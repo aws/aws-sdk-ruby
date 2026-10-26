@@ -139,8 +139,8 @@ module Aws::NetworkFirewall
     end
 
     # <p>A report that captures key activity from the last 30 days of network traffic monitored by your firewall.</p>
-    #          <p>You can generate up to one report per traffic type, per 30 day period. For example, when you successfully create an HTTP traffic report, 
-    #          you cannot create another HTTP traffic report until 30 days pass. Alternatively, if you generate a report that combines metrics on both HTTP 
+    #          <p>You can generate up to one report per traffic type, per 30 day period. For example, when you successfully create an HTTP traffic report,
+    #          you cannot create another HTTP traffic report until 30 days pass. Alternatively, if you generate a report that combines metrics on both HTTP
     #          and HTTPS traffic, you cannot create another report for either traffic type until 30 days pass.</p>
     # @!attribute analysis_report_id
     #   <p>The unique ID of the query that ran when you requested an analysis report. </p>
@@ -399,6 +399,48 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute rule_groups
+    #   <p>The proxy rule group(s) to attach to the proxy configuration</p>
+    #   @return [Array<Types::ProxyRuleGroupAttachment>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class AttachRuleGroupsToProxyConfigurationRequest < Struct.new(
+      nil,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      :rule_groups,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration
+    #   <p>The updated proxy configuration resource that reflects the updates from the request.</p>
+    #   @return [Types::ProxyConfiguration]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class AttachRuleGroupsToProxyConfigurationResponse < Struct.new(
+      nil,
+      :proxy_configuration,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The definition and status of the firewall endpoint for a single subnet. In each configured subnet, Network Firewall instantiates a firewall
     #          endpoint to handle network traffic. </p>
     #          <p>This data type is used for any firewall endpoint type: </p>
@@ -424,9 +466,12 @@ module Aws::NetworkFirewall
     #            this value reflects its state, for example <code>CREATING</code> or <code>DELETING</code>.</p>
     #   @return [String]
     # @!attribute status_message
-    #   <p>If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the error or failure and how to resolve it. 
-    #            A <code>FAILED</code> status indicates a non-recoverable state, and a <code>ERROR</code> status indicates an issue that you can fix. 
+    #   <p>If Network Firewall fails to create or delete the firewall endpoint in the subnet, it populates this with the reason for the error or failure and how to resolve it.
+    #            A <code>FAILED</code> status indicates a non-recoverable state, and a <code>ERROR</code> status indicates an issue that you can fix.
     #            Depending on the error, it can take as many as 15 minutes to populate this field. For more information about the causes for failiure or errors and solutions available for this field, see <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html">Troubleshooting firewall endpoint failures</a> in the <i>Network Firewall Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute dns_name
+    #   <p>The DNS name that resolves to the firewall endpoint in the subnet. This is populated for proxy mode firewalls, where clients direct traffic to the firewall's proxy using this name. </p>
     #   @return [String]
     class Attachment < Struct.new(
       nil,
@@ -434,6 +479,7 @@ module Aws::NetworkFirewall
       :endpoint_id,
       :status,
       :status_message,
+      :dns_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -535,6 +581,151 @@ module Aws::NetworkFirewall
       nil,
       :revoked_status_action,
       :unknown_status_action,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The metadata for a container association returned by <code>ListContainerAssociations</code>. Contains the ARN
+    #       and name that you use to identify the container association in other operations.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the container association.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The descriptive name of the container association.</p>
+    #   @return [String]
+    class ContainerAssociationSummary < Struct.new(
+      nil,
+      :arn,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A key-value filter pair used in container association monitoring configurations to narrow which containers
+    #       are tracked.</p>
+    # @!attribute key
+    #   <p>The attribute key to filter on.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The attribute value to match.</p>
+    #   @return [String]
+    class ContainerAttribute < Struct.new(
+      nil,
+      :key,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the monitoring configuration for a single cluster in a container association. Specifies the cluster
+    #       ARN and optional attribute filters to narrow which containers are tracked.</p>
+    # @!attribute cluster_arn
+    #   <p>The ARN of the Amazon ECS or Amazon EKS cluster to monitor. The cluster must be in the same Region and account as
+    #         the container association.</p>
+    #   @return [String]
+    # @!attribute attribute_filters
+    #   <p>Key-value pairs that filter which containers are tracked. For Amazon EKS, you can filter by namespace and
+    #         Kubernetes labels. For Amazon ECS, you can filter by container instance attributes (EC2 launch type only).</p>
+    #   @return [Array<Types::ContainerAttribute>]
+    class ContainerMonitoringConfiguration < Struct.new(
+      nil,
+      :cluster_arn,
+      :attribute_filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute container_association_name
+    #   <p>The descriptive name of the container association. You can't change the name of a container association after you create it.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the container association.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of containers to monitor. You can't change the container type after creation. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ECS</code> - Amazon Elastic Container Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EKS</code> - Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute container_monitoring_configurations
+    #   <p>The monitoring configurations for the container association. Each configuration specifies an Amazon ECS or Amazon EKS cluster
+    #         to monitor and optional attribute filters to narrow which containers are tracked.</p>
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateContainerAssociationRequest < Struct.new(
+      nil,
+      :container_association_name,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute container_association_name
+    #   <p>The descriptive name of the container association.</p>
+    #   @return [String]
+    # @!attribute container_association_arn
+    #   <p>The Amazon Resource Name (ARN) of the container association.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the container association.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The container type. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ECS</code> - Amazon Elastic Container Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EKS</code> - Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute container_monitoring_configurations
+    #   <p>The monitoring configurations for the container association.</p>
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    # @!attribute status
+    #   <p>The current status of the container association. For a new container association, the status is <code>CREATING</code>.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the container association.
+    #         The token marks the state of the container association resource at the time of the request.</p>
+    #            <p>To make changes to the container association, you provide the token in your request. Network Firewall uses the token to ensure
+    #         that the container association hasn't changed since you last retrieved it. If it has changed, the operation fails with an
+    #         <code>InvalidTokenException</code>. If this happens, retrieve the container association again to get a current copy of it
+    #         with a current token. Reapply your changes as needed, then try the operation again using the new token.</p>
+    #   @return [String]
+    class CreateContainerAssociationResponse < Struct.new(
+      nil,
+      :container_association_name,
+      :container_association_arn,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :status,
+      :tags,
+      :update_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -651,6 +842,23 @@ module Aws::NetworkFirewall
     #            <p>Default value: <code>FALSE</code>
     #            </p>
     #   @return [Boolean]
+    # @!attribute nat_gateway_mappings
+    #   <p>The NAT gateways that the firewall uses to proxy traffic when <code>NoSourcePreservation</code> is <code>TRUE</code>. Network Firewall attaches the firewall to each NAT gateway that you specify, so that egress traffic is proxied through the NAT gateway. </p>
+    #   @return [Array<Types::NatGatewayMapping>]
+    # @!attribute proxy_settings
+    #   <p>The listener configuration for a proxy mode firewall, used when <code>NoSourcePreservation</code> is <code>TRUE</code>. This specifies the ports and protocols on which the firewall's proxy listens for traffic. </p>
+    #   @return [Types::ProxySettings]
+    # @!attribute no_source_preservation
+    #   <p>Optional. Indicates whether the firewall operates in proxy mode, in which the source IP address of the traffic is not preserved. When set to <code>TRUE</code>, the firewall proxies traffic through a NAT gateway and the traffic reaching the destination uses the NAT gateway's IP address as the source. </p>
+    #            <p>When you set this to <code>TRUE</code>, you must specify <code>NatGatewayMappings</code> and <code>VpcEndpoint</code> instead of a top-level <code>VpcId</code> and <code>SubnetMappings</code>. </p>
+    #            <p>You can't change this setting after you create the firewall. </p>
+    #            <p>Default value: <code>FALSE</code>
+    #            </p>
+    #   @return [Boolean]
+    # @!attribute vpc_endpoint
+    #   <p>The VPC and subnets for the firewall endpoint, used when <code>NoSourcePreservation</code> is <code>TRUE</code>. Network Firewall creates the firewall endpoint in the subnets that you specify here. </p>
+    #            <p>For proxy mode firewalls, provide the firewall's VPC and endpoint subnets through this parameter instead of the top-level <code>VpcId</code> and <code>SubnetMappings</code>. </p>
+    #   @return [Types::VpcEndpoint]
     class CreateFirewallRequest < Struct.new(
       nil,
       :firewall_name,
@@ -667,6 +875,10 @@ module Aws::NetworkFirewall
       :transit_gateway_id,
       :availability_zone_mappings,
       :availability_zone_change_protection,
+      :nat_gateway_mappings,
+      :proxy_settings,
+      :no_source_preservation,
+      :vpc_endpoint,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -683,6 +895,236 @@ module Aws::NetworkFirewall
       nil,
       :firewall,
       :firewall_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the proxy configuration. </p>
+    #   @return [String]
+    # @!attribute rule_group_names
+    #   <p>The proxy rule group name(s) to attach to the proxy configuration.</p>
+    #            <p>You must specify the ARNs or the names, and you can specify both. </p>
+    #   @return [Array<String>]
+    # @!attribute rule_group_arns
+    #   <p>The proxy rule group arn(s) to attach to the proxy configuration.</p>
+    #            <p>You must specify the ARNs or the names, and you can specify both. </p>
+    #   @return [Array<String>]
+    # @!attribute default_rule_phase_actions
+    #   <p>Evaluation points in the traffic flow where rules are applied. There are three phases in a traffic where the rule match is applied. </p>
+    #   @return [Types::ProxyConfigDefaultRulePhaseActionsRequest]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateProxyConfigurationRequest < Struct.new(
+      nil,
+      :proxy_configuration_name,
+      :description,
+      :rule_group_names,
+      :rule_group_arns,
+      :default_rule_phase_actions,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration
+    #   <p>The properties that define the proxy configuration. </p>
+    #   @return [Types::ProxyConfiguration]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class CreateProxyConfigurationResponse < Struct.new(
+      nil,
+      :proxy_configuration,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_name
+    #   <p>The descriptive name of the proxy. You can't change the name of a proxy after you create it.</p>
+    #   @return [String]
+    # @!attribute nat_gateway_id
+    #   <p>A unique identifier for the NAT gateway to use with proxy resources.</p>
+    #   @return [String]
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute listener_properties
+    #   <p>Listener properties for HTTP and HTTPS traffic.</p>
+    #   @return [Array<Types::ListenerPropertyRequest>]
+    # @!attribute tls_intercept_properties
+    #   <p>TLS decryption on traffic to filter on attributes in the HTTP header. </p>
+    #   @return [Types::TlsInterceptPropertiesRequest]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateProxyRequest < Struct.new(
+      nil,
+      :proxy_name,
+      :nat_gateway_id,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      :listener_properties,
+      :tls_intercept_properties,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy
+    #   <p>Proxy attached to a NAT gateway. </p>
+    #   @return [Types::Proxy]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy. The token marks the state of the proxy resource at the time of the request. </p>
+    #            <p>To make changes to the proxy, you provide the token in your request. Network Firewall uses the token to ensure that the proxy hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class CreateProxyResponse < Struct.new(
+      nil,
+      :proxy,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Individual rules that define match conditions and actions for application-layer traffic. Rules specify what to inspect (domains, headers, methods) and what action to take (allow, deny, alert). </p>
+    # @!attribute proxy_rule_name
+    #   <p>The descriptive name of the proxy rule. You can't change the name of a proxy rule after you create it.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the proxy rule. </p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>Action to take. </p>
+    #   @return [String]
+    # @!attribute conditions
+    #   <p>Match criteria that specify what traffic attributes to examine. Conditions include operators (StringEquals, StringLike) and values to match against. </p>
+    #   @return [Array<Types::ProxyRuleCondition>]
+    # @!attribute insert_position
+    #   <p>Where to insert a proxy rule in a proxy rule group. </p>
+    #   @return [Integer]
+    class CreateProxyRule < Struct.new(
+      nil,
+      :proxy_rule_name,
+      :description,
+      :action,
+      :conditions,
+      :insert_position,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the proxy rule group. </p>
+    #   @return [String]
+    # @!attribute rules
+    #   <p>Individual rules that define match conditions and actions for application-layer traffic. Rules specify what to inspect (domains, headers, methods) and what action to take (allow, deny, alert). </p>
+    #   @return [Types::ProxyRulesByRequestPhase]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class CreateProxyRuleGroupRequest < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :description,
+      :rules,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group
+    #   <p>The properties that define the proxy rule group. </p>
+    #   @return [Types::ProxyRuleGroup]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy rule group. The token marks the state of the proxy rule group resource at the time of the request. </p>
+    #            <p>To make changes to the proxy rule group, you provide the token in your request. Network Firewall uses the token to ensure that the proxy rule group hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy rule group again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class CreateProxyRuleGroupResponse < Struct.new(
+      nil,
+      :proxy_rule_group,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Evaluation points in the traffic flow where rules are applied. There are three phases in a traffic where the rule match is applied. </p>
+    #          <p>This data type is used specifically for the <a>CreateProxyRules</a> API.</p>
+    #          <p>Pre-DNS - before domain resolution.</p>
+    #          <p>Pre-Request - after DNS, before request.</p>
+    #          <p>Post-Response - after receiving response.</p>
+    # @!attribute pre_dns
+    #   <p>Before domain resolution. </p>
+    #   @return [Array<Types::CreateProxyRule>]
+    # @!attribute pre_request
+    #   <p>After DNS, before request.</p>
+    #   @return [Array<Types::CreateProxyRule>]
+    # @!attribute post_response
+    #   <p>After receiving response.</p>
+    #   @return [Array<Types::CreateProxyRule>]
+    class CreateProxyRulesByRequestPhase < Struct.new(
+      nil,
+      :pre_dns,
+      :pre_request,
+      :post_response,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute rules
+    #   <p>Individual rules that define match conditions and actions for application-layer traffic. Rules specify what to inspect (domains, headers, methods) and what action to take (allow, deny, alert). </p>
+    #   @return [Types::CreateProxyRulesByRequestPhase]
+    class CreateProxyRulesRequest < Struct.new(
+      nil,
+      :proxy_rule_group_arn,
+      :proxy_rule_group_name,
+      :rules,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group
+    #   <p>The properties that define the proxy rule group with the newly created proxy rule(s). </p>
+    #   @return [Types::ProxyRuleGroup]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy rule. The token marks the state of the proxy rule resource at the time of the request. </p>
+    #            <p>To make changes to the proxy rule, you provide the token in your request. Network Firewall uses the token to ensure that the proxy rule hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy rule again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class CreateProxyRulesResponse < Struct.new(
+      nil,
+      :proxy_rule_group,
+      :update_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -776,7 +1218,7 @@ module Aws::NetworkFirewall
     #   <p>Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing. If set to <code>TRUE</code>, Network Firewall runs the analysis and then creates the rule group for you. To run the stateless rule group analyzer without creating the rule group, set <code>DryRun</code> to <code>TRUE</code>.</p>
     #   @return [Boolean]
     # @!attribute summary_configuration
-    #   <p>An object that contains a <code>RuleOptions</code> array of strings. 
+    #   <p>An object that contains a <code>RuleOptions</code> array of strings.
     #            You use <code>RuleOptions</code> to determine which of the following <a>RuleSummary</a> values are returned in response to <code>DescribeRuleGroupSummary</code>.</p>
     #            <ul>
     #               <li>
@@ -836,7 +1278,7 @@ module Aws::NetworkFirewall
     # @!attribute tls_inspection_configuration
     #   <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #            <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
+    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     #   inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::TLSInspectionConfiguration]
@@ -911,7 +1353,7 @@ module Aws::NetworkFirewall
     #   <p>The configuration settings for the VPC endpoint association. These settings include the firewall and the VPC and subnet to use for the firewall endpoint. </p>
     #   @return [Types::VpcEndpointAssociation]
     # @!attribute vpc_endpoint_association_status
-    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this 
+    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this
     #   by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     #   @return [Types::VpcEndpointAssociationStatus]
     class CreateVpcEndpointAssociationResponse < Struct.new(
@@ -954,6 +1396,42 @@ module Aws::NetworkFirewall
       nil,
       :action_name,
       :action_definition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute container_association_name
+    #   <p>The descriptive name of the container association.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute container_association_arn
+    #   <p>The Amazon Resource Name (ARN) of the container association.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    class DeleteContainerAssociationRequest < Struct.new(
+      nil,
+      :container_association_name,
+      :container_association_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute container_association_name
+    #   <p>The descriptive name of the container association.</p>
+    #   @return [String]
+    # @!attribute container_association_arn
+    #   <p>The Amazon Resource Name (ARN) of the container association.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the container association. After deletion is initiated, the status is <code>DELETING</code>.</p>
+    #   @return [String]
+    class DeleteContainerAssociationResponse < Struct.new(
+      nil,
+      :container_association_name,
+      :container_association_arn,
+      :status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1090,6 +1568,142 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    class DeleteProxyConfigurationRequest < Struct.new(
+      nil,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #   @return [String]
+    class DeleteProxyConfigurationResponse < Struct.new(
+      nil,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute nat_gateway_id
+    #   <p>The NAT Gateway the proxy is attached to. </p>
+    #   @return [String]
+    # @!attribute proxy_name
+    #   <p>The descriptive name of the proxy. You can't change the name of a proxy after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    class DeleteProxyRequest < Struct.new(
+      nil,
+      :nat_gateway_id,
+      :proxy_name,
+      :proxy_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute nat_gateway_id
+    #   <p>The NAT Gateway the Proxy was attached to. </p>
+    #   @return [String]
+    # @!attribute proxy_name
+    #   <p>The descriptive name of the proxy. You can't change the name of a proxy after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy.</p>
+    #   @return [String]
+    class DeleteProxyResponse < Struct.new(
+      nil,
+      :nat_gateway_id,
+      :proxy_name,
+      :proxy_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    class DeleteProxyRuleGroupRequest < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :proxy_rule_group_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #   @return [String]
+    class DeleteProxyRuleGroupResponse < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :proxy_rule_group_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute rules
+    #   <p>The proxy rule(s) to remove from the existing proxy rule group. </p>
+    #   @return [Array<String>]
+    class DeleteProxyRulesRequest < Struct.new(
+      nil,
+      :proxy_rule_group_arn,
+      :proxy_rule_group_name,
+      :rules,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group
+    #   <p>The properties that define the proxy rule group with the newly created proxy rule(s). </p>
+    #   @return [Types::ProxyRuleGroup]
+    class DeleteProxyRulesResponse < Struct.new(
+      nil,
+      :proxy_rule_group,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>The Amazon Resource Name (ARN) of the rule group or firewall policy whose resource policy you want to delete. </p>
     #   @return [String]
@@ -1187,13 +1801,92 @@ module Aws::NetworkFirewall
     #   <p>The configuration settings for the VPC endpoint association. These settings include the firewall and the VPC and subnet to use for the firewall endpoint. </p>
     #   @return [Types::VpcEndpointAssociation]
     # @!attribute vpc_endpoint_association_status
-    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this 
+    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this
     #   by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     #   @return [Types::VpcEndpointAssociationStatus]
     class DeleteVpcEndpointAssociationResponse < Struct.new(
       nil,
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute container_association_name
+    #   <p>The descriptive name of the container association.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute container_association_arn
+    #   <p>The Amazon Resource Name (ARN) of the container association.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    class DescribeContainerAssociationRequest < Struct.new(
+      nil,
+      :container_association_name,
+      :container_association_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute container_association_name
+    #   <p>The descriptive name of the container association.</p>
+    #   @return [String]
+    # @!attribute container_association_arn
+    #   <p>The Amazon Resource Name (ARN) of the container association.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the container association.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The container type. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ECS</code> - Amazon Elastic Container Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EKS</code> - Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute container_monitoring_configurations
+    #   <p>The monitoring configurations for the container association.</p>
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    # @!attribute status
+    #   <p>The current status of the container association.</p>
+    #   @return [String]
+    # @!attribute resolved_cidr_count
+    #   <p>The number of CIDR blocks resolved from the monitored containers.</p>
+    #   @return [Integer]
+    # @!attribute last_updated_time
+    #   <p>The most recent time that Network Firewall updated the container association.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the container association.
+    #         The token marks the state of the container association resource at the time of the request.</p>
+    #            <p>To make changes to the container association, you provide the token in your request. Network Firewall uses the token to ensure
+    #         that the container association hasn't changed since you last retrieved it. If it has changed, the operation fails with an
+    #         <code>InvalidTokenException</code>. If this happens, retrieve the container association again to get a current copy of it
+    #         with a current token. Reapply your changes as needed, then try the operation again using the new token.</p>
+    #   @return [String]
+    class DescribeContainerAssociationResponse < Struct.new(
+      nil,
+      :container_association_name,
+      :container_association_arn,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :status,
+      :resolved_cidr_count,
+      :last_updated_time,
+      :tags,
+      :update_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1228,7 +1921,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [String]
     # @!attribute supported_availability_zones
-    #   <p>The Availability Zones that the firewall currently supports. This includes all Availability Zones for which 
+    #   <p>The Availability Zones that the firewall currently supports. This includes all Availability Zones for which
     #          the firewall has a subnet defined. </p>
     #   @return [Hash<String, Types::AvailabilityZoneMetadata>]
     # @!attribute transit_gateway_attachment_id
@@ -1372,7 +2065,7 @@ module Aws::NetworkFirewall
     #   @return [String]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     # @!attribute status_message
@@ -1427,7 +2120,7 @@ module Aws::NetworkFirewall
     # @!attribute enable_monitoring_dashboard
     #   <p>A boolean that reflects whether or not the firewall monitoring dashboard is enabled on a firewall.</p>
     #            <p>
-    #            Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall. 
+    #            Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall.
     #            Returns <code>FALSE</code> when the firewall monitoring dashboard is not enabled on the firewall.
     #         </p>
     #   @return [Boolean]
@@ -1436,6 +2129,218 @@ module Aws::NetworkFirewall
       :firewall_arn,
       :logging_configuration,
       :enable_monitoring_dashboard,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    class DescribeProxyConfigurationRequest < Struct.new(
+      nil,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration
+    #   <p>The configuration for the specified proxy configuration. </p>
+    #   @return [Types::ProxyConfiguration]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class DescribeProxyConfigurationResponse < Struct.new(
+      nil,
+      :proxy_configuration,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_name
+    #   <p>The descriptive name of the proxy. You can't change the name of a proxy after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    class DescribeProxyRequest < Struct.new(
+      nil,
+      :proxy_name,
+      :proxy_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Proxy attached to a NAT gateway. </p>
+    # @!attribute proxy_name
+    #   <p>The descriptive name of the proxy. You can't change the name of a proxy after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy.</p>
+    #   @return [String]
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #   @return [String]
+    # @!attribute nat_gateway_id
+    #   <p>The NAT Gateway for the proxy. </p>
+    #   @return [String]
+    # @!attribute proxy_state
+    #   <p>Current attachment/detachment status of the Proxy. </p>
+    #   @return [String]
+    # @!attribute proxy_modify_state
+    #   <p>Current modification status of the Proxy. </p>
+    #   @return [String]
+    # @!attribute listener_properties
+    #   <p>Listener properties for HTTP and HTTPS traffic. </p>
+    #   @return [Array<Types::ListenerProperty>]
+    # @!attribute tls_intercept_properties
+    #   <p>TLS decryption on traffic to filter on attributes in the HTTP header. </p>
+    #   @return [Types::TlsInterceptProperties]
+    # @!attribute vpc_endpoint_service_name
+    #   <p>The service endpoint created in the VPC. </p>
+    #   @return [String]
+    # @!attribute private_dns_name
+    #   <p>The private DNS name of the Proxy. </p>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>Time the Proxy was created. </p>
+    #   @return [Time]
+    # @!attribute delete_time
+    #   <p>Time the Proxy was deleted. </p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>Time the Proxy was updated. </p>
+    #   @return [Time]
+    # @!attribute failure_code
+    #   <p>Failure code for cases when the Proxy fails to attach or update. </p>
+    #   @return [String]
+    # @!attribute failure_message
+    #   <p>Failure message for cases when the Proxy fails to attach or update. </p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class DescribeProxyResource < Struct.new(
+      nil,
+      :proxy_name,
+      :proxy_arn,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      :nat_gateway_id,
+      :proxy_state,
+      :proxy_modify_state,
+      :listener_properties,
+      :tls_intercept_properties,
+      :vpc_endpoint_service_name,
+      :private_dns_name,
+      :create_time,
+      :delete_time,
+      :update_time,
+      :failure_code,
+      :failure_message,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy
+    #   <p>Proxy attached to a NAT gateway. </p>
+    #   @return [Types::DescribeProxyResource]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy. The token marks the state of the proxy resource at the time of the request. </p>
+    #            <p>To make changes to the proxy, you provide the token in your request. Network Firewall uses the token to ensure that the proxy hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class DescribeProxyResponse < Struct.new(
+      nil,
+      :proxy,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    class DescribeProxyRuleGroupRequest < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :proxy_rule_group_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group
+    #   <p>The configuration for the specified proxy rule group. </p>
+    #   @return [Types::ProxyRuleGroup]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy rule group. The token marks the state of the proxy rule group resource at the time of the request. </p>
+    #            <p>To make changes to the proxy rule group, you provide the token in your request. Network Firewall uses the token to ensure that the proxy rule group hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy rule group again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class DescribeProxyRuleGroupResponse < Struct.new(
+      nil,
+      :proxy_rule_group,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_name
+    #   <p>The descriptive name of the proxy rule. You can't change the name of a proxy rule after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    class DescribeProxyRuleRequest < Struct.new(
+      nil,
+      :proxy_rule_name,
+      :proxy_rule_group_name,
+      :proxy_rule_group_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule
+    #   <p>The configuration for the specified proxy rule. </p>
+    #   @return [Types::ProxyRule]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy rule. The token marks the state of the proxy rule resource at the time of the request. </p>
+    #            <p>To make changes to the proxy rule, you provide the token in your request. Network Firewall uses the token to ensure that the proxy rule hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy rule again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class DescribeProxyRuleResponse < Struct.new(
+      nil,
+      :proxy_rule,
+      :update_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1520,6 +2425,15 @@ module Aws::NetworkFirewall
     # @!attribute last_modified_time
     #   <p>A timestamp indicating when the rule group was last modified.</p>
     #   @return [Time]
+    # @!attribute vendor_name
+    #   <p>The name of the Amazon Web Services Marketplace vendor that provides this rule group.</p>
+    #   @return [String]
+    # @!attribute product_id
+    #   <p>The unique identifier for the product listing associated with this rule group.</p>
+    #   @return [String]
+    # @!attribute listing_name
+    #   <p>The display name of the product listing for this rule group.</p>
+    #   @return [String]
     class DescribeRuleGroupMetadataResponse < Struct.new(
       nil,
       :rule_group_arn,
@@ -1529,6 +2443,9 @@ module Aws::NetworkFirewall
       :capacity,
       :stateful_rule_options,
       :last_modified_time,
+      :vendor_name,
+      :product_id,
+      :listing_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1666,7 +2583,7 @@ module Aws::NetworkFirewall
     # @!attribute tls_inspection_configuration
     #   <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #            <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
+    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     #   inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::TLSInspectionConfiguration]
@@ -1698,13 +2615,59 @@ module Aws::NetworkFirewall
     #   <p>The configuration settings for the VPC endpoint association. These settings include the firewall and the VPC and subnet to use for the firewall endpoint. </p>
     #   @return [Types::VpcEndpointAssociation]
     # @!attribute vpc_endpoint_association_status
-    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this 
+    #   <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this
     #   by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     #   @return [Types::VpcEndpointAssociationStatus]
     class DescribeVpcEndpointAssociationResponse < Struct.new(
       nil,
       :vpc_endpoint_association,
       :vpc_endpoint_association_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute rule_group_names
+    #   <p>The proxy rule group names to detach from the proxy configuration</p>
+    #   @return [Array<String>]
+    # @!attribute rule_group_arns
+    #   <p>The proxy rule group arns to detach from the proxy configuration</p>
+    #   @return [Array<String>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class DetachRuleGroupsFromProxyConfigurationRequest < Struct.new(
+      nil,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      :rule_group_names,
+      :rule_group_arns,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration
+    #   <p>The updated proxy configuration resource that reflects the updates from the request.</p>
+    #   @return [Types::ProxyConfiguration]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class DetachRuleGroupsFromProxyConfigurationResponse < Struct.new(
+      nil,
+      :proxy_configuration,
+      :update_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1919,6 +2882,18 @@ module Aws::NetworkFirewall
     # @!attribute availability_zone_change_protection
     #   <p>A setting indicating whether the firewall is protected against changes to its Availability Zone configuration. When set to <code>TRUE</code>, you must first disable this protection before adding or removing Availability Zones.</p>
     #   @return [Boolean]
+    # @!attribute nat_gateway_mappings
+    #   <p>The NAT gateways that the firewall uses to proxy traffic. This is set for proxy mode firewalls, where <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>
+    #   @return [Array<Types::NatGatewayMapping>]
+    # @!attribute proxy_settings
+    #   <p>The listener configuration for the firewall's proxy. This is set for proxy mode firewalls, where <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>
+    #   @return [Types::ProxySettings]
+    # @!attribute no_source_preservation
+    #   <p>Indicates whether the firewall operates in proxy mode, in which the source IP address of the traffic is not preserved. When this value is <code>TRUE</code>, the firewall proxies traffic through a NAT gateway and uses the NAT gateway's IP address as the source for traffic reaching the destination. </p>
+    #   @return [Boolean]
+    # @!attribute vpc_endpoint
+    #   <p>The VPC and subnets for the firewall endpoint. This is set for proxy mode firewalls, where <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>
+    #   @return [Types::VpcEndpoint]
     class Firewall < Struct.new(
       nil,
       :firewall_name,
@@ -1939,6 +2914,10 @@ module Aws::NetworkFirewall
       :transit_gateway_owner_account_id,
       :availability_zone_mappings,
       :availability_zone_change_protection,
+      :nat_gateway_mappings,
+      :proxy_settings,
+      :no_source_preservation,
+      :vpc_endpoint,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1948,6 +2927,7 @@ module Aws::NetworkFirewall
         options[:subnet_change_protection] = false unless options.key?(:subnet_change_protection)
         options[:firewall_policy_change_protection] = false unless options.key?(:firewall_policy_change_protection)
         options[:availability_zone_change_protection] = false unless options.key?(:availability_zone_change_protection)
+        options[:no_source_preservation] = false unless options.key?(:no_source_preservation)
         super
       end
     end
@@ -2031,6 +3011,18 @@ module Aws::NetworkFirewall
     #               </li>
     #               <li>
     #                  <p>aws:alert_established</p>
+    #               </li>
+    #               <li>
+    #                  <p>aws:drop_established_app_layer</p>
+    #               </li>
+    #               <li>
+    #                  <p>aws:alert_established_app_layer</p>
+    #               </li>
+    #               <li>
+    #                  <p>aws:drop_established_app_layer_to_server</p>
+    #               </li>
+    #               <li>
+    #                  <p>aws:alert_established_app_layer_to_server</p>
     #               </li>
     #            </ul>
     #            <p>For more information, see
@@ -2117,6 +3109,9 @@ module Aws::NetworkFirewall
     # @!attribute consumed_stateful_rule_capacity
     #   <p>The number of capacity units currently consumed by the policy's stateful rules.</p>
     #   @return [Integer]
+    # @!attribute consumed_stateful_domain_capacity
+    #   <p>The total number of domain name specifications across all domain list rule groups in the firewall policy that use the <code>stateful-domain-rulegroup</code> resource type.</p>
+    #   @return [Integer]
     # @!attribute number_of_associations
     #   <p>The number of firewalls that are associated with this firewall policy.</p>
     #   @return [Integer]
@@ -2136,6 +3131,7 @@ module Aws::NetworkFirewall
       :tags,
       :consumed_stateless_rule_capacity,
       :consumed_stateful_rule_capacity,
+      :consumed_stateful_domain_capacity,
       :number_of_associations,
       :encryption_configuration,
       :last_modified_time,
@@ -2155,7 +3151,7 @@ module Aws::NetworkFirewall
     #         </p>
     #   @return [String]
     # @!attribute configuration_sync_state_summary
-    #   <p>The configuration sync state for the firewall. This summarizes the <code>Config</code> 
+    #   <p>The configuration sync state for the firewall. This summarizes the <code>Config</code>
     #                  settings in the <code>SyncStates</code> for this firewall status object. </p>
     #            <p>When you create a firewall or update its configuration, for example by adding a rule
     #            group to its firewall policy, Network Firewall distributes the configuration changes to all
@@ -2168,7 +3164,7 @@ module Aws::NetworkFirewall
     # @!attribute sync_states
     #   <p>Status for the subnets that you've configured in the firewall. This contains
     #         one array element per Availability Zone where you've configured a subnet in the firewall. </p>
-    #            <p>These objects provide detailed information for the settings 
+    #            <p>These objects provide detailed information for the settings
     #     <code>ConfigurationSyncStateSummary</code> and <code>Status</code>. </p>
     #   @return [Hash<String, Types::SyncState>]
     # @!attribute capacity_usage_summary
@@ -2189,7 +3185,7 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Any number of arrays, where each array is a single flow identified in the scope of the operation. 
+    # <p>Any number of arrays, where each array is a single flow identified in the scope of the operation.
     # If multiple flows were in the scope of the operation, multiple <code>Flows</code> arrays are returned.</p>
     # @!attribute source_address
     #   <p>A single IP address specification. This is used in the <a>MatchAttributes</a> source and destination specifications.</p>
@@ -2198,17 +3194,17 @@ module Aws::NetworkFirewall
     #   <p>A single IP address specification. This is used in the <a>MatchAttributes</a> source and destination specifications.</p>
     #   @return [Types::Address]
     # @!attribute source_port
-    #   <p>The source port to inspect for. You can specify an individual port, 
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
+    #   <p>The source port to inspect for. You can specify an individual port,
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute destination_port
-    #   <p>The destination port to inspect for. You can specify an individual port, 
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
+    #   <p>The destination port to inspect for. You can specify an individual port,
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute protocol
-    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA) 
+    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA)
     #    for each protocol. If not specified, this matches with any protocol.</p>
     #   @return [String]
     # @!attribute age
@@ -2248,17 +3244,17 @@ module Aws::NetworkFirewall
     #   <p>A single IP address specification. This is used in the <a>MatchAttributes</a> source and destination specifications.</p>
     #   @return [Types::Address]
     # @!attribute source_port
-    #   <p>The source port to inspect for. You can specify an individual port, 
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
+    #   <p>The source port to inspect for. You can specify an individual port,
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute destination_port
-    #   <p>The destination port to inspect for. You can specify an individual port, 
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
+    #   <p>The destination port to inspect for. You can specify an individual port,
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute protocols
-    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA) 
+    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA)
     #    for each protocol. If not specified, this matches with any protocol.</p>
     #   @return [Array<String>]
     class FlowFilter < Struct.new(
@@ -2275,10 +3271,10 @@ module Aws::NetworkFirewall
 
     # <p>Contains information about a flow operation, such as related statuses, unique identifiers, and all filters defined in the operation.</p>
     #          <p>Flow operations let you manage the flows tracked in the flow table, also known as the firewall table.</p>
-    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules. 
+    #          <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules.
     # For traffic to be considered part of a flow, it must share Destination, DestinationPort, Direction, Protocol, Source, and SourcePort. </p>
     # @!attribute minimum_flow_age_in_seconds
-    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>. 
+    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>.
     #   You provide this for start commands.</p>
     #   @return [Integer]
     # @!attribute flow_filters
@@ -2305,7 +3301,7 @@ module Aws::NetworkFirewall
     #   @return [Time]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     class FlowOperationMetadata < Struct.new(
@@ -2319,12 +3315,12 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Describes the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle and Network Firewall removes the flow entry from its flow table. 
-    #           Existing connections and flows are not impacted when you update this value. Only new connections after you update this value are impacted.
+    # <p>Describes the amount of time that can pass without any traffic sent through the firewall before the firewall determines that the connection is idle and Network Firewall removes the flow entry from its flow table.
+    #           When you update this value, existing connections will be treated according to your stream exception policy configuration.
     #      </p>
     # @!attribute tcp_idle_timeout_seconds
     #   <p>The number of seconds that can pass without any TCP traffic sent through the firewall before the firewall determines that the connection is idle.
-    #           After the idle timeout passes, data packets are dropped, however, the next TCP SYN packet is considered a new flow and is processed by the firewall. 
+    #           After the idle timeout passes, data packets are dropped, however, the next TCP SYN packet is considered a new flow and is processed by the firewall.
     #           Clients or targets can use TCP keepalive packets to reset the idle timeout.
     #            </p>
     #            <p>You can define the <code>TcpIdleTimeoutSeconds</code> value to be between 60 and 6000 seconds. If no value is provided, it defaults to 350 seconds.
@@ -2375,11 +3371,11 @@ module Aws::NetworkFirewall
     #   <p>The status of the analysis report you specify. Statuses include <code>RUNNING</code>, <code>COMPLETED</code>, or <code>FAILED</code>.</p>
     #   @return [String]
     # @!attribute start_time
-    #   <p> The date and time within the last 30 days from which to start retrieving analysis data, 
+    #   <p> The date and time within the last 30 days from which to start retrieving analysis data,
     #      in UTC format (for example, <code>YYYY-MM-DDTHH:MM:SSZ</code>. </p>
     #   @return [Time]
     # @!attribute end_time
-    #   <p>The date and time, up to the current date, from which to stop retrieving analysis data, 
+    #   <p>The date and time, up to the current date, from which to stop retrieving analysis data,
     #      in UTC format (for example, <code>YYYY-MM-DDTHH:MM:SSZ</code>). </p>
     #   @return [Time]
     # @!attribute report_time
@@ -2439,8 +3435,8 @@ module Aws::NetworkFirewall
     #            Inter-Domain Routing</a>.</p>
     #   @return [String]
     # @!attribute source_port
-    #   <p>The source port to inspect for. You can specify an individual port, 
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
+    #   <p>The source port to inspect for. You can specify an individual port,
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     # @!attribute direction
@@ -2472,8 +3468,8 @@ module Aws::NetworkFirewall
     #            Inter-Domain Routing</a>.</p>
     #   @return [String]
     # @!attribute destination_port
-    #   <p>The destination port to inspect for. You can specify an individual port, 
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
+    #   <p>The destination port to inspect for. You can specify an individual port,
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
     #    To match with any port, specify <code>ANY</code>.</p>
     #   @return [String]
     class Header < Struct.new(
@@ -2509,7 +3505,7 @@ module Aws::NetworkFirewall
     # <p>A list of IP addresses and address ranges, in CIDR notation. This is part of a <a>RuleVariables</a>. </p>
     # @!attribute definition
     #   <p>The list of IP addresses and address ranges, in CIDR notation.
-    #            
+    #
     #         </p>
     #   @return [Array<String>]
     class IPSet < Struct.new(
@@ -2686,6 +3682,42 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute max_results
+    #   <p>The maximum number of objects that you want Network Firewall to return for this request. If more
+    #             objects are available, in the response, Network Firewall provides a
+    #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available
+    #            for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>
+    #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
+    #   @return [String]
+    class ListContainerAssociationsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute container_associations
+    #   <p>The container association metadata objects for the account and Region.</p>
+    #   @return [Array<Types::ContainerAssociationSummary>]
+    # @!attribute next_token
+    #   <p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available
+    #            for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>
+    #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
+    #   @return [String]
+    class ListContainerAssociationsResponse < Struct.new(
+      nil,
+      :container_associations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute next_token
     #   <p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available
     #            for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>
@@ -2824,18 +3856,18 @@ module Aws::NetworkFirewall
     #   @return [String]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     # @!attribute status_message
-    #   <p>If the asynchronous operation fails, Network Firewall populates this with the reason for the error or failure. 
+    #   <p>If the asynchronous operation fails, Network Firewall populates this with the reason for the error or failure.
     #            Options include <code>Flow operation error</code> and <code>Flow timeout</code>.</p>
     #   @return [String]
     # @!attribute flow_request_timestamp
     #   <p>A timestamp indicating when the Suricata engine identified flows impacted by an operation. </p>
     #   @return [Time]
     # @!attribute flows
-    #   <p>Any number of arrays, where each array is a single flow identified in the scope of the operation. 
+    #   <p>Any number of arrays, where each array is a single flow identified in the scope of the operation.
     #   If multiple flows were in the scope of the operation, multiple <code>Flows</code> arrays are returned.</p>
     #   @return [Array<Types::Flow>]
     # @!attribute next_token
@@ -2902,7 +3934,7 @@ module Aws::NetworkFirewall
 
     # @!attribute flow_operations
     #   <p>Flow operations let you manage the flows tracked in the flow table, also known as the firewall table.</p>
-    #            <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules. 
+    #            <p>A flow is network traffic that is monitored by a firewall, either by stateful or stateless rules.
     #   For traffic to be considered part of a flow, it must share Destination, DestinationPort, Direction, Protocol, Source, and SourcePort. </p>
     #   @return [Array<Types::FlowOperationMetadata>]
     # @!attribute next_token
@@ -2929,6 +3961,117 @@ module Aws::NetworkFirewall
     #             objects are available, in the response, Network Firewall provides a
     #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
     #   @return [Integer]
+    class ListProxiesRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxies
+    #   <p>The metadata for the proxies. Depending on your setting for max results and
+    #               the number of proxies that you have, this might not be the full list. </p>
+    #   @return [Array<Types::ProxyMetadata>]
+    # @!attribute next_token
+    #   <p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available
+    #            for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>
+    #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
+    #   @return [String]
+    class ListProxiesResponse < Struct.new(
+      nil,
+      :proxies,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available
+    #            for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>
+    #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of objects that you want Network Firewall to return for this request. If more
+    #             objects are available, in the response, Network Firewall provides a
+    #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
+    #   @return [Integer]
+    class ListProxyConfigurationsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configurations
+    #   <p>The metadata for the proxy configurations. Depending on your setting for max results and
+    #               the number of proxy configurations that you have, this might not be the full list. </p>
+    #   @return [Array<Types::ProxyConfigurationMetadata>]
+    # @!attribute next_token
+    #   <p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available
+    #            for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>
+    #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
+    #   @return [String]
+    class ListProxyConfigurationsResponse < Struct.new(
+      nil,
+      :proxy_configurations,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available
+    #            for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>
+    #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of objects that you want Network Firewall to return for this request. If more
+    #             objects are available, in the response, Network Firewall provides a
+    #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
+    #   @return [Integer]
+    class ListProxyRuleGroupsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_groups
+    #   <p>The metadata for the proxy rule groups. Depending on your setting for max results and
+    #               the number of proxy rule groups that you have, this might not be the full list. </p>
+    #   @return [Array<Types::ProxyRuleGroupMetadata>]
+    # @!attribute next_token
+    #   <p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available
+    #            for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>
+    #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
+    #   @return [String]
+    class ListProxyRuleGroupsResponse < Struct.new(
+      nil,
+      :proxy_rule_groups,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>When you request a list of objects with a <code>MaxResults</code> setting, if the number of objects that are still available
+    #            for retrieval exceeds the maximum you requested, Network Firewall returns a <code>NextToken</code>
+    #            value in the response. To retrieve the next batch of objects, use the token returned from the prior request in your next request.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of objects that you want Network Firewall to return for this request. If more
+    #             objects are available, in the response, Network Firewall provides a
+    #            <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>
+    #   @return [Integer]
     # @!attribute scope
     #   <p>The scope of the request. The default setting of <code>ACCOUNT</code> or a setting of
     #            <code>NULL</code> returns all of the rule groups in your account. A setting of
@@ -2936,6 +4079,9 @@ module Aws::NetworkFirewall
     #   @return [String]
     # @!attribute managed_type
     #   <p>Indicates the general category of the Amazon Web Services managed rule group.</p>
+    #   @return [String]
+    # @!attribute subscription_status
+    #   <p>Filters the results to show only rule groups with the specified subscription status. Use this to find subscribed or unsubscribed rule groups.</p>
     #   @return [String]
     # @!attribute type
     #   <p>Indicates whether the rule group is stateless or stateful. If the rule group is stateless, it contains stateless rules. If it is stateful, it contains stateful rules.</p>
@@ -2946,6 +4092,7 @@ module Aws::NetworkFirewall
       :max_results,
       :scope,
       :managed_type,
+      :subscription_status,
       :type,
       keyword_init: true
     )
@@ -3091,6 +4238,40 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Open port for taking HTTP or HTTPS traffic. </p>
+    # @!attribute port
+    #   <p>Port for processing traffic.</p>
+    #   @return [Integer]
+    # @!attribute type
+    #   <p>Selection of HTTP or HTTPS traffic.</p>
+    #   @return [String]
+    class ListenerProperty < Struct.new(
+      nil,
+      :port,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>This data type is used specifically for the <a>CreateProxy</a> and
+    #             <a>UpdateProxy</a> APIs.</p>
+    #          <p>Open port for taking HTTP or HTTPS traffic.</p>
+    # @!attribute port
+    #   <p>Port for processing traffic.</p>
+    #   @return [Integer]
+    # @!attribute type
+    #   <p>Selection of HTTP or HTTPS traffic.</p>
+    #   @return [String]
+    class ListenerPropertyRequest < Struct.new(
+      nil,
+      :port,
+      :type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines where Network Firewall sends logs for the firewall for one log type. This is used
     #          in <a>LoggingConfiguration</a>. You can send each type of log to an Amazon S3 bucket, a CloudWatch log group, or a Firehose delivery stream.</p>
     #          <p>Network Firewall generates logs for stateful rule groups. You can save alert, flow, and TLS log
@@ -3108,8 +4289,8 @@ module Aws::NetworkFirewall
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>TLS</code> - Logs for events that are related to TLS inspection. For more information, see  
-    #             <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-configurations.html">Inspecting SSL/TLS traffic with TLS inspection configurations</a> 
+    #                     <code>TLS</code> - Logs for events that are related to TLS inspection. For more information, see
+    #             <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection-configurations.html">Inspecting SSL/TLS traffic with TLS inspection configurations</a>
     #                 in the <i>Network Firewall Developer Guide</i>.</p>
     #               </li>
     #            </ul>
@@ -3194,20 +4375,20 @@ module Aws::NetworkFirewall
     #            specified, this matches with any destination address. </p>
     #   @return [Array<Types::Address>]
     # @!attribute source_ports
-    #   <p>The source port to inspect for. You can specify an individual port, 
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
+    #   <p>The source port to inspect for. You can specify an individual port,
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
     #    To match with any port, specify <code>ANY</code>.</p>
     #            <p> If not specified, this matches with any source port.</p>
     #            <p>This setting is only used for protocols 6 (TCP) and 17 (UDP).</p>
     #   @return [Array<Types::PortRange>]
     # @!attribute destination_ports
-    #   <p>The destination port to inspect for. You can specify an individual port, 
-    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>. 
+    #   <p>The destination port to inspect for. You can specify an individual port,
+    #    for example <code>1994</code> and you can specify a port range, for example <code>1990:1994</code>.
     #    To match with any port, specify <code>ANY</code>.</p>
     #            <p>This setting is only used for protocols 6 (TCP) and 17 (UDP). </p>
     #   @return [Array<Types::PortRange>]
     # @!attribute protocols
-    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA) 
+    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA)
     #    for each protocol. If not specified, this matches with any protocol.</p>
     #   @return [Array<Integer>]
     # @!attribute tcp_flags
@@ -3222,6 +4403,43 @@ module Aws::NetworkFirewall
       :destination_ports,
       :protocols,
       :tcp_flags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The definition and status of the attachment between a proxy mode firewall and a NAT gateway that proxies its traffic. </p>
+    # @!attribute nat_gateway_id
+    #   <p>A unique identifier for the NAT gateway to use with proxy resources.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the NAT gateway attachment. </p>
+    #            <p>When this value is <code>READY</code>, the attachment is available to proxy traffic. Otherwise, this value reflects its state, for example <code>CREATING</code> or <code>DELETING</code>.</p>
+    #   @return [String]
+    # @!attribute status_message
+    #   <p>If Network Firewall encounters an issue with the NAT gateway attachment, it populates this with an explanation of the problem. </p>
+    #   @return [String]
+    # @!attribute dns_name
+    #   <p>The DNS name that resolves to the firewall's proxy for traffic sent through this NAT gateway attachment. </p>
+    #   @return [String]
+    class NatGatewayAttachment < Struct.new(
+      nil,
+      :nat_gateway_id,
+      :status,
+      :status_message,
+      :dns_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A NAT gateway that a proxy mode firewall uses to proxy traffic. This is used in <a>CreateFirewall</a> when <code>NoSourcePreservation</code> is <code>TRUE</code>. </p>
+    # @!attribute nat_gateway_id
+    #   <p>A unique identifier for the NAT gateway to use with proxy resources.</p>
+    #   @return [String]
+    class NatGatewayMapping < Struct.new(
+      nil,
+      :nat_gateway_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3286,12 +4504,399 @@ module Aws::NetworkFirewall
 
     # <p>A set of port ranges for use in the rules in a rule group. </p>
     # @!attribute definition
-    #   <p>The set of port ranges. 
+    #   <p>The set of port ranges.
     #         </p>
     #   @return [Array<String>]
     class PortSet < Struct.new(
       nil,
       :definition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Proxy attached to a NAT gateway. </p>
+    # @!attribute create_time
+    #   <p>Time the Proxy was created. </p>
+    #   @return [Time]
+    # @!attribute delete_time
+    #   <p>Time the Proxy was deleted. </p>
+    #   @return [Time]
+    # @!attribute update_time
+    #   <p>Time the Proxy was updated. </p>
+    #   @return [Time]
+    # @!attribute failure_code
+    #   <p>Failure code for cases when the Proxy fails to attach or update. </p>
+    #   @return [String]
+    # @!attribute failure_message
+    #   <p>Failure message for cases when the Proxy fails to attach or update. </p>
+    #   @return [String]
+    # @!attribute proxy_state
+    #   <p>Current attachment/detachment status of the Proxy. </p>
+    #   @return [String]
+    # @!attribute proxy_modify_state
+    #   <p>Current modification status of the Proxy. </p>
+    #   @return [String]
+    # @!attribute nat_gateway_id
+    #   <p>The NAT Gateway for the proxy. </p>
+    #   @return [String]
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #   @return [String]
+    # @!attribute proxy_name
+    #   <p>The descriptive name of the proxy. You can't change the name of a proxy after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy.</p>
+    #   @return [String]
+    # @!attribute listener_properties
+    #   <p>Listener properties for HTTP and HTTPS traffic. </p>
+    #   @return [Array<Types::ListenerProperty>]
+    # @!attribute tls_intercept_properties
+    #   <p>TLS decryption on traffic to filter on attributes in the HTTP header. </p>
+    #   @return [Types::TlsInterceptProperties]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class Proxy < Struct.new(
+      nil,
+      :create_time,
+      :delete_time,
+      :update_time,
+      :failure_code,
+      :failure_message,
+      :proxy_state,
+      :proxy_modify_state,
+      :nat_gateway_id,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      :proxy_name,
+      :proxy_arn,
+      :listener_properties,
+      :tls_intercept_properties,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Evaluation points in the traffic flow where rules are applied. There are three phases in a traffic where the rule match is applied. </p>
+    #          <p>This data type is used specifically for the <a>CreateProxyConfiguration</a> and
+    #             <a>UpdateProxyConfiguration</a> APIs.</p>
+    # @!attribute pre_dns
+    #   <p>Before domain resolution. </p>
+    #   @return [String]
+    # @!attribute pre_request
+    #   <p>After DNS, before request.</p>
+    #   @return [String]
+    # @!attribute post_response
+    #   <p>After receiving response.</p>
+    #   @return [String]
+    class ProxyConfigDefaultRulePhaseActionsRequest < Struct.new(
+      nil,
+      :pre_dns,
+      :pre_request,
+      :post_response,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Proxy rule group contained within a proxy configuration. </p>
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>Proxy rule group type. </p>
+    #   @return [String]
+    # @!attribute priority
+    #   <p>Priority of the proxy rule group in the proxy configuration. </p>
+    #   @return [Integer]
+    class ProxyConfigRuleGroup < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :proxy_rule_group_arn,
+      :type,
+      :priority,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A Proxy Configuration defines the monitoring and protection behavior for a Proxy. The details of the behavior are defined in the rule groups that you add to your configuration. </p>
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the proxy configuration. </p>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>Time the Proxy Configuration was created. </p>
+    #   @return [Time]
+    # @!attribute delete_time
+    #   <p>Time the Proxy Configuration was deleted. </p>
+    #   @return [Time]
+    # @!attribute rule_groups
+    #   <p>Proxy rule groups within the proxy configuration. </p>
+    #   @return [Array<Types::ProxyConfigRuleGroup>]
+    # @!attribute default_rule_phase_actions
+    #   <p>Evaluation points in the traffic flow where rules are applied. There are three phases in a traffic where the rule match is applied. </p>
+    #            <p>Pre-DNS - before domain resolution.</p>
+    #            <p>Pre-Request - after DNS, before request.</p>
+    #            <p>Post-Response - after receiving response.</p>
+    #   @return [Types::ProxyConfigDefaultRulePhaseActionsRequest]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class ProxyConfiguration < Struct.new(
+      nil,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      :description,
+      :create_time,
+      :delete_time,
+      :rule_groups,
+      :default_rule_phase_actions,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>High-level information about a proxy configuration, returned by operations like create and
+    #             describe. You can use the information provided in the metadata to retrieve and manage a
+    #             proxy configuration. You can retrieve all objects for a proxy configuration by calling <a>DescribeProxyConfiguration</a>. </p>
+    # @!attribute name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #   @return [String]
+    class ProxyConfigurationMetadata < Struct.new(
+      nil,
+      :name,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>High-level information about a proxy, returned by operations like create and
+    #             describe. You can use the information provided in the metadata to retrieve and manage a
+    #             proxy. You can retrieve all objects for a proxy by calling <a>DescribeProxy</a>. </p>
+    # @!attribute name
+    #   <p>The descriptive name of the proxy. You can't change the name of a proxy after you create it.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy.</p>
+    #   @return [String]
+    class ProxyMetadata < Struct.new(
+      nil,
+      :name,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Individual rules that define match conditions and actions for application-layer traffic. Rules specify what to inspect (domains, headers, methods) and what action to take (allow, deny, alert). </p>
+    # @!attribute proxy_rule_name
+    #   <p>The descriptive name of the proxy rule. You can't change the name of a proxy rule after you create it.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the proxy rule. </p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>Action to take. </p>
+    #   @return [String]
+    # @!attribute conditions
+    #   <p>Match criteria that specify what traffic attributes to examine. Conditions include operators (StringEquals, StringLike) and values to match against. </p>
+    #   @return [Array<Types::ProxyRuleCondition>]
+    class ProxyRule < Struct.new(
+      nil,
+      :proxy_rule_name,
+      :description,
+      :action,
+      :conditions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Match criteria that specify what traffic attributes to examine.</p>
+    # @!attribute condition_operator
+    #   <p>Defines how to perform a match.</p>
+    #   @return [String]
+    # @!attribute condition_key
+    #   <p>Defines what is to be matched.</p>
+    #   @return [String]
+    # @!attribute condition_values
+    #   <p>Specifes the exact value that needs to be matched against.</p>
+    #   @return [Array<String>]
+    class ProxyRuleCondition < Struct.new(
+      nil,
+      :condition_operator,
+      :condition_key,
+      :condition_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Collections of related proxy filtering rules. Rule groups help you manage and reuse sets of rules across multiple proxy configurations. </p>
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #   @return [String]
+    # @!attribute create_time
+    #   <p>Time the Proxy Rule Group was created. </p>
+    #   @return [Time]
+    # @!attribute delete_time
+    #   <p>Time the Proxy Rule Group was deleted. </p>
+    #   @return [Time]
+    # @!attribute rules
+    #   <p>Individual rules that define match conditions and actions for application-layer traffic. Rules specify what to inspect (domains, headers, methods) and what action to take (allow, deny, alert). </p>
+    #   @return [Types::ProxyRulesByRequestPhase]
+    # @!attribute description
+    #   <p>A description of the proxy rule group. </p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    class ProxyRuleGroup < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :proxy_rule_group_arn,
+      :create_time,
+      :delete_time,
+      :rules,
+      :description,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The proxy rule group(s) to attach to the proxy configuration</p>
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #   @return [String]
+    # @!attribute insert_position
+    #   <p>Where to insert a proxy rule group in a proxy configuration. </p>
+    #   @return [Integer]
+    class ProxyRuleGroupAttachment < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :insert_position,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>High-level information about a proxy rule group, returned by operations like create and
+    #             describe. You can use the information provided in the metadata to retrieve and manage a
+    #             proxy rule group. You can retrieve all objects for a proxy rule group by calling <a>DescribeProxyRuleGroup</a>. </p>
+    # @!attribute name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #   @return [String]
+    class ProxyRuleGroupMetadata < Struct.new(
+      nil,
+      :name,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Proxy rule group name and new desired position. </p>
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #   @return [String]
+    # @!attribute new_position
+    #   <p>Where to move a proxy rule group in a proxy configuration. </p>
+    #   @return [Integer]
+    class ProxyRuleGroupPriority < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :new_position,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Proxy rule group along with its priority. </p>
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #   @return [String]
+    # @!attribute priority
+    #   <p>Priority of the proxy rule group in the proxy configuration. </p>
+    #   @return [Integer]
+    class ProxyRuleGroupPriorityResult < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :priority,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Proxy rule name and new desired position. </p>
+    # @!attribute proxy_rule_name
+    #   <p>The descriptive name of the proxy rule. You can't change the name of a proxy rule after you create it.</p>
+    #   @return [String]
+    # @!attribute new_position
+    #   <p>Where to move a proxy rule in a proxy rule group. </p>
+    #   @return [Integer]
+    class ProxyRulePriority < Struct.new(
+      nil,
+      :proxy_rule_name,
+      :new_position,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Evaluation points in the traffic flow where rules are applied. There are three phases in a traffic where the rule match is applied. </p>
+    # @!attribute pre_dns
+    #   <p>Before domain resolution. </p>
+    #   @return [Array<Types::ProxyRule>]
+    # @!attribute pre_request
+    #   <p>After DNS, before request.</p>
+    #   @return [Array<Types::ProxyRule>]
+    # @!attribute post_response
+    #   <p>After receiving response.</p>
+    #   @return [Array<Types::ProxyRule>]
+    class ProxyRulesByRequestPhase < Struct.new(
+      nil,
+      :pre_dns,
+      :pre_request,
+      :post_response,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The listener configuration for a proxy mode firewall. This specifies the ports and protocols on which the firewall's proxy listens for traffic. </p>
+    # @!attribute listener_properties
+    #   <p>Listener properties for HTTP and HTTPS traffic. </p>
+    #   @return [Array<Types::ListenerProperty>]
+    class ProxySettings < Struct.new(
+      nil,
+      :listener_properties,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3560,10 +5165,14 @@ module Aws::NetworkFirewall
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the rule group.</p>
     #   @return [String]
+    # @!attribute vendor_name
+    #   <p>The name of the Amazon Web Services Marketplace seller that provides this rule group.</p>
+    #   @return [String]
     class RuleGroupMetadata < Struct.new(
       nil,
       :name,
       :arn,
+      :vendor_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3665,10 +5274,10 @@ module Aws::NetworkFirewall
 
     # <p>Additional settings for a stateful rule. This is part of the <a>StatefulRule</a> configuration.</p>
     # @!attribute keyword
-    #   <p>The keyword for the Suricata compatible rule option. You must include a <code>sid</code> (signature ID), and can optionally include other keywords. For information about Suricata compatible keywords, see <a href="https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options">Rule options</a> in the Suricata documentation.</p>
+    #   <p>The keyword for the Suricata compatible rule option. You must include a <code>sid</code> (signature ID), and can optionally include other keywords. For information about Suricata compatible keywords, see <a href="https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options">Rule options</a> in the Suricata documentation.</p>
     #   @return [String]
     # @!attribute settings
-    #   <p>The settings of the Suricata compatible rule option. Rule options have zero or more setting values, and the number of possible and required settings depends on the <code>Keyword</code>. For more information about the settings for specific options, see <a href="https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html#rule-options">Rule options</a>.</p>
+    #   <p>The settings of the Suricata compatible rule option. Rule options have zero or more setting values, and the number of possible and required settings depends on the <code>Keyword</code>. For more information about the settings for specific options, see <a href="https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html#rule-options">Rule options</a>.</p>
     #   @return [Array<String>]
     class RuleOption < Struct.new(
       nil,
@@ -3754,7 +5363,7 @@ module Aws::NetworkFirewall
     #   <p>An array of individual stateful rules inspection criteria to be used together in a stateful rule group.
     #          Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options.
     #          For information about the Suricata <code>Rules</code> format, see
-    #                                           <a href="https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html">Rules Format</a>. </p>
+    #                                           <a href="https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html">Rules Format</a>. </p>
     #   @return [Array<Types::StatefulRule>]
     # @!attribute stateless_rules_and_custom_actions
     #   <p>Stateless inspection criteria to be used in a stateless rule group. </p>
@@ -3772,7 +5381,7 @@ module Aws::NetworkFirewall
 
     # <p>Stateful inspection criteria for a domain list rule group. </p>
     #          <p>For HTTPS traffic, domain filtering is SNI-based. It uses the server name indicator extension of the TLS handshake.</p>
-    #          <p>By default, Network Firewall domain list inspection only includes traffic coming from the VPC where you deploy the firewall. To inspect traffic from IP addresses outside of the deployment VPC, you set the <code>HOME_NET</code> rule variable to include the CIDR range of the deployment VPC plus the other CIDR ranges. For more information, see <a>RuleVariables</a> in this guide and 
+    #          <p>By default, Network Firewall domain list inspection only includes traffic coming from the VPC where you deploy the firewall. To inspect traffic from IP addresses outside of the deployment VPC, you set the <code>HOME_NET</code> rule variable to include the CIDR range of the deployment VPC plus the other CIDR ranges. For more information, see <a>RuleVariables</a> in this guide and
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/stateful-rule-groups-domain-names.html">Stateful domain list rule groups in Network Firewall</a> in the <i>Network Firewall Developer Guide</i>.</p>
     # @!attribute targets
     #   <p>The domains that you want to inspect for in your traffic flows. Valid domain specifications are the following:</p>
@@ -3791,7 +5400,7 @@ module Aws::NetworkFirewall
     # @!attribute generated_rules_type
     #   <p>Whether you want to apply allow, reject, alert, or drop behavior to the domains in your target list.</p>
     #            <note>
-    #               <p>When logging is enabled and you choose Alert, traffic that matches the domain specifications 
+    #               <p>When logging is enabled and you choose Alert, traffic that matches the domain specifications
     #               generates an alert in the firewall's logs. Then, traffic either passes, is rejected, or drops based on other rules in the firewall policy.</p>
     #            </note>
     #   @return [String]
@@ -3873,7 +5482,7 @@ module Aws::NetworkFirewall
     #            <p>You can specify individual ports, for example <code>1994</code>, and you can specify port ranges, such as <code>1990:1994</code>.</p>
     #   @return [Array<Types::PortRange>]
     # @!attribute protocols
-    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA) 
+    #   <p>The protocols to inspect for, specified using the assigned internet protocol number (IANA)
     #    for each protocol. If not specified, this matches with any protocol.</p>
     #            <p>Network Firewall currently supports only TCP.</p>
     #   @return [Array<Integer>]
@@ -3951,7 +5560,7 @@ module Aws::NetworkFirewall
     #   <p>A unique identifier for the primary endpoint associated with a firewall.</p>
     #   @return [String]
     # @!attribute minimum_flow_age_in_seconds
-    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>. 
+    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>.
     #   You provide this for start commands.</p>
     #            <note>
     #               <p>We recommend setting this value to at least 1 minute (60 seconds) to reduce chance of capturing flows that are not yet established.</p>
@@ -3981,7 +5590,7 @@ module Aws::NetworkFirewall
     #   @return [String]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     class StartFlowCaptureResponse < Struct.new(
@@ -4008,7 +5617,7 @@ module Aws::NetworkFirewall
     #   <p>A unique identifier for the primary endpoint associated with a firewall.</p>
     #   @return [String]
     # @!attribute minimum_flow_age_in_seconds
-    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>. 
+    #   <p>The reqested <code>FlowOperation</code> ignores flows with an age (in seconds) lower than <code>MinimumFlowAgeInSeconds</code>.
     #   You provide this for start commands.</p>
     #   @return [Integer]
     # @!attribute flow_filters
@@ -4035,7 +5644,7 @@ module Aws::NetworkFirewall
     #   @return [String]
     # @!attribute flow_operation_status
     #   <p>Returns the status of the flow operation. This string is returned in the responses to start, list, and describe commands.</p>
-    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response. 
+    #            <p>If the status is <code>COMPLETED_WITH_ERRORS</code>, results may be returned with any number of <code>Flows</code> missing from the response.
     #   If the status is <code>FAILED</code>, <code>Flows</code> returned will be empty.</p>
     #   @return [String]
     class StartFlowFlushResponse < Struct.new(
@@ -4049,14 +5658,17 @@ module Aws::NetworkFirewall
     end
 
     # <p>Configuration settings for the handling of the stateful rule groups in a firewall policy. </p>
+    #          <important>
+    #             <p>Updating any setting in <code>StatefulEngineOptions</code> may require a restart of the stateful engine in order to apply the changes. When this occurs, existing connections will be treated according to your stream exception policy configuration.</p>
+    #          </important>
     # @!attribute rule_order
     #   <p>Indicates how to manage the order of stateful rule evaluation for the policy. <code>STRICT_ORDER</code> is the
-    #            recommended option, but <code>DEFAULT_ACTION_ORDER</code> is the default option. With <code>STRICT_ORDER</code>, 
-    #            provide your rules in the order that you want them to be evaluated. 
-    #            You can then choose one or more default actions for packets that don't match any rules. 
-    #            Choose <code>STRICT_ORDER</code> to have the stateful rules engine determine the evaluation order of your rules. 
-    #            The default action for this rule order is <code>PASS</code>, followed by <code>DROP</code>, <code>REJECT</code>, and <code>ALERT</code> actions. 
-    #            Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on your settings. 
+    #            recommended option, but <code>DEFAULT_ACTION_ORDER</code> is the default option. With <code>STRICT_ORDER</code>,
+    #            provide your rules in the order that you want them to be evaluated.
+    #            You can then choose one or more default actions for packets that don't match any rules.
+    #            Choose <code>STRICT_ORDER</code> to have the stateful rules engine determine the evaluation order of your rules.
+    #            The default action for this rule order is <code>PASS</code>, followed by <code>DROP</code>, <code>REJECT</code>, and <code>ALERT</code> actions.
+    #            Stateful rules are provided to the rule engine as Suricata compatible strings, and Suricata evaluates them based on your settings.
     #            For more information, see
     #            <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html">Evaluation order for stateful rules</a> in the <i>Network Firewall Developer Guide</i>.
     #         </p>
@@ -4095,7 +5707,7 @@ module Aws::NetworkFirewall
     # <p>A single Suricata rules specification, for use in a stateful rule group.
     #        Use this option to specify a simple Suricata rule with protocol, source and destination, ports, direction, and rule options.
     #        For information about the Suricata <code>Rules</code> format, see
-    #                                         <a href="https://suricata.readthedocs.io/en/suricata-7.0.3/rules/intro.html">Rules Format</a>. </p>
+    #                                         <a href="https://suricata.readthedocs.io/en/suricata-7.0.8/rules/intro.html">Rules Format</a>. </p>
     # @!attribute action
     #   <p>Defines what Network Firewall should do with the packets in a traffic flow when the flow
     #            matches the stateful rule criteria. For all actions, Network Firewall performs the specified
@@ -4177,7 +5789,7 @@ module Aws::NetworkFirewall
     #   <p>The action that allows the policy owner to override the behavior of the rule group within a policy.</p>
     #   @return [Types::StatefulRuleGroupOverride]
     # @!attribute deep_threat_inspection
-    #   <p>Network Firewall plans to augment the active threat defense managed rule group with an additional deep threat inspection capability. When this capability is released, Amazon Web Services will analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers. 
+    #   <p>Network Firewall plans to augment the active threat defense managed rule group with an additional deep threat inspection capability. When this capability is released, Amazon Web Services will analyze service logs of network traffic processed by these rule groups to identify threat indicators across customers.
     #            Amazon Web Services will use these threat indicators to improve the active threat defense managed rule groups and protect the security of Amazon Web Services customers and services.</p>
     #            <note>
     #               <p>Customers can opt-out of deep threat inspection at any time through the Network Firewall console or API. When customers opt out, Network Firewall  will not use the network traffic processed by those customers' active threat defense rule groups for rule group improvement.</p>
@@ -4330,7 +5942,7 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The status of the firewall endpoint and firewall policy configuration for a single VPC subnet. 
+    # <p>The status of the firewall endpoint and firewall policy configuration for a single VPC subnet.
     #           This is part of the <a>FirewallStatus</a>. </p>
     #          <p>For each VPC subnet that you associate with a firewall, Network Firewall does the
     #          following: </p>
@@ -4357,10 +5969,14 @@ module Aws::NetworkFirewall
     #            you add a subnet or modify the associated firewall policy, Network Firewall synchronizes the
     #             rules in the endpoint, so it can properly filter network traffic. </p>
     #   @return [Hash<String, Types::PerObjectStatus>]
+    # @!attribute nat_gateway_attachments
+    #   <p>The status of the NAT gateway attachments for a proxy mode firewall in the Availability Zone. This reflects the attachment of the firewall to each NAT gateway that proxies its traffic. </p>
+    #   @return [Array<Types::NatGatewayAttachment>]
     class SyncState < Struct.new(
       nil,
       :attachment,
       :config,
+      :nat_gateway_attachments,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4393,7 +6009,7 @@ module Aws::NetworkFirewall
 
     # <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #          <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #          <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
+    #          <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
     #     <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     # inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     # @!attribute server_certificate_configurations
@@ -4549,6 +6165,40 @@ module Aws::NetworkFirewall
       :certificate_serial,
       :status,
       :status_message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>TLS decryption on traffic to filter on attributes in the HTTP header. </p>
+    # @!attribute pca_arn
+    #   <p>Private Certificate Authority (PCA) used to issue private TLS certificates so that the proxy can present PCA-signed certificates which applications trust through the same root, establishing a secure and consistent trust model for encrypted communication.</p>
+    #   @return [String]
+    # @!attribute tls_intercept_mode
+    #   <p>Specifies whether to enable or disable TLS Intercept Mode. </p>
+    #   @return [String]
+    class TlsInterceptProperties < Struct.new(
+      nil,
+      :pca_arn,
+      :tls_intercept_mode,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>This data type is used specifically for the <a>CreateProxy</a> and
+    #             <a>UpdateProxy</a> APIs.</p>
+    #          <p>TLS decryption on traffic to filter on attributes in the HTTP header. </p>
+    # @!attribute pca_arn
+    #   <p>Private Certificate Authority (PCA) used to issue private TLS certificates so that the proxy can present PCA-signed certificates which applications trust through the same root, establishing a secure and consistent trust model for encrypted communication.</p>
+    #   @return [String]
+    # @!attribute tls_intercept_mode
+    #   <p>Specifies whether to enable or disable TLS Intercept Mode. </p>
+    #   @return [String]
+    class TlsInterceptPropertiesRequest < Struct.new(
+      nil,
+      :pca_arn,
+      :tls_intercept_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4762,6 +6412,114 @@ module Aws::NetworkFirewall
         options[:availability_zone_change_protection] = false unless options.key?(:availability_zone_change_protection)
         super
       end
+    end
+
+    # @!attribute container_association_name
+    #   <p>The descriptive name of the container association.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute container_association_arn
+    #   <p>The Amazon Resource Name (ARN) of the container association.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the container association. When omitted, the existing description remains unchanged.
+    #         To clear the description, pass an empty string.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The container type. This value must match the existing type and can't be changed. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ECS</code> - Amazon Elastic Container Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EKS</code> - Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute container_monitoring_configurations
+    #   <p>The updated monitoring configurations for the container association. Each configuration specifies an Amazon ECS or Amazon EKS cluster
+    #         to monitor and optional attribute filters.</p>
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the container association.
+    #         The token marks the state of the container association resource at the time of the request.</p>
+    #            <p>To make changes to the container association, you provide the token in your request. Network Firewall uses the token to ensure
+    #         that the container association hasn't changed since you last retrieved it. If it has changed, the operation fails with an
+    #         <code>InvalidTokenException</code>. If this happens, retrieve the container association again to get a current copy of it
+    #         with a current token. Reapply your changes as needed, then try the operation again using the new token.</p>
+    #   @return [String]
+    class UpdateContainerAssociationRequest < Struct.new(
+      nil,
+      :container_association_name,
+      :container_association_arn,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :tags,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute container_association_name
+    #   <p>The descriptive name of the container association.</p>
+    #   @return [String]
+    # @!attribute container_association_arn
+    #   <p>The Amazon Resource Name (ARN) of the container association.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the container association.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The container type. Valid values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ECS</code> - Amazon Elastic Container Service</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>EKS</code> - Amazon Elastic Kubernetes Service</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute container_monitoring_configurations
+    #   <p>The monitoring configurations for the container association.</p>
+    #   @return [Array<Types::ContainerMonitoringConfiguration>]
+    # @!attribute status
+    #   <p>The current status of the container association.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>The key:value pairs to associate with the resource.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the container association.
+    #         The token marks the state of the container association resource at the time of the request.</p>
+    #            <p>To make changes to the container association, you provide the token in your request. Network Firewall uses the token to ensure
+    #         that the container association hasn't changed since you last retrieved it. If it has changed, the operation fails with an
+    #         <code>InvalidTokenException</code>. If this happens, retrieve the container association again to get a current copy of it
+    #         with a current token. Reapply your changes as needed, then try the operation again using the new token.</p>
+    #   @return [String]
+    class UpdateContainerAssociationResponse < Struct.new(
+      nil,
+      :container_association_name,
+      :container_association_arn,
+      :description,
+      :type,
+      :container_monitoring_configurations,
+      :status,
+      :tags,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # @!attribute enabled_analysis_types
@@ -5116,11 +6874,11 @@ module Aws::NetworkFirewall
     #   @return [Types::LoggingConfiguration]
     # @!attribute enable_monitoring_dashboard
     #   <p>A boolean that lets you enable or disable the detailed firewall monitoring dashboard on the firewall. </p>
-    #            <p>The monitoring dashboard provides comprehensive visibility into your firewall's flow logs and alert logs. 
+    #            <p>The monitoring dashboard provides comprehensive visibility into your firewall's flow logs and alert logs.
     #            After you enable detailed monitoring, you can access these dashboards directly from the <b>Monitoring</b> page of the Network Firewall console.</p>
     #            <p>
-    #            Specify <code>TRUE</code> to enable the the detailed monitoring dashboard on the firewall. 
-    #            Specify <code>FALSE</code> to disable the the detailed monitoring dashboard on the firewall. 
+    #            Specify <code>TRUE</code> to enable the the detailed monitoring dashboard on the firewall.
+    #            Specify <code>FALSE</code> to disable the the detailed monitoring dashboard on the firewall.
     #         </p>
     #   @return [Boolean]
     class UpdateLoggingConfigurationRequest < Struct.new(
@@ -5146,7 +6904,7 @@ module Aws::NetworkFirewall
     # @!attribute enable_monitoring_dashboard
     #   <p>A boolean that reflects whether or not the firewall monitoring dashboard is enabled on a firewall.</p>
     #            <p>
-    #            Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall. 
+    #            Returns <code>TRUE</code> when the firewall monitoring dashboard is enabled on the firewall.
     #            Returns <code>FALSE</code> when the firewall monitoring dashboard is not enabled on the firewall.
     #         </p>
     #   @return [Boolean]
@@ -5156,6 +6914,316 @@ module Aws::NetworkFirewall
       :firewall_name,
       :logging_configuration,
       :enable_monitoring_dashboard,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute default_rule_phase_actions
+    #   <p>Evaluation points in the traffic flow where rules are applied. There are three phases in a traffic where the rule match is applied. </p>
+    #   @return [Types::ProxyConfigDefaultRulePhaseActionsRequest]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyConfigurationRequest < Struct.new(
+      nil,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      :default_rule_phase_actions,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration
+    #   <p>The updated proxy configuration resource that reflects the updates from the request.</p>
+    #   @return [Types::ProxyConfiguration]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyConfigurationResponse < Struct.new(
+      nil,
+      :proxy_configuration,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute nat_gateway_id
+    #   <p>The NAT Gateway the proxy is attached to. </p>
+    #   @return [String]
+    # @!attribute proxy_name
+    #   <p>The descriptive name of the proxy. You can't change the name of a proxy after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute listener_properties_to_add
+    #   <p>Listener properties for HTTP and HTTPS traffic to add. </p>
+    #   @return [Array<Types::ListenerPropertyRequest>]
+    # @!attribute listener_properties_to_remove
+    #   <p>Listener properties for HTTP and HTTPS traffic to remove. </p>
+    #   @return [Array<Types::ListenerPropertyRequest>]
+    # @!attribute tls_intercept_properties
+    #   <p>TLS decryption on traffic to filter on attributes in the HTTP header. </p>
+    #   @return [Types::TlsInterceptPropertiesRequest]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy. The token marks the state of the proxy resource at the time of the request. </p>
+    #            <p>To make changes to the proxy, you provide the token in your request. Network Firewall uses the token to ensure that the proxy hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyRequest < Struct.new(
+      nil,
+      :nat_gateway_id,
+      :proxy_name,
+      :proxy_arn,
+      :listener_properties_to_add,
+      :listener_properties_to_remove,
+      :tls_intercept_properties,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy
+    #   <p>The updated proxy resource that reflects the updates from the request.</p>
+    #   @return [Types::Proxy]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy. The token marks the state of the proxy resource at the time of the request. </p>
+    #            <p>To make changes to the proxy, you provide the token in your request. Network Firewall uses the token to ensure that the proxy hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyResponse < Struct.new(
+      nil,
+      :proxy,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_configuration_name
+    #   <p>The descriptive name of the proxy configuration. You can't change the name of a proxy configuration after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_configuration_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy configuration.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute rule_groups
+    #   <p>proxy rule group resources to update to new positions. </p>
+    #   @return [Array<Types::ProxyRuleGroupPriority>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyRuleGroupPrioritiesRequest < Struct.new(
+      nil,
+      :proxy_configuration_name,
+      :proxy_configuration_arn,
+      :rule_groups,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_groups
+    #   <p>The updated proxy rule group hierarchy that reflects the updates from the request.</p>
+    #   @return [Array<Types::ProxyRuleGroupPriorityResult>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy configuration. The token marks the state of the proxy configuration resource at the time of the request. </p>
+    #            <p>To make changes to the proxy configuration, you provide the token in your request. Network Firewall uses the token to ensure that the proxy configuration hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy configuration again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyRuleGroupPrioritiesResponse < Struct.new(
+      nil,
+      :proxy_rule_groups,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute rule_group_request_phase
+    #   <p>Evaluation points in the traffic flow where rules are applied. There are three phases in a traffic where the rule match is applied. </p>
+    #   @return [String]
+    # @!attribute rules
+    #   <p>proxy rule resources to update to new positions. </p>
+    #   @return [Array<Types::ProxyRulePriority>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy rule group. The token marks the state of the proxy rule group resource at the time of the request. </p>
+    #            <p>To make changes to the proxy rule group, you provide the token in your request. Network Firewall uses the token to ensure that the proxy rule group hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy rule group again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyRulePrioritiesRequest < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :proxy_rule_group_arn,
+      :rule_group_request_phase,
+      :rules,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #   @return [String]
+    # @!attribute rule_group_request_phase
+    #   <p>Evaluation points in the traffic flow where rules are applied. There are three phases in a traffic where the rule match is applied. </p>
+    #   @return [String]
+    # @!attribute rules
+    #   <p>The updated proxy rule hierarchy that reflects the updates from the request.</p>
+    #   @return [Array<Types::ProxyRulePriority>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy rule group. The token marks the state of the proxy rule group resource at the time of the request. </p>
+    #            <p>To make changes to the proxy rule group, you provide the token in your request. Network Firewall uses the token to ensure that the proxy rule group hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy rule group again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyRulePrioritiesResponse < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :proxy_rule_group_arn,
+      :rule_group_request_phase,
+      :rules,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule_group_name
+    #   <p>The descriptive name of the proxy rule group. You can't change the name of a proxy rule group after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_rule_group_arn
+    #   <p>The Amazon Resource Name (ARN) of a proxy rule group.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute proxy_rule_name
+    #   <p>The descriptive name of the proxy rule. You can't change the name of a proxy rule after you create it.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the proxy rule. </p>
+    #   @return [String]
+    # @!attribute action
+    #   <p>Depending on the match action, the proxy either stops the evaluation (if the action is terminal - allow or deny), or continues it (if the action is alert) until it matches a rule with a terminal action. </p>
+    #   @return [String]
+    # @!attribute add_conditions
+    #   <p>Proxy rule conditions to add. Match criteria that specify what traffic attributes to examine. Conditions include operators (StringEquals, StringLike) and values to match against.  </p>
+    #   @return [Array<Types::ProxyRuleCondition>]
+    # @!attribute remove_conditions
+    #   <p>Proxy rule conditions to remove. Match criteria that specify what traffic attributes to examine. Conditions include operators (StringEquals, StringLike) and values to match against.  </p>
+    #   @return [Array<Types::ProxyRuleCondition>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy rule. The token marks the state of the proxy rule resource at the time of the request. </p>
+    #            <p>To make changes to the proxy rule, you provide the token in your request. Network Firewall uses the token to ensure that the proxy rule hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy rule again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyRuleRequest < Struct.new(
+      nil,
+      :proxy_rule_group_name,
+      :proxy_rule_group_arn,
+      :proxy_rule_name,
+      :description,
+      :action,
+      :add_conditions,
+      :remove_conditions,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute proxy_rule
+    #   <p>The updated proxy rule resource that reflects the updates from the request.</p>
+    #   @return [Types::ProxyRule]
+    # @!attribute removed_conditions
+    #   <p>Proxy rule conditions removed from the rule. </p>
+    #   @return [Array<Types::ProxyRuleCondition>]
+    # @!attribute update_token
+    #   <p>A token used for optimistic locking. Network Firewall returns a token to your requests that access the proxy rule. The token marks the state of the proxy rule resource at the time of the request. </p>
+    #            <p>To make changes to the proxy rule, you provide the token in your request. Network Firewall uses the token to ensure that the proxy rule hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the proxy rule again to get a current copy of it with a current token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    class UpdateProxyRuleResponse < Struct.new(
+      nil,
+      :proxy_rule,
+      :removed_conditions,
+      :update_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute firewall_arn
+    #   <p>The Amazon Resource Name (ARN) of the firewall.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute firewall_name
+    #   <p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>
+    #            <p>You must specify the ARN or the name, and you can specify both. </p>
+    #   @return [String]
+    # @!attribute update_token
+    #   <p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>
+    #            <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>
+    #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    # @!attribute proxy_settings
+    #   <p>The proxy listener configuration to set on the firewall. This specifies the ports and protocols on which the firewall's proxy listens for traffic. </p>
+    #   @return [Types::ProxySettings]
+    class UpdateProxySettingsRequest < Struct.new(
+      nil,
+      :firewall_arn,
+      :firewall_name,
+      :update_token,
+      :proxy_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute firewall_arn
+    #   <p>The Amazon Resource Name (ARN) of the firewall.</p>
+    #   @return [String]
+    # @!attribute firewall_name
+    #   <p>The descriptive name of the firewall. You can't change the name of a firewall after you create it.</p>
+    #   @return [String]
+    # @!attribute update_token
+    #   <p>An optional token that you can use for optimistic locking. Network Firewall returns a token to your requests that access the firewall. The token marks the state of the firewall resource at the time of the request. </p>
+    #            <p>To make an unconditional change to the firewall, omit the token in your update request. Without the token, Network Firewall performs your updates regardless of whether the firewall has changed since you last retrieved it.</p>
+    #            <p>To make a conditional change to the firewall, provide the token in your update request. Network Firewall uses the token to ensure that the firewall hasn't changed since you last retrieved it. If it has changed, the operation fails with an <code>InvalidTokenException</code>. If this happens, retrieve the firewall again to get a current copy of it with a new token. Reapply your changes as needed, then try the operation again using the new token. </p>
+    #   @return [String]
+    # @!attribute proxy_settings
+    #   <p>The updated proxy listener configuration on the firewall. </p>
+    #   @return [Types::ProxySettings]
+    class UpdateProxySettingsResponse < Struct.new(
+      nil,
+      :firewall_arn,
+      :firewall_name,
+      :update_token,
+      :proxy_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5324,7 +7392,7 @@ module Aws::NetworkFirewall
     # @!attribute tls_inspection_configuration
     #   <p>The object that defines a TLS inspection configuration. This, along with <a>TLSInspectionConfigurationResponse</a>, define the TLS inspection configuration. You can retrieve all objects for a TLS inspection configuration by calling <a>DescribeTLSInspectionConfiguration</a>. </p>
     #            <p>Network Firewall uses a TLS inspection configuration to decrypt traffic. Network Firewall re-encrypts the traffic before sending it to its destination.</p>
-    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see 
+    #            <p>To use a TLS inspection configuration, you add it to a new Network Firewall firewall policy, then you apply the firewall policy to a firewall. Network Firewall acts as a proxy service to decrypt and inspect the traffic traveling through your firewalls. You can reference a TLS inspection configuration from more than one firewall policy, and you can use a firewall policy in more than one firewall. For more information about using TLS inspection configurations, see
     #       <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/tls-inspection.html">Inspecting SSL/TLS traffic with TLS
     #   inspection configurations</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #   @return [Types::TLSInspectionConfiguration]
@@ -5367,14 +7435,31 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A VPC endpoint association defines a single subnet to use for a firewall endpoint for a <code>Firewall</code>. 
-    #        You can define VPC endpoint associations only in the Availability Zones that already have 
+    # <p>The VPC and subnets for a proxy mode firewall endpoint. This is used in <a>CreateFirewall</a> when <code>NoSourcePreservation</code> is <code>TRUE</code>, to specify where Network Firewall creates the firewall endpoint. </p>
+    #          <p>This differs from <a>VpcEndpointAssociation</a>, which defines additional secondary endpoints for a firewall in other VPCs. </p>
+    # @!attribute vpc_id
+    #   <p>The unique identifier of the VPC where Network Firewall creates the proxy mode firewall endpoint. </p>
+    #   @return [String]
+    # @!attribute subnet_mappings
+    #   <p>The subnets in which Network Firewall creates the firewall endpoint for a proxy mode firewall. Each subnet must belong to a different Availability Zone in the VPC. </p>
+    #   @return [Array<Types::SubnetMapping>]
+    class VpcEndpoint < Struct.new(
+      nil,
+      :vpc_id,
+      :subnet_mappings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A VPC endpoint association defines a single subnet to use for a firewall endpoint for a <code>Firewall</code>.
+    #        You can define VPC endpoint associations only in the Availability Zones that already have
     #            a subnet mapping defined in the <code>Firewall</code> resource. </p>
     #          <note>
     #             <p>You can retrieve the list of Availability Zones that are available for use by calling <code>DescribeFirewallMetadata</code>.</p>
     #          </note>
-    #          <p>To manage firewall endpoints, first, in the <code>Firewall</code> specification, you specify a single VPC and one subnet 
-    #            for each of the Availability Zones where you want to use the firewall. Then you can define additional endpoints as 
+    #          <p>To manage firewall endpoints, first, in the <code>Firewall</code> specification, you specify a single VPC and one subnet
+    #            for each of the Availability Zones where you want to use the firewall. Then you can define additional endpoints as
     #            VPC endpoint associations. </p>
     #          <p>You can use VPC endpoint associations to expand the protections of the firewall as follows: </p>
     #          <ul>
@@ -5387,9 +7472,9 @@ module Aws::NetworkFirewall
     #                   <b>Define multiple firewall endpoints for a VPC in an Availability Zone</b> - You can create additional firewall endpoints for the VPC that you have defined in the firewall, in any Availability Zone that already has an endpoint defined in the <code>Firewall</code> subnet mappings. You can create multiple VPC endpoint associations for any other VPC where you use the firewall.</p>
     #             </li>
     #          </ul>
-    #          <p>You can use Resource Access Manager to share a <code>Firewall</code> that you own with other accounts, which gives them the ability to use the firewall 
+    #          <p>You can use Resource Access Manager to share a <code>Firewall</code> that you own with other accounts, which gives them the ability to use the firewall
     #       to create VPC endpoint associations. For information about sharing a firewall, see <code>PutResourcePolicy</code>
-    #           in this guide and see 
+    #           in this guide and see
     #     <a href="https://docs.aws.amazon.com/network-firewall/latest/developerguide/sharing.html">Sharing Network Firewall resources</a> in the <i>Network Firewall Developer Guide</i>.</p>
     #          <p>The status of the VPC endpoint association, which indicates whether it's ready to filter network traffic,
     #          is provided in the corresponding <a>VpcEndpointAssociationStatus</a>. You can retrieve both
@@ -5444,7 +7529,7 @@ module Aws::NetworkFirewall
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this 
+    # <p>Detailed information about the current status of a <a>VpcEndpointAssociation</a>. You can retrieve this
     # by calling <a>DescribeVpcEndpointAssociation</a> and providing the VPC endpoint association ARN.</p>
     # @!attribute status
     #   <p>The readiness of the configured firewall endpoint to handle network traffic. </p>

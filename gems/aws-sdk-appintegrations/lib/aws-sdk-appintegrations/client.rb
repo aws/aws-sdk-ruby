@@ -144,18 +144,18 @@ module Aws::AppIntegrations
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -240,6 +240,10 @@ module Aws::AppIntegrations
     #   <p>The configuration settings for the application.</p>
     # @option params [Types::IframeConfig] :iframe_config
     #   <p>The iframe configuration for the application.</p>
+    # @option params [String] :application_type
+    #   <p>The type of application.</p>
+    # @option params [Types::AuthConfig] :auth_config
+    #   <p>The authentication settings that Connect Customer uses when calling the external application.</p>
     # @example To create an application
     #   # The following creates an application named My Application with access url https://example.com.
     #   params = {
@@ -298,6 +302,12 @@ module Aws::AppIntegrations
     #     iframe_config: {
     #       allow: ["IframePermission"],
     #       sandbox: ["IframePermission"]
+    #     },
+    #     application_type: "STANDARD" # One of: ["STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"],
+    #     auth_config: {
+    #       auth_type: "API_KEY" # One of: ["API_KEY", "CONNECT_JWT"],
+    #       credential_provider_identifier: "Arn",
+    #       audience_override: "Identifier"
     #     }
     #   }
     #   options = {}
@@ -514,11 +524,21 @@ module Aws::AppIntegrations
       request.send_request(options)
     end
 
-    # <p>Deletes the Application. Only Applications that don't have any Application Associations
-    #       can be deleted.</p>
+    # <p>Deletes an application. If the application has associations, you must delete them first.
+    #       Alternatively, use the <code>force</code> option to delete the application and remove its
+    #       associations.</p>
     # @param [Hash, Types::DeleteApplicationRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the Application.</p>
+    # @option params [Boolean] :force
+    #   <p>Specifies whether to delete the application even if it still has application associations.
+    #         If <code>true</code>, the operation removes the application and its associations. If
+    #         <code>false</code> or absent, the delete fails when associations exist.</p>
+    #            <important>
+    #               <p>Setting this parameter to <code>true</code> permanently removes all of the
+    #           application's associations. Doing so might impact other resources that rely on and
+    #           reference the application. This action can't be undone.</p>
+    #            </important>
     # @example To delete an application
     #   # The following deletes an application.
     #   params = {
@@ -531,6 +551,7 @@ module Aws::AppIntegrations
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "ArnOrUUID", # required
+    #     force: false
     #   }
     #   options = {}
     #   response = client.delete_application(params, options)
@@ -547,8 +568,8 @@ module Aws::AppIntegrations
     #       DataIntegrationAssociations can be deleted. Deleting a DataIntegration also deletes the
     #       underlying Amazon AppFlow flow and service linked role. </p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
-    # Use a different DataIntegration, or recreate the DataIntegration using the 
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
+    # Use a different DataIntegration, or recreate the DataIntegration using the
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::DeleteDataIntegrationRequest] params
@@ -660,6 +681,12 @@ module Aws::AppIntegrations
     #     iframe_config: {
     #       allow: ["IframePermission"],
     #       sandbox: ["IframePermission"]
+    #     },
+    #     application_type: "STANDARD" # One of: ["STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"],
+    #     auth_config: {
+    #       auth_type: "API_KEY" # One of: ["API_KEY", "CONNECT_JWT"],
+    #       credential_provider_identifier: "Arn",
+    #       audience_override: "Identifier"
     #     }
     #   }
     # @return [Types::GetApplicationResponse]
@@ -670,8 +697,8 @@ module Aws::AppIntegrations
 
     # <p>Returns information about the DataIntegration.</p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
-    # Use a different DataIntegration, or recreate the DataIntegration using the 
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
+    # Use a different DataIntegration, or recreate the DataIntegration using the
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::GetDataIntegrationRequest] params
@@ -753,7 +780,7 @@ module Aws::AppIntegrations
     # @option params [String] :application_id
     #   <p>A unique identifier for the Application.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -804,10 +831,12 @@ module Aws::AppIntegrations
     # <p>Lists applications in the account.</p>
     # @param [Hash, Types::ListApplicationsRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
+    # @option params [String] :application_type
+    #   <p>The type of application.</p>
     # @example To list applications in the account
     #   # The following lists application summary in the account.
     #   params = {
@@ -830,7 +859,8 @@ module Aws::AppIntegrations
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     application_type: "STANDARD" # One of: ["STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"]
     #   }
     #   options = {}
     #   response = client.list_applications(params, options)
@@ -845,7 +875,8 @@ module Aws::AppIntegrations
     #         namespace: "ApplicationNamespace",
     #         created_time: Time.now,
     #         last_modified_time: Time.now,
-    #         is_service: false
+    #         is_service: false,
+    #         application_type: "STANDARD" # One of: ["STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"]
     #       }
     #     ],
     #     next_token: "NextToken"
@@ -858,15 +889,15 @@ module Aws::AppIntegrations
 
     # <p>Returns a paginated list of DataIntegration associations in the account.</p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
-    # Use a different DataIntegration, or recreate the DataIntegration using the 
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
+    # Use a different DataIntegration, or recreate the DataIntegration using the
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::ListDataIntegrationAssociationsRequest] params
     # @option params [String] :data_integration_identifier
     #   <p>A unique identifier for the DataIntegration.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -915,13 +946,13 @@ module Aws::AppIntegrations
 
     # <p>Returns a paginated list of DataIntegrations in the account.</p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
-    # Use a different DataIntegration, or recreate the DataIntegration using the 
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
+    # Use a different DataIntegration, or recreate the DataIntegration using the
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::ListDataIntegrationsRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -955,7 +986,7 @@ module Aws::AppIntegrations
     # @option params [String] :event_integration_name
     #   <p>The name of the event integration. </p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -993,7 +1024,7 @@ module Aws::AppIntegrations
     # <p>Returns a paginated list of event integrations in the account.</p>
     # @param [Hash, Types::ListEventIntegrationsRequest] params
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
@@ -1122,6 +1153,10 @@ module Aws::AppIntegrations
     #   <p>The configuration settings for the application.</p>
     # @option params [Types::IframeConfig] :iframe_config
     #   <p>The iframe configuration for the application.</p>
+    # @option params [String] :application_type
+    #   <p>The type of application.</p>
+    # @option params [Types::AuthConfig] :auth_config
+    #   <p>The authentication settings that Connect Customer uses when calling the external application.</p>
     # @example To update an application
     #   # The following updates an existing application named with a new name.
     #   params = {
@@ -1167,6 +1202,12 @@ module Aws::AppIntegrations
     #     iframe_config: {
     #       allow: ["IframePermission"],
     #       sandbox: ["IframePermission"]
+    #     },
+    #     application_type: "STANDARD" # One of: ["STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"],
+    #     auth_config: {
+    #       auth_type: "API_KEY" # One of: ["API_KEY", "CONNECT_JWT"],
+    #       credential_provider_identifier: "Arn",
+    #       audience_override: "Identifier"
     #     }
     #   }
     #   options = {}
@@ -1182,8 +1223,8 @@ module Aws::AppIntegrations
 
     # <p>Updates the description of a DataIntegration.</p>
     #          <note>
-    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.  
-    # Use a different DataIntegration, or recreate the DataIntegration using the 
+    #             <p>You cannot create a DataIntegration association for a DataIntegration that has been previously associated.
+    # Use a different DataIntegration, or recreate the DataIntegration using the
     # <a href="https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html">CreateDataIntegration</a> API.</p>
     #          </note>
     # @param [Hash, Types::UpdateDataIntegrationRequest] params

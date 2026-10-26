@@ -118,6 +118,30 @@ module Aws::SSOAdmin
       attr_accessor created_date: Time?
     end
 
+    class AddRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor region_name: String?
+    end
+
+    class AddRegionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
     class Application
       include Smithy::Schema::Structure
 
@@ -127,10 +151,12 @@ module Aws::SSOAdmin
         ?name: String,
         ?application_account: String,
         ?instance_arn: String,
+        ?identity_store_arn: String,
         ?status: String,
         ?portal_options: Types::PortalOptions,
         ?description: String,
         ?created_date: Time,
+        ?created_from: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -139,10 +165,12 @@ module Aws::SSOAdmin
       attr_accessor name: String?
       attr_accessor application_account: String?
       attr_accessor instance_arn: String?
+      attr_accessor identity_store_arn: String?
       attr_accessor status: String?
       attr_accessor portal_options: Types::PortalOptions?
       attr_accessor description: String?
       attr_accessor created_date: Time?
+      attr_accessor created_from: String?
     end
 
     class ApplicationAssignment
@@ -417,10 +445,14 @@ module Aws::SSOAdmin
 
       def initialize: (
         ?application_arn: String,
+        ?instance_arn: String,
+        ?identity_store_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor application_arn: String?
+      attr_accessor instance_arn: String?
+      attr_accessor identity_store_arn: String?
     end
 
     class CreateInstanceAccessControlAttributeConfigurationRequest
@@ -915,10 +947,12 @@ module Aws::SSOAdmin
         ?name: String,
         ?application_account: String,
         ?instance_arn: String,
+        ?identity_store_arn: String,
         ?status: String,
         ?portal_options: Types::PortalOptions,
         ?description: String,
         ?created_date: Time,
+        ?created_from: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -927,10 +961,12 @@ module Aws::SSOAdmin
       attr_accessor name: String?
       attr_accessor application_account: String?
       attr_accessor instance_arn: String?
+      attr_accessor identity_store_arn: String?
       attr_accessor status: String?
       attr_accessor portal_options: Types::PortalOptions?
       attr_accessor description: String?
       attr_accessor created_date: Time?
+      attr_accessor created_from: String?
     end
 
     class DescribeInstanceAccessControlAttributeConfigurationRequest
@@ -976,23 +1012,31 @@ module Aws::SSOAdmin
       def initialize: (
         ?instance_arn: String,
         ?identity_store_id: String,
+        ?identity_store_arn: String,
         ?owner_account_id: String,
         ?name: String,
         ?created_date: Time,
         ?status: String,
         ?status_reason: String,
+        ?primary_region: String,
+        ?regions: Array[Types::RegionMetadata],
         ?encryption_configuration_details: Types::EncryptionConfigurationDetails,
+        ?permission_sets_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_arn: String?
       attr_accessor identity_store_id: String?
+      attr_accessor identity_store_arn: String?
       attr_accessor owner_account_id: String?
       attr_accessor name: String?
       attr_accessor created_date: Time?
       attr_accessor status: String?
       attr_accessor status_reason: String?
+      attr_accessor primary_region: String?
+      attr_accessor regions: Array[Types::RegionMetadata]?
       attr_accessor encryption_configuration_details: Types::EncryptionConfigurationDetails?
+      attr_accessor permission_sets_enabled: bool?
     end
 
     class DescribePermissionSetProvisioningStatusRequest
@@ -1041,6 +1085,36 @@ module Aws::SSOAdmin
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor permission_set: Types::PermissionSet?
+    end
+
+    class DescribeRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor region_name: String?
+    end
+
+    class DescribeRegionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?status: String,
+        ?added_date: Time,
+        ?is_primary_region: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor status: String?
+      attr_accessor added_date: Time?
+      attr_accessor is_primary_region: bool?
     end
 
     class DescribeTrustedTokenIssuerRequest
@@ -1417,21 +1491,27 @@ module Aws::SSOAdmin
       def initialize: (
         ?instance_arn: String,
         ?identity_store_id: String,
+        ?identity_store_arn: String,
         ?owner_account_id: String,
         ?name: String,
         ?created_date: Time,
         ?status: String,
         ?status_reason: String,
+        ?primary_region: String,
+        ?regions: Array[Types::RegionMetadata],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor instance_arn: String?
       attr_accessor identity_store_id: String?
+      attr_accessor identity_store_arn: String?
       attr_accessor owner_account_id: String?
       attr_accessor name: String?
       attr_accessor created_date: Time?
       attr_accessor status: String?
       attr_accessor status_reason: String?
+      attr_accessor primary_region: String?
+      attr_accessor regions: Array[Types::RegionMetadata]?
     end
 
     module InstanceStatus
@@ -2045,6 +2125,34 @@ module Aws::SSOAdmin
       attr_accessor next_token: String?
     end
 
+    class ListRegionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListRegionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[Types::RegionMetadata],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[Types::RegionMetadata]?
+      attr_accessor next_token: String?
+    end
+
     class ListTagsForResourceRequest
       include Smithy::Schema::Structure
 
@@ -2416,6 +2524,53 @@ module Aws::SSOAdmin
 
     end
 
+    class RegionMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_name: String,
+        ?status: String,
+        ?added_date: Time,
+        ?is_primary_region: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_name: String?
+      attr_accessor status: String?
+      attr_accessor added_date: Time?
+      attr_accessor is_primary_region: bool?
+    end
+
+    module RegionStatus
+      ACTIVE: String
+      ADDING: String
+      REMOVING: String
+    end
+
+    class RemoveRegionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?instance_arn: String,
+        ?region_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor instance_arn: String?
+      attr_accessor region_name: String?
+    end
+
+    class RemoveRegionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
     class ResourceNotFoundException
       include Smithy::Schema::Structure
 
@@ -2715,12 +2870,14 @@ module Aws::SSOAdmin
         ?name: String,
         ?instance_arn: String,
         ?encryption_configuration: Types::EncryptionConfiguration,
+        ?permission_sets_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor instance_arn: String?
       attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor permission_sets_enabled: bool?
     end
 
     class UpdateInstanceResponse

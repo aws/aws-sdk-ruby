@@ -46,6 +46,7 @@ module Aws::ConfigService
   # * {MaxNumberOfConfigRulesExceededException}
   # * {MaxNumberOfConfigurationRecordersExceededException}
   # * {MaxNumberOfConformancePacksExceededException}
+  # * {MaxNumberOfConnectorsExceededException}
   # * {MaxNumberOfDeliveryChannelsExceededException}
   # * {MaxNumberOfOrganizationConfigRulesExceededException}
   # * {MaxNumberOfOrganizationConformancePacksExceededException}
@@ -85,7 +86,12 @@ module Aws::ConfigService
     extend Smithy::Client::DynamicErrors
 
     # <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html">PutServiceLinkedConfigurationRecorder</a>, you cannot create a service-linked recorder because a service-linked recorder already exists for the specified service.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html">PutThirdPartyServiceLinkedConfigurationRecorder</a>, you cannot create a service-linked recorder because the specified service principal does not support multiple configuration recorders and one already exists.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutThirdPartyServiceLinkedConfigurationRecorder.html">PutThirdPartyServiceLinkedConfigurationRecorder</a>, another in-progress operation is currently referencing the same connector or service principal. Please try again later.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html">PutConnector</a>, you cannot create a connector because a connector already exists for the specified connector configuration.</p>
     #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html">DeleteServiceLinkedConfigurationRecorder</a>, you cannot delete the service-linked recorder because it is currently in use by the linked Amazon Web Services service.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html">DeleteServiceLinkedConfigurationRecorder</a>, another in-progress operation is currently referencing the same connector. Please try again later.</p>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteConnector.html">DeleteConnector</a>, another in-progress operation is currently referencing the connector. Please try again later.</p>
     #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteDeliveryChannel.html">DeleteDeliveryChannel</a>, you cannot delete the specified delivery channel because the customer managed configuration recorder is running. Use the <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_StopConfigurationRecorder.html">StopConfigurationRecorder</a> operation to stop the customer managed configuration
     # 			recorder.</p>
     #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_AssociateResourceTypes.html">AssociateResourceTypes</a> and <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DisassociateResourceTypes.html">DisassociateResourceTypes</a>, one of the following errors:</p>
@@ -176,6 +182,9 @@ module Aws::ConfigService
     #             </li>
     #             <li>
     #                <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutServiceLinkedConfigurationRecorder.html">PutServiceLinkedConfigurationRecorder</a>, a service-linked configuration recorder cannot be created because you do not have the following permissions: IAM <code>CreateServiceLinkedRole</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_PutConnector.html">PutConnector</a>, a connector cannot be created because you do not have the following permissions: IAM <code>CreateServiceLinkedRole</code>.</p>
     #             </li>
     #          </ul>
     class InsufficientPermissionsException < Smithy::Client::ServiceError
@@ -498,6 +507,20 @@ module Aws::ConfigService
       end
     end
 
+    # <p>You have reached the limit of the number of connectors in your account.</p>
+    class MaxNumberOfConnectorsExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::ConfigService::Types::MaxNumberOfConnectorsExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # <p>Error executing the command</p>
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>You have reached the limit of the number of delivery channels
     # 			you can create.</p>
     class MaxNumberOfDeliveryChannelsExceededException < Smithy::Client::ServiceError
@@ -794,15 +817,15 @@ module Aws::ConfigService
     #                <p>No permission to call <code>EnableAWSServiceAccess</code> API</p>
     #             </li>
     #             <li>
-    #                <p>The configuration aggregator cannot be updated because your Amazon Web Services Organization management account or the delegated administrator role changed. 
+    #                <p>The configuration aggregator cannot be updated because your Amazon Web Services Organization management account or the delegated administrator role changed.
     # 				Delete this aggregator and create a new one with the current Amazon Web Services Organization.</p>
     #             </li>
     #             <li>
-    #                <p>The configuration aggregator is associated with a previous Amazon Web Services Organization and Config cannot aggregate data with current Amazon Web Services Organization. 
+    #                <p>The configuration aggregator is associated with a previous Amazon Web Services Organization and Config cannot aggregate data with current Amazon Web Services Organization.
     # 				Delete this aggregator and create a new one with the current Amazon Web Services Organization.</p>
     #             </li>
     #             <li>
-    #                <p>You are not a registered delegated administrator for Config with permissions to call <code>ListDelegatedAdministrators</code> API. 
+    #                <p>You are not a registered delegated administrator for Config with permissions to call <code>ListDelegatedAdministrators</code> API.
     # 			Ensure that the management account registers delagated administrator for Config service principal name before the delegated administrator creates an aggregator.</p>
     #             </li>
     #          </ul>
@@ -955,7 +978,7 @@ module Aws::ConfigService
       end
     end
 
-    # <p>You have reached the limit of the number of tags you can use. 
+    # <p>You have reached the limit of the number of tags you can use.
     # 			For more information, see <a href="https://docs.aws.amazon.com/config/latest/developerguide/configlimits.html">
     #                <b>Service Limits</b>
     #             </a> in the <i>Config Developer Guide</i>.</p>
@@ -1026,6 +1049,15 @@ module Aws::ConfigService
     #             </li>
     #             <li>
     #                <p>For service-linked configuration recorders, the configuration recorder does not record one or more of the specified resource types.</p>
+    #             </li>
+    #          </ul>
+    #          <p>For <a href="https://docs.aws.amazon.com/config/latest/APIReference/API_DeleteServiceLinkedConfigurationRecorder.html">DeleteServiceLinkedConfigurationRecorder</a>, one of the following errors:</p>
+    #          <ul>
+    #             <li>
+    #                <p>You have provided both <code>Arn</code> and <code>ServicePrincipal</code>. Only one of <code>Arn</code> or <code>ServicePrincipal</code> can be specified.</p>
+    #             </li>
+    #             <li>
+    #                <p>You have provided a service principal for service-linked configuration recorder that is not valid.</p>
     #             </li>
     #          </ul>
     class ValidationException < Smithy::Client::ServiceError

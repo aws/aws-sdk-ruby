@@ -24,9 +24,13 @@ module Aws::PartnerCentralSelling
     # <p>This error occurs when you don't have permission to perform the requested action.</p> <p>You don’t have access to this action or resource. Review IAM policies or contact your AWS administrator for assistance.</p>
     # @!attribute message
     #   @return [String]
+    # @!attribute reason
+    #   <p>The reason why access was denied for the requested operation.</p>
+    #   @return [String]
     class AccessDeniedException < Struct.new(
       nil,
       :message,
+      :reason,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -193,6 +197,9 @@ module Aws::PartnerCentralSelling
     # @!attribute last_name
     #   <p>Specifies the last name of the assignee managing the opportunity. The system automatically retrieves this value from the user profile by referencing the associated email address.</p>
     #   @return [String]
+    # @!attribute phone
+    #   <p>Specifies the contact phone number of the assignee responsible for the opportunity or engagement. This field enables direct communication for time-sensitive matters and facilitates coordination between AWS and partner teams.</p>
+    #   @return [String]
     # @!attribute business_title
     #   <p>Specifies the business title of the assignee managing the opportunity. This helps clarify the individual's role and responsibilities within the organization. Use the value <code>PartnerAccountManager</code> to update details of the opportunity owner.</p>
     #   @return [String]
@@ -201,6 +208,7 @@ module Aws::PartnerCentralSelling
       :email,
       :first_name,
       :last_name,
+      :phone,
       :business_title,
       keyword_init: true
     )
@@ -249,10 +257,22 @@ module Aws::PartnerCentralSelling
     # @!attribute engagement_score
     #   <p>Represents a score assigned by AWS to indicate the level of engagement and potential success for the opportunity. This score helps partners prioritize their efforts.</p>
     #   @return [String]
+    # @!attribute aws_products_spend_insights_by_source
+    #   <p>Source-separated spend insights that provide independent analysis for AWS recommendations and partner estimates.</p>
+    #   @return [Types::AwsProductsSpendInsightsBySource]
+    # @!attribute opportunity_quality
+    #   <p>Opportunity quality assessment. Null if not yet scored.</p>
+    #   @return [Types::OpportunityQuality]
+    # @!attribute recommendations
+    #   <p>List of recommendations from various agent-driven sources.</p>
+    #   @return [Array<Types::Recommendation>]
     class AwsOpportunityInsights < Struct.new(
       nil,
       :next_best_actions,
       :engagement_score,
+      :aws_products_spend_insights_by_source,
+      :opportunity_quality,
+      :recommendations,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -290,9 +310,13 @@ module Aws::PartnerCentralSelling
     # @!attribute expected_customer_spend
     #   <p>Indicates the expected spending by the customer over the course of the project. This value helps partners and AWS estimate the financial impact of the opportunity. Use the <a href="https://calculator.aws/#/">AWS Pricing Calculator</a> to create an estimate of the customer’s total spend. If only annual recurring revenue (ARR) is available, distribute it across 12 months to provide an average monthly value.</p>
     #   @return [Array<Types::ExpectedCustomerSpend>]
+    # @!attribute aws_partition
+    #   <p>AWS partition where the opportunity will be deployed. Possible values: <code>aws-eusc</code> for AWS European Sovereign Cloud, <code>null</code> for all other partitions.</p>
+    #   @return [String]
     class AwsOpportunityProject < Struct.new(
       nil,
       :expected_customer_spend,
+      :aws_partition,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -305,10 +329,206 @@ module Aws::PartnerCentralSelling
     # @!attribute solutions
     #   <p>Specifies the partner solutions related to the opportunity. These solutions represent the partner's offerings that are being positioned as part of the overall AWS opportunity.</p>
     #   @return [Array<String>]
+    # @!attribute aws_marketplace_solutions
+    #   <p>The AWS Marketplace solution ARNs associated with this opportunity.</p>
+    #   @return [Array<String>]
+    # @!attribute aws_marketplace_products
+    #   <p>The AWS Marketplace product ARNs associated with this opportunity.</p>
+    #   @return [Array<String>]
     class AwsOpportunityRelatedEntities < Struct.new(
       nil,
       :aws_products,
       :solutions,
+      :aws_marketplace_solutions,
+      :aws_marketplace_products,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides a comprehensive view of AwsOpportunitySummaryFullView template.</p>
+    # @!attribute related_opportunity_id
+    #   <p>Identifier of the related partner opportunity.</p>
+    #   @return [String]
+    # @!attribute origin
+    #   <p>Source origin of the AWS opportunity.</p>
+    #   @return [String]
+    # @!attribute involvement_type
+    #   <p>Type of AWS involvement in the opportunity.</p>
+    #   @return [String]
+    # @!attribute visibility
+    #   <p>Visibility level for the AWS opportunity.</p>
+    #   @return [String]
+    # @!attribute life_cycle
+    #   <p>Tracks the lifecycle of the AWS opportunity, including stages such as qualification, validation, and closure. This field helps partners understand the current status and progression of the opportunity.</p>
+    #   @return [Types::AwsOpportunityLifeCycle]
+    # @!attribute opportunity_team
+    #   <p>AWS team members involved in the opportunity.</p>
+    #   @return [Array<Types::AwsTeamMember>]
+    # @!attribute insights
+    #   <p>Contains insights provided by AWS for the opportunity, offering recommendations and analysis that can help the partner optimize their engagement and strategy.</p>
+    #   @return [Types::AwsOpportunityInsights]
+    # @!attribute involvement_type_change_reason
+    #   <p>Reason for changes in AWS involvement type for the opportunity.</p>
+    #   @return [String]
+    # @!attribute related_entity_ids
+    #   <p>Represents other entities related to the AWS opportunity, such as AWS products, partner solutions, and marketplace offers. These associations help build a complete picture of the solution being sold.</p>
+    #   @return [Types::AwsOpportunityRelatedEntities]
+    # @!attribute customer
+    #   <p>Represents the customer associated with the AWS opportunity. This field captures key details about the customer that are necessary for managing the opportunity.</p>
+    #   @return [Types::AwsOpportunityCustomer]
+    # @!attribute project
+    #   <p>Captures details about the project associated with the opportunity, including objectives, scope, and customer requirements.</p>
+    #   @return [Types::AwsOpportunityProject]
+    # @!attribute cosell_motion
+    #   <p>Engagement classification for this opportunity. Read-only. Null before scoring. Known values: <code>AWS Field-engaged</code>, <code>Agent-engaged</code>, <code>Partner-led</code>.</p>
+    #   @return [String]
+    # @!attribute software_revenue
+    #   <p>Seller-provided PARC deal terms: commitment value, discount, and contract dates.</p>
+    #   @return [Types::AwsSoftwareRevenue]
+    class AwsOpportunitySummaryFullView < Struct.new(
+      nil,
+      :related_opportunity_id,
+      :origin,
+      :involvement_type,
+      :visibility,
+      :life_cycle,
+      :opportunity_team,
+      :insights,
+      :involvement_type_change_reason,
+      :related_entity_ids,
+      :customer,
+      :project,
+      :cosell_motion,
+      :software_revenue,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>List of AWS services with program eligibility indicators (MAP, modernization pathways), cost estimates, and optimization recommendations.</p>
+    # @!attribute product_code
+    #   <p>AWS Partner Central product identifier used for opportunity association.</p>
+    #   @return [String]
+    # @!attribute service_code
+    #   <p>Pricing Calculator service code.</p>
+    #   @return [String]
+    # @!attribute categories
+    #   <p>List of program and pathway categories this product is eligible for.</p>
+    #   @return [Array<String>]
+    # @!attribute amount
+    #   <p>Baseline service cost before optimizations.</p>
+    #   @return [String]
+    # @!attribute optimized_amount
+    #   <p>Service cost after applying optimizations.</p>
+    #   @return [String]
+    # @!attribute potential_savings_amount
+    #   <p>Service-specific cost reduction through optimizations.</p>
+    #   @return [String]
+    # @!attribute optimizations
+    #   <p>List of specific optimization recommendations for this product.</p>
+    #   @return [Array<Types::AwsProductOptimization>]
+    class AwsProductDetails < Struct.new(
+      nil,
+      :product_code,
+      :service_code,
+      :categories,
+      :amount,
+      :optimized_amount,
+      :potential_savings_amount,
+      :optimizations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Comprehensive spend analysis for a single source (AWS or Partner) including total amounts, optimization savings, program category breakdowns, and detailed product-level insights.</p>
+    # @!attribute currency_code
+    #   <p>ISO 4217 currency code. Supported values are <code>USD</code> and <code>EUR</code>. Returns <code>EUR</code> when the opportunity is in the <code>aws-eusc</code> (AWS European Sovereign Cloud) partition.</p>
+    #   @return [String]
+    # @!attribute frequency
+    #   <p>Time period for spend amounts.</p>
+    #   @return [String]
+    # @!attribute total_amount
+    #   <p>Total estimated spend for this source before optimizations.</p>
+    #   @return [String]
+    # @!attribute total_optimized_amount
+    #   <p>Total estimated spend after applying recommended optimizations.</p>
+    #   @return [String]
+    # @!attribute total_potential_savings_amount
+    #   <p>Quantified savings achievable through implementing optimizations.</p>
+    #   @return [String]
+    # @!attribute total_amount_by_category
+    #   <p>Spend amounts mapped to AWS programs and modernization pathways.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute aws_products
+    #   <p>Product-level details including costs and optimization recommendations.</p>
+    #   @return [Array<Types::AwsProductDetails>]
+    class AwsProductInsights < Struct.new(
+      nil,
+      :currency_code,
+      :frequency,
+      :total_amount,
+      :total_optimized_amount,
+      :total_potential_savings_amount,
+      :total_amount_by_category,
+      :aws_products,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specific optimization strategies partners can implement to reduce costs.</p>
+    # @!attribute description
+    #   <p>Human-readable explanation of the optimization strategy.</p>
+    #   @return [String]
+    # @!attribute savings_amount
+    #   <p>Quantified cost savings achievable by implementing this optimization.</p>
+    #   @return [String]
+    class AwsProductOptimization < Struct.new(
+      nil,
+      :description,
+      :savings_amount,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Source-separated spend insights that provide independent analysis for AWS recommendations and partner estimates.</p>
+    # @!attribute partner
+    #   <p>Partner-sourced insights derived from Pricing Calculator URLs.</p>
+    #   @return [Types::AwsProductInsights]
+    # @!attribute aws
+    #   <p>AI-generated insights including recommended products from AWS.</p>
+    #   @return [Types::AwsProductInsights]
+    class AwsProductsSpendInsightsBySource < Struct.new(
+      nil,
+      :partner,
+      :aws,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Seller-provided PARC deal terms for the opportunity, including commitment value, discount percentage, and contract dates.</p>
+    # @!attribute value
+    #   <p>Specifies payments details.</p>
+    #   @return [Types::MonetaryValue]
+    # @!attribute discount
+    #   <p>Discount percentage offered on the software revenue. Percent convention: 15.00 means 15%.</p>
+    #   @return [String]
+    # @!attribute effective_date
+    #   <p>Contract effective (start) date in YYYY-MM-DD format.</p>
+    #   @return [String]
+    # @!attribute expiration_date
+    #   <p>Contract expiration (end) date in YYYY-MM-DD format.</p>
+    #   @return [String]
+    class AwsSoftwareRevenue < Struct.new(
+      nil,
+      :value,
+      :discount,
+      :effective_date,
+      :expiration_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -394,6 +614,56 @@ module Aws::PartnerCentralSelling
     end
 
     # @!attribute catalog
+    #   <p>Specifies the catalog associated with the engagement context request. This field takes a string value from a predefined list: <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the engagement context is created in. Use <code>AWS</code> to create contexts in the production environment, and <code>Sandbox</code> for testing in secure, isolated environments.</p>
+    #   @return [String]
+    # @!attribute engagement_identifier
+    #   <p>The unique identifier of the <code>Engagement</code> for which the context is being created. This parameter ensures the context is associated with the correct engagement and provides the necessary linkage between the engagement and its contextual information.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier provided by the client to ensure that the request is handled exactly once. This token helps prevent duplicate context creations and must not exceed sixty-four alphanumeric characters. Use a UUID or other unique string to ensure idempotency.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>Specifies the type of context being created for the engagement. This field determines the structure and content of the context payload. Valid values include <code>CustomerProject</code> for customer project-related contexts. The type field ensures that the context is properly categorized and processed according to its intended purpose.</p>
+    #   @return [String]
+    # @!attribute payload
+    #   <p>Represents the payload of an Engagement context. The structure of this payload varies based on the context type specified in the EngagementContextDetails. </p>
+    #   @return [Types::EngagementContextPayload]
+    class CreateEngagementContextRequest < Struct.new(
+      nil,
+      :catalog,
+      :engagement_identifier,
+      :client_token,
+      :type,
+      :payload,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute engagement_id
+    #   <p>The unique identifier of the engagement to which the context was added. This ID confirms the successful association of the context with the specified engagement.</p>
+    #   @return [String]
+    # @!attribute engagement_arn
+    #   <p>The Amazon Resource Name (ARN) of the engagement to which the context was added. This globally unique identifier can be used for cross-service references and IAM policies.</p>
+    #   @return [String]
+    # @!attribute engagement_last_modified_at
+    #   <p>The timestamp indicating when the engagement was last modified as a result of adding the context, in ISO 8601 format (UTC). Example: "2023-05-01T20:37:46Z".</p>
+    #   @return [Time]
+    # @!attribute context_id
+    #   <p>The unique identifier assigned to the newly created engagement context. This ID can be used to reference the specific context within the engagement for future operations.</p>
+    #   @return [String]
+    class CreateEngagementContextResponse < Struct.new(
+      nil,
+      :engagement_id,
+      :engagement_arn,
+      :engagement_last_modified_at,
+      :context_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute catalog
     #   <p> Specifies the catalog related to the engagement. Accepted values are <code>AWS</code> and <code>Sandbox</code>, which determine the environment in which the engagement is managed. </p>
     #   @return [String]
     # @!attribute client_token
@@ -403,7 +673,7 @@ module Aws::PartnerCentralSelling
     #   <p> The unique identifier of the <code>Engagement</code> associated with the invitation. This parameter ensures the invitation is created within the correct <code>Engagement</code> context. </p>
     #   @return [String]
     # @!attribute invitation
-    #   <p> The <code>Invitation</code> object all information necessary to initiate an engagement invitation to a partner. It contains a personalized message from the sender, the invitation's receiver, and a payload. The <code>Payload</code> can be the <code>OpportunityInvitation</code>, which includes detailed structures for sender contacts, partner responsibilities, customer information, and project details. </p>
+    #   <p> The <code>Invitation</code> object all information necessary to initiate an engagement invitation to a partner. It contains a personalized message from the sender, the invitation's receiver, and a payload. The <code>Payload</code> can be the <code>OpportunityInvitation</code>, which includes detailed structures for sender contacts, partner responsibilities, customer information, and project details, or <code>LeadInvitation</code>, which includes structures for customer information and interaction details. </p>
     #   @return [Types::Invitation]
     class CreateEngagementInvitationRequest < Struct.new(
       nil,
@@ -464,10 +734,14 @@ module Aws::PartnerCentralSelling
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) that identifies the engagement.</p>
     #   @return [String]
+    # @!attribute modified_at
+    #   <p>The timestamp indicating when the engagement was last modified, in ISO 8601 format (UTC). For newly created engagements, this value matches the creation timestamp. Example: "2023-05-01T20:37:46Z".</p>
+    #   @return [Time]
     class CreateEngagementResponse < Struct.new(
       nil,
       :id,
       :arn,
+      :modified_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -651,6 +925,22 @@ module Aws::PartnerCentralSelling
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Filter for opportunities based on creation date range.</p>
+    # @!attribute after_created_date
+    #   <p>Filter opportunities created after this date.</p>
+    #   @return [Time]
+    # @!attribute before_created_date
+    #   <p>Filter opportunities created before this date.</p>
+    #   @return [Time]
+    class CreatedDateFilter < Struct.new(
+      nil,
+      :after_created_date,
+      :before_created_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object that contains the customer's <code>Account</code> and <code>Contact</code>.</p>
     # @!attribute account
     #   <p>An object that contains the customer's account details.</p>
@@ -734,6 +1024,9 @@ module Aws::PartnerCentralSelling
     end
 
     # <p>Provides detailed context information for an Engagement. This structure allows for specifying the type of context and its associated payload. </p>
+    # @!attribute id
+    #   <p>The unique identifier of the engagement context. This ID is used to reference and manage the specific context within the engagement.</p>
+    #   @return [String]
     # @!attribute type
     #   <p>Specifies the type of Engagement context. Valid values are "CustomerProject" or "Document", indicating whether the context relates to a customer project or a document respectively. </p>
     #   @return [String]
@@ -742,6 +1035,7 @@ module Aws::PartnerCentralSelling
     #   @return [Types::EngagementContextPayload]
     class EngagementContextDetails < Struct.new(
       nil,
+      :id,
       :type,
       :payload,
       keyword_init: true
@@ -753,14 +1047,24 @@ module Aws::PartnerCentralSelling
     # @!attribute customer_project
     #   <p>Contains detailed information about a customer project when the context type is "CustomerProject". This field is present only when the Type in EngagementContextDetails is set to "CustomerProject". </p>
     #   @return [Types::CustomerProjectsContext]
+    # @!attribute lead
+    #   <p>Contains detailed information about a lead when the context type is "Lead". This field is present only when the Type in EngagementContextDetails is set to "Lead".</p>
+    #   @return [Types::LeadContext]
+    # @!attribute prospecting_result
+    #   <p>Contains prospecting result data with enriched insights. The system generates these insights when a partner runs an autonomous prospecting job on leads. This field appears only when the context type is "ProspectingResult".</p>
+    #   @return [Types::ProspectingResult]
     class EngagementContextPayload < Struct.new(
       :customer_project,
+      :lead,
+      :prospecting_result,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class CustomerProject < EngagementContextPayload; end
+      class Lead < EngagementContextPayload; end
+      class ProspectingResult < EngagementContextPayload; end
       class Unknown < EngagementContextPayload; end
     end
 
@@ -904,6 +1208,34 @@ module Aws::PartnerCentralSelling
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Contains the result of processing a single engagement within a prospecting task. Each engagement is processed independently, so individual engagements can succeed or fail regardless of other engagements in the same task.</p>
+    # @!attribute engagement_identifier
+    #   <p>The unique identifier of the engagement that was processed.</p>
+    #   @return [String]
+    # @!attribute engagement_context_id
+    #   <p>The identifier of the prospecting context created for this engagement. This field is only populated when the engagement was processed successfully (status is <code>COMPLETED</code>). Use this identifier to reference the prospecting context in subsequent operations.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The processing status of this specific engagement. Possible values are <code>PENDING</code>, <code>IN_PROGRESS</code>, <code>COMPLETED</code>, and <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute reason_code
+    #   <p>An enumerated code indicating the reason this engagement failed to process. This field is only populated when <code>Status</code> is <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A human-readable description of the failure for this engagement, including suggested recovery steps. This field is only populated when <code>Status</code> is <code>FAILED</code>.</p>
+    #   @return [String]
+    class EngagementProspectingResult < Struct.new(
+      nil,
+      :engagement_identifier,
+      :engagement_context_id,
+      :status,
+      :reason_code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p> This provide a streamlined view of the relationships between engagements and resources. These summaries offer a crucial link between collaborative engagements and the specific resources involved, such as opportunities.These summaries are particularly valuable for partners navigating complex engagements with multiple resources. They enable quick insights into resource distribution across engagements, support efficient resource management, and help maintain a clear overview of collaborative activities. </p>
     # @!attribute catalog
     #   <p> Indicates the environment in which the resource and engagement exist. </p>
@@ -967,6 +1299,15 @@ module Aws::PartnerCentralSelling
     # @!attribute member_count
     #   <p>The number of members in the Engagement.</p>
     #   @return [Integer]
+    # @!attribute modified_at
+    #   <p>The timestamp indicating when the engagement was last modified, in ISO 8601 format (UTC). Example: "2023-05-01T20:37:46Z".</p>
+    #   @return [Time]
+    # @!attribute modified_by
+    #   <p>The AWS account ID of the user who last modified the engagement. This field helps track who made the most recent changes to the engagement.</p>
+    #   @return [String]
+    # @!attribute context_types
+    #   <p>An array of context types associated with the engagement, such as "CustomerProject" or "Lead". This provides a quick overview of the types of contexts included in the engagement.</p>
+    #   @return [Array<String>]
     class EngagementSummary < Struct.new(
       nil,
       :arn,
@@ -975,6 +1316,41 @@ module Aws::PartnerCentralSelling
       :created_at,
       :created_by,
       :member_count,
+      :modified_at,
+      :modified_by,
+      :context_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains enrichment data for engagement invitations. You can view propensity scores, program eligibility, and lead readiness insights directly in the invitation, before you take action on the invitation.</p>
+    # @!attribute prospecting_result_aws
+    #   <p>The customer account data and propensity insights for the prospected account. It includes geographic, industry, and segment classifications, along with engagement and solution scoring.</p>
+    #   @return [Types::InvitationProspectingResultAws]
+    # @!attribute lead_insights
+    #   <p>The AI-generated lead readiness score for this lead. Use this score to assess lead quality and prioritize engagement efforts.</p>
+    #   @return [Types::LeadInsights]
+    class EnrichmentContext < Struct.new(
+      nil,
+      :prospecting_result_aws,
+      :lead_insights,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The expected duration of a partner's contract with the customer. Used to convert Total Contract Value (TCV) to Monthly Recurring Revenue (MRR) for opportunity dealsizing calculations.</p>
+    # @!attribute term
+    #   <p>The unit of measurement for the contract duration value. Currently accepts only <code>Months</code>.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>A String representation of the contract duration as an integer, expressed in the unit defined by <code>Term</code>. Valid values range from <code>1</code> to <code>144</code>.</p>
+    #   @return [String]
+    class ExpectedContractDuration < Struct.new(
+      nil,
+      :term,
+      :value,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -985,13 +1361,13 @@ module Aws::PartnerCentralSelling
     #   <p>Represents the estimated monthly revenue that the partner expects to earn from the opportunity. This helps in forecasting financial returns.</p>
     #   @return [String]
     # @!attribute currency_code
-    #   <p>Indicates the currency in which the revenue estimate is provided. This helps in understanding the financial impact across different markets.</p>
+    #   <p>Indicates the currency in which the revenue estimate is provided. This helps in understanding the financial impact across different markets. Accepted values are <code>USD</code> (US Dollars) and <code>EUR</code> (Euros). If the AWS Partition is <code>aws-eusc</code> (AWS European Sovereign Cloud), the currency code must be <code>EUR</code>.</p>
     #   @return [String]
     # @!attribute frequency
-    #   <p>Indicates how frequently the customer is expected to spend the projected amount. Only the value <code>Monthly</code> is allowed for the <code>Frequency</code> field, representing recurring monthly spend.</p>
+    #   <p>Indicates how frequently the customer is expected to spend the projected amount. Use <code>Monthly</code> for recurring monthly spend (required for <code>TargetCompany: "AWS"</code> entries). Use <code>None</code> for one-time deal value entries (required for <code>TargetCompany: "Self"</code> entries when providing Total Contract Value).</p>
     #   @return [String]
     # @!attribute target_company
-    #   <p>Specifies the name of the partner company that is expected to generate revenue from the opportunity. This field helps track the partner’s involvement in the opportunity. This field only accepts the value <code>AWS</code>. If any other value is provided, the system will automatically set it to <code>AWS</code>.</p>
+    #   <p>Specifies the entity associated with this spend entry. Use <code>AWS</code> for the system’s AWS Monthly Recurring Revenue (MRR) estimate. Use <code>Self</code> for the partner’s own deal value entry when providing Total Contract Value (TCV) for automatic MRR conversion. When <code>ExpectedContractDuration</code> is present on the Project, only <code>AWS</code> and <code>Self</code> are accepted. When <code>ExpectedContractDuration</code> is not present, only <code>AWS</code> is accepted and any other value will be automatically set to <code>AWS</code>.</p>
     #   @return [String]
     # @!attribute estimation_url
     #   <p>A URL providing additional information or context about the spend estimation.</p>
@@ -1006,6 +1382,11 @@ module Aws::PartnerCentralSelling
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:amount] = '' unless options.key?(:amount)
+        super
+      end
     end
 
     # @!attribute catalog
@@ -1023,9 +1404,6 @@ module Aws::PartnerCentralSelling
       include ::Smithy::Schema::Structure
     end
 
-    # @!attribute catalog
-    #   <p>Specifies the catalog in which the AWS Opportunity exists. This is the environment (e.g., <code>AWS</code> or <code>Sandbox</code>) where the opportunity is being managed.</p>
-    #   @return [String]
     # @!attribute related_opportunity_id
     #   <p>Provides the unique identifier of the related partner opportunity, allowing partners to link the AWS Opportunity to their corresponding opportunity in their CRM system.</p>
     #   @return [String]
@@ -1059,9 +1437,17 @@ module Aws::PartnerCentralSelling
     # @!attribute project
     #   <p>Provides details about the project associated with the AWS Opportunity, including the customer’s business problem, expected outcomes, and project scope. This information is crucial for understanding the broader context of the opportunity.</p>
     #   @return [Types::AwsOpportunityProject]
+    # @!attribute cosell_motion
+    #   <p>Engagement classification for this opportunity. Read-only. Null before scoring. Known values: <code>AWS Field-engaged</code>, <code>Agent-engaged</code>, <code>Partner-led</code>.</p>
+    #   @return [String]
+    # @!attribute software_revenue
+    #   <p>Seller-provided PARC deal terms: commitment value, discount, and contract dates.</p>
+    #   @return [Types::AwsSoftwareRevenue]
+    # @!attribute catalog
+    #   <p>Specifies the catalog in which the AWS Opportunity exists. This is the environment (e.g., <code>AWS</code> or <code>Sandbox</code>) where the opportunity is being managed.</p>
+    #   @return [String]
     class GetAwsOpportunitySummaryResponse < Struct.new(
       nil,
-      :catalog,
       :related_opportunity_id,
       :origin,
       :involvement_type,
@@ -1073,6 +1459,9 @@ module Aws::PartnerCentralSelling
       :related_entity_ids,
       :customer,
       :project,
+      :cosell_motion,
+      :software_revenue,
+      :catalog,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1144,6 +1533,9 @@ module Aws::PartnerCentralSelling
     # @!attribute existing_members
     #   <p>A list of active members currently part of the Engagement. This array contains a maximum of 10 members, each represented by an object with the following properties.</p> <ul> <li> <p>CompanyName: The name of the member's company.</p> </li> <li> <p>WebsiteUrl: The website URL of the member's company.</p> </li> </ul>
     #   @return [Array<Types::EngagementMemberSummary>]
+    # @!attribute enrichment_context
+    #   <p>The enrichment data for the engagement associated with this invitation. You can view propensity scores, program eligibility, and lead readiness assessments before taking action on the invitation.</p>
+    #   @return [Types::EnrichmentContext]
     class GetEngagementInvitationResponse < Struct.new(
       nil,
       :arn,
@@ -1163,6 +1555,7 @@ module Aws::PartnerCentralSelling
       :invitation_message,
       :engagement_description,
       :existing_members,
+      :enrichment_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1204,6 +1597,12 @@ module Aws::PartnerCentralSelling
     # @!attribute member_count
     #   <p>Specifies the current count of members participating in the Engagement. This count includes all active members regardless of their roles or permissions within the Engagement.</p>
     #   @return [Integer]
+    # @!attribute modified_at
+    #   <p>The timestamp indicating when the engagement was last modified, in ISO 8601 format (UTC). Example: "2023-05-01T20:37:46Z". This helps track the most recent changes to the engagement.</p>
+    #   @return [Time]
+    # @!attribute modified_by
+    #   <p>The AWS account ID of the user who last modified the engagement. This field helps track who made the most recent changes to the engagement.</p>
+    #   @return [String]
     # @!attribute contexts
     #   <p>A list of context objects associated with the engagement. Each context provides additional information related to the Engagement, such as customer projects or documents.</p>
     #   @return [Array<Types::EngagementContextDetails>]
@@ -1216,6 +1615,8 @@ module Aws::PartnerCentralSelling
       :created_at,
       :created_by,
       :member_count,
+      :modified_at,
+      :modified_by,
       :contexts,
       keyword_init: true
     )
@@ -1303,6 +1704,54 @@ module Aws::PartnerCentralSelling
       :related_entity_identifiers,
       :life_cycle,
       :opportunity_team,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the request structure for retrieving the status and results of a prospecting task.</p>
+    # @!attribute catalog
+    #   <p>Specifies the catalog associated with the task. Specify <code>AWS</code> for production environments and <code>Sandbox</code> for testing and development purposes. The value must match the catalog used when the task was created.</p>
+    #   @return [String]
+    # @!attribute task_identifier
+    #   <p>The unique identifier of the prospecting task to retrieve. This value is returned in the <code>TaskId</code> field of the <code>StartProspectingFromEngagementTask</code> response.</p>
+    #   @return [String]
+    class GetProspectingFromEngagementTaskRequest < Struct.new(
+      nil,
+      :catalog,
+      :task_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the response structure containing the full details of a prospecting task, including per-engagement processing results. Includes the <code>Status</code> field of each <code>EngagementProspectingResult</code> entry to determine individual outcomes.</p>
+    # @!attribute task_id
+    #   <p>The unique identifier of the task.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The Amazon Resource Name (ARN) of the task.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The descriptive name of the task that you provided when you created it.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The timestamp indicating when the task was initiated. The format follows ISO 8601 date-time notation.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The timestamp indicating when the task finished processing. This field is absent if the task is still in progress. The format follows ISO 8601 date-time notation.</p>
+    #   @return [Time]
+    # @!attribute engagements
+    #   <p>An array of <code>EngagementProspectingResult</code> entries for each engagement in the task. Each entry contains the processing status. For successfully completed engagements, includes the prospecting context identifier. For failed engagements, includes an error code and message.</p>
+    #   @return [Array<Types::EngagementProspectingResult>]
+    class GetProspectingFromEngagementTaskResponse < Struct.new(
+      nil,
+      :task_id,
+      :task_arn,
+      :task_name,
+      :start_time,
+      :end_time,
+      :engagements,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1439,6 +1888,9 @@ module Aws::PartnerCentralSelling
     # @!attribute payload
     #   <p> Represents the payload of a resource snapshot. This structure is designed to accommodate different types of resource snapshots, currently supporting opportunity summaries. </p>
     #   @return [Types::ResourceSnapshotPayload]
+    # @!attribute target_member_accounts
+    #   <p>Target member accounts associated with the resource snapshot.</p>
+    #   @return [Array<String>]
     class GetResourceSnapshotResponse < Struct.new(
       nil,
       :catalog,
@@ -1451,6 +1903,7 @@ module Aws::PartnerCentralSelling
       :resource_snapshot_template_name,
       :revision,
       :payload,
+      :target_member_accounts,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1513,6 +1966,22 @@ module Aws::PartnerCentralSelling
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A subset of prospecting result data visible to invitation receivers. It includes customer account details and AI-generated insights.</p>
+    # @!attribute customer
+    #   <p>The prospected customer account details, including geographic classification, industry segmentation, company size, and program eligibility.</p>
+    #   @return [Types::ProspectingResultCustomer]
+    # @!attribute insights
+    #   <p>The AI-generated insights from the prospecting analysis, including marketplace engagement scoring, solution fit assessments, and solution categorization.</p>
+    #   @return [Types::ProspectingInsights]
+    class InvitationProspectingResultAws < Struct.new(
+      nil,
+      :customer,
+      :insights,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines a filter to retrieve opportunities based on the last modified date. This filter is useful for tracking changes or updates to opportunities over time.</p>
     # @!attribute after_last_modified_date
     #   <p>Specifies the date after which the opportunities were modified. Use this filter to retrieve only those opportunities that were modified after a given timestamp.</p>
@@ -1524,6 +1993,267 @@ module Aws::PartnerCentralSelling
       nil,
       :after_last_modified_date,
       :before_last_modified_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The address information for a lead customer, including city, state or region, postal code, and country code.</p>
+    # @!attribute city
+    #   <p>The city of the lead customer's address.</p>
+    #   @return [String]
+    # @!attribute postal_code
+    #   <p>The postal code of the lead customer's address.</p>
+    #   @return [String]
+    # @!attribute state_or_region
+    #   <p>The state or region of the lead customer's address.</p>
+    #   @return [String]
+    # @!attribute country_code
+    #   <p>The country code of the lead customer's address.</p>
+    #   @return [String]
+    class LeadAddress < Struct.new(
+      nil,
+      :city,
+      :postal_code,
+      :state_or_region,
+      :country_code,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object that contains a lead contact's details associated with the engagement. This provides contact information for individuals involved in lead-related activities.</p>
+    # @!attribute business_title
+    #   <p>The lead contact's business title or job role associated with the engagement.</p>
+    #   @return [String]
+    # @!attribute email
+    #   <p>The lead contact's email address associated with the engagement.</p>
+    #   @return [String]
+    # @!attribute first_name
+    #   <p>The lead contact's first name associated with the engagement.</p>
+    #   @return [String]
+    # @!attribute last_name
+    #   <p>The lead contact's last name associated with the engagement.</p>
+    #   @return [String]
+    # @!attribute phone
+    #   <p>The lead contact's phone number associated with the engagement.</p>
+    #   @return [String]
+    class LeadContact < Struct.new(
+      nil,
+      :business_title,
+      :email,
+      :first_name,
+      :last_name,
+      :phone,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides comprehensive details about a lead associated with an engagement. This structure contains information about lead qualification status, customer details, and interaction history to facilitate lead management and tracking within the engagement.</p>
+    # @!attribute insights
+    #   <p>Insights that AI generates and associates with the lead. These insights provide automated analysis such as lead readiness scoring to help partners assess the lead quality.</p>
+    #   @return [Types::LeadInsights]
+    # @!attribute qualification_status
+    #   <p>Indicates the current qualification status of the lead, such as whether it has been qualified, disqualified, or is still under evaluation. This helps track the lead's progression through the qualification process.</p>
+    #   @return [String]
+    # @!attribute customer
+    #   <p>Contains detailed information about the customer associated with the lead, including company information, contact details, and other relevant customer data.</p>
+    #   @return [Types::LeadCustomer]
+    # @!attribute interactions
+    #   <p>An array of interactions that have occurred with the lead, providing a history of communications, meetings, and other engagement activities related to the lead.</p>
+    #   @return [Array<Types::LeadInteraction>]
+    class LeadContext < Struct.new(
+      nil,
+      :insights,
+      :qualification_status,
+      :customer,
+      :interactions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:qualification_status] = 'Unqualified' unless options.key?(:qualification_status)
+        super
+      end
+    end
+
+    # <p>Contains detailed information about the customer associated with the lead, including company details, industry classification, and AWS maturity level. This information helps qualify and categorize the lead for appropriate engagement strategies.</p>
+    # @!attribute industry
+    #   <p>Specifies the industry sector to which the lead customer's company belongs. This categorization helps in understanding the customer's business context and tailoring appropriate solutions.</p>
+    #   @return [String]
+    # @!attribute company_name
+    #   <p>The name of the lead customer's company. This field is essential for identifying and tracking the customer organization associated with the lead.</p>
+    #   @return [String]
+    # @!attribute website_url
+    #   <p>The website URL of the lead customer's company. This provides additional context about the customer organization and helps verify company legitimacy and size.</p>
+    #   @return [String]
+    # @!attribute address
+    #   <p>The address information for the lead customer.</p>
+    #   @return [Types::LeadAddress]
+    # @!attribute aws_maturity
+    #   <p>Indicates the customer's level of experience and adoption with AWS services. This assessment helps determine the appropriate engagement approach and solution complexity.</p>
+    #   @return [String]
+    # @!attribute market_segment
+    #   <p>Specifies the market segment classification of the lead customer, such as enterprise, mid-market, or small business. This segmentation helps in targeting appropriate solutions and engagement strategies.</p>
+    #   @return [String]
+    class LeadCustomer < Struct.new(
+      nil,
+      :industry,
+      :company_name,
+      :website_url,
+      :address,
+      :aws_maturity,
+      :market_segment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains insights that AI generates for a lead. These insights provide automated analysis to help partners evaluate the lead quality and prioritize engagement efforts.</p>
+    # @!attribute lead_readiness_score
+    #   <p>A score that indicates the lead's readiness for engagement. Valid values are <code>Low</code>, <code>Medium</code>, and <code>High</code>. Use this score to prioritize leads based on their likelihood of conversion.</p>
+    #   @return [String]
+    class LeadInsights < Struct.new(
+      nil,
+      :lead_readiness_score,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents a specific interaction or touchpoint with a lead customer. This structure captures details about communications, meetings, or other engagement activities that help track the lead's progression and engagement history.</p>
+    # @!attribute source_type
+    #   <p>Specifies the type of source that generated the lead interaction, such as "Event", "Website", "Referral", or "Campaign". This categorization helps track lead generation effectiveness across different channels.</p>
+    #   @return [String]
+    # @!attribute source_id
+    #   <p>The unique identifier of the specific source that generated the lead interaction. This ID provides traceability back to the original lead generation activity.</p>
+    #   @return [String]
+    # @!attribute source_name
+    #   <p>The descriptive name of the source that generated the lead interaction, providing a human-readable identifier for the lead generation channel or activity.</p>
+    #   @return [String]
+    # @!attribute usecase
+    #   <p>Describes the specific use case or business scenario discussed during the lead interaction. This helps categorize the customer's interests and potential solutions.</p>
+    #   @return [String]
+    # @!attribute interaction_date
+    #   <p>The date and time when the lead interaction occurred, in ISO 8601 format (UTC). This timestamp helps track the chronology of lead engagement activities.</p>
+    #   @return [Time]
+    # @!attribute customer_action
+    #   <p>Describes the action taken by the customer during or as a result of the interaction, such as requesting information, scheduling a meeting, or expressing interest in a solution.</p>
+    #   @return [String]
+    # @!attribute business_problem
+    #   <p>Describes the business problem or challenge that the customer discussed during the interaction. This information helps qualify the lead and identify appropriate solutions.</p>
+    #   @return [String]
+    # @!attribute contact
+    #   <p>Contains contact information for the customer representative involved in the lead interaction, including their name, title, and contact details.</p>
+    #   @return [Types::LeadContact]
+    class LeadInteraction < Struct.new(
+      nil,
+      :source_type,
+      :source_id,
+      :source_name,
+      :usecase,
+      :interaction_date,
+      :customer_action,
+      :business_problem,
+      :contact,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:source_type] = '' unless options.key?(:source_type)
+        options[:source_id] = '' unless options.key?(:source_id)
+        options[:source_name] = '' unless options.key?(:source_name)
+        options[:customer_action] = '' unless options.key?(:customer_action)
+        super
+      end
+    end
+
+    # <p>Contains customer information included in a lead invitation payload. This structure provides essential details about the customer to help partners evaluate the lead opportunity and determine their interest in engagement.</p>
+    # @!attribute industry
+    #   <p>Specifies the industry sector of the customer company associated with the lead invitation. This categorization helps partners understand the customer's business context and assess solution fit.</p>
+    #   @return [String]
+    # @!attribute company_name
+    #   <p>The name of the customer company associated with the lead invitation. This field identifies the target organization for the lead engagement opportunity.</p>
+    #   @return [String]
+    # @!attribute website_url
+    #   <p>The website URL of the customer company. This provides additional context about the customer organization and helps partners verify company details and assess business size and legitimacy.</p>
+    #   @return [String]
+    # @!attribute country_code
+    #   <p>The country code indicating the geographic location of the customer company. This information helps partners understand regional requirements and assess their ability to serve the customer effectively.</p>
+    #   @return [String]
+    # @!attribute aws_maturity
+    #   <p>Indicates the customer's level of experience and adoption with AWS services. This assessment helps partners understand the customer's cloud maturity and tailor their engagement approach accordingly.</p>
+    #   @return [String]
+    # @!attribute market_segment
+    #   <p>Specifies the market segment classification of the customer, such as enterprise, mid-market, or small business. This segmentation helps partners determine the appropriate solution complexity and engagement strategy.</p>
+    #   @return [String]
+    class LeadInvitationCustomer < Struct.new(
+      nil,
+      :industry,
+      :company_name,
+      :website_url,
+      :country_code,
+      :aws_maturity,
+      :market_segment,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:country_code] = '' unless options.key?(:country_code)
+        super
+      end
+    end
+
+    # <p>Represents interaction details included in a lead invitation payload. This structure provides context about how the lead was generated and the customer's engagement history to help partners assess the opportunity quality.</p>
+    # @!attribute source_type
+    #   <p>Specifies the type of source that generated the lead interaction, such as "Event", "Website", or "Campaign". This helps partners understand the lead generation channel and assess lead quality based on the source type.</p>
+    #   @return [String]
+    # @!attribute source_id
+    #   <p>The unique identifier of the specific source that generated the lead interaction. This provides traceability to the original lead generation activity for reference and follow-up purposes.</p>
+    #   @return [String]
+    # @!attribute source_name
+    #   <p>The descriptive name of the source that generated the lead interaction. This human-readable identifier helps partners understand the specific lead generation channel or campaign that created the opportunity.</p>
+    #   @return [String]
+    # @!attribute usecase
+    #   <p>Describes the specific use case or business scenario associated with the lead interaction. This information helps partners understand the customer's interests and potential solution requirements.</p>
+    #   @return [String]
+    # @!attribute contact_business_title
+    #   <p>The business title or job role of the customer contact involved in the lead interaction. This helps partners identify the decision-making level and engagement approach for the lead.</p>
+    #   @return [String]
+    class LeadInvitationInteraction < Struct.new(
+      nil,
+      :source_type,
+      :source_id,
+      :source_name,
+      :usecase,
+      :contact_business_title,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:source_type] = '' unless options.key?(:source_type)
+        options[:source_id] = '' unless options.key?(:source_id)
+        options[:source_name] = '' unless options.key?(:source_name)
+        super
+      end
+    end
+
+    # <p>Represents the data payload of an engagement invitation for a lead opportunity. This contains detailed information about the customer and interaction history that partners use to evaluate whether to accept the lead engagement invitation.</p>
+    # @!attribute customer
+    #   <p>Contains information about the customer associated with the lead invitation. This data helps partners understand the customer's profile, industry, and business context to assess the lead opportunity.</p>
+    #   @return [Types::LeadInvitationCustomer]
+    # @!attribute interaction
+    #   <p>Describes the interaction details associated with the lead, including the source of the lead generation and customer engagement information. This context helps partners evaluate the lead quality and engagement approach.</p>
+    #   @return [Types::LeadInvitationInteraction]
+    class LeadInvitationPayload < Struct.new(
+      nil,
+      :customer,
+      :interaction,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1984,6 +2714,12 @@ module Aws::PartnerCentralSelling
     # @!attribute exclude_created_by
     #   <p>An array of strings representing AWS Account IDs. Use this to exclude engagements created by specific users. </p>
     #   @return [Array<String>]
+    # @!attribute context_types
+    #   <p>Filters engagements to include only those containing the specified context types, such as "CustomerProject" or "Lead". Use this to find engagements that have specific types of contextual information associated with them.</p>
+    #   @return [Array<String>]
+    # @!attribute exclude_context_types
+    #   <p>Filters engagements to exclude those containing the specified context types. Use this to find engagements that do not have certain types of contextual information, helping to narrow results based on context exclusion criteria.</p>
+    #   @return [Array<String>]
     # @!attribute sort
     #   <p>Specifies the sorting parameters for listing Engagements.</p>
     #   @return [Types::EngagementSort]
@@ -2001,6 +2737,8 @@ module Aws::PartnerCentralSelling
       :catalog,
       :created_by,
       :exclude_created_by,
+      :context_types,
+      :exclude_context_types,
       :sort,
       :max_results,
       :next_token,
@@ -2052,6 +2790,12 @@ module Aws::PartnerCentralSelling
     # @!attribute customer_company_name
     #   <p>Filters the opportunities based on the customer's company name. This allows partners to search for opportunities associated with a specific customer by matching the provided company name string.</p>
     #   @return [Array<String>]
+    # @!attribute created_date
+    #   <p>Filter opportunities by creation date criteria.</p>
+    #   @return [Types::CreatedDateFilter]
+    # @!attribute target_close_date
+    #   <p>Filters opportunities based on their target close date. This filter helps retrieve opportunities with an expected close date before or after a specified date.</p>
+    #   @return [Types::TargetCloseDateFilter]
     class ListOpportunitiesRequest < Struct.new(
       nil,
       :catalog,
@@ -2063,6 +2807,8 @@ module Aws::PartnerCentralSelling
       :life_cycle_stage,
       :life_cycle_review_status,
       :customer_company_name,
+      :created_date,
+      :target_close_date,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2078,6 +2824,168 @@ module Aws::PartnerCentralSelling
       nil,
       :opportunity_summaries,
       :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides a summary of a task related to creating an opportunity from an engagement. This structure contains key information about the task's status, associated identifiers, and any failure details for opportunity creation processes.</p>
+    # @!attribute task_id
+    #   <p>The unique identifier of the task for creating an opportunity from an engagement.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the task within AWS. This ARN can be used for referencing the task in other AWS services or APIs.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The timestamp indicating when the task was initiated, in RFC 3339 format.</p>
+    #   @return [Time]
+    # @!attribute task_status
+    #   <p>The current status of the task. Valid values are COMPLETE, INPROGRESS, or FAILED.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A detailed message providing additional information about the task, especially useful in case of failures. This field may contain error details or other relevant information about the task's execution.</p>
+    #   @return [String]
+    # @!attribute reason_code
+    #   <p>A code indicating the specific reason for a task failure. This field is populated when the task status is FAILED and provides a categorized reason for the failure.</p>
+    #   @return [String]
+    # @!attribute opportunity_id
+    #   <p>The unique identifier of the opportunity created as a result of the task. This field is populated when the task is completed successfully.</p>
+    #   @return [String]
+    # @!attribute resource_snapshot_job_id
+    #   <p>The identifier of the resource snapshot job associated with this task, if a snapshot was created as part of the opportunity creation process.</p>
+    #   @return [String]
+    # @!attribute engagement_id
+    #   <p>The unique identifier of the engagement from which the opportunity is being created. This field helps track the source of the opportunity creation task.</p>
+    #   @return [String]
+    # @!attribute context_id
+    #   <p>The unique identifier of the engagement context associated with the opportunity creation task. This links the task to specific contextual information within the engagement.</p>
+    #   @return [String]
+    class ListOpportunityFromEngagementTaskSummary < Struct.new(
+      nil,
+      :task_id,
+      :task_arn,
+      :start_time,
+      :task_status,
+      :message,
+      :reason_code,
+      :opportunity_id,
+      :resource_snapshot_job_id,
+      :engagement_id,
+      :context_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>Specifies the maximum number of results to return in a single page of the response. Use this parameter to control the number of items returned in each request, which can be useful for performance tuning and managing large result sets.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The token for requesting the next page of results. This value is obtained from the NextToken field in the response of a previous call to this API. Use this parameter for pagination when the result set spans multiple pages.</p>
+    #   @return [String]
+    # @!attribute sort
+    #   <p> Defines the sorting parameters for listing tasks. This structure allows for specifying the field to sort by and the order of sorting. </p>
+    #   @return [Types::ListTasksSortBase]
+    # @!attribute catalog
+    #   <p>Specifies the catalog related to the request. Valid values are <code>AWS</code> for production environments and <code>Sandbox</code> for testing or development purposes. The catalog determines which environment the task data is retrieved from.</p>
+    #   @return [String]
+    # @!attribute task_status
+    #   <p>Filters the tasks based on their current status. This allows you to focus on tasks in specific states. Valid values are <code>COMPLETE</code> for tasks that have finished successfully, <code>INPROGRESS</code> for tasks that are currently running, and <code>FAILED</code> for tasks that have encountered an error and failed to complete.</p>
+    #   @return [Array<String>]
+    # @!attribute task_identifier
+    #   <p>Filters tasks by their unique identifiers. Use this when you want to retrieve information about specific tasks. Provide the task ID to get details about a particular opportunity creation task.</p>
+    #   @return [Array<String>]
+    # @!attribute opportunity_identifier
+    #   <p>Filters tasks by the identifiers of the opportunities they created or are associated with. Use this to find tasks related to specific opportunity creation processes.</p>
+    #   @return [Array<String>]
+    # @!attribute engagement_identifier
+    #   <p>Filters tasks by the identifiers of the engagements from which opportunities are being created. Use this to find all opportunity creation tasks associated with a specific engagement.</p>
+    #   @return [Array<String>]
+    # @!attribute context_identifier
+    #   <p>Filters tasks by the identifiers of the engagement contexts associated with the opportunity creation. Use this to find tasks related to specific contextual information within engagements that are being converted to opportunities.</p>
+    #   @return [Array<String>]
+    class ListOpportunityFromEngagementTasksRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      :sort,
+      :catalog,
+      :task_status,
+      :task_identifier,
+      :opportunity_identifier,
+      :engagement_identifier,
+      :context_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute task_summaries
+    #   <p>An array of <code>ListOpportunityFromEngagementTaskSummary</code> objects, each representing a task that matches the specified filters. The array may be empty if no tasks match the criteria.</p>
+    #   @return [Array<Types::ListOpportunityFromEngagementTaskSummary>]
+    # @!attribute next_token
+    #   <p>A token used for pagination to retrieve the next page of results. If there are more results available, this field will contain a token that can be used in a subsequent API call to retrieve the next page. If there are no more results, this field will be null or an empty string.</p>
+    #   @return [String]
+    class ListOpportunityFromEngagementTasksResponse < Struct.new(
+      nil,
+      :task_summaries,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the request structure for listing prospecting tasks. All filter parameters are optional. Results are paginated — uses <code>NextToken</code> from the response to retrieve subsequent pages.</p>
+    # @!attribute catalog
+    #   <p>Specifies the catalog to list tasks from. Specify <code>AWS</code> for production environments and <code>Sandbox</code> for testing and development purposes.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single page. If additional results exist, the response includes a <code>NextToken</code> value for retrieving the next page. If omitted, the API uses a service-defined default page size.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The pagination token from a previous call to this API. Include this value to retrieve the next page of results. If omitted, the first page is returned.</p>
+    #   @return [String]
+    # @!attribute task_identifier
+    #   <p>Filters the results to include only the tasks with the specified identifiers. Provide up to 10 task IDs to narrow the list to specific tasks. If omitted, tasks are not filtered by identifier.</p>
+    #   @return [Array<String>]
+    # @!attribute task_name
+    #   <p>Filters the results to include only tasks with the specified names. Provide up to 10 task names to narrow the list. If omitted, tasks are not filtered by name.</p>
+    #   @return [Array<String>]
+    # @!attribute start_after
+    #   <p>Filters tasks to include only those that started after the specified timestamp. Use this with <code>StartBefore</code> to define a start-time range for your query. The format follows ISO 8601 date-time notation.</p>
+    #   @return [Time]
+    # @!attribute start_before
+    #   <p>Filters tasks to include only those that started before the specified timestamp. Use this with <code>StartAfter</code> to define a start-time range for your query. The format follows ISO 8601 date-time notation.</p>
+    #   @return [Time]
+    # @!attribute sort
+    #   <p>Specifies the field and order used to sort the returned tasks. If omitted, tasks are returned in the default sort order.</p>
+    #   @return [Types::ProspectingFromEngagementTaskSort]
+    class ListProspectingFromEngagementTasksRequest < Struct.new(
+      nil,
+      :catalog,
+      :max_results,
+      :next_token,
+      :task_identifier,
+      :task_name,
+      :start_after,
+      :start_before,
+      :sort,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the response structure containing a paginated list of prospecting task summaries matching the request filters. Indicates through <code>NextToken</code> when additional results are available.</p>
+    # @!attribute next_token
+    #   <p>A pagination token used to retrieve the next page of results. If this field is present, pass its value as <code>NextToken</code> in the next call. If absent or empty, there are no further pages.</p>
+    #   @return [String]
+    # @!attribute task_summaries
+    #   <p>Prospecting task summaries matching the specified filters. Each summary includes the task identifier, name, status counters, and timing information. If no tasks match the filter criteria, the list is empty.</p>
+    #   @return [Array<Types::ProspectingTaskSummary>]
+    class ListProspectingFromEngagementTasksResponse < Struct.new(
+      nil,
+      :next_token,
+      :task_summaries,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2204,6 +3112,9 @@ module Aws::PartnerCentralSelling
     # @!attribute category
     #   <p>Filters the solutions based on the category to which they belong. This allows partners to search for solutions within specific categories, such as <code>Software</code>, <code>Consulting</code>, or <code>Managed Services</code>.</p>
     #   @return [Array<String>]
+    # @!attribute aws_marketplace_solution_arn
+    #   <p>Filters results by AWS Marketplace solution ARN. You can provide up to 10 ARNs.</p>
+    #   @return [Array<String>]
     class ListSolutionsRequest < Struct.new(
       nil,
       :catalog,
@@ -2213,6 +3124,7 @@ module Aws::PartnerCentralSelling
       :status,
       :identifier,
       :category,
+      :aws_marketplace_solution_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2304,7 +3216,7 @@ module Aws::PartnerCentralSelling
     #   <p>Specifies the payment amount.</p>
     #   @return [String]
     # @!attribute currency_code
-    #   <p>Specifies the payment currency.</p>
+    #   <p>Specifies the payment currency. Accepted values are <code>USD</code> (US Dollars) and <code>EUR</code> (Euros). If the AWS Partition is <code>aws-eusc</code> (AWS European Sovereign Cloud), the currency code must be <code>EUR</code>.</p>
     #   @return [String]
     class MonetaryValue < Struct.new(
       nil,
@@ -2366,6 +3278,22 @@ module Aws::PartnerCentralSelling
       :receiver_responsibilities,
       :customer,
       :project,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Opportunity quality score and trend.</p>
+    # @!attribute score
+    #   <p>Deal quality score based on opportunity content completeness and sales methodology criteria. Values range from 0 to 100.</p>
+    #   @return [Integer]
+    # @!attribute trend
+    #   <p>Direction of score change since last scoring iteration. Known values: <code>Improving</code>, <code>Declining</code>, <code>No Change</code>.</p>
+    #   @return [String]
+    class OpportunityQuality < Struct.new(
+      nil,
+      :score,
+      :trend,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2475,14 +3403,19 @@ module Aws::PartnerCentralSelling
     # @!attribute opportunity_invitation
     #   <p>Specifies the details of the opportunity invitation within the Engagement Invitation payload. This data helps partners understand the context, scope, and expected involvement for the opportunity from AWS.</p>
     #   @return [Types::OpportunityInvitationPayload]
+    # @!attribute lead_invitation
+    #   <p>Specifies the details of the lead invitation within the Engagement Invitation payload. This data helps partners understand the lead context, customer information, and interaction history for the lead opportunity from AWS.</p>
+    #   @return [Types::LeadInvitationPayload]
     class Payload < Struct.new(
       :opportunity_invitation,
+      :lead_invitation,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class OpportunityInvitation < Payload; end
+      class LeadInvitation < Payload; end
       class Unknown < Payload; end
     end
 
@@ -2509,6 +3442,9 @@ module Aws::PartnerCentralSelling
     # @!attribute expected_customer_spend
     #   <p>Represents the estimated amount that the customer is expected to spend on AWS services related to the opportunity. This helps in evaluating the potential financial value of the opportunity for AWS.</p>
     #   @return [Array<Types::ExpectedCustomerSpend>]
+    # @!attribute expected_contract_duration
+    #   <p>Optional. The expected duration of the contract associated with this opportunity. Partners use this value alongside expected customer spend to convert Total Contract Value (TCV) into Monthly Recurring Revenue (MRR).</p>
+    #   @return [Types::ExpectedContractDuration]
     # @!attribute title
     #   <p>Specifies the <code>Opportunity</code>'s title or name.</p>
     #   @return [String]
@@ -2539,10 +3475,14 @@ module Aws::PartnerCentralSelling
     # @!attribute additional_comments
     #   <p>Captures additional comments or information for the <code>Opportunity</code> that weren't captured in other fields.</p>
     #   @return [String]
+    # @!attribute aws_partition
+    #   <p>AWS partition where the opportunity will be deployed. Possible values: <code>aws-eusc</code> for AWS European Sovereign Cloud, <code>null</code> for all other partitions.</p>
+    #   @return [String]
     class Project < Struct.new(
       nil,
       :delivery_models,
       :expected_customer_spend,
+      :expected_contract_duration,
       :title,
       :apn_programs,
       :customer_business_problem,
@@ -2553,6 +3493,7 @@ module Aws::PartnerCentralSelling
       :other_competitor_names,
       :other_solution_description,
       :additional_comments,
+      :aws_partition,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2589,10 +3530,14 @@ module Aws::PartnerCentralSelling
     # @!attribute expected_customer_spend
     #   <p>Provides a summary of the expected customer spend for the project, offering a high-level view of the potential financial impact.</p>
     #   @return [Array<Types::ExpectedCustomerSpend>]
+    # @!attribute expected_contract_duration
+    #   <p>Optional. The expected contract duration for this opportunity, representing the anticipated length of the contract in the unit specified by <code>Term</code>.</p>
+    #   @return [Types::ExpectedContractDuration]
     class ProjectSummary < Struct.new(
       nil,
       :delivery_models,
       :expected_customer_spend,
+      :expected_contract_duration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2605,6 +3550,9 @@ module Aws::PartnerCentralSelling
     # @!attribute expected_customer_spend
     #   <p> Provides information about the anticipated customer spend related to this project. This may include details such as amount, frequency, and currency of expected expenditure. </p>
     #   @return [Array<Types::ExpectedCustomerSpend>]
+    # @!attribute expected_contract_duration
+    #   <p>Optional. The expected contract duration for this opportunity, representing the anticipated length of the contract in the unit specified by <code>Term</code>.</p>
+    #   @return [Types::ExpectedContractDuration]
     # @!attribute customer_use_case
     #   <p> Specifies the proposed solution focus or type of workload for the project. </p>
     #   @return [String]
@@ -2618,12 +3566,198 @@ module Aws::PartnerCentralSelling
       nil,
       :delivery_models,
       :expected_customer_spend,
+      :expected_contract_duration,
       :customer_use_case,
       :sales_activities,
       :other_solution_description,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Specifies the sort configuration for <code>ListProspectingFromEngagementTasks</code>. Contains the field to sort by and the sort direction.</p>
+    # @!attribute sort_order
+    #   <p>The direction in which to sort the results. Use <code>ASCENDING</code> to return the smallest or earliest values first, or <code>DESCENDING</code> to return the largest or most recent values first.</p>
+    #   @return [String]
+    # @!attribute sort_by
+    #   <p>The field by which to sort the returned tasks. Valid values: <code>StartTime</code> (task creation timestamp), <code>TaskName</code> (alphabetically by task name), and <code>FailedEngagementCount</code> (number of failed engagements).</p>
+    #   @return [String]
+    class ProspectingFromEngagementTaskSort < Struct.new(
+      nil,
+      :sort_order,
+      :sort_by,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains insights that AI generates from the prospecting analysis. These insights include marketplace engagement scoring, solution fit assessments, and solution categorization for the prospected customer.</p>
+    # @!attribute marketplace_engagement_score
+    #   <p>A score that indicates the prospected customer's level of engagement with AWS Marketplace. Valid values are <code>High</code>, <code>Medium</code>, and <code>Low</code>.</p>
+    #   @return [String]
+    # @!attribute solution_score
+    #   <p>A score that indicates how well the partner's solution fits the prospected customer's needs.</p>
+    #   @return [String]
+    # @!attribute solution_category
+    #   <p>The primary solution category classification for the prospected customer. This indicates the type of solution that best addresses their needs.</p>
+    #   @return [String]
+    # @!attribute solution_sub_category
+    #   <p>The solution sub-category classification for the prospected customer. This provides more granular categorization of the recommended solution type.</p>
+    #   @return [String]
+    class ProspectingInsights < Struct.new(
+      nil,
+      :marketplace_engagement_score,
+      :solution_score,
+      :solution_category,
+      :solution_sub_category,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the results of an autonomous prospecting job. This includes data and insights that AWS provides about a prospected customer account.</p>
+    # @!attribute aws
+    #   <p>Prospecting data and insights that AWS provides during the prospecting job. This includes customer details, task information, and scoring that AI generates.</p>
+    #   @return [Types::ProspectingResultAws]
+    class ProspectingResult < Struct.new(
+      nil,
+      :aws,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the prospecting data that AWS sources. This includes task execution details, customer account information, and insights that AI generates from the prospecting analysis.</p>
+    # @!attribute customer
+    #   <p>Contains details about the prospected customer account, including geographic, industry, and segment classifications.</p>
+    #   @return [Types::ProspectingResultCustomer]
+    # @!attribute insights
+    #   <p>Insights that AI generates from the prospecting analysis. These insights include engagement scores and solution fit assessments for the prospected customer.</p>
+    #   @return [Types::ProspectingInsights]
+    # @!attribute start_time
+    #   <p>The timestamp when the prospecting result context was created. The format is ISO 8601 (UTC).</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The timestamp when the prospecting task completed processing. The format is ISO 8601 (UTC).</p>
+    #   @return [Time]
+    # @!attribute task_id
+    #   <p>The unique identifier of the prospecting task that generates this result.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The Amazon Resource Name (ARN) of the prospecting task. Use this ARN to track and manage the task within AWS.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The name that the user provides for the prospecting task that generates this result.</p>
+    #   @return [String]
+    class ProspectingResultAws < Struct.new(
+      nil,
+      :customer,
+      :insights,
+      :start_time,
+      :end_time,
+      :task_id,
+      :task_arn,
+      :task_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains detailed information about the prospected customer account, including company identifiers, geographic classification, industry segmentation, and program eligibility.</p>
+    # @!attribute account_name
+    #   <p>The name of the prospected customer account.</p>
+    #   @return [String]
+    # @!attribute geo
+    #   <p>The geographic region classification of the prospected customer account.</p>
+    #   @return [String]
+    # @!attribute region
+    #   <p>The specific region of the prospected customer account.</p>
+    #   @return [String]
+    # @!attribute sub_region
+    #   <p>The subregion classification of the prospected customer account.</p>
+    #   @return [String]
+    # @!attribute country
+    #   <p>The country code of the prospected customer account.</p>
+    #   @return [String]
+    # @!attribute industry
+    #   <p>The industry classification of the prospected customer account.</p>
+    #   @return [String]
+    # @!attribute sub_industry
+    #   <p>The sub-industry classification of the prospected customer account. This provides more granular categorization within the primary industry.</p>
+    #   @return [String]
+    # @!attribute segment
+    #   <p>The market segment classification of the prospected customer account.</p>
+    #   @return [String]
+    # @!attribute company_size
+    #   <p>The company size classification of the prospected customer account.</p>
+    #   @return [String]
+    # @!attribute eligible_programs
+    #   <p>A list of AWS Greenfield programs that the prospected customer is eligible for. Use this list to identify relevant go-to-market opportunities.</p>
+    #   @return [Array<String>]
+    # @!attribute public_profile_summary
+    #   <p>A summary of publicly available information about the prospected customer. The system uses this summary to generate customer insights and inform engagement strategies.</p>
+    #   @return [String]
+    class ProspectingResultCustomer < Struct.new(
+      nil,
+      :account_name,
+      :geo,
+      :region,
+      :sub_region,
+      :country,
+      :industry,
+      :sub_industry,
+      :segment,
+      :company_size,
+      :eligible_programs,
+      :public_profile_summary,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a single prospecting task, returned by <code>ListProspectingFromEngagementTasks</code>. Contains key metrics and status information without the full per-engagement detail available from <code>GetProspectingFromEngagementTask</code>.</p>
+    # @!attribute task_id
+    #   <p>The unique identifier of the task. Use this value with <code>GetProspectingFromEngagementTask</code> to retrieve full task details.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The Amazon Resource Name (ARN) of the task.</p>
+    #   @return [String]
+    # @!attribute task_name
+    #   <p>The descriptive name of the task provided when it was created.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The timestamp indicating when the task was initiated. The format follows ISO 8601 date-time notation.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The timestamp indicating when the task finished processing. This field is absent if the task is still in progress. The format follows ISO 8601 date-time notation.</p>
+    #   @return [Time]
+    # @!attribute total_engagement_count
+    #   <p>The total number of engagements included in the task.</p>
+    #   @return [Integer]
+    # @!attribute completed_engagement_count
+    #   <p>The number of engagements that have been successfully converted into prospecting leads.</p>
+    #   @return [Integer]
+    # @!attribute failed_engagement_count
+    #   <p>The number of engagements that failed to be converted. Retrieve the full task details using <code>GetProspectingFromEngagementTask</code> for per-engagement error information.</p>
+    #   @return [Integer]
+    class ProspectingTaskSummary < Struct.new(
+      nil,
+      :task_id,
+      :task_arn,
+      :task_name,
+      :start_time,
+      :end_time,
+      :total_engagement_count,
+      :completed_engagement_count,
+      :failed_engagement_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:total_engagement_count] = 0 unless options.key?(:total_engagement_count)
+        super
+      end
     end
 
     # @!attribute catalog
@@ -2671,6 +3805,26 @@ module Aws::PartnerCentralSelling
       class Unknown < Receiver; end
     end
 
+    # <p>A recommendation from an agent-driven source.</p>
+    # @!attribute type
+    #   <p>The recommendation source type. Known values: <code>OpportunityQuality</code>, <code>SolutionRecommendation</code>, <code>SpecialistRecommendation</code>.</p>
+    #   @return [String]
+    # @!attribute details
+    #   <p>Human-readable recommendation text from this source.</p>
+    #   @return [String]
+    # @!attribute attributes
+    #   <p>Source-specific metadata as key-value pairs.</p>
+    #   @return [Hash<String, String>]
+    class Recommendation < Struct.new(
+      nil,
+      :type,
+      :details,
+      :attributes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute catalog
     #   <p>This is the catalog that's associated with the engagement invitation. Acceptable values are <code>AWS</code> or <code>Sandbox</code>, and these values determine the environment in which the opportunity is managed.</p>
     #   @return [String]
@@ -2694,17 +3848,29 @@ module Aws::PartnerCentralSelling
     # @!attribute aws_marketplace_offers
     #   <p>Takes one value per opportunity. Each value is an Amazon Resource Name (ARN), in this format: <code>"offers": ["arn:aws:aws-marketplace:us-east-1:999999999999:AWSMarketplace/Offer/offer-sampleOffer32"]</code>.</p> <p>Use the <a href="https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_ListEntities.html">ListEntities</a> action in the Marketplace Catalog APIs for a list of offers in the associated Marketplace seller account.</p>
     #   @return [Array<String>]
+    # @!attribute aws_marketplace_offer_sets
+    #   <p>Enables the association of AWS Marketplace offer sets with the <code>Opportunity</code>. Offer sets allow grouping multiple related marketplace offers together for comprehensive solution packaging. Each value is an Amazon Resource Name (ARN) in this format: <code>arn:aws:aws-marketplace:us-east-1:999999999999:AWSMarketplace/OfferSet/offerset-sampleOfferSet32</code>.</p>
+    #   @return [Array<String>]
     # @!attribute solutions
     #   <p>Enables partner solutions or offerings' association with an opportunity. To associate a solution, provide the solution's unique identifier, which you can obtain with the <code>ListSolutions</code> operation.</p> <p>If the specific solution identifier is not available, you can use the value <code>Other</code> and provide details about the solution in the <code>otherSolutionOffered</code> field. But when the opportunity reaches the <code>Committed</code> stage or beyond, the <code>Other</code> value cannot be used, and a valid solution identifier must be provided.</p> <p>By associating the relevant solutions with the opportunity, you can communicate the offerings that are being considered or implemented to address the customer's business problem.</p>
     #   @return [Array<String>]
     # @!attribute aws_products
     #   <p>Enables the association of specific Amazon Web Services products with the <code>Opportunity</code>. Partners can indicate the relevant Amazon Web Services products for the <code>Opportunity</code>'s solution and align with the customer's needs. Returns multiple values separated by commas. For example, <code>"AWSProducts" : ["AmazonRedshift", "AWSAppFabric", "AWSCleanRooms"]</code>.</p> <p>Use the file with the list of Amazon Web Services products hosted on GitHub: <a href="https://github.com/aws-samples/partner-crm-integration-samples/blob/main/resources/aws_products.json"> Amazon Web Services products</a>.</p>
     #   @return [Array<String>]
+    # @!attribute aws_marketplace_solutions
+    #   <p>Specifies the AWS Marketplace solutions to associate with the <code>Opportunity</code>. Each value is an Amazon Resource Name (ARN) that identifies a solution listing in AWS Marketplace.</p>
+    #   @return [Array<String>]
+    # @!attribute aws_marketplace_products
+    #   <p>Specifies the AWS Marketplace products to associate with the <code>Opportunity</code>. Each value is an Amazon Resource Name (ARN) that identifies a product listing in AWS Marketplace.</p>
+    #   @return [Array<String>]
     class RelatedEntityIdentifiers < Struct.new(
       nil,
       :aws_marketplace_offers,
+      :aws_marketplace_offer_sets,
       :solutions,
       :aws_products,
+      :aws_marketplace_solutions,
+      :aws_marketplace_products,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2749,14 +3915,19 @@ module Aws::PartnerCentralSelling
     # @!attribute opportunity_summary
     #   <p> An object that contains an <code>opportunity</code>'s subset of fields. </p>
     #   @return [Types::OpportunitySummaryView]
+    # @!attribute aws_opportunity_summary_full_view
+    #   <p>Provides a comprehensive view of AwsOpportunitySummaryFullView template.</p>
+    #   @return [Types::AwsOpportunitySummaryFullView]
     class ResourceSnapshotPayload < Struct.new(
       :opportunity_summary,
+      :aws_opportunity_summary_full_view,
       :unknown,
       keyword_init: true
     )
       include ::Smithy::Schema::Union
 
       class OpportunitySummary < ResourceSnapshotPayload; end
+      class AwsOpportunitySummaryFullView < ResourceSnapshotPayload; end
       class Unknown < ResourceSnapshotPayload; end
     end
 
@@ -2877,6 +4048,9 @@ module Aws::PartnerCentralSelling
     # @!attribute created_date
     #   <p>Indicates the solution creation date. This is useful to track and audit.</p>
     #   @return [Time]
+    # @!attribute aws_marketplace_solution_arn
+    #   <p>The Amazon Resource Name (ARN) of the AWS Marketplace solution associated with this partner solution.</p>
+    #   @return [String]
     class SolutionBase < Struct.new(
       nil,
       :catalog,
@@ -2886,6 +4060,7 @@ module Aws::PartnerCentralSelling
       :status,
       :category,
       :created_date,
+      :aws_marketplace_solution_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3064,6 +4239,144 @@ module Aws::PartnerCentralSelling
     end
 
     # @!attribute catalog
+    #   <p>Specifies the catalog in which the opportunity creation task is executed. Acceptable values include <code>AWS</code> for production and <code>Sandbox</code> for testing environments.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique token provided by the client to help ensure the idempotency of the request. It helps prevent the same task from being performed multiple times.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The unique identifier of the engagement from which the opportunity creation task is to be initiated. This helps ensure that the task is applied to the correct engagement.</p>
+    #   @return [String]
+    # @!attribute context_identifier
+    #   <p>The unique identifier of the engagement context from which to create the opportunity. This specifies the specific contextual information within the engagement that will be used for opportunity creation.</p>
+    #   @return [String]
+    # @!attribute tags
+    #   <p>A map of the key-value pairs of the tag or tags to assign.</p>
+    #   @return [Array<Types::Tag>]
+    class StartOpportunityFromEngagementTaskRequest < Struct.new(
+      nil,
+      :catalog,
+      :client_token,
+      :identifier,
+      :context_identifier,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute task_id
+    #   <p>The unique identifier of the task, used to track the task's progress.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The Amazon Resource Name (ARN) of the task, used for tracking and managing the task within AWS.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The timestamp indicating when the task was initiated. The format follows RFC 3339 section 5.6.</p>
+    #   @return [Time]
+    # @!attribute task_status
+    #   <p>Indicates the current status of the task.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>If the task fails, this field contains a detailed message describing the failure and possible recovery steps.</p>
+    #   @return [String]
+    # @!attribute reason_code
+    #   <p>Indicates the reason for task failure using an enumerated code.</p>
+    #   @return [String]
+    # @!attribute opportunity_id
+    #   <p>The unique identifier of the opportunity created as a result of the task. This field is populated when the task is completed successfully.</p>
+    #   @return [String]
+    # @!attribute resource_snapshot_job_id
+    #   <p>The identifier of the resource snapshot job created as part of the opportunity creation process.</p>
+    #   @return [String]
+    # @!attribute engagement_id
+    #   <p>The unique identifier of the engagement from which the opportunity was created.</p>
+    #   @return [String]
+    # @!attribute context_id
+    #   <p>The unique identifier of the engagement context used to create the opportunity.</p>
+    #   @return [String]
+    class StartOpportunityFromEngagementTaskResponse < Struct.new(
+      nil,
+      :task_id,
+      :task_arn,
+      :start_time,
+      :task_status,
+      :message,
+      :reason_code,
+      :opportunity_id,
+      :resource_snapshot_job_id,
+      :engagement_id,
+      :context_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the request structure for starting a prospecting task. Includes up to 100 engagement identifiers and a task name. Uses <code>ClientToken</code> to ensure idempotency.</p>
+    # @!attribute catalog
+    #   <p>Specifies the catalog in which the task is initiated. Specify <code>AWS</code> for production environments and <code>Sandbox</code> for testing and development purposes.</p>
+    #   @return [String]
+    # @!attribute identifiers
+    #   <p>The list of engagement identifiers to include in this prospecting task. Each identifier must correspond to an existing engagement in the specified catalog. Maximum of 100 identifiers per task.</p>
+    #   @return [Array<String>]
+    # @!attribute task_name
+    #   <p>A descriptive name for the task. This name helps identify the task in list and get operations. The name must contain 1 to 128 characters.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier provided by the client to ensure idempotency. Making the same request with the same <code>ClientToken</code> returns the same response without creating a duplicate task.</p>
+    #   @return [String]
+    class StartProspectingFromEngagementTaskRequest < Struct.new(
+      nil,
+      :catalog,
+      :identifiers,
+      :task_name,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the response structure returned when a prospecting task is successfully submitted. Contains the task identifier, ARN, and initial status. Uses <code>TaskId</code> with <code>GetProspectingFromEngagementTask</code> to poll for completion.</p>
+    # @!attribute identifiers
+    #   <p>The list of engagement identifiers that were accepted into the task queue for processing. This list matches the identifiers provided in the request.</p>
+    #   @return [Array<String>]
+    # @!attribute task_name
+    #   <p>The task name from the request.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>A message providing additional context about the task's current state. When the task fails, this field contains a detailed description of the failure and suggested recovery steps. This field is only populated for tasks in a failed state.</p>
+    #   @return [String]
+    # @!attribute reason_code
+    #   <p>An enumerated code identifying the reason for task failure. This field is only populated when the task has failed. Use the corresponding <code>Message</code> field for a human-readable description of the failure.</p>
+    #   @return [String]
+    # @!attribute start_time
+    #   <p>The timestamp indicating when the task was initiated. The format follows ISO 8601 date-time notation.</p>
+    #   @return [Time]
+    # @!attribute task_id
+    #   <p>The unique identifier assigned to this task. Use this identifier with <code>GetProspectingFromEngagementTask</code> to retrieve task details and check status.</p>
+    #   @return [String]
+    # @!attribute task_arn
+    #   <p>The Amazon Resource Name (ARN) of the task. The ARN uniquely identifies the task across AWS and can be used for resource-level IAM policies.</p>
+    #   @return [String]
+    # @!attribute task_status
+    #   <p>The current status of the task. Possible values: <code>PENDING</code> (waiting to run), <code>IN_PROGRESS</code> (actively processing), <code>COMPLETED</code> (successfully processed), and <code>FAILED</code> (unrecoverable error).</p>
+    #   @return [String]
+    class StartProspectingFromEngagementTaskResponse < Struct.new(
+      nil,
+      :identifiers,
+      :task_name,
+      :message,
+      :reason_code,
+      :start_time,
+      :task_id,
+      :task_arn,
+      :task_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute catalog
     #   <p>Specifies the catalog related to the request. Valid values are:</p> <ul> <li> <p>AWS: Starts the request from the production AWS environment.</p> </li> <li> <p>Sandbox: Starts the request from a sandbox environment used for testing or development purposes.</p> </li> </ul>
     #   @return [String]
     # @!attribute resource_snapshot_job_identifier
@@ -3154,6 +4467,22 @@ module Aws::PartnerCentralSelling
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Filters opportunities based on their target close date.</p>
+    # @!attribute after_target_close_date
+    #   <p>Filters opportunities with a target close date after this date. Use the <code>YYYY-MM-DD</code> format.</p>
+    #   @return [String]
+    # @!attribute before_target_close_date
+    #   <p>Filters opportunities with a target close date before this date. Use the <code>YYYY-MM-DD</code> format.</p>
+    #   @return [String]
+    class TargetCloseDateFilter < Struct.new(
+      nil,
+      :after_target_close_date,
+      :before_target_close_date,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>This error occurs when there are too many requests sent. Review the provided quotas and adapt your usage to avoid throttling.</p> <p>This error occurs when there are too many requests sent. Review the provided <a href="https://docs.aws.amazon.com/partner-central/latest/selling-api/quotas.html">Quotas</a> and retry after the provided delay.</p>
     # @!attribute message
     #   @return [String]
@@ -3185,6 +4514,114 @@ module Aws::PartnerCentralSelling
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the updated payload of an engagement context. The structure of this payload varies based on the context type being updated.</p>
+    # @!attribute lead
+    #   <p>Contains updated information about a lead when the context type is "Lead". This field is present only when updating a lead context within the engagement.</p>
+    #   @return [Types::UpdateLeadContext]
+    # @!attribute customer_project
+    #   <p>The CustomerProjects structure in Engagements offers a flexible framework for managing customer-project relationships. It supports multiple customers per Engagement and multiple projects per customer, while also allowing for customers without projects and projects without specific customers. </p> <p>All Engagement members have full visibility of customers and their associated projects, enabling the capture of relevant context even when project details are not fully defined. This structure also facilitates targeted invitations, allowing partners to focus on specific customers and their business problems when sending Engagement invitations. </p>
+    #   @return [Types::CustomerProjectsContext]
+    # @!attribute prospecting_result
+    #   <p>Contains updated prospecting result data when the context type is "ProspectingResult". This field includes enriched data and insights that the system generates when a partner runs an autonomous prospecting job on leads.</p>
+    #   @return [Types::ProspectingResult]
+    class UpdateEngagementContextPayload < Struct.new(
+      :lead,
+      :customer_project,
+      :prospecting_result,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Lead < UpdateEngagementContextPayload; end
+      class CustomerProject < UpdateEngagementContextPayload; end
+      class ProspectingResult < UpdateEngagementContextPayload; end
+      class Unknown < UpdateEngagementContextPayload; end
+    end
+
+    # @!attribute catalog
+    #   <p>Specifies the catalog associated with the engagement context update request. This field takes a string value from a predefined list: <code>AWS</code> or <code>Sandbox</code>. The catalog determines which environment the engagement context is updated in.</p>
+    #   @return [String]
+    # @!attribute engagement_identifier
+    #   <p>The unique identifier of the <code>Engagement</code> containing the context to be updated. This parameter ensures the context update is applied to the correct engagement.</p>
+    #   @return [String]
+    # @!attribute context_identifier
+    #   <p>The unique identifier of the specific engagement context to be updated. This ensures that the correct context within the engagement is modified.</p>
+    #   @return [String]
+    # @!attribute engagement_last_modified_at
+    #   <p>The timestamp when the engagement was last modified, used for optimistic concurrency control. This helps prevent conflicts when multiple users attempt to update the same engagement simultaneously.</p>
+    #   @return [Time]
+    # @!attribute type
+    #   <p>Specifies the type of context being updated within the engagement. This field determines the structure and content of the context payload being modified.</p>
+    #   @return [String]
+    # @!attribute payload
+    #   <p>Contains the updated contextual information for the engagement. The structure of this payload varies based on the context type specified in the Type field.</p>
+    #   @return [Types::UpdateEngagementContextPayload]
+    class UpdateEngagementContextRequest < Struct.new(
+      nil,
+      :catalog,
+      :engagement_identifier,
+      :context_identifier,
+      :engagement_last_modified_at,
+      :type,
+      :payload,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute engagement_id
+    #   <p>The unique identifier of the engagement that was updated.</p>
+    #   @return [String]
+    # @!attribute engagement_arn
+    #   <p>The Amazon Resource Name (ARN) of the updated engagement.</p>
+    #   @return [String]
+    # @!attribute engagement_last_modified_at
+    #   <p>The timestamp when the engagement context was last modified.</p>
+    #   @return [Time]
+    # @!attribute context_id
+    #   <p>The unique identifier of the engagement context that was updated.</p>
+    #   @return [String]
+    class UpdateEngagementContextResponse < Struct.new(
+      nil,
+      :engagement_id,
+      :engagement_arn,
+      :engagement_last_modified_at,
+      :context_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Updates the context information for a lead with qualification status, customer details, and interaction data.</p>
+    # @!attribute qualification_status
+    #   <p>The updated qualification status of the lead.</p>
+    #   @return [String]
+    # @!attribute customer
+    #   <p>Updated customer information associated with the lead.</p>
+    #   @return [Types::LeadCustomer]
+    # @!attribute interaction
+    #   <p>Updated interaction details for the lead context.</p>
+    #   @return [Types::LeadInteraction]
+    # @!attribute insights
+    #   <p>Insights that AI generates and associates with the lead. These insights provide automated analysis to help partners assess the lead quality and readiness.</p>
+    #   @return [Types::LeadInsights]
+    class UpdateLeadContext < Struct.new(
+      nil,
+      :qualification_status,
+      :customer,
+      :interaction,
+      :insights,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:qualification_status] = 'Unqualified' unless options.key?(:qualification_status)
+        super
+      end
     end
 
     # @!attribute catalog
@@ -3276,7 +4713,7 @@ module Aws::PartnerCentralSelling
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Indicates an invalid value for a field.</p> <ul> <li> <p> <i>REQUIRED_FIELD_MISSING:</i> The request is missing a required field.</p> <p>Fix: Verify your request payload includes all required fields.</p> </li> <li> <p> <i>INVALID_ENUM_VALUE:</i> The enum field value isn't an accepted values.</p> <p>Fix: Check the documentation for the list of valid enum values, and update your request with a valid value.</p> </li> <li> <p> <i>INVALID_STRING_FORMAT:</i> The string format is invalid.</p> <p>Fix: Confirm that the string is in the expected format (For example: email address, date).</p> </li> <li> <p> <i>INVALID_VALUE:</i> The value isn't valid.</p> <p>Fix: Confirm that the value meets the expected criteria and is within the allowable range or set.</p> </li> <li> <p> <i>TOO_MANY_VALUES:</i> There are too many values in a field that expects fewer entries.</p> <p>Fix: Reduce the number of values to match the expected limit.</p> </li> <li> <p> <i>ACTION_NOT_PERMITTED:</i> The action isn't permitted due to current state or permissions.</p> <p>Fix: Verify that the action is appropriate for the current state, and that you have the necessary permissions to perform it.</p> </li> <li> <p> <i>DUPLICATE_KEY_VALUE:</i> The value in a field duplicates a value that must be unique.</p> <p>Fix: Verify that the value is unique and doesn't duplicate an existing value in the system.</p> </li> </ul>
+    # <p>Indicates an invalid value for a field.</p> <ul> <li> <p> <i>REQUIRED_FIELD_MISSING:</i> The request is missing a required field.</p> <p>Fix: Verify your request payload includes all required fields.</p> </li> <li> <p> <i>INVALID_ENUM_VALUE:</i> The enum field value isn't an accepted values.</p> <p>Fix: Check the documentation for the list of valid enum values, and update your request with a valid value.</p> </li> <li> <p> <i>INVALID_STRING_FORMAT:</i> The string format is invalid.</p> <p>Fix: Confirm that the string is in the expected format (For example: email address, date).</p> </li> <li> <p> <i>INVALID_VALUE:</i> The value isn't valid.</p> <p>Fix: Confirm that the value meets the expected criteria and is within the allowable range or set.</p> </li> <li> <p> <i>TOO_MANY_VALUES:</i> There are too many values in a field that expects fewer entries.</p> <p>Fix: Reduce the number of values to match the expected limit.</p> </li> <li> <p> <i>NOT_ENOUGH_VALUES:</i> There are not enough values in a field that expects more entries.</p> <p>Fix: Increase the number of values to match the expected threshold.</p> </li> <li> <p> <i>ACTION_NOT_PERMITTED:</i> The action isn't permitted due to current state or permissions.</p> <p>Fix: Verify that the action is appropriate for the current state, and that you have the necessary permissions to perform it.</p> </li> <li> <p> <i>DUPLICATE_KEY_VALUE:</i> The value in a field duplicates a value that must be unique.</p> <p>Fix: Verify that the value is unique and doesn't duplicate an existing value in the system.</p> </li> </ul>
     # @!attribute field_name
     #   <p>Specifies the field name with the invalid value.</p>
     #   @return [String]

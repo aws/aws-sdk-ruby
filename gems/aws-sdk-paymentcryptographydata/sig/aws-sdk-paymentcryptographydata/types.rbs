@@ -57,6 +57,39 @@ module Aws::PaymentCryptographyData
       attr_accessor service_code: String?
     end
 
+    class As2805KekValidationType
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?kek_validation_request: Types::KekValidationRequest,
+        ?kek_validation_response: Types::KekValidationResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kek_validation_request: Types::KekValidationRequest?
+      attr_accessor kek_validation_response: Types::KekValidationResponse?
+
+      class KekValidationRequest < As2805KekValidationType
+      end
+      class KekValidationResponse < As2805KekValidationType
+      end
+      class Unknown < As2805KekValidationType
+      end
+    end
+
+    class As2805PekDerivationAttributes
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?system_trace_audit_number: String,
+        ?transaction_amount: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor system_trace_audit_number: String?
+      attr_accessor transaction_amount: String?
+    end
+
     class AsymmetricEncryptionAttributes
       include Smithy::Schema::Structure
 
@@ -606,6 +639,70 @@ module Aws::PaymentCryptographyData
       OFB: String
     end
 
+    class GenerateAs2805KekValidationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?kek_validation_type: Types::As2805KekValidationType,
+        ?random_key_send_variant_mask: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor kek_validation_type: Types::As2805KekValidationType?
+      attr_accessor random_key_send_variant_mask: String?
+    end
+
+    class GenerateAs2805KekValidationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+        ?random_key_send: String,
+        ?random_key_receive: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+      attr_accessor random_key_send: String?
+      attr_accessor random_key_receive: String?
+    end
+
+    class GenerateAuthRequestCryptogramInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_identifier: String,
+        ?transaction_data: String,
+        ?major_key_derivation_mode: String,
+        ?session_key_derivation_attributes: Types::SessionKeyDerivation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_identifier: String?
+      attr_accessor transaction_data: String?
+      attr_accessor major_key_derivation_mode: String?
+      attr_accessor session_key_derivation_attributes: Types::SessionKeyDerivation?
+    end
+
+    class GenerateAuthRequestCryptogramOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_arn: String,
+        ?key_check_value: String,
+        ?auth_request_cryptogram: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_arn: String?
+      attr_accessor key_check_value: String?
+      attr_accessor auth_request_cryptogram: String?
+    end
+
     class GenerateCardValidationDataInput
       include Smithy::Schema::Structure
 
@@ -897,6 +994,30 @@ module Aws::PaymentCryptographyData
       attr_accessor message: String?
     end
 
+    class KekValidationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?derive_key_algorithm: String,
+        ?random_key_max_length: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor derive_key_algorithm: String?
+      attr_accessor random_key_max_length: String?
+    end
+
+    class KekValidationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?random_key_send: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor random_key_send: String?
+    end
+
     module KeyDerivationFunction
       NIST_SP800: String
       ANSI_X963: String
@@ -917,6 +1038,7 @@ module Aws::PaymentCryptographyData
       HMAC_SHA256: String
       HMAC_SHA384: String
       HMAC_SHA512: String
+      AS2805_4_1: String
     end
 
     class MacAlgorithmDukpt
@@ -1140,6 +1262,17 @@ module Aws::PaymentCryptographyData
       end
     end
 
+    module RandomKeyMaxLength
+      BYTES_8: String
+      BYTES_16: String
+      BYTES_24: String
+    end
+
+    module RandomKeySendVariantMask
+      VARIANT_MASK_82C0: String
+      VARIANT_MASK_82: String
+    end
+
     class ReEncryptDataInput
       include Smithy::Schema::Structure
 
@@ -1183,14 +1316,18 @@ module Aws::PaymentCryptographyData
 
       def initialize: (
         ?symmetric: Types::SymmetricEncryptionAttributes,
+        ?asymmetric: Types::AsymmetricEncryptionAttributes,
         ?dukpt: Types::DukptEncryptionAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor symmetric: Types::SymmetricEncryptionAttributes?
+      attr_accessor asymmetric: Types::AsymmetricEncryptionAttributes?
       attr_accessor dukpt: Types::DukptEncryptionAttributes?
 
       class Symmetric < ReEncryptionAttributes
+      end
+      class Asymmetric < ReEncryptionAttributes
       end
       class Dukpt < ReEncryptionAttributes
       end
@@ -1231,6 +1368,7 @@ module Aws::PaymentCryptographyData
         ?emv2000: Types::SessionKeyEmv2000,
         ?amex: Types::SessionKeyAmex,
         ?visa: Types::SessionKeyVisa,
+        ?union_pay: Types::SessionKeyUnionPay,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1239,6 +1377,7 @@ module Aws::PaymentCryptographyData
       attr_accessor emv2000: Types::SessionKeyEmv2000?
       attr_accessor amex: Types::SessionKeyAmex?
       attr_accessor visa: Types::SessionKeyVisa?
+      attr_accessor union_pay: Types::SessionKeyUnionPay?
 
       class EmvCommon < SessionKeyDerivation
       end
@@ -1250,6 +1389,8 @@ module Aws::PaymentCryptographyData
       end
       class Visa < SessionKeyDerivation
       end
+      class UnionPay < SessionKeyDerivation
+      end
       class Unknown < SessionKeyDerivation
       end
     end
@@ -1260,6 +1401,7 @@ module Aws::PaymentCryptographyData
       AMEX: String
       MASTERCARD_SESSION_KEY: String
       VISA: String
+      UNION_PAY: String
     end
 
     class SessionKeyDerivationValue
@@ -1327,6 +1469,21 @@ module Aws::PaymentCryptographyData
       attr_accessor pan_sequence_number: String?
       attr_accessor application_transaction_counter: String?
       attr_accessor unpredictable_number: String?
+    end
+
+    class SessionKeyUnionPay
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_account_number: String,
+        ?pan_sequence_number: String,
+        ?application_transaction_counter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_account_number: String?
+      attr_accessor pan_sequence_number: String?
+      attr_accessor application_transaction_counter: String?
     end
 
     class SessionKeyVisa
@@ -1419,6 +1576,7 @@ module Aws::PaymentCryptographyData
         ?outgoing_dukpt_attributes: Types::DukptDerivationAttributes,
         ?incoming_wrapped_key: Types::WrappedKey,
         ?outgoing_wrapped_key: Types::WrappedKey,
+        ?incoming_as2805_attributes: Types::As2805PekDerivationAttributes,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1431,6 +1589,7 @@ module Aws::PaymentCryptographyData
       attr_accessor outgoing_dukpt_attributes: Types::DukptDerivationAttributes?
       attr_accessor incoming_wrapped_key: Types::WrappedKey?
       attr_accessor outgoing_wrapped_key: Types::WrappedKey?
+      attr_accessor incoming_as2805_attributes: Types::As2805PekDerivationAttributes?
     end
 
     class TranslatePinDataOutput
@@ -1456,6 +1615,7 @@ module Aws::PaymentCryptographyData
         ?iso_format1: Types::TranslationPinDataIsoFormat1,
         ?iso_format3: Types::TranslationPinDataIsoFormat034,
         ?iso_format4: Types::TranslationPinDataIsoFormat034,
+        ?as2805_format0: Types::TranslationPinDataAs2805Format0,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1463,6 +1623,7 @@ module Aws::PaymentCryptographyData
       attr_accessor iso_format1: Types::TranslationPinDataIsoFormat1?
       attr_accessor iso_format3: Types::TranslationPinDataIsoFormat034?
       attr_accessor iso_format4: Types::TranslationPinDataIsoFormat034?
+      attr_accessor as2805_format0: Types::TranslationPinDataAs2805Format0?
 
       class IsoFormat0 < TranslationIsoFormats
       end
@@ -1472,8 +1633,21 @@ module Aws::PaymentCryptographyData
       end
       class IsoFormat4 < TranslationIsoFormats
       end
+      class As2805Format0 < TranslationIsoFormats
+      end
       class Unknown < TranslationIsoFormats
       end
+    end
+
+    class TranslationPinDataAs2805Format0
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?primary_account_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor primary_account_number: String?
     end
 
     class TranslationPinDataIsoFormat034

@@ -20,10 +20,14 @@ module Aws::GuardDuty
     AccountLevelPermissions: StructureShape
     AccountStatistics: StructureShape
     Action: StructureShape
+    Activities: ListShape
+    Activity: StructureShape
+    ActivityType: EnumShape
     Actor: StructureShape
     ActorIds: ListShape
     ActorProcess: StructureShape
     Actors: ListShape
+    AdditionalInfo: StructureShape
     AdditionalSequenceTypes: ListShape
     AddonDetails: StructureShape
     AdminAccount: StructureShape
@@ -39,12 +43,23 @@ module Aws::GuardDuty
     AnomalyProfiles: MapShape
     AnomalyUnusual: StructureShape
     AnomalyUnusualBehaviorFeature: MapShape
+    ApiCall: StructureShape
     ArchiveFindingsRequest: StructureShape
     ArchiveFindingsResponse: StructureShape
+    AssociationDetail: StructureShape
+    AssociationId: StringShape
+    AssociationMode: EnumShape
+    AssociationSummary: StructureShape
+    AssociationSummaryList: ListShape
     AutoEnableMembers: EnumShape
     AutonomousSystem: StructureShape
+    AutoscalingAutoScalingGroup: StructureShape
     AwsApiCallAction: StructureShape
     BadRequestException: StructureShape
+    BedrockGuardrail: StructureShape
+    BedrockGuardrailDetails: StructureShape
+    BedrockGuardrailResource: StructureShape
+    BedrockGuardrails: ListShape
     Behavior: MapShape
     BlockPublicAccess: StructureShape
     Boolean: BooleanShape
@@ -52,9 +67,14 @@ module Aws::GuardDuty
     BucketPolicy: StructureShape
     City: StructureShape
     ClientToken: StringShape
+    CloudDetails: StructureShape
+    CloudProvider: EnumShape
     CloudTrailConfigurationResult: StructureShape
+    CloudformationStack: StructureShape
     ClusterStatus: EnumShape
     Condition: StructureShape
+    Confidence: EnumShape
+    ConfidenceLevel: EnumShape
     ConflictException: StructureShape
     Container: StructureShape
     ContainerFindingResource: StructureShape
@@ -63,6 +83,11 @@ module Aws::GuardDuty
     ContainerUid: StringShape
     ContainerUids: ListShape
     Containers: ListShape
+    ContentPolicyFilter: StructureShape
+    ContentPolicyFilterAction: EnumShape
+    ContentPolicyFilterType: EnumShape
+    ContentPolicyFilters: ListShape
+    ContinuousScanDetails: StructureShape
     CountByCoverageStatus: MapShape
     CountByResourceType: MapShape
     CountBySeverity: MapShape
@@ -84,12 +109,18 @@ module Aws::GuardDuty
     CoverageStatisticsType: EnumShape
     CoverageStatisticsTypeList: ListShape
     CoverageStatus: EnumShape
+    CreateCustomDetectionRuleAssociationRequest: StructureShape
+    CreateCustomDetectionRuleAssociationResponse: StructureShape
+    CreateCustomDetectionRuleOrgConfigurationRequest: StructureShape
+    CreateCustomDetectionRuleOrgConfigurationResponse: StructureShape
     CreateDetectorRequest: StructureShape
     CreateDetectorResponse: StructureShape
     CreateFilterRequest: StructureShape
     CreateFilterResponse: StructureShape
     CreateIPSetRequest: StructureShape
     CreateIPSetResponse: StructureShape
+    CreateInvestigationRequest: StructureShape
+    CreateInvestigationResponse: StructureShape
     CreateMalwareProtectionPlanRequest: StructureShape
     CreateMalwareProtectionPlanResponse: StructureShape
     CreateMembersRequest: StructureShape
@@ -120,6 +151,10 @@ module Aws::GuardDuty
     DeclineInvitationsRequest: StructureShape
     DeclineInvitationsResponse: StructureShape
     DefaultServerSideEncryption: StructureShape
+    DeleteCustomDetectionRuleAssociationRequest: StructureShape
+    DeleteCustomDetectionRuleAssociationResponse: StructureShape
+    DeleteCustomDetectionRuleOrgConfigurationRequest: StructureShape
+    DeleteCustomDetectionRuleOrgConfigurationResponse: StructureShape
     DeleteDetectorRequest: StructureShape
     DeleteDetectorResponse: StructureShape
     DeleteFilterRequest: StructureShape
@@ -150,6 +185,29 @@ module Aws::GuardDuty
     DestinationType: EnumShape
     Destinations: ListShape
     Detection: StructureShape
+    DetectionRuleAccountIds: ListShape
+    DetectionRuleAgentVersion: StringShape
+    DetectionRuleArn: StringShape
+    DetectionRuleConfigurationStatus: EnumShape
+    DetectionRuleDataSource: EnumShape
+    DetectionRuleDescription: StringShape
+    DetectionRuleEc2Requirements: StructureShape
+    DetectionRuleEcsFargateRequirements: StructureShape
+    DetectionRuleEksRequirements: StructureShape
+    DetectionRuleFilter: StructureShape
+    DetectionRuleFilterCondition: EnumShape
+    DetectionRuleFilterList: ListShape
+    DetectionRuleFilterValue: StringShape
+    DetectionRuleFilterValues: ListShape
+    DetectionRuleMaxResults: IntegerShape
+    DetectionRuleOrgConfiguration: StructureShape
+    DetectionRuleOrgConfigurationSummary: StructureShape
+    DetectionRuleOrgConfigurationSummaryList: ListShape
+    DetectionRuleRuntimeMonitoringDetails: StructureShape
+    DetectionRuleRuntimePlatforms: StructureShape
+    DetectionRuleServiceName: StringShape
+    DetectionRuleSeverity: EnumShape
+    DetectionSource: EnumShape
     DetectorAdditionalConfiguration: StructureShape
     DetectorAdditionalConfigurationResult: StructureShape
     DetectorAdditionalConfigurationResults: ListShape
@@ -174,16 +232,26 @@ module Aws::GuardDuty
     DnsRequestAction: StructureShape
     DomainDetails: StructureShape
     Double: FloatShape
+    EbsSnapshot: StructureShape
+    EbsSnapshotDetails: StructureShape
     EbsSnapshotPreservation: EnumShape
     EbsVolumeDetails: StructureShape
     EbsVolumeScanDetails: StructureShape
     EbsVolumesResult: StructureShape
+    Ec2Image: StructureShape
+    Ec2ImageDetails: StructureShape
     Ec2Instance: StructureShape
     Ec2InstanceUid: StringShape
     Ec2InstanceUids: ListShape
+    Ec2LaunchTemplate: StructureShape
     Ec2NetworkInterface: StructureShape
     Ec2NetworkInterfaceUids: ListShape
+    Ec2Vpc: StructureShape
+    EcsCluster: StructureShape
     EcsClusterDetails: StructureShape
+    EcsClusterStatus: EnumShape
+    EcsLaunchType: EnumShape
+    EcsTask: StructureShape
     EcsTaskDetails: StructureShape
     EksCluster: StructureShape
     EksClusterDetails: StructureShape
@@ -206,9 +274,11 @@ module Aws::GuardDuty
     FilterCriterion: StructureShape
     FilterCriterionList: ListShape
     FilterDescription: StringShape
+    FilterFieldName: EnumShape
     FilterName: StringShape
     FilterNames: ListShape
     FilterRank: IntegerShape
+    FilterVersion: IntegerShape
     Finding: StructureShape
     FindingCriteria: StructureShape
     FindingId: StringShape
@@ -232,6 +302,12 @@ module Aws::GuardDuty
     GetAdministratorAccountResponse: StructureShape
     GetCoverageStatisticsRequest: StructureShape
     GetCoverageStatisticsResponse: StructureShape
+    GetCustomDetectionRuleAssociationRequest: StructureShape
+    GetCustomDetectionRuleAssociationResponse: StructureShape
+    GetCustomDetectionRuleOrgConfigurationRequest: StructureShape
+    GetCustomDetectionRuleOrgConfigurationResponse: StructureShape
+    GetCustomDetectionRuleRequest: StructureShape
+    GetCustomDetectionRuleResponse: StructureShape
     GetDetectorRequest: StructureShape
     GetDetectorResponse: StructureShape
     GetFilterRequest: StructureShape
@@ -242,10 +318,15 @@ module Aws::GuardDuty
     GetFindingsStatisticsResponse: StructureShape
     GetIPSetRequest: StructureShape
     GetIPSetResponse: StructureShape
+    GetInvestigationRequest: StructureShape
+    GetInvestigationResponse: StructureShape
     GetInvitationsCountRequest: StructureShape
     GetInvitationsCountResponse: StructureShape
     GetMalwareProtectionPlanRequest: StructureShape
     GetMalwareProtectionPlanResponse: StructureShape
+    GetMalwareScanRequest: StructureShape
+    GetMalwareScanResponse: StructureShape
+    GetMalwareScanResultDetails: StructureShape
     GetMalwareScanSettingsRequest: StructureShape
     GetMalwareScanSettingsResponse: StructureShape
     GetMasterAccountRequest: StructureShape
@@ -273,10 +354,14 @@ module Aws::GuardDuty
     GroupedBySeverity: ListShape
     Groups: ListShape
     GuardDutyArn: StringShape
+    GuardrailAction: EnumShape
+    GuardrailSource: EnumShape
     HighestSeverityThreatDetails: StructureShape
     HostPath: StructureShape
     IamInstanceProfile: StructureShape
+    IamInstanceProfileV2: StructureShape
     ImpersonatedUser: StructureShape
+    IncrementalScanDetails: StructureShape
     Indicator: StructureShape
     IndicatorTitle: StringShape
     IndicatorType: EnumShape
@@ -288,6 +373,16 @@ module Aws::GuardDuty
     Integer: IntegerShape
     IntegerValueWithMax: IntegerShape
     InternalServerErrorException: StructureShape
+    Investigation: StructureShape
+    InvestigationErrorDetails: StringShape
+    InvestigationId: StringShape
+    InvestigationMetadata: StructureShape
+    InvestigationSortCriteria: StructureShape
+    InvestigationSortField: EnumShape
+    InvestigationStatus: EnumShape
+    InvestigationSummaries: ListShape
+    InvestigationSummary: StructureShape
+    InvestigationTitle: StringShape
     Invitation: StructureShape
     Invitations: ListShape
     InviteMembersRequest: StructureShape
@@ -297,6 +392,8 @@ module Aws::GuardDuty
     IpSetStatus: EnumShape
     Ipv6Addresses: ListShape
     Issues: ListShape
+    ItemDetails: StructureShape
+    ItemDetailsList: ListShape
     ItemPath: StructureShape
     ItemPaths: ListShape
     KubernetesApiCallAction: StructureShape
@@ -314,10 +411,17 @@ module Aws::GuardDuty
     KubernetesWorkload: StructureShape
     KubernetesWorkloadDetails: StructureShape
     LambdaDetails: StructureShape
+    LaunchTemplateVersion: StringShape
     Lineage: ListShape
     LineageObject: StructureShape
     ListCoverageRequest: StructureShape
     ListCoverageResponse: StructureShape
+    ListCustomDetectionRuleAssociationsRequest: StructureShape
+    ListCustomDetectionRuleAssociationsResponse: StructureShape
+    ListCustomDetectionRuleOrgConfigurationsRequest: StructureShape
+    ListCustomDetectionRuleOrgConfigurationsResponse: StructureShape
+    ListCustomDetectionRulesRequest: StructureShape
+    ListCustomDetectionRulesResponse: StructureShape
     ListDetectorsRequest: StructureShape
     ListDetectorsResponse: StructureShape
     ListFiltersRequest: StructureShape
@@ -326,10 +430,18 @@ module Aws::GuardDuty
     ListFindingsResponse: StructureShape
     ListIPSetsRequest: StructureShape
     ListIPSetsResponse: StructureShape
+    ListInvestigationsRequest: StructureShape
+    ListInvestigationsResponse: StructureShape
     ListInvitationsRequest: StructureShape
     ListInvitationsResponse: StructureShape
     ListMalwareProtectionPlansRequest: StructureShape
     ListMalwareProtectionPlansResponse: StructureShape
+    ListMalwareScansCriterionKey: EnumShape
+    ListMalwareScansFilterCriteria: StructureShape
+    ListMalwareScansFilterCriterion: StructureShape
+    ListMalwareScansFilterCriterionList: ListShape
+    ListMalwareScansRequest: StructureShape
+    ListMalwareScansResponse: StructureShape
     ListMembersRequest: StructureShape
     ListMembersResponse: StructureShape
     ListOrganizationAdminAccountsRequest: StructureShape
@@ -354,6 +466,7 @@ module Aws::GuardDuty
     MalwareProtectionConfiguration: StructureShape
     MalwareProtectionConfigurationResult: StructureShape
     MalwareProtectionDataSourceFreeTrial: StructureShape
+    MalwareProtectionFindingsScanConfiguration: StructureShape
     MalwareProtectionPlanActions: StructureShape
     MalwareProtectionPlanObjectPrefixesList: ListShape
     MalwareProtectionPlanStatus: EnumShape
@@ -363,10 +476,18 @@ module Aws::GuardDuty
     MalwareProtectionPlanTaggingAction: StructureShape
     MalwareProtectionPlanTaggingActionStatus: EnumShape
     MalwareProtectionPlansSummary: ListShape
+    MalwareProtectionResourceType: EnumShape
+    MalwareProtectionScanStatus: EnumShape
+    MalwareProtectionScanType: EnumShape
+    MalwareScan: StructureShape
     MalwareScanDetails: StructureShape
+    MalwareScans: ListShape
+    ManagedBy: EnumShape
     ManagementType: EnumShape
     MapEquals: ListShape
     Master: StructureShape
+    Match: StringShape
+    Matches: ListShape
     MaxResults: IntegerShape
     MaxResults100: IntegerShape
     Member: StructureShape
@@ -383,6 +504,10 @@ module Aws::GuardDuty
     Members: ListShape
     MemoryRegionsList: ListShape
     MfaStatus: EnumShape
+    MitreTactic: StringShape
+    MitreTechnique: StringShape
+    ModelDetail: StructureShape
+    ModelDetails: ListShape
     Name: StringShape
     Neq: ListShape
     NetworkConnection: StructureShape
@@ -393,8 +518,13 @@ module Aws::GuardDuty
     NetworkGeoLocation: StructureShape
     NetworkInterface: StructureShape
     NetworkInterfaces: ListShape
+    NextToken: StringShape
     NonEmptyString: StringShape
+    NonNegativeInteger: IntegerShape
     NotEquals: ListShape
+    NotMatch: StringShape
+    NotMatches: ListShape
+    ObservationNumbers: ListShape
     ObservationTexts: ListShape
     Observations: StructureShape
     OrderBy: EnumShape
@@ -442,6 +572,7 @@ module Aws::GuardDuty
     ProcessName: StringShape
     ProcessPath: StringShape
     ProcessSha256: StringShape
+    Product: StructureShape
     ProductCode: StructureShape
     ProductCodes: ListShape
     ProfileSubtype: EnumShape
@@ -456,6 +587,9 @@ module Aws::GuardDuty
     RdsDbUserDetails: StructureShape
     RdsLimitlessDbDetails: StructureShape
     RdsLoginAttemptAction: StructureShape
+    RecoveryPoint: StructureShape
+    RecoveryPointDetails: StructureShape
+    RelatedFilePathsList: ListShape
     RemoteAccountDetails: StructureShape
     RemoteIpDetails: StructureShape
     RemotePortDetails: StructureShape
@@ -470,6 +604,17 @@ module Aws::GuardDuty
     ResourceUids: ListShape
     ResourceV2: StructureShape
     Resources: ListShape
+    RiskDetails: StringShape
+    RiskLevel: EnumShape
+    RuleDefinition: StructureShape
+    RuleDetail: StructureShape
+    RuleExpression: StringShape
+    RuleId: StringShape
+    RuleLanguage: EnumShape
+    RuleName: StringShape
+    RuleSchema: EnumShape
+    RuleSummary: StructureShape
+    RuleSummaryList: ListShape
     RuntimeContext: StructureShape
     RuntimeDetails: StructureShape
     S3Bucket: StructureShape
@@ -480,10 +625,15 @@ module Aws::GuardDuty
     S3Object: StructureShape
     S3ObjectDetail: StructureShape
     S3ObjectDetails: ListShape
+    S3ObjectForSendObjectMalwareScan: StructureShape
     S3ObjectUids: ListShape
     Scan: StructureShape
+    ScanCategory: EnumShape
     ScanCondition: StructureShape
     ScanConditionPair: StructureShape
+    ScanConfiguration: StructureShape
+    ScanConfigurationContinuousScanDetails: StructureShape
+    ScanConfigurationRecoveryPoint: StructureShape
     ScanCriterion: MapShape
     ScanCriterionKey: EnumShape
     ScanDetections: StructureShape
@@ -493,15 +643,24 @@ module Aws::GuardDuty
     ScanResourceCriteria: StructureShape
     ScanResult: EnumShape
     ScanResultDetails: StructureShape
+    ScanResultStatus: EnumShape
+    ScanResultThreat: StructureShape
+    ScanResultThreats: ListShape
     ScanStatus: EnumShape
+    ScanStatusReason: EnumShape
     ScanThreatName: StructureShape
     ScanThreatNames: ListShape
     ScanType: EnumShape
     ScannedItemCount: StructureShape
+    ScannedResource: StructureShape
+    ScannedResourceDetails: StructureShape
+    ScannedResources: ListShape
     Scans: ListShape
     SecurityContext: StructureShape
     SecurityGroup: StructureShape
     SecurityGroups: ListShape
+    SendObjectMalwareScanRequest: StructureShape
+    SendObjectMalwareScanResponse: StructureShape
     SensitiveString: StringShape
     Sequence: StructureShape
     SequenceDescription: StringShape
@@ -517,6 +676,7 @@ module Aws::GuardDuty
     SortCriteria: StructureShape
     SourceIps: ListShape
     Sources: ListShape
+    StartMalwareScanConfiguration: StructureShape
     StartMalwareScanRequest: StructureShape
     StartMalwareScanResponse: StructureShape
     StartMonitoringMembersRequest: StructureShape
@@ -549,6 +709,9 @@ module Aws::GuardDuty
     Timestamp: TimestampShape
     Total: StructureShape
     TriggerDetails: StructureShape
+    TriggerPrompt: StringShape
+    TriggerType: EnumShape
+    TriggeredBy: StringShape
     TrustedEntitySetFormat: EnumShape
     TrustedEntitySetIds: ListShape
     TrustedEntitySetStatus: EnumShape
@@ -559,6 +722,10 @@ module Aws::GuardDuty
     UnprocessedDataSourcesResult: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateCustomDetectionRuleAssociationRequest: StructureShape
+    UpdateCustomDetectionRuleAssociationResponse: StructureShape
+    UpdateCustomDetectionRuleOrgConfigurationRequest: StructureShape
+    UpdateCustomDetectionRuleOrgConfigurationResponse: StructureShape
     UpdateDetectorRequest: StructureShape
     UpdateDetectorResponse: StructureShape
     UpdateFilterRequest: StructureShape

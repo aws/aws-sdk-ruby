@@ -1,0 +1,1758 @@
+module Aws::EventBridgeV2
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class AwsServiceEventsSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aws_service: String,
+        ?pattern: String,
+        ?on_failure_configuration: Types::OnFailureConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_service: String?
+      attr_accessor pattern: String?
+      attr_accessor on_failure_configuration: Types::OnFailureConfiguration?
+    end
+
+    class BatchConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_batch_size: Integer,
+        ?max_batch_window_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_batch_size: Integer?
+      attr_accessor max_batch_window_in_seconds: Integer?
+    end
+
+    module BusState
+      CREATING: String
+      CREATE_FAILED: String
+      UPDATING: String
+      UPDATE_FAILED: String
+      DELETING: String
+      ACTIVE: String
+      DELETE_FAILED: String
+    end
+
+    class ConcurrentModificationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ConfluentPublicRegistryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connection_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connection_arn: String?
+    end
+
+    class CreateEventBusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?storage_configuration: Types::StorageConfiguration,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateEventBusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+        ?name: String,
+        ?description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?storage_configuration: Types::StorageConfigurationOutput,
+        ?state: String,
+        ?state_reason: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor storage_configuration: Types::StorageConfigurationOutput?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class CreateEventSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?event_bus_arn: String,
+        ?configuration: Types::EventSourceConfiguration,
+        ?description: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor configuration: Types::EventSourceConfiguration?
+      attr_accessor description: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateEventSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_arn: String,
+        ?name: String,
+        ?event_bus_arn: String,
+        ?state: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_arn: String?
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor state: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class CreateSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?event_bus_arn: String,
+        ?invoke_configuration: Types::InvokeConfiguration,
+        ?description: String,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?type: String,
+        ?starting_position: String,
+        ?point_in_time_configuration: Types::PointInTimeConfiguration,
+        ?batch_configuration: Types::BatchConfiguration,
+        ?transformer: Types::Transformer,
+        ?retry_policy: Types::RetryPolicy,
+        ?on_failure_configuration: Types::OnFailureConfiguration,
+        ?log_configuration: Types::LogConfiguration,
+        ?state: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor invoke_configuration: Types::InvokeConfiguration?
+      attr_accessor description: String?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor type: String?
+      attr_accessor starting_position: String?
+      attr_accessor point_in_time_configuration: Types::PointInTimeConfiguration?
+      attr_accessor batch_configuration: Types::BatchConfiguration?
+      attr_accessor transformer: Types::Transformer?
+      attr_accessor retry_policy: Types::RetryPolicy?
+      attr_accessor on_failure_configuration: Types::OnFailureConfiguration?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_arn: String,
+        ?name: String,
+        ?event_bus_arn: String,
+        ?type: String,
+        ?starting_position: String,
+        ?point_in_time_configuration: Types::PointInTimeConfiguration,
+        ?state: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_arn: String?
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor type: String?
+      attr_accessor starting_position: String?
+      attr_accessor point_in_time_configuration: Types::PointInTimeConfiguration?
+      attr_accessor state: String?
+      attr_accessor creation_time: Time?
+    end
+
+    class DeduplicationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deduplication_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deduplication_type: String?
+    end
+
+    module DeduplicationType
+      CONTENT_BASED: String
+    end
+
+    class DeleteEventBusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+    end
+
+    class DeleteEventBusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteEventSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_arn: String?
+    end
+
+    class DeleteEventSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_name: String,
+        ?expected_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor expected_revision_id: String?
+    end
+
+    class DeleteResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor revision_id: String?
+    end
+
+    class DeleteSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_arn: String?
+    end
+
+    class DeleteSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DescribeEventBusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+    end
+
+    class DescribeEventBusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+        ?name: String,
+        ?description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?storage_configuration: Types::StorageConfigurationOutput,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?state: String,
+        ?state_reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor storage_configuration: Types::StorageConfigurationOutput?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+    end
+
+    class DescribeEventSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_arn: String?
+    end
+
+    class DescribeEventSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_arn: String,
+        ?name: String,
+        ?event_bus_arn: String,
+        ?configuration: Types::EventSourceConfiguration,
+        ?description: String,
+        ?state: String,
+        ?revoked: bool,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_arn: String?
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor configuration: Types::EventSourceConfiguration?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor revoked: bool?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class DescribeSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_arn: String?
+    end
+
+    class DescribeSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_arn: String,
+        ?name: String,
+        ?event_bus_arn: String,
+        ?invoke_configuration: Types::InvokeConfiguration,
+        ?description: String,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?type: String,
+        ?starting_position: String,
+        ?point_in_time_configuration: Types::PointInTimeConfiguration,
+        ?batch_configuration: Types::BatchConfiguration,
+        ?transformer: Types::Transformer,
+        ?retry_policy: Types::RetryPolicy,
+        ?on_failure_configuration: Types::OnFailureConfiguration,
+        ?log_configuration: Types::LogConfiguration,
+        ?state: String,
+        ?revoked: bool,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_arn: String?
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor invoke_configuration: Types::InvokeConfiguration?
+      attr_accessor description: String?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor type: String?
+      attr_accessor starting_position: String?
+      attr_accessor point_in_time_configuration: Types::PointInTimeConfiguration?
+      attr_accessor batch_configuration: Types::BatchConfiguration?
+      attr_accessor transformer: Types::Transformer?
+      attr_accessor retry_policy: Types::RetryPolicy?
+      attr_accessor on_failure_configuration: Types::OnFailureConfiguration?
+      attr_accessor log_configuration: Types::LogConfiguration?
+      attr_accessor state: String?
+      attr_accessor revoked: bool?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_identifier: String?
+    end
+
+    class EventBusSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?event_bus_arn: String,
+        ?description: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?state: String,
+        ?state_reason: String,
+        ?event_bus_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor description: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor event_bus_account_id: String?
+    end
+
+    class EventBusV2Parameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata: Hash[String, String],
+        ?system_metadata: Types::EventBusV2SystemMetadata,
+        ?deduplication_configuration: Types::DeduplicationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor system_metadata: Types::EventBusV2SystemMetadata?
+      attr_accessor deduplication_configuration: Types::DeduplicationConfiguration?
+    end
+
+    class EventBusV2SystemMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_group_id: String,
+        ?deduplication_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_group_id: String?
+      attr_accessor deduplication_id: String?
+    end
+
+    class EventSourceConfiguration
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?aws_service_events_configuration: Types::AwsServiceEventsSourceConfiguration,
+        ?partner_events_configuration: Types::PartnerEventsSourceConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aws_service_events_configuration: Types::AwsServiceEventsSourceConfiguration?
+      attr_accessor partner_events_configuration: Types::PartnerEventsSourceConfiguration?
+
+      class AwsServiceEventsConfiguration < EventSourceConfiguration
+      end
+      class PartnerEventsConfiguration < EventSourceConfiguration
+      end
+      class Unknown < EventSourceConfiguration
+      end
+    end
+
+    module EventSourceState
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      CREATE_FAILED: String
+      UPDATE_FAILED: String
+      DELETING: String
+      DELETE_FAILED: String
+    end
+
+    class EventSourceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_arn: String,
+        ?name: String,
+        ?event_bus_arn: String,
+        ?type: String,
+        ?state: String,
+        ?revoked: bool,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?event_source_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_arn: String?
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor type: String?
+      attr_accessor state: String?
+      attr_accessor revoked: bool?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor event_source_account_id: String?
+    end
+
+    module EventSourceType
+      AWS_SERVICE_EVENTS: String
+      PARTNER_EVENTS: String
+    end
+
+    class Filter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pattern: String,
+        ?scope: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pattern: String?
+      attr_accessor scope: String?
+    end
+
+    class FilterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?language: String,
+        ?filters: Array[Types::Filter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor language: String?
+      attr_accessor filters: Array[Types::Filter]?
+    end
+
+    module FilterLanguage
+      EVENT_BRIDGE_PATTERN: String
+    end
+
+    module FilterScope
+      DATA: String
+      METADATA: String
+      SYSTEM_METADATA: String
+    end
+
+    class GetResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_name: String?
+    end
+
+    class GetResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_document: String,
+        ?policy_name: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_document: String?
+      attr_accessor policy_name: String?
+      attr_accessor revision_id: String?
+    end
+
+    class HttpParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path_parameter_values: Array[String],
+        ?header_parameters: Hash[String, String],
+        ?query_string_parameters: Hash[String, String],
+        ?invocation_timeout_seconds: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path_parameter_values: Array[String]?
+      attr_accessor header_parameters: Hash[String, String]?
+      attr_accessor query_string_parameters: Hash[String, String]?
+      attr_accessor invocation_timeout_seconds: String?
+    end
+
+    class IdempotentParameterMismatchException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module IncludePayload
+      FULL: String
+      ON_ERROR_ONLY: String
+    end
+
+    class InternalException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidInputException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InvalidStateException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module InvocationType
+      EVENT: String
+      REQUEST_RESPONSE: String
+    end
+
+    class InvokeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?lambda_parameters: Types::LambdaParameters,
+        ?sqs_parameters: Types::SqsParameters,
+        ?sns_parameters: Types::SnsParameters,
+        ?kinesis_parameters: Types::KinesisParameters,
+        ?step_functions_parameters: Types::StepFunctionsParameters,
+        ?http_parameters: Types::HttpParameters,
+        ?universal_target_parameters: Types::UniversalTargetParameters,
+        ?event_bus_v2_parameters: Types::EventBusV2Parameters,
+        ?target_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor lambda_parameters: Types::LambdaParameters?
+      attr_accessor sqs_parameters: Types::SqsParameters?
+      attr_accessor sns_parameters: Types::SnsParameters?
+      attr_accessor kinesis_parameters: Types::KinesisParameters?
+      attr_accessor step_functions_parameters: Types::StepFunctionsParameters?
+      attr_accessor http_parameters: Types::HttpParameters?
+      attr_accessor universal_target_parameters: Types::UniversalTargetParameters?
+      attr_accessor event_bus_v2_parameters: Types::EventBusV2Parameters?
+      attr_accessor target_arn: String?
+    end
+
+    class JsonataConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+    end
+
+    class KinesisParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partition_key: String,
+        ?explicit_hash_key: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partition_key: String?
+      attr_accessor explicit_hash_key: String?
+    end
+
+    class LambdaParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_type: String,
+        ?qualifier: String,
+        ?durable_execution_name: String,
+        ?tenant_id: String,
+        ?invocation_timeout_seconds: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_type: String?
+      attr_accessor qualifier: String?
+      attr_accessor durable_execution_name: String?
+      attr_accessor tenant_id: String?
+      attr_accessor invocation_timeout_seconds: String?
+    end
+
+    class LimitExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListEventBusesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name_prefix: String,
+        ?event_bus_account_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name_prefix: String?
+      attr_accessor event_bus_account_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEventBusesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_buses: Array[Types::EventBusSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_buses: Array[Types::EventBusSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListEventSourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+        ?name_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+      attr_accessor name_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListEventSourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_sources: Array[Types::EventSourceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_sources: Array[Types::EventSourceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListResourcePoliciesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListResourcePoliciesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_summaries: Array[Types::ResourcePolicySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_summaries: Array[Types::ResourcePolicySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSubscribersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+        ?name_prefix: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+      attr_accessor name_prefix: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSubscribersResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscribers: Array[Types::SubscriberSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscribers: Array[Types::SubscriberSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class LogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?level: String,
+        ?include_payload: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor level: String?
+      attr_accessor include_payload: String?
+    end
+
+    module LogLevel
+      OFF: String
+      ERROR: String
+      INFO: String
+    end
+
+    class OnFailureConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    module OrderingType
+      FIFO: String
+      UNORDERED: String
+    end
+
+    class PartnerEventsSourceConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partner_event_source_arn: String,
+        ?pattern: String,
+        ?partner_bus_kms_key_identifier: String,
+        ?on_failure_configuration: Types::OnFailureConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partner_event_source_arn: String?
+      attr_accessor pattern: String?
+      attr_accessor partner_bus_kms_key_identifier: String?
+      attr_accessor on_failure_configuration: Types::OnFailureConfiguration?
+    end
+
+    class PointInTimeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?point_type: String,
+        ?starting_point: Time,
+        ?end_point: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor point_type: String?
+      attr_accessor starting_point: Time?
+      attr_accessor end_point: Time?
+    end
+
+    module PointType
+      HORIZON: String
+      TIMESTAMP: String
+    end
+
+    class PolicyLengthExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PublicPolicyException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class PutEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+        ?entries: Array[Types::PutEventsRequestEntry],
+        ?deduplication_configuration: Types::DeduplicationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+      attr_accessor entries: Array[Types::PutEventsRequestEntry]?
+      attr_accessor deduplication_configuration: Types::DeduplicationConfiguration?
+    end
+
+    class PutEventsRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?detail_type: String,
+        ?detail: String,
+        ?resources: Array[String],
+        ?time: Time,
+        ?system_metadata: Types::PutEventsSystemMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor detail_type: String?
+      attr_accessor detail: String?
+      attr_accessor resources: Array[String]?
+      attr_accessor time: Time?
+      attr_accessor system_metadata: Types::PutEventsSystemMetadata?
+    end
+
+    class PutEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_entry_count: Integer,
+        ?entries: Array[Types::PutEventsResultEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_entry_count: Integer?
+      attr_accessor entries: Array[Types::PutEventsResultEntry]?
+    end
+
+    class PutEventsResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?sequence_number: String,
+        ?success_code: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor sequence_number: String?
+      attr_accessor success_code: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class PutEventsSystemMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_group_id: String,
+        ?deduplication_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_group_id: String?
+      attr_accessor deduplication_id: String?
+    end
+
+    class PutRawEventsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+        ?entries: Array[Types::PutRawEventsRequestEntry],
+        ?schema_registry_configuration: Types::SchemaRegistryConfiguration,
+        ?deduplication_configuration: Types::DeduplicationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+      attr_accessor entries: Array[Types::PutRawEventsRequestEntry]?
+      attr_accessor schema_registry_configuration: Types::SchemaRegistryConfiguration?
+      attr_accessor deduplication_configuration: Types::DeduplicationConfiguration?
+    end
+
+    class PutRawEventsRequestEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data: String,
+        ?metadata: Hash[String, String],
+        ?system_metadata: Types::PutRawEventsSystemMetadata,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data: String?
+      attr_accessor metadata: Hash[String, String]?
+      attr_accessor system_metadata: Types::PutRawEventsSystemMetadata?
+    end
+
+    class PutRawEventsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_entry_count: Integer,
+        ?entries: Array[Types::PutRawEventsResultEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_entry_count: Integer?
+      attr_accessor entries: Array[Types::PutRawEventsResultEntry]?
+    end
+
+    class PutRawEventsResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_id: String,
+        ?sequence_number: String,
+        ?success_code: String,
+        ?error_code: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_id: String?
+      attr_accessor sequence_number: String?
+      attr_accessor success_code: String?
+      attr_accessor error_code: String?
+      attr_accessor error_message: String?
+    end
+
+    class PutRawEventsSystemMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_type: String,
+        ?deduplication_id: String,
+        ?event_group_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_type: String?
+      attr_accessor deduplication_id: String?
+      attr_accessor event_group_id: String?
+    end
+
+    class PutResourcePolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_document: String,
+        ?policy_name: String,
+        ?expected_revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_document: String?
+      attr_accessor policy_name: String?
+      attr_accessor expected_revision_id: String?
+    end
+
+    class PutResourcePolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?policy_name: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor policy_name: String?
+      attr_accessor revision_id: String?
+    end
+
+    class ResourceAlreadyExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceInUseException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourcePolicySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?policy_name: String,
+        ?revision_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor policy_name: String?
+      attr_accessor revision_id: String?
+    end
+
+    module ResumePosition
+      LAST_PROCESSED: String
+      LATEST: String
+    end
+
+    class RetryPolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_retry_attempts: Integer,
+        ?max_event_age_in_seconds: Integer,
+        ?retry_strategy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_retry_attempts: Integer?
+      attr_accessor max_event_age_in_seconds: Integer?
+      attr_accessor retry_strategy: String?
+    end
+
+    module RetryStrategy
+      ALL: String
+    end
+
+    class RevokeResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class RevokeResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class SchemaRegistryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?registry_uri: String,
+        ?confluent_public_registry_configuration: Types::ConfluentPublicRegistryConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor registry_uri: String?
+      attr_accessor confluent_public_registry_configuration: Types::ConfluentPublicRegistryConfiguration?
+    end
+
+    class SchemaRegistryUnavailableException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class SnsMessageAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_type: String,
+        ?string_value: String,
+        ?binary_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_type: String?
+      attr_accessor string_value: String?
+      attr_accessor binary_value: String?
+    end
+
+    class SnsParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_group_id: String,
+        ?message_deduplication_id: String,
+        ?subject: String,
+        ?message_structure: String,
+        ?message_attributes: Hash[String, Types::SnsMessageAttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_group_id: String?
+      attr_accessor message_deduplication_id: String?
+      attr_accessor subject: String?
+      attr_accessor message_structure: String?
+      attr_accessor message_attributes: Hash[String, Types::SnsMessageAttributeValue]?
+    end
+
+    class SqsMessageAttributeValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_type: String,
+        ?string_value: String,
+        ?binary_value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_type: String?
+      attr_accessor string_value: String?
+      attr_accessor binary_value: String?
+    end
+
+    class SqsParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_group_id: String,
+        ?message_deduplication_id: String,
+        ?delay_seconds: String,
+        ?message_attributes: Hash[String, Types::SqsMessageAttributeValue],
+        ?message_system_attributes: Hash[String, Types::SqsMessageAttributeValue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_group_id: String?
+      attr_accessor message_deduplication_id: String?
+      attr_accessor delay_seconds: String?
+      attr_accessor message_attributes: Hash[String, Types::SqsMessageAttributeValue]?
+      attr_accessor message_system_attributes: Hash[String, Types::SqsMessageAttributeValue]?
+    end
+
+    module StartingPosition
+      LATEST: String
+      POINT_IN_TIME: String
+    end
+
+    class StepFunctionsParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invocation_type: String,
+        ?name: String,
+        ?trace_header: String,
+        ?invocation_timeout_seconds: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invocation_type: String?
+      attr_accessor name: String?
+      attr_accessor trace_header: String?
+      attr_accessor invocation_timeout_seconds: String?
+    end
+
+    class StorageConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_period_in_days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_period_in_days: Integer?
+    end
+
+    class StorageConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retention_period_in_days: Integer,
+        ?retention_window_start_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retention_period_in_days: Integer?
+      attr_accessor retention_window_start_time: Time?
+    end
+
+    module SubscriberState
+      RUNNING: String
+      STOPPED: String
+    end
+
+    class SubscriberSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_arn: String,
+        ?name: String,
+        ?event_bus_arn: String,
+        ?target_arn: String,
+        ?type: String,
+        ?revoked: bool,
+        ?state: String,
+        ?creation_time: Time,
+        ?last_modified_time: Time,
+        ?subscriber_account_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_arn: String?
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor target_arn: String?
+      attr_accessor type: String?
+      attr_accessor revoked: bool?
+      attr_accessor state: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_modified_time: Time?
+      attr_accessor subscriber_account_id: String?
+    end
+
+    module SuccessCode
+      PUBLISHED: String
+      DEDUPLICATED: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Transformer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?jsonata_configuration: Types::JsonataConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor jsonata_configuration: Types::JsonataConfiguration?
+    end
+
+    module TransformerType
+      RAW: String
+      WITH_METADATA: String
+      JSONATA: String
+    end
+
+    class UniversalTargetParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?input: String,
+        ?invocation_timeout_seconds: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor input: String?
+      attr_accessor invocation_timeout_seconds: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateEventBusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+        ?description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?storage_configuration: Types::StorageConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+      attr_accessor description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor storage_configuration: Types::StorageConfiguration?
+    end
+
+    class UpdateEventBusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_bus_arn: String,
+        ?name: String,
+        ?description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?storage_configuration: Types::StorageConfigurationOutput,
+        ?state: String,
+        ?state_reason: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_bus_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor storage_configuration: Types::StorageConfigurationOutput?
+      attr_accessor state: String?
+      attr_accessor state_reason: String?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class UpdateEventSourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_arn: String,
+        ?configuration: Types::EventSourceConfiguration,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_arn: String?
+      attr_accessor configuration: Types::EventSourceConfiguration?
+      attr_accessor description: String?
+    end
+
+    class UpdateEventSourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_source_arn: String,
+        ?name: String,
+        ?event_bus_arn: String,
+        ?state: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_source_arn: String?
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor state: String?
+      attr_accessor last_modified_time: Time?
+    end
+
+    class UpdateInvokeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role_arn: String,
+        ?lambda_parameters: Types::LambdaParameters,
+        ?sqs_parameters: Types::SqsParameters,
+        ?sns_parameters: Types::SnsParameters,
+        ?kinesis_parameters: Types::KinesisParameters,
+        ?step_functions_parameters: Types::StepFunctionsParameters,
+        ?http_parameters: Types::HttpParameters,
+        ?universal_target_parameters: Types::UniversalTargetParameters,
+        ?event_bus_v2_parameters: Types::EventBusV2Parameters,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role_arn: String?
+      attr_accessor lambda_parameters: Types::LambdaParameters?
+      attr_accessor sqs_parameters: Types::SqsParameters?
+      attr_accessor sns_parameters: Types::SnsParameters?
+      attr_accessor kinesis_parameters: Types::KinesisParameters?
+      attr_accessor step_functions_parameters: Types::StepFunctionsParameters?
+      attr_accessor http_parameters: Types::HttpParameters?
+      attr_accessor universal_target_parameters: Types::UniversalTargetParameters?
+      attr_accessor event_bus_v2_parameters: Types::EventBusV2Parameters?
+    end
+
+    class UpdateSubscriberRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_arn: String,
+        ?description: String,
+        ?state: String,
+        ?resume_position: String,
+        ?invoke_configuration: Types::UpdateInvokeConfiguration,
+        ?filter_configuration: Types::FilterConfiguration,
+        ?batch_configuration: Types::BatchConfiguration,
+        ?transformer: Types::Transformer,
+        ?retry_policy: Types::RetryPolicy,
+        ?on_failure_configuration: Types::OnFailureConfiguration,
+        ?log_configuration: Types::LogConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_arn: String?
+      attr_accessor description: String?
+      attr_accessor state: String?
+      attr_accessor resume_position: String?
+      attr_accessor invoke_configuration: Types::UpdateInvokeConfiguration?
+      attr_accessor filter_configuration: Types::FilterConfiguration?
+      attr_accessor batch_configuration: Types::BatchConfiguration?
+      attr_accessor transformer: Types::Transformer?
+      attr_accessor retry_policy: Types::RetryPolicy?
+      attr_accessor on_failure_configuration: Types::OnFailureConfiguration?
+      attr_accessor log_configuration: Types::LogConfiguration?
+    end
+
+    class UpdateSubscriberResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?subscriber_arn: String,
+        ?name: String,
+        ?event_bus_arn: String,
+        ?type: String,
+        ?starting_position: String,
+        ?point_in_time_configuration: Types::PointInTimeConfiguration,
+        ?state: String,
+        ?last_modified_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor subscriber_arn: String?
+      attr_accessor name: String?
+      attr_accessor event_bus_arn: String?
+      attr_accessor type: String?
+      attr_accessor starting_position: String?
+      attr_accessor point_in_time_configuration: Types::PointInTimeConfiguration?
+      attr_accessor state: String?
+      attr_accessor last_modified_time: Time?
+    end
+  end
+end

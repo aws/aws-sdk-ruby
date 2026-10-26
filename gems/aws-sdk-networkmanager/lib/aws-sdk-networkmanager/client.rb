@@ -144,18 +144,18 @@ module Aws::NetworkManager
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -267,7 +267,7 @@ module Aws::NetworkManager
     #       updated_at: Time.now,
     #       last_modification_errors: [
     #         {
-    #           code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #           code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #           message: "ServerSideString",
     #           resource_arn: "ResourceArn",
     #           request_id: "ServerSideString"
@@ -447,6 +447,8 @@ module Aws::NetworkManager
     #   <p>The Region where the edge is located.</p>
     # @option params [String] :transport_attachment_id
     #   <p>The ID of the attachment between the two connections.</p>
+    # @option params [String] :routing_policy_label
+    #   <p>The routing policy label to apply to the Connect attachment for traffic routing decisions.</p>
     # @option params [Types::ConnectAttachmentOptions] :options
     #   <p>Options for creating an attachment.</p>
     # @option params [Array<Types::Tag>] :tags
@@ -458,6 +460,7 @@ module Aws::NetworkManager
     #     core_network_id: "CoreNetworkId", # required
     #     edge_location: "ExternalRegionCode", # required
     #     transport_attachment_id: "AttachmentId", # required
+    #     routing_policy_label: "ConstrainedString",
     #     options: { # required
     #       protocol: "GRE" # One of: ["GRE", "NO_ENCAP"]
     #     },
@@ -518,7 +521,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -760,6 +763,38 @@ module Aws::NetworkManager
       request.send_request(options)
     end
 
+    # <p>Creates an association between a core network and a prefix list for routing control.</p>
+    # @param [Hash, Types::CreateCoreNetworkPrefixListAssociationRequest] params
+    # @option params [String] :core_network_id
+    #   <p>The ID of the core network to associate with the prefix list.</p>
+    # @option params [String] :prefix_list_arn
+    #   <p>The ARN of the prefix list to associate with the core network.</p>
+    # @option params [String] :prefix_list_alias
+    #   <p>An optional alias for the prefix list association.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     core_network_id: "CoreNetworkId", # required
+    #     prefix_list_arn: "PrefixListArn", # required
+    #     prefix_list_alias: "ConstrainedString", # required
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_core_network_prefix_list_association(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     core_network_id: "CoreNetworkId",
+    #     prefix_list_arn: "PrefixListArn",
+    #     prefix_list_alias: "ConstrainedString"
+    #   }
+    # @return [Types::CreateCoreNetworkPrefixListAssociationResponse]
+    def create_core_network_prefix_list_association(params = {}, options = {})
+      request = build_request(:create_core_network_prefix_list_association, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a new device in a global network. If you specify both a site ID and a
     #             location, the location of the site is used for visualization in the Network Manager console.</p>
     # @param [Hash, Types::CreateDeviceRequest] params
@@ -858,6 +893,8 @@ module Aws::NetworkManager
     #   <p>The ID of the Cloud WAN core network that the Direct Connect gateway attachment should be attached to.</p>
     # @option params [String] :direct_connect_gateway_arn
     #   <p>The ARN of the Direct Connect gateway attachment.</p>
+    # @option params [String] :routing_policy_label
+    #   <p>The routing policy label to apply to the Direct Connect Gateway attachment for traffic routing decisions.</p>
     # @option params [Array<String>] :edge_locations
     #   <p>One or more core network edge locations that the Direct Connect gateway attachment is associated with. </p>
     # @option params [Array<Types::Tag>] :tags
@@ -868,6 +905,7 @@ module Aws::NetworkManager
     #   params = {
     #     core_network_id: "CoreNetworkId", # required
     #     direct_connect_gateway_arn: "DirectConnectGatewayArn", # required
+    #     routing_policy_label: "ConstrainedString",
     #     edge_locations: ["ExternalRegionCode"], # required
     #     tags: [
     #       {
@@ -926,7 +964,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -1132,6 +1170,8 @@ module Aws::NetworkManager
     #   <p>The ID of a core network where you're creating a site-to-site VPN attachment.</p>
     # @option params [String] :vpn_connection_arn
     #   <p>The ARN identifying the VPN attachment.</p>
+    # @option params [String] :routing_policy_label
+    #   <p>The routing policy label to apply to the Site-to-Site VPN attachment for traffic routing decisions.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tags associated with the request.</p>
     # @option params [String] :client_token
@@ -1140,6 +1180,7 @@ module Aws::NetworkManager
     #   params = {
     #     core_network_id: "CoreNetworkId", # required
     #     vpn_connection_arn: "VpnConnectionArn", # required
+    #     routing_policy_label: "ConstrainedString",
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -1197,7 +1238,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -1285,6 +1326,8 @@ module Aws::NetworkManager
     #   <p>The ID of the peer for the </p>
     # @option params [String] :transit_gateway_route_table_arn
     #   <p>The ARN of the transit gateway route table for the attachment request. For example, <code>"TransitGatewayRouteTableArn": "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"</code>.</p>
+    # @option params [String] :routing_policy_label
+    #   <p>The routing policy label to apply to the Transit Gateway route table attachment for traffic routing decisions.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The list of key-value tags associated with the request.</p>
     # @option params [String] :client_token
@@ -1293,6 +1336,7 @@ module Aws::NetworkManager
     #   params = {
     #     peering_id: "PeeringId", # required
     #     transit_gateway_route_table_arn: "TransitGatewayRouteTableArn", # required
+    #     routing_policy_label: "ConstrainedString",
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -1350,7 +1394,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -1377,6 +1421,8 @@ module Aws::NetworkManager
     #   <p>The subnet ARN of the VPC attachment.</p>
     # @option params [Types::VpcOptions] :options
     #   <p>Options for the VPC attachment.</p>
+    # @option params [String] :routing_policy_label
+    #   <p>The routing policy label to apply to the VPC attachment for traffic routing decisions.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>The key-value tags associated with the request.</p>
     # @option params [String] :client_token
@@ -1392,6 +1438,7 @@ module Aws::NetworkManager
     #       dns_support: false,
     #       security_group_referencing_support: false
     #     },
+    #     routing_policy_label: "ConstrainedString",
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -1449,7 +1496,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -1527,7 +1574,7 @@ module Aws::NetworkManager
     #       updated_at: Time.now,
     #       last_modification_errors: [
     #         {
-    #           code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #           code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #           message: "ServerSideString",
     #           resource_arn: "ResourceArn",
     #           request_id: "ServerSideString"
@@ -1733,6 +1780,31 @@ module Aws::NetworkManager
     # @return [Types::DeleteCoreNetworkPolicyVersionResponse]
     def delete_core_network_policy_version(params = {}, options = {})
       request = build_request(:delete_core_network_policy_version, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an association between a core network and a prefix list.</p>
+    # @param [Hash, Types::DeleteCoreNetworkPrefixListAssociationRequest] params
+    # @option params [String] :core_network_id
+    #   <p>The ID of the core network from which to delete the prefix list association.</p>
+    # @option params [String] :prefix_list_arn
+    #   <p>The ARN of the prefix list to disassociate from the core network.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     core_network_id: "CoreNetworkId", # required
+    #     prefix_list_arn: "PrefixListArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_core_network_prefix_list_association(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     core_network_id: "CoreNetworkId",
+    #     prefix_list_arn: "PrefixListArn"
+    #   }
+    # @return [Types::DeleteCoreNetworkPrefixListAssociationResponse]
+    def delete_core_network_prefix_list_association(params = {}, options = {})
+      request = build_request(:delete_core_network_prefix_list_association, params)
       request.send_request(options)
     end
 
@@ -2255,7 +2327,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -2505,17 +2577,25 @@ module Aws::NetworkManager
     #   {
     #     core_network_change_events: [
     #       {
-    #         type: "CORE_NETWORK_SEGMENT" # One of: ["CORE_NETWORK_SEGMENT", "NETWORK_FUNCTION_GROUP", "CORE_NETWORK_EDGE", "ATTACHMENT_MAPPING", "ATTACHMENT_ROUTE_PROPAGATION", "ATTACHMENT_ROUTE_STATIC", "CORE_NETWORK_CONFIGURATION", "SEGMENTS_CONFIGURATION", "SEGMENT_ACTIONS_CONFIGURATION", "ATTACHMENT_POLICIES_CONFIGURATION"],
+    #         type: "CORE_NETWORK_SEGMENT" # One of: ["CORE_NETWORK_SEGMENT", "NETWORK_FUNCTION_GROUP", "CORE_NETWORK_EDGE", "ATTACHMENT_MAPPING", "ATTACHMENT_ROUTE_PROPAGATION", "ATTACHMENT_ROUTE_STATIC", "ROUTING_POLICY", "ROUTING_POLICY_SEGMENT_ASSOCIATION", "ROUTING_POLICY_EDGE_ASSOCIATION", "ROUTING_POLICY_ATTACHMENT_ASSOCIATION", "CORE_NETWORK_CONFIGURATION", "SEGMENTS_CONFIGURATION", "SEGMENT_ACTIONS_CONFIGURATION", "ATTACHMENT_POLICIES_CONFIGURATION"],
     #         action: "ADD" # One of: ["ADD", "MODIFY", "REMOVE"],
     #         identifier_path: "ConstrainedString",
     #         event_time: Time.now,
     #         status: "NOT_STARTED" # One of: ["NOT_STARTED", "IN_PROGRESS", "COMPLETE", "FAILED"],
     #         values: {
     #           edge_location: "ExternalRegionCode",
+    #           peer_edge_location: "ExternalRegionCode",
+    #           routing_policy_direction: "inbound" # One of: ["inbound", "outbound"],
     #           segment_name: "ConstrainedString",
     #           network_function_group_name: "ConstrainedString",
     #           attachment_id: "AttachmentId",
-    #           cidr: "ConstrainedString"
+    #           cidr: "ConstrainedString",
+    #           routing_policy_association_details: [
+    #             {
+    #               routing_policy_names: ["ConstrainedString"],
+    #               shared_segments: ["ConstrainedString"]
+    #             }
+    #           ]
     #         }
     #       }
     #     ],
@@ -2551,7 +2631,7 @@ module Aws::NetworkManager
     #   {
     #     core_network_changes: [
     #       {
-    #         type: "CORE_NETWORK_SEGMENT" # One of: ["CORE_NETWORK_SEGMENT", "NETWORK_FUNCTION_GROUP", "CORE_NETWORK_EDGE", "ATTACHMENT_MAPPING", "ATTACHMENT_ROUTE_PROPAGATION", "ATTACHMENT_ROUTE_STATIC", "CORE_NETWORK_CONFIGURATION", "SEGMENTS_CONFIGURATION", "SEGMENT_ACTIONS_CONFIGURATION", "ATTACHMENT_POLICIES_CONFIGURATION"],
+    #         type: "CORE_NETWORK_SEGMENT" # One of: ["CORE_NETWORK_SEGMENT", "NETWORK_FUNCTION_GROUP", "CORE_NETWORK_EDGE", "ATTACHMENT_MAPPING", "ATTACHMENT_ROUTE_PROPAGATION", "ATTACHMENT_ROUTE_STATIC", "ROUTING_POLICY", "ROUTING_POLICY_SEGMENT_ASSOCIATION", "ROUTING_POLICY_EDGE_ASSOCIATION", "ROUTING_POLICY_ATTACHMENT_ASSOCIATION", "CORE_NETWORK_CONFIGURATION", "SEGMENTS_CONFIGURATION", "SEGMENT_ACTIONS_CONFIGURATION", "ATTACHMENT_POLICIES_CONFIGURATION"],
     #         action: "ADD" # One of: ["ADD", "MODIFY", "REMOVE"],
     #         identifier: "ConstrainedString",
     #         previous_values: {
@@ -2589,7 +2669,17 @@ module Aws::NetworkManager
     #           ],
     #           vpn_ecmp_support: false,
     #           dns_support: false,
-    #           security_group_referencing_support: false
+    #           security_group_referencing_support: false,
+    #           routing_policy_direction: "inbound" # One of: ["inbound", "outbound"],
+    #           routing_policy: "CoreNetworkPolicyDocument",
+    #           peer_edge_locations: ["ExternalRegionCode"],
+    #           attachment_id: "ConstrainedString",
+    #           routing_policy_association_details: [
+    #             {
+    #               routing_policy_names: ["ConstrainedString"],
+    #               shared_segments: ["ConstrainedString"]
+    #             }
+    #           ]
     #         },
     #         new_values: {
     #           segment_name: "ConstrainedString",
@@ -2626,7 +2716,17 @@ module Aws::NetworkManager
     #           ],
     #           vpn_ecmp_support: false,
     #           dns_support: false,
-    #           security_group_referencing_support: false
+    #           security_group_referencing_support: false,
+    #           routing_policy_direction: "inbound" # One of: ["inbound", "outbound"],
+    #           routing_policy: "CoreNetworkPolicyDocument",
+    #           peer_edge_locations: ["ExternalRegionCode"],
+    #           attachment_id: "ConstrainedString",
+    #           routing_policy_association_details: [
+    #             {
+    #               routing_policy_names: ["ConstrainedString"],
+    #               shared_segments: ["ConstrainedString"]
+    #             }
+    #           ]
     #         },
     #         identifier_path: "ConstrainedString"
     #       }
@@ -2841,7 +2941,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -3732,7 +3832,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -3989,7 +4089,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -4063,7 +4163,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -4082,6 +4182,44 @@ module Aws::NetworkManager
     # @return [Types::GetVpcAttachmentResponse]
     def get_vpc_attachment(params = {}, options = {})
       request = build_request(:get_vpc_attachment, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the routing policy associations for attachments in a core network.</p>
+    # @param [Hash, Types::ListAttachmentRoutingPolicyAssociationsRequest] params
+    # @option params [String] :core_network_id
+    #   <p>The ID of the core network to list attachment routing policy associations for.</p>
+    # @option params [String] :attachment_id
+    #   <p>The ID of a specific attachment to filter the routing policy associations.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single page.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     core_network_id: "CoreNetworkId", # required
+    #     attachment_id: "AttachmentId",
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_attachment_routing_policy_associations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     attachment_routing_policy_associations: [
+    #       {
+    #         attachment_id: "AttachmentId",
+    #         pending_routing_policies: ["ConstrainedString"],
+    #         associated_routing_policies: ["ConstrainedString"],
+    #         routing_policy_label: "ConstrainedString"
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAttachmentRoutingPolicyAssociationsResponse]
+    def list_attachment_routing_policy_associations(params = {}, options = {})
+      request = build_request(:list_attachment_routing_policy_associations, params)
       request.send_request(options)
     end
 
@@ -4157,7 +4295,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -4254,6 +4392,110 @@ module Aws::NetworkManager
     # @return [Types::ListCoreNetworkPolicyVersionsResponse]
     def list_core_network_policy_versions(params = {}, options = {})
       request = build_request(:list_core_network_policy_versions, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the prefix list associations for a core network.</p>
+    # @param [Hash, Types::ListCoreNetworkPrefixListAssociationsRequest] params
+    # @option params [String] :core_network_id
+    #   <p>The ID of the core network to list prefix list associations for.</p>
+    # @option params [String] :prefix_list_arn
+    #   <p>The ARN of a specific prefix list to filter the associations.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single page.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     core_network_id: "CoreNetworkId", # required
+    #     prefix_list_arn: "PrefixListArn",
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_core_network_prefix_list_associations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     prefix_list_associations: [
+    #       {
+    #         core_network_id: "CoreNetworkId",
+    #         prefix_list_arn: "PrefixListArn",
+    #         prefix_list_alias: "ConstrainedString"
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListCoreNetworkPrefixListAssociationsResponse]
+    def list_core_network_prefix_list_associations(params = {}, options = {})
+      request = build_request(:list_core_network_prefix_list_associations, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists routing information for a core network, including routes and their attributes.</p>
+    # @param [Hash, Types::ListCoreNetworkRoutingInformationRequest] params
+    # @option params [String] :core_network_id
+    #   <p>The ID of the core network to retrieve routing information for.</p>
+    # @option params [String] :segment_name
+    #   <p>The name of the segment to filter routing information by.</p>
+    # @option params [String] :edge_location
+    #   <p>The edge location to filter routing information by.</p>
+    # @option params [Hash<String, Array<String>>] :next_hop_filters
+    #   <p>Filters to apply based on next hop information.</p>
+    # @option params [Array<String>] :local_preference_matches
+    #   <p>Local preference values to match when filtering routing information.</p>
+    # @option params [Array<String>] :exact_as_path_matches
+    #   <p>Exact AS path values to match when filtering routing information.</p>
+    # @option params [Array<String>] :med_matches
+    #   <p>Multi-Exit Discriminator (MED) values to match when filtering routing information.</p>
+    # @option params [Array<String>] :community_matches
+    #   <p>BGP community values to match when filtering routing information.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of routing information entries to return in a single page.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     core_network_id: "CoreNetworkId", # required
+    #     segment_name: "ConstrainedString", # required
+    #     edge_location: "ExternalRegionCode", # required
+    #     next_hop_filters: {
+    #       "FilterName" => ["FilterValue"]
+    #     },
+    #     local_preference_matches: ["ConstrainedString"],
+    #     exact_as_path_matches: ["ConstrainedString"],
+    #     med_matches: ["ConstrainedString"],
+    #     community_matches: ["ConstrainedString"],
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_core_network_routing_information(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     core_network_routing_information: [
+    #       {
+    #         prefix: "ConstrainedString",
+    #         next_hop: {
+    #           ip_address: "IPAddress",
+    #           core_network_attachment_id: "ConstrainedString",
+    #           resource_id: "ConstrainedString",
+    #           resource_type: "ConstrainedString",
+    #           segment_name: "ConstrainedString",
+    #           edge_location: "ExternalRegionCode"
+    #         },
+    #         local_preference: "ConstrainedString",
+    #         med: "ConstrainedString",
+    #         as_path: ["ConstrainedString"],
+    #         communities: ["ConstrainedString"]
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListCoreNetworkRoutingInformationResponse]
+    def list_core_network_routing_information(params = {}, options = {})
+      request = build_request(:list_core_network_routing_information, params)
       request.send_request(options)
     end
 
@@ -4424,6 +4666,38 @@ module Aws::NetworkManager
       request.send_request(options)
     end
 
+    # <p>Applies a routing policy label to an attachment for traffic routing decisions.</p>
+    # @param [Hash, Types::PutAttachmentRoutingPolicyLabelRequest] params
+    # @option params [String] :core_network_id
+    #   <p>The ID of the core network containing the attachment.</p>
+    # @option params [String] :attachment_id
+    #   <p>The ID of the attachment to apply the routing policy label to.</p>
+    # @option params [String] :routing_policy_label
+    #   <p>The routing policy label to apply to the attachment.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     core_network_id: "CoreNetworkId", # required
+    #     attachment_id: "AttachmentId", # required
+    #     routing_policy_label: "ConstrainedString", # required
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.put_attachment_routing_policy_label(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     core_network_id: "CoreNetworkId",
+    #     attachment_id: "AttachmentId",
+    #     routing_policy_label: "ConstrainedString"
+    #   }
+    # @return [Types::PutAttachmentRoutingPolicyLabelResponse]
+    def put_attachment_routing_policy_label(params = {}, options = {})
+      request = build_request(:put_attachment_routing_policy_label, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a new, immutable version of a core network policy. A subsequent change set is created showing the differences between the LIVE policy and the submitted policy.</p>
     # @param [Hash, Types::PutCoreNetworkPolicyRequest] params
     # @option params [String] :core_network_id
@@ -4585,7 +4859,7 @@ module Aws::NetworkManager
     #       updated_at: Time.now,
     #       last_modification_errors: [
     #         {
-    #           code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #           code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #           message: "ServerSideString",
     #           resource_arn: "ResourceArn",
     #           request_id: "ServerSideString"
@@ -4596,6 +4870,32 @@ module Aws::NetworkManager
     # @return [Types::RejectAttachmentResponse]
     def reject_attachment(params = {}, options = {})
       request = build_request(:reject_attachment, params)
+      request.send_request(options)
+    end
+
+    # <p>Removes a routing policy label from an attachment.</p>
+    # @param [Hash, Types::RemoveAttachmentRoutingPolicyLabelRequest] params
+    # @option params [String] :core_network_id
+    #   <p>The ID of the core network containing the attachment.</p>
+    # @option params [String] :attachment_id
+    #   <p>The ID of the attachment to remove the routing policy label from.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     core_network_id: "CoreNetworkId", # required
+    #     attachment_id: "AttachmentId", # required
+    #   }
+    #   options = {}
+    #   response = client.remove_attachment_routing_policy_label(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     core_network_id: "CoreNetworkId",
+    #     attachment_id: "AttachmentId",
+    #     routing_policy_label: "ConstrainedString"
+    #   }
+    # @return [Types::RemoveAttachmentRoutingPolicyLabelResponse]
+    def remove_attachment_routing_policy_label(params = {}, options = {})
+      request = build_request(:remove_attachment_routing_policy_label, params)
       request.send_request(options)
     end
 
@@ -4669,7 +4969,7 @@ module Aws::NetworkManager
       request.send_request(options)
     end
 
-    # <p>Starts analyzing the routing path between the specified source and destination. For more information, 
+    # <p>Starts analyzing the routing path between the specified source and destination. For more information,
     #             see <a href="https://docs.aws.amazon.com/vpc/latest/tgw/route-analyzer.html">Route Analyzer</a>.</p>
     # @param [Hash, Types::StartRouteAnalysisRequest] params
     # @option params [String] :global_network_id
@@ -5083,7 +5383,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"
@@ -5371,7 +5671,7 @@ module Aws::NetworkManager
     #         updated_at: Time.now,
     #         last_modification_errors: [
     #           {
-    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF"],
+    #             code: "VPC_NOT_FOUND" # One of: ["VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"],
     #             message: "ServerSideString",
     #             resource_arn: "ResourceArn",
     #             request_id: "ServerSideString"

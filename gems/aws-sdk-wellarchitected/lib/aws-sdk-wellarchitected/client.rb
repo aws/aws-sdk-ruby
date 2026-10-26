@@ -144,18 +144,18 @@ module Aws::WellArchitected
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,23 +209,12 @@ module Aws::WellArchitected
       super
     end
 
-    # <p>Associate a lens to a workload.</p>
-    #          <p>Up to 10 lenses can be associated with a workload in a single API operation. A 
-    #         maximum of 20 lenses can be associated with a workload.</p>
-    #          <note>
-    #             <p>
-    #                <b>Disclaimer</b>
-    #             </p>
-    #             <p>By accessing and/or applying custom lenses created by another Amazon Web Services user or account, 
-    #             you acknowledge that custom lenses created by other users and shared with you are 
-    #             Third Party Content as defined in the Amazon Web Services Customer Agreement.    </p>
-    #          </note>
+    # <p>Associate a lens to a workload.</p> <p>Up to 10 lenses can be associated with a workload in a single API operation. A maximum of 20 lenses can be associated with a workload.</p> <note> <p> <b>Disclaimer</b> </p> <p>By accessing and/or applying custom lenses created by another Amazon Web Services user or account, you acknowledge that custom lenses created by other users and shared with you are Third Party Content as defined in the Amazon Web Services Customer Agreement. </p> </note>
     # @param [Hash, Types::AssociateLensesInput] params
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [Array<String>] :lens_aliases
-    #   <p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p>
-    #            <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -264,51 +253,224 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Create a lens share.</p>
-    #          <p>The owner of a lens can share it with other Amazon Web Services accounts, users, an organization,
-    #             and organizational units (OUs) in the same Amazon Web Services Region.
-    #             Lenses provided by Amazon Web Services (Amazon Web Services Official Content) cannot be shared.</p>
-    #          <p>
-    #             Shared access to a lens is not removed until the lens invitation is deleted.</p>
-    #          <p>If you share a lens with an organization or OU, all accounts in the organization or OU
-    #         are granted access to the lens.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-sharing.html">Sharing a custom lens</a> in the
-    #             <i>Well-Architected Tool User Guide</i>.</p>
-    #          <note>
-    #             <p>
-    #                <b>Disclaimer</b>
-    #             </p>
-    #             <p>By sharing your custom lenses with other Amazon Web Services accounts, 
-    #                 you acknowledge that Amazon Web Services will make your custom lenses available to those 
-    #                 other accounts. Those other accounts may continue to access and use your 
-    #                 shared custom lenses even if you delete the custom lenses 
-    #                 from your own Amazon Web Services account or terminate 
-    #                 your Amazon Web Services account.</p>
-    #          </note>
+    # <p>Creates a context associated with an optimization profile. Contexts provide application and environment information used during recommendation generation.</p>
+    # @param [Hash, Types::CreateAgentContextRequest] params
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile to associate the context with.</p>
+    # @option params [String] :title
+    #   <p>The title of the context.</p>
+    # @option params [String] :context_type
+    #   <p>The type of the context.</p>
+    # @option params [Types::ContextContent] :content
+    #   <p>The typed content of the context. The structure contains application-specific fields such as account IDs, Regions, services, and resource types.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "String",
+    #     profile_arn: "AgentProfileArn", # required
+    #     title: "SensitiveString", # required
+    #     context_type: "APPLICATION" # One of: ["APPLICATION"], # required
+    #     content: { # required
+    #       account_ids: ["String"],
+    #       regions: ["String"],
+    #       aws_services: ["String"],
+    #       resource_types: ["String"],
+    #       resource_tags: [
+    #         {
+    #           key: "String", # required
+    #           value: "String", # required
+    #         }
+    #       ],
+    #       application_overview: "SensitiveString",
+    #       industry: "SensitiveString",
+    #       application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #       criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #       architecture_overview: "SensitiveString",
+    #       additional_context: "SensitiveString"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_agent_context(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     context: { # required
+    #       id: "UUID", # required
+    #       profile_arn: "AgentProfileArn", # required
+    #       title: "SensitiveString", # required
+    #       context_type: "APPLICATION" # One of: ["APPLICATION"], # required
+    #       content: { # required
+    #         account_ids: ["String"],
+    #         regions: ["String"],
+    #         aws_services: ["String"],
+    #         resource_types: ["String"],
+    #         resource_tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           }
+    #         ],
+    #         application_overview: "SensitiveString",
+    #         industry: "SensitiveString",
+    #         application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #         criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #         architecture_overview: "SensitiveString",
+    #         additional_context: "SensitiveString"
+    #       },
+    #       application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #       criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #       created_by: "String", # required
+    #       created_at: Time.now, # required
+    #       last_modified_by: "String",
+    #       last_modified_at: Time.now
+    #     }
+    #   }
+    # @return [Types::CreateAgentContextResponse]
+    def create_agent_context(params = {}, options = {})
+      request = build_request(:create_agent_context, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates an optimization goal associated with a profile. Goals define specific targets and objectives for the optimization process.</p>
+    # @param [Hash, Types::CreateAgentGoalRequest] params
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile to associate the goal with.</p>
+    # @option params [Array<String>] :pillars
+    #   <p>The Well-Architected Tool Framework pillars to associate with this goal.</p>
+    # @option params [String] :title
+    #   <p>The title of the goal.</p>
+    # @option params [String] :description
+    #   <p>A description of the goal.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "String",
+    #     profile_arn: "AgentProfileArn", # required
+    #     pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #     title: "SensitiveString", # required
+    #     description: "SensitiveString"
+    #   }
+    #   options = {}
+    #   response = client.create_agent_goal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     goal: { # required
+    #       id: "UUID", # required
+    #       profile_arn: "AgentProfileArn", # required
+    #       pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #       title: "SensitiveString", # required
+    #       description: "SensitiveString",
+    #       created_by: "String", # required
+    #       created_at: Time.now, # required
+    #       last_modified_by: "String",
+    #       last_modified_at: Time.now
+    #     }
+    #   }
+    # @return [Types::CreateAgentGoalResponse]
+    def create_agent_goal(params = {}, options = {})
+      request = build_request(:create_agent_goal, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates an optimization profile that defines the scope and configuration for generating recommendations. A profile specifies the execution role, target pillars, and aggregation settings for analyzing your Amazon Web Services resources.</p>
+    # @param [Hash, Types::CreateAgentProfileRequest] params
+    # @option params [String] :name
+    #   <p>The system name of the profile.</p>
+    # @option params [String] :display_name
+    #   <p>The display name of the profile shown to users.</p>
+    # @option params [String] :description
+    #   <p>A description of the profile.</p>
+    # @option params [String] :business_overview
+    #   <p>The business overview for this profile.</p>
+    # @option params [Array<String>] :pillars
+    #   <p>The Well-Architected Tool Framework pillars to associate with this profile.</p>
+    # @option params [Boolean] :deletion_protection
+    #   <p>Indicates whether deletion protection is enabled for the profile.</p>
+    # @option params [String] :execution_role_arn
+    #   <p>The ARN of the IAM execution role used for recommendation actions.</p>
+    # @option params [Array<Types::AggregationConfiguration>] :aggregation_configuration
+    #   <p>The aggregation configuration that defines which Amazon Web Services accounts and Regions to analyze.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>The tags to associate with the profile.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "String", # required
+    #     display_name: "SensitiveString",
+    #     description: "SensitiveString",
+    #     business_overview: "SensitiveString",
+    #     pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #     deletion_protection: false,
+    #     execution_role_arn: "RoleArn", # required
+    #     aggregation_configuration: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         regions: ["Region"], # required
+    #         access_role_arn: "RoleArn", # required
+    #       }
+    #     ],
+    #     client_token: "String",
+    #     tags: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_agent_profile(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     name: "String", # required
+    #     display_name: "SensitiveString",
+    #     description: "SensitiveString",
+    #     business_overview: "SensitiveString",
+    #     pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #     deletion_protection: false,
+    #     execution_role_arn: "RoleArn", # required
+    #     aggregation_configuration: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         regions: ["Region"], # required
+    #         access_role_arn: "RoleArn", # required
+    #       }
+    #     ],
+    #     arn: "AgentProfileArn", # required
+    #     eligible_for_scheduled_generation: false,
+    #     eligible_for_architecture_generation: false,
+    #     field_errors: {
+    #       "FieldErrorPath" => "FieldErrorMessage"
+    #     },
+    #     tags: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #     ],
+    #     created_by: "String", # required
+    #     created_at: Time.now, # required
+    #     last_modified_by: "String",
+    #     last_modified_at: Time.now
+    #   }
+    # @return [Types::CreateAgentProfileResponse]
+    def create_agent_profile(params = {}, options = {})
+      request = build_request(:create_agent_profile, params)
+      request.send_request(options)
+    end
+
+    # <p>Create a lens share.</p> <p>The owner of a lens can share it with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Lenses provided by Amazon Web Services (Amazon Web Services Official Content) cannot be shared.</p> <p> Shared access to a lens is not removed until the lens invitation is deleted.</p> <p>If you share a lens with an organization or OU, all accounts in the organization or OU are granted access to the lens.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-sharing.html">Sharing a custom lens</a> in the <i>Well-Architected Tool User Guide</i>.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>
     # @param [Hash, Types::CreateLensShareInput] params
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :shared_with
-    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which 
-    #               the workload, lens, profile, or review template is shared.</p>
+    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the workload, lens, profile, or review template is shared.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     lens_alias: "LensAlias", # required
@@ -328,38 +490,16 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Create a new lens version.</p>
-    #          <p>A lens can have up to 100 versions.</p>
-    #          <p>Use this operation to publish a new lens version after you have imported a lens. The <code>LensAlias</code> 
-    #             is used to identify the lens to be published. 
-    #             The owner of a lens can share the lens with other 
-    #             Amazon Web Services accounts and users in the same Amazon Web Services Region. Only the owner of a lens can delete it.
-    #         </p>
+    # <p>Create a new lens version.</p> <p>A lens can have up to 100 versions.</p> <p>Use this operation to publish a new lens version after you have imported a lens. The <code>LensAlias</code> is used to identify the lens to be published. The owner of a lens can share the lens with other Amazon Web Services accounts and users in the same Amazon Web Services Region. Only the owner of a lens can delete it. </p>
     # @param [Hash, Types::CreateLensVersionInput] params
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :lens_version
     #   <p>The version of the lens being created.</p>
     # @option params [Boolean] :is_major_version
     #   <p>Set to true if this new major lens version.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     lens_alias: "LensAlias", # required
@@ -386,19 +526,9 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :milestone_name
-    #   <p>The name of the milestone in a workload.</p>
-    #            <p>Milestone names must be unique within a workload.</p>
+    #   <p>The name of the milestone in a workload.</p> <p>Milestone names must be unique within a workload.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -428,16 +558,7 @@ module Aws::WellArchitected
     # @option params [Array<Types::ProfileQuestionUpdate>] :profile_questions
     #   <p>The profile questions.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags assigned to the profile.</p>
     # @example Request syntax with placeholder values
@@ -474,19 +595,9 @@ module Aws::WellArchitected
     # @option params [String] :profile_arn
     #   <p>The profile ARN.</p>
     # @option params [String] :shared_with
-    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which 
-    #               the workload, lens, profile, or review template is shared.</p>
+    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the workload, lens, profile, or review template is shared.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     profile_arn: "ProfileArn", # required
@@ -507,18 +618,7 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Create a review template.</p>
-    #          <note>
-    #             <p>
-    #                <b>Disclaimer</b>
-    #             </p>
-    #             <p>Do not include or gather personal identifiable information (PII) of end users or
-    #                 other identifiable individuals in or via your review templates. If your review
-    #                 template or those shared with you and used in your account do include or collect PII
-    #                 you are responsible for: ensuring that the included PII is processed in accordance
-    #                 with applicable law, providing adequate privacy notices, and obtaining necessary
-    #                 consents for processing such data.</p>
-    #          </note>
+    # <p>Create a review template.</p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your review templates. If your review template or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>
     # @param [Hash, Types::CreateReviewTemplateInput] params
     # @option params [String] :template_name
     #   <p>Name of the review template.</p>
@@ -527,21 +627,11 @@ module Aws::WellArchitected
     # @option params [Array<String>] :lenses
     #   <p>Lenses applied to the review template.</p>
     # @option params [String] :notes
-    #   <p>The notes associated with the workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>The notes associated with the workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags assigned to the review template.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     template_name: "TemplateName", # required
@@ -566,38 +656,14 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Create a review template share.</p>
-    #          <p>The owner of a review template can share it with other Amazon Web Services accounts,
-    #             users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. </p>
-    #          <p> Shared access to a review template is not removed until the review template share
-    #             invitation is deleted.</p>
-    #          <p>If you share a review template with an organization or OU, all accounts in the
-    #             organization or OU are granted access to the review template.</p>
-    #          <note>
-    #             <p>
-    #                <b>Disclaimer</b>
-    #             </p>
-    #             <p>By sharing your review template with other Amazon Web Services accounts, you
-    #                 acknowledge that Amazon Web Services will make your review template available to
-    #                 those other accounts.</p>
-    #          </note>
+    # <p>Create a review template share.</p> <p>The owner of a review template can share it with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. </p> <p> Shared access to a review template is not removed until the review template share invitation is deleted.</p> <p>If you share a review template with an organization or OU, all accounts in the organization or OU are granted access to the review template.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your review template with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your review template available to those other accounts.</p> </note>
     # @param [Hash, Types::CreateTemplateShareInput] params
     # @option params [String] :template_arn
     #   <p>The review template ARN.</p>
     # @option params [String] :shared_with
-    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which 
-    #               the workload, lens, profile, or review template is shared.</p>
+    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the workload, lens, profile, or review template is shared.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     template_arn: "TemplateArn", # required
@@ -618,47 +684,10 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Create a new workload.</p>
-    #          <p>The owner of a workload can share the workload with other Amazon Web Services accounts, users,
-    #             an organization, and organizational units (OUs) 
-    #             in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html">Defining a Workload</a> in the
-    #                 <i>Well-Architected Tool User Guide</i>.</p>
-    #          <important>
-    #             <p>Either <code>AwsRegions</code>, <code>NonAwsRegions</code>, or both must be specified when
-    #                 creating a workload.</p>
-    #             <p>You also must specify <code>ReviewOwner</code>, even though the
-    #                 parameter is listed as not being required in the following section.
-    #             </p>
-    #          </important>
-    #          <p>When creating a workload using a review template, you must have the following IAM permissions:</p>
-    #          <ul>
-    #             <li>
-    #                <p>
-    #                   <code>wellarchitected:GetReviewTemplate</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>wellarchitected:GetReviewTemplateAnswer</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>wellarchitected:ListReviewTemplateAnswers</code>
-    #                </p>
-    #             </li>
-    #             <li>
-    #                <p>
-    #                   <code>wellarchitected:GetReviewTemplateLensReview</code>
-    #                </p>
-    #             </li>
-    #          </ul>
+    # <p>Create a new workload.</p> <p>The owner of a workload can share the workload with other Amazon Web Services accounts, users, an organization, and organizational units (OUs) in the same Amazon Web Services Region. Only the owner of a workload can delete it.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html">Defining a Workload</a> in the <i>Well-Architected Tool User Guide</i>.</p> <important> <p>Either <code>AwsRegions</code>, <code>NonAwsRegions</code>, or both must be specified when creating a workload.</p> <p>You also must specify <code>ReviewOwner</code>, even though the parameter is listed as not being required in the following section. </p> </important> <p>When creating a workload using a review template, you must have the following IAM permissions:</p> <ul> <li> <p> <code>wellarchitected:GetReviewTemplate</code> </p> </li> <li> <p> <code>wellarchitected:GetReviewTemplateAnswer</code> </p> </li> <li> <p> <code>wellarchitected:ListReviewTemplateAnswers</code> </p> </li> <li> <p> <code>wellarchitected:GetReviewTemplateLensReview</code> </p> </li> </ul>
     # @param [Hash, Types::CreateWorkloadInput] params
     # @option params [String] :workload_name
-    #   <p>The name of the workload.</p>
-    #            <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization
-    #               are ignored when checking for uniqueness.</p>
+    #   <p>The name of the workload.</p> <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
     # @option params [String] :description
     #   <p>The description for the workload.</p>
     # @option params [String] :environment
@@ -666,178 +695,25 @@ module Aws::WellArchitected
     # @option params [Array<String>] :account_ids
     #   <p>The list of Amazon Web Services account IDs associated with the workload.</p>
     # @option params [Array<String>] :aws_regions
-    #   <p>The list of Amazon Web Services Regions associated with the workload, for example,
-    #                   <code>us-east-2</code>, or <code>ca-central-1</code>.</p>
+    #   <p>The list of Amazon Web Services Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.</p>
     # @option params [Array<String>] :non_aws_regions
     #   <p> The list of non-Amazon Web Services Regions associated with the workload.</p>
     # @option params [Array<String>] :pillar_priorities
-    #   <p>The priorities of the pillars, which are used to order items in the improvement plan.
-    #               Each pillar is represented by its <a>PillarReviewSummary$PillarId</a>.</p>
+    #   <p>The priorities of the pillars, which are used to order items in the improvement plan. Each pillar is represented by its <a>PillarReviewSummary$PillarId</a>.</p>
     # @option params [String] :architectural_design
     #   <p>The URL of the architectural design for the workload.</p>
     # @option params [String] :review_owner
-    #   <p>The review owner of the workload. The name, email address, or identifier for the
-    #               primary group or individual that owns the workload review process.</p>
+    #   <p>The review owner of the workload. The name, email address, or identifier for the primary group or individual that owns the workload review process.</p>
     # @option params [String] :industry_type
-    #   <p>The industry type for the workload.</p>
-    #            <p>If specified, must be one of the following:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>Agriculture</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Automobile</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Defense</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Design and Engineering</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Digital Advertising</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Education</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Environmental Protection</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Financial Services</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Gaming</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>General Public Services</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Healthcare</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Hospitality</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>InfoTech</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Justice and Public Safety</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Life Sciences</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Manufacturing</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Media & Entertainment</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Mining & Resources</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Oil & Gas</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Power & Utilities</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Professional Services</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Real Estate & Construction</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Retail & Wholesale</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Social Protection</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Telecommunications</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Travel, Transportation & Logistics</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Other</code>
-    #                  </p>
-    #               </li>
-    #            </ul>
+    #   <p>The industry type for the workload.</p> <p>If specified, must be one of the following:</p> <ul> <li> <p> <code>Agriculture</code> </p> </li> <li> <p> <code>Automobile</code> </p> </li> <li> <p> <code>Defense</code> </p> </li> <li> <p> <code>Design and Engineering</code> </p> </li> <li> <p> <code>Digital Advertising</code> </p> </li> <li> <p> <code>Education</code> </p> </li> <li> <p> <code>Environmental Protection</code> </p> </li> <li> <p> <code>Financial Services</code> </p> </li> <li> <p> <code>Gaming</code> </p> </li> <li> <p> <code>General Public Services</code> </p> </li> <li> <p> <code>Healthcare</code> </p> </li> <li> <p> <code>Hospitality</code> </p> </li> <li> <p> <code>InfoTech</code> </p> </li> <li> <p> <code>Justice and Public Safety</code> </p> </li> <li> <p> <code>Life Sciences</code> </p> </li> <li> <p> <code>Manufacturing</code> </p> </li> <li> <p> <code>Media &amp; Entertainment</code> </p> </li> <li> <p> <code>Mining &amp; Resources</code> </p> </li> <li> <p> <code>Oil &amp; Gas</code> </p> </li> <li> <p> <code>Power &amp; Utilities</code> </p> </li> <li> <p> <code>Professional Services</code> </p> </li> <li> <p> <code>Real Estate &amp; Construction</code> </p> </li> <li> <p> <code>Retail &amp; Wholesale</code> </p> </li> <li> <p> <code>Social Protection</code> </p> </li> <li> <p> <code>Telecommunications</code> </p> </li> <li> <p> <code>Travel, Transportation &amp; Logistics</code> </p> </li> <li> <p> <code>Other</code> </p> </li> </ul>
     # @option params [String] :industry
     #   <p>The industry for the workload.</p>
     # @option params [Array<String>] :lenses
-    #   <p>The list of lenses associated with the workload. Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
-    #            <p>If a review template that specifies lenses is applied to the workload, those lenses are applied
-    #           to the workload in addition to these lenses.</p>
+    #   <p>The list of lenses associated with the workload. Each lens is identified by its <a>LensSummary$LensAlias</a>.</p> <p>If a review template that specifies lenses is applied to the workload, those lenses are applied to the workload in addition to these lenses.</p>
     # @option params [String] :notes
-    #   <p>The notes associated with the workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>The notes associated with the workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @option params [Hash<String, String>] :tags
     #   <p>The tags to be associated with the workload.</p>
     # @option params [Types::WorkloadDiscoveryConfig] :discovery_config
@@ -896,33 +772,16 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Create a workload share.</p>
-    #          <p>The owner of a workload can share it with other Amazon Web Services accounts and users in the same
-    #             Amazon Web Services Region. Shared access to a workload is not removed until the workload invitation is
-    #             deleted.</p>
-    #          <p>If you share a workload with an organization or OU, all accounts in the organization or OU
-    #             are granted access to the workload.</p>
-    #          <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html">Sharing a workload</a> in the
-    #                 <i>Well-Architected Tool User Guide</i>.</p>
+    # <p>Create a workload share.</p> <p>The owner of a workload can share it with other Amazon Web Services accounts and users in the same Amazon Web Services Region. Shared access to a workload is not removed until the workload invitation is deleted.</p> <p>If you share a workload with an organization or OU, all accounts in the organization or OU are granted access to the workload.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/workloads-sharing.html">Sharing a workload</a> in the <i>Well-Architected Tool User Guide</i>.</p>
     # @param [Hash, Types::CreateWorkloadShareInput] params
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :shared_with
-    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which 
-    #               the workload, lens, profile, or review template is shared.</p>
+    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the workload, lens, profile, or review template is shared.</p>
     # @option params [String] :permission_type
     #   <p>Permission granted on a share request.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -944,42 +803,75 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Delete an existing lens.</p>
-    #          <p>Only the owner of a lens can delete it.  After the lens is deleted,  Amazon Web Services accounts and users 
-    #               that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.
-    #         </p>
-    #          <note>
-    #             <p>
-    #                <b>Disclaimer</b>
-    #             </p>
-    #             <p>By sharing your custom lenses with other Amazon Web Services accounts, 
-    #                 you acknowledge that Amazon Web Services will make your custom lenses available to those 
-    #                 other accounts. Those other accounts may continue to access and use your 
-    #                 shared custom lenses even if you delete the custom lenses 
-    #                 from your own Amazon Web Services account or terminate 
-    #                 your Amazon Web Services account.</p>
-    #          </note>
+    # <p>Deletes a context associated with a profile.</p>
+    # @param [Hash, Types::DeleteAgentContextRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile containing the context.</p>
+    # @option params [String] :id
+    #   <p>The unique identifier of the context to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_agent_context(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteAgentContextResponse]
+    def delete_agent_context(params = {}, options = {})
+      request = build_request(:delete_agent_context, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an optimization goal from a profile.</p>
+    # @param [Hash, Types::DeleteAgentGoalRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile containing the goal.</p>
+    # @option params [String] :id
+    #   <p>The unique identifier of the goal to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_agent_goal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteAgentGoalResponse]
+    def delete_agent_goal(params = {}, options = {})
+      request = build_request(:delete_agent_goal, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an optimization profile and its associated configuration. This action cannot be undone.</p>
+    # @param [Hash, Types::DeleteAgentProfileRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_agent_profile(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteAgentProfileResponse]
+    def delete_agent_profile(params = {}, options = {})
+      request = build_request(:delete_agent_profile, params)
+      request.send_request(options)
+    end
+
+    # <p>Delete an existing lens.</p> <p>Only the owner of a lens can delete it. After the lens is deleted, Amazon Web Services accounts and users that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads. </p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>
     # @param [Hash, Types::DeleteLensInput] params
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @option params [String] :lens_status
     #   <p>The status of the lens to be deleted.</p>
     # @example Request syntax with placeholder values
@@ -999,44 +891,14 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Delete a lens share.</p>
-    #          <p>After the lens share is deleted,  Amazon Web Services accounts, users, organizations,
-    #             and organizational units (OUs) 
-    #             that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p>
-    #          <note>
-    #             <p>
-    #                <b>Disclaimer</b>
-    #             </p>
-    #             <p>By sharing your custom lenses with other Amazon Web Services accounts, 
-    #                 you acknowledge that Amazon Web Services will make your custom lenses available to those 
-    #                 other accounts. Those other accounts may continue to access and use your 
-    #                 shared custom lenses even if you delete the custom lenses 
-    #                 from your own Amazon Web Services account or terminate 
-    #                 your Amazon Web Services account.</p>
-    #          </note>
+    # <p>Delete a lens share.</p> <p>After the lens share is deleted, Amazon Web Services accounts, users, organizations, and organizational units (OUs) that you shared the lens with can continue to use it, but they will no longer be able to apply it to new workloads.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your custom lenses with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your custom lenses available to those other accounts. Those other accounts may continue to access and use your shared custom lenses even if you delete the custom lenses from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>
     # @param [Hash, Types::DeleteLensShareInput] params
     # @option params [String] :share_id
     #   <p>The ID associated with the share.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     share_id: "ShareId", # required
@@ -1054,32 +916,12 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Delete a profile.</p>
-    #          <note>
-    #             <p>
-    #                <b>Disclaimer</b>
-    #             </p>
-    #             <p>By sharing your profile with other Amazon Web Services accounts, 
-    #                you acknowledge that Amazon Web Services will make your profile available to those 
-    #                other accounts. Those other accounts may continue to access and use your 
-    #                shared profile even if you delete the profile 
-    #                from your own Amazon Web Services account or terminate 
-    #                your Amazon Web Services account.</p>
-    #          </note>
+    # <p>Delete a profile.</p> <note> <p> <b>Disclaimer</b> </p> <p>By sharing your profile with other Amazon Web Services accounts, you acknowledge that Amazon Web Services will make your profile available to those other accounts. Those other accounts may continue to access and use your shared profile even if you delete the profile from your own Amazon Web Services account or terminate your Amazon Web Services account.</p> </note>
     # @param [Hash, Types::DeleteProfileInput] params
     # @option params [String] :profile_arn
     #   <p>The profile ARN.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     profile_arn: "ProfileArn", # required
@@ -1103,16 +945,7 @@ module Aws::WellArchitected
     # @option params [String] :profile_arn
     #   <p>The profile ARN.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     share_id: "ShareId", # required
@@ -1130,25 +963,12 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Delete a review template.</p>
-    #          <p>Only the owner of a review template can delete it.</p>
-    #          <p>After the review template is deleted, Amazon Web Services accounts, users,
-    #             organizations, and organizational units (OUs) that you shared the review template with
-    #             will no longer be able to apply it to new workloads.</p>
+    # <p>Delete a review template.</p> <p>Only the owner of a review template can delete it.</p> <p>After the review template is deleted, Amazon Web Services accounts, users, organizations, and organizational units (OUs) that you shared the review template with will no longer be able to apply it to new workloads.</p>
     # @param [Hash, Types::DeleteReviewTemplateInput] params
     # @option params [String] :template_arn
     #   <p>The review template ARN.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     template_arn: "TemplateArn", # required
@@ -1165,26 +985,14 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Delete a review template share.</p>
-    #          <p>After the review template share is deleted, Amazon Web Services accounts, users,
-    #             organizations, and organizational units (OUs) that you shared the review template with
-    #             will no longer be able to apply it to new workloads.</p>
+    # <p>Delete a review template share.</p> <p>After the review template share is deleted, Amazon Web Services accounts, users, organizations, and organizational units (OUs) that you shared the review template with will no longer be able to apply it to new workloads.</p>
     # @param [Hash, Types::DeleteTemplateShareInput] params
     # @option params [String] :share_id
     #   <p>The ID associated with the share.</p>
     # @option params [String] :template_arn
     #   <p>The review template ARN.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     share_id: "ShareId", # required
@@ -1207,16 +1015,7 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -1240,16 +1039,7 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     share_id: "ShareId", # required
@@ -1267,18 +1057,12 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Disassociate a lens from a workload.</p>
-    #          <p>Up to 10 lenses can be disassociated from a workload in a single API operation.</p>
-    #          <note>
-    #             <p>The Amazon Web Services Well-Architected Framework lens (<code>wellarchitected</code>) cannot be
-    #                 removed from a workload.</p>
-    #          </note>
+    # <p>Disassociate a lens from a workload.</p> <p>Up to 10 lenses can be disassociated from a workload in a single API operation.</p> <note> <p>The Amazon Web Services Well-Architected Framework lens (<code>wellarchitected</code>) cannot be removed from a workload.</p> </note>
     # @param [Hash, Types::DisassociateLensesInput] params
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [Array<String>] :lens_aliases
-    #   <p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p>
-    #            <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>List of lens aliases to associate or disassociate with a workload. Up to 10 lenses can be specified.</p> <p>Identify a lens using its <a>LensSummary$LensAlias</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -1317,32 +1101,10 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Export an existing lens.</p>
-    #          <p>Only the owner of a lens can export it. Lenses provided by Amazon Web Services (Amazon Web Services Official Content) 
-    #             cannot be exported.</p>
-    #          <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> 
-    #             in the <i>Well-Architected Tool User Guide</i>.</p>
-    #          <note>
-    #             <p>
-    #                <b>Disclaimer</b>
-    #             </p>
-    #             <p>Do not include or gather personal identifiable information (PII) of end users or 
-    #                 other identifiable individuals in or via your custom lenses. If your custom 
-    #                 lens or those shared with you and used in your account do include or collect 
-    #                 PII you are responsible for: ensuring that the included PII is processed in accordance 
-    #                 with applicable law, providing adequate privacy notices, and obtaining necessary 
-    #                 consents for processing such data.</p>
-    #          </note>
+    # <p>Export an existing lens.</p> <p>Only the owner of a lens can export it. Lenses provided by Amazon Web Services (Amazon Web Services Official Content) cannot be exported.</p> <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>.</p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>
     # @param [Hash, Types::ExportLensInput] params
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :lens_version
     #   <p>The lens version to be exported.</p>
     # @example Request syntax with placeholder values
@@ -1363,24 +1125,319 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
+    # <p>Retrieves detailed information about a specific context associated with a profile.</p>
+    # @param [Hash, Types::GetAgentContextRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile containing the context.</p>
+    # @option params [String] :id
+    #   <p>The unique identifier of the context to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #   }
+    #   options = {}
+    #   response = client.get_agent_context(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     context: { # required
+    #       id: "UUID", # required
+    #       profile_arn: "AgentProfileArn", # required
+    #       title: "SensitiveString", # required
+    #       context_type: "APPLICATION" # One of: ["APPLICATION"], # required
+    #       content: { # required
+    #         account_ids: ["String"],
+    #         regions: ["String"],
+    #         aws_services: ["String"],
+    #         resource_types: ["String"],
+    #         resource_tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           }
+    #         ],
+    #         application_overview: "SensitiveString",
+    #         industry: "SensitiveString",
+    #         application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #         criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #         architecture_overview: "SensitiveString",
+    #         additional_context: "SensitiveString"
+    #       },
+    #       application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #       criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #       created_by: "String", # required
+    #       created_at: Time.now, # required
+    #       last_modified_by: "String",
+    #       last_modified_at: Time.now
+    #     }
+    #   }
+    # @return [Types::GetAgentContextResponse]
+    def get_agent_context(params = {}, options = {})
+      request = build_request(:get_agent_context, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves detailed information about a specific optimization goal.</p>
+    # @param [Hash, Types::GetAgentGoalRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile containing the goal.</p>
+    # @option params [String] :id
+    #   <p>The unique identifier of the goal to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #   }
+    #   options = {}
+    #   response = client.get_agent_goal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     goal: { # required
+    #       id: "UUID", # required
+    #       profile_arn: "AgentProfileArn", # required
+    #       pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #       title: "SensitiveString", # required
+    #       description: "SensitiveString",
+    #       created_by: "String", # required
+    #       created_at: Time.now, # required
+    #       last_modified_by: "String",
+    #       last_modified_at: Time.now
+    #     }
+    #   }
+    # @return [Types::GetAgentGoalResponse]
+    def get_agent_goal(params = {}, options = {})
+      request = build_request(:get_agent_goal, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves detailed information about an optimization profile, including its configuration and metadata.</p>
+    # @param [Hash, Types::GetAgentProfileRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the optimization profile to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_agent_profile(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     name: "String", # required
+    #     display_name: "SensitiveString",
+    #     description: "SensitiveString",
+    #     business_overview: "SensitiveString",
+    #     pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #     deletion_protection: false,
+    #     execution_role_arn: "RoleArn", # required
+    #     aggregation_configuration: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         regions: ["Region"], # required
+    #         access_role_arn: "RoleArn", # required
+    #       }
+    #     ],
+    #     arn: "AgentProfileArn", # required
+    #     eligible_for_scheduled_generation: false,
+    #     eligible_for_architecture_generation: false,
+    #     field_errors: {
+    #       "FieldErrorPath" => "FieldErrorMessage"
+    #     },
+    #     tags: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #     ],
+    #     created_by: "String", # required
+    #     created_at: Time.now, # required
+    #     last_modified_by: "String",
+    #     last_modified_at: Time.now
+    #   }
+    # @return [Types::GetAgentProfileResponse]
+    def get_agent_profile(params = {}, options = {})
+      request = build_request(:get_agent_profile, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves detailed information about a specific optimization recommendation, including its impact analysis, content, and implementation guidance.</p>
+    # @param [Hash, Types::GetAgentRecommendationRequest] params
+    # @option params [String] :recommendation_arn
+    #   <p>The Amazon Resource Name (ARN) of the recommendation to retrieve.</p>
+    # @option params [String] :remediation_type
+    #   <p>Optional filter on remediation type.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recommendation_arn: "AgentRecommendationArn", # required
+    #     remediation_type: "AUTO_REMEDIATION" # One of: ["AUTO_REMEDIATION", "CONSOLE", "CLI", "SDK", "IAC", "MCP"]
+    #   }
+    #   options = {}
+    #   response = client.get_agent_recommendation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recommendation_arn: "RecommendationArn", # required
+    #     profile_arn: "AgentProfileArn", # required
+    #     generation_id: "UUID",
+    #     title: "SensitiveString", # required
+    #     description: "SensitiveString", # required
+    #     type: "RESOURCE" # One of: ["RESOURCE", "ARCHITECTURE", "APPLICATION"], # required
+    #     pillar: "COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"], # required
+    #     priority: "HIGH" # One of: ["HIGH", "MEDIUM", "LOW"], # required
+    #     effort: "LARGE" # One of: ["LARGE", "MEDIUM", "SMALL"], # required
+    #     status: "ACTIVE" # One of: ["ACTIVE", "SUPPRESSED", "COMPLETED"], # required
+    #     state: "OPEN" # One of: ["OPEN", "CLOSED"], # required
+    #     update_reason: "SensitiveString",
+    #     impact: "HIGH" # One of: ["HIGH", "MEDIUM", "LOW"], # required
+    #     roi: { # required
+    #       estimate: "String",
+    #       detail: "String", # required
+    #     },
+    #     number_of_resources: 1,
+    #     aws_services: ["String"],
+    #     business_units: ["String"],
+    #     applications: ["String"],
+    #     impact_details: ["ImpactDetail"], # required
+    #     insights: [ # required
+    #       {
+    #         usage_pattern: "String", # required
+    #         signals_detected: "String"
+    #       }
+    #     ],
+    #     highlights: ["Highlight"], # required
+    #     remediation_summary: { # required
+    #       recommendation: "String", # required
+    #       steps: ["RecommendedFixStep"], # required
+    #     },
+    #     cross_pillar_benefits: [
+    #       {
+    #         pillar: "COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"], # required
+    #         title: "String", # required
+    #         description: "String", # required
+    #         impact: "HIGH" # One of: ["HIGH", "MEDIUM", "LOW"], # required
+    #       }
+    #     ],
+    #     trade_offs: [
+    #       {
+    #         pillar: "COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"], # required
+    #         title: "String", # required
+    #         description: "String", # required
+    #         risk: "LOW" # One of: ["LOW", "MEDIUM", "HIGH"], # required
+    #         mitigation: "String", # required
+    #         risk_explanation: "String"
+    #       }
+    #     ],
+    #     sources: ["TRUSTED_ADVISOR" # One of: ["TRUSTED_ADVISOR", "COST_EXPLORER", "CLOUDWATCH", "WELL_ARCHITECTED_TOOL", "WELL_ARCHITECTED_AGENT", "CUSTOMER_IAC"]],
+    #     goals: [
+    #       {
+    #         title: "String", # required
+    #       }
+    #     ],
+    #     tags: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #     ],
+    #     created_by: "String", # required
+    #     created_at: Time.now, # required
+    #     last_modified_by: "String",
+    #     last_modified_at: Time.now,
+    #     remediations: [
+    #       {
+    #         recommendation_arn: "RecommendationArn", # required
+    #         type: "AUTO_REMEDIATION" # One of: ["AUTO_REMEDIATION", "CONSOLE", "CLI", "SDK", "IAC", "MCP"], # required
+    #         steps: [ # required
+    #           {
+    #             title: "SensitiveString",
+    #             content: "SensitiveString", # required
+    #           }
+    #         ],
+    #         resource_links: [
+    #           {
+    #             url: "String", # required
+    #             title: "String"
+    #           }
+    #         ],
+    #         created_by: "String", # required
+    #         created_at: Time.now, # required
+    #         last_modified_by: "String",
+    #         last_modified_at: Time.now
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetAgentRecommendationResponse]
+    def get_agent_recommendation(params = {}, options = {})
+      request = build_request(:get_agent_recommendation, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about a recommendation generation process, including its status, progress, and results. Recommendation generation is asynchronous: poll this operation until status reaches a terminal value of COMPLETED (results are ready) or ERROR (see errorDetails). Intermediate values are QUEUED and IN_PROGRESS.</p>
+    # @param [Hash, Types::GetAgentRecommendationGenerationRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The ARN of the optimization profile associated with this generation.</p>
+    # @option params [String] :generation_id
+    #   <p>The unique identifier of the recommendation generation to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     generation_id: "UUID", # required
+    #   }
+    #   options = {}
+    #   response = client.get_agent_recommendation_generation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "UUID", # required
+    #     profile_arn: "AgentProfileArn", # required
+    #     name: "String",
+    #     status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "COMPLETED", "ERROR"], # required
+    #     estimated_completion_time: Time.now,
+    #     created_by: "String", # required
+    #     created_at: Time.now, # required
+    #     last_modified_by: "String",
+    #     last_modified_at: Time.now,
+    #     additional_context: ""null"",
+    #     scope: {
+    #       pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #       goal_ids: ["UUID"],
+    #       items: [
+    #         {
+    #           pillar: "COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"], # required
+    #           ids: ["ItemId"], # required
+    #         }
+    #       ]
+    #     },
+    #     started_at: Time.now,
+    #     ended_at: Time.now,
+    #     progress: {
+    #       steps_completed: 1, # required
+    #       total_steps: 1, # required
+    #       completion_percentage: 1.0, # required
+    #     },
+    #     error_details: {
+    #       code: "String", # required
+    #       message: "String", # required
+    #     }
+    #   }
+    # @return [Types::GetAgentRecommendationGenerationResponse]
+    def get_agent_recommendation_generation(params = {}, options = {})
+      request = build_request(:get_agent_recommendation_generation, params)
+      request.send_request(options)
+    end
+
     # <p>Get the answer to a specific question in a workload review.</p>
     # @param [Hash, Types::GetAnswerInput] params
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :question_id
     #   <p>The ID of the question.</p>
     # @option params [Integer] :milestone_number
-    #   <p>The milestone number.</p>
-    #            <p>A workload can have a maximum of 100 milestones.</p>
+    #   <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -1456,13 +1513,10 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Get a consolidated report of your workloads.</p>
-    #          <p>You can optionally choose to include workloads that have been shared with you.</p>
+    # <p>Get a consolidated report of your workloads.</p> <p>You can optionally choose to include workloads that have been shared with you.</p>
     # @param [Hash, Types::GetConsolidatedReportInput] params
     # @option params [String] :format
-    #   <p>The format of the consolidated report.</p>
-    #            <p>For <code>PDF</code>, <code>Base64String</code> is returned. For <code>JSON</code>, 
-    #               <code>Metrics</code> is returned.</p>
+    #   <p>The format of the consolidated report.</p> <p>For <code>PDF</code>, <code>Base64String</code> is returned. For <code>JSON</code>, <code>Metrics</code> is returned.</p>
     # @option params [Boolean] :include_shared_resources
     #   <p>Set to <code>true</code> to have shared resources included in the report.</p>
     # @option params [String] :next_token
@@ -1560,14 +1614,7 @@ module Aws::WellArchitected
     # <p>Get an existing lens.</p>
     # @param [Hash, Types::GetLensInput] params
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :lens_version
     #   <p>The lens version to be retrieved.</p>
     # @example Request syntax with placeholder values
@@ -1603,17 +1650,9 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [Integer] :milestone_number
-    #   <p>The milestone number.</p>
-    #            <p>A workload can have a maximum of 100 milestones.</p>
+    #   <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -1682,17 +1721,9 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [Integer] :milestone_number
-    #   <p>The milestone number.</p>
-    #            <p>A workload can have a maximum of 100 milestones.</p>
+    #   <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -1721,14 +1752,7 @@ module Aws::WellArchitected
     # <p>Get lens version differences.</p>
     # @param [Hash, Types::GetLensVersionDifferenceInput] params
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :base_lens_version
     #   <p>The base version of the lens.</p>
     # @option params [String] :target_lens_version
@@ -1777,8 +1801,7 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [Integer] :milestone_number
-    #   <p>The milestone number.</p>
-    #            <p>A workload can have a maximum of 100 milestones.</p>
+    #   <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -1983,14 +2006,7 @@ module Aws::WellArchitected
     # @option params [String] :template_arn
     #   <p>The review template ARN.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :question_id
     #   <p>The ID of the question.</p>
     # @example Request syntax with placeholder values
@@ -2066,14 +2082,7 @@ module Aws::WellArchitected
     # @option params [String] :template_arn
     #   <p>The review template ARN.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     template_arn: "TemplateArn", # required
@@ -2184,49 +2193,14 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Import a new custom lens or update an existing custom lens.</p>
-    #          <p>To update an existing custom lens, specify its ARN as the  <code>LensAlias</code>. If
-    #             no ARN is specified, a new custom lens is created.</p>
-    #          <p>The new or updated lens will have a status of <code>DRAFT</code>. The lens cannot be
-    #             applied to workloads or shared with other Amazon Web Services accounts until it's
-    #             published with <a>CreateLensVersion</a>.</p>
-    #          <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> 
-    #             in the <i>Well-Architected Tool User Guide</i>.</p>
-    #          <p>A custom lens cannot exceed 500 KB in size.</p>
-    #          <note>
-    #             <p>
-    #                <b>Disclaimer</b>
-    #             </p>
-    #             <p>Do not include or gather personal identifiable information (PII) of end users or 
-    #                 other identifiable individuals in or via your custom lenses. If your custom 
-    #                 lens or those shared with you and used in your account do include or collect 
-    #                 PII you are responsible for: ensuring that the included PII is processed in accordance 
-    #                 with applicable law, providing adequate privacy notices, and obtaining necessary 
-    #                 consents for processing such data.</p>
-    #          </note>
+    # <p>Import a new custom lens or update an existing custom lens.</p> <p>To update an existing custom lens, specify its ARN as the <code>LensAlias</code>. If no ARN is specified, a new custom lens is created.</p> <p>The new or updated lens will have a status of <code>DRAFT</code>. The lens cannot be applied to workloads or shared with other Amazon Web Services accounts until it's published with <a>CreateLensVersion</a>.</p> <p>Lenses are defined in JSON. For more information, see <a href="https://docs.aws.amazon.com/wellarchitected/latest/userguide/lenses-format-specification.html">JSON format specification</a> in the <i>Well-Architected Tool User Guide</i>.</p> <p>A custom lens cannot exceed 500 KB in size.</p> <note> <p> <b>Disclaimer</b> </p> <p>Do not include or gather personal identifiable information (PII) of end users or other identifiable individuals in or via your custom lenses. If your custom lens or those shared with you and used in your account do include or collect PII you are responsible for: ensuring that the included PII is processed in accordance with applicable law, providing adequate privacy notices, and obtaining necessary consents for processing such data.</p> </note>
     # @param [Hash, Types::ImportLensInput] params
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :json_string
     #   <p>The JSON representation of a lens.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @option params [Hash<String, String>] :tags
     #   <p>Tags to associate to a lens.</p>
     # @example Request syntax with placeholder values
@@ -2252,25 +2226,320 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
+    # <p>Lists contexts associated with a profile.</p>
+    # @param [Hash, Types::ListAgentContextsRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile to list contexts for.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return for this request.</p>
+    # @option params [String] :next_token
+    #   <p>The token to use to retrieve the next set of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_agent_contexts(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         id: "UUID", # required
+    #         profile_arn: "AgentProfileArn", # required
+    #         title: "SensitiveString", # required
+    #         context_type: "APPLICATION" # One of: ["APPLICATION"], # required
+    #         content: { # required
+    #           account_ids: ["String"],
+    #           regions: ["String"],
+    #           aws_services: ["String"],
+    #           resource_types: ["String"],
+    #           resource_tags: [
+    #             {
+    #               key: "String", # required
+    #               value: "String", # required
+    #             }
+    #           ],
+    #           application_overview: "SensitiveString",
+    #           industry: "SensitiveString",
+    #           application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #           criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #           architecture_overview: "SensitiveString",
+    #           additional_context: "SensitiveString"
+    #         },
+    #         application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #         criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #         created_by: "String", # required
+    #         created_at: Time.now, # required
+    #         last_modified_by: "String",
+    #         last_modified_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAgentContextsResponse]
+    def list_agent_contexts(params = {}, options = {})
+      request = build_request(:list_agent_contexts, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists optimization goals associated with a specified profile. Goals define specific targets and objectives for the optimization process.</p>
+    # @param [Hash, Types::ListAgentGoalsRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the optimization profile to list goals for.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of goals to return in a single response.</p>
+    # @option params [String] :next_token
+    #   <p>A pagination token returned from a previous call to continue retrieving results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_agent_goals(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         id: "UUID", # required
+    #         profile_arn: "AgentProfileArn", # required
+    #         pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #         title: "SensitiveString", # required
+    #         description: "SensitiveString",
+    #         created_by: "String", # required
+    #         created_at: Time.now, # required
+    #         last_modified_by: "String",
+    #         last_modified_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAgentGoalsResponse]
+    def list_agent_goals(params = {}, options = {})
+      request = build_request(:list_agent_goals, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists optimization profiles in your account. Profiles define the scope and configuration for generating optimization recommendations.</p>
+    # @param [Hash, Types::ListAgentProfilesRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of profiles to return in a single call. Default is 100.</p>
+    # @option params [String] :next_token
+    #   <p>A pagination token returned from a previous call to continue retrieving results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_agent_profiles(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         name: "String", # required
+    #         display_name: "SensitiveString",
+    #         description: "SensitiveString",
+    #         business_overview: "SensitiveString",
+    #         pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #         deletion_protection: false,
+    #         execution_role_arn: "RoleArn", # required
+    #         aggregation_configuration: [ # required
+    #           {
+    #             account_id: "AccountId", # required
+    #             regions: ["Region"], # required
+    #             access_role_arn: "RoleArn", # required
+    #           }
+    #         ],
+    #         arn: "AgentProfileArn", # required
+    #         eligible_for_scheduled_generation: false,
+    #         eligible_for_architecture_generation: false,
+    #         field_errors: {
+    #           "FieldErrorPath" => "FieldErrorMessage"
+    #         },
+    #         tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           }
+    #         ],
+    #         created_by: "String", # required
+    #         created_at: Time.now, # required
+    #         last_modified_by: "String",
+    #         last_modified_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAgentProfilesResponse]
+    def list_agent_profiles(params = {}, options = {})
+      request = build_request(:list_agent_profiles, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists recommendation generation processes for a specified profile.</p>
+    # @param [Hash, Types::ListAgentRecommendationGenerationsRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the optimization profile to list generation processes for.</p>
+    # @option params [String] :recommendation_type
+    #   <p>Optional filter by recommendation type.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of generation processes to return in a single response.</p>
+    # @option params [String] :next_token
+    #   <p>A pagination token returned from a previous call to continue retrieving results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     recommendation_type: "RESOURCE" # One of: ["RESOURCE", "ARCHITECTURE", "APPLICATION"],
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_agent_recommendation_generations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         id: "UUID", # required
+    #         profile_arn: "AgentProfileArn", # required
+    #         name: "String",
+    #         status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "COMPLETED", "ERROR"], # required
+    #         estimated_completion_time: Time.now,
+    #         created_by: "String", # required
+    #         created_at: Time.now, # required
+    #         last_modified_by: "String",
+    #         last_modified_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAgentRecommendationGenerationsResponse]
+    def list_agent_recommendation_generations(params = {}, options = {})
+      request = build_request(:list_agent_recommendation_generations, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists recommendation items for a specific recommendation. Recommendation items provide detailed information about individual optimization opportunities.</p>
+    # @param [Hash, Types::ListAgentRecommendationItemsRequest] params
+    # @option params [String] :recommendation_arn
+    #   <p>The Amazon Resource Name (ARN) of the recommendation to list items for.</p>
+    # @option params [String] :type
+    #   <p>Optional filter to return only recommendation items of the specified type.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of recommendation items to return in a single response.</p>
+    # @option params [String] :next_token
+    #   <p>A pagination token returned from a previous call to continue retrieving results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recommendation_arn: "AgentRecommendationArn", # required
+    #     type: "AWS_RESOURCE" # One of: ["AWS_RESOURCE", "RECOMMENDATION"],
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_agent_recommendation_items(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         id: "String", # required
+    #         recommendation_arn: "RecommendationArn", # required
+    #         type: "AWS_RESOURCE" # One of: ["AWS_RESOURCE", "RECOMMENDATION"], # required
+    #         metadata: ""null"", # required
+    #         created_by: "String", # required
+    #         created_at: Time.now, # required
+    #         last_modified_by: "String",
+    #         last_modified_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAgentRecommendationItemsResponse]
+    def list_agent_recommendation_items(params = {}, options = {})
+      request = build_request(:list_agent_recommendation_items, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists active optimization recommendations for a specified profile with optional filtering by state.</p>
+    # @param [Hash, Types::ListAgentRecommendationsRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the optimization profile to list recommendations for.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of recommendations to return in a single response.</p>
+    # @option params [String] :next_token
+    #   <p>A pagination token returned from a previous call to continue retrieving results.</p>
+    # @option params [String] :state
+    #   <p>Optional filter to return only recommendations with the specified state (OPEN or CLOSED).</p>
+    # @option params [String] :pillar
+    #   <p>Optional filter to return only recommendations for the specified pillar.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     state: "OPEN" # One of: ["OPEN", "CLOSED"],
+    #     pillar: "COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]
+    #   }
+    #   options = {}
+    #   response = client.list_agent_recommendations(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [ # required
+    #       {
+    #         recommendation_arn: "RecommendationArn", # required
+    #         profile_arn: "AgentProfileArn", # required
+    #         generation_id: "UUID",
+    #         title: "SensitiveString", # required
+    #         description: "SensitiveString", # required
+    #         type: "RESOURCE" # One of: ["RESOURCE", "ARCHITECTURE", "APPLICATION"], # required
+    #         pillar: "COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"], # required
+    #         priority: "HIGH" # One of: ["HIGH", "MEDIUM", "LOW"], # required
+    #         effort: "LARGE" # One of: ["LARGE", "MEDIUM", "SMALL"], # required
+    #         status: "ACTIVE" # One of: ["ACTIVE", "SUPPRESSED", "COMPLETED"], # required
+    #         state: "OPEN" # One of: ["OPEN", "CLOSED"], # required
+    #         update_reason: "SensitiveString",
+    #         impact: "HIGH" # One of: ["HIGH", "MEDIUM", "LOW"], # required
+    #         roi: { # required
+    #           estimate: "String",
+    #           detail: "String", # required
+    #         },
+    #         number_of_resources: 1,
+    #         aws_services: ["String"],
+    #         business_units: ["String"],
+    #         applications: ["String"],
+    #         created_by: "String", # required
+    #         created_at: Time.now, # required
+    #         last_modified_by: "String",
+    #         last_modified_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListAgentRecommendationsResponse]
+    def list_agent_recommendations(params = {}, options = {})
+      request = build_request(:list_agent_recommendations, params)
+      request.send_request(options)
+    end
+
     # <p>List of answers for a particular workload and lens.</p>
     # @param [Hash, Types::ListAnswersInput] params
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :pillar_id
-    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p>
-    #            <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
+    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p> <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
     # @option params [Integer] :milestone_number
-    #   <p>The milestone number.</p>
-    #            <p>A workload can have a maximum of 100 milestones.</p>
+    #   <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
@@ -2364,8 +2633,7 @@ module Aws::WellArchitected
     # @option params [String] :lens_arn
     #   <p>Well-Architected Lens ARN.</p>
     # @option params [String] :pillar_id
-    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p>
-    #            <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
+    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p> <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
     # @option params [String] :question_id
     #   <p>The ID of the question.</p>
     # @option params [String] :choice_id
@@ -2421,8 +2689,7 @@ module Aws::WellArchitected
     # @option params [String] :lens_arn
     #   <p>Well-Architected Lens ARN.</p>
     # @option params [String] :pillar_id
-    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p>
-    #            <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
+    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p> <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
     # @option params [String] :question_id
     #   <p>The ID of the question.</p>
     # @option params [String] :choice_id
@@ -2472,20 +2739,11 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :pillar_id
-    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p>
-    #            <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
+    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p> <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
     # @option params [Integer] :milestone_number
-    #   <p>The milestone number.</p>
-    #            <p>A workload can have a maximum of 100 milestones.</p>
+    #   <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
@@ -2544,8 +2802,7 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [Integer] :milestone_number
-    #   <p>The milestone number.</p>
-    #            <p>A workload can have a maximum of 100 milestones.</p>
+    #   <p>The milestone number.</p> <p>A workload can have a maximum of 100 milestones.</p>
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
@@ -2597,14 +2854,7 @@ module Aws::WellArchitected
     # <p>List the lens shares associated with the lens.</p>
     # @param [Hash, Types::ListLensSharesInput] params
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :shared_with_prefix
     #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the lens is shared.</p>
     # @option params [String] :next_token
@@ -2754,10 +3004,7 @@ module Aws::WellArchitected
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return for this request.</p>
     # @option params [String] :resource_arn
-    #   <p>The ARN for the related resource for the notification.</p>
-    #            <note>
-    #               <p>Only one of <code>WorkloadID</code> or <code>ResourceARN</code> should be specified.</p>
-    #            </note>
+    #   <p>The ARN for the related resource for the notification.</p> <note> <p>Only one of <code>WorkloadID</code> or <code>ResourceARN</code> should be specified.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId",
@@ -2875,8 +3122,7 @@ module Aws::WellArchitected
     # <p>List profiles.</p>
     # @param [Hash, Types::ListProfilesInput] params
     # @option params [String] :profile_name_prefix
-    #   <p>An optional string added to the beginning of each profile name returned in the
-    #               results.</p>
+    #   <p>An optional string added to the beginning of each profile name returned in the results.</p>
     # @option params [String] :profile_owner_type
     #   <p>Profile owner type.</p>
     # @option params [String] :next_token
@@ -2919,17 +3165,9 @@ module Aws::WellArchitected
     # @option params [String] :template_arn
     #   <p>The ARN of the review template.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :pillar_id
-    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p>
-    #            <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
+    #   <p>The ID used to identify a pillar, for example, <code>security</code>.</p> <p>A pillar is identified by its <a>PillarReviewSummary$PillarId</a>.</p>
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
@@ -3037,15 +3275,10 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>List the share invitations.</p>
-    #          <p>
-    #             <code>WorkloadNamePrefix</code>, <code>LensNamePrefix</code>,
-    #                 <code>ProfileNamePrefix</code>, and <code>TemplateNamePrefix</code> are mutually
-    #             exclusive. Use the parameter that matches your <code>ShareResourceType</code>.</p>
+    # <p>List the share invitations.</p> <p> <code>WorkloadNamePrefix</code>, <code>LensNamePrefix</code>, <code>ProfileNamePrefix</code>, and <code>TemplateNamePrefix</code> are mutually exclusive. Use the parameter that matches your <code>ShareResourceType</code>.</p>
     # @param [Hash, Types::ListShareInvitationsInput] params
     # @option params [String] :workload_name_prefix
-    #   <p>An optional string added to the beginning of each workload name returned in the
-    #               results.</p>
+    #   <p>An optional string added to the beginning of each workload name returned in the results.</p>
     # @option params [String] :lens_name_prefix
     #   <p>An optional string added to the beginning of each lens name returned in the results.</p>
     # @option params [String] :share_resource_type
@@ -3055,11 +3288,9 @@ module Aws::WellArchitected
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return for this request.</p>
     # @option params [String] :profile_name_prefix
-    #   <p>An optional string added to the beginning of each profile name returned in the
-    #               results.</p>
+    #   <p>An optional string added to the beginning of each profile name returned in the results.</p>
     # @option params [String] :template_name_prefix
-    #   <p>An optional string added to the beginning of each review template name returned in the
-    #               results.</p>
+    #   <p>An optional string added to the beginning of each review template name returned in the results.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_name_prefix: "WorkloadNamePrefix",
@@ -3100,10 +3331,7 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>List the tags for a resource.</p>
-    #          <note>
-    #             <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN.</p>
-    #          </note>
+    # <p>List the tags for a resource.</p> <note> <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN.</p> </note>
     # @param [Hash, Types::ListTagsForResourceInput] params
     # @option params [String] :workload_arn
     #   <p>The ARN for the workload.</p>
@@ -3131,8 +3359,7 @@ module Aws::WellArchitected
     # @option params [String] :template_arn
     #   <p>The review template ARN.</p>
     # @option params [String] :shared_with_prefix
-    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit
-    #               (OU) ID with which the profile is shared.</p>
+    #   <p>The Amazon Web Services account ID, organization ID, or organizational unit (OU) ID with which the profile is shared.</p>
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
@@ -3215,8 +3442,7 @@ module Aws::WellArchitected
     # <p>Paginated list of workloads.</p>
     # @param [Hash, Types::ListWorkloadsInput] params
     # @option params [String] :workload_name_prefix
-    #   <p>An optional string added to the beginning of each workload name returned in the
-    #               results.</p>
+    #   <p>An optional string added to the beginning of each workload name returned in the results.</p>
     # @option params [String] :next_token
     #   <p>The token to use to retrieve the next set of results.</p>
     # @option params [Integer] :max_results
@@ -3263,10 +3489,85 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Adds one or more tags to the specified resource.</p>
-    #          <note>
-    #             <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN.</p>
-    #          </note>
+    # <p>Submits user feedback on a recommendation to help improve future optimization suggestions and track implementation outcomes.</p>
+    # @param [Hash, Types::PutAgentRecommendationFeedbackRequest] params
+    # @option params [String] :recommendation_arn
+    #   <p>The Amazon Resource Name (ARN) of the recommendation to provide feedback for.</p>
+    # @option params [String] :type
+    #   <p>The type of feedback being provided.</p>
+    # @option params [String] :feedback_category
+    #   <p>Optional category classifying the nature of the feedback.</p>
+    # @option params [String] :comments
+    #   <p>Optional comments providing additional context about the feedback.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recommendation_arn: "AgentRecommendationArn", # required
+    #     type: "USEFUL" # One of: ["USEFUL", "NOT_USEFUL"], # required
+    #     feedback_category: "OTHER" # One of: ["OTHER", "RECOMMENDATION_NOT_RELEVANT", "RESOURCE_NOT_IMPORTANT", "RESOURCE_TYPE_NOT_IMPORTANT", "RECOMMENDATION_INCORRECT"],
+    #     comments: "String"
+    #   }
+    #   options = {}
+    #   response = client.put_agent_recommendation_feedback(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::PutAgentRecommendationFeedbackResponse]
+    def put_agent_recommendation_feedback(params = {}, options = {})
+      request = build_request(:put_agent_recommendation_feedback, params)
+      request.send_request(options)
+    end
+
+    # <p>Initiates a new recommendation generation process for the specified optimization profile. This asynchronous operation analyzes your Amazon Web Services resources and generates optimization recommendations based on the configured pillars and scope. Use GetAgentRecommendationGeneration to check status.</p>
+    # @param [Hash, Types::StartAgentRecommendationGenerationRequest] params
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the optimization profile to use for generating recommendations.</p>
+    # @option params [Array<String>] :types
+    #   <p>The types of recommendations to generate.</p>
+    # @option params [String] :name
+    #   <p>An optional name for this generation process to help identify it in lists and logs.</p>
+    # @option params [JSON] :additional_context
+    #   <p>Optional additional context to guide the recommendation generation, such as specific business requirements or constraints.</p>
+    # @option params [Types::Scope] :scope
+    #   <p>Scope configuration to focus the generation on specific pillars or goals.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     profile_arn: "AgentProfileArn", # required
+    #     types: ["RESOURCE" # One of: ["RESOURCE", "ARCHITECTURE", "APPLICATION"]], # required
+    #     name: "String",
+    #     additional_context: ""null"",
+    #     scope: { # required
+    #       pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #       goal_ids: ["UUID"],
+    #       items: [
+    #         {
+    #           pillar: "COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"], # required
+    #           ids: ["ItemId"], # required
+    #         }
+    #       ]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.start_agent_recommendation_generation(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "UUID", # required
+    #     profile_arn: "AgentProfileArn", # required
+    #     name: "String",
+    #     status: "QUEUED" # One of: ["QUEUED", "IN_PROGRESS", "COMPLETED", "ERROR"], # required
+    #     estimated_completion_time: Time.now,
+    #     created_by: "String", # required
+    #     created_at: Time.now, # required
+    #     last_modified_by: "String",
+    #     last_modified_at: Time.now
+    #   }
+    # @return [Types::StartAgentRecommendationGenerationResponse]
+    def start_agent_recommendation_generation(params = {}, options = {})
+      request = build_request(:start_agent_recommendation_generation, params)
+      request.send_request(options)
+    end
+
+    # <p>Adds one or more tags to the specified resource.</p> <note> <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN.</p> </note>
     # @param [Hash, Types::TagResourceInput] params
     # @option params [String] :workload_arn
     #   <p>The ARN for the workload.</p>
@@ -3290,20 +3591,12 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Deletes specified tags from a resource.</p>
-    #          <note>
-    #             <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN.</p>
-    #          </note>
-    #          <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p>
-    #          <p>
-    #             <code>DELETE /tags/WorkloadArn?tagKeys=key1&tagKeys=key2</code>
-    #          </p>
+    # <p>Deletes specified tags from a resource.</p> <note> <p>The WorkloadArn parameter can be a workload ARN, a custom lens ARN, a profile ARN, or review template ARN.</p> </note> <p>To specify multiple tags, use separate <b>tagKeys</b> parameters, for example:</p> <p> <code>DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2</code> </p>
     # @param [Hash, Types::UntagResourceInput] params
     # @option params [String] :workload_arn
     #   <p>The ARN for the workload.</p>
     # @option params [Array<String>] :tag_keys
-    #   <p>A list of tag keys. Existing tags of the resource 
-    #               whose keys are members of this list are removed from the resource.</p>
+    #   <p>A list of tag keys. Existing tags of the resource whose keys are members of this list are removed from the resource.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_arn: "WorkloadArn", # required
@@ -3320,30 +3613,250 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
+    # <p>Updates an existing context associated with a profile.</p>
+    # @param [Hash, Types::UpdateAgentContextRequest] params
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile containing the context.</p>
+    # @option params [String] :id
+    #   <p>The unique identifier of the context to update.</p>
+    # @option params [String] :title
+    #   <p>The updated title of the context.</p>
+    # @option params [Types::ContextContent] :content
+    #   <p>The updated typed content of the context. The structure contains application-specific fields such as account IDs, Regions, services, and resource types.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "String",
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #     title: "SensitiveString",
+    #     content: {
+    #       account_ids: ["String"],
+    #       regions: ["String"],
+    #       aws_services: ["String"],
+    #       resource_types: ["String"],
+    #       resource_tags: [
+    #         {
+    #           key: "String", # required
+    #           value: "String", # required
+    #         }
+    #       ],
+    #       application_overview: "SensitiveString",
+    #       industry: "SensitiveString",
+    #       application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #       criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #       architecture_overview: "SensitiveString",
+    #       additional_context: "SensitiveString"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_agent_context(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     context: { # required
+    #       id: "UUID", # required
+    #       profile_arn: "AgentProfileArn", # required
+    #       title: "SensitiveString", # required
+    #       context_type: "APPLICATION" # One of: ["APPLICATION"], # required
+    #       content: { # required
+    #         account_ids: ["String"],
+    #         regions: ["String"],
+    #         aws_services: ["String"],
+    #         resource_types: ["String"],
+    #         resource_tags: [
+    #           {
+    #             key: "String", # required
+    #             value: "String", # required
+    #           }
+    #         ],
+    #         application_overview: "SensitiveString",
+    #         industry: "SensitiveString",
+    #         application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #         criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #         architecture_overview: "SensitiveString",
+    #         additional_context: "SensitiveString"
+    #       },
+    #       application_type: "SAS" # One of: ["SAS", "DESKTOP_APPLICATION", "OTHER"],
+    #       criticality: "MISSION_CRITICAL" # One of: ["MISSION_CRITICAL", "BUSINESS_CRITICAL", "NON_CRITICAL", "TEST_DEVELOPMENT"],
+    #       created_by: "String", # required
+    #       created_at: Time.now, # required
+    #       last_modified_by: "String",
+    #       last_modified_at: Time.now
+    #     }
+    #   }
+    # @return [Types::UpdateAgentContextResponse]
+    def update_agent_context(params = {}, options = {})
+      request = build_request(:update_agent_context, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the pillars and title of an existing goal associated with a profile.</p>
+    # @param [Hash, Types::UpdateAgentGoalRequest] params
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile containing the goal to update.</p>
+    # @option params [String] :id
+    #   <p>The unique identifier of the goal to update.</p>
+    # @option params [Array<String>] :pillars
+    #   <p>The updated pillars for the goal. Pillars define the optimization focus areas such as cost, performance, resilience, and operational excellence.</p>
+    # @option params [String] :title
+    #   <p>The updated title for the goal. Maximum length of 1000 characters.</p>
+    # @option params [String] :description
+    #   <p>A description of the goal.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "String",
+    #     profile_arn: "AgentProfileArn", # required
+    #     id: "UUID", # required
+    #     pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]],
+    #     title: "SensitiveString",
+    #     description: "SensitiveString"
+    #   }
+    #   options = {}
+    #   response = client.update_agent_goal(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     goal: { # required
+    #       id: "UUID", # required
+    #       profile_arn: "AgentProfileArn", # required
+    #       pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #       title: "SensitiveString", # required
+    #       description: "SensitiveString",
+    #       created_by: "String", # required
+    #       created_at: Time.now, # required
+    #       last_modified_by: "String",
+    #       last_modified_at: Time.now
+    #     }
+    #   }
+    # @return [Types::UpdateAgentGoalResponse]
+    def update_agent_goal(params = {}, options = {})
+      request = build_request(:update_agent_goal, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an existing optimization profile's configuration, including its pillars, execution role, and aggregation settings.</p>
+    # @param [Hash, Types::UpdateAgentProfileRequest] params
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    # @option params [String] :profile_arn
+    #   <p>The Amazon Resource Name (ARN) of the profile to update.</p>
+    # @option params [String] :display_name
+    #   <p>The updated display name of the profile.</p>
+    # @option params [String] :description
+    #   <p>The updated description of the profile.</p>
+    # @option params [String] :execution_role_arn
+    #   <p>The updated ARN of the IAM execution role.</p>
+    # @option params [Array<Types::AggregationConfiguration>] :aggregation_configuration
+    #   <p>The updated aggregation configuration.</p>
+    # @option params [String] :business_overview
+    #   <p>The updated business overview for the profile.</p>
+    # @option params [Array<String>] :pillars
+    #   <p>The updated Well-Architected Tool Framework pillars for the profile.</p>
+    # @option params [Boolean] :deletion_protection
+    #   <p>Indicates whether deletion protection is enabled for the profile.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "String",
+    #     profile_arn: "AgentProfileArn", # required
+    #     display_name: "SensitiveString",
+    #     description: "SensitiveString",
+    #     execution_role_arn: "RoleArn",
+    #     aggregation_configuration: [
+    #       {
+    #         account_id: "AccountId", # required
+    #         regions: ["Region"], # required
+    #         access_role_arn: "RoleArn", # required
+    #       }
+    #     ],
+    #     business_overview: "SensitiveString",
+    #     pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]],
+    #     deletion_protection: false
+    #   }
+    #   options = {}
+    #   response = client.update_agent_profile(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     name: "String", # required
+    #     display_name: "SensitiveString",
+    #     description: "SensitiveString",
+    #     business_overview: "SensitiveString",
+    #     pillars: ["COST_OPTIMIZATION" # One of: ["COST_OPTIMIZATION", "SECURITY", "RESILIENCE", "PERFORMANCE", "OPERATIONAL_EXCELLENCE"]], # required
+    #     deletion_protection: false,
+    #     execution_role_arn: "RoleArn", # required
+    #     aggregation_configuration: [ # required
+    #       {
+    #         account_id: "AccountId", # required
+    #         regions: ["Region"], # required
+    #         access_role_arn: "RoleArn", # required
+    #       }
+    #     ],
+    #     arn: "AgentProfileArn", # required
+    #     eligible_for_scheduled_generation: false,
+    #     eligible_for_architecture_generation: false,
+    #     field_errors: {
+    #       "FieldErrorPath" => "FieldErrorMessage"
+    #     },
+    #     tags: [
+    #       {
+    #         key: "String", # required
+    #         value: "String", # required
+    #       }
+    #     ],
+    #     created_by: "String", # required
+    #     created_at: Time.now, # required
+    #     last_modified_by: "String",
+    #     last_modified_at: Time.now
+    #   }
+    # @return [Types::UpdateAgentProfileResponse]
+    def update_agent_profile(params = {}, options = {})
+      request = build_request(:update_agent_profile, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates the status of a recommendation to track its progress through the implementation lifecycle.</p>
+    # @param [Hash, Types::UpdateAgentRecommendationStatusRequest] params
+    # @option params [String] :recommendation_arn
+    #   <p>The Amazon Resource Name (ARN) of the recommendation to update.</p>
+    # @option params [String] :status
+    #   <p>The new status to assign to the recommendation.</p>
+    # @option params [String] :update_reason
+    #   <p>A free-text reason explaining this status update.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recommendation_arn: "AgentRecommendationArn", # required
+    #     status: "ACTIVE" # One of: ["ACTIVE", "SUPPRESSED", "COMPLETED"], # required
+    #     update_reason: "SensitiveString"
+    #   }
+    #   options = {}
+    #   response = client.update_agent_recommendation_status(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateAgentRecommendationStatusResponse]
+    def update_agent_recommendation_status(params = {}, options = {})
+      request = build_request(:update_agent_recommendation_status, params)
+      request.send_request(options)
+    end
+
     # <p>Update the answer to a specific question in a workload review.</p>
     # @param [Hash, Types::UpdateAnswerInput] params
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :question_id
     #   <p>The ID of the question.</p>
     # @option params [Array<String>] :selected_choices
-    #   <p>List of selected choice IDs in a question answer.</p>
-    #            <p>The values entered replace the previously selected choices.</p>
+    #   <p>List of selected choice IDs in a question answer.</p> <p>The values entered replace the previously selected choices.</p>
     # @option params [Hash<String, Types::ChoiceUpdate>] :choice_updates
-    #   <p>A list of choices to update on a question in your workload.  The String key 
-    #               corresponds to the choice ID to be updated.</p>
+    #   <p>A list of choices to update on a question in your workload. The String key corresponds to the choice ID to be updated.</p>
     # @option params [String] :notes
-    #   <p>The notes associated with the workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>The notes associated with the workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @option params [Boolean] :is_applicable
     #   <p>Defines whether this question is applicable to a lens review.</p>
     # @option params [String] :reason
@@ -3467,16 +3980,7 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @option params [String] :integrating_service
     #   <p>Which integrated service to update.</p>
     # @example Request syntax with placeholder values
@@ -3501,20 +4005,11 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :lens_notes
-    #   <p>The notes associated with the workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>The notes associated with the workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @option params [Hash<String, String>] :pillar_notes
-    #   <p>List of pillar notes of a lens review in a workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>List of pillar notes of a lens review in a workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @option params [Types::JiraSelectedQuestionConfiguration] :jira_configuration
     #   <p>Configuration of the Jira integration.</p>
     # @example Request syntax with placeholder values
@@ -3660,8 +4155,7 @@ module Aws::WellArchitected
     # @option params [String] :description
     #   <p>The review template description.</p>
     # @option params [String] :notes
-    #   <p>The notes associated with the workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>The notes associated with the workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @option params [Array<String>] :lenses_to_associate
     #   <p>A list of lens aliases or ARNs to apply to the review template.</p>
     # @option params [Array<String>] :lenses_to_disassociate
@@ -3709,24 +4203,15 @@ module Aws::WellArchitected
     # @option params [String] :template_arn
     #   <p>The review template ARN.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :question_id
     #   <p>The ID of the question.</p>
     # @option params [Array<String>] :selected_choices
-    #   <p>List of selected choice IDs in a question answer.</p>
-    #            <p>The values entered replace the previously selected choices.</p>
+    #   <p>List of selected choice IDs in a question answer.</p> <p>The values entered replace the previously selected choices.</p>
     # @option params [Hash<String, Types::ChoiceUpdate>] :choice_updates
     #   <p>A list of choices to be updated.</p>
     # @option params [String] :notes
-    #   <p>The notes associated with the workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>The notes associated with the workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @option params [Boolean] :is_applicable
     #   <p>Defines whether this question is applicable to a lens review.</p>
     # @option params [String] :reason
@@ -3815,20 +4300,11 @@ module Aws::WellArchitected
     # @option params [String] :template_arn
     #   <p>The review template ARN.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :lens_notes
-    #   <p>The notes associated with the workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>The notes associated with the workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @option params [Hash<String, String>] :pillar_notes
-    #   <p>List of pillar notes of a lens review in a workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>List of pillar notes of a lens review in a workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     template_arn: "TemplateArn", # required
@@ -3874,10 +4350,7 @@ module Aws::WellArchitected
       request.send_request(options)
     end
 
-    # <p>Update a workload or custom lens share invitation.</p>
-    #          <note>
-    #             <p>This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified.</p>
-    #          </note>
+    # <p>Update a workload or custom lens share invitation.</p> <note> <p>This API operation can be called independently of any resource. Previous documentation implied that a workload ARN must be specified.</p> </note>
     # @param [Hash, Types::UpdateShareInvitationInput] params
     # @option params [String] :share_invitation_id
     #   <p>The ID assigned to the share invitation.</p>
@@ -3914,9 +4387,7 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :workload_name
-    #   <p>The name of the workload.</p>
-    #            <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization
-    #               are ignored when checking for uniqueness.</p>
+    #   <p>The name of the workload.</p> <p>The name must be unique within an account within an Amazon Web Services Region. Spaces and capitalization are ignored when checking for uniqueness.</p>
     # @option params [String] :description
     #   <p>The description for the workload.</p>
     # @option params [String] :environment
@@ -3924,169 +4395,23 @@ module Aws::WellArchitected
     # @option params [Array<String>] :account_ids
     #   <p>The list of Amazon Web Services account IDs associated with the workload.</p>
     # @option params [Array<String>] :aws_regions
-    #   <p>The list of Amazon Web Services Regions associated with the workload, for example,
-    #                   <code>us-east-2</code>, or <code>ca-central-1</code>.</p>
+    #   <p>The list of Amazon Web Services Regions associated with the workload, for example, <code>us-east-2</code>, or <code>ca-central-1</code>.</p>
     # @option params [Array<String>] :non_aws_regions
     #   <p> The list of non-Amazon Web Services Regions associated with the workload.</p>
     # @option params [Array<String>] :pillar_priorities
-    #   <p>The priorities of the pillars, which are used to order items in the improvement plan.
-    #               Each pillar is represented by its <a>PillarReviewSummary$PillarId</a>.</p>
+    #   <p>The priorities of the pillars, which are used to order items in the improvement plan. Each pillar is represented by its <a>PillarReviewSummary$PillarId</a>.</p>
     # @option params [String] :architectural_design
     #   <p>The URL of the architectural design for the workload.</p>
     # @option params [String] :review_owner
-    #   <p>The review owner of the workload. The name, email address, or identifier for the
-    #               primary group or individual that owns the workload review process.</p>
+    #   <p>The review owner of the workload. The name, email address, or identifier for the primary group or individual that owns the workload review process.</p>
     # @option params [Boolean] :is_review_owner_update_acknowledged
-    #   <p>Flag indicating whether the workload owner has acknowledged that the <i>Review
-    #                   owner</i> field is required.</p>
-    #            <p>If a <b>Review owner</b> is not added to the workload within
-    #               60 days of acknowledgement, access to the workload is restricted until an owner is
-    #               added.</p>
+    #   <p>Flag indicating whether the workload owner has acknowledged that the <i>Review owner</i> field is required.</p> <p>If a <b>Review owner</b> is not added to the workload within 60 days of acknowledgement, access to the workload is restricted until an owner is added.</p>
     # @option params [String] :industry_type
-    #   <p>The industry type for the workload.</p>
-    #            <p>If specified, must be one of the following:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>Agriculture</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Automobile</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Defense</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Design and Engineering</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Digital Advertising</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Education</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Environmental Protection</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Financial Services</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Gaming</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>General Public Services</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Healthcare</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Hospitality</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>InfoTech</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Justice and Public Safety</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Life Sciences</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Manufacturing</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Media & Entertainment</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Mining & Resources</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Oil & Gas</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Power & Utilities</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Professional Services</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Real Estate & Construction</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Retail & Wholesale</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Social Protection</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Telecommunications</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Travel, Transportation & Logistics</code>
-    #                  </p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>Other</code>
-    #                  </p>
-    #               </li>
-    #            </ul>
+    #   <p>The industry type for the workload.</p> <p>If specified, must be one of the following:</p> <ul> <li> <p> <code>Agriculture</code> </p> </li> <li> <p> <code>Automobile</code> </p> </li> <li> <p> <code>Defense</code> </p> </li> <li> <p> <code>Design and Engineering</code> </p> </li> <li> <p> <code>Digital Advertising</code> </p> </li> <li> <p> <code>Education</code> </p> </li> <li> <p> <code>Environmental Protection</code> </p> </li> <li> <p> <code>Financial Services</code> </p> </li> <li> <p> <code>Gaming</code> </p> </li> <li> <p> <code>General Public Services</code> </p> </li> <li> <p> <code>Healthcare</code> </p> </li> <li> <p> <code>Hospitality</code> </p> </li> <li> <p> <code>InfoTech</code> </p> </li> <li> <p> <code>Justice and Public Safety</code> </p> </li> <li> <p> <code>Life Sciences</code> </p> </li> <li> <p> <code>Manufacturing</code> </p> </li> <li> <p> <code>Media &amp; Entertainment</code> </p> </li> <li> <p> <code>Mining &amp; Resources</code> </p> </li> <li> <p> <code>Oil &amp; Gas</code> </p> </li> <li> <p> <code>Power &amp; Utilities</code> </p> </li> <li> <p> <code>Professional Services</code> </p> </li> <li> <p> <code>Real Estate &amp; Construction</code> </p> </li> <li> <p> <code>Retail &amp; Wholesale</code> </p> </li> <li> <p> <code>Social Protection</code> </p> </li> <li> <p> <code>Telecommunications</code> </p> </li> <li> <p> <code>Travel, Transportation &amp; Logistics</code> </p> </li> <li> <p> <code>Other</code> </p> </li> </ul>
     # @option params [String] :industry
     #   <p>The industry for the workload.</p>
     # @option params [String] :notes
-    #   <p>The notes associated with the workload.</p>
-    #            <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
+    #   <p>The notes associated with the workload.</p> <p>For a review template, these are the notes that will be associated with the workload when the template is applied.</p>
     # @option params [String] :improvement_status
     #   <p>The improvement status for a workload.</p>
     # @option params [Types::WorkloadDiscoveryConfig] :discovery_config
@@ -4225,28 +4550,11 @@ module Aws::WellArchitected
     # @option params [String] :workload_id
     #   <p>The ID assigned to the workload. This ID is unique within an Amazon Web Services Region.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :milestone_name
-    #   <p>The name of the milestone in a workload.</p>
-    #            <p>Milestone names must be unique within a workload.</p>
+    #   <p>The name of the milestone in a workload.</p> <p>Milestone names must be unique within a workload.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -4272,19 +4580,9 @@ module Aws::WellArchitected
     # @option params [String] :profile_arn
     #   <p>The profile ARN.</p>
     # @option params [String] :milestone_name
-    #   <p>The name of the milestone in a workload.</p>
-    #            <p>Milestone names must be unique within a workload.</p>
+    #   <p>The name of the milestone in a workload.</p> <p>Milestone names must be unique within a workload.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     workload_id: "WorkloadId", # required
@@ -4308,25 +4606,9 @@ module Aws::WellArchitected
     # @option params [String] :template_arn
     #   <p>The ARN of the review template.</p>
     # @option params [String] :lens_alias
-    #   <p>The alias of the lens.</p>
-    #            <p>For Amazon Web Services official lenses, this is either the lens alias, such as
-    #                   <code>serverless</code>, or the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some
-    #               operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p>
-    #            <p>For custom lenses, this is the lens ARN, such as
-    #                   <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p>
-    #            <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
+    #   <p>The alias of the lens.</p> <p>For Amazon Web Services official lenses, this is either the lens alias, such as <code>serverless</code>, or the lens ARN, such as <code>arn:aws:wellarchitected:us-east-1::lens/serverless</code>. Note that some operations (such as ExportLens and CreateLensShare) are not permitted on Amazon Web Services official lenses.</p> <p>For custom lenses, this is the lens ARN, such as <code>arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef</code>. </p> <p>Each lens is identified by its <a>LensSummary$LensAlias</a>.</p>
     # @option params [String] :client_request_token
-    #   <p>A unique case-sensitive string used to ensure that this request is idempotent
-    #               (executes only once).</p>
-    #            <p>You should not reuse the same token for other requests. If you retry a request with
-    #               the same client request token and the same parameters after the original request has completed
-    #               successfully, the result of the original request is returned.</p>
-    #            <important>
-    #               <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs
-    #                   automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI,
-    #                   you must provide this token or the request will fail.</p>
-    #            </important>
+    #   <p>A unique case-sensitive string used to ensure that this request is idempotent (executes only once).</p> <p>You should not reuse the same token for other requests. If you retry a request with the same client request token and the same parameters after the original request has completed successfully, the result of the original request is returned.</p> <important> <p>This token is listed as required, however, if you do not specify it, the Amazon Web Services SDKs automatically generate one for you. If you are not using the Amazon Web Services SDK or the CLI, you must provide this token or the request will fail.</p> </important>
     # @example Request syntax with placeholder values
     #   params = {
     #     template_arn: "TemplateArn", # required

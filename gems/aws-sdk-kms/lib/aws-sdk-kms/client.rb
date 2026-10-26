@@ -144,18 +144,18 @@ module Aws::KMS
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -223,7 +223,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>ScheduleKeyDeletion</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CancelKeyDeletionRequest] params
     # @option params [String] :key_id
@@ -357,7 +357,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ConnectCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_id
@@ -444,7 +444,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CreateAliasRequest] params
     # @option params [String] :alias_name
@@ -594,7 +594,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CreateCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_name
@@ -704,6 +704,10 @@ module Aws::KMS
     #             name.</p>
     #               </li>
     #            </ul>
+    # @option params [String] :xks_proxy_vpc_endpoint_service_owner
+    #   <p>Specifies the Amazon Web Services account ID that owns the Amazon VPC service endpoint for the interface that
+    #         is used to communicate with your external key store proxy (XKS proxy). This parameter is
+    #         optional. If not provided, the Amazon Web Services account ID calling the action will be used.</p>
     # @option params [Types::XksProxyAuthenticationCredentialType] :xks_proxy_authentication_credential
     #   <p>Specifies an authentication credential for the external key store proxy (XKS proxy). This
     #         parameter is required for all custom key stores with a <code>CustomKeyStoreType</code> of
@@ -758,6 +762,7 @@ module Aws::KMS
     #     xks_proxy_uri_endpoint: "XksProxyUriEndpointType",
     #     xks_proxy_uri_path: "XksProxyUriPathType",
     #     xks_proxy_vpc_endpoint_service_name: "XksProxyVpcEndpointServiceNameType",
+    #     xks_proxy_vpc_endpoint_service_owner: "AccountIdType",
     #     xks_proxy_authentication_credential: {
     #       access_key_id: "XksProxyAuthenticationAccessKeyIdType", # required
     #       raw_secret_access_key: "XksProxyAuthenticationRawSecretAccessKeyType", # required
@@ -783,6 +788,10 @@ module Aws::KMS
     #       grants are considered along with key policies and IAM policies. Grants are often used for
     #       temporary permissions because you can create one, use its permissions, and delete it without
     #       changing your key policies or IAM policies. </p>
+    #          <p>You can create a grant for an Amazon Web Services principal (IAM user, IAM role, or Amazon Web Services account) by
+    #       specifying the <code>GranteePrincipal</code> parameter. You can also create a grant for an
+    #       Amazon Web Services service principal by specifying the <code>GranteeServicePrincipal</code>
+    #       parameter.</p>
     #          <p>For detailed information about grants, including grant terminology, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">Grants in KMS</a> in the
     #         <i>
     #                <i>Key Management Service Developer Guide</i>
@@ -840,7 +849,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CreateGrantRequest] params
     # @option params [String] :key_id
@@ -868,6 +877,8 @@ module Aws::KMS
     #           <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM ARNs</a> in the <i>
     #                  <i>Identity and Access Management User Guide</i>
     #               </i>.</p>
+    #            <p>You must specify either <code>GranteePrincipal</code> or
+    #           <code>GranteeServicePrincipal</code>, but not both.</p>
     # @option params [String] :retiring_principal
     #   <p>The principal that has permission to use the <a>RetireGrant</a> operation to
     #         retire the grant. </p>
@@ -881,6 +892,8 @@ module Aws::KMS
     #         retire the grant or revoke the grant. For details, see <a>RevokeGrant</a> and
     #           <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grant-delete.html">Retiring and revoking
     #           grants</a> in the <i>Key Management Service Developer Guide</i>. </p>
+    #            <p>You can specify either <code>RetiringPrincipal</code> or
+    #           <code>RetiringServicePrincipal</code>, but not both.</p>
     # @option params [Array<String>] :operations
     #   <p>A list of operations that the grant permits. </p>
     #            <p>This list must include only operations that are permitted in a grant. Also, the operation
@@ -894,28 +907,42 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>KMS supports the <code>EncryptionContextEquals</code> and
-    #           <code>EncryptionContextSubset</code> grant constraints, which allow the permissions in the
-    #         grant only when the encryption context in the request matches
-    #           (<code>EncryptionContextEquals</code>) or includes (<code>EncryptionContextSubset</code>)
-    #         the encryption context specified in the constraint. </p>
-    #            <p>The encryption context grant constraints are supported only on <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations">grant operations</a> that include
-    #         an <code>EncryptionContext</code> parameter, such as cryptographic operations on symmetric
-    #         encryption KMS keys. Grants with grant constraints can include the <a>DescribeKey</a> and <a>RetireGrant</a> operations, but the constraint doesn't apply to these
-    #         operations. If a grant with a grant constraint includes the <code>CreateGrant</code>
-    #         operation, the constraint requires that any grants created with the <code>CreateGrant</code>
-    #         permission have an equally strict or stricter encryption context constraint.</p>
-    #            <p>You cannot use an encryption context grant constraint for cryptographic operations with
-    #         asymmetric KMS keys or HMAC KMS keys. Operations with these keys don't support an encryption
-    #         context.</p>
-    #            <p>Each constraint value can include up to 8 encryption context pairs. The encryption context
-    #         value in each constraint cannot exceed 384 characters. For information about grant
-    #         constraints, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints">Using grant
-    #           constraints</a> in the <i>Key Management Service Developer Guide</i>. For more information about encryption context,
-    #         see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption
-    #           context</a> in the <i>
-    #                  <i>Key Management Service Developer Guide</i>
-    #               </i>. </p>
+    #            <p>KMS supports the following grant constraints.</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>EncryptionContextEquals</code> and <code>EncryptionContextSubset</code> — These
+    #             encryption context grant constraints allow the permissions in the grant only when the
+    #             encryption context in the request matches (<code>EncryptionContextEquals</code>) or
+    #             includes (<code>EncryptionContextSubset</code>) the encryption context specified in the
+    #             constraint.</p>
+    #                  <p>Encryption context grant constraints are supported only on <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-grant-operations">grant operations</a> that
+    #             include an <code>EncryptionContext</code> parameter, such as cryptographic operations on
+    #             symmetric encryption KMS keys. You cannot use an encryption context grant constraint for
+    #             cryptographic operations with asymmetric KMS keys or HMAC KMS keys. Operations with these
+    #             keys don't support an encryption context. Grants with encryption context grant constraints
+    #             can include the <a>DescribeKey</a> and <a>RetireGrant</a> operations,
+    #             but the constraint doesn't apply to these operations. If a grant with an encryption context
+    #             grant constraint includes the <code>CreateGrant</code> operation, the constraint requires
+    #             that any grants created with the <code>CreateGrant</code> permission have an equally strict
+    #             or stricter encryption context constraint. </p>
+    #                  <p>Each constraint value can include up to 8 encryption context pairs. The encryption
+    #             context value in each constraint cannot exceed 384 characters. For more information about
+    #             encryption context, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context">Encryption context</a> in the <i>
+    #                        <i>Key Management Service Developer Guide</i>
+    #                     </i>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SourceArn</code> — This grant constraint allows the permissions in the grant only when the
+    #           request is made on behalf of a specific Amazon Web Services resource, identified by its <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Name (ARN)</a>. This is effectively
+    #           the same as having the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn">aws:SourceArn</a> global condition key in the grant. The SourceArn constraint is supported on grants
+    #           for all types of KMS keys and can also be applied to the <a>DescribeKey</a> operation when
+    #           specified in the request. However, it does not apply to <a>RetireGrant</a> operation.</p>
+    #               </li>
+    #            </ul>
+    #            <p>For information about grant constraints, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/create-grant-overview.html#grant-constraints">Using grant
+    #           constraints</a> in the <i>Key Management Service Developer Guide</i>. </p>
     # @option params [Array<String>] :grant_tokens
     #   <p>A list of grant tokens. </p>
     #            <p>Use a grant token when your permission to call this operation comes from a new grant that has not yet achieved <i>eventual consistency</i>. For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token">Grant token</a> and <a href="https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html">Using a grant token</a> in the
@@ -937,6 +964,21 @@ module Aws::KMS
     # @option params [Boolean] :dry_run
     #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
+    # @option params [String] :grantee_service_principal
+    #   <p>The Amazon Web Services <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service
+    #           principal</a> that gets the permissions specified in the grant. </p>
+    #            <p>When you specify a <code>GranteeServicePrincipal</code>, you must also specify a
+    #         <code>SourceArn</code> grant constraint. In addition, you must specify either a
+    #         <code>RetiringPrincipal</code> or a <code>RetiringServicePrincipal</code>.
+    #       </p>
+    #            <p>You must specify either <code>GranteePrincipal</code> or
+    #           <code>GranteeServicePrincipal</code>, but not both.</p>
+    # @option params [String] :retiring_service_principal
+    #   <p>The Amazon Web Services <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service
+    #           principal</a> that has permission to use the <a>RetireGrant</a>
+    #         operation to retire the grant.</p>
+    #            <p>You can specify either <code>RetiringPrincipal</code> or
+    #           <code>RetiringServicePrincipal</code>, but not both.</p>
     # @example To create a grant
     #   # The following example creates a grant that allows the specified IAM role to encrypt data with the specified KMS key.
     #   params = {
@@ -954,10 +996,33 @@ module Aws::KMS
     #     grant_token: "AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW__MSrqnre1HIN0Grt00ViSSuUjhqOC8OT3YAAADfMIHcBgkqhkiG9w0BBwaggc4wgcsCAQAwgcUGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmqLyBTAegIn9XlK5AgEQgIGXZQjkBcl1dykDdqZBUQ6L1OfUivQy7JVYO2-ZJP7m6f1g8GzV47HX5phdtONAP7K_HQIflcgpkoCqd_fUnE114mSmiagWkbQ5sqAVV3ov-VeqgrvMe5ZFEWLMSluvBAqdjHEdMIkHMlhlj4ENZbzBfo9Wxk8b8SnwP4kc4gGivedzFXo-dwN8fxjjq_ZZ9JFOj2ijIbj5FyogDCN0drOfi8RORSEuCEmPvjFRMFAwcmwFkN2NPp89amA",
     #     grant_id: "0c237476b39f8bc44e45212e08498fbe3151305030726c0590dd8d3e9f3d6a60"
     #   }
+    # @example To create a grant for a service principal
+    #   # The following example creates a grant that allows the specified AWS service principal to encrypt and decrypt data with the specified KMS key. The grant includes a SourceArn constraint that restricts the grant permissions to requests associated with the specified DynamoDB table.
+    #   params = {
+    #     key_id: "arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab",
+    #     grantee_service_principal: "service-name.amazonaws.com",
+    #     retiring_service_principal: "service-name.amazonaws.com",
+    #     operations: [
+    #       Encrypt,
+    #       Decrypt,
+    #       GenerateDataKey,
+    #       DescribeKey
+    #     ],
+    #     constraints: {
+    #       source_arn: "arn:aws:dynamodb:us-east-2:444455556666:table/ExampleTable"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_grant(params, options)
+    #   response.to_h #=>
+    #   {
+    #     grant_token: "AQpAM2RhZTk1MGMyNTk2ZmZmMzEyYWVhOWViN2I1MWM4Mzc0MWFiYjc0ZDE1ODkyNGFlNTIzODZhMzgyZjBlNGY3NiKIAgEBAgB4Pa6VDCWW...",
+    #     grant_id: "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"
+    #   }
     # @example Request syntax with placeholder values
     #   params = {
     #     key_id: "KeyIdType", # required
-    #     grantee_principal: "PrincipalIdType", # required
+    #     grantee_principal: "PrincipalIdType",
     #     retiring_principal: "PrincipalIdType",
     #     operations: ["Decrypt" # One of: ["Decrypt", "Encrypt", "GenerateDataKey", "GenerateDataKeyWithoutPlaintext", "ReEncryptFrom", "ReEncryptTo", "Sign", "Verify", "GetPublicKey", "CreateGrant", "RetireGrant", "DescribeKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateMac", "VerifyMac", "DeriveSharedSecret"]], # required
     #     constraints: {
@@ -966,11 +1031,14 @@ module Aws::KMS
     #       },
     #       encryption_context_equals: {
     #         "EncryptionContextKey" => "EncryptionContextValue"
-    #       }
+    #       },
+    #       source_arn: "GrantConstraintSourceArnType"
     #     },
     #     grant_tokens: ["GrantTokenType"],
     #     name: "GrantNameType",
-    #     dry_run: false
+    #     dry_run: false,
+    #     grantee_service_principal: "ServicePrincipalType",
+    #     retiring_service_principal: "ServicePrincipalType"
     #   }
     #   options = {}
     #   response = client.create_grant(params, options)
@@ -996,7 +1064,7 @@ module Aws::KMS
     #          <p>Use the parameters of <code>CreateKey</code> to specify the type of KMS key, the source of
     #       its key material, its key policy, description, tags, and other properties.</p>
     #          <note>
-    #             <p>KMS has replaced the term <i>customer master key (CMK)</i> with <i>Key Management Service key</i> 
+    #             <p>KMS has replaced the term <i>customer master key (CMK)</i> with <i>Key Management Service key</i>
     #   and <i>KMS key</i>. The concept has not changed. To prevent breaking changes, KMS is keeping some variations of this term.</p>
     #          </note>
     #          <p>To create different types of KMS keys, use the following guidance:</p>
@@ -1030,7 +1098,7 @@ module Aws::KMS
     #             key never leaves KMS unencrypted. However, you can use the <a>GetPublicKey</a> operation to download the public key so it can be used
     #             outside of KMS. Each KMS key can have only one key usage. KMS keys with RSA key pairs
     #             can be used to encrypt and decrypt data or sign and verify messages (but not both). KMS
-    #             keys with NIST-recommended ECC key pairs can be used to sign and verify messages or
+    #             keys with NIST-standard ECC key pairs can be used to sign and verify messages or
     #             derive shared secrets (but not both). KMS keys with <code>ECC_SECG_P256K1</code> can be
     #             used only to sign and verify messages. KMS keys with ML-DSA key pairs can be used to
     #             sign and verify messages. KMS keys with SM2 key pairs (China Regions only) can be used
@@ -1052,7 +1120,6 @@ module Aws::KMS
     #                <p> </p>
     #             </dd>
     #             <dt>Multi-Region primary keys</dt>
-    #             <dt>Imported key material</dt>
     #             <dd>
     #                <p>To create a multi-Region <i>primary key</i> in the local Amazon Web Services Region,
     #             use the <code>MultiRegion</code> parameter with a value of <code>True</code>. To create
@@ -1070,6 +1137,7 @@ module Aws::KMS
     #       it in a different Amazon Web Services Region without re-encrypting the data or making a cross-Region call. For more information about multi-Region keys, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html">Multi-Region keys in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #                <p> </p>
     #             </dd>
+    #             <dt>Imported key material</dt>
     #             <dd>
     #                <p>To import your own key material into a KMS key, begin by creating a KMS key with no
     #             key material. To do this, use the <code>Origin</code> parameter of
@@ -1155,7 +1223,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::CreateKeyRequest] params
     # @option params [String] :policy
@@ -1225,7 +1293,7 @@ module Aws::KMS
     #               <code>SIGN_VERIFY</code>.</p>
     #               </li>
     #               <li>
-    #                  <p>For asymmetric KMS keys with NIST-recommended elliptic curve key pairs, specify
+    #                  <p>For asymmetric KMS keys with NIST-standard elliptic curve key pairs, specify
     #               <code>SIGN_VERIFY</code> or <code>KEY_AGREEMENT</code>.</p>
     #               </li>
     #               <li>
@@ -1327,7 +1395,7 @@ module Aws::KMS
     #                  </ul>
     #               </li>
     #               <li>
-    #                  <p>Asymmetric NIST-recommended elliptic curve key pairs (signing and verification -or-
+    #                  <p>Asymmetric NIST-standard elliptic curve key pairs (signing and verification -or-
     #             deriving shared secrets)</p>
     #                  <ul>
     #                     <li>
@@ -1341,6 +1409,21 @@ module Aws::KMS
     #                     <li>
     #                        <p>
     #                           <code>ECC_NIST_P521</code> (secp521r1)</p>
+    #                     </li>
+    #                     <li>
+    #                        <p>
+    #                           <code>ECC_NIST_EDWARDS25519</code> (ed25519) - signing and verification only</p>
+    #                        <ul>
+    #                           <li>
+    #                              <p>
+    #                                 <b>Note:</b> For ECC_NIST_EDWARDS25519 KMS keys, the
+    #                             ED25519_SHA_512 signing algorithm requires <a href="kms/latest/APIReference/API_Sign.html#KMS-Sign-request-MessageType">
+    #                                    <code>MessageType:RAW</code>
+    #                                 </a>, while ED25519_PH_SHA_512 requires <a href="kms/latest/APIReference/API_Sign.html#KMS-Sign-request-MessageType">
+    #                                    <code>MessageType:DIGEST</code>
+    #                                 </a>. These message types cannot be used interchangeably.</p>
+    #                           </li>
+    #                        </ul>
     #                     </li>
     #                  </ul>
     #               </li>
@@ -1484,7 +1567,7 @@ module Aws::KMS
     #     description: "DescriptionType",
     #     key_usage: "SIGN_VERIFY" # One of: ["SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"],
     #     customer_master_key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"],
-    #     key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"],
+    #     key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519"],
     #     origin: "AWS_KMS" # One of: ["AWS_KMS", "EXTERNAL", "AWS_CLOUDHSM", "EXTERNAL_KEY_STORE"],
     #     custom_key_store_id: "CustomKeyStoreIdType",
     #     bypass_policy_lockout_safety_check: false,
@@ -1519,9 +1602,9 @@ module Aws::KMS
     #       expiration_model: "KEY_MATERIAL_EXPIRES" # One of: ["KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"],
     #       key_manager: "AWS" # One of: ["AWS", "CUSTOMER"],
     #       customer_master_key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"],
-    #       key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"],
+    #       key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519"],
     #       encryption_algorithms: ["SYMMETRIC_DEFAULT" # One of: ["SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"]],
-    #       signing_algorithms: ["RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"]],
+    #       signing_algorithms: ["RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"]],
     #       key_agreement_algorithms: ["ECDH" # One of: ["ECDH"]],
     #       multi_region: false,
     #       multi_region_configuration: {
@@ -1606,18 +1689,20 @@ module Aws::KMS
     #       particular trusted accounts. For details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policies-best-practices">Best practices for IAM
     #         policies</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #          <p>
-    #             <code>Decrypt</code> also supports <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html">Amazon Web Services Nitro Enclaves</a> and NitroTPM, which provide 
-    #       attested environments in Amazon EC2. To call <code>Decrypt</code> for a Nitro enclave or NitroTPM, use
-    #       the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code> parameter to provide the
-    #       attestation document for the attested environment. Instead of the plaintext data, the response 
-    #       includes the plaintext data encrypted with the public key from the attestation document
-    #         (<code>CiphertextForRecipient</code>). For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
+    #             <code>Decrypt</code> also supports <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html">Amazon Web Services Nitro Enclaves</a> and NitroTPM, which
+    #       provide attested environments in Amazon EC2. To call <code>Decrypt</code> for a Nitro enclave or
+    #       NitroTPM, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code>
+    #       parameter to provide the attestation document for the attested environment. Instead of the
+    #       plaintext data, the response includes the plaintext data encrypted with the public key from
+    #       the attestation document (<code>CiphertextForRecipient</code>). For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #          <p>The KMS key that you use for this operation must be in a compatible key state. For
     # details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #          <p>
-    #             <b>Cross-account use</b>: Yes. If you use the <code>KeyId</code>
-    #       parameter to identify a KMS key in a different Amazon Web Services account, specify the key ARN or the alias
-    #       ARN of the KMS key.</p>
+    #             <b>Cross-account use</b>: Yes. To specify a KMS key
+    #       in a different Amazon Web Services account, use the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">key ARN</a> or <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-alias-ARN">alias
+    #         ARN</a>. A short <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id">key ID</a> is also acceptable
+    #       when decrypting symmetric ciphertexts, though using a full key ARN is recommended
+    #       to be more explicit about the intended KMS key.</p>
     #          <p>
     #             <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:Decrypt</a> (key policy)</p>
     #          <p>
@@ -1646,15 +1731,16 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DecryptRequest] params
     # @option params [String] :ciphertext_blob
     #   <p>Ciphertext to be decrypted. The blob includes metadata.</p>
+    #            <p>This parameter is required in all cases except when <code>DryRun</code> is <code>true</code> and <code>DryRunModifiers</code> is set to <code>IGNORE_CIPHERTEXT</code>.</p>
     # @option params [Hash<String, String>] :encryption_context
     #   <p>Specifies the encryption context to use when decrypting the data.
     #         An encryption context is valid only for <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#cryptographic-operations">cryptographic operations</a> with a symmetric encryption KMS key. The standard asymmetric encryption algorithms and HMAC algorithms that KMS uses do not support an encryption context.</p>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -1669,10 +1755,10 @@ module Aws::KMS
     #         different KMS key, the <code>Decrypt</code> operation throws an
     #           <code>IncorrectKeyException</code>.</p>
     #            <p>This parameter is required only when the ciphertext was encrypted under an asymmetric KMS
-    #         key. If you used a symmetric encryption KMS key, KMS can get the KMS key from metadata that
+    #         key or when <code>DryRun</code> is <code>true</code> and <code>DryRunModifiers</code> is set to <code>IGNORE_CIPHERTEXT</code>. If you used a symmetric encryption KMS key, KMS can get the KMS key from metadata that
     #         it adds to the symmetric ciphertext blob. However, it is always recommended as a best
     #         practice. This practice ensures that you use the KMS key that you intend.</p>
-    #            <p>To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>. To specify a KMS key in a different Amazon Web Services account, you must use the key ARN or alias ARN.</p>
+    #            <p>To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>. To specify a KMS key in a different Amazon Web Services account, you should use the key ARN or alias ARN.</p>
     #            <p>For example:</p>
     #            <ul>
     #               <li>
@@ -1702,20 +1788,27 @@ module Aws::KMS
     #         algorithm that is valid for symmetric encryption KMS keys.</p>
     # @option params [Types::RecipientInfo] :recipient
     #   <p>A signed <a href="https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-concepts.html#term-attestdoc">attestation
-    #           document</a> from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the
-    #         public key in the attestation document. The only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p>
-    #            <p>This parameter supports the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK for Amazon Web Services Nitro Enclaves. It supports 
-    #         any Amazon Web Services SDK for Amazon Web Services NitroTPM.
-    #       </p>
+    #           document</a> from an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to
+    #         use with the public key in the attestation document. The only valid encryption algorithm is
+    #           <code>RSAES_OAEP_SHA_256</code>. </p>
+    #            <p>This parameter supports the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK for
+    #         Amazon Web Services Nitro Enclaves. It supports any Amazon Web Services SDK for Amazon Web Services NitroTPM. </p>
     #            <p>When you use this parameter, instead of returning the plaintext data, KMS encrypts the
     #         plaintext data with the public key in the attestation document, and returns the resulting
     #         ciphertext in the <code>CiphertextForRecipient</code> field in the response. This ciphertext
-    #         can be decrypted only with the private key in the attested environment. The <code>Plaintext</code> field in
-    #         the response is null or empty.</p>
+    #         can be decrypted only with the private key in the attested environment. The
+    #           <code>Plaintext</code> field in the response is null or empty.</p>
     #            <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
+    # @option params [Array<String>] :dry_run_modifiers
+    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is
+    #           set to <code>true</code>.</p>
+    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions
+    #           without requiring a valid ciphertext blob.</p>
+    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your
+    #           permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @example To decrypt data with an asymmetric encryption KMS key
     #   # The following example decrypts data that was encrypted with an asymmetric encryption KMS key. When the KMS encryption key is asymmetric, you must specify the KMS key ID and the encryption algorithm that was used to encrypt the data.
     #   params = {
@@ -1748,7 +1841,7 @@ module Aws::KMS
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     ciphertext_blob: "data", # required
+    #     ciphertext_blob: "data",
     #     encryption_context: {
     #       "EncryptionContextKey" => "EncryptionContextValue"
     #     },
@@ -1759,7 +1852,8 @@ module Aws::KMS
     #       key_encryption_algorithm: "RSAES_OAEP_SHA_256" # One of: ["RSAES_OAEP_SHA_256"],
     #       attestation_document: "data"
     #     },
-    #     dry_run: false
+    #     dry_run: false,
+    #     dry_run_modifiers: ["IGNORE_CIPHERTEXT" # One of: ["IGNORE_CIPHERTEXT"]]
     #   }
     #   options = {}
     #   response = client.decrypt(params, options)
@@ -1827,7 +1921,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DeleteAliasRequest] params
     # @option params [String] :alias_name
@@ -1917,7 +2011,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DeleteCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_id
@@ -1953,6 +2047,20 @@ module Aws::KMS
     #          <p>When the specified KMS key is in the <code>PendingDeletion</code> state, this operation
     #       does not change the KMS key's state. Otherwise, it changes the KMS key's state to
     #         <code>PendingImport</code>.</p>
+    #          <p class="title">
+    #             <b>Considerations for multi-Region symmetric encryption keys</b>
+    #          </p>
+    #          <ul>
+    #             <li>
+    #                <p>When you delete the key material of a primary Region key that is in
+    #             <code>PENDING_ROTATION</code> or <code>PENDING_MULTI_REGION_IMPORT_AND_ROTATION</code>state,
+    #             you'll also be deleting the key materials for the replica Region keys.</p>
+    #             </li>
+    #             <li>
+    #                <p>If you delete any key material of a replica Region key, the primary Region key and
+    #           other replica Region keys remain unchanged.</p>
+    #             </li>
+    #          </ul>
     #          <p>The KMS key that you use for this operation must be in a compatible key state. For
     # details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #          <p>
@@ -1980,7 +2088,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DeleteImportedKeyMaterialRequest] params
     # @option params [String] :key_id
@@ -2036,9 +2144,9 @@ module Aws::KMS
 
     # <p>Derives a shared secret using a key agreement algorithm.</p>
     #          <note>
-    #             <p>You must use an asymmetric NIST-recommended elliptic curve (ECC) or SM2 (China Regions
-    #         only) KMS key pair with a <code>KeyUsage</code>
-    #         value of <code>KEY_AGREEMENT</code> to call DeriveSharedSecret.</p>
+    #             <p>You must use an asymmetric NIST-standard elliptic curve (ECC) or SM2 (China Regions
+    #         only) KMS key pair with a <code>KeyUsage</code> value of <code>KEY_AGREEMENT</code> to call
+    #         DeriveSharedSecret.</p>
     #          </note>
     #          <p>DeriveSharedSecret uses the <a href="https://nvlpubs.nist.gov/nistpubs/SpecialPublications/NIST.SP.800-56Ar3.pdf#page=60">Elliptic Curve Cryptography Cofactor Diffie-Hellman Primitive</a> (ECDH) to establish a
     #       key agreement between two peers by deriving a shared secret from their elliptic curve
@@ -2055,14 +2163,14 @@ module Aws::KMS
     #                   <b>Alice</b> calls <a>CreateKey</a> to create an
     #           asymmetric KMS key pair with a <code>KeyUsage</code> value of
     #           <code>KEY_AGREEMENT</code>.</p>
-    #                <p>The asymmetric KMS key must use a NIST-recommended elliptic curve (ECC) or SM2 (China
+    #                <p>The asymmetric KMS key must use a NIST-standard elliptic curve (ECC) or SM2 (China
     #           Regions only) key spec.</p>
     #             </li>
     #             <li>
     #                <p>
     #                   <b>Bob</b> creates an elliptic curve key pair.</p>
     #                <p>Bob can call <a>CreateKey</a> to create an asymmetric KMS key pair or
-    #           generate a key pair outside of KMS. Bob's key pair must use the same NIST-recommended
+    #           generate a key pair outside of KMS. Bob's key pair must use the same NIST-standard
     #           elliptic curve (ECC) or SM2 (China Regions ony) curve as Alice.</p>
     #             </li>
     #             <li>
@@ -2090,8 +2198,8 @@ module Aws::KMS
     #             </li>
     #          </ol>
     #          <p>To derive a shared secret you must provide a key agreement algorithm, the private key of
-    #       the caller's asymmetric NIST-recommended elliptic curve or SM2 (China Regions only) KMS key
-    #       pair, and the public key from your peer's NIST-recommended elliptic curve or SM2 (China
+    #       the caller's asymmetric NIST-standard elliptic curve or SM2 (China Regions only) KMS key
+    #       pair, and the public key from your peer's NIST-standard elliptic curve or SM2 (China
     #       Regions only) key pair. The public key can be from another asymmetric KMS key pair or from a
     #       key pair generated outside of KMS, but both key pairs must be on the same elliptic
     #       curve.</p>
@@ -2123,11 +2231,11 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DeriveSharedSecretRequest] params
     # @option params [String] :key_id
-    #   <p>Identifies an asymmetric NIST-recommended ECC or SM2 (China Regions only) KMS key. KMS
+    #   <p>Identifies an asymmetric NIST-standard ECC or SM2 (China Regions only) KMS key. KMS
     #         uses the private key in the specified key pair to derive the shared secret. The key usage of
     #         the KMS key must be <code>KEY_AGREEMENT</code>. To find the <code>KeyUsage</code> of a KMS
     #         key, use the <a>DescribeKey</a> operation.</p>
@@ -2156,7 +2264,7 @@ module Aws::KMS
     #   <p>Specifies the key agreement algorithm used to derive the shared secret. The only valid
     #         value is <code>ECDH</code>.</p>
     # @option params [String] :public_key
-    #   <p>Specifies the public key in your peer's NIST-recommended elliptic curve (ECC) or SM2
+    #   <p>Specifies the public key in your peer's NIST-standard elliptic curve (ECC) or SM2
     #         (China Regions only) key pair.</p>
     #            <p>The public key must be a DER-encoded X.509 public key, also known as
     #           <code>SubjectPublicKeyInfo</code> (SPKI), as defined in <a href="https://tools.ietf.org/html/rfc5280">RFC 5280</a>.</p>
@@ -2179,20 +2287,22 @@ module Aws::KMS
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Types::RecipientInfo] :recipient
     #   <p>A signed <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc">attestation document</a> from
-    #         an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document. The
-    #         only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p>
-    #            <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM. To call
-    #         DeriveSharedSecret generate an attestation document use either <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> for an Amazon Web Services Nitro Enclaves or
-    #         <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/attestation-get-doc.html">Amazon Web Services NitroTPM tools</a> for Amazon Web Services NitroTPM. Then use the Recipient parameter from any Amazon Web Services SDK to provide the
+    #         an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in
+    #         the attestation document. The only valid encryption algorithm is
+    #           <code>RSAES_OAEP_SHA_256</code>. </p>
+    #            <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves or
+    #         Amazon Web Services NitroTPM. To call DeriveSharedSecret generate an attestation document use either
+    #         <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> for an Amazon Web Services Nitro Enclaves or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/attestation-get-doc.html">Amazon Web Services NitroTPM tools</a> for
+    #         Amazon Web Services NitroTPM. Then use the Recipient parameter from any Amazon Web Services SDK to provide the
     #         attestation document for the attested environment.</p>
     #            <p>When you use this parameter, instead of returning a plaintext copy of the shared secret,
     #         KMS encrypts the plaintext shared secret under the public key in the attestation document,
     #         and returns the resulting ciphertext in the <code>CiphertextForRecipient</code> field in the
-    #         response. This ciphertext can be decrypted only with the private key in the attested environment. The
-    #           <code>CiphertextBlob</code> field in the response contains the encrypted shared secret
-    #         derived from the KMS key specified by the <code>KeyId</code> parameter and public key
-    #         specified by the <code>PublicKey</code> parameter. The <code>SharedSecret</code> field in the
-    #         response is null or empty.</p>
+    #         response. This ciphertext can be decrypted only with the private key in the attested
+    #         environment. The <code>CiphertextBlob</code> field in the response contains the encrypted
+    #         shared secret derived from the KMS key specified by the <code>KeyId</code> parameter and
+    #         public key specified by the <code>PublicKey</code> parameter. The <code>SharedSecret</code>
+    #         field in the response is null or empty.</p>
     #            <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @example To derive a shared secret
     #   # The following example derives a shared secret using a key agreement algorithm.
@@ -2299,7 +2409,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DescribeCustomKeyStoresRequest] params
     # @option params [String] :custom_key_store_id
@@ -2360,7 +2470,8 @@ module Aws::KMS
     #           access_key_id: "XksProxyAuthenticationAccessKeyIdType",
     #           uri_endpoint: "XksProxyUriEndpointType",
     #           uri_path: "XksProxyUriPathType",
-    #           vpc_endpoint_service_name: "XksProxyVpcEndpointServiceNameType"
+    #           vpc_endpoint_service_name: "XksProxyVpcEndpointServiceNameType",
+    #           vpc_endpoint_service_owner: "AccountIdType"
     #         }
     #       }
     #     ],
@@ -2455,7 +2566,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DescribeKeyRequest] params
     # @option params [String] :key_id
@@ -2686,9 +2797,9 @@ module Aws::KMS
     #       expiration_model: "KEY_MATERIAL_EXPIRES" # One of: ["KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"],
     #       key_manager: "AWS" # One of: ["AWS", "CUSTOMER"],
     #       customer_master_key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"],
-    #       key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"],
+    #       key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519"],
     #       encryption_algorithms: ["SYMMETRIC_DEFAULT" # One of: ["SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"]],
-    #       signing_algorithms: ["RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"]],
+    #       signing_algorithms: ["RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"]],
     #       key_agreement_algorithms: ["ECDH" # One of: ["ECDH"]],
     #       multi_region: false,
     #       multi_region_configuration: {
@@ -2733,7 +2844,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>EnableKey</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DisableKeyRequest] params
     # @option params [String] :key_id
@@ -2819,7 +2930,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DisableKeyRotationRequest] params
     # @option params [String] :key_id
@@ -2917,7 +3028,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::DisconnectCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_id
@@ -2958,7 +3069,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>DisableKey</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::EnableKeyRequest] params
     # @option params [String] :key_id
@@ -3061,7 +3172,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::EnableKeyRotationRequest] params
     # @option params [String] :key_id
@@ -3226,7 +3337,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::EncryptRequest] params
     # @option params [String] :key_id
@@ -3262,7 +3373,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -3362,12 +3473,12 @@ module Aws::KMS
     #          <p>
     #             <code>GenerateDataKey</code> also supports <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html">Amazon Web Services Nitro Enclaves</a>, which provide an
     #       isolated compute environment in Amazon EC2. To call <code>GenerateDataKey</code> for an Amazon Web Services Nitro
-    #       enclave or NitroTPM, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code> parameter
-    #       to provide the attestation document for the attested environment. <code>GenerateDataKey</code> returns a
-    #       copy of the data key encrypted under the specified KMS key, as usual. But instead of a
-    #       plaintext copy of the data key, the response includes a copy of the data key encrypted under
-    #       the public key from the attestation document (<code>CiphertextForRecipient</code>).
-    #       For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
+    #       enclave or NitroTPM, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the
+    #         <code>Recipient</code> parameter to provide the attestation document for the attested
+    #       environment. <code>GenerateDataKey</code> returns a copy of the data key encrypted under the
+    #       specified KMS key, as usual. But instead of a plaintext copy of the data key, the response
+    #       includes a copy of the data key encrypted under the public key from the attestation document
+    #         (<code>CiphertextForRecipient</code>). For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #          <p>The KMS key that you use for this operation must be in a compatible key state. For
     # details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #          <p>
@@ -3440,7 +3551,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateDataKeyRequest] params
     # @option params [String] :key_id
@@ -3473,7 +3584,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -3495,11 +3606,11 @@ module Aws::KMS
     #       <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Types::RecipientInfo] :recipient
     #   <p>A signed <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc">attestation document</a> from
-    #         an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document. The
-    #         only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p>
-    #            <p>This parameter supports the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK for Amazon Web Services Nitro Enclaves. It supports 
-    #         any Amazon Web Services SDK for Amazon Web Services NitroTPM.
-    #       </p>
+    #         an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in
+    #         the attestation document. The only valid encryption algorithm is
+    #           <code>RSAES_OAEP_SHA_256</code>. </p>
+    #            <p>This parameter supports the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK for
+    #         Amazon Web Services Nitro Enclaves. It supports any Amazon Web Services SDK for Amazon Web Services NitroTPM. </p>
     #            <p>When you use this parameter, instead of returning the plaintext data key, KMS encrypts
     #         the plaintext data key under the public key in the attestation document, and returns the
     #         resulting ciphertext in the <code>CiphertextForRecipient</code> field in the response. This
@@ -3591,12 +3702,12 @@ module Aws::KMS
     #          <p>
     #             <code>GenerateDataKeyPair</code> also supports <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html">Amazon Web Services Nitro Enclaves</a>, which provide an
     #       isolated compute environment in Amazon EC2. To call <code>GenerateDataKeyPair</code> for an Amazon Web Services
-    #       Nitro enclave or NitroTPM, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code>
-    #       parameter to provide the attestation document for the attested environment.
-    #         <code>GenerateDataKeyPair</code> returns the public data key and a copy of the private data
-    #       key encrypted under the specified KMS key, as usual. But instead of a plaintext copy of the
-    #       private data key (<code>PrivateKeyPlaintext</code>), the response includes a copy of the
-    #       private data key encrypted under the public key from the attestation document
+    #       Nitro enclave or NitroTPM, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the
+    #         <code>Recipient</code> parameter to provide the attestation document for the attested
+    #       environment. <code>GenerateDataKeyPair</code> returns the public data key and a copy of the
+    #       private data key encrypted under the specified KMS key, as usual. But instead of a plaintext
+    #       copy of the private data key (<code>PrivateKeyPlaintext</code>), the response includes a copy
+    #       of the private data key encrypted under the public key from the attestation document
     #         (<code>CiphertextForRecipient</code>). For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #          <p>You can use an optional encryption context to add additional security to the encryption
     #       operation. If you specify an <code>EncryptionContext</code>, you must specify the same
@@ -3641,7 +3752,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateDataKeyPairRequest] params
     # @option params [Hash<String, String>] :encryption_context
@@ -3650,7 +3761,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -3689,19 +3800,21 @@ module Aws::KMS
     #       <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Types::RecipientInfo] :recipient
     #   <p>A signed <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc">attestation document</a> from
-    #         an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document. The
-    #         only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p>
-    #            <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM. To call
-    #         GenerateDataKeyPair generate an attestation document use either <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> for an Amazon Web Services Nitro Enclaves or
-    #         <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/attestation-get-doc.html">Amazon Web Services NitroTPM tools</a> for Amazon Web Services NitroTPM. Then use the Recipient parameter from any Amazon Web Services SDK to provide the
+    #         an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in
+    #         the attestation document. The only valid encryption algorithm is
+    #           <code>RSAES_OAEP_SHA_256</code>. </p>
+    #            <p>This parameter only supports attestation documents for Amazon Web Services Nitro Enclaves or
+    #         Amazon Web Services NitroTPM. To call GenerateDataKeyPair generate an attestation document use either
+    #         <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> for an Amazon Web Services Nitro Enclaves or <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/attestation-get-doc.html">Amazon Web Services NitroTPM tools</a> for
+    #         Amazon Web Services NitroTPM. Then use the Recipient parameter from any Amazon Web Services SDK to provide the
     #         attestation document for the attested environment.</p>
     #            <p>When you use this parameter, instead of returning a plaintext copy of the private data
     #         key, KMS encrypts the plaintext private data key under the public key in the attestation
     #         document, and returns the resulting ciphertext in the <code>CiphertextForRecipient</code>
     #         field in the response. This ciphertext can be decrypted only with the private key in the
-    #         attested environment. The <code>CiphertextBlob</code> field in the response contains a copy of the private
-    #         data key encrypted under the KMS key specified by the <code>KeyId</code> parameter. The
-    #           <code>PrivateKeyPlaintext</code> field in the response is null or empty.</p>
+    #         attested environment. The <code>CiphertextBlob</code> field in the response contains a copy of
+    #         the private data key encrypted under the KMS key specified by the <code>KeyId</code>
+    #         parameter. The <code>PrivateKeyPlaintext</code> field in the response is null or empty.</p>
     #            <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @option params [Boolean] :dry_run
     #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>
@@ -3729,7 +3842,7 @@ module Aws::KMS
     #       "EncryptionContextKey" => "EncryptionContextValue"
     #     },
     #     key_id: "KeyIdType", # required
-    #     key_pair_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2"], # required
+    #     key_pair_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2", "ECC_NIST_EDWARDS25519"], # required
     #     grant_tokens: ["GrantTokenType"],
     #     recipient: {
     #       key_encryption_algorithm: "RSAES_OAEP_SHA_256" # One of: ["RSAES_OAEP_SHA_256"],
@@ -3746,7 +3859,7 @@ module Aws::KMS
     #     private_key_plaintext: "data",
     #     public_key: "data",
     #     key_id: "KeyIdType",
-    #     key_pair_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2"],
+    #     key_pair_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2", "ECC_NIST_EDWARDS25519"],
     #     ciphertext_for_recipient: "data",
     #     key_material_id: "BackingKeyIdType"
     #   }
@@ -3821,7 +3934,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateDataKeyPairWithoutPlaintextRequest] params
     # @option params [Hash<String, String>] :encryption_context
@@ -3830,7 +3943,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -3892,7 +4005,7 @@ module Aws::KMS
     #       "EncryptionContextKey" => "EncryptionContextValue"
     #     },
     #     key_id: "KeyIdType", # required
-    #     key_pair_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2"], # required
+    #     key_pair_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2", "ECC_NIST_EDWARDS25519"], # required
     #     grant_tokens: ["GrantTokenType"],
     #     dry_run: false
     #   }
@@ -3904,7 +4017,7 @@ module Aws::KMS
     #     private_key_ciphertext_blob: "data",
     #     public_key: "data",
     #     key_id: "KeyIdType",
-    #     key_pair_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2"],
+    #     key_pair_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2", "ECC_NIST_EDWARDS25519"],
     #     key_material_id: "BackingKeyIdType"
     #   }
     # @return [Types::GenerateDataKeyPairWithoutPlaintextResponse]
@@ -3987,7 +4100,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateDataKeyWithoutPlaintextRequest] params
     # @option params [String] :key_id
@@ -4020,7 +4133,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -4109,7 +4222,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>VerifyMac</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateMacRequest] params
     # @option params [String] :message
@@ -4181,11 +4294,11 @@ module Aws::KMS
     #       parameter.</p>
     #          <p>
     #             <code>GenerateRandom</code> also supports <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave.html">Amazon Web Services Nitro Enclaves</a>, which provide an
-    #       isolated compute environment in Amazon EC2. To call <code>GenerateRandom</code> for a Nitro
-    #       enclave or NitroTPM, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code> parameter
-    #       to provide the attestation document for the attested environment. Instead of plaintext bytes, the response
-    #       includes the plaintext bytes encrypted under the public key from the attestation document
-    #         (<code>CiphertextForRecipient</code>). For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
+    #       isolated compute environment in Amazon EC2. To call <code>GenerateRandom</code> for a Nitro enclave
+    #       or NitroTPM, use the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK. Use the <code>Recipient</code>
+    #       parameter to provide the attestation document for the attested environment. Instead of
+    #       plaintext bytes, the response includes the plaintext bytes encrypted under the public key from
+    #       the attestation document (<code>CiphertextForRecipient</code>). For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #          <p>For more information about entropy and random number generation, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-cryptography.html#entropy-and-random-numbers">Entropy and random number generation</a> in the <i>Key Management Service Developer Guide</i>.</p>
     #          <p>
     #             <b>Cross-account use</b>: Not applicable.
@@ -4194,7 +4307,7 @@ module Aws::KMS
     #          <p>
     #             <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:GenerateRandom</a> (IAM policy)</p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GenerateRandomRequest] params
     # @option params [Integer] :number_of_bytes
@@ -4207,16 +4320,16 @@ module Aws::KMS
     #           <code>UnsupportedOperationException</code>.</p>
     # @option params [Types::RecipientInfo] :recipient
     #   <p>A signed <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitro-enclave-how.html#term-attestdoc">attestation document</a> from
-    #         an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in the attestation document. The
-    #         only valid encryption algorithm is <code>RSAES_OAEP_SHA_256</code>. </p>
-    #            <p>This parameter supports the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK for Amazon Web Services Nitro Enclaves. It supports 
-    #         any Amazon Web Services SDK for Amazon Web Services NitroTPM.
-    #       </p>
+    #         an Amazon Web Services Nitro enclave or NitroTPM, and the encryption algorithm to use with the public key in
+    #         the attestation document. The only valid encryption algorithm is
+    #           <code>RSAES_OAEP_SHA_256</code>. </p>
+    #            <p>This parameter supports the <a href="https://docs.aws.amazon.com/enclaves/latest/user/developing-applications.html#sdk">Amazon Web Services Nitro Enclaves SDK</a> or any Amazon Web Services SDK for
+    #         Amazon Web Services Nitro Enclaves. It supports any Amazon Web Services SDK for Amazon Web Services NitroTPM. </p>
     #            <p>When you use this parameter, instead of returning plaintext bytes, KMS encrypts the
     #         plaintext bytes under the public key in the attestation document, and returns the resulting
     #         ciphertext in the <code>CiphertextForRecipient</code> field in the response. This ciphertext
-    #         can be decrypted only with the private key in the attested environment. The <code>Plaintext</code> field in
-    #         the response is null or empty.</p>
+    #         can be decrypted only with the private key in the attested environment. The
+    #           <code>Plaintext</code> field in the response is null or empty.</p>
     #            <p>For information about the interaction between KMS and Amazon Web Services Nitro Enclaves or Amazon Web Services NitroTPM, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/cryptographic-attestation.html">Cryptographic attestation support in KMS</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @example To generate random data
     #   # The following example generates 32 bytes of random data.
@@ -4252,6 +4365,135 @@ module Aws::KMS
       request.send_request(options)
     end
 
+    # <p>Returns usage information about the last successful cryptographic operation performed with a
+    #       specified KMS key, including the operation type, timestamp, and associated CloudTrail event
+    #       ID.</p>
+    #          <p>The <code>TrackingStartDate</code> in the <code>GetKeyLastUsage</code> response indicates
+    #       the date from which KMS began recording cryptographic activity for a given key. Use this
+    #       value together with <code>KeyCreationDate</code> to understand the key's usage
+    #       history:</p>
+    #          <ul>
+    #             <li>
+    #                <p>If the <code>KeyLastUsage</code> response element is <i>present</i>,
+    #           the key has been used for a successful cryptographic operation since the
+    #           <code>TrackingStartDate</code>. The response includes the operation type, timestamp, and
+    #           associated CloudTrail event ID.</p>
+    #             </li>
+    #             <li>
+    #                <p>If the <code>KeyLastUsage</code> response element is <i>empty</i> and
+    #           <code>KeyCreationDate</code> is on or after <code>TrackingStartDate</code>, the key has
+    #           not been used for a successful cryptographic operation since it was created.</p>
+    #             </li>
+    #             <li>
+    #                <p>If the <code>KeyLastUsage</code> response element is <i>empty</i> and
+    #           <code>KeyCreationDate</code> is before <code>TrackingStartDate</code>, there is no record
+    #           of the key being used for a successful cryptographic operation since the
+    #           <code>TrackingStartDate</code>. However, the key may have been used before tracking
+    #           began. To determine whether the key was used before the <code>TrackingStartDate</code>,
+    #           examine your past CloudTrail logs.</p>
+    #             </li>
+    #          </ul>
+    #          <p>For multi-Region KMS keys, primary and replica keys track last usage independently. Each
+    #       key in a multi-Region key set maintains its own usage information.</p>
+    #          <p>The <code>ReEncrypt</code> operation uses two keys: a source key for decryption and a
+    #       destination key for encryption. Usage information is recorded for both keys independently,
+    #       each with the CloudTrail event ID from the respective key owner's account.</p>
+    #          <note>
+    #             <p>Do not use <code>GetKeyLastUsage</code> as the sole indicator when scheduling a key for
+    #         deletion. Instead, first <a href="https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html">disable the key</a> and monitor CloudTrail for
+    #         <code>DisabledException</code> entries, as there could be infrequent workflows that are
+    #         dependent on the key. By looking for this exception, you can identify potential dependencies
+    #         and workload failures before they occur.</p>
+    #          </note>
+    #          <p>
+    #             <b>Cross-account use</b>: No. You cannot perform this operation
+    #       on a KMS key in a different Amazon Web Services account.</p>
+    #          <p>
+    #             <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:GetKeyLastUsage</a> (key policy)</p>
+    #          <p>
+    #             <b>Related operations:</b>
+    #          </p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <a>DescribeKey</a>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <a>DisableKey</a>
+    #                </p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #                   <a>ScheduleKeyDeletion</a>
+    #                </p>
+    #             </li>
+    #          </ul>
+    #          <p>
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
+    #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
+    # @param [Hash, Types::GetKeyLastUsageRequest] params
+    # @option params [String] :key_id
+    #   <p>Identifies the KMS key to get usage information for. To specify a KMS key, use its key ID
+    #         or key ARN. Alias names are not supported.</p>
+    #            <p>Specify the key ID or key ARN of the KMS key.</p>
+    #            <p>For example:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #            <p>To get the key ID and key ARN for a KMS key, use <a>ListKeys</a> or <a>DescribeKey</a>.</p>
+    # @example To retrieve the last usage for a KMS key
+    #   # The following example retrieves usage information about the last successful cryptographic operation performed with the specified KMS key, including the operation type, timestamp, and associated AWS CloudTrail event ID.
+    #   params = {
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab"
+    #   }
+    #   options = {}
+    #   response = client.get_key_last_usage(params, options)
+    #   response.to_h #=>
+    #   {
+    #     key_creation_date: Time.parse(1773253425.56),
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab",
+    #     tracking_start_date: Time.parse(1773253425.56),
+    #     key_last_usage: {
+    #       timestamp: Time.parse(1773253497.0),
+    #       operation: Encrypt,
+    #       kms_request_id: "040cce3e-9ef3-4651-b8cf-e47c9bafdc9b",
+    #       cloud_trail_event_id: "2cfd5892-ea8c-4342-ad49-4b9594b06a8b"
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     key_id: "KeyIdType", # required
+    #   }
+    #   options = {}
+    #   response = client.get_key_last_usage(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     key_id: "KeyIdType",
+    #     key_last_usage: {
+    #       operation: "Decrypt" # One of: ["Decrypt", "DeriveSharedSecret", "Encrypt", "GenerateDataKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateDataKeyWithoutPlaintext", "GenerateMac", "ReEncrypt", "Sign", "Verify", "VerifyMac"],
+    #       timestamp: Time.now,
+    #       cloud_trail_event_id: "CloudTrailEventIdType",
+    #       kms_request_id: "KmsRequestIdType"
+    #     },
+    #     tracking_start_date: Time.now,
+    #     key_creation_date: Time.now
+    #   }
+    # @return [Types::GetKeyLastUsageResponse]
+    def get_key_last_usage(params = {}, options = {})
+      request = build_request(:get_key_last_usage, params)
+      request.send_request(options)
+    end
+
     # <p>Gets a key policy attached to the specified KMS key.</p>
     #          <p>
     #             <b>Cross-account use</b>: No. You cannot perform this operation on a KMS key in a different Amazon Web Services account.</p>
@@ -4261,7 +4503,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html">PutKeyPolicy</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GetKeyPolicyRequest] params
     # @option params [String] :key_id
@@ -4381,7 +4623,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GetKeyRotationStatusRequest] params
     # @option params [String] :key_id
@@ -4496,7 +4738,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GetParametersForImportRequest] params
     # @option params [String] :key_id
@@ -4634,7 +4876,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>CreateKey</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::GetPublicKeyRequest] params
     # @option params [String] :key_id
@@ -4695,10 +4937,10 @@ module Aws::KMS
     #     key_id: "KeyIdType",
     #     public_key: "data",
     #     customer_master_key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"],
-    #     key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"],
+    #     key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519"],
     #     key_usage: "SIGN_VERIFY" # One of: ["SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"],
     #     encryption_algorithms: ["SYMMETRIC_DEFAULT" # One of: ["SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"]],
-    #     signing_algorithms: ["RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"]],
+    #     signing_algorithms: ["RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"]],
     #     key_agreement_algorithms: ["ECDH" # One of: ["ECDH"]]
     #   }
     # @return [Types::GetPublicKeyResponse]
@@ -4714,9 +4956,28 @@ module Aws::KMS
     #       generate and import your own key material. For more information about importing key material,
     #       see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html">Importing key
     #         material</a>.</p>
-    #          <p>For asymmetric, HMAC and multi-Region keys, you cannot change the key material after the
-    #       initial import. You can import multiple key materials into single-Region, symmetric encryption
-    #       keys and rotate the key material on demand using <code>RotateKeyOnDemand</code>.</p>
+    #          <p>For asymmetric and HMAC keys, you cannot change the key material after the initial import.
+    #       You can import multiple key materials into symmetric encryption keys and rotate the key
+    #       material on demand using <code>RotateKeyOnDemand</code>.</p>
+    #          <p>You can import new key materials into multi-Region symmetric encryption keys. To do so, you must
+    #       import the new key material into the primary Region key. Then you can import the same key
+    #       materials into the replica Region keys. You cannot directly import new key material into
+    #       the replica Region keys.</p>
+    #          <p>To import new key material for a multi-Region symmetric key, you’ll need to complete the
+    #       following:</p>
+    #          <ol>
+    #             <li>
+    #                <p>Call <code>ImportKeyMaterial</code> on the primary Region key with the
+    #             <code>ImportType</code>set to <code>NEW_KEY_MATERIAL</code>.</p>
+    #             </li>
+    #             <li>
+    #                <p>Call <code>ImportKeyMaterial</code> on the replica Region key with the
+    #             <code>ImportType</code> set to <code>EXISTING_KEY_MATERIAL</code> using the same key
+    #             material imported to the primary Region key. You must do this for every replica
+    #             Region key before you can perform the <a>RotateKeyOnDemand</a> operation
+    #             on the primary Region key.</p>
+    #             </li>
+    #          </ol>
     #          <p>After you import key material, you can <a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html#reimport-key-material">reimport
     #         the same key material</a> into that KMS key or, if the key supports on-demand rotation,
     #       import new key material. You can use the <code>ImportType</code> parameter to indicate whether
@@ -4748,15 +5009,15 @@ module Aws::KMS
     #           your key material.</p>
     #             </li>
     #          </ul>
-    #          <p> Then, in an <code>ImportKeyMaterial</code> request, you submit your encrypted key
+    #          <p>Then, in an <code>ImportKeyMaterial</code> request, you submit your encrypted key
     #       material and import token. When calling this operation, you must specify the following
     #       values:</p>
     #          <ul>
     #             <li>
     #                <p>The key ID or key ARN of the KMS key to associate with the imported key material. Its
     #             <code>Origin</code> must be <code>EXTERNAL</code> and its <code>KeyState</code> must be
-    #             <code>PendingImport</code>. You cannot perform this operation on a KMS key in a
-    #           <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html">custom key store</a>, or on a KMS key in a different Amazon Web Services account. To get the
+    #             <code>PendingImport</code> or <code>Enabled</code>. You cannot perform this operation on
+    #             a KMS key in a <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html">custom key store</a>, or on a KMS key in a different Amazon Web Services account. To get the
     #             <code>Origin</code> and <code>KeyState</code> of a KMS key, call <a>DescribeKey</a>.</p>
     #             </li>
     #             <li>
@@ -4776,12 +5037,11 @@ module Aws::KMS
     #           time you reimport, you can eliminate or reset the expiration time.</p>
     #             </li>
     #          </ul>
-    #          <p>When this operation is successful, the key state of the KMS key changes from
-    #         <code>PendingImport</code> to <code>Enabled</code>, and you can use the KMS key in
-    #       cryptographic operations. For single-Region, symmetric encryption keys, you will need to
-    #       import all of the key materials associated with the KMS key to change its state to
-    #         <code>Enabled</code>. Use the <code>ListKeyRotations</code> operation to list the ID and
-    #       import state of each key material associated with a KMS key.</p>
+    #          <p>When this operation is successful, the state of the KMS key changes to <code>Enabled</code>,
+    #       and you can use the KMS key in cryptographic operations. For symmetric encryption keys, you will
+    #       need to import all of the key materials associated with the KMS key to change its state to
+    #       <code>Enabled</code>. Use the <code>ListKeyRotations</code> operation to list the ID and import
+    #       state of each key material associated with a KMS key.</p>
     #          <p>If this operation fails, use the exception to help determine the problem. If the error is
     #       related to the key material, the import token, or wrapping key, use <a>GetParametersForImport</a> to get a new public key and import token for the KMS key
     #       and repeat the import procedure. For help, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-conceptual.html">Create a KMS key with imported key
@@ -4818,7 +5078,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ImportKeyMaterialRequest] params
     # @option params [String] :key_id
@@ -4880,6 +5140,10 @@ module Aws::KMS
     #         parameter defaults to <code>NEW_KEY_MATERIAL</code>. After the first key material is imported,
     #         if this parameter is omitted then the parameter defaults to
     #         <code>EXISTING_KEY_MATERIAL</code>.</p>
+    #            <p>For multi-Region keys, you must first import new key material into
+    #   the primary Region key. You should use the <code>NEW_KEY_MATERIAL</code> import type when importing key
+    #   material into the primary Region key. Then, you can import the same key material into the replica Region
+    #   key. The import type for the replica Region key should be <code>EXISTING_KEY_MATERIAL</code>.</p>
     # @option params [String] :key_material_description
     #   <p>Description for the key material being imported. This parameter is optional and only
     #         usable with symmetric encryption keys. If you do not specify a key material description, KMS
@@ -4985,7 +5249,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListAliasesRequest] params
     # @option params [String] :key_id
@@ -5097,19 +5361,21 @@ module Aws::KMS
     end
 
     # <p>Gets a list of all grants for the specified KMS key. </p>
-    #          <p>You must specify the KMS key in all requests. You can filter the grant list by grant ID or
-    #       grantee principal.</p>
+    #          <p>You must specify the KMS key in all requests. You can filter the grant list by grant ID,
+    #       grantee principal, or grantee service principal.</p>
     #          <p>For detailed information about grants, including grant terminology, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/grants.html">Grants in KMS</a> in the
     #         <i>
     #                <i>Key Management Service Developer Guide</i>
     #             </i>. For examples of creating grants in several
     #       programming languages, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/example_kms_CreateGrant_section.html">Use CreateGrant with an Amazon Web Services SDK or CLI</a>. </p>
     #          <note>
-    #             <p>The <code>GranteePrincipal</code> field in the <code>ListGrants</code> response usually contains the
-    #         user or role designated as the grantee principal in the grant. However, when the grantee
-    #         principal in the grant is an Amazon Web Services service, the <code>GranteePrincipal</code> field contains
-    #         the <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service
-    #           principal</a>, which might represent several different grantee principals.</p>
+    #             <p>When a grant is created with the <code>GranteePrincipal</code> field, the <code>ListGrants</code>
+    #         response usually contains the user or role designated as the grantee principal in the grant. However, if the grantee principal
+    #         is an Amazon Web Services service, the <code>GranteePrincipal</code> field contains an Amazon Web Services <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service principal</a>, which
+    #         might correspond to several different grantee principals, such as an IAM user, IAM role, or Amazon Web Services account.</p>
+    #             <p>When a grant is created with the <code>GranteeServicePrincipal</code> field, the <code>ListGrants</code>
+    # 	      response always includes a <code>GranteeServicePrincipal</code> that indicates the grantee is actually
+    #         an Amazon Web Services <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services">service principal</a>.</p>
     #          </note>
     #          <p>
     #             <b>Cross-account use</b>: Yes. To perform this operation on a KMS key in a different Amazon Web Services account, specify the key
@@ -5142,7 +5408,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListGrantsRequest] params
     # @option params [Integer] :limit
@@ -5177,13 +5443,21 @@ module Aws::KMS
     # @option params [String] :grantee_principal
     #   <p>Returns only grants where the specified principal is the grantee principal for the
     #         grant.</p>
+    #            <p>You can specify either <code>GranteePrincipal</code> or
+    #           <code>GranteeServicePrincipal</code>, but not both.</p>
+    # @option params [String] :grantee_service_principal
+    #   <p>Returns only grants where the specified Amazon Web Services service principal is the grantee service
+    #         principal for the grant. This filter is only usable by callers in a service principal.</p>
+    #            <p>You can specify either <code>GranteePrincipal</code> or
+    #           <code>GranteeServicePrincipal</code>, but not both.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     limit: 1,
     #     marker: "MarkerType",
     #     key_id: "KeyIdType", # required
     #     grant_id: "GrantIdType",
-    #     grantee_principal: "PrincipalIdType"
+    #     grantee_principal: "PrincipalIdType",
+    #     grantee_service_principal: "ServicePrincipalType"
     #   }
     #   options = {}
     #   response = client.list_grants(params, options)
@@ -5206,8 +5480,11 @@ module Aws::KMS
     #           },
     #           encryption_context_equals: {
     #             "EncryptionContextKey" => "EncryptionContextValue"
-    #           }
-    #         }
+    #           },
+    #           source_arn: "GrantConstraintSourceArnType"
+    #         },
+    #         grantee_service_principal: "ServicePrincipalType",
+    #         retiring_service_principal: "ServicePrincipalType"
     #       }
     #     ],
     #     next_marker: "MarkerType",
@@ -5242,7 +5519,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListKeyPoliciesRequest] params
     # @option params [String] :key_id
@@ -5353,7 +5630,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListKeyRotationsRequest] params
     # @option params [String] :key_id
@@ -5407,7 +5684,7 @@ module Aws::KMS
     #         key_material_id: "BackingKeyIdType",
     #         key_material_description: "KeyMaterialDescriptionType",
     #         import_state: "IMPORTED" # One of: ["IMPORTED", "PENDING_IMPORT"],
-    #         key_material_state: "NON_CURRENT" # One of: ["NON_CURRENT", "CURRENT", "PENDING_ROTATION"],
+    #         key_material_state: "NON_CURRENT" # One of: ["NON_CURRENT", "CURRENT", "PENDING_ROTATION", "PENDING_MULTI_REGION_IMPORT_AND_ROTATION"],
     #         expiration_model: "KEY_MATERIAL_EXPIRES" # One of: ["KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"],
     #         valid_to: Time.now,
     #         rotation_date: Time.now,
@@ -5454,7 +5731,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListKeysRequest] params
     # @option params [Integer] :limit
@@ -5566,7 +5843,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListResourceTagsRequest] params
     # @option params [String] :key_id
@@ -5648,7 +5925,7 @@ module Aws::KMS
     end
 
     # <p>Returns information about all grants in the Amazon Web Services account and Region that have the
-    #       specified retiring principal. </p>
+    #       specified retiring principal or retiring service principal. </p>
     #          <p>You can specify any principal in your Amazon Web Services account. The grants that are returned include
     #       grants for KMS keys in your Amazon Web Services account and other Amazon Web Services accounts. You might use this
     #       operation to determine which grants you may retire. To retire a grant, use the <a>RetireGrant</a> operation.</p>
@@ -5668,11 +5945,14 @@ module Aws::KMS
     #             <b>Required permissions</b>: <a href="https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html">kms:ListRetirableGrants</a> (IAM policy) in your
     #       Amazon Web Services account.</p>
     #          <note>
-    #             <p>KMS authorizes <code>ListRetirableGrants</code> requests by evaluating the caller
+    #             <p>When listing retirable grants by <code>RetiringPrincipal</code>, KMS authorizes
+    #         <code>ListRetirableGrants</code> requests by evaluating the caller
     #         account's kms:ListRetirableGrants permissions. The authorized resource in
-    #           <code>ListRetirableGrants</code> calls is the retiring principal specified in the request.
+    #         <code>ListRetirableGrants</code> calls is the retiring principal specified in the request.
     #         KMS does not evaluate the caller's permissions to verify their access to any KMS keys or
     #         grants that might be returned by the <code>ListRetirableGrants</code> call.</p>
+    #             <p>The <code>RetiringServicePrincipal</code> filter is only usable by callers in a
+    #         service principal.</p>
     #          </note>
     #          <p>
     #             <b>Related operations:</b>
@@ -5700,7 +5980,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ListRetirableGrantsRequest] params
     # @option params [Integer] :limit
@@ -5722,11 +6002,19 @@ module Aws::KMS
     #           <a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns">IAM ARNs</a> in the <i>
     #                  <i>Identity and Access Management User Guide</i>
     #               </i>.</p>
+    #            <p>You must specify either <code>RetiringPrincipal</code> or
+    #           <code>RetiringServicePrincipal</code>, but not both.</p>
+    # @option params [String] :retiring_service_principal
+    #   <p>The retiring service principal for which to list grants. This filter is only usable by
+    #         callers in a service principal.</p>
+    #            <p>You must specify either <code>RetiringPrincipal</code> or
+    #           <code>RetiringServicePrincipal</code>, but not both.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     limit: 1,
     #     marker: "MarkerType",
-    #     retiring_principal: "PrincipalIdType", # required
+    #     retiring_principal: "PrincipalIdType",
+    #     retiring_service_principal: "ServicePrincipalType"
     #   }
     #   options = {}
     #   response = client.list_retirable_grants(params, options)
@@ -5749,8 +6037,11 @@ module Aws::KMS
     #           },
     #           encryption_context_equals: {
     #             "EncryptionContextKey" => "EncryptionContextValue"
-    #           }
-    #         }
+    #           },
+    #           source_arn: "GrantConstraintSourceArnType"
+    #         },
+    #         grantee_service_principal: "ServicePrincipalType",
+    #         retiring_service_principal: "ServicePrincipalType"
     #       }
     #     ],
     #     next_marker: "MarkerType",
@@ -5777,7 +6068,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>GetKeyPolicy</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::PutKeyPolicyRequest] params
     # @option params [String] :key_id
@@ -5929,11 +6220,19 @@ module Aws::KMS
     #          </ul>
     #          <p>The KMS key that you use for this operation must be in a compatible key state. For
     # details, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html">Key states of KMS keys</a> in the <i>Key Management Service Developer Guide</i>.</p>
+    #          <note>
+    #             <p>When using grants with <code>SourceArn</code> constraints for
+    #           <code>ReEncrypt</code> operations, the grants on both the source KMS key (for
+    #           <code>ReEncryptFrom</code>) and the destination KMS key (for <code>ReEncryptTo</code>)
+    #         must specify the same <code>SourceArn</code> value. </p>
+    #          </note>
     #          <p>
     #             <b>Cross-account use</b>: Yes. The source KMS key and
     #       destination KMS key can be in different Amazon Web Services accounts. Either or both KMS keys can be in a
-    #       different account than the caller. To specify a KMS key in a different account, you must use
-    #       its key ARN or alias ARN.</p>
+    #       different account than the caller. To specify a KMS key in a different account, use the <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN">key ARN</a>
+    #       or <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-alias-ARN">alias ARN</a>. A short <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id">key ID</a>
+    #       is also acceptable for the source key when decrypting symmetric ciphertexts, though
+    #       using a full key ARN is recommended to be more explicit about the intended KMS key.</p>
     #          <p>
     #             <b>Required permissions</b>:</p>
     #          <ul>
@@ -5978,15 +6277,16 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ReEncryptRequest] params
     # @option params [String] :ciphertext_blob
     #   <p>Ciphertext of the data to reencrypt.</p>
+    #            <p>This parameter is required in all cases except when <code>DryRun</code> is <code>true</code> and <code>DryRunModifiers</code> is set to <code>IGNORE_CIPHERTEXT</code>.</p>
     # @option params [Hash<String, String>] :source_encryption_context
     #   <p>Specifies the encryption context to use to decrypt the ciphertext. Enter the same
     #         encryption context that was used to encrypt the ciphertext.</p>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -5998,10 +6298,11 @@ module Aws::KMS
     #         different KMS key, the <code>ReEncrypt</code> operation throws an
     #           <code>IncorrectKeyException</code>.</p>
     #            <p>This parameter is required only when the ciphertext was encrypted under an asymmetric KMS
-    #         key. If you used a symmetric encryption KMS key, KMS can get the KMS key from metadata that
-    #         it adds to the symmetric ciphertext blob. However, it is always recommended as a best
+    #         key or when <code>DryRun</code> is <code>true</code> and <code>DryRunModifiers</code> is set to
+    #         <code>IGNORE_CIPHERTEXT</code>. If you used a symmetric encryption KMS key, KMS can get the KMS key
+    #         from metadata that it adds to the symmetric ciphertext blob. However, it is always recommended as a best
     #         practice. This practice ensures that you use the KMS key that you intend.</p>
-    #            <p>To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>. To specify a KMS key in a different Amazon Web Services account, you must use the key ARN or alias ARN.</p>
+    #            <p>To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it with <code>"alias/"</code>. To specify a KMS key in a different Amazon Web Services account, you should use the key ARN or alias ARN.</p>
     #            <p>For example:</p>
     #            <ul>
     #               <li>
@@ -6056,7 +6357,7 @@ module Aws::KMS
     #            <p>A destination encryption context is valid only when the destination KMS key is a symmetric
     #         encryption KMS key. The standard ciphertext format for asymmetric KMS keys does not include
     #         fields for metadata.</p>
-    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data. 
+    #            <p>An <i>encryption context</i> is a collection of non-secret key-value pairs that represent additional authenticated data.
     #   When you use an encryption context to encrypt data, you must specify the same (an exact case-sensitive match) encryption context to decrypt the data. An encryption context is supported
     #   only on operations with symmetric encryption KMS keys. On operations with symmetric encryption KMS keys, an encryption context is optional, but it is strongly recommended.</p>
     #            <p>For more information, see
@@ -6082,6 +6383,13 @@ module Aws::KMS
     # @option params [Boolean] :dry_run
     #   <p>Checks if your request will succeed. <code>DryRun</code> is an optional parameter. </p>
     #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
+    # @option params [Array<String>] :dry_run_modifiers
+    #   <p>Specifies the modifiers to apply to the dry run operation. <code>DryRunModifiers</code> is an optional parameter that only applies when <code>DryRun</code> is
+    #           set to <code>true</code>.</p>
+    #            <p>When set to <code>IGNORE_CIPHERTEXT</code>, KMS performs only authorization validation without ciphertext validation. This allows you to test permissions
+    #           without requiring a valid ciphertext blob.</p>
+    #            <p>To learn more about how to use this parameter, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html">Testing your
+    #           permissions</a> in the <i>Key Management Service Developer Guide</i>.</p>
     # @example To reencrypt data
     #   # The following example reencrypts data with the specified KMS key.
     #   params = {
@@ -6102,7 +6410,7 @@ module Aws::KMS
     #   }
     # @example Request syntax with placeholder values
     #   params = {
-    #     ciphertext_blob: "data", # required
+    #     ciphertext_blob: "data",
     #     source_encryption_context: {
     #       "EncryptionContextKey" => "EncryptionContextValue"
     #     },
@@ -6114,7 +6422,8 @@ module Aws::KMS
     #     source_encryption_algorithm: "SYMMETRIC_DEFAULT" # One of: ["SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"],
     #     destination_encryption_algorithm: "SYMMETRIC_DEFAULT" # One of: ["SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"],
     #     grant_tokens: ["GrantTokenType"],
-    #     dry_run: false
+    #     dry_run: false,
+    #     dry_run_modifiers: ["IGNORE_CIPHERTEXT" # One of: ["IGNORE_CIPHERTEXT"]]
     #   }
     #   options = {}
     #   response = client.re_encrypt(params, options)
@@ -6215,7 +6524,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ReplicateKeyRequest] params
     # @option params [String] :key_id
@@ -6406,9 +6715,9 @@ module Aws::KMS
     #       expiration_model: "KEY_MATERIAL_EXPIRES" # One of: ["KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"],
     #       key_manager: "AWS" # One of: ["AWS", "CUSTOMER"],
     #       customer_master_key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"],
-    #       key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87"],
+    #       key_spec: "RSA_2048" # One of: ["RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519"],
     #       encryption_algorithms: ["SYMMETRIC_DEFAULT" # One of: ["SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"]],
-    #       signing_algorithms: ["RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"]],
+    #       signing_algorithms: ["RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"]],
     #       key_agreement_algorithms: ["ECDH" # One of: ["ECDH"]],
     #       multi_region: false,
     #       multi_region_configuration: {
@@ -6491,7 +6800,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::RetireGrantRequest] params
     # @option params [String] :grant_token
@@ -6589,7 +6898,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::RevokeGrantRequest] params
     # @option params [String] :key_id
@@ -6652,7 +6961,7 @@ module Aws::KMS
     #       2024, and you perform an on-demand rotation on April 10, 2024, the key will automatically
     #       rotate, as scheduled, on April 14, 2024 and every 730 days thereafter.</p>
     #          <note>
-    #             <p>You can perform on-demand key rotation a <b>maximum of 10
+    #             <p>You can perform on-demand key rotation a <b>maximum of 25
     #           times</b> per KMS key. You can use the KMS console to view the number of
     #         remaining on-demand rotations available for a KMS key.</p>
     #          </note>
@@ -6661,15 +6970,14 @@ module Aws::KMS
     #       on-demand rotations were performed. You can monitor rotation of the key material for your KMS
     #       keys in CloudTrail and Amazon CloudWatch.</p>
     #          <p>On-demand key rotation is supported only on symmetric encryption KMS keys. You cannot
-    #       perform on-demand rotation of <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">asymmetric KMS keys</a>, <a href="https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html">HMAC KMS keys</a>, multi-Region KMS
-    #       keys with <a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html">imported key
-    #         material</a>, or KMS keys in a <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html">custom key store</a>. When you initiate on-demand key
-    #       rotation on a symmetric encryption KMS key with imported key material, you must have already
-    #       imported <a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html">new key material</a> and that
+    #       perform on-demand rotation of <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html">asymmetric KMS keys</a>, <a href="https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html">HMAC KMS keys</a>, or KMS keys in a
+    #       <a href="https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html">custom key store</a>. When you initiate on-demand key rotation on a symmetric encryption KMS key
+    #       with imported key material, you must have already imported <a href="https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys-import-key-material.html">new key material</a> and that
     #       key material's state should be <code>PENDING_ROTATION</code>. Use the
     #         <code>ListKeyRotations</code> operation to check the state of all key materials associated
-    #       with a KMS key. To perform on-demand rotation of a set of related <a href="https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#multi-region-rotate">multi-Region keys</a>, invoke
-    #       the on-demand rotation on the primary key.</p>
+    #       with a KMS key. To perform on-demand rotation of a set of related <a href="https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#multi-region-rotate">multi-Region keys</a>, import
+    #         new key material in the primary Region key, import the same key material in each replica
+    #         Region key, and invoke the on-demand rotation on the primary Region key.</p>
     #          <p>You cannot initiate on-demand rotation of <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-key">Amazon Web Services managed KMS keys</a>. KMS
     #       always rotates the key material of Amazon Web Services managed keys every year. Rotation of <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-owned-key">Amazon Web Services owned KMS
     #         keys</a> is managed by the Amazon Web Services service that owns the key.</p>
@@ -6710,7 +7018,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::RotateKeyOnDemandRequest] params
     # @option params [String] :key_id
@@ -6818,7 +7126,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::ScheduleKeyDeletionRequest] params
     # @option params [String] :key_id
@@ -6922,7 +7230,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>Verify</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::SignRequest] params
     # @option params [String] :key_id
@@ -6971,6 +7279,23 @@ module Aws::KMS
     #             <code>Message</code> parameter is a message digest. If you use the <code>DIGEST</code>
     #           value with an unhashed message, the security of the signing operation can be
     #           compromised.</p>
+    #            </important>
+    #            <p>When using ECC_NIST_EDWARDS25519 KMS keys:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>ED25519_SHA_512 signing algorithm requires KMS <code>MessageType:RAW</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>ED25519_PH_SHA_512 signing algorithm requires KMS <code>MessageType:DIGEST</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #            <important>
+    #               <p>When you specify the ED25519_PH_SHA_512 signing algorithm with <code>MessageType:DIGEST</code>, KMS
+    #         still performs the SHA-512 prehash described in <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf#page=39">Step 1
+    #         of Section 7.8.1 in FIPS 186-5</a>. This means the input is hashed twice: once by you and once by KMS.
+    #         </p>
     #            </important>
     #            <p>When the value of <code>MessageType</code> is <code>DIGEST</code>, the length of the
     #           <code>Message</code> value must match the length of hashed messages for the specified
@@ -7050,7 +7375,7 @@ module Aws::KMS
     #     message: "data", # required
     #     message_type: "RAW" # One of: ["RAW", "DIGEST", "EXTERNAL_MU"],
     #     grant_tokens: ["GrantTokenType"],
-    #     signing_algorithm: "RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"], # required
+    #     signing_algorithm: "RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"], # required
     #     dry_run: false
     #   }
     #   options = {}
@@ -7060,7 +7385,7 @@ module Aws::KMS
     #   {
     #     key_id: "KeyIdType",
     #     signature: "data",
-    #     signing_algorithm: "RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"]
+    #     signing_algorithm: "RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"]
     #   }
     # @return [Types::SignResponse]
     def sign(params = {}, options = {})
@@ -7115,7 +7440,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :key_id
@@ -7221,7 +7546,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :key_id
@@ -7334,7 +7659,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UpdateAliasRequest] params
     # @option params [String] :alias_name
@@ -7422,8 +7747,10 @@ module Aws::KMS
     #       name (<code>NewCustomKeyStoreName</code>), to tell KMS about a change to the
     #         <code>kmsuser</code> crypto user password (<code>KeyStorePassword</code>), or to associate
     #       the custom key store with a different, but related, CloudHSM cluster
-    #         (<code>CloudHsmClusterId</code>). To update any property of an CloudHSM key store, the
-    #         <code>ConnectionState</code> of the CloudHSM key store must be <code>DISCONNECTED</code>. </p>
+    #         (<code>CloudHsmClusterId</code>). To update most properties of an CloudHSM key store, the
+    #         <code>ConnectionState</code> of the CloudHSM key store must be <code>DISCONNECTED</code>.
+    #         However, you can update the <code>CustomKeyStoreName</code> of an AWS CloudHSM key store
+    #         when it is in the <code>CONNECTED</code> or <code>DISCONNECTED</code> state.</p>
     #          <p>For an external key store, you can use this operation to change the custom key store
     #       friendly name (<code>NewCustomKeyStoreName</code>), or to tell KMS about a change to the
     #       external key store proxy authentication credentials
@@ -7485,7 +7812,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UpdateCustomKeyStoreRequest] params
     # @option params [String] :custom_key_store_id
@@ -7497,8 +7824,7 @@ module Aws::KMS
     #            <important>
     #               <p>Do not include confidential or sensitive information in this field. This field may be displayed in plaintext in CloudTrail logs and other output.</p>
     #            </important>
-    #            <p>To change this value, an CloudHSM key store must be disconnected. An external key store can
-    #         be connected or disconnected.</p>
+    #            <p>To change this value, the custom key store can be connected or disconnected.</p>
     # @option params [String] :key_store_password
     #   <p>Enter the current password of the <code>kmsuser</code> crypto user (CU) in the CloudHSM
     #         cluster that is associated with the custom key store. This parameter is valid only for custom
@@ -7547,6 +7873,11 @@ module Aws::KMS
     #         key store proxy (XKS proxy). This parameter is valid when the <code>CustomKeyStoreType</code>
     #         is <code>EXTERNAL_KEY_STORE</code> and the <code>XksProxyConnectivity</code> is
     #           <code>VPC_ENDPOINT_SERVICE</code>.</p>
+    #            <p>To change this value, the external key store must be disconnected.</p>
+    # @option params [String] :xks_proxy_vpc_endpoint_service_owner
+    #   <p>Changes the Amazon Web Services account ID that KMS uses to identify the Amazon VPC endpoint service for
+    #         your external key store proxy (XKS proxy). This parameter is optional. If not specified, the current
+    #         Amazon Web Services account ID for the VPC endpoint service will not be updated.</p>
     #            <p>To change this value, the external key store must be disconnected.</p>
     # @option params [Types::XksProxyAuthenticationCredentialType] :xks_proxy_authentication_credential
     #   <p>Changes the credentials that KMS uses to sign requests to the external key store proxy
@@ -7631,6 +7962,7 @@ module Aws::KMS
     #     xks_proxy_uri_endpoint: "XksProxyUriEndpointType",
     #     xks_proxy_uri_path: "XksProxyUriPathType",
     #     xks_proxy_vpc_endpoint_service_name: "XksProxyVpcEndpointServiceNameType",
+    #     xks_proxy_vpc_endpoint_service_owner: "AccountIdType",
     #     xks_proxy_authentication_credential: {
     #       access_key_id: "XksProxyAuthenticationAccessKeyIdType", # required
     #       raw_secret_access_key: "XksProxyAuthenticationRawSecretAccessKeyType", # required
@@ -7671,7 +8003,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UpdateKeyDescriptionRequest] params
     # @option params [String] :key_id
@@ -7787,7 +8119,7 @@ module Aws::KMS
     #             </li>
     #          </ul>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::UpdatePrimaryRegionRequest] params
     # @option params [String] :key_id
@@ -7813,10 +8145,10 @@ module Aws::KMS
     #            <p>When the operation completes, the multi-Region key in this Region will be the primary
     #         key.</p>
     # @example To update the primary Region of a multi-Region KMS key
-    #   # The following UpdatePrimaryRegion example changes the multi-Region replica key in the eu-central-1 Region to the primary key. The current primary key in the us-west-1 Region becomes a replica key. 
-    # # 
+    #   # The following UpdatePrimaryRegion example changes the multi-Region replica key in the eu-central-1 Region to the primary key. The current primary key in the us-west-1 Region becomes a replica key.
+    # #
     # # The KeyId parameter identifies the current primary key in the us-west-1 Region. The PrimaryRegion parameter indicates the Region of the replica key that will become the new primary key.
-    # # 
+    # #
     # # This operation does not return any output. To verify that primary key is changed, use the DescribeKey operation.
     #   params = {
     #     key_id: "arn:aws:kms:us-west-1:111122223333:key/mrk-1234abcd12ab34cd56ef1234567890ab",
@@ -7878,7 +8210,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>Sign</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::VerifyRequest] params
     # @option params [String] :key_id
@@ -7929,6 +8261,23 @@ module Aws::KMS
     #             <code>Message</code> parameter is a message digest. If you use the <code>DIGEST</code>
     #           value with an unhashed message, the security of the signing operation can be
     #           compromised.</p>
+    #            </important>
+    #            <p>When using ECC_NIST_EDWARDS25519 KMS keys:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>ED25519_SHA_512 signing algorithm requires KMS <code>MessageType:RAW</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>ED25519_PH_SHA_512 signing algorithm requires KMS <code>MessageType:DIGEST</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #            <important>
+    #               <p>When you specify the ED25519_PH_SHA_512 signing algorithm with <code>MessageType:DIGEST</code>, KMS
+    #         still performs the SHA-512 prehash described in <a href="https://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.186-5.pdf#page=39">Step 1
+    #         of Section 7.8.1 in FIPS 186-5</a>. This means the input is hashed twice: once by you and once by KMS.
+    #         </p>
     #            </important>
     #            <p>When the value of <code>MessageType</code> is <code>DIGEST</code>, the length of the
     #           <code>Message</code> value must match the length of hashed messages for the specified
@@ -7989,7 +8338,7 @@ module Aws::KMS
     #     signing_algorithm: ECDSA_SHA_384
     #   }
     # @example To use an asymmetric KMS key to verify a digital signature on a message digest
-    #   # This operation uses the public key in an RSA asymmetric signing key pair to verify the digital signature of a message digest. Hashing a message into a digest before sending it to KMS lets you verify messages that exceed the 4096-byte message size limit. To indicate that the value of Message is a digest, use the MessageType parameter 
+    #   # This operation uses the public key in an RSA asymmetric signing key pair to verify the digital signature of a message digest. Hashing a message into a digest before sending it to KMS lets you verify messages that exceed the 4096-byte message size limit. To indicate that the value of Message is a digest, use the MessageType parameter
     #   params = {
     #     key_id: "arn:aws:kms:us-east-2:111122223333:key/0987dcba-09fe-87dc-65ba-ab0987654321",
     #     message: "<message digest to be verified>",
@@ -8011,7 +8360,7 @@ module Aws::KMS
     #     message: "data", # required
     #     message_type: "RAW" # One of: ["RAW", "DIGEST", "EXTERNAL_MU"],
     #     signature: "data", # required
-    #     signing_algorithm: "RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"], # required
+    #     signing_algorithm: "RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"], # required
     #     grant_tokens: ["GrantTokenType"],
     #     dry_run: false
     #   }
@@ -8022,7 +8371,7 @@ module Aws::KMS
     #   {
     #     key_id: "KeyIdType",
     #     signature_valid: false,
-    #     signing_algorithm: "RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256"]
+    #     signing_algorithm: "RSASSA_PSS_SHA_256" # One of: ["RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"]
     #   }
     # @return [Types::VerifyResponse]
     def verify(params = {}, options = {})
@@ -8052,7 +8401,7 @@ module Aws::KMS
     #             <b>Related operations</b>: <a>GenerateMac</a>
     #          </p>
     #          <p>
-    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model. 
+    #             <b>Eventual consistency</b>: The KMS API follows an eventual consistency model.
     #   For more information, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency">KMS eventual consistency</a>.</p>
     # @param [Hash, Types::VerifyMacRequest] params
     # @option params [String] :message

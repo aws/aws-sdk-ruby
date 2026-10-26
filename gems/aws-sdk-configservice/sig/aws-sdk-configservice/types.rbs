@@ -301,6 +301,19 @@ module Aws::ConfigService
       attr_accessor configuration_recorder: Types::ConfigurationRecorder?
     end
 
+    class AzureConnectorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tenant_identifier: String,
+        ?client_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tenant_identifier: String?
+      attr_accessor client_identifier: String?
+    end
+
     class BaseConfigurationItem
       include Smithy::Schema::Structure
 
@@ -522,6 +535,7 @@ module Aws::ConfigService
         ?config_rule_state: String,
         ?created_by: String,
         ?evaluation_modes: Array[Types::EvaluationModeConfiguration],
+        ?rule_evaluation_visibility: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -536,6 +550,7 @@ module Aws::ConfigService
       attr_accessor config_rule_state: String?
       attr_accessor created_by: String?
       attr_accessor evaluation_modes: Array[Types::EvaluationModeConfiguration]?
+      attr_accessor rule_evaluation_visibility: String?
     end
 
     class ConfigRuleComplianceFilters
@@ -740,6 +755,8 @@ module Aws::ConfigService
         ?recording_mode: Types::RecordingMode,
         ?recording_scope: String,
         ?service_principal: String,
+        ?connector_arn: String,
+        ?scope_configuration: Types::ScopeConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -750,6 +767,8 @@ module Aws::ConfigService
       attr_accessor recording_mode: Types::RecordingMode?
       attr_accessor recording_scope: String?
       attr_accessor service_principal: String?
+      attr_accessor connector_arn: String?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
     end
 
     class ConfigurationRecorderFilter
@@ -806,6 +825,7 @@ module Aws::ConfigService
         ?name: String,
         ?service_principal: String,
         ?recording_scope: String,
+        ?provider: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -813,6 +833,7 @@ module Aws::ConfigService
       attr_accessor name: String?
       attr_accessor service_principal: String?
       attr_accessor recording_scope: String?
+      attr_accessor provider: String?
     end
 
     class ConflictException
@@ -1019,6 +1040,70 @@ module Aws::ConfigService
       attr_accessor message: String?
     end
 
+    class Connector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?arn: String,
+        ?connector_configuration: Types::ConnectorConfiguration,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor connector_configuration: Types::ConnectorConfiguration?
+      attr_accessor created_time: Time?
+    end
+
+    class ConnectorConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?azure: Types::AzureConnectorConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor azure: Types::AzureConnectorConfiguration?
+    end
+
+    class ConnectorFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?filter_name: String,
+        ?filter_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor filter_name: String?
+      attr_accessor filter_values: Array[String]?
+    end
+
+    module ConnectorFilterName
+      provider: String
+    end
+
+    class ConnectorSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+        ?provider: String,
+        ?tenant_identifier: String,
+        ?created_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
+      attr_accessor provider: String?
+      attr_accessor tenant_identifier: String?
+      attr_accessor created_time: Time?
+    end
+
     class CustomPolicyDetails
       include Smithy::Schema::Structure
 
@@ -1089,6 +1174,17 @@ module Aws::ConfigService
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor conformance_pack_name: String?
+    end
+
+    class DeleteConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
     end
 
     class DeleteDeliveryChannelRequest
@@ -1232,10 +1328,12 @@ module Aws::ConfigService
 
       def initialize: (
         ?service_principal: String,
+        ?arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor service_principal: String?
+      attr_accessor arn: String?
     end
 
     class DeleteServiceLinkedConfigurationRecorderResponse
@@ -1516,10 +1614,12 @@ module Aws::ConfigService
 
       def initialize: (
         ?evaluation_mode: String,
+        ?rule_evaluation_visibility: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor evaluation_mode: String?
+      attr_accessor rule_evaluation_visibility: String?
     end
 
     class DescribeConfigRulesRequest
@@ -1527,14 +1627,14 @@ module Aws::ConfigService
 
       def initialize: (
         ?config_rule_names: Array[String],
-        ?next_token: String,
         ?filters: Types::DescribeConfigRulesFilters,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor config_rule_names: Array[String]?
-      attr_accessor next_token: String?
       attr_accessor filters: Types::DescribeConfigRulesFilters?
+      attr_accessor next_token: String?
     end
 
     class DescribeConfigRulesResponse
@@ -2588,6 +2688,28 @@ module Aws::ConfigService
       attr_accessor next_token: String?
     end
 
+    class GetConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+    end
+
+    class GetConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector: Types::Connector,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector: Types::Connector?
+    end
+
     class GetCustomRulePolicyRequest
       include Smithy::Schema::Structure
 
@@ -3117,6 +3239,34 @@ module Aws::ConfigService
       attr_accessor conformance_pack_compliance_scores: Array[Types::ConformancePackComplianceScore]?
     end
 
+    class ListConnectorsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?filters: Array[Types::ConnectorFilter],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor filters: Array[Types::ConnectorFilter]?
+    end
+
+    class ListConnectorsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_summaries: Array[Types::ConnectorSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_summaries: Array[Types::ConnectorSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListDiscoveredResourcesRequest
       include Smithy::Schema::Structure
 
@@ -3267,6 +3417,17 @@ module Aws::ConfigService
     end
 
     class MaxNumberOfConformancePacksExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class MaxNumberOfConnectorsExceededException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -3900,6 +4061,10 @@ module Aws::ConfigService
       attr_accessor requester_aws_region: String?
     end
 
+    module Provider
+      AZURE: String
+    end
+
     class PutAggregationAuthorizationRequest
       include Smithy::Schema::Structure
 
@@ -3993,6 +4158,7 @@ module Aws::ConfigService
         ?delivery_s3_key_prefix: String,
         ?conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter],
         ?template_ssm_document_details: Types::TemplateSSMDocumentDetails,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4003,6 +4169,7 @@ module Aws::ConfigService
       attr_accessor delivery_s3_key_prefix: String?
       attr_accessor conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter]?
       attr_accessor template_ssm_document_details: Types::TemplateSSMDocumentDetails?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class PutConformancePackResponse
@@ -4014,6 +4181,30 @@ module Aws::ConfigService
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor conformance_pack_arn: String?
+    end
+
+    class PutConnectorRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?connector_configuration: Types::ConnectorConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor connector_configuration: Types::ConnectorConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutConnectorResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
     end
 
     class PutDeliveryChannelRequest
@@ -4084,6 +4275,7 @@ module Aws::ConfigService
         ?organization_custom_rule_metadata: Types::OrganizationCustomRuleMetadata,
         ?excluded_accounts: Array[String],
         ?organization_custom_policy_rule_metadata: Types::OrganizationCustomPolicyRuleMetadata,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4092,6 +4284,7 @@ module Aws::ConfigService
       attr_accessor organization_custom_rule_metadata: Types::OrganizationCustomRuleMetadata?
       attr_accessor excluded_accounts: Array[String]?
       attr_accessor organization_custom_policy_rule_metadata: Types::OrganizationCustomPolicyRuleMetadata?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class PutOrganizationConfigRuleResponse
@@ -4116,6 +4309,7 @@ module Aws::ConfigService
         ?delivery_s3_key_prefix: String,
         ?conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter],
         ?excluded_accounts: Array[String],
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4126,6 +4320,7 @@ module Aws::ConfigService
       attr_accessor delivery_s3_key_prefix: String?
       attr_accessor conformance_pack_input_parameters: Array[Types::ConformancePackInputParameter]?
       attr_accessor excluded_accounts: Array[String]?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class PutOrganizationConformancePackResponse
@@ -4280,6 +4475,36 @@ module Aws::ConfigService
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor query_arn: String?
+    end
+
+    class PutThirdPartyServiceLinkedConfigurationRecorderRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+        ?connector_arn: String,
+        ?scope_configuration: Types::ScopeConfiguration,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+      attr_accessor connector_arn: String?
+      attr_accessor scope_configuration: Types::ScopeConfiguration?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class PutThirdPartyServiceLinkedConfigurationRecorderResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor name: String?
     end
 
     class QueryInfo
@@ -5164,6 +5389,97 @@ module Aws::ConfigService
       SageMakerInferenceExperiment: String
       SecurityHubStandard: String
       TransferProfile: String
+      CloudFormationStackSet: String
+      MediaPackageV2Channel: String
+      S3AccessGrantsLocation: String
+      S3AccessGrant: String
+      S3AccessGrantsInstance: String
+      EMRServerlessApplication: String
+      ConfigAggregationAuthorization: String
+      BedrockApplicationInferenceProfile: String
+      ApiGatewayV2Integration: String
+      SageMakerMlflowTrackingServer: String
+      SageMakerModelBiasJobDefinition: String
+      SecretsManagerRotationSchedule: String
+      DeadlineQueueFleetAssociation: String
+      ECRRepositoryCreationTemplate: String
+      CloudFormationLambdaHook: String
+      EC2SubnetNetworkAclAssociation: String
+      ApiGatewayUsagePlan: String
+      AppConfigExtension: String
+      DeadlineFleet: String
+      EMRStudio: String
+      S3TablesTableBucket: String
+      CloudFrontRealtimeLogConfig: String
+      BackupGatewayHypervisor: String
+      BCMDataExportsExport: String
+      CloudFormationGuardHook: String
+      CloudFrontPublicKey: String
+      CloudTrailEventDataStore: String
+      EntityResolutionIdMappingWorkflow: String
+      EntityResolutionSchemaMapping: String
+      IoTDomainConfiguration: String
+      PCAConnectorADDirectoryRegistration: String
+      RDSIntegration: String
+      ConfigConformancePack: String
+      RolesAnywhereProfile: String
+      CodeArtifactDomain: String
+      BackupRestoreTestingPlan: String
+      ConfigStoredQuery: String
+      SageMakerDataQualityJobDefinition: String
+      SageMakerModelExplainabilityJobDefinition: String
+      SageMakerModelQualityJobDefinition: String
+      SageMakerStudioLifecycleConfig: String
+      SESDedicatedIpPool: String
+      SESMailManagerTrafficPolicy: String
+      SSMResourceDataSync: String
+      BedrockAgentCoreRuntime: String
+      BedrockAgentCoreBrowserCustom: String
+      ElasticLoadBalancingV2TargetGroup: String
+      EMRContainersVirtualCluster: String
+      EntityResolutionMatchingWorkflow: String
+      IoTCoreDeviceAdvisorSuiteDefinition: String
+      EC2SecurityGroupVpcAssociation: String
+      EC2VerifiedAccessInstance: String
+      KafkaConnectCustomPlugin: String
+      NetworkManagerTransitGatewayPeering: String
+      OpenSearchServerlessSecurityConfig: String
+      RedshiftIntegration: String
+      RolesAnywhereTrustAnchor: String
+      Route53ProfilesProfileAssociation: String
+      SSMIncidentsResponsePlan: String
+      TransferServer: String
+      GlueDatabase: String
+      OrganizationsOrganizationalUnit: String
+      EC2IPAMPoolCidr: String
+      EC2VPCGatewayAttachment: String
+      BedrockPrompt: String
+      ComprehendFlywheel: String
+      DataSyncAgent: String
+      MediaTailorLiveSource: String
+      MSKServerlessCluster: String
+      IoTSiteWiseAsset: String
+      B2BICapability: String
+      CloudFrontKeyValueStore: String
+      DeadlineMonitor: String
+      GuardDutyMalwareProtectionPlan: String
+      LocationAPIKey: String
+      MediaPackageV2OriginEndpoint: String
+      PCAConnectorADConnector: String
+      S3TablesTableBucketPolicy: String
+      SecretsManagerResourcePolicy: String
+      SSMContactsContact: String
+      IoTThingGroup: String
+      ImageBuilderLifecyclePolicy: String
+      GameLiftBuild: String
+      ECRReplicationConfiguration: String
+      EC2SubnetCidrBlock: String
+      ConnectSecurityProfile: String
+      CleanRoomsMLTrainingDataset: String
+      AppStreamAppBlockBuilder: String
+      Route53DNSSEC: String
+      SageMakerUserProfile: String
+      ApiGatewayMethod: String
     end
 
     class ResourceValue
@@ -5194,6 +5510,11 @@ module Aws::ConfigService
       attr_accessor retention_period_in_days: Integer?
     end
 
+    module RuleEvaluationVisibility
+      EXTERNAL: String
+      INTERNAL: String
+    end
+
     class Scope
       include Smithy::Schema::Structure
 
@@ -5202,6 +5523,7 @@ module Aws::ConfigService
         ?tag_key: String,
         ?tag_value: String,
         ?compliance_resource_id: String,
+        ?service_principals: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5209,6 +5531,24 @@ module Aws::ConfigService
       attr_accessor tag_key: String?
       attr_accessor tag_value: String?
       attr_accessor compliance_resource_id: String?
+      attr_accessor service_principals: Array[String]?
+    end
+
+    class ScopeConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scope_type: String,
+        ?scope_values: Array[String],
+        ?all_regions: bool,
+        ?included_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scope_type: String?
+      attr_accessor scope_values: Array[String]?
+      attr_accessor all_regions: bool?
+      attr_accessor included_regions: Array[String]?
     end
 
     class SelectAggregateResourceConfigRequest

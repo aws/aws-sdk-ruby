@@ -1,0 +1,1465 @@
+module Aws::LambdaMicrovms
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module Architecture
+      ARM_64: String
+    end
+
+    module BuildState
+      PENDING: String
+      IN_PROGRESS: String
+      SUCCESSFUL: String
+      FAILED: String
+    end
+
+    module Capability
+      ALL: String
+    end
+
+    module Chipset
+      GRAVITON: String
+    end
+
+    class CloudWatchLogging
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group: String,
+        ?log_stream: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group: String?
+      attr_accessor log_stream: String?
+    end
+
+    class CodeArtifact
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?uri: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor uri: String?
+
+      class Uri < CodeArtifact
+      end
+      class Unknown < CodeArtifact
+      end
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CpuConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?architecture: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor architecture: String?
+    end
+
+    class CreateMicrovmAuthTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?microvm_identifier: String,
+        ?expiration_in_minutes: Integer,
+        ?allowed_ports: Array[Types::PortSpecification],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor microvm_identifier: String?
+      attr_accessor expiration_in_minutes: Integer?
+      attr_accessor allowed_ports: Array[Types::PortSpecification]?
+    end
+
+    class CreateMicrovmAuthTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_token: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_token: Hash[String, String]?
+    end
+
+    class CreateMicrovmImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_image_arn: String,
+        ?base_image_version: String,
+        ?build_role_arn: String,
+        ?description: String,
+        ?code_artifact: Types::CodeArtifact,
+        ?logging: Types::Logging,
+        ?egress_network_connectors: Array[String],
+        ?cpu_configurations: Array[Types::CpuConfiguration],
+        ?resources: Array[Types::Resources],
+        ?additional_os_capabilities: Array[String],
+        ?hooks: Types::Hooks,
+        ?environment_variables: Hash[String, String],
+        ?name: String,
+        ?tags: Hash[String, String],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_image_arn: String?
+      attr_accessor base_image_version: String?
+      attr_accessor build_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor code_artifact: Types::CodeArtifact?
+      attr_accessor logging: Types::Logging?
+      attr_accessor egress_network_connectors: Array[String]?
+      attr_accessor cpu_configurations: Array[Types::CpuConfiguration]?
+      attr_accessor resources: Array[Types::Resources]?
+      attr_accessor additional_os_capabilities: Array[String]?
+      attr_accessor hooks: Types::Hooks?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor name: String?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateMicrovmImageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_arn: String,
+        ?name: String,
+        ?state: String,
+        ?latest_active_image_version: String,
+        ?latest_failed_image_version: String,
+        ?created_at: Time,
+        ?base_image_arn: String,
+        ?base_image_version: String,
+        ?build_role_arn: String,
+        ?description: String,
+        ?code_artifact: Types::CodeArtifact,
+        ?logging: Types::Logging,
+        ?egress_network_connectors: Array[String],
+        ?cpu_configurations: Array[Types::CpuConfiguration],
+        ?resources: Array[Types::Resources],
+        ?additional_os_capabilities: Array[String],
+        ?hooks: Types::Hooks,
+        ?environment_variables: Hash[String, String],
+        ?tags: Hash[String, String],
+        ?updated_at: Time,
+        ?image_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor latest_active_image_version: String?
+      attr_accessor latest_failed_image_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor base_image_arn: String?
+      attr_accessor base_image_version: String?
+      attr_accessor build_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor code_artifact: Types::CodeArtifact?
+      attr_accessor logging: Types::Logging?
+      attr_accessor egress_network_connectors: Array[String]?
+      attr_accessor cpu_configurations: Array[Types::CpuConfiguration]?
+      attr_accessor resources: Array[Types::Resources]?
+      attr_accessor additional_os_capabilities: Array[String]?
+      attr_accessor hooks: Types::Hooks?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor updated_at: Time?
+      attr_accessor image_version: String?
+    end
+
+    class CreateMicrovmShellAuthTokenRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?microvm_identifier: String,
+        ?expiration_in_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor microvm_identifier: String?
+      attr_accessor expiration_in_minutes: Integer?
+    end
+
+    class CreateMicrovmShellAuthTokenResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?auth_token: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor auth_token: Hash[String, String]?
+    end
+
+    class DeleteMicrovmImageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_identifier: String?
+    end
+
+    class DeleteMicrovmImageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_identifier: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_identifier: String?
+      attr_accessor state: String?
+    end
+
+    class DeleteMicrovmImageVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_identifier: String,
+        ?image_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_identifier: String?
+      attr_accessor image_version: String?
+    end
+
+    class DeleteMicrovmImageVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_identifier: String,
+        ?image_version: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_identifier: String?
+      attr_accessor image_version: String?
+      attr_accessor state: String?
+    end
+
+    class GetMicrovmImageBuildInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_identifier: String,
+        ?image_version: String,
+        ?build_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_identifier: String?
+      attr_accessor image_version: String?
+      attr_accessor build_id: String?
+    end
+
+    class GetMicrovmImageBuildOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_arn: String,
+        ?image_version: String,
+        ?build_id: String,
+        ?build_state: String,
+        ?architecture: String,
+        ?chipset: String,
+        ?chipset_generation: String,
+        ?state_reason: String,
+        ?created_at: Time,
+        ?snapshot_build: Types::SnapshotBuild,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_arn: String?
+      attr_accessor image_version: String?
+      attr_accessor build_id: String?
+      attr_accessor build_state: String?
+      attr_accessor architecture: String?
+      attr_accessor chipset: String?
+      attr_accessor chipset_generation: String?
+      attr_accessor state_reason: String?
+      attr_accessor created_at: Time?
+      attr_accessor snapshot_build: Types::SnapshotBuild?
+    end
+
+    class GetMicrovmImageInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_identifier: String?
+    end
+
+    class GetMicrovmImageOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_arn: String,
+        ?name: String,
+        ?state: String,
+        ?latest_active_image_version: String,
+        ?latest_failed_image_version: String,
+        ?created_at: Time,
+        ?tags: Hash[String, String],
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor latest_active_image_version: String?
+      attr_accessor latest_failed_image_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetMicrovmImageVersionInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_identifier: String,
+        ?image_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_identifier: String?
+      attr_accessor image_version: String?
+    end
+
+    class GetMicrovmImageVersionOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_image_arn: String,
+        ?base_image_version: String,
+        ?build_role_arn: String,
+        ?description: String,
+        ?code_artifact: Types::CodeArtifact,
+        ?logging: Types::Logging,
+        ?egress_network_connectors: Array[String],
+        ?cpu_configurations: Array[Types::CpuConfiguration],
+        ?resources: Array[Types::Resources],
+        ?additional_os_capabilities: Array[String],
+        ?hooks: Types::Hooks,
+        ?environment_variables: Hash[String, String],
+        ?image_arn: String,
+        ?image_version: String,
+        ?state: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?state_reason: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_image_arn: String?
+      attr_accessor base_image_version: String?
+      attr_accessor build_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor code_artifact: Types::CodeArtifact?
+      attr_accessor logging: Types::Logging?
+      attr_accessor egress_network_connectors: Array[String]?
+      attr_accessor cpu_configurations: Array[Types::CpuConfiguration]?
+      attr_accessor resources: Array[Types::Resources]?
+      attr_accessor additional_os_capabilities: Array[String]?
+      attr_accessor hooks: Types::Hooks?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor image_arn: String?
+      attr_accessor image_version: String?
+      attr_accessor state: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor state_reason: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class GetMicrovmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?microvm_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor microvm_identifier: String?
+    end
+
+    class GetMicrovmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?microvm_id: String,
+        ?state: String,
+        ?endpoint: String,
+        ?image_arn: String,
+        ?image_version: String,
+        ?execution_role_arn: String,
+        ?idle_policy: Types::IdlePolicy,
+        ?maximum_duration_in_seconds: Integer,
+        ?started_at: Time,
+        ?terminated_at: Time,
+        ?state_reason: String,
+        ?ingress_network_connectors: Array[String],
+        ?egress_network_connectors: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor microvm_id: String?
+      attr_accessor state: String?
+      attr_accessor endpoint: String?
+      attr_accessor image_arn: String?
+      attr_accessor image_version: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor idle_policy: Types::IdlePolicy?
+      attr_accessor maximum_duration_in_seconds: Integer?
+      attr_accessor started_at: Time?
+      attr_accessor terminated_at: Time?
+      attr_accessor state_reason: String?
+      attr_accessor ingress_network_connectors: Array[String]?
+      attr_accessor egress_network_connectors: Array[String]?
+    end
+
+    module HookState
+      DISABLED: String
+      ENABLED: String
+    end
+
+    class Hooks
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?port: Integer,
+        ?microvm_hooks: Types::MicrovmHooks,
+        ?microvm_image_hooks: Types::MicrovmImageHooks,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor microvm_hooks: Types::MicrovmHooks?
+      attr_accessor microvm_image_hooks: Types::MicrovmImageHooks?
+    end
+
+    class IdlePolicy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_idle_duration_seconds: Integer,
+        ?suspended_duration_seconds: Integer,
+        ?auto_resume_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_idle_duration_seconds: Integer?
+      attr_accessor suspended_duration_seconds: Integer?
+      attr_accessor auto_resume_enabled: bool?
+    end
+
+    class InsufficientCapacityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class InvalidParameterValueException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ListManagedMicrovmImageVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?image_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor image_identifier: String?
+    end
+
+    class ListManagedMicrovmImageVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::ManagedMicrovmImageVersion],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::ManagedMicrovmImageVersion]?
+    end
+
+    class ListManagedMicrovmImagesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListManagedMicrovmImagesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::ManagedMicrovmImageSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::ManagedMicrovmImageSummary]?
+    end
+
+    class ListMicrovmImageBuildsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?image_identifier: String,
+        ?image_version: String,
+        ?architecture: String,
+        ?chipset: String,
+        ?chipset_generation: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor image_identifier: String?
+      attr_accessor image_version: String?
+      attr_accessor architecture: String?
+      attr_accessor chipset: String?
+      attr_accessor chipset_generation: String?
+    end
+
+    class ListMicrovmImageBuildsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::MicrovmImageBuildSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::MicrovmImageBuildSummary]?
+    end
+
+    class ListMicrovmImageVersionsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?image_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor image_identifier: String?
+    end
+
+    class ListMicrovmImageVersionsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::MicrovmImageVersionSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::MicrovmImageVersionSummary]?
+    end
+
+    class ListMicrovmImagesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?name_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor name_filter: String?
+    end
+
+    class ListMicrovmImagesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::MicrovmImageSummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::MicrovmImageSummary]?
+    end
+
+    class ListMicrovmsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?image_identifier: String,
+        ?image_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor image_identifier: String?
+      attr_accessor image_version: String?
+    end
+
+    class ListMicrovmsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?items: Array[Types::MicrovmItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor items: Array[Types::MicrovmItem]?
+    end
+
+    class ListTagsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+    end
+
+    class ListTagsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class Logging
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?disabled: Types::LoggingDisabled,
+        ?cloud_watch: Types::CloudWatchLogging,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor disabled: Types::LoggingDisabled?
+      attr_accessor cloud_watch: Types::CloudWatchLogging?
+
+      class Disabled < Logging
+      end
+      class CloudWatch < Logging
+      end
+      class Unknown < Logging
+      end
+    end
+
+    class LoggingDisabled
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ManagedMicrovmImageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class ManagedMicrovmImageVersion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_arn: String,
+        ?image_version: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_arn: String?
+      attr_accessor image_version: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    module ManagedMicrovmImageVersionStatus
+      AVAILABLE: String
+      DEPRECATED: String
+    end
+
+    class MicrovmHooks
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run: String,
+        ?run_timeout_in_seconds: Integer,
+        ?resume: String,
+        ?resume_timeout_in_seconds: Integer,
+        ?suspend: String,
+        ?suspend_timeout_in_seconds: Integer,
+        ?terminate: String,
+        ?terminate_timeout_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run: String?
+      attr_accessor run_timeout_in_seconds: Integer?
+      attr_accessor resume: String?
+      attr_accessor resume_timeout_in_seconds: Integer?
+      attr_accessor suspend: String?
+      attr_accessor suspend_timeout_in_seconds: Integer?
+      attr_accessor terminate: String?
+      attr_accessor terminate_timeout_in_seconds: Integer?
+    end
+
+    class MicrovmImageBuildSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_arn: String,
+        ?image_version: String,
+        ?build_id: String,
+        ?build_state: String,
+        ?architecture: String,
+        ?chipset: String,
+        ?chipset_generation: String,
+        ?state_reason: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_arn: String?
+      attr_accessor image_version: String?
+      attr_accessor build_id: String?
+      attr_accessor build_state: String?
+      attr_accessor architecture: String?
+      attr_accessor chipset: String?
+      attr_accessor chipset_generation: String?
+      attr_accessor state_reason: String?
+      attr_accessor created_at: Time?
+    end
+
+    class MicrovmImageHooks
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ready: String,
+        ?ready_timeout_in_seconds: Integer,
+        ?validate: String,
+        ?validate_timeout_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ready: String?
+      attr_accessor ready_timeout_in_seconds: Integer?
+      attr_accessor validate: String?
+      attr_accessor validate_timeout_in_seconds: Integer?
+    end
+
+    module MicrovmImageState
+      CREATING: String
+      CREATED: String
+      CREATE_FAILED: String
+      UPDATING: String
+      UPDATED: String
+      UPDATE_FAILED: String
+      DELETING: String
+      DELETE_FAILED: String
+      DELETED: String
+    end
+
+    class MicrovmImageSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_arn: String,
+        ?name: String,
+        ?state: String,
+        ?latest_active_image_version: String,
+        ?latest_failed_image_version: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor latest_active_image_version: String?
+      attr_accessor latest_failed_image_version: String?
+      attr_accessor created_at: Time?
+    end
+
+    module MicrovmImageVersionState
+      PENDING: String
+      IN_PROGRESS: String
+      SUCCESSFUL: String
+      FAILED: String
+      DELETING: String
+      DELETED: String
+      DELETE_FAILED: String
+    end
+
+    module MicrovmImageVersionStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    class MicrovmImageVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_image_arn: String,
+        ?base_image_version: String,
+        ?build_role_arn: String,
+        ?description: String,
+        ?code_artifact: Types::CodeArtifact,
+        ?logging: Types::Logging,
+        ?egress_network_connectors: Array[String],
+        ?cpu_configurations: Array[Types::CpuConfiguration],
+        ?resources: Array[Types::Resources],
+        ?additional_os_capabilities: Array[String],
+        ?hooks: Types::Hooks,
+        ?environment_variables: Hash[String, String],
+        ?image_arn: String,
+        ?image_version: String,
+        ?state: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?state_reason: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_image_arn: String?
+      attr_accessor base_image_version: String?
+      attr_accessor build_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor code_artifact: Types::CodeArtifact?
+      attr_accessor logging: Types::Logging?
+      attr_accessor egress_network_connectors: Array[String]?
+      attr_accessor cpu_configurations: Array[Types::CpuConfiguration]?
+      attr_accessor resources: Array[Types::Resources]?
+      attr_accessor additional_os_capabilities: Array[String]?
+      attr_accessor hooks: Types::Hooks?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor image_arn: String?
+      attr_accessor image_version: String?
+      attr_accessor state: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor state_reason: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class MicrovmItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?microvm_id: String,
+        ?state: String,
+        ?image_arn: String,
+        ?image_version: String,
+        ?started_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor microvm_id: String?
+      attr_accessor state: String?
+      attr_accessor image_arn: String?
+      attr_accessor image_version: String?
+      attr_accessor started_at: Time?
+    end
+
+    module MicrovmState
+      PENDING: String
+      RUNNING: String
+      SUSPENDING: String
+      SUSPENDED: String
+      TERMINATING: String
+      TERMINATED: String
+    end
+
+    class PortRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_port: Integer,
+        ?end_port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_port: Integer?
+      attr_accessor end_port: Integer?
+    end
+
+    class PortSpecification
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?port: Integer,
+        ?range: Types::PortRange,
+        ?all_ports: Smithy::Schema::EmptyStructure,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor port: Integer?
+      attr_accessor range: Types::PortRange?
+      attr_accessor all_ports: Smithy::Schema::EmptyStructure?
+
+      class Port < PortSpecification
+      end
+      class Range < PortSpecification
+      end
+      class AllPorts < PortSpecification
+      end
+      class Unknown < PortSpecification
+      end
+    end
+
+    class ResourceConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_type: String,
+        ?resource_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_type: String?
+      attr_accessor resource_id: String?
+    end
+
+    class Resources
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?minimum_memory_in_mi_b: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor minimum_memory_in_mi_b: Integer?
+    end
+
+    class ResumeMicrovmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?microvm_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor microvm_identifier: String?
+    end
+
+    class ResumeMicrovmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class RunMicrovmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingress_network_connectors: Array[String],
+        ?egress_network_connectors: Array[String],
+        ?image_identifier: String,
+        ?image_version: String,
+        ?execution_role_arn: String,
+        ?idle_policy: Types::IdlePolicy,
+        ?logging: Types::Logging,
+        ?run_hook_payload: String,
+        ?maximum_duration_in_seconds: Integer,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingress_network_connectors: Array[String]?
+      attr_accessor egress_network_connectors: Array[String]?
+      attr_accessor image_identifier: String?
+      attr_accessor image_version: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor idle_policy: Types::IdlePolicy?
+      attr_accessor logging: Types::Logging?
+      attr_accessor run_hook_payload: String?
+      attr_accessor maximum_duration_in_seconds: Integer?
+      attr_accessor client_token: String?
+    end
+
+    class RunMicrovmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?microvm_id: String,
+        ?state: String,
+        ?endpoint: String,
+        ?image_arn: String,
+        ?image_version: String,
+        ?execution_role_arn: String,
+        ?idle_policy: Types::IdlePolicy,
+        ?maximum_duration_in_seconds: Integer,
+        ?started_at: Time,
+        ?terminated_at: Time,
+        ?state_reason: String,
+        ?ingress_network_connectors: Array[String],
+        ?egress_network_connectors: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor microvm_id: String?
+      attr_accessor state: String?
+      attr_accessor endpoint: String?
+      attr_accessor image_arn: String?
+      attr_accessor image_version: String?
+      attr_accessor execution_role_arn: String?
+      attr_accessor idle_policy: Types::IdlePolicy?
+      attr_accessor maximum_duration_in_seconds: Integer?
+      attr_accessor started_at: Time?
+      attr_accessor terminated_at: Time?
+      attr_accessor state_reason: String?
+      attr_accessor ingress_network_connectors: Array[String]?
+      attr_accessor egress_network_connectors: Array[String]?
+    end
+
+    class ServiceException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class SnapshotBuild
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?memory_snapshot_size_in_bytes: Integer,
+        ?code_install_size_in_bytes: Integer,
+        ?disk_snapshot_size_in_bytes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor memory_snapshot_size_in_bytes: Integer?
+      attr_accessor code_install_size_in_bytes: Integer?
+      attr_accessor disk_snapshot_size_in_bytes: Integer?
+    end
+
+    class SuspendMicrovmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?microvm_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor microvm_identifier: String?
+    end
+
+    class SuspendMicrovmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TerminateMicrovmRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?microvm_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor microvm_identifier: String?
+    end
+
+    class TerminateMicrovmResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class TooManyRequestsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UpdateMicrovmImageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_image_arn: String,
+        ?base_image_version: String,
+        ?build_role_arn: String,
+        ?description: String,
+        ?code_artifact: Types::CodeArtifact,
+        ?logging: Types::Logging,
+        ?egress_network_connectors: Array[String],
+        ?cpu_configurations: Array[Types::CpuConfiguration],
+        ?resources: Array[Types::Resources],
+        ?additional_os_capabilities: Array[String],
+        ?hooks: Types::Hooks,
+        ?environment_variables: Hash[String, String],
+        ?image_identifier: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_image_arn: String?
+      attr_accessor base_image_version: String?
+      attr_accessor build_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor code_artifact: Types::CodeArtifact?
+      attr_accessor logging: Types::Logging?
+      attr_accessor egress_network_connectors: Array[String]?
+      attr_accessor cpu_configurations: Array[Types::CpuConfiguration]?
+      attr_accessor resources: Array[Types::Resources]?
+      attr_accessor additional_os_capabilities: Array[String]?
+      attr_accessor hooks: Types::Hooks?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor image_identifier: String?
+      attr_accessor client_token: String?
+    end
+
+    class UpdateMicrovmImageResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_arn: String,
+        ?name: String,
+        ?state: String,
+        ?latest_active_image_version: String,
+        ?latest_failed_image_version: String,
+        ?created_at: Time,
+        ?base_image_arn: String,
+        ?base_image_version: String,
+        ?build_role_arn: String,
+        ?description: String,
+        ?code_artifact: Types::CodeArtifact,
+        ?logging: Types::Logging,
+        ?egress_network_connectors: Array[String],
+        ?cpu_configurations: Array[Types::CpuConfiguration],
+        ?resources: Array[Types::Resources],
+        ?additional_os_capabilities: Array[String],
+        ?hooks: Types::Hooks,
+        ?environment_variables: Hash[String, String],
+        ?updated_at: Time,
+        ?image_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor latest_active_image_version: String?
+      attr_accessor latest_failed_image_version: String?
+      attr_accessor created_at: Time?
+      attr_accessor base_image_arn: String?
+      attr_accessor base_image_version: String?
+      attr_accessor build_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor code_artifact: Types::CodeArtifact?
+      attr_accessor logging: Types::Logging?
+      attr_accessor egress_network_connectors: Array[String]?
+      attr_accessor cpu_configurations: Array[Types::CpuConfiguration]?
+      attr_accessor resources: Array[Types::Resources]?
+      attr_accessor additional_os_capabilities: Array[String]?
+      attr_accessor hooks: Types::Hooks?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor updated_at: Time?
+      attr_accessor image_version: String?
+    end
+
+    class UpdateMicrovmImageVersionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?image_identifier: String,
+        ?image_version: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor image_identifier: String?
+      attr_accessor image_version: String?
+      attr_accessor status: String?
+    end
+
+    class UpdateMicrovmImageVersionResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?base_image_arn: String,
+        ?base_image_version: String,
+        ?build_role_arn: String,
+        ?description: String,
+        ?code_artifact: Types::CodeArtifact,
+        ?logging: Types::Logging,
+        ?egress_network_connectors: Array[String],
+        ?cpu_configurations: Array[Types::CpuConfiguration],
+        ?resources: Array[Types::Resources],
+        ?additional_os_capabilities: Array[String],
+        ?hooks: Types::Hooks,
+        ?environment_variables: Hash[String, String],
+        ?image_arn: String,
+        ?image_version: String,
+        ?state: String,
+        ?status: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?state_reason: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor base_image_arn: String?
+      attr_accessor base_image_version: String?
+      attr_accessor build_role_arn: String?
+      attr_accessor description: String?
+      attr_accessor code_artifact: Types::CodeArtifact?
+      attr_accessor logging: Types::Logging?
+      attr_accessor egress_network_connectors: Array[String]?
+      attr_accessor cpu_configurations: Array[Types::CpuConfiguration]?
+      attr_accessor resources: Array[Types::Resources]?
+      attr_accessor additional_os_capabilities: Array[String]?
+      attr_accessor hooks: Types::Hooks?
+      attr_accessor environment_variables: Hash[String, String]?
+      attr_accessor image_arn: String?
+      attr_accessor image_version: String?
+      attr_accessor state: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor state_reason: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+  end
+end

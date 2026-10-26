@@ -16,6 +16,7 @@ Aws.const_set('Outposts', Module.new) unless Aws.const_defined?('Outposts')
 #       customers to build and run applications on premises using the same programming interfaces as
 #       in Amazon Web Services Regions, while using local compute and storage resources for lower latency and local
 #       data processing needs.</p>
+#          <p>You can use certain Amazon EC2 API actions for Amazon Web Services Outposts. For more information on these API actions, see <a href="https://docs.aws.amazon.com/AWSEC2/latest/APIReference/operation-list-outposts.html">Amazon Web Services Outposts actions</a> in the <i>Amazon EC2 API Reference</i>.</p>
 module Aws::Outposts
   VERSION = '2.0.0.pre0'
 end

@@ -1,6 +1,16 @@
 module Aws::Backup
   module Types
 
+    module AccessPointStatus
+      AVAILABLE: String
+      CREATING: String
+      DELETING: String
+      DISASSOCIATED: String
+      DISASSOCIATING: String
+      EXPIRED: String
+      FAILED: String
+    end
+
     class AdvancedBackupSetting
       include Smithy::Schema::Structure
 
@@ -12,6 +22,21 @@ module Aws::Backup
 
       attr_accessor resource_type: String?
       attr_accessor backup_options: Hash[String, String]?
+    end
+
+    class AggregatedScanResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?failed_scan: bool,
+        ?findings: Array[String],
+        ?last_computed: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor failed_scan: bool?
+      attr_accessor findings: Array[String]?
+      attr_accessor last_computed: Time?
     end
 
     module AggregationPeriod
@@ -64,7 +89,12 @@ module Aws::Backup
         ?backup_job_id: String,
         ?backup_vault_name: String,
         ?backup_vault_arn: String,
+        ?vault_type: String,
+        ?vault_lock_state: String,
         ?recovery_point_arn: String,
+        ?recovery_point_lifecycle: Types::Lifecycle,
+        ?encryption_key_arn: String,
+        ?is_encrypted: bool,
         ?resource_arn: String,
         ?creation_date: Time,
         ?completion_date: Time,
@@ -92,7 +122,12 @@ module Aws::Backup
       attr_accessor backup_job_id: String?
       attr_accessor backup_vault_name: String?
       attr_accessor backup_vault_arn: String?
+      attr_accessor vault_type: String?
+      attr_accessor vault_lock_state: String?
       attr_accessor recovery_point_arn: String?
+      attr_accessor recovery_point_lifecycle: Types::Lifecycle?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor is_encrypted: bool?
       attr_accessor resource_arn: String?
       attr_accessor creation_date: Time?
       attr_accessor completion_date: Time?
@@ -173,12 +208,14 @@ module Aws::Backup
         ?backup_plan_name: String,
         ?rules: Array[Types::BackupRule],
         ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+        ?scan_settings: Array[Types::ScanSetting],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor backup_plan_name: String?
       attr_accessor rules: Array[Types::BackupRule]?
       attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+      attr_accessor scan_settings: Array[Types::ScanSetting]?
     end
 
     class BackupPlanInput
@@ -188,12 +225,14 @@ module Aws::Backup
         ?backup_plan_name: String,
         ?rules: Array[Types::BackupRuleInput],
         ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+        ?scan_settings: Array[Types::ScanSetting],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor backup_plan_name: String?
       attr_accessor rules: Array[Types::BackupRuleInput]?
       attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+      attr_accessor scan_settings: Array[Types::ScanSetting]?
     end
 
     class BackupPlanTemplatesListMember
@@ -242,6 +281,7 @@ module Aws::Backup
       def initialize: (
         ?rule_name: String,
         ?target_backup_vault_name: String,
+        ?target_logically_air_gapped_backup_vault_arn: String,
         ?schedule_expression: String,
         ?start_window_minutes: Integer,
         ?completion_window_minutes: Integer,
@@ -252,11 +292,13 @@ module Aws::Backup
         ?enable_continuous_backup: bool,
         ?schedule_expression_timezone: String,
         ?index_actions: Array[Types::IndexAction],
+        ?scan_actions: Array[Types::ScanAction],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor rule_name: String?
       attr_accessor target_backup_vault_name: String?
+      attr_accessor target_logically_air_gapped_backup_vault_arn: String?
       attr_accessor schedule_expression: String?
       attr_accessor start_window_minutes: Integer?
       attr_accessor completion_window_minutes: Integer?
@@ -267,6 +309,7 @@ module Aws::Backup
       attr_accessor enable_continuous_backup: bool?
       attr_accessor schedule_expression_timezone: String?
       attr_accessor index_actions: Array[Types::IndexAction]?
+      attr_accessor scan_actions: Array[Types::ScanAction]?
     end
 
     class BackupRuleInput
@@ -275,6 +318,7 @@ module Aws::Backup
       def initialize: (
         ?rule_name: String,
         ?target_backup_vault_name: String,
+        ?target_logically_air_gapped_backup_vault_arn: String,
         ?schedule_expression: String,
         ?start_window_minutes: Integer,
         ?completion_window_minutes: Integer,
@@ -284,11 +328,13 @@ module Aws::Backup
         ?enable_continuous_backup: bool,
         ?schedule_expression_timezone: String,
         ?index_actions: Array[Types::IndexAction],
+        ?scan_actions: Array[Types::ScanAction],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor rule_name: String?
       attr_accessor target_backup_vault_name: String?
+      attr_accessor target_logically_air_gapped_backup_vault_arn: String?
       attr_accessor schedule_expression: String?
       attr_accessor start_window_minutes: Integer?
       attr_accessor completion_window_minutes: Integer?
@@ -298,6 +344,7 @@ module Aws::Backup
       attr_accessor enable_continuous_backup: bool?
       attr_accessor schedule_expression_timezone: String?
       attr_accessor index_actions: Array[Types::IndexAction]?
+      attr_accessor scan_actions: Array[Types::ScanAction]?
     end
 
     class BackupSelection
@@ -364,6 +411,15 @@ module Aws::Backup
       RECOVERY_POINT_INDEX_COMPLETED: String
       RECOVERY_POINT_INDEX_DELETED: String
       RECOVERY_POINT_INDEXING_FAILED: String
+      EKS_RESTORE_OBJECT_FAILED: String
+      EKS_RESTORE_OBJECT_SKIPPED: String
+      EKS_BACKUP_OBJECT_FAILED: String
+      ACCESS_POINT_AVAILABLE: String
+      ACCESS_POINT_CREATION_FAILED: String
+      ACCESS_POINT_DELETED: String
+      ACCESS_POINT_DELETION_FAILED: String
+      ACCESS_POINT_EXPIRED: String
+      ACCESS_POINT_DISASSOCIATED: String
     end
 
     class BackupVaultListMember
@@ -382,6 +438,7 @@ module Aws::Backup
         ?min_retention_days: Integer,
         ?max_retention_days: Integer,
         ?lock_date: Time,
+        ?encryption_key_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -397,6 +454,7 @@ module Aws::Backup
       attr_accessor min_retention_days: Integer?
       attr_accessor max_retention_days: Integer?
       attr_accessor lock_date: Time?
+      attr_accessor encryption_key_type: String?
     end
 
     class CalculatedLifecycle
@@ -552,7 +610,11 @@ module Aws::Backup
         ?source_backup_vault_arn: String,
         ?source_recovery_point_arn: String,
         ?destination_backup_vault_arn: String,
+        ?destination_vault_type: String,
+        ?destination_vault_lock_state: String,
         ?destination_recovery_point_arn: String,
+        ?destination_encryption_key_arn: String,
+        ?destination_recovery_point_lifecycle: Types::Lifecycle,
         ?resource_arn: String,
         ?creation_date: Time,
         ?completion_date: Time,
@@ -561,6 +623,7 @@ module Aws::Backup
         ?backup_size_in_bytes: Integer,
         ?iam_role_arn: String,
         ?created_by: Types::RecoveryPointCreator,
+        ?created_by_backup_job_id: String,
         ?resource_type: String,
         ?parent_job_id: String,
         ?is_parent: bool,
@@ -577,7 +640,11 @@ module Aws::Backup
       attr_accessor source_backup_vault_arn: String?
       attr_accessor source_recovery_point_arn: String?
       attr_accessor destination_backup_vault_arn: String?
+      attr_accessor destination_vault_type: String?
+      attr_accessor destination_vault_lock_state: String?
       attr_accessor destination_recovery_point_arn: String?
+      attr_accessor destination_encryption_key_arn: String?
+      attr_accessor destination_recovery_point_lifecycle: Types::Lifecycle?
       attr_accessor resource_arn: String?
       attr_accessor creation_date: Time?
       attr_accessor completion_date: Time?
@@ -586,6 +653,7 @@ module Aws::Backup
       attr_accessor backup_size_in_bytes: Integer?
       attr_accessor iam_role_arn: String?
       attr_accessor created_by: Types::RecoveryPointCreator?
+      attr_accessor created_by_backup_job_id: String?
       attr_accessor resource_type: String?
       attr_accessor parent_job_id: String?
       attr_accessor is_parent: bool?
@@ -641,6 +709,38 @@ module Aws::Backup
       attr_accessor count: Integer?
       attr_accessor start_time: Time?
       attr_accessor end_time: Time?
+    end
+
+    class CreateBackupAccessPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_metadata: Hash[String, String],
+        ?access_point_policy: String,
+        ?name: String,
+        ?recovery_point_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_metadata: Hash[String, String]?
+      attr_accessor access_point_policy: String?
+      attr_accessor name: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateBackupAccessPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_arn: String?
+      attr_accessor status: String?
     end
 
     class CreateBackupPlanInput
@@ -822,6 +922,7 @@ module Aws::Backup
         ?creator_request_id: String,
         ?min_retention_days: Integer,
         ?max_retention_days: Integer,
+        ?encryption_key_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -830,6 +931,7 @@ module Aws::Backup
       attr_accessor creator_request_id: String?
       attr_accessor min_retention_days: Integer?
       attr_accessor max_retention_days: Integer?
+      attr_accessor encryption_key_arn: String?
     end
 
     class CreateLogicallyAirGappedBackupVaultOutput
@@ -983,6 +1085,36 @@ module Aws::Backup
       attr_accessor restore_testing_selection_name: String?
     end
 
+    class CreateTieringConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration: Types::TieringConfigurationInputForCreate,
+        ?tiering_configuration_tags: Hash[String, String],
+        ?creator_request_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration: Types::TieringConfigurationInputForCreate?
+      attr_accessor tiering_configuration_tags: Hash[String, String]?
+      attr_accessor creator_request_id: String?
+    end
+
+    class CreateTieringConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration_arn: String,
+        ?tiering_configuration_name: String,
+        ?creation_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration_arn: String?
+      attr_accessor tiering_configuration_name: String?
+      attr_accessor creation_time: Time?
+    end
+
     class DateRange
       include Smithy::Schema::Structure
 
@@ -994,6 +1126,17 @@ module Aws::Backup
 
       attr_accessor from_date: Time?
       attr_accessor to_date: Time?
+    end
+
+    class DeleteBackupAccessPointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_arn: String?
     end
 
     class DeleteBackupPlanInput
@@ -1140,6 +1283,26 @@ module Aws::Backup
       attr_accessor restore_testing_selection_name: String?
     end
 
+    class DeleteTieringConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration_name: String?
+    end
+
+    class DeleteTieringConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DependencyFailureException
       include Smithy::Schema::Structure
 
@@ -1155,6 +1318,48 @@ module Aws::Backup
       attr_accessor message: String?
       attr_accessor type: String?
       attr_accessor context: String?
+    end
+
+    class DescribeBackupAccessPointInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_arn: String?
+    end
+
+    class DescribeBackupAccessPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_arn: String,
+        ?access_point_metadata: Hash[String, String],
+        ?backup_vault_arn: String,
+        ?backup_vault_name: String,
+        ?creation_time: Time,
+        ?name: String,
+        ?recovery_point_arn: String,
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_arn: String?
+      attr_accessor access_point_metadata: Hash[String, String]?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor name: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
     end
 
     class DescribeBackupJobInput
@@ -1175,8 +1380,13 @@ module Aws::Backup
         ?account_id: String,
         ?backup_job_id: String,
         ?backup_vault_name: String,
+        ?recovery_point_lifecycle: Types::Lifecycle,
         ?backup_vault_arn: String,
+        ?vault_type: String,
+        ?vault_lock_state: String,
         ?recovery_point_arn: String,
+        ?encryption_key_arn: String,
+        ?is_encrypted: bool,
         ?resource_arn: String,
         ?creation_date: Time,
         ?completion_date: Time,
@@ -1205,8 +1415,13 @@ module Aws::Backup
       attr_accessor account_id: String?
       attr_accessor backup_job_id: String?
       attr_accessor backup_vault_name: String?
+      attr_accessor recovery_point_lifecycle: Types::Lifecycle?
       attr_accessor backup_vault_arn: String?
+      attr_accessor vault_type: String?
+      attr_accessor vault_lock_state: String?
       attr_accessor recovery_point_arn: String?
+      attr_accessor encryption_key_arn: String?
+      attr_accessor is_encrypted: bool?
       attr_accessor resource_arn: String?
       attr_accessor creation_date: Time?
       attr_accessor completion_date: Time?
@@ -1264,6 +1479,7 @@ module Aws::Backup
         ?mpa_approval_team_arn: String,
         ?mpa_session_arn: String,
         ?latest_mpa_approval_team_update: Types::LatestMpaApprovalTeamUpdate,
+        ?encryption_key_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1283,6 +1499,7 @@ module Aws::Backup
       attr_accessor mpa_approval_team_arn: String?
       attr_accessor mpa_session_arn: String?
       attr_accessor latest_mpa_approval_team_update: Types::LatestMpaApprovalTeamUpdate?
+      attr_accessor encryption_key_type: String?
     end
 
     class DescribeCopyJobInput
@@ -1449,6 +1666,8 @@ module Aws::Backup
         ?vault_type: String,
         ?index_status: String,
         ?index_status_message: String,
+        ?encryption_key_type: String,
+        ?scan_results: Array[Types::ScanResult],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1479,6 +1698,8 @@ module Aws::Backup
       attr_accessor vault_type: String?
       attr_accessor index_status: String?
       attr_accessor index_status_message: String?
+      attr_accessor encryption_key_type: String?
+      attr_accessor scan_results: Array[Types::ScanResult]?
     end
 
     class DescribeRegionSettingsInput
@@ -1565,6 +1786,8 @@ module Aws::Backup
         ?account_id: String,
         ?restore_job_id: String,
         ?recovery_point_arn: String,
+        ?source_resource_arn: String,
+        ?backup_vault_arn: String,
         ?creation_date: Time,
         ?completion_date: Time,
         ?status: String,
@@ -1581,12 +1804,16 @@ module Aws::Backup
         ?validation_status_message: String,
         ?deletion_status: String,
         ?deletion_status_message: String,
+        ?is_parent: bool,
+        ?parent_job_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor account_id: String?
       attr_accessor restore_job_id: String?
       attr_accessor recovery_point_arn: String?
+      attr_accessor source_resource_arn: String?
+      attr_accessor backup_vault_arn: String?
       attr_accessor creation_date: Time?
       attr_accessor completion_date: Time?
       attr_accessor status: String?
@@ -1603,6 +1830,72 @@ module Aws::Backup
       attr_accessor validation_status_message: String?
       attr_accessor deletion_status: String?
       attr_accessor deletion_status_message: String?
+      attr_accessor is_parent: bool?
+      attr_accessor parent_job_id: String?
+    end
+
+    class DescribeScanJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scan_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scan_job_id: String?
+    end
+
+    class DescribeScanJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?backup_vault_arn: String,
+        ?backup_vault_name: String,
+        ?completion_date: Time,
+        ?continuous_scan_end_time: Time,
+        ?continuous_scan_start_time: Time,
+        ?created_by: Types::ScanJobCreator,
+        ?creation_date: Time,
+        ?iam_role_arn: String,
+        ?malware_scanner: String,
+        ?recovery_point_arn: String,
+        ?resource_arn: String,
+        ?resource_name: String,
+        ?resource_type: String,
+        ?scan_base_recovery_point_arn: String,
+        ?scan_id: String,
+        ?scan_job_id: String,
+        ?scan_mode: String,
+        ?scan_result: Types::ScanResultInfo,
+        ?scanner_role_arn: String,
+        ?state: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor completion_date: Time?
+      attr_accessor continuous_scan_end_time: Time?
+      attr_accessor continuous_scan_start_time: Time?
+      attr_accessor created_by: Types::ScanJobCreator?
+      attr_accessor creation_date: Time?
+      attr_accessor iam_role_arn: String?
+      attr_accessor malware_scanner: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_name: String?
+      attr_accessor resource_type: String?
+      attr_accessor scan_base_recovery_point_arn: String?
+      attr_accessor scan_id: String?
+      attr_accessor scan_job_id: String?
+      attr_accessor scan_mode: String?
+      attr_accessor scan_result: Types::ScanResultInfo?
+      attr_accessor scanner_role_arn: String?
+      attr_accessor state: String?
+      attr_accessor status_message: String?
     end
 
     class DisassociateBackupVaultMpaApprovalTeamInput
@@ -1642,6 +1935,11 @@ module Aws::Backup
 
       attr_accessor backup_vault_name: String?
       attr_accessor recovery_point_arn: String?
+    end
+
+    module EncryptionKeyType
+      AWS_OWNED_KMS_KEY: String
+      CUSTOMER_MANAGED_KMS_KEY: String
     end
 
     class ExportBackupPlanTemplateInput
@@ -1752,11 +2050,13 @@ module Aws::Backup
       def initialize: (
         ?backup_plan_id: String,
         ?version_id: String,
+        ?max_scheduled_runs_preview: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor backup_plan_id: String?
       attr_accessor version_id: String?
+      attr_accessor max_scheduled_runs_preview: Integer?
     end
 
     class GetBackupPlanOutput
@@ -1772,6 +2072,7 @@ module Aws::Backup
         ?deletion_date: Time,
         ?last_execution_date: Time,
         ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+        ?scheduled_runs_preview: Array[Types::ScheduledPlanExecutionMember],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1784,6 +2085,7 @@ module Aws::Backup
       attr_accessor deletion_date: Time?
       attr_accessor last_execution_date: Time?
       attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+      attr_accessor scheduled_runs_preview: Array[Types::ScheduledPlanExecutionMember]?
     end
 
     class GetBackupSelectionInput
@@ -1910,6 +2212,42 @@ module Aws::Backup
       attr_accessor cancellation_date: Time?
       attr_accessor retain_record_until: Time?
       attr_accessor recovery_point_selection: Types::RecoveryPointSelection?
+    end
+
+    class GetPITRMalwareScanResultsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?recovery_point_arn: String,
+        ?backup_vault_name: String,
+        ?scan_end_time: Time,
+        ?malware_scanner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor recovery_point_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor scan_end_time: Time?
+      attr_accessor malware_scanner: String?
+    end
+
+    class GetPITRMalwareScanResultsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scan_end_time: Time,
+        ?scan_result: Types::ScanResultInfo,
+        ?last_scan_job_time: Time,
+        ?scan_id: String,
+        ?scan_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scan_end_time: Time?
+      attr_accessor scan_result: Types::ScanResultInfo?
+      attr_accessor last_scan_job_time: Time?
+      attr_accessor scan_id: String?
+      attr_accessor scan_mode: String?
     end
 
     class GetRecoveryPointIndexDetailsInput
@@ -2089,6 +2427,28 @@ module Aws::Backup
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_types: Array[String]?
+    end
+
+    class GetTieringConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration_name: String?
+    end
+
+    class GetTieringConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration: Types::TieringConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration: Types::TieringConfiguration?
     end
 
     module Index
@@ -2280,12 +2640,18 @@ module Aws::Backup
         ?move_to_cold_storage_after_days: Integer,
         ?delete_after_days: Integer,
         ?opt_in_to_archive_for_supported_resources: bool,
+        ?delete_after_event: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor move_to_cold_storage_after_days: Integer?
       attr_accessor delete_after_days: Integer?
       attr_accessor opt_in_to_archive_for_supported_resources: bool?
+      attr_accessor delete_after_event: String?
+    end
+
+    module LifecycleDeleteAfterEvent
+      DELETE_AFTER_COPY: String
     end
 
     class LimitExceededException
@@ -2303,6 +2669,119 @@ module Aws::Backup
       attr_accessor message: String?
       attr_accessor type: String?
       attr_accessor context: String?
+    end
+
+    class ListAccessPointsMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?access_point_arn: String,
+        ?access_point_metadata: Hash[String, String],
+        ?backup_vault_arn: String,
+        ?backup_vault_name: String,
+        ?creation_time: Time,
+        ?name: String,
+        ?recovery_point_arn: String,
+        ?resource_arn: String,
+        ?resource_type: String,
+        ?status: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor access_point_arn: String?
+      attr_accessor access_point_metadata: Hash[String, String]?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor name: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_type: String?
+      attr_accessor status: String?
+      attr_accessor status_message: String?
+    end
+
+    class ListBackupAccessPointsByRecoveryPointRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?recovery_point_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor recovery_point_arn: String?
+    end
+
+    class ListBackupAccessPointsByRecoveryPointResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_access_points: Array[Types::ListAccessPointsMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_access_points: Array[Types::ListAccessPointsMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBackupAccessPointsByResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor resource_arn: String?
+    end
+
+    class ListBackupAccessPointsByResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_access_points: Array[Types::ListAccessPointsMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_access_points: Array[Types::ListAccessPointsMember]?
+      attr_accessor next_token: String?
+    end
+
+    class ListBackupAccessPointsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListBackupAccessPointsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_access_points: Array[Types::ListAccessPointsMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_access_points: Array[Types::ListAccessPointsMember]?
+      attr_accessor next_token: String?
     end
 
     class ListBackupJobSummariesInput
@@ -2586,6 +3065,7 @@ module Aws::Backup
         ?by_complete_after: Time,
         ?by_parent_job_id: String,
         ?by_message_category: String,
+        ?by_source_recovery_point_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2602,6 +3082,7 @@ module Aws::Backup
       attr_accessor by_complete_after: Time?
       attr_accessor by_parent_job_id: String?
       attr_accessor by_message_category: String?
+      attr_accessor by_source_recovery_point_arn: String?
     end
 
     class ListCopyJobsOutput
@@ -3033,6 +3514,7 @@ module Aws::Backup
         ?by_complete_before: Time,
         ?by_complete_after: Time,
         ?by_restore_testing_plan_arn: String,
+        ?by_parent_job_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3046,6 +3528,7 @@ module Aws::Backup
       attr_accessor by_complete_before: Time?
       attr_accessor by_complete_after: Time?
       attr_accessor by_restore_testing_plan_arn: String?
+      attr_accessor by_parent_job_id: String?
     end
 
     class ListRestoreJobsOutput
@@ -3115,6 +3598,92 @@ module Aws::Backup
       attr_accessor restore_testing_selections: Array[Types::RestoreTestingSelectionForList]?
     end
 
+    class ListScanJobSummariesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?resource_type: String,
+        ?malware_scanner: String,
+        ?scan_result_status: String,
+        ?state: String,
+        ?aggregation_period: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor malware_scanner: String?
+      attr_accessor scan_result_status: String?
+      attr_accessor state: String?
+      attr_accessor aggregation_period: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListScanJobSummariesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scan_job_summaries: Array[Types::ScanJobSummary],
+        ?aggregation_period: String,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scan_job_summaries: Array[Types::ScanJobSummary]?
+      attr_accessor aggregation_period: String?
+      attr_accessor next_token: String?
+    end
+
+    class ListScanJobsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?by_account_id: String,
+        ?by_backup_vault_name: String,
+        ?by_complete_after: Time,
+        ?by_complete_before: Time,
+        ?by_malware_scanner: String,
+        ?by_recovery_point_arn: String,
+        ?by_resource_arn: String,
+        ?by_resource_type: String,
+        ?by_scan_result_status: String,
+        ?by_state: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor by_account_id: String?
+      attr_accessor by_backup_vault_name: String?
+      attr_accessor by_complete_after: Time?
+      attr_accessor by_complete_before: Time?
+      attr_accessor by_malware_scanner: String?
+      attr_accessor by_recovery_point_arn: String?
+      attr_accessor by_resource_arn: String?
+      attr_accessor by_resource_type: String?
+      attr_accessor by_scan_result_status: String?
+      attr_accessor by_state: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListScanJobsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?scan_jobs: Array[Types::ScanJob],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor scan_jobs: Array[Types::ScanJob]?
+    end
+
     class ListTagsInput
       include Smithy::Schema::Structure
 
@@ -3141,6 +3710,36 @@ module Aws::Backup
 
       attr_accessor next_token: String?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTieringConfigurationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTieringConfigurationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configurations: Array[Types::TieringConfigurationsListMember],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configurations: Array[Types::TieringConfigurationsListMember]?
+      attr_accessor next_token: String?
+    end
+
+    module MalwareScanner
+      GUARDDUTY: String
     end
 
     class MissingParameterValueException
@@ -3295,6 +3894,8 @@ module Aws::Backup
         ?vault_type: String,
         ?index_status: String,
         ?index_status_message: String,
+        ?encryption_key_type: String,
+        ?aggregated_scan_result: Types::AggregatedScanResult,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3324,6 +3925,8 @@ module Aws::Backup
       attr_accessor vault_type: String?
       attr_accessor index_status: String?
       attr_accessor index_status_message: String?
+      attr_accessor encryption_key_type: String?
+      attr_accessor aggregated_scan_result: Types::AggregatedScanResult?
     end
 
     class RecoveryPointByResource
@@ -3343,6 +3946,8 @@ module Aws::Backup
         ?vault_type: String,
         ?index_status: String,
         ?index_status_message: String,
+        ?encryption_key_type: String,
+        ?aggregated_scan_result: Types::AggregatedScanResult,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3359,6 +3964,8 @@ module Aws::Backup
       attr_accessor vault_type: String?
       attr_accessor index_status: String?
       attr_accessor index_status_message: String?
+      attr_accessor encryption_key_type: String?
+      attr_accessor aggregated_scan_result: Types::AggregatedScanResult?
     end
 
     class RecoveryPointCreator
@@ -3367,15 +3974,23 @@ module Aws::Backup
       def initialize: (
         ?backup_plan_id: String,
         ?backup_plan_arn: String,
+        ?backup_plan_name: String,
         ?backup_plan_version: String,
         ?backup_rule_id: String,
+        ?backup_rule_name: String,
+        ?backup_rule_cron: String,
+        ?backup_rule_timezone: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor backup_plan_id: String?
       attr_accessor backup_plan_arn: String?
+      attr_accessor backup_plan_name: String?
       attr_accessor backup_plan_version: String?
       attr_accessor backup_rule_id: String?
+      attr_accessor backup_rule_name: String?
+      attr_accessor backup_rule_cron: String?
+      attr_accessor backup_rule_timezone: String?
     end
 
     class RecoveryPointMember
@@ -3538,6 +4153,21 @@ module Aws::Backup
       attr_accessor context: String?
     end
 
+    class ResourceSelection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resources: Array[String],
+        ?tiering_down_settings_in_days: Integer,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resources: Array[String]?
+      attr_accessor tiering_down_settings_in_days: Integer?
+      attr_accessor resource_type: String?
+    end
+
     class RestoreAccessBackupVaultListMember
       include Smithy::Schema::Structure
 
@@ -3623,6 +4253,8 @@ module Aws::Backup
         ?account_id: String,
         ?restore_job_id: String,
         ?recovery_point_arn: String,
+        ?source_resource_arn: String,
+        ?backup_vault_arn: String,
         ?creation_date: Time,
         ?completion_date: Time,
         ?status: String,
@@ -3634,6 +4266,8 @@ module Aws::Backup
         ?created_resource_arn: String,
         ?resource_type: String,
         ?recovery_point_creation_date: Time,
+        ?is_parent: bool,
+        ?parent_job_id: String,
         ?created_by: Types::RestoreJobCreator,
         ?validation_status: String,
         ?validation_status_message: String,
@@ -3645,6 +4279,8 @@ module Aws::Backup
       attr_accessor account_id: String?
       attr_accessor restore_job_id: String?
       attr_accessor recovery_point_arn: String?
+      attr_accessor source_resource_arn: String?
+      attr_accessor backup_vault_arn: String?
       attr_accessor creation_date: Time?
       attr_accessor completion_date: Time?
       attr_accessor status: String?
@@ -3656,6 +4292,8 @@ module Aws::Backup
       attr_accessor created_resource_arn: String?
       attr_accessor resource_type: String?
       attr_accessor recovery_point_creation_date: Time?
+      attr_accessor is_parent: bool?
+      attr_accessor parent_job_id: String?
       attr_accessor created_by: Types::RestoreJobCreator?
       attr_accessor validation_status: String?
       attr_accessor validation_status_message: String?
@@ -3896,6 +4534,228 @@ module Aws::Backup
       attr_accessor requester_comment: String?
     end
 
+    module RuleExecutionType
+      CONTINUOUS: String
+      SNAPSHOTS: String
+      CONTINUOUS_AND_SNAPSHOTS: String
+    end
+
+    class ScanAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?malware_scanner: String,
+        ?scan_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor malware_scanner: String?
+      attr_accessor scan_mode: String?
+    end
+
+    module ScanFinding
+      MALWARE: String
+    end
+
+    class ScanJob
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_id: String,
+        ?backup_vault_arn: String,
+        ?backup_vault_name: String,
+        ?completion_date: Time,
+        ?continuous_scan_end_time: Time,
+        ?continuous_scan_start_time: Time,
+        ?created_by: Types::ScanJobCreator,
+        ?creation_date: Time,
+        ?iam_role_arn: String,
+        ?malware_scanner: String,
+        ?recovery_point_arn: String,
+        ?resource_arn: String,
+        ?resource_name: String,
+        ?resource_type: String,
+        ?scan_base_recovery_point_arn: String,
+        ?scan_id: String,
+        ?scan_job_id: String,
+        ?scan_mode: String,
+        ?scan_result: Types::ScanResultInfo,
+        ?scanner_role_arn: String,
+        ?state: String,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_id: String?
+      attr_accessor backup_vault_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor completion_date: Time?
+      attr_accessor continuous_scan_end_time: Time?
+      attr_accessor continuous_scan_start_time: Time?
+      attr_accessor created_by: Types::ScanJobCreator?
+      attr_accessor creation_date: Time?
+      attr_accessor iam_role_arn: String?
+      attr_accessor malware_scanner: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_name: String?
+      attr_accessor resource_type: String?
+      attr_accessor scan_base_recovery_point_arn: String?
+      attr_accessor scan_id: String?
+      attr_accessor scan_job_id: String?
+      attr_accessor scan_mode: String?
+      attr_accessor scan_result: Types::ScanResultInfo?
+      attr_accessor scanner_role_arn: String?
+      attr_accessor state: String?
+      attr_accessor status_message: String?
+    end
+
+    class ScanJobCreator
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_plan_arn: String,
+        ?backup_plan_id: String,
+        ?backup_plan_version: String,
+        ?backup_rule_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_plan_arn: String?
+      attr_accessor backup_plan_id: String?
+      attr_accessor backup_plan_version: String?
+      attr_accessor backup_rule_id: String?
+    end
+
+    module ScanJobState
+      COMPLETED: String
+      COMPLETED_WITH_ISSUES: String
+      FAILED: String
+      CANCELED: String
+    end
+
+    module ScanJobStatus
+      CREATED: String
+      COMPLETED: String
+      COMPLETED_WITH_ISSUES: String
+      RUNNING: String
+      FAILED: String
+      CANCELED: String
+      AGGREGATE_ALL: String
+      ANY: String
+    end
+
+    class ScanJobSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?account_id: String,
+        ?state: String,
+        ?resource_type: String,
+        ?count: Integer,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?malware_scanner: String,
+        ?scan_result_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor account_id: String?
+      attr_accessor state: String?
+      attr_accessor resource_type: String?
+      attr_accessor count: Integer?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor malware_scanner: String?
+      attr_accessor scan_result_status: String?
+    end
+
+    module ScanMode
+      FULL_SCAN: String
+      INCREMENTAL_SCAN: String
+    end
+
+    module ScanResourceType
+      EBS: String
+      EC2: String
+      S3: String
+    end
+
+    class ScanResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?malware_scanner: String,
+        ?scan_job_state: String,
+        ?last_scan_timestamp: Time,
+        ?findings: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor malware_scanner: String?
+      attr_accessor scan_job_state: String?
+      attr_accessor last_scan_timestamp: Time?
+      attr_accessor findings: Array[String]?
+    end
+
+    class ScanResultInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scan_result_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scan_result_status: String?
+    end
+
+    module ScanResultStatus
+      NO_THREATS_FOUND: String
+      THREATS_FOUND: String
+      UNKNOWN: String
+    end
+
+    class ScanSetting
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?malware_scanner: String,
+        ?resource_types: Array[String],
+        ?scanner_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor malware_scanner: String?
+      attr_accessor resource_types: Array[String]?
+      attr_accessor scanner_role_arn: String?
+    end
+
+    module ScanState
+      CANCELED: String
+      COMPLETED: String
+      COMPLETED_WITH_ISSUES: String
+      CREATED: String
+      FAILED: String
+      RUNNING: String
+    end
+
+    class ScheduledPlanExecutionMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?execution_time: Time,
+        ?rule_id: String,
+        ?rule_execution_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor execution_time: Time?
+      attr_accessor rule_id: String?
+      attr_accessor rule_execution_type: String?
+    end
+
     class ServiceUnavailableException
       include Smithy::Schema::Structure
 
@@ -3918,6 +4778,7 @@ module Aws::Backup
 
       def initialize: (
         ?backup_vault_name: String,
+        ?logically_air_gapped_backup_vault_arn: String,
         ?resource_arn: String,
         ?iam_role_arn: String,
         ?idempotency_token: String,
@@ -3931,6 +4792,7 @@ module Aws::Backup
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor backup_vault_name: String?
+      attr_accessor logically_air_gapped_backup_vault_arn: String?
       attr_accessor resource_arn: String?
       attr_accessor iam_role_arn: String?
       attr_accessor idempotency_token: String?
@@ -4051,6 +4913,46 @@ module Aws::Backup
       attr_accessor restore_job_id: String?
     end
 
+    class StartScanJobInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?backup_vault_name: String,
+        ?continuous_scan_end_time: Time,
+        ?iam_role_arn: String,
+        ?idempotency_token: String,
+        ?malware_scanner: String,
+        ?recovery_point_arn: String,
+        ?scan_base_recovery_point_arn: String,
+        ?scan_mode: String,
+        ?scanner_role_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor backup_vault_name: String?
+      attr_accessor continuous_scan_end_time: Time?
+      attr_accessor iam_role_arn: String?
+      attr_accessor idempotency_token: String?
+      attr_accessor malware_scanner: String?
+      attr_accessor recovery_point_arn: String?
+      attr_accessor scan_base_recovery_point_arn: String?
+      attr_accessor scan_mode: String?
+      attr_accessor scanner_role_arn: String?
+    end
+
+    class StartScanJobOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?creation_date: Time,
+        ?scan_job_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor creation_date: Time?
+      attr_accessor scan_job_id: String?
+    end
+
     class StopBackupJobInput
       include Smithy::Schema::Structure
 
@@ -4079,6 +4981,76 @@ module Aws::Backup
 
       attr_accessor resource_arn: String?
       attr_accessor tags: Hash[String, String]?
+    end
+
+    class TieringConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration_name: String,
+        ?tiering_configuration_arn: String,
+        ?backup_vault_name: String,
+        ?resource_selection: Array[Types::ResourceSelection],
+        ?creator_request_id: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration_name: String?
+      attr_accessor tiering_configuration_arn: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor resource_selection: Array[Types::ResourceSelection]?
+      attr_accessor creator_request_id: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
+    end
+
+    class TieringConfigurationInputForCreate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration_name: String,
+        ?backup_vault_name: String,
+        ?resource_selection: Array[Types::ResourceSelection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration_name: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor resource_selection: Array[Types::ResourceSelection]?
+    end
+
+    class TieringConfigurationInputForUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_selection: Array[Types::ResourceSelection],
+        ?backup_vault_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_selection: Array[Types::ResourceSelection]?
+      attr_accessor backup_vault_name: String?
+    end
+
+    class TieringConfigurationsListMember
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration_arn: String,
+        ?tiering_configuration_name: String,
+        ?backup_vault_name: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration_arn: String?
+      attr_accessor tiering_configuration_name: String?
+      attr_accessor backup_vault_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
     end
 
     class UntagResourceInput
@@ -4116,6 +5088,7 @@ module Aws::Backup
         ?creation_date: Time,
         ?version_id: String,
         ?advanced_backup_settings: Array[Types::AdvancedBackupSetting],
+        ?scan_settings: Array[Types::ScanSetting],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4124,6 +5097,7 @@ module Aws::Backup
       attr_accessor creation_date: Time?
       attr_accessor version_id: String?
       attr_accessor advanced_backup_settings: Array[Types::AdvancedBackupSetting]?
+      attr_accessor scan_settings: Array[Types::ScanSetting]?
     end
 
     class UpdateFrameworkInput
@@ -4344,6 +5318,36 @@ module Aws::Backup
       attr_accessor restore_testing_plan_name: String?
       attr_accessor restore_testing_selection_name: String?
       attr_accessor update_time: Time?
+    end
+
+    class UpdateTieringConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration_name: String,
+        ?tiering_configuration: Types::TieringConfigurationInputForUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration_name: String?
+      attr_accessor tiering_configuration: Types::TieringConfigurationInputForUpdate?
+    end
+
+    class UpdateTieringConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tiering_configuration_arn: String,
+        ?tiering_configuration_name: String,
+        ?creation_time: Time,
+        ?last_updated_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tiering_configuration_arn: String?
+      attr_accessor tiering_configuration_name: String?
+      attr_accessor creation_time: Time?
+      attr_accessor last_updated_time: Time?
     end
 
     module VaultState

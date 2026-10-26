@@ -1,0 +1,11 @@
+module Aws::PricingPlanManager
+  class EndpointParameters
+    def initialize: (
+      ?endpoint: String,
+      region: String,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    attr_accessor endpoint: String?
+    attr_accessor region: String
+  end
+end

@@ -122,10 +122,12 @@ module Aws::Personalize
 
       def initialize: (
         ?item_exploration_config: Hash[String, String],
+        ?ranking_influence: Hash[String, Float],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor item_exploration_config: Hash[String, String]?
+      attr_accessor ranking_influence: Hash[String, Float]?
     end
 
     class BatchInferenceJobInput
@@ -294,12 +296,14 @@ module Aws::Personalize
         ?item_exploration_config: Hash[String, String],
         ?enable_metadata_with_recommendations: bool,
         ?sync_with_latest_solution_version: bool,
+        ?ranking_influence: Hash[String, Float],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor item_exploration_config: Hash[String, String]?
       attr_accessor enable_metadata_with_recommendations: bool?
       attr_accessor sync_with_latest_solution_version: bool?
+      attr_accessor ranking_influence: Hash[String, Float]?
     end
 
     class CampaignSummary
@@ -788,6 +792,7 @@ module Aws::Personalize
         ?perform_hpo: bool,
         ?perform_auto_ml: bool,
         ?perform_auto_training: bool,
+        ?perform_incremental_update: bool,
         ?recipe_arn: String,
         ?dataset_group_arn: String,
         ?event_type: String,
@@ -800,6 +805,7 @@ module Aws::Personalize
       attr_accessor perform_hpo: bool?
       attr_accessor perform_auto_ml: bool?
       attr_accessor perform_auto_training: bool?
+      attr_accessor perform_incremental_update: bool?
       attr_accessor recipe_arn: String?
       attr_accessor dataset_group_arn: String?
       attr_accessor event_type: String?
@@ -2628,6 +2634,11 @@ module Aws::Personalize
       attr_accessor objective_sensitivity: String?
     end
 
+    module RankingInfluenceType
+      POPULARITY: String
+      FRESHNESS: String
+    end
+
     class Recipe
       include Smithy::Schema::Structure
 
@@ -2827,6 +2838,7 @@ module Aws::Personalize
         ?perform_hpo: bool,
         ?perform_auto_ml: bool,
         ?perform_auto_training: bool,
+        ?perform_incremental_update: bool,
         ?recipe_arn: String,
         ?dataset_group_arn: String,
         ?event_type: String,
@@ -2845,6 +2857,7 @@ module Aws::Personalize
       attr_accessor perform_hpo: bool?
       attr_accessor perform_auto_ml: bool?
       attr_accessor perform_auto_training: bool?
+      attr_accessor perform_incremental_update: bool?
       attr_accessor recipe_arn: String?
       attr_accessor dataset_group_arn: String?
       attr_accessor event_type: String?
@@ -2925,6 +2938,7 @@ module Aws::Personalize
         ?solution_update_config: Types::SolutionUpdateConfig,
         ?status: String,
         ?perform_auto_training: bool,
+        ?perform_incremental_update: bool,
         ?creation_date_time: Time,
         ?last_updated_date_time: Time,
         ?failure_reason: String,
@@ -2934,6 +2948,7 @@ module Aws::Personalize
       attr_accessor solution_update_config: Types::SolutionUpdateConfig?
       attr_accessor status: String?
       attr_accessor perform_auto_training: bool?
+      attr_accessor perform_incremental_update: bool?
       attr_accessor creation_date_time: Time?
       attr_accessor last_updated_date_time: Time?
       attr_accessor failure_reason: String?
@@ -2948,6 +2963,7 @@ module Aws::Personalize
         ?solution_arn: String,
         ?perform_hpo: bool,
         ?perform_auto_ml: bool,
+        ?perform_incremental_update: bool,
         ?recipe_arn: String,
         ?event_type: String,
         ?dataset_group_arn: String,
@@ -2968,6 +2984,7 @@ module Aws::Personalize
       attr_accessor solution_arn: String?
       attr_accessor perform_hpo: bool?
       attr_accessor perform_auto_ml: bool?
+      attr_accessor perform_incremental_update: bool?
       attr_accessor recipe_arn: String?
       attr_accessor event_type: String?
       attr_accessor dataset_group_arn: String?
@@ -3133,10 +3150,12 @@ module Aws::Personalize
 
       def initialize: (
         ?excluded_dataset_columns: Hash[String, Array[String]],
+        ?included_dataset_columns: Hash[String, Array[String]],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor excluded_dataset_columns: Hash[String, Array[String]]?
+      attr_accessor included_dataset_columns: Hash[String, Array[String]]?
     end
 
     module TrainingMode
@@ -3293,12 +3312,14 @@ module Aws::Personalize
       def initialize: (
         ?solution_arn: String,
         ?perform_auto_training: bool,
+        ?perform_incremental_update: bool,
         ?solution_update_config: Types::SolutionUpdateConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor solution_arn: String?
       attr_accessor perform_auto_training: bool?
+      attr_accessor perform_incremental_update: bool?
       attr_accessor solution_update_config: Types::SolutionUpdateConfig?
     end
 

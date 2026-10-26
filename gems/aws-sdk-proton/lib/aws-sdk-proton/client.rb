@@ -144,18 +144,18 @@ module Aws::Proton
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -239,6 +239,9 @@ module Aws::Proton
     #       codebuild_role_arn: "RoleArn"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::AcceptEnvironmentAccountConnectionOperationOutput]
     def accept_environment_account_connection(params = {}, options = {})
       request = build_request(:accept_environment_account_connection, params)
@@ -280,6 +283,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CancelComponentDeploymentOperationOutput]
     def cancel_component_deployment(params = {}, options = {})
       request = build_request(:cancel_component_deployment, params)
@@ -343,6 +349,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CancelEnvironmentDeploymentOperationOutput]
     def cancel_environment_deployment(params = {}, options = {})
       request = build_request(:cancel_environment_deployment, params)
@@ -402,6 +411,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CancelServiceInstanceDeploymentOperationOutput]
     def cancel_service_instance_deployment(params = {}, options = {})
       request = build_request(:cancel_service_instance_deployment, params)
@@ -454,6 +466,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CancelServicePipelineDeploymentOperationOutput]
     def cancel_service_pipeline_deployment(params = {}, options = {})
       request = build_request(:cancel_service_pipeline_deployment, params)
@@ -537,6 +552,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateComponentOperationOutput]
     def create_component(params = {}, options = {})
       request = build_request(:create_component, params)
@@ -662,6 +680,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateEnvironmentOperationOutput]
     def create_environment(params = {}, options = {})
       request = build_request(:create_environment, params)
@@ -735,6 +756,9 @@ module Aws::Proton
     #       codebuild_role_arn: "RoleArn"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateEnvironmentAccountConnectionOperationOutput]
     def create_environment_account_connection(params = {}, options = {})
       request = build_request(:create_environment_account_connection, params)
@@ -802,6 +826,9 @@ module Aws::Proton
     #       provisioning: "Provisioning"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateEnvironmentTemplateOperationOutput]
     def create_environment_template(params = {}, options = {})
       request = build_request(:create_environment_template, params)
@@ -867,6 +894,9 @@ module Aws::Proton
     #       schema: "TemplateSchema"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateEnvironmentTemplateVersionOperationOutput]
     def create_environment_template_version(params = {}, options = {})
       request = build_request(:create_environment_template_version, params)
@@ -919,6 +949,9 @@ module Aws::Proton
     #       encryption_key: "Arn"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateRepositoryOperationOutput]
     def create_repository(params = {}, options = {})
       request = build_request(:create_repository, params)
@@ -1016,6 +1049,9 @@ module Aws::Proton
     #       branch_name: "GitBranchName"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateServiceOperationOutput]
     def create_service(params = {}, options = {})
       request = build_request(:create_service, params)
@@ -1083,6 +1119,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateServiceInstanceOperationOutput]
     def create_service_instance(params = {}, options = {})
       request = build_request(:create_service_instance, params)
@@ -1122,6 +1161,9 @@ module Aws::Proton
     #       file_path: "OpsFilePath", # required
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateServiceSyncConfigOperationOutput]
     def create_service_sync_config(params = {}, options = {})
       request = build_request(:create_service_sync_config, params)
@@ -1185,6 +1227,9 @@ module Aws::Proton
     #       pipeline_provisioning: "Provisioning"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateServiceTemplateOperationOutput]
     def create_service_template(params = {}, options = {})
       request = build_request(:create_service_template, params)
@@ -1279,6 +1324,9 @@ module Aws::Proton
     #       supported_component_sources: ["ServiceTemplateSupportedComponentSourceType"]
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateServiceTemplateVersionOperationOutput]
     def create_service_template_version(params = {}, options = {})
       request = build_request(:create_service_template_version, params)
@@ -1327,6 +1375,9 @@ module Aws::Proton
     #       subdirectory: "Subdirectory"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::CreateTemplateSyncConfigOperationOutput]
     def create_template_sync_config(params = {}, options = {})
       request = build_request(:create_template_sync_config, params)
@@ -1368,6 +1419,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteComponentOperationOutput]
     def delete_component(params = {}, options = {})
       request = build_request(:delete_component, params)
@@ -1466,6 +1520,9 @@ module Aws::Proton
     #       }
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteDeploymentOutput]
     def delete_deployment(params = {}, options = {})
       request = build_request(:delete_deployment, params)
@@ -1514,6 +1571,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteEnvironmentOperationOutput]
     def delete_environment(params = {}, options = {})
       request = build_request(:delete_environment, params)
@@ -1552,6 +1612,9 @@ module Aws::Proton
     #       codebuild_role_arn: "RoleArn"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteEnvironmentAccountConnectionOperationOutput]
     def delete_environment_account_connection(params = {}, options = {})
       request = build_request(:delete_environment_account_connection, params)
@@ -1583,6 +1646,9 @@ module Aws::Proton
     #       provisioning: "Provisioning"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteEnvironmentTemplateOperationOutput]
     def delete_environment_template(params = {}, options = {})
       request = build_request(:delete_environment_template, params)
@@ -1627,6 +1693,9 @@ module Aws::Proton
     #       schema: "TemplateSchema"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteEnvironmentTemplateVersionOperationOutput]
     def delete_environment_template_version(params = {}, options = {})
       request = build_request(:delete_environment_template_version, params)
@@ -1657,6 +1726,9 @@ module Aws::Proton
     #       encryption_key: "Arn"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteRepositoryOperationOutput]
     def delete_repository(params = {}, options = {})
       request = build_request(:delete_repository, params)
@@ -1712,6 +1784,9 @@ module Aws::Proton
     #       branch_name: "GitBranchName"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteServiceOperationOutput]
     def delete_service(params = {}, options = {})
       request = build_request(:delete_service, params)
@@ -1739,6 +1814,9 @@ module Aws::Proton
     #       file_path: "OpsFilePath", # required
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteServiceSyncConfigOperationOutput]
     def delete_service_sync_config(params = {}, options = {})
       request = build_request(:delete_service_sync_config, params)
@@ -1771,6 +1849,9 @@ module Aws::Proton
     #       pipeline_provisioning: "Provisioning"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteServiceTemplateOperationOutput]
     def delete_service_template(params = {}, options = {})
       request = build_request(:delete_service_template, params)
@@ -1825,6 +1906,9 @@ module Aws::Proton
     #       supported_component_sources: ["ServiceTemplateSupportedComponentSourceType"]
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteServiceTemplateVersionOperationOutput]
     def delete_service_template_version(params = {}, options = {})
       request = build_request(:delete_service_template_version, params)
@@ -1856,6 +1940,9 @@ module Aws::Proton
     #       subdirectory: "Subdirectory"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::DeleteTemplateSyncConfigOperationOutput]
     def delete_template_sync_config(params = {}, options = {})
       request = build_request(:delete_template_sync_config, params)
@@ -1882,6 +1969,9 @@ module Aws::Proton
     #       pipeline_codebuild_role_arn: "RoleArnOrEmptyString"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetAccountSettingsOperationOutput]
     def get_account_settings(params = {}, options = {})
       request = build_request(:get_account_settings, params)
@@ -1923,6 +2013,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetComponentOperationOutput]
     def get_component(params = {}, options = {})
       request = build_request(:get_component, params)
@@ -2034,6 +2127,9 @@ module Aws::Proton
     #       }
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetDeploymentOutput]
     def get_deployment(params = {}, options = {})
       request = build_request(:get_deployment, params)
@@ -2082,6 +2178,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetEnvironmentOperationOutput]
     def get_environment(params = {}, options = {})
       request = build_request(:get_environment, params)
@@ -2117,6 +2216,9 @@ module Aws::Proton
     #       codebuild_role_arn: "RoleArn"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetEnvironmentAccountConnectionOperationOutput]
     def get_environment_account_connection(params = {}, options = {})
       request = build_request(:get_environment_account_connection, params)
@@ -2148,6 +2250,9 @@ module Aws::Proton
     #       provisioning: "Provisioning"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetEnvironmentTemplateOperationOutput]
     def get_environment_template(params = {}, options = {})
       request = build_request(:get_environment_template, params)
@@ -2187,6 +2292,9 @@ module Aws::Proton
     #       schema: "TemplateSchema"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetEnvironmentTemplateVersionOperationOutput]
     def get_environment_template_version(params = {}, options = {})
       request = build_request(:get_environment_template_version, params)
@@ -2217,6 +2325,9 @@ module Aws::Proton
     #       encryption_key: "Arn"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetRepositoryOperationOutput]
     def get_repository(params = {}, options = {})
       request = build_request(:get_repository, params)
@@ -2265,6 +2376,9 @@ module Aws::Proton
     #       ]
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetRepositorySyncStatusOperationOutput]
     def get_repository_sync_status(params = {}, options = {})
       request = build_request(:get_repository_sync_status, params)
@@ -2341,6 +2455,9 @@ module Aws::Proton
     #       }
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetResourcesSummaryOperationOutput]
     def get_resources_summary(params = {}, options = {})
       request = build_request(:get_resources_summary, params)
@@ -2389,6 +2506,9 @@ module Aws::Proton
     #       branch_name: "GitBranchName"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetServiceOperationOutput]
     def get_service(params = {}, options = {})
       request = build_request(:get_service, params)
@@ -2431,6 +2551,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetServiceInstanceOperationOutput]
     def get_service_instance(params = {}, options = {})
       request = build_request(:get_service_instance, params)
@@ -2515,6 +2638,9 @@ module Aws::Proton
     #       branch: "GitBranchName", # required
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetServiceInstanceSyncStatusOperationOutput]
     def get_service_instance_sync_status(params = {}, options = {})
       request = build_request(:get_service_instance_sync_status, params)
@@ -2562,6 +2688,9 @@ module Aws::Proton
     #       ]
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetServiceSyncBlockerSummaryOperationOutput]
     def get_service_sync_blocker_summary(params = {}, options = {})
       request = build_request(:get_service_sync_blocker_summary, params)
@@ -2589,6 +2718,9 @@ module Aws::Proton
     #       file_path: "OpsFilePath", # required
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetServiceSyncConfigOperationOutput]
     def get_service_sync_config(params = {}, options = {})
       request = build_request(:get_service_sync_config, params)
@@ -2620,6 +2752,9 @@ module Aws::Proton
     #       pipeline_provisioning: "Provisioning"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetServiceTemplateOperationOutput]
     def get_service_template(params = {}, options = {})
       request = build_request(:get_service_template, params)
@@ -2669,6 +2804,9 @@ module Aws::Proton
     #       supported_component_sources: ["ServiceTemplateSupportedComponentSourceType"]
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetServiceTemplateVersionOperationOutput]
     def get_service_template_version(params = {}, options = {})
       request = build_request(:get_service_template_version, params)
@@ -2700,6 +2838,9 @@ module Aws::Proton
     #       subdirectory: "Subdirectory"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetTemplateSyncConfigOperationOutput]
     def get_template_sync_config(params = {}, options = {})
       request = build_request(:get_template_sync_config, params)
@@ -2787,6 +2928,9 @@ module Aws::Proton
     #       branch: "GitBranchName", # required
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::GetTemplateSyncStatusOperationOutput]
     def get_template_sync_status(params = {}, options = {})
       request = build_request(:get_template_sync_status, params)
@@ -2823,6 +2967,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListComponentOutputsOperationOutput]
     def list_component_outputs(params = {}, options = {})
       request = build_request(:list_component_outputs, params)
@@ -2858,6 +3005,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListComponentProvisionedResourcesOperationOutput]
     def list_component_provisioned_resources(params = {}, options = {})
       request = build_request(:list_component_provisioned_resources, params)
@@ -2913,6 +3063,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListComponentsOperationOutput]
     def list_components(params = {}, options = {})
       request = build_request(:list_components, params)
@@ -2969,6 +3122,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListDeploymentsOutput]
     def list_deployments(params = {}, options = {})
       request = build_request(:list_deployments, params)
@@ -3019,6 +3175,9 @@ module Aws::Proton
     #     ],
     #     next_token: "NextToken"
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListEnvironmentAccountConnectionsOperationOutput]
     def list_environment_account_connections(params = {}, options = {})
       request = build_request(:list_environment_account_connections, params)
@@ -3053,6 +3212,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListEnvironmentOutputsOperationOutput]
     def list_environment_outputs(params = {}, options = {})
       request = build_request(:list_environment_outputs, params)
@@ -3085,6 +3247,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListEnvironmentProvisionedResourcesOperationOutput]
     def list_environment_provisioned_resources(params = {}, options = {})
       request = build_request(:list_environment_provisioned_resources, params)
@@ -3132,6 +3297,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListEnvironmentTemplateVersionsOperationOutput]
     def list_environment_template_versions(params = {}, options = {})
       request = build_request(:list_environment_template_versions, params)
@@ -3169,6 +3337,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListEnvironmentTemplatesOperationOutput]
     def list_environment_templates(params = {}, options = {})
       request = build_request(:list_environment_templates, params)
@@ -3224,6 +3395,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListEnvironmentsOperationOutput]
     def list_environments(params = {}, options = {})
       request = build_request(:list_environments, params)
@@ -3256,6 +3430,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListRepositoriesOperationOutput]
     def list_repositories(params = {}, options = {})
       request = build_request(:list_repositories, params)
@@ -3295,6 +3472,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListRepositorySyncDefinitionsOperationOutput]
     def list_repository_sync_definitions(params = {}, options = {})
       request = build_request(:list_repository_sync_definitions, params)
@@ -3332,6 +3512,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListServiceInstanceOutputsOperationOutput]
     def list_service_instance_outputs(params = {}, options = {})
       request = build_request(:list_service_instance_outputs, params)
@@ -3368,6 +3551,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListServiceInstanceProvisionedResourcesOperationOutput]
     def list_service_instance_provisioned_resources(params = {}, options = {})
       request = build_request(:list_service_instance_provisioned_resources, params)
@@ -3436,6 +3622,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListServiceInstancesOperationOutput]
     def list_service_instances(params = {}, options = {})
       request = build_request(:list_service_instances, params)
@@ -3470,6 +3659,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListServicePipelineOutputsOperationOutput]
     def list_service_pipeline_outputs(params = {}, options = {})
       request = build_request(:list_service_pipeline_outputs, params)
@@ -3503,6 +3695,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListServicePipelineProvisionedResourcesOperationOutput]
     def list_service_pipeline_provisioned_resources(params = {}, options = {})
       request = build_request(:list_service_pipeline_provisioned_resources, params)
@@ -3552,6 +3747,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListServiceTemplateVersionsOperationOutput]
     def list_service_template_versions(params = {}, options = {})
       request = build_request(:list_service_template_versions, params)
@@ -3589,6 +3787,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListServiceTemplatesOperationOutput]
     def list_service_templates(params = {}, options = {})
       request = build_request(:list_service_templates, params)
@@ -3626,6 +3827,9 @@ module Aws::Proton
     #       }
     #     ]
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListServicesOperationOutput]
     def list_services(params = {}, options = {})
       request = build_request(:list_services, params)
@@ -3661,6 +3865,9 @@ module Aws::Proton
     #     ],
     #     next_token: "String"
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::ListTagsForResourceOperationOutput]
     def list_tags_for_resource(params = {}, options = {})
       request = build_request(:list_tags_for_resource, params)
@@ -3698,6 +3905,9 @@ module Aws::Proton
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::NotifyResourceDeploymentStatusChangeOperationOutput]
     def notify_resource_deployment_status_change(params = {}, options = {})
       request = build_request(:notify_resource_deployment_status_change, params)
@@ -3736,6 +3946,9 @@ module Aws::Proton
     #       codebuild_role_arn: "RoleArn"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::RejectEnvironmentAccountConnectionOperationOutput]
     def reject_environment_account_connection(params = {}, options = {})
       request = build_request(:reject_environment_account_connection, params)
@@ -3765,6 +3978,9 @@ module Aws::Proton
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::TagResourceOperationOutput]
     def tag_resource(params = {}, options = {})
       request = build_request(:tag_resource, params)
@@ -3789,6 +4005,9 @@ module Aws::Proton
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {}
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UntagResourceOperationOutput]
     def untag_resource(params = {}, options = {})
       request = build_request(:untag_resource, params)
@@ -3839,6 +4058,9 @@ module Aws::Proton
     #       pipeline_codebuild_role_arn: "RoleArnOrEmptyString"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateAccountSettingsOperationOutput]
     def update_account_settings(params = {}, options = {})
       request = build_request(:update_account_settings, params)
@@ -3932,6 +4154,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateComponentOperationOutput]
     def update_component(params = {}, options = {})
       request = build_request(:update_component, params)
@@ -4104,6 +4329,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateEnvironmentOperationOutput]
     def update_environment(params = {}, options = {})
       request = build_request(:update_environment, params)
@@ -4155,6 +4383,9 @@ module Aws::Proton
     #       codebuild_role_arn: "RoleArn"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateEnvironmentAccountConnectionOperationOutput]
     def update_environment_account_connection(params = {}, options = {})
       request = build_request(:update_environment_account_connection, params)
@@ -4192,6 +4423,9 @@ module Aws::Proton
     #       provisioning: "Provisioning"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateEnvironmentTemplateOperationOutput]
     def update_environment_template(params = {}, options = {})
       request = build_request(:update_environment_template, params)
@@ -4237,6 +4471,9 @@ module Aws::Proton
     #       schema: "TemplateSchema"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateEnvironmentTemplateVersionOperationOutput]
     def update_environment_template_version(params = {}, options = {})
       request = build_request(:update_environment_template_version, params)
@@ -4307,6 +4544,9 @@ module Aws::Proton
     #       branch_name: "GitBranchName"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateServiceOperationOutput]
     def update_service(params = {}, options = {})
       request = build_request(:update_service, params)
@@ -4411,6 +4651,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateServiceInstanceOperationOutput]
     def update_service_instance(params = {}, options = {})
       request = build_request(:update_service_instance, params)
@@ -4539,6 +4782,9 @@ module Aws::Proton
     #       last_succeeded_deployment_id: "DeploymentId"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateServicePipelineOperationOutput]
     def update_service_pipeline(params = {}, options = {})
       request = build_request(:update_service_pipeline, params)
@@ -4579,6 +4825,9 @@ module Aws::Proton
     #       resolved_at: Time.now
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateServiceSyncBlockerOperationOutput]
     def update_service_sync_blocker(params = {}, options = {})
       request = build_request(:update_service_sync_blocker, params)
@@ -4618,6 +4867,9 @@ module Aws::Proton
     #       file_path: "OpsFilePath", # required
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateServiceSyncConfigOperationOutput]
     def update_service_sync_config(params = {}, options = {})
       request = build_request(:update_service_sync_config, params)
@@ -4656,6 +4908,9 @@ module Aws::Proton
     #       pipeline_provisioning: "Provisioning"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateServiceTemplateOperationOutput]
     def update_service_template(params = {}, options = {})
       request = build_request(:update_service_template, params)
@@ -4731,6 +4986,9 @@ module Aws::Proton
     #       supported_component_sources: ["ServiceTemplateSupportedComponentSourceType"]
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateServiceTemplateVersionOperationOutput]
     def update_service_template_version(params = {}, options = {})
       request = build_request(:update_service_template_version, params)
@@ -4776,6 +5034,9 @@ module Aws::Proton
     #       subdirectory: "Subdirectory"
     #     }
     #   }
+    # @deprecated
+    #   AWS Proton is not accepting new customers.
+    #   Since: 10/07/2025
     # @return [Types::UpdateTemplateSyncConfigOperationOutput]
     def update_template_sync_config(params = {}, options = {})
       request = build_request(:update_template_sync_config, params)

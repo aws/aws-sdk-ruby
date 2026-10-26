@@ -57,6 +57,31 @@ module Aws::S3
     end
 
     # @api private
+    class ListObjectAnnotations
+      def next_tokens(data)
+        next_token = data.next_continuation_token
+        return {} if next_token.nil? || next_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:continuation_token] = next_token
+        tokens
+      end
+
+      def prev_tokens(params)
+        prev_token = params[:continuation_token]
+        return {} if prev_token.nil? || prev_token.empty?
+
+        tokens = Hash.new { |h, k| h[k] = {} }
+        tokens[:continuation_token] = prev_token
+        tokens
+      end
+
+      def items(data)
+        data.annotations
+      end
+    end
+
+    # @api private
     class ListObjectsV2
       def next_tokens(data)
         next_token = data.next_continuation_token

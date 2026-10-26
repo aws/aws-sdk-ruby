@@ -244,6 +244,17 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The operation did not succeed because the account is managed by a organization policy.</p>
+    # @!attribute message
+    #   @return [String]
+    class BlockedByOrganizationPolicyException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute registry_id
     #   <p>The Amazon Web Services account ID associated with the registry to which to upload layers.
     #               If you do not specify a registry, the default registry is assumed.</p>
@@ -307,7 +318,7 @@ module Aws::ECR
     #            <ul>
     #               <li>
     #                  <p>Amazon ECR (<code>ecr</code>) –
-    #                       <code><accountId>.dkr.ecr.<region>.amazonaws.com</code>
+    #                           <code><accountId>.dkr.ecr.<region>.amazonaws.com</code>
     #                  </p>
     #               </li>
     #               <li>
@@ -455,7 +466,8 @@ module Aws::ECR
     #               repository will be immutable which will prevent them from being overwritten.</p>
     #   @return [String]
     # @!attribute image_tag_mutability_exclusion_filters
-    #   <p>Creates a repository creation template with a list of filters that define which image tags can override the default image tag mutability setting.</p>
+    #   <p>A list of filters that specify which image tags should be excluded from the repository
+    #               creation template's image tag mutability setting.</p>
     #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
     # @!attribute repository_policy
     #   <p>The repository policy to apply to repositories created using the template. A
@@ -467,8 +479,8 @@ module Aws::ECR
     #   @return [String]
     # @!attribute applied_for
     #   <p>A list of enumerable strings representing the Amazon ECR repository creation scenarios that
-    #               this template will apply towards. The two supported scenarios are
-    #                   <code>PULL_THROUGH_CACHE</code> and <code>REPLICATION</code>
+    #               this template will apply towards. The supported scenarios are
+    #                   <code>PULL_THROUGH_CACHE</code>, <code>REPLICATION</code>, and <code>CREATE_ON_PUSH</code>
     #            </p>
     #   @return [Array<String>]
     # @!attribute custom_role_arn
@@ -533,10 +545,16 @@ module Aws::ECR
     #               repository will be immutable which will prevent them from being overwritten.</p>
     #   @return [String]
     # @!attribute image_tag_mutability_exclusion_filters
-    #   <p>Creates a repository with a list of filters that define which image tags can override the default image tag mutability setting.</p>
+    #   <p>A list of filters that specify which image tags should be excluded from the
+    #               repository's image tag mutability setting.</p>
     #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
     # @!attribute image_scanning_configuration
-    #   <p>The image scanning configuration for the repository. This determines whether images
+    #   <important>
+    #               <p>The <code>imageScanningConfiguration</code> parameter is being deprecated, in
+    #                   favor of specifying the image scanning configuration at the registry level. For more
+    #                   information, see <code>PutRegistryScanningConfiguration</code>.</p>
+    #            </important>
+    #            <p>The image scanning configuration for the repository. This determines whether images
     #               are scanned for known vulnerabilities after being pushed to the repository.</p>
     #   @return [Types::ImageScanningConfiguration]
     # @!attribute encryption_configuration
@@ -855,6 +873,50 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
+    class DeleteSigningConfigurationRequest < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute registry_id
+    #   <p>The Amazon Web Services account ID associated with the registry.</p>
+    #   @return [String]
+    # @!attribute signing_configuration
+    #   <p>The registry's deleted signing configuration.</p>
+    #   @return [Types::SigningConfiguration]
+    class DeleteSigningConfigurationResponse < Struct.new(
+      nil,
+      :registry_id,
+      :signing_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute principal_arn
+    #   <p>The ARN of the IAM principal to remove from the pull time update exclusion list.</p>
+    #   @return [String]
+    class DeregisterPullTimeUpdateExclusionRequest < Struct.new(
+      nil,
+      :principal_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute principal_arn
+    #   <p>The ARN of the IAM principal that was removed from the pull time update exclusion list.</p>
+    #   @return [String]
+    class DeregisterPullTimeUpdateExclusionResponse < Struct.new(
+      nil,
+      :principal_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute repository_name
     #   <p>The name of the repository that the image is in.</p>
     #   @return [String]
@@ -968,6 +1030,49 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute repository_name
+    #   <p>The name of the repository that contains the image.</p>
+    #   @return [String]
+    # @!attribute image_id
+    #   <p>An object containing identifying information for an image.</p>
+    #   @return [Types::ImageIdentifier]
+    # @!attribute registry_id
+    #   <p>The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>
+    #   @return [String]
+    class DescribeImageSigningStatusRequest < Struct.new(
+      nil,
+      :repository_name,
+      :image_id,
+      :registry_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute repository_name
+    #   <p>The name of the repository.</p>
+    #   @return [String]
+    # @!attribute image_id
+    #   <p>An object with identifying information for the image.</p>
+    #   @return [Types::ImageIdentifier]
+    # @!attribute registry_id
+    #   <p>The Amazon Web Services account ID associated with the registry.</p>
+    #   @return [String]
+    # @!attribute signing_statuses
+    #   <p>A list of signing statuses for the specified image. Each status corresponds to a
+    #               signing profile.</p>
+    #   @return [Array<Types::ImageSigningStatus>]
+    class DescribeImageSigningStatusResponse < Struct.new(
+      nil,
+      :repository_name,
+      :image_id,
+      :registry_id,
+      :signing_statuses,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object representing a filter on a <a>DescribeImages</a>
     #             operation.</p>
     # @!attribute tag_status
@@ -975,9 +1080,15 @@ module Aws::ECR
     #               can filter results based on whether they are <code>TAGGED</code> or
     #                   <code>UNTAGGED</code>.</p>
     #   @return [String]
+    # @!attribute image_status
+    #   <p>The image status with which to filter your <a>DescribeImages</a> results.
+    #           Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.
+    #           If not specified, only images with <code>ACTIVE</code> status are returned.</p>
+    #   @return [String]
     class DescribeImagesFilter < Struct.new(
       nil,
       :tag_status,
+      :image_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1426,9 +1537,31 @@ module Aws::ECR
       end
     end
 
+    # <p>The specified pull time update exclusion already exists for the registry.</p>
+    # @!attribute message
+    #   @return [String]
+    class ExclusionAlreadyExistsException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The specified pull time update exclusion was not found.</p>
+    # @!attribute message
+    #   @return [String]
+    class ExclusionNotFoundException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
-    #   <p>The name of the account setting, such as <code>BASIC_SCAN_TYPE_VERSION</code> or
-    #                   <code>REGISTRY_POLICY_SCOPE</code>. </p>
+    #   <p>The name of the account setting, such as <code>BASIC_SCAN_TYPE_VERSION</code>,
+    #               <code>REGISTRY_POLICY_SCOPE</code>, or <code>BLOB_MOUNTING</code>.</p>
     #   @return [String]
     class GetAccountSettingRequest < Struct.new(
       nil,
@@ -1442,10 +1575,9 @@ module Aws::ECR
     #   <p>Retrieves the name of the account setting.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>The setting value for the setting name. The following are valid values for the basic
-    #               scan type being used: <code>AWS_NATIVE</code> or <code>CLAIR</code>. The following are
-    #               valid values for the registry policy scope being used: <code>V1</code> or
-    #                   <code>V2</code>.</p>
+    #   <p>The setting value for the setting name. Valid value for basic scan type: <code>AWS_NATIVE</code>.
+    #               Valid values for registry policy scope: <code>V2</code>.
+    #               Valid values for blob mounting: <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class GetAccountSettingResponse < Struct.new(
       nil,
@@ -1726,6 +1858,28 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
+    class GetSigningConfigurationRequest < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute registry_id
+    #   <p>The Amazon Web Services account ID associated with the registry.</p>
+    #   @return [String]
+    # @!attribute signing_configuration
+    #   <p>The registry's signing configuration.</p>
+    #   @return [Types::SigningConfiguration]
+    class GetSigningConfigurationResponse < Struct.new(
+      nil,
+      :registry_id,
+      :signing_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object representing an Amazon ECR image.</p>
     # @!attribute registry_id
     #   <p>The Amazon Web Services account ID associated with the registry containing the image.</p>
@@ -1760,6 +1914,17 @@ module Aws::ECR
     #   <p>The error message associated with the exception.</p>
     #   @return [String]
     class ImageAlreadyExistsException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The specified image is archived and cannot be scanned.</p>
+    # @!attribute message
+    #   @return [String]
+    class ImageArchivedException < Struct.new(
       nil,
       :message,
       keyword_init: true
@@ -1820,6 +1985,18 @@ module Aws::ECR
     #                   result may not be the exact time that the image was last pulled.</p>
     #            </note>
     #   @return [Time]
+    # @!attribute subject_manifest_digest
+    #   <p>The digest of the subject manifest for images that are referrers.</p>
+    #   @return [String]
+    # @!attribute image_status
+    #   <p>The current status of the image.</p>
+    #   @return [String]
+    # @!attribute last_archived_at
+    #   <p>The date and time, expressed in standard JavaScript date format, when the image was last transitioned to Amazon ECR archive.</p>
+    #   @return [Time]
+    # @!attribute last_activated_at
+    #   <p>The date and time, expressed in standard JavaScript date format, when the image was last restored from Amazon ECR archive to Amazon ECR standard.</p>
+    #   @return [Time]
     class ImageDetail < Struct.new(
       nil,
       :registry_id,
@@ -1833,6 +2010,10 @@ module Aws::ECR
       :image_manifest_media_type,
       :artifact_media_type,
       :last_recorded_pull_time,
+      :subject_manifest_digest,
+      :image_status,
+      :last_archived_at,
+      :last_activated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1892,6 +2073,38 @@ module Aws::ECR
     class ImageNotFoundException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An object representing an artifact associated with a subject image.</p>
+    # @!attribute digest
+    #   <p>The digest of the artifact manifest.</p>
+    #   @return [String]
+    # @!attribute media_type
+    #   <p>The media type of the artifact manifest.</p>
+    #   @return [String]
+    # @!attribute artifact_type
+    #   <p>A string identifying the type of artifact.</p>
+    #   @return [String]
+    # @!attribute size
+    #   <p>The size, in bytes, of the artifact.</p>
+    #   @return [Integer]
+    # @!attribute annotations
+    #   <p>A map of annotations associated with the artifact.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute artifact_status
+    #   <p>The status of the artifact. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, or <code>ACTIVATING</code>.</p>
+    #   @return [String]
+    class ImageReferrer < Struct.new(
+      nil,
+      :digest,
+      :media_type,
+      :artifact_type,
+      :size,
+      :annotations,
+      :artifact_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2033,6 +2246,58 @@ module Aws::ECR
       end
     end
 
+    # <p>The signing status for an image. Each status corresponds to a signing profile.</p>
+    # @!attribute signing_profile_arn
+    #   <p>The ARN of the Amazon Web Services Signer signing profile used to sign the image.</p>
+    #   @return [String]
+    # @!attribute failure_code
+    #   <p>The failure code, which is only present if <code>status</code>
+    #               is <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute failure_reason
+    #   <p>A description of why signing the image failed. This field is only
+    #               present if <code>status</code> is <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The image's signing status. Possible values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IN_PROGRESS</code> - Signing is currently in progress.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>COMPLETE</code> - The signature was successfully generated.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FAILED</code> - Signing failed. See
+    #                       <code>failureCode</code> and <code>failureReason</code> for details.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class ImageSigningStatus < Struct.new(
+      nil,
+      :signing_profile_arn,
+      :failure_code,
+      :failure_reason,
+      :status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The requested image storage class update is not supported.</p>
+    # @!attribute message
+    #   @return [String]
+    class ImageStorageClassUpdateNotSupportedException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified image is tagged with a tag that already exists. The repository is
     #             configured for tag immutability.</p>
     # @!attribute message
@@ -2045,12 +2310,14 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Overrides the default image tag mutability setting of the repository for image tags that match the specified filters.</p>
+    # <p>A filter that specifies which image tags should be excluded from the repository's
+    #             image tag mutability setting.</p>
     # @!attribute filter_type
-    #   <p>Specifies the type of filter to use for excluding image tags from the repository's mutability setting.</p>
+    #   <p>The type of filter to apply for excluding image tags from mutability settings.</p>
     #   @return [String]
     # @!attribute filter
-    #   <p>The value to use when filtering image tags. Must be either a regular expression pattern or a tag prefix value based on the specified filter type.</p>
+    #   <p>The filter value used to match image tags for exclusion from mutability
+    #               settings.</p>
     #   @return [String]
     class ImageTagMutabilityExclusionFilter < Struct.new(
       nil,
@@ -2336,6 +2603,9 @@ module Aws::ECR
     # @!attribute applied_rule_priority
     #   <p>The priority of the applied rule.</p>
     #   @return [Integer]
+    # @!attribute storage_class
+    #   <p>The storage class of the image.</p>
+    #   @return [String]
     class LifecyclePolicyPreviewResult < Struct.new(
       nil,
       :image_tags,
@@ -2343,6 +2613,7 @@ module Aws::ECR
       :image_pushed_at,
       :action,
       :applied_rule_priority,
+      :storage_class,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2352,9 +2623,14 @@ module Aws::ECR
     # @!attribute expiring_image_total_count
     #   <p>The number of expiring images.</p>
     #   @return [Integer]
+    # @!attribute transitioning_image_total_counts
+    #   <p>The total count of images that will be transitioned to each storage class.
+    #               This field is only present if at least one image will be transitoned in the summary.</p>
+    #   @return [Array<Types::TransitioningImageTotalCount>]
     class LifecyclePolicyPreviewSummary < Struct.new(
       nil,
       :expiring_image_total_count,
+      :transitioning_image_total_counts,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2364,9 +2640,14 @@ module Aws::ECR
     # @!attribute type
     #   <p>The type of action to be taken.</p>
     #   @return [String]
+    # @!attribute target_storage_class
+    #   <p>The target storage class for the action. This is only present when the <code>type</code> is <code>TRANSITION.</code>
+    #            </p>
+    #   @return [String]
     class LifecyclePolicyRuleAction < Struct.new(
       nil,
       :type,
+      :target_storage_class,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2386,15 +2667,102 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An object representing a filter on a <a>ListImageReferrers</a> operation.</p>
+    # @!attribute artifact_types
+    #   <p>The artifact types with which to filter your <a>ListImageReferrers</a> results.</p>
+    #   @return [Array<String>]
+    # @!attribute artifact_status
+    #   <p>The artifact status with which to filter your <a>ListImageReferrers</a> results. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, <code>ACTIVATING</code>, or <code>ANY</code>. If not specified, only artifacts with <code>ACTIVE</code> status are returned.</p>
+    #   @return [String]
+    class ListImageReferrersFilter < Struct.new(
+      nil,
+      :artifact_types,
+      :artifact_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute registry_id
+    #   <p>The Amazon Web Services account ID associated with the registry that contains the repository in
+    #               which to list image referrers. If you do not specify a registry, the default registry is assumed.</p>
+    #   @return [String]
+    # @!attribute repository_name
+    #   <p>The name of the repository that contains the subject image.</p>
+    #   @return [String]
+    # @!attribute subject_id
+    #   <p>An object containing the image digest of the subject image for which to retrieve associated artifacts.</p>
+    #   @return [Types::SubjectIdentifier]
+    # @!attribute filter
+    #   <p>The filter key and value with which to filter your <code>ListImageReferrers</code>
+    #               results. If no filter is specified, only artifacts with <code>ACTIVE</code> status are returned.</p>
+    #   @return [Types::ListImageReferrersFilter]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a previous paginated
+    #                   <code>ListImageReferrers</code> request where <code>maxResults</code> was used and the
+    #               results exceeded the value of that parameter. Pagination continues from the end of the
+    #               previous results that returned the <code>nextToken</code> value. This value is
+    #                   <code>null</code> when there are no more results to return.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of image referrer results returned by <code>ListImageReferrers</code> in paginated
+    #               output. When this parameter is used, <code>ListImageReferrers</code> only returns
+    #                   <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+    #               response element. The remaining results of the initial request can be seen by sending
+    #               another <code>ListImageReferrers</code> request with the returned <code>nextToken</code> value.
+    #               This value can be between 1 and 50. If this parameter is
+    #               not used, then <code>ListImageReferrers</code> returns up to 20 results and a
+    #                   <code>nextToken</code> value, if applicable.</p>
+    #   @return [Integer]
+    class ListImageReferrersRequest < Struct.new(
+      nil,
+      :registry_id,
+      :repository_name,
+      :subject_id,
+      :filter,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute referrers
+    #   <p>The list of artifacts associated with the subject image.</p>
+    #   @return [Array<Types::ImageReferrer>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListImageReferrers</code>
+    #               request. When the results of a <code>ListImageReferrers</code> request exceed
+    #                   <code>maxResults</code>, this value can be used to retrieve the next page of
+    #               results. This value is <code>null</code> when there are no more results to
+    #               return.</p>
+    #   @return [String]
+    class ListImageReferrersResponse < Struct.new(
+      nil,
+      :referrers,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object representing a filter on a <a>ListImages</a> operation.</p>
     # @!attribute tag_status
-    #   <p>The tag status with which to filter your <a>ListImages</a> results. You can
-    #               filter results based on whether they are <code>TAGGED</code> or
-    #               <code>UNTAGGED</code>.</p>
+    #   <p>The tag status with which to filter your <a>ListImages</a> results.</p>
+    #   @return [String]
+    # @!attribute image_status
+    #   <p>The image status with which to filter your <a>ListImages</a> results.
+    #           Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.
+    #           If not specified, only images with <code>ACTIVE</code> status are returned.</p>
     #   @return [String]
     class ListImagesFilter < Struct.new(
       nil,
       :tag_status,
+      :image_status,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2457,6 +2825,55 @@ module Aws::ECR
     class ListImagesResponse < Struct.new(
       nil,
       :image_ids,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of pull time update exclusion results returned by <code>ListPullTimeUpdateExclusions</code> in
+    #               paginated output. When this parameter is used, <code>ListPullTimeUpdateExclusions</code> only returns
+    #                   <code>maxResults</code> results in a single page along with a <code>nextToken</code>
+    #               response element. The remaining results of the initial request can be seen by sending
+    #               another <code>ListPullTimeUpdateExclusions</code> request with the returned <code>nextToken</code> value.
+    #               This value can be between 1 and 1000. If this parameter is
+    #               not used, then <code>ListPullTimeUpdateExclusions</code> returns up to 100 results and a
+    #                   <code>nextToken</code> value, if applicable.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value returned from a previous paginated
+    #                   <code>ListPullTimeUpdateExclusions</code> request where <code>maxResults</code> was used and the
+    #               results exceeded the value of that parameter. Pagination continues from the end of the
+    #               previous results that returned the <code>nextToken</code> value. This value is
+    #                   <code>null</code> when there are no more results to return.</p>
+    #            <note>
+    #               <p>This token should be treated as an opaque identifier that is only used to
+    #                   retrieve the next items in a list and not for other programmatic purposes.</p>
+    #            </note>
+    #   @return [String]
+    class ListPullTimeUpdateExclusionsRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute pull_time_update_exclusions
+    #   <p>The list of IAM principal ARNs that are excluded from having their image pull times recorded.</p>
+    #   @return [Array<String>]
+    # @!attribute next_token
+    #   <p>The <code>nextToken</code> value to include in a future <code>ListPullTimeUpdateExclusions</code>
+    #               request. When the results of a <code>ListPullTimeUpdateExclusions</code> request exceed
+    #                   <code>maxResults</code>, this value can be used to retrieve the next page of
+    #               results. This value is <code>null</code> when there are no more results to
+    #               return.</p>
+    #   @return [String]
+    class ListPullTimeUpdateExclusionsResponse < Struct.new(
+      nil,
+      :pull_time_update_exclusions,
       :next_token,
       keyword_init: true
     )
@@ -2607,14 +3024,13 @@ module Aws::ECR
     end
 
     # @!attribute name
-    #   <p>The name of the account setting, such as <code>BASIC_SCAN_TYPE_VERSION</code> or
-    #                   <code>REGISTRY_POLICY_SCOPE</code>. </p>
+    #   <p>The name of the account setting, such as <code>BASIC_SCAN_TYPE_VERSION</code>,
+    #               <code>REGISTRY_POLICY_SCOPE</code>, or <code>BLOB_MOUNTING</code>.</p>
     #   @return [String]
     # @!attribute value
-    #   <p>Setting value that is specified. The following are valid values for the basic scan
-    #               type being used: <code>AWS_NATIVE</code> or <code>CLAIR</code>. The following are valid
-    #               values for the registry policy scope being used: <code>V1</code> or
-    #               <code>V2</code>.</p>
+    #   <p>Setting value that is specified. Valid value for basic scan type: <code>AWS_NATIVE</code>.
+    #               Valid values for registry policy scope: <code>V2</code>.
+    #               Valid values for blob mounting: <code>ENABLED</code> or <code>DISABLED</code>.</p>
     #   @return [String]
     class PutAccountSettingRequest < Struct.new(
       nil,
@@ -2656,8 +3072,7 @@ module Aws::ECR
     #                   <code>imageManifestMediaType</code> in the request.</p>
     #   @return [String]
     # @!attribute image_tag
-    #   <p>The tag to associate with the image. This parameter is required for images that use
-    #               the Docker Image Manifest V2 Schema 2 or Open Container Initiative (OCI) formats.</p>
+    #   <p>The tag to associate with the image. This parameter is optional.</p>
     #   @return [String]
     # @!attribute image_digest
     #   <p>The image digest of the image manifest corresponding to the image.</p>
@@ -2744,7 +3159,8 @@ module Aws::ECR
     #               overwritten.</p>
     #   @return [String]
     # @!attribute image_tag_mutability_exclusion_filters
-    #   <p>Creates or updates a repository with filters that define which image tags can override the default image tag mutability setting.</p>
+    #   <p>A list of filters that specify which image tags should be excluded from the image tag
+    #               mutability setting being applied.</p>
     #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
     class PutImageTagMutabilityRequest < Struct.new(
       nil,
@@ -2767,7 +3183,8 @@ module Aws::ECR
     #   <p>The image tag mutability setting for the repository.</p>
     #   @return [String]
     # @!attribute image_tag_mutability_exclusion_filters
-    #   <p>Returns a list of filters that were defined for a repository. These filters determine which image tags can override the default image tag mutability setting of the repository.</p>
+    #   <p>The list of filters that specify which image tags are excluded from the repository's
+    #               image tag mutability setting.</p>
     #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
     class PutImageTagMutabilityResponse < Struct.new(
       nil,
@@ -2905,6 +3322,28 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute signing_configuration
+    #   <p>The signing configuration to assign to the registry.</p>
+    #   @return [Types::SigningConfiguration]
+    class PutSigningConfigurationRequest < Struct.new(
+      nil,
+      :signing_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute signing_configuration
+    #   <p>The registry's updated signing configuration.</p>
+    #   @return [Types::SigningConfiguration]
+    class PutSigningConfigurationResponse < Struct.new(
+      nil,
+      :signing_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Details about the recommended course of action to remediate the finding.</p>
     # @!attribute url
     #   <p>The URL address to the CVE remediation recommendations.</p>
@@ -2927,6 +3366,32 @@ module Aws::ECR
     class ReferencedImagesNotFoundException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute principal_arn
+    #   <p>The ARN of the IAM principal to exclude from having image pull times recorded.</p>
+    #   @return [String]
+    class RegisterPullTimeUpdateExclusionRequest < Struct.new(
+      nil,
+      :principal_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute principal_arn
+    #   <p>The ARN of the IAM principal that was added to the pull time update exclusion list.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time, expressed in standard JavaScript date format, when the exclusion was created.</p>
+    #   @return [Time]
+    class RegisterPullTimeUpdateExclusionResponse < Struct.new(
+      nil,
+      :principal_arn,
+      :created_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3066,7 +3531,8 @@ module Aws::ECR
     #   <p>The tag mutability setting for the repository.</p>
     #   @return [String]
     # @!attribute image_tag_mutability_exclusion_filters
-    #   <p>The image tag mutability exclusion filters associated with the repository. These filters specify which image tags can override the repository's default image tag mutability setting.</p>
+    #   <p>A list of filters that specify which image tags are excluded from the repository's
+    #               image tag mutability setting.</p>
     #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
     # @!attribute image_scanning_configuration
     #   <p>The image scanning configuration for a repository.</p>
@@ -3121,12 +3587,13 @@ module Aws::ECR
     #   @return [Array<Types::Tag>]
     # @!attribute image_tag_mutability
     #   <p>The tag mutability setting for the repository. If this parameter is omitted, the
-    #               default setting of <code>MUTABLE</code> will be used which will allow image tags to be overwritten.
-    #               If <code>IMMUTABLE</code> is specified, all image tags within the repository will be immutable which
-    #               will prevent them from being overwritten.</p>
+    #               default setting of <code>MUTABLE</code> will be used which will allow image tags to be
+    #               overwritten. If <code>IMMUTABLE</code> is specified, all image tags within the
+    #               repository will be immutable which will prevent them from being overwritten.</p>
     #   @return [String]
     # @!attribute image_tag_mutability_exclusion_filters
-    #   <p>Defines the image tag mutability exclusion filters to apply when creating repositories from this template. These filters specify which image tags can override the repository's default image tag mutability setting.</p>
+    #   <p>A list of filters that specify which image tags are excluded from the repository
+    #               creation template's image tag mutability setting.</p>
     #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
     # @!attribute repository_policy
     #   <p>The repository policy to apply to repositories created using the template. A
@@ -3138,8 +3605,8 @@ module Aws::ECR
     #   @return [String]
     # @!attribute applied_for
     #   <p>A list of enumerable Strings representing the repository creation scenarios that this
-    #               template will apply towards. The two supported scenarios are PULL_THROUGH_CACHE and
-    #               REPLICATION</p>
+    #               template will apply towards. The supported scenarios are PULL_THROUGH_CACHE, REPLICATION, and
+    #               CREATE_ON_PUSH</p>
     #   @return [Array<String>]
     # @!attribute custom_role_arn
     #   <p>The ARN of the role to be assumed by Amazon ECR. Amazon ECR will assume your supplied role
@@ -3439,6 +3906,96 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The signing configuration for a registry, which specifies rules
+    #             for automatically signing images when pushed.</p>
+    # @!attribute rules
+    #   <p>A list of signing rules. Each rule defines a signing profile and optional repository
+    #               filters that determine which images are automatically signed. Maximum of 10 rules.</p>
+    #   @return [Array<Types::SigningRule>]
+    class SigningConfiguration < Struct.new(
+      nil,
+      :rules,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The specified signing configuration was not found. This occurs when
+    #             attempting to retrieve or delete a signing configuration that does not exist.</p>
+    # @!attribute message
+    #   <p>The error message associated with the exception.</p>
+    #   @return [String]
+    class SigningConfigurationNotFoundException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A repository filter used to determine which repositories have their
+    #             images automatically signed on push. Each filter consists of a filter type and filter value.</p>
+    # @!attribute filter
+    #   <p>The filter value used to match repository names. When using
+    #               <code>WILDCARD_MATCH</code>, the <code>*</code> character matches any sequence of characters.</p>
+    #            <p>Examples:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>myapp/*</code> - Matches all repositories starting with
+    #                       <code>myapp/</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>*/production</code> - Matches all repositories ending with
+    #                       <code>/production</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>*prod*</code> - Matches all repositories containing
+    #                       <code>prod</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute filter_type
+    #   <p>The type of filter to apply. Currently, only <code>WILDCARD_MATCH</code> is supported,
+    #               which uses wildcard patterns to match repository names.</p>
+    #   @return [String]
+    class SigningRepositoryFilter < Struct.new(
+      nil,
+      :filter,
+      :filter_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A signing rule that specifies a signing profile and optional
+    #             repository filters. When an image is pushed to a matching repository, a
+    #             signing job is created using the specified profile.</p>
+    # @!attribute signing_profile_arn
+    #   <p>The ARN of the Amazon Web Services Signer signing profile to use for signing images that match this
+    #               rule. For more information about signing profiles, see <a href="https://docs.aws.amazon.com/signer/latest/developerguide/signing-profiles.html">Signing profiles</a> in
+    #               the <i>Amazon Web Services Signer Developer Guide</i>.</p>
+    #   @return [String]
+    # @!attribute repository_filters
+    #   <p>A list of repository filters that determine which repositories
+    #               have their images signed on push. If no filters are specified, all
+    #               images pushed to the registry are signed using the rule's signing
+    #               profile. Maximum of 100 filters per rule.</p>
+    #   @return [Array<Types::SigningRepositoryFilter>]
+    class SigningRule < Struct.new(
+      nil,
+      :signing_profile_arn,
+      :repository_filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute registry_id
     #   <p>The Amazon Web Services account ID associated with the registry that contains the repository in
     #               which to start an image scan request. If you do not specify a registry, the default registry is assumed.</p>
@@ -3526,6 +4083,18 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>An object that identifies an image subject.</p>
+    # @!attribute image_digest
+    #   <p>The digest of the image.</p>
+    #   @return [String]
+    class SubjectIdentifier < Struct.new(
+      nil,
+      :image_digest,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The metadata to apply to a resource to help you categorize and organize them. Each tag
     #             consists of a key and a value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have
     #             a maximum length of 256 characters.</p>
@@ -3606,6 +4175,22 @@ module Aws::ECR
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The total count of images transitioning to a storage class.</p>
+    # @!attribute target_storage_class
+    #   <p>The target storage class.</p>
+    #   @return [String]
+    # @!attribute image_total_count
+    #   <p>The total number of images transitioning to the storage class.</p>
+    #   @return [Integer]
+    class TransitioningImageTotalCount < Struct.new(
+      nil,
+      :target_storage_class,
+      :image_total_count,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The secret is unable to be accessed. Verify the resource permissions for the secret
     #             and try again.</p>
     # @!attribute message
@@ -3648,6 +4233,19 @@ module Aws::ECR
     # @!attribute message
     #   @return [String]
     class UnableToGetUpstreamLayerException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The referrer or referrers were unable to be listed using the pull through cache rule. This
+    #             is usually caused because of an issue with the Secrets Manager secret containing the credentials
+    #             for the upstream registry.</p>
+    # @!attribute message
+    #   @return [String]
+    class UnableToListUpstreamImageReferrersException < Struct.new(
       nil,
       :message,
       keyword_init: true
@@ -3701,6 +4299,52 @@ module Aws::ECR
     end
 
     # @!attribute registry_id
+    #   <p>The Amazon Web Services account ID associated with the registry that contains the image to transition. If you do not specify a registry, the default registry is assumed.</p>
+    #   @return [String]
+    # @!attribute repository_name
+    #   <p>The name of the repository that contains the image to transition.</p>
+    #   @return [String]
+    # @!attribute image_id
+    #   <p>An object with identifying information for an image in an Amazon ECR repository.</p>
+    #   @return [Types::ImageIdentifier]
+    # @!attribute target_storage_class
+    #   <p>The target storage class for the image.</p>
+    #   @return [String]
+    class UpdateImageStorageClassRequest < Struct.new(
+      nil,
+      :registry_id,
+      :repository_name,
+      :image_id,
+      :target_storage_class,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute registry_id
+    #   <p>The registry ID associated with the request.</p>
+    #   @return [String]
+    # @!attribute repository_name
+    #   <p>The repository name associated with the request.</p>
+    #   @return [String]
+    # @!attribute image_id
+    #   <p>An object with identifying information for an image in an Amazon ECR repository.</p>
+    #   @return [Types::ImageIdentifier]
+    # @!attribute image_status
+    #   <p>The current status of the image after the call to UpdateImageStorageClass is complete. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.</p>
+    #   @return [String]
+    class UpdateImageStorageClassResponse < Struct.new(
+      nil,
+      :registry_id,
+      :repository_name,
+      :image_id,
+      :image_status,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute registry_id
     #   <p>The Amazon Web Services account ID associated with the registry associated with the pull through
     #               cache rule. If you do not specify a registry, the default registry is assumed.</p>
     #   @return [String]
@@ -3712,9 +4356,9 @@ module Aws::ECR
     #               to the upstream registry.</p>
     #   @return [String]
     # @!attribute custom_role_arn
-    #   <p>Amazon Resource Name (ARN) of the IAM role to be assumed by Amazon ECR to authenticate to the
-    #               ECR upstream registry. This role must be in the same account as the registry that you
-    #               are configuring.</p>
+    #   <p>Amazon Resource Name (ARN) of the IAM role to be assumed by Amazon ECR to authenticate to
+    #               the ECR upstream registry. This role must be in the same account as the registry that
+    #               you are configuring.</p>
     #   @return [String]
     class UpdatePullThroughCacheRuleRequest < Struct.new(
       nil,
@@ -3789,7 +4433,8 @@ module Aws::ECR
     #               repository will be immutable which will prevent them from being overwritten.</p>
     #   @return [String]
     # @!attribute image_tag_mutability_exclusion_filters
-    #   <p>Updates a repository with filters that define which image tags can override the default image tag mutability setting.</p>
+    #   <p>A list of filters that specify which image tags should be excluded from the repository
+    #               creation template's image tag mutability setting.</p>
     #   @return [Array<Types::ImageTagMutabilityExclusionFilter>]
     # @!attribute repository_policy
     #   <p>Updates the repository policy created using the template. A repository policy is a
@@ -3801,8 +4446,8 @@ module Aws::ECR
     #   @return [String]
     # @!attribute applied_for
     #   <p>Updates the list of enumerable strings representing the Amazon ECR repository creation
-    #               scenarios that this template will apply towards. The two supported scenarios are
-    #                   <code>PULL_THROUGH_CACHE</code> and <code>REPLICATION</code>
+    #               scenarios that this template will apply towards. The supported scenarios are
+    #                   <code>PULL_THROUGH_CACHE</code>, <code>REPLICATION</code>, and <code>CREATE_ON_PUSH</code>
     #            </p>
     #   @return [Array<String>]
     # @!attribute custom_role_arn

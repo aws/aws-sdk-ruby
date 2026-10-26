@@ -3,6 +3,7 @@ module Aws::Identitystore
     class AccessDeniedException < Smithy::Client::ServiceError
       def message: () -> String?
       def request_id: () -> String?
+      def reason: () -> String?
     end
     class ConflictException < Smithy::Client::ServiceError
       def message: () -> String?
@@ -18,6 +19,7 @@ module Aws::Identitystore
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def resource_type: () -> String?
       def resource_id: () -> String?
+      def reason: () -> String?
       def message: () -> String?
       def request_id: () -> String?
     end
@@ -29,12 +31,14 @@ module Aws::Identitystore
       def message: () -> String?
       def request_id: () -> String?
       def retry_after_seconds: () -> Integer?
+      def reason: () -> String?
       def retryable?: () -> true
       def throttling?: () -> true
     end
     class ValidationException < Smithy::Client::ServiceError
       def message: () -> String?
       def request_id: () -> String?
+      def reason: () -> String?
     end
   end
 end

@@ -216,8 +216,8 @@ module Aws
               'max' => context.config.max_attempts
             }
 
-            # TODO: Add TTL with estimated skew cached per endpoint that persists between SDK invocations
-            #       along with clock skew correction, after clock skew SEP finalizes.
+            # TODO: Add request TTL using per-endpoint clock-skew estimates cached
+            #       across SDK invocations, together with clock-skew correction.
             formatted_header = request_pairs.map { |k, v| "#{k}=#{v}" }.join('; ')
             context.http_request.headers['amz-sdk-request'] = formatted_header
           end

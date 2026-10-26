@@ -1,0 +1,5 @@
+  module Aws
+    module EventBridgeV2
+      VERSION: String
+    end
+  end

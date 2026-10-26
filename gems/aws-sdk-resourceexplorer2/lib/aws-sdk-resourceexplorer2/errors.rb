@@ -36,8 +36,7 @@ module Aws::ResourceExplorer2
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>The credentials that you used to call this operation don't have the minimum required
-    #             permissions.</p>
+    # <p>The credentials that you used to call this operation don't have the minimum required permissions.</p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceExplorer2::Types::AccessDeniedException] data
@@ -50,13 +49,7 @@ module Aws::ResourceExplorer2
       end
     end
 
-    # <p>If you attempted to create a view, then the request failed because either you specified parameters that didn’t match the
-    #             original request, or you attempted to create a view with a name that already exists in
-    #             this Amazon Web Services Region.</p>
-    #          <p>If you attempted to create an index, then the request failed because either you specified parameters that didn't match
-    #             the original request, or an index already exists in the current Amazon Web Services Region.</p>
-    #          <p>If you attempted to update an index type to <code>AGGREGATOR</code>, then the request failed because you already
-    #             have an <code>AGGREGATOR</code> index in a different Amazon Web Services Region.</p>
+    # <p>If you attempted to create a view, then the request failed because either you specified parameters that didn’t match the original request, or you attempted to create a view with a name that already exists in this Amazon Web Services Region.</p> <p>If you attempted to create an index, then the request failed because either you specified parameters that didn't match the original request, or an index already exists in the current Amazon Web Services Region.</p> <p>If you attempted to update an index type to <code>AGGREGATOR</code>, then the request failed because you already have an <code>AGGREGATOR</code> index in a different Amazon Web Services Region.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceExplorer2::Types::ConflictException] data
@@ -69,8 +62,7 @@ module Aws::ResourceExplorer2
       end
     end
 
-    # <p>The request failed because of internal service error. Try your request again
-    #             later.</p>
+    # <p>The request failed because of internal service error. Try your request again later.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceExplorer2::Types::InternalServerException] data
@@ -83,8 +75,7 @@ module Aws::ResourceExplorer2
       end
     end
 
-    # <p>You specified a resource that doesn't exist. Check the ID or ARN that you used to
-    #             identity the resource, and try again.</p>
+    # <p>You specified a resource that doesn't exist. Check the ID or ARN that you used to identity the resource, and try again.</p>
     class ResourceNotFoundException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceExplorer2::Types::ResourceNotFoundException] data
@@ -120,9 +111,7 @@ module Aws::ResourceExplorer2
       end
     end
 
-    # <p>The request failed because you exceeded a rate limit for this operation. For more
-    #             information, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/quotas.html">Quotas for
-    #             Resource Explorer</a>.</p>
+    # <p>The request failed because you exceeded a rate limit for this operation. For more information, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/quotas.html">Quotas for Resource Explorer</a>.</p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceExplorer2::Types::ThrottlingException] data
@@ -148,8 +137,7 @@ module Aws::ResourceExplorer2
       end
     end
 
-    # <p>You provided an invalid value for one of the operation's parameters. Check the syntax
-    #             for the operation, and try again.</p>
+    # <p>You provided an invalid value for one of the operation's parameters. Check the syntax for the operation, and try again.</p>
     class ValidationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceExplorer2::Types::ValidationException] data

@@ -144,18 +144,18 @@ module Aws::Artifact
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,6 +209,129 @@ module Aws::Artifact
       super
     end
 
+    # <p>Create a new compliance inquiry.</p>
+    # @param [Hash, Types::CreateComplianceInquiryRequest] params
+    # @option params [String] :name
+    #   <p>Title of the inquiry.</p>
+    # @option params [Types::InquiryContent] :inquiry_content
+    #   <p>Content for creating a compliance inquiry - either a single query or file content.</p>
+    # @option params [String] :client_token
+    #   <p>Idempotency token for the request.</p>
+    # @option params [String] :support_mode
+    #   <p>Support mode for inquiry processing. Only supported for file upload mode. Defaults to AI_ONLY if not specified.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Tags to associate with the compliance inquiry resource.</p>
+    # @example Invoke CreateComplianceInquiry operation
+    #   # Creates a compliance inquiry with a single text query.
+    #   params = {
+    #     name: "My Compliance Inquiry",
+    #     inquiry_content: {
+    #     "query" => Is my workload compliant with SOC 2?
+    #   },
+    #     client_token: "unique-client-token-1234",
+    #     support_mode: AI_ONLY
+    #   }
+    #   options = {}
+    #   response = client.create_compliance_inquiry(params, options)
+    #   response.to_h #=>
+    #   {
+    #     compliance_inquiry_summary: {
+    #       arn: "arn:aws:artifact:us-east-1:123456789012:compliance-inquiry/compliance-inquiry-abcdef0123456789",
+    #       name: "My Compliance Inquiry",
+    #       id: "compliance-inquiry-abcdef0123456789",
+    #       status: PROCESSING,
+    #       status_message: Compliance inquiry processing is in-progress.,
+    #       input_source: TEXT,
+    #       created_at: Time.parse("2026-03-24T12:00:00Z")
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "InquiryName", # required
+    #     inquiry_content: { # required
+    #       # One of:
+    #       query: "LongStringAttribute",
+    #       file_content: {
+    #         file_sections: ["ShortStringAttribute"],
+    #         content: "data", # required
+    #       }
+    #     },
+    #     client_token: "IdempotentClientToken",
+    #     support_mode: "AI_ONLY" # One of: ["AI_ONLY", "FULL_SUPPORT"],
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_compliance_inquiry(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     compliance_inquiry_summary: {
+    #       arn: "String", # required
+    #       name: "String", # required
+    #       id: "InquiryId", # required
+    #       status: "PROCESSING" # One of: ["PROCESSING", "HUMAN_REVIEW", "COMPLETED", "FAILED"], # required
+    #       status_message: "Compliance inquiry processing is complete." # One of: ["Compliance inquiry processing is complete.", "Malware was detected on the file. Provide a new file and try again.", "Compliance inquiry processing is in-progress.", "An internal error occurred while processing the inquiry. Try again at a later time.", "Human review is in progress.", "Compliance inquiry processing is complete. One or more queries encountered errors during processing."], # required
+    #       input_source: "TEXT" # One of: ["TEXT", "FILE"], # required
+    #       created_at: Time.now, # required
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::CreateComplianceInquiryResponse]
+    def create_compliance_inquiry(params = {}, options = {})
+      request = build_request(:create_compliance_inquiry, params)
+      request.send_request(options)
+    end
+
+    # <p>Export a compliance inquiry report.</p>
+    # @param [Hash, Types::ExportComplianceInquiryRequest] params
+    # @option params [String] :compliance_inquiry_id
+    #   <p>Unique resource ID for the compliance inquiry.</p>
+    # @option params [Array<Integer>] :query_identifiers
+    #   <p>List of query identifiers to include in the export.</p>
+    # @option params [Boolean] :include_citations
+    #   <p>When true, include citations in the exported document.</p>
+    # @example Invoke ExportComplianceInquiry operation
+    #   # Exports a compliance inquiry report.
+    #   params = {
+    #     compliance_inquiry_id: "compliance-inquiry-abcdef0123456789",
+    #     query_identifiers: [
+    #       1,
+    #       2
+    #     ],
+    #     include_citations: true
+    #   }
+    #   options = {}
+    #   response = client.export_compliance_inquiry(params, options)
+    #   response.to_h #=>
+    #   {
+    #     document_presigned_url: "https://s3.us-east-1.amazonaws.com/artifact-bucket/export.pdf?X-Amz-Signature=example"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     compliance_inquiry_id: "InquiryId", # required
+    #     query_identifiers: [1],
+    #     include_citations: false
+    #   }
+    #   options = {}
+    #   response = client.export_compliance_inquiry(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     document_presigned_url: "PresignedUrl",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::ExportComplianceInquiryResponse]
+    def export_compliance_inquiry(params = {}, options = {})
+      request = build_request(:export_compliance_inquiry, params)
+      request.send_request(options)
+    end
+
     # <p>Get the account settings for Artifact.</p>
     # @param [Hash, Types::GetAccountSettingsRequest] params
     # @example Invoke GetAccountSettings operation
@@ -236,6 +359,61 @@ module Aws::Artifact
     # @return [Types::GetAccountSettingsResponse]
     def get_account_settings(params = {}, options = {})
       request = build_request(:get_account_settings, params)
+      request.send_request(options)
+    end
+
+    # <p>Get the metadata for a single compliance inquiry.</p>
+    # @param [Hash, Types::GetComplianceInquiryMetadataRequest] params
+    # @option params [String] :compliance_inquiry_id
+    #   <p>Unique resource ID for the compliance inquiry.</p>
+    # @example Invoke GetComplianceInquiryMetadata operation
+    #   # Gets metadata for a compliance inquiry.
+    #   params = {
+    #     compliance_inquiry_id: "compliance-inquiry-abcdef0123456789"
+    #   }
+    #   options = {}
+    #   response = client.get_compliance_inquiry_metadata(params, options)
+    #   response.to_h #=>
+    #   {
+    #     compliance_inquiry_detail: {
+    #       arn: "arn:aws:artifact:us-east-1:123456789012:compliance-inquiry/compliance-inquiry-abcdef0123456789",
+    #       name: "My Compliance Inquiry",
+    #       id: "compliance-inquiry-abcdef0123456789",
+    #       status: COMPLETED,
+    #       status_message: Compliance inquiry processing is complete.,
+    #       input_source: TEXT,
+    #       created_at: Time.parse("2026-03-24T12:00:00Z"),
+    #       updated_at: Time.parse("2026-03-24T12:05:00Z"),
+    #       support_mode: AI_ONLY
+    #     }
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     compliance_inquiry_id: "InquiryId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_compliance_inquiry_metadata(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     compliance_inquiry_detail: {
+    #       arn: "String", # required
+    #       name: "String", # required
+    #       id: "InquiryId", # required
+    #       status: "PROCESSING" # One of: ["PROCESSING", "HUMAN_REVIEW", "COMPLETED", "FAILED"], # required
+    #       status_message: "Compliance inquiry processing is complete." # One of: ["Compliance inquiry processing is complete.", "Malware was detected on the file. Provide a new file and try again.", "Compliance inquiry processing is in-progress.", "An internal error occurred while processing the inquiry. Try again at a later time.", "Human review is in progress.", "Compliance inquiry processing is complete. One or more queries encountered errors during processing."], # required
+    #       input_source: "TEXT" # One of: ["TEXT", "FILE"], # required
+    #       created_at: Time.now, # required
+    #       updated_at: Time.now,
+    #       support_mode: "AI_ONLY" # One of: ["AI_ONLY", "FULL_SUPPORT"]
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::GetComplianceInquiryMetadataResponse]
+    def get_compliance_inquiry_metadata(params = {}, options = {})
+      request = build_request(:get_compliance_inquiry_metadata, params)
       request.send_request(options)
     end
 
@@ -391,6 +569,142 @@ module Aws::Artifact
       request.send_request(options)
     end
 
+    # <p>List available compliance inquiries.</p>
+    # @param [Hash, Types::ListComplianceInquiriesRequest] params
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of resources to return in the paginated response.</p>
+    # @option params [String] :next_token
+    #   <p>Pagination token to request the next page of resources.</p>
+    # @example Invoke ListComplianceInquiries operation
+    #   # Lists all compliance inquiries.
+    #   params = {
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_compliance_inquiries(params, options)
+    #   response.to_h #=>
+    #   {
+    #     compliance_inquiries: [
+    #       {
+    #         arn: "arn:aws:artifact:us-east-1:123456789012:compliance-inquiry/compliance-inquiry-abcdef0123456789",
+    #         name: "My Compliance Inquiry",
+    #         id: "compliance-inquiry-abcdef0123456789",
+    #         status: COMPLETED,
+    #         status_message: Compliance inquiry processing is complete.,
+    #         input_source: TEXT,
+    #         created_at: Time.parse("2026-03-24T12:00:00Z")
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextTokenAttribute"
+    #   }
+    #   options = {}
+    #   response = client.list_compliance_inquiries(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     compliance_inquiries: [
+    #       {
+    #         arn: "String", # required
+    #         name: "String", # required
+    #         id: "InquiryId", # required
+    #         status: "PROCESSING" # One of: ["PROCESSING", "HUMAN_REVIEW", "COMPLETED", "FAILED"], # required
+    #         status_message: "Compliance inquiry processing is complete." # One of: ["Compliance inquiry processing is complete.", "Malware was detected on the file. Provide a new file and try again.", "Compliance inquiry processing is in-progress.", "An internal error occurred while processing the inquiry. Try again at a later time.", "Human review is in progress.", "Compliance inquiry processing is complete. One or more queries encountered errors during processing."], # required
+    #         input_source: "TEXT" # One of: ["TEXT", "FILE"], # required
+    #         created_at: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "NextTokenAttribute"
+    #   }
+    # @return [Types::ListComplianceInquiriesResponse]
+    def list_compliance_inquiries(params = {}, options = {})
+      request = build_request(:list_compliance_inquiries, params)
+      request.send_request(options)
+    end
+
+    # <p>List queries within a compliance inquiry.</p>
+    # @param [Hash, Types::ListComplianceInquiryQueriesRequest] params
+    # @option params [String] :compliance_inquiry_id
+    #   <p>Unique resource ID for the compliance inquiry.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of resources to return in the paginated response.</p>
+    # @option params [String] :next_token
+    #   <p>Pagination token to request the next page of resources.</p>
+    # @example Invoke ListComplianceInquiryQueries operation
+    #   # Lists queries within a compliance inquiry.
+    #   params = {
+    #     compliance_inquiry_id: "compliance-inquiry-abcdef0123456789",
+    #     max_results: 10
+    #   }
+    #   options = {}
+    #   response = client.list_compliance_inquiry_queries(params, options)
+    #   response.to_h #=>
+    #   {
+    #     queries: [
+    #       {
+    #         query_identifier: 1,
+    #         query: "Is my workload compliant with SOC 2?",
+    #         response: "Based on the available compliance documentation...",
+    #         review_type: AI,
+    #         citations: [
+    #           {
+    #             source_label: "SOC 2 Type II Report",
+    #             source_content: "Relevant compliance content...",
+    #             source_link: "https://example.com/soc2"
+    #           }
+    #         ],
+    #         status: COMPLETED,
+    #         status_message: Query processing is complete.,
+    #         created_at: Time.parse("2026-03-24T12:00:00Z")
+    #       }
+    #     ]
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     compliance_inquiry_id: "InquiryId", # required
+    #     max_results: 1,
+    #     next_token: "NextTokenAttribute"
+    #   }
+    #   options = {}
+    #   response = client.list_compliance_inquiry_queries(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     queries: [
+    #       {
+    #         query_identifier: 1, # required
+    #         query: "LongStringAttribute", # required
+    #         response: "LongStringAttribute",
+    #         review_type: "HUMAN" # One of: ["HUMAN", "AI"],
+    #         citations: [
+    #           {
+    #             source_label: "ShortStringAttribute",
+    #             source_content: "LongStringAttribute",
+    #             source_link: "LongStringAttribute"
+    #           }
+    #         ],
+    #         status: "PROCESSING" # One of: ["PROCESSING", "COMPLETED", "FAILED"], # required
+    #         status_message: "Query processing is complete." # One of: ["Query processing is complete.", "Query processing is in-progress.", "An internal error occurred while processing the query. Try again at a later time.", "Query is pending human review.", "Query contains restricted or unsupported content."], # required
+    #         created_at: Time.now, # required
+    #         updated_response_versions: [
+    #           {
+    #             response_text: "LongStringAttribute", # required
+    #             timestamp: Time.now, # required
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "NextTokenAttribute"
+    #   }
+    # @return [Types::ListComplianceInquiryQueriesResponse]
+    def list_compliance_inquiry_queries(params = {}, options = {})
+      request = build_request(:list_compliance_inquiry_queries, params)
+      request.send_request(options)
+    end
+
     # <p>List active customer-agreements applicable to calling identity.</p>
     # @param [Hash, Types::ListCustomerAgreementsRequest] params
     # @option params [Integer] :max_results
@@ -457,6 +771,80 @@ module Aws::Artifact
     # @return [Types::ListCustomerAgreementsResponse]
     def list_customer_agreements(params = {}, options = {})
       request = build_request(:list_customer_agreements, params)
+      request.send_request(options)
+    end
+
+    # <p>List available report versions for a given report.</p>
+    # @param [Hash, Types::ListReportVersionsRequest] params
+    # @option params [String] :report_id
+    #   <p>Unique resource ID for the report resource.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of resources to return in the paginated response.</p>
+    # @option params [String] :next_token
+    #   <p>Pagination token to request the next page of resources.</p>
+    # @example Invoke ListReportVersions operation
+    #   # The ListReportVersions operation returns a collection of report versions
+    # #                         for a given resource.
+    #   params = {
+    #     report_id: "report-abcdef0123456789"
+    #   }
+    #   options = {}
+    #   response = client.list_report_versions(params, options)
+    #   response.to_h #=>
+    #   {
+    #     reports: [
+    #       {
+    #         arn: "arn:aws:artifact:us-east-1::report:report-abcdef0123456789:1",
+    #         category: "category",
+    #         company_name: "companyName",
+    #         description: "description",
+    #         id: "report-abcdef0123456789",
+    #         name: "name",
+    #         period_end: Time.parse("2022-04-01T20:32:04Z"),
+    #         period_start: Time.parse("2022-04-01T20:32:04Z"),
+    #         product_name: "productName",
+    #         series: "series",
+    #         state: PUBLISHED,
+    #         version: 1
+    #       }
+    #     ],
+    #     next_token: "gPFEGk7CF4wS901w7ppYclt7gPFEGk7CF4wS901w7ppYclt7gPFEGk7CF4wS901w7ppYclt7"
+    #   }
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     report_id: "ReportId", # required
+    #     max_results: 1,
+    #     next_token: "NextTokenAttribute"
+    #   }
+    #   options = {}
+    #   response = client.list_report_versions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     reports: [ # required
+    #       {
+    #         id: "ReportId",
+    #         name: "ShortStringAttribute",
+    #         state: "PUBLISHED" # One of: ["PUBLISHED", "UNPUBLISHED"],
+    #         arn: "LongStringAttribute",
+    #         version: 1,
+    #         upload_state: "PROCESSING" # One of: ["PROCESSING", "COMPLETE", "FAILED", "FAULT"],
+    #         description: "LongStringAttribute",
+    #         period_start: Time.now,
+    #         period_end: Time.now,
+    #         series: "ShortStringAttribute",
+    #         category: "ShortStringAttribute",
+    #         company_name: "ShortStringAttribute",
+    #         product_name: "ShortStringAttribute",
+    #         status_message: "StatusMessage",
+    #         acceptance_type: "PASSTHROUGH" # One of: ["PASSTHROUGH", "EXPLICIT"]
+    #       }
+    #     ],
+    #     next_token: "NextTokenAttribute"
+    #   }
+    # @return [Types::ListReportVersionsResponse]
+    def list_report_versions(params = {}, options = {})
+      request = build_request(:list_report_versions, params)
       request.send_request(options)
     end
 
@@ -528,6 +916,29 @@ module Aws::Artifact
       request.send_request(options)
     end
 
+    # <p>List tags for a resource.</p>
+    # @param [Hash, Types::ListTagsForResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "LongStringAttribute", # required
+    #   }
+    #   options = {}
+    #   response = client.list_tags_for_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    # @return [Types::ListTagsForResourceResponse]
+    def list_tags_for_resource(params = {}, options = {})
+      request = build_request(:list_tags_for_resource, params)
+      request.send_request(options)
+    end
+
     # <p>Put the account settings for Artifact.</p>
     # @param [Hash, Types::PutAccountSettingsRequest] params
     # @option params [String] :notification_subscription_status
@@ -561,6 +972,91 @@ module Aws::Artifact
     # @return [Types::PutAccountSettingsResponse]
     def put_account_settings(params = {}, options = {})
       request = build_request(:put_account_settings, params)
+      request.send_request(options)
+    end
+
+    # <p>Submits feedback on a compliance inquiry response.</p>
+    # @param [Hash, Types::PutComplianceInquiryFeedbackRequest] params
+    # @option params [String] :compliance_inquiry_id
+    #   <p>The unique identifier for the compliance inquiry.</p>
+    # @option params [Integer] :query_identifier
+    #   <p>The sequential identifier of the query to provide feedback on.</p>
+    # @option params [String] :rating
+    #   <p>The rating for the feedback. Valid values are THUMBS_UP and THUMBS_DOWN.</p>
+    # @option params [Integer] :response_revision_id
+    #   <p>The response revision ID. Use this value to prevent submitting feedback on a stale response.</p>
+    # @option params [Array<String>] :reason_codes
+    #   <p>The reason codes that describe why you rated the response. Valid values are OTHER, PARTIAL_RESPONSE, and IRRELEVANT_RESPONSE.</p>
+    # @option params [String] :comment
+    #   <p>An optional comment for the feedback.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, the service ignores the request, but does not return an error.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     compliance_inquiry_id: "InquiryId", # required
+    #     query_identifier: 1,
+    #     rating: "THUMBS_UP" # One of: ["THUMBS_UP", "THUMBS_DOWN"], # required
+    #     response_revision_id: 1,
+    #     reason_codes: ["OTHER" # One of: ["OTHER", "PARTIAL_RESPONSE", "IRRELEVANT_RESPONSE"]],
+    #     comment: "FeedbackCommentAttribute",
+    #     client_token: "IdempotentClientToken"
+    #   }
+    #   options = {}
+    #   response = client.put_compliance_inquiry_feedback(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     submitted_at: Time.now, # required
+    #   }
+    # @return [Types::PutComplianceInquiryFeedbackResponse]
+    def put_compliance_inquiry_feedback(params = {}, options = {})
+      request = build_request(:put_compliance_inquiry_feedback, params)
+      request.send_request(options)
+    end
+
+    # <p>Add tags to a resource.</p>
+    # @param [Hash, Types::TagResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>Tags to add to the resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "LongStringAttribute", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.tag_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::TagResourceResponse]
+    def tag_resource(params = {}, options = {})
+      request = build_request(:tag_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Remove tags from a resource.</p>
+    # @param [Hash, Types::UntagResourceRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The Amazon Resource Name (ARN) of the resource.</p>
+    # @option params [Array<String>] :tag_keys
+    #   <p>Tag keys to remove from the resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "LongStringAttribute", # required
+    #     tag_keys: ["TagKey"], # required
+    #   }
+    #   options = {}
+    #   response = client.untag_resource(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UntagResourceResponse]
+    def untag_resource(params = {}, options = {})
+      request = build_request(:untag_resource, params)
       request.send_request(options)
     end
 

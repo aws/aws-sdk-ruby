@@ -545,7 +545,7 @@
                 "quickSightConfiguration": {
                     "target": "com.amazonaws.qbusiness#QuickSightConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight as the identity provider.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite configuration for an Amazon Q Business application that uses Quick Suite as the identity provider.</p>"
                     }
                 }
             },
@@ -3025,7 +3025,7 @@
                 "quickSightConfiguration": {
                     "target": "com.amazonaws.qbusiness#QuickSightConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight for authentication. This configuration is required if your application uses QuickSight as the identity provider. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html\">Creating an Amazon QuickSight integrated application</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite configuration for an Amazon Q Business application that uses Quick Suite for authentication. This configuration is required if your application uses Quick Suite as the identity provider. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html\">Creating an Amazon Quick Suite integrated application</a>.</p>"
                     }
                 }
             },
@@ -6959,6 +6959,163 @@
                 },
                 "smithy.api#documentation": "<p>This is the <i>Amazon Q Business</i> API Reference. Amazon Q Business is a fully managed, generative-AI powered enterprise chat assistant that you can deploy within your organization. Amazon Q Business enhances employee productivity by supporting key tasks such as question-answering, knowledge discovery, writing email messages, summarizing text, drafting document outlines, and brainstorming ideas. Users ask questions of Amazon Q Business and get answers that are presented in a conversational manner. For an introduction to the service, see the <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/what-is.html\"> <i>Amazon Q Business User Guide</i> </a>.</p> <p>For an overview of the Amazon Q Business APIs, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/api-ref.html#api-overview\">Overview of Amazon Q Business API operations</a>.</p> <p>For information about the IAM access control permissions you need to use this API, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html\">IAM roles for Amazon Q Business</a> in the <i>Amazon Q Business User Guide</i>.</p> <p>The following resources provide additional information about using the Amazon Q Business API:</p> <ul> <li> <p> <i> <a href=\"https://docs.aws.amazon.com/amazonq/latest/business-use-dg/setting-up.html\">Setting up for Amazon Q Business</a> </i> </p> </li> <li> <p> <i> <a href=\"https://awscli.amazonaws.com/v2/documentation/api/latest/reference/qbusiness/index.html\">Amazon Q Business CLI Reference</a> </i> </p> </li> <li> <p> <i> <a href=\"https://docs.aws.amazon.com/general/latest/gr/amazonq.html\">Amazon Web Services General Reference</a> </i> </p> </li> </ul>",
                 "smithy.api#title": "QBusiness",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://qbusiness-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://qbusiness.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://qbusiness-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://qbusiness.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 9,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAkAAAADAAAAAQAAAAQF9eEIAAAAAgAAAAUF9eEIAAAAAwAAAAcAAAAGAAAABQX14QUF9eEHAAAABAAAAAgF9eEEAAAABQX14QMF9eEGAAAAAwX14QEF9eEC"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -6966,20 +7123,20 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -7594,7 +7751,7 @@
                 "quickSightConfiguration": {
                     "target": "com.amazonaws.qbusiness#QuickSightConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight authentication configuration for the Amazon Q Business application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite authentication configuration for the Amazon Q Business application.</p>"
                     }
                 }
             },
@@ -9366,7 +9523,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:iam::\\d{12}:(oidc-provider|saml-provider)/[a-zA-Z0-9_\\.\\/@\\-]+$"
             }
         },
         "com.amazonaws.qbusiness#IdcApplicationArn": {
@@ -9376,7 +9533,7 @@
                     "min": 10,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:sso::\\d{12}:application/(sso)?ins-[a-zA-Z0-9-.]{16}/apl-[a-zA-Z0-9]{16}$"
             }
         },
         "com.amazonaws.qbusiness#IdcAuthConfiguration": {
@@ -9408,7 +9565,7 @@
                     "min": 0,
                     "max": 1284
                 },
-                "smithy.api#pattern": "^arn:aws:sso::[0-9]{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:sso::[0-9]{12}:trustedTokenIssuer/(sso)?ins-[a-zA-Z0-9-.]{16}/tti-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.qbusiness#IdentityProviderConfiguration": {
@@ -9765,7 +9922,7 @@
                     "min": 10,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}$"
             }
         },
         "com.amazonaws.qbusiness#Instruction": {
@@ -9921,7 +10078,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:lambda:[a-z-]*-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:lambda:[a-z-]*-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?$"
             }
         },
         "com.amazonaws.qbusiness#LicenseNotFoundException": {
@@ -12592,7 +12749,7 @@
         "com.amazonaws.qbusiness#PermissionConditionKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^aws:PrincipalTag/qbusiness-dataaccessor:[a-zA-Z]+"
+                "smithy.api#pattern": "^aws:[a-zA-Z][a-zA-Z0-9-/:]*$"
             }
         },
         "com.amazonaws.qbusiness#PermissionConditionOperator": {
@@ -12613,7 +12770,7 @@
                     "min": 1,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
             }
         },
         "com.amazonaws.qbusiness#PermissionConditionValues": {
@@ -13137,7 +13294,7 @@
                     "min": 1,
                     "max": 1284
                 },
-                "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:role/[a-zA-Z0-9_/+=,.@-]+$"
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:iam::[0-9]{12}:role/[a-zA-Z0-9_/+=,.@-]+$"
             }
         },
         "com.amazonaws.qbusiness#PrincipalUser": {
@@ -13419,13 +13576,13 @@
                 "clientNamespace": {
                     "target": "com.amazonaws.qbusiness#ClientNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon QuickSight namespace that is used as the identity provider. For more information about QuickSight namespaces, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/developerguide/namespace-operations.html\">Namespace operations</a>. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Quick Suite namespace that is used as the identity provider. For more information about Quick Suite namespaces, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/developerguide/namespace-operations.html\">Namespace operations</a>. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon QuickSight configuration for an Amazon Q Business application that uses QuickSight as the identity provider. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html\">Creating an Amazon QuickSight integrated application</a>.</p>"
+                "smithy.api#documentation": "<p>The Amazon Quick Suite configuration for an Amazon Q Business application that uses Quick Suite as the identity provider. For more information, see <a href=\"https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/create-quicksight-integrated-application.html\">Creating an Amazon Quick Suite integrated application</a>.</p>"
             }
         },
         "com.amazonaws.qbusiness#ReadAccessType": {

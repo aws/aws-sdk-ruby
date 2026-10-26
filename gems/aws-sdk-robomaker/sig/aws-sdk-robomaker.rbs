@@ -1,5 +1,0 @@
-  module Aws
-    module RoboMaker
-      VERSION: String
-    end
-  end

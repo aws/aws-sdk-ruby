@@ -29,6 +29,7 @@ require 'aws-sdk-core/plugins/retry_errors'
 require 'aws-sdk-core/plugins/stub_responses'
 require 'aws-sdk-core/plugins/regional_endpoints'
 require 'aws-sdk-core/plugins/sigv4'
+require 'smithy-client/rpc_v2_cbor'
 require 'aws-sdk-core/json_rpc'
 
 Aws::Core::Plugins::GlobalConfiguration.add_identifier(:computeoptimizer)
@@ -123,7 +124,7 @@ module Aws::ComputeOptimizer
     #  at ~/.aws/config and ~/.aws/credentials, respectively.  When not specified, 'default' is used.
     # @option options [Symbol, Object] :protocol
     #  The protocol used for request serialization and response deserialization. Defaults to the service default protocol. May be a Symbol naming a supported protocol, or a custom object implementing the protocol interface.
-    #  Supported protocols: +:json_rpc+ (defaults to +:json_rpc+).
+    #  Supported protocols: +:rpc_v2_cbor+, +:json_rpc+ (defaults to +:rpc_v2_cbor+).
     # @option options [Boolean] :raise_response_errors (true)
     #  When `true`, response errors are raised. When `false`, the error is placed on the
     #  output in the {Smithy::Client::Response#error error accessor}.
@@ -144,18 +145,18 @@ module Aws::ComputeOptimizer
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -457,7 +458,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"]
     #       }
     #     ],
-    #     fields_to_export: ["AccountId" # One of: ["AccountId", "VolumeArn", "Finding", "UtilizationMetricsVolumeReadOpsPerSecondMaximum", "UtilizationMetricsVolumeWriteOpsPerSecondMaximum", "UtilizationMetricsVolumeReadBytesPerSecondMaximum", "UtilizationMetricsVolumeWriteBytesPerSecondMaximum", "LookbackPeriodInDays", "CurrentConfigurationVolumeType", "CurrentConfigurationVolumeBaselineIOPS", "CurrentConfigurationVolumeBaselineThroughput", "CurrentConfigurationVolumeBurstIOPS", "CurrentConfigurationVolumeBurstThroughput", "CurrentConfigurationVolumeSize", "CurrentMonthlyPrice", "RecommendationOptionsConfigurationVolumeType", "RecommendationOptionsConfigurationVolumeBaselineIOPS", "RecommendationOptionsConfigurationVolumeBaselineThroughput", "RecommendationOptionsConfigurationVolumeBurstIOPS", "RecommendationOptionsConfigurationVolumeBurstThroughput", "RecommendationOptionsConfigurationVolumeSize", "RecommendationOptionsMonthlyPrice", "RecommendationOptionsPerformanceRisk", "LastRefreshTimestamp", "CurrentPerformanceRisk", "RecommendationOptionsSavingsOpportunityPercentage", "RecommendationOptionsEstimatedMonthlySavingsCurrency", "RecommendationOptionsEstimatedMonthlySavingsValue", "Tags", "RootVolume", "CurrentConfigurationRootVolume", "EffectiveRecommendationPreferencesSavingsEstimationMode", "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage", "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts", "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"]],
+    #     fields_to_export: ["AccountId" # One of: ["AccountId", "VolumeArn", "Finding", "UtilizationMetricsVolumeReadOpsPerSecondMaximum", "UtilizationMetricsVolumeWriteOpsPerSecondMaximum", "UtilizationMetricsVolumeReadBytesPerSecondMaximum", "UtilizationMetricsVolumeWriteBytesPerSecondMaximum", "UtilizationMetricsVolumeIOPSExceededMaximum", "UtilizationMetricsVolumeThroughputExceededMaximum", "LookbackPeriodInDays", "CurrentConfigurationVolumeType", "CurrentConfigurationVolumeBaselineIOPS", "CurrentConfigurationVolumeBaselineThroughput", "CurrentConfigurationVolumeBurstIOPS", "CurrentConfigurationVolumeBurstThroughput", "CurrentConfigurationVolumeSize", "CurrentMonthlyPrice", "RecommendationOptionsConfigurationVolumeType", "RecommendationOptionsConfigurationVolumeBaselineIOPS", "RecommendationOptionsConfigurationVolumeBaselineThroughput", "RecommendationOptionsConfigurationVolumeBurstIOPS", "RecommendationOptionsConfigurationVolumeBurstThroughput", "RecommendationOptionsConfigurationVolumeSize", "RecommendationOptionsMonthlyPrice", "RecommendationOptionsPerformanceRisk", "LastRefreshTimestamp", "CurrentPerformanceRisk", "RecommendationOptionsSavingsOpportunityPercentage", "RecommendationOptionsEstimatedMonthlySavingsCurrency", "RecommendationOptionsEstimatedMonthlySavingsValue", "Tags", "RootVolume", "CurrentConfigurationRootVolume", "EffectiveRecommendationPreferencesSavingsEstimationMode", "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage", "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts", "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts", "EffectiveRecommendationPreferencesLookBackPeriod"]],
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix"
@@ -586,17 +587,17 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The Amazon Web Services account IDs for the export Amazon ECS service recommendations.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
-    #               of an organization, use this parameter to specify the member account you want to 
+    #            <p>If your account is the management account or the delegated administrator
+    #               of an organization, use this parameter to specify the member account you want to
     #               export recommendations to.</p>
-    #            <p>This parameter can't be specified together with the include member accounts 
+    #            <p>This parameter can't be specified together with the include member accounts
     #               parameter. The parameters are mutually exclusive.</p>
     #            <p>If this parameter or the include member accounts parameter is omitted,
     #               the recommendations for member accounts aren't included in the export.</p>
     #            <p>You can specify multiple account IDs per request.</p>
     # @option params [Array<Types::ECSServiceRecommendationFilter>] :filters
     #   <p>
-    #               An array of objects to specify a filter that exports a more specific set 
+    #               An array of objects to specify a filter that exports a more specific set
     #               of Amazon ECS service recommendations.
     #           </p>
     # @option params [Array<String>] :fields_to_export
@@ -615,7 +616,7 @@ module Aws::ComputeOptimizer
     #                       <i>Compute Optimizer User Guide</i>.</p>
     # @option params [String] :file_format
     #   <p>
-    #               The format of the export file. 
+    #               The format of the export file.
     #           </p>
     #            <p>The CSV file is the only export file format currently supported.</p>
     # @option params [Boolean] :include_member_accounts
@@ -626,9 +627,9 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the 
+    #            <p>If this parameter is omitted, recommendations for member accounts of the
     #               organization aren't included in the export file.</p>
-    #            <p>If this parameter or the account ID parameter is omitted, recommendations for 
+    #            <p>If this parameter or the account ID parameter is omitted, recommendations for
     #               member accounts aren't included in the export.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -639,7 +640,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"]
     #       }
     #     ],
-    #     fields_to_export: ["AccountId" # One of: ["AccountId", "ServiceArn", "LookbackPeriodInDays", "LastRefreshTimestamp", "LaunchType", "CurrentPerformanceRisk", "CurrentServiceConfigurationMemory", "CurrentServiceConfigurationCpu", "CurrentServiceConfigurationTaskDefinitionArn", "CurrentServiceConfigurationAutoScalingConfiguration", "CurrentServiceContainerConfigurations", "UtilizationMetricsCpuMaximum", "UtilizationMetricsMemoryMaximum", "Finding", "FindingReasonCodes", "RecommendationOptionsMemory", "RecommendationOptionsCpu", "RecommendationOptionsSavingsOpportunityPercentage", "RecommendationOptionsEstimatedMonthlySavingsCurrency", "RecommendationOptionsEstimatedMonthlySavingsValue", "RecommendationOptionsContainerRecommendations", "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum", "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum", "Tags", "EffectiveRecommendationPreferencesSavingsEstimationMode", "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage", "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts", "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"]],
+    #     fields_to_export: ["AccountId" # One of: ["AccountId", "ServiceArn", "LookbackPeriodInDays", "LastRefreshTimestamp", "LaunchType", "CurrentPerformanceRisk", "CurrentServiceConfigurationMemory", "CurrentServiceConfigurationCpu", "CurrentServiceConfigurationTaskDefinitionArn", "CurrentServiceConfigurationAutoScalingConfiguration", "CurrentServiceContainerConfigurations", "UtilizationMetricsCpuMaximum", "UtilizationMetricsMemoryMaximum", "Finding", "FindingReasonCodes", "RecommendationOptionsMemory", "RecommendationOptionsCpu", "RecommendationOptionsSavingsOpportunityPercentage", "RecommendationOptionsEstimatedMonthlySavingsCurrency", "RecommendationOptionsEstimatedMonthlySavingsValue", "RecommendationOptionsContainerRecommendations", "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum", "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum", "Tags", "EffectiveRecommendationPreferencesSavingsEstimationMode", "RecommendationOptionsSavingsOpportunityAfterDiscountsPercentage", "RecommendationOptionsEstimatedMonthlySavingsCurrencyAfterDiscounts", "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts", "EffectiveRecommendationPreferencesLookBackPeriod"]],
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix"
@@ -678,10 +679,10 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The Amazon Web Services account IDs for the export idle resource recommendations.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
-    #               of an organization, use this parameter to specify the member account you want to 
+    #            <p>If your account is the management account or the delegated administrator
+    #               of an organization, use this parameter to specify the member account you want to
     #               export recommendations to.</p>
-    #            <p>This parameter can't be specified together with the include member accounts 
+    #            <p>This parameter can't be specified together with the include member accounts
     #               parameter. The parameters are mutually exclusive.</p>
     #            <p>If this parameter or the include member accounts parameter is omitted,
     #               the recommendations for member accounts aren't included in the export.</p>
@@ -712,9 +713,9 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the 
+    #            <p>If this parameter is omitted, recommendations for member accounts of the
     #               organization aren't included in the export file.</p>
-    #            <p>If this parameter or the account ID parameter is omitted, recommendations for 
+    #            <p>If this parameter or the account ID parameter is omitted, recommendations for
     #               member accounts aren't included in the export.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -725,7 +726,7 @@ module Aws::ComputeOptimizer
     #         values: ["FilterValue"]
     #       }
     #     ],
-    #     fields_to_export: ["AccountId" # One of: ["AccountId", "ResourceArn", "ResourceId", "ResourceType", "LastRefreshTimestamp", "LookbackPeriodInDays", "SavingsOpportunity", "SavingsOpportunityAfterDiscount", "UtilizationMetricsCpuMaximum", "UtilizationMetricsMemoryMaximum", "UtilizationMetricsNetworkOutBytesPerSecondMaximum", "UtilizationMetricsNetworkInBytesPerSecondMaximum", "UtilizationMetricsDatabaseConnectionsMaximum", "UtilizationMetricsEBSVolumeReadIOPSMaximum", "UtilizationMetricsEBSVolumeWriteIOPSMaximum", "UtilizationMetricsVolumeReadOpsPerSecondMaximum", "UtilizationMetricsVolumeWriteOpsPerSecondMaximum", "Finding", "FindingDescription", "Tags"]],
+    #     fields_to_export: ["AccountId" # One of: ["AccountId", "ResourceArn", "ResourceId", "ResourceType", "LastRefreshTimestamp", "LookbackPeriodInDays", "SavingsOpportunity", "SavingsOpportunityAfterDiscount", "UtilizationMetricsCpuMaximum", "UtilizationMetricsMemoryMaximum", "UtilizationMetricsNetworkOutBytesPerSecondMaximum", "UtilizationMetricsNetworkInBytesPerSecondMaximum", "UtilizationMetricsDatabaseConnectionsMaximum", "UtilizationMetricsEBSVolumeReadIOPSMaximum", "UtilizationMetricsEBSVolumeWriteIOPSMaximum", "UtilizationMetricsVolumeReadOpsPerSecondMaximum", "UtilizationMetricsVolumeWriteOpsPerSecondMaximum", "UtilizationMetricsActiveConnectionCountMaximum", "UtilizationMetricsPacketsInFromSourceMaximum", "UtilizationMetricsPacketsInFromDestinationMaximum", "UtilizationMetricsConsumedReadCapacityUnitsSum", "UtilizationMetricsConsumedWriteCapacityUnitsSum", "UtilizationMetricsNewConnectionsSum", "UtilizationMetricsEngineCPUUtilizationMaximum", "UtilizationMetricsCacheHitsSum", "UtilizationMetricsCacheMissesSum", "UtilizationMetricsKeyspaceHitsSum", "UtilizationMetricsKeyspaceMissesSum", "UtilizationMetricsIsIdleMinimum", "UtilizationMetricsUserConnectedSum", "UtilizationMetricsInvocationsSum", "UtilizationMetricsGetTypeCmdsSum", "UtilizationMetricsSetTypeCmdsSum", "UtilizationMetricsElastiCacheProcessingUnitsSum", "UtilizationMetricsCurrConnectionsSum", "UtilizationMetricsDatabaseConnectionsSum", "Finding", "FindingDescription", "Tags"]],
     #     s3_destination_config: { # required
     #       bucket: "DestinationBucket",
     #       key_prefix: "DestinationKeyPrefix"
@@ -851,7 +852,7 @@ module Aws::ComputeOptimizer
     #               specify the member account for which you want to export recommendations.</p>
     #            <p>This parameter can't be specified together with the include member accounts
     #               parameter. The parameters are mutually exclusive.</p>
-    #            <p>If this parameter is omitted, recommendations 
+    #            <p>If this parameter is omitted, recommendations
     #               for member accounts aren't included in the export.</p>
     #            <p>You can specify multiple account IDs per request.</p>
     # @option params [Array<Types::LicenseRecommendationFilter>] :filters
@@ -882,7 +883,7 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the organization 
+    #            <p>If this parameter is omitted, recommendations for member accounts of the organization
     #               aren't included in the export file .</p>
     #            <p>This parameter cannot be specified together with the account IDs parameter. The
     #               parameters are mutually exclusive.</p>
@@ -934,17 +935,17 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The Amazon Web Services account IDs for the export Amazon Aurora and RDS database recommendations.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
-    #               of an organization, use this parameter to specify the member account you want to 
+    #            <p>If your account is the management account or the delegated administrator
+    #               of an organization, use this parameter to specify the member account you want to
     #               export recommendations to.</p>
-    #            <p>This parameter can't be specified together with the include member accounts 
+    #            <p>This parameter can't be specified together with the include member accounts
     #               parameter. The parameters are mutually exclusive.</p>
     #            <p>If this parameter or the include member accounts parameter is omitted,
     #               the recommendations for member accounts aren't included in the export.</p>
     #            <p>You can specify multiple account IDs per request.</p>
     # @option params [Array<Types::RDSDBRecommendationFilter>] :filters
     #   <p>
-    #               An array of objects to specify a filter that exports a more specific set of 
+    #               An array of objects to specify a filter that exports a more specific set of
     #               Amazon Aurora and RDS recommendations.
     #           </p>
     # @option params [Array<String>] :fields_to_export
@@ -963,7 +964,7 @@ module Aws::ComputeOptimizer
     #                       <i>Compute Optimizer User Guide</i>.</p>
     # @option params [String] :file_format
     #   <p>
-    #               The format of the export file. 
+    #               The format of the export file.
     #           </p>
     #            <p>The CSV file is the only export file format currently supported.</p>
     # @option params [Boolean] :include_member_accounts
@@ -974,9 +975,9 @@ module Aws::ComputeOptimizer
     #               Compute Optimizer must be enabled in the organization account. For more information,
     #               see <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access">Compute Optimizer and Amazon Web Services Organizations trusted access</a> in the
     #               <i>Compute Optimizer User Guide</i>.</p>
-    #            <p>If this parameter is omitted, recommendations for member accounts of the 
+    #            <p>If this parameter is omitted, recommendations for member accounts of the
     #               organization aren't included in the export file.</p>
-    #            <p>If this parameter or the account ID parameter is omitted, recommendations for 
+    #            <p>If this parameter or the account ID parameter is omitted, recommendations for
     #               member accounts aren't included in the export.</p>
     # @option params [Types::RecommendationPreferences] :recommendation_preferences
     #   <p>Describes the recommendation preferences to return in the response of a <a>GetAutoScalingGroupRecommendations</a>, <a>GetEC2InstanceRecommendations</a>, <a>GetEC2RecommendationProjectedMetrics</a>, <a>GetRDSDatabaseRecommendations</a>, and <a>GetRDSDatabaseRecommendationProjectedMetrics</a> request.</p>
@@ -1254,7 +1255,7 @@ module Aws::ComputeOptimizer
     #         finding: "Optimized" # One of: ["Optimized", "NotOptimized"],
     #         utilization_metrics: [
     #           {
-    #             name: "VolumeReadOpsPerSecond" # One of: ["VolumeReadOpsPerSecond", "VolumeWriteOpsPerSecond", "VolumeReadBytesPerSecond", "VolumeWriteBytesPerSecond"],
+    #             name: "VolumeReadOpsPerSecond" # One of: ["VolumeReadOpsPerSecond", "VolumeWriteOpsPerSecond", "VolumeReadBytesPerSecond", "VolumeWriteBytesPerSecond", "VolumeIOPSExceeded", "VolumeThroughputExceeded"],
     #             statistic: "Maximum" # One of: ["Maximum", "Average"],
     #             value: 1.0
     #           }
@@ -1294,7 +1295,8 @@ module Aws::ComputeOptimizer
     #         effective_recommendation_preferences: {
     #           savings_estimation_mode: {
     #             source: "PublicPricing" # One of: ["PublicPricing", "CostExplorerRightsizing", "CostOptimizationHub"]
-    #           }
+    #           },
+    #           look_back_period: "DAYS_14" # One of: ["DAYS_14", "DAYS_32", "DAYS_93"]
     #         },
     #         tags: [
     #           {
@@ -1424,7 +1426,7 @@ module Aws::ComputeOptimizer
     #         recommendation_sources: [
     #           {
     #             recommendation_source_arn: "RecommendationSourceArn",
-    #             recommendation_source_type: "Ec2Instance" # One of: ["Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License", "RdsDBInstance", "RdsDBInstanceStorage", "AuroraDBClusterStorage"]
+    #             recommendation_source_type: "Ec2Instance" # One of: ["Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License", "RdsDBInstance", "RdsDBInstanceStorage", "AuroraDBClusterStorage", "NatGateway", "DynamoDBTable", "ElastiCacheCluster", "MemoryDBCluster", "DocumentDBCluster", "WorkSpaces", "SageMakerEndpoint"]
     #           }
     #         ],
     #         last_refresh_timestamp: Time.now,
@@ -1622,7 +1624,7 @@ module Aws::ComputeOptimizer
     #             Returns Amazon ECS service recommendations.
     #         </p>
     #          <p>
-    #             Compute Optimizer generates recommendations for Amazon ECS services on 
+    #             Compute Optimizer generates recommendations for Amazon ECS services on
     #             Fargate that meet a specific set of requirements. For more
     #             information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and
     #                 requirements</a> in the <i>Compute Optimizer User
@@ -1647,7 +1649,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               The maximum number of Amazon ECS service recommendations to return with a single request.
     #           </p>
-    #            <p>To retrieve the remaining results, make another request with the returned 
+    #            <p>To retrieve the remaining results, make another request with the returned
     #               <code>nextToken</code> value.</p>
     # @option params [Array<Types::ECSServiceRecommendationFilter>] :filters
     #   <p>
@@ -1657,7 +1659,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               Return the Amazon ECS service recommendations to the specified Amazon Web Services account IDs.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
+    #            <p>If your account is the management account or the delegated administrator
     #               of an organization, use this parameter to return the Amazon ECS service recommendations to specific
     #               member accounts.</p>
     #            <p>You can only specify one account ID per request.</p>
@@ -1754,7 +1756,8 @@ module Aws::ComputeOptimizer
     #         effective_recommendation_preferences: {
     #           savings_estimation_mode: {
     #             source: "PublicPricing" # One of: ["PublicPricing", "CostExplorerRightsizing", "CostOptimizationHub"]
-    #           }
+    #           },
+    #           look_back_period: "DAYS_14" # One of: ["DAYS_14", "DAYS_32", "DAYS_93"]
     #         },
     #         tags: [
     #           {
@@ -1898,7 +1901,7 @@ module Aws::ComputeOptimizer
       request.send_request(options)
     end
 
-    # <p>Returns idle resource recommendations. Compute Optimizer generates recommendations for 
+    # <p>Returns idle resource recommendations. Compute Optimizer generates recommendations for
     #             idle resources that meet a specific set of requirements. For more information, see
     #             <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Resource requirements</a> in the
     #             <i>Compute Optimizer User Guide</i>
@@ -1910,14 +1913,14 @@ module Aws::ComputeOptimizer
     #   <p>The token to advance to the next page of idle resource recommendations.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of idle resource recommendations to return with a single request. </p>
-    #            <p>To retrieve the remaining results, 
+    #            <p>To retrieve the remaining results,
     #               make another request with the returned <code>nextToken</code> value.</p>
     # @option params [Array<Types::IdleRecommendationFilter>] :filters
     #   <p>An array of objects to specify a filter that returns a more specific list of idle resource recommendations.</p>
     # @option params [Array<String>] :account_ids
     #   <p>Return the idle resource recommendations to the specified Amazon Web Services account IDs.</p>
-    #            <p>If your account is the management account 
-    #               or the delegated administrator of an organization, use this parameter to return the idle resource recommendations to 
+    #            <p>If your account is the management account
+    #               or the delegated administrator of an organization, use this parameter to return the idle resource recommendations to
     #               specific member accounts.</p>
     #            <p>You can only specify one account ID per request.</p>
     # @option params [Types::OrderBy] :order_by
@@ -1949,9 +1952,9 @@ module Aws::ComputeOptimizer
     #       {
     #         resource_arn: "ResourceArn",
     #         resource_id: "ResourceId",
-    #         resource_type: "EC2Instance" # One of: ["EC2Instance", "AutoScalingGroup", "EBSVolume", "ECSService", "RDSDBInstance"],
+    #         resource_type: "EC2Instance" # One of: ["EC2Instance", "AutoScalingGroup", "EBSVolume", "ECSService", "RDSDBInstance", "NatGateway", "DynamoDBTable", "ElastiCacheCluster", "MemoryDBCluster", "DocumentDBCluster", "WorkSpaces", "SageMakerEndpoint"],
     #         account_id: "AccountId",
-    #         finding: "Idle" # One of: ["Idle", "Unattached"],
+    #         finding: "Idle" # One of: ["Idle", "Unattached", "Unused"],
     #         finding_description: "IdleFindingDescription",
     #         savings_opportunity: {
     #           savings_opportunity_percentage: 1.0,
@@ -1969,9 +1972,15 @@ module Aws::ComputeOptimizer
     #         },
     #         utilization_metrics: [
     #           {
-    #             name: "CPU" # One of: ["CPU", "Memory", "NetworkOutBytesPerSecond", "NetworkInBytesPerSecond", "DatabaseConnections", "EBSVolumeReadIOPS", "EBSVolumeWriteIOPS", "VolumeReadOpsPerSecond", "VolumeWriteOpsPerSecond"],
+    #             name: "CPU" # One of: ["CPU", "Memory", "NetworkOutBytesPerSecond", "NetworkInBytesPerSecond", "DatabaseConnections", "EBSVolumeReadIOPS", "EBSVolumeWriteIOPS", "VolumeReadOpsPerSecond", "VolumeWriteOpsPerSecond", "ActiveConnectionCount", "PacketsInFromSource", "PacketsInFromDestination", "ConsumedReadCapacityUnits", "ConsumedWriteCapacityUnits", "ConsumedChangeDataCaptureUnits", "NewConnections", "EngineCPUUtilization", "CacheHits", "CacheMisses", "KeyspaceHits", "KeyspaceMisses", "IsIdle", "UserConnected", "Invocations", "GetTypeCmds", "SetTypeCmds", "ElastiCacheProcessingUnits", "CurrConnections"],
     #             statistic: "Maximum" # One of: ["Maximum", "Average"],
-    #             value: 1.0
+    #             value: 1.0,
+    #             dimensions: [
+    #               {
+    #                 key: "IdleDimensionKey",
+    #                 values: ["IdleDimensionValue"]
+    #               }
+    #             ]
     #           }
     #         ],
     #         look_back_period_in_days: 1.0,
@@ -1989,7 +1998,7 @@ module Aws::ComputeOptimizer
     #         identifier: "Identifier",
     #         code: "Code",
     #         message: "Message",
-    #         resource_type: "EC2Instance" # One of: ["EC2Instance", "AutoScalingGroup", "EBSVolume", "ECSService", "RDSDBInstance"]
+    #         resource_type: "EC2Instance" # One of: ["EC2Instance", "AutoScalingGroup", "EBSVolume", "ECSService", "RDSDBInstance", "NatGateway", "DynamoDBTable", "ElastiCacheCluster", "MemoryDBCluster", "DocumentDBCluster", "WorkSpaces", "SageMakerEndpoint"]
     #       }
     #     ]
     #   }
@@ -2302,7 +2311,7 @@ module Aws::ComputeOptimizer
     # <p>
     #             Returns Amazon Aurora and RDS database recommendations.
     #         </p>
-    #          <p>Compute Optimizer generates recommendations for Amazon Aurora and RDS databases that 
+    #          <p>Compute Optimizer generates recommendations for Amazon Aurora and RDS databases that
     #             meet a specific set of requirements. For more
     #             information, see the <a href="https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html">Supported resources and
     #                 requirements</a> in the <i>Compute Optimizer User
@@ -2339,7 +2348,7 @@ module Aws::ComputeOptimizer
     #   <p>
     #               Return the Amazon Aurora and RDS database recommendations to the specified Amazon Web Services account IDs.
     #           </p>
-    #            <p>If your account is the management account or the delegated administrator 
+    #            <p>If your account is the management account or the delegated administrator
     #               of an organization, use this parameter to return the Amazon Aurora and RDS database recommendations to specific
     #               member accounts.</p>
     #            <p>You can only specify one account ID per request.</p>
@@ -2590,15 +2599,15 @@ module Aws::ComputeOptimizer
     #                     or <code>Optimized</code>.</p>
     #             </li>
     #             <li>
-    #                <p>Amazon ECS services in an account that are <code>Underprovisioned</code>, 
+    #                <p>Amazon ECS services in an account that are <code>Underprovisioned</code>,
     #                     <code>Overprovisioned</code>, or <code>Optimized</code>.</p>
     #             </li>
     #             <li>
-    #                <p>Commercial software licenses in an account that are <code>InsufficientMetrics</code>, 
+    #                <p>Commercial software licenses in an account that are <code>InsufficientMetrics</code>,
     #                     <code>NotOptimized</code> or <code>Optimized</code>.</p>
     #             </li>
     #             <li>
-    #                <p>Amazon Aurora and Amazon RDS databases in an account that are <code>Underprovisioned</code>, 
+    #                <p>Amazon Aurora and Amazon RDS databases in an account that are <code>Underprovisioned</code>,
     #                     <code>Overprovisioned</code>, <code>Optimized</code>, or <code>NotOptimized</code>.</p>
     #             </li>
     #          </ul>
@@ -2643,11 +2652,11 @@ module Aws::ComputeOptimizer
     #         ],
     #         idle_summaries: [
     #           {
-    #             name: "Idle" # One of: ["Idle", "Unattached"],
+    #             name: "Idle" # One of: ["Idle", "Unattached", "Unused"],
     #             value: 1.0
     #           }
     #         ],
-    #         recommendation_resource_type: "Ec2Instance" # One of: ["Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License", "RdsDBInstance", "RdsDBInstanceStorage", "AuroraDBClusterStorage"],
+    #         recommendation_resource_type: "Ec2Instance" # One of: ["Ec2Instance", "AutoScalingGroup", "EbsVolume", "LambdaFunction", "EcsService", "License", "RdsDBInstance", "RdsDBInstanceStorage", "AuroraDBClusterStorage", "NatGateway", "DynamoDBTable", "ElastiCacheCluster", "MemoryDBCluster", "DocumentDBCluster", "WorkSpaces", "SageMakerEndpoint"],
     #         account_id: "AccountId",
     #         savings_opportunity: {
     #           savings_opportunity_percentage: 1.0,
@@ -2753,24 +2762,39 @@ module Aws::ComputeOptimizer
     #               Guide</i>.</p>
     # @option params [String] :look_back_period
     #   <p>
-    #               The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. 
+    #               The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed.
     #               When this preference isn't specified, we use the default value <code>DAYS_14</code>.
     #           </p>
-    #            <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.
+    #            <p>You can only set this preference for the Amazon EC2 instance, Auto Scaling group, Amazon EBS volume, Amazon ECS service on Fargate, Amazon RDS DB instance, and Aurora DB cluster storage resource types.
     #               </p>
     #            <note>
     #               <ul>
     #                  <li>
-    #                     <p>Amazon EC2 instance lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                     <p>Lookback period preferences for Amazon EC2 instances, Amazon EBS volumes, Amazon ECS services, Amazon RDS DB instances, and Aurora DB cluster storage resource types can be set at the organization, account, and resource levels.</p>
     #                  </li>
     #                  <li>
     #                     <p>Auto Scaling group lookback preferences can only be set at the resource level.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Amazon EBS volume lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Amazon ECS service on Fargate lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Amazon RDS DB instance lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Aurora DB cluster storage lookback preferences can be set at the organization, account, and resource levels.</p>
+    #                  </li>
+    #                  <li>
+    #                     <p>Changing the lookback period for Amazon EBS volumes to 14 days does not affect the 32-day lookback period used to determine whether an Amazon EBS volume is unattached.</p>
     #                  </li>
     #               </ul>
     #            </note>
     # @option params [Array<Types::UtilizationPreference>] :utilization_preferences
     #   <p>
-    #               The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. When this 
+    #               The preference to control the resource’s CPU utilization threshold, CPU utilization headroom, and memory utilization headroom. When this
     #               preference isn't specified, we use the following default values.
     #           </p>
     #            <p>CPU utilization:</p>
@@ -2803,13 +2827,13 @@ module Aws::ComputeOptimizer
     #            </note>
     # @option params [Array<Types::PreferredResource>] :preferred_resources
     #   <p>
-    #               The preference to control which resource type values are considered when generating rightsizing recommendations. 
-    #               You can specify this preference as a combination of include and exclude lists. You must specify either an 
-    #               <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, 
+    #               The preference to control which resource type values are considered when generating rightsizing recommendations.
+    #               You can specify this preference as a combination of include and exclude lists. You must specify either an
+    #               <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values,
     #               an error occurs.
     #           </p>
     #            <note>
-    #               <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.</p>
+    #               <p>You can only set this preference for the Amazon EC2 instance, Auto Scaling group, Amazon EBS volume, Amazon ECS service, Amazon RDS DB instance, and Aurora DB cluster storage resource types.</p>
     #            </note>
     # @option params [String] :savings_estimation_mode
     #   <p>
@@ -3023,6 +3047,7 @@ module Aws::ComputeOptimizer
       # @api private
       def protocols
         {
+          rpc_v2_cbor: Smithy::Client::RpcV2Cbor,
           json_rpc: Aws::Core::JsonRpc
         }
       end

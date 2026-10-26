@@ -49,15 +49,57 @@ module Aws::CloudWatch
       attr_accessor alarm_contributor_attributes: Hash[String, String]?
     end
 
+    module AlarmMuteRuleStatus
+      SCHEDULED: String
+      ACTIVE: String
+      EXPIRED: String
+    end
+
+    class AlarmMuteRuleSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_mute_rule_arn: String,
+        ?expire_date: Time,
+        ?status: String,
+        ?mute_type: String,
+        ?last_updated_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_mute_rule_arn: String?
+      attr_accessor expire_date: Time?
+      attr_accessor status: String?
+      attr_accessor mute_type: String?
+      attr_accessor last_updated_timestamp: Time?
+    end
+
+    class AlarmPromQLCriteria
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query: String,
+        ?pending_period: Integer,
+        ?recovery_period: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query: String?
+      attr_accessor pending_period: Integer?
+      attr_accessor recovery_period: Integer?
+    end
+
     module AlarmType
       CompositeAlarm: String
       MetricAlarm: String
+      LogAlarm: String
     end
 
     class AnomalyDetector
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?anomaly_detector_id: String,
         ?namespace: String,
         ?metric_name: String,
         ?dimensions: Array[Types::Dimension],
@@ -70,6 +112,7 @@ module Aws::CloudWatch
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor anomaly_detector_id: String?
       attr_accessor namespace: String?
       attr_accessor metric_name: String?
       attr_accessor dimensions: Array[Types::Dimension]?
@@ -103,6 +146,28 @@ module Aws::CloudWatch
     module AnomalyDetectorType
       SINGLE_METRIC: String
       METRIC_MATH: String
+    end
+
+    class AssociateDatasetKmsKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_identifier: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_identifier: String?
+      attr_accessor kms_key_arn: String?
+    end
+
+    class AssociateDatasetKmsKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     module ComparisonOperator
@@ -184,6 +249,30 @@ module Aws::CloudWatch
       attr_accessor message: String?
     end
 
+    class CreateResourceMetricsConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?metric_selections: Array[Types::ResourceMetricSelection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor metric_selections: Array[Types::ResourceMetricSelection]?
+    end
+
+    class CreateResourceMetricsConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_metrics_configuration: Types::ResourceMetricsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_metrics_configuration: Types::ResourceMetricsConfiguration?
+    end
+
     class DashboardEntry
       include Smithy::Schema::Structure
 
@@ -263,6 +352,17 @@ module Aws::CloudWatch
       attr_accessor extended_statistics: Hash[String, Float]?
     end
 
+    class DeleteAlarmMuteRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_mute_rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_mute_rule_name: String?
+    end
+
     class DeleteAlarmsInput
       include Smithy::Schema::Structure
 
@@ -278,6 +378,7 @@ module Aws::CloudWatch
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?anomaly_detector_id: String,
         ?namespace: String,
         ?metric_name: String,
         ?dimensions: Array[Types::Dimension],
@@ -287,6 +388,7 @@ module Aws::CloudWatch
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor anomaly_detector_id: String?
       attr_accessor namespace: String?
       attr_accessor metric_name: String?
       attr_accessor dimensions: Array[Types::Dimension]?
@@ -358,6 +460,26 @@ module Aws::CloudWatch
     end
 
     class DeleteMetricStreamOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteResourceMetricsConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class DeleteResourceMetricsConfigurationOutput
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -499,12 +621,14 @@ module Aws::CloudWatch
       def initialize: (
         ?composite_alarms: Array[Types::CompositeAlarm],
         ?metric_alarms: Array[Types::MetricAlarm],
+        ?log_alarms: Array[Types::LogAlarm],
         ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor composite_alarms: Array[Types::CompositeAlarm]?
       attr_accessor metric_alarms: Array[Types::MetricAlarm]?
+      attr_accessor log_alarms: Array[Types::LogAlarm]?
       attr_accessor next_token: String?
     end
 
@@ -512,6 +636,7 @@ module Aws::CloudWatch
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?anomaly_detector_ids: Array[String],
         ?next_token: String,
         ?max_results: Integer,
         ?namespace: String,
@@ -521,6 +646,7 @@ module Aws::CloudWatch
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor anomaly_detector_ids: Array[String]?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
       attr_accessor namespace: String?
@@ -627,6 +753,26 @@ module Aws::CloudWatch
       attr_accessor failures: Array[Types::PartialFailure]?
     end
 
+    class DisassociateDatasetKmsKeyInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_identifier: String?
+    end
+
+    class DisassociateDatasetKmsKeyOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class EnableAlarmActionsInput
       include Smithy::Schema::Structure
 
@@ -686,8 +832,86 @@ module Aws::CloudWatch
       attr_accessor metric_data: Array[Types::MetricDatum]?
     end
 
+    class EvaluationCriteria
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?prom_ql_criteria: Types::AlarmPromQLCriteria,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prom_ql_criteria: Types::AlarmPromQLCriteria?
+
+      class PromQLCriteria < EvaluationCriteria
+      end
+      class Unknown < EvaluationCriteria
+      end
+    end
+
     module EvaluationState
       PARTIAL_DATA: String
+      EVALUATION_FAILURE: String
+      EVALUATION_ERROR: String
+    end
+
+    class EvaluationWindow
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?wall_clock_window: Types::WallClockWindow,
+        ?sliding_window: Types::SlidingWindow,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wall_clock_window: Types::WallClockWindow?
+      attr_accessor sliding_window: Types::SlidingWindow?
+
+      class WallClockWindow < EvaluationWindow
+      end
+      class SlidingWindow < EvaluationWindow
+      end
+      class Unknown < EvaluationWindow
+      end
+    end
+
+    class GetAlarmMuteRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_mute_rule_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_mute_rule_name: String?
+    end
+
+    class GetAlarmMuteRuleOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?alarm_mute_rule_arn: String,
+        ?description: String,
+        ?rule: Types::Rule,
+        ?mute_targets: Types::MuteTargets,
+        ?start_date: Time,
+        ?expire_date: Time,
+        ?status: String,
+        ?last_updated_timestamp: Time,
+        ?mute_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor alarm_mute_rule_arn: String?
+      attr_accessor description: String?
+      attr_accessor rule: Types::Rule?
+      attr_accessor mute_targets: Types::MuteTargets?
+      attr_accessor start_date: Time?
+      attr_accessor expire_date: Time?
+      attr_accessor status: String?
+      attr_accessor last_updated_timestamp: Time?
+      attr_accessor mute_type: String?
     end
 
     class GetDashboardInput
@@ -714,6 +938,32 @@ module Aws::CloudWatch
       attr_accessor dashboard_arn: String?
       attr_accessor dashboard_body: String?
       attr_accessor dashboard_name: String?
+    end
+
+    class GetDatasetInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_identifier: String?
+    end
+
+    class GetDatasetOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dataset_id: String,
+        ?arn: String,
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dataset_id: String?
+      attr_accessor arn: String?
+      attr_accessor kms_key_arn: String?
     end
 
     class GetInsightRuleReportInput
@@ -906,6 +1156,56 @@ module Aws::CloudWatch
       attr_accessor metric_widget_image: String?
     end
 
+    class GetOTelEnrichmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetOTelEnrichmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?include_filters: Array[Types::OTelEnrichmentMetricSelector],
+        ?exclude_filters: Array[Types::OTelEnrichmentMetricSelector],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor include_filters: Array[Types::OTelEnrichmentMetricSelector]?
+      attr_accessor exclude_filters: Array[Types::OTelEnrichmentMetricSelector]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class GetResourceMetricsConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class GetResourceMetricsConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_metrics_configuration: Types::ResourceMetricsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_metrics_configuration: Types::ResourceMetricsConfiguration?
+    end
+
     module HistoryItemType
       ConfigurationUpdate: String
       StateUpdate: String
@@ -1043,6 +1343,39 @@ module Aws::CloudWatch
       attr_accessor message: String?
     end
 
+    class KmsAccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsKeyDisabledException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class KmsKeyNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class LabelOptions
       include Smithy::Schema::Structure
 
@@ -1074,6 +1407,36 @@ module Aws::CloudWatch
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ListAlarmMuteRulesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_name: String,
+        ?statuses: Array[String],
+        ?max_records: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_name: String?
+      attr_accessor statuses: Array[String]?
+      attr_accessor max_records: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAlarmMuteRulesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_mute_rule_summaries: Array[Types::AlarmMuteRuleSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_mute_rule_summaries: Array[Types::AlarmMuteRuleSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListDashboardsInput
@@ -1216,6 +1579,61 @@ module Aws::CloudWatch
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    class LogAlarm
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_name: String,
+        ?alarm_arn: String,
+        ?alarm_description: String,
+        ?alarm_configuration_updated_timestamp: Time,
+        ?actions_enabled: bool,
+        ?ok_actions: Array[String],
+        ?alarm_actions: Array[String],
+        ?insufficient_data_actions: Array[String],
+        ?state_value: String,
+        ?state_reason: String,
+        ?state_reason_data: String,
+        ?state_updated_timestamp: Time,
+        ?scheduled_query_configuration: Types::ScheduledQueryConfiguration,
+        ?query_results_to_evaluate: Integer,
+        ?query_results_to_alarm: Integer,
+        ?threshold: Float,
+        ?comparison_operator: String,
+        ?treat_missing_data: String,
+        ?state_transitioned_timestamp: Time,
+        ?evaluation_state: String,
+        ?action_log_line_count: Integer,
+        ?action_log_line_role_arn: String,
+        ?warm_up_configuration: Types::WarmUpConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_name: String?
+      attr_accessor alarm_arn: String?
+      attr_accessor alarm_description: String?
+      attr_accessor alarm_configuration_updated_timestamp: Time?
+      attr_accessor actions_enabled: bool?
+      attr_accessor ok_actions: Array[String]?
+      attr_accessor alarm_actions: Array[String]?
+      attr_accessor insufficient_data_actions: Array[String]?
+      attr_accessor state_value: String?
+      attr_accessor state_reason: String?
+      attr_accessor state_reason_data: String?
+      attr_accessor state_updated_timestamp: Time?
+      attr_accessor scheduled_query_configuration: Types::ScheduledQueryConfiguration?
+      attr_accessor query_results_to_evaluate: Integer?
+      attr_accessor query_results_to_alarm: Integer?
+      attr_accessor threshold: Float?
+      attr_accessor comparison_operator: String?
+      attr_accessor treat_missing_data: String?
+      attr_accessor state_transitioned_timestamp: Time?
+      attr_accessor evaluation_state: String?
+      attr_accessor action_log_line_count: Integer?
+      attr_accessor action_log_line_role_arn: String?
+      attr_accessor warm_up_configuration: Types::WarmUpConfiguration?
+    end
+
     class ManagedRule
       include Smithy::Schema::Structure
 
@@ -1320,6 +1738,10 @@ module Aws::CloudWatch
         ?threshold_metric_id: String,
         ?evaluation_state: String,
         ?state_transitioned_timestamp: Time,
+        ?evaluation_window: Types::EvaluationWindow,
+        ?warm_up_configuration: Types::WarmUpConfiguration,
+        ?evaluation_criteria: Types::EvaluationCriteria,
+        ?evaluation_interval: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1352,6 +1774,10 @@ module Aws::CloudWatch
       attr_accessor threshold_metric_id: String?
       attr_accessor evaluation_state: String?
       attr_accessor state_transitioned_timestamp: Time?
+      attr_accessor evaluation_window: Types::EvaluationWindow?
+      attr_accessor warm_up_configuration: Types::WarmUpConfiguration?
+      attr_accessor evaluation_criteria: Types::EvaluationCriteria?
+      attr_accessor evaluation_interval: Integer?
     end
 
     class MetricCharacteristics
@@ -1543,6 +1969,35 @@ module Aws::CloudWatch
       attr_accessor message: String?
     end
 
+    class MuteTargets
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_names: Array[String]?
+    end
+
+    class OTelEnrichmentMetricSelector
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?metric_names: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor metric_names: Array[String]?
+    end
+
+    module OTelEnrichmentStatus
+      RUNNING: String
+      STOPPED: String
+    end
+
     class PartialFailure
       include Smithy::Schema::Structure
 
@@ -1558,6 +2013,29 @@ module Aws::CloudWatch
       attr_accessor exception_type: String?
       attr_accessor failure_code: String?
       attr_accessor failure_description: String?
+    end
+
+    class PutAlarmMuteRuleInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?rule: Types::Rule,
+        ?mute_targets: Types::MuteTargets,
+        ?tags: Array[Types::Tag],
+        ?start_date: Time,
+        ?expire_date: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor rule: Types::Rule?
+      attr_accessor mute_targets: Types::MuteTargets?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor start_date: Time?
+      attr_accessor expire_date: Time?
     end
 
     class PutAnomalyDetectorInput
@@ -1589,9 +2067,11 @@ module Aws::CloudWatch
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?anomaly_detector_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor anomaly_detector_id: String?
     end
 
     class PutCompositeAlarmInput
@@ -1631,11 +2111,13 @@ module Aws::CloudWatch
       def initialize: (
         ?dashboard_name: String,
         ?dashboard_body: String,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor dashboard_name: String?
       attr_accessor dashboard_body: String?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class PutDashboardOutput
@@ -1675,6 +2157,47 @@ module Aws::CloudWatch
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class PutLogAlarmInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?alarm_name: String,
+        ?alarm_description: String,
+        ?scheduled_query_configuration: Types::ScheduledQueryConfiguration,
+        ?action_log_line_count: Integer,
+        ?action_log_line_role_arn: String,
+        ?actions_enabled: bool,
+        ?ok_actions: Array[String],
+        ?alarm_actions: Array[String],
+        ?insufficient_data_actions: Array[String],
+        ?query_results_to_evaluate: Integer,
+        ?query_results_to_alarm: Integer,
+        ?threshold: Float,
+        ?comparison_operator: String,
+        ?treat_missing_data: String,
+        ?tags: Array[Types::Tag],
+        ?warm_up_configuration: Types::WarmUpConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor alarm_name: String?
+      attr_accessor alarm_description: String?
+      attr_accessor scheduled_query_configuration: Types::ScheduledQueryConfiguration?
+      attr_accessor action_log_line_count: Integer?
+      attr_accessor action_log_line_role_arn: String?
+      attr_accessor actions_enabled: bool?
+      attr_accessor ok_actions: Array[String]?
+      attr_accessor alarm_actions: Array[String]?
+      attr_accessor insufficient_data_actions: Array[String]?
+      attr_accessor query_results_to_evaluate: Integer?
+      attr_accessor query_results_to_alarm: Integer?
+      attr_accessor threshold: Float?
+      attr_accessor comparison_operator: String?
+      attr_accessor treat_missing_data: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor warm_up_configuration: Types::WarmUpConfiguration?
     end
 
     class PutManagedInsightRulesInput
@@ -1725,6 +2248,10 @@ module Aws::CloudWatch
         ?metrics: Array[Types::MetricDataQuery],
         ?tags: Array[Types::Tag],
         ?threshold_metric_id: String,
+        ?evaluation_window: Types::EvaluationWindow,
+        ?warm_up_configuration: Types::WarmUpConfiguration,
+        ?evaluation_criteria: Types::EvaluationCriteria,
+        ?evaluation_interval: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1750,6 +2277,10 @@ module Aws::CloudWatch
       attr_accessor metrics: Array[Types::MetricDataQuery]?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor threshold_metric_id: String?
+      attr_accessor evaluation_window: Types::EvaluationWindow?
+      attr_accessor warm_up_configuration: Types::WarmUpConfiguration?
+      attr_accessor evaluation_criteria: Types::EvaluationCriteria?
+      attr_accessor evaluation_interval: Integer?
     end
 
     class PutMetricDataInput
@@ -1824,6 +2355,45 @@ module Aws::CloudWatch
       PT3H: String
     end
 
+    class ResourceConflict
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceMetricSelection
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_metrics: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_metrics: Array[String]?
+    end
+
+    class ResourceMetricsConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?created_at: Time,
+        ?updated_at: Time,
+        ?metric_selections: Array[Types::ResourceMetricSelection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+      attr_accessor metric_selections: Array[Types::ResourceMetricSelection]?
+    end
+
     class ResourceNotFound
       include Smithy::Schema::Structure
 
@@ -1850,9 +2420,73 @@ module Aws::CloudWatch
       attr_accessor message: String?
     end
 
+    class Rule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule: Types::Schedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule: Types::Schedule?
+    end
+
     module ScanBy
       TIMESTAMP_DESCENDING: String
       TIMESTAMP_ASCENDING: String
+    end
+
+    class Schedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?expression: String,
+        ?duration: String,
+        ?timezone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor expression: String?
+      attr_accessor duration: String?
+      attr_accessor timezone: String?
+    end
+
+    class ScheduleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schedule_expression: String,
+        ?start_time_offset: Integer,
+        ?end_time_offset: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schedule_expression: String?
+      attr_accessor start_time_offset: Integer?
+      attr_accessor end_time_offset: Integer?
+    end
+
+    class ScheduledQueryConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_string: String,
+        ?log_group_identifiers: Array[String],
+        ?query_arn: String,
+        ?scheduled_query_role_arn: String,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?aggregation_expression: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_string: String?
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor query_arn: String?
+      attr_accessor scheduled_query_role_arn: String?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor aggregation_expression: String?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class SetAlarmStateInput
@@ -1889,6 +2523,15 @@ module Aws::CloudWatch
       attr_accessor metric_name: String?
       attr_accessor dimensions: Array[Types::Dimension]?
       attr_accessor stat: String?
+    end
+
+    class SlidingWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     module StandardUnit
@@ -1941,6 +2584,36 @@ module Aws::CloudWatch
 
     end
 
+    class StartOTelEnrichmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_filters: Array[Types::OTelEnrichmentMetricSelector],
+        ?exclude_filters: Array[Types::OTelEnrichmentMetricSelector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_filters: Array[Types::OTelEnrichmentMetricSelector]?
+      attr_accessor exclude_filters: Array[Types::OTelEnrichmentMetricSelector]?
+    end
+
+    class StartOTelEnrichmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_filters: Array[Types::OTelEnrichmentMetricSelector],
+        ?exclude_filters: Array[Types::OTelEnrichmentMetricSelector],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_filters: Array[Types::OTelEnrichmentMetricSelector]?
+      attr_accessor exclude_filters: Array[Types::OTelEnrichmentMetricSelector]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
     module StateValue
       OK: String
       ALARM: String
@@ -1991,6 +2664,24 @@ module Aws::CloudWatch
     end
 
     class StopMetricStreamsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopOTelEnrichmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class StopOTelEnrichmentOutput
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2054,6 +2745,95 @@ module Aws::CloudWatch
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class UpdateOTelEnrichmentInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_filters: Array[Types::OTelEnrichmentMetricSelector],
+        ?exclude_filters: Array[Types::OTelEnrichmentMetricSelector],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_filters: Array[Types::OTelEnrichmentMetricSelector]?
+      attr_accessor exclude_filters: Array[Types::OTelEnrichmentMetricSelector]?
+    end
+
+    class UpdateOTelEnrichmentOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?include_filters: Array[Types::OTelEnrichmentMetricSelector],
+        ?exclude_filters: Array[Types::OTelEnrichmentMetricSelector],
+        ?created_at: Time,
+        ?updated_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor include_filters: Array[Types::OTelEnrichmentMetricSelector]?
+      attr_accessor exclude_filters: Array[Types::OTelEnrichmentMetricSelector]?
+      attr_accessor created_at: Time?
+      attr_accessor updated_at: Time?
+    end
+
+    class UpdateResourceMetricsConfigurationInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?metric_selections: Array[Types::ResourceMetricSelection],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor metric_selections: Array[Types::ResourceMetricSelection]?
+    end
+
+    class UpdateResourceMetricsConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_metrics_configuration: Types::ResourceMetricsConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_metrics_configuration: Types::ResourceMetricsConfiguration?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class WallClockWindow
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timezone: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timezone: String?
+    end
+
+    class WarmUpConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?warm_up_period_duration_in_minutes: Integer,
+        ?only_start_evaluating_after_warm_up_period_ends: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor warm_up_period_duration_in_minutes: Integer?
+      attr_accessor only_start_evaluating_after_warm_up_period_ends: bool?
     end
   end
 end

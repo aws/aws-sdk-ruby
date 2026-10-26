@@ -1,0 +1,937 @@
+module Aws::MWAAServerless
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class Code
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_location: Types::S3Location?
+
+      class S3Location < Code
+      end
+      class Unknown < Code
+      end
+    end
+
+    class ConflictException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class CreateWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?client_token: String,
+        ?definition_s3_location: Types::DefinitionS3Location,
+        ?code: Types::Code,
+        ?role_arn: String,
+        ?description: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?engine_version: Integer,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?tags: Hash[String, String],
+        ?trigger_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor client_token: String?
+      attr_accessor definition_s3_location: Types::DefinitionS3Location?
+      attr_accessor code: Types::Code?
+      attr_accessor role_arn: String?
+      attr_accessor description: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor engine_version: Integer?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor trigger_mode: String?
+    end
+
+    class CreateWorkflowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?created_at: Time,
+        ?revision_id: String,
+        ?workflow_status: String,
+        ?workflow_version: String,
+        ?is_latest_version: bool,
+        ?warnings: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor created_at: Time?
+      attr_accessor revision_id: String?
+      attr_accessor workflow_status: String?
+      attr_accessor workflow_version: String?
+      attr_accessor is_latest_version: bool?
+      attr_accessor warnings: Array[String]?
+    end
+
+    class DefinitionS3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?object_key: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor object_key: String?
+      attr_accessor version_id: String?
+    end
+
+    class DeleteWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?workflow_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+    end
+
+    class DeleteWorkflowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?workflow_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    module EncryptionType
+      AWS_MANAGED_KEY: String
+      CUSTOMER_MANAGED_KEY: String
+    end
+
+    module EngineVersion
+      ONE: Integer
+    end
+
+    class GetTaskInstanceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?task_instance_id: String,
+        ?run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor task_instance_id: String?
+      attr_accessor run_id: String?
+    end
+
+    class GetTaskInstanceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?run_id: String,
+        ?task_instance_id: String,
+        ?workflow_version: String,
+        ?status: String,
+        ?duration_in_seconds: Integer,
+        ?operator_name: String,
+        ?modified_at: Time,
+        ?ended_at: Time,
+        ?started_at: Time,
+        ?attempt_number: Integer,
+        ?error_message: String,
+        ?task_id: String,
+        ?log_stream: String,
+        ?xcom: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor run_id: String?
+      attr_accessor task_instance_id: String?
+      attr_accessor workflow_version: String?
+      attr_accessor status: String?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor operator_name: String?
+      attr_accessor modified_at: Time?
+      attr_accessor ended_at: Time?
+      attr_accessor started_at: Time?
+      attr_accessor attempt_number: Integer?
+      attr_accessor error_message: String?
+      attr_accessor task_id: String?
+      attr_accessor log_stream: String?
+      attr_accessor xcom: Hash[String, String]?
+    end
+
+    class GetWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?workflow_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+    end
+
+    class GetWorkflowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?workflow_version: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?engine_version: Integer,
+        ?workflow_status: String,
+        ?definition_s3_location: Types::DefinitionS3Location,
+        ?code: Types::Code,
+        ?code_snapshotted_at: Time,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?role_arn: String,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?trigger_mode: String,
+        ?workflow_definition: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor engine_version: Integer?
+      attr_accessor workflow_status: String?
+      attr_accessor definition_s3_location: Types::DefinitionS3Location?
+      attr_accessor code: Types::Code?
+      attr_accessor code_snapshotted_at: Time?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor role_arn: String?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor trigger_mode: String?
+      attr_accessor workflow_definition: String?
+    end
+
+    class GetWorkflowRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor run_id: String?
+    end
+
+    class GetWorkflowRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?workflow_version: String,
+        ?run_id: String,
+        ?run_type: String,
+        ?override_parameters: Hash[String, Smithy::Schema::document],
+        ?run_detail: Types::WorkflowRunDetail,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+      attr_accessor run_id: String?
+      attr_accessor run_type: String?
+      attr_accessor override_parameters: Hash[String, Smithy::Schema::document]?
+      attr_accessor run_detail: Types::WorkflowRunDetail?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class ListTaskInstancesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?run_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor run_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListTaskInstancesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_instances: Array[Types::TaskInstanceSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_instances: Array[Types::TaskInstanceSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkflowRunsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?workflow_arn: String,
+        ?workflow_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+    end
+
+    class ListWorkflowRunsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_runs: Array[Types::WorkflowRunSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_runs: Array[Types::WorkflowRunSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkflowVersionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?workflow_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor workflow_arn: String?
+    end
+
+    class ListWorkflowVersionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_versions: Array[Types::WorkflowVersionSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_versions: Array[Types::WorkflowVersionSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkflowsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListWorkflowsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflows: Array[Types::WorkflowSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflows: Array[Types::WorkflowSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class LoggingConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_name: String?
+    end
+
+    class NetworkConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?security_group_ids: Array[String],
+        ?subnet_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor security_group_ids: Array[String]?
+      attr_accessor subnet_ids: Array[String]?
+    end
+
+    class OperationTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ResourceNotFoundException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+    end
+
+    class RunDetailSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?created_on: Time,
+        ?started_at: Time,
+        ?ended_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor created_on: Time?
+      attr_accessor started_at: Time?
+      attr_accessor ended_at: Time?
+    end
+
+    module RunType
+      ON_DEMAND: String
+      SCHEDULED: String
+    end
+
+    class S3Location
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket: String,
+        ?object_key: String,
+        ?version_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket: String?
+      attr_accessor object_key: String?
+      attr_accessor version_id: String?
+    end
+
+    class ScheduleConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cron_expression: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cron_expression: String?
+    end
+
+    class ServiceQuotaExceededException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?service_code: String,
+        ?quota_code: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+    end
+
+    class StartWorkflowRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?client_token: String,
+        ?override_parameters: Hash[String, Smithy::Schema::document],
+        ?workflow_version: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor client_token: String?
+      attr_accessor override_parameters: Hash[String, Smithy::Schema::document]?
+      attr_accessor workflow_version: String?
+    end
+
+    class StartWorkflowRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_id: String,
+        ?status: String,
+        ?started_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_id: String?
+      attr_accessor status: String?
+      attr_accessor started_at: Time?
+    end
+
+    class StopWorkflowRunRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?run_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor run_id: String?
+    end
+
+    class StopWorkflowRunResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?workflow_version: String,
+        ?run_id: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+      attr_accessor run_id: String?
+      attr_accessor status: String?
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    module TaskInstanceStatus
+      QUEUED: String
+      FAILED: String
+      SCHEDULED: String
+      RUNNING: String
+      SUCCESS: String
+      UP_FOR_RESCHEDULE: String
+      UP_FOR_RETRY: String
+      UPSTREAM_FAILED: String
+      REMOVED: String
+      RESTARTING: String
+      DEFERRED: String
+      NONE: String
+      CANCELLED: String
+      TIMEOUT: String
+    end
+
+    class TaskInstanceSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?workflow_version: String,
+        ?run_id: String,
+        ?task_instance_id: String,
+        ?status: String,
+        ?duration_in_seconds: Integer,
+        ?operator_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+      attr_accessor run_id: String?
+      attr_accessor task_instance_id: String?
+      attr_accessor status: String?
+      attr_accessor duration_in_seconds: Integer?
+      attr_accessor operator_name: String?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?service_code: String,
+        ?quota_code: String,
+        ?retry_after_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor service_code: String?
+      attr_accessor quota_code: String?
+      attr_accessor retry_after_seconds: Integer?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class UpdateWorkflowRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?definition_s3_location: Types::DefinitionS3Location,
+        ?code: Types::Code,
+        ?role_arn: String,
+        ?description: String,
+        ?logging_configuration: Types::LoggingConfiguration,
+        ?engine_version: Integer,
+        ?network_configuration: Types::NetworkConfiguration,
+        ?trigger_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor definition_s3_location: Types::DefinitionS3Location?
+      attr_accessor code: Types::Code?
+      attr_accessor role_arn: String?
+      attr_accessor description: String?
+      attr_accessor logging_configuration: Types::LoggingConfiguration?
+      attr_accessor engine_version: Integer?
+      attr_accessor network_configuration: Types::NetworkConfiguration?
+      attr_accessor trigger_mode: String?
+    end
+
+    class UpdateWorkflowResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?modified_at: Time,
+        ?workflow_version: String,
+        ?warnings: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor modified_at: Time?
+      attr_accessor workflow_version: String?
+      attr_accessor warnings: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?reason: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor reason: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+    end
+
+    class WorkflowRunDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?workflow_version: String,
+        ?run_id: String,
+        ?run_type: String,
+        ?started_on: Time,
+        ?created_at: Time,
+        ?completed_on: Time,
+        ?modified_at: Time,
+        ?duration: Integer,
+        ?error_message: String,
+        ?task_instances: Array[String],
+        ?run_state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+      attr_accessor run_id: String?
+      attr_accessor run_type: String?
+      attr_accessor started_on: Time?
+      attr_accessor created_at: Time?
+      attr_accessor completed_on: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor duration: Integer?
+      attr_accessor error_message: String?
+      attr_accessor task_instances: Array[String]?
+      attr_accessor run_state: String?
+    end
+
+    module WorkflowRunStatus
+      STARTING: String
+      QUEUED: String
+      RUNNING: String
+      SUCCESS: String
+      FAILED: String
+      TIMEOUT: String
+      STOPPING: String
+      STOPPED: String
+    end
+
+    class WorkflowRunSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?run_id: String,
+        ?workflow_arn: String,
+        ?workflow_version: String,
+        ?run_type: String,
+        ?run_detail_summary: Types::RunDetailSummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor run_id: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+      attr_accessor run_type: String?
+      attr_accessor run_detail_summary: Types::RunDetailSummary?
+    end
+
+    module WorkflowStatus
+      READY: String
+      DELETING: String
+    end
+
+    class WorkflowSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_arn: String,
+        ?workflow_version: String,
+        ?name: String,
+        ?description: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?workflow_status: String,
+        ?trigger_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_arn: String?
+      attr_accessor workflow_version: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor workflow_status: String?
+      attr_accessor trigger_mode: String?
+    end
+
+    class WorkflowVersionSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?workflow_version: String,
+        ?workflow_arn: String,
+        ?is_latest_version: bool,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?definition_s3_location: Types::DefinitionS3Location,
+        ?schedule_configuration: Types::ScheduleConfiguration,
+        ?trigger_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor workflow_version: String?
+      attr_accessor workflow_arn: String?
+      attr_accessor is_latest_version: bool?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor definition_s3_location: Types::DefinitionS3Location?
+      attr_accessor schedule_configuration: Types::ScheduleConfiguration?
+      attr_accessor trigger_mode: String?
+    end
+  end
+end

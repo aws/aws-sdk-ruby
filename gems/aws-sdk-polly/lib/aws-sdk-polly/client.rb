@@ -144,18 +144,18 @@ module Aws::Polly
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -326,7 +326,7 @@ module Aws::Polly
     #     voices: [
     #       {
     #         gender: "Female" # One of: ["Female", "Male"],
-    #         id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye"],
+    #         id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany"],
     #         language_code: "arb" # One of: ["arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"],
     #         language_name: "LanguageName",
     #         name: "VoiceName",
@@ -401,11 +401,11 @@ module Aws::Polly
     #       request_characters: 1,
     #       sns_topic_arn: "SnsTopicArn",
     #       lexicon_names: ["LexiconName"],
-    #       output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"],
+    #       output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm", "mulaw", "alaw"],
     #       sample_rate: "SampleRate",
     #       speech_mark_types: ["sentence" # One of: ["sentence", "ssml", "viseme", "word"]],
     #       text_type: "ssml" # One of: ["ssml", "text"],
-    #       voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye"],
+    #       voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany"],
     #       language_code: "arb" # One of: ["arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"]
     #     }
     #   }
@@ -508,11 +508,11 @@ module Aws::Polly
     #         request_characters: 1,
     #         sns_topic_arn: "SnsTopicArn",
     #         lexicon_names: ["LexiconName"],
-    #         output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"],
+    #         output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm", "mulaw", "alaw"],
     #         sample_rate: "SampleRate",
     #         speech_mark_types: ["sentence" # One of: ["sentence", "ssml", "viseme", "word"]],
     #         text_type: "ssml" # One of: ["ssml", "text"],
-    #         voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye"],
+    #         voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany"],
     #         language_code: "arb" # One of: ["arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"]
     #       }
     #     ]
@@ -562,6 +562,106 @@ module Aws::Polly
       request.send_request(options)
     end
 
+    # <p>Synthesizes UTF-8 input, plain text, or SSML over a bidirectional streaming connection.
+    #       Specify synthesis parameters in HTTP/2 headers, send text incrementally as events on the input stream,
+    #        and receive synthesized audio as it becomes available.</p>
+    #          <p>This operation serves as a bidirectional counterpart to <code>SynthesizeSpeech</code>:</p>
+    #          <ul>
+    #             <li>
+    #                <p>
+    #                   <a href="https://docs.aws.amazon.com/polly/latest/API/API_SynthesizeSpeech.html">SynthesizeSpeech</a>
+    #                </p>
+    #             </li>
+    #          </ul>
+    # @param [Hash, Types::StartSpeechSynthesisStreamInput] params
+    # @option params [String] :engine
+    #   <p>Specifies the engine for Amazon Polly to use when processing input text for speech synthesis.
+    #         Currently, only the <code>generative</code> engine is supported.
+    #         If you specify a voice that the selected engine doesn't support, Amazon Polly returns an error.</p>
+    # @option params [String] :language_code
+    #   <p>An optional parameter that sets the language code for the speech synthesis request. Specify this parameter only
+    #         when using a bilingual voice. If a bilingual voice is used and no language code is specified, Amazon Polly
+    #         uses the default language of the bilingual voice.</p>
+    # @option params [Array<String>] :lexicon_names
+    #   <p>The names of one or more pronunciation lexicons for the service to apply
+    #         during synthesis. Amazon Polly applies lexicons only when the lexicon language matches the voice language.</p>
+    # @option params [String] :output_format
+    #   <p>The audio format for the synthesized speech. Currently, Amazon Polly does not support JSON speech marks.</p>
+    # @option params [String] :sample_rate
+    #   <p>The audio frequency, specified in Hz.</p>
+    # @option params [String] :voice_id
+    #   <p>The voice to use in synthesis. To get a list of available voice IDs, use the <a href="https://docs.aws.amazon.com/polly/latest/API/API_DescribeVoices.html">DescribeVoices</a> operation.</p>
+    # @option params [Types::StartSpeechSynthesisStreamActionStream] :action_stream
+    #   <p>The input event stream that contains text events and stream control events.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     engine: "standard" # One of: ["standard", "neural", "long-form", "generative"], # required
+    #     language_code: "arb" # One of: ["arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"],
+    #     lexicon_names: ["LexiconName"],
+    #     output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm", "mulaw", "alaw"], # required
+    #     sample_rate: "SampleRate",
+    #     voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany"], # required
+    #     action_stream: {
+    #       # One of:
+    #       text_event: {
+    #         text: "Text", # required
+    #         text_type: "ssml" # One of: ["ssml", "text"],
+    #         flush_stream_configuration: {
+    #           force: false
+    #         }
+    #       },
+    #       close_stream_event: {
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.start_speech_synthesis_stream(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     event_stream: {
+    #       # One of:
+    #       audio_event: {
+    #         audio_chunk: "data"
+    #       },
+    #       stream_closed_event: {
+    #         request_characters: 1
+    #       },
+    #       validation_exception: {
+    #         message: "ErrorMessage", # required
+    #         reason: "unsupportedOperation" # One of: ["unsupportedOperation", "fieldValidationFailed", "other", "invalidInboundEvent"], # required
+    #         fields: [
+    #           {
+    #             name: "ValidationExceptionFieldName", # required
+    #             message: "ValidationExceptionFieldMessage", # required
+    #           }
+    #         ]
+    #       },
+    #       service_quota_exceeded_exception: {
+    #         message: "ErrorMessage", # required
+    #         quota_code: "input-stream-inbound-event-timeout" # One of: ["input-stream-inbound-event-timeout", "input-stream-timeout"], # required
+    #         service_code: "polly" # One of: ["polly"], # required
+    #       },
+    #       service_failure_exception: {
+    #         message: "ErrorMessage"
+    #       },
+    #       throttling_exception: {
+    #         message: "AvailabilityErrorMessage",
+    #         throttling_reasons: [
+    #           {
+    #             reason: "CoralAvailabilityThrottlingReason",
+    #             resource: "CoralAvailabilityThrottledResource"
+    #           }
+    #         ]
+    #       }
+    #     }
+    #   }
+    # @return [Types::StartSpeechSynthesisStreamOutput]
+    def start_speech_synthesis_stream(params = {}, options = {})
+      request = build_request(:start_speech_synthesis_stream, params)
+      request.send_request(options)
+    end
+
     # <p>Allows the creation of an asynchronous synthesis task, by starting a
     #       new <code>SpeechSynthesisTask</code>. This operation requires all the
     #       standard information needed for speech synthesis, plus the name of an
@@ -593,7 +693,7 @@ module Aws::Polly
     #         the lexicon is the same as the language of the voice. </p>
     # @option params [String] :output_format
     #   <p>The format in which the returned output will be encoded. For audio
-    #         stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+    #         stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law, or pcm. For speech marks, this will
     #         be json. </p>
     # @option params [String] :output_s3_bucket_name
     #   <p>Amazon S3 bucket name to which the output file will be saved.</p>
@@ -607,6 +707,8 @@ module Aws::Polly
     #         is "24000". The default value for generative voices is "24000".</p>
     #            <p>Valid values for pcm are "8000" and "16000" The default value is
     #         "16000". </p>
+    #            <p>Valid value for ogg_opus is "48000". </p>
+    #            <p>Valid value for mu-law and a-law is "8000". </p>
     # @option params [String] :sns_topic_arn
     #   <p>ARN for the SNS topic optionally used for providing status
     #         notification for a speech synthesis task.</p>
@@ -625,7 +727,7 @@ module Aws::Polly
     #     engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #     language_code: "arb" # One of: ["arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"],
     #     lexicon_names: ["LexiconName"],
-    #     output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"], # required
+    #     output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm", "mulaw", "alaw"], # required
     #     output_s3_bucket_name: "OutputS3BucketName", # required
     #     output_s3_key_prefix: "OutputS3KeyPrefix",
     #     sample_rate: "SampleRate",
@@ -633,7 +735,7 @@ module Aws::Polly
     #     speech_mark_types: ["sentence" # One of: ["sentence", "ssml", "viseme", "word"]],
     #     text: "Text", # required
     #     text_type: "ssml" # One of: ["ssml", "text"],
-    #     voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye"], # required
+    #     voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany"], # required
     #   }
     #   options = {}
     #   response = client.start_speech_synthesis_task(params, options)
@@ -650,11 +752,11 @@ module Aws::Polly
     #       request_characters: 1,
     #       sns_topic_arn: "SnsTopicArn",
     #       lexicon_names: ["LexiconName"],
-    #       output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"],
+    #       output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm", "mulaw", "alaw"],
     #       sample_rate: "SampleRate",
     #       speech_mark_types: ["sentence" # One of: ["sentence", "ssml", "viseme", "word"]],
     #       text_type: "ssml" # One of: ["ssml", "text"],
-    #       voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye"],
+    #       voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany"],
     #       language_code: "arb" # One of: ["arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"]
     #     }
     #   }
@@ -694,7 +796,7 @@ module Aws::Polly
     #         information about storing lexicons, see <a href="https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html">PutLexicon</a>.</p>
     # @option params [String] :output_format
     #   <p> The format in which the returned output will be encoded. For audio
-    #         stream, this will be mp3, ogg_vorbis, or pcm. For speech marks, this will
+    #         stream, this will be mp3, ogg_vorbis, ogg_opus, mu-law, a-law or pcm. For speech marks, this will
     #         be json. </p>
     #            <p>When pcm is used, the content returned is audio/pcm in a signed
     #         16-bit, 1 channel (mono), little-endian format. </p>
@@ -705,6 +807,8 @@ module Aws::Polly
     #         is "24000". The default value for generative voices is "24000".</p>
     #            <p>Valid values for pcm are "8000" and "16000" The default value is
     #         "16000". </p>
+    #            <p>Valid value for ogg_opus is "48000". </p>
+    #            <p>Valid value for mu-law and a-law is "8000". </p>
     # @option params [Array<String>] :speech_mark_types
     #   <p>The type of speech marks returned for the input text.</p>
     # @option params [String] :text
@@ -743,12 +847,12 @@ module Aws::Polly
     #     engine: "standard" # One of: ["standard", "neural", "long-form", "generative"],
     #     language_code: "arb" # One of: ["arb", "cmn-CN", "cy-GB", "da-DK", "de-DE", "en-AU", "en-GB", "en-GB-WLS", "en-IN", "en-US", "es-ES", "es-MX", "es-US", "fr-CA", "fr-FR", "is-IS", "it-IT", "ja-JP", "hi-IN", "ko-KR", "nb-NO", "nl-NL", "pl-PL", "pt-BR", "pt-PT", "ro-RO", "ru-RU", "sv-SE", "tr-TR", "en-NZ", "en-ZA", "ca-ES", "de-AT", "yue-CN", "ar-AE", "fi-FI", "en-IE", "nl-BE", "fr-BE", "cs-CZ", "de-CH", "en-SG"],
     #     lexicon_names: ["LexiconName"],
-    #     output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm"], # required
+    #     output_format: "json" # One of: ["json", "mp3", "ogg_opus", "ogg_vorbis", "pcm", "mulaw", "alaw"], # required
     #     sample_rate: "SampleRate",
     #     speech_mark_types: ["sentence" # One of: ["sentence", "ssml", "viseme", "word"]],
     #     text: "Text", # required
     #     text_type: "ssml" # One of: ["ssml", "text"],
-    #     voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye"], # required
+    #     voice_id: "Aditi" # One of: ["Aditi", "Amy", "Astrid", "Bianca", "Brian", "Camila", "Carla", "Carmen", "Celine", "Chantal", "Conchita", "Cristiano", "Dora", "Emma", "Enrique", "Ewa", "Filiz", "Gabrielle", "Geraint", "Giorgio", "Gwyneth", "Hans", "Ines", "Ivy", "Jacek", "Jan", "Joanna", "Joey", "Justin", "Karl", "Kendra", "Kevin", "Kimberly", "Lea", "Liv", "Lotte", "Lucia", "Lupe", "Mads", "Maja", "Marlene", "Mathieu", "Matthew", "Maxim", "Mia", "Miguel", "Mizuki", "Naja", "Nicole", "Olivia", "Penelope", "Raveena", "Ricardo", "Ruben", "Russell", "Salli", "Seoyeon", "Takumi", "Tatyana", "Vicki", "Vitoria", "Zeina", "Zhiyu", "Aria", "Ayanda", "Arlet", "Hannah", "Arthur", "Daniel", "Liam", "Pedro", "Kajal", "Hiujin", "Laura", "Elin", "Ida", "Suvi", "Ola", "Hala", "Andres", "Sergio", "Remi", "Adriano", "Thiago", "Ruth", "Stephen", "Kazuha", "Tomoko", "Niamh", "Sofie", "Lisa", "Isabelle", "Zayd", "Danielle", "Gregory", "Burcu", "Jitka", "Sabrina", "Jasmine", "Jihye", "Ambre", "Beatrice", "Florian", "Lennart", "Lorenzo", "Tiffany"], # required
     #   }
     #   options = {}
     #   response = client.synthesize_speech(params, options)

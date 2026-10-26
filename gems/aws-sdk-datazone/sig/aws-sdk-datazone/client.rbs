@@ -94,6 +94,14 @@ module Aws::DataZone
           asset_id: String,
           filter_ids: Array[String]
         }
+      ],
+      ?asset_permissions: Array[
+        {
+          asset_id: String,
+          permissions: {
+            s3: Array[String]
+          }
+        }
       ]
     ) -> _AcceptSubscriptionRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AcceptSubscriptionRequestResponse
 
@@ -213,6 +221,44 @@ module Aws::DataZone
       ?entity_type: String,
       ?governed_glossary_terms: Array[String]
     ) -> _AssociateGovernedTermsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateGovernedTermsResponse
+
+    interface _BatchGetAttributesMetadataResponse
+      include Smithy::Client::_Response[Types::BatchGetAttributesMetadataOutput]
+      def attributes: () -> Array[Types::BatchGetAttributeOutput]?
+      def errors: () -> Array[Types::AttributeError]?
+    end
+    def batch_get_attributes_metadata: (
+      ?domain_identifier: String,
+      ?entity_type: String,
+      ?entity_identifier: String,
+      ?entity_revision: String,
+      ?attribute_identifiers: Array[String]
+    ) -> _BatchGetAttributesMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchGetAttributesMetadataResponse
+
+    interface _BatchPutAttributesMetadataResponse
+      include Smithy::Client::_Response[Types::BatchPutAttributesMetadataOutput]
+      def errors: () -> Array[Types::AttributeError]?
+      def attributes: () -> Array[Types::BatchPutAttributeOutput]?
+    end
+    def batch_put_attributes_metadata: (
+      ?domain_identifier: String,
+      ?entity_type: String,
+      ?entity_identifier: String,
+      ?client_token: String,
+      ?attributes: Array[
+        {
+          attribute_identifier: String,
+          forms: Array[
+            {
+              form_name: String,
+              type_identifier: String,
+              type_revision: String,
+              content: String
+            }
+          ]
+        }
+      ]
+    ) -> _BatchPutAttributesMetadataResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _BatchPutAttributesMetadataResponse
 
     interface _CancelMetadataGenerationRunResponse
       include Smithy::Client::_Response[Types::CancelMetadataGenerationRunOutput]
@@ -489,6 +535,7 @@ module Aws::DataZone
     interface _CreateConnectionResponse
       include Smithy::Client::_Response[Types::CreateConnectionOutput]
       def connection_id: () -> String?
+      def configurations: () -> Array[Types::Configuration]?
       def description: () -> String?
       def domain_id: () -> String?
       def domain_unit_id: () -> String?
@@ -498,6 +545,7 @@ module Aws::DataZone
       def project_id: () -> String?
       def props: () -> Types::ConnectionPropertiesOutput?
       def type: () -> String?
+      def scope: () -> String?
     end
     def create_connection: (
       ?aws_location: {
@@ -507,6 +555,12 @@ module Aws::DataZone
         iam_connection_id: String
       },
       ?client_token: String,
+      ?configurations: Array[
+        {
+          classification: String,
+          properties: Hash[String, String]
+        }
+      ],
       ?description: String,
       ?domain_identifier: String,
       ?environment_identifier: String,
@@ -568,7 +622,8 @@ module Aws::DataZone
           cluster_name: untyped
         },
         iam_properties: {
-          glue_lineage_sync_enabled: untyped
+          glue_lineage_sync_enabled: untyped,
+          role_arn: String
         },
         redshift_properties: {
           storage: {
@@ -607,6 +662,7 @@ module Aws::DataZone
             connection: untyped
           },
           glue_connection_name: untyped,
+          glue_connection_names: Array[String],
           glue_version: untyped,
           idle_timeout: untyped,
           java_virtual_env: untyped,
@@ -616,9 +672,62 @@ module Aws::DataZone
         },
         s3_properties: {
           s3_uri: String,
-          s3_access_grant_location_id: String
+          s3_access_grant_location_id: String,
+          register_s3_access_grant_location: untyped
+        },
+        snowflake_properties: {
+          connectivity_properties: {
+            connection_properties: untyped,
+            physical_connection_requirements: untyped,
+            name: untyped,
+            description: untyped,
+            validate_credentials: untyped,
+            validate_for_compute_environments: untyped,
+            spark_properties: untyped,
+            athena_properties: untyped,
+            python_properties: untyped,
+            authentication_configuration: untyped
+          },
+          snowflake_role: String,
+          identity_mapping: {
+            username_attribute: untyped,
+            prefix: untyped
+          },
+          lineage_sync: {
+            timezone: String,
+            enabled: untyped,
+            schedule: String
+          }
+        },
+        amazon_q_properties: {
+          is_enabled: untyped,
+          profile_arn: untyped,
+          auth_mode: untyped
+        },
+        mlflow_properties: {
+          tracking_server_arn: untyped
+        },
+        workflows_mwaa_properties: {
+          mwaa_environment_name: untyped
+        },
+        workflows_serverless_properties: {
+        },
+        lakehouse_properties: {
+          glue_lineage_sync_enabled: untyped
+        },
+        vpc_properties: {
+          vpc_id: String,
+          subnet_ids: Array[String],
+          security_group_id: String
+        },
+        git_properties: {
+          code_connection_arn: untyped,
+          repository_id: untyped,
+          default_branch: untyped
         }
-      }
+      },
+      ?enable_trusted_identity_propagation: bool,
+      ?scope: String
     ) -> _CreateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectionResponse
 
     interface _CreateDataProductResponse
@@ -872,6 +981,7 @@ module Aws::DataZone
       def deployment_properties: () -> Types::DeploymentProperties?
       def environment_blueprint_id: () -> String?
       def environment_configuration_id: () -> String?
+      def environment_configuration_name: () -> String?
     end
     def create_environment: (
       ?project_identifier: String,
@@ -890,7 +1000,8 @@ module Aws::DataZone
       ?environment_account_region: String,
       ?environment_blueprint_identifier: String,
       ?deployment_order: Integer,
-      ?environment_configuration_id: String
+      ?environment_configuration_id: String,
+      ?environment_configuration_name: String
     ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
 
     interface _CreateEnvironmentActionResponse
@@ -924,6 +1035,7 @@ module Aws::DataZone
       def deployment_properties: () -> Types::DeploymentProperties?
       def user_parameters: () -> Array[Types::CustomParameter]?
       def glossary_terms: () -> Array[String]?
+      def blueprint_category: () -> String?
       def created_at: () -> Time?
       def updated_at: () -> Time?
     end
@@ -946,7 +1058,8 @@ module Aws::DataZone
           is_optional: untyped,
           is_update_supported: untyped
         }
-      ]
+      ],
+      ?blueprint_category: String
     ) -> _CreateEnvironmentBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentBlueprintResponse
 
     interface _CreateEnvironmentProfileResponse
@@ -1053,10 +1166,13 @@ module Aws::DataZone
       def id: () -> String?
       def status: () -> String?
       def group_name: () -> String?
+      def role_principal_arn: () -> String?
+      def role_principal_id: () -> String?
     end
     def create_group_profile: (
       ?domain_identifier: String,
       ?group_identifier: String,
+      ?role_principal_arn: String,
       ?client_token: String
     ) -> _CreateGroupProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGroupProfileResponse
 
@@ -1075,6 +1191,41 @@ module Aws::DataZone
       ?client_token: String
     ) -> _CreateListingChangeSetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateListingChangeSetResponse
 
+    interface _CreateNotebookResponse
+      include Smithy::Client::_Response[Types::CreateNotebookOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def owning_project_id: () -> String?
+      def domain_id: () -> String?
+      def cell_order: () -> Array[Types::CellInformation]?
+      def status: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def locked_by: () -> String?
+      def locked_at: () -> Time?
+      def lock_expires_at: () -> Time?
+      def compute_id: () -> String?
+      def metadata: () -> Hash[String, String]?
+      def parameters: () -> Hash[String, String]?
+      def environment_configuration: () -> Types::EnvironmentConfig?
+      def error: () -> Types::NotebookError?
+      def git_metadata: () -> Types::GitMetadata?
+    end
+    def create_notebook: (
+      ?domain_identifier: String,
+      ?owning_project_identifier: String,
+      ?name: String,
+      ?description: String,
+      ?type: String,
+      ?metadata: Hash[String, String],
+      ?parameters: Hash[String, String],
+      ?client_token: String
+    ) -> _CreateNotebookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNotebookResponse
+
     interface _CreateProjectResponse
       include Smithy::Client::_Response[Types::CreateProjectOutput]
       def domain_id: () -> String?
@@ -1086,16 +1237,19 @@ module Aws::DataZone
       def created_by: () -> String?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
+      def resource_tags: () -> Array[Types::ResourceTag]?
       def glossary_terms: () -> Array[String]?
       def domain_unit_id: () -> String?
       def project_profile_id: () -> String?
       def user_parameters: () -> Array[Types::EnvironmentConfigurationUserParameter]?
       def environment_deployment_details: () -> Types::EnvironmentDeploymentDetails?
+      def project_category: () -> String?
     end
     def create_project: (
       ?domain_identifier: String,
       ?name: String,
       ?description: String,
+      ?resource_tags: Hash[String, String],
       ?glossary_terms: Array[String],
       ?domain_unit_id: String,
       ?project_profile_id: String,
@@ -1114,6 +1268,17 @@ module Aws::DataZone
               value: untyped
             }
           ]
+        }
+      ],
+      ?project_category: String,
+      ?project_execution_role: String,
+      ?membership_assignments: Array[
+        {
+          member: {
+            user_identifier: String,
+            group_identifier: untyped
+          },
+          designation: String
         }
       ]
     ) -> _CreateProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateProjectResponse
@@ -1138,6 +1303,9 @@ module Aws::DataZone
       def name: () -> String?
       def description: () -> String?
       def status: () -> String?
+      def project_resource_tags: () -> Array[Types::ResourceTagParameter]?
+      def allow_custom_project_resource_tags: () -> bool?
+      def project_resource_tags_description: () -> String?
       def environment_configurations: () -> Array[Types::EnvironmentConfiguration]?
       def created_by: () -> String?
       def created_at: () -> Time?
@@ -1149,6 +1317,15 @@ module Aws::DataZone
       ?name: String,
       ?description: String,
       ?status: String,
+      ?project_resource_tags: Array[
+        {
+          key: String,
+          value: String,
+          is_value_editable: bool
+        }
+      ],
+      ?allow_custom_project_resource_tags: bool,
+      ?project_resource_tags_description: String,
       ?environment_configurations: Array[
         {
           name: String,
@@ -1225,6 +1402,9 @@ module Aws::DataZone
               type_revision: String
             }
           ]
+        },
+        glossary_term_enforcement_detail: {
+          required_glossary_term_ids: Array[String]
         }
       },
       ?description: String,
@@ -1239,6 +1419,7 @@ module Aws::DataZone
       def domain_id: () -> String?
       def created_at: () -> Time?
       def updated_at: () -> Time?
+      def environment_id: () -> String?
       def subscription_target_id: () -> String?
       def granted_entity: () -> Types::GrantedEntity?
       def status: () -> String?
@@ -1287,6 +1468,15 @@ module Aws::DataZone
         {
           project: {
             identifier: String
+          },
+          user: {
+            identifier: String
+          },
+          group: {
+            identifier: String
+          },
+          iam: {
+            identifier: String
           }
         }
       ],
@@ -1303,6 +1493,20 @@ module Aws::DataZone
           type_identifier: String,
           type_revision: String,
           content: String
+        }
+      ],
+      ?asset_permissions: Array[
+        {
+          asset_id: String,
+          permissions: {
+            s3: Array[String]
+          }
+        }
+      ],
+      ?asset_scopes: Array[
+        {
+          asset_id: String,
+          filter_ids: Array[String]
         }
       ]
     ) -> _CreateSubscriptionRequestResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionRequestResponse
@@ -1324,6 +1528,7 @@ module Aws::DataZone
       def applicable_asset_types: () -> Array[String]?
       def subscription_target_config: () -> Array[Types::SubscriptionTargetForm]?
       def provider: () -> String?
+      def subscription_grant_creation_mode: () -> String?
     end
     def create_subscription_target: (
       ?domain_identifier: String,
@@ -1340,7 +1545,8 @@ module Aws::DataZone
       ?manage_access_role: String,
       ?applicable_asset_types: Array[String],
       ?provider: String,
-      ?client_token: String
+      ?client_token: String,
+      ?subscription_grant_creation_mode: String
     ) -> _CreateSubscriptionTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateSubscriptionTargetResponse
 
     interface _CreateUserProfileResponse
@@ -1355,6 +1561,7 @@ module Aws::DataZone
       ?domain_identifier: String,
       ?user_identifier: String,
       ?user_type: String,
+      ?session_name: String,
       ?client_token: String
     ) -> _CreateUserProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateUserProfileResponse
 
@@ -1399,6 +1606,13 @@ module Aws::DataZone
       ?domain_identifier: String,
       ?identifier: String
     ) -> _DeleteConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectionResponse
+
+    interface _DeleteDataExportConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteDataExportConfigurationOutput]
+    end
+    def delete_data_export_configuration: (
+      ?domain_identifier: String
+    ) -> _DeleteDataExportConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataExportConfigurationResponse
 
     interface _DeleteDataProductResponse
       include Smithy::Client::_Response[Types::DeleteDataProductOutput]
@@ -1447,7 +1661,8 @@ module Aws::DataZone
     def delete_domain: (
       ?identifier: String,
       ?client_token: String,
-      ?skip_deletion_check: bool
+      ?skip_deletion_check: bool,
+      ?cascade_delete: bool
     ) -> _DeleteDomainResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDomainResponse
 
     interface _DeleteDomainUnitResponse
@@ -1523,6 +1738,17 @@ module Aws::DataZone
       ?identifier: String
     ) -> _DeleteGlossaryTermResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteGlossaryTermResponse
 
+    interface _DeleteLineageEventResponse
+      include Smithy::Client::_Response[Types::DeleteLineageEventOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def processing_status: () -> String?
+    end
+    def delete_lineage_event: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteLineageEventResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteLineageEventResponse
+
     interface _DeleteListingResponse
       include Smithy::Client::_Response[Types::DeleteListingOutput]
     end
@@ -1530,6 +1756,14 @@ module Aws::DataZone
       ?domain_identifier: String,
       ?identifier: String
     ) -> _DeleteListingResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteListingResponse
+
+    interface _DeleteNotebookResponse
+      include Smithy::Client::_Response[Types::DeleteNotebookOutput]
+    end
+    def delete_notebook: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _DeleteNotebookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotebookResponse
 
     interface _DeleteProjectResponse
       include Smithy::Client::_Response[Types::DeleteProjectOutput]
@@ -1576,6 +1810,7 @@ module Aws::DataZone
       def domain_id: () -> String?
       def created_at: () -> Time?
       def updated_at: () -> Time?
+      def environment_id: () -> String?
       def subscription_target_id: () -> String?
       def granted_entity: () -> Types::GrantedEntity?
       def status: () -> String?
@@ -1725,6 +1960,7 @@ module Aws::DataZone
     interface _GetConnectionResponse
       include Smithy::Client::_Response[Types::GetConnectionOutput]
       def connection_credentials: () -> Types::ConnectionCredentials?
+      def configurations: () -> Array[Types::Configuration]?
       def connection_id: () -> String?
       def description: () -> String?
       def domain_id: () -> String?
@@ -1736,12 +1972,26 @@ module Aws::DataZone
       def project_id: () -> String?
       def props: () -> Types::ConnectionPropertiesOutput?
       def type: () -> String?
+      def scope: () -> String?
     end
     def get_connection: (
       ?domain_identifier: String,
       ?identifier: String,
       ?with_secret: bool
     ) -> _GetConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConnectionResponse
+
+    interface _GetDataExportConfigurationResponse
+      include Smithy::Client::_Response[Types::GetDataExportConfigurationOutput]
+      def is_export_enabled: () -> bool?
+      def status: () -> String?
+      def encryption_configuration: () -> Types::EncryptionConfiguration?
+      def s3_table_bucket_arn: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_data_export_configuration: (
+      ?domain_identifier: String
+    ) -> _GetDataExportConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataExportConfigurationResponse
 
     interface _GetDataProductResponse
       include Smithy::Client::_Response[Types::GetDataProductOutput]
@@ -1836,6 +2086,8 @@ module Aws::DataZone
       def tags: () -> Hash[String, String]?
       def domain_version: () -> String?
       def service_role: () -> String?
+      def failure_reasons: () -> Array[Types::FailureReason]?
+      def delete_progress: () -> Types::DeleteProgress?
     end
     def get_domain: (
       ?identifier: String
@@ -1883,6 +2135,7 @@ module Aws::DataZone
       def deployment_properties: () -> Types::DeploymentProperties?
       def environment_blueprint_id: () -> String?
       def environment_configuration_id: () -> String?
+      def environment_configuration_name: () -> String?
     end
     def get_environment: (
       ?domain_identifier: String,
@@ -1914,6 +2167,7 @@ module Aws::DataZone
       def deployment_properties: () -> Types::DeploymentProperties?
       def user_parameters: () -> Array[Types::CustomParameter]?
       def glossary_terms: () -> Array[String]?
+      def blueprint_category: () -> String?
       def created_at: () -> Time?
       def updated_at: () -> Time?
     end
@@ -1931,8 +2185,10 @@ module Aws::DataZone
       def manage_access_role_arn: () -> String?
       def enabled_regions: () -> Array[String]?
       def regional_parameters: () -> Hash[String, Hash[String, String]]?
+      def allow_user_provided_configurations: () -> bool?
       def created_at: () -> Time?
       def updated_at: () -> Time?
+      def resource_configurations: () -> Array[Types::ResourceConfiguration]?
       def provisioning_configurations: () -> Array[Types::ProvisioningConfiguration]?
     end
     def get_environment_blueprint_configuration: (
@@ -2039,6 +2295,8 @@ module Aws::DataZone
       def id: () -> String?
       def status: () -> String?
       def group_name: () -> String?
+      def role_principal_arn: () -> String?
+      def role_principal_id: () -> String?
     end
     def get_group_profile: (
       ?domain_identifier: String,
@@ -2140,14 +2398,96 @@ module Aws::DataZone
       def target: () -> Types::MetadataGenerationRunTarget?
       def status: () -> String?
       def type: () -> String?
+      def types: () -> Array[String]?
       def created_at: () -> Time?
       def created_by: () -> String?
       def owning_project_id: () -> String?
+      def type_stats: () -> Array[Types::MetadataGenerationRunTypeStat]?
     end
     def get_metadata_generation_run: (
       ?domain_identifier: String,
-      ?identifier: String
+      ?identifier: String,
+      ?type: String
     ) -> _GetMetadataGenerationRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetMetadataGenerationRunResponse
+
+    interface _GetNotebookResponse
+      include Smithy::Client::_Response[Types::GetNotebookOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def owning_project_id: () -> String?
+      def domain_id: () -> String?
+      def cell_order: () -> Array[Types::CellInformation]?
+      def status: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def locked_by: () -> String?
+      def locked_at: () -> Time?
+      def lock_expires_at: () -> Time?
+      def compute_id: () -> String?
+      def metadata: () -> Hash[String, String]?
+      def parameters: () -> Hash[String, String]?
+      def environment_configuration: () -> Types::EnvironmentConfig?
+      def error: () -> Types::NotebookError?
+      def git_metadata: () -> Types::GitMetadata?
+    end
+    def get_notebook: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetNotebookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotebookResponse
+
+    interface _GetNotebookExportResponse
+      include Smithy::Client::_Response[Types::GetNotebookExportOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def owning_project_id: () -> String?
+      def notebook_id: () -> String?
+      def file_format: () -> String?
+      def status: () -> String?
+      def output_location: () -> Types::OutputLocation?
+      def error: () -> Types::NotebookExportError?
+      def completed_at: () -> Time?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+    end
+    def get_notebook_export: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetNotebookExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotebookExportResponse
+
+    interface _GetNotebookRunResponse
+      include Smithy::Client::_Response[Types::GetNotebookRunOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def owning_project_id: () -> String?
+      def notebook_id: () -> String?
+      def schedule_id: () -> String?
+      def status: () -> String?
+      def cell_order: () -> Array[Types::CellInformation]?
+      def metadata: () -> Hash[String, String]?
+      def parameters: () -> Hash[String, String]?
+      def compute_configuration: () -> Types::ComputeConfig?
+      def network_configuration: () -> Types::NetworkConfig?
+      def timeout_configuration: () -> Types::TimeoutConfig?
+      def environment_configuration: () -> Types::EnvironmentConfig?
+      def storage_configuration: () -> Types::StorageConfig?
+      def notification_configuration: () -> Types::NotificationConfig?
+      def trigger_source: () -> Types::TriggerSource?
+      def error: () -> Types::NotebookRunError?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def started_at: () -> Time?
+      def completed_at: () -> Time?
+    end
+    def get_notebook_run: (
+      ?domain_identifier: String,
+      ?identifier: String
+    ) -> _GetNotebookRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotebookRunResponse
 
     interface _GetProjectResponse
       include Smithy::Client::_Response[Types::GetProjectOutput]
@@ -2160,11 +2500,13 @@ module Aws::DataZone
       def created_by: () -> String?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
+      def resource_tags: () -> Array[Types::ResourceTag]?
       def glossary_terms: () -> Array[String]?
       def domain_unit_id: () -> String?
       def project_profile_id: () -> String?
       def user_parameters: () -> Array[Types::EnvironmentConfigurationUserParameter]?
       def environment_deployment_details: () -> Types::EnvironmentDeploymentDetails?
+      def project_category: () -> String?
     end
     def get_project: (
       ?domain_identifier: String,
@@ -2178,6 +2520,9 @@ module Aws::DataZone
       def name: () -> String?
       def description: () -> String?
       def status: () -> String?
+      def project_resource_tags: () -> Array[Types::ResourceTagParameter]?
+      def allow_custom_project_resource_tags: () -> bool?
+      def project_resource_tags_description: () -> String?
       def environment_configurations: () -> Array[Types::EnvironmentConfiguration]?
       def created_by: () -> String?
       def created_at: () -> Time?
@@ -2239,6 +2584,7 @@ module Aws::DataZone
       def domain_id: () -> String?
       def created_at: () -> Time?
       def updated_at: () -> Time?
+      def environment_id: () -> String?
       def subscription_target_id: () -> String?
       def granted_entity: () -> Types::GrantedEntity?
       def status: () -> String?
@@ -2289,6 +2635,7 @@ module Aws::DataZone
       def applicable_asset_types: () -> Array[String]?
       def subscription_target_config: () -> Array[Types::SubscriptionTargetForm]?
       def provider: () -> String?
+      def subscription_grant_creation_mode: () -> String?
     end
     def get_subscription_target: (
       ?domain_identifier: String,
@@ -2323,7 +2670,8 @@ module Aws::DataZone
     def get_user_profile: (
       ?domain_identifier: String,
       ?user_identifier: String,
-      ?type: String
+      ?type: String,
+      ?session_name: String
     ) -> _GetUserProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetUserProfileResponse
 
     interface _ListAccountPoolsResponse
@@ -2391,7 +2739,8 @@ module Aws::DataZone
       ?name: String,
       ?environment_identifier: String,
       ?project_identifier: String,
-      ?type: String
+      ?type: String,
+      ?scope: String
     ) -> _ListConnectionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectionsResponse
 
     interface _ListDataProductRevisionsResponse
@@ -2611,8 +2960,41 @@ module Aws::DataZone
       ?status: String,
       ?type: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?target_identifier: String
     ) -> _ListMetadataGenerationRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListMetadataGenerationRunsResponse
+
+    interface _ListNotebookRunsResponse
+      include Smithy::Client::_Response[Types::ListNotebookRunsOutput]
+      def items: () -> Array[Types::NotebookRunSummary]?
+      def next_token: () -> String?
+    end
+    def list_notebook_runs: (
+      ?domain_identifier: String,
+      ?owning_project_identifier: String,
+      ?notebook_identifier: String,
+      ?status: String,
+      ?schedule_identifier: String,
+      ?max_results: Integer,
+      ?sort_order: String,
+      ?next_token: String
+    ) -> _ListNotebookRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotebookRunsResponse
+
+    interface _ListNotebooksResponse
+      include Smithy::Client::_Response[Types::ListNotebooksOutput]
+      def items: () -> Array[Types::NotebookSummary]?
+      def next_token: () -> String?
+    end
+    def list_notebooks: (
+      ?domain_identifier: String,
+      ?owning_project_identifier: String,
+      ?max_results: Integer,
+      ?sort_order: String,
+      ?sort_by: String,
+      ?status: String,
+      ?type: String,
+      ?next_token: String
+    ) -> _ListNotebooksResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotebooksResponse
 
     interface _ListNotificationsResponse
       include Smithy::Client::_Response[Types::ListNotificationsOutput]
@@ -2682,6 +3064,7 @@ module Aws::DataZone
       ?user_identifier: String,
       ?group_identifier: String,
       ?name: String,
+      ?project_category: String,
       ?next_token: String,
       ?max_results: Integer
     ) -> _ListProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListProjectsResponse
@@ -2717,6 +3100,9 @@ module Aws::DataZone
       ?subscribed_listing_id: String,
       ?subscription_id: String,
       ?owning_project_id: String,
+      ?owning_iam_principal_arn: String,
+      ?owning_user_id: String,
+      ?owning_group_id: String,
       ?sort_by: String,
       ?sort_order: String,
       ?max_results: Integer,
@@ -2733,7 +3119,10 @@ module Aws::DataZone
       ?status: String,
       ?subscribed_listing_id: String,
       ?owning_project_id: String,
+      ?owning_iam_principal_arn: String,
       ?approver_project_id: String,
+      ?owning_user_id: String,
+      ?owning_group_id: String,
       ?sort_by: String,
       ?sort_order: String,
       ?max_results: Integer,
@@ -2765,6 +3154,9 @@ module Aws::DataZone
       ?status: String,
       ?subscribed_listing_id: String,
       ?owning_project_id: String,
+      ?owning_iam_principal_arn: String,
+      ?owning_user_id: String,
+      ?owning_group_id: String,
       ?approver_project_id: String,
       ?sort_by: String,
       ?sort_order: String,
@@ -2830,6 +3222,19 @@ module Aws::DataZone
       ?client_token: String
     ) -> _PostTimeSeriesDataPointsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PostTimeSeriesDataPointsResponse
 
+    interface _PutDataExportConfigurationResponse
+      include Smithy::Client::_Response[Types::PutDataExportConfigurationOutput]
+    end
+    def put_data_export_configuration: (
+      ?domain_identifier: String,
+      ?enable_export: bool,
+      ?encryption_configuration: {
+        kms_key_arn: String,
+        sse_algorithm: untyped
+      },
+      ?client_token: String
+    ) -> _PutDataExportConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutDataExportConfigurationResponse
+
     interface _PutEnvironmentBlueprintConfigurationResponse
       include Smithy::Client::_Response[Types::PutEnvironmentBlueprintConfigurationOutput]
       def domain_id: () -> String?
@@ -2839,8 +3244,10 @@ module Aws::DataZone
       def manage_access_role_arn: () -> String?
       def enabled_regions: () -> Array[String]?
       def regional_parameters: () -> Hash[String, Hash[String, String]]?
+      def allow_user_provided_configurations: () -> bool?
       def created_at: () -> Time?
       def updated_at: () -> Time?
+      def resource_configurations: () -> Array[Types::ResourceConfiguration]?
       def provisioning_configurations: () -> Array[Types::ProvisioningConfiguration]?
     end
     def put_environment_blueprint_configuration: (
@@ -2853,6 +3260,15 @@ module Aws::DataZone
       ?regional_parameters: Hash[String,
         Hash[String, String]
       ],
+      ?resource_configurations: Array[
+        {
+          name: String,
+          description: untyped,
+          region: String,
+          parameters: Hash[String, String]
+        }
+      ],
+      ?allow_user_provided_configurations: bool,
       ?global_parameters: Hash[String, String],
       ?provisioning_configurations: Array[
         {
@@ -2863,6 +3279,49 @@ module Aws::DataZone
         }
       ]
     ) -> _PutEnvironmentBlueprintConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutEnvironmentBlueprintConfigurationResponse
+
+    interface _QueryGraphResponse
+      include Smithy::Client::_Response[Types::QueryGraphOutput]
+      def items: () -> Array[Types::ResultItem]?
+      def next_token: () -> String?
+    end
+    def query_graph: (
+      ?domain_identifier: String,
+      ?match: Array[
+        {
+          relation_pattern: {
+            relation_type: String,
+            relation_direction: String,
+            max_path_length: Integer
+          },
+          entity_pattern: {
+            entity_type: String,
+            identifier: String,
+            filters: {
+              filter: {
+                attribute: String,
+                value: untyped,
+                int_value: Integer,
+                operator: String
+              },
+              and: Array[
+                {
+                  filter: untyped,
+                  and: untyped,
+                  or: untyped
+                }
+              ],
+              or: untyped
+            }
+          }
+        }
+      ],
+      ?max_results: Integer,
+      ?next_token: String,
+      ?additional_attributes: {
+        form_names: Array[String]
+      }
+    ) -> _QueryGraphResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _QueryGraphResponse
 
     interface _RejectPredictionsResponse
       include Smithy::Client::_Response[Types::RejectPredictionsOutput]
@@ -3009,7 +3468,9 @@ module Aws::DataZone
       ?filters: {
         filter: {
           attribute: String,
-          value: String
+          value: String,
+          int_value: Integer,
+          operator: String
         },
         and: Array[
           {
@@ -3060,7 +3521,9 @@ module Aws::DataZone
       ?filters: {
         filter: {
           attribute: String,
-          value: String
+          value: String,
+          int_value: Integer,
+          operator: String
         },
         and: Array[
           {
@@ -3104,7 +3567,9 @@ module Aws::DataZone
       ?filters: {
         filter: {
           attribute: String,
-          value: String
+          value: String,
+          int_value: Integer,
+          operator: String
         },
         and: Array[
           {
@@ -3163,6 +3628,7 @@ module Aws::DataZone
       def id: () -> String?
       def status: () -> String?
       def type: () -> String?
+      def types: () -> Array[String]?
       def created_at: () -> Time?
       def created_by: () -> String?
       def owning_project_id: () -> String?
@@ -3170,6 +3636,7 @@ module Aws::DataZone
     def start_metadata_generation_run: (
       ?domain_identifier: String,
       ?type: String,
+      ?types: Array[String],
       ?target: {
         type: String,
         identifier: String,
@@ -3178,6 +3645,169 @@ module Aws::DataZone
       ?client_token: String,
       ?owning_project_identifier: String
     ) -> _StartMetadataGenerationRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartMetadataGenerationRunResponse
+
+    interface _StartNotebookExportResponse
+      include Smithy::Client::_Response[Types::StartNotebookExportOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def owning_project_id: () -> String?
+      def notebook_id: () -> String?
+      def file_format: () -> String?
+      def status: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+    end
+    def start_notebook_export: (
+      ?domain_identifier: String,
+      ?notebook_identifier: String,
+      ?owning_project_identifier: String,
+      ?file_format: String,
+      ?client_token: String
+    ) -> _StartNotebookExportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNotebookExportResponse
+
+    interface _StartNotebookImportResponse
+      include Smithy::Client::_Response[Types::StartNotebookImportOutput]
+      def notebook_id: () -> String?
+      def status: () -> String?
+      def domain_id: () -> String?
+      def owning_project_id: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def type: () -> String?
+      def source_location: () -> Types::SourceLocation?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+    end
+    def start_notebook_import: (
+      ?domain_identifier: String,
+      ?owning_project_identifier: String,
+      ?source_location: {
+        s3: String,
+        s3_files: {
+          bucket: String,
+          file_list: Array[
+            {
+              key: String
+            }
+          ]
+        }
+      },
+      ?name: String,
+      ?description: String,
+      ?type: String,
+      ?client_token: String
+    ) -> _StartNotebookImportResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNotebookImportResponse
+
+    interface _StartNotebookRunResponse
+      include Smithy::Client::_Response[Types::StartNotebookRunOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def owning_project_id: () -> String?
+      def notebook_id: () -> String?
+      def schedule_id: () -> String?
+      def status: () -> String?
+      def cell_order: () -> Array[Types::CellInformation]?
+      def metadata: () -> Hash[String, String]?
+      def parameters: () -> Hash[String, String]?
+      def compute_configuration: () -> Types::ComputeConfig?
+      def network_configuration: () -> Types::NetworkConfig?
+      def timeout_configuration: () -> Types::TimeoutConfig?
+      def environment_configuration: () -> Types::EnvironmentConfig?
+      def storage_configuration: () -> Types::StorageConfig?
+      def notification_configuration: () -> Types::NotificationConfig?
+      def trigger_source: () -> Types::TriggerSource?
+      def error: () -> Types::NotebookRunError?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def started_at: () -> Time?
+      def completed_at: () -> Time?
+    end
+    def start_notebook_run: (
+      ?domain_identifier: String,
+      ?owning_project_identifier: String,
+      ?notebook_identifier: String,
+      ?schedule_identifier: String,
+      ?compute_configuration: {
+        instance_type: String,
+        environment_version: String
+      },
+      ?network_configuration: {
+        network_access_type: String,
+        vpc_id: String,
+        subnet_ids: Array[String],
+        security_group_ids: Array[String]
+      },
+      ?timeout_configuration: {
+        run_timeout_in_minutes: Integer
+      },
+      ?notification_configuration: {
+        notify_on: Array[String]
+      },
+      ?trigger_source: {
+        type: String,
+        name: String
+      },
+      ?metadata: Hash[String, String],
+      ?parameters: Hash[String, String],
+      ?client_token: String
+    ) -> _StartNotebookRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNotebookRunResponse
+
+    interface _StartNotebookSyncResponse
+      include Smithy::Client::_Response[Types::StartNotebookSyncOutput]
+      def notebook_id: () -> String?
+      def status: () -> String?
+      def domain_id: () -> String?
+      def owning_project_id: () -> String?
+      def source_location: () -> Types::SourceLocation?
+      def git_metadata: () -> Types::GitMetadata?
+      def name: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+    end
+    def start_notebook_sync: (
+      ?domain_identifier: String,
+      ?owning_project_identifier: String,
+      ?source_location: {
+        s3: String,
+        s3_files: {
+          bucket: String,
+          file_list: Array[
+            {
+              key: String
+            }
+          ]
+        }
+      },
+      ?git_metadata: {
+        connection_id: String,
+        repository: String,
+        branch: String,
+        commit_hash: String,
+        file_name: String,
+        committed_at: Time,
+        commit_message: String
+      },
+      ?notebook_id: String,
+      ?name: String,
+      ?description: String,
+      ?client_token: String
+    ) -> _StartNotebookSyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNotebookSyncResponse
+
+    interface _StopNotebookRunResponse
+      include Smithy::Client::_Response[Types::StopNotebookRunOutput]
+      def id: () -> String?
+      def domain_id: () -> String?
+      def owning_project_id: () -> String?
+      def status: () -> String?
+    end
+    def stop_notebook_run: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?client_token: String
+    ) -> _StopNotebookRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StopNotebookRunResponse
 
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
@@ -3320,6 +3950,7 @@ module Aws::DataZone
 
     interface _UpdateConnectionResponse
       include Smithy::Client::_Response[Types::UpdateConnectionOutput]
+      def configurations: () -> Array[Types::Configuration]?
       def connection_id: () -> String?
       def description: () -> String?
       def domain_id: () -> String?
@@ -3330,8 +3961,15 @@ module Aws::DataZone
       def project_id: () -> String?
       def props: () -> Types::ConnectionPropertiesOutput?
       def type: () -> String?
+      def scope: () -> String?
     end
     def update_connection: (
+      ?configurations: Array[
+        {
+          classification: String,
+          properties: Hash[String, String]
+        }
+      ],
       ?domain_identifier: String,
       ?identifier: String,
       ?description: String,
@@ -3395,7 +4033,41 @@ module Aws::DataZone
         },
         s3_properties: {
           s3_uri: String,
-          s3_access_grant_location_id: String
+          s3_access_grant_location_id: String,
+          register_s3_access_grant_location: untyped
+        },
+        snowflake_properties: {
+          connectivity_properties_patch: {
+            description: untyped,
+            connection_properties: untyped,
+            authentication_configuration: untyped
+          },
+          snowflake_role: String,
+          lineage_sync: {
+            timezone: String,
+            enabled: untyped,
+            schedule: String
+          }
+        },
+        amazon_q_properties: {
+          is_enabled: untyped,
+          profile_arn: untyped,
+          auth_mode: untyped
+        },
+        mlflow_properties: {
+          tracking_server_arn: untyped
+        },
+        lakehouse_properties: {
+          glue_lineage_sync_enabled: untyped
+        },
+        vpc_properties: {
+          vpc_id: String,
+          subnet_ids: Array[String],
+          security_group_id: String
+        },
+        git_properties: {
+          code_connection_arn: untyped,
+          default_branch: untyped
         }
       }
     ) -> _UpdateConnectionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectionResponse
@@ -3559,6 +4231,7 @@ module Aws::DataZone
       def deployment_properties: () -> Types::DeploymentProperties?
       def environment_blueprint_id: () -> String?
       def environment_configuration_id: () -> String?
+      def environment_configuration_name: () -> String?
     end
     def update_environment: (
       ?domain_identifier: String,
@@ -3572,7 +4245,8 @@ module Aws::DataZone
           name: String,
           value: untyped
         }
-      ]
+      ],
+      ?environment_configuration_name: String
     ) -> _UpdateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentResponse
 
     interface _UpdateEnvironmentActionResponse
@@ -3607,6 +4281,7 @@ module Aws::DataZone
       def deployment_properties: () -> Types::DeploymentProperties?
       def user_parameters: () -> Array[Types::CustomParameter]?
       def glossary_terms: () -> Array[String]?
+      def blueprint_category: () -> String?
       def created_at: () -> Time?
       def updated_at: () -> Time?
     end
@@ -3629,7 +4304,8 @@ module Aws::DataZone
           is_optional: untyped,
           is_update_supported: untyped
         }
-      ]
+      ],
+      ?blueprint_category: String
     ) -> _UpdateEnvironmentBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentBlueprintResponse
 
     interface _UpdateEnvironmentProfileResponse
@@ -3713,12 +4389,61 @@ module Aws::DataZone
       def id: () -> String?
       def status: () -> String?
       def group_name: () -> String?
+      def role_principal_arn: () -> String?
+      def role_principal_id: () -> String?
     end
     def update_group_profile: (
       ?domain_identifier: String,
       ?group_identifier: String,
       ?status: String
     ) -> _UpdateGroupProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateGroupProfileResponse
+
+    interface _UpdateNotebookResponse
+      include Smithy::Client::_Response[Types::UpdateNotebookOutput]
+      def id: () -> String?
+      def name: () -> String?
+      def owning_project_id: () -> String?
+      def domain_id: () -> String?
+      def cell_order: () -> Array[Types::CellInformation]?
+      def status: () -> String?
+      def type: () -> String?
+      def description: () -> String?
+      def created_at: () -> Time?
+      def created_by: () -> String?
+      def updated_at: () -> Time?
+      def updated_by: () -> String?
+      def locked_by: () -> String?
+      def locked_at: () -> Time?
+      def lock_expires_at: () -> Time?
+      def compute_id: () -> String?
+      def metadata: () -> Hash[String, String]?
+      def parameters: () -> Hash[String, String]?
+      def environment_configuration: () -> Types::EnvironmentConfig?
+      def error: () -> Types::NotebookError?
+      def git_metadata: () -> Types::GitMetadata?
+    end
+    def update_notebook: (
+      ?domain_identifier: String,
+      ?identifier: String,
+      ?description: String,
+      ?status: String,
+      ?name: String,
+      ?cell_order: Array[
+        {
+        }
+      ],
+      ?type: String,
+      ?metadata: Hash[String, String],
+      ?parameters: Hash[String, String],
+      ?environment_configuration: {
+        image_version: String,
+        package_config: {
+          package_manager: String,
+          package_specification: untyped
+        }
+      },
+      ?client_token: String
+    ) -> _UpdateNotebookResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotebookResponse
 
     interface _UpdateProjectResponse
       include Smithy::Client::_Response[Types::UpdateProjectOutput]
@@ -3731,17 +4456,20 @@ module Aws::DataZone
       def created_by: () -> String?
       def created_at: () -> Time?
       def last_updated_at: () -> Time?
+      def resource_tags: () -> Array[Types::ResourceTag]?
       def glossary_terms: () -> Array[String]?
       def domain_unit_id: () -> String?
       def project_profile_id: () -> String?
       def user_parameters: () -> Array[Types::EnvironmentConfigurationUserParameter]?
       def environment_deployment_details: () -> Types::EnvironmentDeploymentDetails?
+      def project_category: () -> String?
     end
     def update_project: (
       ?domain_identifier: String,
       ?identifier: String,
       ?name: String,
       ?description: String,
+      ?resource_tags: Hash[String, String],
       ?glossary_terms: Array[String],
       ?domain_unit_id: String,
       ?environment_deployment_details: {
@@ -3782,6 +4510,9 @@ module Aws::DataZone
       def name: () -> String?
       def description: () -> String?
       def status: () -> String?
+      def project_resource_tags: () -> Array[Types::ResourceTagParameter]?
+      def allow_custom_project_resource_tags: () -> bool?
+      def project_resource_tags_description: () -> String?
       def environment_configurations: () -> Array[Types::EnvironmentConfiguration]?
       def created_by: () -> String?
       def created_at: () -> Time?
@@ -3794,6 +4525,15 @@ module Aws::DataZone
       ?name: String,
       ?description: String,
       ?status: String,
+      ?project_resource_tags: Array[
+        {
+          key: String,
+          value: String,
+          is_value_editable: bool
+        }
+      ],
+      ?allow_custom_project_resource_tags: bool,
+      ?project_resource_tags_description: String,
       ?environment_configurations: Array[
         {
           name: String,
@@ -3826,6 +4566,16 @@ module Aws::DataZone
       ],
       ?domain_unit_identifier: String
     ) -> _UpdateProjectProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateProjectProfileResponse
+
+    interface _UpdateRootDomainUnitOwnerResponse
+      include Smithy::Client::_Response[Types::UpdateRootDomainUnitOwnerOutput]
+    end
+    def update_root_domain_unit_owner: (
+      ?domain_identifier: String,
+      ?current_owner: String,
+      ?new_owner: String,
+      ?client_token: String
+    ) -> _UpdateRootDomainUnitOwnerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRootDomainUnitOwnerResponse
 
     interface _UpdateRuleResponse
       include Smithy::Client::_Response[Types::UpdateRuleOutput]
@@ -3867,6 +4617,9 @@ module Aws::DataZone
               type_revision: String
             }
           ]
+        },
+        glossary_term_enforcement_detail: {
+          required_glossary_term_ids: Array[String]
         }
       },
       ?include_child_domain_units: bool
@@ -3880,6 +4633,7 @@ module Aws::DataZone
       def domain_id: () -> String?
       def created_at: () -> Time?
       def updated_at: () -> Time?
+      def environment_id: () -> String?
       def subscription_target_id: () -> String?
       def granted_entity: () -> Types::GrantedEntity?
       def status: () -> String?
@@ -3937,6 +4691,7 @@ module Aws::DataZone
       def applicable_asset_types: () -> Array[String]?
       def subscription_target_config: () -> Array[Types::SubscriptionTargetForm]?
       def provider: () -> String?
+      def subscription_grant_creation_mode: () -> String?
     end
     def update_subscription_target: (
       ?domain_identifier: String,
@@ -3952,7 +4707,8 @@ module Aws::DataZone
         }
       ],
       ?manage_access_role: String,
-      ?provider: String
+      ?provider: String,
+      ?subscription_grant_creation_mode: String
     ) -> _UpdateSubscriptionTargetResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateSubscriptionTargetResponse
 
     interface _UpdateUserProfileResponse
@@ -3967,7 +4723,8 @@ module Aws::DataZone
       ?domain_identifier: String,
       ?user_identifier: String,
       ?type: String,
-      ?status: String
+      ?status: String,
+      ?session_name: String
     ) -> _UpdateUserProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateUserProfileResponse
   end
 end

@@ -234,6 +234,33 @@ module Aws::Inspector2
       ?tags: Hash[String, String]
     ) -> _CreateCodeSecurityScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCodeSecurityScanConfigurationResponse
 
+    interface _CreateConnectorResponse
+      include Smithy::Client::_Response[Types::CreateConnectorResponse]
+      def connector_arn: () -> String?
+    end
+    def create_connector: (
+      ?client_token: String,
+      ?name: String,
+      ?provider: String,
+      ?description: String,
+      ?provider_detail: {
+        azure: {
+          aws_config_connector_arn: String,
+          scope_configuration: {
+            vm_scanning: {
+              scope_type: String,
+              scope_values: Array[String]
+            },
+            container_image_scanning: untyped,
+            serverless_scanning: untyped
+          },
+          azure_regions: Array[String],
+          auto_install_vm_scanner: bool
+        }
+      },
+      ?tags: Hash[String, String]
+    ) -> _CreateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConnectorResponse
+
     interface _CreateFilterResponse
       include Smithy::Client::_Response[Types::CreateFilterOutput]
       def arn: () -> String?
@@ -330,7 +357,26 @@ module Aws::Inspector2
         code_vulnerability_file_path: untyped,
         epss_score: untyped,
         code_repository_project_name: untyped,
-        code_repository_provider_type: untyped
+        code_repository_provider_type: untyped,
+        cloud_provider: untyped,
+        cloud_provider_region: untyped,
+        cloud_provider_account_id: untyped,
+        cloud_provider_org_id: untyped,
+        cloud_vm_image_reference: untyped,
+        cloud_vm_network_id: untyped,
+        cloud_vm_subnet_ids: untyped,
+        cloud_image_repository_name: untyped,
+        cloud_image_registry: untyped,
+        cloud_image_digest: untyped,
+        cloud_image_tags: untyped,
+        cloud_image_pushed_at: untyped,
+        cloud_image_architecture: untyped,
+        cloud_image_last_in_use_at: untyped,
+        cloud_image_in_use_count: untyped,
+        cloud_serverless_function_name: untyped,
+        cloud_serverless_function_runtime: untyped,
+        cloud_serverless_function_last_modified_at: untyped,
+        cloud_serverless_function_execution_role: untyped
       },
       ?name: String,
       ?tags: Hash[String, String],
@@ -431,7 +477,26 @@ module Aws::Inspector2
         code_vulnerability_file_path: untyped,
         epss_score: untyped,
         code_repository_project_name: untyped,
-        code_repository_provider_type: untyped
+        code_repository_provider_type: untyped,
+        cloud_provider: untyped,
+        cloud_provider_region: untyped,
+        cloud_provider_account_id: untyped,
+        cloud_provider_org_id: untyped,
+        cloud_vm_image_reference: untyped,
+        cloud_vm_network_id: untyped,
+        cloud_vm_subnet_ids: untyped,
+        cloud_image_repository_name: untyped,
+        cloud_image_registry: untyped,
+        cloud_image_digest: untyped,
+        cloud_image_tags: untyped,
+        cloud_image_pushed_at: untyped,
+        cloud_image_architecture: untyped,
+        cloud_image_last_in_use_at: untyped,
+        cloud_image_in_use_count: untyped,
+        cloud_serverless_function_name: untyped,
+        cloud_serverless_function_runtime: untyped,
+        cloud_serverless_function_last_modified_at: untyped,
+        cloud_serverless_function_execution_role: untyped
       },
       ?report_format: String,
       ?s3_destination: {
@@ -465,7 +530,18 @@ module Aws::Inspector2
             value: untyped
           }
         ],
-        lambda_function_tags: untyped
+        lambda_function_tags: untyped,
+        cloud_provider: untyped,
+        cloud_provider_account_id: untyped,
+        cloud_provider_org_id: untyped,
+        cloud_provider_region: untyped,
+        cloud_vm_instance_tags: untyped,
+        cloud_container_image_tags: untyped,
+        cloud_container_repository_name: untyped,
+        cloud_container_registry_name: untyped,
+        cloud_serverless_function_name: untyped,
+        cloud_serverless_function_runtime: untyped,
+        cloud_serverless_function_tags: untyped
       },
       ?report_format: String,
       ?s3_destination: {
@@ -498,6 +574,13 @@ module Aws::Inspector2
     def delete_code_security_scan_configuration: (
       ?scan_configuration_arn: String
     ) -> _DeleteCodeSecurityScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteCodeSecurityScanConfigurationResponse
+
+    interface _DeleteConnectorResponse
+      include Smithy::Client::_Response[Types::DeleteConnectorResponse]
+    end
+    def delete_connector: (
+      ?connector_arn: String
+    ) -> _DeleteConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConnectorResponse
 
     interface _DeleteFilterResponse
       include Smithy::Client::_Response[Types::DeleteFilterOutput]
@@ -640,8 +723,8 @@ module Aws::Inspector2
       def status_reason: () -> String?
       def created_on: () -> Time?
       def last_update_on: () -> Time?
-      def tags: () -> Hash[String, String]?
       def authorization_url: () -> String?
+      def tags: () -> Hash[String, String]?
     end
     def get_code_security_integration: (
       ?integration_arn: String,
@@ -686,7 +769,9 @@ module Aws::Inspector2
       def ecr_configuration: () -> Types::EcrConfigurationState?
       def ec2_configuration: () -> Types::Ec2ConfigurationState?
     end
-    def get_configuration: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationResponse
+    def get_configuration: (
+      ?account_id: String
+    ) -> _GetConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationResponse
 
     interface _GetDelegatedAdminAccountResponse
       include Smithy::Client::_Response[Types::GetDelegatedAdminAccountOutput]
@@ -1019,6 +1104,59 @@ module Aws::Inspector2
       ?max_results: Integer
     ) -> _ListCodeSecurityScanConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCodeSecurityScanConfigurationsResponse
 
+    interface _ListConnectorScanConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListConnectorScanConfigurationsResponse]
+      def scan_configurations: () -> Array[Types::ConnectorScanConfigurationItem]?
+      def next_token: () -> String?
+    end
+    def list_connector_scan_configurations: (
+      ?aws_config_connector_arns: Array[String],
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListConnectorScanConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorScanConfigurationsResponse
+
+    interface _ListConnectorsResponse
+      include Smithy::Client::_Response[Types::ListConnectorsResponse]
+      def items: () -> Array[Types::Connector]?
+      def next_token: () -> String?
+    end
+    def list_connectors: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?filter_criteria: {
+        connector_arns: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        accounts: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        aws_config_connector_arns: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        connector_type: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ],
+        provider: Array[
+          {
+            comparison: String,
+            value: String
+          }
+        ]
+      }
+    ) -> _ListConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConnectorsResponse
+
     interface _ListCoverageResponse
       include Smithy::Client::_Response[Types::ListCoverageOutput]
       def next_token: () -> String?
@@ -1069,7 +1207,18 @@ module Aws::Inspector2
         code_repository_project_name: untyped,
         code_repository_provider_type: untyped,
         code_repository_provider_type_visibility: untyped,
-        last_scanned_commit_id: untyped
+        last_scanned_commit_id: untyped,
+        cloud_provider: untyped,
+        cloud_provider_account_id: untyped,
+        cloud_provider_region: untyped,
+        cloud_vm_instance_tags: untyped,
+        cloud_container_image_tags: untyped,
+        cloud_container_repository_name: untyped,
+        cloud_container_registry_name: untyped,
+        cloud_serverless_function_name: untyped,
+        cloud_serverless_function_runtime: untyped,
+        cloud_serverless_function_tags: untyped,
+        cloud_provider_org_id: untyped
       }
     ) -> _ListCoverageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCoverageResponse
 
@@ -1122,7 +1271,18 @@ module Aws::Inspector2
         code_repository_project_name: untyped,
         code_repository_provider_type: untyped,
         code_repository_provider_type_visibility: untyped,
-        last_scanned_commit_id: untyped
+        last_scanned_commit_id: untyped,
+        cloud_provider: untyped,
+        cloud_provider_account_id: untyped,
+        cloud_provider_region: untyped,
+        cloud_vm_instance_tags: untyped,
+        cloud_container_image_tags: untyped,
+        cloud_container_repository_name: untyped,
+        cloud_container_registry_name: untyped,
+        cloud_serverless_function_name: untyped,
+        cloud_serverless_function_runtime: untyped,
+        cloud_serverless_function_tags: untyped,
+        cloud_provider_org_id: untyped
       },
       ?group_by: String,
       ?next_token: String
@@ -1228,6 +1388,11 @@ module Aws::Inspector2
           repositories: untyped,
           resource_ids: untyped,
           layer_hashes: untyped,
+          cloud_providers: untyped,
+          cloud_account_ids: untyped,
+          cloud_org_ids: untyped,
+          cloud_regions: untyped,
+          cloud_partitions: untyped,
           sort_order: untyped,
           sort_by: String
         },
@@ -1245,9 +1410,9 @@ module Aws::Inspector2
           titles: untyped,
           vulnerability_ids: untyped,
           resource_type: untyped,
+          finding_type: untyped,
           sort_order: untyped,
-          sort_by: String,
-          finding_type: untyped
+          sort_by: String
         },
         lambda_layer_aggregation: {
           function_names: untyped,
@@ -1270,6 +1435,49 @@ module Aws::Inspector2
           sort_order: untyped,
           sort_by: String,
           resource_ids: untyped
+        },
+        vm_instance_aggregation: {
+          resource_ids: untyped,
+          operating_systems: untyped,
+          instance_tags: untyped,
+          vm_image_references: untyped,
+          cloud_providers: untyped,
+          cloud_partitions: untyped,
+          cloud_regions: untyped,
+          cloud_org_ids: untyped,
+          cloud_account_ids: untyped,
+          sort_order: untyped,
+          sort_by: String
+        },
+        container_image_aggregation: {
+          resource_ids: untyped,
+          image_digests: untyped,
+          repositories: untyped,
+          registries: untyped,
+          architectures: untyped,
+          image_tags: untyped,
+          cloud_providers: untyped,
+          cloud_partitions: untyped,
+          cloud_regions: untyped,
+          cloud_org_ids: untyped,
+          cloud_account_ids: untyped,
+          last_in_use_at: untyped,
+          in_use_count: untyped,
+          sort_order: untyped,
+          sort_by: String
+        },
+        serverless_function_aggregation: {
+          resource_ids: untyped,
+          function_names: untyped,
+          runtimes: untyped,
+          function_tags: untyped,
+          cloud_providers: untyped,
+          cloud_partitions: untyped,
+          cloud_regions: untyped,
+          cloud_org_ids: untyped,
+          cloud_account_ids: untyped,
+          sort_order: untyped,
+          sort_by: String
         }
       }
     ) -> _ListFindingAggregationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListFindingAggregationsResponse
@@ -1371,7 +1579,26 @@ module Aws::Inspector2
         code_vulnerability_file_path: untyped,
         epss_score: untyped,
         code_repository_project_name: untyped,
-        code_repository_provider_type: untyped
+        code_repository_provider_type: untyped,
+        cloud_provider: untyped,
+        cloud_provider_region: untyped,
+        cloud_provider_account_id: untyped,
+        cloud_provider_org_id: untyped,
+        cloud_vm_image_reference: untyped,
+        cloud_vm_network_id: untyped,
+        cloud_vm_subnet_ids: untyped,
+        cloud_image_repository_name: untyped,
+        cloud_image_registry: untyped,
+        cloud_image_digest: untyped,
+        cloud_image_tags: untyped,
+        cloud_image_pushed_at: untyped,
+        cloud_image_architecture: untyped,
+        cloud_image_last_in_use_at: untyped,
+        cloud_image_in_use_count: untyped,
+        cloud_serverless_function_name: untyped,
+        cloud_serverless_function_runtime: untyped,
+        cloud_serverless_function_last_modified_at: untyped,
+        cloud_serverless_function_execution_role: untyped
       },
       ?sort_criteria: {
         field: String,
@@ -1593,15 +1820,57 @@ module Aws::Inspector2
       include Smithy::Client::_Response[Types::UpdateConfigurationOutput]
     end
     def update_configuration: (
+      ?account_id: String,
       ?ecr_configuration: {
         rescan_duration: String,
         pull_date_rescan_duration: String,
         pull_date_rescan_mode: String
       },
       ?ec2_configuration: {
-        scan_mode: String
+        scan_mode: String,
+        activate_vm_scanner: bool
+      },
+      ?update_configuration_inheritance: {
+        ec2_configuration: String,
+        ecr_configuration: untyped
       }
     ) -> _UpdateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConfigurationResponse
+
+    interface _UpdateConnectorResponse
+      include Smithy::Client::_Response[Types::UpdateConnectorResponse]
+      def connector_arn: () -> String?
+    end
+    def update_connector: (
+      ?connector_arn: String,
+      ?description: String,
+      ?provider_detail: {
+        azure: {
+          azure_regions: Array[String],
+          scope_configuration: {
+            vm_scanning: {
+              scope_type: String,
+              scope_values: Array[String]
+            },
+            container_image_scanning: untyped,
+            serverless_scanning: untyped
+          },
+          auto_install_vm_scanner: bool
+        }
+      }
+    ) -> _UpdateConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorResponse
+
+    interface _UpdateConnectorScanConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateConnectorScanConfigurationResponse]
+    end
+    def update_connector_scan_configuration: (
+      ?aws_config_connector_arn: String,
+      ?scan_configuration: {
+        container_image_scanning: {
+          push_duration: String,
+          pull_duration: String
+        }
+      }
+    ) -> _UpdateConnectorScanConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateConnectorScanConfigurationResponse
 
     interface _UpdateEc2DeepInspectionConfigurationResponse
       include Smithy::Client::_Response[Types::UpdateEc2DeepInspectionConfigurationResponse]
@@ -1720,7 +1989,26 @@ module Aws::Inspector2
         code_vulnerability_file_path: untyped,
         epss_score: untyped,
         code_repository_project_name: untyped,
-        code_repository_provider_type: untyped
+        code_repository_provider_type: untyped,
+        cloud_provider: untyped,
+        cloud_provider_region: untyped,
+        cloud_provider_account_id: untyped,
+        cloud_provider_org_id: untyped,
+        cloud_vm_image_reference: untyped,
+        cloud_vm_network_id: untyped,
+        cloud_vm_subnet_ids: untyped,
+        cloud_image_repository_name: untyped,
+        cloud_image_registry: untyped,
+        cloud_image_digest: untyped,
+        cloud_image_tags: untyped,
+        cloud_image_pushed_at: untyped,
+        cloud_image_architecture: untyped,
+        cloud_image_last_in_use_at: untyped,
+        cloud_image_in_use_count: untyped,
+        cloud_serverless_function_name: untyped,
+        cloud_serverless_function_runtime: untyped,
+        cloud_serverless_function_last_modified_at: untyped,
+        cloud_serverless_function_execution_role: untyped
       },
       ?name: String,
       ?filter_arn: String,

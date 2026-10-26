@@ -55,6 +55,18 @@ module Aws::Evs
       ?allocation_id: String
     ) -> _AssociateEipToVlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AssociateEipToVlanResponse
 
+    interface _CreateEntitlementResponse
+      include Smithy::Client::_Response[Types::CreateEntitlementResponse]
+      def entitlements: () -> Array[Types::VmEntitlement]?
+    end
+    def create_entitlement: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?connector_id: String,
+      ?entitlement_type: String,
+      ?vm_ids: Array[String]
+    ) -> _CreateEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEntitlementResponse
+
     interface _CreateEnvironmentResponse
       include Smithy::Client::_Response[Types::CreateEnvironmentResponse]
       def environment: () -> Types::Environment?
@@ -71,12 +83,6 @@ module Aws::Evs
       ?service_access_subnet_id: String,
       ?vcf_version: String,
       ?terms_accepted: bool,
-      ?license_info: Array[
-        {
-          solution_key: String,
-          vsan_key: String
-        }
-      ],
       ?initial_vlans: {
         vmk_management: {
           cidr: String
@@ -93,6 +99,15 @@ module Aws::Evs
         is_hcx_public: bool,
         hcx_network_acl_id: String
       },
+      ?connectivity_info: {
+        private_route_server_peerings: Array[String]
+      },
+      ?license_info: Array[
+        {
+          solution_key: String,
+          vsan_key: String
+        }
+      ],
       ?hosts: Array[
         {
           host_name: String,
@@ -102,9 +117,6 @@ module Aws::Evs
           dedicated_host_id: String
         }
       ],
-      ?connectivity_info: {
-        private_route_server_peerings: Array[String]
-      },
       ?vcf_hostnames: {
         v_center: String,
         nsx: untyped,
@@ -118,6 +130,18 @@ module Aws::Evs
       },
       ?site_id: String
     ) -> _CreateEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentResponse
+
+    interface _CreateEnvironmentConnectorResponse
+      include Smithy::Client::_Response[Types::CreateEnvironmentConnectorResponse]
+      def connector: () -> Types::Connector?
+    end
+    def create_environment_connector: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?type: String,
+      ?appliance_fqdn: String,
+      ?secret_identifier: String
+    ) -> _CreateEnvironmentConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentConnectorResponse
 
     interface _CreateEnvironmentHostResponse
       include Smithy::Client::_Response[Types::CreateEnvironmentHostResponse]
@@ -133,8 +157,21 @@ module Aws::Evs
         instance_type: String,
         placement_group_id: String,
         dedicated_host_id: String
-      }
+      },
+      ?esx_version: String
     ) -> _CreateEnvironmentHostResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateEnvironmentHostResponse
+
+    interface _DeleteEntitlementResponse
+      include Smithy::Client::_Response[Types::DeleteEntitlementResponse]
+      def entitlements: () -> Array[Types::VmEntitlement]?
+    end
+    def delete_entitlement: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?connector_id: String,
+      ?entitlement_type: String,
+      ?vm_ids: Array[String]
+    ) -> _DeleteEntitlementResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEntitlementResponse
 
     interface _DeleteEnvironmentResponse
       include Smithy::Client::_Response[Types::DeleteEnvironmentResponse]
@@ -144,6 +181,17 @@ module Aws::Evs
       ?client_token: String,
       ?environment_id: String
     ) -> _DeleteEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentResponse
+
+    interface _DeleteEnvironmentConnectorResponse
+      include Smithy::Client::_Response[Types::DeleteEnvironmentConnectorResponse]
+      def connector: () -> Types::Connector?
+      def environment_summary: () -> Types::EnvironmentSummary?
+    end
+    def delete_environment_connector: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?connector_id: String
+    ) -> _DeleteEnvironmentConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteEnvironmentConnectorResponse
 
     interface _DeleteEnvironmentHostResponse
       include Smithy::Client::_Response[Types::DeleteEnvironmentHostResponse]
@@ -167,6 +215,22 @@ module Aws::Evs
       ?association_id: String
     ) -> _DisassociateEipFromVlanResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DisassociateEipFromVlanResponse
 
+    interface _GetAccountSettingsResponse
+      include Smithy::Client::_Response[Types::GetAccountSettingsResponse]
+      def settings: () -> Array[Types::AccountSetting]?
+    end
+    def get_account_settings: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAccountSettingsResponse
+
+    interface _GetDepotUrlResponse
+      include Smithy::Client::_Response[Types::GetDepotUrlResponse]
+      def depot_url: () -> String?
+      def token: () -> String?
+    end
+    def get_depot_url: (
+      ?environment_id: String,
+      ?rotate: bool
+    ) -> _GetDepotUrlResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDepotUrlResponse
+
     interface _GetEnvironmentResponse
       include Smithy::Client::_Response[Types::GetEnvironmentResponse]
       def environment: () -> Types::Environment?
@@ -174,6 +238,24 @@ module Aws::Evs
     def get_environment: (
       ?environment_id: String
     ) -> _GetEnvironmentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetEnvironmentResponse
+
+    interface _GetVersionsResponse
+      include Smithy::Client::_Response[Types::GetVersionsResponse]
+      def vcf_versions: () -> Array[Types::VcfVersionInfo]?
+      def instance_type_esx_versions: () -> Array[Types::InstanceTypeEsxVersionsInfo]?
+    end
+    def get_versions: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetVersionsResponse
+
+    interface _ListEnvironmentConnectorsResponse
+      include Smithy::Client::_Response[Types::ListEnvironmentConnectorsResponse]
+      def next_token: () -> String?
+      def connectors: () -> Array[Types::Connector]?
+    end
+    def list_environment_connectors: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?environment_id: String
+    ) -> _ListEnvironmentConnectorsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListEnvironmentConnectorsResponse
 
     interface _ListEnvironmentHostsResponse
       include Smithy::Client::_Response[Types::ListEnvironmentHostsResponse]
@@ -216,6 +298,32 @@ module Aws::Evs
       ?resource_arn: String
     ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
 
+    interface _ListVmEntitlementsResponse
+      include Smithy::Client::_Response[Types::ListVmEntitlementsResponse]
+      def next_token: () -> String?
+      def entitlements: () -> Array[Types::VmEntitlement]?
+    end
+    def list_vm_entitlements: (
+      ?next_token: String,
+      ?max_results: Integer,
+      ?environment_id: String,
+      ?connector_id: String,
+      ?entitlement_type: String
+    ) -> _ListVmEntitlementsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListVmEntitlementsResponse
+
+    interface _PutAccountSettingsResponse
+      include Smithy::Client::_Response[Types::PutAccountSettingsResponse]
+      def settings: () -> Array[Types::AccountSetting]?
+    end
+    def put_account_settings: (
+      ?settings: Array[
+        {
+          name: String,
+          value: String
+        }
+      ]
+    ) -> _PutAccountSettingsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAccountSettingsResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
     end
@@ -231,5 +339,17 @@ module Aws::Evs
       ?resource_arn: String,
       ?tag_keys: Array[String]
     ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateEnvironmentConnectorResponse
+      include Smithy::Client::_Response[Types::UpdateEnvironmentConnectorResponse]
+      def connector: () -> Types::Connector?
+    end
+    def update_environment_connector: (
+      ?client_token: String,
+      ?environment_id: String,
+      ?connector_id: String,
+      ?appliance_fqdn: String,
+      ?secret_identifier: String
+    ) -> _UpdateEnvironmentConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateEnvironmentConnectorResponse
   end
 end

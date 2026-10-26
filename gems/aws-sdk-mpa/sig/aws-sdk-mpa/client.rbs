@@ -196,6 +196,7 @@ module Aws::MPA
       def requester_comment: () -> String?
       def action_completion_strategy: () -> String?
       def approver_responses: () -> Array[Types::GetSessionResponseApproverResponse]?
+      def additional_security_requirements: () -> Array[String]?
     end
     def get_session: (
       ?session_arn: String
@@ -289,6 +290,15 @@ module Aws::MPA
       ?arn: String
     ) -> _StartActiveApprovalTeamDeletionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartActiveApprovalTeamDeletionResponse
 
+    interface _StartApprovalTeamBaselineResponse
+      include Smithy::Client::_Response[Types::StartApprovalTeamBaselineResponse]
+      def baseline_session_arn: () -> String?
+    end
+    def start_approval_team_baseline: (
+      ?arn: String,
+      ?approver_ids: Array[String]
+    ) -> _StartApprovalTeamBaselineResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartApprovalTeamBaselineResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceResponse]
     end
@@ -322,7 +332,8 @@ module Aws::MPA
         }
       ],
       ?description: String,
-      ?arn: String
+      ?arn: String,
+      ?update_actions: Array[String]
     ) -> _UpdateApprovalTeamResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateApprovalTeamResponse
   end
 end

@@ -144,18 +144,18 @@ module Aws::IoTWireless
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -645,6 +645,10 @@ module Aws::IoTWireless
     #       participating_gateways: {
     #         gateway_list: ["WirelessGatewayId"],
     #         transmission_interval: 1
+    #       },
+    #       default_session_parameters: {
+    #         dl_dr: 1,
+    #         dl_freq: 1
     #       }
     #     },
     #     tags: [
@@ -818,8 +822,7 @@ module Aws::IoTWireless
     #   <p>The tags to attach to the new wireless device. Tags are metadata that you can use to
     #               manage a resource.</p>
     # @option params [String] :positioning
-    #   <p>FPort values for the GNSS, stream, and ClockSync functions of the positioning
-    #               information.</p>
+    #   <p>The integration status of the Device Location feature for LoRaWAN and Sidewalk devices.</p>
     # @option params [Types::SidewalkCreateWirelessDevice] :sidewalk
     #   <p>The device configuration information to use to create the Sidewalk device.</p>
     # @example Request syntax with placeholder values
@@ -888,7 +891,11 @@ module Aws::IoTWireless
     #     ],
     #     positioning: "Enabled" # One of: ["Enabled", "Disabled"],
     #     sidewalk: {
-    #       device_profile_id: "DeviceProfileId"
+    #       device_profile_id: "DeviceProfileId",
+    #       positioning: {
+    #         destination_name: "DestinationName"
+    #       },
+    #       sidewalk_manufacturing_sn: "SidewalkManufacturingSn"
     #     }
     #   }
     #   options = {}
@@ -1820,6 +1827,10 @@ module Aws::IoTWireless
     #       participating_gateways: {
     #         gateway_list: ["WirelessGatewayId"],
     #         transmission_interval: 1
+    #       },
+    #       default_session_parameters: {
+    #         dl_dr: 1,
+    #         dl_freq: 1
     #       }
     #     },
     #     created_at: Time.now
@@ -1921,7 +1932,7 @@ module Aws::IoTWireless
     # <p>Get the position information for a given resource.</p>
     #          <important>
     #             <p>This action is no longer supported. Calls to retrieve the position information
-    #                 should use the <a href="https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html">GetResourcePosition</a> API operation instead.</p>
+    #                 should use the <a href="https://docs.aws.amazon.com/iot-wireless/latest/apireference/API_GetResourcePosition.html">GetResourcePosition</a> API operation instead.</p>
     #          </important>
     # @param [Hash, Types::GetPositionRequest] params
     # @option params [String] :resource_identifier
@@ -1959,7 +1970,7 @@ module Aws::IoTWireless
     # <p>Get position configuration for a given resource.</p>
     #          <important>
     #             <p>This action is no longer supported. Calls to retrieve the position configuration
-    #                 should use the <a href="https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html">GetResourcePosition</a> API operation instead.</p>
+    #                 should use the <a href="https://docs.aws.amazon.com/iot-wireless/latest/apireference/API_GetResourcePosition.html">GetResourcePosition</a> API operation instead.</p>
     #          </important>
     # @param [Hash, Types::GetPositionConfigurationRequest] params
     # @option params [String] :resource_identifier
@@ -2010,11 +2021,18 @@ module Aws::IoTWireless
     # @option params [Types::Gnss] :gnss
     #   <p>Retrieves an estimated device position by resolving the global navigation satellite
     #               system (GNSS) scan data. The position is resolved using the GNSS solver powered by LoRa
-    #               Cloud.</p>
+    #               Cloud. This field is mutually exclusive with the GnssMultiFrame field.</p>
+    # @option params [Types::GnssMultiFrame] :gnss_multi_frame
+    #   <p>Retrieves an estimated device position by resolving multiple global navigation
+    #               satellite system (GNSS) scan captures. The position is resolved using the multi-frame
+    #               GNSS solver powered by LoRa Cloud. This field is mutually exclusive with the Gnss
+    #               field.</p>
     # @option params [Time] :timestamp
     #   <p>Optional information that specifies the time when the position information will be
     #               resolved. It uses the Unix timestamp format. If not specified, the time at which the
     #               request was received will be used.</p>
+    # @option params [Types::AdvancedConfiguration] :advanced_configuration
+    #   <p>Optional configuration for customizing position measurement data.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     wi_fi_access_points: [
@@ -2156,7 +2174,24 @@ module Aws::IoTWireless
     #       assist_altitude: 1.0,
     #       use2_d_solver: false
     #     },
-    #     timestamp: Time.now
+    #     gnss_multi_frame: {
+    #       captures: [ # required
+    #         {
+    #           payload: "GnssNav", # required
+    #           capture_time: 1.0
+    #         }
+    #       ],
+    #       capture_time_accuracy: 1.0,
+    #       assist_position: [1.0],
+    #       assist_altitude: 1.0,
+    #       use2_d_solver: false
+    #     },
+    #     timestamp: Time.now,
+    #     advanced_configuration: {
+    #       wi_fi_cellular: {
+    #         confidence_percent: 1
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.get_position_estimate(params, options)
@@ -2451,7 +2486,10 @@ module Aws::IoTWireless
     #       ],
     #       device_profile_id: "DeviceProfileId",
     #       certificate_id: "DakCertificateId",
-    #       status: "PROVISIONED" # One of: ["PROVISIONED", "REGISTERED", "ACTIVATED", "UNKNOWN"]
+    #       status: "PROVISIONED" # One of: ["PROVISIONED", "REGISTERED", "ACTIVATED", "UNKNOWN"],
+    #       positioning: {
+    #         destination_name: "DestinationName"
+    #       }
     #     },
     #     positioning: "Enabled" # One of: ["Enabled", "Disabled"]
     #   }
@@ -2478,9 +2516,13 @@ module Aws::IoTWireless
     #     id: "ImportTaskId",
     #     arn: "ImportTaskArn",
     #     destination_name: "DestinationName",
+    #     positioning: "Enabled" # One of: ["Enabled", "Disabled"],
     #     sidewalk: {
     #       device_creation_file_list: ["DeviceCreationFile"],
-    #       role: "Role"
+    #       role: "Role",
+    #       positioning: {
+    #         destination_name: "DestinationName"
+    #       }
     #     },
     #     creation_time: Time.now,
     #     status: "INITIALIZING" # One of: ["INITIALIZING", "INITIALIZED", "PENDING", "COMPLETE", "FAILED", "DELETING"],
@@ -2828,6 +2870,12 @@ module Aws::IoTWireless
     #   {
     #     next_token: "NextToken",
     #     destination_name: "DestinationName",
+    #     positioning: "Enabled" # One of: ["Enabled", "Disabled"],
+    #     sidewalk: {
+    #       positioning: {
+    #         destination_name: "DestinationName"
+    #       }
+    #     },
     #     imported_wireless_device_list: [
     #       {
     #         sidewalk: {
@@ -3081,7 +3129,7 @@ module Aws::IoTWireless
     # <p>List position configurations for a given resource, such as positioning solvers.</p>
     #          <important>
     #             <p>This action is no longer supported. Calls to retrieve position information should
-    #                 use the <a href="https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html">GetResourcePosition</a> API operation instead.</p>
+    #                 use the <a href="https://docs.aws.amazon.com/iot-wireless/latest/apireference/API_GetResourcePosition.html">GetResourcePosition</a> API operation instead.</p>
     #          </important>
     # @param [Hash, Types::ListPositionConfigurationsRequest] params
     # @option params [String] :resource_type
@@ -3240,7 +3288,8 @@ module Aws::IoTWireless
       request.send_request(options)
     end
 
-    # <p>List wireless devices that have been added to an import task.</p>
+    # <p>List of import tasks and summary information of onboarding status of devices in each
+    #             import task.</p>
     # @param [Hash, Types::ListWirelessDeviceImportTasksRequest] params
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return in this operation.</p>
@@ -3263,9 +3312,13 @@ module Aws::IoTWireless
     #         id: "ImportTaskId",
     #         arn: "ImportTaskArn",
     #         destination_name: "DestinationName",
+    #         positioning: "Enabled" # One of: ["Enabled", "Disabled"],
     #         sidewalk: {
     #           device_creation_file_list: ["DeviceCreationFile"],
-    #           role: "Role"
+    #           role: "Role",
+    #           positioning: {
+    #             destination_name: "DestinationName"
+    #           }
     #         },
     #         creation_time: Time.now,
     #         status: "INITIALIZING" # One of: ["INITIALIZING", "INITIALIZED", "PENDING", "COMPLETE", "FAILED", "DELETING"],
@@ -3292,7 +3345,7 @@ module Aws::IoTWireless
     #               response; otherwise <b>null</b> to receive the first set of
     #               results.</p>
     # @option params [String] :destination_name
-    #   <p>A filter to list only the wireless devices that use this destination.</p>
+    #   <p>A filter to list only the wireless devices that use as uplink destination.</p>
     # @option params [String] :device_profile_id
     #   <p>A filter to list only the wireless devices that use this device profile.</p>
     # @option params [String] :service_profile_id
@@ -3342,11 +3395,15 @@ module Aws::IoTWireless
     #             }
     #           ],
     #           device_profile_id: "DeviceProfileId",
-    #           status: "PROVISIONED" # One of: ["PROVISIONED", "REGISTERED", "ACTIVATED", "UNKNOWN"]
+    #           status: "PROVISIONED" # One of: ["PROVISIONED", "REGISTERED", "ACTIVATED", "UNKNOWN"],
+    #           positioning: {
+    #             destination_name: "DestinationName"
+    #           }
     #         },
     #         fuota_device_status: "Initial" # One of: ["Initial", "Package_Not_Supported", "FragAlgo_unsupported", "Not_enough_memory", "FragIndex_unsupported", "Wrong_descriptor", "SessionCnt_replay", "MissingFrag", "MemoryError", "MICError", "Successful", "Device_exist_in_conflict_fuota_task"],
     #         multicast_device_status: "MulticastDeviceStatus",
-    #         mc_group_id: 1
+    #         mc_group_id: 1,
+    #         positioning: "Enabled" # One of: ["Enabled", "Disabled"]
     #       }
     #     ]
     #   }
@@ -3456,7 +3513,7 @@ module Aws::IoTWireless
     # <p>Put position configuration for a given resource.</p>
     #          <important>
     #             <p>This action is no longer supported. Calls to update the position configuration
-    #                 should use the <a href="https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateResourcePosition.html">UpdateResourcePosition</a> API operation instead.</p>
+    #                 should use the <a href="https://docs.aws.amazon.com/iot-wireless/latest/apireference/API_UpdateResourcePosition.html">UpdateResourcePosition</a> API operation instead.</p>
     #          </important>
     # @param [Hash, Types::PutPositionConfigurationRequest] params
     # @option params [String] :resource_identifier
@@ -3784,6 +3841,8 @@ module Aws::IoTWireless
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tag to attach to the specified resource. Tags are metadata that you can use to
     #               manage a resource.</p>
+    # @option params [String] :positioning
+    #   <p>The integration status of the Device Location feature for Sidewalk devices.</p>
     # @option params [Types::SidewalkSingleStartImportInfo] :sidewalk
     #   <p>The Sidewalk-related parameters for importing a single wireless device.</p>
     # @example Request syntax with placeholder values
@@ -3797,8 +3856,12 @@ module Aws::IoTWireless
     #         value: "TagValue", # required
     #       }
     #     ],
+    #     positioning: "Enabled" # One of: ["Enabled", "Disabled"],
     #     sidewalk: { # required
-    #       sidewalk_manufacturing_sn: "SidewalkManufacturingSn"
+    #       sidewalk_manufacturing_sn: "SidewalkManufacturingSn",
+    #       positioning: {
+    #         destination_name: "DestinationName"
+    #       }
     #     }
     #   }
     #   options = {}
@@ -3833,6 +3896,8 @@ module Aws::IoTWireless
     # @option params [Array<Types::Tag>] :tags
     #   <p>The tag to attach to the specified resource. Tags are metadata that you can use to
     #               manage a resource.</p>
+    # @option params [String] :positioning
+    #   <p>The integration status of the Device Location feature for Sidewalk devices.</p>
     # @option params [Types::SidewalkStartImportInfo] :sidewalk
     #   <p>The Sidewalk-related parameters for importing wireless devices that need to be
     #               provisioned in bulk.</p>
@@ -3846,9 +3911,13 @@ module Aws::IoTWireless
     #         value: "TagValue", # required
     #       }
     #     ],
+    #     positioning: "Enabled" # One of: ["Enabled", "Disabled"],
     #     sidewalk: { # required
     #       device_creation_file: "DeviceCreationFile",
-    #       role: "Role"
+    #       role: "Role",
+    #       positioning: {
+    #         destination_name: "DestinationName"
+    #       }
     #     }
     #   }
     #   options = {}
@@ -4192,6 +4261,10 @@ module Aws::IoTWireless
     #       participating_gateways: {
     #         gateway_list: ["WirelessGatewayId"],
     #         transmission_interval: 1
+    #       },
+    #       default_session_parameters: {
+    #         dl_dr: 1,
+    #         dl_freq: 1
     #       }
     #     }
     #   }
@@ -4289,7 +4362,7 @@ module Aws::IoTWireless
     # <p>Update the position information of a resource.</p>
     #          <important>
     #             <p>This action is no longer supported. Calls to update the position information
-    #                 should use the <a href="https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_UpdateResourcePosition.html">UpdateResourcePosition</a> API operation instead.</p>
+    #                 should use the <a href="https://docs.aws.amazon.com/iot-wireless/latest/apireference/API_UpdateResourcePosition.html">UpdateResourcePosition</a> API operation instead.</p>
     #          </important>
     # @param [Hash, Types::UpdatePositionRequest] params
     # @option params [String] :resource_identifier
@@ -4433,8 +4506,9 @@ module Aws::IoTWireless
     # @option params [Types::LoRaWANUpdateDevice] :lo_ra_wan
     #   <p>The updated wireless device's configuration.</p>
     # @option params [String] :positioning
-    #   <p>FPort values for the GNSS, stream, and ClockSync functions of the positioning
-    #               information.</p>
+    #   <p>The integration status of the Device Location feature for LoRaWAN and Sidewalk devices.</p>
+    # @option params [Types::SidewalkUpdateWirelessDevice] :sidewalk
+    #   <p>The updated sidewalk properties.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     id: "WirelessDeviceId", # required
@@ -4465,7 +4539,12 @@ module Aws::IoTWireless
     #         ]
     #       }
     #     },
-    #     positioning: "Enabled" # One of: ["Enabled", "Disabled"]
+    #     positioning: "Enabled" # One of: ["Enabled", "Disabled"],
+    #     sidewalk: {
+    #       positioning: {
+    #         destination_name: "DestinationName"
+    #       }
+    #     }
     #   }
     #   options = {}
     #   response = client.update_wireless_device(params, options)

@@ -144,18 +144,18 @@ module Aws::Budgets
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -316,6 +316,11 @@ module Aws::Budgets
     #           key: "CostCategoryName",
     #           values: ["Value"],
     #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
+    #         },
+    #         product_attributes: {
+    #           key: "ProductAttributeName", # required
+    #           values: ["Value"],
+    #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
     #         }
     #       },
     #       metrics: ["BlendedCost" # One of: ["BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"]],
@@ -370,6 +375,8 @@ module Aws::Budgets
     # @option params [String] :budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     # @option params [String] :notification_type
     #   <p> The type of a notification. It must be ACTUAL or FORECASTED.</p>
     # @option params [String] :action_type
@@ -560,6 +567,8 @@ module Aws::Budgets
     # @option params [String] :budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     # @option params [String] :action_id
     #   <p>
     #            A system-generated universally unique identifier (UUID) for the action.
@@ -800,6 +809,11 @@ module Aws::Budgets
     #           key: "CostCategoryName",
     #           values: ["Value"],
     #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
+    #         },
+    #         product_attributes: {
+    #           key: "ProductAttributeName", # required
+    #           values: ["Value"],
+    #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
     #         }
     #       },
     #       metrics: ["BlendedCost" # One of: ["BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"]],
@@ -826,6 +840,8 @@ module Aws::Budgets
     # @option params [String] :budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     # @option params [String] :action_id
     #   <p>
     #            A system-generated universally unique identifier (UUID) for the action.
@@ -895,6 +911,8 @@ module Aws::Budgets
     # @option params [String] :budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     # @option params [String] :action_id
     #   <p>
     #            A system-generated universally unique identifier (UUID) for the action.
@@ -1056,6 +1074,8 @@ module Aws::Budgets
     # @option params [String] :budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     # @option params [Integer] :max_results
     #   <p> An integer that represents how many entries a paginated response contains. The
     #   			maximum is 100.</p>
@@ -1168,6 +1188,8 @@ module Aws::Budgets
     # @option params [String] :budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     # @option params [Types::TimePeriod] :time_period
     #   <p>Retrieves how often the budget went into an <code>ALARM</code> state for the specified time period.</p>
     # @option params [Integer] :max_results
@@ -1227,7 +1249,43 @@ module Aws::Budgets
     #             end: Time.now
     #           }
     #         }
-    #       ]
+    #       ],
+    #       filter_expression: {
+    #         or: [
+    #           {
+    #             # recursive Expression
+    #           }
+    #         ],
+    #         and: [
+    #           {
+    #             # recursive Expression
+    #           }
+    #         ],
+    #         not: {
+    #           # recursive Expression
+    #         },
+    #         dimensions: {
+    #           key: "AZ" # One of: ["AZ", "INSTANCE_TYPE", "LINKED_ACCOUNT", "LINKED_ACCOUNT_NAME", "OPERATION", "PURCHASE_TYPE", "REGION", "SERVICE", "SERVICE_CODE", "USAGE_TYPE", "USAGE_TYPE_GROUP", "RECORD_TYPE", "OPERATING_SYSTEM", "TENANCY", "SCOPE", "PLATFORM", "SUBSCRIPTION_ID", "LEGAL_ENTITY_NAME", "INVOICING_ENTITY", "DEPLOYMENT_OPTION", "DATABASE_ENGINE", "CACHE_ENGINE", "INSTANCE_TYPE_FAMILY", "BILLING_ENTITY", "RESERVATION_ID", "RESOURCE_ID", "RIGHTSIZING_TYPE", "SAVINGS_PLANS_TYPE", "SAVINGS_PLAN_ARN", "PAYMENT_OPTION", "RESERVATION_MODIFIED", "TAG_KEY", "COST_CATEGORY_NAME"], # required
+    #           values: ["Value"], # required
+    #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
+    #         },
+    #         tags: {
+    #           key: "TagKey",
+    #           values: ["Value"],
+    #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
+    #         },
+    #         cost_categories: {
+    #           key: "CostCategoryName",
+    #           values: ["Value"],
+    #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
+    #         },
+    #         product_attributes: {
+    #           key: "ProductAttributeName", # required
+    #           values: ["Value"],
+    #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
+    #         }
+    #       },
+    #       metrics: ["BlendedCost" # One of: ["BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"]]
     #     },
     #     next_token: "GenericString"
     #   }
@@ -1349,6 +1407,11 @@ module Aws::Budgets
     #             key: "CostCategoryName",
     #             values: ["Value"],
     #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
+    #           },
+    #           product_attributes: {
+    #             key: "ProductAttributeName", # required
+    #             values: ["Value"],
+    #             match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
     #           }
     #         },
     #         metrics: ["BlendedCost" # One of: ["BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"]],
@@ -1462,6 +1525,8 @@ module Aws::Budgets
     # @option params [String] :budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     # @option params [String] :action_id
     #   <p>
     #            A system-generated universally unique identifier (UUID) for the action.
@@ -1670,6 +1735,11 @@ module Aws::Budgets
     #           key: "CostCategoryName",
     #           values: ["Value"],
     #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
+    #         },
+    #         product_attributes: {
+    #           key: "ProductAttributeName", # required
+    #           values: ["Value"],
+    #           match_options: ["EQUALS" # One of: ["EQUALS", "ABSENT", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "GREATER_THAN_OR_EQUAL", "CASE_SENSITIVE", "CASE_INSENSITIVE"]]
     #         }
     #       },
     #       metrics: ["BlendedCost" # One of: ["BlendedCost", "UnblendedCost", "AmortizedCost", "NetUnblendedCost", "NetAmortizedCost", "UsageQuantity", "NormalizedUsageAmount", "Hours"]],
@@ -1701,6 +1771,8 @@ module Aws::Budgets
     # @option params [String] :budget_name
     #   <p> A string that represents the budget name. The ":" and "\" characters, and the
     #   			"/action/" substring, aren't allowed.</p>
+    #            <p>Budget names are validated for content. Names that contain phone numbers, URLs, or
+    #   			email addresses combined with certain terms may be rejected.</p>
     # @option params [String] :action_id
     #   <p>
     #            A system-generated universally unique identifier (UUID) for the action.

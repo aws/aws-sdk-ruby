@@ -79,7 +79,8 @@ module Aws::MedicalImaging
       ?client_token: String,
       ?tags: Hash[String, String],
       ?kms_key_arn: String,
-      ?lambda_authorizer_arn: String
+      ?lambda_authorizer_arn: String,
+      ?lossless_storage_format: String
     ) -> _CreateDatastoreResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDatastoreResponse
 
     interface _DeleteDatastoreResponse
@@ -147,6 +148,8 @@ module Aws::MedicalImaging
       def image_set_arn: () -> String?
       def overrides: () -> Types::Overrides?
       def is_primary: () -> bool?
+      def last_accessed_at: () -> Time?
+      def storage_tier: () -> String?
     end
     def get_image_set: (
       ?datastore_id: String,
@@ -262,7 +265,18 @@ module Aws::MedicalImaging
       ?datastore_id: String,
       ?input_s3_uri: String,
       ?output_s3_uri: String,
-      ?input_owner_account_id: String
+      ?input_owner_account_id: String,
+      ?import_configuration: {
+        dicom_json_metadata_import_configuration: {
+          dicom_metadata_mappings: Array[
+            {
+              study_instance_uid: String,
+              series_instance_uid: String,
+              metadata_file_path: String
+            }
+          ]
+        }
+      }
     ) -> _StartDICOMImportJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartDICOMImportJobResponse
 
     interface _TagResourceResponse
@@ -297,6 +311,7 @@ module Aws::MedicalImaging
       ?image_set_id: String,
       ?latest_version_id: String,
       ?force: bool,
+      ?include_study_image_sets: bool,
       ?update_image_set_metadata_updates: {
         dicom_updates: {
           removable_attributes: String,

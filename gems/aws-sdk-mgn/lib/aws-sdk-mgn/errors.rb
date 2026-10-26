@@ -36,7 +36,7 @@ module Aws::Mgn
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>Operating denied due to a file permission or access check error.</p>
+    # <p>Operation denied due to a file permission or access check error.</p>
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::AccessDeniedException] data
@@ -130,7 +130,7 @@ module Aws::Mgn
       end
     end
 
-    # <p>The request could not be completed because its exceeded the service quota.</p>
+    # <p>The request could not be completed because it exceeded the service quota.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Mgn::Types::ServiceQuotaExceededException] data

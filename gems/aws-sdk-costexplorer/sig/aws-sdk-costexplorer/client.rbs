@@ -77,6 +77,11 @@ module Aws::CostExplorer
                 key: String,
                 values: untyped,
                 match_options: untyped
+              },
+              product_attributes: {
+                key: String,
+                values: Array[String],
+                match_options: untyped
               }
             }
           ],
@@ -84,7 +89,8 @@ module Aws::CostExplorer
           not: untyped,
           dimensions: untyped,
           tags: untyped,
-          cost_categories: untyped
+          cost_categories: untyped,
+          product_attributes: untyped
         },
         dimensional_value_count: Integer
       },
@@ -135,6 +141,11 @@ module Aws::CostExplorer
                 key: String,
                 values: untyped,
                 match_options: untyped
+              },
+              product_attributes: {
+                key: String,
+                values: Array[String],
+                match_options: untyped
               }
             }
           ],
@@ -142,7 +153,8 @@ module Aws::CostExplorer
           not: untyped,
           dimensions: untyped,
           tags: untyped,
-          cost_categories: untyped
+          cost_categories: untyped,
+          product_attributes: untyped
         }
       },
       ?resource_tags: Array[
@@ -185,6 +197,11 @@ module Aws::CostExplorer
                   key: String,
                   values: untyped,
                   match_options: untyped
+                },
+                product_attributes: {
+                  key: String,
+                  values: Array[String],
+                  match_options: untyped
                 }
               }
             ],
@@ -192,7 +209,8 @@ module Aws::CostExplorer
             not: untyped,
             dimensions: untyped,
             tags: untyped,
-            cost_categories: untyped
+            cost_categories: untyped,
+            product_attributes: untyped
           },
           inherited_value: {
             dimension_name: String,
@@ -359,6 +377,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -366,7 +389,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?metrics: Array[String],
       ?group_by: Array[
@@ -416,6 +440,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -423,7 +452,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?group_by: Array[
         {
@@ -468,6 +498,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -475,7 +510,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?metrics: Array[String],
       ?group_by: Array[
@@ -523,6 +559,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -530,7 +571,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?sort_by: Array[
         {
@@ -579,6 +621,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -586,7 +633,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?group_by: Array[
         {
@@ -630,6 +678,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -637,7 +690,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?billing_view_arn: String,
       ?prediction_interval_level: Integer
@@ -657,6 +711,7 @@ module Aws::CostExplorer
         end: untyped
       },
       ?dimension: String,
+      ?dimension_key: String,
       ?context: String,
       ?filter: {
         or: Array[
@@ -678,6 +733,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -685,7 +745,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?sort_by: Array[
         {
@@ -736,6 +797,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -743,7 +809,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?metrics: Array[String],
       ?next_page_token: String,
@@ -783,6 +850,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -790,7 +862,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?account_scope: String,
       ?lookback_period_in_days: String,
@@ -843,6 +916,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -850,7 +928,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?sort_by: {
         key: String,
@@ -889,6 +968,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -896,7 +980,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?configuration: {
         recommendation_target: String,
@@ -953,6 +1038,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -960,7 +1050,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?metrics: Array[String],
       ?next_token: String,
@@ -1005,6 +1096,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -1012,7 +1108,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       }
     ) -> _GetSavingsPlansPurchaseRecommendationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSavingsPlansPurchaseRecommendationResponse
 
@@ -1047,6 +1144,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -1054,7 +1156,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?sort_by: {
         key: String,
@@ -1094,6 +1197,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -1101,7 +1209,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?data_type: Array[String],
       ?next_token: String,
@@ -1146,6 +1255,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -1153,7 +1267,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?sort_by: Array[
         {
@@ -1198,6 +1313,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -1205,7 +1325,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       },
       ?billing_view_arn: String,
       ?prediction_interval_level: Integer
@@ -1254,8 +1375,20 @@ module Aws::CostExplorer
     def list_cost_category_definitions: (
       ?effective_on: String,
       ?next_token: String,
-      ?max_results: Integer
+      ?max_results: Integer,
+      ?supported_resource_types: Array[String]
     ) -> _ListCostCategoryDefinitionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCostCategoryDefinitionsResponse
+
+    interface _ListCostCategoryResourceAssociationsResponse
+      include Smithy::Client::_Response[Types::ListCostCategoryResourceAssociationsResponse]
+      def cost_category_resource_associations: () -> Array[Types::CostCategoryResourceAssociation]?
+      def next_token: () -> String?
+    end
+    def list_cost_category_resource_associations: (
+      ?cost_category_arn: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListCostCategoryResourceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListCostCategoryResourceAssociationsResponse
 
     interface _ListSavingsPlansPurchaseRecommendationGenerationResponse
       include Smithy::Client::_Response[Types::ListSavingsPlansPurchaseRecommendationGenerationResponse]
@@ -1313,7 +1446,8 @@ module Aws::CostExplorer
           look_back_time_period: {
             start: String,
             end: untyped
-          }
+          },
+          savings_plans_target_coverage: Integer
         }
       }
     ) -> _StartCommitmentPurchaseAnalysisResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartCommitmentPurchaseAnalysisResponse
@@ -1401,6 +1535,11 @@ module Aws::CostExplorer
               key: String,
               values: untyped,
               match_options: untyped
+            },
+            product_attributes: {
+              key: String,
+              values: Array[String],
+              match_options: untyped
             }
           }
         ],
@@ -1408,7 +1547,8 @@ module Aws::CostExplorer
         not: untyped,
         dimensions: untyped,
         tags: untyped,
-        cost_categories: untyped
+        cost_categories: untyped,
+        product_attributes: untyped
       }
     ) -> _UpdateAnomalySubscriptionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateAnomalySubscriptionResponse
 
@@ -1457,6 +1597,11 @@ module Aws::CostExplorer
                   key: String,
                   values: untyped,
                   match_options: untyped
+                },
+                product_attributes: {
+                  key: String,
+                  values: Array[String],
+                  match_options: untyped
                 }
               }
             ],
@@ -1464,7 +1609,8 @@ module Aws::CostExplorer
             not: untyped,
             dimensions: untyped,
             tags: untyped,
-            cost_categories: untyped
+            cost_categories: untyped,
+            product_attributes: untyped
           },
           inherited_value: {
             dimension_name: String,

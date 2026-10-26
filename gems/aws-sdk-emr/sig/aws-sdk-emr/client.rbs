@@ -219,6 +219,12 @@ module Aws::EMR
             jar: untyped,
             main_class: untyped,
             args: Array[String]
+          },
+          step_monitoring_configuration: {
+            s3_monitoring_configuration: {
+              log_uri: untyped,
+              encryption_key_arn: untyped
+            }
           }
         }
       ],
@@ -235,7 +241,8 @@ module Aws::EMR
           key: String,
           value: untyped
         }
-      ]
+      ],
+      ?cluster_id: String
     ) -> _AddTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _AddTagsResponse
 
     interface _CancelStepsResponse
@@ -477,6 +484,27 @@ module Aws::EMR
       ?execution_role_arn: String
     ) -> _GetPersistentAppUIPresignedURLResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPersistentAppUIPresignedURLResponse
 
+    interface _GetSessionResponse
+      include Smithy::Client::_Response[Types::GetSessionOutput]
+      def session: () -> Types::Session?
+    end
+    def get_session: (
+      ?cluster_id: String,
+      ?session_id: String
+    ) -> _GetSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionResponse
+
+    interface _GetSessionEndpointResponse
+      include Smithy::Client::_Response[Types::GetSessionEndpointOutput]
+      def endpoint: () -> String?
+      def auth_token: () -> String?
+      def auth_token_expiration_time: () -> Time?
+      def credentials: () -> Types::Credentials?
+    end
+    def get_session_endpoint: (
+      ?cluster_id: String,
+      ?session_id: String
+    ) -> _GetSessionEndpointResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetSessionEndpointResponse
+
     interface _GetStudioSessionMappingResponse
       include Smithy::Client::_Response[Types::GetStudioSessionMappingOutput]
       def session_mapping: () -> Types::SessionMappingDetail?
@@ -581,6 +609,18 @@ module Aws::EMR
     def list_security_configurations: (
       ?marker: String
     ) -> _ListSecurityConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSecurityConfigurationsResponse
+
+    interface _ListSessionsResponse
+      include Smithy::Client::_Response[Types::ListSessionsOutput]
+      def sessions: () -> Array[Types::Session]?
+      def next_token: () -> String?
+    end
+    def list_sessions: (
+      ?cluster_id: String,
+      ?session_states: Array[String],
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListSessionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListSessionsResponse
 
     interface _ListStepsResponse
       include Smithy::Client::_Response[Types::ListStepsOutput]
@@ -853,7 +893,8 @@ module Aws::EMR
     end
     def remove_tags: (
       ?resource_id: String,
-      ?tag_keys: Array[String]
+      ?tag_keys: Array[String],
+      ?cluster_id: String
     ) -> _RemoveTagsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RemoveTagsResponse
 
     interface _RunJobFlowResponse
@@ -1021,9 +1062,16 @@ module Aws::EMR
             jar: untyped,
             main_class: untyped,
             args: Array[String]
+          },
+          step_monitoring_configuration: {
+            s3_monitoring_configuration: {
+              log_uri: untyped,
+              encryption_key_arn: untyped
+            }
           }
         }
       ],
+      ?step_execution_role_arn: String,
       ?bootstrap_actions: Array[
         {
           name: String,
@@ -1101,7 +1149,22 @@ module Aws::EMR
       ?os_release_label: String,
       ?ebs_root_volume_iops: Integer,
       ?ebs_root_volume_throughput: Integer,
-      ?extended_support: bool
+      ?extended_support: bool,
+      ?monitoring_configuration: {
+        cloud_watch_log_configuration: {
+          enabled: bool,
+          log_group_name: String,
+          log_stream_name_prefix: untyped,
+          encryption_key_arn: untyped,
+          log_types: Hash[String,
+            Array[String]
+          ]
+        },
+        s3_logging_configuration: {
+          log_type_upload_policy: Hash[String, String]
+        }
+      },
+      ?session_enabled: bool
     ) -> _RunJobFlowResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RunJobFlowResponse
 
     interface _SetKeepJobFlowAliveWhenNoStepsResponse
@@ -1171,6 +1234,56 @@ module Aws::EMR
       ?environment_variables: Hash[String, String]
     ) -> _StartNotebookExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartNotebookExecutionResponse
 
+    interface _StartSessionResponse
+      include Smithy::Client::_Response[Types::StartSessionOutput]
+      def id: () -> String?
+      def cluster_id: () -> String?
+      def arn: () -> String?
+      def account_id: () -> String?
+      def state: () -> String?
+    end
+    def start_session: (
+      ?name: String,
+      ?cluster_id: String,
+      ?execution_role_arn: String,
+      ?engine_configurations: Array[
+        {
+          classification: String,
+          configurations: untyped,
+          properties: Hash[String, String]
+        }
+      ],
+      ?monitoring_configuration: {
+        cloud_watch_logging_configuration: {
+          enabled: bool,
+          log_group: String,
+          log_stream_name_prefix: untyped,
+          encryption_key_arn: untyped,
+          log_types: Hash[String,
+            Array[String]
+          ]
+        },
+        managed_logging_configuration: {
+          enabled: untyped,
+          encryption_key_arn: untyped
+        },
+        s3_logging_configuration: {
+          enabled: untyped,
+          log_uri: untyped,
+          encryption_key_arn: untyped,
+          log_types: untyped
+        }
+      },
+      ?session_idle_timeout_in_minutes: Integer,
+      ?client_request_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ]
+    ) -> _StartSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartSessionResponse
+
     interface _StopNotebookExecutionResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -1184,6 +1297,17 @@ module Aws::EMR
     def terminate_job_flows: (
       ?job_flow_ids: Array[String]
     ) -> _TerminateJobFlowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateJobFlowsResponse
+
+    interface _TerminateSessionResponse
+      include Smithy::Client::_Response[Types::TerminateSessionOutput]
+      def cluster_id: () -> String?
+      def session_id: () -> String?
+      def state: () -> String?
+    end
+    def terminate_session: (
+      ?cluster_id: String,
+      ?session_id: String
+    ) -> _TerminateSessionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TerminateSessionResponse
 
     interface _UpdateStudioResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]

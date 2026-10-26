@@ -177,6 +177,7 @@ module Aws::Neptune
       },
       ?global_cluster_identifier: String,
       ?storage_type: String,
+      ?network_type: String,
       ?source_region: String
     ) -> _CreateDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDBClusterResponse
 
@@ -354,6 +355,13 @@ module Aws::Neptune
       ?engine: String,
       ?engine_version: String,
       ?deletion_protection: bool,
+      ?database_name: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: untyped
+        }
+      ],
       ?storage_encrypted: bool
     ) -> _CreateGlobalClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateGlobalClusterResponse
 
@@ -835,7 +843,8 @@ module Aws::Neptune
         min_capacity: Float,
         max_capacity: untyped
       },
-      ?storage_type: String
+      ?storage_type: String,
+      ?network_type: String
     ) -> _ModifyDBClusterResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ModifyDBClusterResponse
 
     interface _ModifyDBClusterEndpointResponse
@@ -1123,7 +1132,8 @@ module Aws::Neptune
         min_capacity: Float,
         max_capacity: untyped
       },
-      ?storage_type: String
+      ?storage_type: String,
+      ?network_type: String
     ) -> _RestoreDBClusterFromSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBClusterFromSnapshotResponse
 
     interface _RestoreDBClusterToPointInTimeResponse
@@ -1155,7 +1165,8 @@ module Aws::Neptune
         min_capacity: Float,
         max_capacity: untyped
       },
-      ?storage_type: String
+      ?storage_type: String,
+      ?network_type: String
     ) -> _RestoreDBClusterToPointInTimeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestoreDBClusterToPointInTimeResponse
 
     interface _StartDBClusterResponse

@@ -144,18 +144,18 @@ module Aws::Drs
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -288,6 +288,41 @@ module Aws::Drs
       request.send_request(options)
     end
 
+    # <p>Cancels an in-progress Recovery Plan execution. Remaining steps are skipped.</p>
+    # @param [Hash, Types::CancelRecoveryPlanExecutionRequest] params
+    # @option params [String] :recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution to cancel.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_execution_arn: "StrictDRSARN", # required
+    #   }
+    #   options = {}
+    #   response = client.cancel_recovery_plan_execution(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_execution: { # required
+    #       recovery_plan_execution_arn: "StrictDRSARN", # required
+    #       recovery_plan_arn: "StrictDRSARN", # required
+    #       mode: "RecoveryPlanExecutionMode", # required
+    #       status: "RecoveryPlanExecutionStatus", # required
+    #       started_at: "ISO8601DatetimeString", # required
+    #       completed_at: "ISO8601DatetimeString",
+    #       error_detail: {
+    #         message: "String", # required
+    #         code: "String", # required
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::CancelRecoveryPlanExecutionResponse]
+    def cancel_recovery_plan_execution(params = {}, options = {})
+      request = build_request(:cancel_recovery_plan_execution, params)
+      request.send_request(options)
+    end
+
     # <p>Create an extended source server in the target Account based on the source server in staging account.</p>
     # @param [Hash, Types::CreateExtendedSourceServerInput] params
     # @option params [String] :source_server_arn
@@ -391,7 +426,8 @@ module Aws::Drs
     #         os: {
     #           full_string: "BoundedString"
     #         },
-    #         supports_nitro_instances: false
+    #         supports_nitro_instances: false,
+    #         architecture: "SourceServerArchitecture"
     #       },
     #       staging_area: {
     #         status: "ExtensionStatus",
@@ -437,6 +473,8 @@ module Aws::Drs
     #   <p>Whether we want to activate post-launch actions.</p>
     # @option params [Boolean] :launch_into_source_instance
     #   <p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>
+    # @option params [String] :recovery_mode
+    #   <p>Recovery mode.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     tags: {
@@ -451,7 +489,8 @@ module Aws::Drs
     #     },
     #     export_bucket_arn: "ARN",
     #     post_launch_enabled: false,
-    #     launch_into_source_instance: false
+    #     launch_into_source_instance: false,
+    #     recovery_mode: "RecoveryMode"
     #   }
     #   options = {}
     #   response = client.create_launch_configuration_template(params, options)
@@ -473,7 +512,8 @@ module Aws::Drs
     #       },
     #       export_bucket_arn: "ARN",
     #       post_launch_enabled: false,
-    #       launch_into_source_instance: false
+    #       launch_into_source_instance: false,
+    #       recovery_mode: "RecoveryMode"
     #     }
     #   }
     # @return [Types::CreateLaunchConfigurationTemplateOutput]
@@ -482,8 +522,117 @@ module Aws::Drs
       request.send_request(options)
     end
 
+    # <p>Creates a Recovery Plan to orchestrate multi-server disaster recovery.</p>
+    # @param [Hash, Types::CreateRecoveryPlanRequest] params
+    # @option params [String] :name
+    #   The name of a Recovery Plan.
+    # @option params [String] :description
+    #   The description of a Recovery Plan.
+    # @option params [String] :client_token
+    #   <p>A unique string provided to ensure request idempotency.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to apply to the Recovery Plan.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "RecoveryPlanName", # required
+    #     description: "RecoveryPlanDescription",
+    #     client_token: "ClientIdempotencyToken",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_recovery_plan(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan: { # required
+    #       recovery_plan_arn: "StrictDRSARN", # required
+    #       name: "RecoveryPlanName", # required
+    #       description: "RecoveryPlanDescription",
+    #       status: "RecoveryPlanStatus", # required
+    #       created_at: "ISO8601DatetimeString", # required
+    #       updated_at: "ISO8601DatetimeString", # required
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::CreateRecoveryPlanResponse]
+    def create_recovery_plan(params = {}, options = {})
+      request = build_request(:create_recovery_plan, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a step in a Recovery Plan. A step is either <code>SERVER</code> type (servers to recover in parallel) or <code>WAIT</code> type (timed pause between steps).</p>
+    # @param [Hash, Types::CreateRecoveryPlanStepRequest] params
+    # @option params [String] :recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to add the step to.</p>
+    # @option params [String] :step_name
+    #   The name of a Recovery Plan Step.
+    # @option params [Integer] :step_order
+    #   The order of a step within a Recovery Plan (1-based).
+    # @option params [Types::RecoveryPlanStepConfiguration] :configuration
+    #   Type-specific configuration for a recovery plan step.
+    #   Exactly one member must be set.
+    # @option params [String] :client_token
+    #   <p>A unique string provided to ensure request idempotency.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     step_name: "RecoveryPlanStepName", # required
+    #     step_order: 1,
+    #     configuration: { # required
+    #       # One of:
+    #       server_step_configuration: {
+    #         servers: [ # required
+    #           {
+    #             server_arn: "SourceServerARN", # required
+    #             impact_level: "RecoveryPlanServerImpactLevel"
+    #           }
+    #         ]
+    #       },
+    #       wait_step_configuration: {
+    #         wait_duration_minutes: 1, # required
+    #       }
+    #     },
+    #     client_token: "ClientIdempotencyToken"
+    #   }
+    #   options = {}
+    #   response = client.create_recovery_plan_step(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_step: { # required
+    #       recovery_plan_step_arn: "StrictDRSARN", # required
+    #       step_order: 1, # required
+    #       step_name: "RecoveryPlanStepName", # required
+    #       configuration: { # required
+    #         # One of:
+    #         server_step_configuration: {
+    #           servers: [ # required
+    #             {
+    #               server_arn: "SourceServerARN", # required
+    #               impact_level: "RecoveryPlanServerImpactLevel"
+    #             }
+    #           ]
+    #         },
+    #         wait_step_configuration: {
+    #           wait_duration_minutes: 1, # required
+    #         }
+    #       },
+    #       created_at: "ISO8601DatetimeString", # required
+    #       updated_at: "ISO8601DatetimeString", # required
+    #     }
+    #   }
+    # @return [Types::CreateRecoveryPlanStepResponse]
+    def create_recovery_plan_step(params = {}, options = {})
+      request = build_request(:create_recovery_plan_step, params)
+      request.send_request(options)
+    end
+
     # <p>Creates a new ReplicationConfigurationTemplate.</p>
-    # @param [Hash, Types::CreateReplicationConfigurationTemplateInput] params
+    # @param [Hash, Types::CreateReplicationConfigurationTemplateRequest] params
     # @option params [String] :staging_area_subnet_id
     #   <p>The subnet to be used by the replication staging area.</p>
     # @option params [Boolean] :associate_default_security_group
@@ -514,19 +663,21 @@ module Aws::Drs
     #   <p>A set of tags to be associated with the Replication Configuration Template resource.</p>
     # @option params [Boolean] :auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
+    # @option params [String] :internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     staging_area_subnet_id: "SubnetID", # required
-    #     associate_default_security_group: false, # required
+    #     associate_default_security_group: false,
     #     replication_servers_security_groups_i_ds: ["SecurityGroupID"], # required
-    #     replication_server_instance_type: "EC2InstanceType", # required
-    #     use_dedicated_replication_server: false, # required
-    #     default_large_staging_disk_type: "ReplicationConfigurationDefaultLargeStagingDiskType", # required
+    #     replication_server_instance_type: "EC2InstanceType",
+    #     use_dedicated_replication_server: false,
+    #     default_large_staging_disk_type: "ReplicationConfigurationDefaultLargeStagingDiskType",
     #     ebs_encryption: "ReplicationConfigurationEbsEncryption", # required
     #     ebs_encryption_key_arn: "ARN",
     #     bandwidth_throttling: 1, # required
-    #     data_plane_routing: "ReplicationConfigurationDataPlaneRouting", # required
-    #     create_public_ip: false, # required
+    #     data_plane_routing: "ReplicationConfigurationDataPlaneRouting",
+    #     create_public_ip: false,
     #     staging_area_tags: { # required
     #       "TagKey" => "TagValue"
     #     },
@@ -542,7 +693,8 @@ module Aws::Drs
     #     tags: {
     #       "TagKey" => "TagValue"
     #     },
-    #     auto_replicate_new_disks: false
+    #     auto_replicate_new_disks: false,
+    #     internet_protocol: "InternetProtocol"
     #   }
     #   options = {}
     #   response = client.create_replication_configuration_template(params, options)
@@ -577,7 +729,8 @@ module Aws::Drs
     #         enabled: false
     #       }
     #     ],
-    #     auto_replicate_new_disks: false
+    #     auto_replicate_new_disks: false,
+    #     internet_protocol: "InternetProtocol"
     #   }
     # @return [Types::CreateReplicationConfigurationTemplateOutput]
     def create_replication_configuration_template(params = {}, options = {})
@@ -696,6 +849,69 @@ module Aws::Drs
       request.send_request(options)
     end
 
+    # <p>Deletes a Recovery Plan. Cannot delete a plan that has an execution in a non-terminal status (<code>CREATED</code>, <code>IN_PROGRESS</code>).</p>
+    # @param [Hash, Types::DeleteRecoveryPlanRequest] params
+    # @option params [String] :recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_recovery_plan(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #   }
+    # @return [Types::DeleteRecoveryPlanResponse]
+    def delete_recovery_plan(params = {}, options = {})
+      request = build_request(:delete_recovery_plan, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a Recovery Plan execution record. Must be in a terminal status.</p>
+    # @param [Hash, Types::DeleteRecoveryPlanExecutionRequest] params
+    # @option params [String] :recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_execution_arn: "StrictDRSARN", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_recovery_plan_execution(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_execution_arn: "StrictDRSARN", # required
+    #   }
+    # @return [Types::DeleteRecoveryPlanExecutionResponse]
+    def delete_recovery_plan_execution(params = {}, options = {})
+      request = build_request(:delete_recovery_plan_execution, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a step from a Recovery Plan.</p>
+    # @param [Hash, Types::DeleteRecoveryPlanStepRequest] params
+    # @option params [String] :recovery_plan_step_arn
+    #   <p>The ARN of the Recovery Plan step to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_step_arn: "StrictDRSARN", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_recovery_plan_step(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_step_arn: "StrictDRSARN", # required
+    #   }
+    # @return [Types::DeleteRecoveryPlanStepResponse]
+    def delete_recovery_plan_step(params = {}, options = {})
+      request = build_request(:delete_recovery_plan_step, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a single Replication Configuration Template by ID</p>
     # @param [Hash, Types::DeleteReplicationConfigurationTemplateInput] params
     # @option params [String] :replication_configuration_template_id
@@ -810,7 +1026,9 @@ module Aws::Drs
     #               target_vpc: "VpcID",
     #               stack_name: "LargeBoundedString"
     #             }
-    #           }
+    #           },
+    #           attempt_count: 1,
+    #           max_attempts_count: 1
     #         }
     #       }
     #     ],
@@ -946,7 +1164,8 @@ module Aws::Drs
     #         },
     #         export_bucket_arn: "ARN",
     #         post_launch_enabled: false,
-    #         launch_into_source_instance: false
+    #         launch_into_source_instance: false,
+    #         recovery_mode: "RecoveryMode"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -1174,7 +1393,8 @@ module Aws::Drs
     #             enabled: false
     #           }
     #         ],
-    #         auto_replicate_new_disks: false
+    #         auto_replicate_new_disks: false,
+    #         internet_protocol: "InternetProtocol"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -1346,7 +1566,8 @@ module Aws::Drs
     #           os: {
     #             full_string: "BoundedString"
     #           },
-    #           supports_nitro_instances: false
+    #           supports_nitro_instances: false,
+    #           architecture: "SourceServerArchitecture"
     #         },
     #         staging_area: {
     #           status: "ExtensionStatus",
@@ -1490,7 +1711,8 @@ module Aws::Drs
     #       os: {
     #         full_string: "BoundedString"
     #       },
-    #       supports_nitro_instances: false
+    #       supports_nitro_instances: false,
+    #       architecture: "SourceServerArchitecture"
     #     },
     #     staging_area: {
     #       status: "ExtensionStatus",
@@ -1552,7 +1774,8 @@ module Aws::Drs
     #     recovery_instance_id: "RecoveryInstanceID", # required
     #     name: "BoundedString",
     #     bandwidth_throttling: 1,
-    #     use_private_ip: false
+    #     use_private_ip: false,
+    #     internet_protocol: "InternetProtocol"
     #   }
     # @return [Types::GetFailbackReplicationConfigurationOutput]
     def get_failback_replication_configuration(params = {}, options = {})
@@ -1586,11 +1809,167 @@ module Aws::Drs
     #     post_launch_enabled: false,
     #     launch_into_instance_properties: {
     #       launch_into_ec2_instance_id: "EC2InstanceID"
-    #     }
+    #     },
+    #     recovery_mode: "RecoveryMode"
     #   }
     # @return [Types::GetLaunchConfigurationOutput]
     def get_launch_configuration(params = {}, options = {})
       request = build_request(:get_launch_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets a Recovery Plan by ARN.</p>
+    # @param [Hash, Types::GetRecoveryPlanRequest] params
+    # @option params [String] :recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_recovery_plan(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan: { # required
+    #       recovery_plan_arn: "StrictDRSARN", # required
+    #       name: "RecoveryPlanName", # required
+    #       description: "RecoveryPlanDescription",
+    #       status: "RecoveryPlanStatus", # required
+    #       created_at: "ISO8601DatetimeString", # required
+    #       updated_at: "ISO8601DatetimeString", # required
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetRecoveryPlanResponse]
+    def get_recovery_plan(params = {}, options = {})
+      request = build_request(:get_recovery_plan, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the details of a Recovery Plan execution.</p>
+    # @param [Hash, Types::GetRecoveryPlanExecutionRequest] params
+    # @option params [String] :recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_execution_arn: "StrictDRSARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_recovery_plan_execution(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_execution: { # required
+    #       recovery_plan_execution_arn: "StrictDRSARN", # required
+    #       recovery_plan_arn: "StrictDRSARN", # required
+    #       mode: "RecoveryPlanExecutionMode", # required
+    #       status: "RecoveryPlanExecutionStatus", # required
+    #       started_at: "ISO8601DatetimeString", # required
+    #       completed_at: "ISO8601DatetimeString",
+    #       error_detail: {
+    #         message: "String", # required
+    #         code: "String", # required
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::GetRecoveryPlanExecutionResponse]
+    def get_recovery_plan_execution(params = {}, options = {})
+      request = build_request(:get_recovery_plan_execution, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the details of a step within a Recovery Plan execution.</p>
+    # @param [Hash, Types::GetRecoveryPlanExecutionStepRequest] params
+    # @option params [String] :recovery_plan_execution_step_arn
+    #   <p>The ARN of the execution step.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_recovery_plan_execution_step(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_execution_step: { # required
+    #       recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #       step_index: 1, # required
+    #       status: "RecoveryPlanExecutionStepStatus", # required
+    #       step_name: "RecoveryPlanStepName", # required
+    #       configuration: { # required
+    #         # One of:
+    #         execution_server_step_configuration: {
+    #           servers: [ # required
+    #             {
+    #               server_arn: "SourceServerARN", # required
+    #               impact_level: "RecoveryPlanServerImpactLevel",
+    #               job_id: "JobID"
+    #             }
+    #           ]
+    #         },
+    #         wait_step_configuration: {
+    #           wait_duration_minutes: 1, # required
+    #         }
+    #       },
+    #       error_detail: {
+    #         message: "String", # required
+    #         code: "String", # required
+    #       },
+    #       attempt: 1, # required
+    #       created_at: "ISO8601DatetimeString", # required
+    #       updated_at: "ISO8601DatetimeString", # required
+    #     }
+    #   }
+    # @return [Types::GetRecoveryPlanExecutionStepResponse]
+    def get_recovery_plan_execution_step(params = {}, options = {})
+      request = build_request(:get_recovery_plan_execution_step, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets a Recovery Plan step by ARN.</p>
+    # @param [Hash, Types::GetRecoveryPlanStepRequest] params
+    # @option params [String] :recovery_plan_step_arn
+    #   <p>The ARN of the Recovery Plan step to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_step_arn: "StrictDRSARN", # required
+    #   }
+    #   options = {}
+    #   response = client.get_recovery_plan_step(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_step: { # required
+    #       recovery_plan_step_arn: "StrictDRSARN", # required
+    #       step_order: 1, # required
+    #       step_name: "RecoveryPlanStepName", # required
+    #       configuration: { # required
+    #         # One of:
+    #         server_step_configuration: {
+    #           servers: [ # required
+    #             {
+    #               server_arn: "SourceServerARN", # required
+    #               impact_level: "RecoveryPlanServerImpactLevel"
+    #             }
+    #           ]
+    #         },
+    #         wait_step_configuration: {
+    #           wait_duration_minutes: 1, # required
+    #         }
+    #       },
+    #       created_at: "ISO8601DatetimeString", # required
+    #       updated_at: "ISO8601DatetimeString", # required
+    #     }
+    #   }
+    # @return [Types::GetRecoveryPlanStepResponse]
+    def get_recovery_plan_step(params = {}, options = {})
+      request = build_request(:get_recovery_plan_step, params)
       request.send_request(options)
     end
 
@@ -1642,7 +2021,8 @@ module Aws::Drs
     #         enabled: false
     #       }
     #     ],
-    #     auto_replicate_new_disks: false
+    #     auto_replicate_new_disks: false,
+    #     internet_protocol: "InternetProtocol"
     #   }
     # @return [Types::GetReplicationConfigurationOutput]
     def get_replication_configuration(params = {}, options = {})
@@ -1665,10 +2045,7 @@ module Aws::Drs
       request.send_request(options)
     end
 
-    # <p>Returns a list of source servers on a staging account that are extensible, which means that:
-    #             a. The source server is not already extended into this Account.
-    #             b. The source server on the Account we’re reading from is not an extension of another source server.
-    #         </p>
+    # <p>Returns a list of source servers on a staging account that are extensible, which means that: a. The source server is not already extended into this Account. b. The source server on the Account we’re reading from is not an extension of another source server. </p>
     # @param [Hash, Types::ListExtensibleSourceServersInput] params
     # @option params [String] :staging_account_id
     #   <p>The Id of the staging Account to retrieve extensible source servers from.</p>
@@ -1753,6 +2130,191 @@ module Aws::Drs
     # @return [Types::ListLaunchActionsResponse]
     def list_launch_actions(params = {}, options = {})
       request = build_request(:list_launch_actions, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all steps within a Recovery Plan execution.</p>
+    # @param [Hash, Types::ListRecoveryPlanExecutionStepsRequest] params
+    # @option params [String] :recovery_plan_execution_arn
+    #   <p>The ARN of the Recovery Plan execution.</p>
+    # @option params [Types::ListRecoveryPlanExecutionStepsFilter] :filter
+    #   <p>Filters for listing execution steps.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of results to return.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_execution_arn: "StrictDRSARN", # required
+    #     filter: {
+    #       status: "RecoveryPlanExecutionStepStatus"
+    #     },
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_recovery_plan_execution_steps(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_execution_steps: [ # required
+    #       {
+    #         recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #         step_name: "RecoveryPlanStepName", # required
+    #         step_index: 1, # required
+    #         status: "RecoveryPlanExecutionStepStatus", # required
+    #         configuration: { # required
+    #           # One of:
+    #           execution_server_step_configuration: {
+    #             servers: [ # required
+    #               {
+    #                 server_arn: "SourceServerARN", # required
+    #                 impact_level: "RecoveryPlanServerImpactLevel",
+    #                 job_id: "JobID"
+    #               }
+    #             ]
+    #           },
+    #           wait_step_configuration: {
+    #             wait_duration_minutes: 1, # required
+    #           }
+    #         },
+    #         error_detail: {
+    #           message: "String", # required
+    #           code: "String", # required
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListRecoveryPlanExecutionStepsResponse]
+    def list_recovery_plan_execution_steps(params = {}, options = {})
+      request = build_request(:list_recovery_plan_execution_steps, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists executions of Recovery Plans, optionally filtered by plan or status.</p>
+    # @param [Hash, Types::ListRecoveryPlanExecutionsRequest] params
+    # @option params [String] :recovery_plan_arn
+    #   <p>Filter executions by Recovery Plan ARN.</p>
+    # @option params [String] :status
+    #   <p>Filter executions by status.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of results to return.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_arn: "StrictDRSARN",
+    #     status: "RecoveryPlanExecutionStatus",
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_recovery_plan_executions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_executions: [ # required
+    #       {
+    #         recovery_plan_execution_arn: "StrictDRSARN", # required
+    #         recovery_plan_arn: "StrictDRSARN", # required
+    #         mode: "RecoveryPlanExecutionMode", # required
+    #         status: "RecoveryPlanExecutionStatus", # required
+    #         started_at: "ISO8601DatetimeString", # required
+    #         error_detail: {
+    #           message: "String", # required
+    #           code: "String", # required
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListRecoveryPlanExecutionsResponse]
+    def list_recovery_plan_executions(params = {}, options = {})
+      request = build_request(:list_recovery_plan_executions, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all steps in a Recovery Plan.</p>
+    # @param [Hash, Types::ListRecoveryPlanStepsRequest] params
+    # @option params [String] :recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan.</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of results to return.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_recovery_plan_steps(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_steps: [ # required
+    #       {
+    #         recovery_plan_step_arn: "StrictDRSARN", # required
+    #         step_order: 1, # required
+    #         step_name: "RecoveryPlanStepName", # required
+    #         configuration: { # required
+    #           # One of:
+    #           server_step_configuration: {
+    #             servers: [ # required
+    #               {
+    #                 server_arn: "SourceServerARN", # required
+    #                 impact_level: "RecoveryPlanServerImpactLevel"
+    #               }
+    #             ]
+    #           },
+    #           wait_step_configuration: {
+    #             wait_duration_minutes: 1, # required
+    #           }
+    #         },
+    #         created_at: "ISO8601DatetimeString", # required
+    #         updated_at: "ISO8601DatetimeString", # required
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListRecoveryPlanStepsResponse]
+    def list_recovery_plan_steps(params = {}, options = {})
+      request = build_request(:list_recovery_plan_steps, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all Recovery Plans in the account.</p>
+    # @param [Hash, Types::ListRecoveryPlansRequest] params
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of results to return.</p>
+    # @option params [String] :next_token
+    #   <p>The token for the next page of results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_recovery_plans(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plans: [ # required
+    #       {
+    #         recovery_plan_arn: "StrictDRSARN", # required
+    #         name: "RecoveryPlanName", # required
+    #         status: "RecoveryPlanStatus", # required
+    #         created_at: "ISO8601DatetimeString", # required
+    #         updated_at: "ISO8601DatetimeString", # required
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListRecoveryPlansResponse]
+    def list_recovery_plans(params = {}, options = {})
+      request = build_request(:list_recovery_plans, params)
       request.send_request(options)
     end
 
@@ -1880,9 +2442,53 @@ module Aws::Drs
       request.send_request(options)
     end
 
-    # <p>WARNING: RetryDataReplication is deprecated.
-    #               Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state.
-    #         </p>
+    # <p>Reorders steps in a Recovery Plan. Accepts a complete ordered list of step ARNs.</p>
+    # @param [Hash, Types::ReorderRecoveryPlanStepsRequest] params
+    # @option params [String] :recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan.</p>
+    # @option params [Array<String>] :ordered_step_arns
+    #   <p>Ordered list of all step ARNs representing the desired sequence.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     ordered_step_arns: ["StrictDRSARN"], # required
+    #   }
+    #   options = {}
+    #   response = client.reorder_recovery_plan_steps(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_steps: [ # required
+    #       {
+    #         recovery_plan_step_arn: "StrictDRSARN", # required
+    #         step_order: 1, # required
+    #         step_name: "RecoveryPlanStepName", # required
+    #         configuration: { # required
+    #           # One of:
+    #           server_step_configuration: {
+    #             servers: [ # required
+    #               {
+    #                 server_arn: "SourceServerARN", # required
+    #                 impact_level: "RecoveryPlanServerImpactLevel"
+    #               }
+    #             ]
+    #           },
+    #           wait_step_configuration: {
+    #             wait_duration_minutes: 1, # required
+    #           }
+    #         },
+    #         created_at: "ISO8601DatetimeString", # required
+    #         updated_at: "ISO8601DatetimeString", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ReorderRecoveryPlanStepsResponse]
+    def reorder_recovery_plan_steps(params = {}, options = {})
+      request = build_request(:reorder_recovery_plan_steps, params)
+      request.send_request(options)
+    end
+
+    # <p>WARNING: RetryDataReplication is deprecated. Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state. </p>
     # @param [Hash, Types::RetryDataReplicationInput] params
     # @option params [String] :source_server_id
     #   <p>The ID of the Source Server whose data replication should be retried.</p>
@@ -1979,7 +2585,8 @@ module Aws::Drs
     #       os: {
     #         full_string: "BoundedString"
     #       },
-    #       supports_nitro_instances: false
+    #       supports_nitro_instances: false,
+    #       architecture: "SourceServerArchitecture"
     #     },
     #     staging_area: {
     #       status: "ExtensionStatus",
@@ -2006,10 +2613,55 @@ module Aws::Drs
       request.send_request(options)
     end
 
-    # <p>Start replication to origin / target region - applies only to protected instances that originated in EC2.
-    #             For recovery instances on target region - starts replication back to origin region.
-    #             For failback instances on origin region - starts replication to target region to re-protect them.
-    #         </p>
+    # <p>Retries a failed <code>SERVER</code> type execution step.</p>
+    # @param [Hash, Types::RetryRecoveryPlanExecutionStepRequest] params
+    # @option params [String] :recovery_plan_execution_step_arn
+    #   <p>The ARN of the execution step to retry.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #   }
+    #   options = {}
+    #   response = client.retry_recovery_plan_execution_step(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_execution_step: { # required
+    #       recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #       step_index: 1, # required
+    #       status: "RecoveryPlanExecutionStepStatus", # required
+    #       step_name: "RecoveryPlanStepName", # required
+    #       configuration: { # required
+    #         # One of:
+    #         execution_server_step_configuration: {
+    #           servers: [ # required
+    #             {
+    #               server_arn: "SourceServerARN", # required
+    #               impact_level: "RecoveryPlanServerImpactLevel",
+    #               job_id: "JobID"
+    #             }
+    #           ]
+    #         },
+    #         wait_step_configuration: {
+    #           wait_duration_minutes: 1, # required
+    #         }
+    #       },
+    #       error_detail: {
+    #         message: "String", # required
+    #         code: "String", # required
+    #       },
+    #       attempt: 1, # required
+    #       created_at: "ISO8601DatetimeString", # required
+    #       updated_at: "ISO8601DatetimeString", # required
+    #     }
+    #   }
+    # @return [Types::RetryRecoveryPlanExecutionStepResponse]
+    def retry_recovery_plan_execution_step(params = {}, options = {})
+      request = build_request(:retry_recovery_plan_execution_step, params)
+      request.send_request(options)
+    end
+
+    # <p>Start replication to origin / target region - applies only to protected instances that originated in EC2. For recovery instances on target region - starts replication back to origin region. For failback instances on origin region - starts replication to target region to re-protect them. </p>
     # @param [Hash, Types::ReverseReplicationInput] params
     # @option params [String] :recovery_instance_id
     #   <p>The ID of the Recovery Instance that we want to reverse the replication for.</p>
@@ -2200,6 +2852,60 @@ module Aws::Drs
       request.send_request(options)
     end
 
+    # <p>Starts executing a Recovery Plan in <code>DRILL</code> or <code>RECOVERY</code> mode. A plan cannot have more than one execution in a non-terminal status at a time.</p>
+    # @param [Hash, Types::StartRecoveryPlanExecutionRequest] params
+    # @option params [String] :recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to execute.</p>
+    # @option params [String] :mode
+    #   <p>The execution mode (<code>DRILL</code> or <code>RECOVERY</code>).</p>
+    # @option params [String] :client_token
+    #   <p>A unique string provided to ensure request idempotency.</p>
+    # @option params [Array<Types::RecoveryPlanExecutionSourceServer>] :source_servers
+    #   <p>Optional list of source servers with specific recovery snapshots. If not provided, the latest snapshot is used for each server.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>The tags to apply to the Recovery Plan execution.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     mode: "RecoveryPlanExecutionMode", # required
+    #     client_token: "ClientIdempotencyToken",
+    #     source_servers: [
+    #       {
+    #         source_server_id: "SourceServerID", # required
+    #         recovery_snapshot_id: "RecoverySnapshotID", # required
+    #       }
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.start_recovery_plan_execution(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_execution: { # required
+    #       recovery_plan_execution_arn: "StrictDRSARN", # required
+    #       recovery_plan_arn: "StrictDRSARN", # required
+    #       mode: "RecoveryPlanExecutionMode", # required
+    #       status: "RecoveryPlanExecutionStatus", # required
+    #       started_at: "ISO8601DatetimeString", # required
+    #       completed_at: "ISO8601DatetimeString",
+    #       error_detail: {
+    #         message: "String", # required
+    #         code: "String", # required
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::StartRecoveryPlanExecutionResponse]
+    def start_recovery_plan_execution(params = {}, options = {})
+      request = build_request(:start_recovery_plan_execution, params)
+      request.send_request(options)
+    end
+
     # <p>Starts replication for a stopped Source Server. This action would make the Source Server protected again and restart billing for it.</p>
     # @param [Hash, Types::StartReplicationInput] params
     # @option params [String] :source_server_id
@@ -2298,7 +3004,8 @@ module Aws::Drs
     #         os: {
     #           full_string: "BoundedString"
     #         },
-    #         supports_nitro_instances: false
+    #         supports_nitro_instances: false,
+    #         architecture: "SourceServerArchitecture"
     #       },
     #       staging_area: {
     #         status: "ExtensionStatus",
@@ -2569,7 +3276,8 @@ module Aws::Drs
     #         os: {
     #           full_string: "BoundedString"
     #         },
-    #         supports_nitro_instances: false
+    #         supports_nitro_instances: false,
+    #         architecture: "SourceServerArchitecture"
     #       },
     #       staging_area: {
     #         status: "ExtensionStatus",
@@ -2766,12 +3474,15 @@ module Aws::Drs
     #   <p>Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.</p>
     # @option params [Boolean] :use_private_ip
     #   <p>Whether to use Private IP for the failback replication of the Recovery Instance.</p>
+    # @option params [String] :internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     recovery_instance_id: "RecoveryInstanceID", # required
     #     name: "BoundedString",
     #     bandwidth_throttling: 1,
-    #     use_private_ip: false
+    #     use_private_ip: false,
+    #     internet_protocol: "InternetProtocol"
     #   }
     #   options = {}
     #   response = client.update_failback_replication_configuration(params, options)
@@ -2804,6 +3515,8 @@ module Aws::Drs
     #   <p>Whether we want to enable post-launch actions for the Source Server.</p>
     # @option params [Types::LaunchIntoInstanceProperties] :launch_into_instance_properties
     #   <p>Launch into existing instance properties.</p>
+    # @option params [String] :recovery_mode
+    #   <p>Recovery mode.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_server_id: "SourceServerID", # required
@@ -2818,7 +3531,8 @@ module Aws::Drs
     #     post_launch_enabled: false,
     #     launch_into_instance_properties: {
     #       launch_into_ec2_instance_id: "EC2InstanceID"
-    #     }
+    #     },
+    #     recovery_mode: "RecoveryMode"
     #   }
     #   options = {}
     #   response = client.update_launch_configuration(params, options)
@@ -2838,7 +3552,8 @@ module Aws::Drs
     #     post_launch_enabled: false,
     #     launch_into_instance_properties: {
     #       launch_into_ec2_instance_id: "EC2InstanceID"
-    #     }
+    #     },
+    #     recovery_mode: "RecoveryMode"
     #   }
     # @return [Types::UpdateLaunchConfigurationOutput]
     def update_launch_configuration(params = {}, options = {})
@@ -2866,6 +3581,8 @@ module Aws::Drs
     #   <p>Whether we want to activate post-launch actions.</p>
     # @option params [Boolean] :launch_into_source_instance
     #   <p>DRS will set the 'launch into instance ID' of any source server when performing a drill, recovery or failback to the previous region or availability zone, using the instance ID of the source instance.</p>
+    # @option params [String] :recovery_mode
+    #   <p>Recovery mode.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     launch_configuration_template_id: "LaunchConfigurationTemplateID", # required
@@ -2878,7 +3595,8 @@ module Aws::Drs
     #     },
     #     export_bucket_arn: "ARN",
     #     post_launch_enabled: false,
-    #     launch_into_source_instance: false
+    #     launch_into_source_instance: false,
+    #     recovery_mode: "RecoveryMode"
     #   }
     #   options = {}
     #   response = client.update_launch_configuration_template(params, options)
@@ -2900,12 +3618,173 @@ module Aws::Drs
     #       },
     #       export_bucket_arn: "ARN",
     #       post_launch_enabled: false,
-    #       launch_into_source_instance: false
+    #       launch_into_source_instance: false,
+    #       recovery_mode: "RecoveryMode"
     #     }
     #   }
     # @return [Types::UpdateLaunchConfigurationTemplateOutput]
     def update_launch_configuration_template(params = {}, options = {})
       request = build_request(:update_launch_configuration_template, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a Recovery Plan's name or description.</p>
+    # @param [Hash, Types::UpdateRecoveryPlanRequest] params
+    # @option params [String] :recovery_plan_arn
+    #   <p>The ARN of the Recovery Plan to update.</p>
+    # @option params [String] :name
+    #   The name of a Recovery Plan.
+    # @option params [String] :description
+    #   The description of a Recovery Plan.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_arn: "StrictDRSARN", # required
+    #     name: "RecoveryPlanName",
+    #     description: "RecoveryPlanDescription"
+    #   }
+    #   options = {}
+    #   response = client.update_recovery_plan(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan: { # required
+    #       recovery_plan_arn: "StrictDRSARN", # required
+    #       name: "RecoveryPlanName", # required
+    #       description: "RecoveryPlanDescription",
+    #       status: "RecoveryPlanStatus", # required
+    #       created_at: "ISO8601DatetimeString", # required
+    #       updated_at: "ISO8601DatetimeString", # required
+    #       tags: {
+    #         "TagKey" => "TagValue"
+    #       }
+    #     }
+    #   }
+    # @return [Types::UpdateRecoveryPlanResponse]
+    def update_recovery_plan(params = {}, options = {})
+      request = build_request(:update_recovery_plan, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an execution step. Supports two actions: (1) skip a step that is in <code>NOT_STARTED</code> or <code>FAILED</code> status; (2) update the wait duration of a <code>WAIT</code> type step that is in <code>NOT_STARTED</code> status.</p>
+    # @param [Hash, Types::UpdateRecoveryPlanExecutionStepRequest] params
+    # @option params [String] :recovery_plan_execution_step_arn
+    #   <p>The ARN of the execution step to update.</p>
+    # @option params [String] :status
+    #   Only SKIPPED is accepted. Step must be in NOT_STARTED or FAILED status.
+    # @option params [Array<Types::RecoveryPlanServer>] :servers
+    #   Full replacement of the server list. Only allowed when the step is in NOT_STARTED status (Server type steps only).
+    # @option params [Integer] :wait_duration_minutes
+    #   Updated wait duration. Only allowed when the step is in NOT_STARTED status (Wait type steps only).
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #     status: "RecoveryPlanExecutionStepStatus",
+    #     servers: [
+    #       {
+    #         server_arn: "SourceServerARN", # required
+    #         impact_level: "RecoveryPlanServerImpactLevel"
+    #       }
+    #     ],
+    #     wait_duration_minutes: 1
+    #   }
+    #   options = {}
+    #   response = client.update_recovery_plan_execution_step(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_execution_step: { # required
+    #       recovery_plan_execution_step_arn: "StrictDRSARN", # required
+    #       step_index: 1, # required
+    #       status: "RecoveryPlanExecutionStepStatus", # required
+    #       step_name: "RecoveryPlanStepName", # required
+    #       configuration: { # required
+    #         # One of:
+    #         execution_server_step_configuration: {
+    #           servers: [ # required
+    #             {
+    #               server_arn: "SourceServerARN", # required
+    #               impact_level: "RecoveryPlanServerImpactLevel",
+    #               job_id: "JobID"
+    #             }
+    #           ]
+    #         },
+    #         wait_step_configuration: {
+    #           wait_duration_minutes: 1, # required
+    #         }
+    #       },
+    #       error_detail: {
+    #         message: "String", # required
+    #         code: "String", # required
+    #       },
+    #       attempt: 1, # required
+    #       created_at: "ISO8601DatetimeString", # required
+    #       updated_at: "ISO8601DatetimeString", # required
+    #     }
+    #   }
+    # @return [Types::UpdateRecoveryPlanExecutionStepResponse]
+    def update_recovery_plan_execution_step(params = {}, options = {})
+      request = build_request(:update_recovery_plan_execution_step, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a Recovery Plan step's name or configuration. Step type is immutable.</p>
+    # @param [Hash, Types::UpdateRecoveryPlanStepRequest] params
+    # @option params [String] :recovery_plan_step_arn
+    #   <p>The ARN of the Recovery Plan step to update.</p>
+    # @option params [String] :step_name
+    #   The name of a Recovery Plan Step.
+    # @option params [Types::RecoveryPlanStepConfiguration] :configuration
+    #   Type-specific configuration for a recovery plan step.
+    #   Exactly one member must be set.
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     recovery_plan_step_arn: "StrictDRSARN", # required
+    #     step_name: "RecoveryPlanStepName",
+    #     configuration: {
+    #       # One of:
+    #       server_step_configuration: {
+    #         servers: [ # required
+    #           {
+    #             server_arn: "SourceServerARN", # required
+    #             impact_level: "RecoveryPlanServerImpactLevel"
+    #           }
+    #         ]
+    #       },
+    #       wait_step_configuration: {
+    #         wait_duration_minutes: 1, # required
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_recovery_plan_step(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     recovery_plan_step: { # required
+    #       recovery_plan_step_arn: "StrictDRSARN", # required
+    #       step_order: 1, # required
+    #       step_name: "RecoveryPlanStepName", # required
+    #       configuration: { # required
+    #         # One of:
+    #         server_step_configuration: {
+    #           servers: [ # required
+    #             {
+    #               server_arn: "SourceServerARN", # required
+    #               impact_level: "RecoveryPlanServerImpactLevel"
+    #             }
+    #           ]
+    #         },
+    #         wait_step_configuration: {
+    #           wait_duration_minutes: 1, # required
+    #         }
+    #       },
+    #       created_at: "ISO8601DatetimeString", # required
+    #       updated_at: "ISO8601DatetimeString", # required
+    #     }
+    #   }
+    # @return [Types::UpdateRecoveryPlanStepResponse]
+    def update_recovery_plan_step(params = {}, options = {})
+      request = build_request(:update_recovery_plan_step, params)
       request.send_request(options)
     end
 
@@ -2945,6 +3824,8 @@ module Aws::Drs
     #   <p>The Point in time (PIT) policy to manage snapshots taken during replication.</p>
     # @option params [Boolean] :auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
+    # @option params [String] :internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     source_server_id: "SourceServerID", # required
@@ -2982,7 +3863,8 @@ module Aws::Drs
     #         enabled: false
     #       }
     #     ],
-    #     auto_replicate_new_disks: false
+    #     auto_replicate_new_disks: false,
+    #     internet_protocol: "InternetProtocol"
     #   }
     #   options = {}
     #   response = client.update_replication_configuration(params, options)
@@ -3024,7 +3906,8 @@ module Aws::Drs
     #         enabled: false
     #       }
     #     ],
-    #     auto_replicate_new_disks: false
+    #     auto_replicate_new_disks: false,
+    #     internet_protocol: "InternetProtocol"
     #   }
     # @return [Types::UpdateReplicationConfigurationOutput]
     def update_replication_configuration(params = {}, options = {})
@@ -3066,6 +3949,8 @@ module Aws::Drs
     #   <p>The Point in time (PIT) policy to manage snapshots taken during replication.</p>
     # @option params [Boolean] :auto_replicate_new_disks
     #   <p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>
+    # @option params [String] :internet_protocol
+    #   <p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     replication_configuration_template_id: "ReplicationConfigurationTemplateID", # required
@@ -3093,7 +3978,8 @@ module Aws::Drs
     #         enabled: false
     #       }
     #     ],
-    #     auto_replicate_new_disks: false
+    #     auto_replicate_new_disks: false,
+    #     internet_protocol: "InternetProtocol"
     #   }
     #   options = {}
     #   response = client.update_replication_configuration_template(params, options)
@@ -3128,7 +4014,8 @@ module Aws::Drs
     #         enabled: false
     #       }
     #     ],
-    #     auto_replicate_new_disks: false
+    #     auto_replicate_new_disks: false,
+    #     internet_protocol: "InternetProtocol"
     #   }
     # @return [Types::UpdateReplicationConfigurationTemplateOutput]
     def update_replication_configuration_template(params = {}, options = {})

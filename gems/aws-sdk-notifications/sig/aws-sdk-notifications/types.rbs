@@ -92,11 +92,13 @@ module Aws::Notifications
       def initialize: (
         ?contact_identifier: String,
         ?managed_notification_configuration_arn: String,
+        ?is_sensitive_events_subscribed: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor contact_identifier: String?
       attr_accessor managed_notification_configuration_arn: String?
+      attr_accessor is_sensitive_events_subscribed: bool?
     end
 
     class AssociateManagedNotificationAccountContactResponse
@@ -114,11 +116,13 @@ module Aws::Notifications
       def initialize: (
         ?channel_arn: String,
         ?managed_notification_configuration_arn: String,
+        ?is_sensitive_events_subscribed: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor channel_arn: String?
       attr_accessor managed_notification_configuration_arn: String?
+      attr_accessor is_sensitive_events_subscribed: bool?
     end
 
     class AssociateManagedNotificationAdditionalChannelResponse
@@ -150,6 +154,13 @@ module Aws::Notifications
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    module ChannelType
+      MOBILE: String
+      CHATBOT: String
+      EMAIL: String
+      ACCOUNT_CONTACT: String
     end
 
     class ConflictException
@@ -855,6 +866,7 @@ module Aws::Notifications
         ?next_token: String,
         ?organizational_unit_id: String,
         ?related_account: String,
+        ?include_sensitive_events: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -866,6 +878,7 @@ module Aws::Notifications
       attr_accessor next_token: String?
       attr_accessor organizational_unit_id: String?
       attr_accessor related_account: String?
+      attr_accessor include_sensitive_events: bool?
     end
 
     class ListManagedNotificationEventsResponse
@@ -1072,12 +1085,14 @@ module Aws::Notifications
         ?channel_identifier: String,
         ?channel_type: String,
         ?override_option: String,
+        ?is_sensitive_events_subscribed: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor channel_identifier: String?
       attr_accessor channel_type: String?
       attr_accessor override_option: String?
+      attr_accessor is_sensitive_events_subscribed: bool?
     end
 
     class ManagedNotificationChildEvent
@@ -1191,6 +1206,7 @@ module Aws::Notifications
         ?end_time: Time,
         ?text_parts: Hash[String, Types::TextPartValue],
         ?organizational_unit_id: String,
+        ?attachments: Array[Types::NotificationEventAttachment],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1207,6 +1223,7 @@ module Aws::Notifications
       attr_accessor end_time: Time?
       attr_accessor text_parts: Hash[String, Types::TextPartValue]?
       attr_accessor organizational_unit_id: String?
+      attr_accessor attachments: Array[Types::NotificationEventAttachment]?
     end
 
     class ManagedNotificationEventOverview
@@ -1313,6 +1330,7 @@ module Aws::Notifications
         ?headline: String,
         ?paragraph_summary: String,
         ?complete_description: String,
+        ?markup_description: String,
         ?dimensions: Array[Types::Dimension],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1320,6 +1338,7 @@ module Aws::Notifications
       attr_accessor headline: String?
       attr_accessor paragraph_summary: String?
       attr_accessor complete_description: String?
+      attr_accessor markup_description: String?
       attr_accessor dimensions: Array[Types::Dimension]?
     end
 
@@ -1355,6 +1374,21 @@ module Aws::Notifications
       attr_accessor creation_time: Time?
       attr_accessor aggregation_duration: String?
       attr_accessor subtype: String?
+    end
+
+    class NotificationEventAttachment
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?attachment_download_url: String,
+        ?content_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor attachment_download_url: String?
+      attr_accessor content_type: String?
     end
 
     class NotificationEventOverview
@@ -1736,6 +1770,30 @@ module Aws::Notifications
       attr_accessor arn: String?
       attr_accessor notification_configuration_arn: String?
       attr_accessor status_summary_by_region: Hash[String, Types::EventRuleStatusSummary]?
+    end
+
+    class UpdateManagedNotificationChannelAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?managed_notification_configuration_arn: String,
+        ?channel_identifier: String,
+        ?is_sensitive_events_subscribed: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor managed_notification_configuration_arn: String?
+      attr_accessor channel_identifier: String?
+      attr_accessor is_sensitive_events_subscribed: bool?
+    end
+
+    class UpdateManagedNotificationChannelAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class UpdateNotificationConfigurationRequest

@@ -149,6 +149,12 @@ module Aws::CodeCommit
     DescribePullRequestEventsInput: StructureShape
     DescribePullRequestEventsOutput: StructureShape
     Description: StringShape
+    DiffChange: StructureShape
+    DiffChangeList: ListShape
+    DiffChangeType: EnumShape
+    DiffContext: IntegerShape
+    DiffHunk: StructureShape
+    DiffHunkList: ListShape
     Difference: StructureShape
     DifferenceList: ListShape
     DirectoryNameConflictsWithFileNameException: StructureShape
@@ -195,6 +201,8 @@ module Aws::CodeCommit
     FolderList: ListShape
     GetApprovalRuleTemplateInput: StructureShape
     GetApprovalRuleTemplateOutput: StructureShape
+    GetBlobDifferencesInput: StructureShape
+    GetBlobDifferencesOutput: StructureShape
     GetBlobInput: StructureShape
     GetBlobOutput: StructureShape
     GetBranchInput: StructureShape
@@ -233,6 +241,7 @@ module Aws::CodeCommit
     GetRepositoryTriggersOutput: StructureShape
     HunkContent: StringShape
     IdempotencyParameterMismatchException: StructureShape
+    IgnoreWhiteSpaces: BooleanShape
     InvalidActorArnException: StructureShape
     InvalidApprovalRuleContentException: StructureShape
     InvalidApprovalRuleNameException: StructureShape
@@ -309,6 +318,7 @@ module Aws::CodeCommit
     KmsKeyId: StringShape
     LastModifiedDate: TimestampShape
     Limit: IntegerShape
+    LineContent: StringShape
     LineNumber: IntegerShape
     ListApprovalRuleTemplatesInput: StructureShape
     ListApprovalRuleTemplatesOutput: StructureShape
@@ -539,6 +549,7 @@ module Aws::CodeCommit
     UpdateRepositoryEncryptionKeyOutput: StructureShape
     UpdateRepositoryNameInput: StructureShape
     UserInfo: StructureShape
+    ValidationException: StructureShape
     Blob: BlobShape
 
     CodeCommit20150413: ServiceShape

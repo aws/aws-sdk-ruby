@@ -34,8 +34,8 @@ module Aws::ResourceGroupsTaggingAPI
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>The target of the operation is currently being modified by a different request. Try
-    #             again later.</p>
+    # <p>The request failed because the target of the operation is currently being modified by
+    #             a different request. Try again later.</p>
     class ConcurrentModificationException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroupsTaggingAPI::Types::ConcurrentModificationException] data
@@ -48,15 +48,13 @@ module Aws::ResourceGroupsTaggingAPI
       end
     end
 
-    # <p>The request was denied because performing this operation violates a constraint. </p>
+    # <p>The request failed because performing the operation would violate a constraint.</p>
     #          <p>Some of the reasons in the following list might not apply to this specific
     #             operation.</p>
     #          <ul>
     #             <li>
     #                <p>You must meet the prerequisites for using tag policies. For information, see
-    #                         <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html">Prerequisites and Permissions for Using Tag Policies</a> in the
-    #                         <i>Organizations User Guide.</i>
-    #                </p>
+    #                         <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#tag-policies-prereqs">Prerequisites and permissions</a> in the <i>Tagging Amazon Web Services resources and Tag Editor</i> user guide. </p>
     #             </li>
     #             <li>
     #                <p>You must enable the tag policies service principal
@@ -94,25 +92,28 @@ module Aws::ResourceGroupsTaggingAPI
       end
     end
 
-    # <p>This error indicates one of the following:</p>
+    # <p>The request failed because of one of the following reasons:</p>
     #          <ul>
     #             <li>
-    #                <p>A parameter is missing.</p>
+    #                <p>A required parameter is missing.</p>
     #             </li>
     #             <li>
-    #                <p>A malformed string was supplied for the request parameter.</p>
+    #                <p>A provided string parameter is malformed.</p>
     #             </li>
     #             <li>
-    #                <p>An out-of-range value was supplied for the request parameter.</p>
+    #                <p>An provided parameter value is out of range.</p>
     #             </li>
     #             <li>
     #                <p>The target ID is invalid, unsupported, or doesn't exist.</p>
     #             </li>
     #             <li>
     #                <p>You can't access the Amazon S3 bucket for report storage. For more information, see
-    #                         <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies-prereqs.html#bucket-policies-org-report">Additional Requirements for Organization-wide Tag Compliance
-    #                         Reports</a> in the <i>Organizations User Guide.</i>
-    #                </p>
+    #                         <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#bucket-policy">Amazon S3 bucket policy for report storage</a> in the <i>Tagging Amazon Web Services resources and Tag Editor</i> user guide. </p>
+    #             </li>
+    #             <li>
+    #                <p>The partition specified in an ARN parameter in the request doesn't match the
+    #                     partition where you invoked the operation. The partition is specified by the
+    #                     second field of the ARN.</p>
     #             </li>
     #          </ul>
     class InvalidParameterException < Smithy::Client::ServiceError
@@ -127,8 +128,8 @@ module Aws::ResourceGroupsTaggingAPI
       end
     end
 
-    # <p>A <code>PaginationToken</code> is valid for a maximum of 15 minutes. Your request was
-    #             denied because the specified <code>PaginationToken</code> has expired.</p>
+    # <p>The request failed because the specified <code>PaginationToken</code> has expired. A
+    #                 <code>PaginationToken</code> is valid for a maximum of 15 minutes.</p>
     class PaginationTokenExpiredException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroupsTaggingAPI::Types::PaginationTokenExpiredException] data
@@ -141,7 +142,8 @@ module Aws::ResourceGroupsTaggingAPI
       end
     end
 
-    # <p>The request was denied to limit the frequency of submitted requests.</p>
+    # <p>The request failed because it exceeded the allowed frequency of submitted
+    #             requests.</p>
     class ThrottledException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ResourceGroupsTaggingAPI::Types::ThrottledException] data

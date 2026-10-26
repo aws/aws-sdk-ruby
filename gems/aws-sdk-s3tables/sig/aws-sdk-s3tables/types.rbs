@@ -66,11 +66,15 @@ module Aws::S3Tables
       def initialize: (
         ?name: String,
         ?encryption_configuration: Types::EncryptionConfiguration,
+        ?storage_class_configuration: Types::StorageClassConfiguration,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor storage_class_configuration: Types::StorageClassConfiguration?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateTableBucketResponse
@@ -94,6 +98,8 @@ module Aws::S3Tables
         ?format: String,
         ?metadata: Types::TableMetadata,
         ?encryption_configuration: Types::EncryptionConfiguration,
+        ?storage_class_configuration: Types::StorageClassConfiguration,
+        ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -103,6 +109,8 @@ module Aws::S3Tables
       attr_accessor format: String?
       attr_accessor metadata: Types::TableMetadata?
       attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor storage_class_configuration: Types::StorageClassConfiguration?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class CreateTableResponse
@@ -142,6 +150,17 @@ module Aws::S3Tables
       attr_accessor table_bucket_arn: String?
     end
 
+    class DeleteTableBucketMetricsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
     class DeleteTableBucketPolicyRequest
       include Smithy::Schema::Structure
 
@@ -151,6 +170,19 @@ module Aws::S3Tables
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor table_bucket_arn: String?
+    end
+
+    class DeleteTableBucketReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?version_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor version_token: String?
     end
 
     class DeleteTableBucketRequest
@@ -177,6 +209,19 @@ module Aws::S3Tables
       attr_accessor table_bucket_arn: String?
       attr_accessor namespace: String?
       attr_accessor name: String?
+    end
+
+    class DeleteTableReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?version_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor version_token: String?
     end
 
     class DeleteTableRequest
@@ -300,6 +345,30 @@ module Aws::S3Tables
       attr_accessor configuration: Hash[String, Types::TableBucketMaintenanceConfigurationValue]?
     end
 
+    class GetTableBucketMetricsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class GetTableBucketMetricsConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor id: String?
+    end
+
     class GetTableBucketPolicyRequest
       include Smithy::Schema::Structure
 
@@ -320,6 +389,30 @@ module Aws::S3Tables
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor resource_policy: String?
+    end
+
+    class GetTableBucketReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class GetTableBucketReplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_token: String,
+        ?configuration: Types::TableBucketReplicationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_token: String?
+      attr_accessor configuration: Types::TableBucketReplicationConfiguration?
     end
 
     class GetTableBucketRequest
@@ -352,6 +445,28 @@ module Aws::S3Tables
       attr_accessor created_at: Time?
       attr_accessor table_bucket_id: String?
       attr_accessor type: String?
+    end
+
+    class GetTableBucketStorageClassRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
+    class GetTableBucketStorageClassResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_class_configuration: Types::StorageClassConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_class_configuration: Types::StorageClassConfiguration?
     end
 
     class GetTableEncryptionRequest
@@ -492,6 +607,104 @@ module Aws::S3Tables
       attr_accessor resource_policy: String?
     end
 
+    class GetTableRecordExpirationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+    end
+
+    class GetTableRecordExpirationConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?configuration: Types::TableRecordExpirationConfigurationValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor configuration: Types::TableRecordExpirationConfigurationValue?
+    end
+
+    class GetTableRecordExpirationJobStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+    end
+
+    class GetTableRecordExpirationJobStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?last_run_timestamp: Time,
+        ?failure_message: String,
+        ?metrics: Types::TableRecordExpirationJobMetrics,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor last_run_timestamp: Time?
+      attr_accessor failure_message: String?
+      attr_accessor metrics: Types::TableRecordExpirationJobMetrics?
+    end
+
+    class GetTableReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+    end
+
+    class GetTableReplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_token: String,
+        ?configuration: Types::TableReplicationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_token: String?
+      attr_accessor configuration: Types::TableReplicationConfiguration?
+    end
+
+    class GetTableReplicationStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+    end
+
+    class GetTableReplicationStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_table_arn: String,
+        ?destinations: Array[Types::ReplicationDestinationStatusModel],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_table_arn: String?
+      attr_accessor destinations: Array[Types::ReplicationDestinationStatusModel]?
+    end
+
     class GetTableRequest
       include Smithy::Schema::Structure
 
@@ -529,6 +742,7 @@ module Aws::S3Tables
         ?owner_account_id: String,
         ?format: String,
         ?table_bucket_id: String,
+        ?managed_table_information: Types::ManagedTableInformation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -548,6 +762,33 @@ module Aws::S3Tables
       attr_accessor owner_account_id: String?
       attr_accessor format: String?
       attr_accessor table_bucket_id: String?
+      attr_accessor managed_table_information: Types::ManagedTableInformation?
+    end
+
+    class GetTableStorageClassRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?namespace: String,
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor namespace: String?
+      attr_accessor name: String?
+    end
+
+    class GetTableStorageClassResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_class_configuration: Types::StorageClassConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_class_configuration: Types::StorageClassConfiguration?
     end
 
     class IcebergCompactionSettings
@@ -575,10 +816,53 @@ module Aws::S3Tables
 
       def initialize: (
         ?schema: Types::IcebergSchema,
+        ?schema_v2: Types::IcebergSchemaV2,
+        ?partition_spec: Types::IcebergPartitionSpec,
+        ?write_order: Types::IcebergSortOrder,
+        ?properties: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor schema: Types::IcebergSchema?
+      attr_accessor schema_v2: Types::IcebergSchemaV2?
+      attr_accessor partition_spec: Types::IcebergPartitionSpec?
+      attr_accessor write_order: Types::IcebergSortOrder?
+      attr_accessor properties: Hash[String, String]?
+    end
+
+    module IcebergNullOrder
+      NULLS_FIRST: String
+      NULLS_LAST: String
+    end
+
+    class IcebergPartitionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_id: Integer,
+        ?transform: String,
+        ?name: String,
+        ?field_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_id: Integer?
+      attr_accessor transform: String?
+      attr_accessor name: String?
+      attr_accessor field_id: Integer?
+    end
+
+    class IcebergPartitionSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?fields: Array[Types::IcebergPartitionField],
+        ?spec_id: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor fields: Array[Types::IcebergPartitionField]?
+      attr_accessor spec_id: Integer?
     end
 
     class IcebergSchema
@@ -592,6 +876,23 @@ module Aws::S3Tables
       attr_accessor fields: Array[Types::SchemaField]?
     end
 
+    class IcebergSchemaV2
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?fields: Array[Types::SchemaV2Field],
+        ?schema_id: Integer,
+        ?identifier_field_ids: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor fields: Array[Types::SchemaV2Field]?
+      attr_accessor schema_id: Integer?
+      attr_accessor identifier_field_ids: Array[Integer]?
+    end
+
     class IcebergSnapshotManagementSettings
       include Smithy::Schema::Structure
 
@@ -603,6 +904,41 @@ module Aws::S3Tables
 
       attr_accessor min_snapshots_to_keep: Integer?
       attr_accessor max_snapshot_age_hours: Integer?
+    end
+
+    module IcebergSortDirection
+      ASC: String
+      DESC: String
+    end
+
+    class IcebergSortField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_id: Integer,
+        ?transform: String,
+        ?direction: String,
+        ?null_order: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_id: Integer?
+      attr_accessor transform: String?
+      attr_accessor direction: String?
+      attr_accessor null_order: String?
+    end
+
+    class IcebergSortOrder
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?order_id: Integer,
+        ?fields: Array[Types::IcebergSortField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor order_id: Integer?
+      attr_accessor fields: Array[Types::IcebergSortField]?
     end
 
     class IcebergUnreferencedFileRemovalSettings
@@ -634,6 +970,19 @@ module Aws::S3Tables
       SUCCESSFUL: String
       FAILED: String
       DISABLED: String
+    end
+
+    class LastSuccessfulReplicatedUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?metadata_location: String,
+        ?timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor metadata_location: String?
+      attr_accessor timestamp: Time?
     end
 
     class ListNamespacesRequest
@@ -728,9 +1077,53 @@ module Aws::S3Tables
       attr_accessor continuation_token: String?
     end
 
+    class ListTagsForResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+    end
+
+    class ListTagsForResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tags: Hash[String, String]?
+    end
+
     module MaintenanceStatus
       ENABLED: String
       DISABLED: String
+    end
+
+    class ManagedTableInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_information: Types::ReplicationInformation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_information: Types::ReplicationInformation?
+    end
+
+    class MethodNotAllowedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
     end
 
     class NamespaceSummary
@@ -797,6 +1190,17 @@ module Aws::S3Tables
       attr_accessor value: Types::TableBucketMaintenanceConfigurationValue?
     end
 
+    class PutTableBucketMetricsConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+    end
+
     class PutTableBucketPolicyRequest
       include Smithy::Schema::Structure
 
@@ -808,6 +1212,47 @@ module Aws::S3Tables
 
       attr_accessor table_bucket_arn: String?
       attr_accessor resource_policy: String?
+    end
+
+    class PutTableBucketReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?version_token: String,
+        ?configuration: Types::TableBucketReplicationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor version_token: String?
+      attr_accessor configuration: Types::TableBucketReplicationConfiguration?
+    end
+
+    class PutTableBucketReplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_token: String?
+      attr_accessor status: String?
+    end
+
+    class PutTableBucketStorageClassRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_bucket_arn: String,
+        ?storage_class_configuration: Types::StorageClassConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_bucket_arn: String?
+      attr_accessor storage_class_configuration: Types::StorageClassConfiguration?
     end
 
     class PutTableMaintenanceConfigurationRequest
@@ -846,6 +1291,47 @@ module Aws::S3Tables
       attr_accessor resource_policy: String?
     end
 
+    class PutTableRecordExpirationConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?value: Types::TableRecordExpirationConfigurationValue,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor value: Types::TableRecordExpirationConfigurationValue?
+    end
+
+    class PutTableReplicationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_arn: String,
+        ?version_token: String,
+        ?configuration: Types::TableReplicationConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_arn: String?
+      attr_accessor version_token: String?
+      attr_accessor configuration: Types::TableReplicationConfiguration?
+    end
+
+    class PutTableReplicationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?version_token: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor version_token: String?
+      attr_accessor status: String?
+    end
+
     class RenameTableRequest
       include Smithy::Schema::Structure
 
@@ -867,6 +1353,53 @@ module Aws::S3Tables
       attr_accessor version_token: String?
     end
 
+    class ReplicationDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_table_bucket_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_table_bucket_arn: String?
+    end
+
+    class ReplicationDestinationStatusModel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replication_status: String,
+        ?destination_table_bucket_arn: String,
+        ?destination_table_arn: String,
+        ?last_successful_replicated_update: Types::LastSuccessfulReplicatedUpdate,
+        ?failure_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replication_status: String?
+      attr_accessor destination_table_bucket_arn: String?
+      attr_accessor destination_table_arn: String?
+      attr_accessor last_successful_replicated_update: Types::LastSuccessfulReplicatedUpdate?
+      attr_accessor failure_message: String?
+    end
+
+    class ReplicationInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_table_arn: String?
+    end
+
+    module ReplicationStatus
+      PENDING: String
+      COMPLETED: String
+      FAILED: String
+    end
+
     module SSEAlgorithm
       AES256: String
       AWS_KMS: String
@@ -876,15 +1409,56 @@ module Aws::S3Tables
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?id: Integer,
         ?name: String,
         ?type: String,
         ?required: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor id: Integer?
       attr_accessor name: String?
       attr_accessor type: String?
       attr_accessor required: bool?
+    end
+
+    class SchemaV2Field
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: Integer,
+        ?name: String,
+        ?type: Smithy::Schema::document,
+        ?required: bool,
+        ?doc: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: Integer?
+      attr_accessor name: String?
+      attr_accessor type: Smithy::Schema::document?
+      attr_accessor required: bool?
+      attr_accessor doc: String?
+    end
+
+    module SchemaV2FieldType
+      STRUCT: String
+    end
+
+    module StorageClass
+      STANDARD: String
+      INTELLIGENT_TIERING: String
+    end
+
+    class StorageClassConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_class: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_class: String?
     end
 
     class TableBucketMaintenanceConfigurationValue
@@ -918,6 +1492,30 @@ module Aws::S3Tables
 
     module TableBucketMaintenanceType
       ICEBERG_UNREFERENCED_FILE_REMOVAL: String
+    end
+
+    class TableBucketReplicationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?rules: Array[Types::TableBucketReplicationRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor rules: Array[Types::TableBucketReplicationRule]?
+    end
+
+    class TableBucketReplicationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destinations: Array[Types::ReplicationDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destinations: Array[Types::ReplicationDestination]?
     end
 
     class TableBucketSummary
@@ -1021,6 +1619,81 @@ module Aws::S3Tables
       end
     end
 
+    class TableRecordExpirationConfigurationValue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?settings: Types::TableRecordExpirationSettings,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor settings: Types::TableRecordExpirationSettings?
+    end
+
+    class TableRecordExpirationJobMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deleted_data_files: Integer,
+        ?deleted_records: Integer,
+        ?removed_files_size: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deleted_data_files: Integer?
+      attr_accessor deleted_records: Integer?
+      attr_accessor removed_files_size: Integer?
+    end
+
+    module TableRecordExpirationJobStatus
+      NOT_YET_RUN: String
+      SUCCESSFUL: String
+      FAILED: String
+      DISABLED: String
+    end
+
+    class TableRecordExpirationSettings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?days: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor days: Integer?
+    end
+
+    module TableRecordExpirationStatus
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class TableReplicationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?rules: Array[Types::TableReplicationRule],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor rules: Array[Types::TableReplicationRule]?
+    end
+
+    class TableReplicationRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destinations: Array[Types::ReplicationDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destinations: Array[Types::ReplicationDestination]?
+    end
+
     class TableSummary
       include Smithy::Schema::Structure
 
@@ -1031,6 +1704,7 @@ module Aws::S3Tables
         ?table_arn: String,
         ?created_at: Time,
         ?modified_at: Time,
+        ?managed_by_service: String,
         ?namespace_id: String,
         ?table_bucket_id: String,
       ) -> void
@@ -1042,6 +1716,7 @@ module Aws::S3Tables
       attr_accessor table_arn: String?
       attr_accessor created_at: Time?
       attr_accessor modified_at: Time?
+      attr_accessor managed_by_service: String?
       attr_accessor namespace_id: String?
       attr_accessor table_bucket_id: String?
     end
@@ -1049,6 +1724,28 @@ module Aws::S3Tables
     module TableType
       CUSTOMER: String
       AWS: String
+    end
+
+    class TagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class TagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class TooManyRequestsException
@@ -1060,6 +1757,28 @@ module Aws::S3Tables
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class UntagResourceRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_arn: String,
+        ?tag_keys: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_arn: String?
+      attr_accessor tag_keys: Array[String]?
+    end
+
+    class UntagResourceResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
     end
 
     class UpdateTableMetadataLocationRequest

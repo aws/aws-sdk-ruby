@@ -7,7 +7,7 @@ module Aws::MemoryDB
   module Types
 
     # <p>An Access Control List. You can authenticate users with Access Contol Lists.
-    #          
+    #
     #          ACLs enable you to control cluster access by grouping users. These Access control lists are designed as a way to organize access to clusters.</p>
     # @!attribute name
     #   <p>The name of the Access Control List</p>
@@ -44,7 +44,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>An ACL with the specified name already exists.</p>
     # @!attribute message
     #   @return [String]
     class ACLAlreadyExistsFault < Struct.new(
@@ -55,7 +55,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified ACL does not exist.</p>
     # @!attribute message
     #   @return [String]
     class ACLNotFoundFault < Struct.new(
@@ -82,7 +82,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of ACLs allowed.</p>
     # @!attribute message
     #   @return [String]
     class ACLQuotaExceededFault < Struct.new(
@@ -105,7 +105,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The customer has exceeded the maximum number of API requests allowed per time period.</p>
     # @!attribute message
     #   @return [String]
     class APICallRateForCustomerExceededFault < Struct.new(
@@ -265,9 +265,9 @@ module Aws::MemoryDB
     #   @return [String]
     # @!attribute snapshot_window
     #   <p>The daily time range (in UTC) during which MemoryDB begins taking a daily snapshot of your shard.
-    #            
+    #
     #            Example: 05:00-09:00
-    #            
+    #
     #            If you do not specify this parameter, MemoryDB automatically chooses an appropriate time range.</p>
     #   @return [String]
     # @!attribute acl_name
@@ -277,7 +277,7 @@ module Aws::MemoryDB
     #   <p>When set to true, the cluster will automatically receive minor engine version upgrades after launch.</p>
     #   @return [Boolean]
     # @!attribute data_tiering
-    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. 
+    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
     #               This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
     #   @return [String]
     # @!attribute network_type
@@ -323,7 +323,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>A cluster with the specified name already exists.</p>
     # @!attribute message
     #   @return [String]
     class ClusterAlreadyExistsFault < Struct.new(
@@ -410,7 +410,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified cluster does not exist.</p>
     # @!attribute message
     #   @return [String]
     class ClusterNotFoundFault < Struct.new(
@@ -441,7 +441,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of clusters allowed for this customer.</p>
     # @!attribute message
     #   @return [String]
     class ClusterQuotaForCustomerExceededFault < Struct.new(
@@ -460,11 +460,11 @@ module Aws::MemoryDB
     #   @return [String]
     # @!attribute target_bucket
     #   <p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.
-    #          
-    #          When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see 
-    #          
-    #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>. 
-    #          
+    #
+    #          When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see
+    #
+    #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>.
+    #
     #        </p>
     #   @return [String]
     # @!attribute kms_key_id
@@ -641,7 +641,7 @@ module Aws::MemoryDB
     #   <p>When set to true, the cluster will automatically receive minor engine version upgrades after launch.</p>
     #   @return [Boolean]
     # @!attribute data_tiering
-    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. 
+    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
     #               This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
     #   @return [Boolean]
     # @!attribute network_type
@@ -884,7 +884,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>A default user is required and must be specified.</p>
     # @!attribute message
     #   @return [String]
     class DefaultUserRequired < Struct.new(
@@ -1183,12 +1183,12 @@ module Aws::MemoryDB
     #   @return [String]
     # @!attribute start_time
     #   <p>The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
-    #            
+    #
     #            Example: 2017-03-30T07:03:49.555Z</p>
     #   @return [Time]
     # @!attribute end_time
     #   <p>The end of the time interval for which to retrieve events, specified in ISO 8601 format.
-    #            
+    #
     #            Example: 2017-03-30T07:03:49.555Z</p>
     #   @return [Time]
     # @!attribute duration
@@ -1262,6 +1262,78 @@ module Aws::MemoryDB
       nil,
       :next_token,
       :multi_region_clusters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute multi_region_parameter_group_name
+    #   <p>The request for information on a specific multi-region parameter group.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+    #   @return [String]
+    class DescribeMultiRegionParameterGroupsRequest < Struct.new(
+      nil,
+      :multi_region_parameter_group_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>An optional token to include in the response. If this token is provided, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+    #   @return [String]
+    # @!attribute multi_region_parameter_groups
+    #   <p>A list of multi-region parameter groups. Each element in the list contains detailed information about one parameter group.</p>
+    #   @return [Array<Types::MultiRegionParameterGroup>]
+    class DescribeMultiRegionParameterGroupsResponse < Struct.new(
+      nil,
+      :next_token,
+      :multi_region_parameter_groups,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute multi_region_parameter_group_name
+    #   <p>The name of the multi-region parameter group to return details for.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>The parameter types to return. Valid values: user | system | engine-default</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of records to include in the response. If more records exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+    #   @return [String]
+    class DescribeMultiRegionParametersRequest < Struct.new(
+      nil,
+      :multi_region_parameter_group_name,
+      :source,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>An optional token to include in the response. If this token is provided, the response includes only results beyond the token, up to the value specified by MaxResults.</p>
+    #   @return [String]
+    # @!attribute multi_region_parameters
+    #   <p>A list of parameters specific to a particular multi-region parameter group. Each element in the list contains detailed information about one parameter.</p>
+    #   @return [Array<Types::MultiRegionParameter>]
+    class DescribeMultiRegionParametersResponse < Struct.new(
+      nil,
+      :next_token,
+      :multi_region_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1345,7 +1417,7 @@ module Aws::MemoryDB
     #   <p>Duration filter value, specified in years or seconds. Use this parameter to show only reservations for a given duration.</p>
     #   @return [String]
     # @!attribute offering_type
-    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. 
+    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
     #            Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
     #   @return [String]
     # @!attribute max_results
@@ -1395,7 +1467,7 @@ module Aws::MemoryDB
     #   <p>The duration filter value, specified in years or seconds. Use this parameter to show only reservations for this duration.</p>
     #   @return [String]
     # @!attribute offering_type
-    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type. 
+    #   <p>The offering type filter value. Use this parameter to show only the available offerings matching the specified offering type.
     #            Valid values: "All Upfront"|"Partial Upfront"| "No Upfront"</p>
     #   @return [String]
     # @!attribute max_results
@@ -1593,7 +1665,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>A user with the specified name already exists.</p>
     # @!attribute message
     #   @return [String]
     class DuplicateUserNameFault < Struct.new(
@@ -1649,7 +1721,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a single occurrence of something interesting within the system. Some examples of events are creating a cluster or adding or removing a 
+    # <p>Represents a single occurrence of something interesting within the system. Some examples of events are creating a cluster or adding or removing a
     #          node.</p>
     # @!attribute source_name
     #   <p>The name for the source of the event. For example, if the event occurred at the cluster level, the identifier would be the name of the cluster.</p>
@@ -1716,7 +1788,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The cluster does not have sufficient capacity to perform the requested operation.</p>
     # @!attribute message
     #   @return [String]
     class InsufficientClusterCapacityFault < Struct.new(
@@ -1727,7 +1799,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The ACL is not in a valid state for the requested operation.</p>
     # @!attribute message
     #   @return [String]
     class InvalidACLStateFault < Struct.new(
@@ -1738,7 +1810,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified Amazon Resource Name (ARN) is not valid.</p>
     # @!attribute message
     #   @return [String]
     class InvalidARNFault < Struct.new(
@@ -1749,7 +1821,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The cluster is not in a valid state for the requested operation.</p>
     # @!attribute message
     #   @return [String]
     class InvalidClusterStateFault < Struct.new(
@@ -1760,7 +1832,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The provided credentials are not valid.</p>
     # @!attribute message
     #   @return [String]
     class InvalidCredentialsException < Struct.new(
@@ -1771,7 +1843,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified KMS key is not valid or accessible.</p>
     # @!attribute message
     #   @return [String]
     class InvalidKMSKeyFault < Struct.new(
@@ -1793,7 +1865,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The node is not in a valid state for the requested operation.</p>
     # @!attribute message
     #   @return [String]
     class InvalidNodeStateFault < Struct.new(
@@ -1804,7 +1876,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified parameter combination is not valid.</p>
     # @!attribute message
     #   @return [String]
     class InvalidParameterCombinationException < Struct.new(
@@ -1815,7 +1887,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The parameter group is not in a valid state for the requested operation.</p>
     # @!attribute message
     #   @return [String]
     class InvalidParameterGroupStateFault < Struct.new(
@@ -1826,7 +1898,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified parameter value is not valid.</p>
     # @!attribute message
     #   @return [String]
     class InvalidParameterValueException < Struct.new(
@@ -1837,7 +1909,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The snapshot is not in a valid state for the requested operation.</p>
     # @!attribute message
     #   @return [String]
     class InvalidSnapshotStateFault < Struct.new(
@@ -1848,7 +1920,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified subnet is not valid.</p>
     # @!attribute message
     #   @return [String]
     class InvalidSubnet < Struct.new(
@@ -1859,7 +1931,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The user is not in a valid state for the requested operation.</p>
     # @!attribute message
     #   @return [String]
     class InvalidUserStateFault < Struct.new(
@@ -1870,7 +1942,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The VPC network is not in a valid state for the requested operation.</p>
     # @!attribute message
     #   @return [String]
     class InvalidVPCNetworkStateFault < Struct.new(
@@ -2030,6 +2102,66 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes an individual setting that controls some aspect of MemoryDB behavior across multiple regions.</p>
+    # @!attribute name
+    #   <p>The name of the parameter.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the parameter.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the parameter.</p>
+    #   @return [String]
+    # @!attribute source
+    #   <p>Indicates the source of the parameter value. Valid values: user | system | engine-default</p>
+    #   @return [String]
+    # @!attribute data_type
+    #   <p>The valid data type for the parameter.</p>
+    #   @return [String]
+    # @!attribute allowed_values
+    #   <p>The valid range of values for the parameter.</p>
+    #   @return [String]
+    # @!attribute minimum_engine_version
+    #   <p>The earliest engine version to which the parameter can apply.</p>
+    #   @return [String]
+    class MultiRegionParameter < Struct.new(
+      nil,
+      :name,
+      :value,
+      :description,
+      :source,
+      :data_type,
+      :allowed_values,
+      :minimum_engine_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Represents the output of a CreateMultiRegionParameterGroup operation. A multi-region parameter group represents a collection of parameters that can be applied to clusters across multiple regions.</p>
+    # @!attribute name
+    #   <p>The name of the multi-region parameter group.</p>
+    #   @return [String]
+    # @!attribute family
+    #   <p>The name of the parameter group family that this multi-region parameter group is compatible with.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the multi-region parameter group.</p>
+    #   @return [String]
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the multi-region parameter group.</p>
+    #   @return [String]
+    class MultiRegionParameterGroup < Struct.new(
+      nil,
+      :name,
+      :family,
+      :description,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified multi-Region parameter group does not exist.</p>
     # @!attribute message
     #   @return [String]
@@ -2041,7 +2173,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The requested operation would result in no changes.</p>
     # @!attribute message
     #   @return [String]
     class NoOperationFault < Struct.new(
@@ -2080,7 +2212,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of nodes allowed for this cluster.</p>
     # @!attribute message
     #   @return [String]
     class NodeQuotaForClusterExceededFault < Struct.new(
@@ -2091,7 +2223,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of nodes allowed for this customer.</p>
     # @!attribute message
     #   @return [String]
     class NodeQuotaForCustomerExceededFault < Struct.new(
@@ -2158,7 +2290,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>A parameter group with the specified name already exists.</p>
     # @!attribute message
     #   @return [String]
     class ParameterGroupAlreadyExistsFault < Struct.new(
@@ -2169,7 +2301,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified parameter group does not exist.</p>
     # @!attribute message
     #   @return [String]
     class ParameterGroupNotFoundFault < Struct.new(
@@ -2180,7 +2312,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of parameter groups allowed.</p>
     # @!attribute message
     #   @return [String]
     class ParameterGroupQuotaExceededFault < Struct.new(
@@ -2450,7 +2582,7 @@ module Aws::MemoryDB
     end
 
     # <p>The requested node offering does not exist.
-    #          
+    #
     #       </p>
     # @!attribute message
     #   @return [String]
@@ -2520,7 +2652,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The required service-linked role was not found.</p>
     # @!attribute message
     #   @return [String]
     class ServiceLinkedRoleNotFoundFault < Struct.new(
@@ -2575,7 +2707,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified service update does not exist.</p>
     # @!attribute message
     #   @return [String]
     class ServiceUpdateNotFoundFault < Struct.new(
@@ -2683,7 +2815,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified shard does not exist.</p>
     # @!attribute message
     #   @return [String]
     class ShardNotFoundFault < Struct.new(
@@ -2694,7 +2826,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of shards allowed per cluster.</p>
     # @!attribute message
     #   @return [String]
     class ShardsPerClusterQuotaExceededFault < Struct.new(
@@ -2742,7 +2874,7 @@ module Aws::MemoryDB
     #   <p>The configuration of the cluster from which the snapshot was taken</p>
     #   @return [Types::ClusterConfiguration]
     # @!attribute data_tiering
-    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type. 
+    #   <p>Enables data tiering. Data tiering is only supported for clusters using the r6gd node type.
     #               This parameter must be set when using r6gd nodes. For more information, see <a href="https://docs.aws.amazon.com/memorydb/latest/devguide/data-tiering.html">Data tiering</a>.</p>
     #   @return [String]
     class Snapshot < Struct.new(
@@ -2759,7 +2891,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>A snapshot with the specified name already exists.</p>
     # @!attribute message
     #   @return [String]
     class SnapshotAlreadyExistsFault < Struct.new(
@@ -2770,7 +2902,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified snapshot does not exist.</p>
     # @!attribute message
     #   @return [String]
     class SnapshotNotFoundFault < Struct.new(
@@ -2781,7 +2913,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of snapshots allowed.</p>
     # @!attribute message
     #   @return [String]
     class SnapshotQuotaExceededFault < Struct.new(
@@ -2853,7 +2985,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>A subnet group with the specified name already exists.</p>
     # @!attribute message
     #   @return [String]
     class SubnetGroupAlreadyExistsFault < Struct.new(
@@ -2864,7 +2996,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The subnet group is currently in use and cannot be deleted.</p>
     # @!attribute message
     #   @return [String]
     class SubnetGroupInUseFault < Struct.new(
@@ -2875,7 +3007,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified subnet group does not exist.</p>
     # @!attribute message
     #   @return [String]
     class SubnetGroupNotFoundFault < Struct.new(
@@ -2886,7 +3018,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of subnet groups allowed.</p>
     # @!attribute message
     #   @return [String]
     class SubnetGroupQuotaExceededFault < Struct.new(
@@ -2897,7 +3029,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The subnet is currently in use and cannot be deleted.</p>
     # @!attribute message
     #   @return [String]
     class SubnetInUse < Struct.new(
@@ -2908,7 +3040,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified subnet is not allowed for this operation.</p>
     # @!attribute message
     #   @return [String]
     class SubnetNotAllowedFault < Struct.new(
@@ -2919,7 +3051,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of subnets allowed.</p>
     # @!attribute message
     #   @return [String]
     class SubnetQuotaExceededFault < Struct.new(
@@ -2930,8 +3062,8 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources. 
-    #          When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see 
+    # <p>A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources.
+    #          When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see
     #          <a href="https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html">Tagging your MemoryDB resources</a>
     #          </p>
     # @!attribute key
@@ -2949,7 +3081,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified tag does not exist.</p>
     # @!attribute message
     #   @return [String]
     class TagNotFoundFault < Struct.new(
@@ -2960,7 +3092,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of tags allowed per resource.</p>
     # @!attribute message
     #   @return [String]
     class TagQuotaPerResourceExceeded < Struct.new(
@@ -2997,7 +3129,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>Test failover is not available for this cluster configuration.</p>
     # @!attribute message
     #   @return [String]
     class TestFailoverNotAvailableFault < Struct.new(
@@ -3362,7 +3494,7 @@ module Aws::MemoryDB
     #   @return [Types::Authentication]
     # @!attribute arn
     #   <p>The Amazon Resource Name (ARN) of the user.
-    #            
+    #
     #         </p>
     #   @return [String]
     class User < Struct.new(
@@ -3379,7 +3511,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>A user with the specified name already exists.</p>
     # @!attribute message
     #   @return [String]
     class UserAlreadyExistsFault < Struct.new(
@@ -3390,7 +3522,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The specified user does not exist.</p>
     # @!attribute message
     #   @return [String]
     class UserNotFoundFault < Struct.new(
@@ -3401,7 +3533,7 @@ module Aws::MemoryDB
       include ::Smithy::Schema::Structure
     end
 
-    # <p></p>
+    # <p>The request cannot be processed because it would exceed the maximum number of users allowed.</p>
     # @!attribute message
     #   @return [String]
     class UserQuotaExceededFault < Struct.new(

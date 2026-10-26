@@ -258,12 +258,16 @@ module Aws::DeviceFarm
         ?name: String,
         ?default_job_timeout_minutes: Integer,
         ?vpc_config: Types::VpcConfig,
+        ?environment_variables: Array[Types::EnvironmentVariable],
+        ?execution_role_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor default_job_timeout_minutes: Integer?
       attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor environment_variables: Array[Types::EnvironmentVariable]?
+      attr_accessor execution_role_arn: String?
     end
 
     class CreateProjectResult
@@ -281,15 +285,19 @@ module Aws::DeviceFarm
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?auxiliary_apps: Array[String],
         ?billing_method: String,
         ?vpce_configuration_arns: Array[String],
         ?device_proxy: Types::DeviceProxy,
+        ?parameters: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor auxiliary_apps: Array[String]?
       attr_accessor billing_method: String?
       attr_accessor vpce_configuration_arns: Array[String]?
       attr_accessor device_proxy: Types::DeviceProxy?
+      attr_accessor parameters: Hash[String, String]?
     end
 
     class CreateRemoteAccessSessionRequest
@@ -298,13 +306,9 @@ module Aws::DeviceFarm
       def initialize: (
         ?project_arn: String,
         ?device_arn: String,
+        ?app_arn: String,
         ?instance_arn: String,
-        ?ssh_public_key: String,
-        ?remote_debug_enabled: bool,
-        ?remote_record_enabled: bool,
-        ?remote_record_app_arn: String,
         ?name: String,
-        ?client_id: String,
         ?configuration: Types::CreateRemoteAccessSessionConfiguration,
         ?interaction_mode: String,
         ?skip_app_resign: bool,
@@ -313,13 +317,9 @@ module Aws::DeviceFarm
 
       attr_accessor project_arn: String?
       attr_accessor device_arn: String?
+      attr_accessor app_arn: String?
       attr_accessor instance_arn: String?
-      attr_accessor ssh_public_key: String?
-      attr_accessor remote_debug_enabled: bool?
-      attr_accessor remote_record_enabled: bool?
-      attr_accessor remote_record_app_arn: String?
       attr_accessor name: String?
-      attr_accessor client_id: String?
       attr_accessor configuration: Types::CreateRemoteAccessSessionConfiguration?
       attr_accessor interaction_mode: String?
       attr_accessor skip_app_resign: bool?
@@ -875,6 +875,19 @@ module Aws::DeviceFarm
       attr_accessor max_devices: Integer?
     end
 
+    class EnvironmentVariable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor value: String?
+    end
+
     class ExecutionConfiguration
       include Smithy::Schema::Structure
 
@@ -1359,6 +1372,10 @@ module Aws::DeviceFarm
       attr_accessor type: String?
     end
 
+    module InsightsType
+      TEST_REPORT: String
+    end
+
     class InstallToRemoteAccessSessionRequest
       include Smithy::Schema::Structure
 
@@ -1458,6 +1475,7 @@ module Aws::DeviceFarm
         ?device_minutes: Types::DeviceMinutes,
         ?video_endpoint: String,
         ?video_capture: bool,
+        ?insights: Types::JobInsights,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1476,6 +1494,64 @@ module Aws::DeviceFarm
       attr_accessor device_minutes: Types::DeviceMinutes?
       attr_accessor video_endpoint: String?
       attr_accessor video_capture: bool?
+      attr_accessor insights: Types::JobInsights?
+    end
+
+    class JobInsights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?test_report: Types::TestReport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor test_report: Types::TestReport?
+    end
+
+    class JobReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?metrics: Types::JobReportMetrics,
+        ?job_details_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor metrics: Types::JobReportMetrics?
+      attr_accessor job_details_url: String?
+    end
+
+    class JobReportMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?jobs_total: Integer,
+        ?jobs_passed: Integer,
+        ?jobs_failed: Integer,
+        ?jobs_skipped: Integer,
+        ?jobs_errored: Integer,
+        ?jobs_stopped: Integer,
+        ?jobs_passed_percentage: Float,
+        ?total_job_execution_duration_seconds: Float,
+        ?average_job_execution_duration_seconds: Float,
+        ?median_job_execution_duration_seconds: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor jobs_total: Integer?
+      attr_accessor jobs_passed: Integer?
+      attr_accessor jobs_failed: Integer?
+      attr_accessor jobs_skipped: Integer?
+      attr_accessor jobs_errored: Integer?
+      attr_accessor jobs_stopped: Integer?
+      attr_accessor jobs_passed_percentage: Float?
+      attr_accessor total_job_execution_duration_seconds: Float?
+      attr_accessor average_job_execution_duration_seconds: Float?
+      attr_accessor median_job_execution_duration_seconds: Float?
     end
 
     class LimitExceededException
@@ -2340,6 +2416,8 @@ module Aws::DeviceFarm
         ?default_job_timeout_minutes: Integer,
         ?created: Time,
         ?vpc_config: Types::VpcConfig,
+        ?environment_variables: Array[Types::EnvironmentVariable],
+        ?execution_role_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2348,6 +2426,8 @@ module Aws::DeviceFarm
       attr_accessor default_job_timeout_minutes: Integer?
       attr_accessor created: Time?
       attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor environment_variables: Array[Types::EnvironmentVariable]?
+      attr_accessor execution_role_arn: String?
     end
 
     class PurchaseOfferingRequest
@@ -2410,6 +2490,19 @@ module Aws::DeviceFarm
       MONTHLY: String
     end
 
+    class RemoteAccessEndpoints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?remote_driver_endpoint: String,
+        ?interactive_endpoint: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor remote_driver_endpoint: String?
+      attr_accessor interactive_endpoint: String?
+    end
+
     class RemoteAccessSession
       include Smithy::Schema::Structure
 
@@ -2424,11 +2517,6 @@ module Aws::DeviceFarm
         ?stopped: Time,
         ?device: Types::Device,
         ?instance_arn: String,
-        ?remote_debug_enabled: bool,
-        ?remote_record_enabled: bool,
-        ?remote_record_app_arn: String,
-        ?host_address: String,
-        ?client_id: String,
         ?billing_method: String,
         ?device_minutes: Types::DeviceMinutes,
         ?endpoint: String,
@@ -2437,6 +2525,8 @@ module Aws::DeviceFarm
         ?skip_app_resign: bool,
         ?vpc_config: Types::VpcConfig,
         ?device_proxy: Types::DeviceProxy,
+        ?app_upload: String,
+        ?endpoints: Types::RemoteAccessEndpoints,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2450,11 +2540,6 @@ module Aws::DeviceFarm
       attr_accessor stopped: Time?
       attr_accessor device: Types::Device?
       attr_accessor instance_arn: String?
-      attr_accessor remote_debug_enabled: bool?
-      attr_accessor remote_record_enabled: bool?
-      attr_accessor remote_record_app_arn: String?
-      attr_accessor host_address: String?
-      attr_accessor client_id: String?
       attr_accessor billing_method: String?
       attr_accessor device_minutes: Types::DeviceMinutes?
       attr_accessor endpoint: String?
@@ -2463,6 +2548,8 @@ module Aws::DeviceFarm
       attr_accessor skip_app_resign: bool?
       attr_accessor vpc_config: Types::VpcConfig?
       attr_accessor device_proxy: Types::DeviceProxy?
+      attr_accessor app_upload: String?
+      attr_accessor endpoints: Types::RemoteAccessEndpoints?
     end
 
     class RenewOfferingRequest
@@ -2487,6 +2574,14 @@ module Aws::DeviceFarm
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor offering_transaction: Types::OfferingTransaction?
+    end
+
+    module ReportStatus
+      PENDING: String
+      RUNNING: String
+      COMPLETED: String
+      SKIPPED: String
+      ERRORED: String
     end
 
     class Resolution
@@ -2565,6 +2660,10 @@ module Aws::DeviceFarm
         ?test_spec_arn: String,
         ?device_selection_result: Types::DeviceSelectionResult,
         ?vpc_config: Types::VpcConfig,
+        ?execution_role_arn: String,
+        ?environment_variables: Array[Types::EnvironmentVariable],
+        ?insights_types: Array[String],
+        ?insights: Types::RunInsights,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2601,6 +2700,23 @@ module Aws::DeviceFarm
       attr_accessor test_spec_arn: String?
       attr_accessor device_selection_result: Types::DeviceSelectionResult?
       attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor execution_role_arn: String?
+      attr_accessor environment_variables: Array[Types::EnvironmentVariable]?
+      attr_accessor insights_types: Array[String]?
+      attr_accessor insights: Types::RunInsights?
+    end
+
+    class RunInsights
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?job_report: Types::JobReport,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor job_report: Types::JobReport?
     end
 
     class Sample
@@ -2652,6 +2768,9 @@ module Aws::DeviceFarm
         ?radios: Types::Radios,
         ?auxiliary_apps: Array[String],
         ?billing_method: String,
+        ?environment_variables: Array[Types::EnvironmentVariable],
+        ?execution_role_arn: String,
+        ?insights_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2665,6 +2784,9 @@ module Aws::DeviceFarm
       attr_accessor radios: Types::Radios?
       attr_accessor auxiliary_apps: Array[String]?
       attr_accessor billing_method: String?
+      attr_accessor environment_variables: Array[Types::EnvironmentVariable]?
+      attr_accessor execution_role_arn: String?
+      attr_accessor insights_types: Array[String]?
     end
 
     class ScheduleRunRequest
@@ -3028,6 +3150,48 @@ module Aws::DeviceFarm
       attr_accessor vpc_id: String?
     end
 
+    class TestReport
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?metrics: Types::TestReportMetrics,
+        ?test_details_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor metrics: Types::TestReportMetrics?
+      attr_accessor test_details_url: String?
+    end
+
+    class TestReportMetrics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tests_total: Integer,
+        ?tests_passed: Integer,
+        ?tests_failed: Integer,
+        ?tests_skipped: Integer,
+        ?tests_errored: Integer,
+        ?tests_other: Integer,
+        ?tests_passed_percentage: Float,
+        ?total_test_execution_duration_seconds: Float,
+        ?median_test_execution_duration_seconds: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tests_total: Integer?
+      attr_accessor tests_passed: Integer?
+      attr_accessor tests_failed: Integer?
+      attr_accessor tests_skipped: Integer?
+      attr_accessor tests_errored: Integer?
+      attr_accessor tests_other: Integer?
+      attr_accessor tests_passed_percentage: Float?
+      attr_accessor total_test_execution_duration_seconds: Float?
+      attr_accessor median_test_execution_duration_seconds: Float?
+    end
+
     module TestType
       BUILTIN_FUZZ: String
       APPIUM_JAVA_JUNIT: String
@@ -3248,6 +3412,8 @@ module Aws::DeviceFarm
         ?name: String,
         ?default_job_timeout_minutes: Integer,
         ?vpc_config: Types::VpcConfig,
+        ?environment_variables: Array[Types::EnvironmentVariable],
+        ?execution_role_arn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3255,6 +3421,8 @@ module Aws::DeviceFarm
       attr_accessor name: String?
       attr_accessor default_job_timeout_minutes: Integer?
       attr_accessor vpc_config: Types::VpcConfig?
+      attr_accessor environment_variables: Array[Types::EnvironmentVariable]?
+      attr_accessor execution_role_arn: String?
     end
 
     class UpdateProjectResult

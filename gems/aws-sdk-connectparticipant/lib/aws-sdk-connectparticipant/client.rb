@@ -144,18 +144,18 @@ module Aws::ConnectParticipant
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -247,7 +247,7 @@ module Aws::ConnectParticipant
     # <p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL
     #             provided in StartAttachmentUpload API. A conflict exception is thrown when an attachment
     #             with that identifier is already being uploaded.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of
@@ -283,8 +283,8 @@ module Aws::ConnectParticipant
     end
 
     # <p>Creates the participant's connection. </p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
-    #          <p>For WebRTC security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security">Amazon Connect WebRTC security best practices</a>. </p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
+    #          <p>For WebRTC security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-webrtc-security">Connect Customer WebRTC security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ParticipantToken</code> is used for invoking this API instead of
@@ -400,7 +400,7 @@ module Aws::ConnectParticipant
     end
 
     # <p>Retrieves the view for the specified view token.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
     # @param [Hash, Types::DescribeViewRequest] params
     # @option params [String] :view_token
     #   <p>An encrypted token originating from the interactive message of a ShowView block
@@ -436,7 +436,7 @@ module Aws::ConnectParticipant
     end
 
     # <p>Disconnects a participant. </p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of
@@ -470,7 +470,7 @@ module Aws::ConnectParticipant
 
     # <p>Provides a pre-signed URL for download of a completed attachment. This is an
     #             asynchronous API for use with active contacts.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
     #          <note>
     #             <ul>
     #                <li>
@@ -519,7 +519,7 @@ module Aws::ConnectParticipant
 
     # <p>Retrieves the AuthenticationUrl for the current authentication session for the
     #             AuthenticateCustomer flow block. </p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>.</p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>.</p>
     #          <note>
     #             <ul>
     #                <li>
@@ -569,7 +569,7 @@ module Aws::ConnectParticipant
     # <p>Retrieves a transcript of the session, including details about any attachments. For
     #             information about accessing past chat contact transcripts for a persistent chat, see
     #                 <a href="https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html">Enable persistent chat</a>. </p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
     #          <p>If you have a process that consumes events in the transcript of an chat that has
     #             ended, note that chat transcripts contain the following event content types if the event
     #             has occurred during the chat session:</p>
@@ -675,7 +675,8 @@ module Aws::ConnectParticipant
     #               read_timestamp: "Instant",
     #               recipient_participant_id: "ParticipantId"
     #             }
-    #           ]
+    #           ],
+    #           message_processing_status: "PROCESSING" # One of: ["PROCESSING", "FAILED", "REJECTED"]
     #         },
     #         related_contact_id: "ContactId",
     #         contact_id: "ContactId"
@@ -698,7 +699,7 @@ module Aws::ConnectParticipant
     #          <p>Sends an event. Message receipts are not supported when there are more than two active
     #             participants in the chat. Using the SendEvent API for message receipts when a supervisor
     #             is barged-in will result in a conflict exception.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of
@@ -757,7 +758,7 @@ module Aws::ConnectParticipant
     end
 
     # <p>Sends a message.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of
@@ -813,7 +814,10 @@ module Aws::ConnectParticipant
     #   response.to_h #=>
     #   {
     #     id: "ChatItemId",
-    #     absolute_time: "Instant"
+    #     absolute_time: "Instant",
+    #     message_metadata: {
+    #       message_processing_status: "PROCESSING" # One of: ["PROCESSING", "FAILED", "REJECTED"]
+    #     }
     #   }
     # @return [Types::SendMessageResponse]
     def send_message(params = {}, options = {})
@@ -823,7 +827,7 @@ module Aws::ConnectParticipant
 
     # <p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to
     #             S3.</p>
-    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Amazon Connect Chat security best practices</a>. </p>
+    #          <p>For security recommendations, see <a href="https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat">Connect Customer Chat security best practices</a>. </p>
     #          <note>
     #             <p>
     #                <code>ConnectionToken</code> is used for invoking this API instead of

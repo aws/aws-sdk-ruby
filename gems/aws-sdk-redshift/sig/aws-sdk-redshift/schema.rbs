@@ -12,6 +12,7 @@ module Aws::Redshift
     ActionType: EnumShape
     AddPartnerInput: StructureShape
     AddPartnerOutput: StructureShape
+    ApplicationType: EnumShape
     AquaConfiguration: StructureShape
     AquaConfigurationStatus: EnumShape
     AquaStatus: EnumShape
@@ -60,6 +61,7 @@ module Aws::Redshift
     BucketNotFoundFault: StructureShape
     CancelResizeMessage: StructureShape
     CancelResizeOutput: StructureShape
+    CatalogNameString: StringShape
     CertificateAssociation: StructureShape
     CertificateAssociationList: ListShape
     Cluster: StructureShape
@@ -70,6 +72,7 @@ module Aws::Redshift
     ClusterDbRevisionsMessage: StructureShape
     ClusterIamRole: StructureShape
     ClusterIamRoleList: ListShape
+    ClusterIdentifierList: ListShape
     ClusterList: ListShape
     ClusterNode: StructureShape
     ClusterNodesList: ListShape
@@ -110,6 +113,7 @@ module Aws::Redshift
     ClusterVersionsMessage: StructureShape
     ClustersMessage: StructureShape
     ConflictPolicyUpdateFault: StructureShape
+    Connect: StructureShape
     ConsumerIdentifierList: ListShape
     CopyClusterSnapshotMessage: StructureShape
     CopyClusterSnapshotResult: StructureShape
@@ -138,6 +142,8 @@ module Aws::Redshift
     CreateHsmConfigurationResult: StructureShape
     CreateIntegrationMessage: StructureShape
     CreateIntegrationOutput: StructureShape
+    CreateQev2IdcApplicationMessage: StructureShape
+    CreateQev2IdcApplicationResult: StructureShape
     CreateRedshiftIdcApplicationMessage: StructureShape
     CreateRedshiftIdcApplicationResult: StructureShape
     CreateScheduledActionMessage: StructureShape
@@ -191,6 +197,7 @@ module Aws::Redshift
     DeleteIntegrationOutput: StructureShape
     DeletePartnerInput: StructureShape
     DeletePartnerOutput: StructureShape
+    DeleteQev2IdcApplicationMessage: StructureShape
     DeleteRedshiftIdcApplicationMessage: StructureShape
     DeleteResourcePolicyMessage: StructureShape
     DeleteScheduledActionMessage: StructureShape
@@ -247,6 +254,8 @@ module Aws::Redshift
     DescribeOrderableClusterOptionsMessage: StructureShape
     DescribePartnersInputMessage: StructureShape
     DescribePartnersOutputMessage: StructureShape
+    DescribeQev2IdcApplicationsMessage: StructureShape
+    DescribeQev2IdcApplicationsResult: StructureShape
     DescribeRedshiftIdcApplicationsMessage: StructureShape
     DescribeRedshiftIdcApplicationsResult: StructureShape
     DescribeReservedNodeExchangeStatusInputMessage: StructureShape
@@ -313,6 +322,8 @@ module Aws::Redshift
     GetClusterCredentialsOutput: StructureShape
     GetClusterCredentialsWithIAMMessage: StructureShape
     GetClusterCredentialsWithIAMOutput: StructureShape
+    GetIdentityCenterAuthTokenRequest: StructureShape
+    GetIdentityCenterAuthTokenResponse: StructureShape
     GetReservedNodeExchangeConfigurationOptionsInputMessage: StructureShape
     GetReservedNodeExchangeConfigurationOptionsOutputMessage: StructureShape
     GetReservedNodeExchangeOfferingsInputMessage: StructureShape
@@ -401,11 +412,14 @@ module Aws::Redshift
     LakeFormationQuery: StructureShape
     LakeFormationScopeUnion: UnionShape
     LakeFormationServiceIntegrations: ListShape
+    LakehouseIdcRegistration: EnumShape
+    LakehouseRegistration: EnumShape
     LimitExceededFault: StructureShape
     ListRecommendationsMessage: StructureShape
     ListRecommendationsResult: StructureShape
     LogDestinationType: EnumShape
     LogTypeList: ListShape
+    LoggingPublishStatus: StructureShape
     Long: IntegerShape
     LongOptional: IntegerShape
     MaintenanceTrack: StructureShape
@@ -437,6 +451,10 @@ module Aws::Redshift
     ModifyEventSubscriptionResult: StructureShape
     ModifyIntegrationMessage: StructureShape
     ModifyIntegrationOutput: StructureShape
+    ModifyLakehouseConfigurationMessage: StructureShape
+    ModifyLakehouseConfigurationOutput: StructureShape
+    ModifyQev2IdcApplicationMessage: StructureShape
+    ModifyQev2IdcApplicationResult: StructureShape
     ModifyRedshiftIdcApplicationMessage: StructureShape
     ModifyRedshiftIdcApplicationResult: StructureShape
     ModifyScheduledActionMessage: StructureShape
@@ -486,6 +504,11 @@ module Aws::Redshift
     PurchaseReservedNodeOfferingResult: StructureShape
     PutResourcePolicyMessage: StructureShape
     PutResourcePolicyResult: StructureShape
+    Qev2IdcApplication: StructureShape
+    Qev2IdcApplicationAlreadyExistsFault: StructureShape
+    Qev2IdcApplicationList: ListShape
+    Qev2IdcApplicationName: StringShape
+    Qev2IdcApplicationNotExistsFault: StructureShape
     ReadWriteAccess: StructureShape
     RebootClusterMessage: StructureShape
     RebootClusterResult: StructureShape
@@ -502,6 +525,9 @@ module Aws::Redshift
     RedshiftIdcApplicationName: StringShape
     RedshiftIdcApplicationNotExistsFault: StructureShape
     RedshiftIdcApplicationQuotaExceededFault: StructureShape
+    RedshiftInvalidParameterFault: StructureShape
+    RedshiftScopeUnion: UnionShape
+    RedshiftServiceIntegrations: ListShape
     ReferenceLink: StructureShape
     ReferenceLinkList: ListShape
     RegisterNamespaceInputMessage: StructureShape
@@ -558,6 +584,8 @@ module Aws::Redshift
     S3AccessGrantsScopeUnion: UnionShape
     S3AccessGrantsServiceIntegrations: ListShape
     S3KeyPrefixValue: StringShape
+    S3TableLastIngestionTimeMap: MapShape
+    S3TablePublishStatus: StructureShape
     SNSInvalidTopicFault: StructureShape
     SNSNoAuthorizationFault: StructureShape
     SNSTopicArnNotFoundFault: StructureShape

@@ -144,18 +144,18 @@ module Aws::LakeFormation
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -273,6 +273,10 @@ module Aws::LakeFormation
     #       lf_tag_expression: {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
     #       }
     #     },
     #     lf_tags: [ # required
@@ -312,8 +316,27 @@ module Aws::LakeFormation
     #       Lake Formation does not scope down the permission of the assumed role.  All permissions attached to the role via the SAML federation setup will be included in the role session.
     #     </p>
     #          <p>
-    #       This decorated role is expected to access data in Amazon S3 by getting temporary access from Lake Formation which is authorized via the virtual API <code>GetDataAccess</code>.  Therefore, all SAML roles that can be assumed via <code>AssumeDecoratedRoleWithSAML</code> must at a minimum include <code>lakeformation:GetDataAccess</code> in their role policies.  A typical IAM policy attached to such a role would look as follows:
+    #       This decorated role is expected to access data in Amazon S3 by getting temporary access from Lake Formation which is authorized via the virtual API <code>GetDataAccess</code>.
+    #       Therefore, all SAML roles that can be assumed via <code>AssumeDecoratedRoleWithSAML</code> must at a minimum include <code>lakeformation:GetDataAccess</code> in their role policies.
+    #       A typical IAM policy attached to such a role would include the following actions:
     #     </p>
+    #          <ul>
+    #             <li>
+    #                <p>glue:*Database*</p>
+    #             </li>
+    #             <li>
+    #                <p>glue:*Table*</p>
+    #             </li>
+    #             <li>
+    #                <p>glue:*Partition*</p>
+    #             </li>
+    #             <li>
+    #                <p>glue:*UserDefinedFunction*</p>
+    #             </li>
+    #             <li>
+    #                <p>lakeformation:GetDataAccess</p>
+    #             </li>
+    #          </ul>
     # @param [Hash, Types::AssumeDecoratedRoleWithSAMLRequest] params
     # @option params [String] :saml_assertion
     #   <p>A SAML assertion consisting of an assertion statement for the user who needs temporary credentials. This must match the SAML assertion that was issued to IAM. This must be Base64 encoded.</p>
@@ -343,6 +366,99 @@ module Aws::LakeFormation
     # @return [Types::AssumeDecoratedRoleWithSAMLResponse]
     def assume_decorated_role_with_saml(params = {}, options = {})
       request = build_request(:assume_decorated_role_with_saml, params)
+      request.send_request(options)
+    end
+
+    # <p>Attaches a row-level security policy to a resource for a principal. When the principal queries the resource, Lake Formation applies the policy's filter expression so that only the permitted rows are returned.</p>
+    # @param [Hash, Types::AttachRLSPolicyRequest] params
+    # @option params [String] :name
+    #   <p>The name of the row-level security policy to attach.</p>
+    # @option params [Types::Resource] :resource
+    #   <p>The resource to which the row-level security policy is attached.</p>
+    # @option params [Types::DataLakePrincipal] :principal
+    #   <p>The principal to which the row-level security policy applies.</p>
+    # @option params [Types::Condition] :condition
+    #   <p>A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.</p>
+    # @option params [Boolean] :set_default
+    #   <p>Indicates whether this policy becomes the default row-level security policy for the resource. The default policy applies to all principals by default.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "NameString", # required
+    #     resource: { # required
+    #       catalog: {
+    #         id: "CatalogIdString"
+    #       },
+    #       database: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         }
+    #       },
+    #       table_with_columns: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"]
+    #         }
+    #       },
+    #       data_location: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString"
+    #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE" # One of: ["DATABASE", "TABLE"], # required
+    #         expression: [
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           }
+    #         ],
+    #         expression_name: "NameString"
+    #       },
+    #       lf_tag_expression: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       }
+    #     },
+    #     principal: {
+    #       data_lake_principal_identifier: "DataLakePrincipalString"
+    #     },
+    #     condition: {
+    #       expression: "ExpressionString"
+    #     },
+    #     set_default: false
+    #   }
+    #   options = {}
+    #   response = client.attach_rls_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::AttachRLSPolicyResponse]
+    def attach_rls_policy(params = {}, options = {})
+      request = build_request(:attach_rls_policy, params)
       request.send_request(options)
     end
 
@@ -412,6 +528,10 @@ module Aws::LakeFormation
     #             expression_name: "NameString"
     #           },
     #           lf_tag_expression: {
+    #             catalog_id: "CatalogIdString",
+    #             name: "NameString", # required
+    #           },
+    #           rls_policy: {
     #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
     #           }
@@ -487,6 +607,10 @@ module Aws::LakeFormation
     #               expression_name: "NameString"
     #             },
     #             lf_tag_expression: {
+    #               catalog_id: "CatalogIdString",
+    #               name: "NameString", # required
+    #             },
+    #             rls_policy: {
     #               catalog_id: "CatalogIdString",
     #               name: "NameString", # required
     #             }
@@ -578,6 +702,10 @@ module Aws::LakeFormation
     #           lf_tag_expression: {
     #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
+    #           },
+    #           rls_policy: {
+    #             catalog_id: "CatalogIdString",
+    #             name: "NameString", # required
     #           }
     #         },
     #         permissions: ["ALL" # One of: ["ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_LF_TAG", "ASSOCIATE", "GRANT_WITH_LF_TAG_EXPRESSION", "CREATE_LF_TAG_EXPRESSION", "CREATE_CATALOG", "SUPER_USER"]],
@@ -651,6 +779,10 @@ module Aws::LakeFormation
     #               expression_name: "NameString"
     #             },
     #             lf_tag_expression: {
+    #               catalog_id: "CatalogIdString",
+    #               name: "NameString", # required
+    #             },
+    #             rls_policy: {
     #               catalog_id: "CatalogIdString",
     #               name: "NameString", # required
     #             }
@@ -833,6 +965,8 @@ module Aws::LakeFormation
     #            that are allowed to access data managed by Lake Formation. </p>
     #            <p>If the <code>ShareRecipients</code> list includes valid values, a resource share is created with the principals you want to have access to the resources.</p>
     #            <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>
+    # @option params [Array<Types::ServiceIntegrationUnion>] :service_integrations
+    #   <p>A list of service integrations for enabling trusted identity propagation with external services such as Redshift.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog_id: "CatalogIdString",
@@ -845,7 +979,16 @@ module Aws::LakeFormation
     #       {
     #         data_lake_principal_identifier: "DataLakePrincipalString"
     #       }
-    #     ]
+    #     ],
+    #     service_integrations: [{
+    #       # One of:
+    #       redshift: [{
+    #         # One of:
+    #         redshift_connect: {
+    #           authorization: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #         }
+    #       }]
+    #     }]
     #   }
     #   options = {}
     #   response = client.create_lake_formation_identity_center_configuration(params, options)
@@ -927,6 +1070,10 @@ module Aws::LakeFormation
     #       lf_tag_expression: {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
     #       }
     #     },
     #     condition: {
@@ -941,6 +1088,36 @@ module Aws::LakeFormation
     # @return [Types::CreateLakeFormationOptInResponse]
     def create_lake_formation_opt_in(params = {}, options = {})
       request = build_request(:create_lake_formation_opt_in, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a row-level security (RLS) policy. A row-level security policy defines a filter expression that Lake Formation evaluates to determine which rows of a table a principal is allowed to see. The policy is created independently of any resource, and is later associated with a resource and principal using <code>AttachRLSPolicy</code>.</p>
+    # @param [Hash, Types::CreateRLSPolicyRequest] params
+    # @option params [String] :name
+    #   <p>A unique name for the row-level security policy within the Data Catalog.</p>
+    # @option params [Array<Types::Column>] :attachment_columns
+    #   <p>The list of columns that the filter expression references. These columns define the shape of the data that the policy can be attached to.</p>
+    # @option params [String] :filter_expression
+    #   <p>A filter predicate, written in a SQL-like syntax, that Lake Formation evaluates against each row. Only the rows for which the expression evaluates to true are returned to the principal.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "NameString", # required
+    #     attachment_columns: [ # required
+    #       {
+    #         name: "NameString", # required
+    #         type: "ColumnTypeString"
+    #       }
+    #     ],
+    #     filter_expression: "PredicateString", # required
+    #   }
+    #   options = {}
+    #   response = client.create_rls_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::CreateRLSPolicyResponse]
+    def create_rls_policy(params = {}, options = {})
+      request = build_request(:create_rls_policy, params)
       request.send_request(options)
     end
 
@@ -972,7 +1149,18 @@ module Aws::LakeFormation
       request.send_request(options)
     end
 
-    # <p>Deletes the specified LF-tag given a key name. If the input parameter tag key was not found, then the operation will throw an exception. When you delete an LF-tag, the <code>LFTagPolicy</code> attached to the LF-tag becomes invalid. If the deleted LF-tag was still assigned to any resource, the tag policy attach to the deleted LF-tag will no longer be applied to the resource.</p>
+    # <p> Deletes an LF-tag by its key name. The operation fails if the specified tag key doesn't
+    #       exist. When you delete an LF-Tag: </p>
+    #          <ul>
+    #             <li>
+    #                <p>The associated LF-Tag policy becomes invalid.</p>
+    #             </li>
+    #             <li>
+    #                <p>
+    #      Resources that had this tag assigned will no longer have the tag policy applied to
+    #      them.</p>
+    #             </li>
+    #          </ul>
     # @param [Hash, Types::DeleteLFTagRequest] params
     # @option params [String] :catalog_id
     #   <p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your Lake Formation environment. </p>
@@ -1105,6 +1293,10 @@ module Aws::LakeFormation
     #       lf_tag_expression: {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
     #       }
     #     },
     #     condition: {
@@ -1126,8 +1318,8 @@ module Aws::LakeFormation
     #       if the transaction is canceled. Without this call, no Amazon S3 objects are automatically deleted when a transaction cancels.
     #     </p>
     #          <p>
-    #       The Glue ETL library function <code>write_dynamic_frame.from_catalog()</code> includes an option to automatically 
-    #       call <code>DeleteObjectsOnCancel</code> before writes. For more information, see 
+    #       The Glue ETL library function <code>write_dynamic_frame.from_catalog()</code> includes an option to automatically
+    #       call <code>DeleteObjectsOnCancel</code> before writes. For more information, see
     #       <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/transactions-data-operations.html#rolling-back-writes">Rolling Back Amazon S3 Writes</a>.
     #     </p>
     # @param [Hash, Types::DeleteObjectsOnCancelRequest] params
@@ -1162,6 +1354,25 @@ module Aws::LakeFormation
     # @return [Types::DeleteObjectsOnCancelResponse]
     def delete_objects_on_cancel(params = {}, options = {})
       request = build_request(:delete_objects_on_cancel, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a row-level security policy. Any active attachments of the policy are automatically removed as part of the deletion, so you do not need to detach the policy first.</p>
+    # @param [Hash, Types::DeleteRLSPolicyRequest] params
+    # @option params [String] :name
+    #   <p>The name of the row-level security policy to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "NameString", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_rls_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteRLSPolicyResponse]
+    def delete_rls_policy(params = {}, options = {})
+      request = build_request(:delete_rls_policy, params)
       request.send_request(options)
     end
 
@@ -1210,6 +1421,15 @@ module Aws::LakeFormation
     #         data_lake_principal_identifier: "DataLakePrincipalString"
     #       }
     #     ],
+    #     service_integrations: [{
+    #       # One of:
+    #       redshift: [{
+    #         # One of:
+    #         redshift_connect: {
+    #           authorization: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #         }
+    #       }]
+    #     }],
     #     resource_share: "RAMResourceShareArn"
     #   }
     # @return [Types::DescribeLakeFormationIdentityCenterConfigurationResponse]
@@ -1237,7 +1457,9 @@ module Aws::LakeFormation
     #       last_modified: Time.now,
     #       with_federation: false,
     #       hybrid_access_enabled: false,
-    #       with_privileged_access: false
+    #       with_privileged_access: false,
+    #       verification_status: "VERIFIED" # One of: ["VERIFIED", "VERIFICATION_FAILED", "NOT_VERIFIED"],
+    #       expected_resource_owner_account: "AccountIdString"
     #     }
     #   }
     # @return [Types::DescribeResourceResponse]
@@ -1269,6 +1491,99 @@ module Aws::LakeFormation
     # @return [Types::DescribeTransactionResponse]
     def describe_transaction(params = {}, options = {})
       request = build_request(:describe_transaction, params)
+      request.send_request(options)
+    end
+
+    # <p>Detaches a row-level security policy from a resource for a principal. After the policy is detached, its filter expression is no longer applied to the principal's queries on that resource.</p>
+    # @param [Hash, Types::DetachRLSPolicyRequest] params
+    # @option params [String] :name
+    #   <p>The name of the row-level security policy to detach.</p>
+    # @option params [Types::Resource] :resource
+    #   <p>The resource from which the row-level security policy is detached.</p>
+    # @option params [Types::DataLakePrincipal] :principal
+    #   <p>The principal for which the row-level security policy is detached.</p>
+    # @option params [Types::Condition] :condition
+    #   <p>A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.</p>
+    # @option params [Boolean] :remove_default
+    #   <p>Indicates whether to remove this policy as the default row-level security policy for the resource.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "NameString", # required
+    #     resource: { # required
+    #       catalog: {
+    #         id: "CatalogIdString"
+    #       },
+    #       database: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         }
+    #       },
+    #       table_with_columns: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"]
+    #         }
+    #       },
+    #       data_location: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString"
+    #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE" # One of: ["DATABASE", "TABLE"], # required
+    #         expression: [
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           }
+    #         ],
+    #         expression_name: "NameString"
+    #       },
+    #       lf_tag_expression: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       }
+    #     },
+    #     principal: {
+    #       data_lake_principal_identifier: "DataLakePrincipalString"
+    #     },
+    #     condition: {
+    #       expression: "ExpressionString"
+    #     },
+    #     remove_default: false
+    #   }
+    #   options = {}
+    #   response = client.detach_rls_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DetachRLSPolicyResponse]
+    def detach_rls_policy(params = {}, options = {})
+      request = build_request(:detach_rls_policy, params)
       request.send_request(options)
     end
 
@@ -1495,6 +1810,10 @@ module Aws::LakeFormation
     #           lf_tag_expression: {
     #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
+    #           },
+    #           rls_policy: {
+    #             catalog_id: "CatalogIdString",
+    #             name: "NameString", # required
     #           }
     #         },
     #         condition: {
@@ -1630,6 +1949,37 @@ module Aws::LakeFormation
       request.send_request(options)
     end
 
+    # <p>Returns the definition of a row-level security policy, including its attachment columns and filter expression.</p>
+    # @param [Hash, Types::GetRLSPolicyRequest] params
+    # @option params [String] :name
+    #   <p>The name of the row-level security policy to retrieve.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "NameString", # required
+    #   }
+    #   options = {}
+    #   response = client.get_rls_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     rls_policy: {
+    #       catalog_id: "CatalogIdString",
+    #       name: "NameString",
+    #       attachment_columns: [
+    #         {
+    #           name: "NameString", # required
+    #           type: "ColumnTypeString"
+    #         }
+    #       ],
+    #       filter_expression: "PredicateString"
+    #     }
+    #   }
+    # @return [Types::GetRLSPolicyResponse]
+    def get_rls_policy(params = {}, options = {})
+      request = build_request(:get_rls_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Returns the LF-tags applied to a resource.</p>
     # @param [Hash, Types::GetResourceLFTagsRequest] params
     # @option params [String] :catalog_id
@@ -1692,6 +2042,10 @@ module Aws::LakeFormation
     #         expression_name: "NameString"
     #       },
     #       lf_tag_expression: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
     #       }
@@ -1798,6 +2152,76 @@ module Aws::LakeFormation
     # @return [Types::GetTableObjectsResponse]
     def get_table_objects(params = {}, options = {})
       request = build_request(:get_table_objects, params)
+      request.send_request(options)
+    end
+
+    # <p>Allows a user or application in a secure environment to access data in a specific Amazon S3 location registered with Lake Formation by providing temporary scoped credentials that are limited to the requested data location and
+    #       the caller's authorized access level.</p>
+    #          <p>
+    #             <code>GetDataAccess</code> is logged in CloudTrail whenever a principal requests temporary data location credentials to access data in a data lake location that is registered with Lake Formation.</p>
+    #          <p> The API operation returns an error in the following scenarios:</p>
+    #          <ul>
+    #             <li>
+    #                <p>The data location is not registered with Lake Formation. </p>
+    #             </li>
+    #             <li>
+    #                <p>No Glue table is associated with the data location.</p>
+    #             </li>
+    #             <li>
+    #                <p>The caller doesn't have required permissions on the associated table. The caller must have
+    #             <code>SELECT</code> or <code>SUPER</code> permissions on the associated table, and
+    #           credential vending for full table access must be enabled in the data lake settings. </p>
+    #                <p>For more information, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/full-table-credential-vending.html">Application integration for full table access</a>.</p>
+    #             </li>
+    #             <li>
+    #                <p>The data location is in a different Amazon Web Services Region. Lake Formation doesn't
+    #           support cross-Region access when vending credentials for a data location. Lake Formation only supports Amazon S3 paths registered within the same Region as the API
+    #           call. </p>
+    #             </li>
+    #          </ul>
+    # @param [Hash, Types::GetTemporaryDataLocationCredentialsRequest] params
+    # @option params [Integer] :duration_seconds
+    #   <p>The time period, between 900 and 43,200 seconds, for the timeout of the temporary credentials.</p>
+    # @option params [Types::AuditContext] :audit_context
+    #   <p>A structure used to include auditing information on the privileged API. </p>
+    # @option params [Array<String>] :data_locations
+    #   <p>The Amazon S3 data location that you want to access.</p>
+    # @option params [String] :credentials_scope
+    #   <p>The credential scope is determined by the caller's Lake Formation permission on the associated table. Credential scope can be either:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>READ - Provides read-only access to the data location.</p>
+    #               </li>
+    #               <li>
+    #                  <p>READ_WRITE - Provides both read and write access to the data location.</p>
+    #               </li>
+    #            </ul>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     duration_seconds: 1,
+    #     audit_context: {
+    #       additional_audit_context: "AuditContextString"
+    #     },
+    #     data_locations: ["PathString"],
+    #     credentials_scope: "READ" # One of: ["READ", "READWRITE"]
+    #   }
+    #   options = {}
+    #   response = client.get_temporary_data_location_credentials(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     credentials: {
+    #       access_key_id: "AccessKeyIdString",
+    #       secret_access_key: "SecretAccessKeyString",
+    #       session_token: "SessionTokenString",
+    #       expiration: Time.now
+    #     },
+    #     accessible_data_locations: ["PathString"],
+    #     credentials_scope: "READ" # One of: ["READ", "READWRITE"]
+    #   }
+    # @return [Types::GetTemporaryDataLocationCredentialsResponse]
+    def get_temporary_data_location_credentials(params = {}, options = {})
+      request = build_request(:get_temporary_data_location_credentials, params)
       request.send_request(options)
     end
 
@@ -2035,6 +2459,10 @@ module Aws::LakeFormation
     #       lf_tag_expression: {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
     #       }
     #     },
     #     permissions: ["ALL" # One of: ["ALL", "SELECT", "ALTER", "DROP", "DELETE", "INSERT", "DESCRIBE", "CREATE_DATABASE", "CREATE_TABLE", "DATA_LOCATION_ACCESS", "CREATE_LF_TAG", "ASSOCIATE", "GRANT_WITH_LF_TAG_EXPRESSION", "CREATE_LF_TAG_EXPRESSION", "CREATE_CATALOG", "SUPER_USER"]], # required
@@ -2251,6 +2679,10 @@ module Aws::LakeFormation
     #       lf_tag_expression: {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
     #       }
     #     },
     #     max_results: 1,
@@ -2316,6 +2748,10 @@ module Aws::LakeFormation
     #           lf_tag_expression: {
     #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
+    #           },
+    #           rls_policy: {
+    #             catalog_id: "CatalogIdString",
+    #             name: "NameString", # required
     #           }
     #         },
     #         principal: {
@@ -2337,7 +2773,9 @@ module Aws::LakeFormation
     end
 
     # <p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p>
-    #          <p>This operation returns only those permissions that have been explicitly granted.</p>
+    #          <p>This operation returns only those permissions that have been explicitly granted. If both
+    #         <code>Principal</code> and <code>Resource</code> parameters are provided, the response
+    #       returns effective permissions rather than the explicitly granted permissions.</p>
     #          <p>For information about permissions, see <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html">Security and Access Control to Metadata and Data</a>.</p>
     # @param [Hash, Types::ListPermissionsRequest] params
     # @option params [String] :catalog_id
@@ -2354,7 +2792,10 @@ module Aws::LakeFormation
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return.</p>
     # @option params [String] :include_related
-    #   <p>Indicates that related permissions should be included in the results.</p>
+    #   <p>Indicates that related permissions should be included in the results when listing permissions on a table resource.</p>
+    #            <p>Set the field to <code>TRUE</code> to show the cell filters on a table resource. Default
+    #         is <code>FALSE</code>. The Principal parameter must not be specified when requesting cell
+    #         filter information.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     catalog_id: "CatalogIdString",
@@ -2413,6 +2854,10 @@ module Aws::LakeFormation
     #         expression_name: "NameString"
     #       },
     #       lf_tag_expression: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
     #       }
@@ -2484,6 +2929,10 @@ module Aws::LakeFormation
     #           lf_tag_expression: {
     #             catalog_id: "CatalogIdString",
     #             name: "NameString", # required
+    #           },
+    #           rls_policy: {
+    #             catalog_id: "CatalogIdString",
+    #             name: "NameString", # required
     #           }
     #         },
     #         condition: {
@@ -2503,6 +2952,208 @@ module Aws::LakeFormation
     # @return [Types::ListPermissionsResponse]
     def list_permissions(params = {}, options = {})
       request = build_request(:list_permissions, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the row-level security policies in the Data Catalog.</p>
+    # @param [Hash, Types::ListRLSPoliciesRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of row-level security policies to return in a single response.</p>
+    # @option params [String] :next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_rls_policies(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     rls_policies: [
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString",
+    #         attachment_columns: [
+    #           {
+    #             name: "NameString", # required
+    #             type: "ColumnTypeString"
+    #           }
+    #         ],
+    #         filter_expression: "PredicateString"
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListRLSPoliciesResponse]
+    def list_rls_policies(params = {}, options = {})
+      request = build_request(:list_rls_policies, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the row-level security policy attachments in the Data Catalog. You can filter the results by resource, principal, or policy name.</p>
+    # @param [Hash, Types::ListRLSPolicyAttachmentsRequest] params
+    # @option params [Types::Resource] :resource
+    #   <p>If specified, returns only the attachments for the given resource.</p>
+    # @option params [Types::DataLakePrincipal] :principal
+    #   <p>If specified, returns only the attachments for the given principal.</p>
+    # @option params [String] :policy_name
+    #   <p>If specified, returns only the attachments for the row-level security policy with this name.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of attachments to return in a single response.</p>
+    # @option params [String] :next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource: {
+    #       catalog: {
+    #         id: "CatalogIdString"
+    #       },
+    #       database: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       table: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString",
+    #         table_wildcard: {
+    #         }
+    #       },
+    #       table_with_columns: {
+    #         catalog_id: "CatalogIdString",
+    #         database_name: "NameString", # required
+    #         name: "NameString", # required
+    #         column_names: ["NameString"],
+    #         column_wildcard: {
+    #           excluded_column_names: ["NameString"]
+    #         }
+    #       },
+    #       data_location: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_arn: "ResourceArnString", # required
+    #       },
+    #       data_cells_filter: {
+    #         table_catalog_id: "CatalogIdString",
+    #         database_name: "NameString",
+    #         table_name: "NameString",
+    #         name: "NameString"
+    #       },
+    #       lf_tag: {
+    #         catalog_id: "CatalogIdString",
+    #         tag_key: "NameString", # required
+    #         tag_values: ["LFTagValue"], # required
+    #       },
+    #       lf_tag_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         resource_type: "DATABASE" # One of: ["DATABASE", "TABLE"], # required
+    #         expression: [
+    #           {
+    #             tag_key: "LFTagKey", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           }
+    #         ],
+    #         expression_name: "NameString"
+    #       },
+    #       lf_tag_expression: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       }
+    #     },
+    #     principal: {
+    #       data_lake_principal_identifier: "DataLakePrincipalString"
+    #     },
+    #     policy_name: "NameString",
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_rls_policy_attachments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     rls_policy_attachments: [
+    #       {
+    #         catalog_id: "CatalogIdString",
+    #         policy_name: "NameString",
+    #         principal: {
+    #           data_lake_principal_identifier: "DataLakePrincipalString"
+    #         },
+    #         resource: {
+    #           catalog: {
+    #             id: "CatalogIdString"
+    #           },
+    #           database: {
+    #             catalog_id: "CatalogIdString",
+    #             name: "NameString", # required
+    #           },
+    #           table: {
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString", # required
+    #             name: "NameString",
+    #             table_wildcard: {
+    #             }
+    #           },
+    #           table_with_columns: {
+    #             catalog_id: "CatalogIdString",
+    #             database_name: "NameString", # required
+    #             name: "NameString", # required
+    #             column_names: ["NameString"],
+    #             column_wildcard: {
+    #               excluded_column_names: ["NameString"]
+    #             }
+    #           },
+    #           data_location: {
+    #             catalog_id: "CatalogIdString",
+    #             resource_arn: "ResourceArnString", # required
+    #           },
+    #           data_cells_filter: {
+    #             table_catalog_id: "CatalogIdString",
+    #             database_name: "NameString",
+    #             table_name: "NameString",
+    #             name: "NameString"
+    #           },
+    #           lf_tag: {
+    #             catalog_id: "CatalogIdString",
+    #             tag_key: "NameString", # required
+    #             tag_values: ["LFTagValue"], # required
+    #           },
+    #           lf_tag_policy: {
+    #             catalog_id: "CatalogIdString",
+    #             resource_type: "DATABASE" # One of: ["DATABASE", "TABLE"], # required
+    #             expression: [
+    #               {
+    #                 tag_key: "LFTagKey", # required
+    #                 tag_values: ["LFTagValue"], # required
+    #               }
+    #             ],
+    #             expression_name: "NameString"
+    #           },
+    #           lf_tag_expression: {
+    #             catalog_id: "CatalogIdString",
+    #             name: "NameString", # required
+    #           },
+    #           rls_policy: {
+    #             catalog_id: "CatalogIdString",
+    #             name: "NameString", # required
+    #           }
+    #         },
+    #         condition: {
+    #           expression: "ExpressionString"
+    #         },
+    #         default_rls_policy: false
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListRLSPolicyAttachmentsResponse]
+    def list_rls_policy_attachments(params = {}, options = {})
+      request = build_request(:list_rls_policy_attachments, params)
       request.send_request(options)
     end
 
@@ -2538,7 +3189,9 @@ module Aws::LakeFormation
     #         last_modified: Time.now,
     #         with_federation: false,
     #         hybrid_access_enabled: false,
-    #         with_privileged_access: false
+    #         with_privileged_access: false,
+    #         verification_status: "VERIFIED" # One of: ["VERIFIED", "VERIFICATION_FAILED", "NOT_VERIFIED"],
+    #         expected_resource_owner_account: "AccountIdString"
     #       }
     #     ],
     #     next_token: "Token"
@@ -2724,6 +3377,9 @@ module Aws::LakeFormation
     #     </p>
     # @option params [Boolean] :with_privileged_access
     #   <p>Grants the calling principal the permissions to perform all supported Lake Formation operations on the registered data location. </p>
+    # @option params [String] :expected_resource_owner_account
+    #   <p>The Amazon Web Services account that owns the Glue tables associated with specific Amazon S3 locations.
+    #       </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     resource_arn: "ResourceArnString", # required
@@ -2731,7 +3387,8 @@ module Aws::LakeFormation
     #     role_arn: "IAMRoleArn",
     #     with_federation: false,
     #     hybrid_access_enabled: false,
-    #     with_privileged_access: false
+    #     with_privileged_access: false,
+    #     expected_resource_owner_account: "AccountIdString"
     #   }
     #   options = {}
     #   response = client.register_resource(params, options)
@@ -2806,6 +3463,10 @@ module Aws::LakeFormation
     #         expression_name: "NameString"
     #       },
     #       lf_tag_expression: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
     #       }
@@ -2915,6 +3576,10 @@ module Aws::LakeFormation
     #         expression_name: "NameString"
     #       },
     #       lf_tag_expression: {
+    #         catalog_id: "CatalogIdString",
+    #         name: "NameString", # required
+    #       },
+    #       rls_policy: {
     #         catalog_id: "CatalogIdString",
     #         name: "NameString", # required
     #       }
@@ -3223,6 +3888,8 @@ module Aws::LakeFormation
     #            the resource share remain unchanged.</p>
     #            <p>If the <code>ShareRecipients</code> value is an empty list, then the existing share
     #            recipients list will be cleared, and the resource share will be deleted.</p>
+    # @option params [Array<Types::ServiceIntegrationUnion>] :service_integrations
+    #   <p>A list of service integrations for enabling trusted identity propagation with external services such as Redshift.</p>
     # @option params [String] :application_status
     #   <p>Allows to enable or disable the IAM Identity Center connection.</p>
     # @option params [Types::ExternalFilteringConfiguration] :external_filtering
@@ -3236,6 +3903,15 @@ module Aws::LakeFormation
     #         data_lake_principal_identifier: "DataLakePrincipalString"
     #       }
     #     ],
+    #     service_integrations: [{
+    #       # One of:
+    #       redshift: [{
+    #         # One of:
+    #         redshift_connect: {
+    #           authorization: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
+    #         }
+    #       }]
+    #     }],
     #     application_status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #     external_filtering: {
     #       status: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
@@ -3253,6 +3929,28 @@ module Aws::LakeFormation
       request.send_request(options)
     end
 
+    # <p>Updates the filter expression of an existing row-level security policy. The change applies to all attachments of the policy.</p>
+    # @param [Hash, Types::UpdateRLSPolicyRequest] params
+    # @option params [String] :name
+    #   <p>The name of the row-level security policy to update.</p>
+    # @option params [String] :filter_expression
+    #   <p>The new filter predicate, written in a SQL-like syntax, that replaces the policy's current filter expression.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     name: "NameString", # required
+    #     filter_expression: "PredicateString"
+    #   }
+    #   options = {}
+    #   response = client.update_rls_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateRLSPolicyResponse]
+    def update_rls_policy(params = {}, options = {})
+      request = build_request(:update_rls_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Updates the data access role used for vending access to the given (registered) resource in Lake Formation. </p>
     # @param [Hash, Types::UpdateResourceRequest] params
     # @option params [String] :role_arn
@@ -3265,12 +3963,16 @@ module Aws::LakeFormation
     #   <p>
     #         Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
     #       </p>
+    # @option params [String] :expected_resource_owner_account
+    #   <p>The Amazon Web Services account that owns the Glue tables associated with specific Amazon S3 locations.
+    #       </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     role_arn: "IAMRoleArn", # required
     #     resource_arn: "ResourceArnString", # required
     #     with_federation: false,
-    #     hybrid_access_enabled: false
+    #     hybrid_access_enabled: false,
+    #     expected_resource_owner_account: "AccountIdString"
     #   }
     #   options = {}
     #   response = client.update_resource(params, options)

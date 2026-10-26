@@ -144,18 +144,18 @@ module Aws::ControlTower
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -213,17 +213,20 @@ module Aws::ControlTower
     # @param [Hash, Types::CreateLandingZoneInput] params
     # @option params [String] :version
     #   <p>The landing zone version, for example, 3.0.</p>
-    # @option params [JSON] :manifest
-    #   <p>The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review <a href="https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch">Launch your landing zone</a>. </p>
+    # @option params [Array<String>] :remediation_types
+    #   <p>Specifies the types of remediation actions to apply when creating the landing zone, such as automatic drift correction or compliance enforcement.</p>
     # @option params [Hash<String, String>] :tags
     #   <p>Tags to be applied to the landing zone. </p>
+    # @option params [JSON] :manifest
+    #   <p>The manifest JSON file is a text file that describes your Amazon Web Services resources. For examples, review <a href="https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch">Launch your landing zone</a>. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     version: "LandingZoneVersion", # required
-    #     manifest: ""null"", # required
+    #     remediation_types: ["INHERITANCE_DRIFT" # One of: ["INHERITANCE_DRIFT"]],
     #     tags: {
     #       "TagKey" => "TagValue"
-    #     }
+    #     },
+    #     manifest: ""null""
     #   }
     #   options = {}
     #   response = client.create_landing_zone(params, options)
@@ -239,7 +242,7 @@ module Aws::ControlTower
       request.send_request(options)
     end
 
-    # <p>Decommissions a landing zone. This API call starts an asynchronous operation that deletes Amazon Web Services Control Tower resources deployed in accounts managed by Amazon Web Services Control Tower.</p>
+    # <p>Decommissions a landing zone. This API call starts an asynchronous operation that deletes Amazon Web Services Control Tower resources deployed in accounts managed by Amazon Web Services Control Tower.</p> <p>Decommissioning a landing zone is a process with significant consequences, and it cannot be undone. We strongly recommend that you perform this decommissioning process only if you intend to stop using your landing zone.</p>
     # @param [Hash, Types::DeleteLandingZoneInput] params
     # @option params [String] :landing_zone_identifier
     #   <p>The unique identifier of the landing zone.</p>
@@ -287,10 +290,13 @@ module Aws::ControlTower
     #   <p>The ARN of the control. Only <b>Strongly recommended</b> and <b>Elective</b> controls are permitted, with the exception of the <b>Region deny</b> control. For information on how to find the <code>controlIdentifier</code>, see <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html">the overview page</a>.</p>
     # @option params [String] :target_identifier
     #   <p>The ARN of the organizational unit. For information on how to find the <code>targetIdentifier</code>, see <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html">the overview page</a>.</p>
+    # @option params [String] :enabled_control_identifier
+    #   <p>The ARN of the enabled control to be disabled, which uniquely identifies the control instance on the target organizational unit.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     control_identifier: "ControlIdentifier", # required
-    #     target_identifier: "TargetIdentifier", # required
+    #     control_identifier: "ControlIdentifier",
+    #     target_identifier: "TargetIdentifier",
+    #     enabled_control_identifier: "Arn"
     #   }
     #   options = {}
     #   response = client.disable_control(params, options)
@@ -527,18 +533,27 @@ module Aws::ControlTower
     #       arn: "Arn",
     #       control_identifier: "ControlIdentifier",
     #       target_identifier: "TargetIdentifier",
-    #       target_regions: [
-    #         {
-    #           name: "RegionName"
-    #         }
-    #       ],
     #       status_summary: {
     #         status: "SUCCEEDED" # One of: ["SUCCEEDED", "FAILED", "UNDER_CHANGE"],
     #         last_operation_identifier: "OperationIdentifier"
     #       },
     #       drift_status_summary: {
-    #         drift_status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]
+    #         drift_status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"],
+    #         types: {
+    #           inheritance: {
+    #             status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]
+    #           },
+    #           resource: {
+    #             status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]
+    #           }
+    #         }
     #       },
+    #       parent_identifier: "ParentIdentifier",
+    #       target_regions: [
+    #         {
+    #           name: "RegionName"
+    #         }
+    #       ],
     #       parameters: [
     #         {
     #           key: "String", # required
@@ -568,13 +583,14 @@ module Aws::ControlTower
     #   {
     #     landing_zone: { # required
     #       version: "LandingZoneVersion", # required
-    #       manifest: ""null"", # required
+    #       remediation_types: ["INHERITANCE_DRIFT" # One of: ["INHERITANCE_DRIFT"]],
     #       arn: "Arn",
     #       status: "ACTIVE" # One of: ["ACTIVE", "PROCESSING", "FAILED"],
     #       latest_available_version: "LandingZoneVersion",
     #       drift_status: {
     #         status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC"]
-    #       }
+    #       },
+    #       manifest: ""null"", # required
     #     }
     #   }
     # @return [Types::GetLandingZoneOutput]
@@ -747,13 +763,15 @@ module Aws::ControlTower
     # <p>Lists the controls enabled by Amazon Web Services Control Tower on the specified organizational unit and the accounts it contains. For usage examples, see the <a href="https://docs.aws.amazon.com/controltower/latest/controlreference/control-api-examples-short.html"> <i>Controls Reference Guide</i> </a>.</p>
     # @param [Hash, Types::ListEnabledControlsInput] params
     # @option params [String] :target_identifier
-    #   <p>The ARN of the organizational unit. For information on how to find the <code>targetIdentifier</code>, see <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html">the overview page</a>.</p>
+    #   <p>The ARN of the target. The value depends on the target type:</p> <ul> <li> <p>Organizational unit (OU) – Specify the ARN of the OU.</p> </li> <li> <p>Account – Specify the ARN of the account.</p> </li> </ul> <p>For information on how to find the <code>targetIdentifier</code>, see <a href="https://docs.aws.amazon.com/controltower/latest/APIReference/Welcome.html">the overview page</a>.</p>
     # @option params [String] :next_token
     #   <p>The token to continue the list from a previous API call with the same parameters.</p>
     # @option params [Integer] :max_results
     #   <p>How many results to return per API call.</p>
     # @option params [Types::EnabledControlFilter] :filter
     #   <p>An input filter for the <code>ListEnabledControls</code> API that lets you select the types of control operations to view.</p>
+    # @option params [Boolean] :include_children
+    #   <p>Specifies whether to include enabled controls from child organizational units and child accounts in the response.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     target_identifier: "TargetIdentifier",
@@ -762,8 +780,12 @@ module Aws::ControlTower
     #     filter: {
     #       control_identifiers: ["ControlIdentifier"],
     #       statuses: ["SUCCEEDED" # One of: ["SUCCEEDED", "FAILED", "UNDER_CHANGE"]],
-    #       drift_statuses: ["DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]]
-    #     }
+    #       drift_statuses: ["DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]],
+    #       parent_identifiers: ["ParentIdentifier"],
+    #       inheritance_drift_statuses: ["DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]],
+    #       resource_drift_statuses: ["DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]]
+    #     },
+    #     include_children: false
     #   }
     #   options = {}
     #   response = client.list_enabled_controls(params, options)
@@ -772,16 +794,25 @@ module Aws::ControlTower
     #   {
     #     enabled_controls: [ # required
     #       {
-    #         control_identifier: "ControlIdentifier",
     #         arn: "Arn",
+    #         control_identifier: "ControlIdentifier",
     #         target_identifier: "TargetIdentifier",
     #         status_summary: {
     #           status: "SUCCEEDED" # One of: ["SUCCEEDED", "FAILED", "UNDER_CHANGE"],
     #           last_operation_identifier: "OperationIdentifier"
     #         },
     #         drift_status_summary: {
-    #           drift_status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]
-    #         }
+    #           drift_status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"],
+    #           types: {
+    #             inheritance: {
+    #               status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]
+    #             },
+    #             resource: {
+    #               status: "DRIFTED" # One of: ["DRIFTED", "IN_SYNC", "NOT_CHECKING", "UNKNOWN"]
+    #             }
+    #           }
+    #         },
+    #         parent_identifier: "ParentIdentifier"
     #       }
     #     ],
     #     next_token: "String"
@@ -902,7 +933,7 @@ module Aws::ControlTower
       request.send_request(options)
     end
 
-    # <p>Resets an enabled control.</p>
+    # <p>Resets an enabled control. Does not work for controls implemented with SCPs.</p>
     # @param [Hash, Types::ResetEnabledControlInput] params
     # @option params [String] :enabled_control_identifier
     #   <p>The ARN of the enabled control to be reset.</p>
@@ -1055,15 +1086,18 @@ module Aws::ControlTower
     # @param [Hash, Types::UpdateLandingZoneInput] params
     # @option params [String] :version
     #   <p>The landing zone version, for example, 3.2.</p>
-    # @option params [JSON] :manifest
-    #   <p>The manifest file (JSON) is a text file that describes your Amazon Web Services resources. For an example, review <a href="https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch">Launch your landing zone</a>. The example manifest file contains each of the available parameters. The schema for the landing zone's JSON manifest file is not published, by design.</p>
+    # @option params [Array<String>] :remediation_types
+    #   <p>Specifies the types of remediation actions to apply when updating the landing zone configuration.</p>
     # @option params [String] :landing_zone_identifier
     #   <p>The unique identifier of the landing zone.</p>
+    # @option params [JSON] :manifest
+    #   <p>The manifest file (JSON) is a text file that describes your Amazon Web Services resources. For an example, review <a href="https://docs.aws.amazon.com/controltower/latest/userguide/lz-api-launch">Launch your landing zone</a>. The example manifest file contains each of the available parameters. The schema for the landing zone's JSON manifest file is not published, by design.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     version: "LandingZoneVersion", # required
-    #     manifest: ""null"", # required
+    #     remediation_types: ["INHERITANCE_DRIFT" # One of: ["INHERITANCE_DRIFT"]],
     #     landing_zone_identifier: "String", # required
+    #     manifest: ""null""
     #   }
     #   options = {}
     #   response = client.update_landing_zone(params, options)

@@ -25,7 +25,7 @@ Aws.const_set('IoTWireless', Module.new) unless Aws.const_defined?('IoTWireless'
 #             schedule a session to update the firmware of individual devices or an entire group of
 #             devices in a multicast group.</p>
 #          <p>To connect to the AWS IoT Wireless Service, use the Service endpoints as described in
-#             <a href="https://docs.aws.amazon.com/general/latest/gr/iot-lorawan.html#iot-wireless_region">IoT 
+#             <a href="https://docs.aws.amazon.com/general/latest/gr/iot-lorawan.html#iot-wireless_region">IoT
 #             Wireless Service endpoints</a>. You can use both IPv4 and IPv6 protocols to connect
 #             to the endpoints and send requests to the AWS IoT Wireless service. For more information,
 #             see <a href="https://docs.aws.amazon.com/iot-wireless/latest/developerguide/wireless-ipv6-access.html">Using

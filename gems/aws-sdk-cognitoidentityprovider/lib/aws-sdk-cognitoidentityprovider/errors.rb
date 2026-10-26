@@ -22,6 +22,7 @@ module Aws::CognitoIdentityProvider
   #
   # ## Error Classes
   #
+  # * {AccessDeniedException}
   # * {AliasExistsException}
   # * {CodeDeliveryFailureException}
   # * {CodeMismatchException}
@@ -34,6 +35,7 @@ module Aws::CognitoIdentityProvider
   # * {ForbiddenException}
   # * {GroupExistsException}
   # * {InternalErrorException}
+  # * {InternalServerException}
   # * {InvalidEmailRoleAccessPolicyException}
   # * {InvalidLambdaResponseException}
   # * {InvalidOAuthFlowException}
@@ -46,12 +48,14 @@ module Aws::CognitoIdentityProvider
   # * {MFAMethodNotFoundException}
   # * {ManagedLoginBrandingExistsException}
   # * {NotAuthorizedException}
+  # * {OperationNotEnabledException}
   # * {PasswordHistoryPolicyViolationException}
   # * {PasswordResetRequiredException}
   # * {PreconditionNotMetException}
   # * {RefreshTokenReuseException}
   # * {ResourceNotFoundException}
   # * {ScopeDoesNotExistException}
+  # * {ServiceQuotaExceededException}
   # * {SoftwareTokenMFANotFoundException}
   # * {TermsExistsException}
   # * {TierChangeNotAllowedException}
@@ -82,6 +86,19 @@ module Aws::CognitoIdentityProvider
   # if they are not defined above.
   module Errors
     extend Smithy::Client::DynamicErrors
+
+    # <p>This exception is thrown when you don't have sufficient permissions to perform the requested operation.</p>
+    class AccessDeniedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CognitoIdentityProvider::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
 
     # <p>This exception is thrown when a user tries to confirm the account with an email
     #             address or phone number that has already been supplied as an alias for a different user
@@ -203,8 +220,20 @@ module Aws::CognitoIdentityProvider
       end
     end
 
-    # <p>This exception is thrown when a feature you attempted to configure isn't
-    #             available in your current feature plan.</p>
+    # <p>This exception is thrown when a feature that you attempted to use or configure
+    #             isn't included in your user pool's current feature plan. This can occur
+    #             when:</p>
+    #          <ul>
+    #             <li>
+    #                <p>You configure a feature that your feature plan doesn't support.</p>
+    #             </li>
+    #             <li>
+    #                <p>You make a request that uses a feature that requires a higher feature
+    #                     plan.</p>
+    #             </li>
+    #          </ul>
+    #          <p>To resolve this issue, upgrade your user pool to a feature plan that includes the
+    #             feature.</p>
     class FeatureUnavailableInTierException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentityProvider::Types::FeatureUnavailableInTierException] data
@@ -256,6 +285,19 @@ module Aws::CognitoIdentityProvider
       end
 
       # <p>The message returned when Amazon Cognito throws an internal error exception.</p>
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>This exception is thrown when Amazon Cognito encounters an internal server error.</p>
+    class InternalServerException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CognitoIdentityProvider::Types::InternalServerException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
       def message
         @data[:message]
       end
@@ -447,6 +489,19 @@ module Aws::CognitoIdentityProvider
       end
     end
 
+    # <p>This exception is thrown when an operation is not available in the current region or for the current user pool configuration. This can occur when attempting to perform operations that are not supported in secondary replica regions.</p>
+    class OperationNotEnabledException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CognitoIdentityProvider::Types::OperationNotEnabledException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The message returned when a user's new password matches a previous password and
     #             doesn't comply with the password-history policy.</p>
     class PasswordHistoryPolicyViolationException < Smithy::Client::ServiceError
@@ -523,6 +578,19 @@ module Aws::CognitoIdentityProvider
     class ScopeDoesNotExistException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::CognitoIdentityProvider::Types::ScopeDoesNotExistException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request exceeded your account's service quota. To increase your limit, use  or submit a Service Quotas increase request.</p>
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::CognitoIdentityProvider::Types::ServiceQuotaExceededException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

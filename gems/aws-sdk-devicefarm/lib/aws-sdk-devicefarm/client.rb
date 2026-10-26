@@ -144,18 +144,18 @@ module Aws::DeviceFarm
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -224,7 +224,7 @@ module Aws::DeviceFarm
     #               available and meet the criteria that you assign for the <code>rules</code> parameter. Depending on how many
     #               devices meet these constraints, your device pool might contain fewer devices than the value for this
     #               parameter.</p>
-    #           <p>By specifying the maximum number of devices, you can control the costs that you incur
+    #            <p>By specifying the maximum number of devices, you can control the costs that you incur
     #               by running tests.</p>
     # @example To create a new device pool
     #   # The following example creates a new device pool named MyDevicePool inside an existing project.
@@ -295,7 +295,7 @@ module Aws::DeviceFarm
     # @option params [Array<String>] :exclude_app_packages_from_cleanup
     #   <p>An array of strings that specifies the list of app packages that should not be cleaned up from the device
     #               after a test run.</p>
-    #           <p>The list of packages is considered only if you set <code>packageCleanup</code> to
+    #            <p>The list of packages is considered only if you set <code>packageCleanup</code> to
     #               <code>true</code>.</p>
     # @option params [Boolean] :reboot_after_use
     #   <p>When set to <code>true</code>, Device Farm reboots the instance after a test run. The default value is
@@ -412,6 +412,18 @@ module Aws::DeviceFarm
     #               specified execution timeout value unless overridden when scheduling a run.</p>
     # @option params [Types::VpcConfig] :vpc_config
     #   <p>The VPC security groups and subnets that are attached to a project.</p>
+    # @option params [Array<Types::EnvironmentVariable>] :environment_variables
+    #   <p>
+    #               A set of environment variables which are used by default for all runs in the project.
+    #               These environment variables are applied to the test run during the execution of a test spec file.
+    #           </p>
+    #            <p>
+    #               For more information about using test spec files, please see
+    #               <a href="https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html">Custom test environments </a> in <i>AWS Device
+    #               Farm.</i>
+    #            </p>
+    # @option params [String] :execution_role_arn
+    #   <p>An IAM role to be assumed by the test host for all runs in the project.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "Name", # required
@@ -420,7 +432,14 @@ module Aws::DeviceFarm
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnet_ids: ["SubnetId"], # required
     #       vpc_id: "NonEmptyString", # required
-    #     }
+    #     },
+    #     environment_variables: [
+    #       {
+    #         name: "EnvironmentVariableName", # required
+    #         value: "EnvironmentVariableValue", # required
+    #       }
+    #     ],
+    #     execution_role_arn: "AmazonRoleResourceName"
     #   }
     #   options = {}
     #   response = client.create_project(params, options)
@@ -436,7 +455,14 @@ module Aws::DeviceFarm
     #         security_group_ids: ["SecurityGroupId"], # required
     #         subnet_ids: ["SubnetId"], # required
     #         vpc_id: "NonEmptyString", # required
-    #       }
+    #       },
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         }
+    #       ],
+    #       execution_role_arn: "AmazonRoleResourceName"
     #     }
     #   }
     # @return [Types::CreateProjectResult]
@@ -452,58 +478,21 @@ module Aws::DeviceFarm
     #               access session.</p>
     # @option params [String] :device_arn
     #   <p>The ARN of the device for which you want to create a remote access session.</p>
+    # @option params [String] :app_arn
+    #   <p>The Amazon Resource Name (ARN) of the app to create the remote access session.</p>
     # @option params [String] :instance_arn
     #   <p>The Amazon Resource Name (ARN) of the device instance for which you want to create a
     #               remote access session.</p>
-    # @option params [String] :ssh_public_key
-    #   <p>Ignored. The public key of the <code>ssh</code> key pair you want to use for connecting to remote
-    #               devices in your remote debugging session. This key is required only if <code>remoteDebugEnabled</code> is
-    #               set to <code>true</code>.</p>
-    #           <p>Remote debugging is <a href="https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html">no
-    #               longer supported</a>.</p>
-    # @option params [Boolean] :remote_debug_enabled
-    #   <p>Set to <code>true</code> if you want to access devices remotely for debugging in
-    #               your remote access session.</p>
-    #           <p>Remote debugging is <a href="https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html">no
-    #               longer supported</a>.</p>
-    # @option params [Boolean] :remote_record_enabled
-    #   <p>Set to <code>true</code> to enable remote recording for the remote access
-    #               session.</p>
-    # @option params [String] :remote_record_app_arn
-    #   <p>The Amazon Resource Name (ARN) for the app to be recorded in the remote access
-    #               session.</p>
     # @option params [String] :name
     #   <p>The name of the remote access session to create.</p>
-    # @option params [String] :client_id
-    #   <p>Unique identifier for the client. If you want access to multiple devices on the same client, you should
-    #               pass the same <code>clientId</code> value in each call to <code>CreateRemoteAccessSession</code>. This
-    #               identifier is required only if <code>remoteDebugEnabled</code> is set to <code>true</code>.</p>
-    #           <p>Remote debugging is <a href="https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html">no
-    #               longer supported</a>.</p>
     # @option params [Types::CreateRemoteAccessSessionConfiguration] :configuration
     #   <p>The configuration information for the remote access session request.</p>
     # @option params [String] :interaction_mode
-    #   <p>The interaction mode of the remote access session. Valid values are:</p>
-    #           <ul>
-    #               <li>
-    #                   <p>INTERACTIVE: You can interact with the iOS device by viewing, touching, and
-    #                       rotating the screen. You cannot run XCUITest framework-based tests in this
-    #                       mode.</p>
-    #               </li>
-    #               <li>
-    #                   <p>NO_VIDEO: You are connected to the device, but cannot interact with it or view the screen. This
-    #                       mode has the fastest test execution speed. You can run XCUITest framework-based tests in this
-    #                       mode.</p>
-    #               </li>
-    #               <li>
-    #                   <p>VIDEO_ONLY: You can view the screen, but cannot touch or rotate it. You can run XCUITest
-    #                       framework-based tests and watch the screen in this mode.</p>
-    #               </li>
-    #            </ul>
+    #   <p>The interaction mode of the remote access session. Changing the interactive mode of remote access sessions is no longer available.</p>
     # @option params [Boolean] :skip_app_resign
     #   <p>When set to <code>true</code>, for private devices, Device Farm does not sign your app again. For public
     #               devices, Device Farm always signs your apps again.</p>
-    #           <p>For more information on how Device Farm modifies your uploads during tests, see <a href="http://aws.amazon.com/device-farm/faqs/">Do you modify my app?</a>
+    #            <p>For more information on how Device Farm modifies your uploads during tests, see <a href="http://aws.amazon.com/device-farm/faqs/">Do you modify my app?</a>
     #            </p>
     # @example To create a remote access session
     #   # The following example creates a remote access session named MySession.
@@ -526,19 +515,19 @@ module Aws::DeviceFarm
     #   params = {
     #     project_arn: "AmazonResourceName", # required
     #     device_arn: "AmazonResourceName", # required
+    #     app_arn: "AmazonResourceName",
     #     instance_arn: "AmazonResourceName",
-    #     ssh_public_key: "SshPublicKey",
-    #     remote_debug_enabled: false,
-    #     remote_record_enabled: false,
-    #     remote_record_app_arn: "AmazonResourceName",
     #     name: "Name",
-    #     client_id: "ClientId",
     #     configuration: {
+    #       auxiliary_apps: ["AmazonResourceName"],
     #       billing_method: "METERED" # One of: ["METERED", "UNMETERED"],
     #       vpce_configuration_arns: ["AmazonResourceName"],
     #       device_proxy: {
     #         host: "DeviceProxyHost", # required
     #         port: 1, # required
+    #       },
+    #       parameters: {
+    #         "RemoteAccessParameterKey" => "RemoteAccessParameterValue"
     #       }
     #     },
     #     interaction_mode: "INTERACTIVE" # One of: ["INTERACTIVE", "NO_VIDEO", "VIDEO_ONLY"],
@@ -605,11 +594,6 @@ module Aws::DeviceFarm
     #         availability: "TEMPORARY_NOT_AVAILABLE" # One of: ["TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"]
     #       },
     #       instance_arn: "AmazonResourceName",
-    #       remote_debug_enabled: false,
-    #       remote_record_enabled: false,
-    #       remote_record_app_arn: "AmazonResourceName",
-    #       host_address: "HostAddress",
-    #       client_id: "ClientId",
     #       billing_method: "METERED" # One of: ["METERED", "UNMETERED"],
     #       device_minutes: {
     #         total: 1.0,
@@ -628,6 +612,11 @@ module Aws::DeviceFarm
     #       device_proxy: {
     #         host: "DeviceProxyHost", # required
     #         port: 1, # required
+    #       },
+    #       app_upload: "AmazonResourceName",
+    #       endpoints: {
+    #         remote_driver_endpoint: "SensitiveURL",
+    #         interactive_endpoint: "SensitiveURL"
     #       }
     #     }
     #   }
@@ -717,97 +706,97 @@ module Aws::DeviceFarm
     #               end with the <code>.zip</code> file extension.</p>
     # @option params [String] :type
     #   <p>The upload's upload type.</p>
-    #           <p>Must be one of the following values:</p>
-    #           <ul>
+    #            <p>Must be one of the following values:</p>
+    #            <ul>
     #               <li>
-    #                   <p>ANDROID_APP</p>
+    #                  <p>ANDROID_APP</p>
     #               </li>
     #               <li>
-    #                   <p>IOS_APP</p>
+    #                  <p>IOS_APP</p>
     #               </li>
     #               <li>
-    #                   <p>WEB_APP</p>
+    #                  <p>WEB_APP</p>
     #               </li>
     #               <li>
-    #                   <p>EXTERNAL_DATA</p>
+    #                  <p>EXTERNAL_DATA</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_JUNIT_TEST_PACKAGE</p>
+    #                  <p>APPIUM_JAVA_JUNIT_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_TESTNG_TEST_PACKAGE</p>
+    #                  <p>APPIUM_JAVA_TESTNG_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_PYTHON_TEST_PACKAGE</p>
+    #                  <p>APPIUM_PYTHON_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_NODE_TEST_PACKAGE</p>
+    #                  <p>APPIUM_NODE_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_RUBY_TEST_PACKAGE</p>
+    #                  <p>APPIUM_RUBY_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_PYTHON_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_PYTHON_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_NODE_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_NODE_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_RUBY_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_RUBY_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>INSTRUMENTATION_TEST_PACKAGE</p>
+    #                  <p>INSTRUMENTATION_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>XCTEST_TEST_PACKAGE</p>
+    #                  <p>XCTEST_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>XCTEST_UI_TEST_PACKAGE</p>
+    #                  <p>XCTEST_UI_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_JUNIT_TEST_SPEC</p>
+    #                  <p>APPIUM_JAVA_JUNIT_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_TESTNG_TEST_SPEC</p>
+    #                  <p>APPIUM_JAVA_TESTNG_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_PYTHON_TEST_SPEC</p>
+    #                  <p>APPIUM_PYTHON_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_NODE_TEST_SPEC</p>
+    #                  <p>APPIUM_NODE_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_RUBY_TEST_SPEC</p>
+    #                  <p>APPIUM_RUBY_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_JUNIT_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_JAVA_JUNIT_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_TESTNG_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_JAVA_TESTNG_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_PYTHON_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_PYTHON_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_NODE_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_NODE_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_RUBY_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_RUBY_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>INSTRUMENTATION_TEST_SPEC</p>
+    #                  <p>INSTRUMENTATION_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>XCTEST_UI_TEST_SPEC</p>
+    #                  <p>XCTEST_UI_TEST_SPEC</p>
     #               </li>
     #            </ul>
-    #           <p> If you call <code>CreateUpload</code> with <code>WEB_APP</code> specified, AWS
+    #            <p> If you call <code>CreateUpload</code> with <code>WEB_APP</code> specified, AWS
     #               Device Farm throws an <code>ArgumentException</code> error.</p>
     # @option params [String] :content_type
     #   <p>The upload's content type (for example, <code>application/octet-stream</code>).</p>
@@ -949,8 +938,10 @@ module Aws::DeviceFarm
       request.send_request(options)
     end
 
-    # <p>Deletes an AWS Device Farm project, given the project ARN.</p>
-    #         <p> Deleting this resource does not stop an in-progress run.</p>
+    # <p>Deletes an AWS Device Farm project, given the project ARN. You cannot delete a project if it has an active run or session.</p>
+    #          <important>
+    #             <p>You cannot undo this operation.</p>
+    #          </important>
     # @param [Hash, Types::DeleteProjectRequest] params
     # @option params [String] :arn
     #   <p>Represents the Amazon Resource Name (ARN) of the Device Farm project to delete.</p>
@@ -978,7 +969,10 @@ module Aws::DeviceFarm
       request.send_request(options)
     end
 
-    # <p>Deletes a completed remote access session and its results.</p>
+    # <p>Deletes a completed remote access session and its results. You cannot delete a remote access session if it is still active.</p>
+    #          <important>
+    #             <p>You cannot undo this operation.</p>
+    #          </important>
     # @param [Hash, Types::DeleteRemoteAccessSessionRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the session for which you want to delete remote
@@ -1007,8 +1001,10 @@ module Aws::DeviceFarm
       request.send_request(options)
     end
 
-    # <p>Deletes the run, given the run ARN.</p>
-    #         <p> Deleting this resource does not stop an in-progress run.</p>
+    # <p>Deletes the run, given the run ARN. You cannot delete a run if it is still active.</p>
+    #          <important>
+    #             <p>You cannot undo this operation.</p>
+    #          </important>
     # @param [Hash, Types::DeleteRunRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) for the run to delete.</p>
@@ -1036,13 +1032,10 @@ module Aws::DeviceFarm
       request.send_request(options)
     end
 
-    # <p> Deletes a Selenium testing project and all content generated under it. </p>
+    # <p> Deletes a Selenium testing project and all content generated under it. You cannot delete a project if it has active sessions.</p>
     #          <important>
     #             <p>You cannot undo this operation.</p>
     #          </important>
-    #          <note>
-    #             <p>You cannot delete a project if it has active sessions.</p>
-    #          </note>
     # @param [Hash, Types::DeleteTestGridProjectRequest] params
     # @option params [String] :project_arn
     #   <p>The ARN of the project to delete, from <a>CreateTestGridProject</a> or <a>ListTestGridProjects</a>.</p>
@@ -1347,49 +1340,49 @@ module Aws::DeviceFarm
     #   <p>The ARN of the app that is associated with the specified device pool.</p>
     # @option params [String] :test_type
     #   <p>The test type for the specified device pool.</p>
-    #           <p>Allowed values include the following:</p>
-    #           <ul>
+    #            <p>Allowed values include the following:</p>
+    #            <ul>
     #               <li>
-    #                   <p>BUILTIN_FUZZ.</p>
+    #                  <p>BUILTIN_FUZZ.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_JUNIT.</p>
+    #                  <p>APPIUM_JAVA_JUNIT.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_TESTNG.</p>
+    #                  <p>APPIUM_JAVA_TESTNG.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_PYTHON.</p>
+    #                  <p>APPIUM_PYTHON.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_NODE.</p>
+    #                  <p>APPIUM_NODE.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_RUBY.</p>
+    #                  <p>APPIUM_RUBY.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_JUNIT.</p>
+    #                  <p>APPIUM_WEB_JAVA_JUNIT.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_TESTNG.</p>
+    #                  <p>APPIUM_WEB_JAVA_TESTNG.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_PYTHON.</p>
+    #                  <p>APPIUM_WEB_PYTHON.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_NODE.</p>
+    #                  <p>APPIUM_WEB_NODE.</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_RUBY.</p>
+    #                  <p>APPIUM_WEB_RUBY.</p>
     #               </li>
     #               <li>
-    #                   <p>INSTRUMENTATION.</p>
+    #                  <p>INSTRUMENTATION.</p>
     #               </li>
     #               <li>
-    #                   <p>XCTEST.</p>
+    #                  <p>XCTEST.</p>
     #               </li>
     #               <li>
-    #                   <p>XCTEST_UI.</p>
+    #                  <p>XCTEST_UI.</p>
     #               </li>
     #            </ul>
     # @option params [Types::ScheduleRunTest] :test
@@ -1454,7 +1447,15 @@ module Aws::DeviceFarm
     #         gps: false
     #       },
     #       auxiliary_apps: ["AmazonResourceName"],
-    #       billing_method: "METERED" # One of: ["METERED", "UNMETERED"]
+    #       billing_method: "METERED" # One of: ["METERED", "UNMETERED"],
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         }
+    #       ],
+    #       execution_role_arn: "AmazonRoleResourceName",
+    #       insights_types: ["TEST_REPORT" # One of: ["TEST_REPORT"]]
     #     },
     #     project_arn: "AmazonResourceName"
     #   }
@@ -1709,7 +1710,25 @@ module Aws::DeviceFarm
     #         unmetered: 1.0
     #       },
     #       video_endpoint: "String",
-    #       video_capture: false
+    #       video_capture: false,
+    #       insights: {
+    #         status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"],
+    #         test_report: {
+    #           message: "ReportMessage",
+    #           metrics: {
+    #             tests_total: 1,
+    #             tests_passed: 1,
+    #             tests_failed: 1,
+    #             tests_skipped: 1,
+    #             tests_errored: 1,
+    #             tests_other: 1,
+    #             tests_passed_percentage: 1.0,
+    #             total_test_execution_duration_seconds: 1.0,
+    #             median_test_execution_duration_seconds: 1.0
+    #           },
+    #           test_details_url: "SensitiveURL"
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::GetJobResult]
@@ -1843,7 +1862,14 @@ module Aws::DeviceFarm
     #         security_group_ids: ["SecurityGroupId"], # required
     #         subnet_ids: ["SubnetId"], # required
     #         vpc_id: "NonEmptyString", # required
-    #       }
+    #       },
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         }
+    #       ],
+    #       execution_role_arn: "AmazonRoleResourceName"
     #     }
     #   }
     # @return [Types::GetProjectResult]
@@ -1934,11 +1960,6 @@ module Aws::DeviceFarm
     #         availability: "TEMPORARY_NOT_AVAILABLE" # One of: ["TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"]
     #       },
     #       instance_arn: "AmazonResourceName",
-    #       remote_debug_enabled: false,
-    #       remote_record_enabled: false,
-    #       remote_record_app_arn: "AmazonResourceName",
-    #       host_address: "HostAddress",
-    #       client_id: "ClientId",
     #       billing_method: "METERED" # One of: ["METERED", "UNMETERED"],
     #       device_minutes: {
     #         total: 1.0,
@@ -1957,6 +1978,11 @@ module Aws::DeviceFarm
     #       device_proxy: {
     #         host: "DeviceProxyHost", # required
     #         port: 1, # required
+    #       },
+    #       app_upload: "AmazonResourceName",
+    #       endpoints: {
+    #         remote_driver_endpoint: "SensitiveURL",
+    #         interactive_endpoint: "SensitiveURL"
     #       }
     #     }
     #   }
@@ -2066,6 +2092,33 @@ module Aws::DeviceFarm
     #         security_group_ids: ["SecurityGroupId"], # required
     #         subnet_ids: ["SubnetId"], # required
     #         vpc_id: "NonEmptyString", # required
+    #       },
+    #       execution_role_arn: "AmazonRoleResourceName",
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         }
+    #       ],
+    #       insights_types: ["TEST_REPORT" # One of: ["TEST_REPORT"]],
+    #       insights: {
+    #         status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"],
+    #         job_report: {
+    #           message: "ReportMessage",
+    #           metrics: {
+    #             jobs_total: 1,
+    #             jobs_passed: 1,
+    #             jobs_failed: 1,
+    #             jobs_skipped: 1,
+    #             jobs_errored: 1,
+    #             jobs_stopped: 1,
+    #             jobs_passed_percentage: 1.0,
+    #             total_job_execution_duration_seconds: 1.0,
+    #             average_job_execution_duration_seconds: 1.0,
+    #             median_job_execution_duration_seconds: 1.0
+    #           },
+    #           job_details_url: "SensitiveURL"
+    #         }
     #       }
     #     }
     #   }
@@ -2220,13 +2273,14 @@ module Aws::DeviceFarm
       request.send_request(options)
     end
 
-    # <p>A session is an instance of a browser created through a <code>RemoteWebDriver</code> with the URL from <a>CreateTestGridUrlResult$url</a>. You can use the following to look up sessions:</p>
+    # <p>A session is an instance of a browser created through a <code>RemoteWebDriver</code> with the URL from <code>
+    #             CreateTestGridUrlResult</code>. You can use the following to look up sessions:</p>
     #          <ul>
     #             <li>
-    #                <p>The session ARN (<a>GetTestGridSessionRequest$sessionArn</a>).</p>
+    #                <p>The session ARN.</p>
     #             </li>
     #             <li>
-    #                <p>The project ARN and a session ID (<a>GetTestGridSessionRequest$projectArn</a> and <a>GetTestGridSessionRequest$sessionId</a>).</p>
+    #                <p>The project ARN and a session ID.</p>
     #             </li>
     #          </ul>
     #          <p></p>
@@ -2393,16 +2447,16 @@ module Aws::DeviceFarm
     #   <p>The run, job, suite, or test ARN.</p>
     # @option params [String] :type
     #   <p>The artifacts' type.</p>
-    #           <p>Allowed values include:</p>
-    #           <ul>
+    #            <p>Allowed values include:</p>
+    #            <ul>
     #               <li>
-    #                   <p>FILE</p>
+    #                  <p>FILE</p>
     #               </li>
     #               <li>
-    #                   <p>LOG</p>
+    #                  <p>LOG</p>
     #               </li>
     #               <li>
-    #                   <p>SCREENSHOT</p>
+    #                  <p>SCREENSHOT</p>
     #               </li>
     #            </ul>
     # @option params [String] :next_token
@@ -2495,14 +2549,14 @@ module Aws::DeviceFarm
     #   <p>The project ARN.</p>
     # @option params [String] :type
     #   <p>The device pools' type.</p>
-    #           <p>Allowed values include:</p>
-    #           <ul>
+    #            <p>Allowed values include:</p>
+    #            <ul>
     #               <li>
-    #                   <p>CURATED: A device pool that is created and managed by AWS Device
+    #                  <p>CURATED: A device pool that is created and managed by AWS Device
     #                       Farm.</p>
     #               </li>
     #               <li>
-    #                   <p>PRIVATE: A device pool that is created and managed by the device pool
+    #                  <p>PRIVATE: A device pool that is created and managed by the device pool
     #                       developer.</p>
     #               </li>
     #            </ul>
@@ -2591,92 +2645,92 @@ module Aws::DeviceFarm
     # @option params [Array<Types::DeviceFilter>] :filters
     #   <p>Used to select a set of devices. A filter is made up of an attribute, an operator, and
     #               one or more values.</p>
-    #           <ul>
+    #            <ul>
     #               <li>
-    #                   <p>Attribute: The aspect of a device such as platform or model used as the
+    #                  <p>Attribute: The aspect of a device such as platform or model used as the
     #                       selection criteria in a device filter.</p>
-    #                   <p>Allowed values include:</p>
-    #                   <ul>
+    #                  <p>Allowed values include:</p>
+    #                  <ul>
     #                     <li>
-    #                           <p>ARN: The Amazon Resource Name (ARN) of the device (for example,
+    #                        <p>ARN: The Amazon Resource Name (ARN) of the device (for example,
     #                                   <code>arn:aws:devicefarm:us-west-2::device:12345Example</code>).</p>
-    #                       </li>
+    #                     </li>
     #                     <li>
-    #                           <p>PLATFORM: The device platform. Valid values are ANDROID or IOS.</p>
-    #                       </li>
+    #                        <p>PLATFORM: The device platform. Valid values are ANDROID or IOS.</p>
+    #                     </li>
     #                     <li>
-    #                           <p>OS_VERSION: The operating system version (for example, 10.3.2).</p>
-    #                       </li>
+    #                        <p>OS_VERSION: The operating system version (for example, 10.3.2).</p>
+    #                     </li>
     #                     <li>
-    #                           <p>MODEL: The device model (for example, iPad 5th Gen).</p>
-    #                       </li>
+    #                        <p>MODEL: The device model (for example, iPad 5th Gen).</p>
+    #                     </li>
     #                     <li>
-    #                           <p>AVAILABILITY: The current availability of the device. Valid values are AVAILABLE,
+    #                        <p>AVAILABILITY: The current availability of the device. Valid values are AVAILABLE,
     #                               HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.</p>
-    #                       </li>
+    #                     </li>
     #                     <li>
-    #                           <p>FORM_FACTOR: The device form factor. Valid values are PHONE or TABLET.</p>
-    #                       </li>
+    #                        <p>FORM_FACTOR: The device form factor. Valid values are PHONE or TABLET.</p>
+    #                     </li>
     #                     <li>
-    #                           <p>MANUFACTURER: The device manufacturer (for example, Apple).</p>
-    #                       </li>
+    #                        <p>MANUFACTURER: The device manufacturer (for example, Apple).</p>
+    #                     </li>
     #                     <li>
-    #                           <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid values
+    #                        <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid values
     #                               are TRUE or FALSE.</p>
-    #                       </li>
+    #                     </li>
     #                     <li>
-    #                           <p>REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging. Valid values
+    #                        <p>REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging. Valid values
     #                               are TRUE or FALSE. Because remote debugging is <a href="https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html">no
     #                                   longer supported</a>, this attribute is ignored.</p>
-    #                       </li>
+    #                     </li>
     #                     <li>
-    #                           <p>INSTANCE_ARN: The Amazon Resource Name (ARN) of the device
+    #                        <p>INSTANCE_ARN: The Amazon Resource Name (ARN) of the device
     #                               instance.</p>
-    #                       </li>
+    #                     </li>
     #                     <li>
-    #                           <p>INSTANCE_LABELS: The label of the device instance.</p>
-    #                       </li>
+    #                        <p>INSTANCE_LABELS: The label of the device instance.</p>
+    #                     </li>
     #                     <li>
-    #                           <p>FLEET_TYPE: The fleet type. Valid values are PUBLIC or PRIVATE.</p>
-    #                       </li>
+    #                        <p>FLEET_TYPE: The fleet type. Valid values are PUBLIC or PRIVATE.</p>
+    #                     </li>
     #                  </ul>
     #               </li>
     #               <li>
-    #                   <p>Operator: The filter operator.</p>
-    #                   <ul>
+    #                  <p>Operator: The filter operator.</p>
+    #                  <ul>
     #                     <li>
-    #                           <p>The EQUALS operator is available for every attribute except
+    #                        <p>The EQUALS operator is available for every attribute except
     #                               INSTANCE_LABELS.</p>
-    #                       </li>
+    #                     </li>
     #                     <li>
-    #                           <p>The CONTAINS operator is available for the INSTANCE_LABELS and MODEL
+    #                        <p>The CONTAINS operator is available for the INSTANCE_LABELS and MODEL
     #                               attributes.</p>
-    #                       </li>
+    #                     </li>
     #                     <li>
-    #                           <p>The IN and NOT_IN operators are available for the ARN, OS_VERSION,
+    #                        <p>The IN and NOT_IN operators are available for the ARN, OS_VERSION,
     #                               MODEL, MANUFACTURER, and INSTANCE_ARN attributes.</p>
-    #                       </li>
+    #                     </li>
     #                     <li>
-    #                           <p>The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and
+    #                        <p>The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and
     #                               GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION
     #                               attribute.</p>
-    #                       </li>
+    #                     </li>
     #                  </ul>
     #               </li>
     #               <li>
-    #                   <p>Values: An array of one or more filter values.</p>
-    #                   <ul>
+    #                  <p>Values: An array of one or more filter values.</p>
+    #                  <ul>
     #                     <li>
-    #                           <p>The IN and NOT_IN operators take a values array that has one or more
+    #                        <p>The IN and NOT_IN operators take a values array that has one or more
     #                               elements.</p>
-    #                       </li>
+    #                     </li>
     #                     <li>
-    #                           <p>The other operators require an array with a single element.</p>
-    #                       </li>
+    #                        <p>The other operators require an array with a single element.</p>
+    #                     </li>
     #                     <li>
-    #                           <p>In a request, the AVAILABILITY attribute takes the following values: AVAILABLE,
+    #                        <p>In a request, the AVAILABILITY attribute takes the following values: AVAILABLE,
     #                               HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.</p>
-    #                       </li>
+    #                     </li>
     #                  </ul>
     #               </li>
     #            </ul>
@@ -2896,7 +2950,25 @@ module Aws::DeviceFarm
     #           unmetered: 1.0
     #         },
     #         video_endpoint: "String",
-    #         video_capture: false
+    #         video_capture: false,
+    #         insights: {
+    #           status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"],
+    #           test_report: {
+    #             message: "ReportMessage",
+    #             metrics: {
+    #               tests_total: 1,
+    #               tests_passed: 1,
+    #               tests_failed: 1,
+    #               tests_skipped: 1,
+    #               tests_errored: 1,
+    #               tests_other: 1,
+    #               tests_passed_percentage: 1.0,
+    #               total_test_execution_duration_seconds: 1.0,
+    #               median_test_execution_duration_seconds: 1.0
+    #             },
+    #             test_details_url: "SensitiveURL"
+    #           }
+    #         }
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -3181,7 +3253,14 @@ module Aws::DeviceFarm
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnet_ids: ["SubnetId"], # required
     #           vpc_id: "NonEmptyString", # required
-    #         }
+    #         },
+    #         environment_variables: [
+    #           {
+    #             name: "EnvironmentVariableName", # required
+    #             value: "EnvironmentVariableValue", # required
+    #           }
+    #         ],
+    #         execution_role_arn: "AmazonRoleResourceName"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -3280,11 +3359,6 @@ module Aws::DeviceFarm
     #           availability: "TEMPORARY_NOT_AVAILABLE" # One of: ["TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"]
     #         },
     #         instance_arn: "AmazonResourceName",
-    #         remote_debug_enabled: false,
-    #         remote_record_enabled: false,
-    #         remote_record_app_arn: "AmazonResourceName",
-    #         host_address: "HostAddress",
-    #         client_id: "ClientId",
     #         billing_method: "METERED" # One of: ["METERED", "UNMETERED"],
     #         device_minutes: {
     #           total: 1.0,
@@ -3303,6 +3377,11 @@ module Aws::DeviceFarm
     #         device_proxy: {
     #           host: "DeviceProxyHost", # required
     #           port: 1, # required
+    #         },
+    #         app_upload: "AmazonResourceName",
+    #         endpoints: {
+    #           remote_driver_endpoint: "SensitiveURL",
+    #           interactive_endpoint: "SensitiveURL"
     #         }
     #       }
     #     ],
@@ -3420,6 +3499,33 @@ module Aws::DeviceFarm
     #           security_group_ids: ["SecurityGroupId"], # required
     #           subnet_ids: ["SubnetId"], # required
     #           vpc_id: "NonEmptyString", # required
+    #         },
+    #         execution_role_arn: "AmazonRoleResourceName",
+    #         environment_variables: [
+    #           {
+    #             name: "EnvironmentVariableName", # required
+    #             value: "EnvironmentVariableValue", # required
+    #           }
+    #         ],
+    #         insights_types: ["TEST_REPORT" # One of: ["TEST_REPORT"]],
+    #         insights: {
+    #           status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"],
+    #           job_report: {
+    #             message: "ReportMessage",
+    #             metrics: {
+    #               jobs_total: 1,
+    #               jobs_passed: 1,
+    #               jobs_failed: 1,
+    #               jobs_skipped: 1,
+    #               jobs_errored: 1,
+    #               jobs_stopped: 1,
+    #               jobs_passed_percentage: 1.0,
+    #               total_job_execution_duration_seconds: 1.0,
+    #               average_job_execution_duration_seconds: 1.0,
+    #               median_job_execution_duration_seconds: 1.0
+    #             },
+    #             job_details_url: "SensitiveURL"
+    #           }
     #         }
     #       }
     #     ],
@@ -3432,6 +3538,9 @@ module Aws::DeviceFarm
     end
 
     # <p>Gets information about samples, given an AWS Device Farm job ARN.</p>
+    #          <important>
+    #             <p>Device Farm does not support performance data samples during test executions.</p>
+    #          </important>
     # @param [Hash, Types::ListSamplesRequest] params
     # @option params [String] :arn
     #   <p>The Amazon Resource Name (ARN) of the job used to list samples.</p>
@@ -3545,7 +3654,7 @@ module Aws::DeviceFarm
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource or resources for which to list tags. You can associate tags
-    #               with the following Device Farm resources: <code>PROJECT</code>, <code>RUN</code>,
+    #               with the following Device Farm resources: <code>PROJECT</code>, <code>TESTGRID_PROJECT</code>, <code>RUN</code>,
     #                   <code>NETWORK_PROFILE</code>, <code>INSTANCE_PROFILE</code>, <code>DEVICE_INSTANCE</code>,
     #                   <code>SESSION</code>, <code>DEVICE_POOL</code>, <code>DEVICE</code>, and
     #               <code>VPCE_CONFIGURATION</code>.</p>
@@ -3799,7 +3908,7 @@ module Aws::DeviceFarm
     end
 
     # <p>Gets information about unique problems, such as exceptions or crashes.</p>
-    #         <p>Unique problems are defined as a single instance of an error across a run, job, or suite. For example,
+    #          <p>Unique problems are defined as a single instance of an error across a run, job, or suite. For example,
     #             if a call in your application consistently raises an exception (<code>OutOfBoundsException in
     #                 MyActivity.java:386</code>), <code>ListUniqueProblems</code> returns a single entry instead of many
     #             individual entries for that exception.</p>
@@ -3922,94 +4031,94 @@ module Aws::DeviceFarm
     #               uploads.</p>
     # @option params [String] :type
     #   <p>The type of upload.</p>
-    #           <p>Must be one of the following values:</p>
-    #           <ul>
+    #            <p>Must be one of the following values:</p>
+    #            <ul>
     #               <li>
-    #                   <p>ANDROID_APP</p>
+    #                  <p>ANDROID_APP</p>
     #               </li>
     #               <li>
-    #                   <p>IOS_APP</p>
+    #                  <p>IOS_APP</p>
     #               </li>
     #               <li>
-    #                   <p>WEB_APP</p>
+    #                  <p>WEB_APP</p>
     #               </li>
     #               <li>
-    #                   <p>EXTERNAL_DATA</p>
+    #                  <p>EXTERNAL_DATA</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_JUNIT_TEST_PACKAGE</p>
+    #                  <p>APPIUM_JAVA_JUNIT_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_TESTNG_TEST_PACKAGE</p>
+    #                  <p>APPIUM_JAVA_TESTNG_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_PYTHON_TEST_PACKAGE</p>
+    #                  <p>APPIUM_PYTHON_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_NODE_TEST_PACKAGE</p>
+    #                  <p>APPIUM_NODE_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_RUBY_TEST_PACKAGE</p>
+    #                  <p>APPIUM_RUBY_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_PYTHON_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_PYTHON_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_NODE_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_NODE_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_RUBY_TEST_PACKAGE</p>
+    #                  <p>APPIUM_WEB_RUBY_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>INSTRUMENTATION_TEST_PACKAGE</p>
+    #                  <p>INSTRUMENTATION_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>XCTEST_TEST_PACKAGE</p>
+    #                  <p>XCTEST_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>XCTEST_UI_TEST_PACKAGE</p>
+    #                  <p>XCTEST_UI_TEST_PACKAGE</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_JUNIT_TEST_SPEC</p>
+    #                  <p>APPIUM_JAVA_JUNIT_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_JAVA_TESTNG_TEST_SPEC</p>
+    #                  <p>APPIUM_JAVA_TESTNG_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_PYTHON_TEST_SPEC</p>
+    #                  <p>APPIUM_PYTHON_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_NODE_TEST_SPEC</p>
+    #                  <p>APPIUM_NODE_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p> APPIUM_RUBY_TEST_SPEC</p>
+    #                  <p> APPIUM_RUBY_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_JUNIT_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_JAVA_JUNIT_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_JAVA_TESTNG_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_JAVA_TESTNG_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_PYTHON_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_PYTHON_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_NODE_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_NODE_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>APPIUM_WEB_RUBY_TEST_SPEC</p>
+    #                  <p>APPIUM_WEB_RUBY_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>INSTRUMENTATION_TEST_SPEC</p>
+    #                  <p>INSTRUMENTATION_TEST_SPEC</p>
     #               </li>
     #               <li>
-    #                   <p>XCTEST_UI_TEST_SPEC</p>
+    #                  <p>XCTEST_UI_TEST_SPEC</p>
     #               </li>
     #            </ul>
     # @option params [String] :next_token
@@ -4220,7 +4329,7 @@ module Aws::DeviceFarm
     # @option params [Types::DeviceSelectionConfiguration] :device_selection_configuration
     #   <p>The filter criteria used to dynamically select a set of devices for a test run and the maximum number of
     #               devices to be included in the run.</p>
-    #           <p>Either <b>
+    #            <p>Either <b>
     #                  <code>devicePoolArn</code>
     #               </b> or <b>
     #                  <code>deviceSelectionConfiguration</code>
@@ -4303,7 +4412,15 @@ module Aws::DeviceFarm
     #         gps: false
     #       },
     #       auxiliary_apps: ["AmazonResourceName"],
-    #       billing_method: "METERED" # One of: ["METERED", "UNMETERED"]
+    #       billing_method: "METERED" # One of: ["METERED", "UNMETERED"],
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         }
+    #       ],
+    #       execution_role_arn: "AmazonRoleResourceName",
+    #       insights_types: ["TEST_REPORT" # One of: ["TEST_REPORT"]]
     #     },
     #     execution_configuration: {
     #       job_timeout_minutes: 1,
@@ -4405,6 +4522,33 @@ module Aws::DeviceFarm
     #         security_group_ids: ["SecurityGroupId"], # required
     #         subnet_ids: ["SubnetId"], # required
     #         vpc_id: "NonEmptyString", # required
+    #       },
+    #       execution_role_arn: "AmazonRoleResourceName",
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         }
+    #       ],
+    #       insights_types: ["TEST_REPORT" # One of: ["TEST_REPORT"]],
+    #       insights: {
+    #         status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"],
+    #         job_report: {
+    #           message: "ReportMessage",
+    #           metrics: {
+    #             jobs_total: 1,
+    #             jobs_passed: 1,
+    #             jobs_failed: 1,
+    #             jobs_skipped: 1,
+    #             jobs_errored: 1,
+    #             jobs_stopped: 1,
+    #             jobs_passed_percentage: 1.0,
+    #             total_job_execution_duration_seconds: 1.0,
+    #             average_job_execution_duration_seconds: 1.0,
+    #             median_job_execution_duration_seconds: 1.0
+    #           },
+    #           job_details_url: "SensitiveURL"
+    #         }
     #       }
     #     }
     #   }
@@ -4502,7 +4646,25 @@ module Aws::DeviceFarm
     #         unmetered: 1.0
     #       },
     #       video_endpoint: "String",
-    #       video_capture: false
+    #       video_capture: false,
+    #       insights: {
+    #         status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"],
+    #         test_report: {
+    #           message: "ReportMessage",
+    #           metrics: {
+    #             tests_total: 1,
+    #             tests_passed: 1,
+    #             tests_failed: 1,
+    #             tests_skipped: 1,
+    #             tests_errored: 1,
+    #             tests_other: 1,
+    #             tests_passed_percentage: 1.0,
+    #             total_test_execution_duration_seconds: 1.0,
+    #             median_test_execution_duration_seconds: 1.0
+    #           },
+    #           test_details_url: "SensitiveURL"
+    #         }
+    #       }
     #     }
     #   }
     # @return [Types::StopJobResult]
@@ -4580,11 +4742,6 @@ module Aws::DeviceFarm
     #         availability: "TEMPORARY_NOT_AVAILABLE" # One of: ["TEMPORARY_NOT_AVAILABLE", "BUSY", "AVAILABLE", "HIGHLY_AVAILABLE"]
     #       },
     #       instance_arn: "AmazonResourceName",
-    #       remote_debug_enabled: false,
-    #       remote_record_enabled: false,
-    #       remote_record_app_arn: "AmazonResourceName",
-    #       host_address: "HostAddress",
-    #       client_id: "ClientId",
     #       billing_method: "METERED" # One of: ["METERED", "UNMETERED"],
     #       device_minutes: {
     #         total: 1.0,
@@ -4603,6 +4760,11 @@ module Aws::DeviceFarm
     #       device_proxy: {
     #         host: "DeviceProxyHost", # required
     #         port: 1, # required
+    #       },
+    #       app_upload: "AmazonResourceName",
+    #       endpoints: {
+    #         remote_driver_endpoint: "SensitiveURL",
+    #         interactive_endpoint: "SensitiveURL"
     #       }
     #     }
     #   }
@@ -4727,6 +4889,33 @@ module Aws::DeviceFarm
     #         security_group_ids: ["SecurityGroupId"], # required
     #         subnet_ids: ["SubnetId"], # required
     #         vpc_id: "NonEmptyString", # required
+    #       },
+    #       execution_role_arn: "AmazonRoleResourceName",
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         }
+    #       ],
+    #       insights_types: ["TEST_REPORT" # One of: ["TEST_REPORT"]],
+    #       insights: {
+    #         status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "SKIPPED", "ERRORED"],
+    #         job_report: {
+    #           message: "ReportMessage",
+    #           metrics: {
+    #             jobs_total: 1,
+    #             jobs_passed: 1,
+    #             jobs_failed: 1,
+    #             jobs_skipped: 1,
+    #             jobs_errored: 1,
+    #             jobs_stopped: 1,
+    #             jobs_passed_percentage: 1.0,
+    #             total_job_execution_duration_seconds: 1.0,
+    #             average_job_execution_duration_seconds: 1.0,
+    #             median_job_execution_duration_seconds: 1.0
+    #           },
+    #           job_details_url: "SensitiveURL"
+    #         }
     #       }
     #     }
     #   }
@@ -4742,7 +4931,7 @@ module Aws::DeviceFarm
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource or resources to which to add tags. You can associate tags
-    #               with the following Device Farm resources: <code>PROJECT</code>, <code>RUN</code>,
+    #               with the following Device Farm resources: <code>PROJECT</code>, <code>TESTGRID_PROJECT</code>, <code>RUN</code>,
     #                   <code>NETWORK_PROFILE</code>, <code>INSTANCE_PROFILE</code>, <code>DEVICE_INSTANCE</code>,
     #                   <code>SESSION</code>, <code>DEVICE_POOL</code>, <code>DEVICE</code>, and
     #               <code>VPCE_CONFIGURATION</code>.</p>
@@ -4774,7 +4963,7 @@ module Aws::DeviceFarm
     # @param [Hash, Types::UntagResourceRequest] params
     # @option params [String] :resource_arn
     #   <p>The Amazon Resource Name (ARN) of the resource or resources from which to delete tags. You can associate
-    #               tags with the following Device Farm resources: <code>PROJECT</code>, <code>RUN</code>,
+    #               tags with the following Device Farm resources: <code>PROJECT</code>, <code>TESTGRID_PROJECT</code>, <code>RUN</code>,
     #                   <code>NETWORK_PROFILE</code>, <code>INSTANCE_PROFILE</code>, <code>DEVICE_INSTANCE</code>,
     #                   <code>SESSION</code>, <code>DEVICE_POOL</code>, <code>DEVICE</code>, and
     #               <code>VPCE_CONFIGURATION</code>.</p>
@@ -4855,16 +5044,16 @@ module Aws::DeviceFarm
     #               devices that are available and that meet the criteria that you assign for the
     #                   <code>rules</code> parameter. Depending on how many devices meet these constraints,
     #               your device pool might contain fewer devices than the value for this parameter.</p>
-    #           <p>By specifying the maximum number of devices, you can control the costs that you incur
+    #            <p>By specifying the maximum number of devices, you can control the costs that you incur
     #               by running tests.</p>
-    #           <p>If you use this parameter in your request, you cannot use the
+    #            <p>If you use this parameter in your request, you cannot use the
     #                   <code>clearMaxDevices</code> parameter in the same request.</p>
     # @option params [Boolean] :clear_max_devices
     #   <p>Sets whether the <code>maxDevices</code> parameter applies to your device pool. If you set this parameter
     #               to <code>true</code>, the <code>maxDevices</code> parameter does not apply, and Device Farm does not limit
     #               the number of devices that it adds to your device pool. In this case, Device Farm adds all available devices
     #               that meet the criteria specified in the <code>rules</code> parameter.</p>
-    #           <p>If you use this parameter in your request, you cannot use the <code>maxDevices</code>
+    #            <p>If you use this parameter in your request, you cannot use the <code>maxDevices</code>
     #               parameter in the same request.</p>
     # @example To update a device pool
     #   # The following example updates the specified device pool with a new name and description. It also enables remote access of devices in the device pool.
@@ -4942,7 +5131,7 @@ module Aws::DeviceFarm
     # @option params [Array<String>] :exclude_app_packages_from_cleanup
     #   <p>An array of strings that specifies the list of app packages that should not be cleaned up from the device
     #               after a test run is over.</p>
-    #           <p>The list of packages is only considered if you set <code>packageCleanup</code> to
+    #            <p>The list of packages is only considered if you set <code>packageCleanup</code> to
     #                   <code>true</code>.</p>
     # @option params [Boolean] :reboot_after_use
     #   <p>The updated choice for whether you want to reboot the device after use. The default
@@ -5064,6 +5253,18 @@ module Aws::DeviceFarm
     #   <p>The number of minutes a test run in the project executes before it times out.</p>
     # @option params [Types::VpcConfig] :vpc_config
     #   <p>The VPC security groups and subnets that are attached to a project.</p>
+    # @option params [Array<Types::EnvironmentVariable>] :environment_variables
+    #   <p>
+    #               A set of environment variables which are used by default for all runs in the project.
+    #               These environment variables are applied to the test run during the execution of a test spec file.
+    #           </p>
+    #            <p>
+    #               For more information about using test spec files, please see
+    #               <a href="https://docs.aws.amazon.com/devicefarm/latest/developerguide/custom-test-environments.html">Custom test environments </a> in <i>AWS Device
+    #               Farm.</i>
+    #            </p>
+    # @option params [String] :execution_role_arn
+    #   <p>An IAM role to be assumed by the test host for all runs in the project.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     arn: "AmazonResourceName", # required
@@ -5073,7 +5274,14 @@ module Aws::DeviceFarm
     #       security_group_ids: ["SecurityGroupId"], # required
     #       subnet_ids: ["SubnetId"], # required
     #       vpc_id: "NonEmptyString", # required
-    #     }
+    #     },
+    #     environment_variables: [
+    #       {
+    #         name: "EnvironmentVariableName", # required
+    #         value: "EnvironmentVariableValue", # required
+    #       }
+    #     ],
+    #     execution_role_arn: "AmazonRoleResourceName"
     #   }
     #   options = {}
     #   response = client.update_project(params, options)
@@ -5089,7 +5297,14 @@ module Aws::DeviceFarm
     #         security_group_ids: ["SecurityGroupId"], # required
     #         subnet_ids: ["SubnetId"], # required
     #         vpc_id: "NonEmptyString", # required
-    #       }
+    #       },
+    #       environment_variables: [
+    #         {
+    #           name: "EnvironmentVariableName", # required
+    #           value: "EnvironmentVariableValue", # required
+    #         }
+    #       ],
+    #       execution_role_arn: "AmazonRoleResourceName"
     #     }
     #   }
     # @return [Types::UpdateProjectResult]

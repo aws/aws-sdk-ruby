@@ -33,7 +33,7 @@ module Aws::Glue
     #   <p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can
     #         consume resources before it is terminated and enters <code>TIMEOUT</code> status. This overrides the timeout value set in the parent job.</p>
     #            <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>
-    #            <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>
+    #            <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>
     #            <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>
     #            <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>
     #   @return [Integer]
@@ -90,7 +90,7 @@ module Aws::Glue
     #   @return [Array<String>]
     # @!attribute agg_func
     #   <p>Specifies the aggregation function to apply.</p>
-    #            <p>Possible aggregation functions include: avg countDistinct, count, first, last, kurtosis, max, min, skewness, 
+    #            <p>Possible aggregation functions include: avg countDistinct, count, first, last, kurtosis, max, min, skewness,
     #         stddev_samp, stddev_pop, sum, sumDistinct, var_samp, var_pop</p>
     #   @return [String]
     class AggregateOperation < Struct.new(
@@ -339,6 +339,100 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A form on an asset, consisting of the form type identifier and its JSON content.</p>
+    # @!attribute form_type_id
+    #   <p>The identifier of the form type that defines this form's schema.</p>
+    #   @return [String]
+    # @!attribute content
+    #   <p>The JSON content of the form, conforming to the schema of the specified form type.</p>
+    #   @return [String]
+    class AssetFormEntry < Struct.new(
+      nil,
+      :form_type_id,
+      :content,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A reference to a form type that is included in an asset type.</p>
+    # @!attribute form_type_identifier
+    #   <p>The identifier of the referenced form type.</p>
+    #   @return [String]
+    class AssetTypeFormReference < Struct.new(
+      nil,
+      :form_type_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an asset type.</p>
+    # @!attribute id
+    #   <p>The identifier of the asset type.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the asset type.</p>
+    #   @return [String]
+    class AssetTypeItem < Struct.new(
+      nil,
+      :id,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset to associate glossary terms with.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the glossary terms are associated with an item within the iterable form rather than the asset itself.</p>
+    #   @return [String]
+    # @!attribute item_identifier
+    #   <p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>
+    #   @return [String]
+    # @!attribute glossary_term_identifiers
+    #   <p>The list of glossary term identifiers to associate with the asset.</p>
+    #   @return [Array<String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class AssociateGlossaryTermsRequest < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
+      :glossary_term_identifiers,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form, if the association targets an item.</p>
+    #   @return [String]
+    # @!attribute item_identifier
+    #   <p>The identifier of the item within the iterable form, if applicable.</p>
+    #   @return [String]
+    # @!attribute glossary_terms
+    #   <p>The glossary terms now associated with the asset.</p>
+    #   @return [Array<String>]
+    class AssociateGlossaryTermsResponse < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
+      :glossary_terms,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies a connector to an Amazon Athena data source.</p>
     # @!attribute name
     #   <p>The name of the data source.</p>
@@ -431,7 +525,7 @@ module Aws::Glue
     #   <p>The secret manager ARN to store credentials.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive authentication information. This key is used to protect credentials 
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used to encrypt sensitive authentication information. This key is used to protect credentials
     #         and other sensitive data stored within the authentication configuration.</p>
     #   @return [String]
     # @!attribute o_auth2_properties
@@ -496,7 +590,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality 
+    # <p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality
     #       checks and monitoring during ETL operations, helping to ensure data integrity and reliability without manual intervention.</p>
     # @!attribute is_enabled
     #   <p>Specifies whether automatic data quality evaluation is enabled. When set to <code>true</code>, data quality checks are performed automatically.</p>
@@ -560,6 +654,22 @@ module Aws::Glue
     #   <p>The password to connect to the data source.</p>
     #   @return [String]
     class BasicAuthenticationCredentials < Struct.new(
+      nil,
+      :username,
+      :password,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Basic authentication configuration that defines the username and password properties for HTTP Basic authentication.</p>
+    # @!attribute username
+    #   <p>The username property name to use for Basic authentication credentials.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute password
+    #   <p>The password property name to use for Basic authentication credentials.</p>
+    #   @return [Types::ConnectorProperty]
+    class BasicAuthenticationProperties < Struct.new(
       nil,
       :username,
       :password,
@@ -748,7 +858,7 @@ module Aws::Glue
     #         compatibility, this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute table_name
-    #   <p>The name of the table. For Hive compatibility, 
+    #   <p>The name of the table. For Hive compatibility,
     #         this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute version_ids
@@ -890,6 +1000,58 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute result_ids
+    #   <p>A list of unique result IDs for the data quality results.</p>
+    #   @return [Array<String>]
+    class BatchGetDataQualityResultV2Request < Struct.new(
+      nil,
+      :result_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute results
+    #   <p>A list of <code>DataQualityResultV2Item</code> objects representing the data quality results.</p>
+    #   @return [Array<Types::DataQualityResultV2Item>]
+    # @!attribute results_not_found
+    #   <p>A list of result IDs for which results were not found.</p>
+    #   @return [Array<String>]
+    class BatchGetDataQualityResultV2Response < Struct.new(
+      nil,
+      :results,
+      :results_not_found,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute run_ids
+    #   <p>A list of unique run identifiers for the evaluation runs to retrieve.</p>
+    #   @return [Array<String>]
+    class BatchGetDataQualityRulesetEvaluationRunRequest < Struct.new(
+      nil,
+      :run_ids,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute runs
+    #   <p>A list of evaluation run details for the requested run IDs.</p>
+    #   @return [Array<Types::DataQualityRulesetEvaluationRun>]
+    # @!attribute runs_not_found
+    #   <p>A list of run IDs that were not found.</p>
+    #   @return [Array<String>]
+    class BatchGetDataQualityRulesetEvaluationRunResponse < Struct.new(
+      nil,
+      :runs,
+      :runs_not_found,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute dev_endpoint_names
     #   <p>The list of <code>DevEndpoint</code> names, which might be the names returned from the
     #           <code>ListDevEndpoint</code> operation.</p>
@@ -912,6 +1074,40 @@ module Aws::Glue
       nil,
       :dev_endpoints,
       :dev_endpoints_not_found,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form to retrieve items from.</p>
+    #   @return [String]
+    # @!attribute item_identifiers
+    #   <p>The list of item identifiers to retrieve. Each identifier can be an item ID or item name.</p>
+    #   @return [Array<String>]
+    class BatchGetIterableFormsRequest < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifiers,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The list of retrieved iterable form items.</p>
+    #   @return [Array<Types::IterableFormItem>]
+    # @!attribute errors
+    #   <p>The list of errors for items that could not be retrieved.</p>
+    #   @return [Array<Types::ItemError>]
+    class BatchGetIterableFormsResponse < Struct.new(
+      nil,
+      :items,
+      :errors,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -957,12 +1153,22 @@ module Aws::Glue
     # @!attribute partitions_to_get
     #   <p>A list of partition values identifying the partitions to retrieve.</p>
     #   @return [Array<Types::PartitionValueList>]
+    # @!attribute audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
+    #   @return [Types::AuditContext]
+    # @!attribute query_session_context
+    #   <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
+    #            <p>For more information about how to utilize QuerySessionContext, see
+    #             <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html">Lake Formation workflow for application integration API operations</a> in the developer guide.</p>
+    #   @return [Types::QuerySessionContext]
     class BatchGetPartitionRequest < Struct.new(
       nil,
       :catalog_id,
       :database_name,
       :table_name,
       :partitions_to_get,
+      :audit_context,
+      :query_session_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1302,6 +1508,26 @@ module Aws::Glue
     class BatchUpdatePartitionResponse < Struct.new(
       nil,
       :errors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that defines how BETWEEN range filter operations are translated into REST API request parameters.</p>
+    # @!attribute low_bound_key
+    #   <p>The parameter name used for the lower bound value in a BETWEEN filter operation.</p>
+    #   @return [String]
+    # @!attribute high_bound_key
+    #   <p>The parameter name used for the upper bound value in a BETWEEN filter operation.</p>
+    #   @return [String]
+    # @!attribute template
+    #   <p>A template string for constructing the BETWEEN filter expression.</p>
+    #   @return [String]
+    class BetweenConfiguration < Struct.new(
+      nil,
+      :low_bound_key,
+      :high_bound_key,
+      :template,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1832,6 +2058,11 @@ module Aws::Glue
     #         Allows third-party engines to access data in Amazon S3 locations that are registered with Lake Formation.
     #       </p>
     #   @return [String]
+    # @!attribute overwrite_child_resource_permissions_with_default
+    #   <p>
+    #         Overwrites existing Amazon Web Services Lake Formation permissions with <code>CatalogInput$CreateTableDefaultPermissions</code> and <code>CatalogInput$CreateDatabaseDefaultPermissions</code> for all child resources.
+    #       </p>
+    #   @return [String]
     class CatalogInput < Struct.new(
       nil,
       :description,
@@ -1842,6 +2073,7 @@ module Aws::Glue
       :create_table_default_permissions,
       :create_database_default_permissions,
       :allow_full_table_external_data_access,
+      :overwrite_child_resource_permissions_with_default,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1924,7 +2156,7 @@ module Aws::Glue
     #   <p>A <code>DataLakeAccessProperties</code> object that specifies properties to configure data lake access for your catalog resource in the Glue Data Catalog.</p>
     #   @return [Types::DataLakeAccessProperties]
     # @!attribute iceberg_optimization_properties
-    #   <p>A structure that specifies Iceberg table optimization properties for the catalog. This includes configuration for compaction, retention, and 
+    #   <p>A structure that specifies Iceberg table optimization properties for the catalog. This includes configuration for compaction, retention, and
     #         orphan file deletion operations that can be applied to Iceberg tables in this catalog.</p>
     #   @return [Types::IcebergOptimizationProperties]
     # @!attribute custom_properties
@@ -1945,7 +2177,7 @@ module Aws::Glue
     #   <p>A <code>DataLakeAccessProperties</code> object with input properties to configure data lake access for your catalog resource in the Glue Data Catalog.</p>
     #   @return [Types::DataLakeAccessPropertiesOutput]
     # @!attribute iceberg_optimization_properties
-    #   <p>An <code>IcebergOptimizationPropertiesOutput</code> object that specifies Iceberg table optimization settings for the catalog, including 
+    #   <p>An <code>IcebergOptimizationPropertiesOutput</code> object that specifies Iceberg table optimization settings for the catalog, including
     #         configurations for compaction, retention, and orphan file deletion operations.</p>
     #   @return [Types::IcebergOptimizationPropertiesOutput]
     # @!attribute custom_properties
@@ -1989,7 +2221,7 @@ module Aws::Glue
     #   @return [String]
     # @!attribute partition_predicate
     #   <p>
-    #         Partitions satisfying this predicate are deleted. Files within the retention period in these partitions are not deleted. 
+    #         Partitions satisfying this predicate are deleted. Files within the retention period in these partitions are not deleted.
     #       </p>
     #   @return [String]
     # @!attribute output_schemas
@@ -2002,6 +2234,30 @@ module Aws::Glue
       :table,
       :partition_predicate,
       :output_schemas,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for a Glue Data Catalog table used to store data quality results.</p>
+    # @!attribute database_name
+    #   <p>The name of the database in the Glue Data Catalog.</p>
+    #   @return [String]
+    # @!attribute table_name
+    #   <p>The name of the table in the Glue Data Catalog.</p>
+    #   @return [String]
+    # @!attribute s3_location
+    #   <p>The Amazon S3 location for storing the results.</p>
+    #   @return [String]
+    # @!attribute catalog_id
+    #   <p>A unique identifier for the Glue Data Catalog.</p>
+    #   @return [String]
+    class CatalogTableConfigOptions < Struct.new(
+      nil,
+      :database_name,
+      :table_name,
+      :s3_location,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2096,6 +2352,42 @@ module Aws::Glue
       :xml_classifier,
       :json_classifier,
       :csv_classifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>OAuth2 client credentials configuration that defines the properties needed for the Client Credentials grant type flow.</p>
+    # @!attribute token_url
+    #   <p>The token endpoint URL where the client will request access tokens using client credentials.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute request_method
+    #   <p>The HTTP method to use when making token requests, typically POST.</p>
+    #   @return [String]
+    # @!attribute content_type
+    #   <p>The content type to use for token requests, such as application/x-www-form-urlencoded or application/json.</p>
+    #   @return [String]
+    # @!attribute client_id
+    #   <p>The OAuth2 client identifier provided by the authorization server.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute client_secret
+    #   <p>The OAuth2 client secret provided by the authorization server.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute scope
+    #   <p>The OAuth2 scope that defines the level of access requested for the client credentials flow.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute token_url_parameters
+    #   <p>Additional parameters to include in token URL requests as key-value pairs.</p>
+    #   @return [Array<Types::ConnectorProperty>]
+    class ClientCredentialsProperties < Struct.new(
+      nil,
+      :token_url,
+      :request_method,
+      :content_type,
+      :client_id,
+      :client_secret,
+      :scope,
+      :token_url_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2858,7 +3150,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve 
+    # <p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to improve
     #       query performance and reduce storage costs.</p>
     # @!attribute iceberg_configuration
     #   <p>The configuration for an Iceberg compaction optimizer.</p>
@@ -3460,89 +3752,6 @@ module Aws::Glue
     #                     <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.</p>
     #               </li>
     #            </ul>
-    #            <p>Additionally, a <code>ConnectionType</code> for the following SaaS connectors is supported:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>
-    #                     <code>FACEBOOKADS</code> - Designates a connection to Facebook Ads.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>GOOGLEADS</code> - Designates a connection to Google Ads.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>GOOGLESHEETS</code> - Designates a connection to Google Sheets.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>GOOGLEANALYTICS4</code> - Designates a connection to Google Analytics 4.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>HUBSPOT</code> - Designates a connection to HubSpot.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INSTAGRAMADS</code> - Designates a connection to Instagram Ads.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>INTERCOM</code> - Designates a connection to Intercom.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>JIRACLOUD</code> - Designates a connection to Jira Cloud.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>MARKETO</code> - Designates a connection to Adobe Marketo Engage.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>NETSUITEERP</code> - Designates a connection to Oracle NetSuite.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>SALESFORCE</code> - Designates a connection to Salesforce using OAuth authentication.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>SALESFORCEMARKETINGCLOUD</code> - Designates a connection to Salesforce Marketing Cloud.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>SALESFORCEPARDOT</code> - Designates a connection to Salesforce Marketing Cloud Account Engagement (MCAE).</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>SAPODATA</code> - Designates a connection to SAP OData.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>SERVICENOW</code> - Designates a connection to ServiceNow.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>SLACK</code> - Designates a connection to Slack.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>SNAPCHATADS</code> - Designates a connection to Snapchat Ads.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>STRIPE</code> - Designates a connection to Stripe.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ZENDESK</code> - Designates a connection to Zendesk.</p>
-    #               </li>
-    #               <li>
-    #                  <p>
-    #                     <code>ZOHOCRM</code> - Designates a connection to Zoho CRM.</p>
-    #               </li>
-    #            </ul>
     #            <p>For more information on the connection parameters needed for a particular connector, see the documentation for the connector in <a href="https://docs.aws.amazon.com/glue/latest/dg/console-connections.html">Adding an Glue connection</a>in the Glue User Guide.</p>
     #            <p>
     #               <code>SFTP</code> is not supported.</p>
@@ -3634,6 +3843,22 @@ module Aws::Glue
       end
     end
 
+    # <p>Configuration that defines the base URL and additional request parameters needed during connection creation.</p>
+    # @!attribute url
+    #   <p>The base instance URL for the endpoint that this connection type will connect to.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute additional_request_parameters
+    #   <p>Key-value pairs of additional request parameters that may be needed during connection creation, such as API versions or service-specific configuration options.</p>
+    #   @return [Array<Types::ConnectorProperty>]
+    class ConnectionPropertiesConfiguration < Struct.new(
+      nil,
+      :url,
+      :additional_request_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Brief information about a supported connection type returned by the <code>ListConnectionTypes</code> API.</p>
     # @!attribute connection_type
     #   <p>The name of the connection type.</p>
@@ -3648,7 +3873,7 @@ module Aws::Glue
     #   <p>A description of the connection type.</p>
     #   @return [String]
     # @!attribute categories
-    #   <p>A list of categories that this connection type belongs to. Categories help users filter and find appropriate connection types based on their 
+    #   <p>A list of categories that this connection type belongs to. Categories help users filter and find appropriate connection types based on their
     #         use cases.</p>
     #   @return [Array<String>]
     # @!attribute capabilities
@@ -3658,7 +3883,7 @@ module Aws::Glue
     #   <p>The URL of the logo associated with a connection type.</p>
     #   @return [String]
     # @!attribute connection_type_variants
-    #   <p>A list of variants available for this connection type. Different variants may provide specialized configurations for specific use cases or 
+    #   <p>A list of variants available for this connection type. Different variants may provide specialized configurations for specific use cases or
     #         implementations of the same general connection type.</p>
     #   @return [Array<Types::ConnectionTypeVariant>]
     class ConnectionTypeBrief < Struct.new(
@@ -3676,7 +3901,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Represents a variant of a connection type in Glue Data Catalog. Connection type variants provide specific configurations and behaviors 
+    # <p>Represents a variant of a connection type in Glue. Connection type variants provide specific configurations and behaviors
     #       for different implementations of the same general connection type.</p>
     # @!attribute connection_type_variant_name
     #   <p>The unique identifier for the connection type variant. This name is used internally to identify the specific variant of a connection type.
@@ -3709,6 +3934,82 @@ module Aws::Glue
     class ConnectionsList < Struct.new(
       nil,
       :connections,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that defines the supported authentication types and required properties for the connection type.</p>
+    # @!attribute authentication_types
+    #   <p>A list of authentication types supported by this connection type, such as Basic, OAuth2, or Custom authentication methods.</p>
+    #   @return [Array<String>]
+    # @!attribute o_auth2_properties
+    #   <p>OAuth2 configuration container that defines the authentication properties and flow-specific configurations for OAuth2-based connections.</p>
+    #   @return [Types::ConnectorOAuth2Properties]
+    # @!attribute basic_authentication_properties
+    #   <p>Basic authentication configuration that defines the username and password properties for HTTP Basic authentication.</p>
+    #   @return [Types::BasicAuthenticationProperties]
+    # @!attribute custom_authentication_properties
+    #   <p>Custom authentication configuration that allows for flexible authentication mechanisms beyond standard Basic and OAuth2 flows.</p>
+    #   @return [Types::CustomAuthenticationProperties]
+    class ConnectorAuthenticationConfiguration < Struct.new(
+      nil,
+      :authentication_types,
+      :o_auth2_properties,
+      :basic_authentication_properties,
+      :custom_authentication_properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>OAuth2 authorization code configuration that defines the properties needed for the Authorization Code grant type flow.</p>
+    # @!attribute authorization_code_url
+    #   <p>The authorization endpoint URL where users will be redirected to grant authorization.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute authorization_code
+    #   <p>The authorization code received from the authorization server after user consent.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute redirect_uri
+    #   <p>The redirect URI that must match the URI registered with the authorization server.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute token_url
+    #   <p>The token endpoint URL where the authorization code will be exchanged for an access token.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute request_method
+    #   <p>The HTTP method to use when making token exchange requests, typically POST.</p>
+    #   @return [String]
+    # @!attribute content_type
+    #   <p>The content type to use for token exchange requests, such as application/x-www-form-urlencoded or application/json.</p>
+    #   @return [String]
+    # @!attribute client_id
+    #   <p>The OAuth2 client identifier provided by the authorization server.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute client_secret
+    #   <p>The OAuth2 client secret provided by the authorization server.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute scope
+    #   <p>The OAuth2 scope that defines the level of access requested for the authorization code flow.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute prompt
+    #   <p>The OAuth2 prompt parameter that controls the authorization server's behavior during user authentication.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute token_url_parameters
+    #   <p>Additional parameters to include in token URL requests as key-value pairs.</p>
+    #   @return [Array<Types::ConnectorProperty>]
+    class ConnectorAuthorizationCodeProperties < Struct.new(
+      nil,
+      :authorization_code_url,
+      :authorization_code,
+      :redirect_uri,
+      :token_url,
+      :request_method,
+      :content_type,
+      :client_id,
+      :client_secret,
+      :scope,
+      :prompt,
+      :token_url_parameters,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3825,8 +4126,8 @@ module Aws::Glue
     #            </ul>
     #   @return [String]
     # @!attribute data
-    #   <p>A map specifying connection options for the node. You can find standard connection options for the 
-    #       corresponding connection type in the 
+    #   <p>A map specifying connection options for the node. You can find standard connection options for the
+    #       corresponding connection type in the
     #       <a href="https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-connect.html">
     #       Connection parameters</a> section of the Glue documentation.</p>
     #   @return [Hash<String, String>]
@@ -3839,6 +4140,70 @@ module Aws::Glue
       :connection_type,
       :data,
       :inputs,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>OAuth2 configuration container that defines the authentication properties and flow-specific configurations for OAuth2-based connections.</p>
+    # @!attribute o_auth2_grant_type
+    #   <p>The OAuth2 grant type to use for authentication, such as CLIENT_CREDENTIALS, JWT_BEARER, or AUTHORIZATION_CODE.</p>
+    #   @return [String]
+    # @!attribute client_credentials_properties
+    #   <p>Configuration properties specific to the OAuth2 Client Credentials grant type flow.</p>
+    #   @return [Types::ClientCredentialsProperties]
+    # @!attribute jwt_bearer_properties
+    #   <p>Configuration properties specific to the OAuth2 JWT Bearer grant type flow.</p>
+    #   @return [Types::JWTBearerProperties]
+    # @!attribute authorization_code_properties
+    #   <p>Configuration properties specific to the OAuth2 Authorization Code grant type flow.</p>
+    #   @return [Types::ConnectorAuthorizationCodeProperties]
+    class ConnectorOAuth2Properties < Struct.new(
+      nil,
+      :o_auth2_grant_type,
+      :client_credentials_properties,
+      :jwt_bearer_properties,
+      :authorization_code_properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Defines a property configuration for connection types, default values, and where the property should be used in requests.</p>
+    # @!attribute name
+    #   <p>The name of the property.</p>
+    #   @return [String]
+    # @!attribute key_override
+    #   <p>A key name to use when sending this property in API requests, if different from the display name.</p>
+    #   @return [String]
+    # @!attribute required
+    #   <p>Indicates whether the property is required.</p>
+    #   @return [Boolean]
+    # @!attribute default_value
+    #   <p>The default value for the property.</p>
+    #   @return [String]
+    # @!attribute allowed_values
+    #   <p>A list of <code>AllowedValue</code> objects representing the values allowed for the property.</p>
+    #   @return [Array<String>]
+    # @!attribute property_location
+    #   <p>Specifies where this property should be included in REST requests, such as in headers, query parameters, or request body.</p>
+    #   @return [String]
+    # @!attribute property_type
+    #   <p>The data type of this property</p>
+    #   @return [String]
+    # @!attribute format
+    #   <p>A format template for the property value that defines how the value should be formatted before sending it in API requests. Use <code>{value}</code> as a placeholder for the actual property value (for example, <code>SSWS {value}</code>).</p>
+    #   @return [String]
+    class ConnectorProperty < Struct.new(
+      nil,
+      :name,
+      :key_override,
+      :required,
+      :default_value,
+      :allowed_values,
+      :property_location,
+      :property_type,
+      :format,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3896,7 +4261,7 @@ module Aws::Glue
     #   <p>A description of the crawler.</p>
     #   @return [String]
     # @!attribute classifiers
-    #   <p>A list of UTF-8 strings that specify the custom classifiers that are associated 
+    #   <p>A list of UTF-8 strings that specify the custom classifiers that are associated
     #        with the crawler.</p>
     #   @return [Array<String>]
     # @!attribute recrawl_policy
@@ -3945,6 +4310,9 @@ module Aws::Glue
     # @!attribute lake_formation_configuration
     #   <p>Specifies whether the crawler should use Lake Formation credentials for the crawler instead of the IAM role credentials.</p>
     #   @return [Types::LakeFormationConfiguration]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog in which the crawler's output is stored.</p>
+    #   @return [String]
     class Crawler < Struct.new(
       nil,
       :name,
@@ -3967,6 +4335,7 @@ module Aws::Glue
       :configuration,
       :crawler_security_configuration,
       :lake_formation_configuration,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4466,6 +4835,9 @@ module Aws::Glue
     #               crawler. For more information about tags in Glue, see <a href="https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html">Amazon Web Services Tags in Glue</a> in the developer
     #               guide.</p>
     #   @return [Hash<String, String>]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog in which to store the crawler's output. If none is supplied, the Amazon Web Services account ID is used by default.</p>
+    #   @return [String]
     class CreateCrawlerRequest < Struct.new(
       nil,
       :name,
@@ -4483,6 +4855,7 @@ module Aws::Glue
       :configuration,
       :crawler_security_configuration,
       :tags,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4860,6 +5233,98 @@ module Aws::Glue
       end
     end
 
+    # @!attribute name
+    #   <p>The name of the glossary.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the glossary.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class CreateGlossaryRequest < Struct.new(
+      nil,
+      :name,
+      :description,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the glossary.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the glossary.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the glossary.</p>
+    #   @return [String]
+    class CreateGlossaryResponse < Struct.new(
+      nil,
+      :id,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute glossary_identifier
+    #   <p>The unique identifier of the glossary in which to create the term.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the glossary term.</p>
+    #   @return [String]
+    # @!attribute short_description
+    #   <p>A short description of the glossary term.</p>
+    #   @return [String]
+    # @!attribute long_description
+    #   <p>A long description of the glossary term.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class CreateGlossaryTermRequest < Struct.new(
+      nil,
+      :glossary_identifier,
+      :name,
+      :short_description,
+      :long_description,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the glossary term.</p>
+    #   @return [String]
+    # @!attribute glossary_id
+    #   <p>The unique identifier of the glossary containing this term.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the glossary term.</p>
+    #   @return [String]
+    # @!attribute short_description
+    #   <p>The short description of the glossary term.</p>
+    #   @return [String]
+    # @!attribute long_description
+    #   <p>The long description of the glossary term.</p>
+    #   @return [String]
+    class CreateGlossaryTermResponse < Struct.new(
+      nil,
+      :id,
+      :glossary_id,
+      :name,
+      :short_description,
+      :long_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Request to create a new Glue Identity Center configuration.</p>
     # @!attribute instance_arn
     #   <p>The Amazon Resource Name (ARN) of the Identity Center instance to be associated with the Glue configuration.</p>
@@ -4867,10 +5332,14 @@ module Aws::Glue
     # @!attribute scopes
     #   <p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>
     #   @return [Array<String>]
+    # @!attribute user_background_sessions_enabled
+    #   <p>Specifies whether users can run background sessions when using Identity Center authentication with Glue services.</p>
+    #   @return [Boolean]
     class CreateGlueIdentityCenterConfigurationRequest < Struct.new(
       nil,
       :instance_arn,
       :scopes,
+      :user_background_sessions_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4914,7 +5383,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, 
+    # <p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog,
     #       including table properties and metadata specifications.</p>
     # @!attribute location
     #   <p>The S3 location where the Iceberg table data will be stored.</p>
@@ -4995,11 +5464,15 @@ module Aws::Glue
     # @!attribute target_processing_properties
     #   <p>The resource properties associated with the integration target.</p>
     #   @return [Types::TargetProcessingProperties]
+    # @!attribute tags
+    #   <p>Metadata assigned to the resource consisting of a list of key-value pairs.</p>
+    #   @return [Array<Types::Tag>]
     class CreateIntegrationResourcePropertyRequest < Struct.new(
       nil,
       :resource_arn,
       :source_processing_properties,
       :target_processing_properties,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5007,6 +5480,9 @@ module Aws::Glue
 
     # @!attribute resource_arn
     #   <p>The connection ARN of the source, or the database ARN of the target.</p>
+    #   @return [String]
+    # @!attribute resource_property_arn
+    #   <p>The resource ARN created through this create API. The format is something like arn:aws:glue:<region>:<account_id>:integrationresourceproperty/*</p>
     #   @return [String]
     # @!attribute source_processing_properties
     #   <p>The resource properties associated with the integration source.</p>
@@ -5017,6 +5493,7 @@ module Aws::Glue
     class CreateIntegrationResourcePropertyResponse < Struct.new(
       nil,
       :resource_arn,
+      :resource_property_arn,
       :source_processing_properties,
       :target_processing_properties,
       keyword_init: true
@@ -5108,8 +5585,8 @@ module Aws::Glue
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating 
-    #         integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for 
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to create integration table properties. Currently, this API only supports creating
+    #         integration table properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for
     #         creating integration table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     #   @return [String]
@@ -5221,7 +5698,7 @@ module Aws::Glue
     #         can consume resources before it is terminated and enters <code>TIMEOUT</code>
     #         status.</p>
     #            <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>
-    #            <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>
+    #            <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>
     #            <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>
     #            <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>
     #   @return [Integer]
@@ -5243,8 +5720,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -5269,7 +5746,7 @@ module Aws::Glue
     #            <p>For more information about the available Glue versions and corresponding
     #         Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
     #         guide.</p>
-    #            <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>
+    #            <p>Jobs that are created without specifying a Glue version default to Glue 5.1.</p>
     #   @return [String]
     # @!attribute number_of_workers
     #   <p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p>
@@ -5838,7 +6315,7 @@ module Aws::Glue
     #   <p>The number of connections to use for the session. </p>
     #   @return [Types::ConnectionsList]
     # @!attribute max_capacity
-    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs. 
+    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs.
     #         A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>
     #   @return [Float]
     # @!attribute number_of_workers
@@ -5869,7 +6346,7 @@ module Aws::Glue
     #   <p>The name of the SecurityConfiguration structure to be used with the session </p>
     #   @return [String]
     # @!attribute glue_version
-    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports. 
+    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports.
     #         The GlueVersion must be greater than 2.0. </p>
     #   @return [String]
     # @!attribute tags
@@ -5877,6 +6354,9 @@ module Aws::Glue
     #   @return [Hash<String, String>]
     # @!attribute request_origin
     #   <p>The origin of the request. </p>
+    #   @return [String]
+    # @!attribute session_type
+    #   <p>The type of session to create.</p>
     #   @return [String]
     class CreateSessionRequest < Struct.new(
       nil,
@@ -5895,6 +6375,7 @@ module Aws::Glue
       :glue_version,
       :tags,
       :request_origin,
+      :session_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5954,7 +6435,7 @@ module Aws::Glue
     #         compatibility, this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The unique identifier for the table within the specified database that will be 
+    #   <p>The unique identifier for the table within the specified database that will be
     #         created in the Glue Data Catalog.</p>
     #   @return [String]
     # @!attribute table_input
@@ -6249,6 +6730,34 @@ module Aws::Glue
       end
     end
 
+    # <p>Cursor-based pagination configuration that defines how to handle pagination using cursor tokens or next page identifiers.</p>
+    # @!attribute next_page
+    #   <p>The parameter name or JSON path that contains the cursor or token for retrieving the next page of results.</p>
+    #   @return [Types::ExtractedParameter]
+    # @!attribute limit_parameter
+    #   <p>The parameter name used to specify the maximum number of results to return per page.</p>
+    #   @return [Types::ExtractedParameter]
+    class CursorConfiguration < Struct.new(
+      nil,
+      :next_page,
+      :limit_parameter,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Custom authentication configuration that allows for flexible authentication mechanisms beyond standard Basic and OAuth2 flows.</p>
+    # @!attribute authentication_parameters
+    #   <p>A map of custom authentication parameters that define the specific authentication mechanism and required properties.</p>
+    #   @return [Array<Types::ConnectorProperty>]
+    class CustomAuthenticationProperties < Struct.new(
+      nil,
+      :authentication_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies a transform that uses custom code you provide to perform the data transformation. The output is a collection of DynamicFrames.</p>
     # @!attribute name
     #   <p>The name of the transform node.</p>
@@ -6319,34 +6828,34 @@ module Aws::Glue
       end
     end
 
-    # <p>Specifies connection options for DynamoDB ELT (Extract, Load, Transform) operations. This structure contains configuration parameters for connecting 
+    # <p>Specifies connection options for DynamoDB ELT (Extract, Load, Transform) operations. This structure contains configuration parameters for connecting
     #       to and extracting data from DynamoDB tables using the ELT connector.</p>
     # @!attribute dynamodb_export
     #   <p>Specifies the export type for DynamoDB data extraction. This parameter determines how data is exported from the DynamoDB table during the ELT process.</p>
     #   @return [String]
     # @!attribute dynamodb_unnest_ddb_json
-    #   <p>A boolean value that specifies whether to unnest DynamoDB JSON format during data extraction. When set to <code>true</code>, the connector will 
+    #   <p>A boolean value that specifies whether to unnest DynamoDB JSON format during data extraction. When set to <code>true</code>, the connector will
     #         flatten nested JSON structures from DynamoDB items. When set to <code>false</code>, the original DynamoDB JSON structure is preserved.</p>
     #   @return [Boolean]
     # @!attribute dynamodb_table_arn
-    #   <p>The Amazon Resource Name (ARN) of the DynamoDB table to extract data from. This parameter specifies the source table for the ELT operation. 
+    #   <p>The Amazon Resource Name (ARN) of the DynamoDB table to extract data from. This parameter specifies the source table for the ELT operation.
     #         </p>
     #   @return [String]
     # @!attribute dynamodb_s3_bucket
-    #   <p>The name of the Amazon S3 bucket used for intermediate storage during the DynamoDB ELT process. This bucket is used to temporarily store exported 
+    #   <p>The name of the Amazon S3 bucket used for intermediate storage during the DynamoDB ELT process. This bucket is used to temporarily store exported
     #         DynamoDB data before it is processed by the ELT job.</p>
     #   @return [String]
     # @!attribute dynamodb_s3_prefix
-    #   <p>The S3 object key prefix for files stored in the intermediate S3 bucket during the DynamoDB ELT process. This prefix helps organize and identify the 
+    #   <p>The S3 object key prefix for files stored in the intermediate S3 bucket during the DynamoDB ELT process. This prefix helps organize and identify the
     #         temporary files created during data extraction.</p>
     #   @return [String]
     # @!attribute dynamodb_s3_bucket_owner
-    #   <p>The Amazon Web Services account ID of the owner of the S3 bucket specified in <code>DynamodbS3Bucket</code>. This parameter is required when the S3 bucket is owned by 
+    #   <p>The Amazon Web Services account ID of the owner of the S3 bucket specified in <code>DynamodbS3Bucket</code>. This parameter is required when the S3 bucket is owned by
     #         a different Amazon Web Services account than the one running the ELT job, enabling cross-account access to the intermediate storage bucket.</p>
     #   @return [String]
     # @!attribute dynamodb_sts_role_arn
-    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Security Token Service (STS) role to assume for accessing DynamoDB and S3 resources during 
-    #         the ELT operation. 
+    #   <p>The Amazon Resource Name (ARN) of the Amazon Web Services Security Token Service (STS) role to assume for accessing DynamoDB and S3 resources during
+    #         the ELT operation.
     #         This role must have the necessary permissions to read from the DynamoDB table and write to the intermediate S3 bucket. </p>
     #   @return [String]
     class DDBELTConnectionOptions < Struct.new(
@@ -6555,12 +7064,56 @@ module Aws::Glue
     # @!attribute evaluated_metrics
     #   <p>A map of metrics associated with the evaluation of the analyzer.</p>
     #   @return [Hash<String, Float>]
+    # @!attribute evaluated_distributions
+    #   <p>A map of distribution metrics associated with the evaluation of the analyzer.</p>
+    #   @return [Hash<String, Types::DistributionData>]
     class DataQualityAnalyzerResult < Struct.new(
       nil,
       :name,
       :description,
       :evaluation_message,
       :evaluated_metrics,
+      :evaluated_distributions,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The run configuration for a data quality result.</p>
+    # @!attribute observations_enabled
+    #   <p>Whether observations are enabled for the run. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ALL</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>NONE</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute observation_mode
+    #   <p>The observation mode for the run. Valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>SCHEDULED</code>
+    #                  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FIXED</code>
+    #                  </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class DataQualityConfigurationV2 < Struct.new(
+      nil,
+      :observations_enabled,
+      :observation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6593,11 +7146,39 @@ module Aws::Glue
     # @!attribute composite_rule_evaluation_method
     #   <p>Set the evaluation method for composite rules in the ruleset to ROW/COLUMN</p>
     #   @return [String]
+    # @!attribute custom_log_group_prefix
+    #   <p>A custom prefix for the CloudWatch log group names. When specified, evaluation run logs are written to <code><CustomLogGroupPrefix>/error</code> and <code><CustomLogGroupPrefix>/output</code> instead of the default <code>/aws-glue/data-quality/error</code> and <code>/aws-glue/data-quality/output</code> log groups.</p>
+    #   @return [String]
+    # @!attribute row_level_results
+    #   <p>The configuration for writing row-level evaluation results to a Glue Data Catalog table.</p>
+    #   @return [Types::RowLevelResultsOptions]
+    # @!attribute profiling_results
+    #   <p>The configuration for writing profiling results to a Glue Data Catalog table.</p>
+    #   @return [Types::ProfilingResultsOptions]
+    # @!attribute observation_scope
+    #   <p>The scope of the observation for the evaluation run. Specifies whether anomaly detection is enabled or disabled.</p>
+    #   @return [String]
+    # @!attribute observation_mode
+    #   <p>The observation mode for the evaluation run. Specifies how anomaly detection bounds are calculated.</p>
+    #   @return [String]
+    # @!attribute data_quality_rule_results
+    #   <p>The configuration for writing rule results to a Glue Data Catalog table.</p>
+    #   @return [Types::DataQualityRuleResultsOptions]
+    # @!attribute observation_results
+    #   <p>The configuration for writing observation results to a Glue Data Catalog table.</p>
+    #   @return [Types::ObservationResultsOptions]
     class DataQualityEvaluationRunAdditionalRunOptions < Struct.new(
       nil,
       :cloud_watch_metrics_enabled,
       :results_s3_prefix,
       :composite_rule_evaluation_method,
+      :custom_log_group_prefix,
+      :row_level_results,
+      :profiling_results,
+      :observation_scope,
+      :observation_mode,
+      :data_quality_rule_results,
+      :observation_results,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6722,13 +7303,13 @@ module Aws::Glue
     #   <p>The unique run ID for the ruleset evaluation for this data quality result.</p>
     #   @return [String]
     # @!attribute rule_results
-    #   <p>A list of <code>DataQualityRuleResult</code> objects representing the results for each rule. </p>
+    #   <p>A list of <code>DataQualityRuleResult</code> objects representing the results for each rule.</p>
     #   @return [Array<Types::DataQualityRuleResult>]
     # @!attribute analyzer_results
-    #   <p>A list of <code>DataQualityAnalyzerResult</code> objects representing the results for each analyzer. </p>
+    #   <p>A list of <code>DataQualityAnalyzerResult</code> objects representing the results for each analyzer.</p>
     #   @return [Array<Types::DataQualityAnalyzerResult>]
     # @!attribute observations
-    #   <p>A list of <code>DataQualityObservation</code> objects representing the observations generated after evaluating the rules and analyzers. </p>
+    #   <p>A list of <code>DataQualityObservation</code> objects representing the anomaly detection observations generated after evaluating the rules and analyzers.</p>
     #   @return [Array<Types::DataQualityObservation>]
     # @!attribute aggregated_metrics
     #   <p> A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results. </p>
@@ -6811,6 +7392,147 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Describes a data quality result returned by <code>BatchGetDataQualityResultV2</code>.</p>
+    # @!attribute result_id
+    #   <p>A unique result ID for the data quality result.</p>
+    #   @return [String]
+    # @!attribute data_source
+    #   <p>The table associated with the data quality result, if any.</p>
+    #   @return [Types::DataSource]
+    # @!attribute dimensions
+    #   <p>A map of platform-specific identifiers, such as cluster, application, workgroup, or project IDs, that identify where the data quality evaluation ran.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute tags
+    #   <p>A map of tags associated with the data quality result.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute execution_started_on
+    #   <p>The date and time when this data quality run started.</p>
+    #   @return [Time]
+    # @!attribute execution_completed_on
+    #   <p>The date and time when this data quality run completed.</p>
+    #   @return [Time]
+    # @!attribute result_published_on
+    #   <p>The date and time when this data quality result was published.</p>
+    #   @return [Time]
+    # @!attribute score
+    #   <p>An aggregate data quality score. Represents the ratio of rules that passed to the total number of rules.</p>
+    #   @return [Float]
+    # @!attribute rule_results
+    #   <p>A list of <code>DataQualityRuleResult</code> objects representing the results for each rule.</p>
+    #   @return [Array<Types::DataQualityRuleResult>]
+    # @!attribute analyzer_results
+    #   <p>A list of <code>DataQualityAnalyzerResult</code> objects representing the results for each analyzer.</p>
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    # @!attribute observations
+    #   <p>A list of <code>DataQualityObservation</code> objects representing the anomaly detection observations generated after evaluating the rules and analyzers.</p>
+    #   @return [Array<Types::DataQualityObservation>]
+    # @!attribute evaluation_context
+    #   <p>The evaluation context for the data quality result. This value identifies a specific data quality result, or a series of related results, within a run.</p>
+    #   @return [String]
+    # @!attribute descriptors
+    #   <p>A map of user-provided descriptors that add contextual metadata and configuration to the data quality result, such as database name, table name, team, or environment.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute aggregated_metrics
+    #   <p>A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results.</p>
+    #   @return [Types::DataQualityAggregatedMetrics]
+    # @!attribute ruleset_name
+    #   <p>The name of the ruleset associated with the data quality result.</p>
+    #   @return [String]
+    class DataQualityResultV2Item < Struct.new(
+      nil,
+      :result_id,
+      :data_source,
+      :dimensions,
+      :tags,
+      :execution_started_on,
+      :execution_completed_on,
+      :result_published_on,
+      :score,
+      :rule_results,
+      :analyzer_results,
+      :observations,
+      :evaluation_context,
+      :descriptors,
+      :aggregated_metrics,
+      :ruleset_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes a data quality result returned by <code>ListDataQualityResultsV2</code>.</p>
+    # @!attribute result_id
+    #   <p>The unique result ID for this data quality result.</p>
+    #   @return [String]
+    # @!attribute data_source
+    #   <p>The table associated with the data quality result, if any.</p>
+    #   @return [Types::DataSource]
+    # @!attribute result_published_on
+    #   <p>The date and time when this data quality result was published.</p>
+    #   @return [Time]
+    # @!attribute dimensions
+    #   <p>A map of platform-specific identifiers, such as cluster, application, workgroup, or project IDs, that identify where the data quality evaluation ran.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute evaluation_context
+    #   <p>The evaluation context for the data quality result. This value identifies a specific data quality result, or a series of related results, within a run.</p>
+    #   @return [String]
+    # @!attribute descriptors
+    #   <p>A map of user-provided descriptors that add contextual metadata and configuration to the data quality result, such as database name, table name, team, or environment.</p>
+    #   @return [Hash<String, String>]
+    class DataQualityResultsV2Description < Struct.new(
+      nil,
+      :result_id,
+      :data_source,
+      :result_published_on,
+      :dimensions,
+      :evaluation_context,
+      :descriptors,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Describes the criteria used to filter the data quality results returned by <code>ListDataQualityResultsV2</code>.</p>
+    # @!attribute data_source
+    #   <p>The data source used to filter the results. For example, you can retrieve all results for an Glue table. <code>DatabaseName</code> and <code>TableName</code> are required. If you omit <code>CatalogId</code>, the catalog of the calling account is used.</p>
+    #            <p>When you filter by data source, a page of results can be empty but still include a <code>NextToken</code>. Keep requesting pages until <code>NextToken</code> is absent.</p>
+    #   @return [Types::DataSource]
+    # @!attribute published_after
+    #   <p>The time after which to include published results.</p>
+    #   @return [Time]
+    # @!attribute published_before
+    #   <p>The time before which to include published results.</p>
+    #   @return [Time]
+    # @!attribute dimensions
+    #   <p>The platform dimensions to filter results by.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute evaluation_context
+    #   <p>The evaluation context to filter results by.</p>
+    #   @return [String]
+    class DataQualityResultsV2FilterCriteria < Struct.new(
+      nil,
+      :data_source,
+      :published_after,
+      :published_before,
+      :dimensions,
+      :evaluation_context,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Additional run options you can specify for a recommendation run.</p>
+    # @!attribute custom_log_group_prefix
+    #   <p>A custom prefix for the CloudWatch log group names. When specified, recommendation run logs are written to <code><CustomLogGroupPrefix>/error</code> and <code><CustomLogGroupPrefix>/output</code> instead of the default <code>/aws-glue/data-quality/error</code> and <code>/aws-glue/data-quality/output</code> log groups.</p>
+    #   @return [String]
+    class DataQualityRuleRecommendationRunAdditionalRunOptions < Struct.new(
+      nil,
+      :custom_log_group_prefix,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Describes the result of a data quality rule recommendation run.</p>
     # @!attribute run_id
     #   <p>The unique run identifier associated with this run.</p>
@@ -6824,12 +7546,21 @@ module Aws::Glue
     # @!attribute data_source
     #   <p>The data source (Glue table) associated with the recommendation run.</p>
     #   @return [Types::DataSource]
+    # @!attribute created_ruleset_name
+    #   <p>The name of the ruleset that was created by the recommendation run.</p>
+    #   @return [String]
+    # @!attribute recommendation_mode
+    #   <p>The mode that Glue Data Quality uses to recommend rules.</p>
+    #            <p>The default is <code>BASIC</code>.</p>
+    #   @return [String]
     class DataQualityRuleRecommendationRunDescription < Struct.new(
       nil,
       :run_id,
       :status,
       :started_on,
       :data_source,
+      :created_ruleset_name,
+      :recommendation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6877,6 +7608,9 @@ module Aws::Glue
     # @!attribute rule_metrics
     #   <p>A map containing metrics associated with the evaluation of the rule based on row-level results. </p>
     #   @return [Hash<String, Float>]
+    # @!attribute labels
+    #   <p>A map containing labels assigned to the data quality rule. </p>
+    #   @return [Hash<String, String>]
     class DataQualityRuleResult < Struct.new(
       nil,
       :name,
@@ -6886,9 +7620,99 @@ module Aws::Glue
       :evaluated_metrics,
       :evaluated_rule,
       :rule_metrics,
+      :labels,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for writing data quality rule results.</p>
+    # @!attribute write_data_quality_rule_results_enabled
+    #   <p>Set to true to write data quality rule results.</p>
+    #   @return [Boolean]
+    # @!attribute catalog_table_config
+    #   <p>The Glue Data Catalog table configuration for storing the rule results.</p>
+    #   @return [Types::CatalogTableConfigOptions]
+    class DataQualityRuleResultsOptions < Struct.new(
+      nil,
+      :write_data_quality_rule_results_enabled,
+      :catalog_table_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The details of a data quality ruleset evaluation run.</p>
+    # @!attribute run_id
+    #   <p>The unique run identifier associated with this run.</p>
+    #   @return [String]
+    # @!attribute data_source
+    #   <p>A data source (an Glue table) for which you want data quality results.</p>
+    #   @return [Types::DataSource]
+    # @!attribute role
+    #   <p>An IAM role supplied to encrypt the results of the run.</p>
+    #   @return [String]
+    # @!attribute number_of_workers
+    #   <p>The number of <code>G.1X</code> workers to be used in the run. The default is 5.</p>
+    #   @return [Integer]
+    # @!attribute timeout
+    #   <p>The timeout for a run in minutes. This is the maximum time that a run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours).</p>
+    #   @return [Integer]
+    # @!attribute additional_run_options
+    #   <p>Additional run options you can specify for an evaluation run.</p>
+    #   @return [Types::DataQualityEvaluationRunAdditionalRunOptions]
+    # @!attribute status
+    #   <p>The status for this run.</p>
+    #   @return [String]
+    # @!attribute error_string
+    #   <p>The error strings that are associated with the run.</p>
+    #   @return [String]
+    # @!attribute started_on
+    #   <p>The date and time when this run started.</p>
+    #   @return [Time]
+    # @!attribute last_modified_on
+    #   <p>A timestamp. The last point in time when this run was modified.</p>
+    #   @return [Time]
+    # @!attribute completed_on
+    #   <p>The date and time when this run was completed.</p>
+    #   @return [Time]
+    # @!attribute execution_time
+    #   <p>The amount of time (in seconds) that the run consumed resources.</p>
+    #   @return [Integer]
+    # @!attribute ruleset_names
+    #   <p>A list of ruleset names for the run.</p>
+    #   @return [Array<String>]
+    # @!attribute result_ids
+    #   <p>A list of result IDs for the data quality results for the run.</p>
+    #   @return [Array<String>]
+    # @!attribute additional_data_sources
+    #   <p>A map of reference strings to additional data sources you can specify for an evaluation run.</p>
+    #   @return [Hash<String, Types::DataSource>]
+    class DataQualityRulesetEvaluationRun < Struct.new(
+      nil,
+      :run_id,
+      :data_source,
+      :role,
+      :number_of_workers,
+      :timeout,
+      :additional_run_options,
+      :status,
+      :error_string,
+      :started_on,
+      :last_modified_on,
+      :completed_on,
+      :execution_time,
+      :ruleset_names,
+      :result_ids,
+      :additional_data_sources,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:execution_time] = 0 unless options.key?(:execution_time)
+        super
+      end
     end
 
     # <p>Describes the result of a data quality ruleset evaluation run.</p>
@@ -6925,11 +7749,15 @@ module Aws::Glue
     # @!attribute started_after
     #   <p>Filter results by runs that started after this time.</p>
     #   @return [Time]
+    # @!attribute ruleset_name
+    #   <p>Filter results by the name of the ruleset.</p>
+    #   @return [String]
     class DataQualityRulesetEvaluationRunFilter < Struct.new(
       nil,
       :data_source,
       :started_before,
       :started_after,
+      :ruleset_name,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7022,6 +7850,31 @@ module Aws::Glue
       :table_name,
       :database_name,
       :catalog_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute vcpu_hours
+    #   @return [Float]
+    # @!attribute flags_enabled
+    #   @return [Hash<String, String>]
+    # @!attribute library_version
+    #   @return [String]
+    # @!attribute spark_version
+    #   @return [String]
+    # @!attribute host_runtime_version
+    #   @return [String]
+    # @!attribute engine
+    #   @return [String]
+    class DataQualityTelemetry < Struct.new(
+      nil,
+      :vcpu_hours,
+      :flags_enabled,
+      :library_version,
+      :spark_version,
+      :host_runtime_version,
+      :engine,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7267,6 +8120,84 @@ module Aws::Glue
       end
     end
 
+    # @!attribute identifier
+    #   <p>The unique identifier of the asset to delete.</p>
+    #   @return [String]
+    class DeleteAssetRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteAssetResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The identifier of the asset type to delete.</p>
+    #   @return [String]
+    class DeleteAssetTypeRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteAssetTypeResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset from which to delete the attachment.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the attachment is deleted from an item within the iterable form rather than from the asset itself.</p>
+    #   @return [String]
+    # @!attribute item_identifier
+    #   <p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>
+    #   @return [String]
+    # @!attribute attachment_name
+    #   <p>The name of the attachment to delete.</p>
+    #   @return [String]
+    class DeleteAttachmentRequest < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
+      :attachment_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form, if the deletion targets an item.</p>
+    #   @return [String]
+    # @!attribute item_identifier
+    #   <p>The identifier of the item within the iterable form, if applicable.</p>
+    #   @return [String]
+    class DeleteAttachmentResponse < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of the blueprint to delete.</p>
     #   @return [String]
@@ -7397,10 +8328,14 @@ module Aws::Glue
     # @!attribute table_name
     #   <p>The name of the table for which to delete column statistics.</p>
     #   @return [String]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
+    #   @return [String]
     class DeleteColumnStatisticsTaskSettingsRequest < Struct.new(
       nil,
       :database_name,
       :table_name,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -7430,6 +8365,24 @@ module Aws::Glue
     end
 
     class DeleteConnectionResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_type
+    #   <p>The name of the connection type to delete. Must reference an existing registered connection type.</p>
+    #   @return [String]
+    class DeleteConnectionTypeRequest < Struct.new(
+      nil,
+      :connection_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteConnectionTypeResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -7536,6 +8489,60 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute identifier
+    #   <p>The identifier of the form type to delete.</p>
+    #   @return [String]
+    class DeleteFormTypeRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteFormTypeResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The unique identifier of the glossary to delete.</p>
+    #   @return [String]
+    class DeleteGlossaryRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteGlossaryResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The unique identifier of the glossary term to delete.</p>
+    #   @return [String]
+    class DeleteGlossaryTermRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteGlossaryTermResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Request to delete the existing Glue Identity Center configuration.</p>
     class DeleteGlueIdentityCenterConfigurationRequest < Struct.new(
       nil,
@@ -7558,6 +8565,24 @@ module Aws::Glue
     class DeleteIntegrationRequest < Struct.new(
       nil,
       :integration_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute resource_arn
+    #   <p>The connection ARN of the source, or the database ARN of the target.</p>
+    #   @return [String]
+    class DeleteIntegrationResourcePropertyRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteIntegrationResourcePropertyResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8002,7 +9027,7 @@ module Aws::Glue
     #         compatibility, this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute table_name
-    #   <p>The name of the table. For Hive compatibility, 
+    #   <p>The name of the table. For Hive compatibility,
     #         this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute version_id
@@ -8183,6 +9208,9 @@ module Aws::Glue
     # @!attribute spark_connection_properties
     #   <p>Connection properties specific to the Spark compute environment.</p>
     #   @return [Hash<String, Types::Property>]
+    # @!attribute rest_configuration
+    #   <p>HTTP request and response configuration, validation endpoint, and entity configurations for REST based data source.</p>
+    #   @return [Types::RestConfiguration]
     class DescribeConnectionTypeResponse < Struct.new(
       nil,
       :connection_type,
@@ -8196,6 +9224,7 @@ module Aws::Glue
       :athena_connection_properties,
       :python_connection_properties,
       :spark_connection_properties,
+      :rest_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -8631,6 +9660,92 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset to disassociate glossary terms from.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the glossary terms are disassociated from an item within the iterable form rather than the asset itself.</p>
+    #   @return [String]
+    # @!attribute item_identifier
+    #   <p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>
+    #   @return [String]
+    # @!attribute glossary_term_identifiers
+    #   <p>The list of glossary term identifiers to disassociate from the asset.</p>
+    #   @return [Array<String>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class DisassociateGlossaryTermsRequest < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
+      :glossary_term_identifiers,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form, if the disassociation targets an item.</p>
+    #   @return [String]
+    # @!attribute item_identifier
+    #   <p>The identifier of the item within the iterable form, if applicable.</p>
+    #   @return [String]
+    # @!attribute glossary_terms
+    #   <p>The remaining glossary terms associated with the asset.</p>
+    #   @return [Array<String>]
+    class DisassociateGlossaryTermsResponse < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
+      :glossary_terms,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The distribution data for a statistic.</p>
+    # @!attribute bin_edges
+    #   <p>The bin edge values for the distribution.</p>
+    #   @return [Array<String>]
+    # @!attribute count
+    #   <p>The frequency count for each bin in the distribution.</p>
+    #   @return [Array<Integer>]
+    # @!attribute data_type
+    #   <p>The data type of the column for the distribution.</p>
+    #   @return [String]
+    class DistributionData < Struct.new(
+      nil,
+      :bin_edges,
+      :count,
+      :data_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for writing distribution results.</p>
+    # @!attribute write_distribution_results_enabled
+    #   <p>Set to true to write distribution results.</p>
+    #   @return [Boolean]
+    # @!attribute catalog_table_config
+    #   <p>The Glue Data Catalog table configuration for storing the distribution results.</p>
+    #   @return [Types::CatalogTableConfigOptions]
+    class DistributionResultsOptions < Struct.new(
+      nil,
+      :write_distribution_results_enabled,
+      :catalog_table_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Defines column statistics supported for floating-point number data columns.</p>
     # @!attribute minimum_value
     #   <p>The lowest value in the column.</p>
@@ -8779,7 +9894,7 @@ module Aws::Glue
     #   <p>The name of the table in the database to read from.</p>
     #   @return [String]
     # @!attribute pitr_enabled
-    #   <p>Specifies whether Point-in-Time Recovery (PITR) is enabled for the DynamoDB table. When set to <code>true</code>, 
+    #   <p>Specifies whether Point-in-Time Recovery (PITR) is enabled for the DynamoDB table. When set to <code>true</code>,
     #         allows reading from a specific point in time. The default value is <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute additional_options
@@ -8927,6 +10042,22 @@ module Aws::Glue
       :description,
       :category,
       :custom_properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that defines how to interact with a specific data entity through the REST API, including its access patterns and schema definition.</p>
+    # @!attribute source_configuration
+    #   <p>The source configuration that defines how to make requests to access this entity's data through the REST API.</p>
+    #   @return [Types::SourceConfiguration]
+    # @!attribute schema
+    #   <p>The schema definition for this entity, including field names, types, and other metadata that describes the structure of the data.</p>
+    #   @return [Hash<String, Types::FieldDefinition>]
+    class EntityConfiguration < Struct.new(
+      nil,
+      :source_configuration,
+      :schema,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9124,6 +10255,22 @@ module Aws::Glue
       end
     end
 
+    # <p>The encryption configuration for exported data catalog metadata.</p>
+    # @!attribute sse_algorithm
+    #   <p>The server-side encryption algorithm used for the exported data. Valid values are <code>AES256</code> and <code>aws:kms</code>.</p>
+    #   @return [String]
+    # @!attribute kms_key_arn
+    #   <p>The ARN of the KMS key used to encrypt the exported data.</p>
+    #   @return [String]
+    class ExportEncryptionConfiguration < Struct.new(
+      nil,
+      :sse_algorithm,
+      :kms_key_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies configuration properties for an exporting labels task run.</p>
     # @!attribute output_s3_path
     #   <p>The Amazon Simple Storage Service (Amazon S3) path where you will export the
@@ -9137,6 +10284,30 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Parameter extraction configuration that defines how to extract and map values from API responses to request parameters.</p>
+    # @!attribute key
+    #   <p>The parameter key name that will be used in subsequent requests.</p>
+    #   @return [String]
+    # @!attribute default_value
+    #   <p>The default value to use if the parameter cannot be extracted from the response.</p>
+    #   @return [String]
+    # @!attribute property_location
+    #   <p>Specifies where this extracted parameter should be placed in subsequent requests, such as in headers, query parameters, or request body.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The JSON path or extraction mapping that defines how to extract the parameter value from API responses.</p>
+    #   @return [Types::ResponseExtractionMapping]
+    class ExtractedParameter < Struct.new(
+      nil,
+      :key,
+      :default_value,
+      :property_location,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A catalog that points to an entity outside the Glue Data Catalog.</p>
     # @!attribute identifier
     #   <p>A unique identifier for the federated catalog.</p>
@@ -9145,7 +10316,7 @@ module Aws::Glue
     #   <p>The name of the connection to an external data source, for example a Redshift-federated catalog.</p>
     #   @return [String]
     # @!attribute connection_type
-    #   <p>The type of connection used to access the federated catalog, specifying the protocol or method for connection to the 
+    #   <p>The type of connection used to access the federated catalog, specifying the protocol or method for connection to the
     #       external data source.</p>
     #   @return [String]
     class FederatedCatalog < Struct.new(
@@ -9326,6 +10497,46 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines a field in an entity schema for REST connector data sources, specifying the field name and data type.</p>
+    # @!attribute name
+    #   <p>The name of the field in the entity schema.</p>
+    #   @return [String]
+    # @!attribute field_data_type
+    #   <p>The data type of the field.</p>
+    #   @return [String]
+    # @!attribute response_date_format
+    #   <p>The format pattern for parsing date values from API responses. Required when the API uses a non-ISO-8601 format. Accepts Java <code>DateTimeFormatter</code> patterns (for example, <code>EEE, d MMM yyyy HH:mm:ss Z</code>), <code>EPOCH_SECONDS</code> for Unix epoch seconds, or <code>EPOCH_MILLIS</code> for Unix epoch milliseconds.</p>
+    #   @return [String]
+    # @!attribute is_partitionable
+    #   <p>Indicates whether this field can be used for partitioning queries to the data source.</p>
+    #   @return [Boolean]
+    # @!attribute is_nullable
+    #   <p>Indicates whether this field can contain null values.</p>
+    #   @return [Boolean]
+    # @!attribute is_queryable
+    #   <p>Indicates whether this field can be used in filter predicates when querying data.</p>
+    #   @return [Boolean]
+    # @!attribute is_orderable
+    #   <p>Indicates whether this field can be used for ordering results.</p>
+    #   @return [Boolean]
+    # @!attribute filter_overrides
+    #   <p>Per-field overrides for filter behavior, allowing customization of how filters are applied to this specific field.</p>
+    #   @return [Types::FilterOverrides]
+    class FieldDefinition < Struct.new(
+      nil,
+      :name,
+      :field_data_type,
+      :response_date_format,
+      :is_partitionable,
+      :is_nullable,
+      :is_queryable,
+      :is_orderable,
+      :filter_overrides,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies a transform that locates records in the dataset that have missing values and adds a new field with a value determined by imputation. The input data set is used to train the machine learning model that determines what the missing value should be.</p>
     # @!attribute name
     #   <p>The name of the transform node.</p>
@@ -9374,6 +10585,38 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration that defines how filter predicates are applied to REST API requests, supporting both query parameter and filter string strategies.</p>
+    # @!attribute filter_mode
+    #   <p>The strategy for applying filters to requests. Use <code>QUERY_PARAMS</code> to pass filters as individual query parameters, or <code>FILTER_STRING</code> to construct a single filter expression string.</p>
+    #   @return [String]
+    # @!attribute operator_mappings
+    #   <p>A map of logical filter operators to their API-specific string representations. Supported operator keys are: <code>EQUAL_TO</code>, <code>NOT_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>GREATER_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>CONTAINS</code>, <code>BETWEEN</code>, <code>AND</code>, and <code>OR</code>.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute date_time_format
+    #   <p>The global date and time format for filter expressions. Accepts Java <code>DateTimeFormatter</code> patterns (for example, <code>EEE, d MMM yyyy HH:mm:ss Z</code>), <code>EPOCH_SECONDS</code> for Unix epoch seconds, or <code>EPOCH_MILLIS</code> for Unix epoch milliseconds. If not specified, values are passed as-is in ISO-8601 format.</p>
+    #   @return [String]
+    # @!attribute strip_quotes
+    #   <p>Indicates whether surrounding double quotes should be stripped from filter values before processing.</p>
+    #   @return [Boolean]
+    # @!attribute between_configuration
+    #   <p>Configuration for handling BETWEEN range filter operations.</p>
+    #   @return [Types::BetweenConfiguration]
+    # @!attribute filter_string_configuration
+    #   <p>Configuration for constructing filter expressions when <code>FilterMode</code> is set to <code>FILTER_STRING</code>.</p>
+    #   @return [Types::FilterStringConfiguration]
+    class FilterConfiguration < Struct.new(
+      nil,
+      :filter_mode,
+      :operator_mappings,
+      :date_time_format,
+      :strip_quotes,
+      :between_configuration,
+      :filter_string_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies a filter expression.</p>
     # @!attribute operation
     #   <p>The type of operation to perform in the expression.</p>
@@ -9389,6 +10632,50 @@ module Aws::Glue
       :operation,
       :negated,
       :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that defines per-field overrides for filter behavior, allowing individual fields to customize how filter operations are applied.</p>
+    # @!attribute field_name
+    #   <p>An override for the field name to use in filter expressions, if different from the schema field name.</p>
+    #   @return [String]
+    # @!attribute operator_mappings
+    #   <p>A map of logical filter operators to their field-specific API representations, overriding the global operator mappings. Supported operator keys are: <code>EQUAL_TO</code>, <code>NOT_EQUAL_TO</code>, <code>LESS_THAN</code>, <code>GREATER_THAN</code>, <code>LESS_THAN_OR_EQUAL_TO</code>, <code>GREATER_THAN_OR_EQUAL_TO</code>, <code>CONTAINS</code>, <code>BETWEEN</code>, <code>AND</code>, and <code>OR</code>.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute between_configuration
+    #   <p>Field-specific configuration for handling BETWEEN range filter operations.</p>
+    #   @return [Types::BetweenConfiguration]
+    # @!attribute date_time_format
+    #   <p>The date and time format for filter expressions on this field, overriding the global <code>DateTimeFormat</code>. Accepts Java <code>DateTimeFormatter</code> patterns (for example, <code>EEE, d MMM yyyy HH:mm:ss Z</code>), <code>EPOCH_SECONDS</code> for Unix epoch seconds, or <code>EPOCH_MILLIS</code> for Unix epoch milliseconds.</p>
+    #   @return [String]
+    class FilterOverrides < Struct.new(
+      nil,
+      :field_name,
+      :operator_mappings,
+      :between_configuration,
+      :date_time_format,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration for constructing filter expression strings when using the <code>FILTER_STRING</code> filter mode.</p>
+    # @!attribute query_parameter_name
+    #   <p>The query parameter name used to send the constructed filter expression string in API requests.</p>
+    #   @return [String]
+    # @!attribute quote_string_values
+    #   <p>Indicates whether string and date values should be wrapped with a quote character in the filter expression.</p>
+    #   @return [Boolean]
+    # @!attribute quote_character
+    #   <p>The character used to quote values when <code>QuoteStringValues</code> is true. Defaults to double quotes if not specified.</p>
+    #   @return [String]
+    class FilterStringConfiguration < Struct.new(
+      nil,
+      :query_parameter_name,
+      :quote_string_values,
+      :quote_character,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9507,6 +10794,111 @@ module Aws::Glue
       :job_id,
       :job_name,
       :job_run_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a form type.</p>
+    # @!attribute id
+    #   <p>The identifier of the form type.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the form type.</p>
+    #   @return [String]
+    class FormTypeItem < Struct.new(
+      nil,
+      :id,
+      :name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The unique identifier of the asset to retrieve.</p>
+    #   @return [String]
+    class GetAssetInput < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The asset metadata returned by the <code>GetAsset</code> operation.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the asset.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the asset.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the asset.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp at which the asset was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp at which the asset was last updated.</p>
+    #   @return [Time]
+    # @!attribute asset_type_id
+    #   <p>The identifier of the asset type for this asset.</p>
+    #   @return [String]
+    # @!attribute glossary_terms
+    #   <p>The identifiers of the glossary terms associated with the asset.</p>
+    #   @return [Array<String>]
+    # @!attribute forms
+    #   <p>The forms on the asset, keyed by form name.</p>
+    #   @return [Hash<String, Types::AssetFormEntry>]
+    # @!attribute attachments
+    #   <p>Additional attachments on the asset for more context, keyed by attachment name.</p>
+    #   @return [Hash<String, Types::AssetFormEntry>]
+    # @!attribute iterable_forms
+    #   <p>The iterable forms available on the asset, keyed by form name (for example, <code>columns</code>). Use the form name with <code>ListIterableForms</code> or <code>BatchGetIterableForms</code> to retrieve the form's items.</p>
+    #   @return [Hash<String, Types::IterableFormEntry>]
+    class GetAssetOutput < Struct.new(
+      nil,
+      :id,
+      :name,
+      :description,
+      :created_at,
+      :updated_at,
+      :asset_type_id,
+      :glossary_terms,
+      :forms,
+      :attachments,
+      :iterable_forms,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The identifier of the asset type to retrieve.</p>
+    #   @return [String]
+    class GetAssetTypeRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the asset type.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the asset type.</p>
+    #   @return [String]
+    # @!attribute forms
+    #   <p>The forms that make up the asset type, keyed by form name.</p>
+    #   @return [Hash<String, Types::AssetTypeFormReference>]
+    class GetAssetTypeResponse < Struct.new(
+      nil,
+      :id,
+      :name,
+      :forms,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9662,6 +11054,9 @@ module Aws::Glue
     #   <p>Whether to list the default catalog in the account and region in the response. Defaults to <code>false</code>. When <code>true</code> and <code>ParentCatalogId = NULL | Amazon Web Services Account ID</code>, all catalogs and the default catalog are enumerated in the response.</p>
     #            <p>When the <code>ParentCatalogId</code> is not equal to null, and this attribute is passed as <code>false</code> or <code>true</code>, an <code>InvalidInputException</code> is thrown.</p>
     #   @return [Boolean]
+    # @!attribute has_databases
+    #   <p>When <code>true</code>, the response only includes catalogs that can contain databases. Some catalogs are organizational containers that hold only other catalogs, not databases. When this parameter is set to <code>true</code>, those container-only catalogs are excluded, and only catalogs capable of containing databases are returned. Defaults to <code>false</code>.</p>
+    #   @return [Boolean]
     class GetCatalogsRequest < Struct.new(
       nil,
       :parent_catalog_id,
@@ -9669,6 +11064,7 @@ module Aws::Glue
       :max_results,
       :recursive,
       :include_root,
+      :has_databases,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9858,12 +11254,16 @@ module Aws::Glue
     # @!attribute next_token
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
+    #   @return [String]
     class GetColumnStatisticsTaskRunsRequest < Struct.new(
       nil,
       :database_name,
       :table_name,
       :max_results,
       :next_token,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9890,10 +11290,14 @@ module Aws::Glue
     # @!attribute table_name
     #   <p>The name of the table for which to retrieve column statistics.</p>
     #   @return [String]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
+    #   @return [String]
     class GetColumnStatisticsTaskSettingsRequest < Struct.new(
       nil,
       :database_name,
       :table_name,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10137,6 +11541,36 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_id
+    #   <p>The unique identifier of the resource for which to retrieve the dashboard URL.</p>
+    #   @return [String]
+    # @!attribute resource_type
+    #   <p>The type of the resource. Valid values are <code>SESSION</code> and <code>JOB</code>.</p>
+    #   @return [String]
+    # @!attribute request_origin
+    #   <p>The origin of the request. </p>
+    #   @return [String]
+    class GetDashboardUrlRequest < Struct.new(
+      nil,
+      :resource_id,
+      :resource_type,
+      :request_origin,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute url
+    #   <p>The URL for the Spark monitoring dashboard.</p>
+    #   @return [String]
+    class GetDashboardUrlResponse < Struct.new(
+      nil,
+      :url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute catalog_id
     #   <p>The ID of the Data Catalog to retrieve the security configuration for. If none is
     #         provided, the Amazon Web Services account ID is used by default.</p>
@@ -10155,6 +11589,45 @@ module Aws::Glue
     class GetDataCatalogEncryptionSettingsResponse < Struct.new(
       nil,
       :data_catalog_encryption_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class GetDataCatalogExportConfigurationInput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The export configuration returned by the <code>GetDataCatalogExportConfiguration</code> operation.</p>
+    # @!attribute export_setting
+    #   <p>The export setting for the data catalog. Valid values are <code>ENABLED</code> and <code>DISABLED</code>.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The current status of the export. Valid values are <code>ENABLING</code>, <code>ENABLED</code>, <code>DISABLING</code>, <code>DISABLED</code>, and <code>FAILED</code>.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration for the exported data.</p>
+    #   @return [Types::ExportEncryptionConfiguration]
+    # @!attribute s3_table_bucket_arn
+    #   <p>The ARN of the S3 Tables bucket where catalog metadata is exported.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp at which the export configuration was created.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The timestamp at which the export configuration was last updated.</p>
+    #   @return [Time]
+    class GetDataCatalogExportConfigurationOutput < Struct.new(
+      nil,
+      :export_setting,
+      :status,
+      :encryption_configuration,
+      :s3_table_bucket_arn,
+      :created_at,
+      :updated_at,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10275,13 +11748,13 @@ module Aws::Glue
     #   <p>The unique run ID associated with the ruleset evaluation.</p>
     #   @return [String]
     # @!attribute rule_results
-    #   <p>A list of <code>DataQualityRuleResult</code> objects representing the results for each rule. </p>
+    #   <p>A list of <code>DataQualityRuleResult</code> objects representing the results for each rule.</p>
     #   @return [Array<Types::DataQualityRuleResult>]
     # @!attribute analyzer_results
-    #   <p>A list of <code>DataQualityAnalyzerResult</code> objects representing the results for each analyzer. </p>
+    #   <p>A list of <code>DataQualityAnalyzerResult</code> objects representing the results for each analyzer.</p>
     #   @return [Array<Types::DataQualityAnalyzerResult>]
     # @!attribute observations
-    #   <p>A list of <code>DataQualityObservation</code> objects representing the observations generated after evaluating the rules and analyzers. </p>
+    #   <p>A list of <code>DataQualityObservation</code> objects representing the anomaly detection observations generated after evaluating the rules and analyzers.</p>
     #   @return [Array<Types::DataQualityObservation>]
     # @!attribute aggregated_metrics
     #   <p> A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results. </p>
@@ -10308,6 +11781,88 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute result_id
+    #   <p>A unique result ID for the data quality result.</p>
+    #   @return [String]
+    class GetDataQualityResultV2Request < Struct.new(
+      nil,
+      :result_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute result_id
+    #   <p>A unique result ID for the data quality result.</p>
+    #   @return [String]
+    # @!attribute data_source
+    #   <p>The table associated with the data quality result, if any.</p>
+    #   @return [Types::DataSource]
+    # @!attribute profile_id
+    #   <p>The Profile ID for the data quality result.</p>
+    #   @return [String]
+    # @!attribute dimensions
+    #   <p>A map of platform-specific identifiers, such as cluster, application, workgroup, or project IDs, that identify where the data quality evaluation ran.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute tags
+    #   <p>A map of tags associated with the data quality result.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute execution_started_on
+    #   <p>The date and time when this data quality run started.</p>
+    #   @return [Time]
+    # @!attribute execution_completed_on
+    #   <p>The date and time when this data quality run completed.</p>
+    #   @return [Time]
+    # @!attribute result_published_on
+    #   <p>The date and time when this data quality result was published.</p>
+    #   @return [Time]
+    # @!attribute score
+    #   <p>An aggregate data quality score. Represents the ratio of rules that passed to the total number of rules.</p>
+    #   @return [Float]
+    # @!attribute rule_results
+    #   <p>A list of <code>DataQualityRuleResult</code> objects representing the results for each rule.</p>
+    #   @return [Array<Types::DataQualityRuleResult>]
+    # @!attribute analyzer_results
+    #   <p>A list of <code>DataQualityAnalyzerResult</code> objects representing the results for each analyzer.</p>
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    # @!attribute observations
+    #   <p>A list of <code>DataQualityObservation</code> objects representing the anomaly detection observations generated after evaluating the rules and analyzers.</p>
+    #   @return [Array<Types::DataQualityObservation>]
+    # @!attribute evaluation_context
+    #   <p>The evaluation context for the data quality result. This value identifies a specific data quality result, or a series of related results, within a run.</p>
+    #   @return [String]
+    # @!attribute descriptors
+    #   <p>A map of user-provided descriptors that add contextual metadata and configuration to the data quality result, such as database name, table name, team, or environment.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute aggregated_metrics
+    #   <p>A summary of <code>DataQualityAggregatedMetrics</code> objects showing the total counts of processed rows and rules, including their pass/fail statistics based on row-level results.</p>
+    #   @return [Types::DataQualityAggregatedMetrics]
+    # @!attribute ruleset_name
+    #   <p>The name of the ruleset associated with the data quality result.</p>
+    #   @return [String]
+    class GetDataQualityResultV2Response < Struct.new(
+      nil,
+      :result_id,
+      :data_source,
+      :profile_id,
+      :dimensions,
+      :tags,
+      :execution_started_on,
+      :execution_completed_on,
+      :result_published_on,
+      :score,
+      :rule_results,
+      :analyzer_results,
+      :observations,
+      :evaluation_context,
+      :descriptors,
+      :aggregated_metrics,
+      :ruleset_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute run_id
     #   <p>The unique run identifier associated with this run.</p>
     #   @return [String]
@@ -10327,7 +11882,7 @@ module Aws::Glue
     #   <p>The data source (an Glue table) associated with this run.</p>
     #   @return [Types::DataSource]
     # @!attribute role
-    #   <p>An IAM role supplied to encrypt the results of the run.</p>
+    #   <p>The IAM role that Glue assumes to access resources for the run.</p>
     #   @return [String]
     # @!attribute number_of_workers
     #   <p>The number of <code>G.1X</code> workers to be used in the run. The default is 5.</p>
@@ -10362,6 +11917,13 @@ module Aws::Glue
     # @!attribute data_quality_security_configuration
     #   <p>The name of the security configuration created with the data quality encryption option.</p>
     #   @return [String]
+    # @!attribute additional_run_options
+    #   <p>Additional run options you can specify for a recommendation run.</p>
+    #   @return [Types::DataQualityRuleRecommendationRunAdditionalRunOptions]
+    # @!attribute recommendation_mode
+    #   <p>The mode that Glue Data Quality uses to recommend rules.</p>
+    #            <p>The default is <code>BASIC</code>.</p>
+    #   @return [String]
     class GetDataQualityRuleRecommendationRunResponse < Struct.new(
       nil,
       :run_id,
@@ -10378,6 +11940,8 @@ module Aws::Glue
       :recommended_ruleset,
       :created_ruleset_name,
       :data_quality_security_configuration,
+      :additional_run_options,
+      :recommendation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10527,7 +12091,7 @@ module Aws::Glue
     #         account ID is used by default.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the database to retrieve. For Hive compatibility, this 
+    #   <p>The name of the database to retrieve. For Hive compatibility, this
     #         should be all lowercase.</p>
     #   @return [String]
     class GetDatabaseRequest < Struct.new(
@@ -10746,6 +12310,104 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute identifier
+    #   <p>The identifier of the form type to retrieve.</p>
+    #   @return [String]
+    class GetFormTypeRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the form type.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the form type.</p>
+    #   @return [String]
+    # @!attribute schema
+    #   <p>The Smithy IDL schema of the form type.</p>
+    #   @return [String]
+    class GetFormTypeResponse < Struct.new(
+      nil,
+      :id,
+      :name,
+      :schema,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The unique identifier of the glossary to retrieve.</p>
+    #   @return [String]
+    class GetGlossaryRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the glossary.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the glossary.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the glossary.</p>
+    #   @return [String]
+    class GetGlossaryResponse < Struct.new(
+      nil,
+      :id,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The unique identifier of the glossary term to retrieve.</p>
+    #   @return [String]
+    class GetGlossaryTermRequest < Struct.new(
+      nil,
+      :identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the glossary term.</p>
+    #   @return [String]
+    # @!attribute glossary_id
+    #   <p>The unique identifier of the glossary containing this term.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the glossary term.</p>
+    #   @return [String]
+    # @!attribute short_description
+    #   <p>The short description of the glossary term.</p>
+    #   @return [String]
+    # @!attribute long_description
+    #   <p>The long description of the glossary term.</p>
+    #   @return [String]
+    class GetGlossaryTermResponse < Struct.new(
+      nil,
+      :id,
+      :glossary_id,
+      :name,
+      :short_description,
+      :long_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Request to retrieve the Glue Identity Center configuration.</p>
     class GetGlueIdentityCenterConfigurationRequest < Struct.new(
       nil,
@@ -10764,11 +12426,15 @@ module Aws::Glue
     # @!attribute scopes
     #   <p>A list of Identity Center scopes that define the permissions and access levels for the Glue configuration.</p>
     #   @return [Array<String>]
+    # @!attribute user_background_sessions_enabled
+    #   <p>Indicates whether users can run background sessions when using Identity Center authentication with Glue services.</p>
+    #   @return [Boolean]
     class GetGlueIdentityCenterConfigurationResponse < Struct.new(
       nil,
       :application_arn,
       :instance_arn,
       :scopes,
+      :user_background_sessions_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -10788,6 +12454,9 @@ module Aws::Glue
     # @!attribute resource_arn
     #   <p>The connection ARN of the source, or the database ARN of the target.</p>
     #   @return [String]
+    # @!attribute resource_property_arn
+    #   <p>The resource ARN created through this create API. The format is something like arn:aws:glue:<region>:<account_id>:integrationresourceproperty/*</p>
+    #   @return [String]
     # @!attribute source_processing_properties
     #   <p>The resource properties associated with the integration source.</p>
     #   @return [Types::SourceProcessingProperties]
@@ -10797,6 +12466,7 @@ module Aws::Glue
     class GetIntegrationResourcePropertyResponse < Struct.new(
       nil,
       :resource_arn,
+      :resource_property_arn,
       :source_processing_properties,
       :target_processing_properties,
       keyword_init: true
@@ -10805,8 +12475,8 @@ module Aws::Glue
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving 
-    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration 
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving
+    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration
     #         table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     #   @return [String]
@@ -10823,8 +12493,8 @@ module Aws::Glue
     end
 
     # @!attribute resource_arn
-    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving 
-    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration 
+    #   <p>The Amazon Resource Name (ARN) of the target table for which to retrieve integration table properties. Currently, this API only supports retrieving
+    #         properties for target tables, and the provided ARN should be the ARN of the target table in the Glue Data Catalog. Support for retrieving integration
     #         table properties for source connections (using the connection ARN) is not yet implemented and will be added in a future release.
     #       </p>
     #   @return [String]
@@ -11286,6 +12956,32 @@ module Aws::Glue
     end
 
     # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>
+    #   @return [String]
+    # @!attribute materialized_view_refresh_task_run_id
+    #   <p>The identifier for the particular materialized view refresh task run.</p>
+    #   @return [String]
+    class GetMaterializedViewRefreshTaskRunRequest < Struct.new(
+      nil,
+      :catalog_id,
+      :materialized_view_refresh_task_run_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute materialized_view_refresh_task_run
+    #   <p>A MaterializedViewRefreshTaskRun object representing the details of the task run.</p>
+    #   @return [Types::MaterializedViewRefreshTaskRun]
+    class GetMaterializedViewRefreshTaskRunResponse < Struct.new(
+      nil,
+      :materialized_view_refresh_task_run,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute catalog_id
     #   <p>The catalog ID where the table resides.</p>
     #   @return [String]
     # @!attribute database_name
@@ -11336,12 +13032,16 @@ module Aws::Glue
     # @!attribute partition_values
     #   <p>The values that define the partition.</p>
     #   @return [Array<String>]
+    # @!attribute audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
+    #   @return [Types::AuditContext]
     class GetPartitionRequest < Struct.new(
       nil,
       :catalog_id,
       :database_name,
       :table_name,
       :partition_values,
+      :audit_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11495,6 +13195,9 @@ module Aws::Glue
     # @!attribute query_as_of_time
     #   <p>The time as of when to read the partition contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>
     #   @return [Time]
+    # @!attribute audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
+    #   @return [Types::AuditContext]
     class GetPartitionsRequest < Struct.new(
       nil,
       :catalog_id,
@@ -11507,6 +13210,7 @@ module Aws::Glue
       :exclude_column_schema,
       :transaction_id,
       :query_as_of_time,
+      :audit_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11978,6 +13682,28 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute session_id
+    #   <p>The unique identifier of the interactive session.</p>
+    #   @return [String]
+    class GetSessionEndpointRequest < Struct.new(
+      nil,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute spark_connect
+    #   <p>The Spark Connect endpoint details for the session.</p>
+    #   @return [Types::SessionEndpoint]
+    class GetSessionEndpointResponse < Struct.new(
+      nil,
+      :spark_connect,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute id
     #   <p>The ID of the session. </p>
     #   @return [String]
@@ -12029,6 +13755,54 @@ module Aws::Glue
     class GetStatementResponse < Struct.new(
       nil,
       :statement,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute job_name
+    #   <p>The name of the job.</p>
+    #   @return [String]
+    # @!attribute run_id
+    #   <p>The ID of the job run.</p>
+    #   @return [String]
+    class GetSystemLogsForJobRunRequest < Struct.new(
+      nil,
+      :job_name,
+      :run_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute system_logs_url
+    #   <p>The URL to download the system logs for the job run.</p>
+    #   @return [String]
+    class GetSystemLogsForJobRunResponse < Struct.new(
+      nil,
+      :system_logs_url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The ID of the session.</p>
+    #   @return [String]
+    class GetSystemLogsForSessionRequest < Struct.new(
+      nil,
+      :id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute system_logs_url
+    #   <p>The URL to download the system logs for the session.</p>
+    #   @return [String]
+    class GetSystemLogsForSessionResponse < Struct.new(
+      nil,
+      :system_logs_url,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12098,9 +13872,30 @@ module Aws::Glue
     # @!attribute query_as_of_time
     #   <p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>
     #   @return [Time]
+    # @!attribute audit_context
+    #   <p>A structure containing the Lake Formation <a href="https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html">audit context</a>.</p>
+    #   @return [Types::AuditContext]
     # @!attribute include_status_details
     #   <p>Specifies whether to include status details related to a request to create or update an Glue Data Catalog view.</p>
     #   @return [Boolean]
+    # @!attribute attributes_to_get
+    #   <p>Specifies the table fields returned by the <code>GetTable</code> call. This parameter doesn't accept an empty list.</p>
+    #            <p>The following are the valid combinations of values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>DEFAULT</code> - Returns the Hive-style table definition only.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>LATEST_ICEBERG_METADATA</code> - Returns only the latest Apache Iceberg table metadata.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>DEFAULT</code>, <code>LATEST_ICEBERG_METADATA</code> - Returns both the Hive-style table definition and the latest Apache Iceberg table metadata.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<String>]
     class GetTableRequest < Struct.new(
       nil,
       :catalog_id,
@@ -12108,7 +13903,9 @@ module Aws::Glue
       :name,
       :transaction_id,
       :query_as_of_time,
+      :audit_context,
       :include_status_details,
+      :attributes_to_get,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12140,12 +13937,16 @@ module Aws::Glue
     # @!attribute version_id
     #   <p>The ID value of the table version to be retrieved. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1. </p>
     #   @return [String]
+    # @!attribute audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
+    #   @return [Types::AuditContext]
     class GetTableVersionRequest < Struct.new(
       nil,
       :catalog_id,
       :database_name,
       :table_name,
       :version_id,
+      :audit_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12180,6 +13981,9 @@ module Aws::Glue
     # @!attribute max_results
     #   <p>The maximum number of table versions to return in one response.</p>
     #   @return [Integer]
+    # @!attribute audit_context
+    #   <p>A structure containing the Lake Formation audit context.</p>
+    #   @return [Types::AuditContext]
     class GetTableVersionsRequest < Struct.new(
       nil,
       :catalog_id,
@@ -12187,6 +13991,7 @@ module Aws::Glue
       :table_name,
       :next_token,
       :max_results,
+      :audit_context,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -12233,6 +14038,20 @@ module Aws::Glue
     # @!attribute query_as_of_time
     #   <p>The time as of when to read the table contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>
     #   @return [Time]
+    # @!attribute audit_context
+    #   <p>A structure containing the Lake Formation <a href="https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html">audit context</a>.</p>
+    #   @return [Types::AuditContext]
+    # @!attribute resource_share_type
+    #   <p>Specifies which tables the <code>GetTables</code> call returns. The allowable values are <code>FEDERATED</code> or <code>ALL</code>. </p>
+    #            <ul>
+    #               <li>
+    #                  <p>If set to <code>FEDERATED</code>, returns only federated tables, which reference an entity outside the Glue Data Catalog.</p>
+    #               </li>
+    #               <li>
+    #                  <p>If set to <code>ALL</code>, returns all tables in the database, both federated and non-federated. </p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     # @!attribute include_status_details
     #   <p>Specifies whether to include status details related to a request to create or update an Glue Data Catalog view.</p>
     #   @return [Boolean]
@@ -12259,6 +14078,8 @@ module Aws::Glue
       :max_results,
       :transaction_id,
       :query_as_of_time,
+      :audit_context,
+      :resource_share_type,
       :include_status_details,
       :attributes_to_get,
       keyword_init: true
@@ -12407,7 +14228,7 @@ module Aws::Glue
     #   <p>A list of column names that the user has been granted access to.</p>
     #   @return [Array<String>]
     # @!attribute is_registered_with_lake_formation
-    #   <p>A Boolean value that indicates whether the partition location is registered 
+    #   <p>A Boolean value that indicates whether the partition location is registered
     #             with Lake Formation.</p>
     #   @return [Boolean]
     class GetUnfilteredPartitionMetadataResponse < Struct.new(
@@ -12429,7 +14250,7 @@ module Aws::Glue
     #   <p>Specified only if the base tables belong to a different Amazon Web Services Region.</p>
     #   @return [String]
     # @!attribute catalog_id
-    #   <p>The ID of the Data Catalog where the partitions in question reside. If none is provided, 
+    #   <p>The ID of the Data Catalog where the partitions in question reside. If none is provided,
     #             the AWS account ID is used by default. </p>
     #   @return [String]
     # @!attribute database_name
@@ -12671,7 +14492,7 @@ module Aws::Glue
     #   <p>A list of column names that the user has been granted access to.</p>
     #   @return [Array<String>]
     # @!attribute is_registered_with_lake_formation
-    #   <p>A Boolean value that indicates whether the partition location is registered 
+    #   <p>A Boolean value that indicates whether the partition location is registered
     #             with Lake Formation.</p>
     #   @return [Boolean]
     # @!attribute cell_filters
@@ -12682,6 +14503,9 @@ module Aws::Glue
     #   @return [String]
     # @!attribute is_multi_dialect_view
     #   <p>Specifies whether the view supports the SQL dialects of one or more different query engines and can therefore be read by those engines.</p>
+    #   @return [Boolean]
+    # @!attribute is_materialized_view
+    #   <p>Indicates if a table is a materialized view.</p>
     #   @return [Boolean]
     # @!attribute resource_arn
     #   <p>The resource ARN of the parent resource extracted from the request.</p>
@@ -12703,6 +14527,7 @@ module Aws::Glue
       :cell_filters,
       :query_authorization_id,
       :is_multi_dialect_view,
+      :is_materialized_view,
       :resource_arn,
       :is_protected,
       :permissions,
@@ -12714,6 +14539,7 @@ module Aws::Glue
       def initialize(options = {})
         options[:is_registered_with_lake_formation] = false unless options.key?(:is_registered_with_lake_formation)
         options[:is_multi_dialect_view] = false unless options.key?(:is_multi_dialect_view)
+        options[:is_materialized_view] = false unless options.key?(:is_materialized_view)
         options[:is_protected] = false unless options.key?(:is_protected)
         super
       end
@@ -12800,6 +14626,14 @@ module Aws::Glue
     #   <p>An optional function-name pattern string that filters the function
     #         definitions returned.</p>
     #   @return [String]
+    # @!attribute function_type
+    #   <p>An optional function-type pattern string that filters the function
+    #         definitions returned from Amazon Redshift Federated Permissions Catalog.</p>
+    #            <p>Specify a value of <code>REGULAR_FUNCTION</code> or <code>STORED_PROCEDURE</code>.
+    #         The <code>STORED_PROCEDURE</code> function type is only compatible with
+    #         Amazon Redshift Federated Permissions Catalog.
+    #       </p>
+    #   @return [String]
     # @!attribute next_token
     #   <p>A continuation token, if this is a continuation call.</p>
     #   @return [String]
@@ -12811,6 +14645,7 @@ module Aws::Glue
       :catalog_id,
       :database_name,
       :pattern,
+      :function_type,
       :next_token,
       :max_results,
       keyword_init: true
@@ -12949,6 +14784,46 @@ module Aws::Glue
       nil,
       :runs,
       :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a business glossary.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the glossary.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the glossary.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the glossary.</p>
+    #   @return [String]
+    class GlossaryItem < Struct.new(
+      nil,
+      :id,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of a glossary term.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the glossary term.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the glossary term.</p>
+    #   @return [String]
+    # @!attribute short_description
+    #   <p>The short description of the glossary term.</p>
+    #   @return [String]
+    class GlossaryTermItem < Struct.new(
+      nil,
+      :id,
+      :name,
+      :short_description,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13216,21 +15091,21 @@ module Aws::Glue
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes. 
+    #                     <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes.
     #             This is the recommended compaction strategy for most use cases.
     #           </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query 
-    #           performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy, 
+    #                     <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query
+    #           performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy,
     #           you must first define a sort order in your Iceberg table properties using the <code>sort_order</code> table property.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting, 
-    #             allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions 
-    #             simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the 
+    #                     <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting,
+    #             allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions
+    #             simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the
     #             <code>sort_order</code> table property.
     #           </p>
     #               </li>
@@ -13290,6 +15165,30 @@ module Aws::Glue
       end
     end
 
+    # <p>Encryption key structure used for Iceberg table encryption. Contains the key ID, encrypted key metadata, optional reference to the encrypting key, and additional properties for the table's encryption scheme.</p>
+    # @!attribute key_id
+    #   <p>Unique identifier of the encryption key used for Iceberg table encryption. This ID is used to reference the key in table metadata and track which key was used to encrypt specific data.</p>
+    #   @return [String]
+    # @!attribute encrypted_key_metadata
+    #   <p>Encrypted key and metadata, base64 encoded. The format of encrypted key metadata is determined by the table's encryption scheme and can be a wrapped format specific to the table's KMS provider.</p>
+    #   @return [String]
+    # @!attribute encrypted_by_id
+    #   <p>Optional ID of the key used to encrypt or wrap the key metadata in Iceberg table encryption. This field references another encryption key that was used to encrypt the current key's metadata.</p>
+    #   @return [String]
+    # @!attribute properties
+    #   <p>A string to string map of additional metadata used by the table's encryption scheme. These properties provide additional context and configuration for the encryption key implementation.</p>
+    #   @return [Hash<String, String>]
+    class IcebergEncryptedKey < Struct.new(
+      nil,
+      :key_id,
+      :encrypted_key_metadata,
+      :encrypted_by_id,
+      :properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure that defines an Apache Iceberg metadata table to create in the catalog.</p>
     # @!attribute metadata_operation
     #   <p>A required metadata operation. Can only be set to <code>CREATE</code>.</p>
@@ -13298,7 +15197,7 @@ module Aws::Glue
     #   <p>The table version for the Iceberg table. Defaults to 2.</p>
     #   @return [String]
     # @!attribute create_iceberg_table_input
-    #   <p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, including table properties 
+    #   <p>The configuration parameters required to create a new Iceberg table in the Glue Data Catalog, including table properties
     #         and metadata specifications.</p>
     #   @return [Types::CreateIcebergTableInput]
     class IcebergInput < Struct.new(
@@ -13335,7 +15234,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A structure that contains the output properties of Iceberg table optimization configuration for your catalog resource in the Glue 
+    # <p>A structure that contains the output properties of Iceberg table optimization configuration for your catalog resource in the Glue
     #       Data Catalog.</p>
     # @!attribute role_arn
     #   <p>The Amazon Resource Name (ARN) of the IAM role that is used to perform Iceberg table optimization operations.</p>
@@ -13416,7 +15315,7 @@ module Aws::Glue
       end
     end
 
-    # <p>Defines a single partition field within an Iceberg partition specification, including the source field, transformation function, partition name, 
+    # <p>Defines a single partition field within an Iceberg partition specification, including the source field, transformation function, partition name,
     #       and unique identifier.</p>
     # @!attribute source_id
     #   <p>The identifier of the source field from the table schema that this partition field is based on.</p>
@@ -13592,7 +15491,7 @@ module Aws::Glue
       end
     end
 
-    # <p>Defines the sort order specification for an Iceberg table, determining how data should be ordered within partitions to 
+    # <p>Defines the sort order specification for an Iceberg table, determining how data should be ordered within partitions to
     #       optimize query performance.</p>
     # @!attribute order_id
     #   <p>The unique identifier for this sort order specification within the Iceberg table's metadata.</p>
@@ -13630,6 +15529,12 @@ module Aws::Glue
     # @!attribute doc
     #   <p>Optional documentation or description text that provides additional context about the purpose and usage of this field.</p>
     #   @return [String]
+    # @!attribute initial_default
+    #   <p>Default value used to populate the field's value for all records that were written before the field was added to the schema. This enables backward compatibility when adding new fields to existing Iceberg tables.</p>
+    #   @return [JSON]
+    # @!attribute write_default
+    #   <p>Default value used to populate the field's value for any records written after the field was added to the schema, if the writer does not supply the field's value. This can be changed through schema evolution.</p>
+    #   @return [JSON]
     class IcebergStructField < Struct.new(
       nil,
       :id,
@@ -13637,6 +15542,8 @@ module Aws::Glue
       :type,
       :required,
       :doc,
+      :initial_default,
+      :write_default,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13648,7 +15555,72 @@ module Aws::Glue
       end
     end
 
-    # <p>Defines a complete set of updates to be applied to an Iceberg table, including schema changes, partitioning modifications, sort order 
+    # <p>The Apache Iceberg table metadata, including format version, table identifier, schemas, partition specifications, sort orders, and table properties. This structure captures the current state of an Iceberg table's metadata as managed by the Glue Data Catalog.</p>
+    # @!attribute format_version
+    #   <p>The Apache Iceberg table format version, such as <code>1</code> or <code>2</code>. Determines the set of features and on-disk layout supported by the table.</p>
+    #   @return [String]
+    # @!attribute table_uuid
+    #   <p>The unique identifier (UUID) for the Iceberg table, assigned when the table is created and used to track the table across metadata updates.</p>
+    #   @return [String]
+    # @!attribute location
+    #   <p>The base S3 location where the Iceberg table's data and metadata files are stored.</p>
+    #   @return [String]
+    # @!attribute properties
+    #   <p>A map of key-value pairs that define table-level properties and configuration settings for the Iceberg table.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute schemas
+    #   <p>The list of schemas that have been associated with the Iceberg table over its history, supporting schema evolution.</p>
+    #   @return [Array<Types::IcebergSchema>]
+    # @!attribute current_schema_id
+    #   <p>The identifier of the schema that is currently active for the Iceberg table. Matches an entry in <code>Schemas</code>.</p>
+    #   @return [Integer]
+    # @!attribute last_column_id
+    #   <p>The highest column identifier that has been assigned in the Iceberg table's schema, used to ensure unique IDs as new columns are added.</p>
+    #   @return [Integer]
+    # @!attribute partition_specs
+    #   <p>The list of partition specifications that have been associated with the Iceberg table over its history, supporting partition evolution.</p>
+    #   @return [Array<Types::IcebergPartitionSpec>]
+    # @!attribute default_spec_id
+    #   <p>The identifier of the partition specification that is currently used by default when writing new data to the Iceberg table.</p>
+    #   @return [Integer]
+    # @!attribute last_partition_id
+    #   <p>The highest partition field identifier that has been assigned across the table's partition specifications.</p>
+    #   @return [Integer]
+    # @!attribute sort_orders
+    #   <p>The list of sort order specifications that have been associated with the Iceberg table over its history.</p>
+    #   @return [Array<Types::IcebergSortOrder>]
+    # @!attribute default_sort_order_id
+    #   <p>The identifier of the sort order that is currently used by default when writing new data to the Iceberg table.</p>
+    #   @return [Integer]
+    class IcebergTableMetadata < Struct.new(
+      nil,
+      :format_version,
+      :table_uuid,
+      :location,
+      :properties,
+      :schemas,
+      :current_schema_id,
+      :last_column_id,
+      :partition_specs,
+      :default_spec_id,
+      :last_partition_id,
+      :sort_orders,
+      :default_sort_order_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:current_schema_id] = 0 unless options.key?(:current_schema_id)
+        options[:last_column_id] = 0 unless options.key?(:last_column_id)
+        options[:default_spec_id] = 0 unless options.key?(:default_spec_id)
+        options[:last_partition_id] = 0 unless options.key?(:last_partition_id)
+        options[:default_sort_order_id] = 0 unless options.key?(:default_sort_order_id)
+        super
+      end
+    end
+
+    # <p>Defines a complete set of updates to be applied to an Iceberg table, including schema changes, partitioning modifications, sort order
     #       adjustments, location updates, and property changes.</p>
     # @!attribute schema
     #   <p>The updated schema definition for the Iceberg table, specifying any changes to field structure, data types, or schema metadata.</p>
@@ -13665,6 +15637,15 @@ module Aws::Glue
     # @!attribute properties
     #   <p>Updated key-value pairs of table properties and configuration settings for the Iceberg table.</p>
     #   @return [Hash<String, String>]
+    # @!attribute action
+    #   <p>The type of update action to be performed on the Iceberg table. Defines the specific operation such as adding schema, setting current schema, adding partition spec, or managing encryption keys.</p>
+    #   @return [String]
+    # @!attribute encryption_key
+    #   <p>Encryption key information associated with an Iceberg table update operation. Used when adding or removing encryption keys from the table metadata during table evolution.</p>
+    #   @return [Types::IcebergEncryptedKey]
+    # @!attribute key_id
+    #   <p>Identifier of the encryption key involved in an Iceberg table update operation. References the specific key being added to or removed from the table's encryption configuration.</p>
+    #   @return [String]
     class IcebergTableUpdate < Struct.new(
       nil,
       :schema,
@@ -13672,6 +15653,9 @@ module Aws::Glue
       :sort_order,
       :location,
       :properties,
+      :action,
+      :encryption_key,
+      :key_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -13934,25 +15918,30 @@ module Aws::Glue
 
     # <p>Properties associated with the integration.</p>
     # @!attribute refresh_interval
-    #   <p>Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur. This parameter provides flexibility to align 
-    #         the refresh rate with your specific data update patterns, system load considerations, and performance optimization goals. Time increment can be set from  
-    #       15 minutes to 8640 minutes (six days). Currently supports creation of <code>RefreshInterval</code> only.</p>
+    #   <p>Specifies the frequency at which CDC (Change Data Capture) pulls or incremental loads should occur. This parameter provides flexibility to align
+    #         the refresh rate with your specific data update patterns, system load considerations, and performance optimization goals. Time increment can be set from
+    #       15 minutes to 8640 minutes (six days).</p>
     #   @return [String]
     # @!attribute source_properties
     #   <p>
-    #         A collection of key-value pairs that specify additional properties for the integration source. These properties provide configuration options that 
+    #         A collection of key-value pairs that specify additional properties for the integration source. These properties provide configuration options that
     #         can be used to customize the behavior of the ODB source during data integration operations.
     #       </p>
     #   @return [Hash<String, String>]
     # @!attribute continuous_sync
-    #   <p>Enables continuous synchronization for on-demand data extractions from SaaS applications to Amazon Web Services data services like Amazon Redshift 
+    #   <p>Enables continuous synchronization for on-demand data extractions from SaaS applications to Amazon Web Services data services like Amazon Redshift
     #         and Amazon S3.</p>
     #   @return [Boolean]
+    # @!attribute target_namespace
+    #   <p>An optional custom namespace for the integration's target. Supply this parameter only when the target is an Amazon S3 Tables table bucket; it is not accepted for other target types. The integration replicates data into the namespace you specify, reusing it if it already exists. If you omit this parameter, the target namespace defaults to <code>zetl_</code> followed by the integration ID, with hyphens converted to underscores.</p>
+    #            <p>The value is immutable after the integration is created; <code>ModifyIntegration</code> rejects changes to it. It must be a valid Amazon S3 Tables namespace name: 1 to 255 characters using lowercase letters, numbers, and underscores, with no leading or trailing underscore and no reserved <code>aws</code> prefix.</p>
+    #   @return [String]
     class IntegrationConfig < Struct.new(
       nil,
       :refresh_interval,
       :source_properties,
       :continuous_sync,
+      :target_namespace,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14016,8 +16005,8 @@ module Aws::Glue
 
     # <p>A structure that describes how data is partitioned on the target.</p>
     # @!attribute field_name
-    #   <p>The field name used to partition data on the target. Avoid using columns that have unique values for each row (for example, `LastModifiedTimestamp`, 
-    #         `SystemModTimeStamp`) as the partition column. These columns are not suitable for partitioning because they create a large number of small partitions, 
+    #   <p>The field name used to partition data on the target. Avoid using columns that have unique values for each row (for example, `LastModifiedTimestamp`,
+    #         `SystemModTimeStamp`) as the partition column. These columns are not suitable for partitioning because they create a large number of small partitions,
     #         which can lead to performance issues.</p>
     #   @return [String]
     # @!attribute function_spec
@@ -14063,7 +16052,7 @@ module Aws::Glue
     #            </ul>
     #            <note>
     #               <p>
-    #           Only specify <code>ConversionSpec</code> when using timestamp-based partition functions (year, month, day, or hour). 
+    #           Only specify <code>ConversionSpec</code> when using timestamp-based partition functions (year, month, day, or hour).
     #           Glue Zero-ETL uses this parameter to correctly transform source data into timestamp format before partitioning.
     #         </p>
     #               <p>
@@ -14102,6 +16091,86 @@ module Aws::Glue
     class IntegrationQuotaExceededFault < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure representing an integration resource property.</p>
+    # @!attribute resource_arn
+    #   <p>The connection ARN of the source, or the database ARN of the target.</p>
+    #   @return [String]
+    # @!attribute resource_property_arn
+    #   <p>The resource ARN created through this create API. The format is something like arn:aws:glue:<region>:<account_id>:integrationresourceproperty/*</p>
+    #   @return [String]
+    # @!attribute source_processing_properties
+    #   <p>The resource properties associated with the integration source.</p>
+    #   @return [Types::SourceProcessingProperties]
+    # @!attribute target_processing_properties
+    #   <p>The resource properties associated with the integration target.</p>
+    #   @return [Types::TargetProcessingProperties]
+    class IntegrationResourceProperty < Struct.new(
+      nil,
+      :resource_arn,
+      :resource_property_arn,
+      :source_processing_properties,
+      :target_processing_properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter for integration resource properties.</p>
+    # @!attribute name
+    #   <p>The name of the filter. Supported filter keys are <code>SourceArn</code> and <code>TargetArn</code>.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>A list of filter values.</p>
+    #   @return [Array<String>]
+    class IntegrationResourcePropertyFilter < Struct.new(
+      nil,
+      :name,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The properties of a single integration table, including the resource ARN, the table name, and the source or target table configuration.</p>
+    # @!attribute resource_arn
+    #   <p>The connection ARN of the source, or the database ARN of the target.</p>
+    #   @return [String]
+    # @!attribute table_name
+    #   <p>The name of the source table to be replicated.</p>
+    #   @return [String]
+    # @!attribute source_table_config
+    #   <p>A structure for the source table configuration.</p>
+    #   @return [Types::SourceTableConfig]
+    # @!attribute target_table_config
+    #   <p>A structure for the target table configuration.</p>
+    #   @return [Types::TargetTableConfig]
+    class IntegrationTableProperties < Struct.new(
+      nil,
+      :resource_arn,
+      :table_name,
+      :source_table_config,
+      :target_table_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A key-value filter used to narrow the list of integration table properties returned by ListIntegrationTableProperties. Specify a filter key and one or more values to match.</p>
+    # @!attribute name
+    #   <p>The name of the filter. Supported filter keys are <code>SourceArn</code>, <code>TargetArn</code>, <code>SourceTableName</code>, and <code>TargetTableName</code>.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>A list of filter values.</p>
+    #   @return [Array<String>]
+    class IntegrationTablePropertiesFilter < Struct.new(
+      nil,
+      :name,
+      :values,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14166,6 +16235,90 @@ module Aws::Glue
     class InvalidStateException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An error that occurred when retrieving an iterable form item.</p>
+    # @!attribute item_identifier
+    #   <p>The identifier of the item that caused the error.</p>
+    #   @return [String]
+    # @!attribute code
+    #   <p>The error code.</p>
+    #   @return [String]
+    # @!attribute message
+    #   <p>The error message.</p>
+    #   @return [String]
+    class ItemError < Struct.new(
+      nil,
+      :item_identifier,
+      :code,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>An iterable form available on an asset, identified by its form type.</p>
+    # @!attribute form_type_id
+    #   <p>The form type identifier of the iterable form (for example, <code>columns</code>), used to retrieve its items via <code>ListIterableForms</code> or <code>BatchGetIterableForms</code>.</p>
+    #   @return [String]
+    class IterableFormEntry < Struct.new(
+      nil,
+      :form_type_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A full iterable form item with its forms.</p>
+    # @!attribute item_id
+    #   <p>The unique identifier of the item.</p>
+    #   @return [String]
+    # @!attribute item_name
+    #   <p>The name of the item.</p>
+    #   @return [String]
+    # @!attribute glossary_terms
+    #   <p>The identifiers of the glossary terms associated with the item.</p>
+    #   @return [Array<String>]
+    # @!attribute forms
+    #   <p>The forms on the item, keyed by form name.</p>
+    #   @return [Hash<String, Types::AssetFormEntry>]
+    # @!attribute attachments
+    #   <p>Additional attachments on the item for more context, keyed by attachment name.</p>
+    #   @return [Hash<String, Types::AssetFormEntry>]
+    class IterableFormItem < Struct.new(
+      nil,
+      :item_id,
+      :item_name,
+      :glossary_terms,
+      :forms,
+      :attachments,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A summary of an item in an iterable form.</p>
+    # @!attribute item_id
+    #   <p>The unique identifier of the item.</p>
+    #   @return [String]
+    # @!attribute item_name
+    #   <p>The name of the item.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the item.</p>
+    #   @return [String]
+    # @!attribute glossary_terms
+    #   <p>The identifiers of the glossary terms associated with the item.</p>
+    #   @return [Array<String>]
+    class IterableFormListItem < Struct.new(
+      nil,
+      :item_id,
+      :item_name,
+      :description,
+      :glossary_terms,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -14295,6 +16448,34 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>JWT bearer token configuration that defines the properties needed for the JWT Bearer grant type flow.</p>
+    # @!attribute token_url
+    #   <p>The token endpoint URL where the JWT bearer token will be exchanged for an access token.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute request_method
+    #   <p>The HTTP method to use when making JWT bearer token requests, typically POST.</p>
+    #   @return [String]
+    # @!attribute content_type
+    #   <p>The content type to use for JWT bearer token requests, such as application/x-www-form-urlencoded or application/json.</p>
+    #   @return [String]
+    # @!attribute jwt_token
+    #   <p>The JWT token to be used in the bearer token grant flow for authentication.</p>
+    #   @return [Types::ConnectorProperty]
+    # @!attribute token_url_parameters
+    #   <p>Additional parameters to include in token URL requests as key-value pairs.</p>
+    #   @return [Array<Types::ConnectorProperty>]
+    class JWTBearerProperties < Struct.new(
+      nil,
+      :token_url,
+      :request_method,
+      :content_type,
+      :jwt_token,
+      :token_url_parameters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies a JDBC data store to crawl.</p>
     # @!attribute connection_name
     #   <p>The name of the connection to use to connect to the JDBC target.</p>
@@ -14410,7 +16591,7 @@ module Aws::Glue
     #         can consume resources before it is terminated and enters <code>TIMEOUT</code>
     #         status.</p>
     #            <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>
-    #            <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>
+    #            <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>
     #            <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>
     #            <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>
     #   @return [Integer]
@@ -14432,8 +16613,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
-    #               Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
+    #               Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
     #               The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -14498,7 +16679,7 @@ module Aws::Glue
     #            <p>For more information about the available Glue versions and corresponding
     #         Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
     #         guide.</p>
-    #            <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>
+    #            <p>Jobs that are created without specifying a Glue version default to Glue 5.1.</p>
     #   @return [String]
     # @!attribute code_gen_configuration_nodes
     #   <p>The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.</p>
@@ -14620,7 +16801,7 @@ module Aws::Glue
     # <p>Specifies code that runs when a job is run.</p>
     # @!attribute name
     #   <p>The name of the job command. For an Apache Spark ETL job, this must be
-    #         <code>glueetl</code>. For a Python shell job, it must be <code>pythonshell</code>. 
+    #         <code>glueetl</code>. For a Python shell job, it must be <code>pythonshell</code>.
     #         For an Apache Spark streaming ETL job, this must be <code>gluestreaming</code>. For a Ray job,
     #         this must be <code>glueray</code>.</p>
     #   @return [String]
@@ -14749,7 +16930,7 @@ module Aws::Glue
     #   <p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can
     #         consume resources before it is terminated and enters <code>TIMEOUT</code> status. This value overrides the timeout value set in the parent job.</p>
     #            <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>
-    #            <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>
+    #            <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>
     #            <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>
     #            <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>
     #   @return [Integer]
@@ -14771,8 +16952,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -14829,7 +17010,7 @@ module Aws::Glue
     #            <p>For more information about the available Glue versions and corresponding
     #         Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
     #         guide.</p>
-    #            <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>
+    #            <p>Jobs that are created without specifying a Glue version default to Glue 5.1.</p>
     #   @return [String]
     # @!attribute dpu_seconds
     #   <p>This field can be set for either job runs with execution class <code>FLEX</code> or when Auto Scaling is enabled, and represents the total time each executor ran during the lifecycle of a job run in seconds, multiplied by a DPU factor (1 for <code>G.1X</code>, 2 for <code>G.2X</code>, or 0.25 for <code>G.025X</code> workers). This value may be different than the <code>executionEngineRuntime</code> * <code>MaxCapacity</code> as in the case of Auto Scaling jobs, as the number of executors running at a given time may be less than the <code>MaxCapacity</code>. Therefore, it is possible that the value of <code>DPUSeconds</code> is less than <code>executionEngineRuntime</code> * <code>MaxCapacity</code>.</p>
@@ -14851,7 +17032,7 @@ module Aws::Glue
     #            <p>For example, when a job run is in a WAITING state as a result of job run queuing, the field has the reason why the job run is in that state.</p>
     #   @return [String]
     # @!attribute execution_role_session_policy
-    #   <p>This inline session policy to the StartJobRun API allows you to dynamically restrict the permissions of the specified 
+    #   <p>This inline session policy to the StartJobRun API allows you to dynamically restrict the permissions of the specified
     #         execution role for the scope of the job, without requiring the creation of additional IAM roles.</p>
     #   @return [String]
     class JobRun < Struct.new(
@@ -14979,7 +17160,7 @@ module Aws::Glue
     #         can consume resources before it is terminated and enters <code>TIMEOUT</code>
     #         status.</p>
     #            <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>
-    #            <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>
+    #            <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>
     #            <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>
     #            <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>
     #   @return [Integer]
@@ -15001,16 +17182,16 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
     #   @return [Float]
     # @!attribute worker_type
     #   <p>The type of predefined worker that is allocated when a job runs. Accepts a value of
-    #         G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs. For more information, see 
-    #         <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html#create-job">Defining job properties for Spark jobs   
+    #         G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X for Ray jobs. For more information, see
+    #         <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html#create-job">Defining job properties for Spark jobs
     #         </a>
     #            </p>
     #   @return [String]
@@ -15034,7 +17215,7 @@ module Aws::Glue
     #            <p>For more information about the available Glue versions and corresponding
     #         Spark and Python versions, see <a href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a> in the developer
     #         guide.</p>
-    #            <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>
+    #            <p>If not provided in the update request, the Glue version retains the value from the existing job definition.</p>
     #   @return [String]
     # @!attribute code_gen_configuration_nodes
     #   <p>The representation of a directed acyclic graph on which both the Glue Studio visual component and Glue Studio code generation is based.</p>
@@ -15220,8 +17401,8 @@ module Aws::Glue
     #   <p>The desired minimum number of partitions to read from Kafka. The default value is null, which means that the number of spark partitions is equal to the number of Kafka partitions.</p>
     #   @return [Integer]
     # @!attribute include_headers
-    #   <p>Whether to include the Kafka headers. When the option is set to "true", the data output will contain an additional column named "glue_streaming_kafka_headers" 
-    #             with type <code>Array[Struct(key: String, value: String)]</code>. The default value is "false". 
+    #   <p>Whether to include the Kafka headers. When the option is set to "true", the data output will contain an additional column named "glue_streaming_kafka_headers"
+    #             with type <code>Array[Struct(key: String, value: String)]</code>. The default value is "false".
     #         This option is available in Glue version 3.0 or later only.</p>
     #   @return [Boolean]
     # @!attribute add_record_timestamp
@@ -15342,7 +17523,7 @@ module Aws::Glue
     #   <p>The timestamp of the record in the Kinesis data stream to start reading data from. The possible values are a timestamp string in UTC format of the pattern <code>yyyy-mm-ddTHH:MM:SSZ</code> (where Z represents a UTC timezone offset with a +/-. For example: "2023-04-04T08:00:00+08:00"). </p>
     #   @return [Time]
     # @!attribute fanout_consumer_arn
-    #   <p>The Amazon Resource Name (ARN) of the Kinesis Data Streams enhanced fan-out consumer. When specified, enables enhanced fan-out for 
+    #   <p>The Amazon Resource Name (ARN) of the Kinesis Data Streams enhanced fan-out consumer. When specified, enables enhanced fan-out for
     #         dedicated throughput and lower latency data consumption.</p>
     #   @return [String]
     class KinesisStreamingSourceOptions < Struct.new(
@@ -15478,6 +17659,36 @@ module Aws::Glue
     class LineageConfiguration < Struct.new(
       nil,
       :crawler_lineage_settings,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    #   @return [String]
+    class ListAssetTypesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The list of asset type items.</p>
+    #   @return [Array<Types::AssetTypeItem>]
+    # @!attribute next_token
+    #   <p>A continuation token, present if the current segment is not the last.</p>
+    #   @return [String]
+    class ListAssetTypesResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15720,6 +17931,40 @@ module Aws::Glue
 
     # @!attribute filter
     #   <p>The filter criteria.</p>
+    #   @return [Types::DataQualityResultsV2FilterCriteria]
+    # @!attribute next_token
+    #   <p>A pagination token to retrieve the next page of results.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return. If you don't specify a value, the operation uses the default number of results.</p>
+    #   @return [Integer]
+    class ListDataQualityResultsV2Request < Struct.new(
+      nil,
+      :filter,
+      :next_token,
+      :max_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute results
+    #   <p>A list of <code>DataQualityResultsV2Description</code> objects.</p>
+    #   @return [Array<Types::DataQualityResultsV2Description>]
+    # @!attribute next_token
+    #   <p>A pagination token, if more results are available.</p>
+    #   @return [String]
+    class ListDataQualityResultsV2Response < Struct.new(
+      nil,
+      :results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filter
+    #   <p>The filter criteria.</p>
     #   @return [Types::DataQualityRuleRecommendationRunFilter]
     # @!attribute next_token
     #   <p>A paginated token to offset the results.</p>
@@ -15727,11 +17972,15 @@ module Aws::Glue
     # @!attribute max_results
     #   <p>The maximum number of results to return.</p>
     #   @return [Integer]
+    # @!attribute tags
+    #   <p>A list of key-value pair tags to filter recommendation runs.</p>
+    #   @return [Hash<String, String>]
     class ListDataQualityRuleRecommendationRunsRequest < Struct.new(
       nil,
       :filter,
       :next_token,
       :max_results,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -15986,6 +18235,206 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    #   @return [String]
+    class ListFormTypesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The list of form type items.</p>
+    #   @return [Array<Types::FormTypeItem>]
+    # @!attribute next_token
+    #   <p>A continuation token, present if the current segment is not the last.</p>
+    #   @return [String]
+    class ListFormTypesResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    #   @return [String]
+    class ListGlossariesRequest < Struct.new(
+      nil,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The list of glossary items.</p>
+    #   @return [Array<Types::GlossaryItem>]
+    # @!attribute next_token
+    #   <p>A continuation token, present if the current segment is not the last.</p>
+    #   @return [String]
+    class ListGlossariesResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute glossary_identifier
+    #   <p>The unique identifier of the glossary whose terms to list.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    #   @return [String]
+    class ListGlossaryTermsRequest < Struct.new(
+      nil,
+      :glossary_identifier,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The list of glossary term items.</p>
+    #   @return [Array<Types::GlossaryTermItem>]
+    # @!attribute next_token
+    #   <p>A continuation token, present if the current segment is not the last.</p>
+    #   @return [String]
+    class ListGlossaryTermsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute marker
+    #   <p>This is the pagination token for next page, initial value is <code>null</code>.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>A list of filters, supported filter Key is <code>SourceArn</code> and <code>TargetArn</code>.</p>
+    #   @return [Array<Types::IntegrationResourcePropertyFilter>]
+    # @!attribute max_records
+    #   <p>This is total number of items to be evaluated.</p>
+    #   @return [Integer]
+    class ListIntegrationResourcePropertiesRequest < Struct.new(
+      nil,
+      :marker,
+      :filters,
+      :max_records,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute integration_resource_property_list
+    #   <p>A list of integration resource property meeting the filter criteria.</p>
+    #   @return [Array<Types::IntegrationResourceProperty>]
+    # @!attribute marker
+    #   <p>This is the pagination token for the next page.</p>
+    #   @return [String]
+    class ListIntegrationResourcePropertiesResponse < Struct.new(
+      nil,
+      :integration_resource_property_list,
+      :marker,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute marker
+    #   <p>The pagination token for the next page of results. The initial value is <code>null</code>.</p>
+    #   @return [String]
+    # @!attribute filters
+    #   <p>A list of filters. Supported filter keys are <code>SourceArn</code>, <code>TargetArn</code>, <code>SourceTableName</code>, and <code>TargetTableName</code>.</p>
+    #   @return [Array<Types::IntegrationTablePropertiesFilter>]
+    # @!attribute max_records
+    #   <p>The maximum number of records to return in the response.</p>
+    #   @return [Integer]
+    class ListIntegrationTablePropertiesRequest < Struct.new(
+      nil,
+      :marker,
+      :filters,
+      :max_records,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute integration_table_properties_list
+    #   <p>A list of integration table properties meeting the filter criteria.</p>
+    #   @return [Array<Types::IntegrationTableProperties>]
+    # @!attribute marker
+    #   <p>The pagination token for the next page. Returns <code>null</code> if there are no more results.</p>
+    #   @return [String]
+    class ListIntegrationTablePropertiesResponse < Struct.new(
+      nil,
+      :integration_table_properties_list,
+      :marker,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form to list items from.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    #   @return [String]
+    class ListIterableFormsRequest < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute items
+    #   <p>The list of iterable form items.</p>
+    #   @return [Array<Types::IterableFormListItem>]
+    # @!attribute next_token
+    #   <p>A continuation token, present if the current segment is not the last.</p>
+    #   @return [String]
+    class ListIterableFormsResponse < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute next_token
     #   <p>A continuation token, if this is a continuation request.</p>
     #   @return [String]
@@ -16059,6 +18508,48 @@ module Aws::Glue
     class ListMLTransformsResponse < Struct.new(
       nil,
       :transform_ids,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>
+    #   @return [String]
+    # @!attribute database_name
+    #   <p>The database where the table resides.</p>
+    #   @return [String]
+    # @!attribute table_name
+    #   <p>The name of the materialized view.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum size of the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    #   @return [String]
+    class ListMaterializedViewRefreshTaskRunsRequest < Struct.new(
+      nil,
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :max_results,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute materialized_view_refresh_task_runs
+    #   <p>The results of the ListMaterializedViewRefreshTaskRuns action. </p>
+    #   @return [Array<Types::MaterializedViewRefreshTaskRun>]
+    # @!attribute next_token
+    #   <p>A continuation token, if not all task run IDs have yet been returned.</p>
+    #   @return [String]
+    class ListMaterializedViewRefreshTaskRunsResponse < Struct.new(
+      nil,
+      :materialized_view_refresh_task_runs,
       :next_token,
       keyword_init: true
     )
@@ -16741,6 +19232,115 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Exception thrown when stopping a task that is not in running state.</p>
+    # @!attribute message
+    #   <p>A message describing the problem.</p>
+    #   @return [String]
+    class MaterializedViewRefreshTaskNotRunningException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The object that shows the details of the materialized view refresh task run.</p>
+    # @!attribute customer_id
+    #   <p>The Amazon Web Services account ID.</p>
+    #   @return [String]
+    # @!attribute materialized_view_refresh_task_run_id
+    #   <p>The identifier of the materialized view refresh task run.</p>
+    #   @return [String]
+    # @!attribute database_name
+    #   <p>The database where the table resides.</p>
+    #   @return [String]
+    # @!attribute table_name
+    #   <p>The name of the materialized view.</p>
+    #   @return [String]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the account ID is used by default.</p>
+    #   @return [String]
+    # @!attribute role
+    #   <p>The IAM role that the service assumes to run the materialized view refresh task.</p>
+    #   @return [String]
+    # @!attribute status
+    #   <p>The status of the task run.</p>
+    #   @return [String]
+    # @!attribute creation_time
+    #   <p>The time that this task was created.</p>
+    #   @return [Time]
+    # @!attribute last_updated
+    #   <p>The last point in time when this task was modified.</p>
+    #   @return [Time]
+    # @!attribute start_time
+    #   <p>The start time of the task.</p>
+    #   @return [Time]
+    # @!attribute end_time
+    #   <p>The end time of the task.</p>
+    #   @return [Time]
+    # @!attribute error_message
+    #   <p>The error message for the job.</p>
+    #   @return [String]
+    # @!attribute dpu_seconds
+    #   <p>The calculated DPU usage in seconds for all autoscaled workers.</p>
+    #   @return [Float]
+    # @!attribute refresh_type
+    #   <p>The type of the refresh task run. Either FULL or INCREMENTAL.</p>
+    #   @return [String]
+    # @!attribute processed_bytes
+    #   <p>The number of bytes the refresh task run has scanned to refresh the materialized view.</p>
+    #   @return [Integer]
+    class MaterializedViewRefreshTaskRun < Struct.new(
+      nil,
+      :customer_id,
+      :materialized_view_refresh_task_run_id,
+      :database_name,
+      :table_name,
+      :catalog_id,
+      :role,
+      :status,
+      :creation_time,
+      :last_updated,
+      :start_time,
+      :end_time,
+      :error_message,
+      :dpu_seconds,
+      :refresh_type,
+      :processed_bytes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:dpu_seconds] = 0 unless options.key?(:dpu_seconds)
+        super
+      end
+    end
+
+    # <p>Exception thrown when a task is already in running state.</p>
+    # @!attribute message
+    #   <p>A message describing the problem.</p>
+    #   @return [String]
+    class MaterializedViewRefreshTaskRunningException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Exception thrown when a task is already in stopping state.</p>
+    # @!attribute message
+    #   <p>A message describing the problem.</p>
+    #   @return [String]
+    class MaterializedViewRefreshTaskStoppingException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Specifies a transform that merges a <code>DynamicFrame</code> with a staging <code>DynamicFrame</code> based on the specified primary keys to identify records. Duplicate records (records with the same primary keys) are not de-duplicated. </p>
     # @!attribute name
     #   <p>The name of the transform node.</p>
@@ -16879,7 +19479,7 @@ module Aws::Glue
     #   <p>Selects source tables for the integration using Maxwell filter syntax.</p>
     #   @return [String]
     # @!attribute integration_config
-    #   <p>Properties associated with the integration.</p>
+    #   <p>The configuration settings for the integration. Currently, only the RefreshInterval can be modified. </p>
     #   @return [Types::IntegrationConfig]
     # @!attribute integration_name
     #   <p>A unique name for an integration in Glue.</p>
@@ -16957,7 +19557,7 @@ module Aws::Glue
     #   <p>Selects source tables for the integration using Maxwell filter syntax.</p>
     #   @return [String]
     # @!attribute integration_config
-    #   <p>Properties associated with the integration.</p>
+    #   <p>The updated configuration settings for the integration.</p>
     #   @return [Types::IntegrationConfig]
     class ModifyIntegrationResponse < Struct.new(
       nil,
@@ -17179,7 +19779,7 @@ module Aws::Glue
 
     # <p>A structure containing properties for OAuth2 authentication.</p>
     # @!attribute o_auth2_grant_type
-    #   <p>The OAuth2 grant type. For example, <code>AUTHORIZATION_CODE</code>, <code>JWT_BEARER</code>, or <code>CLIENT_CREDENTIALS</code>.</p>
+    #   <p>The OAuth2 grant type. For example, <code>AUTHORIZATION_CODE</code>, <code>JWT_BEARER</code>, <code>REFRESH_TOKEN</code>, or <code>CLIENT_CREDENTIALS</code>.</p>
     #   @return [String]
     # @!attribute o_auth2_client_application
     #   <p>The client application type. For example, AWS_MANAGED or USER_MANAGED.</p>
@@ -17203,7 +19803,7 @@ module Aws::Glue
 
     # <p>A structure containing properties for OAuth2 in the CreateConnection request.</p>
     # @!attribute o_auth2_grant_type
-    #   <p>The OAuth2 grant type in the CreateConnection request. For example, <code>AUTHORIZATION_CODE</code>, <code>JWT_BEARER</code>, or <code>CLIENT_CREDENTIALS</code>.</p>
+    #   <p>The OAuth2 grant type in the CreateConnection request. For example, <code>AUTHORIZATION_CODE</code>, <code>JWT_BEARER</code>, <code>REFRESH_TOKEN</code>, or <code>CLIENT_CREDENTIALS</code>.</p>
     #   @return [String]
     # @!attribute o_auth2_client_application
     #   <p>The client application type in the CreateConnection request. For example, <code>AWS_MANAGED</code> or <code>USER_MANAGED</code>.</p>
@@ -17228,6 +19828,38 @@ module Aws::Glue
       :token_url_parameters_map,
       :authorization_code_properties,
       :o_auth2_credentials,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for writing observation results.</p>
+    # @!attribute write_observation_results_enabled
+    #   <p>Set to true to write observation results.</p>
+    #   @return [Boolean]
+    # @!attribute catalog_table_config
+    #   <p>The Glue Data Catalog table configuration for storing the observation results.</p>
+    #   @return [Types::CatalogTableConfigOptions]
+    class ObservationResultsOptions < Struct.new(
+      nil,
+      :write_observation_results_enabled,
+      :catalog_table_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Offset-based pagination configuration that defines how to handle pagination using numeric offsets and limits.</p>
+    # @!attribute offset_parameter
+    #   <p>The parameter name used to specify the starting position or offset for retrieving results.</p>
+    #   @return [Types::ExtractedParameter]
+    # @!attribute limit_parameter
+    #   <p>The parameter name used to specify the maximum number of results to return per page.</p>
+    #   @return [Types::ExtractedParameter]
+    class OffsetConfiguration < Struct.new(
+      nil,
+      :offset_parameter,
+      :limit_parameter,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17463,6 +20095,22 @@ module Aws::Glue
       :num_right_chars_to_exclude,
       :detection_parameters,
       :detection_sensitivity,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that defines how to handle paginated responses from REST APIs, supporting different pagination strategies used by various services.</p>
+    # @!attribute cursor_configuration
+    #   <p>Configuration for cursor-based pagination, where the API provides a cursor or token to retrieve the next page of results.</p>
+    #   @return [Types::CursorConfiguration]
+    # @!attribute offset_configuration
+    #   <p>Configuration for offset-based pagination, where the API uses numeric offsets and limits to control which results are returned.</p>
+    #   @return [Types::OffsetConfiguration]
+    class PaginationConfiguration < Struct.new(
+      nil,
+      :cursor_configuration,
+      :offset_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17770,6 +20418,26 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for writing profiling results.</p>
+    # @!attribute write_profiling_results_enabled
+    #   <p>Set to true to write profiling results.</p>
+    #   @return [Boolean]
+    # @!attribute catalog_table_config
+    #   <p>The Glue Data Catalog table configuration for storing the profiling results.</p>
+    #   @return [Types::CatalogTableConfigOptions]
+    # @!attribute distribution_results
+    #   <p>The configuration for writing distribution results.</p>
+    #   @return [Types::DistributionResultsOptions]
+    class ProfilingResultsOptions < Struct.new(
+      nil,
+      :write_profiling_results_enabled,
+      :catalog_table_config,
+      :distribution_results,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>An object that defines a connection type for a compute environment.</p>
     # @!attribute name
     #   <p>The name of the property.</p>
@@ -17792,6 +20460,12 @@ module Aws::Glue
     # @!attribute data_operation_scopes
     #   <p>Indicates which data operations are applicable to the property.</p>
     #   @return [Array<String>]
+    # @!attribute key_override
+    #   <p>A key name to use when sending this property in API requests, if different from the display name.</p>
+    #   @return [String]
+    # @!attribute property_location
+    #   <p>Specifies where this property should be included in REST requests, such as in headers, query parameters, or request body.</p>
+    #   @return [String]
     class Property < Struct.new(
       nil,
       :name,
@@ -17801,6 +20475,8 @@ module Aws::Glue
       :property_types,
       :allowed_values,
       :data_operation_scopes,
+      :key_override,
+      :property_location,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -17831,6 +20507,249 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute dimensions
+    #   <p>The dimensions for the result.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute tags
+    #   <p>The tags for the result.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute execution_started_on
+    #   <p>The time execution started for the result.</p>
+    #   @return [Time]
+    # @!attribute execution_completed_on
+    #   <p>The time execution completed for the result.</p>
+    #   @return [Time]
+    # @!attribute score
+    #   <p>The score for the result.</p>
+    #   @return [Float]
+    # @!attribute rule_results
+    #   <p>The rule level results.</p>
+    #   @return [Array<Types::DataQualityRuleResult>]
+    # @!attribute analyzer_results
+    #   <p>The analyzer level results.</p>
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    # @!attribute observations
+    #   <p>The observations for the result.</p>
+    #   @return [Array<Types::DataQualityObservation>]
+    # @!attribute aggregated_metrics
+    #   <p>The aggregated metrics for the result.</p>
+    #   @return [Types::DataQualityAggregatedMetrics]
+    # @!attribute statistics
+    #   <p>The statistics for the result.</p>
+    #   @return [Array<Types::StatisticSummary>]
+    # @!attribute run_configuration
+    #   <p>The run configuration for the result.</p>
+    #   @return [Types::DataQualityConfigurationV2]
+    # @!attribute client_token
+    #   <p>The client token for the request.</p>
+    #   @return [String]
+    # @!attribute evaluation_context
+    #   <p>The evaluation context for the result.</p>
+    #   @return [String]
+    # @!attribute descriptors
+    #   <p>The descriptors for the result.</p>
+    #   @return [Hash<String, String>]
+    # @!attribute ruleset_name
+    #   <p>The ruleset name for the result.</p>
+    #   @return [String]
+    # @!attribute data_quality_security_configuration
+    #   <p>The security configuration for the result.</p>
+    #   @return [String]
+    # @!attribute telemetry
+    #   @return [Types::DataQualityTelemetry]
+    class PublishDataQualityResultV2Request < Struct.new(
+      nil,
+      :dimensions,
+      :tags,
+      :execution_started_on,
+      :execution_completed_on,
+      :score,
+      :rule_results,
+      :analyzer_results,
+      :observations,
+      :aggregated_metrics,
+      :statistics,
+      :run_configuration,
+      :client_token,
+      :evaluation_context,
+      :descriptors,
+      :ruleset_name,
+      :data_quality_security_configuration,
+      :telemetry,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute result_id
+    #   <p>The ID of the result.</p>
+    #   @return [String]
+    class PublishDataQualityResultV2Response < Struct.new(
+      nil,
+      :result_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_type_id
+    #   <p>The identifier of the asset type for the asset.</p>
+    #   @return [String]
+    # @!attribute identifier
+    #   <p>The unique identifier of the asset. If an asset with this identifier already exists, it is updated.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the asset.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the asset.</p>
+    #   @return [String]
+    # @!attribute forms
+    #   <p>The forms to set on the asset, keyed by form name. Each entry specifies the form type and its JSON content.</p>
+    #   @return [Hash<String, Types::AssetFormEntry>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class PutAssetRequest < Struct.new(
+      nil,
+      :asset_type_id,
+      :identifier,
+      :name,
+      :description,
+      :forms,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the asset.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the asset.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the asset.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The timestamp at which the asset was created.</p>
+    #   @return [Time]
+    # @!attribute forms
+    #   <p>The forms attached to the asset, keyed by form name.</p>
+    #   @return [Hash<String, Types::AssetFormEntry>]
+    class PutAssetResponse < Struct.new(
+      nil,
+      :id,
+      :name,
+      :description,
+      :created_at,
+      :forms,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the asset type.</p>
+    #   @return [String]
+    # @!attribute forms
+    #   <p>The forms that make up the asset type, keyed by form name. Each entry references the form type that defines the form's schema.</p>
+    #   @return [Hash<String, Types::AssetTypeFormReference>]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class PutAssetTypeRequest < Struct.new(
+      nil,
+      :name,
+      :forms,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the asset type.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the asset type.</p>
+    #   @return [String]
+    # @!attribute forms
+    #   <p>The forms that make up the asset type, keyed by form name.</p>
+    #   @return [Hash<String, Types::AssetTypeFormReference>]
+    class PutAssetTypeResponse < Struct.new(
+      nil,
+      :id,
+      :name,
+      :forms,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset to attach the form to.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form. When specified along with <code>itemIdentifier</code>, the attachment targets an item within the iterable form rather than the asset itself.</p>
+    #   @return [String]
+    # @!attribute item_identifier
+    #   <p>The identifier of the item within the iterable form. Required when <code>iterableFormName</code> is specified.</p>
+    #   @return [String]
+    # @!attribute attachment_name
+    #   <p>The name of the attachment.</p>
+    #   @return [String]
+    # @!attribute content
+    #   <p>The JSON content of the form, conforming to the schema of the specified form type.</p>
+    #   @return [String]
+    # @!attribute form_type_id
+    #   <p>The identifier of the form type for this attachment.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class PutAttachmentRequest < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
+      :attachment_name,
+      :content,
+      :form_type_id,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute asset_identifier
+    #   <p>The unique identifier of the asset.</p>
+    #   @return [String]
+    # @!attribute iterable_form_name
+    #   <p>The name of the iterable form, if the attachment targets an item.</p>
+    #   @return [String]
+    # @!attribute item_identifier
+    #   <p>The identifier of the item within the iterable form, if applicable.</p>
+    #   @return [String]
+    # @!attribute attachment_name
+    #   <p>The name of the attachment.</p>
+    #   @return [String]
+    # @!attribute form_type_id
+    #   <p>The identifier of the form type for this attachment.</p>
+    #   @return [String]
+    class PutAttachmentResponse < Struct.new(
+      nil,
+      :asset_identifier,
+      :iterable_form_name,
+      :item_identifier,
+      :attachment_name,
+      :form_type_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute catalog_id
     #   <p>The ID of the Data Catalog to set the security configuration for. If none is provided, the
     #         Amazon Web Services account ID is used by default.</p>
@@ -17854,6 +20773,41 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute export_setting
+    #   <p>The export setting for the data catalog. Specify <code>ENABLED</code> to start exporting catalog metadata to S3 Tables, or <code>DISABLED</code> to stop exporting. This field is required.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration for the exported data. If not specified, the default encryption settings are used.</p>
+    #   @return [Types::ExportEncryptionConfiguration]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class PutDataCatalogExportConfigurationInput < Struct.new(
+      nil,
+      :export_setting,
+      :encryption_configuration,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The export configuration returned by the <code>PutDataCatalogExportConfiguration</code> operation.</p>
+    # @!attribute export_setting
+    #   <p>The export setting for the data catalog.</p>
+    #   @return [String]
+    # @!attribute encryption_configuration
+    #   <p>The encryption configuration for the exported data.</p>
+    #   @return [Types::ExportEncryptionConfiguration]
+    class PutDataCatalogExportConfigurationOutput < Struct.new(
+      nil,
+      :export_setting,
+      :encryption_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute profile_id
     #   <p>The ID of the data quality monitoring profile to annotate.</p>
     #   @return [String]
@@ -17872,6 +20826,44 @@ module Aws::Glue
     # <p>Left blank.</p>
     class PutDataQualityProfileAnnotationResponse < Struct.new(
       nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute name
+    #   <p>The name of the form type. Must start with an uppercase letter.</p>
+    #   @return [String]
+    # @!attribute schema
+    #   <p>The Smithy IDL schema definition for the form type.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class PutFormTypeRequest < Struct.new(
+      nil,
+      :name,
+      :schema,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The identifier of the form type.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the form type.</p>
+    #   @return [String]
+    # @!attribute schema
+    #   <p>The Smithy IDL schema of the form type.</p>
+    #   @return [String]
+    class PutFormTypeResponse < Struct.new(
+      nil,
+      :id,
+      :name,
+      :schema,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18078,6 +21070,8 @@ module Aws::Glue
     end
 
     # <p>A structure used as a protocol between query engines and Lake Formation or Glue. Contains both a Lake Formation generated authorization identifier and information from the request's authorization context.</p>
+    #          <p>For more information about how to utilize QuerySessionContext, see
+    #           <a href="https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html">Lake Formation workflow for application integration API operations</a> in the developer guide.</p>
     # @!attribute query_id
     #   <p>A unique identifier generated by the query engine for the query.</p>
     #   @return [String]
@@ -18100,6 +21094,18 @@ module Aws::Glue
       :cluster_id,
       :query_authorization_id,
       :additional_context,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A structure that describes the default row-level security policy of a table.</p>
+    # @!attribute default_rls_policy
+    #   <p>The name of the default row-level security policy applied to the table.</p>
+    #   @return [String]
+    class RLSProperties < Struct.new(
+      nil,
+      :default_rls_policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18251,6 +21257,53 @@ module Aws::Glue
       :redshift_tmp_dir,
       :tmp_dir_iam_role,
       :upsert_redshift_options,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute connection_type
+    #   <p>The name of the connection type. Must be between 1 and 255 characters and must be prefixed with "REST-" to indicate it is a REST-based connector.</p>
+    #   @return [String]
+    # @!attribute integration_type
+    #   <p>The integration type for the connection. Currently only "REST" protocol is supported.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>A description of the connection type. Can be up to 2048 characters and provides details about the purpose and functionality of the connection type.</p>
+    #   @return [String]
+    # @!attribute connection_properties
+    #   <p>Defines the base URL and additional request parameters needed during connection creation for this connection type.</p>
+    #   @return [Types::ConnectionPropertiesConfiguration]
+    # @!attribute connector_authentication_configuration
+    #   <p>Defines the supported authentication types and required properties for this connection type, including Basic, OAuth2, and Custom authentication methods.</p>
+    #   @return [Types::ConnectorAuthenticationConfiguration]
+    # @!attribute rest_configuration
+    #   <p>Defines the HTTP request and response configuration, validation endpoint, and entity configurations for REST API interactions.</p>
+    #   @return [Types::RestConfiguration]
+    # @!attribute tags
+    #   <p>The tags you assign to the connection type.</p>
+    #   @return [Hash<String, String>]
+    class RegisterConnectionTypeRequest < Struct.new(
+      nil,
+      :connection_type,
+      :integration_type,
+      :description,
+      :connection_properties,
+      :connector_authentication_configuration,
+      :rest_configuration,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the Amazon Resource Name (ARN) of the newly registered connection type.</p>
+    # @!attribute connection_type_arn
+    #   <p>The Amazon Resource Name (ARN) of the registered connection type. This unique identifier can be used to reference the connection type in other Glue operations.</p>
+    #   @return [String]
+    class RegisterConnectionTypeResponse < Struct.new(
+      nil,
+      :connection_type_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18535,6 +21588,58 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration that defines how to parse JSON responses from REST API calls, including paths to result data and error information.</p>
+    # @!attribute result_path
+    #   <p>The JSON path expression that identifies where the actual result data is located within the API response.</p>
+    #   @return [String]
+    # @!attribute error_path
+    #   <p>The JSON path expression that identifies where error information is located within API responses when requests fail.</p>
+    #   @return [String]
+    class ResponseConfiguration < Struct.new(
+      nil,
+      :result_path,
+      :error_path,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that defines how to extract values from HTTP response content or headers for use in subsequent requests or parameter mapping.</p>
+    # @!attribute content_path
+    #   <p>A JSON path expression that specifies how to extract a value from the response body content.</p>
+    #   @return [String]
+    # @!attribute header_key
+    #   <p>The name of an HTTP response header from which to extract the value.</p>
+    #   @return [String]
+    class ResponseExtractionMapping < Struct.new(
+      nil,
+      :content_path,
+      :header_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration that defines HTTP request and response handling, validation endpoints, and entity configurations for REST API interactions.</p>
+    # @!attribute global_source_configuration
+    #   <p>Global configuration settings that apply to all REST API requests for this connection type, including common request methods, paths, and parameters.</p>
+    #   @return [Types::SourceConfiguration]
+    # @!attribute validation_endpoint_configuration
+    #   <p>Configuration for the endpoint used to validate connection credentials and test connectivity during connection creation.</p>
+    #   @return [Types::SourceConfiguration]
+    # @!attribute entity_configurations
+    #   <p>A map of entity configurations that define how to interact with different data entities available through the REST API, including their schemas and access patterns.</p>
+    #   @return [Hash<String, Types::EntityConfiguration>]
+    class RestConfiguration < Struct.new(
+      nil,
+      :global_source_configuration,
+      :validation_endpoint_configuration,
+      :entity_configurations,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of the workflow to resume.</p>
     #   @return [String]
@@ -18608,6 +21713,26 @@ module Aws::Glue
       :name,
       :inputs,
       :group_filters_list,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The configuration for writing row-level evaluation results.</p>
+    # @!attribute max_rows_to_write
+    #   <p>The maximum number of rows to write in the results.</p>
+    #   @return [Integer]
+    # @!attribute result_type
+    #   <p>The result type to include in the row-level results output.</p>
+    #   @return [String]
+    # @!attribute catalog_table_config
+    #   <p>The Glue Data Catalog table configuration for storing the results.</p>
+    #   @return [Types::CatalogTableConfigOptions]
+    class RowLevelResultsOptions < Struct.new(
+      nil,
+      :max_rows_to_write,
+      :result_type,
+      :catalog_table_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -18821,7 +21946,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::CatalogSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 catalog target. 
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 catalog target.
     #         When set to <code>true</code>, data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3CatalogTarget < Struct.new(
@@ -18950,7 +22075,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::CatalogSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Delta catalog target. When set to <code>true</code>, 
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Delta catalog target. When set to <code>true</code>,
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     # @!attribute output_schemas
@@ -19001,7 +22126,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Delta direct target. When set to <code>true</code>, 
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Delta direct target. When set to <code>true</code>,
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3DeltaDirectTarget < Struct.new(
@@ -19099,7 +22224,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 direct target. When set to <code>true</code>, 
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 direct target. When set to <code>true</code>,
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     # @!attribute output_schemas
@@ -19221,7 +22346,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Glue Parquet target. When set to <code>true</code>, 
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Glue Parquet target. When set to <code>true</code>,
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3GlueParquetTarget < Struct.new(
@@ -19262,7 +22387,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::CatalogSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi catalog target. When set to <code>true</code>, 
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi catalog target. When set to <code>true</code>,
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     # @!attribute output_schemas
@@ -19313,7 +22438,7 @@ module Aws::Glue
     #   <p>A policy that specifies update behavior for the crawler.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi direct target. When set to <code>true</code>, 
+    #   <p>Specifies whether to automatically enable data quality evaluation for the S3 Hudi direct target. When set to <code>true</code>,
     #         data quality checks are performed automatically during the write operation.</p>
     #   @return [Types::AutoDataQuality]
     class S3HudiDirectTarget < Struct.new(
@@ -19468,7 +22593,7 @@ module Aws::Glue
     #   <p>Defines how schema changes are handled when writing data to the Iceberg table.</p>
     #   @return [Types::DirectSchemaChangePolicy]
     # @!attribute auto_data_quality
-    #   <p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality 
+    #   <p>Specifies configuration options for automatic data quality evaluation in Glue jobs. This structure enables automated data quality
     #         checks and monitoring during ETL operations, helping to ensure data integrity and reliability without manual intervention.</p>
     #   @return [Types::AutoDataQuality]
     # @!attribute compression
@@ -19887,6 +23012,198 @@ module Aws::Glue
       end
     end
 
+    # @!attribute search_text
+    #   <p>The text to search for. At least one of <code>searchText</code> or <code>filterClause</code> must be provided.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    #   @return [Integer]
+    # @!attribute next_token
+    #   <p>A continuation token, if this is a continuation call.</p>
+    #   @return [String]
+    # @!attribute sort
+    #   <p>The sort criteria for the search results.</p>
+    #   @return [Types::SearchSort]
+    # @!attribute filter_clause
+    #   <p>The filter clause to apply to the search. Supports nested AND/OR logic with attribute-level and map-level filters.</p>
+    #   @return [Types::SearchFilterClause]
+    class SearchAssetsInput < Struct.new(
+      nil,
+      :search_text,
+      :max_results,
+      :next_token,
+      :sort,
+      :filter_clause,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The search results returned by the <code>SearchAssets</code> operation.</p>
+    # @!attribute items
+    #   <p>The list of assets matching the search criteria.</p>
+    #   @return [Array<Types::SearchResultItem>]
+    # @!attribute next_token
+    #   <p>A continuation token, present if the current segment is not the last.</p>
+    #   @return [String]
+    class SearchAssetsOutput < Struct.new(
+      nil,
+      :items,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter that compares an attribute value using an operator.</p>
+    # @!attribute attribute
+    #   <p>The attribute name to filter on.</p>
+    #   @return [String]
+    # @!attribute operator
+    #   <p>The comparison operator. Valid values are <code>equals</code>, <code>greaterThan</code>, <code>greaterThanOrEquals</code>, <code>lessThan</code>, <code>lessThanOrEquals</code>, and <code>notExists</code>.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value to compare against.</p>
+    #   @return [Types::SearchFilterValue]
+    class SearchAttributeFilter < Struct.new(
+      nil,
+      :attribute,
+      :operator,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A filter clause that supports nested boolean logic. Exactly one of <code>andAllFilters</code>, <code>orAnyFilters</code>, <code>attributeFilter</code>, or <code>mapFilter</code> must be specified.</p>
+    # @!attribute and_all_filters
+    #   <p>A list of filter clauses that must all match (logical AND).</p>
+    #   @return [Array<Types::SearchFilterClause>]
+    # @!attribute or_any_filters
+    #   <p>A list of filter clauses where at least one must match (logical OR).</p>
+    #   @return [Array<Types::SearchFilterClause>]
+    # @!attribute attribute_filter
+    #   <p>A filter on a single attribute value.</p>
+    #   @return [Types::SearchAttributeFilter]
+    # @!attribute map_filter
+    #   <p>A filter on a map attribute's key-value pair.</p>
+    #   @return [Types::SearchMapFilter]
+    class SearchFilterClause < Struct.new(
+      :and_all_filters,
+      :or_any_filters,
+      :attribute_filter,
+      :map_filter,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class AndAllFilters < SearchFilterClause; end
+      class OrAnyFilters < SearchFilterClause; end
+      class AttributeFilter < SearchFilterClause; end
+      class MapFilter < SearchFilterClause; end
+      class Unknown < SearchFilterClause; end
+    end
+
+    # <p>A filter value. Exactly one of <code>stringValue</code> or <code>longValue</code> must be specified.</p>
+    # @!attribute string_value
+    #   <p>A string filter value.</p>
+    #   @return [String]
+    # @!attribute long_value
+    #   <p>A long integer filter value.</p>
+    #   @return [Integer]
+    class SearchFilterValue < Struct.new(
+      :string_value,
+      :long_value,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class StringValue < SearchFilterValue; end
+      class LongValue < SearchFilterValue; end
+      class Unknown < SearchFilterValue; end
+    end
+
+    # <p>A filter on a map attribute's key-value pair.</p>
+    # @!attribute attribute
+    #   <p>The map attribute name to filter on.</p>
+    #   @return [String]
+    # @!attribute key
+    #   <p>The key within the map attribute to filter on.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value to compare against.</p>
+    #   @return [Types::SearchMapFilterValue]
+    class SearchMapFilter < Struct.new(
+      nil,
+      :attribute,
+      :key,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>A map filter value. Currently supports string comparison only.</p>
+    # @!attribute string_value
+    #   <p>A string filter value.</p>
+    #   @return [String]
+    class SearchMapFilterValue < Struct.new(
+      :string_value,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class StringValue < SearchMapFilterValue; end
+      class Unknown < SearchMapFilterValue; end
+    end
+
+    # <p>A single search result item representing a matched asset.</p>
+    # @!attribute id
+    #   <p>The unique identifier of the matched asset.</p>
+    #   @return [String]
+    # @!attribute asset_name
+    #   <p>The name of the matched asset.</p>
+    #   @return [String]
+    # @!attribute asset_description
+    #   <p>The description of the matched asset.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp at which the matched asset was last updated.</p>
+    #   @return [Time]
+    # @!attribute asset_type_id
+    #   <p>The identifier of the asset type for the matched asset.</p>
+    #   @return [String]
+    class SearchResultItem < Struct.new(
+      nil,
+      :id,
+      :asset_name,
+      :asset_description,
+      :updated_at,
+      :asset_type_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The sort criteria for search results.</p>
+    # @!attribute attribute
+    #   <p>The attribute to sort by.</p>
+    #   @return [String]
+    # @!attribute order
+    #   <p>The sort order. Valid values are <code>ASCENDING</code> and <code>DESCENDING</code>.</p>
+    #   @return [String]
+    class SearchSort < Struct.new(
+      nil,
+      :attribute,
+      :order,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute catalog_id
     #   <p>A unique identifier, consisting of <code>
     #                  <i>account_id</i>
@@ -20096,14 +23413,14 @@ module Aws::Glue
     #   <p>The code execution progress of the session.</p>
     #   @return [Float]
     # @!attribute max_capacity
-    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs. 
+    #   <p>The number of Glue data processing units (DPUs) that can be allocated when the job runs.
     #         A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB memory. </p>
     #   @return [Float]
     # @!attribute security_configuration
     #   <p>The name of the SecurityConfiguration structure to be used with the session.</p>
     #   @return [String]
     # @!attribute glue_version
-    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports. 
+    #   <p>The Glue version determines the versions of Apache Spark and Python that Glue supports.
     #         The GlueVersion must be greater than 2.0.</p>
     #   @return [String]
     # @!attribute number_of_workers
@@ -20127,6 +23444,9 @@ module Aws::Glue
     # @!attribute profile_name
     #   <p>The name of an Glue usage profile associated with the session.</p>
     #   @return [String]
+    # @!attribute session_type
+    #   <p>The type of the session.</p>
+    #   @return [String]
     class Session < Struct.new(
       nil,
       :id,
@@ -20149,6 +23469,7 @@ module Aws::Glue
       :dpu_seconds,
       :idle_timeout,
       :profile_name,
+      :session_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20157,6 +23478,18 @@ module Aws::Glue
         options[:progress] = 0 unless options.key?(:progress)
         super
       end
+    end
+
+    # <p>The session is currently busy processing another request and cannot accept new operations.</p>
+    # @!attribute message
+    #   <p>A message describing the problem.</p>
+    #   @return [String]
+    class SessionBusyException < Struct.new(
+      nil,
+      :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>The <code>SessionCommand</code> that runs the job.</p>
@@ -20170,6 +23503,26 @@ module Aws::Glue
       nil,
       :name,
       :python_version,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the Spark Connect endpoint details for an interactive session, including the URL and authentication credentials.</p>
+    # @!attribute url
+    #   <p>The Spark Connect endpoint URL for the session.</p>
+    #   @return [String]
+    # @!attribute auth_token
+    #   <p>The authentication token to include in requests to the Spark Connect endpoint.</p>
+    #   @return [String]
+    # @!attribute auth_token_expiration_time
+    #   <p>The time at which the authentication token expires.</p>
+    #   @return [Time]
+    class SessionEndpoint < Struct.new(
+      nil,
+      :url,
+      :auth_token,
+      :auth_token_expiration_time,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20367,6 +23720,38 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration that defines how to make requests to endpoints, including request methods, paths, parameters, and response handling.</p>
+    # @!attribute request_method
+    #   <p>The HTTP method to use for requests to this endpoint, such as GET, POST.</p>
+    #   @return [String]
+    # @!attribute request_path
+    #   <p>The URL path for the REST endpoint, which may include parameter placeholders that will be replaced with actual values during requests.</p>
+    #   @return [String]
+    # @!attribute request_parameters
+    #   <p>Configuration for request parameters that should be included in API calls, such as query parameters, headers, or body content.</p>
+    #   @return [Array<Types::ConnectorProperty>]
+    # @!attribute response_configuration
+    #   <p>Configuration that defines how to parse and extract data from API responses, including success and error handling.</p>
+    #   @return [Types::ResponseConfiguration]
+    # @!attribute pagination_configuration
+    #   <p>Configuration for handling paginated responses from the REST API, supporting both cursor-based and offset-based pagination strategies.</p>
+    #   @return [Types::PaginationConfiguration]
+    # @!attribute filter_configuration
+    #   <p>Configuration for applying filter pushdown to REST API requests, defining how filter predicates are translated into query parameters or filter strings.</p>
+    #   @return [Types::FilterConfiguration]
+    class SourceConfiguration < Struct.new(
+      nil,
+      :request_method,
+      :request_path,
+      :request_parameters,
+      :response_configuration,
+      :pagination_configuration,
+      :filter_configuration,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The details for a source control configuration for a job, allowing synchronization of job artifacts to or from a remote repository.</p>
     # @!attribute provider
     #   <p>The provider for the remote repository.</p>
@@ -20427,7 +23812,7 @@ module Aws::Glue
     #   <p>A condition clause used for row-level filtering. Currently unsupported.</p>
     #   @return [String]
     # @!attribute primary_key
-    #   <p>Provide the primary key set for this table. Currently supported specifically for SAP <code>EntityOf</code> entities upon request. Contact 
+    #   <p>Provide the primary key set for this table. Currently supported specifically for SAP <code>EntityOf</code> entities upon request. Contact
     #         Amazon Web Services Support to make this feature available.</p>
     #   @return [Array<String>]
     # @!attribute record_update_field
@@ -20691,10 +24076,14 @@ module Aws::Glue
     # @!attribute table_name
     #   <p>The name of the table for which to start a column statistic task run schedule.</p>
     #   @return [String]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
+    #   @return [String]
     class StartColumnStatisticsTaskRunScheduleRequest < Struct.new(
       nil,
       :database_name,
       :table_name,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20748,7 +24137,8 @@ module Aws::Glue
     #   <p>The data source (Glue table) associated with this run.</p>
     #   @return [Types::DataSource]
     # @!attribute role
-    #   <p>An IAM role supplied to encrypt the results of the run.</p>
+    #   <p>The IAM role that Glue assumes to access resources for the run.</p>
+    #            <p>For more information, see <a href="https://docs.aws.amazon.com/glue/latest/dg/data-quality-authorization.html">Configure IAM permissions for Glue Data Quality</a>.</p>
     #   @return [String]
     # @!attribute number_of_workers
     #   <p>The number of <code>G.1X</code> workers to be used in the run. The default is 5.</p>
@@ -20765,6 +24155,13 @@ module Aws::Glue
     # @!attribute client_token
     #   <p>Used for idempotency and is recommended to be set to a random ID (such as a UUID) to avoid creating or starting multiple instances of the same resource.</p>
     #   @return [String]
+    # @!attribute additional_run_options
+    #   <p>Additional run options you can specify for a recommendation run.</p>
+    #   @return [Types::DataQualityRuleRecommendationRunAdditionalRunOptions]
+    # @!attribute recommendation_mode
+    #   <p>The mode that Glue Data Quality uses to recommend rules.</p>
+    #            <p>The default is <code>BASIC</code>.</p>
+    #   @return [String]
     class StartDataQualityRuleRecommendationRunRequest < Struct.new(
       nil,
       :data_source,
@@ -20774,6 +24171,8 @@ module Aws::Glue
       :created_ruleset_name,
       :data_quality_security_configuration,
       :client_token,
+      :additional_run_options,
+      :recommendation_mode,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -20936,7 +24335,7 @@ module Aws::Glue
     #   <p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can
     #         consume resources before it is terminated and enters <code>TIMEOUT</code> status. This value overrides the timeout value set in the parent job. </p>
     #            <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>
-    #            <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>
+    #            <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>
     #            <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>
     #            <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>
     #   @return [Integer]
@@ -20958,8 +24357,8 @@ module Aws::Glue
     #             allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p>
     #               </li>
     #               <li>
-    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache 
-    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs. 
+    #                  <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>="glueetl") or Apache
+    #           Spark streaming ETL job (<code>JobCommand.Name</code>="gluestreaming"), you can allocate from 2 to 100 DPUs.
     #           The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p>
     #               </li>
     #            </ul>
@@ -21082,6 +24481,40 @@ module Aws::Glue
     class StartMLLabelingSetGenerationTaskRunResponse < Struct.new(
       nil,
       :task_run_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>
+    #   @return [String]
+    # @!attribute database_name
+    #   <p>The name of the database where the table resides.</p>
+    #   @return [String]
+    # @!attribute table_name
+    #   <p>The name of the materialized view to run the refresh task for.</p>
+    #   @return [String]
+    # @!attribute full_refresh
+    #   <p>Specifies whether this is a full refresh of the task run.</p>
+    #   @return [Boolean]
+    class StartMaterializedViewRefreshTaskRunRequest < Struct.new(
+      nil,
+      :catalog_id,
+      :database_name,
+      :table_name,
+      :full_refresh,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute materialized_view_refresh_task_run_id
+    #   <p>The identifier for the materialized view refresh task run.</p>
+    #   @return [String]
+    class StartMaterializedViewRefreshTaskRunResponse < Struct.new(
+      nil,
+      :materialized_view_refresh_task_run_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21319,6 +24752,9 @@ module Aws::Glue
     # @!attribute double_value
     #   <p>The value of the statistic.</p>
     #   @return [Float]
+    # @!attribute distribution_value
+    #   <p>The distribution value for the statistic.</p>
+    #   @return [Types::DistributionData]
     # @!attribute evaluation_level
     #   <p>The evaluation level of the statistic. Possible values: <code>Dataset</code>, <code>Column</code>, <code>Multicolumn</code>.</p>
     #   @return [String]
@@ -21345,6 +24781,7 @@ module Aws::Glue
       :run_identifier,
       :statistic_name,
       :double_value,
+      :distribution_value,
       :evaluation_level,
       :columns_referenced,
       :referenced_datasets,
@@ -21383,10 +24820,14 @@ module Aws::Glue
     # @!attribute table_name
     #   <p>The name of the table.</p>
     #   @return [String]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
+    #   @return [String]
     class StopColumnStatisticsTaskRunRequest < Struct.new(
       nil,
       :database_name,
       :table_name,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21405,10 +24846,14 @@ module Aws::Glue
     # @!attribute table_name
     #   <p>The name of the table for which to stop a column statistic task run schedule.</p>
     #   @return [String]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table resides. If none is supplied, the Amazon Web Services account ID is used by default.</p>
+    #   @return [String]
     class StopColumnStatisticsTaskRunScheduleRequest < Struct.new(
       nil,
       :database_name,
       :table_name,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21451,6 +24896,32 @@ module Aws::Glue
     end
 
     class StopCrawlerScheduleResponse < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog where the table reside. If none is supplied, the account ID is used by default.</p>
+    #   @return [String]
+    # @!attribute database_name
+    #   <p>The name of the database where the table resides.</p>
+    #   @return [String]
+    # @!attribute table_name
+    #   <p>The name of the materialized view.</p>
+    #   @return [String]
+    class StopMaterializedViewRefreshTaskRunRequest < Struct.new(
+      nil,
+      :catalog_id,
+      :database_name,
+      :table_name,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class StopMaterializedViewRefreshTaskRunResponse < Struct.new(
       nil,
       keyword_init: true
     )
@@ -21656,6 +25127,39 @@ module Aws::Glue
       end
     end
 
+    # <p>Statistics for one sub-object referenced by a materialized view, recorded when the
+    #       materialized view was created or last fully refreshed. These values describe what that refresh
+    #       selected from the sub-object, which can be a subset of the table when the materialized view's
+    #       definition limits the data it reads. The fields present depend on the sub-object's format.</p>
+    # @!attribute source_type
+    #   <p>The source type of the sub-object (for example, its table format), which identifies the
+    #         sub-object.</p>
+    #   @return [String]
+    # @!attribute glue_version_id
+    #   <p>The Glue version ID of the sub-object that the statistics were captured for.</p>
+    #   @return [String]
+    # @!attribute partition_count
+    #   <p>The number of sub-object partitions selected for that refresh. Not present for
+    #         unpartitioned sub-objects.</p>
+    #   @return [Integer]
+    # @!attribute file_count
+    #   <p>The number of sub-object data files selected for that refresh.</p>
+    #   @return [Integer]
+    # @!attribute total_file_bytes
+    #   <p>The total size, in bytes, of the data files counted by <code>FileCount</code>.</p>
+    #   @return [Integer]
+    class SubObjectStatistics < Struct.new(
+      nil,
+      :source_type,
+      :glue_version_id,
+      :partition_count,
+      :file_count,
+      :total_file_bytes,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>A structure specifying the dialect and dialect version used by the query engine.</p>
     # @!attribute dialect
     #   <p>The dialect of the query engine.</p>
@@ -21769,9 +25273,18 @@ module Aws::Glue
     # @!attribute is_multi_dialect_view
     #   <p>Specifies whether the view supports the SQL dialects of one or more different query engines and can therefore be read by those engines.</p>
     #   @return [Boolean]
+    # @!attribute is_materialized_view
+    #   <p>Indicates a table is a <code>MaterializedView</code>.</p>
+    #   @return [Boolean]
+    # @!attribute iceberg_table_metadata
+    #   <p>The latest Apache Iceberg table metadata for the table, including format version, schemas, partition specifications, and sort orders. This field is populated for Iceberg tables and reflects the current state of the table's Iceberg metadata.</p>
+    #   @return [Types::IcebergTableMetadata]
     # @!attribute status
-    #   <p>A structure containing information about the state of an asynchronous change to a table.</p>
+    #   <p>Indicates the the state of an asynchronous change to a table.</p>
     #   @return [Types::TableStatus]
+    # @!attribute rls_properties
+    #   <p>A <code>RLSProperties</code> structure that describes the default row-level security policy of the table.</p>
+    #   @return [Types::RLSProperties]
     class Table < Struct.new(
       nil,
       :name,
@@ -21797,7 +25310,10 @@ module Aws::Glue
       :federated_table,
       :view_definition,
       :is_multi_dialect_view,
+      :is_materialized_view,
+      :iceberg_table_metadata,
       :status,
+      :rls_properties,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -21914,6 +25430,9 @@ module Aws::Glue
     # @!attribute target_table
     #   <p>A <code>TableIdentifier</code> structure that describes a target table for resource linking.</p>
     #   @return [Types::TableIdentifier]
+    # @!attribute federated_table
+    #   <p>A <code>FederatedTable</code> structure that references an entity outside the Glue Data Catalog. Specify this field to create a federated table, which points to a table in an external metastore instead of describing data managed in the Glue Data Catalog.</p>
+    #   @return [Types::FederatedTable]
     # @!attribute view_definition
     #   <p>A structure that contains all the information that defines the view, including the dialect or dialects for the view, and the query.</p>
     #   @return [Types::ViewDefinitionInput]
@@ -21932,6 +25451,7 @@ module Aws::Glue
       :table_type,
       :parameters,
       :target_table,
+      :federated_table,
       :view_definition,
       keyword_init: true
     )
@@ -21969,8 +25489,8 @@ module Aws::Glue
     #   @return [Types::TableOptimizerRun]
     # @!attribute configuration_source
     #   <p>
-    #         Specifies the source of the optimizer configuration. This indicates how the table optimizer was configured and which entity or service 
-    #         initiated the configuration. 
+    #         Specifies the source of the optimizer configuration. This indicates how the table optimizer was configured and which entity or service
+    #         initiated the configuration.
     #       </p>
     #   @return [String]
     class TableOptimizer < Struct.new(
@@ -21996,7 +25516,7 @@ module Aws::Glue
     #            <p>This configuration is necessary to perform optimization on tables that are in a customer VPC.</p>
     #   @return [Types::TableOptimizerVpcConfiguration]
     # @!attribute compaction_configuration
-    #   <p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to 
+    #   <p>The configuration for a compaction optimizer. This configuration defines how data files in your table will be compacted to
     #         improve query performance and reduce storage costs.</p>
     #   @return [Types::CompactionConfiguration]
     # @!attribute retention_configuration
@@ -22041,26 +25561,26 @@ module Aws::Glue
     #   <p>A <code>CompactionMetrics</code> object containing metrics for the optimizer run.</p>
     #   @return [Types::CompactionMetrics]
     # @!attribute compaction_strategy
-    #   <p>The strategy used for the compaction run. Indicates which algorithm was applied to determine how files were selected and combined during the 
+    #   <p>The strategy used for the compaction run. Indicates which algorithm was applied to determine how files were selected and combined during the
     #         compaction process. Valid values are:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes. 
+    #                     <code>binpack</code>: Combines small files into larger files, typically targeting sizes over 100MB, while applying any pending deletes.
     #             This is the recommended compaction strategy for most use cases.
     #           </p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query 
-    #             performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy, 
+    #                     <code>sort</code>: Organizes data based on specified columns which are sorted hierarchically during compaction, improving query
+    #             performance for filtered operations. This strategy is recommended when your queries frequently filter on specific columns. To use this strategy,
     #             you must first define a sort order in your Iceberg table properties using the <code>sort_order</code> table property.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting, 
-    #             allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions 
-    #             simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the 
+    #                     <code>z-order</code>: Optimizes data organization by blending multiple attributes into a single scalar value that can be used for sorting,
+    #             allowing efficient querying across multiple dimensions. This strategy is recommended when you need to query data across multiple dimensions
+    #             simultaneously. To use this strategy, you must first define a sort order in your Iceberg table properties using the
     #             <code>sort_order</code> table property.
     #           </p>
     #               </li>
@@ -22280,11 +25800,15 @@ module Aws::Glue
     # @!attribute target_table_name
     #   <p>The optional name of a target table.</p>
     #   @return [String]
+    # @!attribute integration_arn
+    #   <p>The ARN of the integration that owns this target table configuration.</p>
+    #   @return [String]
     class TargetTableConfig < Struct.new(
       nil,
       :unnest_spec,
       :partition_spec,
       :target_table_name,
+      :integration_arn,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -22825,6 +26349,52 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute identifier
+    #   <p>The unique identifier of the asset to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The new name of the asset.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The new description of the asset.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class UpdateAssetRequest < Struct.new(
+      nil,
+      :identifier,
+      :name,
+      :description,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the asset.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the asset.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the asset.</p>
+    #   @return [String]
+    # @!attribute updated_at
+    #   <p>The timestamp at which the asset was last updated.</p>
+    #   @return [Time]
+    class UpdateAssetResponse < Struct.new(
+      nil,
+      :id,
+      :name,
+      :description,
+      :updated_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute name
     #   <p>The name of the blueprint.</p>
     #   @return [String]
@@ -23107,6 +26677,9 @@ module Aws::Glue
     #   <p>The name of the <code>SecurityConfiguration</code> structure to be used by this
     #         crawler.</p>
     #   @return [String]
+    # @!attribute catalog_id
+    #   <p>The ID of the Data Catalog in which to store the crawler's output. If you omit this value, the existing value on the crawler is preserved.</p>
+    #   @return [String]
     class UpdateCrawlerRequest < Struct.new(
       nil,
       :name,
@@ -23123,6 +26696,7 @@ module Aws::Glue
       :lake_formation_configuration,
       :configuration,
       :crawler_security_configuration,
+      :catalog_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23334,13 +26908,113 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute identifier
+    #   <p>The unique identifier of the glossary to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The updated name of the glossary.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The updated description of the glossary.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class UpdateGlossaryRequest < Struct.new(
+      nil,
+      :identifier,
+      :name,
+      :description,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the glossary.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the glossary.</p>
+    #   @return [String]
+    # @!attribute description
+    #   <p>The description of the glossary.</p>
+    #   @return [String]
+    class UpdateGlossaryResponse < Struct.new(
+      nil,
+      :id,
+      :name,
+      :description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute identifier
+    #   <p>The unique identifier of the glossary term to update.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The updated name of the glossary term.</p>
+    #   @return [String]
+    # @!attribute short_description
+    #   <p>The updated short description of the glossary term.</p>
+    #   @return [String]
+    # @!attribute long_description
+    #   <p>The updated long description of the glossary term.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>
+    #   @return [String]
+    class UpdateGlossaryTermRequest < Struct.new(
+      nil,
+      :identifier,
+      :name,
+      :short_description,
+      :long_description,
+      :client_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute id
+    #   <p>The unique identifier of the glossary term.</p>
+    #   @return [String]
+    # @!attribute glossary_id
+    #   <p>The unique identifier of the glossary containing this term.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the glossary term.</p>
+    #   @return [String]
+    # @!attribute short_description
+    #   <p>The short description of the glossary term.</p>
+    #   @return [String]
+    # @!attribute long_description
+    #   <p>The long description of the glossary term.</p>
+    #   @return [String]
+    class UpdateGlossaryTermResponse < Struct.new(
+      nil,
+      :id,
+      :glossary_id,
+      :name,
+      :short_description,
+      :long_description,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Request to update an existing Glue Identity Center configuration.</p>
     # @!attribute scopes
     #   <p>A list of Identity Center scopes that define the updated permissions and access levels for the Glue configuration.</p>
     #   @return [Array<String>]
+    # @!attribute user_background_sessions_enabled
+    #   <p>Specifies whether users can run background sessions when using Identity Center authentication with Glue services.</p>
+    #   @return [Boolean]
     class UpdateGlueIdentityCenterConfigurationRequest < Struct.new(
       nil,
       :scopes,
+      :user_background_sessions_enabled,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -23380,12 +27054,12 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Input parameters specific to updating Apache Iceberg tables in Glue Data 
-    #       Catalog, containing the update operations to be applied to an existing Iceberg 
+    # <p>Input parameters specific to updating Apache Iceberg tables in Glue Data
+    #       Catalog, containing the update operations to be applied to an existing Iceberg
     #       table.</p>
     # @!attribute update_iceberg_table_input
-    #   <p>The specific update operations to be applied to the Iceberg table, containing a 
-    #         list of updates that define the new state of the table including schema, 
+    #   <p>The specific update operations to be applied to the Iceberg table, containing a
+    #         list of updates that define the new state of the table including schema,
     #         partitions, and properties.</p>
     #   @return [Types::UpdateIcebergTableInput]
     class UpdateIcebergInput < Struct.new(
@@ -23399,7 +27073,7 @@ module Aws::Glue
     # <p>Contains the update operations to be applied to an existing Iceberg table inGlue Data Catalog, defining the new state of the table metadata.
     #     </p>
     # @!attribute updates
-    #   <p>The list of table update operations that specify the changes to be made to the Iceberg table, including schema modifications, partition 
+    #   <p>The list of table update operations that specify the changes to be made to the Iceberg table, including schema modifications, partition
     #         specifications, and table properties.</p>
     #   @return [Array<Types::IcebergTableUpdate>]
     class UpdateIcebergTableInput < Struct.new(
@@ -23432,6 +27106,9 @@ module Aws::Glue
     # @!attribute resource_arn
     #   <p>The connection ARN of the source, or the database ARN of the target.</p>
     #   @return [String]
+    # @!attribute resource_property_arn
+    #   <p>The resource ARN created through this create API. The format is something like arn:aws:glue:<region>:<account_id>:integrationresourceproperty/*</p>
+    #   @return [String]
     # @!attribute source_processing_properties
     #   <p>The resource properties associated with the integration source.</p>
     #   @return [Types::SourceProcessingProperties]
@@ -23441,6 +27118,7 @@ module Aws::Glue
     class UpdateIntegrationResourcePropertyResponse < Struct.new(
       nil,
       :resource_arn,
+      :resource_property_arn,
       :source_processing_properties,
       :target_processing_properties,
       keyword_init: true
@@ -23487,9 +27165,9 @@ module Aws::Glue
     #       </p>
     #   @return [String]
     # @!attribute repository_name
-    #   <p>The name of the remote repository that contains the job artifacts. 
+    #   <p>The name of the remote repository that contains the job artifacts.
     #         For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.
-    #         Use the format <code><WorkspaceName>/<RepositoryName></code>. 
+    #         Use the format <code><WorkspaceName>/<RepositoryName></code>.
     #       </p>
     #   @return [String]
     # @!attribute repository_owner
@@ -23659,11 +27337,11 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Input parameters for updating open table format tables in GlueData Catalog, 
+    # <p>Input parameters for updating open table format tables in GlueData Catalog,
     #       serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>
     # @!attribute update_iceberg_input
-    #   <p>Apache Iceberg-specific update parameters that define the table modifications to 
-    #         be applied, including schema changes, partition specifications, and table 
+    #   <p>Apache Iceberg-specific update parameters that define the table modifications to
+    #         be applied, including schema changes, partition specifications, and table
     #         properties.</p>
     #   @return [Types::UpdateIcebergInput]
     class UpdateOpenTableFormatInput < Struct.new(
@@ -23800,9 +27478,9 @@ module Aws::Glue
     #       </p>
     #   @return [String]
     # @!attribute repository_name
-    #   <p>The name of the remote repository that contains the job artifacts. 
+    #   <p>The name of the remote repository that contains the job artifacts.
     #         For BitBucket providers, <code>RepositoryName</code> should include <code>WorkspaceName</code>.
-    #         Use the format <code><WorkspaceName>/<RepositoryName></code>. 
+    #         Use the format <code><WorkspaceName>/<RepositoryName></code>.
     #       </p>
     #   @return [String]
     # @!attribute repository_owner
@@ -23893,7 +27571,7 @@ module Aws::Glue
     #         compatibility, this name is entirely lowercase.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The unique identifier for the table within the specified database that will be 
+    #   <p>The unique identifier for the table within the specified database that will be
     #         created in the Glue Data Catalog.</p>
     #   @return [String]
     # @!attribute table_input
@@ -23918,8 +27596,7 @@ module Aws::Glue
     #   <p>A flag that can be set to true to ignore matching storage descriptor and subobject matching requirements.</p>
     #   @return [Boolean]
     # @!attribute update_open_table_format_input
-    #   <p>Input parameters for updating open table format tables in GlueData Catalog, 
-    #         serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>
+    #   <p>Input parameters for updating open table format tables in GlueData Catalog, serving as a wrapper for format-specific update operations such as Apache Iceberg.</p>
     #   @return [Types::UpdateOpenTableFormatInput]
     class UpdateTableRequest < Struct.new(
       nil,
@@ -24151,6 +27828,9 @@ module Aws::Glue
     # @!attribute owner_name
     #   <p>The owner of the function.</p>
     #   @return [String]
+    # @!attribute function_type
+    #   <p>The type of the function.</p>
+    #   @return [String]
     # @!attribute owner_type
     #   <p>The owner type.</p>
     #   @return [String]
@@ -24169,6 +27849,7 @@ module Aws::Glue
       :database_name,
       :class_name,
       :owner_name,
+      :function_type,
       :owner_type,
       :create_time,
       :resource_uris,
@@ -24188,6 +27869,9 @@ module Aws::Glue
     # @!attribute owner_name
     #   <p>The owner of the function.</p>
     #   @return [String]
+    # @!attribute function_type
+    #   <p>The type of the function.</p>
+    #   @return [String]
     # @!attribute owner_type
     #   <p>The owner type.</p>
     #   @return [String]
@@ -24199,6 +27883,7 @@ module Aws::Glue
       :function_name,
       :class_name,
       :owner_name,
+      :function_type,
       :owner_type,
       :resource_uris,
       keyword_init: true
@@ -24234,29 +27919,73 @@ module Aws::Glue
     # @!attribute is_protected
     #   <p>You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.</p>
     #   @return [Boolean]
+    # @!attribute is_managed
+    #   <p>Specifies whether the materialized view is managed by Glue.</p>
+    #   @return [Boolean]
     # @!attribute definer
     #   <p>The definer of a view in SQL.</p>
+    #   @return [String]
+    # @!attribute view_version_id
+    #   <p>The ID value that identifies this view's version. For materialized views, the version ID is the Apache Iceberg table's snapshot ID. </p>
+    #   @return [Integer]
+    # @!attribute view_version_token
+    #   <p>The version ID of the Apache Iceberg table.</p>
+    #   @return [String]
+    # @!attribute refresh_seconds
+    #   <p>Auto refresh interval in seconds for the materialized view. If not specified, the view will
+    #         not automatically refresh.</p>
+    #   @return [Integer]
+    # @!attribute last_refresh_type
+    #   <p>Sets the method used for the most recent refresh.</p>
     #   @return [String]
     # @!attribute sub_objects
     #   <p>A list of table Amazon Resource Names (ARNs).</p>
     #   @return [Array<String>]
+    # @!attribute sub_object_version_ids
+    #   <p>List of the Apache Iceberg table versions referenced by the materialized view.</p>
+    #   @return [Array<Integer>]
+    # @!attribute sub_objects_statistics
+    #   <p>Statistics captured for each sub-object referenced by the materialized view as of its most
+    #         recent refresh, such as the source type, Glue version ID, and the partition,
+    #         file, and byte counts. Each entry describes one sub-object, identified by its source type.</p>
+    #   @return [Array<Types::SubObjectStatistics>]
     # @!attribute representations
     #   <p>A list of representations.</p>
     #   @return [Array<Types::ViewRepresentation>]
+    # @!attribute spark_pipeline_info
+    #   <p>A map of key-value pairs containing Spark Declarative Pipelines (SDP) information for the
+    #         materialized view.</p>
+    #   @return [Hash<String, String>]
     class ViewDefinition < Struct.new(
       nil,
       :is_protected,
+      :is_managed,
       :definer,
+      :view_version_id,
+      :view_version_token,
+      :refresh_seconds,
+      :last_refresh_type,
       :sub_objects,
+      :sub_object_version_ids,
+      :sub_objects_statistics,
       :representations,
+      :spark_pipeline_info,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:view_version_id] = 0 unless options.key?(:view_version_id)
+        super
+      end
     end
 
     # <p>A structure containing details for creating or updating an Glue view.</p>
     # @!attribute is_protected
     #   <p>You can set this flag as true to instruct the engine not to push user-provided operations into the logical plan of the view during query planning. However, setting this flag does not guarantee that the engine will comply. Refer to the engine's documentation to understand the guarantees provided, if any.</p>
+    #   @return [Boolean]
+    # @!attribute is_managed
+    #   <p>Specifies whether the materialized view is managed by Glue.</p>
     #   @return [Boolean]
     # @!attribute definer
     #   <p>The definer of a view in SQL.</p>
@@ -24264,18 +27993,57 @@ module Aws::Glue
     # @!attribute representations
     #   <p>A list of structures that contains the dialect of the view, and the query that defines the view.</p>
     #   @return [Array<Types::ViewRepresentationInput>]
+    # @!attribute view_version_id
+    #   <p>The ID value that identifies this view's version. For materialized views, the version ID is the Apache Iceberg table's snapshot ID. </p>
+    #   @return [Integer]
+    # @!attribute view_version_token
+    #   <p>The version ID of the Apache Iceberg table.</p>
+    #   @return [String]
+    # @!attribute refresh_seconds
+    #   <p>Auto refresh interval in seconds for the materialized view. If not specified, the view will
+    #         not automatically refresh.</p>
+    #   @return [Integer]
+    # @!attribute last_refresh_type
+    #   <p>The type of the materialized view's last refresh. Valid values: <code>Full</code>,
+    #         <code>Incremental</code>.</p>
+    #   @return [String]
     # @!attribute sub_objects
     #   <p>A list of base table ARNs that make up the view.</p>
     #   @return [Array<String>]
+    # @!attribute sub_object_version_ids
+    #   <p>List of the Apache Iceberg table versions referenced by the materialized view.</p>
+    #   @return [Array<Integer>]
+    # @!attribute sub_objects_statistics
+    #   <p>Statistics for each sub-object referenced by the materialized view, such as the source
+    #         type, Glue version ID, and the partition, file, and byte counts. Each entry
+    #         describes one sub-object, identified by its source type.</p>
+    #   @return [Array<Types::SubObjectStatistics>]
+    # @!attribute spark_pipeline_info
+    #   <p>A map of key-value pairs containing Spark Declarative Pipelines (SDP) information for the
+    #         materialized view.</p>
+    #   @return [Hash<String, String>]
     class ViewDefinitionInput < Struct.new(
       nil,
       :is_protected,
+      :is_managed,
       :definer,
       :representations,
+      :view_version_id,
+      :view_version_token,
+      :refresh_seconds,
+      :last_refresh_type,
       :sub_objects,
+      :sub_object_version_ids,
+      :sub_objects_statistics,
+      :spark_pipeline_info,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:view_version_id] = 0 unless options.key?(:view_version_id)
+        super
+      end
     end
 
     # <p>A structure that contains the dialect of the view, and the query that defines the view.</p>
@@ -24376,7 +28144,7 @@ module Aws::Glue
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A workflow is a collection of multiple dependent Glue 
+    # <p>A workflow is a collection of multiple dependent Glue
     #       jobs and crawlers that are run to complete a complex ETL task. A
     #       workflow manages the execution and monitoring of all its jobs and crawlers.</p>
     # @!attribute name

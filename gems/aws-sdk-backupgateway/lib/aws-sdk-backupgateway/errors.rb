@@ -106,8 +106,7 @@ module Aws::BackupGateway
       end
     end
 
-    # <p>TPS has been limited to protect against intentional or unintentional 
-    #     high request volumes.</p>
+    # <p>TPS has been limited to protect against intentional or unintentional high request volumes.</p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::BackupGateway::Types::ThrottlingException] data
@@ -115,8 +114,7 @@ module Aws::BackupGateway
         super
       end
 
-      # <p>Error: TPS has been limited to protect against intentional or unintentional 
-      #       high request volumes.</p>
+      # <p>Error: TPS has been limited to protect against intentional or unintentional high request volumes.</p>
       def error_code
         @data[:error_code]
       end

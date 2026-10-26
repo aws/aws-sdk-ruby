@@ -23,6 +23,10 @@ module Aws::DatabaseMigrationService
     BatchStartRecommendationsResponse: StructureShape
     Boolean: BooleanShape
     BooleanOptional: BooleanShape
+    CancelMetadataModelConversionMessage: StructureShape
+    CancelMetadataModelConversionResponse: StructureShape
+    CancelMetadataModelCreationMessage: StructureShape
+    CancelMetadataModelCreationResponse: StructureShape
     CancelReplicationTaskAssessmentRunMessage: StructureShape
     CancelReplicationTaskAssessmentRunResponse: StructureShape
     CannedAclForObjectsValue: EnumShape
@@ -157,14 +161,20 @@ module Aws::DatabaseMigrationService
     DescribeInstanceProfilesResponse: StructureShape
     DescribeMetadataModelAssessmentsMessage: StructureShape
     DescribeMetadataModelAssessmentsResponse: StructureShape
+    DescribeMetadataModelChildrenMessage: StructureShape
+    DescribeMetadataModelChildrenResponse: StructureShape
     DescribeMetadataModelConversionsMessage: StructureShape
     DescribeMetadataModelConversionsResponse: StructureShape
+    DescribeMetadataModelCreationsMessage: StructureShape
+    DescribeMetadataModelCreationsResponse: StructureShape
     DescribeMetadataModelExportsAsScriptMessage: StructureShape
     DescribeMetadataModelExportsAsScriptResponse: StructureShape
     DescribeMetadataModelExportsToTargetMessage: StructureShape
     DescribeMetadataModelExportsToTargetResponse: StructureShape
     DescribeMetadataModelImportsMessage: StructureShape
     DescribeMetadataModelImportsResponse: StructureShape
+    DescribeMetadataModelMessage: StructureShape
+    DescribeMetadataModelResponse: StructureShape
     DescribeMigrationProjectsMessage: StructureShape
     DescribeMigrationProjectsResponse: StructureShape
     DescribeOrderableReplicationInstancesMessage: StructureShape
@@ -242,6 +252,8 @@ module Aws::DatabaseMigrationService
     FleetAdvisorSchemaObjectList: ListShape
     FleetAdvisorSchemaObjectResponse: StructureShape
     GcpMySQLSettings: StructureShape
+    GetTargetSelectionRulesMessage: StructureShape
+    GetTargetSelectionRulesResponse: StructureShape
     IBMDb2Settings: StructureShape
     IbmDb2LuwDataProviderSettings: StructureShape
     IbmDb2zOsDataProviderSettings: StructureShape
@@ -275,6 +287,7 @@ module Aws::DatabaseMigrationService
     KerberosAuthenticationSettings: StructureShape
     KeyList: ListShape
     KinesisSettings: StructureShape
+    LakehouseSettings: StructureShape
     Limitation: StructureShape
     LimitationList: ListShape
     ListTagsForResourceMessage: StructureShape
@@ -285,6 +298,9 @@ module Aws::DatabaseMigrationService
     MariaDbDataProviderSettings: StructureShape
     Marker: StringShape
     MessageFormatValue: EnumShape
+    MetadataModelProperties: UnionShape
+    MetadataModelReference: StructureShape
+    MetadataModelReferenceList: ListShape
     MicrosoftSQLServerSettings: StructureShape
     MicrosoftSqlServerDataProviderSettings: StructureShape
     MigrationProject: StructureShape
@@ -338,6 +354,8 @@ module Aws::DatabaseMigrationService
     PostgreSqlDataProviderSettings: StructureShape
     PremigrationAssessmentStatus: StructureShape
     PremigrationAssessmentStatusList: ListShape
+    ProcessedObject: StructureShape
+    Progress: StructureShape
     ProvisionData: StructureShape
     PublicIpAddressList: ListShape
     RdsConfiguration: StructureShape
@@ -429,6 +447,8 @@ module Aws::DatabaseMigrationService
     StartMetadataModelAssessmentResponse: StructureShape
     StartMetadataModelConversionMessage: StructureShape
     StartMetadataModelConversionResponse: StructureShape
+    StartMetadataModelCreationMessage: StructureShape
+    StartMetadataModelCreationResponse: StructureShape
     StartMetadataModelExportAsScriptMessage: StructureShape
     StartMetadataModelExportAsScriptResponse: StructureShape
     StartMetadataModelExportToTargetMessage: StructureShape
@@ -448,6 +468,7 @@ module Aws::DatabaseMigrationService
     StartReplicationTaskMessage: StructureShape
     StartReplicationTaskResponse: StructureShape
     StartReplicationTaskTypeValue: EnumShape
+    StatementProperties: StructureShape
     StopDataMigrationMessage: StructureShape
     StopDataMigrationResponse: StructureShape
     StopReplicationMessage: StructureShape
@@ -463,6 +484,7 @@ module Aws::DatabaseMigrationService
     SubnetList: ListShape
     SupportedEndpointType: StructureShape
     SupportedEndpointTypeList: ListShape
+    SybaseAseDataProviderSettings: StructureShape
     SybaseSettings: StructureShape
     TStamp: TimestampShape
     TableListToReload: ListShape

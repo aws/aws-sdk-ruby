@@ -14,7 +14,7 @@ module Aws::Billingconductor
     AccountGrouping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#AccountGrouping", name: "AccountGrouping")
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#AccountId", name: "AccountId", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     AccountIdFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#AccountIdFilterList", name: "AccountIdFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}})
-    AccountIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#AccountIdList", name: "AccountIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}})
+    AccountIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#AccountIdList", name: "AccountIdList", traits: {"smithy.api#length" => {"min" => 0, "max" => 30}})
     AccountName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#AccountName", name: "AccountName", traits: {"smithy.api#sensitive" => {}})
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#Arn", name: "Arn", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}, "smithy.api#pattern" => "^arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}$|^arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/[a-zA-Z0-9]{10}$|^arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingrule/[a-zA-Z0-9]{10}$|^(arn:aws(-cn)?:billingconductor::[0-9]{12}:customlineitem/)?[a-zA-Z0-9]{10}$"})
     AssociateAccountsOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#AssociateAccountsOperationInput", name: "AssociateAccountsOperationInput")
@@ -22,37 +22,43 @@ module Aws::Billingconductor
     AssociatePricingRulesOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#AssociatePricingRulesOperationInput", name: "AssociatePricingRulesOperationInput")
     AssociatePricingRulesOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#AssociatePricingRulesOperationOutput", name: "AssociatePricingRulesOperationOutput")
     AssociateResourceError = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#AssociateResourceError", name: "AssociateResourceError")
-    AssociateResourceErrorReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#AssociateResourceErrorReason", name: "AssociateResourceErrorReason", traits: {"smithy.api#enum" => [{"value" => "INVALID_ARN", "name" => "INVALID_ARN"}, {"value" => "SERVICE_LIMIT_EXCEEDED", "name" => "SERVICE_LIMIT_EXCEEDED"}, {"value" => "ILLEGAL_CUSTOMLINEITEM", "name" => "ILLEGAL_CUSTOMLINEITEM"}, {"value" => "INTERNAL_SERVER_EXCEPTION", "name" => "INTERNAL_SERVER_EXCEPTION"}, {"value" => "INVALID_BILLING_PERIOD_RANGE", "name" => "INVALID_BILLING_PERIOD_RANGE"}]})
+    AssociateResourceErrorReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#AssociateResourceErrorReason", name: "AssociateResourceErrorReason")
     AssociateResourceResponseElement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#AssociateResourceResponseElement", name: "AssociateResourceResponseElement")
     AssociateResourcesResponseList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#AssociateResourcesResponseList", name: "AssociateResourcesResponseList")
-    Association = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#Association", name: "Association", traits: {"smithy.api#pattern" => "^((arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/)?[0-9]{12}|MONITORED|UNMONITORED)$"})
+    Association = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#Association", name: "Association", traits: {"smithy.api#pattern" => "^((arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/)?[a-zA-Z0-9]{10,12}|MONITORED|UNMONITORED)$"})
     Attribute = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#Attribute", name: "Attribute")
+    AttributeValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#AttributeValue", name: "AttributeValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9]+$"})
+    AttributeValueList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#AttributeValueList", name: "AttributeValueList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     AttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#AttributesList", name: "AttributesList")
+    AutoTransferBillingGroupCreationPreference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#AutoTransferBillingGroupCreationPreference", name: "AutoTransferBillingGroupCreationPreference")
     BatchAssociateResourcesToCustomLineItemOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#BatchAssociateResourcesToCustomLineItemOperationInput", name: "BatchAssociateResourcesToCustomLineItemOperationInput")
     BatchAssociateResourcesToCustomLineItemOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#BatchAssociateResourcesToCustomLineItemOperationOutput", name: "BatchAssociateResourcesToCustomLineItemOperationOutput")
     BatchDisassociateResourcesFromCustomLineItemOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#BatchDisassociateResourcesFromCustomLineItemOperationInput", name: "BatchDisassociateResourcesFromCustomLineItemOperationInput")
     BatchDisassociateResourcesFromCustomLineItemOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#BatchDisassociateResourcesFromCustomLineItemOperationOutput", name: "BatchDisassociateResourcesFromCustomLineItemOperationOutput")
-    BillingEntity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingEntity", name: "BillingEntity", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9 ]+$"})
-    BillingGroupArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingGroupArn", name: "BillingGroupArn", traits: {"smithy.api#pattern" => "^(arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/)?[0-9]{12}$"})
+    BillingEntity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingEntity", name: "BillingEntity", traits: {"smithy.api#pattern" => "^[a-zA-Z0-9() ]+$"})
+    BillingGroupArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingGroupArn", name: "BillingGroupArn", traits: {"smithy.api#pattern" => "^(arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/)?[a-zA-Z0-9]{10,12}$"})
     BillingGroupArnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#BillingGroupArnList", name: "BillingGroupArnList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     BillingGroupCostReportElement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#BillingGroupCostReportElement", name: "BillingGroupCostReportElement")
     BillingGroupCostReportList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#BillingGroupCostReportList", name: "BillingGroupCostReportList")
     BillingGroupCostReportResultElement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#BillingGroupCostReportResultElement", name: "BillingGroupCostReportResultElement")
     BillingGroupCostReportResultsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#BillingGroupCostReportResultsList", name: "BillingGroupCostReportResultsList")
     BillingGroupDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingGroupDescription", name: "BillingGroupDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#sensitive" => {}})
-    BillingGroupFullArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingGroupFullArn", name: "BillingGroupFullArn", traits: {"smithy.api#pattern" => "^arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/[0-9]{12}$"})
+    BillingGroupFullArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingGroupFullArn", name: "BillingGroupFullArn", traits: {"smithy.api#pattern" => "^arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/[a-zA-Z0-9]{10,12}$"})
     BillingGroupList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#BillingGroupList", name: "BillingGroupList")
     BillingGroupListElement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#BillingGroupListElement", name: "BillingGroupListElement")
     BillingGroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingGroupName", name: "BillingGroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\+=\\.\\-@]+$", "smithy.api#sensitive" => {}})
-    BillingGroupStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingGroupStatus", name: "BillingGroupStatus", traits: {"smithy.api#enum" => [{"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "PRIMARY_ACCOUNT_MISSING", "name" => "PRIMARY_ACCOUNT_MISSING"}]})
+    BillingGroupStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#BillingGroupStatus", name: "BillingGroupStatus")
     BillingGroupStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#BillingGroupStatusList", name: "BillingGroupStatusList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     BillingGroupStatusReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingGroupStatusReason", name: "BillingGroupStatusReason")
+    BillingGroupType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#BillingGroupType", name: "BillingGroupType")
+    BillingGroupTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#BillingGroupTypeList", name: "BillingGroupTypeList", traits: {"smithy.api#length" => {"min" => 1, "max" => 2}})
     BillingPeriod = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#BillingPeriod", name: "BillingPeriod", traits: {"smithy.api#pattern" => "^\\d{4}-(0?[1-9]|1[012])$"})
     BillingPeriodRange = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#BillingPeriodRange", name: "BillingPeriodRange")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9-]+$"})
     ComputationPreference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#ComputationPreference", name: "ComputationPreference")
+    ComputationRuleEnum = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#ComputationRuleEnum", name: "ComputationRuleEnum")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
-    ConflictExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#ConflictExceptionReason", name: "ConflictExceptionReason", traits: {"smithy.api#enum" => [{"value" => "RESOURCE_NAME_CONFLICT", "name" => "RESOURCE_NAME_CONFLICT"}, {"value" => "PRICING_RULE_IN_PRICING_PLAN_CONFLICT", "name" => "PRICING_RULE_IN_PRICING_PLAN_CONFLICT"}, {"value" => "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT", "name" => "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT"}, {"value" => "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT", "name" => "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT"}, {"value" => "WRITE_CONFLICT_RETRY", "name" => "WRITE_CONFLICT_RETRY"}]})
+    ConflictExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#ConflictExceptionReason", name: "ConflictExceptionReason")
     CreateBillingGroupOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#CreateBillingGroupOperationInput", name: "CreateBillingGroupOperationInput")
     CreateBillingGroupOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#CreateBillingGroupOperationOutput", name: "CreateBillingGroupOperationOutput")
     CreateCustomLineItemOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#CreateCustomLineItemOperationInput", name: "CreateCustomLineItemOperationInput", traits: {"smithy.api#references" => [{"resource" => "com.amazonaws.billingconductor#BillingGroup", "ids" => {"Arn" => "BillingGroupArn"}}]})
@@ -64,7 +70,7 @@ module Aws::Billingconductor
     CreatePricingRuleOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#CreatePricingRuleOperationOutput", name: "CreatePricingRuleOperationOutput")
     CreateTieringInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#CreateTieringInput", name: "CreateTieringInput")
     Currency = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#Currency", name: "Currency")
-    CurrencyCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#CurrencyCode", name: "CurrencyCode", traits: {"smithy.api#enum" => [{"value" => "USD", "name" => "USD"}, {"value" => "CNY", "name" => "CNY"}]})
+    CurrencyCode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#CurrencyCode", name: "CurrencyCode")
     CustomLineItemArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#CustomLineItemArn", name: "CustomLineItemArn", traits: {"smithy.api#pattern" => "^(arn:aws(-cn)?:billingconductor::[0-9]{12}:customlineitem/)?[a-zA-Z0-9]{10}$"})
     CustomLineItemArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#CustomLineItemArns", name: "CustomLineItemArns", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     CustomLineItemAssociationElement = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#CustomLineItemAssociationElement", name: "CustomLineItemAssociationElement", traits: {"smithy.api#pattern" => "^(arn:aws(-cn)?:billingconductor::[0-9]{12}:(customlineitem|billinggroup)/)?[a-zA-Z0-9]{10,12}$"})
@@ -83,10 +89,15 @@ module Aws::Billingconductor
     CustomLineItemPercentageChargeDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#CustomLineItemPercentageChargeDetails", name: "CustomLineItemPercentageChargeDetails")
     CustomLineItemPercentageChargeValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.billingconductor#CustomLineItemPercentageChargeValue", name: "CustomLineItemPercentageChargeValue", traits: {"smithy.api#range" => {"min" => 0, "max" => 10000}})
     CustomLineItemProductCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#CustomLineItemProductCode", name: "CustomLineItemProductCode", traits: {"smithy.api#length" => {"min" => 1, "max" => 29}})
-    CustomLineItemRelationship = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#CustomLineItemRelationship", name: "CustomLineItemRelationship", traits: {"smithy.api#enum" => [{"value" => "PARENT", "name" => "PARENT"}, {"value" => "CHILD", "name" => "CHILD"}]})
-    CustomLineItemType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#CustomLineItemType", name: "CustomLineItemType", traits: {"smithy.api#enum" => [{"value" => "CREDIT", "name" => "CREDIT"}, {"value" => "FEE", "name" => "FEE"}]})
+    CustomLineItemRelationship = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#CustomLineItemRelationship", name: "CustomLineItemRelationship")
+    CustomLineItemType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#CustomLineItemType", name: "CustomLineItemType")
     CustomLineItemVersionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#CustomLineItemVersionList", name: "CustomLineItemVersionList")
     CustomLineItemVersionListElement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#CustomLineItemVersionListElement", name: "CustomLineItemVersionListElement")
+    CustomTier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#CustomTier", name: "CustomTier")
+    CustomTierBeginRangeInclusive = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.billingconductor#CustomTierBeginRangeInclusive", name: "CustomTierBeginRangeInclusive", traits: {"smithy.api#range" => {"min" => 0}})
+    CustomTierEndRangeExclusive = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.billingconductor#CustomTierEndRangeExclusive", name: "CustomTierEndRangeExclusive", traits: {"smithy.api#range" => {"min" => 0}})
+    CustomTierRateValue = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.billingconductor#CustomTierRateValue", name: "CustomTierRateValue", traits: {"smithy.api#range" => {"min" => 0}})
+    CustomTiersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#CustomTiersList", name: "CustomTiersList", traits: {"smithy.api#length" => {"min" => 1, "max" => 10}})
     DeleteBillingGroupOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#DeleteBillingGroupOperationInput", name: "DeleteBillingGroupOperationInput")
     DeleteBillingGroupOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#DeleteBillingGroupOperationOutput", name: "DeleteBillingGroupOperationOutput")
     DeleteCustomLineItemOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#DeleteCustomLineItemOperationInput", name: "DeleteCustomLineItemOperationInput")
@@ -104,14 +115,16 @@ module Aws::Billingconductor
     FreeTierConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#FreeTierConfig", name: "FreeTierConfig")
     GetBillingGroupCostReportInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#GetBillingGroupCostReportInput", name: "GetBillingGroupCostReportInput")
     GetBillingGroupCostReportOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#GetBillingGroupCostReportOutput", name: "GetBillingGroupCostReportOutput")
-    GroupByAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#GroupByAttributeName", name: "GroupByAttributeName", traits: {"smithy.api#enum" => [{"value" => "PRODUCT_NAME", "name" => "PRODUCT_NAME"}, {"value" => "BILLING_PERIOD", "name" => "BILLING_PERIOD"}]})
+    GetBillingTransferPreferenceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#GetBillingTransferPreferenceInput", name: "GetBillingTransferPreferenceInput")
+    GetBillingTransferPreferenceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#GetBillingTransferPreferenceOutput", name: "GetBillingTransferPreferenceOutput")
+    GroupByAttributeName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#GroupByAttributeName", name: "GroupByAttributeName")
     GroupByAttributesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#GroupByAttributesList", name: "GroupByAttributesList")
     Instant = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.billingconductor#Instant", name: "Instant", traits: {"smithy.api#default" => 0})
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     LineItemFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#LineItemFilter", name: "LineItemFilter")
-    LineItemFilterAttributeName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#LineItemFilterAttributeName", name: "LineItemFilterAttributeName", traits: {"smithy.api#enum" => [{"value" => "LINE_ITEM_TYPE", "name" => "LINE_ITEM_TYPE"}]})
-    LineItemFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#LineItemFilterValue", name: "LineItemFilterValue", traits: {"smithy.api#enum" => [{"value" => "SAVINGS_PLAN_NEGATION", "name" => "SAVINGS_PLAN_NEGATION"}]})
-    LineItemFilterValuesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#LineItemFilterValuesList", name: "LineItemFilterValuesList", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
+    LineItemFilterAttributeName = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#LineItemFilterAttributeName", name: "LineItemFilterAttributeName")
+    LineItemFilterValue = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#LineItemFilterValue", name: "LineItemFilterValue")
+    LineItemFilterValuesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#LineItemFilterValuesList", name: "LineItemFilterValuesList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     LineItemFiltersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#LineItemFiltersList", name: "LineItemFiltersList", traits: {"smithy.api#length" => {"min" => 0, "max" => 1}})
     ListAccountAssociationsFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#ListAccountAssociationsFilter", name: "ListAccountAssociationsFilter")
     ListAccountAssociationsOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#ListAccountAssociationsOperationInput", name: "ListAccountAssociationsOperationInput")
@@ -152,7 +165,7 @@ module Aws::Billingconductor
     ListTagsForResourceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#ListTagsForResourceOutput", name: "ListTagsForResourceOutput")
     Margin = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#Margin", name: "Margin")
     MarginPercentage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#MarginPercentage", name: "MarginPercentage")
-    MatchOption = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#MatchOption", name: "MatchOption", traits: {"smithy.api#enum" => [{"value" => "NOT_EQUAL", "name" => "NOT_EQUAL"}]})
+    MatchOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#MatchOption", name: "MatchOption")
     MaxBillingGroupCostReportResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.billingconductor#MaxBillingGroupCostReportResults", name: "MaxBillingGroupCostReportResults", traits: {"smithy.api#range" => {"min" => 200, "max" => 300}})
     MaxBillingGroupResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.billingconductor#MaxBillingGroupResults", name: "MaxBillingGroupResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     MaxCustomLineItemResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.billingconductor#MaxCustomLineItemResults", name: "MaxCustomLineItemResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
@@ -164,10 +177,11 @@ module Aws::Billingconductor
     NumberOfAssociations = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.billingconductor#NumberOfAssociations", name: "NumberOfAssociations", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     NumberOfPricingPlansAssociatedWith = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.billingconductor#NumberOfPricingPlansAssociatedWith", name: "NumberOfPricingPlansAssociatedWith", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0}})
     Operation = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#Operation", name: "Operation", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^\\S+$"})
-    PricingPlanArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#PricingPlanArn", name: "PricingPlanArn", traits: {"smithy.api#pattern" => "^(arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/)?[a-zA-Z0-9]{10}$"})
+    PresentationObject = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#PresentationObject", name: "PresentationObject")
+    PricingPlanArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#PricingPlanArn", name: "PricingPlanArn", traits: {"smithy.api#pattern" => "^(arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/)?(BasicPricingPlan|Passthrough|[a-zA-Z0-9]{10})$"})
     PricingPlanArns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#PricingPlanArns", name: "PricingPlanArns", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     PricingPlanDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#PricingPlanDescription", name: "PricingPlanDescription", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}, "smithy.api#sensitive" => {}})
-    PricingPlanFullArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#PricingPlanFullArn", name: "PricingPlanFullArn", traits: {"smithy.api#pattern" => "^arn:aws(-cn)?:billingconductor::[0-9]{12}:pricingplan/[a-zA-Z0-9]{10}$"})
+    PricingPlanFullArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#PricingPlanFullArn", name: "PricingPlanFullArn", traits: {"smithy.api#pattern" => "^arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/(BasicPricingPlan|Passthrough|[a-zA-Z0-9]{10})$"})
     PricingPlanList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#PricingPlanList", name: "PricingPlanList")
     PricingPlanListElement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#PricingPlanListElement", name: "PricingPlanListElement")
     PricingPlanName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#PricingPlanName", name: "PricingPlanName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\+=\\.\\-@]+$", "smithy.api#sensitive" => {}})
@@ -179,14 +193,21 @@ module Aws::Billingconductor
     PricingRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#PricingRuleList", name: "PricingRuleList")
     PricingRuleListElement = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#PricingRuleListElement", name: "PricingRuleListElement")
     PricingRuleName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#PricingRuleName", name: "PricingRuleName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\+=\\.\\-@]+$", "smithy.api#sensitive" => {}})
-    PricingRuleScope = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#PricingRuleScope", name: "PricingRuleScope", traits: {"smithy.api#enum" => [{"value" => "GLOBAL", "name" => "GLOBAL"}, {"value" => "SERVICE", "name" => "SERVICE"}, {"value" => "BILLING_ENTITY", "name" => "BILLING_ENTITY"}, {"value" => "SKU", "name" => "SKU"}]})
-    PricingRuleType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#PricingRuleType", name: "PricingRuleType", traits: {"smithy.api#enum" => [{"value" => "MARKUP", "name" => "MARKUP"}, {"value" => "DISCOUNT", "name" => "DISCOUNT"}, {"value" => "TIERING", "name" => "TIERING"}]})
+    PricingRuleScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#PricingRuleScope", name: "PricingRuleScope")
+    PricingRuleType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#PricingRuleType", name: "PricingRuleType")
+    PrimaryAccountIdList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#PrimaryAccountIdList", name: "PrimaryAccountIdList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     ProformaCost = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#ProformaCost", name: "ProformaCost")
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
+    ResponsibilityTransferArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#ResponsibilityTransferArn", name: "ResponsibilityTransferArn", traits: {"smithy.api#pattern" => "^arn:[a-z0-9][a-z0-9-.]{0,62}:organizations::\\d{12}:transfer/o-[a-z0-9]{10,32}/(billing)/(inbound|outbound)/rt-[0-9a-z]{8,32}$"})
+    ResponsibilityTransferArnsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#ResponsibilityTransferArnsList", name: "ResponsibilityTransferArnsList", traits: {"smithy.api#length" => {"min" => 1, "max" => 30}})
     RetryAfterSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.billingconductor#RetryAfterSeconds", name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0})
+    SearchOption = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#SearchOption", name: "SearchOption")
+    SearchValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#SearchValue", name: "SearchValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9_\\+=\\.\\-@ ]+$"})
     Service = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#Service", name: "Service", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9]+$"})
     ServiceLimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#ServiceLimitExceededException", name: "ServiceLimitExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 402})
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#String", name: "String")
+    StringSearch = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#StringSearch", name: "StringSearch")
+    StringSearches = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#StringSearches", name: "StringSearches", traits: {"smithy.api#length" => {"min" => 1, "max" => 1}})
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#TagKeyList", name: "TagKeyList", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
     TagMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.billingconductor#TagMap", name: "TagMap", traits: {"smithy.api#length" => {"min" => 1, "max" => 200}})
@@ -202,6 +223,8 @@ module Aws::Billingconductor
     UpdateBillingGroupAccountGrouping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#UpdateBillingGroupAccountGrouping", name: "UpdateBillingGroupAccountGrouping")
     UpdateBillingGroupOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#UpdateBillingGroupOperationInput", name: "UpdateBillingGroupOperationInput")
     UpdateBillingGroupOperationOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#UpdateBillingGroupOperationOutput", name: "UpdateBillingGroupOperationOutput")
+    UpdateBillingTransferPreferenceInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#UpdateBillingTransferPreferenceInput", name: "UpdateBillingTransferPreferenceInput")
+    UpdateBillingTransferPreferenceOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#UpdateBillingTransferPreferenceOutput", name: "UpdateBillingTransferPreferenceOutput")
     UpdateCustomLineItemChargeDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#UpdateCustomLineItemChargeDetails", name: "UpdateCustomLineItemChargeDetails")
     UpdateCustomLineItemFlatChargeDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#UpdateCustomLineItemFlatChargeDetails", name: "UpdateCustomLineItemFlatChargeDetails")
     UpdateCustomLineItemOperationInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#UpdateCustomLineItemOperationInput", name: "UpdateCustomLineItemOperationInput")
@@ -217,7 +240,7 @@ module Aws::Billingconductor
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ValidationExceptionField = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.billingconductor#ValidationExceptionField", name: "ValidationExceptionField")
     ValidationExceptionFieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.billingconductor#ValidationExceptionFieldList", name: "ValidationExceptionFieldList")
-    ValidationExceptionReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.billingconductor#ValidationExceptionReason", name: "ValidationExceptionReason", traits: {"smithy.api#enum" => [{"value" => "UNKNOWN_OPERATION", "name" => "UNKNOWN_OPERATION"}, {"value" => "CANNOT_PARSE", "name" => "CANNOT_PARSE"}, {"value" => "FIELD_VALIDATION_FAILED", "name" => "FIELD_VALIDATION_FAILED"}, {"value" => "OTHER", "name" => "OTHER"}, {"value" => "PRIMARY_NOT_ASSOCIATED", "name" => "PRIMARY_NOT_ASSOCIATED"}, {"value" => "PRIMARY_CANNOT_DISASSOCIATE", "name" => "PRIMARY_CANNOT_DISASSOCIATE"}, {"value" => "ACCOUNTS_NOT_ASSOCIATED", "name" => "ACCOUNTS_NOT_ASSOCIATED"}, {"value" => "ACCOUNTS_ALREADY_ASSOCIATED", "name" => "ACCOUNTS_ALREADY_ASSOCIATED"}, {"value" => "ILLEGAL_PRIMARY_ACCOUNT", "name" => "ILLEGAL_PRIMARY_ACCOUNT"}, {"value" => "ILLEGAL_ACCOUNTS", "name" => "ILLEGAL_ACCOUNTS"}, {"value" => "MISMATCHED_BILLINGGROUP_ARN", "name" => "MISMATCHED_BILLINGGROUP_ARN"}, {"value" => "MISSING_BILLINGGROUP", "name" => "MISSING_BILLINGGROUP"}, {"value" => "MISMATCHED_CUSTOMLINEITEM_ARN", "name" => "MISMATCHED_CUSTOMLINEITEM_ARN"}, {"value" => "ILLEGAL_BILLING_PERIOD", "name" => "ILLEGAL_BILLING_PERIOD"}, {"value" => "ILLEGAL_BILLING_PERIOD_RANGE", "name" => "ILLEGAL_BILLING_PERIOD_RANGE"}, {"value" => "TOO_MANY_ACCOUNTS_IN_REQUEST", "name" => "TOO_MANY_ACCOUNTS_IN_REQUEST"}, {"value" => "DUPLICATE_ACCOUNT", "name" => "DUPLICATE_ACCOUNT"}, {"value" => "INVALID_BILLING_GROUP_STATUS", "name" => "INVALID_BILLING_GROUP_STATUS"}, {"value" => "MISMATCHED_PRICINGPLAN_ARN", "name" => "MISMATCHED_PRICINGPLAN_ARN"}, {"value" => "MISSING_PRICINGPLAN", "name" => "MISSING_PRICINGPLAN"}, {"value" => "MISMATCHED_PRICINGRULE_ARN", "name" => "MISMATCHED_PRICINGRULE_ARN"}, {"value" => "DUPLICATE_PRICINGRULE_ARNS", "name" => "DUPLICATE_PRICINGRULE_ARNS"}, {"value" => "ILLEGAL_EXPRESSION", "name" => "ILLEGAL_EXPRESSION"}, {"value" => "ILLEGAL_SCOPE", "name" => "ILLEGAL_SCOPE"}, {"value" => "ILLEGAL_SERVICE", "name" => "ILLEGAL_SERVICE"}, {"value" => "PRICINGRULES_NOT_EXIST", "name" => "PRICINGRULES_NOT_EXIST"}, {"value" => "PRICINGRULES_ALREADY_ASSOCIATED", "name" => "PRICINGRULES_ALREADY_ASSOCIATED"}, {"value" => "PRICINGRULES_NOT_ASSOCIATED", "name" => "PRICINGRULES_NOT_ASSOCIATED"}, {"value" => "INVALID_TIME_RANGE", "name" => "INVALID_TIME_RANGE"}, {"value" => "INVALID_BILLINGVIEW_ARN", "name" => "INVALID_BILLINGVIEW_ARN"}, {"value" => "MISMATCHED_BILLINGVIEW_ARN", "name" => "MISMATCHED_BILLINGVIEW_ARN"}, {"value" => "ILLEGAL_CUSTOMLINEITEM", "name" => "ILLEGAL_CUSTOMLINEITEM"}, {"value" => "MISSING_CUSTOMLINEITEM", "name" => "MISSING_CUSTOMLINEITEM"}, {"value" => "ILLEGAL_CUSTOMLINEITEM_UPDATE", "name" => "ILLEGAL_CUSTOMLINEITEM_UPDATE"}, {"value" => "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST", "name" => "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST"}, {"value" => "ILLEGAL_CHARGE_DETAILS", "name" => "ILLEGAL_CHARGE_DETAILS"}, {"value" => "ILLEGAL_UPDATE_CHARGE_DETAILS", "name" => "ILLEGAL_UPDATE_CHARGE_DETAILS"}, {"value" => "INVALID_ARN", "name" => "INVALID_ARN"}, {"value" => "ILLEGAL_RESOURCE_ARNS", "name" => "ILLEGAL_RESOURCE_ARNS"}, {"value" => "ILLEGAL_CUSTOMLINEITEM_MODIFICATION", "name" => "ILLEGAL_CUSTOMLINEITEM_MODIFICATION"}, {"value" => "MISSING_LINKED_ACCOUNT_IDS", "name" => "MISSING_LINKED_ACCOUNT_IDS"}, {"value" => "MULTIPLE_LINKED_ACCOUNT_IDS", "name" => "MULTIPLE_LINKED_ACCOUNT_IDS"}, {"value" => "MISSING_PRICING_PLAN_ARN", "name" => "MISSING_PRICING_PLAN_ARN"}, {"value" => "MULTIPLE_PRICING_PLAN_ARN", "name" => "MULTIPLE_PRICING_PLAN_ARN"}, {"value" => "ILLEGAL_CHILD_ASSOCIATE_RESOURCE", "name" => "ILLEGAL_CHILD_ASSOCIATE_RESOURCE"}, {"value" => "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS", "name" => "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS"}, {"value" => "INVALID_BILLING_GROUP", "name" => "INVALID_BILLING_GROUP"}, {"value" => "INVALID_BILLING_PERIOD_FOR_OPERATION", "name" => "INVALID_BILLING_PERIOD_FOR_OPERATION"}, {"value" => "ILLEGAL_BILLING_ENTITY", "name" => "ILLEGAL_BILLING_ENTITY"}, {"value" => "ILLEGAL_MODIFIER_PERCENTAGE", "name" => "ILLEGAL_MODIFIER_PERCENTAGE"}, {"value" => "ILLEGAL_TYPE", "name" => "ILLEGAL_TYPE"}, {"value" => "ILLEGAL_ENDED_BILLINGGROUP", "name" => "ILLEGAL_ENDED_BILLINGGROUP"}, {"value" => "ILLEGAL_TIERING_INPUT", "name" => "ILLEGAL_TIERING_INPUT"}, {"value" => "ILLEGAL_OPERATION", "name" => "ILLEGAL_OPERATION"}, {"value" => "ILLEGAL_USAGE_TYPE", "name" => "ILLEGAL_USAGE_TYPE"}, {"value" => "INVALID_SKU_COMBO", "name" => "INVALID_SKU_COMBO"}, {"value" => "INVALID_FILTER", "name" => "INVALID_FILTER"}, {"value" => "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS", "name" => "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS"}, {"value" => "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP", "name" => "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP"}, {"value" => "ILLEGAL_ACCOUNT_ID", "name" => "ILLEGAL_ACCOUNT_ID"}]})
+    ValidationExceptionReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.billingconductor#ValidationExceptionReason", name: "ValidationExceptionReason")
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     AccessDeniedException.type = Types::AccessDeniedException
@@ -227,8 +250,9 @@ module Aws::Billingconductor
     AccountAssociationsListElement.add_member(:account_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountName, name: "AccountName"))
     AccountAssociationsListElement.add_member(:account_email, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountEmail, name: "AccountEmail"))
     AccountAssociationsListElement.type = Types::AccountAssociationsListElement
-    AccountGrouping.add_member(:linked_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "LinkedAccountIds", traits: {"smithy.api#required" => {}}))
+    AccountGrouping.add_member(:linked_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountIdList, name: "LinkedAccountIds", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
     AccountGrouping.add_member(:auto_associate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AutoAssociate"))
+    AccountGrouping.add_member(:responsibility_transfer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArn, name: "ResponsibilityTransferArn"))
     AccountGrouping.type = Types::AccountGrouping
     AccountIdFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     AccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
@@ -245,6 +269,11 @@ module Aws::Billingconductor
     AssociateResourceError.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     AssociateResourceError.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateResourceErrorReason, name: "Reason"))
     AssociateResourceError.type = Types::AssociateResourceError
+    AssociateResourceErrorReason.add_member(:invalid_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_ARN", traits: {"smithy.api#enumValue" => "INVALID_ARN"}))
+    AssociateResourceErrorReason.add_member(:service_limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE_LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "SERVICE_LIMIT_EXCEEDED"}))
+    AssociateResourceErrorReason.add_member(:illegal_customlineitem, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_CUSTOMLINEITEM", traits: {"smithy.api#enumValue" => "ILLEGAL_CUSTOMLINEITEM"}))
+    AssociateResourceErrorReason.add_member(:internal_server_exception, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNAL_SERVER_EXCEPTION", traits: {"smithy.api#enumValue" => "INTERNAL_SERVER_EXCEPTION"}))
+    AssociateResourceErrorReason.add_member(:invalid_billing_period_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_BILLING_PERIOD_RANGE", traits: {"smithy.api#enumValue" => "INVALID_BILLING_PERIOD_RANGE"}))
     AssociateResourceResponseElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "Arn"))
     AssociateResourceResponseElement.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: AssociateResourceError, name: "Error"))
     AssociateResourceResponseElement.type = Types::AssociateResourceResponseElement
@@ -252,7 +281,11 @@ module Aws::Billingconductor
     Attribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Key"))
     Attribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "Value"))
     Attribute.type = Types::Attribute
+    AttributeValueList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "member"))
     AttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Attribute, name: "member"))
+    AutoTransferBillingGroupCreationPreference.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "Enabled", traits: {"smithy.api#required" => {}}))
+    AutoTransferBillingGroupCreationPreference.add_member(:pricing_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanArn, name: "PricingPlanArn"))
+    AutoTransferBillingGroupCreationPreference.type = Types::AutoTransferBillingGroupCreationPreference
     BatchAssociateResourcesToCustomLineItemOperationInput.add_member(:target_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemArn, name: "TargetArn", traits: {"smithy.api#required" => {}, "smithy.api#resourceIdentifier" => "Arn"}))
     BatchAssociateResourcesToCustomLineItemOperationInput.add_member(:resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemBatchAssociationsList, name: "ResourceArns", traits: {"smithy.api#required" => {}}))
     BatchAssociateResourcesToCustomLineItemOperationInput.add_member(:billing_period_range, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemBillingPeriodRange, name: "BillingPeriodRange"))
@@ -297,18 +330,33 @@ module Aws::Billingconductor
     BillingGroupListElement.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupStatus, name: "Status"))
     BillingGroupListElement.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupStatusReason, name: "StatusReason"))
     BillingGroupListElement.add_member(:account_grouping, ::Smithy::Schema::Shapes::MemberShape.new(target: ListBillingGroupAccountGrouping, name: "AccountGrouping"))
+    BillingGroupListElement.add_member(:billing_group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupType, name: "BillingGroupType"))
     BillingGroupListElement.type = Types::BillingGroupListElement
+    BillingGroupStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    BillingGroupStatus.add_member(:primary_account_missing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY_ACCOUNT_MISSING", traits: {"smithy.api#enumValue" => "PRIMARY_ACCOUNT_MISSING"}))
+    BillingGroupStatus.add_member(:pending, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PENDING", traits: {"smithy.api#enumValue" => "PENDING"}))
     BillingGroupStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupStatus, name: "member"))
+    BillingGroupType.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    BillingGroupType.add_member(:transfer_billing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSFER_BILLING", traits: {"smithy.api#enumValue" => "TRANSFER_BILLING"}))
+    BillingGroupTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupType, name: "member"))
     BillingPeriodRange.add_member(:inclusive_start_billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingPeriod, name: "InclusiveStartBillingPeriod", traits: {"smithy.api#required" => {}}))
     BillingPeriodRange.add_member(:exclusive_end_billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingPeriod, name: "ExclusiveEndBillingPeriod", traits: {"smithy.api#required" => {}}))
     BillingPeriodRange.type = Types::BillingPeriodRange
     ComputationPreference.add_member(:pricing_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanFullArn, name: "PricingPlanArn", traits: {"smithy.api#required" => {}}))
     ComputationPreference.type = Types::ComputationPreference
+    ComputationRuleEnum.add_member(:itemized, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITEMIZED", traits: {"smithy.api#enumValue" => "ITEMIZED"}))
+    ComputationRuleEnum.add_member(:consolidated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONSOLIDATED", traits: {"smithy.api#enumValue" => "CONSOLIDATED"}))
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
     ConflictException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ConflictExceptionReason, name: "Reason"))
     ConflictException.type = Types::ConflictException
+    ConflictExceptionReason.add_member(:resource_name_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESOURCE_NAME_CONFLICT", traits: {"smithy.api#enumValue" => "RESOURCE_NAME_CONFLICT"}))
+    ConflictExceptionReason.add_member(:pricing_rule_in_pricing_plan_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICING_RULE_IN_PRICING_PLAN_CONFLICT", traits: {"smithy.api#enumValue" => "PRICING_RULE_IN_PRICING_PLAN_CONFLICT"}))
+    ConflictExceptionReason.add_member(:pricing_plan_attached_to_billing_group_delete_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT", traits: {"smithy.api#enumValue" => "PRICING_PLAN_ATTACHED_TO_BILLING_GROUP_DELETE_CONFLICT"}))
+    ConflictExceptionReason.add_member(:pricing_plan_referenced_by_preference_delete_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT", traits: {"smithy.api#enumValue" => "PRICING_PLAN_REFERENCED_BY_PREFERENCE_DELETE_CONFLICT"}))
+    ConflictExceptionReason.add_member(:pricing_rule_attached_to_pricing_plan_delete_conflict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT", traits: {"smithy.api#enumValue" => "PRICING_RULE_ATTACHED_TO_PRICING_PLAN_DELETE_CONFLICT"}))
+    ConflictExceptionReason.add_member(:write_conflict_retry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WRITE_CONFLICT_RETRY", traits: {"smithy.api#enumValue" => "WRITE_CONFLICT_RETRY"}))
     CreateBillingGroupOperationInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}}))
     CreateBillingGroupOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupName, name: "Name", traits: {"smithy.api#required" => {}}))
     CreateBillingGroupOperationInput.add_member(:account_grouping, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountGrouping, name: "AccountGrouping", traits: {"smithy.api#required" => {}}))
@@ -327,6 +375,8 @@ module Aws::Billingconductor
     CreateCustomLineItemOperationInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     CreateCustomLineItemOperationInput.add_member(:charge_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemChargeDetails, name: "ChargeDetails", traits: {"smithy.api#required" => {}}))
     CreateCustomLineItemOperationInput.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
+    CreateCustomLineItemOperationInput.add_member(:computation_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationRuleEnum, name: "ComputationRule"))
+    CreateCustomLineItemOperationInput.add_member(:presentation_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PresentationObject, name: "PresentationDetails"))
     CreateCustomLineItemOperationInput.type = Types::CreateCustomLineItemOperationInput
     CreateCustomLineItemOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemArn, name: "Arn"))
     CreateCustomLineItemOperationOutput.type = Types::CreateCustomLineItemOperationOutput
@@ -355,8 +405,11 @@ module Aws::Billingconductor
     CreatePricingRuleOperationInput.type = Types::CreatePricingRuleOperationInput
     CreatePricingRuleOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingRuleArn, name: "Arn"))
     CreatePricingRuleOperationOutput.type = Types::CreatePricingRuleOperationOutput
-    CreateTieringInput.add_member(:free_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFreeTierConfig, name: "FreeTier", traits: {"smithy.api#required" => {}}))
+    CreateTieringInput.add_member(:free_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: CreateFreeTierConfig, name: "FreeTier"))
+    CreateTieringInput.add_member(:custom_tiers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomTiersList, name: "CustomTiers"))
     CreateTieringInput.type = Types::CreateTieringInput
+    CurrencyCode.add_member(:usd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USD", traits: {"smithy.api#enumValue" => "USD"}))
+    CurrencyCode.add_member(:cny, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CNY", traits: {"smithy.api#enumValue" => "CNY"}))
     CustomLineItemArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemArn, name: "member"))
     CustomLineItemAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "member"))
     CustomLineItemBatchAssociationsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationElement, name: "member"))
@@ -383,11 +436,17 @@ module Aws::Billingconductor
     CustomLineItemListElement.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Instant, name: "LastModifiedTime", traits: {"smithy.api#default" => 0}))
     CustomLineItemListElement.add_member(:association_size, ::Smithy::Schema::Shapes::MemberShape.new(target: NumberOfAssociations, name: "AssociationSize", traits: {"smithy.api#default" => 0}))
     CustomLineItemListElement.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
+    CustomLineItemListElement.add_member(:computation_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationRuleEnum, name: "ComputationRule"))
+    CustomLineItemListElement.add_member(:presentation_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PresentationObject, name: "PresentationDetails"))
     CustomLineItemListElement.type = Types::CustomLineItemListElement
     CustomLineItemNameList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemName, name: "member"))
     CustomLineItemPercentageChargeDetails.add_member(:percentage_value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemPercentageChargeValue, name: "PercentageValue", traits: {"smithy.api#required" => {}}))
     CustomLineItemPercentageChargeDetails.add_member(:associated_values, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemAssociationsList, name: "AssociatedValues"))
     CustomLineItemPercentageChargeDetails.type = Types::CustomLineItemPercentageChargeDetails
+    CustomLineItemRelationship.add_member(:parent, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PARENT", traits: {"smithy.api#enumValue" => "PARENT"}))
+    CustomLineItemRelationship.add_member(:child, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CHILD", traits: {"smithy.api#enumValue" => "CHILD"}))
+    CustomLineItemType.add_member(:credit, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREDIT", traits: {"smithy.api#enumValue" => "CREDIT"}))
+    CustomLineItemType.add_member(:fee, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FEE", traits: {"smithy.api#enumValue" => "FEE"}))
     CustomLineItemVersionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemVersionListElement, name: "member"))
     CustomLineItemVersionListElement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemName, name: "Name"))
     CustomLineItemVersionListElement.add_member(:charge_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ListCustomLineItemChargeDetails, name: "ChargeDetails"))
@@ -403,7 +462,14 @@ module Aws::Billingconductor
     CustomLineItemVersionListElement.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomLineItemArn, name: "Arn"))
     CustomLineItemVersionListElement.add_member(:start_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Instant, name: "StartTime", traits: {"smithy.api#default" => 0}))
     CustomLineItemVersionListElement.add_member(:account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "AccountId"))
+    CustomLineItemVersionListElement.add_member(:computation_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputationRuleEnum, name: "ComputationRule"))
+    CustomLineItemVersionListElement.add_member(:presentation_details, ::Smithy::Schema::Shapes::MemberShape.new(target: PresentationObject, name: "PresentationDetails"))
     CustomLineItemVersionListElement.type = Types::CustomLineItemVersionListElement
+    CustomTier.add_member(:begin_range_inclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomTierBeginRangeInclusive, name: "BeginRangeInclusive", traits: {"smithy.api#required" => {}}))
+    CustomTier.add_member(:end_range_exclusive, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomTierEndRangeExclusive, name: "EndRangeExclusive"))
+    CustomTier.add_member(:rate_value, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomTierRateValue, name: "RateValue", traits: {"smithy.api#required" => {}}))
+    CustomTier.type = Types::CustomTier
+    CustomTiersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomTier, name: "member"))
     DeleteBillingGroupOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     DeleteBillingGroupOperationInput.type = Types::DeleteBillingGroupOperationInput
     DeleteBillingGroupOperationOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "Arn"))
@@ -446,14 +512,26 @@ module Aws::Billingconductor
     GetBillingGroupCostReportOutput.add_member(:billing_group_cost_report_results, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupCostReportResultsList, name: "BillingGroupCostReportResults"))
     GetBillingGroupCostReportOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     GetBillingGroupCostReportOutput.type = Types::GetBillingGroupCostReportOutput
+    GetBillingTransferPreferenceInput.add_member(:responsibility_transfer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArn, name: "ResponsibilityTransferArn", traits: {"smithy.api#required" => {}}))
+    GetBillingTransferPreferenceInput.type = Types::GetBillingTransferPreferenceInput
+    GetBillingTransferPreferenceOutput.add_member(:responsibility_transfer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArn, name: "ResponsibilityTransferArn", traits: {"smithy.api#required" => {}}))
+    GetBillingTransferPreferenceOutput.add_member(:auto_billing_transfer_billing_group_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTransferBillingGroupCreationPreference, name: "AutoBillingTransferBillingGroupCreation", traits: {"smithy.api#required" => {}}))
+    GetBillingTransferPreferenceOutput.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Instant, name: "LastModifiedTime", traits: {"smithy.api#default" => nil}))
+    GetBillingTransferPreferenceOutput.type = Types::GetBillingTransferPreferenceOutput
+    GroupByAttributeName.add_member(:product_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRODUCT_NAME", traits: {"smithy.api#enumValue" => "PRODUCT_NAME"}))
+    GroupByAttributeName.add_member(:billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BILLING_PERIOD", traits: {"smithy.api#enumValue" => "BILLING_PERIOD"}))
     GroupByAttributesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GroupByAttributeName, name: "member"))
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     InternalServerException.type = Types::InternalServerException
     LineItemFilter.add_member(:attribute, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilterAttributeName, name: "Attribute", traits: {"smithy.api#required" => {}}))
     LineItemFilter.add_member(:match_option, ::Smithy::Schema::Shapes::MemberShape.new(target: MatchOption, name: "MatchOption", traits: {"smithy.api#required" => {}}))
-    LineItemFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilterValuesList, name: "Values", traits: {"smithy.api#required" => {}}))
+    LineItemFilter.add_member(:values, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilterValuesList, name: "Values", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => []}))
+    LineItemFilter.add_member(:attribute_values, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValueList, name: "AttributeValues"))
     LineItemFilter.type = Types::LineItemFilter
+    LineItemFilterAttributeName.add_member(:line_item_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LINE_ITEM_TYPE", traits: {"smithy.api#enumValue" => "LINE_ITEM_TYPE"}))
+    LineItemFilterAttributeName.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
+    LineItemFilterValue.add_member(:savings_plan_negation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SAVINGS_PLAN_NEGATION", traits: {"smithy.api#enumValue" => "SAVINGS_PLAN_NEGATION"}))
     LineItemFilterValuesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilterValue, name: "member"))
     LineItemFiltersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFilter, name: "member"))
     ListAccountAssociationsFilter.add_member(:association, ::Smithy::Schema::Shapes::MemberShape.new(target: Association, name: "Association"))
@@ -468,6 +546,7 @@ module Aws::Billingconductor
     ListAccountAssociationsOperationOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "NextToken"))
     ListAccountAssociationsOperationOutput.type = Types::ListAccountAssociationsOperationOutput
     ListBillingGroupAccountGrouping.add_member(:auto_associate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AutoAssociate"))
+    ListBillingGroupAccountGrouping.add_member(:responsibility_transfer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArn, name: "ResponsibilityTransferArn"))
     ListBillingGroupAccountGrouping.type = Types::ListBillingGroupAccountGrouping
     ListBillingGroupCostReportsFilter.add_member(:billing_group_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArnList, name: "BillingGroupArns"))
     ListBillingGroupCostReportsFilter.type = Types::ListBillingGroupCostReportsFilter
@@ -483,6 +562,10 @@ module Aws::Billingconductor
     ListBillingGroupsFilter.add_member(:pricing_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanFullArn, name: "PricingPlan"))
     ListBillingGroupsFilter.add_member(:statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupStatusList, name: "Statuses"))
     ListBillingGroupsFilter.add_member(:auto_associate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AutoAssociate"))
+    ListBillingGroupsFilter.add_member(:primary_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryAccountIdList, name: "PrimaryAccountIds"))
+    ListBillingGroupsFilter.add_member(:billing_group_types, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupTypeList, name: "BillingGroupTypes"))
+    ListBillingGroupsFilter.add_member(:names, ::Smithy::Schema::Shapes::MemberShape.new(target: StringSearches, name: "Names"))
+    ListBillingGroupsFilter.add_member(:responsibility_transfer_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArnsList, name: "ResponsibilityTransferArns"))
     ListBillingGroupsFilter.type = Types::ListBillingGroupsFilter
     ListBillingGroupsOperationInput.add_member(:billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingPeriod, name: "BillingPeriod"))
     ListBillingGroupsOperationInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxBillingGroupResults, name: "MaxResults"))
@@ -590,6 +673,10 @@ module Aws::Billingconductor
     ListTagsForResourceInput.type = Types::ListTagsForResourceInput
     ListTagsForResourceOutput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags"))
     ListTagsForResourceOutput.type = Types::ListTagsForResourceOutput
+    MatchOption.add_member(:not_equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_EQUAL", traits: {"smithy.api#enumValue" => "NOT_EQUAL"}))
+    MatchOption.add_member(:equal, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EQUAL", traits: {"smithy.api#enumValue" => "EQUAL"}))
+    PresentationObject.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: Service, name: "Service", traits: {"smithy.api#required" => {}}))
+    PresentationObject.type = Types::PresentationObject
     PricingPlanArns.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanArn, name: "member"))
     PricingPlanList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanListElement, name: "member"))
     PricingPlanListElement.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: PricingPlanName, name: "Name"))
@@ -618,16 +705,30 @@ module Aws::Billingconductor
     PricingRuleListElement.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, name: "UsageType"))
     PricingRuleListElement.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "Operation"))
     PricingRuleListElement.type = Types::PricingRuleListElement
+    PricingRuleScope.add_member(:global, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GLOBAL", traits: {"smithy.api#enumValue" => "GLOBAL"}))
+    PricingRuleScope.add_member(:service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVICE", traits: {"smithy.api#enumValue" => "SERVICE"}))
+    PricingRuleScope.add_member(:billing_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BILLING_ENTITY", traits: {"smithy.api#enumValue" => "BILLING_ENTITY"}))
+    PricingRuleScope.add_member(:sku, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SKU", traits: {"smithy.api#enumValue" => "SKU"}))
+    PricingRuleType.add_member(:markup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MARKUP", traits: {"smithy.api#enumValue" => "MARKUP"}))
+    PricingRuleType.add_member(:discount, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCOUNT", traits: {"smithy.api#enumValue" => "DISCOUNT"}))
+    PricingRuleType.add_member(:tiering, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TIERING", traits: {"smithy.api#enumValue" => "TIERING"}))
+    PrimaryAccountIdList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "member"))
     ResourceNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
+    ResponsibilityTransferArnsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArn, name: "member"))
+    SearchOption.add_member(:starts_with, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STARTS_WITH", traits: {"smithy.api#enumValue" => "STARTS_WITH"}))
     ServiceLimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ServiceLimitExceededException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId"))
     ServiceLimitExceededException.add_member(:resource_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceType"))
     ServiceLimitExceededException.add_member(:limit_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LimitCode", traits: {"smithy.api#required" => {}}))
     ServiceLimitExceededException.add_member(:service_code, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ServiceCode", traits: {"smithy.api#required" => {}}))
     ServiceLimitExceededException.type = Types::ServiceLimitExceededException
+    StringSearch.add_member(:search_option, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchOption, name: "SearchOption", traits: {"smithy.api#required" => {}}))
+    StringSearch.add_member(:search_value, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchValue, name: "SearchValue", traits: {"smithy.api#required" => {}}))
+    StringSearch.type = Types::StringSearch
+    StringSearches.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StringSearch, name: "member"))
     TagKeyList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "member"))
     TagMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     TagMap.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
@@ -638,13 +739,15 @@ module Aws::Billingconductor
     ThrottlingException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ThrottlingException.add_member(:retry_after_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: RetryAfterSeconds, name: "RetryAfterSeconds", traits: {"smithy.api#default" => 0, "smithy.api#httpHeader" => "Retry-After"}))
     ThrottlingException.type = Types::ThrottlingException
-    Tiering.add_member(:free_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTierConfig, name: "FreeTier", traits: {"smithy.api#required" => {}}))
+    Tiering.add_member(:free_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: FreeTierConfig, name: "FreeTier"))
+    Tiering.add_member(:custom_tiers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomTiersList, name: "CustomTiers"))
     Tiering.type = Types::Tiering
     UntagResourceInput.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "ResourceArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UntagResourceInput.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "TagKeys", traits: {"smithy.api#httpQuery" => "tagKeys", "smithy.api#required" => {}}))
     UntagResourceInput.type = Types::UntagResourceInput
     UntagResourceOutput.type = Types::UntagResourceOutput
     UpdateBillingGroupAccountGrouping.add_member(:auto_associate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "AutoAssociate"))
+    UpdateBillingGroupAccountGrouping.add_member(:responsibility_transfer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArn, name: "ResponsibilityTransferArn"))
     UpdateBillingGroupAccountGrouping.type = Types::UpdateBillingGroupAccountGrouping
     UpdateBillingGroupOperationInput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupArn, name: "Arn", traits: {"smithy.api#required" => {}}))
     UpdateBillingGroupOperationInput.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupName, name: "Name"))
@@ -664,6 +767,14 @@ module Aws::Billingconductor
     UpdateBillingGroupOperationOutput.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: BillingGroupStatusReason, name: "StatusReason"))
     UpdateBillingGroupOperationOutput.add_member(:account_grouping, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateBillingGroupAccountGrouping, name: "AccountGrouping"))
     UpdateBillingGroupOperationOutput.type = Types::UpdateBillingGroupOperationOutput
+    UpdateBillingTransferPreferenceInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#httpHeader" => "X-Amzn-Client-Token", "smithy.api#idempotencyToken" => {}}))
+    UpdateBillingTransferPreferenceInput.add_member(:responsibility_transfer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArn, name: "ResponsibilityTransferArn", traits: {"smithy.api#required" => {}}))
+    UpdateBillingTransferPreferenceInput.add_member(:auto_billing_transfer_billing_group_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTransferBillingGroupCreationPreference, name: "AutoBillingTransferBillingGroupCreation", traits: {"smithy.api#required" => {}}))
+    UpdateBillingTransferPreferenceInput.type = Types::UpdateBillingTransferPreferenceInput
+    UpdateBillingTransferPreferenceOutput.add_member(:responsibility_transfer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponsibilityTransferArn, name: "ResponsibilityTransferArn", traits: {"smithy.api#required" => {}}))
+    UpdateBillingTransferPreferenceOutput.add_member(:auto_billing_transfer_billing_group_creation, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoTransferBillingGroupCreationPreference, name: "AutoBillingTransferBillingGroupCreation", traits: {"smithy.api#required" => {}}))
+    UpdateBillingTransferPreferenceOutput.add_member(:last_modified_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Instant, name: "LastModifiedTime", traits: {"smithy.api#default" => 0, "smithy.api#required" => {}}))
+    UpdateBillingTransferPreferenceOutput.type = Types::UpdateBillingTransferPreferenceOutput
     UpdateCustomLineItemChargeDetails.add_member(:flat, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateCustomLineItemFlatChargeDetails, name: "Flat"))
     UpdateCustomLineItemChargeDetails.add_member(:percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateCustomLineItemPercentageChargeDetails, name: "Percentage"))
     UpdateCustomLineItemChargeDetails.add_member(:line_item_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: LineItemFiltersList, name: "LineItemFilters"))
@@ -719,7 +830,8 @@ module Aws::Billingconductor
     UpdatePricingRuleOperationOutput.add_member(:usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: UsageType, name: "UsageType"))
     UpdatePricingRuleOperationOutput.add_member(:operation, ::Smithy::Schema::Shapes::MemberShape.new(target: Operation, name: "Operation"))
     UpdatePricingRuleOperationOutput.type = Types::UpdatePricingRuleOperationOutput
-    UpdateTieringInput.add_member(:free_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFreeTierConfig, name: "FreeTier", traits: {"smithy.api#required" => {}}))
+    UpdateTieringInput.add_member(:free_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateFreeTierConfig, name: "FreeTier"))
+    UpdateTieringInput.add_member(:custom_tiers, ::Smithy::Schema::Shapes::MemberShape.new(target: CustomTiersList, name: "CustomTiers"))
     UpdateTieringInput.type = Types::UpdateTieringInput
     ValidationException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationException.add_member(:reason, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionReason, name: "Reason"))
@@ -729,12 +841,78 @@ module Aws::Billingconductor
     ValidationExceptionField.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     ValidationExceptionField.type = Types::ValidationExceptionField
     ValidationExceptionFieldList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ValidationExceptionField, name: "member"))
+    ValidationExceptionReason.add_member(:unknown_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNKNOWN_OPERATION", traits: {"smithy.api#enumValue" => "UNKNOWN_OPERATION"}))
+    ValidationExceptionReason.add_member(:cannot_parse, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_PARSE", traits: {"smithy.api#enumValue" => "CANNOT_PARSE"}))
+    ValidationExceptionReason.add_member(:field_validation_failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIELD_VALIDATION_FAILED", traits: {"smithy.api#enumValue" => "FIELD_VALIDATION_FAILED"}))
+    ValidationExceptionReason.add_member(:other, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OTHER", traits: {"smithy.api#enumValue" => "OTHER"}))
+    ValidationExceptionReason.add_member(:primary_not_associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY_NOT_ASSOCIATED", traits: {"smithy.api#enumValue" => "PRIMARY_NOT_ASSOCIATED"}))
+    ValidationExceptionReason.add_member(:primary_cannot_disassociate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY_CANNOT_DISASSOCIATE", traits: {"smithy.api#enumValue" => "PRIMARY_CANNOT_DISASSOCIATE"}))
+    ValidationExceptionReason.add_member(:accounts_not_associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNTS_NOT_ASSOCIATED", traits: {"smithy.api#enumValue" => "ACCOUNTS_NOT_ASSOCIATED"}))
+    ValidationExceptionReason.add_member(:accounts_already_associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNTS_ALREADY_ASSOCIATED", traits: {"smithy.api#enumValue" => "ACCOUNTS_ALREADY_ASSOCIATED"}))
+    ValidationExceptionReason.add_member(:illegal_primary_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_PRIMARY_ACCOUNT", traits: {"smithy.api#enumValue" => "ILLEGAL_PRIMARY_ACCOUNT"}))
+    ValidationExceptionReason.add_member(:illegal_accounts, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_ACCOUNTS", traits: {"smithy.api#enumValue" => "ILLEGAL_ACCOUNTS"}))
+    ValidationExceptionReason.add_member(:mismatched_billinggroup_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISMATCHED_BILLINGGROUP_ARN", traits: {"smithy.api#enumValue" => "MISMATCHED_BILLINGGROUP_ARN"}))
+    ValidationExceptionReason.add_member(:missing_billinggroup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_BILLINGGROUP", traits: {"smithy.api#enumValue" => "MISSING_BILLINGGROUP"}))
+    ValidationExceptionReason.add_member(:mismatched_customlineitem_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISMATCHED_CUSTOMLINEITEM_ARN", traits: {"smithy.api#enumValue" => "MISMATCHED_CUSTOMLINEITEM_ARN"}))
+    ValidationExceptionReason.add_member(:illegal_billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_BILLING_PERIOD", traits: {"smithy.api#enumValue" => "ILLEGAL_BILLING_PERIOD"}))
+    ValidationExceptionReason.add_member(:illegal_billing_period_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_BILLING_PERIOD_RANGE", traits: {"smithy.api#enumValue" => "ILLEGAL_BILLING_PERIOD_RANGE"}))
+    ValidationExceptionReason.add_member(:too_many_accounts_in_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOO_MANY_ACCOUNTS_IN_REQUEST", traits: {"smithy.api#enumValue" => "TOO_MANY_ACCOUNTS_IN_REQUEST"}))
+    ValidationExceptionReason.add_member(:duplicate_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUPLICATE_ACCOUNT", traits: {"smithy.api#enumValue" => "DUPLICATE_ACCOUNT"}))
+    ValidationExceptionReason.add_member(:invalid_billing_group_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_BILLING_GROUP_STATUS", traits: {"smithy.api#enumValue" => "INVALID_BILLING_GROUP_STATUS"}))
+    ValidationExceptionReason.add_member(:mismatched_pricingplan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISMATCHED_PRICINGPLAN_ARN", traits: {"smithy.api#enumValue" => "MISMATCHED_PRICINGPLAN_ARN"}))
+    ValidationExceptionReason.add_member(:missing_pricingplan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_PRICINGPLAN", traits: {"smithy.api#enumValue" => "MISSING_PRICINGPLAN"}))
+    ValidationExceptionReason.add_member(:mismatched_pricingrule_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISMATCHED_PRICINGRULE_ARN", traits: {"smithy.api#enumValue" => "MISMATCHED_PRICINGRULE_ARN"}))
+    ValidationExceptionReason.add_member(:duplicate_pricingrule_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DUPLICATE_PRICINGRULE_ARNS", traits: {"smithy.api#enumValue" => "DUPLICATE_PRICINGRULE_ARNS"}))
+    ValidationExceptionReason.add_member(:missing_costcategory, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_COSTCATEGORY", traits: {"smithy.api#enumValue" => "MISSING_COSTCATEGORY"}))
+    ValidationExceptionReason.add_member(:illegal_expression, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_EXPRESSION", traits: {"smithy.api#enumValue" => "ILLEGAL_EXPRESSION"}))
+    ValidationExceptionReason.add_member(:illegal_scope, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_SCOPE", traits: {"smithy.api#enumValue" => "ILLEGAL_SCOPE"}))
+    ValidationExceptionReason.add_member(:illegal_service, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_SERVICE", traits: {"smithy.api#enumValue" => "ILLEGAL_SERVICE"}))
+    ValidationExceptionReason.add_member(:pricingrules_not_exist, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICINGRULES_NOT_EXIST", traits: {"smithy.api#enumValue" => "PRICINGRULES_NOT_EXIST"}))
+    ValidationExceptionReason.add_member(:pricingrules_already_associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICINGRULES_ALREADY_ASSOCIATED", traits: {"smithy.api#enumValue" => "PRICINGRULES_ALREADY_ASSOCIATED"}))
+    ValidationExceptionReason.add_member(:pricingrules_not_associated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRICINGRULES_NOT_ASSOCIATED", traits: {"smithy.api#enumValue" => "PRICINGRULES_NOT_ASSOCIATED"}))
+    ValidationExceptionReason.add_member(:invalid_time_range, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_TIME_RANGE", traits: {"smithy.api#enumValue" => "INVALID_TIME_RANGE"}))
+    ValidationExceptionReason.add_member(:invalid_billingview_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_BILLINGVIEW_ARN", traits: {"smithy.api#enumValue" => "INVALID_BILLINGVIEW_ARN"}))
+    ValidationExceptionReason.add_member(:mismatched_billingview_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISMATCHED_BILLINGVIEW_ARN", traits: {"smithy.api#enumValue" => "MISMATCHED_BILLINGVIEW_ARN"}))
+    ValidationExceptionReason.add_member(:illegal_customlineitem, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_CUSTOMLINEITEM", traits: {"smithy.api#enumValue" => "ILLEGAL_CUSTOMLINEITEM"}))
+    ValidationExceptionReason.add_member(:missing_customlineitem, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_CUSTOMLINEITEM", traits: {"smithy.api#enumValue" => "MISSING_CUSTOMLINEITEM"}))
+    ValidationExceptionReason.add_member(:illegal_customlineitem_update, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_CUSTOMLINEITEM_UPDATE", traits: {"smithy.api#enumValue" => "ILLEGAL_CUSTOMLINEITEM_UPDATE"}))
+    ValidationExceptionReason.add_member(:too_many_customlineitems_in_request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST", traits: {"smithy.api#enumValue" => "TOO_MANY_CUSTOMLINEITEMS_IN_REQUEST"}))
+    ValidationExceptionReason.add_member(:illegal_charge_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_CHARGE_DETAILS", traits: {"smithy.api#enumValue" => "ILLEGAL_CHARGE_DETAILS"}))
+    ValidationExceptionReason.add_member(:illegal_update_charge_details, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_UPDATE_CHARGE_DETAILS", traits: {"smithy.api#enumValue" => "ILLEGAL_UPDATE_CHARGE_DETAILS"}))
+    ValidationExceptionReason.add_member(:invalid_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_ARN", traits: {"smithy.api#enumValue" => "INVALID_ARN"}))
+    ValidationExceptionReason.add_member(:illegal_resource_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_RESOURCE_ARNS", traits: {"smithy.api#enumValue" => "ILLEGAL_RESOURCE_ARNS"}))
+    ValidationExceptionReason.add_member(:illegal_customlineitem_modification, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_CUSTOMLINEITEM_MODIFICATION", traits: {"smithy.api#enumValue" => "ILLEGAL_CUSTOMLINEITEM_MODIFICATION"}))
+    ValidationExceptionReason.add_member(:missing_linked_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_LINKED_ACCOUNT_IDS", traits: {"smithy.api#enumValue" => "MISSING_LINKED_ACCOUNT_IDS"}))
+    ValidationExceptionReason.add_member(:multiple_linked_account_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTIPLE_LINKED_ACCOUNT_IDS", traits: {"smithy.api#enumValue" => "MULTIPLE_LINKED_ACCOUNT_IDS"}))
+    ValidationExceptionReason.add_member(:missing_pricing_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISSING_PRICING_PLAN_ARN", traits: {"smithy.api#enumValue" => "MISSING_PRICING_PLAN_ARN"}))
+    ValidationExceptionReason.add_member(:multiple_pricing_plan_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTIPLE_PRICING_PLAN_ARN", traits: {"smithy.api#enumValue" => "MULTIPLE_PRICING_PLAN_ARN"}))
+    ValidationExceptionReason.add_member(:illegal_child_associate_resource, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_CHILD_ASSOCIATE_RESOURCE", traits: {"smithy.api#enumValue" => "ILLEGAL_CHILD_ASSOCIATE_RESOURCE"}))
+    ValidationExceptionReason.add_member(:custom_line_item_association_exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS", traits: {"smithy.api#enumValue" => "CUSTOM_LINE_ITEM_ASSOCIATION_EXISTS"}))
+    ValidationExceptionReason.add_member(:invalid_billing_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_BILLING_GROUP", traits: {"smithy.api#enumValue" => "INVALID_BILLING_GROUP"}))
+    ValidationExceptionReason.add_member(:invalid_billing_period_for_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_BILLING_PERIOD_FOR_OPERATION", traits: {"smithy.api#enumValue" => "INVALID_BILLING_PERIOD_FOR_OPERATION"}))
+    ValidationExceptionReason.add_member(:illegal_billing_entity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_BILLING_ENTITY", traits: {"smithy.api#enumValue" => "ILLEGAL_BILLING_ENTITY"}))
+    ValidationExceptionReason.add_member(:illegal_modifier_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_MODIFIER_PERCENTAGE", traits: {"smithy.api#enumValue" => "ILLEGAL_MODIFIER_PERCENTAGE"}))
+    ValidationExceptionReason.add_member(:illegal_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_TYPE", traits: {"smithy.api#enumValue" => "ILLEGAL_TYPE"}))
+    ValidationExceptionReason.add_member(:illegal_billing_group_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_BILLING_GROUP_TYPE", traits: {"smithy.api#enumValue" => "ILLEGAL_BILLING_GROUP_TYPE"}))
+    ValidationExceptionReason.add_member(:illegal_billing_group_pricing_plan, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_BILLING_GROUP_PRICING_PLAN", traits: {"smithy.api#enumValue" => "ILLEGAL_BILLING_GROUP_PRICING_PLAN"}))
+    ValidationExceptionReason.add_member(:illegal_ended_billinggroup, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_ENDED_BILLINGGROUP", traits: {"smithy.api#enumValue" => "ILLEGAL_ENDED_BILLINGGROUP"}))
+    ValidationExceptionReason.add_member(:illegal_tiering_input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_TIERING_INPUT", traits: {"smithy.api#enumValue" => "ILLEGAL_TIERING_INPUT"}))
+    ValidationExceptionReason.add_member(:illegal_operation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_OPERATION", traits: {"smithy.api#enumValue" => "ILLEGAL_OPERATION"}))
+    ValidationExceptionReason.add_member(:illegal_usage_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_USAGE_TYPE", traits: {"smithy.api#enumValue" => "ILLEGAL_USAGE_TYPE"}))
+    ValidationExceptionReason.add_member(:invalid_sku_combo, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_SKU_COMBO", traits: {"smithy.api#enumValue" => "INVALID_SKU_COMBO"}))
+    ValidationExceptionReason.add_member(:invalid_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INVALID_FILTER", traits: {"smithy.api#enumValue" => "INVALID_FILTER"}))
+    ValidationExceptionReason.add_member(:too_many_auto_associate_billing_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS", traits: {"smithy.api#enumValue" => "TOO_MANY_AUTO_ASSOCIATE_BILLING_GROUPS"}))
+    ValidationExceptionReason.add_member(:cannot_delete_auto_associate_billing_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP", traits: {"smithy.api#enumValue" => "CANNOT_DELETE_AUTO_ASSOCIATE_BILLING_GROUP"}))
+    ValidationExceptionReason.add_member(:illegal_account_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_ACCOUNT_ID", traits: {"smithy.api#enumValue" => "ILLEGAL_ACCOUNT_ID"}))
+    ValidationExceptionReason.add_member(:billing_group_already_exist_in_current_billing_period, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD", traits: {"smithy.api#enumValue" => "BILLING_GROUP_ALREADY_EXIST_IN_CURRENT_BILLING_PERIOD"}))
+    ValidationExceptionReason.add_member(:illegal_computation_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_COMPUTATION_RULE", traits: {"smithy.api#enumValue" => "ILLEGAL_COMPUTATION_RULE"}))
+    ValidationExceptionReason.add_member(:illegal_line_item_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ILLEGAL_LINE_ITEM_FILTER", traits: {"smithy.api#enumValue" => "ILLEGAL_LINE_ITEM_FILTER"}))
 
     AWSBillingConductor = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.billingconductor#AWSBillingConductor"
       service.name = "AWSBillingConductor"
       service.version = "2021-07-30"
-      service.traits = {"aws.api#service" => {"sdkId" => "billingconductor", "arnNamespace" => "billingconductor"}, "aws.auth#sigv4" => {"name" => "billingconductor"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access based on the tags associated with the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access based on the tags that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "String", "documentation" => "Filters access based on the tag keys that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["X-Api-Key"]}, "smithy.api#title" => "AWSBillingConductor"}
+      service.traits = {"aws.api#service" => {"sdkId" => "billingconductor", "arnNamespace" => "billingconductor"}, "aws.auth#sigv4" => {"name" => "billingconductor"}, "aws.iam#defineConditionKeys" => {"aws:ResourceTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access based on the tags associated with the resource", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"}, "aws:RequestTag/${TagKey}" => {"type" => "String", "documentation" => "Filters access based on the tags that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"}, "aws:TagKeys" => {"type" => "String", "documentation" => "Filters access based on the tag keys that are passed in the request", "externalDocumentation" => "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"}, "billingconductor:PricingPlanArn" => {"type" => "ARN", "documentation" => "Filters access based on the pricing plan ARN that is passed in the request", "relativeDocumentation" => "security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-conditionkeys"}}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {"additionalAllowedHeaders" => ["X-Api-Key"]}, "smithy.api#title" => "AWSBillingConductor", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://billingconductor.us-east-1.amazonaws.com", "properties" => {"authSchemes" => [{"name" => "sigv4", "signingName" => "billingconductor", "signingRegion" => "us-east-1"}]}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://billingconductor-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://billingconductor-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://billingconductor.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://billingconductor.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAkAAAAGAAAABQAAAAgAAAAHAAAABwX14QQF9eELAAAABgX14QkF9eEKAAAABAAAAAsAAAAKAAAABQX14QYF9eEIAAAABQAAAAwF9eEHAAAABgX14QUF9eEGAAAAAwX14QEAAAAOAAAABQX14QIF9eED"}}
       service.add_operation(:associate_accounts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.billingconductor#AssociateAccounts"
         operation.name = "AssociateAccounts"
@@ -929,6 +1107,18 @@ module Aws::Billingconductor
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/get-billing-group-cost-report", "code" => 200}, "smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::GetBillingGroupCostReport.new
       end)
+      service.add_operation(:get_billing_transfer_preference, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.billingconductor#GetBillingTransferPreference"
+        operation.name = "GetBillingTransferPreference"
+        operation.input = GetBillingTransferPreferenceInput
+        operation.output = GetBillingTransferPreferenceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/get-billing-transfer-preference", "code" => 200}, "smithy.api#readonly" => {}}
+      end)
       service.add_operation(:list_account_associations, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.billingconductor#ListAccountAssociations"
         operation.name = "ListAccountAssociations"
@@ -1105,12 +1295,26 @@ module Aws::Billingconductor
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"method" => "POST", "uri" => "/update-billing-group", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:update_billing_transfer_preference, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.billingconductor#UpdateBillingTransferPreference"
+        operation.name = "UpdateBillingTransferPreference"
+        operation.input = UpdateBillingTransferPreferenceInput
+        operation.output = UpdateBillingTransferPreferenceOutput
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"aws.iam#conditionKeys" => ["billingconductor:PricingPlanArn"], "smithy.api#http" => {"method" => "PUT", "uri" => "/update-billing-transfer-preference", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:update_custom_line_item, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.billingconductor#UpdateCustomLineItem"
         operation.name = "UpdateCustomLineItem"
         operation.input = UpdateCustomLineItemOperationInput
         operation.output = UpdateCustomLineItemOperationOutput
         operation.errors << AccessDeniedException
+        operation.errors << ConflictException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ThrottlingException

@@ -173,7 +173,7 @@ module Aws::Budgets
       end
     end
 
-    # <p>You've reached the limit on the number of tags you can associate with a resource.</p>
+    # <p>You've reached a Service Quota limit on this resource.</p>
     class ServiceQuotaExceededException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::Budgets::Types::ServiceQuotaExceededException] data

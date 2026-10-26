@@ -14,6 +14,9 @@ module Aws::MediaLive
     AacSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AacSettings", name: "AacSettings")
     AacSpec = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AacSpec", name: "AacSpec")
     AacVbrQuality = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AacVbrQuality", name: "AacVbrQuality")
+    AbWatermarkerIdLength = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AbWatermarkerIdLength", name: "AbWatermarkerIdLength")
+    AbWatermarkingCustomProfile = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AbWatermarkingCustomProfile", name: "AbWatermarkingCustomProfile")
+    AbWatermarkingProfile = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AbWatermarkingProfile", name: "AbWatermarkingProfile")
     Ac3AttenuationControl = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Ac3AttenuationControl", name: "Ac3AttenuationControl")
     Ac3BitstreamMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Ac3BitstreamMode", name: "Ac3BitstreamMode")
     Ac3CodingMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Ac3CodingMode", name: "Ac3CodingMode")
@@ -44,16 +47,20 @@ module Aws::MediaLive
     AudioDescriptionAudioTypeControl = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AudioDescriptionAudioTypeControl", name: "AudioDescriptionAudioTypeControl")
     AudioDescriptionLanguageCodeControl = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AudioDescriptionLanguageCodeControl", name: "AudioDescriptionLanguageCodeControl")
     AudioDolbyEDecode = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioDolbyEDecode", name: "AudioDolbyEDecode")
+    AudioFeedInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioFeedInput", name: "AudioFeedInput")
     AudioHlsRenditionSelection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioHlsRenditionSelection", name: "AudioHlsRenditionSelection")
     AudioLanguageSelection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioLanguageSelection", name: "AudioLanguageSelection")
     AudioLanguageSelectionPolicy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AudioLanguageSelectionPolicy", name: "AudioLanguageSelectionPolicy")
     AudioNormalizationAlgorithm = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AudioNormalizationAlgorithm", name: "AudioNormalizationAlgorithm")
     AudioNormalizationAlgorithmControl = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AudioNormalizationAlgorithmControl", name: "AudioNormalizationAlgorithmControl")
+    AudioNormalizationPeakCalculation = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AudioNormalizationPeakCalculation", name: "AudioNormalizationPeakCalculation")
     AudioNormalizationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioNormalizationSettings", name: "AudioNormalizationSettings")
     AudioOnlyHlsSegmentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AudioOnlyHlsSegmentType", name: "AudioOnlyHlsSegmentType")
     AudioOnlyHlsSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioOnlyHlsSettings", name: "AudioOnlyHlsSettings")
     AudioOnlyHlsTrackType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AudioOnlyHlsTrackType", name: "AudioOnlyHlsTrackType")
+    AudioPid = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioPid", name: "AudioPid")
     AudioPidSelection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioPidSelection", name: "AudioPidSelection")
+    AudioPreMixerSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioPreMixerSettings", name: "AudioPreMixerSettings")
     AudioSelector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioSelector", name: "AudioSelector")
     AudioSelectorSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioSelectorSettings", name: "AudioSelectorSettings")
     AudioSilenceFailoverSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioSilenceFailoverSettings", name: "AudioSilenceFailoverSettings")
@@ -63,6 +70,7 @@ module Aws::MediaLive
     AudioWatermarkSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AudioWatermarkSettings", name: "AudioWatermarkSettings")
     AuthenticationScheme = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AuthenticationScheme", name: "AuthenticationScheme")
     AutomaticInputFailoverSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AutomaticInputFailoverSettings", name: "AutomaticInputFailoverSettings")
+    Av1BitDepth = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Av1BitDepth", name: "Av1BitDepth")
     Av1ColorSpaceSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Av1ColorSpaceSettings", name: "Av1ColorSpaceSettings")
     Av1GopSizeUnits = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Av1GopSizeUnits", name: "Av1GopSizeUnits")
     Av1Level = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Av1Level", name: "Av1Level")
@@ -70,6 +78,9 @@ module Aws::MediaLive
     Av1RateControlMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Av1RateControlMode", name: "Av1RateControlMode")
     Av1SceneChangeDetect = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Av1SceneChangeDetect", name: "Av1SceneChangeDetect")
     Av1Settings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Av1Settings", name: "Av1Settings")
+    Av1SpatialAq = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Av1SpatialAq", name: "Av1SpatialAq")
+    Av1TemporalAq = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Av1TemporalAq", name: "Av1TemporalAq")
+    Av1TimecodeInsertionBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Av1TimecodeInsertionBehavior", name: "Av1TimecodeInsertionBehavior")
     AvailBlanking = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AvailBlanking", name: "AvailBlanking")
     AvailBlankingState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#AvailBlankingState", name: "AvailBlankingState")
     AvailConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#AvailConfiguration", name: "AvailConfiguration")
@@ -112,9 +123,12 @@ module Aws::MediaLive
     CaptionRectangle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CaptionRectangle", name: "CaptionRectangle")
     CaptionSelector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CaptionSelector", name: "CaptionSelector")
     CaptionSelectorSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CaptionSelectorSettings", name: "CaptionSelectorSettings")
+    CaptionSynchronizationMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#CaptionSynchronizationMode", name: "CaptionSynchronizationMode")
     CdiInputResolution = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#CdiInputResolution", name: "CdiInputResolution")
     CdiInputSpecification = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CdiInputSpecification", name: "CdiInputSpecification")
     Channel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Channel", name: "Channel")
+    ChannelAlert = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ChannelAlert", name: "ChannelAlert")
+    ChannelAlertState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#ChannelAlertState", name: "ChannelAlertState")
     ChannelClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#ChannelClass", name: "ChannelClass")
     ChannelEgressEndpoint = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ChannelEgressEndpoint", name: "ChannelEgressEndpoint")
     ChannelEngineVersionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ChannelEngineVersionRequest", name: "ChannelEngineVersionRequest")
@@ -131,16 +145,20 @@ module Aws::MediaLive
     CloudWatchAlarmTemplateSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CloudWatchAlarmTemplateSummary", name: "CloudWatchAlarmTemplateSummary")
     CloudWatchAlarmTemplateTargetResourceType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#CloudWatchAlarmTemplateTargetResourceType", name: "CloudWatchAlarmTemplateTargetResourceType")
     CloudWatchAlarmTemplateTreatMissingData = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#CloudWatchAlarmTemplateTreatMissingData", name: "CloudWatchAlarmTemplateTreatMissingData")
+    ClusterAlert = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ClusterAlert", name: "ClusterAlert")
+    ClusterAlertState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#ClusterAlertState", name: "ClusterAlertState")
     ClusterNetworkSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ClusterNetworkSettings", name: "ClusterNetworkSettings")
     ClusterNetworkSettingsCreateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ClusterNetworkSettingsCreateRequest", name: "ClusterNetworkSettingsCreateRequest")
     ClusterNetworkSettingsUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ClusterNetworkSettingsUpdateRequest", name: "ClusterNetworkSettingsUpdateRequest")
     ClusterState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#ClusterState", name: "ClusterState")
     ClusterType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#ClusterType", name: "ClusterType")
     CmafId3Behavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#CmafId3Behavior", name: "CmafId3Behavior")
+    CmafIngestAbWatermarkerIrdetoSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CmafIngestAbWatermarkerIrdetoSettings", name: "CmafIngestAbWatermarkerIrdetoSettings")
     CmafIngestCaptionLanguageMapping = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CmafIngestCaptionLanguageMapping", name: "CmafIngestCaptionLanguageMapping")
     CmafIngestGroupSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CmafIngestGroupSettings", name: "CmafIngestGroupSettings")
     CmafIngestOutputSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CmafIngestOutputSettings", name: "CmafIngestOutputSettings")
     CmafIngestSegmentLengthUnits = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#CmafIngestSegmentLengthUnits", name: "CmafIngestSegmentLengthUnits")
+    CmafIngestWatermarkingSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CmafIngestWatermarkingSettings", name: "CmafIngestWatermarkingSettings")
     CmafKLVBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#CmafKLVBehavior", name: "CmafKLVBehavior")
     CmafNielsenId3Behavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#CmafNielsenId3Behavior", name: "CmafNielsenId3Behavior")
     CmafTimedMetadataId3Frame = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#CmafTimedMetadataId3Frame", name: "CmafTimedMetadataId3Frame")
@@ -150,6 +168,7 @@ module Aws::MediaLive
     ColorSpace = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#ColorSpace", name: "ColorSpace")
     ColorSpacePassthroughSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ColorSpacePassthroughSettings", name: "ColorSpacePassthroughSettings")
     ConflictException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ConflictException", name: "ConflictException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 409})
+    ConnectionMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#ConnectionMode", name: "ConnectionMode")
     ContentType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#ContentType", name: "ContentType")
     CreateChannelPlacementGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CreateChannelPlacementGroupRequest", name: "CreateChannelPlacementGroupRequest")
     CreateChannelPlacementGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#CreateChannelPlacementGroupResponse", name: "CreateChannelPlacementGroupResponse")
@@ -229,6 +248,8 @@ module Aws::MediaLive
     DescribeClusterRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeClusterRequest", name: "DescribeClusterRequest")
     DescribeClusterResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeClusterResponse", name: "DescribeClusterResponse")
     DescribeClusterSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeClusterSummary", name: "DescribeClusterSummary")
+    DescribeFollowerChannelSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeFollowerChannelSettings", name: "DescribeFollowerChannelSettings")
+    DescribeInferenceSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeInferenceSettings", name: "DescribeInferenceSettings")
     DescribeInputDeviceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeInputDeviceRequest", name: "DescribeInputDeviceRequest")
     DescribeInputDeviceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeInputDeviceResponse", name: "DescribeInputDeviceResponse")
     DescribeInputDeviceThumbnailRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeInputDeviceThumbnailRequest", name: "DescribeInputDeviceThumbnailRequest")
@@ -237,6 +258,7 @@ module Aws::MediaLive
     DescribeInputResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeInputResponse", name: "DescribeInputResponse")
     DescribeInputSecurityGroupRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeInputSecurityGroupRequest", name: "DescribeInputSecurityGroupRequest")
     DescribeInputSecurityGroupResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeInputSecurityGroupResponse", name: "DescribeInputSecurityGroupResponse")
+    DescribeLinkedChannelSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeLinkedChannelSettings", name: "DescribeLinkedChannelSettings")
     DescribeMultiplexProgramRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeMultiplexProgramRequest", name: "DescribeMultiplexProgramRequest")
     DescribeMultiplexProgramResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeMultiplexProgramResponse", name: "DescribeMultiplexProgramResponse")
     DescribeMultiplexRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeMultiplexRequest", name: "DescribeMultiplexRequest")
@@ -249,6 +271,7 @@ module Aws::MediaLive
     DescribeNodeSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeNodeSummary", name: "DescribeNodeSummary")
     DescribeOfferingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeOfferingRequest", name: "DescribeOfferingRequest")
     DescribeOfferingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeOfferingResponse", name: "DescribeOfferingResponse")
+    DescribePrimaryChannelSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribePrimaryChannelSettings", name: "DescribePrimaryChannelSettings")
     DescribeReservationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeReservationRequest", name: "DescribeReservationRequest")
     DescribeReservationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeReservationResponse", name: "DescribeReservationResponse")
     DescribeScheduleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeScheduleRequest", name: "DescribeScheduleRequest")
@@ -259,6 +282,7 @@ module Aws::MediaLive
     DescribeThumbnailsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DescribeThumbnailsResponse", name: "DescribeThumbnailsResponse")
     DeviceSettingsSyncState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#DeviceSettingsSyncState", name: "DeviceSettingsSyncState")
     DeviceUpdateStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#DeviceUpdateStatus", name: "DeviceUpdateStatus")
+    DisabledLockingSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DisabledLockingSettings", name: "DisabledLockingSettings")
     DolbyEProgramSelection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#DolbyEProgramSelection", name: "DolbyEProgramSelection")
     DolbyVision81Settings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#DolbyVision81Settings", name: "DolbyVision81Settings")
     DvbDashAccessibility = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#DvbDashAccessibility", name: "DvbDashAccessibility")
@@ -298,12 +322,15 @@ module Aws::MediaLive
     EbuTtDDestinationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#EbuTtDDestinationSettings", name: "EbuTtDDestinationSettings")
     EbuTtDDestinationStyleControl = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#EbuTtDDestinationStyleControl", name: "EbuTtDDestinationStyleControl")
     EbuTtDFillLineGapControl = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#EbuTtDFillLineGapControl", name: "EbuTtDFillLineGapControl")
+    EmbeddedCaptionPositionSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#EmbeddedCaptionPositionSettings", name: "EmbeddedCaptionPositionSettings")
     EmbeddedConvert608To708 = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#EmbeddedConvert608To708", name: "EmbeddedConvert608To708")
     EmbeddedDestinationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#EmbeddedDestinationSettings", name: "EmbeddedDestinationSettings")
+    EmbeddedDestinationStyleControl = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#EmbeddedDestinationStyleControl", name: "EmbeddedDestinationStyleControl")
     EmbeddedPlusScte20DestinationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#EmbeddedPlusScte20DestinationSettings", name: "EmbeddedPlusScte20DestinationSettings")
     EmbeddedScte20Detection = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#EmbeddedScte20Detection", name: "EmbeddedScte20Detection")
     EmbeddedSourceSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#EmbeddedSourceSettings", name: "EmbeddedSourceSettings")
     EncoderSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#EncoderSettings", name: "EncoderSettings")
+    EnrichmentMethod = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#EnrichmentMethod", name: "EnrichmentMethod")
     EpochLockingSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#EpochLockingSettings", name: "EpochLockingSettings")
     Esam = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Esam", name: "Esam")
     EventBridgeRuleTemplateEventType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#EventBridgeRuleTemplateEventType", name: "EventBridgeRuleTemplateEventType")
@@ -325,6 +352,7 @@ module Aws::MediaLive
     Fmp4TimedMetadataBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#Fmp4TimedMetadataBehavior", name: "Fmp4TimedMetadataBehavior")
     FollowModeScheduleActionStartSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#FollowModeScheduleActionStartSettings", name: "FollowModeScheduleActionStartSettings")
     FollowPoint = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#FollowPoint", name: "FollowPoint")
+    FollowerChannelSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#FollowerChannelSettings", name: "FollowerChannelSettings")
     ForbiddenException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ForbiddenException", name: "ForbiddenException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 403})
     FrameCaptureCdnSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#FrameCaptureCdnSettings", name: "FrameCaptureCdnSettings")
     FrameCaptureGroupSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#FrameCaptureGroupSettings", name: "FrameCaptureGroupSettings")
@@ -397,6 +425,7 @@ module Aws::MediaLive
     H265TimecodeInsertionBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#H265TimecodeInsertionBehavior", name: "H265TimecodeInsertionBehavior")
     H265TreeblockSize = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#H265TreeblockSize", name: "H265TreeblockSize")
     Hdr10Settings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Hdr10Settings", name: "Hdr10Settings")
+    Hlg2020Settings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Hlg2020Settings", name: "Hlg2020Settings")
     HlsAdMarkers = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#HlsAdMarkers", name: "HlsAdMarkers")
     HlsAkamaiHttpTransferMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#HlsAkamaiHttpTransferMode", name: "HlsAkamaiHttpTransferMode")
     HlsAkamaiSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#HlsAkamaiSettings", name: "HlsAkamaiSettings")
@@ -443,6 +472,7 @@ module Aws::MediaLive
     Id3SegmentTaggingScheduleActionSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Id3SegmentTaggingScheduleActionSettings", name: "Id3SegmentTaggingScheduleActionSettings")
     ImmediateModeScheduleActionStartSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ImmediateModeScheduleActionStartSettings", name: "ImmediateModeScheduleActionStartSettings")
     IncludeFillerNalUnits = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#IncludeFillerNalUnits", name: "IncludeFillerNalUnits")
+    InferenceSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#InferenceSettings", name: "InferenceSettings")
     Input = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Input", name: "Input")
     InputAttachment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#InputAttachment", name: "InputAttachment")
     InputChannelLevel = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#InputChannelLevel", name: "InputChannelLevel")
@@ -520,6 +550,10 @@ module Aws::MediaLive
     IpPoolUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#IpPoolUpdateRequest", name: "IpPoolUpdateRequest")
     KeyProviderSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#KeyProviderSettings", name: "KeyProviderSettings")
     LastFrameClippingBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#LastFrameClippingBehavior", name: "LastFrameClippingBehavior")
+    LinkedChannelSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#LinkedChannelSettings", name: "LinkedChannelSettings")
+    LinkedChannelType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#LinkedChannelType", name: "LinkedChannelType")
+    ListAlertsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListAlertsRequest", name: "ListAlertsRequest")
+    ListAlertsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListAlertsResponse", name: "ListAlertsResponse")
     ListChannelPlacementGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListChannelPlacementGroupsRequest", name: "ListChannelPlacementGroupsRequest")
     ListChannelPlacementGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListChannelPlacementGroupsResponse", name: "ListChannelPlacementGroupsResponse")
     ListChannelsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListChannelsRequest", name: "ListChannelsRequest")
@@ -528,6 +562,8 @@ module Aws::MediaLive
     ListCloudWatchAlarmTemplateGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListCloudWatchAlarmTemplateGroupsResponse", name: "ListCloudWatchAlarmTemplateGroupsResponse")
     ListCloudWatchAlarmTemplatesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListCloudWatchAlarmTemplatesRequest", name: "ListCloudWatchAlarmTemplatesRequest")
     ListCloudWatchAlarmTemplatesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListCloudWatchAlarmTemplatesResponse", name: "ListCloudWatchAlarmTemplatesResponse")
+    ListClusterAlertsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListClusterAlertsRequest", name: "ListClusterAlertsRequest")
+    ListClusterAlertsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListClusterAlertsResponse", name: "ListClusterAlertsResponse")
     ListClustersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListClustersRequest", name: "ListClustersRequest")
     ListClustersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListClustersResponse", name: "ListClustersResponse")
     ListEventBridgeRuleTemplateGroupsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListEventBridgeRuleTemplateGroupsRequest", name: "ListEventBridgeRuleTemplateGroupsRequest")
@@ -542,6 +578,8 @@ module Aws::MediaLive
     ListInputSecurityGroupsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListInputSecurityGroupsResponse", name: "ListInputSecurityGroupsResponse")
     ListInputsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListInputsRequest", name: "ListInputsRequest")
     ListInputsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListInputsResponse", name: "ListInputsResponse")
+    ListMultiplexAlertsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListMultiplexAlertsRequest", name: "ListMultiplexAlertsRequest")
+    ListMultiplexAlertsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListMultiplexAlertsResponse", name: "ListMultiplexAlertsResponse")
     ListMultiplexProgramsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListMultiplexProgramsRequest", name: "ListMultiplexProgramsRequest")
     ListMultiplexProgramsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListMultiplexProgramsResponse", name: "ListMultiplexProgramsResponse")
     ListMultiplexesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ListMultiplexesRequest", name: "ListMultiplexesRequest")
@@ -593,14 +631,25 @@ module Aws::MediaLive
     MaintenanceDay = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#MaintenanceDay", name: "MaintenanceDay")
     MaintenanceStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MaintenanceStatus", name: "MaintenanceStatus")
     MaintenanceUpdateSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MaintenanceUpdateSettings", name: "MaintenanceUpdateSettings")
-    MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
+    MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#MaxResults", name: "MaxResults")
     MediaConnectFlow = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaConnectFlow", name: "MediaConnectFlow")
     MediaConnectFlowRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaConnectFlowRequest", name: "MediaConnectFlowRequest")
+    MediaConnectRouterContainerSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaConnectRouterContainerSettings", name: "MediaConnectRouterContainerSettings")
+    MediaConnectRouterGroupSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaConnectRouterGroupSettings", name: "MediaConnectRouterGroupSettings")
+    MediaConnectRouterOutputConnection = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaConnectRouterOutputConnection", name: "MediaConnectRouterOutputConnection")
+    MediaConnectRouterOutputConnectionMap = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaConnectRouterOutputConnectionMap", name: "MediaConnectRouterOutputConnectionMap")
+    MediaConnectRouterOutputConnections = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.medialive#MediaConnectRouterOutputConnections", name: "MediaConnectRouterOutputConnections")
+    MediaConnectRouterOutputDestinationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaConnectRouterOutputDestinationSettings", name: "MediaConnectRouterOutputDestinationSettings")
+    MediaConnectRouterOutputEncryptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#MediaConnectRouterOutputEncryptionType", name: "MediaConnectRouterOutputEncryptionType")
+    MediaConnectRouterOutputSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaConnectRouterOutputSettings", name: "MediaConnectRouterOutputSettings")
+    MediaPackageAdditionalDestinations = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaPackageAdditionalDestinations", name: "MediaPackageAdditionalDestinations")
     MediaPackageGroupSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaPackageGroupSettings", name: "MediaPackageGroupSettings")
     MediaPackageOutputDestinationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaPackageOutputDestinationSettings", name: "MediaPackageOutputDestinationSettings")
     MediaPackageOutputSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaPackageOutputSettings", name: "MediaPackageOutputSettings")
+    MediaPackageV2AbWatermarkerIrdetoSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaPackageV2AbWatermarkerIrdetoSettings", name: "MediaPackageV2AbWatermarkerIrdetoSettings")
     MediaPackageV2DestinationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaPackageV2DestinationSettings", name: "MediaPackageV2DestinationSettings")
     MediaPackageV2GroupSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaPackageV2GroupSettings", name: "MediaPackageV2GroupSettings")
+    MediaPackageV2WatermarkingSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaPackageV2WatermarkingSettings", name: "MediaPackageV2WatermarkingSettings")
     MediaResource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaResource", name: "MediaResource")
     MediaResourceMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.medialive#MediaResourceMap", name: "MediaResourceMap")
     MediaResourceNeighbor = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MediaResourceNeighbor", name: "MediaResourceNeighbor")
@@ -633,6 +682,8 @@ module Aws::MediaLive
     MulticastSourceCreateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MulticastSourceCreateRequest", name: "MulticastSourceCreateRequest")
     MulticastSourceUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MulticastSourceUpdateRequest", name: "MulticastSourceUpdateRequest")
     Multiplex = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Multiplex", name: "Multiplex")
+    MultiplexAlert = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MultiplexAlert", name: "MultiplexAlert")
+    MultiplexAlertState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#MultiplexAlertState", name: "MultiplexAlertState")
     MultiplexContainerSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MultiplexContainerSettings", name: "MultiplexContainerSettings")
     MultiplexGroupSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MultiplexGroupSettings", name: "MultiplexGroupSettings")
     MultiplexM2tsSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#MultiplexM2tsSettings", name: "MultiplexM2tsSettings")
@@ -660,6 +711,7 @@ module Aws::MediaLive
     NielsenCBET = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#NielsenCBET", name: "NielsenCBET")
     NielsenConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#NielsenConfiguration", name: "NielsenConfiguration")
     NielsenNaesIiNw = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#NielsenNaesIiNw", name: "NielsenNaesIiNw")
+    NielsenNwOnly = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#NielsenNwOnly", name: "NielsenNwOnly")
     NielsenPcmToId3TaggingState = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#NielsenPcmToId3TaggingState", name: "NielsenPcmToId3TaggingState")
     NielsenWatermarkTimezones = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#NielsenWatermarkTimezones", name: "NielsenWatermarkTimezones")
     NielsenWatermarksCbetStepaside = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#NielsenWatermarksCbetStepaside", name: "NielsenWatermarksCbetStepaside")
@@ -682,13 +734,16 @@ module Aws::MediaLive
     OutputLocationRef = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#OutputLocationRef", name: "OutputLocationRef")
     OutputLockingSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#OutputLockingSettings", name: "OutputLockingSettings")
     OutputSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#OutputSettings", name: "OutputSettings")
+    OutputUsage = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#OutputUsage", name: "OutputUsage")
     PassThroughSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#PassThroughSettings", name: "PassThroughSettings")
     PauseStateScheduleActionSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#PauseStateScheduleActionSettings", name: "PauseStateScheduleActionSettings")
     PipelineDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#PipelineDetail", name: "PipelineDetail")
     PipelineId = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#PipelineId", name: "PipelineId")
+    PipelineLockingMethod = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#PipelineLockingMethod", name: "PipelineLockingMethod")
     PipelineLockingSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#PipelineLockingSettings", name: "PipelineLockingSettings")
     PipelinePauseStateSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#PipelinePauseStateSettings", name: "PipelinePauseStateSettings")
     PreferredChannelPipeline = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#PreferredChannelPipeline", name: "PreferredChannelPipeline")
+    PrimaryChannelSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#PrimaryChannelSettings", name: "PrimaryChannelSettings")
     PurchaseOfferingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#PurchaseOfferingRequest", name: "PurchaseOfferingRequest")
     PurchaseOfferingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#PurchaseOfferingResponse", name: "PurchaseOfferingResponse")
     RawSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#RawSettings", name: "RawSettings")
@@ -717,6 +772,11 @@ module Aws::MediaLive
     Route = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Route", name: "Route")
     RouteCreateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#RouteCreateRequest", name: "RouteCreateRequest")
     RouteUpdateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#RouteUpdateRequest", name: "RouteUpdateRequest")
+    RouterDestination = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#RouterDestination", name: "RouterDestination")
+    RouterDestinationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#RouterDestinationSettings", name: "RouterDestinationSettings")
+    RouterEncryptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#RouterEncryptionType", name: "RouterEncryptionType")
+    RouterInputSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#RouterInputSettings", name: "RouterInputSettings")
+    RouterSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#RouterSettings", name: "RouterSettings")
     RtmpAdMarkers = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#RtmpAdMarkers", name: "RtmpAdMarkers")
     RtmpCacheFullBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#RtmpCacheFullBehavior", name: "RtmpCacheFullBehavior")
     RtmpCaptionData = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#RtmpCaptionData", name: "RtmpCaptionData")
@@ -768,6 +828,7 @@ module Aws::MediaLive
     SignalMapMonitorDeploymentStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#SignalMapMonitorDeploymentStatus", name: "SignalMapMonitorDeploymentStatus")
     SignalMapStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#SignalMapStatus", name: "SignalMapStatus")
     SignalMapSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SignalMapSummary", name: "SignalMapSummary")
+    SmartSubtitleSourceSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SmartSubtitleSourceSettings", name: "SmartSubtitleSourceSettings")
     SmoothGroupAudioOnlyTimecodeControl = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#SmoothGroupAudioOnlyTimecodeControl", name: "SmoothGroupAudioOnlyTimecodeControl")
     SmoothGroupCertificateMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#SmoothGroupCertificateMode", name: "SmoothGroupCertificateMode")
     SmoothGroupEventIdMode = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#SmoothGroupEventIdMode", name: "SmoothGroupEventIdMode")
@@ -781,12 +842,17 @@ module Aws::MediaLive
     Smpte2110ReceiverGroupSdpSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Smpte2110ReceiverGroupSdpSettings", name: "Smpte2110ReceiverGroupSdpSettings")
     Smpte2110ReceiverGroupSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Smpte2110ReceiverGroupSettings", name: "Smpte2110ReceiverGroupSettings")
     SmpteTtDestinationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SmpteTtDestinationSettings", name: "SmpteTtDestinationSettings")
+    SpecialRouterSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SpecialRouterSettings", name: "SpecialRouterSettings")
     SrtCallerDecryption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtCallerDecryption", name: "SrtCallerDecryption")
     SrtCallerDecryptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtCallerDecryptionRequest", name: "SrtCallerDecryptionRequest")
     SrtCallerSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtCallerSource", name: "SrtCallerSource")
     SrtCallerSourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtCallerSourceRequest", name: "SrtCallerSourceRequest")
     SrtEncryptionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#SrtEncryptionType", name: "SrtEncryptionType")
     SrtGroupSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtGroupSettings", name: "SrtGroupSettings")
+    SrtListenerDecryption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtListenerDecryption", name: "SrtListenerDecryption")
+    SrtListenerDecryptionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtListenerDecryptionRequest", name: "SrtListenerDecryptionRequest")
+    SrtListenerSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtListenerSettings", name: "SrtListenerSettings")
+    SrtListenerSettingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtListenerSettingsRequest", name: "SrtListenerSettingsRequest")
     SrtOutputDestinationSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtOutputDestinationSettings", name: "SrtOutputDestinationSettings")
     SrtOutputSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtOutputSettings", name: "SrtOutputSettings")
     SrtSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#SrtSettings", name: "SrtSettings")
@@ -827,6 +893,7 @@ module Aws::MediaLive
     TemporalFilterPostFilterSharpening = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#TemporalFilterPostFilterSharpening", name: "TemporalFilterPostFilterSharpening")
     TemporalFilterSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#TemporalFilterSettings", name: "TemporalFilterSettings")
     TemporalFilterStrength = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#TemporalFilterStrength", name: "TemporalFilterStrength")
+    TextCaptionPositionSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#TextCaptionPositionSettings", name: "TextCaptionPositionSettings")
     Thumbnail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#Thumbnail", name: "Thumbnail")
     ThumbnailConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ThumbnailConfiguration", name: "ThumbnailConfiguration")
     ThumbnailDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#ThumbnailDetail", name: "ThumbnailDetail")
@@ -894,6 +961,7 @@ module Aws::MediaLive
     VideoDescription = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#VideoDescription", name: "VideoDescription")
     VideoDescriptionRespondToAfd = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#VideoDescriptionRespondToAfd", name: "VideoDescriptionRespondToAfd")
     VideoDescriptionScalingBehavior = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#VideoDescriptionScalingBehavior", name: "VideoDescriptionScalingBehavior")
+    VideoPositionRectangle = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#VideoPositionRectangle", name: "VideoPositionRectangle")
     VideoSelector = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#VideoSelector", name: "VideoSelector")
     VideoSelectorColorSpace = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.medialive#VideoSelectorColorSpace", name: "VideoSelectorColorSpace")
     VideoSelectorColorSpaceSettings = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.medialive#VideoSelectorColorSpaceSettings", name: "VideoSelectorColorSpaceSettings")
@@ -915,76 +983,89 @@ module Aws::MediaLive
     Doublemin0max5000 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.medialive#__doubleMin0Max5000", name: "Doublemin0max5000")
     Doublemin1 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.medialive#__doubleMin1", name: "Doublemin1")
     Doublemin1max65535 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.medialive#__doubleMin1Max65535", name: "Doublemin1max65535")
+    Doublemin250max5000 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.medialive#__doubleMin250Max5000", name: "Doublemin250max5000")
+    Doublemin32max46 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.medialive#__doubleMin32Max46", name: "Doublemin32max46")
+    Doubleminnegative1max5 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.medialive#__doubleMinNegative1Max5", name: "Doubleminnegative1max5")
     Doubleminnegative59max0 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.medialive#__doubleMinNegative59Max0", name: "Doubleminnegative59max0")
+    Doubleminnegative60max60 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.medialive#__doubleMinNegative60Max60", name: "Doubleminnegative60max60")
+    Doubleminnegative8max0 = ::Smithy::Schema::Shapes::FloatShape.new(id: "com.amazonaws.medialive#__doubleMinNegative8Max0", name: "Doubleminnegative8max0")
     Integer = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integer", name: "Integer")
-    Integermax5 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMax5", name: "Integermax5", traits: {"smithy.api#range" => {"max" => 5}})
-    Integermin0 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0", name: "Integermin0", traits: {"smithy.api#range" => {"min" => 0}})
-    Integermin0max10 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max10", name: "Integermin0max10", traits: {"smithy.api#range" => {"min" => 0, "max" => 10}})
-    Integermin0max100 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max100", name: "Integermin0max100", traits: {"smithy.api#range" => {"min" => 0, "max" => 100}})
-    Integermin0max1000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max1000", name: "Integermin0max1000", traits: {"smithy.api#range" => {"min" => 0, "max" => 1000}})
-    Integermin0max10000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max10000", name: "Integermin0max10000", traits: {"smithy.api#range" => {"min" => 0, "max" => 10000}})
-    Integermin0max1000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max1000000", name: "Integermin0max1000000", traits: {"smithy.api#range" => {"min" => 0, "max" => 1000000}})
-    Integermin0max100000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max100000000", name: "Integermin0max100000000", traits: {"smithy.api#range" => {"min" => 0, "max" => 100000000}})
-    Integermin0max128 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max128", name: "Integermin0max128", traits: {"smithy.api#range" => {"min" => 0, "max" => 128}})
-    Integermin0max15 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max15", name: "Integermin0max15", traits: {"smithy.api#range" => {"min" => 0, "max" => 15}})
-    Integermin0max2000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max2000", name: "Integermin0max2000", traits: {"smithy.api#range" => {"min" => 0, "max" => 2000}})
-    Integermin0max255 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max255", name: "Integermin0max255", traits: {"smithy.api#range" => {"min" => 0, "max" => 255}})
-    Integermin0max3 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max3", name: "Integermin0max3", traits: {"smithy.api#range" => {"min" => 0, "max" => 3}})
-    Integermin0max30 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max30", name: "Integermin0max30", traits: {"smithy.api#range" => {"min" => 0, "max" => 30}})
-    Integermin0max32768 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max32768", name: "Integermin0max32768", traits: {"smithy.api#range" => {"min" => 0, "max" => 32768}})
-    Integermin0max3600 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max3600", name: "Integermin0max3600", traits: {"smithy.api#range" => {"min" => 0, "max" => 3600}})
-    Integermin0max40000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max40000000", name: "Integermin0max40000000", traits: {"smithy.api#range" => {"min" => 0, "max" => 40000000}})
-    Integermin0max500 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max500", name: "Integermin0max500", traits: {"smithy.api#range" => {"min" => 0, "max" => 500}})
-    Integermin0max600 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max600", name: "Integermin0max600", traits: {"smithy.api#range" => {"min" => 0, "max" => 600}})
-    Integermin0max65535 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max65535", name: "Integermin0max65535", traits: {"smithy.api#range" => {"min" => 0, "max" => 65535}})
-    Integermin0max65536 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max65536", name: "Integermin0max65536", traits: {"smithy.api#range" => {"min" => 0, "max" => 65536}})
-    Integermin0max7 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max7", name: "Integermin0max7", traits: {"smithy.api#range" => {"min" => 0, "max" => 7}})
-    Integermin0max8000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max8000000", name: "Integermin0max8000000", traits: {"smithy.api#range" => {"min" => 0, "max" => 8000000}})
-    Integermin0max8191 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max8191", name: "Integermin0max8191", traits: {"smithy.api#range" => {"min" => 0, "max" => 8191}})
-    Integermin1 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1", name: "Integermin1", traits: {"smithy.api#range" => {"min" => 1}})
-    Integermin100 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin100", name: "Integermin100", traits: {"smithy.api#range" => {"min" => 100}})
-    Integermin1000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1000", name: "Integermin1000", traits: {"smithy.api#range" => {"min" => 1000}})
-    Integermin1000000max100000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1000000Max100000000", name: "Integermin1000000max100000000", traits: {"smithy.api#range" => {"min" => 1000000, "max" => 100000000}})
-    Integermin100000max100000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin100000Max100000000", name: "Integermin100000max100000000", traits: {"smithy.api#range" => {"min" => 100000, "max" => 100000000}})
-    Integermin100000max40000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin100000Max40000000", name: "Integermin100000max40000000", traits: {"smithy.api#range" => {"min" => 100000, "max" => 40000000}})
-    Integermin100000max80000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin100000Max80000000", name: "Integermin100000max80000000", traits: {"smithy.api#range" => {"min" => 100000, "max" => 80000000}})
-    Integermin1000max30000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1000Max30000", name: "Integermin1000max30000", traits: {"smithy.api#range" => {"min" => 1000, "max" => 30000}})
-    Integermin10max86400 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin10Max86400", name: "Integermin10max86400", traits: {"smithy.api#range" => {"min" => 10, "max" => 86400}})
-    Integermin1max10 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max10", name: "Integermin1max10", traits: {"smithy.api#range" => {"min" => 1, "max" => 10}})
-    Integermin1max1000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max1000000", name: "Integermin1max1000000", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000000}})
-    Integermin1max16 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max16", name: "Integermin1max16", traits: {"smithy.api#range" => {"min" => 1, "max" => 16}})
-    Integermin1max20 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max20", name: "Integermin1max20", traits: {"smithy.api#range" => {"min" => 1, "max" => 20}})
-    Integermin1max3003 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max3003", name: "Integermin1max3003", traits: {"smithy.api#range" => {"min" => 1, "max" => 3003}})
-    Integermin1max31 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max31", name: "Integermin1max31", traits: {"smithy.api#range" => {"min" => 1, "max" => 31}})
-    Integermin1max32 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max32", name: "Integermin1max32", traits: {"smithy.api#range" => {"min" => 1, "max" => 32}})
-    Integermin1max3600000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max3600000", name: "Integermin1max3600000", traits: {"smithy.api#range" => {"min" => 1, "max" => 3600000}})
-    Integermin1max4 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max4", name: "Integermin1max4", traits: {"smithy.api#range" => {"min" => 1, "max" => 4}})
-    Integermin1max5 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max5", name: "Integermin1max5", traits: {"smithy.api#range" => {"min" => 1, "max" => 5}})
-    Integermin1max51 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max51", name: "Integermin1max51", traits: {"smithy.api#range" => {"min" => 1, "max" => 51}})
-    Integermin1max6 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max6", name: "Integermin1max6", traits: {"smithy.api#range" => {"min" => 1, "max" => 6}})
-    Integermin1max8 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max8", name: "Integermin1max8", traits: {"smithy.api#range" => {"min" => 1, "max" => 8}})
-    Integermin1max800 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max800", name: "Integermin1max800", traits: {"smithy.api#range" => {"min" => 1, "max" => 800}})
-    Integermin256max3840 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin256Max3840", name: "Integermin256max3840", traits: {"smithy.api#range" => {"min" => 256, "max" => 3840}})
-    Integermin25max10000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin25Max10000", name: "Integermin25max10000", traits: {"smithy.api#range" => {"min" => 25, "max" => 10000}})
-    Integermin25max2000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin25Max2000", name: "Integermin25max2000", traits: {"smithy.api#range" => {"min" => 25, "max" => 2000}})
-    Integermin3 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin3", name: "Integermin3", traits: {"smithy.api#range" => {"min" => 3}})
-    Integermin30 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin30", name: "Integermin30", traits: {"smithy.api#range" => {"min" => 30}})
-    Integermin32max8191 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin32Max8191", name: "Integermin32max8191", traits: {"smithy.api#range" => {"min" => 32, "max" => 8191}})
-    Integermin40max16000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin40Max16000", name: "Integermin40max16000", traits: {"smithy.api#range" => {"min" => 40, "max" => 16000}})
-    Integermin4max20 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin4Max20", name: "Integermin4max20", traits: {"smithy.api#range" => {"min" => 4, "max" => 20}})
-    Integermin50000max12000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin50000Max12000000", name: "Integermin50000max12000000", traits: {"smithy.api#range" => {"min" => 50000, "max" => 12000000}})
-    Integermin50000max24000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin50000Max24000000", name: "Integermin50000max24000000", traits: {"smithy.api#range" => {"min" => 50000, "max" => 24000000}})
-    Integermin64max2160 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin64Max2160", name: "Integermin64max2160", traits: {"smithy.api#range" => {"min" => 64, "max" => 2160}})
-    Integermin800max3000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin800Max3000", name: "Integermin800max3000", traits: {"smithy.api#range" => {"min" => 800, "max" => 3000}})
-    Integermin80max800 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin80Max800", name: "Integermin80max800", traits: {"smithy.api#range" => {"min" => 80, "max" => 800}})
-    Integermin96max600 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin96Max600", name: "Integermin96max600", traits: {"smithy.api#range" => {"min" => 96, "max" => 600}})
-    Integerminnegative1000max1000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMinNegative1000Max1000", name: "Integerminnegative1000max1000", traits: {"smithy.api#range" => {"min" => -1000, "max" => 1000}})
-    Integerminnegative5max5 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMinNegative5Max5", name: "Integerminnegative5max5", traits: {"smithy.api#range" => {"min" => -5, "max" => 5}})
-    Integerminnegative60max6 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMinNegative60Max6", name: "Integerminnegative60max6", traits: {"smithy.api#range" => {"min" => -60, "max" => 6}})
-    Integerminnegative60max60 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMinNegative60Max60", name: "Integerminnegative60max60", traits: {"smithy.api#range" => {"min" => -60, "max" => 60}})
+    Integermax5 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMax5", name: "Integermax5")
+    Integermin0 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0", name: "Integermin0")
+    Integermin0max10 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max10", name: "Integermin0max10")
+    Integermin0max100 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max100", name: "Integermin0max100")
+    Integermin0max1000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max1000", name: "Integermin0max1000")
+    Integermin0max10000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max10000", name: "Integermin0max10000")
+    Integermin0max1000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max1000000", name: "Integermin0max1000000")
+    Integermin0max100000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max100000000", name: "Integermin0max100000000")
+    Integermin0max128 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max128", name: "Integermin0max128")
+    Integermin0max15 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max15", name: "Integermin0max15")
+    Integermin0max2000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max2000", name: "Integermin0max2000")
+    Integermin0max255 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max255", name: "Integermin0max255")
+    Integermin0max3 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max3", name: "Integermin0max3")
+    Integermin0max30 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max30", name: "Integermin0max30")
+    Integermin0max32768 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max32768", name: "Integermin0max32768")
+    Integermin0max3600 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max3600", name: "Integermin0max3600")
+    Integermin0max40000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max40000000", name: "Integermin0max40000000")
+    Integermin0max500 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max500", name: "Integermin0max500")
+    Integermin0max600 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max600", name: "Integermin0max600")
+    Integermin0max65535 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max65535", name: "Integermin0max65535")
+    Integermin0max65536 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max65536", name: "Integermin0max65536")
+    Integermin0max7 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max7", name: "Integermin0max7")
+    Integermin0max8000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max8000000", name: "Integermin0max8000000")
+    Integermin0max8190 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max8190", name: "Integermin0max8190")
+    Integermin0max8191 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin0Max8191", name: "Integermin0max8191")
+    Integermin1 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1", name: "Integermin1")
+    Integermin100 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin100", name: "Integermin100")
+    Integermin1000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1000", name: "Integermin1000")
+    Integermin1000000max100000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1000000Max100000000", name: "Integermin1000000max100000000")
+    Integermin100000max100000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin100000Max100000000", name: "Integermin100000max100000000")
+    Integermin100000max40000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin100000Max40000000", name: "Integermin100000max40000000")
+    Integermin100000max80000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin100000Max80000000", name: "Integermin100000max80000000")
+    Integermin1000max30000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1000Max30000", name: "Integermin1000max30000")
+    Integermin10max86400 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin10Max86400", name: "Integermin10max86400")
+    Integermin1max10 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max10", name: "Integermin1max10")
+    Integermin1max1000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max1000", name: "Integermin1max1000")
+    Integermin1max1000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max1000000", name: "Integermin1max1000000")
+    Integermin1max15 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max15", name: "Integermin1max15")
+    Integermin1max16 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max16", name: "Integermin1max16")
+    Integermin1max20 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max20", name: "Integermin1max20")
+    Integermin1max3003 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max3003", name: "Integermin1max3003")
+    Integermin1max31 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max31", name: "Integermin1max31")
+    Integermin1max32 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max32", name: "Integermin1max32")
+    Integermin1max3600000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max3600000", name: "Integermin1max3600000")
+    Integermin1max4 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max4", name: "Integermin1max4")
+    Integermin1max5 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max5", name: "Integermin1max5")
+    Integermin1max51 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max51", name: "Integermin1max51")
+    Integermin1max511 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max511", name: "Integermin1max511")
+    Integermin1max6 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max6", name: "Integermin1max6")
+    Integermin1max65535 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max65535", name: "Integermin1max65535")
+    Integermin1max8 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max8", name: "Integermin1max8")
+    Integermin1max800 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin1Max800", name: "Integermin1max800")
+    Integermin256max3840 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin256Max3840", name: "Integermin256max3840")
+    Integermin25max10000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin25Max10000", name: "Integermin25max10000")
+    Integermin25max2000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin25Max2000", name: "Integermin25max2000")
+    Integermin2max8192 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin2Max8192", name: "Integermin2max8192")
+    Integermin3 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin3", name: "Integermin3")
+    Integermin30 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin30", name: "Integermin30")
+    Integermin32max8191 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin32Max8191", name: "Integermin32max8191")
+    Integermin40max16000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin40Max16000", name: "Integermin40max16000")
+    Integermin4max20 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin4Max20", name: "Integermin4max20")
+    Integermin50000max12000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin50000Max12000000", name: "Integermin50000max12000000")
+    Integermin50000max24000000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin50000Max24000000", name: "Integermin50000max24000000")
+    Integermin64max2160 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin64Max2160", name: "Integermin64max2160")
+    Integermin800max3000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin800Max3000", name: "Integermin800max3000")
+    Integermin80max800 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin80Max800", name: "Integermin80max800")
+    Integermin96max600 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMin96Max600", name: "Integermin96max600")
+    Integerminnegative1000max1000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMinNegative1000Max1000", name: "Integerminnegative1000max1000")
+    Integerminnegative5max5 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMinNegative5Max5", name: "Integerminnegative5max5")
+    Integerminnegative60max6 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMinNegative60Max6", name: "Integerminnegative60max6")
+    Integerminnegative60max60 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__integerMinNegative60Max60", name: "Integerminnegative60max60")
     Listofadditionaldestinations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfAdditionalDestinations", name: "Listofadditionaldestinations")
     Listofaudiochannelmapping = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfAudioChannelMapping", name: "Listofaudiochannelmapping")
     Listofaudiodescription = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfAudioDescription", name: "Listofaudiodescription")
+    Listofaudiofeedinput = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfAudioFeedInput", name: "Listofaudiofeedinput")
+    Listofaudiopid = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfAudioPid", name: "Listofaudiopid")
     Listofaudioselector = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfAudioSelector", name: "Listofaudioselector")
     Listofaudiotrack = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfAudioTrack", name: "Listofaudiotrack")
     Listofbatchfailedresultmodel = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfBatchFailedResultModel", name: "Listofbatchfailedresultmodel")
@@ -992,12 +1073,14 @@ module Aws::MediaLive
     Listofcaptiondescription = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfCaptionDescription", name: "Listofcaptiondescription")
     Listofcaptionlanguagemapping = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfCaptionLanguageMapping", name: "Listofcaptionlanguagemapping")
     Listofcaptionselector = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfCaptionSelector", name: "Listofcaptionselector")
+    Listofchannelalert = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfChannelAlert", name: "Listofchannelalert")
     Listofchannelegressendpoint = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfChannelEgressEndpoint", name: "Listofchannelegressendpoint")
     Listofchannelengineversionresponse = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfChannelEngineVersionResponse", name: "Listofchannelengineversionresponse")
     Listofchannelpipelineidtorestart = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfChannelPipelineIdToRestart", name: "Listofchannelpipelineidtorestart")
     Listofchannelsummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfChannelSummary", name: "Listofchannelsummary")
     Listofcloudwatchalarmtemplategroupsummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfCloudWatchAlarmTemplateGroupSummary", name: "Listofcloudwatchalarmtemplategroupsummary")
     Listofcloudwatchalarmtemplatesummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfCloudWatchAlarmTemplateSummary", name: "Listofcloudwatchalarmtemplatesummary")
+    Listofclusteralert = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfClusterAlert", name: "Listofclusteralert")
     Listofcmafingestcaptionlanguagemapping = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfCmafIngestCaptionLanguageMapping", name: "Listofcmafingestcaptionlanguagemapping")
     Listofcolorcorrection = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfColorCorrection", name: "Listofcolorcorrection")
     Listofdashroleaudio = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfDashRoleAudio", name: "Listofdashroleaudio")
@@ -1006,6 +1089,7 @@ module Aws::MediaLive
     Listofdescribeclustersummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfDescribeClusterSummary", name: "Listofdescribeclustersummary")
     Listofdescribenetworksummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfDescribeNetworkSummary", name: "Listofdescribenetworksummary")
     Listofdescribenodesummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfDescribeNodeSummary", name: "Listofdescribenodesummary")
+    Listofenrichmentmethod = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfEnrichmentMethod", name: "Listofenrichmentmethod")
     Listofeventbridgeruletemplategroupsummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfEventBridgeRuleTemplateGroupSummary", name: "Listofeventbridgeruletemplategroupsummary")
     Listofeventbridgeruletemplatesummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfEventBridgeRuleTemplateSummary", name: "Listofeventbridgeruletemplatesummary")
     Listofeventbridgeruletemplatetarget = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfEventBridgeRuleTemplateTarget", name: "Listofeventbridgeruletemplatetarget")
@@ -1037,11 +1121,14 @@ module Aws::MediaLive
     Listofippoolupdaterequest = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfIpPoolUpdateRequest", name: "Listofippoolupdaterequest")
     Listofmediaconnectflow = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMediaConnectFlow", name: "Listofmediaconnectflow")
     Listofmediaconnectflowrequest = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMediaConnectFlowRequest", name: "Listofmediaconnectflowrequest")
+    Listofmediaconnectrouteroutputdestinationsettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMediaConnectRouterOutputDestinationSettings", name: "Listofmediaconnectrouteroutputdestinationsettings")
+    Listofmediapackageadditionaldestinations = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMediaPackageAdditionalDestinations", name: "Listofmediapackageadditionaldestinations")
     Listofmediapackageoutputdestinationsettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMediaPackageOutputDestinationSettings", name: "Listofmediapackageoutputdestinationsettings")
     Listofmediaresourceneighbor = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMediaResourceNeighbor", name: "Listofmediaresourceneighbor")
     Listofmulticastsource = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMulticastSource", name: "Listofmulticastsource")
     Listofmulticastsourcecreaterequest = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMulticastSourceCreateRequest", name: "Listofmulticastsourcecreaterequest")
     Listofmulticastsourceupdaterequest = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMulticastSourceUpdateRequest", name: "Listofmulticastsourceupdaterequest")
+    Listofmultiplexalert = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMultiplexAlert", name: "Listofmultiplexalert")
     Listofmultiplexoutputdestination = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMultiplexOutputDestination", name: "Listofmultiplexoutputdestination")
     Listofmultiplexprogrampipelinedetail = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMultiplexProgramPipelineDetail", name: "Listofmultiplexprogrampipelinedetail")
     Listofmultiplexprogramsummary = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfMultiplexProgramSummary", name: "Listofmultiplexprogramsummary")
@@ -1053,12 +1140,16 @@ module Aws::MediaLive
     Listofoutputdestination = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfOutputDestination", name: "Listofoutputdestination")
     Listofoutputdestinationsettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfOutputDestinationSettings", name: "Listofoutputdestinationsettings")
     Listofoutputgroup = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfOutputGroup", name: "Listofoutputgroup")
+    Listofoutputlocationref = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfOutputLocationRef", name: "Listofoutputlocationref")
+    Listofoutputusage = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfOutputUsage", name: "Listofoutputusage")
     Listofpipelinedetail = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfPipelineDetail", name: "Listofpipelinedetail")
     Listofpipelinepausestatesettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfPipelinePauseStateSettings", name: "Listofpipelinepausestatesettings")
     Listofreservation = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfReservation", name: "Listofreservation")
     Listofroute = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfRoute", name: "Listofroute")
     Listofroutecreaterequest = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfRouteCreateRequest", name: "Listofroutecreaterequest")
     Listofrouteupdaterequest = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfRouteUpdateRequest", name: "Listofrouteupdaterequest")
+    Listofrouterdestination = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfRouterDestination", name: "Listofrouterdestination")
+    Listofrouterdestinationsettings = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfRouterDestinationSettings", name: "Listofrouterdestinationsettings")
     Listofrtmpadmarkers = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfRtmpAdMarkers", name: "Listofrtmpadmarkers")
     Listofscheduleaction = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfScheduleAction", name: "Listofscheduleaction")
     Listofscte35descriptor = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOfScte35Descriptor", name: "Listofscte35descriptor")
@@ -1078,41 +1169,41 @@ module Aws::MediaLive
     ListofStringmin7max11patternaws097 = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOf__stringMin7Max11PatternAws097", name: "ListofStringmin7max11patternaws097")
     ListofStringpatterns = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.medialive#__listOf__stringPatternS", name: "ListofStringpatterns")
     Long = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__long", name: "Long")
-    Longmin0max1099511627775 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__longMin0Max1099511627775", name: "Longmin0max1099511627775", traits: {"smithy.api#range" => {"min" => 0, "max" => 1099511627775}})
-    Longmin0max4294967295 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__longMin0Max4294967295", name: "Longmin0max4294967295", traits: {"smithy.api#range" => {"min" => 0, "max" => 4294967295}})
-    Longmin0max8589934591 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__longMin0Max8589934591", name: "Longmin0max8589934591", traits: {"smithy.api#range" => {"min" => 0, "max" => 8589934591}})
-    Longmin0max86400000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__longMin0Max86400000", name: "Longmin0max86400000", traits: {"smithy.api#range" => {"min" => 0, "max" => 86400000}})
+    Longmin0max1099511627775 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__longMin0Max1099511627775", name: "Longmin0max1099511627775")
+    Longmin0max4294967295 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__longMin0Max4294967295", name: "Longmin0max4294967295")
+    Longmin0max8589934591 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__longMin0Max8589934591", name: "Longmin0max8589934591")
+    Longmin0max86400000 = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.medialive#__longMin0Max86400000", name: "Longmin0max86400000")
     String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__string", name: "String")
-    Stringmax100 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax100", name: "Stringmax100", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
-    Stringmax1000 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax1000", name: "Stringmax1000", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
-    Stringmax2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax2048", name: "Stringmax2048", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
-    Stringmax255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax255", name: "Stringmax255", traits: {"smithy.api#length" => {"min" => 0, "max" => 255}})
-    Stringmax256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax256", name: "Stringmax256", traits: {"smithy.api#length" => {"min" => 0, "max" => 256}})
-    Stringmax32 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax32", name: "Stringmax32", traits: {"smithy.api#length" => {"min" => 0, "max" => 32}})
-    Stringmax64 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax64", name: "Stringmax64", traits: {"smithy.api#length" => {"min" => 0, "max" => 64}})
-    Stringmin0max1024 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin0Max1024", name: "Stringmin0max1024", traits: {"smithy.api#length" => {"min" => 0, "max" => 1024}})
-    Stringmin1 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1", name: "Stringmin1", traits: {"smithy.api#length" => {"min" => 1}})
-    Stringmin1max2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max2048", name: "Stringmin1max2048", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
-    Stringmin1max2048patternarn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max2048PatternArn", name: "Stringmin1max2048patternarn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn.+$"})
-    Stringmin1max255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max255", name: "Stringmin1max255", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
-    Stringmin1max255patterns = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max255PatternS", name: "Stringmin1max255patterns", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[^\\s]+$"})
-    Stringmin1max256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max256", name: "Stringmin1max256", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}})
-    Stringmin1max256patterns = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max256PatternS", name: "Stringmin1max256patterns", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[\\S]+$"})
-    Stringmin1max35 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max35", name: "Stringmin1max35", traits: {"smithy.api#length" => {"min" => 1, "max" => 35}})
-    Stringmin1max7 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max7", name: "Stringmin1max7", traits: {"smithy.api#length" => {"min" => 1, "max" => 7}})
-    Stringmin2max2 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin2Max2", name: "Stringmin2max2", traits: {"smithy.api#length" => {"min" => 2, "max" => 2}})
-    Stringmin32max32 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin32Max32", name: "Stringmin32max32", traits: {"smithy.api#length" => {"min" => 32, "max" => 32}})
-    Stringmin34max34 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin34Max34", name: "Stringmin34max34", traits: {"smithy.api#length" => {"min" => 34, "max" => 34}})
-    Stringmin3max3 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin3Max3", name: "Stringmin3max3", traits: {"smithy.api#length" => {"min" => 3, "max" => 3}})
-    Stringmin6max6 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin6Max6", name: "Stringmin6max6", traits: {"smithy.api#length" => {"min" => 6, "max" => 6}})
-    Stringmin7max11patternaws097 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin7Max11PatternAws097", name: "Stringmin7max11patternaws097", traits: {"smithy.api#length" => {"min" => 7, "max" => 11}, "smithy.api#pattern" => "^(aws-)?[0-9]{7}$"})
-    Stringpattern010920300 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPattern010920300", name: "Stringpattern010920300", traits: {"smithy.api#pattern" => "^([0,1]?[0-9]|2[0-3]):00$"})
-    Stringpatternarnmedialivecloudwatchalarmtemplate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveCloudwatchAlarmTemplate", name: "Stringpatternarnmedialivecloudwatchalarmtemplate", traits: {"smithy.api#pattern" => "^arn:.+:medialive:.+:cloudwatch-alarm-template:.+$"})
-    Stringpatternarnmedialivecloudwatchalarmtemplategroup = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveCloudwatchAlarmTemplateGroup", name: "Stringpatternarnmedialivecloudwatchalarmtemplategroup", traits: {"smithy.api#pattern" => "^arn:.+:medialive:.+:cloudwatch-alarm-template-group:.+$"})
-    Stringpatternarnmedialiveeventbridgeruletemplate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveEventbridgeRuleTemplate", name: "Stringpatternarnmedialiveeventbridgeruletemplate", traits: {"smithy.api#pattern" => "^arn:.+:medialive:.+:eventbridge-rule-template:.+$"})
-    Stringpatternarnmedialiveeventbridgeruletemplategroup = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveEventbridgeRuleTemplateGroup", name: "Stringpatternarnmedialiveeventbridgeruletemplategroup", traits: {"smithy.api#pattern" => "^arn:.+:medialive:.+:eventbridge-rule-template-group:.+$"})
-    Stringpatternarnmedialivesignalmap = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveSignalMap", name: "Stringpatternarnmedialivesignalmap", traits: {"smithy.api#pattern" => "^arn:.+:medialive:.+:signal-map:.+$"})
-    Stringpatterns = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternS", name: "Stringpatterns", traits: {"smithy.api#pattern" => "^[^\\s]+$"})
+    Stringmax100 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax100", name: "Stringmax100")
+    Stringmax1000 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax1000", name: "Stringmax1000")
+    Stringmax2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax2048", name: "Stringmax2048")
+    Stringmax255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax255", name: "Stringmax255")
+    Stringmax256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax256", name: "Stringmax256")
+    Stringmax32 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax32", name: "Stringmax32")
+    Stringmax64 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMax64", name: "Stringmax64")
+    Stringmin0max1024 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin0Max1024", name: "Stringmin0max1024")
+    Stringmin1 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1", name: "Stringmin1")
+    Stringmin1max2048 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max2048", name: "Stringmin1max2048")
+    Stringmin1max2048patternarn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max2048PatternArn", name: "Stringmin1max2048patternarn")
+    Stringmin1max255 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max255", name: "Stringmin1max255")
+    Stringmin1max255patterns = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max255PatternS", name: "Stringmin1max255patterns")
+    Stringmin1max256 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max256", name: "Stringmin1max256")
+    Stringmin1max256patterns = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max256PatternS", name: "Stringmin1max256patterns")
+    Stringmin1max35 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max35", name: "Stringmin1max35")
+    Stringmin1max7 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin1Max7", name: "Stringmin1max7")
+    Stringmin2max2 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin2Max2", name: "Stringmin2max2")
+    Stringmin32max32 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin32Max32", name: "Stringmin32max32")
+    Stringmin34max34 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin34Max34", name: "Stringmin34max34")
+    Stringmin3max3 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin3Max3", name: "Stringmin3max3")
+    Stringmin6max6 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin6Max6", name: "Stringmin6max6")
+    Stringmin7max11patternaws097 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringMin7Max11PatternAws097", name: "Stringmin7max11patternaws097")
+    Stringpattern010920300 = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPattern010920300", name: "Stringpattern010920300")
+    Stringpatternarnmedialivecloudwatchalarmtemplate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveCloudwatchAlarmTemplate", name: "Stringpatternarnmedialivecloudwatchalarmtemplate")
+    Stringpatternarnmedialivecloudwatchalarmtemplategroup = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveCloudwatchAlarmTemplateGroup", name: "Stringpatternarnmedialivecloudwatchalarmtemplategroup")
+    Stringpatternarnmedialiveeventbridgeruletemplate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveEventbridgeRuleTemplate", name: "Stringpatternarnmedialiveeventbridgeruletemplate")
+    Stringpatternarnmedialiveeventbridgeruletemplategroup = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveEventbridgeRuleTemplateGroup", name: "Stringpatternarnmedialiveeventbridgeruletemplategroup")
+    Stringpatternarnmedialivesignalmap = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternArnMedialiveSignalMap", name: "Stringpatternarnmedialivesignalmap")
+    Stringpatterns = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.medialive#__stringPatternS", name: "Stringpatterns")
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.medialive#__timestamp", name: "Timestamp")
     Timestampiso8601 = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.medialive#__timestampIso8601", name: "Timestampiso8601", traits: {"smithy.api#timestampFormat" => "date-time"})
 
@@ -1146,6 +1237,18 @@ module Aws::MediaLive
     AacVbrQuality.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     AacVbrQuality.add_member(:medium_high, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM_HIGH", traits: {"smithy.api#enumValue" => "MEDIUM_HIGH"}))
     AacVbrQuality.add_member(:medium_low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM_LOW", traits: {"smithy.api#enumValue" => "MEDIUM_LOW"}))
+    AbWatermarkerIdLength.add_member(:id_2048, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ID_2048", traits: {"smithy.api#enumValue" => "ID_2048"}))
+    AbWatermarkerIdLength.add_member(:id_512, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ID_512", traits: {"smithy.api#enumValue" => "ID_512"}))
+    AbWatermarkingCustomProfile.add_member(:embedding_frequency, ::Smithy::Schema::Shapes::MemberShape.new(target: Doublemin250max5000, name: "EmbeddingFrequency", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "embeddingFrequency", "smithy.api#required" => {}}))
+    AbWatermarkingCustomProfile.add_member(:scene_cut, ::Smithy::Schema::Shapes::MemberShape.new(target: Doubleminnegative1max5, name: "SceneCut", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "sceneCut", "smithy.api#required" => {}}))
+    AbWatermarkingCustomProfile.add_member(:target_psnr, ::Smithy::Schema::Shapes::MemberShape.new(target: Doublemin32max46, name: "TargetPsnr", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "targetPsnr", "smithy.api#required" => {}}))
+    AbWatermarkingCustomProfile.type = Types::AbWatermarkingCustomProfile
+    AbWatermarkingProfile.add_member(:camcording, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CAMCORDING", traits: {"smithy.api#enumValue" => "CAMCORDING"}))
+    AbWatermarkingProfile.add_member(:custom, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CUSTOM", traits: {"smithy.api#enumValue" => "CUSTOM"}))
+    AbWatermarkingProfile.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
+    AbWatermarkingProfile.add_member(:hq, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HQ", traits: {"smithy.api#enumValue" => "HQ"}))
+    AbWatermarkingProfile.add_member(:mezzanine, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEZZANINE", traits: {"smithy.api#enumValue" => "MEZZANINE"}))
+    AbWatermarkingProfile.add_member(:robust, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ROBUST", traits: {"smithy.api#enumValue" => "ROBUST"}))
     Ac3AttenuationControl.add_member(:attenuate_3_db, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ATTENUATE_3_DB", traits: {"smithy.api#enumValue" => "ATTENUATE_3_DB"}))
     Ac3AttenuationControl.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     Ac3BitstreamMode.add_member(:commentary, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMMENTARY", traits: {"smithy.api#enumValue" => "COMMENTARY"}))
@@ -1244,6 +1347,9 @@ module Aws::MediaLive
     AudioDescriptionLanguageCodeControl.add_member(:use_configured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USE_CONFIGURED", traits: {"smithy.api#enumValue" => "USE_CONFIGURED"}))
     AudioDolbyEDecode.add_member(:program_selection, ::Smithy::Schema::Shapes::MemberShape.new(target: DolbyEProgramSelection, name: "ProgramSelection", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "programSelection", "smithy.api#required" => {}}))
     AudioDolbyEDecode.type = Types::AudioDolbyEDecode
+    AudioFeedInput.add_member(:audio_selector_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AudioSelectorName", traits: {"smithy.api#jsonName" => "audioSelectorName"}))
+    AudioFeedInput.add_member(:feed_input, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FeedInput", traits: {"smithy.api#jsonName" => "feedInput"}))
+    AudioFeedInput.type = Types::AudioFeedInput
     AudioHlsRenditionSelection.add_member(:group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1, name: "GroupId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "groupId", "smithy.api#required" => {}}))
     AudioHlsRenditionSelection.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
     AudioHlsRenditionSelection.type = Types::AudioHlsRenditionSelection
@@ -1254,10 +1360,16 @@ module Aws::MediaLive
     AudioLanguageSelectionPolicy.add_member(:strict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRICT", traits: {"smithy.api#enumValue" => "STRICT"}))
     AudioNormalizationAlgorithm.add_member(:itu_1770_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITU_1770_1", traits: {"smithy.api#enumValue" => "ITU_1770_1"}))
     AudioNormalizationAlgorithm.add_member(:itu_1770_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITU_1770_2", traits: {"smithy.api#enumValue" => "ITU_1770_2"}))
+    AudioNormalizationAlgorithm.add_member(:itu_1770_3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITU_1770_3", traits: {"smithy.api#enumValue" => "ITU_1770_3"}))
+    AudioNormalizationAlgorithm.add_member(:itu_1770_4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ITU_1770_4", traits: {"smithy.api#enumValue" => "ITU_1770_4"}))
     AudioNormalizationAlgorithmControl.add_member(:correct_audio, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CORRECT_AUDIO", traits: {"smithy.api#enumValue" => "CORRECT_AUDIO"}))
+    AudioNormalizationPeakCalculation.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
+    AudioNormalizationPeakCalculation.add_member(:true_peak, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRUE_PEAK", traits: {"smithy.api#enumValue" => "TRUE_PEAK"}))
     AudioNormalizationSettings.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioNormalizationAlgorithm, name: "Algorithm", traits: {"smithy.api#jsonName" => "algorithm"}))
     AudioNormalizationSettings.add_member(:algorithm_control, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioNormalizationAlgorithmControl, name: "AlgorithmControl", traits: {"smithy.api#jsonName" => "algorithmControl"}))
     AudioNormalizationSettings.add_member(:target_lkfs, ::Smithy::Schema::Shapes::MemberShape.new(target: Doubleminnegative59max0, name: "TargetLkfs", traits: {"smithy.api#jsonName" => "targetLkfs"}))
+    AudioNormalizationSettings.add_member(:peak_calculation, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioNormalizationPeakCalculation, name: "PeakCalculation", traits: {"smithy.api#jsonName" => "peakCalculation"}))
+    AudioNormalizationSettings.add_member(:peak_limiter_threshold, ::Smithy::Schema::Shapes::MemberShape.new(target: Doubleminnegative8max0, name: "PeakLimiterThreshold", traits: {"smithy.api#jsonName" => "peakLimiterThreshold"}))
     AudioNormalizationSettings.type = Types::AudioNormalizationSettings
     AudioOnlyHlsSegmentType.add_member(:aac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AAC", traits: {"smithy.api#enumValue" => "AAC"}))
     AudioOnlyHlsSegmentType.add_member(:fmp4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FMP4", traits: {"smithy.api#enumValue" => "FMP4"}))
@@ -1270,8 +1382,18 @@ module Aws::MediaLive
     AudioOnlyHlsTrackType.add_member(:alternate_audio_auto_select_default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT", traits: {"smithy.api#enumValue" => "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"}))
     AudioOnlyHlsTrackType.add_member(:alternate_audio_not_auto_select, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALTERNATE_AUDIO_NOT_AUTO_SELECT", traits: {"smithy.api#enumValue" => "ALTERNATE_AUDIO_NOT_AUTO_SELECT"}))
     AudioOnlyHlsTrackType.add_member(:audio_only_variant_stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUDIO_ONLY_VARIANT_STREAM", traits: {"smithy.api#enumValue" => "AUDIO_ONLY_VARIANT_STREAM"}))
+    AudioPid.add_member(:dolby_e_decode, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioDolbyEDecode, name: "DolbyEDecode", traits: {"smithy.api#jsonName" => "dolbyEDecode"}))
+    AudioPid.add_member(:pid, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max8191, name: "Pid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "pid", "smithy.api#required" => {}}))
+    AudioPid.add_member(:premix_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioPreMixerSettings, name: "PremixSettings", traits: {"smithy.api#jsonName" => "premixSettings"}))
+    AudioPid.type = Types::AudioPid
     AudioPidSelection.add_member(:pid, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max8191, name: "Pid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "pid", "smithy.api#required" => {}}))
+    AudioPidSelection.add_member(:pids, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofaudiopid, name: "Pids", traits: {"smithy.api#jsonName" => "pids"}))
     AudioPidSelection.type = Types::AudioPidSelection
+    AudioPreMixerSettings.add_member(:audio_normalization_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioNormalizationSettings, name: "AudioNormalizationSettings", traits: {"smithy.api#jsonName" => "audioNormalizationSettings"}))
+    AudioPreMixerSettings.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max16, name: "Channels", traits: {"smithy.api#jsonName" => "channels"}))
+    AudioPreMixerSettings.add_member(:gain_db, ::Smithy::Schema::Shapes::MemberShape.new(target: Doubleminnegative60max60, name: "GainDb", traits: {"smithy.api#jsonName" => "gainDb"}))
+    AudioPreMixerSettings.add_member(:remix_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RemixSettings, name: "RemixSettings", traits: {"smithy.api#jsonName" => "remixSettings"}))
+    AudioPreMixerSettings.type = Types::AudioPreMixerSettings
     AudioSelector.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1, name: "Name", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "name", "smithy.api#required" => {}}))
     AudioSelector.add_member(:selector_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioSelectorSettings, name: "SelectorSettings", traits: {"smithy.api#jsonName" => "selectorSettings"}))
     AudioSelector.type = Types::AudioSelector
@@ -1284,6 +1406,7 @@ module Aws::MediaLive
     AudioSilenceFailoverSettings.add_member(:audio_silence_threshold_msec, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1000, name: "AudioSilenceThresholdMsec", traits: {"smithy.api#jsonName" => "audioSilenceThresholdMsec"}))
     AudioSilenceFailoverSettings.type = Types::AudioSilenceFailoverSettings
     AudioTrack.add_member(:track, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1, name: "Track", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "track", "smithy.api#required" => {}}))
+    AudioTrack.add_member(:premix_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioPreMixerSettings, name: "PremixSettings", traits: {"smithy.api#jsonName" => "premixSettings"}))
     AudioTrack.type = Types::AudioTrack
     AudioTrackSelection.add_member(:tracks, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofaudiotrack, name: "Tracks", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "tracks", "smithy.api#required" => {}}))
     AudioTrackSelection.add_member(:dolby_e_decode, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioDolbyEDecode, name: "DolbyEDecode", traits: {"smithy.api#jsonName" => "dolbyEDecode"}))
@@ -1301,10 +1424,13 @@ module Aws::MediaLive
     AutomaticInputFailoverSettings.add_member(:input_preference, ::Smithy::Schema::Shapes::MemberShape.new(target: InputPreference, name: "InputPreference", traits: {"smithy.api#jsonName" => "inputPreference"}))
     AutomaticInputFailoverSettings.add_member(:secondary_input_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecondaryInputId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "secondaryInputId", "smithy.api#required" => {}}))
     AutomaticInputFailoverSettings.type = Types::AutomaticInputFailoverSettings
+    Av1BitDepth.add_member(:depth_10, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPTH_10", traits: {"smithy.api#enumValue" => "DEPTH_10"}))
+    Av1BitDepth.add_member(:depth_8, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEPTH_8", traits: {"smithy.api#enumValue" => "DEPTH_8"}))
     Av1ColorSpaceSettings.add_member(:color_space_passthrough_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorSpacePassthroughSettings, name: "ColorSpacePassthroughSettings", traits: {"smithy.api#jsonName" => "colorSpacePassthroughSettings"}))
     Av1ColorSpaceSettings.add_member(:hdr10_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Hdr10Settings, name: "Hdr10Settings", traits: {"smithy.api#jsonName" => "hdr10Settings"}))
     Av1ColorSpaceSettings.add_member(:rec601_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Rec601Settings, name: "Rec601Settings", traits: {"smithy.api#jsonName" => "rec601Settings"}))
     Av1ColorSpaceSettings.add_member(:rec709_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Rec709Settings, name: "Rec709Settings", traits: {"smithy.api#jsonName" => "rec709Settings"}))
+    Av1ColorSpaceSettings.add_member(:hlg2020_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Hlg2020Settings, name: "Hlg2020Settings", traits: {"smithy.api#jsonName" => "hlg2020Settings"}))
     Av1ColorSpaceSettings.type = Types::Av1ColorSpaceSettings
     Av1GopSizeUnits.add_member(:frames, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FRAMES", traits: {"smithy.api#enumValue" => "FRAMES"}))
     Av1GopSizeUnits.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDS", traits: {"smithy.api#enumValue" => "SECONDS"}))
@@ -1350,7 +1476,17 @@ module Aws::MediaLive
     Av1Settings.add_member(:bitrate, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin50000max12000000, name: "Bitrate", traits: {"smithy.api#jsonName" => "bitrate"}))
     Av1Settings.add_member(:rate_control_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: Av1RateControlMode, name: "RateControlMode", traits: {"smithy.api#jsonName" => "rateControlMode"}))
     Av1Settings.add_member(:min_bitrate, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max8000000, name: "MinBitrate", traits: {"smithy.api#jsonName" => "minBitrate"}))
+    Av1Settings.add_member(:spatial_aq, ::Smithy::Schema::Shapes::MemberShape.new(target: Av1SpatialAq, name: "SpatialAq", traits: {"smithy.api#jsonName" => "spatialAq"}))
+    Av1Settings.add_member(:temporal_aq, ::Smithy::Schema::Shapes::MemberShape.new(target: Av1TemporalAq, name: "TemporalAq", traits: {"smithy.api#jsonName" => "temporalAq"}))
+    Av1Settings.add_member(:timecode_insertion, ::Smithy::Schema::Shapes::MemberShape.new(target: Av1TimecodeInsertionBehavior, name: "TimecodeInsertion", traits: {"smithy.api#jsonName" => "timecodeInsertion"}))
+    Av1Settings.add_member(:bit_depth, ::Smithy::Schema::Shapes::MemberShape.new(target: Av1BitDepth, name: "BitDepth", traits: {"smithy.api#jsonName" => "bitDepth"}))
     Av1Settings.type = Types::Av1Settings
+    Av1SpatialAq.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    Av1SpatialAq.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    Av1TemporalAq.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    Av1TemporalAq.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    Av1TimecodeInsertionBehavior.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
+    Av1TimecodeInsertionBehavior.add_member(:metadata_obu, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "METADATA_OBU", traits: {"smithy.api#enumValue" => "METADATA_OBU"}))
     AvailBlanking.add_member(:avail_blanking_image, ::Smithy::Schema::Shapes::MemberShape.new(target: InputLocation, name: "AvailBlankingImage", traits: {"smithy.api#jsonName" => "availBlankingImage"}))
     AvailBlanking.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: AvailBlankingState, name: "State", traits: {"smithy.api#jsonName" => "state"}))
     AvailBlanking.type = Types::AvailBlanking
@@ -1524,7 +1660,10 @@ module Aws::MediaLive
     CaptionSelectorSettings.add_member(:scte20_source_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Scte20SourceSettings, name: "Scte20SourceSettings", traits: {"smithy.api#jsonName" => "scte20SourceSettings"}))
     CaptionSelectorSettings.add_member(:scte27_source_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Scte27SourceSettings, name: "Scte27SourceSettings", traits: {"smithy.api#jsonName" => "scte27SourceSettings"}))
     CaptionSelectorSettings.add_member(:teletext_source_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: TeletextSourceSettings, name: "TeletextSourceSettings", traits: {"smithy.api#jsonName" => "teletextSourceSettings"}))
+    CaptionSelectorSettings.add_member(:smart_subtitle_source_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SmartSubtitleSourceSettings, name: "SmartSubtitleSourceSettings", traits: {"smithy.api#jsonName" => "smartSubtitleSourceSettings"}))
     CaptionSelectorSettings.type = Types::CaptionSelectorSettings
+    CaptionSynchronizationMode.add_member(:no_video_delay, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_VIDEO_DELAY", traits: {"smithy.api#enumValue" => "NO_VIDEO_DELAY"}))
+    CaptionSynchronizationMode.add_member(:video_aligned_captions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIDEO_ALIGNED_CAPTIONS", traits: {"smithy.api#enumValue" => "VIDEO_ALIGNED_CAPTIONS"}))
     CdiInputResolution.add_member(:sd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SD", traits: {"smithy.api#enumValue" => "SD"}))
     CdiInputResolution.add_member(:hd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HD", traits: {"smithy.api#enumValue" => "HD"}))
     CdiInputResolution.add_member(:fhd, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FHD", traits: {"smithy.api#enumValue" => "FHD"}))
@@ -1551,7 +1690,20 @@ module Aws::MediaLive
     Channel.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcOutputSettingsDescription, name: "Vpc", traits: {"smithy.api#jsonName" => "vpc"}))
     Channel.add_member(:anywhere_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeAnywhereSettings, name: "AnywhereSettings", traits: {"smithy.api#jsonName" => "anywhereSettings"}))
     Channel.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionResponse, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
+    Channel.add_member(:linked_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLinkedChannelSettings, name: "LinkedChannelSettings", traits: {"smithy.api#jsonName" => "linkedChannelSettings"}))
+    Channel.add_member(:channel_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ChannelSecurityGroups", traits: {"smithy.api#jsonName" => "channelSecurityGroups"}))
+    Channel.add_member(:inference_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeInferenceSettings, name: "InferenceSettings", traits: {"smithy.api#jsonName" => "inferenceSettings"}))
     Channel.type = Types::Channel
+    ChannelAlert.add_member(:alert_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AlertType", traits: {"smithy.api#jsonName" => "alertType"}))
+    ChannelAlert.add_member(:cleared_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "ClearedTimestamp", traits: {"smithy.api#jsonName" => "clearedTimestamp"}))
+    ChannelAlert.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#jsonName" => "id"}))
+    ChannelAlert.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    ChannelAlert.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PipelineId", traits: {"smithy.api#jsonName" => "pipelineId"}))
+    ChannelAlert.add_member(:set_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "SetTimestamp", traits: {"smithy.api#jsonName" => "setTimestamp"}))
+    ChannelAlert.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAlertState, name: "State", traits: {"smithy.api#jsonName" => "state"}))
+    ChannelAlert.type = Types::ChannelAlert
+    ChannelAlertState.add_member(:set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SET", traits: {"smithy.api#enumValue" => "SET"}))
+    ChannelAlertState.add_member(:cleared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLEARED", traits: {"smithy.api#enumValue" => "CLEARED"}))
     ChannelClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
     ChannelClass.add_member(:single_pipeline, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SINGLE_PIPELINE", traits: {"smithy.api#enumValue" => "SINGLE_PIPELINE"}))
     ChannelEgressEndpoint.add_member(:source_ip, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SourceIp", traits: {"smithy.api#jsonName" => "sourceIp"}))
@@ -1600,6 +1752,9 @@ module Aws::MediaLive
     ChannelSummary.add_member(:anywhere_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeAnywhereSettings, name: "AnywhereSettings", traits: {"smithy.api#jsonName" => "anywhereSettings"}))
     ChannelSummary.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionResponse, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
     ChannelSummary.add_member(:used_channel_engine_versions, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofchannelengineversionresponse, name: "UsedChannelEngineVersions", traits: {"smithy.api#jsonName" => "usedChannelEngineVersions"}))
+    ChannelSummary.add_member(:linked_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLinkedChannelSettings, name: "LinkedChannelSettings", traits: {"smithy.api#jsonName" => "linkedChannelSettings"}))
+    ChannelSummary.add_member(:channel_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ChannelSecurityGroups", traits: {"smithy.api#jsonName" => "channelSecurityGroups"}))
+    ChannelSummary.add_member(:inference_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeInferenceSettings, name: "InferenceSettings", traits: {"smithy.api#jsonName" => "inferenceSettings"}))
     ChannelSummary.type = Types::ChannelSummary
     ClaimDeviceRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#jsonName" => "id"}))
     ClaimDeviceRequest.type = Types::ClaimDeviceRequest
@@ -1649,10 +1804,22 @@ module Aws::MediaLive
     CloudWatchAlarmTemplateTargetResourceType.add_member(:mediaconnect_flow, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIACONNECT_FLOW", traits: {"smithy.api#enumValue" => "MEDIACONNECT_FLOW"}))
     CloudWatchAlarmTemplateTargetResourceType.add_member(:s3_bucket, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "S3_BUCKET", traits: {"smithy.api#enumValue" => "S3_BUCKET"}))
     CloudWatchAlarmTemplateTargetResourceType.add_member(:mediatailor_playback_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIATAILOR_PLAYBACK_CONFIGURATION", traits: {"smithy.api#enumValue" => "MEDIATAILOR_PLAYBACK_CONFIGURATION"}))
+    CloudWatchAlarmTemplateTargetResourceType.add_member(:elemental_inference_feed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ELEMENTAL_INFERENCE_FEED", traits: {"smithy.api#enumValue" => "ELEMENTAL_INFERENCE_FEED"}))
     CloudWatchAlarmTemplateTreatMissingData.add_member(:not_breaching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "notBreaching", traits: {"smithy.api#enumValue" => "notBreaching"}))
     CloudWatchAlarmTemplateTreatMissingData.add_member(:breaching, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "breaching", traits: {"smithy.api#enumValue" => "breaching"}))
     CloudWatchAlarmTemplateTreatMissingData.add_member(:ignore, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ignore", traits: {"smithy.api#enumValue" => "ignore"}))
     CloudWatchAlarmTemplateTreatMissingData.add_member(:missing, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "missing", traits: {"smithy.api#enumValue" => "missing"}))
+    ClusterAlert.add_member(:alert_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AlertType", traits: {"smithy.api#jsonName" => "alertType"}))
+    ClusterAlert.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ChannelId", traits: {"smithy.api#jsonName" => "channelId"}))
+    ClusterAlert.add_member(:cleared_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "ClearedTimestamp", traits: {"smithy.api#jsonName" => "clearedTimestamp"}))
+    ClusterAlert.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#jsonName" => "id"}))
+    ClusterAlert.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    ClusterAlert.add_member(:node_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NodeId", traits: {"smithy.api#jsonName" => "nodeId"}))
+    ClusterAlert.add_member(:set_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "SetTimestamp", traits: {"smithy.api#jsonName" => "setTimestamp"}))
+    ClusterAlert.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAlertState, name: "State", traits: {"smithy.api#jsonName" => "state"}))
+    ClusterAlert.type = Types::ClusterAlert
+    ClusterAlertState.add_member(:set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SET", traits: {"smithy.api#enumValue" => "SET"}))
+    ClusterAlertState.add_member(:cleared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLEARED", traits: {"smithy.api#enumValue" => "CLEARED"}))
     ClusterNetworkSettings.add_member(:default_route, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DefaultRoute", traits: {"smithy.api#jsonName" => "defaultRoute"}))
     ClusterNetworkSettings.add_member(:interface_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofinterfacemapping, name: "InterfaceMappings", traits: {"smithy.api#jsonName" => "interfaceMappings"}))
     ClusterNetworkSettings.type = Types::ClusterNetworkSettings
@@ -1671,6 +1838,15 @@ module Aws::MediaLive
     ClusterType.add_member(:on_premises, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_PREMISES", traits: {"smithy.api#enumValue" => "ON_PREMISES"}))
     CmafId3Behavior.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     CmafId3Behavior.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:additional_destinations_alternate_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofoutputlocationref, name: "AdditionalDestinationsAlternateDestinations", traits: {"smithy.api#jsonName" => "additionalDestinationsAlternateDestinations"}))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:alternate_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocationRef, name: "AlternateDestination", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "alternateDestination", "smithy.api#required" => {}}))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:custom_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AbWatermarkingCustomProfile, name: "CustomProfile", traits: {"smithy.api#jsonName" => "customProfile"}))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:license, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "License", traits: {"smithy.api#jsonName" => "license"}))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:operator_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max511, name: "OperatorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "operatorId", "smithy.api#required" => {}}))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:poly_period, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max1000, name: "PolyPeriod", traits: {"smithy.api#jsonName" => "polyPeriod"}))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AbWatermarkingProfile, name: "Profile", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "profile", "smithy.api#required" => {}}))
+    CmafIngestAbWatermarkerIrdetoSettings.add_member(:watermark_id_length, ::Smithy::Schema::Shapes::MemberShape.new(target: AbWatermarkerIdLength, name: "WatermarkIdLength", traits: {"smithy.api#jsonName" => "watermarkIdLength"}))
+    CmafIngestAbWatermarkerIrdetoSettings.type = Types::CmafIngestAbWatermarkerIrdetoSettings
     CmafIngestCaptionLanguageMapping.add_member(:caption_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max4, name: "CaptionChannel", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "captionChannel", "smithy.api#required" => {}}))
     CmafIngestCaptionLanguageMapping.add_member(:language_code, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin3max3, name: "LanguageCode", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "languageCode", "smithy.api#required" => {}}))
     CmafIngestCaptionLanguageMapping.type = Types::CmafIngestCaptionLanguageMapping
@@ -1691,11 +1867,14 @@ module Aws::MediaLive
     CmafIngestGroupSettings.add_member(:timed_metadata_id3_period, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max10000, name: "TimedMetadataId3Period", traits: {"smithy.api#jsonName" => "timedMetadataId3Period"}))
     CmafIngestGroupSettings.add_member(:timed_metadata_passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: CmafTimedMetadataPassthrough, name: "TimedMetadataPassthrough", traits: {"smithy.api#jsonName" => "timedMetadataPassthrough"}))
     CmafIngestGroupSettings.add_member(:additional_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofadditionaldestinations, name: "AdditionalDestinations", traits: {"smithy.api#jsonName" => "additionalDestinations"}))
+    CmafIngestGroupSettings.add_member(:watermarking_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: CmafIngestWatermarkingSettings, name: "WatermarkingSettings", traits: {"smithy.api#jsonName" => "watermarkingSettings"}))
     CmafIngestGroupSettings.type = Types::CmafIngestGroupSettings
     CmafIngestOutputSettings.add_member(:name_modifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NameModifier", traits: {"smithy.api#jsonName" => "nameModifier"}))
     CmafIngestOutputSettings.type = Types::CmafIngestOutputSettings
     CmafIngestSegmentLengthUnits.add_member(:milliseconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MILLISECONDS", traits: {"smithy.api#enumValue" => "MILLISECONDS"}))
     CmafIngestSegmentLengthUnits.add_member(:seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECONDS", traits: {"smithy.api#enumValue" => "SECONDS"}))
+    CmafIngestWatermarkingSettings.add_member(:cmaf_ingest_ab_watermarker_irdeto_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: CmafIngestAbWatermarkerIrdetoSettings, name: "CmafIngestAbWatermarkerIrdetoSettings", traits: {"smithy.api#jsonName" => "cmafIngestAbWatermarkerIrdetoSettings"}))
+    CmafIngestWatermarkingSettings.type = Types::CmafIngestWatermarkingSettings
     CmafKLVBehavior.add_member(:no_passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_PASSTHROUGH", traits: {"smithy.api#enumValue" => "NO_PASSTHROUGH"}))
     CmafKLVBehavior.add_member(:passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSTHROUGH", traits: {"smithy.api#enumValue" => "PASSTHROUGH"}))
     CmafNielsenId3Behavior.add_member(:no_passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_PASSTHROUGH", traits: {"smithy.api#enumValue" => "NO_PASSTHROUGH"}))
@@ -1718,6 +1897,8 @@ module Aws::MediaLive
     ColorSpacePassthroughSettings.type = Types::ColorSpacePassthroughSettings
     ConflictException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     ConflictException.type = Types::ConflictException
+    ConnectionMode.add_member(:caller, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CALLER", traits: {"smithy.api#enumValue" => "CALLER"}))
+    ConnectionMode.add_member(:listener, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LISTENER", traits: {"smithy.api#enumValue" => "LISTENER"}))
     ContentType.add_member(:image_jpeg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "image_jpeg", traits: {"smithy.api#enumValue" => "image/jpeg"}))
     CreateChannelPlacementGroupRequest.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateChannelPlacementGroupRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
@@ -1750,6 +1931,9 @@ module Aws::MediaLive
     CreateChannelRequest.add_member(:anywhere_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AnywhereSettings, name: "AnywhereSettings", traits: {"smithy.api#jsonName" => "anywhereSettings"}))
     CreateChannelRequest.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionRequest, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
     CreateChannelRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DryRun", traits: {"smithy.api#jsonName" => "dryRun"}))
+    CreateChannelRequest.add_member(:linked_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedChannelSettings, name: "LinkedChannelSettings", traits: {"smithy.api#jsonName" => "linkedChannelSettings"}))
+    CreateChannelRequest.add_member(:channel_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ChannelSecurityGroups", traits: {"smithy.api#jsonName" => "channelSecurityGroups"}))
+    CreateChannelRequest.add_member(:inference_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceSettings, name: "InferenceSettings", traits: {"smithy.api#jsonName" => "inferenceSettings"}))
     CreateChannelRequest.type = Types::CreateChannelRequest
     CreateChannelResponse.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "Channel", traits: {"smithy.api#jsonName" => "channel"}))
     CreateChannelResponse.type = Types::CreateChannelResponse
@@ -1863,6 +2047,7 @@ module Aws::MediaLive
     CreateInputRequest.add_member(:multicast_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastSettingsCreateRequest, name: "MulticastSettings", traits: {"smithy.api#jsonName" => "multicastSettings"}))
     CreateInputRequest.add_member(:smpte2110_receiver_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Smpte2110ReceiverGroupSettings, name: "Smpte2110ReceiverGroupSettings", traits: {"smithy.api#jsonName" => "smpte2110ReceiverGroupSettings"}))
     CreateInputRequest.add_member(:sdi_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: InputSdiSources, name: "SdiSources", traits: {"smithy.api#jsonName" => "sdiSources"}))
+    CreateInputRequest.add_member(:router_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RouterSettings, name: "RouterSettings", traits: {"smithy.api#jsonName" => "routerSettings"}))
     CreateInputRequest.type = Types::CreateInputRequest
     CreateInputResponse.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: Input, name: "Input", traits: {"smithy.api#jsonName" => "input"}))
     CreateInputResponse.type = Types::CreateInputResponse
@@ -2027,6 +2212,9 @@ module Aws::MediaLive
     DeleteChannelResponse.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcOutputSettingsDescription, name: "Vpc", traits: {"smithy.api#jsonName" => "vpc"}))
     DeleteChannelResponse.add_member(:anywhere_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeAnywhereSettings, name: "AnywhereSettings", traits: {"smithy.api#jsonName" => "anywhereSettings"}))
     DeleteChannelResponse.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionResponse, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
+    DeleteChannelResponse.add_member(:linked_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLinkedChannelSettings, name: "LinkedChannelSettings", traits: {"smithy.api#jsonName" => "linkedChannelSettings"}))
+    DeleteChannelResponse.add_member(:channel_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ChannelSecurityGroups", traits: {"smithy.api#jsonName" => "channelSecurityGroups"}))
+    DeleteChannelResponse.add_member(:inference_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeInferenceSettings, name: "InferenceSettings", traits: {"smithy.api#jsonName" => "inferenceSettings"}))
     DeleteChannelResponse.type = Types::DeleteChannelResponse
     DeleteCloudWatchAlarmTemplateGroupRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteCloudWatchAlarmTemplateGroupRequest.type = Types::DeleteCloudWatchAlarmTemplateGroupRequest
@@ -2181,6 +2369,9 @@ module Aws::MediaLive
     DescribeChannelResponse.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcOutputSettingsDescription, name: "Vpc", traits: {"smithy.api#jsonName" => "vpc"}))
     DescribeChannelResponse.add_member(:anywhere_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeAnywhereSettings, name: "AnywhereSettings", traits: {"smithy.api#jsonName" => "anywhereSettings"}))
     DescribeChannelResponse.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionResponse, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
+    DescribeChannelResponse.add_member(:linked_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLinkedChannelSettings, name: "LinkedChannelSettings", traits: {"smithy.api#jsonName" => "linkedChannelSettings"}))
+    DescribeChannelResponse.add_member(:channel_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ChannelSecurityGroups", traits: {"smithy.api#jsonName" => "channelSecurityGroups"}))
+    DescribeChannelResponse.add_member(:inference_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeInferenceSettings, name: "InferenceSettings", traits: {"smithy.api#jsonName" => "inferenceSettings"}))
     DescribeChannelResponse.type = Types::DescribeChannelResponse
     DescribeClusterRequest.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeClusterRequest.type = Types::DescribeClusterRequest
@@ -2202,6 +2393,13 @@ module Aws::MediaLive
     DescribeClusterSummary.add_member(:network_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterNetworkSettings, name: "NetworkSettings", traits: {"smithy.api#jsonName" => "networkSettings"}))
     DescribeClusterSummary.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterState, name: "State", traits: {"smithy.api#jsonName" => "state"}))
     DescribeClusterSummary.type = Types::DescribeClusterSummary
+    DescribeFollowerChannelSettings.add_member(:linked_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedChannelType, name: "LinkedChannelType", traits: {"smithy.api#jsonName" => "linkedChannelType"}))
+    DescribeFollowerChannelSettings.add_member(:primary_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrimaryChannelArn", traits: {"smithy.api#jsonName" => "primaryChannelArn"}))
+    DescribeFollowerChannelSettings.type = Types::DescribeFollowerChannelSettings
+    DescribeInferenceSettings.add_member(:feed_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FeedArn", traits: {"smithy.api#jsonName" => "feedArn"}))
+    DescribeInferenceSettings.add_member(:audio_feed_inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofaudiofeedinput, name: "AudioFeedInputs", traits: {"smithy.api#jsonName" => "audioFeedInputs"}))
+    DescribeInferenceSettings.add_member(:enrichment_methods, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofenrichmentmethod, name: "EnrichmentMethods", traits: {"smithy.api#jsonName" => "enrichmentMethods"}))
+    DescribeInferenceSettings.type = Types::DescribeInferenceSettings
     DescribeInputDeviceRequest.add_member(:input_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InputDeviceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeInputDeviceRequest.type = Types::DescribeInputDeviceRequest
     DescribeInputDeviceResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#jsonName" => "arn"}))
@@ -2255,6 +2453,7 @@ module Aws::MediaLive
     DescribeInputResponse.add_member(:multicast_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastSettings, name: "MulticastSettings", traits: {"smithy.api#jsonName" => "multicastSettings"}))
     DescribeInputResponse.add_member(:smpte2110_receiver_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Smpte2110ReceiverGroupSettings, name: "Smpte2110ReceiverGroupSettings", traits: {"smithy.api#jsonName" => "smpte2110ReceiverGroupSettings"}))
     DescribeInputResponse.add_member(:sdi_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: InputSdiSources, name: "SdiSources", traits: {"smithy.api#jsonName" => "sdiSources"}))
+    DescribeInputResponse.add_member(:router_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RouterInputSettings, name: "RouterSettings", traits: {"smithy.api#jsonName" => "routerSettings"}))
     DescribeInputResponse.type = Types::DescribeInputResponse
     DescribeInputSecurityGroupRequest.add_member(:input_security_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InputSecurityGroupId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeInputSecurityGroupRequest.type = Types::DescribeInputSecurityGroupRequest
@@ -2264,7 +2463,11 @@ module Aws::MediaLive
     DescribeInputSecurityGroupResponse.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: InputSecurityGroupState, name: "State", traits: {"smithy.api#jsonName" => "state"}))
     DescribeInputSecurityGroupResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     DescribeInputSecurityGroupResponse.add_member(:whitelist_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofinputwhitelistrule, name: "WhitelistRules", traits: {"smithy.api#jsonName" => "whitelistRules"}))
+    DescribeInputSecurityGroupResponse.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "Channels", traits: {"smithy.api#jsonName" => "channels"}))
     DescribeInputSecurityGroupResponse.type = Types::DescribeInputSecurityGroupResponse
+    DescribeLinkedChannelSettings.add_member(:follower_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeFollowerChannelSettings, name: "FollowerChannelSettings", traits: {"smithy.api#jsonName" => "followerChannelSettings"}))
+    DescribeLinkedChannelSettings.add_member(:primary_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribePrimaryChannelSettings, name: "PrimaryChannelSettings", traits: {"smithy.api#jsonName" => "primaryChannelSettings"}))
+    DescribeLinkedChannelSettings.type = Types::DescribeLinkedChannelSettings
     DescribeMultiplexProgramRequest.add_member(:multiplex_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MultiplexId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeMultiplexProgramRequest.add_member(:program_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ProgramName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeMultiplexProgramRequest.type = Types::DescribeMultiplexProgramRequest
@@ -2347,6 +2550,9 @@ module Aws::MediaLive
     DescribeOfferingResponse.add_member(:resource_specification, ::Smithy::Schema::Shapes::MemberShape.new(target: ReservationResourceSpecification, name: "ResourceSpecification", traits: {"smithy.api#jsonName" => "resourceSpecification"}))
     DescribeOfferingResponse.add_member(:usage_price, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "UsagePrice", traits: {"smithy.api#jsonName" => "usagePrice"}))
     DescribeOfferingResponse.type = Types::DescribeOfferingResponse
+    DescribePrimaryChannelSettings.add_member(:following_channel_arns, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "FollowingChannelArns", traits: {"smithy.api#jsonName" => "followingChannelArns"}))
+    DescribePrimaryChannelSettings.add_member(:linked_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedChannelType, name: "LinkedChannelType", traits: {"smithy.api#jsonName" => "linkedChannelType"}))
+    DescribePrimaryChannelSettings.type = Types::DescribePrimaryChannelSettings
     DescribeReservationRequest.add_member(:reservation_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ReservationId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DescribeReservationRequest.type = Types::DescribeReservationRequest
     DescribeReservationResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#jsonName" => "arn"}))
@@ -2391,6 +2597,8 @@ module Aws::MediaLive
     DeviceUpdateStatus.add_member(:up_to_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UP_TO_DATE", traits: {"smithy.api#enumValue" => "UP_TO_DATE"}))
     DeviceUpdateStatus.add_member(:not_up_to_date, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NOT_UP_TO_DATE", traits: {"smithy.api#enumValue" => "NOT_UP_TO_DATE"}))
     DeviceUpdateStatus.add_member(:updating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPDATING", traits: {"smithy.api#enumValue" => "UPDATING"}))
+    DisabledLockingSettings.add_member(:custom_epoch, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomEpoch", traits: {"smithy.api#jsonName" => "customEpoch"}))
+    DisabledLockingSettings.type = Types::DisabledLockingSettings
     DolbyEProgramSelection.add_member(:all_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ALL_CHANNELS", traits: {"smithy.api#enumValue" => "ALL_CHANNELS"}))
     DolbyEProgramSelection.add_member(:program_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROGRAM_1", traits: {"smithy.api#enumValue" => "PROGRAM_1"}))
     DolbyEProgramSelection.add_member(:program_2, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROGRAM_2", traits: {"smithy.api#enumValue" => "PROGRAM_2"}))
@@ -2576,9 +2784,15 @@ module Aws::MediaLive
     EbuTtDDestinationStyleControl.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDE", traits: {"smithy.api#enumValue" => "INCLUDE"}))
     EbuTtDFillLineGapControl.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     EbuTtDFillLineGapControl.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
+    EmbeddedCaptionPositionSettings.add_member(:y_position_line, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max15, name: "YPositionLine", traits: {"smithy.api#jsonName" => "yPositionLine"}))
+    EmbeddedCaptionPositionSettings.type = Types::EmbeddedCaptionPositionSettings
     EmbeddedConvert608To708.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     EmbeddedConvert608To708.add_member(:upconvert, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UPCONVERT", traits: {"smithy.api#enumValue" => "UPCONVERT"}))
+    EmbeddedDestinationSettings.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddedCaptionPositionSettings, name: "Position", traits: {"smithy.api#jsonName" => "position"}))
+    EmbeddedDestinationSettings.add_member(:style_control, ::Smithy::Schema::Shapes::MemberShape.new(target: EmbeddedDestinationStyleControl, name: "StyleControl", traits: {"smithy.api#jsonName" => "styleControl"}))
     EmbeddedDestinationSettings.type = Types::EmbeddedDestinationSettings
+    EmbeddedDestinationStyleControl.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
+    EmbeddedDestinationStyleControl.add_member(:passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSTHROUGH", traits: {"smithy.api#enumValue" => "PASSTHROUGH"}))
     EmbeddedPlusScte20DestinationSettings.type = Types::EmbeddedPlusScte20DestinationSettings
     EmbeddedScte20Detection.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
     EmbeddedScte20Detection.add_member(:off, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OFF", traits: {"smithy.api#enumValue" => "OFF"}))
@@ -2602,6 +2816,7 @@ module Aws::MediaLive
     EncoderSettings.add_member(:thumbnail_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailConfiguration, name: "ThumbnailConfiguration", traits: {"smithy.api#jsonName" => "thumbnailConfiguration"}))
     EncoderSettings.add_member(:color_correction_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorCorrectionSettings, name: "ColorCorrectionSettings", traits: {"smithy.api#jsonName" => "colorCorrectionSettings"}))
     EncoderSettings.type = Types::EncoderSettings
+    EnrichmentMethod.add_member(:scte35_elemental_inference_query_params, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS", traits: {"smithy.api#enumValue" => "SCTE35_ELEMENTAL_INFERENCE_QUERY_PARAMS"}))
     EpochLockingSettings.add_member(:custom_epoch, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomEpoch", traits: {"smithy.api#jsonName" => "customEpoch"}))
     EpochLockingSettings.add_member(:jam_sync_time, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "JamSyncTime", traits: {"smithy.api#jsonName" => "jamSyncTime"}))
     EpochLockingSettings.type = Types::EpochLockingSettings
@@ -2694,6 +2909,9 @@ module Aws::MediaLive
     FollowModeScheduleActionStartSettings.type = Types::FollowModeScheduleActionStartSettings
     FollowPoint.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "END", traits: {"smithy.api#enumValue" => "END"}))
     FollowPoint.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "START", traits: {"smithy.api#enumValue" => "START"}))
+    FollowerChannelSettings.add_member(:linked_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedChannelType, name: "LinkedChannelType", traits: {"smithy.api#jsonName" => "linkedChannelType"}))
+    FollowerChannelSettings.add_member(:primary_channel_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PrimaryChannelArn", traits: {"smithy.api#jsonName" => "primaryChannelArn"}))
+    FollowerChannelSettings.type = Types::FollowerChannelSettings
     ForbiddenException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
     ForbiddenException.type = Types::ForbiddenException
     FrameCaptureCdnSettings.add_member(:frame_capture_s3_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameCaptureS3Settings, name: "FrameCaptureS3Settings", traits: {"smithy.api#jsonName" => "frameCaptureS3Settings"}))
@@ -2942,6 +3160,7 @@ module Aws::MediaLive
     H265ColorSpaceSettings.add_member(:hdr10_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Hdr10Settings, name: "Hdr10Settings", traits: {"smithy.api#jsonName" => "hdr10Settings"}))
     H265ColorSpaceSettings.add_member(:rec601_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Rec601Settings, name: "Rec601Settings", traits: {"smithy.api#jsonName" => "rec601Settings"}))
     H265ColorSpaceSettings.add_member(:rec709_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Rec709Settings, name: "Rec709Settings", traits: {"smithy.api#jsonName" => "rec709Settings"}))
+    H265ColorSpaceSettings.add_member(:hlg2020_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Hlg2020Settings, name: "Hlg2020Settings", traits: {"smithy.api#jsonName" => "hlg2020Settings"}))
     H265ColorSpaceSettings.type = Types::H265ColorSpaceSettings
     H265Deblocking.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     H265Deblocking.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
@@ -3040,6 +3259,7 @@ module Aws::MediaLive
     Hdr10Settings.add_member(:max_cll, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max32768, name: "MaxCll", traits: {"smithy.api#jsonName" => "maxCll"}))
     Hdr10Settings.add_member(:max_fall, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max32768, name: "MaxFall", traits: {"smithy.api#jsonName" => "maxFall"}))
     Hdr10Settings.type = Types::Hdr10Settings
+    Hlg2020Settings.type = Types::Hlg2020Settings
     HlsAdMarkers.add_member(:adobe, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADOBE", traits: {"smithy.api#enumValue" => "ADOBE"}))
     HlsAdMarkers.add_member(:elemental, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ELEMENTAL", traits: {"smithy.api#enumValue" => "ELEMENTAL"}))
     HlsAdMarkers.add_member(:elemental_scte35, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ELEMENTAL_SCTE35", traits: {"smithy.api#enumValue" => "ELEMENTAL_SCTE35"}))
@@ -3211,6 +3431,10 @@ module Aws::MediaLive
     IncludeFillerNalUnits.add_member(:auto, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTO", traits: {"smithy.api#enumValue" => "AUTO"}))
     IncludeFillerNalUnits.add_member(:drop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DROP", traits: {"smithy.api#enumValue" => "DROP"}))
     IncludeFillerNalUnits.add_member(:include, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDE", traits: {"smithy.api#enumValue" => "INCLUDE"}))
+    InferenceSettings.add_member(:feed_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FeedArn", traits: {"smithy.api#jsonName" => "feedArn"}))
+    InferenceSettings.add_member(:audio_feed_inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofaudiofeedinput, name: "AudioFeedInputs", traits: {"smithy.api#jsonName" => "audioFeedInputs"}))
+    InferenceSettings.add_member(:enrichment_methods, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofenrichmentmethod, name: "EnrichmentMethods", traits: {"smithy.api#jsonName" => "enrichmentMethods"}))
+    InferenceSettings.type = Types::InferenceSettings
     Input.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#jsonName" => "arn"}))
     Input.add_member(:attached_channels, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "AttachedChannels", traits: {"smithy.api#jsonName" => "attachedChannels"}))
     Input.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofinputdestination, name: "Destinations", traits: {"smithy.api#jsonName" => "destinations"}))
@@ -3232,6 +3456,7 @@ module Aws::MediaLive
     Input.add_member(:multicast_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastSettings, name: "MulticastSettings", traits: {"smithy.api#jsonName" => "multicastSettings"}))
     Input.add_member(:smpte2110_receiver_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Smpte2110ReceiverGroupSettings, name: "Smpte2110ReceiverGroupSettings", traits: {"smithy.api#jsonName" => "smpte2110ReceiverGroupSettings"}))
     Input.add_member(:sdi_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: InputSdiSources, name: "SdiSources", traits: {"smithy.api#jsonName" => "sdiSources"}))
+    Input.add_member(:router_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: RouterInputSettings, name: "RouterSettings", traits: {"smithy.api#jsonName" => "routerSettings"}))
     Input.type = Types::Input
     InputAttachment.add_member(:automatic_input_failover_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AutomaticInputFailoverSettings, name: "AutomaticInputFailoverSettings", traits: {"smithy.api#jsonName" => "automaticInputFailoverSettings"}))
     InputAttachment.add_member(:input_attachment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InputAttachmentName", traits: {"smithy.api#jsonName" => "inputAttachmentName"}))
@@ -3439,6 +3664,7 @@ module Aws::MediaLive
     InputSecurityGroup.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: InputSecurityGroupState, name: "State", traits: {"smithy.api#jsonName" => "state"}))
     InputSecurityGroup.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     InputSecurityGroup.add_member(:whitelist_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofinputwhitelistrule, name: "WhitelistRules", traits: {"smithy.api#jsonName" => "whitelistRules"}))
+    InputSecurityGroup.add_member(:channels, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "Channels", traits: {"smithy.api#jsonName" => "channels"}))
     InputSecurityGroup.type = Types::InputSecurityGroup
     InputSecurityGroupState.add_member(:idle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IDLE", traits: {"smithy.api#enumValue" => "IDLE"}))
     InputSecurityGroupState.add_member(:in_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_USE", traits: {"smithy.api#enumValue" => "IN_USE"}))
@@ -3497,6 +3723,8 @@ module Aws::MediaLive
     InputType.add_member(:multicast, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTICAST", traits: {"smithy.api#enumValue" => "MULTICAST"}))
     InputType.add_member(:smpte_2110_receiver_group, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMPTE_2110_RECEIVER_GROUP", traits: {"smithy.api#enumValue" => "SMPTE_2110_RECEIVER_GROUP"}))
     InputType.add_member(:sdi, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SDI", traits: {"smithy.api#enumValue" => "SDI"}))
+    InputType.add_member(:mediaconnect_router, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIACONNECT_ROUTER", traits: {"smithy.api#enumValue" => "MEDIACONNECT_ROUTER"}))
+    InputType.add_member(:srt_listener, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SRT_LISTENER", traits: {"smithy.api#enumValue" => "SRT_LISTENER"}))
     InputVpcRequest.add_member(:security_group_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "SecurityGroupIds", traits: {"smithy.api#jsonName" => "securityGroupIds"}))
     InputVpcRequest.add_member(:subnet_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "SubnetIds", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "subnetIds", "smithy.api#required" => {}}))
     InputVpcRequest.type = Types::InputVpcRequest
@@ -3525,6 +3753,19 @@ module Aws::MediaLive
     KeyProviderSettings.type = Types::KeyProviderSettings
     LastFrameClippingBehavior.add_member(:exclude_last_frame, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXCLUDE_LAST_FRAME", traits: {"smithy.api#enumValue" => "EXCLUDE_LAST_FRAME"}))
     LastFrameClippingBehavior.add_member(:include_last_frame, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INCLUDE_LAST_FRAME", traits: {"smithy.api#enumValue" => "INCLUDE_LAST_FRAME"}))
+    LinkedChannelSettings.add_member(:follower_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: FollowerChannelSettings, name: "FollowerChannelSettings", traits: {"smithy.api#jsonName" => "followerChannelSettings"}))
+    LinkedChannelSettings.add_member(:primary_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: PrimaryChannelSettings, name: "PrimaryChannelSettings", traits: {"smithy.api#jsonName" => "primaryChannelSettings"}))
+    LinkedChannelSettings.type = Types::LinkedChannelSettings
+    LinkedChannelType.add_member(:following_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FOLLOWING_CHANNEL", traits: {"smithy.api#enumValue" => "FOLLOWING_CHANNEL"}))
+    LinkedChannelType.add_member(:primary_channel, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIMARY_CHANNEL", traits: {"smithy.api#enumValue" => "PRIMARY_CHANNEL"}))
+    ListAlertsRequest.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ChannelId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListAlertsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListAlertsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListAlertsRequest.add_member(:state_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateFilter", traits: {"smithy.api#httpQuery" => "stateFilter"}))
+    ListAlertsRequest.type = Types::ListAlertsRequest
+    ListAlertsResponse.add_member(:alerts, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofchannelalert, name: "Alerts", traits: {"smithy.api#jsonName" => "alerts"}))
+    ListAlertsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
+    ListAlertsResponse.type = Types::ListAlertsResponse
     ListChannelPlacementGroupsRequest.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListChannelPlacementGroupsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListChannelPlacementGroupsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -3555,6 +3796,14 @@ module Aws::MediaLive
     ListCloudWatchAlarmTemplatesResponse.add_member(:cloud_watch_alarm_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofcloudwatchalarmtemplatesummary, name: "CloudWatchAlarmTemplates", traits: {"smithy.api#jsonName" => "cloudWatchAlarmTemplates"}))
     ListCloudWatchAlarmTemplatesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max2048, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
     ListCloudWatchAlarmTemplatesResponse.type = Types::ListCloudWatchAlarmTemplatesResponse
+    ListClusterAlertsRequest.add_member(:cluster_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListClusterAlertsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListClusterAlertsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListClusterAlertsRequest.add_member(:state_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateFilter", traits: {"smithy.api#httpQuery" => "stateFilter"}))
+    ListClusterAlertsRequest.type = Types::ListClusterAlertsRequest
+    ListClusterAlertsResponse.add_member(:alerts, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofclusteralert, name: "Alerts", traits: {"smithy.api#jsonName" => "alerts"}))
+    ListClusterAlertsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
+    ListClusterAlertsResponse.type = Types::ListClusterAlertsResponse
     ListClustersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListClustersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListClustersRequest.type = Types::ListClustersRequest
@@ -3601,6 +3850,14 @@ module Aws::MediaLive
     ListInputsResponse.add_member(:inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofinput, name: "Inputs", traits: {"smithy.api#jsonName" => "inputs"}))
     ListInputsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
     ListInputsResponse.type = Types::ListInputsResponse
+    ListMultiplexAlertsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
+    ListMultiplexAlertsRequest.add_member(:multiplex_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MultiplexId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListMultiplexAlertsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
+    ListMultiplexAlertsRequest.add_member(:state_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StateFilter", traits: {"smithy.api#httpQuery" => "stateFilter"}))
+    ListMultiplexAlertsRequest.type = Types::ListMultiplexAlertsRequest
+    ListMultiplexAlertsResponse.add_member(:alerts, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofmultiplexalert, name: "Alerts", traits: {"smithy.api#jsonName" => "alerts"}))
+    ListMultiplexAlertsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#jsonName" => "nextToken"}))
+    ListMultiplexAlertsResponse.type = Types::ListMultiplexAlertsResponse
     ListMultiplexProgramsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "MaxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListMultiplexProgramsRequest.add_member(:multiplex_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "MultiplexId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListMultiplexProgramsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
@@ -3715,6 +3972,7 @@ module Aws::MediaLive
     M2tsRateMode.add_member(:vbr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VBR", traits: {"smithy.api#enumValue" => "VBR"}))
     M2tsScte35Control.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     M2tsScte35Control.add_member(:passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSTHROUGH", traits: {"smithy.api#enumValue" => "PASSTHROUGH"}))
+    M2tsScte35Control.add_member(:scte_35_without_idr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCTE_35_WITHOUT_IDR", traits: {"smithy.api#enumValue" => "SCTE_35_WITHOUT_IDR"}))
     M2tsSegmentationMarkers.add_member(:ebp, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EBP", traits: {"smithy.api#enumValue" => "EBP"}))
     M2tsSegmentationMarkers.add_member(:ebp_legacy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EBP_LEGACY", traits: {"smithy.api#enumValue" => "EBP_LEGACY"}))
     M2tsSegmentationMarkers.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
@@ -3827,19 +4085,53 @@ module Aws::MediaLive
     MediaConnectFlow.type = Types::MediaConnectFlow
     MediaConnectFlowRequest.add_member(:flow_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "FlowArn", traits: {"smithy.api#jsonName" => "flowArn"}))
     MediaConnectFlowRequest.type = Types::MediaConnectFlowRequest
+    MediaConnectRouterContainerSettings.add_member(:m2ts_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: M2tsSettings, name: "M2tsSettings", traits: {"smithy.api#jsonName" => "m2tsSettings"}))
+    MediaConnectRouterContainerSettings.type = Types::MediaConnectRouterContainerSettings
+    MediaConnectRouterGroupSettings.add_member(:availability_zones, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "AvailabilityZones", traits: {"smithy.api#jsonName" => "availabilityZones"}))
+    MediaConnectRouterGroupSettings.type = Types::MediaConnectRouterGroupSettings
+    MediaConnectRouterOutputConnection.add_member(:router_input_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RouterInputArn", traits: {"smithy.api#jsonName" => "routerInputArn"}))
+    MediaConnectRouterOutputConnection.type = Types::MediaConnectRouterOutputConnection
+    MediaConnectRouterOutputConnectionMap.add_member(:pipeline0, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Pipeline0", traits: {"smithy.api#jsonName" => "pipeline0"}))
+    MediaConnectRouterOutputConnectionMap.add_member(:pipeline1, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Pipeline1", traits: {"smithy.api#jsonName" => "pipeline1"}))
+    MediaConnectRouterOutputConnectionMap.type = Types::MediaConnectRouterOutputConnectionMap
+    MediaConnectRouterOutputConnections.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    MediaConnectRouterOutputConnections.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectRouterOutputConnection, name: "value"))
+    MediaConnectRouterOutputDestinationSettings.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectRouterOutputEncryptionType, name: "EncryptionType", traits: {"smithy.api#jsonName" => "encryptionType"}))
+    MediaConnectRouterOutputDestinationSettings.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretArn", traits: {"smithy.api#jsonName" => "secretArn"}))
+    MediaConnectRouterOutputDestinationSettings.type = Types::MediaConnectRouterOutputDestinationSettings
+    MediaConnectRouterOutputEncryptionType.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
+    MediaConnectRouterOutputEncryptionType.add_member(:secrets_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECRETS_MANAGER", traits: {"smithy.api#enumValue" => "SECRETS_MANAGER"}))
+    MediaConnectRouterOutputSettings.add_member(:connected_router_inputs, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectRouterOutputConnectionMap, name: "ConnectedRouterInputs", traits: {"smithy.api#jsonName" => "connectedRouterInputs"}))
+    MediaConnectRouterOutputSettings.add_member(:container_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectRouterContainerSettings, name: "ContainerSettings", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "containerSettings", "smithy.api#required" => {}}))
+    MediaConnectRouterOutputSettings.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocationRef, name: "Destination", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "destination", "smithy.api#required" => {}}))
+    MediaConnectRouterOutputSettings.type = Types::MediaConnectRouterOutputSettings
+    MediaPackageAdditionalDestinations.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocationRef, name: "Destination", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "destination", "smithy.api#required" => {}}))
+    MediaPackageAdditionalDestinations.type = Types::MediaPackageAdditionalDestinations
     MediaPackageGroupSettings.add_member(:destination, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocationRef, name: "Destination", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "destination", "smithy.api#required" => {}}))
     MediaPackageGroupSettings.add_member(:mediapackage_v2_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPackageV2GroupSettings, name: "MediapackageV2GroupSettings", traits: {"smithy.api#jsonName" => "mediapackageV2GroupSettings"}))
     MediaPackageGroupSettings.type = Types::MediaPackageGroupSettings
     MediaPackageOutputDestinationSettings.add_member(:channel_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1, name: "ChannelId", traits: {"smithy.api#jsonName" => "channelId"}))
     MediaPackageOutputDestinationSettings.add_member(:channel_group, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1, name: "ChannelGroup", traits: {"smithy.api#jsonName" => "channelGroup"}))
     MediaPackageOutputDestinationSettings.add_member(:channel_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1, name: "ChannelName", traits: {"smithy.api#jsonName" => "channelName"}))
+    MediaPackageOutputDestinationSettings.add_member(:channel_endpoint_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1, name: "ChannelEndpointId", traits: {"smithy.api#jsonName" => "channelEndpointId"}))
+    MediaPackageOutputDestinationSettings.add_member(:media_package_region_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1, name: "MediaPackageRegionName", traits: {"smithy.api#jsonName" => "mediaPackageRegionName"}))
     MediaPackageOutputDestinationSettings.type = Types::MediaPackageOutputDestinationSettings
     MediaPackageOutputSettings.add_member(:media_package_v2_destination_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPackageV2DestinationSettings, name: "MediaPackageV2DestinationSettings", traits: {"smithy.api#jsonName" => "mediaPackageV2DestinationSettings"}))
     MediaPackageOutputSettings.type = Types::MediaPackageOutputSettings
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:additional_destinations_alternate_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofoutputlocationref, name: "AdditionalDestinationsAlternateDestinations", traits: {"smithy.api#jsonName" => "additionalDestinationsAlternateDestinations"}))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:alternate_destination, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocationRef, name: "AlternateDestination", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "alternateDestination", "smithy.api#required" => {}}))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:custom_profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AbWatermarkingCustomProfile, name: "CustomProfile", traits: {"smithy.api#jsonName" => "customProfile"}))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:license, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "License", traits: {"smithy.api#jsonName" => "license"}))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:operator_id, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max511, name: "OperatorId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "operatorId", "smithy.api#required" => {}}))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:poly_period, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max1000, name: "PolyPeriod", traits: {"smithy.api#jsonName" => "polyPeriod"}))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:profile, ::Smithy::Schema::Shapes::MemberShape.new(target: AbWatermarkingProfile, name: "Profile", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "profile", "smithy.api#required" => {}}))
+    MediaPackageV2AbWatermarkerIrdetoSettings.add_member(:watermark_id_length, ::Smithy::Schema::Shapes::MemberShape.new(target: AbWatermarkerIdLength, name: "WatermarkIdLength", traits: {"smithy.api#jsonName" => "watermarkIdLength"}))
+    MediaPackageV2AbWatermarkerIrdetoSettings.type = Types::MediaPackageV2AbWatermarkerIrdetoSettings
     MediaPackageV2DestinationSettings.add_member(:audio_group_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AudioGroupId", traits: {"smithy.api#jsonName" => "audioGroupId"}))
     MediaPackageV2DestinationSettings.add_member(:audio_rendition_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AudioRenditionSets", traits: {"smithy.api#jsonName" => "audioRenditionSets"}))
     MediaPackageV2DestinationSettings.add_member(:hls_auto_select, ::Smithy::Schema::Shapes::MemberShape.new(target: HlsAutoSelect, name: "HlsAutoSelect", traits: {"smithy.api#jsonName" => "hlsAutoSelect"}))
     MediaPackageV2DestinationSettings.add_member(:hls_default, ::Smithy::Schema::Shapes::MemberShape.new(target: HlsDefault, name: "HlsDefault", traits: {"smithy.api#jsonName" => "hlsDefault"}))
+    MediaPackageV2DestinationSettings.add_member(:output_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofoutputusage, name: "OutputUsage", traits: {"smithy.api#jsonName" => "outputUsage"}))
     MediaPackageV2DestinationSettings.type = Types::MediaPackageV2DestinationSettings
     MediaPackageV2GroupSettings.add_member(:caption_language_mappings, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofcaptionlanguagemapping, name: "CaptionLanguageMappings", traits: {"smithy.api#jsonName" => "captionLanguageMappings"}))
     MediaPackageV2GroupSettings.add_member(:id3_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: CmafId3Behavior, name: "Id3Behavior", traits: {"smithy.api#jsonName" => "id3Behavior"}))
@@ -3851,7 +4143,11 @@ module Aws::MediaLive
     MediaPackageV2GroupSettings.add_member(:timed_metadata_id3_frame, ::Smithy::Schema::Shapes::MemberShape.new(target: CmafTimedMetadataId3Frame, name: "TimedMetadataId3Frame", traits: {"smithy.api#jsonName" => "timedMetadataId3Frame"}))
     MediaPackageV2GroupSettings.add_member(:timed_metadata_id3_period, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max10000, name: "TimedMetadataId3Period", traits: {"smithy.api#jsonName" => "timedMetadataId3Period"}))
     MediaPackageV2GroupSettings.add_member(:timed_metadata_passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: CmafTimedMetadataPassthrough, name: "TimedMetadataPassthrough", traits: {"smithy.api#jsonName" => "timedMetadataPassthrough"}))
+    MediaPackageV2GroupSettings.add_member(:additional_destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofmediapackageadditionaldestinations, name: "AdditionalDestinations", traits: {"smithy.api#jsonName" => "additionalDestinations"}))
+    MediaPackageV2GroupSettings.add_member(:watermarking_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPackageV2WatermarkingSettings, name: "WatermarkingSettings", traits: {"smithy.api#jsonName" => "watermarkingSettings"}))
     MediaPackageV2GroupSettings.type = Types::MediaPackageV2GroupSettings
+    MediaPackageV2WatermarkingSettings.add_member(:media_package_v2_ab_watermarker_irdeto_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPackageV2AbWatermarkerIrdetoSettings, name: "MediaPackageV2AbWatermarkerIrdetoSettings", traits: {"smithy.api#jsonName" => "mediaPackageV2AbWatermarkerIrdetoSettings"}))
+    MediaPackageV2WatermarkingSettings.type = Types::MediaPackageV2WatermarkingSettings
     MediaResource.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofmediaresourceneighbor, name: "Destinations", traits: {"smithy.api#jsonName" => "destinations"}))
     MediaResource.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin1max256, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     MediaResource.add_member(:sources, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofmediaresourceneighbor, name: "Sources", traits: {"smithy.api#jsonName" => "sources"}))
@@ -3976,6 +4272,16 @@ module Aws::MediaLive
     Multiplex.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiplexState, name: "State", traits: {"smithy.api#jsonName" => "state"}))
     Multiplex.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     Multiplex.type = Types::Multiplex
+    MultiplexAlert.add_member(:alert_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AlertType", traits: {"smithy.api#jsonName" => "alertType"}))
+    MultiplexAlert.add_member(:cleared_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "ClearedTimestamp", traits: {"smithy.api#jsonName" => "clearedTimestamp"}))
+    MultiplexAlert.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Id", traits: {"smithy.api#jsonName" => "id"}))
+    MultiplexAlert.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#jsonName" => "message"}))
+    MultiplexAlert.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PipelineId", traits: {"smithy.api#jsonName" => "pipelineId"}))
+    MultiplexAlert.add_member(:set_timestamp, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestampiso8601, name: "SetTimestamp", traits: {"smithy.api#jsonName" => "setTimestamp"}))
+    MultiplexAlert.add_member(:state, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiplexAlertState, name: "State", traits: {"smithy.api#jsonName" => "state"}))
+    MultiplexAlert.type = Types::MultiplexAlert
+    MultiplexAlertState.add_member(:set, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SET", traits: {"smithy.api#enumValue" => "SET"}))
+    MultiplexAlertState.add_member(:cleared, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CLEARED", traits: {"smithy.api#enumValue" => "CLEARED"}))
     MultiplexContainerSettings.add_member(:multiplex_m2ts_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiplexM2tsSettings, name: "MultiplexM2tsSettings", traits: {"smithy.api#jsonName" => "multiplexM2tsSettings"}))
     MultiplexContainerSettings.type = Types::MultiplexContainerSettings
     MultiplexGroupSettings.type = Types::MultiplexGroupSettings
@@ -4105,6 +4411,10 @@ module Aws::MediaLive
     NielsenNaesIiNw.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: Doublemin1max65535, name: "Sid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "sid", "smithy.api#required" => {}}))
     NielsenNaesIiNw.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: NielsenWatermarkTimezones, name: "Timezone", traits: {"smithy.api#jsonName" => "timezone"}))
     NielsenNaesIiNw.type = Types::NielsenNaesIiNw
+    NielsenNwOnly.add_member(:check_digit_string, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmin2max2, name: "CheckDigitString", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "checkDigitString", "smithy.api#required" => {}}))
+    NielsenNwOnly.add_member(:sid, ::Smithy::Schema::Shapes::MemberShape.new(target: Doublemin1max65535, name: "Sid", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "sid", "smithy.api#required" => {}}))
+    NielsenNwOnly.add_member(:timezone, ::Smithy::Schema::Shapes::MemberShape.new(target: NielsenWatermarkTimezones, name: "Timezone", traits: {"smithy.api#jsonName" => "timezone"}))
+    NielsenNwOnly.type = Types::NielsenNwOnly
     NielsenPcmToId3TaggingState.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
     NielsenPcmToId3TaggingState.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     NielsenWatermarkTimezones.add_member(:america_puerto_rico, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AMERICA_PUERTO_RICO", traits: {"smithy.api#enumValue" => "AMERICA_PUERTO_RICO"}))
@@ -4124,12 +4434,14 @@ module Aws::MediaLive
     NielsenWatermarksSettings.add_member(:nielsen_cbet_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: NielsenCBET, name: "NielsenCbetSettings", traits: {"smithy.api#jsonName" => "nielsenCbetSettings"}))
     NielsenWatermarksSettings.add_member(:nielsen_distribution_type, ::Smithy::Schema::Shapes::MemberShape.new(target: NielsenWatermarksDistributionTypes, name: "NielsenDistributionType", traits: {"smithy.api#jsonName" => "nielsenDistributionType"}))
     NielsenWatermarksSettings.add_member(:nielsen_naes_ii_nw_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: NielsenNaesIiNw, name: "NielsenNaesIiNwSettings", traits: {"smithy.api#jsonName" => "nielsenNaesIiNwSettings"}))
+    NielsenWatermarksSettings.add_member(:nielsen_nw_only_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: NielsenNwOnly, name: "NielsenNwOnlySettings", traits: {"smithy.api#jsonName" => "nielsenNwOnlySettings"}))
     NielsenWatermarksSettings.type = Types::NielsenWatermarksSettings
     NodeConnectionState.add_member(:connected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONNECTED", traits: {"smithy.api#enumValue" => "CONNECTED"}))
     NodeConnectionState.add_member(:disconnected, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCONNECTED", traits: {"smithy.api#enumValue" => "DISCONNECTED"}))
     NodeInterfaceMapping.add_member(:logical_interface_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogicalInterfaceName", traits: {"smithy.api#jsonName" => "logicalInterfaceName"}))
     NodeInterfaceMapping.add_member(:network_interface_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceMode, name: "NetworkInterfaceMode", traits: {"smithy.api#jsonName" => "networkInterfaceMode"}))
     NodeInterfaceMapping.add_member(:physical_interface_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PhysicalInterfaceName", traits: {"smithy.api#jsonName" => "physicalInterfaceName"}))
+    NodeInterfaceMapping.add_member(:physical_interface_ip_addresses, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "PhysicalInterfaceIpAddresses", traits: {"smithy.api#jsonName" => "physicalInterfaceIpAddresses"}))
     NodeInterfaceMapping.type = Types::NodeInterfaceMapping
     NodeInterfaceMappingCreateRequest.add_member(:logical_interface_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LogicalInterfaceName", traits: {"smithy.api#jsonName" => "logicalInterfaceName"}))
     NodeInterfaceMappingCreateRequest.add_member(:network_interface_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: NetworkInterfaceMode, name: "NetworkInterfaceMode", traits: {"smithy.api#jsonName" => "networkInterfaceMode"}))
@@ -4177,11 +4489,13 @@ module Aws::MediaLive
     OutputDestination.add_member(:settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofoutputdestinationsettings, name: "Settings", traits: {"smithy.api#jsonName" => "settings"}))
     OutputDestination.add_member(:srt_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofsrtoutputdestinationsettings, name: "SrtSettings", traits: {"smithy.api#jsonName" => "srtSettings"}))
     OutputDestination.add_member(:logical_interface_names, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "LogicalInterfaceNames", traits: {"smithy.api#jsonName" => "logicalInterfaceNames"}))
+    OutputDestination.add_member(:media_connect_router_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofmediaconnectrouteroutputdestinationsettings, name: "MediaConnectRouterSettings", traits: {"smithy.api#jsonName" => "mediaConnectRouterSettings"}))
     OutputDestination.type = Types::OutputDestination
     OutputDestinationSettings.add_member(:password_param, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PasswordParam", traits: {"smithy.api#jsonName" => "passwordParam"}))
     OutputDestinationSettings.add_member(:stream_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamName", traits: {"smithy.api#jsonName" => "streamName"}))
     OutputDestinationSettings.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Url", traits: {"smithy.api#jsonName" => "url"}))
     OutputDestinationSettings.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Username", traits: {"smithy.api#jsonName" => "username"}))
+    OutputDestinationSettings.add_member(:virtual_source_address, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "VirtualSourceAddress", traits: {"smithy.api#jsonName" => "virtualSourceAddress"}))
     OutputDestinationSettings.type = Types::OutputDestinationSettings
     OutputGroup.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Stringmax32, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     OutputGroup.add_member(:output_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputGroupSettings, name: "OutputGroupSettings", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "outputGroupSettings", "smithy.api#required" => {}}))
@@ -4197,11 +4511,13 @@ module Aws::MediaLive
     OutputGroupSettings.add_member(:udp_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UdpGroupSettings, name: "UdpGroupSettings", traits: {"smithy.api#jsonName" => "udpGroupSettings"}))
     OutputGroupSettings.add_member(:cmaf_ingest_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: CmafIngestGroupSettings, name: "CmafIngestGroupSettings", traits: {"smithy.api#jsonName" => "cmafIngestGroupSettings"}))
     OutputGroupSettings.add_member(:srt_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtGroupSettings, name: "SrtGroupSettings", traits: {"smithy.api#jsonName" => "srtGroupSettings"}))
+    OutputGroupSettings.add_member(:media_connect_router_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectRouterGroupSettings, name: "MediaConnectRouterGroupSettings", traits: {"smithy.api#jsonName" => "mediaConnectRouterGroupSettings"}))
     OutputGroupSettings.type = Types::OutputGroupSettings
     OutputLocationRef.add_member(:destination_ref_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DestinationRefId", traits: {"smithy.api#jsonName" => "destinationRefId"}))
     OutputLocationRef.type = Types::OutputLocationRef
     OutputLockingSettings.add_member(:epoch_locking_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: EpochLockingSettings, name: "EpochLockingSettings", traits: {"smithy.api#jsonName" => "epochLockingSettings"}))
     OutputLockingSettings.add_member(:pipeline_locking_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineLockingSettings, name: "PipelineLockingSettings", traits: {"smithy.api#jsonName" => "pipelineLockingSettings"}))
+    OutputLockingSettings.add_member(:disabled_locking_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DisabledLockingSettings, name: "DisabledLockingSettings", traits: {"smithy.api#jsonName" => "disabledLockingSettings"}))
     OutputLockingSettings.type = Types::OutputLockingSettings
     OutputSettings.add_member(:archive_output_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveOutputSettings, name: "ArchiveOutputSettings", traits: {"smithy.api#jsonName" => "archiveOutputSettings"}))
     OutputSettings.add_member(:frame_capture_output_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: FrameCaptureOutputSettings, name: "FrameCaptureOutputSettings", traits: {"smithy.api#jsonName" => "frameCaptureOutputSettings"}))
@@ -4213,7 +4529,11 @@ module Aws::MediaLive
     OutputSettings.add_member(:udp_output_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UdpOutputSettings, name: "UdpOutputSettings", traits: {"smithy.api#jsonName" => "udpOutputSettings"}))
     OutputSettings.add_member(:cmaf_ingest_output_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: CmafIngestOutputSettings, name: "CmafIngestOutputSettings", traits: {"smithy.api#jsonName" => "cmafIngestOutputSettings"}))
     OutputSettings.add_member(:srt_output_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtOutputSettings, name: "SrtOutputSettings", traits: {"smithy.api#jsonName" => "srtOutputSettings"}))
+    OutputSettings.add_member(:media_connect_router_output_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectRouterOutputSettings, name: "MediaConnectRouterOutputSettings", traits: {"smithy.api#jsonName" => "mediaConnectRouterOutputSettings"}))
     OutputSettings.type = Types::OutputSettings
+    OutputUsage.add_member(:multiview_equal_size_view, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTIVIEW_EQUAL_SIZE_VIEW", traits: {"smithy.api#enumValue" => "MULTIVIEW_EQUAL_SIZE_VIEW"}))
+    OutputUsage.add_member(:multiview_primary_view, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTIVIEW_PRIMARY_VIEW", traits: {"smithy.api#enumValue" => "MULTIVIEW_PRIMARY_VIEW"}))
+    OutputUsage.add_member(:multiview_secondary_view, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MULTIVIEW_SECONDARY_VIEW", traits: {"smithy.api#enumValue" => "MULTIVIEW_SECONDARY_VIEW"}))
     PassThroughSettings.type = Types::PassThroughSettings
     PauseStateScheduleActionSettings.add_member(:pipelines, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofpipelinepausestatesettings, name: "Pipelines", traits: {"smithy.api#jsonName" => "pipelines"}))
     PauseStateScheduleActionSettings.type = Types::PauseStateScheduleActionSettings
@@ -4223,15 +4543,22 @@ module Aws::MediaLive
     PipelineDetail.add_member(:active_motion_graphics_uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ActiveMotionGraphicsUri", traits: {"smithy.api#jsonName" => "activeMotionGraphicsUri"}))
     PipelineDetail.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PipelineId", traits: {"smithy.api#jsonName" => "pipelineId"}))
     PipelineDetail.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionResponse, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
+    PipelineDetail.add_member(:media_connect_router_output_connection_map, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectRouterOutputConnections, name: "MediaConnectRouterOutputConnectionMap", traits: {"smithy.api#jsonName" => "mediaConnectRouterOutputConnectionMap"}))
     PipelineDetail.type = Types::PipelineDetail
     PipelineId.add_member(:pipeline_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PIPELINE_0", traits: {"smithy.api#enumValue" => "PIPELINE_0"}))
     PipelineId.add_member(:pipeline_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PIPELINE_1", traits: {"smithy.api#enumValue" => "PIPELINE_1"}))
+    PipelineLockingMethod.add_member(:source_timecode, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SOURCE_TIMECODE", traits: {"smithy.api#enumValue" => "SOURCE_TIMECODE"}))
+    PipelineLockingMethod.add_member(:video_alignment, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIDEO_ALIGNMENT", traits: {"smithy.api#enumValue" => "VIDEO_ALIGNMENT"}))
+    PipelineLockingSettings.add_member(:pipeline_locking_method, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineLockingMethod, name: "PipelineLockingMethod", traits: {"smithy.api#jsonName" => "pipelineLockingMethod"}))
+    PipelineLockingSettings.add_member(:custom_epoch, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "CustomEpoch", traits: {"smithy.api#jsonName" => "customEpoch"}))
     PipelineLockingSettings.type = Types::PipelineLockingSettings
     PipelinePauseStateSettings.add_member(:pipeline_id, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineId, name: "PipelineId", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "pipelineId", "smithy.api#required" => {}}))
     PipelinePauseStateSettings.type = Types::PipelinePauseStateSettings
     PreferredChannelPipeline.add_member(:currently_active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CURRENTLY_ACTIVE", traits: {"smithy.api#enumValue" => "CURRENTLY_ACTIVE"}))
     PreferredChannelPipeline.add_member(:pipeline_0, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PIPELINE_0", traits: {"smithy.api#enumValue" => "PIPELINE_0"}))
     PreferredChannelPipeline.add_member(:pipeline_1, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PIPELINE_1", traits: {"smithy.api#enumValue" => "PIPELINE_1"}))
+    PrimaryChannelSettings.add_member(:linked_channel_type, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedChannelType, name: "LinkedChannelType", traits: {"smithy.api#jsonName" => "linkedChannelType"}))
+    PrimaryChannelSettings.type = Types::PrimaryChannelSettings
     PurchaseOfferingRequest.add_member(:count, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1, name: "Count", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "count", "smithy.api#required" => {}}))
     PurchaseOfferingRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Name", traits: {"smithy.api#jsonName" => "name"}))
     PurchaseOfferingRequest.add_member(:offering_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "OfferingId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
@@ -4347,6 +4674,9 @@ module Aws::MediaLive
     RestartChannelPipelinesResponse.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcOutputSettingsDescription, name: "Vpc", traits: {"smithy.api#jsonName" => "vpc"}))
     RestartChannelPipelinesResponse.add_member(:anywhere_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeAnywhereSettings, name: "AnywhereSettings", traits: {"smithy.api#jsonName" => "anywhereSettings"}))
     RestartChannelPipelinesResponse.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionResponse, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
+    RestartChannelPipelinesResponse.add_member(:linked_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLinkedChannelSettings, name: "LinkedChannelSettings", traits: {"smithy.api#jsonName" => "linkedChannelSettings"}))
+    RestartChannelPipelinesResponse.add_member(:channel_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ChannelSecurityGroups", traits: {"smithy.api#jsonName" => "channelSecurityGroups"}))
+    RestartChannelPipelinesResponse.add_member(:inference_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeInferenceSettings, name: "InferenceSettings", traits: {"smithy.api#jsonName" => "inferenceSettings"}))
     RestartChannelPipelinesResponse.type = Types::RestartChannelPipelinesResponse
     Route.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Cidr", traits: {"smithy.api#jsonName" => "cidr"}))
     Route.add_member(:gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Gateway", traits: {"smithy.api#jsonName" => "gateway"}))
@@ -4357,6 +4687,21 @@ module Aws::MediaLive
     RouteUpdateRequest.add_member(:cidr, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Cidr", traits: {"smithy.api#jsonName" => "cidr"}))
     RouteUpdateRequest.add_member(:gateway, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Gateway", traits: {"smithy.api#jsonName" => "gateway"}))
     RouteUpdateRequest.type = Types::RouteUpdateRequest
+    RouterDestination.add_member(:availability_zone_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AvailabilityZoneName", traits: {"smithy.api#jsonName" => "availabilityZoneName"}))
+    RouterDestination.add_member(:router_output_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RouterOutputArn", traits: {"smithy.api#jsonName" => "routerOutputArn"}))
+    RouterDestination.type = Types::RouterDestination
+    RouterDestinationSettings.add_member(:availability_zone_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AvailabilityZoneName", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "availabilityZoneName", "smithy.api#required" => {}}))
+    RouterDestinationSettings.type = Types::RouterDestinationSettings
+    RouterEncryptionType.add_member(:automatic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AUTOMATIC", traits: {"smithy.api#enumValue" => "AUTOMATIC"}))
+    RouterEncryptionType.add_member(:secrets_manager, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SECRETS_MANAGER", traits: {"smithy.api#enumValue" => "SECRETS_MANAGER"}))
+    RouterInputSettings.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofrouterdestination, name: "Destinations", traits: {"smithy.api#jsonName" => "destinations"}))
+    RouterInputSettings.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouterEncryptionType, name: "EncryptionType", traits: {"smithy.api#jsonName" => "encryptionType"}))
+    RouterInputSettings.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretArn", traits: {"smithy.api#jsonName" => "secretArn"}))
+    RouterInputSettings.type = Types::RouterInputSettings
+    RouterSettings.add_member(:destinations, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofrouterdestinationsettings, name: "Destinations", traits: {"smithy.api#jsonName" => "destinations"}))
+    RouterSettings.add_member(:encryption_type, ::Smithy::Schema::Shapes::MemberShape.new(target: RouterEncryptionType, name: "EncryptionType", traits: {"smithy.api#jsonName" => "encryptionType"}))
+    RouterSettings.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SecretArn", traits: {"smithy.api#jsonName" => "secretArn"}))
+    RouterSettings.type = Types::RouterSettings
     RtmpAdMarkers.add_member(:on_cue_point_scte35, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ON_CUE_POINT_SCTE35", traits: {"smithy.api#enumValue" => "ON_CUE_POINT_SCTE35"}))
     RtmpCacheFullBehavior.add_member(:disconnect_immediately, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISCONNECT_IMMEDIATELY", traits: {"smithy.api#enumValue" => "DISCONNECT_IMMEDIATELY"}))
     RtmpCacheFullBehavior.add_member(:wait_for_server, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WAIT_FOR_SERVER", traits: {"smithy.api#enumValue" => "WAIT_FOR_SERVER"}))
@@ -4489,6 +4834,7 @@ module Aws::MediaLive
     Scte35TimeSignalScheduleActionSettings.type = Types::Scte35TimeSignalScheduleActionSettings
     Scte35Type.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     Scte35Type.add_member(:scte_35_without_segmentation, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCTE_35_WITHOUT_SEGMENTATION", traits: {"smithy.api#enumValue" => "SCTE_35_WITHOUT_SEGMENTATION"}))
+    Scte35Type.add_member(:scte_35_without_idr, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCTE_35_WITHOUT_IDR", traits: {"smithy.api#enumValue" => "SCTE_35_WITHOUT_IDR"}))
     Scte35WebDeliveryAllowedFlag.add_member(:web_delivery_not_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEB_DELIVERY_NOT_ALLOWED", traits: {"smithy.api#enumValue" => "WEB_DELIVERY_NOT_ALLOWED"}))
     Scte35WebDeliveryAllowedFlag.add_member(:web_delivery_allowed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEB_DELIVERY_ALLOWED", traits: {"smithy.api#enumValue" => "WEB_DELIVERY_ALLOWED"}))
     SdiSource.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Arn", traits: {"smithy.api#jsonName" => "arn"}))
@@ -4553,6 +4899,9 @@ module Aws::MediaLive
     SignalMapSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SignalMapStatus, name: "Status", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "status", "smithy.api#required" => {}}))
     SignalMapSummary.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagMap, name: "Tags", traits: {"smithy.api#jsonName" => "tags"}))
     SignalMapSummary.type = Types::SignalMapSummary
+    SmartSubtitleSourceSettings.add_member(:caption_synchronization_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionSynchronizationMode, name: "CaptionSynchronizationMode", traits: {"smithy.api#jsonName" => "captionSynchronizationMode"}))
+    SmartSubtitleSourceSettings.add_member(:inference_feed_output, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InferenceFeedOutput", traits: {"smithy.api#jsonName" => "inferenceFeedOutput"}))
+    SmartSubtitleSourceSettings.type = Types::SmartSubtitleSourceSettings
     SmoothGroupAudioOnlyTimecodeControl.add_member(:passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSTHROUGH", traits: {"smithy.api#enumValue" => "PASSTHROUGH"}))
     SmoothGroupAudioOnlyTimecodeControl.add_member(:use_configured_clock, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USE_CONFIGURED_CLOCK", traits: {"smithy.api#enumValue" => "USE_CONFIGURED_CLOCK"}))
     SmoothGroupCertificateMode.add_member(:self_signed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF_SIGNED", traits: {"smithy.api#enumValue" => "SELF_SIGNED"}))
@@ -4582,6 +4931,8 @@ module Aws::MediaLive
     Smpte2110ReceiverGroupSettings.add_member(:smpte2110_receiver_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofsmpte2110receivergroup, name: "Smpte2110ReceiverGroups", traits: {"smithy.api#jsonName" => "smpte2110ReceiverGroups"}))
     Smpte2110ReceiverGroupSettings.type = Types::Smpte2110ReceiverGroupSettings
     SmpteTtDestinationSettings.type = Types::SmpteTtDestinationSettings
+    SpecialRouterSettings.add_member(:router_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "RouterArn", traits: {"smithy.api#jsonName" => "routerArn"}))
+    SpecialRouterSettings.type = Types::SpecialRouterSettings
     SrtCallerDecryption.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: Algorithm, name: "Algorithm", traits: {"smithy.api#jsonName" => "algorithm"}))
     SrtCallerDecryption.add_member(:passphrase_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PassphraseSecretArn", traits: {"smithy.api#jsonName" => "passphraseSecretArn"}))
     SrtCallerDecryption.type = Types::SrtCallerDecryption
@@ -4605,9 +4956,25 @@ module Aws::MediaLive
     SrtEncryptionType.add_member(:aes256, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AES256", traits: {"smithy.api#enumValue" => "AES256"}))
     SrtGroupSettings.add_member(:input_loss_action, ::Smithy::Schema::Shapes::MemberShape.new(target: InputLossActionForUdpOut, name: "InputLossAction", traits: {"smithy.api#jsonName" => "inputLossAction"}))
     SrtGroupSettings.type = Types::SrtGroupSettings
+    SrtListenerDecryption.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: Algorithm, name: "Algorithm", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "algorithm", "smithy.api#required" => {}}))
+    SrtListenerDecryption.add_member(:passphrase_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PassphraseSecretArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "passphraseSecretArn", "smithy.api#required" => {}}))
+    SrtListenerDecryption.type = Types::SrtListenerDecryption
+    SrtListenerDecryptionRequest.add_member(:algorithm, ::Smithy::Schema::Shapes::MemberShape.new(target: Algorithm, name: "Algorithm", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "algorithm", "smithy.api#required" => {}}))
+    SrtListenerDecryptionRequest.add_member(:passphrase_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "PassphraseSecretArn", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "passphraseSecretArn", "smithy.api#required" => {}}))
+    SrtListenerDecryptionRequest.type = Types::SrtListenerDecryptionRequest
+    SrtListenerSettings.add_member(:decryption, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtListenerDecryption, name: "Decryption", traits: {"smithy.api#jsonName" => "decryption"}))
+    SrtListenerSettings.add_member(:minimum_latency, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MinimumLatency", traits: {"smithy.api#jsonName" => "minimumLatency"}))
+    SrtListenerSettings.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamId", traits: {"smithy.api#jsonName" => "streamId"}))
+    SrtListenerSettings.type = Types::SrtListenerSettings
+    SrtListenerSettingsRequest.add_member(:decryption, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtListenerDecryptionRequest, name: "Decryption", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "decryption", "smithy.api#required" => {}}))
+    SrtListenerSettingsRequest.add_member(:minimum_latency, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "MinimumLatency", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "minimumLatency", "smithy.api#required" => {}}))
+    SrtListenerSettingsRequest.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamId", traits: {"smithy.api#jsonName" => "streamId"}))
+    SrtListenerSettingsRequest.type = Types::SrtListenerSettingsRequest
     SrtOutputDestinationSettings.add_member(:encryption_passphrase_secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EncryptionPassphraseSecretArn", traits: {"smithy.api#jsonName" => "encryptionPassphraseSecretArn"}))
     SrtOutputDestinationSettings.add_member(:stream_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StreamId", traits: {"smithy.api#jsonName" => "streamId"}))
     SrtOutputDestinationSettings.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Url", traits: {"smithy.api#jsonName" => "url"}))
+    SrtOutputDestinationSettings.add_member(:connection_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ConnectionMode, name: "ConnectionMode", traits: {"smithy.api#jsonName" => "connectionMode"}))
+    SrtOutputDestinationSettings.add_member(:listener_port, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin1max65535, name: "ListenerPort", traits: {"smithy.api#jsonName" => "listenerPort"}))
     SrtOutputDestinationSettings.type = Types::SrtOutputDestinationSettings
     SrtOutputSettings.add_member(:buffer_msec, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max10000, name: "BufferMsec", traits: {"smithy.api#jsonName" => "bufferMsec"}))
     SrtOutputSettings.add_member(:container_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: UdpContainerSettings, name: "ContainerSettings", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "containerSettings", "smithy.api#required" => {}}))
@@ -4616,8 +4983,10 @@ module Aws::MediaLive
     SrtOutputSettings.add_member(:latency, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin40max16000, name: "Latency", traits: {"smithy.api#jsonName" => "latency"}))
     SrtOutputSettings.type = Types::SrtOutputSettings
     SrtSettings.add_member(:srt_caller_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofsrtcallersource, name: "SrtCallerSources", traits: {"smithy.api#jsonName" => "srtCallerSources"}))
+    SrtSettings.add_member(:srt_listener_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtListenerSettings, name: "SrtListenerSettings", traits: {"smithy.api#jsonName" => "srtListenerSettings"}))
     SrtSettings.type = Types::SrtSettings
     SrtSettingsRequest.add_member(:srt_caller_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: Listofsrtcallersourcerequest, name: "SrtCallerSources", traits: {"smithy.api#jsonName" => "srtCallerSources"}))
+    SrtSettingsRequest.add_member(:srt_listener_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SrtListenerSettingsRequest, name: "SrtListenerSettings", traits: {"smithy.api#jsonName" => "srtListenerSettings"}))
     SrtSettingsRequest.type = Types::SrtSettingsRequest
     StandardHlsSettings.add_member(:audio_rendition_sets, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "AudioRenditionSets", traits: {"smithy.api#jsonName" => "audioRenditionSets"}))
     StandardHlsSettings.add_member(:m3u8_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: M3u8Settings, name: "M3u8Settings", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "m3u8Settings", "smithy.api#required" => {}}))
@@ -4644,6 +5013,9 @@ module Aws::MediaLive
     StartChannelResponse.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcOutputSettingsDescription, name: "Vpc", traits: {"smithy.api#jsonName" => "vpc"}))
     StartChannelResponse.add_member(:anywhere_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeAnywhereSettings, name: "AnywhereSettings", traits: {"smithy.api#jsonName" => "anywhereSettings"}))
     StartChannelResponse.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionResponse, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
+    StartChannelResponse.add_member(:linked_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLinkedChannelSettings, name: "LinkedChannelSettings", traits: {"smithy.api#jsonName" => "linkedChannelSettings"}))
+    StartChannelResponse.add_member(:channel_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ChannelSecurityGroups", traits: {"smithy.api#jsonName" => "channelSecurityGroups"}))
+    StartChannelResponse.add_member(:inference_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeInferenceSettings, name: "InferenceSettings", traits: {"smithy.api#jsonName" => "inferenceSettings"}))
     StartChannelResponse.type = Types::StartChannelResponse
     StartDeleteMonitorDeploymentRequest.add_member(:identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Identifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StartDeleteMonitorDeploymentRequest.type = Types::StartDeleteMonitorDeploymentRequest
@@ -4791,6 +5163,9 @@ module Aws::MediaLive
     StopChannelResponse.add_member(:vpc, ::Smithy::Schema::Shapes::MemberShape.new(target: VpcOutputSettingsDescription, name: "Vpc", traits: {"smithy.api#jsonName" => "vpc"}))
     StopChannelResponse.add_member(:anywhere_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeAnywhereSettings, name: "AnywhereSettings", traits: {"smithy.api#jsonName" => "anywhereSettings"}))
     StopChannelResponse.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionResponse, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
+    StopChannelResponse.add_member(:linked_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeLinkedChannelSettings, name: "LinkedChannelSettings", traits: {"smithy.api#jsonName" => "linkedChannelSettings"}))
+    StopChannelResponse.add_member(:channel_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ChannelSecurityGroups", traits: {"smithy.api#jsonName" => "channelSecurityGroups"}))
+    StopChannelResponse.add_member(:inference_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeInferenceSettings, name: "InferenceSettings", traits: {"smithy.api#jsonName" => "inferenceSettings"}))
     StopChannelResponse.type = Types::StopChannelResponse
     StopInputDeviceRequest.add_member(:input_device_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "InputDeviceId", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     StopInputDeviceRequest.type = Types::StopInputDeviceRequest
@@ -4845,6 +5220,8 @@ module Aws::MediaLive
     TemporalFilterStrength.add_member(:strength_14, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRENGTH_14", traits: {"smithy.api#enumValue" => "STRENGTH_14"}))
     TemporalFilterStrength.add_member(:strength_15, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRENGTH_15", traits: {"smithy.api#enumValue" => "STRENGTH_15"}))
     TemporalFilterStrength.add_member(:strength_16, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRENGTH_16", traits: {"smithy.api#enumValue" => "STRENGTH_16"}))
+    TextCaptionPositionSettings.add_member(:y_position_percentage, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max100, name: "YPositionPercentage", traits: {"smithy.api#jsonName" => "yPositionPercentage"}))
+    TextCaptionPositionSettings.type = Types::TextCaptionPositionSettings
     Thumbnail.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Body", traits: {"smithy.api#jsonName" => "body"}))
     Thumbnail.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ContentType", traits: {"smithy.api#jsonName" => "contentType"}))
     Thumbnail.add_member(:thumbnail_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ThumbnailType, name: "ThumbnailType", traits: {"smithy.api#jsonName" => "thumbnailType"}))
@@ -4898,9 +5275,11 @@ module Aws::MediaLive
     TransferringInputDeviceSummary.add_member(:transfer_type, ::Smithy::Schema::Shapes::MemberShape.new(target: InputDeviceTransferType, name: "TransferType", traits: {"smithy.api#jsonName" => "transferType"}))
     TransferringInputDeviceSummary.type = Types::TransferringInputDeviceSummary
     TtmlDestinationSettings.add_member(:style_control, ::Smithy::Schema::Shapes::MemberShape.new(target: TtmlDestinationStyleControl, name: "StyleControl", traits: {"smithy.api#jsonName" => "styleControl"}))
+    TtmlDestinationSettings.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: TextCaptionPositionSettings, name: "Position", traits: {"smithy.api#jsonName" => "position"}))
     TtmlDestinationSettings.type = Types::TtmlDestinationSettings
     TtmlDestinationStyleControl.add_member(:passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSTHROUGH", traits: {"smithy.api#enumValue" => "PASSTHROUGH"}))
     TtmlDestinationStyleControl.add_member(:use_configured, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USE_CONFIGURED", traits: {"smithy.api#enumValue" => "USE_CONFIGURED"}))
+    TtmlDestinationStyleControl.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
     UdpContainerSettings.add_member(:m2ts_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: M2tsSettings, name: "M2tsSettings", traits: {"smithy.api#jsonName" => "m2tsSettings"}))
     UdpContainerSettings.type = Types::UdpContainerSettings
     UdpGroupSettings.add_member(:input_loss_action, ::Smithy::Schema::Shapes::MemberShape.new(target: InputLossActionForUdpOut, name: "InputLossAction", traits: {"smithy.api#jsonName" => "inputLossAction"}))
@@ -4954,6 +5333,10 @@ module Aws::MediaLive
     UpdateChannelRequest.add_member(:channel_engine_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionRequest, name: "ChannelEngineVersion", traits: {"smithy.api#jsonName" => "channelEngineVersion"}))
     UpdateChannelRequest.add_member(:dry_run, ::Smithy::Schema::Shapes::MemberShape.new(target: Boolean, name: "DryRun", traits: {"smithy.api#jsonName" => "dryRun"}))
     UpdateChannelRequest.add_member(:anywhere_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: AnywhereSettings, name: "AnywhereSettings", traits: {"smithy.api#jsonName" => "anywhereSettings"}))
+    UpdateChannelRequest.add_member(:linked_channel_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: LinkedChannelSettings, name: "LinkedChannelSettings", traits: {"smithy.api#jsonName" => "linkedChannelSettings"}))
+    UpdateChannelRequest.add_member(:channel_security_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: ListofString, name: "ChannelSecurityGroups", traits: {"smithy.api#jsonName" => "channelSecurityGroups"}))
+    UpdateChannelRequest.add_member(:inference_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: InferenceSettings, name: "InferenceSettings", traits: {"smithy.api#jsonName" => "inferenceSettings"}))
+    UpdateChannelRequest.add_member(:special_router_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecialRouterSettings, name: "SpecialRouterSettings", traits: {"smithy.api#jsonName" => "specialRouterSettings"}))
     UpdateChannelRequest.type = Types::UpdateChannelRequest
     UpdateChannelResponse.add_member(:channel, ::Smithy::Schema::Shapes::MemberShape.new(target: Channel, name: "Channel", traits: {"smithy.api#jsonName" => "channel"}))
     UpdateChannelResponse.type = Types::UpdateChannelResponse
@@ -5076,6 +5459,7 @@ module Aws::MediaLive
     UpdateInputRequest.add_member(:multicast_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastSettingsUpdateRequest, name: "MulticastSettings", traits: {"smithy.api#jsonName" => "multicastSettings"}))
     UpdateInputRequest.add_member(:smpte2110_receiver_group_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: Smpte2110ReceiverGroupSettings, name: "Smpte2110ReceiverGroupSettings", traits: {"smithy.api#jsonName" => "smpte2110ReceiverGroupSettings"}))
     UpdateInputRequest.add_member(:sdi_sources, ::Smithy::Schema::Shapes::MemberShape.new(target: InputSdiSources, name: "SdiSources", traits: {"smithy.api#jsonName" => "sdiSources"}))
+    UpdateInputRequest.add_member(:special_router_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecialRouterSettings, name: "SpecialRouterSettings", traits: {"smithy.api#jsonName" => "specialRouterSettings"}))
     UpdateInputRequest.type = Types::UpdateInputRequest
     UpdateInputResponse.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: Input, name: "Input", traits: {"smithy.api#jsonName" => "input"}))
     UpdateInputResponse.type = Types::UpdateInputResponse
@@ -5179,12 +5563,21 @@ module Aws::MediaLive
     VideoDescription.add_member(:scaling_behavior, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoDescriptionScalingBehavior, name: "ScalingBehavior", traits: {"smithy.api#jsonName" => "scalingBehavior"}))
     VideoDescription.add_member(:sharpness, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max100, name: "Sharpness", traits: {"smithy.api#jsonName" => "sharpness"}))
     VideoDescription.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: Integer, name: "Width", traits: {"smithy.api#jsonName" => "width"}))
+    VideoDescription.add_member(:crop_rectangle, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoPositionRectangle, name: "CropRectangle", traits: {"smithy.api#jsonName" => "cropRectangle"}))
+    VideoDescription.add_member(:output_position_rectangle, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoPositionRectangle, name: "OutputPositionRectangle", traits: {"smithy.api#jsonName" => "outputPositionRectangle"}))
+    VideoDescription.add_member(:border, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max100, name: "Border", traits: {"smithy.api#jsonName" => "border"}))
     VideoDescription.type = Types::VideoDescription
     VideoDescriptionRespondToAfd.add_member(:none, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NONE", traits: {"smithy.api#enumValue" => "NONE"}))
     VideoDescriptionRespondToAfd.add_member(:passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSTHROUGH", traits: {"smithy.api#enumValue" => "PASSTHROUGH"}))
     VideoDescriptionRespondToAfd.add_member(:respond, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESPOND", traits: {"smithy.api#enumValue" => "RESPOND"}))
     VideoDescriptionScalingBehavior.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "DEFAULT"}))
     VideoDescriptionScalingBehavior.add_member(:stretch_to_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STRETCH_TO_OUTPUT", traits: {"smithy.api#enumValue" => "STRETCH_TO_OUTPUT"}))
+    VideoDescriptionScalingBehavior.add_member(:smart_crop, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SMART_CROP", traits: {"smithy.api#enumValue" => "SMART_CROP"}))
+    VideoPositionRectangle.add_member(:height, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin2max8192, name: "Height", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "height", "smithy.api#required" => {}}))
+    VideoPositionRectangle.add_member(:width, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin2max8192, name: "Width", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "width", "smithy.api#required" => {}}))
+    VideoPositionRectangle.add_member(:x, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max8190, name: "X", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "x", "smithy.api#required" => {}}))
+    VideoPositionRectangle.add_member(:y, ::Smithy::Schema::Shapes::MemberShape.new(target: Integermin0max8190, name: "Y", traits: {"smithy.api#clientOptional" => {}, "smithy.api#jsonName" => "y", "smithy.api#required" => {}}))
+    VideoPositionRectangle.type = Types::VideoPositionRectangle
     VideoSelector.add_member(:color_space, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoSelectorColorSpace, name: "ColorSpace", traits: {"smithy.api#jsonName" => "colorSpace"}))
     VideoSelector.add_member(:color_space_settings, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoSelectorColorSpaceSettings, name: "ColorSpaceSettings", traits: {"smithy.api#jsonName" => "colorSpaceSettings"}))
     VideoSelector.add_member(:color_space_usage, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoSelectorColorSpaceUsage, name: "ColorSpaceUsage", traits: {"smithy.api#jsonName" => "colorSpaceUsage"}))
@@ -5224,12 +5617,16 @@ module Aws::MediaLive
     WavSettings.add_member(:sample_rate, ::Smithy::Schema::Shapes::MemberShape.new(target: Double, name: "SampleRate", traits: {"smithy.api#jsonName" => "sampleRate"}))
     WavSettings.type = Types::WavSettings
     WebvttDestinationSettings.add_member(:style_control, ::Smithy::Schema::Shapes::MemberShape.new(target: WebvttDestinationStyleControl, name: "StyleControl", traits: {"smithy.api#jsonName" => "styleControl"}))
+    WebvttDestinationSettings.add_member(:position, ::Smithy::Schema::Shapes::MemberShape.new(target: TextCaptionPositionSettings, name: "Position", traits: {"smithy.api#jsonName" => "position"}))
     WebvttDestinationSettings.type = Types::WebvttDestinationSettings
     WebvttDestinationStyleControl.add_member(:no_style_data, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NO_STYLE_DATA", traits: {"smithy.api#enumValue" => "NO_STYLE_DATA"}))
     WebvttDestinationStyleControl.add_member(:passthrough, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSTHROUGH", traits: {"smithy.api#enumValue" => "PASSTHROUGH"}))
+    WebvttDestinationStyleControl.add_member(:manual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MANUAL", traits: {"smithy.api#enumValue" => "MANUAL"}))
     Listofadditionaldestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalDestinations, name: "member"))
     Listofaudiochannelmapping.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioChannelMapping, name: "member"))
     Listofaudiodescription.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioDescription, name: "member"))
+    Listofaudiofeedinput.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFeedInput, name: "member"))
+    Listofaudiopid.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioPid, name: "member"))
     Listofaudioselector.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioSelector, name: "member"))
     Listofaudiotrack.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioTrack, name: "member"))
     Listofbatchfailedresultmodel.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchFailedResultModel, name: "member"))
@@ -5237,12 +5634,14 @@ module Aws::MediaLive
     Listofcaptiondescription.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionDescription, name: "member"))
     Listofcaptionlanguagemapping.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionLanguageMapping, name: "member"))
     Listofcaptionselector.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CaptionSelector, name: "member"))
+    Listofchannelalert.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelAlert, name: "member"))
     Listofchannelegressendpoint.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEgressEndpoint, name: "member"))
     Listofchannelengineversionresponse.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelEngineVersionResponse, name: "member"))
     Listofchannelpipelineidtorestart.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelPipelineIdToRestart, name: "member"))
     Listofchannelsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ChannelSummary, name: "member"))
     Listofcloudwatchalarmtemplategroupsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchAlarmTemplateGroupSummary, name: "member"))
     Listofcloudwatchalarmtemplatesummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CloudWatchAlarmTemplateSummary, name: "member"))
+    Listofclusteralert.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterAlert, name: "member"))
     Listofcmafingestcaptionlanguagemapping.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CmafIngestCaptionLanguageMapping, name: "member"))
     Listofcolorcorrection.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ColorCorrection, name: "member"))
     Listofdashroleaudio.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DashRoleAudio, name: "member"))
@@ -5251,6 +5650,7 @@ module Aws::MediaLive
     Listofdescribeclustersummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeClusterSummary, name: "member"))
     Listofdescribenetworksummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeNetworkSummary, name: "member"))
     Listofdescribenodesummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: DescribeNodeSummary, name: "member"))
+    Listofenrichmentmethod.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnrichmentMethod, name: "member"))
     Listofeventbridgeruletemplategroupsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBridgeRuleTemplateGroupSummary, name: "member"))
     Listofeventbridgeruletemplatesummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBridgeRuleTemplateSummary, name: "member"))
     Listofeventbridgeruletemplatetarget.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EventBridgeRuleTemplateTarget, name: "member"))
@@ -5282,11 +5682,14 @@ module Aws::MediaLive
     Listofippoolupdaterequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: IpPoolUpdateRequest, name: "member"))
     Listofmediaconnectflow.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectFlow, name: "member"))
     Listofmediaconnectflowrequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectFlowRequest, name: "member"))
+    Listofmediaconnectrouteroutputdestinationsettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaConnectRouterOutputDestinationSettings, name: "member"))
+    Listofmediapackageadditionaldestinations.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPackageAdditionalDestinations, name: "member"))
     Listofmediapackageoutputdestinationsettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaPackageOutputDestinationSettings, name: "member"))
     Listofmediaresourceneighbor.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaResourceNeighbor, name: "member"))
     Listofmulticastsource.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastSource, name: "member"))
     Listofmulticastsourcecreaterequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastSourceCreateRequest, name: "member"))
     Listofmulticastsourceupdaterequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MulticastSourceUpdateRequest, name: "member"))
+    Listofmultiplexalert.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiplexAlert, name: "member"))
     Listofmultiplexoutputdestination.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiplexOutputDestination, name: "member"))
     Listofmultiplexprogrampipelinedetail.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiplexProgramPipelineDetail, name: "member"))
     Listofmultiplexprogramsummary.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: MultiplexProgramSummary, name: "member"))
@@ -5298,12 +5701,16 @@ module Aws::MediaLive
     Listofoutputdestination.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDestination, name: "member"))
     Listofoutputdestinationsettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputDestinationSettings, name: "member"))
     Listofoutputgroup.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputGroup, name: "member"))
+    Listofoutputlocationref.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputLocationRef, name: "member"))
+    Listofoutputusage.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputUsage, name: "member"))
     Listofpipelinedetail.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelineDetail, name: "member"))
     Listofpipelinepausestatesettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PipelinePauseStateSettings, name: "member"))
     Listofreservation.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Reservation, name: "member"))
     Listofroute.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Route, name: "member"))
     Listofroutecreaterequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteCreateRequest, name: "member"))
     Listofrouteupdaterequest.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouteUpdateRequest, name: "member"))
+    Listofrouterdestination.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouterDestination, name: "member"))
+    Listofrouterdestinationsettings.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RouterDestinationSettings, name: "member"))
     Listofrtmpadmarkers.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RtmpAdMarkers, name: "member"))
     Listofscheduleaction.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ScheduleAction, name: "member"))
     Listofscte35descriptor.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Scte35Descriptor, name: "member"))
@@ -5327,7 +5734,7 @@ module Aws::MediaLive
       service.id = "com.amazonaws.medialive#MediaLive"
       service.name = "MediaLive"
       service.version = "2017-10-14"
-      service.traits = {"aws.api#service" => {"sdkId" => "MediaLive", "arnNamespace" => "medialive", "cloudFormationName" => "MediaLive", "cloudTrailEventSource" => "medialive.amazonaws.com", "endpointPrefix" => "medialive"}, "aws.auth#sigv4" => {"name" => "medialive"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AWS Elemental MediaLive"}
+      service.traits = {"aws.api#service" => {"sdkId" => "MediaLive", "arnNamespace" => "medialive", "cloudFormationName" => "MediaLive", "cloudTrailEventSource" => "medialive.amazonaws.com", "endpointPrefix" => "medialive"}, "aws.auth#sigv4" => {"name" => "medialive"}, "aws.protocols#restJson1" => {}, "smithy.api#auth" => ["aws.auth#sigv4"], "smithy.api#title" => "AWS Elemental MediaLive", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://medialive-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://medialive-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://medialive.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://medialive.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:accept_input_device_transfer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.medialive#AcceptInputDeviceTransfer"
         operation.name = "AcceptInputDeviceTransfer"
@@ -6232,6 +6639,21 @@ module Aws::MediaLive
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/prod/signal-maps/{Identifier}", "code" => 200}}
       end)
+      service.add_operation(:list_alerts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.medialive#ListAlerts"
+        operation.name = "ListAlerts"
+        operation.input = ListAlertsRequest
+        operation.output = ListAlertsResponse
+        operation.errors << BadGatewayException
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << GatewayTimeoutException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/prod/channels/{ChannelId}/alerts", "code" => 200}}
+        operation[:paginator] = Paginators::ListAlerts.new
+      end)
       service.add_operation(:list_channel_placement_groups, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.medialive#ListChannelPlacementGroups"
         operation.name = "ListChannelPlacementGroups"
@@ -6285,6 +6707,21 @@ module Aws::MediaLive
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/prod/cloudwatch-alarm-templates", "code" => 200}}
         operation[:paginator] = Paginators::ListCloudWatchAlarmTemplates.new
+      end)
+      service.add_operation(:list_cluster_alerts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.medialive#ListClusterAlerts"
+        operation.name = "ListClusterAlerts"
+        operation.input = ListClusterAlertsRequest
+        operation.output = ListClusterAlertsResponse
+        operation.errors << BadGatewayException
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << GatewayTimeoutException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/prod/clusters/{ClusterId}/alerts", "code" => 200}}
+        operation[:paginator] = Paginators::ListClusterAlerts.new
       end)
       service.add_operation(:list_clusters, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.medialive#ListClusters"
@@ -6382,6 +6819,21 @@ module Aws::MediaLive
         operation.errors << TooManyRequestsException
         operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/prod/inputs", "code" => 200}}
         operation[:paginator] = Paginators::ListInputs.new
+      end)
+      service.add_operation(:list_multiplex_alerts, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.medialive#ListMultiplexAlerts"
+        operation.name = "ListMultiplexAlerts"
+        operation.input = ListMultiplexAlertsRequest
+        operation.output = ListMultiplexAlertsResponse
+        operation.errors << BadGatewayException
+        operation.errors << BadRequestException
+        operation.errors << ForbiddenException
+        operation.errors << GatewayTimeoutException
+        operation.errors << InternalServerErrorException
+        operation.errors << NotFoundException
+        operation.errors << TooManyRequestsException
+        operation.traits = {"smithy.api#http" => {"method" => "GET", "uri" => "/prod/multiplexes/{MultiplexId}/alerts", "code" => 200}}
+        operation[:paginator] = Paginators::ListMultiplexAlerts.new
       end)
       service.add_operation(:list_multiplex_programs, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.medialive#ListMultiplexPrograms"

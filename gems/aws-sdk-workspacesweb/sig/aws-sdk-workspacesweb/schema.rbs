@@ -22,12 +22,18 @@ module Aws::WorkSpacesWeb
     AssociateUserSettingsRequest: StructureShape
     AssociateUserSettingsResponse: StructureShape
     AuthenticationType: StringShape
+    BlockedCategories: ListShape
+    BrandingConfiguration: StructureShape
+    BrandingConfigurationCreateInput: StructureShape
+    BrandingConfigurationUpdateInput: StructureShape
+    BrandingSafeStringType: StringShape
     BrowserPolicy: StringShape
     BrowserSettings: StructureShape
     BrowserSettingsList: ListShape
     BrowserSettingsSummary: StructureShape
     BrowserType: StringShape
     BuiltInPatternId: StringShape
+    Category: EnumShape
     Certificate: StructureShape
     CertificateAuthorityBody: BlobShape
     CertificateList: ListShape
@@ -37,8 +43,10 @@ module Aws::WorkSpacesWeb
     CertificateThumbprint: StringShape
     CertificateThumbprintList: ListShape
     ClientToken: StringShape
+    ColorTheme: EnumShape
     ConfidenceLevel: IntegerShape
     ConflictException: StructureShape
+    ContactLinkUrl: StringShape
     CookieDomain: StringShape
     CookieName: StringShape
     CookiePath: StringShape
@@ -148,6 +156,8 @@ module Aws::WorkSpacesWeb
     GetUserSettingsResponse: StructureShape
     GlobalInlineRedactionUrls: ListShape
     HiddenToolbarItemList: ListShape
+    IconImage: BlobShape
+    IconImageInput: UnionShape
     IdentityProvider: StructureShape
     IdentityProviderDetails: MapShape
     IdentityProviderList: ListShape
@@ -155,6 +165,7 @@ module Aws::WorkSpacesWeb
     IdentityProviderSummary: StructureShape
     IdentityProviderType: StringShape
     IdleDisconnectTimeoutInMinutes: IntegerShape
+    ImageMetadata: StructureShape
     InlineRedactionConfiguration: StructureShape
     InlineRedactionPattern: StructureShape
     InlineRedactionPatterns: ListShape
@@ -197,17 +208,23 @@ module Aws::WorkSpacesWeb
     ListUserAccessLoggingSettingsResponse: StructureShape
     ListUserSettingsRequest: StructureShape
     ListUserSettingsResponse: StructureShape
+    Locale: EnumShape
+    LocalizedBrandingStringMap: MapShape
+    LocalizedBrandingStrings: StructureShape
     LogConfiguration: StructureShape
     LogFileFormat: EnumShape
+    Markdown: StringShape
     MaxConcurrentSessions: IntegerShape
     MaxDisplayResolution: StringShape
     MaxResults: IntegerShape
+    MimeType: EnumShape
     NetworkSettings: StructureShape
     NetworkSettingsList: ListShape
     NetworkSettingsSummary: StructureShape
     PaginationToken: StringShape
     PatternName: StringShape
     Portal: StructureShape
+    PortalCustomDomain: StringShape
     PortalEndpoint: StringShape
     PortalId: StringShape
     PortalList: ListShape
@@ -227,6 +244,7 @@ module Aws::WorkSpacesWeb
     S3BucketOwner: StringShape
     S3KeyPrefix: StringShape
     S3LogConfiguration: StructureShape
+    S3Uri: StringShape
     SamlMetadata: StringShape
     SecurityGroupId: StringShape
     SecurityGroupIdList: ListShape
@@ -285,6 +303,8 @@ module Aws::WorkSpacesWeb
     UpdateUserAccessLoggingSettingsResponse: StructureShape
     UpdateUserSettingsRequest: StructureShape
     UpdateUserSettingsResponse: StructureShape
+    UrlPattern: StringShape
+    UrlPatternList: ListShape
     UserAccessLoggingSettings: StructureShape
     UserAccessLoggingSettingsList: ListShape
     UserAccessLoggingSettingsSummary: StructureShape
@@ -298,6 +318,9 @@ module Aws::WorkSpacesWeb
     ValidationExceptionReason: StringShape
     VisualMode: StringShape
     VpcId: StringShape
+    WallpaperImage: BlobShape
+    WallpaperImageInput: UnionShape
+    WebContentFilteringPolicy: StructureShape
     KeyArn: StringShape
 
     AWSErmineControlPlaneService: ServiceShape

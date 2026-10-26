@@ -7,11 +7,13 @@ module Aws::Support
       def initialize: (
         ?attachment_set_id: String,
         ?attachments: Array[Types::Attachment],
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor attachment_set_id: String?
       attr_accessor attachments: Array[Types::Attachment]?
+      attr_accessor dry_run: bool?
     end
 
     class AddAttachmentsToSetResponse
@@ -35,6 +37,8 @@ module Aws::Support
         ?communication_body: String,
         ?cc_email_addresses: Array[String],
         ?attachment_set_id: String,
+        ?upload_ids: Array[String],
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -42,6 +46,8 @@ module Aws::Support
       attr_accessor communication_body: String?
       attr_accessor cc_email_addresses: Array[String]?
       attr_accessor attachment_set_id: String?
+      attr_accessor upload_ids: Array[String]?
+      attr_accessor dry_run: bool?
     end
 
     class AddCommunicationToCaseResponse
@@ -212,6 +218,7 @@ module Aws::Support
         ?body: String,
         ?submitted_by: String,
         ?time_created: String,
+        ?attachments: Array[Types::AttachmentDetails],
         ?attachment_set: Array[Types::AttachmentDetails],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -220,6 +227,7 @@ module Aws::Support
       attr_accessor body: String?
       attr_accessor submitted_by: String?
       attr_accessor time_created: String?
+      attr_accessor attachments: Array[Types::AttachmentDetails]?
       attr_accessor attachment_set: Array[Types::AttachmentDetails]?
     end
 
@@ -238,6 +246,45 @@ module Aws::Support
       attr_accessor dates_without_support: Array[Types::DateInterval]?
     end
 
+    class CompleteAttachmentUploadRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_id: String,
+        ?completed_uploads: Array[Types::CompletedUpload],
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_id: String?
+      attr_accessor completed_uploads: Array[Types::CompletedUpload]?
+      attr_accessor dry_run: bool?
+    end
+
+    class CompleteAttachmentUploadResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_status: String?
+    end
+
+    class CompletedUpload
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?part_index: Integer,
+        ?e_tag: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor part_index: Integer?
+      attr_accessor e_tag: String?
+    end
+
     class CreateCaseRequest
       include Smithy::Schema::Structure
 
@@ -251,6 +298,8 @@ module Aws::Support
         ?language: String,
         ?issue_type: String,
         ?attachment_set_id: String,
+        ?upload_ids: Array[String],
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -263,6 +312,8 @@ module Aws::Support
       attr_accessor language: String?
       attr_accessor issue_type: String?
       attr_accessor attachment_set_id: String?
+      attr_accessor upload_ids: Array[String]?
+      attr_accessor dry_run: bool?
     end
 
     class CreateCaseResponse
@@ -305,10 +356,12 @@ module Aws::Support
 
       def initialize: (
         ?attachment_id: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor attachment_id: String?
+      attr_accessor dry_run: bool?
     end
 
     class DescribeAttachmentResponse
@@ -320,6 +373,34 @@ module Aws::Support
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor attachment: Types::Attachment?
+    end
+
+    class DescribeAttachmentUploadStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_id: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_id: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class DescribeAttachmentUploadStatusResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_status: String,
+        ?file_name: String,
+        ?upload_progress: Types::UploadProgress,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_status: String?
+      attr_accessor file_name: String?
+      attr_accessor upload_progress: Types::UploadProgress?
     end
 
     class DescribeCasesRequest
@@ -335,6 +416,7 @@ module Aws::Support
         ?max_results: Integer,
         ?language: String,
         ?include_communications: bool,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -347,6 +429,7 @@ module Aws::Support
       attr_accessor max_results: Integer?
       attr_accessor language: String?
       attr_accessor include_communications: bool?
+      attr_accessor dry_run: bool?
     end
 
     class DescribeCasesResponse
@@ -371,6 +454,7 @@ module Aws::Support
         ?after_time: String,
         ?next_token: String,
         ?max_results: Integer,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -379,6 +463,7 @@ module Aws::Support
       attr_accessor after_time: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
+      attr_accessor dry_run: bool?
     end
 
     class DescribeCommunicationsResponse
@@ -402,6 +487,7 @@ module Aws::Support
         ?service_code: String,
         ?language: String,
         ?category_code: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -409,6 +495,7 @@ module Aws::Support
       attr_accessor service_code: String?
       attr_accessor language: String?
       attr_accessor category_code: String?
+      attr_accessor dry_run: bool?
     end
 
     class DescribeCreateCaseOptionsResponse
@@ -430,11 +517,13 @@ module Aws::Support
       def initialize: (
         ?service_code_list: Array[String],
         ?language: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor service_code_list: Array[String]?
       attr_accessor language: String?
+      attr_accessor dry_run: bool?
     end
 
     class DescribeServicesResponse
@@ -453,10 +542,12 @@ module Aws::Support
 
       def initialize: (
         ?language: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor language: String?
+      attr_accessor dry_run: bool?
     end
 
     class DescribeSeverityLevelsResponse
@@ -477,12 +568,14 @@ module Aws::Support
         ?issue_type: String,
         ?service_code: String,
         ?category_code: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor issue_type: String?
       attr_accessor service_code: String?
       attr_accessor category_code: String?
+      attr_accessor dry_run: bool?
     end
 
     class DescribeSupportedLanguagesResponse
@@ -586,6 +679,94 @@ module Aws::Support
       attr_accessor checks: Array[Types::TrustedAdvisorCheckDescription]?
     end
 
+    class DownloadUrl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?expiry_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor expiry_date: String?
+    end
+
+    class DryRunOperationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class GetAttachmentDownloadLinkRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor dry_run: bool?
+    end
+
+    class GetAttachmentDownloadLinkResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_name: String,
+        ?download_url: Types::DownloadUrl,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_name: String?
+      attr_accessor download_url: Types::DownloadUrl?
+    end
+
+    class GetAttachmentUploadLinksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_name: String,
+        ?file_size_bytes: Integer,
+        ?upload_id: String,
+        ?upload_range: Types::UploadRange,
+        ?dry_run: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_name: String?
+      attr_accessor file_size_bytes: Integer?
+      attr_accessor upload_id: String?
+      attr_accessor upload_range: Types::UploadRange?
+      attr_accessor dry_run: bool?
+    end
+
+    class GetAttachmentUploadLinksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?upload_id: String,
+        ?part_size_bytes: Integer,
+        ?total_parts: Integer,
+        ?next_index: Integer,
+        ?upload_urls: Array[Types::UploadUrl],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor upload_id: String?
+      attr_accessor part_size_bytes: Integer?
+      attr_accessor total_parts: Integer?
+      attr_accessor next_index: Integer?
+      attr_accessor upload_urls: Array[Types::UploadUrl]?
+    end
+
     class InternalServerError
       include Smithy::Schema::Structure
 
@@ -637,10 +818,12 @@ module Aws::Support
 
       def initialize: (
         ?case_id: String,
+        ?dry_run: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor case_id: String?
+      attr_accessor dry_run: bool?
     end
 
     class ResolveCaseResponse
@@ -717,10 +900,25 @@ module Aws::Support
 
       def initialize: (
         ?message: String,
+        ?throttling_reasons: Array[Types::ThrottlingReason],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+      attr_accessor throttling_reasons: Array[Types::ThrottlingReason]?
+    end
+
+    class ThrottlingReason
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?reason: String,
+        ?resource: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reason: String?
+      attr_accessor resource: String?
     end
 
     class TrustedAdvisorCategorySpecificSummary
@@ -857,6 +1055,64 @@ module Aws::Support
       attr_accessor resources_flagged: Integer?
       attr_accessor resources_ignored: Integer?
       attr_accessor resources_suppressed: Integer?
+    end
+
+    class UploadIdNotFound
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UploadProgress
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?total_parts: Integer,
+        ?completed_parts_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor total_parts: Integer?
+      attr_accessor completed_parts_count: Integer?
+    end
+
+    class UploadRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_index: Integer,
+        ?end_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_index: Integer?
+      attr_accessor end_index: Integer?
+    end
+
+    module UploadStatus
+      ATTACHMENT_READY: String
+      ATTACHMENT_NOT_READY: String
+      FAILED: String
+    end
+
+    class UploadUrl
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?part_index: Integer,
+        ?expiry_date: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor part_index: Integer?
+      attr_accessor expiry_date: String?
     end
   end
 end

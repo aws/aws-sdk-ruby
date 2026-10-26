@@ -1,0 +1,473 @@
+module Aws::EndUserMessaging
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::EndUserMessaging::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateBrandProfileResponse
+      include Smithy::Client::_Response[Types::CreateBrandProfileOutput]
+      def brand_profile_id: () -> String?
+      def brand_profile_arn: () -> String?
+      def brand_profile_name: () -> String?
+      def status: () -> String?
+      def deletion_protection_enabled: () -> bool?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def attributes_created: () -> Integer?
+    end
+    def create_brand_profile: (
+      ?brand_profile_name: String,
+      ?client_token: String,
+      ?deletion_protection_enabled: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateBrandProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrandProfileResponse
+
+    interface _CreateBrandProfileAttributesResponse
+      include Smithy::Client::_Response[Types::CreateBrandProfileAttributesOutput]
+      def attributes: () -> Array[Types::BrandProfileAttributeOutput]?
+    end
+    def create_brand_profile_attributes: (
+      ?brand_profile_id: String,
+      ?attributes: Array[
+        {
+          attribute_name: String,
+          attribute_type: String,
+          attribute_value: String,
+          attachment_body: String,
+          description: String,
+          category: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateBrandProfileAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrandProfileAttributesResponse
+
+    interface _CreateBrandProfileFromRegistrationResponse
+      include Smithy::Client::_Response[Types::CreateBrandProfileFromRegistrationOutput]
+      def results: () -> Array[Types::JobResult]?
+    end
+    def create_brand_profile_from_registration: (
+      ?registration_id: String,
+      ?brand_profile_name: String,
+      ?smart_match: bool,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ],
+      ?client_token: String
+    ) -> _CreateBrandProfileFromRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBrandProfileFromRegistrationResponse
+
+    interface _CreateNotifyCodeConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateNotifyCodeConfigurationOutput]
+      def notify_code_configuration: () -> Types::NotifyCodeConfiguration?
+    end
+    def create_notify_code_configuration: (
+      ?notify_code_configuration_name: String,
+      ?code_configuration_parameters: {
+        code_type: String,
+        code_length: Integer,
+        validity_period_minutes: Integer,
+        max_attempts: Integer
+      },
+      ?channel_parameters: {
+        text: {
+          inline_template_body: String,
+          destination_country_parameters: Hash[String, String]
+        },
+        voice: {
+          inline_template_body: untyped,
+          language_code: String,
+          voice_id: String,
+          voice_message_body_text_type: String
+        },
+        notify: {
+          notify_template_id: String,
+          voice_id: untyped
+        },
+        whats_app: {
+          whats_app_template_name: String,
+          language_code: untyped
+        }
+      },
+      ?deletion_protection_enabled: bool,
+      ?client_token: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateNotifyCodeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateNotifyCodeConfigurationResponse
+
+    interface _CreateRegistrationsFromBrandProfileResponse
+      include Smithy::Client::_Response[Types::CreateRegistrationsFromBrandProfileOutput]
+      def results: () -> Array[Types::JobResult]?
+    end
+    def create_registrations_from_brand_profile: (
+      ?brand_profile_id: String,
+      ?registration_types: Array[String],
+      ?smart_match: bool,
+      ?client_token: String
+    ) -> _CreateRegistrationsFromBrandProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRegistrationsFromBrandProfileResponse
+
+    interface _DeleteBrandProfileResponse
+      include Smithy::Client::_Response[Types::DeleteBrandProfileOutput]
+      def brand_profile_id: () -> String?
+      def brand_profile_arn: () -> String?
+    end
+    def delete_brand_profile: (
+      ?brand_profile_id: String
+    ) -> _DeleteBrandProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBrandProfileResponse
+
+    interface _DeleteBrandProfileAttributeResponse
+      include Smithy::Client::_Response[Types::DeleteBrandProfileAttributeOutput]
+      def brand_profile_id: () -> String?
+      def attribute_name: () -> String?
+    end
+    def delete_brand_profile_attribute: (
+      ?brand_profile_id: String,
+      ?attribute_name: String
+    ) -> _DeleteBrandProfileAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBrandProfileAttributeResponse
+
+    interface _DeleteNotifyCodeConfigurationResponse
+      include Smithy::Client::_Response[Types::DeleteNotifyCodeConfigurationOutput]
+    end
+    def delete_notify_code_configuration: (
+      ?notify_code_configuration_id: String
+    ) -> _DeleteNotifyCodeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteNotifyCodeConfigurationResponse
+
+    interface _GetBrandProfileResponse
+      include Smithy::Client::_Response[Types::GetBrandProfileOutput]
+      def brand_profile_id: () -> String?
+      def brand_profile_arn: () -> String?
+      def brand_profile_name: () -> String?
+      def status: () -> String?
+      def deletion_protection_enabled: () -> bool?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_brand_profile: (
+      ?brand_profile_id: String
+    ) -> _GetBrandProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBrandProfileResponse
+
+    interface _GetBrandProfileAttributeResponse
+      include Smithy::Client::_Response[Types::GetBrandProfileAttributeOutput]
+      def attribute_name: () -> String?
+      def attribute_type: () -> String?
+      def attribute_value: () -> String?
+      def description: () -> String?
+      def category: () -> String?
+      def media_content_type: () -> String?
+      def media_size_bytes: () -> Integer?
+      def media_download_url: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def get_brand_profile_attribute: (
+      ?brand_profile_id: String,
+      ?attribute_name: String
+    ) -> _GetBrandProfileAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBrandProfileAttributeResponse
+
+    interface _GetJobResponse
+      include Smithy::Client::_Response[Types::Job]
+      def job_id: () -> String?
+      def status: () -> String?
+      def operation_type: () -> String?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+      def brand_profile_id: () -> String?
+      def error_code: () -> String?
+      def error_message: () -> String?
+      def resources: () -> Array[Types::JobResource]?
+    end
+    def get_job: (
+      ?job_id: String
+    ) -> _GetJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetJobResponse
+
+    interface _GetNotifyCodeConfigurationResponse
+      include Smithy::Client::_Response[Types::GetNotifyCodeConfigurationOutput]
+      def notify_code_configuration: () -> Types::NotifyCodeConfiguration?
+    end
+    def get_notify_code_configuration: (
+      ?notify_code_configuration_id: String
+    ) -> _GetNotifyCodeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetNotifyCodeConfigurationResponse
+
+    interface _ListBrandProfileAttributesResponse
+      include Smithy::Client::_Response[Types::ListBrandProfileAttributesOutput]
+      def brand_profile_attributes: () -> Array[Types::BrandProfileAttributeSummary]?
+      def next_token: () -> String?
+    end
+    def list_brand_profile_attributes: (
+      ?brand_profile_id: String,
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBrandProfileAttributesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBrandProfileAttributesResponse
+
+    interface _ListBrandProfilesResponse
+      include Smithy::Client::_Response[Types::ListBrandProfilesOutput]
+      def brand_profiles: () -> Array[Types::BrandProfileInfo]?
+      def next_token: () -> String?
+    end
+    def list_brand_profiles: (
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _ListBrandProfilesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBrandProfilesResponse
+
+    interface _ListJobsResponse
+      include Smithy::Client::_Response[Types::ListJobsOutput]
+      def jobs: () -> Array[Types::JobSummary]?
+      def next_token: () -> String?
+    end
+    def list_jobs: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String,
+      ?brand_profile_id: String,
+      ?operation_type: String
+    ) -> _ListJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListJobsResponse
+
+    interface _ListNotifyCodeConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListNotifyCodeConfigurationsOutput]
+      def notify_code_configurations: () -> Array[Types::NotifyCodeConfiguration]?
+      def next_token: () -> String?
+    end
+    def list_notify_code_configurations: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListNotifyCodeConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListNotifyCodeConfigurationsResponse
+
+    interface _ListRegistrationsFromBrandProfileResponse
+      include Smithy::Client::_Response[Types::ListRegistrationsFromBrandProfileOutput]
+      def registration_associations: () -> Array[Types::RegistrationAssociationSummary]?
+      def next_token: () -> String?
+    end
+    def list_registrations_from_brand_profile: (
+      ?brand_profile_id: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRegistrationsFromBrandProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRegistrationsFromBrandProfileResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Array[Types::Tag]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _SendNotifyCodeVerificationResponse
+      include Smithy::Client::_Response[Types::SendNotifyCodeVerificationOutput]
+      def verification_id: () -> String?
+      def message_id: () -> String?
+    end
+    def send_notify_code_verification: (
+      ?channel: String,
+      ?destination_identity: String,
+      ?origination_identity: String,
+      ?notify_code_configuration: String,
+      ?override_channel_parameters: {
+        text: {
+          inline_template_body: String,
+          destination_country_parameters: Hash[String, String]
+        },
+        voice: {
+          inline_template_body: untyped,
+          language_code: String,
+          voice_id: String,
+          voice_message_body_text_type: String
+        },
+        notify: {
+          notify_template_id: String,
+          voice_id: untyped
+        },
+        whats_app: {
+          whats_app_template_name: String,
+          language_code: untyped
+        }
+      },
+      ?override_code_configuration_parameters: {
+        code_type: String,
+        code_length: Integer,
+        validity_period_minutes: Integer,
+        max_attempts: Integer
+      },
+      ?configuration_set_name: String,
+      ?context: Hash[String, String],
+      ?reference_id: String
+    ) -> _SendNotifyCodeVerificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _SendNotifyCodeVerificationResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateBrandProfileResponse
+      include Smithy::Client::_Response[Types::UpdateBrandProfileOutput]
+      def brand_profile_id: () -> String?
+      def brand_profile_arn: () -> String?
+      def brand_profile_name: () -> String?
+      def status: () -> String?
+      def deletion_protection_enabled: () -> bool?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_brand_profile: (
+      ?brand_profile_id: String,
+      ?brand_profile_name: String,
+      ?deletion_protection_enabled: bool
+    ) -> _UpdateBrandProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrandProfileResponse
+
+    interface _UpdateBrandProfileAttributeResponse
+      include Smithy::Client::_Response[Types::UpdateBrandProfileAttributeOutput]
+      def attribute_name: () -> String?
+      def attribute_type: () -> String?
+      def attribute_value: () -> String?
+      def description: () -> String?
+      def category: () -> String?
+      def media_content_type: () -> String?
+      def media_size_bytes: () -> Integer?
+      def created_at: () -> Time?
+      def updated_at: () -> Time?
+    end
+    def update_brand_profile_attribute: (
+      ?brand_profile_id: String,
+      ?attribute_name: String,
+      ?attribute_value: String,
+      ?attachment_body: String,
+      ?description: String,
+      ?category: String
+    ) -> _UpdateBrandProfileAttributeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrandProfileAttributeResponse
+
+    interface _UpdateBrandProfileFromRegistrationResponse
+      include Smithy::Client::_Response[Types::UpdateBrandProfileFromRegistrationOutput]
+      def results: () -> Array[Types::JobResult]?
+    end
+    def update_brand_profile_from_registration: (
+      ?brand_profile_id: String,
+      ?registration_id: String,
+      ?smart_match: bool,
+      ?on_attribute_conflict: String,
+      ?client_token: String
+    ) -> _UpdateBrandProfileFromRegistrationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBrandProfileFromRegistrationResponse
+
+    interface _UpdateNotifyCodeConfigurationResponse
+      include Smithy::Client::_Response[Types::UpdateNotifyCodeConfigurationOutput]
+      def notify_code_configuration: () -> Types::NotifyCodeConfiguration?
+    end
+    def update_notify_code_configuration: (
+      ?notify_code_configuration_id: String,
+      ?notify_code_configuration_name: String,
+      ?code_configuration_parameters: {
+        code_type: String,
+        code_length: Integer,
+        validity_period_minutes: Integer,
+        max_attempts: Integer
+      },
+      ?channel_parameters: {
+        text: {
+          inline_template_body: String,
+          destination_country_parameters: Hash[String, String]
+        },
+        voice: {
+          inline_template_body: untyped,
+          language_code: String,
+          voice_id: String,
+          voice_message_body_text_type: String
+        },
+        notify: {
+          notify_template_id: String,
+          voice_id: untyped
+        },
+        whats_app: {
+          whats_app_template_name: String,
+          language_code: untyped
+        }
+      },
+      ?deletion_protection_enabled: bool
+    ) -> _UpdateNotifyCodeConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateNotifyCodeConfigurationResponse
+
+    interface _UpdateRegistrationsFromBrandProfileResponse
+      include Smithy::Client::_Response[Types::UpdateRegistrationsFromBrandProfileOutput]
+      def results: () -> Array[Types::JobResult]?
+    end
+    def update_registrations_from_brand_profile: (
+      ?brand_profile_id: String,
+      ?registration_ids: Array[String],
+      ?smart_match: bool,
+      ?on_attribute_conflict: String,
+      ?client_token: String
+    ) -> _UpdateRegistrationsFromBrandProfileResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRegistrationsFromBrandProfileResponse
+
+    interface _ValidateNotifyCodeVerificationResponse
+      include Smithy::Client::_Response[Types::ValidateNotifyCodeVerificationOutput]
+      def status: () -> String?
+    end
+    def validate_notify_code_verification: (
+      ?destination_identity: String,
+      ?reference_id: String,
+      ?code: String
+    ) -> _ValidateNotifyCodeVerificationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ValidateNotifyCodeVerificationResponse
+  end
+end

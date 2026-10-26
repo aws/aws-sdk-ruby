@@ -50,10 +50,45 @@ module Aws::BedrockDataAutomationRuntime
       def error_type: () -> String?
       def error_message: () -> String?
       def output_configuration: () -> Types::OutputConfiguration?
+      def job_submission_time: () -> Time?
+      def job_completion_time: () -> Time?
+      def job_duration_in_seconds: () -> Integer?
     end
     def get_data_automation_status: (
       ?invocation_arn: String
     ) -> _GetDataAutomationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataAutomationStatusResponse
+
+    interface _InvokeDataAutomationResponse
+      include Smithy::Client::_Response[Types::InvokeDataAutomationResponse]
+      def output_configuration: () -> Types::OutputConfiguration?
+      def semantic_modality: () -> String?
+      def output_segments: () -> Array[Types::OutputSegment]?
+    end
+    def invoke_data_automation: (
+      ?input_configuration: {
+        bytes: String,
+        s3_uri: String
+      },
+      ?data_automation_configuration: {
+        data_automation_project_arn: String,
+        stage: String
+      },
+      ?blueprints: Array[
+        {
+          blueprint_arn: String,
+          version: String,
+          stage: String
+        }
+      ],
+      ?data_automation_profile_arn: String,
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_encryption_context: Hash[String, String]
+      },
+      ?output_configuration: {
+        s3_uri: String
+      }
+    ) -> _InvokeDataAutomationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeDataAutomationResponse
 
     interface _InvokeDataAutomationAsyncResponse
       include Smithy::Client::_Response[Types::InvokeDataAutomationAsyncResponse]

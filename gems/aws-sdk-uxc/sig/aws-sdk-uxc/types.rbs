@@ -1,0 +1,156 @@
+module Aws::Uxc
+  module Types
+
+    class AccessDeniedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    module AccountColor
+      NONE: String
+      PINK: String
+      PURPLE: String
+      DARKBLUE: String
+      LIGHTBLUE: String
+      TEAL: String
+      GREEN: String
+      YELLOW: String
+      ORANGE: String
+      RED: String
+    end
+
+    class GetAccountCustomizationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetAccountCustomizationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_color: String,
+        ?visible_services: Array[String],
+        ?visible_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_color: String?
+      attr_accessor visible_services: Array[String]?
+      attr_accessor visible_regions: Array[String]?
+    end
+
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class ListServicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListServicesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?services: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor services: Array[String]?
+    end
+
+    class ThrottlingException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
+    class UpdateAccountCustomizationsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_color: String,
+        ?visible_services: Array[String],
+        ?visible_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_color: String?
+      attr_accessor visible_services: Array[String]?
+      attr_accessor visible_regions: Array[String]?
+    end
+
+    class UpdateAccountCustomizationsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_color: String,
+        ?visible_services: Array[String],
+        ?visible_regions: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_color: String?
+      attr_accessor visible_services: Array[String]?
+      attr_accessor visible_regions: Array[String]?
+    end
+
+    class ValidationException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+        ?field_list: Array[Types::ValidationExceptionField],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+      attr_accessor field_list: Array[Types::ValidationExceptionField]?
+    end
+
+    class ValidationExceptionField
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?path: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor path: String?
+      attr_accessor message: String?
+    end
+  end
+end

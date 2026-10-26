@@ -8,6 +8,7 @@ module Aws::RedshiftData
 
     ActiveSessionsExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ActiveSessionsExceededException", name: "ActiveSessionsExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ActiveStatementsExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ActiveStatementsExceededException", name: "ActiveStatementsExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ActiveWaitingRequestsExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ActiveWaitingRequestsExceededException", name: "ActiveWaitingRequestsExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     BatchExecuteStatementException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#BatchExecuteStatementException", name: "BatchExecuteStatementException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     BatchExecuteStatementInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#BatchExecuteStatementInput", name: "BatchExecuteStatementInput")
     BatchExecuteStatementOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#BatchExecuteStatementOutput", name: "BatchExecuteStatementOutput")
@@ -18,7 +19,7 @@ module Aws::RedshiftData
     CancelStatementRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#CancelStatementRequest", name: "CancelStatementRequest")
     CancelStatementResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#CancelStatementResponse", name: "CancelStatementResponse")
     ClientToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#ClientToken", name: "ClientToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
-    ClusterIdentifierString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#ClusterIdentifierString", name: "ClusterIdentifierString", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}})
+    ClusterIdentifierString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#ClusterIdentifierString", name: "ClusterIdentifierString", traits: {"smithy.api#length" => {"min" => 1, "max" => 63}, "smithy.api#pattern" => "^[a-z][a-z0-9]*(-[a-z0-9]+)*$"})
     ColumnList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#ColumnList", name: "ColumnList")
     ColumnMetadata = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ColumnMetadata", name: "ColumnMetadata")
     ColumnMetadataList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#ColumnMetadataList", name: "ColumnMetadataList")
@@ -32,6 +33,7 @@ module Aws::RedshiftData
     ExecuteStatementException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ExecuteStatementException", name: "ExecuteStatementException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     ExecuteStatementInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ExecuteStatementInput", name: "ExecuteStatementInput")
     ExecuteStatementOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ExecuteStatementOutput", name: "ExecuteStatementOutput")
+    ExecutionMode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#ExecutionMode", name: "ExecutionMode", traits: {"smithy.api#enum" => [{"name" => "TRANSACTION", "value" => "TRANSACTION"}, {"name" => "AUTO_COMMIT", "value" => "AUTO_COMMIT"}]})
     Field = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.redshiftdata#Field", name: "Field")
     FieldList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#FieldList", name: "FieldList")
     FormattedSqlRecords = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#FormattedSqlRecords", name: "FormattedSqlRecords")
@@ -45,6 +47,8 @@ module Aws::RedshiftData
     ListDatabasesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ListDatabasesResponse", name: "ListDatabasesResponse")
     ListSchemasRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ListSchemasRequest", name: "ListSchemasRequest")
     ListSchemasResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ListSchemasResponse", name: "ListSchemasResponse")
+    ListSessionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ListSessionsRequest", name: "ListSessionsRequest")
+    ListSessionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ListSessionsResponse", name: "ListSessionsResponse")
     ListStatementsLimit = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.redshiftdata#ListStatementsLimit", name: "ListStatementsLimit", traits: {"smithy.api#default" => 0, "smithy.api#range" => {"min" => 0, "max" => 100}})
     ListStatementsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ListStatementsRequest", name: "ListStatementsRequest")
     ListStatementsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ListStatementsResponse", name: "ListStatementsResponse")
@@ -61,13 +65,16 @@ module Aws::RedshiftData
     SchemaList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#SchemaList", name: "SchemaList")
     SecretArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#SecretArn", name: "SecretArn")
     SessionAliveSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.redshiftdata#SessionAliveSeconds", name: "SessionAliveSeconds", traits: {"smithy.api#range" => {"min" => 0, "max" => 86400}})
+    SessionData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#SessionData", name: "SessionData")
+    SessionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#SessionList", name: "SessionList")
+    SessionStatusString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#SessionStatusString", name: "SessionStatusString", traits: {"smithy.api#enum" => [{"name" => "AVAILABLE", "value" => "AVAILABLE"}, {"name" => "BUSY", "value" => "BUSY"}, {"name" => "CLOSED", "value" => "CLOSED"}]})
     SqlList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#SqlList", name: "SqlList", traits: {"smithy.api#length" => {"min" => 1, "max" => 40}})
     SqlParameter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#SqlParameter", name: "SqlParameter")
     SqlParametersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#SqlParametersList", name: "SqlParametersList", traits: {"smithy.api#length" => {"min" => 1}})
     SqlRecords = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#SqlRecords", name: "SqlRecords")
     StatementData = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#StatementData", name: "StatementData")
     StatementList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#StatementList", name: "StatementList")
-    StatementNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#StatementNameString", name: "StatementNameString", traits: {"smithy.api#length" => {"max" => 500}})
+    StatementNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#StatementNameString", name: "StatementNameString", traits: {"smithy.api#length" => {"max" => 2048}})
     StatementStatusString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#StatementStatusString", name: "StatementStatusString", traits: {"smithy.api#enum" => [{"name" => "SUBMITTED", "value" => "SUBMITTED"}, {"name" => "PICKED", "value" => "PICKED"}, {"name" => "STARTED", "value" => "STARTED"}, {"name" => "FINISHED", "value" => "FINISHED"}, {"name" => "ABORTED", "value" => "ABORTED"}, {"name" => "FAILED", "value" => "FAILED"}]})
     StatementString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#StatementString", name: "StatementString")
     StatementStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#StatementStringList", name: "StatementStringList")
@@ -77,15 +84,18 @@ module Aws::RedshiftData
     SubStatementList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#SubStatementList", name: "SubStatementList")
     TableList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.redshiftdata#TableList", name: "TableList")
     TableMember = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#TableMember", name: "TableMember")
-    UUID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#UUID", name: "UUID", traits: {"smithy.api#pattern" => "^[a-z0-9]{8}(-[a-z0-9]{4}){3}-[a-z0-9]{12}(:\\d+)?$"})
+    UUID = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#UUID", name: "UUID", traits: {"smithy.api#pattern" => "^[a-z0-9]{8}(-[a-z0-9]{4}){3}-[a-z0-9]{12}(:\\d{0,2})?$"})
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.redshiftdata#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
-    WorkgroupNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#WorkgroupNameString", name: "WorkgroupNameString", traits: {"smithy.api#length" => {"min" => 3, "max" => 128}, "smithy.api#pattern" => "^(([a-z0-9-]+)|(arn:(aws(-[a-z]+)*):redshift-serverless:[a-z]{2}(-gov|(-iso[a-z]?))?-[a-z]+-\\d{1}:\\d{12}:workgroup/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}))$"})
+    WaitTimeSeconds = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.redshiftdata#WaitTimeSeconds", name: "WaitTimeSeconds", traits: {"smithy.api#range" => {"min" => 1, "max" => 30}})
+    WorkgroupNameString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.redshiftdata#WorkgroupNameString", name: "WorkgroupNameString", traits: {"smithy.api#length" => {"min" => 3, "max" => 128}, "smithy.api#pattern" => "^([a-z0-9-]{3,63}|arn:(aws(-[a-z]+)*):redshift-serverless:([a-z]{2}(-gov|(-iso[a-z]?))?|eusc-[a-z]+)-[a-z]+-\\d{1}:\\d{12}:workgroup/([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|[a-z0-9-]{1,63}/[a-z0-9-]{1,63}))$"})
     Bool = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.redshiftdata#bool", name: "Bool", traits: {"smithy.api#default" => false})
 
     ActiveSessionsExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ActiveSessionsExceededException.type = Types::ActiveSessionsExceededException
     ActiveStatementsExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
     ActiveStatementsExceededException.type = Types::ActiveStatementsExceededException
+    ActiveWaitingRequestsExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message"))
+    ActiveWaitingRequestsExceededException.type = Types::ActiveWaitingRequestsExceededException
     BatchExecuteStatementException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     BatchExecuteStatementException.add_member(:statement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "StatementId", traits: {"smithy.api#required" => {}}))
     BatchExecuteStatementException.type = Types::BatchExecuteStatementException
@@ -96,11 +106,14 @@ module Aws::RedshiftData
     BatchExecuteStatementInput.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Database"))
     BatchExecuteStatementInput.add_member(:with_event, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "WithEvent"))
     BatchExecuteStatementInput.add_member(:statement_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementNameString, name: "StatementName"))
+    BatchExecuteStatementInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParametersList, name: "Parameters"))
     BatchExecuteStatementInput.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupNameString, name: "WorkgroupName"))
     BatchExecuteStatementInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    BatchExecuteStatementInput.add_member(:result_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultFormatString, name: "ResultFormat"))
     BatchExecuteStatementInput.add_member(:session_keep_alive_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionAliveSeconds, name: "SessionKeepAliveSeconds"))
     BatchExecuteStatementInput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "SessionId"))
-    BatchExecuteStatementInput.add_member(:result_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultFormatString, name: "ResultFormat"))
+    BatchExecuteStatementInput.add_member(:execution_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionMode, name: "ExecutionMode"))
+    BatchExecuteStatementInput.add_member(:wait_time_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitTimeSeconds, name: "WaitTimeSeconds"))
     BatchExecuteStatementInput.type = Types::BatchExecuteStatementInput
     BatchExecuteStatementOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id"))
     BatchExecuteStatementOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt"))
@@ -111,6 +124,9 @@ module Aws::RedshiftData
     BatchExecuteStatementOutput.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn"))
     BatchExecuteStatementOutput.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupNameString, name: "WorkgroupName"))
     BatchExecuteStatementOutput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "SessionId"))
+    BatchExecuteStatementOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementStatusString, name: "Status"))
+    BatchExecuteStatementOutput.add_member(:redshift_pid, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedLong, name: "RedshiftPid"))
+    BatchExecuteStatementOutput.add_member(:has_result_set, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "HasResultSet"))
     BatchExecuteStatementOutput.type = Types::BatchExecuteStatementOutput
     CancelStatementRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
     CancelStatementRequest.type = Types::CancelStatementRequest
@@ -137,6 +153,7 @@ module Aws::RedshiftData
     DatabaseList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     DbGroupList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
     DescribeStatementRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
+    DescribeStatementRequest.add_member(:wait_time_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitTimeSeconds, name: "WaitTimeSeconds"))
     DescribeStatementRequest.type = Types::DescribeStatementRequest
     DescribeStatementResponse.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
     DescribeStatementResponse.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn"))
@@ -157,8 +174,9 @@ module Aws::RedshiftData
     DescribeStatementResponse.add_member(:query_parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParametersList, name: "QueryParameters"))
     DescribeStatementResponse.add_member(:sub_statements, ::Smithy::Schema::Shapes::MemberShape.new(target: SubStatementList, name: "SubStatements"))
     DescribeStatementResponse.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupNameString, name: "WorkgroupName"))
-    DescribeStatementResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SessionId"))
     DescribeStatementResponse.add_member(:result_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultFormatString, name: "ResultFormat"))
+    DescribeStatementResponse.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "SessionId"))
+    DescribeStatementResponse.add_member(:execution_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: ExecutionMode, name: "ExecutionMode"))
     DescribeStatementResponse.type = Types::DescribeStatementResponse
     DescribeTableRequest.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterIdentifierString, name: "ClusterIdentifier"))
     DescribeTableRequest.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn"))
@@ -188,9 +206,10 @@ module Aws::RedshiftData
     ExecuteStatementInput.add_member(:parameters, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlParametersList, name: "Parameters"))
     ExecuteStatementInput.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupNameString, name: "WorkgroupName"))
     ExecuteStatementInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ClientToken, name: "ClientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    ExecuteStatementInput.add_member(:result_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultFormatString, name: "ResultFormat"))
     ExecuteStatementInput.add_member(:session_keep_alive_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionAliveSeconds, name: "SessionKeepAliveSeconds"))
     ExecuteStatementInput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "SessionId"))
-    ExecuteStatementInput.add_member(:result_format, ::Smithy::Schema::Shapes::MemberShape.new(target: ResultFormatString, name: "ResultFormat"))
+    ExecuteStatementInput.add_member(:wait_time_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitTimeSeconds, name: "WaitTimeSeconds"))
     ExecuteStatementInput.type = Types::ExecuteStatementInput
     ExecuteStatementOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id"))
     ExecuteStatementOutput.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt"))
@@ -201,6 +220,9 @@ module Aws::RedshiftData
     ExecuteStatementOutput.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn"))
     ExecuteStatementOutput.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupNameString, name: "WorkgroupName"))
     ExecuteStatementOutput.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "SessionId"))
+    ExecuteStatementOutput.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementStatusString, name: "Status"))
+    ExecuteStatementOutput.add_member(:redshift_pid, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedLong, name: "RedshiftPid"))
+    ExecuteStatementOutput.add_member(:has_result_set, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "HasResultSet"))
     ExecuteStatementOutput.type = Types::ExecuteStatementOutput
     Field.add_member(:is_null, Types::Field::IsNull, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "isNull"))
     Field.add_member(:boolean_value, Types::Field::BooleanValue, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedBoolean, name: "booleanValue"))
@@ -214,6 +236,7 @@ module Aws::RedshiftData
     FormattedSqlRecords.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: QueryRecords, name: "member"))
     GetStatementResultRequest.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
     GetStatementResultRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    GetStatementResultRequest.add_member(:wait_time_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitTimeSeconds, name: "WaitTimeSeconds"))
     GetStatementResultRequest.type = Types::GetStatementResultRequest
     GetStatementResultResponse.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: SqlRecords, name: "Records", traits: {"smithy.api#required" => {}}))
     GetStatementResultResponse.add_member(:column_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadataList, name: "ColumnMetadata"))
@@ -222,6 +245,7 @@ module Aws::RedshiftData
     GetStatementResultResponse.type = Types::GetStatementResultResponse
     GetStatementResultV2Request.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "Id", traits: {"smithy.api#required" => {}}))
     GetStatementResultV2Request.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    GetStatementResultV2Request.add_member(:wait_time_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: WaitTimeSeconds, name: "WaitTimeSeconds"))
     GetStatementResultV2Request.type = Types::GetStatementResultV2Request
     GetStatementResultV2Response.add_member(:records, ::Smithy::Schema::Shapes::MemberShape.new(target: FormattedSqlRecords, name: "Records", traits: {"smithy.api#required" => {}}))
     GetStatementResultV2Response.add_member(:column_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: ColumnMetadataList, name: "ColumnMetadata"))
@@ -232,7 +256,7 @@ module Aws::RedshiftData
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Message", traits: {"smithy.api#required" => {}}))
     InternalServerException.type = Types::InternalServerException
     ListDatabasesRequest.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterIdentifierString, name: "ClusterIdentifier"))
-    ListDatabasesRequest.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Database", traits: {"smithy.api#required" => {}}))
+    ListDatabasesRequest.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Database"))
     ListDatabasesRequest.add_member(:secret_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SecretArn, name: "SecretArn"))
     ListDatabasesRequest.add_member(:db_user, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DbUser"))
     ListDatabasesRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
@@ -255,6 +279,18 @@ module Aws::RedshiftData
     ListSchemasResponse.add_member(:schemas, ::Smithy::Schema::Shapes::MemberShape.new(target: SchemaList, name: "Schemas"))
     ListSchemasResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListSchemasResponse.type = Types::ListSchemasResponse
+    ListSessionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListSessionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListStatementsLimit, name: "MaxResults", traits: {"smithy.api#default" => 0}))
+    ListSessionsRequest.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "SessionId"))
+    ListSessionsRequest.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStatusString, name: "Status"))
+    ListSessionsRequest.add_member(:role_level, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "RoleLevel"))
+    ListSessionsRequest.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: ClusterIdentifierString, name: "ClusterIdentifier"))
+    ListSessionsRequest.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupNameString, name: "WorkgroupName"))
+    ListSessionsRequest.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Database"))
+    ListSessionsRequest.type = Types::ListSessionsRequest
+    ListSessionsResponse.add_member(:sessions, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionList, name: "Sessions", traits: {"smithy.api#required" => {}}))
+    ListSessionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
+    ListSessionsResponse.type = Types::ListSessionsResponse
     ListStatementsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "NextToken"))
     ListStatementsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ListStatementsLimit, name: "MaxResults", traits: {"smithy.api#default" => 0}))
     ListStatementsRequest.add_member(:statement_name, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementNameString, name: "StatementName"))
@@ -290,6 +326,19 @@ module Aws::RedshiftData
     ResourceNotFoundException.add_member(:resource_id, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ResourceId", traits: {"smithy.api#required" => {}}))
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     SchemaList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "member"))
+    SessionData.add_member(:session_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "SessionId", traits: {"smithy.api#required" => {}}))
+    SessionData.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionStatusString, name: "Status", traits: {"smithy.api#required" => {}}))
+    SessionData.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "CreatedAt", traits: {"smithy.api#required" => {}}))
+    SessionData.add_member(:updated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "UpdatedAt"))
+    SessionData.add_member(:database, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Database"))
+    SessionData.add_member(:db_user, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DbUser"))
+    SessionData.add_member(:cluster_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "ClusterIdentifier"))
+    SessionData.add_member(:workgroup_name, ::Smithy::Schema::Shapes::MemberShape.new(target: WorkgroupNameString, name: "WorkgroupName"))
+    SessionData.add_member(:session_alive_seconds, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionAliveSeconds, name: "SessionAliveSeconds"))
+    SessionData.add_member(:session_ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Timestamp, name: "SessionTtl"))
+    SessionData.add_member(:current_statement_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UUID, name: "CurrentStatementId"))
+    SessionData.type = Types::SessionData
+    SessionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SessionData, name: "member"))
     SqlList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: StatementString, name: "member"))
     SqlParameter.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterName, name: "name", traits: {"smithy.api#required" => {}}))
     SqlParameter.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: ParameterValue, name: "value", traits: {"smithy.api#required" => {}}))
@@ -336,7 +385,7 @@ module Aws::RedshiftData
       service.id = "com.amazonaws.redshiftdata#RedshiftData"
       service.name = "RedshiftData"
       service.version = "2019-12-20"
-      service.traits = {"aws.api#service" => {"sdkId" => "Redshift Data", "arnNamespace" => "redshift-data"}, "aws.auth#sigv4" => {"name" => "redshift-data"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Redshift Data API Service"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Redshift Data", "arnNamespace" => "redshift-data"}, "aws.auth#sigv4" => {"name" => "redshift-data"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Redshift Data API Service", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-data-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-data-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-data.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://redshift-data.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:batch_execute_statement, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.redshiftdata#BatchExecuteStatement"
         operation.name = "BatchExecuteStatement"
@@ -346,6 +395,7 @@ module Aws::RedshiftData
         operation.errors << ActiveStatementsExceededException
         operation.errors << BatchExecuteStatementException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {}
       end)
@@ -356,6 +406,7 @@ module Aws::RedshiftData
         operation.output = CancelStatementResponse
         operation.errors << DatabaseConnectionException
         operation.errors << InternalServerException
+        operation.errors << QueryTimeoutException
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {}
@@ -365,6 +416,7 @@ module Aws::RedshiftData
         operation.name = "DescribeStatement"
         operation.input = DescribeStatementRequest
         operation.output = DescribeStatementResponse
+        operation.errors << ActiveWaitingRequestsExceededException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
@@ -378,6 +430,7 @@ module Aws::RedshiftData
         operation.errors << DatabaseConnectionException
         operation.errors << InternalServerException
         operation.errors << QueryTimeoutException
+        operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::DescribeTable.new
@@ -391,6 +444,7 @@ module Aws::RedshiftData
         operation.errors << ActiveStatementsExceededException
         operation.errors << ExecuteStatementException
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {}
       end)
@@ -399,6 +453,7 @@ module Aws::RedshiftData
         operation.name = "GetStatementResult"
         operation.input = GetStatementResultRequest
         operation.output = GetStatementResultResponse
+        operation.errors << ActiveWaitingRequestsExceededException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
@@ -410,6 +465,7 @@ module Aws::RedshiftData
         operation.name = "GetStatementResultV2"
         operation.input = GetStatementResultV2Request
         operation.output = GetStatementResultV2Response
+        operation.errors << ActiveWaitingRequestsExceededException
         operation.errors << InternalServerException
         operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
@@ -424,6 +480,7 @@ module Aws::RedshiftData
         operation.errors << DatabaseConnectionException
         operation.errors << InternalServerException
         operation.errors << QueryTimeoutException
+        operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListDatabases.new
@@ -436,9 +493,21 @@ module Aws::RedshiftData
         operation.errors << DatabaseConnectionException
         operation.errors << InternalServerException
         operation.errors << QueryTimeoutException
+        operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListSchemas.new
+      end)
+      service.add_operation(:list_sessions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.redshiftdata#ListSessions"
+        operation.name = "ListSessions"
+        operation.input = ListSessionsRequest
+        operation.output = ListSessionsResponse
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#readonly" => {}}
+        operation[:paginator] = Paginators::ListSessions.new
       end)
       service.add_operation(:list_statements, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.redshiftdata#ListStatements"
@@ -446,6 +515,7 @@ module Aws::RedshiftData
         operation.input = ListStatementsRequest
         operation.output = ListStatementsResponse
         operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListStatements.new
@@ -458,6 +528,7 @@ module Aws::RedshiftData
         operation.errors << DatabaseConnectionException
         operation.errors << InternalServerException
         operation.errors << QueryTimeoutException
+        operation.errors << ResourceNotFoundException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#readonly" => {}}
         operation[:paginator] = Paginators::ListTables.new

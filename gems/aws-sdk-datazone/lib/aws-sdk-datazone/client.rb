@@ -144,18 +144,18 @@ module Aws::DataZone
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -266,6 +266,8 @@ module Aws::DataZone
     #   <p>A description that specifies the reason for accepting the specified subscription request.</p>
     # @option params [Array<Types::AcceptedAssetScope>] :asset_scopes
     #   <p>The asset scopes of the accept subscription request.</p>
+    # @option params [Array<Types::AssetPermission>] :asset_permissions
+    #   <p>The asset permissions of the accept subscription request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -275,6 +277,15 @@ module Aws::DataZone
     #       {
     #         asset_id: "AssetId", # required
     #         filter_ids: ["FilterId"], # required
+    #       }
+    #     ],
+    #     asset_permissions: [
+    #       {
+    #         asset_id: "AssetId", # required
+    #         permissions: { # required
+    #           # One of:
+    #           s3: ["READ" # One of: ["READ", "WRITE"]]
+    #         }
     #       }
     #     ]
     #   }
@@ -296,6 +307,30 @@ module Aws::DataZone
     #       project: {
     #         id: "ProjectId",
     #         name: "ProjectName"
+    #       },
+    #       user: {
+    #         id: "UserProfileId",
+    #         details: {
+    #           # One of:
+    #           iam: {
+    #             arn: "String",
+    #             principal_id: "String",
+    #             session_name: "String",
+    #             group_profile_id: "String"
+    #           },
+    #           sso: {
+    #             username: "UserProfileName",
+    #             first_name: "FirstName",
+    #             last_name: "LastName"
+    #           }
+    #         }
+    #       },
+    #       group: {
+    #         id: "GroupProfileId",
+    #         name: "GroupProfileName"
+    #       },
+    #       iam: {
+    #         principal_arn: "IamPrincipalArn"
     #       }
     #     }],
     #     subscribed_listings: [ # required
@@ -321,7 +356,12 @@ module Aws::DataZone
     #               asset_id: "AssetId", # required
     #               filter_ids: ["FilterId"], # required
     #               status: "String", # required
+    #               scope_name: "String",
     #               error_message: "String"
+    #             },
+    #             permissions: {
+    #               # One of:
+    #               s3: ["READ" # One of: ["READ", "WRITE"]]
     #             }
     #           },
     #           product_listing: {
@@ -571,6 +611,114 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Gets the attribute metadata.</p>
+    # @param [Hash, Types::BatchGetAttributesMetadataInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The domain ID where you want to get the attribute metadata.</p>
+    # @option params [String] :entity_type
+    #   <p>The entity type for which you want to get attribute metadata.</p>
+    # @option params [String] :entity_identifier
+    #   <p>The entity ID for which you want to get attribute metadata.</p>
+    # @option params [String] :entity_revision
+    #   <p>The entity revision for which you want to get attribute metadata.</p>
+    # @option params [Array<String>] :attribute_identifiers
+    #   <p>The attribute identifier.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     entity_type: "ASSET" # One of: ["ASSET", "LISTING"], # required
+    #     entity_identifier: "EntityId", # required
+    #     entity_revision: "Revision",
+    #     attribute_identifiers: ["AttributeIdentifier"], # required
+    #   }
+    #   options = {}
+    #   response = client.batch_get_attributes_metadata(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     attributes: [
+    #       {
+    #         attribute_identifier: "AttributeIdentifier", # required
+    #         forms: [
+    #           {
+    #             form_name: "FormName", # required
+    #             type_name: "FormTypeName",
+    #             type_revision: "Revision",
+    #             content: "String"
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     errors: [ # required
+    #       {
+    #         attribute_identifier: "AttributeIdentifier", # required
+    #         code: "String", # required
+    #         message: "String", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchGetAttributesMetadataOutput]
+    def batch_get_attributes_metadata(params = {}, options = {})
+      request = build_request(:batch_get_attributes_metadata, params)
+      request.send_request(options)
+    end
+
+    # <p>Writes the attribute metadata.</p>
+    # @param [Hash, Types::BatchPutAttributesMetadataInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The domain ID where you want to write the attribute metadata.</p>
+    # @option params [String] :entity_type
+    #   <p>The entity type for which you want to write the attribute metadata.</p>
+    # @option params [String] :entity_identifier
+    #   <p>The entity ID for which you want to write the attribute metadata.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @option params [Array<Types::AttributeInput>] :attributes
+    #   <p>The attributes of the metadata.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     entity_type: "ASSET" # One of: ["ASSET", "LISTING"], # required
+    #     entity_identifier: "EntityId", # required
+    #     client_token: "ClientToken",
+    #     attributes: [ # required
+    #       {
+    #         attribute_identifier: "AttributeIdentifier", # required
+    #         forms: [ # required
+    #           {
+    #             form_name: "FormName", # required
+    #             type_identifier: "FormTypeIdentifier",
+    #             type_revision: "RevisionInput",
+    #             content: "String"
+    #           }
+    #         ]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.batch_put_attributes_metadata(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     errors: [
+    #       {
+    #         attribute_identifier: "AttributeIdentifier", # required
+    #         code: "String", # required
+    #         message: "String", # required
+    #       }
+    #     ],
+    #     attributes: [
+    #       {
+    #         attribute_identifier: "AttributeIdentifier", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchPutAttributesMetadataOutput]
+    def batch_put_attributes_metadata(params = {}, options = {})
+      request = build_request(:batch_put_attributes_metadata, params)
+      request.send_request(options)
+    end
+
     # <p>Cancels the metadata generation run.</p> <p>Prerequisites:</p> <ul> <li> <p>The run must exist and be in a cancelable status (e.g., SUBMITTED, IN_PROGRESS). </p> </li> <li> <p>Runs in SUCCEEDED status cannot be cancelled.</p> </li> <li> <p>User must have access to the run and cancel permissions.</p> </li> </ul>
     # @param [Hash, Types::CancelMetadataGenerationRunInput] params
     # @option params [String] :domain_identifier
@@ -621,6 +769,30 @@ module Aws::DataZone
     #       project: {
     #         id: "ProjectId",
     #         name: "ProjectName"
+    #       },
+    #       user: {
+    #         id: "UserProfileId",
+    #         details: {
+    #           # One of:
+    #           iam: {
+    #             arn: "String",
+    #             principal_id: "String",
+    #             session_name: "String",
+    #             group_profile_id: "String"
+    #           },
+    #           sso: {
+    #             username: "UserProfileName",
+    #             first_name: "FirstName",
+    #             last_name: "LastName"
+    #           }
+    #         }
+    #       },
+    #       group: {
+    #         id: "GroupProfileId",
+    #         name: "GroupProfileName"
+    #       },
+    #       iam: {
+    #         principal_arn: "IamPrincipalArn"
     #       }
     #     },
     #     subscribed_listing: { # required
@@ -645,7 +817,12 @@ module Aws::DataZone
     #             asset_id: "AssetId", # required
     #             filter_ids: ["FilterId"], # required
     #             status: "String", # required
+    #             scope_name: "String",
     #             error_message: "String"
+    #           },
+    #           permissions: {
+    #             # One of:
+    #             s3: ["READ" # One of: ["READ", "WRITE"]]
     #           }
     #         },
     #         product_listing: {
@@ -1205,6 +1382,8 @@ module Aws::DataZone
     #   <p>The location where the connection is created.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
+    # @option params [Array<Types::Configuration>] :configurations
+    #   <p>The configurations of the connection.</p>
     # @option params [String] :description
     #   <p>A connection description.</p>
     # @option params [String] :domain_identifier
@@ -1215,6 +1394,10 @@ module Aws::DataZone
     #   <p>The connection name.</p>
     # @option params [Types::ConnectionPropertiesInput] :props
     #   <p>The connection props.</p>
+    # @option params [Boolean] :enable_trusted_identity_propagation
+    #   <p>Specifies whether the trusted identity propagation is enabled.</p>
+    # @option params [String] :scope
+    #   <p>The scope of the connection.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     aws_location: {
@@ -1224,9 +1407,17 @@ module Aws::DataZone
     #       iam_connection_id: "ConnectionId"
     #     },
     #     client_token: "String",
+    #     configurations: [
+    #       {
+    #         classification: "String",
+    #         properties: {
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
     #     description: "Description",
     #     domain_identifier: "DomainId", # required
-    #     environment_identifier: "EnvironmentId", # required
+    #     environment_identifier: "EnvironmentId",
     #     name: "ConnectionName", # required
     #     props: {
     #       # One of:
@@ -1298,7 +1489,8 @@ module Aws::DataZone
     #         cluster_name: "String", # required
     #       },
     #       iam_properties: {
-    #         glue_lineage_sync_enabled: false
+    #         glue_lineage_sync_enabled: false,
+    #         role_arn: "RoleArn"
     #       },
     #       redshift_properties: {
     #         storage: {
@@ -1339,6 +1531,7 @@ module Aws::DataZone
     #           connection: "String"
     #         },
     #         glue_connection_name: "String",
+    #         glue_connection_names: ["GlueConnectionName"],
     #         glue_version: "String",
     #         idle_timeout: 1,
     #         java_virtual_env: "String",
@@ -1348,9 +1541,107 @@ module Aws::DataZone
     #       },
     #       s3_properties: {
     #         s3_uri: "S3Uri", # required
-    #         s3_access_grant_location_id: "S3AccessGrantLocationId"
+    #         s3_access_grant_location_id: "S3AccessGrantLocationId",
+    #         register_s3_access_grant_location: false
+    #       },
+    #       snowflake_properties: {
+    #         connectivity_properties: {
+    #           connection_properties: {
+    #             "String" => "String"
+    #           },
+    #           physical_connection_requirements: {
+    #             subnet_id: "SubnetId",
+    #             subnet_id_list: ["SubnetId"],
+    #             security_group_id_list: ["String"],
+    #             availability_zone: "String"
+    #           },
+    #           name: "String",
+    #           description: "String",
+    #           validate_credentials: false,
+    #           validate_for_compute_environments: ["SPARK" # One of: ["SPARK", "ATHENA", "PYTHON"]],
+    #           spark_properties: {
+    #             "String" => "String"
+    #           },
+    #           athena_properties: {
+    #             "String" => "String"
+    #           },
+    #           python_properties: {
+    #             "String" => "String"
+    #           },
+    #           authentication_configuration: {
+    #             authentication_type: "BASIC" # One of: ["BASIC", "OAUTH2", "CUSTOM"],
+    #             o_auth2_properties: {
+    #               o_auth2_grant_type: "AUTHORIZATION_CODE" # One of: ["AUTHORIZATION_CODE", "CLIENT_CREDENTIALS", "JWT_BEARER"],
+    #               o_auth2_client_application: {
+    #                 user_managed_client_application_client_id: "String",
+    #                 a_ws_managed_client_application_reference: "String"
+    #               },
+    #               token_url: "String",
+    #               token_url_parameters_map: {
+    #                 "String" => "String"
+    #               },
+    #               authorization_code_properties: {
+    #                 authorization_code: "String",
+    #                 redirect_uri: "String"
+    #               },
+    #               o_auth2_credentials: {
+    #                 user_managed_client_application_client_secret: "String",
+    #                 access_token: "String",
+    #                 refresh_token: "String",
+    #                 jwt_token: "String"
+    #               }
+    #             },
+    #             secret_arn: "String",
+    #             kms_key_arn: "String",
+    #             basic_authentication_credentials: {
+    #               user_name: "String",
+    #               password: "String"
+    #             },
+    #             custom_authentication_credentials: {
+    #               "String" => "String"
+    #             }
+    #           }
+    #         },
+    #         snowflake_role: "SnowflakeRole", # required
+    #         identity_mapping: { # required
+    #           username_attribute: "String", # required
+    #           prefix: "String"
+    #         },
+    #         lineage_sync: {
+    #           timezone: "UTC" # One of: ["UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"],
+    #           enabled: false, # required
+    #           schedule: "LineageSyncScheduleCronString"
+    #         }
+    #       },
+    #       amazon_q_properties: {
+    #         is_enabled: false, # required
+    #         profile_arn: "String",
+    #         auth_mode: "String"
+    #       },
+    #       mlflow_properties: {
+    #         tracking_server_arn: "String"
+    #       },
+    #       workflows_mwaa_properties: {
+    #         mwaa_environment_name: "String"
+    #       },
+    #       workflows_serverless_properties: {
+    #       },
+    #       lakehouse_properties: {
+    #         glue_lineage_sync_enabled: false
+    #       },
+    #       vpc_properties: {
+    #         vpc_id: "VpcId", # required
+    #         subnet_ids: ["SubnetId"], # required
+    #         security_group_id: "SecurityGroupId"
+    #       },
+    #       git_properties: {
+    #         code_connection_arn: "String", # required
+    #         repository_id: "String", # required
+    #         default_branch: "String", # required
     #       }
-    #     }
+    #     },
+    #     enable_trusted_identity_propagation: false,
+    #     scope: "DOMAIN" # One of: ["DOMAIN", "PROJECT"]
     #   }
     #   options = {}
     #   response = client.create_connection(params, options)
@@ -1358,6 +1649,14 @@ module Aws::DataZone
     #   response.to_h #=>
     #   {
     #     connection_id: "ConnectionId", # required
+    #     configurations: [
+    #       {
+    #         classification: "String",
+    #         properties: {
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
     #     description: "Description",
     #     domain_id: "DomainId", # required
     #     domain_unit_id: "DomainUnitId", # required
@@ -1372,10 +1671,11 @@ module Aws::DataZone
     #           iam_connection_id: "ConnectionId"
     #         },
     #         glue_connection_name: "String",
+    #         glue_connection_names: ["GlueConnectionName"],
     #         glue_connection: {
     #           name: "String",
     #           description: "String",
-    #           connection_type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"],
+    #           connection_type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"],
     #           match_criteria: ["String"],
     #           connection_properties: {
     #             "String" => "String"
@@ -1429,6 +1729,7 @@ module Aws::DataZone
     #           connection_schema_version: 1,
     #           compatible_compute_environments: ["SPARK" # One of: ["SPARK", "ATHENA", "PYTHON"]]
     #         },
+    #         enable_trusted_identity_propagation: false,
     #         host: "String",
     #         port: 1,
     #         protocol: "ATHENA" # One of: ["ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"],
@@ -1509,6 +1810,7 @@ module Aws::DataZone
     #           connection: "String"
     #         },
     #         glue_connection_name: "String",
+    #         glue_connection_names: ["GlueConnectionName"],
     #         glue_version: "String",
     #         idle_timeout: 1,
     #         java_virtual_env: "String",
@@ -1519,11 +1821,58 @@ module Aws::DataZone
     #       s3_properties: {
     #         s3_uri: "S3Uri", # required
     #         s3_access_grant_location_id: "S3AccessGrantLocationId",
+    #         register_s3_access_grant_location: false,
+    #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"],
+    #         error_message: "String"
+    #       },
+    #       snowflake_properties: {
+    #         snowflake_role: "SnowflakeRole", # required
+    #         identity_mapping: { # required
+    #           username_attribute: "String", # required
+    #           prefix: "String"
+    #         },
+    #         lineage_sync: { # required
+    #           lineage_job_id: "String",
+    #           timezone: "UTC" # One of: ["UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"],
+    #           enabled: false,
+    #           schedule: "LineageSyncScheduleCronString"
+    #         },
+    #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"], # required
+    #         error_message: "String"
+    #       },
+    #       amazon_q_properties: {
+    #         is_enabled: false, # required
+    #         profile_arn: "String",
+    #         auth_mode: "String"
+    #       },
+    #       mlflow_properties: {
+    #         tracking_server_arn: "String"
+    #       },
+    #       workflows_mwaa_properties: {
+    #         mwaa_environment_name: "String"
+    #       },
+    #       workflows_serverless_properties: {
+    #       },
+    #       lakehouse_properties: {
+    #         glue_lineage_sync_enabled: false
+    #       },
+    #       vpc_properties: {
+    #         vpc_id: "VpcId", # required
+    #         subnet_ids: ["SubnetId"], # required
+    #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"], # required
+    #         security_group_id: "SecurityGroupId",
+    #         glue_connection_names: ["GlueConnectionName"]
+    #       },
+    #       git_properties: {
+    #         code_connection_arn: "String", # required
+    #         repository_id: "String", # required
+    #         default_branch: "String", # required
     #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"],
     #         error_message: "String"
     #       }
     #     },
-    #     type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"], # required
+    #     type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"], # required
+    #     scope: "DOMAIN" # One of: ["DOMAIN", "PROJECT"]
     #   }
     # @return [Types::CreateConnectionOutput]
     def create_connection(params = {}, options = {})
@@ -1944,7 +2293,7 @@ module Aws::DataZone
     #       user_assignment: "AUTOMATIC" # One of: ["AUTOMATIC", "MANUAL"],
     #       idc_instance_arn: "String"
     #     },
-    #     domain_execution_role: "RoleArn", # required
+    #     domain_execution_role: "RoleArn",
     #     kms_key_identifier: "KmsKeyArn",
     #     tags: {
     #       "TagKey" => "TagValue"
@@ -2054,11 +2403,13 @@ module Aws::DataZone
     # @option params [String] :environment_account_region
     #   <p>The region of the account in which the environment is being created.</p>
     # @option params [String] :environment_blueprint_identifier
-    #   <p>The ID of the blueprint with which the environment is being created.</p>
+    #   <p>The ID of the blueprint with which the environment is being created.</p> <note> <p>This parameter is only valid for V1 domains. If provided for a V2 domain, the service returns a ValidationException.</p> </note>
     # @option params [Integer] :deployment_order
     #   <p>The deployment order of the environment.</p>
     # @option params [String] :environment_configuration_id
     #   <p>The configuration ID of the environment.</p>
+    # @option params [String] :environment_configuration_name
+    #   <p>The configuration name of the environment.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     project_identifier: "ProjectId", # required
@@ -2077,7 +2428,8 @@ module Aws::DataZone
     #     environment_account_region: "String",
     #     environment_blueprint_identifier: "String",
     #     deployment_order: 1,
-    #     environment_configuration_id: "String"
+    #     environment_configuration_id: "String",
+    #     environment_configuration_name: "EnvironmentConfigurationName"
     #   }
     #   options = {}
     #   response = client.create_environment(params, options)
@@ -2151,7 +2503,8 @@ module Aws::DataZone
     #       end_timeout_minutes: 1
     #     },
     #     environment_blueprint_id: "EnvironmentBlueprintId",
-    #     environment_configuration_id: "EnvironmentConfigurationId"
+    #     environment_configuration_id: "EnvironmentConfigurationId",
+    #     environment_configuration_name: "EnvironmentConfigurationName"
     #   }
     # @return [Types::CreateEnvironmentOutput]
     def create_environment(params = {}, options = {})
@@ -2219,6 +2572,8 @@ module Aws::DataZone
     #   <p>The provisioning properties of this Amazon DataZone blueprint.</p>
     # @option params [Array<Types::CustomParameter>] :user_parameters
     #   <p>The user parameters of this Amazon DataZone blueprint.</p>
+    # @option params [String] :blueprint_category
+    #   <p>The category of the Amazon DataZone blueprint. The only valid value is <code>TOOLING</code>, which creates a blueprint that provisions the tooling resources of a project.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -2240,7 +2595,8 @@ module Aws::DataZone
     #         is_optional: false,
     #         is_update_supported: false
     #       }
-    #     ]
+    #     ],
+    #     blueprint_category: "TOOLING" # One of: ["TOOLING"]
     #   }
     #   options = {}
     #   response = client.create_environment_blueprint(params, options)
@@ -2273,6 +2629,7 @@ module Aws::DataZone
     #       }
     #     ],
     #     glossary_terms: ["GlossaryTermId"],
+    #     blueprint_category: "TOOLING" # One of: ["TOOLING"],
     #     created_at: Time.now,
     #     updated_at: Time.now
     #   }
@@ -2502,12 +2859,15 @@ module Aws::DataZone
     #   <p>The identifier of the Amazon DataZone domain in which the group profile is created.</p>
     # @option params [String] :group_identifier
     #   <p>The identifier of the group for which the group profile is created.</p>
+    # @option params [String] :role_principal_arn
+    #   <p>The ARN of the IAM role that will be associated with the group profile. This role defines the permissions that group members will assume when accessing Amazon DataZone resources.</p>
     # @option params [String] :client_token
     #   <p> A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
-    #     group_identifier: "GroupIdentifier", # required
+    #     group_identifier: "GroupIdentifier",
+    #     role_principal_arn: "String",
     #     client_token: "String"
     #   }
     #   options = {}
@@ -2518,7 +2878,9 @@ module Aws::DataZone
     #     domain_id: "DomainId",
     #     id: "GroupProfileId",
     #     status: "ASSIGNED" # One of: ["ASSIGNED", "NOT_ASSIGNED"],
-    #     group_name: "GroupProfileName"
+    #     group_name: "GroupProfileName",
+    #     role_principal_arn: "String",
+    #     role_principal_id: "String"
     #   }
     # @return [Types::CreateGroupProfileOutput]
     def create_group_profile(params = {}, options = {})
@@ -2564,6 +2926,95 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Creates a <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html">notebook</a> in Amazon SageMaker Unified Studio. A notebook is a collaborative document within a project that contains code cells for interactive computing.</p>
+    # @param [Hash, Types::CreateNotebookInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to create the notebook.</p>
+    # @option params [String] :owning_project_identifier
+    #   <p>The identifier of the project that owns the notebook.</p>
+    # @option params [String] :name
+    #   <p>The name of the notebook. The name must be between 1 and 256 characters.</p>
+    # @option params [String] :description
+    #   <p>The description of the notebook.</p>
+    # @option params [String] :type
+    #   <p>The type of the notebook.</p>
+    # @option params [Hash<String, String>] :metadata
+    #   <p>The metadata for the notebook, specified as key-value pairs. You can specify up to 50 entries, with keys up to 128 characters and values up to 1024 characters.</p>
+    # @option params [Hash<String, String>] :parameters
+    #   <p>The sensitive parameters for the notebook, specified as key-value pairs. You can specify up to 50 entries, with keys up to 128 characters and values up to 1024 characters.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     name: "NotebookName", # required
+    #     description: "Description",
+    #     type: "DATA" # One of: ["DATA", "SQL"],
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue"
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_notebook(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "NotebookId", # required
+    #     name: "NotebookName", # required
+    #     owning_project_id: "ProjectId", # required
+    #     domain_id: "DomainId", # required
+    #     cell_order: [ # required
+    #       {
+    #       }
+    #     ],
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"], # required
+    #     type: "DATA" # One of: ["DATA", "SQL"],
+    #     description: "Description",
+    #     created_at: Time.now,
+    #     created_by: "CreatedBy",
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy",
+    #     locked_by: "String",
+    #     locked_at: Time.now,
+    #     lock_expires_at: Time.now,
+    #     compute_id: "ComputeId",
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue"
+    #     },
+    #     environment_configuration: {
+    #       image_version: "String",
+    #       package_config: {
+    #         package_manager: "UV" # One of: ["UV"], # required
+    #         package_specification: "String"
+    #       }
+    #     },
+    #     error: {
+    #       message: "String", # required
+    #     },
+    #     git_metadata: {
+    #       connection_id: "GitConnectionId", # required
+    #       repository: "GitRepository", # required
+    #       branch: "GitBranch", # required
+    #       commit_hash: "CommitHash", # required
+    #       file_name: "FileName",
+    #       committed_at: Time.now,
+    #       commit_message: "CommitMessage"
+    #     }
+    #   }
+    # @return [Types::CreateNotebookOutput]
+    def create_notebook(params = {}, options = {})
+      request = build_request(:create_notebook, params)
+      request.send_request(options)
+    end
+
     # <p>Creates an Amazon DataZone project.</p>
     # @param [Hash, Types::CreateProjectInput] params
     # @option params [String] :domain_identifier
@@ -2572,6 +3023,8 @@ module Aws::DataZone
     #   <p>The name of the Amazon DataZone project.</p>
     # @option params [String] :description
     #   <p>The description of the Amazon DataZone project.</p>
+    # @option params [Hash<String, String>] :resource_tags
+    #   <p>The resource tags of the project.</p>
     # @option params [Array<String>] :glossary_terms
     #   <p>The glossary terms that can be used in this Amazon DataZone project.</p>
     # @option params [String] :domain_unit_id
@@ -2580,11 +3033,20 @@ module Aws::DataZone
     #   <p>The ID of the project profile.</p>
     # @option params [Array<Types::EnvironmentConfigurationUserParameter>] :user_parameters
     #   <p>The user parameters of the project.</p>
+    # @option params [String] :project_category
+    #   <p>The category of the project. Set to 'ADMIN' designates this as an administrative project for the Amazon DataZone domain.</p>
+    # @option params [String] :project_execution_role
+    #   <p>The default project IAM role that is used to access project resources and run computes such as Glue and Sagemaker.</p>
+    # @option params [Array<Types::ProjectMembershipAssignment>] :membership_assignments
+    #   <p>The members to be assigned to the project.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
     #     name: "ProjectName", # required
     #     description: "Description",
+    #     resource_tags: {
+    #       "TagKey" => "TagValue"
+    #     },
     #     glossary_terms: ["GlossaryTermId"],
     #     domain_unit_id: "DomainUnitId",
     #     project_profile_id: "ProjectProfileId",
@@ -2603,6 +3065,18 @@ module Aws::DataZone
     #             value: "String"
     #           }
     #         ]
+    #       }
+    #     ],
+    #     project_category: "String",
+    #     project_execution_role: "RoleArn",
+    #     membership_assignments: [
+    #       {
+    #         member: { # required
+    #           # One of:
+    #           user_identifier: "String",
+    #           group_identifier: "String"
+    #         },
+    #         designation: "PROJECT_OWNER" # One of: ["PROJECT_OWNER", "PROJECT_CONTRIBUTOR", "PROJECT_CATALOG_VIEWER", "PROJECT_CATALOG_CONSUMER", "PROJECT_CATALOG_STEWARD"], # required
     #       }
     #     ]
     #   }
@@ -2625,6 +3099,13 @@ module Aws::DataZone
     #     created_by: "CreatedBy", # required
     #     created_at: Time.now,
     #     last_updated_at: Time.now,
+    #     resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #         source: "PROJECT" # One of: ["PROJECT", "PROJECT_PROFILE"], # required
+    #       }
+    #     ],
     #     glossary_terms: ["GlossaryTermId"],
     #     domain_unit_id: "DomainUnitId",
     #     project_profile_id: "ProjectProfileId",
@@ -2655,7 +3136,8 @@ module Aws::DataZone
     #           }
     #         ]
     #       }
-    #     }
+    #     },
+    #     project_category: "String"
     #   }
     # @return [Types::CreateProjectOutput]
     def create_project(params = {}, options = {})
@@ -2705,6 +3187,12 @@ module Aws::DataZone
     #   <p>A description of a project profile.</p>
     # @option params [String] :status
     #   <p>Project profile status.</p>
+    # @option params [Array<Types::ResourceTagParameter>] :project_resource_tags
+    #   <p>The resource tags of the project profile.</p>
+    # @option params [Boolean] :allow_custom_project_resource_tags
+    #   <p>Specifies whether custom project resource tags are supported.</p>
+    # @option params [String] :project_resource_tags_description
+    #   <p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>
     # @option params [Array<Types::EnvironmentConfiguration>] :environment_configurations
     #   <p>Environment configurations of the project profile.</p>
     # @option params [String] :domain_unit_identifier
@@ -2715,6 +3203,15 @@ module Aws::DataZone
     #     name: "ProjectProfileName", # required
     #     description: "Description",
     #     status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     project_resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #         is_value_editable: false, # required
+    #       }
+    #     ],
+    #     allow_custom_project_resource_tags: false,
+    #     project_resource_tags_description: "Description",
     #     environment_configurations: [
     #       {
     #         name: "EnvironmentConfigurationName", # required
@@ -2765,6 +3262,15 @@ module Aws::DataZone
     #     name: "ProjectProfileName", # required
     #     description: "Description",
     #     status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     project_resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #         is_value_editable: false, # required
+    #       }
+    #     ],
+    #     allow_custom_project_resource_tags: false,
+    #     project_resource_tags_description: "Description",
     #     environment_configurations: [
     #       {
     #         name: "EnvironmentConfigurationName", # required
@@ -2864,6 +3370,9 @@ module Aws::DataZone
     #             type_revision: "Revision", # required
     #           }
     #         ]
+    #       },
+    #       glossary_term_enforcement_detail: {
+    #         required_glossary_term_ids: ["GlossaryTermId"]
     #       }
     #     },
     #     description: "Description",
@@ -2876,7 +3385,7 @@ module Aws::DataZone
     #   {
     #     identifier: "RuleId", # required
     #     name: "RuleName", # required
-    #     rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT"], # required
+    #     rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"], # required
     #     target: { # required
     #       # One of:
     #       domain_unit_target: {
@@ -2905,6 +3414,9 @@ module Aws::DataZone
     #             type_revision: "Revision", # required
     #           }
     #         ]
+    #       },
+    #       glossary_term_enforcement_detail: {
+    #         required_glossary_term_ids: ["GlossaryTermId"]
     #       }
     #     },
     #     target_type: "DOMAIN_UNIT" # One of: ["DOMAIN_UNIT"],
@@ -2963,6 +3475,7 @@ module Aws::DataZone
     #     domain_id: "DomainId", # required
     #     created_at: Time.now, # required
     #     updated_at: Time.now, # required
+    #     environment_id: "EnvironmentId",
     #     subscription_target_id: "SubscriptionTargetId", # required
     #     granted_entity: { # required
     #       # One of:
@@ -2987,7 +3500,12 @@ module Aws::DataZone
     #           asset_id: "AssetId", # required
     #           filter_ids: ["FilterId"], # required
     #           status: "String", # required
+    #           scope_name: "String",
     #           error_message: "String"
+    #         },
+    #         permissions: {
+    #           # One of:
+    #           s3: ["READ" # One of: ["READ", "WRITE"]]
     #         }
     #       }
     #     ],
@@ -3013,6 +3531,10 @@ module Aws::DataZone
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @option params [Array<Types::FormInput>] :metadata_forms
     #   <p>The metadata form included in the subscription request.</p>
+    # @option params [Array<Types::AssetPermission>] :asset_permissions
+    #   <p>The asset permissions of the subscription request.</p>
+    # @option params [Array<Types::AcceptedAssetScope>] :asset_scopes
+    #   <p>The asset scopes of the subscription request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -3020,6 +3542,15 @@ module Aws::DataZone
     #       # One of:
     #       project: {
     #         identifier: "ProjectId"
+    #       },
+    #       user: {
+    #         identifier: "UserProfileId"
+    #       },
+    #       group: {
+    #         identifier: "GroupProfileId"
+    #       },
+    #       iam: {
+    #         identifier: "IamPrincipalArn"
     #       }
     #     }],
     #     subscribed_listings: [ # required
@@ -3035,6 +3566,21 @@ module Aws::DataZone
     #         type_identifier: "FormTypeIdentifier",
     #         type_revision: "RevisionInput",
     #         content: "String"
+    #       }
+    #     ],
+    #     asset_permissions: [
+    #       {
+    #         asset_id: "AssetId", # required
+    #         permissions: { # required
+    #           # One of:
+    #           s3: ["READ" # One of: ["READ", "WRITE"]]
+    #         }
+    #       }
+    #     ],
+    #     asset_scopes: [
+    #       {
+    #         asset_id: "AssetId", # required
+    #         filter_ids: ["FilterId"], # required
     #       }
     #     ]
     #   }
@@ -3056,6 +3602,30 @@ module Aws::DataZone
     #       project: {
     #         id: "ProjectId",
     #         name: "ProjectName"
+    #       },
+    #       user: {
+    #         id: "UserProfileId",
+    #         details: {
+    #           # One of:
+    #           iam: {
+    #             arn: "String",
+    #             principal_id: "String",
+    #             session_name: "String",
+    #             group_profile_id: "String"
+    #           },
+    #           sso: {
+    #             username: "UserProfileName",
+    #             first_name: "FirstName",
+    #             last_name: "LastName"
+    #           }
+    #         }
+    #       },
+    #       group: {
+    #         id: "GroupProfileId",
+    #         name: "GroupProfileName"
+    #       },
+    #       iam: {
+    #         principal_arn: "IamPrincipalArn"
     #       }
     #     }],
     #     subscribed_listings: [ # required
@@ -3081,7 +3651,12 @@ module Aws::DataZone
     #               asset_id: "AssetId", # required
     #               filter_ids: ["FilterId"], # required
     #               status: "String", # required
+    #               scope_name: "String",
     #               error_message: "String"
+    #             },
+    #             permissions: {
+    #               # One of:
+    #               s3: ["READ" # One of: ["READ", "WRITE"]]
     #             }
     #           },
     #           product_listing: {
@@ -3148,6 +3723,8 @@ module Aws::DataZone
     #   <p>The provider of the subscription target.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
+    # @option params [String] :subscription_grant_creation_mode
+    #   <p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -3164,7 +3741,8 @@ module Aws::DataZone
     #     manage_access_role: "IamRoleArn", # required
     #     applicable_asset_types: ["TypeName"], # required
     #     provider: "String",
-    #     client_token: "String"
+    #     client_token: "String",
+    #     subscription_grant_creation_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "MANUAL"]
     #   }
     #   options = {}
     #   response = client.create_subscription_target(params, options)
@@ -3191,6 +3769,7 @@ module Aws::DataZone
     #       }
     #     ],
     #     provider: "String", # required
+    #     subscription_grant_creation_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "MANUAL"]
     #   }
     # @return [Types::CreateSubscriptionTargetOutput]
     def create_subscription_target(params = {}, options = {})
@@ -3206,13 +3785,16 @@ module Aws::DataZone
     #   <p>The identifier of the user for which the user profile is created.</p>
     # @option params [String] :user_type
     #   <p>The user type of the user for which the user profile is created.</p>
+    # @option params [String] :session_name
+    #   <p>The session name for IAM role sessions.</p>
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
     #     user_identifier: "UserIdentifier", # required
-    #     user_type: "IAM_USER" # One of: ["IAM_USER", "IAM_ROLE", "SSO_USER"],
+    #     user_type: "IAM_USER" # One of: ["IAM_USER", "IAM_ROLE", "SSO_USER", "IAM_ROLE_SESSION"],
+    #     session_name: "String",
     #     client_token: "String"
     #   }
     #   options = {}
@@ -3228,7 +3810,9 @@ module Aws::DataZone
     #       # One of:
     #       iam: {
     #         arn: "String",
-    #         principal_id: "String"
+    #         principal_id: "String",
+    #         session_name: "String",
+    #         group_profile_id: "String"
     #       },
     #       sso: {
     #         username: "UserProfileName",
@@ -3355,6 +3939,25 @@ module Aws::DataZone
     # @return [Types::DeleteConnectionOutput]
     def delete_connection(params = {}, options = {})
       request = build_request(:delete_connection, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes data export configuration for a domain.</p> <p>This operation does not delete the S3 table created by the PutDataExportConfiguration operation.</p> <p>To temporarily disable export without deleting the configuration, use the PutDataExportConfiguration operation with the <code>--no-enable-export</code> flag instead. This allows you to re-enable export for the same domain using the <code>--enable-export</code> flag without deleting S3 table.</p>
+    # @param [Hash, Types::DeleteDataExportConfigurationInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The domain ID for which you want to delete the data export configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_data_export_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteDataExportConfigurationOutput]
+    def delete_data_export_configuration(params = {}, options = {})
+      request = build_request(:delete_data_export_configuration, params)
       request.send_request(options)
     end
 
@@ -3533,12 +4136,15 @@ module Aws::DataZone
     # @option params [String] :client_token
     #   <p>A unique, case-sensitive identifier that is provided to ensure the idempotency of the request.</p>
     # @option params [Boolean] :skip_deletion_check
-    #   <p>Specifies the optional flag to delete all child entities within the domain.</p>
+    #   <p>Specifies whether to skip the check that prevents deletion of a domain that still contains resources. When you use this parameter, Amazon DataZone deletes the domain but might not remove its associated resources, which can leave orphaned resources behind. To delete a domain and fully clean up its associated resources, use <code>cascadeDelete</code> instead. You can't use this parameter together with <code>cascadeDelete</code>.</p>
+    # @option params [Boolean] :cascade_delete
+    #   <p>Specifies whether to delete the domain along with all of its associated resources. When you use this parameter, Amazon DataZone deletes the domain and cleanly removes its associated resources without leaving orphaned resources behind. Amazon DataZone reports deletion progress in the <code>deleteProgress</code> field. Amazon DataZone reports any resources that it can't delete in the <code>failureReasons</code> field of the <code>GetDomain</code> response. You can't use this parameter together with <code>skipDeletionCheck</code>. If you don't specify a value, the default is <code>false</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identifier: "DomainId", # required
     #     client_token: "String",
-    #     skip_deletion_check: false
+    #     skip_deletion_check: false,
+    #     cascade_delete: false
     #   }
     #   options = {}
     #   response = client.delete_domain(params, options)
@@ -3754,6 +4360,32 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Deletes the specified lineage event.</p>
+    # @param [Hash, Types::DeleteLineageEventInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The ID of the domain.</p>
+    # @option params [String] :identifier
+    #   <p>The ID of the lineage event.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "LineageEventIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_lineage_event(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "LineageEventIdentifier",
+    #     domain_id: "DomainId",
+    #     processing_status: "REQUESTED" # One of: ["REQUESTED", "PROCESSING", "SUCCESS", "FAILED"]
+    #   }
+    # @return [Types::DeleteLineageEventOutput]
+    def delete_lineage_event(params = {}, options = {})
+      request = build_request(:delete_lineage_event, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a listing (a record of an asset at a given time).</p>
     # @param [Hash, Types::DeleteListingInput] params
     # @option params [String] :domain_identifier
@@ -3773,6 +4405,28 @@ module Aws::DataZone
     # @return [Types::DeleteListingOutput]
     def delete_listing(params = {}, options = {})
       request = build_request(:delete_listing, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html">notebook</a> in Amazon SageMaker Unified Studio.</p>
+    # @param [Hash, Types::DeleteNotebookInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook exists.</p>
+    # @option params [String] :identifier
+    #   <p>The identifier of the notebook to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "NotebookId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_notebook(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteNotebookOutput]
+    def delete_notebook(params = {}, options = {})
+      request = build_request(:delete_notebook, params)
       request.send_request(options)
     end
 
@@ -3896,6 +4550,7 @@ module Aws::DataZone
     #     domain_id: "DomainId", # required
     #     created_at: Time.now, # required
     #     updated_at: Time.now, # required
+    #     environment_id: "EnvironmentId",
     #     subscription_target_id: "SubscriptionTargetId", # required
     #     granted_entity: { # required
     #       # One of:
@@ -3920,7 +4575,12 @@ module Aws::DataZone
     #           asset_id: "AssetId", # required
     #           filter_ids: ["FilterId"], # required
     #           status: "String", # required
+    #           scope_name: "String",
     #           error_message: "String"
+    #         },
+    #         permissions: {
+    #           # One of:
+    #           s3: ["READ" # One of: ["READ", "WRITE"]]
     #         }
     #       }
     #     ],
@@ -4353,6 +5013,14 @@ module Aws::DataZone
     #       session_token: "String",
     #       expiration: Time.now
     #     },
+    #     configurations: [
+    #       {
+    #         classification: "String",
+    #         properties: {
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
     #     connection_id: "ConnectionId", # required
     #     description: "Description",
     #     domain_id: "DomainId", # required
@@ -4369,10 +5037,11 @@ module Aws::DataZone
     #           iam_connection_id: "ConnectionId"
     #         },
     #         glue_connection_name: "String",
+    #         glue_connection_names: ["GlueConnectionName"],
     #         glue_connection: {
     #           name: "String",
     #           description: "String",
-    #           connection_type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"],
+    #           connection_type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"],
     #           match_criteria: ["String"],
     #           connection_properties: {
     #             "String" => "String"
@@ -4426,6 +5095,7 @@ module Aws::DataZone
     #           connection_schema_version: 1,
     #           compatible_compute_environments: ["SPARK" # One of: ["SPARK", "ATHENA", "PYTHON"]]
     #         },
+    #         enable_trusted_identity_propagation: false,
     #         host: "String",
     #         port: 1,
     #         protocol: "ATHENA" # One of: ["ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"],
@@ -4506,6 +5176,7 @@ module Aws::DataZone
     #           connection: "String"
     #         },
     #         glue_connection_name: "String",
+    #         glue_connection_names: ["GlueConnectionName"],
     #         glue_version: "String",
     #         idle_timeout: 1,
     #         java_virtual_env: "String",
@@ -4516,15 +5187,91 @@ module Aws::DataZone
     #       s3_properties: {
     #         s3_uri: "S3Uri", # required
     #         s3_access_grant_location_id: "S3AccessGrantLocationId",
+    #         register_s3_access_grant_location: false,
+    #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"],
+    #         error_message: "String"
+    #       },
+    #       snowflake_properties: {
+    #         snowflake_role: "SnowflakeRole", # required
+    #         identity_mapping: { # required
+    #           username_attribute: "String", # required
+    #           prefix: "String"
+    #         },
+    #         lineage_sync: { # required
+    #           lineage_job_id: "String",
+    #           timezone: "UTC" # One of: ["UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"],
+    #           enabled: false,
+    #           schedule: "LineageSyncScheduleCronString"
+    #         },
+    #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"], # required
+    #         error_message: "String"
+    #       },
+    #       amazon_q_properties: {
+    #         is_enabled: false, # required
+    #         profile_arn: "String",
+    #         auth_mode: "String"
+    #       },
+    #       mlflow_properties: {
+    #         tracking_server_arn: "String"
+    #       },
+    #       workflows_mwaa_properties: {
+    #         mwaa_environment_name: "String"
+    #       },
+    #       workflows_serverless_properties: {
+    #       },
+    #       lakehouse_properties: {
+    #         glue_lineage_sync_enabled: false
+    #       },
+    #       vpc_properties: {
+    #         vpc_id: "VpcId", # required
+    #         subnet_ids: ["SubnetId"], # required
+    #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"], # required
+    #         security_group_id: "SecurityGroupId",
+    #         glue_connection_names: ["GlueConnectionName"]
+    #       },
+    #       git_properties: {
+    #         code_connection_arn: "String", # required
+    #         repository_id: "String", # required
+    #         default_branch: "String", # required
     #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"],
     #         error_message: "String"
     #       }
     #     },
-    #     type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"], # required
+    #     type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"], # required
+    #     scope: "DOMAIN" # One of: ["DOMAIN", "PROJECT"]
     #   }
     # @return [Types::GetConnectionOutput]
     def get_connection(params = {}, options = {})
       request = build_request(:get_connection, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets data export configuration details.</p>
+    # @param [Hash, Types::GetDataExportConfigurationInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The ID of the domain where you want to get the data export configuration details.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_data_export_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     is_export_enabled: false,
+    #     status: "COMPLETED" # One of: ["COMPLETED", "FAILED"],
+    #     encryption_configuration: {
+    #       kms_key_arn: "String",
+    #       sse_algorithm: "String"
+    #     },
+    #     s3_table_bucket_arn: "String",
+    #     created_at: Time.now,
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::GetDataExportConfigurationOutput]
+    def get_data_export_configuration(params = {}, options = {})
+      request = build_request(:get_data_export_configuration, params)
       request.send_request(options)
     end
 
@@ -4806,7 +5553,16 @@ module Aws::DataZone
     #       "TagKey" => "TagValue"
     #     },
     #     domain_version: "V1" # One of: ["V1", "V2"],
-    #     service_role: "RoleArn"
+    #     service_role: "RoleArn",
+    #     failure_reasons: [
+    #       {
+    #         id: "String",
+    #         message: "String"
+    #       }
+    #     ],
+    #     delete_progress: {
+    #       successfully_deleted_project_count: 1
+    #     }
     #   }
     # @return [Types::GetDomainOutput]
     def get_domain(params = {}, options = {})
@@ -4938,7 +5694,8 @@ module Aws::DataZone
     #       end_timeout_minutes: 1
     #     },
     #     environment_blueprint_id: "EnvironmentBlueprintId",
-    #     environment_configuration_id: "EnvironmentConfigurationId"
+    #     environment_configuration_id: "EnvironmentConfigurationId",
+    #     environment_configuration_name: "EnvironmentConfigurationName"
     #   }
     # @return [Types::GetEnvironmentOutput]
     def get_environment(params = {}, options = {})
@@ -5025,6 +5782,7 @@ module Aws::DataZone
     #       }
     #     ],
     #     glossary_terms: ["GlossaryTermId"],
+    #     blueprint_category: "TOOLING" # One of: ["TOOLING"],
     #     created_at: Time.now,
     #     updated_at: Time.now
     #   }
@@ -5061,8 +5819,20 @@ module Aws::DataZone
     #         "String" => "String"
     #       }
     #     },
+    #     allow_user_provided_configurations: false,
     #     created_at: Time.now,
     #     updated_at: Time.now,
+    #     resource_configurations: [
+    #       {
+    #         identifier: "String", # required
+    #         name: "String", # required
+    #         description: "String",
+    #         region: "RegionName", # required
+    #         parameters: { # required
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
     #     provisioning_configurations: [{
     #       # One of:
     #       lake_formation_configuration: {
@@ -5287,7 +6057,9 @@ module Aws::DataZone
     #     domain_id: "DomainId",
     #     id: "GroupProfileId",
     #     status: "ASSIGNED" # One of: ["ASSIGNED", "NOT_ASSIGNED"],
-    #     group_name: "GroupProfileName"
+    #     group_name: "GroupProfileName",
+    #     role_principal_arn: "String",
+    #     role_principal_id: "String"
     #   }
     # @return [Types::GetGroupProfileOutput]
     def get_group_profile(params = {}, options = {})
@@ -5553,10 +6325,13 @@ module Aws::DataZone
     #   <p>The ID of the Amazon DataZone domain the metadata generation run of which you want to get.</p>
     # @option params [String] :identifier
     #   <p>The identifier of the metadata generation run.</p>
+    # @option params [String] :type
+    #   <p>The type of the metadata generation run.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
     #     identifier: "MetadataGenerationRunIdentifier", # required
+    #     type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"]
     #   }
     #   options = {}
     #   response = client.get_metadata_generation_run(params, options)
@@ -5570,15 +6345,210 @@ module Aws::DataZone
     #       identifier: "String", # required
     #       revision: "Revision"
     #     },
-    #     status: "SUBMITTED" # One of: ["SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"],
-    #     type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS"],
+    #     status: "SUBMITTED" # One of: ["SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"],
+    #     type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"],
+    #     types: ["BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"]],
     #     created_at: Time.now,
     #     created_by: "CreatedBy",
     #     owning_project_id: "ProjectId", # required
+    #     type_stats: [
+    #       {
+    #         type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"], # required
+    #         status: "SUBMITTED" # One of: ["SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"], # required
+    #         error_message: "String"
+    #       }
+    #     ]
     #   }
     # @return [Types::GetMetadataGenerationRunOutput]
     def get_metadata_generation_run(params = {}, options = {})
       request = build_request(:get_metadata_generation_run, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the details of a <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html">notebook</a> in Amazon SageMaker Unified Studio.</p>
+    # @param [Hash, Types::GetNotebookInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook exists.</p>
+    # @option params [String] :identifier
+    #   <p>The identifier of the notebook.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "NotebookId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_notebook(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "NotebookId", # required
+    #     name: "NotebookName", # required
+    #     owning_project_id: "ProjectId", # required
+    #     domain_id: "DomainId", # required
+    #     cell_order: [ # required
+    #       {
+    #       }
+    #     ],
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"], # required
+    #     type: "DATA" # One of: ["DATA", "SQL"],
+    #     description: "Description",
+    #     created_at: Time.now,
+    #     created_by: "CreatedBy",
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy",
+    #     locked_by: "String",
+    #     locked_at: Time.now,
+    #     lock_expires_at: Time.now,
+    #     compute_id: "ComputeId",
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue"
+    #     },
+    #     environment_configuration: {
+    #       image_version: "String",
+    #       package_config: {
+    #         package_manager: "UV" # One of: ["UV"], # required
+    #         package_specification: "String"
+    #       }
+    #     },
+    #     error: {
+    #       message: "String", # required
+    #     },
+    #     git_metadata: {
+    #       connection_id: "GitConnectionId", # required
+    #       repository: "GitRepository", # required
+    #       branch: "GitBranch", # required
+    #       commit_hash: "CommitHash", # required
+    #       file_name: "FileName",
+    #       committed_at: Time.now,
+    #       commit_message: "CommitMessage"
+    #     }
+    #   }
+    # @return [Types::GetNotebookOutput]
+    def get_notebook(params = {}, options = {})
+      request = build_request(:get_notebook, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the details of a notebook export in Amazon SageMaker Unified Studio.</p>
+    # @param [Hash, Types::GetNotebookExportInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook export exists.</p>
+    # @option params [String] :identifier
+    #   <p>The identifier of the notebook export.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "ExportId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_notebook_export(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "ExportId", # required
+    #     domain_id: "DomainId", # required
+    #     owning_project_id: "ProjectId", # required
+    #     notebook_id: "NotebookId", # required
+    #     file_format: "PDF" # One of: ["PDF", "IPYNB"], # required
+    #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "SUCCEEDED", "FAILED"], # required
+    #     output_location: {
+    #       # One of:
+    #       s3: {
+    #         uri: "NotebookS3Uri"
+    #       }
+    #     },
+    #     error: {
+    #       message: "String", # required
+    #     },
+    #     completed_at: Time.now,
+    #     created_at: Time.now,
+    #     created_by: "CreatedBy"
+    #   }
+    # @return [Types::GetNotebookExportOutput]
+    def get_notebook_export(params = {}, options = {})
+      request = build_request(:get_notebook_export, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets the details of a <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html">notebook run</a> in Amazon SageMaker Unified Studio.</p>
+    # @param [Hash, Types::GetNotebookRunInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook run exists.</p>
+    # @option params [String] :identifier
+    #   <p>The identifier of the notebook run.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "NotebookRunId", # required
+    #   }
+    #   options = {}
+    #   response = client.get_notebook_run(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "NotebookRunId", # required
+    #     domain_id: "DomainId", # required
+    #     owning_project_id: "ProjectId", # required
+    #     notebook_id: "NotebookId", # required
+    #     schedule_id: "ScheduleId",
+    #     status: "QUEUED" # One of: ["QUEUED", "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"], # required
+    #     cell_order: [
+    #       {
+    #       }
+    #     ],
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue"
+    #     },
+    #     compute_configuration: {
+    #       instance_type: "InstanceType",
+    #       environment_version: "String"
+    #     },
+    #     network_configuration: {
+    #       network_access_type: "PUBLIC_INTERNET_ONLY" # One of: ["PUBLIC_INTERNET_ONLY", "VPC_ONLY"], # required
+    #       vpc_id: "String",
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"]
+    #     },
+    #     timeout_configuration: {
+    #       run_timeout_in_minutes: 1
+    #     },
+    #     environment_configuration: {
+    #       image_version: "String",
+    #       package_config: {
+    #         package_manager: "UV" # One of: ["UV"], # required
+    #         package_specification: "String"
+    #       }
+    #     },
+    #     storage_configuration: {
+    #       project_s3_path: "S3Path",
+    #       kms_key_arn: "KmsKeyArn"
+    #     },
+    #     notification_configuration: {
+    #       notify_on: ["SUCCEEDED" # One of: ["SUCCEEDED", "FAILED", "STOPPED", "QUEUED", "STARTING", "RUNNING", "STOPPING"]], # required
+    #     },
+    #     trigger_source: {
+    #       type: "MANUAL" # One of: ["MANUAL", "SCHEDULED", "WORKFLOW"],
+    #       name: "String"
+    #     },
+    #     error: {
+    #       message: "String", # required
+    #     },
+    #     created_at: Time.now,
+    #     created_by: "CreatedBy",
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy",
+    #     started_at: Time.now,
+    #     completed_at: Time.now
+    #   }
+    # @return [Types::GetNotebookRunOutput]
+    def get_notebook_run(params = {}, options = {})
+      request = build_request(:get_notebook_run, params)
       request.send_request(options)
     end
 
@@ -5612,6 +6582,13 @@ module Aws::DataZone
     #     created_by: "CreatedBy", # required
     #     created_at: Time.now,
     #     last_updated_at: Time.now,
+    #     resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #         source: "PROJECT" # One of: ["PROJECT", "PROJECT_PROFILE"], # required
+    #       }
+    #     ],
     #     glossary_terms: ["GlossaryTermId"],
     #     domain_unit_id: "DomainUnitId",
     #     project_profile_id: "ProjectProfileId",
@@ -5642,7 +6619,8 @@ module Aws::DataZone
     #           }
     #         ]
     #       }
-    #     }
+    #     },
+    #     project_category: "String"
     #   }
     # @return [Types::GetProjectOutput]
     def get_project(params = {}, options = {})
@@ -5671,6 +6649,15 @@ module Aws::DataZone
     #     name: "ProjectProfileName", # required
     #     description: "Description",
     #     status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     project_resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #         is_value_editable: false, # required
+    #       }
+    #     ],
+    #     allow_custom_project_resource_tags: false,
+    #     project_resource_tags_description: "Description",
     #     environment_configurations: [
     #       {
     #         name: "EnvironmentConfigurationName", # required
@@ -5742,7 +6729,7 @@ module Aws::DataZone
     #     identifier: "RuleId", # required
     #     revision: "Revision", # required
     #     name: "RuleName", # required
-    #     rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT"], # required
+    #     rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"], # required
     #     target: { # required
     #       # One of:
     #       domain_unit_target: {
@@ -5771,6 +6758,9 @@ module Aws::DataZone
     #             type_revision: "Revision", # required
     #           }
     #         ]
+    #       },
+    #       glossary_term_enforcement_detail: {
+    #         required_glossary_term_ids: ["GlossaryTermId"]
     #       }
     #     },
     #     target_type: "DOMAIN_UNIT" # One of: ["DOMAIN_UNIT"],
@@ -5814,6 +6804,30 @@ module Aws::DataZone
     #       project: {
     #         id: "ProjectId",
     #         name: "ProjectName"
+    #       },
+    #       user: {
+    #         id: "UserProfileId",
+    #         details: {
+    #           # One of:
+    #           iam: {
+    #             arn: "String",
+    #             principal_id: "String",
+    #             session_name: "String",
+    #             group_profile_id: "String"
+    #           },
+    #           sso: {
+    #             username: "UserProfileName",
+    #             first_name: "FirstName",
+    #             last_name: "LastName"
+    #           }
+    #         }
+    #       },
+    #       group: {
+    #         id: "GroupProfileId",
+    #         name: "GroupProfileName"
+    #       },
+    #       iam: {
+    #         principal_arn: "IamPrincipalArn"
     #       }
     #     },
     #     subscribed_listing: { # required
@@ -5838,7 +6852,12 @@ module Aws::DataZone
     #             asset_id: "AssetId", # required
     #             filter_ids: ["FilterId"], # required
     #             status: "String", # required
+    #             scope_name: "String",
     #             error_message: "String"
+    #           },
+    #           permissions: {
+    #             # One of:
+    #             s3: ["READ" # One of: ["READ", "WRITE"]]
     #           }
     #         },
     #         product_listing: {
@@ -5895,6 +6914,7 @@ module Aws::DataZone
     #     domain_id: "DomainId", # required
     #     created_at: Time.now, # required
     #     updated_at: Time.now, # required
+    #     environment_id: "EnvironmentId",
     #     subscription_target_id: "SubscriptionTargetId", # required
     #     granted_entity: { # required
     #       # One of:
@@ -5919,7 +6939,12 @@ module Aws::DataZone
     #           asset_id: "AssetId", # required
     #           filter_ids: ["FilterId"], # required
     #           status: "String", # required
+    #           scope_name: "String",
     #           error_message: "String"
+    #         },
+    #         permissions: {
+    #           # One of:
+    #           s3: ["READ" # One of: ["READ", "WRITE"]]
     #         }
     #       }
     #     ],
@@ -5960,6 +6985,30 @@ module Aws::DataZone
     #       project: {
     #         id: "ProjectId",
     #         name: "ProjectName"
+    #       },
+    #       user: {
+    #         id: "UserProfileId",
+    #         details: {
+    #           # One of:
+    #           iam: {
+    #             arn: "String",
+    #             principal_id: "String",
+    #             session_name: "String",
+    #             group_profile_id: "String"
+    #           },
+    #           sso: {
+    #             username: "UserProfileName",
+    #             first_name: "FirstName",
+    #             last_name: "LastName"
+    #           }
+    #         }
+    #       },
+    #       group: {
+    #         id: "GroupProfileId",
+    #         name: "GroupProfileName"
+    #       },
+    #       iam: {
+    #         principal_arn: "IamPrincipalArn"
     #       }
     #     }],
     #     subscribed_listings: [ # required
@@ -5985,7 +7034,12 @@ module Aws::DataZone
     #               asset_id: "AssetId", # required
     #               filter_ids: ["FilterId"], # required
     #               status: "String", # required
+    #               scope_name: "String",
     #               error_message: "String"
+    #             },
+    #             permissions: {
+    #               # One of:
+    #               s3: ["READ" # One of: ["READ", "WRITE"]]
     #             }
     #           },
     #           product_listing: {
@@ -6069,6 +7123,7 @@ module Aws::DataZone
     #       }
     #     ],
     #     provider: "String", # required
+    #     subscription_grant_creation_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "MANUAL"]
     #   }
     # @return [Types::GetSubscriptionTargetOutput]
     def get_subscription_target(params = {}, options = {})
@@ -6128,11 +7183,14 @@ module Aws::DataZone
     #   <p>The identifier of the user for which you want to get the user profile.</p>
     # @option params [String] :type
     #   <p>The type of the user profile.</p>
+    # @option params [String] :session_name
+    #   <p>The session name for IAM role sessions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
     #     user_identifier: "UserIdentifier", # required
-    #     type: "IAM" # One of: ["IAM", "SSO"]
+    #     type: "IAM" # One of: ["IAM", "SSO"],
+    #     session_name: "String"
     #   }
     #   options = {}
     #   response = client.get_user_profile(params, options)
@@ -6147,7 +7205,9 @@ module Aws::DataZone
     #       # One of:
     #       iam: {
     #         arn: "String",
-    #         principal_id: "String"
+    #         principal_id: "String",
+    #         session_name: "String",
+    #         group_profile_id: "String"
     #       },
     #       sso: {
     #         username: "UserProfileName",
@@ -6352,6 +7412,8 @@ module Aws::DataZone
     #   <p>The ID of the project where you want to list connections.</p>
     # @option params [String] :type
     #   <p>The type of connection.</p>
+    # @option params [String] :scope
+    #   <p>The scope of the connection.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -6361,8 +7423,9 @@ module Aws::DataZone
     #     sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"],
     #     name: "ConnectionName",
     #     environment_identifier: "EnvironmentId",
-    #     project_identifier: "ProjectId", # required
-    #     type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"]
+    #     project_identifier: "ProjectId",
+    #     type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"],
+    #     scope: "DOMAIN" # One of: ["DOMAIN", "PROJECT"]
     #   }
     #   options = {}
     #   response = client.list_connections(params, options)
@@ -6371,6 +7434,14 @@ module Aws::DataZone
     #   {
     #     items: [ # required
     #       {
+    #         configurations: [
+    #           {
+    #             classification: "String",
+    #             properties: {
+    #               "String" => "String"
+    #             }
+    #           }
+    #         ],
     #         connection_id: "ConnectionId", # required
     #         domain_id: "DomainId", # required
     #         domain_unit_id: "DomainUnitId", # required
@@ -6385,10 +7456,11 @@ module Aws::DataZone
     #               iam_connection_id: "ConnectionId"
     #             },
     #             glue_connection_name: "String",
+    #             glue_connection_names: ["GlueConnectionName"],
     #             glue_connection: {
     #               name: "String",
     #               description: "String",
-    #               connection_type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"],
+    #               connection_type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"],
     #               match_criteria: ["String"],
     #               connection_properties: {
     #                 "String" => "String"
@@ -6442,6 +7514,7 @@ module Aws::DataZone
     #               connection_schema_version: 1,
     #               compatible_compute_environments: ["SPARK" # One of: ["SPARK", "ATHENA", "PYTHON"]]
     #             },
+    #             enable_trusted_identity_propagation: false,
     #             host: "String",
     #             port: 1,
     #             protocol: "ATHENA" # One of: ["ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"],
@@ -6522,6 +7595,7 @@ module Aws::DataZone
     #               connection: "String"
     #             },
     #             glue_connection_name: "String",
+    #             glue_connection_names: ["GlueConnectionName"],
     #             glue_version: "String",
     #             idle_timeout: 1,
     #             java_virtual_env: "String",
@@ -6532,11 +7606,58 @@ module Aws::DataZone
     #           s3_properties: {
     #             s3_uri: "S3Uri", # required
     #             s3_access_grant_location_id: "S3AccessGrantLocationId",
+    #             register_s3_access_grant_location: false,
+    #             status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"],
+    #             error_message: "String"
+    #           },
+    #           snowflake_properties: {
+    #             snowflake_role: "SnowflakeRole", # required
+    #             identity_mapping: { # required
+    #               username_attribute: "String", # required
+    #               prefix: "String"
+    #             },
+    #             lineage_sync: { # required
+    #               lineage_job_id: "String",
+    #               timezone: "UTC" # One of: ["UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"],
+    #               enabled: false,
+    #               schedule: "LineageSyncScheduleCronString"
+    #             },
+    #             status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"], # required
+    #             error_message: "String"
+    #           },
+    #           amazon_q_properties: {
+    #             is_enabled: false, # required
+    #             profile_arn: "String",
+    #             auth_mode: "String"
+    #           },
+    #           mlflow_properties: {
+    #             tracking_server_arn: "String"
+    #           },
+    #           workflows_mwaa_properties: {
+    #             mwaa_environment_name: "String"
+    #           },
+    #           workflows_serverless_properties: {
+    #           },
+    #           lakehouse_properties: {
+    #             glue_lineage_sync_enabled: false
+    #           },
+    #           vpc_properties: {
+    #             vpc_id: "VpcId", # required
+    #             subnet_ids: ["SubnetId"], # required
+    #             status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"], # required
+    #             security_group_id: "SecurityGroupId",
+    #             glue_connection_names: ["GlueConnectionName"]
+    #           },
+    #           git_properties: {
+    #             code_connection_arn: "String", # required
+    #             repository_id: "String", # required
+    #             default_branch: "String", # required
     #             status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"],
     #             error_message: "String"
     #           }
     #         },
-    #         type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"], # required
+    #         type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"], # required
+    #         scope: "DOMAIN" # One of: ["DOMAIN", "PROJECT"]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -6968,8 +8089,20 @@ module Aws::DataZone
     #             "String" => "String"
     #           }
     #         },
+    #         allow_user_provided_configurations: false,
     #         created_at: Time.now,
     #         updated_at: Time.now,
+    #         resource_configurations: [
+    #           {
+    #             identifier: "String", # required
+    #             name: "String", # required
+    #             description: "String",
+    #             region: "RegionName", # required
+    #             parameters: { # required
+    #               "String" => "String"
+    #             }
+    #           }
+    #         ],
     #         provisioning_configurations: [{
     #           # One of:
     #           lake_formation_configuration: {
@@ -7025,7 +8158,8 @@ module Aws::DataZone
     #           }
     #         },
     #         created_at: Time.now,
-    #         updated_at: Time.now
+    #         updated_at: Time.now,
+    #         blueprint_category: "TOOLING" # One of: ["TOOLING"]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -7151,7 +8285,8 @@ module Aws::DataZone
     #         aws_account_region: "AwsRegion",
     #         provider: "String", # required
     #         status: "ACTIVE" # One of: ["ACTIVE", "CREATING", "UPDATING", "DELETING", "CREATE_FAILED", "UPDATE_FAILED", "DELETE_FAILED", "VALIDATION_FAILED", "SUSPENDED", "DISABLED", "EXPIRED", "DELETED", "INACCESSIBLE"],
-    #         environment_configuration_id: "EnvironmentConfigurationId"
+    #         environment_configuration_id: "EnvironmentConfigurationId",
+    #         environment_configuration_name: "EnvironmentConfigurationName"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -7357,13 +8492,16 @@ module Aws::DataZone
     #   <p>When the number of metadata generation runs is greater than the default value for the MaxResults parameter, or if you explicitly specify a value for MaxResults that is less than the number of metadata generation runs, the response includes a pagination token named NextToken. You can specify this NextToken value in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of metadata generation runs to return in a single call to ListMetadataGenerationRuns. When the number of metadata generation runs to be listed is greater than the value of MaxResults, the response contains a NextToken value that you can use in a subsequent call to ListMetadataGenerationRuns to list the next set of revisions.</p>
+    # @option params [String] :target_identifier
+    #   <p>The target ID for which you want to list metadata generation runs.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
-    #     status: "SUBMITTED" # One of: ["SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"],
-    #     type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS"],
+    #     status: "SUBMITTED" # One of: ["SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"],
+    #     type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"],
     #     next_token: "PaginationToken",
-    #     max_results: 1
+    #     max_results: 1,
+    #     target_identifier: "EntityId"
     #   }
     #   options = {}
     #   response = client.list_metadata_generation_runs(params, options)
@@ -7379,8 +8517,9 @@ module Aws::DataZone
     #           identifier: "String", # required
     #           revision: "Revision"
     #         },
-    #         status: "SUBMITTED" # One of: ["SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"],
-    #         type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS"],
+    #         status: "SUBMITTED" # One of: ["SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"],
+    #         type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"],
+    #         types: ["BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"]],
     #         created_at: Time.now,
     #         created_by: "CreatedBy",
     #         owning_project_id: "ProjectId", # required
@@ -7391,6 +8530,125 @@ module Aws::DataZone
     # @return [Types::ListMetadataGenerationRunsOutput]
     def list_metadata_generation_runs(params = {}, options = {})
       request = build_request(:list_metadata_generation_runs, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html">notebook runs</a> in Amazon SageMaker Unified Studio.</p>
+    # @param [Hash, Types::ListNotebookRunsInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to list notebook runs.</p>
+    # @option params [String] :owning_project_identifier
+    #   <p>The identifier of the project that owns the notebook runs.</p>
+    # @option params [String] :notebook_identifier
+    #   <p>The identifier of the notebook to filter runs by.</p>
+    # @option params [String] :status
+    #   <p>The status to filter notebook runs by.</p>
+    # @option params [String] :schedule_identifier
+    #   <p>The identifier of the schedule to filter notebook runs by.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of notebook runs to return in a single call. When the number of notebook runs exceeds the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value.</p>
+    # @option params [String] :sort_order
+    #   <p>The sort order for the results.</p>
+    # @option params [String] :next_token
+    #   <p>When the number of notebook runs is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notebook runs, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotebookRuns</code> to list the next set of notebook runs.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     notebook_identifier: "NotebookId",
+    #     status: "QUEUED" # One of: ["QUEUED", "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"],
+    #     schedule_identifier: "ScheduleId",
+    #     max_results: 1,
+    #     sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"],
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_notebook_runs(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         id: "NotebookRunId", # required
+    #         domain_id: "DomainId", # required
+    #         owning_project_id: "ProjectId", # required
+    #         notebook_id: "NotebookId", # required
+    #         schedule_id: "ScheduleId",
+    #         status: "QUEUED" # One of: ["QUEUED", "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"], # required
+    #         trigger_source: {
+    #           type: "MANUAL" # One of: ["MANUAL", "SCHEDULED", "WORKFLOW"],
+    #           name: "String"
+    #         },
+    #         created_at: Time.now,
+    #         created_by: "CreatedBy",
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy",
+    #         started_at: Time.now,
+    #         completed_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNotebookRunsOutput]
+    def list_notebook_runs(params = {}, options = {})
+      request = build_request(:list_notebook_runs, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html">notebooks</a> in Amazon SageMaker Unified Studio.</p>
+    # @param [Hash, Types::ListNotebooksInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to list notebooks.</p>
+    # @option params [String] :owning_project_identifier
+    #   <p>The identifier of the project that owns the notebooks.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of notebooks to return in a single call. When the number of notebooks exceeds the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value.</p>
+    # @option params [String] :sort_order
+    #   <p>The sort order for the results.</p>
+    # @option params [String] :sort_by
+    #   <p>The field to sort the results by.</p>
+    # @option params [String] :status
+    #   <p>The status to filter notebooks by.</p>
+    # @option params [String] :type
+    #   <p>The type to filter notebooks by.</p>
+    # @option params [String] :next_token
+    #   <p>When the number of notebooks is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of notebooks, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListNotebooks</code> to list the next set of notebooks.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     max_results: 1,
+    #     sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"],
+    #     sort_by: "CREATED_AT" # One of: ["CREATED_AT", "UPDATED_AT"],
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"],
+    #     type: "DATA" # One of: ["DATA", "SQL"],
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_notebooks(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [
+    #       {
+    #         id: "NotebookId", # required
+    #         name: "NotebookName", # required
+    #         owning_project_id: "ProjectId", # required
+    #         domain_id: "DomainId", # required
+    #         status: "ACTIVE" # One of: ["ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"], # required
+    #         type: "DATA" # One of: ["DATA", "SQL"],
+    #         description: "Description",
+    #         created_at: Time.now,
+    #         created_by: "CreatedBy",
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy"
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListNotebooksOutput]
+    def list_notebooks(params = {}, options = {})
+      request = build_request(:list_notebooks, params)
       request.send_request(options)
     end
 
@@ -7689,6 +8947,8 @@ module Aws::DataZone
     #   <p>The identifier of a group.</p>
     # @option params [String] :name
     #   <p>The name of the project.</p>
+    # @option params [String] :project_category
+    #   <p>A parameter to filter projects by their category.</p>
     # @option params [String] :next_token
     #   <p>When the number of projects is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of projects, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>ListProjects</code> to list the next set of projects.</p>
     # @option params [Integer] :max_results
@@ -7699,6 +8959,7 @@ module Aws::DataZone
     #     user_identifier: "String",
     #     group_identifier: "String",
     #     name: "ProjectName",
+    #     project_category: "String",
     #     next_token: "PaginationToken",
     #     max_results: 1
     #   }
@@ -7723,7 +8984,8 @@ module Aws::DataZone
     #         created_by: "CreatedBy", # required
     #         created_at: Time.now,
     #         updated_at: Time.now,
-    #         domain_unit_id: "DomainUnitId"
+    #         domain_unit_id: "DomainUnitId",
+    #         project_category: "String"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -7763,7 +9025,7 @@ module Aws::DataZone
     #     domain_identifier: "DomainId", # required
     #     target_type: "DOMAIN_UNIT" # One of: ["DOMAIN_UNIT"], # required
     #     target_identifier: "String", # required
-    #     rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT"],
+    #     rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"],
     #     action: "CREATE_LISTING_CHANGE_SET" # One of: ["CREATE_LISTING_CHANGE_SET", "CREATE_SUBSCRIPTION_REQUEST"],
     #     project_ids: ["ProjectId"],
     #     asset_types: ["AssetTypeIdentifier"],
@@ -7781,7 +9043,7 @@ module Aws::DataZone
     #       {
     #         identifier: "RuleId",
     #         revision: "Revision",
-    #         rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT"],
+    #         rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"],
     #         name: "RuleName",
     #         target_type: "DOMAIN_UNIT" # One of: ["DOMAIN_UNIT"],
     #         target: {
@@ -7829,6 +9091,12 @@ module Aws::DataZone
     #   <p>The identifier of the subscription.</p>
     # @option params [String] :owning_project_id
     #   <p>The ID of the owning project of the subscription grants.</p>
+    # @option params [String] :owning_iam_principal_arn
+    #   <p>The ARN of the owning IAM principal.</p>
+    # @option params [String] :owning_user_id
+    #   <p>The ID of the owning user.</p>
+    # @option params [String] :owning_group_id
+    #   <p>The ID of the owning group.</p>
     # @option params [String] :sort_by
     #   <p>Specifies the way of sorting the results of this action.</p>
     # @option params [String] :sort_order
@@ -7845,6 +9113,9 @@ module Aws::DataZone
     #     subscribed_listing_id: "ListingId",
     #     subscription_id: "SubscriptionId",
     #     owning_project_id: "ProjectId",
+    #     owning_iam_principal_arn: "IamPrincipalArn",
+    #     owning_user_id: "UserProfileId",
+    #     owning_group_id: "GroupProfileId",
     #     sort_by: "CREATED_AT" # One of: ["CREATED_AT", "UPDATED_AT"],
     #     sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"],
     #     max_results: 1,
@@ -7863,6 +9134,7 @@ module Aws::DataZone
     #         domain_id: "DomainId", # required
     #         created_at: Time.now, # required
     #         updated_at: Time.now, # required
+    #         environment_id: "EnvironmentId",
     #         subscription_target_id: "SubscriptionTargetId", # required
     #         granted_entity: { # required
     #           # One of:
@@ -7887,7 +9159,12 @@ module Aws::DataZone
     #               asset_id: "AssetId", # required
     #               filter_ids: ["FilterId"], # required
     #               status: "String", # required
+    #               scope_name: "String",
     #               error_message: "String"
+    #             },
+    #             permissions: {
+    #               # One of:
+    #               s3: ["READ" # One of: ["READ", "WRITE"]]
     #             }
     #           }
     #         ],
@@ -7912,8 +9189,14 @@ module Aws::DataZone
     #   <p>The identifier of the subscribed listing.</p>
     # @option params [String] :owning_project_id
     #   <p>The identifier of the project for the subscription requests.</p>
+    # @option params [String] :owning_iam_principal_arn
+    #   <p>The ARN of the owning IAM principal.</p>
     # @option params [String] :approver_project_id
     #   <p>The identifier of the subscription request approver's project.</p>
+    # @option params [String] :owning_user_id
+    #   <p>The ID of the owning user.</p>
+    # @option params [String] :owning_group_id
+    #   <p>The ID of the owning group.</p>
     # @option params [String] :sort_by
     #   <p>Specifies the way to sort the results of this action.</p>
     # @option params [String] :sort_order
@@ -7928,7 +9211,10 @@ module Aws::DataZone
     #     status: "PENDING" # One of: ["PENDING", "ACCEPTED", "REJECTED"],
     #     subscribed_listing_id: "ListingId",
     #     owning_project_id: "ProjectId",
+    #     owning_iam_principal_arn: "IamPrincipalArn",
     #     approver_project_id: "ProjectId",
+    #     owning_user_id: "UserProfileId",
+    #     owning_group_id: "GroupProfileId",
     #     sort_by: "CREATED_AT" # One of: ["CREATED_AT", "UPDATED_AT"],
     #     sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"],
     #     max_results: 1,
@@ -7954,6 +9240,30 @@ module Aws::DataZone
     #           project: {
     #             id: "ProjectId",
     #             name: "ProjectName"
+    #           },
+    #           user: {
+    #             id: "UserProfileId",
+    #             details: {
+    #               # One of:
+    #               iam: {
+    #                 arn: "String",
+    #                 principal_id: "String",
+    #                 session_name: "String",
+    #                 group_profile_id: "String"
+    #               },
+    #               sso: {
+    #                 username: "UserProfileName",
+    #                 first_name: "FirstName",
+    #                 last_name: "LastName"
+    #               }
+    #             }
+    #           },
+    #           group: {
+    #             id: "GroupProfileId",
+    #             name: "GroupProfileName"
+    #           },
+    #           iam: {
+    #             principal_arn: "IamPrincipalArn"
     #           }
     #         }],
     #         subscribed_listings: [ # required
@@ -7979,7 +9289,12 @@ module Aws::DataZone
     #                   asset_id: "AssetId", # required
     #                   filter_ids: ["FilterId"], # required
     #                   status: "String", # required
+    #                   scope_name: "String",
     #                   error_message: "String"
+    #                 },
+    #                 permissions: {
+    #                   # One of:
+    #                   s3: ["READ" # One of: ["READ", "WRITE"]]
     #                 }
     #               },
     #               product_listing: {
@@ -8076,6 +9391,7 @@ module Aws::DataZone
     #           }
     #         ],
     #         provider: "String", # required
+    #         subscription_grant_creation_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "MANUAL"]
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -8098,6 +9414,12 @@ module Aws::DataZone
     #   <p>The identifier of the subscribed listing for the subscriptions that you want to list.</p>
     # @option params [String] :owning_project_id
     #   <p>The identifier of the owning project.</p>
+    # @option params [String] :owning_iam_principal_arn
+    #   <p>The ARN of the owning IAM principal.</p>
+    # @option params [String] :owning_user_id
+    #   <p>The ID of the owning user.</p>
+    # @option params [String] :owning_group_id
+    #   <p>The ID of the owning group.</p>
     # @option params [String] :approver_project_id
     #   <p>The identifier of the project for the subscription's approver.</p>
     # @option params [String] :sort_by
@@ -8115,6 +9437,9 @@ module Aws::DataZone
     #     status: "APPROVED" # One of: ["APPROVED", "REVOKED", "CANCELLED"],
     #     subscribed_listing_id: "ListingId",
     #     owning_project_id: "ProjectId",
+    #     owning_iam_principal_arn: "IamPrincipalArn",
+    #     owning_user_id: "UserProfileId",
+    #     owning_group_id: "GroupProfileId",
     #     approver_project_id: "ProjectId",
     #     sort_by: "CREATED_AT" # One of: ["CREATED_AT", "UPDATED_AT"],
     #     sort_order: "ASCENDING" # One of: ["ASCENDING", "DESCENDING"],
@@ -8140,6 +9465,30 @@ module Aws::DataZone
     #           project: {
     #             id: "ProjectId",
     #             name: "ProjectName"
+    #           },
+    #           user: {
+    #             id: "UserProfileId",
+    #             details: {
+    #               # One of:
+    #               iam: {
+    #                 arn: "String",
+    #                 principal_id: "String",
+    #                 session_name: "String",
+    #                 group_profile_id: "String"
+    #               },
+    #               sso: {
+    #                 username: "UserProfileName",
+    #                 first_name: "FirstName",
+    #                 last_name: "LastName"
+    #               }
+    #             }
+    #           },
+    #           group: {
+    #             id: "GroupProfileId",
+    #             name: "GroupProfileName"
+    #           },
+    #           iam: {
+    #             principal_arn: "IamPrincipalArn"
     #           }
     #         },
     #         subscribed_listing: { # required
@@ -8164,7 +9513,12 @@ module Aws::DataZone
     #                 asset_id: "AssetId", # required
     #                 filter_ids: ["FilterId"], # required
     #                 status: "String", # required
+    #                 scope_name: "String",
     #                 error_message: "String"
+    #               },
+    #               permissions: {
+    #                 # One of:
+    #                 s3: ["READ" # One of: ["READ", "WRITE"]]
     #               }
     #             },
     #             product_listing: {
@@ -8358,6 +9712,37 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Creates data export configuration details.</p> <p>If you want to temporarily disable export and later re-enable it for the same domain, use the <code>--no-enable-export</code> flag to disable and the <code>--enable-export</code> flag to re-enable. This preserves the configuration and allows you to re-enable export without deleting S3 table.</p> <note> <p>You can enable asset metadata export for only one domain per account per Region. To enable export for a different domain, complete the following steps:</p> <ol> <li> <p>Delete the export configuration for the currently enabled domain using the DeleteDataExportConfiguration operation.</p> </li> <li> <p>Delete the asset S3 table under the aws-sagemaker-catalog S3 table bucket. We recommend backing up the S3 table before deletion.</p> </li> <li> <p>Call the PutDataExportConfiguration API to enable export for the new domain.</p> </li> </ol> </note>
+    # @param [Hash, Types::PutDataExportConfigurationInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The domain ID for which you want to create data export configuration details.</p>
+    # @option params [Boolean] :enable_export
+    #   <p>Specifies that the export is to be enabled as part of creating data export configuration details.</p>
+    # @option params [Types::EncryptionConfiguration] :encryption_configuration
+    #   <p>The encryption configuration as part of creating data export configuration details.</p> <p>The KMS key provided here as part of encryptionConfiguration must have the required permissions as described in <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/adminguide/sagemaker-unified-studio-export-asset-metadata-kms-permissions.html">KMS permissions for exporting asset metadata in Amazon SageMaker Unified Studio</a>.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     enable_export: false, # required
+    #     encryption_configuration: {
+    #       kms_key_arn: "String",
+    #       sse_algorithm: "String"
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.put_data_export_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::PutDataExportConfigurationOutput]
+    def put_data_export_configuration(params = {}, options = {})
+      request = build_request(:put_data_export_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Writes the configuration for the specified environment blueprint in Amazon DataZone.</p>
     # @param [Hash, Types::PutEnvironmentBlueprintConfigurationInput] params
     # @option params [String] :domain_identifier
@@ -8374,6 +9759,10 @@ module Aws::DataZone
     #   <p>Specifies the enabled Amazon Web Services Regions.</p>
     # @option params [Hash<String, Hash<String, String>>] :regional_parameters
     #   <p>The regional parameters in the environment blueprint.</p>
+    # @option params [Array<Types::PutResourceConfiguration>] :resource_configurations
+    #   <p>The resource configurations of the environment blueprint.</p>
+    # @option params [Boolean] :allow_user_provided_configurations
+    #   <p>Specifies whether user-provided resource configurations are allowed for the environment blueprint.</p>
     # @option params [Hash<String, String>] :global_parameters
     #   <p>Region-agnostic environment blueprint parameters. </p>
     # @option params [Array<Types::ProvisioningConfiguration>] :provisioning_configurations
@@ -8391,6 +9780,17 @@ module Aws::DataZone
     #         "String" => "String"
     #       }
     #     },
+    #     resource_configurations: [
+    #       {
+    #         name: "String", # required
+    #         description: "String",
+    #         region: "RegionName", # required
+    #         parameters: { # required
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
+    #     allow_user_provided_configurations: false,
     #     global_parameters: {
     #       "String" => "String"
     #     },
@@ -8418,8 +9818,20 @@ module Aws::DataZone
     #         "String" => "String"
     #       }
     #     },
+    #     allow_user_provided_configurations: false,
     #     created_at: Time.now,
     #     updated_at: Time.now,
+    #     resource_configurations: [
+    #       {
+    #         identifier: "String", # required
+    #         name: "String", # required
+    #         description: "String",
+    #         region: "RegionName", # required
+    #         parameters: { # required
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
     #     provisioning_configurations: [{
     #       # One of:
     #       lake_formation_configuration: {
@@ -8431,6 +9843,94 @@ module Aws::DataZone
     # @return [Types::PutEnvironmentBlueprintConfigurationOutput]
     def put_environment_blueprint_configuration(params = {}, options = {})
       request = build_request(:put_environment_blueprint_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Queries entities in the graph store.</p>
+    # @param [Hash, Types::QueryGraphInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon DataZone domain.</p>
+    # @option params [Array<Types::MatchClause>] :match
+    #   <p>List of query match clauses.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of entities to return in a single call to <code>QueryGraph</code>. When the number of entities to be listed is greater than the value of <code>MaxResults</code>, the response contains a <code>NextToken</code> value that you can use in a subsequent call to <code>QueryGraph</code> to list the next set of entities.</p>
+    # @option params [String] :next_token
+    #   <p>When the number of entities is greater than the default value for the <code>MaxResults</code> parameter, or if you explicitly specify a value for <code>MaxResults</code> that is less than the number of entities, the response includes a pagination token named <code>NextToken</code>. You can specify this <code>NextToken</code> value in a subsequent call to <code>QueryGraph</code> to list the next set of entities.</p>
+    # @option params [Types::AdditionalAttributes] :additional_attributes
+    #   <p>Additional details on the queried entity that can be requested in the response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     match: [{ # required
+    #       # One of:
+    #       relation_pattern: {
+    #         relation_type: "LINEAGE" # One of: ["LINEAGE"], # required
+    #         relation_direction: "IN" # One of: ["IN", "OUT"], # required
+    #         max_path_length: 1
+    #       },
+    #       entity_pattern: {
+    #         entity_type: "LINEAGE_NODE" # One of: ["LINEAGE_NODE"], # required
+    #         identifier: "String", # required
+    #         filters: {
+    #           # One of:
+    #           filter: {
+    #             attribute: "Attribute", # required
+    #             value: "String",
+    #             int_value: 1,
+    #             operator: "EQ" # One of: ["EQ", "LE", "LT", "GE", "GT", "TEXT_SEARCH"]
+    #           },
+    #           and: [{
+    #             # recursive FilterClause
+    #           }],
+    #           or: [{
+    #             # recursive FilterClause
+    #           }]
+    #         }
+    #       }
+    #     }],
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     additional_attributes: {
+    #       form_names: ["FormName"]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.query_graph(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     items: [{
+    #       # One of:
+    #       lineage_node: {
+    #         domain_id: "DomainId", # required
+    #         name: "String",
+    #         description: "String",
+    #         created_at: Time.now,
+    #         created_by: "CreatedBy",
+    #         updated_at: Time.now,
+    #         updated_by: "UpdatedBy",
+    #         id: "LineageNodeId", # required
+    #         type_name: "String", # required
+    #         type_revision: "Revision",
+    #         source_identifier: "String",
+    #         event_timestamp: Time.now,
+    #         forms_output: [
+    #           {
+    #             form_name: "FormName", # required
+    #             type_name: "FormTypeName",
+    #             type_revision: "Revision",
+    #             content: "String"
+    #           }
+    #         ],
+    #         upstream_lineage_node_ids: ["LineageNodeId"],
+    #         downstream_lineage_node_ids: ["LineageNodeId"]
+    #       }
+    #     }],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::QueryGraphOutput]
+    def query_graph(params = {}, options = {})
+      request = build_request(:query_graph, params)
       request.send_request(options)
     end
 
@@ -8512,6 +10012,30 @@ module Aws::DataZone
     #       project: {
     #         id: "ProjectId",
     #         name: "ProjectName"
+    #       },
+    #       user: {
+    #         id: "UserProfileId",
+    #         details: {
+    #           # One of:
+    #           iam: {
+    #             arn: "String",
+    #             principal_id: "String",
+    #             session_name: "String",
+    #             group_profile_id: "String"
+    #           },
+    #           sso: {
+    #             username: "UserProfileName",
+    #             first_name: "FirstName",
+    #             last_name: "LastName"
+    #           }
+    #         }
+    #       },
+    #       group: {
+    #         id: "GroupProfileId",
+    #         name: "GroupProfileName"
+    #       },
+    #       iam: {
+    #         principal_arn: "IamPrincipalArn"
     #       }
     #     }],
     #     subscribed_listings: [ # required
@@ -8537,7 +10061,12 @@ module Aws::DataZone
     #               asset_id: "AssetId", # required
     #               filter_ids: ["FilterId"], # required
     #               status: "String", # required
+    #               scope_name: "String",
     #               error_message: "String"
+    #             },
+    #             permissions: {
+    #               # One of:
+    #               s3: ["READ" # One of: ["READ", "WRITE"]]
     #             }
     #           },
     #           product_listing: {
@@ -8721,6 +10250,30 @@ module Aws::DataZone
     #       project: {
     #         id: "ProjectId",
     #         name: "ProjectName"
+    #       },
+    #       user: {
+    #         id: "UserProfileId",
+    #         details: {
+    #           # One of:
+    #           iam: {
+    #             arn: "String",
+    #             principal_id: "String",
+    #             session_name: "String",
+    #             group_profile_id: "String"
+    #           },
+    #           sso: {
+    #             username: "UserProfileName",
+    #             first_name: "FirstName",
+    #             last_name: "LastName"
+    #           }
+    #         }
+    #       },
+    #       group: {
+    #         id: "GroupProfileId",
+    #         name: "GroupProfileName"
+    #       },
+    #       iam: {
+    #         principal_arn: "IamPrincipalArn"
     #       }
     #     },
     #     subscribed_listing: { # required
@@ -8745,7 +10298,12 @@ module Aws::DataZone
     #             asset_id: "AssetId", # required
     #             filter_ids: ["FilterId"], # required
     #             status: "String", # required
+    #             scope_name: "String",
     #             error_message: "String"
+    #           },
+    #           permissions: {
+    #             # One of:
+    #             s3: ["READ" # One of: ["READ", "WRITE"]]
     #           }
     #         },
     #         product_listing: {
@@ -8780,7 +10338,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Searches for assets in Amazon DataZone.</p> <p>Search in Amazon DataZone is a powerful capability that enables users to discover and explore data assets, glossary terms, and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. Search can be scoped to specific types of resources (like assets, glossary terms, or data products) and can be filtered using various criteria such as creation date, owner, or status. The search functionality is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>Many search commands in Amazon DataZone are paginated, including <code>search</code> and <code>search-types</code>. When the result set is large, Amazon DataZone returns a <code>nextToken</code> in the response. This token can be used to retrieve the next page of results. </p> <p>Prerequisites:</p> <ul> <li> <p>The --domain-identifier must refer to an existing Amazon DataZone domain. </p> </li> <li> <p>--search-scope must be one of: ASSET, GLOSSARY_TERM, DATA_PRODUCT, or GLOSSARY.</p> </li> <li> <p>The user must have search permissions in the specified domain.</p> </li> <li> <p>If using --filters, ensure that the JSON is well-formed and that each filter includes valid attribute and value keys. </p> </li> <li> <p>For paginated results, be prepared to use --next-token to fetch additional pages.</p> </li> </ul>
+    # <p>Searches for assets in Amazon DataZone.</p> <p>Search in Amazon DataZone is a powerful capability that enables users to discover and explore data assets, glossary terms, and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. Search can be scoped to specific types of resources (like assets, glossary terms, or data products) and can be filtered using various criteria such as creation date, owner, or status. The search functionality is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>Many search commands in Amazon DataZone are paginated, including <code>search</code> and <code>search-types</code>. When the result set is large, Amazon DataZone returns a <code>nextToken</code> in the response. This token can be used to retrieve the next page of results. </p> <p>Prerequisites:</p> <ul> <li> <p>The --domain-identifier must refer to an existing Amazon DataZone domain. </p> </li> <li> <p>--search-scope must be one of: ASSET, GLOSSARY_TERM, DATA_PRODUCT, or GLOSSARY.</p> </li> <li> <p>The user must have search permissions in the specified domain.</p> </li> <li> <p>If using --filters, ensure that the JSON is well-formed and that each filter includes valid attribute and value keys. </p> </li> <li> <p>For paginated results, be prepared to use --next-token to fetch additional pages.</p> </li> </ul> <p>To run a standard free-text search, the <code>searchText</code> parameter must be supplied. By default, all searchable fields are indexed for semantic search and will return semantic matches for SearchListings queries. To prevent semantic search indexing for a custom form attribute, see the <a href="https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html">CreateFormType API documentation</a>. To run a lexical search query, enclose the query with double quotes (""). This will disable semantic search even for fields that have semantic search enabled and will only return results that contain the keywords wrapped by double quotes (order of tokens in the query is not enforced). Free-text search is supported for all attributes annotated with @amazon.datazone#searchable.</p> <p>To run a filtered search, provide filter clause using the <code>filters</code> parameter. To filter on glossary terms, use the special attribute <code>__DataZoneGlossaryTerms</code>. To filter on an indexed numeric attribute (i.e., a numeric attribute annotated with <code>@amazon.datazone#sortable</code>), provide a filter using the <code>intValue</code> parameter. The filters parameter can also be used to run more advanced free-text searches that target specific attributes (attributes must be annotated with <code>@amazon.datazone#searchable</code> for free-text search). Create/update timestamp filtering is supported using the special <code>creationTime</code>/<code>lastUpdatedTime</code> attributes. Filter types can be mixed and matched to power complex queries.</p> <p> To find out whether an attribute has been annotated and indexed for a given search type, use the GetFormType API to retrieve the form containing the attribute.</p>
     # @param [Hash, Types::SearchInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the Amazon DataZone domain.</p>
@@ -8819,7 +10377,9 @@ module Aws::DataZone
     #       # One of:
     #       filter: {
     #         attribute: "Attribute", # required
-    #         value: "String", # required
+    #         value: "String",
+    #         int_value: 1,
+    #         operator: "EQ" # One of: ["EQ", "LE", "LT", "GE", "GT", "TEXT_SEARCH"]
     #       },
     #       and: [{
     #         # recursive FilterClause
@@ -9019,7 +10579,7 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
-    #     group_type: "SSO_GROUP" # One of: ["SSO_GROUP", "DATAZONE_SSO_GROUP"], # required
+    #     group_type: "SSO_GROUP" # One of: ["SSO_GROUP", "DATAZONE_SSO_GROUP", "IAM_ROLE_SESSION_GROUP"], # required
     #     search_text: "GroupSearchText",
     #     max_results: 1,
     #     next_token: "PaginationToken"
@@ -9034,7 +10594,9 @@ module Aws::DataZone
     #         domain_id: "DomainId",
     #         id: "GroupProfileId",
     #         status: "ASSIGNED" # One of: ["ASSIGNED", "NOT_ASSIGNED"],
-    #         group_name: "GroupProfileName"
+    #         group_name: "GroupProfileName",
+    #         role_principal_arn: "String",
+    #         role_principal_id: "String"
     #       }
     #     ],
     #     next_token: "PaginationToken"
@@ -9045,7 +10607,7 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Searches listings in Amazon DataZone.</p> <p>SearchListings is a powerful capability that enables users to discover and explore published assets and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. SearchListings also supports filtering using various criteria such as creation date, owner, or status. This API is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>SearchListings returns results in a paginated format. When the result set is large, the response will include a nextToken, which can be used to retrieve the next page of results.</p> <p>The SearchListings API gives users flexibility in specifying what kind of search is run.</p> <p>To run a free-text search, the <code>searchText</code> parameter must be supplied. By default, all searchable fields are indexed for semantic search and will return semantic matches for SearchListings queries. To prevent semantic search indexing for a custom form attribute, see the <a href="https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html">CreateFormType API documentation</a>. To run a lexical search query, enclose the query with double quotes (""). This will disable semantic search even for fields that have semantic search enabled and will only return results that contain the keywords wrapped by double quotes (order of tokens in the query is not enforced). Free-text search is supported for all attributes annotated with @amazon.datazone#searchable.</p> <p>To run a filtered search, provide filter clause using the filters parameter. To filter on glossary terms, use the special attribute <code>__DataZoneGlossaryTerms</code>.</p> <p> To find out whether an attribute has been annotated and indexed for a given search type, use the GetFormType API to retrieve the form containing the attribute.</p>
+    # <p>Searches listings in Amazon DataZone.</p> <p>SearchListings is a powerful capability that enables users to discover and explore published assets and data products across their organization. It provides both basic and advanced search functionality, allowing users to find resources based on names, descriptions, metadata, and other attributes. SearchListings also supports filtering using various criteria such as creation date, owner, or status. This API is essential for making the wealth of data resources in an organization discoverable and usable, helping users find the right data for their needs quickly and efficiently.</p> <p>SearchListings returns results in a paginated format. When the result set is large, the response will include a nextToken, which can be used to retrieve the next page of results.</p> <p>The SearchListings API gives users flexibility in specifying what kind of search is run.</p> <p>To run a standard free-text search, the <code>searchText</code> parameter must be supplied. By default, all searchable fields are indexed for semantic search and will return semantic matches for SearchListings queries. To prevent semantic search indexing for a custom form attribute, see the <a href="https://docs.aws.amazon.com/datazone/latest/APIReference/API_CreateFormType.html">CreateFormType API documentation</a>. To run a lexical search query, enclose the query with double quotes (""). This will disable semantic search even for fields that have semantic search enabled and will only return results that contain the keywords wrapped by double quotes (order of tokens in the query is not enforced). Free-text search is supported for all attributes annotated with @amazon.datazone#searchable.</p> <p>To run a filtered search, provide filter clause using the <code>filters</code> parameter. To filter on glossary terms, use the special attribute <code>__DataZoneGlossaryTerms</code>. To filter on an indexed numeric attribute (i.e., a numeric attribute annotated with <code>@amazon.datazone#sortable</code>), provide a filter using the <code>intValue</code> parameter. The filters parameter can also be used to run more advanced free-text searches that target specific attributes (attributes must be annotated with <code>@amazon.datazone#searchable</code> for free-text search). Create/update timestamp filtering is supported using the special <code>creationTime</code>/<code>lastUpdatedTime</code> attributes. Filter types can be mixed and matched to power complex queries.</p> <p> To find out whether an attribute has been annotated and indexed for a given search type, use the GetFormType API to retrieve the form containing the attribute.</p>
     # @param [Hash, Types::SearchListingsInput] params
     # @option params [String] :domain_identifier
     #   <p>The identifier of the domain in which to search listings.</p>
@@ -9080,7 +10642,9 @@ module Aws::DataZone
     #       # One of:
     #       filter: {
     #         attribute: "Attribute", # required
-    #         value: "String", # required
+    #         value: "String",
+    #         int_value: 1,
+    #         operator: "EQ" # One of: ["EQ", "LE", "LT", "GE", "GT", "TEXT_SEARCH"]
     #       },
     #       and: [{
     #         # recursive FilterClause
@@ -9268,7 +10832,9 @@ module Aws::DataZone
     #       # One of:
     #       filter: {
     #         attribute: "Attribute", # required
-    #         value: "String", # required
+    #         value: "String",
+    #         int_value: 1,
+    #         operator: "EQ" # One of: ["EQ", "LE", "LT", "GE", "GT", "TEXT_SEARCH"]
     #       },
     #       and: [{
     #         # recursive FilterClause
@@ -9394,7 +10960,9 @@ module Aws::DataZone
     #           # One of:
     #           iam: {
     #             arn: "String",
-    #             principal_id: "String"
+    #             principal_id: "String",
+    #             session_name: "String",
+    #             group_profile_id: "String"
     #           },
     #           sso: {
     #             username: "UserProfileName",
@@ -9460,12 +11028,14 @@ module Aws::DataZone
       request.send_request(options)
     end
 
-    # <p>Starts the metadata generation run.</p> <p>Prerequisites:</p> <ul> <li> <p>Asset must be created and belong to the specified domain and project. </p> </li> <li> <p>Asset type must be supported for metadata generation (e.g., Amazon Web Services Glue table).</p> </li> <li> <p>Asset must have a structured schema with valid rows and columns.</p> </li> <li> <p>Valid values for --type: BUSINESS_DESCRIPTIONS, BUSINESS_NAMES.</p> </li> <li> <p>The user must have permission to run metadata generation in the domain/project.</p> </li> </ul>
+    # <p>Starts the metadata generation run.</p> <p>Prerequisites:</p> <ul> <li> <p>Asset must be created and belong to the specified domain and project. </p> </li> <li> <p>Asset type must be supported for metadata generation (e.g., Amazon Web Services Glue table).</p> </li> <li> <p>Asset must have a structured schema with valid rows and columns.</p> </li> <li> <p>Valid values for --type: BUSINESS_DESCRIPTIONS, BUSINESS_NAMES, BUSINESS_GLOSSARY_ASSOCIATIONS.</p> </li> <li> <p>The user must have permission to run metadata generation in the domain/project.</p> </li> </ul>
     # @param [Hash, Types::StartMetadataGenerationRunInput] params
     # @option params [String] :domain_identifier
     #   <p>The ID of the Amazon DataZone domain where you want to start a metadata generation run.</p>
     # @option params [String] :type
     #   <p>The type of the metadata generation run.</p>
+    # @option params [Array<String>] :types
+    #   <p>The types of the metadata generation run.</p>
     # @option params [Types::MetadataGenerationRunTarget] :target
     #   <p>The asset for which you want to start a metadata generation run.</p>
     # @option params [String] :client_token
@@ -9475,7 +11045,8 @@ module Aws::DataZone
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
-    #     type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS"], # required
+    #     type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"],
+    #     types: ["BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"]],
     #     target: { # required
     #       type: "ASSET" # One of: ["ASSET"], # required
     #       identifier: "String", # required
@@ -9491,8 +11062,9 @@ module Aws::DataZone
     #   {
     #     domain_id: "DomainId", # required
     #     id: "MetadataGenerationRunIdentifier", # required
-    #     status: "SUBMITTED" # One of: ["SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED"],
-    #     type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS"],
+    #     status: "SUBMITTED" # One of: ["SUBMITTED", "IN_PROGRESS", "CANCELED", "SUCCEEDED", "FAILED", "PARTIALLY_SUCCEEDED"],
+    #     type: "BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"],
+    #     types: ["BUSINESS_DESCRIPTIONS" # One of: ["BUSINESS_DESCRIPTIONS", "BUSINESS_NAMES", "BUSINESS_GLOSSARY_ASSOCIATIONS"]],
     #     created_at: Time.now,
     #     created_by: "CreatedBy",
     #     owning_project_id: "ProjectId"
@@ -9500,6 +11072,363 @@ module Aws::DataZone
     # @return [Types::StartMetadataGenerationRunOutput]
     def start_metadata_generation_run(params = {}, options = {})
       request = build_request(:start_metadata_generation_run, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a notebook export in Amazon SageMaker Unified Studio. This operation exports a notebook to a specified file format and stores the output in Amazon Simple Storage Service.</p>
+    # @param [Hash, Types::StartNotebookExportInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to export the notebook.</p>
+    # @option params [String] :notebook_identifier
+    #   <p>The identifier of the notebook to export.</p>
+    # @option params [String] :owning_project_identifier
+    #   <p>The identifier of the project that owns the notebook.</p>
+    # @option params [String] :file_format
+    #   <p>The file format for the notebook export. Valid values are <code>PDF</code> and <code>IPYNB</code>.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     notebook_identifier: "NotebookId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     file_format: "PDF" # One of: ["PDF", "IPYNB"], # required
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.start_notebook_export(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "ExportId", # required
+    #     domain_id: "DomainId", # required
+    #     owning_project_id: "ProjectId", # required
+    #     notebook_id: "NotebookId", # required
+    #     file_format: "PDF" # One of: ["PDF", "IPYNB"], # required
+    #     status: "IN_PROGRESS" # One of: ["IN_PROGRESS", "SUCCEEDED", "FAILED"], # required
+    #     created_at: Time.now,
+    #     created_by: "CreatedBy"
+    #   }
+    # @return [Types::StartNotebookExportOutput]
+    def start_notebook_export(params = {}, options = {})
+      request = build_request(:start_notebook_export, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a notebook import in Amazon SageMaker Unified Studio. This operation imports a notebook from an Amazon Simple Storage Service location into a project.</p>
+    # @param [Hash, Types::StartNotebookImportInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to import the notebook.</p>
+    # @option params [String] :owning_project_identifier
+    #   <p>The identifier of the project that will own the imported notebook.</p>
+    # @option params [Types::SourceLocation] :source_location
+    #   <p>The source location of the notebook to import. Specify either a single Amazon Simple Storage Service URI, or a list of objects to import as the notebook's cells.</p>
+    # @option params [String] :name
+    #   <p>The name of the imported notebook. The name must be between 1 and 256 characters.</p>
+    # @option params [String] :description
+    #   <p>The description of the imported notebook.</p>
+    # @option params [String] :type
+    #   <p>The type of the notebook to import. If not specified, defaults to <code>DATA</code>.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     source_location: { # required
+    #       # One of:
+    #       s3: "S3SourceLocation",
+    #       s3_files: {
+    #         bucket: "S3BucketName", # required
+    #         file_list: [ # required
+    #           {
+    #             key: "S3ObjectKey", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     name: "NotebookName", # required
+    #     description: "Description",
+    #     type: "DATA" # One of: ["DATA", "SQL"],
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.start_notebook_import(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     notebook_id: "NotebookId",
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"],
+    #     domain_id: "DomainId",
+    #     owning_project_id: "ProjectId",
+    #     name: "NotebookName",
+    #     description: "Description",
+    #     type: "DATA" # One of: ["DATA", "SQL"],
+    #     source_location: {
+    #       # One of:
+    #       s3: "S3SourceLocation",
+    #       s3_files: {
+    #         bucket: "S3BucketName", # required
+    #         file_list: [ # required
+    #           {
+    #             key: "S3ObjectKey", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     created_at: Time.now,
+    #     created_by: "CreatedBy"
+    #   }
+    # @return [Types::StartNotebookImportOutput]
+    def start_notebook_import(params = {}, options = {})
+      request = build_request(:start_notebook_import, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a notebook run in Amazon SageMaker Unified Studio. A notebook run represents the execution of an <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html">Amazon SageMaker notebook</a> within a project. You can configure compute, network, timeout, and environment settings for the run.</p>
+    # @param [Hash, Types::StartNotebookRunInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook run is started.</p>
+    # @option params [String] :owning_project_identifier
+    #   <p>The identifier of the project that owns the notebook run.</p>
+    # @option params [String] :notebook_identifier
+    #   <p>The identifier of the notebook to run.</p>
+    # @option params [String] :schedule_identifier
+    #   <p>The identifier of the schedule associated with the notebook run.</p>
+    # @option params [Types::ComputeConfig] :compute_configuration
+    #   <p>The compute configuration for the notebook run, including instance type and environment version.</p>
+    # @option params [Types::NetworkConfig] :network_configuration
+    #   <p>The network configuration for the notebook run, including network access type and optional VPC settings.</p>
+    # @option params [Types::TimeoutConfig] :timeout_configuration
+    #   <p>The timeout configuration for the notebook run. The default timeout is 720 minutes (12 hours) and the maximum is 1440 minutes (24 hours).</p>
+    # @option params [Types::NotificationConfig] :notification_configuration
+    #   <p>The notification configuration for the notebook run. Use this to specify the notebook run states that trigger notifications.</p>
+    # @option params [Types::TriggerSource] :trigger_source
+    #   <p>The source that triggered the notebook run.</p>
+    # @option params [Hash<String, String>] :metadata
+    #   <p>The metadata for the notebook run, specified as key-value pairs. You can specify up to 50 entries, with keys up to 128 characters and values up to 1024 characters.</p>
+    # @option params [Hash<String, String>] :parameters
+    #   <p>The sensitive parameters for the notebook run, specified as key-value pairs. You can specify up to 50 entries, with keys up to 128 characters and values up to 1024 characters.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     notebook_identifier: "NotebookId", # required
+    #     schedule_identifier: "ScheduleId",
+    #     compute_configuration: {
+    #       instance_type: "InstanceType",
+    #       environment_version: "String"
+    #     },
+    #     network_configuration: {
+    #       network_access_type: "PUBLIC_INTERNET_ONLY" # One of: ["PUBLIC_INTERNET_ONLY", "VPC_ONLY"], # required
+    #       vpc_id: "String",
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"]
+    #     },
+    #     timeout_configuration: {
+    #       run_timeout_in_minutes: 1
+    #     },
+    #     notification_configuration: {
+    #       notify_on: ["SUCCEEDED" # One of: ["SUCCEEDED", "FAILED", "STOPPED", "QUEUED", "STARTING", "RUNNING", "STOPPING"]], # required
+    #     },
+    #     trigger_source: {
+    #       type: "MANUAL" # One of: ["MANUAL", "SCHEDULED", "WORKFLOW"],
+    #       name: "String"
+    #     },
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue"
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.start_notebook_run(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "NotebookRunId", # required
+    #     domain_id: "DomainId", # required
+    #     owning_project_id: "ProjectId", # required
+    #     notebook_id: "NotebookId", # required
+    #     schedule_id: "ScheduleId",
+    #     status: "QUEUED" # One of: ["QUEUED", "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"], # required
+    #     cell_order: [
+    #       {
+    #       }
+    #     ],
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue"
+    #     },
+    #     compute_configuration: {
+    #       instance_type: "InstanceType",
+    #       environment_version: "String"
+    #     },
+    #     network_configuration: {
+    #       network_access_type: "PUBLIC_INTERNET_ONLY" # One of: ["PUBLIC_INTERNET_ONLY", "VPC_ONLY"], # required
+    #       vpc_id: "String",
+    #       subnet_ids: ["String"],
+    #       security_group_ids: ["String"]
+    #     },
+    #     timeout_configuration: {
+    #       run_timeout_in_minutes: 1
+    #     },
+    #     environment_configuration: {
+    #       image_version: "String",
+    #       package_config: {
+    #         package_manager: "UV" # One of: ["UV"], # required
+    #         package_specification: "String"
+    #       }
+    #     },
+    #     storage_configuration: {
+    #       project_s3_path: "S3Path",
+    #       kms_key_arn: "KmsKeyArn"
+    #     },
+    #     notification_configuration: {
+    #       notify_on: ["SUCCEEDED" # One of: ["SUCCEEDED", "FAILED", "STOPPED", "QUEUED", "STARTING", "RUNNING", "STOPPING"]], # required
+    #     },
+    #     trigger_source: {
+    #       type: "MANUAL" # One of: ["MANUAL", "SCHEDULED", "WORKFLOW"],
+    #       name: "String"
+    #     },
+    #     error: {
+    #       message: "String", # required
+    #     },
+    #     created_at: Time.now,
+    #     created_by: "CreatedBy",
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy",
+    #     started_at: Time.now,
+    #     completed_at: Time.now
+    #   }
+    # @return [Types::StartNotebookRunOutput]
+    def start_notebook_run(params = {}, options = {})
+      request = build_request(:start_notebook_run, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts a notebook sync in Amazon SageMaker Unified Studio. This operation syncs a notebook from a Git repository into a project.</p>
+    # @param [Hash, Types::StartNotebookSyncInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which to sync the notebook.</p>
+    # @option params [String] :owning_project_identifier
+    #   <p>The identifier of the project that will own the synced notebook.</p>
+    # @option params [Types::SourceLocation] :source_location
+    #   <p>The source location of the notebook to sync. This specifies the Amazon Simple Storage Service URI of the notebook file.</p>
+    # @option params [Types::GitMetadata] :git_metadata
+    #   <p>The Git metadata for the notebook sync, including repository, branch, and commit information.</p>
+    # @option params [String] :notebook_id
+    #   <p>The identifier of an existing notebook to sync. If not specified, a new notebook is created.</p>
+    # @option params [String] :name
+    #   <p>The name of the notebook. The name must be between 1 and 256 characters.</p>
+    # @option params [String] :description
+    #   <p>The description of the notebook.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     owning_project_identifier: "ProjectId", # required
+    #     source_location: { # required
+    #       # One of:
+    #       s3: "S3SourceLocation",
+    #       s3_files: {
+    #         bucket: "S3BucketName", # required
+    #         file_list: [ # required
+    #           {
+    #             key: "S3ObjectKey", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     git_metadata: {
+    #       connection_id: "GitConnectionId", # required
+    #       repository: "GitRepository", # required
+    #       branch: "GitBranch", # required
+    #       commit_hash: "CommitHash", # required
+    #       file_name: "FileName",
+    #       committed_at: Time.now,
+    #       commit_message: "CommitMessage"
+    #     },
+    #     notebook_id: "NotebookId",
+    #     name: "NotebookName",
+    #     description: "Description",
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.start_notebook_sync(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     notebook_id: "NotebookId",
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"],
+    #     domain_id: "DomainId",
+    #     owning_project_id: "ProjectId",
+    #     source_location: {
+    #       # One of:
+    #       s3: "S3SourceLocation",
+    #       s3_files: {
+    #         bucket: "S3BucketName", # required
+    #         file_list: [ # required
+    #           {
+    #             key: "S3ObjectKey", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     git_metadata: {
+    #       connection_id: "GitConnectionId", # required
+    #       repository: "GitRepository", # required
+    #       branch: "GitBranch", # required
+    #       commit_hash: "CommitHash", # required
+    #       file_name: "FileName",
+    #       committed_at: Time.now,
+    #       commit_message: "CommitMessage"
+    #     },
+    #     name: "NotebookName",
+    #     description: "Description",
+    #     created_at: Time.now,
+    #     created_by: "CreatedBy"
+    #   }
+    # @return [Types::StartNotebookSyncOutput]
+    def start_notebook_sync(params = {}, options = {})
+      request = build_request(:start_notebook_sync, params)
+      request.send_request(options)
+    end
+
+    # <p>Stops a running <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html">notebook run</a> in Amazon SageMaker Unified Studio.</p>
+    # @param [Hash, Types::StopNotebookRunInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook run is stopped.</p>
+    # @option params [String] :identifier
+    #   <p>The identifier of the notebook run to stop.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "NotebookRunId", # required
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.stop_notebook_run(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "NotebookRunId", # required
+    #     domain_id: "DomainId", # required
+    #     owning_project_id: "ProjectId", # required
+    #     status: "QUEUED" # One of: ["QUEUED", "STARTING", "RUNNING", "STOPPING", "STOPPED", "SUCCEEDED", "FAILED"], # required
+    #   }
+    # @return [Types::StopNotebookRunOutput]
+    def stop_notebook_run(params = {}, options = {})
+      request = build_request(:stop_notebook_run, params)
       request.send_request(options)
     end
 
@@ -9801,6 +11730,8 @@ module Aws::DataZone
 
     # <p>Updates a connection. In Amazon DataZone, a connection enables you to connect your resources (domains, projects, and environments) to external resources and services.</p>
     # @param [Hash, Types::UpdateConnectionInput] params
+    # @option params [Array<Types::Configuration>] :configurations
+    #   <p>The configurations of the connection.</p>
     # @option params [String] :domain_identifier
     #   <p>The ID of the domain where a connection is to be updated.</p>
     # @option params [String] :identifier
@@ -9813,6 +11744,14 @@ module Aws::DataZone
     #   <p>The connection props.</p>
     # @example Request syntax with placeholder values
     #   params = {
+    #     configurations: [
+    #       {
+    #         classification: "String",
+    #         properties: {
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
     #     domain_identifier: "DomainId", # required
     #     identifier: "ConnectionId", # required
     #     description: "Description",
@@ -9881,7 +11820,49 @@ module Aws::DataZone
     #       },
     #       s3_properties: {
     #         s3_uri: "S3Uri", # required
-    #         s3_access_grant_location_id: "S3AccessGrantLocationId"
+    #         s3_access_grant_location_id: "S3AccessGrantLocationId",
+    #         register_s3_access_grant_location: false
+    #       },
+    #       snowflake_properties: {
+    #         connectivity_properties_patch: {
+    #           description: "String",
+    #           connection_properties: {
+    #             "String" => "String"
+    #           },
+    #           authentication_configuration: {
+    #             secret_arn: "String",
+    #             basic_authentication_credentials: {
+    #               user_name: "String",
+    #               password: "String"
+    #             }
+    #           }
+    #         },
+    #         snowflake_role: "SnowflakeRole",
+    #         lineage_sync: {
+    #           timezone: "UTC" # One of: ["UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"],
+    #           enabled: false, # required
+    #           schedule: "LineageSyncScheduleCronString"
+    #         }
+    #       },
+    #       amazon_q_properties: {
+    #         is_enabled: false, # required
+    #         profile_arn: "String",
+    #         auth_mode: "String"
+    #       },
+    #       mlflow_properties: {
+    #         tracking_server_arn: "String"
+    #       },
+    #       lakehouse_properties: {
+    #         glue_lineage_sync_enabled: false
+    #       },
+    #       vpc_properties: {
+    #         vpc_id: "VpcId",
+    #         subnet_ids: ["SubnetId"],
+    #         security_group_id: "SecurityGroupId"
+    #       },
+    #       git_properties: {
+    #         code_connection_arn: "String",
+    #         default_branch: "String"
     #       }
     #     }
     #   }
@@ -9890,6 +11871,14 @@ module Aws::DataZone
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     configurations: [
+    #       {
+    #         classification: "String",
+    #         properties: {
+    #           "String" => "String"
+    #         }
+    #       }
+    #     ],
     #     connection_id: "ConnectionId", # required
     #     description: "Description",
     #     domain_id: "DomainId", # required
@@ -9905,10 +11894,11 @@ module Aws::DataZone
     #           iam_connection_id: "ConnectionId"
     #         },
     #         glue_connection_name: "String",
+    #         glue_connection_names: ["GlueConnectionName"],
     #         glue_connection: {
     #           name: "String",
     #           description: "String",
-    #           connection_type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"],
+    #           connection_type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"],
     #           match_criteria: ["String"],
     #           connection_properties: {
     #             "String" => "String"
@@ -9962,6 +11952,7 @@ module Aws::DataZone
     #           connection_schema_version: 1,
     #           compatible_compute_environments: ["SPARK" # One of: ["SPARK", "ATHENA", "PYTHON"]]
     #         },
+    #         enable_trusted_identity_propagation: false,
     #         host: "String",
     #         port: 1,
     #         protocol: "ATHENA" # One of: ["ATHENA", "GLUE_INTERACTIVE_SESSION", "HTTPS", "JDBC", "LIVY", "ODBC", "PRISM"],
@@ -10042,6 +12033,7 @@ module Aws::DataZone
     #           connection: "String"
     #         },
     #         glue_connection_name: "String",
+    #         glue_connection_names: ["GlueConnectionName"],
     #         glue_version: "String",
     #         idle_timeout: 1,
     #         java_virtual_env: "String",
@@ -10052,11 +12044,58 @@ module Aws::DataZone
     #       s3_properties: {
     #         s3_uri: "S3Uri", # required
     #         s3_access_grant_location_id: "S3AccessGrantLocationId",
+    #         register_s3_access_grant_location: false,
+    #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"],
+    #         error_message: "String"
+    #       },
+    #       snowflake_properties: {
+    #         snowflake_role: "SnowflakeRole", # required
+    #         identity_mapping: { # required
+    #           username_attribute: "String", # required
+    #           prefix: "String"
+    #         },
+    #         lineage_sync: { # required
+    #           lineage_job_id: "String",
+    #           timezone: "UTC" # One of: ["UTC", "AFRICA_JOHANNESBURG", "AMERICA_MONTREAL", "AMERICA_SAO_PAULO", "ASIA_BAHRAIN", "ASIA_BANGKOK", "ASIA_CALCUTTA", "ASIA_DUBAI", "ASIA_HONG_KONG", "ASIA_JAKARTA", "ASIA_KUALA_LUMPUR", "ASIA_SEOUL", "ASIA_SHANGHAI", "ASIA_SINGAPORE", "ASIA_TAIPEI", "ASIA_TOKYO", "AUSTRALIA_MELBOURNE", "AUSTRALIA_SYDNEY", "CANADA_CENTRAL", "CET", "CST6CDT", "ETC_GMT", "ETC_GMT0", "ETC_GMT_ADD_0", "ETC_GMT_ADD_1", "ETC_GMT_ADD_10", "ETC_GMT_ADD_11", "ETC_GMT_ADD_12", "ETC_GMT_ADD_2", "ETC_GMT_ADD_3", "ETC_GMT_ADD_4", "ETC_GMT_ADD_5", "ETC_GMT_ADD_6", "ETC_GMT_ADD_7", "ETC_GMT_ADD_8", "ETC_GMT_ADD_9", "ETC_GMT_NEG_0", "ETC_GMT_NEG_1", "ETC_GMT_NEG_10", "ETC_GMT_NEG_11", "ETC_GMT_NEG_12", "ETC_GMT_NEG_13", "ETC_GMT_NEG_14", "ETC_GMT_NEG_2", "ETC_GMT_NEG_3", "ETC_GMT_NEG_4", "ETC_GMT_NEG_5", "ETC_GMT_NEG_6", "ETC_GMT_NEG_7", "ETC_GMT_NEG_8", "ETC_GMT_NEG_9", "EUROPE_DUBLIN", "EUROPE_LONDON", "EUROPE_PARIS", "EUROPE_STOCKHOLM", "EUROPE_ZURICH", "ISRAEL", "MEXICO_GENERAL", "MST7MDT", "PACIFIC_AUCKLAND", "US_CENTRAL", "US_EASTERN", "US_MOUNTAIN", "US_PACIFIC"],
+    #           enabled: false,
+    #           schedule: "LineageSyncScheduleCronString"
+    #         },
+    #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"], # required
+    #         error_message: "String"
+    #       },
+    #       amazon_q_properties: {
+    #         is_enabled: false, # required
+    #         profile_arn: "String",
+    #         auth_mode: "String"
+    #       },
+    #       mlflow_properties: {
+    #         tracking_server_arn: "String"
+    #       },
+    #       workflows_mwaa_properties: {
+    #         mwaa_environment_name: "String"
+    #       },
+    #       workflows_serverless_properties: {
+    #       },
+    #       lakehouse_properties: {
+    #         glue_lineage_sync_enabled: false
+    #       },
+    #       vpc_properties: {
+    #         vpc_id: "VpcId", # required
+    #         subnet_ids: ["SubnetId"], # required
+    #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"], # required
+    #         security_group_id: "SecurityGroupId",
+    #         glue_connection_names: ["GlueConnectionName"]
+    #       },
+    #       git_properties: {
+    #         code_connection_arn: "String", # required
+    #         repository_id: "String", # required
+    #         default_branch: "String", # required
     #         status: "CREATING" # One of: ["CREATING", "CREATE_FAILED", "DELETING", "DELETE_FAILED", "READY", "UPDATING", "UPDATE_FAILED", "DELETED"],
     #         error_message: "String"
     #       }
     #     },
-    #     type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA"], # required
+    #     type: "ATHENA" # One of: ["ATHENA", "BIGQUERY", "DATABRICKS", "DOCUMENTDB", "DYNAMODB", "HYPERPOD", "IAM", "MYSQL", "OPENSEARCH", "ORACLE", "POSTGRESQL", "REDSHIFT", "S3", "SAPHANA", "SNOWFLAKE", "SPARK", "SQLSERVER", "TERADATA", "VERTICA", "WORKFLOWS_MWAA", "AMAZON_Q", "MLFLOW", "VPC", "GIT"], # required
+    #     scope: "DOMAIN" # One of: ["DOMAIN", "PROJECT"]
     #   }
     # @return [Types::UpdateConnectionOutput]
     def update_connection(params = {}, options = {})
@@ -10414,6 +12453,8 @@ module Aws::DataZone
     #   <p>The blueprint version to which the environment should be updated. You can only specify the following string for this parameter: <code>latest</code>.</p>
     # @option params [Array<Types::EnvironmentParameter>] :user_parameters
     #   <p>The user parameters of the environment.</p>
+    # @option params [String] :environment_configuration_name
+    #   <p>The configuration name of the environment.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -10427,7 +12468,8 @@ module Aws::DataZone
     #         name: "String",
     #         value: "String"
     #       }
-    #     ]
+    #     ],
+    #     environment_configuration_name: "EnvironmentConfigurationName"
     #   }
     #   options = {}
     #   response = client.update_environment(params, options)
@@ -10501,7 +12543,8 @@ module Aws::DataZone
     #       end_timeout_minutes: 1
     #     },
     #     environment_blueprint_id: "EnvironmentBlueprintId",
-    #     environment_configuration_id: "EnvironmentConfigurationId"
+    #     environment_configuration_id: "EnvironmentConfigurationId",
+    #     environment_configuration_name: "EnvironmentConfigurationName"
     #   }
     # @return [Types::UpdateEnvironmentOutput]
     def update_environment(params = {}, options = {})
@@ -10572,6 +12615,8 @@ module Aws::DataZone
     #   <p>The provisioning properties to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
     # @option params [Array<Types::CustomParameter>] :user_parameters
     #   <p>The user parameters to be updated as part of the <code>UpdateEnvironmentBlueprint</code> action.</p>
+    # @option params [String] :blueprint_category
+    #   <p>The category to update. The only valid value is <code>TOOLING</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -10593,7 +12638,8 @@ module Aws::DataZone
     #         is_optional: false,
     #         is_update_supported: false
     #       }
-    #     ]
+    #     ],
+    #     blueprint_category: "TOOLING" # One of: ["TOOLING"]
     #   }
     #   options = {}
     #   response = client.update_environment_blueprint(params, options)
@@ -10626,6 +12672,7 @@ module Aws::DataZone
     #       }
     #     ],
     #     glossary_terms: ["GlossaryTermId"],
+    #     blueprint_category: "TOOLING" # One of: ["TOOLING"],
     #     created_at: Time.now,
     #     updated_at: Time.now
     #   }
@@ -10820,11 +12867,120 @@ module Aws::DataZone
     #     domain_id: "DomainId",
     #     id: "GroupProfileId",
     #     status: "ASSIGNED" # One of: ["ASSIGNED", "NOT_ASSIGNED"],
-    #     group_name: "GroupProfileName"
+    #     group_name: "GroupProfileName",
+    #     role_principal_arn: "String",
+    #     role_principal_id: "String"
     #   }
     # @return [Types::UpdateGroupProfileOutput]
     def update_group_profile(params = {}, options = {})
       request = build_request(:update_group_profile, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a <a href="https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html">notebook</a> in Amazon SageMaker Unified Studio.</p>
+    # @param [Hash, Types::UpdateNotebookInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The identifier of the Amazon SageMaker Unified Studio domain in which the notebook exists.</p>
+    # @option params [String] :identifier
+    #   <p>The identifier of the notebook to update.</p>
+    # @option params [String] :description
+    #   <p>The updated description of the notebook.</p>
+    # @option params [String] :status
+    #   <p>The updated status of the notebook.</p>
+    # @option params [String] :name
+    #   <p>The updated name of the notebook.</p>
+    # @option params [Array<Types::CellInformation>] :cell_order
+    #   <p>The updated ordered list of cells in the notebook.</p>
+    # @option params [String] :type
+    #   <p>The updated type of the notebook.</p>
+    # @option params [Hash<String, String>] :metadata
+    #   <p>The updated metadata for the notebook, specified as key-value pairs.</p>
+    # @option params [Hash<String, String>] :parameters
+    #   <p>The updated sensitive parameters for the notebook, specified as key-value pairs.</p>
+    # @option params [Types::EnvironmentConfig] :environment_configuration
+    #   <p>The updated environment configuration for the notebook.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     identifier: "NotebookId", # required
+    #     description: "Description",
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"],
+    #     name: "NotebookName",
+    #     cell_order: [
+    #       {
+    #       }
+    #     ],
+    #     type: "DATA" # One of: ["DATA", "SQL"],
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue"
+    #     },
+    #     environment_configuration: {
+    #       image_version: "String",
+    #       package_config: {
+    #         package_manager: "UV" # One of: ["UV"], # required
+    #         package_specification: "String"
+    #       }
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.update_notebook(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     id: "NotebookId", # required
+    #     name: "NotebookName", # required
+    #     owning_project_id: "ProjectId", # required
+    #     domain_id: "DomainId", # required
+    #     cell_order: [ # required
+    #       {
+    #       }
+    #     ],
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ARCHIVED", "SYNC_IN_PROGRESS", "SYNC_FAILED"], # required
+    #     type: "DATA" # One of: ["DATA", "SQL"],
+    #     description: "Description",
+    #     created_at: Time.now,
+    #     created_by: "CreatedBy",
+    #     updated_at: Time.now,
+    #     updated_by: "UpdatedBy",
+    #     locked_by: "String",
+    #     locked_at: Time.now,
+    #     lock_expires_at: Time.now,
+    #     compute_id: "ComputeId",
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
+    #     parameters: {
+    #       "ParameterKey" => "ParameterValue"
+    #     },
+    #     environment_configuration: {
+    #       image_version: "String",
+    #       package_config: {
+    #         package_manager: "UV" # One of: ["UV"], # required
+    #         package_specification: "String"
+    #       }
+    #     },
+    #     error: {
+    #       message: "String", # required
+    #     },
+    #     git_metadata: {
+    #       connection_id: "GitConnectionId", # required
+    #       repository: "GitRepository", # required
+    #       branch: "GitBranch", # required
+    #       commit_hash: "CommitHash", # required
+    #       file_name: "FileName",
+    #       committed_at: Time.now,
+    #       commit_message: "CommitMessage"
+    #     }
+    #   }
+    # @return [Types::UpdateNotebookOutput]
+    def update_notebook(params = {}, options = {})
+      request = build_request(:update_notebook, params)
       request.send_request(options)
     end
 
@@ -10838,6 +12994,8 @@ module Aws::DataZone
     #   <p>The name to be updated as part of the <code>UpdateProject</code> action.</p>
     # @option params [String] :description
     #   <p>The description to be updated as part of the <code>UpdateProject</code> action.</p>
+    # @option params [Hash<String, String>] :resource_tags
+    #   <p>The resource tags of the project.</p>
     # @option params [Array<String>] :glossary_terms
     #   <p>The glossary terms to be updated as part of the <code>UpdateProject</code> action.</p>
     # @option params [String] :domain_unit_id
@@ -10854,6 +13012,9 @@ module Aws::DataZone
     #     identifier: "ProjectId", # required
     #     name: "ProjectName",
     #     description: "Description",
+    #     resource_tags: {
+    #       "TagKey" => "TagValue"
+    #     },
     #     glossary_terms: ["GlossaryTermId"],
     #     domain_unit_id: "DomainUnitId",
     #     environment_deployment_details: {
@@ -10905,6 +13066,13 @@ module Aws::DataZone
     #     created_by: "CreatedBy", # required
     #     created_at: Time.now,
     #     last_updated_at: Time.now,
+    #     resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #         source: "PROJECT" # One of: ["PROJECT", "PROJECT_PROFILE"], # required
+    #       }
+    #     ],
     #     glossary_terms: ["GlossaryTermId"],
     #     domain_unit_id: "DomainUnitId",
     #     project_profile_id: "ProjectProfileId",
@@ -10935,7 +13103,8 @@ module Aws::DataZone
     #           }
     #         ]
     #       }
-    #     }
+    #     },
+    #     project_category: "String"
     #   }
     # @return [Types::UpdateProjectOutput]
     def update_project(params = {}, options = {})
@@ -10955,6 +13124,12 @@ module Aws::DataZone
     #   <p>The description of a project profile.</p>
     # @option params [String] :status
     #   <p>The status of a project profile.</p>
+    # @option params [Array<Types::ResourceTagParameter>] :project_resource_tags
+    #   <p>The resource tags of the project profile.</p>
+    # @option params [Boolean] :allow_custom_project_resource_tags
+    #   <p>Specifies whether custom project resource tags are supported.</p>
+    # @option params [String] :project_resource_tags_description
+    #   <p>Field viewable through the UI that provides a project user with the allowed resource tag specifications.</p>
     # @option params [Array<Types::EnvironmentConfiguration>] :environment_configurations
     #   <p>The environment configurations of a project profile.</p>
     # @option params [String] :domain_unit_identifier
@@ -10966,6 +13141,15 @@ module Aws::DataZone
     #     name: "ProjectProfileName",
     #     description: "Description",
     #     status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     project_resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #         is_value_editable: false, # required
+    #       }
+    #     ],
+    #     allow_custom_project_resource_tags: false,
+    #     project_resource_tags_description: "Description",
     #     environment_configurations: [
     #       {
     #         name: "EnvironmentConfigurationName", # required
@@ -11016,6 +13200,15 @@ module Aws::DataZone
     #     name: "ProjectProfileName", # required
     #     description: "Description",
     #     status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
+    #     project_resource_tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #         is_value_editable: false, # required
+    #       }
+    #     ],
+    #     allow_custom_project_resource_tags: false,
+    #     project_resource_tags_description: "Description",
     #     environment_configurations: [
     #       {
     #         name: "EnvironmentConfigurationName", # required
@@ -11065,6 +13258,34 @@ module Aws::DataZone
       request.send_request(options)
     end
 
+    # <p>Updates the owner of the root domain unit.</p>
+    # @param [Hash, Types::UpdateRootDomainUnitOwnerInput] params
+    # @option params [String] :domain_identifier
+    #   <p>The ID of the domain where the root domain unit owner is to be updated.</p>
+    # @option params [String] :current_owner
+    #   <p>The current owner of the root domain unit.</p>
+    # @option params [String] :new_owner
+    #   <p>The new owner of the root domain unit.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure idempotency of the request. This field is automatically populated if not provided.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     domain_identifier: "DomainId", # required
+    #     current_owner: "UserIdentifier", # required
+    #     new_owner: "String", # required
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.update_root_domain_unit_owner(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::UpdateRootDomainUnitOwnerOutput]
+    def update_root_domain_unit_owner(params = {}, options = {})
+      request = build_request(:update_root_domain_unit_owner, params)
+      request.send_request(options)
+    end
+
     # <p>Updates a rule. In Amazon DataZone, a rule is a formal agreement that enforces specific requirements across user workflows (e.g., publishing assets to the catalog, requesting subscriptions, creating projects) within the Amazon DataZone data portal. These rules help maintain consistency, ensure compliance, and uphold governance standards in data management processes. For instance, a metadata enforcement rule can specify the required information for creating a subscription request or publishing a data asset to the catalog, ensuring alignment with organizational standards.</p>
     # @param [Hash, Types::UpdateRuleInput] params
     # @option params [String] :domain_identifier
@@ -11107,6 +13328,9 @@ module Aws::DataZone
     #             type_revision: "Revision", # required
     #           }
     #         ]
+    #       },
+    #       glossary_term_enforcement_detail: {
+    #         required_glossary_term_ids: ["GlossaryTermId"]
     #       }
     #     },
     #     include_child_domain_units: false
@@ -11119,7 +13343,7 @@ module Aws::DataZone
     #     identifier: "RuleId", # required
     #     revision: "Revision", # required
     #     name: "RuleName", # required
-    #     rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT"], # required
+    #     rule_type: "METADATA_FORM_ENFORCEMENT" # One of: ["METADATA_FORM_ENFORCEMENT", "GLOSSARY_TERM_ENFORCEMENT"], # required
     #     target: { # required
     #       # One of:
     #       domain_unit_target: {
@@ -11148,6 +13372,9 @@ module Aws::DataZone
     #             type_revision: "Revision", # required
     #           }
     #         ]
+    #       },
+    #       glossary_term_enforcement_detail: {
+    #         required_glossary_term_ids: ["GlossaryTermId"]
     #       }
     #     },
     #     description: "Description",
@@ -11198,6 +13425,7 @@ module Aws::DataZone
     #     domain_id: "DomainId", # required
     #     created_at: Time.now, # required
     #     updated_at: Time.now, # required
+    #     environment_id: "EnvironmentId",
     #     subscription_target_id: "SubscriptionTargetId", # required
     #     granted_entity: { # required
     #       # One of:
@@ -11222,7 +13450,12 @@ module Aws::DataZone
     #           asset_id: "AssetId", # required
     #           filter_ids: ["FilterId"], # required
     #           status: "String", # required
+    #           scope_name: "String",
     #           error_message: "String"
+    #         },
+    #         permissions: {
+    #           # One of:
+    #           s3: ["READ" # One of: ["READ", "WRITE"]]
     #         }
     #       }
     #     ],
@@ -11266,6 +13499,30 @@ module Aws::DataZone
     #       project: {
     #         id: "ProjectId",
     #         name: "ProjectName"
+    #       },
+    #       user: {
+    #         id: "UserProfileId",
+    #         details: {
+    #           # One of:
+    #           iam: {
+    #             arn: "String",
+    #             principal_id: "String",
+    #             session_name: "String",
+    #             group_profile_id: "String"
+    #           },
+    #           sso: {
+    #             username: "UserProfileName",
+    #             first_name: "FirstName",
+    #             last_name: "LastName"
+    #           }
+    #         }
+    #       },
+    #       group: {
+    #         id: "GroupProfileId",
+    #         name: "GroupProfileName"
+    #       },
+    #       iam: {
+    #         principal_arn: "IamPrincipalArn"
     #       }
     #     }],
     #     subscribed_listings: [ # required
@@ -11291,7 +13548,12 @@ module Aws::DataZone
     #               asset_id: "AssetId", # required
     #               filter_ids: ["FilterId"], # required
     #               status: "String", # required
+    #               scope_name: "String",
     #               error_message: "String"
+    #             },
+    #             permissions: {
+    #               # One of:
+    #               s3: ["READ" # One of: ["READ", "WRITE"]]
     #             }
     #           },
     #           product_listing: {
@@ -11356,6 +13618,8 @@ module Aws::DataZone
     #   <p>The manage access role to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
     # @option params [String] :provider
     #   <p>The provider to be updated as part of the <code>UpdateSubscriptionTarget</code> action.</p>
+    # @option params [String] :subscription_grant_creation_mode
+    #   <p> Determines the subscription grant creation mode for this target, defining if grants are auto-created upon subscription approval or managed manually. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
@@ -11371,7 +13635,8 @@ module Aws::DataZone
     #       }
     #     ],
     #     manage_access_role: "IamRoleArn",
-    #     provider: "String"
+    #     provider: "String",
+    #     subscription_grant_creation_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "MANUAL"]
     #   }
     #   options = {}
     #   response = client.update_subscription_target(params, options)
@@ -11398,6 +13663,7 @@ module Aws::DataZone
     #       }
     #     ],
     #     provider: "String", # required
+    #     subscription_grant_creation_mode: "AUTOMATIC" # One of: ["AUTOMATIC", "MANUAL"]
     #   }
     # @return [Types::UpdateSubscriptionTargetOutput]
     def update_subscription_target(params = {}, options = {})
@@ -11415,12 +13681,15 @@ module Aws::DataZone
     #   <p>The type of the user profile that are to be updated.</p>
     # @option params [String] :status
     #   <p>The status of the user profile that are to be updated.</p>
+    # @option params [String] :session_name
+    #   <p>The session name for IAM role sessions.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     domain_identifier: "DomainId", # required
     #     user_identifier: "UserIdentifier", # required
     #     type: "IAM" # One of: ["IAM", "SSO"],
     #     status: "ASSIGNED" # One of: ["ASSIGNED", "NOT_ASSIGNED", "ACTIVATED", "DEACTIVATED"], # required
+    #     session_name: "String"
     #   }
     #   options = {}
     #   response = client.update_user_profile(params, options)
@@ -11435,7 +13704,9 @@ module Aws::DataZone
     #       # One of:
     #       iam: {
     #         arn: "String",
-    #         principal_id: "String"
+    #         principal_id: "String",
+    #         session_name: "String",
+    #         group_profile_id: "String"
     #       },
     #       sso: {
     #         username: "UserProfileName",

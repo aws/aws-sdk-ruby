@@ -94,10 +94,12 @@ module Aws::ControlCatalog
 
       def initialize: (
         ?implementations: Types::ImplementationFilter,
+        ?governed_providers: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor implementations: Types::ImplementationFilter?
+      attr_accessor governed_providers: Array[String]?
     end
 
     class ControlMapping
@@ -135,10 +137,23 @@ module Aws::ControlCatalog
 
       def initialize: (
         ?name: String,
+        ?requirement: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
+      attr_accessor requirement: String?
+    end
+
+    module ControlParameterRequirement
+      REQUIRED: String
+      OPTIONAL: String
+    end
+
+    module ControlRelationType
+      COMPLEMENTARY: String
+      ALTERNATIVE: String
+      MUTUALLY_EXCLUSIVE: String
     end
 
     module ControlScope
@@ -163,9 +178,11 @@ module Aws::ControlCatalog
         ?description: String,
         ?behavior: String,
         ?severity: String,
+        ?parameter_requirement_summary: String,
         ?implementation: Types::ImplementationSummary,
         ?create_time: Time,
         ?governed_resources: Array[String],
+        ?governed_providers: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -175,9 +192,11 @@ module Aws::ControlCatalog
       attr_accessor description: String?
       attr_accessor behavior: String?
       attr_accessor severity: String?
+      attr_accessor parameter_requirement_summary: String?
       attr_accessor implementation: Types::ImplementationSummary?
       attr_accessor create_time: Time?
       attr_accessor governed_resources: Array[String]?
+      attr_accessor governed_providers: Array[String]?
     end
 
     class DomainResourceFilter
@@ -246,9 +265,11 @@ module Aws::ControlCatalog
         ?severity: String,
         ?region_configuration: Types::RegionConfiguration,
         ?implementation: Types::ImplementationDetails,
+        ?parameter_requirement_summary: String,
         ?parameters: Array[Types::ControlParameter],
         ?create_time: Time,
         ?governed_resources: Array[String],
+        ?governed_providers: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -260,9 +281,11 @@ module Aws::ControlCatalog
       attr_accessor severity: String?
       attr_accessor region_configuration: Types::RegionConfiguration?
       attr_accessor implementation: Types::ImplementationDetails?
+      attr_accessor parameter_requirement_summary: String?
       attr_accessor parameters: Array[Types::ControlParameter]?
       attr_accessor create_time: Time?
       attr_accessor governed_resources: Array[String]?
+      attr_accessor governed_providers: Array[String]?
     end
 
     class ImplementationDetails
@@ -459,15 +482,19 @@ module Aws::ControlCatalog
       def initialize: (
         ?framework: Types::FrameworkMappingDetails,
         ?common_control: Types::CommonControlMappingDetails,
+        ?related_control: Types::RelatedControlMappingDetails,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor framework: Types::FrameworkMappingDetails?
       attr_accessor common_control: Types::CommonControlMappingDetails?
+      attr_accessor related_control: Types::RelatedControlMappingDetails?
 
       class Framework < Mapping
       end
       class CommonControl < Mapping
+      end
+      class RelatedControl < Mapping
       end
       class Unknown < Mapping
       end
@@ -476,6 +503,7 @@ module Aws::ControlCatalog
     module MappingType
       FRAMEWORK: String
       COMMON_CONTROL: String
+      RELATED_CONTROL: String
     end
 
     class ObjectiveFilter
@@ -521,6 +549,12 @@ module Aws::ControlCatalog
       attr_accessor last_update_time: Time?
     end
 
+    module ParameterRequirementSummary
+      REQUIRED: String
+      OPTIONAL: String
+      NONE: String
+    end
+
     class RegionConfiguration
       include Smithy::Schema::Structure
 
@@ -532,6 +566,19 @@ module Aws::ControlCatalog
 
       attr_accessor scope: String?
       attr_accessor deployable_regions: Array[String]?
+    end
+
+    class RelatedControlMappingDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?control_arn: String,
+        ?relation_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor control_arn: String?
+      attr_accessor relation_type: String?
     end
 
     class ResourceNotFoundException

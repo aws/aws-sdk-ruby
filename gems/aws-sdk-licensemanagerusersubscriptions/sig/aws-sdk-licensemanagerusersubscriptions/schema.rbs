@@ -34,6 +34,8 @@ module Aws::LicenseManagerUserSubscriptions
     InternalServerException: StructureShape
     IpV4: StringShape
     IpV4List: ListShape
+    IpV6: StringShape
+    IpV6List: ListShape
     LicenseServer: StructureShape
     LicenseServerEndpoint: StructureShape
     LicenseServerEndpointId: StringShape

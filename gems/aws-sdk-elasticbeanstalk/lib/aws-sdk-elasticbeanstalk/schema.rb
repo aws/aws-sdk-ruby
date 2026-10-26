@@ -30,6 +30,7 @@ module Aws::ElasticBeanstalk
     ApplicationVersionStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticbeanstalk#ApplicationVersionStatus", name: "ApplicationVersionStatus")
     ApplyEnvironmentManagedActionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#ApplyEnvironmentManagedActionRequest", name: "ApplyEnvironmentManagedActionRequest")
     ApplyEnvironmentManagedActionResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#ApplyEnvironmentManagedActionResult", name: "ApplyEnvironmentManagedActionResult")
+    ArchitectureType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticbeanstalk#ArchitectureType", name: "ArchitectureType")
     AssociateEnvironmentOperationsRoleMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#AssociateEnvironmentOperationsRoleMessage", name: "AssociateEnvironmentOperationsRoleMessage")
     AutoCreateApplication = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.elasticbeanstalk#AutoCreateApplication", name: "AutoCreateApplication")
     AutoScalingGroup = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#AutoScalingGroup", name: "AutoScalingGroup")
@@ -47,6 +48,7 @@ module Aws::ElasticBeanstalk
     Causes = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.elasticbeanstalk#Causes", name: "Causes")
     CheckDNSAvailabilityMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#CheckDNSAvailabilityMessage", name: "CheckDNSAvailabilityMessage")
     CheckDNSAvailabilityResultMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#CheckDNSAvailabilityResultMessage", name: "CheckDNSAvailabilityResultMessage")
+    Cluster = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#Cluster", name: "Cluster")
     CnameAvailability = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.elasticbeanstalk#CnameAvailability", name: "CnameAvailability")
     CodeBuildNotInServiceRegionException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#CodeBuildNotInServiceRegionException", name: "CodeBuildNotInServiceRegionException", traits: {"aws.protocols#awsQueryError" => {"code" => "CodeBuildNotInServiceRegionException", "httpResponseCode" => 400}, "smithy.api#error" => "client", "smithy.api#httpError" => 400})
     ComposeEnvironmentsMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#ComposeEnvironmentsMessage", name: "ComposeEnvironmentsMessage")
@@ -151,7 +153,11 @@ module Aws::ElasticBeanstalk
     FileTypeExtension = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticbeanstalk#FileTypeExtension", name: "FileTypeExtension", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     ForceTerminate = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.elasticbeanstalk#ForceTerminate", name: "ForceTerminate")
     GroupName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticbeanstalk#GroupName", name: "GroupName", traits: {"smithy.api#length" => {"min" => 1, "max" => 19}})
+    ImageBuildConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#ImageBuildConfiguration", name: "ImageBuildConfiguration")
+    ImageBuildType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.elasticbeanstalk#ImageBuildType", name: "ImageBuildType")
+    ImageConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#ImageConfiguration", name: "ImageConfiguration")
     ImageId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.elasticbeanstalk#ImageId", name: "ImageId")
+    ImageSource = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#ImageSource", name: "ImageSource")
     IncludeDeleted = ::Smithy::Schema::Shapes::BooleanShape.new(id: "com.amazonaws.elasticbeanstalk#IncludeDeleted", name: "IncludeDeleted")
     IncludeDeletedBackTo = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.elasticbeanstalk#IncludeDeletedBackTo", name: "IncludeDeletedBackTo")
     Instance = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.elasticbeanstalk#Instance", name: "Instance")
@@ -376,6 +382,9 @@ module Aws::ElasticBeanstalk
     ApplicationVersionDescription.add_member(:source_build_information, ::Smithy::Schema::Shapes::MemberShape.new(target: SourceBuildInformation, name: "SourceBuildInformation"))
     ApplicationVersionDescription.add_member(:build_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "BuildArn"))
     ApplicationVersionDescription.add_member(:source_bundle, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "SourceBundle"))
+    ApplicationVersionDescription.add_member(:image_source, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSource, name: "ImageSource"))
+    ApplicationVersionDescription.add_member(:image_build_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuildConfiguration, name: "ImageBuildConfiguration"))
+    ApplicationVersionDescription.add_member(:process, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionProccess, name: "Process"))
     ApplicationVersionDescription.add_member(:date_created, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationDate, name: "DateCreated"))
     ApplicationVersionDescription.add_member(:date_updated, ::Smithy::Schema::Shapes::MemberShape.new(target: UpdateDate, name: "DateUpdated"))
     ApplicationVersionDescription.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionStatus, name: "Status"))
@@ -401,6 +410,8 @@ module Aws::ElasticBeanstalk
     ApplyEnvironmentManagedActionResult.add_member(:action_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ActionType, name: "ActionType"))
     ApplyEnvironmentManagedActionResult.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Status"))
     ApplyEnvironmentManagedActionResult.type = Types::ApplyEnvironmentManagedActionResult
+    ArchitectureType.add_member(:amd64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "amd64", traits: {"smithy.api#enumValue" => "amd64"}))
+    ArchitectureType.add_member(:arm64, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "arm64", traits: {"smithy.api#enumValue" => "arm64"}))
     AssociateEnvironmentOperationsRoleMessage.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "EnvironmentName", traits: {"smithy.api#required" => {}}))
     AssociateEnvironmentOperationsRoleMessage.add_member(:operations_role, ::Smithy::Schema::Shapes::MemberShape.new(target: OperationsRole, name: "OperationsRole", traits: {"smithy.api#required" => {}}))
     AssociateEnvironmentOperationsRoleMessage.type = Types::AssociateEnvironmentOperationsRoleMessage
@@ -432,6 +443,8 @@ module Aws::ElasticBeanstalk
     CheckDNSAvailabilityResultMessage.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: CnameAvailability, name: "Available"))
     CheckDNSAvailabilityResultMessage.add_member(:fully_qualified_cname, ::Smithy::Schema::Shapes::MemberShape.new(target: DNSCname, name: "FullyQualifiedCNAME"))
     CheckDNSAvailabilityResultMessage.type = Types::CheckDNSAvailabilityResultMessage
+    Cluster.add_member(:cluster_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "ClusterArn"))
+    Cluster.type = Types::Cluster
     CodeBuildNotInServiceRegionException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     CodeBuildNotInServiceRegionException.type = Types::CodeBuildNotInServiceRegionException
     ComposeEnvironmentsMessage.add_member(:application_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationName, name: "ApplicationName"))
@@ -498,6 +511,7 @@ module Aws::ElasticBeanstalk
     CreateApplicationVersionMessage.add_member(:auto_create_application, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoCreateApplication, name: "AutoCreateApplication"))
     CreateApplicationVersionMessage.add_member(:process, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionProccess, name: "Process"))
     CreateApplicationVersionMessage.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: Tags, name: "Tags"))
+    CreateApplicationVersionMessage.add_member(:image_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageConfiguration, name: "ImageConfiguration"))
     CreateApplicationVersionMessage.type = Types::CreateApplicationVersionMessage
     CreateApplicationVersionOutput.add_member(:application_version, ::Smithy::Schema::Shapes::MemberShape.new(target: ApplicationVersionDescription, name: "ApplicationVersion"))
     CreateApplicationVersionOutput.type = Types::CreateApplicationVersionOutput
@@ -749,6 +763,7 @@ module Aws::ElasticBeanstalk
     EnvironmentInfoDescriptionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentInfoDescription, name: "member"))
     EnvironmentInfoType.add_member(:tail, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "tail", traits: {"smithy.api#enumValue" => "tail"}))
     EnvironmentInfoType.add_member(:bundle, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "bundle", traits: {"smithy.api#enumValue" => "bundle"}))
+    EnvironmentInfoType.add_member(:analyze, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "analyze", traits: {"smithy.api#enumValue" => "analyze"}))
     EnvironmentLink.add_member(:link_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "LinkName"))
     EnvironmentLink.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "EnvironmentName"))
     EnvironmentLink.type = Types::EnvironmentLink
@@ -756,6 +771,7 @@ module Aws::ElasticBeanstalk
     EnvironmentNamesList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "member"))
     EnvironmentResourceDescription.add_member(:environment_name, ::Smithy::Schema::Shapes::MemberShape.new(target: EnvironmentName, name: "EnvironmentName"))
     EnvironmentResourceDescription.add_member(:auto_scaling_groups, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoScalingGroupList, name: "AutoScalingGroups"))
+    EnvironmentResourceDescription.add_member(:cluster, ::Smithy::Schema::Shapes::MemberShape.new(target: Cluster, name: "Cluster"))
     EnvironmentResourceDescription.add_member(:instances, ::Smithy::Schema::Shapes::MemberShape.new(target: InstanceList, name: "Instances"))
     EnvironmentResourceDescription.add_member(:launch_configurations, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchConfigurationList, name: "LaunchConfigurations"))
     EnvironmentResourceDescription.add_member(:launch_templates, ::Smithy::Schema::Shapes::MemberShape.new(target: LaunchTemplateList, name: "LaunchTemplates"))
@@ -806,6 +822,21 @@ module Aws::ElasticBeanstalk
     FailureType.add_member(:internal_failure, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InternalFailure", traits: {"smithy.api#enumValue" => "InternalFailure"}))
     FailureType.add_member(:invalid_environment_state, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "InvalidEnvironmentState", traits: {"smithy.api#enumValue" => "InvalidEnvironmentState"}))
     FailureType.add_member(:permissions_error, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PermissionsError", traits: {"smithy.api#enumValue" => "PermissionsError"}))
+    ImageBuildConfiguration.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuildType, name: "Type"))
+    ImageBuildConfiguration.add_member(:dockerfile_location, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "DockerfileLocation"))
+    ImageBuildConfiguration.add_member(:buildpack, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Buildpack"))
+    ImageBuildConfiguration.add_member(:architecture, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchitectureType, name: "Architecture"))
+    ImageBuildConfiguration.add_member(:code_build_service_role, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "CodeBuildServiceRole"))
+    ImageBuildConfiguration.add_member(:compute_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ComputeType, name: "ComputeType"))
+    ImageBuildConfiguration.add_member(:timeout_in_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: BoxedInt, name: "TimeoutInMinutes"))
+    ImageBuildConfiguration.type = Types::ImageBuildConfiguration
+    ImageBuildType.add_member(:docker, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "docker", traits: {"smithy.api#enumValue" => "docker"}))
+    ImageBuildType.add_member(:buildpack, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "buildpack", traits: {"smithy.api#enumValue" => "buildpack"}))
+    ImageConfiguration.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSource, name: "Source"))
+    ImageConfiguration.add_member(:build, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBuildConfiguration, name: "Build"))
+    ImageConfiguration.type = Types::ImageConfiguration
+    ImageSource.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "Uri"))
+    ImageSource.type = Types::ImageSource
     Instance.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceId, name: "Id"))
     Instance.type = Types::Instance
     InstanceHealthList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SingleInstanceHealth, name: "member"))
@@ -1215,7 +1246,7 @@ module Aws::ElasticBeanstalk
       service.id = "com.amazonaws.elasticbeanstalk#AWSElasticBeanstalkService"
       service.name = "AWSElasticBeanstalkService"
       service.version = "2010-12-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "Elastic Beanstalk", "arnNamespace" => "elasticbeanstalk", "cloudFormationName" => "ElasticBeanstalk", "cloudTrailEventSource" => "elasticbeanstalk.amazonaws.com", "docId" => "elasticbeanstalk-2010-12-01", "endpointPrefix" => "elasticbeanstalk"}, "aws.auth#sigv4" => {"name" => "elasticbeanstalk"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "AWS Elastic Beanstalk", "smithy.api#xmlNamespace" => {"uri" => "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "Elastic Beanstalk", "arnNamespace" => "elasticbeanstalk", "cloudFormationName" => "ElasticBeanstalk", "cloudTrailEventSource" => "elasticbeanstalk.amazonaws.com", "docId" => "elasticbeanstalk-2010-12-01", "endpointPrefix" => "elasticbeanstalk"}, "aws.auth#sigv4" => {"name" => "elasticbeanstalk"}, "aws.protocols#awsQuery" => {}, "smithy.api#title" => "AWS Elastic Beanstalk", "smithy.api#xmlNamespace" => {"uri" => "http://elasticbeanstalk.amazonaws.com/docs/2010-12-01/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticbeanstalk-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticbeanstalk.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticbeanstalk-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticbeanstalk.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://elasticbeanstalk.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:abort_environment_update, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.elasticbeanstalk#AbortEnvironmentUpdate"
         operation.name = "AbortEnvironmentUpdate"

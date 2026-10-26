@@ -144,18 +144,18 @@ module Aws::BCMPricingCalculator
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -987,7 +987,10 @@ module Aws::BCMPricingCalculator
     #       }
     #     },
     #     created_at: Time.now,
-    #     expires_at: Time.now
+    #     expires_at: Time.now,
+    #     group_sharing_preference: "OPEN" # One of: ["OPEN", "PRIORITIZED", "RESTRICTED"],
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn",
+    #     cost_category_group_sharing_preference_effective_date: Time.now
     #   }
     # @return [Types::CreateBillEstimateResponse]
     def create_bill_estimate(params = {}, options = {})
@@ -1003,13 +1006,19 @@ module Aws::BCMPricingCalculator
     #   <p> A unique, case-sensitive identifier to ensure idempotency of the request. </p>
     # @option params [Hash<String, String>] :tags
     #   <p> The tags to apply to the bill scenario. </p>
+    # @option params [String] :group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    # @option params [String] :cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "BillScenarioName", # required
     #     client_token: "ClientToken",
     #     tags: {
     #       "ResourceTagKey" => "ResourceTagValue"
-    #     }
+    #     },
+    #     group_sharing_preference: "OPEN" # One of: ["OPEN", "PRIORITIZED", "RESTRICTED"],
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn"
     #   }
     #   options = {}
     #   response = client.create_bill_scenario(params, options)
@@ -1025,7 +1034,9 @@ module Aws::BCMPricingCalculator
     #     status: "READY" # One of: ["READY", "LOCKED", "FAILED", "STALE"],
     #     created_at: Time.now,
     #     expires_at: Time.now,
-    #     failure_message: "String"
+    #     failure_message: "String",
+    #     group_sharing_preference: "OPEN" # One of: ["OPEN", "PRIORITIZED", "RESTRICTED"],
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn"
     #   }
     # @return [Types::CreateBillScenarioResponse]
     def create_bill_scenario(params = {}, options = {})
@@ -1177,7 +1188,10 @@ module Aws::BCMPricingCalculator
     #       }
     #     },
     #     created_at: Time.now,
-    #     expires_at: Time.now
+    #     expires_at: Time.now,
+    #     group_sharing_preference: "OPEN" # One of: ["OPEN", "PRIORITIZED", "RESTRICTED"],
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn",
+    #     cost_category_group_sharing_preference_effective_date: Time.now
     #   }
     # @return [Types::GetBillEstimateResponse]
     def get_bill_estimate(params = {}, options = {})
@@ -1207,7 +1221,9 @@ module Aws::BCMPricingCalculator
     #     status: "READY" # One of: ["READY", "LOCKED", "FAILED", "STALE"],
     #     created_at: Time.now,
     #     expires_at: Time.now,
-    #     failure_message: "String"
+    #     failure_message: "String",
+    #     group_sharing_preference: "OPEN" # One of: ["OPEN", "PRIORITIZED", "RESTRICTED"],
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn"
     #   }
     # @return [Types::GetBillScenarioResponse]
     def get_bill_scenario(params = {}, options = {})
@@ -1745,7 +1761,7 @@ module Aws::BCMPricingCalculator
     #   params = {
     #     filters: [
     #       {
-    #         name: "STATUS" # One of: ["STATUS", "NAME"], # required
+    #         name: "STATUS" # One of: ["STATUS", "NAME", "GROUP_SHARING_PREFERENCE", "COST_CATEGORY_ARN"], # required
     #         values: ["String"], # required
     #         match_option: "EQUALS" # One of: ["EQUALS", "STARTS_WITH", "CONTAINS"]
     #       }
@@ -1777,7 +1793,9 @@ module Aws::BCMPricingCalculator
     #         status: "READY" # One of: ["READY", "LOCKED", "FAILED", "STALE"],
     #         created_at: Time.now,
     #         expires_at: Time.now,
-    #         failure_message: "String"
+    #         failure_message: "String",
+    #         group_sharing_preference: "OPEN" # One of: ["OPEN", "PRIORITIZED", "RESTRICTED"],
+    #         cost_category_group_sharing_preference_arn: "CostCategoryArn"
     #       }
     #     ],
     #     next_token: "NextPageToken"
@@ -2063,7 +2081,10 @@ module Aws::BCMPricingCalculator
     #       }
     #     },
     #     created_at: Time.now,
-    #     expires_at: Time.now
+    #     expires_at: Time.now,
+    #     group_sharing_preference: "OPEN" # One of: ["OPEN", "PRIORITIZED", "RESTRICTED"],
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn",
+    #     cost_category_group_sharing_preference_effective_date: Time.now
     #   }
     # @return [Types::UpdateBillEstimateResponse]
     def update_bill_estimate(params = {}, options = {})
@@ -2079,11 +2100,17 @@ module Aws::BCMPricingCalculator
     #   <p> The new name for the bill scenario. </p>
     # @option params [Time] :expires_at
     #   <p> The new expiration date for the bill scenario. </p>
+    # @option params [String] :group_sharing_preference
+    #   <p>The setting for the reserved instance and savings plan group sharing used in this estimate.</p>
+    # @option params [String] :cost_category_group_sharing_preference_arn
+    #   <p>The arn of the cost category used in the reserved and prioritized group sharing.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     identifier: "ResourceId", # required
     #     name: "BillScenarioName",
-    #     expires_at: Time.now
+    #     expires_at: Time.now,
+    #     group_sharing_preference: "OPEN" # One of: ["OPEN", "PRIORITIZED", "RESTRICTED"],
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn"
     #   }
     #   options = {}
     #   response = client.update_bill_scenario(params, options)
@@ -2099,7 +2126,9 @@ module Aws::BCMPricingCalculator
     #     status: "READY" # One of: ["READY", "LOCKED", "FAILED", "STALE"],
     #     created_at: Time.now,
     #     expires_at: Time.now,
-    #     failure_message: "String"
+    #     failure_message: "String",
+    #     group_sharing_preference: "OPEN" # One of: ["OPEN", "PRIORITIZED", "RESTRICTED"],
+    #     cost_category_group_sharing_preference_arn: "CostCategoryArn"
     #   }
     # @return [Types::UpdateBillScenarioResponse]
     def update_bill_scenario(params = {}, options = {})

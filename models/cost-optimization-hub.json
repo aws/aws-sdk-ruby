@@ -169,10 +169,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the details of an Aurora DB cluster storage.</p>",
-                "smithy.api#tags": [
-                    "aurora"
-                ]
+                "smithy.api#documentation": "<p>Contains the details of an Aurora DB cluster storage.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#AuroraDbClusterStorageConfiguration": {
@@ -186,10 +183,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Aurora DB cluster storage configuration used for recommendations.</p>",
-                "smithy.api#tags": [
-                    "aurora"
-                ]
+                "smithy.api#documentation": "<p>The Aurora DB cluster storage configuration used for recommendations.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#BlockStoragePerformanceConfiguration": {
@@ -307,6 +301,9 @@
                     "target": "com.amazonaws.costoptimizationhub#GetRecommendation"
                 },
                 {
+                    "target": "com.amazonaws.costoptimizationhub#ListEfficiencyMetrics"
+                },
+                {
                     "target": "com.amazonaws.costoptimizationhub#ListEnrollmentStatuses"
                 },
                 {
@@ -333,6 +330,194 @@
                 "aws.protocols#awsJson1_0": {},
                 "smithy.api#documentation": "<p>You can use the Cost Optimization Hub API to programmatically identify, filter, aggregate, and quantify savings for your cost optimization recommendations across multiple Amazon Web Services Regions and Amazon Web Services accounts in your organization.</p> <p>The Cost Optimization Hub API provides the following endpoint:</p> <ul> <li> <p> https://cost-optimization-hub.us-east-1.amazonaws.com </p> </li> </ul>",
                 "smithy.api#title": "Cost Optimization Hub",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cost-optimization-hub-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cost-optimization-hub-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cost-optimization-hub.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://cost-optimization-hub.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -340,27 +525,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -972,6 +1157,20 @@
                 "smithy.api#documentation": "<p>The DB instance configuration used for recommendations.</p>"
             }
         },
+        "com.amazonaws.costoptimizationhub#DocumentDbCluster": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon DocumentDB cluster recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
+            }
+        },
         "com.amazonaws.costoptimizationhub#DynamoDbReservedCapacity": {
             "type": "structure",
             "members": {
@@ -1049,6 +1248,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The DynamoDB reserved capacity configuration used for recommendations.</p>"
+            }
+        },
+        "com.amazonaws.costoptimizationhub#DynamoDbTable": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The DynamoDB table recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#EbsVolume": {
@@ -1250,7 +1463,7 @@
                 "instanceFamily": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance family of the recommended Savings Plan.</p>"
+                        "smithy.api#documentation": "<p>The instance family of the recommended Savings Plans.</p>"
                     }
                 },
                 "savingsPlansRegion": {
@@ -1420,6 +1633,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The ECS service configuration used for recommendations.</p>"
+            }
+        },
+        "com.amazonaws.costoptimizationhub#EfficiencyMetricsByGroup": {
+            "type": "structure",
+            "members": {
+                "metricsByTime": {
+                    "target": "com.amazonaws.costoptimizationhub#MetricsByTimeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of time-series data points containing efficiency metrics for this group. Each data point includes an efficiency score, estimated savings, spending, and a timestamp corresponding to the specified granularity. This field is null when efficiency metrics cannot be calculated for the group, in which case the message field provides an explanation.</p>"
+                    }
+                },
+                "group": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the grouping dimension for this set of metrics. For example, if grouped by account ID, this field contains the account ID. If no grouping is specified, this field is empty.</p>"
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An explanation of why efficiency metrics could not be calculated for this group when the metricsByTime field is null. Common reasons include insufficient or inconclusive cost and usage data during the specified time period. This field is null or empty when metrics are successfully calculated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains cost efficiency metrics for a specific group over time. The group is defined by the grouping dimension specified in the request, such as account ID, Amazon Web Services Region.</p>",
+                "smithy.api#tags": [
+                    "cost_efficiency"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#EfficiencyMetricsByGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costoptimizationhub#EfficiencyMetricsByGroup",
+                "traits": {
+                    "smithy.api#documentation": "<p>An individual group's cost efficiency metrics over time.</p>"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of cost efficiency metrics grouped by the specified dimension.</p>",
+                "smithy.api#tags": [
+                    "cost_efficiency"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#ElastiCacheCluster": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The ElastiCache cluster recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#ElastiCacheReservedInstances": {
@@ -1697,10 +1968,7 @@
                 "preferredCommitment": {
                     "target": "com.amazonaws.costoptimizationhub#PreferredCommitment",
                     "traits": {
-                        "smithy.api#documentation": "<p>Retrieves the current preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>",
-                        "smithy.api#tags": [
-                            "commitmentPreferences"
-                        ]
+                        "smithy.api#documentation": "<p>Retrieves the current preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>"
                     }
                 }
             },
@@ -1899,6 +2167,31 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.costoptimizationhub#GranularityType": {
+            "type": "enum",
+            "members": {
+                "DAILY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics are aggregated daily, with each data point representing a single day's worth of efficiency data. Timestamps are formatted as YYYY-MM-DD.</p>",
+                        "smithy.api#enumValue": "Daily"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metrics are aggregated monthly, with each data point representing a full month's worth of efficiency data. Timestamps are formatted as YYYY-MM.</p>",
+                        "smithy.api#enumValue": "Monthly"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The time granularity for aggregating the cost efficiency metrics.</p>",
+                "smithy.api#tags": [
+                    "cost_efficiency"
+                ]
+            }
+        },
         "com.amazonaws.costoptimizationhub#ImplementationEffort": {
             "type": "enum",
             "members": {
@@ -2008,6 +2301,118 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The Lambda function configuration used for recommendations.</p>"
+            }
+        },
+        "com.amazonaws.costoptimizationhub#ListEfficiencyMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costoptimizationhub#ListEfficiencyMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costoptimizationhub#ListEfficiencyMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costoptimizationhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.costoptimizationhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.costoptimizationhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.costoptimizationhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns cost efficiency metrics aggregated over time and optionally grouped by a specified dimension. The metrics provide insights into your cost optimization progress by tracking estimated savings, spending, and measures how effectively you're optimizing your Cloud resources.</p> <p>The operation supports both daily and monthly time granularities and allows grouping results by account ID, Amazon Web Services Region. Results are returned as time-series data, enabling you to analyze trends in your cost optimization performance over the specified time period.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "efficiencyMetricsByGroup"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "cost_efficiency"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#ListEfficiencyMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "groupBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension by which to group the cost efficiency metrics. Valid values include account ID, Amazon Web Services Region. When no grouping is specified, metrics are aggregated across all resources in the specified time period.</p>"
+                    }
+                },
+                "granularity": {
+                    "target": "com.amazonaws.costoptimizationhub#GranularityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time granularity for the cost efficiency metrics. Specify <code>Daily</code> for metrics aggregated by day, or <code>Monthly</code> for metrics aggregated by month.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timePeriod": {
+                    "target": "com.amazonaws.costoptimizationhub#TimePeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period for which to retrieve the cost efficiency metrics. The start date is inclusive and the end date is exclusive. Dates can be specified in either YYYY-MM-DD format or YYYY-MM format depending on the desired granularity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.costoptimizationhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of groups to return in the response. Valid values range from 0 to 1000. Use in conjunction with <code>nextToken</code> to paginate through results when the total number of groups exceeds this limit.</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 1000
+                        }
+                    }
+                },
+                "orderBy": {
+                    "target": "com.amazonaws.costoptimizationhub#OrderBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ordering specification for the results. Defines which dimension to sort by and whether to sort in ascending or descending order.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next page of results. This value is returned in the response when the number of groups exceeds the specified <code>maxResults</code> value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#tags": [
+                    "cost_efficiency"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#ListEfficiencyMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "efficiencyMetricsByGroup": {
+                    "target": "com.amazonaws.costoptimizationhub#EfficiencyMetricsByGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of cost efficiency metrics grouped by the specified dimension. Each group contains time-series data points with cost efficiency, potential savings, and optimzable spend for the specified time period.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next page of results. When this value is present in the response, additional groups are available. Pass this token in the <code>nextToken</code> parameter of a subsequent request to retrieve the next page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {},
+                "smithy.api#tags": [
+                    "cost_efficiency"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#ListEnrollmentStatuses": {
@@ -2341,6 +2746,20 @@
                 }
             }
         },
+        "com.amazonaws.costoptimizationhub#MemoryDbCluster": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The MemoryDB cluster recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
+            }
+        },
         "com.amazonaws.costoptimizationhub#MemoryDbReservedInstances": {
             "type": "structure",
             "members": {
@@ -2444,6 +2863,56 @@
                 "smithy.api#documentation": "<p>The MemoryDB reserved instances configuration used for recommendations.</p> <note> <p>While the API reference uses \"MemoryDB reserved instances\", the user guide and other documentation refer to them as \"MemoryDB reserved nodes\", as the terms are used interchangeably.</p> </note>"
             }
         },
+        "com.amazonaws.costoptimizationhub#MetricsByTime": {
+            "type": "structure",
+            "members": {
+                "score": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The efficiency score for this time period. The score represents a measure of how effectively the cloud resources are being optimized, with higher scores indicating better optimization performance.</p>"
+                    }
+                },
+                "savings": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated savings amount for this time period, representing the potential cost reduction achieved through optimization recommendations.</p>"
+                    }
+                },
+                "spend": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total spending amount for this time period.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for this data point. The format depends on the granularity: YYYY-MM-DD for daily metrics, or YYYY-MM for monthly metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains efficiency metrics for a specific point in time, including an efficiency score, potential savings, optimizable spend, and timestamp.</p>",
+                "smithy.api#tags": [
+                    "cost_efficiency"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#MetricsByTimeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costoptimizationhub#MetricsByTime",
+                "traits": {
+                    "smithy.api#documentation": "<p>A single time-series data point containing efficiency metrics.</p>"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of time-series efficiency metric data points.</p>",
+                "smithy.api#tags": [
+                    "cost_efficiency"
+                ]
+            }
+        },
         "com.amazonaws.costoptimizationhub#MixedInstanceConfiguration": {
             "type": "structure",
             "members": {
@@ -2462,6 +2931,55 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.costoptimizationhub#MixedInstanceConfiguration"
+            }
+        },
+        "com.amazonaws.costoptimizationhub#NatGateway": {
+            "type": "structure",
+            "members": {
+                "configuration": {
+                    "target": "com.amazonaws.costoptimizationhub#NatGatewayConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NAT Gateway configuration used for recommendations.</p>"
+                    }
+                },
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The NAT Gateway recommendation details.</p>",
+                "smithy.api#tags": [
+                    "nat_gateway"
+                ]
+            }
+        },
+        "com.amazonaws.costoptimizationhub#NatGatewayConfiguration": {
+            "type": "structure",
+            "members": {
+                "activeConnectionCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active connections through the NAT Gateway.</p>"
+                    }
+                },
+                "packetsInFromSource": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of packets received from the source through the NAT Gateway.</p>"
+                    }
+                },
+                "packetsInFromDestination": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of packets received from the destination through the NAT Gateway.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The NAT Gateway configuration used for recommendations.</p>",
+                "smithy.api#tags": [
+                    "nat_gateway"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#OpenSearchReservedInstances": {
@@ -2641,10 +3159,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The preferred configuration for Reserved Instances and Savings Plans commitment-based discounts, consisting of a payment option and a commitment duration.</p>",
-                "smithy.api#tags": [
-                    "commitmentPreferences"
-                ]
+                "smithy.api#documentation": "<p>The preferred configuration for Reserved Instances and Savings Plans commitment-based discounts, consisting of a payment option and a commitment duration.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#RdsDbInstance": {
@@ -3333,10 +3848,7 @@
                 "auroraDbClusterStorage": {
                     "target": "com.amazonaws.costoptimizationhub#AuroraDbClusterStorage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Aurora DB cluster storage recommendation details.</p>",
-                        "smithy.api#tags": [
-                            "aurora"
-                        ]
+                        "smithy.api#documentation": "<p>The Aurora DB cluster storage recommendation details.</p>"
                     }
                 },
                 "dynamoDbReservedCapacity": {
@@ -3349,6 +3861,69 @@
                     "target": "com.amazonaws.costoptimizationhub#MemoryDbReservedInstances",
                     "traits": {
                         "smithy.api#documentation": "<p>The MemoryDB reserved instances recommendation details.</p>"
+                    }
+                },
+                "natGateway": {
+                    "target": "com.amazonaws.costoptimizationhub#NatGateway",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The NAT Gateway recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "nat_gateway"
+                        ]
+                    }
+                },
+                "dynamoDbTable": {
+                    "target": "com.amazonaws.costoptimizationhub#DynamoDbTable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DynamoDB table recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "elastiCacheCluster": {
+                    "target": "com.amazonaws.costoptimizationhub#ElastiCacheCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ElastiCache cluster recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "memoryDbCluster": {
+                    "target": "com.amazonaws.costoptimizationhub#MemoryDbCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MemoryDB cluster recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "documentDbCluster": {
+                    "target": "com.amazonaws.costoptimizationhub#DocumentDbCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon DocumentDB cluster recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "workSpaces": {
+                    "target": "com.amazonaws.costoptimizationhub#WorkSpaces",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The WorkSpaces recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "sageMakerEndpoint": {
+                    "target": "com.amazonaws.costoptimizationhub#SageMakerEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SageMaker endpoint recommendation details.</p>",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
                     }
                 }
             },
@@ -3519,10 +4094,7 @@
                 "AURORA_DB_CLUSTER_STORAGE": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#enumValue": "AuroraDbClusterStorage",
-                        "smithy.api#tags": [
-                            "aurora"
-                        ]
+                        "smithy.api#enumValue": "AuroraDbClusterStorage"
                     }
                 },
                 "DYNAMO_DB_RESERVED_CAPACITY": {
@@ -3535,6 +4107,69 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MemoryDbReservedInstances"
+                    }
+                },
+                "NAT_GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NatGateway",
+                        "smithy.api#tags": [
+                            "nat_gateway"
+                        ]
+                    }
+                },
+                "DYNAMO_DB_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DynamoDBTable",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "ELASTI_CACHE_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ElastiCacheCluster",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "MEMORY_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MemoryDBCluster",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "DOCUMENT_DB_CLUSTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DocumentDBCluster",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "WORK_SPACES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WorkSpaces",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
+                    }
+                },
+                "SAGE_MAKER_ENDPOINT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SageMakerEndpoint",
+                        "smithy.api#tags": [
+                            "idle_bulk"
+                        ]
                     }
                 }
             }
@@ -3549,6 +4184,20 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#SageMakerEndpoint": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SageMaker endpoint recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         },
         "com.amazonaws.costoptimizationhub#SageMakerSavingsPlans": {
@@ -3640,30 +4289,30 @@
                 "monthlySavingsPlansEligibleCost": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cost of paying for the recommended Savings Plan monthly.</p>"
+                        "smithy.api#documentation": "<p>The cost of paying for the recommended Savings Plans monthly.</p>"
                     }
                 },
                 "estimatedMonthlyCommitment": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Estimated monthly commitment for the Savings Plan.</p>"
+                        "smithy.api#documentation": "<p>Estimated monthly commitment for the Savings Plans.</p>"
                     }
                 },
                 "savingsPercentage": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Estimated savings as a percentage of your overall costs after buying the Savings Plan.</p>"
+                        "smithy.api#documentation": "<p>Estimated savings as a percentage of your overall costs after buying the Savings Plans.</p>"
                     }
                 },
                 "estimatedOnDemandCost": {
                     "target": "smithy.api#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Estimated On-Demand cost you will pay after buying the Savings Plan.</p>"
+                        "smithy.api#documentation": "<p>Estimated On-Demand cost you will pay after buying the Savings Plans.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Pricing information about a Savings Plan.</p>"
+                "smithy.api#documentation": "<p>Pricing information about a Savings Plans.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#Source": {
@@ -3802,6 +4451,31 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.costoptimizationhub#TimePeriod": {
+            "type": "structure",
+            "members": {
+                "start": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning of the time period (inclusive). Specify the date in ISO 8601 format, such as 2024-01-01.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "end": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time period (exclusive). Specify the date in ISO 8601 format, such as 2024-12-31.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a date range for retrieving efficiency metrics. The start date is inclusive and the end date is exclusive.</p>",
+                "smithy.api#tags": [
+                    "cost_efficiency"
+                ]
+            }
+        },
         "com.amazonaws.costoptimizationhub#UpdateEnrollmentStatus": {
             "type": "operation",
             "input": {
@@ -3825,7 +4499,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization Hub service.</p> <p>If the account is a management account or delegated administrator of an organization, this action can also be used to enroll member accounts of the organization.</p> <p>You must have the appropriate permissions to opt in to Cost Optimization Hub and to view its recommendations. When you opt in, Cost Optimization Hub automatically creates a service-linked role in your account to access its data.</p>"
+                "smithy.api#documentation": "<p>Updates the enrollment (opt in and opt out) status of an account to the Cost Optimization Hub service.</p> <p>If the account is a management account of an organization, this action can also be used to enroll member accounts of the organization.</p> <p>You must have the appropriate permissions to opt in to Cost Optimization Hub and to view its recommendations. When you opt in, Cost Optimization Hub automatically creates a service-linked role in your account to access its data.</p>"
             }
         },
         "com.amazonaws.costoptimizationhub#UpdateEnrollmentStatusRequest": {
@@ -3907,10 +4581,7 @@
                 "preferredCommitment": {
                     "target": "com.amazonaws.costoptimizationhub#PreferredCommitment",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>",
-                        "smithy.api#tags": [
-                            "commitmentPreferences"
-                        ]
+                        "smithy.api#documentation": "<p>Sets the preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>"
                     }
                 }
             },
@@ -3936,10 +4607,7 @@
                 "preferredCommitment": {
                     "target": "com.amazonaws.costoptimizationhub#PreferredCommitment",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows the updated preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>",
-                        "smithy.api#tags": [
-                            "commitmentPreferences"
-                        ]
+                        "smithy.api#documentation": "<p>Shows the updated preferences for how Reserved Instances and Savings Plans cost-saving opportunities are prioritized in terms of payment option and term length.</p>"
                     }
                 }
             },
@@ -4062,6 +4730,20 @@
                         "smithy.api#enumValue": "Other"
                     }
                 }
+            }
+        },
+        "com.amazonaws.costoptimizationhub#WorkSpaces": {
+            "type": "structure",
+            "members": {
+                "costCalculation": {
+                    "target": "com.amazonaws.costoptimizationhub#ResourceCostCalculation"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The WorkSpaces recommendation details.</p>",
+                "smithy.api#tags": [
+                    "idle_bulk"
+                ]
             }
         }
     }

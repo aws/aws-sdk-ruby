@@ -41,6 +41,7 @@ module Aws::AccessAnalyzer
     AnalyzedResourcesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.accessanalyzer#AnalyzedResourcesList", name: "AnalyzedResourcesList")
     AnalyzerArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.accessanalyzer#AnalyzerArn", name: "AnalyzerArn", traits: {"smithy.api#pattern" => "^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$"})
     AnalyzerConfiguration = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.accessanalyzer#AnalyzerConfiguration", name: "AnalyzerConfiguration")
+    AnalyzerName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.accessanalyzer#AnalyzerName", name: "AnalyzerName", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}, "smithy.api#pattern" => "^[A-Za-z_][A-Za-z0-9_.-]*$"})
     AnalyzerStatus = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.accessanalyzer#AnalyzerStatus", name: "AnalyzerStatus", traits: {"smithy.api#enum" => [{"value" => "ACTIVE", "name" => "ACTIVE"}, {"value" => "CREATING", "name" => "CREATING"}, {"value" => "DISABLED", "name" => "DISABLED"}, {"value" => "FAILED", "name" => "FAILED"}]})
     AnalyzerSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#AnalyzerSummary", name: "AnalyzerSummary")
     AnalyzersList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.accessanalyzer#AnalyzersList", name: "AnalyzersList")
@@ -71,9 +72,12 @@ module Aws::AccessAnalyzer
     CreateAnalyzerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#CreateAnalyzerInput", name: "CreateAnalyzerInput")
     CreateAnalyzerOutput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#CreateAnalyzerOutput", name: "CreateAnalyzerOutput")
     CreateArchiveRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#CreateArchiveRuleInput", name: "CreateArchiveRuleInput")
+    CreateServiceLinkedAnalyzerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#CreateServiceLinkedAnalyzerRequest", name: "CreateServiceLinkedAnalyzerRequest")
+    CreateServiceLinkedAnalyzerResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#CreateServiceLinkedAnalyzerResponse", name: "CreateServiceLinkedAnalyzerResponse")
     Criterion = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#Criterion", name: "Criterion")
     DeleteAnalyzerInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#DeleteAnalyzerInput", name: "DeleteAnalyzerInput")
     DeleteArchiveRuleInput = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#DeleteArchiveRuleInput", name: "DeleteArchiveRuleInput")
+    DeleteServiceLinkedAnalyzerRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#DeleteServiceLinkedAnalyzerRequest", name: "DeleteServiceLinkedAnalyzerRequest")
     DynamodbStreamConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#DynamodbStreamConfiguration", name: "DynamodbStreamConfiguration")
     DynamodbStreamPolicy = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.accessanalyzer#DynamodbStreamPolicy", name: "DynamodbStreamPolicy")
     DynamodbTableConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.accessanalyzer#DynamodbTableConfiguration", name: "DynamodbTableConfiguration")
@@ -393,7 +397,7 @@ module Aws::AccessAnalyzer
     AnalyzerConfiguration.add_member(:unknown, Types::AnalyzerConfiguration::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     AnalyzerConfiguration.type = Types::AnalyzerConfiguration
     AnalyzerSummary.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "arn", traits: {"smithy.api#required" => {}}))
-    AnalyzerSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "name", traits: {"smithy.api#required" => {}}))
+    AnalyzerSummary.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "name", traits: {"smithy.api#required" => {}}))
     AnalyzerSummary.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "type", traits: {"smithy.api#required" => {}}))
     AnalyzerSummary.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "createdAt", traits: {"smithy.api#required" => {}}))
     AnalyzerSummary.add_member(:last_resource_analyzed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "lastResourceAnalyzed"))
@@ -402,6 +406,7 @@ module Aws::AccessAnalyzer
     AnalyzerSummary.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerStatus, name: "status", traits: {"smithy.api#required" => {}}))
     AnalyzerSummary.add_member(:status_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StatusReason, name: "statusReason"))
     AnalyzerSummary.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerConfiguration, name: "configuration"))
+    AnalyzerSummary.add_member(:managed_by, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "managedBy"))
     AnalyzerSummary.type = Types::AnalyzerSummary
     AnalyzersList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerSummary, name: "member"))
     ApplyArchiveRuleInput.add_member(:analyzer_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "analyzerArn", traits: {"smithy.api#required" => {}}))
@@ -479,7 +484,7 @@ module Aws::AccessAnalyzer
     CreateAccessPreviewInput.type = Types::CreateAccessPreviewInput
     CreateAccessPreviewOutput.add_member(:id, ::Smithy::Schema::Shapes::MemberShape.new(target: AccessPreviewId, name: "id", traits: {"smithy.api#required" => {}}))
     CreateAccessPreviewOutput.type = Types::CreateAccessPreviewOutput
-    CreateAnalyzerInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "analyzerName", traits: {"smithy.api#required" => {}}))
+    CreateAnalyzerInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#required" => {}}))
     CreateAnalyzerInput.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "type", traits: {"smithy.api#required" => {}}))
     CreateAnalyzerInput.add_member(:archive_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineArchiveRulesList, name: "archiveRules"))
     CreateAnalyzerInput.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagsMap, name: "tags"))
@@ -488,23 +493,33 @@ module Aws::AccessAnalyzer
     CreateAnalyzerInput.type = Types::CreateAnalyzerInput
     CreateAnalyzerOutput.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "arn"))
     CreateAnalyzerOutput.type = Types::CreateAnalyzerOutput
-    CreateArchiveRuleInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    CreateArchiveRuleInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     CreateArchiveRuleInput.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ruleName", traits: {"smithy.api#required" => {}}))
     CreateArchiveRuleInput.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCriteriaMap, name: "filter", traits: {"smithy.api#required" => {}}))
     CreateArchiveRuleInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
     CreateArchiveRuleInput.type = Types::CreateArchiveRuleInput
+    CreateServiceLinkedAnalyzerRequest.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: Type, name: "type", traits: {"smithy.api#required" => {}}))
+    CreateServiceLinkedAnalyzerRequest.add_member(:archive_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: InlineArchiveRulesList, name: "archiveRules"))
+    CreateServiceLinkedAnalyzerRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
+    CreateServiceLinkedAnalyzerRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerConfiguration, name: "configuration"))
+    CreateServiceLinkedAnalyzerRequest.type = Types::CreateServiceLinkedAnalyzerRequest
+    CreateServiceLinkedAnalyzerResponse.add_member(:arn, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerArn, name: "arn"))
+    CreateServiceLinkedAnalyzerResponse.type = Types::CreateServiceLinkedAnalyzerResponse
     Criterion.add_member(:eq, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueList, name: "eq"))
     Criterion.add_member(:neq, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueList, name: "neq"))
     Criterion.add_member(:contains, ::Smithy::Schema::Shapes::MemberShape.new(target: ValueList, name: "contains"))
     Criterion.add_member(:exists, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "exists"))
     Criterion.type = Types::Criterion
-    DeleteAnalyzerInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteAnalyzerInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteAnalyzerInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteAnalyzerInput.type = Types::DeleteAnalyzerInput
-    DeleteArchiveRuleInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteArchiveRuleInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteArchiveRuleInput.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ruleName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     DeleteArchiveRuleInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
     DeleteArchiveRuleInput.type = Types::DeleteArchiveRuleInput
+    DeleteServiceLinkedAnalyzerRequest.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    DeleteServiceLinkedAnalyzerRequest.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#httpQuery" => "clientToken", "smithy.api#idempotencyToken" => {}}))
+    DeleteServiceLinkedAnalyzerRequest.type = Types::DeleteServiceLinkedAnalyzerRequest
     DynamodbStreamConfiguration.add_member(:stream_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamodbStreamPolicy, name: "streamPolicy"))
     DynamodbStreamConfiguration.type = Types::DynamodbStreamConfiguration
     DynamodbTableConfiguration.add_member(:table_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: DynamodbTablePolicy, name: "tablePolicy"))
@@ -630,11 +645,11 @@ module Aws::AccessAnalyzer
     GetAnalyzedResourceInput.type = Types::GetAnalyzedResourceInput
     GetAnalyzedResourceOutput.add_member(:resource, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzedResource, name: "resource"))
     GetAnalyzedResourceOutput.type = Types::GetAnalyzedResourceOutput
-    GetAnalyzerInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetAnalyzerInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAnalyzerInput.type = Types::GetAnalyzerInput
     GetAnalyzerOutput.add_member(:analyzer, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerSummary, name: "analyzer", traits: {"smithy.api#required" => {}}))
     GetAnalyzerOutput.type = Types::GetAnalyzerOutput
-    GetArchiveRuleInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    GetArchiveRuleInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetArchiveRuleInput.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ruleName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetArchiveRuleInput.type = Types::GetArchiveRuleInput
     GetArchiveRuleOutput.add_member(:archive_rule, ::Smithy::Schema::Shapes::MemberShape.new(target: ArchiveRuleSummary, name: "archiveRule", traits: {"smithy.api#required" => {}}))
@@ -788,7 +803,7 @@ module Aws::AccessAnalyzer
     ListAnalyzersOutput.add_member(:analyzers, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzersList, name: "analyzers", traits: {"smithy.api#required" => {}}))
     ListAnalyzersOutput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "nextToken"))
     ListAnalyzersOutput.type = Types::ListAnalyzersOutput
-    ListArchiveRulesInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    ListArchiveRulesInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ListArchiveRulesInput.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: Token, name: "nextToken", traits: {"smithy.api#httpQuery" => "nextToken"}))
     ListArchiveRulesInput.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "maxResults", traits: {"smithy.api#httpQuery" => "maxResults"}))
     ListArchiveRulesInput.type = Types::ListArchiveRulesInput
@@ -892,6 +907,7 @@ module Aws::AccessAnalyzer
     ResourceNotFoundException.type = Types::ResourceNotFoundException
     ResourceTypeDetails.add_member(:total_active_public, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalActivePublic"))
     ResourceTypeDetails.add_member(:total_active_cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalActiveCrossAccount"))
+    ResourceTypeDetails.add_member(:total_active_errors, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalActiveErrors"))
     ResourceTypeDetails.type = Types::ResourceTypeDetails
     ResourceTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "member"))
     ResourceTypeStatisticsMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ResourceType, name: "key"))
@@ -1016,12 +1032,12 @@ module Aws::AccessAnalyzer
     UnusedPermissionsRecommendedStep.add_member(:recommended_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "recommendedPolicy"))
     UnusedPermissionsRecommendedStep.add_member(:existing_policy_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "existingPolicyId"))
     UnusedPermissionsRecommendedStep.type = Types::UnusedPermissionsRecommendedStep
-    UpdateAnalyzerRequest.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateAnalyzerRequest.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateAnalyzerRequest.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerConfiguration, name: "configuration"))
     UpdateAnalyzerRequest.type = Types::UpdateAnalyzerRequest
     UpdateAnalyzerResponse.add_member(:configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerConfiguration, name: "configuration"))
     UpdateAnalyzerResponse.type = Types::UpdateAnalyzerResponse
-    UpdateArchiveRuleInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
+    UpdateArchiveRuleInput.add_member(:analyzer_name, ::Smithy::Schema::Shapes::MemberShape.new(target: AnalyzerName, name: "analyzerName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateArchiveRuleInput.add_member(:rule_name, ::Smithy::Schema::Shapes::MemberShape.new(target: Name, name: "ruleName", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     UpdateArchiveRuleInput.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: FilterCriteriaMap, name: "filter", traits: {"smithy.api#required" => {}}))
     UpdateArchiveRuleInput.add_member(:client_token, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "clientToken", traits: {"smithy.api#idempotencyToken" => {}}))
@@ -1065,7 +1081,7 @@ module Aws::AccessAnalyzer
       service.id = "com.amazonaws.accessanalyzer#AccessAnalyzer"
       service.name = "AccessAnalyzer"
       service.version = "2019-11-01"
-      service.traits = {"aws.api#service" => {"sdkId" => "AccessAnalyzer", "arnNamespace" => "access-analyzer", "cloudTrailEventSource" => "access-analyzer.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "access-analyzer"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Access Analyzer"}
+      service.traits = {"aws.api#service" => {"sdkId" => "AccessAnalyzer", "arnNamespace" => "access-analyzer", "cloudTrailEventSource" => "access-analyzer.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "access-analyzer"}, "aws.protocols#restJson1" => {}, "smithy.api#cors" => {}, "smithy.api#title" => "Access Analyzer", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://access-analyzer-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://access-analyzer.{Region}.amazonaws.com", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://access-analyzer-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://access-analyzer.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://access-analyzer.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 14, "nodes" => "/////wAAAAH/////AAAAAAAAAA0AAAADAAAAAQAAAAQF9eEMAAAAAgAAAAUF9eEMAAAAAwAAAAgAAAAGAAAABAAAAAcF9eELAAAABQX14QkF9eEKAAAABAAAAAsAAAAJAAAABgAAAAoF9eEIAAAABwX14QYF9eEHAAAABQAAAAwF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAAOAAAABAX14QIF9eED"}}
       service.add_operation(:apply_archive_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.accessanalyzer#ApplyArchiveRule"
         operation.name = "ApplyArchiveRule"
@@ -1169,6 +1185,19 @@ module Aws::AccessAnalyzer
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/analyzer/{analyzerName}/archive-rule", "method" => "PUT", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
+      service.add_operation(:create_service_linked_analyzer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.accessanalyzer#CreateServiceLinkedAnalyzer"
+        operation.name = "CreateServiceLinkedAnalyzer"
+        operation.input = CreateServiceLinkedAnalyzerRequest
+        operation.output = CreateServiceLinkedAnalyzerResponse
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ServiceQuotaExceededException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/service-linked-analyzer", "method" => "PUT", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
       service.add_operation(:delete_analyzer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.accessanalyzer#DeleteAnalyzer"
         operation.name = "DeleteAnalyzer"
@@ -1192,6 +1221,19 @@ module Aws::AccessAnalyzer
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"uri" => "/analyzer/{analyzerName}/archive-rule/{ruleName}", "method" => "DELETE", "code" => 200}, "smithy.api#idempotent" => {}}
+      end)
+      service.add_operation(:delete_service_linked_analyzer, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.accessanalyzer#DeleteServiceLinkedAnalyzer"
+        operation.name = "DeleteServiceLinkedAnalyzer"
+        operation.input = DeleteServiceLinkedAnalyzerRequest
+        operation.output = ::Smithy::Schema::Shapes::Prelude::Unit
+        operation.errors << AccessDeniedException
+        operation.errors << ConflictException
+        operation.errors << InternalServerException
+        operation.errors << ResourceNotFoundException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"uri" => "/service-linked-analyzer/{analyzerName}", "method" => "DELETE", "code" => 200}, "smithy.api#idempotent" => {}}
       end)
       service.add_operation(:generate_finding_recommendation, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.accessanalyzer#GenerateFindingRecommendation"

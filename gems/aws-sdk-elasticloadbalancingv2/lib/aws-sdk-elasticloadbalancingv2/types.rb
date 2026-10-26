@@ -18,16 +18,19 @@ module Aws::ElasticLoadBalancingV2
     end
 
     # <p>Information about an action.</p>
-    #          <p>Each rule must include exactly one of the following types of actions:
-    #       <code>forward</code>, <code>fixed-response</code>, or <code>redirect</code>, and it must be
-    #       the last action to be performed.</p>
+    #          <p>Each rule must include exactly one of the following routing actions: <code>forward</code>,
+    #       <code>fixed-response</code>, or <code>redirect</code>, and it must be the last
+    #       action to be performed.</p>
+    #          <p>Optionally, a rule for an HTTPS listener can also include one of the following
+    #       user authentication actions: <code>authenticate-oidc</code>,
+    #       <code>authenticate-cognito</code>, or <code>jwt-validation</code>.</p>
     # @!attribute type
     #   <p>The type of action.</p>
     #   @return [String]
     # @!attribute target_group_arn
     #   <p>The Amazon Resource Name (ARN) of the target group. Specify only when <code>Type</code> is
-    #           <code>forward</code> and you want to route to a single target group. To route to one or more
-    #         target groups, use <code>ForwardConfig</code> instead.</p>
+    #           <code>forward</code> and you want to route to a single target group. To route to multiple
+    #         target groups, you must use <code>ForwardConfig</code> instead.</p>
     #   @return [String]
     # @!attribute authenticate_oidc_config
     #   <p>[HTTPS listeners] Information about an identity provider that is compliant with OpenID
@@ -50,13 +53,16 @@ module Aws::ElasticLoadBalancingV2
     #         response. Specify only when <code>Type</code> is <code>fixed-response</code>.</p>
     #   @return [Types::FixedResponseActionConfig]
     # @!attribute forward_config
-    #   <p>Information for creating an action that distributes requests among one or more target
-    #         groups. For Network Load Balancers, you can specify a single target group. Specify only when
-    #           <code>Type</code> is <code>forward</code>. If you specify both <code>ForwardConfig</code>
-    #         and <code>TargetGroupArn</code>, you can specify only one target group using
-    #           <code>ForwardConfig</code> and it must be the same target group specified in
-    #           <code>TargetGroupArn</code>.</p>
+    #   <p>Information for creating an action that distributes requests among multiple target
+    #         groups. Specify only when <code>Type</code> is <code>forward</code>.</p>
+    #            <p>If you specify both <code>ForwardConfig</code> and <code>TargetGroupArn</code>, you can
+    #         specify only one target group using <code>ForwardConfig</code> and it must be the same
+    #         target group specified in <code>TargetGroupArn</code>.</p>
     #   @return [Types::ForwardActionConfig]
+    # @!attribute jwt_validation_config
+    #   <p>[HTTPS listeners] Information for validating JWT access tokens in client requests.
+    #         Specify only when <code>Type</code> is <code>jwt-validation</code>.</p>
+    #   @return [Types::JwtValidationActionConfig]
     class Action < Struct.new(
       nil,
       :type,
@@ -67,6 +73,7 @@ module Aws::ElasticLoadBalancingV2
       :redirect_config,
       :fixed_response_config,
       :forward_config,
+      :jwt_validation_config,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -492,7 +499,7 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute protocol
     #   <p>The protocol for connections from clients to the load balancer. For Application Load
     #         Balancers, the supported protocols are HTTP and HTTPS. For Network Load Balancers, the
-    #         supported protocols are TCP, TLS, UDP, and TCP_UDP. You can’t specify the UDP or TCP_UDP
+    #         supported protocols are TCP, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC. You can’t specify the UDP, TCP_UDP, QUIC, or TCP_QUIC
     #         protocol if dual-stack mode is enabled. You can't specify a protocol for a Gateway Load
     #         Balancer.</p>
     #   @return [String]
@@ -551,7 +558,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The tags to assign to the listener.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute mutual_authentication
-    #   <p>The mutual authentication configuration information.</p>
+    #   <p>[HTTPS listeners] The mutual authentication configuration information.</p>
     #   @return [Types::MutualAuthenticationAttributes]
     class CreateListenerInput < Struct.new(
       nil,
@@ -595,7 +602,7 @@ module Aws::ElasticLoadBalancingV2
     #            <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p>
     #            <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local
     #         Zones.</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] You can specify subnets from one or more 
+    #            <p>[Network Load Balancers and Gateway Load Balancers] You can specify subnets from one or more
     #         Availability Zones.</p>
     #   @return [Array<String>]
     # @!attribute subnet_mappings
@@ -638,10 +645,10 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     # @!attribute ip_address_type
     #   <p>The IP address type. Internal load balancers must use <code>ipv4</code>.</p>
-    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses), 
-    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code> 
+    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses),
+    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code>
     #         (public IPv6 addresses and private IPv4 and IPv6 addresses).</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code> 
+    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code>
     #         (IPv4 addresses) and <code>dualstack</code> (IPv4 and IPv6 addresses).</p>
     #   @return [String]
     # @!attribute customer_owned_ipv4_pool
@@ -649,8 +656,8 @@ module Aws::ElasticLoadBalancingV2
     #         pool).</p>
     #   @return [String]
     # @!attribute enable_prefix_for_ipv6_source_nat
-    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix 
-    #         from each subnet for source NAT. The IP address type must be <code>dualstack</code>. 
+    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix
+    #         from each subnet for source NAT. The IP address type must be <code>dualstack</code>.
     #         The default value is <code>off</code>.</p>
     #   @return [String]
     # @!attribute ipam_pools
@@ -700,6 +707,10 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute tags
     #   <p>The tags to assign to the rule.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute transforms
+    #   <p>The transforms to apply to requests that match this rule. You can add one host header rewrite transform
+    #         and one URL rewrite transform.</p>
+    #   @return [Array<Types::RuleTransform>]
     class CreateRuleInput < Struct.new(
       nil,
       :listener_arn,
@@ -707,6 +718,7 @@ module Aws::ElasticLoadBalancingV2
       :priority,
       :actions,
       :tags,
+      :transforms,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -732,8 +744,8 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute protocol
     #   <p>The protocol to use for routing traffic to the targets. For Application Load Balancers,
     #         the supported protocols are HTTP and HTTPS. For Network Load Balancers, the supported
-    #         protocols are TCP, TLS, UDP, or TCP_UDP. For Gateway Load Balancers, the supported protocol is
-    #         GENEVE. A TCP_UDP listener must be associated with a TCP_UDP target group. If the target is a
+    #         protocols are TCP, TLS, UDP, TCP_UDP, QUIC, or TCP_QUIC. For Gateway Load Balancers, the supported protocol is
+    #         GENEVE. A TCP_UDP listener must be associated with a TCP_UDP target group. A TCP_QUIC listener must be associated with a TCP_QUIC target group. If the target is a
     #         Lambda function, this parameter does not apply.</p>
     #   @return [String]
     # @!attribute protocol_version
@@ -754,12 +766,12 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The protocol the load balancer uses when performing health checks on targets. For
     #         Application Load Balancers, the default is HTTP. For Network Load Balancers and Gateway Load
     #         Balancers, the default is TCP. The TCP protocol is not supported for health checks if the
-    #         protocol of the target group is HTTP or HTTPS. The GENEVE, TLS, UDP, and TCP_UDP protocols are
+    #         protocol of the target group is HTTP or HTTPS. The GENEVE, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC protocols are
     #         not supported for health checks.</p>
     #   @return [String]
     # @!attribute health_check_port
     #   <p>The port the load balancer uses when performing health checks on targets. If the protocol
-    #         is HTTP, HTTPS, TCP, TLS, UDP, or TCP_UDP, the default is <code>traffic-port</code>, which is
+    #         is HTTP, HTTPS, TCP, TLS, UDP, TCP_UDP, QUIC, or TCP_QUIC the default is <code>traffic-port</code>, which is
     #         the port on which each target receives traffic from the load balancer. If the protocol is
     #         GENEVE, the default is port 80.</p>
     #   @return [String]
@@ -777,33 +789,33 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     # @!attribute health_check_interval_seconds
     #   <p>The approximate amount of time, in seconds, between health checks of an individual target. The range is 5-300.
-    #         If the target group protocol is TCP, TLS, UDP, TCP_UDP, HTTP or HTTPS, the default is 30 seconds. 
-    #         If the target group protocol is GENEVE, the default is 10 seconds. 
+    #         If the target group protocol is TCP, TLS, UDP, TCP_UDP, QUIC, TCP_QUIC, HTTP or HTTPS, the default is 30 seconds.
+    #         If the target group protocol is GENEVE, the default is 10 seconds.
     #         If the target type is <code>lambda</code>, the default is 35 seconds.</p>
     #   @return [Integer]
     # @!attribute health_check_timeout_seconds
-    #   <p>The amount of time, in seconds, during which no response from a target means a failed 
-    #         health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the 
-    #         default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default 
-    #         is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If 
+    #   <p>The amount of time, in seconds, during which no response from a target means a failed
+    #         health check. The range is 2–120 seconds. For target groups with a protocol of HTTP, the
+    #         default is 6 seconds. For target groups with a protocol of TCP, TLS or HTTPS, the default
+    #         is 10 seconds. For target groups with a protocol of GENEVE, the default is 5 seconds. If
     #         the target type is <code>lambda</code>, the default is 30 seconds.</p>
     #   @return [Integer]
     # @!attribute healthy_threshold_count
-    #   <p>The number of consecutive health check successes required before considering a target healthy. The range is 
-    #         2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, HTTP or HTTPS, the default is 5. For target groups 
-    #         with a protocol of GENEVE, the default is 5. If the target type 
+    #   <p>The number of consecutive health check successes required before considering a target healthy. The range is
+    #         2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, HTTP or HTTPS, the default is 5. For target groups
+    #         with a protocol of GENEVE, the default is 5. If the target type
     #         is <code>lambda</code>, the default is 5.</p>
     #   @return [Integer]
     # @!attribute unhealthy_threshold_count
-    #   <p>The number of consecutive health check failures required before considering a target unhealthy. The range is 
-    #         2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, HTTP or HTTPS, the default is 2. For target groups 
-    #         with a protocol of GENEVE, the default is 2. If the target type 
+    #   <p>The number of consecutive health check failures required before considering a target unhealthy. The range is
+    #         2-10. If the target group protocol is TCP, TCP_UDP, UDP, TLS, QUIC, TCP_QUIC, HTTP or HTTPS, the default is 2. For target groups
+    #         with a protocol of GENEVE, the default is 2. If the target type
     #         is <code>lambda</code>, the default is 5.</p>
     #   @return [Integer]
     # @!attribute matcher
-    #   <p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful 
-    #         response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP or TLS the range 
-    #         is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target 
+    #   <p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful
+    #         response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP, QUIC, TCP_QUIC, or TLS the range
+    #         is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target
     #         groups with a protocol of GENEVE, the range is 200-399.</p>
     #   @return [Types::Matcher]
     # @!attribute target_type
@@ -838,6 +850,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute ip_address_type
     #   <p>The IP address type. The default value is <code>ipv4</code>.</p>
     #   @return [String]
+    # @!attribute target_control_port
+    #   <p>The port on which the target control agent and application load balancer exchange management traffic for the target optimizer feature.</p>
+    #   @return [Integer]
     class CreateTargetGroupInput < Struct.new(
       nil,
       :name,
@@ -857,6 +872,7 @@ module Aws::ElasticLoadBalancingV2
       :target_type,
       :tags,
       :ip_address_type,
+      :target_control_port,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1701,8 +1717,7 @@ module Aws::ElasticLoadBalancingV2
 
     # <p>Information about a forward action.</p>
     # @!attribute target_groups
-    #   <p>The target groups. For Network Load Balancers, you can specify a single target
-    #         group.</p>
+    #   <p>The target groups.</p>
     #   @return [Array<Types::TargetGroupTuple>]
     # @!attribute target_group_stickiness_config
     #   <p>The target group stickiness for the rule.</p>
@@ -1800,16 +1815,32 @@ module Aws::ElasticLoadBalancingV2
 
     # <p>Information about a host header condition.</p>
     # @!attribute values
-    #   <p>The host names. The maximum size of each name is 128 characters. The comparison is
+    #   <p>The host names. The maximum length of each string is 128 characters. The comparison is
     #         case insensitive. The following wildcard characters are supported: * (matches 0 or more
-    #         characters) and ? (matches exactly 1 character). You must include at least one "." 
+    #         characters) and ? (matches exactly 1 character). You must include at least one "."
     #         character. You can include only alphabetical characters after the final "." character.</p>
     #            <p>If you specify multiple strings, the condition is satisfied if one of the strings matches
     #         the host name.</p>
     #   @return [Array<String>]
+    # @!attribute regex_values
+    #   <p>The regular expressions to compare against the host header. The maximum length of each string is 128 characters.</p>
+    #   @return [Array<String>]
     class HostHeaderConditionConfig < Struct.new(
       nil,
       :values,
+      :regex_values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a host header rewrite transform. This transform matches a pattern in the host header in an HTTP request and replaces it with the specified string.</p>
+    # @!attribute rewrites
+    #   <p>The host header rewrite transform. Each transform consists of a regular expression to match and a replacement string.</p>
+    #   @return [Array<Types::RewriteConfig>]
+    class HostHeaderRewriteConfig < Struct.new(
+      nil,
+      :rewrites,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1819,13 +1850,13 @@ module Aws::ElasticLoadBalancingV2
     #          <p>There is a set of standard HTTP header fields. You can also define custom HTTP header
     #       fields.</p>
     # @!attribute http_header_name
-    #   <p>The name of the HTTP header field. The maximum size is 40 characters. The header name is
+    #   <p>The name of the HTTP header field. The maximum length is 40 characters. The header name is
     #         case insensitive. The allowed characters are specified by RFC 7230. Wildcards are not
     #         supported.</p>
     #            <p>You can't use an HTTP header condition to specify the host header. Instead, use a <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#host-conditions">host condition</a>.</p>
     #   @return [String]
     # @!attribute values
-    #   <p>The strings to compare against the value of the HTTP header. The maximum size of
+    #   <p>The strings to compare against the value of the HTTP header. The maximum length of
     #         each string is 128 characters. The comparison strings are case insensitive. The following
     #         wildcard characters are supported: * (matches 0 or more characters) and ? (matches exactly 1
     #         character).</p>
@@ -1835,10 +1866,14 @@ module Aws::ElasticLoadBalancingV2
     #         the value of the HTTP header. To require that all of the strings are a match, create one
     #         condition per string.</p>
     #   @return [Array<String>]
+    # @!attribute regex_values
+    #   <p>The regular expression to compare against the HTTP header. The maximum length of each string is 128 characters.</p>
+    #   @return [Array<String>]
     class HttpHeaderConditionConfig < Struct.new(
       nil,
       :http_header_name,
       :values,
+      :regex_values,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1849,7 +1884,7 @@ module Aws::ElasticLoadBalancingV2
     #       information, see the <a href="https://www.iana.org/assignments/http-methods/http-methods.xhtml">HTTP Method
     #         Registry</a>. You can also define custom HTTP methods.</p>
     # @!attribute values
-    #   <p>The name of the request method. The maximum size is 40 characters. The allowed characters
+    #   <p>The name of the request method. The maximum length is 40 characters. The allowed characters
     #         are A-Z, hyphen (-), and underscore (_). The comparison is case sensitive. Wildcards are not
     #         supported; therefore, the method name must be an exact match.</p>
     #            <p>If you specify multiple strings, the condition is satisfied if one of the strings matches
@@ -1975,8 +2010,8 @@ module Aws::ElasticLoadBalancingV2
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An IPAM pool is a collection of IP address CIDRs. 
-    #       IPAM pools enable you to organize your IP addresses 
+    # <p>An IPAM pool is a collection of IP address CIDRs.
+    #       IPAM pools enable you to organize your IP addresses
     #       according to your routing and security needs.</p>
     # @!attribute ipv4_ipam_pool_id
     #   <p>The ID of the IPv4 IPAM pool.</p>
@@ -1984,6 +2019,55 @@ module Aws::ElasticLoadBalancingV2
     class IpamPools < Struct.new(
       nil,
       :ipv4_ipam_pool_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about an additional claim to validate.</p>
+    # @!attribute format
+    #   <p>The format of the claim value.</p>
+    #   @return [String]
+    # @!attribute name
+    #   <p>The name of the claim. You can't specify <code>exp</code>, <code>iss</code>,
+    #         <code>nbf</code>, or <code>iat</code> because we validate them by default.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>The claim value. The maximum size of the list is 10.
+    #         Each value can be up to 256 characters in length.
+    #         If the format is <code>space-separated-values</code>, the values
+    #         can't include spaces.</p>
+    #   @return [Array<String>]
+    class JwtValidationActionAdditionalClaim < Struct.new(
+      nil,
+      :format,
+      :name,
+      :values,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a JSON Web Token (JWT) validation action.</p>
+    # @!attribute jwks_endpoint
+    #   <p>The JSON Web Key Set (JWKS) endpoint. This endpoint contains JSON Web Keys (JWK)
+    #           that are used to validate signatures from the provider.</p>
+    #            <p>This must be a full URL, including the HTTPS protocol, the domain, and the path.
+    #           The maximum length is 256 characters.</p>
+    #   @return [String]
+    # @!attribute issuer
+    #   <p>The issuer of the JWT. The maximum length is 256 characters.</p>
+    #   @return [String]
+    # @!attribute additional_claims
+    #   <p>Additional claims to validate. The maximum size of the list is 10.
+    #         We validate the <code>exp</code>, <code>iss</code>, <code>nbf</code>,
+    #         and <code>iat</code> claims by default.</p>
+    #   @return [Array<Types::JwtValidationActionAdditionalClaim>]
+    class JwtValidationActionConfig < Struct.new(
+      nil,
+      :jwks_endpoint,
+      :issuer,
+      :additional_claims,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2013,63 +2097,7 @@ module Aws::ElasticLoadBalancingV2
     #             </li>
     #          </ul>
     # @!attribute name
-    #   <p>The name of the limit. The possible values are:</p>
-    #            <ul>
-    #               <li>
-    #                  <p>application-load-balancers</p>
-    #               </li>
-    #               <li>
-    #                  <p>condition-values-per-alb-rule</p>
-    #               </li>
-    #               <li>
-    #                  <p>condition-wildcards-per-alb-rule</p>
-    #               </li>
-    #               <li>
-    #                  <p>gateway-load-balancers</p>
-    #               </li>
-    #               <li>
-    #                  <p>gateway-load-balancers-per-vpc</p>
-    #               </li>
-    #               <li>
-    #                  <p>geneve-target-groups</p>
-    #               </li>
-    #               <li>
-    #                  <p>listeners-per-application-load-balancer</p>
-    #               </li>
-    #               <li>
-    #                  <p>listeners-per-network-load-balancer</p>
-    #               </li>
-    #               <li>
-    #                  <p>network-load-balancers</p>
-    #               </li>
-    #               <li>
-    #                  <p>rules-per-application-load-balancer</p>
-    #               </li>
-    #               <li>
-    #                  <p>target-groups</p>
-    #               </li>
-    #               <li>
-    #                  <p>target-groups-per-action-on-application-load-balancer</p>
-    #               </li>
-    #               <li>
-    #                  <p>target-groups-per-action-on-network-load-balancer</p>
-    #               </li>
-    #               <li>
-    #                  <p>target-groups-per-application-load-balancer</p>
-    #               </li>
-    #               <li>
-    #                  <p>targets-per-application-load-balancer</p>
-    #               </li>
-    #               <li>
-    #                  <p>targets-per-availability-zone-per-gateway-load-balancer</p>
-    #               </li>
-    #               <li>
-    #                  <p>targets-per-availability-zone-per-network-load-balancer</p>
-    #               </li>
-    #               <li>
-    #                  <p>targets-per-network-load-balancer</p>
-    #               </li>
-    #            </ul>
+    #   <p>The name of the limit.</p>
     #   @return [String]
     # @!attribute max
     #   <p>The maximum value of the limit.</p>
@@ -2136,121 +2164,132 @@ module Aws::ElasticLoadBalancingV2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>tcp.idle_timeout.seconds</code> - The tcp idle timeout value, in seconds. The 
+    #                     <code>tcp.idle_timeout.seconds</code> - The tcp idle timeout value, in seconds. The
     #             valid range is 60-6000 seconds. The default is 350 seconds.</p>
+    #               </li>
+    #            </ul>
+    #            <p>The following attribute is only supported by Gateway Load Balancers:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>send_tcp_reset.on_idle_timeout.enabled</code> – Specifies whether the Gateway
+    #             Load Balancer sends a TCP Reset to the sender of traffic when a TCP flow's idle timeout
+    #             expires. This attribute also applies to non-SYN TCP packets received for flows that are
+    #             not in the flow table. The value is <code>true</code> or <code>false</code>. The default
+    #             is <code>false</code>.</p>
     #               </li>
     #            </ul>
     #            <p>The following attributes are only supported by Application Load Balancers.</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.request.x_amzn_mtls_clientcert_serial_number.header_name</code> - 
-    #             Enables you to modify the header name of the  
+    #                     <code>routing.http.request.x_amzn_mtls_clientcert_serial_number.header_name</code> -
+    #             Enables you to modify the header name of the
     #             <b>X-Amzn-Mtls-Clientcert-Serial-Number</b> HTTP request header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.request.x_amzn_mtls_clientcert_issuer.header_name</code> - 
-    #             Enables you to modify the header name of the  
+    #                     <code>routing.http.request.x_amzn_mtls_clientcert_issuer.header_name</code> -
+    #             Enables you to modify the header name of the
     #             <b>X-Amzn-Mtls-Clientcert-Issuer</b> HTTP request header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.request.x_amzn_mtls_clientcert_subject.header_name</code> - 
-    #             Enables you to modify the header name of the  
+    #                     <code>routing.http.request.x_amzn_mtls_clientcert_subject.header_name</code> -
+    #             Enables you to modify the header name of the
     #             <b>X-Amzn-Mtls-Clientcert-Subject</b> HTTP request header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.request.x_amzn_mtls_clientcert_validity.header_name</code> - 
-    #             Enables you to modify the header name of the  
+    #                     <code>routing.http.request.x_amzn_mtls_clientcert_validity.header_name</code> -
+    #             Enables you to modify the header name of the
     #             <b>X-Amzn-Mtls-Clientcert-Validity</b> HTTP request header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.request.x_amzn_mtls_clientcert_leaf.header_name</code> - 
-    #             Enables you to modify the header name of the  
+    #                     <code>routing.http.request.x_amzn_mtls_clientcert_leaf.header_name</code> -
+    #             Enables you to modify the header name of the
     #             <b>X-Amzn-Mtls-Clientcert-Leaf</b> HTTP request header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.request.x_amzn_mtls_clientcert.header_name</code> - 
-    #             Enables you to modify the header name of the  
+    #                     <code>routing.http.request.x_amzn_mtls_clientcert.header_name</code> -
+    #             Enables you to modify the header name of the
     #             <b>X-Amzn-Mtls-Clientcert</b> HTTP request header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.request.x_amzn_tls_version.header_name</code> - 
-    #             Enables you to modify the header name of the  
+    #                     <code>routing.http.request.x_amzn_tls_version.header_name</code> -
+    #             Enables you to modify the header name of the
     #             <b>X-Amzn-Tls-Version</b> HTTP request header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.request.x_amzn_tls_cipher_suite.header_name</code> - 
-    #             Enables you to modify the header name of the  
+    #                     <code>routing.http.request.x_amzn_tls_cipher_suite.header_name</code> -
+    #             Enables you to modify the header name of the
     #             <b>X-Amzn-Tls-Cipher-Suite</b> HTTP request header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.server.enabled</code> - 
+    #                     <code>routing.http.response.server.enabled</code> -
     #             Enables you to allow or remove the HTTP response server header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.strict_transport_security.header_value</code> - 
-    #             Informs browsers that the site should only be accessed using HTTPS, and that 
-    #             any future attempts to access it using HTTP should automatically be converted 
+    #                     <code>routing.http.response.strict_transport_security.header_value</code> -
+    #             Informs browsers that the site should only be accessed using HTTPS, and that
+    #             any future attempts to access it using HTTP should automatically be converted
     #             to HTTPS.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.access_control_allow_origin.header_value</code> - 
+    #                     <code>routing.http.response.access_control_allow_origin.header_value</code> -
     #             Specifies which origins are allowed to access the server.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.access_control_allow_methods.header_value</code> - 
-    #             Returns which HTTP methods are allowed when accessing the server from a different 
+    #                     <code>routing.http.response.access_control_allow_methods.header_value</code> -
+    #             Returns which HTTP methods are allowed when accessing the server from a different
     #             origin.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.access_control_allow_headers.header_value</code> - 
+    #                     <code>routing.http.response.access_control_allow_headers.header_value</code> -
     #             Specifies which headers can be used during the request.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.access_control_allow_credentials.header_value</code> - 
-    #             Indicates whether the browser should include credentials such as cookies or 
+    #                     <code>routing.http.response.access_control_allow_credentials.header_value</code> -
+    #             Indicates whether the browser should include credentials such as cookies or
     #             authentication when making requests.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.access_control_expose_headers.header_value</code> - 
+    #                     <code>routing.http.response.access_control_expose_headers.header_value</code> -
     #             Returns which headers the browser can expose to the requesting client.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.access_control_max_age.header_value</code> - 
+    #                     <code>routing.http.response.access_control_max_age.header_value</code> -
     #             Specifies how long the results of a preflight request can be cached, in seconds.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.content_security_policy.header_value</code> - 
-    #             Specifies restrictions enforced by the browser to help minimize the risk of certain 
+    #                     <code>routing.http.response.content_security_policy.header_value</code> -
+    #             Specifies restrictions enforced by the browser to help minimize the risk of certain
     #             types of security threats.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.x_content_type_options.header_value</code> - 
-    #             Indicates whether the MIME types advertised in the <b>Content-Type</b> 
+    #                     <code>routing.http.response.x_content_type_options.header_value</code> -
+    #             Indicates whether the MIME types advertised in the <b>Content-Type</b>
     #             headers should be followed and not be changed.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http.response.x_frame_options.header_value</code> - Indicates 
-    #             whether the browser is allowed to render a page in a <b>frame</b>, 
-    #             <b>iframe</b>, <b>embed</b> or 
+    #                     <code>routing.http.response.x_frame_options.header_value</code> - Indicates
+    #             whether the browser is allowed to render a page in a <b>frame</b>,
+    #             <b>iframe</b>, <b>embed</b> or
     #             <b>object</b>.</p>
     #               </li>
     #            </ul>
@@ -2320,23 +2359,23 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The IDs of the security groups for the load balancer.</p>
     #   @return [Array<String>]
     # @!attribute ip_address_type
-    #   <p>The type of IP addresses used for public or private connections by the subnets 
+    #   <p>The type of IP addresses used for public or private connections by the subnets
     #         attached to your load balancer.</p>
-    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses), 
-    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code> 
+    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses),
+    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code>
     #         (public IPv6 addresses and private IPv4 and IPv6 addresses).</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code> 
+    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code>
     #         (IPv4 addresses) and <code>dualstack</code> (IPv4 and IPv6 addresses).</p>
     #   @return [String]
     # @!attribute customer_owned_ipv4_pool
     #   <p>[Application Load Balancers on Outposts] The ID of the customer-owned address pool.</p>
     #   @return [String]
     # @!attribute enforce_security_group_inbound_rules_on_private_link_traffic
-    #   <p>Indicates whether to evaluate inbound security group rules for traffic sent to a 
+    #   <p>Indicates whether to evaluate inbound security group rules for traffic sent to a
     #         Network Load Balancer through Amazon Web Services PrivateLink.</p>
     #   @return [String]
     # @!attribute enable_prefix_for_ipv6_source_nat
-    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix 
+    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix
     #         from each subnet for source NAT. The IP address type must be <code>dualstack</code>.
     #         The default value is <code>off</code>.</p>
     #   @return [String]
@@ -2406,7 +2445,7 @@ module Aws::ElasticLoadBalancingV2
     #                  <p>
     #                     <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross-zone load
     #             balancing is enabled. The possible values are <code>true</code> and <code>false</code>.
-    #             The default for Network Load Balancers and Gateway Load Balancers is <code>false</code>. 
+    #             The default for Network Load Balancers and Gateway Load Balancers is <code>false</code>.
     #             The default for Application Load Balancers is <code>true</code>, and can't be changed.</p>
     #               </li>
     #            </ul>
@@ -2440,8 +2479,8 @@ module Aws::ElasticLoadBalancingV2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>zonal_shift.config.enabled</code> - Indicates whether zonal shift is 
-    #             enabled. The possible values are <code>true</code> and <code>false</code>. The 
+    #                     <code>zonal_shift.config.enabled</code> - Indicates whether zonal shift is
+    #             enabled. The possible values are <code>true</code> and <code>false</code>. The
     #             default is <code>false</code>.</p>
     #               </li>
     #            </ul>
@@ -2454,7 +2493,7 @@ module Aws::ElasticLoadBalancingV2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>client_keep_alive.seconds</code> - The client keep alive value, in seconds. The 
+    #                     <code>client_keep_alive.seconds</code> - The client keep alive value, in seconds. The
     #             valid range is 60-604800 seconds. The default is 3600 seconds.</p>
     #               </li>
     #               <li>
@@ -2473,6 +2512,23 @@ module Aws::ElasticLoadBalancingV2
     #                  <p>
     #                     <code>connection_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the
     #             connection logs.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>health_check_logs.s3.enabled</code> - Indicates whether health check logs are enabled. The
+    #             value is <code>true</code> or <code>false</code>. The default is <code>false</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>health_check_logs.s3.bucket</code> - The name of the S3 bucket for the health check logs.
+    #             This attribute is required if health check logs are enabled. The bucket must exist in the same
+    #             region as the load balancer and have a bucket policy that grants Elastic Load Balancing
+    #             permissions to write to the bucket.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>health_check_logs.s3.prefix</code> - The prefix for the location in the S3 bucket for the
+    #             health check logs.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -2540,10 +2596,12 @@ module Aws::ElasticLoadBalancingV2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>routing.http2.enabled</code> - Indicates whether HTTP/2 is enabled. The possible
-    #             values are <code>true</code> and <code>false</code>. The default is <code>true</code>.
-    #             Elastic Load Balancing requires that message header names contain only alphanumeric
-    #             characters and hyphens.</p>
+    #                     <code>routing.http2.enabled</code> - Indicates whether clients can connect to the load
+    #             balancer using HTTP/2. If <code>true</code>, clients can connect using HTTP/2 or HTTP/1.1.
+    #             However, all client requests are subject to the stricter HTTP/2 header validation rules.
+    #             For example, message header names must contain only alphanumeric characters and hyphens.
+    #             If <code>false</code>, clients must connect using HTTP/1.1. The default is
+    #               <code>true</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -2556,17 +2614,17 @@ module Aws::ElasticLoadBalancingV2
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>dns_record.client_routing_policy</code> - Indicates how traffic is 
-    #             distributed among the load balancer Availability Zones. The possible values are 
-    #             <code>availability_zone_affinity</code> with 100 percent zonal affinity, 
-    #             <code>partial_availability_zone_affinity</code> with 85 percent zonal affinity, 
+    #                     <code>dns_record.client_routing_policy</code> - Indicates how traffic is
+    #             distributed among the load balancer Availability Zones. The possible values are
+    #             <code>availability_zone_affinity</code> with 100 percent zonal affinity,
+    #             <code>partial_availability_zone_affinity</code> with 85 percent zonal affinity,
     #             and <code>any_availability_zone</code> with 0 percent zonal affinity.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>secondary_ips.auto_assigned.per_subnet</code> - The number of secondary
-    #               IP addresses to configure for your load balancer nodes. Use to address port 
-    #               allocation errors if you can't add targets. The valid range is 0 to 7. The 
+    #               IP addresses to configure for your load balancer nodes. Use to address port
+    #               allocation errors if you can't add targets. The valid range is 0 to 7. The
     #               default is 0. After you set this value, you can't decrease it.</p>
     #               </li>
     #            </ul>
@@ -2757,8 +2815,8 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Integer]
     # @!attribute protocol
     #   <p>The protocol for connections from clients to the load balancer. Application Load Balancers
-    #         support the HTTP and HTTPS protocols. Network Load Balancers support the TCP, TLS, UDP, and
-    #         TCP_UDP protocols. You can’t change the protocol to UDP or TCP_UDP if dual-stack mode is
+    #         support the HTTP and HTTPS protocols. Network Load Balancers support the TCP, TLS, UDP,
+    #         TCP_UDP, QUIC, and TCP_QUIC protocols. You can’t change the protocol to UDP, TCP_UDP, QUIC, or TCP_QUIC if dual-stack mode is
     #         enabled. You can't specify a protocol for a Gateway Load Balancer.</p>
     #   @return [String]
     # @!attribute ssl_policy
@@ -2809,7 +2867,7 @@ module Aws::ElasticLoadBalancingV2
     #           policies</a> in the <i>Network Load Balancers Guide</i>.</p>
     #   @return [Array<String>]
     # @!attribute mutual_authentication
-    #   <p>The mutual authentication configuration information.</p>
+    #   <p>[HTTPS listeners] The mutual authentication configuration information.</p>
     #   @return [Types::MutualAuthenticationAttributes]
     class ModifyListenerInput < Struct.new(
       nil,
@@ -2872,11 +2930,21 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute actions
     #   <p>The actions.</p>
     #   @return [Array<Types::Action>]
+    # @!attribute transforms
+    #   <p>The transforms to apply to requests that match this rule. You can add one host header rewrite transform
+    #         and one URL rewrite transform. If you specify <code>Transforms</code>, you can't specify <code>ResetTransforms</code>.</p>
+    #   @return [Array<Types::RuleTransform>]
+    # @!attribute reset_transforms
+    #   <p>Indicates whether to remove all transforms from the rule. If you specify <code>ResetTransforms</code>,
+    #         you can't specify <code>Transforms</code>.</p>
+    #   @return [Boolean]
     class ModifyRuleInput < Struct.new(
       nil,
       :rule_arn,
       :conditions,
       :actions,
+      :transforms,
+      :reset_transforms,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2927,7 +2995,7 @@ module Aws::ElasticLoadBalancingV2
     #         Application Load Balancers, the default is HTTP. For Network Load Balancers and Gateway Load
     #         Balancers, the default is TCP. The TCP protocol is not supported for health checks if the
     #         protocol of the target group is HTTP or HTTPS. It is supported for health checks only if the
-    #         protocol of the target group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, and TCP_UDP
+    #         protocol of the target group is TCP, TLS, UDP, or TCP_UDP. The GENEVE, TLS, UDP, TCP_UDP, QUIC, and TCP_QUIC
     #         protocols are not supported for health checks.</p>
     #   @return [String]
     # @!attribute health_check_port
@@ -2940,7 +3008,10 @@ module Aws::ElasticLoadBalancingV2
     #         /package.service/method. The default is /Amazon Web Services.ALB/healthcheck.</p>
     #   @return [String]
     # @!attribute health_check_enabled
-    #   <p>Indicates whether health checks are enabled.</p>
+    #   <p>Indicates whether health checks are enabled. If the target type is <code>lambda</code>,
+    #         health checks are disabled by default but can be enabled. If the target type is
+    #         <code>instance</code>, <code>ip</code>, or <code>alb</code>, health checks are always
+    #         enabled and can't be disabled.</p>
     #   @return [Boolean]
     # @!attribute health_check_interval_seconds
     #   <p>The approximate amount of time, in seconds, between health checks of an individual target.</p>
@@ -2958,9 +3029,9 @@ module Aws::ElasticLoadBalancingV2
     #         unhealthy.</p>
     #   @return [Integer]
     # @!attribute matcher
-    #   <p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful 
-    #         response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP or TLS the range 
-    #         is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target 
+    #   <p>[HTTP/HTTPS health checks] The HTTP or gRPC codes to use when checking for a successful
+    #         response from a target. For target groups with a protocol of TCP, TCP_UDP, UDP or TLS the range
+    #         is 200-599. For target groups with a protocol of HTTP or HTTPS, the range is 200-499. For target
     #         groups with a protocol of GENEVE, the range is 200-399.</p>
     #   @return [Types::Matcher]
     class ModifyTargetGroupInput < Struct.new(
@@ -3027,8 +3098,8 @@ module Aws::ElasticLoadBalancingV2
 
     # <p>Information about the mutual authentication attributes of a listener.</p>
     # @!attribute mode
-    #   <p>The client certificate handling method. Options are <code>off</code>, 
-    #         <code>passthrough</code> or <code>verify</code>. The default value is 
+    #   <p>The client certificate handling method. Options are <code>off</code>,
+    #         <code>passthrough</code> or <code>verify</code>. The default value is
     #         <code>off</code>.</p>
     #   @return [String]
     # @!attribute trust_store_arn
@@ -3068,16 +3139,20 @@ module Aws::ElasticLoadBalancingV2
 
     # <p>Information about a path pattern condition.</p>
     # @!attribute values
-    #   <p>The path patterns to compare against the request URL. The maximum size of each
+    #   <p>The path patterns to compare against the request URL. The maximum length of each
     #         string is 128 characters. The comparison is case sensitive. The following wildcard characters
     #         are supported: * (matches 0 or more characters) and ? (matches exactly 1 character).</p>
     #            <p>If you specify multiple strings, the condition is satisfied if one of them matches the
     #         request URL. The path pattern is compared only to the path of the URL, not to its query
     #         string. To compare against the query string, use a <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#query-string-conditions">query string condition</a>.</p>
     #   @return [Array<String>]
+    # @!attribute regex_values
+    #   <p>The regular expressions to compare against the request URL. The maximum length of each string is 128 characters.</p>
+    #   @return [Array<String>]
     class PathPatternConditionConfig < Struct.new(
       nil,
       :values,
+      :regex_values,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3111,7 +3186,7 @@ module Aws::ElasticLoadBalancingV2
     #       pairs separated by '&' characters. The allowed characters are specified by RFC 3986. Any
     #       character can be percentage encoded.</p>
     # @!attribute values
-    #   <p>The key/value pairs or values to find in the query string. The maximum size of
+    #   <p>The key/value pairs or values to find in the query string. The maximum length of
     #         each string is 128 characters. The comparison is case insensitive. The following wildcard
     #         characters are supported: * (matches 0 or more characters) and ? (matches exactly 1
     #         character). To search for a literal '*' or '?' character in a query string, you must escape
@@ -3362,6 +3437,23 @@ module Aws::ElasticLoadBalancingV2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about a rewrite transform. This transform matches a pattern and replaces it with the specified string.</p>
+    # @!attribute regex
+    #   <p>The regular expression to match in the input string. The maximum length of the string is 1,024 characters.</p>
+    #   @return [String]
+    # @!attribute replace
+    #   <p>The replacement string to use when rewriting the matched input. The maximum length of the string is 1,024 characters.
+    #         You can specify capture groups in the regular expression (for example, $1 and $2).</p>
+    #   @return [String]
+    class RewriteConfig < Struct.new(
+      nil,
+      :regex,
+      :replace,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about a rule.</p>
     # @!attribute rule_arn
     #   <p>The Amazon Resource Name (ARN) of the rule.</p>
@@ -3383,6 +3475,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute is_default
     #   <p>Indicates whether this is the default rule.</p>
     #   @return [Boolean]
+    # @!attribute transforms
+    #   <p>The transforms for the rule.</p>
+    #   @return [Array<Types::RuleTransform>]
     class Rule < Struct.new(
       nil,
       :rule_arn,
@@ -3390,6 +3485,7 @@ module Aws::ElasticLoadBalancingV2
       :conditions,
       :actions,
       :is_default,
+      :transforms,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3401,40 +3497,41 @@ module Aws::ElasticLoadBalancingV2
     #         <code>source-ip</code>. Each rule can also optionally include one or more of each of the
     #       following conditions: <code>http-header</code> and <code>query-string</code>. Note that the
     #       value for a condition can't be empty.</p>
+    #          <p>For Network Load Balancer listener rules, the only supported condition is
+    #         <code>source-ip</code>. Use <code>SourceIpConfig</code> with <code>IpAddressType</code> to
+    #       match on the IP address type of the source traffic (<code>ipv4</code> or
+    #       <code>ipv6</code>).</p>
     #          <p>For more information, see <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html">Quotas for your
     #       Application Load Balancers</a>.</p>
     # @!attribute field
-    #   <p>The field in the HTTP request. The following are the possible values:</p>
+    #   <p>The name of the field. The possible values are:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>http-header</code>
-    #                  </p>
+    #                     <code>http-header</code> – [ALB] Matches on an HTTP header field.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>http-request-method</code>
-    #                  </p>
+    #                     <code>http-request-method</code> – [ALB] Matches on the HTTP request method.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>host-header</code>
-    #                  </p>
+    #                     <code>host-header</code> – [ALB] Matches on the host header.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>path-pattern</code>
-    #                  </p>
+    #                     <code>path-pattern</code> – [ALB] Matches on the URL path of the request.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>query-string</code>
-    #                  </p>
+    #                     <code>query-string</code> – [ALB] Matches on a query string parameter.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>source-ip</code>
-    #                  </p>
+    #                     <code>source-ip</code> – [ALB, NLB] Matches on the source IP address. For ALB, use
+    #               <code>SourceIpConfig</code> with <code>Values</code> to specify CIDR ranges. For NLB,
+    #             use <code>SourceIpConfig</code> with <code>IpAddressType</code> to match the IP address
+    #             type (<code>ipv4</code> or <code>ipv6</code>).</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -3506,6 +3603,10 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Information for a source IP condition. Specify only when <code>Field</code> is
     #           <code>source-ip</code>.</p>
     #   @return [Types::SourceIpConditionConfig]
+    # @!attribute regex_values
+    #   <p>The regular expressions to match against the condition field. The maximum length of each string is 128 characters.
+    #         Specify only when <code>Field</code> is <code>http-header</code>, <code>host-header</code>, or <code>path-pattern</code>.</p>
+    #   @return [Array<String>]
     class RuleCondition < Struct.new(
       nil,
       :field,
@@ -3516,6 +3617,7 @@ module Aws::ElasticLoadBalancingV2
       :query_string_config,
       :http_request_method_config,
       :source_ip_config,
+      :regex_values,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3548,6 +3650,38 @@ module Aws::ElasticLoadBalancingV2
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Information about a transform to apply to requests that match a rule. Transforms are applied to requests before they are sent to targets.</p>
+    # @!attribute type
+    #   <p>The type of transform. </p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>host-header-rewrite</code> - Rewrite the host header.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>url-rewrite</code> - Rewrite the request URL.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute host_header_rewrite_config
+    #   <p>Information about a host header rewrite transform. This transform modifies the host header in an HTTP request.
+    #           Specify only when <code>Type</code> is <code>host-header-rewrite</code>.</p>
+    #   @return [Types::HostHeaderRewriteConfig]
+    # @!attribute url_rewrite_config
+    #   <p>Information about a URL rewrite transform. This transform modifies the request URL.
+    #         Specify only when <code>Type</code> is <code>url-rewrite</code>.</p>
+    #   @return [Types::UrlRewriteConfig]
+    class RuleTransform < Struct.new(
+      nil,
+      :type,
+      :host_header_rewrite_config,
+      :url_rewrite_config,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified SSL policy does not exist.</p>
     # @!attribute message
     #   @return [String]
@@ -3564,14 +3698,14 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     # @!attribute ip_address_type
     #   <p>The IP address type. Internal load balancers must use <code>ipv4</code>.</p>
-    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses), 
-    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code> 
+    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses),
+    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code>
     #         (public IPv6 addresses and private IPv4 and IPv6 addresses).</p>
-    #            <p>Application Load Balancer authentication supports IPv4 addresses only when 
-    #         connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public 
-    #         IPv4 address the load balancer can't complete the authentication process, resulting 
+    #            <p>Application Load Balancer authentication supports IPv4 addresses only when
+    #         connecting to an Identity Provider (IdP) or Amazon Cognito endpoint. Without a public
+    #         IPv4 address the load balancer can't complete the authentication process, resulting
     #         in HTTP 500 errors.</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code> 
+    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code>
     #         (IPv4 addresses) and <code>dualstack</code> (IPv4 and IPv6 addresses).</p>
     #   @return [String]
     class SetIpAddressTypeInput < Struct.new(
@@ -3623,8 +3757,9 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The IDs of the security groups.</p>
     #   @return [Array<String>]
     # @!attribute enforce_security_group_inbound_rules_on_private_link_traffic
-    #   <p>Indicates whether to evaluate inbound security group rules for traffic sent to a 
-    #         Network Load Balancer through Amazon Web Services PrivateLink. The default is <code>on</code>.</p>
+    #   <p>Indicates whether to evaluate inbound security group rules for traffic sent to a
+    #         Network Load Balancer through Amazon Web Services PrivateLink. Applies only if the load balancer
+    #         has an associated security group. The default is <code>on</code>.</p>
     #   @return [String]
     class SetSecurityGroupsInput < Struct.new(
       nil,
@@ -3640,7 +3775,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The IDs of the security groups associated with the load balancer.</p>
     #   @return [Array<String>]
     # @!attribute enforce_security_group_inbound_rules_on_private_link_traffic
-    #   <p>Indicates whether to evaluate inbound security group rules for traffic sent to a 
+    #   <p>Indicates whether to evaluate inbound security group rules for traffic sent to a
     #         Network Load Balancer through Amazon Web Services PrivateLink.</p>
     #   @return [String]
     class SetSecurityGroupsOutput < Struct.new(
@@ -3663,8 +3798,10 @@ module Aws::ElasticLoadBalancingV2
     #            <p>[Application Load Balancers on Outposts] You must specify one Outpost subnet.</p>
     #            <p>[Application Load Balancers on Local Zones] You can specify subnets from one or more Local
     #         Zones.</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] You can specify subnets from one or more 
-    #         Availability Zones.</p>
+    #            <p>[Network Load Balancers] You can specify subnets from one or more Availability Zones.</p>
+    #            <p>[Gateway Load Balancers] You can specify subnets from one or more Availability Zones.
+    #         You must include all subnets that were enabled previously, with their existing configurations,
+    #         plus any additional subnets.</p>
     #   @return [Array<String>]
     # @!attribute subnet_mappings
     #   <p>The IDs of the public subnets. You can specify only one subnet per Availability Zone. You
@@ -3684,14 +3821,14 @@ module Aws::ElasticLoadBalancingV2
     #   @return [Array<Types::SubnetMapping>]
     # @!attribute ip_address_type
     #   <p>The IP address type.</p>
-    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses), 
-    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code> 
+    #            <p>[Application Load Balancers] The possible values are <code>ipv4</code> (IPv4 addresses),
+    #         <code>dualstack</code> (IPv4 and IPv6 addresses), and <code>dualstack-without-public-ipv4</code>
     #         (public IPv6 addresses and private IPv4 and IPv6 addresses).</p>
-    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code> 
+    #            <p>[Network Load Balancers and Gateway Load Balancers] The possible values are <code>ipv4</code>
     #         (IPv4 addresses) and <code>dualstack</code> (IPv4 and IPv6 addresses).</p>
     #   @return [String]
     # @!attribute enable_prefix_for_ipv6_source_nat
-    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix 
+    #   <p>[Network Load Balancers with UDP listeners] Indicates whether to use an IPv6 prefix
     #         from each subnet for source NAT. The IP address type must be <code>dualstack</code>.
     #         The default value is <code>off</code>.</p>
     #   @return [String]
@@ -3730,6 +3867,9 @@ module Aws::ElasticLoadBalancingV2
     #          <p>You can use this condition to route based on the IP address of the source that connects to
     #       the load balancer. If a client is behind a proxy, this is the IP address of the proxy not the
     #       IP address of the client.</p>
+    #          <p>For Application Load Balancers, use <code>Values</code> to specify CIDR ranges. For
+    #       Network Load Balancers, use <code>IpAddressType</code> to match on the IP address type of
+    #       the source traffic.</p>
     # @!attribute values
     #   <p>The source IP addresses, in CIDR format. You can use both IPv4 and IPv6 addresses.
     #         Wildcards are not supported.</p>
@@ -3739,9 +3879,24 @@ module Aws::ElasticLoadBalancingV2
     #         an <a href="https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#http-header-conditions">HTTP header condition</a>.</p>
     #            <p>The total number of values must be less than, or equal to five.</p>
     #   @return [Array<String>]
+    # @!attribute ip_address_type
+    #   <p>The IP address type for Network Load Balancers.</p>
+    #            <p>The valid values are:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>ipv4</code> – IPv4 addresses only.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ipv6</code> – IPv6 addresses only.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
     class SourceIpConditionConfig < Struct.new(
       nil,
       :values,
+      :ip_address_type,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3787,7 +3942,7 @@ module Aws::ElasticLoadBalancingV2
     #   @return [String]
     # @!attribute source_nat_ipv6_prefix
     #   <p>[Network Load Balancers with UDP listeners] The IPv6 prefix to use for source NAT.
-    #         Specify an IPv6 prefix (/80 netmask) from the subnet CIDR block or <code>auto_assigned</code> 
+    #         Specify an IPv6 prefix (/80 netmask) from the subnet CIDR block or <code>auto_assigned</code>
     #         to use an IPv6 prefix selected at random from the subnet CIDR block.</p>
     #   @return [String]
     class SubnetMapping < Struct.new(
@@ -3855,32 +4010,41 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute port
     #   <p>The port on which the target is listening. If the target group protocol is GENEVE, the
     #         supported port is 6081. If the target type is <code>alb</code>, the targeted Application Load
-    #         Balancer must have at least one listener whose port matches the target group port. This 
+    #         Balancer must have at least one listener whose port matches the target group port. This
     #         parameter is not used if the target is a Lambda function.</p>
     #   @return [Integer]
     # @!attribute availability_zone
-    #   <p>An Availability Zone or <code>all</code>. This determines whether the target receives 
-    #         traffic from the load balancer nodes in the specified Availability Zone or from all enabled 
+    #   <p>An Availability Zone or <code>all</code>. This determines whether the target receives
+    #         traffic from the load balancer nodes in the specified Availability Zone or from all enabled
     #         Availability Zones for the load balancer.</p>
-    #            <p>For Application Load Balancer target groups, the specified Availability Zone value is only applicable 
-    #         when cross-zone load balancing is off. Otherwise the parameter is ignored and treated 
+    #            <p>For Application Load Balancer target groups, the specified Availability Zone value is only applicable
+    #         when cross-zone load balancing is off. Otherwise the parameter is ignored and treated
     #         as <code>all</code>.</p>
     #            <p>This parameter is not supported if the target type of the target group is
     #         <code>instance</code> or <code>alb</code>.</p>
-    #            <p>If the target type is <code>ip</code> and the IP address is in a subnet of the VPC for the target group, 
-    #         the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside 
+    #            <p>If the target type is <code>ip</code> and the IP address is in a subnet of the VPC for the target group,
+    #         the Availability Zone is automatically detected and this parameter is optional. If the IP address is outside
     #         the VPC, this parameter is required.</p>
-    #            <p>For Application Load Balancer target groups with cross-zone load balancing off, if the target type 
-    #         is <code>ip</code> and the IP address is outside of the VPC for the target group, this should be an 
+    #            <p>For Application Load Balancer target groups with cross-zone load balancing off, if the target type
+    #         is <code>ip</code> and the IP address is outside of the VPC for the target group, this should be an
     #         Availability Zone inside the VPC for the target group.</p>
     #            <p>If the target type is <code>lambda</code>, this parameter is optional and the only
     #         supported value is <code>all</code>.</p>
+    #   @return [String]
+    # @!attribute quic_server_id
+    #   <p>The server ID for the targets. This value is required if the protocol is
+    #         <code>QUIC</code> or <code>TCP_QUIC</code> and can't be used with other protocols.</p>
+    #            <p>The ID consists of the <code>0x</code> prefix followed by 16 hexadecimal characters.
+    #         Any letters must be lowercase. The value must be unique at the listener level. You can't
+    #         modify the server ID for a registered target. You must deregister the target and then
+    #         provide a new server ID when you register the target again.</p>
     #   @return [String]
     class TargetDescription < Struct.new(
       nil,
       :id,
       :port,
       :availability_zone,
+      :quic_server_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3897,7 +4061,7 @@ module Aws::ElasticLoadBalancingV2
     #   <p>The protocol to use for routing traffic to the targets.</p>
     #   @return [String]
     # @!attribute port
-    #   <p>The port on which the targets are listening. This parameter is not used if the target is 
+    #   <p>The port on which the targets are listening. This parameter is not used if the target is
     #         a Lambda function.</p>
     #   @return [Integer]
     # @!attribute vpc_id
@@ -3954,6 +4118,9 @@ module Aws::ElasticLoadBalancingV2
     # @!attribute ip_address_type
     #   <p>The IP address type. The default value is <code>ipv4</code>.</p>
     #   @return [String]
+    # @!attribute target_control_port
+    #   <p>The port on which the target control agent and application load balancer exchange management traffic for the target optimizer feature.</p>
+    #   @return [Integer]
     class TargetGroup < Struct.new(
       nil,
       :target_group_arn,
@@ -3974,6 +4141,7 @@ module Aws::ElasticLoadBalancingV2
       :target_type,
       :protocol_version,
       :ip_address_type,
+      :target_control_port,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4028,19 +4196,19 @@ module Aws::ElasticLoadBalancingV2
     #                  </ul>
     #               </li>
     #            </ul>
-    #            <p>The following attributes are supported by Application Load Balancers and 
+    #            <p>The following attributes are supported by Application Load Balancers and
     #         Network Load Balancers:</p>
     #            <ul>
     #               <li>
     #                  <p>
-    #                     <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross zone load 
-    #             balancing is enabled. The value is <code>true</code>, <code>false</code> or 
-    #             <code>use_load_balancer_configuration</code>. The default is 
+    #                     <code>load_balancing.cross_zone.enabled</code> - Indicates whether cross zone load
+    #             balancing is enabled. The value is <code>true</code>, <code>false</code> or
+    #             <code>use_load_balancer_configuration</code>. The default is
     #             <code>use_load_balancer_configuration</code>.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>target_group_health.dns_failover.minimum_healthy_targets.count</code> - 
+    #                     <code>target_group_health.dns_failover.minimum_healthy_targets.count</code> -
     #             The minimum number of targets that must be healthy.
     #             If the number of healthy targets is below this value, mark the zone as unhealthy
     #             in DNS, so that traffic is routed only to healthy zones. The possible values are
@@ -4049,7 +4217,7 @@ module Aws::ElasticLoadBalancingV2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>target_group_health.dns_failover.minimum_healthy_targets.percentage</code> - 
+    #                     <code>target_group_health.dns_failover.minimum_healthy_targets.percentage</code> -
     #             The minimum percentage of targets that must be healthy.
     #             If the percentage of healthy targets is below this value, mark the zone as unhealthy
     #             in DNS, so that traffic is routed only to healthy zones. The possible values are
@@ -4057,15 +4225,15 @@ module Aws::ElasticLoadBalancingV2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.count</code> - 
-    #             The minimum number of targets that must be healthy.  
+    #                     <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.count</code> -
+    #             The minimum number of targets that must be healthy.
     #             If the number of healthy targets is below this value, send traffic to all targets, including unhealthy targets.
     #             The possible values are 1 to the maximum number of targets. The default is 1.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage</code> - 
-    #             The minimum percentage of targets that must be healthy. 
+    #                     <code>target_group_health.unhealthy_state_routing.minimum_healthy_targets.percentage</code> -
+    #             The minimum percentage of targets that must be healthy.
     #             If the percentage of healthy targets is below this value, send traffic to all targets, including unhealthy targets.
     #             The possible values are <code>off</code> or an integer from 1 to 100.
     #             The default is <code>off</code>.</p>
@@ -4083,8 +4251,8 @@ module Aws::ElasticLoadBalancingV2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>load_balancing.algorithm.anomaly_mitigation</code> - Only available when <code>load_balancing.algorithm.type</code> 
-    #             is <code>weighted_random</code>. Indicates whether anomaly mitigation is enabled. The value is <code>on</code> 
+    #                     <code>load_balancing.algorithm.anomaly_mitigation</code> - Only available when <code>load_balancing.algorithm.type</code>
+    #             is <code>weighted_random</code>. Indicates whether anomaly mitigation is enabled. The value is <code>on</code>
     #             or <code>off</code>. The default is <code>off</code>.</p>
     #               </li>
     #               <li>
@@ -4135,7 +4303,7 @@ module Aws::ElasticLoadBalancingV2
     #                  <p>
     #                     <code>deregistration_delay.connection_termination.enabled</code> - Indicates whether
     #             the load balancer terminates connections at the end of the deregistration timeout. The
-    #             value is <code>true</code> or <code>false</code>. For new UDP/TCP_UDP target groups the 
+    #             value is <code>true</code> or <code>false</code>. For new UDP/TCP_UDP target groups the
     #             default is <code>true</code>. Otherwise, the default is <code>false</code>.</p>
     #               </li>
     #               <li>
@@ -4154,18 +4322,18 @@ module Aws::ElasticLoadBalancingV2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>target_health_state.unhealthy.connection_termination.enabled</code> - Indicates whether 
-    #             the load balancer terminates connections to unhealthy targets. The value is <code>true</code> 
+    #                     <code>target_health_state.unhealthy.connection_termination.enabled</code> - Indicates whether
+    #             the load balancer terminates connections to unhealthy targets. The value is <code>true</code>
     #             or <code>false</code>. The default is <code>true</code>. This attribute can't be enabled for UDP and
     #             TCP_UDP target groups.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>target_health_state.unhealthy.draining_interval_seconds</code> - The amount of time 
-    #             for Elastic Load Balancing to wait before changing the state of an unhealthy target from 
-    #             <code>unhealthy.draining</code> to <code>unhealthy</code>. The range is 0-360000 seconds. 
+    #                     <code>target_health_state.unhealthy.draining_interval_seconds</code> - The amount of time
+    #             for Elastic Load Balancing to wait before changing the state of an unhealthy target from
+    #             <code>unhealthy.draining</code> to <code>unhealthy</code>. The range is 0-360000 seconds.
     #             The default value is 0 seconds.</p>
-    #                  <p>Note: This attribute can only be configured when 
+    #                  <p>Note: This attribute can only be configured when
     #             <code>target_health_state.unhealthy.connection_termination.enabled</code> is <code>false</code>.</p>
     #               </li>
     #            </ul>
@@ -4190,6 +4358,28 @@ module Aws::ElasticLoadBalancingV2
     #               (<code>target_failover.on_deregistration</code> and
     #               <code>target_failover.on_unhealthy</code>) can't be set independently. The value you
     #             set for both attributes must be the same.  </p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>send_tcp_reset.on_unhealthy.enabled</code> – Specifies whether the Gateway Load
+    #             Balancer sends a TCP Reset to the sender of traffic when a target becomes unhealthy. After
+    #             sending the reset, the Gateway Load Balancer removes the flow entry from its flow table.
+    #             The value is <code>true</code> or <code>false</code>. The default is <code>false</code>.
+    #             This attribute does not apply when <code>target_failover.on_unhealthy</code> is set to
+    #               <code>rebalance</code>. This feature requires 5-tuple flow stickiness, which the target
+    #             group uses by default when <code>stickiness.enabled</code> is set to
+    #               <code>false</code>.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>send_tcp_reset.on_deregistration.enabled</code> – Specifies whether the Gateway
+    #             Load Balancer sends a TCP Reset to the sender of traffic when a target is deregistered.
+    #             The reset occurs after the connection drain time has elapsed. The value is
+    #               <code>true</code> or <code>false</code>. The default is <code>false</code>. This
+    #             attribute does not apply when <code>target_failover.on_deregistration</code> is set to
+    #             <code>rebalance</code>. This feature requires 5-tuple flow stickiness, which the target
+    #             group uses by default when <code>stickiness.enabled</code> is set to
+    #             <code>false</code>.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -4221,9 +4411,9 @@ module Aws::ElasticLoadBalancingV2
     #   <p>Indicates whether target group stickiness is enabled.</p>
     #   @return [Boolean]
     # @!attribute duration_seconds
-    #   <p>The time period, in seconds, during which requests from a client should be routed to the
-    #         same target group. The range is 1-604800 seconds (7 days). You must specify this value when
-    #         enabling target group stickiness.</p>
+    #   <p>[Application Load Balancers] The time period, in seconds, during which requests from a
+    #         client should be routed to the same target group. The range is 1-604800 seconds (7 days). You
+    #         must specify this value when enabling target group stickiness.</p>
     #   @return [Integer]
     class TargetGroupStickinessConfig < Struct.new(
       nil,
@@ -4278,13 +4468,11 @@ module Aws::ElasticLoadBalancingV2
     #               <li>
     #                  <p>
     #                     <code>Target.ResponseCodeMismatch</code> - The health checks did not return an
-    #             expected HTTP code. Applies only to Application Load Balancers and Gateway Load
-    #             Balancers.</p>
+    #             expected HTTP code.</p>
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Target.Timeout</code> - The health check requests timed out. Applies only to
-    #             Application Load Balancers and Gateway Load Balancers.</p>
+    #                     <code>Target.Timeout</code> - The health check requests timed out.</p>
     #               </li>
     #               <li>
     #                  <p>
@@ -4293,8 +4481,7 @@ module Aws::ElasticLoadBalancingV2
     #               </li>
     #               <li>
     #                  <p>
-    #                     <code>Elb.InternalError</code> - The health checks failed due to an internal error.
-    #             Applies only to Application Load Balancers.</p>
+    #                     <code>Elb.InternalError</code> - The health checks failed due to an internal error.</p>
     #               </li>
     #            </ul>
     #            <p>If the target state is <code>unused</code>, the reason code can be one of the following
@@ -4336,12 +4523,12 @@ module Aws::ElasticLoadBalancingV2
     #               <li>
     #                  <p>
     #                     <code>Target.HealthCheckDisabled</code> - Health checks are disabled for the target
-    #             group. Applies only to Application Load Balancers.</p>
+    #             group.</p>
     #               </li>
     #               <li>
     #                  <p>
     #                     <code>Elb.InternalError</code> - Target health is unavailable due to an internal
-    #             error. Applies only to Network Load Balancers.</p>
+    #             error.</p>
     #               </li>
     #            </ul>
     #   @return [String]
@@ -4640,6 +4827,18 @@ module Aws::ElasticLoadBalancingV2
     class UnsupportedProtocolException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Information about a URL rewrite transform. This transform matches a pattern in the request URL and replaces it with the specified string.</p>
+    # @!attribute rewrites
+    #   <p>The URL rewrite transform to apply to the request. The transform consists of a regular expression to match and a replacement string.</p>
+    #   @return [Array<Types::RewriteConfig>]
+    class UrlRewriteConfig < Struct.new(
+      nil,
+      :rewrites,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

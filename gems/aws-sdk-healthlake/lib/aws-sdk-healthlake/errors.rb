@@ -23,10 +23,17 @@ module Aws::HealthLake
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {AgentMessageOutOfContextException}
   # * {ConflictException}
+  # * {ConversationNotFoundException}
+  # * {FailedDependencyException}
   # * {InternalServerException}
+  # * {NotImplementedOperationException}
   # * {ResourceNotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
+  # * {UnauthorizedException}
+  # * {UnsupportedMIMETypeException}
   # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -47,8 +54,20 @@ module Aws::HealthLake
       end
     end
 
-    # <p>The data store is in a transition state and the user requested action cannot be
-    #          performed.</p>
+    # <p>The agent message does not fit within the current conversation context. Start a new conversation or provide a message that relates to the current profile customization session.</p>
+    class AgentMessageOutOfContextException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::HealthLake::Types::AgentMessageOutOfContextException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The data store is in a transition state and the user requested action cannot be performed.</p>
     class ConflictException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::ConflictException] data
@@ -61,10 +80,50 @@ module Aws::HealthLake
       end
     end
 
+    # <p>The specified conversation identifier does not exist. Verify the conversation ID or omit it to start a new conversation.</p>
+    class ConversationNotFoundException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::HealthLake::Types::ConversationNotFoundException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>A dependent service failed to fulfill the request.</p>
+    class FailedDependencyException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::HealthLake::Types::FailedDependencyException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # A message describing the error.
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>An unknown internal error occurred in the service.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::InternalServerException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The requested operation is not yet available. Check the service documentation for a list of supported operations.</p>
+    class NotImplementedOperationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::HealthLake::Types::NotImplementedOperationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -87,10 +146,50 @@ module Aws::HealthLake
       end
     end
 
+    # <p>The request exceeds the service quota.</p>
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::HealthLake::Types::ServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      # A message describing the error.
+      def message
+        @data[:message]
+      end
+    end
+
     # <p>The user has exceeded their maximum number of allowed calls to the given API. </p>
     class ThrottlingException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::HealthLake::Types::ThrottlingException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>You are not authorized to make this request. Verify that your Amazon Web Services credentials are valid and that you have the required permissions.</p>
+    class UnauthorizedException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::HealthLake::Types::UnauthorizedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The content type in your request is not supported. Use a supported content type for this operation.</p>
+    class UnsupportedMIMETypeException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::HealthLake::Types::UnsupportedMIMETypeException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

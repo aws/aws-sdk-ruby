@@ -20,22 +20,40 @@ module Aws::Kafka
       end
       if Smithy::Client::EndpointRules.set?(parameters.region)
         if (partition_result = Aws::Core::EndpointRules.partition(parameters.region))
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka-api.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka-api-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-cn") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka-api.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka-api.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka-api.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
+          end
+          if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-eusc") && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+            return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka-api.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
+          end
           if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS")) && Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS and DualStack are enabled, but this partition does not support one or both"
           end
-          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true)
+          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, true) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, false)
             if Smithy::Client::EndpointRules.boolean_equals?(Smithy::Client::EndpointRules.attr(partition_result, "supportsFIPS"), true)
-              if Smithy::Client::EndpointRules.string_equals?(Smithy::Client::EndpointRules.attr(partition_result, "name"), "aws-us-gov")
-                return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka.#{parameters.region}.amazonaws.com", headers: {}, properties: {})
-              end
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka-fips.#{parameters.region}.#{partition_result['dnsSuffix']}", headers: {}, properties: {})
             end
             raise ArgumentError, "FIPS is enabled but this partition does not support FIPS"
           end
-          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
+          if Smithy::Client::EndpointRules.boolean_equals?(parameters.use_fips, false) && Smithy::Client::EndpointRules.boolean_equals?(parameters.use_dual_stack, true)
             if Smithy::Client::EndpointRules.boolean_equals?(true, Smithy::Client::EndpointRules.attr(partition_result, "supportsDualStack"))
               return Smithy::Client::EndpointRules::Endpoint.new(url: "https://kafka.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}", headers: {}, properties: {})
             end

@@ -131,6 +131,7 @@ module Aws::Health
     end
     def describe_event_aggregates: (
       ?filter: {
+        actionabilities: Array[String],
         event_arns: Array[String],
         event_type_codes: Array[String],
         services: Array[String],
@@ -150,7 +151,8 @@ module Aws::Health
         tags: Array[
           Hash[String, String]
         ],
-        event_status_codes: Array[String]
+        event_status_codes: Array[String],
+        personas: Array[String]
       },
       ?aggregate_field: String,
       ?max_results: Integer,
@@ -191,7 +193,9 @@ module Aws::Health
       ?filter: {
         event_type_codes: Array[String],
         services: Array[String],
-        event_type_categories: Array[String]
+        event_type_categories: Array[String],
+        actionabilities: Array[String],
+        personas: Array[String]
       },
       ?locale: String,
       ?next_token: String,
@@ -205,6 +209,7 @@ module Aws::Health
     end
     def describe_events: (
       ?filter: {
+        actionabilities: Array[String],
         event_arns: Array[String],
         event_type_codes: Array[String],
         services: Array[String],
@@ -224,7 +229,8 @@ module Aws::Health
         tags: Array[
           Hash[String, String]
         ],
-        event_status_codes: Array[String]
+        event_status_codes: Array[String],
+        personas: Array[String]
       },
       ?next_token: String,
       ?max_results: Integer,
@@ -238,6 +244,7 @@ module Aws::Health
     end
     def describe_events_for_organization: (
       ?filter: {
+        actionabilities: Array[String],
         event_type_codes: Array[String],
         aws_account_ids: Array[String],
         services: Array[String],
@@ -251,7 +258,8 @@ module Aws::Health
         entity_arns: Array[String],
         entity_values: Array[String],
         event_type_categories: Array[String],
-        event_status_codes: Array[String]
+        event_status_codes: Array[String],
+        personas: Array[String]
       },
       ?next_token: String,
       ?max_results: Integer,
@@ -263,6 +271,19 @@ module Aws::Health
       def health_service_access_status_for_organization: () -> String?
     end
     def describe_health_service_status_for_organization: (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeHealthServiceStatusForOrganizationResponse
+
+    interface _DescribeServiceLifecycleResponse
+      include Smithy::Client::_Response[Types::DescribeServiceLifecycleResponse]
+      def service_lifecycles: () -> Array[Types::ServiceLifecycle]?
+      def next_token: () -> String?
+    end
+    def describe_service_lifecycle: (
+      ?filter: {
+        service: String
+      },
+      ?next_token: String,
+      ?max_results: Integer
+    ) -> _DescribeServiceLifecycleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DescribeServiceLifecycleResponse
 
     interface _DisableHealthServiceAccessForOrganizationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]

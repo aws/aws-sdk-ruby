@@ -144,18 +144,18 @@ module Aws::SSOAdmin
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -207,6 +207,30 @@ module Aws::SSOAdmin
     #  When `true`, request parameters are validated before sending the request.
     def initialize(*options)
       super
+    end
+
+    # <p>Adds a Region to an IAM Identity Center instance. This operation initiates an asynchronous workflow to replicate the IAM Identity Center instance to the target Region. The Region status is set to ADDING at first and changes to ACTIVE when the workflow completes.</p> <p>To use this operation, your IAM Identity Center instance and the target Region must meet the requirements described in the <a href="https://docs.aws.amazon.com/singlesignon/latest/userguide/multi-region-iam-identity-center.html#multi-region-prerequisites">IAM Identity Center User Guide</a>. </p> <p>The following actions are related to <code>AddRegion</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_RemoveRegion.html">RemoveRegion</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribeRegion.html">DescribeRegion</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListRegions.html">ListRegions</a> </p> </li> </ul>
+    # @param [Hash, Types::AddRegionRequest] params
+    # @option params [String] :instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance to replicate to the target Region.</p>
+    # @option params [String] :region_name
+    #   <p>The name of the Amazon Web Services Region to add to the IAM Identity Center instance. The Region name must be 1-32 characters long and follow the pattern of Amazon Web Services Region names (for example, us-east-1).</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instance_arn: "InstanceArn", # required
+    #     region_name: "RegionName", # required
+    #   }
+    #   options = {}
+    #   response = client.add_region(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ADDING", "REMOVING"]
+    #   }
+    # @return [Types::AddRegionResponse]
+    def add_region(params = {}, options = {})
+      request = build_request(:add_region, params)
+      request.send_request(options)
     end
 
     # <p>Attaches the specified customer managed policy to the specified <a>PermissionSet</a>.</p>
@@ -353,7 +377,9 @@ module Aws::SSOAdmin
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
-    #     application_arn: "ApplicationArn"
+    #     application_arn: "ApplicationArn",
+    #     instance_arn: "InstanceArn",
+    #     identity_store_arn: "IdentityStoreArn"
     #   }
     # @return [Types::CreateApplicationResponse]
     def create_application(params = {}, options = {})
@@ -911,6 +937,7 @@ module Aws::SSOAdmin
     #     name: "ApplicationNameType",
     #     application_account: "AccountId",
     #     instance_arn: "InstanceArn",
+    #     identity_store_arn: "IdentityStoreArn",
     #     status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #     portal_options: {
     #       sign_in_options: {
@@ -920,7 +947,8 @@ module Aws::SSOAdmin
     #       visibility: "ENABLED" # One of: ["ENABLED", "DISABLED"]
     #     },
     #     description: "Description",
-    #     created_date: Time.now
+    #     created_date: Time.now,
+    #     created_from: "RegionName"
     #   }
     # @return [Types::DescribeApplicationResponse]
     def describe_application(params = {}, options = {})
@@ -1007,17 +1035,28 @@ module Aws::SSOAdmin
     #   {
     #     instance_arn: "InstanceArn",
     #     identity_store_id: "Id",
+    #     identity_store_arn: "InstanceIdentityStoreArn",
     #     owner_account_id: "AccountId",
     #     name: "NameType",
     #     created_date: Time.now,
     #     status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_IN_PROGRESS", "ACTIVE"],
     #     status_reason: "Reason",
+    #     primary_region: "RegionName",
+    #     regions: [
+    #       {
+    #         region_name: "RegionName",
+    #         status: "ACTIVE" # One of: ["ACTIVE", "ADDING", "REMOVING"],
+    #         added_date: Time.now,
+    #         is_primary_region: false
+    #       }
+    #     ],
     #     encryption_configuration_details: {
     #       key_type: "AWS_OWNED_KMS_KEY" # One of: ["AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KEY"],
     #       kms_key_arn: "KmsKeyArn",
     #       encryption_status: "UPDATING" # One of: ["UPDATING", "ENABLED", "UPDATE_FAILED"],
     #       encryption_status_reason: "Reason"
-    #     }
+    #     },
+    #     permission_sets_enabled: false
     #   }
     # @return [Types::DescribeInstanceResponse]
     def describe_instance(params = {}, options = {})
@@ -1116,6 +1155,33 @@ module Aws::SSOAdmin
     # @return [Types::DescribePermissionSetProvisioningStatusResponse]
     def describe_permission_set_provisioning_status(params = {}, options = {})
       request = build_request(:describe_permission_set_provisioning_status, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves details about a specific Region enabled in an IAM Identity Center instance. Details include the Region name, current status (ACTIVE, ADDING, or REMOVING), the date when the Region was added, and whether it is the primary Region. The request must be made from one of the enabled Regions of the IAM Identity Center instance.</p> <p>The following actions are related to <code>DescribeRegion</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_AddRegion.html"> AddRegion</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_RemoveRegion.html">RemoveRegion</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListRegions.html">ListRegions</a> </p> </li> </ul>
+    # @param [Hash, Types::DescribeRegionRequest] params
+    # @option params [String] :instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>
+    # @option params [String] :region_name
+    #   <p>The name of the Amazon Web Services Region to retrieve information about. The Region name must be 1-32 characters long and follow the pattern of Amazon Web Services Region names (for example, us-east-1).</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instance_arn: "InstanceArn", # required
+    #     region_name: "RegionName", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_region(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     region_name: "RegionName",
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ADDING", "REMOVING"],
+    #     added_date: Time.now,
+    #     is_primary_region: false
+    #   }
+    # @return [Types::DescribeRegionResponse]
+    def describe_region(params = {}, options = {})
+      request = build_request(:describe_region, params)
       request.send_request(options)
     end
 
@@ -1863,6 +1929,7 @@ module Aws::SSOAdmin
     #         name: "ApplicationNameType",
     #         application_account: "AccountId",
     #         instance_arn: "InstanceArn",
+    #         identity_store_arn: "IdentityStoreArn",
     #         status: "ENABLED" # One of: ["ENABLED", "DISABLED"],
     #         portal_options: {
     #           sign_in_options: {
@@ -1872,7 +1939,8 @@ module Aws::SSOAdmin
     #           visibility: "ENABLED" # One of: ["ENABLED", "DISABLED"]
     #         },
     #         description: "Description",
-    #         created_date: Time.now
+    #         created_date: Time.now,
+    #         created_from: "RegionName"
     #       }
     #     ],
     #     next_token: "Token"
@@ -1939,11 +2007,21 @@ module Aws::SSOAdmin
     #       {
     #         instance_arn: "InstanceArn",
     #         identity_store_id: "Id",
+    #         identity_store_arn: "InstanceIdentityStoreArn",
     #         owner_account_id: "AccountId",
     #         name: "NameType",
     #         created_date: Time.now,
     #         status: "CREATE_IN_PROGRESS" # One of: ["CREATE_IN_PROGRESS", "CREATE_FAILED", "DELETE_IN_PROGRESS", "ACTIVE"],
-    #         status_reason: "Reason"
+    #         status_reason: "Reason",
+    #         primary_region: "RegionName",
+    #         regions: [
+    #           {
+    #             region_name: "RegionName",
+    #             status: "ACTIVE" # One of: ["ACTIVE", "ADDING", "REMOVING"],
+    #             added_date: Time.now,
+    #             is_primary_region: false
+    #           }
+    #         ]
     #       }
     #     ],
     #     next_token: "Token"
@@ -2088,6 +2166,41 @@ module Aws::SSOAdmin
     # @return [Types::ListPermissionSetsProvisionedToAccountResponse]
     def list_permission_sets_provisioned_to_account(params = {}, options = {})
       request = build_request(:list_permission_sets_provisioned_to_account, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists all enabled Regions of an IAM Identity Center instance, including those that are being added or removed. This operation returns Regions with ACTIVE, ADDING, or REMOVING status.</p> <p>The following actions are related to <code>ListRegions</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_AddRegion.html"> AddRegion</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_RemoveRegion.html">RemoveRegion</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribeRegion.html">DescribeRegion</a> </p> </li> </ul>
+    # @param [Hash, Types::ListRegionsRequest] params
+    # @option params [String] :instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single call. Default is 100.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token for the list API. Initially the value is null. Use the output of previous API calls to make subsequent calls.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instance_arn: "InstanceArn", # required
+    #     max_results: 1,
+    #     next_token: "Token"
+    #   }
+    #   options = {}
+    #   response = client.list_regions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     regions: [
+    #       {
+    #         region_name: "RegionName",
+    #         status: "ACTIVE" # One of: ["ACTIVE", "ADDING", "REMOVING"],
+    #         added_date: Time.now,
+    #         is_primary_region: false
+    #       }
+    #     ],
+    #     next_token: "Token"
+    #   }
+    # @return [Types::ListRegionsResponse]
+    def list_regions(params = {}, options = {})
+      request = build_request(:list_regions, params)
       request.send_request(options)
     end
 
@@ -2392,6 +2505,30 @@ module Aws::SSOAdmin
       request.send_request(options)
     end
 
+    # <p>Removes an additional Region from an IAM Identity Center instance. This operation initiates an asynchronous workflow to clean up IAM Identity Center resources in the specified additional Region. The Region status is set to REMOVING and the Region record is deleted when the workflow completes. The request must be made from the primary Region. The target Region cannot be the primary Region, and no other add or remove Region workflows can be in progress.</p> <p>The following actions are related to <code>RemoveRegion</code>:</p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_AddRegion.html"> AddRegion</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DescribeRegion.html">DescribeRegion</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListRegions.html">ListRegions</a> </p> </li> </ul>
+    # @param [Hash, Types::RemoveRegionRequest] params
+    # @option params [String] :instance_arn
+    #   <p>The Amazon Resource Name (ARN) of the IAM Identity Center instance.</p>
+    # @option params [String] :region_name
+    #   <p>The name of the Amazon Web Services Region to remove from the IAM Identity Center instance. The Region name must be 1-32 characters long and follow the pattern of Amazon Web Services Region names (for example, us-east-1). The primary Region cannot be removed.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     instance_arn: "InstanceArn", # required
+    #     region_name: "RegionName", # required
+    #   }
+    #   options = {}
+    #   response = client.remove_region(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: "ACTIVE" # One of: ["ACTIVE", "ADDING", "REMOVING"]
+    #   }
+    # @return [Types::RemoveRegionResponse]
+    def remove_region(params = {}, options = {})
+      request = build_request(:remove_region, params)
+      request.send_request(options)
+    end
+
     # <p>Associates a set of tags with a specified resource.</p>
     # @param [Hash, Types::TagResourceRequest] params
     # @option params [String] :instance_arn
@@ -2483,14 +2620,16 @@ module Aws::SSOAdmin
       request.send_request(options)
     end
 
-    # <p>Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.</p>
+    # <p>Update the details for the instance of IAM Identity Center that is owned by the Amazon Web Services account.</p> <p>In a single <code>UpdateInstance</code> request, you can perform only one of the following operations:</p> <ul> <li> <p>Update the encryption configuration of the instance by specifying <code>EncryptionConfiguration</code>.</p> </li> <li> <p>Enable permission sets for the instance by specifying <code>PermissionSetsEnabled</code>.</p> </li> </ul> <p>A request that specifies both <code>EncryptionConfiguration</code> and <code>PermissionSetsEnabled</code> returns a <code>ValidationException</code>. To perform both operations, call <code>UpdateInstance</code> separately for each. The two calls can be made in parallel.</p>
     # @param [Hash, Types::UpdateInstanceRequest] params
     # @option params [String] :name
     #   <p>Updates the instance name.</p>
     # @option params [String] :instance_arn
     #   <p>The ARN of the instance of IAM Identity Center under which the operation will run. For more information about ARNs, see <a href="/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a> in the <i>Amazon Web Services General Reference</i>.</p>
     # @option params [Types::EncryptionConfiguration] :encryption_configuration
-    #   <p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys (CMK) or Amazon Web Services owned KMS keys for encrypting your instance data.</p>
+    #   <p>Specifies the encryption configuration for your IAM Identity Center instance. You can use this to configure customer managed KMS keys or Amazon Web Services owned KMS keys for encrypting your instance data.</p>
+    # @option params [Boolean] :permission_sets_enabled
+    #   <p>Enables permission sets for this Identity Center instance. The only accepted value is <code>true </code>. After permission sets are enabled, they cannot be disabled.</p> <note> <p>You can't set <code>EncryptionConfiguration</code> and <code>PermissionSetsEnabled</code> in the same request. To configure both, make two separate <code>UpdateInstance</code> calls. These calls can be made in parallel.</p> </note>
     # @example Request syntax with placeholder values
     #   params = {
     #     name: "NameType",
@@ -2498,7 +2637,8 @@ module Aws::SSOAdmin
     #     encryption_configuration: {
     #       key_type: "AWS_OWNED_KMS_KEY" # One of: ["AWS_OWNED_KMS_KEY", "CUSTOMER_MANAGED_KEY"], # required
     #       kms_key_arn: "KmsKeyArn"
-    #     }
+    #     },
+    #     permission_sets_enabled: false
     #   }
     #   options = {}
     #   response = client.update_instance(params, options)

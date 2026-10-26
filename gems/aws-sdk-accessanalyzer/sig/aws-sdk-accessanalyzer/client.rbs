@@ -279,6 +279,54 @@ module Aws::AccessAnalyzer
       ?client_token: String
     ) -> _CreateArchiveRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateArchiveRuleResponse
 
+    interface _CreateServiceLinkedAnalyzerResponse
+      include Smithy::Client::_Response[Types::CreateServiceLinkedAnalyzerResponse]
+      def arn: () -> String?
+    end
+    def create_service_linked_analyzer: (
+      ?type: String,
+      ?archive_rules: Array[
+        {
+          rule_name: String,
+          filter: Hash[String,
+            {
+              eq: Array[String],
+              neq: untyped,
+              contains: untyped,
+              exists: bool
+            }
+          ]
+        }
+      ],
+      ?client_token: String,
+      ?configuration: {
+        unused_access: {
+          unused_access_age: Integer,
+          analysis_rule: {
+            exclusions: Array[
+              {
+                account_ids: Array[String],
+                resource_tags: Array[
+                  Hash[String, String]
+                ]
+              }
+            ]
+          }
+        },
+        internal_access: {
+          analysis_rule: {
+            inclusions: Array[
+              {
+                account_ids: untyped,
+                resource_types: Array[String],
+                resource_arns: Array[String]
+              }
+            ]
+          }
+        }
+      }
+    ) -> _CreateServiceLinkedAnalyzerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateServiceLinkedAnalyzerResponse
+
     interface _DeleteAnalyzerResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
     end
@@ -295,6 +343,14 @@ module Aws::AccessAnalyzer
       ?rule_name: String,
       ?client_token: String
     ) -> _DeleteArchiveRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteArchiveRuleResponse
+
+    interface _DeleteServiceLinkedAnalyzerResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_service_linked_analyzer: (
+      ?analyzer_name: String,
+      ?client_token: String
+    ) -> _DeleteServiceLinkedAnalyzerResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteServiceLinkedAnalyzerResponse
 
     interface _GenerateFindingRecommendationResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]

@@ -144,18 +144,18 @@ module Aws::ConnectContactLens
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -209,7 +209,12 @@ module Aws::ConnectContactLens
       super
     end
 
-    # <p>Provides a list of analysis segments for a real-time analysis session.</p>
+    # <p>Provides a list of analysis segments for a real-time analysis session for
+    #             voice.</p>
+    #          <note>
+    #             <p>Voice data is retained for 24 hours. You must invoke this API during that
+    #                 time.</p>
+    #          </note>
     # @param [Hash, Types::ListRealtimeContactAnalysisSegmentsRequest] params
     # @option params [String] :instance_id
     #   <p>The identifier of the Amazon Connect instance.</p>
@@ -218,7 +223,7 @@ module Aws::ConnectContactLens
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return per page.</p>
     # @option params [String] :next_token
-    #   <p>The token for the next set of results. Use the value returned in the previous 
+    #   <p>The token for the next set of results. Use the value returned in the previous
     #   response in the next request to retrieve the next set of results.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -268,6 +273,23 @@ module Aws::ConnectContactLens
     #           content: "PostContactSummaryContent",
     #           status: "FAILED" # One of: ["FAILED", "COMPLETED"], # required
     #           failure_code: "QUOTA_EXCEEDED" # One of: ["QUOTA_EXCEEDED", "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES", "INVALID_ANALYSIS_CONFIGURATION", "INTERNAL_ERROR"]
+    #         },
+    #         extracted_information: {
+    #           extraction_definition_id: "ExtractionDefinitionId", # required
+    #           extraction_definition_name: "ExtractionDefinitionName", # required
+    #           extraction_definition_display_label: "ExtractionDefinitionDisplayLabel",
+    #           extracted_values: [
+    #             {
+    #               content: "ExtractedInformationContent", # required
+    #               points_of_interest: [ # required
+    #                 {
+    #                   begin_offset_millis: 1, # required
+    #                   end_offset_millis: 1, # required
+    #                 }
+    #               ]
+    #             }
+    #           ],
+    #           failure_code: "QUOTA_EXCEEDED" # One of: ["QUOTA_EXCEEDED", "INSUFFICIENT_CONVERSATION_CONTENT", "FAILED_SAFETY_GUIDELINES", "INTERNAL_ERROR", "MAX_PACKAGE_FEATURE_ONLY"]
     #         }
     #       }
     #     ],

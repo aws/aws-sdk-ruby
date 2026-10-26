@@ -67,7 +67,8 @@ module Aws::Personalize
       },
       ?role_arn: String,
       ?batch_inference_job_config: {
-        item_exploration_config: Hash[String, String]
+        item_exploration_config: Hash[String, String],
+        ranking_influence: Hash[String, Float]
       },
       ?tags: Array[
         {
@@ -124,7 +125,8 @@ module Aws::Personalize
       ?campaign_config: {
         item_exploration_config: Hash[String, String],
         enable_metadata_with_recommendations: bool,
-        sync_with_latest_solution_version: untyped
+        sync_with_latest_solution_version: untyped,
+        ranking_influence: Hash[String, Float]
       },
       ?tags: Array[
         {
@@ -301,6 +303,9 @@ module Aws::Personalize
         training_data_config: {
           excluded_dataset_columns: Hash[String,
             Array[String]
+          ],
+          included_dataset_columns: Hash[String,
+            Array[String]
           ]
         },
         enable_metadata_with_recommendations: bool
@@ -332,6 +337,7 @@ module Aws::Personalize
       ?perform_hpo: bool,
       ?perform_auto_ml: bool,
       ?perform_auto_training: bool,
+      ?perform_incremental_update: bool,
       ?recipe_arn: String,
       ?dataset_group_arn: String,
       ?event_type: String,
@@ -391,6 +397,9 @@ module Aws::Personalize
         },
         training_data_config: {
           excluded_dataset_columns: Hash[String,
+            Array[String]
+          ],
+          included_dataset_columns: Hash[String,
             Array[String]
           ]
         },
@@ -887,7 +896,8 @@ module Aws::Personalize
       ?campaign_config: {
         item_exploration_config: Hash[String, String],
         enable_metadata_with_recommendations: bool,
-        sync_with_latest_solution_version: untyped
+        sync_with_latest_solution_version: untyped,
+        ranking_influence: Hash[String, Float]
       }
     ) -> _UpdateCampaignResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCampaignResponse
 
@@ -935,6 +945,9 @@ module Aws::Personalize
         training_data_config: {
           excluded_dataset_columns: Hash[String,
             Array[String]
+          ],
+          included_dataset_columns: Hash[String,
+            Array[String]
           ]
         },
         enable_metadata_with_recommendations: bool
@@ -948,6 +961,7 @@ module Aws::Personalize
     def update_solution: (
       ?solution_arn: String,
       ?perform_auto_training: bool,
+      ?perform_incremental_update: bool,
       ?solution_update_config: {
         auto_training_config: {
           scheduling_expression: String

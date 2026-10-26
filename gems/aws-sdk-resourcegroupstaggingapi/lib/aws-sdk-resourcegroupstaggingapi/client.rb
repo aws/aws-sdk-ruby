@@ -144,18 +144,18 @@ module Aws::ResourceGroupsTaggingAPI
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -210,7 +210,7 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # <p>Describes the status of the <code>StartReportCreation</code> operation. </p>
-    #          <p>You can call this operation only from the organization's 
+    #          <p>You can call this operation only from the organization's
     #     management account and from the us-east-1 Region.</p>
     # @param [Hash, Types::DescribeReportCreationInput] params
     # @example Request syntax with placeholder values
@@ -236,9 +236,9 @@ module Aws::ResourceGroupsTaggingAPI
     #          <p>For more information on tag policies, see <a href="https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html">Tag Policies</a> in
     #             the <i>Organizations User Guide.</i>
     #          </p>
-    #          <p>You can call this operation only from the organization's 
+    #          <p>You can call this operation only from the organization's
     #     management account and from the us-east-1 Region.</p>
-    #          <p>This operation supports pagination, where the response can be sent in 
+    #          <p>This operation supports pagination, where the response can be sent in
     #     multiple pages. You should check the <code>PaginationToken</code> response parameter to determine
     #     if there are additional results available to return. Repeat the query, passing the
     #     <code>PaginationToken</code> response parameter value as an input to the next request until you
@@ -278,6 +278,14 @@ module Aws::ResourceGroupsTaggingAPI
     #                           (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
     #               </li>
     #            </ul>
+    #            <note>
+    #               <p>For the list of services whose resources you can tag using the Resource Groups Tagging API, see
+    #                       <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html">Services that support the Resource Groups Tagging API</a>. If an Amazon Web Services
+    #                   service isn't listed on that page, you might still be able to tag that service's
+    #                   resources by using that service's native tagging operations instead of using
+    #                   Resource Groups Tagging API operations. All tagged resources, whether the tagging used the Resource Groups Tagging API
+    #                   or not, are returned by the <code>Get*</code> operation.</p>
+    #            </note>
     #            <p>You can specify multiple resource types by using a comma separated array. The array
     #               can include up to 100 items. Note that the length constraint requirement applies to each
     #               resource type filter. </p>
@@ -289,13 +297,13 @@ module Aws::ResourceGroupsTaggingAPI
     #   <p>Specifies a list of attributes to group the counts of noncompliant resources by. If
     #               supplied, the counts are sorted by those attributes.</p>
     # @option params [Integer] :max_results
-    #   <p>Specifies the maximum number of results to be returned in each page. A 
+    #   <p>Specifies the maximum number of results to be returned in each page. A
     #       query can return fewer than this maximum, even if there are more results still to return. You
     #       should always check the <code>PaginationToken</code> response value to see if there are more
     #       results. You can specify a minimum of 1 and a maximum value of 100.</p>
     # @option params [String] :pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a 
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
+    #   <p>Specifies a <code>PaginationToken</code> response value from a
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty
     #       in your initial request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -331,7 +339,7 @@ module Aws::ResourceGroupsTaggingAPI
     end
 
     # <p>Returns all the tagged or previously tagged resources that are located in the
-    #             specified Amazon Web Services Region for the account.</p>
+    #             specified Amazon Web Services Region for the account. </p>
     #          <p>Depending on what information you want returned, you can also specify the
     #             following:</p>
     #          <ul>
@@ -348,29 +356,39 @@ module Aws::ResourceGroupsTaggingAPI
     #                </p>
     #             </li>
     #          </ul>
-    #          <p>This operation supports pagination, where the response can be sent in 
+    #          <p>This operation supports pagination, where the response can be sent in
     #     multiple pages. You should check the <code>PaginationToken</code> response parameter to determine
     #     if there are additional results available to return. Repeat the query, passing the
     #     <code>PaginationToken</code> response parameter value as an input to the next request until you
     #     recieve a <code>null</code> value. A null value for <code>PaginationToken</code> indicates that
     #     there are no more results waiting to be returned.</p>
+    #          <note>
+    #             <p>
+    #                <code>GetResources</code> does not return untagged resources. </p>
+    #             <p>To find untagged resources in your account, use Amazon Web Services Resource Explorer with a
+    #                 query that uses <code>tag:none</code>. For more information, see <a href="https://docs.aws.amazon.com/resource-explorer/latest/userguide/using-search-query-syntax.html"> Search query syntax reference for Resource Explorer</a>. </p>
+    #          </note>
     # @param [Hash, Types::GetResourcesInput] params
     # @option params [String] :pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a 
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
+    #   <p>Specifies a <code>PaginationToken</code> response value from a
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty
     #       in your initial request.</p>
     # @option params [Array<Types::TagFilter>] :tag_filters
     #   <p>Specifies a list of TagFilters (keys and values) to restrict the output to only those
     #               resources that have tags with the specified keys and, if included, the specified values.
     #               Each <code>TagFilter</code> must contain a key with values optional. A request can
     #               include up to 50 keys, and each key can include up to 20 values. </p>
+    #            <p>You can't specify both this parameter and the <code>ResourceArnList</code> parameter
+    #               in the same request. If you do, you get an <code>Invalid Parameter</code>
+    #               exception.</p>
     #            <p>Note the following when deciding how to use TagFilters:</p>
     #            <ul>
     #               <li>
     #                  <p>If you <i>don't</i> specify a <code>TagFilter</code>, the
     #                       response includes all resources that are currently tagged or ever had a tag.
-    #                       Resources that currently don't have tags are shown with an empty tag set, like
-    #                       this: <code>"Tags": []</code>.</p>
+    #                       Resources that were previously tagged, <i>but do not currently</i>
+    #                       have tags, are shown with an empty tag set, like this: <code>"Tags":
+    #                       []</code>.</p>
     #               </li>
     #               <li>
     #                  <p>If you specify more than one filter in a single request, the response returns
@@ -384,9 +402,9 @@ module Aws::ResourceGroupsTaggingAPI
     #               <li>
     #                  <p>If you don't specify a value for a key, the response returns all resources
     #                       that are tagged with that key, with any or no value.</p>
-    #                  <p>For example, for the following filters: <code>filter1= {keyA,{value1}}</code>,
-    #                           <code>filter2={keyB,{value2,value3,value4}}</code>, <code>filter3=
-    #                           {keyC}</code>:</p>
+    #                  <p>For example, for the following filters: <code>filter1= {key1,{value1}}</code>,
+    #                           <code>filter2={key2,{value2,value3,value4}}</code>, <code>filter3=
+    #                           {key3}</code>:</p>
     #                  <ul>
     #                     <li>
     #                        <p>
@@ -417,7 +435,7 @@ module Aws::ResourceGroupsTaggingAPI
     #               </li>
     #            </ul>
     # @option params [Integer] :resources_per_page
-    #   <p>Specifies the maximum number of results to be returned in each page. A 
+    #   <p>Specifies the maximum number of results to be returned in each page. A
     #       query can return fewer than this maximum, even if there are more results still to return. You
     #       should always check the <code>PaginationToken</code> response value to see if there are more
     #       results. You can specify a minimum of 1 and a maximum value of 100.</p>
@@ -441,12 +459,21 @@ module Aws::ResourceGroupsTaggingAPI
     # @option params [Array<String>] :resource_type_filters
     #   <p>Specifies the resource types that you want included in the response. The format of
     #               each resource type is <code>service[:resourceType]</code>. For example, specifying a
-    #               resource type of <code>ec2</code> returns all Amazon EC2 resources (which includes EC2
-    #               instances). Specifying a resource type of <code>ec2:instance</code> returns only EC2
-    #               instances. </p>
+    #               service of <code>ec2</code> returns all Amazon EC2 resources (which includes EC2 instances).
+    #               Specifying a resource type of <code>ec2:instance</code> returns only EC2 instances. </p>
+    #            <p>You can't specify both this parameter and the <code>ResourceArnList</code> parameter
+    #               in the same request. If you do, you get an <code>Invalid Parameter</code>
+    #               exception.</p>
     #            <p>The string for each service name and resource type is the same as that embedded in a
-    #               resource's Amazon Resource Name (ARN). For the list of services whose resources you can
-    #               use in this parameter, see <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html">Services that support the Resource Groups Tagging API</a>.</p>
+    #               resource's Amazon Resource Name (ARN).</p>
+    #            <note>
+    #               <p>For the list of services whose resources you can tag using the Resource Groups Tagging API, see
+    #                       <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html">Services that support the Resource Groups Tagging API</a>. If an Amazon Web Services
+    #                   service isn't listed on that page, you might still be able to tag that service's
+    #                   resources by using that service's native tagging operations instead of using
+    #                   Resource Groups Tagging API operations. All tagged resources, whether the tagging used the Resource Groups Tagging API
+    #                   or not, are returned by the <code>Get*</code> operation.</p>
+    #            </note>
     #            <p>You can specify multiple resource types by using an array. The array can include up to
     #               100 items. Note that the length constraint requirement applies to each resource type
     #               filter. For example, the following string would limit the response to only Amazon EC2
@@ -465,10 +492,15 @@ module Aws::ResourceGroupsTaggingAPI
     #            <p>You can use this parameter only if the <code>IncludeComplianceDetails</code> parameter
     #               is also set to <code>true</code>.</p>
     # @option params [Array<String>] :resource_arn_list
-    #   <p>Specifies a list of ARNs of resources for which you want to retrieve tag data. You
-    #               can't specify both this parameter and any of the pagination parameters
+    #   <p>Specifies a list of ARNs of resources for which you want to retrieve tag data.</p>
+    #            <p>You can't specify both this parameter and the <code>ResourceTypeFilters</code>
+    #               parameter in the same request. If you do, you get an <code>Invalid Parameter</code>
+    #               exception.</p>
+    #            <p>You can't specify both this parameter and the <code>TagFilters</code> parameter in the
+    #               same request. If you do, you get an <code>Invalid Parameter</code> exception.</p>
+    #            <p>You can't specify both this parameter and any of the pagination parameters
     #                   (<code>ResourcesPerPage</code>, <code>TagsPerPage</code>,
-    #                   <code>PaginationToken</code>) in the same request. If you specify both, you get an
+    #                   <code>PaginationToken</code>) in the same request. If you do, you get an
     #                   <code>Invalid Parameter</code> exception.</p>
     #            <p>If a resource specified by this parameter doesn't exist, it doesn't generate an error;
     #               it simply isn't included in the response.</p>
@@ -510,6 +542,7 @@ module Aws::ResourceGroupsTaggingAPI
     #         compliance_details: {
     #           noncompliant_keys: ["TagKey"],
     #           keys_with_noncompliant_values: ["TagKey"],
+    #           missing_tag_keys: ["TagKey"],
     #           compliance_status: false
     #         }
     #       }
@@ -523,7 +556,7 @@ module Aws::ResourceGroupsTaggingAPI
 
     # <p>Returns all tag keys currently in use in the specified Amazon Web Services Region for the calling
     #             account.</p>
-    #          <p>This operation supports pagination, where the response can be sent in 
+    #          <p>This operation supports pagination, where the response can be sent in
     #     multiple pages. You should check the <code>PaginationToken</code> response parameter to determine
     #     if there are additional results available to return. Repeat the query, passing the
     #     <code>PaginationToken</code> response parameter value as an input to the next request until you
@@ -531,8 +564,8 @@ module Aws::ResourceGroupsTaggingAPI
     #     there are no more results waiting to be returned.</p>
     # @param [Hash, Types::GetTagKeysInput] params
     # @option params [String] :pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a 
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
+    #   <p>Specifies a <code>PaginationToken</code> response value from a
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty
     #       in your initial request.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -554,7 +587,7 @@ module Aws::ResourceGroupsTaggingAPI
 
     # <p>Returns all tag values for the specified key that are used in the specified Amazon Web Services
     #             Region for the calling account.</p>
-    #          <p>This operation supports pagination, where the response can be sent in 
+    #          <p>This operation supports pagination, where the response can be sent in
     #     multiple pages. You should check the <code>PaginationToken</code> response parameter to determine
     #     if there are additional results available to return. Repeat the query, passing the
     #     <code>PaginationToken</code> response parameter value as an input to the next request until you
@@ -562,8 +595,8 @@ module Aws::ResourceGroupsTaggingAPI
     #     there are no more results waiting to be returned.</p>
     # @param [Hash, Types::GetTagValuesInput] params
     # @option params [String] :pagination_token
-    #   <p>Specifies a <code>PaginationToken</code> response value from a 
-    #       previous request to indicate that you want the next page of results. Leave this parameter empty 
+    #   <p>Specifies a <code>PaginationToken</code> response value from a
+    #       previous request to indicate that you want the next page of results. Leave this parameter empty
     #       in your initial request.</p>
     # @option params [String] :key
     #   <p>Specifies the tag key for which you want to list all existing values that are
@@ -587,23 +620,66 @@ module Aws::ResourceGroupsTaggingAPI
       request.send_request(options)
     end
 
+    # <p>Lists the required tags for supported resource types in an Amazon Web Services account.</p>
+    # @param [Hash, Types::ListRequiredTagsInput] params
+    # @option params [String] :next_token
+    #   <p>A token for requesting another page of required tags if the <code>NextToken</code> response element
+    #               indicates that more required tags are available. Use the value of the returned <code>NextToken</code>
+    #               element in your request until the token comes back as null. Pass null if this is the
+    #               first call.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of required tags.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_required_tags(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     required_tags: [
+    #       {
+    #         resource_type: "ResourceType",
+    #         cloud_formation_resource_types: ["CloudFormationResourceType"],
+    #         reporting_tag_keys: ["TagKey"]
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListRequiredTagsOutput]
+    def list_required_tags(params = {}, options = {})
+      request = build_request(:list_required_tags, params)
+      request.send_request(options)
+    end
+
     # <p>Generates a report that lists all tagged resources in the accounts across your
     #             organization and tells whether each resource is compliant with the effective tag policy.
     #             Compliance data is refreshed daily. The report is generated asynchronously.</p>
     #          <p>The generated report is saved to the following location:</p>
     #          <p>
-    #             <code>s3://example-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv</code>
+    #             <code>s3://amzn-s3-demo-bucket/AwsTagPolicies/o-exampleorgid/YYYY-MM-ddTHH:mm:ssZ/report.csv</code>
     #          </p>
-    #          <p>You can call this operation only from the organization's 
+    #          <p>For more information about evaluating resource compliance with tag policies, including
+    #             the required permissions, review <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#tag-policies-permissions-org">Permissions for evaluating organization-wide compliance</a> in the
+    #                 <i>Tagging Amazon Web Services Resources and Tag Editor</i> user guide. </p>
+    #          <p>You can call this operation only from the organization's
     #     management account and from the us-east-1 Region.</p>
+    #          <p>If the account associated with the identity used to call
+    #                 <code>StartReportCreation</code> is different from the account that owns the Amazon S3
+    #             bucket, there must be a bucket policy attached to the bucket to provide access. For more
+    #             information, review <a href="https://docs.aws.amazon.com/tag-editor/latest/userguide/tag-policies-orgs.html#bucket-policy">Amazon S3 bucket
+    #                 policy for report storage</a> in the <i>Tagging Amazon Web Services Resources and Tag
+    #                 Editor</i> user guide.</p>
     # @param [Hash, Types::StartReportCreationInput] params
     # @option params [String] :s3_bucket
     #   <p>The name of the Amazon S3 bucket where the report will be stored; for example:</p>
     #            <p>
-    #               <code>awsexamplebucket</code>
+    #               <code>amzn-s3-demo-bucket</code>
     #            </p>
     #            <p>For more information on S3 bucket requirements, including an example bucket policy,
-    #               see the example S3 bucket policy on this page.</p>
+    #               see the example Amazon S3 bucket policy on this page.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     s3_bucket: "S3Bucket", # required
@@ -643,6 +719,17 @@ module Aws::ResourceGroupsTaggingAPI
     #                     that the resource belongs to as well as permissions for adding tags. For more
     #                     information, see the documentation for each service.</p>
     #             </li>
+    #             <li>
+    #                <p>When you use the <a href="https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/overview.html">Amazon Web Services Resource
+    #                         Groups Tagging API</a> to update tags for Amazon Web Services CloudFormation stack
+    #                     sets, Amazon Web Services calls the <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStack.html">Amazon Web Services
+    #                         CloudFormation <code>UpdateStack</code>
+    #                   </a> operation. This operation
+    #                     may initiate additional resource property updates in addition to the desired tag
+    #                     updates. To avoid unexpected resource updates, Amazon Web Services recommends that you only
+    #                     apply or update tags to your CloudFormation stack sets using Amazon Web Services
+    #                     CloudFormation. </p>
+    #             </li>
     #          </ul>
     #          <important>
     #             <p>Do not store personally identifiable information (PII) or other confidential or
@@ -660,7 +747,7 @@ module Aws::ResourceGroupsTaggingAPI
     #          <ul>
     #             <li>
     #                <p>
-    #                   <code>tag:TagResource</code>
+    #                   <code>tag:TagResources</code>
     #                </p>
     #             </li>
     #             <li>
@@ -669,6 +756,13 @@ module Aws::ResourceGroupsTaggingAPI
     #                </p>
     #             </li>
     #          </ul>
+    #          <note>
+    #             <p>In addition, some services might have specific requirements for tagging some types
+    #                 of resources. For example, to tag an Amazon S3 bucket, you must also have the
+    #                     <code>s3:GetBucketTagging</code> permission. If the expected minimum permissions
+    #                 don't work, check the documentation for that service's tagging APIs for more
+    #                 information.</p>
+    #          </note>
     # @param [Hash, Types::TagResourcesInput] params
     # @option params [Array<String>] :resource_arn_list
     #   <p>Specifies the list of ARNs of the resources that you want to apply tags to.</p>
@@ -732,7 +826,7 @@ module Aws::ResourceGroupsTaggingAPI
     #          <ul>
     #             <li>
     #                <p>
-    #                   <code>tag:UntagResource</code>
+    #                   <code>tag:UntagResources</code>
     #                </p>
     #             </li>
     #             <li>
@@ -741,6 +835,13 @@ module Aws::ResourceGroupsTaggingAPI
     #                </p>
     #             </li>
     #          </ul>
+    #          <note>
+    #             <p>In addition, some services might have specific requirements for untagging some
+    #                 types of resources. For example, to untag Amazon Web Services Glue Connection, you must also have the
+    #                     <code>glue:GetConnection</code> permission. If the expected minimum permissions
+    #                 don't work, check the documentation for that service's tagging APIs for more
+    #                 information.</p>
+    #          </note>
     # @param [Hash, Types::UntagResourcesInput] params
     # @option params [Array<String>] :resource_arn_list
     #   <p>Specifies a list of ARNs of the resources that you want to remove tags from.</p>

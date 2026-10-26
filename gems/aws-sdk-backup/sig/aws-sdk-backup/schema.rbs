@@ -3,12 +3,21 @@ module Aws::Backup
     include Smithy::Schema::Shapes
 
     ARN: StringShape
+    AccessPointArn: StringShape
+    AccessPointMetadataMap: MapShape
+    AccessPointMetadataMapKeyString: StringShape
+    AccessPointMetadataMapValueString: StringShape
+    AccessPointName: StringShape
+    AccessPointPolicy: StringShape
+    AccessPointStatus: EnumShape
     AccountId: StringShape
     AdvancedBackupSetting: StructureShape
     AdvancedBackupSettings: ListShape
+    AggregatedScanResult: StructureShape
     AggregationPeriod: EnumShape
     AlreadyExistsException: StructureShape
     AssociateBackupVaultMpaApprovalTeamInput: StructureShape
+    BackupAccessPoints: ListShape
     BackupJob: StructureShape
     BackupJobChildJobsInState: MapShape
     BackupJobState: EnumShape
@@ -36,11 +45,13 @@ module Aws::Backup
     BackupSelectionName: StringShape
     BackupSelectionsList: ListShape
     BackupSelectionsListMember: StructureShape
+    BackupVaultArn: StringShape
     BackupVaultEvent: EnumShape
     BackupVaultEvents: ListShape
     BackupVaultList: ListShape
     BackupVaultListMember: StructureShape
     BackupVaultName: StringShape
+    BackupVaultNameOrWildcard: StringShape
     Boolean: BooleanShape
     Boolean2: BooleanShape
     CalculatedLifecycle: StructureShape
@@ -68,6 +79,8 @@ module Aws::Backup
     CopyJobSummary: StructureShape
     CopyJobSummaryList: ListShape
     CopyJobsList: ListShape
+    CreateBackupAccessPointRequest: StructureShape
+    CreateBackupAccessPointResponse: StructureShape
     CreateBackupPlanInput: StructureShape
     CreateBackupPlanOutput: StructureShape
     CreateBackupSelectionInput: StructureShape
@@ -88,8 +101,12 @@ module Aws::Backup
     CreateRestoreTestingPlanOutput: StructureShape
     CreateRestoreTestingSelectionInput: StructureShape
     CreateRestoreTestingSelectionOutput: StructureShape
+    CreateTieringConfigurationInput: StructureShape
+    CreateTieringConfigurationOutput: StructureShape
+    CreatorRequestId: StringShape
     CronExpression: StringShape
     DateRange: StructureShape
+    DeleteBackupAccessPointInput: StructureShape
     DeleteBackupPlanInput: StructureShape
     DeleteBackupPlanOutput: StructureShape
     DeleteBackupSelectionInput: StructureShape
@@ -102,7 +119,11 @@ module Aws::Backup
     DeleteReportPlanInput: StructureShape
     DeleteRestoreTestingPlanInput: StructureShape
     DeleteRestoreTestingSelectionInput: StructureShape
+    DeleteTieringConfigurationInput: StructureShape
+    DeleteTieringConfigurationOutput: StructureShape
     DependencyFailureException: StructureShape
+    DescribeBackupAccessPointInput: StructureShape
+    DescribeBackupAccessPointResponse: StructureShape
     DescribeBackupJobInput: StructureShape
     DescribeBackupJobOutput: StructureShape
     DescribeBackupVaultInput: StructureShape
@@ -125,9 +146,12 @@ module Aws::Backup
     DescribeReportPlanOutput: StructureShape
     DescribeRestoreJobInput: StructureShape
     DescribeRestoreJobOutput: StructureShape
+    DescribeScanJobInput: StructureShape
+    DescribeScanJobOutput: StructureShape
     DisassociateBackupVaultMpaApprovalTeamInput: StructureShape
     DisassociateRecoveryPointFromParentInput: StructureShape
     DisassociateRecoveryPointInput: StructureShape
+    EncryptionKeyType: EnumShape
     ExportBackupPlanTemplateInput: StructureShape
     ExportBackupPlanTemplateOutput: StructureShape
     FormatList: ListShape
@@ -151,6 +175,8 @@ module Aws::Backup
     GetBackupVaultNotificationsOutput: StructureShape
     GetLegalHoldInput: StructureShape
     GetLegalHoldOutput: StructureShape
+    GetPITRMalwareScanResultsInput: StructureShape
+    GetPITRMalwareScanResultsOutput: StructureShape
     GetRecoveryPointIndexDetailsInput: StructureShape
     GetRecoveryPointIndexDetailsOutput: StructureShape
     GetRecoveryPointRestoreMetadataInput: StructureShape
@@ -164,6 +190,8 @@ module Aws::Backup
     GetRestoreTestingSelectionInput: StructureShape
     GetRestoreTestingSelectionOutput: StructureShape
     GetSupportedResourceTypesOutput: StructureShape
+    GetTieringConfigurationInput: StructureShape
+    GetTieringConfigurationOutput: StructureShape
     GlobalSettings: MapShape
     GlobalSettingsName: StringShape
     GlobalSettingsValue: StringShape
@@ -187,7 +215,18 @@ module Aws::Backup
     LegalHoldStatus: EnumShape
     LegalHoldsList: ListShape
     Lifecycle: StructureShape
+    LifecycleDeleteAfterEvent: EnumShape
     LimitExceededException: StructureShape
+    ListAccessPointsMember: StructureShape
+    ListBackupAccessPointsByRecoveryPointRequest: StructureShape
+    ListBackupAccessPointsByRecoveryPointRequestMaxResultsInteger: IntegerShape
+    ListBackupAccessPointsByRecoveryPointResponse: StructureShape
+    ListBackupAccessPointsByResourceRequest: StructureShape
+    ListBackupAccessPointsByResourceRequestMaxResultsInteger: IntegerShape
+    ListBackupAccessPointsByResourceResponse: StructureShape
+    ListBackupAccessPointsRequest: StructureShape
+    ListBackupAccessPointsRequestMaxResultsInteger: IntegerShape
+    ListBackupAccessPointsResponse: StructureShape
     ListBackupJobSummariesInput: StructureShape
     ListBackupJobSummariesOutput: StructureShape
     ListBackupJobsInput: StructureShape
@@ -241,12 +280,21 @@ module Aws::Backup
     ListRestoreTestingSelectionsInput: StructureShape
     ListRestoreTestingSelectionsInputMaxResultsInteger: IntegerShape
     ListRestoreTestingSelectionsOutput: StructureShape
+    ListScanJobSummariesInput: StructureShape
+    ListScanJobSummariesOutput: StructureShape
+    ListScanJobsInput: StructureShape
+    ListScanJobsInputMaxResultsInteger: IntegerShape
+    ListScanJobsOutput: StructureShape
     ListTagsInput: StructureShape
     ListTagsOutput: StructureShape
+    ListTieringConfigurationsInput: StructureShape
+    ListTieringConfigurationsOutput: StructureShape
     Long: IntegerShape
     Long2: IntegerShape
+    MalwareScanner: EnumShape
     MaxFrameworkInputs: IntegerShape
     MaxResults: IntegerShape
+    MaxScheduledRunsPreview: IntegerShape
     MessageCategory: StringShape
     Metadata: MapShape
     MetadataKey: StringShape
@@ -263,6 +311,7 @@ module Aws::Backup
     PutBackupVaultLockConfigurationInput: StructureShape
     PutBackupVaultNotificationsInput: StructureShape
     PutRestoreValidationResultInput: StructureShape
+    RecoveryPointArn: StringShape
     RecoveryPointByBackupVault: StructureShape
     RecoveryPointByBackupVaultList: ListShape
     RecoveryPointByResource: StructureShape
@@ -284,9 +333,12 @@ module Aws::Backup
     ReportPlanName: StringShape
     ReportSetting: StructureShape
     RequesterComment: StringShape
+    ResourceArn: StringShape
     ResourceArns: ListShape
     ResourceIdentifiers: ListShape
     ResourceNotFoundException: StructureShape
+    ResourceSelection: StructureShape
+    ResourceSelections: ListShape
     ResourceType: StringShape
     ResourceTypeList: ListShape
     ResourceTypeManagementPreference: MapShape
@@ -319,6 +371,29 @@ module Aws::Backup
     RestoreTestingSelections: ListShape
     RestoreValidationStatus: EnumShape
     RevokeRestoreAccessBackupVaultInput: StructureShape
+    RuleExecutionType: EnumShape
+    ScanAction: StructureShape
+    ScanActions: ListShape
+    ScanFinding: EnumShape
+    ScanFindings: ListShape
+    ScanJob: StructureShape
+    ScanJobCreator: StructureShape
+    ScanJobState: EnumShape
+    ScanJobStatus: EnumShape
+    ScanJobSummary: StructureShape
+    ScanJobSummaryList: ListShape
+    ScanJobs: ListShape
+    ScanMode: EnumShape
+    ScanResourceType: EnumShape
+    ScanResult: StructureShape
+    ScanResultInfo: StructureShape
+    ScanResultStatus: EnumShape
+    ScanResults: ListShape
+    ScanSetting: StructureShape
+    ScanSettings: ListShape
+    ScanState: EnumShape
+    ScheduledPlanExecutionMember: StructureShape
+    ScheduledRunsPreview: ListShape
     SensitiveStringMap: MapShape
     ServiceUnavailableException: StructureShape
     StartBackupJobInput: StructureShape
@@ -329,13 +404,25 @@ module Aws::Backup
     StartReportJobOutput: StructureShape
     StartRestoreJobInput: StructureShape
     StartRestoreJobOutput: StructureShape
+    StartScanJobInput: StructureShape
+    StartScanJobOutput: StructureShape
     StopBackupJobInput: StructureShape
     StorageClass: EnumShape
     TagKey: StringShape
     TagKeyList: ListShape
+    TagMap: MapShape
+    TagMapKeyString: StringShape
+    TagMapValueString: StringShape
     TagResourceInput: StructureShape
     TagValue: StringShape
     Tags: MapShape
+    TieringConfiguration: StructureShape
+    TieringConfigurationInputForCreate: StructureShape
+    TieringConfigurationInputForUpdate: StructureShape
+    TieringConfigurationName: StringShape
+    TieringConfigurationsList: ListShape
+    TieringConfigurationsListMember: StructureShape
+    TieringDownSettingsInDays: IntegerShape
     Timezone: StringShape
     UntagResourceInput: StructureShape
     UpdateBackupPlanInput: StructureShape
@@ -354,6 +441,8 @@ module Aws::Backup
     UpdateRestoreTestingPlanOutput: StructureShape
     UpdateRestoreTestingSelectionInput: StructureShape
     UpdateRestoreTestingSelectionOutput: StructureShape
+    UpdateTieringConfigurationInput: StructureShape
+    UpdateTieringConfigurationOutput: StructureShape
     VaultNames: ListShape
     VaultState: EnumShape
     VaultType: EnumShape

@@ -194,7 +194,8 @@ module Aws::ChimeSDKVoice
           voice_connector_id: String,
           priority: Integer
         }
-      ]
+      ],
+      ?call_distribution_type: String
     ) -> _CreateVoiceConnectorGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateVoiceConnectorGroupResponse
 
     interface _CreateVoiceProfileResponse
@@ -990,7 +991,8 @@ module Aws::ChimeSDKVoice
           voice_connector_id: String,
           priority: Integer
         }
-      ]
+      ],
+      ?call_distribution_type: String
     ) -> _UpdateVoiceConnectorGroupResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateVoiceConnectorGroupResponse
 
     interface _UpdateVoiceProfileResponse

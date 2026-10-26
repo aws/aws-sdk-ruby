@@ -171,7 +171,8 @@ module Aws::Appflow
             refresh_token: String,
             o_auth_request: {
               auth_code: String,
-              redirect_uri: String
+              redirect_uri: String,
+              code_verifier: String
             }
           },
           honeycode: {
@@ -225,7 +226,8 @@ module Aws::Appflow
           },
           snowflake: {
             username: untyped,
-            password: untyped
+            password: untyped,
+            private_key: String
           },
           trendmicro: {
             api_secret_key: String
@@ -847,7 +849,8 @@ module Aws::Appflow
             refresh_token: String,
             o_auth_request: {
               auth_code: String,
-              redirect_uri: String
+              redirect_uri: String,
+              code_verifier: String
             }
           },
           honeycode: {
@@ -901,7 +904,8 @@ module Aws::Appflow
           },
           snowflake: {
             username: untyped,
-            password: untyped
+            password: untyped,
+            private_key: String
           },
           trendmicro: {
             api_secret_key: String

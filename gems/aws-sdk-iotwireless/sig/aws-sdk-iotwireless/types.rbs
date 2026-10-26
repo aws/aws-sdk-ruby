@@ -55,6 +55,17 @@ module Aws::IoTWireless
       attr_accessor vertical_accuracy: Float?
     end
 
+    class AdvancedConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?wi_fi_cellular: Types::WiFiCellular,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor wi_fi_cellular: Types::WiFiCellular?
+    end
+
     module AggregationPeriod
       OneHour: String
       OneDay: String
@@ -773,6 +784,19 @@ module Aws::IoTWireless
       attr_accessor factory_support: bool?
       attr_accessor ap_id: String?
       attr_accessor device_type_id: String?
+    end
+
+    class DefaultSessionParametersMulticast
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dl_dr: Integer,
+        ?dl_freq: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dl_dr: Integer?
+      attr_accessor dl_freq: Integer?
     end
 
     class DeleteDestinationRequest
@@ -1831,7 +1855,9 @@ module Aws::IoTWireless
         ?cell_towers: Types::CellTowers,
         ?ip: Types::Ip,
         ?gnss: Types::Gnss,
+        ?gnss_multi_frame: Types::GnssMultiFrame,
         ?timestamp: Time,
+        ?advanced_configuration: Types::AdvancedConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1839,7 +1865,9 @@ module Aws::IoTWireless
       attr_accessor cell_towers: Types::CellTowers?
       attr_accessor ip: Types::Ip?
       attr_accessor gnss: Types::Gnss?
+      attr_accessor gnss_multi_frame: Types::GnssMultiFrame?
       attr_accessor timestamp: Time?
+      attr_accessor advanced_configuration: Types::AdvancedConfiguration?
     end
 
     class GetPositionEstimateResponse
@@ -2041,6 +2069,7 @@ module Aws::IoTWireless
         ?id: String,
         ?arn: String,
         ?destination_name: String,
+        ?positioning: String,
         ?sidewalk: Types::SidewalkGetStartImportInfo,
         ?creation_time: Time,
         ?status: String,
@@ -2055,6 +2084,7 @@ module Aws::IoTWireless
       attr_accessor id: String?
       attr_accessor arn: String?
       attr_accessor destination_name: String?
+      attr_accessor positioning: String?
       attr_accessor sidewalk: Types::SidewalkGetStartImportInfo?
       attr_accessor creation_time: Time?
       attr_accessor status: String?
@@ -2337,6 +2367,38 @@ module Aws::IoTWireless
       attr_accessor use2_d_solver: bool?
     end
 
+    class GnssCapture
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?payload: String,
+        ?capture_time: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor payload: String?
+      attr_accessor capture_time: Float?
+    end
+
+    class GnssMultiFrame
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?captures: Array[Types::GnssCapture],
+        ?capture_time_accuracy: Float,
+        ?assist_position: Array[Float],
+        ?assist_altitude: Float,
+        ?use2_d_solver: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor captures: Array[Types::GnssCapture]?
+      attr_accessor capture_time_accuracy: Float?
+      attr_accessor assist_position: Array[Float]?
+      attr_accessor assist_altitude: Float?
+      attr_accessor use2_d_solver: bool?
+    end
+
     class GsmLocalId
       include Smithy::Schema::Structure
 
@@ -2560,12 +2622,16 @@ module Aws::IoTWireless
       def initialize: (
         ?next_token: String,
         ?destination_name: String,
+        ?positioning: String,
+        ?sidewalk: Types::SidewalkListDevicesForImportInfo,
         ?imported_wireless_device_list: Array[Types::ImportedWirelessDevice],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor next_token: String?
       attr_accessor destination_name: String?
+      attr_accessor positioning: String?
+      attr_accessor sidewalk: Types::SidewalkListDevicesForImportInfo?
       attr_accessor imported_wireless_device_list: Array[Types::ImportedWirelessDevice]?
     end
 
@@ -3253,12 +3319,14 @@ module Aws::IoTWireless
         ?rf_region: String,
         ?dl_class: String,
         ?participating_gateways: Types::ParticipatingGatewaysMulticast,
+        ?default_session_parameters: Types::DefaultSessionParametersMulticast,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor rf_region: String?
       attr_accessor dl_class: String?
       attr_accessor participating_gateways: Types::ParticipatingGatewaysMulticast?
+      attr_accessor default_session_parameters: Types::DefaultSessionParametersMulticast?
     end
 
     class LoRaWANMulticastGet
@@ -3270,6 +3338,7 @@ module Aws::IoTWireless
         ?number_of_devices_requested: Integer,
         ?number_of_devices_in_group: Integer,
         ?participating_gateways: Types::ParticipatingGatewaysMulticast,
+        ?default_session_parameters: Types::DefaultSessionParametersMulticast,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3278,6 +3347,7 @@ module Aws::IoTWireless
       attr_accessor number_of_devices_requested: Integer?
       attr_accessor number_of_devices_in_group: Integer?
       attr_accessor participating_gateways: Types::ParticipatingGatewaysMulticast?
+      attr_accessor default_session_parameters: Types::DefaultSessionParametersMulticast?
     end
 
     class LoRaWANMulticastMetadata
@@ -4098,10 +4168,14 @@ module Aws::IoTWireless
 
       def initialize: (
         ?device_profile_id: String,
+        ?positioning: Types::SidewalkPositioning,
+        ?sidewalk_manufacturing_sn: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor device_profile_id: String?
+      attr_accessor positioning: Types::SidewalkPositioning?
+      attr_accessor sidewalk_manufacturing_sn: String?
     end
 
     class SidewalkDevice
@@ -4116,6 +4190,7 @@ module Aws::IoTWireless
         ?device_profile_id: String,
         ?certificate_id: String,
         ?status: String,
+        ?positioning: Types::SidewalkPositioning,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4127,6 +4202,7 @@ module Aws::IoTWireless
       attr_accessor device_profile_id: String?
       attr_accessor certificate_id: String?
       attr_accessor status: String?
+      attr_accessor positioning: Types::SidewalkPositioning?
     end
 
     class SidewalkDeviceMetadata
@@ -4178,11 +4254,13 @@ module Aws::IoTWireless
       def initialize: (
         ?device_creation_file_list: Array[String],
         ?role: String,
+        ?positioning: Types::SidewalkPositioning,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor device_creation_file_list: Array[String]?
       attr_accessor role: String?
+      attr_accessor positioning: Types::SidewalkPositioning?
     end
 
     class SidewalkListDevice
@@ -4195,6 +4273,7 @@ module Aws::IoTWireless
         ?device_certificates: Array[Types::CertificateList],
         ?device_profile_id: String,
         ?status: String,
+        ?positioning: Types::SidewalkPositioning,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4204,6 +4283,29 @@ module Aws::IoTWireless
       attr_accessor device_certificates: Array[Types::CertificateList]?
       attr_accessor device_profile_id: String?
       attr_accessor status: String?
+      attr_accessor positioning: Types::SidewalkPositioning?
+    end
+
+    class SidewalkListDevicesForImportInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?positioning: Types::SidewalkPositioning,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor positioning: Types::SidewalkPositioning?
+    end
+
+    class SidewalkPositioning
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_name: String?
     end
 
     class SidewalkResourceTypeEventConfiguration
@@ -4237,10 +4339,12 @@ module Aws::IoTWireless
 
       def initialize: (
         ?sidewalk_manufacturing_sn: String,
+        ?positioning: Types::SidewalkPositioning,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor sidewalk_manufacturing_sn: String?
+      attr_accessor positioning: Types::SidewalkPositioning?
     end
 
     class SidewalkStartImportInfo
@@ -4249,11 +4353,13 @@ module Aws::IoTWireless
       def initialize: (
         ?device_creation_file: String,
         ?role: String,
+        ?positioning: Types::SidewalkPositioning,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor device_creation_file: String?
       attr_accessor role: String?
+      attr_accessor positioning: Types::SidewalkPositioning?
     end
 
     class SidewalkUpdateAccount
@@ -4276,6 +4382,17 @@ module Aws::IoTWireless
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor device_creation_file: String?
+    end
+
+    class SidewalkUpdateWirelessDevice
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?positioning: Types::SidewalkPositioning,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor positioning: Types::SidewalkPositioning?
     end
 
     module SigningAlg
@@ -4383,6 +4500,7 @@ module Aws::IoTWireless
         ?client_request_token: String,
         ?device_name: String,
         ?tags: Array[Types::Tag],
+        ?positioning: String,
         ?sidewalk: Types::SidewalkSingleStartImportInfo,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4391,6 +4509,7 @@ module Aws::IoTWireless
       attr_accessor client_request_token: String?
       attr_accessor device_name: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor positioning: String?
       attr_accessor sidewalk: Types::SidewalkSingleStartImportInfo?
     end
 
@@ -4414,6 +4533,7 @@ module Aws::IoTWireless
         ?destination_name: String,
         ?client_request_token: String,
         ?tags: Array[Types::Tag],
+        ?positioning: String,
         ?sidewalk: Types::SidewalkStartImportInfo,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -4421,6 +4541,7 @@ module Aws::IoTWireless
       attr_accessor destination_name: String?
       attr_accessor client_request_token: String?
       attr_accessor tags: Array[Types::Tag]?
+      attr_accessor positioning: String?
       attr_accessor sidewalk: Types::SidewalkStartImportInfo?
     end
 
@@ -5073,6 +5194,7 @@ module Aws::IoTWireless
         ?description: String,
         ?lo_ra_wan: Types::LoRaWANUpdateDevice,
         ?positioning: String,
+        ?sidewalk: Types::SidewalkUpdateWirelessDevice,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5082,6 +5204,7 @@ module Aws::IoTWireless
       attr_accessor description: String?
       attr_accessor lo_ra_wan: Types::LoRaWANUpdateDevice?
       attr_accessor positioning: String?
+      attr_accessor sidewalk: Types::SidewalkUpdateWirelessDevice?
     end
 
     class UpdateWirelessDeviceResponse
@@ -5234,6 +5357,17 @@ module Aws::IoTWireless
       attr_accessor rss: Integer?
     end
 
+    class WiFiCellular
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?confidence_percent: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor confidence_percent: Integer?
+    end
+
     module WirelessDeviceEvent
       Join: String
       Rejoin: String
@@ -5274,6 +5408,7 @@ module Aws::IoTWireless
         ?id: String,
         ?arn: String,
         ?destination_name: String,
+        ?positioning: String,
         ?sidewalk: Types::SidewalkGetStartImportInfo,
         ?creation_time: Time,
         ?status: String,
@@ -5288,6 +5423,7 @@ module Aws::IoTWireless
       attr_accessor id: String?
       attr_accessor arn: String?
       attr_accessor destination_name: String?
+      attr_accessor positioning: String?
       attr_accessor sidewalk: Types::SidewalkGetStartImportInfo?
       attr_accessor creation_time: Time?
       attr_accessor status: String?
@@ -5335,6 +5471,7 @@ module Aws::IoTWireless
         ?fuota_device_status: String,
         ?multicast_device_status: String,
         ?mc_group_id: Integer,
+        ?positioning: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -5349,6 +5486,7 @@ module Aws::IoTWireless
       attr_accessor fuota_device_status: String?
       attr_accessor multicast_device_status: String?
       attr_accessor mc_group_id: Integer?
+      attr_accessor positioning: String?
     end
 
     module WirelessDeviceType

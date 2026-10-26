@@ -244,6 +244,25 @@ module Aws::NetworkManager
       DIRECT_CONNECT_GATEWAY_NOT_FOUND: String
       DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS: String
       DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF: String
+      VPN_EXISTING_ASSOCIATIONS: String
+      VPC_UNSUPPORTED_FEATURES: String
+    end
+
+    class AttachmentRoutingPolicyAssociationSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_id: String,
+        ?pending_routing_policies: Array[String],
+        ?associated_routing_policies: Array[String],
+        ?routing_policy_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_id: String?
+      attr_accessor pending_routing_policies: Array[String]?
+      attr_accessor associated_routing_policies: Array[String]?
+      attr_accessor routing_policy_label: String?
     end
 
     module AttachmentState
@@ -319,6 +338,10 @@ module Aws::NetworkManager
       ATTACHMENT_MAPPING: String
       ATTACHMENT_ROUTE_PROPAGATION: String
       ATTACHMENT_ROUTE_STATIC: String
+      ROUTING_POLICY: String
+      ROUTING_POLICY_SEGMENT_ASSOCIATION: String
+      ROUTING_POLICY_EDGE_ASSOCIATION: String
+      ROUTING_POLICY_ATTACHMENT_ASSOCIATION: String
       CORE_NETWORK_CONFIGURATION: String
       SEGMENTS_CONFIGURATION: String
       SEGMENT_ACTIONS_CONFIGURATION: String
@@ -654,18 +677,24 @@ module Aws::NetworkManager
 
       def initialize: (
         ?edge_location: String,
+        ?peer_edge_location: String,
+        ?routing_policy_direction: String,
         ?segment_name: String,
         ?network_function_group_name: String,
         ?attachment_id: String,
         ?cidr: String,
+        ?routing_policy_association_details: Array[Types::RoutingPolicyAssociationDetail],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor edge_location: String?
+      attr_accessor peer_edge_location: String?
+      attr_accessor routing_policy_direction: String?
       attr_accessor segment_name: String?
       attr_accessor network_function_group_name: String?
       attr_accessor attachment_id: String?
       attr_accessor cidr: String?
+      attr_accessor routing_policy_association_details: Array[Types::RoutingPolicyAssociationDetail]?
     end
 
     class CoreNetworkChangeValues
@@ -684,6 +713,11 @@ module Aws::NetworkManager
         ?vpn_ecmp_support: bool,
         ?dns_support: bool,
         ?security_group_referencing_support: bool,
+        ?routing_policy_direction: String,
+        ?routing_policy: String,
+        ?peer_edge_locations: Array[String],
+        ?attachment_id: String,
+        ?routing_policy_association_details: Array[Types::RoutingPolicyAssociationDetail],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -699,6 +733,11 @@ module Aws::NetworkManager
       attr_accessor vpn_ecmp_support: bool?
       attr_accessor dns_support: bool?
       attr_accessor security_group_referencing_support: bool?
+      attr_accessor routing_policy_direction: String?
+      attr_accessor routing_policy: String?
+      attr_accessor peer_edge_locations: Array[String]?
+      attr_accessor attachment_id: String?
+      attr_accessor routing_policy_association_details: Array[Types::RoutingPolicyAssociationDetail]?
     end
 
     class CoreNetworkEdge
@@ -825,6 +864,27 @@ module Aws::NetworkManager
       attr_accessor change_set_state: String?
     end
 
+    class CoreNetworkRoutingInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix: String,
+        ?next_hop: Types::RoutingInformationNextHop,
+        ?local_preference: String,
+        ?med: String,
+        ?as_path: Array[String],
+        ?communities: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix: String?
+      attr_accessor next_hop: Types::RoutingInformationNextHop?
+      attr_accessor local_preference: String?
+      attr_accessor med: String?
+      attr_accessor as_path: Array[String]?
+      attr_accessor communities: Array[String]?
+    end
+
     class CoreNetworkSegment
       include Smithy::Schema::Structure
 
@@ -892,6 +952,7 @@ module Aws::NetworkManager
         ?core_network_id: String,
         ?edge_location: String,
         ?transport_attachment_id: String,
+        ?routing_policy_label: String,
         ?options: Types::ConnectAttachmentOptions,
         ?tags: Array[Types::Tag],
         ?client_token: String,
@@ -901,6 +962,7 @@ module Aws::NetworkManager
       attr_accessor core_network_id: String?
       attr_accessor edge_location: String?
       attr_accessor transport_attachment_id: String?
+      attr_accessor routing_policy_label: String?
       attr_accessor options: Types::ConnectAttachmentOptions?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor client_token: String?
@@ -987,6 +1049,38 @@ module Aws::NetworkManager
       attr_accessor connection: Types::Connection?
     end
 
+    class CreateCoreNetworkPrefixListAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?prefix_list_arn: String,
+        ?prefix_list_alias: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor prefix_list_arn: String?
+      attr_accessor prefix_list_alias: String?
+      attr_accessor client_token: String?
+    end
+
+    class CreateCoreNetworkPrefixListAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?prefix_list_arn: String,
+        ?prefix_list_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor prefix_list_arn: String?
+      attr_accessor prefix_list_alias: String?
+    end
+
     class CreateCoreNetworkRequest
       include Smithy::Schema::Structure
 
@@ -1063,6 +1157,7 @@ module Aws::NetworkManager
       def initialize: (
         ?core_network_id: String,
         ?direct_connect_gateway_arn: String,
+        ?routing_policy_label: String,
         ?edge_locations: Array[String],
         ?tags: Array[Types::Tag],
         ?client_token: String,
@@ -1071,6 +1166,7 @@ module Aws::NetworkManager
 
       attr_accessor core_network_id: String?
       attr_accessor direct_connect_gateway_arn: String?
+      attr_accessor routing_policy_label: String?
       attr_accessor edge_locations: Array[String]?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor client_token: String?
@@ -1179,6 +1275,7 @@ module Aws::NetworkManager
       def initialize: (
         ?core_network_id: String,
         ?vpn_connection_arn: String,
+        ?routing_policy_label: String,
         ?tags: Array[Types::Tag],
         ?client_token: String,
       ) -> void
@@ -1186,6 +1283,7 @@ module Aws::NetworkManager
 
       attr_accessor core_network_id: String?
       attr_accessor vpn_connection_arn: String?
+      attr_accessor routing_policy_label: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor client_token: String?
     end
@@ -1235,6 +1333,7 @@ module Aws::NetworkManager
       def initialize: (
         ?peering_id: String,
         ?transit_gateway_route_table_arn: String,
+        ?routing_policy_label: String,
         ?tags: Array[Types::Tag],
         ?client_token: String,
       ) -> void
@@ -1242,6 +1341,7 @@ module Aws::NetworkManager
 
       attr_accessor peering_id: String?
       attr_accessor transit_gateway_route_table_arn: String?
+      attr_accessor routing_policy_label: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor client_token: String?
     end
@@ -1265,6 +1365,7 @@ module Aws::NetworkManager
         ?vpc_arn: String,
         ?subnet_arns: Array[String],
         ?options: Types::VpcOptions,
+        ?routing_policy_label: String,
         ?tags: Array[Types::Tag],
         ?client_token: String,
       ) -> void
@@ -1274,6 +1375,7 @@ module Aws::NetworkManager
       attr_accessor vpc_arn: String?
       attr_accessor subnet_arns: Array[String]?
       attr_accessor options: Types::VpcOptions?
+      attr_accessor routing_policy_label: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor client_token: String?
     end
@@ -1405,6 +1507,32 @@ module Aws::NetworkManager
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor core_network_policy: Types::CoreNetworkPolicy?
+    end
+
+    class DeleteCoreNetworkPrefixListAssociationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?prefix_list_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor prefix_list_arn: String?
+    end
+
+    class DeleteCoreNetworkPrefixListAssociationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?prefix_list_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor prefix_list_arn: String?
     end
 
     class DeleteCoreNetworkRequest
@@ -2698,6 +2826,36 @@ module Aws::NetworkManager
       updating: String
     end
 
+    class ListAttachmentRoutingPolicyAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?attachment_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor attachment_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListAttachmentRoutingPolicyAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?attachment_routing_policy_associations: Array[Types::AttachmentRoutingPolicyAssociationSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor attachment_routing_policy_associations: Array[Types::AttachmentRoutingPolicyAssociationSummary]?
+      attr_accessor next_token: String?
+    end
+
     class ListAttachmentsRequest
       include Smithy::Schema::Structure
 
@@ -2787,6 +2945,78 @@ module Aws::NetworkManager
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor core_network_policy_versions: Array[Types::CoreNetworkPolicyVersion]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreNetworkPrefixListAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?prefix_list_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor prefix_list_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreNetworkPrefixListAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?prefix_list_associations: Array[Types::PrefixListAssociation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor prefix_list_associations: Array[Types::PrefixListAssociation]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreNetworkRoutingInformationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?segment_name: String,
+        ?edge_location: String,
+        ?next_hop_filters: Hash[String, Array[String]],
+        ?local_preference_matches: Array[String],
+        ?exact_as_path_matches: Array[String],
+        ?med_matches: Array[String],
+        ?community_matches: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor segment_name: String?
+      attr_accessor edge_location: String?
+      attr_accessor next_hop_filters: Hash[String, Array[String]]?
+      attr_accessor local_preference_matches: Array[String]?
+      attr_accessor exact_as_path_matches: Array[String]?
+      attr_accessor med_matches: Array[String]?
+      attr_accessor community_matches: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCoreNetworkRoutingInformationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_routing_information: Array[Types::CoreNetworkRoutingInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_routing_information: Array[Types::CoreNetworkRoutingInformation]?
       attr_accessor next_token: String?
     end
 
@@ -3171,6 +3401,21 @@ module Aws::NetworkManager
       attr_accessor missing_permission: String?
     end
 
+    class PrefixListAssociation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?prefix_list_arn: String,
+        ?prefix_list_alias: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor prefix_list_arn: String?
+      attr_accessor prefix_list_alias: String?
+    end
+
     class ProposedNetworkFunctionGroupChange
       include Smithy::Schema::Structure
 
@@ -3199,6 +3444,38 @@ module Aws::NetworkManager
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor attachment_policy_rule_number: Integer?
       attr_accessor segment_name: String?
+    end
+
+    class PutAttachmentRoutingPolicyLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?attachment_id: String,
+        ?routing_policy_label: String,
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor attachment_id: String?
+      attr_accessor routing_policy_label: String?
+      attr_accessor client_token: String?
+    end
+
+    class PutAttachmentRoutingPolicyLabelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?attachment_id: String,
+        ?routing_policy_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor attachment_id: String?
+      attr_accessor routing_policy_label: String?
     end
 
     class PutCoreNetworkPolicyRequest
@@ -3310,6 +3587,34 @@ module Aws::NetworkManager
 
       attr_accessor from: String?
       attr_accessor to: String?
+    end
+
+    class RemoveAttachmentRoutingPolicyLabelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?attachment_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor attachment_id: String?
+    end
+
+    class RemoveAttachmentRoutingPolicyLabelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?core_network_id: String,
+        ?attachment_id: String,
+        ?routing_policy_label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor core_network_id: String?
+      attr_accessor attachment_id: String?
+      attr_accessor routing_policy_label: String?
     end
 
     class ResourceNotFoundException
@@ -3494,6 +3799,45 @@ module Aws::NetworkManager
     module RouteType
       PROPAGATED: String
       STATIC: String
+    end
+
+    class RoutingInformationNextHop
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ip_address: String,
+        ?core_network_attachment_id: String,
+        ?resource_id: String,
+        ?resource_type: String,
+        ?segment_name: String,
+        ?edge_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ip_address: String?
+      attr_accessor core_network_attachment_id: String?
+      attr_accessor resource_id: String?
+      attr_accessor resource_type: String?
+      attr_accessor segment_name: String?
+      attr_accessor edge_location: String?
+    end
+
+    class RoutingPolicyAssociationDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?routing_policy_names: Array[String],
+        ?shared_segments: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor routing_policy_names: Array[String]?
+      attr_accessor shared_segments: Array[String]?
+    end
+
+    module RoutingPolicyDirection
+      INBOUND: String
+      OUTBOUND: String
     end
 
     module SegmentActionServiceInsertion

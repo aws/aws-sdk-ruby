@@ -110,6 +110,32 @@ module Aws::ResourceExplorer2
       attr_accessor created_at: Time?
     end
 
+    class CreateResourceExplorerSetupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_list: Array[String],
+        ?aggregator_regions: Array[String],
+        ?view_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_list: Array[String]?
+      attr_accessor aggregator_regions: Array[String]?
+      attr_accessor view_name: String?
+    end
+
+    class CreateResourceExplorerSetupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
     class CreateViewOperationInput
       include Smithy::Schema::Structure
 
@@ -168,6 +194,30 @@ module Aws::ResourceExplorer2
       attr_accessor last_updated_at: Time?
     end
 
+    class DeleteResourceExplorerSetupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region_list: Array[String],
+        ?delete_in_all_regions: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region_list: Array[String]?
+      attr_accessor delete_in_all_regions: bool?
+    end
+
+    class DeleteResourceExplorerSetupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+    end
+
     class DeleteViewOperationInput
       include Smithy::Schema::Structure
 
@@ -188,6 +238,19 @@ module Aws::ResourceExplorer2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor view_arn: String?
+    end
+
+    class ErrorDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
     end
 
     class GetAccountLevelServiceConfigurationOutput
@@ -259,6 +322,69 @@ module Aws::ResourceExplorer2
       attr_accessor managed_view: Types::ManagedView?
     end
 
+    class GetResourceExplorerSetupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?task_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor task_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetResourceExplorerSetupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[Types::RegionStatus],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[Types::RegionStatus]?
+      attr_accessor next_token: String?
+    end
+
+    class GetServiceIndexOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?arn: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor arn: String?
+      attr_accessor type: String?
+    end
+
+    class GetServiceViewInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_view_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_view_arn: String?
+    end
+
+    class GetServiceViewOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?view: Types::ServiceView,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor view: Types::ServiceView?
+    end
+
     class GetViewOperationInput
       include Smithy::Schema::Structure
 
@@ -307,6 +433,21 @@ module Aws::ResourceExplorer2
       attr_accessor region: String?
       attr_accessor arn: String?
       attr_accessor type: String?
+    end
+
+    class IndexStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?index: Types::Index,
+        ?error_details: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor index: Types::Index?
+      attr_accessor error_details: Types::ErrorDetails?
     end
 
     class InternalServerException
@@ -436,6 +577,86 @@ module Aws::ResourceExplorer2
       attr_accessor resources: Array[Types::Resource]?
       attr_accessor next_token: String?
       attr_accessor view_arn: String?
+    end
+
+    class ListServiceIndexesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?regions: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor regions: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceIndexesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?indexes: Array[Types::Index],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor indexes: Array[Types::Index]?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceViewsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListServiceViewsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?service_views: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor service_views: Array[String]?
+    end
+
+    class ListStreamingAccessForServicesInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListStreamingAccessForServicesOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?streaming_access_for_services: Array[Types::StreamingAccessDetails],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor streaming_access_for_services: Array[Types::StreamingAccessDetails]?
+      attr_accessor next_token: String?
     end
 
     class ListSupportedResourceTypesOperationInput
@@ -571,6 +792,21 @@ module Aws::ResourceExplorer2
       attr_accessor service_linked_role: String?
     end
 
+    class RegionStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?region: String,
+        ?index: Types::IndexStatus,
+        ?view: Types::ViewStatus,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor region: String?
+      attr_accessor index: Types::IndexStatus?
+      attr_accessor view: Types::ViewStatus?
+    end
+
     class Resource
       include Smithy::Schema::Structure
 
@@ -580,6 +816,7 @@ module Aws::ResourceExplorer2
         ?region: String,
         ?resource_type: String,
         ?service: String,
+        ?cfn_resource_type: String,
         ?last_reported_at: Time,
         ?properties: Array[Types::ResourceProperty],
       ) -> void
@@ -590,6 +827,7 @@ module Aws::ResourceExplorer2
       attr_accessor region: String?
       attr_accessor resource_type: String?
       attr_accessor service: String?
+      attr_accessor cfn_resource_type: String?
       attr_accessor last_reported_at: Time?
       attr_accessor properties: Array[Types::ResourceProperty]?
     end
@@ -678,6 +916,21 @@ module Aws::ResourceExplorer2
       attr_accessor count: Types::ResourceCount?
     end
 
+    class ServiceLinkedRecorderInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+        ?recorder_name: String,
+        ?recorder_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+      attr_accessor recorder_name: String?
+      attr_accessor recorder_type: String?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -693,17 +946,55 @@ module Aws::ResourceExplorer2
       attr_accessor value: String?
     end
 
+    class ServiceView
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_view_arn: String,
+        ?service_view_name: String,
+        ?filters: Types::SearchFilter,
+        ?included_properties: Array[Types::IncludedProperty],
+        ?streaming_access_for_service: String,
+        ?scope_type: String,
+        ?service_linked_recorder: Types::ServiceLinkedRecorderInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_view_arn: String?
+      attr_accessor service_view_name: String?
+      attr_accessor filters: Types::SearchFilter?
+      attr_accessor included_properties: Array[Types::IncludedProperty]?
+      attr_accessor streaming_access_for_service: String?
+      attr_accessor scope_type: String?
+      attr_accessor service_linked_recorder: Types::ServiceLinkedRecorderInfo?
+    end
+
+    class StreamingAccessDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?service_principal: String,
+        ?created_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor service_principal: String?
+      attr_accessor created_at: Time?
+    end
+
     class SupportedResourceType
       include Smithy::Schema::Structure
 
       def initialize: (
         ?service: String,
         ?resource_type: String,
+        ?cfn_resource_types: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor service: String?
       attr_accessor resource_type: String?
+      attr_accessor cfn_resource_types: Array[String]?
     end
 
     class TagResourceOperationInput
@@ -859,6 +1150,7 @@ module Aws::ResourceExplorer2
 
       def initialize: (
         ?view_arn: String,
+        ?view_name: String,
         ?owner: String,
         ?last_updated_at: Time,
         ?scope: String,
@@ -868,11 +1160,27 @@ module Aws::ResourceExplorer2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor view_arn: String?
+      attr_accessor view_name: String?
       attr_accessor owner: String?
       attr_accessor last_updated_at: Time?
       attr_accessor scope: String?
       attr_accessor included_properties: Array[Types::IncludedProperty]?
       attr_accessor filters: Types::SearchFilter?
+    end
+
+    class ViewStatus
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?view: Types::View,
+        ?error_details: Types::ErrorDetails,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor view: Types::View?
+      attr_accessor error_details: Types::ErrorDetails?
     end
   end
 end

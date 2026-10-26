@@ -605,7 +605,7 @@ module Aws::Appflow
     #   <p> The connector metadata specific to Upsolver. </p>
     #   @return [Types::UpsolverMetadata]
     # @!attribute customer_profiles
-    #   <p> The connector metadata specific to Amazon Connect Customer Profiles. </p>
+    #   <p> The connector metadata specific to Connect Customer Customer Profiles. </p>
     #   @return [Types::CustomerProfilesMetadata]
     # @!attribute honeycode
     #   <p> The connector metadata specific to Amazon Honeycode. </p>
@@ -655,10 +655,14 @@ module Aws::Appflow
     #   <p> The URL to which the authentication server redirects the browser after authorization has
     #         been granted. </p>
     #   @return [String]
+    # @!attribute code_verifier
+    #   <p> The code verifier used in the PKCE (Proof Key for Code Exchange) OAuth flow. </p>
+    #   @return [String]
     class ConnectorOAuthRequest < Struct.new(
       nil,
       :auth_code,
       :redirect_uri,
+      :code_verifier,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1321,13 +1325,13 @@ module Aws::Appflow
       include ::Smithy::Schema::Structure
     end
 
-    # <p> The properties that are applied when Amazon Connect Customer Profiles is used as a
+    # <p> The properties that are applied when Connect Customer Customer Profiles is used as a
     #       destination. </p>
     # @!attribute domain_name
-    #   <p> The unique name of the Amazon Connect Customer Profiles domain. </p>
+    #   <p> The unique name of the Connect Customer Customer Profiles domain. </p>
     #   @return [String]
     # @!attribute object_type_name
-    #   <p> The object specified in the Amazon Connect Customer Profiles flow destination.
+    #   <p> The object specified in the Connect Customer Customer Profiles flow destination.
     #       </p>
     #   @return [String]
     class CustomerProfilesDestinationProperties < Struct.new(
@@ -1339,7 +1343,7 @@ module Aws::Appflow
       include ::Smithy::Schema::Structure
     end
 
-    # <p> The connector metadata specific to Amazon Connect Customer Profiles. </p>
+    # <p> The connector metadata specific to Connect Customer Customer Profiles. </p>
     class CustomerProfilesMetadata < Struct.new(
       nil,
       keyword_init: true
@@ -1811,7 +1815,7 @@ module Aws::Appflow
     #   <p> The properties required to query Amazon Honeycode. </p>
     #   @return [Types::HoneycodeDestinationProperties]
     # @!attribute customer_profiles
-    #   <p> The properties required to query Amazon Connect Customer Profiles. </p>
+    #   <p> The properties required to query Connect Customer Customer Profiles. </p>
     #   @return [Types::CustomerProfilesDestinationProperties]
     # @!attribute zendesk
     #   <p>The properties required to query Zendesk.</p>
@@ -3308,13 +3312,13 @@ module Aws::Appflow
     # @!attribute connector_profile_name
     #   <p>The name of the connector profile that you want to reset cached metadata for.</p>
     #            <p>You can omit this parameter if you're resetting the cache for any of the following
-    #         connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you must include this
+    #         connectors: Connect Customer, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you must include this
     #         parameter in your request.</p>
     #   @return [String]
     # @!attribute connector_type
     #   <p>The type of connector to reset cached metadata for.</p>
     #            <p>You must include this parameter in your request if you're resetting the cache for any of
-    #         the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics,
+    #         the following connectors: Connect Customer, Amazon EventBridge, Amazon Lookout for Metrics,
     #           Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you
     #         can omit this parameter from your request. </p>
     #   @return [String]
@@ -4199,10 +4203,15 @@ module Aws::Appflow
     # @!attribute password
     #   <p> The password that corresponds to the user name. </p>
     #   @return [String]
+    # @!attribute private_key
+    #   <p> The RSA private key used for key pair authentication with Snowflake. Provide this
+    #         instead of a password when your Snowflake account uses key pair authentication. </p>
+    #   @return [String]
     class SnowflakeConnectorProfileCredentials < Struct.new(
       nil,
       :username,
       :password,
+      :private_key,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

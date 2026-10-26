@@ -1,0 +1,5 @@
+  module Aws
+    module MWAAServerless
+      VERSION: String
+    end
+  end

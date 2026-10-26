@@ -108,6 +108,59 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor protect_configuration_id: String?
     end
 
+    class CarrierLookupRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?phone_number: String,
+        ?enable_cleansing: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor phone_number: String?
+      attr_accessor enable_cleansing: bool?
+    end
+
+    class CarrierLookupResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?e164_phone_number: String,
+        ?dialing_country_code: String,
+        ?iso_country_code: String,
+        ?country: String,
+        ?mcc: String,
+        ?mnc: String,
+        ?carrier: String,
+        ?phone_number_type: String,
+        ?original_phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor e164_phone_number: String?
+      attr_accessor dialing_country_code: String?
+      attr_accessor iso_country_code: String?
+      attr_accessor country: String?
+      attr_accessor mcc: String?
+      attr_accessor mnc: String?
+      attr_accessor carrier: String?
+      attr_accessor phone_number_type: String?
+      attr_accessor original_phone_number: String?
+    end
+
+    class CarrierStatusInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?carrier_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor carrier_name: String?
+      attr_accessor status: String?
+    end
+
     class CloudWatchLogsDestination
       include Smithy::Schema::Structure
 
@@ -119,6 +172,51 @@ module Aws::PinpointSMSVoiceV2
 
       attr_accessor iam_role_arn: String?
       attr_accessor log_group_arn: String?
+    end
+
+    class ConditionalBehavior
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rules: Array[Types::ConditionalRule],
+        ?default_behavior: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rules: Array[Types::ConditionalRule]?
+      attr_accessor default_behavior: String?
+    end
+
+    class ConditionalRule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?conditions: Array[Types::FieldCondition],
+        ?rule_behavior: String,
+        ?conditional_validation: Types::ConditionalValidation,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor conditions: Array[Types::FieldCondition]?
+      attr_accessor rule_behavior: String?
+      attr_accessor conditional_validation: Types::ConditionalValidation?
+    end
+
+    class ConditionalValidation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_length: Integer,
+        ?max_length: Integer,
+        ?pattern: String,
+        ?allowed_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_length: Integer?
+      attr_accessor max_length: Integer?
+      attr_accessor pattern: String?
+      attr_accessor allowed_values: Array[String]?
     end
 
     class ConfigurationSetFilter
@@ -174,6 +272,38 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor reason: String?
       attr_accessor resource_type: String?
       attr_accessor resource_id: String?
+    end
+
+    class CountryLaunchStatusFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class CountryLaunchStatusInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iso_country_code: String,
+        ?status: String,
+        ?rcs_platform_id: String,
+        ?registration_id: String,
+        ?carrier_status: Array[Types::CarrierStatusInformation],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iso_country_code: String?
+      attr_accessor status: String?
+      attr_accessor rcs_platform_id: String?
+      attr_accessor registration_id: String?
+      attr_accessor carrier_status: Array[Types::CarrierStatusInformation]?
     end
 
     class CreateConfigurationSetRequest
@@ -244,6 +374,72 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor configuration_set_arn: String?
       attr_accessor configuration_set_name: String?
       attr_accessor event_destination: Types::EventDestination?
+    end
+
+    class CreateNotifyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?display_name: String,
+        ?use_case: String,
+        ?default_template_id: String,
+        ?pool_id: String,
+        ?enabled_countries: Array[String],
+        ?enabled_channels: Array[String],
+        ?deletion_protection_enabled: bool,
+        ?client_token: String,
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor display_name: String?
+      attr_accessor use_case: String?
+      attr_accessor default_template_id: String?
+      attr_accessor pool_id: String?
+      attr_accessor enabled_countries: Array[String]?
+      attr_accessor enabled_channels: Array[String]?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor client_token: String?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateNotifyConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configuration_arn: String,
+        ?notify_configuration_id: String,
+        ?display_name: String,
+        ?use_case: String,
+        ?default_template_id: String,
+        ?pool_id: String,
+        ?enabled_countries: Array[String],
+        ?enabled_channels: Array[String],
+        ?tier: String,
+        ?tier_upgrade_status: String,
+        ?status: String,
+        ?rejection_reason: String,
+        ?deletion_protection_enabled: bool,
+        ?tags: Array[Types::Tag],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configuration_arn: String?
+      attr_accessor notify_configuration_id: String?
+      attr_accessor display_name: String?
+      attr_accessor use_case: String?
+      attr_accessor default_template_id: String?
+      attr_accessor pool_id: String?
+      attr_accessor enabled_countries: Array[String]?
+      attr_accessor enabled_channels: Array[String]?
+      attr_accessor tier: String?
+      attr_accessor tier_upgrade_status: String?
+      attr_accessor status: String?
+      attr_accessor rejection_reason: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor created_timestamp: Time?
     end
 
     class CreateOptOutListRequest
@@ -367,6 +563,62 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor created_timestamp: Time?
       attr_accessor account_default: bool?
       attr_accessor deletion_protection_enabled: bool?
+      attr_accessor tags: Array[Types::Tag]?
+    end
+
+    class CreateRcsAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?deletion_protection_enabled: bool,
+        ?opt_out_list_name: String,
+        ?tags: Array[Types::Tag],
+        ?client_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor tags: Array[Types::Tag]?
+      attr_accessor client_token: String?
+    end
+
+    class CreateRcsAgentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agent_arn: String,
+        ?rcs_agent_id: String,
+        ?status: String,
+        ?deletion_protection_enabled: bool,
+        ?opt_out_list_name: String,
+        ?created_timestamp: Time,
+        ?self_managed_opt_outs_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?two_way_enabled: bool,
+        ?two_way_media_s3_bucket_name: String,
+        ?two_way_media_s3_key_prefix: String,
+        ?two_way_media_s3_role: String,
+        ?two_way_rcs_events_enabled: Array[String],
+        ?tags: Array[Types::Tag],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agent_arn: String?
+      attr_accessor rcs_agent_id: String?
+      attr_accessor status: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_media_s3_bucket_name: String?
+      attr_accessor two_way_media_s3_key_prefix: String?
+      attr_accessor two_way_media_s3_role: String?
+      attr_accessor two_way_rcs_events_enabled: Array[String]?
       attr_accessor tags: Array[Types::Tag]?
     end
 
@@ -519,12 +771,14 @@ module Aws::PinpointSMSVoiceV2
 
       def initialize: (
         ?destination_phone_number: String,
+        ?rcs_agent_id: String,
         ?tags: Array[Types::Tag],
         ?client_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor destination_phone_number: String?
+      attr_accessor rcs_agent_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor client_token: String?
     end
@@ -537,6 +791,7 @@ module Aws::PinpointSMSVoiceV2
         ?verified_destination_number_id: String,
         ?destination_phone_number: String,
         ?status: String,
+        ?rcs_agent_id: String,
         ?tags: Array[Types::Tag],
         ?created_timestamp: Time,
       ) -> void
@@ -546,6 +801,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor verified_destination_number_id: String?
       attr_accessor destination_phone_number: String?
       attr_accessor status: String?
+      attr_accessor rcs_agent_id: String?
       attr_accessor tags: Array[Types::Tag]?
       attr_accessor created_timestamp: Time?
     end
@@ -738,6 +994,74 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor monthly_limit: Integer?
     end
 
+    class DeleteNotifyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configuration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configuration_id: String?
+    end
+
+    class DeleteNotifyConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configuration_arn: String,
+        ?notify_configuration_id: String,
+        ?display_name: String,
+        ?use_case: String,
+        ?default_template_id: String,
+        ?pool_id: String,
+        ?enabled_countries: Array[String],
+        ?enabled_channels: Array[String],
+        ?tier: String,
+        ?tier_upgrade_status: String,
+        ?status: String,
+        ?rejection_reason: String,
+        ?deletion_protection_enabled: bool,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configuration_arn: String?
+      attr_accessor notify_configuration_id: String?
+      attr_accessor display_name: String?
+      attr_accessor use_case: String?
+      attr_accessor default_template_id: String?
+      attr_accessor pool_id: String?
+      attr_accessor enabled_countries: Array[String]?
+      attr_accessor enabled_channels: Array[String]?
+      attr_accessor tier: String?
+      attr_accessor tier_upgrade_status: String?
+      attr_accessor status: String?
+      attr_accessor rejection_reason: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class DeleteNotifyMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteNotifyMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
     class DeleteOptOutListRequest
       include Smithy::Schema::Structure
 
@@ -902,6 +1226,68 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor action: String?
       attr_accessor iso_country_code: String?
       attr_accessor expiration_timestamp: Time?
+    end
+
+    class DeleteRcsAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agent_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agent_id: String?
+    end
+
+    class DeleteRcsAgentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agent_arn: String,
+        ?rcs_agent_id: String,
+        ?status: String,
+        ?created_timestamp: Time,
+        ?deletion_protection_enabled: bool,
+        ?opt_out_list_name: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?two_way_enabled: bool,
+        ?two_way_rcs_events_enabled: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agent_arn: String?
+      attr_accessor rcs_agent_id: String?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_rcs_events_enabled: Array[String]?
+    end
+
+    class DeleteRcsMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class DeleteRcsMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
     end
 
     class DeleteRegistrationAttachmentRequest
@@ -1220,6 +1606,66 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor next_token: String?
     end
 
+    class DescribeNotifyConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configuration_ids: Array[String],
+        ?filters: Array[Types::NotifyConfigurationFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configuration_ids: Array[String]?
+      attr_accessor filters: Array[Types::NotifyConfigurationFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeNotifyConfigurationsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configurations: Array[Types::NotifyConfigurationInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configurations: Array[Types::NotifyConfigurationInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeNotifyTemplatesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_ids: Array[String],
+        ?filters: Array[Types::NotifyTemplateFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_ids: Array[String]?
+      attr_accessor filters: Array[Types::NotifyTemplateFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeNotifyTemplatesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_templates: Array[Types::NotifyTemplateInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_templates: Array[Types::NotifyTemplateInformation]?
+      attr_accessor next_token: String?
+    end
+
     class DescribeOptOutListsRequest
       include Smithy::Schema::Structure
 
@@ -1377,6 +1823,74 @@ module Aws::PinpointSMSVoiceV2
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor protect_configurations: Array[Types::ProtectConfigurationInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRcsAgentCountryLaunchStatusRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agent_id: String,
+        ?iso_country_codes: Array[String],
+        ?filters: Array[Types::CountryLaunchStatusFilter],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agent_id: String?
+      attr_accessor iso_country_codes: Array[String]?
+      attr_accessor filters: Array[Types::CountryLaunchStatusFilter]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRcsAgentCountryLaunchStatusResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agent_id: String,
+        ?rcs_agent_arn: String,
+        ?country_launch_status: Array[Types::CountryLaunchStatusInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agent_id: String?
+      attr_accessor rcs_agent_arn: String?
+      attr_accessor country_launch_status: Array[Types::CountryLaunchStatusInformation]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeRcsAgentsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agent_ids: Array[String],
+        ?owner: String,
+        ?filters: Array[Types::RcsAgentFilter],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agent_ids: Array[String]?
+      attr_accessor owner: String?
+      attr_accessor filters: Array[Types::RcsAgentFilter]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class DescribeRcsAgentsResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agents: Array[Types::RcsAgentInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agents: Array[Types::RcsAgentInformation]?
       attr_accessor next_token: String?
     end
 
@@ -1819,6 +2333,21 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor sns_destination: Types::SnsDestination?
     end
 
+    class FieldCondition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?depends_on_field_path: String,
+        ?operator: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor depends_on_field_path: String?
+      attr_accessor operator: String?
+      attr_accessor values: Array[String]?
+    end
+
     class GetProtectConfigurationCountryRuleSetRequest
       include Smithy::Schema::Structure
 
@@ -1927,6 +2456,74 @@ module Aws::PinpointSMSVoiceV2
 
       attr_accessor iam_role_arn: String?
       attr_accessor delivery_stream_arn: String?
+    end
+
+    class ListAvailablePhoneNumbersRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iso_country_code: String,
+        ?number_capabilities: Array[String],
+        ?number_type: String,
+        ?registration_id: String,
+        ?number_preference: Array[Types::NumberPreferenceItem],
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iso_country_code: String?
+      attr_accessor number_capabilities: Array[String]?
+      attr_accessor number_type: String?
+      attr_accessor registration_id: String?
+      attr_accessor number_preference: Array[Types::NumberPreferenceItem]?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListAvailablePhoneNumbersResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?available_phone_numbers: Array[String],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor available_phone_numbers: Array[String]?
+      attr_accessor next_token: String?
+    end
+
+    class ListNotifyCountriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[String],
+        ?use_cases: Array[String],
+        ?tier: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[String]?
+      attr_accessor use_cases: Array[String]?
+      attr_accessor tier: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListNotifyCountriesResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_countries: Array[Types::NotifyCountryInformation],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_countries: Array[Types::NotifyCountryInformation]?
+      attr_accessor next_token: String?
     end
 
     class ListPoolOriginationIdentitiesRequest
@@ -2057,6 +2654,149 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor tags: Array[Types::Tag]?
     end
 
+    class MessagingLimits
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rate_limits: Hash[String, Integer],
+        ?daily_message_caps: Hash[String, Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rate_limits: Hash[String, Integer]?
+      attr_accessor daily_message_caps: Hash[String, Integer]?
+    end
+
+    class NotifyConfigurationFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class NotifyConfigurationInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configuration_arn: String,
+        ?notify_configuration_id: String,
+        ?display_name: String,
+        ?use_case: String,
+        ?default_template_id: String,
+        ?pool_id: String,
+        ?enabled_countries: Array[String],
+        ?enabled_channels: Array[String],
+        ?tier: String,
+        ?tier_upgrade_status: String,
+        ?status: String,
+        ?rejection_reason: String,
+        ?deletion_protection_enabled: bool,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configuration_arn: String?
+      attr_accessor notify_configuration_id: String?
+      attr_accessor display_name: String?
+      attr_accessor use_case: String?
+      attr_accessor default_template_id: String?
+      attr_accessor pool_id: String?
+      attr_accessor enabled_countries: Array[String]?
+      attr_accessor enabled_channels: Array[String]?
+      attr_accessor tier: String?
+      attr_accessor tier_upgrade_status: String?
+      attr_accessor status: String?
+      attr_accessor rejection_reason: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class NotifyCountryInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?iso_country_code: String,
+        ?country_name: String,
+        ?supported_channels: Array[String],
+        ?supported_use_cases: Array[String],
+        ?supported_tiers: Array[String],
+        ?customer_owned_identity_required: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor iso_country_code: String?
+      attr_accessor country_name: String?
+      attr_accessor supported_channels: Array[String]?
+      attr_accessor supported_use_cases: Array[String]?
+      attr_accessor supported_tiers: Array[String]?
+      attr_accessor customer_owned_identity_required: bool?
+    end
+
+    class NotifyTemplateFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class NotifyTemplateInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?template_id: String,
+        ?version: Integer,
+        ?template_type: String,
+        ?channels: Array[String],
+        ?tier_access: Array[String],
+        ?status: String,
+        ?supported_countries: Array[String],
+        ?language_code: String,
+        ?content: String,
+        ?variables: Hash[String, Types::TemplateVariableMetadata],
+        ?supported_voice_ids: Array[String],
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor template_id: String?
+      attr_accessor version: Integer?
+      attr_accessor template_type: String?
+      attr_accessor channels: Array[String]?
+      attr_accessor tier_access: Array[String]?
+      attr_accessor status: String?
+      attr_accessor supported_countries: Array[String]?
+      attr_accessor language_code: String?
+      attr_accessor content: String?
+      attr_accessor variables: Hash[String, Types::TemplateVariableMetadata]?
+      attr_accessor supported_voice_ids: Array[String]?
+      attr_accessor created_timestamp: Time?
+    end
+
+    class NumberPreferenceItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?preference_type: Array[String],
+        ?filter: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor preference_type: Array[String]?
+      attr_accessor filter: Array[String]?
+    end
+
     class OptOutListInformation
       include Smithy::Schema::Structure
 
@@ -2154,6 +2894,8 @@ module Aws::PinpointSMSVoiceV2
         ?deletion_protection_enabled: bool,
         ?pool_id: String,
         ?registration_id: String,
+        ?messaging_limits: Types::MessagingLimits,
+        ?pricing_tier: String,
         ?created_timestamp: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -2176,6 +2918,8 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor deletion_protection_enabled: bool?
       attr_accessor pool_id: String?
       attr_accessor registration_id: String?
+      attr_accessor messaging_limits: Types::MessagingLimits?
+      attr_accessor pricing_tier: String?
       attr_accessor created_timestamp: Time?
     end
 
@@ -2519,6 +3263,372 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor created_timestamp: Time?
     end
 
+    class RcsAgentFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor values: Array[String]?
+    end
+
+    class RcsAgentInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agent_arn: String,
+        ?rcs_agent_id: String,
+        ?status: String,
+        ?created_timestamp: Time,
+        ?deletion_protection_enabled: bool,
+        ?opt_out_list_name: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?two_way_enabled: bool,
+        ?pool_id: String,
+        ?two_way_media_s3_bucket_name: String,
+        ?two_way_media_s3_key_prefix: String,
+        ?two_way_media_s3_role: String,
+        ?two_way_rcs_events_enabled: Array[String],
+        ?testing_agent: Types::TestingAgentInformation,
+        ?messaging_limits: Types::MessagingLimits,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agent_arn: String?
+      attr_accessor rcs_agent_id: String?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor pool_id: String?
+      attr_accessor two_way_media_s3_bucket_name: String?
+      attr_accessor two_way_media_s3_key_prefix: String?
+      attr_accessor two_way_media_s3_role: String?
+      attr_accessor two_way_rcs_events_enabled: Array[String]?
+      attr_accessor testing_agent: Types::TestingAgentInformation?
+      attr_accessor messaging_limits: Types::MessagingLimits?
+    end
+
+    class RcsCardContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?description: String,
+        ?media: Types::RcsCardMedia,
+        ?suggestions: Array[Types::RcsSuggestedAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor media: Types::RcsCardMedia?
+      attr_accessor suggestions: Array[Types::RcsSuggestedAction]?
+    end
+
+    class RcsCardMedia
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_url: String,
+        ?thumbnail_url: String,
+        ?height: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_url: String?
+      attr_accessor thumbnail_url: String?
+      attr_accessor height: String?
+    end
+
+    class RcsCarousel
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_width: String,
+        ?card_contents: Array[Types::RcsCarouselCardContent],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_width: String?
+      attr_accessor card_contents: Array[Types::RcsCarouselCardContent]?
+    end
+
+    class RcsCarouselCardContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?title: String,
+        ?description: String,
+        ?media: Types::RcsCarouselCardMedia,
+        ?suggestions: Array[Types::RcsSuggestedAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor title: String?
+      attr_accessor description: String?
+      attr_accessor media: Types::RcsCarouselCardMedia?
+      attr_accessor suggestions: Array[Types::RcsSuggestedAction]?
+    end
+
+    class RcsCarouselCardMedia
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_url: String,
+        ?thumbnail_url: String,
+        ?height: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_url: String?
+      attr_accessor thumbnail_url: String?
+      attr_accessor height: String?
+    end
+
+    class RcsContent
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text_message: Types::RcsTextMessage,
+        ?file_message: Types::RcsFileMessage,
+        ?rich_card: Types::RcsStandaloneCard,
+        ?carousel: Types::RcsCarousel,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_message: Types::RcsTextMessage?
+      attr_accessor file_message: Types::RcsFileMessage?
+      attr_accessor rich_card: Types::RcsStandaloneCard?
+      attr_accessor carousel: Types::RcsCarousel?
+
+      class TextMessage < RcsContent
+      end
+      class FileMessage < RcsContent
+      end
+      class RichCard < RcsContent
+      end
+      class Carousel < RcsContent
+      end
+      class Unknown < RcsContent
+      end
+    end
+
+    class RcsCreateCalendarEventAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?postback_data: String,
+        ?title: String,
+        ?start_time: Time,
+        ?end_time: Time,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor postback_data: String?
+      attr_accessor title: String?
+      attr_accessor start_time: Time?
+      attr_accessor end_time: Time?
+      attr_accessor description: String?
+    end
+
+    class RcsDialPhoneAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?postback_data: String,
+        ?phone_number: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor postback_data: String?
+      attr_accessor phone_number: String?
+    end
+
+    class RcsFallbackConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel: String,
+        ?message_body: String,
+        ?media_urls: Array[String],
+        ?origination_identity: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel: String?
+      attr_accessor message_body: String?
+      attr_accessor media_urls: Array[String]?
+      attr_accessor origination_identity: String?
+    end
+
+    class RcsFileMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?file_url: String,
+        ?thumbnail_url: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor file_url: String?
+      attr_accessor thumbnail_url: String?
+    end
+
+    class RcsMessageContent
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content: Types::RcsContent,
+        ?suggestions: Array[Types::RcsSuggestedAction],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content: Types::RcsContent?
+      attr_accessor suggestions: Array[Types::RcsSuggestedAction]?
+    end
+
+    class RcsOpenUrlAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?postback_data: String,
+        ?url: String,
+        ?application: String,
+        ?webview_view_mode: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor postback_data: String?
+      attr_accessor url: String?
+      attr_accessor application: String?
+      attr_accessor webview_view_mode: String?
+    end
+
+    class RcsReplyAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?postback_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor postback_data: String?
+    end
+
+    class RcsRequestLocationAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?postback_data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor postback_data: String?
+    end
+
+    class RcsShowLocationAction
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+        ?postback_data: String,
+        ?latitude: Float,
+        ?longitude: Float,
+        ?label: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor postback_data: String?
+      attr_accessor latitude: Float?
+      attr_accessor longitude: Float?
+      attr_accessor label: String?
+    end
+
+    class RcsStandaloneCard
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?card_orientation: String,
+        ?thumbnail_image_alignment: String,
+        ?card_content: Types::RcsCardContent,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor card_orientation: String?
+      attr_accessor thumbnail_image_alignment: String?
+      attr_accessor card_content: Types::RcsCardContent?
+    end
+
+    class RcsSuggestedAction
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?reply: Types::RcsReplyAction,
+        ?open_url: Types::RcsOpenUrlAction,
+        ?dial_phone: Types::RcsDialPhoneAction,
+        ?show_location: Types::RcsShowLocationAction,
+        ?request_location: Types::RcsRequestLocationAction,
+        ?create_calendar_event: Types::RcsCreateCalendarEventAction,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor reply: Types::RcsReplyAction?
+      attr_accessor open_url: Types::RcsOpenUrlAction?
+      attr_accessor dial_phone: Types::RcsDialPhoneAction?
+      attr_accessor show_location: Types::RcsShowLocationAction?
+      attr_accessor request_location: Types::RcsRequestLocationAction?
+      attr_accessor create_calendar_event: Types::RcsCreateCalendarEventAction?
+
+      class Reply < RcsSuggestedAction
+      end
+      class OpenUrl < RcsSuggestedAction
+      end
+      class DialPhone < RcsSuggestedAction
+      end
+      class ShowLocation < RcsSuggestedAction
+      end
+      class RequestLocation < RcsSuggestedAction
+      end
+      class CreateCalendarEvent < RcsSuggestedAction
+      end
+      class Unknown < RcsSuggestedAction
+      end
+    end
+
+    class RcsTextMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor body: String?
+    end
+
     class RegistrationAssociationFilter
       include Smithy::Schema::Structure
 
@@ -2573,6 +3683,7 @@ module Aws::PinpointSMSVoiceV2
         ?attachment_status: String,
         ?attachment_upload_error_reason: String,
         ?created_timestamp: Time,
+        ?attachment_url: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2581,6 +3692,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor attachment_status: String?
       attr_accessor attachment_upload_error_reason: String?
       attr_accessor created_timestamp: Time?
+      attr_accessor attachment_url: String?
     end
 
     class RegistrationDeniedReasonInformation
@@ -2613,6 +3725,7 @@ module Aws::PinpointSMSVoiceV2
         ?select_validation: Types::SelectValidation,
         ?text_validation: Types::TextValidation,
         ?display_hints: Types::RegistrationFieldDisplayHints,
+        ?conditional_behavior: Types::ConditionalBehavior,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2623,6 +3736,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor select_validation: Types::SelectValidation?
       attr_accessor text_validation: Types::TextValidation?
       attr_accessor display_hints: Types::RegistrationFieldDisplayHints?
+      attr_accessor conditional_behavior: Types::ConditionalBehavior?
     end
 
     class RegistrationFieldDisplayHints
@@ -2659,6 +3773,7 @@ module Aws::PinpointSMSVoiceV2
         ?text_value: String,
         ?registration_attachment_id: String,
         ?denied_reason: String,
+        ?feedback: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2667,6 +3782,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor text_value: String?
       attr_accessor registration_attachment_id: String?
       attr_accessor denied_reason: String?
+      attr_accessor feedback: String?
     end
 
     class RegistrationFilter
@@ -2809,6 +3925,7 @@ module Aws::PinpointSMSVoiceV2
         ?registration_version_status: String,
         ?registration_version_status_history: Types::RegistrationVersionStatusHistory,
         ?denied_reasons: Array[Types::RegistrationDeniedReasonInformation],
+        ?feedback: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2816,6 +3933,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor registration_version_status: String?
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory?
       attr_accessor denied_reasons: Array[Types::RegistrationDeniedReasonInformation]?
+      attr_accessor feedback: String?
     end
 
     class RegistrationVersionStatusHistory
@@ -2824,6 +3942,7 @@ module Aws::PinpointSMSVoiceV2
       def initialize: (
         ?draft_timestamp: Time,
         ?submitted_timestamp: Time,
+        ?aws_reviewing_timestamp: Time,
         ?reviewing_timestamp: Time,
         ?requires_authentication_timestamp: Time,
         ?approved_timestamp: Time,
@@ -2836,6 +3955,7 @@ module Aws::PinpointSMSVoiceV2
 
       attr_accessor draft_timestamp: Time?
       attr_accessor submitted_timestamp: Time?
+      attr_accessor aws_reviewing_timestamp: Time?
       attr_accessor reviewing_timestamp: Time?
       attr_accessor requires_authentication_timestamp: Time?
       attr_accessor approved_timestamp: Time?
@@ -2944,6 +4064,7 @@ module Aws::PinpointSMSVoiceV2
         ?opt_out_list_name: String,
         ?pool_id: String,
         ?registration_id: String,
+        ?number_preference: Array[Types::NumberPreferenceItem],
         ?international_sending_enabled: bool,
         ?deletion_protection_enabled: bool,
         ?tags: Array[Types::Tag],
@@ -2958,6 +4079,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor opt_out_list_name: String?
       attr_accessor pool_id: String?
       attr_accessor registration_id: String?
+      attr_accessor number_preference: Array[Types::NumberPreferenceItem]?
       attr_accessor international_sending_enabled: bool?
       attr_accessor deletion_protection_enabled: bool?
       attr_accessor tags: Array[Types::Tag]?
@@ -3180,6 +4302,136 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor message_id: String?
     end
 
+    class SendNotifyTextMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configuration_id: String,
+        ?destination_phone_number: String,
+        ?template_id: String,
+        ?template_variables: Hash[String, String],
+        ?time_to_live: Integer,
+        ?context: Hash[String, String],
+        ?configuration_set_name: String,
+        ?dry_run: bool,
+        ?message_feedback_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configuration_id: String?
+      attr_accessor destination_phone_number: String?
+      attr_accessor template_id: String?
+      attr_accessor template_variables: Hash[String, String]?
+      attr_accessor time_to_live: Integer?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor configuration_set_name: String?
+      attr_accessor dry_run: bool?
+      attr_accessor message_feedback_enabled: bool?
+    end
+
+    class SendNotifyTextMessageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?template_id: String,
+        ?resolved_message_body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor template_id: String?
+      attr_accessor resolved_message_body: String?
+    end
+
+    class SendNotifyVoiceMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configuration_id: String,
+        ?destination_phone_number: String,
+        ?template_id: String,
+        ?template_variables: Hash[String, String],
+        ?voice_id: String,
+        ?time_to_live: Integer,
+        ?context: Hash[String, String],
+        ?configuration_set_name: String,
+        ?dry_run: bool,
+        ?message_feedback_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configuration_id: String?
+      attr_accessor destination_phone_number: String?
+      attr_accessor template_id: String?
+      attr_accessor template_variables: Hash[String, String]?
+      attr_accessor voice_id: String?
+      attr_accessor time_to_live: Integer?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor configuration_set_name: String?
+      attr_accessor dry_run: bool?
+      attr_accessor message_feedback_enabled: bool?
+    end
+
+    class SendNotifyVoiceMessageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+        ?template_id: String,
+        ?resolved_message_body: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+      attr_accessor template_id: String?
+      attr_accessor resolved_message_body: String?
+    end
+
+    class SendRcsMessageRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_phone_number: String,
+        ?origination_identity: String,
+        ?rcs_message_content: Types::RcsMessageContent,
+        ?time_to_live: Integer,
+        ?message_traffic_type: String,
+        ?fallback_configuration: Types::RcsFallbackConfiguration,
+        ?protect_configuration_id: String,
+        ?configuration_set_name: String,
+        ?max_price: String,
+        ?dry_run: bool,
+        ?context: Hash[String, String],
+        ?message_feedback_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_phone_number: String?
+      attr_accessor origination_identity: String?
+      attr_accessor rcs_message_content: Types::RcsMessageContent?
+      attr_accessor time_to_live: Integer?
+      attr_accessor message_traffic_type: String?
+      attr_accessor fallback_configuration: Types::RcsFallbackConfiguration?
+      attr_accessor protect_configuration_id: String?
+      attr_accessor configuration_set_name: String?
+      attr_accessor max_price: String?
+      attr_accessor dry_run: bool?
+      attr_accessor context: Hash[String, String]?
+      attr_accessor message_feedback_enabled: bool?
+    end
+
+    class SendRcsMessageResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message_id: String?
+    end
+
     class SendTextMessageRequest
       include Smithy::Schema::Structure
 
@@ -3308,6 +4560,8 @@ module Aws::PinpointSMSVoiceV2
         ?deletion_protection_enabled: bool,
         ?registered: bool,
         ?registration_id: String,
+        ?messaging_limits: Types::MessagingLimits,
+        ?pricing_tier: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3319,6 +4573,8 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor deletion_protection_enabled: bool?
       attr_accessor registered: bool?
       attr_accessor registration_id: String?
+      attr_accessor messaging_limits: Types::MessagingLimits?
+      attr_accessor pricing_tier: String?
     end
 
     class ServiceQuotaExceededException
@@ -3464,6 +4720,50 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor monthly_limit: Integer?
     end
 
+    class SetNotifyMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class SetNotifyMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class SetRcsMessageSpendLimitOverrideRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
+    class SetRcsMessageSpendLimitOverrideResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?monthly_limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor monthly_limit: Integer?
+    end
+
     class SetTextMessageSpendLimitOverrideRequest
       include Smithy::Schema::Structure
 
@@ -3541,10 +4841,12 @@ module Aws::PinpointSMSVoiceV2
 
       def initialize: (
         ?registration_id: String,
+        ?aws_review: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor registration_id: String?
+      attr_accessor aws_review: bool?
     end
 
     class SubmitRegistrationVersionResult
@@ -3556,6 +4858,7 @@ module Aws::PinpointSMSVoiceV2
         ?version_number: Integer,
         ?registration_version_status: String,
         ?registration_version_status_history: Types::RegistrationVersionStatusHistory,
+        ?aws_review: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3564,6 +4867,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor version_number: Integer?
       attr_accessor registration_version_status: String?
       attr_accessor registration_version_status_history: Types::RegistrationVersionStatusHistory?
+      attr_accessor aws_review: bool?
     end
 
     class SupportedAssociation
@@ -3616,6 +4920,50 @@ module Aws::PinpointSMSVoiceV2
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+    end
+
+    class TemplateVariableMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?required: bool,
+        ?description: String,
+        ?max_length: Integer,
+        ?min_value: Integer,
+        ?max_value: Integer,
+        ?default_value: String,
+        ?pattern: String,
+        ?sample: String,
+        ?source: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor required: bool?
+      attr_accessor description: String?
+      attr_accessor max_length: Integer?
+      attr_accessor min_value: Integer?
+      attr_accessor max_value: Integer?
+      attr_accessor default_value: String?
+      attr_accessor pattern: String?
+      attr_accessor sample: String?
+      attr_accessor source: String?
+    end
+
+    class TestingAgentInformation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?testing_agent_id: String,
+        ?registration_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor testing_agent_id: String?
+      attr_accessor registration_id: String?
     end
 
     class TextValidation
@@ -3702,6 +5050,64 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor configuration_set_arn: String?
       attr_accessor configuration_set_name: String?
       attr_accessor event_destination: Types::EventDestination?
+    end
+
+    class UpdateNotifyConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configuration_id: String,
+        ?default_template_id: String,
+        ?pool_id: String,
+        ?enabled_countries: Array[String],
+        ?enabled_channels: Array[String],
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configuration_id: String?
+      attr_accessor default_template_id: String?
+      attr_accessor pool_id: String?
+      attr_accessor enabled_countries: Array[String]?
+      attr_accessor enabled_channels: Array[String]?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
+    class UpdateNotifyConfigurationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?notify_configuration_arn: String,
+        ?notify_configuration_id: String,
+        ?display_name: String,
+        ?use_case: String,
+        ?default_template_id: String,
+        ?pool_id: String,
+        ?enabled_countries: Array[String],
+        ?enabled_channels: Array[String],
+        ?tier: String,
+        ?tier_upgrade_status: String,
+        ?status: String,
+        ?rejection_reason: String,
+        ?deletion_protection_enabled: bool,
+        ?created_timestamp: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor notify_configuration_arn: String?
+      attr_accessor notify_configuration_id: String?
+      attr_accessor display_name: String?
+      attr_accessor use_case: String?
+      attr_accessor default_template_id: String?
+      attr_accessor pool_id: String?
+      attr_accessor enabled_countries: Array[String]?
+      attr_accessor enabled_channels: Array[String]?
+      attr_accessor tier: String?
+      attr_accessor tier_upgrade_status: String?
+      attr_accessor status: String?
+      attr_accessor rejection_reason: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor created_timestamp: Time?
     end
 
     class UpdatePhoneNumberRequest
@@ -3896,6 +5302,74 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor deletion_protection_enabled: bool?
     end
 
+    class UpdateRcsAgentRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agent_id: String,
+        ?deletion_protection_enabled: bool,
+        ?opt_out_list_name: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?two_way_enabled: bool,
+        ?two_way_media_s3_bucket_name: String,
+        ?two_way_media_s3_key_prefix: String,
+        ?two_way_media_s3_role: String,
+        ?two_way_rcs_events_enabled: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agent_id: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_media_s3_bucket_name: String?
+      attr_accessor two_way_media_s3_key_prefix: String?
+      attr_accessor two_way_media_s3_role: String?
+      attr_accessor two_way_rcs_events_enabled: Array[String]?
+    end
+
+    class UpdateRcsAgentResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rcs_agent_arn: String,
+        ?rcs_agent_id: String,
+        ?status: String,
+        ?created_timestamp: Time,
+        ?deletion_protection_enabled: bool,
+        ?opt_out_list_name: String,
+        ?self_managed_opt_outs_enabled: bool,
+        ?two_way_channel_arn: String,
+        ?two_way_channel_role: String,
+        ?two_way_enabled: bool,
+        ?two_way_media_s3_bucket_name: String,
+        ?two_way_media_s3_key_prefix: String,
+        ?two_way_media_s3_role: String,
+        ?two_way_rcs_events_enabled: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rcs_agent_arn: String?
+      attr_accessor rcs_agent_id: String?
+      attr_accessor status: String?
+      attr_accessor created_timestamp: Time?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor opt_out_list_name: String?
+      attr_accessor self_managed_opt_outs_enabled: bool?
+      attr_accessor two_way_channel_arn: String?
+      attr_accessor two_way_channel_role: String?
+      attr_accessor two_way_enabled: bool?
+      attr_accessor two_way_media_s3_bucket_name: String?
+      attr_accessor two_way_media_s3_key_prefix: String?
+      attr_accessor two_way_media_s3_role: String?
+      attr_accessor two_way_rcs_events_enabled: Array[String]?
+    end
+
     class UpdateSenderIdRequest
       include Smithy::Schema::Structure
 
@@ -3985,6 +5459,7 @@ module Aws::PinpointSMSVoiceV2
         ?verified_destination_number_id: String,
         ?destination_phone_number: String,
         ?status: String,
+        ?rcs_agent_id: String,
         ?created_timestamp: Time,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3993,6 +5468,7 @@ module Aws::PinpointSMSVoiceV2
       attr_accessor verified_destination_number_id: String?
       attr_accessor destination_phone_number: String?
       attr_accessor status: String?
+      attr_accessor rcs_agent_id: String?
       attr_accessor created_timestamp: Time?
     end
 

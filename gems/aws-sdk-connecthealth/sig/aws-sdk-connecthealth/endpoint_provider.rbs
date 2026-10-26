@@ -1,0 +1,5 @@
+module Aws::ConnectHealth
+  class EndpointProvider
+    def resolve: (EndpointParameters) -> Smithy::Client::EndpointRules::Endpoint
+  end
+end

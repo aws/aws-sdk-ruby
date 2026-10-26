@@ -12,6 +12,30 @@ module Aws::TimestreamInfluxDB
       attr_accessor message: String?
     end
 
+    module AutomatedDbBackupType
+      HOURLY: String
+      DAILY: String
+      WEEKLY: String
+      MONTHLY: String
+      CUSTOM_SCHEDULE: String
+      CONTINUOUS: String
+    end
+
+    class ClusterConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ingest_query_instances: Integer,
+        ?query_only_instances: Integer,
+        ?dedicated_compactor: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ingest_query_instances: Integer?
+      attr_accessor query_only_instances: Integer?
+      attr_accessor dedicated_compactor: bool?
+    end
+
     module ClusterDeploymentType
       MULTI_NODE_READ_REPLICAS: String
     end
@@ -24,6 +48,12 @@ module Aws::TimestreamInfluxDB
       FAILED: String
       DELETED: String
       MAINTENANCE: String
+      UPDATING_INSTANCE_TYPE: String
+      REBOOTING: String
+      REBOOT_FAILED: String
+      PARTIALLY_AVAILABLE: String
+      RESTORING: String
+      RESTORE_FAILED: String
     end
 
     class ConflictException
@@ -39,6 +69,82 @@ module Aws::TimestreamInfluxDB
       attr_accessor message: String?
       attr_accessor resource_id: String?
       attr_accessor resource_type: String?
+    end
+
+    class CreateDbBackupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?db_resource_id: String,
+        ?retention_days: Integer,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor db_resource_id: String?
+      attr_accessor retention_days: Integer?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateDbBackupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?expires_after: String,
+        ?db_resource_id: String,
+        ?type: String,
+        ?engine_type: String,
+        ?deployment_type: String,
+        ?kms_key_id: String,
+        ?cluster_configuration: Types::ClusterConfiguration,
+        ?db_parameter_group_id: String,
+        ?db_instance_type: String,
+        ?log_delivery_configuration: Types::LogDeliveryConfiguration,
+        ?failover_mode: String,
+        ?db_storage_type: String,
+        ?allocated_storage: Integer,
+        ?vpc_subnet_ids: Array[String],
+        ?vpc_security_group_ids: Array[String],
+        ?publicly_accessible: bool,
+        ?port: Integer,
+        ?network_type: String,
+        ?influx_auth_parameters_secret_arn: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_after: String?
+      attr_accessor db_resource_id: String?
+      attr_accessor type: String?
+      attr_accessor engine_type: String?
+      attr_accessor deployment_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor cluster_configuration: Types::ClusterConfiguration?
+      attr_accessor db_parameter_group_id: String?
+      attr_accessor db_instance_type: String?
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration?
+      attr_accessor failover_mode: String?
+      attr_accessor db_storage_type: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor vpc_subnet_ids: Array[String]?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor port: Integer?
+      attr_accessor network_type: String?
+      attr_accessor influx_auth_parameters_secret_arn: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
     end
 
     class CreateDbClusterInput
@@ -62,6 +168,9 @@ module Aws::TimestreamInfluxDB
         ?deployment_type: String,
         ?failover_mode: String,
         ?log_delivery_configuration: Types::LogDeliveryConfiguration,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?db_backup_configurations: Array[Types::DbBackupConfiguration],
+        ?kms_key_id: String,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -83,6 +192,9 @@ module Aws::TimestreamInfluxDB
       attr_accessor deployment_type: String?
       attr_accessor failover_mode: String?
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfiguration]?
+      attr_accessor kms_key_id: String?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -117,9 +229,12 @@ module Aws::TimestreamInfluxDB
         ?db_parameter_group_identifier: String,
         ?deployment_type: String,
         ?log_delivery_configuration: Types::LogDeliveryConfiguration,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
         ?tags: Hash[String, String],
         ?port: Integer,
         ?network_type: String,
+        ?db_backup_configurations: Array[Types::DbBackupConfiguration],
+        ?kms_key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -137,9 +252,12 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_parameter_group_identifier: String?
       attr_accessor deployment_type: String?
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
       attr_accessor tags: Hash[String, String]?
       attr_accessor port: Integer?
       attr_accessor network_type: String?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfiguration]?
+      attr_accessor kms_key_id: String?
     end
 
     class CreateDbInstanceOutput
@@ -167,6 +285,12 @@ module Aws::TimestreamInfluxDB
         ?influx_auth_parameters_secret_arn: String,
         ?db_cluster_id: String,
         ?instance_mode: String,
+        ?instance_modes: Array[String],
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?last_maintenance_time: Time,
+        ?next_maintenance_time: Time,
+        ?db_backup_configurations: Array[Types::DbBackupConfigurationOutput],
+        ?kms_key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -191,6 +315,12 @@ module Aws::TimestreamInfluxDB
       attr_accessor influx_auth_parameters_secret_arn: String?
       attr_accessor db_cluster_id: String?
       attr_accessor instance_mode: String?
+      attr_accessor instance_modes: Array[String]?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor last_maintenance_time: Time?
+      attr_accessor next_maintenance_time: Time?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfigurationOutput]?
+      attr_accessor kms_key_id: String?
     end
 
     class CreateDbParameterGroupInput
@@ -229,6 +359,96 @@ module Aws::TimestreamInfluxDB
       attr_accessor parameters: Types::Parameters?
     end
 
+    module DataFusionRuntimeType
+      MULTI_THREAD: String
+      MULTI_THREAD_ALT: String
+    end
+
+    class DbBackupConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?retention_days: Integer,
+        ?enabled: bool,
+        ?custom_schedule: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor retention_days: Integer?
+      attr_accessor enabled: bool?
+      attr_accessor custom_schedule: String?
+    end
+
+    class DbBackupConfigurationOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?retention_days: Integer,
+        ?enabled: bool,
+        ?custom_schedule: String,
+        ?next_automated_backup_time: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor retention_days: Integer?
+      attr_accessor enabled: bool?
+      attr_accessor custom_schedule: String?
+      attr_accessor next_automated_backup_time: Time?
+    end
+
+    module DbBackupStatus
+      IN_PROGRESS: String
+      COMPLETED: String
+      FAILED: String
+      DELETING: String
+      DELETED: String
+    end
+
+    class DbBackupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?expires_after: String,
+        ?db_resource_id: String,
+        ?type: String,
+        ?engine_type: String,
+        ?deployment_type: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_after: String?
+      attr_accessor db_resource_id: String?
+      attr_accessor type: String?
+      attr_accessor engine_type: String?
+      attr_accessor deployment_type: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    module DbBackupType
+      HOURLY: String
+      DAILY: String
+      WEEKLY: String
+      MONTHLY: String
+      CUSTOM_SCHEDULE: String
+      ON_DEMAND: String
+      CONTINUOUS: String
+    end
+
     class DbClusterSummary
       include Smithy::Schema::Structure
 
@@ -245,6 +465,7 @@ module Aws::TimestreamInfluxDB
         ?network_type: String,
         ?db_storage_type: String,
         ?allocated_storage: Integer,
+        ?engine_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -260,6 +481,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor network_type: String?
       attr_accessor db_storage_type: String?
       attr_accessor allocated_storage: Integer?
+      attr_accessor engine_type: String?
     end
 
     class DbInstanceForClusterSummary
@@ -278,6 +500,7 @@ module Aws::TimestreamInfluxDB
         ?allocated_storage: Integer,
         ?deployment_type: String,
         ?instance_mode: String,
+        ?instance_modes: Array[String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -293,6 +516,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor allocated_storage: Integer?
       attr_accessor deployment_type: String?
       attr_accessor instance_mode: String?
+      attr_accessor instance_modes: Array[String]?
     end
 
     class DbInstanceSummary
@@ -361,15 +585,87 @@ module Aws::TimestreamInfluxDB
       INFLUX_IO_INCLUDED_T3: String
     end
 
+    class DeleteDbBackupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteDbBackupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?expires_after: String,
+        ?db_resource_id: String,
+        ?type: String,
+        ?engine_type: String,
+        ?deployment_type: String,
+        ?kms_key_id: String,
+        ?cluster_configuration: Types::ClusterConfiguration,
+        ?db_parameter_group_id: String,
+        ?db_instance_type: String,
+        ?log_delivery_configuration: Types::LogDeliveryConfiguration,
+        ?failover_mode: String,
+        ?db_storage_type: String,
+        ?allocated_storage: Integer,
+        ?vpc_subnet_ids: Array[String],
+        ?vpc_security_group_ids: Array[String],
+        ?publicly_accessible: bool,
+        ?port: Integer,
+        ?network_type: String,
+        ?influx_auth_parameters_secret_arn: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_after: String?
+      attr_accessor db_resource_id: String?
+      attr_accessor type: String?
+      attr_accessor engine_type: String?
+      attr_accessor deployment_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor cluster_configuration: Types::ClusterConfiguration?
+      attr_accessor db_parameter_group_id: String?
+      attr_accessor db_instance_type: String?
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration?
+      attr_accessor failover_mode: String?
+      attr_accessor db_storage_type: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor vpc_subnet_ids: Array[String]?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor port: Integer?
+      attr_accessor network_type: String?
+      attr_accessor influx_auth_parameters_secret_arn: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+    end
+
     class DeleteDbClusterInput
       include Smithy::Schema::Structure
 
       def initialize: (
         ?db_cluster_id: String,
+        ?retain_automated_backups: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor db_cluster_id: String?
+      attr_accessor retain_automated_backups: bool?
     end
 
     class DeleteDbClusterOutput
@@ -388,10 +684,12 @@ module Aws::TimestreamInfluxDB
 
       def initialize: (
         ?identifier: String,
+        ?retain_automated_backups: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor identifier: String?
+      attr_accessor retain_automated_backups: bool?
     end
 
     class DeleteDbInstanceOutput
@@ -419,6 +717,12 @@ module Aws::TimestreamInfluxDB
         ?influx_auth_parameters_secret_arn: String,
         ?db_cluster_id: String,
         ?instance_mode: String,
+        ?instance_modes: Array[String],
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?last_maintenance_time: Time,
+        ?next_maintenance_time: Time,
+        ?db_backup_configurations: Array[Types::DbBackupConfigurationOutput],
+        ?kms_key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -443,6 +747,12 @@ module Aws::TimestreamInfluxDB
       attr_accessor influx_auth_parameters_secret_arn: String?
       attr_accessor db_cluster_id: String?
       attr_accessor instance_mode: String?
+      attr_accessor instance_modes: Array[String]?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor last_maintenance_time: Time?
+      attr_accessor next_maintenance_time: Time?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfigurationOutput]?
+      attr_accessor kms_key_id: String?
     end
 
     module DeploymentType
@@ -468,11 +778,88 @@ module Aws::TimestreamInfluxDB
       MINUTES: String
       SECONDS: String
       MILLISECONDS: String
+      DAYS: String
+    end
+
+    module EngineType
+      INFLUXDB_V2: String
+      INFLUXDB_V3_CORE: String
+      INFLUXDB_V3_ENTERPRISE: String
     end
 
     module FailoverMode
       AUTOMATIC: String
       NO_FAILOVER: String
+    end
+
+    class GetDbBackupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetDbBackupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?created_at: Time,
+        ?expires_after: String,
+        ?db_resource_id: String,
+        ?type: String,
+        ?engine_type: String,
+        ?deployment_type: String,
+        ?kms_key_id: String,
+        ?cluster_configuration: Types::ClusterConfiguration,
+        ?db_parameter_group_id: String,
+        ?db_instance_type: String,
+        ?log_delivery_configuration: Types::LogDeliveryConfiguration,
+        ?failover_mode: String,
+        ?db_storage_type: String,
+        ?allocated_storage: Integer,
+        ?vpc_subnet_ids: Array[String],
+        ?vpc_security_group_ids: Array[String],
+        ?publicly_accessible: bool,
+        ?port: Integer,
+        ?network_type: String,
+        ?influx_auth_parameters_secret_arn: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor created_at: Time?
+      attr_accessor expires_after: String?
+      attr_accessor db_resource_id: String?
+      attr_accessor type: String?
+      attr_accessor engine_type: String?
+      attr_accessor deployment_type: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor cluster_configuration: Types::ClusterConfiguration?
+      attr_accessor db_parameter_group_id: String?
+      attr_accessor db_instance_type: String?
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration?
+      attr_accessor failover_mode: String?
+      attr_accessor db_storage_type: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor vpc_subnet_ids: Array[String]?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor port: Integer?
+      attr_accessor network_type: String?
+      attr_accessor influx_auth_parameters_secret_arn: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
     end
 
     class GetDbClusterInput
@@ -502,13 +889,21 @@ module Aws::TimestreamInfluxDB
         ?network_type: String,
         ?db_storage_type: String,
         ?allocated_storage: Integer,
+        ?engine_type: String,
         ?publicly_accessible: bool,
         ?db_parameter_group_identifier: String,
+        ?effective_db_parameter_group_identifier: String,
         ?log_delivery_configuration: Types::LogDeliveryConfiguration,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?last_maintenance_time: Time,
+        ?next_maintenance_time: Time,
         ?influx_auth_parameters_secret_arn: String,
         ?vpc_subnet_ids: Array[String],
         ?vpc_security_group_ids: Array[String],
         ?failover_mode: String,
+        ?cluster_configuration: Types::ClusterConfiguration,
+        ?db_backup_configurations: Array[Types::DbBackupConfigurationOutput],
+        ?kms_key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -524,13 +919,21 @@ module Aws::TimestreamInfluxDB
       attr_accessor network_type: String?
       attr_accessor db_storage_type: String?
       attr_accessor allocated_storage: Integer?
+      attr_accessor engine_type: String?
       attr_accessor publicly_accessible: bool?
       attr_accessor db_parameter_group_identifier: String?
+      attr_accessor effective_db_parameter_group_identifier: String?
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor last_maintenance_time: Time?
+      attr_accessor next_maintenance_time: Time?
       attr_accessor influx_auth_parameters_secret_arn: String?
       attr_accessor vpc_subnet_ids: Array[String]?
       attr_accessor vpc_security_group_ids: Array[String]?
       attr_accessor failover_mode: String?
+      attr_accessor cluster_configuration: Types::ClusterConfiguration?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfigurationOutput]?
+      attr_accessor kms_key_id: String?
     end
 
     class GetDbInstanceInput
@@ -569,6 +972,12 @@ module Aws::TimestreamInfluxDB
         ?influx_auth_parameters_secret_arn: String,
         ?db_cluster_id: String,
         ?instance_mode: String,
+        ?instance_modes: Array[String],
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?last_maintenance_time: Time,
+        ?next_maintenance_time: Time,
+        ?db_backup_configurations: Array[Types::DbBackupConfigurationOutput],
+        ?kms_key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -593,6 +1002,12 @@ module Aws::TimestreamInfluxDB
       attr_accessor influx_auth_parameters_secret_arn: String?
       attr_accessor db_cluster_id: String?
       attr_accessor instance_mode: String?
+      attr_accessor instance_modes: Array[String]?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor last_maintenance_time: Time?
+      attr_accessor next_maintenance_time: Time?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfigurationOutput]?
+      attr_accessor kms_key_id: String?
     end
 
     class GetDbParameterGroupInput
@@ -702,10 +1117,222 @@ module Aws::TimestreamInfluxDB
       attr_accessor ui_disabled: bool?
     end
 
+    class InfluxDBv3CoreParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_file_limit: Integer,
+        ?query_log_size: Integer,
+        ?log_filter: String,
+        ?log_format: String,
+        ?data_fusion_num_threads: Integer,
+        ?data_fusion_runtime_type: String,
+        ?data_fusion_runtime_disable_lifo_slot: bool,
+        ?data_fusion_runtime_event_interval: Integer,
+        ?data_fusion_runtime_global_queue_interval: Integer,
+        ?data_fusion_runtime_max_blocking_threads: Integer,
+        ?data_fusion_runtime_max_io_events_per_tick: Integer,
+        ?data_fusion_runtime_thread_keep_alive: Types::Duration,
+        ?data_fusion_runtime_thread_priority: Integer,
+        ?data_fusion_max_parquet_fanout: Integer,
+        ?data_fusion_use_cached_parquet_loader: bool,
+        ?data_fusion_config: String,
+        ?max_http_request_size: Integer,
+        ?force_snapshot_mem_threshold: Types::PercentOrAbsoluteLong,
+        ?wal_snapshot_size: Integer,
+        ?wal_max_write_buffer_size: Integer,
+        ?snapshotted_wal_files_to_keep: Integer,
+        ?preemptive_cache_age: Types::Duration,
+        ?parquet_mem_cache_prune_percentage: Float,
+        ?parquet_mem_cache_prune_interval: Types::Duration,
+        ?disable_parquet_mem_cache: bool,
+        ?parquet_mem_cache_query_path_duration: Types::Duration,
+        ?last_cache_eviction_interval: Types::Duration,
+        ?distinct_cache_eviction_interval: Types::Duration,
+        ?gen1_duration: Types::Duration,
+        ?exec_mem_pool_bytes: Types::PercentOrAbsoluteLong,
+        ?parquet_mem_cache_size: Types::PercentOrAbsoluteLong,
+        ?wal_replay_fail_on_error: bool,
+        ?wal_replay_concurrency_limit: Integer,
+        ?table_index_cache_max_entries: Integer,
+        ?table_index_cache_concurrency_limit: Integer,
+        ?gen1_lookback_duration: Types::Duration,
+        ?retention_check_interval: Types::Duration,
+        ?delete_grace_period: Types::Duration,
+        ?hard_delete_default_duration: Types::Duration,
+        ?plugin_repository_url: String,
+        ?plugin_repository_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_file_limit: Integer?
+      attr_accessor query_log_size: Integer?
+      attr_accessor log_filter: String?
+      attr_accessor log_format: String?
+      attr_accessor data_fusion_num_threads: Integer?
+      attr_accessor data_fusion_runtime_type: String?
+      attr_accessor data_fusion_runtime_disable_lifo_slot: bool?
+      attr_accessor data_fusion_runtime_event_interval: Integer?
+      attr_accessor data_fusion_runtime_global_queue_interval: Integer?
+      attr_accessor data_fusion_runtime_max_blocking_threads: Integer?
+      attr_accessor data_fusion_runtime_max_io_events_per_tick: Integer?
+      attr_accessor data_fusion_runtime_thread_keep_alive: Types::Duration?
+      attr_accessor data_fusion_runtime_thread_priority: Integer?
+      attr_accessor data_fusion_max_parquet_fanout: Integer?
+      attr_accessor data_fusion_use_cached_parquet_loader: bool?
+      attr_accessor data_fusion_config: String?
+      attr_accessor max_http_request_size: Integer?
+      attr_accessor force_snapshot_mem_threshold: Types::PercentOrAbsoluteLong?
+      attr_accessor wal_snapshot_size: Integer?
+      attr_accessor wal_max_write_buffer_size: Integer?
+      attr_accessor snapshotted_wal_files_to_keep: Integer?
+      attr_accessor preemptive_cache_age: Types::Duration?
+      attr_accessor parquet_mem_cache_prune_percentage: Float?
+      attr_accessor parquet_mem_cache_prune_interval: Types::Duration?
+      attr_accessor disable_parquet_mem_cache: bool?
+      attr_accessor parquet_mem_cache_query_path_duration: Types::Duration?
+      attr_accessor last_cache_eviction_interval: Types::Duration?
+      attr_accessor distinct_cache_eviction_interval: Types::Duration?
+      attr_accessor gen1_duration: Types::Duration?
+      attr_accessor exec_mem_pool_bytes: Types::PercentOrAbsoluteLong?
+      attr_accessor parquet_mem_cache_size: Types::PercentOrAbsoluteLong?
+      attr_accessor wal_replay_fail_on_error: bool?
+      attr_accessor wal_replay_concurrency_limit: Integer?
+      attr_accessor table_index_cache_max_entries: Integer?
+      attr_accessor table_index_cache_concurrency_limit: Integer?
+      attr_accessor gen1_lookback_duration: Types::Duration?
+      attr_accessor retention_check_interval: Types::Duration?
+      attr_accessor delete_grace_period: Types::Duration?
+      attr_accessor hard_delete_default_duration: Types::Duration?
+      attr_accessor plugin_repository_url: String?
+      attr_accessor plugin_repository_secret_arn: String?
+    end
+
+    class InfluxDBv3EnterpriseParameters
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_file_limit: Integer,
+        ?query_log_size: Integer,
+        ?log_filter: String,
+        ?log_format: String,
+        ?data_fusion_num_threads: Integer,
+        ?data_fusion_runtime_type: String,
+        ?data_fusion_runtime_disable_lifo_slot: bool,
+        ?data_fusion_runtime_event_interval: Integer,
+        ?data_fusion_runtime_global_queue_interval: Integer,
+        ?data_fusion_runtime_max_blocking_threads: Integer,
+        ?data_fusion_runtime_max_io_events_per_tick: Integer,
+        ?data_fusion_runtime_thread_keep_alive: Types::Duration,
+        ?data_fusion_runtime_thread_priority: Integer,
+        ?data_fusion_max_parquet_fanout: Integer,
+        ?data_fusion_use_cached_parquet_loader: bool,
+        ?data_fusion_config: String,
+        ?max_http_request_size: Integer,
+        ?force_snapshot_mem_threshold: Types::PercentOrAbsoluteLong,
+        ?wal_snapshot_size: Integer,
+        ?wal_max_write_buffer_size: Integer,
+        ?snapshotted_wal_files_to_keep: Integer,
+        ?preemptive_cache_age: Types::Duration,
+        ?parquet_mem_cache_prune_percentage: Float,
+        ?parquet_mem_cache_prune_interval: Types::Duration,
+        ?disable_parquet_mem_cache: bool,
+        ?parquet_mem_cache_query_path_duration: Types::Duration,
+        ?last_cache_eviction_interval: Types::Duration,
+        ?distinct_cache_eviction_interval: Types::Duration,
+        ?gen1_duration: Types::Duration,
+        ?exec_mem_pool_bytes: Types::PercentOrAbsoluteLong,
+        ?parquet_mem_cache_size: Types::PercentOrAbsoluteLong,
+        ?wal_replay_fail_on_error: bool,
+        ?wal_replay_concurrency_limit: Integer,
+        ?table_index_cache_max_entries: Integer,
+        ?table_index_cache_concurrency_limit: Integer,
+        ?gen1_lookback_duration: Types::Duration,
+        ?retention_check_interval: Types::Duration,
+        ?delete_grace_period: Types::Duration,
+        ?hard_delete_default_duration: Types::Duration,
+        ?plugin_repository_url: String,
+        ?plugin_repository_secret_arn: String,
+        ?ingest_query_instances: Integer,
+        ?query_only_instances: Integer,
+        ?dedicated_compactor: bool,
+        ?compaction_row_limit: Integer,
+        ?compaction_max_num_files_per_plan: Integer,
+        ?compaction_gen2_duration: Types::Duration,
+        ?compaction_multipliers: String,
+        ?compaction_cleanup_wait: Types::Duration,
+        ?compaction_check_interval: Types::Duration,
+        ?last_value_cache_disable_from_history: bool,
+        ?distinct_value_cache_disable_from_history: bool,
+        ?replication_interval: Types::Duration,
+        ?catalog_sync_interval: Types::Duration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_file_limit: Integer?
+      attr_accessor query_log_size: Integer?
+      attr_accessor log_filter: String?
+      attr_accessor log_format: String?
+      attr_accessor data_fusion_num_threads: Integer?
+      attr_accessor data_fusion_runtime_type: String?
+      attr_accessor data_fusion_runtime_disable_lifo_slot: bool?
+      attr_accessor data_fusion_runtime_event_interval: Integer?
+      attr_accessor data_fusion_runtime_global_queue_interval: Integer?
+      attr_accessor data_fusion_runtime_max_blocking_threads: Integer?
+      attr_accessor data_fusion_runtime_max_io_events_per_tick: Integer?
+      attr_accessor data_fusion_runtime_thread_keep_alive: Types::Duration?
+      attr_accessor data_fusion_runtime_thread_priority: Integer?
+      attr_accessor data_fusion_max_parquet_fanout: Integer?
+      attr_accessor data_fusion_use_cached_parquet_loader: bool?
+      attr_accessor data_fusion_config: String?
+      attr_accessor max_http_request_size: Integer?
+      attr_accessor force_snapshot_mem_threshold: Types::PercentOrAbsoluteLong?
+      attr_accessor wal_snapshot_size: Integer?
+      attr_accessor wal_max_write_buffer_size: Integer?
+      attr_accessor snapshotted_wal_files_to_keep: Integer?
+      attr_accessor preemptive_cache_age: Types::Duration?
+      attr_accessor parquet_mem_cache_prune_percentage: Float?
+      attr_accessor parquet_mem_cache_prune_interval: Types::Duration?
+      attr_accessor disable_parquet_mem_cache: bool?
+      attr_accessor parquet_mem_cache_query_path_duration: Types::Duration?
+      attr_accessor last_cache_eviction_interval: Types::Duration?
+      attr_accessor distinct_cache_eviction_interval: Types::Duration?
+      attr_accessor gen1_duration: Types::Duration?
+      attr_accessor exec_mem_pool_bytes: Types::PercentOrAbsoluteLong?
+      attr_accessor parquet_mem_cache_size: Types::PercentOrAbsoluteLong?
+      attr_accessor wal_replay_fail_on_error: bool?
+      attr_accessor wal_replay_concurrency_limit: Integer?
+      attr_accessor table_index_cache_max_entries: Integer?
+      attr_accessor table_index_cache_concurrency_limit: Integer?
+      attr_accessor gen1_lookback_duration: Types::Duration?
+      attr_accessor retention_check_interval: Types::Duration?
+      attr_accessor delete_grace_period: Types::Duration?
+      attr_accessor hard_delete_default_duration: Types::Duration?
+      attr_accessor plugin_repository_url: String?
+      attr_accessor plugin_repository_secret_arn: String?
+      attr_accessor ingest_query_instances: Integer?
+      attr_accessor query_only_instances: Integer?
+      attr_accessor dedicated_compactor: bool?
+      attr_accessor compaction_row_limit: Integer?
+      attr_accessor compaction_max_num_files_per_plan: Integer?
+      attr_accessor compaction_gen2_duration: Types::Duration?
+      attr_accessor compaction_multipliers: String?
+      attr_accessor compaction_cleanup_wait: Types::Duration?
+      attr_accessor compaction_check_interval: Types::Duration?
+      attr_accessor last_value_cache_disable_from_history: bool?
+      attr_accessor distinct_value_cache_disable_from_history: bool?
+      attr_accessor replication_interval: Types::Duration?
+      attr_accessor catalog_sync_interval: Types::Duration?
+    end
+
     module InstanceMode
       PRIMARY: String
       STANDBY: String
       REPLICA: String
+      INGEST: String
+      QUERY: String
+      COMPACT: String
+      PROCESS: String
     end
 
     class InternalServerException
@@ -717,6 +1344,34 @@ module Aws::TimestreamInfluxDB
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ListDbBackupsInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_resource_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_resource_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListDbBackupsOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?items: Array[Types::DbBackupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor items: Array[Types::DbBackupSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListDbClustersInput
@@ -858,10 +1513,27 @@ module Aws::TimestreamInfluxDB
       attr_accessor s3_configuration: Types::S3Configuration?
     end
 
+    module LogFormats
+      FULL: String
+    end
+
     module LogLevel
       DEBUG: String
       INFO: String
       ERROR: String
+    end
+
+    class MaintenanceSchedule
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timezone: String,
+        ?preferred_maintenance_window: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timezone: String?
+      attr_accessor preferred_maintenance_window: String?
     end
 
     module NetworkType
@@ -874,15 +1546,147 @@ module Aws::TimestreamInfluxDB
 
       def initialize: (
         ?influx_d_bv2: Types::InfluxDBv2Parameters,
+        ?influx_d_bv3_core: Types::InfluxDBv3CoreParameters,
+        ?influx_d_bv3_enterprise: Types::InfluxDBv3EnterpriseParameters,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor influx_d_bv2: Types::InfluxDBv2Parameters?
+      attr_accessor influx_d_bv3_core: Types::InfluxDBv3CoreParameters?
+      attr_accessor influx_d_bv3_enterprise: Types::InfluxDBv3EnterpriseParameters?
 
       class InfluxDBv2 < Parameters
       end
+      class InfluxDBv3Core < Parameters
+      end
+      class InfluxDBv3Enterprise < Parameters
+      end
       class Unknown < Parameters
       end
+    end
+
+    class PercentOrAbsoluteLong
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?percent: String,
+        ?absolute: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor percent: String?
+      attr_accessor absolute: Integer?
+
+      class Percent < PercentOrAbsoluteLong
+      end
+      class Absolute < PercentOrAbsoluteLong
+      end
+      class Unknown < PercentOrAbsoluteLong
+      end
+    end
+
+    class RebootDbClusterInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_id: String,
+        ?instance_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_id: String?
+      attr_accessor instance_ids: Array[String]?
+    end
+
+    class RebootDbClusterOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?db_cluster_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor db_cluster_status: String?
+    end
+
+    class RebootDbInstanceInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class RebootDbInstanceOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?name: String,
+        ?arn: String,
+        ?status: String,
+        ?endpoint: String,
+        ?port: Integer,
+        ?network_type: String,
+        ?db_instance_type: String,
+        ?db_storage_type: String,
+        ?allocated_storage: Integer,
+        ?deployment_type: String,
+        ?vpc_subnet_ids: Array[String],
+        ?publicly_accessible: bool,
+        ?vpc_security_group_ids: Array[String],
+        ?db_parameter_group_identifier: String,
+        ?availability_zone: String,
+        ?secondary_availability_zone: String,
+        ?log_delivery_configuration: Types::LogDeliveryConfiguration,
+        ?influx_auth_parameters_secret_arn: String,
+        ?db_cluster_id: String,
+        ?instance_mode: String,
+        ?instance_modes: Array[String],
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?last_maintenance_time: Time,
+        ?next_maintenance_time: Time,
+        ?db_backup_configurations: Array[Types::DbBackupConfigurationOutput],
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor name: String?
+      attr_accessor arn: String?
+      attr_accessor status: String?
+      attr_accessor endpoint: String?
+      attr_accessor port: Integer?
+      attr_accessor network_type: String?
+      attr_accessor db_instance_type: String?
+      attr_accessor db_storage_type: String?
+      attr_accessor allocated_storage: Integer?
+      attr_accessor deployment_type: String?
+      attr_accessor vpc_subnet_ids: Array[String]?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor db_parameter_group_identifier: String?
+      attr_accessor availability_zone: String?
+      attr_accessor secondary_availability_zone: String?
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration?
+      attr_accessor influx_auth_parameters_secret_arn: String?
+      attr_accessor db_cluster_id: String?
+      attr_accessor instance_mode: String?
+      attr_accessor instance_modes: Array[String]?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor last_maintenance_time: Time?
+      attr_accessor next_maintenance_time: Time?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfigurationOutput]?
+      attr_accessor kms_key_id: String?
+    end
+
+    module ResourceDeploymentType
+      SINGLE_AZ: String
+      WITH_MULTIAZ_STANDBY: String
+      MULTI_NODE_READ_REPLICAS: String
     end
 
     class ResourceNotFoundException
@@ -898,6 +1702,78 @@ module Aws::TimestreamInfluxDB
       attr_accessor message: String?
       attr_accessor resource_id: String?
       attr_accessor resource_type: String?
+    end
+
+    module ResourceType
+      DB_INSTANCE: String
+      DB_CLUSTER: String
+    end
+
+    class RestoreFromDbBackupInput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?db_backup_id: String,
+        ?restore_to_time: Time,
+        ?restore_mode: String,
+        ?vpc_subnet_ids: Array[String],
+        ?vpc_security_group_ids: Array[String],
+        ?publicly_accessible: bool,
+        ?log_delivery_configuration: Types::LogDeliveryConfiguration,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?tags: Hash[String, String],
+        ?port: Integer,
+        ?network_type: String,
+        ?deployment_type: String,
+        ?db_backup_configurations: Array[Types::DbBackupConfiguration],
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor db_backup_id: String?
+      attr_accessor restore_to_time: Time?
+      attr_accessor restore_mode: String?
+      attr_accessor vpc_subnet_ids: Array[String]?
+      attr_accessor vpc_security_group_ids: Array[String]?
+      attr_accessor publicly_accessible: bool?
+      attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor port: Integer?
+      attr_accessor network_type: String?
+      attr_accessor deployment_type: String?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfiguration]?
+      attr_accessor kms_key_id: String?
+    end
+
+    class RestoreFromDbBackupOutput
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?restored_db_resource_id: String,
+        ?restore_status: String,
+        ?resource_type: String,
+        ?engine_type: String,
+        ?deployment_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor restored_db_resource_id: String?
+      attr_accessor restore_status: String?
+      attr_accessor resource_type: String?
+      attr_accessor engine_type: String?
+      attr_accessor deployment_type: String?
+    end
+
+    module RestoreMode
+      NEW_RESOURCE: String
+      REPLACE_EXISTING: String
+    end
+
+    module RestoreStatus
+      RESTORING: String
     end
 
     class S3Configuration
@@ -935,6 +1811,10 @@ module Aws::TimestreamInfluxDB
       UPDATING_DEPLOYMENT_TYPE: String
       UPDATING_INSTANCE_TYPE: String
       MAINTENANCE: String
+      REBOOTING: String
+      REBOOT_FAILED: String
+      RESTORING: String
+      RESTORE_FAILED: String
     end
 
     class TagResourceRequest
@@ -966,6 +1846,7 @@ module Aws::TimestreamInfluxDB
     module TracingType
       LOG: String
       JAEGER: String
+      DISABLED: String
     end
 
     class UntagResourceRequest
@@ -991,6 +1872,8 @@ module Aws::TimestreamInfluxDB
         ?port: Integer,
         ?db_instance_type: String,
         ?failover_mode: String,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?db_backup_configurations: Array[Types::DbBackupConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1000,6 +1883,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor port: Integer?
       attr_accessor db_instance_type: String?
       attr_accessor failover_mode: String?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfiguration]?
     end
 
     class UpdateDbClusterOutput
@@ -1025,6 +1910,8 @@ module Aws::TimestreamInfluxDB
         ?deployment_type: String,
         ?db_storage_type: String,
         ?allocated_storage: Integer,
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?db_backup_configurations: Array[Types::DbBackupConfiguration],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1036,6 +1923,8 @@ module Aws::TimestreamInfluxDB
       attr_accessor deployment_type: String?
       attr_accessor db_storage_type: String?
       attr_accessor allocated_storage: Integer?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfiguration]?
     end
 
     class UpdateDbInstanceOutput
@@ -1063,6 +1952,12 @@ module Aws::TimestreamInfluxDB
         ?influx_auth_parameters_secret_arn: String,
         ?db_cluster_id: String,
         ?instance_mode: String,
+        ?instance_modes: Array[String],
+        ?maintenance_schedule: Types::MaintenanceSchedule,
+        ?last_maintenance_time: Time,
+        ?next_maintenance_time: Time,
+        ?db_backup_configurations: Array[Types::DbBackupConfigurationOutput],
+        ?kms_key_id: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1087,6 +1982,12 @@ module Aws::TimestreamInfluxDB
       attr_accessor influx_auth_parameters_secret_arn: String?
       attr_accessor db_cluster_id: String?
       attr_accessor instance_mode: String?
+      attr_accessor instance_modes: Array[String]?
+      attr_accessor maintenance_schedule: Types::MaintenanceSchedule?
+      attr_accessor last_maintenance_time: Time?
+      attr_accessor next_maintenance_time: Time?
+      attr_accessor db_backup_configurations: Array[Types::DbBackupConfigurationOutput]?
+      attr_accessor kms_key_id: String?
     end
 
     class ValidationException

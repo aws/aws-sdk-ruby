@@ -119,6 +119,9 @@ module Aws::Keyspaces
     UpdateTableOutput: StructureShape
     ValidationException: StructureShape
     ViewType: StringShape
+    WarmThroughputSpecification: StructureShape
+    WarmThroughputSpecificationSummary: StructureShape
+    WarmThroughputStatus: StringShape
     KmsKeyARN: StringShape
     Region: StringShape
     Rs: StringShape

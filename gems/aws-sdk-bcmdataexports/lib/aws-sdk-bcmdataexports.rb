@@ -11,14 +11,7 @@ Object.const_set('Aws', Module.new) unless Object.const_defined?('Aws')
 Aws.const_set('BCMDataExports', Module.new) unless Aws.const_defined?('BCMDataExports')
 
 # @title AWS Billing and Cost Management Data Exports
-# <p>You can use the Data Exports API to create customized exports from multiple Amazon Web Services cost management and billing datasets, such as cost and usage data and cost
-#       optimization recommendations.</p>
-#          <p>The Data Exports API provides the following endpoint:</p>
-#          <ul>
-#             <li>
-#                <p>https://bcm-data-exports.us-east-1.api.aws</p>
-#             </li>
-#          </ul>
+# <p>You can use the Data Exports API to create customized exports from multiple Amazon Web Services cost management and billing datasets, such as cost and usage data and cost optimization recommendations.</p> <p>The Data Exports API provides the following endpoint:</p> <ul> <li> <p>https://bcm-data-exports.us-east-1.api.aws</p> </li> </ul>
 module Aws::BCMDataExports
   VERSION = '2.0.0.pre0'
 end

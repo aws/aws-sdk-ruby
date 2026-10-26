@@ -32,6 +32,15 @@ module Aws::MediaConnect
     class NotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class RouterInputServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RouterNetworkInterfaceServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
+    class RouterOutputServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class ServiceUnavailableException < Smithy::Client::ServiceError
       def message: () -> String?
       def retryable?: () -> true

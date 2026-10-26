@@ -785,6 +785,11 @@ module Aws::ElastiCache
       attr_accessor preferred_outpost_arns: Array[String]?
     end
 
+    module ConnectionType
+      VPC: String
+      PUBLIC: String
+    end
+
     class CopyServerlessCacheSnapshotRequest
       include Smithy::Schema::Structure
 
@@ -1012,12 +1017,14 @@ module Aws::ElastiCache
         ?global_replication_group_id_suffix: String,
         ?global_replication_group_description: String,
         ?primary_replication_group_id: String,
+        ?tags: Array[Types::Tag],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor global_replication_group_id_suffix: String?
       attr_accessor global_replication_group_description: String?
       attr_accessor primary_replication_group_id: String?
+      attr_accessor tags: Array[Types::Tag]?
     end
 
     class CreateGlobalReplicationGroupResult
@@ -1074,6 +1081,7 @@ module Aws::ElastiCache
         ?transit_encryption_mode: String,
         ?cluster_mode: String,
         ?serverless_cache_snapshot_name: String,
+        ?durability: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1116,6 +1124,7 @@ module Aws::ElastiCache
       attr_accessor transit_encryption_mode: String?
       attr_accessor cluster_mode: String?
       attr_accessor serverless_cache_snapshot_name: String?
+      attr_accessor durability: String?
     end
 
     class CreateReplicationGroupResult
@@ -1146,6 +1155,8 @@ module Aws::ElastiCache
         ?subnet_ids: Array[String],
         ?snapshot_retention_limit: Integer,
         ?daily_snapshot_time: String,
+        ?network_type: String,
+        ?connection_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1162,6 +1173,8 @@ module Aws::ElastiCache
       attr_accessor subnet_ids: Array[String]?
       attr_accessor snapshot_retention_limit: Integer?
       attr_accessor daily_snapshot_time: String?
+      attr_accessor network_type: String?
+      attr_accessor connection_type: String?
     end
 
     class CreateServerlessCacheResponse
@@ -2215,6 +2228,13 @@ module Aws::ElastiCache
       attr_accessor message: String?
     end
 
+    module Durability
+      DEFAULT: String
+      ASYNC: String
+      SYNC: String
+      DISABLED: String
+    end
+
     class EC2SecurityGroup
       include Smithy::Schema::Structure
 
@@ -2241,6 +2261,12 @@ module Aws::ElastiCache
 
       attr_accessor maximum: Integer?
       attr_accessor minimum: Integer?
+    end
+
+    module EffectiveDurability
+      ASYNC: String
+      SYNC: String
+      DISABLED: String
     end
 
     class Endpoint
@@ -3023,6 +3049,7 @@ module Aws::ElastiCache
         ?transit_encryption_enabled: bool,
         ?transit_encryption_mode: String,
         ?cluster_mode: String,
+        ?durability: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3056,6 +3083,7 @@ module Aws::ElastiCache
       attr_accessor transit_encryption_enabled: bool?
       attr_accessor transit_encryption_mode: String?
       attr_accessor cluster_mode: String?
+      attr_accessor durability: String?
     end
 
     class ModifyReplicationGroupResult
@@ -3720,6 +3748,7 @@ module Aws::ElastiCache
         ?at_rest_encryption_enabled: bool,
         ?member_clusters_outpost_arns: Array[String],
         ?kms_key_id: String,
+        ?storage_encryption_type: String,
         ?arn: String,
         ?user_group_ids: Array[String],
         ?log_delivery_configurations: Array[Types::LogDeliveryConfiguration],
@@ -3731,6 +3760,8 @@ module Aws::ElastiCache
         ?transit_encryption_mode: String,
         ?cluster_mode: String,
         ?engine: String,
+        ?durability: String,
+        ?effective_durability: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3755,6 +3786,7 @@ module Aws::ElastiCache
       attr_accessor at_rest_encryption_enabled: bool?
       attr_accessor member_clusters_outpost_arns: Array[String]?
       attr_accessor kms_key_id: String?
+      attr_accessor storage_encryption_type: String?
       attr_accessor arn: String?
       attr_accessor user_group_ids: Array[String]?
       attr_accessor log_delivery_configurations: Array[Types::LogDeliveryConfiguration]?
@@ -3766,6 +3798,8 @@ module Aws::ElastiCache
       attr_accessor transit_encryption_mode: String?
       attr_accessor cluster_mode: String?
       attr_accessor engine: String?
+      attr_accessor durability: String?
+      attr_accessor effective_durability: String?
     end
 
     class ReplicationGroupAlreadyExistsFault
@@ -4097,6 +4131,7 @@ module Aws::ElastiCache
         ?full_engine_version: String,
         ?cache_usage_limits: Types::CacheUsageLimits,
         ?kms_key_id: String,
+        ?storage_encryption_type: String,
         ?security_group_ids: Array[String],
         ?endpoint: Types::Endpoint,
         ?reader_endpoint: Types::Endpoint,
@@ -4105,6 +4140,8 @@ module Aws::ElastiCache
         ?subnet_ids: Array[String],
         ?snapshot_retention_limit: Integer,
         ?daily_snapshot_time: String,
+        ?network_type: String,
+        ?connection_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4117,6 +4154,7 @@ module Aws::ElastiCache
       attr_accessor full_engine_version: String?
       attr_accessor cache_usage_limits: Types::CacheUsageLimits?
       attr_accessor kms_key_id: String?
+      attr_accessor storage_encryption_type: String?
       attr_accessor security_group_ids: Array[String]?
       attr_accessor endpoint: Types::Endpoint?
       attr_accessor reader_endpoint: Types::Endpoint?
@@ -4125,6 +4163,8 @@ module Aws::ElastiCache
       attr_accessor subnet_ids: Array[String]?
       attr_accessor snapshot_retention_limit: Integer?
       attr_accessor daily_snapshot_time: String?
+      attr_accessor network_type: String?
+      attr_accessor connection_type: String?
     end
 
     class ServerlessCacheAlreadyExistsFault
@@ -4369,6 +4409,7 @@ module Aws::ElastiCache
         ?kms_key_id: String,
         ?arn: String,
         ?data_tiering: String,
+        ?durability: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -4400,6 +4441,7 @@ module Aws::ElastiCache
       attr_accessor kms_key_id: String?
       attr_accessor arn: String?
       attr_accessor data_tiering: String?
+      attr_accessor durability: String?
     end
 
     class SnapshotAlreadyExistsFault
@@ -4480,6 +4522,12 @@ module Aws::ElastiCache
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor replication_group: Types::ReplicationGroup?
+    end
+
+    module StorageEncryptionType
+      NONE: String
+      SSE_ELASTICACHE: String
+      SSE_KMS: String
     end
 
     class Subnet

@@ -6,6 +6,10 @@ module Aws::ACM
     class ConflictException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def retryable?: () -> true
+    end
     class InvalidArgsException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -36,11 +40,15 @@ module Aws::ACM
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class TagPolicyException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ThrottlingException < Smithy::Client::ServiceError
       def message: () -> String?
+      def throttling_reasons: () -> Array[Types::ThrottlingReason]?
     end
     class TooManyTagsException < Smithy::Client::ServiceError
       def message: () -> String?

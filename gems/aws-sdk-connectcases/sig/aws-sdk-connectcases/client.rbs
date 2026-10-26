@@ -48,6 +48,7 @@ module Aws::ConnectCases
       include Smithy::Client::_Response[Types::BatchGetCaseRuleResponse]
       def case_rules: () -> Array[Types::GetCaseRuleResponse]?
       def errors: () -> Array[Types::CaseRuleError]?
+      def unprocessed_case_rules: () -> Array[String]?
     end
     def batch_get_case_rule: (
       ?domain_id: String,
@@ -113,7 +114,8 @@ module Aws::ConnectCases
       ?performed_by: {
         user_arn: String,
         custom_entity: String
-      }
+      },
+      ?tags: Hash[String, String]
     ) -> _CreateCaseResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCaseResponse
 
     interface _CreateCaseRuleResponse
@@ -143,9 +145,27 @@ module Aws::ConnectCases
                 },
                 result: untyped
               },
-              not_equal_to: untyped
+              not_equal_to: untyped,
+              and_all: {
+                conditions: untyped
+              },
+              or_all: untyped
             }
           ]
+        },
+        field_options: {
+          parent_field_id: untyped,
+          child_field_id: untyped,
+          parent_child_field_options_mappings: Array[
+            {
+              parent_field_option_value: String,
+              child_field_option_values: Array[String]
+            }
+          ]
+        },
+        hidden: {
+          default_value: untyped,
+          conditions: untyped
         }
       }
     ) -> _CreateCaseRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateCaseRuleResponse
@@ -169,7 +189,12 @@ module Aws::ConnectCases
       ?domain_id: String,
       ?name: String,
       ?type: String,
-      ?description: String
+      ?description: String,
+      ?attributes: {
+        text: {
+          is_multiline: bool
+        }
+      }
     ) -> _CreateFieldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateFieldResponse
 
     interface _CreateLayoutResponse
@@ -285,6 +310,12 @@ module Aws::ConnectCases
         {
           case_rule_id: String,
           field_id: String
+        }
+      ],
+      ?tag_propagation_configurations: Array[
+        {
+          resource_type: String,
+          tag_map: Hash[String, String]
         }
       ]
     ) -> _CreateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateResponse
@@ -426,6 +457,7 @@ module Aws::ConnectCases
       def created_time: () -> Time?
       def last_modified_time: () -> Time?
       def rules: () -> Array[Types::TemplateRule]?
+      def tag_propagation_configurations: () -> Array[Types::TagPropagationConfiguration]?
     end
     def get_template: (
       ?domain_id: String,
@@ -615,6 +647,7 @@ module Aws::ConnectCases
       include Smithy::Client::_Response[Types::SearchCasesOutput]
       def next_token: () -> String?
       def cases: () -> Array[Types::SearchCasesResponseItem?]?
+      def total_count: () -> Integer?
     end
     def search_cases: (
       ?domain_id: String,
@@ -641,10 +674,17 @@ module Aws::ConnectCases
           less_than_or_equal_to: untyped
         },
         not: untyped,
+        tag: {
+          equal_to: {
+            key: String,
+            value: String
+          }
+        },
         and_all: Array[
           {
             field: untyped,
             not: untyped,
+            tag: untyped,
             and_all: untyped,
             or_all: untyped
           }
@@ -795,9 +835,27 @@ module Aws::ConnectCases
                 },
                 result: untyped
               },
-              not_equal_to: untyped
+              not_equal_to: untyped,
+              and_all: {
+                conditions: untyped
+              },
+              or_all: untyped
             }
           ]
+        },
+        field_options: {
+          parent_field_id: untyped,
+          child_field_id: untyped,
+          parent_child_field_options_mappings: Array[
+            {
+              parent_field_option_value: String,
+              child_field_option_values: Array[String]
+            }
+          ]
+        },
+        hidden: {
+          default_value: untyped,
+          conditions: untyped
         }
       }
     ) -> _UpdateCaseRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateCaseRuleResponse
@@ -809,7 +867,12 @@ module Aws::ConnectCases
       ?domain_id: String,
       ?field_id: String,
       ?name: String,
-      ?description: String
+      ?description: String,
+      ?attributes: {
+        text: {
+          is_multiline: bool
+        }
+      }
     ) -> _UpdateFieldResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateFieldResponse
 
     interface _UpdateLayoutResponse
@@ -840,6 +903,48 @@ module Aws::ConnectCases
       }
     ) -> _UpdateLayoutResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLayoutResponse
 
+    interface _UpdateRelatedItemResponse
+      include Smithy::Client::_Response[Types::UpdateRelatedItemResponse]
+      def related_item_id: () -> String?
+      def related_item_arn: () -> String?
+      def type: () -> String?
+      def content: () -> Types::RelatedItemContent?
+      def association_time: () -> Time?
+      def tags: () -> Hash[String, String?]?
+      def last_updated_user: () -> Types::UserUnion?
+      def created_by: () -> Types::UserUnion?
+    end
+    def update_related_item: (
+      ?domain_id: String,
+      ?case_id: String,
+      ?related_item_id: String,
+      ?content: {
+        comment: {
+          body: String,
+          content_type: String
+        },
+        custom: {
+          fields: Array[
+            {
+              id: String,
+              value: {
+                string_value: String,
+                double_value: Float,
+                boolean_value: bool,
+                empty_value: {
+                },
+                user_arn_value: untyped
+              }
+            }
+          ]
+        }
+      },
+      ?performed_by: {
+        user_arn: String,
+        custom_entity: String
+      }
+    ) -> _UpdateRelatedItemResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRelatedItemResponse
+
     interface _UpdateTemplateResponse
       include Smithy::Client::_Response[Types::UpdateTemplateOutput]
     end
@@ -861,6 +966,12 @@ module Aws::ConnectCases
         {
           case_rule_id: String,
           field_id: String
+        }
+      ],
+      ?tag_propagation_configurations: Array[
+        {
+          resource_type: String,
+          tag_map: Hash[String, String]
         }
       ]
     ) -> _UpdateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTemplateResponse

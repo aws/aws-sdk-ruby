@@ -33,8 +33,14 @@ module Aws::OpenSearch
     class ResourceNotFoundException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class SlotNotAvailableException < Smithy::Client::ServiceError
       def slot_suggestions: () -> Array[Integer]?
+      def message: () -> String?
+    end
+    class ThrottlingException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class ValidationException < Smithy::Client::ServiceError

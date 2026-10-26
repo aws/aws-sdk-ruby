@@ -1,5 +1,11 @@
 module Aws::S3
   module Errors
+    class AccessDenied < Smithy::Client::ServiceError
+    end
+    class AnnotationLimitExceeded < Smithy::Client::ServiceError
+    end
+    class AnnotationNameTooLong < Smithy::Client::ServiceError
+    end
     class BucketAlreadyExists < Smithy::Client::ServiceError
     end
     class BucketAlreadyOwnedByYou < Smithy::Client::ServiceError
@@ -8,13 +14,19 @@ module Aws::S3
     end
     class IdempotencyParameterMismatch < Smithy::Client::ServiceError
     end
+    class InvalidAnnotationName < Smithy::Client::ServiceError
+    end
     class InvalidObjectState < Smithy::Client::ServiceError
       def storage_class: () -> String?
       def access_tier: () -> String?
     end
+    class InvalidPrefix < Smithy::Client::ServiceError
+    end
     class InvalidRequest < Smithy::Client::ServiceError
     end
     class InvalidWriteOffset < Smithy::Client::ServiceError
+    end
+    class NoSuchAnnotation < Smithy::Client::ServiceError
     end
     class NoSuchBucket < Smithy::Client::ServiceError
     end
@@ -29,6 +41,8 @@ module Aws::S3
     class ObjectNotInActiveTierError < Smithy::Client::ServiceError
     end
     class TooManyParts < Smithy::Client::ServiceError
+    end
+    class UnsupportedMediaType < Smithy::Client::ServiceError
     end
   end
 end

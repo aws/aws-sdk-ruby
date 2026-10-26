@@ -46,8 +46,11 @@ module Aws::AutoScaling
     AutoScalingInstances: ListShape
     AutoScalingNotificationTypes: ListShape
     AvailabilityZoneDistribution: StructureShape
+    AvailabilityZoneIds: ListShape
+    AvailabilityZoneIdsLimit1: ListShape
     AvailabilityZoneImpairmentPolicy: StructureShape
     AvailabilityZones: ListShape
+    AvailabilityZonesLimit1: ListShape
     BakeTime: IntegerShape
     BareMetal: EnumShape
     BaselineEbsBandwidthMbpsRequest: StructureShape
@@ -79,6 +82,7 @@ module Aws::AutoScaling
     CheckpointDelay: IntegerShape
     CheckpointPercentages: ListShape
     ClassicLinkVPCSecurityGroups: ListShape
+    ClientToken: StringShape
     CompleteLifecycleActionInput: StructureShape
     CompleteLifecycleActionOutput: StructureShape
     Context: StringShape
@@ -101,6 +105,7 @@ module Aws::AutoScaling
     DeleteTagsInput: StructureShape
     DeleteWarmPoolInput: StructureShape
     DeleteWarmPoolOutput: StructureShape
+    DeletionProtection: EnumShape
     DescribeAccountLimitsOutput: StructureShape
     DescribeAdjustmentTypesOutput: StructureShape
     DescribeAutoScalingGroupsInput: StructureShape
@@ -147,6 +152,8 @@ module Aws::AutoScaling
     DetachTrafficSourcesOutput: StructureShape
     DisableMetricsCollectionInput: StructureShape
     DisableScaleIn: BooleanShape
+    DistributionSegment: StructureShape
+    DistributionSegments: ListShape
     Ebs: StructureShape
     EbsOptimized: BooleanShape
     EnableMetricsCollectionInput: StructureShape
@@ -171,13 +178,19 @@ module Aws::AutoScaling
     HealthCheckGracePeriod: IntegerShape
     HeartbeatTimeout: IntegerShape
     HonorCooldown: BooleanShape
+    IdempotentCallInProgressFault: StructureShape
+    IdempotentParameterMismatchError: StructureShape
+    ImageId: StringShape
     ImpairedZoneHealthCheckBehavior: EnumShape
     IncludeDeletedGroups: BooleanShape
     IncludeInstances: BooleanShape
     Instance: StructureShape
+    InstanceCollection: StructureShape
+    InstanceCollections: ListShape
     InstanceGeneration: EnumShape
     InstanceGenerations: ListShape
     InstanceIds: ListShape
+    InstanceLifecyclePolicy: StructureShape
     InstanceMaintenancePolicy: StructureShape
     InstanceMetadataEndpointState: EnumShape
     InstanceMetadataHttpPutResponseHopLimit: IntegerShape
@@ -207,6 +220,10 @@ module Aws::AutoScaling
     LaunchConfiguration: StructureShape
     LaunchConfigurationNames: ListShape
     LaunchConfigurations: ListShape
+    LaunchInstancesError: StructureShape
+    LaunchInstancesErrors: ListShape
+    LaunchInstancesRequest: StructureShape
+    LaunchInstancesResult: StructureShape
     LaunchTemplate: StructureShape
     LaunchTemplateName: StringShape
     LaunchTemplateOverrides: StructureShape
@@ -231,6 +248,7 @@ module Aws::AutoScaling
     LocalStorage: EnumShape
     LocalStorageType: EnumShape
     LocalStorageTypes: ListShape
+    ManagerIdentifier: StringShape
     MaxGroupPreparedCapacity: IntegerShape
     MaxInstanceLifetime: IntegerShape
     MaxNumberOfAutoScalingGroups: IntegerShape
@@ -277,6 +295,7 @@ module Aws::AutoScaling
     NumberOfLaunchConfigurations: IntegerShape
     OnDemandBaseCapacity: IntegerShape
     OnDemandPercentageAboveBaseCapacity: IntegerShape
+    Operator: StructureShape
     Overrides: ListShape
     PerformanceFactorReferenceRequest: StructureShape
     PerformanceFactorReferenceSetRequest: ListShape
@@ -321,10 +340,14 @@ module Aws::AutoScaling
     RefreshInstanceWarmup: IntegerShape
     RefreshPreferences: StructureShape
     RefreshStrategy: EnumShape
+    RequestedCapacity: IntegerShape
     ResourceContentionFault: StructureShape
     ResourceInUseFault: StructureShape
     ResourceName: StringShape
     ResumeProcessesInput: StructureShape
+    RetentionAction: EnumShape
+    RetentionTriggers: StructureShape
+    RetryStrategy: EnumShape
     ReturnData: BooleanShape
     ReuseOnScaleIn: BooleanShape
     RollbackDetails: StructureShape
@@ -359,6 +382,7 @@ module Aws::AutoScaling
     StepAdjustment: StructureShape
     StepAdjustments: ListShape
     String: StringShape
+    SubnetIdsLimit1: ListShape
     SuspendProcessesInput: StructureShape
     SuspendedProcess: StructureShape
     SuspendedProcesses: ListShape
@@ -368,6 +392,8 @@ module Aws::AutoScaling
     TagKey: StringShape
     TagValue: StringShape
     Tags: ListShape
+    TargetCapacityType: EnumShape
+    TargetCapacityTypes: ListShape
     TargetGroupARNs: ListShape
     TargetTrackingConfiguration: StructureShape
     TargetTrackingMetricDataQueries: ListShape
@@ -375,6 +401,7 @@ module Aws::AutoScaling
     TargetTrackingMetricStat: StructureShape
     TerminateInstanceInAutoScalingGroupInput: StructureShape
     TerminateInstanceInAutoScalingGroupOutput: StructureShape
+    TerminationInstanceIds: ListShape
     TerminationPolicies: ListShape
     TimestampType: TimestampShape
     TotalLocalStorageGBRequest: StructureShape

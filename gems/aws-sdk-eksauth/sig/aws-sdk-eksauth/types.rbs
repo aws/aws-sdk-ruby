@@ -18,11 +18,17 @@ module Aws::EKSAuth
       def initialize: (
         ?cluster_name: String,
         ?token: String,
+        ?eks_node_name: String,
+        ?instance_id: String,
+        ?zone: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cluster_name: String?
       attr_accessor token: String?
+      attr_accessor eks_node_name: String?
+      attr_accessor instance_id: String?
+      attr_accessor zone: String?
     end
 
     class AssumeRoleForPodIdentityResponse

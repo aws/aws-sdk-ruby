@@ -12,6 +12,34 @@ module Aws::Kafka
       attr_accessor msk_cluster_arn: String?
     end
 
+    class ApacheKafkaCluster
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?apache_kafka_cluster_id: String,
+        ?bootstrap_broker_string: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor apache_kafka_cluster_id: String?
+      attr_accessor bootstrap_broker_string: String?
+    end
+
+    class AuthorizerLogs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs: Types::CloudWatchLogs,
+        ?firehose: Types::Firehose,
+        ?s3: Types::S3,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogs?
+      attr_accessor firehose: Types::Firehose?
+      attr_accessor s3: Types::S3?
+    end
+
     class BadRequestException
       include Smithy::Schema::Structure
 
@@ -183,6 +211,83 @@ module Aws::Kafka
       attr_accessor kafka_version: String?
     end
 
+    class Catalog
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?catalog_arn: String,
+        ?warehouse_location: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor catalog_arn: String?
+      attr_accessor warehouse_location: String?
+    end
+
+    module ChannelDestinationType
+      ICEBERG: String
+      S3: String
+    end
+
+    class ChannelInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?channel_name: String,
+        ?status: String,
+        ?creation_time: Time,
+        ?destination_type: String,
+        ?cluster_operation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor status: String?
+      attr_accessor creation_time: Time?
+      attr_accessor destination_type: String?
+      attr_accessor cluster_operation_arn: String?
+    end
+
+    class ChannelLoggingInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs: Types::CloudWatchLogs,
+        ?firehose: Types::Firehose,
+        ?s3: Types::S3,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::CloudWatchLogs?
+      attr_accessor firehose: Types::Firehose?
+      attr_accessor s3: Types::S3?
+    end
+
+    class ChannelStateInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module ChannelStatus
+      CREATING: String
+      ACTIVE: String
+      UPDATING: String
+      DELETING: String
+      FAILED: String
+      SUSPENDING: String
+      SUSPENDED: String
+    end
+
     class ClientAuthentication
       include Smithy::Schema::Structure
 
@@ -267,12 +372,26 @@ module Aws::Kafka
       attr_accessor serverless: Types::Serverless?
     end
 
+    class ClusterConnectivityException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameter: String?
+      attr_accessor message: String?
+    end
+
     class ClusterInfo
       include Smithy::Schema::Structure
 
       def initialize: (
         ?active_operation_arn: String,
         ?broker_node_group_info: Types::BrokerNodeGroupInfo,
+        ?rebalancing: Types::Rebalancing,
         ?client_authentication: Types::ClientAuthentication,
         ?cluster_arn: String,
         ?cluster_name: String,
@@ -296,6 +415,7 @@ module Aws::Kafka
 
       attr_accessor active_operation_arn: String?
       attr_accessor broker_node_group_info: Types::BrokerNodeGroupInfo?
+      attr_accessor rebalancing: Types::Rebalancing?
       attr_accessor client_authentication: Types::ClientAuthentication?
       attr_accessor cluster_arn: String?
       attr_accessor cluster_name: String?
@@ -423,10 +543,14 @@ module Aws::Kafka
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?source_cluster_info: Types::ServerlessConnectivityInfo,
+        ?target_cluster_info: Types::ServerlessConnectivityInfo,
         ?vpc_connection_info: Types::VpcConnectionInfoServerless,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor source_cluster_info: Types::ServerlessConnectivityInfo?
+      attr_accessor target_cluster_info: Types::ServerlessConnectivityInfo?
       attr_accessor vpc_connection_info: Types::VpcConnectionInfoServerless?
     end
 
@@ -558,11 +682,18 @@ module Aws::Kafka
       def initialize: (
         ?public_access: Types::PublicAccess,
         ?vpc_connectivity: Types::VpcConnectivity,
+        ?network_type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor public_access: Types::PublicAccess?
       attr_accessor vpc_connectivity: Types::VpcConnectivity?
+      attr_accessor network_type: String?
+    end
+
+    module ConsumerGroupOffsetSyncMode
+      LEGACY: String
+      ENHANCED: String
     end
 
     class ConsumerGroupReplication
@@ -573,6 +704,7 @@ module Aws::Kafka
         ?consumer_groups_to_replicate: Array[String],
         ?detect_and_copy_new_consumer_groups: bool,
         ?synchronise_consumer_group_offsets: bool,
+        ?consumer_group_offset_sync_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -580,6 +712,7 @@ module Aws::Kafka
       attr_accessor consumer_groups_to_replicate: Array[String]?
       attr_accessor detect_and_copy_new_consumer_groups: bool?
       attr_accessor synchronise_consumer_group_offsets: bool?
+      attr_accessor consumer_group_offset_sync_mode: String?
     end
 
     class ConsumerGroupReplicationUpdate
@@ -599,6 +732,19 @@ module Aws::Kafka
       attr_accessor synchronise_consumer_group_offsets: bool?
     end
 
+    class ControllerMovedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameter: String?
+      attr_accessor message: String?
+    end
+
     class ControllerNodeInfo
       include Smithy::Schema::Structure
 
@@ -610,11 +756,50 @@ module Aws::Kafka
       attr_accessor endpoints: Array[String]?
     end
 
+    class CreateChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_name: String,
+        ?cluster_arn: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?iceberg_destination_configuration: Types::IcebergDestinationConfiguration,
+        ?s3_destination_configuration: Types::S3DestinationConfiguration,
+        ?tags: Hash[String, String],
+        ?topic_configuration_list: Array[Types::TopicConfiguration],
+        ?logging_info: Types::ChannelLoggingInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_name: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor iceberg_destination_configuration: Types::IcebergDestinationConfiguration?
+      attr_accessor s3_destination_configuration: Types::S3DestinationConfiguration?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor topic_configuration_list: Array[Types::TopicConfiguration]?
+      attr_accessor logging_info: Types::ChannelLoggingInfo?
+    end
+
+    class CreateChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?cluster_operation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor cluster_operation_arn: String?
+    end
+
     class CreateClusterRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?broker_node_group_info: Types::BrokerNodeGroupInfo,
+        ?rebalancing: Types::Rebalancing,
         ?client_authentication: Types::ClientAuthentication,
         ?cluster_name: String,
         ?configuration_info: Types::ConfigurationInfo,
@@ -630,6 +815,7 @@ module Aws::Kafka
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor broker_node_group_info: Types::BrokerNodeGroupInfo?
+      attr_accessor rebalancing: Types::Rebalancing?
       attr_accessor client_authentication: Types::ClientAuthentication?
       attr_accessor cluster_name: String?
       attr_accessor configuration_info: Types::ConfigurationInfo?
@@ -738,6 +924,7 @@ module Aws::Kafka
         ?replicator_name: String,
         ?service_execution_role_arn: String,
         ?tags: Hash[String, String],
+        ?log_delivery: Types::LogDelivery,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -747,6 +934,7 @@ module Aws::Kafka
       attr_accessor replicator_name: String?
       attr_accessor service_execution_role_arn: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor log_delivery: Types::LogDelivery?
     end
 
     class CreateReplicatorResponse
@@ -762,6 +950,40 @@ module Aws::Kafka
       attr_accessor replicator_arn: String?
       attr_accessor replicator_name: String?
       attr_accessor replicator_state: String?
+    end
+
+    class CreateTopicRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?topic_name: String,
+        ?partition_count: Integer,
+        ?replication_factor: Integer,
+        ?configs: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor partition_count: Integer?
+      attr_accessor replication_factor: Integer?
+      attr_accessor configs: String?
+    end
+
+    class CreateTopicResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?topic_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor status: String?
     end
 
     class CreateVpcConnectionRequest
@@ -814,6 +1036,47 @@ module Aws::Kafka
       CRITICAL_ACTION_REQUIRED: String
       ACTION_RECOMMENDED: String
       NONE: String
+    end
+
+    class DeadLetterQueueS3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?error_output_prefix: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor error_output_prefix: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    class DeleteChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor cluster_arn: String?
+    end
+
+    class DeleteChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?cluster_operation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor cluster_operation_arn: String?
     end
 
     class DeleteClusterPolicyRequest
@@ -912,6 +1175,34 @@ module Aws::Kafka
       attr_accessor replicator_state: String?
     end
 
+    class DeleteTopicRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?topic_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor topic_name: String?
+    end
+
+    class DeleteTopicResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?topic_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor status: String?
+    end
+
     class DeleteVpcConnectionRequest
       include Smithy::Schema::Structure
 
@@ -934,6 +1225,54 @@ module Aws::Kafka
 
       attr_accessor vpc_connection_arn: String?
       attr_accessor state: String?
+    end
+
+    class DescribeChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?cluster_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor cluster_arn: String?
+    end
+
+    class DescribeChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?channel_name: String,
+        ?encryption_configuration: Types::EncryptionConfiguration,
+        ?iceberg_destination_configuration: Types::IcebergDestinationConfiguration,
+        ?s3_destination_configuration: Types::S3DestinationConfiguration,
+        ?status: String,
+        ?destination_type: String,
+        ?creation_time: Time,
+        ?topic_configuration_list: Array[Types::TopicConfiguration],
+        ?logging_info: Types::ChannelLoggingInfo,
+        ?state_info: Types::ChannelStateInfo,
+        ?cluster_operation_arn: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor channel_name: String?
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration?
+      attr_accessor iceberg_destination_configuration: Types::IcebergDestinationConfiguration?
+      attr_accessor s3_destination_configuration: Types::S3DestinationConfiguration?
+      attr_accessor status: String?
+      attr_accessor destination_type: String?
+      attr_accessor creation_time: Time?
+      attr_accessor topic_configuration_list: Array[Types::TopicConfiguration]?
+      attr_accessor logging_info: Types::ChannelLoggingInfo?
+      attr_accessor state_info: Types::ChannelStateInfo?
+      attr_accessor cluster_operation_arn: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class DescribeClusterOperationRequest
@@ -1118,6 +1457,7 @@ module Aws::Kafka
         ?service_execution_role_arn: String,
         ?state_info: Types::ReplicationStateInfo,
         ?tags: Hash[String, String],
+        ?log_delivery: Types::LogDelivery,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1134,6 +1474,71 @@ module Aws::Kafka
       attr_accessor service_execution_role_arn: String?
       attr_accessor state_info: Types::ReplicationStateInfo?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor log_delivery: Types::LogDelivery?
+    end
+
+    class DescribeTopicPartitionsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?topic_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeTopicPartitionsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partitions: Array[Types::TopicPartitionInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partitions: Array[Types::TopicPartitionInfo]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeTopicRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?topic_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor topic_name: String?
+    end
+
+    class DescribeTopicResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?topic_name: String,
+        ?replication_factor: Integer,
+        ?partition_count: Integer,
+        ?configs: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor replication_factor: Integer?
+      attr_accessor partition_count: Integer?
+      attr_accessor configs: String?
+      attr_accessor status: String?
     end
 
     class DescribeVpcConnectionRequest
@@ -1174,6 +1579,21 @@ module Aws::Kafka
       attr_accessor tags: Hash[String, String]?
     end
 
+    class DestinationTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_database_name: String,
+        ?destination_table_name: String,
+        ?partition_spec: Types::PartitionSpec,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_database_name: String?
+      attr_accessor destination_table_name: String?
+      attr_accessor partition_spec: Types::PartitionSpec?
+    end
+
     class EBSStorageInfo
       include Smithy::Schema::Structure
 
@@ -1196,6 +1616,17 @@ module Aws::Kafka
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor data_volume_kms_key_id: String?
+    end
+
+    class EncryptionConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kms_key_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kms_key_arn: String?
     end
 
     class EncryptionInTransit
@@ -1295,6 +1726,10 @@ module Aws::Kafka
         ?bootstrap_broker_string_vpc_connectivity_tls: String,
         ?bootstrap_broker_string_vpc_connectivity_sasl_scram: String,
         ?bootstrap_broker_string_vpc_connectivity_sasl_iam: String,
+        ?bootstrap_broker_string_ipv6: String,
+        ?bootstrap_broker_string_tls_ipv6: String,
+        ?bootstrap_broker_string_sasl_scram_ipv6: String,
+        ?bootstrap_broker_string_sasl_iam_ipv6: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1308,6 +1743,10 @@ module Aws::Kafka
       attr_accessor bootstrap_broker_string_vpc_connectivity_tls: String?
       attr_accessor bootstrap_broker_string_vpc_connectivity_sasl_scram: String?
       attr_accessor bootstrap_broker_string_vpc_connectivity_sasl_iam: String?
+      attr_accessor bootstrap_broker_string_ipv6: String?
+      attr_accessor bootstrap_broker_string_tls_ipv6: String?
+      attr_accessor bootstrap_broker_string_sasl_scram_ipv6: String?
+      attr_accessor bootstrap_broker_string_sasl_iam_ipv6: String?
     end
 
     class GetClusterPolicyRequest
@@ -1356,6 +1795,19 @@ module Aws::Kafka
       attr_accessor compatible_kafka_versions: Array[Types::CompatibleKafkaVersion]?
     end
 
+    class GroupSubscribedToTopicException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameter: String?
+      attr_accessor message: String?
+    end
+
     class Iam
       include Smithy::Schema::Structure
 
@@ -1365,6 +1817,49 @@ module Aws::Kafka
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor enabled: bool?
+    end
+
+    module IcebergCompressionType
+      ZSTD: String
+      SNAPPY: String
+    end
+
+    class IcebergDestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?append_only: bool,
+        ?catalog: Types::Catalog,
+        ?data_freshness_in_seconds: Integer,
+        ?dead_letter_queue_s3: Types::DeadLetterQueueS3,
+        ?destination_table_list: Array[Types::DestinationTable],
+        ?schema_evolution: Types::SchemaEvolution,
+        ?service_execution_role_arn: String,
+        ?table_creation: Types::TableCreation,
+        ?compression_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor append_only: bool?
+      attr_accessor catalog: Types::Catalog?
+      attr_accessor data_freshness_in_seconds: Integer?
+      attr_accessor dead_letter_queue_s3: Types::DeadLetterQueueS3?
+      attr_accessor destination_table_list: Array[Types::DestinationTable]?
+      attr_accessor schema_evolution: Types::SchemaEvolution?
+      attr_accessor service_execution_role_arn: String?
+      attr_accessor table_creation: Types::TableCreation?
+      attr_accessor compression_type: String?
+    end
+
+    class IcebergDestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_freshness_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_freshness_in_seconds: Integer?
     end
 
     class InternalServerErrorException
@@ -1402,17 +1897,43 @@ module Aws::Kafka
       attr_accessor enabled_in_broker: bool?
     end
 
+    module JwtSigningAlgorithm
+      RS256: String
+      ES384: String
+    end
+
     class KafkaCluster
       include Smithy::Schema::Structure
 
       def initialize: (
         ?amazon_msk_cluster: Types::AmazonMskCluster,
+        ?apache_kafka_cluster: Types::ApacheKafkaCluster,
         ?vpc_config: Types::KafkaClusterClientVpcConfig,
+        ?client_authentication: Types::KafkaClusterClientAuthentication,
+        ?encryption_in_transit: Types::KafkaClusterEncryptionInTransit,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor amazon_msk_cluster: Types::AmazonMskCluster?
+      attr_accessor apache_kafka_cluster: Types::ApacheKafkaCluster?
       attr_accessor vpc_config: Types::KafkaClusterClientVpcConfig?
+      attr_accessor client_authentication: Types::KafkaClusterClientAuthentication?
+      attr_accessor encryption_in_transit: Types::KafkaClusterEncryptionInTransit?
+    end
+
+    class KafkaClusterClientAuthentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sasl_scram: Types::KafkaClusterSaslScramAuthentication,
+        ?mtls: Types::KafkaClusterMTLSAuthentication,
+        ?sasl_o_auth_bearer: Types::KafkaClusterSaslOAuthBearerAuthentication,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sasl_scram: Types::KafkaClusterSaslScramAuthentication?
+      attr_accessor mtls: Types::KafkaClusterMTLSAuthentication?
+      attr_accessor sasl_o_auth_bearer: Types::KafkaClusterSaslOAuthBearerAuthentication?
     end
 
     class KafkaClusterClientVpcConfig
@@ -1433,14 +1954,130 @@ module Aws::Kafka
 
       def initialize: (
         ?amazon_msk_cluster: Types::AmazonMskCluster,
+        ?apache_kafka_cluster: Types::ApacheKafkaCluster,
         ?kafka_cluster_alias: String,
         ?vpc_config: Types::KafkaClusterClientVpcConfig,
+        ?client_authentication: Types::KafkaClusterClientAuthentication,
+        ?encryption_in_transit: Types::KafkaClusterEncryptionInTransit,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor amazon_msk_cluster: Types::AmazonMskCluster?
+      attr_accessor apache_kafka_cluster: Types::ApacheKafkaCluster?
       attr_accessor kafka_cluster_alias: String?
       attr_accessor vpc_config: Types::KafkaClusterClientVpcConfig?
+      attr_accessor client_authentication: Types::KafkaClusterClientAuthentication?
+      attr_accessor encryption_in_transit: Types::KafkaClusterEncryptionInTransit?
+    end
+
+    class KafkaClusterEncryptionInTransit
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?encryption_type: String,
+        ?root_ca_certificate: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor encryption_type: String?
+      attr_accessor root_ca_certificate: String?
+    end
+
+    module KafkaClusterEncryptionInTransitType
+      TLS: String
+    end
+
+    class KafkaClusterMTLSAuthentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor secret_arn: String?
+    end
+
+    class KafkaClusterOAuthClientCredentials
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_request_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_request_secret_arn: String?
+    end
+
+    class KafkaClusterOAuthClientCredentialsAssertion
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience: String,
+        ?signing_algorithm: String,
+        ?token_request_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience: String?
+      attr_accessor signing_algorithm: String?
+      attr_accessor token_request_secret_arn: String?
+    end
+
+    class KafkaClusterOAuthIamJwtBearer
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?audience: String,
+        ?signing_algorithm: String,
+        ?token_request_secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor audience: String?
+      attr_accessor signing_algorithm: String?
+      attr_accessor token_request_secret_arn: String?
+    end
+
+    class KafkaClusterSaslOAuthBearerAuthentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?token_endpoint_url: String,
+        ?client_credentials: Types::KafkaClusterOAuthClientCredentials,
+        ?iam_jwt_bearer: Types::KafkaClusterOAuthIamJwtBearer,
+        ?client_credentials_assertion: Types::KafkaClusterOAuthClientCredentialsAssertion,
+        ?token_endpoint_authentication_method: String,
+        ?scope: String,
+        ?token_endpoint_tls_certificate_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor token_endpoint_url: String?
+      attr_accessor client_credentials: Types::KafkaClusterOAuthClientCredentials?
+      attr_accessor iam_jwt_bearer: Types::KafkaClusterOAuthIamJwtBearer?
+      attr_accessor client_credentials_assertion: Types::KafkaClusterOAuthClientCredentialsAssertion?
+      attr_accessor token_endpoint_authentication_method: String?
+      attr_accessor scope: String?
+      attr_accessor token_endpoint_tls_certificate_arn: String?
+    end
+
+    class KafkaClusterSaslScramAuthentication
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?mechanism: String,
+        ?secret_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor mechanism: String?
+      attr_accessor secret_arn: String?
+    end
+
+    module KafkaClusterSaslScramMechanism
+      SHA256: String
+      SHA512: String
     end
 
     class KafkaClusterSummary
@@ -1448,12 +2085,40 @@ module Aws::Kafka
 
       def initialize: (
         ?amazon_msk_cluster: Types::AmazonMskCluster,
+        ?apache_kafka_cluster: Types::ApacheKafkaCluster,
         ?kafka_cluster_alias: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor amazon_msk_cluster: Types::AmazonMskCluster?
+      attr_accessor apache_kafka_cluster: Types::ApacheKafkaCluster?
       attr_accessor kafka_cluster_alias: String?
+    end
+
+    class KafkaRequestException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameter: String?
+      attr_accessor message: String?
+    end
+
+    class KafkaTimeoutException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameter: String?
+      attr_accessor message: String?
     end
 
     class KafkaVersion
@@ -1472,6 +2137,36 @@ module Aws::Kafka
     module KafkaVersionStatus
       ACTIVE: String
       DEPRECATED: String
+    end
+
+    class ListChannelsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?topic_name_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor topic_name_filter: String?
+    end
+
+    class ListChannelsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channels: Array[Types::ChannelInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channels: Array[Types::ChannelInfo]?
+      attr_accessor next_token: String?
     end
 
     class ListClientVpcConnectionsRequest
@@ -1802,6 +2497,36 @@ module Aws::Kafka
       attr_accessor tags: Hash[String, String]?
     end
 
+    class ListTopicsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+        ?topic_name_filter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor topic_name_filter: String?
+    end
+
+    class ListTopicsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topics: Array[Types::TopicInfo],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topics: Array[Types::TopicInfo]?
+      attr_accessor next_token: String?
+    end
+
     class ListVpcConnectionsRequest
       include Smithy::Schema::Structure
 
@@ -1828,14 +2553,27 @@ module Aws::Kafka
       attr_accessor next_token: String?
     end
 
+    class LogDelivery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?replicator_log_delivery: Types::ReplicatorLogDelivery,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor replicator_log_delivery: Types::ReplicatorLogDelivery?
+    end
+
     class LoggingInfo
       include Smithy::Schema::Structure
 
       def initialize: (
+        ?authorizer_logs: Types::AuthorizerLogs,
         ?broker_logs: Types::BrokerLogs,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor authorizer_logs: Types::AuthorizerLogs?
       attr_accessor broker_logs: Types::BrokerLogs?
     end
 
@@ -1848,6 +2586,7 @@ module Aws::Kafka
         ?number_of_broker_nodes: Integer,
         ?enhanced_monitoring: String,
         ?open_monitoring: Types::OpenMonitoring,
+        ?zookeeper_access: Types::ZookeeperAccess,
         ?kafka_version: String,
         ?logging_info: Types::LoggingInfo,
         ?instance_type: String,
@@ -1856,6 +2595,7 @@ module Aws::Kafka
         ?connectivity_info: Types::ConnectivityInfo,
         ?storage_mode: String,
         ?broker_count_update_info: Types::BrokerCountUpdateInfo,
+        ?rebalancing: Types::Rebalancing,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1864,6 +2604,7 @@ module Aws::Kafka
       attr_accessor number_of_broker_nodes: Integer?
       attr_accessor enhanced_monitoring: String?
       attr_accessor open_monitoring: Types::OpenMonitoring?
+      attr_accessor zookeeper_access: Types::ZookeeperAccess?
       attr_accessor kafka_version: String?
       attr_accessor logging_info: Types::LoggingInfo?
       attr_accessor instance_type: String?
@@ -1872,6 +2613,12 @@ module Aws::Kafka
       attr_accessor connectivity_info: Types::ConnectivityInfo?
       attr_accessor storage_mode: String?
       attr_accessor broker_count_update_info: Types::BrokerCountUpdateInfo?
+      attr_accessor rebalancing: Types::Rebalancing?
+    end
+
+    module NetworkType
+      IPV4: String
+      DUAL: String
     end
 
     class NodeExporter
@@ -1923,6 +2670,19 @@ module Aws::Kafka
       BROKER: String
     end
 
+    class NotControllerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameter: String?
+      attr_accessor message: String?
+    end
+
     class NotFoundException
       include Smithy::Schema::Structure
 
@@ -1958,6 +2718,34 @@ module Aws::Kafka
       attr_accessor prometheus: Types::PrometheusInfo?
     end
 
+    class PartitionSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_name: String?
+    end
+
+    class PartitionSpec
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partition_strategy: String,
+        ?source_list: Array[Types::PartitionSource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partition_strategy: String?
+      attr_accessor source_list: Array[Types::PartitionSource]?
+    end
+
+    module PartitionStrategy
+      TIME_HOUR: String
+    end
+
     class Prometheus
       include Smithy::Schema::Structure
 
@@ -1989,6 +2777,7 @@ module Aws::Kafka
 
       def initialize: (
         ?broker_node_group_info: Types::BrokerNodeGroupInfo,
+        ?rebalancing: Types::Rebalancing,
         ?current_broker_software_info: Types::BrokerSoftwareInfo,
         ?client_authentication: Types::ClientAuthentication,
         ?encryption_info: Types::EncryptionInfo,
@@ -2004,6 +2793,7 @@ module Aws::Kafka
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor broker_node_group_info: Types::BrokerNodeGroupInfo?
+      attr_accessor rebalancing: Types::Rebalancing?
       attr_accessor current_broker_software_info: Types::BrokerSoftwareInfo?
       attr_accessor client_authentication: Types::ClientAuthentication?
       attr_accessor encryption_info: Types::EncryptionInfo?
@@ -2022,6 +2812,7 @@ module Aws::Kafka
 
       def initialize: (
         ?broker_node_group_info: Types::BrokerNodeGroupInfo,
+        ?rebalancing: Types::Rebalancing,
         ?client_authentication: Types::ClientAuthentication,
         ?configuration_info: Types::ConfigurationInfo,
         ?encryption_info: Types::EncryptionInfo,
@@ -2035,6 +2826,7 @@ module Aws::Kafka
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor broker_node_group_info: Types::BrokerNodeGroupInfo?
+      attr_accessor rebalancing: Types::Rebalancing?
       attr_accessor client_authentication: Types::ClientAuthentication?
       attr_accessor configuration_info: Types::ConfigurationInfo?
       attr_accessor encryption_info: Types::EncryptionInfo?
@@ -2096,6 +2888,35 @@ module Aws::Kafka
       attr_accessor current_version: String?
     end
 
+    class ReassignmentInProgressException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameter: String?
+      attr_accessor message: String?
+    end
+
+    class Rebalancing
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+    end
+
+    module RebalancingStatus
+      PAUSED: String
+      ACTIVE: String
+    end
+
     class RebootBrokerRequest
       include Smithy::Schema::Structure
 
@@ -2120,6 +2941,28 @@ module Aws::Kafka
 
       attr_accessor cluster_arn: String?
       attr_accessor cluster_operation_arn: String?
+    end
+
+    class RecordConverter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value_converter: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value_converter: String?
+    end
+
+    class RecordSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?gsr_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor gsr_arn: String?
     end
 
     class RejectClientVpcConnectionRequest
@@ -2150,16 +2993,20 @@ module Aws::Kafka
       def initialize: (
         ?consumer_group_replication: Types::ConsumerGroupReplication,
         ?source_kafka_cluster_arn: String,
+        ?source_kafka_cluster_id: String,
         ?target_compression_type: String,
         ?target_kafka_cluster_arn: String,
+        ?target_kafka_cluster_id: String,
         ?topic_replication: Types::TopicReplication,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor consumer_group_replication: Types::ConsumerGroupReplication?
       attr_accessor source_kafka_cluster_arn: String?
+      attr_accessor source_kafka_cluster_id: String?
       attr_accessor target_compression_type: String?
       attr_accessor target_kafka_cluster_arn: String?
+      attr_accessor target_kafka_cluster_id: String?
       attr_accessor topic_replication: Types::TopicReplication?
     end
 
@@ -2240,6 +3087,62 @@ module Aws::Kafka
       IDENTICAL: String
     end
 
+    class ReplicatorCloudWatchLogs
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?log_group: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor log_group: String?
+    end
+
+    class ReplicatorFirehose
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?delivery_stream: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor delivery_stream: String?
+    end
+
+    class ReplicatorLogDelivery
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cloud_watch_logs: Types::ReplicatorCloudWatchLogs,
+        ?firehose: Types::ReplicatorFirehose,
+        ?s3: Types::ReplicatorS3,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cloud_watch_logs: Types::ReplicatorCloudWatchLogs?
+      attr_accessor firehose: Types::ReplicatorFirehose?
+      attr_accessor s3: Types::ReplicatorS3?
+    end
+
+    class ReplicatorS3
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?bucket: String,
+        ?prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor bucket: String?
+      attr_accessor prefix: String?
+    end
+
     module ReplicatorState
       RUNNING: String
       CREATING: String
@@ -2290,6 +3193,67 @@ module Aws::Kafka
       attr_accessor prefix: String?
     end
 
+    module S3CompressionType
+      NONE: String
+      GZIP: String
+      ZSTD: String
+    end
+
+    class S3DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_freshness_in_seconds: Integer,
+        ?dead_letter_queue_s3: Types::DeadLetterQueueS3,
+        ?service_execution_role_arn: String,
+        ?storage: Types::S3Storage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_freshness_in_seconds: Integer?
+      attr_accessor dead_letter_queue_s3: Types::DeadLetterQueueS3?
+      attr_accessor service_execution_role_arn: String?
+      attr_accessor storage: Types::S3Storage?
+    end
+
+    class S3DestinationUpdate
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_freshness_in_seconds: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_freshness_in_seconds: Integer?
+    end
+
+    class S3Storage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bucket_arn: String,
+        ?compression_type: String,
+        ?output_prefix: String,
+        ?output_key_template: String,
+        ?storage_class: String,
+        ?expected_bucket_owner: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bucket_arn: String?
+      attr_accessor compression_type: String?
+      attr_accessor output_prefix: String?
+      attr_accessor output_key_template: String?
+      attr_accessor storage_class: String?
+      attr_accessor expected_bucket_owner: String?
+    end
+
+    module S3StorageClass
+      STANDARD: String
+      INTELLIGENT_TIERING: String
+      GLACIER_IR: String
+    end
+
     class Sasl
       include Smithy::Schema::Structure
 
@@ -2301,6 +3265,17 @@ module Aws::Kafka
 
       attr_accessor scram: Types::Scram?
       attr_accessor iam: Types::Iam?
+    end
+
+    class SchemaEvolution
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_schema_evolution: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_schema_evolution: bool?
     end
 
     class Scram
@@ -2320,11 +3295,13 @@ module Aws::Kafka
       def initialize: (
         ?vpc_configs: Array[Types::VpcConfig],
         ?client_authentication: Types::ServerlessClientAuthentication,
+        ?connectivity_info: Types::ServerlessConnectivityInfo,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor vpc_configs: Array[Types::VpcConfig]?
       attr_accessor client_authentication: Types::ServerlessClientAuthentication?
+      attr_accessor connectivity_info: Types::ServerlessConnectivityInfo?
     end
 
     class ServerlessClientAuthentication
@@ -2336,6 +3313,17 @@ module Aws::Kafka
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor sasl: Types::ServerlessSasl?
+    end
+
+    class ServerlessConnectivityInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?network_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor network_type: String?
     end
 
     class ServerlessRequest
@@ -2404,6 +3392,17 @@ module Aws::Kafka
       TIERED: String
     end
 
+    class TableCreation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_table_creation: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_table_creation: bool?
+    end
+
     class TagResourceRequest
       include Smithy::Schema::Structure
 
@@ -2438,6 +3437,12 @@ module Aws::Kafka
       attr_accessor enabled: bool?
     end
 
+    module TokenEndpointAuthenticationMethod
+      POST: String
+      BASIC: String
+      NONE: String
+    end
+
     class TooManyRequestsException
       include Smithy::Schema::Structure
 
@@ -2449,6 +3454,70 @@ module Aws::Kafka
 
       attr_accessor invalid_parameter: String?
       attr_accessor message: String?
+    end
+
+    class TopicConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?record_converter: Types::RecordConverter,
+        ?record_schema: Types::RecordSchema,
+        ?topic_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor record_converter: Types::RecordConverter?
+      attr_accessor record_schema: Types::RecordSchema?
+      attr_accessor topic_arn: String?
+    end
+
+    class TopicExistsException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameter: String?
+      attr_accessor message: String?
+    end
+
+    class TopicInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?topic_name: String,
+        ?replication_factor: Integer,
+        ?partition_count: Integer,
+        ?out_of_sync_replica_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor replication_factor: Integer?
+      attr_accessor partition_count: Integer?
+      attr_accessor out_of_sync_replica_count: Integer?
+    end
+
+    class TopicPartitionInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?partition: Integer,
+        ?leader: Integer,
+        ?replicas: Array[Integer],
+        ?isr: Array[Integer],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor partition: Integer?
+      attr_accessor leader: Integer?
+      attr_accessor replicas: Array[Integer]?
+      attr_accessor isr: Array[Integer]?
     end
 
     class TopicReplication
@@ -2493,6 +3562,13 @@ module Aws::Kafka
       attr_accessor topics_to_replicate: Array[String]?
     end
 
+    module TopicState
+      CREATING: String
+      UPDATING: String
+      DELETING: String
+      ACTIVE: String
+    end
+
     class Unauthenticated
       include Smithy::Schema::Structure
 
@@ -2505,6 +3581,19 @@ module Aws::Kafka
     end
 
     class UnauthorizedException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?invalid_parameter: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor invalid_parameter: String?
+      attr_accessor message: String?
+    end
+
+    class UnknownTopicOrPartitionException
       include Smithy::Schema::Structure
 
       def initialize: (
@@ -2629,6 +3718,36 @@ module Aws::Kafka
       attr_accessor cluster_operation_arn: String?
     end
 
+    class UpdateChannelRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?cluster_arn: String,
+        ?iceberg_destination_update: Types::IcebergDestinationUpdate,
+        ?s3_destination_update: Types::S3DestinationUpdate,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor cluster_arn: String?
+      attr_accessor iceberg_destination_update: Types::IcebergDestinationUpdate?
+      attr_accessor s3_destination_update: Types::S3DestinationUpdate?
+    end
+
+    class UpdateChannelResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?channel_arn: String,
+        ?cluster_operation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor channel_arn: String?
+      attr_accessor cluster_operation_arn: String?
+    end
+
     class UpdateClusterConfigurationRequest
       include Smithy::Schema::Structure
 
@@ -2722,12 +3841,14 @@ module Aws::Kafka
         ?cluster_arn: String,
         ?connectivity_info: Types::ConnectivityInfo,
         ?current_version: String,
+        ?zookeeper_access: Types::ZookeeperAccess,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor cluster_arn: String?
       attr_accessor connectivity_info: Types::ConnectivityInfo?
       attr_accessor current_version: String?
+      attr_accessor zookeeper_access: Types::ZookeeperAccess?
     end
 
     class UpdateConnectivityResponse
@@ -2775,6 +3896,34 @@ module Aws::Kafka
       attr_accessor cluster_operation_arn: String?
     end
 
+    class UpdateRebalancingRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?current_version: String,
+        ?rebalancing: Types::Rebalancing,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor current_version: String?
+      attr_accessor rebalancing: Types::Rebalancing?
+    end
+
+    class UpdateRebalancingResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?cluster_operation_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor cluster_operation_arn: String?
+    end
+
     class UpdateReplicationInfoRequest
       include Smithy::Schema::Structure
 
@@ -2783,8 +3932,11 @@ module Aws::Kafka
         ?current_version: String,
         ?replicator_arn: String,
         ?source_kafka_cluster_arn: String,
+        ?source_kafka_cluster_id: String,
         ?target_kafka_cluster_arn: String,
+        ?target_kafka_cluster_id: String,
         ?topic_replication: Types::TopicReplicationUpdate,
+        ?log_delivery: Types::LogDelivery,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2792,8 +3944,11 @@ module Aws::Kafka
       attr_accessor current_version: String?
       attr_accessor replicator_arn: String?
       attr_accessor source_kafka_cluster_arn: String?
+      attr_accessor source_kafka_cluster_id: String?
       attr_accessor target_kafka_cluster_arn: String?
+      attr_accessor target_kafka_cluster_id: String?
       attr_accessor topic_replication: Types::TopicReplicationUpdate?
+      attr_accessor log_delivery: Types::LogDelivery?
     end
 
     class UpdateReplicationInfoResponse
@@ -2871,6 +4026,38 @@ module Aws::Kafka
       attr_accessor cluster_operation_arn: String?
     end
 
+    class UpdateTopicRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_arn: String,
+        ?topic_name: String,
+        ?configs: String,
+        ?partition_count: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor configs: String?
+      attr_accessor partition_count: Integer?
+    end
+
+    class UpdateTopicResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?topic_arn: String,
+        ?topic_name: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor topic_arn: String?
+      attr_accessor topic_name: String?
+      attr_accessor status: String?
+    end
+
     class UserIdentity
       include Smithy::Schema::Structure
 
@@ -2887,6 +4074,13 @@ module Aws::Kafka
     module UserIdentityType
       AWSACCOUNT: String
       AWSSERVICE: String
+    end
+
+    module ValueConverter
+      BYTE_ARRAY: String
+      JSON: String
+      JSON_SCHEMA_GSR: String
+      STRING: String
     end
 
     class VpcConfig
@@ -3028,6 +4222,17 @@ module Aws::Kafka
     end
 
     class VpcConnectivityTls
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+    end
+
+    class ZookeeperAccess
       include Smithy::Schema::Structure
 
       def initialize: (

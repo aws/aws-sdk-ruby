@@ -2,8 +2,21 @@ module Aws::BedrockAgentCoreControl
   module Schema
     include Smithy::Schema::Shapes
 
+    A2aDescriptor: StructureShape
     AccessDeniedException: StructureShape
+    Action: UnionShape
+    Actions: ListShape
+    ActorTokenContentType: EnumShape
+    AddDatasetExamplesRequest: StructureShape
+    AddDatasetExamplesResponse: StructureShape
+    AdditionalClaimName: StringShape
+    AdditionalClaimValue: StringShape
+    AdditionalClaims: MapShape
+    AdditionalModelRequestFields: DocumentShape
+    AdvertisedScopeMappingType: MapShape
+    AgentCardDefinition: StructureShape
     AgentEndpointDescription: StringShape
+    AgentManagedRuntimeType: EnumShape
     AgentRuntime: StructureShape
     AgentRuntimeArn: StringShape
     AgentRuntimeArtifact: UnionShape
@@ -16,11 +29,32 @@ module Aws::BedrockAgentCoreControl
     AgentRuntimeName: StringShape
     AgentRuntimeStatus: EnumShape
     AgentRuntimeVersion: StringShape
+    AgentRuntimeVersionSummary: StructureShape
+    AgentRuntimeVersionSummaryList: ListShape
     AgentRuntimes: ListShape
+    AgentSkillsDescriptor: StructureShape
     AllowedAudience: StringShape
     AllowedAudienceList: ListShape
+    AllowedAudienceType: StringShape
     AllowedClient: StringShape
     AllowedClientsList: ListShape
+    AllowedQueryParameters: ListShape
+    AllowedRequestHeaders: ListShape
+    AllowedResponseHeaders: ListShape
+    AllowedScopeType: StringShape
+    AllowedScopesType: ListShape
+    AllowedStringListValue: StringShape
+    AllowedStringListValuesList: ListShape
+    AllowedStringValue: StringShape
+    AllowedStringValuesList: ListShape
+    AllowedWorkloadConfiguration: StructureShape
+    ApiGatewayTargetConfiguration: StructureShape
+    ApiGatewayToolConfiguration: StructureShape
+    ApiGatewayToolFilter: StructureShape
+    ApiGatewayToolFilters: ListShape
+    ApiGatewayToolOverride: StructureShape
+    ApiGatewayToolOverrides: ListShape
+    ApiKeyArn: StringShape
     ApiKeyCredentialLocation: EnumShape
     ApiKeyCredentialParameterName: StringShape
     ApiKeyCredentialPrefix: StringShape
@@ -28,23 +62,82 @@ module Aws::BedrockAgentCoreControl
     ApiKeyCredentialProviderArnType: StringShape
     ApiKeyCredentialProviderItem: StructureShape
     ApiKeyCredentialProviders: ListShape
-    ApiKeyType: StringShape
     ApiSchemaConfiguration: UnionShape
+    ApprovalConfiguration: StructureShape
     Arn: StringShape
+    AtlassianOauth2ProviderConfigInput: StructureShape
+    AtlassianOauth2ProviderConfigOutput: StructureShape
+    AuthorizationData: UnionShape
     AuthorizationEndpointType: StringShape
     AuthorizerConfiguration: UnionShape
     AuthorizerType: EnumShape
+    AuthorizingClaimMatchValueType: StructureShape
     AwsAccountId: StringShape
+    BatchPutGatewayRateLimitsRequest: StructureShape
+    BatchPutGatewayRateLimitsResponse: StructureShape
+    BatchPutLimitEntries: ListShape
+    BatchPutLimitEntry: StructureShape
+    BedrockAgentcoreResourceArn: StringShape
+    BedrockEvaluatorModelConfig: StructureShape
+    BranchName: StringShape
     BrowserArn: StringShape
+    BrowserEnterprisePolicies: ListShape
+    BrowserEnterprisePolicy: StructureShape
+    BrowserEnterprisePolicyType: EnumShape
     BrowserId: StringShape
     BrowserNetworkConfiguration: StructureShape
     BrowserNetworkMode: EnumShape
+    BrowserProfileArn: StringShape
+    BrowserProfileId: StringShape
+    BrowserProfileName: StringShape
+    BrowserProfileStatus: EnumShape
+    BrowserProfileSummaries: ListShape
+    BrowserProfileSummary: StructureShape
+    BrowserSessionId: StringShape
+    BrowserSigningConfigInput: StructureShape
+    BrowserSigningConfigOutput: StructureShape
     BrowserStatus: EnumShape
     BrowserSummaries: ListShape
     BrowserSummary: StructureShape
+    CapacityProviderArn: StringShape
+    CapacityProviderConfiguration: StructureShape
+    CapacityProviderId: StringShape
+    CapacityProviderList: ListShape
+    CapacityProviderName: StringShape
+    CapacityProviderStatus: EnumShape
+    CapacityProviderStatusCode: EnumShape
+    CapacityProviderSummary: StructureShape
+    CapacityProviderVolumeConfiguration: StructureShape
+    CapacityProviderVolumeName: StringShape
+    CapacityReservationId: StringShape
+    CapacityReservationPreference: EnumShape
+    CapacityReservationResourceGroupArn: StringShape
+    CapacityReservationSpecification: StructureShape
+    CapacityReservationTarget: StructureShape
+    CategoricalScaleDefinition: StructureShape
+    CategoricalScaleDefinitions: ListShape
+    CedarPolicy: StructureShape
+    Certificate: StructureShape
+    CertificateBucketOwnerAccountId: StringShape
+    CertificateConfiguration: UnionShape
+    CertificateConfigurationList: ListShape
+    CertificateLocation: UnionShape
+    CertificateS3Uri: StringShape
+    CertificateSecretArn: StringShape
+    Certificates: ListShape
+    ClaimMatchOperatorType: EnumShape
+    ClaimMatchValueType: UnionShape
+    ClientAuthenticationMethodType: EnumShape
     ClientIdType: StringShape
-    ClientSecretType: StringShape
     ClientToken: StringShape
+    CloudWatchLogsInputConfig: StructureShape
+    CloudWatchOutputConfig: StructureShape
+    ClusteringConfig: StructureShape
+    ClusteringFrequency: EnumShape
+    ClusteringFrequencyList: ListShape
+    Code: UnionShape
+    CodeBasedEvaluatorConfig: UnionShape
+    CodeConfiguration: StructureShape
     CodeInterpreterArn: StringShape
     CodeInterpreterId: StringShape
     CodeInterpreterNetworkConfiguration: StructureShape
@@ -52,93 +145,355 @@ module Aws::BedrockAgentCoreControl
     CodeInterpreterStatus: EnumShape
     CodeInterpreterSummaries: ListShape
     CodeInterpreterSummary: StructureShape
+    CoinbaseCdpApiKeyIdType: StringShape
+    CoinbaseCdpConfigurationInput: StructureShape
+    CoinbaseCdpConfigurationOutput: StructureShape
+    CoinbaseCdpRotationTargets: StructureShape
+    CoinbaseCdpSecret: EnumShape
+    CoinbaseCdpSecrets: ListShape
+    ComponentConfiguration: StructureShape
+    ComponentConfigurationMap: MapShape
+    ComponentIdentifier: StringShape
+    CompositeIdentifierEntry: StringShape
+    CompositeIdentifierList: ListShape
+    ComputeConfiguration: UnionShape
     ConcurrentModificationException: StructureShape
+    Condition: UnionShape
+    Conditions: ListShape
+    ConfigurationBundleAction: UnionShape
+    ConfigurationBundleArn: StringShape
+    ConfigurationBundleDescription: StringShape
+    ConfigurationBundleId: StringShape
+    ConfigurationBundleName: StringShape
+    ConfigurationBundleReference: StructureShape
+    ConfigurationBundleStatus: EnumShape
+    ConfigurationBundleSummary: StructureShape
+    ConfigurationBundleSummaryList: ListShape
+    ConfigurationBundleVersion: StringShape
+    ConfigurationBundleVersionList: ListShape
+    ConfigurationBundleVersionSummary: StructureShape
+    ConfigurationBundleVersionSummaryList: ListShape
     ConflictException: StructureShape
+    ConnectorConfiguration: StructureShape
+    ConnectorConfigurations: ListShape
+    ConnectorId: StringShape
+    ConnectorParameterName: StringShape
+    ConnectorParameterOverride: StructureShape
+    ConnectorParameterOverrides: ListShape
+    ConnectorParameterValue: StringShape
+    ConnectorSource: StructureShape
+    ConnectorTargetConfiguration: StructureShape
+    ConnectorVersion: StringShape
+    ConsentPortalArnType: StringShape
+    ConsentPortalDescriptionType: StringShape
+    ConsentPortalIdType: StringShape
+    ConsentPortalIdentifier: StringShape
+    ConsentPortalIdpConfig: StructureShape
+    ConsentPortalNameType: StringShape
+    ConsentPortalSource: StructureShape
+    ConsentPortalSourceIdentifierType: StringShape
+    ConsentPortalSourceType: EnumShape
+    ConsentPortalSources: ListShape
+    ConsentPortalStatus: EnumShape
+    ConsentPortalSummaries: ListShape
+    ConsentPortalSummary: StructureShape
     ConsolidationConfiguration: UnionShape
     ContainerConfiguration: StructureShape
+    Content: UnionShape
+    ContentConfiguration: StructureShape
+    ContentConfigurationList: ListShape
+    ContentLevel: EnumShape
+    ContentType: EnumShape
     CreateAgentRuntimeEndpointRequest: StructureShape
     CreateAgentRuntimeEndpointResponse: StructureShape
     CreateAgentRuntimeRequest: StructureShape
     CreateAgentRuntimeResponse: StructureShape
     CreateApiKeyCredentialProviderRequest: StructureShape
     CreateApiKeyCredentialProviderResponse: StructureShape
+    CreateBrowserProfileRequest: StructureShape
+    CreateBrowserProfileResponse: StructureShape
     CreateBrowserRequest: StructureShape
     CreateBrowserResponse: StructureShape
+    CreateCapacityProviderInput: StructureShape
+    CreateCapacityProviderOutput: StructureShape
     CreateCodeInterpreterRequest: StructureShape
     CreateCodeInterpreterResponse: StructureShape
+    CreateConfigurationBundleRequest: StructureShape
+    CreateConfigurationBundleResponse: StructureShape
+    CreateConsentPortalRequest: StructureShape
+    CreateConsentPortalResponse: StructureShape
+    CreateDatasetRequest: StructureShape
+    CreateDatasetResponse: StructureShape
+    CreateDatasetVersionRequest: StructureShape
+    CreateDatasetVersionResponse: StructureShape
+    CreateEvaluatorRequest: StructureShape
+    CreateEvaluatorResponse: StructureShape
+    CreateGatewayRateLimitRequest: StructureShape
+    CreateGatewayRateLimitResponse: StructureShape
     CreateGatewayRequest: StructureShape
     CreateGatewayResponse: StructureShape
+    CreateGatewayRuleRequest: StructureShape
+    CreateGatewayRuleResponse: StructureShape
     CreateGatewayTargetRequest: StructureShape
     CreateGatewayTargetResponse: StructureShape
+    CreateHarnessEndpointRequest: StructureShape
+    CreateHarnessEndpointResponse: StructureShape
+    CreateHarnessRequest: StructureShape
+    CreateHarnessResponse: StructureShape
     CreateMemoryInput: StructureShape
     CreateMemoryOutput: StructureShape
     CreateOauth2CredentialProviderRequest: StructureShape
     CreateOauth2CredentialProviderResponse: StructureShape
+    CreateOnlineEvaluationConfigRequest: StructureShape
+    CreateOnlineEvaluationConfigResponse: StructureShape
+    CreatePaymentConnectorRequest: StructureShape
+    CreatePaymentConnectorResponse: StructureShape
+    CreatePaymentCredentialProviderRequest: StructureShape
+    CreatePaymentCredentialProviderResponse: StructureShape
+    CreatePaymentManagerRequest: StructureShape
+    CreatePaymentManagerResponse: StructureShape
+    CreatePolicyEngineRequest: StructureShape
+    CreatePolicyEngineResponse: StructureShape
+    CreatePolicyRequest: StructureShape
+    CreatePolicyResponse: StructureShape
+    CreateRegistryRecordRequest: StructureShape
+    CreateRegistryRecordResponse: StructureShape
+    CreateRegistryRequest: StructureShape
+    CreateRegistryResponse: StructureShape
     CreateWorkloadIdentityRequest: StructureShape
     CreateWorkloadIdentityResponse: StructureShape
     CredentialProvider: UnionShape
+    CredentialProviderArn: StringShape
     CredentialProviderArnType: StringShape
     CredentialProviderConfiguration: StructureShape
     CredentialProviderConfigurations: ListShape
     CredentialProviderName: StringShape
     CredentialProviderType: EnumShape
     CredentialProviderVendorType: EnumShape
+    CredentialRotationConfig: UnionShape
+    CredentialsProviderConfiguration: UnionShape
+    CredentialsProviderConfigurations: ListShape
+    CustomClaimValidationType: StructureShape
+    CustomClaimValidationsType: ListShape
     CustomConfigurationInput: UnionShape
     CustomConsolidationConfiguration: UnionShape
     CustomConsolidationConfigurationInput: UnionShape
+    CustomDescriptor: StructureShape
+    CustomEvaluatorArn: StringShape
+    CustomEvaluatorName: StringShape
     CustomExtractionConfiguration: UnionShape
     CustomExtractionConfigurationInput: UnionShape
     CustomJWTAuthorizerConfiguration: StructureShape
     CustomMemoryStrategyInput: StructureShape
     CustomOauth2ProviderConfigInput: StructureShape
     CustomOauth2ProviderConfigOutput: StructureShape
+    CustomParameterMap: MapShape
+    CustomReflectionConfiguration: UnionShape
+    CustomReflectionConfigurationInput: UnionShape
+    CustomTransformConfiguration: StructureShape
+    DataSourceConfig: UnionShape
+    DataSourceType: UnionShape
+    DatasetArn: StringShape
+    DatasetExampleList: ListShape
+    DatasetId: StringShape
+    DatasetName: StringShape
+    DatasetSchemaType: EnumShape
+    DatasetStatus: EnumShape
+    DatasetSummary: StructureShape
+    DatasetSummaryList: ListShape
+    DatasetVersion: StringShape
+    DatasetVersionSummary: StructureShape
+    DatasetVersionSummaryList: ListShape
     DateTimestamp: TimestampShape
     DecryptionFailure: StructureShape
+    DefaultApiKeyType: StringShape
+    DefaultClientIdType: StringShape
+    DefaultClientSecretType: StringShape
+    DefaultCoinbaseCdpApiKeySecretType: StringShape
+    DefaultCoinbaseCdpWalletSecretType: StringShape
+    DefaultStripePrivyAppSecretType: StringShape
+    DefaultStripePrivyAuthorizationPrivateKeyType: StringShape
+    Definition: StringShape
     DeleteAgentRuntimeEndpointRequest: StructureShape
     DeleteAgentRuntimeEndpointResponse: StructureShape
     DeleteAgentRuntimeRequest: StructureShape
     DeleteAgentRuntimeResponse: StructureShape
     DeleteApiKeyCredentialProviderRequest: StructureShape
     DeleteApiKeyCredentialProviderResponse: StructureShape
+    DeleteBrowserProfileRequest: StructureShape
+    DeleteBrowserProfileResponse: StructureShape
     DeleteBrowserRequest: StructureShape
     DeleteBrowserResponse: StructureShape
+    DeleteCapacityProviderInput: StructureShape
+    DeleteCapacityProviderOutput: StructureShape
     DeleteCodeInterpreterRequest: StructureShape
     DeleteCodeInterpreterResponse: StructureShape
+    DeleteConfigurationBundleRequest: StructureShape
+    DeleteConfigurationBundleResponse: StructureShape
+    DeleteConsentPortalRequest: StructureShape
+    DeleteConsentPortalResponse: StructureShape
+    DeleteDatasetExamplesRequest: StructureShape
+    DeleteDatasetExamplesResponse: StructureShape
+    DeleteDatasetRequest: StructureShape
+    DeleteDatasetResponse: StructureShape
+    DeleteEvaluatorRequest: StructureShape
+    DeleteEvaluatorResponse: StructureShape
+    DeleteGatewayRateLimitRequest: StructureShape
+    DeleteGatewayRateLimitResponse: StructureShape
     DeleteGatewayRequest: StructureShape
     DeleteGatewayResponse: StructureShape
+    DeleteGatewayRuleRequest: StructureShape
+    DeleteGatewayRuleResponse: StructureShape
     DeleteGatewayTargetRequest: StructureShape
     DeleteGatewayTargetResponse: StructureShape
+    DeleteHarnessEndpointRequest: StructureShape
+    DeleteHarnessEndpointResponse: StructureShape
+    DeleteHarnessRequest: StructureShape
+    DeleteHarnessResponse: StructureShape
     DeleteMemoryInput: StructureShape
     DeleteMemoryOutput: StructureShape
     DeleteMemoryStrategiesList: ListShape
     DeleteMemoryStrategyInput: StructureShape
     DeleteOauth2CredentialProviderRequest: StructureShape
     DeleteOauth2CredentialProviderResponse: StructureShape
+    DeleteOnlineEvaluationConfigRequest: StructureShape
+    DeleteOnlineEvaluationConfigResponse: StructureShape
+    DeletePaymentConnectorRequest: StructureShape
+    DeletePaymentConnectorResponse: StructureShape
+    DeletePaymentCredentialProviderRequest: StructureShape
+    DeletePaymentCredentialProviderResponse: StructureShape
+    DeletePaymentManagerRequest: StructureShape
+    DeletePaymentManagerResponse: StructureShape
+    DeletePolicyEngineRequest: StructureShape
+    DeletePolicyEngineResponse: StructureShape
+    DeletePolicyRequest: StructureShape
+    DeletePolicyResponse: StructureShape
+    DeleteRegistryRecordRequest: StructureShape
+    DeleteRegistryRecordResponse: StructureShape
+    DeleteRegistryRequest: StructureShape
+    DeleteRegistryResponse: StructureShape
+    DeleteResourcePolicyRequest: StructureShape
+    DeleteResourcePolicyResponse: StructureShape
     DeleteWorkloadIdentityRequest: StructureShape
     DeleteWorkloadIdentityResponse: StructureShape
+    DerivedEvaluatorConfig: StructureShape
     Description: StringShape
+    DescriptorType: EnumShape
+    Descriptors: StructureShape
+    DeviceName: StringShape
+    DimensionKey: StringShape
+    DimensionKeys: ListShape
+    DimensionValue: StringShape
+    Dimensions: MapShape
     DiscoveryUrl: StringShape
     DiscoveryUrlType: StringShape
+    DomainName: StringShape
+    DownloadUrl: StringShape
+    DraftStatus: EnumShape
+    EC2InstanceType: StringShape
+    EbsCardIndex: IntegerShape
+    EbsSnapshotId: StringShape
+    EbsVolumeConfiguration: StructureShape
+    EbsVolumeInitializationRate: IntegerShape
+    EbsVolumeType: EnumShape
+    Ec2Configuration: StructureShape
+    EfsAccessPointArn: StringShape
+    EfsAccessPointConfiguration: StructureShape
+    EfsConfiguration: StructureShape
+    EfsFileSystemArn: StringShape
+    EnabledConnectors: ListShape
     EncryptionFailure: StructureShape
+    EndpointIpAddressType: EnumShape
     EndpointName: StringShape
+    EnforcementMode: EnumShape
+    EntryPoints: ListShape
     EnvironmentVariableKey: StringShape
     EnvironmentVariableValue: StringShape
     EnvironmentVariablesMap: MapShape
+    EphemeralBlockDeviceMapping: StructureShape
+    EphemeralBlockDeviceMappingList: ListShape
+    EphemeralEBSVolumeConfiguration: StructureShape
+    EpisodicConsolidationOverride: StructureShape
+    EpisodicExtractionOverride: StructureShape
+    EpisodicMemoryStrategyInput: StructureShape
+    EpisodicOverrideConfigurationInput: StructureShape
+    EpisodicOverrideConsolidationConfigurationInput: StructureShape
+    EpisodicOverrideExtractionConfigurationInput: StructureShape
+    EpisodicOverrideReflectionConfigurationInput: StructureShape
+    EpisodicReflectionConfiguration: StructureShape
+    EpisodicReflectionConfigurationInput: StructureShape
+    EpisodicReflectionOverride: StructureShape
+    EvaluationConfigDescription: StringShape
+    EvaluationConfigName: StringShape
+    EvaluatorArn: StringShape
+    EvaluatorConfig: UnionShape
+    EvaluatorDescription: StringShape
+    EvaluatorId: StringShape
+    EvaluatorInstructions: StringShape
+    EvaluatorLevel: EnumShape
+    EvaluatorList: ListShape
+    EvaluatorModelConfig: UnionShape
+    EvaluatorName: StringShape
+    EvaluatorReference: UnionShape
+    EvaluatorStatus: EnumShape
+    EvaluatorSummary: StructureShape
+    EvaluatorSummaryList: ListShape
+    EvaluatorType: EnumShape
+    ExampleId: StringShape
+    ExampleIdList: ListShape
     ExceptionLevel: EnumShape
+    ExecutionRoleArnType: StringShape
+    ExtractionConfig: UnionShape
     ExtractionConfiguration: UnionShape
+    ExtractionType: EnumShape
+    FilesystemConfiguration: UnionShape
+    FilesystemConfigurations: ListShape
+    Filter: StructureShape
+    FilterList: ListShape
+    FilterOperator: EnumShape
+    FilterValue: UnionShape
+    Finding: StructureShape
+    FindingType: EnumShape
+    Findings: ListShape
+    FromUrlSynchronizationConfiguration: StructureShape
     GatewayApiKeyCredentialProvider: StructureShape
     GatewayArn: StringShape
+    GatewayConfigurationBundleArn: StringShape
     GatewayDescription: StringShape
     GatewayId: StringShape
     GatewayIdentifier: StringShape
+    GatewayInterceptionPoint: EnumShape
+    GatewayInterceptionPoints: ListShape
+    GatewayInterceptorConfiguration: StructureShape
+    GatewayInterceptorConfigurations: ListShape
     GatewayMaxResults: IntegerShape
     GatewayName: StringShape
     GatewayNextToken: StringShape
+    GatewayPolicyEngineArn: StringShape
+    GatewayPolicyEngineConfiguration: StructureShape
+    GatewayPolicyEngineMode: EnumShape
     GatewayProtocolConfiguration: UnionShape
     GatewayProtocolType: EnumShape
+    GatewayRateLimitDescription: StringShape
+    GatewayRateLimitDetail: StructureShape
+    GatewayRateLimitId: StringShape
+    GatewayRateLimitMaxResults: IntegerShape
+    GatewayRateLimitNextToken: StringShape
+    GatewayRateLimitStatus: EnumShape
+    GatewayRateLimits: ListShape
+    GatewayRuleDescription: StringShape
+    GatewayRuleDetail: StructureShape
+    GatewayRuleId: StringShape
+    GatewayRuleMaxResults: IntegerShape
+    GatewayRuleNextToken: StringShape
+    GatewayRulePriority: IntegerShape
+    GatewayRuleStatus: EnumShape
+    GatewayRules: ListShape
     GatewayStatus: EnumShape
     GatewaySummaries: ListShape
     GatewaySummary: StructureShape
+    GatewayTarget: StructureShape
+    GatewayTargetList: ListShape
     GatewayUrl: StringShape
     GetAgentRuntimeEndpointRequest: StructureShape
     GetAgentRuntimeEndpointResponse: StructureShape
@@ -146,18 +501,66 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeResponse: StructureShape
     GetApiKeyCredentialProviderRequest: StructureShape
     GetApiKeyCredentialProviderResponse: StructureShape
+    GetBrowserProfileRequest: StructureShape
+    GetBrowserProfileResponse: StructureShape
     GetBrowserRequest: StructureShape
     GetBrowserResponse: StructureShape
+    GetCapacityProviderInput: StructureShape
+    GetCapacityProviderOutput: StructureShape
     GetCodeInterpreterRequest: StructureShape
     GetCodeInterpreterResponse: StructureShape
+    GetConfigurationBundleRequest: StructureShape
+    GetConfigurationBundleResponse: StructureShape
+    GetConfigurationBundleVersionRequest: StructureShape
+    GetConfigurationBundleVersionResponse: StructureShape
+    GetConsentPortalRequest: StructureShape
+    GetConsentPortalResponse: StructureShape
+    GetDatasetRequest: StructureShape
+    GetDatasetResponse: StructureShape
+    GetEvaluatorRequest: StructureShape
+    GetEvaluatorResponse: StructureShape
+    GetGatewayRateLimitRequest: StructureShape
+    GetGatewayRateLimitResponse: StructureShape
     GetGatewayRequest: StructureShape
     GetGatewayResponse: StructureShape
+    GetGatewayRuleRequest: StructureShape
+    GetGatewayRuleResponse: StructureShape
     GetGatewayTargetRequest: StructureShape
     GetGatewayTargetResponse: StructureShape
+    GetHarnessEndpointRequest: StructureShape
+    GetHarnessEndpointResponse: StructureShape
+    GetHarnessRequest: StructureShape
+    GetHarnessResponse: StructureShape
     GetMemoryInput: StructureShape
     GetMemoryOutput: StructureShape
     GetOauth2CredentialProviderRequest: StructureShape
     GetOauth2CredentialProviderResponse: StructureShape
+    GetOnlineEvaluationConfigRequest: StructureShape
+    GetOnlineEvaluationConfigResponse: StructureShape
+    GetPaymentConnectorRequest: StructureShape
+    GetPaymentConnectorResponse: StructureShape
+    GetPaymentCredentialProviderRequest: StructureShape
+    GetPaymentCredentialProviderResponse: StructureShape
+    GetPaymentManagerRequest: StructureShape
+    GetPaymentManagerResponse: StructureShape
+    GetPolicyEngineRequest: StructureShape
+    GetPolicyEngineResponse: StructureShape
+    GetPolicyEngineSummaryRequest: StructureShape
+    GetPolicyEngineSummaryResponse: StructureShape
+    GetPolicyGenerationRequest: StructureShape
+    GetPolicyGenerationResponse: StructureShape
+    GetPolicyGenerationSummaryRequest: StructureShape
+    GetPolicyGenerationSummaryResponse: StructureShape
+    GetPolicyRequest: StructureShape
+    GetPolicyResponse: StructureShape
+    GetPolicySummaryRequest: StructureShape
+    GetPolicySummaryResponse: StructureShape
+    GetRegistryRecordRequest: StructureShape
+    GetRegistryRecordResponse: StructureShape
+    GetRegistryRequest: StructureShape
+    GetRegistryResponse: StructureShape
+    GetResourcePolicyRequest: StructureShape
+    GetResourcePolicyResponse: StructureShape
     GetTokenVaultRequest: StructureShape
     GetTokenVaultResponse: StructureShape
     GetWorkloadIdentityRequest: StructureShape
@@ -166,48 +569,284 @@ module Aws::BedrockAgentCoreControl
     GithubOauth2ProviderConfigOutput: StructureShape
     GoogleOauth2ProviderConfigInput: StructureShape
     GoogleOauth2ProviderConfigOutput: StructureShape
+    Harness: StructureShape
+    HarnessAfterInvocationHook: StructureShape
+    HarnessAfterToolCallHook: StructureShape
+    HarnessAgentCoreBrowserConfig: StructureShape
+    HarnessAgentCoreCodeInterpreterConfig: StructureShape
+    HarnessAgentCoreGatewayConfig: StructureShape
+    HarnessAgentCoreMemoryConfiguration: StructureShape
+    HarnessAgentCoreMemoryRetrievalConfig: StructureShape
+    HarnessAgentCoreMemoryRetrievalConfigs: MapShape
+    HarnessAgentCoreRuntimeEnvironment: StructureShape
+    HarnessAgentCoreRuntimeEnvironmentRequest: StructureShape
+    HarnessAllowedTool: StringShape
+    HarnessAllowedTools: ListShape
+    HarnessArn: StringShape
+    HarnessAwsSkillPath: StringShape
+    HarnessAwsSkillPaths: ListShape
+    HarnessBedrockApiFormat: EnumShape
+    HarnessBedrockModelConfig: StructureShape
+    HarnessBeforeInvocationHook: StructureShape
+    HarnessBeforeToolCallHook: StructureShape
+    HarnessBrowserArn: StringShape
+    HarnessCodeInterpreterArn: StringShape
+    HarnessDisabledMemoryConfiguration: StructureShape
+    HarnessEndpoint: StructureShape
+    HarnessEndpointArn: StringShape
+    HarnessEndpointDescription: StringShape
+    HarnessEndpointName: StringShape
+    HarnessEndpointStatus: EnumShape
+    HarnessEndpoints: ListShape
+    HarnessEnvironmentArtifact: UnionShape
+    HarnessEnvironmentProvider: UnionShape
+    HarnessEnvironmentProviderRequest: UnionShape
+    HarnessEventBridgeBusArn: StringShape
+    HarnessGatewayOutboundAuth: UnionShape
+    HarnessGeminiModelConfig: StructureShape
+    HarnessHook: UnionShape
+    HarnessHookEventBridgeTarget: StructureShape
+    HarnessHookFailureMode: EnumShape
+    HarnessHookLambdaTarget: StructureShape
+    HarnessHookName: StringShape
+    HarnessHookSnsTarget: StructureShape
+    HarnessHookTarget: UnionShape
+    HarnessHooks: ListShape
+    HarnessId: StringShape
+    HarnessInlineFunctionConfig: StructureShape
+    HarnessInlineFunctionDescription: StringShape
+    HarnessLambdaFunctionArn: StringShape
+    HarnessLiteLlmApiBase: StringShape
+    HarnessLiteLlmModelConfig: StructureShape
+    HarnessManagedMemoryConfiguration: StructureShape
+    HarnessManagedMemoryStrategyList: ListShape
+    HarnessManagedMemoryStrategyType: EnumShape
+    HarnessMemoryConfiguration: UnionShape
+    HarnessModelConfiguration: UnionShape
+    HarnessName: StringShape
+    HarnessOpenAiApiBase: StringShape
+    HarnessOpenAiApiFormat: EnumShape
+    HarnessOpenAiModelConfig: StructureShape
+    HarnessRemoteMcpConfig: StructureShape
+    HarnessRemoteMcpUrl: StringShape
+    HarnessSkill: UnionShape
+    HarnessSkillAwsSkillsSource: StructureShape
+    HarnessSkillGitAuth: StructureShape
+    HarnessSkillGitSource: StructureShape
+    HarnessSkillGitUrl: StringShape
+    HarnessSkillPath: StringShape
+    HarnessSkillS3Source: StructureShape
+    HarnessSkillS3Uri: StringShape
+    HarnessSkills: ListShape
+    HarnessSlidingWindowConfiguration: StructureShape
+    HarnessSnsTopicArn: StringShape
+    HarnessStatus: EnumShape
+    HarnessSummaries: ListShape
+    HarnessSummarizationConfiguration: StructureShape
+    HarnessSummary: StructureShape
+    HarnessSystemContentBlock: UnionShape
+    HarnessSystemPrompt: ListShape
+    HarnessTool: StructureShape
+    HarnessToolConfiguration: UnionShape
+    HarnessToolName: StringShape
+    HarnessToolType: EnumShape
+    HarnessTools: ListShape
+    HarnessTruncationConfiguration: StructureShape
+    HarnessTruncationStrategy: EnumShape
+    HarnessTruncationStrategyConfiguration: UnionShape
+    HarnessVersion: StringShape
+    HarnessVersionSummaries: ListShape
+    HarnessVersionSummary: StructureShape
     HeaderName: StringShape
+    HostingEnvironment: StructureShape
+    HostingEnvironmentListType: ListShape
+    HttpApiSchemaConfiguration: StructureShape
+    HttpConnectorParameters: MapShape
+    HttpConnectorSource: StructureShape
+    HttpConnectorTargetConfiguration: StructureShape
+    HttpHeaderKey: StringShape
+    HttpHeaderName: StringShape
+    HttpHeaderValue: StringShape
+    HttpHeadersMap: MapShape
+    HttpQueryParameterName: StringShape
+    HttpTargetConfiguration: UnionShape
+    IamCredentialProvider: StructureShape
+    IamPrincipal: StructureShape
+    IamPrincipalArn: StringShape
+    IamRoleArn: StringShape
+    IamSigningRegion: StringShape
+    IamSigningServiceName: StringShape
+    InboundTokenClaimNameType: StringShape
+    InboundTokenClaimValueType: EnumShape
+    IncludedData: EnumShape
+    IncludedOauth2ProviderConfigInput: StructureShape
+    IncludedOauth2ProviderConfigOutput: StructureShape
+    IndexedKey: StructureShape
+    IndexedKeysList: ListShape
+    InferenceConfiguration: StructureShape
+    InferenceConnectorId: StringShape
+    InferenceConnectorSource: StructureShape
+    InferenceConnectorTargetConfiguration: StructureShape
+    InferenceOperationConfiguration: StructureShape
+    InferenceOperationConfigurations: ListShape
+    InferenceOperationPath: StringShape
+    InferenceProviderTargetConfiguration: StructureShape
+    InferenceTargetConfiguration: UnionShape
+    InlineContent: StringShape
+    InlineExamplesSource: StructureShape
     InlinePayload: StringShape
+    Insight: StructureShape
+    InsightId: StringShape
+    InsightList: ListShape
+    InstanceLifecycleConfiguration: StructureShape
+    InstanceProfileArn: StringShape
+    InstanceRequirements: StructureShape
+    InstanceTypeList: ListShape
+    InterceptorConfiguration: UnionShape
+    InterceptorInputConfiguration: StructureShape
+    InterceptorPayloadExclusion: EnumShape
+    InterceptorPayloadExclusionSelector: UnionShape
+    InterceptorPayloadExclusionSelectorList: ListShape
+    InterceptorPayloadFilter: StructureShape
     InternalServerException: StructureShape
+    InvocationConfiguration: StructureShape
+    InvocationConfigurationInput: StructureShape
     IssuerUrlType: StringShape
     KeyType: EnumShape
+    KinesisResource: StructureShape
     KmsConfiguration: StructureShape
     KmsKeyArn: StringShape
+    KmsKeyId: StringShape
+    KmsKeySourceType: StructureShape
+    LambdaArn: StringShape
+    LambdaEvaluatorConfig: StructureShape
     LambdaFunctionArn: StringShape
+    LambdaInterceptorConfiguration: StructureShape
+    LambdaTransformConfiguration: StructureShape
+    LaunchParameters: StructureShape
+    LaunchTemplateSource: UnionShape
+    LicenseConfigurationArn: StringShape
+    LicenseSpecification: StructureShape
+    LicenseSpecificationList: ListShape
+    LifecycleConfiguration: StructureShape
+    LimitEntries: ListShape
+    LimitEntry: StructureShape
+    LinkedinOauth2ProviderConfigInput: StructureShape
+    LinkedinOauth2ProviderConfigOutput: StructureShape
     ListAgentRuntimeEndpointsRequest: StructureShape
     ListAgentRuntimeEndpointsResponse: StructureShape
+    ListAgentRuntimeVersionsByCapacityProviderInput: StructureShape
+    ListAgentRuntimeVersionsByCapacityProviderOutput: StructureShape
     ListAgentRuntimeVersionsRequest: StructureShape
     ListAgentRuntimeVersionsResponse: StructureShape
     ListAgentRuntimesRequest: StructureShape
     ListAgentRuntimesResponse: StructureShape
     ListApiKeyCredentialProvidersRequest: StructureShape
     ListApiKeyCredentialProvidersResponse: StructureShape
+    ListBrowserProfilesRequest: StructureShape
+    ListBrowserProfilesResponse: StructureShape
     ListBrowsersRequest: StructureShape
     ListBrowsersResponse: StructureShape
+    ListCapacityProvidersInput: StructureShape
+    ListCapacityProvidersOutput: StructureShape
     ListCodeInterpretersRequest: StructureShape
     ListCodeInterpretersResponse: StructureShape
+    ListConfigurationBundleVersionsRequest: StructureShape
+    ListConfigurationBundleVersionsResponse: StructureShape
+    ListConfigurationBundlesRequest: StructureShape
+    ListConfigurationBundlesResponse: StructureShape
+    ListConsentPortalsRequest: StructureShape
+    ListConsentPortalsResponse: StructureShape
+    ListDatasetExamplesRequest: StructureShape
+    ListDatasetExamplesResponse: StructureShape
+    ListDatasetVersionsRequest: StructureShape
+    ListDatasetVersionsResponse: StructureShape
+    ListDatasetsRequest: StructureShape
+    ListDatasetsResponse: StructureShape
+    ListEvaluatorsRequest: StructureShape
+    ListEvaluatorsResponse: StructureShape
+    ListGatewayRateLimitsRequest: StructureShape
+    ListGatewayRateLimitsResponse: StructureShape
+    ListGatewayRulesRequest: StructureShape
+    ListGatewayRulesResponse: StructureShape
     ListGatewayTargetsRequest: StructureShape
     ListGatewayTargetsResponse: StructureShape
     ListGatewaysRequest: StructureShape
     ListGatewaysResponse: StructureShape
+    ListHarnessEndpointsRequest: StructureShape
+    ListHarnessEndpointsResponse: StructureShape
+    ListHarnessVersionsRequest: StructureShape
+    ListHarnessVersionsResponse: StructureShape
+    ListHarnessesRequest: StructureShape
+    ListHarnessesResponse: StructureShape
     ListMemoriesInput: StructureShape
     ListMemoriesOutput: StructureShape
     ListOauth2CredentialProvidersRequest: StructureShape
     ListOauth2CredentialProvidersResponse: StructureShape
+    ListOnlineEvaluationConfigsRequest: StructureShape
+    ListOnlineEvaluationConfigsResponse: StructureShape
+    ListPaymentConnectorsRequest: StructureShape
+    ListPaymentConnectorsResponse: StructureShape
+    ListPaymentCredentialProvidersRequest: StructureShape
+    ListPaymentCredentialProvidersResponse: StructureShape
+    ListPaymentManagersRequest: StructureShape
+    ListPaymentManagersResponse: StructureShape
+    ListPoliciesRequest: StructureShape
+    ListPoliciesResponse: StructureShape
+    ListPolicyEngineSummariesRequest: StructureShape
+    ListPolicyEngineSummariesResponse: StructureShape
+    ListPolicyEnginesRequest: StructureShape
+    ListPolicyEnginesResponse: StructureShape
+    ListPolicyGenerationAssetsRequest: StructureShape
+    ListPolicyGenerationAssetsResponse: StructureShape
+    ListPolicyGenerationSummariesRequest: StructureShape
+    ListPolicyGenerationSummariesResponse: StructureShape
+    ListPolicyGenerationsRequest: StructureShape
+    ListPolicyGenerationsResponse: StructureShape
+    ListPolicySummariesRequest: StructureShape
+    ListPolicySummariesResponse: StructureShape
+    ListRegistriesRequest: StructureShape
+    ListRegistriesResponse: StructureShape
+    ListRegistryRecordsRequest: StructureShape
+    ListRegistryRecordsResponse: StructureShape
     ListTagsForResourceRequest: StructureShape
     ListTagsForResourceResponse: StructureShape
     ListWorkloadIdentitiesRequest: StructureShape
     ListWorkloadIdentitiesResponse: StructureShape
+    ListingMode: EnumShape
+    LlmAsAJudgeEvaluatorConfig: StructureShape
+    LlmExtractionConfig: StructureShape
+    LlmExtractionInstruction: StringShape
+    LogGroupName: StringShape
+    LogGroupNamePrefix: StringShape
+    LogGroupNamePrefixList: ListShape
+    LogGroupNamesList: ListShape
     MCPGatewayConfiguration: StructureShape
+    ManagedResourceDetails: StructureShape
+    ManagedVpcResource: StructureShape
+    MatchPathPattern: StringShape
+    MatchPathPatterns: ListShape
+    MatchPaths: StructureShape
+    MatchPrincipalEntries: ListShape
+    MatchPrincipalEntry: UnionShape
+    MatchPrincipals: StructureShape
+    MatchValueString: StringShape
+    MatchValueStringList: ListShape
     MaxResults: IntegerShape
+    MaxTokens: IntegerShape
+    McpDescriptor: StructureShape
     McpInstructions: StringShape
     McpLambdaTargetConfiguration: StructureShape
+    McpServerTargetConfiguration: StructureShape
+    McpServerUrl: StringShape
     McpSupportedVersions: ListShape
     McpTargetConfiguration: UnionShape
+    McpToolSchemaConfiguration: UnionShape
     McpVersion: StringShape
     Memory: StructureShape
     MemoryArn: StringShape
     MemoryId: StringShape
+    MemoryRecordSchema: StructureShape
     MemoryStatus: EnumShape
     MemoryStrategy: StructureShape
     MemoryStrategyId: StringShape
@@ -218,27 +857,62 @@ module Aws::BedrockAgentCoreControl
     MemoryStrategyType: EnumShape
     MemorySummary: StructureShape
     MemorySummaryList: ListShape
+    MemoryView: EnumShape
+    MessageBasedTrigger: StructureShape
+    MessageBasedTriggerInput: StructureShape
+    MetadataConfiguration: StructureShape
+    MetadataKey: StringShape
+    MetadataSchemaEntry: StructureShape
+    MetadataSchemaList: ListShape
+    MetadataValueType: EnumShape
+    MetricsNamespace: StringShape
     MicrosoftOauth2ProviderConfigInput: StructureShape
     MicrosoftOauth2ProviderConfigOutput: StructureShape
+    ModelEntries: ListShape
+    ModelEntry: StructureShape
+    ModelId: StringShape
+    ModelMapping: StructureShape
+    ModelPattern: StringShape
     ModifyConsolidationConfiguration: UnionShape
     ModifyExtractionConfiguration: UnionShape
+    ModifyInvocationConfigurationInput: StructureShape
     ModifyMemoryStrategies: StructureShape
     ModifyMemoryStrategiesList: ListShape
     ModifyMemoryStrategyInput: StructureShape
+    ModifyReflectionConfiguration: UnionShape
+    ModifySelfManagedConfiguration: StructureShape
     ModifyStrategyConfiguration: StructureShape
+    Monitoring: EnumShape
+    MountPath: StringShape
     Name: StringShape
     Namespace: StringShape
+    NamespaceAllowedValue: StringShape
+    NamespaceAllowedValuesList: ListShape
+    NamespaceKeyEntry: StructureShape
+    NamespaceKeyValidation: StructureShape
+    NamespaceKeysList: ListShape
+    NamespaceRegexPattern: StringShape
+    NamespaceVariableKey: StringShape
     NamespacesList: ListShape
+    NaturalLanguage: StringShape
     NetworkConfiguration: StructureShape
     NetworkMode: EnumShape
     NextToken: StringShape
     NonBlankString: StringShape
     NonEmptyString: StringShape
+    NonEmptyStringList: ListShape
+    NumberValidation: StructureShape
+    NumericalScaleDefinition: StructureShape
+    NumericalScaleDefinitions: ListShape
+    OAuth2AuthorizationData: StructureShape
+    OAuth2CredentialProviderArn: StringShape
     OAuthCredentialProvider: StructureShape
     OAuthCredentialProviderArn: StringShape
     OAuthCustomParameters: MapShape
     OAuthCustomParametersKey: StringShape
     OAuthCustomParametersValue: StringShape
+    OAuthDefaultReturnUrl: StringShape
+    OAuthGrantType: EnumShape
     OAuthScope: StringShape
     OAuthScopes: ListShape
     Oauth2AuthorizationServerMetadata: StructureShape
@@ -247,58 +921,264 @@ module Aws::BedrockAgentCoreControl
     Oauth2Discovery: UnionShape
     Oauth2ProviderConfigInput: UnionShape
     Oauth2ProviderConfigOutput: UnionShape
+    OnBehalfOfTokenExchangeConfigType: StructureShape
+    OnBehalfOfTokenExchangeGrantTypeType: EnumShape
+    OnlineEvaluationConfigArn: StringShape
+    OnlineEvaluationConfigId: StringShape
+    OnlineEvaluationConfigStatus: EnumShape
+    OnlineEvaluationConfigSummary: StructureShape
+    OnlineEvaluationConfigSummaryList: ListShape
+    OnlineEvaluationExecutionStatus: EnumShape
+    OpenResponsesEvaluatorModelConfig: StructureShape
+    OperatingSystem: EnumShape
+    OptionalLogGroupName: StringShape
+    OutputConfig: StructureShape
     OverrideType: EnumShape
+    PassthroughEndpoint: StringShape
+    PassthroughProtocolType: EnumShape
+    PassthroughTargetConfiguration: StructureShape
+    PaymentConnectorAuthorizationUrl: StringShape
+    PaymentConnectorId: StringShape
+    PaymentConnectorName: StringShape
+    PaymentConnectorProvisionMode: EnumShape
+    PaymentConnectorStatus: EnumShape
+    PaymentConnectorSummaries: ListShape
+    PaymentConnectorSummary: StructureShape
+    PaymentConnectorType: EnumShape
+    PaymentCredentialProviderArn: StringShape
+    PaymentCredentialProviderArnType: StringShape
+    PaymentCredentialProviderConfiguration: StructureShape
+    PaymentCredentialProviderItem: StructureShape
+    PaymentCredentialProviderVendorType: EnumShape
+    PaymentCredentialProviders: ListShape
+    PaymentManagerArn: StringShape
+    PaymentManagerId: StringShape
+    PaymentManagerName: StringShape
+    PaymentManagerStatus: EnumShape
+    PaymentManagerSummaries: ListShape
+    PaymentManagerSummary: StructureShape
+    PaymentProviderConfigurationInput: UnionShape
+    PaymentProviderConfigurationOutput: UnionShape
+    PaymentsAuthorizerType: EnumShape
+    PaymentsDescription: StringShape
+    Period: EnumShape
+    PermissionsConfiguration: StructureShape
+    PlatformVersion: StringShape
+    Policies: ListShape
+    Policy: StructureShape
+    PolicyArn: StringShape
+    PolicyDefinition: UnionShape
+    PolicyEngine: StructureShape
+    PolicyEngineArn: StringShape
+    PolicyEngineName: StringShape
+    PolicyEngineStatus: EnumShape
+    PolicyEngineSummary: StructureShape
+    PolicyEngineSummaryList: ListShape
+    PolicyEngines: ListShape
+    PolicyGeneration: StructureShape
+    PolicyGenerationArn: StringShape
+    PolicyGenerationAsset: StructureShape
+    PolicyGenerationAssets: ListShape
+    PolicyGenerationDetails: StructureShape
+    PolicyGenerationName: StringShape
+    PolicyGenerationStatus: EnumShape
+    PolicyGenerationSummary: StructureShape
+    PolicyGenerationSummaryList: ListShape
+    PolicyGenerations: ListShape
+    PolicyName: StringShape
+    PolicyStatement: StructureShape
+    PolicyStatus: EnumShape
+    PolicyStatusReasons: ListShape
+    PolicySummary: StructureShape
+    PolicySummaryList: ListShape
+    PolicyValidationMode: EnumShape
+    PortalUrlType: StringShape
+    PrincipalMatchOperator: EnumShape
+    PrivateEndpoint: UnionShape
+    PrivateEndpointManagedResources: ListShape
+    PrivateEndpointOverride: StructureShape
+    PrivateEndpointOverrideDomain: StringShape
+    PrivateEndpointOverrides: ListShape
+    PrivateKeyJwtConfig: StructureShape
+    PrivateKeySource: UnionShape
     Prompt: StringShape
     ProtocolConfiguration: StructureShape
+    Provider: EnumShape
+    ProviderPrefix: StructureShape
+    PutResourcePolicyRequest: StructureShape
+    PutResourcePolicyResponse: StructureShape
+    RateConfig: StructureShape
+    RateConfigs: ListShape
+    RatingScale: UnionShape
+    ReasoningConfiguration: StructureShape
+    RecordExpiryAction: EnumShape
+    RecordExpiryDurationDays: IntegerShape
+    RecordExpirySpecification: UnionShape
+    RecordIdentifier: StringShape
     RecordingConfig: StructureShape
+    ReflectionConfiguration: UnionShape
+    RegistryArn: StringShape
+    RegistryAuthorizerType: EnumShape
+    RegistryId: StringShape
+    RegistryIdentifier: StringShape
+    RegistryName: StringShape
+    RegistryRecordArn: StringShape
+    RegistryRecordCredentialProviderConfiguration: StructureShape
+    RegistryRecordCredentialProviderConfigurationList: ListShape
+    RegistryRecordCredentialProviderType: EnumShape
+    RegistryRecordCredentialProviderUnion: UnionShape
+    RegistryRecordIamCredentialProvider: StructureShape
+    RegistryRecordId: StringShape
+    RegistryRecordName: StringShape
+    RegistryRecordOAuthCredentialProvider: StructureShape
+    RegistryRecordOAuthGrantType: EnumShape
+    RegistryRecordStatus: EnumShape
+    RegistryRecordSummary: StructureShape
+    RegistryRecordSummaryList: ListShape
+    RegistryRecordVersion: StringShape
+    RegistryStatus: EnumShape
+    RegistrySummary: StructureShape
+    RegistrySummaryList: ListShape
     RequestHeaderAllowlist: ListShape
     RequestHeaderConfiguration: UnionShape
     RequiredProperties: ListShape
+    Resource: UnionShape
+    ResourceAssociationArn: StringShape
+    ResourceConfigurationIdentifier: StringShape
+    ResourceGatewayArn: StringShape
+    ResourceId: StringShape
     ResourceLimitExceededException: StructureShape
+    ResourceLocation: UnionShape
     ResourceNotFoundException: StructureShape
     ResourceOauth2ReturnUrlListType: ListShape
     ResourceOauth2ReturnUrlType: StringShape
+    ResourcePolicyBody: StringShape
     ResourceType: EnumShape
     ResponseListType: ListShape
     ResponseType: StringShape
+    RestApiMethod: EnumShape
+    RestApiMethods: ListShape
+    ResultDestination: EnumShape
+    RetryableConflictException: StructureShape
     RoleArn: StringShape
+    RootVolumeConfiguration: StructureShape
+    RotatePaymentConnectorCredentialsRequest: StructureShape
+    RotatePaymentConnectorCredentialsResponse: StructureShape
+    RouteToTargetAction: UnionShape
+    RoutingDomain: StringShape
+    Rule: StructureShape
+    RuntimeArn: StringShape
     RuntimeContainerUri: StringShape
+    RuntimeMetadataConfiguration: StructureShape
+    RuntimeQualifier: StringShape
+    RuntimeTargetConfiguration: StructureShape
     S3BucketUri: StringShape
+    S3CertificateConfiguration: StructureShape
     S3Configuration: StructureShape
+    S3FilesAccessPointArn: StringShape
+    S3FilesAccessPointConfiguration: StructureShape
+    S3FilesConfiguration: StructureShape
+    S3FilesFileSystemArn: StringShape
     S3Location: StructureShape
+    S3Source: StructureShape
+    S3Uri: StringShape
+    SSHKeyName: StringShape
     SalesforceOauth2ProviderConfigInput: StructureShape
     SalesforceOauth2ProviderConfigOutput: StructureShape
+    SamplingConfig: StructureShape
+    SamplingPercentage: FloatShape
     SandboxName: StringShape
     SchemaDefinition: StructureShape
     SchemaProperties: MapShape
     SchemaType: EnumShape
+    SchemaVersion: StringShape
+    ScopeList: ListShape
+    ScopeType: StringShape
+    ScopesListType: ListShape
     SearchType: EnumShape
     Secret: StructureShape
     SecretArn: StringShape
+    SecretIdType: StringShape
+    SecretJsonKeyType: StringShape
+    SecretReference: StructureShape
+    SecretSourceType: EnumShape
+    SecretsManagerCertificateConfiguration: StructureShape
+    SecretsManagerLocation: StructureShape
     SecurityGroupId: StringShape
+    SecurityGroupIdList: ListShape
+    SecurityGroupIdentifier: StringShape
+    SecurityGroupIds: ListShape
     SecurityGroups: ListShape
+    SelfManagedConfiguration: StructureShape
+    SelfManagedConfigurationInput: StructureShape
+    SelfManagedLatticeResource: UnionShape
     SemanticConsolidationOverride: StructureShape
     SemanticExtractionOverride: StructureShape
     SemanticMemoryStrategyInput: StructureShape
     SemanticOverrideConfigurationInput: StructureShape
     SemanticOverrideConsolidationConfigurationInput: StructureShape
     SemanticOverrideExtractionConfigurationInput: StructureShape
+    SensitiveJson: DocumentShape
+    SensitiveText: StringShape
+    ServerDefinition: StructureShape
     ServerProtocol: EnumShape
     ServiceException: StructureShape
+    ServiceName: StringShape
+    ServiceNamesList: ListShape
     ServiceQuotaExceededException: StructureShape
+    SessionConfig: StructureShape
+    SessionConfiguration: StructureShape
+    SessionStorageConfiguration: StructureShape
     SetTokenVaultCMKRequest: StructureShape
     SetTokenVaultCMKResponse: StructureShape
+    SigningAlgorithm: EnumShape
+    SkillDefinition: StructureShape
+    SkillMdDefinition: StructureShape
     SlackOauth2ProviderConfigInput: StructureShape
     SlackOauth2ProviderConfigOutput: StructureShape
+    StartPolicyGenerationRequest: StructureShape
+    StartPolicyGenerationResponse: StructureShape
+    Statement: StringShape
+    StaticOverride: StructureShape
+    StaticQueryParameterConflictResolution: EnumShape
+    StaticQueryParameterName: StringShape
+    StaticQueryParameterValue: StringShape
+    StaticQueryParameters: MapShape
+    StaticRoute: StructureShape
+    Status: EnumShape
     StatusReason: StringShape
+    StatusReasonType: StringShape
     StatusReasons: ListShape
+    StickinessConfiguration: StructureShape
+    StickinessTimeout: IntegerShape
     StrategyConfiguration: StructureShape
+    StreamDeliveryResource: UnionShape
+    StreamDeliveryResources: StructureShape
+    StreamDeliveryResourcesList: ListShape
+    StreamingConfiguration: StructureShape
+    String: StringShape
+    StringListValidation: StructureShape
+    StringValidation: StructureShape
+    StripePrivyAppIdType: StringShape
+    StripePrivyAuthorizationIdType: StringShape
+    StripePrivyConfigurationInput: StructureShape
+    StripePrivyConfigurationOutput: StructureShape
+    SubmitRegistryRecordForApprovalRequest: StructureShape
+    SubmitRegistryRecordForApprovalResponse: StructureShape
     SubnetId: StringShape
+    SubnetIdList: ListShape
+    SubnetIds: ListShape
     Subnets: ListShape
+    SubscriptionRequiredException: StructureShape
     SummaryConsolidationOverride: StructureShape
     SummaryMemoryStrategyInput: StructureShape
     SummaryOverrideConfigurationInput: StructureShape
     SummaryOverrideConsolidationConfigurationInput: StructureShape
+    SynchronizationConfiguration: StructureShape
+    SynchronizationType: EnumShape
+    SynchronizeGatewayTargetsRequest: StructureShape
+    SynchronizeGatewayTargetsResponse: StructureShape
+    SystemManagedBlock: StructureShape
     TagKey: StringShape
     TagKeyList: ListShape
     TagResourceRequest: StructureShape
@@ -309,19 +1189,49 @@ module Aws::BedrockAgentCoreControl
     TargetConfiguration: UnionShape
     TargetDescription: StringShape
     TargetId: StringShape
+    TargetIdList: ListShape
     TargetMaxResults: IntegerShape
     TargetName: StringShape
     TargetNextToken: StringShape
+    TargetProtocolType: EnumShape
+    TargetResourcePriority: IntegerShape
     TargetStatus: EnumShape
     TargetSummaries: ListShape
     TargetSummary: StructureShape
+    TargetTrafficSplitEntries: ListShape
+    TargetTrafficSplitEntry: StructureShape
+    TargetType: EnumShape
+    Temperature: FloatShape
+    TenantIdType: StringShape
     ThrottledException: StructureShape
     ThrottlingException: StructureShape
+    TimeBasedTrigger: StructureShape
+    TimeBasedTriggerInput: StructureShape
+    TokenAuthMethod: StringShape
+    TokenBasedTrigger: StructureShape
+    TokenBasedTriggerInput: StructureShape
+    TokenEndpointAuthMethodsType: ListShape
     TokenEndpointType: StringShape
+    TokenExchangeGrantTypeConfigType: StructureShape
     TokenVaultIdType: StringShape
     ToolDefinition: StructureShape
     ToolDefinitions: ListShape
     ToolSchema: UnionShape
+    ToolSecretArn: StringShape
+    ToolsDefinition: StructureShape
+    ToolsFileSystemConfiguration: UnionShape
+    ToolsFileSystemConfigurations: ListShape
+    TopK: IntegerShape
+    TopP: FloatShape
+    TrafficSplitEntries: ListShape
+    TrafficSplitEntry: StructureShape
+    TrafficSplitMetadataKey: StringShape
+    TrafficSplitMetadataMap: MapShape
+    TrafficSplitMetadataValue: StringShape
+    TriggerCondition: UnionShape
+    TriggerConditionInput: UnionShape
+    TriggerConditionInputList: ListShape
+    TriggerConditionsList: ListShape
     UnauthorizedException: StructureShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
@@ -331,33 +1241,110 @@ module Aws::BedrockAgentCoreControl
     UpdateAgentRuntimeResponse: StructureShape
     UpdateApiKeyCredentialProviderRequest: StructureShape
     UpdateApiKeyCredentialProviderResponse: StructureShape
+    UpdateCapacityProviderInput: StructureShape
+    UpdateCapacityProviderOutput: StructureShape
+    UpdateConfigurationBundleRequest: StructureShape
+    UpdateConfigurationBundleResponse: StructureShape
+    UpdateConsentPortalRequest: StructureShape
+    UpdateConsentPortalResponse: StructureShape
+    UpdateDatasetExamplesRequest: StructureShape
+    UpdateDatasetExamplesResponse: StructureShape
+    UpdateDatasetRequest: StructureShape
+    UpdateDatasetResponse: StructureShape
+    UpdateEvaluatorRequest: StructureShape
+    UpdateEvaluatorResponse: StructureShape
+    UpdateGatewayRateLimitRequest: StructureShape
+    UpdateGatewayRateLimitResponse: StructureShape
     UpdateGatewayRequest: StructureShape
     UpdateGatewayResponse: StructureShape
+    UpdateGatewayRuleRequest: StructureShape
+    UpdateGatewayRuleResponse: StructureShape
     UpdateGatewayTargetRequest: StructureShape
     UpdateGatewayTargetResponse: StructureShape
+    UpdateHarnessEndpointRequest: StructureShape
+    UpdateHarnessEndpointResponse: StructureShape
+    UpdateHarnessRequest: StructureShape
+    UpdateHarnessResponse: StructureShape
     UpdateMemoryInput: StructureShape
     UpdateMemoryOutput: StructureShape
     UpdateOauth2CredentialProviderRequest: StructureShape
     UpdateOauth2CredentialProviderResponse: StructureShape
+    UpdateOnlineEvaluationConfigRequest: StructureShape
+    UpdateOnlineEvaluationConfigResponse: StructureShape
+    UpdatePaymentConnectorRequest: StructureShape
+    UpdatePaymentConnectorResponse: StructureShape
+    UpdatePaymentCredentialProviderRequest: StructureShape
+    UpdatePaymentCredentialProviderResponse: StructureShape
+    UpdatePaymentManagerRequest: StructureShape
+    UpdatePaymentManagerResponse: StructureShape
+    UpdatePolicyEngineRequest: StructureShape
+    UpdatePolicyEngineResponse: StructureShape
+    UpdatePolicyRequest: StructureShape
+    UpdatePolicyResponse: StructureShape
+    UpdateRegistryRecordRequest: StructureShape
+    UpdateRegistryRecordResponse: StructureShape
+    UpdateRegistryRecordStatusRequest: StructureShape
+    UpdateRegistryRecordStatusResponse: StructureShape
+    UpdateRegistryRequest: StructureShape
+    UpdateRegistryResponse: StructureShape
     UpdateWorkloadIdentityRequest: StructureShape
     UpdateWorkloadIdentityResponse: StructureShape
+    UpdatedA2aDescriptor: StructureShape
+    UpdatedAgentSkillsDescriptor: StructureShape
+    UpdatedAgentSkillsDescriptorFields: StructureShape
+    UpdatedApprovalConfiguration: StructureShape
+    UpdatedAuthorizerConfiguration: StructureShape
+    UpdatedCustomDescriptor: StructureShape
+    UpdatedDescription: StructureShape
+    UpdatedDescriptors: StructureShape
+    UpdatedDescriptorsUnion: StructureShape
+    UpdatedHarnessEnvironmentArtifact: StructureShape
+    UpdatedHarnessMemoryConfiguration: StructureShape
+    UpdatedMcpDescriptor: StructureShape
+    UpdatedMcpDescriptorFields: StructureShape
+    UpdatedServerDefinition: StructureShape
+    UpdatedSkillDefinition: StructureShape
+    UpdatedSkillMdDefinition: StructureShape
+    UpdatedSynchronizationConfiguration: StructureShape
+    UpdatedSynchronizationType: StructureShape
+    UpdatedToolsDefinition: StructureShape
     UserPreferenceConsolidationOverride: StructureShape
     UserPreferenceExtractionOverride: StructureShape
     UserPreferenceMemoryStrategyInput: StructureShape
     UserPreferenceOverrideConfigurationInput: StructureShape
     UserPreferenceOverrideConsolidationConfigurationInput: StructureShape
     UserPreferenceOverrideExtractionConfigurationInput: StructureShape
+    Validation: UnionShape
     ValidationException: StructureShape
     ValidationExceptionField: StructureShape
     ValidationExceptionFieldList: ListShape
     ValidationExceptionReason: EnumShape
+    VersionCreatedBySource: StructureShape
+    VersionFilter: StructureShape
+    VersionLineageMetadata: StructureShape
+    VirtualDeviceName: StringShape
+    VolumeConfiguration: UnionShape
+    VolumeConfigurationList: ListShape
+    VolumeIops: IntegerShape
+    VolumeName: StringShape
+    VolumeSizeGiB: IntegerShape
+    VolumeThroughput: IntegerShape
     VpcConfig: StructureShape
+    VpcConfiguration: StructureShape
+    VpcIdentifier: StringShape
+    WafConfiguration: StructureShape
+    WafFailureMode: EnumShape
+    WebAclArn: StringShape
+    WeightedOverride: StructureShape
+    WeightedRoute: StructureShape
     WorkloadIdentityArn: StringShape
     WorkloadIdentityArnType: StringShape
     WorkloadIdentityDetails: StructureShape
     WorkloadIdentityList: ListShape
+    WorkloadIdentityNameListType: ListShape
     WorkloadIdentityNameType: StringShape
     WorkloadIdentityType: StructureShape
+    EntryPoint: StringShape
 
     AmazonBedrockAgentCoreControl: ServiceShape
   end

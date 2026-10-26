@@ -193,6 +193,11 @@ module Aws::ComputeOptimizer
     High: IntegerShape
     Identifier: StringShape
     Idle: EnumShape
+    IdleDimension: StructureShape
+    IdleDimensionKey: StringShape
+    IdleDimensionValue: StringShape
+    IdleDimensionValues: ListShape
+    IdleDimensions: ListShape
     IdleEstimatedMonthlySavings: StructureShape
     IdleFinding: EnumShape
     IdleFindingDescription: StringShape

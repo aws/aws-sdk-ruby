@@ -10,6 +10,9 @@ module Aws::CloudWatchLogs
       def expected_sequence_token: () -> String?
       def message: () -> String?
     end
+    class InternalServerException < Smithy::Client::ServiceError
+      def message: () -> String?
+    end
     class InternalStreamingException < Smithy::Client::ServiceError
       def message: () -> String?
     end

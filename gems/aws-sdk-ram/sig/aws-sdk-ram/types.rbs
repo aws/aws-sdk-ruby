@@ -116,6 +116,29 @@ module Aws::RAM
       attr_accessor resource_share_arn: String?
     end
 
+    class AssociatedSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arn: String,
+        ?source_id: String,
+        ?source_type: String,
+        ?status: String,
+        ?last_updated_time: Time,
+        ?creation_time: Time,
+        ?status_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arn: String?
+      attr_accessor source_id: String?
+      attr_accessor source_type: String?
+      attr_accessor status: String?
+      attr_accessor last_updated_time: Time?
+      attr_accessor creation_time: Time?
+      attr_accessor status_message: String?
+    end
+
     class CreatePermissionRequest
       include Smithy::Schema::Structure
 
@@ -188,6 +211,7 @@ module Aws::RAM
         ?client_token: String,
         ?permission_arns: Array[String],
         ?sources: Array[String],
+        ?resource_share_configuration: Types::ResourceShareConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -199,6 +223,7 @@ module Aws::RAM
       attr_accessor client_token: String?
       attr_accessor permission_arns: Array[String]?
       attr_accessor sources: Array[String]?
+      attr_accessor resource_share_configuration: Types::ResourceShareConfiguration?
     end
 
     class CreateResourceShareResponse
@@ -912,6 +937,40 @@ module Aws::RAM
       attr_accessor next_token: String?
     end
 
+    class ListSourceAssociationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?resource_share_arns: Array[String],
+        ?source_id: String,
+        ?source_type: String,
+        ?association_status: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor resource_share_arns: Array[String]?
+      attr_accessor source_id: String?
+      attr_accessor source_type: String?
+      attr_accessor association_status: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSourceAssociationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source_associations: Array[Types::AssociatedSource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source_associations: Array[Types::AssociatedSource]?
+      attr_accessor next_token: String?
+    end
+
     class MalformedArnException
       include Smithy::Schema::Structure
 
@@ -1239,6 +1298,7 @@ module Aws::RAM
         ?creation_time: Time,
         ?last_updated_time: Time,
         ?feature_set: String,
+        ?resource_share_configuration: Types::ResourceShareConfiguration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1252,6 +1312,7 @@ module Aws::RAM
       attr_accessor creation_time: Time?
       attr_accessor last_updated_time: Time?
       attr_accessor feature_set: String?
+      attr_accessor resource_share_configuration: Types::ResourceShareConfiguration?
     end
 
     class ResourceShareAssociation
@@ -1287,11 +1348,26 @@ module Aws::RAM
       FAILED: String
       DISASSOCIATING: String
       DISASSOCIATED: String
+      SUSPENDED: String
+      SUSPENDING: String
+      RESTORING: String
     end
 
     module ResourceShareAssociationType
       PRINCIPAL: String
       RESOURCE: String
+      SOURCE: String
+    end
+
+    class ResourceShareConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?retain_sharing_on_account_leave_organization: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor retain_sharing_on_account_leave_organization: bool?
     end
 
     module ResourceShareFeatureSet

@@ -154,7 +154,18 @@ module Aws::DataSync
             version: String
           },
           password: String,
-          user: String
+          user: String,
+          managed_secret_config: {
+            secret_arn: String
+          },
+          cmk_secret_config: {
+            secret_arn: untyped,
+            kms_key_arn: String
+          },
+          custom_secret_config: {
+            secret_arn: untyped,
+            secret_access_role_arn: String
+          }
         }
       },
       ?security_group_arns: Array[String],
@@ -186,7 +197,18 @@ module Aws::DataSync
             version: String
           },
           password: String,
-          user: String
+          user: String,
+          managed_secret_config: {
+            secret_arn: String
+          },
+          cmk_secret_config: {
+            secret_arn: untyped,
+            kms_key_arn: String
+          },
+          custom_secret_config: {
+            secret_arn: untyped,
+            secret_access_role_arn: String
+          }
         }
       },
       ?security_group_arns: Array[String],
@@ -215,7 +237,15 @@ module Aws::DataSync
       ],
       ?user: String,
       ?domain: String,
-      ?password: String
+      ?password: String,
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      }
     ) -> _CreateLocationFsxWindowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationFsxWindowsResponse
 
     interface _CreateLocationHdfsResponse
@@ -248,7 +278,15 @@ module Aws::DataSync
           key: String,
           value: String
         }
-      ]
+      ],
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      }
     ) -> _CreateLocationHdfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateLocationHdfsResponse
 
     interface _CreateLocationNfsResponse
@@ -332,6 +370,14 @@ module Aws::DataSync
       ?user: String,
       ?domain: String,
       ?password: String,
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      },
       ?agent_arns: Array[String],
       ?mount_options: {
         version: String
@@ -373,7 +419,8 @@ module Aws::DataSync
         log_level: String,
         transfer_mode: String,
         security_descriptor_copy_flags: String,
-        object_tags: String
+        object_tags: String,
+        object_metadata: String
       },
       ?excludes: Array[
         {
@@ -544,6 +591,9 @@ module Aws::DataSync
       def creation_time: () -> Time?
       def user: () -> String?
       def domain: () -> String?
+      def managed_secret_config: () -> Types::ManagedSecretConfig?
+      def cmk_secret_config: () -> Types::CmkSecretConfig?
+      def custom_secret_config: () -> Types::CustomSecretConfig?
     end
     def describe_location_fsx_windows: (
       ?location_arn: String
@@ -563,6 +613,9 @@ module Aws::DataSync
       def kerberos_principal: () -> String?
       def agent_arns: () -> Array[String]?
       def creation_time: () -> Time?
+      def managed_secret_config: () -> Types::ManagedSecretConfig?
+      def cmk_secret_config: () -> Types::CmkSecretConfig?
+      def custom_secret_config: () -> Types::CustomSecretConfig?
     end
     def describe_location_hdfs: (
       ?location_arn: String
@@ -623,6 +676,9 @@ module Aws::DataSync
       def dns_ip_addresses: () -> Array[String]?
       def kerberos_principal: () -> String?
       def authentication_type: () -> String?
+      def managed_secret_config: () -> Types::ManagedSecretConfig?
+      def cmk_secret_config: () -> Types::CmkSecretConfig?
+      def custom_secret_config: () -> Types::CustomSecretConfig?
     end
     def describe_location_smb: (
       ?location_arn: String
@@ -681,6 +737,15 @@ module Aws::DataSync
       def files_prepared: () -> Integer?
       def files_listed: () -> Types::TaskExecutionFilesListedDetail?
       def files_failed: () -> Types::TaskExecutionFilesFailedDetail?
+      def estimated_folders_to_delete: () -> Integer?
+      def estimated_folders_to_transfer: () -> Integer?
+      def folders_skipped: () -> Integer?
+      def folders_prepared: () -> Integer?
+      def folders_transferred: () -> Integer?
+      def folders_verified: () -> Integer?
+      def folders_deleted: () -> Integer?
+      def folders_listed: () -> Types::TaskExecutionFoldersListedDetail?
+      def folders_failed: () -> Types::TaskExecutionFoldersFailedDetail?
       def launch_time: () -> Time?
       def end_time: () -> Time?
     end
@@ -775,7 +840,8 @@ module Aws::DataSync
         log_level: String,
         transfer_mode: String,
         security_descriptor_copy_flags: String,
-        object_tags: String
+        object_tags: String,
+        object_metadata: String
       },
       ?includes: Array[
         {
@@ -917,7 +983,15 @@ module Aws::DataSync
             version: String
           },
           password: String,
-          user: String
+          user: String,
+          cmk_secret_config: {
+            secret_arn: String,
+            kms_key_arn: String
+          },
+          custom_secret_config: {
+            secret_arn: untyped,
+            secret_access_role_arn: String
+          }
         }
       },
       ?subdirectory: String
@@ -940,7 +1014,18 @@ module Aws::DataSync
             version: String
           },
           password: String,
-          user: String
+          user: String,
+          managed_secret_config: {
+            secret_arn: String
+          },
+          cmk_secret_config: {
+            secret_arn: untyped,
+            kms_key_arn: String
+          },
+          custom_secret_config: {
+            secret_arn: untyped,
+            secret_access_role_arn: String
+          }
         }
       },
       ?subdirectory: String
@@ -954,7 +1039,15 @@ module Aws::DataSync
       ?subdirectory: String,
       ?domain: String,
       ?user: String,
-      ?password: String
+      ?password: String,
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      }
     ) -> _UpdateLocationFsxWindowsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationFsxWindowsResponse
 
     interface _UpdateLocationHdfsResponse
@@ -981,7 +1074,15 @@ module Aws::DataSync
       ?kerberos_principal: String,
       ?kerberos_keytab: String,
       ?kerberos_krb5_conf: String,
-      ?agent_arns: Array[String]
+      ?agent_arns: Array[String],
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      }
     ) -> _UpdateLocationHdfsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateLocationHdfsResponse
 
     interface _UpdateLocationNfsResponse
@@ -1044,6 +1145,14 @@ module Aws::DataSync
       ?user: String,
       ?domain: String,
       ?password: String,
+      ?cmk_secret_config: {
+        secret_arn: String,
+        kms_key_arn: String
+      },
+      ?custom_secret_config: {
+        secret_arn: String,
+        secret_access_role_arn: String
+      },
       ?agent_arns: Array[String],
       ?mount_options: {
         version: String
@@ -1075,7 +1184,8 @@ module Aws::DataSync
         log_level: String,
         transfer_mode: String,
         security_descriptor_copy_flags: String,
-        object_tags: String
+        object_tags: String,
+        object_metadata: String
       },
       ?excludes: Array[
         {
@@ -1149,7 +1259,8 @@ module Aws::DataSync
         log_level: String,
         transfer_mode: String,
         security_descriptor_copy_flags: String,
-        object_tags: String
+        object_tags: String,
+        object_metadata: String
       }
     ) -> _UpdateTaskExecutionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTaskExecutionResponse
   end

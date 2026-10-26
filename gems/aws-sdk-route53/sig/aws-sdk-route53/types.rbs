@@ -1,6 +1,17 @@
 module Aws::Route53
   module Types
 
+    module AcceleratedRecoveryStatus
+      ENABLING: String
+      ENABLE_FAILED: String
+      ENABLING_HOSTED_ZONE_LOCKED: String
+      ENABLED: String
+      DISABLING: String
+      DISABLE_FAILED: String
+      DISABLED: String
+      DISABLING_HOSTED_ZONE_LOCKED: String
+    end
+
     class AccountLimit
       include Smithy::Schema::Structure
 
@@ -407,6 +418,8 @@ module Aws::Route53
       ap_east_2: String
       eu_isoe_west_1: String
       ap_southeast_6: String
+      us_isob_west_1: String
+      eusc_de_east_1: String
     end
 
     class CollectionSummary
@@ -1769,6 +1782,7 @@ module Aws::Route53
         ?config: Types::HostedZoneConfig,
         ?resource_record_set_count: Integer,
         ?linked_service: Types::LinkedService,
+        ?features: Types::HostedZoneFeatures,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1778,6 +1792,7 @@ module Aws::Route53
       attr_accessor config: Types::HostedZoneConfig?
       attr_accessor resource_record_set_count: Integer?
       attr_accessor linked_service: Types::LinkedService?
+      attr_accessor features: Types::HostedZoneFeatures?
     end
 
     class HostedZoneAlreadyExists
@@ -1802,6 +1817,30 @@ module Aws::Route53
 
       attr_accessor comment: String?
       attr_accessor private_zone: bool?
+    end
+
+    class HostedZoneFailureReasons
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerated_recovery: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerated_recovery: String?
+    end
+
+    class HostedZoneFeatures
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?accelerated_recovery_status: String,
+        ?failure_reasons: Types::HostedZoneFailureReasons,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor accelerated_recovery_status: String?
+      attr_accessor failure_reasons: Types::HostedZoneFailureReasons?
     end
 
     class HostedZoneLimit
@@ -3108,6 +3147,7 @@ module Aws::Route53
       us_gov_west_1: String
       ap_east_2: String
       ap_southeast_6: String
+      eusc_de_east_1: String
     end
 
     class ResourceTagSet
@@ -3489,6 +3529,28 @@ module Aws::Route53
       attr_accessor hosted_zone: Types::HostedZone?
     end
 
+    class UpdateHostedZoneFeaturesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?hosted_zone_id: String,
+        ?enable_accelerated_recovery: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor hosted_zone_id: String?
+      attr_accessor enable_accelerated_recovery: bool?
+    end
+
+    class UpdateHostedZoneFeaturesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class UpdateTrafficPolicyCommentRequest
       include Smithy::Schema::Structure
 
@@ -3623,6 +3685,8 @@ module Aws::Route53
       ap_east_2: String
       eu_isoe_west_1: String
       ap_southeast_6: String
+      us_isob_west_1: String
+      eusc_de_east_1: String
     end
   end
 end

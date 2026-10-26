@@ -4,6 +4,7 @@ module Aws::EMRcontainers
 
     ACMCertArn: StringShape
     AllowAWSToRetainLogs: EnumShape
+    AuthenticationConfiguration: StructureShape
     AuthorizationConfiguration: StructureShape
     Base64Encoded: StringShape
     Boolean: BooleanShape
@@ -36,6 +37,8 @@ module Aws::EMRcontainers
     DeleteJobTemplateResponse: StructureShape
     DeleteManagedEndpointRequest: StructureShape
     DeleteManagedEndpointResponse: StructureShape
+    DeleteSecurityConfigurationRequest: StructureShape
+    DeleteSecurityConfigurationResponse: StructureShape
     DeleteVirtualClusterRequest: StructureShape
     DeleteVirtualClusterResponse: StructureShape
     DescribeJobRunRequest: StructureShape
@@ -50,6 +53,7 @@ module Aws::EMRcontainers
     DescribeVirtualClusterResponse: StructureShape
     EKSRequestThrottledException: StructureShape
     EksInfo: StructureShape
+    EmrIdentityCenterApplicationARN: StringShape
     EncryptionConfiguration: StructureShape
     Endpoint: StructureShape
     EndpointArn: StringShape
@@ -64,12 +68,17 @@ module Aws::EMRcontainers
     FailureReason: EnumShape
     GetManagedEndpointSessionCredentialsRequest: StructureShape
     GetManagedEndpointSessionCredentialsResponse: StructureShape
+    IAMConfiguration: StructureShape
     IAMRoleArn: StringShape
+    IdentityCenterConfiguration: StructureShape
+    IdentityCenterInstanceARN: StringShape
+    InQueueJobLimitInteger: IntegerShape
     InTransitEncryptionConfiguration: StructureShape
     InternalServerException: StructureShape
     JavaInteger: IntegerShape
     JobArn: StringShape
     JobDriver: StructureShape
+    JobLimitInteger: IntegerShape
     JobRun: StructureShape
     JobRunState: EnumShape
     JobRunStates: ListShape
@@ -99,6 +108,8 @@ module Aws::EMRcontainers
     MaxFilesToKeep: IntegerShape
     MonitoringConfiguration: StructureShape
     NextToken: StringShape
+    NodeLabelString: StringShape
+    NonNegativeInteger: IntegerShape
     ParametricCloudWatchMonitoringConfiguration: StructureShape
     ParametricConfigurationOverrides: StructureShape
     ParametricIAMRoleArn: StringShape
@@ -117,6 +128,8 @@ module Aws::EMRcontainers
     RotationSize: StringShape
     RsiArn: StringShape
     S3MonitoringConfiguration: StructureShape
+    SchedulerConfiguration: StructureShape
+    SchedulerStatus: StructureShape
     SecretsManagerArn: StringShape
     SecureNamespaceInfo: StructureShape
     SecurityConfiguration: StructureShape
@@ -124,6 +137,7 @@ module Aws::EMRcontainers
     SecurityConfigurationData: StructureShape
     SecurityConfigurations: ListShape
     SensitivePropertiesMap: MapShape
+    SessionIdleTimeoutInMinutes: IntegerShape
     SessionTagValue: StringShape
     SparkSqlJobDriver: StructureShape
     SparkSqlParameters: StringShape
@@ -151,6 +165,8 @@ module Aws::EMRcontainers
     Token: StringShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateVirtualClusterRequest: StructureShape
+    UpdateVirtualClusterResponse: StructureShape
     UriString: StringShape
     ValidationException: StructureShape
     VirtualCluster: StructureShape

@@ -25,6 +25,7 @@ module Aws::PaymentCryptography
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {PublicPolicyException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ServiceUnavailableException}
@@ -66,6 +67,19 @@ module Aws::PaymentCryptography
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::PaymentCryptography::Types::InternalServerException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The resource-based policy would grant public access to the key.</p> <p>Modify the policy to restrict access to specific principals and resubmit the request.</p>
+    class PublicPolicyException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::PaymentCryptography::Types::PublicPolicyException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

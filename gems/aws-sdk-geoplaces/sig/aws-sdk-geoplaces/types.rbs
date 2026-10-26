@@ -17,10 +17,26 @@ module Aws::GeoPlaces
 
       def initialize: (
         ?position: Array[Float],
+        ?type: String,
+        ?primary: bool,
+        ?label: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor position: Array[Float]?
+      attr_accessor type: String?
+      attr_accessor primary: bool?
+      attr_accessor label: String?
+    end
+
+    module AccessPointType
+      DELIVERY: String
+      EMERGENCY: String
+      ENTRANCE: String
+      LOADING: String
+      OTHER: String
+      PARKING: String
+      TAXI: String
     end
 
     class AccessRestriction
@@ -139,6 +155,35 @@ module Aws::GeoPlaces
       attr_accessor street: Array[Types::PhonemeTranscription]?
     end
 
+    module AddressTranslationComponent
+      DISTRICT: String
+      LOCALITY: String
+      REGION: String
+      SUB_REGION: String
+    end
+
+    class AdminNames
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?names: Array[Types::TranslationName],
+        ?preference: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor names: Array[Types::TranslationName]?
+      attr_accessor preference: String?
+    end
+
+    module AdminNamesPreference
+      ALTERNATIVE: String
+      PRIMARY: String
+    end
+
+    module AutocompleteAdditionalFeature
+      CORE: String
+    end
+
     class AutocompleteAddressHighlights
       include Smithy::Schema::Structure
 
@@ -193,6 +238,17 @@ module Aws::GeoPlaces
       attr_accessor include_place_types: Array[String]?
     end
 
+    module AutocompleteFilterPlaceType
+      LOCALITY: String
+      POSTAL_CODE: String
+      STREET: String
+      INTERSECTION: String
+      POINT_ADDRESS: String
+      INTERPOLATED_ADDRESS: String
+      COUNTRY: String
+      REGION: String
+    end
+
     class AutocompleteHighlights
       include Smithy::Schema::Structure
 
@@ -204,6 +260,10 @@ module Aws::GeoPlaces
 
       attr_accessor title: Array[Types::Highlight]?
       attr_accessor address: Types::AutocompleteAddressHighlights?
+    end
+
+    module AutocompleteIntendedUse
+      SINGLE_USE: String
     end
 
     class AutocompleteRequest
@@ -260,6 +320,7 @@ module Aws::GeoPlaces
         ?language: String,
         ?political_view: String,
         ?highlights: Types::AutocompleteHighlights,
+        ?estimated_point_address: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -271,6 +332,7 @@ module Aws::GeoPlaces
       attr_accessor language: String?
       attr_accessor political_view: String?
       attr_accessor highlights: Types::AutocompleteHighlights?
+      attr_accessor estimated_point_address: bool?
     end
 
     class BusinessChain
@@ -376,6 +438,21 @@ module Aws::GeoPlaces
       attr_accessor name: Array[Types::Highlight]?
     end
 
+    class CrossReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?source_place_id: String,
+        ?source_categories: Array[Types::Category],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor source_place_id: String?
+      attr_accessor source_categories: Array[Types::Category]?
+    end
+
     class FilterCircle
       include Smithy::Schema::Structure
 
@@ -404,6 +481,18 @@ module Aws::GeoPlaces
       attr_accessor primary: bool?
     end
 
+    module GeocodeAdditionalFeature
+      TIME_ZONE: String
+      ACCESS: String
+      SECONDARY_ADDRESSES: String
+      INTERSECTIONS: String
+    end
+
+    module GeocodeAddressNamesMode
+      MATCHED: String
+      ADMINISTRATIVE: String
+    end
+
     class GeocodeFilter
       include Smithy::Schema::Structure
 
@@ -415,6 +504,24 @@ module Aws::GeoPlaces
 
       attr_accessor include_countries: Array[String]?
       attr_accessor include_place_types: Array[String]?
+    end
+
+    module GeocodeFilterPlaceType
+      LOCALITY: String
+      POSTAL_CODE: String
+      INTERSECTION: String
+      STREET: String
+      POINT_ADDRESS: String
+      INTERPOLATED_ADDRESS: String
+      SECONDARY_ADDRESS: String
+      POINT_OF_INTEREST: String
+      COUNTRY: String
+      REGION: String
+    end
+
+    module GeocodeIntendedUse
+      SINGLE_USE: String
+      STORAGE: String
     end
 
     class GeocodeParsedQuery
@@ -447,6 +554,7 @@ module Aws::GeoPlaces
         ?address_number: Array[Types::ParsedQueryComponent],
         ?building: Array[Types::ParsedQueryComponent],
         ?secondary_address_components: Array[Types::ParsedQuerySecondaryAddressComponent],
+        ?other_components: Array[Types::ParsedQueryComponent],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -463,6 +571,7 @@ module Aws::GeoPlaces
       attr_accessor address_number: Array[Types::ParsedQueryComponent]?
       attr_accessor building: Array[Types::ParsedQueryComponent]?
       attr_accessor secondary_address_components: Array[Types::ParsedQuerySecondaryAddressComponent]?
+      attr_accessor other_components: Array[Types::ParsedQueryComponent]?
     end
 
     class GeocodeQueryComponents
@@ -504,6 +613,9 @@ module Aws::GeoPlaces
         ?political_view: String,
         ?intended_use: String,
         ?key: String,
+        ?postal_code_mode: String,
+        ?address_translations: Array[String],
+        ?address_names_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -517,6 +629,9 @@ module Aws::GeoPlaces
       attr_accessor political_view: String?
       attr_accessor intended_use: String?
       attr_accessor key: String?
+      attr_accessor postal_code_mode: String?
+      attr_accessor address_translations: Array[String]?
+      attr_accessor address_names_mode: String?
     end
 
     class GeocodeResponse
@@ -555,6 +670,8 @@ module Aws::GeoPlaces
         ?intersections: Array[Types::Intersection],
         ?main_address: Types::RelatedPlace,
         ?secondary_addresses: Array[Types::RelatedPlace],
+        ?translations: Types::TranslationDetails,
+        ?estimated_point_address: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -577,6 +694,26 @@ module Aws::GeoPlaces
       attr_accessor intersections: Array[Types::Intersection]?
       attr_accessor main_address: Types::RelatedPlace?
       attr_accessor secondary_addresses: Array[Types::RelatedPlace]?
+      attr_accessor translations: Types::TranslationDetails?
+      attr_accessor estimated_point_address: bool?
+    end
+
+    module GetPlaceAdditionalFeature
+      TIME_ZONE: String
+      PHONEMES: String
+      ACCESS: String
+      CONTACT: String
+      SECONDARY_ADDRESSES: String
+      CROSS_REFERENCES: String
+    end
+
+    module GetPlaceAddressNamesMode
+      ADMINISTRATIVE: String
+    end
+
+    module GetPlaceIntendedUse
+      SINGLE_USE: String
+      STORAGE: String
     end
 
     class GetPlaceRequest
@@ -589,6 +726,7 @@ module Aws::GeoPlaces
         ?political_view: String,
         ?intended_use: String,
         ?key: String,
+        ?address_names_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -598,6 +736,7 @@ module Aws::GeoPlaces
       attr_accessor political_view: String?
       attr_accessor intended_use: String?
       attr_accessor key: String?
+      attr_accessor address_names_mode: String?
     end
 
     class GetPlaceResponse
@@ -625,6 +764,9 @@ module Aws::GeoPlaces
         ?phonemes: Types::PhonemeDetails,
         ?main_address: Types::RelatedPlace,
         ?secondary_addresses: Array[Types::RelatedPlace],
+        ?place_attributes: Array[String],
+        ?estimated_point_address: bool,
+        ?cross_references: Array[Types::CrossReference],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -649,6 +791,9 @@ module Aws::GeoPlaces
       attr_accessor phonemes: Types::PhonemeDetails?
       attr_accessor main_address: Types::RelatedPlace?
       attr_accessor secondary_addresses: Array[Types::RelatedPlace]?
+      attr_accessor place_attributes: Array[String]?
+      attr_accessor estimated_point_address: bool?
+      attr_accessor cross_references: Array[Types::CrossReference]?
     end
 
     class Highlight
@@ -811,6 +956,33 @@ module Aws::GeoPlaces
       attr_accessor preferred: bool?
     end
 
+    module PlaceAttribute
+      DRIVE_THROUGH: String
+    end
+
+    module PlaceType
+      COUNTRY: String
+      REGION: String
+      SUB_REGION: String
+      LOCALITY: String
+      DISTRICT: String
+      SUB_DISTRICT: String
+      POSTAL_CODE: String
+      BLOCK: String
+      SUB_BLOCK: String
+      INTERSECTION: String
+      STREET: String
+      POINT_OF_INTEREST: String
+      POINT_ADDRESS: String
+      INTERPOLATED_ADDRESS: String
+      SECONDARY_ADDRESS: String
+      INFERRED_SECONDARY_ADDRESS: String
+    end
+
+    module PostalAuthority
+      USPS: String
+    end
+
     class PostalCodeDetails
       include Smithy::Schema::Structure
 
@@ -830,6 +1002,17 @@ module Aws::GeoPlaces
       attr_accessor usps_zip_plus4: Types::UspsZipPlus4?
     end
 
+    module PostalCodeMode
+      MERGE_ALL_SPANNED_LOCALITIES: String
+      ENUMERATE_SPANNED_LOCALITIES: String
+      ENUMERATE_SPANNED_DISTRICTS: String
+    end
+
+    module PostalCodeType
+      USPS_ZIP: String
+      USPS_ZIP_PLUS_4: String
+    end
+
     class QueryRefinement
       include Smithy::Schema::Structure
 
@@ -845,6 +1028,20 @@ module Aws::GeoPlaces
       attr_accessor original_term: String?
       attr_accessor start_index: Integer?
       attr_accessor end_index: Integer?
+    end
+
+    module QueryType
+      CATEGORY: String
+      BUSINESS_CHAIN: String
+    end
+
+    module RecordTypeCode
+      FIRM: String
+      GENERAL: String
+      HIGH_RISE: String
+      POST_OFFICE_BOX: String
+      RURAL: String
+      STREET: String
     end
 
     class Region
@@ -894,6 +1091,16 @@ module Aws::GeoPlaces
       attr_accessor access_points: Array[Types::AccessPoint]?
     end
 
+    module ReverseGeocodeAdditionalFeature
+      TIME_ZONE: String
+      ACCESS: String
+      INTERSECTIONS: String
+    end
+
+    module ReverseGeocodeAddressNamesMode
+      ADMINISTRATIVE: String
+    end
+
     class ReverseGeocodeFilter
       include Smithy::Schema::Structure
 
@@ -903,6 +1110,21 @@ module Aws::GeoPlaces
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor include_place_types: Array[String]?
+    end
+
+    module ReverseGeocodeFilterPlaceType
+      LOCALITY: String
+      INTERSECTION: String
+      STREET: String
+      POINT_ADDRESS: String
+      INTERPOLATED_ADDRESS: String
+      SECONDARY_ADDRESS: String
+      POINT_OF_INTEREST: String
+    end
+
+    module ReverseGeocodeIntendedUse
+      SINGLE_USE: String
+      STORAGE: String
     end
 
     class ReverseGeocodeRequest
@@ -918,6 +1140,8 @@ module Aws::GeoPlaces
         ?political_view: String,
         ?intended_use: String,
         ?key: String,
+        ?heading: Float,
+        ?address_names_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -930,6 +1154,8 @@ module Aws::GeoPlaces
       attr_accessor political_view: String?
       attr_accessor intended_use: String?
       attr_accessor key: String?
+      attr_accessor heading: Float?
+      attr_accessor address_names_mode: String?
     end
 
     class ReverseGeocodeResponse
@@ -964,6 +1190,8 @@ module Aws::GeoPlaces
         ?time_zone: Types::TimeZone,
         ?political_view: String,
         ?intersections: Array[Types::Intersection],
+        ?main_address: Types::RelatedPlace,
+        ?estimated_point_address: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -982,6 +1210,16 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone?
       attr_accessor political_view: String?
       attr_accessor intersections: Array[Types::Intersection]?
+      attr_accessor main_address: Types::RelatedPlace?
+      attr_accessor estimated_point_address: bool?
+    end
+
+    module SearchNearbyAdditionalFeature
+      TIME_ZONE: String
+      PHONEMES: String
+      ACCESS: String
+      CONTACT: String
+      CROSS_REFERENCES: String
     end
 
     class SearchNearbyFilter
@@ -1007,6 +1245,11 @@ module Aws::GeoPlaces
       attr_accessor exclude_business_chains: Array[String]?
       attr_accessor include_food_types: Array[String]?
       attr_accessor exclude_food_types: Array[String]?
+    end
+
+    module SearchNearbyIntendedUse
+      SINGLE_USE: String
+      STORAGE: String
     end
 
     class SearchNearbyRequest
@@ -1075,6 +1318,8 @@ module Aws::GeoPlaces
         ?time_zone: Types::TimeZone,
         ?political_view: String,
         ?phonemes: Types::PhonemeDetails,
+        ?place_attributes: Array[String],
+        ?cross_references: Array[Types::CrossReference],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1096,6 +1341,16 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone?
       attr_accessor political_view: String?
       attr_accessor phonemes: Types::PhonemeDetails?
+      attr_accessor place_attributes: Array[String]?
+      attr_accessor cross_references: Array[Types::CrossReference]?
+    end
+
+    module SearchTextAdditionalFeature
+      TIME_ZONE: String
+      PHONEMES: String
+      ACCESS: String
+      CONTACT: String
+      CROSS_REFERENCES: String
     end
 
     class SearchTextFilter
@@ -1113,6 +1368,11 @@ module Aws::GeoPlaces
       attr_accessor include_countries: Array[String]?
     end
 
+    module SearchTextIntendedUse
+      SINGLE_USE: String
+      STORAGE: String
+    end
+
     class SearchTextRequest
       include Smithy::Schema::Structure
 
@@ -1127,6 +1387,7 @@ module Aws::GeoPlaces
         ?political_view: String,
         ?intended_use: String,
         ?next_token: String,
+        ?travel_mode: String,
         ?key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1141,6 +1402,7 @@ module Aws::GeoPlaces
       attr_accessor political_view: String?
       attr_accessor intended_use: String?
       attr_accessor next_token: String?
+      attr_accessor travel_mode: String?
       attr_accessor key: String?
     end
 
@@ -1181,6 +1443,8 @@ module Aws::GeoPlaces
         ?time_zone: Types::TimeZone,
         ?political_view: String,
         ?phonemes: Types::PhonemeDetails,
+        ?place_attributes: Array[String],
+        ?cross_references: Array[Types::CrossReference],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1202,6 +1466,14 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone?
       attr_accessor political_view: String?
       attr_accessor phonemes: Types::PhonemeDetails?
+      attr_accessor place_attributes: Array[String]?
+      attr_accessor cross_references: Array[Types::CrossReference]?
+    end
+
+    module SearchTextTravelMode
+      CAR: String
+      SCOOTER: String
+      TRUCK: String
     end
 
     class SecondaryAddressComponent
@@ -1209,10 +1481,12 @@ module Aws::GeoPlaces
 
       def initialize: (
         ?number: String,
+        ?designator: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor number: String?
+      attr_accessor designator: String?
     end
 
     class SecondaryAddressComponentMatchScore
@@ -1277,6 +1551,14 @@ module Aws::GeoPlaces
       attr_accessor name: Array[Types::Highlight]?
     end
 
+    module SuggestAdditionalFeature
+      CORE: String
+      TIME_ZONE: String
+      PHONEMES: String
+      ACCESS: String
+      CROSS_REFERENCES: String
+    end
+
     class SuggestAddressHighlights
       include Smithy::Schema::Structure
 
@@ -1316,6 +1598,10 @@ module Aws::GeoPlaces
       attr_accessor address: Types::SuggestAddressHighlights?
     end
 
+    module SuggestIntendedUse
+      SINGLE_USE: String
+    end
+
     class SuggestPlaceResult
       include Smithy::Schema::Structure
 
@@ -1334,6 +1620,8 @@ module Aws::GeoPlaces
         ?time_zone: Types::TimeZone,
         ?political_view: String,
         ?phonemes: Types::PhonemeDetails,
+        ?place_attributes: Array[String],
+        ?cross_references: Array[Types::CrossReference],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1351,6 +1639,8 @@ module Aws::GeoPlaces
       attr_accessor time_zone: Types::TimeZone?
       attr_accessor political_view: String?
       attr_accessor phonemes: Types::PhonemeDetails?
+      attr_accessor place_attributes: Array[String]?
+      attr_accessor cross_references: Array[Types::CrossReference]?
     end
 
     class SuggestQueryResult
@@ -1379,6 +1669,7 @@ module Aws::GeoPlaces
         ?language: String,
         ?political_view: String,
         ?intended_use: String,
+        ?travel_mode: String,
         ?key: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1392,6 +1683,7 @@ module Aws::GeoPlaces
       attr_accessor language: String?
       attr_accessor political_view: String?
       attr_accessor intended_use: String?
+      attr_accessor travel_mode: String?
       attr_accessor key: String?
     end
 
@@ -1429,6 +1721,17 @@ module Aws::GeoPlaces
       attr_accessor highlights: Types::SuggestHighlights?
     end
 
+    module SuggestResultItemType
+      PLACE: String
+      QUERY: String
+    end
+
+    module SuggestTravelMode
+      CAR: String
+      SCOOTER: String
+      TRUCK: String
+    end
+
     class ThrottlingException
       include Smithy::Schema::Structure
 
@@ -1453,6 +1756,56 @@ module Aws::GeoPlaces
       attr_accessor name: String?
       attr_accessor offset: String?
       attr_accessor offset_seconds: Integer?
+    end
+
+    class TranslationDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?locality: Array[Types::AdminNames],
+        ?region: Array[Types::AdminNames],
+        ?district: Array[Types::AdminNames],
+        ?sub_region: Array[Types::AdminNames],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor locality: Array[Types::AdminNames]?
+      attr_accessor region: Array[Types::AdminNames]?
+      attr_accessor district: Array[Types::AdminNames]?
+      attr_accessor sub_region: Array[Types::AdminNames]?
+    end
+
+    class TranslationName
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?value: String,
+        ?language: String,
+        ?type: String,
+        ?primary: bool,
+        ?transliterated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor value: String?
+      attr_accessor language: String?
+      attr_accessor type: String?
+      attr_accessor primary: bool?
+      attr_accessor transliterated: bool?
+    end
+
+    module TranslationNameType
+      ABBREVIATION: String
+      AREA_CODE: String
+      BASE_NAME: String
+      EXONYM: String
+      SHORTENED: String
+      SYNONYM: String
+    end
+
+    module TypePlacement
+      BEFORE_BASE_NAME: String
+      AFTER_BASE_NAME: String
     end
 
     class UspsZip
@@ -1503,6 +1856,21 @@ module Aws::GeoPlaces
 
       attr_accessor name: String?
       attr_accessor message: String?
+    end
+
+    module ValidationExceptionReason
+      UNKNOWN_OPERATION: String
+      MISSING: String
+      CANNOT_PARSE: String
+      FIELD_VALIDATION_FAILED: String
+      OTHER: String
+      UNKNOWN_FIELD: String
+    end
+
+    module ZipClassificationCode
+      MILITARY: String
+      POST_OFFICE_BOXES: String
+      UNIQUE: String
     end
   end
 end

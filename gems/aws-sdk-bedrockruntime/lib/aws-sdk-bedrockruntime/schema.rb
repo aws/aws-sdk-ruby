@@ -10,6 +10,7 @@ module Aws::BedrockRuntime
     AccountId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#AccountId", name: "AccountId", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     AdditionalModelResponseFieldPaths = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#AdditionalModelResponseFieldPaths", name: "AdditionalModelResponseFieldPaths", traits: {"smithy.api#length" => {"max" => 10}})
     AnyToolChoice = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#AnyToolChoice", name: "AnyToolChoice")
+    AppliedGuardrailDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#AppliedGuardrailDetails", name: "AppliedGuardrailDetails")
     ApplyGuardrailRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ApplyGuardrailRequest", name: "ApplyGuardrailRequest")
     ApplyGuardrailResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ApplyGuardrailResponse", name: "ApplyGuardrailResponse")
     AsyncInvokeArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#AsyncInvokeArn", name: "AsyncInvokeArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:[a-z0-9\\-]+:bedrock:[a-z0-9\\-]*:[0-9]*:(provisioned-model|foundation-model)/.+$"})
@@ -21,13 +22,19 @@ module Aws::BedrockRuntime
     AsyncInvokeStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#AsyncInvokeStatus", name: "AsyncInvokeStatus")
     AsyncInvokeSummaries = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#AsyncInvokeSummaries", name: "AsyncInvokeSummaries")
     AsyncInvokeSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#AsyncInvokeSummary", name: "AsyncInvokeSummary")
+    AudioBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#AudioBlock", name: "AudioBlock")
+    AudioFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#AudioFormat", name: "AudioFormat")
+    AudioSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#AudioSource", name: "AudioSource", traits: {"smithy.api#sensitive" => {}})
     AutoToolChoice = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#AutoToolChoice", name: "AutoToolChoice")
     AutomatedReasoningRuleIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#AutomatedReasoningRuleIdentifier", name: "AutomatedReasoningRuleIdentifier", traits: {"smithy.api#length" => {"max" => 12}, "smithy.api#pattern" => "^[a-z0-9]{12}$"})
     BidirectionalInputPayloadPart = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#BidirectionalInputPayloadPart", name: "BidirectionalInputPayloadPart", traits: {"smithy.api#sensitive" => {}})
     BidirectionalOutputPayloadPart = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#BidirectionalOutputPayloadPart", name: "BidirectionalOutputPayloadPart", traits: {"smithy.api#sensitive" => {}})
     Body = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.bedrockruntime#Body", name: "Body", traits: {"smithy.api#length" => {"max" => 25000000}, "smithy.api#sensitive" => {}})
+    CacheDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#CacheDetail", name: "CacheDetail")
+    CacheDetailsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#CacheDetailsList", name: "CacheDetailsList")
     CachePointBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#CachePointBlock", name: "CachePointBlock")
     CachePointType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#CachePointType", name: "CachePointType")
+    CacheTTL = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#CacheTTL", name: "CacheTTL")
     Citation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#Citation", name: "Citation")
     CitationGeneratedContent = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#CitationGeneratedContent", name: "CitationGeneratedContent")
     CitationGeneratedContentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#CitationGeneratedContentList", name: "CitationGeneratedContentList")
@@ -73,10 +80,12 @@ module Aws::BedrockRuntime
     DocumentFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#DocumentFormat", name: "DocumentFormat")
     DocumentPageLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#DocumentPageLocation", name: "DocumentPageLocation")
     DocumentSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#DocumentSource", name: "DocumentSource")
+    ErrorBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ErrorBlock", name: "ErrorBlock", traits: {"smithy.api#sensitive" => {}})
     FoundationModelVersionIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#FoundationModelVersionIdentifier", name: "FoundationModelVersionIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^[a-zA-Z_\\.\\-/0-9:]+$"})
     GetAsyncInvokeRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GetAsyncInvokeRequest", name: "GetAsyncInvokeRequest")
     GetAsyncInvokeResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GetAsyncInvokeResponse", name: "GetAsyncInvokeResponse")
     GuardrailAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailAction", name: "GuardrailAction")
+    GuardrailArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#GuardrailArn", name: "GuardrailArn", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+)$"})
     GuardrailAssessment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailAssessment", name: "GuardrailAssessment")
     GuardrailAssessmentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailAssessmentList", name: "GuardrailAssessmentList")
     GuardrailAssessmentListMap = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bedrockruntime#GuardrailAssessmentListMap", name: "GuardrailAssessmentListMap")
@@ -111,6 +120,39 @@ module Aws::BedrockRuntime
     GuardrailAutomatedReasoningTranslationOption = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationOption", name: "GuardrailAutomatedReasoningTranslationOption")
     GuardrailAutomatedReasoningTranslationOptionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningTranslationOptionList", name: "GuardrailAutomatedReasoningTranslationOptionList", traits: {"smithy.api#length" => {"max" => 2}})
     GuardrailAutomatedReasoningValidFinding = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailAutomatedReasoningValidFinding", name: "GuardrailAutomatedReasoningValidFinding")
+    GuardrailChecksConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksConfig", name: "GuardrailChecksConfig")
+    GuardrailChecksContentBlock = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentBlock", name: "GuardrailChecksContentBlock")
+    GuardrailChecksContentBlockList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentBlockList", name: "GuardrailChecksContentBlockList", traits: {"smithy.api#length" => {"min" => 1}})
+    GuardrailChecksContentFilterCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterCategory", name: "GuardrailChecksContentFilterCategory")
+    GuardrailChecksContentFilterCategoryConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterCategoryConfig", name: "GuardrailChecksContentFilterCategoryConfig")
+    GuardrailChecksContentFilterCategoryConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterCategoryConfigList", name: "GuardrailChecksContentFilterCategoryConfigList", traits: {"smithy.api#length" => {"min" => 1, "max" => 5}})
+    GuardrailChecksContentFilterConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterConfig", name: "GuardrailChecksContentFilterConfig")
+    GuardrailChecksContentFilterResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterResult", name: "GuardrailChecksContentFilterResult")
+    GuardrailChecksContentFilterResultEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterResultEntry", name: "GuardrailChecksContentFilterResultEntry")
+    GuardrailChecksContentFilterResultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterResultList", name: "GuardrailChecksContentFilterResultList")
+    GuardrailChecksContentFilterUsage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksContentFilterUsage", name: "GuardrailChecksContentFilterUsage")
+    GuardrailChecksMessage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksMessage", name: "GuardrailChecksMessage")
+    GuardrailChecksMessageList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksMessageList", name: "GuardrailChecksMessageList", traits: {"smithy.api#length" => {"min" => 1}})
+    GuardrailChecksPromptAttackCategory = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackCategory", name: "GuardrailChecksPromptAttackCategory")
+    GuardrailChecksPromptAttackCategoryConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackCategoryConfig", name: "GuardrailChecksPromptAttackCategoryConfig")
+    GuardrailChecksPromptAttackCategoryConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackCategoryConfigList", name: "GuardrailChecksPromptAttackCategoryConfigList", traits: {"smithy.api#length" => {"min" => 1, "max" => 3}})
+    GuardrailChecksPromptAttackConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackConfig", name: "GuardrailChecksPromptAttackConfig")
+    GuardrailChecksPromptAttackResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackResult", name: "GuardrailChecksPromptAttackResult")
+    GuardrailChecksPromptAttackResultEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackResultEntry", name: "GuardrailChecksPromptAttackResultEntry")
+    GuardrailChecksPromptAttackResultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackResultList", name: "GuardrailChecksPromptAttackResultList")
+    GuardrailChecksPromptAttackUsage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksPromptAttackUsage", name: "GuardrailChecksPromptAttackUsage")
+    GuardrailChecksResults = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksResults", name: "GuardrailChecksResults")
+    GuardrailChecksRole = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksRole", name: "GuardrailChecksRole")
+    GuardrailChecksSensitiveInformationConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationConfig", name: "GuardrailChecksSensitiveInformationConfig")
+    GuardrailChecksSensitiveInformationEntityConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationEntityConfig", name: "GuardrailChecksSensitiveInformationEntityConfig")
+    GuardrailChecksSensitiveInformationEntityConfigList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationEntityConfigList", name: "GuardrailChecksSensitiveInformationEntityConfigList", traits: {"smithy.api#length" => {"min" => 1, "max" => 31}})
+    GuardrailChecksSensitiveInformationEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationEntityType", name: "GuardrailChecksSensitiveInformationEntityType")
+    GuardrailChecksSensitiveInformationResult = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationResult", name: "GuardrailChecksSensitiveInformationResult")
+    GuardrailChecksSensitiveInformationResultEntry = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationResultEntry", name: "GuardrailChecksSensitiveInformationResultEntry")
+    GuardrailChecksSensitiveInformationResultList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationResultList", name: "GuardrailChecksSensitiveInformationResultList")
+    GuardrailChecksSensitiveInformationUsage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksSensitiveInformationUsage", name: "GuardrailChecksSensitiveInformationUsage")
+    GuardrailChecksTextContent = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksTextContent", name: "GuardrailChecksTextContent", traits: {"smithy.api#length" => {"min" => 1}, "smithy.api#sensitive" => {}})
+    GuardrailChecksUsageResults = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailChecksUsageResults", name: "GuardrailChecksUsageResults")
     GuardrailConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailConfiguration", name: "GuardrailConfiguration")
     GuardrailContentBlock = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#GuardrailContentBlock", name: "GuardrailContentBlock")
     GuardrailContentBlockList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailContentBlockList", name: "GuardrailContentBlockList")
@@ -142,7 +184,8 @@ module Aws::BedrockRuntime
     GuardrailCoverage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailCoverage", name: "GuardrailCoverage")
     GuardrailCustomWord = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailCustomWord", name: "GuardrailCustomWord")
     GuardrailCustomWordList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailCustomWordList", name: "GuardrailCustomWordList")
-    GuardrailIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#GuardrailIdentifier", name: "GuardrailIdentifier", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^(([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$"})
+    GuardrailId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#GuardrailId", name: "GuardrailId", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^([a-z0-9]+)$"})
+    GuardrailIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#GuardrailIdentifier", name: "GuardrailIdentifier", traits: {"smithy.api#length" => {"max" => 2048}, "smithy.api#pattern" => "^(|([a-z0-9]+)|(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:guardrail/[a-z0-9]+))$"})
     GuardrailImageBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailImageBlock", name: "GuardrailImageBlock", traits: {"smithy.api#sensitive" => {}})
     GuardrailImageCoverage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailImageCoverage", name: "GuardrailImageCoverage")
     GuardrailImageFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailImageFormat", name: "GuardrailImageFormat")
@@ -151,10 +194,13 @@ module Aws::BedrockRuntime
     GuardrailManagedWord = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailManagedWord", name: "GuardrailManagedWord")
     GuardrailManagedWordList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailManagedWordList", name: "GuardrailManagedWordList")
     GuardrailManagedWordType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailManagedWordType", name: "GuardrailManagedWordType")
+    GuardrailOrigin = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailOrigin", name: "GuardrailOrigin")
+    GuardrailOriginList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailOriginList", name: "GuardrailOriginList")
     GuardrailOutputContent = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailOutputContent", name: "GuardrailOutputContent")
     GuardrailOutputContentList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailOutputContentList", name: "GuardrailOutputContentList")
     GuardrailOutputScope = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailOutputScope", name: "GuardrailOutputScope")
     GuardrailOutputText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#GuardrailOutputText", name: "GuardrailOutputText")
+    GuardrailOwnership = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailOwnership", name: "GuardrailOwnership")
     GuardrailPiiEntityFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailPiiEntityFilter", name: "GuardrailPiiEntityFilter")
     GuardrailPiiEntityFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#GuardrailPiiEntityFilterList", name: "GuardrailPiiEntityFilterList")
     GuardrailPiiEntityType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailPiiEntityType", name: "GuardrailPiiEntityType")
@@ -178,18 +224,22 @@ module Aws::BedrockRuntime
     GuardrailTrace = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailTrace", name: "GuardrailTrace")
     GuardrailTraceAssessment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailTraceAssessment", name: "GuardrailTraceAssessment")
     GuardrailUsage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailUsage", name: "GuardrailUsage")
-    GuardrailVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#GuardrailVersion", name: "GuardrailVersion", traits: {"smithy.api#pattern" => "^(([1-9][0-9]{0,7})|(DRAFT))$"})
+    GuardrailVersion = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#GuardrailVersion", name: "GuardrailVersion", traits: {"smithy.api#pattern" => "^(|([1-9][0-9]{0,7})|(DRAFT))$"})
     GuardrailWordPolicyAction = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#GuardrailWordPolicyAction", name: "GuardrailWordPolicyAction")
     GuardrailWordPolicyAssessment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#GuardrailWordPolicyAssessment", name: "GuardrailWordPolicyAssessment")
     GuardrailWordPolicyUnitsProcessed = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrockruntime#GuardrailWordPolicyUnitsProcessed", name: "GuardrailWordPolicyUnitsProcessed")
     ImageBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ImageBlock", name: "ImageBlock")
+    ImageBlockDelta = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ImageBlockDelta", name: "ImageBlockDelta")
+    ImageBlockStart = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ImageBlockStart", name: "ImageBlockStart")
     ImageFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#ImageFormat", name: "ImageFormat")
-    ImageSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#ImageSource", name: "ImageSource")
+    ImageSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#ImageSource", name: "ImageSource", traits: {"smithy.api#sensitive" => {}})
     ImagesGuarded = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrockruntime#ImagesGuarded", name: "ImagesGuarded")
     ImagesTotal = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrockruntime#ImagesTotal", name: "ImagesTotal")
     InferenceConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#InferenceConfiguration", name: "InferenceConfiguration")
     InternalServerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#InternalServerException", name: "InternalServerException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 500})
     InvocationArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#InvocationArn", name: "InvocationArn", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:async-invoke/[a-z0-9]{12}$"})
+    InvokeGuardrailChecksRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#InvokeGuardrailChecksRequest", name: "InvokeGuardrailChecksRequest")
+    InvokeGuardrailChecksResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#InvokeGuardrailChecksResponse", name: "InvokeGuardrailChecksResponse")
     InvokeModelIdentifier = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#InvokeModelIdentifier", name: "InvokeModelIdentifier", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:(([0-9]{12}:custom-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}/[a-z0-9]{12})|(:foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|([0-9]{12}:imported-model/[a-z0-9]{12})|([0-9]{12}:provisioned-model/[a-z0-9]{12})|([0-9]{12}:custom-model-deployment/[a-z0-9]{12})|([0-9]{12}:(inference-profile|application-inference-profile)/[a-zA-Z0-9-:.]+)))|([a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([.:]?[a-z0-9-]{1,63}))|(([0-9a-zA-Z][_-]?)+)|([a-zA-Z0-9-:.]+)$|(^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}:[0-9]{12}:prompt/[0-9a-zA-Z]{10}(?::[0-9]{1,5})?))$|(^arn:aws:sagemaker:[a-z0-9-]+:[0-9]{12}:endpoint/[a-zA-Z0-9-]+$)|(^arn:aws(-[^:]+)?:bedrock:([0-9a-z-]{1,20}):([0-9]{12}):(default-)?prompt-router/[a-zA-Z0-9-:.]+$)$"})
     InvokeModelRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#InvokeModelRequest", name: "InvokeModelRequest")
     InvokeModelResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#InvokeModelResponse", name: "InvokeModelResponse")
@@ -201,6 +251,7 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamRequest", name: "InvokeModelWithResponseStreamRequest")
     InvokeModelWithResponseStreamResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#InvokeModelWithResponseStreamResponse", name: "InvokeModelWithResponseStreamResponse")
     InvokedModelId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#InvokedModelId", name: "InvokedModelId", traits: {"smithy.api#pattern" => "^(arn:aws(-[^:]+)?:bedrock:[a-z0-9-]{1,20}::foundation-model/[a-z0-9-]{1,63}[.]{1}[a-z0-9-]{1,63}([a-z0-9-]{1,63}[.]){0,2}[a-z0-9-]{1,63}([:][a-z0-9-]{1,63}){0,2})|(arn:aws(|-us-gov|-cn|-iso|-iso-b):bedrock:(|[0-9a-z-]{1,20}):(|[0-9]{12}):inference-profile/[a-zA-Z0-9-:.]+)$"})
+    JsonSchemaDefinition = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#JsonSchemaDefinition", name: "JsonSchemaDefinition")
     KmsKeyId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#KmsKeyId", name: "KmsKeyId", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^arn:aws(-[^:]+)?:kms:[a-zA-Z0-9-]*:[0-9]{12}:((key/[a-zA-Z0-9-]{36})|(alias/[a-zA-Z0-9-_/]+))$"})
     ListAsyncInvokesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ListAsyncInvokesRequest", name: "ListAsyncInvokesRequest")
     ListAsyncInvokesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ListAsyncInvokesResponse", name: "ListAsyncInvokesResponse")
@@ -220,6 +271,10 @@ module Aws::BedrockRuntime
     NonEmptyString = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#NonEmptyString", name: "NonEmptyString", traits: {"smithy.api#length" => {"min" => 1}})
     NonEmptyStringList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#NonEmptyStringList", name: "NonEmptyStringList")
     NonNegativeInteger = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.bedrockruntime#NonNegativeInteger", name: "NonNegativeInteger", traits: {"smithy.api#range" => {"min" => 0}})
+    OutputConfig = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#OutputConfig", name: "OutputConfig")
+    OutputFormat = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#OutputFormat", name: "OutputFormat")
+    OutputFormatStructure = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#OutputFormatStructure", name: "OutputFormatStructure", traits: {"smithy.api#sensitive" => {}})
+    OutputFormatType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#OutputFormatType", name: "OutputFormatType")
     PaginationToken = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#PaginationToken", name: "PaginationToken", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}, "smithy.api#pattern" => "^\\S*$"})
     PartBody = ::Smithy::Schema::Shapes::BlobShape.new(id: "com.amazonaws.bedrockruntime#PartBody", name: "PartBody", traits: {"smithy.api#length" => {"max" => 1000000}, "smithy.api#sensitive" => {}})
     PayloadPart = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#PayloadPart", name: "PayloadPart", traits: {"smithy.api#sensitive" => {}})
@@ -232,11 +287,18 @@ module Aws::BedrockRuntime
     ReasoningContentBlockDelta = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#ReasoningContentBlockDelta", name: "ReasoningContentBlockDelta", traits: {"smithy.api#sensitive" => {}})
     ReasoningTextBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ReasoningTextBlock", name: "ReasoningTextBlock", traits: {"smithy.api#sensitive" => {}})
     RequestMetadata = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.bedrockruntime#RequestMetadata", name: "RequestMetadata", traits: {"smithy.api#length" => {"min" => 1, "max" => 16}, "smithy.api#sensitive" => {}})
+    RequestMetadataJson = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#RequestMetadataJson", name: "RequestMetadataJson", traits: {"smithy.api#length" => {"max" => 8500}, "smithy.api#sensitive" => {}})
     ResourceNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ResourceNotFoundException", name: "ResourceNotFoundException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 404})
     ResponseStream = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#ResponseStream", name: "ResponseStream", traits: {"smithy.api#streaming" => {}})
     S3Location = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#S3Location", name: "S3Location")
     S3Uri = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#S3Uri", name: "S3Uri", traits: {"smithy.api#length" => {"min" => 1, "max" => 1024}, "smithy.api#pattern" => "^s3://[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9](/.*)?$"})
+    SearchResultBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#SearchResultBlock", name: "SearchResultBlock")
+    SearchResultContentBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#SearchResultContentBlock", name: "SearchResultContentBlock")
+    SearchResultContentBlocks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#SearchResultContentBlocks", name: "SearchResultContentBlocks")
+    SearchResultLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#SearchResultLocation", name: "SearchResultLocation")
     ServiceQuotaExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ServiceQuotaExceededException", name: "ServiceQuotaExceededException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
+    ServiceTier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ServiceTier", name: "ServiceTier")
+    ServiceTierType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#ServiceTierType", name: "ServiceTierType")
     ServiceUnavailableException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ServiceUnavailableException", name: "ServiceUnavailableException", traits: {"smithy.api#error" => "server", "smithy.api#httpError" => 503})
     SortAsyncInvocationBy = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#SortAsyncInvocationBy", name: "SortAsyncInvocationBy")
     SortOrder = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#SortOrder", name: "SortOrder")
@@ -247,6 +309,7 @@ module Aws::BedrockRuntime
     StopReason = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#StopReason", name: "StopReason")
     SystemContentBlock = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#SystemContentBlock", name: "SystemContentBlock")
     SystemContentBlocks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#SystemContentBlocks", name: "SystemContentBlocks")
+    SystemTool = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#SystemTool", name: "SystemTool")
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#Tag", name: "Tag")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#TagKey", name: "TagKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}, "smithy.api#pattern" => "^[a-zA-Z0-9\\s._:/=+@-]*$"})
     TagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#TagList", name: "TagList", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}})
@@ -257,11 +320,17 @@ module Aws::BedrockRuntime
     Timestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.bedrockruntime#Timestamp", name: "Timestamp", traits: {"smithy.api#timestampFormat" => "date-time"})
     TokenUsage = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#TokenUsage", name: "TokenUsage")
     Tool = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#Tool", name: "Tool")
+    ToolAdditionBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ToolAdditionBlock", name: "ToolAdditionBlock")
     ToolChoice = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#ToolChoice", name: "ToolChoice")
     ToolConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ToolConfiguration", name: "ToolConfiguration")
     ToolInputSchema = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#ToolInputSchema", name: "ToolInputSchema")
     ToolName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#ToolName", name: "ToolName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
+    ToolReference = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ToolReference", name: "ToolReference")
+    ToolRemovalBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ToolRemovalBlock", name: "ToolRemovalBlock")
     ToolResultBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ToolResultBlock", name: "ToolResultBlock")
+    ToolResultBlockDelta = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#ToolResultBlockDelta", name: "ToolResultBlockDelta")
+    ToolResultBlockStart = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ToolResultBlockStart", name: "ToolResultBlockStart")
+    ToolResultBlocksDelta = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#ToolResultBlocksDelta", name: "ToolResultBlocksDelta")
     ToolResultContentBlock = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#ToolResultContentBlock", name: "ToolResultContentBlock")
     ToolResultContentBlocks = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#ToolResultContentBlocks", name: "ToolResultContentBlocks")
     ToolResultStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#ToolResultStatus", name: "ToolResultStatus")
@@ -269,18 +338,26 @@ module Aws::BedrockRuntime
     ToolUseBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ToolUseBlock", name: "ToolUseBlock")
     ToolUseBlockDelta = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ToolUseBlockDelta", name: "ToolUseBlockDelta")
     ToolUseBlockStart = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ToolUseBlockStart", name: "ToolUseBlockStart")
-    ToolUseId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#ToolUseId", name: "ToolUseId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_-]+$"})
+    ToolUseId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.bedrockruntime#ToolUseId", name: "ToolUseId", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}, "smithy.api#pattern" => "^[a-zA-Z0-9_.:-]+$"})
+    ToolUseType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#ToolUseType", name: "ToolUseType")
     Tools = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.bedrockruntime#Tools", name: "Tools")
     Trace = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#Trace", name: "Trace")
     ValidationException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#ValidationException", name: "ValidationException", traits: {"smithy.api#error" => "client", "smithy.api#httpError" => 400})
     VideoBlock = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#VideoBlock", name: "VideoBlock")
     VideoFormat = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.bedrockruntime#VideoFormat", name: "VideoFormat")
     VideoSource = ::Smithy::Schema::Shapes::UnionShape.new(id: "com.amazonaws.bedrockruntime#VideoSource", name: "VideoSource")
+    WebLocation = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.bedrockruntime#WebLocation", name: "WebLocation")
 
     AccessDeniedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     AccessDeniedException.type = Types::AccessDeniedException
     AdditionalModelResponseFieldPaths.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "member", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}}))
     AnyToolChoice.type = Types::AnyToolChoice
+    AppliedGuardrailDetails.add_member(:guardrail_id, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailId, name: "guardrailId"))
+    AppliedGuardrailDetails.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailVersion, name: "guardrailVersion"))
+    AppliedGuardrailDetails.add_member(:guardrail_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailArn, name: "guardrailArn"))
+    AppliedGuardrailDetails.add_member(:guardrail_origin, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailOriginList, name: "guardrailOrigin"))
+    AppliedGuardrailDetails.add_member(:guardrail_ownership, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailOwnership, name: "guardrailOwnership"))
+    AppliedGuardrailDetails.type = Types::AppliedGuardrailDetails
     ApplyGuardrailRequest.add_member(:guardrail_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailIdentifier, name: "guardrailIdentifier", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ApplyGuardrailRequest.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailVersion, name: "guardrailVersion", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     ApplyGuardrailRequest.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailContentSource, name: "source", traits: {"smithy.api#required" => {}}))
@@ -315,15 +392,46 @@ module Aws::BedrockRuntime
     AsyncInvokeSummary.add_member(:end_time, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "endTime"))
     AsyncInvokeSummary.add_member(:output_data_config, ::Smithy::Schema::Shapes::MemberShape.new(target: AsyncInvokeOutputDataConfig, name: "outputDataConfig", traits: {"smithy.api#required" => {}}))
     AsyncInvokeSummary.type = Types::AsyncInvokeSummary
+    AudioBlock.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioFormat, name: "format", traits: {"smithy.api#required" => {}}))
+    AudioBlock.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioSource, name: "source", traits: {"smithy.api#required" => {}}))
+    AudioBlock.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorBlock, name: "error"))
+    AudioBlock.type = Types::AudioBlock
+    AudioFormat.add_member(:mp3, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MP3", traits: {"smithy.api#enumValue" => "mp3"}))
+    AudioFormat.add_member(:opus, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OPUS", traits: {"smithy.api#enumValue" => "opus"}))
+    AudioFormat.add_member(:wav, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WAV", traits: {"smithy.api#enumValue" => "wav"}))
+    AudioFormat.add_member(:aac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AAC", traits: {"smithy.api#enumValue" => "aac"}))
+    AudioFormat.add_member(:flac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLAC", traits: {"smithy.api#enumValue" => "flac"}))
+    AudioFormat.add_member(:mp4, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MP4", traits: {"smithy.api#enumValue" => "mp4"}))
+    AudioFormat.add_member(:ogg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "OGG", traits: {"smithy.api#enumValue" => "ogg"}))
+    AudioFormat.add_member(:mkv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MKV", traits: {"smithy.api#enumValue" => "mkv"}))
+    AudioFormat.add_member(:mka, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MKA", traits: {"smithy.api#enumValue" => "mka"}))
+    AudioFormat.add_member(:x_aac, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "X_AAC", traits: {"smithy.api#enumValue" => "x-aac"}))
+    AudioFormat.add_member(:m4_a, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "M4A", traits: {"smithy.api#enumValue" => "m4a"}))
+    AudioFormat.add_member(:mpeg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MPEG", traits: {"smithy.api#enumValue" => "mpeg"}))
+    AudioFormat.add_member(:mpga, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MPGA", traits: {"smithy.api#enumValue" => "mpga"}))
+    AudioFormat.add_member(:pcm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PCM", traits: {"smithy.api#enumValue" => "pcm"}))
+    AudioFormat.add_member(:webm, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WEBM", traits: {"smithy.api#enumValue" => "webm"}))
+    AudioSource.add_member(:bytes, Types::AudioSource::Bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Blob, name: "bytes", traits: {"smithy.api#length" => {"min" => 1}}))
+    AudioSource.add_member(:s3_location, Types::AudioSource::S3Location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3Location"))
+    AudioSource.add_member(:unknown, Types::AudioSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    AudioSource.type = Types::AudioSource
     AutoToolChoice.type = Types::AutoToolChoice
     BidirectionalInputPayloadPart.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PartBody, name: "bytes"))
     BidirectionalInputPayloadPart.type = Types::BidirectionalInputPayloadPart
     BidirectionalOutputPayloadPart.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PartBody, name: "bytes"))
     BidirectionalOutputPayloadPart.type = Types::BidirectionalOutputPayloadPart
+    CacheDetail.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheTTL, name: "ttl", traits: {"smithy.api#required" => {}}))
+    CacheDetail.add_member(:input_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "inputTokens", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    CacheDetail.type = Types::CacheDetail
+    CacheDetailsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheDetail, name: "member"))
     CachePointBlock.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePointType, name: "type", traits: {"smithy.api#required" => {}}))
+    CachePointBlock.add_member(:ttl, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheTTL, name: "ttl"))
     CachePointBlock.type = Types::CachePointBlock
     CachePointType.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
+    CacheTTL.add_member(:five_minutes, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FIVE_MINUTES", traits: {"smithy.api#enumValue" => "5m"}))
+    CacheTTL.add_member(:one_hour, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ONE_HOUR", traits: {"smithy.api#enumValue" => "1h"}))
     Citation.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "title"))
+    Citation.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "source"))
     Citation.add_member(:source_content, ::Smithy::Schema::Shapes::MemberShape.new(target: CitationSourceContentList, name: "sourceContent"))
     Citation.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: CitationLocation, name: "location"))
     Citation.type = Types::Citation
@@ -331,9 +439,11 @@ module Aws::BedrockRuntime
     CitationGeneratedContent.add_member(:unknown, Types::CitationGeneratedContent::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CitationGeneratedContent.type = Types::CitationGeneratedContent
     CitationGeneratedContentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: CitationGeneratedContent, name: "member"))
+    CitationLocation.add_member(:web, Types::CitationLocation::Web, ::Smithy::Schema::Shapes::MemberShape.new(target: WebLocation, name: "web"))
     CitationLocation.add_member(:document_char, Types::CitationLocation::DocumentChar, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentCharLocation, name: "documentChar"))
     CitationLocation.add_member(:document_page, Types::CitationLocation::DocumentPage, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentPageLocation, name: "documentPage"))
     CitationLocation.add_member(:document_chunk, Types::CitationLocation::DocumentChunk, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentChunkLocation, name: "documentChunk"))
+    CitationLocation.add_member(:search_result_location, Types::CitationLocation::SearchResultLocation, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultLocation, name: "searchResultLocation"))
     CitationLocation.add_member(:unknown, Types::CitationLocation::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     CitationLocation.type = Types::CitationLocation
     CitationSourceContent.add_member(:text, Types::CitationSourceContent::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text"))
@@ -350,6 +460,7 @@ module Aws::BedrockRuntime
     CitationsContentBlock.add_member(:citations, ::Smithy::Schema::Shapes::MemberShape.new(target: Citations, name: "citations"))
     CitationsContentBlock.type = Types::CitationsContentBlock
     CitationsDelta.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "title"))
+    CitationsDelta.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "source"))
     CitationsDelta.add_member(:source_content, ::Smithy::Schema::Shapes::MemberShape.new(target: CitationSourceContentListDelta, name: "sourceContent"))
     CitationsDelta.add_member(:location, ::Smithy::Schema::Shapes::MemberShape.new(target: CitationLocation, name: "location"))
     CitationsDelta.type = Types::CitationsDelta
@@ -359,24 +470,32 @@ module Aws::BedrockRuntime
     ContentBlock.add_member(:image, Types::ContentBlock::Image, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBlock, name: "image"))
     ContentBlock.add_member(:document, Types::ContentBlock::Document, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentBlock, name: "document"))
     ContentBlock.add_member(:video, Types::ContentBlock::Video, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoBlock, name: "video"))
+    ContentBlock.add_member(:audio, Types::ContentBlock::Audio, ::Smithy::Schema::Shapes::MemberShape.new(target: AudioBlock, name: "audio"))
     ContentBlock.add_member(:tool_use, Types::ContentBlock::ToolUse, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolUseBlock, name: "toolUse"))
     ContentBlock.add_member(:tool_result, Types::ContentBlock::ToolResult, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolResultBlock, name: "toolResult"))
     ContentBlock.add_member(:guard_content, Types::ContentBlock::GuardContent, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailConverseContentBlock, name: "guardContent"))
     ContentBlock.add_member(:cache_point, Types::ContentBlock::CachePoint, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePointBlock, name: "cachePoint"))
     ContentBlock.add_member(:reasoning_content, Types::ContentBlock::ReasoningContent, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasoningContentBlock, name: "reasoningContent"))
     ContentBlock.add_member(:citations_content, Types::ContentBlock::CitationsContent, ::Smithy::Schema::Shapes::MemberShape.new(target: CitationsContentBlock, name: "citationsContent"))
+    ContentBlock.add_member(:search_result, Types::ContentBlock::SearchResult, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultBlock, name: "searchResult"))
+    ContentBlock.add_member(:tool_addition, Types::ContentBlock::ToolAddition, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolAdditionBlock, name: "toolAddition"))
+    ContentBlock.add_member(:tool_removal, Types::ContentBlock::ToolRemoval, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolRemovalBlock, name: "toolRemoval"))
     ContentBlock.add_member(:unknown, Types::ContentBlock::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ContentBlock.type = Types::ContentBlock
     ContentBlockDelta.add_member(:text, Types::ContentBlockDelta::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text"))
     ContentBlockDelta.add_member(:tool_use, Types::ContentBlockDelta::ToolUse, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolUseBlockDelta, name: "toolUse"))
+    ContentBlockDelta.add_member(:tool_result, Types::ContentBlockDelta::ToolResult, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolResultBlocksDelta, name: "toolResult"))
     ContentBlockDelta.add_member(:reasoning_content, Types::ContentBlockDelta::ReasoningContent, ::Smithy::Schema::Shapes::MemberShape.new(target: ReasoningContentBlockDelta, name: "reasoningContent"))
     ContentBlockDelta.add_member(:citation, Types::ContentBlockDelta::Citation, ::Smithy::Schema::Shapes::MemberShape.new(target: CitationsDelta, name: "citation"))
+    ContentBlockDelta.add_member(:image, Types::ContentBlockDelta::Image, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBlockDelta, name: "image"))
     ContentBlockDelta.add_member(:unknown, Types::ContentBlockDelta::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ContentBlockDelta.type = Types::ContentBlockDelta
     ContentBlockDeltaEvent.add_member(:delta, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentBlockDelta, name: "delta", traits: {"smithy.api#required" => {}}))
     ContentBlockDeltaEvent.add_member(:content_block_index, ::Smithy::Schema::Shapes::MemberShape.new(target: NonNegativeInteger, name: "contentBlockIndex", traits: {"smithy.api#required" => {}}))
     ContentBlockDeltaEvent.type = Types::ContentBlockDeltaEvent
     ContentBlockStart.add_member(:tool_use, Types::ContentBlockStart::ToolUse, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolUseBlockStart, name: "toolUse"))
+    ContentBlockStart.add_member(:tool_result, Types::ContentBlockStart::ToolResult, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolResultBlockStart, name: "toolResult"))
+    ContentBlockStart.add_member(:image, Types::ContentBlockStart::Image, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBlockStart, name: "image"))
     ContentBlockStart.add_member(:unknown, Types::ContentBlockStart::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ContentBlockStart.type = Types::ContentBlockStart
     ContentBlockStartEvent.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentBlockStart, name: "start", traits: {"smithy.api#required" => {}}))
@@ -387,6 +506,7 @@ module Aws::BedrockRuntime
     ContentBlocks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ContentBlock, name: "member"))
     ConversationRole.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "user"}))
     ConversationRole.add_member(:assistant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSISTANT", traits: {"smithy.api#enumValue" => "assistant"}))
+    ConversationRole.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM", traits: {"smithy.api#enumValue" => "system"}))
     ConverseMetrics.add_member(:latency_ms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "latencyMs", traits: {"smithy.api#required" => {}}))
     ConverseMetrics.type = Types::ConverseMetrics
     ConverseOutput.add_member(:message, Types::ConverseOutput::Message, ::Smithy::Schema::Shapes::MemberShape.new(target: Message, name: "message"))
@@ -403,6 +523,8 @@ module Aws::BedrockRuntime
     ConverseRequest.add_member(:additional_model_response_field_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelResponseFieldPaths, name: "additionalModelResponseFieldPaths", traits: {"smithy.api#length" => {"max" => 10}}))
     ConverseRequest.add_member(:request_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMetadata, name: "requestMetadata"))
     ConverseRequest.add_member(:performance_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfiguration, name: "performanceConfig"))
+    ConverseRequest.add_member(:service_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTier, name: "serviceTier"))
+    ConverseRequest.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputConfig, name: "outputConfig"))
     ConverseRequest.type = Types::ConverseRequest
     ConverseResponse.add_member(:output, ::Smithy::Schema::Shapes::MemberShape.new(target: ConverseOutput, name: "output", traits: {"smithy.api#required" => {}}))
     ConverseResponse.add_member(:stop_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: StopReason, name: "stopReason", traits: {"smithy.api#required" => {}}))
@@ -411,11 +533,13 @@ module Aws::BedrockRuntime
     ConverseResponse.add_member(:additional_model_response_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "additionalModelResponseFields"))
     ConverseResponse.add_member(:trace, ::Smithy::Schema::Shapes::MemberShape.new(target: ConverseTrace, name: "trace"))
     ConverseResponse.add_member(:performance_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfiguration, name: "performanceConfig"))
+    ConverseResponse.add_member(:service_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTier, name: "serviceTier"))
     ConverseResponse.type = Types::ConverseResponse
     ConverseStreamMetadataEvent.add_member(:usage, ::Smithy::Schema::Shapes::MemberShape.new(target: TokenUsage, name: "usage", traits: {"smithy.api#required" => {}}))
     ConverseStreamMetadataEvent.add_member(:metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: ConverseStreamMetrics, name: "metrics", traits: {"smithy.api#required" => {}}))
     ConverseStreamMetadataEvent.add_member(:trace, ::Smithy::Schema::Shapes::MemberShape.new(target: ConverseStreamTrace, name: "trace"))
     ConverseStreamMetadataEvent.add_member(:performance_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfiguration, name: "performanceConfig"))
+    ConverseStreamMetadataEvent.add_member(:service_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTier, name: "serviceTier"))
     ConverseStreamMetadataEvent.type = Types::ConverseStreamMetadataEvent
     ConverseStreamMetrics.add_member(:latency_ms, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Long, name: "latencyMs", traits: {"smithy.api#required" => {}}))
     ConverseStreamMetrics.type = Types::ConverseStreamMetrics
@@ -443,6 +567,8 @@ module Aws::BedrockRuntime
     ConverseStreamRequest.add_member(:additional_model_response_field_paths, ::Smithy::Schema::Shapes::MemberShape.new(target: AdditionalModelResponseFieldPaths, name: "additionalModelResponseFieldPaths", traits: {"smithy.api#length" => {"max" => 10}}))
     ConverseStreamRequest.add_member(:request_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMetadata, name: "requestMetadata"))
     ConverseStreamRequest.add_member(:performance_config, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfiguration, name: "performanceConfig"))
+    ConverseStreamRequest.add_member(:service_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTier, name: "serviceTier"))
+    ConverseStreamRequest.add_member(:output_config, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputConfig, name: "outputConfig"))
     ConverseStreamRequest.type = Types::ConverseStreamRequest
     ConverseStreamResponse.add_member(:stream, ::Smithy::Schema::Shapes::MemberShape.new(target: ConverseStreamOutput, name: "stream", traits: {"smithy.api#httpPayload" => {}}))
     ConverseStreamResponse[:http_payload] = :stream
@@ -453,6 +579,8 @@ module Aws::BedrockRuntime
     ConverseStreamTrace.type = Types::ConverseStreamTrace
     ConverseTokensRequest.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: Messages, name: "messages"))
     ConverseTokensRequest.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemContentBlocks, name: "system"))
+    ConverseTokensRequest.add_member(:tool_config, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolConfiguration, name: "toolConfig"))
+    ConverseTokensRequest.add_member(:additional_model_request_fields, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "additionalModelRequestFields"))
     ConverseTokensRequest.type = Types::ConverseTokensRequest
     ConverseTrace.add_member(:guardrail, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTraceAssessment, name: "guardrail"))
     ConverseTrace.add_member(:prompt_router, ::Smithy::Schema::Shapes::MemberShape.new(target: PromptRouterTrace, name: "promptRouter"))
@@ -503,6 +631,8 @@ module Aws::BedrockRuntime
     DocumentSource.add_member(:content, Types::DocumentSource::Content, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentContentBlocks, name: "content"))
     DocumentSource.add_member(:unknown, Types::DocumentSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     DocumentSource.type = Types::DocumentSource
+    ErrorBlock.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "message"))
+    ErrorBlock.type = Types::ErrorBlock
     GetAsyncInvokeRequest.add_member(:invocation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InvocationArn, name: "invocationArn", traits: {"smithy.api#httpLabel" => {}, "smithy.api#required" => {}}))
     GetAsyncInvokeRequest.type = Types::GetAsyncInvokeRequest
     GetAsyncInvokeResponse.add_member(:invocation_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: InvocationArn, name: "invocationArn", traits: {"smithy.api#required" => {}}))
@@ -524,6 +654,7 @@ module Aws::BedrockRuntime
     GuardrailAssessment.add_member(:contextual_grounding_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailContextualGroundingPolicyAssessment, name: "contextualGroundingPolicy"))
     GuardrailAssessment.add_member(:automated_reasoning_policy, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailAutomatedReasoningPolicyAssessment, name: "automatedReasoningPolicy"))
     GuardrailAssessment.add_member(:invocation_metrics, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailInvocationMetrics, name: "invocationMetrics"))
+    GuardrailAssessment.add_member(:applied_guardrail_details, ::Smithy::Schema::Shapes::MemberShape.new(target: AppliedGuardrailDetails, name: "appliedGuardrailDetails"))
     GuardrailAssessment.type = Types::GuardrailAssessment
     GuardrailAssessmentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailAssessment, name: "member"))
     GuardrailAssessmentListMap.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "key"))
@@ -595,8 +726,114 @@ module Aws::BedrockRuntime
     GuardrailAutomatedReasoningValidFinding.add_member(:supporting_rules, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailAutomatedReasoningRuleList, name: "supportingRules"))
     GuardrailAutomatedReasoningValidFinding.add_member(:logic_warning, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailAutomatedReasoningLogicWarning, name: "logicWarning"))
     GuardrailAutomatedReasoningValidFinding.type = Types::GuardrailAutomatedReasoningValidFinding
-    GuardrailConfiguration.add_member(:guardrail_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailIdentifier, name: "guardrailIdentifier", traits: {"smithy.api#required" => {}}))
-    GuardrailConfiguration.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailVersion, name: "guardrailVersion", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksConfig.add_member(:content_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentFilterConfig, name: "contentFilter"))
+    GuardrailChecksConfig.add_member(:prompt_attack, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksPromptAttackConfig, name: "promptAttack"))
+    GuardrailChecksConfig.add_member(:sensitive_information, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksSensitiveInformationConfig, name: "sensitiveInformation"))
+    GuardrailChecksConfig.type = Types::GuardrailChecksConfig
+    GuardrailChecksContentBlock.add_member(:text, Types::GuardrailChecksContentBlock::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksTextContent, name: "text"))
+    GuardrailChecksContentBlock.add_member(:unknown, Types::GuardrailChecksContentBlock::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    GuardrailChecksContentBlock.type = Types::GuardrailChecksContentBlock
+    GuardrailChecksContentBlockList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentBlock, name: "member"))
+    GuardrailChecksContentFilterCategory.add_member(:violence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VIOLENCE", traits: {"smithy.api#enumValue" => "VIOLENCE"}))
+    GuardrailChecksContentFilterCategory.add_member(:hate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "HATE", traits: {"smithy.api#enumValue" => "HATE"}))
+    GuardrailChecksContentFilterCategory.add_member(:sexual, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SEXUAL", traits: {"smithy.api#enumValue" => "SEXUAL"}))
+    GuardrailChecksContentFilterCategory.add_member(:misconduct, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MISCONDUCT", traits: {"smithy.api#enumValue" => "MISCONDUCT"}))
+    GuardrailChecksContentFilterCategory.add_member(:insults, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INSULTS", traits: {"smithy.api#enumValue" => "INSULTS"}))
+    GuardrailChecksContentFilterCategoryConfig.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentFilterCategory, name: "category", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksContentFilterCategoryConfig.type = Types::GuardrailChecksContentFilterCategoryConfig
+    GuardrailChecksContentFilterCategoryConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentFilterCategoryConfig, name: "member"))
+    GuardrailChecksContentFilterConfig.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentFilterCategoryConfigList, name: "categories", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksContentFilterConfig.type = Types::GuardrailChecksContentFilterConfig
+    GuardrailChecksContentFilterResult.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentFilterResultList, name: "results", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksContentFilterResult.type = Types::GuardrailChecksContentFilterResult
+    GuardrailChecksContentFilterResultEntry.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentFilterCategory, name: "category", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksContentFilterResultEntry.add_member(:severity_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "severityScore", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}, "smithy.api#required" => {}}))
+    GuardrailChecksContentFilterResultEntry.type = Types::GuardrailChecksContentFilterResultEntry
+    GuardrailChecksContentFilterResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentFilterResultEntry, name: "member"))
+    GuardrailChecksContentFilterUsage.add_member(:text_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "textUnits", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksContentFilterUsage.type = Types::GuardrailChecksContentFilterUsage
+    GuardrailChecksMessage.add_member(:role, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksRole, name: "role", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksMessage.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentBlockList, name: "content", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksMessage.type = Types::GuardrailChecksMessage
+    GuardrailChecksMessageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksMessage, name: "member"))
+    GuardrailChecksPromptAttackCategory.add_member(:jailbreak, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JAILBREAK", traits: {"smithy.api#enumValue" => "JAILBREAK"}))
+    GuardrailChecksPromptAttackCategory.add_member(:prompt_injection, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROMPT_INJECTION", traits: {"smithy.api#enumValue" => "PROMPT_INJECTION"}))
+    GuardrailChecksPromptAttackCategory.add_member(:prompt_leakage, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROMPT_LEAKAGE", traits: {"smithy.api#enumValue" => "PROMPT_LEAKAGE"}))
+    GuardrailChecksPromptAttackCategoryConfig.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksPromptAttackCategory, name: "category", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksPromptAttackCategoryConfig.type = Types::GuardrailChecksPromptAttackCategoryConfig
+    GuardrailChecksPromptAttackCategoryConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksPromptAttackCategoryConfig, name: "member"))
+    GuardrailChecksPromptAttackConfig.add_member(:categories, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksPromptAttackCategoryConfigList, name: "categories", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksPromptAttackConfig.type = Types::GuardrailChecksPromptAttackConfig
+    GuardrailChecksPromptAttackResult.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksPromptAttackResultList, name: "results", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksPromptAttackResult.type = Types::GuardrailChecksPromptAttackResult
+    GuardrailChecksPromptAttackResultEntry.add_member(:category, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksPromptAttackCategory, name: "category", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksPromptAttackResultEntry.add_member(:severity_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "severityScore", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}, "smithy.api#required" => {}}))
+    GuardrailChecksPromptAttackResultEntry.type = Types::GuardrailChecksPromptAttackResultEntry
+    GuardrailChecksPromptAttackResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksPromptAttackResultEntry, name: "member"))
+    GuardrailChecksPromptAttackUsage.add_member(:text_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "textUnits", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksPromptAttackUsage.type = Types::GuardrailChecksPromptAttackUsage
+    GuardrailChecksResults.add_member(:content_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentFilterResult, name: "contentFilter"))
+    GuardrailChecksResults.add_member(:prompt_attack, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksPromptAttackResult, name: "promptAttack"))
+    GuardrailChecksResults.add_member(:sensitive_information, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksSensitiveInformationResult, name: "sensitiveInformation"))
+    GuardrailChecksResults.type = Types::GuardrailChecksResults
+    GuardrailChecksRole.add_member(:user, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USER", traits: {"smithy.api#enumValue" => "user"}))
+    GuardrailChecksRole.add_member(:assistant, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ASSISTANT", traits: {"smithy.api#enumValue" => "assistant"}))
+    GuardrailChecksRole.add_member(:system, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SYSTEM", traits: {"smithy.api#enumValue" => "system"}))
+    GuardrailChecksSensitiveInformationConfig.add_member(:entities, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksSensitiveInformationEntityConfigList, name: "entities", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationConfig.type = Types::GuardrailChecksSensitiveInformationConfig
+    GuardrailChecksSensitiveInformationEntityConfig.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksSensitiveInformationEntityType, name: "type", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationEntityConfig.type = Types::GuardrailChecksSensitiveInformationEntityConfig
+    GuardrailChecksSensitiveInformationEntityConfigList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksSensitiveInformationEntityConfig, name: "member"))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ADDRESS", traits: {"smithy.api#enumValue" => "ADDRESS"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:age, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AGE", traits: {"smithy.api#enumValue" => "AGE"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:aws_access_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_ACCESS_KEY", traits: {"smithy.api#enumValue" => "AWS_ACCESS_KEY"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:aws_secret_key, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AWS_SECRET_KEY", traits: {"smithy.api#enumValue" => "AWS_SECRET_KEY"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:ca_health_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CA_HEALTH_NUMBER", traits: {"smithy.api#enumValue" => "CA_HEALTH_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:ca_social_insurance_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CA_SOCIAL_INSURANCE_NUMBER", traits: {"smithy.api#enumValue" => "CA_SOCIAL_INSURANCE_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:credit_debit_card_cvv, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREDIT_DEBIT_CARD_CVV", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_CARD_CVV"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:credit_debit_card_expiry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREDIT_DEBIT_CARD_EXPIRY", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_CARD_EXPIRY"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:credit_debit_card_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREDIT_DEBIT_CARD_NUMBER", traits: {"smithy.api#enumValue" => "CREDIT_DEBIT_CARD_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:driver_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DRIVER_ID", traits: {"smithy.api#enumValue" => "DRIVER_ID"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:email, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EMAIL", traits: {"smithy.api#enumValue" => "EMAIL"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:international_bank_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERNATIONAL_BANK_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "INTERNATIONAL_BANK_ACCOUNT_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:ip_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IP_ADDRESS", traits: {"smithy.api#enumValue" => "IP_ADDRESS"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:license_plate, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LICENSE_PLATE", traits: {"smithy.api#enumValue" => "LICENSE_PLATE"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:mac_address, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MAC_ADDRESS", traits: {"smithy.api#enumValue" => "MAC_ADDRESS"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "NAME", traits: {"smithy.api#enumValue" => "NAME"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:password, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PASSWORD", traits: {"smithy.api#enumValue" => "PASSWORD"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:phone, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PHONE", traits: {"smithy.api#enumValue" => "PHONE"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:pin, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PIN", traits: {"smithy.api#enumValue" => "PIN"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:swift_code, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SWIFT_CODE", traits: {"smithy.api#enumValue" => "SWIFT_CODE"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:uk_national_health_service_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UK_NATIONAL_HEALTH_SERVICE_NUMBER", traits: {"smithy.api#enumValue" => "UK_NATIONAL_HEALTH_SERVICE_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:uk_national_insurance_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UK_NATIONAL_INSURANCE_NUMBER", traits: {"smithy.api#enumValue" => "UK_NATIONAL_INSURANCE_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:uk_unique_taxpayer_reference_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER", traits: {"smithy.api#enumValue" => "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "URL", traits: {"smithy.api#enumValue" => "URL"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:username, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "USERNAME", traits: {"smithy.api#enumValue" => "USERNAME"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:us_bank_account_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_BANK_ACCOUNT_NUMBER", traits: {"smithy.api#enumValue" => "US_BANK_ACCOUNT_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:us_bank_routing_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_BANK_ROUTING_NUMBER", traits: {"smithy.api#enumValue" => "US_BANK_ROUTING_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:us_individual_tax_identification_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER", traits: {"smithy.api#enumValue" => "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:us_passport_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_PASSPORT_NUMBER", traits: {"smithy.api#enumValue" => "US_PASSPORT_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:us_social_security_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "US_SOCIAL_SECURITY_NUMBER", traits: {"smithy.api#enumValue" => "US_SOCIAL_SECURITY_NUMBER"}))
+    GuardrailChecksSensitiveInformationEntityType.add_member(:vehicle_identification_number, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "VEHICLE_IDENTIFICATION_NUMBER", traits: {"smithy.api#enumValue" => "VEHICLE_IDENTIFICATION_NUMBER"}))
+    GuardrailChecksSensitiveInformationResult.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksSensitiveInformationResultList, name: "results", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationResult.add_member(:truncated, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "truncated"))
+    GuardrailChecksSensitiveInformationResult.type = Types::GuardrailChecksSensitiveInformationResult
+    GuardrailChecksSensitiveInformationResultEntry.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksSensitiveInformationEntityType, name: "type", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationResultEntry.add_member(:confidence_score, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Double, name: "confidenceScore", traits: {"smithy.api#range" => {"min" => 0.0, "max" => 1.0}, "smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationResultEntry.add_member(:begin_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "beginOffset", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationResultEntry.add_member(:end_offset, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "endOffset", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationResultEntry.add_member(:message_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "messageIndex", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationResultEntry.add_member(:content_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "contentIndex", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationResultEntry.type = Types::GuardrailChecksSensitiveInformationResultEntry
+    GuardrailChecksSensitiveInformationResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksSensitiveInformationResultEntry, name: "member"))
+    GuardrailChecksSensitiveInformationUsage.add_member(:text_units, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "textUnits", traits: {"smithy.api#required" => {}}))
+    GuardrailChecksSensitiveInformationUsage.type = Types::GuardrailChecksSensitiveInformationUsage
+    GuardrailChecksUsageResults.add_member(:content_filter, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksContentFilterUsage, name: "contentFilter"))
+    GuardrailChecksUsageResults.add_member(:prompt_attack, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksPromptAttackUsage, name: "promptAttack"))
+    GuardrailChecksUsageResults.add_member(:sensitive_information, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksSensitiveInformationUsage, name: "sensitiveInformation"))
+    GuardrailChecksUsageResults.type = Types::GuardrailChecksUsageResults
+    GuardrailConfiguration.add_member(:guardrail_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailIdentifier, name: "guardrailIdentifier", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    GuardrailConfiguration.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailVersion, name: "guardrailVersion", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     GuardrailConfiguration.add_member(:trace, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTrace, name: "trace", traits: {"smithy.api#default" => "disabled"}))
     GuardrailConfiguration.type = Types::GuardrailConfiguration
     GuardrailContentBlock.add_member(:text, Types::GuardrailContentBlock::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTextBlock, name: "text"))
@@ -697,11 +934,17 @@ module Aws::BedrockRuntime
     GuardrailManagedWord.type = Types::GuardrailManagedWord
     GuardrailManagedWordList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailManagedWord, name: "member"))
     GuardrailManagedWordType.add_member(:profanity, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PROFANITY", traits: {"smithy.api#enumValue" => "PROFANITY"}))
+    GuardrailOrigin.add_member(:request, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REQUEST", traits: {"smithy.api#enumValue" => "REQUEST"}))
+    GuardrailOrigin.add_member(:account_enforced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACCOUNT_ENFORCED", traits: {"smithy.api#enumValue" => "ACCOUNT_ENFORCED"}))
+    GuardrailOrigin.add_member(:organization_enforced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ORGANIZATION_ENFORCED", traits: {"smithy.api#enumValue" => "ORGANIZATION_ENFORCED"}))
+    GuardrailOriginList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailOrigin, name: "member"))
     GuardrailOutputContent.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailOutputText, name: "text"))
     GuardrailOutputContent.type = Types::GuardrailOutputContent
     GuardrailOutputContentList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailOutputContent, name: "member"))
     GuardrailOutputScope.add_member(:interventions, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INTERVENTIONS", traits: {"smithy.api#enumValue" => "INTERVENTIONS"}))
     GuardrailOutputScope.add_member(:full, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FULL", traits: {"smithy.api#enumValue" => "FULL"}))
+    GuardrailOwnership.add_member(:self, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SELF", traits: {"smithy.api#enumValue" => "SELF"}))
+    GuardrailOwnership.add_member(:cross_account, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CROSS_ACCOUNT", traits: {"smithy.api#enumValue" => "CROSS_ACCOUNT"}))
     GuardrailPiiEntityFilter.add_member(:match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "match", traits: {"smithy.api#required" => {}}))
     GuardrailPiiEntityFilter.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPiiEntityType, name: "type", traits: {"smithy.api#required" => {}}))
     GuardrailPiiEntityFilter.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailSensitiveInformationPolicyAction, name: "action", traits: {"smithy.api#required" => {}}))
@@ -752,8 +995,8 @@ module Aws::BedrockRuntime
     GuardrailSensitiveInformationPolicyAssessment.add_member(:pii_entities, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailPiiEntityFilterList, name: "piiEntities", traits: {"smithy.api#required" => {}}))
     GuardrailSensitiveInformationPolicyAssessment.add_member(:regexes, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailRegexFilterList, name: "regexes", traits: {"smithy.api#required" => {}}))
     GuardrailSensitiveInformationPolicyAssessment.type = Types::GuardrailSensitiveInformationPolicyAssessment
-    GuardrailStreamConfiguration.add_member(:guardrail_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailIdentifier, name: "guardrailIdentifier", traits: {"smithy.api#required" => {}}))
-    GuardrailStreamConfiguration.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailVersion, name: "guardrailVersion", traits: {"smithy.api#required" => {}}))
+    GuardrailStreamConfiguration.add_member(:guardrail_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailIdentifier, name: "guardrailIdentifier", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
+    GuardrailStreamConfiguration.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailVersion, name: "guardrailVersion", traits: {"smithy.api#addedDefault" => {}, "smithy.api#default" => ""}))
     GuardrailStreamConfiguration.add_member(:trace, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailTrace, name: "trace", traits: {"smithy.api#default" => "disabled"}))
     GuardrailStreamConfiguration.add_member(:stream_processing_mode, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailStreamProcessingMode, name: "streamProcessingMode", traits: {"smithy.api#default" => "sync"}))
     GuardrailStreamConfiguration.type = Types::GuardrailStreamConfiguration
@@ -801,7 +1044,13 @@ module Aws::BedrockRuntime
     GuardrailWordPolicyAssessment.type = Types::GuardrailWordPolicyAssessment
     ImageBlock.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFormat, name: "format", traits: {"smithy.api#required" => {}}))
     ImageBlock.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSource, name: "source", traits: {"smithy.api#required" => {}}))
+    ImageBlock.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorBlock, name: "error"))
     ImageBlock.type = Types::ImageBlock
+    ImageBlockDelta.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSource, name: "source"))
+    ImageBlockDelta.add_member(:error, ::Smithy::Schema::Shapes::MemberShape.new(target: ErrorBlock, name: "error"))
+    ImageBlockDelta.type = Types::ImageBlockDelta
+    ImageBlockStart.add_member(:format, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFormat, name: "format", traits: {"smithy.api#required" => {}}))
+    ImageBlockStart.type = Types::ImageBlockStart
     ImageFormat.add_member(:png, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PNG", traits: {"smithy.api#enumValue" => "png"}))
     ImageFormat.add_member(:jpeg, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JPEG", traits: {"smithy.api#enumValue" => "jpeg"}))
     ImageFormat.add_member(:gif, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GIF", traits: {"smithy.api#enumValue" => "gif"}))
@@ -817,6 +1066,12 @@ module Aws::BedrockRuntime
     InferenceConfiguration.type = Types::InferenceConfiguration
     InternalServerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     InternalServerException.type = Types::InternalServerException
+    InvokeGuardrailChecksRequest.add_member(:messages, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksMessageList, name: "messages", traits: {"smithy.api#required" => {}}))
+    InvokeGuardrailChecksRequest.add_member(:checks, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksConfig, name: "checks", traits: {"smithy.api#required" => {}}))
+    InvokeGuardrailChecksRequest.type = Types::InvokeGuardrailChecksRequest
+    InvokeGuardrailChecksResponse.add_member(:results, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksResults, name: "results", traits: {"smithy.api#required" => {}}))
+    InvokeGuardrailChecksResponse.add_member(:usage, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailChecksUsageResults, name: "usage", traits: {"smithy.api#required" => {}}))
+    InvokeGuardrailChecksResponse.type = Types::InvokeGuardrailChecksResponse
     InvokeModelRequest.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Body, name: "body", traits: {"smithy.api#httpPayload" => {}}))
     InvokeModelRequest.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MimeType, name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type"}))
     InvokeModelRequest.add_member(:accept, ::Smithy::Schema::Shapes::MemberShape.new(target: MimeType, name: "accept", traits: {"smithy.api#httpHeader" => "Accept"}))
@@ -825,12 +1080,15 @@ module Aws::BedrockRuntime
     InvokeModelRequest.add_member(:guardrail_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailIdentifier, name: "guardrailIdentifier", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-GuardrailIdentifier"}))
     InvokeModelRequest.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailVersion, name: "guardrailVersion", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-GuardrailVersion"}))
     InvokeModelRequest.add_member(:performance_config_latency, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfigLatency, name: "performanceConfigLatency", traits: {"smithy.api#default" => "standard", "smithy.api#httpHeader" => "X-Amzn-Bedrock-PerformanceConfig-Latency"}))
+    InvokeModelRequest.add_member(:service_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTierType, name: "serviceTier", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-Service-Tier"}))
+    InvokeModelRequest.add_member(:request_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMetadataJson, name: "requestMetadata", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-Request-Metadata"}))
     InvokeModelRequest[:http_payload] = :body
     InvokeModelRequest[:http_payload_member] = InvokeModelRequest.member(:body)
     InvokeModelRequest.type = Types::InvokeModelRequest
     InvokeModelResponse.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: Body, name: "body", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     InvokeModelResponse.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MimeType, name: "contentType", traits: {"smithy.api#httpHeader" => "Content-Type", "smithy.api#required" => {}}))
     InvokeModelResponse.add_member(:performance_config_latency, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfigLatency, name: "performanceConfigLatency", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-PerformanceConfig-Latency"}))
+    InvokeModelResponse.add_member(:service_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTierType, name: "serviceTier", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-Service-Tier"}))
     InvokeModelResponse[:http_payload] = :body
     InvokeModelResponse[:http_payload_member] = InvokeModelResponse.member(:body)
     InvokeModelResponse.type = Types::InvokeModelResponse
@@ -865,15 +1123,22 @@ module Aws::BedrockRuntime
     InvokeModelWithResponseStreamRequest.add_member(:guardrail_identifier, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailIdentifier, name: "guardrailIdentifier", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-GuardrailIdentifier"}))
     InvokeModelWithResponseStreamRequest.add_member(:guardrail_version, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailVersion, name: "guardrailVersion", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-GuardrailVersion"}))
     InvokeModelWithResponseStreamRequest.add_member(:performance_config_latency, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfigLatency, name: "performanceConfigLatency", traits: {"smithy.api#default" => "standard", "smithy.api#httpHeader" => "X-Amzn-Bedrock-PerformanceConfig-Latency"}))
+    InvokeModelWithResponseStreamRequest.add_member(:service_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTierType, name: "serviceTier", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-Service-Tier"}))
+    InvokeModelWithResponseStreamRequest.add_member(:request_metadata, ::Smithy::Schema::Shapes::MemberShape.new(target: RequestMetadataJson, name: "requestMetadata", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-Request-Metadata"}))
     InvokeModelWithResponseStreamRequest[:http_payload] = :body
     InvokeModelWithResponseStreamRequest[:http_payload_member] = InvokeModelWithResponseStreamRequest.member(:body)
     InvokeModelWithResponseStreamRequest.type = Types::InvokeModelWithResponseStreamRequest
     InvokeModelWithResponseStreamResponse.add_member(:body, ::Smithy::Schema::Shapes::MemberShape.new(target: ResponseStream, name: "body", traits: {"smithy.api#httpPayload" => {}, "smithy.api#required" => {}}))
     InvokeModelWithResponseStreamResponse.add_member(:content_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MimeType, name: "contentType", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-Content-Type", "smithy.api#required" => {}}))
     InvokeModelWithResponseStreamResponse.add_member(:performance_config_latency, ::Smithy::Schema::Shapes::MemberShape.new(target: PerformanceConfigLatency, name: "performanceConfigLatency", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-PerformanceConfig-Latency"}))
+    InvokeModelWithResponseStreamResponse.add_member(:service_tier, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTierType, name: "serviceTier", traits: {"smithy.api#httpHeader" => "X-Amzn-Bedrock-Service-Tier"}))
     InvokeModelWithResponseStreamResponse[:http_payload] = :body
     InvokeModelWithResponseStreamResponse[:http_payload_member] = InvokeModelWithResponseStreamResponse.member(:body)
     InvokeModelWithResponseStreamResponse.type = Types::InvokeModelWithResponseStreamResponse
+    JsonSchemaDefinition.add_member(:schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "schema", traits: {"smithy.api#required" => {}}))
+    JsonSchemaDefinition.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name"))
+    JsonSchemaDefinition.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "description"))
+    JsonSchemaDefinition.type = Types::JsonSchemaDefinition
     ListAsyncInvokesRequest.add_member(:submit_time_after, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "submitTimeAfter", traits: {"smithy.api#httpQuery" => "submitTimeAfter"}))
     ListAsyncInvokesRequest.add_member(:submit_time_before, ::Smithy::Schema::Shapes::MemberShape.new(target: Timestamp, name: "submitTimeBefore", traits: {"smithy.api#httpQuery" => "submitTimeBefore"}))
     ListAsyncInvokesRequest.add_member(:status_equals, ::Smithy::Schema::Shapes::MemberShape.new(target: AsyncInvokeStatus, name: "statusEquals", traits: {"smithy.api#httpQuery" => "statusEquals"}))
@@ -908,6 +1173,16 @@ module Aws::BedrockRuntime
     ModelTimeoutException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     ModelTimeoutException.type = Types::ModelTimeoutException
     NonEmptyStringList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "member"))
+    OutputConfig.add_member(:text_format, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormat, name: "textFormat"))
+    OutputConfig.add_member(:effort, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "effort", traits: {"smithy.api#length" => {"max" => 16}}))
+    OutputConfig.type = Types::OutputConfig
+    OutputFormat.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormatType, name: "type", traits: {"smithy.api#required" => {}}))
+    OutputFormat.add_member(:structure, ::Smithy::Schema::Shapes::MemberShape.new(target: OutputFormatStructure, name: "structure", traits: {"smithy.api#required" => {}}))
+    OutputFormat.type = Types::OutputFormat
+    OutputFormatStructure.add_member(:json_schema, Types::OutputFormatStructure::JsonSchema, ::Smithy::Schema::Shapes::MemberShape.new(target: JsonSchemaDefinition, name: "jsonSchema"))
+    OutputFormatStructure.add_member(:unknown, Types::OutputFormatStructure::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    OutputFormatStructure.type = Types::OutputFormatStructure
+    OutputFormatType.add_member(:json_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "JSON_SCHEMA", traits: {"smithy.api#enumValue" => "json_schema"}))
     PayloadPart.add_member(:bytes, ::Smithy::Schema::Shapes::MemberShape.new(target: PartBody, name: "bytes"))
     PayloadPart.type = Types::PayloadPart
     PerformanceConfigLatency.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "standard"}))
@@ -949,8 +1224,26 @@ module Aws::BedrockRuntime
     S3Location.add_member(:uri, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Uri, name: "uri", traits: {"smithy.api#required" => {}}))
     S3Location.add_member(:bucket_owner, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountId, name: "bucketOwner"))
     S3Location.type = Types::S3Location
+    SearchResultBlock.add_member(:source, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "source", traits: {"smithy.api#required" => {}}))
+    SearchResultBlock.add_member(:title, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "title", traits: {"smithy.api#required" => {}}))
+    SearchResultBlock.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultContentBlocks, name: "content", traits: {"smithy.api#required" => {}}))
+    SearchResultBlock.add_member(:citations, ::Smithy::Schema::Shapes::MemberShape.new(target: CitationsConfig, name: "citations"))
+    SearchResultBlock.type = Types::SearchResultBlock
+    SearchResultContentBlock.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text", traits: {"smithy.api#required" => {}}))
+    SearchResultContentBlock.type = Types::SearchResultContentBlock
+    SearchResultContentBlocks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultContentBlock, name: "member"))
+    SearchResultLocation.add_member(:search_result_index, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "searchResultIndex", traits: {"smithy.api#range" => {"min" => 0}}))
+    SearchResultLocation.add_member(:start, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "start", traits: {"smithy.api#range" => {"min" => 0}}))
+    SearchResultLocation.add_member(:end, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "end", traits: {"smithy.api#range" => {"min" => 0}}))
+    SearchResultLocation.type = Types::SearchResultLocation
     ServiceQuotaExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     ServiceQuotaExceededException.type = Types::ServiceQuotaExceededException
+    ServiceTier.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ServiceTierType, name: "type", traits: {"smithy.api#required" => {}}))
+    ServiceTier.type = Types::ServiceTier
+    ServiceTierType.add_member(:priority, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PRIORITY", traits: {"smithy.api#enumValue" => "priority"}))
+    ServiceTierType.add_member(:default, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DEFAULT", traits: {"smithy.api#enumValue" => "default"}))
+    ServiceTierType.add_member(:flex, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FLEX", traits: {"smithy.api#enumValue" => "flex"}))
+    ServiceTierType.add_member(:reserved, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "RESERVED", traits: {"smithy.api#enumValue" => "reserved"}))
     ServiceUnavailableException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: NonBlankString, name: "message"))
     ServiceUnavailableException.type = Types::ServiceUnavailableException
     SortAsyncInvocationBy.add_member(:submission_time, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SUBMISSION_TIME", traits: {"smithy.api#enumValue" => "SubmissionTime"}))
@@ -972,6 +1265,8 @@ module Aws::BedrockRuntime
     StopReason.add_member(:stop_sequence, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STOP_SEQUENCE", traits: {"smithy.api#enumValue" => "stop_sequence"}))
     StopReason.add_member(:guardrail_intervened, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GUARDRAIL_INTERVENED", traits: {"smithy.api#enumValue" => "guardrail_intervened"}))
     StopReason.add_member(:content_filtered, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CONTENT_FILTERED", traits: {"smithy.api#enumValue" => "content_filtered"}))
+    StopReason.add_member(:malformed_model_output, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MALFORMED_MODEL_OUTPUT", traits: {"smithy.api#enumValue" => "malformed_model_output"}))
+    StopReason.add_member(:malformed_tool_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MALFORMED_TOOL_USE", traits: {"smithy.api#enumValue" => "malformed_tool_use"}))
     StopReason.add_member(:model_context_window_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MODEL_CONTEXT_WINDOW_EXCEEDED", traits: {"smithy.api#enumValue" => "model_context_window_exceeded"}))
     SystemContentBlock.add_member(:text, Types::SystemContentBlock::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "text"))
     SystemContentBlock.add_member(:guard_content, Types::SystemContentBlock::GuardContent, ::Smithy::Schema::Shapes::MemberShape.new(target: GuardrailConverseContentBlock, name: "guardContent"))
@@ -979,6 +1274,8 @@ module Aws::BedrockRuntime
     SystemContentBlock.add_member(:unknown, Types::SystemContentBlock::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     SystemContentBlock.type = Types::SystemContentBlock
     SystemContentBlocks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemContentBlock, name: "member"))
+    SystemTool.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolName, name: "name", traits: {"smithy.api#required" => {}}))
+    SystemTool.type = Types::SystemTool
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
@@ -990,11 +1287,15 @@ module Aws::BedrockRuntime
     TokenUsage.add_member(:total_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "totalTokens", traits: {"smithy.api#range" => {"min" => 0}, "smithy.api#required" => {}}))
     TokenUsage.add_member(:cache_read_input_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "cacheReadInputTokens", traits: {"smithy.api#range" => {"min" => 0}}))
     TokenUsage.add_member(:cache_write_input_tokens, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Integer, name: "cacheWriteInputTokens", traits: {"smithy.api#range" => {"min" => 0}}))
+    TokenUsage.add_member(:cache_details, ::Smithy::Schema::Shapes::MemberShape.new(target: CacheDetailsList, name: "cacheDetails"))
     TokenUsage.type = Types::TokenUsage
     Tool.add_member(:tool_spec, Types::Tool::ToolSpec, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolSpecification, name: "toolSpec"))
+    Tool.add_member(:system_tool, Types::Tool::SystemTool, ::Smithy::Schema::Shapes::MemberShape.new(target: SystemTool, name: "systemTool"))
     Tool.add_member(:cache_point, Types::Tool::CachePoint, ::Smithy::Schema::Shapes::MemberShape.new(target: CachePointBlock, name: "cachePoint"))
     Tool.add_member(:unknown, Types::Tool::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     Tool.type = Types::Tool
+    ToolAdditionBlock.add_member(:tool, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolReference, name: "tool", traits: {"smithy.api#required" => {}}))
+    ToolAdditionBlock.type = Types::ToolAdditionBlock
     ToolChoice.add_member(:auto, Types::ToolChoice::Auto, ::Smithy::Schema::Shapes::MemberShape.new(target: AutoToolChoice, name: "auto"))
     ToolChoice.add_member(:any, Types::ToolChoice::Any, ::Smithy::Schema::Shapes::MemberShape.new(target: AnyToolChoice, name: "any"))
     ToolChoice.add_member(:tool, Types::ToolChoice::Tool, ::Smithy::Schema::Shapes::MemberShape.new(target: SpecificToolChoice, name: "tool"))
@@ -1006,15 +1307,32 @@ module Aws::BedrockRuntime
     ToolInputSchema.add_member(:json, Types::ToolInputSchema::Json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "json"))
     ToolInputSchema.add_member(:unknown, Types::ToolInputSchema::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ToolInputSchema.type = Types::ToolInputSchema
+    ToolReference.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}}))
+    ToolReference.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "name", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}}))
+    ToolReference.add_member(:server_name, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "serverName", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}}))
+    ToolReference.type = Types::ToolReference
+    ToolRemovalBlock.add_member(:tool, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolReference, name: "tool", traits: {"smithy.api#required" => {}}))
+    ToolRemovalBlock.type = Types::ToolRemovalBlock
     ToolResultBlock.add_member(:tool_use_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolUseId, name: "toolUseId", traits: {"smithy.api#required" => {}}))
     ToolResultBlock.add_member(:content, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolResultContentBlocks, name: "content", traits: {"smithy.api#required" => {}}))
     ToolResultBlock.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolResultStatus, name: "status"))
+    ToolResultBlock.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type"))
     ToolResultBlock.type = Types::ToolResultBlock
+    ToolResultBlockDelta.add_member(:text, Types::ToolResultBlockDelta::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text"))
+    ToolResultBlockDelta.add_member(:json, Types::ToolResultBlockDelta::Json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "json"))
+    ToolResultBlockDelta.add_member(:unknown, Types::ToolResultBlockDelta::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
+    ToolResultBlockDelta.type = Types::ToolResultBlockDelta
+    ToolResultBlockStart.add_member(:tool_use_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolUseId, name: "toolUseId", traits: {"smithy.api#required" => {}}))
+    ToolResultBlockStart.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "type"))
+    ToolResultBlockStart.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolResultStatus, name: "status"))
+    ToolResultBlockStart.type = Types::ToolResultBlockStart
+    ToolResultBlocksDelta.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolResultBlockDelta, name: "member"))
     ToolResultContentBlock.add_member(:json, Types::ToolResultContentBlock::Json, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "json"))
     ToolResultContentBlock.add_member(:text, Types::ToolResultContentBlock::Text, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "text"))
     ToolResultContentBlock.add_member(:image, Types::ToolResultContentBlock::Image, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageBlock, name: "image"))
     ToolResultContentBlock.add_member(:document, Types::ToolResultContentBlock::Document, ::Smithy::Schema::Shapes::MemberShape.new(target: DocumentBlock, name: "document"))
     ToolResultContentBlock.add_member(:video, Types::ToolResultContentBlock::Video, ::Smithy::Schema::Shapes::MemberShape.new(target: VideoBlock, name: "video"))
+    ToolResultContentBlock.add_member(:search_result, Types::ToolResultContentBlock::SearchResult, ::Smithy::Schema::Shapes::MemberShape.new(target: SearchResultBlock, name: "searchResult"))
     ToolResultContentBlock.add_member(:unknown, Types::ToolResultContentBlock::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     ToolResultContentBlock.type = Types::ToolResultContentBlock
     ToolResultContentBlocks.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolResultContentBlock, name: "member"))
@@ -1023,16 +1341,20 @@ module Aws::BedrockRuntime
     ToolSpecification.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolName, name: "name", traits: {"smithy.api#required" => {}}))
     ToolSpecification.add_member(:description, ::Smithy::Schema::Shapes::MemberShape.new(target: NonEmptyString, name: "description"))
     ToolSpecification.add_member(:input_schema, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolInputSchema, name: "inputSchema", traits: {"smithy.api#required" => {}}))
+    ToolSpecification.add_member(:strict, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Boolean, name: "strict"))
     ToolSpecification.type = Types::ToolSpecification
     ToolUseBlock.add_member(:tool_use_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolUseId, name: "toolUseId", traits: {"smithy.api#required" => {}}))
     ToolUseBlock.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolName, name: "name", traits: {"smithy.api#required" => {}}))
     ToolUseBlock.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Document, name: "input", traits: {"smithy.api#required" => {}}))
+    ToolUseBlock.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolUseType, name: "type"))
     ToolUseBlock.type = Types::ToolUseBlock
     ToolUseBlockDelta.add_member(:input, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "input", traits: {"smithy.api#required" => {}}))
     ToolUseBlockDelta.type = Types::ToolUseBlockDelta
     ToolUseBlockStart.add_member(:tool_use_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolUseId, name: "toolUseId", traits: {"smithy.api#required" => {}}))
     ToolUseBlockStart.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolName, name: "name", traits: {"smithy.api#required" => {}}))
+    ToolUseBlockStart.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ToolUseType, name: "type"))
     ToolUseBlockStart.type = Types::ToolUseBlockStart
+    ToolUseType.add_member(:server_tool_use, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SERVER_TOOL_USE", traits: {"smithy.api#enumValue" => "server_tool_use"}))
     Tools.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Tool, name: "member"))
     Trace.add_member(:enabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENABLED", traits: {"smithy.api#enumValue" => "ENABLED"}))
     Trace.add_member(:disabled, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "DISABLED", traits: {"smithy.api#enumValue" => "DISABLED"}))
@@ -1055,12 +1377,15 @@ module Aws::BedrockRuntime
     VideoSource.add_member(:s3_location, Types::VideoSource::S3Location, ::Smithy::Schema::Shapes::MemberShape.new(target: S3Location, name: "s3Location"))
     VideoSource.add_member(:unknown, Types::VideoSource::Unknown, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit))
     VideoSource.type = Types::VideoSource
+    WebLocation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "url"))
+    WebLocation.add_member(:domain, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::String, name: "domain"))
+    WebLocation.type = Types::WebLocation
 
     AmazonBedrockFrontendService = ::Smithy::Schema::Shapes::ServiceShape.new do |service|
       service.id = "com.amazonaws.bedrockruntime#AmazonBedrockFrontendService"
       service.name = "AmazonBedrockFrontendService"
       service.version = "2023-09-30"
-      service.traits = {"aws.api#service" => {"sdkId" => "Bedrock Runtime", "endpointPrefix" => "bedrock-runtime", "cloudTrailEventSource" => "bedrock.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "bedrock"}, "aws.protocols#restJson1" => {"http" => ["h2", "http/1.1"], "eventStreamHttp" => ["h2", "http/1.1"]}, "smithy.api#auth" => ["aws.auth#sigv4", "smithy.api#httpBearerAuth"], "smithy.api#httpBearerAuth" => {}, "smithy.api#title" => "Amazon Bedrock Runtime"}
+      service.traits = {"aws.api#service" => {"sdkId" => "Bedrock Runtime", "endpointPrefix" => "bedrock-runtime", "cloudTrailEventSource" => "bedrock.amazonaws.com"}, "aws.auth#sigv4" => {"name" => "bedrock"}, "aws.protocols#restJson1" => {"http" => ["h2", "http/1.1"], "eventStreamHttp" => ["h2", "http/1.1"]}, "smithy.api#auth" => ["aws.auth#sigv4", "smithy.api#httpBearerAuth"], "smithy.api#httpBearerAuth" => {}, "smithy.api#title" => "Amazon Bedrock Runtime", "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}, "UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-runtime-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-runtime-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-runtime.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://bedrock-runtime.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 13, "nodes" => "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"}}
       service.add_operation(:apply_guardrail, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockruntime#ApplyGuardrail"
         operation.name = "ApplyGuardrail"
@@ -1130,6 +1455,18 @@ module Aws::BedrockRuntime
         operation.errors << ThrottlingException
         operation.errors << ValidationException
         operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "GET", "uri" => "/async-invoke/{invocationArn}"}, "smithy.api#readonly" => {}}
+      end)
+      service.add_operation(:invoke_guardrail_checks, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.bedrockruntime#InvokeGuardrailChecks"
+        operation.name = "InvokeGuardrailChecks"
+        operation.input = InvokeGuardrailChecksRequest
+        operation.output = InvokeGuardrailChecksResponse
+        operation.errors << AccessDeniedException
+        operation.errors << InternalServerException
+        operation.errors << ServiceUnavailableException
+        operation.errors << ThrottlingException
+        operation.errors << ValidationException
+        operation.traits = {"smithy.api#http" => {"code" => 200, "method" => "POST", "uri" => "/guardrail-checks/invoke"}}
       end)
       service.add_operation(:invoke_model, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.bedrockruntime#InvokeModel"

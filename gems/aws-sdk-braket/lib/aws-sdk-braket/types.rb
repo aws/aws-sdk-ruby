@@ -22,10 +22,10 @@ module Aws::Braket
     #   <p>The type of action associated with the quantum task.</p>
     #   @return [String]
     # @!attribute program_count
-    #   <p>The number of programs in a program set. This is only available for a Program Set.</p>
+    #   <p>The number of programs in a program set. This is only available for a program set.</p>
     #   @return [Integer]
     # @!attribute executable_count
-    #   <p>The number of executables in a program set. This is only available for a Program Set.</p>
+    #   <p>The number of executables in a program set. This is only available for a program set.</p>
     #   @return [Integer]
     class ActionMetadata < Struct.new(
       nil,
@@ -248,6 +248,9 @@ module Aws::Braket
     # @!attribute associations
     #   <p>The list of Amazon Braket resources associated with the quantum task.</p>
     #   @return [Array<Types::Association>]
+    # @!attribute experimental_capabilities
+    #   <p>Enable experimental capabilities for the quantum task.</p>
+    #   @return [Types::ExperimentalCapabilities]
     class CreateQuantumTaskInput < Struct.new(
       nil,
       :client_token,
@@ -260,6 +263,7 @@ module Aws::Braket
       :tags,
       :job_token,
       :associations,
+      :experimental_capabilities,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -276,6 +280,44 @@ module Aws::Braket
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Braket ignores the request, but does not return an error.</p>
+    #   @return [String]
+    # @!attribute device_arn
+    #   <p>The Amazon Resource Name (ARN) of the quantum device to apply the spending limit to.</p>
+    #   @return [String]
+    # @!attribute spending_limit
+    #   <p>The maximum amount that can be spent on the specified device, in USD.</p>
+    #   @return [String]
+    # @!attribute time_period
+    #   <p>The time period during which the spending limit is active, including start and end dates.</p>
+    #   @return [Types::TimePeriod]
+    # @!attribute tags
+    #   <p>The tags to apply to the spending limit. Each tag consists of a key and an optional value.</p>
+    #   @return [Hash<String, String>]
+    class CreateSpendingLimitRequest < Struct.new(
+      nil,
+      :client_token,
+      :device_arn,
+      :spending_limit,
+      :time_period,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute spending_limit_arn
+    #   <p>The Amazon Resource Name (ARN) of the created spending limit.</p>
+    #   @return [String]
+    class CreateSpendingLimitResponse < Struct.new(
+      nil,
+      :spending_limit_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Information about the source of the input data used by the Amazon Braket hybrid job.</p>
     # @!attribute s3_data_source
     #   <p>Amazon S3 path of the input data used by the hybrid job.</p>
@@ -283,6 +325,24 @@ module Aws::Braket
     class DataSource < Struct.new(
       nil,
       :s3_data_source,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute spending_limit_arn
+    #   <p>The Amazon Resource Name (ARN) of the spending limit to delete.</p>
+    #   @return [String]
+    class DeleteSpendingLimitRequest < Struct.new(
+      nil,
+      :spending_limit_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class DeleteSpendingLimitResponse < Struct.new(
+      nil,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -368,6 +428,21 @@ module Aws::Braket
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+    end
+
+    # <p>Enabled experimental capabilities for quantum hardware. Note that the use of these features may impact device capabilities and performance beyond its standard specifications.</p>
+    # @!attribute enabled
+    #   <p>Enabled experimental capabilities.</p>
+    #   @return [String]
+    class ExperimentalCapabilities < Struct.new(
+      :enabled,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Enabled < ExperimentalCapabilities; end
+      class Unknown < ExperimentalCapabilities; end
     end
 
     # @!attribute device_arn
@@ -585,6 +660,9 @@ module Aws::Braket
     # @!attribute action_metadata
     #   <p>Metadata about the action performed by the quantum task, including information about the type of action and program counts.</p>
     #   @return [Types::ActionMetadata]
+    # @!attribute experimental_capabilities
+    #   <p>Enabled experimental capabilities for the quantum task, if any.</p>
+    #   @return [Types::ExperimentalCapabilities]
     class GetQuantumTaskOutput < Struct.new(
       nil,
       :quantum_task_arn,
@@ -603,6 +681,7 @@ module Aws::Braket
       :associations,
       :num_successful_shots,
       :action_metadata,
+      :experimental_capabilities,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1094,12 +1173,110 @@ module Aws::Braket
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Specifies filter criteria for searching spending limits. Use filters to narrow down results based on specific attributes.</p>
+    # @!attribute name
+    #   <p>The name of the field to filter on. Currently only supports <code>deviceArn</code>.</p>
+    #   @return [String]
+    # @!attribute values
+    #   <p>An array of values to match against the specified field.</p>
+    #   @return [Array<String>]
+    # @!attribute operator
+    #   <p>The comparison operator to use when filtering.</p>
+    #   @return [String]
+    class SearchSpendingLimitsFilter < Struct.new(
+      nil,
+      :name,
+      :values,
+      :operator,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute next_token
+    #   <p>The token to retrieve the next page of results. This value is returned from a previous call to SearchSpendingLimits when there are more results available.</p>
+    #   @return [String]
+    # @!attribute max_results
+    #   <p>The maximum number of results to return in a single call. Minimum value of 1, maximum value of 100. Default is 20.</p>
+    #   @return [Integer]
+    # @!attribute filters
+    #   <p>The filters to apply when searching for spending limits. Use filters to narrow down the results based on specific criteria.</p>
+    #   @return [Array<Types::SearchSpendingLimitsFilter>]
+    class SearchSpendingLimitsRequest < Struct.new(
+      nil,
+      :next_token,
+      :max_results,
+      :filters,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute spending_limits
+    #   <p>An array of spending limit summaries that match the specified filters.</p>
+    #   @return [Array<Types::SpendingLimitSummary>]
+    # @!attribute next_token
+    #   <p>The token to retrieve the next page of results. This value is null when there are no more results to return.</p>
+    #   @return [String]
+    class SearchSpendingLimitsResponse < Struct.new(
+      nil,
+      :spending_limits,
+      :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The request failed because a service quota is exceeded.</p>
     # @!attribute message
     #   @return [String]
     class ServiceQuotaExceededException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains summary information about a spending limit, including current spending status and configuration details.</p>
+    # @!attribute spending_limit_arn
+    #   <p>The Amazon Resource Name (ARN) that uniquely identifies the spending limit.</p>
+    #   @return [String]
+    # @!attribute device_arn
+    #   <p>The Amazon Resource Name (ARN) of the quantum device associated with this spending limit.</p>
+    #   @return [String]
+    # @!attribute time_period
+    #   <p>The time period during which the spending limit is active.</p>
+    #   @return [Types::TimePeriod]
+    # @!attribute spending_limit
+    #   <p>The maximum spending amount allowed for the device during the specified time period, in USD.</p>
+    #   @return [String]
+    # @!attribute queued_spend
+    #   <p>The amount currently queued for spending on the device, in USD.</p>
+    #   @return [String]
+    # @!attribute total_spend
+    #   <p>The total amount spent on the device so far during the current time period, in USD.</p>
+    #   @return [String]
+    # @!attribute created_at
+    #   <p>The date and time when the spending limit was created, in epoch seconds.</p>
+    #   @return [Time]
+    # @!attribute updated_at
+    #   <p>The date and time when the spending limit was last modified, in epoch seconds.</p>
+    #   @return [Time]
+    # @!attribute tags
+    #   <p>The tags associated with the spending limit. Each tag consists of a key and an optional value.</p>
+    #   @return [Hash<String, String>]
+    class SpendingLimitSummary < Struct.new(
+      nil,
+      :spending_limit_arn,
+      :device_arn,
+      :time_period,
+      :spending_limit,
+      :queued_spend,
+      :total_spend,
+      :created_at,
+      :updated_at,
+      :tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1138,6 +1315,22 @@ module Aws::Braket
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Defines a time range for spending limits, specifying when the limit is active.</p>
+    # @!attribute start_at
+    #   <p>The start date and time for the spending limit period, in epoch seconds.</p>
+    #   @return [Time]
+    # @!attribute end_at
+    #   <p>The end date and time for the spending limit period, in epoch seconds.</p>
+    #   @return [Time]
+    class TimePeriod < Struct.new(
+      nil,
+      :start_at,
+      :end_at,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>Specify the <code>resourceArn</code> for the resource from which to remove the tags.</p>
     #   @return [String]
@@ -1154,6 +1347,36 @@ module Aws::Braket
     end
 
     class UntagResourceOutput < Struct.new(
+      nil,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute spending_limit_arn
+    #   <p>The Amazon Resource Name (ARN) of the spending limit to update.</p>
+    #   @return [String]
+    # @!attribute client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Braket ignores the request, but does not return an error.</p>
+    #   @return [String]
+    # @!attribute spending_limit
+    #   <p>The new maximum amount that can be spent on the specified device, in USD.</p>
+    #   @return [String]
+    # @!attribute time_period
+    #   <p>The new time period during which the spending limit is active, including start and end dates.</p>
+    #   @return [Types::TimePeriod]
+    class UpdateSpendingLimitRequest < Struct.new(
+      nil,
+      :spending_limit_arn,
+      :client_token,
+      :spending_limit,
+      :time_period,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    class UpdateSpendingLimitResponse < Struct.new(
       nil,
       keyword_init: true
     )

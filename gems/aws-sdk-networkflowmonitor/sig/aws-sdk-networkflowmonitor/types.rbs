@@ -539,6 +539,7 @@ module Aws::NetworkFlowMonitor
       AWS_AZ: String
       AWS_SUBNET: String
       AWS_REGION: String
+      EKS_CLUSTER: String
     end
 
     module MonitorMetric

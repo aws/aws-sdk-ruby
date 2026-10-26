@@ -35,6 +35,13 @@ module Aws::CloudWatchLogs
       attr_accessor account_id: String?
     end
 
+    module ActionStatus
+      IN_PROGRESS: String
+      CLIENT_ERROR: String
+      FAILED: String
+      COMPLETE: String
+    end
+
     class AddKeyEntry
       include Smithy::Schema::Structure
 
@@ -59,6 +66,19 @@ module Aws::CloudWatchLogs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor entries: Array[Types::AddKeyEntry]?
+    end
+
+    class AggregateLogGroupSummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_count: Integer,
+        ?grouping_identifiers: Array[Types::GroupingIdentifier],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_count: Integer?
+      attr_accessor grouping_identifiers: Array[Types::GroupingIdentifier]?
     end
 
     class Anomaly
@@ -161,6 +181,30 @@ module Aws::CloudWatchLogs
       attr_accessor resource_identifier: String?
     end
 
+    class AssociateSourceToS3TableIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_arn: String,
+        ?data_source: Types::DataSource,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_arn: String?
+      attr_accessor data_source: Types::DataSource?
+    end
+
+    class AssociateSourceToS3TableIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
     class CSV
       include Smithy::Schema::Structure
 
@@ -169,6 +213,7 @@ module Aws::CloudWatchLogs
         ?delimiter: String,
         ?columns: Array[String],
         ?source: String,
+        ?destination: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -176,6 +221,7 @@ module Aws::CloudWatchLogs
       attr_accessor delimiter: String?
       attr_accessor columns: Array[String]?
       attr_accessor source: String?
+      attr_accessor destination: String?
     end
 
     class CancelExportTaskRequest
@@ -187,6 +233,36 @@ module Aws::CloudWatchLogs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor task_id: String?
+    end
+
+    class CancelImportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+    end
+
+    class CancelImportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+        ?import_statistics: Types::ImportStatistics,
+        ?import_status: String,
+        ?creation_time: Integer,
+        ?last_updated_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+      attr_accessor import_statistics: Types::ImportStatistics?
+      attr_accessor import_status: String?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_updated_time: Integer?
     end
 
     class ConfigurationTemplate
@@ -203,6 +279,8 @@ module Aws::CloudWatchLogs
         ?allowed_action_for_allow_vended_logs_delivery_for_resource: String,
         ?allowed_field_delimiters: Array[String],
         ?allowed_suffix_path_fields: Array[String],
+        ?delivery_source_configuration: Array[Types::DeliverySourceConfigurationSchema],
+        ?s3_tables_integration: Types::S3TablesIntegration,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -216,6 +294,8 @@ module Aws::CloudWatchLogs
       attr_accessor allowed_action_for_allow_vended_logs_delivery_for_resource: String?
       attr_accessor allowed_field_delimiters: Array[String]?
       attr_accessor allowed_suffix_path_fields: Array[String]?
+      attr_accessor delivery_source_configuration: Array[Types::DeliverySourceConfigurationSchema]?
+      attr_accessor s3_tables_integration: Types::S3TablesIntegration?
     end
 
     class ConfigurationTemplateDeliveryConfigValues
@@ -336,6 +416,36 @@ module Aws::CloudWatchLogs
       attr_accessor task_id: String?
     end
 
+    class CreateImportTaskRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_source_arn: String,
+        ?import_role_arn: String,
+        ?import_filter: Types::ImportFilter,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_source_arn: String?
+      attr_accessor import_role_arn: String?
+      attr_accessor import_filter: Types::ImportFilter?
+    end
+
+    class CreateImportTaskResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+        ?import_destination_arn: String,
+        ?creation_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+      attr_accessor import_destination_arn: String?
+      attr_accessor creation_time: Integer?
+    end
+
     class CreateLogAnomalyDetectorRequest
       include Smithy::Schema::Structure
 
@@ -378,6 +488,7 @@ module Aws::CloudWatchLogs
         ?kms_key_id: String,
         ?tags: Hash[String, String],
         ?log_group_class: String,
+        ?deletion_protection_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -385,6 +496,7 @@ module Aws::CloudWatchLogs
       attr_accessor kms_key_id: String?
       attr_accessor tags: Hash[String, String]?
       attr_accessor log_group_class: String?
+      attr_accessor deletion_protection_enabled: bool?
     end
 
     class CreateLogStreamRequest
@@ -398,6 +510,92 @@ module Aws::CloudWatchLogs
 
       attr_accessor log_group_name: String?
       attr_accessor log_stream_name: String?
+    end
+
+    class CreateLookupTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_table_name: String,
+        ?description: String,
+        ?table_body: String,
+        ?query_id: String,
+        ?kms_key_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_table_name: String?
+      attr_accessor description: String?
+      attr_accessor table_body: String?
+      attr_accessor query_id: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateLookupTableResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_table_arn: String,
+        ?created_at: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_table_arn: String?
+      attr_accessor created_at: Integer?
+    end
+
+    class CreateScheduledQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?description: String,
+        ?query_language: String,
+        ?query_string: String,
+        ?log_group_identifiers: Array[String],
+        ?schedule_expression: String,
+        ?timezone: String,
+        ?start_time_offset: Integer,
+        ?end_time_offset: Integer,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?schedule_start_time: Integer,
+        ?schedule_end_time: Integer,
+        ?execution_role_arn: String,
+        ?state: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor query_language: String?
+      attr_accessor query_string: String?
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor schedule_expression: String?
+      attr_accessor timezone: String?
+      attr_accessor start_time_offset: Integer?
+      attr_accessor end_time_offset: Integer?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor schedule_start_time: Integer?
+      attr_accessor schedule_end_time: Integer?
+      attr_accessor execution_role_arn: String?
+      attr_accessor state: String?
+      attr_accessor tags: Hash[String, String]?
+    end
+
+    class CreateScheduledQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_query_arn: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_query_arn: String?
+      attr_accessor state: String?
     end
 
     class DataAlreadyAcceptedException
@@ -418,6 +616,32 @@ module Aws::CloudWatchLogs
       DELETED: String
       ARCHIVED: String
       DISABLED: String
+    end
+
+    class DataSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    class DataSourceFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor type: String?
     end
 
     class DateTimeConverter
@@ -610,6 +834,17 @@ module Aws::CloudWatchLogs
       attr_accessor log_stream_name: String?
     end
 
+    class DeleteLookupTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_table_arn: String?
+    end
+
     class DeleteMetricFilterRequest
       include Smithy::Schema::Structure
 
@@ -671,6 +906,26 @@ module Aws::CloudWatchLogs
       attr_accessor log_group_name: String?
     end
 
+    class DeleteScheduledQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DeleteScheduledQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
     class DeleteSubscriptionFilterRequest
       include Smithy::Schema::Structure
 
@@ -682,6 +937,19 @@ module Aws::CloudWatchLogs
 
       attr_accessor log_group_name: String?
       attr_accessor filter_name: String?
+    end
+
+    class DeleteSyslogConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor vpc_endpoint_id: String?
     end
 
     class DeleteTransformerRequest
@@ -731,6 +999,7 @@ module Aws::CloudWatchLogs
         ?delivery_destination_type: String,
         ?output_format: String,
         ?delivery_destination_configuration: Types::DeliveryDestinationConfiguration,
+        ?role_arn: String,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -740,6 +1009,7 @@ module Aws::CloudWatchLogs
       attr_accessor delivery_destination_type: String?
       attr_accessor output_format: String?
       attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration?
+      attr_accessor role_arn: String?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -771,6 +1041,9 @@ module Aws::CloudWatchLogs
         ?service: String,
         ?log_type: String,
         ?tags: Hash[String, String],
+        ?delivery_source_configuration: Hash[String, String],
+        ?status: String,
+        ?status_reason: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -780,6 +1053,47 @@ module Aws::CloudWatchLogs
       attr_accessor service: String?
       attr_accessor log_type: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor delivery_source_configuration: Hash[String, String]?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+    end
+
+    class DeliverySourceConfigurationSchema
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key_name: String,
+        ?value_type: String,
+        ?default_value: String,
+        ?supported_values: Array[String],
+        ?min_value: Float,
+        ?max_value: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key_name: String?
+      attr_accessor value_type: String?
+      attr_accessor default_value: String?
+      attr_accessor supported_values: Array[String]?
+      attr_accessor min_value: Float?
+      attr_accessor max_value: Float?
+    end
+
+    module DeliverySourceConfigurationSchemaValueType
+      STRING: String
+      BOOLEAN: String
+      INT: String
+      DOUBLE: String
+      LONG: String
+    end
+
+    module DeliverySourceStatus
+      ACTIVE: String
+      INACTIVE: String
+    end
+
+    module DeliverySourceStatusReason
+      RESOURCE_DELETED: String
     end
 
     class DescribeAccountPoliciesRequest
@@ -987,11 +1301,13 @@ module Aws::CloudWatchLogs
 
       def initialize: (
         ?log_group_identifiers: Array[String],
+        ?index_categories: Array[String],
         ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor index_categories: Array[String]?
       attr_accessor next_token: String?
     end
 
@@ -1005,6 +1321,72 @@ module Aws::CloudWatchLogs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor field_indexes: Array[Types::FieldIndex]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImportTaskBatchesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+        ?batch_import_status: Array[String],
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+      attr_accessor batch_import_status: Array[String]?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImportTaskBatchesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_source_arn: String,
+        ?import_id: String,
+        ?import_batches: Array[Types::ImportBatch],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_source_arn: String?
+      attr_accessor import_id: String?
+      attr_accessor import_batches: Array[Types::ImportBatch]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImportTasksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+        ?import_status: String,
+        ?import_source_arn: String,
+        ?limit: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+      attr_accessor import_status: String?
+      attr_accessor import_source_arn: String?
+      attr_accessor limit: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeImportTasksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?imports: Array[Types::Import],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor imports: Array[Types::Import]?
       attr_accessor next_token: String?
     end
 
@@ -1105,6 +1487,34 @@ module Aws::CloudWatchLogs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor log_streams: Array[Types::LogStream]?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLookupTablesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_table_name_prefix: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_table_name_prefix: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeLookupTablesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_tables: Array[Types::LookupTable],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_tables: Array[Types::LookupTable]?
       attr_accessor next_token: String?
     end
 
@@ -1285,6 +1695,19 @@ module Aws::CloudWatchLogs
       attr_accessor creation_time: Integer?
     end
 
+    class DestinationConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?s3_configuration: Types::S3Configuration,
+        ?lookup_table_configuration: Types::LookupTableConfiguration,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor s3_configuration: Types::S3Configuration?
+      attr_accessor lookup_table_configuration: Types::LookupTableConfiguration?
+    end
+
     class DisassociateKmsKeyRequest
       include Smithy::Schema::Structure
 
@@ -1296,6 +1719,28 @@ module Aws::CloudWatchLogs
 
       attr_accessor log_group_name: String?
       attr_accessor resource_identifier: String?
+    end
+
+    class DisassociateSourceFromS3TableIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class DisassociateSourceFromS3TableIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
     end
 
     module Distribution
@@ -1341,6 +1786,14 @@ module Aws::CloudWatchLogs
       VPC_FLOW: String
       EKS_AUDIT: String
       AWSWAF: String
+    end
+
+    module ExecutionStatus
+      Running: String
+      InvalidQuery: String
+      Complete: String
+      Failed: String
+      Timeout: String
     end
 
     class ExportTask
@@ -1414,6 +1867,8 @@ module Aws::CloudWatchLogs
         ?last_scan_time: Integer,
         ?first_event_time: Integer,
         ?last_event_time: Integer,
+        ?type: String,
+        ?index_category: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1422,6 +1877,8 @@ module Aws::CloudWatchLogs
       attr_accessor last_scan_time: Integer?
       attr_accessor first_event_time: Integer?
       attr_accessor last_event_time: Integer?
+      attr_accessor type: String?
+      attr_accessor index_category: String?
     end
 
     class FieldsData
@@ -1448,6 +1905,7 @@ module Aws::CloudWatchLogs
         ?filter_pattern: String,
         ?next_token: String,
         ?limit: Integer,
+        ?start_from_head: bool,
         ?interleaved: bool,
         ?unmask: bool,
       ) -> void
@@ -1462,6 +1920,7 @@ module Aws::CloudWatchLogs
       attr_accessor filter_pattern: String?
       attr_accessor next_token: String?
       attr_accessor limit: Integer?
+      attr_accessor start_from_head: bool?
       attr_accessor interleaved: bool?
       attr_accessor unmask: bool?
     end
@@ -1727,6 +2186,30 @@ module Aws::CloudWatchLogs
       attr_accessor next_backward_token: String?
     end
 
+    class GetLogFieldsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?data_source_name: String,
+        ?data_source_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor data_source_name: String?
+      attr_accessor data_source_type: String?
+    end
+
+    class GetLogFieldsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_fields: Array[Types::LogFieldsListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_fields: Array[Types::LogFieldsListItem]?
+    end
+
     class GetLogGroupFieldsRequest
       include Smithy::Schema::Structure
 
@@ -1821,15 +2304,53 @@ module Aws::CloudWatchLogs
       attr_accessor log_record: Hash[String, String]?
     end
 
+    class GetLookupTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_table_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_table_arn: String?
+    end
+
+    class GetLookupTableResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_table_arn: String,
+        ?lookup_table_name: String,
+        ?description: String,
+        ?table_body: String,
+        ?size_bytes: Integer,
+        ?last_updated_time: Integer,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_table_arn: String?
+      attr_accessor lookup_table_name: String?
+      attr_accessor description: String?
+      attr_accessor table_body: String?
+      attr_accessor size_bytes: Integer?
+      attr_accessor last_updated_time: Integer?
+      attr_accessor kms_key_id: String?
+    end
+
     class GetQueryResultsRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?query_id: String,
+        ?next_token: String,
+        ?max_items: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor query_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_items: Integer?
     end
 
     class GetQueryResultsResponse
@@ -1841,6 +2362,7 @@ module Aws::CloudWatchLogs
         ?statistics: Types::QueryStatistics,
         ?status: String,
         ?encryption_key: String,
+        ?next_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1849,6 +2371,127 @@ module Aws::CloudWatchLogs
       attr_accessor statistics: Types::QueryStatistics?
       attr_accessor status: String?
       attr_accessor encryption_key: String?
+      attr_accessor next_token: String?
+    end
+
+    class GetScheduledQueryHistoryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?start_time: Integer,
+        ?end_time: Integer,
+        ?execution_statuses: Array[String],
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor start_time: Integer?
+      attr_accessor end_time: Integer?
+      attr_accessor execution_statuses: Array[String]?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class GetScheduledQueryHistoryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?scheduled_query_arn: String,
+        ?trigger_history: Array[Types::TriggerHistoryRecord],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor scheduled_query_arn: String?
+      attr_accessor trigger_history: Array[Types::TriggerHistoryRecord]?
+      attr_accessor next_token: String?
+    end
+
+    class GetScheduledQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+    end
+
+    class GetScheduledQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_query_arn: String,
+        ?name: String,
+        ?description: String,
+        ?query_language: String,
+        ?query_string: String,
+        ?log_group_identifiers: Array[String],
+        ?schedule_expression: String,
+        ?timezone: String,
+        ?start_time_offset: Integer,
+        ?end_time_offset: Integer,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?state: String,
+        ?schedule_type: String,
+        ?last_triggered_time: Integer,
+        ?last_execution_status: String,
+        ?schedule_start_time: Integer,
+        ?schedule_end_time: Integer,
+        ?execution_role_arn: String,
+        ?creation_time: Integer,
+        ?last_updated_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_query_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor query_language: String?
+      attr_accessor query_string: String?
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor schedule_expression: String?
+      attr_accessor timezone: String?
+      attr_accessor start_time_offset: Integer?
+      attr_accessor end_time_offset: Integer?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor state: String?
+      attr_accessor schedule_type: String?
+      attr_accessor last_triggered_time: Integer?
+      attr_accessor last_execution_status: String?
+      attr_accessor schedule_start_time: Integer?
+      attr_accessor schedule_end_time: Integer?
+      attr_accessor execution_role_arn: String?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_updated_time: Integer?
+    end
+
+    class GetStorageTierPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+    end
+
+    class GetStorageTierPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_tier: String,
+        ?last_updated_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_tier: String?
+      attr_accessor last_updated_time: Integer?
     end
 
     class GetTransformerRequest
@@ -1892,6 +2535,99 @@ module Aws::CloudWatchLogs
       attr_accessor match: String?
     end
 
+    class GroupingIdentifier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?value: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor value: String?
+    end
+
+    class Import
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?import_id: String,
+        ?import_source_arn: String,
+        ?import_status: String,
+        ?import_destination_arn: String,
+        ?import_statistics: Types::ImportStatistics,
+        ?import_filter: Types::ImportFilter,
+        ?creation_time: Integer,
+        ?last_updated_time: Integer,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor import_id: String?
+      attr_accessor import_source_arn: String?
+      attr_accessor import_status: String?
+      attr_accessor import_destination_arn: String?
+      attr_accessor import_statistics: Types::ImportStatistics?
+      attr_accessor import_filter: Types::ImportFilter?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_updated_time: Integer?
+      attr_accessor error_message: String?
+    end
+
+    class ImportBatch
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?batch_id: String,
+        ?status: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor batch_id: String?
+      attr_accessor status: String?
+      attr_accessor error_message: String?
+    end
+
+    class ImportFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?start_event_time: Integer,
+        ?end_event_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor start_event_time: Integer?
+      attr_accessor end_event_time: Integer?
+    end
+
+    class ImportStatistics
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?bytes_imported: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes_imported: Integer?
+    end
+
+    module ImportStatus
+      IN_PROGRESS: String
+      CANCELLED: String
+      COMPLETED: String
+      FAILED: String
+    end
+
+    module IndexCategory
+      DEFAULT: String
+      CUSTOM: String
+      AUTO: String
+      INACTIVE: String
+    end
+
     class IndexPolicy
       include Smithy::Schema::Structure
 
@@ -1914,6 +2650,11 @@ module Aws::CloudWatchLogs
     module IndexSource
       ACCOUNT: String
       LOG_GROUP: String
+    end
+
+    module IndexType
+      FACET: String
+      FIELD_INDEX: String
     end
 
     module InheritedProperty
@@ -1974,6 +2715,17 @@ module Aws::CloudWatchLogs
       OPENSEARCH: String
     end
 
+    class InternalServerException
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class InternalStreamingException
       include Smithy::Schema::Structure
 
@@ -2029,6 +2781,49 @@ module Aws::CloudWatchLogs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module ListAggregateLogGroupSummariesGroupBy
+      DATA_SOURCE_NAME_TYPE_AND_FORMAT: String
+      DATA_SOURCE_NAME_AND_TYPE: String
+    end
+
+    class ListAggregateLogGroupSummariesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?account_identifiers: Array[String],
+        ?include_linked_accounts: bool,
+        ?log_group_class: String,
+        ?log_group_name_pattern: String,
+        ?data_sources: Array[Types::DataSourceFilter],
+        ?group_by: String,
+        ?next_token: String,
+        ?limit: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor account_identifiers: Array[String]?
+      attr_accessor include_linked_accounts: bool?
+      attr_accessor log_group_class: String?
+      attr_accessor log_group_name_pattern: String?
+      attr_accessor data_sources: Array[Types::DataSourceFilter]?
+      attr_accessor group_by: String?
+      attr_accessor next_token: String?
+      attr_accessor limit: Integer?
+    end
+
+    class ListAggregateLogGroupSummariesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?aggregate_log_group_summaries: Array[Types::AggregateLogGroupSummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor aggregate_log_group_summaries: Array[Types::AggregateLogGroupSummary]?
+      attr_accessor next_token: String?
     end
 
     class ListAnomaliesRequest
@@ -2153,6 +2948,9 @@ module Aws::CloudWatchLogs
         ?account_identifiers: Array[String],
         ?next_token: String,
         ?limit: Integer,
+        ?data_sources: Array[Types::DataSourceFilter],
+        ?field_index_names: Array[String],
+        ?log_group_tags: Array[Types::TagFilter],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2162,6 +2960,9 @@ module Aws::CloudWatchLogs
       attr_accessor account_identifiers: Array[String]?
       attr_accessor next_token: String?
       attr_accessor limit: Integer?
+      attr_accessor data_sources: Array[Types::DataSourceFilter]?
+      attr_accessor field_index_names: Array[String]?
+      attr_accessor log_group_tags: Array[Types::TagFilter]?
     end
 
     class ListLogGroupsResponse
@@ -2174,6 +2975,94 @@ module Aws::CloudWatchLogs
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor log_groups: Array[Types::LogGroupSummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListScheduledQueriesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?max_results: Integer,
+        ?next_token: String,
+        ?state: String,
+        ?schedule_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+      attr_accessor state: String?
+      attr_accessor schedule_type: String?
+    end
+
+    class ListScheduledQueriesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?scheduled_queries: Array[Types::ScheduledQuerySummary],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor scheduled_queries: Array[Types::ScheduledQuerySummary]?
+    end
+
+    class ListSourcesForS3TableIntegrationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?integration_arn: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor integration_arn: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListSourcesForS3TableIntegrationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sources: Array[Types::S3TableIntegrationSource],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sources: Array[Types::S3TableIntegrationSource]?
+      attr_accessor next_token: String?
+    end
+
+    class ListSyslogConfigurationsRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?vpc_endpoint_id: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListSyslogConfigurationsResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?syslog_configurations: Array[Types::SyslogConfiguration],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor syslog_configurations: Array[Types::SyslogConfiguration]?
       attr_accessor next_token: String?
     end
 
@@ -2319,6 +3208,34 @@ module Aws::CloudWatchLogs
       attr_accessor message: String?
     end
 
+    class LogFieldType
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?element: Types::LogFieldType,
+        ?fields: Array[Types::LogFieldsListItem],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor element: Types::LogFieldType?
+      attr_accessor fields: Array[Types::LogFieldsListItem]?
+    end
+
+    class LogFieldsListItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_field_name: String,
+        ?log_field_type: Types::LogFieldType,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_field_name: String?
+      attr_accessor log_field_type: Types::LogFieldType?
+    end
+
     class LogGroup
       include Smithy::Schema::Structure
 
@@ -2334,6 +3251,8 @@ module Aws::CloudWatchLogs
         ?inherited_properties: Array[String],
         ?log_group_class: String,
         ?log_group_arn: String,
+        ?deletion_protection_enabled: bool,
+        ?bearer_token_authentication_enabled: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2348,6 +3267,8 @@ module Aws::CloudWatchLogs
       attr_accessor inherited_properties: Array[String]?
       attr_accessor log_group_class: String?
       attr_accessor log_group_arn: String?
+      attr_accessor deletion_protection_enabled: bool?
+      attr_accessor bearer_token_authentication_enabled: bool?
     end
 
     module LogGroupClass
@@ -2407,6 +3328,50 @@ module Aws::CloudWatchLogs
       attr_accessor upload_sequence_token: String?
       attr_accessor arn: String?
       attr_accessor stored_bytes: Integer?
+    end
+
+    class LookupTable
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_table_arn: String,
+        ?lookup_table_name: String,
+        ?description: String,
+        ?table_fields: Array[String],
+        ?records_count: Integer,
+        ?size_bytes: Integer,
+        ?last_updated_time: Integer,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_table_arn: String?
+      attr_accessor lookup_table_name: String?
+      attr_accessor description: String?
+      attr_accessor table_fields: Array[String]?
+      attr_accessor records_count: Integer?
+      attr_accessor size_bytes: Integer?
+      attr_accessor last_updated_time: Integer?
+      attr_accessor kms_key_id: String?
+    end
+
+    class LookupTableConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?table_name: String,
+        ?role_arn: String,
+        ?description: String,
+        ?kms_key_id: String,
+        ?tags: Hash[String, String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor table_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor description: String?
+      attr_accessor kms_key_id: String?
+      attr_accessor tags: Hash[String, String]?
     end
 
     class LowerCaseString
@@ -2522,6 +3487,7 @@ module Aws::CloudWatchLogs
 
     module OCSFVersion
       V1_1: String
+      V1_5: String
     end
 
     class OpenSearchApplication
@@ -2812,12 +3778,14 @@ module Aws::CloudWatchLogs
         ?source: String,
         ?event_source: String,
         ?ocsf_version: String,
+        ?mapping_version: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor source: String?
       attr_accessor event_source: String?
       attr_accessor ocsf_version: String?
+      attr_accessor mapping_version: String?
     end
 
     class ParseVPC
@@ -2970,6 +3938,19 @@ module Aws::CloudWatchLogs
       attr_accessor account_policy: Types::AccountPolicy?
     end
 
+    class PutBearerTokenAuthenticationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?bearer_token_authentication_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor bearer_token_authentication_enabled: bool?
+    end
+
     class PutDataProtectionPolicyRequest
       include Smithy::Schema::Structure
 
@@ -3030,6 +4011,7 @@ module Aws::CloudWatchLogs
         ?output_format: String,
         ?delivery_destination_configuration: Types::DeliveryDestinationConfiguration,
         ?delivery_destination_type: String,
+        ?role_arn: String,
         ?tags: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3038,6 +4020,7 @@ module Aws::CloudWatchLogs
       attr_accessor output_format: String?
       attr_accessor delivery_destination_configuration: Types::DeliveryDestinationConfiguration?
       attr_accessor delivery_destination_type: String?
+      attr_accessor role_arn: String?
       attr_accessor tags: Hash[String, String]?
     end
 
@@ -3060,6 +4043,7 @@ module Aws::CloudWatchLogs
         ?resource_arn: String,
         ?log_type: String,
         ?tags: Hash[String, String],
+        ?delivery_source_configuration: Hash[String, String],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3067,6 +4051,7 @@ module Aws::CloudWatchLogs
       attr_accessor resource_arn: String?
       attr_accessor log_type: String?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor delivery_source_configuration: Hash[String, String]?
     end
 
     class PutDeliverySourceResponse
@@ -3209,6 +4194,19 @@ module Aws::CloudWatchLogs
       attr_accessor rejected_entity_info: Types::RejectedEntityInfo?
     end
 
+    class PutLogGroupDeletionProtectionRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?deletion_protection_enabled: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor deletion_protection_enabled: bool?
+    end
+
     class PutMetricFilterRequest
       include Smithy::Schema::Structure
 
@@ -3242,6 +4240,7 @@ module Aws::CloudWatchLogs
         ?log_group_names: Array[String],
         ?query_string: String,
         ?client_token: String,
+        ?parameters: Array[Types::QueryParameter],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3251,6 +4250,7 @@ module Aws::CloudWatchLogs
       attr_accessor log_group_names: Array[String]?
       attr_accessor query_string: String?
       attr_accessor client_token: String?
+      attr_accessor parameters: Array[Types::QueryParameter]?
     end
 
     class PutQueryDefinitionResponse
@@ -3307,6 +4307,30 @@ module Aws::CloudWatchLogs
       attr_accessor retention_in_days: Integer?
     end
 
+    class PutStorageTierPolicyRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_tier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_tier: String?
+    end
+
+    class PutStorageTierPolicyResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?storage_tier: String,
+        ?last_updated_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor storage_tier: String?
+      attr_accessor last_updated_time: Integer?
+    end
+
     class PutSubscriptionFilterRequest
       include Smithy::Schema::Structure
 
@@ -3332,6 +4356,19 @@ module Aws::CloudWatchLogs
       attr_accessor apply_on_transformed_logs: bool?
       attr_accessor field_selection_criteria: String?
       attr_accessor emit_system_fields: Array[String]?
+    end
+
+    class PutSyslogConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_identifier: String,
+        ?vpc_endpoint_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_identifier: String?
+      attr_accessor vpc_endpoint_id: String?
     end
 
     class PutTransformerRequest
@@ -3383,6 +4420,7 @@ module Aws::CloudWatchLogs
         ?query_string: String,
         ?last_modified: Integer,
         ?log_group_names: Array[String],
+        ?parameters: Array[Types::QueryParameter],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3392,6 +4430,7 @@ module Aws::CloudWatchLogs
       attr_accessor query_string: String?
       attr_accessor last_modified: Integer?
       attr_accessor log_group_names: Array[String]?
+      attr_accessor parameters: Array[Types::QueryParameter]?
     end
 
     class QueryInfo
@@ -3404,6 +4443,9 @@ module Aws::CloudWatchLogs
         ?status: String,
         ?create_time: Integer,
         ?log_group_name: String,
+        ?query_duration: Integer,
+        ?bytes_scanned: Float,
+        ?user_identity: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3413,12 +4455,30 @@ module Aws::CloudWatchLogs
       attr_accessor status: String?
       attr_accessor create_time: Integer?
       attr_accessor log_group_name: String?
+      attr_accessor query_duration: Integer?
+      attr_accessor bytes_scanned: Float?
+      attr_accessor user_identity: String?
     end
 
     module QueryLanguage
       CWLI: String
       SQL: String
       PPL: String
+    end
+
+    class QueryParameter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?default_value: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor default_value: String?
+      attr_accessor description: String?
     end
 
     class QueryStatistics
@@ -3431,6 +4491,7 @@ module Aws::CloudWatchLogs
         ?bytes_scanned: Float,
         ?estimated_bytes_skipped: Float,
         ?log_groups_scanned: Float,
+        ?result_count: Float,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3440,6 +4501,7 @@ module Aws::CloudWatchLogs
       attr_accessor bytes_scanned: Float?
       attr_accessor estimated_bytes_skipped: Float?
       attr_accessor log_groups_scanned: Float?
+      attr_accessor result_count: Float?
     end
 
     module QueryStatus
@@ -3589,6 +4651,23 @@ module Aws::CloudWatchLogs
       attr_accessor value: String?
     end
 
+    class S3Configuration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_identifier: String,
+        ?role_arn: String,
+        ?owner_account_id: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_identifier: String?
+      attr_accessor role_arn: String?
+      attr_accessor owner_account_id: String?
+      attr_accessor kms_key_id: String?
+    end
+
     class S3DeliveryConfiguration
       include Smithy::Schema::Structure
 
@@ -3600,6 +4679,112 @@ module Aws::CloudWatchLogs
 
       attr_accessor suffix_path: String?
       attr_accessor enable_hive_compatible_path: bool?
+    end
+
+    class S3TableIntegrationSource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?data_source: Types::DataSource,
+        ?status: String,
+        ?status_reason: String,
+        ?created_time_stamp: Integer,
+        ?parent_source_identifier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor data_source: Types::DataSource?
+      attr_accessor status: String?
+      attr_accessor status_reason: String?
+      attr_accessor created_time_stamp: Integer?
+      attr_accessor parent_source_identifier: String?
+    end
+
+    module S3TableIntegrationSourceStatus
+      ACTIVE: String
+      UNHEALTHY: String
+      FAILED: String
+      DATA_SOURCE_DELETE_IN_PROGRESS: String
+    end
+
+    class S3TablesIntegration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?datasource_name: String,
+        ?datasource_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor datasource_name: String?
+      attr_accessor datasource_type: String?
+    end
+
+    module ScheduleType
+      CUSTOMER_MANAGED: String
+      AWS_MANAGED: String
+    end
+
+    class ScheduledQueryDestination
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?destination_type: String,
+        ?destination_identifier: String,
+        ?status: String,
+        ?processed_identifier: String,
+        ?error_message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor destination_type: String?
+      attr_accessor destination_identifier: String?
+      attr_accessor status: String?
+      attr_accessor processed_identifier: String?
+      attr_accessor error_message: String?
+    end
+
+    module ScheduledQueryDestinationType
+      S3: String
+      LOOKUP_TABLE: String
+    end
+
+    module ScheduledQueryState
+      ENABLED: String
+      DISABLED: String
+    end
+
+    class ScheduledQuerySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_query_arn: String,
+        ?name: String,
+        ?state: String,
+        ?schedule_type: String,
+        ?last_triggered_time: Integer,
+        ?last_execution_status: String,
+        ?schedule_expression: String,
+        ?timezone: String,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?creation_time: Integer,
+        ?last_updated_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_query_arn: String?
+      attr_accessor name: String?
+      attr_accessor state: String?
+      attr_accessor schedule_type: String?
+      attr_accessor last_triggered_time: Integer?
+      attr_accessor last_execution_status: String?
+      attr_accessor schedule_expression: String?
+      attr_accessor timezone: String?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_updated_time: Integer?
     end
 
     module Scope
@@ -3837,6 +5022,11 @@ module Aws::CloudWatchLogs
       attr_accessor success: bool?
     end
 
+    module StorageTier
+      STANDARD: String
+      INTELLIGENT_TIERING: String
+    end
+
     class SubscriptionFilter
       include Smithy::Schema::Structure
 
@@ -3919,6 +5109,40 @@ module Aws::CloudWatchLogs
       SECONDS: String
       MINUTES: String
       HOURS: String
+    end
+
+    class SyslogConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?log_group_arn: String,
+        ?source_type: String,
+        ?vpc_endpoint_id: String,
+        ?created_at: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor log_group_arn: String?
+      attr_accessor source_type: String?
+      attr_accessor vpc_endpoint_id: String?
+      attr_accessor created_at: Integer?
+    end
+
+    module SyslogSourceType
+      VPCE: String
+    end
+
+    class TagFilter
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?key: String,
+        ?values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor key: String?
+      attr_accessor values: Array[String]?
     end
 
     class TagLogGroupRequest
@@ -4032,6 +5256,25 @@ module Aws::CloudWatchLogs
       attr_accessor event_number: Integer?
       attr_accessor event_message: String?
       attr_accessor transformed_event_message: String?
+    end
+
+    class TriggerHistoryRecord
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?query_id: String,
+        ?execution_status: String,
+        ?triggered_timestamp: Integer,
+        ?error_message: String,
+        ?destinations: Array[Types::ScheduledQueryDestination],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor query_id: String?
+      attr_accessor execution_status: String?
+      attr_accessor triggered_timestamp: Integer?
+      attr_accessor error_message: String?
+      attr_accessor destinations: Array[Types::ScheduledQueryDestination]?
     end
 
     class TrimString
@@ -4177,6 +5420,124 @@ module Aws::CloudWatchLogs
       attr_accessor filter_pattern: String?
       attr_accessor anomaly_visibility_time: Integer?
       attr_accessor enabled: bool?
+    end
+
+    class UpdateLookupTableRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_table_arn: String,
+        ?description: String,
+        ?table_body: String,
+        ?query_id: String,
+        ?kms_key_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_table_arn: String?
+      attr_accessor description: String?
+      attr_accessor table_body: String?
+      attr_accessor query_id: String?
+      attr_accessor kms_key_id: String?
+    end
+
+    class UpdateLookupTableResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?lookup_table_arn: String,
+        ?last_updated_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor lookup_table_arn: String?
+      attr_accessor last_updated_time: Integer?
+    end
+
+    class UpdateScheduledQueryRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?identifier: String,
+        ?description: String,
+        ?query_language: String,
+        ?query_string: String,
+        ?log_group_identifiers: Array[String],
+        ?schedule_expression: String,
+        ?timezone: String,
+        ?start_time_offset: Integer,
+        ?end_time_offset: Integer,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?schedule_start_time: Integer,
+        ?schedule_end_time: Integer,
+        ?execution_role_arn: String,
+        ?state: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor identifier: String?
+      attr_accessor description: String?
+      attr_accessor query_language: String?
+      attr_accessor query_string: String?
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor schedule_expression: String?
+      attr_accessor timezone: String?
+      attr_accessor start_time_offset: Integer?
+      attr_accessor end_time_offset: Integer?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor schedule_start_time: Integer?
+      attr_accessor schedule_end_time: Integer?
+      attr_accessor execution_role_arn: String?
+      attr_accessor state: String?
+    end
+
+    class UpdateScheduledQueryResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scheduled_query_arn: String,
+        ?name: String,
+        ?description: String,
+        ?query_language: String,
+        ?query_string: String,
+        ?log_group_identifiers: Array[String],
+        ?schedule_expression: String,
+        ?timezone: String,
+        ?start_time_offset: Integer,
+        ?end_time_offset: Integer,
+        ?destination_configuration: Types::DestinationConfiguration,
+        ?state: String,
+        ?schedule_type: String,
+        ?last_triggered_time: Integer,
+        ?last_execution_status: String,
+        ?schedule_start_time: Integer,
+        ?schedule_end_time: Integer,
+        ?execution_role_arn: String,
+        ?creation_time: Integer,
+        ?last_updated_time: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scheduled_query_arn: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
+      attr_accessor query_language: String?
+      attr_accessor query_string: String?
+      attr_accessor log_group_identifiers: Array[String]?
+      attr_accessor schedule_expression: String?
+      attr_accessor timezone: String?
+      attr_accessor start_time_offset: Integer?
+      attr_accessor end_time_offset: Integer?
+      attr_accessor destination_configuration: Types::DestinationConfiguration?
+      attr_accessor state: String?
+      attr_accessor schedule_type: String?
+      attr_accessor last_triggered_time: Integer?
+      attr_accessor last_execution_status: String?
+      attr_accessor schedule_start_time: Integer?
+      attr_accessor schedule_end_time: Integer?
+      attr_accessor execution_role_arn: String?
+      attr_accessor creation_time: Integer?
+      attr_accessor last_updated_time: Integer?
     end
 
     class UpperCaseString

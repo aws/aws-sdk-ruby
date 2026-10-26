@@ -12,10 +12,14 @@ module Aws::EKS
       BOTTLEROCKET_x86_64_FIPS: String
       BOTTLEROCKET_ARM_64_NVIDIA: String
       BOTTLEROCKET_x86_64_NVIDIA: String
+      BOTTLEROCKET_ARM_64_NVIDIA_FIPS: String
+      BOTTLEROCKET_x86_64_NVIDIA_FIPS: String
       WINDOWS_CORE_2019_x86_64: String
       WINDOWS_FULL_2019_x86_64: String
       WINDOWS_CORE_2022_x86_64: String
       WINDOWS_FULL_2022_x86_64: String
+      WINDOWS_CORE_2025_x86_64: String
+      WINDOWS_FULL_2025_x86_64: String
       AL2023_x86_64_STANDARD: String
       AL2023_ARM_64_STANDARD: String
       AL2023_x86_64_NEURON: String
@@ -103,6 +107,73 @@ module Aws::EKS
     module AccessScopeType
       cluster: String
       namespace: String
+    end
+
+    class AckConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_cross_namespace: bool,
+        ?disabled_services: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_cross_namespace: bool?
+      attr_accessor disabled_services: Array[String]?
+    end
+
+    class AckConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_cross_namespace: bool,
+        ?disabled_services: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_cross_namespace: bool?
+      attr_accessor disabled_services: Array[String]?
+    end
+
+    class ActivateCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?certificate_authority_id: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor certificate_authority_id: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class ActivateCertificateAuthorityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+        ?certificate_authority: Types::CertificateAuthoritySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+      attr_accessor certificate_authority: Types::CertificateAuthoritySummary?
+    end
+
+    class ActiveCertificateAuthority
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?activated_by: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor activated_by: String?
     end
 
     class Addon
@@ -301,6 +372,126 @@ module Aws::EKS
       attr_accessor requires_iam_permissions: bool?
     end
 
+    class AllowedValuesConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?allowed_values: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor allowed_values: Array[String]?
+    end
+
+    class ArgoCdAwsIdcConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idc_instance_arn: String,
+        ?idc_region: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idc_instance_arn: String?
+      attr_accessor idc_region: String?
+    end
+
+    class ArgoCdAwsIdcConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?idc_instance_arn: String,
+        ?idc_region: String,
+        ?idc_managed_application_arn: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor idc_instance_arn: String?
+      attr_accessor idc_region: String?
+      attr_accessor idc_managed_application_arn: String?
+    end
+
+    class ArgoCdConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?aws_idc: Types::ArgoCdAwsIdcConfigRequest,
+        ?rbac_role_mappings: Array[Types::ArgoCdRoleMapping],
+        ?network_access: Types::ArgoCdNetworkAccessConfigRequest,
+        ?endpoint_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor aws_idc: Types::ArgoCdAwsIdcConfigRequest?
+      attr_accessor rbac_role_mappings: Array[Types::ArgoCdRoleMapping]?
+      attr_accessor network_access: Types::ArgoCdNetworkAccessConfigRequest?
+      attr_accessor endpoint_prefix: String?
+    end
+
+    class ArgoCdConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?namespace: String,
+        ?aws_idc: Types::ArgoCdAwsIdcConfigResponse,
+        ?rbac_role_mappings: Array[Types::ArgoCdRoleMapping],
+        ?network_access: Types::ArgoCdNetworkAccessConfigResponse,
+        ?server_url: String,
+        ?endpoint_prefix: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor namespace: String?
+      attr_accessor aws_idc: Types::ArgoCdAwsIdcConfigResponse?
+      attr_accessor rbac_role_mappings: Array[Types::ArgoCdRoleMapping]?
+      attr_accessor network_access: Types::ArgoCdNetworkAccessConfigResponse?
+      attr_accessor server_url: String?
+      attr_accessor endpoint_prefix: String?
+    end
+
+    class ArgoCdNetworkAccessConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpce_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpce_ids: Array[String]?
+    end
+
+    class ArgoCdNetworkAccessConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?vpce_ids: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor vpce_ids: Array[String]?
+    end
+
+    module ArgoCdRole
+      ADMIN: String
+      EDITOR: String
+      VIEWER: String
+    end
+
+    class ArgoCdRoleMapping
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?identities: Array[Types::SsoIdentity],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor identities: Array[Types::SsoIdentity]?
+    end
+
     class AssociateAccessPolicyRequest
       include Smithy::Schema::Structure
 
@@ -445,6 +636,184 @@ module Aws::EKS
       attr_accessor enabled: bool?
     end
 
+    class CancelUpdateRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?update_id: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor update_id: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class CancelUpdateResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
+    class Cancellation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?status: String,
+        ?reason: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor status: String?
+      attr_accessor reason: String?
+    end
+
+    module CancellationStatus
+      IN_PROGRESS: String
+      FAILED: String
+      SUCCESSFUL: String
+    end
+
+    class Capability
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_name: String,
+        ?arn: String,
+        ?cluster_name: String,
+        ?type: String,
+        ?role_arn: String,
+        ?status: String,
+        ?version: String,
+        ?configuration: Types::CapabilityConfigurationResponse,
+        ?tags: Hash[String, String],
+        ?health: Types::CapabilityHealth,
+        ?created_at: Time,
+        ?modified_at: Time,
+        ?delete_propagation_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_name: String?
+      attr_accessor arn: String?
+      attr_accessor cluster_name: String?
+      attr_accessor type: String?
+      attr_accessor role_arn: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor configuration: Types::CapabilityConfigurationResponse?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor health: Types::CapabilityHealth?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+      attr_accessor delete_propagation_policy: String?
+    end
+
+    class CapabilityConfigurationRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?argo_cd: Types::ArgoCdConfigRequest,
+        ?ack: Types::AckConfigRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor argo_cd: Types::ArgoCdConfigRequest?
+      attr_accessor ack: Types::AckConfigRequest?
+    end
+
+    class CapabilityConfigurationResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?argo_cd: Types::ArgoCdConfigResponse,
+        ?ack: Types::AckConfigResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor argo_cd: Types::ArgoCdConfigResponse?
+      attr_accessor ack: Types::AckConfigResponse?
+    end
+
+    module CapabilityDeletePropagationPolicy
+      RETAIN: String
+    end
+
+    class CapabilityHealth
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?issues: Array[Types::CapabilityIssue],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor issues: Array[Types::CapabilityIssue]?
+    end
+
+    class CapabilityIssue
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module CapabilityIssueCode
+      ACCESS_DENIED: String
+      CLUSTER_UNREACHABLE: String
+    end
+
+    module CapabilityStatus
+      CREATING: String
+      CREATE_FAILED: String
+      UPDATING: String
+      DELETING: String
+      DELETE_FAILED: String
+      ACTIVE: String
+      DEGRADED: String
+    end
+
+    class CapabilitySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_name: String,
+        ?arn: String,
+        ?type: String,
+        ?status: String,
+        ?version: String,
+        ?created_at: Time,
+        ?modified_at: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_name: String?
+      attr_accessor arn: String?
+      attr_accessor type: String?
+      attr_accessor status: String?
+      attr_accessor version: String?
+      attr_accessor created_at: Time?
+      attr_accessor modified_at: Time?
+    end
+
+    module CapabilityType
+      ACK: String
+      KRO: String
+      ARGOCD: String
+    end
+
     module CapacityTypes
       ON_DEMAND: String
       SPOT: String
@@ -454,6 +823,7 @@ module Aws::EKS
     module Category
       UPGRADE_READINESS: String
       MISCONFIGURATION: String
+      ROLLBACK_READINESS: String
     end
 
     class Certificate
@@ -461,10 +831,115 @@ module Aws::EKS
 
       def initialize: (
         ?data: String,
+        ?active: Types::ActiveCertificateAuthority,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor data: String?
+      attr_accessor active: Types::ActiveCertificateAuthority?
+    end
+
+    class CertificateAuthority
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?activated_at: Time,
+        ?activated_by: String,
+        ?signing_status: String,
+        ?distribution_status: String,
+        ?validity: Types::CertificateAuthorityValidity,
+        ?scheduled_events: Types::CertificateAuthorityScheduledEvents,
+        ?rollback_available: bool,
+        ?data: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor activated_at: Time?
+      attr_accessor activated_by: String?
+      attr_accessor signing_status: String?
+      attr_accessor distribution_status: String?
+      attr_accessor validity: Types::CertificateAuthorityValidity?
+      attr_accessor scheduled_events: Types::CertificateAuthorityScheduledEvents?
+      attr_accessor rollback_available: bool?
+      attr_accessor data: String?
+    end
+
+    module CertificateAuthorityActivatedBy
+      EKS: String
+      CUSTOMER: String
+    end
+
+    module CertificateAuthorityCreatedBy
+      EKS: String
+      CUSTOMER: String
+    end
+
+    module CertificateAuthorityDistributionStatus
+      IN_PROGRESS: String
+      COMPLETE: String
+      FAILED: String
+      DELETING: String
+    end
+
+    class CertificateAuthorityScheduledEvents
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?first_auto_activation: Time,
+        ?final_auto_activation: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor first_auto_activation: Time?
+      attr_accessor final_auto_activation: Time?
+    end
+
+    module CertificateAuthoritySigningStatus
+      NOT_USED: String
+      ACTIVATING: String
+      IN_USE: String
+    end
+
+    class CertificateAuthoritySummary
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?created_at: Time,
+        ?created_by: String,
+        ?activated_at: Time,
+        ?activated_by: String,
+        ?signing_status: String,
+        ?distribution_status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor created_at: Time?
+      attr_accessor created_by: String?
+      attr_accessor activated_at: Time?
+      attr_accessor activated_by: String?
+      attr_accessor signing_status: String?
+      attr_accessor distribution_status: String?
+    end
+
+    class CertificateAuthorityValidity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?not_before: Time,
+        ?not_after: Time,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor not_before: Time?
+      attr_accessor not_after: Time?
     end
 
     class ClientException
@@ -532,6 +1007,10 @@ module Aws::EKS
         ?compute_config: Types::ComputeConfigResponse,
         ?storage_config: Types::StorageConfigResponse,
         ?deletion_protection: bool,
+        ?control_plane_scaling_config: Types::ControlPlaneScalingConfig,
+        ?kube_api_server_config: Types::KubeApiServerConfigResponse,
+        ?kube_scheduler_config: Types::KubeSchedulerConfigResponse,
+        ?kube_controller_manager_config: Types::KubeControllerManagerConfigResponse,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -562,6 +1041,10 @@ module Aws::EKS
       attr_accessor compute_config: Types::ComputeConfigResponse?
       attr_accessor storage_config: Types::StorageConfigResponse?
       attr_accessor deletion_protection: bool?
+      attr_accessor control_plane_scaling_config: Types::ControlPlaneScalingConfig?
+      attr_accessor kube_api_server_config: Types::KubeApiServerConfigResponse?
+      attr_accessor kube_scheduler_config: Types::KubeSchedulerConfigResponse?
+      attr_accessor kube_controller_manager_config: Types::KubeControllerManagerConfigResponse?
     end
 
     class ClusterHealth
@@ -635,6 +1118,8 @@ module Aws::EKS
         ?status: String,
         ?version_status: String,
         ?kubernetes_patch_version: String,
+        ?control_plane_scaling_tiers: Array[Types::ControlPlaneScalingTierInfo],
+        ?control_plane_component_config: Types::ControlPlaneConfigInfo,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -648,6 +1133,8 @@ module Aws::EKS
       attr_accessor status: String?
       attr_accessor version_status: String?
       attr_accessor kubernetes_patch_version: String?
+      attr_accessor control_plane_scaling_tiers: Array[Types::ControlPlaneScalingTierInfo]?
+      attr_accessor control_plane_component_config: Types::ControlPlaneConfigInfo?
     end
 
     module ClusterVersionStatus
@@ -745,15 +1232,38 @@ module Aws::EKS
       attr_accessor role_arn: String?
     end
 
+    class ControlPlaneConfigInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?kube_api_server_config: Types::KubeApiServerVersionConfig,
+        ?kube_scheduler_config: Types::KubeSchedulerVersionConfig,
+        ?kube_controller_manager_config: Types::KubeControllerManagerVersionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor kube_api_server_config: Types::KubeApiServerVersionConfig?
+      attr_accessor kube_scheduler_config: Types::KubeSchedulerVersionConfig?
+      attr_accessor kube_controller_manager_config: Types::KubeControllerManagerVersionConfig?
+    end
+
+    module ControlPlaneEgressModeType
+      AWS_MANAGED: String
+      CUSTOMER_ROUTED: String
+      CUSTOMER_ISOLATED: String
+    end
+
     class ControlPlanePlacementRequest
       include Smithy::Schema::Structure
 
       def initialize: (
         ?group_name: String,
+        ?spread_level: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor group_name: String?
+      attr_accessor spread_level: String?
     end
 
     class ControlPlanePlacementResponse
@@ -761,10 +1271,42 @@ module Aws::EKS
 
       def initialize: (
         ?group_name: String,
+        ?spread_level: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor group_name: String?
+      attr_accessor spread_level: String?
+    end
+
+    class ControlPlaneScalingConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tier: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tier: String?
+    end
+
+    class ControlPlaneScalingTierInfo
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tier_name: String,
+        ?api_request_concurrency: Integer,
+        ?pod_scheduling_rate_per_second: Integer,
+        ?cluster_database_size_gb: Integer,
+        ?control_plane_component_config_overrides: Types::ControlPlaneConfigInfo,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tier_name: String?
+      attr_accessor api_request_concurrency: Integer?
+      attr_accessor pod_scheduling_rate_per_second: Integer?
+      attr_accessor cluster_database_size_gb: Integer?
+      attr_accessor control_plane_component_config_overrides: Types::ControlPlaneConfigInfo?
     end
 
     class CreateAccessConfigRequest
@@ -854,6 +1396,68 @@ module Aws::EKS
       attr_accessor addon: Types::Addon?
     end
 
+    class CreateCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability_name: String,
+        ?cluster_name: String,
+        ?client_request_token: String,
+        ?type: String,
+        ?role_arn: String,
+        ?configuration: Types::CapabilityConfigurationRequest,
+        ?tags: Hash[String, String],
+        ?delete_propagation_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability_name: String?
+      attr_accessor cluster_name: String?
+      attr_accessor client_request_token: String?
+      attr_accessor type: String?
+      attr_accessor role_arn: String?
+      attr_accessor configuration: Types::CapabilityConfigurationRequest?
+      attr_accessor tags: Hash[String, String]?
+      attr_accessor delete_propagation_policy: String?
+    end
+
+    class CreateCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability: Types::Capability,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability: Types::Capability?
+    end
+
+    class CreateCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class CreateCertificateAuthorityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+        ?certificate_authority: Types::CertificateAuthoritySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+      attr_accessor certificate_authority: Types::CertificateAuthoritySummary?
+    end
+
     class CreateClusterRequest
       include Smithy::Schema::Structure
 
@@ -876,6 +1480,10 @@ module Aws::EKS
         ?compute_config: Types::ComputeConfigRequest,
         ?storage_config: Types::StorageConfigRequest,
         ?deletion_protection: bool,
+        ?control_plane_scaling_config: Types::ControlPlaneScalingConfig,
+        ?kube_api_server_config: Types::KubeApiServerConfigRequest,
+        ?kube_scheduler_config: Types::KubeSchedulerConfigRequest,
+        ?kube_controller_manager_config: Types::KubeControllerManagerConfigRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -897,6 +1505,10 @@ module Aws::EKS
       attr_accessor compute_config: Types::ComputeConfigRequest?
       attr_accessor storage_config: Types::StorageConfigRequest?
       attr_accessor deletion_protection: bool?
+      attr_accessor control_plane_scaling_config: Types::ControlPlaneScalingConfig?
+      attr_accessor kube_api_server_config: Types::KubeApiServerConfigRequest?
+      attr_accessor kube_scheduler_config: Types::KubeSchedulerConfigRequest?
+      attr_accessor kube_controller_manager_config: Types::KubeControllerManagerConfigRequest?
     end
 
     class CreateClusterResponse
@@ -1001,6 +1613,7 @@ module Aws::EKS
         ?capacity_type: String,
         ?version: String,
         ?release_version: String,
+        ?warm_pool_config: Types::WarmPoolConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1023,6 +1636,7 @@ module Aws::EKS
       attr_accessor capacity_type: String?
       attr_accessor version: String?
       attr_accessor release_version: String?
+      attr_accessor warm_pool_config: Types::WarmPoolConfig?
     end
 
     class CreateNodegroupResponse
@@ -1048,6 +1662,7 @@ module Aws::EKS
         ?tags: Hash[String, String],
         ?disable_session_tags: bool,
         ?target_role_arn: String,
+        ?policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1059,6 +1674,7 @@ module Aws::EKS
       attr_accessor tags: Hash[String, String]?
       attr_accessor disable_session_tags: bool?
       attr_accessor target_role_arn: String?
+      attr_accessor policy: String?
     end
 
     class CreatePodIdentityAssociationResponse
@@ -1118,6 +1734,58 @@ module Aws::EKS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor addon: Types::Addon?
+    end
+
+    class DeleteCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?capability_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor capability_name: String?
+    end
+
+    class DeleteCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability: Types::Capability,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability: Types::Capability?
+    end
+
+    class DeleteCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?certificate_authority_id: String,
+        ?client_request_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor certificate_authority_id: String?
+      attr_accessor client_request_token: String?
+    end
+
+    class DeleteCertificateAuthorityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+        ?certificate_authority: Types::CertificateAuthoritySummary,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+      attr_accessor certificate_authority: Types::CertificateAuthoritySummary?
     end
 
     class DeleteClusterRequest
@@ -1391,6 +2059,54 @@ module Aws::EKS
       attr_accessor next_token: String?
     end
 
+    class DescribeCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?capability_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor capability_name: String?
+    end
+
+    class DescribeCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capability: Types::Capability,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capability: Types::Capability?
+    end
+
+    class DescribeCertificateAuthorityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?certificate_authority_id: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor certificate_authority_id: String?
+    end
+
+    class DescribeCertificateAuthorityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authority: Types::CertificateAuthority,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authority: Types::CertificateAuthority?
+    end
+
     class DescribeClusterRequest
       include Smithy::Schema::Structure
 
@@ -1629,6 +2345,7 @@ module Aws::EKS
         ?update_id: String,
         ?nodegroup_name: String,
         ?addon_name: String,
+        ?capability_name: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1636,6 +2353,7 @@ module Aws::EKS
       attr_accessor update_id: String?
       attr_accessor nodegroup_name: String?
       attr_accessor addon_name: String?
+      attr_accessor capability_name: String?
     end
 
     class DescribeUpdateResponse
@@ -1697,6 +2415,32 @@ module Aws::EKS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor update: Types::Update?
+    end
+
+    class DurationConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: String,
+        ?max: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: String?
+      attr_accessor max: String?
+    end
+
+    class DurationParameterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_value: String,
+        ?constraints: Types::DurationConstraints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_value: String?
+      attr_accessor constraints: Types::DurationConstraints?
     end
 
     class EksAnywhereSubscription
@@ -1823,6 +2567,28 @@ module Aws::EKS
       attr_accessor resource_ids: Array[String]?
     end
 
+    class EtcdPlacementRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spread_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spread_level: String?
+    end
+
+    class EtcdPlacementResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?spread_level: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor spread_level: String?
+    end
+
     class FargateProfile
       include Smithy::Schema::Structure
 
@@ -1904,6 +2670,39 @@ module Aws::EKS
       DELETING: String
       CREATE_FAILED: String
       DELETE_FAILED: String
+    end
+
+    class HorizontalPodAutoscalerControllerConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?horizontal_pod_autoscaler_sync_period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor horizontal_pod_autoscaler_sync_period: String?
+    end
+
+    class HorizontalPodAutoscalerControllerConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?horizontal_pod_autoscaler_sync_period: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor horizontal_pod_autoscaler_sync_period: String?
+    end
+
+    class HorizontalPodAutoscalerControllerVersionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?horizontal_pod_autoscaler_sync_period: Types::DurationParameterConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor horizontal_pod_autoscaler_sync_period: Types::DurationParameterConfig?
     end
 
     class Identity
@@ -2068,6 +2867,45 @@ module Aws::EKS
       COMPLETED: String
     end
 
+    class IntegerConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
+    class IntegerParameterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_value: Integer,
+        ?constraints: Types::IntegerConstraints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_value: Integer?
+      attr_accessor constraints: Types::IntegerConstraints?
+    end
+
+    class IntegerRangeConstraint
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min: Integer,
+        ?max: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min: Integer?
+      attr_accessor max: Integer?
+    end
+
     class InvalidParameterException
       include Smithy::Schema::Structure
 
@@ -2139,6 +2977,117 @@ module Aws::EKS
       attr_accessor code: String?
       attr_accessor message: String?
       attr_accessor resource_ids: Array[String]?
+    end
+
+    class KubeApiServerConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_ttl: String,
+        ?service_node_port_range: Types::ServiceNodePortRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_ttl: String?
+      attr_accessor service_node_port_range: Types::ServiceNodePortRange?
+    end
+
+    class KubeApiServerConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_ttl: String,
+        ?service_node_port_range: Types::ServiceNodePortRange,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_ttl: String?
+      attr_accessor service_node_port_range: Types::ServiceNodePortRange?
+    end
+
+    class KubeApiServerVersionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?event_ttl: Types::DurationParameterConfig,
+        ?service_node_port_range: Types::PortRangeParameterConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor event_ttl: Types::DurationParameterConfig?
+      attr_accessor service_node_port_range: Types::PortRangeParameterConfig?
+    end
+
+    class KubeControllerManagerConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pod_gc_controller_config: Types::PodGcControllerConfigRequest,
+        ?horizontal_pod_autoscaler_controller_config: Types::HorizontalPodAutoscalerControllerConfigRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pod_gc_controller_config: Types::PodGcControllerConfigRequest?
+      attr_accessor horizontal_pod_autoscaler_controller_config: Types::HorizontalPodAutoscalerControllerConfigRequest?
+    end
+
+    class KubeControllerManagerConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pod_gc_controller_config: Types::PodGcControllerConfigResponse,
+        ?horizontal_pod_autoscaler_controller_config: Types::HorizontalPodAutoscalerControllerConfigResponse,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pod_gc_controller_config: Types::PodGcControllerConfigResponse?
+      attr_accessor horizontal_pod_autoscaler_controller_config: Types::HorizontalPodAutoscalerControllerConfigResponse?
+    end
+
+    class KubeControllerManagerVersionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?pod_gc_controller_config: Types::PodGcControllerVersionConfig,
+        ?horizontal_pod_autoscaler_controller_config: Types::HorizontalPodAutoscalerControllerVersionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor pod_gc_controller_config: Types::PodGcControllerVersionConfig?
+      attr_accessor horizontal_pod_autoscaler_controller_config: Types::HorizontalPodAutoscalerControllerVersionConfig?
+    end
+
+    class KubeSchedulerConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_resources_fit: Types::NodeResourcesFitConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_resources_fit: Types::NodeResourcesFitConfig?
+    end
+
+    class KubeSchedulerConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_resources_fit: Types::NodeResourcesFitConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_resources_fit: Types::NodeResourcesFitConfig?
+    end
+
+    class KubeSchedulerVersionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?node_resources_fit: Types::NodeResourcesFitVersionConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor node_resources_fit: Types::NodeResourcesFitVersionConfig?
     end
 
     class KubernetesNetworkConfigRequest
@@ -2317,6 +3266,62 @@ module Aws::EKS
       attr_accessor principal_arn: String?
       attr_accessor next_token: String?
       attr_accessor associated_access_policies: Array[Types::AssociatedAccessPolicy]?
+    end
+
+    class ListCapabilitiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?next_token: String,
+        ?max_results: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor next_token: String?
+      attr_accessor max_results: Integer?
+    end
+
+    class ListCapabilitiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?capabilities: Array[Types::CapabilitySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor capabilities: Array[Types::CapabilitySummary]?
+      attr_accessor next_token: String?
+    end
+
+    class ListCertificateAuthoritiesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class ListCertificateAuthoritiesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?certificate_authorities: Array[Types::CertificateAuthoritySummary],
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor certificate_authorities: Array[Types::CertificateAuthoritySummary]?
+      attr_accessor next_token: String?
     end
 
     class ListClustersRequest
@@ -2550,6 +3555,7 @@ module Aws::EKS
         ?name: String,
         ?nodegroup_name: String,
         ?addon_name: String,
+        ?capability_name: String,
         ?next_token: String,
         ?max_results: Integer,
       ) -> void
@@ -2558,6 +3564,7 @@ module Aws::EKS
       attr_accessor name: String?
       attr_accessor nodegroup_name: String?
       attr_accessor addon_name: String?
+      attr_accessor capability_name: String?
       attr_accessor next_token: String?
       attr_accessor max_results: Integer?
     end
@@ -2658,6 +3665,28 @@ module Aws::EKS
       attr_accessor repair_action: String?
     end
 
+    class NodeResourcesFitConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scoring_strategy: Types::ScoringStrategy,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scoring_strategy: Types::ScoringStrategy?
+    end
+
+    class NodeResourcesFitVersionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scoring_strategy: Types::ScoringStrategyConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scoring_strategy: Types::ScoringStrategyConfig?
+    end
+
     class Nodegroup
       include Smithy::Schema::Structure
 
@@ -2686,6 +3715,7 @@ module Aws::EKS
         ?node_repair_config: Types::NodeRepairConfig,
         ?launch_template: Types::LaunchTemplateSpecification,
         ?tags: Hash[String, String],
+        ?warm_pool_config: Types::WarmPoolConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2713,6 +3743,7 @@ module Aws::EKS
       attr_accessor node_repair_config: Types::NodeRepairConfig?
       attr_accessor launch_template: Types::LaunchTemplateSpecification?
       attr_accessor tags: Hash[String, String]?
+      attr_accessor warm_pool_config: Types::WarmPoolConfig?
     end
 
     class NodegroupHealth
@@ -2910,12 +3941,16 @@ module Aws::EKS
         ?outpost_arns: Array[String],
         ?control_plane_instance_type: String,
         ?control_plane_placement: Types::ControlPlanePlacementRequest,
+        ?etcd_instance_type: String,
+        ?etcd_placement: Types::EtcdPlacementRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor outpost_arns: Array[String]?
       attr_accessor control_plane_instance_type: String?
       attr_accessor control_plane_placement: Types::ControlPlanePlacementRequest?
+      attr_accessor etcd_instance_type: String?
+      attr_accessor etcd_placement: Types::EtcdPlacementRequest?
     end
 
     class OutpostConfigResponse
@@ -2925,12 +3960,49 @@ module Aws::EKS
         ?outpost_arns: Array[String],
         ?control_plane_instance_type: String,
         ?control_plane_placement: Types::ControlPlanePlacementResponse,
+        ?etcd_instance_type: String,
+        ?etcd_placement: Types::EtcdPlacementResponse,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor outpost_arns: Array[String]?
       attr_accessor control_plane_instance_type: String?
       attr_accessor control_plane_placement: Types::ControlPlanePlacementResponse?
+      attr_accessor etcd_instance_type: String?
+      attr_accessor etcd_placement: Types::EtcdPlacementResponse?
+    end
+
+    class PodGcControllerConfigRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminated_pod_gc_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminated_pod_gc_threshold: Integer?
+    end
+
+    class PodGcControllerConfigResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminated_pod_gc_threshold: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminated_pod_gc_threshold: Integer?
+    end
+
+    class PodGcControllerVersionConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?terminated_pod_gc_threshold: Types::IntegerParameterConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor terminated_pod_gc_threshold: Types::IntegerParameterConfig?
     end
 
     class PodIdentityAssociation
@@ -2950,6 +4022,7 @@ module Aws::EKS
         ?disable_session_tags: bool,
         ?target_role_arn: String,
         ?external_id: String,
+        ?policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2966,6 +4039,7 @@ module Aws::EKS
       attr_accessor disable_session_tags: bool?
       attr_accessor target_role_arn: String?
       attr_accessor external_id: String?
+      attr_accessor policy: String?
     end
 
     class PodIdentityAssociationSummary
@@ -2989,6 +4063,32 @@ module Aws::EKS
       attr_accessor owner_arn: String?
     end
 
+    class PortRangeConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_port: Types::IntegerRangeConstraint,
+        ?max_port: Types::IntegerRangeConstraint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_port: Types::IntegerRangeConstraint?
+      attr_accessor max_port: Types::IntegerRangeConstraint?
+    end
+
+    class PortRangeParameterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_value: Types::ServiceNodePortRange,
+        ?constraints: Types::PortRangeConstraints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_value: Types::ServiceNodePortRange?
+      attr_accessor constraints: Types::PortRangeConstraints?
+    end
+
     class Provider
       include Smithy::Schema::Structure
 
@@ -2998,6 +4098,14 @@ module Aws::EKS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor key_arn: String?
+    end
+
+    module ProvisionedControlPlaneTier
+      STANDARD: String
+      TIER_XL: String
+      TIER_2XL: String
+      TIER_4XL: String
+      TIER_8XL: String
     end
 
     class RegisterClusterRequest
@@ -3101,6 +4209,19 @@ module Aws::EKS
       PRESERVE: String
     end
 
+    class ResourceConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: Types::AllowedValuesConstraint,
+        ?weight: Types::IntegerRangeConstraint,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: Types::AllowedValuesConstraint?
+      attr_accessor weight: Types::IntegerRangeConstraint?
+    end
+
     class ResourceInUseException
       include Smithy::Schema::Structure
 
@@ -3167,6 +4288,74 @@ module Aws::EKS
       attr_accessor message: String?
     end
 
+    class ResourceWeight
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+        ?weight: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
+      attr_accessor weight: Integer?
+    end
+
+    class RollbackConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?timeout_minutes: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor timeout_minutes: Integer?
+    end
+
+    class ScoringStrategy
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?resources: Array[Types::ResourceWeight],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor resources: Array[Types::ResourceWeight]?
+    end
+
+    class ScoringStrategyConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?default_value: Types::ScoringStrategy,
+        ?constraints: Types::ScoringStrategyConstraints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor default_value: Types::ScoringStrategy?
+      attr_accessor constraints: Types::ScoringStrategyConstraints?
+    end
+
+    class ScoringStrategyConstraints
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?scoring_strategy: Types::AllowedValuesConstraint,
+        ?resources: Types::ResourceConstraints,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor scoring_strategy: Types::AllowedValuesConstraint?
+      attr_accessor resources: Types::ResourceConstraints?
+    end
+
+    module ScoringStrategyType
+      LEAST_ALLOCATED: String
+      MOST_ALLOCATED: String
+    end
+
     class ServerException
       include Smithy::Schema::Structure
 
@@ -3186,6 +4375,19 @@ module Aws::EKS
       attr_accessor message: String?
     end
 
+    class ServiceNodePortRange
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?min_port: Integer,
+        ?max_port: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor min_port: Integer?
+      attr_accessor max_port: Integer?
+    end
+
     class ServiceUnavailableException
       include Smithy::Schema::Structure
 
@@ -3195,6 +4397,29 @@ module Aws::EKS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    module SpreadLevel
+      HOST: String
+      RACK: String
+    end
+
+    class SsoIdentity
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?id: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor id: String?
+      attr_accessor type: String?
+    end
+
+    module SsoIdentityType
+      SSO_USER: String
+      SSO_GROUP: String
     end
 
     class StartInsightsRefreshRequest
@@ -3353,6 +4578,7 @@ module Aws::EKS
         ?params: Array[Types::UpdateParam],
         ?created_at: Time,
         ?errors: Array[Types::ErrorDetail],
+        ?cancellation: Types::Cancellation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3362,6 +4588,7 @@ module Aws::EKS
       attr_accessor params: Array[Types::UpdateParam]?
       attr_accessor created_at: Time?
       attr_accessor errors: Array[Types::ErrorDetail]?
+      attr_accessor cancellation: Types::Cancellation?
     end
 
     class UpdateAccessConfigRequest
@@ -3405,6 +4632,19 @@ module Aws::EKS
       attr_accessor access_entry: Types::AccessEntry?
     end
 
+    class UpdateAckConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enable_cross_namespace: bool,
+        ?disabled_services: Array[String],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enable_cross_namespace: bool?
+      attr_accessor disabled_services: Array[String]?
+    end
+
     class UpdateAddonRequest
       include Smithy::Schema::Structure
 
@@ -3441,6 +4681,64 @@ module Aws::EKS
       attr_accessor update: Types::Update?
     end
 
+    class UpdateArgoCdConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?rbac_role_mappings: Types::UpdateRoleMappings,
+        ?network_access: Types::ArgoCdNetworkAccessConfigRequest,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor rbac_role_mappings: Types::UpdateRoleMappings?
+      attr_accessor network_access: Types::ArgoCdNetworkAccessConfigRequest?
+    end
+
+    class UpdateCapabilityConfiguration
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?argo_cd: Types::UpdateArgoCdConfig,
+        ?ack: Types::UpdateAckConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor argo_cd: Types::UpdateArgoCdConfig?
+      attr_accessor ack: Types::UpdateAckConfig?
+    end
+
+    class UpdateCapabilityRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?cluster_name: String,
+        ?capability_name: String,
+        ?role_arn: String,
+        ?configuration: Types::UpdateCapabilityConfiguration,
+        ?client_request_token: String,
+        ?delete_propagation_policy: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor cluster_name: String?
+      attr_accessor capability_name: String?
+      attr_accessor role_arn: String?
+      attr_accessor configuration: Types::UpdateCapabilityConfiguration?
+      attr_accessor client_request_token: String?
+      attr_accessor delete_propagation_policy: String?
+    end
+
+    class UpdateCapabilityResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?update: Types::Update,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor update: Types::Update?
+    end
+
     class UpdateClusterConfigRequest
       include Smithy::Schema::Structure
 
@@ -3457,6 +4755,10 @@ module Aws::EKS
         ?storage_config: Types::StorageConfigRequest,
         ?remote_network_config: Types::RemoteNetworkConfigRequest,
         ?deletion_protection: bool,
+        ?control_plane_scaling_config: Types::ControlPlaneScalingConfig,
+        ?kube_api_server_config: Types::KubeApiServerConfigRequest,
+        ?kube_scheduler_config: Types::KubeSchedulerConfigRequest,
+        ?kube_controller_manager_config: Types::KubeControllerManagerConfigRequest,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3472,6 +4774,10 @@ module Aws::EKS
       attr_accessor storage_config: Types::StorageConfigRequest?
       attr_accessor remote_network_config: Types::RemoteNetworkConfigRequest?
       attr_accessor deletion_protection: bool?
+      attr_accessor control_plane_scaling_config: Types::ControlPlaneScalingConfig?
+      attr_accessor kube_api_server_config: Types::KubeApiServerConfigRequest?
+      attr_accessor kube_scheduler_config: Types::KubeSchedulerConfigRequest?
+      attr_accessor kube_controller_manager_config: Types::KubeControllerManagerConfigRequest?
     end
 
     class UpdateClusterConfigResponse
@@ -3493,6 +4799,7 @@ module Aws::EKS
         ?version: String,
         ?client_request_token: String,
         ?force: bool,
+        ?rollback_config: Types::RollbackConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3500,6 +4807,7 @@ module Aws::EKS
       attr_accessor version: String?
       attr_accessor client_request_token: String?
       attr_accessor force: bool?
+      attr_accessor rollback_config: Types::RollbackConfig?
     end
 
     class UpdateClusterVersionResponse
@@ -3563,6 +4871,7 @@ module Aws::EKS
         ?scaling_config: Types::NodegroupScalingConfig,
         ?update_config: Types::NodegroupUpdateConfig,
         ?node_repair_config: Types::NodeRepairConfig,
+        ?warm_pool_config: Types::WarmPoolConfig,
         ?client_request_token: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -3574,6 +4883,7 @@ module Aws::EKS
       attr_accessor scaling_config: Types::NodegroupScalingConfig?
       attr_accessor update_config: Types::NodegroupUpdateConfig?
       attr_accessor node_repair_config: Types::NodeRepairConfig?
+      attr_accessor warm_pool_config: Types::WarmPoolConfig?
       attr_accessor client_request_token: String?
     end
 
@@ -3674,6 +4984,28 @@ module Aws::EKS
       REMOTE_NETWORK_CONFIG: String
       DELETION_PROTECTION: String
       NODE_REPAIR_CONFIG: String
+      ROLE_ARN: String
+      ROLE_MAPPINGS_TO_ADD_OR_UPDATE: String
+      ROLE_MAPPINGS_TO_REMOVE: String
+      NETWORK_ACCESS: String
+      VENDED_LOGS: String
+      UPDATED_TIER: String
+      PREVIOUS_TIER: String
+      ENABLE_CROSS_NAMESPACE: String
+      DISABLED_SERVICES: String
+      WARM_POOL_ENABLED: String
+      WARM_POOL_MAX_GROUP_PREPARED_CAPACITY: String
+      WARM_POOL_MIN_SIZE: String
+      WARM_POOL_STATE: String
+      WARM_POOL_REUSE_ON_SCALE_IN: String
+      CONTROL_PLANE_EGRESS_MODE: String
+      KUBE_API_SERVER_CONFIG: String
+      KUBE_SCHEDULER_CONFIG: String
+      KUBE_CONTROLLER_MANAGER_CONFIG: String
+      ACTIVE_CERTIFICATE_AUTHORITY: String
+      TRUSTED_CERTIFICATE_AUTHORITIES: String
+      CERTIFICATE_AUTHORITY_ID: String
+      SIGNING_STATUS: String
     end
 
     class UpdatePodIdentityAssociationRequest
@@ -3686,6 +5018,7 @@ module Aws::EKS
         ?client_request_token: String,
         ?disable_session_tags: bool,
         ?target_role_arn: String,
+        ?policy: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3695,6 +5028,7 @@ module Aws::EKS
       attr_accessor client_request_token: String?
       attr_accessor disable_session_tags: bool?
       attr_accessor target_role_arn: String?
+      attr_accessor policy: String?
     end
 
     class UpdatePodIdentityAssociationResponse
@@ -3706,6 +5040,19 @@ module Aws::EKS
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor association: Types::PodIdentityAssociation?
+    end
+
+    class UpdateRoleMappings
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?add_or_update_role_mappings: Array[Types::ArgoCdRoleMapping],
+        ?remove_role_mappings: Array[Types::ArgoCdRoleMapping],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor add_or_update_role_mappings: Array[Types::ArgoCdRoleMapping]?
+      attr_accessor remove_role_mappings: Array[Types::ArgoCdRoleMapping]?
     end
 
     module UpdateStatus
@@ -3744,6 +5091,13 @@ module Aws::EKS
       AUTO_MODE_UPDATE: String
       REMOTE_NETWORK_CONFIG_UPDATE: String
       DELETION_PROTECTION_UPDATE: String
+      CAPABILITY_UPDATE: String
+      CONTROL_PLANE_SCALING_CONFIG_UPDATE: String
+      VENDED_LOGS_UPDATE: String
+      CONTROL_PLANE_EGRESS_UPDATE: String
+      VERSION_ROLLBACK: String
+      CONTROL_PLANE_COMPONENT_CONFIG_UPDATE: String
+      CERTIFICATE_AUTHORITY_UPDATE: String
     end
 
     class UpgradePolicyRequest
@@ -3783,6 +5137,7 @@ module Aws::EKS
         ?endpoint_public_access: bool,
         ?endpoint_private_access: bool,
         ?public_access_cidrs: Array[String],
+        ?control_plane_egress_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3791,6 +5146,7 @@ module Aws::EKS
       attr_accessor endpoint_public_access: bool?
       attr_accessor endpoint_private_access: bool?
       attr_accessor public_access_cidrs: Array[String]?
+      attr_accessor control_plane_egress_mode: String?
     end
 
     class VpcConfigResponse
@@ -3804,6 +5160,7 @@ module Aws::EKS
         ?endpoint_public_access: bool,
         ?endpoint_private_access: bool,
         ?public_access_cidrs: Array[String],
+        ?control_plane_egress_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -3814,6 +5171,32 @@ module Aws::EKS
       attr_accessor endpoint_public_access: bool?
       attr_accessor endpoint_private_access: bool?
       attr_accessor public_access_cidrs: Array[String]?
+      attr_accessor control_plane_egress_mode: String?
+    end
+
+    class WarmPoolConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?enabled: bool,
+        ?min_size: Integer,
+        ?max_group_prepared_capacity: Integer,
+        ?pool_state: String,
+        ?reuse_on_scale_in: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor enabled: bool?
+      attr_accessor min_size: Integer?
+      attr_accessor max_group_prepared_capacity: Integer?
+      attr_accessor pool_state: String?
+      attr_accessor reuse_on_scale_in: bool?
+    end
+
+    module WarmPoolState
+      STOPPED: String
+      RUNNING: String
+      HIBERNATED: String
     end
 
     class ZonalShiftConfigRequest

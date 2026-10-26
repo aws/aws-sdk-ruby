@@ -71,8 +71,7 @@ module Aws::DSQL
       end
     end
 
-    # <p>The request processing has failed because of an unknown error, exception or
-    #          failure.</p>
+    # <p>The request processing has failed because of an unknown error, exception or failure.</p>
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::DSQL::Types::InternalServerException] data

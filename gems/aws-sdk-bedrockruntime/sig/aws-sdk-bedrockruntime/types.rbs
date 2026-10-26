@@ -21,6 +21,25 @@ module Aws::BedrockRuntime
 
     end
 
+    class AppliedGuardrailDetails
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?guardrail_id: String,
+        ?guardrail_version: String,
+        ?guardrail_arn: String,
+        ?guardrail_origin: Array[String],
+        ?guardrail_ownership: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor guardrail_id: String?
+      attr_accessor guardrail_version: String?
+      attr_accessor guardrail_arn: String?
+      attr_accessor guardrail_origin: Array[String]?
+      attr_accessor guardrail_ownership: String?
+    end
+
     class ApplyGuardrailRequest
       include Smithy::Schema::Structure
 
@@ -125,6 +144,59 @@ module Aws::BedrockRuntime
       attr_accessor output_data_config: Types::AsyncInvokeOutputDataConfig?
     end
 
+    class AudioBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+        ?source: Types::AudioSource,
+        ?error: Types::ErrorBlock,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
+      attr_accessor source: Types::AudioSource?
+      attr_accessor error: Types::ErrorBlock?
+    end
+
+    module AudioFormat
+      MP3: String
+      OPUS: String
+      WAV: String
+      AAC: String
+      FLAC: String
+      MP4: String
+      OGG: String
+      MKV: String
+      MKA: String
+      X_AAC: String
+      M4A: String
+      MPEG: String
+      MPGA: String
+      PCM: String
+      WEBM: String
+    end
+
+    class AudioSource
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?bytes: String,
+        ?s3_location: Types::S3Location,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor bytes: String?
+      attr_accessor s3_location: Types::S3Location?
+
+      class Bytes < AudioSource
+      end
+      class S3Location < AudioSource
+      end
+      class Unknown < AudioSource
+      end
+    end
+
     class AutoToolChoice
       include Smithy::Schema::Structure
 
@@ -156,19 +228,39 @@ module Aws::BedrockRuntime
       attr_accessor bytes: String?
     end
 
+    class CacheDetail
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?ttl: String,
+        ?input_tokens: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor ttl: String?
+      attr_accessor input_tokens: Integer?
+    end
+
     class CachePointBlock
       include Smithy::Schema::Structure
 
       def initialize: (
         ?type: String,
+        ?ttl: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor type: String?
+      attr_accessor ttl: String?
     end
 
     module CachePointType
       DEFAULT: String
+    end
+
+    module CacheTTL
+      FIVE_MINUTES: String
+      ONE_HOUR: String
     end
 
     class Citation
@@ -176,12 +268,14 @@ module Aws::BedrockRuntime
 
       def initialize: (
         ?title: String,
+        ?source: String,
         ?source_content: Array[Types::CitationSourceContent],
         ?location: Types::CitationLocation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor title: String?
+      attr_accessor source: String?
       attr_accessor source_content: Array[Types::CitationSourceContent]?
       attr_accessor location: Types::CitationLocation?
     end
@@ -206,21 +300,29 @@ module Aws::BedrockRuntime
       include Smithy::Schema::Union
 
       def initialize: (
+        ?web: Types::WebLocation,
         ?document_char: Types::DocumentCharLocation,
         ?document_page: Types::DocumentPageLocation,
         ?document_chunk: Types::DocumentChunkLocation,
+        ?search_result_location: Types::SearchResultLocation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
+      attr_accessor web: Types::WebLocation?
       attr_accessor document_char: Types::DocumentCharLocation?
       attr_accessor document_page: Types::DocumentPageLocation?
       attr_accessor document_chunk: Types::DocumentChunkLocation?
+      attr_accessor search_result_location: Types::SearchResultLocation?
 
+      class Web < CitationLocation
+      end
       class DocumentChar < CitationLocation
       end
       class DocumentPage < CitationLocation
       end
       class DocumentChunk < CitationLocation
+      end
+      class SearchResultLocation < CitationLocation
       end
       class Unknown < CitationLocation
       end
@@ -282,12 +384,14 @@ module Aws::BedrockRuntime
 
       def initialize: (
         ?title: String,
+        ?source: String,
         ?source_content: Array[Types::CitationSourceContentDelta],
         ?location: Types::CitationLocation,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor title: String?
+      attr_accessor source: String?
       attr_accessor source_content: Array[Types::CitationSourceContentDelta]?
       attr_accessor location: Types::CitationLocation?
     end
@@ -311,12 +415,16 @@ module Aws::BedrockRuntime
         ?image: Types::ImageBlock,
         ?document: Types::DocumentBlock,
         ?video: Types::VideoBlock,
+        ?audio: Types::AudioBlock,
         ?tool_use: Types::ToolUseBlock,
         ?tool_result: Types::ToolResultBlock,
         ?guard_content: Types::GuardrailConverseContentBlock,
         ?cache_point: Types::CachePointBlock,
         ?reasoning_content: Types::ReasoningContentBlock,
         ?citations_content: Types::CitationsContentBlock,
+        ?search_result: Types::SearchResultBlock,
+        ?tool_addition: Types::ToolAdditionBlock,
+        ?tool_removal: Types::ToolRemovalBlock,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -324,12 +432,16 @@ module Aws::BedrockRuntime
       attr_accessor image: Types::ImageBlock?
       attr_accessor document: Types::DocumentBlock?
       attr_accessor video: Types::VideoBlock?
+      attr_accessor audio: Types::AudioBlock?
       attr_accessor tool_use: Types::ToolUseBlock?
       attr_accessor tool_result: Types::ToolResultBlock?
       attr_accessor guard_content: Types::GuardrailConverseContentBlock?
       attr_accessor cache_point: Types::CachePointBlock?
       attr_accessor reasoning_content: Types::ReasoningContentBlock?
       attr_accessor citations_content: Types::CitationsContentBlock?
+      attr_accessor search_result: Types::SearchResultBlock?
+      attr_accessor tool_addition: Types::ToolAdditionBlock?
+      attr_accessor tool_removal: Types::ToolRemovalBlock?
 
       class Text < ContentBlock
       end
@@ -338,6 +450,8 @@ module Aws::BedrockRuntime
       class Document < ContentBlock
       end
       class Video < ContentBlock
+      end
+      class Audio < ContentBlock
       end
       class ToolUse < ContentBlock
       end
@@ -351,6 +465,12 @@ module Aws::BedrockRuntime
       end
       class CitationsContent < ContentBlock
       end
+      class SearchResult < ContentBlock
+      end
+      class ToolAddition < ContentBlock
+      end
+      class ToolRemoval < ContentBlock
+      end
       class Unknown < ContentBlock
       end
     end
@@ -361,23 +481,31 @@ module Aws::BedrockRuntime
       def initialize: (
         ?text: String,
         ?tool_use: Types::ToolUseBlockDelta,
+        ?tool_result: Array[Types::ToolResultBlockDelta],
         ?reasoning_content: Types::ReasoningContentBlockDelta,
         ?citation: Types::CitationsDelta,
+        ?image: Types::ImageBlockDelta,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor text: String?
       attr_accessor tool_use: Types::ToolUseBlockDelta?
+      attr_accessor tool_result: Array[Types::ToolResultBlockDelta]?
       attr_accessor reasoning_content: Types::ReasoningContentBlockDelta?
       attr_accessor citation: Types::CitationsDelta?
+      attr_accessor image: Types::ImageBlockDelta?
 
       class Text < ContentBlockDelta
       end
       class ToolUse < ContentBlockDelta
       end
+      class ToolResult < ContentBlockDelta
+      end
       class ReasoningContent < ContentBlockDelta
       end
       class Citation < ContentBlockDelta
+      end
+      class Image < ContentBlockDelta
       end
       class Unknown < ContentBlockDelta
       end
@@ -401,12 +529,20 @@ module Aws::BedrockRuntime
 
       def initialize: (
         ?tool_use: Types::ToolUseBlockStart,
+        ?tool_result: Types::ToolResultBlockStart,
+        ?image: Types::ImageBlockStart,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tool_use: Types::ToolUseBlockStart?
+      attr_accessor tool_result: Types::ToolResultBlockStart?
+      attr_accessor image: Types::ImageBlockStart?
 
       class ToolUse < ContentBlockStart
+      end
+      class ToolResult < ContentBlockStart
+      end
+      class Image < ContentBlockStart
       end
       class Unknown < ContentBlockStart
       end
@@ -439,6 +575,7 @@ module Aws::BedrockRuntime
     module ConversationRole
       USER: String
       ASSISTANT: String
+      SYSTEM: String
     end
 
     class ConverseMetrics
@@ -483,6 +620,8 @@ module Aws::BedrockRuntime
         ?additional_model_response_field_paths: Array[String],
         ?request_metadata: Hash[String, String],
         ?performance_config: Types::PerformanceConfiguration,
+        ?service_tier: Types::ServiceTier,
+        ?output_config: Types::OutputConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -497,6 +636,8 @@ module Aws::BedrockRuntime
       attr_accessor additional_model_response_field_paths: Array[String]?
       attr_accessor request_metadata: Hash[String, String]?
       attr_accessor performance_config: Types::PerformanceConfiguration?
+      attr_accessor service_tier: Types::ServiceTier?
+      attr_accessor output_config: Types::OutputConfig?
     end
 
     class ConverseResponse
@@ -510,6 +651,7 @@ module Aws::BedrockRuntime
         ?additional_model_response_fields: Smithy::Schema::document,
         ?trace: Types::ConverseTrace,
         ?performance_config: Types::PerformanceConfiguration,
+        ?service_tier: Types::ServiceTier,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -520,6 +662,7 @@ module Aws::BedrockRuntime
       attr_accessor additional_model_response_fields: Smithy::Schema::document?
       attr_accessor trace: Types::ConverseTrace?
       attr_accessor performance_config: Types::PerformanceConfiguration?
+      attr_accessor service_tier: Types::ServiceTier?
     end
 
     class ConverseStreamMetadataEvent
@@ -530,6 +673,7 @@ module Aws::BedrockRuntime
         ?metrics: Types::ConverseStreamMetrics,
         ?trace: Types::ConverseStreamTrace,
         ?performance_config: Types::PerformanceConfiguration,
+        ?service_tier: Types::ServiceTier,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -537,6 +681,7 @@ module Aws::BedrockRuntime
       attr_accessor metrics: Types::ConverseStreamMetrics?
       attr_accessor trace: Types::ConverseStreamTrace?
       attr_accessor performance_config: Types::PerformanceConfiguration?
+      attr_accessor service_tier: Types::ServiceTier?
     end
 
     class ConverseStreamMetrics
@@ -621,6 +766,8 @@ module Aws::BedrockRuntime
         ?additional_model_response_field_paths: Array[String],
         ?request_metadata: Hash[String, String],
         ?performance_config: Types::PerformanceConfiguration,
+        ?service_tier: Types::ServiceTier,
+        ?output_config: Types::OutputConfig,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -635,6 +782,8 @@ module Aws::BedrockRuntime
       attr_accessor additional_model_response_field_paths: Array[String]?
       attr_accessor request_metadata: Hash[String, String]?
       attr_accessor performance_config: Types::PerformanceConfiguration?
+      attr_accessor service_tier: Types::ServiceTier?
+      attr_accessor output_config: Types::OutputConfig?
     end
 
     class ConverseStreamResponse
@@ -667,11 +816,15 @@ module Aws::BedrockRuntime
       def initialize: (
         ?messages: Array[Types::Message],
         ?system: Array[Types::SystemContentBlock],
+        ?tool_config: Types::ToolConfiguration,
+        ?additional_model_request_fields: Smithy::Schema::document,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor messages: Array[Types::Message]?
       attr_accessor system: Array[Types::SystemContentBlock]?
+      attr_accessor tool_config: Types::ToolConfiguration?
+      attr_accessor additional_model_request_fields: Smithy::Schema::document?
     end
 
     class ConverseTrace
@@ -851,6 +1004,17 @@ module Aws::BedrockRuntime
       end
     end
 
+    class ErrorBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor message: String?
+    end
+
     class GetAsyncInvokeRequest
       include Smithy::Schema::Structure
 
@@ -905,6 +1069,7 @@ module Aws::BedrockRuntime
         ?contextual_grounding_policy: Types::GuardrailContextualGroundingPolicyAssessment,
         ?automated_reasoning_policy: Types::GuardrailAutomatedReasoningPolicyAssessment,
         ?invocation_metrics: Types::GuardrailInvocationMetrics,
+        ?applied_guardrail_details: Types::AppliedGuardrailDetails,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -915,6 +1080,7 @@ module Aws::BedrockRuntime
       attr_accessor contextual_grounding_policy: Types::GuardrailContextualGroundingPolicyAssessment?
       attr_accessor automated_reasoning_policy: Types::GuardrailAutomatedReasoningPolicyAssessment?
       attr_accessor invocation_metrics: Types::GuardrailInvocationMetrics?
+      attr_accessor applied_guardrail_details: Types::AppliedGuardrailDetails?
     end
 
     class GuardrailAutomatedReasoningFinding
@@ -1159,6 +1325,315 @@ module Aws::BedrockRuntime
       attr_accessor claims_true_scenario: Types::GuardrailAutomatedReasoningScenario?
       attr_accessor supporting_rules: Array[Types::GuardrailAutomatedReasoningRule]?
       attr_accessor logic_warning: Types::GuardrailAutomatedReasoningLogicWarning?
+    end
+
+    class GuardrailChecksConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_filter: Types::GuardrailChecksContentFilterConfig,
+        ?prompt_attack: Types::GuardrailChecksPromptAttackConfig,
+        ?sensitive_information: Types::GuardrailChecksSensitiveInformationConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_filter: Types::GuardrailChecksContentFilterConfig?
+      attr_accessor prompt_attack: Types::GuardrailChecksPromptAttackConfig?
+      attr_accessor sensitive_information: Types::GuardrailChecksSensitiveInformationConfig?
+    end
+
+    class GuardrailChecksContentBlock
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+
+      class Text < GuardrailChecksContentBlock
+      end
+      class Unknown < GuardrailChecksContentBlock
+      end
+    end
+
+    module GuardrailChecksContentFilterCategory
+      VIOLENCE: String
+      HATE: String
+      SEXUAL: String
+      MISCONDUCT: String
+      INSULTS: String
+    end
+
+    class GuardrailChecksContentFilterCategoryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+    end
+
+    class GuardrailChecksContentFilterConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?categories: Array[Types::GuardrailChecksContentFilterCategoryConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor categories: Array[Types::GuardrailChecksContentFilterCategoryConfig]?
+    end
+
+    class GuardrailChecksContentFilterResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::GuardrailChecksContentFilterResultEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::GuardrailChecksContentFilterResultEntry]?
+    end
+
+    class GuardrailChecksContentFilterResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?severity_score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor severity_score: Float?
+    end
+
+    class GuardrailChecksContentFilterUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_units: Integer?
+    end
+
+    class GuardrailChecksMessage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?role: String,
+        ?content: Array[Types::GuardrailChecksContentBlock],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor role: String?
+      attr_accessor content: Array[Types::GuardrailChecksContentBlock]?
+    end
+
+    module GuardrailChecksPromptAttackCategory
+      JAILBREAK: String
+      PROMPT_INJECTION: String
+      PROMPT_LEAKAGE: String
+    end
+
+    class GuardrailChecksPromptAttackCategoryConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+    end
+
+    class GuardrailChecksPromptAttackConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?categories: Array[Types::GuardrailChecksPromptAttackCategoryConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor categories: Array[Types::GuardrailChecksPromptAttackCategoryConfig]?
+    end
+
+    class GuardrailChecksPromptAttackResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::GuardrailChecksPromptAttackResultEntry],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::GuardrailChecksPromptAttackResultEntry]?
+    end
+
+    class GuardrailChecksPromptAttackResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?category: String,
+        ?severity_score: Float,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor category: String?
+      attr_accessor severity_score: Float?
+    end
+
+    class GuardrailChecksPromptAttackUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_units: Integer?
+    end
+
+    class GuardrailChecksResults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_filter: Types::GuardrailChecksContentFilterResult,
+        ?prompt_attack: Types::GuardrailChecksPromptAttackResult,
+        ?sensitive_information: Types::GuardrailChecksSensitiveInformationResult,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_filter: Types::GuardrailChecksContentFilterResult?
+      attr_accessor prompt_attack: Types::GuardrailChecksPromptAttackResult?
+      attr_accessor sensitive_information: Types::GuardrailChecksSensitiveInformationResult?
+    end
+
+    module GuardrailChecksRole
+      USER: String
+      ASSISTANT: String
+      SYSTEM: String
+    end
+
+    class GuardrailChecksSensitiveInformationConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?entities: Array[Types::GuardrailChecksSensitiveInformationEntityConfig],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor entities: Array[Types::GuardrailChecksSensitiveInformationEntityConfig]?
+    end
+
+    class GuardrailChecksSensitiveInformationEntityConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module GuardrailChecksSensitiveInformationEntityType
+      ADDRESS: String
+      AGE: String
+      AWS_ACCESS_KEY: String
+      AWS_SECRET_KEY: String
+      CA_HEALTH_NUMBER: String
+      CA_SOCIAL_INSURANCE_NUMBER: String
+      CREDIT_DEBIT_CARD_CVV: String
+      CREDIT_DEBIT_CARD_EXPIRY: String
+      CREDIT_DEBIT_CARD_NUMBER: String
+      DRIVER_ID: String
+      EMAIL: String
+      INTERNATIONAL_BANK_ACCOUNT_NUMBER: String
+      IP_ADDRESS: String
+      LICENSE_PLATE: String
+      MAC_ADDRESS: String
+      NAME: String
+      PASSWORD: String
+      PHONE: String
+      PIN: String
+      SWIFT_CODE: String
+      UK_NATIONAL_HEALTH_SERVICE_NUMBER: String
+      UK_NATIONAL_INSURANCE_NUMBER: String
+      UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER: String
+      URL: String
+      USERNAME: String
+      US_BANK_ACCOUNT_NUMBER: String
+      US_BANK_ROUTING_NUMBER: String
+      US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER: String
+      US_PASSPORT_NUMBER: String
+      US_SOCIAL_SECURITY_NUMBER: String
+      VEHICLE_IDENTIFICATION_NUMBER: String
+    end
+
+    class GuardrailChecksSensitiveInformationResult
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Array[Types::GuardrailChecksSensitiveInformationResultEntry],
+        ?truncated: bool,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Array[Types::GuardrailChecksSensitiveInformationResultEntry]?
+      attr_accessor truncated: bool?
+    end
+
+    class GuardrailChecksSensitiveInformationResultEntry
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?confidence_score: Float,
+        ?begin_offset: Integer,
+        ?end_offset: Integer,
+        ?message_index: Integer,
+        ?content_index: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor confidence_score: Float?
+      attr_accessor begin_offset: Integer?
+      attr_accessor end_offset: Integer?
+      attr_accessor message_index: Integer?
+      attr_accessor content_index: Integer?
+    end
+
+    class GuardrailChecksSensitiveInformationUsage
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_units: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_units: Integer?
+    end
+
+    class GuardrailChecksUsageResults
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?content_filter: Types::GuardrailChecksContentFilterUsage,
+        ?prompt_attack: Types::GuardrailChecksPromptAttackUsage,
+        ?sensitive_information: Types::GuardrailChecksSensitiveInformationUsage,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor content_filter: Types::GuardrailChecksContentFilterUsage?
+      attr_accessor prompt_attack: Types::GuardrailChecksPromptAttackUsage?
+      attr_accessor sensitive_information: Types::GuardrailChecksSensitiveInformationUsage?
     end
 
     class GuardrailConfiguration
@@ -1489,6 +1964,12 @@ module Aws::BedrockRuntime
       PROFANITY: String
     end
 
+    module GuardrailOrigin
+      REQUEST: String
+      ACCOUNT_ENFORCED: String
+      ORGANIZATION_ENFORCED: String
+    end
+
     class GuardrailOutputContent
       include Smithy::Schema::Structure
 
@@ -1503,6 +1984,11 @@ module Aws::BedrockRuntime
     module GuardrailOutputScope
       INTERVENTIONS: String
       FULL: String
+    end
+
+    module GuardrailOwnership
+      SELF: String
+      CROSS_ACCOUNT: String
     end
 
     class GuardrailPiiEntityFilter
@@ -1753,11 +2239,37 @@ module Aws::BedrockRuntime
       def initialize: (
         ?format: String,
         ?source: Types::ImageSource,
+        ?error: Types::ErrorBlock,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor format: String?
       attr_accessor source: Types::ImageSource?
+      attr_accessor error: Types::ErrorBlock?
+    end
+
+    class ImageBlockDelta
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: Types::ImageSource,
+        ?error: Types::ErrorBlock,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: Types::ImageSource?
+      attr_accessor error: Types::ErrorBlock?
+    end
+
+    class ImageBlockStart
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?format: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor format: String?
     end
 
     module ImageFormat
@@ -1815,6 +2327,32 @@ module Aws::BedrockRuntime
       attr_accessor message: String?
     end
 
+    class InvokeGuardrailChecksRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?messages: Array[Types::GuardrailChecksMessage],
+        ?checks: Types::GuardrailChecksConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor messages: Array[Types::GuardrailChecksMessage]?
+      attr_accessor checks: Types::GuardrailChecksConfig?
+    end
+
+    class InvokeGuardrailChecksResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?results: Types::GuardrailChecksResults,
+        ?usage: Types::GuardrailChecksUsageResults,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor results: Types::GuardrailChecksResults?
+      attr_accessor usage: Types::GuardrailChecksUsageResults?
+    end
+
     class InvokeModelRequest
       include Smithy::Schema::Structure
 
@@ -1827,6 +2365,8 @@ module Aws::BedrockRuntime
         ?guardrail_identifier: String,
         ?guardrail_version: String,
         ?performance_config_latency: String,
+        ?service_tier: String,
+        ?request_metadata: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1838,6 +2378,8 @@ module Aws::BedrockRuntime
       attr_accessor guardrail_identifier: String?
       attr_accessor guardrail_version: String?
       attr_accessor performance_config_latency: String?
+      attr_accessor service_tier: String?
+      attr_accessor request_metadata: String?
     end
 
     class InvokeModelResponse
@@ -1847,12 +2389,14 @@ module Aws::BedrockRuntime
         ?body: String,
         ?content_type: String,
         ?performance_config_latency: String,
+        ?service_tier: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor body: String?
       attr_accessor content_type: String?
       attr_accessor performance_config_latency: String?
+      attr_accessor service_tier: String?
     end
 
     class InvokeModelTokensRequest
@@ -1958,6 +2502,8 @@ module Aws::BedrockRuntime
         ?guardrail_identifier: String,
         ?guardrail_version: String,
         ?performance_config_latency: String,
+        ?service_tier: String,
+        ?request_metadata: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1969,6 +2515,8 @@ module Aws::BedrockRuntime
       attr_accessor guardrail_identifier: String?
       attr_accessor guardrail_version: String?
       attr_accessor performance_config_latency: String?
+      attr_accessor service_tier: String?
+      attr_accessor request_metadata: String?
     end
 
     class InvokeModelWithResponseStreamResponse
@@ -1978,12 +2526,29 @@ module Aws::BedrockRuntime
         ?body: Types::ResponseStream,
         ?content_type: String,
         ?performance_config_latency: String,
+        ?service_tier: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor body: Types::ResponseStream?
       attr_accessor content_type: String?
       attr_accessor performance_config_latency: String?
+      attr_accessor service_tier: String?
+    end
+
+    class JsonSchemaDefinition
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?schema: String,
+        ?name: String,
+        ?description: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor schema: String?
+      attr_accessor name: String?
+      attr_accessor description: String?
     end
 
     class ListAsyncInvokesRequest
@@ -2109,6 +2674,52 @@ module Aws::BedrockRuntime
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class OutputConfig
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text_format: Types::OutputFormat,
+        ?effort: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text_format: Types::OutputFormat?
+      attr_accessor effort: String?
+    end
+
+    class OutputFormat
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?structure: Types::OutputFormatStructure,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor structure: Types::OutputFormatStructure?
+    end
+
+    class OutputFormatStructure
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?json_schema: Types::JsonSchemaDefinition,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor json_schema: Types::JsonSchemaDefinition?
+
+      class JsonSchema < OutputFormatStructure
+      end
+      class Unknown < OutputFormatStructure
+      end
+    end
+
+    module OutputFormatType
+      JSON_SCHEMA: String
     end
 
     class PayloadPart
@@ -2286,6 +2897,49 @@ module Aws::BedrockRuntime
       attr_accessor bucket_owner: String?
     end
 
+    class SearchResultBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?source: String,
+        ?title: String,
+        ?content: Array[Types::SearchResultContentBlock],
+        ?citations: Types::CitationsConfig,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor source: String?
+      attr_accessor title: String?
+      attr_accessor content: Array[Types::SearchResultContentBlock]?
+      attr_accessor citations: Types::CitationsConfig?
+    end
+
+    class SearchResultContentBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?text: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+    end
+
+    class SearchResultLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?search_result_index: Integer,
+        ?start: Integer,
+        ?end: Integer,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor search_result_index: Integer?
+      attr_accessor start: Integer?
+      attr_accessor end: Integer?
+    end
+
     class ServiceQuotaExceededException
       include Smithy::Schema::Structure
 
@@ -2295,6 +2949,24 @@ module Aws::BedrockRuntime
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor message: String?
+    end
+
+    class ServiceTier
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+    end
+
+    module ServiceTierType
+      PRIORITY: String
+      DEFAULT: String
+      FLEX: String
+      RESERVED: String
     end
 
     class ServiceUnavailableException
@@ -2365,6 +3037,8 @@ module Aws::BedrockRuntime
       STOP_SEQUENCE: String
       GUARDRAIL_INTERVENED: String
       CONTENT_FILTERED: String
+      MALFORMED_MODEL_OUTPUT: String
+      MALFORMED_TOOL_USE: String
       MODEL_CONTEXT_WINDOW_EXCEEDED: String
     end
 
@@ -2390,6 +3064,17 @@ module Aws::BedrockRuntime
       end
       class Unknown < SystemContentBlock
       end
+    end
+
+    class SystemTool
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor name: String?
     end
 
     class Tag
@@ -2425,6 +3110,7 @@ module Aws::BedrockRuntime
         ?total_tokens: Integer,
         ?cache_read_input_tokens: Integer,
         ?cache_write_input_tokens: Integer,
+        ?cache_details: Array[Types::CacheDetail],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2433,6 +3119,7 @@ module Aws::BedrockRuntime
       attr_accessor total_tokens: Integer?
       attr_accessor cache_read_input_tokens: Integer?
       attr_accessor cache_write_input_tokens: Integer?
+      attr_accessor cache_details: Array[Types::CacheDetail]?
     end
 
     class Tool
@@ -2440,19 +3127,34 @@ module Aws::BedrockRuntime
 
       def initialize: (
         ?tool_spec: Types::ToolSpecification,
+        ?system_tool: Types::SystemTool,
         ?cache_point: Types::CachePointBlock,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tool_spec: Types::ToolSpecification?
+      attr_accessor system_tool: Types::SystemTool?
       attr_accessor cache_point: Types::CachePointBlock?
 
       class ToolSpec < Tool
+      end
+      class SystemTool < Tool
       end
       class CachePoint < Tool
       end
       class Unknown < Tool
       end
+    end
+
+    class ToolAdditionBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tool: Types::ToolReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tool: Types::ToolReference?
     end
 
     class ToolChoice
@@ -2508,6 +3210,32 @@ module Aws::BedrockRuntime
       end
     end
 
+    class ToolReference
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?type: String,
+        ?name: String,
+        ?server_name: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor type: String?
+      attr_accessor name: String?
+      attr_accessor server_name: String?
+    end
+
+    class ToolRemovalBlock
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tool: Types::ToolReference,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tool: Types::ToolReference?
+    end
+
     class ToolResultBlock
       include Smithy::Schema::Structure
 
@@ -2515,11 +3243,48 @@ module Aws::BedrockRuntime
         ?tool_use_id: String,
         ?content: Array[Types::ToolResultContentBlock],
         ?status: String,
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tool_use_id: String?
       attr_accessor content: Array[Types::ToolResultContentBlock]?
+      attr_accessor status: String?
+      attr_accessor type: String?
+    end
+
+    class ToolResultBlockDelta
+      include Smithy::Schema::Union
+
+      def initialize: (
+        ?text: String,
+        ?json: Smithy::Schema::document,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor text: String?
+      attr_accessor json: Smithy::Schema::document?
+
+      class Text < ToolResultBlockDelta
+      end
+      class Json < ToolResultBlockDelta
+      end
+      class Unknown < ToolResultBlockDelta
+      end
+    end
+
+    class ToolResultBlockStart
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?tool_use_id: String,
+        ?type: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor tool_use_id: String?
+      attr_accessor type: String?
       attr_accessor status: String?
     end
 
@@ -2532,6 +3297,7 @@ module Aws::BedrockRuntime
         ?image: Types::ImageBlock,
         ?document: Types::DocumentBlock,
         ?video: Types::VideoBlock,
+        ?search_result: Types::SearchResultBlock,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2540,6 +3306,7 @@ module Aws::BedrockRuntime
       attr_accessor image: Types::ImageBlock?
       attr_accessor document: Types::DocumentBlock?
       attr_accessor video: Types::VideoBlock?
+      attr_accessor search_result: Types::SearchResultBlock?
 
       class Json < ToolResultContentBlock
       end
@@ -2550,6 +3317,8 @@ module Aws::BedrockRuntime
       class Document < ToolResultContentBlock
       end
       class Video < ToolResultContentBlock
+      end
+      class SearchResult < ToolResultContentBlock
       end
       class Unknown < ToolResultContentBlock
       end
@@ -2567,12 +3336,14 @@ module Aws::BedrockRuntime
         ?name: String,
         ?description: String,
         ?input_schema: Types::ToolInputSchema,
+        ?strict: bool,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor name: String?
       attr_accessor description: String?
       attr_accessor input_schema: Types::ToolInputSchema?
+      attr_accessor strict: bool?
     end
 
     class ToolUseBlock
@@ -2582,12 +3353,14 @@ module Aws::BedrockRuntime
         ?tool_use_id: String,
         ?name: String,
         ?input: Smithy::Schema::document,
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tool_use_id: String?
       attr_accessor name: String?
       attr_accessor input: Smithy::Schema::document?
+      attr_accessor type: String?
     end
 
     class ToolUseBlockDelta
@@ -2607,11 +3380,17 @@ module Aws::BedrockRuntime
       def initialize: (
         ?tool_use_id: String,
         ?name: String,
+        ?type: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor tool_use_id: String?
       attr_accessor name: String?
+      attr_accessor type: String?
+    end
+
+    module ToolUseType
+      SERVER_TOOL_USE: String
     end
 
     module Trace
@@ -2674,6 +3453,19 @@ module Aws::BedrockRuntime
       end
       class Unknown < VideoSource
       end
+    end
+
+    class WebLocation
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?url: String,
+        ?domain: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor url: String?
+      attr_accessor domain: String?
     end
   end
 end

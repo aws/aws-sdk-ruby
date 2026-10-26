@@ -6,7 +6,7 @@ module Aws::DatabaseMigrationService
   # This module contains the types returned by client operations.
   module Types
 
-    # <p>DMS was denied access to the endpoint. Check that the 
+    # <p>DMS was denied access to the endpoint. Check that the
     #             role is correctly configured.</p>
     # @!attribute message
     #   <p></p>
@@ -188,6 +188,64 @@ module Aws::DatabaseMigrationService
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute request_identifier
+    #   <p>The identifier for the metadata model conversion operation to cancel. This operation was initiated by StartMetadataModelConversion.</p>
+    #   @return [String]
+    class CancelMetadataModelConversionMessage < Struct.new(
+      nil,
+      :migration_project_identifier,
+      :request_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute request
+    #   <p>The metadata model conversion request.</p>
+    #            <note>
+    #               <p>DMS never populates the <code>ExportSqlDetails</code> field for this operation.</p>
+    #            </note>
+    #   @return [Types::SchemaConversionRequest]
+    class CancelMetadataModelConversionResponse < Struct.new(
+      nil,
+      :request,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute request_identifier
+    #   <p>The identifier for the metadata model creation operation to cancel. This operation was initiated by <code>StartMetadataModelCreation</code>.</p>
+    #   @return [String]
+    class CancelMetadataModelCreationMessage < Struct.new(
+      nil,
+      :migration_project_identifier,
+      :request_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute request
+    #   <p>The metadata model creation request.</p>
+    #            <note>
+    #               <p>DMS never populates the <code>ExportSqlDetails</code> field for this operation.</p>
+    #            </note>
+    #   @return [Types::SchemaConversionRequest]
+    class CancelMetadataModelCreationResponse < Struct.new(
+      nil,
+      :request,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p></p>
     # @!attribute replication_task_assessment_run_arn
     #   <p>Amazon Resource Name (ARN) of the premigration assessment run to be canceled.</p>
@@ -249,6 +307,13 @@ module Aws::DatabaseMigrationService
     # @!attribute key_length
     #   <p>The key length of the cryptographic algorithm being used.</p>
     #   @return [Integer]
+    # @!attribute kms_key_id
+    #   <p>An KMS key identifier that is used to encrypt the certificate.</p>
+    #            <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses
+    #            your default encryption key.</p>
+    #            <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has
+    #            a different default encryption key for each Amazon Web Services Region.</p>
+    #   @return [String]
     class Certificate < Struct.new(
       nil,
       :certificate_identifier,
@@ -261,6 +326,7 @@ module Aws::DatabaseMigrationService
       :valid_to_date,
       :signing_algorithm,
       :key_length,
+      :kms_key_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -608,9 +674,12 @@ module Aws::DatabaseMigrationService
     #   <p>A user-friendly description of the data provider.</p>
     #   @return [String]
     # @!attribute engine
-    #   <p>The type of database engine for the data provider. Valid values include <code>"aurora"</code>, 
-    #            <code>"aurora-postgresql"</code>, <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, 
-    #            <code>"sqlserver"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>"aurora"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>
+    #   <p>The type of database engine for the data provider.</p>
+    #            <p>Valid values: <code>aurora</code>, <code>aurora-postgresql</code>, <code>db2</code>,
+    #            <code>db2-zos</code>, <code>docdb</code>, <code>mariadb</code>, <code>mongodb</code>,
+    #            <code>mysql</code>, <code>oracle</code>, <code>postgres</code>, <code>redshift</code>,
+    #            <code>sqlserver</code>, and <code>sybase</code>. A value of <code>aurora</code> represents
+    #            Amazon Aurora MySQL-Compatible Edition.</p>
     #   @return [String]
     # @!attribute virtual
     #   <p>Indicates whether the data provider is virtual.</p>
@@ -1024,11 +1093,11 @@ module Aws::DatabaseMigrationService
 
     # @!attribute availability_zone
     #   <p>The Availability Zone where the instance profile will be created. The default
-    #            value is a random, system-chosen Availability Zone in the Amazon Web Services Region where your 
+    #            value is a random, system-chosen Availability Zone in the Amazon Web Services Region where your
     #            data provider is created, for examplem <code>us-east-1d</code>.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
+    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
     #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
@@ -1043,10 +1112,10 @@ module Aws::DatabaseMigrationService
     #   <p>One or more tags to be assigned to the instance profile.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute network_type
-    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code> 
-    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing. 
-    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type 
-    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance 
+    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code>
+    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing.
+    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type
+    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance
     #            profile with dual network type that supports IPv4 and IPv6 addressing.</p>
     #   @return [String]
     # @!attribute instance_profile_name
@@ -1059,7 +1128,7 @@ module Aws::DatabaseMigrationService
     #   <p>A subnet group to associate with the instance profile.</p>
     #   @return [String]
     # @!attribute vpc_security_groups
-    #   <p>Specifies the VPC security group names to be used with the instance profile. 
+    #   <p>Specifies the VPC security group names to be used with the instance profile.
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     #   @return [Array<String>]
     class CreateInstanceProfileMessage < Struct.new(
@@ -1099,14 +1168,19 @@ module Aws::DatabaseMigrationService
     #   <p>Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.</p>
     #   @return [Array<Types::DataProviderDescriptorDefinition>]
     # @!attribute instance_profile_identifier
-    #   <p>The identifier of the associated instance profile. Identifiers must begin with a letter 
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
+    #   <p>The identifier of the associated instance profile. Identifiers must begin with a letter
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
     #            a hyphen, or contain two consecutive hyphens.</p>
     #   @return [String]
     # @!attribute transformation_rules
-    #   <p>The settings in JSON format for migration rules. Migration rules make it possible for you to change 
-    #            the object names according to the rules that you specify. For example, you can change an object name 
-    #            to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.</p>
+    #   <p>A JSON string that specifies the transformation rules for the migration project.
+    #            Transformation rules let you customize how DMS Schema Conversion converts your source
+    #            database objects, including renaming, adding prefixes or suffixes, and changing data types.
+    #            For the transformation rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-transformation-rules.html">Transformation rules in DMS
+    #               Schema Conversion</a>.</p>
+    #            <note>
+    #               <p>Homogeneous data migrations do not support transformation rules.</p>
+    #            </note>
     #   @return [String]
     # @!attribute description
     #   <p>A user-friendly description of the migration project.</p>
@@ -1726,14 +1800,17 @@ module Aws::DatabaseMigrationService
     #   <p>The time the data provider was created.</p>
     #   @return [Time]
     # @!attribute description
-    #   <p>A description of the data provider. Descriptions can have up to 31 characters. 
-    #            A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't 
+    #   <p>A description of the data provider. Descriptions can have up to 31 characters.
+    #            A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't
     #            end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.</p>
     #   @return [String]
     # @!attribute engine
-    #   <p>The type of database engine for the data provider. Valid values include <code>"aurora"</code>, 
-    #            <code>"aurora-postgresql"</code>, <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, 
-    #            <code>"sqlserver"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>"aurora"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>
+    #   <p>The type of database engine for the data provider.</p>
+    #            <p>Valid values: <code>aurora</code>, <code>aurora-postgresql</code>, <code>db2</code>,
+    #            <code>db2-zos</code>, <code>docdb</code>, <code>mariadb</code>, <code>mongodb</code>,
+    #            <code>mysql</code>, <code>oracle</code>, <code>postgres</code>, <code>redshift</code>,
+    #            <code>sqlserver</code>, and <code>sybase</code>. A value of <code>aurora</code> represents
+    #            Amazon Aurora MySQL-Compatible Edition.</p>
     #   @return [String]
     # @!attribute virtual
     #   <p>Indicates whether the data provider is virtual.</p>
@@ -1812,6 +1889,9 @@ module Aws::DatabaseMigrationService
     # @!attribute oracle_settings
     #   <p>Provides information that defines an Oracle data provider.</p>
     #   @return [Types::OracleDataProviderSettings]
+    # @!attribute sybase_ase_settings
+    #   <p>Provides information that defines an SAP ASE data provider.</p>
+    #   @return [Types::SybaseAseDataProviderSettings]
     # @!attribute microsoft_sql_server_settings
     #   <p>Provides information that defines a Microsoft SQL Server data provider.</p>
     #   @return [Types::MicrosoftSqlServerDataProviderSettings]
@@ -1835,6 +1915,7 @@ module Aws::DatabaseMigrationService
       :postgre_sql_settings,
       :my_sql_settings,
       :oracle_settings,
+      :sybase_ase_settings,
       :microsoft_sql_server_settings,
       :doc_db_settings,
       :maria_db_settings,
@@ -1850,6 +1931,7 @@ module Aws::DatabaseMigrationService
       class PostgreSqlSettings < DataProviderSettings; end
       class MySqlSettings < DataProviderSettings; end
       class OracleSettings < DataProviderSettings; end
+      class SybaseAseSettings < DataProviderSettings; end
       class MicrosoftSqlServerSettings < DataProviderSettings; end
       class DocDbSettings < DataProviderSettings; end
       class MariaDbSettings < DataProviderSettings; end
@@ -2519,7 +2601,10 @@ module Aws::DatabaseMigrationService
     #   <p>The name or Amazon Resource Name (ARN) for the schema conversion project.</p>
     #   @return [String]
     # @!attribute conversion_configuration
-    #   <p>The configuration parameters for the schema conversion project.</p>
+    #   <p>A JSON string that contains the schema conversion settings for the migration project.
+    #            For the format and available settings, see
+    #            <a href="https://docs.aws.amazon.com/dms/latest/userguide/schema-conversion-settings.html">Specifying schema conversion
+    #               settings for migration projects</a>.</p>
     #   @return [String]
     class DescribeConversionConfigurationResponse < Struct.new(
       nil,
@@ -2583,20 +2668,26 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute filters
-    #   <p>Filters applied to the data providers described in the form of key-value pairs.</p>
-    #            <p>Valid filter names and values: data-provider-identifier, data provider arn or name</p>
+    #   <p>The filters to apply to the data providers.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>data-provider-identifier</code> – The data provider name or ARN.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     class DescribeDataProvidersMessage < Struct.new(
@@ -2610,11 +2701,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute data_providers
@@ -2947,22 +3038,33 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute migration_project_identifier
-    #   <p>The name or Amazon Resource Name (ARN) for the migration project.</p>
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>Filters applied to the extension pack associations described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the extension pack installation requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeExtensionPackAssociationsMessage < Struct.new(
@@ -2977,15 +3079,18 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
-    #   <p>A paginated list of extension pack associations for the specified migration project.</p>
+    #   <p>A paginated list of extension pack installation requests.</p>
+    #            <note>
+    #               <p>DMS never populates the <code>ExportSqlDetails</code> field for this operation.</p>
+    #            </note>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeExtensionPackAssociationsResponse < Struct.new(
       nil,
@@ -3306,20 +3411,26 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute filters
-    #   <p>Filters applied to the instance profiles described in the form of key-value pairs.</p>
-    #            <p>Valid filter names and values: instance-profile-identifier, instance profile arn or name</p>
+    #   <p>The filters to apply to the instance profiles.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>instance-profile-identifier</code> – The instance profile name or ARN.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     class DescribeInstanceProfilesMessage < Struct.new(
@@ -3333,11 +3444,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute instance_profiles
@@ -3353,22 +3464,33 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute migration_project_identifier
-    #   <p>The name or Amazon Resource Name (ARN) of the migration project.</p>
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>Filters applied to the metadata model assessments described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the metadata model assessment requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #               The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
-    #               make the call again using the returned token and keeping all other arguments unchanged.</p>
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelAssessmentsMessage < Struct.new(
@@ -3383,15 +3505,18 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
-    #   <p>A paginated list of metadata model assessments for the specified migration project.</p>
+    #   <p>A paginated list of metadata model assessment requests.</p>
+    #            <note>
+    #               <p>DMS never populates the <code>ExportSqlDetails</code> field for this operation.</p>
+    #            </note>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelAssessmentsResponse < Struct.new(
       nil,
@@ -3402,23 +3527,88 @@ module Aws::DatabaseMigrationService
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute selection_rules
+    #   <p>A JSON string that identifies the metadata model whose children to retrieve. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts source or target selection rules depending on the <code>Origin</code> parameter. The <code>server-name</code> in the object locator must match the corresponding data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Exactly one rule is allowed.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute origin
+    #   <p>Specifies whether to retrieve metadata from the source or target tree. Valid values: SOURCE | TARGET</p>
+    #   @return [String]
+    # @!attribute marker
+    #   <p>Specifies the unique pagination token that indicates where the next page should start. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.</p>
+    #   @return [String]
+    # @!attribute max_records
+    #   <p>The maximum number of metadata model children to include in the response. If more items exist than the specified MaxRecords value, a marker is included in the response so that the remaining results can be retrieved.</p>
+    #   @return [Integer]
+    class DescribeMetadataModelChildrenMessage < Struct.new(
+      nil,
+      :selection_rules,
+      :migration_project_identifier,
+      :origin,
+      :marker,
+      :max_records,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute marker
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of metadata model children. If a marker is returned, there are more metadata model children available.</p>
+    #   @return [String]
+    # @!attribute metadata_model_children
+    #   <p>A list of child metadata models.</p>
+    #   @return [Array<Types::MetadataModelReference>]
+    class DescribeMetadataModelChildrenResponse < Struct.new(
+      nil,
+      :marker,
+      :metadata_model_children,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute migration_project_identifier
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>Filters applied to the metadata model conversions described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the metadata model conversion requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>, <code>CANCELING</code>, <code>CANCELED</code>.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelConversionsMessage < Struct.new(
@@ -3433,17 +3623,84 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
-    #   <p>A paginated list of metadata model conversions.</p>
+    #   <p>A paginated list of metadata model conversion requests.</p>
+    #            <note>
+    #               <p>DMS never populates the <code>ExportSqlDetails</code> field for this operation.</p>
+    #            </note>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelConversionsResponse < Struct.new(
+      nil,
+      :marker,
+      :requests,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filters
+    #   <p>The filters to apply to the metadata model creation requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>, <code>CANCELING</code>, <code>CANCELED</code>.</p>
+    #               </li>
+    #            </ul>
+    #   @return [Array<Types::Filter>]
+    # @!attribute marker
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #            value specified by <code>MaxRecords</code>.</p>
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            make the call again using the returned token and keeping all other arguments unchanged.</p>
+    #   @return [String]
+    # @!attribute max_records
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #            in the response so that you can retrieve the remaining results.</p>
+    #   @return [Integer]
+    # @!attribute migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    class DescribeMetadataModelCreationsMessage < Struct.new(
+      nil,
+      :filters,
+      :marker,
+      :max_records,
+      :migration_project_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute marker
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
+    #            value specified by <code>MaxRecords</code>.</p>
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
+    #            make the call again using the returned token and keeping all other arguments unchanged.</p>
+    #   @return [String]
+    # @!attribute requests
+    #   <p>A paginated list of metadata model creation requests.</p>
+    #            <note>
+    #               <p>DMS never populates the <code>ExportSqlDetails</code> field for this operation.</p>
+    #            </note>
+    #   @return [Array<Types::SchemaConversionRequest>]
+    class DescribeMetadataModelCreationsResponse < Struct.new(
       nil,
       :marker,
       :requests,
@@ -3456,19 +3713,30 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>Filters applied to the metadata model exports described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the metadata model export requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelExportsAsScriptMessage < Struct.new(
@@ -3483,15 +3751,15 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
-    #   <p>A paginated list of metadata model exports.</p>
+    #   <p>A paginated list of metadata model export requests.</p>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelExportsAsScriptResponse < Struct.new(
       nil,
@@ -3506,19 +3774,30 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>Filters applied to the metadata model exports described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the metadata model export requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelExportsToTargetMessage < Struct.new(
@@ -3533,15 +3812,18 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
-    #   <p>A paginated list of metadata model exports.</p>
+    #   <p>A paginated list of metadata model export requests.</p>
+    #            <note>
+    #               <p>DMS never populates the <code>ExportSqlDetails</code> field for this operation.</p>
+    #            </note>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelExportsToTargetResponse < Struct.new(
       nil,
@@ -3556,18 +3838,31 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute filters
-    #   <p>Filters applied to the metadata model imports described in the form of key-value pairs.</p>
+    #   <p>The filters to apply to the metadata model import requests.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>request-id</code> – The request identifier.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>status</code> – The request status. Valid values: <code>RECEIVED</code>, <code>IN_PROGRESS</code>, <code>SUCCESS</code>, <code>FAILED</code>.</p>
+    #               </li>
+    #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute max_records
-    #   <p>A paginated list of metadata model imports.</p>
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
+    #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     class DescribeMetadataModelImportsMessage < Struct.new(
       nil,
@@ -3581,15 +3876,18 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute requests
-    #   <p>A paginated list of metadata model imports.</p>
+    #   <p>A paginated list of metadata model import requests.</p>
+    #            <note>
+    #               <p>DMS never populates the <code>ExportSqlDetails</code> field for this operation.</p>
+    #            </note>
     #   @return [Array<Types::SchemaConversionRequest>]
     class DescribeMetadataModelImportsResponse < Struct.new(
       nil,
@@ -3600,32 +3898,97 @@ module Aws::DatabaseMigrationService
       include ::Smithy::Schema::Structure
     end
 
-    # @!attribute filters
-    #   <p>Filters applied to the migration projects described in the form of key-value pairs.</p>
-    #            <p>Valid filter names and values:</p>
+    # @!attribute selection_rules
+    #   <p>A JSON string that identifies the metadata model to retrieve. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
     #            <ul>
     #               <li>
-    #                  <p>instance-profile-identifier, instance profile arn or name</p>
+    #                  <p>Accepts source or target selection rules depending on the <code>Origin</code> parameter. The <code>server-name</code> in the object locator must match the corresponding data provider.</p>
     #               </li>
     #               <li>
-    #                  <p>data-provider-identifier, data provider arn or name</p>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
     #               </li>
     #               <li>
-    #                  <p>migration-project-identifier, migration project arn or name</p>
+    #                  <p>Exactly one rule is allowed.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute origin
+    #   <p>Specifies whether to retrieve metadata from the source or target tree. Valid values: SOURCE | TARGET</p>
+    #   @return [String]
+    class DescribeMetadataModelMessage < Struct.new(
+      nil,
+      :selection_rules,
+      :migration_project_identifier,
+      :origin,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute metadata_model_name
+    #   <p>The name of the metadata model.</p>
+    #   @return [String]
+    # @!attribute metadata_model_type
+    #   <p>The type of the metadata model.</p>
+    #   @return [String]
+    # @!attribute target_metadata_models
+    #   <p>A list of counterpart metadata models in the target. This field is populated only when Origin is SOURCE and after the object has been converted by DMS Schema Conversion.</p>
+    #   @return [Array<Types::MetadataModelReference>]
+    # @!attribute definition
+    #   <p>The SQL text of the metadata model. This field might not be populated for some metadata models.</p>
+    #   @return [String]
+    class DescribeMetadataModelResponse < Struct.new(
+      nil,
+      :metadata_model_name,
+      :metadata_model_type,
+      :target_metadata_models,
+      :definition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute filters
+    #   <p>The filters to apply to the migration projects.</p>
+    #            <p>The following filter names are supported:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>migration-project-identifier</code> – The migration project name or ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>instance-profile-identifier</code> – The instance profile name or ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>data-provider-identifier</code> – The source or target data provider name or ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>source-data-provider-identifier</code> – The source data provider name or ARN.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>target-data-provider-identifier</code> – The target data provider name or ARN.</p>
     #               </li>
     #            </ul>
     #   @return [Array<Types::Filter>]
     # @!attribute max_records
-    #   <p>The maximum number of records to include in the response. If more records exist than 
-    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token  
+    #   <p>The maximum number of records to include in the response. If more records exist than
+    #            the specified <code>MaxRecords</code> value, DMS includes a pagination token
     #            in the response so that you can retrieve the remaining results.</p>
     #   @return [Integer]
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     class DescribeMigrationProjectsMessage < Struct.new(
@@ -3639,11 +4002,11 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute marker
-    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results. 
-    #            If this parameter is specified, the response includes only records beyond the marker, up to the 
+    #   <p>Specifies the unique pagination token that makes it possible to display the next page of results.
+    #            If this parameter is specified, the response includes only records beyond the marker, up to the
     #            value specified by <code>MaxRecords</code>.</p>
-    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available. 
-    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page, 
+    #            <p>If <code>Marker</code> is returned by a previous response, there are more results available.
+    #            The value of <code>Marker</code> is a unique pagination token for each page. To retrieve the next page,
     #            make the call again using the returned token and keeping all other arguments unchanged.</p>
     #   @return [String]
     # @!attribute migration_projects
@@ -4466,7 +4829,7 @@ module Aws::DatabaseMigrationService
     #   <p>The database name on the DocumentDB data provider.</p>
     #   @return [String]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the DocumentDB data provider. 
+    #   <p>The SSL mode used to connect to the DocumentDB data provider.
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -4507,9 +4870,14 @@ module Aws::DatabaseMigrationService
     #            Specify <code>"one"</code> to use table mode.</p>
     #   @return [String]
     # @!attribute extract_doc_id
-    #   <p> Specifies the document ID. Use this setting when <code>NestingLevel</code> is set to
-    #               <code>"none"</code>. </p>
-    #            <p>Default value is <code>"false"</code>. </p>
+    #   <p>Specifies whether the document ID is added to the target table. Use this setting when
+    #              <code>NestingLevel</code> is set to <code>"none"</code>.
+    #          </p>
+    #            <p>Set <code>ExtractDocId</code> to <code>true</code> when using
+    #              <a href="https://www.mongodb.com/docs/manual/reference/method/Session.startTransaction/#mongodb-method-Session.startTransaction">multi-document transactions</a>
+    #              with CDC.
+    #          </p>
+    #            <p>Default value is <code>false</code>.</p>
     #   @return [Boolean]
     # @!attribute docs_to_investigate
     #   <p> Indicates the number of documents to preview to determine the document organization.
@@ -4727,6 +5095,11 @@ module Aws::DatabaseMigrationService
     #            validation. Use it on a subsequent call to CreateEndpoint to create the endpoint with a
     #            cross-account. </p>
     #   @return [String]
+    # @!attribute is_read_only
+    #   <p>Indicates whether the endpoint is read-only. When set to <code>true</code>, this endpoint
+    #            is managed by DMS as part of a zero-ETL integration and cannot be modified or deleted directly.
+    #            You can only modify or delete read-only endpoints through their associated zero-ETL integration.</p>
+    #   @return [Boolean]
     # @!attribute dynamo_db_settings
     #   <p>The settings for the DynamoDB target endpoint. For more information, see the
     #               <code>DynamoDBSettings</code> structure.</p>
@@ -4801,6 +5174,10 @@ module Aws::DatabaseMigrationService
     #   <p>The settings for the Amazon Timestream target endpoint. For more information, see the
     #               <code>TimestreamSettings</code> structure.</p>
     #   @return [Types::TimestreamSettings]
+    # @!attribute lakehouse_settings
+    #   <p>Settings in JSON format for the target Lakehouse endpoint. This parameter applies to endpoints
+    #             that are automatically created by DMS for a Lakehouse data warehouse as part of a zero-ETL integration.</p>
+    #   @return [Types::LakehouseSettings]
     class Endpoint < Struct.new(
       nil,
       :endpoint_identifier,
@@ -4820,6 +5197,7 @@ module Aws::DatabaseMigrationService
       :service_access_role_arn,
       :external_table_definition,
       :external_id,
+      :is_read_only,
       :dynamo_db_settings,
       :s3_settings,
       :dms_transfer_settings,
@@ -4839,6 +5217,7 @@ module Aws::DatabaseMigrationService
       :redis_settings,
       :gcp_my_sql_settings,
       :timestream_settings,
+      :lakehouse_settings,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5064,7 +5443,16 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute selection_rules
-    #   <p>A value that specifies the database objects to assess.</p>
+    #   <p>A JSON string that identifies the metadata models to export a conversion assessment report for. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute file_name
     #   <p>The name of the assessment file to create in your Amazon S3 bucket.</p>
@@ -5114,12 +5502,12 @@ module Aws::DatabaseMigrationService
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Provides information about a metadata model assessment exported to SQL.</p>
+    # <p>The Amazon S3 location of the ZIP archive that contains the exported data definition language (DDL) scripts.</p>
     # @!attribute s3_object_key
-    #   <p>The Amazon S3 object key for the object containing the exported metadata model assessment.</p>
+    #   <p>The Amazon S3 URI of the object that contains the ZIP archive with exported DDL scripts.</p>
     #   @return [String]
     # @!attribute object_url
-    #   <p>The URL for the object containing the exported metadata model assessment.</p>
+    #   <p>The URL of the Amazon S3 object that contains the ZIP archive with exported DDL scripts.</p>
     #   @return [String]
     class ExportSqlDetails < Struct.new(
       nil,
@@ -5341,6 +5729,47 @@ module Aws::DatabaseMigrationService
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute selection_rules
+    #   <p>A JSON string that contains the source selection rules to convert into their target counterparts. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Does not support <code>category-name</code> in the object locator.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Up to 10 rules are allowed.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class GetTargetSelectionRulesMessage < Struct.new(
+      nil,
+      :migration_project_identifier,
+      :selection_rules,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute target_selection_rules
+    #   <p>The JSON string representing the counterpart selection rules in the target.</p>
+    #   @return [String]
+    class GetTargetSelectionRulesResponse < Struct.new(
+      nil,
+      :target_selection_rules,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Provides information that defines an IBM Db2 LUW endpoint.</p>
     # @!attribute database_name
     #   <p>Database name for the endpoint.</p>
@@ -5443,6 +5872,20 @@ module Aws::DatabaseMigrationService
     # @!attribute certificate_arn
     #   <p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>
     #   @return [String]
+    # @!attribute encryption_algorithm
+    #   <p>
+    #            The encryption algorithm used for securing the connection to the IBM DB2 LUW database server.
+    #            You can provide an integer value corresponding to a specific encryption algorithm,
+    #            or leave this parameter empty to use the default behavior.
+    #         </p>
+    #   @return [Integer]
+    # @!attribute security_mechanism
+    #   <p>
+    #            The security mechanism used for authenticating the connection to the IBM DB2 LUW database server.
+    #            You can provide an integer value corresponding to a specific security mechanism,
+    #            or leave this parameter empty to use the default behavior.
+    #         </p>
+    #   @return [Integer]
     # @!attribute s3_path
     #   <p>The path for the Amazon S3 bucket that the application uses for accessing the user-defined schema.</p>
     #   @return [String]
@@ -5456,6 +5899,8 @@ module Aws::DatabaseMigrationService
       :database_name,
       :ssl_mode,
       :certificate_arn,
+      :encryption_algorithm,
+      :security_mechanism,
       :s3_path,
       :s3_access_role_arn,
       keyword_init: true
@@ -5518,12 +5963,20 @@ module Aws::DatabaseMigrationService
     # @!attribute tags
     #   <p>The tags associated with the certificate.</p>
     #   @return [Array<Types::Tag>]
+    # @!attribute kms_key_id
+    #   <p>An KMS key identifier that is used to encrypt the certificate.</p>
+    #            <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses
+    #            your default encryption key.</p>
+    #            <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has
+    #            a different default encryption key for each Amazon Web Services Region.</p>
+    #   @return [String]
     class ImportCertificateMessage < Struct.new(
       nil,
       :certificate_identifier,
       :certificate_pem,
       :certificate_wallet,
       :tags,
+      :kms_key_id,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -5548,7 +6001,7 @@ module Aws::DatabaseMigrationService
     #   <p>The Availability Zone where the instance profile runs.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
+    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
     #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
@@ -5560,18 +6013,18 @@ module Aws::DatabaseMigrationService
     #            is <code>true</code>.</p>
     #   @return [Boolean]
     # @!attribute network_type
-    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code> 
-    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing. 
-    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type 
-    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance 
+    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code>
+    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing.
+    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type
+    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance
     #            profile with dual network type that supports IPv4 and IPv6 addressing.</p>
     #   @return [String]
     # @!attribute instance_profile_name
     #   <p>The user-friendly name for the instance profile.</p>
     #   @return [String]
     # @!attribute description
-    #   <p>A description of the instance profile. Descriptions can have up to 31 characters. 
-    #            A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't 
+    #   <p>A description of the instance profile. Descriptions can have up to 31 characters.
+    #            A description can contain only ASCII letters, digits, and hyphens ('-'). Also, it can't
     #            end with a hyphen or contain two consecutive hyphens, and can only begin with a letter.</p>
     #   @return [String]
     # @!attribute instance_profile_creation_time
@@ -5581,7 +6034,7 @@ module Aws::DatabaseMigrationService
     #   <p>The identifier of the subnet group that is associated with the instance profile.</p>
     #   @return [String]
     # @!attribute vpc_security_groups
-    #   <p>The VPC security groups that are used with the instance profile. 
+    #   <p>The VPC security groups that are used with the instance profile.
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     #   @return [Array<String>]
     class InstanceProfile < Struct.new(
@@ -5991,6 +6444,20 @@ module Aws::DatabaseMigrationService
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Provides information that defines a Lakehouse endpoint. This endpoint type is used for
+    #          zero-ETL integrations with Lakehouse data warehouses.</p>
+    # @!attribute arn
+    #   <p>The Amazon Resource Name (ARN) of the Lakehouse resource that serves as the target for
+    #            this endpoint.</p>
+    #   @return [String]
+    class LakehouseSettings < Struct.new(
+      nil,
+      :arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Provides information about the limitations of target Amazon Web Services engines.</p>
     #          <p>Your source database might include features that the target Amazon Web Services engine doesn't
     #             support. Fleet Advisor lists these features as limitations. You should consider these
@@ -6078,7 +6545,7 @@ module Aws::DatabaseMigrationService
     #   <p>The port value for the MariaDB data provider</p>
     #   @return [Integer]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the MariaDB data provider. 
+    #   <p>The SSL mode used to connect to the MariaDB data provider.
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -6098,6 +6565,43 @@ module Aws::DatabaseMigrationService
       :certificate_arn,
       :s3_path,
       :s3_access_role_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The properties of the metadata model.</p>
+    # @!attribute statement_properties
+    #   <p>The properties of the SQL statement.</p>
+    #   @return [Types::StatementProperties]
+    class MetadataModelProperties < Struct.new(
+      :statement_properties,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class StatementProperties < MetadataModelProperties; end
+      class Unknown < MetadataModelProperties; end
+    end
+
+    # <p>A reference to a metadata model, including its name and selection rules for location identification.</p>
+    # @!attribute metadata_model_name
+    #   <p>The name of the metadata model.</p>
+    #   @return [String]
+    # @!attribute selection_rules
+    #   <p>A JSON string that identifies this metadata model in the metadata tree. For the selection rule format, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>You can pass this value as the <code>SelectionRules</code> parameter to any operation that accepts selection rules, such as <code>DescribeMetadataModel</code>, <code>StartMetadataModelConversion</code>, and others.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    class MetadataModelReference < Struct.new(
+      nil,
+      :metadata_model_name,
+      :selection_rules,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -6239,7 +6743,7 @@ module Aws::DatabaseMigrationService
     #   <p>The database name on the Microsoft SQL Server data provider.</p>
     #   @return [String]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the Microsoft SQL Server data provider. 
+    #   <p>The SSL mode used to connect to the Microsoft SQL Server data provider.
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -6288,9 +6792,14 @@ module Aws::DatabaseMigrationService
     #   <p>The name of the associated instance profile.</p>
     #   @return [String]
     # @!attribute transformation_rules
-    #   <p>The settings in JSON format for migration rules. Migration rules make it possible for you to change 
-    #            the object names according to the rules that you specify. For example, you can change an object name 
-    #            to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.</p>
+    #   <p>The transformation rules for the migration project in JSON format.
+    #            Transformation rules let you customize how DMS Schema Conversion converts your source
+    #            database objects, including renaming, adding prefixes or suffixes, and changing data types.
+    #            For the transformation rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-transformation-rules.html">Transformation rules in DMS
+    #               Schema Conversion</a>.</p>
+    #            <note>
+    #               <p>Homogeneous data migrations do not support transformation rules.</p>
+    #            </note>
     #   @return [String]
     # @!attribute description
     #   <p>A user-friendly description of the migration project.</p>
@@ -6319,7 +6828,17 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute conversion_configuration
-    #   <p>The new conversion configuration.</p>
+    #   <p>A JSON string that contains the schema conversion settings to update.
+    #            For the format and available settings, see
+    #            <a href="https://docs.aws.amazon.com/dms/latest/userguide/schema-conversion-settings.html">Specifying schema conversion
+    #               settings for migration projects</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Include only the sections and keys to change. The operation merges supplied
+    #               values with the existing configuration.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     class ModifyConversionConfigurationMessage < Struct.new(
       nil,
@@ -6398,8 +6917,8 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute data_provider_identifier
-    #   <p>The identifier of the data provider. Identifiers must begin with a letter 
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
+    #   <p>The identifier of the data provider. Identifiers must begin with a letter
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
     #            a hyphen, or contain two consecutive hyphens.</p>
     #   @return [String]
     # @!attribute data_provider_name
@@ -6409,9 +6928,12 @@ module Aws::DatabaseMigrationService
     #   <p>A user-friendly description of the data provider.</p>
     #   @return [String]
     # @!attribute engine
-    #   <p>The type of database engine for the data provider. Valid values include <code>"aurora"</code>, 
-    #            <code>"aurora-postgresql"</code>, <code>"mysql"</code>, <code>"oracle"</code>, <code>"postgres"</code>, 
-    #            <code>"sqlserver"</code>, <code>redshift</code>, <code>mariadb</code>, <code>mongodb</code>, <code>db2</code>, <code>db2-zos</code> and <code>docdb</code>. A value of <code>"aurora"</code> represents Amazon Aurora MySQL-Compatible Edition.</p>
+    #   <p>The type of database engine for the data provider.</p>
+    #            <p>Valid values: <code>aurora</code>, <code>aurora-postgresql</code>, <code>db2</code>,
+    #            <code>db2-zos</code>, <code>docdb</code>, <code>mariadb</code>, <code>mongodb</code>,
+    #            <code>mysql</code>, <code>oracle</code>, <code>postgres</code>, <code>redshift</code>,
+    #            <code>sqlserver</code>, and <code>sybase</code>. A value of <code>aurora</code> represents
+    #            Amazon Aurora MySQL-Compatible Edition.</p>
     #   @return [String]
     # @!attribute virtual
     #   <p>Indicates whether the data provider is virtual.</p>
@@ -6422,11 +6944,11 @@ module Aws::DatabaseMigrationService
     #            attribute is N, the current call to <code>ModifyDataProvider</code> does two things: </p>
     #            <ul>
     #               <li>
-    #                  <p>It replaces any data provider settings that already exist with new values, 
+    #                  <p>It replaces any data provider settings that already exist with new values,
     #               for settings with the same names.</p>
     #               </li>
     #               <li>
-    #                  <p>It creates new data provider settings that you specify in the call, 
+    #                  <p>It creates new data provider settings that you specify in the call,
     #               for settings with different names. </p>
     #               </li>
     #            </ul>
@@ -6761,15 +7283,15 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute instance_profile_identifier
-    #   <p>The identifier of the instance profile. Identifiers must begin with a letter and must contain 
-    #            only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive 
+    #   <p>The identifier of the instance profile. Identifiers must begin with a letter and must contain
+    #            only ASCII letters, digits, and hyphens. They can't end with a hyphen, or contain two consecutive
     #            hyphens.</p>
     #   @return [String]
     # @!attribute availability_zone
     #   <p>The Availability Zone where the instance profile runs.</p>
     #   @return [String]
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt 
+    #   <p>The Amazon Resource Name (ARN) of the KMS key that is used to encrypt
     #            the connection parameters for the instance profile.</p>
     #            <p>If you don't specify a value for the <code>KmsKeyArn</code> parameter, then
     #            DMS uses an Amazon Web Services owned encryption key to encrypt your resources.</p>
@@ -6781,10 +7303,10 @@ module Aws::DatabaseMigrationService
     #            is <code>true</code>.</p>
     #   @return [Boolean]
     # @!attribute network_type
-    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code> 
-    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing. 
-    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type 
-    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance 
+    #   <p>Specifies the network type for the instance profile. A value of <code>IPV4</code>
+    #            represents an instance profile with IPv4 network type and only supports IPv4 addressing.
+    #            A value of <code>IPV6</code> represents an instance profile with IPv6 network type
+    #            and only supports IPv6 addressing. A value of <code>DUAL</code> represents an instance
     #            profile with dual network type that supports IPv4 and IPv6 addressing.</p>
     #   @return [String]
     # @!attribute instance_profile_name
@@ -6797,7 +7319,7 @@ module Aws::DatabaseMigrationService
     #   <p>A subnet group to associate with the instance profile.</p>
     #   @return [String]
     # @!attribute vpc_security_groups
-    #   <p>Specifies the VPC security groups to be used with the instance profile. 
+    #   <p>Specifies the VPC security groups to be used with the instance profile.
     #            The VPC security group must work with the VPC containing the instance profile.</p>
     #   @return [Array<String>]
     class ModifyInstanceProfileMessage < Struct.new(
@@ -6828,8 +7350,8 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute migration_project_identifier
-    #   <p>The identifier of the migration project. Identifiers must begin with a letter 
-    #            and must contain only ASCII letters, digits, and hyphens. They can't end with 
+    #   <p>The identifier of the migration project. Identifiers must begin with a letter
+    #            and must contain only ASCII letters, digits, and hyphens. They can't end with
     #            a hyphen, or contain two consecutive hyphens.</p>
     #   @return [String]
     # @!attribute migration_project_name
@@ -6845,9 +7367,14 @@ module Aws::DatabaseMigrationService
     #   <p>The name or Amazon Resource Name (ARN) for the instance profile.</p>
     #   @return [String]
     # @!attribute transformation_rules
-    #   <p>The settings in JSON format for migration rules. Migration rules make it possible for you to change 
-    #            the object names according to the rules that you specify. For example, you can change an object name 
-    #            to lowercase or uppercase, add or remove a prefix or suffix, or rename objects.</p>
+    #   <p>A JSON string that specifies the transformation rules for the migration project.
+    #            Transformation rules let you customize how DMS Schema Conversion converts your source
+    #            database objects, including renaming, adding prefixes or suffixes, and changing data types.
+    #            For the transformation rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-transformation-rules.html">Transformation rules in DMS
+    #               Schema Conversion</a>.</p>
+    #            <note>
+    #               <p>Homogeneous data migrations do not support transformation rules.</p>
+    #            </note>
     #   @return [String]
     # @!attribute description
     #   <p>A user-friendly description of the migration project.</p>
@@ -7192,7 +7719,7 @@ module Aws::DatabaseMigrationService
     #   <p>The database name on the MongoDB data provider.</p>
     #   @return [String]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the MongoDB data provider. 
+    #   <p>The SSL mode used to connect to the MongoDB data provider.
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -7260,9 +7787,14 @@ module Aws::DatabaseMigrationService
     #            Specify <code>"one"</code> to use table mode.</p>
     #   @return [String]
     # @!attribute extract_doc_id
-    #   <p> Specifies the document ID. Use this setting when <code>NestingLevel</code> is set to
-    #               <code>"none"</code>. </p>
-    #            <p>Default value is <code>"false"</code>. </p>
+    #   <p>Specifies whether the document ID is added to the target table. Use this setting when
+    #              <code>NestingLevel</code> is set to <code>"none"</code>.
+    #          </p>
+    #            <p>Set <code>ExtractDocId</code> to <code>"true"</code> when using
+    #              <a href="https://www.mongodb.com/docs/manual/reference/method/Session.startTransaction/#mongodb-method-Session.startTransaction">multi-document transactions</a>
+    #              with CDC.
+    #          </p>
+    #            <p>Default value is <code>"false"</code>.</p>
     #   @return [String]
     # @!attribute docs_to_investigate
     #   <p> Indicates the number of documents to preview to determine the document organization.
@@ -7506,7 +8038,7 @@ module Aws::DatabaseMigrationService
     #   <p>The port value for the MySQL data provider.</p>
     #   @return [Integer]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the MySQL data provider. 
+    #   <p>The SSL mode used to connect to the MySQL data provider.
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -7593,16 +8125,16 @@ module Aws::DatabaseMigrationService
     #   <p>The database name on the Oracle data provider.</p>
     #   @return [String]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the Oracle data provider. 
+    #   <p>The SSL mode used to connect to the Oracle data provider.
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
     #   <p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>
     #   @return [String]
     # @!attribute asm_server
-    #   <p>The address of your Oracle Automatic Storage Management (ASM) server. You can set 
-    #            this value from the <code>asm_server</code> value. You set <code>asm_server</code> as part 
-    #            of the extra connection attribute string to access an Oracle server with Binary Reader that 
+    #   <p>The address of your Oracle Automatic Storage Management (ASM) server. You can set
+    #            this value from the <code>asm_server</code> value. You set <code>asm_server</code> as part
+    #            of the extra connection attribute string to access an Oracle server with Binary Reader that
     #            uses ASM. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.CDC.Configuration">Configuration for change data capture (CDC) on an Oracle source database</a>.</p>
     #   @return [String]
     # @!attribute secrets_manager_oracle_asm_secret_id
@@ -7610,16 +8142,16 @@ module Aws::DatabaseMigrationService
     #            <p>Required only if your data provider uses the Oracle ASM server.</p>
     #   @return [String]
     # @!attribute secrets_manager_oracle_asm_access_role_arn
-    #   <p>The ARN of the IAM role that provides access to the secret in Secrets Manager 
+    #   <p>The ARN of the IAM role that provides access to the secret in Secrets Manager
     #            that contains the Oracle ASM connection details.</p>
     #   @return [String]
     # @!attribute secrets_manager_security_db_encryption_secret_id
-    #   <p>The identifier of the secret in Secrets Manager that contains the transparent data encryption (TDE) 
-    #            password. DMS requires this password to access Oracle redo logs encrypted by TDE 
+    #   <p>The identifier of the secret in Secrets Manager that contains the transparent data encryption (TDE)
+    #            password. DMS requires this password to access Oracle redo logs encrypted by TDE
     #            using Binary Reader.</p>
     #   @return [String]
     # @!attribute secrets_manager_security_db_encryption_access_role_arn
-    #   <p>The ARN of the IAM role that provides access to the secret in Secrets Manager 
+    #   <p>The ARN of the IAM role that provides access to the secret in Secrets Manager
     #            that contains the TDE password.</p>
     #   @return [String]
     # @!attribute s3_path
@@ -7819,12 +8351,12 @@ module Aws::DatabaseMigrationService
     #   @return [Integer]
     # @!attribute security_db_encryption
     #   <p>For an Oracle source endpoint, the transparent data encryption (TDE) password required
-    #            by AWM DMS to access Oracle redo logs encrypted by TDE using Binary Reader. It is also the
+    #            by DMS to access Oracle redo logs encrypted by TDE using Binary Reader. It is also the
     #                  <code>
     #                  <i>TDE_Password</i>
     #               </code> part of the comma-separated value you
     #            set to the <code>Password</code> request parameter when you create the endpoint. The
-    #               <code>SecurityDbEncryptian</code> setting is related to this
+    #               <code>SecurityDbEncryption</code> setting is related to this
     #               <code>SecurityDbEncryptionName</code> setting. For more information, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.html#CHAP_Source.Oracle.Encryption"> Supported encryption methods for using Oracle as a source for
     #               DMS </a> in the <i>Database Migration Service User Guide</i>. </p>
     #   @return [String]
@@ -8302,7 +8834,7 @@ module Aws::DatabaseMigrationService
     #   <p>The database name on the PostgreSQL data provider.</p>
     #   @return [String]
     # @!attribute ssl_mode
-    #   <p>The SSL mode used to connect to the PostgreSQL data provider. 
+    #   <p>The SSL mode used to connect to the PostgreSQL data provider.
     #            The default value is <code>none</code>.</p>
     #   @return [String]
     # @!attribute certificate_arn
@@ -8446,6 +8978,88 @@ module Aws::DatabaseMigrationService
 
       def initialize(options = {})
         options[:fail_on_assessment_failure] = false unless options.key?(:fail_on_assessment_failure)
+        super
+      end
+    end
+
+    # <p>The database object that the schema conversion operation currently uses.</p>
+    # @!attribute name
+    #   <p>The name of the database object.</p>
+    #   @return [String]
+    # @!attribute type
+    #   <p>The type of the database object. For example, a table, view, procedure, and so on.</p>
+    #   @return [String]
+    # @!attribute endpoint_type
+    #   <p>The type of the data provider. This parameter can store one of the following values:
+    #            <code>"SOURCE"</code> or <code>"TARGET"</code>.</p>
+    #   @return [String]
+    class ProcessedObject < Struct.new(
+      nil,
+      :name,
+      :type,
+      :endpoint_type,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Provides information about the progress of the schema conversion operation.</p>
+    # @!attribute progress_percent
+    #   <p>The percent complete for the current step of the schema conversion operation.</p>
+    #   @return [Float]
+    # @!attribute total_objects
+    #   <p>The number of objects in this schema conversion operation.</p>
+    #   @return [Integer]
+    # @!attribute progress_step
+    #   <p>The step of the schema conversion operation. This parameter can store one of the following values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>IN_PROGRESS</code> – The operation is running.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>LOADING_METADATA</code> – Loads metadata from the source database.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>COUNTING_OBJECTS</code> – Determines the number of objects involved
+    #               in the operation.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>ANALYZING</code> – Analyzes the source database objects.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CONVERTING</code> – Converts the source database objects to a format compatible
+    #               with the target database.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>APPLYING</code> – Applies the converted code to the target database.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FINISHED</code> – The operation completed successfully.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute processed_object
+    #   <p>The name of the database object that the schema conversion operation currently uses.</p>
+    #   @return [Types::ProcessedObject]
+    class Progress < Struct.new(
+      nil,
+      :progress_percent,
+      :total_objects,
+      :progress_step,
+      :processed_object,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:total_objects] = 0 unless options.key?(:total_objects)
         super
       end
     end
@@ -8901,7 +9515,7 @@ module Aws::DatabaseMigrationService
     #            10.</p>
     #   @return [Integer]
     # @!attribute load_timeout
-    #   <p>The amount of time to wait (in milliseconds) before timing out of operations performed
+    #   <p>The amount of time to wait (in seconds) before timing out of operations performed
     #            by DMS on a Redshift cluster, such as Redshift COPY, INSERT, DELETE, and UPDATE.</p>
     #   @return [Integer]
     # @!attribute max_file_size
@@ -9329,6 +9943,12 @@ module Aws::DatabaseMigrationService
     # @!attribute replication_deprovision_time
     #   <p>The timestamp when DMS will deprovision the replication.</p>
     #   @return [Time]
+    # @!attribute is_read_only
+    #   <p>Indicates whether the serverless replication is read-only. When set to <code>true</code>,
+    #            this replication is managed by DMS as part of a zero-ETL integration and cannot be modified
+    #            or deleted directly. You can only modify or delete read-only replications through their
+    #            associated zero-ETL integration.</p>
+    #   @return [Boolean]
     class Replication < Struct.new(
       nil,
       :replication_config_identifier,
@@ -9351,6 +9971,7 @@ module Aws::DatabaseMigrationService
       :replication_update_time,
       :replication_last_stop_time,
       :replication_deprovision_time,
+      :is_read_only,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9394,6 +10015,12 @@ module Aws::DatabaseMigrationService
     # @!attribute replication_config_update_time
     #   <p>The time the serverless replication config was updated.</p>
     #   @return [Time]
+    # @!attribute is_read_only
+    #   <p>Indicates whether the replication configuration is read-only. When set to <code>true</code>,
+    #            this replication configuration is managed by DMS as part of a zero-ETL integration and cannot
+    #            be modified or deleted directly. You can only modify or delete read-only replication configurations
+    #            through their associated zero-ETL integration.</p>
+    #   @return [Boolean]
     class ReplicationConfig < Struct.new(
       nil,
       :replication_config_identifier,
@@ -9407,6 +10034,7 @@ module Aws::DatabaseMigrationService
       :table_mappings,
       :replication_config_create_time,
       :replication_config_update_time,
+      :is_read_only,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -9794,6 +10422,12 @@ module Aws::DatabaseMigrationService
     #            instance with values such as IPv4 only or Dual-stack that supports both IPv4 and IPv6
     #            addressing. IPv6 only is not yet supported.</p>
     #   @return [Array<String>]
+    # @!attribute is_read_only
+    #   <p>Indicates whether the replication subnet group is read-only. When set to <code>true</code>,
+    #            this subnet group is managed by DMS as part of a zero-ETL integration and cannot be modified
+    #            or deleted directly. You can only modify or delete read-only subnet groups through their
+    #            associated zero-ETL integration.</p>
+    #   @return [Boolean]
     class ReplicationSubnetGroup < Struct.new(
       nil,
       :replication_subnet_group_identifier,
@@ -9802,6 +10436,7 @@ module Aws::DatabaseMigrationService
       :subnet_group_status,
       :subnets,
       :supported_network_types,
+      :is_read_only,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11162,7 +11797,33 @@ module Aws::DatabaseMigrationService
 
     # <p>Provides information about a schema conversion action.</p>
     # @!attribute status
-    #   <p>The schema conversion action status.</p>
+    #   <p>The schema conversion operation status. Possible values:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>
+    #                     <code>RECEIVED</code> – The operation is received but not yet queued for processing.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>IN_PROGRESS</code> – The operation is queued or actively running.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>SUCCESS</code> – The operation completed successfully.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>FAILED</code> – The operation did not complete.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CANCELING</code> – The operation is being canceled. The operation might still succeed or fail before cancellation takes effect.</p>
+    #               </li>
+    #               <li>
+    #                  <p>
+    #                     <code>CANCELED</code> – The operation was canceled before completion.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute request_identifier
     #   <p>The identifier for the schema conversion action.</p>
@@ -11174,8 +11835,14 @@ module Aws::DatabaseMigrationService
     #   <p>Provides error information about a project.</p>
     #   @return [Types::ErrorDetails]
     # @!attribute export_sql_details
-    #   <p>Provides information about a metadata model assessment exported to SQL.</p>
+    #   <p>The Amazon S3 location of the ZIP archive that contains the exported data definition language (DDL) scripts.</p>
+    #            <note>
+    #               <p>DMS populates this field only for the <code>DescribeMetadataModelExportsAsScript</code> operation.</p>
+    #            </note>
     #   @return [Types::ExportSqlDetails]
+    # @!attribute progress
+    #   <p>Provides information about the progress of the schema conversion operation.</p>
+    #   @return [Types::Progress]
     class SchemaConversionRequest < Struct.new(
       nil,
       :status,
@@ -11183,6 +11850,7 @@ module Aws::DatabaseMigrationService
       :migration_project_arn,
       :error,
       :export_sql_details,
+      :progress,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -11346,7 +12014,7 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute request_identifier
-    #   <p>The identifier for the request operation.</p>
+    #   <p>The identifier for the installation request.</p>
     #   @return [String]
     class StartExtensionPackAssociationResponse < Struct.new(
       nil,
@@ -11360,7 +12028,16 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute selection_rules
-    #   <p>A value that specifies the database objects to assess.</p>
+    #   <p>A JSON string that identifies the metadata models to assess. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     class StartMetadataModelAssessmentMessage < Struct.new(
       nil,
@@ -11372,7 +12049,7 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute request_identifier
-    #   <p>The identifier for the assessment operation.</p>
+    #   <p>The identifier for the assessment request.</p>
     #   @return [String]
     class StartMetadataModelAssessmentResponse < Struct.new(
       nil,
@@ -11386,7 +12063,16 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute selection_rules
-    #   <p>A value that specifies the database objects to convert.</p>
+    #   <p>A JSON string that identifies the metadata models to convert. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     class StartMetadataModelConversionMessage < Struct.new(
       nil,
@@ -11398,7 +12084,7 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute request_identifier
-    #   <p>The identifier for the conversion operation.</p>
+    #   <p>The identifier for the conversion request.</p>
     #   @return [String]
     class StartMetadataModelConversionResponse < Struct.new(
       nil,
@@ -11412,13 +12098,72 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute selection_rules
-    #   <p>A value that specifies the database objects to export.</p>
+    #   <p>A JSON string that identifies the source schema for the metadata model. For the
+    #            selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema
+    #               Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only source selection rules, where <code>server-name</code> in the
+    #               object locator matches the source data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports only <code>explicit</code> rule actions.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Exactly one rule is allowed.</p>
+    #               </li>
+    #            </ul>
+    #   @return [String]
+    # @!attribute metadata_model_name
+    #   <p>The name for the metadata model to use in subsequent operations.</p>
+    #   @return [String]
+    # @!attribute properties
+    #   <p>The properties of the metadata model.</p>
+    #   @return [Types::MetadataModelProperties]
+    class StartMetadataModelCreationMessage < Struct.new(
+      nil,
+      :migration_project_identifier,
+      :selection_rules,
+      :metadata_model_name,
+      :properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute request_identifier
+    #   <p>The identifier for the creation request.</p>
+    #   @return [String]
+    class StartMetadataModelCreationResponse < Struct.new(
+      nil,
+      :request_identifier,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute migration_project_identifier
+    #   <p>The migration project name or Amazon Resource Name (ARN).</p>
+    #   @return [String]
+    # @!attribute selection_rules
+    #   <p>A JSON string that identifies the metadata models to export as a SQL script. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts source or target selection rules depending on the <code>Origin</code> parameter. The <code>server-name</code> in the object locator must match the corresponding data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute origin
-    #   <p>Whether to export the metadata model from the source or the target.</p>
+    #   <p>Specifies the metadata tree to export from.</p>
     #   @return [String]
     # @!attribute file_name
-    #   <p>The name of the model file to create in the Amazon S3 bucket.</p>
+    #   <p>The name for the exported file. When you omit this parameter, the service generates
+    #            a name from the data provider engine name and an export timestamp.</p>
     #   @return [String]
     class StartMetadataModelExportAsScriptMessage < Struct.new(
       nil,
@@ -11432,7 +12177,7 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute request_identifier
-    #   <p>The identifier for the export operation.</p>
+    #   <p>The identifier for the export request.</p>
     #   @return [String]
     class StartMetadataModelExportAsScriptResponse < Struct.new(
       nil,
@@ -11446,12 +12191,20 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute selection_rules
-    #   <p>A value that specifies the database objects to export.</p>
+    #   <p>A JSON string that identifies the metadata models to export to the target database. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts only target selection rules, where <code>server-name</code> in the object locator matches the target data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute overwrite_extension_pack
-    #   <p>Whether to overwrite the migration project extension pack. An extension pack is an add-on module 
-    #            that emulates functions present in a source database that are required when converting objects 
-    #            to the target database.</p>
+    #   <p>Specifies whether to overwrite the extension pack if one already exists on the
+    #            target database. The default value is <code>true</code>.</p>
     #   @return [Boolean]
     class StartMetadataModelExportToTargetMessage < Struct.new(
       nil,
@@ -11464,7 +12217,7 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute request_identifier
-    #   <p>The identifier for the export operation.</p>
+    #   <p>The identifier for the export request.</p>
     #   @return [String]
     class StartMetadataModelExportToTargetResponse < Struct.new(
       nil,
@@ -11478,13 +12231,30 @@ module Aws::DatabaseMigrationService
     #   <p>The migration project name or Amazon Resource Name (ARN).</p>
     #   @return [String]
     # @!attribute selection_rules
-    #   <p>A value that specifies the database objects to import.</p>
+    #   <p>A JSON string that identifies the metadata models to import from the data provider. For the selection rule format and examples, see <a href="https://docs.aws.amazon.com/dms/latest/userguide/sc-selection-rules.html">Selection rules in DMS Schema Conversion</a>.</p>
+    #            <p>Usage:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Accepts source or target selection rules depending on the <code>Origin</code> parameter. The <code>server-name</code> in the object locator must match the corresponding data provider.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Supports <code>explicit</code>, <code>include</code>, and <code>exclude</code> rule actions.</p>
+    #               </li>
+    #            </ul>
     #   @return [String]
     # @!attribute origin
-    #   <p>Whether to load metadata to the source or target database.</p>
+    #   <p>Specifies the metadata tree to import into.</p>
+    #            <note>
+    #               <p>You cannot import from a virtual target data provider.</p>
+    #            </note>
     #   @return [String]
     # @!attribute refresh
-    #   <p>If <code>true</code>, DMS loads metadata for the specified objects from the source database.</p>
+    #   <p>Specifies whether to refresh the selected metadata models from the data
+    #            provider.</p>
+    #            <p>When <code>true</code>, the import reloads the selected metadata models with
+    #            current definitions and removes their existing subtree.</p>
+    #            <p>When <code>false</code> (default), the import loads the full subtree that has not
+    #            yet been loaded into the metadata tree.</p>
     #   @return [Boolean]
     class StartMetadataModelImportMessage < Struct.new(
       nil,
@@ -11498,7 +12268,7 @@ module Aws::DatabaseMigrationService
     end
 
     # @!attribute request_identifier
-    #   <p>The identifier for the import operation.</p>
+    #   <p>The identifier for the import request.</p>
     #   @return [String]
     class StartMetadataModelImportResponse < Struct.new(
       nil,
@@ -11846,6 +12616,18 @@ module Aws::DatabaseMigrationService
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The properties of the SQL statement.</p>
+    # @!attribute definition
+    #   <p>The SQL text of the statement.</p>
+    #   @return [String]
+    class StatementProperties < Struct.new(
+      nil,
+      :definition,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute data_migration_identifier
     #   <p>The identifier (name or ARN) of the data migration to stop.</p>
     #   @return [String]
@@ -12006,6 +12788,39 @@ module Aws::DatabaseMigrationService
         options[:supports_cdc] = false unless options.key?(:supports_cdc)
         super
       end
+    end
+
+    # <p>Provides information that defines an SAP ASE data provider.</p>
+    # @!attribute server_name
+    #   <p>The name of the SAP ASE server.</p>
+    #   @return [String]
+    # @!attribute port
+    #   <p>The port value for the SAP ASE data provider.</p>
+    #   @return [Integer]
+    # @!attribute database_name
+    #   <p>The database name on the SAP ASE data provider.</p>
+    #   @return [String]
+    # @!attribute ssl_mode
+    #   <p>The SSL mode used to connect to the SAP ASE data provider.
+    #            The default value is <code>none</code>.</p>
+    #   @return [String]
+    # @!attribute encrypt_password
+    #   <p>Specifies whether to encrypt the password when connecting to the Sybase ASE database. When set to true, the connection password is encrypted during transmission. Default is true.</p>
+    #   @return [Boolean]
+    # @!attribute certificate_arn
+    #   <p>The Amazon Resource Name (ARN) of the certificate used for SSL connection.</p>
+    #   @return [String]
+    class SybaseAseDataProviderSettings < Struct.new(
+      nil,
+      :server_name,
+      :port,
+      :database_name,
+      :ssl_mode,
+      :encrypt_password,
+      :certificate_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
     end
 
     # <p>Provides information that defines a SAP ASE endpoint.</p>

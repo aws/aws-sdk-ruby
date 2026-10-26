@@ -144,18 +144,18 @@ module Aws::EFS
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -236,7 +236,7 @@ module Aws::EFS
     #   <p>A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent
     #         creation.</p>
     # @option params [Array<Types::Tag>] :tags
-    #   <p>Creates tags associated with the access point. Each tag is a key-value pair, each key must be unique. For more 
+    #   <p>Creates tags associated with the access point. Each tag is a key-value pair, each key must be unique. For more
     #         information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>
     #         in the <i>Amazon Web Services General Reference Guide</i>.</p>
     # @option params [String] :file_system_id
@@ -251,8 +251,8 @@ module Aws::EFS
     #           <code>RootDirectory</code> > <code>Path</code> specified does not exist, Amazon EFS creates it and applies the <code>CreationInfo</code> settings when a client connects to an
     #         access point. When specifying a <code>RootDirectory</code>, you must provide the
     #           <code>Path</code>, and the <code>CreationInfo</code>.</p>
-    #            <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory. 
-    #         If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount 
+    #            <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory.
+    #         If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount
     #         using the access point will fail.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -342,7 +342,7 @@ module Aws::EFS
     #       be that a transport level timeout occurred or your connection was reset. As long as you use
     #       the same creation token, if the initial call had succeeded in creating a file system, the
     #       client can learn of its existence from the <code>FileSystemAlreadyExists</code> error.</p>
-    #          <p>For more information, see 
+    #          <p>For more information, see
     #       <a href="https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1">Creating a file system</a>
     #      in the <i>Amazon EFS User Guide</i>.</p>
     #          <note>
@@ -417,10 +417,10 @@ module Aws::EFS
     #               <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>
     #               </li>
     #            </ul>
-    #            <p>If you use <code>KmsKeyId</code>, you must set the <a>CreateFileSystemRequest$Encrypted</a> 
+    #            <p>If you use <code>KmsKeyId</code>, you must set the <a>CreateFileSystemRequest$Encrypted</a>
     #         parameter to true.</p>
     #            <important>
-    #               <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric 
+    #               <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric
     #         KMS keys with Amazon EFS file systems.</p>
     #            </important>
     # @option params [String] :throughput_mode
@@ -437,7 +437,7 @@ module Aws::EFS
     #   <p>The throughput, measured in mebibytes per second (MiBps), that you want to provision for a
     #         file system that you're creating. Required if <code>ThroughputMode</code> is set to
     #           <code>provisioned</code>. Valid values are 1-3414 MiBps, with the upper limit depending on
-    #         Region. To increase this limit, contact Amazon Web ServicesSupport. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS quotas
+    #         Region. To increase this limit, contact Amazon Web Services Support. For more information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS quotas
     #           that you can increase</a> in the <i>Amazon EFS User
     #         Guide</i>.</p>
     # @option params [String] :availability_zone_name
@@ -454,7 +454,7 @@ module Aws::EFS
     #         One Zone file system, automatic backups are enabled by default. For more
     #         information, see <a href="https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups">Automatic backups</a> in the
     #             <i>Amazon EFS User Guide</i>.</p>
-    #            <p>Default is <code>false</code>. However, if you specify an <code>AvailabilityZoneName</code>, 
+    #            <p>Default is <code>false</code>. However, if you specify an <code>AvailabilityZoneName</code>,
     #         the default is <code>true</code>.</p>
     #            <note>
     #               <p>Backup is not available in all Amazon Web Services Regions where Amazon EFS is available.</p>
@@ -462,7 +462,7 @@ module Aws::EFS
     # @option params [Array<Types::Tag>] :tags
     #   <p>Use to create one or more tags associated with the file system. Each
     #           tag is a user-defined key-value pair. Name your file system on creation by including a
-    #           <code>"Key":"Name","Value":"{value}"</code> key-value pair. Each key must be unique. For more 
+    #           <code>"Key":"Name","Value":"{value}"</code> key-value pair. Each key must be unique. For more
     #           information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html">Tagging Amazon Web Services resources</a>
     #           in the <i>Amazon Web Services General Reference Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -780,7 +780,7 @@ module Aws::EFS
     #              Guide</i>.</p>
     # @param [Hash, Types::CreateReplicationConfigurationRequest] params
     # @option params [String] :source_file_system_id
-    #   <p>Specifies the Amazon EFS file system that you want to replicate. This file system cannot already be 
+    #   <p>Specifies the Amazon EFS file system that you want to replicate. This file system cannot already be
     #       a source or destination file system in another replication configuration.</p>
     # @option params [Array<Types::DestinationToCreate>] :destinations
     #   <p>An array of destination configuration objects. Only one destination configuration object is supported.</p>
@@ -881,8 +881,8 @@ module Aws::EFS
       request.send_request(options)
     end
 
-    # <p>Deletes the specified access point. After deletion is complete, new clients can no 
-    #       longer connect to the access points. Clients connected to the access point at the time of 
+    # <p>Deletes the specified access point. After deletion is complete, new clients can no
+    #       longer connect to the access points. Clients connected to the access point at the time of
     #       deletion will continue to function until they terminate their connection.</p>
     #          <p>This operation requires permissions for the <code>elasticfilesystem:DeleteAccessPoint</code> action.</p>
     # @param [Hash, Types::DeleteAccessPointRequest] params
@@ -907,10 +907,10 @@ module Aws::EFS
     #       file system no longer exists and you can't access any contents of the deleted file
     #       system.</p>
     #          <p>You need to manually delete mount targets attached to a file system before you can delete
-    #     an EFS file system. This step is performed for you when you use the Amazon Web Services console 
+    #     an EFS file system. This step is performed for you when you use the Amazon Web Services console
     #     to delete a file system.</p>
     #          <note>
-    #             <p>You cannot delete a file system that is part of an EFS replication configuration. 
+    #             <p>You cannot delete a file system that is part of an EFS replication configuration.
     #       You need to delete the replication configuration first.</p>
     #          </note>
     #          <p> You can't delete a file system that is in use. That is, if the file system has
@@ -950,8 +950,8 @@ module Aws::EFS
       request.send_request(options)
     end
 
-    # <p>Deletes the <code>FileSystemPolicy</code> for the specified file system. 
-    #       The default <code>FileSystemPolicy</code> goes into effect once the existing policy is deleted. 
+    # <p>Deletes the <code>FileSystemPolicy</code> for the specified file system.
+    #       The default <code>FileSystemPolicy</code> goes into effect once the existing policy is deleted.
     #       For more information about the default file system policy, see <a href="https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html">Using Resource-based Policies with EFS</a>.</p>
     #          <p>This operation requires permissions for the <code>elasticfilesystem:DeleteFileSystemPolicy</code> action.</p>
     # @param [Hash, Types::DeleteFileSystemPolicyRequest] params
@@ -1041,19 +1041,19 @@ module Aws::EFS
     # @option params [String] :source_file_system_id
     #   <p>The ID of the source file system in the replication configuration.</p>
     # @option params [String] :deletion_mode
-    #   <p>When replicating across Amazon Web Services accounts or across Amazon Web Services Regions, 
-    #         Amazon EFS deletes the replication configuration from both the source 
-    #         and destination account or Region (<code>ALL_CONFIGURATIONS</code>) by default. 
-    #         If there's a configuration or permissions issue that prevents Amazon EFS from deleting the 
+    #   <p>When replicating across Amazon Web Services accounts or across Amazon Web Services Regions,
+    #         Amazon EFS deletes the replication configuration from both the source
+    #         and destination account or Region (<code>ALL_CONFIGURATIONS</code>) by default.
+    #         If there's a configuration or permissions issue that prevents Amazon EFS from deleting the
     #         replication configuration from both sides, you can use the <code>LOCAL_CONFIGURATION_ONLY</code> mode
     #         to delete the replication configuration from only the local side (the account
     #          or Region from which the delete is performed). </p>
     #            <note>
     #               <p>Only use the <code>LOCAL_CONFIGURATION_ONLY</code> mode in the case that Amazon EFS is unable
-    #          to delete the replication configuration in both the source and destination account or Region. 
-    #           Deleting the local configuration 
+    #          to delete the replication configuration in both the source and destination account or Region.
+    #           Deleting the local configuration
     #          leaves the configuration in the other account or Region unrecoverable.</p>
-    #               <p>Additionally, do not use this mode for same-account, same-region replication as doing so results in a 
+    #               <p>Additionally, do not use this mode for same-account, same-region replication as doing so results in a
     #           BadRequest exception error.</p>
     #            </note>
     # @example Request syntax with placeholder values
@@ -1126,11 +1126,11 @@ module Aws::EFS
     # @param [Hash, Types::DescribeAccessPointsRequest] params
     # @option params [Integer] :max_results
     #   <p>(Optional) When retrieving all access points for a file system,
-    #         you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.  
+    #         you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.
     #         The default value is 100. </p>
     # @option params [String] :next_token
     #   <p>
-    #               <code>NextToken</code> is present if the response is paginated. You can use 
+    #               <code>NextToken</code> is present if the response is paginated. You can use
     #         <code>NextMarker</code> in the subsequent request to fetch the next page of access point descriptions.</p>
     # @option params [String] :access_point_id
     #   <p>(Optional) Specifies an EFS access point to describe in the response; mutually
@@ -1191,11 +1191,11 @@ module Aws::EFS
     # <p>Returns the account preferences settings for the Amazon Web Services account associated with the user making the request, in the current Amazon Web Services Region.</p>
     # @param [Hash, Types::DescribeAccountPreferencesRequest] params
     # @option params [String] :next_token
-    #   <p>(Optional) You can use <code>NextToken</code> in a subsequent request to fetch the next page of 
+    #   <p>(Optional) You can use <code>NextToken</code> in a subsequent request to fetch the next page of
     #         Amazon Web Services account preferences if the response payload was paginated.</p>
     # @option params [Integer] :max_results
     #   <p>(Optional) When retrieving account preferences,
-    #         you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.  
+    #         you can optionally specify the <code>MaxItems</code> parameter to limit the number of objects returned in a response.
     #         The default value is 100. </p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1270,7 +1270,7 @@ module Aws::EFS
 
     # <p>Returns the description of a specific Amazon EFS file system if either the file system
     #         <code>CreationToken</code> or the <code>FileSystemId</code> is provided. Otherwise, it
-    #       returns descriptions of all file systems owned by the caller's Amazon Web Services account in the 
+    #       returns descriptions of all file systems owned by the caller's Amazon Web Services account in the
     #       Amazon Web Services Region of the endpoint that you're calling.</p>
     #          <p>When retrieving all file system descriptions, you can optionally specify the
     #         <code>MaxItems</code> parameter to limit the number of descriptions in a response.
@@ -1371,7 +1371,7 @@ module Aws::EFS
     #   <p>The ID of the file system whose <code>LifecycleConfiguration</code> object you want to
     #         retrieve (String).</p>
     # @example To describe the lifecycle configuration for a file system
-    #   # This operation describes a file system's LifecycleConfiguration. EFS lifecycle management uses the LifecycleConfiguration object to identify which files to move to the EFS Infrequent Access (IA) storage class. 
+    #   # This operation describes a file system's LifecycleConfiguration. EFS lifecycle management uses the LifecycleConfiguration object to identify which files to move to the EFS Infrequent Access (IA) storage class.
     #   params = {
     #     file_system_id: "fs-01234567"
     #   }
@@ -1838,10 +1838,10 @@ module Aws::EFS
     #         policy definition. EFS file system policies have a 20,000 character limit. To find
     #         out more about the elements that make up a file system policy, see <a href="https://docs.aws.amazon.com/efs/latest/ug/security_iam_service-with-iam.html#security_iam_service-with-iam-resource-based-policies">Resource-based policies within Amazon EFS</a>. </p>
     # @option params [Boolean] :bypass_policy_lockout_safety_check
-    #   <p>(Optional) A boolean that specifies whether or not to bypass the <code>FileSystemPolicy</code> lockout safety check. The lockout safety check 
+    #   <p>(Optional) A boolean that specifies whether or not to bypass the <code>FileSystemPolicy</code> lockout safety check. The lockout safety check
     #         determines whether the policy in the request will lock out, or prevent, the IAM principal that is making the request from making future <code>PutFileSystemPolicy</code> requests on this file system.
-    #         Set <code>BypassPolicyLockoutSafetyCheck</code> to <code>True</code> only when you intend to prevent 
-    #         the IAM principal that is making the request from making subsequent <code>PutFileSystemPolicy</code> requests on this file system. 
+    #         Set <code>BypassPolicyLockoutSafetyCheck</code> to <code>True</code> only when you intend to prevent
+    #         the IAM principal that is making the request from making subsequent <code>PutFileSystemPolicy</code> requests on this file system.
     #         The default value is <code>False</code>.
     #       </p>
     # @example Request syntax with placeholder values
@@ -1873,7 +1873,7 @@ module Aws::EFS
     #                   <b>
     #                      <code>TransitionToIA</code>
     #                   </b> –
-    #           When to move files in the file system from primary storage (Standard storage class) into the Infrequent Access 
+    #           When to move files in the file system from primary storage (Standard storage class) into the Infrequent Access
     #         (IA) storage.</p>
     #             </li>
     #             <li>
@@ -1881,12 +1881,12 @@ module Aws::EFS
     #                   <b>
     #                      <code>TransitionToArchive</code>
     #                   </b> –
-    #           When to move files in the file system from their current storage class (either IA or Standard storage) into the 
+    #           When to move files in the file system from their current storage class (either IA or Standard storage) into the
     #          Archive storage.</p>
-    #                <p>File systems cannot transition into Archive storage before transitioning into IA  storage. Therefore,  
+    #                <p>File systems cannot transition into Archive storage before transitioning into IA  storage. Therefore,
     #         TransitionToArchive must either not be set or must be later than TransitionToIA.</p>
     #                <note>
-    #                   <p> The Archive storage class is available only for file systems that use the Elastic throughput mode 
+    #                   <p> The Archive storage class is available only for file systems that use the Elastic throughput mode
     # and the General Purpose performance mode. </p>
     #                </note>
     #             </li>
@@ -1919,8 +1919,8 @@ module Aws::EFS
     #           define when to move files to IA storage, to Archive storage,
     #           and back to primary storage.</p>
     #                <note>
-    #                   <p>Amazon EFS requires that each <code>LifecyclePolicy</code> 
-    #           object have only have a single transition, so the <code>LifecyclePolicies</code> array needs to be structured with separate 
+    #                   <p>Amazon EFS requires that each <code>LifecyclePolicy</code>
+    #           object have only have a single transition, so the <code>LifecyclePolicies</code> array needs to be structured with separate
     #           <code>LifecyclePolicy</code> objects. See the example requests in the following section for more information.</p>
     #                </note>
     #             </li>
@@ -1941,8 +1941,8 @@ module Aws::EFS
     #                  <p>
     #                     <b>
     #                        <code>TransitionToIA</code>
-    #                     </b> – 
-    #         When to move files in the file system from primary storage (Standard storage class) into the Infrequent Access 
+    #                     </b> –
+    #         When to move files in the file system from primary storage (Standard storage class) into the Infrequent Access
     #           (IA) storage.</p>
     #               </li>
     #               <li>
@@ -1950,12 +1950,12 @@ module Aws::EFS
     #                     <b>
     #                        <code>TransitionToArchive</code>
     #                     </b> –
-    #             When to move files in the file system from their current storage class (either IA or Standard storage) into the 
+    #             When to move files in the file system from their current storage class (either IA or Standard storage) into the
     #            Archive storage.</p>
-    #                  <p>File systems cannot transition into Archive storage before transitioning into IA  storage. Therefore,  
+    #                  <p>File systems cannot transition into Archive storage before transitioning into IA  storage. Therefore,
     #           TransitionToArchive must either not be set or must be later than TransitionToIA.</p>
     #                  <note>
-    #                     <p>The Archive storage class is available only for file systems that use the Elastic throughput mode 
+    #                     <p>The Archive storage class is available only for file systems that use the Elastic throughput mode
     #   and the General Purpose performance mode. </p>
     #                  </note>
     #               </li>
@@ -2088,13 +2088,13 @@ module Aws::EFS
     # @option params [String] :throughput_mode
     #   <p>(Optional) Updates the file system's throughput mode. If you're not
     #         updating your throughput mode, you don't need to provide this value in your
-    #         request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, 
+    #         request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>,
     #         you must also set a value for <code>ProvisionedThroughputInMibps</code>.</p>
     # @option params [Float] :provisioned_throughput_in_mibps
     #   <p>(Optional) The throughput, measured in mebibytes per second (MiBps), that you want to
     #         provision for a file system that you're creating. Required if <code>ThroughputMode</code>
     #         is set to <code>provisioned</code>. Valid values are 1-3414 MiBps, with the upper limit
-    #         depending on Region. To increase this limit, contact Amazon Web ServicesSupport. For more information,
+    #         depending on Region. To increase this limit, contact Amazon Web Services Support. For more information,
     #         see <a href="https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits">Amazon EFS
     #           quotas that you can increase</a> in the <i>Amazon EFS User
     #           Guide</i>.</p>

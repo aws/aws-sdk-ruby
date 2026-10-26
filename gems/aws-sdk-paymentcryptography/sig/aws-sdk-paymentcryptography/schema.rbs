@@ -8,6 +8,10 @@ module Aws::PaymentCryptography
     Alias: StructureShape
     AliasName: StringShape
     Aliases: ListShape
+    As2805KeyVariant: EnumShape
+    AssociateMpaTeamInput: StructureShape
+    AssociateMpaTeamOutput: StructureShape
+    AssociationState: StringShape
     CertificateSigningRequestType: StringShape
     CertificateSubjectType: StructureShape
     CertificateType: StringShape
@@ -20,13 +24,18 @@ module Aws::PaymentCryptography
     DeleteAliasOutput: StructureShape
     DeleteKeyInput: StructureShape
     DeleteKeyOutput: StructureShape
+    DeleteResourcePolicyInput: StructureShape
+    DeleteResourcePolicyOutput: StructureShape
     DeriveKeyUsage: StringShape
     DiffieHellmanDerivationData: UnionShape
     DisableDefaultKeyReplicationRegionsInput: StructureShape
     DisableDefaultKeyReplicationRegionsOutput: StructureShape
+    DisassociateMpaTeamInput: StructureShape
+    DisassociateMpaTeamOutput: StructureShape
     EnableDefaultKeyReplicationRegionsInput: StructureShape
     EnableDefaultKeyReplicationRegionsOutput: StructureShape
     EvenHexLengthBetween16And32: StringShape
+    ExportAs2805KeyCryptogram: StructureShape
     ExportAttributes: StructureShape
     ExportDiffieHellmanTr31KeyBlock: StructureShape
     ExportDukptInitialKey: StructureShape
@@ -45,13 +54,18 @@ module Aws::PaymentCryptography
     GetDefaultKeyReplicationRegionsOutput: StructureShape
     GetKeyInput: StructureShape
     GetKeyOutput: StructureShape
+    GetMpaTeamAssociationInput: StructureShape
+    GetMpaTeamAssociationOutput: StructureShape
     GetParametersForExportInput: StructureShape
     GetParametersForExportOutput: StructureShape
     GetParametersForImportInput: StructureShape
     GetParametersForImportOutput: StructureShape
     GetPublicKeyCertificateInput: StructureShape
     GetPublicKeyCertificateOutput: StructureShape
+    GetResourcePolicyInput: StructureShape
+    GetResourcePolicyOutput: StructureShape
     HexLength20Or24: StringShape
+    ImportAs2805KeyCryptogram: StructureShape
     ImportDiffieHellmanTr31KeyBlock: StructureShape
     ImportKeyCryptogram: StructureShape
     ImportKeyInput: StructureShape
@@ -90,11 +104,21 @@ module Aws::PaymentCryptography
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
     MaxResults: IntegerShape
+    MpaOperation: StringShape
+    MpaRequesterComment: StringShape
+    MpaSessionArn: StringShape
+    MpaStatus: StructureShape
+    MpaStatusMessage: StringShape
+    MpaTeamArn: StringShape
+    MpaTeamAssociation: StructureShape
     MultiRegionKeyType: StringShape
     NextToken: StringShape
     OptionalBlockId: StringShape
     OptionalBlockValue: StringShape
     OptionalBlocks: MapShape
+    PublicPolicyException: StructureShape
+    PutResourcePolicyInput: StructureShape
+    PutResourcePolicyOutput: StructureShape
     Region: StringShape
     Regions: ListShape
     RemoveKeyReplicationRegionsInput: StructureShape
@@ -103,11 +127,13 @@ module Aws::PaymentCryptography
     ReplicationStatusType: StructureShape
     ResourceArn: StringShape
     ResourceNotFoundException: StructureShape
+    ResourcePolicy: StringShape
     RestoreKeyInput: StructureShape
     RestoreKeyOutput: StructureShape
     RootCertificatePublicKey: StructureShape
     ServiceQuotaExceededException: StructureShape
     ServiceUnavailableException: StructureShape
+    SessionStatus: StringShape
     SharedInformation: StringShape
     SigningAlgorithmType: StringShape
     StartKeyUsageInput: StructureShape

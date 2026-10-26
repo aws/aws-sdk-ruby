@@ -404,6 +404,47 @@ module Aws::Athena
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A classification refers to a set of specific configurations.</p>
+    # @!attribute name
+    #   <p>The name of the configuration classification.</p>
+    #   @return [String]
+    # @!attribute properties
+    #   <p>A set of properties specified within a configuration classification.</p>
+    #   @return [Hash<String, String>]
+    class Classification < Struct.new(
+      nil,
+      :name,
+      :properties,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Configuration settings for delivering logs to Amazon CloudWatch log groups.</p>
+    # @!attribute enabled
+    #   <p>Enables CloudWatch logging.</p>
+    #   @return [Boolean]
+    # @!attribute log_group
+    #   <p>The name of the log group in Amazon CloudWatch Logs where you want to publish
+    #               your logs.</p>
+    #   @return [String]
+    # @!attribute log_stream_name_prefix
+    #   <p>Prefix for the CloudWatch log stream name.</p>
+    #   @return [String]
+    # @!attribute log_types
+    #   <p>The types of logs that you want to publish to CloudWatch.</p>
+    #   @return [Hash<String, Array<String>>]
+    class CloudWatchLoggingConfiguration < Struct.new(
+      nil,
+      :enabled,
+      :log_group,
+      :log_stream_name_prefix,
+      :log_types,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>Contains metadata for a column in a table.</p>
     # @!attribute name
     #   <p>The name of the column.</p>
@@ -1340,8 +1381,10 @@ module Aws::Athena
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Contains data processing unit (DPU) configuration settings and parameter mappings for
-    #             a notebook engine.</p>
+    # <p>The engine configuration for the workgroup, which includes the minimum/maximum number of Data Processing Units (DPU) that queries should use when
+    #             running in provisioned capacity. If not specified, Athena uses default values (Default value for min is 4 and for max is Minimum of 124 and allocated DPUs).</p>
+    #          <p>To specify DPU values for PC queries the WG containing EngineConfiguration should have the following values:
+    #         The name of the Classifications should be <code>athena-query-engine-properties</code>, with the only allowed properties as <code>max-dpu-count</code> and <code>min-dpu-count</code>.</p>
     # @!attribute coordinator_dpu_size
     #   <p>The number of DPUs to use for the coordinator. A coordinator is a special executor
     #               that orchestrates processing work and manages other executors in a notebook session. The
@@ -1366,6 +1409,9 @@ module Aws::Athena
     #   <p>Specifies custom jar files and Spark properties for use cases like cluster encryption,
     #               table formats, and general Spark tuning.</p>
     #   @return [Hash<String, String>]
+    # @!attribute classifications
+    #   <p>The configuration classifications that can be specified for the engine.</p>
+    #   @return [Array<Types::Classification>]
     class EngineConfiguration < Struct.new(
       nil,
       :coordinator_dpu_size,
@@ -1373,9 +1419,15 @@ module Aws::Athena
       :default_executor_dpu_size,
       :additional_configs,
       :spark_properties,
+      :classifications,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
+
+      def initialize(options = {})
+        options[:max_concurrent_dpus] = 20 unless options.key?(:max_concurrent_dpus)
+        super
+      end
     end
 
     # <p>The Athena engine version for running queries, or the PySpark engine
@@ -1853,6 +1905,58 @@ module Aws::Athena
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute resource_arn
+    #   <p>The The Amazon Resource Name (ARN) for a session.</p>
+    #   @return [String]
+    class GetResourceDashboardRequest < Struct.new(
+      nil,
+      :resource_arn,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute url
+    #   <p>The Live UI/Persistence UI url for a session.</p>
+    #   @return [String]
+    class GetResourceDashboardResponse < Struct.new(
+      nil,
+      :url,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute session_id
+    #   <p>The session ID.</p>
+    #   @return [String]
+    class GetSessionEndpointRequest < Struct.new(
+      nil,
+      :session_id,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # @!attribute endpoint_url
+    #   <p>The endpoint for connecting to the session.</p>
+    #   @return [String]
+    # @!attribute auth_token
+    #   <p>Authentication token for the connection</p>
+    #   @return [String]
+    # @!attribute auth_token_expiration_time
+    #   <p>Expiration time of the auth token.</p>
+    #   @return [Time]
+    class GetSessionEndpointResponse < Struct.new(
+      nil,
+      :endpoint_url,
+      :auth_token,
+      :auth_token_expiration_time,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute session_id
     #   <p>The session ID.</p>
     #   @return [String]
@@ -1883,6 +1987,10 @@ module Aws::Athena
     # @!attribute notebook_version
     #   <p>The notebook version.</p>
     #   @return [String]
+    # @!attribute monitoring_configuration
+    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #               Amazon CloudWatch log groups etc.</p>
+    #   @return [Types::MonitoringConfiguration]
     # @!attribute session_configuration
     #   <p>Contains the workgroup configuration information used by the session.</p>
     #   @return [Types::SessionConfiguration]
@@ -1900,6 +2008,7 @@ module Aws::Athena
       :engine_version,
       :engine_configuration,
       :notebook_version,
+      :monitoring_configuration,
       :session_configuration,
       :status,
       :statistics,
@@ -2770,8 +2879,24 @@ module Aws::Athena
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings for delivering logs to Amazon S3 buckets.</p>
+    # @!attribute enabled
+    #   <p>Enables mamanged log persistence.</p>
+    #   @return [Boolean]
+    # @!attribute kms_key
+    #   <p>The KMS key ARN to encrypt the logs stored in managed log persistence.</p>
+    #   @return [String]
+    class ManagedLoggingConfiguration < Struct.new(
+      nil,
+      :enabled,
+      :kms_key,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>
-    #             The configuration for storing results in Athena owned storage, which includes whether this feature is enabled; whether encryption configuration, if any, is used for encrypting query results. 
+    #             The configuration for storing results in Athena owned storage, which includes whether this feature is enabled; whether encryption configuration, if any, is used for encrypting query results.
     #         </p>
     # @!attribute enabled
     #   <p>If set to true, allows you to store query results in Athena owned storage. If set to
@@ -2849,6 +2974,30 @@ module Aws::Athena
     class MetadataException < Struct.new(
       nil,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #             Amazon CloudWatch log groups etc.</p>
+    # @!attribute cloud_watch_logging_configuration
+    #   <p>Configuration settings for delivering logs to Amazon CloudWatch log groups.
+    #           </p>
+    #   @return [Types::CloudWatchLoggingConfiguration]
+    # @!attribute managed_logging_configuration
+    #   <p>Configuration settings for managed log persistence.
+    #           </p>
+    #   @return [Types::ManagedLoggingConfiguration]
+    # @!attribute s3_logging_configuration
+    #   <p>Configuration settings for delivering logs to Amazon S3 buckets.
+    #           </p>
+    #   @return [Types::S3LoggingConfiguration]
+    class MonitoringConfiguration < Struct.new(
+      nil,
+      :cloud_watch_logging_configuration,
+      :managed_logging_configuration,
+      :s3_logging_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3014,8 +3163,8 @@ module Aws::Athena
     #   <p>The type of query statement that was run. <code>DDL</code> indicates DDL query
     #               statements. <code>DML</code> indicates DML (Data Manipulation Language) query
     #               statements, such as <code>CREATE TABLE AS SELECT</code>. <code>UTILITY</code> indicates
-    #               query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>, or
-    #                   <code>DESCRIBE TABLE</code>.</p>
+    #               query statements other than DDL and DML, such as <code>SHOW CREATE TABLE</code>,
+    #                   <code>EXPLAIN</code>, <code>DESCRIBE</code>, or <code>SHOW TABLES</code>.</p>
     #   @return [String]
     # @!attribute managed_query_results_configuration
     #   <p> The configuration for storing results in Athena owned storage, which includes whether
@@ -3142,6 +3291,9 @@ module Aws::Athena
     #   <p>Contains information about whether previous query results were reused for the
     #               query.</p>
     #   @return [Types::ResultReuseInformation]
+    # @!attribute dpu_count
+    #   <p>The number of Data Processing Units (DPUs) that Athena used to run the query.</p>
+    #   @return [Float]
     class QueryExecutionStatistics < Struct.new(
       nil,
       :engine_execution_time_in_millis,
@@ -3153,6 +3305,7 @@ module Aws::Athena
       :query_planning_time_in_millis,
       :service_processing_time_in_millis,
       :result_reuse_information,
+      :dpu_count,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3169,9 +3322,9 @@ module Aws::Athena
     #               complete processing. <code>CANCELLED</code> indicates that a user input interrupted
     #               query execution.</p>
     #            <note>
-    #               <p>Athena automatically retries your queries in cases of certain
-    #                   transient errors. As a result, you may see the query state transition from
-    #                       <code>RUNNING</code> or <code>FAILED</code> to <code>QUEUED</code>. </p>
+    #               <p>For queries that experience certain transient errors, the state transitions from
+    #                       <code>RUNNING</code> back to <code>QUEUED</code>. The <code>FAILED</code> state
+    #                   is always terminal with no automatic retry. </p>
     #            </note>
     #   @return [String]
     # @!attribute state_change_reason
@@ -3628,6 +3781,26 @@ module Aws::Athena
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Configuration settings for delivering logs to Amazon S3 buckets.</p>
+    # @!attribute enabled
+    #   <p>Enables S3 log delivery.</p>
+    #   @return [Boolean]
+    # @!attribute kms_key
+    #   <p>The KMS key ARN to encrypt the logs published to the given Amazon S3 destination.</p>
+    #   @return [String]
+    # @!attribute log_location
+    #   <p>The Amazon S3 destination URI for log publishing.</p>
+    #   @return [String]
+    class S3LoggingConfiguration < Struct.new(
+      nil,
+      :enabled,
+      :kms_key,
+      :log_location,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The specified session already exists.</p>
     # @!attribute message
     #   @return [String]
@@ -3651,6 +3824,9 @@ module Aws::Athena
     # @!attribute idle_timeout_seconds
     #   <p>The idle timeout in seconds for the session.</p>
     #   @return [Integer]
+    # @!attribute session_idle_timeout_in_minutes
+    #   <p>The idle timeout in seconds for the session.</p>
+    #   @return [Integer]
     # @!attribute encryption_configuration
     #   <p>If query and calculation results are encrypted in Amazon S3, indicates the
     #               encryption option used (for example, <code>SSE_KMS</code> or <code>CSE_KMS</code>) and
@@ -3661,6 +3837,7 @@ module Aws::Athena
       :execution_role,
       :working_directory,
       :idle_timeout_seconds,
+      :session_idle_timeout_in_minutes,
       :encryption_configuration,
       keyword_init: true
     )
@@ -3870,6 +4047,12 @@ module Aws::Athena
     # @!attribute result_reuse_configuration
     #   <p>Specifies the query result reuse behavior for the query.</p>
     #   @return [Types::ResultReuseConfiguration]
+    # @!attribute engine_configuration
+    #   <p>The engine configuration for the workgroup, which includes the minimum/maximum number of Data Processing Units (DPU) that queries should use when
+    #               running in provisioned capacity. If not specified, Athena uses default values (Default value for min is 4 and for max is Minimum of 124 and allocated DPUs).</p>
+    #            <p>To specify minimum and maximum DPU values for Capacity Reservations queries, the workgroup containing <code>EngineConfiguration</code> should have the following values: The name of
+    #               the <code>Classifications</code> should be <code>athena-query-engine-properties</code>, with the only allowed properties as <code>max-dpu-count</code> and <code>min-dpu-count</code>.</p>
+    #   @return [Types::EngineConfiguration]
     class StartQueryExecutionInput < Struct.new(
       nil,
       :query_string,
@@ -3879,6 +4062,7 @@ module Aws::Athena
       :work_group,
       :execution_parameters,
       :result_reuse_configuration,
+      :engine_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3905,6 +4089,15 @@ module Aws::Athena
     #   <p>Contains engine data processing unit (DPU) configuration settings and parameter
     #               mappings.</p>
     #   @return [Types::EngineConfiguration]
+    # @!attribute execution_role
+    #   <p>The ARN of the execution role used to access user resources for Spark sessions and
+    #               Identity Center enabled workgroups. This property applies only to Spark enabled
+    #               workgroups and Identity Center enabled workgroups.</p>
+    #   @return [String]
+    # @!attribute monitoring_configuration
+    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #               Amazon CloudWatch log groups etc.</p>
+    #   @return [Types::MonitoringConfiguration]
     # @!attribute notebook_version
     #   <p>The notebook version. This value is supplied automatically for notebook sessions in
     #               the Athena console and is not required for programmatic session access. The
@@ -3927,14 +4120,24 @@ module Aws::Athena
     #                   this token or the action will fail.</p>
     #            </important>
     #   @return [String]
+    # @!attribute tags
+    #   <p>A list of comma separated tags to add to the session that is created.</p>
+    #   @return [Array<Types::Tag>]
+    # @!attribute copy_work_group_tags
+    #   <p>Copies the tags from the Workgroup to the Session when.</p>
+    #   @return [Boolean]
     class StartSessionRequest < Struct.new(
       nil,
       :description,
       :work_group,
       :engine_configuration,
+      :execution_role,
+      :monitoring_configuration,
       :notebook_version,
       :session_idle_timeout_in_minutes,
       :client_request_token,
+      :tags,
+      :copy_work_group_tags,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4610,7 +4813,9 @@ module Aws::Athena
     #   @return [Types::ManagedQueryResultsConfiguration]
     # @!attribute enforce_work_group_configuration
     #   <p>If set to "true", the settings for the workgroup override client-side settings. If set
-    #               to "false", client-side settings are used. For more information, see <a href="https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html">Workgroup Settings Override Client-Side Settings</a>.</p>
+    #               to "false", client-side settings are used. This property is not required for Apache
+    #               Spark enabled workgroups. For more information, see <a href="https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html">Workgroup Settings Override
+    #                   Client-Side Settings</a>.</p>
     #   @return [Boolean]
     # @!attribute publish_cloud_watch_metrics_enabled
     #   <p>Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.</p>
@@ -4642,6 +4847,16 @@ module Aws::Athena
     #               workgroups and IAM Identity Center enabled workgroups. The property is required for
     #                   IAM Identity Center enabled workgroups.</p>
     #   @return [String]
+    # @!attribute monitoring_configuration
+    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #               Amazon CloudWatch log groups etc.</p>
+    #   @return [Types::MonitoringConfiguration]
+    # @!attribute engine_configuration
+    #   <p>The engine configuration for the workgroup, which includes the minimum/maximum number of Data Processing Units (DPU) that queries should use when
+    #               running in provisioned capacity. If not specified, Athena uses default values (Default value for min is 4 and for max is Minimum of 124 and allocated DPUs).</p>
+    #            <p>To specify DPU values for PC queries the WG containing EngineConfiguration should have the following values:
+    #           The name of the Classifications should be <code>athena-query-engine-properties</code>, with the only allowed properties as <code>max-dpu-count</code> and <code>min-dpu-count</code>.</p>
+    #   @return [Types::EngineConfiguration]
     # @!attribute customer_content_encryption_configuration
     #   <p>Specifies the KMS key that is used to encrypt the user's data stores in Athena. This setting does not apply to Athena SQL workgroups.</p>
     #   @return [Types::CustomerContentEncryptionConfiguration]
@@ -4674,6 +4889,8 @@ module Aws::Athena
       :engine_version,
       :additional_configuration,
       :execution_role,
+      :monitoring_configuration,
+      :engine_configuration,
       :customer_content_encryption_configuration,
       :enable_minimum_encryption_configuration,
       :identity_center_configuration,
@@ -4756,6 +4973,16 @@ module Aws::Athena
     #   <p>Specifies whether Amazon S3 access grants are enabled for query
     #               results.</p>
     #   @return [Types::QueryResultsS3AccessGrantsConfiguration]
+    # @!attribute monitoring_configuration
+    #   <p>Contains the configuration settings for managed log persistence, delivering logs to Amazon S3 buckets,
+    #               Amazon CloudWatch log groups etc.</p>
+    #   @return [Types::MonitoringConfiguration]
+    # @!attribute engine_configuration
+    #   <p>The engine configuration for the workgroup, which includes the minimum/maximum number of Data Processing Units (DPU) that queries should use when
+    #               running in provisioned capacity. If not specified, Athena uses default values (Default value for min is 4 and for max is Minimum of 124 and allocated DPUs).</p>
+    #            <p>To specify DPU values for PC queries the WG containing EngineConfiguration should have the following values:
+    #           The name of the Classifications should be <code>athena-query-engine-properties</code>, with the only allowed properties as <code>max-dpu-count</code> and <code>min-dpu-count</code>.</p>
+    #   @return [Types::EngineConfiguration]
     class WorkGroupConfigurationUpdates < Struct.new(
       nil,
       :enforce_work_group_configuration,
@@ -4772,6 +4999,8 @@ module Aws::Athena
       :customer_content_encryption_configuration,
       :enable_minimum_encryption_configuration,
       :query_results_s3_access_grants_configuration,
+      :monitoring_configuration,
+      :engine_configuration,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

@@ -3,19 +3,27 @@ module Aws::CloudWatch
     include Smithy::Schema::Shapes
 
     AccountId: StringShape
+    ActionLogLineCount: IntegerShape
+    ActionLogLineRoleArn: StringShape
     ActionPrefix: StringShape
     ActionsEnabled: BooleanShape
     ActionsSuppressedBy: EnumShape
     ActionsSuppressedReason: StringShape
+    AggregationExpression: StringShape
     AlarmArn: StringShape
     AlarmContributor: StructureShape
     AlarmContributors: ListShape
     AlarmDescription: StringShape
     AlarmHistoryItem: StructureShape
     AlarmHistoryItems: ListShape
+    AlarmMuteRuleStatus: EnumShape
+    AlarmMuteRuleStatuses: ListShape
+    AlarmMuteRuleSummaries: ListShape
+    AlarmMuteRuleSummary: StructureShape
     AlarmName: StringShape
     AlarmNamePrefix: StringShape
     AlarmNames: ListShape
+    AlarmPromQLCriteria: StructureShape
     AlarmRule: StringShape
     AlarmType: EnumShape
     AlarmTypes: ListShape
@@ -23,12 +31,17 @@ module Aws::CloudWatch
     AnomalyDetector: StructureShape
     AnomalyDetectorConfiguration: StructureShape
     AnomalyDetectorExcludedTimeRanges: ListShape
+    AnomalyDetectorId: StringShape
+    AnomalyDetectorIds: ListShape
     AnomalyDetectorMetricStat: StringShape
     AnomalyDetectorMetricTimezone: StringShape
     AnomalyDetectorStateValue: EnumShape
     AnomalyDetectorType: EnumShape
     AnomalyDetectorTypes: ListShape
     AnomalyDetectors: ListShape
+    Arn: StringShape
+    AssociateDatasetKmsKeyInput: StructureShape
+    AssociateDatasetKmsKeyOutput: StructureShape
     AttributeName: StringShape
     AttributeValue: StringShape
     AwsQueryErrorMessage: StringShape
@@ -41,6 +54,8 @@ module Aws::CloudWatch
     ContributorAttributes: MapShape
     ContributorId: StringShape
     Counts: ListShape
+    CreateResourceMetricsConfigurationInput: StructureShape
+    CreateResourceMetricsConfigurationOutput: StructureShape
     DashboardArn: StringShape
     DashboardBody: StringShape
     DashboardEntries: ListShape
@@ -60,6 +75,10 @@ module Aws::CloudWatch
     DatapointValues: ListShape
     Datapoints: ListShape
     DatapointsToAlarm: IntegerShape
+    DatasetArn: StringShape
+    DatasetId: StringShape
+    DatasetIdentifier: StringShape
+    DeleteAlarmMuteRuleInput: StructureShape
     DeleteAlarmsInput: StructureShape
     DeleteAnomalyDetectorInput: StructureShape
     DeleteAnomalyDetectorOutput: StructureShape
@@ -69,6 +88,8 @@ module Aws::CloudWatch
     DeleteInsightRulesOutput: StructureShape
     DeleteMetricStreamInput: StructureShape
     DeleteMetricStreamOutput: StructureShape
+    DeleteResourceMetricsConfigurationInput: StructureShape
+    DeleteResourceMetricsConfigurationOutput: StructureShape
     DescribeAlarmContributorsInput: StructureShape
     DescribeAlarmContributorsOutput: StructureShape
     DescribeAlarmHistoryInput: StructureShape
@@ -90,9 +111,13 @@ module Aws::CloudWatch
     DisableAlarmActionsInput: StructureShape
     DisableInsightRulesInput: StructureShape
     DisableInsightRulesOutput: StructureShape
+    DisassociateDatasetKmsKeyInput: StructureShape
+    DisassociateDatasetKmsKeyOutput: StructureShape
+    Duration: StringShape
     EnableAlarmActionsInput: StructureShape
     EnableInsightRulesInput: StructureShape
     EnableInsightRulesOutput: StructureShape
+    EndTimeOffset: IntegerShape
     Entity: StructureShape
     EntityAttributesMap: MapShape
     EntityAttributesMapKeyString: StringShape
@@ -104,17 +129,25 @@ module Aws::CloudWatch
     EntityMetricDataList: ListShape
     ErrorMessage: StringShape
     EvaluateLowSampleCountPercentile: StringShape
+    EvaluationCriteria: UnionShape
+    EvaluationInterval: IntegerShape
     EvaluationPeriods: IntegerShape
     EvaluationState: EnumShape
+    EvaluationWindow: UnionShape
     ExceptionType: StringShape
+    Expression: StringShape
     ExtendedStatistic: StringShape
     ExtendedStatistics: ListShape
     FailureCode: StringShape
     FailureDescription: StringShape
     FailureResource: StringShape
     FaultDescription: StringShape
+    GetAlarmMuteRuleInput: StructureShape
+    GetAlarmMuteRuleOutput: StructureShape
     GetDashboardInput: StructureShape
     GetDashboardOutput: StructureShape
+    GetDatasetInput: StructureShape
+    GetDatasetOutput: StructureShape
     GetInsightRuleReportInput: StructureShape
     GetInsightRuleReportOutput: StructureShape
     GetMetricDataInput: StructureShape
@@ -127,6 +160,10 @@ module Aws::CloudWatch
     GetMetricStreamOutput: StructureShape
     GetMetricWidgetImageInput: StructureShape
     GetMetricWidgetImageOutput: StructureShape
+    GetOTelEnrichmentInput: StructureShape
+    GetOTelEnrichmentOutput: StructureShape
+    GetResourceMetricsConfigurationInput: StructureShape
+    GetResourceMetricsConfigurationOutput: StructureShape
     HistoryData: StringShape
     HistoryItemType: EnumShape
     HistorySummary: StringShape
@@ -164,10 +201,16 @@ module Aws::CloudWatch
     InvalidNextToken: StructureShape
     InvalidParameterCombinationException: StructureShape
     InvalidParameterValueException: StructureShape
+    KmsAccessDeniedException: StructureShape
+    KmsKeyArn: StringShape
+    KmsKeyDisabledException: StructureShape
+    KmsKeyNotFoundException: StructureShape
     LabelOptions: StructureShape
     LastModified: TimestampShape
     LimitExceededException: StructureShape
     LimitExceededFault: StructureShape
+    ListAlarmMuteRulesInput: StructureShape
+    ListAlarmMuteRulesOutput: StructureShape
     ListDashboardsInput: StructureShape
     ListDashboardsOutput: StructureShape
     ListManagedInsightRulesInput: StructureShape
@@ -179,6 +222,9 @@ module Aws::CloudWatch
     ListMetricsOutput: StructureShape
     ListTagsForResourceInput: StructureShape
     ListTagsForResourceOutput: StructureShape
+    LogAlarm: StructureShape
+    LogAlarms: ListShape
+    LogGroupIdentifiers: ListShape
     ManagedRule: StructureShape
     ManagedRuleDescription: StructureShape
     ManagedRuleDescriptions: ListShape
@@ -206,6 +252,7 @@ module Aws::CloudWatch
     MetricLabel: StringShape
     MetricMathAnomalyDetector: StructureShape
     MetricName: StringShape
+    MetricNameList: ListShape
     MetricStat: StructureShape
     MetricStreamEntries: ListShape
     MetricStreamEntry: StructureShape
@@ -226,13 +273,24 @@ module Aws::CloudWatch
     MetricWidgetImage: BlobShape
     Metrics: ListShape
     MissingRequiredParameterException: StructureShape
+    MuteTargetAlarmNameList: ListShape
+    MuteTargets: StructureShape
+    MuteType: StringShape
+    Name: StringShape
     Namespace: StringShape
     NextToken: StringShape
+    OTelEnrichmentMetricNameList: ListShape
+    OTelEnrichmentMetricSelector: StructureShape
+    OTelEnrichmentMetricSelectorList: ListShape
+    OTelEnrichmentStatus: EnumShape
+    OnlyStartEvaluatingAfterWarmUpPeriodEnds: BooleanShape
     OutputFormat: StringShape
     OwningAccounts: ListShape
     PartialFailure: StructureShape
+    PendingPeriod: IntegerShape
     Period: IntegerShape
     PeriodicSpikes: BooleanShape
+    PutAlarmMuteRuleInput: StructureShape
     PutAnomalyDetectorInput: StructureShape
     PutAnomalyDetectorOutput: StructureShape
     PutCompositeAlarmInput: StructureShape
@@ -240,28 +298,48 @@ module Aws::CloudWatch
     PutDashboardOutput: StructureShape
     PutInsightRuleInput: StructureShape
     PutInsightRuleOutput: StructureShape
+    PutLogAlarmInput: StructureShape
     PutManagedInsightRulesInput: StructureShape
     PutManagedInsightRulesOutput: StructureShape
     PutMetricAlarmInput: StructureShape
     PutMetricDataInput: StructureShape
     PutMetricStreamInput: StructureShape
     PutMetricStreamOutput: StructureShape
+    Query: StringShape
+    QueryResultsToAlarm: IntegerShape
+    QueryResultsToEvaluate: IntegerShape
+    QueryString: StringShape
     Range: StructureShape
     RecentlyActive: EnumShape
+    RecoveryPeriod: IntegerShape
+    ResourceArn: StringShape
+    ResourceConflict: StructureShape
     ResourceId: StringShape
     ResourceList: ListShape
+    ResourceMetricSelection: StructureShape
+    ResourceMetricSelectionList: ListShape
+    ResourceMetricsConfiguration: StructureShape
     ResourceName: StringShape
     ResourceNotFound: StructureShape
     ResourceNotFoundException: StructureShape
     ResourceType: StringShape
     ReturnData: BooleanShape
+    Rule: StructureShape
     ScanBy: EnumShape
+    Schedule: StructureShape
+    ScheduleConfiguration: StructureShape
+    ScheduleExpression: StringShape
+    ScheduledQueryConfiguration: StructureShape
     SetAlarmStateInput: StructureShape
     SingleMetricAnomalyDetector: StructureShape
     Size: IntegerShape
+    SlidingWindow: StructureShape
     StandardUnit: EnumShape
     StartMetricStreamsInput: StructureShape
     StartMetricStreamsOutput: StructureShape
+    StartOTelEnrichmentInput: StructureShape
+    StartOTelEnrichmentOutput: StructureShape
+    StartTimeOffset: IntegerShape
     Stat: StringShape
     StateReason: StringShape
     StateReasonData: StringShape
@@ -272,8 +350,11 @@ module Aws::CloudWatch
     StatusCode: EnumShape
     StopMetricStreamsInput: StructureShape
     StopMetricStreamsOutput: StructureShape
+    StopOTelEnrichmentInput: StructureShape
+    StopOTelEnrichmentOutput: StructureShape
     StorageResolution: IntegerShape
     StrictEntityValidation: BooleanShape
+    String: StringShape
     SuppressorPeriod: IntegerShape
     Tag: StructureShape
     TagKey: StringShape
@@ -286,10 +367,20 @@ module Aws::CloudWatch
     Threshold: FloatShape
     Timestamp: TimestampShape
     Timestamps: ListShape
+    Timezone: StringShape
     TreatMissingData: StringShape
     UntagResourceInput: StructureShape
     UntagResourceOutput: StructureShape
+    UpdateOTelEnrichmentInput: StructureShape
+    UpdateOTelEnrichmentOutput: StructureShape
+    UpdateResourceMetricsConfigurationInput: StructureShape
+    UpdateResourceMetricsConfigurationOutput: StructureShape
+    ValidationException: StructureShape
+    ValidationExceptionMessage: StringShape
     Values: ListShape
+    WallClockWindow: StructureShape
+    WarmUpConfiguration: StructureShape
+    WarmUpPeriodDurationInMinutes: IntegerShape
 
     GraniteServiceVersion20100801: ServiceShape
   end

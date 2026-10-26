@@ -11,6 +11,8 @@ module Aws::KeyspacesStreams
     GetStreamInput: StructureShape
     GetStreamOutput: StructureShape
     InternalServerException: StructureShape
+    IteratorDescription: StructureShape
+    IteratorPosition: EnumShape
     KeyspaceName: StringShape
     KeyspacesCell: StructureShape
     KeyspacesCellList: ListShape

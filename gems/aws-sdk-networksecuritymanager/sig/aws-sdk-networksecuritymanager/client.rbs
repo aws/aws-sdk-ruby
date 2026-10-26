@@ -1,0 +1,912 @@
+module Aws::NetworkSecurityManager
+  class Client < Smithy::Client::Base
+    include Smithy::Client::Stubs
+
+    def self.new: (
+      ?access_key_id: String,
+      ?account_id: String,
+      ?account_id_endpoint_mode: String,
+      ?adaptive_retry_wait_to_fill: bool,
+      ?auth_resolver: AuthResolver,
+      ?auth_scheme_preference: Array[String],
+      ?connect_timeout: Numeric,
+      ?convert_params: bool,
+      ?credentials_provider: #identity,
+      ?disable_host_prefix_injection: bool,
+      ?disable_request_compression: bool,
+      ?endpoint: String,
+      ?endpoint_provider: Aws::NetworkSecurityManager::EndpointProvider,
+      ?http_proxy: URI::HTTP | String,
+      ?http_wire_trace: bool,
+      ?log_formatter: Smithy::Client::LogFormatter,
+      ?log_level: Symbol,
+      ?logger: Logger,
+      ?max_attempts: Integer,
+      ?profile: String,
+      ?protocol: Symbol | Object,
+      ?raise_response_errors: bool,
+      ?read_timeout: Numeric,
+      ?region: String,
+      ?request_min_compression_size_bytes: Integer,
+      ?retry_mode: String,
+      ?retry_strategy: Object,
+      ?sdk_ua_app_id: String,
+      ?secret_access_key: String,
+      ?session_token: String,
+      ?ssl_ca_bundle: String,
+      ?ssl_ca_directory: String,
+      ?ssl_ca_store: OpenSSL::X509::Store,
+      ?ssl_verify_peer: bool,
+      ?stub_responses: bool,
+      ?transport: Smithy::Client::NetHTTP::Transport,
+      ?use_dualstack_endpoint: bool,
+      ?use_fips_endpoint: bool,
+      ?validate_params: bool,
+    ) -> void | (?Hash[Symbol, untyped]) -> void
+
+    interface _CreateDeploymentResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentOutput]
+      def deployment_id: () -> String?
+      def deployment_arn: () -> String?
+      def deployment_name: () -> String?
+      def deployment_description: () -> String?
+      def status: () -> String?
+      def deployment_configuration: () -> Types::DeploymentConfiguration?
+      def associated_policy_list: () -> Array[Types::AssociatedPolicy]?
+      def associated_scope_list: () -> Array[Types::AssociatedScope]?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def deployment_coverage: () -> Array[Types::DeploymentCoverageEntry]?
+      def warnings: () -> Array[Types::DeploymentWarningEntry]?
+      def updated_at: () -> Time?
+    end
+    def create_deployment: (
+      ?client_token: String,
+      ?deployment_name: String,
+      ?deployment_description: String,
+      ?deployment_configuration: {
+        enable_cross_account_visibility: bool
+      },
+      ?associated_policy_list: Array[
+        {
+          policy_identifier: String
+        }
+      ],
+      ?associated_scope_list: Array[
+        {
+          scope_identifier: String
+        }
+      ],
+      ?is_published: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentResponse
+
+    interface _CreateDeploymentSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateDeploymentSnapshotOutput]
+      def deployment_id: () -> String?
+      def deployment_arn: () -> String?
+      def deployment_name: () -> String?
+      def deployment_description: () -> String?
+      def status: () -> String?
+      def deployment_configuration: () -> Types::DeploymentConfiguration?
+      def associated_policy_list: () -> Array[Types::AssociatedPolicy]?
+      def associated_scope_list: () -> Array[Types::AssociatedScope]?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+    end
+    def create_deployment_snapshot: (
+      ?deployment_identifier: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateDeploymentSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDeploymentSnapshotResponse
+
+    interface _CreatePolicyResponse
+      include Smithy::Client::_Response[Types::CreatePolicyOutput]
+      def policy_id: () -> String?
+      def policy_arn: () -> String?
+      def policy_name: () -> String?
+      def policy_description: () -> String?
+      def status: () -> String?
+      def priority: () -> Integer?
+      def associated_template_and_rule_list: () -> Array[Types::AssociatedTemplateOrRule]?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def firewall_type: () -> String?
+      def policy_configuration: () -> Types::PolicyConfiguration?
+      def updated_at: () -> Time?
+    end
+    def create_policy: (
+      ?client_token: String,
+      ?policy_name: String,
+      ?policy_description: String,
+      ?priority: Integer,
+      ?associated_template_and_rule_list: Array[
+        {
+          template_identifier: String,
+          rule_identifier: String
+        }
+      ],
+      ?firewall_type: String,
+      ?policy_configuration: {
+        remediation_enabled: bool,
+        resources_clean_up: bool,
+        waf_config: {
+          existing_customer_web_acl_resolution: String,
+          conflict_resolution: String
+        }
+      },
+      ?is_published: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicyResponse
+
+    interface _CreatePolicySnapshotResponse
+      include Smithy::Client::_Response[Types::CreatePolicySnapshotOutput]
+      def policy_id: () -> String?
+      def policy_arn: () -> String?
+      def policy_name: () -> String?
+      def policy_description: () -> String?
+      def status: () -> String?
+      def priority: () -> Integer?
+      def associated_template_and_rule_list: () -> Array[Types::AssociatedTemplateOrRule]?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def firewall_type: () -> String?
+      def policy_configuration: () -> Types::PolicyConfiguration?
+      def updated_at: () -> Time?
+    end
+    def create_policy_snapshot: (
+      ?policy_identifier: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreatePolicySnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreatePolicySnapshotResponse
+
+    interface _CreateRuleResponse
+      include Smithy::Client::_Response[Types::CreateRuleOutput]
+      def rule_id: () -> String?
+      def rule_arn: () -> String?
+      def rule_name: () -> String?
+      def firewall_type: () -> String?
+      def rule_type: () -> String?
+      def rule_description: () -> String?
+      def configuration: () -> Smithy::Schema::document?
+      def status: () -> String?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+    end
+    def create_rule: (
+      ?client_token: String,
+      ?rule_name: String,
+      ?firewall_type: String,
+      ?rule_type: String,
+      ?rule_description: String,
+      ?configuration: Smithy::Schema::document,
+      ?is_published: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleResponse
+
+    interface _CreateRuleSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateRuleSnapshotOutput]
+      def rule_id: () -> String?
+      def rule_arn: () -> String?
+      def rule_name: () -> String?
+      def firewall_type: () -> String?
+      def rule_type: () -> String?
+      def rule_description: () -> String?
+      def configuration: () -> Smithy::Schema::document?
+      def status: () -> String?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+    end
+    def create_rule_snapshot: (
+      ?rule_identifier: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateRuleSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateRuleSnapshotResponse
+
+    interface _CreateScopeResponse
+      include Smithy::Client::_Response[Types::CreateScopeOutput]
+      def scope_id: () -> String?
+      def scope_arn: () -> String?
+      def scope_name: () -> String?
+      def scope_description: () -> String?
+      def scope_configuration: () -> Types::ScopeConfiguration?
+      def status: () -> String?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+    end
+    def create_scope: (
+      ?client_token: String,
+      ?scope_name: String,
+      ?scope_description: String,
+      ?scope_configuration: {
+        account_filter: {
+          include_all: {
+          },
+          include: {
+            account_ids: Array[String],
+            organizational_units: Array[String]
+          },
+          exclude: untyped
+        },
+        resource_scopes: Hash[String,
+          {
+            include_all: bool,
+            include: {
+              explicit_arns: Array[String],
+              expression: {
+                criteria: {
+                  tags: Hash[String, String],
+                  alb_config: {
+                    scheme: String,
+                    ip_address_type: String
+                  }
+                },
+                and: Array[
+                  {
+                    criteria: untyped,
+                    and: untyped,
+                    or: untyped,
+                    not: untyped
+                  }
+                ],
+                or: untyped,
+                not: untyped
+              }
+            },
+            exclude: untyped
+          }
+        ]
+      },
+      ?is_published: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScopeResponse
+
+    interface _CreateScopeSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateScopeSnapshotOutput]
+      def scope_id: () -> String?
+      def scope_arn: () -> String?
+      def scope_name: () -> String?
+      def scope_description: () -> String?
+      def scope_configuration: () -> Types::ScopeConfiguration?
+      def status: () -> String?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+    end
+    def create_scope_snapshot: (
+      ?scope_identifier: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateScopeSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateScopeSnapshotResponse
+
+    interface _CreateTemplateResponse
+      include Smithy::Client::_Response[Types::CreateTemplateOutput]
+      def template_id: () -> String?
+      def template_arn: () -> String?
+      def template_name: () -> String?
+      def template_description: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+      def associated_rule_list: () -> Array[Types::AssociatedRule]?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def firewall_type: () -> String?
+      def updated_at: () -> Time?
+    end
+    def create_template: (
+      ?client_token: String,
+      ?template_name: String,
+      ?template_description: String,
+      ?associated_rule_list: Array[
+        {
+          rule_identifier: String
+        }
+      ],
+      ?firewall_type: String,
+      ?is_published: bool,
+      ?tags: Hash[String, String]
+    ) -> _CreateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateResponse
+
+    interface _CreateTemplateSnapshotResponse
+      include Smithy::Client::_Response[Types::CreateTemplateSnapshotOutput]
+      def template_id: () -> String?
+      def template_arn: () -> String?
+      def template_name: () -> String?
+      def template_description: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+      def associated_rule_list: () -> Array[Types::AssociatedRule]?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def firewall_type: () -> String?
+      def updated_at: () -> Time?
+    end
+    def create_template_snapshot: (
+      ?template_identifier: String,
+      ?client_token: String,
+      ?tags: Hash[String, String]
+    ) -> _CreateTemplateSnapshotResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateTemplateSnapshotResponse
+
+    interface _DeleteAdminAccountResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_admin_account: (
+      ?account_id: String
+    ) -> _DeleteAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAdminAccountResponse
+
+    interface _DeleteDeploymentResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_deployment: (
+      ?deployment_identifier: String
+    ) -> _DeleteDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDeploymentResponse
+
+    interface _DeletePolicyResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_policy: (
+      ?policy_identifier: String
+    ) -> _DeletePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeletePolicyResponse
+
+    interface _DeleteRuleResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_rule: (
+      ?rule_identifier: String
+    ) -> _DeleteRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRuleResponse
+
+    interface _DeleteScopeResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_scope: (
+      ?scope_identifier: String
+    ) -> _DeleteScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteScopeResponse
+
+    interface _DeleteTemplateResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_template: (
+      ?template_identifier: String
+    ) -> _DeleteTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteTemplateResponse
+
+    interface _GenerateRuleConfigurationResponse
+      include Smithy::Client::_Response[Types::GenerateRuleConfigurationResponse]
+      def configuration: () -> String?
+      def description: () -> String?
+    end
+    def generate_rule_configuration: (
+      ?prompt: String,
+      ?rule_firewall_type: String,
+      ?rule_type: String,
+      ?waf_config_data_type: String,
+      ?current_configuration: String,
+      ?client_token: String
+    ) -> _GenerateRuleConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GenerateRuleConfigurationResponse
+
+    interface _GetAdminAccountResponse
+      include Smithy::Client::_Response[Types::GetAdminAccountResponse]
+      def admin_account_details: () -> Types::AdminAccountDetails?
+    end
+    def get_admin_account: (
+      ?account_id: String
+    ) -> _GetAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAdminAccountResponse
+
+    interface _GetDeploymentResponse
+      include Smithy::Client::_Response[Types::GetDeploymentOutput]
+      def deployment_id: () -> String?
+      def deployment_arn: () -> String?
+      def deployment_name: () -> String?
+      def deployment_description: () -> String?
+      def status: () -> String?
+      def deployment_configuration: () -> Types::DeploymentConfiguration?
+      def associated_policy_list: () -> Array[Types::AssociatedPolicy]?
+      def associated_scope_list: () -> Array[Types::AssociatedScope]?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+      def deployment_coverage: () -> Array[Types::DeploymentCoverageEntry]?
+      def warnings: () -> Array[Types::DeploymentWarningEntry]?
+    end
+    def get_deployment: (
+      ?deployment_identifier: String
+    ) -> _GetDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDeploymentResponse
+
+    interface _GetPolicyResponse
+      include Smithy::Client::_Response[Types::GetPolicyOutput]
+      def policy_id: () -> String?
+      def policy_arn: () -> String?
+      def policy_name: () -> String?
+      def policy_description: () -> String?
+      def status: () -> String?
+      def priority: () -> Integer?
+      def associated_template_and_rule_list: () -> Array[Types::AssociatedTemplateOrRule]?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def firewall_type: () -> String?
+      def policy_configuration: () -> Types::PolicyConfiguration?
+      def updated_at: () -> Time?
+    end
+    def get_policy: (
+      ?policy_identifier: String
+    ) -> _GetPolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetPolicyResponse
+
+    interface _GetRuleResponse
+      include Smithy::Client::_Response[Types::GetRuleOutput]
+      def rule_id: () -> String?
+      def rule_arn: () -> String?
+      def rule_name: () -> String?
+      def firewall_type: () -> String?
+      def rule_type: () -> String?
+      def rule_description: () -> String?
+      def configuration: () -> Smithy::Schema::document?
+      def status: () -> String?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+    end
+    def get_rule: (
+      ?rule_identifier: String
+    ) -> _GetRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetRuleResponse
+
+    interface _GetScopeResponse
+      include Smithy::Client::_Response[Types::GetScopeOutput]
+      def scope_id: () -> String?
+      def scope_arn: () -> String?
+      def scope_name: () -> String?
+      def scope_description: () -> String?
+      def scope_configuration: () -> Types::ScopeConfiguration?
+      def status: () -> String?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+    end
+    def get_scope: (
+      ?scope_identifier: String
+    ) -> _GetScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetScopeResponse
+
+    interface _GetTemplateResponse
+      include Smithy::Client::_Response[Types::GetTemplateOutput]
+      def template_id: () -> String?
+      def template_arn: () -> String?
+      def template_name: () -> String?
+      def template_description: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+      def associated_rule_list: () -> Array[Types::AssociatedRule]?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def firewall_type: () -> String?
+      def updated_at: () -> Time?
+    end
+    def get_template: (
+      ?template_identifier: String
+    ) -> _GetTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetTemplateResponse
+
+    interface _ListAdminAccountsResponse
+      include Smithy::Client::_Response[Types::ListAdminAccountsResponse]
+      def next_token: () -> String?
+      def admin_accounts: () -> Array[Types::AdminAccountSummary]?
+    end
+    def list_admin_accounts: (
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAdminAccountsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAdminAccountsResponse
+
+    interface _ListAggregateResourceSynchronizationStatusesResponse
+      include Smithy::Client::_Response[Types::ListAggregateResourceSynchronizationStatusesOutput]
+      def next_token: () -> String?
+      def resource_synchronization_statuses: () -> Array[Types::ResourceSynchronizationStatusSummary]?
+    end
+    def list_aggregate_resource_synchronization_statuses: (
+      ?synchronization_status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListAggregateResourceSynchronizationStatusesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAggregateResourceSynchronizationStatusesResponse
+
+    interface _ListDeploymentSnapshotsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentSnapshotsOutput]
+      def next_token: () -> String?
+      def snapshots: () -> Array[Types::DeploymentSummary]?
+    end
+    def list_deployment_snapshots: (
+      ?deployment_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDeploymentSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentSnapshotsResponse
+
+    interface _ListDeploymentsResponse
+      include Smithy::Client::_Response[Types::ListDeploymentsOutput]
+      def next_token: () -> String?
+      def deployments: () -> Array[Types::DeploymentSummary]?
+    end
+    def list_deployments: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListDeploymentsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDeploymentsResponse
+
+    interface _ListPoliciesResponse
+      include Smithy::Client::_Response[Types::ListPoliciesOutput]
+      def next_token: () -> String?
+      def policies: () -> Array[Types::PolicySummary]?
+    end
+    def list_policies: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListPoliciesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPoliciesResponse
+
+    interface _ListPolicySnapshotsResponse
+      include Smithy::Client::_Response[Types::ListPolicySnapshotsOutput]
+      def next_token: () -> String?
+      def snapshots: () -> Array[Types::PolicySummary]?
+    end
+    def list_policy_snapshots: (
+      ?policy_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListPolicySnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListPolicySnapshotsResponse
+
+    interface _ListResourceAssociationsResponse
+      include Smithy::Client::_Response[Types::ListResourceAssociationsOutput]
+      def next_token: () -> String?
+      def resource_associations: () -> Array[Types::ResourceAssociation]?
+    end
+    def list_resource_associations: (
+      ?resource_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourceAssociationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceAssociationsResponse
+
+    interface _ListResourceSynchronizationStatusesResponse
+      include Smithy::Client::_Response[Types::ListResourceSynchronizationStatusesOutput]
+      def next_token: () -> String?
+      def resource_synchronization_statuses: () -> Array[Types::ResourceSynchronizationStatusSummary]?
+    end
+    def list_resource_synchronization_statuses: (
+      ?deployment_identifier: String,
+      ?synchronization_status: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListResourceSynchronizationStatusesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListResourceSynchronizationStatusesResponse
+
+    interface _ListRuleSnapshotsResponse
+      include Smithy::Client::_Response[Types::ListRuleSnapshotsOutput]
+      def next_token: () -> String?
+      def snapshots: () -> Array[Types::RuleSummary]?
+    end
+    def list_rule_snapshots: (
+      ?rule_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListRuleSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRuleSnapshotsResponse
+
+    interface _ListRulesResponse
+      include Smithy::Client::_Response[Types::ListRulesOutput]
+      def next_token: () -> String?
+      def rules: () -> Array[Types::RuleSummary]?
+    end
+    def list_rules: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListRulesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRulesResponse
+
+    interface _ListScopeSnapshotsResponse
+      include Smithy::Client::_Response[Types::ListScopeSnapshotsOutput]
+      def next_token: () -> String?
+      def snapshots: () -> Array[Types::ScopeSummary]?
+    end
+    def list_scope_snapshots: (
+      ?scope_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListScopeSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScopeSnapshotsResponse
+
+    interface _ListScopesResponse
+      include Smithy::Client::_Response[Types::ListScopesOutput]
+      def next_token: () -> String?
+      def scopes: () -> Array[Types::ScopeSummary]?
+    end
+    def list_scopes: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListScopesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListScopesResponse
+
+    interface _ListTagsForResourceResponse
+      include Smithy::Client::_Response[Types::ListTagsForResourceOutput]
+      def tags: () -> Hash[String, String]?
+    end
+    def list_tags_for_resource: (
+      ?resource_arn: String
+    ) -> _ListTagsForResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTagsForResourceResponse
+
+    interface _ListTemplateSnapshotsResponse
+      include Smithy::Client::_Response[Types::ListTemplateSnapshotsOutput]
+      def next_token: () -> String?
+      def snapshots: () -> Array[Types::TemplateSummary]?
+    end
+    def list_template_snapshots: (
+      ?template_identifier: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListTemplateSnapshotsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplateSnapshotsResponse
+
+    interface _ListTemplatesResponse
+      include Smithy::Client::_Response[Types::ListTemplatesOutput]
+      def next_token: () -> String?
+      def templates: () -> Array[Types::TemplateSummary]?
+    end
+    def list_templates: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?status: String
+    ) -> _ListTemplatesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListTemplatesResponse
+
+    interface _PutAdminAccountResponse
+      include Smithy::Client::_Response[Types::PutAdminAccountResponse]
+      def admin_account_details: () -> Types::AdminAccountDetails?
+    end
+    def put_admin_account: (
+      ?account_id: String,
+      ?priority: Integer,
+      ?admin_scope: {
+        scope_filter: {
+          include_all: {
+          },
+          include_only: {
+            accounts: Array[String],
+            organizational_units: Array[String]
+          },
+          exclude_only: untyped
+        },
+        firewall_type_scope: {
+          all_firewall_types_enabled: bool,
+          firewall_types: Array[String]
+        }
+      }
+    ) -> _PutAdminAccountResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _PutAdminAccountResponse
+
+    interface _TagResourceResponse
+      include Smithy::Client::_Response[Types::TagResourceOutput]
+    end
+    def tag_resource: (
+      ?resource_arn: String,
+      ?tags: Hash[String, String]
+    ) -> _TagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _TagResourceResponse
+
+    interface _UntagResourceResponse
+      include Smithy::Client::_Response[Types::UntagResourceOutput]
+    end
+    def untag_resource: (
+      ?resource_arn: String,
+      ?tag_keys: Array[String]
+    ) -> _UntagResourceResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UntagResourceResponse
+
+    interface _UpdateDeploymentResponse
+      include Smithy::Client::_Response[Types::UpdateDeploymentOutput]
+      def deployment_id: () -> String?
+      def deployment_arn: () -> String?
+      def deployment_name: () -> String?
+      def deployment_description: () -> String?
+      def status: () -> String?
+      def deployment_configuration: () -> Types::DeploymentConfiguration?
+      def associated_policy_list: () -> Array[Types::AssociatedPolicy]?
+      def associated_scope_list: () -> Array[Types::AssociatedScope]?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def deployment_coverage: () -> Array[Types::DeploymentCoverageEntry]?
+      def warnings: () -> Array[Types::DeploymentWarningEntry]?
+      def updated_at: () -> Time?
+    end
+    def update_deployment: (
+      ?deployment_identifier: String,
+      ?update_token: String,
+      ?deployment_description: String,
+      ?deployment_configuration: {
+        enable_cross_account_visibility: bool
+      },
+      ?associated_policy_list: Array[
+        {
+          policy_identifier: String
+        }
+      ],
+      ?associated_scope_list: Array[
+        {
+          scope_identifier: String
+        }
+      ],
+      ?is_published: bool,
+      ?client_token: String
+    ) -> _UpdateDeploymentResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDeploymentResponse
+
+    interface _UpdatePolicyResponse
+      include Smithy::Client::_Response[Types::UpdatePolicyOutput]
+      def policy_id: () -> String?
+      def policy_arn: () -> String?
+      def policy_name: () -> String?
+      def policy_description: () -> String?
+      def status: () -> String?
+      def priority: () -> Integer?
+      def associated_template_and_rule_list: () -> Array[Types::AssociatedTemplateOrRule]?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def firewall_type: () -> String?
+      def policy_configuration: () -> Types::PolicyConfiguration?
+      def updated_at: () -> Time?
+    end
+    def update_policy: (
+      ?policy_identifier: String,
+      ?update_token: String,
+      ?policy_description: String,
+      ?priority: Integer,
+      ?associated_template_and_rule_list: Array[
+        {
+          template_identifier: String,
+          rule_identifier: String
+        }
+      ],
+      ?policy_configuration: {
+        remediation_enabled: bool,
+        resources_clean_up: bool,
+        waf_config: {
+          existing_customer_web_acl_resolution: String,
+          conflict_resolution: String
+        }
+      },
+      ?is_published: bool,
+      ?client_token: String
+    ) -> _UpdatePolicyResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdatePolicyResponse
+
+    interface _UpdateRuleResponse
+      include Smithy::Client::_Response[Types::UpdateRuleOutput]
+      def rule_id: () -> String?
+      def rule_arn: () -> String?
+      def rule_name: () -> String?
+      def firewall_type: () -> String?
+      def rule_type: () -> String?
+      def rule_description: () -> String?
+      def configuration: () -> Smithy::Schema::document?
+      def status: () -> String?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+    end
+    def update_rule: (
+      ?rule_identifier: String,
+      ?update_token: String,
+      ?rule_type: String,
+      ?rule_description: String,
+      ?configuration: Smithy::Schema::document,
+      ?is_published: bool,
+      ?client_token: String
+    ) -> _UpdateRuleResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateRuleResponse
+
+    interface _UpdateScopeResponse
+      include Smithy::Client::_Response[Types::UpdateScopeOutput]
+      def scope_id: () -> String?
+      def scope_arn: () -> String?
+      def scope_name: () -> String?
+      def scope_description: () -> String?
+      def scope_configuration: () -> Types::ScopeConfiguration?
+      def status: () -> String?
+      def version: () -> String?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def updated_at: () -> Time?
+    end
+    def update_scope: (
+      ?scope_identifier: String,
+      ?update_token: String,
+      ?scope_description: String,
+      ?scope_configuration: {
+        account_filter: {
+          include_all: {
+          },
+          include: {
+            account_ids: Array[String],
+            organizational_units: Array[String]
+          },
+          exclude: untyped
+        },
+        resource_scopes: Hash[String,
+          {
+            include_all: bool,
+            include: {
+              explicit_arns: Array[String],
+              expression: {
+                criteria: {
+                  tags: Hash[String, String],
+                  alb_config: {
+                    scheme: String,
+                    ip_address_type: String
+                  }
+                },
+                and: Array[
+                  {
+                    criteria: untyped,
+                    and: untyped,
+                    or: untyped,
+                    not: untyped
+                  }
+                ],
+                or: untyped,
+                not: untyped
+              }
+            },
+            exclude: untyped
+          }
+        ]
+      },
+      ?is_published: bool,
+      ?client_token: String
+    ) -> _UpdateScopeResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateScopeResponse
+
+    interface _UpdateTemplateResponse
+      include Smithy::Client::_Response[Types::UpdateTemplateOutput]
+      def template_id: () -> String?
+      def template_arn: () -> String?
+      def template_name: () -> String?
+      def template_description: () -> String?
+      def status: () -> String?
+      def version: () -> String?
+      def associated_rule_list: () -> Array[Types::AssociatedRule]?
+      def update_token: () -> String?
+      def is_snapshot: () -> bool?
+      def has_published_version: () -> bool?
+      def firewall_type: () -> String?
+      def updated_at: () -> Time?
+    end
+    def update_template: (
+      ?template_identifier: String,
+      ?update_token: String,
+      ?template_description: String,
+      ?associated_rule_list: Array[
+        {
+          rule_identifier: String
+        }
+      ],
+      ?is_published: bool,
+      ?client_token: String
+    ) -> _UpdateTemplateResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateTemplateResponse
+  end
+end

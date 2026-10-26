@@ -47,7 +47,7 @@ module Aws::ElasticBeanstalk
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>AWS CodeBuild is not available in the specified region.</p>
+    # <p>CodeBuild is not available in the specified region.</p>
     class CodeBuildNotInServiceRegionException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::CodeBuildNotInServiceRegionException] data
@@ -75,8 +75,7 @@ module Aws::ElasticBeanstalk
       end
     end
 
-    # <p>The specified account does not have sufficient privileges for one or more AWS
-    #       services.</p>
+    # <p>The specified account does not have sufficient privileges for one or more Amazon Web Services services.</p>
     class InsufficientPrivilegesException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::ElasticBeanstalk::Types::InsufficientPrivilegesException] data

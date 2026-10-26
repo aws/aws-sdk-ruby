@@ -51,6 +51,11 @@ module Aws::Mq
       def message
         @data[:message]
       end
+
+      # <p>The list of resource share errors.</p>
+      def resource_share_errors
+        @data[:resource_share_errors]
+      end
     end
 
     # <p>Returns information about an error.</p>
@@ -69,6 +74,11 @@ module Aws::Mq
       # <p>The explanation of the error.</p>
       def message
         @data[:message]
+      end
+
+      # <p>The list of resource share errors.</p>
+      def resource_share_errors
+        @data[:resource_share_errors]
       end
     end
 
@@ -89,6 +99,11 @@ module Aws::Mq
       def message
         @data[:message]
       end
+
+      # <p>The list of resource share errors.</p>
+      def resource_share_errors
+        @data[:resource_share_errors]
+      end
     end
 
     # <p>Returns information about an error.</p>
@@ -107,6 +122,11 @@ module Aws::Mq
       # <p>The explanation of the error.</p>
       def message
         @data[:message]
+      end
+
+      # <p>The list of resource share errors.</p>
+      def resource_share_errors
+        @data[:resource_share_errors]
       end
     end
 
@@ -127,6 +147,11 @@ module Aws::Mq
       def message
         @data[:message]
       end
+
+      # <p>The list of resource share errors.</p>
+      def resource_share_errors
+        @data[:resource_share_errors]
+      end
     end
 
     # <p>Returns information about an error.</p>
@@ -145,6 +170,11 @@ module Aws::Mq
       # <p>The explanation of the error.</p>
       def message
         @data[:message]
+      end
+
+      # <p>The list of resource share errors.</p>
+      def resource_share_errors
+        @data[:resource_share_errors]
       end
     end
   end

@@ -257,9 +257,103 @@ module Aws::WorkSpacesWeb
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The browser settings resource that can be associated with a web portal. Once associated
-    #          with a web portal, browser settings control how the browser will behave once a user starts
-    #          a streaming session for the web portal. </p>
+    # <p>The branding configuration output including custom images metadata, localized strings, color theme, and terms of service.</p>
+    # @!attribute logo
+    #   <p>Metadata for the logo image file, including the MIME type, file extension, and upload timestamp.</p>
+    #   @return [Types::ImageMetadata]
+    # @!attribute wallpaper
+    #   <p>Metadata for the wallpaper image file, including the MIME type, file extension, and upload timestamp.</p>
+    #   @return [Types::ImageMetadata]
+    # @!attribute favicon
+    #   <p>Metadata for the favicon image file, including the MIME type, file extension, and upload timestamp.</p>
+    #   @return [Types::ImageMetadata]
+    # @!attribute localized_strings
+    #   <p>A map of localized text strings for different languages, allowing the portal to display content in the user's preferred language.</p>
+    #   @return [Hash<String, Types::LocalizedBrandingStrings>]
+    # @!attribute color_theme
+    #   <p>The color theme for components on the web portal.</p>
+    #   @return [String]
+    # @!attribute terms_of_service
+    #   <p>The terms of service text in Markdown format that users must accept before accessing the portal.</p>
+    #   @return [String]
+    class BrandingConfiguration < Struct.new(
+      nil,
+      :logo,
+      :wallpaper,
+      :favicon,
+      :localized_strings,
+      :color_theme,
+      :terms_of_service,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The input configuration for creating branding settings.</p>
+    # @!attribute logo
+    #   <p>The logo image for the portal. Provide either a binary image file or an S3 URI pointing to the image file. Maximum 100 KB in JPEG, PNG, or ICO format.</p>
+    #   @return [Types::IconImageInput]
+    # @!attribute wallpaper
+    #   <p>The wallpaper image for the portal. Provide either a binary image file or an S3 URI pointing to the image file. Maximum 5 MB in JPEG or PNG format. If not provided, a default wallpaper will be used as the background image.</p>
+    #   @return [Types::WallpaperImageInput]
+    # @!attribute favicon
+    #   <p>The favicon image for the portal. Provide either a binary image file or an S3 URI pointing to the image file. Maximum 100 KB in JPEG, PNG, or ICO format.</p>
+    #   @return [Types::IconImageInput]
+    # @!attribute localized_strings
+    #   <p>A map of localized text strings for different supported languages. Each locale must provide the required fields <code>browserTabTitle</code> and <code>welcomeText</code>.</p>
+    #   @return [Hash<String, Types::LocalizedBrandingStrings>]
+    # @!attribute color_theme
+    #   <p>The color theme for components on the web portal. Choose <code>Light</code> if you upload a dark wallpaper, or <code>Dark</code> for a light wallpaper.</p>
+    #   @return [String]
+    # @!attribute terms_of_service
+    #   <p>The terms of service text in Markdown format. Users will be presented with the terms of service after successfully signing in.</p>
+    #   @return [String]
+    class BrandingConfigurationCreateInput < Struct.new(
+      nil,
+      :logo,
+      :wallpaper,
+      :favicon,
+      :localized_strings,
+      :color_theme,
+      :terms_of_service,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The input configuration for updating branding settings. All fields are optional when updating existing branding.</p>
+    # @!attribute logo
+    #   <p>The logo image for the portal. Provide either a binary image file or an S3 URI pointing to the image file. Maximum 100 KB in JPEG, PNG, or ICO format.</p>
+    #   @return [Types::IconImageInput]
+    # @!attribute wallpaper
+    #   <p>The wallpaper image for the portal. Provide either a binary image file or an S3 URI pointing to the image file. Maximum 5 MB in JPEG or PNG format.</p>
+    #   @return [Types::WallpaperImageInput]
+    # @!attribute favicon
+    #   <p>The favicon image for the portal. Provide either a binary image file or an S3 URI pointing to the image file. Maximum 100 KB in JPEG, PNG, or ICO format.</p>
+    #   @return [Types::IconImageInput]
+    # @!attribute localized_strings
+    #   <p>A map of localized text strings for different supported languages. Each locale must provide the required fields <code>browserTabTitle</code> and <code>welcomeText</code>.</p>
+    #   @return [Hash<String, Types::LocalizedBrandingStrings>]
+    # @!attribute color_theme
+    #   <p>The color theme for components on the web portal. Choose <code>Light</code> if you upload a dark wallpaper, or <code>Dark</code> for a light wallpaper.</p>
+    #   @return [String]
+    # @!attribute terms_of_service
+    #   <p>The terms of service text in Markdown format. To remove existing terms of service, provide an empty string.</p>
+    #   @return [String]
+    class BrandingConfigurationUpdateInput < Struct.new(
+      nil,
+      :logo,
+      :wallpaper,
+      :favicon,
+      :localized_strings,
+      :color_theme,
+      :terms_of_service,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The browser settings resource that can be associated with a web portal. Once associated with a web portal, browser settings control how the browser will behave once a user starts a streaming session for the web portal. </p>
     # @!attribute browser_settings_arn
     #   <p>The ARN of the browser settings.</p>
     #   @return [String]
@@ -267,16 +361,17 @@ module Aws::WorkSpacesWeb
     #   <p>A list of web portal ARNs that this browser settings is associated with.</p>
     #   @return [Array<String>]
     # @!attribute browser_policy
-    #   <p>A JSON string containing Chrome Enterprise policies that will be applied to all
-    #            streaming sessions.</p>
+    #   <p>A JSON string containing Chrome Enterprise policies that will be applied to all streaming sessions.</p>
     #   @return [String]
     # @!attribute customer_managed_key
-    #   <p>The customer managed key used to encrypt sensitive information in the browser
-    #            settings.</p>
+    #   <p>The customer managed key used to encrypt sensitive information in the browser settings.</p>
     #   @return [String]
     # @!attribute additional_encryption_context
     #   <p>The additional encryption context of the browser settings.</p>
     #   @return [Hash<String, String>]
+    # @!attribute web_content_filtering_policy
+    #   <p>The policy that specifies which URLs end users are allowed to access or which URLs or domain categories they are restricted from accessing for enhanced security.</p>
+    #   @return [Types::WebContentFilteringPolicy]
     class BrowserSettings < Struct.new(
       nil,
       :browser_settings_arn,
@@ -284,6 +379,7 @@ module Aws::WorkSpacesWeb
       :browser_policy,
       :customer_managed_key,
       :additional_encryption_context,
+      :web_content_filtering_policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -400,16 +496,13 @@ module Aws::WorkSpacesWeb
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The configuration that specifies which cookies should be synchronized from the end
-    #          user's local browser to the remote browser.</p>
+    # <p>The configuration that specifies which cookies should be synchronized from the end user's local browser to the remote browser.</p>
     # @note This shape contains sensitive data and should be treated as such.
     # @!attribute allowlist
-    #   <p>The list of cookie specifications that are allowed to be synchronized to the remote
-    #            browser.</p>
+    #   <p>The list of cookie specifications that are allowed to be synchronized to the remote browser.</p>
     #   @return [Array<Types::CookieSpecification>]
     # @!attribute blocklist
-    #   <p>The list of cookie specifications that are blocked from being synchronized to the remote
-    #            browser.</p>
+    #   <p>The list of cookie specifications that are blocked from being synchronized to the remote browser.</p>
     #   @return [Array<Types::CookieSpecification>]
     class CookieSynchronizationConfiguration < Struct.new(
       nil,
@@ -430,17 +523,14 @@ module Aws::WorkSpacesWeb
     #   <p>Additional encryption context of the browser settings.</p>
     #   @return [Hash<String, String>]
     # @!attribute browser_policy
-    #   <p>A JSON string containing Chrome Enterprise policies that will be applied to all
-    #            streaming sessions.</p>
+    #   <p>A JSON string containing Chrome Enterprise policies that will be applied to all streaming sessions.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request.</p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.
-    #         </p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request.</p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK. </p>
     #   @return [String]
+    # @!attribute web_content_filtering_policy
+    #   <p>The policy that specifies which URLs end users are allowed to access or which URLs or domain categories they are restricted from accessing for enhanced security.</p>
+    #   @return [Types::WebContentFilteringPolicy]
     class CreateBrowserSettingsRequest < Struct.new(
       nil,
       :tags,
@@ -448,6 +538,7 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :browser_policy,
       :client_token,
+      :web_content_filtering_policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -483,12 +574,7 @@ module Aws::WorkSpacesWeb
     #   <p>The inline redaction configuration of the data protection settings that will be applied to all sessions.</p>
     #   @return [Types::InlineRedactionConfiguration]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class CreateDataProtectionSettingsRequest < Struct.new(
       nil,
@@ -525,182 +611,10 @@ module Aws::WorkSpacesWeb
     #   <p>The identity provider type.</p>
     #   @return [String]
     # @!attribute identity_provider_details
-    #   <p>The identity provider details. The following list describes the provider detail keys for
-    #            each identity provider type. </p>
-    #            <ul>
-    #               <li>
-    #                  <p>For Google and Login with Amazon:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_secret</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For Facebook:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_secret</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>api_version</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For Sign in with Apple:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>team_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>key_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>private_key</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For OIDC providers:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_secret</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>attributes_request_method</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>oidc_issuer</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_url</code>
-    #                           <i>if not available from discovery URL specified by
-    #                              <code>oidc_issuer</code> key</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>token_url</code>
-    #                           <i>if not available from discovery URL specified by
-    #                              <code>oidc_issuer</code> key</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>attributes_url</code>
-    #                           <i>if not available from discovery URL specified by
-    #                              <code>oidc_issuer</code> key</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>jwks_uri</code>
-    #                           <i>if not available from discovery URL specified by
-    #                              <code>oidc_issuer</code> key</i>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For SAML providers:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>MetadataFile</code> OR <code>MetadataURL</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>IDPSignout</code> (boolean) <i>optional</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>IDPInit</code> (boolean) <i>optional</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>RequestSigningAlgorithm</code> (string) <i>optional</i>
-    #                        - Only accepts <code>rsa-sha256</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>EncryptedResponses</code> (boolean) <i>optional</i>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The identity provider details. The following list describes the provider detail keys for each identity provider type. </p> <ul> <li> <p>For Google and Login with Amazon:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>client_secret</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> </ul> </li> <li> <p>For Facebook:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>client_secret</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> <li> <p> <code>api_version</code> </p> </li> </ul> </li> <li> <p>For Sign in with Apple:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>team_id</code> </p> </li> <li> <p> <code>key_id</code> </p> </li> <li> <p> <code>private_key</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> </ul> </li> <li> <p>For OIDC providers:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>client_secret</code> </p> </li> <li> <p> <code>attributes_request_method</code> </p> </li> <li> <p> <code>oidc_issuer</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> <li> <p> <code>authorize_url</code> <i>if not available from discovery URL specified by <code>oidc_issuer</code> key</i> </p> </li> <li> <p> <code>token_url</code> <i>if not available from discovery URL specified by <code>oidc_issuer</code> key</i> </p> </li> <li> <p> <code>attributes_url</code> <i>if not available from discovery URL specified by <code>oidc_issuer</code> key</i> </p> </li> <li> <p> <code>jwks_uri</code> <i>if not available from discovery URL specified by <code>oidc_issuer</code> key</i> </p> </li> </ul> </li> <li> <p>For SAML providers:</p> <ul> <li> <p> <code>MetadataFile</code> OR <code>MetadataURL</code> </p> </li> <li> <p> <code>IDPSignout</code> (boolean) <i>optional</i> </p> </li> <li> <p> <code>IDPInit</code> (boolean) <i>optional</i> </p> </li> <li> <p> <code>RequestSigningAlgorithm</code> (string) <i>optional</i> - Only accepts <code>rsa-sha256</code> </p> </li> <li> <p> <code>EncryptedResponses</code> (boolean) <i>optional</i> </p> </li> </ul> </li> </ul>
     #   @return [Hash<String, String>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request.</p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request.</p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags to add to the identity provider resource. A tag is a key-value pair.</p>
@@ -748,12 +662,7 @@ module Aws::WorkSpacesWeb
     #   <p>The IP rules of the IP access settings.</p>
     #   @return [Array<Types::IpRule>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class CreateIpAccessSettingsRequest < Struct.new(
       nil,
@@ -784,23 +693,16 @@ module Aws::WorkSpacesWeb
     #   <p>The VPC that streaming instances will connect to.</p>
     #   @return [String]
     # @!attribute subnet_ids
-    #   <p>The subnets in which network interfaces are created to connect streaming instances to
-    #            your VPC. At least two of these subnets must be in different availability zones.</p>
+    #   <p>The subnets in which network interfaces are created to connect streaming instances to your VPC. At least two of these subnets must be in different availability zones.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
-    #   <p>One or more security groups used to control access from streaming instances to your
-    #            VPC.</p>
+    #   <p>One or more security groups used to control access from streaming instances to your VPC.</p>
     #   @return [Array<String>]
     # @!attribute tags
     #   <p>The tags to add to the network settings resource. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class CreateNetworkSettingsRequest < Struct.new(
       nil,
@@ -826,8 +728,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute display_name
-    #   <p>The name of the web portal. This is not visible to users who log into the web
-    #            portal.</p>
+    #   <p>The name of the web portal. This is not visible to users who log into the web portal.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags to add to the web portal. A tag is a key-value pair.</p>
@@ -839,25 +740,10 @@ module Aws::WorkSpacesWeb
     #   <p>The additional encryption context of the portal.</p>
     #   @return [Hash<String, String>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     # @!attribute authentication_type
-    #   <p>The type of authentication integration points used when signing into the web portal.
-    #            Defaults to <code>Standard</code>.</p>
-    #            <p>
-    #               <code>Standard</code> web portals are authenticated directly through your identity
-    #            provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity
-    #            provider with your web portal. User and group access to your web portal is controlled
-    #            through your identity provider.</p>
-    #            <p>
-    #               <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center. Identity sources
-    #            (including external identity provider integration), plus user and group access to your web
-    #            portal, can be configured in the IAM Identity Center.</p>
+    #   <p>The type of authentication integration points used when signing into the web portal. Defaults to <code>Standard</code>.</p> <p> <code>Standard</code> web portals are authenticated directly through your identity provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity provider with your web portal. User and group access to your web portal is controlled through your identity provider.</p> <p> <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center. Identity sources (including external identity provider integration), plus user and group access to your web portal, can be configured in the IAM Identity Center.</p>
     #   @return [String]
     # @!attribute instance_type
     #   <p>The type and resources of the underlying instance.</p>
@@ -865,6 +751,9 @@ module Aws::WorkSpacesWeb
     # @!attribute max_concurrent_sessions
     #   <p>The maximum number of concurrent sessions for the portal.</p>
     #   @return [Integer]
+    # @!attribute portal_custom_domain
+    #   <p>The custom domain of the web portal that users access in order to start streaming sessions.</p>
+    #   @return [String]
     class CreatePortalRequest < Struct.new(
       nil,
       :display_name,
@@ -875,6 +764,7 @@ module Aws::WorkSpacesWeb
       :authentication_type,
       :instance_type,
       :max_concurrent_sessions,
+      :portal_custom_domain,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -884,8 +774,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     # @!attribute portal_endpoint
-    #   <p>The endpoint URL of the web portal that users access in order to start streaming
-    #            sessions.</p>
+    #   <p>The endpoint URL of the web portal that users access in order to start streaming sessions.</p>
     #   @return [String]
     class CreatePortalResponse < Struct.new(
       nil,
@@ -949,12 +838,7 @@ module Aws::WorkSpacesWeb
     #   <p>The tags to add to the trust store. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class CreateTrustStoreRequest < Struct.new(
       nil,
@@ -984,12 +868,7 @@ module Aws::WorkSpacesWeb
     #   <p>The tags to add to the user settings resource. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class CreateUserAccessLoggingSettingsRequest < Struct.new(
       nil,
@@ -1013,20 +892,16 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute copy_allowed
-    #   <p>Specifies whether the user can copy text from the streaming session to the local
-    #            device.</p>
+    #   <p>Specifies whether the user can copy text from the streaming session to the local device.</p>
     #   @return [String]
     # @!attribute paste_allowed
-    #   <p>Specifies whether the user can paste text from the local device to the streaming
-    #            session.</p>
+    #   <p>Specifies whether the user can paste text from the local device to the streaming session.</p>
     #   @return [String]
     # @!attribute download_allowed
-    #   <p>Specifies whether the user can download files from the streaming session to the local
-    #            device.</p>
+    #   <p>Specifies whether the user can download files from the streaming session to the local device.</p>
     #   @return [String]
     # @!attribute upload_allowed
-    #   <p>Specifies whether the user can upload files from the local device to the streaming
-    #            session.</p>
+    #   <p>Specifies whether the user can upload files from the local device to the streaming session.</p>
     #   @return [String]
     # @!attribute print_allowed
     #   <p>Specifies whether the user can print to the local device.</p>
@@ -1035,39 +910,35 @@ module Aws::WorkSpacesWeb
     #   <p>The tags to add to the user settings resource. A tag is a key-value pair.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute disconnect_timeout_in_minutes
-    #   <p>The amount of time that a streaming session remains active after users
-    #            disconnect.</p>
+    #   <p>The amount of time that a streaming session remains active after users disconnect.</p>
     #   @return [Integer]
     # @!attribute idle_disconnect_timeout_in_minutes
-    #   <p>The amount of time that users can be idle (inactive) before they are disconnected from
-    #            their streaming session and the disconnect timeout interval begins.</p>
+    #   <p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.</p>
     #   @return [Integer]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     # @!attribute cookie_synchronization_configuration
-    #   <p>The configuration that specifies which cookies should be synchronized from the end
-    #            user's local browser to the remote browser.</p>
+    #   <p>The configuration that specifies which cookies should be synchronized from the end user's local browser to the remote browser.</p>
     #   @return [Types::CookieSynchronizationConfiguration]
     # @!attribute customer_managed_key
-    #   <p>The customer managed key used to encrypt sensitive information in the user
-    #            settings.</p>
+    #   <p>The customer managed key used to encrypt sensitive information in the user settings.</p>
     #   @return [String]
     # @!attribute additional_encryption_context
     #   <p>The additional encryption context of the user settings.</p>
     #   @return [Hash<String, String>]
     # @!attribute deep_link_allowed
-    #   <p>Specifies whether the user can use deep links that open automatically when connecting to
-    #            a session.</p>
+    #   <p>Specifies whether the user can use deep links that open automatically when connecting to a session.</p>
     #   @return [String]
     # @!attribute toolbar_configuration
     #   <p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>
     #   @return [Types::ToolbarConfiguration]
+    # @!attribute branding_configuration_input
+    #   <p>The branding configuration input that customizes the appearance of the web portal for end users. This includes a custom logo, favicon, localized strings, color theme, and optionally a wallpaper and terms of service.</p>
+    #   @return [Types::BrandingConfigurationCreateInput]
+    # @!attribute web_authn_allowed
+    #   <p>Specifies whether the user can use WebAuthn redirection for passwordless login to websites within the streaming session.</p>
+    #   @return [String]
     class CreateUserSettingsRequest < Struct.new(
       nil,
       :copy_allowed,
@@ -1084,6 +955,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :deep_link_allowed,
       :toolbar_configuration,
+      :branding_configuration_input,
+      :web_authn_allowed,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -1132,8 +1005,7 @@ module Aws::WorkSpacesWeb
     #   <p>The inline redaction configuration for the data protection settings.</p>
     #   @return [Types::InlineRedactionConfiguration]
     # @!attribute associated_portal_arns
-    #   <p>A list of web portal ARNs that this data protection settings resource is associated
-    #            with.</p>
+    #   <p>A list of web portal ARNs that this data protection settings resource is associated with.</p>
     #   @return [Array<String>]
     # @!attribute display_name
     #   <p>The display name of the data protection settings.</p>
@@ -1145,8 +1017,7 @@ module Aws::WorkSpacesWeb
     #   <p>The creation date timestamp of the data protection settings.</p>
     #   @return [Time]
     # @!attribute customer_managed_key
-    #   <p>The customer managed key used to encrypt sensitive information in the data protection
-    #            settings.</p>
+    #   <p>The customer managed key used to encrypt sensitive information in the data protection settings.</p>
     #   @return [String]
     # @!attribute additional_encryption_context
     #   <p>The additional encryption context of the data protection settings.</p>
@@ -1858,6 +1729,26 @@ module Aws::WorkSpacesWeb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The input for an icon image (logo or favicon). Provide either a binary image file or an S3 URI pointing to the image file. Maximum 100 KB in JPEG, PNG, or ICO format.</p>
+    # @!attribute blob
+    #   <p>The image provided as a binary image file.</p>
+    #   @return [String]
+    # @!attribute s3_uri
+    #   <p>The S3 URI pointing to the image file. The URI must use the format <code>s3://bucket-name/key-name</code>. You must have read access to the S3 object.</p>
+    #   @return [String]
+    class IconImageInput < Struct.new(
+      :blob,
+      :s3_uri,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Blob < IconImageInput; end
+      class S3Uri < IconImageInput; end
+      class Unknown < IconImageInput; end
+    end
+
     # <p>The identity provider.</p>
     # @!attribute identity_provider_arn
     #   <p>The ARN of the identity provider.</p>
@@ -1869,174 +1760,7 @@ module Aws::WorkSpacesWeb
     #   <p>The identity provider type.</p>
     #   @return [String]
     # @!attribute identity_provider_details
-    #   <p>The identity provider details. The following list describes the provider detail keys for
-    #            each identity provider type. </p>
-    #            <ul>
-    #               <li>
-    #                  <p>For Google and Login with Amazon:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_secret</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For Facebook:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_secret</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>api_version</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For Sign in with Apple:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>team_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>key_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>private_key</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For OIDC providers:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_secret</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>attributes_request_method</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>oidc_issuer</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_url</code>
-    #                           <i>if not available from discovery URL specified by oidc_issuer
-    #                           key</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>token_url</code>
-    #                           <i>if not available from discovery URL specified by oidc_issuer
-    #                           key</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>attributes_url</code>
-    #                           <i>if not available from discovery URL specified by oidc_issuer
-    #                           key</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>jwks_uri</code>
-    #                           <i>if not available from discovery URL specified by oidc_issuer
-    #                           key</i>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For SAML providers:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>MetadataFile</code> OR <code>MetadataURL</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>IDPSignout</code> (boolean) <i>optional</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>IDPInit</code> (boolean) <i>optional</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>RequestSigningAlgorithm</code> (string) <i>optional</i>
-    #                        - Only accepts <code>rsa-sha256</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>EncryptedResponses</code> (boolean) <i>optional</i>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The identity provider details. The following list describes the provider detail keys for each identity provider type. </p> <ul> <li> <p>For Google and Login with Amazon:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>client_secret</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> </ul> </li> <li> <p>For Facebook:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>client_secret</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> <li> <p> <code>api_version</code> </p> </li> </ul> </li> <li> <p>For Sign in with Apple:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>team_id</code> </p> </li> <li> <p> <code>key_id</code> </p> </li> <li> <p> <code>private_key</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> </ul> </li> <li> <p>For OIDC providers:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>client_secret</code> </p> </li> <li> <p> <code>attributes_request_method</code> </p> </li> <li> <p> <code>oidc_issuer</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> <li> <p> <code>authorize_url</code> <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p> <code>token_url</code> <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p> <code>attributes_url</code> <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> <li> <p> <code>jwks_uri</code> <i>if not available from discovery URL specified by oidc_issuer key</i> </p> </li> </ul> </li> <li> <p>For SAML providers:</p> <ul> <li> <p> <code>MetadataFile</code> OR <code>MetadataURL</code> </p> </li> <li> <p> <code>IDPSignout</code> (boolean) <i>optional</i> </p> </li> <li> <p> <code>IDPInit</code> (boolean) <i>optional</i> </p> </li> <li> <p> <code>RequestSigningAlgorithm</code> (string) <i>optional</i> - Only accepts <code>rsa-sha256</code> </p> </li> <li> <p> <code>EncryptedResponses</code> (boolean) <i>optional</i> </p> </li> </ul> </li> </ul>
     #   @return [Hash<String, String>]
     class IdentityProvider < Struct.new(
       nil,
@@ -2069,6 +1793,26 @@ module Aws::WorkSpacesWeb
       include ::Smithy::Schema::Structure
     end
 
+    # <p>Metadata information about an uploaded image file.</p>
+    # @!attribute mime_type
+    #   <p>The MIME type of the image.</p>
+    #   @return [String]
+    # @!attribute file_extension
+    #   <p>The file extension of the image.</p>
+    #   @return [String]
+    # @!attribute last_upload_timestamp
+    #   <p>The timestamp when the image was last uploaded.</p>
+    #   @return [Time]
+    class ImageMetadata < Struct.new(
+      nil,
+      :mime_type,
+      :file_extension,
+      :last_upload_timestamp,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The configuration for in-session inline redaction.</p>
     # @!attribute inline_redaction_patterns
     #   <p>The inline redaction patterns to be enabled for the inline redaction configuration.</p>
@@ -2080,14 +1824,7 @@ module Aws::WorkSpacesWeb
     #   <p>The global exempt URL configuration for the inline redaction configuration. This is applied to patterns that do not have a pattern-level exempt URL list.</p>
     #   @return [Array<String>]
     # @!attribute global_confidence_level
-    #   <p>The global confidence level for the inline redaction configuration. This indicates the
-    #            certainty of data type matches in the redaction process. Confidence level 3 means high
-    #            confidence, and requires a formatted text pattern match in order for content to be
-    #            redacted. Confidence level 2 means medium confidence, and redaction considers both
-    #            formatted and unformatted text, and adds keyword associate to the logic. Confidence level 1
-    #            means low confidence, and redaction is enforced for both formatted pattern + unformatted
-    #            pattern without keyword. This is applied to patterns that do not have a pattern-level
-    #            confidence level. Defaults to confidence level 2.</p>
+    #   <p>The global confidence level for the inline redaction configuration. This indicates the certainty of data type matches in the redaction process. Confidence level 3 means high confidence, and requires a formatted text pattern match in order for content to be redacted. Confidence level 2 means medium confidence, and redaction considers both formatted and unformatted text, and adds keyword associate to the logic. Confidence level 1 means low confidence, and redaction is enforced for both formatted pattern + unformatted pattern without keyword. This is applied to patterns that do not have a pattern-level confidence level. Defaults to confidence level 2.</p>
     #   @return [Integer]
     class InlineRedactionConfiguration < Struct.new(
       nil,
@@ -2117,13 +1854,7 @@ module Aws::WorkSpacesWeb
     #   <p>The exempt URL configuration for the inline redaction pattern. This will override the global exempt URL configuration for the inline redaction pattern.</p>
     #   @return [Array<String>]
     # @!attribute confidence_level
-    #   <p>The confidence level for inline redaction pattern. This indicates the certainty of data
-    #            type matches in the redaction process. Confidence level 3 means high confidence, and
-    #            requires a formatted text pattern match in order for content to be redacted. Confidence
-    #            level 2 means medium confidence, and redaction considers both formatted and unformatted
-    #            text, and adds keyword associate to the logic. Confidence level 1 means low confidence, and
-    #            redaction is enforced for both formatted pattern + unformatted pattern without keyword.
-    #            This overrides the global confidence level.</p>
+    #   <p>The confidence level for inline redaction pattern. This indicates the certainty of data type matches in the redaction process. Confidence level 3 means high confidence, and requires a formatted text pattern match in order for content to be redacted. Confidence level 2 means medium confidence, and redaction considers both formatted and unformatted text, and adds keyword associate to the logic. Confidence level 1 means low confidence, and redaction is enforced for both formatted pattern + unformatted pattern without keyword. This overrides the global confidence level.</p>
     #   @return [Integer]
     class InlineRedactionPattern < Struct.new(
       nil,
@@ -2163,8 +1894,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the IP access settings resource.</p>
     #   @return [String]
     # @!attribute associated_portal_arns
-    #   <p>A list of web portal ARNs that this IP access settings resource is associated
-    #            with.</p>
+    #   <p>A list of web portal ARNs that this IP access settings resource is associated with.</p>
     #   @return [Array<String>]
     # @!attribute ip_rules
     #   <p>The IP rules of the IP access settings.</p>
@@ -2179,8 +1909,7 @@ module Aws::WorkSpacesWeb
     #   <p>The creation date timestamp of the IP access settings.</p>
     #   @return [Time]
     # @!attribute customer_managed_key
-    #   <p>The customer managed key used to encrypt sensitive information in the IP access
-    #            settings.</p>
+    #   <p>The customer managed key used to encrypt sensitive information in the IP access settings.</p>
     #   @return [String]
     # @!attribute additional_encryption_context
     #   <p>The additional encryption context of the IP access settings.</p>
@@ -2241,8 +1970,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2260,8 +1988,7 @@ module Aws::WorkSpacesWeb
     #   <p>The browser settings.</p>
     #   @return [Array<Types::BrowserSettingsSummary>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListBrowserSettingsResponse < Struct.new(
       nil,
@@ -2273,8 +2000,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2292,8 +2018,7 @@ module Aws::WorkSpacesWeb
     #   <p>The data protection settings.</p>
     #   @return [Array<Types::DataProtectionSettingsSummary>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListDataProtectionSettingsResponse < Struct.new(
       nil,
@@ -2305,8 +2030,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2325,8 +2049,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute identity_providers
     #   <p>The identity providers.</p>
@@ -2341,8 +2064,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2360,8 +2082,7 @@ module Aws::WorkSpacesWeb
     #   <p>The IP access settings.</p>
     #   @return [Array<Types::IpAccessSettingsSummary>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListIpAccessSettingsResponse < Struct.new(
       nil,
@@ -2373,8 +2094,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2392,8 +2112,7 @@ module Aws::WorkSpacesWeb
     #   <p>The network settings.</p>
     #   @return [Array<Types::NetworkSettingsSummary>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListNetworkSettingsResponse < Struct.new(
       nil,
@@ -2405,8 +2124,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this operation.
-    #         </p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation. </p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2424,8 +2142,7 @@ module Aws::WorkSpacesWeb
     #   <p>The portals in the list.</p>
     #   @return [Array<Types::PortalSummary>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this operation.
-    #         </p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation. </p>
     #   @return [String]
     class ListPortalsResponse < Struct.new(
       nil,
@@ -2485,8 +2202,7 @@ module Aws::WorkSpacesWeb
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListSessionsRequest < Struct.new(
       nil,
@@ -2506,8 +2222,7 @@ module Aws::WorkSpacesWeb
     #   <p>The sessions in a list.</p>
     #   @return [Array<Types::SessionSummary>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListSessionsResponse < Struct.new(
       nil,
@@ -2544,8 +2259,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2567,8 +2281,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust store.</p>
     #   @return [String]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.&gt;</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.&gt;</p>
     #   @return [String]
     class ListTrustStoreCertificatesResponse < Struct.new(
       nil,
@@ -2581,8 +2294,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2600,8 +2312,7 @@ module Aws::WorkSpacesWeb
     #   <p>The trust stores.</p>
     #   @return [Array<Types::TrustStoreSummary>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListTrustStoresResponse < Struct.new(
       nil,
@@ -2613,8 +2324,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2632,8 +2342,7 @@ module Aws::WorkSpacesWeb
     #   <p>The user access logging settings.</p>
     #   @return [Array<Types::UserAccessLoggingSettingsSummary>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListUserAccessLoggingSettingsResponse < Struct.new(
       nil,
@@ -2645,8 +2354,7 @@ module Aws::WorkSpacesWeb
     end
 
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this operation.
-    #         </p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation. </p>
     #   @return [String]
     # @!attribute max_results
     #   <p>The maximum number of results to be included in the next page.</p>
@@ -2664,13 +2372,52 @@ module Aws::WorkSpacesWeb
     #   <p>The user settings.</p>
     #   @return [Array<Types::UserSettingsSummary>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this operation.
-    #         </p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation. </p>
     #   @return [String]
     class ListUserSettingsResponse < Struct.new(
       nil,
       :user_settings,
       :next_token,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>Localized text strings for a specific language that customize the web portal.</p>
+    # @!attribute browser_tab_title
+    #   <p>The text displayed in the browser tab title.</p>
+    #   @return [String]
+    # @!attribute welcome_text
+    #   <p>The welcome text displayed on the sign-in page.</p>
+    #   @return [String]
+    # @!attribute login_title
+    #   <p>The title text for the login section. This field is optional and defaults to "Sign In".</p>
+    #   @return [String]
+    # @!attribute login_description
+    #   <p>The description text for the login section. This field is optional and defaults to "Sign in to your session".</p>
+    #   @return [String]
+    # @!attribute login_button_text
+    #   <p>The text displayed on the login button. This field is optional and defaults to "Sign In".</p>
+    #   @return [String]
+    # @!attribute contact_link
+    #   <p>A contact link URL. The URL must start with <code>https://</code> or <code>mailto:</code>. If not provided, the contact button will be hidden from the web portal screen.</p>
+    #   @return [String]
+    # @!attribute contact_button_text
+    #   <p>The text displayed on the contact button. This field is optional and defaults to "Contact us".</p>
+    #   @return [String]
+    # @!attribute loading_text
+    #   <p>The text displayed during session loading. This field is optional and defaults to "Loading your session".</p>
+    #   @return [String]
+    class LocalizedBrandingStrings < Struct.new(
+      nil,
+      :browser_tab_title,
+      :welcome_text,
+      :login_title,
+      :login_description,
+      :login_button_text,
+      :contact_link,
+      :contact_button_text,
+      :loading_text,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2688,9 +2435,7 @@ module Aws::WorkSpacesWeb
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A network settings resource that can be associated with a web portal. Once associated
-    #          with a web portal, network settings define how streaming instances will connect with your
-    #          specified VPC. </p>
+    # <p>A network settings resource that can be associated with a web portal. Once associated with a web portal, network settings define how streaming instances will connect with your specified VPC. </p>
     # @!attribute network_settings_arn
     #   <p>The ARN of the network settings.</p>
     #   @return [String]
@@ -2701,12 +2446,10 @@ module Aws::WorkSpacesWeb
     #   <p>The VPC that streaming instances will connect to.</p>
     #   @return [String]
     # @!attribute subnet_ids
-    #   <p>The subnets in which network interfaces are created to connect streaming instances to
-    #            your VPC. At least two of these subnets must be in different availability zones.</p>
+    #   <p>The subnets in which network interfaces are created to connect streaming instances to your VPC. At least two of these subnets must be in different availability zones.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
-    #   <p>One or more security groups used to control access from streaming instances to your VPC.
-    #         </p>
+    #   <p>One or more security groups used to control access from streaming instances to your VPC. </p>
     #   @return [Array<String>]
     class NetworkSettings < Struct.new(
       nil,
@@ -2750,8 +2493,7 @@ module Aws::WorkSpacesWeb
     #   <p>The status of the web portal.</p>
     #   @return [String]
     # @!attribute portal_endpoint
-    #   <p>The endpoint URL of the web portal that users access in order to start streaming
-    #            sessions.</p>
+    #   <p>The endpoint URL of the web portal that users access in order to start streaming sessions.</p>
     #   @return [String]
     # @!attribute display_name
     #   <p>The name of the web portal.</p>
@@ -2781,21 +2523,10 @@ module Aws::WorkSpacesWeb
     #   <p>A message that explains why the web portal is in its current status.</p>
     #   @return [String]
     # @!attribute user_access_logging_settings_arn
-    #   <p>The ARN of the user access logging settings that is associated with the web
-    #            portal.</p>
+    #   <p>The ARN of the user access logging settings that is associated with the web portal.</p>
     #   @return [String]
     # @!attribute authentication_type
-    #   <p>The type of authentication integration points used when signing into the web portal.
-    #            Defaults to <code>Standard</code>.</p>
-    #            <p>
-    #               <code>Standard</code> web portals are authenticated directly through your identity
-    #            provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity
-    #            provider with your web portal. User and group access to your web portal is controlled
-    #            through your identity provider.</p>
-    #            <p>
-    #               <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center. Identity sources
-    #            (including external identity provider integration), plus user and group access to your web
-    #            portal, can be configured in the IAM Identity Center.</p>
+    #   <p>The type of authentication integration points used when signing into the web portal. Defaults to <code>Standard</code>.</p> <p> <code>Standard</code> web portals are authenticated directly through your identity provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity provider with your web portal. User and group access to your web portal is controlled through your identity provider.</p> <p> <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center. Identity sources (including external identity provider integration), plus user and group access to your web portal, can be configured in the IAM Identity Center.</p>
     #   @return [String]
     # @!attribute ip_access_settings_arn
     #   <p>The ARN of the IP access settings.</p>
@@ -2812,6 +2543,9 @@ module Aws::WorkSpacesWeb
     # @!attribute max_concurrent_sessions
     #   <p>The maximum number of concurrent sessions for the portal.</p>
     #   @return [Integer]
+    # @!attribute portal_custom_domain
+    #   <p>The custom domain of the web portal that users access in order to start streaming sessions.</p>
+    #   @return [String]
     class Portal < Struct.new(
       nil,
       :portal_arn,
@@ -2835,6 +2569,7 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :instance_type,
       :max_concurrent_sessions,
+      :portal_custom_domain,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -2854,8 +2589,7 @@ module Aws::WorkSpacesWeb
     #   <p>The status of the web portal.</p>
     #   @return [String]
     # @!attribute portal_endpoint
-    #   <p>The endpoint URL of the web portal that users access in order to start streaming
-    #            sessions.</p>
+    #   <p>The endpoint URL of the web portal that users access in order to start streaming sessions.</p>
     #   @return [String]
     # @!attribute display_name
     #   <p>The name of the web portal.</p>
@@ -2882,21 +2616,10 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the trust that is associated with this web portal.</p>
     #   @return [String]
     # @!attribute user_access_logging_settings_arn
-    #   <p>The ARN of the user access logging settings that is associated with the web
-    #            portal.</p>
+    #   <p>The ARN of the user access logging settings that is associated with the web portal.</p>
     #   @return [String]
     # @!attribute authentication_type
-    #   <p>The type of authentication integration points used when signing into the web portal.
-    #            Defaults to <code>Standard</code>.</p>
-    #            <p>
-    #               <code>Standard</code> web portals are authenticated directly through your identity
-    #            provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity
-    #            provider with your web portal. User and group access to your web portal is controlled
-    #            through your identity provider.</p>
-    #            <p>
-    #               <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center. Identity sources
-    #            (including external identity provider integration), plus user and group access to your web
-    #            portal, can be configured in the IAM Identity Center.</p>
+    #   <p>The type of authentication integration points used when signing into the web portal. Defaults to <code>Standard</code>.</p> <p> <code>Standard</code> web portals are authenticated directly through your identity provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity provider with your web portal. User and group access to your web portal is controlled through your identity provider.</p> <p> <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center. Identity sources (including external identity provider integration), plus user and group access to your web portal, can be configured in the IAM Identity Center.</p>
     #   @return [String]
     # @!attribute ip_access_settings_arn
     #   <p>The ARN of the IP access settings.</p>
@@ -2907,6 +2630,9 @@ module Aws::WorkSpacesWeb
     # @!attribute max_concurrent_sessions
     #   <p>The maximum number of concurrent sessions for the portal.</p>
     #   @return [Integer]
+    # @!attribute portal_custom_domain
+    #   <p>The custom domain of the web portal that users access in order to start streaming sessions.</p>
+    #   @return [String]
     class PortalSummary < Struct.new(
       nil,
       :portal_arn,
@@ -2927,6 +2653,7 @@ module Aws::WorkSpacesWeb
       :ip_access_settings_arn,
       :instance_type,
       :max_concurrent_sessions,
+      :portal_custom_domain,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3178,12 +2905,7 @@ module Aws::WorkSpacesWeb
     #   <p>The tags of the resource.</p>
     #   @return [Array<Types::Tag>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token returns the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token returns the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class TagResourceRequest < Struct.new(
       nil,
@@ -3269,11 +2991,7 @@ module Aws::WorkSpacesWeb
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A trust store that can be associated with a web portal. A trust store contains
-    #          certificate authority (CA) certificates. Once associated with a web portal, the browser in
-    #          a streaming session will recognize certificates that have been issued using any of the CAs
-    #          in the trust store. If your organization has internal websites that use certificates issued
-    #          by private CAs, you should add the private CA certificate to the trust store. </p>
+    # <p>A trust store that can be associated with a web portal. A trust store contains certificate authority (CA) certificates. Once associated with a web portal, the browser in a streaming session will recognize certificates that have been issued using any of the CAs in the trust store. If your organization has internal websites that use certificates issued by private CAs, you should add the private CA certificate to the trust store. </p>
     # @!attribute associated_portal_arns
     #   <p>A list of web portal ARNs that this trust store is associated with.</p>
     #   @return [Array<String>]
@@ -3327,22 +3045,20 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the browser settings.</p>
     #   @return [String]
     # @!attribute browser_policy
-    #   <p>A JSON string containing Chrome Enterprise policies that will be applied to all
-    #            streaming sessions. </p>
+    #   <p>A JSON string containing Chrome Enterprise policies that will be applied to all streaming sessions. </p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token return the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
+    # @!attribute web_content_filtering_policy
+    #   <p>The policy that specifies which URLs end users are allowed to access or which URLs or domain categories they are restricted from accessing for enhanced security.</p>
+    #   @return [Types::WebContentFilteringPolicy]
     class UpdateBrowserSettingsRequest < Struct.new(
       nil,
       :browser_settings_arn,
       :browser_policy,
       :client_token,
+      :web_content_filtering_policy,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3372,12 +3088,7 @@ module Aws::WorkSpacesWeb
     #   <p>The description of the data protection settings.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token return the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class UpdateDataProtectionSettingsRequest < Struct.new(
       nil,
@@ -3412,182 +3123,10 @@ module Aws::WorkSpacesWeb
     #   <p>The type of the identity provider.</p>
     #   @return [String]
     # @!attribute identity_provider_details
-    #   <p>The details of the identity provider. The following list describes the provider detail
-    #            keys for each identity provider type. </p>
-    #            <ul>
-    #               <li>
-    #                  <p>For Google and Login with Amazon:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_secret</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For Facebook:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_secret</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>api_version</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For Sign in with Apple:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>team_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>key_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>private_key</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For OIDC providers:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_id</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>client_secret</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>attributes_request_method</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>oidc_issuer</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_scopes</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>authorize_url</code>
-    #                           <i>if not available from discovery URL specified by
-    #                              <code>oidc_issuer</code> key</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>token_url</code>
-    #                           <i>if not available from discovery URL specified by
-    #                              <code>oidc_issuer</code> key</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>attributes_url</code>
-    #                           <i>if not available from discovery URL specified by
-    #                              <code>oidc_issuer</code> key</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>jwks_uri</code>
-    #                           <i>if not available from discovery URL specified by
-    #                              <code>oidc_issuer</code> key</i>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #               <li>
-    #                  <p>For SAML providers:</p>
-    #                  <ul>
-    #                     <li>
-    #                        <p>
-    #                           <code>MetadataFile</code> OR <code>MetadataURL</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>IDPSignout</code> (boolean) <i>optional</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>IDPInit</code> (boolean) <i>optional</i>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>RequestSigningAlgorithm</code> (string) <i>optional</i>
-    #                        - Only accepts <code>rsa-sha256</code>
-    #                        </p>
-    #                     </li>
-    #                     <li>
-    #                        <p>
-    #                           <code>EncryptedResponses</code> (boolean) <i>optional</i>
-    #                        </p>
-    #                     </li>
-    #                  </ul>
-    #               </li>
-    #            </ul>
+    #   <p>The details of the identity provider. The following list describes the provider detail keys for each identity provider type. </p> <ul> <li> <p>For Google and Login with Amazon:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>client_secret</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> </ul> </li> <li> <p>For Facebook:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>client_secret</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> <li> <p> <code>api_version</code> </p> </li> </ul> </li> <li> <p>For Sign in with Apple:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>team_id</code> </p> </li> <li> <p> <code>key_id</code> </p> </li> <li> <p> <code>private_key</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> </ul> </li> <li> <p>For OIDC providers:</p> <ul> <li> <p> <code>client_id</code> </p> </li> <li> <p> <code>client_secret</code> </p> </li> <li> <p> <code>attributes_request_method</code> </p> </li> <li> <p> <code>oidc_issuer</code> </p> </li> <li> <p> <code>authorize_scopes</code> </p> </li> <li> <p> <code>authorize_url</code> <i>if not available from discovery URL specified by <code>oidc_issuer</code> key</i> </p> </li> <li> <p> <code>token_url</code> <i>if not available from discovery URL specified by <code>oidc_issuer</code> key</i> </p> </li> <li> <p> <code>attributes_url</code> <i>if not available from discovery URL specified by <code>oidc_issuer</code> key</i> </p> </li> <li> <p> <code>jwks_uri</code> <i>if not available from discovery URL specified by <code>oidc_issuer</code> key</i> </p> </li> </ul> </li> <li> <p>For SAML providers:</p> <ul> <li> <p> <code>MetadataFile</code> OR <code>MetadataURL</code> </p> </li> <li> <p> <code>IDPSignout</code> (boolean) <i>optional</i> </p> </li> <li> <p> <code>IDPInit</code> (boolean) <i>optional</i> </p> </li> <li> <p> <code>RequestSigningAlgorithm</code> (string) <i>optional</i> - Only accepts <code>rsa-sha256</code> </p> </li> <li> <p> <code>EncryptedResponses</code> (boolean) <i>optional</i> </p> </li> </ul> </li> </ul>
     #   @return [Hash<String, String>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token return the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class UpdateIdentityProviderRequest < Struct.new(
       nil,
@@ -3625,12 +3164,7 @@ module Aws::WorkSpacesWeb
     #   <p>The updated IP rules of the IP access settings.</p>
     #   @return [Array<Types::IpRule>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token return the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class UpdateIpAccessSettingsRequest < Struct.new(
       nil,
@@ -3662,20 +3196,13 @@ module Aws::WorkSpacesWeb
     #   <p>The VPC that streaming instances will connect to.</p>
     #   @return [String]
     # @!attribute subnet_ids
-    #   <p>The subnets in which network interfaces are created to connect streaming instances to
-    #            your VPC. At least two of these subnets must be in different availability zones.</p>
+    #   <p>The subnets in which network interfaces are created to connect streaming instances to your VPC. At least two of these subnets must be in different availability zones.</p>
     #   @return [Array<String>]
     # @!attribute security_group_ids
-    #   <p>One or more security groups used to control access from streaming instances to your
-    #            VPC.</p>
+    #   <p>One or more security groups used to control access from streaming instances to your VPC.</p>
     #   @return [Array<String>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token return the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class UpdateNetworkSettingsRequest < Struct.new(
       nil,
@@ -3704,21 +3231,10 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the web portal.</p>
     #   @return [String]
     # @!attribute display_name
-    #   <p>The name of the web portal. This is not visible to users who log into the web
-    #            portal.</p>
+    #   <p>The name of the web portal. This is not visible to users who log into the web portal.</p>
     #   @return [String]
     # @!attribute authentication_type
-    #   <p>The type of authentication integration points used when signing into the web portal.
-    #            Defaults to <code>Standard</code>.</p>
-    #            <p>
-    #               <code>Standard</code> web portals are authenticated directly through your identity
-    #            provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity
-    #            provider with your web portal. User and group access to your web portal is controlled
-    #            through your identity provider.</p>
-    #            <p>
-    #               <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center. Identity sources
-    #            (including external identity provider integration), plus user and group access to your web
-    #            portal, can be configured in the IAM Identity Center.</p>
+    #   <p>The type of authentication integration points used when signing into the web portal. Defaults to <code>Standard</code>.</p> <p> <code>Standard</code> web portals are authenticated directly through your identity provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity provider with your web portal. User and group access to your web portal is controlled through your identity provider.</p> <p> <code>IAM Identity Center</code> web portals are authenticated through IAM Identity Center. Identity sources (including external identity provider integration), plus user and group access to your web portal, can be configured in the IAM Identity Center.</p>
     #   @return [String]
     # @!attribute instance_type
     #   <p>The type and resources of the underlying instance.</p>
@@ -3726,6 +3242,9 @@ module Aws::WorkSpacesWeb
     # @!attribute max_concurrent_sessions
     #   <p>The maximum number of concurrent sessions for the portal.</p>
     #   @return [Integer]
+    # @!attribute portal_custom_domain
+    #   <p>The custom domain of the web portal that users access in order to start streaming sessions. </p>
+    #   @return [String]
     class UpdatePortalRequest < Struct.new(
       nil,
       :portal_arn,
@@ -3733,6 +3252,7 @@ module Aws::WorkSpacesWeb
       :authentication_type,
       :instance_type,
       :max_concurrent_sessions,
+      :portal_custom_domain,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3793,12 +3313,7 @@ module Aws::WorkSpacesWeb
     #   <p>A list of CA certificates to delete from a trust store.</p>
     #   @return [Array<String>]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token return the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class UpdateTrustStoreRequest < Struct.new(
       nil,
@@ -3829,12 +3344,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the Kinesis stream.</p>
     #   @return [String]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token return the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     class UpdateUserAccessLoggingSettingsRequest < Struct.new(
       nil,
@@ -3861,52 +3371,44 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user settings.</p>
     #   @return [String]
     # @!attribute copy_allowed
-    #   <p>Specifies whether the user can copy text from the streaming session to the local
-    #            device.</p>
+    #   <p>Specifies whether the user can copy text from the streaming session to the local device.</p>
     #   @return [String]
     # @!attribute paste_allowed
-    #   <p>Specifies whether the user can paste text from the local device to the streaming
-    #            session.</p>
+    #   <p>Specifies whether the user can paste text from the local device to the streaming session.</p>
     #   @return [String]
     # @!attribute download_allowed
-    #   <p>Specifies whether the user can download files from the streaming session to the local
-    #            device.</p>
+    #   <p>Specifies whether the user can download files from the streaming session to the local device.</p>
     #   @return [String]
     # @!attribute upload_allowed
-    #   <p>Specifies whether the user can upload files from the local device to the streaming
-    #            session.</p>
+    #   <p>Specifies whether the user can upload files from the local device to the streaming session.</p>
     #   @return [String]
     # @!attribute print_allowed
     #   <p>Specifies whether the user can print to the local device.</p>
     #   @return [String]
     # @!attribute disconnect_timeout_in_minutes
-    #   <p>The amount of time that a streaming session remains active after users
-    #            disconnect.</p>
+    #   <p>The amount of time that a streaming session remains active after users disconnect.</p>
     #   @return [Integer]
     # @!attribute idle_disconnect_timeout_in_minutes
-    #   <p>The amount of time that users can be idle (inactive) before they are disconnected from
-    #            their streaming session and the disconnect timeout interval begins.</p>
+    #   <p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.</p>
     #   @return [Integer]
     # @!attribute client_token
-    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the
-    #            request. Idempotency ensures that an API request completes only once. With an idempotent
-    #            request, if the original request completes successfully, subsequent retries with the same
-    #            client token return the result from the original successful request. </p>
-    #            <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services
-    #            SDK.</p>
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. Idempotency ensures that an API request completes only once. With an idempotent request, if the original request completes successfully, subsequent retries with the same client token return the result from the original successful request. </p> <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>
     #   @return [String]
     # @!attribute cookie_synchronization_configuration
-    #   <p>The configuration that specifies which cookies should be synchronized from the end
-    #            user's local browser to the remote browser.</p>
-    #            <p>If the allowlist and blocklist are empty, the configuration becomes null.</p>
+    #   <p>The configuration that specifies which cookies should be synchronized from the end user's local browser to the remote browser.</p> <p>If the allowlist and blocklist are empty, the configuration becomes null.</p>
     #   @return [Types::CookieSynchronizationConfiguration]
     # @!attribute deep_link_allowed
-    #   <p>Specifies whether the user can use deep links that open automatically when connecting to
-    #            a session.</p>
+    #   <p>Specifies whether the user can use deep links that open automatically when connecting to a session.</p>
     #   @return [String]
     # @!attribute toolbar_configuration
     #   <p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>
     #   @return [Types::ToolbarConfiguration]
+    # @!attribute branding_configuration_input
+    #   <p>The branding configuration that customizes the appearance of the web portal for end users. When updating user settings without an existing branding configuration, all fields (logo, favicon, localized strings, and color theme) are required except for wallpaper and terms of service. When updating user settings with an existing branding configuration, all fields are optional.</p>
+    #   @return [Types::BrandingConfigurationUpdateInput]
+    # @!attribute web_authn_allowed
+    #   <p>Specifies whether the user can use WebAuthn redirection for passwordless login to websites within the streaming session.</p>
+    #   @return [String]
     class UpdateUserSettingsRequest < Struct.new(
       nil,
       :user_settings_arn,
@@ -3921,6 +3423,8 @@ module Aws::WorkSpacesWeb
       :cookie_synchronization_configuration,
       :deep_link_allowed,
       :toolbar_configuration,
+      :branding_configuration_input,
+      :web_authn_allowed,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -3942,8 +3446,7 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user access logging settings.</p>
     #   @return [String]
     # @!attribute associated_portal_arns
-    #   <p>A list of web portal ARNs that this user access logging settings is associated
-    #            with.</p>
+    #   <p>A list of web portal ARNs that this user access logging settings is associated with.</p>
     #   @return [Array<String>]
     # @!attribute kinesis_stream_arn
     #   <p>The ARN of the Kinesis stream.</p>
@@ -3974,9 +3477,7 @@ module Aws::WorkSpacesWeb
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A user settings resource that can be associated with a web portal. Once associated with
-    #          a web portal, user settings control how users can transfer data between a streaming session
-    #          and the their local devices. </p>
+    # <p>A user settings resource that can be associated with a web portal. Once associated with a web portal, user settings control how users can transfer data between a streaming session and the their local devices. </p>
     # @!attribute user_settings_arn
     #   <p>The ARN of the user settings.</p>
     #   @return [String]
@@ -3984,50 +3485,47 @@ module Aws::WorkSpacesWeb
     #   <p>A list of web portal ARNs that this user settings is associated with.</p>
     #   @return [Array<String>]
     # @!attribute copy_allowed
-    #   <p>Specifies whether the user can copy text from the streaming session to the local
-    #            device.</p>
+    #   <p>Specifies whether the user can copy text from the streaming session to the local device.</p>
     #   @return [String]
     # @!attribute paste_allowed
-    #   <p>Specifies whether the user can paste text from the local device to the streaming
-    #            session.</p>
+    #   <p>Specifies whether the user can paste text from the local device to the streaming session.</p>
     #   @return [String]
     # @!attribute download_allowed
-    #   <p>Specifies whether the user can download files from the streaming session to the local
-    #            device.</p>
+    #   <p>Specifies whether the user can download files from the streaming session to the local device.</p>
     #   @return [String]
     # @!attribute upload_allowed
-    #   <p>Specifies whether the user can upload files from the local device to the streaming
-    #            session.</p>
+    #   <p>Specifies whether the user can upload files from the local device to the streaming session.</p>
     #   @return [String]
     # @!attribute print_allowed
     #   <p>Specifies whether the user can print to the local device.</p>
     #   @return [String]
     # @!attribute disconnect_timeout_in_minutes
-    #   <p>The amount of time that a streaming session remains active after users
-    #            disconnect.</p>
+    #   <p>The amount of time that a streaming session remains active after users disconnect.</p>
     #   @return [Integer]
     # @!attribute idle_disconnect_timeout_in_minutes
-    #   <p>The amount of time that users can be idle (inactive) before they are disconnected from
-    #            their streaming session and the disconnect timeout interval begins.</p>
+    #   <p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.</p>
     #   @return [Integer]
     # @!attribute cookie_synchronization_configuration
-    #   <p>The configuration that specifies which cookies should be synchronized from the end
-    #            user's local browser to the remote browser.</p>
+    #   <p>The configuration that specifies which cookies should be synchronized from the end user's local browser to the remote browser.</p>
     #   @return [Types::CookieSynchronizationConfiguration]
     # @!attribute customer_managed_key
-    #   <p>The customer managed key used to encrypt sensitive information in the user
-    #            settings.</p>
+    #   <p>The customer managed key used to encrypt sensitive information in the user settings.</p>
     #   @return [String]
     # @!attribute additional_encryption_context
     #   <p>The additional encryption context of the user settings.</p>
     #   @return [Hash<String, String>]
     # @!attribute deep_link_allowed
-    #   <p>Specifies whether the user can use deep links that open automatically when connecting to
-    #            a session.</p>
+    #   <p>Specifies whether the user can use deep links that open automatically when connecting to a session.</p>
     #   @return [String]
     # @!attribute toolbar_configuration
     #   <p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>
     #   @return [Types::ToolbarConfiguration]
+    # @!attribute branding_configuration
+    #   <p>The branding configuration output that customizes the appearance of the web portal for end users.</p>
+    #   @return [Types::BrandingConfiguration]
+    # @!attribute web_authn_allowed
+    #   <p>Specifies whether the user can use WebAuthn redirection for passwordless login to websites within the streaming session.</p>
+    #   @return [String]
     class UserSettings < Struct.new(
       nil,
       :user_settings_arn,
@@ -4044,6 +3542,8 @@ module Aws::WorkSpacesWeb
       :additional_encryption_context,
       :deep_link_allowed,
       :toolbar_configuration,
+      :branding_configuration,
+      :web_authn_allowed,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4060,43 +3560,41 @@ module Aws::WorkSpacesWeb
     #   <p>The ARN of the user settings.</p>
     #   @return [String]
     # @!attribute copy_allowed
-    #   <p>Specifies whether the user can copy text from the streaming session to the local
-    #            device.</p>
+    #   <p>Specifies whether the user can copy text from the streaming session to the local device.</p>
     #   @return [String]
     # @!attribute paste_allowed
-    #   <p>Specifies whether the user can paste text from the local device to the streaming
-    #            session.</p>
+    #   <p>Specifies whether the user can paste text from the local device to the streaming session.</p>
     #   @return [String]
     # @!attribute download_allowed
-    #   <p>Specifies whether the user can download files from the streaming session to the local
-    #            device.</p>
+    #   <p>Specifies whether the user can download files from the streaming session to the local device.</p>
     #   @return [String]
     # @!attribute upload_allowed
-    #   <p>Specifies whether the user can upload files from the local device to the streaming
-    #            session.</p>
+    #   <p>Specifies whether the user can upload files from the local device to the streaming session.</p>
     #   @return [String]
     # @!attribute print_allowed
     #   <p>Specifies whether the user can print to the local device.</p>
     #   @return [String]
     # @!attribute disconnect_timeout_in_minutes
-    #   <p>The amount of time that a streaming session remains active after users
-    #            disconnect.</p>
+    #   <p>The amount of time that a streaming session remains active after users disconnect.</p>
     #   @return [Integer]
     # @!attribute idle_disconnect_timeout_in_minutes
-    #   <p>The amount of time that users can be idle (inactive) before they are disconnected from
-    #            their streaming session and the disconnect timeout interval begins.</p>
+    #   <p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the disconnect timeout interval begins.</p>
     #   @return [Integer]
     # @!attribute cookie_synchronization_configuration
-    #   <p>The configuration that specifies which cookies should be synchronized from the end
-    #            user's local browser to the remote browser.</p>
+    #   <p>The configuration that specifies which cookies should be synchronized from the end user's local browser to the remote browser.</p>
     #   @return [Types::CookieSynchronizationConfiguration]
     # @!attribute deep_link_allowed
-    #   <p>Specifies whether the user can use deep links that open automatically when connecting to
-    #            a session.</p>
+    #   <p>Specifies whether the user can use deep links that open automatically when connecting to a session.</p>
     #   @return [String]
     # @!attribute toolbar_configuration
     #   <p>The configuration of the toolbar. This allows administrators to select the toolbar type and visual mode, set maximum display resolution for sessions, and choose which items are visible to end users during their sessions. If administrators do not modify these settings, end users retain control over their toolbar preferences.</p>
     #   @return [Types::ToolbarConfiguration]
+    # @!attribute branding_configuration
+    #   <p>The branding configuration output that customizes the appearance of the web portal for end users.</p>
+    #   @return [Types::BrandingConfiguration]
+    # @!attribute web_authn_allowed
+    #   <p>Specifies whether the user can use WebAuthn redirection for passwordless login to websites within the streaming session.</p>
+    #   @return [String]
     class UserSettingsSummary < Struct.new(
       nil,
       :user_settings_arn,
@@ -4110,6 +3608,8 @@ module Aws::WorkSpacesWeb
       :cookie_synchronization_configuration,
       :deep_link_allowed,
       :toolbar_configuration,
+      :branding_configuration,
+      :web_authn_allowed,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure
@@ -4151,6 +3651,46 @@ module Aws::WorkSpacesWeb
       nil,
       :name,
       :message,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
+    # <p>The input for a wallpaper image. Provide the image as either a binary image file or an S3 URI. Maximum 5 MB in JPEG or PNG format.</p>
+    # @!attribute blob
+    #   <p>The image provided as a binary image file.</p>
+    #   @return [String]
+    # @!attribute s3_uri
+    #   <p>The S3 URI pointing to the image file. The URI must use the format <code>s3://bucket-name/key-name</code>. You must have read access to the S3 object.</p>
+    #   @return [String]
+    class WallpaperImageInput < Struct.new(
+      :blob,
+      :s3_uri,
+      :unknown,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Union
+
+      class Blob < WallpaperImageInput; end
+      class S3Uri < WallpaperImageInput; end
+      class Unknown < WallpaperImageInput; end
+    end
+
+    # <p>The policy that specifies which URLs end users are allowed to access or which URLs or domain categories they are restricted from accessing for enhanced security.</p>
+    # @!attribute blocked_categories
+    #   <p>Categories of websites that are blocked on the end user’s browsers.</p>
+    #   @return [Array<String>]
+    # @!attribute allowed_urls
+    #   <p>URLs and domains that are always accessible to end users.</p>
+    #   @return [Array<String>]
+    # @!attribute blocked_urls
+    #   <p>URLs and domains that end users cannot access.</p>
+    #   @return [Array<String>]
+    class WebContentFilteringPolicy < Struct.new(
+      nil,
+      :blocked_categories,
+      :allowed_urls,
+      :blocked_urls,
       keyword_init: true
     )
       include ::Smithy::Schema::Structure

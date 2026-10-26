@@ -6,6 +6,8 @@ module Aws::MPA
     AccountId: StringShape
     ActionCompletionStrategy: EnumShape
     ActionName: StringShape
+    AdditionalSecurityRequirement: EnumShape
+    AdditionalSecurityRequirements: ListShape
     ApprovalStrategy: UnionShape
     ApprovalStrategyResponse: UnionShape
     ApprovalTeamArn: StringShape
@@ -14,6 +16,7 @@ module Aws::MPA
     ApprovalTeamRequestApprovers: ListShape
     ApprovalTeamStatus: EnumShape
     ApprovalTeamStatusCode: EnumShape
+    ApproverLastActivity: EnumShape
     CancelSessionRequest: StructureShape
     CancelSessionResponse: StructureShape
     ConflictException: StructureShape
@@ -81,6 +84,10 @@ module Aws::MPA
     ListTagsForResourceResponse: StructureShape
     MaxResults: IntegerShape
     Message: StringShape
+    MfaMethod: StructureShape
+    MfaMethods: ListShape
+    MfaSyncStatus: EnumShape
+    MfaType: EnumShape
     MofNApprovalStrategy: StructureShape
     Operator: EnumShape
     ParticipantId: StringShape
@@ -113,6 +120,9 @@ module Aws::MPA
     SessionValue: StringShape
     StartActiveApprovalTeamDeletionRequest: StructureShape
     StartActiveApprovalTeamDeletionResponse: StructureShape
+    StartApprovalTeamBaselineApproverIds: ListShape
+    StartApprovalTeamBaselineRequest: StructureShape
+    StartApprovalTeamBaselineResponse: StructureShape
     String: StringShape
     TagKey: StringShape
     TagKeyList: ListShape
@@ -126,6 +136,8 @@ module Aws::MPA
     UnqualifiedPolicyArn: StringShape
     UntagResourceRequest: StructureShape
     UntagResourceResponse: StructureShape
+    UpdateAction: EnumShape
+    UpdateActions: ListShape
     UpdateApprovalTeamRequest: StructureShape
     UpdateApprovalTeamResponse: StructureShape
     ValidationException: StructureShape

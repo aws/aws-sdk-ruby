@@ -61,7 +61,8 @@ module Aws::KafkaConnect
           },
           scale_out_policy: {
             cpu_utilization_percentage: untyped
-          }
+          },
+          max_autoscaling_task_count: untyped
         },
         provisioned_capacity: {
           mcu_count: untyped,
@@ -104,6 +105,7 @@ module Aws::KafkaConnect
           }
         }
       },
+      ?network_type: String,
       ?plugins: Array[
         {
           custom_plugin: {
@@ -199,6 +201,7 @@ module Aws::KafkaConnect
       def kafka_cluster_encryption_in_transit: () -> Types::KafkaClusterEncryptionInTransitDescription?
       def kafka_connect_version: () -> String?
       def log_delivery: () -> Types::LogDeliveryDescription?
+      def network_type: () -> String?
       def plugins: () -> Array[Types::PluginDescription]?
       def service_execution_role_arn: () -> String?
       def worker_configuration: () -> Types::WorkerConfigurationDescription?
@@ -306,6 +309,16 @@ module Aws::KafkaConnect
       ?name_prefix: String
     ) -> _ListWorkerConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListWorkerConfigurationsResponse
 
+    interface _RestartConnectorResponse
+      include Smithy::Client::_Response[Types::RestartConnectorResponse]
+      def connector_arn: () -> String?
+      def connector_operation_arn: () -> String?
+    end
+    def restart_connector: (
+      ?connector_arn: String,
+      ?only_failed_tasks: bool
+    ) -> _RestartConnectorResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _RestartConnectorResponse
+
     interface _TagResourceResponse
       include Smithy::Client::_Response[Types::TagResourceOutput]
     end
@@ -339,7 +352,8 @@ module Aws::KafkaConnect
           },
           scale_out_policy: {
             cpu_utilization_percentage: untyped
-          }
+          },
+          max_autoscaling_task_count: untyped
         },
         provisioned_capacity: {
           mcu_count: untyped,

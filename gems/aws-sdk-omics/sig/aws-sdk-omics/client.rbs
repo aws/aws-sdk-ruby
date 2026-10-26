@@ -83,6 +83,13 @@ module Aws::Omics
       ?id: String
     ) -> _CancelRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelRunResponse
 
+    interface _CancelRunBatchResponse
+      include Smithy::Client::_Response[Types::CancelRunBatchResponse]
+    end
+    def cancel_run_batch: (
+      ?batch_id: String
+    ) -> _CancelRunBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CancelRunBatchResponse
+
     interface _CancelVariantImportJobResponse
       include Smithy::Client::_Response[Types::CancelVariantImportResponse]
     end
@@ -166,6 +173,31 @@ module Aws::Omics
       },
       ?tags: Hash[String, String]
     ) -> _CreateAnnotationStoreVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateAnnotationStoreVersionResponse
+
+    interface _CreateConfigurationResponse
+      include Smithy::Client::_Response[Types::CreateConfigurationResponse]
+      def arn: () -> String?
+      def uuid: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def run_configurations: () -> Types::RunConfigurationsResponse?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def create_configuration: (
+      ?name: String,
+      ?description: String,
+      ?run_configurations: {
+        vpc_config: {
+          security_group_ids: Array[String],
+          subnet_ids: Array[String],
+          vpc_owner_account_id: String
+        }
+      },
+      ?tags: Hash[String, String],
+      ?request_id: String
+    ) -> _CreateConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateConfigurationResponse
 
     interface _CreateMultipartReadSetUploadResponse
       include Smithy::Client::_Response[Types::CreateMultipartReadSetUploadResponse]
@@ -344,7 +376,8 @@ module Aws::Omics
             upstream_registry_url: String,
             ecr_repository_prefix: String,
             upstream_repository_prefix: String,
-            ecr_account_id: String
+            ecr_account_id: String,
+            credential_arn: String
           }
         ],
         image_mappings: Array[
@@ -406,7 +439,8 @@ module Aws::Omics
             upstream_registry_url: String,
             ecr_repository_prefix: String,
             upstream_repository_prefix: String,
-            ecr_account_id: String
+            ecr_account_id: String,
+            credential_arn: String
           }
         ],
         image_mappings: Array[
@@ -451,6 +485,20 @@ module Aws::Omics
       ?force: bool
     ) -> _DeleteAnnotationStoreVersionsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteAnnotationStoreVersionsResponse
 
+    interface _DeleteBatchResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_batch: (
+      ?batch_id: String
+    ) -> _DeleteBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBatchResponse
+
+    interface _DeleteConfigurationResponse
+      include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
+    end
+    def delete_configuration: (
+      ?name: String
+    ) -> _DeleteConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteConfigurationResponse
+
     interface _DeleteReferenceResponse
       include Smithy::Client::_Response[Types::DeleteReferenceResponse]
     end
@@ -472,6 +520,13 @@ module Aws::Omics
     def delete_run: (
       ?id: String
     ) -> _DeleteRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRunResponse
+
+    interface _DeleteRunBatchResponse
+      include Smithy::Client::_Response[Types::DeleteRunBatchResponse]
+    end
+    def delete_run_batch: (
+      ?batch_id: String
+    ) -> _DeleteRunBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteRunBatchResponse
 
     interface _DeleteRunCacheResponse
       include Smithy::Client::_Response[Smithy::Schema::EmptyStructure]
@@ -595,6 +650,43 @@ module Aws::Omics
       ?name: String,
       ?version_name: String
     ) -> _GetAnnotationStoreVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetAnnotationStoreVersionResponse
+
+    interface _GetBatchResponse
+      include Smithy::Client::_Response[Types::GetBatchResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def uuid: () -> String?
+      def name: () -> String?
+      def status: () -> String?
+      def tags: () -> Hash[String, String]?
+      def total_runs: () -> Integer?
+      def default_run_setting: () -> Types::DefaultRunSetting?
+      def submission_summary: () -> Types::SubmissionSummary?
+      def run_summary: () -> Types::RunSummary?
+      def creation_time: () -> Time?
+      def submitted_time: () -> Time?
+      def processed_time: () -> Time?
+      def failed_time: () -> Time?
+      def failure_reason: () -> String?
+    end
+    def get_batch: (
+      ?batch_id: String
+    ) -> _GetBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBatchResponse
+
+    interface _GetConfigurationResponse
+      include Smithy::Client::_Response[Types::GetConfigurationResponse]
+      def arn: () -> String?
+      def uuid: () -> String?
+      def name: () -> String?
+      def description: () -> String?
+      def run_configurations: () -> Types::RunConfigurationsResponse?
+      def status: () -> String?
+      def creation_time: () -> Time?
+      def tags: () -> Hash[String, String]?
+    end
+    def get_configuration: (
+      ?name: String
+    ) -> _GetConfigurationResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetConfigurationResponse
 
     interface _GetReadSetResponse
       include Smithy::Client::_Response[Types::GetReadSetResponse]
@@ -754,6 +846,7 @@ module Aws::Omics
       def role_arn: () -> String?
       def name: () -> String?
       def run_group_id: () -> String?
+      def batch_id: () -> String?
       def priority: () -> Integer?
       def definition: () -> String?
       def digest: () -> String?
@@ -778,6 +871,12 @@ module Aws::Omics
       def workflow_owner_id: () -> String?
       def workflow_version_name: () -> String?
       def workflow_uuid: () -> String?
+      def networking_mode: () -> String?
+      def scratch_storage_mode: () -> String?
+      def configuration: () -> Types::ConfigurationDetails?
+      def vpc_config: () -> Types::VpcConfigResponse?
+      def engine_settings: () -> Smithy::Schema::document?
+      def session_policy: () -> String?
     end
     def get_run: (
       ?id: String,
@@ -835,6 +934,7 @@ module Aws::Omics
       def instance_type: () -> String?
       def failure_reason: () -> String?
       def image_details: () -> Types::ImageDetails?
+      def uuid: () -> String?
     end
     def get_run_task: (
       ?id: String,
@@ -943,6 +1043,8 @@ module Aws::Omics
       def readme: () -> String?
       def definition_repository_details: () -> Types::DefinitionRepositoryDetails?
       def readme_path: () -> String?
+      def profiles: () -> Array[String]?
+      def profile_parameter_templates: () -> Hash[String, Hash[String, Types::WorkflowParameter]]?
     end
     def get_workflow: (
       ?id: String,
@@ -977,6 +1079,8 @@ module Aws::Omics
       def readme: () -> String?
       def definition_repository_details: () -> Types::DefinitionRepositoryDetails?
       def readme_path: () -> String?
+      def profiles: () -> Array[String]?
+      def profile_parameter_templates: () -> Hash[String, Hash[String, Types::WorkflowParameter]]?
     end
     def get_workflow_version: (
       ?workflow_id: String,
@@ -1028,6 +1132,29 @@ module Aws::Omics
         status: String
       }
     ) -> _ListAnnotationStoresResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListAnnotationStoresResponse
+
+    interface _ListBatchResponse
+      include Smithy::Client::_Response[Types::ListBatchResponse]
+      def items: () -> Array[Types::BatchListItem]?
+      def next_token: () -> String?
+    end
+    def list_batch: (
+      ?max_items: Integer,
+      ?starting_token: String,
+      ?status: String,
+      ?name: String,
+      ?run_group_id: String
+    ) -> _ListBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBatchResponse
+
+    interface _ListConfigurationsResponse
+      include Smithy::Client::_Response[Types::ListConfigurationsResponse]
+      def items: () -> Array[Types::ConfigurationListItem]?
+      def next_token: () -> String?
+    end
+    def list_configurations: (
+      ?max_results: Integer,
+      ?starting_token: String
+    ) -> _ListConfigurationsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListConfigurationsResponse
 
     interface _ListMultipartReadSetUploadsResponse
       include Smithy::Client::_Response[Types::ListMultipartReadSetUploadsResponse]
@@ -1216,10 +1343,25 @@ module Aws::Omics
     def list_runs: (
       ?name: String,
       ?run_group_id: String,
+      ?batch_id: String,
       ?starting_token: String,
       ?max_results: Integer,
       ?status: String
     ) -> _ListRunsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRunsResponse
+
+    interface _ListRunsInBatchResponse
+      include Smithy::Client::_Response[Types::ListRunsInBatchResponse]
+      def runs: () -> Array[Types::RunBatchListItem]?
+      def next_token: () -> String?
+    end
+    def list_runs_in_batch: (
+      ?batch_id: String,
+      ?max_items: Integer,
+      ?starting_token: String,
+      ?submission_status: String,
+      ?run_setting_id: String,
+      ?run_id: String
+    ) -> _ListRunsInBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListRunsInBatchResponse
 
     interface _ListSequenceStoresResponse
       include Smithy::Client::_Response[Types::ListSequenceStoresResponse]
@@ -1461,6 +1603,8 @@ module Aws::Omics
       def tags: () -> Hash[String, String]?
       def uuid: () -> String?
       def run_output_uri: () -> String?
+      def configuration: () -> Types::ConfigurationDetails?
+      def networking_mode: () -> String?
     end
     def start_run: (
       ?workflow_id: String,
@@ -1481,8 +1625,67 @@ module Aws::Omics
       ?retention_mode: String,
       ?storage_type: String,
       ?workflow_owner_id: String,
-      ?workflow_version_name: String
+      ?workflow_version_name: String,
+      ?networking_mode: String,
+      ?scratch_storage_mode: String,
+      ?configuration_name: String,
+      ?session_policy: String,
+      ?engine_settings: Smithy::Schema::document
     ) -> _StartRunResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRunResponse
+
+    interface _StartRunBatchResponse
+      include Smithy::Client::_Response[Types::StartRunBatchResponse]
+      def id: () -> String?
+      def arn: () -> String?
+      def status: () -> String?
+      def uuid: () -> String?
+      def tags: () -> Hash[String, String]?
+    end
+    def start_run_batch: (
+      ?batch_name: String,
+      ?request_id: String,
+      ?tags: Hash[String, String],
+      ?default_run_setting: {
+        workflow_id: String,
+        workflow_type: String,
+        role_arn: String,
+        name: String,
+        cache_id: String,
+        cache_behavior: String,
+        run_group_id: String,
+        priority: Integer,
+        parameters: Smithy::Schema::document,
+        storage_capacity: untyped,
+        output_uri: String,
+        log_level: String,
+        run_tags: Hash[String, String],
+        retention_mode: String,
+        storage_type: String,
+        workflow_owner_id: String,
+        output_bucket_owner_id: String,
+        workflow_version_name: String,
+        networking_mode: String,
+        configuration_name: String,
+        session_policy: String,
+        engine_settings: Smithy::Schema::document,
+        scratch_storage_mode: String
+      },
+      ?batch_run_settings: {
+        inline_settings: Array[
+          {
+            run_setting_id: String,
+            name: String,
+            output_uri: String,
+            priority: Integer,
+            parameters: Smithy::Schema::document,
+            output_bucket_owner_id: String,
+            run_tags: Hash[String, String],
+            engine_settings: Smithy::Schema::document
+          }
+        ],
+        s3_uri_settings: String
+      }
+    ) -> _StartRunBatchResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _StartRunBatchResponse
 
     interface _StartVariantImportJobResponse
       include Smithy::Client::_Response[Types::StartVariantImportResponse]

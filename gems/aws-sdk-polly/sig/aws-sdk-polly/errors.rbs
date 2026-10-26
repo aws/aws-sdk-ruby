@@ -48,6 +48,11 @@ module Aws::Polly
     class ServiceFailureException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def quota_code: () -> String?
+      def service_code: () -> String?
+    end
     class SsmlMarksNotSupportedForTextTypeException < Smithy::Client::ServiceError
       def message: () -> String?
     end
@@ -57,11 +62,20 @@ module Aws::Polly
     class TextLengthExceededException < Smithy::Client::ServiceError
       def message: () -> String?
     end
+    class ThrottlingException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def throttling_reasons: () -> Array[Types::ThrottlingReason]?
+    end
     class UnsupportedPlsAlphabetException < Smithy::Client::ServiceError
       def message: () -> String?
     end
     class UnsupportedPlsLanguageException < Smithy::Client::ServiceError
       def message: () -> String?
+    end
+    class ValidationException < Smithy::Client::ServiceError
+      def message: () -> String?
+      def reason: () -> String?
+      def fields: () -> Array[Types::ValidationExceptionField]?
     end
   end
 end

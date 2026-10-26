@@ -27,7 +27,9 @@ module Aws::MediaConvert
   # * {ForbiddenException}
   # * {InternalServerErrorException}
   # * {NotFoundException}
+  # * {ServiceQuotaExceededException}
   # * {TooManyRequestsException}
+  # * {UnprocessableEntityException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -99,10 +101,36 @@ module Aws::MediaConvert
       end
     end
 
+    # You attempted to create more resources than the service allows based on service quotas.
+    class ServiceQuotaExceededException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MediaConvert::Types::ServiceQuotaExceededException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
     # Too many requests have been sent in too short of a time. The service limits the rate at which it will accept requests.
     class TooManyRequestsException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MediaConvert::Types::TooManyRequestsException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # The input file was recognized but appears to be malformed or corrupt.
+    class UnprocessableEntityException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MediaConvert::Types::UnprocessableEntityException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

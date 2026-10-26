@@ -155,18 +155,18 @@ module Aws::Bedrock
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -218,6 +218,39 @@ module Aws::Bedrock
     #  When `true`, request parameters are validated before sending the request.
     def initialize(*options)
       super
+    end
+
+    # <p>Deletes one or more advanced prompt optimization jobs.</p>
+    # @param [Hash, Types::BatchDeleteAdvancedPromptOptimizationJobRequest] params
+    # @option params [Array<String>] :job_identifiers
+    #   <p>A list of advanced prompt optimization job identifiers (ARNs or IDs) to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     job_identifiers: ["AdvancedPromptOptimizationJobIdentifier"], # required
+    #   }
+    #   options = {}
+    #   response = client.batch_delete_advanced_prompt_optimization_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     errors: [ # required
+    #       {
+    #         job_identifier: "AdvancedPromptOptimizationJobIdentifier", # required
+    #         code: "String", # required
+    #         message: "String"
+    #       }
+    #     ],
+    #     advanced_prompt_optimization_jobs: [ # required
+    #       {
+    #         job_identifier: "AdvancedPromptOptimizationJobIdentifier", # required
+    #         job_status: "InProgress" # One of: ["InProgress", "Completed", "Failed", "PartiallyCompleted", "Stopping", "Stopped", "Deleting"], # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchDeleteAdvancedPromptOptimizationJobResponse]
+    def batch_delete_advanced_prompt_optimization_job(params = {}, options = {})
+      request = build_request(:batch_delete_advanced_prompt_optimization_job, params)
+      request.send_request(options)
     end
 
     # <p>Deletes a batch of evaluation jobs. An evaluation job can only be deleted if it has following status <code>FAILED</code>, <code>COMPLETED</code>, and <code>STOPPED</code>. You can request up to 25 model evaluation jobs be deleted in a single request.</p>
@@ -301,6 +334,70 @@ module Aws::Bedrock
       request.send_request(options)
     end
 
+    # <p>Creates an advanced prompt optimization job. The job optimizes your prompt templates for specific models using your evaluation dataset and criteria.</p>
+    # @param [Hash, Types::CreateAdvancedPromptOptimizationJobRequest] params
+    # @option params [String] :job_name
+    #   <p>A name for the advanced prompt optimization job.</p>
+    # @option params [String] :job_description
+    #   <p>A description of the advanced prompt optimization job.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If this token matches a previous request, Amazon Bedrock ignores the request but does not return an error.</p>
+    # @option params [Types::AdvancedPromptOptimizationInputConfig] :input_config
+    #   <p>Specifies the S3 location of your JSONL input file containing prompt templates and evaluation samples.</p>
+    # @option params [Types::AdvancedPromptOptimizationOutputConfig] :output_config
+    #   <p>Specifies the S3 location where optimization results will be stored.</p>
+    # @option params [String] :encryption_key_arn
+    #   <p>The Amazon Resource Name (ARN) of the KMS key used for encrypting the output data. If not specified, the output is encrypted with an Amazon-owned KMS key.</p>
+    # @option params [Array<Types::Tag>] :tags
+    #   <p>Tags to associate with the advanced prompt optimization job.</p>
+    # @option params [Array<Types::ModelConfiguration>] :model_configurations
+    #   <p>A list of model configurations specifying the target models for prompt optimization. You can specify up to 5 models.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     job_name: "AdvancedPromptOptimizationJobName", # required
+    #     job_description: "AdvancedPromptOptimizationJobDescription",
+    #     client_token: "IdempotencyToken",
+    #     input_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     output_config: { # required
+    #       s3_uri: "S3UriFolder", # required
+    #     },
+    #     encryption_key_arn: "KmsKeyArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue", # required
+    #       }
+    #     ],
+    #     model_configurations: [ # required
+    #       {
+    #         model_id: "AdvancedPromptOptimizationModelIdentifier", # required
+    #         inference_config: {
+    #           max_tokens: 1,
+    #           temperature: 1.0,
+    #           top_p: 1.0,
+    #           stop_sequences: ["String"]
+    #         },
+    #         additional_model_request_fields: {
+    #           "AdditionalModelRequestFieldsKey" => ""null""
+    #         }
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.create_advanced_prompt_optimization_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_arn: "AdvancedPromptOptimizationJobArn", # required
+    #   }
+    # @return [Types::CreateAdvancedPromptOptimizationJobResponse]
+    def create_advanced_prompt_optimization_job(params = {}, options = {})
+      request = build_request(:create_advanced_prompt_optimization_job, params)
+      request.send_request(options)
+    end
+
     # <p>Creates an Automated Reasoning policy for Amazon Bedrock Guardrails. Automated Reasoning policies use mathematical techniques to detect hallucinations, suggest corrections, and highlight unstated assumptions in the responses of your GenAI application.</p> <p>To create a policy, you upload a source document that describes the rules that you're encoding. Automated Reasoning extracts important concepts from the source document that will become variables in the policy and infers policy rules.</p>
     # @param [Hash, Types::CreateAutomatedReasoningPolicyRequest] params
     # @option params [String] :name
@@ -311,6 +408,8 @@ module Aws::Bedrock
     #   <p>A unique, case-sensitive identifier to ensure that the operation completes no more than once. If this token matches a previous request, Amazon Bedrock ignores the request but doesn't return an error.</p>
     # @option params [Types::AutomatedReasoningPolicyDefinition] :policy_definition
     #   <p>The policy definition that contains the formal logic rules, variables, and custom variable types used to validate foundation model responses in your application.</p>
+    # @option params [String] :kms_key_id
+    #   <p>The identifier of the KMS key to use for encrypting the automated reasoning policy and its associated artifacts. If you don't specify a KMS key, Amazon Bedrock uses an KMS managed key for encryption. For enhanced security and control, you can specify a customer managed KMS key.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>A list of tags to associate with the Automated Reasoning policy. Tags help you organize and manage your policies.</p>
     # @example Request syntax with placeholder values
@@ -347,6 +446,7 @@ module Aws::Bedrock
     #         }
     #       ]
     #     },
+    #     kms_key_id: "KmsKeyId",
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -450,16 +550,18 @@ module Aws::Bedrock
       request.send_request(options)
     end
 
-    # <p>Creates a new custom model in Amazon Bedrock. After the model is active, you can use it for inference.</p> <p>To use the model for inference, you must purchase Provisioned Throughput for it. You can't use On-demand inference with these custom models. For more information about Provisioned Throughput, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html">Provisioned Throughput</a>.</p> <p>The model appears in <code>ListCustomModels</code> with a <code>customizationType</code> of <code>imported</code>. To track the status of the new model, you use the <code>GetCustomModel</code> API operation. The model can be in the following states:</p> <ul> <li> <p> <code>Creating</code> - Initial state during validation and registration</p> </li> <li> <p> <code>Active</code> - Model is ready for use in inference</p> </li> <li> <p> <code>Failed</code> - Creation process encountered an error</p> </li> </ul> <p> <b>Related APIs</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModel.html">GetCustomModel</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModels.html">ListCustomModels</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModel.html">DeleteCustomModel</a> </p> </li> </ul>
+    # <p>Creates a new custom model in Amazon Bedrock. After the model is active, you can use it for inference.</p> <p>You can provide the model data source in one of the following ways:</p> <ul> <li> <p> <code>customModelDataSource</code> — Specify a SageMaker AI model package ARN. Amazon Bedrock resolves the model package to retrieve the model artifacts. This is the preferred method for new SageMaker AI training outputs.</p> </li> <li> <p> <code>modelSourceConfig</code> — Specify an Amazon S3 URI pointing to the Amazon-managed Amazon S3 bucket containing your model artifacts.</p> </li> </ul> <p>To use the model for inference, you must purchase Provisioned Throughput for it. You can't use On-demand inference with these custom models. For more information about Provisioned Throughput, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html">Provisioned Throughput</a>.</p> <p>The model appears in <code>ListCustomModels</code> with a <code>customizationType</code> of <code>imported</code>. To track the status of the new model, you use the <code>GetCustomModel</code> API operation. The model can be in the following states:</p> <ul> <li> <p> <code>Creating</code> - Initial state during validation and registration</p> </li> <li> <p> <code>Active</code> - Model is ready for use in inference</p> </li> <li> <p> <code>Failed</code> - Creation process encountered an error</p> </li> </ul> <p> <b>Related APIs</b> </p> <ul> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_GetCustomModel.html">GetCustomModel</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_ListCustomModels.html">ListCustomModels</a> </p> </li> <li> <p> <a href="https://docs.aws.amazon.com/bedrock/latest/APIReference/API_DeleteCustomModel.html">DeleteCustomModel</a> </p> </li> </ul>
     # @param [Hash, Types::CreateCustomModelRequest] params
     # @option params [String] :model_name
     #   <p>A unique name for the custom model.</p>
     # @option params [Types::ModelDataSource] :model_source_config
     #   <p>The data source for the model. The Amazon S3 URI in the model source must be for the Amazon-managed Amazon S3 bucket containing your model artifacts.</p>
+    # @option params [Types::CustomModelDataSource] :custom_model_data_source
+    #   <p>The data source for the custom model. Use this field to specify a SageMaker AI model package ARN as the source for your custom model. Amazon Bedrock resolves the model package to retrieve the model artifacts.</p> <p>You can specify either <code>customModelDataSource</code> or <code>modelSourceConfig</code>, but not both.</p>
     # @option params [String] :model_kms_key_arn
     #   <p>The Amazon Resource Name (ARN) of the customer managed KMS key to encrypt the custom model. If you don't provide a KMS key, Amazon Bedrock uses an Amazon Web Services-managed KMS key to encrypt the model. </p> <p>If you provide a customer managed KMS key, your Amazon Bedrock service role must have permissions to use it. For more information see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/encryption-import-model.html">Encryption of imported models</a>. </p>
     # @option params [String] :role_arn
-    #   <p>The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock assumes to perform tasks on your behalf. This role must have permissions to access the Amazon S3 bucket containing your model artifacts and the KMS key (if specified). For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html">Setting up an IAM service role for importing models</a> in the Amazon Bedrock User Guide.</p>
+    #   <p>The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock assumes to perform tasks on your behalf. This role must have permissions to access the Amazon S3 bucket containing your model artifacts and the KMS key (if specified). For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-import-iam-role.html">Setting up an IAM service role for importing models</a> in the Amazon Bedrock User Guide.</p> <p>This field is required when you use <code>modelSourceConfig</code> with an Amazon S3 data source. It is not required when you use <code>customModelDataSource</code> with a model package ARN, because Amazon Bedrock uses its own credentials to access the model artifacts.</p>
     # @option params [Array<Types::Tag>] :model_tags
     #   <p>A list of key-value pairs to associate with the custom model resource. You can use these tags to organize and identify your resources.</p> <p>For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html">Tagging resources</a> in the <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html">Amazon Bedrock User Guide</a>.</p>
     # @option params [String] :client_request_token
@@ -496,10 +598,16 @@ module Aws::Bedrock
     # @example Request syntax with placeholder values
     #   params = {
     #     model_name: "CustomModelName", # required
-    #     model_source_config: { # required
+    #     model_source_config: {
     #       # One of:
     #       s3_data_source: {
     #         s3_uri: "S3Uri", # required
+    #       }
+    #     },
+    #     custom_model_data_source: {
+    #       # One of:
+    #       model_package_arn_data_source: {
+    #         model_package_arn: "ModelPackageArn", # required
     #       }
     #     },
     #     model_kms_key_arn: "KmsKeyArn",
@@ -1393,7 +1501,7 @@ module Aws::Bedrock
     #     role_arn: "RoleArn", # required
     #     client_request_token: "IdempotencyToken",
     #     base_model_identifier: "BaseModelIdentifier", # required
-    #     customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"],
+    #     customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"],
     #     custom_model_kms_key_id: "KmsKeyId",
     #     job_tags: [
     #       {
@@ -1469,6 +1577,24 @@ module Aws::Bedrock
     #         teacher_model_config: { # required
     #           teacher_model_identifier: "TeacherModelIdentifier", # required
     #           max_response_length_for_inference: 1
+    #         }
+    #       },
+    #       rft_config: {
+    #         grader_config: {
+    #           # One of:
+    #           lambda_grader: {
+    #             lambda_arn: "LambdaArn", # required
+    #           }
+    #         },
+    #         hyper_parameters: {
+    #           epoch_count: 1,
+    #           batch_size: 1,
+    #           learning_rate: 1.0,
+    #           max_prompt_length: 1,
+    #           training_sample_per_prompt: 1,
+    #           inference_max_tokens: 1,
+    #           reasoning_effort: "low" # One of: ["low", "medium", "high"],
+    #           eval_interval: 1
     #         }
     #       }
     #     }
@@ -1569,6 +1695,8 @@ module Aws::Bedrock
     #   <p>The number of hours after which to force the batch inference job to time out.</p>
     # @option params [Array<Types::Tag>] :tags
     #   <p>Any tags to associate with the batch inference job. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/tagging.html">Tagging Amazon Bedrock resources</a>.</p>
+    # @option params [String] :model_invocation_type
+    #   <p>The invocation endpoint for ModelInvocationJob</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     job_name: "ModelInvocationJobName", # required
@@ -1601,7 +1729,8 @@ module Aws::Bedrock
     #         key: "TagKey", # required
     #         value: "TagValue", # required
     #       }
-    #     ]
+    #     ],
+    #     model_invocation_type: "InvokeModel" # One of: ["InvokeModel", "Converse"]
     #   }
     #   options = {}
     #   response = client.create_model_invocation_job(params, options)
@@ -1713,9 +1842,12 @@ module Aws::Bedrock
     # @param [Hash, Types::DeleteAutomatedReasoningPolicyRequest] params
     # @option params [String] :policy_arn
     #   <p>The Amazon Resource Name (ARN) of the Automated Reasoning policy to delete.</p>
+    # @option params [Boolean] :force
+    #   <p>Specifies whether to force delete the automated reasoning policy even if it has active resources. When <code>false</code>, Amazon Bedrock validates if all artifacts have been deleted (e.g. policy version, test case, test result) for a policy before deletion. When <code>true</code>, Amazon Bedrock will delete the policy and all its artifacts without validation. Default is <code>false</code>. </p>
     # @example Request syntax with placeholder values
     #   params = {
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
+    #     force: false
     #   }
     #   options = {}
     #   response = client.delete_automated_reasoning_policy(params, options)
@@ -1813,6 +1945,25 @@ module Aws::Bedrock
     # @return [Types::DeleteCustomModelDeploymentResponse]
     def delete_custom_model_deployment(params = {}, options = {})
       request = build_request(:delete_custom_model_deployment, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes the account-level enforced guardrail configuration.</p>
+    # @param [Hash, Types::DeleteEnforcedGuardrailConfigurationRequest] params
+    # @option params [String] :config_id
+    #   <p>Unique ID for the account enforced configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     config_id: "AccountEnforcedGuardrailConfigurationId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_enforced_guardrail_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteEnforcedGuardrailConfigurationResponse]
+    def delete_enforced_guardrail_configuration(params = {}, options = {})
+      request = build_request(:delete_enforced_guardrail_configuration, params)
       request.send_request(options)
     end
 
@@ -1967,6 +2118,25 @@ module Aws::Bedrock
       request.send_request(options)
     end
 
+    # <p>Deletes a previously created Bedrock resource policy.</p>
+    # @param [Hash, Types::DeleteResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The ARN of the Bedrock resource to which this resource policy applies.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourcePolicyResourceArn", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteResourcePolicyResponse]
+    def delete_resource_policy(params = {}, options = {})
+      request = build_request(:delete_resource_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Deregisters an endpoint for a model from Amazon Bedrock Marketplace. This operation removes the endpoint's association with Amazon Bedrock but does not delete the underlying Amazon SageMaker endpoint.</p>
     # @param [Hash, Types::DeregisterMarketplaceModelEndpointRequest] params
     # @option params [String] :endpoint_arn
@@ -2035,6 +2205,72 @@ module Aws::Bedrock
       request.send_request(options)
     end
 
+    # <p>Returns the account-wide data retention mode for Amazon Bedrock.</p>
+    # @param [Hash, Types::GetAccountDataRetentionRequest] params
+    # @example Request syntax with placeholder values
+    #   params = {}
+    #   options = {}
+    #   response = client.get_account_data_retention(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     mode: "default" # One of: ["default", "none", "aws_review", "provider_data_share", "inherit"], # required
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::GetAccountDataRetentionResponse]
+    def get_account_data_retention(params = {}, options = {})
+      request = build_request(:get_account_data_retention, params)
+      request.send_request(options)
+    end
+
+    # <p>Gets information about an advanced prompt optimization job.</p>
+    # @param [Hash, Types::GetAdvancedPromptOptimizationJobRequest] params
+    # @option params [String] :job_identifier
+    #   <p>The ARN or ID of the advanced prompt optimization job.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     job_identifier: "AdvancedPromptOptimizationJobIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.get_advanced_prompt_optimization_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_arn: "AdvancedPromptOptimizationJobArn", # required
+    #     job_name: "AdvancedPromptOptimizationJobName", # required
+    #     job_description: "AdvancedPromptOptimizationJobDescription",
+    #     job_status: "InProgress" # One of: ["InProgress", "Completed", "Failed", "PartiallyCompleted", "Stopping", "Stopped", "Deleting"], # required
+    #     input_config: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     output_config: { # required
+    #       s3_uri: "S3UriFolder", # required
+    #     },
+    #     encryption_key_arn: "KmsKeyArn",
+    #     creation_time: Time.now, # required
+    #     last_modified_time: Time.now,
+    #     failure_message: "ErrorMessage",
+    #     model_configurations: [ # required
+    #       {
+    #         model_id: "AdvancedPromptOptimizationModelIdentifier", # required
+    #         inference_config: {
+    #           max_tokens: 1,
+    #           temperature: 1.0,
+    #           top_p: 1.0,
+    #           stop_sequences: ["String"]
+    #         },
+    #         additional_model_request_fields: {
+    #           "AdditionalModelRequestFieldsKey" => ""null""
+    #         }
+    #       }
+    #     ]
+    #   }
+    # @return [Types::GetAdvancedPromptOptimizationJobResponse]
+    def get_advanced_prompt_optimization_job(params = {}, options = {})
+      request = build_request(:get_advanced_prompt_optimization_job, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves details about an Automated Reasoning policy or policy version. Returns information including the policy definition, metadata, and timestamps.</p>
     # @param [Hash, Types::GetAutomatedReasoningPolicyRequest] params
     # @option params [String] :policy_arn
@@ -2054,6 +2290,7 @@ module Aws::Bedrock
     #     policy_id: "AutomatedReasoningPolicyId", # required
     #     description: "AutomatedReasoningPolicyDescription",
     #     definition_hash: "AutomatedReasoningPolicyHash", # required
+    #     kms_key_arn: "KmsKeyArn",
     #     created_at: Time.now,
     #     updated_at: Time.now, # required
     #   }
@@ -2184,7 +2421,7 @@ module Aws::Bedrock
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
     #     build_workflow_id: "AutomatedReasoningPolicyBuildWorkflowId", # required
     #     status: "SCHEDULED" # One of: ["SCHEDULED", "CANCEL_REQUESTED", "PREPROCESSING", "BUILDING", "TESTING", "COMPLETED", "FAILED", "CANCELLED"], # required
-    #     build_workflow_type: "INGEST_CONTENT" # One of: ["INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY"], # required
+    #     build_workflow_type: "INGEST_CONTENT" # One of: ["INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY", "GENERATE_FIDELITY_REPORT", "GENERATE_POLICY_SCENARIOS", "RESOLVE_POLICY_AMBIGUITIES", "ITERATIVELY_REFINE_POLICY"], # required
     #     document_name: "AutomatedReasoningPolicyBuildDocumentName",
     #     document_content_type: "pdf" # One of: ["pdf", "txt"],
     #     document_description: "AutomatedReasoningPolicyBuildDocumentDescription",
@@ -2204,12 +2441,15 @@ module Aws::Bedrock
     # @option params [String] :build_workflow_id
     #   <p>The unique identifier of the build workflow whose result assets you want to retrieve.</p>
     # @option params [String] :asset_type
-    #   <p>The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION).</p>
+    #   <p>The type of asset to retrieve (e.g., BUILD_LOG, QUALITY_REPORT, POLICY_DEFINITION, GENERATED_TEST_CASES, POLICY_SCENARIOS, FIDELITY_REPORT, ASSET_MANIFEST, SOURCE_DOCUMENT).</p>
+    # @option params [String] :asset_id
+    #   <p>The unique identifier of the specific asset to retrieve when multiple assets of the same type exist. This is required when retrieving SOURCE_DOCUMENT assets, as multiple source documents may have been used in the workflow. The asset ID can be obtained from the asset manifest.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
     #     build_workflow_id: "AutomatedReasoningPolicyBuildWorkflowId", # required
-    #     asset_type: "BUILD_LOG" # One of: ["BUILD_LOG", "QUALITY_REPORT", "POLICY_DEFINITION"], # required
+    #     asset_type: "BUILD_LOG" # One of: ["BUILD_LOG", "QUALITY_REPORT", "POLICY_DEFINITION", "GENERATED_TEST_CASES", "POLICY_SCENARIOS", "FIDELITY_REPORT", "ASSET_MANIFEST", "SOURCE_DOCUMENT"], # required
+    #     asset_id: "AutomatedReasoningPolicyBuildResultAssetId"
     #   }
     #   options = {}
     #   response = client.get_automated_reasoning_policy_build_workflow_result_assets(params, options)
@@ -2451,6 +2691,101 @@ module Aws::Bedrock
     #             ]
     #           }
     #         ]
+    #       },
+    #       generated_test_cases: {
+    #         generated_test_cases: [ # required
+    #           {
+    #             query_content: "AutomatedReasoningPolicyTestQueryContent", # required
+    #             guard_content: "AutomatedReasoningPolicyTestGuardContent", # required
+    #             expected_aggregated_findings_result: "VALID" # One of: ["VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"], # required
+    #           }
+    #         ]
+    #       },
+    #       policy_scenarios: {
+    #         policy_scenarios: [ # required
+    #           {
+    #             expression: "AutomatedReasoningPolicyScenarioExpression", # required
+    #             alternate_expression: "AutomatedReasoningPolicyScenarioAlternateExpression", # required
+    #             expected_result: "VALID" # One of: ["VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"], # required
+    #             rule_ids: ["AutomatedReasoningPolicyDefinitionRuleId"], # required
+    #           }
+    #         ]
+    #       },
+    #       asset_manifest: {
+    #         entries: [ # required
+    #           {
+    #             asset_type: "BUILD_LOG" # One of: ["BUILD_LOG", "QUALITY_REPORT", "POLICY_DEFINITION", "GENERATED_TEST_CASES", "POLICY_SCENARIOS", "FIDELITY_REPORT", "ASSET_MANIFEST", "SOURCE_DOCUMENT"], # required
+    #             asset_name: "AutomatedReasoningPolicyBuildResultAssetName",
+    #             asset_id: "AutomatedReasoningPolicyBuildResultAssetId"
+    #           }
+    #         ]
+    #       },
+    #       document: {
+    #         document: "data", # required
+    #         document_content_type: "pdf" # One of: ["pdf", "txt"], # required
+    #         document_name: "AutomatedReasoningPolicyBuildDocumentName", # required
+    #         document_description: "AutomatedReasoningPolicyBuildDocumentDescription",
+    #         document_hash: "AutomatedReasoningPolicyDocumentSha256", # required
+    #       },
+    #       fidelity_report: {
+    #         coverage_score: 1.0, # required
+    #         accuracy_score: 1.0, # required
+    #         rule_reports: { # required
+    #           "AutomatedReasoningPolicyDefinitionRuleId" => {
+    #             rule: "AutomatedReasoningPolicyDefinitionRuleId", # required
+    #             grounding_statements: [
+    #               {
+    #                 document_id: "AutomatedReasoningPolicyDocumentId", # required
+    #                 statement_id: "AutomatedReasoningPolicyStatementId", # required
+    #               }
+    #             ],
+    #             grounding_justifications: ["AutomatedReasoningPolicyJustificationText"],
+    #             accuracy_score: 1.0,
+    #             accuracy_justification: "AutomatedReasoningPolicyJustificationText"
+    #           }
+    #         },
+    #         variable_reports: { # required
+    #           "AutomatedReasoningPolicyDefinitionVariableName" => {
+    #             policy_variable: "AutomatedReasoningPolicyDefinitionVariableName", # required
+    #             grounding_statements: [
+    #               {
+    #                 document_id: "AutomatedReasoningPolicyDocumentId", # required
+    #                 statement_id: "AutomatedReasoningPolicyStatementId", # required
+    #               }
+    #             ],
+    #             grounding_justifications: ["AutomatedReasoningPolicyJustificationText"],
+    #             accuracy_score: 1.0,
+    #             accuracy_justification: "AutomatedReasoningPolicyJustificationText"
+    #           }
+    #         },
+    #         document_sources: [ # required
+    #           {
+    #             document_name: "AutomatedReasoningPolicyBuildDocumentName", # required
+    #             document_hash: "AutomatedReasoningPolicyDocumentSha256", # required
+    #             document_id: "AutomatedReasoningPolicyDocumentId", # required
+    #             atomic_statements: [ # required
+    #               {
+    #                 id: "AutomatedReasoningPolicyStatementId", # required
+    #                 text: "AutomatedReasoningPolicyStatementText", # required
+    #                 location: { # required
+    #                   lines: [1], # required
+    #                 }
+    #               }
+    #             ],
+    #             document_content: [ # required
+    #               {
+    #                 page_number: 1,
+    #                 content: [{ # required
+    #                   # One of:
+    #                   line: {
+    #                     line_number: 1,
+    #                     line_text: "AutomatedReasoningPolicyLineText"
+    #                   }
+    #                 }]
+    #               }
+    #             ]
+    #           }
+    #         ]
     #       }
     #     }
     #   }
@@ -2480,8 +2815,8 @@ module Aws::Bedrock
     #     scenario: {
     #       expression: "AutomatedReasoningPolicyScenarioExpression", # required
     #       alternate_expression: "AutomatedReasoningPolicyScenarioAlternateExpression", # required
-    #       rule_ids: ["AutomatedReasoningPolicyDefinitionRuleId"], # required
     #       expected_result: "VALID" # One of: ["VALID", "INVALID", "SATISFIABLE", "IMPOSSIBLE", "TRANSLATION_AMBIGUOUS", "TOO_COMPLEX", "NO_TRANSLATION"], # required
+    #       rule_ids: ["AutomatedReasoningPolicyDefinitionRuleId"], # required
     #     }
     #   }
     # @return [Types::GetAutomatedReasoningPolicyNextScenarioResponse]
@@ -2843,7 +3178,7 @@ module Aws::Bedrock
     #     job_name: "JobName",
     #     job_arn: "ModelCustomizationJobArn",
     #     base_model_arn: "ModelArn",
-    #     customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"],
+    #     customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"],
     #     model_kms_key_arn: "KmsKeyArn",
     #     hyper_parameters: {
     #       "String" => "String"
@@ -2913,6 +3248,24 @@ module Aws::Bedrock
     #           teacher_model_identifier: "TeacherModelIdentifier", # required
     #           max_response_length_for_inference: 1
     #         }
+    #       },
+    #       rft_config: {
+    #         grader_config: {
+    #           # One of:
+    #           lambda_grader: {
+    #             lambda_arn: "LambdaArn", # required
+    #           }
+    #         },
+    #         hyper_parameters: {
+    #           epoch_count: 1,
+    #           batch_size: 1,
+    #           learning_rate: 1.0,
+    #           max_prompt_length: 1,
+    #           training_sample_per_prompt: 1,
+    #           inference_max_tokens: 1,
+    #           reasoning_effort: "low" # One of: ["low", "medium", "high"],
+    #           eval_interval: 1
+    #         }
     #       }
     #     },
     #     model_status: "Active" # One of: ["Active", "Creating", "Failed"],
@@ -2943,6 +3296,10 @@ module Aws::Bedrock
     #     created_at: Time.now, # required
     #     status: "Creating" # One of: ["Creating", "Active", "Failed"], # required
     #     description: "CustomModelDeploymentDescription",
+    #     update_details: {
+    #       model_arn: "ModelArn", # required
+    #       update_status: "Updating" # One of: ["Updating", "UpdateCompleted", "UpdateFailed"], # required
+    #     },
     #     failure_message: "ErrorMessage",
     #     last_updated_at: Time.now
     #   }
@@ -3385,6 +3742,10 @@ module Aws::Bedrock
     #       inference_types_supported: ["ON_DEMAND" # One of: ["ON_DEMAND", "PROVISIONED"]],
     #       model_lifecycle: {
     #         status: "ACTIVE" # One of: ["ACTIVE", "LEGACY"], # required
+    #         start_of_life_time: Time.now,
+    #         end_of_life_time: Time.now,
+    #         legacy_time: Time.now,
+    #         public_extended_access_time: Time.now
     #       }
     #     }
     #   }
@@ -3799,7 +4160,7 @@ module Aws::Bedrock
     #     output_data_config: { # required
     #       s3_uri: "S3Uri", # required
     #     },
-    #     customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"],
+    #     customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"],
     #     output_model_kms_key_arn: "KmsKeyArn",
     #     training_metrics: {
     #       training_loss: 1.0
@@ -3819,6 +4180,24 @@ module Aws::Bedrock
     #         teacher_model_config: { # required
     #           teacher_model_identifier: "TeacherModelIdentifier", # required
     #           max_response_length_for_inference: 1
+    #         }
+    #       },
+    #       rft_config: {
+    #         grader_config: {
+    #           # One of:
+    #           lambda_grader: {
+    #             lambda_arn: "LambdaArn", # required
+    #           }
+    #         },
+    #         hyper_parameters: {
+    #           epoch_count: 1,
+    #           batch_size: 1,
+    #           learning_rate: 1.0,
+    #           max_prompt_length: 1,
+    #           training_sample_per_prompt: 1,
+    #           inference_max_tokens: 1,
+    #           reasoning_effort: "low" # One of: ["low", "medium", "high"],
+    #           eval_interval: 1
     #         }
     #       }
     #     }
@@ -3914,7 +4293,12 @@ module Aws::Bedrock
     #       security_group_ids: ["SecurityGroupId"], # required
     #     },
     #     timeout_duration_in_hours: 1,
-    #     job_expiration_time: Time.now
+    #     job_expiration_time: Time.now,
+    #     model_invocation_type: "InvokeModel" # One of: ["InvokeModel", "Converse"],
+    #     total_record_count: 1,
+    #     processed_record_count: 1,
+    #     success_record_count: 1,
+    #     error_record_count: 1
     #   }
     # @return [Types::GetModelInvocationJobResponse]
     def get_model_invocation_job(params = {}, options = {})
@@ -3947,7 +4331,8 @@ module Aws::Bedrock
     #       text_data_delivery_enabled: false,
     #       image_data_delivery_enabled: false,
     #       embedding_data_delivery_enabled: false,
-    #       video_data_delivery_enabled: false
+    #       video_data_delivery_enabled: false,
+    #       audio_data_delivery_enabled: false
     #     }
     #   }
     # @return [Types::GetModelInvocationLoggingConfigurationResponse]
@@ -4027,6 +4412,27 @@ module Aws::Bedrock
       request.send_request(options)
     end
 
+    # <p>Gets the resource policy document for a Bedrock resource</p>
+    # @param [Hash, Types::GetResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The ARN of the Bedrock resource to which this resource policy applies.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourcePolicyResourceArn", # required
+    #   }
+    #   options = {}
+    #   response = client.get_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_policy: "ResourcePolicyDocument"
+    #   }
+    # @return [Types::GetResourcePolicyResponse]
+    def get_resource_policy(params = {}, options = {})
+      request = build_request(:get_resource_policy, params)
+      request.send_request(options)
+    end
+
     # <p>Get usecase for model access.</p>
     # @param [Hash, Types::GetUseCaseForModelAccessRequest] params
     # @example Request syntax with placeholder values
@@ -4041,6 +4447,45 @@ module Aws::Bedrock
     # @return [Types::GetUseCaseForModelAccessResponse]
     def get_use_case_for_model_access(params = {}, options = {})
       request = build_request(:get_use_case_for_model_access, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the advanced prompt optimization jobs in your account.</p>
+    # @param [Hash, Types::ListAdvancedPromptOptimizationJobsRequest] params
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in the response.</p>
+    # @option params [String] :next_token
+    #   <p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token in a subsequent request to get the next set of results.</p>
+    # @option params [String] :sort_by
+    #   <p>The field to sort the results by.</p>
+    # @option params [String] :sort_order
+    #   <p>The sort order for the results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "PaginationToken",
+    #     sort_by: "CreationTime" # One of: ["CreationTime"],
+    #     sort_order: "Ascending" # One of: ["Ascending", "Descending"]
+    #   }
+    #   options = {}
+    #   response = client.list_advanced_prompt_optimization_jobs(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_summaries: [
+    #       {
+    #         job_arn: "AdvancedPromptOptimizationJobArn", # required
+    #         job_name: "AdvancedPromptOptimizationJobName", # required
+    #         job_status: "InProgress" # One of: ["InProgress", "Completed", "Failed", "PartiallyCompleted", "Stopping", "Stopped", "Deleting"], # required
+    #         creation_time: Time.now, # required
+    #         last_modified_time: Time.now
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListAdvancedPromptOptimizationJobsResponse]
+    def list_advanced_prompt_optimization_jobs(params = {}, options = {})
+      request = build_request(:list_advanced_prompt_optimization_jobs, params)
       request.send_request(options)
     end
 
@@ -4106,7 +4551,7 @@ module Aws::Bedrock
     #         policy_arn: "AutomatedReasoningPolicyArn", # required
     #         build_workflow_id: "AutomatedReasoningPolicyBuildWorkflowId", # required
     #         status: "SCHEDULED" # One of: ["SCHEDULED", "CANCEL_REQUESTED", "PREPROCESSING", "BUILDING", "TESTING", "COMPLETED", "FAILED", "CANCELLED"], # required
-    #         build_workflow_type: "INGEST_CONTENT" # One of: ["INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY"], # required
+    #         build_workflow_type: "INGEST_CONTENT" # One of: ["INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY", "GENERATE_FIDELITY_REPORT", "GENERATE_POLICY_SCENARIOS", "RESOLVE_POLICY_AMBIGUITIES", "ITERATIVELY_REFINE_POLICY"], # required
     #         created_at: Time.now, # required
     #         updated_at: Time.now, # required
     #       }
@@ -4572,7 +5017,7 @@ module Aws::Bedrock
     #         creation_time: Time.now, # required
     #         base_model_arn: "ModelArn", # required
     #         base_model_name: "ModelName", # required
-    #         customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"],
+    #         customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"],
     #         owner_account_id: "AccountId",
     #         model_status: "Active" # One of: ["Active", "Creating", "Failed"]
     #       }
@@ -4581,6 +5026,49 @@ module Aws::Bedrock
     # @return [Types::ListCustomModelsResponse]
     def list_custom_models(params = {}, options = {})
       request = build_request(:list_custom_models, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the account-level enforced guardrail configurations.</p>
+    # @param [Hash, Types::ListEnforcedGuardrailsConfigurationRequest] params
+    # @option params [String] :next_token
+    #   <p>Opaque continuation token of previous paginated response.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "PaginationToken"
+    #   }
+    #   options = {}
+    #   response = client.list_enforced_guardrails_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     guardrails_config: [ # required
+    #       {
+    #         config_id: "AccountEnforcedGuardrailConfigurationId",
+    #         guardrail_arn: "GuardrailArn",
+    #         guardrail_id: "GuardrailId",
+    #         input_tags: "HONOR" # One of: ["HONOR", "IGNORE"],
+    #         selective_content_guarding: {
+    #           system: "SELECTIVE" # One of: ["SELECTIVE", "COMPREHENSIVE"],
+    #           messages: "SELECTIVE" # One of: ["SELECTIVE", "COMPREHENSIVE"]
+    #         },
+    #         guardrail_version: "GuardrailNumericalVersion",
+    #         created_at: Time.now,
+    #         created_by: "String",
+    #         updated_at: Time.now,
+    #         updated_by: "String",
+    #         owner: "ConfigurationOwner",
+    #         model_enforcement: {
+    #           included_models: ["IncludedModelId"], # required
+    #           excluded_models: ["ExcludedModelId"], # required
+    #         }
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListEnforcedGuardrailsConfigurationResponse]
+    def list_enforced_guardrails_configuration(params = {}, options = {})
+      request = build_request(:list_enforced_guardrails_configuration, params)
       request.send_request(options)
     end
 
@@ -4740,6 +5228,10 @@ module Aws::Bedrock
     #         inference_types_supported: ["ON_DEMAND" # One of: ["ON_DEMAND", "PROVISIONED"]],
     #         model_lifecycle: {
     #           status: "ACTIVE" # One of: ["ACTIVE", "LEGACY"], # required
+    #           start_of_life_time: Time.now,
+    #           end_of_life_time: Time.now,
+    #           legacy_time: Time.now,
+    #           public_extended_access_time: Time.now
     #         }
     #       }
     #     ]
@@ -5053,7 +5545,7 @@ module Aws::Bedrock
     #         end_time: Time.now,
     #         custom_model_arn: "CustomModelArn",
     #         custom_model_name: "CustomModelName",
-    #         customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "IMPORTED"]
+    #         customization_type: "FINE_TUNING" # One of: ["FINE_TUNING", "CONTINUED_PRE_TRAINING", "DISTILLATION", "REINFORCEMENT_FINE_TUNING", "IMPORTED"]
     #       }
     #     ]
     #   }
@@ -5124,7 +5616,7 @@ module Aws::Bedrock
     # @option params [Time] :submit_time_before
     #   <p>Specify a time to filter for batch inference jobs that were submitted before the time you specify.</p>
     # @option params [String] :status_equals
-    #   <p>Specify a status to filter for batch inference jobs whose statuses match the string you specify.</p> <p>The following statuses are possible:</p> <ul> <li> <p>Submitted – This job has been submitted to a queue for validation.</p> </li> <li> <p>Validating – This job is being validated for the requirements described in <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html">Format and upload your batch inference data</a>. The criteria include the following:</p> <ul> <li> <p>Your IAM service role has access to the Amazon S3 buckets containing your files.</p> </li> <li> <p>Your files are .jsonl files and each individual record is a JSON object in the correct format. Note that validation doesn't check if the <code>modelInput</code> value matches the request body for the model.</p> </li> <li> <p>Your files fulfill the requirements for file size and number of records. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html">Quotas for Amazon Bedrock</a>.</p> </li> </ul> </li> <li> <p>Scheduled – This job has been validated and is now in a queue. The job will automatically start when it reaches its turn.</p> </li> <li> <p>Expired – This job timed out because it was scheduled but didn't begin before the set timeout duration. Submit a new job request.</p> </li> <li> <p>InProgress – This job has begun. You can start viewing the results in the output S3 location.</p> </li> <li> <p>Completed – This job has successfully completed. View the output files in the output S3 location.</p> </li> <li> <p>PartiallyCompleted – This job has partially completed. Not all of your records could be processed in time. View the output files in the output S3 location.</p> </li> <li> <p>Failed – This job has failed. Check the failure message for any further details. For further assistance, reach out to the <a href="https://console.aws.amazon.com/support/home/">Amazon Web ServicesSupport Center</a>.</p> </li> <li> <p>Stopped – This job was stopped by a user.</p> </li> <li> <p>Stopping – This job is being stopped by a user.</p> </li> </ul>
+    #   <p>Specify a status to filter for batch inference jobs whose statuses match the string you specify.</p> <p>The following statuses are possible:</p> <ul> <li> <p>Submitted – This job has been submitted to a queue for validation.</p> </li> <li> <p>Validating – This job is being validated for the requirements described in <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/batch-inference-data.html">Format and upload your batch inference data</a>. The criteria include the following:</p> <ul> <li> <p>Your IAM service role has access to the Amazon S3 buckets containing your files.</p> </li> <li> <p>Your files are .jsonl files and each individual record is a JSON object in the correct format. Note that validation doesn't check if the <code>modelInput</code> value matches the request body for the model.</p> </li> <li> <p>Your files fulfill the requirements for file size and number of records. For more information, see <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html">Quotas for Amazon Bedrock</a>.</p> </li> </ul> </li> <li> <p>Scheduled – This job has been validated and is now in a queue. The job will automatically start when it reaches its turn.</p> </li> <li> <p>Expired – This job timed out because it was scheduled but didn't begin before the set timeout duration. Submit a new job request.</p> </li> <li> <p>InProgress – This job has begun. You can start viewing the results in the output S3 location.</p> </li> <li> <p>Completed – This job has successfully completed. View the output files in the output S3 location.</p> </li> <li> <p>PartiallyCompleted – This job has partially completed. Not all of your records could be processed in time. View the output files in the output S3 location.</p> </li> <li> <p>Failed – This job has failed. Check the failure message for any further details. For further assistance, reach out to the <a href="https://console.aws.amazon.com/support/home/">Amazon Web Services Support Center</a>.</p> </li> <li> <p>Stopped – This job was stopped by a user.</p> </li> <li> <p>Stopping – This job is being stopped by a user.</p> </li> </ul>
     # @option params [String] :name_contains
     #   <p>Specify a string to filter for batch inference jobs whose names contain the string.</p>
     # @option params [Integer] :max_results
@@ -5185,7 +5677,12 @@ module Aws::Bedrock
     #           security_group_ids: ["SecurityGroupId"], # required
     #         },
     #         timeout_duration_in_hours: 1,
-    #         job_expiration_time: Time.now
+    #         job_expiration_time: Time.now,
+    #         model_invocation_type: "InvokeModel" # One of: ["InvokeModel", "Converse"],
+    #         total_record_count: 1,
+    #         processed_record_count: 1,
+    #         success_record_count: 1,
+    #         error_record_count: 1
     #       }
     #     ]
     #   }
@@ -5331,6 +5828,65 @@ module Aws::Bedrock
       request.send_request(options)
     end
 
+    # <p>Sets the account-wide data retention mode for Amazon Bedrock.</p>
+    # @param [Hash, Types::PutAccountDataRetentionRequest] params
+    # @option params [String] :mode
+    #   <p>The data retention mode to set for the account.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     mode: "default" # One of: ["default", "none", "aws_review", "provider_data_share", "inherit"], # required
+    #   }
+    #   options = {}
+    #   response = client.put_account_data_retention(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     mode: "default" # One of: ["default", "none", "aws_review", "provider_data_share", "inherit"], # required
+    #     updated_at: Time.now
+    #   }
+    # @return [Types::PutAccountDataRetentionResponse]
+    def put_account_data_retention(params = {}, options = {})
+      request = build_request(:put_account_data_retention, params)
+      request.send_request(options)
+    end
+
+    # <p>Sets the account-level enforced guardrail configuration.</p>
+    # @param [Hash, Types::PutEnforcedGuardrailConfigurationRequest] params
+    # @option params [String] :config_id
+    #   <p>Unique ID for the account enforced configuration.</p>
+    # @option params [Types::AccountEnforcedGuardrailInferenceInputConfiguration] :guardrail_inference_config
+    #   <p>Account-level enforced guardrail input configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     config_id: "AccountEnforcedGuardrailConfigurationId",
+    #     guardrail_inference_config: { # required
+    #       guardrail_identifier: "GuardrailIdentifier", # required
+    #       guardrail_version: "GuardrailNumericalVersion", # required
+    #       selective_content_guarding: {
+    #         system: "SELECTIVE" # One of: ["SELECTIVE", "COMPREHENSIVE"],
+    #         messages: "SELECTIVE" # One of: ["SELECTIVE", "COMPREHENSIVE"]
+    #       },
+    #       model_enforcement: {
+    #         included_models: ["IncludedModelId"], # required
+    #         excluded_models: ["ExcludedModelId"], # required
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.put_enforced_guardrail_configuration(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     config_id: "AccountEnforcedGuardrailConfigurationId",
+    #     updated_at: Time.now,
+    #     updated_by: "String"
+    #   }
+    # @return [Types::PutEnforcedGuardrailConfigurationResponse]
+    def put_enforced_guardrail_configuration(params = {}, options = {})
+      request = build_request(:put_enforced_guardrail_configuration, params)
+      request.send_request(options)
+    end
+
     # <p>Set the configuration values for model invocation logging.</p>
     # @param [Hash, Types::PutModelInvocationLoggingConfigurationRequest] params
     # @option params [Types::LoggingConfig] :logging_config
@@ -5353,7 +5909,8 @@ module Aws::Bedrock
     #       text_data_delivery_enabled: false,
     #       image_data_delivery_enabled: false,
     #       embedding_data_delivery_enabled: false,
-    #       video_data_delivery_enabled: false
+    #       video_data_delivery_enabled: false,
+    #       audio_data_delivery_enabled: false
     #     }
     #   }
     #   options = {}
@@ -5364,6 +5921,30 @@ module Aws::Bedrock
     # @return [Types::PutModelInvocationLoggingConfigurationResponse]
     def put_model_invocation_logging_configuration(params = {}, options = {})
       request = build_request(:put_model_invocation_logging_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Adds a resource policy for a Bedrock resource.</p>
+    # @param [Hash, Types::PutResourcePolicyRequest] params
+    # @option params [String] :resource_arn
+    #   <p>The ARN of the Bedrock resource to which this resource policy applies.</p>
+    # @option params [String] :resource_policy
+    #   <p>The JSON string representing the Bedrock resource policy.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     resource_arn: "ResourcePolicyResourceArn", # required
+    #     resource_policy: "ResourcePolicyDocument", # required
+    #   }
+    #   options = {}
+    #   response = client.put_resource_policy(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     resource_arn: "ResourcePolicyResourceArn"
+    #   }
+    # @return [Types::PutResourcePolicyResponse]
+    def put_resource_policy(params = {}, options = {})
+      request = build_request(:put_resource_policy, params)
       request.send_request(options)
     end
 
@@ -5445,7 +6026,7 @@ module Aws::Bedrock
     # @example Request syntax with placeholder values
     #   params = {
     #     policy_arn: "AutomatedReasoningPolicyArn", # required
-    #     build_workflow_type: "INGEST_CONTENT" # One of: ["INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY"], # required
+    #     build_workflow_type: "INGEST_CONTENT" # One of: ["INGEST_CONTENT", "REFINE_POLICY", "IMPORT_POLICY", "GENERATE_FIDELITY_REPORT", "GENERATE_POLICY_SCENARIOS", "RESOLVE_POLICY_AMBIGUITIES", "ITERATIVELY_REFINE_POLICY"], # required
     #     client_request_token: "IdempotencyToken",
     #     source_content: { # required
     #       policy_definition: {
@@ -5562,6 +6143,28 @@ module Aws::Bedrock
     #               content: "AutomatedReasoningPolicyAnnotationIngestContent", # required
     #             }
     #           }]
+    #         },
+    #         generate_fidelity_report_content: {
+    #           # One of:
+    #           documents: [
+    #             {
+    #               document: "data", # required
+    #               document_content_type: "pdf" # One of: ["pdf", "txt"], # required
+    #               document_name: "AutomatedReasoningPolicyBuildDocumentName", # required
+    #               document_description: "AutomatedReasoningPolicyBuildDocumentDescription"
+    #             }
+    #           ]
+    #         },
+    #         iterative_refinement_content: {
+    #           documents: [ # required
+    #             {
+    #               document: "data", # required
+    #               document_content_type: "pdf" # One of: ["pdf", "txt"], # required
+    #               document_name: "AutomatedReasoningPolicyBuildDocumentName", # required
+    #               document_description: "AutomatedReasoningPolicyBuildDocumentDescription"
+    #             }
+    #           ],
+    #           feedback: "AutomatedReasoningPolicyBuildFeedback"
     #         }
     #       }
     #     }
@@ -5607,6 +6210,25 @@ module Aws::Bedrock
     # @return [Types::StartAutomatedReasoningPolicyTestWorkflowResponse]
     def start_automated_reasoning_policy_test_workflow(params = {}, options = {})
       request = build_request(:start_automated_reasoning_policy_test_workflow, params)
+      request.send_request(options)
+    end
+
+    # <p>Stops an advanced prompt optimization job that is in progress.</p>
+    # @param [Hash, Types::StopAdvancedPromptOptimizationJobRequest] params
+    # @option params [String] :job_identifier
+    #   <p>The ARN or ID of the advanced prompt optimization job to stop.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     job_identifier: "AdvancedPromptOptimizationJobIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.stop_advanced_prompt_optimization_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::StopAdvancedPromptOptimizationJobResponse]
+    def stop_advanced_prompt_optimization_job(params = {}, options = {})
+      request = build_request(:stop_advanced_prompt_optimization_job, params)
       request.send_request(options)
     end
 
@@ -5923,6 +6545,30 @@ module Aws::Bedrock
     # @return [Types::UpdateAutomatedReasoningPolicyTestCaseResponse]
     def update_automated_reasoning_policy_test_case(params = {}, options = {})
       request = build_request(:update_automated_reasoning_policy_test_case, params)
+      request.send_request(options)
+    end
+
+    # <p> Updates a custom model deployment with a new custom model. This allows you to deploy updated models without creating new deployment endpoints. </p>
+    # @param [Hash, Types::UpdateCustomModelDeploymentRequest] params
+    # @option params [String] :model_arn
+    #   <p> ARN of the new custom model to deploy. This replaces the currently deployed model. </p>
+    # @option params [String] :custom_model_deployment_identifier
+    #   <p> Identifier of the custom model deployment to update with the new custom model. </p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     model_arn: "CustomModelArn", # required
+    #     custom_model_deployment_identifier: "CustomModelDeploymentIdentifier", # required
+    #   }
+    #   options = {}
+    #   response = client.update_custom_model_deployment(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     custom_model_deployment_arn: "CustomModelDeploymentArn", # required
+    #   }
+    # @return [Types::UpdateCustomModelDeploymentResponse]
+    def update_custom_model_deployment(params = {}, options = {})
+      request = build_request(:update_custom_model_deployment, params)
       request.send_request(options)
     end
 

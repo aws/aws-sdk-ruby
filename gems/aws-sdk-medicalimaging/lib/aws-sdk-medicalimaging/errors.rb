@@ -23,8 +23,10 @@ module Aws::MedicalImaging
   # ## Error Classes
   #
   # * {AccessDeniedException}
+  # * {BadRequestException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {NotAcceptableException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
@@ -39,6 +41,19 @@ module Aws::MedicalImaging
     class AccessDeniedException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MedicalImaging::Types::AccessDeniedException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request is invalid or malformed.</p>
+    class BadRequestException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MedicalImaging::Types::BadRequestException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
@@ -65,6 +80,19 @@ module Aws::MedicalImaging
     class InternalServerException < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::MedicalImaging::Types::InternalServerException] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The request content type or accept header is not supported.</p>
+    class NotAcceptableException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::MedicalImaging::Types::NotAcceptableException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end

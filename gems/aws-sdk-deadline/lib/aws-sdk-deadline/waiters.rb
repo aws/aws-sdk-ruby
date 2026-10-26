@@ -62,7 +62,91 @@ module Aws::Deadline
 
     # @api private
     #
-    # Wait until a Job is created. Use this after invoking CreateJob.
+    # Wait until a job reaches any terminal status. Waits up to 1 hour by default.
+    #
+    class JobComplete
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 15,
+          max_delay: options[:max_delay] || 3600,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :get_job,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "SUCCEEDED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "FAILED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "CANCELED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "SUSPENDED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "NOT_COMPATIBLE",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "lifecycle_status",
+                    "expected" => "ARCHIVED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until a job is created. Use this after invoking CreateJob.
     #
     class JobCreateComplete
       def initialize(options = {})
@@ -130,6 +214,90 @@ module Aws::Deadline
                   "output" => {
                     "path" => "lifecycle_status",
                     "expected" => "CREATE_FAILED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              }
+            ]
+          )
+        )
+      end
+
+      def wait(params = {})
+        @waiter.wait(@client, params)
+      end
+    end
+
+    # @api private
+    #
+    # Wait until a job has succeeded. Fails if the job reaches a non-successful terminal status. Waits up to 1 hour by default.
+    #
+    class JobSucceeded
+      def initialize(options = {})
+        @client = options[:client]
+        @waiter = Smithy::Client::Waiters::Waiter.new(
+          max_wait_time: options[:max_wait_time],
+          min_delay: options[:min_delay] || 15,
+          max_delay: options[:max_delay] || 3600,
+          poller: Smithy::Client::Waiters::Poller.new(
+            operation_name: :get_job,
+            acceptors: [
+              {
+                "state" => "success",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "SUCCEEDED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "FAILED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "CANCELED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "SUSPENDED",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "task_run_status",
+                    "expected" => "NOT_COMPATIBLE",
+                    "comparator" => "stringEquals"
+                  }
+                }
+              },
+              {
+                "state" => "failure",
+                "matcher" => {
+                  "output" => {
+                    "path" => "lifecycle_status",
+                    "expected" => "ARCHIVED",
                     "comparator" => "stringEquals"
                   }
                 }

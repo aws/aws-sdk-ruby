@@ -97,6 +97,7 @@ module Aws::CodeDeploy
     DeploymentInfo: StructureShape
     DeploymentIsNotInReadyStateException: StructureShape
     DeploymentLimitExceededException: StructureShape
+    DeploymentMode: EnumShape
     DeploymentNotStartedException: StructureShape
     DeploymentOption: EnumShape
     DeploymentOverview: StructureShape

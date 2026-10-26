@@ -144,18 +144,18 @@ module Aws::IoTSiteWise
     #  The value must be non-negative integer value between 0 and 10,485,780 bytes inclusive.
     # @option options [String] :retry_mode (standard)
     #  Specifies which retry algorithm to use. Values are:
-    #  
+    #
     #  * `standard` - A standardized set of retry rules across the AWS SDKs.
     #    This includes support for retry quotas, which limit the number of
     #    unsuccessful retries a client can make. This is the default
     #    value if no retry mode is provided.
-    #  
+    #
     #  * `adaptive` - A retry mode that includes all the functionality of
     #    `standard` mode along with automatic client side throttling.
     # @option options [Object] :retry_strategy
     #  The retry strategy used by the client. If not provided, a default strategy is built
     #  based on `:retry_mode` — either `Standard` or `Adaptive`.
-    #  
+    #
     #  A custom strategy must respond to:
     #  * `#acquire_initial_retry_token` - returns a token
     #  * `#refresh_retry_token(token, error_info)` - returns a token or nil
@@ -274,7 +274,78 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Associates a group (batch) of assets with an IoT SiteWise Monitor project.</p>
+    # <p>Associates a batch of data segments with a curated dataset. Data segments are
+    #       time-bounded slices of time series data selected from source session datasets. Data segments
+    #       that belong to the same time series can't overlap in time, regardless of which dataset they
+    #       belong to.</p>
+    # @param [Hash, Types::BatchAssociateDataSegmentsToDatasetRequest] params
+    # @option params [String] :dataset_id
+    #   <p>The ID of the curated dataset to associate data segments with.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    # @option params [Array<Types::AssociateDataSegmentEntry>] :associate_data_segment_entries
+    #   <p>The list of data segment entries to associate with the dataset.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     dataset_id: "ID", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     associate_data_segment_entries: [ # required
+    #       {
+    #         source_dataset_id: "ID", # required
+    #         time_series_id: "TimeSeriesId", # required
+    #         start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         }
+    #       }
+    #     ],
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.batch_associate_data_segments_to_dataset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     dataset_id: "ID", # required
+    #     dataset_version: "Version", # required
+    #     failed_associations: [ # required
+    #       {
+    #         source_dataset_id: "ID", # required
+    #         time_series_id: "TimeSeriesId", # required
+    #         start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         error_code: "INTERNAL_FAILURE" # One of: ["INTERNAL_FAILURE", "VALIDATION_ERROR", "RESOURCE_NOT_FOUND", "LIMIT_EXCEEDED", "CONFLICTING_OPERATION"], # required
+    #         error_message: "DataSegmentErrorMessage", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchAssociateDataSegmentsToDatasetResponse]
+    def batch_associate_data_segments_to_dataset(params = {}, options = {})
+      request = build_request(:batch_associate_data_segments_to_dataset, params)
+      request.send_request(options)
+    end
+
+    # <important>
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
+    #          </important>
+    #          <p>Associates a group (batch) of assets with an IoT SiteWise Monitor project.</p>
     # @param [Hash, Types::BatchAssociateProjectAssetsRequest] params
     # @option params [String] :project_id
     #   <p>The ID of the project to which to associate the assets.</p>
@@ -304,6 +375,130 @@ module Aws::IoTSiteWise
     # @return [Types::BatchAssociateProjectAssetsResponse]
     def batch_associate_project_assets(params = {}, options = {})
       request = build_request(:batch_associate_project_assets, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a batch of data segments from a session dataset. Deleting a data segment deletes
+    #       the underlying time series data for the segment's time range.</p>
+    # @param [Hash, Types::BatchDeleteDatasetDataSegmentsRequest] params
+    # @option params [String] :dataset_id
+    #   <p>The ID of the session dataset from which to delete data segments.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    # @option params [Array<Types::DeleteDataSegmentEntry>] :delete_data_segment_entries
+    #   <p>The list of data segment entries to delete.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     dataset_id: "ID", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     delete_data_segment_entries: [ # required
+    #       {
+    #         time_series_id: "ID", # required
+    #         start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         }
+    #       }
+    #     ],
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.batch_delete_dataset_data_segments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     dataset_id: "ID", # required
+    #     dataset_version: "Version", # required
+    #     errors: [ # required
+    #       {
+    #         time_series_id: "ID", # required
+    #         start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         error_code: "INTERNAL_FAILURE" # One of: ["INTERNAL_FAILURE", "VALIDATION_ERROR", "RESOURCE_NOT_FOUND", "LIMIT_EXCEEDED", "CONFLICTING_OPERATION"], # required
+    #         error_message: "DataSegmentErrorMessage", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchDeleteDatasetDataSegmentsResponse]
+    def batch_delete_dataset_data_segments(params = {}, options = {})
+      request = build_request(:batch_delete_dataset_data_segments, params)
+      request.send_request(options)
+    end
+
+    # <p>Disassociates a batch of data segments from a curated dataset. Disassociating a data
+    #       segment doesn't delete the underlying data in the source session dataset.</p>
+    # @param [Hash, Types::BatchDisassociateDataSegmentsFromDatasetRequest] params
+    # @option params [String] :dataset_id
+    #   <p>The ID of the curated dataset to disassociate data segments from.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    # @option params [Array<Types::DisassociateDataSegmentEntry>] :disassociate_data_segment_entries
+    #   <p>The list of data segment entries to disassociate from the dataset.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     dataset_id: "ID", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     disassociate_data_segment_entries: [ # required
+    #       {
+    #         source_dataset_id: "ID", # required
+    #         time_series_id: "TimeSeriesId", # required
+    #         start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         }
+    #       }
+    #     ],
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.batch_disassociate_data_segments_from_dataset(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     dataset_id: "ID", # required
+    #     dataset_version: "Version", # required
+    #     failed_disassociations: [ # required
+    #       {
+    #         source_dataset_id: "ID", # required
+    #         time_series_id: "TimeSeriesId", # required
+    #         start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         error_code: "INTERNAL_FAILURE" # One of: ["INTERNAL_FAILURE", "VALIDATION_ERROR", "RESOURCE_NOT_FOUND", "LIMIT_EXCEEDED", "CONFLICTING_OPERATION"], # required
+    #         error_message: "DataSegmentErrorMessage", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::BatchDisassociateDataSegmentsFromDatasetResponse]
+    def batch_disassociate_data_segments_from_dataset(params = {}, options = {})
+      request = build_request(:batch_disassociate_data_segments_from_dataset, params)
       request.send_request(options)
     end
 
@@ -682,7 +877,121 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or
+    # <p>Cancels a running or pending enrichment job. This is an idempotent operation—calling it multiple
+    # times with the same jobId is safe and returns the current status.</p>
+    # <h2>Behavior</h2>
+    # <ul>
+    # <li>Jobs in PENDING or RUNNING status transition to CANCELLED</li>
+    # <li>Jobs in RUNNING state may not be cancellable once they have progressed to certain processing stages</li>
+    # <li>Jobs already in terminal states (COMPLETED, FAILED, TIMED_OUT) cannot be cancelled;
+    # the operation returns a ConflictingOperationException</li>
+    # <li>Cancelling an already-CANCELLED job is a no-op and returns the current status (idempotent behavior)</li>
+    # <li>The API responds immediately after recording the cancellation</li>
+    # <li>Cleanup of job resources happens asynchronously in the background</li>
+    # </ul>
+    # <h2>When to Cancel</h2>
+    # <p>Cancel a job when:</p>
+    # <ul>
+    # <li>The job is taking longer than expected</li>
+    # <li>The job was created with incorrect parameters</li>
+    # <li>You no longer need the results</li>
+    # </ul>
+    # <h2>Idempotency</h2>
+    # <p>You can safely retry cancellation requests. Calling CancelEnrichmentJob multiple times for the same
+    # job returns the current status without error as long as the job is not in a terminal state other
+    # than CANCELLED.</p>
+    # @param [Hash, Types::CancelEnrichmentJobRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the IoT SiteWise workspace containing the enrichment job to cancel.</p>
+    # @option params [String] :job_id
+    #   <p>The unique identifier of the enrichment job to cancel. This is the jobId returned by CreateEnrichmentJob.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     job_id: "ID", # required
+    #   }
+    #   options = {}
+    #   response = client.cancel_enrichment_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "ID", # required
+    #     status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELLED"], # required
+    #   }
+    # @return [Types::CancelEnrichmentJobResponse]
+    def cancel_enrichment_job(params = {}, options = {})
+      request = build_request(:cancel_enrichment_job, params)
+      request.send_request(options)
+    end
+
+    # <p>Cancels a pipeline execution in the specified workspace. If the execution
+    # is not in a terminal state (such as NOT_STARTED or RUNNING), it transitions to
+    # CANCELLING and asynchronously to CANCELLED. This operation is idempotent: calling
+    # it on an execution that is already CANCELLING or CANCELLED returns success with
+    # the current state. Calling it on a terminal execution (SUCCEEDED or FAILED)
+    # returns a conflict error. You can optionally provide a reason; it is returned in
+    # the stateDetails field when you describe the execution.</p>
+    # @param [Hash, Types::CancelPipelineExecutionRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :pipeline_name
+    #   <p>The name of the pipeline.</p>
+    # @option params [String] :pipeline_execution_id
+    #   <p>The unique identifier of the pipeline execution.</p>
+    # @option params [String] :reason
+    #   <p>A message describing why the pipeline execution is being cancelled.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     pipeline_name: "ResourceName", # required
+    #     pipeline_execution_id: "ID", # required
+    #     reason: "CancelPipelineExecutionRequestReasonString"
+    #   }
+    #   options = {}
+    #   response = client.cancel_pipeline_execution(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     state: "NOT_STARTED" # One of: ["NOT_STARTED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"], # required
+    #   }
+    # @return [Types::CancelPipelineExecutionResponse]
+    def cancel_pipeline_execution(params = {}, options = {})
+      request = build_request(:cancel_pipeline_execution, params)
+      request.send_request(options)
+    end
+
+    # <p>Cancels a running query.</p>
+    # @param [Hash, Types::CancelQueryRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace associated with the query.</p>
+    # @option params [String] :query_id
+    #   <p>The unique identifier for the query execution to cancel.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     query_id: "QueryId", # required
+    #   }
+    #   options = {}
+    #   response = client.cancel_query(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     query_id: "QueryId", # required
+    #     status: "SUBMITTED" # One of: ["SUBMITTED", "RUNNING", "COMPLETED", "FAILED", "CANCELED", "CANCELING"], # required
+    #   }
+    # @return [Types::CancelQueryResponse]
+    def cancel_query(params = {}, options = {})
+      request = build_request(:cancel_query, params)
+      request.send_request(options)
+    end
+
+    # <important>
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
+    #          </important>
+    #          <p>Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or
     #       IAM user) access to the specified IoT SiteWise Monitor portal or project resource.</p>
     #          <note>
     #             <p>Support for access policies that use an SSO Group as the identity is not supported at this time.</p>
@@ -741,6 +1050,48 @@ module Aws::IoTSiteWise
     # @return [Types::CreateAccessPolicyResponse]
     def create_access_policy(params = {}, options = {})
       request = build_request(:create_access_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a new application for the workspace and IdC application provided</p>
+    # @param [Hash, Types::CreateApplicationRequest] params
+    # @option params [String] :client_token
+    #   <p>Unique client token for idempotent request handling</p>
+    # @option params [String] :idc_instance_arn
+    #   <p>Identity Center Instance ARN to create the application in</p>
+    # @option params [String] :workspace_name
+    #   <p>Name of the workspace to associate with the underlying Application</p>
+    # @option params [String] :name
+    #   <p>Name of the application</p>
+    # @option params [String] :description
+    #   <p>Description of the application</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A list of key-value pairs that contain metadata for the application.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "ClientToken",
+    #     idc_instance_arn: "ARN", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     name: "ApplicationName", # required
+    #     description: "Description",
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_application(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "ARN", # required
+    #     id: "ApplicationId", # required
+    #     dns_subdomain: "DnsSubdomain", # required
+    #     name: "ApplicationName", # required
+    #     status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING"], # required
+    #   }
+    # @return [Types::CreateApplicationResponse]
+    def create_application(params = {}, options = {})
+      request = build_request(:create_application, params)
       request.send_request(options)
     end
 
@@ -895,7 +1246,7 @@ module Aws::IoTSiteWise
     #         id: "ID",
     #         external_id: "ExternalId",
     #         name: "Name", # required
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
@@ -983,7 +1334,7 @@ module Aws::IoTSiteWise
     #             id: "ID",
     #             external_id: "ExternalId",
     #             name: "Name", # required
-    #             data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #             data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #             data_type_spec: "Name",
     #             unit: "PropertyUnit",
     #             type: { # required
@@ -1133,15 +1484,15 @@ module Aws::IoTSiteWise
     #            <p>You can specify up to 200 properties per composite model. For more
     #         information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The create request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the create request if an active version 
+    #   <p>Accepts <b>*</b> to reject the create request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the create operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1159,7 +1510,7 @@ module Aws::IoTSiteWise
     #         id: "ID",
     #         external_id: "ExternalId",
     #         name: "Name", # required
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
@@ -1255,7 +1606,8 @@ module Aws::IoTSiteWise
     #           }
     #         ]
     #       }
-    #     }
+    #     },
+    #     asset_model_id: "ID"
     #   }
     # @return [Types::CreateAssetModelCompositeModelResponse]
     def create_asset_model_composite_model(params = {}, options = {})
@@ -1266,8 +1618,12 @@ module Aws::IoTSiteWise
     # <p>Defines a job to ingest data to IoT SiteWise from Amazon S3. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html">Create a
     #         bulk import job (CLI)</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>
     #          <important>
-    #             <p>Before you create a bulk import job, you must enable IoT SiteWise warm tier or IoT SiteWise cold tier.
-    #         For more information about how to configure storage settings, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html">PutStorageConfiguration</a>.</p>
+    #             <p>Before you create a bulk import job that ingests data into time series outside of a
+    #         workspace, you must enable IoT SiteWise warm tier or IoT SiteWise cold tier. For more information about how
+    #         to configure storage settings, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html">PutStorageConfiguration</a>. This requirement doesn't apply to bulk import jobs that
+    #         ingest data into a session dataset in a workspace (jobs that specify a
+    #         <code>workspaceName</code> and <code>datasetId</code>). Those jobs don't use IoT SiteWise warm or
+    #         cold tier storage.</p>
     #             <p>Bulk import is designed to store historical data to IoT SiteWise.</p>
     #             <ul>
     #                <li>
@@ -1288,42 +1644,78 @@ module Aws::IoTSiteWise
     # @option params [String] :job_role_arn
     #   <p>The <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">ARN</a> of the IAM role that allows IoT SiteWise to read Amazon S3 data.</p>
     # @option params [Array<Types::File>] :files
-    #   <p>The files in the specified Amazon S3 bucket that contain your data.</p>
+    #   <p>The files in the specified Amazon S3 bucket that contain your data. You can specify up to 100 files for each bulk import job. Each file supports the following size limits:</p>
+    #            <ul>
+    #               <li>
+    #                  <p>Parquet files – Up to 256 MiB.</p>
+    #               </li>
+    #               <li>
+    #                  <p>Other file formats – Up to 5 GiB.</p>
+    #               </li>
+    #            </ul>
     # @option params [Types::ErrorReportLocation] :error_report_location
     #   <p>The Amazon S3 destination where errors associated with the job creation request are saved.</p>
     # @option params [Types::JobConfiguration] :job_configuration
     #   <p>Contains the configuration information of a job, such as the file format used to save data in Amazon S3.</p>
     # @option params [Boolean] :adaptive_ingestion
-    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are 
+    #   <p>If set to true, ingest new data into IoT SiteWise storage. Measurements with notifications, metrics and transforms are
     #      computed. If set to false, historical data is ingested into IoT SiteWise as is.</p>
     # @option params [Boolean] :delete_files_after_import
     #   <p>If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.</p>
+    # @option params [String] :dataset_id
+    #   <p>The ID of the session dataset to ingest data into. Specify this field, together with
+    #         <code>workspaceName</code>, to ingest data into a session dataset in a workspace.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the session dataset. Specify this field together
+    #         with <code>datasetId</code>.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     job_name: "Name", # required
+    #     job_name: "BulkImportJobName", # required
     #     job_role_arn: "ARN", # required
     #     files: [ # required
     #       {
     #         bucket: "Bucket", # required
     #         key: "String", # required
-    #         version_id: "String"
+    #         version_id: "String",
+    #         alias: "AssetPropertyAlias",
+    #         start_time: {
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         file_format: {
+    #           csv: {
+    #             column_names: ["ALIAS" # One of: ["ALIAS", "ASSET_ID", "PROPERTY_ID", "DATA_TYPE", "TIMESTAMP_SECONDS", "TIMESTAMP_NANO_OFFSET", "QUALITY", "VALUE"]], # required
+    #           },
+    #           parquet: {
+    #           },
+    #           mp4: {
+    #           },
+    #           annotation: {
+    #           }
+    #         }
     #       }
     #     ],
     #     error_report_location: { # required
     #       bucket: "Bucket", # required
     #       prefix: "String", # required
     #     },
-    #     job_configuration: { # required
-    #       file_format: { # required
+    #     job_configuration: {
+    #       file_format: {
     #         csv: {
     #           column_names: ["ALIAS" # One of: ["ALIAS", "ASSET_ID", "PROPERTY_ID", "DATA_TYPE", "TIMESTAMP_SECONDS", "TIMESTAMP_NANO_OFFSET", "QUALITY", "VALUE"]], # required
     #         },
     #         parquet: {
+    #         },
+    #         mp4: {
+    #         },
+    #         annotation: {
     #         }
     #       }
     #     },
     #     adaptive_ingestion: false,
-    #     delete_files_after_import: false
+    #     delete_files_after_import: false,
+    #     dataset_id: "ID",
+    #     workspace_name: "WorkspaceName"
     #   }
     #   options = {}
     #   response = client.create_bulk_import_job(params, options)
@@ -1331,7 +1723,7 @@ module Aws::IoTSiteWise
     #   response.to_h #=>
     #   {
     #     job_id: "ID", # required
-    #     job_name: "Name", # required
+    #     job_name: "BulkImportJobName", # required
     #     job_status: "PENDING" # One of: ["PENDING", "CANCELLED", "RUNNING", "COMPLETED", "FAILED", "COMPLETED_WITH_FAILURES"], # required
     #   }
     # @return [Types::CreateBulkImportJobResponse]
@@ -1349,7 +1741,7 @@ module Aws::IoTSiteWise
     # @option params [Types::ComputationModelConfiguration] :computation_model_configuration
     #   <p>The configuration for the computation model.</p>
     # @option params [Hash<String, Types::ComputationModelDataBindingValue>] :computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
@@ -1416,7 +1808,13 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Creates a dashboard in an IoT SiteWise Monitor project.</p>
+    # <important>
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
+    #          </important>
+    #          <p>Creates a dashboard in an IoT SiteWise Monitor project.</p>
     # @param [Hash, Types::CreateDashboardRequest] params
     # @option params [String] :project_id
     #   <p>The ID of the project in which to create the dashboard.</p>
@@ -1469,7 +1867,7 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Creates a dataset to connect an external datasource.</p>
+    # <p>Creates a dataset. Session and curated datasets are created in a workspace. A session dataset contains data segments of time series data, and a curated dataset curates data segments selected from source session datasets. A dataset that connects to an external datasource is created outside of a workspace.</p>
     # @param [Hash, Types::CreateDatasetRequest] params
     # @option params [String] :dataset_id
     #   <p>The ID of the dataset.</p>
@@ -1477,6 +1875,16 @@ module Aws::IoTSiteWise
     #   <p>The name of the dataset.</p>
     # @option params [String] :dataset_description
     #   <p>A description about the dataset, and its functionality.</p>
+    # @option params [String] :dataset_type
+    #   <p>The type of dataset: a session dataset, a curated dataset, or a connection to an external
+    #         datasource.</p>
+    # @option params [Types::DatasetConfig] :dataset_config
+    #   <p>The configuration for the dataset.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset. Required for session and curated
+    #         datasets. Omit this field for datasets that connect to an external datasource.</p>
+    # @option params [Hash<String, String>] :metadata
+    #   <p>The metadata for the dataset, provided as key-value pairs.</p>
     # @option params [Types::DatasetSource] :dataset_source
     #   <p>The data source for the dataset.</p>
     # @option params [String] :client_token
@@ -1489,10 +1897,27 @@ module Aws::IoTSiteWise
     #   params = {
     #     dataset_id: "ID",
     #     dataset_name: "RestrictedName", # required
-    #     dataset_description: "RestrictedDescription",
+    #     dataset_description: "Description",
+    #     dataset_type: "SESSION" # One of: ["SESSION", "CURATED", "EXTERNAL"],
+    #     dataset_config: {
+    #       session: {
+    #         session_start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         session_end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         }
+    #       }
+    #     },
+    #     workspace_name: "WorkspaceName",
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
     #     dataset_source: { # required
-    #       source_type: "KENDRA" # One of: ["KENDRA"], # required
-    #       source_format: "KNOWLEDGE_BASE" # One of: ["KNOWLEDGE_BASE"], # required
+    #       source_type: "KENDRA" # One of: ["KENDRA", "SITEWISE"], # required
+    #       source_format: "KNOWLEDGE_BASE" # One of: ["KNOWLEDGE_BASE", "TIMESERIES"], # required
     #       source_detail: {
     #         kendra: {
     #           knowledge_base_arn: "ARN", # required
@@ -1529,6 +1954,158 @@ module Aws::IoTSiteWise
     # @return [Types::CreateDatasetResponse]
     def create_dataset(params = {}, options = {})
       request = build_request(:create_dataset, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts an asynchronous job that exports dataset and time-series data from a workspace to Amazon
+    # S3. The operation returns a jobId immediately; poll DescribeDatasetExportJob to track progress and
+    # ListDatasetExportJobs to enumerate a workspace's jobs.</p>
+    # @param [Hash, Types::CreateDatasetExportJobRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace in which to create the dataset export job.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   The AWS SDKs and CLI populate this automatically.</p>
+    # @option params [String] :destination_s3_uri
+    #   <p>The S3 URI where output clips will be written.</p>
+    # @option params [Types::ProcessingInput] :input
+    #   <p>The processing input source.</p>
+    # @option params [Types::ExportErrorReportLocation] :error_report_location
+    #   <p>The location where the error report will be written on failure.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     client_token: "ClientToken",
+    #     destination_s3_uri: "S3Uri", # required
+    #     input: { # required
+    #       # One of:
+    #       timeseries: [
+    #         {
+    #           time_series_id: "TimeSeriesId",
+    #           property_alias: "AssetPropertyAlias",
+    #           trim_settings: {
+    #             start_time: { # required
+    #               time_in_seconds: 1, # required
+    #               offset_in_nanos: 1
+    #             },
+    #             end_time: { # required
+    #               time_in_seconds: 1, # required
+    #               offset_in_nanos: 1
+    #             }
+    #           },
+    #           format_settings: {
+    #             frames_per_second: 1,
+    #             width_in_pixels: 1,
+    #             height_in_pixels: 1
+    #           }
+    #         }
+    #       ],
+    #       dataset: {
+    #         dataset_id: "DatasetId", # required
+    #         trim_settings: {
+    #           start_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           },
+    #           end_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           }
+    #         },
+    #         export_data_types: ["VIDEO" # One of: ["VIDEO", "TELEMETRY", "ANNOTATION"]]
+    #       }
+    #     },
+    #     error_report_location: { # required
+    #       s3_uri: "S3Uri", # required
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.create_dataset_export_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "DatasetExportJobId", # required
+    #     workspace_name: "WorkspaceName", # required
+    #   }
+    # @return [Types::CreateDatasetExportJobResponse]
+    def create_dataset_export_job(params = {}, options = {})
+      request = build_request(:create_dataset_export_job, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates an asynchronous enrichment job to analyze time-series sensor data. The operation returns
+    # immediately with job details while processing continues in the background.</p>
+    # <h2>Idempotency</h2>
+    # <p>Include a clientToken to make the operation idempotent. If you submit the same request with the same
+    # token within the idempotency window, you receive the original job details without creating a duplicate.</p>
+    # <h2>Prerequisites</h2>
+    # <p>Before creating a job, ensure:</p>
+    # <ul>
+    # <li>The workspace is in ACTIVE state (not being deleted)</li>
+    # <li>You have IAM permissions for the workspace, dataset, and time-series resources</li>
+    # <li>You have KMS Decrypt permission on the workspace's customer-managed encryption key</li>
+    # <li>No duplicate job (same workspace, dataset, property, and job type) is currently running</li>
+    # </ul>
+    # <h2>Workflow</h2>
+    # <ol>
+    # <li>Submit the job with configuration specifying which video data to analyze and the time range</li>
+    # <li>Capture the jobId from the response</li>
+    # <li>Use DescribeEnrichmentJob to monitor progress and check job status</li>
+    # <li>When status reaches a terminal state (COMPLETED, FAILED, TIMED_OUT, CANCELLED), check results</li>
+    # <li>For COMPLETED jobs, query IoT SiteWise for semantic search on video events</li>
+    # </ol>
+    # <h2>Error Handling</h2>
+    # <ul>
+    # <li>ConflictingOperationException: A duplicate job is already running for the same configuration</li>
+    # <li>InvalidRequestException: Invalid parameters (e.g., both timeSeriesId and propertyAlias specified)</li>
+    # <li>AccessDeniedException: Insufficient IAM or KMS permissions</li>
+    # <li>LimitExceededException: Too many concurrent jobs or requests</li>
+    # </ul>
+    # @param [Hash, Types::CreateEnrichmentJobRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the IoT SiteWise workspace containing the video data to analyze.</p>
+    # @option params [Types::EnrichmentJobConfiguration] :job_configuration
+    #   <p>Configuration defining the type of enrichment analysis to perform and which video data to analyze.
+    #   Currently supports eventDetection for generating embeddings from video data for semantic search.</p>
+    # @option params [String] :client_token
+    #   <p>Optional unique token that makes the operation idempotent. If you submit the same request with the
+    #   same token within the idempotency window, the service returns the original job without creating a
+    #   duplicate. Use a UUID or timestamp-based token for each unique request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     job_configuration: { # required
+    #       # One of:
+    #       event_detection: {
+    #         dataset_id: "ID", # required
+    #         time_series_id: "TimeSeriesId",
+    #         property_alias: "AssetPropertyAlias",
+    #         trim_settings: { # required
+    #           start_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           },
+    #           end_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           }
+    #         }
+    #       }
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_enrichment_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "ID", # required
+    #     status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELLED"], # required
+    #     created_at: Time.now, # required
+    #   }
+    # @return [Types::CreateEnrichmentJobResponse]
+    def create_enrichment_job(params = {}, options = {})
+      request = build_request(:create_enrichment_job, params)
       request.send_request(options)
     end
 
@@ -1590,7 +2167,82 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses IAM Identity Center or IAM
+    # <p>Creates a new pipeline in the specified workspace. A pipeline defines a
+    # directed acyclic graph (DAG) of compute nodes, where each node references a task
+    # and can declare dependencies on other nodes. Cyclic dependencies are not
+    # allowed. Nodes without dependencies run in parallel, while nodes with dependencies
+    # wait for all upstream nodes to complete successfully before starting.</p>
+    # <p>You can set environment variables at the pipeline level that are shared across all
+    # compute nodes, and override them at the individual compute node level.</p>
+    # @param [Hash, Types::CreatePipelineRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :pipeline_name
+    #   <p>The name of the pipeline to create. Must be unique within the workspace.</p>
+    # @option params [String] :description
+    #   <p>A description of the pipeline.</p>
+    # @option params [Hash<String, String>] :environment_variables
+    #   <p>Environment variables shared across all compute nodes in the pipeline. Individual compute nodes can override these values with their own environment variables.</p>
+    # @option params [Array<Types::ComputeNode>] :computations
+    #   <p>The list of compute nodes that form the pipeline DAG. Each compute node references a task and can declare dependencies on other nodes.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A list of key-value pairs that contain metadata for the pipeline. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your AWS IoT SiteWise resources</a> in the AWS IoT SiteWise User Guide.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   If you retry a request that completed successfully using the same client token, the server returns the
+    #   cached result from the original successful request without performing the operation again.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     pipeline_name: "ResourceName", # required
+    #     description: "Description",
+    #     environment_variables: {
+    #       "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #     },
+    #     computations: [ # required
+    #       {
+    #         compute_node_name: "ResourceName", # required
+    #         task_name: "ResourceName", # required
+    #         environment_variables: {
+    #           "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #         },
+    #         depends_on: ["ResourceName"]
+    #       }
+    #     ],
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_pipeline(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pipeline_name: "ResourceName", # required
+    #     pipeline_arn: "ARN", # required
+    #     version: "Version", # required
+    #     status: { # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #         message: "String"
+    #       },
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #     }
+    #   }
+    # @return [Types::CreatePipelineResponse]
+    def create_pipeline(params = {}, options = {})
+      request = build_request(:create_pipeline, params)
+      request.send_request(options)
+    end
+
+    # <important>
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
+    #          </important>
+    #          <p>Creates a portal, which can contain projects and dashboards. IoT SiteWise Monitor uses IAM Identity Center or IAM
     #       to authenticate portal users and manage user permissions.</p>
     #          <note>
     #             <p>Before you can sign in to a new portal, you must add at least one identity to that
@@ -1703,7 +2355,13 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Creates a project in the specified portal.</p>
+    # <important>
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
+    #          </important>
+    #          <p>Creates a project in the specified portal.</p>
     #          <note>
     #             <p>Make sure that the project name and description don't contain confidential
     #         information.</p>
@@ -1745,6 +2403,144 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Creates a new task in the specified workspace. A task defines a reusable
+    # containerized compute workload that can be referenced by one or more pipeline compute nodes.</p>
+    # <p>Specify a <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ContainerTaskConfiguration.html"><code>containerTaskConfiguration</code></a> for custom container workloads with
+    # configurable ECR image, processing type, processing unit, and environment variables.</p>
+    # @param [Hash, Types::CreateTaskRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :task_name
+    #   <p>The name of the task to create. Must be unique within the workspace.</p>
+    # @option params [String] :description
+    #   <p>A description of the task.</p>
+    # @option params [Types::TaskConfiguration] :task_configuration
+    #   <p>The task execution configuration. Specify a <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ContainerTaskConfiguration.html">containerTaskConfiguration</a> for custom container workloads.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A list of key-value pairs that contain metadata for the task. For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your AWS IoT SiteWise resources</a> in the AWS IoT SiteWise User Guide.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   If you retry a request that completed successfully using the same client token, the server returns the
+    #   cached result from the original successful request without performing the operation again.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     task_name: "ResourceName", # required
+    #     description: "Description",
+    #     task_configuration: { # required
+    #       # One of:
+    #       container_task_configuration: {
+    #         ecr_uri: "EcrUri", # required
+    #         task_execution_role: "IamRoleArn", # required
+    #         processing_type: "GENERIC_COMPUTE_PROCESSING" # One of: ["GENERIC_COMPUTE_PROCESSING", "HARDWARE_ACCELERATED_PROCESSING"], # required
+    #         processing_unit: "UNITS_2" # One of: ["UNITS_2", "UNITS_4", "UNITS_8", "UNITS_12", "UNITS_16", "UNITS_24", "UNITS_32", "UNITS_36", "UNITS_48", "UNITS_60", "UNITS_64", "UNITS_72", "UNITS_84", "UNITS_96"], # required
+    #         ephemeral_storage_configuration: {
+    #           storage_class: "STANDARD_1" # One of: ["STANDARD_1", "STANDARD_2", "THROUGHPUT_1", "THROUGHPUT_2"], # required
+    #           storage_size_in_gi_b: 1, # required
+    #         },
+    #         command: ["String"],
+    #         timeout_seconds: 1,
+    #         environment_variables: {
+    #           "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #         },
+    #         mounts: [
+    #           {
+    #             name: "ResourceName", # required
+    #             relative_path: "MountRelativePath", # required
+    #             source: { # required
+    #               # One of:
+    #               s3_access_point: {
+    #                 access_point_arn: "MountS3AccessPointArn", # required
+    #                 prefix: "MountS3KeyPrefix"
+    #               }
+    #             },
+    #             storage_type: "SHARED_STORAGE" # One of: ["SHARED_STORAGE"], # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     task_name: "ResourceName", # required
+    #     task_arn: "ARN", # required
+    #     version: "Version", # required
+    #     status: { # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #         message: "String"
+    #       },
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #     }
+    #   }
+    # @return [Types::CreateTaskResponse]
+    def create_task(params = {}, options = {})
+      request = build_request(:create_task, params)
+      request.send_request(options)
+    end
+
+    # <p>Creates a workspace in IoT SiteWise. A workspace isolates its resources, such as datasets, time
+    #       series, pipelines, and tasks, and their data from other workspaces, and has its own quotas
+    #       and throttling limits. You must specify an encryption configuration when you create
+    #       a workspace. The operation returns immediately with the workspace in the
+    #       <code>CREATING</code> state. Provisioning completes asynchronously, after which the workspace
+    #       state is <code>ACTIVE</code>, or <code>FAILED</code> if provisioning doesn't complete.</p>
+    # @param [Hash, Types::CreateWorkspaceRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace to create.</p>
+    # @option params [String] :workspace_description
+    #   <p>A description for the workspace.</p>
+    # @option params [Types::WorkspaceEncryptionConfiguration] :encryption_configuration
+    #   <p>The encryption configuration for the workspace.</p>
+    # @option params [Hash<String, String>] :tags
+    #   <p>A list of key-value pairs that contain metadata for the workspace. For more information,
+    #         see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html">Tagging your IoT SiteWise
+    #           resources</a> in the <i>IoT SiteWise User Guide</i>.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     workspace_description: "Description",
+    #     encryption_configuration: { # required
+    #       encryption_type: "SITEWISE_DEFAULT_ENCRYPTION" # One of: ["SITEWISE_DEFAULT_ENCRYPTION", "KMS_BASED_ENCRYPTION"], # required
+    #       kms_key_id: "KmsKeyId"
+    #     },
+    #     tags: {
+    #       "TagKey" => "TagValue"
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.create_workspace(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     workspace_name: "WorkspaceName", # required
+    #     workspace_arn: "ARN", # required
+    #     workspace_status: { # required
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"], # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"], # required
+    #         message: "Description", # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::CreateWorkspaceResponse]
+    def create_workspace(params = {}, options = {})
+      request = build_request(:create_workspace, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes an access policy that grants the specified identity access to the specified
     #       IoT SiteWise Monitor resource. You can use this operation to revoke access to an IoT SiteWise Monitor
     #       resource.</p>
@@ -1766,6 +2562,28 @@ module Aws::IoTSiteWise
     # @return [Types::DeleteAccessPolicyResponse]
     def delete_access_policy(params = {}, options = {})
       request = build_request(:delete_access_policy, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes an application by ID</p>
+    # @param [Hash, Types::DeleteApplicationRequest] params
+    # @option params [String] :workspace_name
+    #   <p>Name of the workspace to associate with the underlying Application</p>
+    # @option params [String] :id
+    #   <p>ID of the Application to delete</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     id: "ApplicationId", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_application(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {}
+    # @return [Types::DeleteApplicationResponse]
+    def delete_application(params = {}, options = {})
+      request = build_request(:delete_application, params)
       request.send_request(options)
     end
 
@@ -1791,6 +2609,7 @@ module Aws::IoTSiteWise
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     asset_id: "ID",
     #     asset_status: { # required
     #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"], # required
     #       error: {
@@ -1823,15 +2642,15 @@ module Aws::IoTSiteWise
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The delete request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the delete request if an active version 
+    #   <p>Accepts <b>*</b> to reject the delete request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1846,6 +2665,7 @@ module Aws::IoTSiteWise
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     asset_model_id: "ID",
     #     asset_model_status: { # required
     #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"], # required
     #       error: {
@@ -1879,15 +2699,15 @@ module Aws::IoTSiteWise
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The delete request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the delete request if an active version 
+    #   <p>Accepts <b>*</b> to reject the delete request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the delete operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -1915,7 +2735,8 @@ module Aws::IoTSiteWise
     #           }
     #         ]
     #       }
-    #     }
+    #     },
+    #     asset_model_id: "ID"
     #   }
     # @return [Types::DeleteAssetModelCompositeModelResponse]
     def delete_asset_model_composite_model(params = {}, options = {})
@@ -2027,15 +2848,18 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Deletes a dataset. This cannot be undone.</p>
+    # <p>Deletes a dataset. This can't be undone. Deleting a session dataset also deletes the underlying time series data in the session. You can't delete a session dataset while a curated dataset references its data segments. First delete the curated dataset or disassociate the data segments. Deleting a curated dataset doesn't delete the underlying data in the source session datasets.</p>
     # @param [Hash, Types::DeleteDatasetRequest] params
     # @option params [String] :dataset_id
     #   <p>The ID of the dataset.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     dataset_id: "ID", # required
+    #     workspace_name: "WorkspaceName",
     #     client_token: "ClientToken"
     #   }
     #   options = {}
@@ -2080,6 +2904,39 @@ module Aws::IoTSiteWise
     # @return [Smithy::Schema::EmptyStructure]
     def delete_gateway(params = {}, options = {})
       request = build_request(:delete_gateway, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a pipeline from the specified workspace. A pipeline cannot be
+    # deleted if it has any active executions. Wait for all executions to complete before
+    # attempting to delete the pipeline, or use <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CancelPipelineExecution.html">CancelPipelineExecution</a> to stop a running
+    # execution.</p>
+    # @param [Hash, Types::DeletePipelineRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :pipeline_name
+    #   <p>The name of the pipeline to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     pipeline_name: "ResourceName", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_pipeline(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: { # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #         message: "String"
+    #       },
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #     }
+    #   }
+    # @return [Types::DeletePipelineResponse]
+    def delete_pipeline(params = {}, options = {})
+      request = build_request(:delete_pipeline, params)
       request.send_request(options)
     end
 
@@ -2135,9 +2992,42 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Deletes a task from the specified workspace. A task cannot be deleted
+    # if it is currently referenced by any existing pipeline. Remove the task from all
+    # pipelines before attempting to delete it.</p>
+    # @param [Hash, Types::DeleteTaskRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :task_name
+    #   <p>The name of the task to delete.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     task_name: "ResourceName", # required
+    #   }
+    #   options = {}
+    #   response = client.delete_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     status: { # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #         message: "String"
+    #       },
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #     }
+    #   }
+    # @return [Types::DeleteTaskResponse]
+    def delete_task(params = {}, options = {})
+      request = build_request(:delete_task, params)
+      request.send_request(options)
+    end
+
     # <p>Deletes a time series (data stream). If you delete a time series that's associated with an
     #       asset property, the asset property still exists, but the time series will no longer be
-    #       associated with this asset property.</p>
+    #       associated with this asset property. You can't delete a time series until all of its data
+    #       segments have been deleted from session datasets.</p>
     #          <p>To identify a time series, do one of the following:</p>
     #          <ul>
     #             <li>
@@ -2168,12 +3058,15 @@ module Aws::IoTSiteWise
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     alias: "PropertyAlias",
     #     asset_id: "CustomID",
     #     property_id: "CustomID",
-    #     client_token: "ClientToken"
+    #     client_token: "ClientToken",
+    #     workspace_name: "WorkspaceName"
     #   }
     #   options = {}
     #   response = client.delete_time_series(params, options)
@@ -2183,6 +3076,40 @@ module Aws::IoTSiteWise
     # @return [Smithy::Schema::EmptyStructure]
     def delete_time_series(params = {}, options = {})
       request = build_request(:delete_time_series, params)
+      request.send_request(options)
+    end
+
+    # <p>Deletes a workspace. Before you delete a workspace, you must delete all resources
+    #       contained in or associated with the workspace, such as datasets, time series, pipelines,
+    #       and tasks.</p>
+    # @param [Hash, Types::DeleteWorkspaceRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace to delete.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.delete_workspace(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     workspace_status: { # required
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"], # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"], # required
+    #         message: "Description", # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::DeleteWorkspaceResponse]
+    def delete_workspace(params = {}, options = {})
+      request = build_request(:delete_workspace, params)
       request.send_request(options)
     end
 
@@ -2267,6 +3194,39 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Retrieves Application details based on the ID</p>
+    # @param [Hash, Types::DescribeApplicationRequest] params
+    # @option params [String] :workspace_name
+    #   <p>Name of the workspace to associate with the underlying Application</p>
+    # @option params [String] :id
+    #   <p>ID of the Application</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     id: "ApplicationId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_application(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     arn: "ARN", # required
+    #     created_at: Time.now, # required
+    #     dns_subdomain: "DnsSubdomain", # required
+    #     description: "ApplicationDescription",
+    #     id: "ApplicationId", # required
+    #     idc_application_arn: "ARN", # required
+    #     name: "ApplicationName", # required
+    #     status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING"], # required
+    #     updated_at: Time.now, # required
+    #     workspace_name: "WorkspaceName", # required
+    #   }
+    # @return [Types::DescribeApplicationResponse]
+    def describe_application(params = {}, options = {})
+      request = build_request(:describe_application, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves information about an asset.</p>
     # @param [Hash, Types::DescribeAssetRequest] params
     # @option params [String] :asset_id
@@ -2299,7 +3259,7 @@ module Aws::IoTSiteWise
     #           topic: "PropertyNotificationTopic", # required
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #         },
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         path: [
@@ -2332,7 +3292,7 @@ module Aws::IoTSiteWise
     #               topic: "PropertyNotificationTopic", # required
     #               state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #             },
-    #             data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #             data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #             data_type_spec: "Name",
     #             unit: "PropertyUnit",
     #             path: [
@@ -2428,7 +3388,7 @@ module Aws::IoTSiteWise
     #           topic: "PropertyNotificationTopic", # required
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #         },
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         path: [
@@ -2478,7 +3438,7 @@ module Aws::IoTSiteWise
     # @option params [Boolean] :exclude_properties
     #   <p> Whether or not to exclude asset model properties from the response. </p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -2503,7 +3463,7 @@ module Aws::IoTSiteWise
     #         id: "CustomID",
     #         external_id: "ExternalId",
     #         name: "Name", # required
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
@@ -2595,7 +3555,7 @@ module Aws::IoTSiteWise
     #             id: "CustomID",
     #             external_id: "ExternalId",
     #             name: "Name", # required
-    #             data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #             data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #             data_type_spec: "Name",
     #             unit: "PropertyUnit",
     #             type: { # required
@@ -2728,7 +3688,7 @@ module Aws::IoTSiteWise
     #   <p>The ID of a composite model on this asset model. This can be either the actual ID in UUID format, or else <code>externalId:</code> followed by the external ID, if it has one.
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -2759,7 +3719,7 @@ module Aws::IoTSiteWise
     #         id: "CustomID",
     #         external_id: "ExternalId",
     #         name: "Name", # required
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
@@ -2947,7 +3907,7 @@ module Aws::IoTSiteWise
     #         topic: "PropertyNotificationTopic", # required
     #         state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #       },
-    #       data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #       data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #       unit: "PropertyUnit",
     #       type: {
     #         attribute: {
@@ -3031,7 +3991,7 @@ module Aws::IoTSiteWise
     #           topic: "PropertyNotificationTopic", # required
     #           state: "ENABLED" # One of: ["ENABLED", "DISABLED"], # required
     #         },
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         unit: "PropertyUnit",
     #         type: {
     #           attribute: {
@@ -3118,9 +4078,12 @@ module Aws::IoTSiteWise
     # @param [Hash, Types::DescribeBulkImportJobRequest] params
     # @option params [String] :job_id
     #   <p>The ID of the job.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     job_id: "ID", # required
+    #     workspace_name: "WorkspaceName"
     #   }
     #   options = {}
     #   response = client.describe_bulk_import_job(params, options)
@@ -3135,26 +4098,48 @@ module Aws::IoTSiteWise
     #       {
     #         bucket: "Bucket", # required
     #         key: "String", # required
-    #         version_id: "String"
+    #         version_id: "String",
+    #         alias: "AssetPropertyAlias",
+    #         start_time: {
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         file_format: {
+    #           csv: {
+    #             column_names: ["ALIAS" # One of: ["ALIAS", "ASSET_ID", "PROPERTY_ID", "DATA_TYPE", "TIMESTAMP_SECONDS", "TIMESTAMP_NANO_OFFSET", "QUALITY", "VALUE"]], # required
+    #           },
+    #           parquet: {
+    #           },
+    #           mp4: {
+    #           },
+    #           annotation: {
+    #           }
+    #         }
     #       }
     #     ],
     #     error_report_location: { # required
     #       bucket: "Bucket", # required
     #       prefix: "String", # required
     #     },
-    #     job_configuration: { # required
-    #       file_format: { # required
+    #     job_configuration: {
+    #       file_format: {
     #         csv: {
     #           column_names: ["ALIAS" # One of: ["ALIAS", "ASSET_ID", "PROPERTY_ID", "DATA_TYPE", "TIMESTAMP_SECONDS", "TIMESTAMP_NANO_OFFSET", "QUALITY", "VALUE"]], # required
     #         },
     #         parquet: {
+    #         },
+    #         mp4: {
+    #         },
+    #         annotation: {
     #         }
     #       }
     #     },
     #     job_creation_date: Time.now, # required
     #     job_last_update_date: Time.now, # required
     #     adaptive_ingestion: false,
-    #     delete_files_after_import: false
+    #     delete_files_after_import: false,
+    #     dataset_id: "ID",
+    #     workspace_name: "WorkspaceName"
     #   }
     # @return [Types::DescribeBulkImportJobResponse]
     def describe_bulk_import_job(params = {}, options = {})
@@ -3300,9 +4285,15 @@ module Aws::IoTSiteWise
     # @param [Hash, Types::DescribeDatasetRequest] params
     # @option params [String] :dataset_id
     #   <p>The ID of the dataset.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    # @option params [String] :dataset_version
+    #   <p>The version of the dataset.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     dataset_id: "ID", # required
+    #     workspace_name: "WorkspaceName",
+    #     dataset_version: "Version"
     #   }
     #   options = {}
     #   response = client.describe_dataset(params, options)
@@ -3312,10 +4303,27 @@ module Aws::IoTSiteWise
     #     dataset_id: "ID", # required
     #     dataset_arn: "ARN", # required
     #     dataset_name: "RestrictedName", # required
-    #     dataset_description: "RestrictedDescription", # required
+    #     dataset_description: "Description", # required
+    #     dataset_type: "SESSION" # One of: ["SESSION", "CURATED", "EXTERNAL"],
+    #     dataset_config: {
+    #       session: {
+    #         session_start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         session_end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         }
+    #       }
+    #     },
+    #     workspace_name: "WorkspaceName",
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
     #     dataset_source: { # required
-    #       source_type: "KENDRA" # One of: ["KENDRA"], # required
-    #       source_format: "KNOWLEDGE_BASE" # One of: ["KNOWLEDGE_BASE"], # required
+    #       source_type: "KENDRA" # One of: ["KENDRA", "SITEWISE"], # required
+    #       source_format: "KNOWLEDGE_BASE" # One of: ["KNOWLEDGE_BASE", "TIMESERIES"], # required
     #       source_detail: {
     #         kendra: {
     #           knowledge_base_arn: "ARN", # required
@@ -3338,11 +4346,87 @@ module Aws::IoTSiteWise
     #     },
     #     dataset_creation_date: Time.now, # required
     #     dataset_last_update_date: Time.now, # required
-    #     dataset_version: "Version"
+    #     dataset_version: "Version",
+    #     enrichment_status: {
+    #       video: {
+    #         status: "FULLY_ENRICHED" # One of: ["FULLY_ENRICHED", "PARTIALLY_ENRICHED", "NOT_ENRICHED"], # required
+    #         last_enriched_at: Time.now
+    #       }
+    #     }
     #   }
     # @return [Types::DescribeDatasetResponse]
     def describe_dataset(params = {}, options = {})
       request = build_request(:describe_dataset, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about a dataset export job.</p>
+    # @param [Hash, Types::DescribeDatasetExportJobRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset export job.</p>
+    # @option params [String] :job_id
+    #   <p>The unique identifier for the dataset export job.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     job_id: "DatasetExportJobId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_dataset_export_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "DatasetExportJobId", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     status: "SUBMITTED" # One of: ["SUBMITTED", "RUNNING", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"], # required
+    #     started_at: Time.now, # required
+    #     completed_at: Time.now,
+    #     destination_s3_uri: "S3Uri", # required
+    #     error_report_location: { # required
+    #       s3_uri: "S3Uri", # required
+    #     },
+    #     input: { # required
+    #       # One of:
+    #       timeseries: [
+    #         {
+    #           time_series_id: "TimeSeriesId",
+    #           property_alias: "AssetPropertyAlias",
+    #           trim_settings: {
+    #             start_time: { # required
+    #               time_in_seconds: 1, # required
+    #               offset_in_nanos: 1
+    #             },
+    #             end_time: { # required
+    #               time_in_seconds: 1, # required
+    #               offset_in_nanos: 1
+    #             }
+    #           },
+    #           format_settings: {
+    #             frames_per_second: 1,
+    #             width_in_pixels: 1,
+    #             height_in_pixels: 1
+    #           }
+    #         }
+    #       ],
+    #       dataset: {
+    #         dataset_id: "DatasetId", # required
+    #         trim_settings: {
+    #           start_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           },
+    #           end_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           }
+    #         },
+    #         export_data_types: ["VIDEO" # One of: ["VIDEO", "TELEMETRY", "ANNOTATION"]]
+    #       }
+    #     }
+    #   }
+    # @return [Types::DescribeDatasetExportJobResponse]
+    def describe_dataset_export_job(params = {}, options = {})
+      request = build_request(:describe_dataset_export_job, params)
       request.send_request(options)
     end
 
@@ -3370,6 +4454,81 @@ module Aws::IoTSiteWise
     # @return [Types::DescribeDefaultEncryptionConfigurationResponse]
     def describe_default_encryption_configuration(params = {}, options = {})
       request = build_request(:describe_default_encryption_configuration, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves detailed information about a specific enrichment job, including its current status,
+    # configuration, and timestamps.</p>
+    # <h2>Use Cases</h2>
+    # <ul>
+    # <li>Monitor job progress by checking status updates with DescribeEnrichmentJob</li>
+    # <li>Retrieve the complete job configuration submitted during creation</li>
+    # <li>Debug failed jobs by examining the failureMessage field</li>
+    # <li>Track job lifecycle with creation, update, completion, and cancellation timestamps</li>
+    # </ul>
+    # <h2>Status Monitoring</h2>
+    # <p>Jobs progress through statuses: PENDING → RUNNING → terminal state</p>
+    # <p>Terminal states:</p>
+    # <ul>
+    # <li>COMPLETED: Job finished successfully; query IoT SiteWise for semantic search results</li>
+    # <li>FAILED: Job encountered an error; check failureMessage for details</li>
+    # <li>TIMED_OUT: Job exceeded maximum processing time</li>
+    # <li>CANCELLED: Job was cancelled via CancelEnrichmentJob</li>
+    # </ul>
+    # <h2>Response Fields</h2>
+    # <p>The response includes:</p>
+    # <ul>
+    # <li>Current job status and type</li>
+    # <li>Full job configuration as originally submitted</li>
+    # <li>Lifecycle timestamps (created, updated, completed, cancelled)</li>
+    # <li>Failure details if status is FAILED</li>
+    # </ul>
+    # @param [Hash, Types::DescribeEnrichmentJobRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the IoT SiteWise workspace containing the enrichment job.</p>
+    # @option params [String] :job_id
+    #   <p>The unique identifier of the enrichment job to retrieve. This is the jobId returned by CreateEnrichmentJob.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     job_id: "ID", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_enrichment_job(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     job_id: "ID", # required
+    #     status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELLED"], # required
+    #     workspace_name: "WorkspaceName", # required
+    #     job_type: "EVENT_DETECTION" # One of: ["EVENT_DETECTION"], # required
+    #     job_configuration: { # required
+    #       # One of:
+    #       event_detection: {
+    #         dataset_id: "ID", # required
+    #         time_series_id: "TimeSeriesId",
+    #         property_alias: "AssetPropertyAlias",
+    #         trim_settings: { # required
+    #           start_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           },
+    #           end_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           }
+    #         }
+    #       }
+    #     },
+    #     created_at: Time.now, # required
+    #     updated_at: Time.now,
+    #     completed_at: Time.now,
+    #     cancelled_at: Time.now,
+    #     failure_message: "String"
+    #   }
+    # @return [Types::DescribeEnrichmentJobResponse]
+    def describe_enrichment_job(params = {}, options = {})
+      request = build_request(:describe_enrichment_job, params)
       request.send_request(options)
     end
 
@@ -3508,8 +4667,12 @@ module Aws::IoTSiteWise
 
     # <p>Retrieves the current IoT SiteWise logging options.</p>
     # @param [Hash, Types::DescribeLoggingOptionsRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
     # @example Request syntax with placeholder values
-    #   params = {}
+    #   params = {
+    #     workspace_name: "WorkspaceName"
+    #   }
     #   options = {}
     #   response = client.describe_logging_options(params, options)
     # @example Response structure with placeholder values
@@ -3522,6 +4685,184 @@ module Aws::IoTSiteWise
     # @return [Types::DescribeLoggingOptionsResponse]
     def describe_logging_options(params = {}, options = {})
       request = build_request(:describe_logging_options, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves detailed information about a specific pipeline in a workspace.</p>
+    # @param [Hash, Types::DescribePipelineRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :pipeline_name
+    #   <p>The name of the pipeline.</p>
+    # @option params [String] :pipeline_version
+    #   <p>The version number of the pipeline to retrieve. If not specified, returns the latest version.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     pipeline_name: "ResourceName", # required
+    #     pipeline_version: "Version"
+    #   }
+    #   options = {}
+    #   response = client.describe_pipeline(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pipeline_name: "ResourceName", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     description: "Description",
+    #     pipeline_arn: "ARN", # required
+    #     version: "Version", # required
+    #     environment_variables: {
+    #       "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #     },
+    #     computations: [ # required
+    #       {
+    #         compute_node_name: "ResourceName", # required
+    #         task_name: "ResourceName", # required
+    #         environment_variables: {
+    #           "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #         },
+    #         depends_on: ["ResourceName"]
+    #       }
+    #     ],
+    #     status: { # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #         message: "String"
+    #       },
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #     },
+    #     created_at: Time.now, # required
+    #     updated_at: Time.now, # required
+    #   }
+    # @return [Types::DescribePipelineResponse]
+    def describe_pipeline(params = {}, options = {})
+      request = build_request(:describe_pipeline, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves detailed information about a specific pipeline execution, including the
+    # overall execution status and the status of each individual compute node. Use this
+    # operation to monitor execution progress and inspect per-node results, environment
+    # variables, and error details.</p>
+    # @param [Hash, Types::DescribePipelineExecutionRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :pipeline_name
+    #   <p>The name of the pipeline.</p>
+    # @option params [String] :pipeline_execution_id
+    #   <p>The unique identifier of the pipeline execution.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of compute nodes to return per request. This is an upper bound; the actual number of results may be less. Default: 50.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     pipeline_name: "ResourceName", # required
+    #     pipeline_execution_id: "ID", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.describe_pipeline_execution(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pipeline_execution_id: "ID", # required
+    #     pipeline_name: "ResourceName", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     pipeline_version: "Version", # required
+    #     status: { # required
+    #       state: "NOT_STARTED" # One of: ["NOT_STARTED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"], # required
+    #       state_details: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE", "EXECUTION_ERROR", "TIMED_OUT"],
+    #         message: "String", # required
+    #         details: [
+    #           {
+    #             code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE", "EXECUTION_ERROR", "TIMED_OUT"], # required
+    #             message: "String", # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     start_time: Time.now,
+    #     end_time: Time.now,
+    #     request_environment_variables: { # required
+    #       global: {
+    #         "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #       },
+    #       compute_nodes: {
+    #         "ResourceName" => {
+    #           "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #         }
+    #       }
+    #     },
+    #     request_mount_overrides: {
+    #       compute_nodes: { # required
+    #         "ResourceName" => [
+    #           {
+    #             name: "ResourceName", # required
+    #             relative_path: "MountRelativePath", # required
+    #             source: { # required
+    #               # One of:
+    #               s3_access_point: {
+    #                 access_point_arn: "MountS3AccessPointArn", # required
+    #                 prefix: "MountS3KeyPrefix"
+    #               }
+    #             },
+    #             storage_type: "SHARED_STORAGE" # One of: ["SHARED_STORAGE"], # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     execution_priority: 1,
+    #     compute_node_execution_details: [ # required
+    #       {
+    #         compute_node_name: "ResourceName", # required
+    #         task_name: "ResourceName", # required
+    #         task_arn: "ARN", # required
+    #         task_version: "Version", # required
+    #         depends_on: ["ResourceName"], # required
+    #         status: { # required
+    #           state: "NOT_STARTED" # One of: ["NOT_STARTED", "QUEUED", "RUNNING", "SUCCEEDED", "FAILED"], # required
+    #           state_details: {
+    #             code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE", "EXECUTION_ERROR", "TIMED_OUT"], # required
+    #             message: "String", # required
+    #             details: [
+    #               {
+    #                 code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE", "EXECUTION_ERROR", "TIMED_OUT"], # required
+    #                 message: "String", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         start_time: Time.now,
+    #         end_time: Time.now,
+    #         execution_environment_variables: {
+    #           "ExecutionEnvironmentVariablesMapKeyString" => "ExecutionEnvironmentVariablesMapValueString"
+    #         },
+    #         execution_mounts: [
+    #           {
+    #             name: "ResourceName", # required
+    #             relative_path: "MountRelativePath", # required
+    #             source: { # required
+    #               # One of:
+    #               s3_access_point: {
+    #                 access_point_arn: "MountS3AccessPointArn", # required
+    #                 prefix: "MountS3KeyPrefix"
+    #               }
+    #             },
+    #             storage_type: "SHARED_STORAGE" # One of: ["SHARED_STORAGE"], # required
+    #           }
+    #         ]
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::DescribePipelineExecutionResponse]
+    def describe_pipeline_execution(params = {}, options = {})
+      request = build_request(:describe_pipeline_execution, params)
       request.send_request(options)
     end
 
@@ -3605,6 +4946,73 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Retrieves information about a query, including its status.</p>
+    # @param [Hash, Types::DescribeQueryRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace associated with the query.</p>
+    # @option params [String] :query_id
+    #   <p>The unique identifier for the query execution.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     query_id: "QueryId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_query(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     query_id: "QueryId", # required
+    #     status: "SUBMITTED" # One of: ["SUBMITTED", "RUNNING", "COMPLETED", "FAILED", "CANCELED", "CANCELING"], # required
+    #     submitted_at: Time.now, # required
+    #     completed_at: Time.now,
+    #     statistics: {
+    #       row_count: 1, # required
+    #       bytes_scanned: 1, # required
+    #       execution_time_in_millis: 1, # required
+    #     },
+    #     error_message: "QueryErrorMessage"
+    #   }
+    # @return [Types::DescribeQueryResponse]
+    def describe_query(params = {}, options = {})
+      request = build_request(:describe_query, params)
+      request.send_request(options)
+    end
+
+    # <p>Returns the current status and metadata of a single search, including the query that was
+    # submitted, the search type, and — when the search has failed — the reason. Use this to poll a
+    # search started with <code>StartSearch</code> until it reaches a terminal status (<code>SUCCEEDED</code> or
+    # <code>FAILED</code>).</p>
+    # @param [Hash, Types::DescribeSearchRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace the search belongs to.</p>
+    # @option params [String] :search_id
+    #   <p>The identifier of the search to describe.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     search_id: "SearchId", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_search(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     search_id: "SearchId", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     status: "QUEUED" # One of: ["QUEUED", "RUNNING", "SUCCEEDED", "FAILED"], # required
+    #     query_statement: "SearchQueryStatement", # required
+    #     search_type: "DEEP" # One of: ["DEEP", "QUICK"], # required
+    #     status_reason: "String",
+    #     started_at: Time.now,
+    #     group_id: "GroupId"
+    #   }
+    # @return [Types::DescribeSearchResponse]
+    def describe_search(params = {}, options = {})
+      request = build_request(:describe_search, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves information about the storage configuration for IoT SiteWise.</p>
     # @param [Hash, Types::DescribeStorageConfigurationRequest] params
     # @example Request syntax with placeholder values
@@ -3647,6 +5055,78 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Retrieves detailed information about a specific task in a workspace.</p>
+    # @param [Hash, Types::DescribeTaskRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :task_name
+    #   <p>The name of the task.</p>
+    # @option params [String] :task_version
+    #   <p>The version number of the task to retrieve. If not specified, returns the latest version.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     task_name: "ResourceName", # required
+    #     task_version: "Version"
+    #   }
+    #   options = {}
+    #   response = client.describe_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     workspace_name: "WorkspaceName", # required
+    #     task_name: "ResourceName", # required
+    #     description: "Description",
+    #     task_arn: "ARN", # required
+    #     version: "Version", # required
+    #     task_configuration: { # required
+    #       # One of:
+    #       container_task_configuration: {
+    #         ecr_uri: "EcrUri", # required
+    #         task_execution_role: "IamRoleArn", # required
+    #         processing_type: "GENERIC_COMPUTE_PROCESSING" # One of: ["GENERIC_COMPUTE_PROCESSING", "HARDWARE_ACCELERATED_PROCESSING"], # required
+    #         processing_unit: "UNITS_2" # One of: ["UNITS_2", "UNITS_4", "UNITS_8", "UNITS_12", "UNITS_16", "UNITS_24", "UNITS_32", "UNITS_36", "UNITS_48", "UNITS_60", "UNITS_64", "UNITS_72", "UNITS_84", "UNITS_96"], # required
+    #         ephemeral_storage_configuration: {
+    #           storage_class: "STANDARD_1" # One of: ["STANDARD_1", "STANDARD_2", "THROUGHPUT_1", "THROUGHPUT_2"], # required
+    #           storage_size_in_gi_b: 1, # required
+    #         },
+    #         command: ["String"],
+    #         timeout_seconds: 1,
+    #         environment_variables: {
+    #           "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #         },
+    #         mounts: [
+    #           {
+    #             name: "ResourceName", # required
+    #             relative_path: "MountRelativePath", # required
+    #             source: { # required
+    #               # One of:
+    #               s3_access_point: {
+    #                 access_point_arn: "MountS3AccessPointArn", # required
+    #                 prefix: "MountS3KeyPrefix"
+    #               }
+    #             },
+    #             storage_type: "SHARED_STORAGE" # One of: ["SHARED_STORAGE"], # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     status: { # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #         message: "String"
+    #       },
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #     },
+    #     created_at: Time.now, # required
+    #     updated_at: Time.now, # required
+    #   }
+    # @return [Types::DescribeTaskResponse]
+    def describe_task(params = {}, options = {})
+      request = build_request(:describe_task, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves information about a time series (data stream).</p>
     #          <p>To identify a time series, do one of the following:</p>
     #          <ul>
@@ -3676,11 +5156,14 @@ module Aws::IoTSiteWise
     # @option params [String] :property_id
     #   <p>The ID of the asset property. This can be either the actual ID in UUID format, or else <code>externalId:</code> followed by the external ID, if it has one.
     #       For more information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references">Referencing objects with external IDs</a> in the <i>IoT SiteWise User Guide</i>.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     alias: "PropertyAlias",
     #     asset_id: "CustomID",
-    #     property_id: "CustomID"
+    #     property_id: "CustomID",
+    #     workspace_name: "WorkspaceName"
     #   }
     #   options = {}
     #   response = client.describe_time_series(params, options)
@@ -3691,15 +5174,52 @@ module Aws::IoTSiteWise
     #     property_id: "ID",
     #     alias: "PropertyAlias",
     #     time_series_id: "TimeSeriesId", # required
-    #     data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #     data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #     data_type_spec: "Name",
     #     time_series_creation_date: Time.now, # required
     #     time_series_last_update_date: Time.now, # required
     #     time_series_arn: "ARN", # required
+    #     workspace_name: "WorkspaceName"
     #   }
     # @return [Types::DescribeTimeSeriesResponse]
     def describe_time_series(params = {}, options = {})
       request = build_request(:describe_time_series, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves information about a workspace.</p>
+    # @param [Hash, Types::DescribeWorkspaceRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #   }
+    #   options = {}
+    #   response = client.describe_workspace(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     workspace_arn: "ARN", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     workspace_description: "Description",
+    #     workspace_status: { # required
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"], # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"], # required
+    #         message: "Description", # required
+    #       }
+    #     },
+    #     encryption_configuration: {
+    #       encryption_type: "SITEWISE_DEFAULT_ENCRYPTION" # One of: ["SITEWISE_DEFAULT_ENCRYPTION", "KMS_BASED_ENCRYPTION"], # required
+    #       kms_key_arn: "ARN"
+    #     },
+    #     created_at: Time.now, # required
+    #     updated_at: Time.now, # required
+    #   }
+    # @return [Types::DescribeWorkspaceResponse]
+    def describe_workspace(params = {}, options = {})
+      request = build_request(:describe_workspace, params)
       request.send_request(options)
     end
 
@@ -4111,6 +5631,65 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Retrieves video data for a specific time range.</p>
+    # @param [Hash, Types::GetCaptureDataRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the capture source.</p>
+    # @option params [Types::TimeInNanos] :start_time
+    #   <p>The start time for the video data range.</p>
+    # @option params [Types::TimeInNanos] :end_time
+    #   <p>The end time for the video data range. Must be greater than startTime.</p>
+    # @option params [String] :time_series_id
+    #   <p>The time series ID that identifies the capture source. Mutually exclusive with propertyAlias.</p>
+    # @option params [String] :property_alias
+    #   <p>The property alias that identifies the capture source. Mutually exclusive with timeSeriesId.</p>
+    # @option params [Types::FormatSettings] :format_settings
+    #   <p>The optional format settings for the output.</p>
+    # @option params [String] :next_token
+    #   <p>The token from a previous response used to continue retrieving data.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     start_time: { # required
+    #       time_in_seconds: 1, # required
+    #       offset_in_nanos: 1
+    #     },
+    #     end_time: { # required
+    #       time_in_seconds: 1, # required
+    #       offset_in_nanos: 1
+    #     },
+    #     time_series_id: "TimeSeriesId",
+    #     property_alias: "AssetPropertyAlias",
+    #     format_settings: {
+    #       frames_per_second: 1,
+    #       width_in_pixels: 1,
+    #       height_in_pixels: 1
+    #     },
+    #     next_token: "GetCaptureDataNextToken"
+    #   }
+    #   options = {}
+    #   response = client.get_capture_data(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     data: "data", # required
+    #     start_time: { # required
+    #       time_in_seconds: 1, # required
+    #       offset_in_nanos: 1
+    #     },
+    #     end_time: { # required
+    #       time_in_seconds: 1, # required
+    #       offset_in_nanos: 1
+    #     },
+    #     data_type: "VIDEO-MP4" # One of: ["VIDEO-MP4"], # required
+    #     next_token: "GetCaptureDataNextToken"
+    #   }
+    # @return [Types::GetCaptureDataResponse]
+    def get_capture_data(params = {}, options = {})
+      request = build_request(:get_capture_data, params)
+      request.send_request(options)
+    end
+
     # <p>Get interpolated values for an asset property for a specified time interval, during a
     #       period of time. If your time series is missing data points during the specified time interval,
     #       you can use interpolation to estimate the missing data.</p>
@@ -4255,15 +5834,111 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Retrieves the paginated results of a query. Returns empty rows if the query is not yet complete.</p>
+    # @param [Hash, Types::GetQueryResultsRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace associated with the query.</p>
+    # @option params [String] :query_id
+    #   <p>The unique identifier for the query execution.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return for each paginated request.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     query_id: "QueryId", # required
+    #     max_results: 1,
+    #     next_token: "QueryNextToken"
+    #   }
+    #   options = {}
+    #   response = client.get_query_results(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     column_info: [
+    #       {
+    #         name: "ColumnLabel", # required
+    #         type: "ColumnDataType", # required
+    #       }
+    #     ],
+    #     rows: [
+    #       ["ColumnValue"]
+    #     ],
+    #     next_token: "QueryNextToken"
+    #   }
+    # @return [Types::GetQueryResultsResponse]
+    def get_query_results(params = {}, options = {})
+      request = build_request(:get_query_results, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves the ranked results of a search, ordered by descending relevance score. Results are
+    # available only after the search has reached the <code>SUCCEEDED</code> status. Calling this on a search
+    # that exists but has not yet completed returns <code>InvalidRequestException</code>, while calling it on a
+    # search that does not exist returns <code>ResourceNotFoundException</code>. The response is paginated: when
+    # <code>nextToken</code> is present, pass it on a subsequent call to retrieve the next page.</p>
+    # @param [Hash, Types::GetSearchResultsRequest] params
+    # @option params [String] :search_id
+    #   <p>The identifier of the search whose results are retrieved.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace the search belongs to.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return in a single page. Valid range is 1 to 10,000; if
+    #   omitted, a service-defined default is used.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token returned by a previous GetSearchResults call. Provide it to retrieve the
+    #   next page of results; omit it to retrieve the first page.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     search_id: "SearchId", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.get_search_results(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     search_results: [ # required
+    #       {
+    #         search_id: "SearchId", # required
+    #         workspace_name: "WorkspaceName", # required
+    #         dataset_id: "DatasetId", # required
+    #         time_series_id: "TimeSeriesId", # required
+    #         start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         top_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         score: 1.0, # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::GetSearchResultsResponse]
+    def get_search_results(params = {}, options = {})
+      request = build_request(:get_search_results, params)
+      request.send_request(options)
+    end
+
     # <p>Invokes SiteWise Assistant to start or continue a conversation.</p>
     # @param [Hash, Types::InvokeAssistantRequest] params
     # @option params [String] :conversation_id
-    #   <p>The ID assigned to a conversation. IoT SiteWise automatically generates a unique ID for you, and this parameter is never required. 
+    #   <p>The ID assigned to a conversation. IoT SiteWise automatically generates a unique ID for you, and this parameter is never required.
     #     However, if you prefer to have your own ID, you must specify it here in UUID format. If you specify your own ID, it must be globally unique.</p>
     # @option params [String] :message
     #   <p>A text message sent to the SiteWise Assistant by the user.</p>
     # @option params [Boolean] :enable_trace
-    #   <p>Specifies if to turn trace on or not. It is used to track the SiteWise Assistant's 
+    #   <p>Specifies if to turn trace on or not. It is used to track the SiteWise Assistant's
     #     reasoning, and data access process.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -4460,6 +6135,40 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Retrieves a paginated list of existing applications</p>
+    # @param [Hash, Types::ListApplicationsRequest] params
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of results to return</p>
+    # @option params [String] :next_token
+    #   <p>Next Page Token</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_applications(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     next_token: "NextToken",
+    #     applications: [ # required
+    #       {
+    #         arn: "ARN", # required
+    #         id: "ApplicationId", # required
+    #         name: "ApplicationName", # required
+    #         status: "CREATING" # One of: ["CREATING", "ACTIVE", "DELETING"], # required
+    #         created_at: Time.now, # required
+    #         workspace_name: "WorkspaceName", # required
+    #       }
+    #     ]
+    #   }
+    # @return [Types::ListApplicationsResponse]
+    def list_applications(params = {}, options = {})
+      request = build_request(:list_applications, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves a paginated list of composite models associated with the asset model</p>
     # @param [Hash, Types::ListAssetModelCompositeModelsRequest] params
     # @option params [String] :asset_model_id
@@ -4471,7 +6180,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results to return for each paginated request.</p>
     #            <p>Default: 50</p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -4538,7 +6247,7 @@ module Aws::IoTSiteWise
     #            <p>Default: <code>BASE</code>
     #            </p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -4559,7 +6268,7 @@ module Aws::IoTSiteWise
     #         id: "ID",
     #         external_id: "ExternalId",
     #         name: "Name", # required
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
@@ -4677,7 +6386,7 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results to return for each paginated request.</p>
     #            <p>Default: 50</p>
     # @option params [String] :asset_model_version
-    #   <p>The version alias that specifies the latest or active version of the asset model. 
+    #   <p>The version alias that specifies the latest or active version of the asset model.
     #             The details are returned in the response. The default value is <code>LATEST</code>. See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/model-active-version.html">
     #             Asset model versions</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @example Request syntax with placeholder values
@@ -5041,11 +6750,14 @@ module Aws::IoTSiteWise
     #   <p>The maximum number of results to return for each paginated request.</p>
     # @option params [String] :filter
     #   <p>You can use a filter to select the bulk import jobs that you want to retrieve.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken",
     #     max_results: 1,
-    #     filter: "ALL" # One of: ["ALL", "PENDING", "RUNNING", "CANCELLED", "FAILED", "COMPLETED_WITH_FAILURES", "COMPLETED"]
+    #     filter: "ALL" # One of: ["ALL", "PENDING", "RUNNING", "CANCELLED", "FAILED", "COMPLETED_WITH_FAILURES", "COMPLETED"],
+    #     workspace_name: "WorkspaceName"
     #   }
     #   options = {}
     #   response = client.list_bulk_import_jobs(params, options)
@@ -5292,17 +7004,163 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Retrieves a paginated list of data segment relationships for a session dataset. Use this
+    #       operation to find the curated datasets that reference data segments of the specified session
+    #       dataset. Use the <code>nextToken</code> parameter to retrieve additional results.</p>
+    # @param [Hash, Types::ListDatasetDataSegmentRelationshipsRequest] params
+    # @option params [String] :dataset_id
+    #   <p>The ID of the session dataset to list data segment relationships for.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     dataset_id: "ID", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_dataset_data_segment_relationships(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     data_segment_relationship_summaries: [ # required
+    #       {
+    #         target_dataset_id: "ID", # required
+    #         source_dataset_id: "ID", # required
+    #         time_series_id: "TimeSeriesId", # required
+    #         start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListDatasetDataSegmentRelationshipsResponse]
+    def list_dataset_data_segment_relationships(params = {}, options = {})
+      request = build_request(:list_dataset_data_segment_relationships, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a paginated list of data segments associated with a dataset. Use the <code>nextToken</code> parameter to retrieve additional results.</p>
+    # @param [Hash, Types::ListDatasetDataSegmentsRequest] params
+    # @option params [String] :dataset_id
+    #   <p>The ID of the dataset.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
+    # @option params [String] :dataset_version
+    #   <p>The version of the dataset to list data segments for.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     dataset_id: "ID", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     dataset_version: "Version",
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_dataset_data_segments(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     data_segments: [ # required
+    #       {
+    #         source_dataset_id: "ID", # required
+    #         time_series_id: "TimeSeriesId", # required
+    #         start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         alias: "PropertyAlias", # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
+    #         enrichment: {
+    #           status: "ENRICHED" # One of: ["ENRICHED", "NOT_ENRICHED"], # required
+    #           last_enriched_at: Time.now
+    #         }
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListDatasetDataSegmentsResponse]
+    def list_dataset_data_segments(params = {}, options = {})
+      request = build_request(:list_dataset_data_segments, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a paginated list of dataset export jobs for a workspace.</p>
+    # @param [Hash, Types::ListDatasetExportJobsRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace whose dataset export jobs should be listed.</p>
+    # @option params [String] :filter
+    #   <p>The optional filter that returns only jobs matching the given filter value. Defaults to ALL.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return for each paginated request.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     filter: "ALL" # One of: ["ALL", "SUBMITTED", "RUNNING", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"],
+    #     max_results: 1,
+    #     next_token: "ListExportJobsNextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_dataset_export_jobs(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     jobs: [ # required
+    #       {
+    #         job_id: "DatasetExportJobId", # required
+    #         status: "SUBMITTED" # One of: ["SUBMITTED", "RUNNING", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"], # required
+    #         started_at: Time.now, # required
+    #         completed_at: Time.now,
+    #         destination_s3_uri: "S3Uri", # required
+    #       }
+    #     ],
+    #     next_token: "ListExportJobsNextToken"
+    #   }
+    # @return [Types::ListDatasetExportJobsResponse]
+    def list_dataset_export_jobs(params = {}, options = {})
+      request = build_request(:list_dataset_export_jobs, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves a paginated list of datasets for a specific target resource.</p>
     # @param [Hash, Types::ListDatasetsRequest] params
     # @option params [String] :source_type
     #   <p>The type of data source for the dataset.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace to filter datasets by.</p>
+    # @option params [String] :dataset_type
+    #   <p>The type of dataset to filter by: a session dataset, a curated dataset, or a connection
+    #         to an external datasource.</p>
     # @option params [String] :next_token
     #   <p>The token for the next set of results, or null if there are no additional results.</p>
     # @option params [Integer] :max_results
     #   <p>The maximum number of results to return for each paginated request.</p>
     # @example Request syntax with placeholder values
     #   params = {
-    #     source_type: "KENDRA" # One of: ["KENDRA"], # required
+    #     source_type: "KENDRA" # One of: ["KENDRA", "SITEWISE"], # required
+    #     workspace_name: "WorkspaceName",
+    #     dataset_type: "SESSION" # One of: ["SESSION", "CURATED", "EXTERNAL"],
     #     next_token: "NextToken",
     #     max_results: 1
     #   }
@@ -5316,7 +7174,9 @@ module Aws::IoTSiteWise
     #         id: "ID", # required
     #         arn: "ARN", # required
     #         name: "RestrictedName", # required
-    #         description: "RestrictedDescription", # required
+    #         description: "Description", # required
+    #         source_type: "KENDRA" # One of: ["KENDRA", "SITEWISE"],
+    #         dataset_type: "SESSION" # One of: ["SESSION", "CURATED", "EXTERNAL"],
     #         creation_date: Time.now, # required
     #         last_update_date: Time.now, # required
     #         status: { # required
@@ -5331,14 +7191,119 @@ module Aws::IoTSiteWise
     #               }
     #             ]
     #           }
+    #         },
+    #         enrichment_status: {
+    #           video: {
+    #             status: "FULLY_ENRICHED" # One of: ["FULLY_ENRICHED", "PARTIALLY_ENRICHED", "NOT_ENRICHED"], # required
+    #             last_enriched_at: Time.now
+    #           }
     #         }
     #       }
     #     ],
-    #     next_token: "NextToken"
+    #     next_token: "NextToken",
+    #     workspace_name: "WorkspaceName"
     #   }
     # @return [Types::ListDatasetsResponse]
     def list_datasets(params = {}, options = {})
       request = build_request(:list_datasets, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists enrichment jobs within a workspace with optional filtering and pagination. Results are ordered
+    # by createdAt timestamp descending (newest first).</p>
+    # <h2>Filtering</h2>
+    # <p>Combine filters to narrow results:</p>
+    # <ul>
+    # <li><strong>datasetId</strong>: Filter by dataset</li>
+    # <li><strong>propertyAlias</strong> OR <strong>timeSeriesId</strong>: Filter by time series (specify one, not both)</li>
+    # <li><strong>status</strong>: Filter by job status (e.g., RUNNING to find active jobs)</li>
+    # <li><strong>jobType</strong>: Filter by enrichment type (currently only EVENT_DETECTION)</li>
+    # <li><strong>startDate</strong> and <strong>endDate</strong>: Filter by job creation time range</li>
+    # </ul>
+    # <h2>Important Constraints</h2>
+    # <ul>
+    # <li>You must specify either propertyAlias OR timeSeriesId, but not both</li>
+    # <li>Attempting to specify both results in an InvalidRequestException</li>
+    # <li>Date filters use ISO 8601 format</li>
+    # <li>startDate is exclusive, endDate is inclusive</li>
+    # </ul>
+    # <h2>Pagination</h2>
+    # <p>The operation returns up to maxResults jobs per page (default 50). If more results exist, the
+    # response includes a nextToken. Submit this token in a subsequent request to retrieve the next page.</p>
+    # <h2>Common Use Cases</h2>
+    # <ul>
+    # <li>Find all running jobs: Filter by status=RUNNING</li>
+    # <li>List recent jobs for a dataset: Filter by datasetId with optional date range</li>
+    # <li>Monitor jobs for a specific sensor: Filter by propertyAlias or timeSeriesId</li>
+    # <li>Track all event detection jobs: Filter by jobType=EVENT_DETECTION</li>
+    # </ul>
+    # <h2>Performance</h2>
+    # <p>Performance is optimal when filtering by supported fields (datasetId, propertyAlias, timeSeriesId, status, jobType).</p>
+    # @param [Hash, Types::ListEnrichmentJobsRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the IoT SiteWise workspace to list enrichment jobs from.</p>
+    # @option params [String] :dataset_id
+    #   <p>Filter jobs by dataset ID. Returns only jobs analyzing data from the specified dataset.</p>
+    # @option params [String] :property_alias
+    #   <p>Filter by property alias (human-readable sensor name). Specify either propertyAlias or timeSeriesId,
+    #   but not both. Returns only jobs analyzing the specified property alias.</p>
+    # @option params [String] :time_series_id
+    #   <p>Filter by time series ID (system identifier). Specify either timeSeriesId or propertyAlias, but not
+    #   both. Returns only jobs analyzing the specified time series.</p>
+    # @option params [String] :status
+    #   <p>Filter by job status. Returns only jobs in the specified status.
+    #   Use RUNNING to find active jobs, or FAILED to identify jobs requiring attention.</p>
+    # @option params [String] :job_type
+    #   <p>Filter by enrichment job type. Currently only EVENT_DETECTION is supported.
+    #   Use this filter to future-proof queries when additional job types are added.</p>
+    # @option params [Time] :start_date
+    #   <p>The exclusive start of the date range for filtering jobs by creation time. Jobs created after this
+    #   timestamp are included. Use ISO 8601 format (e.g., 2024-01-01T00:00:00Z).</p>
+    # @option params [Time] :end_date
+    #   <p>The inclusive end of the date range for filtering jobs by creation time. Jobs created on or before
+    #   this timestamp are included. Use ISO 8601 format (e.g., 2024-01-31T23:59:59Z).</p>
+    # @option params [Integer] :max_results
+    #   <p>Maximum number of jobs to return per page. Defaults to 50 if not specified.
+    #   Use smaller values for faster responses, larger values to reduce API calls.</p>
+    # @option params [String] :next_token
+    #   <p>Pagination token from a previous ListEnrichmentJobs response. Include this token to retrieve the
+    #   next page of results. Omit for the first request.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     dataset_id: "ID",
+    #     property_alias: "AssetPropertyAlias",
+    #     time_series_id: "TimeSeriesId",
+    #     status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELLED"],
+    #     job_type: "EVENT_DETECTION" # One of: ["EVENT_DETECTION"],
+    #     start_date: Time.now,
+    #     end_date: Time.now,
+    #     max_results: 1,
+    #     next_token: "NextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_enrichment_jobs(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     jobs: [ # required
+    #       {
+    #         job_id: "ID", # required
+    #         status: "PENDING" # One of: ["PENDING", "RUNNING", "COMPLETED", "FAILED", "TIMED_OUT", "CANCELLED"], # required
+    #         workspace_name: "WorkspaceName", # required
+    #         job_type: "EVENT_DETECTION" # One of: ["EVENT_DETECTION"], # required
+    #         dataset_id: "ID", # required
+    #         property_alias: "AssetPropertyAlias",
+    #         time_series_id: "TimeSeriesId",
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListEnrichmentJobsResponse]
+    def list_enrichment_jobs(params = {}, options = {})
+      request = build_request(:list_enrichment_jobs, params)
       request.send_request(options)
     end
 
@@ -5487,6 +7452,135 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Lists pipeline executions for a specific pipeline in a workspace.
+    # Supports filtering by state and time range. State can be combined with either
+    # startTime or endTime filters. Time range filters are grouped: use startTime filters
+    # (startTimeAfter, startTimeBefore) or endTime filters (endTimeAfter, endTimeBefore),
+    # but not both. Combining startTime and endTime filters returns an InvalidRequestException.
+    # Note: endTime filters only return executions in terminal states, as in-progress
+    # executions have no endTime.</p>
+    # @param [Hash, Types::ListPipelineExecutionsRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :pipeline_name
+    #   <p>The name of the pipeline.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return per request.
+    #   This is an upper bound; the actual number of results may be less. Default: 50.</p>
+    # @option params [String] :state
+    #   <p>Filter by execution state.
+    #   If not specified, executions in all states are returned.</p>
+    # @option params [Time] :start_time_after
+    #   <p>Inclusive lower bound on execution start time (ISO-8601).
+    #   Only executions with startTime &gt;= startTimeAfter are returned.
+    #   Cannot be combined with endTimeAfter or endTimeBefore.</p>
+    # @option params [Time] :start_time_before
+    #   <p>Exclusive upper bound on execution start time (ISO-8601).
+    #   Only executions with startTime &lt; startTimeBefore are returned.
+    #   Cannot be combined with endTimeAfter or endTimeBefore.</p>
+    # @option params [Time] :end_time_after
+    #   <p>Inclusive lower bound on execution end time (ISO-8601).
+    #   Only executions with endTime &gt;= endTimeAfter are returned.
+    #   Cannot be combined with startTimeAfter or startTimeBefore.
+    #   Only matches executions in terminal states.</p>
+    # @option params [Time] :end_time_before
+    #   <p>Exclusive upper bound on execution end time (ISO-8601).
+    #   Only executions with endTime &lt; endTimeBefore are returned.
+    #   Cannot be combined with startTimeAfter or startTimeBefore.
+    #   Only matches executions in terminal states.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     pipeline_name: "ResourceName", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #     state: "NOT_STARTED" # One of: ["NOT_STARTED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"],
+    #     start_time_after: Time.now,
+    #     start_time_before: Time.now,
+    #     end_time_after: Time.now,
+    #     end_time_before: Time.now
+    #   }
+    #   options = {}
+    #   response = client.list_pipeline_executions(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pipeline_execution_summaries: [ # required
+    #       {
+    #         pipeline_execution_id: "ID", # required
+    #         pipeline_version: "Version", # required
+    #         status: { # required
+    #           state: "NOT_STARTED" # One of: ["NOT_STARTED", "RUNNING", "SUCCEEDED", "FAILED", "CANCELLING", "CANCELLED"], # required
+    #           state_details: {
+    #             code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE", "EXECUTION_ERROR", "TIMED_OUT"],
+    #             message: "String", # required
+    #             details: [
+    #               {
+    #                 code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE", "EXECUTION_ERROR", "TIMED_OUT"], # required
+    #                 message: "String", # required
+    #               }
+    #             ]
+    #           }
+    #         },
+    #         execution_priority: 1,
+    #         start_time: Time.now,
+    #         end_time: Time.now
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListPipelineExecutionsResponse]
+    def list_pipeline_executions(params = {}, options = {})
+      request = build_request(:list_pipeline_executions, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists pipelines in a workspace. To get complete details about a pipeline, use <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribePipeline.html">DescribePipeline</a>.</p>
+    # @param [Hash, Types::ListPipelinesRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_pipelines(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pipeline_summaries: [ # required
+    #       {
+    #         pipeline_name: "ResourceName", # required
+    #         description: "Description",
+    #         pipeline_arn: "ARN", # required
+    #         version: "Version", # required
+    #         status: { # required
+    #           error: {
+    #             code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #             message: "String"
+    #           },
+    #           state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #         },
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListPipelinesResponse]
+    def list_pipelines(params = {}, options = {})
+      request = build_request(:list_pipelines, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves a paginated list of IoT SiteWise Monitor portals.</p>
     # @param [Hash, Types::ListPortalsRequest] params
     # @option params [String] :next_token
@@ -5597,6 +7691,96 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Retrieves a paginated list of queries for a workspace.</p>
+    # @param [Hash, Types::ListQueriesRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace to list queries for.</p>
+    # @option params [String] :filter
+    #   <p>An optional filter to return only queries with the specified status. The value must be one of the supported query statuses: SUBMITTED, RUNNING, COMPLETED, FAILED, CANCELED, or CANCELING.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return for each paginated request.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     filter: "QueryFilter",
+    #     max_results: 1,
+    #     next_token: "QueryListNextToken"
+    #   }
+    #   options = {}
+    #   response = client.list_queries(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     queries: [ # required
+    #       {
+    #         query_id: "QueryId", # required
+    #         status: "SUBMITTED" # One of: ["SUBMITTED", "RUNNING", "COMPLETED", "FAILED", "CANCELED", "CANCELING"], # required
+    #         submitted_at: Time.now, # required
+    #         completed_at: Time.now
+    #       }
+    #     ],
+    #     next_token: "QueryListNextToken"
+    #   }
+    # @return [Types::ListQueriesResponse]
+    def list_queries(params = {}, options = {})
+      request = build_request(:list_queries, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists the searches in a workspace, most recently started first. Results can be narrowed with
+    # optional filters (status, search type, group, and started-at time range) and are paginated: when
+    # <code>nextToken</code> is present, pass it on a subsequent call to retrieve the next page.</p>
+    # @param [Hash, Types::ListSearchesRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace whose searches are listed.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of searches to return in a single page. Valid range is 1 to 1,000; if
+    #   omitted, a service-defined default is used.</p>
+    # @option params [String] :next_token
+    #   <p>The pagination token returned by a previous ListSearches call. Provide it to retrieve the next
+    #   page; omit it to retrieve the first page.</p>
+    # @option params [Types::ListSearchesFilters] :list_searches_filters
+    #   <p>Optional filters that restrict which searches are returned.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #     list_searches_filters: {
+    #       status_filter: ["QUEUED" # One of: ["QUEUED", "RUNNING", "SUCCEEDED", "FAILED"]],
+    #       started_after: Time.now,
+    #       started_before: Time.now,
+    #       group_id_filter: ["GroupId"],
+    #       search_type_filter: ["DEEP" # One of: ["DEEP", "QUICK"]]
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.list_searches(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     search_summaries: [ # required
+    #       {
+    #         search_id: "SearchId", # required
+    #         workspace_name: "WorkspaceName", # required
+    #         status: "QUEUED" # One of: ["QUEUED", "RUNNING", "SUCCEEDED", "FAILED"], # required
+    #         query_statement: "SearchQueryStatement", # required
+    #         search_type: "DEEP" # One of: ["DEEP", "QUICK"], # required
+    #         status_reason: "String",
+    #         started_at: Time.now,
+    #         group_id: "GroupId"
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListSearchesResponse]
+    def list_searches(params = {}, options = {})
+      request = build_request(:list_searches, params)
+      request.send_request(options)
+    end
+
     # <p>Retrieves the list of tags for an IoT SiteWise resource.</p>
     # @param [Hash, Types::ListTagsForResourceRequest] params
     # @option params [String] :resource_arn
@@ -5617,6 +7801,50 @@ module Aws::IoTSiteWise
     # @return [Types::ListTagsForResourceResponse]
     def list_tags_for_resource(params = {}, options = {})
       request = build_request(:list_tags_for_resource, params)
+      request.send_request(options)
+    end
+
+    # <p>Lists tasks in a workspace. To get complete details about a task, use <a href="https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeTask.html">DescribeTask</a>.</p>
+    # @param [Hash, Types::ListTasksRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     next_token: "PaginationToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_tasks(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     task_summaries: [ # required
+    #       {
+    #         task_name: "ResourceName", # required
+    #         description: "Description",
+    #         task_arn: "ARN", # required
+    #         version: "Version", # required
+    #         status: { # required
+    #           error: {
+    #             code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #             message: "String"
+    #           },
+    #           state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #         },
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "PaginationToken"
+    #   }
+    # @return [Types::ListTasksResponse]
+    def list_tasks(params = {}, options = {})
+      request = build_request(:list_tasks, params)
       request.send_request(options)
     end
 
@@ -5646,13 +7874,16 @@ module Aws::IoTSiteWise
     #             property.</p>
     #               </li>
     #            </ul>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     next_token: "NextToken",
     #     max_results: 1,
     #     asset_id: "CustomID",
     #     alias_prefix: "PropertyAlias",
-    #     time_series_type: "ASSOCIATED" # One of: ["ASSOCIATED", "DISASSOCIATED"]
+    #     time_series_type: "ASSOCIATED" # One of: ["ASSOCIATED", "DISASSOCIATED"],
+    #     workspace_name: "WorkspaceName"
     #   }
     #   options = {}
     #   response = client.list_time_series(params, options)
@@ -5665,18 +7896,58 @@ module Aws::IoTSiteWise
     #         property_id: "ID",
     #         alias: "PropertyAlias",
     #         time_series_id: "TimeSeriesId", # required
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         time_series_creation_date: Time.now, # required
     #         time_series_last_update_date: Time.now, # required
     #         time_series_arn: "ARN", # required
     #       }
     #     ],
-    #     next_token: "NextToken"
+    #     next_token: "NextToken",
+    #     workspace_name: "WorkspaceName"
     #   }
     # @return [Types::ListTimeSeriesResponse]
     def list_time_series(params = {}, options = {})
       request = build_request(:list_time_series, params)
+      request.send_request(options)
+    end
+
+    # <p>Retrieves a paginated list of workspaces. Use the <code>nextToken</code> parameter to retrieve additional results.</p>
+    # @param [Hash, Types::ListWorkspacesRequest] params
+    # @option params [String] :next_token
+    #   <p>The token to be used for the next set of paginated results.</p>
+    # @option params [Integer] :max_results
+    #   <p>The maximum number of results to return for each paginated request. Default: 50.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     next_token: "NextToken",
+    #     max_results: 1
+    #   }
+    #   options = {}
+    #   response = client.list_workspaces(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     workspace_summaries: [ # required
+    #       {
+    #         name: "WorkspaceName", # required
+    #         arn: "ARN", # required
+    #         status: { # required
+    #           state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"], # required
+    #           error: {
+    #             code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"], # required
+    #             message: "Description", # required
+    #           }
+    #         },
+    #         created_at: Time.now, # required
+    #         updated_at: Time.now, # required
+    #       }
+    #     ],
+    #     next_token: "NextToken"
+    #   }
+    # @return [Types::ListWorkspacesResponse]
+    def list_workspaces(params = {}, options = {})
+      request = build_request(:list_workspaces, params)
       request.send_request(options)
     end
 
@@ -5779,11 +8050,14 @@ module Aws::IoTSiteWise
     # @param [Hash, Types::PutLoggingOptionsRequest] params
     # @option params [Types::LoggingOptions] :logging_options
     #   <p>The logging options to set.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
     # @example Request syntax with placeholder values
     #   params = {
     #     logging_options: { # required
     #       level: "ERROR" # One of: ["ERROR", "INFO", "OFF"], # required
-    #     }
+    #     },
+    #     workspace_name: "WorkspaceName"
     #   }
     #   options = {}
     #   response = client.put_logging_options(params, options)
@@ -5901,6 +8175,168 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
+    # <p>Starts execution of a pipeline in the specified workspace. Each compute node runs
+    # according to the DAG dependency order defined in the pipeline. Nodes without
+    # dependencies start immediately, while dependent nodes wait for all upstream nodes
+    # to complete successfully.</p>
+    # <p>You can provide runtime environment variable overrides that take the highest priority
+    # in the environment variable hierarchy, without modifying the pipeline definition.</p>
+    # @param [Hash, Types::StartPipelineExecutionRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace containing the pipeline.</p>
+    # @option params [String] :pipeline_name
+    #   <p>The name of the pipeline to execute.</p>
+    # @option params [Types::ExecutionEnvironmentVariables] :execution_environment_variable_overrides
+    #   <p>Runtime environment variable overrides for the execution. Includes global variables
+    #   that apply to all compute nodes and computeNodes for per-node overrides. These take the highest
+    #   priority in the environment variable hierarchy.</p>
+    # @option params [Types::MountOverrides] :execution_mount_overrides
+    #   <p>Runtime mount overrides for the execution. Overrides are merged by mount name into
+    #   each listed compute node's task-defined mounts: a matching name replaces the task-defined
+    #   mount, a new name adds a mount, and task-defined mounts not referenced remain unchanged.
+    #   Compute nodes not listed use their task-defined mounts as-is.</p>
+    # @option params [Integer] :execution_priority
+    #   <p>Scheduling priority for the execution. Lower values indicate higher priority. Defaults to 2 when not specified.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+    #   If you retry a request that completed successfully using the same client token, the server returns the
+    #   cached result from the original successful request without performing the operation again.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     pipeline_name: "ResourceName", # required
+    #     execution_environment_variable_overrides: {
+    #       global: {
+    #         "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #       },
+    #       compute_nodes: {
+    #         "ResourceName" => {
+    #           "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #         }
+    #       }
+    #     },
+    #     execution_mount_overrides: {
+    #       compute_nodes: { # required
+    #         "ResourceName" => [
+    #           {
+    #             name: "ResourceName", # required
+    #             relative_path: "MountRelativePath", # required
+    #             source: { # required
+    #               # One of:
+    #               s3_access_point: {
+    #                 access_point_arn: "MountS3AccessPointArn", # required
+    #                 prefix: "MountS3KeyPrefix"
+    #               }
+    #             },
+    #             storage_type: "SHARED_STORAGE" # One of: ["SHARED_STORAGE"], # required
+    #           }
+    #         ]
+    #       }
+    #     },
+    #     execution_priority: 1,
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.start_pipeline_execution(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     pipeline_execution_id: "ID", # required
+    #   }
+    # @return [Types::StartPipelineExecutionResponse]
+    def start_pipeline_execution(params = {}, options = {})
+      request = build_request(:start_pipeline_execution, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts an asynchronous SQL query against workspace telemetry, annotations, data segment, and dataset data.</p>
+    # @param [Hash, Types::StartQueryRequest] params
+    # @option params [String] :client_token
+    #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace to query.</p>
+    # @option params [String] :query_statement
+    #   <p>The SQL query to execute against the workspace telemetry, annotations, data segment, and dataset data.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     client_token: "ClientToken",
+    #     workspace_name: "WorkspaceName", # required
+    #     query_statement: "QueryString", # required
+    #   }
+    #   options = {}
+    #   response = client.start_query(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     query_id: "QueryId", # required
+    #     status: "SUBMITTED" # One of: ["SUBMITTED", "RUNNING", "COMPLETED", "FAILED", "CANCELED", "CANCELING"], # required
+    #   }
+    # @return [Types::StartQueryResponse]
+    def start_query(params = {}, options = {})
+      request = build_request(:start_query, params)
+      request.send_request(options)
+    end
+
+    # <p>Starts an asynchronous search over the data in a workspace. The search runs in the background;
+    # the response returns immediately with a <code>searchId</code> and an initial status of <code>QUEUED</code>. Use
+    # <code>DescribeSearch</code> to poll for completion and <code>GetSearchResults</code> to retrieve the results once the
+    # search reaches <code>SUCCEEDED</code>. The request is idempotent on <code>clientToken</code>: repeating a call with the
+    # same token returns the original search instead of starting a new one.</p>
+    # @param [Hash, Types::StartSearchRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace whose data is searched.</p>
+    # @option params [String] :query_statement
+    #   <p>The natural-language query describing the data to search for.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier you provide to ensure the request is idempotent. Repeating
+    #   a StartSearch call with the same <code>clientToken</code> returns the original search rather than starting
+    #   a new one. If omitted, the SDK autogenerates one.</p>
+    # @option params [String] :search_type
+    #   <p>The search strategy to use. Defaults to <code>QUICK</code> when omitted.</p>
+    # @option params [Types::SearchFilters] :search_filters
+    #   <p>Optional filters that restrict the search to a subset of the workspace's data.</p>
+    # @option params [String] :group_id
+    #   <p>An optional caller-supplied identifier used to group related searches together.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     query_statement: "SearchQueryStatement", # required
+    #     client_token: "ClientToken",
+    #     search_type: "DEEP" # One of: ["DEEP", "QUICK"],
+    #     search_filters: {
+    #       time_series_ids: ["TimeSeriesId"],
+    #       dataset_ids: ["DatasetId"],
+    #       time_intervals: [
+    #         {
+    #           start_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           },
+    #           end_time: { # required
+    #             time_in_seconds: 1, # required
+    #             offset_in_nanos: 1
+    #           }
+    #         }
+    #       ]
+    #     },
+    #     group_id: "GroupId"
+    #   }
+    #   options = {}
+    #   response = client.start_search(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     search_id: "SearchId", # required
+    #     workspace_name: "WorkspaceName", # required
+    #     status: "QUEUED" # One of: ["QUEUED", "RUNNING", "SUCCEEDED", "FAILED"], # required
+    #     group_id: "GroupId"
+    #   }
+    # @return [Types::StartSearchResponse]
+    def start_search(params = {}, options = {})
+      request = build_request(:start_search, params)
+      request.send_request(options)
+    end
+
     # <p>Adds tags to an IoT SiteWise resource. If a tag already exists for the resource, this operation
     #       updates the tag's value.</p>
     # @param [Hash, Types::TagResourceRequest] params
@@ -5950,7 +8386,13 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Updates an existing access policy that specifies an identity's access to an IoT SiteWise Monitor
+    # <important>
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
+    #          </important>
+    #          <p>Updates an existing access policy that specifies an identity's access to an IoT SiteWise Monitor
     #       portal or project resource.</p>
     # @param [Hash, Types::UpdateAccessPolicyRequest] params
     # @option params [String] :access_policy_id
@@ -6030,6 +8472,7 @@ module Aws::IoTSiteWise
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     asset_id: "ID",
     #     asset_status: { # required
     #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"], # required
     #       error: {
@@ -6106,15 +8549,15 @@ module Aws::IoTSiteWise
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The update request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the update request if an active version 
+    #   <p>Accepts <b>*</b> to reject the update request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -6127,7 +8570,7 @@ module Aws::IoTSiteWise
     #         id: "CustomID",
     #         external_id: "ExternalId",
     #         name: "Name", # required
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
@@ -6219,7 +8662,7 @@ module Aws::IoTSiteWise
     #             id: "CustomID",
     #             external_id: "ExternalId",
     #             name: "Name", # required
-    #             data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #             data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #             data_type_spec: "Name",
     #             unit: "PropertyUnit",
     #             type: { # required
@@ -6307,6 +8750,7 @@ module Aws::IoTSiteWise
     # @example Response structure with placeholder values
     #   response.to_h #=>
     #   {
+    #     asset_model_id: "ID",
     #     asset_model_status: { # required
     #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "PROPAGATING", "DELETING", "FAILED"], # required
     #       error: {
@@ -6369,15 +8813,15 @@ module Aws::IoTSiteWise
     #            <p>You can specify up to 200 properties per composite model. For more
     #         information, see <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html">Quotas</a> in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_match
-    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).   
+    #   <p>The expected current entity tag (ETag) for the asset model’s latest or active version (specified using <code>matchForVersionType</code>).
     #       The update request is rejected if the tag does not match the latest or active version's current entity tag.
     #       See <a href="https://docs.aws.amazon.com/iot-sitewise/latest/userguide/opt-locking-for-model.html">Optimistic locking for asset model writes</a>
     #       in the <i>IoT SiteWise User Guide</i>.</p>
     # @option params [String] :if_none_match
-    #   <p>Accepts <b>*</b> to reject the update request if an active version 
+    #   <p>Accepts <b>*</b> to reject the update request if an active version
     #       (specified using <code>matchForVersionType</code> as <code>ACTIVE</code>) already exists for the asset model.</p>
     # @option params [String] :match_for_version_type
-    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in 
+    #   <p>Specifies the asset model version type (<code>LATEST</code> or <code>ACTIVE</code>) used in
     #     conjunction with <code>If-Match</code> or <code>If-None-Match</code> headers to determine the target ETag for the update operation.</p>
     # @example Request syntax with placeholder values
     #   params = {
@@ -6392,7 +8836,7 @@ module Aws::IoTSiteWise
     #         id: "CustomID",
     #         external_id: "ExternalId",
     #         name: "Name", # required
-    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT"], # required
+    #         data_type: "STRING" # One of: ["STRING", "INTEGER", "DOUBLE", "BOOLEAN", "STRUCT", "VIDEO", "ANNOTATION", "JSON"], # required
     #         data_type_spec: "Name",
     #         unit: "PropertyUnit",
     #         type: { # required
@@ -6493,7 +8937,8 @@ module Aws::IoTSiteWise
     #           }
     #         ]
     #       }
-    #     }
+    #     },
+    #     asset_model_id: "ID"
     #   }
     # @return [Types::UpdateAssetModelCompositeModelResponse]
     def update_asset_model_composite_model(params = {}, options = {})
@@ -6562,7 +9007,7 @@ module Aws::IoTSiteWise
     # @option params [Types::ComputationModelConfiguration] :computation_model_configuration
     #   <p>The configuration for the computation model.</p>
     # @option params [Hash<String, Types::ComputationModelDataBindingValue>] :computation_model_data_binding
-    #   <p>The data binding for the computation model. Key is a variable name defined in configuration. 
+    #   <p>The data binding for the computation model. Key is a variable name defined in configuration.
     #     Value is a <code>ComputationModelDataBindingValue</code> referenced by the variable.</p>
     # @option params [String] :client_token
     #   <p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the
@@ -6622,7 +9067,13 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Updates an IoT SiteWise Monitor dashboard.</p>
+    # <important>
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
+    #          </important>
+    #          <p>Updates an IoT SiteWise Monitor dashboard.</p>
     # @param [Hash, Types::UpdateDashboardRequest] params
     # @option params [String] :dashboard_id
     #   <p>The ID of the dashboard to update.</p>
@@ -6669,10 +9120,16 @@ module Aws::IoTSiteWise
     # @param [Hash, Types::UpdateDatasetRequest] params
     # @option params [String] :dataset_id
     #   <p>The ID of the dataset.</p>
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace that contains the dataset.</p>
     # @option params [String] :dataset_name
     #   <p>The name of the dataset.</p>
     # @option params [String] :dataset_description
     #   <p>A description about the dataset, and its functionality.</p>
+    # @option params [Types::DatasetConfig] :dataset_config
+    #   <p>The updated configuration for the dataset.</p>
+    # @option params [Hash<String, String>] :metadata
+    #   <p>The updated metadata for the dataset.</p>
     # @option params [Types::DatasetSource] :dataset_source
     #   <p>The data source for the dataset.</p>
     # @option params [String] :client_token
@@ -6680,11 +9137,27 @@ module Aws::IoTSiteWise
     # @example Request syntax with placeholder values
     #   params = {
     #     dataset_id: "ID", # required
+    #     workspace_name: "WorkspaceName",
     #     dataset_name: "RestrictedName", # required
-    #     dataset_description: "RestrictedDescription",
+    #     dataset_description: "Description",
+    #     dataset_config: {
+    #       session: {
+    #         session_start_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         },
+    #         session_end_timestamp: { # required
+    #           time_in_seconds: 1, # required
+    #           offset_in_nanos: 1
+    #         }
+    #       }
+    #     },
+    #     metadata: {
+    #       "MetadataKey" => "MetadataValue"
+    #     },
     #     dataset_source: { # required
-    #       source_type: "KENDRA" # One of: ["KENDRA"], # required
-    #       source_format: "KNOWLEDGE_BASE" # One of: ["KNOWLEDGE_BASE"], # required
+    #       source_type: "KENDRA" # One of: ["KENDRA", "SITEWISE"], # required
+    #       source_format: "KNOWLEDGE_BASE" # One of: ["KNOWLEDGE_BASE", "TIMESERIES"], # required
     #       source_detail: {
     #         kendra: {
     #           knowledge_base_arn: "ARN", # required
@@ -6794,7 +9267,67 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Updates an IoT SiteWise Monitor portal.</p>
+    # <p>Updates an existing pipeline in the specified workspace. Only the fields
+    # provided in the request are updated; fields not included in the request are preserved
+    # unchanged. You can update the pipeline description, environment variables, and the
+    # list of compute nodes independently.</p>
+    # @param [Hash, Types::UpdatePipelineRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :pipeline_name
+    #   <p>The name of the pipeline to update.</p>
+    # @option params [String] :description
+    #   <p>A new description for the pipeline.</p>
+    # @option params [Hash<String, String>] :environment_variables
+    #   <p>Updated environment variables shared across all compute nodes.</p>
+    # @option params [Array<Types::ComputeNode>] :computations
+    #   <p>Updated list of compute nodes forming the pipeline DAG.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     pipeline_name: "ResourceName", # required
+    #     description: "Description",
+    #     environment_variables: {
+    #       "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #     },
+    #     computations: [
+    #       {
+    #         compute_node_name: "ResourceName", # required
+    #         task_name: "ResourceName", # required
+    #         environment_variables: {
+    #           "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #         },
+    #         depends_on: ["ResourceName"]
+    #       }
+    #     ]
+    #   }
+    #   options = {}
+    #   response = client.update_pipeline(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     version: "Version", # required
+    #     status: { # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #         message: "String"
+    #       },
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #     }
+    #   }
+    # @return [Types::UpdatePipelineResponse]
+    def update_pipeline(params = {}, options = {})
+      request = build_request(:update_pipeline, params)
+      request.send_request(options)
+    end
+
+    # <important>
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
+    #          </important>
+    #          <p>Updates an IoT SiteWise Monitor portal.</p>
     # @param [Hash, Types::UpdatePortalRequest] params
     # @option params [String] :portal_id
     #   <p>The ID of the portal to update.</p>
@@ -6876,7 +9409,13 @@ module Aws::IoTSiteWise
       request.send_request(options)
     end
 
-    # <p>Updates an IoT SiteWise Monitor project.</p>
+    # <important>
+    #             <p>The IoT SiteWise Monitor feature will no longer be open to new
+    #   customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date. Existing customers can
+    #   continue to use the service as normal. For more information, see
+    # <a href="https://docs.aws.amazon.com/iot-sitewise/latest/appguide/iotsitewise-monitor-availability-change.html">IoT SiteWise Monitor availability change</a>.</p>
+    #          </important>
+    #          <p>Updates an IoT SiteWise Monitor project.</p>
     # @param [Hash, Types::UpdateProjectRequest] params
     # @option params [String] :project_id
     #   <p>The ID of the project to update.</p>
@@ -6901,6 +9440,122 @@ module Aws::IoTSiteWise
     # @return [Types::UpdateProjectResponse]
     def update_project(params = {}, options = {})
       request = build_request(:update_project, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates an existing task in the specified workspace. Only the fields
+    # provided in the request are updated; fields not included in the request are preserved
+    # unchanged.</p>
+    # @param [Hash, Types::UpdateTaskRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace.</p>
+    # @option params [String] :task_name
+    #   <p>The name of the task to update.</p>
+    # @option params [String] :description
+    #   <p>A new description for the task.</p>
+    # @option params [Types::TaskConfiguration] :task_configuration
+    #   <p>The updated task execution configuration.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     task_name: "ResourceName", # required
+    #     description: "Description",
+    #     task_configuration: {
+    #       # One of:
+    #       container_task_configuration: {
+    #         ecr_uri: "EcrUri", # required
+    #         task_execution_role: "IamRoleArn", # required
+    #         processing_type: "GENERIC_COMPUTE_PROCESSING" # One of: ["GENERIC_COMPUTE_PROCESSING", "HARDWARE_ACCELERATED_PROCESSING"], # required
+    #         processing_unit: "UNITS_2" # One of: ["UNITS_2", "UNITS_4", "UNITS_8", "UNITS_12", "UNITS_16", "UNITS_24", "UNITS_32", "UNITS_36", "UNITS_48", "UNITS_60", "UNITS_64", "UNITS_72", "UNITS_84", "UNITS_96"], # required
+    #         ephemeral_storage_configuration: {
+    #           storage_class: "STANDARD_1" # One of: ["STANDARD_1", "STANDARD_2", "THROUGHPUT_1", "THROUGHPUT_2"], # required
+    #           storage_size_in_gi_b: 1, # required
+    #         },
+    #         command: ["String"],
+    #         timeout_seconds: 1,
+    #         environment_variables: {
+    #           "EnvironmentVariableName" => "EnvironmentVariableValue"
+    #         },
+    #         mounts: [
+    #           {
+    #             name: "ResourceName", # required
+    #             relative_path: "MountRelativePath", # required
+    #             source: { # required
+    #               # One of:
+    #               s3_access_point: {
+    #                 access_point_arn: "MountS3AccessPointArn", # required
+    #                 prefix: "MountS3KeyPrefix"
+    #               }
+    #             },
+    #             storage_type: "SHARED_STORAGE" # One of: ["SHARED_STORAGE"], # required
+    #           }
+    #         ]
+    #       }
+    #     }
+    #   }
+    #   options = {}
+    #   response = client.update_task(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     version: "Version", # required
+    #     status: { # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"],
+    #         message: "String"
+    #       },
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"]
+    #     }
+    #   }
+    # @return [Types::UpdateTaskResponse]
+    def update_task(params = {}, options = {})
+      request = build_request(:update_task, params)
+      request.send_request(options)
+    end
+
+    # <p>Updates a workspace. You can update only workspaces in the <code>ACTIVE</code> or
+    #       <code>FAILED</code> state. Fields that you omit from the request are left unchanged. To
+    #       recover a workspace in the <code>FAILED</code> state, call this operation and supply its
+    #       encryption configuration again.</p>
+    # @param [Hash, Types::UpdateWorkspaceRequest] params
+    # @option params [String] :workspace_name
+    #   <p>The name of the workspace to update.</p>
+    # @option params [String] :workspace_description
+    #   <p>A new description for the workspace.</p>
+    # @option params [Types::WorkspaceEncryptionConfiguration] :encryption_configuration
+    #   <p>The encryption configuration for the workspace. Omit this field to leave encryption
+    #         unchanged. After a customer managed key configuration becomes active, the key can't be
+    #         changed; supplying the same key is accepted.</p>
+    # @option params [String] :client_token
+    #   <p>A unique, case-sensitive identifier that you provide to ensure that the request is
+    #         idempotent. If you retry a request that completed successfully using the same client token,
+    #         the retry succeeds without performing any further actions.</p>
+    # @example Request syntax with placeholder values
+    #   params = {
+    #     workspace_name: "WorkspaceName", # required
+    #     workspace_description: "Description",
+    #     encryption_configuration: {
+    #       encryption_type: "SITEWISE_DEFAULT_ENCRYPTION" # One of: ["SITEWISE_DEFAULT_ENCRYPTION", "KMS_BASED_ENCRYPTION"], # required
+    #       kms_key_id: "KmsKeyId"
+    #     },
+    #     client_token: "ClientToken"
+    #   }
+    #   options = {}
+    #   response = client.update_workspace(params, options)
+    # @example Response structure with placeholder values
+    #   response.to_h #=>
+    #   {
+    #     workspace_status: { # required
+    #       state: "CREATING" # One of: ["CREATING", "ACTIVE", "UPDATING", "DELETING", "FAILED"], # required
+    #       error: {
+    #         code: "VALIDATION_ERROR" # One of: ["VALIDATION_ERROR", "INTERNAL_FAILURE"], # required
+    #         message: "Description", # required
+    #       }
+    #     }
+    #   }
+    # @return [Types::UpdateWorkspaceResponse]
+    def update_workspace(params = {}, options = {})
+      request = build_request(:update_workspace, params)
       request.send_request(options)
     end
 

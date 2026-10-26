@@ -37,11 +37,13 @@ module Aws::Mq
       def initialize: (
         ?error_attribute: String,
         ?message: String,
+        ?resource_share_errors: Array[Types::ResourceShareError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor error_attribute: String?
       attr_accessor message: String?
+      attr_accessor resource_share_errors: Array[Types::ResourceShareError]?
     end
 
     class BrokerEngineType
@@ -217,11 +219,13 @@ module Aws::Mq
       def initialize: (
         ?error_attribute: String,
         ?message: String,
+        ?resource_share_errors: Array[Types::ResourceShareError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor error_attribute: String?
       attr_accessor message: String?
+      attr_accessor resource_share_errors: Array[Types::ResourceShareError]?
     end
 
     class CreateBrokerRequest
@@ -243,6 +247,7 @@ module Aws::Mq
         ?maintenance_window_start_time: Types::WeeklyStartTime,
         ?publicly_accessible: bool,
         ?security_groups: Array[String],
+        ?storage_size: Integer,
         ?storage_type: String,
         ?subnet_ids: Array[String],
         ?tags: Hash[String, String],
@@ -267,6 +272,7 @@ module Aws::Mq
       attr_accessor maintenance_window_start_time: Types::WeeklyStartTime?
       attr_accessor publicly_accessible: bool?
       attr_accessor security_groups: Array[String]?
+      attr_accessor storage_size: Integer?
       attr_accessor storage_type: String?
       attr_accessor subnet_ids: Array[String]?
       attr_accessor tags: Hash[String, String]?
@@ -599,8 +605,10 @@ module Aws::Mq
         ?pending_host_instance_type: String,
         ?pending_ldap_server_metadata: Types::LdapServerMetadataOutput,
         ?pending_security_groups: Array[String],
+        ?pending_storage_size: Integer,
         ?publicly_accessible: bool,
         ?security_groups: Array[String],
+        ?storage_size: Integer,
         ?storage_type: String,
         ?subnet_ids: Array[String],
         ?tags: Hash[String, String],
@@ -635,8 +643,10 @@ module Aws::Mq
       attr_accessor pending_host_instance_type: String?
       attr_accessor pending_ldap_server_metadata: Types::LdapServerMetadataOutput?
       attr_accessor pending_security_groups: Array[String]?
+      attr_accessor pending_storage_size: Integer?
       attr_accessor publicly_accessible: bool?
       attr_accessor security_groups: Array[String]?
+      attr_accessor storage_size: Integer?
       attr_accessor storage_type: String?
       attr_accessor subnet_ids: Array[String]?
       attr_accessor tags: Hash[String, String]?
@@ -717,6 +727,34 @@ module Aws::Mq
       attr_accessor description: String?
     end
 
+    class DescribeSharedResourcesRequest
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?broker_id: String,
+        ?max_results: Integer,
+        ?next_token: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor broker_id: String?
+      attr_accessor max_results: Integer?
+      attr_accessor next_token: String?
+    end
+
+    class DescribeSharedResourcesResponse
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?next_token: String,
+        ?shared_resources: Array[Types::SharedResource],
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor next_token: String?
+      attr_accessor shared_resources: Array[Types::SharedResource]?
+    end
+
     class DescribeUserRequest
       include Smithy::Schema::Structure
 
@@ -786,11 +824,13 @@ module Aws::Mq
       def initialize: (
         ?error_attribute: String,
         ?message: String,
+        ?resource_share_errors: Array[Types::ResourceShareError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor error_attribute: String?
       attr_accessor message: String?
+      attr_accessor resource_share_errors: Array[Types::ResourceShareError]?
     end
 
     class InternalServerErrorException
@@ -799,11 +839,13 @@ module Aws::Mq
       def initialize: (
         ?error_attribute: String,
         ?message: String,
+        ?resource_share_errors: Array[Types::ResourceShareError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor error_attribute: String?
       attr_accessor message: String?
+      attr_accessor resource_share_errors: Array[Types::ResourceShareError]?
     end
 
     class LdapServerMetadataInput
@@ -1044,11 +1086,13 @@ module Aws::Mq
       def initialize: (
         ?error_attribute: String,
         ?message: String,
+        ?resource_share_errors: Array[Types::ResourceShareError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor error_attribute: String?
       attr_accessor message: String?
+      attr_accessor resource_share_errors: Array[Types::ResourceShareError]?
     end
 
     class PendingLogs
@@ -1113,6 +1157,21 @@ module Aws::Mq
 
     end
 
+    class ResourceShareError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?error_code: String,
+        ?resource_share_arn: String,
+        ?status: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor error_code: String?
+      attr_accessor resource_share_arn: String?
+      attr_accessor status: String?
+    end
+
     class SanitizationWarning
       include Smithy::Schema::Structure
 
@@ -1134,17 +1193,77 @@ module Aws::Mq
       INVALID_ATTRIBUTE_VALUE_REMOVED: String
     end
 
+    class SharedResource
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?dns_names: Array[String],
+        ?error: Types::SharedResourceError,
+        ?resource_arn: String,
+        ?resource_share_arns: Array[String],
+        ?status: String,
+        ?type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor dns_names: Array[String]?
+      attr_accessor error: Types::SharedResourceError?
+      attr_accessor resource_arn: String?
+      attr_accessor resource_share_arns: Array[String]?
+      attr_accessor status: String?
+      attr_accessor type: String?
+    end
+
+    class SharedResourceError
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
+    module SharedResourceErrorCode
+      QUOTA_EXCEEDED: String
+      SHARE_NOT_FOUND: String
+      INVITE_FAILED: String
+      SETUP_INCOMPLETE: String
+      INTERNAL_ERROR: String
+      AZ_MISMATCH: String
+      RESOURCE_CONFIGURATION_NOT_FOUND: String
+    end
+
+    module SharedResourceStatus
+      AVAILABLE: String
+      SETUP_IN_PROGRESS: String
+      DELETION_IN_PROGRESS: String
+      PENDING_CREATE: String
+      PENDING_DELETE: String
+      ERROR: String
+    end
+
+    module SharedResourceType
+      RESOURCE_SHARE: String
+      RESOURCE: String
+    end
+
     class UnauthorizedException
       include Smithy::Schema::Structure
 
       def initialize: (
         ?error_attribute: String,
         ?message: String,
+        ?resource_share_errors: Array[Types::ResourceShareError],
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
       attr_accessor error_attribute: String?
       attr_accessor message: String?
+      attr_accessor resource_share_errors: Array[Types::ResourceShareError]?
     end
 
     class UpdateBrokerRequest
@@ -1160,7 +1279,9 @@ module Aws::Mq
         ?ldap_server_metadata: Types::LdapServerMetadataInput,
         ?logs: Types::Logs,
         ?maintenance_window_start_time: Types::WeeklyStartTime,
+        ?resource_share_arns: Array[String],
         ?security_groups: Array[String],
+        ?storage_size: Integer,
         ?data_replication_mode: String,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
@@ -1174,7 +1295,9 @@ module Aws::Mq
       attr_accessor ldap_server_metadata: Types::LdapServerMetadataInput?
       attr_accessor logs: Types::Logs?
       attr_accessor maintenance_window_start_time: Types::WeeklyStartTime?
+      attr_accessor resource_share_arns: Array[String]?
       attr_accessor security_groups: Array[String]?
+      attr_accessor storage_size: Integer?
       attr_accessor data_replication_mode: String?
     end
 
@@ -1191,11 +1314,13 @@ module Aws::Mq
         ?ldap_server_metadata: Types::LdapServerMetadataOutput,
         ?logs: Types::Logs,
         ?maintenance_window_start_time: Types::WeeklyStartTime,
+        ?resource_share_arns: Array[String],
         ?security_groups: Array[String],
         ?data_replication_metadata: Types::DataReplicationMetadataOutput,
         ?data_replication_mode: String,
         ?pending_data_replication_metadata: Types::DataReplicationMetadataOutput,
         ?pending_data_replication_mode: String,
+        ?storage_size: Integer,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -1208,11 +1333,13 @@ module Aws::Mq
       attr_accessor ldap_server_metadata: Types::LdapServerMetadataOutput?
       attr_accessor logs: Types::Logs?
       attr_accessor maintenance_window_start_time: Types::WeeklyStartTime?
+      attr_accessor resource_share_arns: Array[String]?
       attr_accessor security_groups: Array[String]?
       attr_accessor data_replication_metadata: Types::DataReplicationMetadataOutput?
       attr_accessor data_replication_mode: String?
       attr_accessor pending_data_replication_metadata: Types::DataReplicationMetadataOutput?
       attr_accessor pending_data_replication_mode: String?
+      attr_accessor storage_size: Integer?
     end
 
     class UpdateConfigurationRequest

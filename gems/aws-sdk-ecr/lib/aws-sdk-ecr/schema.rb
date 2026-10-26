@@ -8,8 +8,13 @@ module Aws::ECR
 
     AccountSettingName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#AccountSettingName", name: "AccountSettingName", traits: {"smithy.api#length" => {"min" => 1, "max" => 64}})
     AccountSettingValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#AccountSettingValue", name: "AccountSettingValue")
+    Annotations = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.ecr#Annotations", name: "Annotations")
     Arch = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Arch", name: "Arch")
     Arn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Arn", name: "Arn")
+    ArtifactStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#ArtifactStatus", name: "ArtifactStatus")
+    ArtifactStatusFilter = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#ArtifactStatusFilter", name: "ArtifactStatusFilter")
+    ArtifactType = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#ArtifactType", name: "ArtifactType", traits: {"smithy.api#length" => {"min" => 1, "max" => 255}})
+    ArtifactTypeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ArtifactTypeList", name: "ArtifactTypeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 5}})
     Attribute = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#Attribute", name: "Attribute")
     AttributeKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#AttributeKey", name: "AttributeKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 128}})
     AttributeList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#AttributeList", name: "AttributeList", traits: {"smithy.api#length" => {"min" => 0, "max" => 50}})
@@ -30,6 +35,7 @@ module Aws::ECR
     BatchGetRepositoryScanningConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#BatchGetRepositoryScanningConfigurationResponse", name: "BatchGetRepositoryScanningConfigurationResponse")
     BatchedOperationLayerDigest = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#BatchedOperationLayerDigest", name: "BatchedOperationLayerDigest", traits: {"smithy.api#length" => {"min" => 0, "max" => 1000}})
     BatchedOperationLayerDigestList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#BatchedOperationLayerDigestList", name: "BatchedOperationLayerDigestList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    BlockedByOrganizationPolicyException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#BlockedByOrganizationPolicyException", name: "BlockedByOrganizationPolicyException", traits: {"smithy.api#error" => "client"})
     CompleteLayerUploadRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#CompleteLayerUploadRequest", name: "CompleteLayerUploadRequest")
     CompleteLayerUploadResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#CompleteLayerUploadResponse", name: "CompleteLayerUploadResponse")
     CreatePullThroughCacheRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#CreatePullThroughCacheRuleRequest", name: "CreatePullThroughCacheRuleRequest")
@@ -39,7 +45,7 @@ module Aws::ECR
     CreateRepositoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#CreateRepositoryRequest", name: "CreateRepositoryRequest")
     CreateRepositoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#CreateRepositoryResponse", name: "CreateRepositoryResponse")
     CreationTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.ecr#CreationTimestamp", name: "CreationTimestamp")
-    CredentialArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#CredentialArn", name: "CredentialArn", traits: {"smithy.api#length" => {"min" => 50, "max" => 612}, "smithy.api#pattern" => "^arn:aws:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"})
+    CredentialArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#CredentialArn", name: "CredentialArn", traits: {"smithy.api#length" => {"min" => 50, "max" => 612}, "smithy.api#pattern" => "^arn:aws(-\\w+)*:secretsmanager:[a-zA-Z0-9-:]+:secret:ecr\\-pullthroughcache\\/[a-zA-Z0-9\\/_+=.@-]+$"})
     CustomRoleArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#CustomRoleArn", name: "CustomRoleArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}})
     CvssScore = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#CvssScore", name: "CvssScore")
     CvssScoreAdjustment = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#CvssScoreAdjustment", name: "CvssScoreAdjustment")
@@ -59,10 +65,16 @@ module Aws::ECR
     DeleteRepositoryPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DeleteRepositoryPolicyResponse", name: "DeleteRepositoryPolicyResponse")
     DeleteRepositoryRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DeleteRepositoryRequest", name: "DeleteRepositoryRequest")
     DeleteRepositoryResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DeleteRepositoryResponse", name: "DeleteRepositoryResponse")
+    DeleteSigningConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DeleteSigningConfigurationRequest", name: "DeleteSigningConfigurationRequest")
+    DeleteSigningConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DeleteSigningConfigurationResponse", name: "DeleteSigningConfigurationResponse")
+    DeregisterPullTimeUpdateExclusionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusionRequest", name: "DeregisterPullTimeUpdateExclusionRequest")
+    DeregisterPullTimeUpdateExclusionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusionResponse", name: "DeregisterPullTimeUpdateExclusionResponse")
     DescribeImageReplicationStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DescribeImageReplicationStatusRequest", name: "DescribeImageReplicationStatusRequest")
     DescribeImageReplicationStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DescribeImageReplicationStatusResponse", name: "DescribeImageReplicationStatusResponse")
     DescribeImageScanFindingsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DescribeImageScanFindingsRequest", name: "DescribeImageScanFindingsRequest")
     DescribeImageScanFindingsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DescribeImageScanFindingsResponse", name: "DescribeImageScanFindingsResponse")
+    DescribeImageSigningStatusRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DescribeImageSigningStatusRequest", name: "DescribeImageSigningStatusRequest")
+    DescribeImageSigningStatusResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DescribeImageSigningStatusResponse", name: "DescribeImageSigningStatusResponse")
     DescribeImagesFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DescribeImagesFilter", name: "DescribeImagesFilter")
     DescribeImagesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DescribeImagesRequest", name: "DescribeImagesRequest")
     DescribeImagesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#DescribeImagesResponse", name: "DescribeImagesResponse")
@@ -83,8 +95,11 @@ module Aws::ECR
     Epoch = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecr#Epoch", name: "Epoch")
     EvaluationTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.ecr#EvaluationTimestamp", name: "EvaluationTimestamp")
     ExceptionMessage = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#ExceptionMessage", name: "ExceptionMessage")
+    ExclusionAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ExclusionAlreadyExistsException", name: "ExclusionAlreadyExistsException", traits: {"smithy.api#error" => "client"})
+    ExclusionNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ExclusionNotFoundException", name: "ExclusionNotFoundException", traits: {"smithy.api#error" => "client"})
     ExpirationTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.ecr#ExpirationTimestamp", name: "ExpirationTimestamp")
     ExploitAvailable = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#ExploitAvailable", name: "ExploitAvailable")
+    FiftyMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecr#FiftyMaxResults", name: "FiftyMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 50}})
     FilePath = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#FilePath", name: "FilePath")
     FindingArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#FindingArn", name: "FindingArn")
     FindingDescription = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#FindingDescription", name: "FindingDescription")
@@ -111,9 +126,12 @@ module Aws::ECR
     GetRegistryScanningConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#GetRegistryScanningConfigurationResponse", name: "GetRegistryScanningConfigurationResponse")
     GetRepositoryPolicyRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#GetRepositoryPolicyRequest", name: "GetRepositoryPolicyRequest")
     GetRepositoryPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#GetRepositoryPolicyResponse", name: "GetRepositoryPolicyResponse")
+    GetSigningConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#GetSigningConfigurationRequest", name: "GetSigningConfigurationRequest")
+    GetSigningConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#GetSigningConfigurationResponse", name: "GetSigningConfigurationResponse")
     Image = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#Image", name: "Image")
     ImageActionType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#ImageActionType", name: "ImageActionType")
     ImageAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageAlreadyExistsException", name: "ImageAlreadyExistsException", traits: {"smithy.api#error" => "client"})
+    ImageArchivedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageArchivedException", name: "ImageArchivedException", traits: {"smithy.api#error" => "client"})
     ImageCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecr#ImageCount", name: "ImageCount", traits: {"smithy.api#range" => {"min" => 0}})
     ImageDetail = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageDetail", name: "ImageDetail")
     ImageDetailList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ImageDetailList", name: "ImageDetailList")
@@ -128,6 +146,8 @@ module Aws::ECR
     ImageList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ImageList", name: "ImageList")
     ImageManifest = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#ImageManifest", name: "ImageManifest", traits: {"smithy.api#length" => {"min" => 1, "max" => 4194304}})
     ImageNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageNotFoundException", name: "ImageNotFoundException", traits: {"smithy.api#error" => "client"})
+    ImageReferrer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageReferrer", name: "ImageReferrer")
+    ImageReferrerList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ImageReferrerList", name: "ImageReferrerList")
     ImageReplicationStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageReplicationStatus", name: "ImageReplicationStatus")
     ImageReplicationStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ImageReplicationStatusList", name: "ImageReplicationStatusList")
     ImageScanFinding = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageScanFinding", name: "ImageScanFinding")
@@ -136,7 +156,12 @@ module Aws::ECR
     ImageScanFindingsSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageScanFindingsSummary", name: "ImageScanFindingsSummary")
     ImageScanStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageScanStatus", name: "ImageScanStatus")
     ImageScanningConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageScanningConfiguration", name: "ImageScanningConfiguration")
+    ImageSigningStatus = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageSigningStatus", name: "ImageSigningStatus")
+    ImageSigningStatusList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ImageSigningStatusList", name: "ImageSigningStatusList")
     ImageSizeInBytes = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecr#ImageSizeInBytes", name: "ImageSizeInBytes")
+    ImageStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#ImageStatus", name: "ImageStatus")
+    ImageStatusFilter = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#ImageStatusFilter", name: "ImageStatusFilter")
+    ImageStorageClassUpdateNotSupportedException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageStorageClassUpdateNotSupportedException", name: "ImageStorageClassUpdateNotSupportedException", traits: {"smithy.api#error" => "client"})
     ImageTag = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#ImageTag", name: "ImageTag", traits: {"smithy.api#length" => {"min" => 1, "max" => 300}})
     ImageTagAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ImageTagAlreadyExistsException", name: "ImageTagAlreadyExistsException", traits: {"smithy.api#error" => "client"})
     ImageTagList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ImageTagList", name: "ImageTagList")
@@ -157,7 +182,9 @@ module Aws::ECR
     KmsError = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#KmsError", name: "KmsError")
     KmsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#KmsException", name: "KmsException", traits: {"smithy.api#error" => "client"})
     KmsKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#KmsKey", name: "KmsKey", traits: {"smithy.api#length" => {"min" => 1, "max" => 2048}})
-    KmsKeyForRepositoryCreationTemplate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#KmsKeyForRepositoryCreationTemplate", name: "KmsKeyForRepositoryCreationTemplate", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^$|arn:aws:kms:[a-z0-9-]+:[0-9]{12}:key\\/[a-z0-9-]+$"})
+    KmsKeyForRepositoryCreationTemplate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#KmsKeyForRepositoryCreationTemplate", name: "KmsKeyForRepositoryCreationTemplate", traits: {"smithy.api#length" => {"min" => 0, "max" => 2048}, "smithy.api#pattern" => "^$|arn:aws[a-z0-9-]*:kms:[a-z0-9-]+:[0-9]{12}:key\\/[a-z0-9-]+$"})
+    LastActivatedAtTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.ecr#LastActivatedAtTimestamp", name: "LastActivatedAtTimestamp")
+    LastArchivedAtTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.ecr#LastArchivedAtTimestamp", name: "LastArchivedAtTimestamp")
     Layer = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#Layer", name: "Layer")
     LayerAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#LayerAlreadyExistsException", name: "LayerAlreadyExistsException", traits: {"smithy.api#error" => "client"})
     LayerAvailability = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#LayerAvailability", name: "LayerAvailability")
@@ -183,13 +210,20 @@ module Aws::ECR
     LifecyclePolicyPreviewSummary = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#LifecyclePolicyPreviewSummary", name: "LifecyclePolicyPreviewSummary")
     LifecyclePolicyRuleAction = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#LifecyclePolicyRuleAction", name: "LifecyclePolicyRuleAction")
     LifecyclePolicyRulePriority = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecr#LifecyclePolicyRulePriority", name: "LifecyclePolicyRulePriority", traits: {"smithy.api#range" => {"min" => 1}})
+    LifecyclePolicyStorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#LifecyclePolicyStorageClass", name: "LifecyclePolicyStorageClass")
+    LifecyclePolicyTargetStorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#LifecyclePolicyTargetStorageClass", name: "LifecyclePolicyTargetStorageClass")
     LifecyclePolicyText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#LifecyclePolicyText", name: "LifecyclePolicyText", traits: {"smithy.api#length" => {"min" => 100, "max" => 30720}})
     LifecyclePolicyTextForRepositoryCreationTemplate = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#LifecyclePolicyTextForRepositoryCreationTemplate", name: "LifecyclePolicyTextForRepositoryCreationTemplate", traits: {"smithy.api#length" => {"min" => 0, "max" => 30720}})
     LifecyclePreviewMaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecr#LifecyclePreviewMaxResults", name: "LifecyclePreviewMaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 100}})
     LimitExceededException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#LimitExceededException", name: "LimitExceededException", traits: {"smithy.api#error" => "client"})
+    ListImageReferrersFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListImageReferrersFilter", name: "ListImageReferrersFilter")
+    ListImageReferrersRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListImageReferrersRequest", name: "ListImageReferrersRequest")
+    ListImageReferrersResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListImageReferrersResponse", name: "ListImageReferrersResponse")
     ListImagesFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListImagesFilter", name: "ListImagesFilter")
     ListImagesRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListImagesRequest", name: "ListImagesRequest")
     ListImagesResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListImagesResponse", name: "ListImagesResponse")
+    ListPullTimeUpdateExclusionsRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListPullTimeUpdateExclusionsRequest", name: "ListPullTimeUpdateExclusionsRequest")
+    ListPullTimeUpdateExclusionsResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListPullTimeUpdateExclusionsResponse", name: "ListPullTimeUpdateExclusionsResponse")
     ListTagsForResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListTagsForResourceRequest", name: "ListTagsForResourceRequest")
     ListTagsForResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ListTagsForResourceResponse", name: "ListTagsForResourceResponse")
     MaxResults = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecr#MaxResults", name: "MaxResults", traits: {"smithy.api#range" => {"min" => 1, "max" => 1000}})
@@ -202,15 +236,17 @@ module Aws::ECR
     PackageVulnerabilityDetails = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PackageVulnerabilityDetails", name: "PackageVulnerabilityDetails")
     PartSize = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecr#PartSize", name: "PartSize", traits: {"smithy.api#range" => {"min" => 0}})
     Platform = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Platform", name: "Platform")
-    Prefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Prefix", name: "Prefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"})
+    Prefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Prefix", name: "Prefix", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"})
     PrefixList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#PrefixList", name: "PrefixList")
+    PrincipalArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#PrincipalArn", name: "PrincipalArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#pattern" => "^arn:aws(-[a-z]+)*:iam::[0-9]{12}:(role|user)/[\\w+=,.@-]+(/[\\w+=,.@-]+)*$"})
     ProxyEndpoint = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#ProxyEndpoint", name: "ProxyEndpoint")
     PullThroughCacheRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PullThroughCacheRule", name: "PullThroughCacheRule")
     PullThroughCacheRuleAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PullThroughCacheRuleAlreadyExistsException", name: "PullThroughCacheRuleAlreadyExistsException", traits: {"smithy.api#error" => "client"})
     PullThroughCacheRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#PullThroughCacheRuleList", name: "PullThroughCacheRuleList")
     PullThroughCacheRuleNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PullThroughCacheRuleNotFoundException", name: "PullThroughCacheRuleNotFoundException", traits: {"smithy.api#error" => "client"})
-    PullThroughCacheRuleRepositoryPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix", name: "PullThroughCacheRuleRepositoryPrefix", traits: {"smithy.api#length" => {"min" => 2, "max" => 30}, "smithy.api#pattern" => "^((?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*/?|ROOT)$"})
+    PullThroughCacheRuleRepositoryPrefix = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefix", name: "PullThroughCacheRuleRepositoryPrefix", traits: {"smithy.api#length" => {"min" => 2, "max" => 30}, "smithy.api#pattern" => "^([a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*\\/?|ROOT)$"})
     PullThroughCacheRuleRepositoryPrefixList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#PullThroughCacheRuleRepositoryPrefixList", name: "PullThroughCacheRuleRepositoryPrefixList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    PullTimeUpdateExclusionList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#PullTimeUpdateExclusionList", name: "PullTimeUpdateExclusionList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     PushTimestamp = ::Smithy::Schema::Shapes::TimestampShape.new(id: "com.amazonaws.ecr#PushTimestamp", name: "PushTimestamp")
     PutAccountSettingRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PutAccountSettingRequest", name: "PutAccountSettingRequest")
     PutAccountSettingResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PutAccountSettingResponse", name: "PutAccountSettingResponse")
@@ -228,6 +264,8 @@ module Aws::ECR
     PutRegistryScanningConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PutRegistryScanningConfigurationResponse", name: "PutRegistryScanningConfigurationResponse")
     PutReplicationConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PutReplicationConfigurationRequest", name: "PutReplicationConfigurationRequest")
     PutReplicationConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PutReplicationConfigurationResponse", name: "PutReplicationConfigurationResponse")
+    PutSigningConfigurationRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PutSigningConfigurationRequest", name: "PutSigningConfigurationRequest")
+    PutSigningConfigurationResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#PutSigningConfigurationResponse", name: "PutSigningConfigurationResponse")
     RCTAppliedFor = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#RCTAppliedFor", name: "RCTAppliedFor")
     RCTAppliedForList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#RCTAppliedForList", name: "RCTAppliedForList")
     Reason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Reason", name: "Reason")
@@ -237,6 +275,8 @@ module Aws::ECR
     ReferenceUrlsList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ReferenceUrlsList", name: "ReferenceUrlsList")
     ReferencedImagesNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ReferencedImagesNotFoundException", name: "ReferencedImagesNotFoundException", traits: {"smithy.api#error" => "client"})
     Region = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Region", name: "Region", traits: {"smithy.api#length" => {"min" => 2, "max" => 25}, "smithy.api#pattern" => "^[0-9a-z-]{2,25}$"})
+    RegisterPullTimeUpdateExclusionRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#RegisterPullTimeUpdateExclusionRequest", name: "RegisterPullTimeUpdateExclusionRequest")
+    RegisterPullTimeUpdateExclusionResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#RegisterPullTimeUpdateExclusionResponse", name: "RegisterPullTimeUpdateExclusionResponse")
     RegistryId = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#RegistryId", name: "RegistryId", traits: {"smithy.api#pattern" => "^[0-9]{12}$"})
     RegistryPolicyNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#RegistryPolicyNotFoundException", name: "RegistryPolicyNotFoundException", traits: {"smithy.api#error" => "client"})
     RegistryPolicyText = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#RegistryPolicyText", name: "RegistryPolicyText", traits: {"smithy.api#length" => {"min" => 0, "max" => 10240}})
@@ -252,7 +292,7 @@ module Aws::ECR
     ReplicationDestinationList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ReplicationDestinationList", name: "ReplicationDestinationList", traits: {"smithy.api#length" => {"min" => 0, "max" => 100}})
     ReplicationError = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#ReplicationError", name: "ReplicationError")
     ReplicationRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#ReplicationRule", name: "ReplicationRule")
-    ReplicationRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ReplicationRuleList", name: "ReplicationRuleList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    ReplicationRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#ReplicationRuleList", name: "ReplicationRuleList", traits: {"smithy.api#length" => {"min" => 0, "max" => 25}})
     ReplicationStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#ReplicationStatus", name: "ReplicationStatus")
     Repository = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#Repository", name: "Repository")
     RepositoryAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#RepositoryAlreadyExistsException", name: "RepositoryAlreadyExistsException", traits: {"smithy.api#error" => "client"})
@@ -263,7 +303,7 @@ module Aws::ECR
     RepositoryFilterType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#RepositoryFilterType", name: "RepositoryFilterType")
     RepositoryFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#RepositoryFilterValue", name: "RepositoryFilterValue", traits: {"smithy.api#length" => {"min" => 2, "max" => 256}, "smithy.api#pattern" => "^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$"})
     RepositoryList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#RepositoryList", name: "RepositoryList")
-    RepositoryName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#RepositoryName", name: "RepositoryName", traits: {"smithy.api#length" => {"min" => 2, "max" => 256}, "smithy.api#pattern" => "^(?:[a-z0-9]+(?:[._-][a-z0-9]+)*/)*[a-z0-9]+(?:[._-][a-z0-9]+)*$"})
+    RepositoryName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#RepositoryName", name: "RepositoryName", traits: {"smithy.api#length" => {"min" => 2, "max" => 256}, "smithy.api#pattern" => "^[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*(\\/[a-z0-9]+((\\.|_|__|-+)[a-z0-9]+)*)*$"})
     RepositoryNameList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#RepositoryNameList", name: "RepositoryNameList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
     RepositoryNotEmptyException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#RepositoryNotEmptyException", name: "RepositoryNotEmptyException", traits: {"smithy.api#error" => "client"})
     RepositoryNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#RepositoryNotFoundException", name: "RepositoryNotFoundException", traits: {"smithy.api#error" => "client"})
@@ -301,6 +341,18 @@ module Aws::ECR
     SetRepositoryPolicyResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#SetRepositoryPolicyResponse", name: "SetRepositoryPolicyResponse")
     Severity = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Severity", name: "Severity")
     SeverityCount = ::Smithy::Schema::Shapes::IntegerShape.new(id: "com.amazonaws.ecr#SeverityCount", name: "SeverityCount", traits: {"smithy.api#range" => {"min" => 0}})
+    SigningConfiguration = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#SigningConfiguration", name: "SigningConfiguration")
+    SigningConfigurationNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#SigningConfigurationNotFoundException", name: "SigningConfigurationNotFoundException", traits: {"smithy.api#error" => "client"})
+    SigningProfileArn = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#SigningProfileArn", name: "SigningProfileArn", traits: {"smithy.api#length" => {"min" => 0, "max" => 200}, "smithy.api#pattern" => "^arn:aws(-[a-z]+)*:signer:[a-z0-9-]+:[0-9]{12}:\\/signing-profiles\\/[a-zA-Z0-9_]{2,}$"})
+    SigningRepositoryFilter = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#SigningRepositoryFilter", name: "SigningRepositoryFilter")
+    SigningRepositoryFilterList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#SigningRepositoryFilterList", name: "SigningRepositoryFilterList", traits: {"smithy.api#length" => {"min" => 1, "max" => 100}})
+    SigningRepositoryFilterType = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#SigningRepositoryFilterType", name: "SigningRepositoryFilterType")
+    SigningRepositoryFilterValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#SigningRepositoryFilterValue", name: "SigningRepositoryFilterValue", traits: {"smithy.api#length" => {"min" => 1, "max" => 256}, "smithy.api#pattern" => "^(?:[a-z0-9*]+(?:[._-][a-z0-9*]+)*/)*[a-z0-9*]+(?:[._-][a-z0-9*]+)*$"})
+    SigningRule = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#SigningRule", name: "SigningRule")
+    SigningRuleList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#SigningRuleList", name: "SigningRuleList", traits: {"smithy.api#length" => {"min" => 0, "max" => 10}})
+    SigningStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#SigningStatus", name: "SigningStatus")
+    SigningStatusFailureCode = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#SigningStatusFailureCode", name: "SigningStatusFailureCode")
+    SigningStatusFailureReason = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#SigningStatusFailureReason", name: "SigningStatusFailureReason")
     Source = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Source", name: "Source")
     SourceLayerHash = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#SourceLayerHash", name: "SourceLayerHash")
     StartImageScanRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#StartImageScanRequest", name: "StartImageScanRequest")
@@ -308,6 +360,8 @@ module Aws::ECR
     StartLifecyclePolicyPreviewRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#StartLifecyclePolicyPreviewRequest", name: "StartLifecyclePolicyPreviewRequest")
     StartLifecyclePolicyPreviewResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#StartLifecyclePolicyPreviewResponse", name: "StartLifecyclePolicyPreviewResponse")
     Status = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Status", name: "Status")
+    String = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#String", name: "String")
+    SubjectIdentifier = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#SubjectIdentifier", name: "SubjectIdentifier")
     Tag = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#Tag", name: "Tag")
     TagKey = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#TagKey", name: "TagKey")
     TagKeyList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#TagKeyList", name: "TagKeyList")
@@ -317,19 +371,25 @@ module Aws::ECR
     TagStatus = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#TagStatus", name: "TagStatus")
     TagValue = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#TagValue", name: "TagValue")
     Tags = ::Smithy::Schema::Shapes::MapShape.new(id: "com.amazonaws.ecr#Tags", name: "Tags")
+    TargetStorageClass = ::Smithy::Schema::Shapes::EnumShape.new(id: "com.amazonaws.ecr#TargetStorageClass", name: "TargetStorageClass")
     TemplateAlreadyExistsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#TemplateAlreadyExistsException", name: "TemplateAlreadyExistsException", traits: {"smithy.api#error" => "client"})
     TemplateNotFoundException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#TemplateNotFoundException", name: "TemplateNotFoundException", traits: {"smithy.api#error" => "client"})
     Title = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Title", name: "Title")
     TooManyTagsException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#TooManyTagsException", name: "TooManyTagsException", traits: {"smithy.api#error" => "client"})
+    TransitioningImageTotalCount = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#TransitioningImageTotalCount", name: "TransitioningImageTotalCount")
+    TransitioningImageTotalCounts = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#TransitioningImageTotalCounts", name: "TransitioningImageTotalCounts")
     Type = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#Type", name: "Type")
     UnableToAccessSecretException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UnableToAccessSecretException", name: "UnableToAccessSecretException", traits: {"smithy.api#error" => "client"})
     UnableToDecryptSecretValueException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UnableToDecryptSecretValueException", name: "UnableToDecryptSecretValueException", traits: {"smithy.api#error" => "client"})
     UnableToGetUpstreamImageException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UnableToGetUpstreamImageException", name: "UnableToGetUpstreamImageException", traits: {"smithy.api#error" => "client"})
     UnableToGetUpstreamLayerException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UnableToGetUpstreamLayerException", name: "UnableToGetUpstreamLayerException", traits: {"smithy.api#error" => "client"})
+    UnableToListUpstreamImageReferrersException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UnableToListUpstreamImageReferrersException", name: "UnableToListUpstreamImageReferrersException", traits: {"smithy.api#error" => "client"})
     UnsupportedImageTypeException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UnsupportedImageTypeException", name: "UnsupportedImageTypeException", traits: {"smithy.api#error" => "client"})
     UnsupportedUpstreamRegistryException = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UnsupportedUpstreamRegistryException", name: "UnsupportedUpstreamRegistryException", traits: {"smithy.api#error" => "client"})
     UntagResourceRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UntagResourceRequest", name: "UntagResourceRequest")
     UntagResourceResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UntagResourceResponse", name: "UntagResourceResponse")
+    UpdateImageStorageClassRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UpdateImageStorageClassRequest", name: "UpdateImageStorageClassRequest")
+    UpdateImageStorageClassResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UpdateImageStorageClassResponse", name: "UpdateImageStorageClassResponse")
     UpdatePullThroughCacheRuleRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UpdatePullThroughCacheRuleRequest", name: "UpdatePullThroughCacheRuleRequest")
     UpdatePullThroughCacheRuleResponse = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UpdatePullThroughCacheRuleResponse", name: "UpdatePullThroughCacheRuleResponse")
     UpdateRepositoryCreationTemplateRequest = ::Smithy::Schema::Shapes::StructureShape.new(id: "com.amazonaws.ecr#UpdateRepositoryCreationTemplateRequest", name: "UpdateRepositoryCreationTemplateRequest")
@@ -351,6 +411,16 @@ module Aws::ECR
     VulnerablePackageName = ::Smithy::Schema::Shapes::StringShape.new(id: "com.amazonaws.ecr#VulnerablePackageName", name: "VulnerablePackageName")
     VulnerablePackagesList = ::Smithy::Schema::Shapes::ListShape.new(id: "com.amazonaws.ecr#VulnerablePackagesList", name: "VulnerablePackagesList")
 
+    Annotations.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "key"))
+    Annotations.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: String, name: "value"))
+    ArtifactStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ArtifactStatus.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
+    ArtifactStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
+    ArtifactStatusFilter.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ArtifactStatusFilter.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
+    ArtifactStatusFilter.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
+    ArtifactStatusFilter.add_member(:any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY", traits: {"smithy.api#enumValue" => "ANY"}))
+    ArtifactTypeList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactType, name: "member"))
     Attribute.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeKey, name: "key", traits: {"smithy.api#required" => {}}))
     Attribute.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AttributeValue, name: "value"))
     Attribute.type = Types::Attribute
@@ -399,6 +469,8 @@ module Aws::ECR
     BatchGetRepositoryScanningConfigurationResponse.add_member(:failures, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryScanningConfigurationFailureList, name: "failures"))
     BatchGetRepositoryScanningConfigurationResponse.type = Types::BatchGetRepositoryScanningConfigurationResponse
     BatchedOperationLayerDigestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest, name: "member"))
+    BlockedByOrganizationPolicyException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    BlockedByOrganizationPolicyException.type = Types::BlockedByOrganizationPolicyException
     CompleteLayerUploadRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     CompleteLayerUploadRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     CompleteLayerUploadRequest.add_member(:upload_id, ::Smithy::Schema::Shapes::MemberShape.new(target: UploadId, name: "uploadId", traits: {"smithy.api#required" => {}}))
@@ -507,6 +579,14 @@ module Aws::ECR
     DeleteRepositoryRequest.type = Types::DeleteRepositoryRequest
     DeleteRepositoryResponse.add_member(:repository, ::Smithy::Schema::Shapes::MemberShape.new(target: Repository, name: "repository"))
     DeleteRepositoryResponse.type = Types::DeleteRepositoryResponse
+    DeleteSigningConfigurationRequest.type = Types::DeleteSigningConfigurationRequest
+    DeleteSigningConfigurationResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
+    DeleteSigningConfigurationResponse.add_member(:signing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningConfiguration, name: "signingConfiguration"))
+    DeleteSigningConfigurationResponse.type = Types::DeleteSigningConfigurationResponse
+    DeregisterPullTimeUpdateExclusionRequest.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "principalArn", traits: {"smithy.api#required" => {}}))
+    DeregisterPullTimeUpdateExclusionRequest.type = Types::DeregisterPullTimeUpdateExclusionRequest
+    DeregisterPullTimeUpdateExclusionResponse.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "principalArn"))
+    DeregisterPullTimeUpdateExclusionResponse.type = Types::DeregisterPullTimeUpdateExclusionResponse
     DescribeImageReplicationStatusRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     DescribeImageReplicationStatusRequest.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "imageId", traits: {"smithy.api#required" => {}}))
     DescribeImageReplicationStatusRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
@@ -528,7 +608,17 @@ module Aws::ECR
     DescribeImageScanFindingsResponse.add_member(:image_scan_findings, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageScanFindings, name: "imageScanFindings"))
     DescribeImageScanFindingsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     DescribeImageScanFindingsResponse.type = Types::DescribeImageScanFindingsResponse
+    DescribeImageSigningStatusRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    DescribeImageSigningStatusRequest.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "imageId", traits: {"smithy.api#required" => {}}))
+    DescribeImageSigningStatusRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
+    DescribeImageSigningStatusRequest.type = Types::DescribeImageSigningStatusRequest
+    DescribeImageSigningStatusResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
+    DescribeImageSigningStatusResponse.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "imageId"))
+    DescribeImageSigningStatusResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
+    DescribeImageSigningStatusResponse.add_member(:signing_statuses, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSigningStatusList, name: "signingStatuses"))
+    DescribeImageSigningStatusResponse.type = Types::DescribeImageSigningStatusResponse
     DescribeImagesFilter.add_member(:tag_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TagStatus, name: "tagStatus"))
+    DescribeImagesFilter.add_member(:image_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageStatusFilter, name: "imageStatus"))
     DescribeImagesFilter.type = Types::DescribeImagesFilter
     DescribeImagesRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     DescribeImagesRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
@@ -598,6 +688,10 @@ module Aws::ECR
     EnhancedImageScanFinding.add_member(:exploit_available, ::Smithy::Schema::Shapes::MemberShape.new(target: ExploitAvailable, name: "exploitAvailable"))
     EnhancedImageScanFinding.type = Types::EnhancedImageScanFinding
     EnhancedImageScanFindingList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: EnhancedImageScanFinding, name: "member"))
+    ExclusionAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    ExclusionAlreadyExistsException.type = Types::ExclusionAlreadyExistsException
+    ExclusionNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    ExclusionNotFoundException.type = Types::ExclusionNotFoundException
     FindingSeverity.add_member(:informational, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "INFORMATIONAL", traits: {"smithy.api#enumValue" => "INFORMATIONAL"}))
     FindingSeverity.add_member(:low, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LOW", traits: {"smithy.api#enumValue" => "LOW"}))
     FindingSeverity.add_member(:medium, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "MEDIUM", traits: {"smithy.api#enumValue" => "MEDIUM"}))
@@ -661,6 +755,10 @@ module Aws::ECR
     GetRepositoryPolicyResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
     GetRepositoryPolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryPolicyText, name: "policyText"))
     GetRepositoryPolicyResponse.type = Types::GetRepositoryPolicyResponse
+    GetSigningConfigurationRequest.type = Types::GetSigningConfigurationRequest
+    GetSigningConfigurationResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
+    GetSigningConfigurationResponse.add_member(:signing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningConfiguration, name: "signingConfiguration"))
+    GetSigningConfigurationResponse.type = Types::GetSigningConfigurationResponse
     Image.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     Image.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
     Image.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "imageId"))
@@ -668,8 +766,11 @@ module Aws::ECR
     Image.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "imageManifestMediaType"))
     Image.type = Types::Image
     ImageActionType.add_member(:expire, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRE", traits: {"smithy.api#enumValue" => "EXPIRE"}))
+    ImageActionType.add_member(:transition, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "TRANSITION", traits: {"smithy.api#enumValue" => "TRANSITION"}))
     ImageAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ImageAlreadyExistsException.type = Types::ImageAlreadyExistsException
+    ImageArchivedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    ImageArchivedException.type = Types::ImageArchivedException
     ImageDetail.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     ImageDetail.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
     ImageDetail.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "imageDigest"))
@@ -681,6 +782,10 @@ module Aws::ECR
     ImageDetail.add_member(:image_manifest_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "imageManifestMediaType"))
     ImageDetail.add_member(:artifact_media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "artifactMediaType"))
     ImageDetail.add_member(:last_recorded_pull_time, ::Smithy::Schema::Shapes::MemberShape.new(target: RecordedPullTimestamp, name: "lastRecordedPullTime"))
+    ImageDetail.add_member(:subject_manifest_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "subjectManifestDigest"))
+    ImageDetail.add_member(:image_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageStatus, name: "imageStatus"))
+    ImageDetail.add_member(:last_archived_at, ::Smithy::Schema::Shapes::MemberShape.new(target: LastArchivedAtTimestamp, name: "lastArchivedAt"))
+    ImageDetail.add_member(:last_activated_at, ::Smithy::Schema::Shapes::MemberShape.new(target: LastActivatedAtTimestamp, name: "lastActivatedAt"))
     ImageDetail.type = Types::ImageDetail
     ImageDetailList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDetail, name: "member"))
     ImageDigestDoesNotMatchException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -699,6 +804,7 @@ module Aws::ECR
     ImageFailureCode.add_member(:upstream_access_denied, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UpstreamAccessDenied", traits: {"smithy.api#enumValue" => "UpstreamAccessDenied"}))
     ImageFailureCode.add_member(:upstream_too_many_requests, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UpstreamTooManyRequests", traits: {"smithy.api#enumValue" => "UpstreamTooManyRequests"}))
     ImageFailureCode.add_member(:upstream_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UpstreamUnavailable", traits: {"smithy.api#enumValue" => "UpstreamUnavailable"}))
+    ImageFailureCode.add_member(:image_inaccessible, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ImageInaccessible", traits: {"smithy.api#enumValue" => "ImageInaccessible"}))
     ImageFailureList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageFailure, name: "member"))
     ImageIdentifier.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "imageDigest"))
     ImageIdentifier.add_member(:image_tag, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "imageTag"))
@@ -707,6 +813,14 @@ module Aws::ECR
     ImageList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Image, name: "member"))
     ImageNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ImageNotFoundException.type = Types::ImageNotFoundException
+    ImageReferrer.add_member(:digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "digest", traits: {"smithy.api#required" => {}}))
+    ImageReferrer.add_member(:media_type, ::Smithy::Schema::Shapes::MemberShape.new(target: MediaType, name: "mediaType", traits: {"smithy.api#required" => {}}))
+    ImageReferrer.add_member(:artifact_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactType, name: "artifactType"))
+    ImageReferrer.add_member(:size, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSizeInBytes, name: "size", traits: {"smithy.api#required" => {}}))
+    ImageReferrer.add_member(:annotations, ::Smithy::Schema::Shapes::MemberShape.new(target: Annotations, name: "annotations"))
+    ImageReferrer.add_member(:artifact_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactStatus, name: "artifactStatus"))
+    ImageReferrer.type = Types::ImageReferrer
+    ImageReferrerList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReferrer, name: "member"))
     ImageReplicationStatus.add_member(:region, ::Smithy::Schema::Shapes::MemberShape.new(target: Region, name: "region"))
     ImageReplicationStatus.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     ImageReplicationStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationStatus, name: "status"))
@@ -735,6 +849,21 @@ module Aws::ECR
     ImageScanStatus.type = Types::ImageScanStatus
     ImageScanningConfiguration.add_member(:scan_on_push, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanOnPushFlag, name: "scanOnPush", traits: {"smithy.api#default" => false}))
     ImageScanningConfiguration.type = Types::ImageScanningConfiguration
+    ImageSigningStatus.add_member(:signing_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningProfileArn, name: "signingProfileArn"))
+    ImageSigningStatus.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningStatusFailureCode, name: "failureCode"))
+    ImageSigningStatus.add_member(:failure_reason, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningStatusFailureReason, name: "failureReason"))
+    ImageSigningStatus.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningStatus, name: "status"))
+    ImageSigningStatus.type = Types::ImageSigningStatus
+    ImageSigningStatusList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageSigningStatus, name: "member"))
+    ImageStatus.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ImageStatus.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
+    ImageStatus.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
+    ImageStatusFilter.add_member(:active, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVE", traits: {"smithy.api#enumValue" => "ACTIVE"}))
+    ImageStatusFilter.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
+    ImageStatusFilter.add_member(:activating, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ACTIVATING", traits: {"smithy.api#enumValue" => "ACTIVATING"}))
+    ImageStatusFilter.add_member(:any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY", traits: {"smithy.api#enumValue" => "ANY"}))
+    ImageStorageClassUpdateNotSupportedException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    ImageStorageClassUpdateNotSupportedException.type = Types::ImageStorageClassUpdateNotSupportedException
     ImageTagAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ImageTagAlreadyExistsException.type = Types::ImageTagAlreadyExistsException
     ImageTagList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageTag, name: "member"))
@@ -778,6 +907,7 @@ module Aws::ECR
     LayerAlreadyExistsException.type = Types::LayerAlreadyExistsException
     LayerAvailability.add_member(:available, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AVAILABLE", traits: {"smithy.api#enumValue" => "AVAILABLE"}))
     LayerAvailability.add_member(:unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "UNAVAILABLE", traits: {"smithy.api#enumValue" => "UNAVAILABLE"}))
+    LayerAvailability.add_member(:archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVED", traits: {"smithy.api#enumValue" => "ARCHIVED"}))
     LayerDigestList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerDigest, name: "member"))
     LayerFailure.add_member(:layer_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: BatchedOperationLayerDigest, name: "layerDigest"))
     LayerFailure.add_member(:failure_code, ::Smithy::Schema::Shapes::MemberShape.new(target: LayerFailureCode, name: "failureCode"))
@@ -806,6 +936,7 @@ module Aws::ECR
     LifecyclePolicyPreviewResult.add_member(:image_pushed_at, ::Smithy::Schema::Shapes::MemberShape.new(target: PushTimestamp, name: "imagePushedAt"))
     LifecyclePolicyPreviewResult.add_member(:action, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyRuleAction, name: "action"))
     LifecyclePolicyPreviewResult.add_member(:applied_rule_priority, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyRulePriority, name: "appliedRulePriority"))
+    LifecyclePolicyPreviewResult.add_member(:storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyStorageClass, name: "storageClass"))
     LifecyclePolicyPreviewResult.type = Types::LifecyclePolicyPreviewResult
     LifecyclePolicyPreviewResultList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyPreviewResult, name: "member"))
     LifecyclePolicyPreviewStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
@@ -813,12 +944,31 @@ module Aws::ECR
     LifecyclePolicyPreviewStatus.add_member(:expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "EXPIRED", traits: {"smithy.api#enumValue" => "EXPIRED"}))
     LifecyclePolicyPreviewStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     LifecyclePolicyPreviewSummary.add_member(:expiring_image_total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageCount, name: "expiringImageTotalCount"))
+    LifecyclePolicyPreviewSummary.add_member(:transitioning_image_total_counts, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitioningImageTotalCounts, name: "transitioningImageTotalCounts"))
     LifecyclePolicyPreviewSummary.type = Types::LifecyclePolicyPreviewSummary
     LifecyclePolicyRuleAction.add_member(:type, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageActionType, name: "type"))
+    LifecyclePolicyRuleAction.add_member(:target_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyTargetStorageClass, name: "targetStorageClass"))
     LifecyclePolicyRuleAction.type = Types::LifecyclePolicyRuleAction
+    LifecyclePolicyStorageClass.add_member(:archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVE", traits: {"smithy.api#enumValue" => "ARCHIVE"}))
+    LifecyclePolicyStorageClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    LifecyclePolicyTargetStorageClass.add_member(:archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVE", traits: {"smithy.api#enumValue" => "ARCHIVE"}))
     LimitExceededException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     LimitExceededException.type = Types::LimitExceededException
+    ListImageReferrersFilter.add_member(:artifact_types, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactTypeList, name: "artifactTypes"))
+    ListImageReferrersFilter.add_member(:artifact_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ArtifactStatusFilter, name: "artifactStatus"))
+    ListImageReferrersFilter.type = Types::ListImageReferrersFilter
+    ListImageReferrersRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
+    ListImageReferrersRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    ListImageReferrersRequest.add_member(:subject_id, ::Smithy::Schema::Shapes::MemberShape.new(target: SubjectIdentifier, name: "subjectId", traits: {"smithy.api#required" => {}}))
+    ListImageReferrersRequest.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: ListImageReferrersFilter, name: "filter"))
+    ListImageReferrersRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListImageReferrersRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: FiftyMaxResults, name: "maxResults"))
+    ListImageReferrersRequest.type = Types::ListImageReferrersRequest
+    ListImageReferrersResponse.add_member(:referrers, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageReferrerList, name: "referrers"))
+    ListImageReferrersResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListImageReferrersResponse.type = Types::ListImageReferrersResponse
     ListImagesFilter.add_member(:tag_status, ::Smithy::Schema::Shapes::MemberShape.new(target: TagStatus, name: "tagStatus"))
+    ListImagesFilter.add_member(:image_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageStatusFilter, name: "imageStatus"))
     ListImagesFilter.type = Types::ListImagesFilter
     ListImagesRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     ListImagesRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
@@ -829,6 +979,12 @@ module Aws::ECR
     ListImagesResponse.add_member(:image_ids, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifierList, name: "imageIds"))
     ListImagesResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
     ListImagesResponse.type = Types::ListImagesResponse
+    ListPullTimeUpdateExclusionsRequest.add_member(:max_results, ::Smithy::Schema::Shapes::MemberShape.new(target: MaxResults, name: "maxResults"))
+    ListPullTimeUpdateExclusionsRequest.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListPullTimeUpdateExclusionsRequest.type = Types::ListPullTimeUpdateExclusionsRequest
+    ListPullTimeUpdateExclusionsResponse.add_member(:pull_time_update_exclusions, ::Smithy::Schema::Shapes::MemberShape.new(target: PullTimeUpdateExclusionList, name: "pullTimeUpdateExclusions"))
+    ListPullTimeUpdateExclusionsResponse.add_member(:next_token, ::Smithy::Schema::Shapes::MemberShape.new(target: NextToken, name: "nextToken"))
+    ListPullTimeUpdateExclusionsResponse.type = Types::ListPullTimeUpdateExclusionsResponse
     ListTagsForResourceRequest.add_member(:resource_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: Arn, name: "resourceArn", traits: {"smithy.api#required" => {}}))
     ListTagsForResourceRequest.type = Types::ListTagsForResourceRequest
     ListTagsForResourceResponse.add_member(:tags, ::Smithy::Schema::Shapes::MemberShape.new(target: TagList, name: "tags"))
@@ -862,6 +1018,7 @@ module Aws::ECR
     PullThroughCacheRuleNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     PullThroughCacheRuleNotFoundException.type = Types::PullThroughCacheRuleNotFoundException
     PullThroughCacheRuleRepositoryPrefixList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PullThroughCacheRuleRepositoryPrefix, name: "member"))
+    PullTimeUpdateExclusionList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "member"))
     PutAccountSettingRequest.add_member(:name, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingName, name: "name", traits: {"smithy.api#required" => {}}))
     PutAccountSettingRequest.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: AccountSettingValue, name: "value", traits: {"smithy.api#required" => {}}))
     PutAccountSettingRequest.type = Types::PutAccountSettingRequest
@@ -917,8 +1074,13 @@ module Aws::ECR
     PutReplicationConfigurationRequest.type = Types::PutReplicationConfigurationRequest
     PutReplicationConfigurationResponse.add_member(:replication_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: ReplicationConfiguration, name: "replicationConfiguration"))
     PutReplicationConfigurationResponse.type = Types::PutReplicationConfigurationResponse
+    PutSigningConfigurationRequest.add_member(:signing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningConfiguration, name: "signingConfiguration", traits: {"smithy.api#required" => {}}))
+    PutSigningConfigurationRequest.type = Types::PutSigningConfigurationRequest
+    PutSigningConfigurationResponse.add_member(:signing_configuration, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningConfiguration, name: "signingConfiguration"))
+    PutSigningConfigurationResponse.type = Types::PutSigningConfigurationResponse
     RCTAppliedFor.add_member(:replication, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPLICATION", traits: {"smithy.api#enumValue" => "REPLICATION"}))
     RCTAppliedFor.add_member(:pull_through_cache, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "PULL_THROUGH_CACHE", traits: {"smithy.api#enumValue" => "PULL_THROUGH_CACHE"}))
+    RCTAppliedFor.add_member(:create_on_push, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "CREATE_ON_PUSH", traits: {"smithy.api#enumValue" => "CREATE_ON_PUSH"}))
     RCTAppliedForList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: RCTAppliedFor, name: "member"))
     Recommendation.add_member(:url, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "url"))
     Recommendation.add_member(:text, ::Smithy::Schema::Shapes::MemberShape.new(target: RecommendationText, name: "text"))
@@ -926,6 +1088,11 @@ module Aws::ECR
     ReferenceUrlsList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: Url, name: "member"))
     ReferencedImagesNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     ReferencedImagesNotFoundException.type = Types::ReferencedImagesNotFoundException
+    RegisterPullTimeUpdateExclusionRequest.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "principalArn", traits: {"smithy.api#required" => {}}))
+    RegisterPullTimeUpdateExclusionRequest.type = Types::RegisterPullTimeUpdateExclusionRequest
+    RegisterPullTimeUpdateExclusionResponse.add_member(:principal_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: PrincipalArn, name: "principalArn"))
+    RegisterPullTimeUpdateExclusionResponse.add_member(:created_at, ::Smithy::Schema::Shapes::MemberShape.new(target: CreationTimestamp, name: "createdAt"))
+    RegisterPullTimeUpdateExclusionResponse.type = Types::RegisterPullTimeUpdateExclusionResponse
     RegistryPolicyNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     RegistryPolicyNotFoundException.type = Types::RegistryPolicyNotFoundException
     RegistryScanningConfiguration.add_member(:scan_type, ::Smithy::Schema::Shapes::MemberShape.new(target: ScanType, name: "scanType"))
@@ -1024,6 +1191,7 @@ module Aws::ECR
     ScanStatus.add_member(:scan_eligibility_expired, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "SCAN_ELIGIBILITY_EXPIRED", traits: {"smithy.api#enumValue" => "SCAN_ELIGIBILITY_EXPIRED"}))
     ScanStatus.add_member(:findings_unavailable, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FINDINGS_UNAVAILABLE", traits: {"smithy.api#enumValue" => "FINDINGS_UNAVAILABLE"}))
     ScanStatus.add_member(:limit_exceeded, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "LIMIT_EXCEEDED", traits: {"smithy.api#enumValue" => "LIMIT_EXCEEDED"}))
+    ScanStatus.add_member(:image_archived, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IMAGE_ARCHIVED", traits: {"smithy.api#enumValue" => "IMAGE_ARCHIVED"}))
     ScanType.add_member(:basic, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "BASIC", traits: {"smithy.api#enumValue" => "BASIC"}))
     ScanType.add_member(:enhanced, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ENHANCED", traits: {"smithy.api#enumValue" => "ENHANCED"}))
     ScanningConfigurationFailureCode.add_member(:repository_not_found, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "REPOSITORY_NOT_FOUND", traits: {"smithy.api#enumValue" => "REPOSITORY_NOT_FOUND"}))
@@ -1048,6 +1216,22 @@ module Aws::ECR
     SetRepositoryPolicyResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
     SetRepositoryPolicyResponse.add_member(:policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryPolicyText, name: "policyText"))
     SetRepositoryPolicyResponse.type = Types::SetRepositoryPolicyResponse
+    SigningConfiguration.add_member(:rules, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningRuleList, name: "rules", traits: {"smithy.api#required" => {}}))
+    SigningConfiguration.type = Types::SigningConfiguration
+    SigningConfigurationNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    SigningConfigurationNotFoundException.type = Types::SigningConfigurationNotFoundException
+    SigningRepositoryFilter.add_member(:filter, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningRepositoryFilterValue, name: "filter", traits: {"smithy.api#required" => {}}))
+    SigningRepositoryFilter.add_member(:filter_type, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningRepositoryFilterType, name: "filterType", traits: {"smithy.api#required" => {}}))
+    SigningRepositoryFilter.type = Types::SigningRepositoryFilter
+    SigningRepositoryFilterList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningRepositoryFilter, name: "member"))
+    SigningRepositoryFilterType.add_member(:wildcard_match, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "WILDCARD_MATCH", traits: {"smithy.api#enumValue" => "WILDCARD_MATCH"}))
+    SigningRule.add_member(:signing_profile_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningProfileArn, name: "signingProfileArn", traits: {"smithy.api#required" => {}}))
+    SigningRule.add_member(:repository_filters, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningRepositoryFilterList, name: "repositoryFilters"))
+    SigningRule.type = Types::SigningRule
+    SigningRuleList.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: SigningRule, name: "member"))
+    SigningStatus.add_member(:in_progress, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "IN_PROGRESS", traits: {"smithy.api#enumValue" => "IN_PROGRESS"}))
+    SigningStatus.add_member(:complete, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "COMPLETE", traits: {"smithy.api#enumValue" => "COMPLETE"}))
+    SigningStatus.add_member(:failed, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "FAILED", traits: {"smithy.api#enumValue" => "FAILED"}))
     StartImageScanRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     StartImageScanRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
     StartImageScanRequest.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "imageId", traits: {"smithy.api#required" => {}}))
@@ -1066,6 +1250,8 @@ module Aws::ECR
     StartLifecyclePolicyPreviewResponse.add_member(:lifecycle_policy_text, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyText, name: "lifecyclePolicyText"))
     StartLifecyclePolicyPreviewResponse.add_member(:status, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyPreviewStatus, name: "status"))
     StartLifecyclePolicyPreviewResponse.type = Types::StartLifecyclePolicyPreviewResponse
+    SubjectIdentifier.add_member(:image_digest, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageDigest, name: "imageDigest", traits: {"smithy.api#required" => {}}))
+    SubjectIdentifier.type = Types::SubjectIdentifier
     Tag.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "Key", traits: {"smithy.api#required" => {}}))
     Tag.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "Value", traits: {"smithy.api#required" => {}}))
     Tag.type = Types::Tag
@@ -1080,12 +1266,18 @@ module Aws::ECR
     TagStatus.add_member(:any, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ANY", traits: {"smithy.api#enumValue" => "ANY"}))
     Tags.add_member(:key, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKey, name: "key"))
     Tags.add_member(:value, ::Smithy::Schema::Shapes::MemberShape.new(target: TagValue, name: "value"))
+    TargetStorageClass.add_member(:standard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "STANDARD", traits: {"smithy.api#enumValue" => "STANDARD"}))
+    TargetStorageClass.add_member(:archive, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "ARCHIVE", traits: {"smithy.api#enumValue" => "ARCHIVE"}))
     TemplateAlreadyExistsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TemplateAlreadyExistsException.type = Types::TemplateAlreadyExistsException
     TemplateNotFoundException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TemplateNotFoundException.type = Types::TemplateNotFoundException
     TooManyTagsException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     TooManyTagsException.type = Types::TooManyTagsException
+    TransitioningImageTotalCount.add_member(:target_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: LifecyclePolicyTargetStorageClass, name: "targetStorageClass"))
+    TransitioningImageTotalCount.add_member(:image_total_count, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageCount, name: "imageTotalCount"))
+    TransitioningImageTotalCount.type = Types::TransitioningImageTotalCount
+    TransitioningImageTotalCounts.add_member(:member, ::Smithy::Schema::Shapes::MemberShape.new(target: TransitioningImageTotalCount, name: "member"))
     UnableToAccessSecretException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     UnableToAccessSecretException.type = Types::UnableToAccessSecretException
     UnableToDecryptSecretValueException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1094,6 +1286,8 @@ module Aws::ECR
     UnableToGetUpstreamImageException.type = Types::UnableToGetUpstreamImageException
     UnableToGetUpstreamLayerException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     UnableToGetUpstreamLayerException.type = Types::UnableToGetUpstreamLayerException
+    UnableToListUpstreamImageReferrersException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
+    UnableToListUpstreamImageReferrersException.type = Types::UnableToListUpstreamImageReferrersException
     UnsupportedImageTypeException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
     UnsupportedImageTypeException.type = Types::UnsupportedImageTypeException
     UnsupportedUpstreamRegistryException.add_member(:message, ::Smithy::Schema::Shapes::MemberShape.new(target: ExceptionMessage, name: "message"))
@@ -1102,6 +1296,16 @@ module Aws::ECR
     UntagResourceRequest.add_member(:tag_keys, ::Smithy::Schema::Shapes::MemberShape.new(target: TagKeyList, name: "tagKeys", traits: {"smithy.api#required" => {}}))
     UntagResourceRequest.type = Types::UntagResourceRequest
     UntagResourceResponse.type = Types::UntagResourceResponse
+    UpdateImageStorageClassRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
+    UpdateImageStorageClassRequest.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName", traits: {"smithy.api#required" => {}}))
+    UpdateImageStorageClassRequest.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "imageId", traits: {"smithy.api#required" => {}}))
+    UpdateImageStorageClassRequest.add_member(:target_storage_class, ::Smithy::Schema::Shapes::MemberShape.new(target: TargetStorageClass, name: "targetStorageClass", traits: {"smithy.api#required" => {}}))
+    UpdateImageStorageClassRequest.type = Types::UpdateImageStorageClassRequest
+    UpdateImageStorageClassResponse.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
+    UpdateImageStorageClassResponse.add_member(:repository_name, ::Smithy::Schema::Shapes::MemberShape.new(target: RepositoryName, name: "repositoryName"))
+    UpdateImageStorageClassResponse.add_member(:image_id, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageIdentifier, name: "imageId"))
+    UpdateImageStorageClassResponse.add_member(:image_status, ::Smithy::Schema::Shapes::MemberShape.new(target: ImageStatus, name: "imageStatus"))
+    UpdateImageStorageClassResponse.type = Types::UpdateImageStorageClassResponse
     UpdatePullThroughCacheRuleRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     UpdatePullThroughCacheRuleRequest.add_member(:ecr_repository_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: PullThroughCacheRuleRepositoryPrefix, name: "ecrRepositoryPrefix", traits: {"smithy.api#required" => {}}))
     UpdatePullThroughCacheRuleRequest.add_member(:credential_arn, ::Smithy::Schema::Shapes::MemberShape.new(target: CredentialArn, name: "credentialArn"))
@@ -1150,6 +1354,7 @@ module Aws::ECR
     UpstreamRegistry.add_member(:git_hub_container_registry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GitHubContainerRegistry", traits: {"smithy.api#enumValue" => "github-container-registry"}))
     UpstreamRegistry.add_member(:azure_container_registry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "AzureContainerRegistry", traits: {"smithy.api#enumValue" => "azure-container-registry"}))
     UpstreamRegistry.add_member(:git_lab_container_registry, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "GitLabContainerRegistry", traits: {"smithy.api#enumValue" => "gitlab-container-registry"}))
+    UpstreamRegistry.add_member(:chainguard, ::Smithy::Schema::Shapes::MemberShape.new(target: ::Smithy::Schema::Shapes::Prelude::Unit, name: "Chainguard", traits: {"smithy.api#enumValue" => "chainguard"}))
     ValidatePullThroughCacheRuleRequest.add_member(:ecr_repository_prefix, ::Smithy::Schema::Shapes::MemberShape.new(target: PullThroughCacheRuleRepositoryPrefix, name: "ecrRepositoryPrefix", traits: {"smithy.api#required" => {}}))
     ValidatePullThroughCacheRuleRequest.add_member(:registry_id, ::Smithy::Schema::Shapes::MemberShape.new(target: RegistryId, name: "registryId"))
     ValidatePullThroughCacheRuleRequest.type = Types::ValidatePullThroughCacheRuleRequest
@@ -1180,7 +1385,7 @@ module Aws::ECR
       service.id = "com.amazonaws.ecr#AmazonEC2ContainerRegistry_V20150921"
       service.name = "AmazonEC2ContainerRegistryV20150921"
       service.version = "2015-09-21"
-      service.traits = {"aws.api#service" => {"sdkId" => "ECR", "arnNamespace" => "ecr", "cloudFormationName" => "ECR", "cloudTrailEventSource" => "ecr.amazonaws.com", "endpointPrefix" => "api.ecr"}, "aws.auth#sigv4" => {"name" => "ecr"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Elastic Container Registry", "smithy.api#xmlNamespace" => {"uri" => "http://ecr.amazonaws.com/doc/2015-09-21/"}}
+      service.traits = {"aws.api#service" => {"sdkId" => "ECR", "arnNamespace" => "ecr", "cloudFormationName" => "ECR", "cloudTrailEventSource" => "ecr.amazonaws.com", "endpointPrefix" => "api.ecr"}, "aws.auth#sigv4" => {"name" => "ecr"}, "aws.protocols#awsJson1_1" => {}, "smithy.api#title" => "Amazon Elastic Container Registry", "smithy.api#xmlNamespace" => {"uri" => "http://ecr.amazonaws.com/doc/2015-09-21/"}, "smithy.rules#endpointBdd" => {"version" => "1.1", "parameters" => {"UseDualStack" => {"builtIn" => "AWS::UseDualStack", "required" => true, "default" => false, "documentation" => "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.", "type" => "boolean"}, "UseFIPS" => {"builtIn" => "AWS::UseFIPS", "required" => true, "default" => false, "documentation" => "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.", "type" => "boolean"}, "Endpoint" => {"builtIn" => "SDK::Endpoint", "required" => false, "documentation" => "Override the endpoint used to send this request", "type" => "string"}, "Region" => {"builtIn" => "AWS::Region", "required" => false, "documentation" => "The AWS region used to dispatch the request.", "type" => "string"}}, "conditions" => [{"fn" => "isSet", "argv" => [{"ref" => "Endpoint"}]}, {"fn" => "isSet", "argv" => [{"ref" => "Region"}]}, {"fn" => "aws.partition", "argv" => [{"ref" => "Region"}], "assign" => "PartitionResult"}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-eusc"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-f"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-e"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso-b"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-iso"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-cn"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws-us-gov"]}, {"fn" => "stringEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "name"]}, "aws"]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseFIPS"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsFIPS"]}, true]}, {"fn" => "booleanEquals", "argv" => [{"ref" => "UseDualStack"}, true]}, {"fn" => "booleanEquals", "argv" => [{"fn" => "getAttr", "argv" => [{"ref" => "PartitionResult"}, "supportsDualStack"]}, true]}], "results" => [{"conditions" => [], "error" => "Invalid Configuration: FIPS and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Dualstack and custom endpoint are not supported", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => {"ref" => "Endpoint"}, "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.ecr.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ecr.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.ecr-fips.{Region}.{PartitionResult#dnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://ecr-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "endpoint" => {"url" => "https://api.ecr-fips.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "FIPS and DualStack are enabled, but this partition does not support one or both", "type" => "error"}, {"conditions" => [], "error" => "FIPS is enabled but this partition does not support FIPS", "type" => "error"}, {"conditions" => [], "endpoint" => {"url" => "https://api.ecr.{Region}.{PartitionResult#dualStackDnsSuffix}", "properties" => {}, "headers" => {}}, "type" => "endpoint"}, {"conditions" => [], "error" => "DualStack is enabled but this partition does not support DualStack", "type" => "error"}, {"conditions" => [], "error" => "Invalid Configuration: Missing Region", "type" => "error"}], "root" => 2, "nodeCount" => 24, "nodes" => "/////wAAAAH/////AAAAAAAAABcAAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAABQAAAAGAAAABAAAABQAAAAHAAAABQAAABQAAAAIAAAABgAAABQAAAAJAAAABwAAABQAAAAKAAAACAAAABQAAAALAAAACQAAABQAAAAMAAAACgAAABQAAAANAAAACwAAABAAAAAOAAAADQAAAA8F9eEEAAAADgX14QsF9eEMAAAADAAAABIAAAARAAAADQX14QkF9eEKAAAADQAAABMF9eEGAAAADgX14QgF9eEJAAAACwAAABYAAAAVAAAADQX14QUF9eEEAAAADQX14QcF9eEGAAAACwX14QEAAAAYAAAADQX14QIF9eED"}}
       service.add_operation(:batch_check_layer_availability, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecr#BatchCheckLayerAvailability"
         operation.name = "BatchCheckLayerAvailability"
@@ -1350,6 +1555,28 @@ module Aws::ECR
         operation.errors << ServerException
         operation.traits = {}
       end)
+      service.add_operation(:delete_signing_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecr#DeleteSigningConfiguration"
+        operation.name = "DeleteSigningConfiguration"
+        operation.input = DeleteSigningConfigurationRequest
+        operation.output = DeleteSigningConfigurationResponse
+        operation.errors << ServerException
+        operation.errors << SigningConfigurationNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:deregister_pull_time_update_exclusion, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecr#DeregisterPullTimeUpdateExclusion"
+        operation.name = "DeregisterPullTimeUpdateExclusion"
+        operation.input = DeregisterPullTimeUpdateExclusionRequest
+        operation.output = DeregisterPullTimeUpdateExclusionResponse
+        operation.errors << ExclusionNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << ServerException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:describe_image_replication_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecr#DescribeImageReplicationStatus"
         operation.name = "DescribeImageReplicationStatus"
@@ -1375,6 +1602,18 @@ module Aws::ECR
         operation.errors << ValidationException
         operation.traits = {}
         operation[:paginator] = Paginators::DescribeImageScanFindings.new
+      end)
+      service.add_operation(:describe_image_signing_status, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecr#DescribeImageSigningStatus"
+        operation.name = "DescribeImageSigningStatus"
+        operation.input = DescribeImageSigningStatusRequest
+        operation.output = DescribeImageSigningStatusResponse
+        operation.errors << ImageNotFoundException
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << ValidationException
+        operation.traits = {}
       end)
       service.add_operation(:describe_images, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecr#DescribeImages"
@@ -1521,6 +1760,17 @@ module Aws::ECR
         operation.errors << ServerException
         operation.traits = {}
       end)
+      service.add_operation(:get_signing_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecr#GetSigningConfiguration"
+        operation.name = "GetSigningConfiguration"
+        operation.input = GetSigningConfigurationRequest
+        operation.output = GetSigningConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << SigningConfigurationNotFoundException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
       service.add_operation(:initiate_layer_upload, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecr#InitiateLayerUpload"
         operation.name = "InitiateLayerUpload"
@@ -1530,6 +1780,18 @@ module Aws::ECR
         operation.errors << KmsException
         operation.errors << RepositoryNotFoundException
         operation.errors << ServerException
+        operation.traits = {}
+      end)
+      service.add_operation(:list_image_referrers, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecr#ListImageReferrers"
+        operation.name = "ListImageReferrers"
+        operation.input = ListImageReferrersRequest
+        operation.output = ListImageReferrersResponse
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << UnableToListUpstreamImageReferrersException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:list_images, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
@@ -1542,6 +1804,17 @@ module Aws::ECR
         operation.errors << ServerException
         operation.traits = {"smithy.test#smokeTests" => [{"id" => "ListImagesFailure", "params" => {"repositoryName" => "not-a-real-repository"}, "vendorParams" => {"region" => "us-west-2"}, "vendorParamsShape" => "aws.test#AwsVendorParams", "expect" => {"failure" => {}}}]}
         operation[:paginator] = Paginators::ListImages.new
+      end)
+      service.add_operation(:list_pull_time_update_exclusions, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecr#ListPullTimeUpdateExclusions"
+        operation.name = "ListPullTimeUpdateExclusions"
+        operation.input = ListPullTimeUpdateExclusionsRequest
+        operation.output = ListPullTimeUpdateExclusionsResponse
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
+        operation.errors << ServerException
+        operation.errors << ValidationException
+        operation.traits = {}
       end)
       service.add_operation(:list_tags_for_resource, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
         operation.id = "com.amazonaws.ecr#ListTagsForResource"
@@ -1628,6 +1901,7 @@ module Aws::ECR
         operation.name = "PutRegistryScanningConfiguration"
         operation.input = PutRegistryScanningConfigurationRequest
         operation.output = PutRegistryScanningConfigurationResponse
+        operation.errors << BlockedByOrganizationPolicyException
         operation.errors << InvalidParameterException
         operation.errors << ServerException
         operation.errors << ValidationException
@@ -1639,6 +1913,28 @@ module Aws::ECR
         operation.input = PutReplicationConfigurationRequest
         operation.output = PutReplicationConfigurationResponse
         operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:put_signing_configuration, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecr#PutSigningConfiguration"
+        operation.name = "PutSigningConfiguration"
+        operation.input = PutSigningConfigurationRequest
+        operation.output = PutSigningConfigurationResponse
+        operation.errors << InvalidParameterException
+        operation.errors << ServerException
+        operation.errors << ValidationException
+        operation.traits = {}
+      end)
+      service.add_operation(:register_pull_time_update_exclusion, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecr#RegisterPullTimeUpdateExclusion"
+        operation.name = "RegisterPullTimeUpdateExclusion"
+        operation.input = RegisterPullTimeUpdateExclusionRequest
+        operation.output = RegisterPullTimeUpdateExclusionResponse
+        operation.errors << ExclusionAlreadyExistsException
+        operation.errors << InvalidParameterException
+        operation.errors << LimitExceededException
         operation.errors << ServerException
         operation.errors << ValidationException
         operation.traits = {}
@@ -1658,6 +1954,7 @@ module Aws::ECR
         operation.name = "StartImageScan"
         operation.input = StartImageScanRequest
         operation.output = StartImageScanResponse
+        operation.errors << ImageArchivedException
         operation.errors << ImageNotFoundException
         operation.errors << InvalidParameterException
         operation.errors << LimitExceededException
@@ -1702,6 +1999,19 @@ module Aws::ECR
         operation.errors << RepositoryNotFoundException
         operation.errors << ServerException
         operation.errors << TooManyTagsException
+        operation.traits = {}
+      end)
+      service.add_operation(:update_image_storage_class, ::Smithy::Schema::Shapes::OperationShape.new do |operation|
+        operation.id = "com.amazonaws.ecr#UpdateImageStorageClass"
+        operation.name = "UpdateImageStorageClass"
+        operation.input = UpdateImageStorageClassRequest
+        operation.output = UpdateImageStorageClassResponse
+        operation.errors << ImageNotFoundException
+        operation.errors << ImageStorageClassUpdateNotSupportedException
+        operation.errors << InvalidParameterException
+        operation.errors << RepositoryNotFoundException
+        operation.errors << ServerException
+        operation.errors << ValidationException
         operation.traits = {}
       end)
       service.add_operation(:update_pull_through_cache_rule, ::Smithy::Schema::Shapes::OperationShape.new do |operation|

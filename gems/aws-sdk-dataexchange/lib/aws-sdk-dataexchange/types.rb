@@ -144,6 +144,18 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
+    # <p>The configuration for the asset, which can include tags.</p>
+    # @!attribute tags
+    #   <p>The tags to be applied to assets created by the job.</p>
+    #   @return [Array<Types::Tag>]
+    class AssetConfiguration < Struct.new(
+      nil,
+      :tags,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # <p>The destination for the asset.</p>
     # @!attribute asset_id
     #   <p>The unique identifier for the asset.</p>
@@ -192,14 +204,7 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An asset in AWS Data Exchange is a piece of data (Amazon S3 object) or a means of
-    #          fulfilling data (Amazon Redshift datashare or Amazon API Gateway API, AWS Lake Formation
-    #          data permission, or Amazon S3 data access). The asset can be a structured data file, an
-    #          image file, or some other data file that can be stored as an Amazon S3 object, an Amazon
-    #          API Gateway API, or an Amazon Redshift datashare, an AWS Lake Formation data permission, or
-    #          an Amazon S3 data access. When you create an import job for your files, API Gateway APIs,
-    #          Amazon Redshift datashares, AWS Lake Formation data permission, or Amazon S3 data access,
-    #          you create an asset in AWS Data Exchange.</p>
+    # <p>An asset in AWS Data Exchange is a piece of data (Amazon S3 object) or a means of fulfilling data (Amazon Redshift datashare or Amazon API Gateway API, AWS Lake Formation data permission, or Amazon S3 data access). The asset can be a structured data file, an image file, or some other data file that can be stored as an Amazon S3 object, an Amazon API Gateway API, or an Amazon Redshift datashare, an AWS Lake Formation data permission, or an Amazon S3 data access. When you create an import job for your files, API Gateway APIs, Amazon Redshift datashares, AWS Lake Formation data permission, or Amazon S3 data access, you create an asset in AWS Data Exchange.</p>
     # @!attribute arn
     #   <p>The ARN for the asset.</p>
     #   @return [String]
@@ -219,21 +224,13 @@ module Aws::DataExchange
     #   <p>The unique identifier for the asset.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used
-    #            as the asset name. When exporting to Amazon S3, the asset name is used as default target
-    #            Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as
-    #            the asset name. When importing from Amazon Redshift, the datashare name is used as the
-    #            asset name. When importing from AWS Lake Formation, the static values of "Database(s)
-    #            included in LF-tag policy" or "Table(s) included in LF-tag policy" are used as the asset
-    #            name.</p>
+    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name. When importing from AWS Lake Formation, the static values of "Database(s) included in LF-tag policy" or "Table(s) included in LF-tag policy" are used as the asset name.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for the revision associated with this asset.</p>
     #   @return [String]
     # @!attribute source_id
-    #   <p>The asset ID of the owned asset corresponding to the entitled asset being viewed. This
-    #            parameter is returned when an asset owner is viewing the entitled copy of its owned
-    #            asset.</p>
+    #   <p>The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.</p>
     #   @return [String]
     # @!attribute updated_at
     #   <p>The date and time that the asset was last updated, in ISO 8601 format.</p>
@@ -271,14 +268,12 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
-    # <p>A revision destination is the Amazon S3 bucket folder destination to where the export
-    #          will be sent.</p>
+    # <p>A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.</p>
     # @!attribute bucket
     #   <p>The Amazon S3 bucket that is the destination for the event action.</p>
     #   @return [String]
     # @!attribute key_pattern
-    #   <p>A string representing the pattern for generated names of the individual assets in the
-    #            revision. For more information about key patterns, see <a href="https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns">Key patterns when exporting revisions</a>.</p>
+    #   <p>A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see <a href="https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns">Key patterns when exporting revisions</a>.</p>
     #   @return [String]
     class AutoExportRevisionDestinationEntry < Struct.new(
       nil,
@@ -294,8 +289,7 @@ module Aws::DataExchange
     #   <p>Encryption configuration for the auto export job.</p>
     #   @return [Types::ExportServerSideEncryption]
     # @!attribute revision_destination
-    #   <p>A revision destination is the Amazon S3 bucket folder destination to where the export
-    #            will be sent.</p>
+    #   <p>A revision destination is the Amazon S3 bucket folder destination to where the export will be sent.</p>
     #   @return [Types::AutoExportRevisionDestinationEntry]
     class AutoExportRevisionToS3RequestDetails < Struct.new(
       nil,
@@ -317,11 +311,9 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The request couldn't be completed because it conflicted with the current state of the
-    #          resource.</p>
+    # <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
     # @!attribute message
-    #   <p>The request couldn't be completed because it conflicted with the current state of the
-    #            resource.</p>
+    #   <p>The request couldn't be completed because it conflicted with the current state of the resource.</p>
     #   @return [String]
     # @!attribute resource_id
     #   <p>The unique identifier for the resource with the conflict.</p>
@@ -451,10 +443,7 @@ module Aws::DataExchange
     #   <p>The name of the data set.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>A data set tag is an optional label that you can assign to a data set when you create
-    #            it. Each tag consists of a key and an optional value, both of which you define. When you
-    #            use tagging, you can also use tag-based access control in IAM policies to control access to
-    #            these data sets and revisions.</p>
+    #   <p>A data set tag is an optional label that you can assign to a data set when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.</p>
     #   @return [Hash<String, String>]
     class CreateDataSetInput < Struct.new(
       nil,
@@ -486,17 +475,13 @@ module Aws::DataExchange
     #   <p>The name of the data set.</p>
     #   @return [String]
     # @!attribute origin
-    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED
-    #            to the account (for subscribers).</p>
+    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
     #   @return [String]
     # @!attribute origin_details
-    #   <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS
-    #            Marketplace.</p>
+    #   <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
     #   @return [Types::OriginDetails]
     # @!attribute source_id
-    #   <p>The data set ID of the owned data set corresponding to the entitled data set being
-    #            viewed. This parameter is returned when a data set owner is viewing the entitled copy of
-    #            its owned data set.</p>
+    #   <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the data set.</p>
@@ -576,6 +561,9 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
+    # @!attribute asset_configuration
+    #   <p>The configuration for the asset, including tags to be applied to assets created by the job.</p>
+    #   @return [Types::AssetConfiguration]
     # @!attribute details
     #   <p>The details for the CreateJob request.</p>
     #   @return [Types::RequestDetails]
@@ -584,6 +572,7 @@ module Aws::DataExchange
     #   @return [String]
     class CreateJobInput < Struct.new(
       nil,
+      :asset_configuration,
       :details,
       :type,
       keyword_init: true
@@ -594,6 +583,9 @@ module Aws::DataExchange
     # @!attribute arn
     #   <p>The ARN for the job.</p>
     #   @return [String]
+    # @!attribute asset_configuration
+    #   <p>The configuration for the asset, including tags applied to assets created by the job.</p>
+    #   @return [Types::AssetConfiguration]
     # @!attribute created_at
     #   <p>The date and time that the job was created, in ISO 8601 format.</p>
     #   @return [Time]
@@ -618,6 +610,7 @@ module Aws::DataExchange
     class CreateJobOutput < Struct.new(
       nil,
       :arn,
+      :asset_configuration,
       :created_at,
       :details,
       :errors,
@@ -637,10 +630,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a data set.</p>
     #   @return [String]
     # @!attribute tags
-    #   <p>A revision tag is an optional label that you can assign to a revision when you create
-    #            it. Each tag consists of a key and an optional value, both of which you define. When you
-    #            use tagging, you can also use tag-based access control in IAM policies to control access to
-    #            these data sets and revisions.</p>
+    #   <p>A revision tag is an optional label that you can assign to a revision when you create it. Each tag consists of a key and an optional value, both of which you define. When you use tagging, you can also use tag-based access control in IAM policies to control access to these data sets and revisions.</p>
     #   @return [Hash<String, String>]
     class CreateRevisionInput < Struct.new(
       nil,
@@ -665,20 +655,13 @@ module Aws::DataExchange
     #   <p>The unique identifier for the data set associated with the data set revision.</p>
     #   @return [String]
     # @!attribute finalized
-    #   <p>To publish a revision to a data set in a product, the revision must first be finalized.
-    #            Finalizing a revision tells AWS Data Exchange that your changes to the assets in the
-    #            revision are complete. After it's in this read-only state, you can publish the revision to
-    #            your products. Finalized revisions can be published through the AWS Data Exchange console
-    #            or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API
-    #            action. When using the API, revisions are uniquely identified by their ARN.</p>
+    #   <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
     #   @return [Boolean]
     # @!attribute id
     #   <p>The unique identifier for the revision.</p>
     #   @return [String]
     # @!attribute source_id
-    #   <p>The revision ID of the owned revision corresponding to the entitled revision being
-    #            viewed. This parameter is returned when a revision owner is viewing the entitled copy of
-    #            its owned revision.</p>
+    #   <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the revision.</p>
@@ -687,8 +670,7 @@ module Aws::DataExchange
     #   <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     # @!attribute revocation_comment
-    #   <p>A required comment to inform subscribers of the reason their access to the revision was
-    #            revoked.</p>
+    #   <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
     #   @return [String]
     # @!attribute revoked
     #   <p>A status indicating that subscribers' access to the revision was revoked.</p>
@@ -726,8 +708,7 @@ module Aws::DataExchange
     #   <p>Details about the S3 data access source asset.</p>
     #   @return [Types::S3DataAccessAssetSourceEntry]
     # @!attribute data_set_id
-    #   <p>The unique identifier for the data set associated with the creation of this Amazon S3
-    #            data access.</p>
+    #   <p>The unique identifier for the data set associated with the creation of this Amazon S3 data access.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for a revision.</p>
@@ -742,8 +723,7 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Details about the response of the operation to create an S3 data access from an S3
-    #          bucket.</p>
+    # <p>Details about the response of the operation to create an S3 data access from an S3 bucket.</p>
     # @!attribute asset_source
     #   <p>Details about the asset source from an Amazon S3 bucket.</p>
     #   @return [Types::S3DataAccessAssetSourceEntry]
@@ -839,17 +819,13 @@ module Aws::DataExchange
     #   <p>The name of the data set.</p>
     #   @return [String]
     # @!attribute origin
-    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED
-    #            to the account (for subscribers).</p>
+    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
     #   @return [String]
     # @!attribute origin_details
-    #   <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS
-    #            Marketplace.</p>
+    #   <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
     #   @return [Types::OriginDetails]
     # @!attribute source_id
-    #   <p>The data set ID of the owned data set corresponding to the entitled data set being
-    #            viewed. This parameter is returned when a data set owner is viewing the entitled copy of
-    #            its owned data set.</p>
+    #   <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
     #   @return [String]
     # @!attribute updated_at
     #   <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
@@ -873,9 +849,7 @@ module Aws::DataExchange
 
     # <p>Extra details specific to a data update type notification.</p>
     # @!attribute data_updated_at
-    #   <p>A
-    #            datetime in the past when the data was updated. This typically means that the underlying
-    #            resource supporting the data set was updated.</p>
+    #   <p>A datetime in the past when the data was updated. This typically means that the underlying resource supporting the data set was updated.</p>
     #   @return [Time]
     class DataUpdateRequestDetails < Struct.new(
       nil,
@@ -982,8 +956,7 @@ module Aws::DataExchange
 
     # <p>Extra details specific to a deprecation type notification.</p>
     # @!attribute deprecation_at
-    #   <p>A
-    #            datetime in the future when the data set will be deprecated.</p>
+    #   <p>A datetime in the future when the data set will be deprecated.</p>
     #   @return [Time]
     class DeprecationRequestDetails < Struct.new(
       nil,
@@ -1021,8 +994,7 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
-    # <p>An event action is an object that defines the relationship between a specific event and
-    #          an automated action that will be taken on behalf of the customer.</p>
+    # <p>An event action is an object that defines the relationship between a specific event and an automated action that will be taken on behalf of the customer.</p>
     # @!attribute action
     #   <p>What occurs after a certain event.</p>
     #   @return [Types::Action]
@@ -1194,11 +1166,9 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Encryption configuration of the export job. Includes the encryption type in addition to
-    #          the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption type.</p>
+    # <p>Encryption configuration of the export job. Includes the encryption type in addition to the AWS KMS key. The KMS key is only necessary if you chose the KMS encryption type.</p>
     # @!attribute kms_key_arn
-    #   <p>The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon
-    #            S3 objects. This parameter is required if you choose aws:kms as an encryption type.</p>
+    #   <p>The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.</p>
     #   @return [String]
     # @!attribute type
     #   <p>The type of server side encryption used for encrypting the objects in Amazon S3.</p>
@@ -1250,22 +1220,17 @@ module Aws::DataExchange
     #   <p>The unique identifier for the asset.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used
-    #            as the asset name. When exporting to Amazon S3, the asset name is used as default target
-    #            Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as
-    #            the asset name. When importing from Amazon Redshift, the datashare name is used as the
-    #            asset name. When importing from AWS Lake Formation, the static values of "Database(s)
-    #            included in the LF-tag policy" or "Table(s) included in the LF-tag policy" are used as the
-    #            asset name.</p>
+    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name. When importing from AWS Lake Formation, the static values of "Database(s) included in the LF-tag policy" or "Table(s) included in the LF-tag policy" are used as the asset name.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for the revision associated with this asset.</p>
     #   @return [String]
     # @!attribute source_id
-    #   <p>The asset ID of the owned asset corresponding to the entitled asset being viewed. This
-    #            parameter is returned when an asset owner is viewing the entitled copy of its owned
-    #            asset.</p>
+    #   <p>The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.</p>
     #   @return [String]
+    # @!attribute tags
+    #   <p>The tags for the asset.</p>
+    #   @return [Hash<String, String>]
     # @!attribute updated_at
     #   <p>The date and time that the asset was last updated, in ISO 8601 format.</p>
     #   @return [Time]
@@ -1280,6 +1245,7 @@ module Aws::DataExchange
       :name,
       :revision_id,
       :source_id,
+      :tags,
       :updated_at,
       keyword_init: true
     )
@@ -1394,17 +1360,13 @@ module Aws::DataExchange
     #   <p>The name of the data set.</p>
     #   @return [String]
     # @!attribute origin
-    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED
-    #            to the account (for subscribers).</p>
+    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
     #   @return [String]
     # @!attribute origin_details
-    #   <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS
-    #            Marketplace.</p>
+    #   <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
     #   @return [Types::OriginDetails]
     # @!attribute source_id
-    #   <p>The data set ID of the owned data set corresponding to the entitled data set being
-    #            viewed. This parameter is returned when a data set owner is viewing the entitled copy of
-    #            its owned data set.</p>
+    #   <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the data set.</p>
@@ -1490,6 +1452,9 @@ module Aws::DataExchange
     # @!attribute arn
     #   <p>The ARN for the job.</p>
     #   @return [String]
+    # @!attribute asset_configuration
+    #   <p>The configuration for the asset, including tags applied to assets created by the job.</p>
+    #   @return [Types::AssetConfiguration]
     # @!attribute created_at
     #   <p>The date and time that the job was created, in ISO 8601 format.</p>
     #   @return [Time]
@@ -1514,6 +1479,7 @@ module Aws::DataExchange
     class GetJobOutput < Struct.new(
       nil,
       :arn,
+      :asset_configuration,
       :created_at,
       :details,
       :errors,
@@ -1624,20 +1590,13 @@ module Aws::DataExchange
     #   <p>The unique identifier for the data set associated with the data set revision.</p>
     #   @return [String]
     # @!attribute finalized
-    #   <p>To publish a revision to a data set in a product, the revision must first be finalized.
-    #            Finalizing a revision tells AWS Data Exchange that your changes to the assets in the
-    #            revision are complete. After it's in this read-only state, you can publish the revision to
-    #            your products. Finalized revisions can be published through the AWS Data Exchange console
-    #            or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API
-    #            action. When using the API, revisions are uniquely identified by their ARN.</p>
+    #   <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
     #   @return [Boolean]
     # @!attribute id
     #   <p>The unique identifier for the revision.</p>
     #   @return [String]
     # @!attribute source_id
-    #   <p>The revision ID of the owned revision corresponding to the entitled revision being
-    #            viewed. This parameter is returned when a revision owner is viewing the entitled copy of
-    #            its owned revision.</p>
+    #   <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
     #   @return [String]
     # @!attribute tags
     #   <p>The tags for the revision.</p>
@@ -1646,8 +1605,7 @@ module Aws::DataExchange
     #   <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     # @!attribute revocation_comment
-    #   <p>A required comment to inform subscribers of the reason their access to the revision was
-    #            revoked.</p>
+    #   <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
     #   @return [String]
     # @!attribute revoked
     #   <p>A status indicating that subscribers' access to the revision was revoked.</p>
@@ -1694,8 +1652,7 @@ module Aws::DataExchange
     #   <p>The API name.</p>
     #   @return [String]
     # @!attribute api_specification_md5_hash
-    #   <p>The Base64-encoded MD5 hash of the OpenAPI 3.0 JSON API specification file. It is used
-    #            to ensure the integrity of the file.</p>
+    #   <p>The Base64-encoded MD5 hash of the OpenAPI 3.0 JSON API specification file. It is used to ensure the integrity of the file.</p>
     #   @return [String]
     # @!attribute data_set_id
     #   <p>The data set ID.</p>
@@ -1739,8 +1696,7 @@ module Aws::DataExchange
     #   <p>The API name.</p>
     #   @return [String]
     # @!attribute api_specification_md5_hash
-    #   <p>The Base64-encoded Md5 hash for the API asset, used to ensure the integrity of the API
-    #            at that location.</p>
+    #   <p>The Base64-encoded Md5 hash for the API asset, used to ensure the integrity of the API at that location.</p>
     #   @return [String]
     # @!attribute api_specification_upload_url
     #   <p>The upload URL of the API specification.</p>
@@ -1792,15 +1748,13 @@ module Aws::DataExchange
 
     # <p>Details of the operation to be performed by the job.</p>
     # @!attribute asset_name
-    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used
-    #            as the asset name.</p>
+    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name.</p>
     #   @return [String]
     # @!attribute data_set_id
     #   <p>The unique identifier for the data set associated with this import job.</p>
     #   @return [String]
     # @!attribute md5_hash
-    #   <p>The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at
-    #            that location.</p>
+    #   <p>The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at that location.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for the revision associated with this import request.</p>
@@ -1816,8 +1770,7 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
-    # <p>The details in the response for an import request, including the signed URL and other
-    #          information.</p>
+    # <p>The details in the response for an import request, including the signed URL and other information.</p>
     # @!attribute asset_name
     #   <p>The name for the asset associated with this import job.</p>
     #   @return [String]
@@ -1825,8 +1778,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for the data set associated with this import job.</p>
     #   @return [String]
     # @!attribute md5_hash
-    #   <p>The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at
-    #            that location.</p>
+    #   <p>The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the file at that location.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for the revision associated with this import response.</p>
@@ -1861,8 +1813,7 @@ module Aws::DataExchange
     #   <p>A structure for the table object.</p>
     #   @return [Types::TableLFTagPolicyAndPermissions]
     # @!attribute role_arn
-    #   <p>The IAM role's ARN that allows AWS Data Exchange to assume the role and grant and revoke
-    #            permissions of subscribers to AWS Lake Formation data permissions.</p>
+    #   <p>The IAM role's ARN that allows AWS Data Exchange to assume the role and grant and revoke permissions of subscribers to AWS Lake Formation data permissions.</p>
     #   @return [String]
     # @!attribute data_set_id
     #   <p>The unique identifier for the data set associated with this import job.</p>
@@ -1894,8 +1845,7 @@ module Aws::DataExchange
     #   <p>A structure for the table object.</p>
     #   @return [Types::TableLFTagPolicyAndPermissions]
     # @!attribute role_arn
-    #   <p>The IAM role's ARN that allows AWS Data Exchange to assume the role and grant and revoke
-    #            permissions to AWS Lake Formation data permissions.</p>
+    #   <p>The IAM role's ARN that allows AWS Data Exchange to assume the role and grant and revoke permissions to AWS Lake Formation data permissions.</p>
     #   @return [String]
     # @!attribute data_set_id
     #   <p>The unique identifier for the data set associated with this import job.</p>
@@ -2008,19 +1958,18 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
-    # <p>AWS Data Exchange Jobs are asynchronous import or export operations used to create or
-    #          copy assets. A data set owner can both import and export as they see fit. Someone with an
-    #          entitlement to a data set can only export. Jobs are deleted 90 days after they are
-    #          created.</p>
+    # <p>AWS Data Exchange Jobs are asynchronous import or export operations used to create or copy assets. A data set owner can both import and export as they see fit. Someone with an entitlement to a data set can only export. Jobs are deleted 90 days after they are created.</p>
     # @!attribute arn
     #   <p>The ARN for the job.</p>
     #   @return [String]
+    # @!attribute asset_configuration
+    #   <p>The configuration for the asset, including tags applied to assets created by the job.</p>
+    #   @return [Types::AssetConfiguration]
     # @!attribute created_at
     #   <p>The date and time that the job was created, in ISO 8601 format.</p>
     #   @return [Time]
     # @!attribute details
-    #   <p>Details of the operation to be performed by the job, such as export destination details
-    #            or import source details.</p>
+    #   <p>Details of the operation to be performed by the job, such as export destination details or import source details.</p>
     #   @return [Types::ResponseDetails]
     # @!attribute errors
     #   <p>Errors for jobs.</p>
@@ -2040,6 +1989,7 @@ module Aws::DataExchange
     class JobEntry < Struct.new(
       nil,
       :arn,
+      :asset_configuration,
       :created_at,
       :details,
       :errors,
@@ -2093,13 +2043,9 @@ module Aws::DataExchange
       end
     end
 
-    # <p>The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the shared S3
-    #          objects.</p>
+    # <p>The Amazon Resource Name (ARN) of the AWS KMS key used to encrypt the shared S3 objects.</p>
     # @!attribute kms_key_arn
-    #   <p>The AWS KMS CMK (Key Management System Customer Managed Key) used to encrypt S3 objects
-    #            in the shared S3 Bucket. AWS Data exchange will create a KMS grant for each subscriber to
-    #            allow them to access and decrypt their entitled data that is encrypted using this KMS key
-    #            specified.</p>
+    #   <p>The AWS KMS CMK (Key Management System Customer Managed Key) used to encrypt S3 objects in the shared S3 Bucket. AWS Data exchange will create a KMS grant for each subscriber to allow them to access and decrypt their entitled data that is encrypted using this KMS key specified.</p>
     #   @return [String]
     class KmsKeyToGrant < Struct.new(
       nil,
@@ -2109,15 +2055,12 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
-    # <p>Details about the AWS Lake Formation resource (Table or Database) included in the AWS
-    #          Lake Formation data permission.</p>
+    # <p>Details about the AWS Lake Formation resource (Table or Database) included in the AWS Lake Formation data permission.</p>
     # @!attribute database
-    #   <p>Details about the database resource included in the AWS Lake Formation data
-    #            permission.</p>
+    #   <p>Details about the database resource included in the AWS Lake Formation data permission.</p>
     #   @return [Types::DatabaseLFTagPolicy]
     # @!attribute table
-    #   <p>Details about the table resource included in the AWS Lake Formation data
-    #            permission.</p>
+    #   <p>Details about the table resource included in the AWS Lake Formation data permission.</p>
     #   @return [Types::TableLFTagPolicy]
     class LFResourceDetails < Struct.new(
       nil,
@@ -2175,8 +2118,7 @@ module Aws::DataExchange
     #   <p>The permissions granted to the subscribers on the resource.</p>
     #   @return [Array<String>]
     # @!attribute role_arn
-    #   <p>The IAM role's ARN that allows AWS Data Exchange to assume the role and grant and revoke
-    #            permissions to AWS Lake Formation data permissions.</p>
+    #   <p>The IAM role's ARN that allows AWS Data Exchange to assume the role and grant and revoke permissions to AWS Lake Formation data permissions.</p>
     #   @return [String]
     class LakeFormationDataPermissionAsset < Struct.new(
       nil,
@@ -2203,12 +2145,10 @@ module Aws::DataExchange
 
     # <p>Extra details specific to the affected scope in this LF data set.</p>
     # @!attribute database
-    #   <p>The
-    #            underlying Glue database that the notification is referring to.</p>
+    #   <p>The underlying Glue database that the notification is referring to.</p>
     #   @return [String]
     # @!attribute table
-    #   <p>The
-    #            underlying Glue table that the notification is referring to.</p>
+    #   <p>The underlying Glue table that the notification is referring to.</p>
     #   @return [String]
     class LakeFormationTagPolicyDetails < Struct.new(
       nil,
@@ -2223,8 +2163,7 @@ module Aws::DataExchange
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListDataGrantsRequest < Struct.new(
       nil,
@@ -2239,8 +2178,7 @@ module Aws::DataExchange
     #   <p>An object that contains a list of data grant information.</p>
     #   @return [Array<Types::DataGrantSummaryEntry>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListDataGrantsResponse < Struct.new(
       nil,
@@ -2258,8 +2196,7 @@ module Aws::DataExchange
     #   <p>The maximum number of results returned by a single call.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     class ListDataSetRevisionsInput < Struct.new(
       nil,
@@ -2272,8 +2209,7 @@ module Aws::DataExchange
     end
 
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     # @!attribute revisions
     #   <p>The asset objects listed by the request.</p>
@@ -2291,12 +2227,10 @@ module Aws::DataExchange
     #   <p>The maximum number of results returned by a single call.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     # @!attribute origin
-    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED
-    #            to the account (for subscribers).</p>
+    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
     #   @return [String]
     class ListDataSetsInput < Struct.new(
       nil,
@@ -2312,8 +2246,7 @@ module Aws::DataExchange
     #   <p>The data set objects listed by the request.</p>
     #   @return [Array<Types::DataSetEntry>]
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     class ListDataSetsOutput < Struct.new(
       nil,
@@ -2331,8 +2264,7 @@ module Aws::DataExchange
     #   <p>The maximum number of results returned by a single call.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     class ListEventActionsInput < Struct.new(
       nil,
@@ -2348,8 +2280,7 @@ module Aws::DataExchange
     #   <p>The event action objects listed by the request.</p>
     #   @return [Array<Types::EventActionEntry>]
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     class ListEventActionsOutput < Struct.new(
       nil,
@@ -2367,8 +2298,7 @@ module Aws::DataExchange
     #   <p>The maximum number of results returned by a single call.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for a revision.</p>
@@ -2388,8 +2318,7 @@ module Aws::DataExchange
     #   <p>The jobs listed by the request.</p>
     #   @return [Array<Types::JobEntry>]
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     class ListJobsOutput < Struct.new(
       nil,
@@ -2404,8 +2333,7 @@ module Aws::DataExchange
     #   <p>The maximum number of results to be included in the next page.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     # @!attribute acceptance_state
     #   <p>The acceptance state of the data grants to list.</p>
@@ -2424,8 +2352,7 @@ module Aws::DataExchange
     #   <p>An object that contains a list of received data grant information.</p>
     #   @return [Array<Types::ReceivedDataGrantSummariesEntry>]
     # @!attribute next_token
-    #   <p>The pagination token used to retrieve the next page of results for this
-    #            operation.</p>
+    #   <p>The pagination token used to retrieve the next page of results for this operation.</p>
     #   @return [String]
     class ListReceivedDataGrantsResponse < Struct.new(
       nil,
@@ -2443,8 +2370,7 @@ module Aws::DataExchange
     #   <p>The maximum number of results returned by a single call.</p>
     #   @return [Integer]
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for a revision.</p>
@@ -2464,8 +2390,7 @@ module Aws::DataExchange
     #   <p>The asset objects listed by the request.</p>
     #   @return [Array<Types::AssetEntry>]
     # @!attribute next_token
-    #   <p>The token value retrieved from a previous call to access the next page of
-    #            results.</p>
+    #   <p>The token value retrieved from a previous call to access the next page of results.</p>
     #   @return [String]
     class ListRevisionAssetsOutput < Struct.new(
       nil,
@@ -2500,16 +2425,13 @@ module Aws::DataExchange
 
     # <p>Extra details specific to this notification.</p>
     # @!attribute data_update
-    #   <p>Extra
-    #            details specific to a data update type notification.</p>
+    #   <p>Extra details specific to a data update type notification.</p>
     #   @return [Types::DataUpdateRequestDetails]
     # @!attribute deprecation
-    #   <p>Extra
-    #            details specific to a deprecation type notification.</p>
+    #   <p>Extra details specific to a deprecation type notification.</p>
     #   @return [Types::DeprecationRequestDetails]
     # @!attribute schema_change
-    #   <p>Extra
-    #            details specific to a schema change type notification.</p>
+    #   <p>Extra details specific to a schema change type notification.</p>
     #   @return [Types::SchemaChangeRequestDetails]
     class NotificationDetails < Struct.new(
       nil,
@@ -2615,30 +2537,22 @@ module Aws::DataExchange
 
     # <p>Extra details specific to the affected scope in this Redshift data set.</p>
     # @!attribute arn
-    #   <p>The
-    #            ARN of the underlying Redshift data share that is being affected by this
-    #            notification.</p>
+    #   <p>The ARN of the underlying Redshift data share that is being affected by this notification.</p>
     #   @return [String]
     # @!attribute database
-    #   <p>The
-    #            database name in the Redshift data share that is being affected by this
-    #            notification.</p>
+    #   <p>The database name in the Redshift data share that is being affected by this notification.</p>
     #   @return [String]
     # @!attribute function
-    #   <p>A
-    #            function name in the Redshift database that is being affected by this notification.</p>
+    #   <p>A function name in the Redshift database that is being affected by this notification.</p>
     #   @return [String]
     # @!attribute table
-    #   <p>A
-    #            table name in the Redshift database that is being affected by this notification.</p>
+    #   <p>A table name in the Redshift database that is being affected by this notification.</p>
     #   @return [String]
     # @!attribute schema
-    #   <p>A
-    #            schema name in the Redshift database that is being affected by this notification.</p>
+    #   <p>A schema name in the Redshift database that is being affected by this notification.</p>
     #   @return [String]
     # @!attribute view
-    #   <p>A
-    #            view name in the Redshift database that is being affected by this notification.</p>
+    #   <p>A view name in the Redshift database that is being affected by this notification.</p>
     #   @return [String]
     class RedshiftDataShareDetails < Struct.new(
       nil,
@@ -2766,8 +2680,7 @@ module Aws::DataExchange
     #   <p>The Amazon S3 bucket that is the destination for the assets in the revision.</p>
     #   @return [String]
     # @!attribute key_pattern
-    #   <p>A string representing the pattern for generated names of the individual assets in the
-    #            revision. For more information about key patterns, see <a href="https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns">Key patterns when exporting revisions</a>.</p>
+    #   <p>A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see <a href="https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns">Key patterns when exporting revisions</a>.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for the revision.</p>
@@ -2796,27 +2709,19 @@ module Aws::DataExchange
     #   <p>The unique identifier for the data set associated with the data set revision.</p>
     #   @return [String]
     # @!attribute finalized
-    #   <p>To publish a revision to a data set in a product, the revision must first be finalized.
-    #            Finalizing a revision tells AWS Data Exchange that your changes to the assets in the
-    #            revision are complete. After it's in this read-only state, you can publish the revision to
-    #            your products. Finalized revisions can be published through the AWS Data Exchange console
-    #            or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API
-    #            action. When using the API, revisions are uniquely identified by their ARN.</p>
+    #   <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
     #   @return [Boolean]
     # @!attribute id
     #   <p>The unique identifier for the revision.</p>
     #   @return [String]
     # @!attribute source_id
-    #   <p>The revision ID of the owned revision corresponding to the entitled revision being
-    #            viewed. This parameter is returned when a revision owner is viewing the entitled copy of
-    #            its owned revision.</p>
+    #   <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
     #   @return [String]
     # @!attribute updated_at
     #   <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     # @!attribute revocation_comment
-    #   <p>A required comment to inform subscribers of the reason their access to the revision was
-    #            revoked.</p>
+    #   <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
     #   @return [String]
     # @!attribute revoked
     #   <p>A status indicating that subscribers' access to the revision was revoked.</p>
@@ -2867,8 +2772,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a revision.</p>
     #   @return [String]
     # @!attribute revocation_comment
-    #   <p>A required comment to inform subscribers of the reason their access to the revision was
-    #            revoked.</p>
+    #   <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
     #   @return [String]
     class RevokeRevisionInput < Struct.new(
       nil,
@@ -2893,27 +2797,19 @@ module Aws::DataExchange
     #   <p>The unique identifier for the data set associated with the data set revision.</p>
     #   @return [String]
     # @!attribute finalized
-    #   <p>To publish a revision to a data set in a product, the revision must first be finalized.
-    #            Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision
-    #            are complete. After it's in this read-only state, you can publish the revision to your
-    #            products. Finalized revisions can be published through the AWS Data Exchange console or the
-    #            AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action.
-    #            When using the API, revisions are uniquely identified by their ARN.</p>
+    #   <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
     #   @return [Boolean]
     # @!attribute id
     #   <p>The unique identifier for the revision.</p>
     #   @return [String]
     # @!attribute source_id
-    #   <p>The revision ID of the owned revision corresponding to the entitled revision being
-    #            viewed. This parameter is returned when a revision owner is viewing the entitled copy of
-    #            its owned revision.</p>
+    #   <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
     #   @return [String]
     # @!attribute updated_at
     #   <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     # @!attribute revocation_comment
-    #   <p>A required comment to inform subscribers of the reason their access to the revision was
-    #            revoked.</p>
+    #   <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
     #   @return [String]
     # @!attribute revoked
     #   <p>A status indicating that subscribers' access to the revision was revoked.</p>
@@ -2956,17 +2852,13 @@ module Aws::DataExchange
     #   <p>S3 keys made available using this asset.</p>
     #   @return [Array<String>]
     # @!attribute s3_access_point_alias
-    #   <p>The automatically-generated bucket-style alias for your Amazon S3 Access Point.
-    #            Customers can access their entitled data using the S3 Access Point alias.</p>
+    #   <p>The automatically-generated bucket-style alias for your Amazon S3 Access Point. Customers can access their entitled data using the S3 Access Point alias.</p>
     #   @return [String]
     # @!attribute s3_access_point_arn
-    #   <p>The ARN for your Amazon S3 Access Point. Customers can also access their entitled data
-    #            using the S3 Access Point ARN.</p>
+    #   <p>The ARN for your Amazon S3 Access Point. Customers can also access their entitled data using the S3 Access Point ARN.</p>
     #   @return [String]
     # @!attribute kms_keys_to_grant
-    #   <p> List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used to
-    #            encrypt S3 objects being shared in this S3 Data Access asset. Providers must include all
-    #            AWS KMS keys used to encrypt these shared S3 objects.</p>
+    #   <p> List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used to encrypt S3 objects being shared in this S3 Data Access asset. Providers must include all AWS KMS keys used to encrypt these shared S3 objects.</p>
     #   @return [Array<Types::KmsKeyToGrant>]
     class S3DataAccessAsset < Struct.new(
       nil,
@@ -2992,8 +2884,7 @@ module Aws::DataExchange
     #   <p>The keys used to create the Amazon S3 data access.</p>
     #   @return [Array<String>]
     # @!attribute kms_keys_to_grant
-    #   <p>List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used to
-    #            encrypt S3 objects being shared in this S3 Data Access asset.</p>
+    #   <p>List of AWS KMS CMKs (Key Management System Customer Managed Keys) and ARNs used to encrypt S3 objects being shared in this S3 Data Access asset.</p>
     #   @return [Array<Types::KmsKeyToGrant>]
     class S3DataAccessAssetSourceEntry < Struct.new(
       nil,
@@ -3008,16 +2899,10 @@ module Aws::DataExchange
 
     # <p>Extra details specific to the affected scope in this S3 Data Access data set.</p>
     # @!attribute key_prefixes
-    #   <p>A
-    #            list of the key prefixes affected by this
-    #            notification. This
-    #            can have up to 50 entries.</p>
+    #   <p>A list of the key prefixes affected by this notification. This can have up to 50 entries.</p>
     #   @return [Array<String>]
     # @!attribute keys
-    #   <p>A
-    #            list of the keys affected by this
-    #            notification. This
-    #            can have up to 50 entries.</p>
+    #   <p>A list of the keys affected by this notification. This can have up to 50 entries.</p>
     #   @return [Array<String>]
     class S3DataAccessDetails < Struct.new(
       nil,
@@ -3045,23 +2930,15 @@ module Aws::DataExchange
       end
     end
 
-    # <p>Object encompassing information about a schema change to a single, particular field, a
-    #          notification can have up to 100 of these.</p>
+    # <p>Object encompassing information about a schema change to a single, particular field, a notification can have up to 100 of these.</p>
     # @!attribute name
-    #   <p>Name
-    #            of the changing
-    #            field. This value
-    #            can be up to 255 characters long.</p>
+    #   <p>Name of the changing field. This value can be up to 255 characters long.</p>
     #   @return [String]
     # @!attribute type
-    #   <p>Is
-    #            the field being added, removed, or modified?</p>
+    #   <p>Is the field being added, removed, or modified?</p>
     #   @return [String]
     # @!attribute description
-    #   <p>Description
-    #            of what's changing about this
-    #            field. This value
-    #            can be up to 512 characters long.</p>
+    #   <p>Description of what's changing about this field. This value can be up to 512 characters long.</p>
     #   @return [String]
     class SchemaChangeDetails < Struct.new(
       nil,
@@ -3075,14 +2952,10 @@ module Aws::DataExchange
 
     # <p>Extra details specific to this schema change type notification.</p>
     # @!attribute changes
-    #   <p>List
-    #            of schema changes happening in the scope of this
-    #            notification. This
-    #            can have up to 100 entries.</p>
+    #   <p>List of schema changes happening in the scope of this notification. This can have up to 100 entries.</p>
     #   @return [Array<Types::SchemaChangeDetails>]
     # @!attribute schema_change_at
-    #   <p>A
-    #            date in the future when the schema change is taking effect.</p>
+    #   <p>A date in the future when the schema change is taking effect.</p>
     #   @return [Time]
     class SchemaChangeRequestDetails < Struct.new(
       nil,
@@ -3095,16 +2968,13 @@ module Aws::DataExchange
 
     # <p>Details about the scope of the notifications such as the affected resources.</p>
     # @!attribute lake_formation_tag_policies
-    #   <p>Underlying
-    #            LF resources that will be affected by this notification.</p>
+    #   <p>Underlying LF resources that will be affected by this notification.</p>
     #   @return [Array<Types::LakeFormationTagPolicyDetails>]
     # @!attribute redshift_data_shares
-    #   <p>Underlying
-    #            Redshift resources that will be affected by this notification.</p>
+    #   <p>Underlying Redshift resources that will be affected by this notification.</p>
     #   @return [Array<Types::RedshiftDataShareDetails>]
     # @!attribute s3_data_accesses
-    #   <p>Underlying
-    #            S3 resources that will be affected by this notification.</p>
+    #   <p>Underlying S3 resources that will be affected by this notification.</p>
     #   @return [Array<Types::S3DataAccessDetails>]
     class ScopeDetails < Struct.new(
       nil,
@@ -3120,8 +2990,7 @@ module Aws::DataExchange
     #   <p>The request body.</p>
     #   @return [String]
     # @!attribute query_string_parameters
-    #   <p>Attach query string parameters to the end of the URI (for example,
-    #            /v1/examplePath?exampleParam=exampleValue).</p>
+    #   <p>Attach query string parameters to the end of the URI (for example, /v1/examplePath?exampleParam=exampleValue).</p>
     #   @return [Hash<String, String>]
     # @!attribute asset_id
     #   <p>Asset ID value for the API request.</p>
@@ -3130,18 +2999,13 @@ module Aws::DataExchange
     #   <p>Data set ID value for the API request.</p>
     #   @return [String]
     # @!attribute request_headers
-    #   <p>Any header value prefixed with x-amzn-dataexchange-header- will have that stripped
-    #            before sending the Asset API request. Use this when you want to override a header that AWS
-    #            Data Exchange uses. Alternatively, you can use the header without a prefix to the HTTP
-    #            request.</p>
+    #   <p>Any header value prefixed with x-amzn-dataexchange-header- will have that stripped before sending the Asset API request. Use this when you want to override a header that AWS Data Exchange uses. Alternatively, you can use the header without a prefix to the HTTP request.</p>
     #   @return [Hash<String, String>]
     # @!attribute method
-    #   <p>HTTP method value for the API request. Alternatively, you can use the appropriate verb
-    #            in your request.</p>
+    #   <p>HTTP method value for the API request. Alternatively, you can use the appropriate verb in your request.</p>
     #   @return [String]
     # @!attribute path
-    #   <p>URI path value for the API request. Alternatively, you can set the URI path directly by
-    #            invoking /v1/{pathValue}.</p>
+    #   <p>URI path value for the API request. Alternatively, you can set the URI path directly by invoking /v1/{pathValue}.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>Revision ID value for the API request.</p>
@@ -3177,31 +3041,22 @@ module Aws::DataExchange
     end
 
     # @!attribute scope
-    #   <p>Affected
-    #            scope of this notification such as the underlying resources affected by the notification
-    #            event.</p>
+    #   <p>Affected scope of this notification such as the underlying resources affected by the notification event.</p>
     #   @return [Types::ScopeDetails]
     # @!attribute client_token
-    #   <p>Idempotency
-    #            key for the notification, this key allows us to deduplicate notifications that are sent in
-    #            quick succession erroneously.</p>
+    #   <p>Idempotency key for the notification, this key allows us to deduplicate notifications that are sent in quick succession erroneously.</p>
     #   @return [String]
     # @!attribute comment
-    #   <p>Free-form
-    #            text field for providers to add information about their notifications.</p>
+    #   <p>Free-form text field for providers to add information about their notifications.</p>
     #   @return [String]
     # @!attribute data_set_id
-    #   <p>Affected
-    #            data set of the notification.</p>
+    #   <p>Affected data set of the notification.</p>
     #   @return [String]
     # @!attribute details
-    #   <p>Extra
-    #            details specific to this notification type.</p>
+    #   <p>Extra details specific to this notification type.</p>
     #   @return [Types::NotificationDetails]
     # @!attribute type
-    #   <p>The
-    #            type of the notification. Describing the kind of event the notification is alerting you
-    #            to.</p>
+    #   <p>The type of the notification. Describing the kind of event the notification is alerting you to.</p>
     #   @return [String]
     class SendDataSetNotificationRequest < Struct.new(
       nil,
@@ -3294,6 +3149,22 @@ module Aws::DataExchange
       include ::Smithy::Schema::Structure
     end
 
+    # <p>A tag consisting of a key-value pair that can be applied to a resource.</p>
+    # @!attribute key
+    #   <p>The key of the tag.</p>
+    #   @return [String]
+    # @!attribute value
+    #   <p>The value of the tag.</p>
+    #   @return [String]
+    class Tag < Struct.new(
+      nil,
+      :key,
+      :value,
+      keyword_init: true
+    )
+      include ::Smithy::Schema::Structure
+    end
+
     # @!attribute resource_arn
     #   <p>An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.</p>
     #   @return [String]
@@ -3343,13 +3214,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a data set.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used
-    #            as the asset name. When exporting to Amazon S3, the asset name is used as default target
-    #            Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as
-    #            the asset name. When importing from Amazon Redshift, the datashare name is used as the
-    #            asset name. When importing from AWS Lake Formation, the static values of "Database(s)
-    #            included in the LF-tag policy" or "Table(s) included in LF-tag policy" are used as the
-    #            name.</p>
+    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name. When importing from AWS Lake Formation, the static values of "Database(s) included in the LF-tag policy" or "Table(s) included in LF-tag policy" are used as the name.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for a revision.</p>
@@ -3384,21 +3249,13 @@ module Aws::DataExchange
     #   <p>The unique identifier for the asset.</p>
     #   @return [String]
     # @!attribute name
-    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used
-    #            as the asset name. When exporting to Amazon S3, the asset name is used as default target
-    #            Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as
-    #            the asset name. When importing from Amazon Redshift, the datashare name is used as the
-    #            asset name. When importing from AWS Lake Formation, the static values of "Database(s)
-    #            included in the LF-tag policy"- or "Table(s) included in LF-tag policy" are used as the
-    #            asset name.</p>
+    #   <p>The name of the asset. When importing from Amazon S3, the Amazon S3 object key is used as the asset name. When exporting to Amazon S3, the asset name is used as default target Amazon S3 object key. When importing from Amazon API Gateway API, the API name is used as the asset name. When importing from Amazon Redshift, the datashare name is used as the asset name. When importing from AWS Lake Formation, the static values of "Database(s) included in the LF-tag policy"- or "Table(s) included in LF-tag policy" are used as the asset name.</p>
     #   @return [String]
     # @!attribute revision_id
     #   <p>The unique identifier for the revision associated with this asset.</p>
     #   @return [String]
     # @!attribute source_id
-    #   <p>The asset ID of the owned asset corresponding to the entitled asset being viewed. This
-    #            parameter is returned when an asset owner is viewing the entitled copy of its owned
-    #            asset.</p>
+    #   <p>The asset ID of the owned asset corresponding to the entitled asset being viewed. This parameter is returned when an asset owner is viewing the entitled copy of its owned asset.</p>
     #   @return [String]
     # @!attribute updated_at
     #   <p>The date and time that the asset was last updated, in ISO 8601 format.</p>
@@ -3458,17 +3315,13 @@ module Aws::DataExchange
     #   <p>The name of the data set.</p>
     #   @return [String]
     # @!attribute origin
-    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED
-    #            to the account (for subscribers).</p>
+    #   <p>A property that defines the data set as OWNED by the account (for providers) or ENTITLED to the account (for subscribers).</p>
     #   @return [String]
     # @!attribute origin_details
-    #   <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS
-    #            Marketplace.</p>
+    #   <p>If the origin of this data set is ENTITLED, includes the details for the product on AWS Marketplace.</p>
     #   @return [Types::OriginDetails]
     # @!attribute source_id
-    #   <p>The data set ID of the owned data set corresponding to the entitled data set being
-    #            viewed. This parameter is returned when a data set owner is viewing the entitled copy of
-    #            its owned data set.</p>
+    #   <p>The data set ID of the owned data set corresponding to the entitled data set being viewed. This parameter is returned when a data set owner is viewing the entitled copy of its owned data set.</p>
     #   @return [String]
     # @!attribute updated_at
     #   <p>The date and time that the data set was last updated, in ISO 8601 format.</p>
@@ -3543,9 +3396,7 @@ module Aws::DataExchange
     #   <p>The unique identifier for a data set.</p>
     #   @return [String]
     # @!attribute finalized
-    #   <p>Finalizing a revision tells AWS Data Exchange that your changes to the assets in the
-    #            revision are complete. After it's in this read-only state, you can publish the revision to
-    #            your products.</p>
+    #   <p>Finalizing a revision tells AWS Data Exchange that your changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products.</p>
     #   @return [Boolean]
     # @!attribute revision_id
     #   <p>The unique identifier for a revision.</p>
@@ -3574,27 +3425,19 @@ module Aws::DataExchange
     #   <p>The unique identifier for the data set associated with the data set revision.</p>
     #   @return [String]
     # @!attribute finalized
-    #   <p>To publish a revision to a data set in a product, the revision must first be finalized.
-    #            Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision
-    #            are complete. After it's in this read-only state, you can publish the revision to your
-    #            products. Finalized revisions can be published through the AWS Data Exchange console or the
-    #            AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action.
-    #            When using the API, revisions are uniquely identified by their ARN.</p>
+    #   <p>To publish a revision to a data set in a product, the revision must first be finalized. Finalizing a revision tells AWS Data Exchange that changes to the assets in the revision are complete. After it's in this read-only state, you can publish the revision to your products. Finalized revisions can be published through the AWS Data Exchange console or the AWS Marketplace Catalog API, using the StartChangeSet AWS Marketplace Catalog API action. When using the API, revisions are uniquely identified by their ARN.</p>
     #   @return [Boolean]
     # @!attribute id
     #   <p>The unique identifier for the revision.</p>
     #   @return [String]
     # @!attribute source_id
-    #   <p>The revision ID of the owned revision corresponding to the entitled revision being
-    #            viewed. This parameter is returned when a revision owner is viewing the entitled copy of
-    #            its owned revision.</p>
+    #   <p>The revision ID of the owned revision corresponding to the entitled revision being viewed. This parameter is returned when a revision owner is viewing the entitled copy of its owned revision.</p>
     #   @return [String]
     # @!attribute updated_at
     #   <p>The date and time that the revision was last updated, in ISO 8601 format.</p>
     #   @return [Time]
     # @!attribute revocation_comment
-    #   <p>A required comment to inform subscribers of the reason their access to the revision was
-    #            revoked.</p>
+    #   <p>A required comment to inform subscribers of the reason their access to the revision was revoked.</p>
     #   @return [String]
     # @!attribute revoked
     #   <p>A status indicating that subscribers' access to the revision was revoked.</p>

@@ -27,13 +27,13 @@
                 "programCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of programs in a program set. This is only available for a Program Set.</p>"
+                        "smithy.api#documentation": "<p>The number of programs in a program set. This is only available for a program set.</p>"
                     }
                 },
                 "executableCount": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of executables in a program set. This is only available for a Program Set.</p>"
+                        "smithy.api#documentation": "<p>The number of executables in a program set. This is only available for a program set.</p>"
                     }
                 }
             },
@@ -123,6 +123,9 @@
                 },
                 {
                     "target": "com.amazonaws.braket#QuantumTaskResource"
+                },
+                {
+                    "target": "com.amazonaws.braket#SpendingLimitResource"
                 }
             ],
             "traits": {
@@ -155,6 +158,194 @@
                 },
                 "smithy.api#documentation": "<p>The Amazon Braket API Reference provides information about the operations and structures supported by Amazon Braket.</p> <p>To learn about the permissions required to call an Amazon Braket API action, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonbraket.html\">Actions, resources, and condition keys for Amazon Braket</a>. <a href=\"https://amazon-braket-sdk-python.readthedocs.io/en/latest/#\">Amazon Braket Python SDK</a> and the <a href=\"https://docs.aws.amazon.com/cli/latest/reference/braket/\">AWS Command Line Interface</a> can be used to make discovery and creation of API calls easier. For more information about Amazon Braket features, see <a href=\"https://docs.aws.amazon.com/braket/latest/developerguide/what-is-braket.html\">What is Amazon Braket?</a> and important <a href=\"https://docs.aws.amazon.com/braket/latest/developerguide/braket-terms.html\">terms and concepts</a> in the <i>Amazon Braket Developer Guide</i>.</p> <p> <b>In this guide:</b> </p> <ul> <li> <p/> </li> <li> <p/> </li> <li> <p> <a>CommonParameters</a> </p> </li> <li> <p> <a>CommonErrors</a> </p> </li> </ul> <p> <b>Available languages for AWS SDK:</b> </p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/sdkfornet/v3/apidocs/items/Braket/NBraket.html\">.NET</a> </p> </li> <li> <p> <a href=\"https://sdk.amazonaws.com/cpp/api/LATEST/root/html/index.html\">C++</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-go/api/service/braket/\">Go API reference</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AWSJavaSDK/latest/javadoc/com/amazonaws/services/braket/package-summary.html\">Java</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Braket.html\">JavaScript</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/aws-sdk-php/v3/api/class-Aws.Braket.BraketClient.html\">PHP</a> </p> </li> <li> <p> <a href=\"https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/braket.html\">Python (Boto)</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Braket.html\">Ruby</a> </p> </li> </ul> <p> <b>Code examples from the Amazon Braket Tutorials GitHub repository:</b> </p> <ul> <li> <p> <a href=\"https://github.com/amazon-braket/amazon-braket-examples\">Amazon Braket Examples</a> </p> </li> </ul>",
                 "smithy.api#title": "Braket",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://braket-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://braket-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://braket.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://braket.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -162,27 +353,27 @@
                             "builtIn": "AWS::Region",
                             "required": false,
                             "documentation": "The AWS region used to dispatch the request.",
-                            "type": "String"
+                            "type": "string"
                         },
                         "UseDualStack": {
                             "builtIn": "AWS::UseDualStack",
                             "required": true,
                             "default": false,
                             "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "UseFIPS": {
                             "builtIn": "AWS::UseFIPS",
                             "required": true,
                             "default": false,
                             "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
-                            "type": "Boolean"
+                            "type": "boolean"
                         },
                         "Endpoint": {
                             "builtIn": "SDK::Endpoint",
                             "required": false,
                             "documentation": "Override the endpoint used to send this request",
-                            "type": "String"
+                            "type": "string"
                         }
                     },
                     "rules": [
@@ -1277,6 +1468,12 @@
                             "max": 1
                         }
                     }
+                },
+                "experimentalCapabilities": {
+                    "target": "com.amazonaws.braket#ExperimentalCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable experimental capabilities for the quantum task.</p>"
+                    }
                 }
             }
         },
@@ -1292,6 +1489,101 @@
                 }
             }
         },
+        "com.amazonaws.braket#CreateSpendingLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.braket#CreateSpendingLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.braket#CreateSpendingLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.braket#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.braket#DeviceRetiredException"
+                },
+                {
+                    "target": "com.amazonaws.braket#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a spending limit for a specified quantum device. Spending limits help you control costs by setting maximum amounts that can be spent on quantum computing tasks within a specified time period. Simulators do not support spending limits.</p>",
+                "smithy.api#http": {
+                    "uri": "/spending-limit",
+                    "method": "POST",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.braket#CreateSpendingLimitRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.braket#String64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Braket ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "deviceArn": {
+                    "target": "com.amazonaws.braket#DeviceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quantum device to apply the spending limit to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spendingLimit": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount that can be spent on the specified device, in USD.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#pattern": "^\\d+(\\.\\d{1,2})?$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timePeriod": {
+                    "target": "com.amazonaws.braket#TimePeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period during which the spending limit is active, including start and end dates.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.braket#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the spending limit. Each tag consists of a key and an optional value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.braket#CreateSpendingLimitResponse": {
+            "type": "structure",
+            "members": {
+                "spendingLimitArn": {
+                    "target": "com.amazonaws.braket#SpendingLimitArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created spending limit.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.braket#DataSource": {
             "type": "structure",
             "members": {
@@ -1305,6 +1597,64 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about the source of the input data used by the Amazon Braket hybrid job.</p>"
+            }
+        },
+        "com.amazonaws.braket#DeleteSpendingLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.braket#DeleteSpendingLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.braket#DeleteSpendingLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.braket#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.braket#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing spending limit. This operation permanently removes the spending limit and cannot be undone. After deletion, the associated device becomes unrestricted for spending.</p>",
+                "smithy.api#http": {
+                    "uri": "/spending-limit/{spendingLimitArn}/delete",
+                    "method": "DELETE",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.braket#DeleteSpendingLimitRequest": {
+            "type": "structure",
+            "members": {
+                "spendingLimitArn": {
+                    "target": "com.amazonaws.braket#SpendingLimitArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the spending limit to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.braket#DeleteSpendingLimitResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.braket#DeviceArn": {
@@ -1494,6 +1844,35 @@
                     {
                         "value": "SIMULATOR",
                         "name": "SIMULATOR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.braket#ExperimentalCapabilities": {
+            "type": "union",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.braket#ExperimentalCapabilitiesEnablementType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enabled experimental capabilities.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enabled experimental capabilities for quantum hardware. Note that the use of these features may impact device capabilities and performance beyond its standard specifications.</p>"
+            }
+        },
+        "com.amazonaws.braket#ExperimentalCapabilitiesEnablementType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    },
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
                     }
                 ]
             }
@@ -1961,6 +2340,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata about the action performed by the quantum task, including information about the type of action and program counts.</p>"
                     }
+                },
+                "experimentalCapabilities": {
+                    "target": "com.amazonaws.braket#ExperimentalCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enabled experimental capabilities for the quantum task, if any.</p>"
+                    }
                 }
             }
         },
@@ -2105,6 +2490,18 @@
             "traits": {
                 "smithy.api#enum": [
                     {
+                        "value": "ml.t3.large",
+                        "name": "ML_T3_LARGE"
+                    },
+                    {
+                        "value": "ml.t3.xlarge",
+                        "name": "ML_T3_XLARGE"
+                    },
+                    {
+                        "value": "ml.t3.2xlarge",
+                        "name": "ML_T3_2XLARGE"
+                    },
+                    {
                         "value": "ml.m4.xlarge",
                         "name": "ML_M4_XLARGE"
                     },
@@ -2123,30 +2520,6 @@
                     {
                         "value": "ml.m4.16xlarge",
                         "name": "ML_M4_16XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.xlarge",
-                        "name": "ML_G4DN_XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.2xlarge",
-                        "name": "ML_G4DN_2XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.4xlarge",
-                        "name": "ML_G4DN_4XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.8xlarge",
-                        "name": "ML_G4DN_8XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.12xlarge",
-                        "name": "ML_G4DN_12XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.16xlarge",
-                        "name": "ML_G4DN_16XLARGE"
                     },
                     {
                         "value": "ml.m5.large",
@@ -2189,38 +2562,6 @@
                         "name": "ML_C4_8XLARGE"
                     },
                     {
-                        "value": "ml.p2.xlarge",
-                        "name": "ML_P2_XLARGE"
-                    },
-                    {
-                        "value": "ml.p2.8xlarge",
-                        "name": "ML_P2_8XLARGE"
-                    },
-                    {
-                        "value": "ml.p2.16xlarge",
-                        "name": "ML_P2_16XLARGE"
-                    },
-                    {
-                        "value": "ml.p3.2xlarge",
-                        "name": "ML_P3_2XLARGE"
-                    },
-                    {
-                        "value": "ml.p3.8xlarge",
-                        "name": "ML_P3_8XLARGE"
-                    },
-                    {
-                        "value": "ml.p3.16xlarge",
-                        "name": "ML_P3_16XLARGE"
-                    },
-                    {
-                        "value": "ml.p3dn.24xlarge",
-                        "name": "ML_P3DN_24XLARGE"
-                    },
-                    {
-                        "value": "ml.p4d.24xlarge",
-                        "name": "ML_P4D_24XLARGE"
-                    },
-                    {
                         "value": "ml.c5.xlarge",
                         "name": "ML_C5_XLARGE"
                     },
@@ -2259,6 +2600,126 @@
                     {
                         "value": "ml.c5n.18xlarge",
                         "name": "ML_C5N_18XLARGE"
+                    },
+                    {
+                        "value": "ml.p2.xlarge",
+                        "name": "ML_P2_XLARGE"
+                    },
+                    {
+                        "value": "ml.p2.8xlarge",
+                        "name": "ML_P2_8XLARGE"
+                    },
+                    {
+                        "value": "ml.p2.16xlarge",
+                        "name": "ML_P2_16XLARGE"
+                    },
+                    {
+                        "value": "ml.p3.2xlarge",
+                        "name": "ML_P3_2XLARGE"
+                    },
+                    {
+                        "value": "ml.p3.8xlarge",
+                        "name": "ML_P3_8XLARGE"
+                    },
+                    {
+                        "value": "ml.p3.16xlarge",
+                        "name": "ML_P3_16XLARGE"
+                    },
+                    {
+                        "value": "ml.p3dn.24xlarge",
+                        "name": "ML_P3DN_24XLARGE"
+                    },
+                    {
+                        "value": "ml.p4d.24xlarge",
+                        "name": "ML_P4D_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.xlarge",
+                        "name": "ML_G4DN_XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.2xlarge",
+                        "name": "ML_G4DN_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.4xlarge",
+                        "name": "ML_G4DN_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.8xlarge",
+                        "name": "ML_G4DN_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.12xlarge",
+                        "name": "ML_G4DN_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.16xlarge",
+                        "name": "ML_G4DN_16XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.xlarge",
+                        "name": "ML_G6_XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.2xlarge",
+                        "name": "ML_G6_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.4xlarge",
+                        "name": "ML_G6_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.8xlarge",
+                        "name": "ML_G6_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.12xlarge",
+                        "name": "ML_G6_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.16xlarge",
+                        "name": "ML_G6_16XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.24xlarge",
+                        "name": "ML_G6_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.48xlarge",
+                        "name": "ML_G6_48XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.xlarge",
+                        "name": "ML_G6E_XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.2xlarge",
+                        "name": "ML_G6E_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.4xlarge",
+                        "name": "ML_G6E_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.8xlarge",
+                        "name": "ML_G6E_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.12xlarge",
+                        "name": "ML_G6E_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.16xlarge",
+                        "name": "ML_G6E_16XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.24xlarge",
+                        "name": "ML_G6E_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.48xlarge",
+                        "name": "ML_G6E_48XLARGE"
                     }
                 ]
             }
@@ -3418,6 +3879,148 @@
                 }
             }
         },
+        "com.amazonaws.braket#SearchSpendingLimits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.braket#SearchSpendingLimitsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.braket#SearchSpendingLimitsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.braket#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.braket#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches and lists spending limits based on specified filters. This operation supports pagination and allows filtering by various criteria to find specific spending limits. We recommend using pagination to ensure that the operation returns quickly and successfully.</p>",
+                "smithy.api#http": {
+                    "uri": "/spending-limits",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "spendingLimits"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.braket#SearchSpendingLimitsFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.braket#String64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field to filter on. Currently only supports <code>deviceArn</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.braket#String256List",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of values to match against the specified field.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 10
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.braket#SearchSpendingLimitsFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator to use when filtering.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies filter criteria for searching spending limits. Use filters to narrow down results based on specific attributes.</p>"
+            }
+        },
+        "com.amazonaws.braket#SearchSpendingLimitsFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.braket#SearchSpendingLimitsFilter"
+            }
+        },
+        "com.amazonaws.braket#SearchSpendingLimitsFilterOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUAL",
+                        "name": "EQUAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.braket#SearchSpendingLimitsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next page of results. This value is returned from a previous call to SearchSpendingLimits when there are more results available.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Minimum value of 1, maximum value of 100. Default is 20.</p>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.braket#SearchSpendingLimitsFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply when searching for spending limits. Use filters to narrow down the results based on specific criteria.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 10
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.braket#SearchSpendingLimitsResponse": {
+            "type": "structure",
+            "members": {
+                "spendingLimits": {
+                    "target": "com.amazonaws.braket#SpendingLimitSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of spending limit summaries that match the specified filters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to retrieve the next page of results. This value is null when there are no more results to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.braket#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -3429,6 +4032,124 @@
                 "smithy.api#documentation": "<p>The request failed because a service quota is exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.braket#SpendingLimitArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "service": "com.amazonaws.braket#Braket",
+                    "resource": "com.amazonaws.braket#SpendingLimitResource"
+                },
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:braket:[a-z0-9\\-]+:[0-9]{12}:spending-limit/.*$"
+            }
+        },
+        "com.amazonaws.braket#SpendingLimitResource": {
+            "type": "resource",
+            "identifiers": {
+                "spendingLimitArn": {
+                    "target": "com.amazonaws.braket#SpendingLimitArn"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.braket#CreateSpendingLimit"
+            },
+            "update": {
+                "target": "com.amazonaws.braket#UpdateSpendingLimit"
+            },
+            "delete": {
+                "target": "com.amazonaws.braket#DeleteSpendingLimit"
+            },
+            "list": {
+                "target": "com.amazonaws.braket#SearchSpendingLimits"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{spendingLimitArn}",
+                    "absolute": true
+                }
+            }
+        },
+        "com.amazonaws.braket#SpendingLimitSummary": {
+            "type": "structure",
+            "members": {
+                "spendingLimitArn": {
+                    "target": "com.amazonaws.braket#SpendingLimitArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the spending limit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deviceArn": {
+                    "target": "com.amazonaws.braket#DeviceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the quantum device associated with this spending limit.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timePeriod": {
+                    "target": "com.amazonaws.braket#TimePeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time period during which the spending limit is active.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spendingLimit": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum spending amount allowed for the device during the specified time period, in USD.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "queuedSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount currently queued for spending on the device, in USD.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "totalSpend": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount spent on the device so far during the current time period, in USD.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the spending limit was created, in epoch seconds.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the spending limit was last modified, in epoch seconds.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "date-time"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.braket#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the spending limit. Each tag consists of a key and an optional value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains summary information about a spending limit, including current spending status and configuration details.</p>"
+            }
+        },
+        "com.amazonaws.braket#SpendingLimitSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.braket#SpendingLimitSummary"
             }
         },
         "com.amazonaws.braket#String1024": {
@@ -3561,6 +4282,30 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.braket#TimePeriod": {
+            "type": "structure",
+            "members": {
+                "startAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date and time for the spending limit period, in epoch seconds.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "epoch-seconds"
+                    }
+                },
+                "endAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date and time for the spending limit period, in epoch seconds.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#timestampFormat": "epoch-seconds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a time range for spending limits, specifying when the limit is active.</p>"
+            }
+        },
         "com.amazonaws.braket#UntagResource": {
             "type": "operation",
             "input": {
@@ -3613,6 +4358,88 @@
         "com.amazonaws.braket#UntagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.braket#UpdateSpendingLimit": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.braket#UpdateSpendingLimitRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.braket#UpdateSpendingLimitResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.braket#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.braket#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.braket#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing spending limit. You can modify the spending amount or time period. Changes take effect immediately.</p>",
+                "smithy.api#http": {
+                    "uri": "/spending-limit/{spendingLimitArn}/update",
+                    "method": "PATCH",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.braket#UpdateSpendingLimitRequest": {
+            "type": "structure",
+            "members": {
+                "spendingLimitArn": {
+                    "target": "com.amazonaws.braket#SpendingLimitArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the spending limit to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.braket#String64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the operation completes no more than one time. If this token matches a previous request, Amazon Braket ignores the request, but does not return an error.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "spendingLimit": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new maximum amount that can be spent on the specified device, in USD.</p>",
+                        "smithy.api#length": {
+                            "min": 1
+                        },
+                        "smithy.api#pattern": "^\\d+(\\.\\d{1,2})?$"
+                    }
+                },
+                "timePeriod": {
+                    "target": "com.amazonaws.braket#TimePeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new time period during which the spending limit is active, including start and end dates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.braket#UpdateSpendingLimitResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
         },
         "com.amazonaws.braket#Uri": {
             "type": "string",

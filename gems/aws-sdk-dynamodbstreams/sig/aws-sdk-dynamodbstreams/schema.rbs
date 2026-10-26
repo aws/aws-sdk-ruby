@@ -57,6 +57,7 @@ module Aws::DynamoDBStreams
     StringAttributeValue: StringShape
     StringSetAttributeValue: ListShape
     TableName: StringShape
+    Timestamp: TimestampShape
     TrimmedDataAccessException: StructureShape
 
     DynamoDBStreams20120810: ServiceShape

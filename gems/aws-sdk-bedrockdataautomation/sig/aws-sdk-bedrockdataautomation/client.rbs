@@ -44,6 +44,16 @@ module Aws::BedrockDataAutomation
       ?validate_params: bool,
     ) -> void | (?Hash[Symbol, untyped]) -> void
 
+    interface _CopyBlueprintStageResponse
+      include Smithy::Client::_Response[Types::CopyBlueprintStageResponse]
+    end
+    def copy_blueprint_stage: (
+      ?blueprint_arn: String,
+      ?source_stage: String,
+      ?target_stage: String,
+      ?client_token: String
+    ) -> _CopyBlueprintStageResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CopyBlueprintStageResponse
+
     interface _CreateBlueprintResponse
       include Smithy::Client::_Response[Types::CreateBlueprintResponse]
       def blueprint: () -> Types::Blueprint?
@@ -75,6 +85,27 @@ module Aws::BedrockDataAutomation
       ?client_token: String
     ) -> _CreateBlueprintVersionResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateBlueprintVersionResponse
 
+    interface _CreateDataAutomationLibraryResponse
+      include Smithy::Client::_Response[Types::CreateDataAutomationLibraryResponse]
+      def library_arn: () -> String?
+      def status: () -> String?
+    end
+    def create_data_automation_library: (
+      ?library_name: String,
+      ?library_description: String,
+      ?client_token: String,
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_encryption_context: Hash[String, String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _CreateDataAutomationLibraryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _CreateDataAutomationLibraryResponse
+
     interface _CreateDataAutomationProjectResponse
       include Smithy::Client::_Response[Types::CreateDataAutomationProjectResponse]
       def project_arn: () -> String?
@@ -85,6 +116,7 @@ module Aws::BedrockDataAutomation
       ?project_name: String,
       ?project_description: String,
       ?project_stage: String,
+      ?project_type: String,
       ?standard_output_configuration: {
         document: {
           extraction: {
@@ -167,7 +199,16 @@ module Aws::BedrockDataAutomation
             blueprint_version: String,
             blueprint_stage: String
           }
-        ]
+        ],
+        document: {
+          fallback_blueprints: Array[
+            {
+              blueprint_arn: untyped,
+              blueprint_version: untyped,
+              blueprint_stage: untyped
+            }
+          ]
+        }
       },
       ?override_configuration: {
         document: {
@@ -176,16 +217,32 @@ module Aws::BedrockDataAutomation
           },
           modality_processing: {
             state: untyped
+          },
+          sensitive_data_configuration: {
+            detection_mode: String,
+            detection_scope: Array[String],
+            pii_entities_configuration: {
+              pii_entity_types: Array[String],
+              redaction_mask_mode: String
+            }
           }
         },
         image: {
-          modality_processing: untyped
+          modality_processing: untyped,
+          sensitive_data_configuration: untyped
         },
         video: {
-          modality_processing: untyped
+          modality_processing: untyped,
+          sensitive_data_configuration: untyped
         },
         audio: {
-          modality_processing: untyped
+          modality_processing: untyped,
+          language_configuration: {
+            input_languages: Array[String],
+            generative_output_language: String,
+            identify_multiple_languages: bool
+          },
+          sensitive_data_configuration: untyped
         },
         modality_routing: {
           jpeg: String,
@@ -193,6 +250,13 @@ module Aws::BedrockDataAutomation
           mp4: untyped,
           mov: untyped
         }
+      },
+      ?data_automation_library_configuration: {
+        libraries: Array[
+          {
+            library_arn: String
+          }
+        ]
       },
       ?client_token: String,
       ?encryption_configuration: {
@@ -215,6 +279,15 @@ module Aws::BedrockDataAutomation
       ?blueprint_version: String
     ) -> _DeleteBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteBlueprintResponse
 
+    interface _DeleteDataAutomationLibraryResponse
+      include Smithy::Client::_Response[Types::DeleteDataAutomationLibraryResponse]
+      def library_arn: () -> String?
+      def status: () -> String?
+    end
+    def delete_data_automation_library: (
+      ?library_arn: String
+    ) -> _DeleteDataAutomationLibraryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _DeleteDataAutomationLibraryResponse
+
     interface _DeleteDataAutomationProjectResponse
       include Smithy::Client::_Response[Types::DeleteDataAutomationProjectResponse]
       def project_arn: () -> String?
@@ -234,6 +307,44 @@ module Aws::BedrockDataAutomation
       ?blueprint_stage: String
     ) -> _GetBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBlueprintResponse
 
+    interface _GetBlueprintOptimizationStatusResponse
+      include Smithy::Client::_Response[Types::GetBlueprintOptimizationStatusResponse]
+      def status: () -> String?
+      def error_type: () -> String?
+      def error_message: () -> String?
+      def output_configuration: () -> Types::BlueprintOptimizationOutputConfiguration?
+    end
+    def get_blueprint_optimization_status: (
+      ?invocation_arn: String
+    ) -> _GetBlueprintOptimizationStatusResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetBlueprintOptimizationStatusResponse
+
+    interface _GetDataAutomationLibraryResponse
+      include Smithy::Client::_Response[Types::GetDataAutomationLibraryResponse]
+      def library: () -> Types::DataAutomationLibrary?
+    end
+    def get_data_automation_library: (
+      ?library_arn: String
+    ) -> _GetDataAutomationLibraryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataAutomationLibraryResponse
+
+    interface _GetDataAutomationLibraryEntityResponse
+      include Smithy::Client::_Response[Types::GetDataAutomationLibraryEntityResponse]
+      def entity: () -> Types::EntityDetails?
+    end
+    def get_data_automation_library_entity: (
+      ?library_arn: String,
+      ?entity_type: String,
+      ?entity_id: String
+    ) -> _GetDataAutomationLibraryEntityResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataAutomationLibraryEntityResponse
+
+    interface _GetDataAutomationLibraryIngestionJobResponse
+      include Smithy::Client::_Response[Types::GetDataAutomationLibraryIngestionJobResponse]
+      def job: () -> Types::DataAutomationLibraryIngestionJob?
+    end
+    def get_data_automation_library_ingestion_job: (
+      ?library_arn: String,
+      ?job_arn: String
+    ) -> _GetDataAutomationLibraryIngestionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataAutomationLibraryIngestionJobResponse
+
     interface _GetDataAutomationProjectResponse
       include Smithy::Client::_Response[Types::GetDataAutomationProjectResponse]
       def project: () -> Types::DataAutomationProject?
@@ -242,6 +353,94 @@ module Aws::BedrockDataAutomation
       ?project_arn: String,
       ?project_stage: String
     ) -> _GetDataAutomationProjectResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _GetDataAutomationProjectResponse
+
+    interface _InvokeBlueprintOptimizationAsyncResponse
+      include Smithy::Client::_Response[Types::InvokeBlueprintOptimizationAsyncResponse]
+      def invocation_arn: () -> String?
+    end
+    def invoke_blueprint_optimization_async: (
+      ?blueprint: {
+        blueprint_arn: String,
+        stage: String
+      },
+      ?samples: Array[
+        {
+          asset_s3_object: {
+            s3_uri: String,
+            version: String
+          },
+          ground_truth_s3_object: untyped
+        }
+      ],
+      ?output_configuration: {
+        s3_object: {
+          s3_uri: String,
+          version: String
+        }
+      },
+      ?data_automation_profile_arn: String,
+      ?encryption_configuration: {
+        kms_key_id: String,
+        kms_encryption_context: Hash[String, String]
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _InvokeBlueprintOptimizationAsyncResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeBlueprintOptimizationAsyncResponse
+
+    interface _InvokeDataAutomationLibraryIngestionJobResponse
+      include Smithy::Client::_Response[Types::InvokeDataAutomationLibraryIngestionJobResponse]
+      def job_arn: () -> String?
+    end
+    def invoke_data_automation_library_ingestion_job: (
+      ?library_arn: String,
+      ?client_token: String,
+      ?input_configuration: {
+        s3_object: {
+          s3_uri: String,
+          version: String
+        },
+        inline_payload: {
+          upsert_entities_info: Array[
+            {
+              vocabulary: {
+                entity_id: String,
+                description: String,
+                language: String,
+                phrases: Array[
+                  {
+                    text: String,
+                    display_as_text: String
+                  }
+                ]
+              }
+            }
+          ],
+          delete_entities_info: {
+            entity_ids: Array[String]
+          }
+        }
+      },
+      ?entity_type: String,
+      ?operation_type: String,
+      ?output_configuration: {
+        s3_uri: String
+      },
+      ?notification_configuration: {
+        event_bridge_configuration: {
+          event_bridge_enabled: bool
+        }
+      },
+      ?tags: Array[
+        {
+          key: String,
+          value: String
+        }
+      ]
+    ) -> _InvokeDataAutomationLibraryIngestionJobResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _InvokeDataAutomationLibraryIngestionJobResponse
 
     interface _ListBlueprintsResponse
       include Smithy::Client::_Response[Types::ListBlueprintsResponse]
@@ -260,6 +459,43 @@ module Aws::BedrockDataAutomation
       }
     ) -> _ListBlueprintsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListBlueprintsResponse
 
+    interface _ListDataAutomationLibrariesResponse
+      include Smithy::Client::_Response[Types::ListDataAutomationLibrariesResponse]
+      def libraries: () -> Array[Types::DataAutomationLibrarySummary]?
+      def next_token: () -> String?
+    end
+    def list_data_automation_libraries: (
+      ?max_results: Integer,
+      ?next_token: String,
+      ?project_filter: {
+        project_arn: String,
+        project_stage: String
+      }
+    ) -> _ListDataAutomationLibrariesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataAutomationLibrariesResponse
+
+    interface _ListDataAutomationLibraryEntitiesResponse
+      include Smithy::Client::_Response[Types::ListDataAutomationLibraryEntitiesResponse]
+      def entities: () -> Array[Types::DataAutomationLibraryEntitySummary]?
+      def next_token: () -> String?
+    end
+    def list_data_automation_library_entities: (
+      ?library_arn: String,
+      ?entity_type: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataAutomationLibraryEntitiesResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataAutomationLibraryEntitiesResponse
+
+    interface _ListDataAutomationLibraryIngestionJobsResponse
+      include Smithy::Client::_Response[Types::ListDataAutomationLibraryIngestionJobsResponse]
+      def jobs: () -> Array[Types::DataAutomationLibraryIngestionJobSummary]?
+      def next_token: () -> String?
+    end
+    def list_data_automation_library_ingestion_jobs: (
+      ?library_arn: String,
+      ?max_results: Integer,
+      ?next_token: String
+    ) -> _ListDataAutomationLibraryIngestionJobsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataAutomationLibraryIngestionJobsResponse
+
     interface _ListDataAutomationProjectsResponse
       include Smithy::Client::_Response[Types::ListDataAutomationProjectsResponse]
       def projects: () -> Array[Types::DataAutomationProjectSummary]?
@@ -274,7 +510,10 @@ module Aws::BedrockDataAutomation
         blueprint_version: String,
         blueprint_stage: String
       },
-      ?resource_owner: String
+      ?resource_owner: String,
+      ?library_filter: {
+        library_arn: String
+      }
     ) -> _ListDataAutomationProjectsResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _ListDataAutomationProjectsResponse
 
     interface _ListTagsForResourceResponse
@@ -319,6 +558,17 @@ module Aws::BedrockDataAutomation
         kms_encryption_context: Hash[String, String]
       }
     ) -> _UpdateBlueprintResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateBlueprintResponse
+
+    interface _UpdateDataAutomationLibraryResponse
+      include Smithy::Client::_Response[Types::UpdateDataAutomationLibraryResponse]
+      def library_arn: () -> String?
+      def status: () -> String?
+    end
+    def update_data_automation_library: (
+      ?library_arn: String,
+      ?library_description: String,
+      ?client_token: String
+    ) -> _UpdateDataAutomationLibraryResponse | (?Hash[Symbol, untyped], ?Hash[Symbol, untyped]) -> _UpdateDataAutomationLibraryResponse
 
     interface _UpdateDataAutomationProjectResponse
       include Smithy::Client::_Response[Types::UpdateDataAutomationProjectResponse]
@@ -412,7 +662,16 @@ module Aws::BedrockDataAutomation
             blueprint_version: String,
             blueprint_stage: String
           }
-        ]
+        ],
+        document: {
+          fallback_blueprints: Array[
+            {
+              blueprint_arn: untyped,
+              blueprint_version: untyped,
+              blueprint_stage: untyped
+            }
+          ]
+        }
       },
       ?override_configuration: {
         document: {
@@ -421,16 +680,32 @@ module Aws::BedrockDataAutomation
           },
           modality_processing: {
             state: untyped
+          },
+          sensitive_data_configuration: {
+            detection_mode: String,
+            detection_scope: Array[String],
+            pii_entities_configuration: {
+              pii_entity_types: Array[String],
+              redaction_mask_mode: String
+            }
           }
         },
         image: {
-          modality_processing: untyped
+          modality_processing: untyped,
+          sensitive_data_configuration: untyped
         },
         video: {
-          modality_processing: untyped
+          modality_processing: untyped,
+          sensitive_data_configuration: untyped
         },
         audio: {
-          modality_processing: untyped
+          modality_processing: untyped,
+          language_configuration: {
+            input_languages: Array[String],
+            generative_output_language: String,
+            identify_multiple_languages: bool
+          },
+          sensitive_data_configuration: untyped
         },
         modality_routing: {
           jpeg: String,
@@ -438,6 +713,13 @@ module Aws::BedrockDataAutomation
           mp4: untyped,
           mov: untyped
         }
+      },
+      ?data_automation_library_configuration: {
+        libraries: Array[
+          {
+            library_arn: String
+          }
+        ]
       },
       ?encryption_configuration: {
         kms_key_id: String,

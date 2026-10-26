@@ -1867,6 +1867,29 @@ module Aws::Rekognition
       TIMESTAMP: String
     end
 
+    module FeedbackCode
+      FACE_NOT_VISIBLE: String
+      FACE_OBSTRUCTION_DETECTED: String
+      LOW_VIDEO_QUALITY_DETECTED: String
+      FACE_NOT_ALIGNED: String
+      EYES_CLOSED_DETECTED: String
+      LOW_LIGHTING_DETECTED: String
+      HIGH_LIGHTING_DETECTED: String
+    end
+
+    class FeedbackItem
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?code: String,
+        ?message: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor code: String?
+      attr_accessor message: String?
+    end
+
     class Gender
       include Smithy::Schema::Structure
 
@@ -2105,6 +2128,8 @@ module Aws::Rekognition
         ?reference_image: Types::AuditImage,
         ?audit_images: Array[Types::AuditImage],
         ?challenge: Types::Challenge,
+        ?feedback: Array[Types::FeedbackItem],
+        ?metadata: Types::SessionMetadata,
       ) -> void
       | (?Hash[Symbol, untyped]) -> void
 
@@ -2114,6 +2139,8 @@ module Aws::Rekognition
       attr_accessor reference_image: Types::AuditImage?
       attr_accessor audit_images: Array[Types::AuditImage]?
       attr_accessor challenge: Types::Challenge?
+      attr_accessor feedback: Array[Types::FeedbackItem]?
+      attr_accessor metadata: Types::SessionMetadata?
     end
 
     class GetFaceSearchRequest
@@ -4106,6 +4133,17 @@ module Aws::Rekognition
       attr_accessor message: String?
       attr_accessor code: String?
       attr_accessor logref: String?
+    end
+
+    class SessionMetadata
+      include Smithy::Schema::Structure
+
+      def initialize: (
+        ?sdk_type: String,
+      ) -> void
+      | (?Hash[Symbol, untyped]) -> void
+
+      attr_accessor sdk_type: String?
     end
 
     class SessionNotFoundException

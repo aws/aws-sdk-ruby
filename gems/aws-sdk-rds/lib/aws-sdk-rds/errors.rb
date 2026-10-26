@@ -167,14 +167,14 @@ module Aws::RDS
   # * {TenantDatabaseNotFoundFault}
   # * {TenantDatabaseQuotaExceededFault}
   # * {UnsupportedDBEngineVersionFault}
+  # * {VpcEncryptionControlViolationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
   module Errors
     extend Smithy::Client::DynamicErrors
 
-    # <p>The specified CIDR IP range or Amazon EC2 security group is already authorized for
-    #             the specified DB security group.</p>
+    # <p>The specified CIDR IP range or Amazon EC2 security group is already authorized for the specified DB security group.</p>
     class AuthorizationAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::AuthorizationAlreadyExistsFault] data
@@ -187,10 +187,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The specified CIDR IP range or Amazon EC2 security group might not be authorized
-    #             for the specified DB security group.</p>
-    #          <p>Or, RDS might not be authorized to perform necessary actions using IAM on your
-    #             behalf.</p>
+    # <p>The specified CIDR IP range or Amazon EC2 security group might not be authorized for the specified DB security group.</p> <p>Or, RDS might not be authorized to perform necessary actions using IAM on your behalf.</p>
     class AuthorizationNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::AuthorizationNotFoundFault] data
@@ -216,7 +213,7 @@ module Aws::RDS
       end
     end
 
-    # Error class for BackupPolicyNotFoundFault.
+    # <p/>
     class BackupPolicyNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::BackupPolicyNotFoundFault] data
@@ -242,8 +239,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>BlueGreenDeploymentIdentifier</code> doesn't refer to an existing blue/green deployment.</p>
+    # <p> <code>BlueGreenDeploymentIdentifier</code> doesn't refer to an existing blue/green deployment.</p>
     class BlueGreenDeploymentNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::BlueGreenDeploymentNotFoundFault] data
@@ -256,9 +252,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>CertificateIdentifier</code> doesn't refer to an
-    #         existing certificate.</p>
+    # <p> <code>CertificateIdentifier</code> doesn't refer to an existing certificate.</p>
     class CertificateNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::CertificateNotFoundFault] data
@@ -284,9 +278,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>CustomAvailabilityZoneId</code> doesn't refer to an existing custom
-    #             Availability Zone identifier.</p>
+    # <p> <code>CustomAvailabilityZoneId</code> doesn't refer to an existing custom Availability Zone identifier.</p>
     class CustomAvailabilityZoneNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::CustomAvailabilityZoneNotFoundFault] data
@@ -364,8 +356,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The quota for retained automated backups was exceeded. This prevents you from retaining any additional automated 
-    #             backups. The retained automated backups quota is the same as your DB cluster quota.</p>
+    # <p>The quota for retained automated backups was exceeded. This prevents you from retaining any additional automated backups. The retained automated backups quota is the same as your DB cluster quota.</p>
     class DBClusterAutomatedBackupQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterAutomatedBackupQuotaExceededFault] data
@@ -378,8 +369,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>BacktrackIdentifier</code> doesn't refer to an existing backtrack.</p>
+    # <p> <code>BacktrackIdentifier</code> doesn't refer to an existing backtrack.</p>
     class DBClusterBacktrackNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterBacktrackNotFoundFault] data
@@ -431,8 +421,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBClusterIdentifier</code> doesn't refer to an existing DB cluster.</p>
+    # <p> <code>DBClusterIdentifier</code> doesn't refer to an existing DB cluster.</p>
     class DBClusterNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterNotFoundFault] data
@@ -445,9 +434,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBClusterParameterGroupName</code> doesn't refer to an existing DB
-    #             cluster parameter group.</p>
+    # <p> <code>DBClusterParameterGroupName</code> doesn't refer to an existing DB cluster parameter group.</p>
     class DBClusterParameterGroupNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterParameterGroupNotFoundFault] data
@@ -460,8 +447,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The user attempted to create a new DB cluster and the user has already reached the
-    #             maximum allowed DB cluster quota.</p>
+    # <p>The user attempted to create a new DB cluster and the user has already reached the maximum allowed DB cluster quota.</p>
     class DBClusterQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterQuotaExceededFault] data
@@ -526,8 +512,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBClusterSnapshotIdentifier</code> doesn't refer to an existing DB cluster snapshot.</p>
+    # <p> <code>DBClusterSnapshotIdentifier</code> doesn't refer to an existing DB cluster snapshot.</p>
     class DBClusterSnapshotNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBClusterSnapshotNotFoundFault] data
@@ -566,9 +551,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The quota for retained automated backups was exceeded. This prevents you
-    #             from retaining any additional automated backups. The retained automated backups 
-    #             quota is the same as your DB instance quota.</p>
+    # <p>The quota for retained automated backups was exceeded. This prevents you from retaining any additional automated backups. The retained automated backups quota is the same as your DB instance quota.</p>
     class DBInstanceAutomatedBackupQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceAutomatedBackupQuotaExceededFault] data
@@ -581,8 +564,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBInstanceIdentifier</code> doesn't refer to an existing DB instance.</p>
+    # <p> <code>DBInstanceIdentifier</code> doesn't refer to an existing DB instance.</p>
     class DBInstanceNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceNotFoundFault] data
@@ -621,8 +603,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The specified <code>RoleArn</code> value doesn't match the specified feature for
-    #             the DB instance.</p>
+    # <p>The specified <code>RoleArn</code> value doesn't match the specified feature for the DB instance.</p>
     class DBInstanceRoleNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBInstanceRoleNotFoundFault] data
@@ -648,8 +629,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>LogFileName</code> doesn't refer to an existing DB log file.</p>
+    # <p> <code>LogFileName</code> doesn't refer to an existing DB log file.</p>
     class DBLogFileNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBLogFileNotFoundFault] data
@@ -675,9 +655,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBParameterGroupName</code> doesn't refer to an
-    #         existing DB parameter group.</p>
+    # <p> <code>DBParameterGroupName</code> doesn't refer to an existing DB parameter group.</p>
     class DBParameterGroupNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBParameterGroupNotFoundFault] data
@@ -690,8 +668,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The request would result in the user exceeding the allowed number of DB parameter
-    #             groups.</p>
+    # <p>The request would result in the user exceeding the allowed number of DB parameter groups.</p>
     class DBParameterGroupQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBParameterGroupQuotaExceededFault] data
@@ -821,8 +798,7 @@ module Aws::RDS
       end
     end
 
-    # <p>A DB security group with the name specified in
-    #         <code>DBSecurityGroupName</code> already exists.</p>
+    # <p>A DB security group with the name specified in <code>DBSecurityGroupName</code> already exists.</p>
     class DBSecurityGroupAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSecurityGroupAlreadyExistsFault] data
@@ -835,8 +811,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBSecurityGroupName</code> doesn't refer to an existing DB security group.</p>
+    # <p> <code>DBSecurityGroupName</code> doesn't refer to an existing DB security group.</p>
     class DBSecurityGroupNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSecurityGroupNotFoundFault] data
@@ -862,8 +837,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The request would result in the user exceeding the allowed number of DB security
-    #             groups.</p>
+    # <p>The request would result in the user exceeding the allowed number of DB security groups.</p>
     class DBSecurityGroupQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSecurityGroupQuotaExceededFault] data
@@ -902,8 +876,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBSnapshotIdentifier</code> is already used by an existing snapshot.</p>
+    # <p> <code>DBSnapshotIdentifier</code> is already used by an existing snapshot.</p>
     class DBSnapshotAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSnapshotAlreadyExistsFault] data
@@ -916,8 +889,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBSnapshotIdentifier</code> doesn't refer to an existing DB snapshot.</p>
+    # <p> <code>DBSnapshotIdentifier</code> doesn't refer to an existing DB snapshot.</p>
     class DBSnapshotNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSnapshotNotFoundFault] data
@@ -943,8 +915,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBSubnetGroupName</code> is already used by an existing DB subnet group.</p>
+    # <p> <code>DBSubnetGroupName</code> is already used by an existing DB subnet group.</p>
     class DBSubnetGroupAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetGroupAlreadyExistsFault] data
@@ -970,8 +941,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The DBSubnetGroup shouldn't be specified while creating read replicas that lie
-    #             in the same region as the source instance.</p>
+    # <p>The DBSubnetGroup shouldn't be specified while creating read replicas that lie in the same region as the source instance.</p>
     class DBSubnetGroupNotAllowedFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetGroupNotAllowedFault] data
@@ -984,8 +954,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>DBSubnetGroupName</code> doesn't refer to an existing DB subnet group.</p>
+    # <p> <code>DBSubnetGroupName</code> doesn't refer to an existing DB subnet group.</p>
     class DBSubnetGroupNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetGroupNotFoundFault] data
@@ -998,8 +967,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The request would result in the user exceeding the allowed number of DB subnet
-    #             groups.</p>
+    # <p>The request would result in the user exceeding the allowed number of DB subnet groups.</p>
     class DBSubnetGroupQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetGroupQuotaExceededFault] data
@@ -1012,8 +980,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The request would result in the user exceeding the allowed number of subnets in a
-    #             DB subnet groups.</p>
+    # <p>The request would result in the user exceeding the allowed number of subnets in a DB subnet groups.</p>
     class DBSubnetQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBSubnetQuotaExceededFault] data
@@ -1026,8 +993,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The DB upgrade failed because a resource the DB depends on can't be
-    #             modified.</p>
+    # <p>The DB upgrade failed because a resource the DB depends on can't be modified.</p>
     class DBUpgradeDependencyFailureFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DBUpgradeDependencyFailureFault] data
@@ -1040,8 +1006,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>Domain</code> doesn't refer to an existing Active Directory domain.</p>
+    # <p> <code>Domain</code> doesn't refer to an existing Active Directory domain.</p>
     class DomainNotFoundFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::DomainNotFoundFault] data
@@ -1106,8 +1071,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The <code>GlobalClusterIdentifier</code> already exists. Specify a new global database identifier 
-    #         (unique name) to create a new global database cluster or to rename an existing one.</p>
+    # <p>The <code>GlobalClusterIdentifier</code> already exists. Specify a new global database identifier (unique name) to create a new global database cluster or to rename an existing one.</p>
     class GlobalClusterAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::GlobalClusterAlreadyExistsFault] data
@@ -1172,8 +1136,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The request would result in the user exceeding the allowed number of DB
-    #             instances.</p>
+    # <p>The request would result in the user exceeding the allowed number of DB instances.</p>
     class InstanceQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InstanceQuotaExceededFault] data
@@ -1186,9 +1149,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The requested operation can't be performed because there aren't enough available IP addresses 
-    #            in the proxy's subnets. Add more CIDR blocks to the VPC or remove IP address that aren't required 
-    #            from the subnets.</p>
+    # <p>The requested operation can't be performed because there aren't enough available IP addresses in the proxy's subnets. Add more CIDR blocks to the VPC or remove IP address that aren't required from the subnets.</p>
     class InsufficientAvailableIPsInSubnetFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InsufficientAvailableIPsInSubnetFault] data
@@ -1214,8 +1175,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The specified DB instance class isn't available in the specified Availability
-    #             Zone.</p>
+    # <p>The specified DB instance class isn't available in the specified Availability Zone.</p>
     class InsufficientDBInstanceCapacityFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InsufficientDBInstanceCapacityFault] data
@@ -1228,9 +1188,7 @@ module Aws::RDS
       end
     end
 
-    # <p>There is insufficient storage available for the current action. You might be able to
-    #             resolve this error by updating your subnet group to use different Availability Zones
-    #             that have more storage available.</p>
+    # <p>There is insufficient storage available for the current action. You might be able to resolve this error by updating your subnet group to use different Availability Zones that have more storage available.</p>
     class InsufficientStorageClusterCapacityFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InsufficientStorageClusterCapacityFault] data
@@ -1256,9 +1214,7 @@ module Aws::RDS
       end
     end
 
-    # <p>A conflicting conditional operation is currently in progress against this resource.
-    #             Typically occurs when there are multiple requests being made to the same resource at the same time,
-    #             and these requests conflict with each other.</p>
+    # <p>A conflicting conditional operation is currently in progress against this resource. Typically occurs when there are multiple requests being made to the same resource at the same time, and these requests conflict with each other.</p>
     class IntegrationConflictOperationFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::IntegrationConflictOperationFault] data
@@ -1297,8 +1253,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The blue/green deployment can't be switched over or deleted because there is an invalid configuration in 
-    #             the green environment.</p>
+    # <p>The blue/green deployment can't be switched over or deleted because there is an invalid configuration in the green environment.</p>
     class InvalidBlueGreenDeploymentStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidBlueGreenDeploymentStateFault] data
@@ -1324,8 +1279,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The automated backup is in an invalid state. 
-    #             For example, this automated backup is associated with an active cluster.</p>
+    # <p>The automated backup is in an invalid state. For example, this automated backup is associated with an active cluster.</p>
     class InvalidDBClusterAutomatedBackupStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBClusterAutomatedBackupStateFault] data
@@ -1338,10 +1292,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>Capacity</code> isn't a valid Aurora Serverless DB cluster
-    #             capacity. Valid capacity values are <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, 
-    #             <code>32</code>, <code>64</code>, <code>128</code>, and <code>256</code>.</p>
+    # <p> <code>Capacity</code> isn't a valid Aurora Serverless DB cluster capacity. Valid capacity values are <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, and <code>256</code>.</p>
     class InvalidDBClusterCapacityFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBClusterCapacityFault] data
@@ -1393,8 +1344,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The automated backup is in an invalid state. 
-    #             For example, this automated backup is associated with an active instance.</p>
+    # <p>The automated backup is in an invalid state. For example, this automated backup is associated with an active instance.</p>
     class InvalidDBInstanceAutomatedBackupStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBInstanceAutomatedBackupStateFault] data
@@ -1420,9 +1370,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The DB parameter group is in use or is in an invalid state. If you are attempting
-    #             to delete the parameter group, you can't delete it when the parameter group is in
-    #             this state.</p>
+    # <p>The DB parameter group is in use or is in an invalid state. If you are attempting to delete the parameter group, you can't delete it when the parameter group is in this state.</p>
     class InvalidDBParameterGroupStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBParameterGroupStateFault] data
@@ -1500,8 +1448,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The DBSubnetGroup doesn't belong to the same VPC as that of an existing
-    #             cross-region read replica of the same source instance.</p>
+    # <p>The DBSubnetGroup doesn't belong to the same VPC as that of an existing cross-region read replica of the same source instance.</p>
     class InvalidDBSubnetGroupFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidDBSubnetGroupFault] data
@@ -1657,8 +1604,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The specified Amazon S3 bucket name can't be found or Amazon RDS isn't
-    #             authorized to access the specified Amazon S3 bucket. Verify the <b>SourceS3BucketName</b> and <b>S3IngestionRoleArn</b> values and try again.</p>
+    # <p>The specified Amazon S3 bucket name can't be found or Amazon RDS isn't authorized to access the specified Amazon S3 bucket. Verify the <b>SourceS3BucketName</b> and <b>S3IngestionRoleArn</b> values and try again.</p>
     class InvalidS3BucketFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidS3BucketFault] data
@@ -1684,8 +1630,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The DB subnet group doesn't cover all Availability Zones after it's
-    #             created because of users' change.</p>
+    # <p>The DB subnet group doesn't cover all Availability Zones after it's created because of users' change.</p>
     class InvalidVPCNetworkStateFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::InvalidVPCNetworkStateFault] data
@@ -1776,10 +1721,7 @@ module Aws::RDS
       end
     end
 
-    # <p>
-    #             <code>SourceDBInstanceIdentifier</code>
-    #         refers to a DB instance with
-    #         <code>BackupRetentionPeriod</code> equal to 0.</p>
+    # <p> <code>SourceDBInstanceIdentifier</code> refers to a DB instance with <code>BackupRetentionPeriod</code> equal to 0.</p>
     class PointInTimeRestoreNotEnabledFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::PointInTimeRestoreNotEnabledFault] data
@@ -1922,8 +1864,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The request would result in the user exceeding the allowed number of DB
-    #             snapshots.</p>
+    # <p>The request would result in the user exceeding the allowed number of DB snapshots.</p>
     class SnapshotQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::SnapshotQuotaExceededFault] data
@@ -1975,8 +1916,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The request would result in the user exceeding the allowed amount of storage
-    #             available across all DB instances.</p>
+    # <p>The request would result in the user exceeding the allowed amount of storage available across all DB instances.</p>
     class StorageQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::StorageQuotaExceededFault] data
@@ -1989,8 +1929,7 @@ module Aws::RDS
       end
     end
 
-    # <p>The <code>aurora-iopt1</code> storage type isn't available, because you modified the DB cluster 
-    #             to use this storage type less than one month ago.</p>
+    # <p>The <code>aurora-iopt1</code> storage type isn't available, because you modified the DB cluster to use this storage type less than one month ago.</p>
     class StorageTypeNotAvailableFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::StorageTypeNotAvailableFault] data
@@ -2068,8 +2007,7 @@ module Aws::RDS
       end
     end
 
-    # <p>You attempted to either create a tenant database that already exists or  
-    #                 modify a tenant database to use the name of an existing tenant database.</p>
+    # <p>You attempted to either create a tenant database that already exists or modify a tenant database to use the name of an existing tenant database.</p>
     class TenantDatabaseAlreadyExistsFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::TenantDatabaseAlreadyExistsFault] data
@@ -2095,8 +2033,7 @@ module Aws::RDS
       end
     end
 
-    # <p>You attempted to create more tenant databases than are permitted in your Amazon Web Services
-    #             account.</p>
+    # <p>You attempted to create more tenant databases than are permitted in your Amazon Web Services account.</p>
     class TenantDatabaseQuotaExceededFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::TenantDatabaseQuotaExceededFault] data
@@ -2113,6 +2050,19 @@ module Aws::RDS
     class UnsupportedDBEngineVersionFault < Smithy::Client::ServiceError
       # @param [Smithy::Client::HandlerContext] context
       # @param [Aws::RDS::Types::UnsupportedDBEngineVersionFault] data
+      def initialize(context, data = Smithy::Schema::EmptyStructure.new)
+        super
+      end
+
+      def message
+        @data[:message]
+      end
+    end
+
+    # <p>The operation violates VPC encryption control settings. Make sure that your DB instance type supports the Nitro encryption-in-transit capability, or modify your VPC's encryption controls to not enforce encryption-in-transit.</p>
+    class VpcEncryptionControlViolationException < Smithy::Client::ServiceError
+      # @param [Smithy::Client::HandlerContext] context
+      # @param [Aws::RDS::Types::VpcEncryptionControlViolationException] data
       def initialize(context, data = Smithy::Schema::EmptyStructure.new)
         super
       end
