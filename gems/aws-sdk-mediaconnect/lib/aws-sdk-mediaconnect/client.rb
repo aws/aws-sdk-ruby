@@ -199,12 +199,19 @@ module Aws::MediaConnect
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -752,6 +759,7 @@ module Aws::MediaConnect
     #           },
     #         },
     #         ndi_output_timecode_source: "EMBEDDED_TIMECODE", # accepts EMBEDDED_TIMECODE, UTC_SYSTEM_TIME
+    #         ndi_audio_reference_level: 1,
     #       },
     #     ],
     #   })
@@ -805,7 +813,9 @@ module Aws::MediaConnect
     #   resp.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.outputs[0].transport.ndi_program_name #=> String
     #   resp.outputs[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.outputs[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.outputs[0].bridge_arn #=> String
     #   resp.outputs[0].bridge_ports #=> Array
@@ -895,6 +905,7 @@ module Aws::MediaConnect
     #         },
     #         ndi_source_settings: {
     #           source_name: "String",
+    #           audio_reference_level: 1,
     #         },
     #         source_tags: {
     #           "String" => "String",
@@ -961,7 +972,9 @@ module Aws::MediaConnect
     #   resp.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.sources[0].transport.ndi_program_name #=> String
     #   resp.sources[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.sources[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.sources[0].vpc_interface_name #=> String
     #   resp.sources[0].whitelist_cidr #=> String
     #   resp.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -1035,6 +1048,104 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Retrieves information about multiple destination endpoints in a single
+    # request.
+    #
+    # @option params [required, Array<String>] :arns
+    #   The Amazon Resource Names (ARNs) of one or more destination endpoints
+    #   to retrieve. You can specify from 1 to 20 ARNs.
+    #
+    # @return [Types::BatchGetDestinationEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetDestinationEndpointResponse#destination_endpoints #destination_endpoints} => Array&lt;Types::DestinationEndpoint&gt;
+    #   * {Types::BatchGetDestinationEndpointResponse#errors #errors} => Array&lt;Types::BatchGetDestinationEndpointError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_destination_endpoint({
+    #     arns: ["DestinationEndpointArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_endpoints #=> Array
+    #   resp.destination_endpoints[0].name #=> String
+    #   resp.destination_endpoints[0].arn #=> String
+    #   resp.destination_endpoints[0].id #=> String
+    #   resp.destination_endpoints[0].description #=> String
+    #   resp.destination_endpoints[0].region_name #=> String
+    #   resp.destination_endpoints[0].availability_zone #=> String
+    #   resp.destination_endpoints[0].availability_zone_id #=> String
+    #   resp.destination_endpoints[0].created_at #=> Time
+    #   resp.destination_endpoints[0].updated_at #=> Time
+    #   resp.destination_endpoints[0].lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.destination_endpoints[0].messages #=> Array
+    #   resp.destination_endpoints[0].messages[0].code #=> String
+    #   resp.destination_endpoints[0].messages[0].message #=> String
+    #   resp.destination_endpoints[0].destination_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.destination_endpoints[0].configuration.standard.name #=> String
+    #   resp.destination_endpoints[0].configuration.standard.destination_networking_configuration.public.destination_allow_rules #=> Array
+    #   resp.destination_endpoints[0].configuration.standard.destination_networking_configuration.public.destination_allow_rules[0].cidr #=> String
+    #   resp.destination_endpoints[0].configuration.standard.destination_networking_configuration.vpc.security_group_ids #=> Array
+    #   resp.destination_endpoints[0].configuration.standard.destination_networking_configuration.vpc.security_group_ids[0] #=> String
+    #   resp.destination_endpoints[0].configuration.standard.destination_networking_configuration.vpc.subnet_id #=> String
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.rist.destination_address #=> String
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.rist.destination_ingest_port #=> Integer
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.srt_listener.destination_address #=> String
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.srt_listener.destination_ingest_port #=> Integer
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.srt_listener.stream_id #=> String
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.srt_listener.encryption_passphrase.secret_arn #=> String
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.srt_caller.source_listener_port #=> Integer
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.srt_caller.encryption_passphrase.secret_arn #=> String
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.rtp.destination_address #=> String
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.rtp.destination_ingest_port #=> Integer
+    #   resp.destination_endpoints[0].configuration.standard.protocol_configuration.rtp.forward_error_correction_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.destination_endpoints[0].configuration.standard.destination_networking_type #=> String, one of "PUBLIC", "VPC"
+    #   resp.destination_endpoints[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.destination_endpoints[0].configuration.router_input.router_input_arn #=> String
+    #   resp.destination_endpoints[0].resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.destination_endpoints[0].resource_share_details.owned.share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.destination_endpoints[0].resource_share_details.consumed.owner_account_id #=> String
+    #   resp.destination_endpoints[0].registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.destination_endpoints[0].connection_details.standard.source_ip_address #=> String
+    #   resp.destination_endpoints[0].connection_details.standard.source_listener_port #=> Integer
+    #   resp.destination_endpoints[0].connection_details.standard.source_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoints[0].connection_details.standard.source_encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoints[0].connection_details.standard.source_encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoints[0].connection_details.standard.source_endpoint_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.destination_endpoints[0].connection_details.router_input.source_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoints[0].connection_details.router_input.source_encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoints[0].connection_details.router_input.source_encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoints[0].connection_details.router_input.source_endpoint_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.destination_endpoints[0].connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.destination_endpoints[0].connected_source #=> String
+    #   resp.destination_endpoints[0].decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoints[0].decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoints[0].decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoints[0].associated_resource_details.router_input.name #=> String
+    #   resp.destination_endpoints[0].associated_resource_details.router_input.maximum_bitrate #=> Integer
+    #   resp.destination_endpoints[0].associated_resource_details.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
+    #   resp.destination_endpoints[0].associated_resource_details.router_input.messages #=> Array
+    #   resp.destination_endpoints[0].associated_resource_details.router_input.messages[0].code #=> String
+    #   resp.destination_endpoints[0].associated_resource_details.router_input.messages[0].message #=> String
+    #   resp.destination_endpoints[0].tags #=> Hash
+    #   resp.destination_endpoints[0].tags["String"] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].arn #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BatchGetDestinationEndpoint AWS API Documentation
+    #
+    # @overload batch_get_destination_endpoint(params = {})
+    # @param [Hash] params ({})
+    def batch_get_destination_endpoint(params = {}, options = {})
+      req = build_request(:batch_get_destination_endpoint, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about multiple router inputs in AWS Elemental
     # MediaConnect.
     #
@@ -1060,7 +1171,11 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].arn #=> String
     #   resp.router_inputs[0].id #=> String
     #   resp.router_inputs[0].state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_inputs[0].input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
+    #   resp.router_inputs[0].input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL", "DESTINATION_ENDPOINT"
+    #   resp.router_inputs[0].configuration.destination_endpoint.endpoint_lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.router_inputs[0].configuration.destination_endpoint.source_transit_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_inputs[0].configuration.destination_endpoint.source_transit_decryption.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.router_inputs[0].configuration.destination_endpoint.source_transit_decryption.secrets_manager.encryption_secret.secret_arn #=> String
     #   resp.router_inputs[0].configuration.standard.network_interface_arn #=> String
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.rist.port #=> Integer
     #   resp.router_inputs[0].configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
@@ -1118,7 +1233,7 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].region_name #=> String
     #   resp.router_inputs[0].availability_zone #=> String
     #   resp.router_inputs[0].maximum_bitrate #=> Integer
-    #   resp.router_inputs[0].tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20"
+    #   resp.router_inputs[0].tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"
     #   resp.router_inputs[0].routing_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.router_inputs[0].created_at #=> Time
     #   resp.router_inputs[0].updated_at #=> Time
@@ -1154,6 +1269,8 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].content_quality_analysis_configuration.content_level.frozen_frames.threshold_seconds #=> Integer
     #   resp.router_inputs[0].content_quality_analysis_configuration.content_level.silent_audio.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_inputs[0].content_quality_analysis_configuration.content_level.silent_audio.threshold_seconds #=> Integer
+    #   resp.router_inputs[0].associated_destination_endpoint_arns #=> Array
+    #   resp.router_inputs[0].associated_destination_endpoint_arns[0] #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
@@ -1245,7 +1362,7 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].arn #=> String
     #   resp.router_outputs[0].id #=> String
     #   resp.router_outputs[0].state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_outputs[0].output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"
+    #   resp.router_outputs[0].output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT", "SOURCE_ENDPOINT"
     #   resp.router_outputs[0].configuration.standard.network_interface_arn #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rist.destination_address #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rist.destination_port #=> Integer
@@ -1253,6 +1370,11 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -1262,7 +1384,7 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_outputs[0].configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_outputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_outputs[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_outputs[0].configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_outputs[0].configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_outputs[0].configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -1273,12 +1395,16 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].configuration.media_live_input.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
     #   resp.router_outputs[0].configuration.media_live_input.destination_transit_encryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
     #   resp.router_outputs[0].configuration.media_live_input.destination_transit_encryption.encryption_key_configuration.secrets_manager.role_arn #=> String
+    #   resp.router_outputs[0].configuration.source_endpoint.endpoint_lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.router_outputs[0].configuration.source_endpoint.destination_transit_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_outputs[0].configuration.source_endpoint.destination_transit_encryption.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.router_outputs[0].configuration.source_endpoint.destination_transit_encryption.secrets_manager.encryption_secret.secret_arn #=> String
     #   resp.router_outputs[0].routed_state #=> String, one of "ROUTED", "ROUTING", "UNROUTED"
     #   resp.router_outputs[0].region_name #=> String
     #   resp.router_outputs[0].availability_zone #=> String
     #   resp.router_outputs[0].maximum_bitrate #=> Integer
     #   resp.router_outputs[0].routing_scope #=> String, one of "REGIONAL", "GLOBAL"
-    #   resp.router_outputs[0].tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20"
+    #   resp.router_outputs[0].tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"
     #   resp.router_outputs[0].created_at #=> Time
     #   resp.router_outputs[0].updated_at #=> Time
     #   resp.router_outputs[0].messages #=> Array
@@ -1297,6 +1423,8 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].maintenance_schedule.window.end #=> Time
     #   resp.router_outputs[0].maintenance_schedule.window.scheduled_time #=> Time
     #   resp.router_outputs[0].fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
+    #   resp.router_outputs[0].associated_source_endpoint_arns #=> Array
+    #   resp.router_outputs[0].associated_source_endpoint_arns[0] #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
@@ -1308,6 +1436,142 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def batch_get_router_output(params = {}, options = {})
       req = build_request(:batch_get_router_output, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about multiple source endpoints in a single
+    # request.
+    #
+    # @option params [required, Array<String>] :arns
+    #   The Amazon Resource Names (ARNs) of one or more source endpoints to
+    #   retrieve. You can specify from 1 to 20 ARNs.
+    #
+    # @return [Types::BatchGetSourceEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchGetSourceEndpointResponse#source_endpoints #source_endpoints} => Array&lt;Types::SourceEndpoint&gt;
+    #   * {Types::BatchGetSourceEndpointResponse#errors #errors} => Array&lt;Types::BatchGetSourceEndpointError&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_get_source_endpoint({
+    #     arns: ["SourceEndpointArn"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_endpoints #=> Array
+    #   resp.source_endpoints[0].name #=> String
+    #   resp.source_endpoints[0].arn #=> String
+    #   resp.source_endpoints[0].id #=> String
+    #   resp.source_endpoints[0].description #=> String
+    #   resp.source_endpoints[0].region_name #=> String
+    #   resp.source_endpoints[0].availability_zone #=> String
+    #   resp.source_endpoints[0].availability_zone_id #=> String
+    #   resp.source_endpoints[0].created_at #=> Time
+    #   resp.source_endpoints[0].updated_at #=> Time
+    #   resp.source_endpoints[0].lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.source_endpoints[0].messages #=> Array
+    #   resp.source_endpoints[0].messages[0].code #=> String
+    #   resp.source_endpoints[0].messages[0].message #=> String
+    #   resp.source_endpoints[0].source_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.source_endpoints[0].configuration.standard.name #=> String
+    #   resp.source_endpoints[0].configuration.standard.source_networking_configuration.public.source_allow_rules #=> Array
+    #   resp.source_endpoints[0].configuration.standard.source_networking_configuration.public.source_allow_rules[0].cidr #=> String
+    #   resp.source_endpoints[0].configuration.standard.source_networking_configuration.vpc.security_group_ids #=> Array
+    #   resp.source_endpoints[0].configuration.standard.source_networking_configuration.vpc.security_group_ids[0] #=> String
+    #   resp.source_endpoints[0].configuration.standard.source_networking_configuration.vpc.subnet_id #=> String
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.rist.destination_ingest_port #=> Integer
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.srt_listener.source_listener_port #=> Integer
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.srt_listener.source_address #=> String
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.srt_listener.stream_id #=> String
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.srt_listener.encryption_passphrase.secret_arn #=> String
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.srt_caller.destination_ingest_port #=> Integer
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.srt_caller.encryption_passphrase.secret_arn #=> String
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.rtp.destination_ingest_port #=> Integer
+    #   resp.source_endpoints[0].configuration.standard.protocol_configuration.rtp.forward_error_correction_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.source_endpoints[0].configuration.standard.source_networking_type #=> String, one of "PUBLIC", "VPC"
+    #   resp.source_endpoints[0].configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.source_endpoints[0].configuration.router_output.router_output_arn #=> String
+    #   resp.source_endpoints[0].resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.source_endpoints[0].resource_share_details.owned.share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.source_endpoints[0].resource_share_details.consumed.owner_account_id #=> String
+    #   resp.source_endpoints[0].registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.source_endpoints[0].connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.source_endpoints[0].connection_details.standard.destination_ip_address #=> String
+    #   resp.source_endpoints[0].connection_details.standard.destination_ingest_port #=> Integer
+    #   resp.source_endpoints[0].connection_details.standard.destination_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoints[0].connection_details.standard.destination_decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoints[0].connection_details.standard.destination_decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoints[0].connection_details.standard.destination_endpoint_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.source_endpoints[0].connection_details.router_output.destination_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoints[0].connection_details.router_output.destination_decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoints[0].connection_details.router_output.destination_decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoints[0].connection_details.router_output.destination_endpoint_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.source_endpoints[0].connected_destinations #=> Array
+    #   resp.source_endpoints[0].connected_destinations[0] #=> String
+    #   resp.source_endpoints[0].encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoints[0].encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoints[0].encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoints[0].associated_resource_details.router_output.name #=> String
+    #   resp.source_endpoints[0].associated_resource_details.router_output.maximum_bitrate #=> Integer
+    #   resp.source_endpoints[0].associated_resource_details.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
+    #   resp.source_endpoints[0].associated_resource_details.router_output.messages #=> Array
+    #   resp.source_endpoints[0].associated_resource_details.router_output.messages[0].code #=> String
+    #   resp.source_endpoints[0].associated_resource_details.router_output.messages[0].message #=> String
+    #   resp.source_endpoints[0].tags #=> Hash
+    #   resp.source_endpoints[0].tags["String"] #=> String
+    #   resp.errors #=> Array
+    #   resp.errors[0].arn #=> String
+    #   resp.errors[0].code #=> String
+    #   resp.errors[0].message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BatchGetSourceEndpoint AWS API Documentation
+    #
+    # @overload batch_get_source_endpoint(params = {})
+    # @param [Hash] params ({})
+    def batch_get_source_endpoint(params = {}, options = {})
+      req = build_request(:batch_get_source_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Connects a source endpoint to a destination endpoint.
+    #
+    # @option params [required, String] :destination_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to connect.
+    #
+    # @option params [required, String] :source_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to connect.
+    #
+    # @return [Types::ConnectEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ConnectEndpointsResponse#destination_endpoint_arn #destination_endpoint_arn} => String
+    #   * {Types::ConnectEndpointsResponse#destination_endpoint_name #destination_endpoint_name} => String
+    #   * {Types::ConnectEndpointsResponse#source_endpoint_arn #source_endpoint_arn} => String
+    #   * {Types::ConnectEndpointsResponse#source_endpoint_name #source_endpoint_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.connect_endpoints({
+    #     destination_endpoint_arn: "DestinationEndpointArn", # required
+    #     source_endpoint_arn: "SourceEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_endpoint_arn #=> String
+    #   resp.destination_endpoint_name #=> String
+    #   resp.source_endpoint_arn #=> String
+    #   resp.source_endpoint_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ConnectEndpoints AWS API Documentation
+    #
+    # @overload connect_endpoints(params = {})
+    # @param [Hash] params ({})
+    def connect_endpoints(params = {}, options = {})
+      req = build_request(:connect_endpoints, params)
       req.send_request(options)
     end
 
@@ -1626,6 +1890,7 @@ module Aws::MediaConnect
     #           },
     #         },
     #         ndi_output_timecode_source: "EMBEDDED_TIMECODE", # accepts EMBEDDED_TIMECODE, UTC_SYSTEM_TIME
+    #         ndi_audio_reference_level: 1,
     #       },
     #     ],
     #     source: {
@@ -1678,6 +1943,7 @@ module Aws::MediaConnect
     #       },
     #       ndi_source_settings: {
     #         source_name: "String",
+    #         audio_reference_level: 1,
     #       },
     #       source_tags: {
     #         "String" => "String",
@@ -1754,6 +2020,7 @@ module Aws::MediaConnect
     #         },
     #         ndi_source_settings: {
     #           source_name: "String",
+    #           audio_reference_level: 1,
     #         },
     #         source_tags: {
     #           "String" => "String",
@@ -1919,7 +2186,9 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.outputs[0].transport.ndi_program_name #=> String
     #   resp.flow.outputs[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.outputs[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -1973,7 +2242,9 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.source.transport.ndi_program_name #=> String
     #   resp.flow.source.transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.source.transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -2031,7 +2302,9 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.sources[0].transport.ndi_program_name #=> String
     #   resp.flow.sources[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.sources[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -2160,7 +2433,22 @@ module Aws::MediaConnect
     #   same Region. GLOBAL - connects to outputs in any Region.
     #
     # @option params [required, String] :tier
-    #   The tier level for the router input.
+    #   The tier level for the router input. The tier sets the maximum
+    #   bitrate, in Mbps, for the router input. Valid values include the
+    #   following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #
     # @option params [String] :region_name
     #   The Amazon Web Services Region for the router input. Defaults to the
@@ -2200,6 +2488,20 @@ module Aws::MediaConnect
     #   resp = client.create_router_input({
     #     name: "CreateRouterInputRequestNameString", # required
     #     configuration: { # required
+    #       destination_endpoint: {
+    #         endpoint_lifecycle_management: "MANAGED", # required, accepts MANAGED, UNMANAGED
+    #         source_transit_decryption_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
+    #         source_transit_decryption: { # required
+    #           secrets_manager: {
+    #             encryption_secret_type: "AES_128_KEY", # accepts AES_128_KEY, AES_192_KEY, AES_256_KEY, SRT_PASSPHRASE
+    #             encryption_secret: { # required
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           automatic: {
+    #           },
+    #         },
+    #       },
     #       standard: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
     #         protocol_configuration: { # required
@@ -2325,7 +2627,7 @@ module Aws::MediaConnect
     #     },
     #     maximum_bitrate: 1, # required
     #     routing_scope: "REGIONAL", # required, accepts REGIONAL, GLOBAL
-    #     tier: "INPUT_100", # required, accepts INPUT_100, INPUT_50, INPUT_20
+    #     tier: "INPUT_100", # required, accepts INPUT_100, INPUT_50, INPUT_20, INPUT_500, INPUT_250
     #     region_name: "String",
     #     availability_zone: "String",
     #     transit_encryption: {
@@ -2375,7 +2677,11 @@ module Aws::MediaConnect
     #   resp.router_input.arn #=> String
     #   resp.router_input.id #=> String
     #   resp.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
+    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL", "DESTINATION_ENDPOINT"
+    #   resp.router_input.configuration.destination_endpoint.endpoint_lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.router_input.configuration.destination_endpoint.source_transit_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_input.configuration.destination_endpoint.source_transit_decryption.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.router_input.configuration.destination_endpoint.source_transit_decryption.secrets_manager.encryption_secret.secret_arn #=> String
     #   resp.router_input.configuration.standard.network_interface_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.rist.port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
@@ -2433,7 +2739,7 @@ module Aws::MediaConnect
     #   resp.router_input.region_name #=> String
     #   resp.router_input.availability_zone #=> String
     #   resp.router_input.maximum_bitrate #=> Integer
-    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20"
+    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"
     #   resp.router_input.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.router_input.created_at #=> Time
     #   resp.router_input.updated_at #=> Time
@@ -2469,6 +2775,8 @@ module Aws::MediaConnect
     #   resp.router_input.content_quality_analysis_configuration.content_level.frozen_frames.threshold_seconds #=> Integer
     #   resp.router_input.content_quality_analysis_configuration.content_level.silent_audio.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.content_quality_analysis_configuration.content_level.silent_audio.threshold_seconds #=> Integer
+    #   resp.router_input.associated_destination_endpoint_arns #=> Array
+    #   resp.router_input.associated_destination_endpoint_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateRouterInput AWS API Documentation
     #
@@ -2575,7 +2883,22 @@ module Aws::MediaConnect
     #   Region. GLOBAL - can take inputs from any Region.
     #
     # @option params [required, String] :tier
-    #   The tier level for the router output.
+    #   The tier level for the router output. The tier sets the maximum
+    #   bitrate, in Mbps, for the router output. Valid values include the
+    #   following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #
     # @option params [String] :region_name
     #   The Amazon Web Services Region for the router output. Defaults to the
@@ -2628,6 +2951,19 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtmp_push: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             application_name: "String", # required
+    #             stream_name: "String", # required
+    #             tls_encryption: {
+    #               encryption_type: "PUBLIC", # accepts PUBLIC
+    #               encryption_configuration: { # required
+    #                 public: {
+    #                 },
+    #               },
+    #             },
+    #           },
     #           srt_caller: {
     #             destination_address: "String", # required
     #             destination_port: 1, # required
@@ -2646,7 +2982,7 @@ module Aws::MediaConnect
     #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
-    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER, RTMP_PUSH
     #       },
     #       media_connect_flow: {
     #         flow_arn: "FlowArn",
@@ -2678,10 +3014,24 @@ module Aws::MediaConnect
     #           },
     #         },
     #       },
+    #       source_endpoint: {
+    #         endpoint_lifecycle_management: "MANAGED", # required, accepts MANAGED, UNMANAGED
+    #         destination_transit_encryption_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
+    #         destination_transit_encryption: { # required
+    #           secrets_manager: {
+    #             encryption_secret_type: "AES_128_KEY", # accepts AES_128_KEY, AES_192_KEY, AES_256_KEY, SRT_PASSPHRASE
+    #             encryption_secret: { # required
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           automatic: {
+    #           },
+    #         },
+    #       },
     #     },
     #     maximum_bitrate: 1, # required
     #     routing_scope: "REGIONAL", # required, accepts REGIONAL, GLOBAL
-    #     tier: "OUTPUT_100", # required, accepts OUTPUT_100, OUTPUT_50, OUTPUT_20
+    #     tier: "OUTPUT_100", # required, accepts OUTPUT_100, OUTPUT_50, OUTPUT_20, OUTPUT_500, OUTPUT_250
     #     region_name: "String",
     #     availability_zone: "String",
     #     maintenance_configuration: {
@@ -2707,7 +3057,7 @@ module Aws::MediaConnect
     #   resp.router_output.arn #=> String
     #   resp.router_output.id #=> String
     #   resp.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_output.output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"
+    #   resp.router_output.output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT", "SOURCE_ENDPOINT"
     #   resp.router_output.configuration.standard.network_interface_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_port #=> Integer
@@ -2715,6 +3065,11 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -2724,7 +3079,7 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -2735,12 +3090,16 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.media_live_input.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
     #   resp.router_output.configuration.media_live_input.destination_transit_encryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
     #   resp.router_output.configuration.media_live_input.destination_transit_encryption.encryption_key_configuration.secrets_manager.role_arn #=> String
+    #   resp.router_output.configuration.source_endpoint.endpoint_lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.router_output.configuration.source_endpoint.destination_transit_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_output.configuration.source_endpoint.destination_transit_encryption.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.router_output.configuration.source_endpoint.destination_transit_encryption.secrets_manager.encryption_secret.secret_arn #=> String
     #   resp.router_output.routed_state #=> String, one of "ROUTED", "ROUTING", "UNROUTED"
     #   resp.router_output.region_name #=> String
     #   resp.router_output.availability_zone #=> String
     #   resp.router_output.maximum_bitrate #=> Integer
     #   resp.router_output.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
-    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20"
+    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"
     #   resp.router_output.created_at #=> Time
     #   resp.router_output.updated_at #=> Time
     #   resp.router_output.messages #=> Array
@@ -2759,6 +3118,8 @@ module Aws::MediaConnect
     #   resp.router_output.maintenance_schedule.window.end #=> Time
     #   resp.router_output.maintenance_schedule.window.scheduled_time #=> Time
     #   resp.router_output.fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
+    #   resp.router_output.associated_source_endpoint_arns #=> Array
+    #   resp.router_output.associated_source_endpoint_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/CreateRouterOutput AWS API Documentation
     #
@@ -2956,6 +3317,37 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Deregisters a destination endpoint from MediaConnect.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to
+    #   deregister.
+    #
+    # @return [Types::DeregisterDestinationEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeregisterDestinationEndpointResponse#arn #arn} => String
+    #   * {Types::DeregisterDestinationEndpointResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_destination_endpoint({
+    #     arn: "DestinationEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeregisterDestinationEndpoint AWS API Documentation
+    #
+    # @overload deregister_destination_endpoint(params = {})
+    # @param [Hash] params ({})
+    def deregister_destination_endpoint(params = {}, options = {})
+      req = build_request(:deregister_destination_endpoint, params)
+      req.send_request(options)
+    end
+
     # Deregisters an instance. Before you deregister an instance, all
     # bridges running on the instance must be stopped. If you want to
     # deregister an instance without stopping the bridges, you must use the
@@ -2992,6 +3384,36 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def deregister_gateway_instance(params = {}, options = {})
       req = build_request(:deregister_gateway_instance, params)
+      req.send_request(options)
+    end
+
+    # Deregisters a source endpoint from MediaConnect.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to deregister.
+    #
+    # @return [Types::DeregisterSourceEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeregisterSourceEndpointResponse#arn #arn} => String
+    #   * {Types::DeregisterSourceEndpointResponse#name #name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.deregister_source_endpoint({
+    #     arn: "SourceEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.arn #=> String
+    #   resp.name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeregisterSourceEndpoint AWS API Documentation
+    #
+    # @overload deregister_source_endpoint(params = {})
+    # @param [Hash] params ({})
+    def deregister_source_endpoint(params = {}, options = {})
+      req = build_request(:deregister_source_endpoint, params)
       req.send_request(options)
     end
 
@@ -3165,7 +3587,9 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.outputs[0].transport.ndi_program_name #=> String
     #   resp.flow.outputs[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.outputs[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -3219,7 +3643,9 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.source.transport.ndi_program_name #=> String
     #   resp.flow.source.transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.source.transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -3277,7 +3703,9 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.sources[0].transport.ndi_program_name #=> String
     #   resp.flow.sources[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.sources[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -3378,6 +3806,9 @@ module Aws::MediaConnect
     #   resp.transport_media_info.programs[0].streams #=> Array
     #   resp.transport_media_info.programs[0].streams[0].channels #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].codec #=> String
+    #   resp.transport_media_info.programs[0].streams[0].color.colorimetry #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"
+    #   resp.transport_media_info.programs[0].streams[0].color.transfer_characteristics #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"
+    #   resp.transport_media_info.programs[0].streams[0].color.matrix_coefficients #=> String, one of "IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"
     #   resp.transport_media_info.programs[0].streams[0].frame_rate #=> String
     #   resp.transport_media_info.programs[0].streams[0].frame_resolution.frame_height #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].frame_resolution.frame_width #=> Integer
@@ -3385,6 +3816,7 @@ module Aws::MediaConnect
     #   resp.transport_media_info.programs[0].streams[0].sample_rate #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].sample_size #=> Integer
     #   resp.transport_media_info.programs[0].streams[0].stream_type #=> String
+    #   resp.transport_media_info.ts_id #=> Integer
     #   resp.ndi_info.active_source.source_name #=> String
     #   resp.ndi_info.discovered_sources #=> Array
     #   resp.ndi_info.discovered_sources[0].source_name #=> String
@@ -3393,6 +3825,9 @@ module Aws::MediaConnect
     #   resp.ndi_info.media_info.streams[0].codec #=> String
     #   resp.ndi_info.media_info.streams[0].stream_id #=> Integer
     #   resp.ndi_info.media_info.streams[0].scan_mode #=> String, one of "progressive", "interlace", "progressive-segmented-frame"
+    #   resp.ndi_info.media_info.streams[0].color.colorimetry #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"
+    #   resp.ndi_info.media_info.streams[0].color.transfer_characteristics #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"
+    #   resp.ndi_info.media_info.streams[0].color.matrix_coefficients #=> String, one of "IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"
     #   resp.ndi_info.media_info.streams[0].frame_resolution.frame_height #=> Integer
     #   resp.ndi_info.media_info.streams[0].frame_resolution.frame_width #=> Integer
     #   resp.ndi_info.media_info.streams[0].frame_rate #=> String
@@ -3609,6 +4044,144 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Disconnects a source endpoint from a destination endpoint.
+    #
+    # @option params [required, String] :destination_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to
+    #   disconnect.
+    #
+    # @option params [required, String] :source_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to disconnect.
+    #
+    # @return [Types::DisconnectEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DisconnectEndpointsResponse#destination_endpoint_arn #destination_endpoint_arn} => String
+    #   * {Types::DisconnectEndpointsResponse#destination_endpoint_name #destination_endpoint_name} => String
+    #   * {Types::DisconnectEndpointsResponse#source_endpoint_arn #source_endpoint_arn} => String
+    #   * {Types::DisconnectEndpointsResponse#source_endpoint_name #source_endpoint_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.disconnect_endpoints({
+    #     destination_endpoint_arn: "DestinationEndpointArn", # required
+    #     source_endpoint_arn: "SourceEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_endpoint_arn #=> String
+    #   resp.destination_endpoint_name #=> String
+    #   resp.source_endpoint_arn #=> String
+    #   resp.source_endpoint_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DisconnectEndpoints AWS API Documentation
+    #
+    # @overload disconnect_endpoints(params = {})
+    # @param [Hash] params ({})
+    def disconnect_endpoints(params = {}, options = {})
+      req = build_request(:disconnect_endpoints, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a destination endpoint.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to
+    #   retrieve.
+    #
+    # @return [Types::GetDestinationEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDestinationEndpointResponse#destination_endpoint #destination_endpoint} => Types::DestinationEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_destination_endpoint({
+    #     arn: "DestinationEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_endpoint.name #=> String
+    #   resp.destination_endpoint.arn #=> String
+    #   resp.destination_endpoint.id #=> String
+    #   resp.destination_endpoint.description #=> String
+    #   resp.destination_endpoint.region_name #=> String
+    #   resp.destination_endpoint.availability_zone #=> String
+    #   resp.destination_endpoint.availability_zone_id #=> String
+    #   resp.destination_endpoint.created_at #=> Time
+    #   resp.destination_endpoint.updated_at #=> Time
+    #   resp.destination_endpoint.lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.destination_endpoint.messages #=> Array
+    #   resp.destination_endpoint.messages[0].code #=> String
+    #   resp.destination_endpoint.messages[0].message #=> String
+    #   resp.destination_endpoint.destination_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.destination_endpoint.configuration.standard.name #=> String
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.public.destination_allow_rules #=> Array
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.public.destination_allow_rules[0].cidr #=> String
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.vpc.security_group_ids #=> Array
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.vpc.security_group_ids[0] #=> String
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.vpc.subnet_id #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rist.destination_address #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rist.destination_ingest_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.destination_address #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.destination_ingest_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.stream_id #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.encryption_passphrase.secret_arn #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_caller.source_listener_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_caller.encryption_passphrase.secret_arn #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rtp.destination_address #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rtp.destination_ingest_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rtp.forward_error_correction_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.destination_endpoint.configuration.standard.destination_networking_type #=> String, one of "PUBLIC", "VPC"
+    #   resp.destination_endpoint.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.destination_endpoint.configuration.router_input.router_input_arn #=> String
+    #   resp.destination_endpoint.resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.destination_endpoint.resource_share_details.owned.share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.destination_endpoint.resource_share_details.consumed.owner_account_id #=> String
+    #   resp.destination_endpoint.registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.destination_endpoint.connection_details.standard.source_ip_address #=> String
+    #   resp.destination_endpoint.connection_details.standard.source_listener_port #=> Integer
+    #   resp.destination_endpoint.connection_details.standard.source_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoint.connection_details.standard.source_encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoint.connection_details.standard.source_encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoint.connection_details.standard.source_endpoint_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.destination_endpoint.connection_details.router_input.source_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoint.connection_details.router_input.source_encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoint.connection_details.router_input.source_encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoint.connection_details.router_input.source_endpoint_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.destination_endpoint.connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.destination_endpoint.connected_source #=> String
+    #   resp.destination_endpoint.decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoint.decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoint.decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoint.associated_resource_details.router_input.name #=> String
+    #   resp.destination_endpoint.associated_resource_details.router_input.maximum_bitrate #=> Integer
+    #   resp.destination_endpoint.associated_resource_details.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
+    #   resp.destination_endpoint.associated_resource_details.router_input.messages #=> Array
+    #   resp.destination_endpoint.associated_resource_details.router_input.messages[0].code #=> String
+    #   resp.destination_endpoint.associated_resource_details.router_input.messages[0].message #=> String
+    #   resp.destination_endpoint.tags #=> Hash
+    #   resp.destination_endpoint.tags["String"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * destination_endpoint_connected
+    #   * destination_endpoint_deregistered
+    #   * destination_endpoint_disconnected
+    #   * destination_endpoint_registered
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetDestinationEndpoint AWS API Documentation
+    #
+    # @overload get_destination_endpoint(params = {})
+    # @param [Hash] params ({})
+    def get_destination_endpoint(params = {}, options = {})
+      req = build_request(:get_destination_endpoint, params)
+      req.send_request(options)
+    end
+
     # Retrieves information about a specific router input in AWS Elemental
     # MediaConnect.
     #
@@ -3632,7 +4205,11 @@ module Aws::MediaConnect
     #   resp.router_input.arn #=> String
     #   resp.router_input.id #=> String
     #   resp.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
+    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL", "DESTINATION_ENDPOINT"
+    #   resp.router_input.configuration.destination_endpoint.endpoint_lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.router_input.configuration.destination_endpoint.source_transit_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_input.configuration.destination_endpoint.source_transit_decryption.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.router_input.configuration.destination_endpoint.source_transit_decryption.secrets_manager.encryption_secret.secret_arn #=> String
     #   resp.router_input.configuration.standard.network_interface_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.rist.port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
@@ -3690,7 +4267,7 @@ module Aws::MediaConnect
     #   resp.router_input.region_name #=> String
     #   resp.router_input.availability_zone #=> String
     #   resp.router_input.maximum_bitrate #=> Integer
-    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20"
+    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"
     #   resp.router_input.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.router_input.created_at #=> Time
     #   resp.router_input.updated_at #=> Time
@@ -3726,6 +4303,8 @@ module Aws::MediaConnect
     #   resp.router_input.content_quality_analysis_configuration.content_level.frozen_frames.threshold_seconds #=> Integer
     #   resp.router_input.content_quality_analysis_configuration.content_level.silent_audio.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.content_quality_analysis_configuration.content_level.silent_audio.threshold_seconds #=> Integer
+    #   resp.router_input.associated_destination_endpoint_arns #=> Array
+    #   resp.router_input.associated_destination_endpoint_arns[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3778,6 +4357,9 @@ module Aws::MediaConnect
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams #=> Array
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].channels #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].codec #=> String
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].color.colorimetry #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "GENERIC_FILM", "BT2020", "SMPTE428", "SMPTE431", "SMPTE432"
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].color.transfer_characteristics #=> String, one of "BT709", "BT470M", "BT470BG", "BT601", "SMPTE240M", "LINEAR", "LOG100", "LOG316", "IEC61966_2_4", "BT1361_ECG", "IEC61966_2_1", "BT2020_10", "BT2020_12", "BT2100_PQ", "SMPTE428", "BT2100_HLG"
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].color.matrix_coefficients #=> String, one of "IDENTITY", "BT709", "FCC", "BT470BG", "BT601", "SMPTE240M", "YCGCO", "BT2020_NCL", "BT2020_CL", "SMPTE2085", "CHROMATICITY_DERIVED_NCL", "CHROMATICITY_DERIVED_CL", "BT2100_ICTCP", "IPT_C2"
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].frame_rate #=> String
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].frame_resolution.frame_height #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].frame_resolution.frame_width #=> Integer
@@ -3785,6 +4367,7 @@ module Aws::MediaConnect
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].sample_rate #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].sample_size #=> Integer
     #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.programs[0].streams[0].stream_type #=> String
+    #   resp.source_metadata_details.router_input_metadata.transport_stream_media_info.ts_id #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetRouterInputSourceMetadata AWS API Documentation
     #
@@ -3903,7 +4486,7 @@ module Aws::MediaConnect
     #   resp.router_output.arn #=> String
     #   resp.router_output.id #=> String
     #   resp.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_output.output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"
+    #   resp.router_output.output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT", "SOURCE_ENDPOINT"
     #   resp.router_output.configuration.standard.network_interface_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_port #=> Integer
@@ -3911,6 +4494,11 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -3920,7 +4508,7 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -3931,12 +4519,16 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.media_live_input.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
     #   resp.router_output.configuration.media_live_input.destination_transit_encryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
     #   resp.router_output.configuration.media_live_input.destination_transit_encryption.encryption_key_configuration.secrets_manager.role_arn #=> String
+    #   resp.router_output.configuration.source_endpoint.endpoint_lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.router_output.configuration.source_endpoint.destination_transit_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_output.configuration.source_endpoint.destination_transit_encryption.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.router_output.configuration.source_endpoint.destination_transit_encryption.secrets_manager.encryption_secret.secret_arn #=> String
     #   resp.router_output.routed_state #=> String, one of "ROUTED", "ROUTING", "UNROUTED"
     #   resp.router_output.region_name #=> String
     #   resp.router_output.availability_zone #=> String
     #   resp.router_output.maximum_bitrate #=> Integer
     #   resp.router_output.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
-    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20"
+    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"
     #   resp.router_output.created_at #=> Time
     #   resp.router_output.updated_at #=> Time
     #   resp.router_output.messages #=> Array
@@ -3955,6 +4547,8 @@ module Aws::MediaConnect
     #   resp.router_output.maintenance_schedule.window.end #=> Time
     #   resp.router_output.maintenance_schedule.window.scheduled_time #=> Time
     #   resp.router_output.fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
+    #   resp.router_output.associated_source_endpoint_arns #=> Array
+    #   resp.router_output.associated_source_endpoint_arns[0] #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -3971,6 +4565,106 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def get_router_output(params = {}, options = {})
       req = build_request(:get_router_output, params)
+      req.send_request(options)
+    end
+
+    # Retrieves information about a source endpoint.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to retrieve.
+    #
+    # @return [Types::GetSourceEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSourceEndpointResponse#source_endpoint #source_endpoint} => Types::SourceEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_source_endpoint({
+    #     arn: "SourceEndpointArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_endpoint.name #=> String
+    #   resp.source_endpoint.arn #=> String
+    #   resp.source_endpoint.id #=> String
+    #   resp.source_endpoint.description #=> String
+    #   resp.source_endpoint.region_name #=> String
+    #   resp.source_endpoint.availability_zone #=> String
+    #   resp.source_endpoint.availability_zone_id #=> String
+    #   resp.source_endpoint.created_at #=> Time
+    #   resp.source_endpoint.updated_at #=> Time
+    #   resp.source_endpoint.lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.source_endpoint.messages #=> Array
+    #   resp.source_endpoint.messages[0].code #=> String
+    #   resp.source_endpoint.messages[0].message #=> String
+    #   resp.source_endpoint.source_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.source_endpoint.configuration.standard.name #=> String
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.public.source_allow_rules #=> Array
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.public.source_allow_rules[0].cidr #=> String
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.vpc.security_group_ids #=> Array
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.vpc.security_group_ids[0] #=> String
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.vpc.subnet_id #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rist.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.source_listener_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.source_address #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.stream_id #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.encryption_passphrase.secret_arn #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_caller.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_caller.encryption_passphrase.secret_arn #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rtp.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rtp.forward_error_correction_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.source_endpoint.configuration.standard.source_networking_type #=> String, one of "PUBLIC", "VPC"
+    #   resp.source_endpoint.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.source_endpoint.configuration.router_output.router_output_arn #=> String
+    #   resp.source_endpoint.resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.source_endpoint.resource_share_details.owned.share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.source_endpoint.resource_share_details.consumed.owner_account_id #=> String
+    #   resp.source_endpoint.registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.source_endpoint.connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.source_endpoint.connection_details.standard.destination_ip_address #=> String
+    #   resp.source_endpoint.connection_details.standard.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.connection_details.standard.destination_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoint.connection_details.standard.destination_decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoint.connection_details.standard.destination_decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoint.connection_details.standard.destination_endpoint_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.source_endpoint.connection_details.router_output.destination_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoint.connection_details.router_output.destination_decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoint.connection_details.router_output.destination_decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoint.connection_details.router_output.destination_endpoint_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.source_endpoint.connected_destinations #=> Array
+    #   resp.source_endpoint.connected_destinations[0] #=> String
+    #   resp.source_endpoint.encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoint.encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoint.encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoint.associated_resource_details.router_output.name #=> String
+    #   resp.source_endpoint.associated_resource_details.router_output.maximum_bitrate #=> Integer
+    #   resp.source_endpoint.associated_resource_details.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
+    #   resp.source_endpoint.associated_resource_details.router_output.messages #=> Array
+    #   resp.source_endpoint.associated_resource_details.router_output.messages[0].code #=> String
+    #   resp.source_endpoint.associated_resource_details.router_output.messages[0].message #=> String
+    #   resp.source_endpoint.tags #=> Hash
+    #   resp.source_endpoint.tags["String"] #=> String
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * source_endpoint_connected
+    #   * source_endpoint_connecting
+    #   * source_endpoint_deregistered
+    #   * source_endpoint_disconnected
+    #   * source_endpoint_disconnecting
+    #   * source_endpoint_registered
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetSourceEndpoint AWS API Documentation
+    #
+    # @overload get_source_endpoint(params = {})
+    # @param [Hash] params ({})
+    def get_source_endpoint(params = {}, options = {})
+      req = build_request(:get_source_endpoint, params)
       req.send_request(options)
     end
 
@@ -4107,6 +4801,75 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def list_bridges(params = {}, options = {})
       req = build_request(:list_bridges, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of the destination endpoints in your account. The
+    # results are paginated. Use the NextToken value that's returned to
+    # retrieve additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single request. The valid
+    #   range is 1 to 100. If you don't specify a value, the service returns
+    #   up to 100 results.
+    #
+    # @option params [String] :next_token
+    #   The token that identifies the next page of results to return. Use the
+    #   token that a previous request returned.
+    #
+    # @option params [Array<Types::DestinationEndpointFilter>] :filters
+    #   The filters to apply to the list of destination endpoints.
+    #
+    # @return [Types::ListDestinationEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListDestinationEndpointsResponse#destination_endpoints #destination_endpoints} => Array&lt;Types::ListedDestinationEndpoint&gt;
+    #   * {Types::ListDestinationEndpointsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_destination_endpoints({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [
+    #       {
+    #         region_names: ["String"],
+    #         destination_types: ["STANDARD"], # accepts STANDARD, ROUTER_INPUT
+    #         name_contains: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_endpoints #=> Array
+    #   resp.destination_endpoints[0].name #=> String
+    #   resp.destination_endpoints[0].arn #=> String
+    #   resp.destination_endpoints[0].id #=> String
+    #   resp.destination_endpoints[0].destination_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.destination_endpoints[0].region_name #=> String
+    #   resp.destination_endpoints[0].availability_zone #=> String
+    #   resp.destination_endpoints[0].availability_zone_id #=> String
+    #   resp.destination_endpoints[0].created_at #=> Time
+    #   resp.destination_endpoints[0].updated_at #=> Time
+    #   resp.destination_endpoints[0].lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.destination_endpoints[0].message_count #=> Integer
+    #   resp.destination_endpoints[0].resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.destination_endpoints[0].resource_share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.destination_endpoints[0].registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.destination_endpoints[0].connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.destination_endpoints[0].decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoints[0].connected_source #=> String
+    #   resp.destination_endpoints[0].associated_resource_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListDestinationEndpoints AWS API Documentation
+    #
+    # @overload list_destination_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_destination_endpoints(params = {}, options = {})
+      req = build_request(:list_destination_endpoints, params)
       req.send_request(options)
     end
 
@@ -4505,7 +5268,7 @@ module Aws::MediaConnect
     #         region_names: ["String"],
     #         network_interface_arns: ["RouterNetworkInterfaceArn"],
     #         routing_scopes: ["REGIONAL"], # accepts REGIONAL, GLOBAL
-    #         input_types: ["STANDARD"], # accepts STANDARD, FAILOVER, MERGE, MEDIACONNECT_FLOW, MEDIALIVE_CHANNEL
+    #         input_types: ["STANDARD"], # accepts STANDARD, FAILOVER, MERGE, MEDIACONNECT_FLOW, MEDIALIVE_CHANNEL, DESTINATION_ENDPOINT
     #       },
     #     ],
     #   })
@@ -4516,7 +5279,7 @@ module Aws::MediaConnect
     #   resp.router_inputs[0].name #=> String
     #   resp.router_inputs[0].arn #=> String
     #   resp.router_inputs[0].id #=> String
-    #   resp.router_inputs[0].input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
+    #   resp.router_inputs[0].input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL", "DESTINATION_ENDPOINT"
     #   resp.router_inputs[0].state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
     #   resp.router_inputs[0].routed_outputs #=> Integer
     #   resp.router_inputs[0].region_name #=> String
@@ -4629,7 +5392,7 @@ module Aws::MediaConnect
     #         region_names: ["String"],
     #         network_interface_arns: ["RouterNetworkInterfaceArn"],
     #         routing_scopes: ["REGIONAL"], # accepts REGIONAL, GLOBAL
-    #         output_types: ["STANDARD"], # accepts STANDARD, MEDIACONNECT_FLOW, MEDIALIVE_INPUT
+    #         output_types: ["STANDARD"], # accepts STANDARD, MEDIACONNECT_FLOW, MEDIALIVE_INPUT, SOURCE_ENDPOINT
     #         routed_input_arns: ["RouterInputArn"],
     #         name_contains: ["String"],
     #       },
@@ -4642,7 +5405,7 @@ module Aws::MediaConnect
     #   resp.router_outputs[0].name #=> String
     #   resp.router_outputs[0].arn #=> String
     #   resp.router_outputs[0].id #=> String
-    #   resp.router_outputs[0].output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"
+    #   resp.router_outputs[0].output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT", "SOURCE_ENDPOINT"
     #   resp.router_outputs[0].state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
     #   resp.router_outputs[0].routed_state #=> String, one of "ROUTED", "ROUTING", "UNROUTED"
     #   resp.router_outputs[0].region_name #=> String
@@ -4666,6 +5429,75 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def list_router_outputs(params = {}, options = {})
       req = build_request(:list_router_outputs, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of the source endpoints in your account. The results
+    # are paginated. Use the NextToken value that's returned to retrieve
+    # additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single request. The valid
+    #   range is 1 to 100. If you don't specify a value, the service returns
+    #   up to 100 results.
+    #
+    # @option params [String] :next_token
+    #   The token that identifies the next page of results to return. Use the
+    #   token that a previous request returned.
+    #
+    # @option params [Array<Types::SourceEndpointFilter>] :filters
+    #   The filters to apply to the list of source endpoints.
+    #
+    # @return [Types::ListSourceEndpointsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSourceEndpointsResponse#source_endpoints #source_endpoints} => Array&lt;Types::ListedSourceEndpoint&gt;
+    #   * {Types::ListSourceEndpointsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_source_endpoints({
+    #     max_results: 1,
+    #     next_token: "String",
+    #     filters: [
+    #       {
+    #         region_names: ["String"],
+    #         source_types: ["STANDARD"], # accepts STANDARD, ROUTER_OUTPUT
+    #         name_contains: ["String"],
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_endpoints #=> Array
+    #   resp.source_endpoints[0].name #=> String
+    #   resp.source_endpoints[0].arn #=> String
+    #   resp.source_endpoints[0].id #=> String
+    #   resp.source_endpoints[0].source_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.source_endpoints[0].region_name #=> String
+    #   resp.source_endpoints[0].availability_zone #=> String
+    #   resp.source_endpoints[0].availability_zone_id #=> String
+    #   resp.source_endpoints[0].created_at #=> Time
+    #   resp.source_endpoints[0].updated_at #=> Time
+    #   resp.source_endpoints[0].lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.source_endpoints[0].message_count #=> Integer
+    #   resp.source_endpoints[0].resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.source_endpoints[0].resource_share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.source_endpoints[0].registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.source_endpoints[0].connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.source_endpoints[0].encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoints[0].connected_destination_count #=> Integer
+    #   resp.source_endpoints[0].associated_resource_arn #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListSourceEndpoints AWS API Documentation
+    #
+    # @overload list_source_endpoints(params = {})
+    # @param [Hash] params ({})
+    def list_source_endpoints(params = {}, options = {})
+      req = build_request(:list_source_endpoints, params)
       req.send_request(options)
     end
 
@@ -4786,6 +5618,333 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def purchase_offering(params = {}, options = {})
       req = build_request(:purchase_offering, params)
+      req.send_request(options)
+    end
+
+    # Registers a new destination endpoint in MediaConnect.
+    #
+    # @option params [String] :description
+    #   A description to help you identify the destination endpoint.
+    #
+    # @option params [required, Types::DestinationEndpointConfiguration] :configuration
+    #   The configuration settings for the destination endpoint.
+    #
+    # @option params [String] :region_name
+    #   The name of the Amazon Web Services Region in which to register the
+    #   destination endpoint. Defaults to the current region if not specified.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the destination endpoint. Each tag is a key-value
+    #   pair.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If this token matches a previous request,
+    #   the service ignores the request, but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::RegisterDestinationEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterDestinationEndpointResponse#destination_endpoint #destination_endpoint} => Types::DestinationEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_destination_endpoint({
+    #     description: "RegisterDestinationEndpointRequestDescriptionString",
+    #     configuration: { # required
+    #       standard: {
+    #         name: "StandardDestinationEndpointConfigurationNameString", # required
+    #         destination_networking_configuration: { # required
+    #           public: {
+    #             destination_allow_rules: [ # required
+    #               {
+    #                 cidr: "PublicDestinationEndpointNetworkingConfigurationAllowRuleCidrString", # required
+    #               },
+    #             ],
+    #           },
+    #           vpc: {
+    #             security_group_ids: ["String"], # required
+    #             subnet_id: "String", # required
+    #           },
+    #         },
+    #         protocol_configuration: { # required
+    #           rist: {
+    #             destination_address: "String", # required
+    #             destination_ingest_port: 1, # required
+    #           },
+    #           srt_listener: {
+    #             destination_address: "String", # required
+    #             destination_ingest_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             encryption_passphrase: {
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           srt_caller: {
+    #             source_listener_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             encryption_passphrase: {
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           rtp: {
+    #             destination_address: "String", # required
+    #             destination_ingest_port: 1, # required
+    #             forward_error_correction_state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         destination_networking_type: "PUBLIC", # accepts PUBLIC, VPC
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #       },
+    #       router_input: {
+    #         router_input_arn: "RouterInputArn", # required
+    #       },
+    #     },
+    #     region_name: "String",
+    #     tags: {
+    #       "String" => "String",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_endpoint.name #=> String
+    #   resp.destination_endpoint.arn #=> String
+    #   resp.destination_endpoint.id #=> String
+    #   resp.destination_endpoint.description #=> String
+    #   resp.destination_endpoint.region_name #=> String
+    #   resp.destination_endpoint.availability_zone #=> String
+    #   resp.destination_endpoint.availability_zone_id #=> String
+    #   resp.destination_endpoint.created_at #=> Time
+    #   resp.destination_endpoint.updated_at #=> Time
+    #   resp.destination_endpoint.lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.destination_endpoint.messages #=> Array
+    #   resp.destination_endpoint.messages[0].code #=> String
+    #   resp.destination_endpoint.messages[0].message #=> String
+    #   resp.destination_endpoint.destination_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.destination_endpoint.configuration.standard.name #=> String
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.public.destination_allow_rules #=> Array
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.public.destination_allow_rules[0].cidr #=> String
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.vpc.security_group_ids #=> Array
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.vpc.security_group_ids[0] #=> String
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.vpc.subnet_id #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rist.destination_address #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rist.destination_ingest_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.destination_address #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.destination_ingest_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.stream_id #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.encryption_passphrase.secret_arn #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_caller.source_listener_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_caller.encryption_passphrase.secret_arn #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rtp.destination_address #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rtp.destination_ingest_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rtp.forward_error_correction_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.destination_endpoint.configuration.standard.destination_networking_type #=> String, one of "PUBLIC", "VPC"
+    #   resp.destination_endpoint.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.destination_endpoint.configuration.router_input.router_input_arn #=> String
+    #   resp.destination_endpoint.resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.destination_endpoint.resource_share_details.owned.share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.destination_endpoint.resource_share_details.consumed.owner_account_id #=> String
+    #   resp.destination_endpoint.registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.destination_endpoint.connection_details.standard.source_ip_address #=> String
+    #   resp.destination_endpoint.connection_details.standard.source_listener_port #=> Integer
+    #   resp.destination_endpoint.connection_details.standard.source_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoint.connection_details.standard.source_encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoint.connection_details.standard.source_encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoint.connection_details.standard.source_endpoint_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.destination_endpoint.connection_details.router_input.source_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoint.connection_details.router_input.source_encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoint.connection_details.router_input.source_encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoint.connection_details.router_input.source_endpoint_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.destination_endpoint.connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.destination_endpoint.connected_source #=> String
+    #   resp.destination_endpoint.decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoint.decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoint.decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoint.associated_resource_details.router_input.name #=> String
+    #   resp.destination_endpoint.associated_resource_details.router_input.maximum_bitrate #=> Integer
+    #   resp.destination_endpoint.associated_resource_details.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
+    #   resp.destination_endpoint.associated_resource_details.router_input.messages #=> Array
+    #   resp.destination_endpoint.associated_resource_details.router_input.messages[0].code #=> String
+    #   resp.destination_endpoint.associated_resource_details.router_input.messages[0].message #=> String
+    #   resp.destination_endpoint.tags #=> Hash
+    #   resp.destination_endpoint.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RegisterDestinationEndpoint AWS API Documentation
+    #
+    # @overload register_destination_endpoint(params = {})
+    # @param [Hash] params ({})
+    def register_destination_endpoint(params = {}, options = {})
+      req = build_request(:register_destination_endpoint, params)
+      req.send_request(options)
+    end
+
+    # Registers a new source endpoint in MediaConnect.
+    #
+    # @option params [String] :region_name
+    #   The name of the Amazon Web Services Region in which to register the
+    #   source endpoint. Defaults to the current region if not specified.
+    #
+    # @option params [String] :description
+    #   A description to help you identify the source endpoint.
+    #
+    # @option params [required, Types::SourceEndpointConfiguration] :configuration
+    #   The configuration settings for the source endpoint.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The tags to apply to the source endpoint. Each tag is a key-value
+    #   pair.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If this token matches a previous request,
+    #   the service ignores the request, but does not return an error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::RegisterSourceEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterSourceEndpointResponse#source_endpoint #source_endpoint} => Types::SourceEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_source_endpoint({
+    #     region_name: "String",
+    #     description: "RegisterSourceEndpointRequestDescriptionString",
+    #     configuration: { # required
+    #       standard: {
+    #         name: "StandardSourceEndpointConfigurationNameString", # required
+    #         source_networking_configuration: { # required
+    #           public: {
+    #             source_allow_rules: [ # required
+    #               {
+    #                 cidr: "PublicSourceEndpointNetworkingConfigurationAllowRuleCidrString", # required
+    #               },
+    #             ],
+    #           },
+    #           vpc: {
+    #             security_group_ids: ["String"], # required
+    #             subnet_id: "String", # required
+    #           },
+    #         },
+    #         protocol_configuration: { # required
+    #           rist: {
+    #             destination_ingest_port: 1, # required
+    #             recovery_latency_milliseconds: 1, # required
+    #           },
+    #           srt_listener: {
+    #             source_listener_port: 1, # required
+    #             source_address: "String", # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             encryption_passphrase: {
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           srt_caller: {
+    #             destination_ingest_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             encryption_passphrase: {
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           rtp: {
+    #             destination_ingest_port: 1, # required
+    #             forward_error_correction_state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         source_networking_type: "PUBLIC", # accepts PUBLIC, VPC
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #       },
+    #       router_output: {
+    #         router_output_arn: "RouterOutputArn", # required
+    #       },
+    #     },
+    #     tags: {
+    #       "String" => "String",
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_endpoint.name #=> String
+    #   resp.source_endpoint.arn #=> String
+    #   resp.source_endpoint.id #=> String
+    #   resp.source_endpoint.description #=> String
+    #   resp.source_endpoint.region_name #=> String
+    #   resp.source_endpoint.availability_zone #=> String
+    #   resp.source_endpoint.availability_zone_id #=> String
+    #   resp.source_endpoint.created_at #=> Time
+    #   resp.source_endpoint.updated_at #=> Time
+    #   resp.source_endpoint.lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.source_endpoint.messages #=> Array
+    #   resp.source_endpoint.messages[0].code #=> String
+    #   resp.source_endpoint.messages[0].message #=> String
+    #   resp.source_endpoint.source_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.source_endpoint.configuration.standard.name #=> String
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.public.source_allow_rules #=> Array
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.public.source_allow_rules[0].cidr #=> String
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.vpc.security_group_ids #=> Array
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.vpc.security_group_ids[0] #=> String
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.vpc.subnet_id #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rist.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.source_listener_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.source_address #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.stream_id #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.encryption_passphrase.secret_arn #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_caller.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_caller.encryption_passphrase.secret_arn #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rtp.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rtp.forward_error_correction_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.source_endpoint.configuration.standard.source_networking_type #=> String, one of "PUBLIC", "VPC"
+    #   resp.source_endpoint.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.source_endpoint.configuration.router_output.router_output_arn #=> String
+    #   resp.source_endpoint.resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.source_endpoint.resource_share_details.owned.share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.source_endpoint.resource_share_details.consumed.owner_account_id #=> String
+    #   resp.source_endpoint.registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.source_endpoint.connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.source_endpoint.connection_details.standard.destination_ip_address #=> String
+    #   resp.source_endpoint.connection_details.standard.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.connection_details.standard.destination_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoint.connection_details.standard.destination_decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoint.connection_details.standard.destination_decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoint.connection_details.standard.destination_endpoint_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.source_endpoint.connection_details.router_output.destination_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoint.connection_details.router_output.destination_decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoint.connection_details.router_output.destination_decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoint.connection_details.router_output.destination_endpoint_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.source_endpoint.connected_destinations #=> Array
+    #   resp.source_endpoint.connected_destinations[0] #=> String
+    #   resp.source_endpoint.encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoint.encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoint.encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoint.associated_resource_details.router_output.name #=> String
+    #   resp.source_endpoint.associated_resource_details.router_output.maximum_bitrate #=> Integer
+    #   resp.source_endpoint.associated_resource_details.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
+    #   resp.source_endpoint.associated_resource_details.router_output.messages #=> Array
+    #   resp.source_endpoint.associated_resource_details.router_output.messages[0].code #=> String
+    #   resp.source_endpoint.associated_resource_details.router_output.messages[0].message #=> String
+    #   resp.source_endpoint.tags #=> Hash
+    #   resp.source_endpoint.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RegisterSourceEndpoint AWS API Documentation
+    #
+    # @overload register_source_endpoint(params = {})
+    # @param [Hash] params ({})
+    def register_source_endpoint(params = {}, options = {})
+      req = build_request(:register_source_endpoint, params)
       req.send_request(options)
     end
 
@@ -5723,6 +6882,153 @@ module Aws::MediaConnect
       req.send_request(options)
     end
 
+    # Updates the configuration of a destination endpoint.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to update.
+    #
+    # @option params [String] :description
+    #   A description to help you identify the destination endpoint.
+    #
+    # @option params [Types::DestinationEndpointConfiguration] :configuration
+    #   The updated configuration settings for the destination endpoint.
+    #
+    # @return [Types::UpdateDestinationEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateDestinationEndpointResponse#destination_endpoint #destination_endpoint} => Types::DestinationEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_destination_endpoint({
+    #     arn: "DestinationEndpointArn", # required
+    #     description: "UpdateDestinationEndpointRequestDescriptionString",
+    #     configuration: {
+    #       standard: {
+    #         name: "StandardDestinationEndpointConfigurationNameString", # required
+    #         destination_networking_configuration: { # required
+    #           public: {
+    #             destination_allow_rules: [ # required
+    #               {
+    #                 cidr: "PublicDestinationEndpointNetworkingConfigurationAllowRuleCidrString", # required
+    #               },
+    #             ],
+    #           },
+    #           vpc: {
+    #             security_group_ids: ["String"], # required
+    #             subnet_id: "String", # required
+    #           },
+    #         },
+    #         protocol_configuration: { # required
+    #           rist: {
+    #             destination_address: "String", # required
+    #             destination_ingest_port: 1, # required
+    #           },
+    #           srt_listener: {
+    #             destination_address: "String", # required
+    #             destination_ingest_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             encryption_passphrase: {
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           srt_caller: {
+    #             source_listener_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             encryption_passphrase: {
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           rtp: {
+    #             destination_address: "String", # required
+    #             destination_ingest_port: 1, # required
+    #             forward_error_correction_state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         destination_networking_type: "PUBLIC", # accepts PUBLIC, VPC
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #       },
+    #       router_input: {
+    #         router_input_arn: "RouterInputArn", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.destination_endpoint.name #=> String
+    #   resp.destination_endpoint.arn #=> String
+    #   resp.destination_endpoint.id #=> String
+    #   resp.destination_endpoint.description #=> String
+    #   resp.destination_endpoint.region_name #=> String
+    #   resp.destination_endpoint.availability_zone #=> String
+    #   resp.destination_endpoint.availability_zone_id #=> String
+    #   resp.destination_endpoint.created_at #=> Time
+    #   resp.destination_endpoint.updated_at #=> Time
+    #   resp.destination_endpoint.lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.destination_endpoint.messages #=> Array
+    #   resp.destination_endpoint.messages[0].code #=> String
+    #   resp.destination_endpoint.messages[0].message #=> String
+    #   resp.destination_endpoint.destination_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.destination_endpoint.configuration.standard.name #=> String
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.public.destination_allow_rules #=> Array
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.public.destination_allow_rules[0].cidr #=> String
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.vpc.security_group_ids #=> Array
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.vpc.security_group_ids[0] #=> String
+    #   resp.destination_endpoint.configuration.standard.destination_networking_configuration.vpc.subnet_id #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rist.destination_address #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rist.destination_ingest_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.destination_address #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.destination_ingest_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.stream_id #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_listener.encryption_passphrase.secret_arn #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_caller.source_listener_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.srt_caller.encryption_passphrase.secret_arn #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rtp.destination_address #=> String
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rtp.destination_ingest_port #=> Integer
+    #   resp.destination_endpoint.configuration.standard.protocol_configuration.rtp.forward_error_correction_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.destination_endpoint.configuration.standard.destination_networking_type #=> String, one of "PUBLIC", "VPC"
+    #   resp.destination_endpoint.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.destination_endpoint.configuration.router_input.router_input_arn #=> String
+    #   resp.destination_endpoint.resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.destination_endpoint.resource_share_details.owned.share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.destination_endpoint.resource_share_details.consumed.owner_account_id #=> String
+    #   resp.destination_endpoint.registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.destination_endpoint.connection_details.standard.source_ip_address #=> String
+    #   resp.destination_endpoint.connection_details.standard.source_listener_port #=> Integer
+    #   resp.destination_endpoint.connection_details.standard.source_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoint.connection_details.standard.source_encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoint.connection_details.standard.source_encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoint.connection_details.standard.source_endpoint_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.destination_endpoint.connection_details.router_input.source_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoint.connection_details.router_input.source_encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoint.connection_details.router_input.source_encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoint.connection_details.router_input.source_endpoint_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.destination_endpoint.connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.destination_endpoint.connected_source #=> String
+    #   resp.destination_endpoint.decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.destination_endpoint.decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.destination_endpoint.decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.destination_endpoint.associated_resource_details.router_input.name #=> String
+    #   resp.destination_endpoint.associated_resource_details.router_input.maximum_bitrate #=> Integer
+    #   resp.destination_endpoint.associated_resource_details.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
+    #   resp.destination_endpoint.associated_resource_details.router_input.messages #=> Array
+    #   resp.destination_endpoint.associated_resource_details.router_input.messages[0].code #=> String
+    #   resp.destination_endpoint.associated_resource_details.router_input.messages[0].message #=> String
+    #   resp.destination_endpoint.tags #=> Hash
+    #   resp.destination_endpoint.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateDestinationEndpoint AWS API Documentation
+    #
+    # @overload update_destination_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_destination_endpoint(params = {}, options = {})
+      req = build_request(:update_destination_endpoint, params)
+      req.send_request(options)
+    end
+
     # Updates an existing flow.
     #
     # <note markdown="1"> Because `UpdateFlowSources` and `UpdateFlow` are separate operations,
@@ -5922,7 +7228,9 @@ module Aws::MediaConnect
     #   resp.flow.outputs[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.outputs[0].transport.ndi_program_name #=> String
     #   resp.flow.outputs[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.outputs[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.outputs[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.outputs[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.outputs[0].vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.flow.outputs[0].bridge_arn #=> String
     #   resp.flow.outputs[0].bridge_ports #=> Array
@@ -5976,7 +7284,9 @@ module Aws::MediaConnect
     #   resp.flow.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.source.transport.ndi_program_name #=> String
     #   resp.flow.source.transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.source.transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.source.vpc_interface_name #=> String
     #   resp.flow.source.whitelist_cidr #=> String
     #   resp.flow.source.gateway_bridge_source.bridge_arn #=> String
@@ -6034,7 +7344,9 @@ module Aws::MediaConnect
     #   resp.flow.sources[0].transport.ndi_speed_hq_quality #=> Integer
     #   resp.flow.sources[0].transport.ndi_program_name #=> String
     #   resp.flow.sources[0].transport.ndi_source_settings.source_name #=> String
+    #   resp.flow.sources[0].transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.flow.sources[0].transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.flow.sources[0].transport.ndi_audio_reference_level #=> Integer
     #   resp.flow.sources[0].vpc_interface_name #=> String
     #   resp.flow.sources[0].whitelist_cidr #=> String
     #   resp.flow.sources[0].gateway_bridge_source.bridge_arn #=> String
@@ -6365,6 +7677,12 @@ module Aws::MediaConnect
     #   * `UTC_SYSTEM_TIME` - Generates timecodes based on the system clock
     #     time when each frame is sent.
     #
+    # @option params [Integer] :ndi_audio_reference_level
+    #   The audio reference level of the NDI receiver, in decibels relative to
+    #   full scale (dBFS). Common values are `-20` (NDI and SMPTE) and `-18`
+    #   (EBU). If you don't specify this field, MediaConnect leaves the value
+    #   unchanged.
+    #
     # @return [Types::UpdateFlowOutputResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateFlowOutputResponse#flow_arn #flow_arn} => String
@@ -6436,6 +7754,7 @@ module Aws::MediaConnect
     #       },
     #     },
     #     ndi_output_timecode_source: "EMBEDDED_TIMECODE", # accepts EMBEDDED_TIMECODE, UTC_SYSTEM_TIME
+    #     ndi_audio_reference_level: 1,
     #   })
     #
     # @example Response structure
@@ -6486,7 +7805,9 @@ module Aws::MediaConnect
     #   resp.output.transport.ndi_speed_hq_quality #=> Integer
     #   resp.output.transport.ndi_program_name #=> String
     #   resp.output.transport.ndi_source_settings.source_name #=> String
+    #   resp.output.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.output.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.output.transport.ndi_audio_reference_level #=> Integer
     #   resp.output.vpc_interface_attachment.vpc_interface_name #=> String
     #   resp.output.bridge_arn #=> String
     #   resp.output.bridge_ports #=> Array
@@ -6689,6 +8010,7 @@ module Aws::MediaConnect
     #     },
     #     ndi_source_settings: {
     #       source_name: "String",
+    #       audio_reference_level: 1,
     #     },
     #     router_integration_state: "ENABLED", # accepts ENABLED, DISABLED
     #     router_integration_transit_decryption: {
@@ -6749,7 +8071,9 @@ module Aws::MediaConnect
     #   resp.source.transport.ndi_speed_hq_quality #=> Integer
     #   resp.source.transport.ndi_program_name #=> String
     #   resp.source.transport.ndi_source_settings.source_name #=> String
+    #   resp.source.transport.ndi_source_settings.audio_reference_level #=> Integer
     #   resp.source.transport.ndi_output_timecode_source #=> String, one of "EMBEDDED_TIMECODE", "UTC_SYSTEM_TIME"
+    #   resp.source.transport.ndi_audio_reference_level #=> Integer
     #   resp.source.vpc_interface_name #=> String
     #   resp.source.whitelist_cidr #=> String
     #   resp.source.gateway_bridge_source.bridge_arn #=> String
@@ -6829,7 +8153,22 @@ module Aws::MediaConnect
     #   Region.
     #
     # @option params [String] :tier
-    #   The updated tier level for the router input.
+    #   The updated tier level for the router input. The tier sets the maximum
+    #   bitrate, in Mbps, for the router input. Valid values include the
+    #   following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #
     # @option params [Types::RouterInputTransitEncryption] :transit_encryption
     #   The updated transit encryption settings for the router input.
@@ -6851,6 +8190,20 @@ module Aws::MediaConnect
     #     arn: "RouterInputArn", # required
     #     name: "UpdateRouterInputRequestNameString",
     #     configuration: {
+    #       destination_endpoint: {
+    #         endpoint_lifecycle_management: "MANAGED", # required, accepts MANAGED, UNMANAGED
+    #         source_transit_decryption_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
+    #         source_transit_decryption: { # required
+    #           secrets_manager: {
+    #             encryption_secret_type: "AES_128_KEY", # accepts AES_128_KEY, AES_192_KEY, AES_256_KEY, SRT_PASSPHRASE
+    #             encryption_secret: { # required
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           automatic: {
+    #           },
+    #         },
+    #       },
     #       standard: {
     #         network_interface_arn: "RouterNetworkInterfaceArn", # required
     #         protocol_configuration: { # required
@@ -6976,7 +8329,7 @@ module Aws::MediaConnect
     #     },
     #     maximum_bitrate: 1,
     #     routing_scope: "REGIONAL", # accepts REGIONAL, GLOBAL
-    #     tier: "INPUT_100", # accepts INPUT_100, INPUT_50, INPUT_20
+    #     tier: "INPUT_100", # accepts INPUT_100, INPUT_50, INPUT_20, INPUT_500, INPUT_250
     #     transit_encryption: {
     #       encryption_key_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
     #       encryption_key_configuration: { # required
@@ -7020,7 +8373,11 @@ module Aws::MediaConnect
     #   resp.router_input.arn #=> String
     #   resp.router_input.id #=> String
     #   resp.router_input.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL"
+    #   resp.router_input.input_type #=> String, one of "STANDARD", "FAILOVER", "MERGE", "MEDIACONNECT_FLOW", "MEDIALIVE_CHANNEL", "DESTINATION_ENDPOINT"
+    #   resp.router_input.configuration.destination_endpoint.endpoint_lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.router_input.configuration.destination_endpoint.source_transit_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_input.configuration.destination_endpoint.source_transit_decryption.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.router_input.configuration.destination_endpoint.source_transit_decryption.secrets_manager.encryption_secret.secret_arn #=> String
     #   resp.router_input.configuration.standard.network_interface_arn #=> String
     #   resp.router_input.configuration.standard.protocol_configuration.rist.port #=> Integer
     #   resp.router_input.configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
@@ -7078,7 +8435,7 @@ module Aws::MediaConnect
     #   resp.router_input.region_name #=> String
     #   resp.router_input.availability_zone #=> String
     #   resp.router_input.maximum_bitrate #=> Integer
-    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20"
+    #   resp.router_input.tier #=> String, one of "INPUT_100", "INPUT_50", "INPUT_20", "INPUT_500", "INPUT_250"
     #   resp.router_input.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
     #   resp.router_input.created_at #=> Time
     #   resp.router_input.updated_at #=> Time
@@ -7114,6 +8471,8 @@ module Aws::MediaConnect
     #   resp.router_input.content_quality_analysis_configuration.content_level.frozen_frames.threshold_seconds #=> Integer
     #   resp.router_input.content_quality_analysis_configuration.content_level.silent_audio.state #=> String, one of "ENABLED", "DISABLED"
     #   resp.router_input.content_quality_analysis_configuration.content_level.silent_audio.threshold_seconds #=> Integer
+    #   resp.router_input.associated_destination_endpoint_arns #=> Array
+    #   resp.router_input.associated_destination_endpoint_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateRouterInput AWS API Documentation
     #
@@ -7214,7 +8573,22 @@ module Aws::MediaConnect
     #   Region. GLOBAL - can take inputs from any Region.
     #
     # @option params [String] :tier
-    #   The updated tier level for the router output.
+    #   The updated tier level for the router output. The tier sets the
+    #   maximum bitrate, in Mbps, for the router output. Valid values include
+    #   the following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #
     # @option params [Types::MaintenanceConfiguration] :maintenance_configuration
     #   The updated maintenance configuration settings for the router output,
@@ -7253,6 +8627,19 @@ module Aws::MediaConnect
     #               },
     #             },
     #           },
+    #           rtmp_push: {
+    #             destination_address: "String", # required
+    #             destination_port: 1, # required
+    #             application_name: "String", # required
+    #             stream_name: "String", # required
+    #             tls_encryption: {
+    #               encryption_type: "PUBLIC", # accepts PUBLIC
+    #               encryption_configuration: { # required
+    #                 public: {
+    #                 },
+    #               },
+    #             },
+    #           },
     #           srt_caller: {
     #             destination_address: "String", # required
     #             destination_port: 1, # required
@@ -7271,7 +8658,7 @@ module Aws::MediaConnect
     #             forward_error_correction: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
-    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER, RTMP_PUSH
     #       },
     #       media_connect_flow: {
     #         flow_arn: "FlowArn",
@@ -7303,10 +8690,24 @@ module Aws::MediaConnect
     #           },
     #         },
     #       },
+    #       source_endpoint: {
+    #         endpoint_lifecycle_management: "MANAGED", # required, accepts MANAGED, UNMANAGED
+    #         destination_transit_encryption_type: "SECRETS_MANAGER", # accepts SECRETS_MANAGER, AUTOMATIC
+    #         destination_transit_encryption: { # required
+    #           secrets_manager: {
+    #             encryption_secret_type: "AES_128_KEY", # accepts AES_128_KEY, AES_192_KEY, AES_256_KEY, SRT_PASSPHRASE
+    #             encryption_secret: { # required
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           automatic: {
+    #           },
+    #         },
+    #       },
     #     },
     #     maximum_bitrate: 1,
     #     routing_scope: "REGIONAL", # accepts REGIONAL, GLOBAL
-    #     tier: "OUTPUT_100", # accepts OUTPUT_100, OUTPUT_50, OUTPUT_20
+    #     tier: "OUTPUT_100", # accepts OUTPUT_100, OUTPUT_50, OUTPUT_20, OUTPUT_500, OUTPUT_250
     #     maintenance_configuration: {
     #       preferred_day_time: {
     #         day: "MONDAY", # required, accepts MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
@@ -7326,7 +8727,7 @@ module Aws::MediaConnect
     #   resp.router_output.arn #=> String
     #   resp.router_output.id #=> String
     #   resp.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
-    #   resp.router_output.output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT"
+    #   resp.router_output.output_type #=> String, one of "STANDARD", "MEDIACONNECT_FLOW", "MEDIALIVE_INPUT", "SOURCE_ENDPOINT"
     #   resp.router_output.configuration.standard.network_interface_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rist.destination_port #=> Integer
@@ -7334,6 +8735,11 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.secret_arn #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_listener.encryption_configuration.encryption_key.role_arn #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_address #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.destination_port #=> Integer
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.application_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.stream_name #=> String
+    #   resp.router_output.configuration.standard.protocol_configuration.rtmp_push.tls_encryption.encryption_type #=> String, one of "PUBLIC"
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
@@ -7343,7 +8749,7 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_address #=> String
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.destination_port #=> Integer
     #   resp.router_output.configuration.standard.protocol_configuration.rtp.forward_error_correction #=> String, one of "ENABLED", "DISABLED"
-    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.router_output.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER", "RTMP_PUSH"
     #   resp.router_output.configuration.media_connect_flow.flow_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.flow_source_arn #=> String
     #   resp.router_output.configuration.media_connect_flow.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
@@ -7354,12 +8760,16 @@ module Aws::MediaConnect
     #   resp.router_output.configuration.media_live_input.destination_transit_encryption.encryption_key_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
     #   resp.router_output.configuration.media_live_input.destination_transit_encryption.encryption_key_configuration.secrets_manager.secret_arn #=> String
     #   resp.router_output.configuration.media_live_input.destination_transit_encryption.encryption_key_configuration.secrets_manager.role_arn #=> String
+    #   resp.router_output.configuration.source_endpoint.endpoint_lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.router_output.configuration.source_endpoint.destination_transit_encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.router_output.configuration.source_endpoint.destination_transit_encryption.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.router_output.configuration.source_endpoint.destination_transit_encryption.secrets_manager.encryption_secret.secret_arn #=> String
     #   resp.router_output.routed_state #=> String, one of "ROUTED", "ROUTING", "UNROUTED"
     #   resp.router_output.region_name #=> String
     #   resp.router_output.availability_zone #=> String
     #   resp.router_output.maximum_bitrate #=> Integer
     #   resp.router_output.routing_scope #=> String, one of "REGIONAL", "GLOBAL"
-    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20"
+    #   resp.router_output.tier #=> String, one of "OUTPUT_100", "OUTPUT_50", "OUTPUT_20", "OUTPUT_500", "OUTPUT_250"
     #   resp.router_output.created_at #=> Time
     #   resp.router_output.updated_at #=> Time
     #   resp.router_output.messages #=> Array
@@ -7378,6 +8788,8 @@ module Aws::MediaConnect
     #   resp.router_output.maintenance_schedule.window.end #=> Time
     #   resp.router_output.maintenance_schedule.window.scheduled_time #=> Time
     #   resp.router_output.fabric_configuration.recovery_latency_mode #=> String, one of "BALANCED", "LOW_LATENCY"
+    #   resp.router_output.associated_source_endpoint_arns #=> Array
+    #   resp.router_output.associated_source_endpoint_arns[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateRouterOutput AWS API Documentation
     #
@@ -7385,6 +8797,152 @@ module Aws::MediaConnect
     # @param [Hash] params ({})
     def update_router_output(params = {}, options = {})
       req = build_request(:update_router_output, params)
+      req.send_request(options)
+    end
+
+    # Updates the configuration of a source endpoint.
+    #
+    # @option params [required, String] :arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to update.
+    #
+    # @option params [String] :description
+    #   A description to help you identify the source endpoint.
+    #
+    # @option params [Types::SourceEndpointConfiguration] :configuration
+    #   The updated configuration settings for the source endpoint.
+    #
+    # @return [Types::UpdateSourceEndpointResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSourceEndpointResponse#source_endpoint #source_endpoint} => Types::SourceEndpoint
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_source_endpoint({
+    #     arn: "SourceEndpointArn", # required
+    #     description: "UpdateSourceEndpointRequestDescriptionString",
+    #     configuration: {
+    #       standard: {
+    #         name: "StandardSourceEndpointConfigurationNameString", # required
+    #         source_networking_configuration: { # required
+    #           public: {
+    #             source_allow_rules: [ # required
+    #               {
+    #                 cidr: "PublicSourceEndpointNetworkingConfigurationAllowRuleCidrString", # required
+    #               },
+    #             ],
+    #           },
+    #           vpc: {
+    #             security_group_ids: ["String"], # required
+    #             subnet_id: "String", # required
+    #           },
+    #         },
+    #         protocol_configuration: { # required
+    #           rist: {
+    #             destination_ingest_port: 1, # required
+    #             recovery_latency_milliseconds: 1, # required
+    #           },
+    #           srt_listener: {
+    #             source_listener_port: 1, # required
+    #             source_address: "String", # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             stream_id: "String",
+    #             encryption_passphrase: {
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           srt_caller: {
+    #             destination_ingest_port: 1, # required
+    #             minimum_latency_milliseconds: 1, # required
+    #             encryption_passphrase: {
+    #               secret_arn: "SecretArn", # required
+    #             },
+    #           },
+    #           rtp: {
+    #             destination_ingest_port: 1, # required
+    #             forward_error_correction_state: "ENABLED", # required, accepts ENABLED, DISABLED
+    #           },
+    #         },
+    #         source_networking_type: "PUBLIC", # accepts PUBLIC, VPC
+    #         protocol: "RTP", # accepts RTP, RIST, SRT_CALLER, SRT_LISTENER
+    #       },
+    #       router_output: {
+    #         router_output_arn: "RouterOutputArn", # required
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_endpoint.name #=> String
+    #   resp.source_endpoint.arn #=> String
+    #   resp.source_endpoint.id #=> String
+    #   resp.source_endpoint.description #=> String
+    #   resp.source_endpoint.region_name #=> String
+    #   resp.source_endpoint.availability_zone #=> String
+    #   resp.source_endpoint.availability_zone_id #=> String
+    #   resp.source_endpoint.created_at #=> Time
+    #   resp.source_endpoint.updated_at #=> Time
+    #   resp.source_endpoint.lifecycle_management #=> String, one of "MANAGED", "UNMANAGED"
+    #   resp.source_endpoint.messages #=> Array
+    #   resp.source_endpoint.messages[0].code #=> String
+    #   resp.source_endpoint.messages[0].message #=> String
+    #   resp.source_endpoint.source_type #=> String, one of "STANDARD", "ROUTER_OUTPUT"
+    #   resp.source_endpoint.configuration.standard.name #=> String
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.public.source_allow_rules #=> Array
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.public.source_allow_rules[0].cidr #=> String
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.vpc.security_group_ids #=> Array
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.vpc.security_group_ids[0] #=> String
+    #   resp.source_endpoint.configuration.standard.source_networking_configuration.vpc.subnet_id #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rist.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rist.recovery_latency_milliseconds #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.source_listener_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.source_address #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.minimum_latency_milliseconds #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.stream_id #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_listener.encryption_passphrase.secret_arn #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_caller.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_caller.minimum_latency_milliseconds #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.srt_caller.encryption_passphrase.secret_arn #=> String
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rtp.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.configuration.standard.protocol_configuration.rtp.forward_error_correction_state #=> String, one of "ENABLED", "DISABLED"
+    #   resp.source_endpoint.configuration.standard.source_networking_type #=> String, one of "PUBLIC", "VPC"
+    #   resp.source_endpoint.configuration.standard.protocol #=> String, one of "RTP", "RIST", "SRT_CALLER", "SRT_LISTENER"
+    #   resp.source_endpoint.configuration.router_output.router_output_arn #=> String
+    #   resp.source_endpoint.resource_share_ownership #=> String, one of "OWNED", "CONSUMED"
+    #   resp.source_endpoint.resource_share_details.owned.share_state #=> String, one of "SHARED", "UNSHARED"
+    #   resp.source_endpoint.resource_share_details.consumed.owner_account_id #=> String
+    #   resp.source_endpoint.registration_state #=> String, one of "REGISTERED", "REGISTERING", "DEREGISTERING", "REGISTRATION_FAILED"
+    #   resp.source_endpoint.connection_state #=> String, one of "CONNECTED", "DISCONNECTED", "CONNECTING", "DISCONNECTING"
+    #   resp.source_endpoint.connection_details.standard.destination_ip_address #=> String
+    #   resp.source_endpoint.connection_details.standard.destination_ingest_port #=> Integer
+    #   resp.source_endpoint.connection_details.standard.destination_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoint.connection_details.standard.destination_decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoint.connection_details.standard.destination_decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoint.connection_details.standard.destination_endpoint_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.source_endpoint.connection_details.router_output.destination_decryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoint.connection_details.router_output.destination_decryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoint.connection_details.router_output.destination_decryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoint.connection_details.router_output.destination_endpoint_type #=> String, one of "STANDARD", "ROUTER_INPUT"
+    #   resp.source_endpoint.connected_destinations #=> Array
+    #   resp.source_endpoint.connected_destinations[0] #=> String
+    #   resp.source_endpoint.encryption_type #=> String, one of "SECRETS_MANAGER", "AUTOMATIC"
+    #   resp.source_endpoint.encryption_configuration.secrets_manager.encryption_secret_type #=> String, one of "AES_128_KEY", "AES_192_KEY", "AES_256_KEY", "SRT_PASSPHRASE"
+    #   resp.source_endpoint.encryption_configuration.secrets_manager.encryption_secret.secret_arn #=> String
+    #   resp.source_endpoint.associated_resource_details.router_output.name #=> String
+    #   resp.source_endpoint.associated_resource_details.router_output.maximum_bitrate #=> Integer
+    #   resp.source_endpoint.associated_resource_details.router_output.state #=> String, one of "CREATING", "STANDBY", "STARTING", "ACTIVE", "STOPPING", "DELETING", "UPDATING", "ERROR", "RECOVERING", "MIGRATING"
+    #   resp.source_endpoint.associated_resource_details.router_output.messages #=> Array
+    #   resp.source_endpoint.associated_resource_details.router_output.messages[0].code #=> String
+    #   resp.source_endpoint.associated_resource_details.router_output.messages[0].message #=> String
+    #   resp.source_endpoint.tags #=> Hash
+    #   resp.source_endpoint.tags["String"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateSourceEndpoint AWS API Documentation
+    #
+    # @overload update_source_endpoint(params = {})
+    # @param [Hash] params ({})
+    def update_source_endpoint(params = {}, options = {})
+      req = build_request(:update_source_endpoint, params)
       req.send_request(options)
     end
 
@@ -7406,7 +8964,7 @@ module Aws::MediaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconnect'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.113.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -7472,19 +9030,29 @@ module Aws::MediaConnect
     # The following table lists the valid waiter names, the operations they call,
     # and the default `:delay` and `:max_attempts` values.
     #
-    # | waiter_name     | params                     | :delay   | :max_attempts |
-    # | --------------- | -------------------------- | -------- | ------------- |
-    # | flow_active     | {Client#describe_flow}     | 3        | 40            |
-    # | flow_deleted    | {Client#describe_flow}     | 3        | 40            |
-    # | flow_standby    | {Client#describe_flow}     | 3        | 40            |
-    # | input_active    | {Client#get_router_input}  | 3        | 40            |
-    # | input_deleted   | {Client#get_router_input}  | 3        | 40            |
-    # | input_standby   | {Client#get_router_input}  | 3        | 40            |
-    # | output_active   | {Client#get_router_output} | 3        | 40            |
-    # | output_deleted  | {Client#get_router_output} | 3        | 40            |
-    # | output_routed   | {Client#get_router_output} | 3        | 40            |
-    # | output_standby  | {Client#get_router_output} | 3        | 40            |
-    # | output_unrouted | {Client#get_router_output} | 3        | 40            |
+    # | waiter_name                       | params                            | :delay   | :max_attempts |
+    # | --------------------------------- | --------------------------------- | -------- | ------------- |
+    # | destination_endpoint_connected    | {Client#get_destination_endpoint} | 3        | 40            |
+    # | destination_endpoint_deregistered | {Client#get_destination_endpoint} | 3        | 40            |
+    # | destination_endpoint_disconnected | {Client#get_destination_endpoint} | 3        | 40            |
+    # | destination_endpoint_registered   | {Client#get_destination_endpoint} | 3        | 40            |
+    # | flow_active                       | {Client#describe_flow}            | 3        | 40            |
+    # | flow_deleted                      | {Client#describe_flow}            | 3        | 40            |
+    # | flow_standby                      | {Client#describe_flow}            | 3        | 40            |
+    # | input_active                      | {Client#get_router_input}         | 3        | 40            |
+    # | input_deleted                     | {Client#get_router_input}         | 3        | 40            |
+    # | input_standby                     | {Client#get_router_input}         | 3        | 40            |
+    # | output_active                     | {Client#get_router_output}        | 3        | 40            |
+    # | output_deleted                    | {Client#get_router_output}        | 3        | 40            |
+    # | output_routed                     | {Client#get_router_output}        | 3        | 40            |
+    # | output_standby                    | {Client#get_router_output}        | 3        | 40            |
+    # | output_unrouted                   | {Client#get_router_output}        | 3        | 40            |
+    # | source_endpoint_connected         | {Client#get_source_endpoint}      | 3        | 40            |
+    # | source_endpoint_connecting        | {Client#get_source_endpoint}      | 3        | 40            |
+    # | source_endpoint_deregistered      | {Client#get_source_endpoint}      | 3        | 40            |
+    # | source_endpoint_disconnected      | {Client#get_source_endpoint}      | 3        | 40            |
+    # | source_endpoint_disconnecting     | {Client#get_source_endpoint}      | 3        | 40            |
+    # | source_endpoint_registered        | {Client#get_source_endpoint}      | 3        | 40            |
     #
     # @raise [Errors::FailureStateError] Raised when the waiter terminates
     #   because the waiter has entered a state that it will not transition
@@ -7535,6 +9103,10 @@ module Aws::MediaConnect
 
     def waiters
       {
+        destination_endpoint_connected: Waiters::DestinationEndpointConnected,
+        destination_endpoint_deregistered: Waiters::DestinationEndpointDeregistered,
+        destination_endpoint_disconnected: Waiters::DestinationEndpointDisconnected,
+        destination_endpoint_registered: Waiters::DestinationEndpointRegistered,
         flow_active: Waiters::FlowActive,
         flow_deleted: Waiters::FlowDeleted,
         flow_standby: Waiters::FlowStandby,
@@ -7545,7 +9117,13 @@ module Aws::MediaConnect
         output_deleted: Waiters::OutputDeleted,
         output_routed: Waiters::OutputRouted,
         output_standby: Waiters::OutputStandby,
-        output_unrouted: Waiters::OutputUnrouted
+        output_unrouted: Waiters::OutputUnrouted,
+        source_endpoint_connected: Waiters::SourceEndpointConnected,
+        source_endpoint_connecting: Waiters::SourceEndpointConnecting,
+        source_endpoint_deregistered: Waiters::SourceEndpointDeregistered,
+        source_endpoint_disconnected: Waiters::SourceEndpointDisconnected,
+        source_endpoint_disconnecting: Waiters::SourceEndpointDisconnecting,
+        source_endpoint_registered: Waiters::SourceEndpointRegistered
       }
     end
 

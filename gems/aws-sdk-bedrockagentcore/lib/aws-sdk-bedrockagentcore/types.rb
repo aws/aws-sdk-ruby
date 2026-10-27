@@ -403,12 +403,23 @@ module Aws::BedrockAgentCore
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] record_expiry_specification
+    #   The record expiry (long-term memory time-to-live) applied to every
+    #   record created by this request. Set `recordExpiryDurationDays` to
+    #   the number of days after which the records expire. Only the expiry
+    #   provided here is applied; the records' strategy association has no
+    #   effect on their expiry. If you do not provide this value, the
+    #   records do not expire. The `REMOVE` action does not apply when
+    #   creating records.
+    #   @return [Types::RecordExpirySpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchCreateMemoryRecordsInput AWS API Documentation
     #
     class BatchCreateMemoryRecordsInput < Struct.new(
       :memory_id,
       :records,
-      :client_token)
+      :client_token,
+      :record_expiry_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -563,11 +574,35 @@ module Aws::BedrockAgentCore
     #   operation.
     #   @return [Array<Types::MemoryRecordUpdateInput>]
     #
+    # @!attribute [rw] record_expiry_specification
+    #   The record expiry (long-term memory time-to-live) applied to every
+    #   record updated by this request. Set `recordExpiryDurationDays` to
+    #   configure or overwrite the number of days after which the records
+    #   expire, or set `action` to `REMOVE` to clear a previously configured
+    #   expiry so that the records no longer expire.
+    #
+    #   When you do not provide this value, the service determines each
+    #   record's expiry from its current state:
+    #
+    #   * If the record already has an expiry configured, the service resets
+    #     and reapplies the expiry based on the last applied
+    #     `recordExpiryDurationDays`.
+    #
+    #   * If the record does not have an expiry configured, no expiry is
+    #     applied and the record remains non-expiring. This is the outcome
+    #     regardless of whether the record's strategy configures an expiry.
+    #
+    #   Providing an explicit `recordExpiryDurationDays` always takes
+    #   precedence: it overwrites an existing expiry, or sets one on a
+    #   record that previously had none.
+    #   @return [Types::RecordExpirySpecification]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/BatchUpdateMemoryRecordsInput AWS API Documentation
     #
     class BatchUpdateMemoryRecordsInput < Struct.new(
       :memory_id,
-      :records)
+      :records,
+      :record_expiry_specification)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2653,6 +2688,14 @@ module Aws::BedrockAgentCore
     #   the user-defined name.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_dimension_name
+    #   The name of the dimension that this result scores. This field is set
+    #   only on results produced by an evaluator that uses a
+    #   multi-dimensional rating scale, where each dimension is scored
+    #   independently. For evaluators with a single rating scale, this field
+    #   is absent.
+    #   @return [String]
+    #
     # @!attribute [rw] explanation
     #   The detailed explanation provided by the evaluator describing the
     #   reasoning behind the assigned score. This qualitative feedback helps
@@ -2713,6 +2756,7 @@ module Aws::BedrockAgentCore
       :evaluator_arn,
       :evaluator_id,
       :evaluator_name,
+      :evaluation_dimension_name,
       :explanation,
       :context,
       :value,
@@ -2818,6 +2862,13 @@ module Aws::BedrockAgentCore
     #   The unique identifier of the evaluator.
     #   @return [String]
     #
+    # @!attribute [rw] evaluation_dimension_name
+    #   The name of the dimension that this summary covers. This field is
+    #   set only for evaluators that use a multi-dimensional rating scale,
+    #   where each dimension is summarized separately. For single-scale
+    #   evaluators, this field is not set.
+    #   @return [String]
+    #
     # @!attribute [rw] statistics
     #   The aggregated statistics for this evaluator.
     #   @return [Types::EvaluatorStatistics]
@@ -2835,6 +2886,7 @@ module Aws::BedrockAgentCore
     #
     class EvaluatorSummary < Struct.new(
       :evaluator_id,
+      :evaluation_dimension_name,
       :statistics,
       :total_evaluated,
       :total_failed)
@@ -3561,6 +3613,14 @@ module Aws::BedrockAgentCore
     #   counts and evaluator score summaries.
     #   @return [Types::EvaluationJobResults]
     #
+    # @!attribute [rw] insight_results
+    #   The insights generated when the batch evaluation includes the
+    #   `Builtin.FailureAnalysis` evaluator. Each insight groups related
+    #   failures found across the evaluated sessions. An empty list means
+    #   that no failures were found. If the analysis fails, this field is
+    #   omitted and `errorDetails` describes the error.
+    #   @return [Array<Types::InsightResult>]
+    #
     # @!attribute [rw] failure_analysis_result
     #   The failure analysis results from insights, containing categorized
     #   failure clusters with root causes and recommendations.
@@ -3605,6 +3665,7 @@ module Aws::BedrockAgentCore
       :data_source_config,
       :output_config,
       :evaluation_results,
+      :insight_results,
       :failure_analysis_result,
       :user_intent_result,
       :execution_summary_result,
@@ -4702,6 +4763,10 @@ module Aws::BedrockAgentCore
     #
     # @!attribute [rw] oauth
     #   OAuth 2.0 authentication via AgentCore Identity.
+    #
+    #   The `AUTHORIZATION_CODE` grant type is not supported for outbound
+    #   authentication from a harness to an AgentCore Gateway, even when
+    #   `defaultReturnUrl` is specified.
     #   @return [Types::OAuthCredentialProvider]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/HarnessGatewayOutboundAuth AWS API Documentation
@@ -5149,7 +5214,8 @@ module Aws::BedrockAgentCore
     #   @return [Types::HarnessSkillGitSource]
     #
     # @!attribute [rw] aws_skills
-    #   AWS Skills baked into the Harness's underlying Runtime.
+    #   Amazon Web Services Skills baked into the Harness's underlying
+    #   Runtime.
     #   @return [Types::HarnessSkillAwsSkillsSource]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/HarnessSkill AWS API Documentation
@@ -5171,7 +5237,7 @@ module Aws::BedrockAgentCore
       class Unknown < HarnessSkill; end
     end
 
-    # Passed to show that AWS Skills should be included.
+    # Passed to show that Amazon Web Services Skills should be included.
     #
     # @!attribute [rw] paths
     #   Optionally filter allowed skills with glob syntax, e.g.,
@@ -5761,6 +5827,92 @@ module Aws::BedrockAgentCore
     class Insight < Struct.new(
       :insight_id)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An insight that groups related failures found across the sessions in a
+    # batch evaluation.
+    #
+    # @!attribute [rw] type
+    #   The type of insight. `FAILURE` indicates a group of related
+    #   failures.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   A generated label for the insight. The name is not an identifier and
+    #   can differ between batch evaluations.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the failure pattern that the insight represents.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The timestamp when the insight was generated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] affected_session_count
+    #   The number of distinct sessions affected by the insight.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] sample_sessions
+    #   A sample of up to 10 sessions affected by the insight. Returned only
+    #   when the insight has no root causes. Otherwise, sample sessions are
+    #   returned for each root cause.
+    #   @return [Array<Types::SampleSession>]
+    #
+    # @!attribute [rw] root_causes
+    #   The root causes identified for the insight.
+    #   @return [Array<Types::InsightRootCause>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InsightResult AWS API Documentation
+    #
+    class InsightResult < Struct.new(
+      :type,
+      :name,
+      :description,
+      :created_at,
+      :affected_session_count,
+      :sample_sessions,
+      :root_causes)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # A root cause that contributes to an insight.
+    #
+    # @!attribute [rw] name
+    #   A generated label for the root cause.
+    #   @return [String]
+    #
+    # @!attribute [rw] explanation
+    #   An explanation of how the root cause leads to the failures in the
+    #   insight.
+    #   @return [String]
+    #
+    # @!attribute [rw] affected_session_count
+    #   The number of distinct sessions affected by the root cause. A
+    #   session can be affected by more than one root cause of the same
+    #   insight.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] suggested_fix
+    #   A suggested change to the agent that addresses the root cause.
+    #   @return [String]
+    #
+    # @!attribute [rw] sample_sessions
+    #   A sample of up to 10 sessions affected by the root cause.
+    #   @return [Array<Types::SampleSession>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InsightRootCause AWS API Documentation
+    #
+    class InsightRootCause < Struct.new(
+      :name,
+      :explanation,
+      :affected_session_count,
+      :suggested_fix,
+      :sample_sessions)
+      SENSITIVE = [:name, :explanation, :suggested_fix]
       include Aws::Structure
     end
 
@@ -7023,9 +7175,9 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace prefix to filter memory records by. Returns all memory
-    #   records in namespaces that start with the provided prefix. Either
-    #   `namespace` or `namespacePath` is required.
+    #   The exact namespace to filter memory records by. Returns all memory
+    #   records that matches the provided namespace. Either `namespace` or
+    #   `namespacePath` is required.
     #   @return [String]
     #
     # @!attribute [rw] namespace_path
@@ -7435,9 +7587,26 @@ module Aws::BedrockAgentCore
     #   The timestamp when the memory record was created.
     #   @return [Time]
     #
+    # @!attribute [rw] timestamp
+    #   The timestamp based on which the memory record was ingested. This
+    #   reflects the time of the source content that the record was derived
+    #   from, which can differ from `createdAt`, the time the record itself
+    #   was written.
+    #   @return [Time]
+    #
     # @!attribute [rw] metadata
     #   A map of metadata key-value pairs associated with a memory record.
     #   @return [Hash<String,Types::MemoryRecordMetadataValue>]
+    #
+    # @!attribute [rw] expires_at
+    #   The timestamp at which the memory record expires and becomes
+    #   eligible for deletion. This value is set when a record expiry
+    #   (long-term memory time-to-live) applies to the record, either from
+    #   the strategy the record belongs to or from a record expiry provided
+    #   on the batch request that created or updated it. If the record has
+    #   no expiry configured, this value is not present and the record does
+    #   not expire.
+    #   @return [Time]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/MemoryRecord AWS API Documentation
     #
@@ -7447,7 +7616,9 @@ module Aws::BedrockAgentCore
       :memory_strategy_id,
       :namespaces,
       :created_at,
-      :metadata)
+      :timestamp,
+      :metadata,
+      :expires_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7662,6 +7833,13 @@ module Aws::BedrockAgentCore
     #   search query.
     #   @return [Float]
     #
+    # @!attribute [rw] timestamp
+    #   The timestamp based on which the memory record was ingested. This
+    #   reflects the time of the source content that the record was derived
+    #   from, which can differ from `createdAt`, the time the record itself
+    #   was written.
+    #   @return [Time]
+    #
     # @!attribute [rw] metadata
     #   A map of metadata key-value pairs associated with a memory record.
     #   @return [Hash<String,Types::MemoryRecordMetadataValue>]
@@ -7675,6 +7853,7 @@ module Aws::BedrockAgentCore
       :namespaces,
       :created_at,
       :score,
+      :timestamp,
       :metadata)
       SENSITIVE = []
       include Aws::Structure
@@ -8906,6 +9085,41 @@ module Aws::BedrockAgentCore
       include Aws::Structure
     end
 
+    # Specifies the record expiry (long-term memory time-to-live) applied to
+    # the records in a batch request. Provide exactly one of
+    # `recordExpiryDurationDays` or `action`. Set `recordExpiryDurationDays`
+    # to configure or update the expiry, or set `action` to `REMOVE` to
+    # remove a previously configured expiry.
+    #
+    # @note RecordExpirySpecification is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] record_expiry_duration_days
+    #   The duration, in days, after which the records in this request
+    #   expire. The minimum is 31 days.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] action
+    #   The action to apply to the existing record expiry configuration. Set
+    #   to `REMOVE` to remove a previously configured expiry so that the
+    #   records no longer expire. This value does not apply when creating
+    #   records.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/RecordExpirySpecification AWS API Documentation
+    #
+    class RecordExpirySpecification < Struct.new(
+      :record_expiry_duration_days,
+      :action,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RecordExpiryDurationDays < RecordExpirySpecification; end
+      class Action < RecordExpirySpecification; end
+      class Unknown < RecordExpirySpecification; end
+    end
+
     # Summary information about a registry record.
     #
     # @!attribute [rw] registry_arn
@@ -9082,9 +9296,9 @@ module Aws::BedrockAgentCore
     #   @return [String]
     #
     # @!attribute [rw] namespace
-    #   The namespace prefix to filter memory records by. Searches for
-    #   memory records in namespaces that start with the provided prefix.
-    #   Either `namespace` or `namespacePath` is required.
+    #   The exact namespace to filter memory records by. Searches for memory
+    #   records that matches the provided namespace value. Either
+    #   `namespace` or `namespacePath` is required.
     #   @return [String]
     #
     # @!attribute [rw] namespace_path
@@ -9287,6 +9501,33 @@ module Aws::BedrockAgentCore
       :bucket,
       :prefix,
       :version_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A session affected by an insight or root cause. Use the session ID to
+    # find the per-session evaluation results in CloudWatch Logs.
+    #
+    # @!attribute [rw] session_id
+    #   The unique identifier of the session.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_seen_at
+    #   The latest timestamp observed for the session in the batch
+    #   evaluation input.
+    #   @return [Time]
+    #
+    # @!attribute [rw] findings
+    #   The failures found in the session that belong to the insight or root
+    #   cause, up to 10.
+    #   @return [Array<Types::SessionFinding>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SampleSession AWS API Documentation
+    #
+    class SampleSession < Struct.new(
+      :session_id,
+      :last_seen_at,
+      :findings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9590,6 +9831,41 @@ module Aws::BedrockAgentCore
       :start_time,
       :end_time)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A failure found in a session.
+    #
+    # @!attribute [rw] target_id
+    #   The identifier or name of the location in the session where the
+    #   failure was found, interpreted according to `targetType`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_type
+    #   The type of location that `targetId` refers to.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] category
+    #   The category of the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] confidence
+    #   The confidence that the finding is a failure, from 0 to 1.
+    #   @return [Float]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/SessionFinding AWS API Documentation
+    #
+    class SessionFinding < Struct.new(
+      :target_id,
+      :target_type,
+      :description,
+      :category,
+      :confidence)
+      SENSITIVE = [:description]
       include Aws::Structure
     end
 

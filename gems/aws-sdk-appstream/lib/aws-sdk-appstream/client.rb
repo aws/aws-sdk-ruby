@@ -199,12 +199,19 @@ module Aws::AppStream
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1173,7 +1180,7 @@ module Aws::AppStream
     #     launch_path: "String", # required
     #     working_directory: "String",
     #     launch_parameters: "String",
-    #     platforms: ["WINDOWS"], # required, accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
+    #     platforms: ["WINDOWS"], # required, accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, WINDOWS_11, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
     #     instance_families: ["String"], # required
     #     app_block_arn: "Arn", # required
     #     tags: {
@@ -1198,7 +1205,7 @@ module Aws::AppStream
     #   resp.application.icon_s3_location.s3_bucket #=> String
     #   resp.application.icon_s3_location.s3_key #=> String
     #   resp.application.platforms #=> Array
-    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.application.instance_families #=> Array
     #   resp.application.instance_families[0] #=> String
     #   resp.application.created_time #=> Time
@@ -1734,7 +1741,7 @@ module Aws::AppStream
     #     idle_disconnect_timeout_in_seconds: 1,
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
-    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, WINDOWS_11, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
@@ -1786,7 +1793,7 @@ module Aws::AppStream
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
     #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
-    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.fleet.max_concurrent_sessions #=> Integer
     #   resp.fleet.usb_device_filter_strings #=> Array
     #   resp.fleet.usb_device_filter_strings[0] #=> String
@@ -2156,7 +2163,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -2326,7 +2333,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -2346,7 +2353,7 @@ module Aws::AppStream
     #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.image.applications[0].icon_s3_location.s3_key #=> String
     #   resp.image.applications[0].platforms #=> Array
-    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.applications[0].instance_families #=> Array
     #   resp.image.applications[0].instance_families[0] #=> String
     #   resp.image.applications[0].created_time #=> Time
@@ -2366,6 +2373,7 @@ module Aws::AppStream
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.image.managed_software_included #=> Boolean
     #   resp.image.image_type #=> String, one of "CUSTOM", "NATIVE", "BYOL"
+    #   resp.image.image_software_metadata.nvidia_grid_driver_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateImportedImage AWS API Documentation
     #
@@ -2453,6 +2461,14 @@ module Aws::AppStream
     #   The configuration for agent access on the stack. If specified, agent
     #   access is enabled for the stack.
     #
+    # @option params [String] :storage_connector_authentication
+    #   Specifies whether users' cloud storage authentication persists across
+    #   streaming sessions. When you specify FORCE\_REAUTHENTICATION,
+    #   WorkSpaces Applications removes the stored authentication for the
+    #   stack's OneDrive and Google Drive connectors when a user's session
+    #   ends. The user links their cloud storage again on their next session.
+    #   The default is REUSE\_CREDENTIALS.
+    #
     # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateStackResult#stack #stack} => Types::Stack
@@ -2517,6 +2533,7 @@ module Aws::AppStream
     #       screen_image_format: "PNG", # required, accepts PNG, JPEG
     #       user_control_mode: "VIEW_ONLY", # accepts VIEW_ONLY, VIEW_STOP, DISABLED
     #     },
+    #     storage_connector_authentication: "FORCE_REAUTHENTICATION", # accepts FORCE_REAUTHENTICATION, REUSE_CREDENTIALS
     #   })
     #
     # @example Response structure
@@ -2564,6 +2581,7 @@ module Aws::AppStream
     #   resp.stack.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
     #   resp.stack.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
     #   resp.stack.agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
+    #   resp.stack.storage_connector_authentication #=> String, one of "FORCE_REAUTHENTICATION", "REUSE_CREDENTIALS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStack AWS API Documentation
     #
@@ -2795,7 +2813,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -2815,7 +2833,7 @@ module Aws::AppStream
     #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.image.applications[0].icon_s3_location.s3_key #=> String
     #   resp.image.applications[0].platforms #=> Array
-    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.applications[0].instance_families #=> Array
     #   resp.image.applications[0].instance_families[0] #=> String
     #   resp.image.applications[0].created_time #=> Time
@@ -2835,6 +2853,7 @@ module Aws::AppStream
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.image.managed_software_included #=> Boolean
     #   resp.image.image_type #=> String, one of "CUSTOM", "NATIVE", "BYOL"
+    #   resp.image.image_software_metadata.nvidia_grid_driver_version #=> String
     #   resp.can_update_image #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateUpdatedImage AWS API Documentation
@@ -3090,7 +3109,7 @@ module Aws::AppStream
     #   resp.image.visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.image.image_builder_supported #=> Boolean
     #   resp.image.image_builder_name #=> String
-    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.description #=> String
     #   resp.image.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.image.state_change_reason.message #=> String
@@ -3110,7 +3129,7 @@ module Aws::AppStream
     #   resp.image.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.image.applications[0].icon_s3_location.s3_key #=> String
     #   resp.image.applications[0].platforms #=> Array
-    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image.applications[0].instance_families #=> Array
     #   resp.image.applications[0].instance_families[0] #=> String
     #   resp.image.applications[0].created_time #=> Time
@@ -3130,6 +3149,7 @@ module Aws::AppStream
     #   resp.image.image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.image.managed_software_included #=> Boolean
     #   resp.image.image_type #=> String, one of "CUSTOM", "NATIVE", "BYOL"
+    #   resp.image.image_software_metadata.nvidia_grid_driver_version #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DeleteImage AWS API Documentation
     #
@@ -3167,7 +3187,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -3632,7 +3652,7 @@ module Aws::AppStream
     #   resp.applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.applications[0].icon_s3_location.s3_key #=> String
     #   resp.applications[0].platforms #=> Array
-    #   resp.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.applications[0].instance_families #=> Array
     #   resp.applications[0].instance_families[0] #=> String
     #   resp.applications[0].created_time #=> Time
@@ -3816,7 +3836,7 @@ module Aws::AppStream
     #   resp.fleets[0].idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleets[0].iam_role_arn #=> String
     #   resp.fleets[0].stream_view #=> String, one of "APP", "DESKTOP"
-    #   resp.fleets[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.fleets[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.fleets[0].max_concurrent_sessions #=> Integer
     #   resp.fleets[0].usb_device_filter_strings #=> Array
     #   resp.fleets[0].usb_device_filter_strings[0] #=> String
@@ -3882,7 +3902,7 @@ module Aws::AppStream
     #   resp.image_builders[0].vpc_config.security_group_ids #=> Array
     #   resp.image_builders[0].vpc_config.security_group_ids[0] #=> String
     #   resp.image_builders[0].instance_type #=> String
-    #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image_builders[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builders[0].iam_role_arn #=> String
     #   resp.image_builders[0].state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builders[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -4018,7 +4038,7 @@ module Aws::AppStream
     #   resp.images[0].visibility #=> String, one of "PUBLIC", "PRIVATE", "SHARED"
     #   resp.images[0].image_builder_supported #=> Boolean
     #   resp.images[0].image_builder_name #=> String
-    #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.images[0].platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.images[0].description #=> String
     #   resp.images[0].state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_BUILDER_NOT_AVAILABLE", "IMAGE_COPY_FAILURE", "IMAGE_UPDATE_FAILURE", "IMAGE_IMPORT_FAILURE"
     #   resp.images[0].state_change_reason.message #=> String
@@ -4038,7 +4058,7 @@ module Aws::AppStream
     #   resp.images[0].applications[0].icon_s3_location.s3_bucket #=> String
     #   resp.images[0].applications[0].icon_s3_location.s3_key #=> String
     #   resp.images[0].applications[0].platforms #=> Array
-    #   resp.images[0].applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.images[0].applications[0].platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.images[0].applications[0].instance_families #=> Array
     #   resp.images[0].applications[0].instance_families[0] #=> String
     #   resp.images[0].applications[0].created_time #=> Time
@@ -4058,6 +4078,7 @@ module Aws::AppStream
     #   resp.images[0].image_shared_with_others #=> String, one of "TRUE", "FALSE"
     #   resp.images[0].managed_software_included #=> Boolean
     #   resp.images[0].image_type #=> String, one of "CUSTOM", "NATIVE", "BYOL"
+    #   resp.images[0].image_software_metadata.nvidia_grid_driver_version #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeImages AWS API Documentation
@@ -4264,6 +4285,7 @@ module Aws::AppStream
     #   resp.stacks[0].agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
     #   resp.stacks[0].agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
     #   resp.stacks[0].agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
+    #   resp.stacks[0].storage_connector_authentication #=> String, one of "FORCE_REAUTHENTICATION", "REUSE_CREDENTIALS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/DescribeStacks AWS API Documentation
@@ -5138,7 +5160,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -5303,7 +5325,7 @@ module Aws::AppStream
     #   resp.image_builder.vpc_config.security_group_ids #=> Array
     #   resp.image_builder.vpc_config.security_group_ids[0] #=> String
     #   resp.image_builder.instance_type #=> String
-    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.image_builder.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.image_builder.iam_role_arn #=> String
     #   resp.image_builder.state #=> String, one of "PENDING", "UPDATING_AGENT", "RUNNING", "STOPPING", "STOPPED", "REBOOTING", "SNAPSHOTTING", "DELETING", "FAILED", "UPDATING", "PENDING_QUALIFICATION", "PENDING_SYNCING_APPS", "SYNCING_APPS", "PENDING_IMAGE_IMPORT"
     #   resp.image_builder.state_change_reason.code #=> String, one of "INTERNAL_ERROR", "IMAGE_UNAVAILABLE"
@@ -5510,7 +5532,7 @@ module Aws::AppStream
     #     name: "Name", # required
     #     description: "Description",
     #     display_name: "DisplayName",
-    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, WINDOWS_11, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
     #     instance_type: "String",
     #     vpc_config: {
     #       subnet_ids: ["String"],
@@ -5633,7 +5655,7 @@ module Aws::AppStream
     #   resp.application.icon_s3_location.s3_bucket #=> String
     #   resp.application.icon_s3_location.s3_key #=> String
     #   resp.application.platforms #=> Array
-    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.application.platforms[0] #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.application.instance_families #=> Array
     #   resp.application.instance_families[0] #=> String
     #   resp.application.created_time #=> Time
@@ -6083,7 +6105,7 @@ module Aws::AppStream
     #     attributes_to_delete: ["VPC_CONFIGURATION"], # accepts VPC_CONFIGURATION, VPC_CONFIGURATION_SECURITY_GROUP_IDS, DOMAIN_JOIN_INFO, IAM_ROLE_ARN, USB_DEVICE_FILTER_STRINGS, SESSION_SCRIPT_S3_LOCATION, MAX_SESSIONS_PER_INSTANCE, VOLUME_CONFIGURATION
     #     iam_role_arn: "Arn",
     #     stream_view: "APP", # accepts APP, DESKTOP
-    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
+    #     platform: "WINDOWS", # accepts WINDOWS, WINDOWS_SERVER_2016, WINDOWS_SERVER_2019, WINDOWS_SERVER_2022, WINDOWS_SERVER_2025, WINDOWS_11, AMAZON_LINUX2, RHEL8, ROCKY_LINUX8, UBUNTU_PRO_2404
     #     max_concurrent_sessions: 1,
     #     usb_device_filter_strings: ["UsbDeviceFilterString"],
     #     session_script_s3_location: {
@@ -6135,7 +6157,7 @@ module Aws::AppStream
     #   resp.fleet.idle_disconnect_timeout_in_seconds #=> Integer
     #   resp.fleet.iam_role_arn #=> String
     #   resp.fleet.stream_view #=> String, one of "APP", "DESKTOP"
-    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
+    #   resp.fleet.platform #=> String, one of "WINDOWS", "WINDOWS_SERVER_2016", "WINDOWS_SERVER_2019", "WINDOWS_SERVER_2022", "WINDOWS_SERVER_2025", "WINDOWS_11", "AMAZON_LINUX2", "RHEL8", "ROCKY_LINUX8", "UBUNTU_PRO_2404"
     #   resp.fleet.max_concurrent_sessions #=> Integer
     #   resp.fleet.usb_device_filter_strings #=> Array
     #   resp.fleet.usb_device_filter_strings[0] #=> String
@@ -6251,6 +6273,15 @@ module Aws::AppStream
     #   update agent access settings. To remove agent access, use
     #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG value.
     #
+    # @option params [String] :storage_connector_authentication
+    #   Specifies whether users' cloud storage authentication persists across
+    #   streaming sessions. When you specify FORCE\_REAUTHENTICATION,
+    #   WorkSpaces Applications removes the stored authentication for the
+    #   stack's OneDrive and Google Drive connectors when a user's session
+    #   ends. The user links their cloud storage again on their next session.
+    #   To clear this attribute, add STORAGE\_CONNECTOR\_AUTHENTICATION to
+    #   AttributesToDelete.
+    #
     # @return [Types::UpdateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateStackResult#stack #stack} => Types::Stack
@@ -6272,7 +6303,7 @@ module Aws::AppStream
     #     delete_storage_connectors: false,
     #     redirect_url: "RedirectURL",
     #     feedback_url: "FeedbackURL",
-    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION, AGENT_ACCESS_CONFIG
+    #     attributes_to_delete: ["STORAGE_CONNECTORS"], # accepts STORAGE_CONNECTORS, STORAGE_CONNECTOR_HOMEFOLDERS, STORAGE_CONNECTOR_GOOGLE_DRIVE, STORAGE_CONNECTOR_ONE_DRIVE, REDIRECT_URL, FEEDBACK_URL, THEME_NAME, USER_SETTINGS, EMBED_HOST_DOMAINS, IAM_ROLE_ARN, ACCESS_ENDPOINTS, STREAMING_EXPERIENCE_SETTINGS, CONTENT_REDIRECTION, AGENT_ACCESS_CONFIG, STORAGE_CONNECTOR_AUTHENTICATION
     #     user_settings: [
     #       {
     #         action: "CLIPBOARD_COPY_FROM_LOCAL_DEVICE", # required, accepts CLIPBOARD_COPY_FROM_LOCAL_DEVICE, CLIPBOARD_COPY_TO_LOCAL_DEVICE, FILE_UPLOAD, FILE_DOWNLOAD, PRINTING_TO_LOCAL_DEVICE, DOMAIN_PASSWORD_SIGNIN, DOMAIN_SMART_CARD_SIGNIN, AUTO_TIME_ZONE_REDIRECTION
@@ -6314,6 +6345,7 @@ module Aws::AppStream
     #       screen_image_format: "PNG", # accepts PNG, JPEG
     #       user_control_mode: "VIEW_ONLY", # accepts VIEW_ONLY, VIEW_STOP, DISABLED
     #     },
+    #     storage_connector_authentication: "FORCE_REAUTHENTICATION", # accepts FORCE_REAUTHENTICATION, REUSE_CREDENTIALS
     #   })
     #
     # @example Response structure
@@ -6361,6 +6393,7 @@ module Aws::AppStream
     #   resp.stack.agent_access_config.screen_resolution #=> String, one of "W_1280xH_720"
     #   resp.stack.agent_access_config.screen_image_format #=> String, one of "PNG", "JPEG"
     #   resp.stack.agent_access_config.user_control_mode #=> String, one of "VIEW_ONLY", "VIEW_STOP", "DISABLED"
+    #   resp.stack.storage_connector_authentication #=> String, one of "FORCE_REAUTHENTICATION", "REUSE_CREDENTIALS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStack AWS API Documentation
     #
@@ -6476,7 +6509,7 @@ module Aws::AppStream
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appstream'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.148.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

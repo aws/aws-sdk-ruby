@@ -517,6 +517,7 @@ module Aws::PCS
     RegisterComputeNodeGroupInstanceResponse.add_member(:compute_node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "computeNodeGroupId"))
     RegisterComputeNodeGroupInstanceResponse.add_member(:compute_node_group_name, Shapes::ShapeRef.new(shape: String, location_name: "computeNodeGroupName"))
     RegisterComputeNodeGroupInstanceResponse.add_member(:node_lifecycle_actions, Shapes::ShapeRef.new(shape: NodeLifecycleActions, location_name: "nodeLifecycleActions"))
+    RegisterComputeNodeGroupInstanceResponse.add_member(:scheduler_version, Shapes::ShapeRef.new(shape: String, location_name: "schedulerVersion"))
     RegisterComputeNodeGroupInstanceResponse.struct_class = Types::RegisterComputeNodeGroupInstanceResponse
 
     RequestTagMap.key = Shapes::ShapeRef.new(shape: TagKey)

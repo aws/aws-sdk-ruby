@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.170.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.169.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.168.0 (2026-10-19)
+------------------
+
+* Feature - Adding a new Expected Bucket Owner optional field for GuardDuty publishing destination APIs
+
+1.167.0 (2026-10-14)
+------------------
+
+* Feature - Releasing support for Custom Detection Rule Runtime Monitoring
+
+1.166.0 (2026-10-08)
+------------------
+
+* Feature - Added support for GuardDuty RDS Data Activity Monitoring
+
+1.165.0 (2026-09-30)
+------------------
+
+* Feature - GuardDuty AWS Organizations policy integration. GetDetector and GetMemberDetectors now show whether a GuardDuty policy manages a feature.
+
+1.164.0 (2026-09-28)
+------------------
+
+* Feature - Adding awsServiceName field to GuardDuty Findings
+
 1.163.0 (2026-09-17)
 ------------------
 

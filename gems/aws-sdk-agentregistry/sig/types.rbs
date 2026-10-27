@@ -166,7 +166,8 @@ module Aws::AgentRegistry
       attr_accessor status: ("DRAFT" | "PENDING_APPROVAL" | "APPROVED" | "REJECTED" | "DEPRECATED" | "CREATING" | "UPDATING" | "CREATE_FAILED" | "UPDATE_FAILED")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      SENSITIVE: [:description]
+      attr_accessor custom_metadata: untyped
+      SENSITIVE: [:description, :custom_metadata]
     end
 
     class RegistryRecordsEntry

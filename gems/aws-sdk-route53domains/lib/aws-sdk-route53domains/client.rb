@@ -199,12 +199,19 @@ module Aws::Route53Domains
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -681,6 +688,7 @@ module Aws::Route53Domains
     # @return [Types::CheckDomainAvailabilityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CheckDomainAvailabilityResponse#availability #availability} => String
+    #   * {Types::CheckDomainAvailabilityResponse#price #price} => Types::PriceWithCurrency
     #
     # @example Request syntax with placeholder values
     #
@@ -692,6 +700,9 @@ module Aws::Route53Domains
     # @example Response structure
     #
     #   resp.availability #=> String, one of "AVAILABLE", "AVAILABLE_RESERVED", "AVAILABLE_PREORDER", "UNAVAILABLE", "UNAVAILABLE_PREMIUM", "UNAVAILABLE_RESTRICTED", "RESERVED", "DONT_KNOW", "INVALID_NAME_FOR_TLD", "PENDING"
+    #   resp.price.price #=> Float
+    #   resp.price.currency #=> String
+    #   resp.price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainAvailability AWS API Documentation
     #
@@ -736,6 +747,7 @@ module Aws::Route53Domains
     #
     #   * {Types::CheckDomainTransferabilityResponse#transferability #transferability} => Types::DomainTransferability
     #   * {Types::CheckDomainTransferabilityResponse#message #message} => String
+    #   * {Types::CheckDomainTransferabilityResponse#price #price} => Types::PriceWithCurrency
     #
     # @example Request syntax with placeholder values
     #
@@ -746,8 +758,11 @@ module Aws::Route53Domains
     #
     # @example Response structure
     #
-    #   resp.transferability.transferable #=> String, one of "TRANSFERABLE", "UNTRANSFERABLE", "DONT_KNOW", "DOMAIN_IN_OWN_ACCOUNT", "DOMAIN_IN_ANOTHER_ACCOUNT", "PREMIUM_DOMAIN"
+    #   resp.transferability.transferable #=> String, one of "TRANSFERABLE", "UNTRANSFERABLE", "DONT_KNOW", "DOMAIN_IN_OWN_ACCOUNT", "DOMAIN_IN_ANOTHER_ACCOUNT", "PREMIUM_DOMAIN", "PENDING"
     #   resp.message #=> String
+    #   resp.price.price #=> Float
+    #   resp.price.currency #=> String
+    #   resp.price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferability AWS API Documentation
     #
@@ -1186,6 +1201,68 @@ module Aws::Route53Domains
       req.send_request(options)
     end
 
+    # Returns the following prices for the specified domain:
+    #
+    # * Registration
+    #
+    # * Transfer
+    #
+    # * Owner change
+    #
+    # * Renewal
+    #
+    # * Restoration
+    #
+    # For most domains, the prices match the standard prices for the TLD
+    # that the [ListPrices][1] operation returns. For a premium domain, the
+    # registry sets the price individually. Premium prices might differ from
+    # the standard prices and can change over time.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListPrices.html
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain that you want to get the prices for.
+    #
+    # @return [Types::GetDomainPricesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetDomainPricesResponse#domain_price #domain_price} => Types::DomainPrice
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_domain_prices({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_price.name #=> String
+    #   resp.domain_price.registration_price.price #=> Float
+    #   resp.domain_price.registration_price.currency #=> String
+    #   resp.domain_price.registration_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
+    #   resp.domain_price.transfer_price.price #=> Float
+    #   resp.domain_price.transfer_price.currency #=> String
+    #   resp.domain_price.transfer_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
+    #   resp.domain_price.renewal_price.price #=> Float
+    #   resp.domain_price.renewal_price.currency #=> String
+    #   resp.domain_price.renewal_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
+    #   resp.domain_price.change_ownership_price.price #=> Float
+    #   resp.domain_price.change_ownership_price.currency #=> String
+    #   resp.domain_price.change_ownership_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
+    #   resp.domain_price.restoration_price.price #=> Float
+    #   resp.domain_price.restoration_price.currency #=> String
+    #   resp.domain_price.restoration_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainPrices AWS API Documentation
+    #
+    # @overload get_domain_prices(params = {})
+    # @param [Hash] params ({})
+    def get_domain_prices(params = {}, options = {})
+      req = build_request(:get_domain_prices, params)
+      req.send_request(options)
+    end
+
     # The GetDomainSuggestions operation returns a list of suggested domain
     # names.
     #
@@ -1226,8 +1303,17 @@ module Aws::Route53Domains
     #   If `OnlyAvailable` is `true`, Route 53 returns only domain names that
     #   are available. If `OnlyAvailable` is `false`, Route 53 returns domain
     #   names without checking whether they're available to be registered. To
-    #   determine whether the domain is available, you can call
+    #   determine whether the domain is available, call
     #   `checkDomainAvailability` for each suggestion.
+    #
+    #   If `OnlyAvailable` is `false`, Route 53 does not return pricing
+    #   information for the suggested domain names.
+    #
+    # @option params [Boolean] :only_standard_prices
+    #   If `true`, Route 53 returns only domain names that are priced at the
+    #   standard registration rate for their TLD. If `false`, Route 53
+    #   includes domain names with premium pricing in the suggestions list.
+    #   The default is `true`.
     #
     # @return [Types::GetDomainSuggestionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1239,6 +1325,7 @@ module Aws::Route53Domains
     #     domain_name: "DomainName", # required
     #     suggestion_count: 1, # required
     #     only_available: false, # required
+    #     only_standard_prices: false,
     #   })
     #
     # @example Response structure
@@ -1246,6 +1333,9 @@ module Aws::Route53Domains
     #   resp.suggestions_list #=> Array
     #   resp.suggestions_list[0].domain_name #=> String
     #   resp.suggestions_list[0].availability #=> String
+    #   resp.suggestions_list[0].price.price #=> Float
+    #   resp.suggestions_list[0].price.currency #=> String
+    #   resp.suggestions_list[0].price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestions AWS API Documentation
     #
@@ -1461,9 +1551,17 @@ module Aws::Route53Domains
     #
     # * Owner change
     #
-    # * Domain renewal
+    # * Renewal
     #
-    # * Domain restoration
+    # * Restoration
+    #
+    # <note markdown="1"> The prices that `ListPrices` returns are the standard rates for a TLD.
+    # `ListPrices` doesn't return registry premium prices, which apply to
+    # individual domain names rather than to a TLD. To get accurate pricing
+    # for a specific domain name, including premium prices, call
+    # `GetDomainPrices`.
+    #
+    #  </note>
     #
     # @option params [String] :tld
     #   The TLD for which you want to receive the pricing information. For
@@ -1510,14 +1608,19 @@ module Aws::Route53Domains
     #   resp.prices[0].name #=> String
     #   resp.prices[0].registration_price.price #=> Float
     #   resp.prices[0].registration_price.currency #=> String
+    #   resp.prices[0].registration_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
     #   resp.prices[0].transfer_price.price #=> Float
     #   resp.prices[0].transfer_price.currency #=> String
+    #   resp.prices[0].transfer_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
     #   resp.prices[0].renewal_price.price #=> Float
     #   resp.prices[0].renewal_price.currency #=> String
+    #   resp.prices[0].renewal_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
     #   resp.prices[0].change_ownership_price.price #=> Float
     #   resp.prices[0].change_ownership_price.currency #=> String
+    #   resp.prices[0].change_ownership_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
     #   resp.prices[0].restoration_price.price #=> Float
     #   resp.prices[0].restoration_price.currency #=> String
+    #   resp.prices[0].restoration_price.price_type #=> String, one of "STANDARD", "REGISTRY_PREMIUM"
     #   resp.next_page_marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/ListPrices AWS API Documentation
@@ -1774,6 +1877,13 @@ module Aws::Route53Domains
     #
     #    </note>
     #
+    # @option params [Types::Consent] :consent
+    #   Specifies the maximum price that you agree to pay to register the
+    #   domain name. This element is required if the domain has registry
+    #   premium pricing, and optional if the domain is priced at the standard
+    #   rate for its TLD. If you include it and the registration price is more
+    #   than `MaxPrice`, the request fails.
+    #
     # @return [Types::RegisterDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RegisterDomainResponse#operation_id #operation_id} => String
@@ -1873,6 +1983,10 @@ module Aws::Route53Domains
     #       ],
     #     },
     #     privacy_protect_billing_contact: false,
+    #     consent: {
+    #       max_price: 1.0, # required
+    #       currency: "Currency", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -1970,6 +2084,13 @@ module Aws::Route53Domains
     #   The year when the registration for the domain is set to expire. This
     #   value must match the current expiration date for the domain.
     #
+    # @option params [Types::Consent] :consent
+    #   Specifies the maximum price that you agree to pay to renew the domain
+    #   name. This element is required if the domain has registry premium
+    #   pricing, and optional if the domain is priced at the standard rate for
+    #   its TLD. If you include it and the renewal price is more than
+    #   `MaxPrice`, the request fails.
+    #
     # @return [Types::RenewDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::RenewDomainResponse#operation_id #operation_id} => String
@@ -1980,6 +2101,10 @@ module Aws::Route53Domains
     #     domain_name: "DomainName", # required
     #     duration_in_years: 1,
     #     current_expiry_year: 1, # required
+    #     consent: {
+    #       max_price: 1.0, # required
+    #       currency: "Currency", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2252,6 +2377,13 @@ module Aws::Route53Domains
     #
     #    </note>
     #
+    # @option params [Types::Consent] :consent
+    #   Specifies the maximum price that you agree to pay to transfer the
+    #   domain name to Route 53. This element is required if the domain has
+    #   registry premium pricing, and optional if the domain is priced at the
+    #   standard rate for its TLD. If you include it and the transfer price is
+    #   more than `MaxPrice`, the request fails.
+    #
     # @return [Types::TransferDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TransferDomainResponse#operation_id #operation_id} => String
@@ -2358,6 +2490,10 @@ module Aws::Route53Domains
     #       ],
     #     },
     #     privacy_protect_billing_contact: false,
+    #     consent: {
+    #       max_price: 1.0, # required
+    #       currency: "Currency", # required
+    #     },
     #   })
     #
     # @example Response structure
@@ -2467,8 +2603,9 @@ module Aws::Route53Domains
     #   Provides detailed contact information.
     #
     # @option params [Types::Consent] :consent
-    #   Customer's consent for the owner change request. Required if the
-    #   domain is not free (consent price is more than $0.00).
+    #   The maximum amount that you agree to pay for the owner change.
+    #   Required if the domain is not free (consent price is more than USD
+    #   $0.00).
     #
     # @option params [Types::ContactDetail] :billing_contact
     #   Provides detailed contact information.
@@ -2866,7 +3003,7 @@ module Aws::Route53Domains
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53domains'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.104.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

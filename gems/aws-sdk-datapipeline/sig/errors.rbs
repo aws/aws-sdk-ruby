@@ -11,19 +11,19 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class InternalServiceError < ::Aws::Errors::ServiceError
+      class InternalServiceError < ServiceError
         def message: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
         def message: () -> ::String
       end
-      class PipelineDeletedException < ::Aws::Errors::ServiceError
+      class PipelineDeletedException < ServiceError
         def message: () -> ::String
       end
-      class PipelineNotFoundException < ::Aws::Errors::ServiceError
+      class PipelineNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TaskNotFoundException < ::Aws::Errors::ServiceError
+      class TaskNotFoundException < ServiceError
         def message: () -> ::String
       end
     end

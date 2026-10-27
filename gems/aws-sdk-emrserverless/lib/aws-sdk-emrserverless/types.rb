@@ -731,12 +731,18 @@ module Aws::EMRServerless
     #   `Session` is supported.
     #   @return [String]
     #
+    # @!attribute [rw] access_system_profile_logs
+    #   Allows access to system profile logs for Lake Formation-enabled
+    #   sessions. Default is false.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/emr-serverless-2021-07-13/GetResourceDashboardRequest AWS API Documentation
     #
     class GetResourceDashboardRequest < Struct.new(
       :application_id,
       :resource_id,
-      :resource_type)
+      :resource_type,
+      :access_system_profile_logs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1159,9 +1165,11 @@ module Aws::EMRServerless
     #   @return [Integer]
     #
     # @!attribute [rw] execution_timeout_minutes
-    #   Returns the job run timeout value from the `StartJobRun` call. If no
-    #   timeout was specified, then it returns the default timeout of 720
-    #   minutes.
+    #   Returns the job run timeout value from the `StartJobRun` call. If
+    #   you didn't specify a timeout, this value defaults to 720 minutes.
+    #
+    #   For BATCH mode job runs, the maximum value is 10080 minutes (7 days)
+    #   starting with Amazon EMR release 7.11.
     #   @return [Integer]
     #
     # @!attribute [rw] billed_resource_utilization
@@ -2195,8 +2203,13 @@ module Aws::EMRServerless
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] execution_timeout_minutes
-    #   The maximum duration for the job run to run. If the job run runs
-    #   beyond this duration, it will be automatically cancelled.
+    #   The maximum duration, in minutes, for the job run. If the job run
+    #   exceeds this duration, Amazon EMR Serverless cancels it
+    #   automatically.
+    #
+    #   For BATCH mode job runs, the maximum value is 10080 minutes (7 days)
+    #   starting with Amazon EMR release 7.11. Setting a value of 0 to
+    #   disable the timeout is no longer supported for BATCH mode job runs.
     #   @return [Integer]
     #
     # @!attribute [rw] name

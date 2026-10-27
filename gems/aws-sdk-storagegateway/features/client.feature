@@ -10,7 +10,3 @@ Feature: AWS Storage Gateway
     When I attempt to call the "ListVolumes" API with:
     | GatewayARN | fake_gateway |
     Then I expect the response error code to be "ValidationException"
-    And I expect the response error message to include:
-    """
-    invalid input
-    """

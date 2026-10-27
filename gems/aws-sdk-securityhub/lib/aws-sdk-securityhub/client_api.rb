@@ -76,6 +76,7 @@ module Aws::SecurityHub
     AutomationRulesMetadataList = Shapes::ListShape.new(name: 'AutomationRulesMetadataList')
     AutomationRulesMetadataListV2 = Shapes::ListShape.new(name: 'AutomationRulesMetadataListV2')
     AutomationRulesMetadataV2 = Shapes::StructureShape.new(name: 'AutomationRulesMetadataV2')
+    AutomationRulesResourceFieldsUpdateV2 = Shapes::StructureShape.new(name: 'AutomationRulesResourceFieldsUpdateV2')
     AvailabilityZone = Shapes::StructureShape.new(name: 'AvailabilityZone')
     AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
     AwsAmazonMqBrokerDetails = Shapes::StructureShape.new(name: 'AwsAmazonMqBrokerDetails')
@@ -771,6 +772,8 @@ module Aws::SecurityHub
     BooleanConfigurationOptions = Shapes::StructureShape.new(name: 'BooleanConfigurationOptions')
     BooleanFilter = Shapes::StructureShape.new(name: 'BooleanFilter')
     BooleanFilterList = Shapes::ListShape.new(name: 'BooleanFilterList')
+    CancelExportJobV2Request = Shapes::StructureShape.new(name: 'CancelExportJobV2Request')
+    CancelExportJobV2Response = Shapes::StructureShape.new(name: 'CancelExportJobV2Response')
     CategoryList = Shapes::ListShape.new(name: 'CategoryList')
     Cell = Shapes::StructureShape.new(name: 'Cell')
     Cells = Shapes::ListShape.new(name: 'Cells')
@@ -831,6 +834,9 @@ module Aws::SecurityHub
     CreateTicketV2Request = Shapes::StructureShape.new(name: 'CreateTicketV2Request')
     CreateTicketV2Response = Shapes::StructureShape.new(name: 'CreateTicketV2Response')
     Criteria = Shapes::UnionShape.new(name: 'Criteria')
+    CriticalitySource = Shapes::StructureShape.new(name: 'CriticalitySource')
+    CriticalitySourceList = Shapes::ListShape.new(name: 'CriticalitySourceList')
+    CriticalitySourceType = Shapes::StringShape.new(name: 'CriticalitySourceType')
     CrossAccountMaxResults = Shapes::IntegerShape.new(name: 'CrossAccountMaxResults')
     CspmConnectorProviderName = Shapes::StringShape.new(name: 'CspmConnectorProviderName')
     CspmConnectorStatus = Shapes::StringShape.new(name: 'CspmConnectorStatus')
@@ -929,6 +935,22 @@ module Aws::SecurityHub
     EnablementStatus = Shapes::StringShape.new(name: 'EnablementStatus')
     EnumConfigurationOptions = Shapes::StructureShape.new(name: 'EnumConfigurationOptions')
     EnumListConfigurationOptions = Shapes::StructureShape.new(name: 'EnumListConfigurationOptions')
+    ExportDataType = Shapes::StringShape.new(name: 'ExportDataType')
+    ExportDestination = Shapes::UnionShape.new(name: 'ExportDestination')
+    ExportFailureCode = Shapes::StringShape.new(name: 'ExportFailureCode')
+    ExportJobId = Shapes::StringShape.new(name: 'ExportJobId')
+    ExportMaxResults = Shapes::IntegerShape.new(name: 'ExportMaxResults')
+    ExportName = Shapes::StringShape.new(name: 'ExportName')
+    ExportOutput = Shapes::UnionShape.new(name: 'ExportOutput')
+    ExportOutputSummary = Shapes::UnionShape.new(name: 'ExportOutputSummary')
+    ExportScopes = Shapes::StructureShape.new(name: 'ExportScopes')
+    ExportStatus = Shapes::StringShape.new(name: 'ExportStatus')
+    ExportSummary = Shapes::StructureShape.new(name: 'ExportSummary')
+    ExportSummaryList = Shapes::ListShape.new(name: 'ExportSummaryList')
+    ExposureFinding = Shapes::StructureShape.new(name: 'ExposureFinding')
+    ExposureFindingItemsList = Shapes::ListShape.new(name: 'ExposureFindingItemsList')
+    ExposureImpact = Shapes::StringShape.new(name: 'ExposureImpact')
+    ExposureSeverity = Shapes::StringShape.new(name: 'ExposureSeverity')
     ExternalIntegrationConfiguration = Shapes::StructureShape.new(name: 'ExternalIntegrationConfiguration')
     FeatureDetail = Shapes::StructureShape.new(name: 'FeatureDetail')
     FeatureName = Shapes::StringShape.new(name: 'FeatureName')
@@ -949,6 +971,11 @@ module Aws::SecurityHub
     FindingProviderFields = Shapes::StructureShape.new(name: 'FindingProviderFields')
     FindingProviderSeverity = Shapes::StructureShape.new(name: 'FindingProviderSeverity')
     FindingScopes = Shapes::StructureShape.new(name: 'FindingScopes')
+    FindingsExportFormat = Shapes::StringShape.new(name: 'FindingsExportFormat')
+    FindingsOutput = Shapes::StructureShape.new(name: 'FindingsOutput')
+    FindingsOutputSummary = Shapes::StructureShape.new(name: 'FindingsOutputSummary')
+    FindingsSelectableField = Shapes::StringShape.new(name: 'FindingsSelectableField')
+    FindingsSelectedFieldList = Shapes::ListShape.new(name: 'FindingsSelectedFieldList')
     FindingsTrendsCompositeFilter = Shapes::StructureShape.new(name: 'FindingsTrendsCompositeFilter')
     FindingsTrendsCompositeFilterList = Shapes::ListShape.new(name: 'FindingsTrendsCompositeFilterList')
     FindingsTrendsFilters = Shapes::StructureShape.new(name: 'FindingsTrendsFilters')
@@ -989,6 +1016,8 @@ module Aws::SecurityHub
     GetConnectorV2Response = Shapes::StructureShape.new(name: 'GetConnectorV2Response')
     GetEnabledStandardsRequest = Shapes::StructureShape.new(name: 'GetEnabledStandardsRequest')
     GetEnabledStandardsResponse = Shapes::StructureShape.new(name: 'GetEnabledStandardsResponse')
+    GetExportJobV2Request = Shapes::StructureShape.new(name: 'GetExportJobV2Request')
+    GetExportJobV2Response = Shapes::StructureShape.new(name: 'GetExportJobV2Response')
     GetFindingAggregatorRequest = Shapes::StructureShape.new(name: 'GetFindingAggregatorRequest')
     GetFindingAggregatorResponse = Shapes::StructureShape.new(name: 'GetFindingAggregatorResponse')
     GetFindingHistoryRequest = Shapes::StructureShape.new(name: 'GetFindingHistoryRequest')
@@ -1013,6 +1042,8 @@ module Aws::SecurityHub
     GetMembersResponse = Shapes::StructureShape.new(name: 'GetMembersResponse')
     GetRecommendedPolicyV2Request = Shapes::StructureShape.new(name: 'GetRecommendedPolicyV2Request')
     GetRecommendedPolicyV2Response = Shapes::StructureShape.new(name: 'GetRecommendedPolicyV2Response')
+    GetRemediationsV2Request = Shapes::StructureShape.new(name: 'GetRemediationsV2Request')
+    GetRemediationsV2Response = Shapes::StructureShape.new(name: 'GetRemediationsV2Response')
     GetResourcesStatisticsV2Request = Shapes::StructureShape.new(name: 'GetResourcesStatisticsV2Request')
     GetResourcesStatisticsV2Response = Shapes::StructureShape.new(name: 'GetResourcesStatisticsV2Response')
     GetResourcesTrendsV2Request = Shapes::StructureShape.new(name: 'GetResourcesTrendsV2Request')
@@ -1029,6 +1060,7 @@ module Aws::SecurityHub
     GroupByRules = Shapes::ListShape.new(name: 'GroupByRules')
     GroupByValue = Shapes::StructureShape.new(name: 'GroupByValue')
     GroupByValues = Shapes::ListShape.new(name: 'GroupByValues')
+    GuidanceFormat = Shapes::StringShape.new(name: 'GuidanceFormat')
     HealthCheck = Shapes::StructureShape.new(name: 'HealthCheck')
     HealthIssue = Shapes::StructureShape.new(name: 'HealthIssue')
     HealthIssueCode = Shapes::StringShape.new(name: 'HealthIssueCode')
@@ -1068,6 +1100,8 @@ module Aws::SecurityHub
     JiraCloudDetail = Shapes::StructureShape.new(name: 'JiraCloudDetail')
     JiraCloudProviderConfiguration = Shapes::StructureShape.new(name: 'JiraCloudProviderConfiguration')
     JiraCloudUpdateConfiguration = Shapes::StructureShape.new(name: 'JiraCloudUpdateConfiguration')
+    KbArticle = Shapes::StructureShape.new(name: 'KbArticle')
+    KbArticleList = Shapes::ListShape.new(name: 'KbArticleList')
     KeywordFilter = Shapes::StructureShape.new(name: 'KeywordFilter')
     KeywordFilterList = Shapes::ListShape.new(name: 'KeywordFilterList')
     LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
@@ -1087,6 +1121,10 @@ module Aws::SecurityHub
     ListConnectorsV2Response = Shapes::StructureShape.new(name: 'ListConnectorsV2Response')
     ListEnabledProductsForImportRequest = Shapes::StructureShape.new(name: 'ListEnabledProductsForImportRequest')
     ListEnabledProductsForImportResponse = Shapes::StructureShape.new(name: 'ListEnabledProductsForImportResponse')
+    ListExportJobsV2Request = Shapes::StructureShape.new(name: 'ListExportJobsV2Request')
+    ListExportJobsV2Response = Shapes::StructureShape.new(name: 'ListExportJobsV2Response')
+    ListExposuresByRemediationV2Request = Shapes::StructureShape.new(name: 'ListExposuresByRemediationV2Request')
+    ListExposuresByRemediationV2Response = Shapes::StructureShape.new(name: 'ListExposuresByRemediationV2Response')
     ListFindingAggregatorsRequest = Shapes::StructureShape.new(name: 'ListFindingAggregatorsRequest')
     ListFindingAggregatorsResponse = Shapes::StructureShape.new(name: 'ListFindingAggregatorsResponse')
     ListFreeTrialStatusesV2Request = Shapes::StructureShape.new(name: 'ListFreeTrialStatusesV2Request')
@@ -1213,11 +1251,38 @@ module Aws::SecurityHub
     RelatedFindingList = Shapes::ListShape.new(name: 'RelatedFindingList')
     RelatedRequirementsList = Shapes::ListShape.new(name: 'RelatedRequirementsList')
     Remediation = Shapes::StructureShape.new(name: 'Remediation')
+    RemediationCompositeFilter = Shapes::StructureShape.new(name: 'RemediationCompositeFilter')
+    RemediationCompositeFilterList = Shapes::ListShape.new(name: 'RemediationCompositeFilterList')
+    RemediationFilters = Shapes::StructureShape.new(name: 'RemediationFilters')
+    RemediationGuidance = Shapes::StructureShape.new(name: 'RemediationGuidance')
+    RemediationGuidanceContext = Shapes::StructureShape.new(name: 'RemediationGuidanceContext')
+    RemediationGuidanceExamples = Shapes::StructureShape.new(name: 'RemediationGuidanceExamples')
+    RemediationGuidanceMetadata = Shapes::StructureShape.new(name: 'RemediationGuidanceMetadata')
+    RemediationGuidanceSpecification = Shapes::StructureShape.new(name: 'RemediationGuidanceSpecification')
+    RemediationOutcome = Shapes::StructureShape.new(name: 'RemediationOutcome')
+    RemediationParameter = Shapes::StructureShape.new(name: 'RemediationParameter')
+    RemediationParameterList = Shapes::ListShape.new(name: 'RemediationParameterList')
+    RemediationPriority = Shapes::StringShape.new(name: 'RemediationPriority')
+    RemediationResource = Shapes::StructureShape.new(name: 'RemediationResource')
+    RemediationStatus = Shapes::StringShape.new(name: 'RemediationStatus')
+    RemediationStep = Shapes::StructureShape.new(name: 'RemediationStep')
+    RemediationStepList = Shapes::ListShape.new(name: 'RemediationStepList')
+    RemediationStringField = Shapes::StringShape.new(name: 'RemediationStringField')
+    RemediationStringFilter = Shapes::StructureShape.new(name: 'RemediationStringFilter')
+    RemediationStringFilterCondition = Shapes::StructureShape.new(name: 'RemediationStringFilterCondition')
+    RemediationStringFilterList = Shapes::ListShape.new(name: 'RemediationStringFilterList')
+    RemediationStringList = Shapes::ListShape.new(name: 'RemediationStringList')
+    RemediationStringUid = Shapes::StringShape.new(name: 'RemediationStringUid')
+    RemediationSummaryDetail = Shapes::StructureShape.new(name: 'RemediationSummaryDetail')
+    RemediationTrait = Shapes::StructureShape.new(name: 'RemediationTrait')
+    RemediationV2Item = Shapes::StructureShape.new(name: 'RemediationV2Item')
+    RemediationV2ItemList = Shapes::ListShape.new(name: 'RemediationV2ItemList')
     Resource = Shapes::StructureShape.new(name: 'Resource')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceCategory = Shapes::StringShape.new(name: 'ResourceCategory')
     ResourceConfig = Shapes::DocumentShape.new(name: 'ResourceConfig', document: true)
     ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
+    ResourceCriticality = Shapes::StringShape.new(name: 'ResourceCriticality')
     ResourceDetails = Shapes::StructureShape.new(name: 'ResourceDetails')
     ResourceFindingsSummary = Shapes::StructureShape.new(name: 'ResourceFindingsSummary')
     ResourceFindingsSummaryList = Shapes::ListShape.new(name: 'ResourceFindingsSummaryList')
@@ -1301,6 +1366,8 @@ module Aws::SecurityHub
     RuleOrderValueV2 = Shapes::FloatShape.new(name: 'RuleOrderValueV2')
     RuleStatus = Shapes::StringShape.new(name: 'RuleStatus')
     RuleStatusV2 = Shapes::StringShape.new(name: 'RuleStatusV2')
+    S3ExportDestination = Shapes::StructureShape.new(name: 'S3ExportDestination')
+    S3ObjectPrefix = Shapes::StringShape.new(name: 'S3ObjectPrefix')
     ScopeType = Shapes::StringShape.new(name: 'ScopeType')
     ScopeValueList = Shapes::ListShape.new(name: 'ScopeValueList')
     SecurityControl = Shapes::StructureShape.new(name: 'SecurityControl')
@@ -1369,6 +1436,8 @@ module Aws::SecurityHub
     StartConfigurationPolicyAssociationResponse = Shapes::StructureShape.new(name: 'StartConfigurationPolicyAssociationResponse')
     StartConfigurationPolicyDisassociationRequest = Shapes::StructureShape.new(name: 'StartConfigurationPolicyDisassociationRequest')
     StartConfigurationPolicyDisassociationResponse = Shapes::StructureShape.new(name: 'StartConfigurationPolicyDisassociationResponse')
+    StartExportJobV2Request = Shapes::StructureShape.new(name: 'StartExportJobV2Request')
+    StartExportJobV2Response = Shapes::StructureShape.new(name: 'StartExportJobV2Response')
     StatelessCustomActionDefinition = Shapes::StructureShape.new(name: 'StatelessCustomActionDefinition')
     StatelessCustomPublishMetricAction = Shapes::StructureShape.new(name: 'StatelessCustomPublishMetricAction')
     StatelessCustomPublishMetricActionDimension = Shapes::StructureShape.new(name: 'StatelessCustomPublishMetricActionDimension')
@@ -1628,6 +1697,7 @@ module Aws::SecurityHub
     AutomationRulesActionV2.add_member(:type, Shapes::ShapeRef.new(shape: AutomationRulesActionTypeV2, required: true, location_name: "Type"))
     AutomationRulesActionV2.add_member(:finding_fields_update, Shapes::ShapeRef.new(shape: AutomationRulesFindingFieldsUpdateV2, location_name: "FindingFieldsUpdate"))
     AutomationRulesActionV2.add_member(:external_integration_configuration, Shapes::ShapeRef.new(shape: ExternalIntegrationConfiguration, location_name: "ExternalIntegrationConfiguration"))
+    AutomationRulesActionV2.add_member(:resource_fields_update, Shapes::ShapeRef.new(shape: AutomationRulesResourceFieldsUpdateV2, location_name: "ResourceFieldsUpdate"))
     AutomationRulesActionV2.struct_class = Types::AutomationRulesActionV2
 
     AutomationRulesArnsList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -1731,6 +1801,9 @@ module Aws::SecurityHub
     AutomationRulesMetadataV2.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
     AutomationRulesMetadataV2.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
     AutomationRulesMetadataV2.struct_class = Types::AutomationRulesMetadataV2
+
+    AutomationRulesResourceFieldsUpdateV2.add_member(:criticality, Shapes::ShapeRef.new(shape: ResourceCriticality, required: true, location_name: "Criticality"))
+    AutomationRulesResourceFieldsUpdateV2.struct_class = Types::AutomationRulesResourceFieldsUpdateV2
 
     AvailabilityZone.add_member(:zone_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ZoneName"))
     AvailabilityZone.add_member(:subnet_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "SubnetId"))
@@ -5606,6 +5679,13 @@ module Aws::SecurityHub
 
     BooleanFilterList.member = Shapes::ShapeRef.new(shape: BooleanFilter)
 
+    CancelExportJobV2Request.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location: "uri", location_name: "ExportJobId"))
+    CancelExportJobV2Request.struct_class = Types::CancelExportJobV2Request
+
+    CancelExportJobV2Response.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location_name: "ExportJobId"))
+    CancelExportJobV2Response.add_member(:status, Shapes::ShapeRef.new(shape: ExportStatus, required: true, location_name: "Status"))
+    CancelExportJobV2Response.struct_class = Types::CancelExportJobV2Response
+
     CategoryList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
     Cell.add_member(:column, Shapes::ShapeRef.new(shape: Long, location_name: "Column"))
@@ -5876,10 +5956,18 @@ module Aws::SecurityHub
     CreateTicketV2Response.struct_class = Types::CreateTicketV2Response
 
     Criteria.add_member(:ocsf_finding_criteria, Shapes::ShapeRef.new(shape: OcsfFindingFilters, location_name: "OcsfFindingCriteria"))
+    Criteria.add_member(:resource_criteria, Shapes::ShapeRef.new(shape: ResourcesFilters, location_name: "ResourceCriteria"))
     Criteria.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Criteria.add_member_subclass(:ocsf_finding_criteria, Types::Criteria::OcsfFindingCriteria)
+    Criteria.add_member_subclass(:resource_criteria, Types::Criteria::ResourceCriteria)
     Criteria.add_member_subclass(:unknown, Types::Criteria::Unknown)
     Criteria.struct_class = Types::Criteria
+
+    CriticalitySource.add_member(:source, Shapes::ShapeRef.new(shape: CriticalitySourceType, required: true, location_name: "Source"))
+    CriticalitySource.add_member(:reason, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Reason"))
+    CriticalitySource.struct_class = Types::CriticalitySource
+
+    CriticalitySourceList.member = Shapes::ShapeRef.new(shape: CriticalitySource)
 
     CspmConnectorSummary.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
     CspmConnectorSummary.add_member(:connector_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorId"))
@@ -6188,6 +6276,51 @@ module Aws::SecurityHub
     EnumListConfigurationOptions.add_member(:allowed_values, Shapes::ShapeRef.new(shape: StringList, location_name: "AllowedValues"))
     EnumListConfigurationOptions.struct_class = Types::EnumListConfigurationOptions
 
+    ExportDestination.add_member(:s3, Shapes::ShapeRef.new(shape: S3ExportDestination, location_name: "S3"))
+    ExportDestination.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExportDestination.add_member_subclass(:s3, Types::ExportDestination::S3)
+    ExportDestination.add_member_subclass(:unknown, Types::ExportDestination::Unknown)
+    ExportDestination.struct_class = Types::ExportDestination
+
+    ExportOutput.add_member(:findings, Shapes::ShapeRef.new(shape: FindingsOutput, location_name: "Findings"))
+    ExportOutput.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExportOutput.add_member_subclass(:findings, Types::ExportOutput::Findings)
+    ExportOutput.add_member_subclass(:unknown, Types::ExportOutput::Unknown)
+    ExportOutput.struct_class = Types::ExportOutput
+
+    ExportOutputSummary.add_member(:findings, Shapes::ShapeRef.new(shape: FindingsOutputSummary, location_name: "Findings"))
+    ExportOutputSummary.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ExportOutputSummary.add_member_subclass(:findings, Types::ExportOutputSummary::Findings)
+    ExportOutputSummary.add_member_subclass(:unknown, Types::ExportOutputSummary::Unknown)
+    ExportOutputSummary.struct_class = Types::ExportOutputSummary
+
+    ExportScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))
+    ExportScopes.struct_class = Types::ExportScopes
+
+    ExportSummary.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location_name: "ExportJobId"))
+    ExportSummary.add_member(:name, Shapes::ShapeRef.new(shape: ExportName, location_name: "Name"))
+    ExportSummary.add_member(:status, Shapes::ShapeRef.new(shape: ExportStatus, required: true, location_name: "Status"))
+    ExportSummary.add_member(:data_type, Shapes::ShapeRef.new(shape: ExportDataType, required: true, location_name: "DataType"))
+    ExportSummary.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ExportOutputSummary, location_name: "OutputConfiguration"))
+    ExportSummary.add_member(:scopes, Shapes::ShapeRef.new(shape: ExportScopes, location_name: "Scopes"))
+    ExportSummary.add_member(:destination, Shapes::ShapeRef.new(shape: ExportDestination, required: true, location_name: "Destination"))
+    ExportSummary.add_member(:failure_code, Shapes::ShapeRef.new(shape: ExportFailureCode, location_name: "FailureCode"))
+    ExportSummary.add_member(:failure_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FailureMessage"))
+    ExportSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartedAt"))
+    ExportSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
+    ExportSummary.struct_class = Types::ExportSummary
+
+    ExportSummaryList.member = Shapes::ShapeRef.new(shape: ExportSummary)
+
+    ExposureFinding.add_member(:metadata_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "MetadataUid"))
+    ExposureFinding.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Title"))
+    ExposureFinding.add_member(:previous_severity, Shapes::ShapeRef.new(shape: ExposureSeverity, required: true, location_name: "PreviousSeverity"))
+    ExposureFinding.add_member(:projected_severity, Shapes::ShapeRef.new(shape: ExposureSeverity, required: true, location_name: "ProjectedSeverity"))
+    ExposureFinding.add_member(:impact, Shapes::ShapeRef.new(shape: ExposureImpact, required: true, location_name: "Impact"))
+    ExposureFinding.struct_class = Types::ExposureFinding
+
+    ExposureFindingItemsList.member = Shapes::ShapeRef.new(shape: ExposureFinding)
+
     ExternalIntegrationConfiguration.add_member(:connector_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ConnectorArn"))
     ExternalIntegrationConfiguration.struct_class = Types::ExternalIntegrationConfiguration
 
@@ -6248,6 +6381,16 @@ module Aws::SecurityHub
 
     FindingScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))
     FindingScopes.struct_class = Types::FindingScopes
+
+    FindingsOutput.add_member(:format, Shapes::ShapeRef.new(shape: FindingsExportFormat, required: true, location_name: "Format"))
+    FindingsOutput.add_member(:filters, Shapes::ShapeRef.new(shape: OcsfFindingFilters, location_name: "Filters"))
+    FindingsOutput.add_member(:selected_fields, Shapes::ShapeRef.new(shape: FindingsSelectedFieldList, location_name: "SelectedFields"))
+    FindingsOutput.struct_class = Types::FindingsOutput
+
+    FindingsOutputSummary.add_member(:format, Shapes::ShapeRef.new(shape: FindingsExportFormat, required: true, location_name: "Format"))
+    FindingsOutputSummary.struct_class = Types::FindingsOutputSummary
+
+    FindingsSelectedFieldList.member = Shapes::ShapeRef.new(shape: FindingsSelectableField)
 
     FindingsTrendsCompositeFilter.add_member(:string_filters, Shapes::ShapeRef.new(shape: FindingsTrendsStringFilterList, location_name: "StringFilters"))
     FindingsTrendsCompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: FindingsTrendsCompositeFilterList, location_name: "NestedCompositeFilters"))
@@ -6410,6 +6553,22 @@ module Aws::SecurityHub
     GetEnabledStandardsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetEnabledStandardsResponse.struct_class = Types::GetEnabledStandardsResponse
 
+    GetExportJobV2Request.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location: "uri", location_name: "ExportJobId"))
+    GetExportJobV2Request.struct_class = Types::GetExportJobV2Request
+
+    GetExportJobV2Response.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location_name: "ExportJobId"))
+    GetExportJobV2Response.add_member(:name, Shapes::ShapeRef.new(shape: ExportName, location_name: "Name"))
+    GetExportJobV2Response.add_member(:status, Shapes::ShapeRef.new(shape: ExportStatus, required: true, location_name: "Status"))
+    GetExportJobV2Response.add_member(:data_type, Shapes::ShapeRef.new(shape: ExportDataType, required: true, location_name: "DataType"))
+    GetExportJobV2Response.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ExportOutput, location_name: "OutputConfiguration"))
+    GetExportJobV2Response.add_member(:scopes, Shapes::ShapeRef.new(shape: ExportScopes, location_name: "Scopes"))
+    GetExportJobV2Response.add_member(:destination, Shapes::ShapeRef.new(shape: ExportDestination, required: true, location_name: "Destination"))
+    GetExportJobV2Response.add_member(:failure_code, Shapes::ShapeRef.new(shape: ExportFailureCode, location_name: "FailureCode"))
+    GetExportJobV2Response.add_member(:failure_message, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "FailureMessage"))
+    GetExportJobV2Response.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartedAt"))
+    GetExportJobV2Response.add_member(:ended_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "EndedAt"))
+    GetExportJobV2Response.struct_class = Types::GetExportJobV2Response
+
     GetFindingAggregatorRequest.add_member(:finding_aggregator_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location: "uri", location_name: "FindingAggregatorArn"))
     GetFindingAggregatorRequest.struct_class = Types::GetFindingAggregatorRequest
 
@@ -6516,6 +6675,19 @@ module Aws::SecurityHub
     GetRecommendedPolicyV2Response.add_member(:status, Shapes::ShapeRef.new(shape: RecommendationStatus, location_name: "Status"))
     GetRecommendedPolicyV2Response.add_member(:resource_arn, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceArn"))
     GetRecommendedPolicyV2Response.struct_class = Types::GetRecommendedPolicyV2Response
+
+    GetRemediationsV2Request.add_member(:target_uid, Shapes::ShapeRef.new(shape: RemediationStringUid, location_name: "TargetUid"))
+    GetRemediationsV2Request.add_member(:metadata_uid, Shapes::ShapeRef.new(shape: RemediationStringUid, location_name: "MetadataUid"))
+    GetRemediationsV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: RemediationFilters, location_name: "Filters"))
+    GetRemediationsV2Request.add_member(:show_guidance, Shapes::ShapeRef.new(shape: Boolean, location_name: "ShowGuidance"))
+    GetRemediationsV2Request.add_member(:guidance_format, Shapes::ShapeRef.new(shape: GuidanceFormat, location_name: "GuidanceFormat"))
+    GetRemediationsV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetRemediationsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetRemediationsV2Request.struct_class = Types::GetRemediationsV2Request
+
+    GetRemediationsV2Response.add_member(:items, Shapes::ShapeRef.new(shape: RemediationV2ItemList, required: true, location_name: "Items"))
+    GetRemediationsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetRemediationsV2Response.struct_class = Types::GetRemediationsV2Response
 
     GetResourcesStatisticsV2Request.add_member(:group_by_rules, Shapes::ShapeRef.new(shape: ResourceGroupByRules, required: true, location_name: "GroupByRules"))
     GetResourcesStatisticsV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: ResourceScopes, location_name: "Scopes"))
@@ -6701,6 +6873,12 @@ module Aws::SecurityHub
     JiraCloudUpdateConfiguration.add_member(:project_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProjectKey"))
     JiraCloudUpdateConfiguration.struct_class = Types::JiraCloudUpdateConfiguration
 
+    KbArticle.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Title"))
+    KbArticle.add_member(:url, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Url"))
+    KbArticle.struct_class = Types::KbArticle
+
+    KbArticleList.member = Shapes::ShapeRef.new(shape: KbArticle)
+
     KeywordFilter.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Value"))
     KeywordFilter.struct_class = Types::KeywordFilter
 
@@ -6780,6 +6958,29 @@ module Aws::SecurityHub
     ListEnabledProductsForImportResponse.add_member(:product_subscriptions, Shapes::ShapeRef.new(shape: ProductSubscriptionArnList, location_name: "ProductSubscriptions"))
     ListEnabledProductsForImportResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListEnabledProductsForImportResponse.struct_class = Types::ListEnabledProductsForImportResponse
+
+    ListExportJobsV2Request.add_member(:status, Shapes::ShapeRef.new(shape: ExportStatus, location: "querystring", location_name: "Status"))
+    ListExportJobsV2Request.add_member(:data_type, Shapes::ShapeRef.new(shape: ExportDataType, location: "querystring", location_name: "DataType"))
+    ListExportJobsV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: ExportMaxResults, location: "querystring", location_name: "MaxResults"))
+    ListExportJobsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
+    ListExportJobsV2Request.struct_class = Types::ListExportJobsV2Request
+
+    ListExportJobsV2Response.add_member(:items, Shapes::ShapeRef.new(shape: ExportSummaryList, required: true, location_name: "Items"))
+    ListExportJobsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListExportJobsV2Response.struct_class = Types::ListExportJobsV2Response
+
+    ListExposuresByRemediationV2Request.add_member(:target_uid, Shapes::ShapeRef.new(shape: RemediationStringUid, required: true, location_name: "TargetUid"))
+    ListExposuresByRemediationV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListExposuresByRemediationV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListExposuresByRemediationV2Request.struct_class = Types::ListExposuresByRemediationV2Request
+
+    ListExposuresByRemediationV2Response.add_member(:items, Shapes::ShapeRef.new(shape: ExposureFindingItemsList, required: true, location_name: "Items"))
+    ListExposuresByRemediationV2Response.add_member(:target_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "TargetUid"))
+    ListExposuresByRemediationV2Response.add_member(:resource, Shapes::ShapeRef.new(shape: RemediationResource, required: true, location_name: "Resource"))
+    ListExposuresByRemediationV2Response.add_member(:total_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalCount"))
+    ListExposuresByRemediationV2Response.add_member(:trait, Shapes::ShapeRef.new(shape: RemediationTrait, required: true, location_name: "Trait"))
+    ListExposuresByRemediationV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListExposuresByRemediationV2Response.struct_class = Types::ListExposuresByRemediationV2Response
 
     ListFindingAggregatorsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
     ListFindingAggregatorsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "MaxResults"))
@@ -7239,6 +7440,128 @@ module Aws::SecurityHub
     Remediation.add_member(:recommendation, Shapes::ShapeRef.new(shape: Recommendation, location_name: "Recommendation"))
     Remediation.struct_class = Types::Remediation
 
+    RemediationCompositeFilter.add_member(:string_filters, Shapes::ShapeRef.new(shape: RemediationStringFilterList, location_name: "StringFilters"))
+    RemediationCompositeFilter.struct_class = Types::RemediationCompositeFilter
+
+    RemediationCompositeFilterList.member = Shapes::ShapeRef.new(shape: RemediationCompositeFilter)
+
+    RemediationFilters.add_member(:composite_filters, Shapes::ShapeRef.new(shape: RemediationCompositeFilterList, location_name: "CompositeFilters"))
+    RemediationFilters.struct_class = Types::RemediationFilters
+
+    RemediationGuidance.add_member(:target_type_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "TargetTypeName"))
+    RemediationGuidance.add_member(:pattern, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Pattern"))
+    RemediationGuidance.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Version"))
+    RemediationGuidance.add_member(:context, Shapes::ShapeRef.new(shape: RemediationGuidanceContext, required: true, location_name: "Context"))
+    RemediationGuidance.add_member(:specification, Shapes::ShapeRef.new(shape: RemediationGuidanceSpecification, required: true, location_name: "Specification"))
+    RemediationGuidance.add_member(:examples, Shapes::ShapeRef.new(shape: RemediationGuidanceExamples, required: true, location_name: "Examples"))
+    RemediationGuidance.add_member(:metadata, Shapes::ShapeRef.new(shape: RemediationGuidanceMetadata, required: true, location_name: "Metadata"))
+    RemediationGuidance.struct_class = Types::RemediationGuidance
+
+    RemediationGuidanceContext.add_member(:problem_statement, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ProblemStatement"))
+    RemediationGuidanceContext.add_member(:risk_assessment, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "RiskAssessment"))
+    RemediationGuidanceContext.add_member(:affected_scope, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AffectedScope"))
+    RemediationGuidanceContext.add_member(:prerequisites, Shapes::ShapeRef.new(shape: RemediationStringList, location_name: "Prerequisites"))
+    RemediationGuidanceContext.struct_class = Types::RemediationGuidanceContext
+
+    RemediationGuidanceExamples.add_member(:aws_cli, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AwsCli"))
+    RemediationGuidanceExamples.add_member(:cli, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Cli"))
+    RemediationGuidanceExamples.add_member(:python, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Python"))
+    RemediationGuidanceExamples.add_member(:terraform, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Terraform"))
+    RemediationGuidanceExamples.add_member(:cdk, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Cdk"))
+    RemediationGuidanceExamples.add_member(:cloud_formation, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "CloudFormation"))
+    RemediationGuidanceExamples.add_member(:ia_c, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "IaC"))
+    RemediationGuidanceExamples.add_member(:template, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Template"))
+    RemediationGuidanceExamples.struct_class = Types::RemediationGuidanceExamples
+
+    RemediationGuidanceMetadata.add_member(:resource_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceType"))
+    RemediationGuidanceMetadata.add_member(:exposure_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ExposureType"))
+    RemediationGuidanceMetadata.add_member(:trait_titles, Shapes::ShapeRef.new(shape: RemediationStringList, required: true, location_name: "TraitTitles"))
+    RemediationGuidanceMetadata.add_member(:reversibility, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Reversibility"))
+    RemediationGuidanceMetadata.add_member(:fix_effect, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "FixEffect"))
+    RemediationGuidanceMetadata.add_member(:risk_level, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "RiskLevel"))
+    RemediationGuidanceMetadata.add_member(:automation_level, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "AutomationLevel"))
+    RemediationGuidanceMetadata.add_member(:human_review_required, Shapes::ShapeRef.new(shape: Boolean, location_name: "HumanReviewRequired"))
+    RemediationGuidanceMetadata.add_member(:generated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "GeneratedAt"))
+    RemediationGuidanceMetadata.add_member(:verification_status, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VerificationStatus"))
+    RemediationGuidanceMetadata.struct_class = Types::RemediationGuidanceMetadata
+
+    RemediationGuidanceSpecification.add_member(:parameters, Shapes::ShapeRef.new(shape: RemediationParameterList, location_name: "Parameters"))
+    RemediationGuidanceSpecification.add_member(:steps, Shapes::ShapeRef.new(shape: RemediationStepList, location_name: "Steps"))
+    RemediationGuidanceSpecification.add_member(:expected_end_state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ExpectedEndState"))
+    RemediationGuidanceSpecification.add_member(:required_permissions, Shapes::ShapeRef.new(shape: RemediationStringList, location_name: "RequiredPermissions"))
+    RemediationGuidanceSpecification.struct_class = Types::RemediationGuidanceSpecification
+
+    RemediationOutcome.add_member(:resolved_findings_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ResolvedFindingsCount"))
+    RemediationOutcome.add_member(:severity_reduction_findings_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SeverityReductionFindingsCount"))
+    RemediationOutcome.add_member(:severity_unchanged_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "SeverityUnchangedCount"))
+    RemediationOutcome.struct_class = Types::RemediationOutcome
+
+    RemediationParameter.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Name"))
+    RemediationParameter.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Type"))
+    RemediationParameter.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Description"))
+    RemediationParameter.add_member(:required, Shapes::ShapeRef.new(shape: Boolean, location_name: "Required"))
+    RemediationParameter.struct_class = Types::RemediationParameter
+
+    RemediationParameterList.member = Shapes::ShapeRef.new(shape: RemediationParameter)
+
+    RemediationResource.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AccountId"))
+    RemediationResource.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Region"))
+    RemediationResource.add_member(:resource_owner_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceOwnerAccountId"))
+    RemediationResource.add_member(:resource_owner_org_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceOwnerOrgId"))
+    RemediationResource.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Type"))
+    RemediationResource.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
+    RemediationResource.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
+    RemediationResource.add_member(:resource_guid, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceGuid"))
+    RemediationResource.add_member(:resource_region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceRegion"))
+    RemediationResource.add_member(:cloud_provider, Shapes::ShapeRef.new(shape: CloudProviderName, required: true, location_name: "CloudProvider"))
+    RemediationResource.struct_class = Types::RemediationResource
+
+    RemediationStep.add_member(:phase, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Phase"))
+    RemediationStep.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Description"))
+    RemediationStep.add_member(:service, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Service"))
+    RemediationStep.add_member(:action, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Action"))
+    RemediationStep.add_member(:logic, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Logic"))
+    RemediationStep.add_member(:inverse, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Inverse"))
+    RemediationStep.add_member(:verify_after, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "VerifyAfter"))
+    RemediationStep.struct_class = Types::RemediationStep
+
+    RemediationStepList.member = Shapes::ShapeRef.new(shape: RemediationStep)
+
+    RemediationStringFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: RemediationStringField, required: true, location_name: "FieldName"))
+    RemediationStringFilter.add_member(:filter, Shapes::ShapeRef.new(shape: RemediationStringFilterCondition, required: true, location_name: "Filter"))
+    RemediationStringFilter.struct_class = Types::RemediationStringFilter
+
+    RemediationStringFilterCondition.add_member(:value, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Value"))
+    RemediationStringFilterCondition.struct_class = Types::RemediationStringFilterCondition
+
+    RemediationStringFilterList.member = Shapes::ShapeRef.new(shape: RemediationStringFilter)
+
+    RemediationStringList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
+
+    RemediationSummaryDetail.add_member(:action, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Action"))
+    RemediationSummaryDetail.add_member(:description, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Description"))
+    RemediationSummaryDetail.add_member(:is_immediate, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "IsImmediate"))
+    RemediationSummaryDetail.add_member(:post_remediation_steps, Shapes::ShapeRef.new(shape: RemediationStringList, location_name: "PostRemediationSteps"))
+    RemediationSummaryDetail.add_member(:kb_articles, Shapes::ShapeRef.new(shape: KbArticleList, location_name: "KbArticles"))
+    RemediationSummaryDetail.struct_class = Types::RemediationSummaryDetail
+
+    RemediationTrait.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Type"))
+    RemediationTrait.add_member(:title, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Title"))
+    RemediationTrait.struct_class = Types::RemediationTrait
+
+    RemediationV2Item.add_member(:target_uid, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "TargetUid"))
+    RemediationV2Item.add_member(:outcome, Shapes::ShapeRef.new(shape: RemediationOutcome, required: true, location_name: "Outcome"))
+    RemediationV2Item.add_member(:priority, Shapes::ShapeRef.new(shape: RemediationPriority, required: true, location_name: "Priority"))
+    RemediationV2Item.add_member(:remediation_summary, Shapes::ShapeRef.new(shape: RemediationSummaryDetail, required: true, location_name: "RemediationSummary"))
+    RemediationV2Item.add_member(:resource, Shapes::ShapeRef.new(shape: RemediationResource, required: true, location_name: "Resource"))
+    RemediationV2Item.add_member(:status, Shapes::ShapeRef.new(shape: RemediationStatus, required: true, location_name: "Status"))
+    RemediationV2Item.add_member(:trait, Shapes::ShapeRef.new(shape: RemediationTrait, required: true, location_name: "Trait"))
+    RemediationV2Item.add_member(:guidance, Shapes::ShapeRef.new(shape: RemediationGuidance, location_name: "Guidance"))
+    RemediationV2Item.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "UpdatedAt"))
+    RemediationV2Item.struct_class = Types::RemediationV2Item
+
+    RemediationV2ItemList.member = Shapes::ShapeRef.new(shape: RemediationV2Item)
+
     Resource.add_member(:type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Type"))
     Resource.add_member(:id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Id"))
     Resource.add_member(:partition, Shapes::ShapeRef.new(shape: Partition, location_name: "Partition"))
@@ -7418,6 +7741,8 @@ module Aws::SecurityHub
     ResourceResult.add_member(:resource_sub_category, Shapes::ShapeRef.new(shape: ResourceSubCategory, location_name: "ResourceSubCategory"))
     ResourceResult.add_member(:discovery_type, Shapes::ShapeRef.new(shape: DiscoveryType, location_name: "DiscoveryType"))
     ResourceResult.add_member(:resource_info, Shapes::ShapeRef.new(shape: ResourceInfo, location_name: "ResourceInfo"))
+    ResourceResult.add_member(:resource_criticality, Shapes::ShapeRef.new(shape: ResourceCriticality, location_name: "ResourceCriticality"))
+    ResourceResult.add_member(:criticality_sources, Shapes::ShapeRef.new(shape: CriticalitySourceList, location_name: "CriticalitySources"))
     ResourceResult.struct_class = Types::ResourceResult
 
     ResourceScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))
@@ -7639,6 +7964,11 @@ module Aws::SecurityHub
 
     RuleGroupVariablesPortSetsDetails.add_member(:definition, Shapes::ShapeRef.new(shape: NonEmptyStringList, location_name: "Definition"))
     RuleGroupVariablesPortSetsDetails.struct_class = Types::RuleGroupVariablesPortSetsDetails
+
+    S3ExportDestination.add_member(:bucket_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "BucketArn"))
+    S3ExportDestination.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "KmsKeyArn"))
+    S3ExportDestination.add_member(:object_prefix, Shapes::ShapeRef.new(shape: S3ObjectPrefix, location_name: "ObjectPrefix"))
+    S3ExportDestination.struct_class = Types::S3ExportDestination
 
     ScopeValueList.member = Shapes::ShapeRef.new(shape: NonEmptyString)
 
@@ -7910,6 +8240,16 @@ module Aws::SecurityHub
     StartConfigurationPolicyDisassociationRequest.struct_class = Types::StartConfigurationPolicyDisassociationRequest
 
     StartConfigurationPolicyDisassociationResponse.struct_class = Types::StartConfigurationPolicyDisassociationResponse
+
+    StartExportJobV2Request.add_member(:name, Shapes::ShapeRef.new(shape: ExportName, location_name: "Name"))
+    StartExportJobV2Request.add_member(:destination, Shapes::ShapeRef.new(shape: ExportDestination, required: true, location_name: "Destination"))
+    StartExportJobV2Request.add_member(:output_configuration, Shapes::ShapeRef.new(shape: ExportOutput, required: true, location_name: "OutputConfiguration"))
+    StartExportJobV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: ExportScopes, location_name: "Scopes"))
+    StartExportJobV2Request.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    StartExportJobV2Request.struct_class = Types::StartExportJobV2Request
+
+    StartExportJobV2Response.add_member(:export_job_id, Shapes::ShapeRef.new(shape: ExportJobId, required: true, location_name: "ExportJobId"))
+    StartExportJobV2Response.struct_class = Types::StartExportJobV2Response
 
     StatelessCustomActionDefinition.add_member(:publish_metric_action, Shapes::ShapeRef.new(shape: StatelessCustomPublishMetricAction, location_name: "PublishMetricAction"))
     StatelessCustomActionDefinition.struct_class = Types::StatelessCustomActionDefinition
@@ -8451,6 +8791,20 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:cancel_export_job_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelExportJobV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/exportjobsv2/{ExportJobId}/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelExportJobV2Request)
+        o.output = Shapes::ShapeRef.new(shape: CancelExportJobV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:create_action_target, Seahorse::Model::Operation.new.tap do |o|
@@ -9182,6 +9536,19 @@ module Aws::SecurityHub
         )
       end)
 
+      api.add_operation(:get_export_job_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetExportJobV2"
+        o.http_method = "GET"
+        o.http_request_uri = "/exportjobsv2/{ExportJobId}"
+        o.input = Shapes::ShapeRef.new(shape: GetExportJobV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetExportJobV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
       api.add_operation(:get_finding_aggregator, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetFindingAggregator"
         o.http_method = "GET"
@@ -9369,6 +9736,25 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_remediations_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetRemediationsV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetRemediationsV2"
+        o.input = Shapes::ShapeRef.new(shape: GetRemediationsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetRemediationsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -9590,6 +9976,43 @@ module Aws::SecurityHub
         )
       end)
 
+      api.add_operation(:list_export_jobs_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExportJobsV2"
+        o.http_method = "GET"
+        o.http_request_uri = "/exportjobsv2"
+        o.input = Shapes::ShapeRef.new(shape: ListExportJobsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: ListExportJobsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_exposures_by_remediation_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListExposuresByRemediationV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListExposuresByRemediationV2"
+        o.input = Shapes::ShapeRef.new(shape: ListExposuresByRemediationV2Request)
+        o.output = Shapes::ShapeRef.new(shape: ListExposuresByRemediationV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_finding_aggregators, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListFindingAggregators"
         o.http_method = "GET"
@@ -9769,6 +10192,22 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:start_export_job_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartExportJobV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/exportjobsv2"
+        o.input = Shapes::ShapeRef.new(shape: StartExportJobV2Request)
+        o.output = Shapes::ShapeRef.new(shape: StartExportJobV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

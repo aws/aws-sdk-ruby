@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -79,6 +80,16 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _AssociateContractResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateContractResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#associate_contract-instance_method
+      def associate_contract: (
+                                contract_arn: ::String,
+                                contract_document_id: ::String
+                              ) -> _AssociateContractResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateContractResponseSuccess
+
       interface _AssociateSourceViewsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::AssociateSourceViewsResponse]
         def arn: () -> ::String
@@ -89,6 +100,17 @@ module Aws
                                     source_views: Array[::String]
                                   ) -> _AssociateSourceViewsResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateSourceViewsResponseSuccess
+
+      interface _CancelContractualInvestmentAttestationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelContractualInvestmentAttestationResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#cancel_contractual_investment_attestation-instance_method
+      def cancel_contractual_investment_attestation: (
+                                                       attestation_id: ::String,
+                                                       contract_arn: ::String,
+                                                       reason: ::String
+                                                     ) -> _CancelContractualInvestmentAttestationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelContractualInvestmentAttestationResponseSuccess
 
       interface _CreateBillingViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateBillingViewResponse]
@@ -111,6 +133,54 @@ module Aws
                                ) -> _CreateBillingViewResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateBillingViewResponseSuccess
 
+      interface _CreateContractualInvestmentAttestationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContractualInvestmentAttestationResponse]
+        def attestation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#create_contractual_investment_attestation-instance_method
+      def create_contractual_investment_attestation: (
+                                                       contract_arn: ::String,
+                                                       investment_summary_id: ::String,
+                                                       investment_id: ::String,
+                                                       contract_document_id: ::String,
+                                                       approver_details: {
+                                                         name: ::String,
+                                                         title: ::String,
+                                                         email: ::String
+                                                       },
+                                                       ?investment_disbursed_at: ::Time,
+                                                       attestation_details: {
+                                                         attestation_value: {
+                                                           attestation_amount: {
+                                                             currency_code: ::String,
+                                                             currency_amount: ::String
+                                                           }?,
+                                                           attestation_quantities: Array[
+                                                             {
+                                                               attestation_volume: ::String,
+                                                               attestation_unit: ::String
+                                                             }
+                                                           ]?
+                                                         },
+                                                         investment_distributions: Array[
+                                                           {
+                                                             account_id: ::String,
+                                                             investment_amount: {
+                                                               currency_code: ::String,
+                                                               currency_amount: ::String
+                                                             }
+                                                           }
+                                                         ]?
+                                                       },
+                                                       ?additional_recipients: Array[
+                                                         {
+                                                           email: ::String
+                                                         }
+                                                       ],
+                                                       ?client_token: ::String
+                                                     ) -> _CreateContractualInvestmentAttestationResponseSuccess
+                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContractualInvestmentAttestationResponseSuccess
+
       interface _DeleteBillingViewResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteBillingViewResponse]
         def arn: () -> ::String
@@ -121,6 +191,15 @@ module Aws
                                  ?force: bool
                                ) -> _DeleteBillingViewResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteBillingViewResponseSuccess
+
+      interface _DisassociateContractResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateContractResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#disassociate_contract-instance_method
+      def disassociate_contract: (
+                                   contract_arn: ::String
+                                 ) -> _DisassociateContractResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisassociateContractResponseSuccess
 
       interface _DisassociateSourceViewsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateSourceViewsResponse]
@@ -161,6 +240,16 @@ module Aws
                               arn: ::String
                             ) -> _GetBillingViewResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetBillingViewResponseSuccess
+
+      interface _GetContractInformationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetContractInformationResponse]
+        def contract: () -> Types::ContractDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#get_contract_information-instance_method
+      def get_contract_information: (
+                                      contract_arn: ::String
+                                    ) -> _GetContractInformationResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetContractInformationResponseSuccess
 
       interface _GetCreditAllocationHistoryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCreditAllocationHistoryResponse]
@@ -291,6 +380,94 @@ module Aws
                                 ?next_token: ::String
                               ) -> _ListBillingViewsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBillingViewsResponseSuccess
+
+      interface _ListBusinessSupportAccountChargesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBusinessSupportAccountChargesResponse]
+        def billing_month: () -> ::String
+        def is_estimated: () -> bool
+        def total_support_charge: () -> ::String
+        def total_support_eligible_spend: () -> ::String
+        def account_count: () -> ::Integer
+        def account_charges: () -> ::Array[Types::BusinessSupportAccountCharge]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_business_support_account_charges-instance_method
+      def list_business_support_account_charges: (
+                                                   billing_month: ::String,
+                                                   ?account_id: ::String,
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _ListBusinessSupportAccountChargesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBusinessSupportAccountChargesResponseSuccess
+
+      interface _ListBusinessSupportSubscriptionHistoryResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBusinessSupportSubscriptionHistoryResponse]
+        def subscription_contracts: () -> ::Array[Types::BusinessSupportSubscriptionContract]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_business_support_subscription_history-instance_method
+      def list_business_support_subscription_history: (
+                                                        ?billing_month: ::String,
+                                                        ?account_id: ::String,
+                                                        ?start_date: ::Time,
+                                                        ?end_date: ::Time,
+                                                        ?max_results: ::Integer,
+                                                        ?next_token: ::String
+                                                      ) -> _ListBusinessSupportSubscriptionHistoryResponseSuccess
+                                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBusinessSupportSubscriptionHistoryResponseSuccess
+
+      interface _ListContractsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContractsResponse]
+        def items: () -> ::Array[Types::ContractSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_contracts-instance_method
+      def list_contracts: (
+                            ?next_token: ::String,
+                            ?max_results: ::Integer
+                          ) -> _ListContractsResponseSuccess
+                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContractsResponseSuccess
+
+      interface _ListContractualInvestmentAttestationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContractualInvestmentAttestationsResponse]
+        def items: () -> ::Array[Types::InvestmentAttestation]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_contractual_investment_attestations-instance_method
+      def list_contractual_investment_attestations: (
+                                                      contract_arn: ::String,
+                                                      ?investment_summary_id: ::String,
+                                                      ?next_token: ::String,
+                                                      ?max_results: ::Integer
+                                                    ) -> _ListContractualInvestmentAttestationsResponseSuccess
+                                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContractualInvestmentAttestationsResponseSuccess
+
+      interface _ListContractualInvestmentSummariesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContractualInvestmentSummariesResponse]
+        def items: () -> ::Array[Types::InvestmentSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_contractual_investment_summaries-instance_method
+      def list_contractual_investment_summaries: (
+                                                   contract_arn: ::String,
+                                                   ?next_token: ::String,
+                                                   ?max_results: ::Integer
+                                                 ) -> _ListContractualInvestmentSummariesResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContractualInvestmentSummariesResponseSuccess
+
+      interface _ListContractualInvestmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContractualInvestmentsResponse]
+        def items: () -> ::Array[Types::Investment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Billing/Client.html#list_contractual_investments-instance_method
+      def list_contractual_investments: (
+                                          contract_arn: ::String,
+                                          investment_summary_id: ::String,
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListContractualInvestmentsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContractualInvestmentsResponseSuccess
 
       interface _ListEnterpriseSupportLinkedAccountChargesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEnterpriseSupportLinkedAccountChargesResponse]

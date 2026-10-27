@@ -339,6 +339,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class CertificateConfiguration
+      attr_accessor s3: Types::S3CertificateConfiguration
+      attr_accessor secrets_manager: Types::SecretsManagerCertificateConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < CertificateConfiguration
+      end
+      class SecretsManager < CertificateConfiguration
+      end
+      class Unknown < CertificateConfiguration
+      end
+    end
+
     class CertificateLocation
       attr_accessor secrets_manager: Types::SecretsManagerLocation
       attr_accessor unknown: untyped
@@ -348,6 +362,11 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < CertificateLocation
       end
+    end
+
+    class CircuitBreakerConfiguration
+      attr_accessor mode: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
     end
 
     class ClaimMatchValueType
@@ -451,6 +470,11 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class CoinbaseCdpRotationTargets
+      attr_accessor secrets: ::Array[("API_KEY" | "WALLET_SECRET")]
+      SENSITIVE: []
+    end
+
     class ComponentConfiguration
       attr_accessor configuration: untyped
       SENSITIVE: []
@@ -475,12 +499,15 @@ module Aws::BedrockAgentCoreControl
     class Condition
       attr_accessor match_principals: Types::MatchPrincipals
       attr_accessor match_paths: Types::MatchPaths
+      attr_accessor match_models: Types::MatchModels
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class MatchPrincipals < Condition
       end
       class MatchPaths < Condition
+      end
+      class MatchModels < Condition
       end
       class Unknown < Condition
       end
@@ -958,6 +985,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
       attr_accessor metadata_configuration: Types::MetadataConfiguration
       attr_accessor private_endpoint: Types::PrivateEndpoint
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -978,6 +1006,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor private_endpoint_managed_resources: ::Array[Types::ManagedResourceDetails]
       attr_accessor authorization_data: Types::AuthorizationData
       attr_accessor protocol_type: ("MCP" | "HTTP")
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -1276,6 +1305,17 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class CredentialRotationConfig
+      attr_accessor coinbase_cdp: Types::CoinbaseCdpRotationTargets
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CoinbaseCdp < CredentialRotationConfig
+      end
+      class Unknown < CredentialRotationConfig
+      end
+    end
+
     class CredentialsProviderConfiguration
       attr_accessor coinbase_cdp: Types::PaymentCredentialProviderConfiguration
       attr_accessor stripe_privy: Types::PaymentCredentialProviderConfiguration
@@ -1419,6 +1459,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor configuration: Types::CustomConfigurationInput
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -1620,6 +1661,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     class DeleteConfigurationBundleResponse
+      attr_accessor bundle_arn: ::String
       attr_accessor bundle_id: ::String
       attr_accessor status: ("ACTIVE" | "CREATING" | "CREATE_FAILED" | "UPDATING" | "UPDATE_FAILED" | "DELETING" | "DELETE_FAILED")
       SENSITIVE: []
@@ -1908,6 +1950,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class DimensionRatingScale
+      attr_accessor numerical: ::Array[Types::NumericalScaleDefinition]
+      attr_accessor categorical: ::Array[Types::CategoricalScaleDefinition]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Numerical < DimensionRatingScale
+      end
+      class Categorical < DimensionRatingScale
+      end
+      class Unknown < DimensionRatingScale
+      end
+    end
+
     class EbsVolumeConfiguration
       attr_accessor name: ::String
       attr_accessor size_gi_b: ::Integer
@@ -1986,6 +2042,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor reflection_configuration: Types::EpisodicReflectionConfigurationInput
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -2038,6 +2095,13 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
       SENSITIVE: [:append_to_prompt]
+    end
+
+    class EvaluationDimension
+      attr_accessor dimension_name: ::String
+      attr_accessor dimension_instruction: ::String
+      attr_accessor dimension_rating_scale: Types::DimensionRatingScale
+      SENSITIVE: [:dimension_instruction, :dimension_rating_scale]
     end
 
     class EvaluatorConfig
@@ -2118,6 +2182,28 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < ExtractionConfiguration
       end
+    end
+
+    class Fallback
+      attr_accessor trigger_on: Types::FallbackTriggers
+      attr_accessor first_byte_timeout_milliseconds: ::Integer
+      attr_accessor circuit_breaker: Types::CircuitBreakerConfiguration
+      attr_accessor target_fallback: ::Array[Types::FallbackTarget]
+      SENSITIVE: []
+    end
+
+    class FallbackTarget
+      attr_accessor target_name: ::String
+      attr_accessor model: ::String
+      attr_accessor trigger_on: Types::FallbackTriggers
+      attr_accessor first_byte_timeout_milliseconds: ::Integer
+      SENSITIVE: [:target_name]
+    end
+
+    class FallbackTriggers
+      attr_accessor status_codes: ::Array[::String]
+      attr_accessor errors: ::Array[("CONNECTION_ERROR" | "FIRST_BYTE_TIMEOUT" | "UNROUTABLE")]
+      SENSITIVE: []
     end
 
     class FilesystemConfiguration
@@ -2255,6 +2341,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor private_endpoint_managed_resources: ::Array[Types::ManagedResourceDetails]
       attr_accessor authorization_data: Types::AuthorizationData
       attr_accessor protocol_type: ("MCP" | "HTTP")
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -2613,6 +2700,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor private_endpoint_managed_resources: ::Array[Types::ManagedResourceDetails]
       attr_accessor authorization_data: Types::AuthorizationData
       attr_accessor protocol_type: ("MCP" | "HTTP")
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -2706,11 +2794,13 @@ module Aws::BedrockAgentCoreControl
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor provision_mode: ("MANUAL" | "QUICK_CREATE")
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialsProviderConfiguration]
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
       attr_accessor authorization_url: ::String
+      attr_accessor credentials_updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -4246,6 +4336,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor search_type: ("SEMANTIC")
       attr_accessor session_configuration: Types::SessionConfiguration
       attr_accessor streaming_configuration: Types::StreamingConfiguration
+      attr_accessor disable_mcp_list_tools_pagination: bool
       SENSITIVE: [:instructions]
     end
 
@@ -4263,6 +4354,17 @@ module Aws::BedrockAgentCoreControl
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor routing_domain: ::String
+      SENSITIVE: []
+    end
+
+    class MatchModelEntry
+      attr_accessor value: ::String
+      attr_accessor operator: ("StringEquals" | "StringLike")
+      SENSITIVE: []
+    end
+
+    class MatchModels
+      attr_accessor any_of: ::Array[Types::MatchModelEntry]
       SENSITIVE: []
     end
 
@@ -4384,6 +4486,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor updated_at: ::Time
       attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "FAILED")
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_duration_days: ::Integer
       SENSITIVE: [:description]
     end
 
@@ -4512,6 +4615,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor configuration: Types::ModifyStrategyConfiguration
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -4741,6 +4845,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor payment_connector_id: ::String
       attr_accessor name: ::String
       attr_accessor type: ("CoinbaseCDP" | "StripePrivy")
+      attr_accessor provision_mode: ("MANUAL" | "QUICK_CREATE")
       attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
       attr_accessor last_updated_at: ::Time
       SENSITIVE: []
@@ -4991,12 +5096,15 @@ module Aws::BedrockAgentCoreControl
     class RatingScale
       attr_accessor numerical: ::Array[Types::NumericalScaleDefinition]
       attr_accessor categorical: ::Array[Types::CategoricalScaleDefinition]
+      attr_accessor multi_dimensional: ::Array[Types::EvaluationDimension]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Numerical < RatingScale
       end
       class Categorical < RatingScale
+      end
+      class MultiDimensional < RatingScale
       end
       class Unknown < RatingScale
       end
@@ -5005,6 +5113,20 @@ module Aws::BedrockAgentCoreControl
     class ReasoningConfiguration
       attr_accessor effort: ::String
       SENSITIVE: []
+    end
+
+    class RecordExpirySpecification
+      attr_accessor record_expiry_duration_days: ::Integer
+      attr_accessor action: ("REMOVE")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RecordExpiryDurationDays < RecordExpirySpecification
+      end
+      class Action < RecordExpirySpecification
+      end
+      class Unknown < RecordExpirySpecification
+      end
     end
 
     class RecordingConfig
@@ -5147,6 +5269,22 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class RotatePaymentConnectorCredentialsRequest
+      attr_accessor payment_manager_id: ::String
+      attr_accessor payment_connector_id: ::String
+      attr_accessor credentials_to_rotate: Types::CredentialRotationConfig
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class RotatePaymentConnectorCredentialsResponse
+      attr_accessor payment_connector_id: ::String
+      attr_accessor payment_manager_id: ::String
+      attr_accessor last_updated_at: ::Time
+      attr_accessor status: ("CREATING" | "UPDATING" | "DELETING" | "READY" | "CREATE_FAILED" | "UPDATE_FAILED" | "DELETE_FAILED" | "AWS_MARKETPLACE_SUBSCRIPTION_REQUIRED" | "PENDING_AUTHENTICATION" | "PROVISIONING" | "AUTHENTICATION_EXPIRED" | "AUTHENTICATION_FAILED")
+      SENSITIVE: []
+    end
+
     class RouteToTargetAction
       attr_accessor static_route: Types::StaticRoute
       attr_accessor weighted_route: Types::WeightedRoute
@@ -5177,6 +5315,12 @@ module Aws::BedrockAgentCoreControl
       attr_accessor arn: ::String
       attr_accessor qualifier: ::String
       attr_accessor schema: Types::HttpApiSchemaConfiguration
+      SENSITIVE: []
+    end
+
+    class S3CertificateConfiguration
+      attr_accessor uri: ::String
+      attr_accessor bucket_owner_account_id: ::String
       SENSITIVE: []
     end
 
@@ -5250,6 +5394,11 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class SecretsManagerCertificateConfiguration
+      attr_accessor secret_arn: ::String
+      SENSITIVE: []
+    end
+
     class SecretsManagerLocation
       attr_accessor secret_arn: ::String
       SENSITIVE: []
@@ -5298,6 +5447,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespaces: ::Array[::String]
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -5419,6 +5569,8 @@ module Aws::BedrockAgentCoreControl
 
     class StaticRoute
       attr_accessor target_name: ::String
+      attr_accessor model: ::String
+      attr_accessor fallback: Types::Fallback
       SENSITIVE: [:target_name]
     end
 
@@ -5528,6 +5680,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespaces: ::Array[::String]
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 
@@ -5605,9 +5758,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     class TargetTrafficSplitEntry
+      attr_accessor target_name: ::String
+      attr_accessor model: ::String
+      attr_accessor fallback: Types::Fallback
       attr_accessor name: ::String
       attr_accessor weight: ::Integer
-      attr_accessor target_name: ::String
       attr_accessor description: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
       SENSITIVE: [:target_name]
@@ -6028,6 +6183,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor credential_provider_configurations: ::Array[Types::CredentialProviderConfiguration]
       attr_accessor metadata_configuration: Types::MetadataConfiguration
       attr_accessor private_endpoint: Types::PrivateEndpoint
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -6048,6 +6204,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor private_endpoint_managed_resources: ::Array[Types::ManagedResourceDetails]
       attr_accessor authorization_data: Types::AuthorizationData
       attr_accessor protocol_type: ("MCP" | "HTTP")
+      attr_accessor certificate_configurations: ::Array[Types::CertificateConfiguration]
       SENSITIVE: [:name, :description]
     end
 
@@ -6471,6 +6628,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor namespaces: ::Array[::String]
       attr_accessor namespace_templates: ::Array[::String]
       attr_accessor memory_record_schema: Types::MemoryRecordSchema
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: [:description]
     end
 

@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -229,7 +230,26 @@ module Aws
                             type: ::String,
                             condition: {
                               schedule: {
-                                expression: ::String
+                                expression: ::String?,
+                                spec: {
+                                  cron: {
+                                    expression: ::String
+                                  }?,
+                                  time_range: {
+                                    start_after: ::String,
+                                    start_before: ::String,
+                                    recurrence: {
+                                      daily: {
+                                      }?,
+                                      weekly: {
+                                        day_of_week: ("MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY")
+                                      }?,
+                                      monthly: {
+                                        day_of_month: ::Integer
+                                      }?
+                                    }
+                                  }?
+                                }?
                               }?
                             },
                             action: {
@@ -363,6 +383,7 @@ module Aws
         def monthly_account_evaluation_hours: () -> Types::UsageMetric
         def monthly_account_system_learning_hours: () -> Types::UsageMetric
         def monthly_account_on_demand_hours: () -> Types::UsageMetric
+        def monthly_account_grader_hours: () -> Types::UsageMetric
         def usage_period_start_time: () -> ::Time
         def usage_period_end_time: () -> ::Time
       end
@@ -378,7 +399,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#get_agent_space-instance_method
       def get_agent_space: (
-                             agent_space_id: ::String
+                             agent_space_id: ::String,
+                             ?included_data: ("METADATA_ONLY" | "ALL_DATA")
                            ) -> _GetAgentSpaceResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAgentSpaceResponseSuccess
 
@@ -497,7 +519,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DevOpsAgent/Client.html#list_agent_spaces-instance_method
       def list_agent_spaces: (
                                ?max_results: ::Integer,
-                               ?next_token: ::String
+                               ?next_token: ::String,
+                               ?included_data: ("METADATA_ONLY" | "ALL_DATA")
                              ) -> _ListAgentSpacesResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAgentSpacesResponseSuccess
 
@@ -703,7 +726,7 @@ module Aws
       def list_services: (
                            ?max_results: ::Integer,
                            ?next_token: ::String,
-                           ?filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
+                           ?filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "msteams" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
                          ) -> _ListServicesResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListServicesResponseSuccess
 

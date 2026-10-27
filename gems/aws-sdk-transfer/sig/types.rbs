@@ -160,6 +160,7 @@ module Aws::Transfer
       attr_accessor structured_log_destinations: ::Array[::String]
       attr_accessor s3_storage_options: Types::S3StorageOptions
       attr_accessor ip_address_type: ("IPV4" | "DUALSTACK")
+      attr_accessor host_key_storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
       SENSITIVE: [:host_key]
     end
 
@@ -208,6 +209,7 @@ module Aws::Transfer
       attr_accessor steps: ::Array[Types::WorkflowStep]
       attr_accessor on_exception_steps: ::Array[Types::WorkflowStep]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor structured_log_destinations: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -560,6 +562,8 @@ module Aws::Transfer
       attr_accessor type: ::String
       attr_accessor date_imported: ::Time
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
+      attr_accessor secret_id: ::String
       SENSITIVE: []
     end
 
@@ -693,6 +697,7 @@ module Aws::Transfer
       attr_accessor on_exception_steps: ::Array[Types::WorkflowStep]
       attr_accessor workflow_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor structured_log_destinations: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -780,6 +785,8 @@ module Aws::Transfer
       attr_accessor host_key_body: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
+      attr_accessor kms_key: ::String
       SENSITIVE: [:host_key_body]
     end
 
@@ -1059,6 +1066,8 @@ module Aws::Transfer
       attr_accessor description: ::String
       attr_accessor type: ::String
       attr_accessor date_imported: ::Time
+      attr_accessor storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
+      attr_accessor secret_id: ::String
       SENSITIVE: []
     end
 
@@ -1125,6 +1134,7 @@ module Aws::Transfer
       attr_accessor passive_ip: ::String
       attr_accessor tls_session_resumption_mode: ("DISABLED" | "ENABLED" | "ENFORCED")
       attr_accessor set_stat_option: ("DEFAULT" | "ENABLE_NO_OP")
+      attr_accessor sftp_ports: ::Array[Types::SftpPortWithOptions]
       attr_accessor as_2_transports: ::Array[("HTTP")]
       attr_accessor proxy_config: Types::ProxyConfig
       SENSITIVE: []
@@ -1205,6 +1215,12 @@ module Aws::Transfer
 
     class SftpConnectorConnectionDetails
       attr_accessor host_key: ::String
+      SENSITIVE: []
+    end
+
+    class SftpPortWithOptions
+      attr_accessor sftp_port: ::Integer
+      attr_accessor communication_mode: ("CLIENT_TALK_FIRST" | "SERVER_TALK_FIRST")
       SENSITIVE: []
     end
 
@@ -1427,6 +1443,8 @@ module Aws::Transfer
       attr_accessor server_id: ::String
       attr_accessor host_key_id: ::String
       attr_accessor description: ::String
+      attr_accessor storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
+      attr_accessor kms_key: ::String
       SENSITIVE: []
     end
 

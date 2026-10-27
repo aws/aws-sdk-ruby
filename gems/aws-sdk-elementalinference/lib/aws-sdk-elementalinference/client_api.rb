@@ -31,6 +31,8 @@ module Aws::ElementalInference
     CreateFeedResponse = Shapes::StructureShape.new(name: 'CreateFeedResponse')
     CreateOutput = Shapes::StructureShape.new(name: 'CreateOutput')
     CreateOutputList = Shapes::ListShape.new(name: 'CreateOutputList')
+    CreateScheduleActionRequest = Shapes::StructureShape.new(name: 'CreateScheduleActionRequest')
+    CreateScheduleActionResponse = Shapes::StructureShape.new(name: 'CreateScheduleActionResponse')
     CroppingConfig = Shapes::StructureShape.new(name: 'CroppingConfig')
     DataSourceConfiguration = Shapes::StructureShape.new(name: 'DataSourceConfiguration')
     DataSourceSport = Shapes::StringShape.new(name: 'DataSourceSport')
@@ -39,6 +41,8 @@ module Aws::ElementalInference
     DeleteFeedPolicyRequest = Shapes::StructureShape.new(name: 'DeleteFeedPolicyRequest')
     DeleteFeedRequest = Shapes::StructureShape.new(name: 'DeleteFeedRequest')
     DeleteFeedResponse = Shapes::StructureShape.new(name: 'DeleteFeedResponse')
+    DeleteScheduleActionRequest = Shapes::StructureShape.new(name: 'DeleteScheduleActionRequest')
+    DeleteScheduleActionResponse = Shapes::StructureShape.new(name: 'DeleteScheduleActionResponse')
     DictionaryArn = Shapes::StringShape.new(name: 'DictionaryArn')
     DictionaryEntriesPayload = Shapes::StringShape.new(name: 'DictionaryEntriesPayload')
     DictionaryId = Shapes::StringShape.new(name: 'DictionaryId')
@@ -50,6 +54,7 @@ module Aws::ElementalInference
     DisassociateFeedResponse = Shapes::StructureShape.new(name: 'DisassociateFeedResponse')
     ExportDictionaryEntriesRequest = Shapes::StructureShape.new(name: 'ExportDictionaryEntriesRequest')
     ExportDictionaryEntriesResponse = Shapes::StructureShape.new(name: 'ExportDictionaryEntriesResponse')
+    ExtendedAnalysisMode = Shapes::StringShape.new(name: 'ExtendedAnalysisMode')
     FeedArn = Shapes::StringShape.new(name: 'FeedArn')
     FeedAssociation = Shapes::StructureShape.new(name: 'FeedAssociation')
     FeedId = Shapes::StringShape.new(name: 'FeedId')
@@ -60,6 +65,7 @@ module Aws::ElementalInference
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterValue = Shapes::StringShape.new(name: 'FilterValue')
     FilterValueList = Shapes::ListShape.new(name: 'FilterValueList')
+    FixedModeScheduleActionStartSettings = Shapes::StructureShape.new(name: 'FixedModeScheduleActionStartSettings')
     FixtureDate = Shapes::StringShape.new(name: 'FixtureDate')
     FixtureId = Shapes::StringShape.new(name: 'FixtureId')
     FixtureSummary = Shapes::StructureShape.new(name: 'FixtureSummary')
@@ -84,6 +90,9 @@ module Aws::ElementalInference
     ListFeedsRequest = Shapes::StructureShape.new(name: 'ListFeedsRequest')
     ListFeedsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListFeedsRequestMaxResultsInteger')
     ListFeedsResponse = Shapes::StructureShape.new(name: 'ListFeedsResponse')
+    ListScheduleActionsRequest = Shapes::StructureShape.new(name: 'ListScheduleActionsRequest')
+    ListScheduleActionsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListScheduleActionsRequestMaxResultsInteger')
+    ListScheduleActionsResponse = Shapes::StructureShape.new(name: 'ListScheduleActionsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     OutputConfig = Shapes::UnionShape.new(name: 'OutputConfig')
@@ -92,11 +101,20 @@ module Aws::ElementalInference
     ProfanityFilterMode = Shapes::StringShape.new(name: 'ProfanityFilterMode')
     PutFeedPolicyRequest = Shapes::StructureShape.new(name: 'PutFeedPolicyRequest')
     PutFeedPolicyResponse = Shapes::StructureShape.new(name: 'PutFeedPolicyResponse')
+    RemoveClippingDataSourceConfiguration = Shapes::StructureShape.new(name: 'RemoveClippingDataSourceConfiguration')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceDescription = Shapes::StringShape.new(name: 'ResourceDescription')
     ResourceName = Shapes::StringShape.new(name: 'ResourceName')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3Uri = Shapes::StringShape.new(name: 'S3Uri')
+    ScheduleAction = Shapes::StructureShape.new(name: 'ScheduleAction')
+    ScheduleActionError = Shapes::StructureShape.new(name: 'ScheduleActionError')
+    ScheduleActionErrorCode = Shapes::StringShape.new(name: 'ScheduleActionErrorCode')
+    ScheduleActionList = Shapes::ListShape.new(name: 'ScheduleActionList')
+    ScheduleActionOperation = Shapes::UnionShape.new(name: 'ScheduleActionOperation')
+    ScheduleActionOperations = Shapes::ListShape.new(name: 'ScheduleActionOperations')
+    ScheduleActionStartConfiguration = Shapes::UnionShape.new(name: 'ScheduleActionStartConfiguration')
+    ScheduleActionStatus = Shapes::StringShape.new(name: 'ScheduleActionStatus')
     SearchFilter = Shapes::StructureShape.new(name: 'SearchFilter')
     SearchFilterList = Shapes::ListShape.new(name: 'SearchFilterList')
     SearchFixturesRequest = Shapes::StructureShape.new(name: 'SearchFixturesRequest')
@@ -117,15 +135,18 @@ module Aws::ElementalInference
     TemplateGroup = Shapes::StructureShape.new(name: 'TemplateGroup')
     TemplateGroupList = Shapes::ListShape.new(name: 'TemplateGroupList')
     TemplateUriList = Shapes::ListShape.new(name: 'TemplateUriList')
+    Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TooManyRequestException = Shapes::StructureShape.new(name: 'TooManyRequestException')
     TranscriptionLanguage = Shapes::StringShape.new(name: 'TranscriptionLanguage')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+    UpdateClippingDataSourceConfiguration = Shapes::StructureShape.new(name: 'UpdateClippingDataSourceConfiguration')
     UpdateDictionaryRequest = Shapes::StructureShape.new(name: 'UpdateDictionaryRequest')
     UpdateDictionaryResponse = Shapes::StructureShape.new(name: 'UpdateDictionaryResponse')
     UpdateFeedRequest = Shapes::StructureShape.new(name: 'UpdateFeedRequest')
     UpdateFeedResponse = Shapes::StructureShape.new(name: 'UpdateFeedResponse')
     UpdateOutput = Shapes::StructureShape.new(name: 'UpdateOutput')
     UpdateOutputList = Shapes::ListShape.new(name: 'UpdateOutputList')
+    UpdateOutputStatus = Shapes::StructureShape.new(name: 'UpdateOutputStatus')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
 
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -159,6 +180,7 @@ module Aws::ElementalInference
     ConflictException.struct_class = Types::ConflictException
 
     ContextualMetadataConfig.add_member(:summary_generation, Shapes::ShapeRef.new(shape: SummaryGenerationMode, location_name: "summaryGeneration"))
+    ContextualMetadataConfig.add_member(:extended_analysis, Shapes::ShapeRef.new(shape: ExtendedAnalysisMode, location_name: "extendedAnalysis"))
     ContextualMetadataConfig.struct_class = Types::ContextualMetadataConfig
 
     CreateDictionaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
@@ -201,6 +223,19 @@ module Aws::ElementalInference
 
     CreateOutputList.member = Shapes::ShapeRef.new(shape: CreateOutput)
 
+    CreateScheduleActionRequest.add_member(:id, Shapes::ShapeRef.new(shape: FeedId, required: true, location: "uri", location_name: "id"))
+    CreateScheduleActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "actionName"))
+    CreateScheduleActionRequest.add_member(:start_configuration, Shapes::ShapeRef.new(shape: ScheduleActionStartConfiguration, required: true, location_name: "startConfiguration"))
+    CreateScheduleActionRequest.add_member(:operations, Shapes::ShapeRef.new(shape: ScheduleActionOperations, required: true, location_name: "operations"))
+    CreateScheduleActionRequest.struct_class = Types::CreateScheduleActionRequest
+
+    CreateScheduleActionResponse.add_member(:action_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "actionName"))
+    CreateScheduleActionResponse.add_member(:start_configuration, Shapes::ShapeRef.new(shape: ScheduleActionStartConfiguration, required: true, location_name: "startConfiguration"))
+    CreateScheduleActionResponse.add_member(:operations, Shapes::ShapeRef.new(shape: ScheduleActionOperations, required: true, location_name: "operations"))
+    CreateScheduleActionResponse.add_member(:status, Shapes::ShapeRef.new(shape: ScheduleActionStatus, required: true, location_name: "status"))
+    CreateScheduleActionResponse.add_member(:error, Shapes::ShapeRef.new(shape: ScheduleActionError, location_name: "error"))
+    CreateScheduleActionResponse.struct_class = Types::CreateScheduleActionResponse
+
     CroppingConfig.add_member(:template_groups, Shapes::ShapeRef.new(shape: TemplateGroupList, location_name: "templateGroups"))
     CroppingConfig.struct_class = Types::CroppingConfig
 
@@ -225,6 +260,13 @@ module Aws::ElementalInference
     DeleteFeedResponse.add_member(:id, Shapes::ShapeRef.new(shape: FeedId, required: true, location_name: "id"))
     DeleteFeedResponse.add_member(:status, Shapes::ShapeRef.new(shape: FeedStatus, required: true, location_name: "status"))
     DeleteFeedResponse.struct_class = Types::DeleteFeedResponse
+
+    DeleteScheduleActionRequest.add_member(:id, Shapes::ShapeRef.new(shape: FeedId, required: true, location: "uri", location_name: "id"))
+    DeleteScheduleActionRequest.add_member(:action_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location: "querystring", location_name: "actionName"))
+    DeleteScheduleActionRequest.struct_class = Types::DeleteScheduleActionRequest
+
+    DeleteScheduleActionResponse.add_member(:action_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "actionName"))
+    DeleteScheduleActionResponse.struct_class = Types::DeleteScheduleActionResponse
 
     DictionarySummary.add_member(:arn, Shapes::ShapeRef.new(shape: DictionaryArn, required: true, location_name: "arn"))
     DictionarySummary.add_member(:id, Shapes::ShapeRef.new(shape: DictionaryId, required: true, location_name: "id"))
@@ -265,6 +307,9 @@ module Aws::ElementalInference
     FeedSummaryList.member = Shapes::ShapeRef.new(shape: FeedSummary)
 
     FilterValueList.member = Shapes::ShapeRef.new(shape: FilterValue)
+
+    FixedModeScheduleActionStartSettings.add_member(:scheduled_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "scheduledAt"))
+    FixedModeScheduleActionStartSettings.struct_class = Types::FixedModeScheduleActionStartSettings
 
     FixtureSummary.add_member(:fixture_id, Shapes::ShapeRef.new(shape: FixtureId, required: true, location_name: "fixtureId"))
     FixtureSummary.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
@@ -350,6 +395,15 @@ module Aws::ElementalInference
     ListFeedsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListFeedsResponse.struct_class = Types::ListFeedsResponse
 
+    ListScheduleActionsRequest.add_member(:id, Shapes::ShapeRef.new(shape: FeedId, required: true, location: "uri", location_name: "id"))
+    ListScheduleActionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListScheduleActionsRequestMaxResultsInteger, location: "querystring", location_name: "maxResults"))
+    ListScheduleActionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "nextToken"))
+    ListScheduleActionsRequest.struct_class = Types::ListScheduleActionsRequest
+
+    ListScheduleActionsResponse.add_member(:schedule_actions, Shapes::ShapeRef.new(shape: ScheduleActionList, required: true, location_name: "scheduleActions"))
+    ListScheduleActionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    ListScheduleActionsResponse.struct_class = Types::ListScheduleActionsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -374,8 +428,42 @@ module Aws::ElementalInference
 
     PutFeedPolicyResponse.struct_class = Types::PutFeedPolicyResponse
 
+    RemoveClippingDataSourceConfiguration.add_member(:output_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "outputName"))
+    RemoveClippingDataSourceConfiguration.struct_class = Types::RemoveClippingDataSourceConfiguration
+
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    ScheduleAction.add_member(:action_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "actionName"))
+    ScheduleAction.add_member(:start_configuration, Shapes::ShapeRef.new(shape: ScheduleActionStartConfiguration, required: true, location_name: "startConfiguration"))
+    ScheduleAction.add_member(:operations, Shapes::ShapeRef.new(shape: ScheduleActionOperations, required: true, location_name: "operations"))
+    ScheduleAction.add_member(:status, Shapes::ShapeRef.new(shape: ScheduleActionStatus, required: true, location_name: "status"))
+    ScheduleAction.add_member(:error, Shapes::ShapeRef.new(shape: ScheduleActionError, location_name: "error"))
+    ScheduleAction.struct_class = Types::ScheduleAction
+
+    ScheduleActionError.add_member(:error_code, Shapes::ShapeRef.new(shape: ScheduleActionErrorCode, required: true, location_name: "errorCode"))
+    ScheduleActionError.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorMessage"))
+    ScheduleActionError.struct_class = Types::ScheduleActionError
+
+    ScheduleActionList.member = Shapes::ShapeRef.new(shape: ScheduleAction)
+
+    ScheduleActionOperation.add_member(:update_output_status, Shapes::ShapeRef.new(shape: UpdateOutputStatus, location_name: "updateOutputStatus"))
+    ScheduleActionOperation.add_member(:update_clipping_data_source_configuration, Shapes::ShapeRef.new(shape: UpdateClippingDataSourceConfiguration, location_name: "updateClippingDataSourceConfiguration"))
+    ScheduleActionOperation.add_member(:remove_clipping_data_source_configuration, Shapes::ShapeRef.new(shape: RemoveClippingDataSourceConfiguration, location_name: "removeClippingDataSourceConfiguration"))
+    ScheduleActionOperation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ScheduleActionOperation.add_member_subclass(:update_output_status, Types::ScheduleActionOperation::UpdateOutputStatus)
+    ScheduleActionOperation.add_member_subclass(:update_clipping_data_source_configuration, Types::ScheduleActionOperation::UpdateClippingDataSourceConfiguration)
+    ScheduleActionOperation.add_member_subclass(:remove_clipping_data_source_configuration, Types::ScheduleActionOperation::RemoveClippingDataSourceConfiguration)
+    ScheduleActionOperation.add_member_subclass(:unknown, Types::ScheduleActionOperation::Unknown)
+    ScheduleActionOperation.struct_class = Types::ScheduleActionOperation
+
+    ScheduleActionOperations.member = Shapes::ShapeRef.new(shape: ScheduleActionOperation)
+
+    ScheduleActionStartConfiguration.add_member(:fixed_mode_schedule_action_start_settings, Shapes::ShapeRef.new(shape: FixedModeScheduleActionStartSettings, location_name: "fixedModeScheduleActionStartSettings"))
+    ScheduleActionStartConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ScheduleActionStartConfiguration.add_member_subclass(:fixed_mode_schedule_action_start_settings, Types::ScheduleActionStartConfiguration::FixedModeScheduleActionStartSettings)
+    ScheduleActionStartConfiguration.add_member_subclass(:unknown, Types::ScheduleActionStartConfiguration::Unknown)
+    ScheduleActionStartConfiguration.struct_class = Types::ScheduleActionStartConfiguration
 
     SearchFilter.add_member(:name, Shapes::ShapeRef.new(shape: FilterName, required: true, location_name: "name"))
     SearchFilter.add_member(:values, Shapes::ShapeRef.new(shape: FilterValueList, required: true, location_name: "values"))
@@ -433,6 +521,10 @@ module Aws::ElementalInference
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location: "querystring", location_name: "tagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
+    UpdateClippingDataSourceConfiguration.add_member(:output_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "outputName"))
+    UpdateClippingDataSourceConfiguration.add_member(:data_source_configuration, Shapes::ShapeRef.new(shape: DataSourceConfiguration, required: true, location_name: "dataSourceConfiguration"))
+    UpdateClippingDataSourceConfiguration.struct_class = Types::UpdateClippingDataSourceConfiguration
+
     UpdateDictionaryRequest.add_member(:id, Shapes::ShapeRef.new(shape: DictionaryId, required: true, location: "uri", location_name: "id"))
     UpdateDictionaryRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateDictionaryRequest.add_member(:language, Shapes::ShapeRef.new(shape: DictionaryLanguage, location_name: "language"))
@@ -473,6 +565,10 @@ module Aws::ElementalInference
     UpdateOutput.struct_class = Types::UpdateOutput
 
     UpdateOutputList.member = Shapes::ShapeRef.new(shape: UpdateOutput)
+
+    UpdateOutputStatus.add_member(:output_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "outputName"))
+    UpdateOutputStatus.add_member(:status, Shapes::ShapeRef.new(shape: OutputStatus, required: true, location_name: "status"))
+    UpdateOutputStatus.struct_class = Types::UpdateOutputStatus
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ValidationException.struct_class = Types::ValidationException
@@ -539,6 +635,21 @@ module Aws::ElementalInference
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_schedule_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateScheduleAction"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/feed/{id}/schedule-actions"
+        o.input = Shapes::ShapeRef.new(shape: CreateScheduleActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateScheduleActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:delete_dictionary, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteDictionary"
         o.http_method = "DELETE"
@@ -578,6 +689,20 @@ module Aws::ElementalInference
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestException)
+      end)
+
+      api.add_operation(:delete_schedule_action, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteScheduleAction"
+        o.http_method = "DELETE"
+        o.http_request_uri = "/v1/feed/{id}/schedule-actions"
+        o.input = Shapes::ShapeRef.new(shape: DeleteScheduleActionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteScheduleActionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:disassociate_feed, Seahorse::Model::Operation.new.tap do |o|
@@ -684,6 +809,25 @@ module Aws::ElementalInference
         o.http_request_uri = "/v1/feeds"
         o.input = Shapes::ShapeRef.new(shape: ListFeedsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListFeedsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_schedule_actions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListScheduleActions"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/feed/{id}/schedule-actions"
+        o.input = Shapes::ShapeRef.new(shape: ListScheduleActionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListScheduleActionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)

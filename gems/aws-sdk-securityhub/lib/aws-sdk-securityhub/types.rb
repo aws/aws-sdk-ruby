@@ -752,12 +752,18 @@ module Aws::SecurityHub
     #   systems or service.
     #   @return [Types::ExternalIntegrationConfiguration]
     #
+    # @!attribute [rw] resource_fields_update
+    #   The changes to be applied to resource fields when an automation rule
+    #   is triggered.
+    #   @return [Types::AutomationRulesResourceFieldsUpdateV2]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesActionV2 AWS API Documentation
     #
     class AutomationRulesActionV2 < Struct.new(
       :type,
       :finding_fields_update,
-      :external_integration_configuration)
+      :external_integration_configuration,
+      :resource_fields_update)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1473,6 +1479,22 @@ module Aws::SecurityHub
       :actions,
       :created_at,
       :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Allows you to define the structure for modifying specific fields of
+    # resources.
+    #
+    # @!attribute [rw] criticality
+    #   The criticality level to be assigned to resources that match the
+    #   automation rule criteria.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/AutomationRulesResourceFieldsUpdateV2 AWS API Documentation
+    #
+    class AutomationRulesResourceFieldsUpdateV2 < Struct.new(
+      :criticality)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -22565,6 +22587,36 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job to cancel. This is the value
+    #   returned by `StartExportJobV2`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CancelExportJobV2Request AWS API Documentation
+    #
+    class CancelExportJobV2Request < Struct.new(
+      :export_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The state of the export job after the cancel request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CancelExportJobV2Response AWS API Documentation
+    #
+    class CancelExportJobV2Response < Struct.new(
+      :export_job_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An occurrence of sensitive data detected in a Microsoft Excel
     # workbook, comma-separated value (CSV) file, or tab-separated value
     # (TSV) file.
@@ -23919,7 +23971,7 @@ module Aws::SecurityHub
     end
 
     # Defines the parameters and conditions used to evaluate and filter
-    # security findings.
+    # security findings or resources.
     #
     # @note Criteria is a union - when making an API calls you must set exactly one of the members.
     #
@@ -23929,17 +23981,42 @@ module Aws::SecurityHub
     #   The filtering conditions that align with OCSF standards.
     #   @return [Types::OcsfFindingFilters]
     #
+    # @!attribute [rw] resource_criteria
+    #   The filtering conditions for resources.
+    #   @return [Types::ResourcesFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/Criteria AWS API Documentation
     #
     class Criteria < Struct.new(
       :ocsf_finding_criteria,
+      :resource_criteria,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class OcsfFindingCriteria < Criteria; end
+      class ResourceCriteria < Criteria; end
       class Unknown < Criteria; end
+    end
+
+    # Details the source and reason of a criticality.
+    #
+    # @!attribute [rw] source
+    #   The source of the criticality.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason the criticality was assigned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/CriticalitySource AWS API Documentation
+    #
+    class CriticalitySource < Struct.new(
+      :source,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # A summary of a CSPM connector.
@@ -25300,6 +25377,235 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Specifies where Security Hub writes the export output. This is a
+    # union: you must specify exactly one member. Currently, the only
+    # supported member is `S3`.
+    #
+    # @note ExportDestination is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ExportDestination is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExportDestination corresponding to the set member.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon Simple Storage Service (Amazon S3) bucket and Amazon Web
+    #   Services Key Management Service (Amazon Web Services KMS) key that
+    #   Security Hub uses to write the export.
+    #   @return [Types::S3ExportDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportDestination AWS API Documentation
+    #
+    class ExportDestination < Struct.new(
+      :s3,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class S3 < ExportDestination; end
+      class Unknown < ExportDestination; end
+    end
+
+    # Specifies what data to export and how to format it. This is a union:
+    # you must specify exactly one member. Currently, the only supported
+    # member is `Findings`.
+    #
+    # @note ExportOutput is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ExportOutput is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExportOutput corresponding to the set member.
+    #
+    # @!attribute [rw] findings
+    #   Configures an export of Security Hub findings, including the output
+    #   format and any filters or selected fields.
+    #   @return [Types::FindingsOutput]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportOutput AWS API Documentation
+    #
+    class ExportOutput < Struct.new(
+      :findings,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Findings < ExportOutput; end
+      class Unknown < ExportOutput; end
+    end
+
+    # A summary of the output configuration for an export job. The populated
+    # member corresponds to the data type that was exported.
+    #
+    # @note ExportOutputSummary is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ExportOutputSummary corresponding to the set member.
+    #
+    # @!attribute [rw] findings
+    #   The output configuration summary for a findings export.
+    #   @return [Types::FindingsOutputSummary]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportOutputSummary AWS API Documentation
+    #
+    class ExportOutputSummary < Struct.new(
+      :findings,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Findings < ExportOutputSummary; end
+      class Unknown < ExportOutputSummary; end
+    end
+
+    # Defines the data boundary for a findings export. Scopes determine
+    # which organizational units or organizations to retrieve data from.
+    #
+    # Only a delegated administrator can use this structure. If a delegated
+    # administrator omits it, the export covers the entire organization; any
+    # other caller exports only findings from its own account.
+    #
+    # @!attribute [rw] aws_organizations
+    #   A list of Organizations scopes to include in the export. Each entry
+    #   in the list specifies an organization or organizational unit to
+    #   include for the delegated administrator's account. If the list
+    #   specifies multiple entries, the entries are combined using OR logic.
+    #   @return [Array<Types::AwsOrganizationScope>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportScopes AWS API Documentation
+    #
+    class ExportScopes < Struct.new(
+      :aws_organizations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of an export job, as returned by `ListExportJobsV2`.
+    #
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The user-provided name of the export job, if one was specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The category of data that the export job produces.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration of the export job. For findings exports,
+    #   this reports the output format. Present only for findings exports;
+    #   absent for other data types.
+    #   @return [Types::ExportOutputSummary]
+    #
+    # @!attribute [rw] scopes
+    #   The organization scopes that the export job was started with, echoed
+    #   verbatim. Absent if the caller didn't supply `Scopes`.
+    #   @return [Types::ExportScopes]
+    #
+    # @!attribute [rw] destination
+    #   The destination that the export job writes to.
+    #   @return [Types::ExportDestination]
+    #
+    # @!attribute [rw] failure_code
+    #   A code that classifies why the export job failed. Present only when
+    #   `Status` is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A human-readable message about why the export job failed. Present
+    #   only when `Status` is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The time when the export job was created.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The time when the export job reached a terminal state. Absent while
+    #   the job is `RUNNING`.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExportSummary AWS API Documentation
+    #
+    class ExportSummary < Struct.new(
+      :export_job_id,
+      :name,
+      :status,
+      :data_type,
+      :output_configuration,
+      :scopes,
+      :destination,
+      :failure_code,
+      :failure_message,
+      :started_at,
+      :ended_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides details about an exposure finding and the effect the specific
+    # remediation target has on it.
+    #
+    # @!attribute [rw] metadata_uid
+    #   The unique identifier (ID) of the Security Hub exposure finding,
+    #   found under the `metadata.uid` field of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the exposure finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] previous_severity
+    #   The severity of the exposure finding before the remediation target
+    #   is resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] projected_severity
+    #   The severity of the exposure finding after the remediation target is
+    #   resolved.
+    #   @return [String]
+    #
+    # @!attribute [rw] impact
+    #   The impact resolving a remediation target has on the exposure
+    #   finding.
+    #
+    #   * `Reduces` specifies that resolving the remediation target lowers
+    #     the severity of the exposure finding, but does not resolve it.
+    #
+    #   * `Resolves` specifies that resolving the remediation target
+    #     resolves the exposure finding.
+    #
+    #   * `Unchanged` specifies that resolving the remediation target does
+    #     not change the severity of the exposure finding.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ExposureFinding AWS API Documentation
+    #
+    class ExposureFinding < Struct.new(
+      :metadata_uid,
+      :title,
+      :previous_severity,
+      :projected_severity,
+      :impact)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines the settings and parameters required for integrating external
     # security tools and services.
     #
@@ -25683,6 +25989,69 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # The configuration for a findings export: the output format, an
+    # optional set of filters, and the fields to include.
+    #
+    # @!attribute [rw] format
+    #   The output format of the export. `CSV` produces comma-separated rows
+    #   that are suitable for spreadsheets and analysis tools. `OCSF_JSON`
+    #   produces newline-delimited JSON records in the Open Cybersecurity
+    #   Schema Framework (OCSF) format used elsewhere in Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   An optional set of OCSF finding filters that restrict which findings
+    #   are exported. The filter structure is the same as the one used by
+    #   `GetFindingsV2`. If you omit this member, Security Hub exports all
+    #   findings available to the caller. When echoed by `GetExportJobV2`,
+    #   relative date ranges are returned unresolved.
+    #   @return [Types::OcsfFindingFilters]
+    #
+    # @!attribute [rw] selected_fields
+    #   The OCSF finding fields to include in the export, specified as OCSF
+    #   field paths (for example, `finding_info.title` or `severity`). You
+    #   can specify from 1 to 50 fields.
+    #
+    #   Whether this parameter is required depends on the value of `Format`:
+    #
+    #   * `CSV` – Required. The field paths that you specify become the
+    #     columns of the output, in the order that you provide them. If you
+    #     omit this parameter, the request returns a `ValidationException`.
+    #
+    #   * `OCSF_JSON` – Not supported. This format includes each finding in
+    #     full, so field selection doesn't apply. If you specify this
+    #     parameter, the request returns a `ValidationException`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsOutput AWS API Documentation
+    #
+    class FindingsOutput < Struct.new(
+      :format,
+      :filters,
+      :selected_fields)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the output configuration for a findings export, returned
+    # by `ListExportJobsV2`. Unlike the configuration returned by
+    # `GetExportJobV2`, it reports only the output format.
+    #
+    # @!attribute [rw] format
+    #   The output format of the export. `CSV` produces comma-separated rows
+    #   that are suitable for spreadsheets and analysis tools. `OCSF_JSON`
+    #   produces newline-delimited JSON records in the Open Cybersecurity
+    #   Schema Framework (OCSF) format used elsewhere in Security Hub.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/FindingsOutputSummary AWS API Documentation
+    #
+    class FindingsOutputSummary < Struct.new(
+      :format)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A filter structure that contains a logical combination of string
     # filters and nested composite filters for findings trend data.
     #
@@ -25908,7 +26277,8 @@ module Aws::SecurityHub
     #   @return [String]
     #
     # @!attribute [rw] status
-    #   Whether the free trial period is currently active. Valid values:
+    #   Specifies whether the free trial period is currently active. Valid
+    #   values:
     #
     #   * `ACTIVE` specifies that the free trial period is ongoing.
     #
@@ -26459,6 +26829,105 @@ module Aws::SecurityHub
     class GetEnabledStandardsResponse < Struct.new(
       :standards_subscriptions,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job to retrieve. This is the
+    #   value returned by `StartExportJobV2`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetExportJobV2Request AWS API Documentation
+    #
+    class GetExportJobV2Request < Struct.new(
+      :export_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The user-provided name of the export job, if one was specified when
+    #   the job was started.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current state of the export job.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   The category of data that the export job produces.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_configuration
+    #   The output configuration that the export job was started with,
+    #   including the format and any filters or selected fields.
+    #   @return [Types::ExportOutput]
+    #
+    # @!attribute [rw] scopes
+    #   The organization scopes that the export job was started with, echoed
+    #   verbatim. This parameter is absent if the caller didn't supply
+    #   `Scopes`. It contains only the organization or organizational unit
+    #   (OU) identifiers that the caller submitted; it never contains
+    #   resolved member-account identifiers.
+    #   @return [Types::ExportScopes]
+    #
+    # @!attribute [rw] destination
+    #   The destination that the export job writes to.
+    #   @return [Types::ExportDestination]
+    #
+    # @!attribute [rw] failure_code
+    #   A code that classifies why the export job failed. Present only when
+    #   `Status` is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A human-readable message that provides more detail about why the
+    #   export job failed. Present only when `Status` is `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The time when the export job was created.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The time when the export job reached a terminal state (`SUCCEEDED`,
+    #   `FAILED`, or `CANCELLED`). This parameter is absent while the job is
+    #   `RUNNING`.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetExportJobV2Response AWS API Documentation
+    #
+    class GetExportJobV2Response < Struct.new(
+      :export_job_id,
+      :name,
+      :status,
+      :data_type,
+      :output_configuration,
+      :scopes,
+      :destination,
+      :failure_code,
+      :failure_message,
+      :started_at,
+      :ended_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27045,6 +27514,81 @@ module Aws::SecurityHub
       :error,
       :status,
       :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_uid
+    #   The unique identifier (ID) of an existing remediation target to
+    #   return. Returns the single matching target. You can't use
+    #   `TargetUid` together with `MetadataUid` or `Filters`.
+    #   @return [String]
+    #
+    # @!attribute [rw] metadata_uid
+    #   The unique identifier (ID) of the Security Hub exposure finding,
+    #   found under the `metadata.uid` field of the finding. Returns the
+    #   remediation targets associated with that finding. You can't use
+    #   `MetadataUid` together with `TargetUid` or `Filters`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters remediation targets based on a set of criteria. You can't
+    #   use `Filters` together with `TargetUid` or `MetadataUid`.
+    #   @return [Types::RemediationFilters]
+    #
+    # @!attribute [rw] show_guidance
+    #   Specifies whether to show remediation target guidance.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] guidance_format
+    #   The format of the remediation guidance examples to return. Valid
+    #   values are `All`, `AwsCli`, `Cli`, `Python`, `Terraform`, `Cdk`,
+    #   `CloudFormation`, `IaC`, and `Template`. If you don't specify a
+    #   value, all formats are returned. Applies only when `ShowGuidance` is
+    #   `true`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid range is 1-100. If
+    #   you don't specify a value, the operation returns up to 25 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to paginate the remediations target list returned. On
+    #   your first call to `GetRemediationsV2`, omit this parameter or set
+    #   it to `NULL`. For subsequent calls, use the `NextToken` value
+    #   returned in the previous response to retrieve the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetRemediationsV2Request AWS API Documentation
+    #
+    class GetRemediationsV2Request < Struct.new(
+      :target_uid,
+      :metadata_uid,
+      :filters,
+      :show_guidance,
+      :guidance_format,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   An array of remediation targets returned by the operation.
+    #   @return [Array<Types::RemediationV2Item>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetRemediationsV2Response AWS API Documentation
+    #
+    class GetRemediationsV2Response < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -27875,6 +28419,26 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # A knowledge base article that provides additional guidance related to
+    # the remediation target.
+    #
+    # @!attribute [rw] title
+    #   The title of the `KbArticle`.
+    #   @return [String]
+    #
+    # @!attribute [rw] url
+    #   The URL of the `KbArticle`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/KbArticle AWS API Documentation
+    #
+    class KbArticle < Struct.new(
+      :title,
+      :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A keyword filter for querying findings.
     #
     # @!attribute [rw] value
@@ -28270,6 +28834,124 @@ module Aws::SecurityHub
     #
     class ListEnabledProductsForImportResponse < Struct.new(
       :product_subscriptions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   Filters the results to export jobs that have the specified status.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_type
+    #   Filters the results to export jobs that produce the specified data
+    #   type.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single call. Valid
+    #   range is 1–20.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExportJobsV2Request AWS API Documentation
+    #
+    class ListExportJobsV2Request < Struct.new(
+      :status,
+      :data_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The export jobs that match the request, as `ExportSummary` objects.
+    #   @return [Array<Types::ExportSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExportJobsV2Response AWS API Documentation
+    #
+    class ListExportJobsV2Response < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] target_uid
+    #   The unique identifier (ID) of an existing remediation target to list
+    #   exposure findings for.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid range is 1-100. If
+    #   you don't specify a value, the operation returns up to 25 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token used to paginate the exposures list returned. On your
+    #   first call to `ListExposuresByRemediationV2`, omit this parameter or
+    #   set it to `NULL`. For subsequent calls, use the `NextToken` value
+    #   returned in the previous response to retrieve the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExposuresByRemediationV2Request AWS API Documentation
+    #
+    class ListExposuresByRemediationV2Request < Struct.new(
+      :target_uid,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   An array of exposure findings returned by the operation.
+    #   @return [Array<Types::ExposureFinding>]
+    #
+    # @!attribute [rw] target_uid
+    #   The unique identifier (ID) of the remediation target that the
+    #   exposure findings are associated with.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   Provides comprehensive details about a resource.
+    #   @return [Types::RemediationResource]
+    #
+    # @!attribute [rw] total_count
+    #   The total count of exposure findings associated with the remediation
+    #   target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] trait
+    #   The specific trait associated with the remediation target.
+    #   @return [Types::RemediationTrait]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ListExposuresByRemediationV2Response AWS API Documentation
+    #
+    class ListExposuresByRemediationV2Response < Struct.new(
+      :items,
+      :target_uid,
+      :resource,
+      :total_count,
+      :trait,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -30491,6 +31173,598 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Enables the creation of criteria for remediation targets.
+    #
+    # @!attribute [rw] string_filters
+    #   Enables filtering based on string field values.
+    #   @return [Array<Types::RemediationStringFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationCompositeFilter AWS API Documentation
+    #
+    class RemediationCompositeFilter < Struct.new(
+      :string_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the criteria used to filter remediation targets, such as
+    # resource type, priority, or status.
+    #
+    # @!attribute [rw] composite_filters
+    #   A collection of complex filtering conditions that can be applied to
+    #   remediation target data.
+    #   @return [Array<Types::RemediationCompositeFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationFilters AWS API Documentation
+    #
+    class RemediationFilters < Struct.new(
+      :composite_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A remediation guidebook outlining guidance in resolving the
+    # remediation target.
+    #
+    # @!attribute [rw] target_type_name
+    #   The name of the remediation target type.
+    #   @return [String]
+    #
+    # @!attribute [rw] pattern
+    #   The remediation pattern of the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The guidance version.
+    #   @return [String]
+    #
+    # @!attribute [rw] context
+    #   The context behind the remediation target's existence and guidance.
+    #   @return [Types::RemediationGuidanceContext]
+    #
+    # @!attribute [rw] specification
+    #   The specification of the remediation target guidance. This outlines
+    #   required resource parameters and permissions, remediation steps, and
+    #   the end state.
+    #   @return [Types::RemediationGuidanceSpecification]
+    #
+    # @!attribute [rw] examples
+    #   Provided remediation guidance examples in different formats that can
+    #   be run for remediating the target.
+    #   @return [Types::RemediationGuidanceExamples]
+    #
+    # @!attribute [rw] metadata
+    #   The metadata of the remediation guidance.
+    #   @return [Types::RemediationGuidanceMetadata]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidance AWS API Documentation
+    #
+    class RemediationGuidance < Struct.new(
+      :target_type_name,
+      :pattern,
+      :version,
+      :context,
+      :specification,
+      :examples,
+      :metadata)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The context behind the remediation target's existence and guidance.
+    #
+    # @!attribute [rw] problem_statement
+    #   Explains the cause which directly created the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_assessment
+    #   An assessment of the existing risk the remediation target creates.
+    #   @return [String]
+    #
+    # @!attribute [rw] affected_scope
+    #   The scope of the resources affected by the resolution of the
+    #   remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] prerequisites
+    #   An array of prerequisite steps in resolving the remediation target.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidanceContext AWS API Documentation
+    #
+    class RemediationGuidanceContext < Struct.new(
+      :problem_statement,
+      :risk_assessment,
+      :affected_scope,
+      :prerequisites)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provided remediation guidance examples in different formats that can
+    # be run for remediating the target.
+    #
+    # @!attribute [rw] aws_cli
+    #   An CLI snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] cli
+    #   A CLI snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] python
+    #   A Python snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] terraform
+    #   A Terraform snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] cdk
+    #   A CDK snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_formation
+    #   A CloudFormation snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] ia_c
+    #   An IaC snippet version of the example.
+    #   @return [String]
+    #
+    # @!attribute [rw] template
+    #   A Template snippet version of the example.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidanceExamples AWS API Documentation
+    #
+    class RemediationGuidanceExamples < Struct.new(
+      :aws_cli,
+      :cli,
+      :python,
+      :terraform,
+      :cdk,
+      :cloud_formation,
+      :ia_c,
+      :template)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The metadata of the remediation guidance.
+    #
+    # @!attribute [rw] resource_type
+    #   The resource type of the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] exposure_type
+    #   The exposure type of the related exposure findings.
+    #   @return [String]
+    #
+    # @!attribute [rw] trait_titles
+    #   The titles of traits this guidance applies to.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] reversibility
+    #   The extent to which changes made in accordance with the guidance can
+    #   be reversed, for example `Fully reversible`.
+    #   @return [String]
+    #
+    # @!attribute [rw] fix_effect
+    #   When the fix takes effect, for example `Immediate` or `Deferred`.
+    #   @return [String]
+    #
+    # @!attribute [rw] risk_level
+    #   The risk when implementing the guidance provided.
+    #   @return [String]
+    #
+    # @!attribute [rw] automation_level
+    #   The extent to which the guidance can be automated, for example
+    #   `Full`.
+    #   @return [String]
+    #
+    # @!attribute [rw] human_review_required
+    #   Specifies whether human review is required.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] generated_at
+    #   Timestamp of when the guidance was generated.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub CSPM, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @!attribute [rw] verification_status
+    #   Verification status of the guidance.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidanceMetadata AWS API Documentation
+    #
+    class RemediationGuidanceMetadata < Struct.new(
+      :resource_type,
+      :exposure_type,
+      :trait_titles,
+      :reversibility,
+      :fix_effect,
+      :risk_level,
+      :automation_level,
+      :human_review_required,
+      :generated_at,
+      :verification_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specification of the remediation target guidance. This outlines
+    # required resource parameters and permissions, remediation steps, and
+    # the end state.
+    #
+    # @!attribute [rw] parameters
+    #   An array of the parameters used in running the steps provided.
+    #   @return [Array<Types::RemediationParameter>]
+    #
+    # @!attribute [rw] steps
+    #   An array of ordered steps for resolving the remediation targets.
+    #   @return [Array<Types::RemediationStep>]
+    #
+    # @!attribute [rw] expected_end_state
+    #   The expected end state of the associated resources after completion
+    #   of the steps.
+    #   @return [String]
+    #
+    # @!attribute [rw] required_permissions
+    #   An array of required permissions to run the steps.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationGuidanceSpecification AWS API Documentation
+    #
+    class RemediationGuidanceSpecification < Struct.new(
+      :parameters,
+      :steps,
+      :expected_end_state,
+      :required_permissions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The outcome from resolving the remediation target.
+    #
+    # @!attribute [rw] resolved_findings_count
+    #   The number of associated exposure findings that are resolved by
+    #   remediating the target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_reduction_findings_count
+    #   The number of associated exposure findings whose severity is reduced
+    #   by remediating the target.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] severity_unchanged_count
+    #   The number of associated exposure findings whose severity is
+    #   unchanged by remediating the target.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationOutcome AWS API Documentation
+    #
+    class RemediationOutcome < Struct.new(
+      :resolved_findings_count,
+      :severity_reduction_findings_count,
+      :severity_unchanged_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A parameter used in running the guidance steps.
+    #
+    # @!attribute [rw] name
+    #   The name of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] required
+    #   Specifies whether the parameter is required for running the guidance
+    #   steps.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationParameter AWS API Documentation
+    #
+    class RemediationParameter < Struct.new(
+      :name,
+      :type,
+      :description,
+      :required)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides comprehensive details about a resource.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account that recorded the resource data in
+    #   Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region in which Security Hub recorded the
+    #   resource data.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   The identifier of the cloud account that owns the resource. For
+    #   Amazon Web Services resources, this is the Amazon Web Services
+    #   account ID. For Azure resources, this is the Azure subscription ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_org_id
+    #   The identifier of the cloud organization that owns the resource. For
+    #   Amazon Web Services resources, this is the Organizations ID. For
+    #   Azure resources, this is the Azure tenant ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier for a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_guid
+    #   The global identifier used to identify a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The native cloud region where the resource is located. For Amazon
+    #   Web Services, this is an Amazon Web Services Region (for example,
+    #   `us-east-1`). For Azure resources, this is the Azure region (for
+    #   example, `westus2`). This field is always included.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_provider
+    #   The cloud provider where the resource exists.
+    #
+    #   * `AWS` specifies that the resource exists in Amazon Web Services.
+    #
+    #   * `Azure` specifies that the resource exists in Microsoft Azure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationResource AWS API Documentation
+    #
+    class RemediationResource < Struct.new(
+      :account_id,
+      :region,
+      :resource_owner_account_id,
+      :resource_owner_org_id,
+      :type,
+      :name,
+      :id,
+      :resource_guid,
+      :resource_region,
+      :cloud_provider)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A step in the remediation guidance.
+    #
+    # @!attribute [rw] phase
+    #   The phase of the remediation plan that this step belongs to (for
+    #   example, `FIX`).
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of what the step does.
+    #   @return [String]
+    #
+    # @!attribute [rw] service
+    #   Which service this step is performed in.
+    #   @return [String]
+    #
+    # @!attribute [rw] action
+    #   The action to be taken for this step.
+    #   @return [String]
+    #
+    # @!attribute [rw] logic
+    #   The logic behind the existence of this step.
+    #   @return [String]
+    #
+    # @!attribute [rw] inverse
+    #   The inverse of the step, to be used if the step needs to be rolled
+    #   back.
+    #   @return [String]
+    #
+    # @!attribute [rw] verify_after
+    #   The action to take after the step to verify its success.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationStep AWS API Documentation
+    #
+    class RemediationStep < Struct.new(
+      :phase,
+      :description,
+      :service,
+      :action,
+      :logic,
+      :inverse,
+      :verify_after)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A string filter for filtering remediation targets.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the filter field. Valid values are `Resource.Type`,
+    #   `Priority`, `Status`, `Resource.Id`,
+    #   `Resource.ResourceOwnerAccountId`, and `Resource.CloudProvider`.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The string filter definition.
+    #   @return [Types::RemediationStringFilterCondition]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationStringFilter AWS API Documentation
+    #
+    class RemediationStringFilter < Struct.new(
+      :field_name,
+      :filter)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The condition to apply to the string filter.
+    #
+    # @!attribute [rw] value
+    #   The value the string filter is comparing against.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationStringFilterCondition AWS API Documentation
+    #
+    class RemediationStringFilterCondition < Struct.new(
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of the remediation target.
+    #
+    # @!attribute [rw] action
+    #   A summarized action to take for the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_immediate
+    #   Specifies whether the effect of this target is immediate.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] post_remediation_steps
+    #   An array of steps to be taken after remediation.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] kb_articles
+    #   An array of `KbArticle` objects.
+    #   @return [Array<Types::KbArticle>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationSummaryDetail AWS API Documentation
+    #
+    class RemediationSummaryDetail < Struct.new(
+      :action,
+      :description,
+      :is_immediate,
+      :post_remediation_steps,
+      :kb_articles)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The trait associated with the remediation target.
+    #
+    # @!attribute [rw] type
+    #   The trait type.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The trait title.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationTrait AWS API Documentation
+    #
+    class RemediationTrait < Struct.new(
+      :type,
+      :title)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A remediation target.
+    #
+    # @!attribute [rw] target_uid
+    #   The unique identifier (ID) of the remediation target.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcome
+    #   The outcome of the remediation target's resolution.
+    #   @return [Types::RemediationOutcome]
+    #
+    # @!attribute [rw] priority
+    #   The remediation target's priority. Valid values are `Critical`,
+    #   `High`, `Medium`, and `Low`.
+    #   @return [String]
+    #
+    # @!attribute [rw] remediation_summary
+    #   A summary of the remediation target.
+    #   @return [Types::RemediationSummaryDetail]
+    #
+    # @!attribute [rw] resource
+    #   The remediation target's associated resource.
+    #   @return [Types::RemediationResource]
+    #
+    # @!attribute [rw] status
+    #   The current status of the remediation target.
+    #
+    #   * `New` specifies that the remediation target was newly identified.
+    #
+    #   * `Updated` specifies that the remediation target changed after it
+    #     was identified.
+    #
+    #   * `Resolved` specifies that the remediation target is no longer
+    #     present.
+    #   @return [String]
+    #
+    # @!attribute [rw] trait
+    #   The trait associated with the remediation target.
+    #   @return [Types::RemediationTrait]
+    #
+    # @!attribute [rw] guidance
+    #   The remediation target's guidance. Returned only when
+    #   `ShowGuidance` is `true` in the request.
+    #   @return [Types::RemediationGuidance]
+    #
+    # @!attribute [rw] updated_at
+    #   The remediation target's last updated timestamp.
+    #
+    #   For more information about the validation and formatting of
+    #   timestamp fields in Security Hub CSPM, see [Timestamps][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/Welcome.html#timestamps
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/RemediationV2Item AWS API Documentation
+    #
+    class RemediationV2Item < Struct.new(
+      :target_uid,
+      :outcome,
+      :priority,
+      :remediation_summary,
+      :resource,
+      :status,
+      :trait,
+      :guidance,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A resource related to a finding.
     #
     # @!attribute [rw] type
@@ -31456,6 +32730,14 @@ module Aws::SecurityHub
     #   structure.
     #   @return [Types::ResourceInfo]
     #
+    # @!attribute [rw] resource_criticality
+    #   The criticality assigned to a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] criticality_sources
+    #   The sources of criticalities determined from a resource.
+    #   @return [Array<Types::CriticalitySource>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/ResourceResult AWS API Documentation
     #
     class ResourceResult < Struct.new(
@@ -31479,7 +32761,9 @@ module Aws::SecurityHub
       :resource_config,
       :resource_sub_category,
       :discovery_type,
-      :resource_info)
+      :resource_info,
+      :resource_criticality,
+      :criticality_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -32412,6 +33696,62 @@ module Aws::SecurityHub
     #
     class RuleGroupVariablesPortSetsDetails < Struct.new(
       :definition)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 destination for an export, including the bucket, the
+    # Amazon Web Services KMS key used for encryption, and an optional
+    # object key prefix.
+    #
+    # @!attribute [rw] bucket_arn
+    #   The Amazon Resource Name (ARN) of the Amazon S3 bucket that Security
+    #   Hub writes the export to. You must own the bucket, and its bucket
+    #   policy must grant the Security Hub service principal
+    #   (`exportv2.securityhub.amazonaws.com`) permission to write objects.
+    #   For the required bucket policy, see the Examples section of
+    #   `StartExportJobV2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The ARN of the Amazon Web Services KMS key that Security Hub uses to
+    #   encrypt the export objects with server-side encryption. The key
+    #   policy must allow the Security Hub service principal
+    #   (`exportv2.securityhub.amazonaws.com`) to use the key through Amazon
+    #   S3. For the required key policy, see the Examples section of
+    #   `StartExportJobV2`.
+    #
+    #   The key must meet all of the following requirements:
+    #
+    #   * It must be a symmetric key with a key usage of `ENCRYPT_DECRYPT`.
+    #
+    #   * It must be a single-Region key. Multi-Region keys, whose key IDs
+    #     begin with `mrk-`, are rejected.
+    #
+    #   * You must specify the full key ARN. Key IDs and aliases are
+    #     rejected.
+    #
+    #   * The key must be in the same Amazon Web Services account as the
+    #     export job.
+    #
+    #   * The key must be in the same Amazon Web Services Region as the
+    #     export job.
+    #
+    #   * The key must be in the `aws`, `aws-cn`, or `aws-us-gov` partition.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_prefix
+    #   An optional key prefix that Security Hub prepends to the Amazon S3
+    #   object keys of the export output. Use a prefix to organize exports
+    #   within the bucket. The value can be up to 512 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/S3ExportDestination AWS API Documentation
+    #
+    class S3ExportDestination < Struct.new(
+      :bucket_arn,
+      :kms_key_arn,
+      :object_prefix)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33848,6 +35188,72 @@ module Aws::SecurityHub
     #
     class StartConfigurationPolicyDisassociationResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] name
+    #   An optional, user-provided name for the export job that helps you
+    #   identify it in `ListExportJobsV2` results. The value can be 1–256
+    #   characters. Alphanumeric characters, spaces, and the following ASCII
+    #   characters are permitted: `. _ , : ( ) / + -`.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination that Security Hub writes the export to. You must
+    #   specify exactly one destination type. Currently, the only supported
+    #   type is Amazon S3.
+    #   @return [Types::ExportDestination]
+    #
+    # @!attribute [rw] output_configuration
+    #   Specifies what data to export and how to format it. You must specify
+    #   exactly one output type. Currently, the only supported type is
+    #   `Findings`.
+    #   @return [Types::ExportOutput]
+    #
+    # @!attribute [rw] scopes
+    #   Limits the export to findings from specific organizational units
+    #   (OUs) or from the delegated administrator's organization. Only the
+    #   delegated administrator account can use this parameter; other
+    #   accounts that specify it receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator exports findings from all accounts across the entire
+    #   organization, and other accounts export only their own findings.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   you specify multiple entries, Security Hub combines them using OR
+    #   logic.
+    #   @return [Types::ExportScopes]
+    #
+    # @!attribute [rw] client_token
+    #   A unique identifier used to ensure idempotency.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartExportJobV2Request AWS API Documentation
+    #
+    class StartExportJobV2Request < Struct.new(
+      :name,
+      :destination,
+      :output_configuration,
+      :scopes,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] export_job_id
+    #   The unique identifier of the export job that Security Hub started.
+    #   Use this value with `GetExportJobV2` or `CancelExportJobV2`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/StartExportJobV2Response AWS API Documentation
+    #
+    class StartExportJobV2Response < Struct.new(
+      :export_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The definition of a custom action that can be used for stateless
     # packet handling.
     #
@@ -33962,7 +35368,14 @@ module Aws::SecurityHub
     #   * To search for values that include the filter value, use
     #     `CONTAINS`. For example, the filter `Title CONTAINS CloudFront`
     #     matches findings that have a `Title` that includes the string
-    #     CloudFront.
+    #     `CloudFront`.
+    #
+    #   * To search for values that contain a word matching the filter
+    #     value, regardless of case, use `CONTAINS_WORD`. For example, the
+    #     filter `Title CONTAINS_WORD lambda` matches a finding whose
+    #     `Title` is `GuardDuty Lambda Protection`, because the `Title`
+    #     contains the word Lambda. Including special characters in the
+    #     filter value might produce unexpected search results.
     #
     #   * To search for values that exactly match the filter value, use
     #     `EQUALS`. For example, the filter `AwsAccountId EQUALS

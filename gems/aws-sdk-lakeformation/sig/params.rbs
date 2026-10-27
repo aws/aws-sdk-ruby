@@ -65,6 +65,10 @@ module Aws
       lf_tag_expression: {
         catalog_id: ::String?,
         name: ::String
+      }?,
+      rls_policy: {
+        catalog_id: ::String?,
+        name: ::String
       }?
     }
 

@@ -1400,6 +1400,9 @@ module Aws::MediaLive
     class H264FilterSettings
       attr_accessor temporal_filter_settings: Types::TemporalFilterSettings
       attr_accessor bandwidth_reduction_filter_settings: Types::BandwidthReductionFilterSettings
+      attr_accessor auto_filter_settings: Types::AutoFilterSettings
+      attr_accessor none_filter_settings: Types::NoneFilterSettings
+      attr_accessor perceptual_filter_settings: Types::PerceptualFilterSettings
       SENSITIVE: []
     end
 
@@ -1448,6 +1451,7 @@ module Aws::MediaLive
       attr_accessor timecode_burnin_settings: Types::TimecodeBurninSettings
       attr_accessor min_qp: ::Integer
       attr_accessor min_bitrate: ::Integer
+      attr_accessor allow_explicit_weighted_prediction: ("DISABLED" | "ENABLED")
       SENSITIVE: []
     end
 
@@ -1464,6 +1468,9 @@ module Aws::MediaLive
     class H265FilterSettings
       attr_accessor temporal_filter_settings: Types::TemporalFilterSettings
       attr_accessor bandwidth_reduction_filter_settings: Types::BandwidthReductionFilterSettings
+      attr_accessor auto_filter_settings: Types::AutoFilterSettings
+      attr_accessor none_filter_settings: Types::NoneFilterSettings
+      attr_accessor perceptual_filter_settings: Types::PerceptualFilterSettings
       SENSITIVE: []
     end
 
@@ -3731,7 +3738,7 @@ module Aws::MediaLive
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       SENSITIVE: []
@@ -3791,7 +3798,7 @@ module Aws::MediaLive
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       attr_accessor request_id: ::String
@@ -3809,7 +3816,7 @@ module Aws::MediaLive
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       attr_accessor request_id: ::String
@@ -3831,7 +3838,7 @@ module Aws::MediaLive
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       SENSITIVE: []
@@ -3852,7 +3859,7 @@ module Aws::MediaLive
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       SENSITIVE: []
@@ -4120,7 +4127,7 @@ module Aws::MediaLive
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       SENSITIVE: []
@@ -4141,7 +4148,7 @@ module Aws::MediaLive
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       SENSITIVE: []
@@ -4623,7 +4630,7 @@ module Aws::MediaLive
       attr_accessor name: ::String
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       SENSITIVE: []
@@ -4639,7 +4646,7 @@ module Aws::MediaLive
       attr_accessor name: ::String
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       SENSITIVE: []
@@ -4660,7 +4667,7 @@ module Aws::MediaLive
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       SENSITIVE: []
@@ -4681,7 +4688,7 @@ module Aws::MediaLive
       attr_accessor period: ::Integer
       attr_accessor statistic: ("SampleCount" | "Average" | "Sum" | "Minimum" | "Maximum")
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION")
+      attr_accessor target_resource_type: ("CLOUDFRONT_DISTRIBUTION" | "MEDIALIVE_MULTIPLEX" | "MEDIALIVE_CHANNEL" | "MEDIALIVE_INPUT_DEVICE" | "MEDIAPACKAGE_CHANNEL" | "MEDIAPACKAGE_ORIGIN_ENDPOINT" | "MEDIACONNECT_FLOW" | "S3_BUCKET" | "MEDIATAILOR_PLAYBACK_CONFIGURATION" | "ELEMENTAL_INFERENCE_FEED")
       attr_accessor threshold: ::Float
       attr_accessor treat_missing_data: ("notBreaching" | "breaching" | "ignore" | "missing")
       SENSITIVE: []
@@ -4849,6 +4856,7 @@ module Aws::MediaLive
       attr_accessor temporal_aq: ("DISABLED" | "ENABLED")
       attr_accessor timecode_insertion: ("DISABLED" | "METADATA_OBU")
       attr_accessor bit_depth: ("DEPTH_10" | "DEPTH_8")
+      attr_accessor filter_settings: Types::Av1FilterSettings
       SENSITIVE: []
     end
 
@@ -6116,6 +6124,24 @@ module Aws::MediaLive
 
     class TextCaptionPositionSettings
       attr_accessor y_position_percentage: ::Integer
+      SENSITIVE: []
+    end
+
+    class AutoFilterSettings < Aws::EmptyStructure
+    end
+
+    class Av1FilterSettings
+      attr_accessor auto_filter_settings: Types::AutoFilterSettings
+      attr_accessor none_filter_settings: Types::NoneFilterSettings
+      attr_accessor perceptual_filter_settings: Types::PerceptualFilterSettings
+      SENSITIVE: []
+    end
+
+    class NoneFilterSettings < Aws::EmptyStructure
+    end
+
+    class PerceptualFilterSettings
+      attr_accessor strength: ("STRENGTH_1" | "STRENGTH_2")
       SENSITIVE: []
     end
   end

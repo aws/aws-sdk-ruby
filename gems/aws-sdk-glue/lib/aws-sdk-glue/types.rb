@@ -1270,6 +1270,36 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] result_ids
+    #   A list of unique result IDs for the data quality results.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityResultV2Request AWS API Documentation
+    #
+    class BatchGetDataQualityResultV2Request < Struct.new(
+      :result_ids)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of `DataQualityResultV2Item` objects representing the data
+    #   quality results.
+    #   @return [Array<Types::DataQualityResultV2Item>]
+    #
+    # @!attribute [rw] results_not_found
+    #   A list of result IDs for which results were not found.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetDataQualityResultV2Response AWS API Documentation
+    #
+    class BatchGetDataQualityResultV2Response < Struct.new(
+      :results,
+      :results_not_found)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] run_ids
     #   A list of unique run identifiers for the evaluation runs to
     #   retrieve.
@@ -1427,6 +1457,14 @@ module Aws::Glue
     #   Formation or Glue. Contains both a Lake Formation generated
     #   authorization identifier and information from the request's
     #   authorization context.
+    #
+    #   For more information about how to utilize QuerySessionContext, see
+    #   [Lake Formation workflow for application integration API
+    #   operations][1] in the developer guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html
     #   @return [Types::QuerySessionContext]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/BatchGetPartitionRequest AWS API Documentation
@@ -5236,6 +5274,10 @@ module Aws::Glue
     #   for the crawler instead of the IAM role credentials.
     #   @return [Types::LakeFormationConfiguration]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which the crawler's output is stored.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Crawler AWS API Documentation
     #
     class Crawler < Struct.new(
@@ -5258,7 +5300,8 @@ module Aws::Glue
       :version,
       :configuration,
       :crawler_security_configuration,
-      :lake_formation_configuration)
+      :lake_formation_configuration,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5808,6 +5851,12 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which to store the crawler's output.
+    #   If none is supplied, the Amazon Web Services account ID is used by
+    #   default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/CreateCrawlerRequest AWS API Documentation
     #
     class CreateCrawlerRequest < Struct.new(
@@ -5825,7 +5874,8 @@ module Aws::Glue
       :lake_formation_configuration,
       :configuration,
       :crawler_security_configuration,
-      :tags)
+      :tags,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7007,8 +7057,15 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs.
-    #   Accepts the value Z.2X for Ray jobs.
+    #   Accepts a value of G.025X, G.1X, G.2X, G.4X, G.8X, G.12X, G.16X,
+    #   R.1X, R.2X, R.4X, or R.8X for Spark jobs. Accepts the value Z.2X for
+    #   Ray jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
+    #     vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for low volume streaming
+    #     jobs. This worker type is only available for Glue version 3.0 or
+    #     later streaming jobs.
     #
     #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
     #     GB of memory) with 94GB disk, and provides 1 executor per worker.
@@ -7027,31 +7084,74 @@ module Aws::Glue
     #     worker. We recommend this worker type for jobs whose workloads
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs in the following Amazon Web Services
-    #     Regions: US East (Ohio), US East (N. Virginia), US West (N.
-    #     California), US West (Oregon), Asia Pacific (Mumbai), Asia Pacific
-    #     (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia
-    #     Pacific (Tokyo), Canada (Central), Europe (Frankfurt), Europe
-    #     (Ireland), Europe (London), Europe (Spain), Europe (Stockholm),
-    #     and South America (São Paulo).
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs,
     #     128 GB of memory) with 512GB disk, and provides 1 executor per
     #     worker. We recommend this worker type for jobs whose workloads
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs, in the same Amazon Web Services Regions
-    #     as supported for the `G.4X` worker type.
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
-    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
-    #     vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per
-    #     worker. We recommend this worker type for low volume streaming
-    #     jobs. This worker type is only available for Glue version 3.0 or
-    #     later streaming jobs.
+    #   * For the `G.12X` worker type, each worker maps to 12 DPU (48 vCPUs,
+    #     192 GB of memory) with 768GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `G.16X` worker type, each worker maps to 16 DPU (64 vCPUs,
+    #     256 GB of memory) with 1024GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.1X` worker type, each worker maps to 1 M-DPU (4 vCPUs,
+    #     32 GB of memory) with 94GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.2X` worker type, each worker maps to 2 M-DPU (8 vCPUs,
+    #     64 GB of memory) with 138GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.4X` worker type, each worker maps to 4 M-DPU (16 vCPUs,
+    #     128 GB of memory) with 256GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.8X` worker type, each worker maps to 8 M-DPU (32 vCPUs,
+    #     256 GB of memory) with 512GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs,
     #     64 GB of memory) with 128 GB disk, and provides up to 8 Ray
     #     workers based on the autoscaler.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
     # @!attribute [rw] code_gen_configuration_nodes
@@ -7762,8 +7862,9 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of G.1X, G.2X, G.4X, or G.8X for Spark jobs. Accepts
-    #   the value Z.2X for Ray notebooks.
+    #   Accepts a value of G.1X, G.2X, G.4X, G.8X, G.12X, G.16X, R.1X, R.2X,
+    #   R.4X, or R.8X for Spark jobs. Accepts the value Z.2X for Ray
+    #   notebooks.
     #
     #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
     #     GB of memory) with 94GB disk, and provides 1 executor per worker.
@@ -7782,23 +7883,74 @@ module Aws::Glue
     #     worker. We recommend this worker type for jobs whose workloads
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs in the following Amazon Web Services
-    #     Regions: US East (Ohio), US East (N. Virginia), US West (Oregon),
-    #     Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific
-    #     (Tokyo), Canada (Central), Europe (Frankfurt), Europe (Ireland),
-    #     and Europe (Stockholm).
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs,
     #     128 GB of memory) with 512GB disk, and provides 1 executor per
     #     worker. We recommend this worker type for jobs whose workloads
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs, in the same Amazon Web Services Regions
-    #     as supported for the `G.4X` worker type.
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `G.12X` worker type, each worker maps to 12 DPU (48 vCPUs,
+    #     192 GB of memory) with 768GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `G.16X` worker type, each worker maps to 16 DPU (64 vCPUs,
+    #     256 GB of memory) with 1024GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.1X` worker type, each worker maps to 1 M-DPU (4 vCPUs,
+    #     32 GB of memory) with 94GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.2X` worker type, each worker maps to 2 M-DPU (8 vCPUs,
+    #     64 GB of memory) with 138GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.4X` worker type, each worker maps to 4 M-DPU (16 vCPUs,
+    #     128 GB of memory) with 256GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.8X` worker type, each worker maps to 8 M-DPU (32 vCPUs,
+    #     256 GB of memory) with 512GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs,
     #     64 GB of memory) with 128 GB disk, and provides up to 8 Ray
     #     workers based on the autoscaler.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
     # @!attribute [rw] security_configuration
@@ -8715,6 +8867,33 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # The run configuration for a data quality result.
+    #
+    # @!attribute [rw] observations_enabled
+    #   Whether observations are enabled for the run. Valid values are:
+    #
+    #   * `ALL`
+    #
+    #   * `NONE`
+    #   @return [String]
+    #
+    # @!attribute [rw] observation_mode
+    #   The observation mode for the run. Valid values are:
+    #
+    #   * `SCHEDULED`
+    #
+    #   * `FIXED`
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityConfigurationV2 AWS API Documentation
+    #
+    class DataQualityConfigurationV2 < Struct.new(
+      :observations_enabled,
+      :observation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies how Data Quality assets in your account should be encrypted.
     #
     # @!attribute [rw] data_quality_encryption_mode
@@ -8975,8 +9154,9 @@ module Aws::Glue
     #   @return [Array<Types::DataQualityAnalyzerResult>]
     #
     # @!attribute [rw] observations
-    #   A list of `DataQualityObservation` objects representing the
-    #   observations generated after evaluating the rules and analyzers.
+    #   A list of `DataQualityObservation` objects representing the anomaly
+    #   detection observations generated after evaluating the rules and
+    #   analyzers.
     #   @return [Array<Types::DataQualityObservation>]
     #
     # @!attribute [rw] aggregated_metrics
@@ -9072,6 +9252,192 @@ module Aws::Glue
       :job_run_id,
       :started_after,
       :started_before)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a data quality result returned by
+    # `BatchGetDataQualityResultV2`.
+    #
+    # @!attribute [rw] result_id
+    #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The table associated with the data quality result, if any.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] dimensions
+    #   A map of platform-specific identifiers, such as cluster,
+    #   application, workgroup, or project IDs, that identify where the data
+    #   quality evaluation ran.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   A map of tags associated with the data quality result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] execution_started_on
+    #   The date and time when this data quality run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_completed_on
+    #   The date and time when this data quality run completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] result_published_on
+    #   The date and time when this data quality result was published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] score
+    #   An aggregate data quality score. Represents the ratio of rules that
+    #   passed to the total number of rules.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rule_results
+    #   A list of `DataQualityRuleResult` objects representing the results
+    #   for each rule.
+    #   @return [Array<Types::DataQualityRuleResult>]
+    #
+    # @!attribute [rw] analyzer_results
+    #   A list of `DataQualityAnalyzerResult` objects representing the
+    #   results for each analyzer.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   A list of `DataQualityObservation` objects representing the anomaly
+    #   detection observations generated after evaluating the rules and
+    #   analyzers.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context for the data quality result. This value
+    #   identifies a specific data quality result, or a series of related
+    #   results, within a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptors
+    #   A map of user-provided descriptors that add contextual metadata and
+    #   configuration to the data quality result, such as database name,
+    #   table name, team, or environment.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] aggregated_metrics
+    #   A summary of `DataQualityAggregatedMetrics` objects showing the
+    #   total counts of processed rows and rules, including their pass/fail
+    #   statistics based on row-level results.
+    #   @return [Types::DataQualityAggregatedMetrics]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of the ruleset associated with the data quality result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultV2Item AWS API Documentation
+    #
+    class DataQualityResultV2Item < Struct.new(
+      :result_id,
+      :data_source,
+      :dimensions,
+      :tags,
+      :execution_started_on,
+      :execution_completed_on,
+      :result_published_on,
+      :score,
+      :rule_results,
+      :analyzer_results,
+      :observations,
+      :evaluation_context,
+      :descriptors,
+      :aggregated_metrics,
+      :ruleset_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a data quality result returned by
+    # `ListDataQualityResultsV2`.
+    #
+    # @!attribute [rw] result_id
+    #   The unique result ID for this data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The table associated with the data quality result, if any.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] result_published_on
+    #   The date and time when this data quality result was published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dimensions
+    #   A map of platform-specific identifiers, such as cluster,
+    #   application, workgroup, or project IDs, that identify where the data
+    #   quality evaluation ran.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context for the data quality result. This value
+    #   identifies a specific data quality result, or a series of related
+    #   results, within a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptors
+    #   A map of user-provided descriptors that add contextual metadata and
+    #   configuration to the data quality result, such as database name,
+    #   table name, team, or environment.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultsV2Description AWS API Documentation
+    #
+    class DataQualityResultsV2Description < Struct.new(
+      :result_id,
+      :data_source,
+      :result_published_on,
+      :dimensions,
+      :evaluation_context,
+      :descriptors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the criteria used to filter the data quality results
+    # returned by `ListDataQualityResultsV2`.
+    #
+    # @!attribute [rw] data_source
+    #   The data source used to filter the results. For example, you can
+    #   retrieve all results for an Glue table. `DatabaseName` and
+    #   `TableName` are required. If you omit `CatalogId`, the catalog of
+    #   the calling account is used.
+    #
+    #   When you filter by data source, a page of results can be empty but
+    #   still include a `NextToken`. Keep requesting pages until `NextToken`
+    #   is absent.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] published_after
+    #   The time after which to include published results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] published_before
+    #   The time before which to include published results.
+    #   @return [Time]
+    #
+    # @!attribute [rw] dimensions
+    #   The platform dimensions to filter results by.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context to filter results by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityResultsV2FilterCriteria AWS API Documentation
+    #
+    class DataQualityResultsV2FilterCriteria < Struct.new(
+      :data_source,
+      :published_after,
+      :published_before,
+      :dimensions,
+      :evaluation_context)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9486,6 +9852,37 @@ module Aws::Glue
       :table_name,
       :database_name,
       :catalog_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] vcpu_hours
+    #   @return [Float]
+    #
+    # @!attribute [rw] flags_enabled
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] library_version
+    #   @return [String]
+    #
+    # @!attribute [rw] spark_version
+    #   @return [String]
+    #
+    # @!attribute [rw] host_runtime_version
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DataQualityTelemetry AWS API Documentation
+    #
+    class DataQualityTelemetry < Struct.new(
+      :vcpu_hours,
+      :flags_enabled,
+      :library_version,
+      :spark_version,
+      :host_runtime_version,
+      :engine)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9989,11 +10386,17 @@ module Aws::Glue
     #   The name of the table for which to delete column statistics.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/DeleteColumnStatisticsTaskSettingsRequest AWS API Documentation
     #
     class DeleteColumnStatisticsTaskSettingsRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13570,13 +13973,19 @@ module Aws::Glue
     #   A continuation token, if this is a continuation call.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskRunsRequest AWS API Documentation
     #
     class GetColumnStatisticsTaskRunsRequest < Struct.new(
       :database_name,
       :table_name,
       :max_results,
-      :next_token)
+      :next_token,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13606,11 +14015,17 @@ module Aws::Glue
     #   The name of the table for which to retrieve column statistics.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetColumnStatisticsTaskSettingsRequest AWS API Documentation
     #
     class GetColumnStatisticsTaskSettingsRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14154,8 +14569,9 @@ module Aws::Glue
     #   @return [Array<Types::DataQualityAnalyzerResult>]
     #
     # @!attribute [rw] observations
-    #   A list of `DataQualityObservation` objects representing the
-    #   observations generated after evaluating the rules and analyzers.
+    #   A list of `DataQualityObservation` objects representing the anomaly
+    #   detection observations generated after evaluating the rules and
+    #   analyzers.
     #   @return [Array<Types::DataQualityObservation>]
     #
     # @!attribute [rw] aggregated_metrics
@@ -14182,6 +14598,118 @@ module Aws::Glue
       :analyzer_results,
       :observations,
       :aggregated_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_id
+    #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultV2Request AWS API Documentation
+    #
+    class GetDataQualityResultV2Request < Struct.new(
+      :result_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_id
+    #   A unique result ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source
+    #   The table associated with the data quality result, if any.
+    #   @return [Types::DataSource]
+    #
+    # @!attribute [rw] profile_id
+    #   The Profile ID for the data quality result.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimensions
+    #   A map of platform-specific identifiers, such as cluster,
+    #   application, workgroup, or project IDs, that identify where the data
+    #   quality evaluation ran.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   A map of tags associated with the data quality result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] execution_started_on
+    #   The date and time when this data quality run started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_completed_on
+    #   The date and time when this data quality run completed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] result_published_on
+    #   The date and time when this data quality result was published.
+    #   @return [Time]
+    #
+    # @!attribute [rw] score
+    #   An aggregate data quality score. Represents the ratio of rules that
+    #   passed to the total number of rules.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rule_results
+    #   A list of `DataQualityRuleResult` objects representing the results
+    #   for each rule.
+    #   @return [Array<Types::DataQualityRuleResult>]
+    #
+    # @!attribute [rw] analyzer_results
+    #   A list of `DataQualityAnalyzerResult` objects representing the
+    #   results for each analyzer.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   A list of `DataQualityObservation` objects representing the anomaly
+    #   detection observations generated after evaluating the rules and
+    #   analyzers.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context for the data quality result. This value
+    #   identifies a specific data quality result, or a series of related
+    #   results, within a run.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptors
+    #   A map of user-provided descriptors that add contextual metadata and
+    #   configuration to the data quality result, such as database name,
+    #   table name, team, or environment.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] aggregated_metrics
+    #   A summary of `DataQualityAggregatedMetrics` objects showing the
+    #   total counts of processed rows and rules, including their pass/fail
+    #   statistics based on row-level results.
+    #   @return [Types::DataQualityAggregatedMetrics]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The name of the ruleset associated with the data quality result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetDataQualityResultV2Response AWS API Documentation
+    #
+    class GetDataQualityResultV2Response < Struct.new(
+      :result_id,
+      :data_source,
+      :profile_id,
+      :dimensions,
+      :tags,
+      :execution_started_on,
+      :execution_completed_on,
+      :result_published_on,
+      :score,
+      :rule_results,
+      :analyzer_results,
+      :observations,
+      :evaluation_context,
+      :descriptors,
+      :aggregated_metrics,
+      :ruleset_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16419,6 +16947,59 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] job_name
+    #   The name of the job.
+    #   @return [String]
+    #
+    # @!attribute [rw] run_id
+    #   The ID of the job run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForJobRunRequest AWS API Documentation
+    #
+    class GetSystemLogsForJobRunRequest < Struct.new(
+      :job_name,
+      :run_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] system_logs_url
+    #   The URL to download the system logs for the job run.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForJobRunResponse AWS API Documentation
+    #
+    class GetSystemLogsForJobRunResponse < Struct.new(
+      :system_logs_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForSessionRequest AWS API Documentation
+    #
+    class GetSystemLogsForSessionRequest < Struct.new(
+      :id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] system_logs_url
+    #   The URL to download the system logs for the session.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetSystemLogsForSessionResponse AWS API Documentation
+    #
+    class GetSystemLogsForSessionResponse < Struct.new(
+      :system_logs_url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] catalog_id
     #   The Catalog ID of the table.
     #   @return [String]
@@ -16702,6 +17283,17 @@ module Aws::Glue
     #   [1]: https://docs.aws.amazon.com/glue/latest/webapi/API_AuditContext.html
     #   @return [Types::AuditContext]
     #
+    # @!attribute [rw] resource_share_type
+    #   Specifies which tables the `GetTables` call returns. The allowable
+    #   values are `FEDERATED` or `ALL`.
+    #
+    #   * If set to `FEDERATED`, returns only federated tables, which
+    #     reference an entity outside the Glue Data Catalog.
+    #
+    #   * If set to `ALL`, returns all tables in the database, both
+    #     federated and non-federated.
+    #   @return [String]
+    #
     # @!attribute [rw] include_status_details
     #   Specifies whether to include status details related to a request to
     #   create or update an Glue Data Catalog view.
@@ -16730,6 +17322,7 @@ module Aws::Glue
       :transaction_id,
       :query_as_of_time,
       :audit_context,
+      :resource_share_type,
       :include_status_details,
       :attributes_to_get)
       SENSITIVE = []
@@ -18972,12 +19565,29 @@ module Aws::Glue
     #   Amazon Redshift and Amazon S3.
     #   @return [Boolean]
     #
+    # @!attribute [rw] target_namespace
+    #   An optional custom namespace for the integration's target. Supply
+    #   this parameter only when the target is an Amazon S3 Tables table
+    #   bucket; it is not accepted for other target types. The integration
+    #   replicates data into the namespace you specify, reusing it if it
+    #   already exists. If you omit this parameter, the target namespace
+    #   defaults to `zetl_` followed by the integration ID, with hyphens
+    #   converted to underscores.
+    #
+    #   The value is immutable after the integration is created;
+    #   `ModifyIntegration` rejects changes to it. It must be a valid Amazon
+    #   S3 Tables namespace name: 1 to 255 characters using lowercase
+    #   letters, numbers, and underscores, with no leading or trailing
+    #   underscore and no reserved `aws` prefix.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/IntegrationConfig AWS API Documentation
     #
     class IntegrationConfig < Struct.new(
       :refresh_interval,
       :source_properties,
-      :continuous_sync)
+      :continuous_sync,
+      :target_namespace)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19865,13 +20475,23 @@ module Aws::Glue
     #
     #   R Worker Types (Memory-optimized workers):
     #
-    #   * R.1X: 1 M-DPU (4 vCPUs, 32 GB memory)
+    #   * R.1X: 1 M-DPU (4 vCPUs, 32 GB memory, 94GB disk)
     #
-    #   * R.2X: 2 M-DPU (8 vCPUs, 64 GB memory)
+    #   * R.2X: 2 M-DPU (8 vCPUs, 64 GB memory, 138GB disk)
     #
-    #   * R.4X: 4 M-DPU (16 vCPUs, 128 GB memory)
+    #   * R.4X: 4 M-DPU (16 vCPUs, 128 GB memory, 256GB disk)
     #
-    #   * R.8X: 8 M-DPU (32 vCPUs, 256 GB memory)
+    #   * R.8X: 8 M-DPU (32 vCPUs, 256 GB memory, 512GB disk)
+    #
+    #   The `G.12X`, `G.16X`, and `R.1X` through `R.8X` worker types are
+    #   available only for Glue version 4.0 or later Spark ETL jobs in
+    #   select Amazon Web Services Regions. For the supported Regions, see
+    #   [Configuring job properties for Spark jobs][1] in the developer
+    #   guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -20288,8 +20908,15 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs.
-    #   Accepts the value Z.2X for Ray jobs.
+    #   Accepts a value of G.025X, G.1X, G.2X, G.4X, G.8X, G.12X, G.16X,
+    #   R.1X, R.2X, R.4X, or R.8X for Spark jobs. Accepts the value Z.2X for
+    #   Ray jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
+    #     vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for low volume streaming
+    #     jobs. This worker type is only available for Glue version 3.0 or
+    #     later streaming jobs.
     #
     #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
     #     GB of memory) with 94GB disk, and provides 1 executor per worker.
@@ -20308,29 +20935,74 @@ module Aws::Glue
     #     worker. We recommend this worker type for jobs whose workloads
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs in the following Amazon Web Services
-    #     Regions: US East (Ohio), US East (N. Virginia), US West (Oregon),
-    #     Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific
-    #     (Tokyo), Canada (Central), Europe (Frankfurt), Europe (Ireland),
-    #     and Europe (Stockholm).
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs,
     #     128 GB of memory) with 512GB disk, and provides 1 executor per
     #     worker. We recommend this worker type for jobs whose workloads
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs, in the same Amazon Web Services Regions
-    #     as supported for the `G.4X` worker type.
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
-    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
-    #     vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per
-    #     worker. We recommend this worker type for low volume streaming
-    #     jobs. This worker type is only available for Glue version 3.0 or
-    #     later streaming jobs.
+    #   * For the `G.12X` worker type, each worker maps to 12 DPU (48 vCPUs,
+    #     192 GB of memory) with 768GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `G.16X` worker type, each worker maps to 16 DPU (64 vCPUs,
+    #     256 GB of memory) with 1024GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.1X` worker type, each worker maps to 1 M-DPU (4 vCPUs,
+    #     32 GB of memory) with 94GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.2X` worker type, each worker maps to 2 M-DPU (8 vCPUs,
+    #     64 GB of memory) with 138GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.4X` worker type, each worker maps to 4 M-DPU (16 vCPUs,
+    #     128 GB of memory) with 256GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.8X` worker type, each worker maps to 8 M-DPU (32 vCPUs,
+    #     256 GB of memory) with 512GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs,
     #     64 GB of memory) with 128 GB disk, and provides up to 8 Ray
     #     workers based on the autoscaler.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -20642,13 +21314,21 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs.
-    #   Accepts the value Z.2X for Ray jobs. For more information, see
-    #   [Defining job properties for Spark jobs ][1]
+    #   Accepts a value of G.025X, G.1X, G.2X, G.4X, G.8X, G.12X, G.16X,
+    #   R.1X, R.2X, R.4X, or R.8X for Spark jobs. Accepts the value Z.2X for
+    #   Ray jobs. For more information, see [Defining job properties for
+    #   Spark jobs ][1]
+    #
+    #   The `G.12X`, `G.16X`, and `R.1X` through `R.8X` worker types are
+    #   available only for Glue version 4.0 or later Spark ETL jobs in
+    #   select Amazon Web Services Regions. For the supported Regions, see
+    #   [Configuring job properties for Spark jobs][2] in the developer
+    #   guide.
     #
     #
     #
     #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html#create-job
+    #   [2]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -21628,6 +22308,46 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResultsResponse AWS API Documentation
     #
     class ListDataQualityResultsResponse < Struct.new(
+      :results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filter
+    #   The filter criteria.
+    #   @return [Types::DataQualityResultsV2FilterCriteria]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to retrieve the next page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. If you don't specify a
+    #   value, the operation uses the default number of results.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResultsV2Request AWS API Documentation
+    #
+    class ListDataQualityResultsV2Request < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] results
+    #   A list of `DataQualityResultsV2Description` objects.
+    #   @return [Array<Types::DataQualityResultsV2Description>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token, if more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ListDataQualityResultsV2Response AWS API Documentation
+    #
+    class ListDataQualityResultsV2Response < Struct.new(
       :results,
       :next_token)
       SENSITIVE = []
@@ -23806,7 +24526,7 @@ module Aws::Glue
     #
     # @!attribute [rw] o_auth_2_grant_type
     #   The OAuth2 grant type. For example, `AUTHORIZATION_CODE`,
-    #   `JWT_BEARER`, or `CLIENT_CREDENTIALS`.
+    #   `JWT_BEARER`, `REFRESH_TOKEN`, or `CLIENT_CREDENTIALS`.
     #   @return [String]
     #
     # @!attribute [rw] o_auth_2_client_application
@@ -23839,7 +24559,8 @@ module Aws::Glue
     #
     # @!attribute [rw] o_auth_2_grant_type
     #   The OAuth2 grant type in the CreateConnection request. For example,
-    #   `AUTHORIZATION_CODE`, `JWT_BEARER`, or `CLIENT_CREDENTIALS`.
+    #   `AUTHORIZATION_CODE`, `JWT_BEARER`, `REFRESH_TOKEN`, or
+    #   `CLIENT_CREDENTIALS`.
     #   @return [String]
     #
     # @!attribute [rw] o_auth_2_client_application
@@ -24707,6 +25428,112 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] dimensions
+    #   The dimensions for the result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] tags
+    #   The tags for the result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] execution_started_on
+    #   The time execution started for the result.
+    #   @return [Time]
+    #
+    # @!attribute [rw] execution_completed_on
+    #   The time execution completed for the result.
+    #   @return [Time]
+    #
+    # @!attribute [rw] score
+    #   The score for the result.
+    #   @return [Float]
+    #
+    # @!attribute [rw] rule_results
+    #   The rule level results.
+    #   @return [Array<Types::DataQualityRuleResult>]
+    #
+    # @!attribute [rw] analyzer_results
+    #   The analyzer level results.
+    #   @return [Array<Types::DataQualityAnalyzerResult>]
+    #
+    # @!attribute [rw] observations
+    #   The observations for the result.
+    #   @return [Array<Types::DataQualityObservation>]
+    #
+    # @!attribute [rw] aggregated_metrics
+    #   The aggregated metrics for the result.
+    #   @return [Types::DataQualityAggregatedMetrics]
+    #
+    # @!attribute [rw] statistics
+    #   The statistics for the result.
+    #   @return [Array<Types::StatisticSummary>]
+    #
+    # @!attribute [rw] run_configuration
+    #   The run configuration for the result.
+    #   @return [Types::DataQualityConfigurationV2]
+    #
+    # @!attribute [rw] client_token
+    #   The client token for the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] evaluation_context
+    #   The evaluation context for the result.
+    #   @return [String]
+    #
+    # @!attribute [rw] descriptors
+    #   The descriptors for the result.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] ruleset_name
+    #   The ruleset name for the result.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_quality_security_configuration
+    #   The security configuration for the result.
+    #   @return [String]
+    #
+    # @!attribute [rw] telemetry
+    #   @return [Types::DataQualityTelemetry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PublishDataQualityResultV2Request AWS API Documentation
+    #
+    class PublishDataQualityResultV2Request < Struct.new(
+      :dimensions,
+      :tags,
+      :execution_started_on,
+      :execution_completed_on,
+      :score,
+      :rule_results,
+      :analyzer_results,
+      :observations,
+      :aggregated_metrics,
+      :statistics,
+      :run_configuration,
+      :client_token,
+      :evaluation_context,
+      :descriptors,
+      :ruleset_name,
+      :data_quality_security_configuration,
+      :telemetry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] result_id
+    #   The ID of the result.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/PublishDataQualityResultV2Response AWS API Documentation
+    #
+    class PublishDataQualityResultV2Response < Struct.new(
+      :result_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] asset_type_id
     #   The identifier of the asset type for the asset.
     #   @return [String]
@@ -25291,6 +26118,14 @@ module Aws::Glue
     # authorization identifier and information from the request's
     # authorization context.
     #
+    # For more information about how to utilize QuerySessionContext, see
+    # [Lake Formation workflow for application integration API
+    # operations][1] in the developer guide.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/lake-formation/latest/dg/api-overview.html
+    #
     # @!attribute [rw] query_id
     #   A unique identifier generated by the query engine for the query.
     #   @return [String]
@@ -25320,6 +26155,22 @@ module Aws::Glue
       :cluster_id,
       :query_authorization_id,
       :additional_context)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A structure that describes the default row-level security policy of a
+    # table.
+    #
+    # @!attribute [rw] default_rls_policy
+    #   The name of the default row-level security policy applied to the
+    #   table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/RLSProperties AWS API Documentation
+    #
+    class RLSProperties < Struct.new(
+      :default_rls_policy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -28319,8 +29170,19 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a session runs.
-    #   Accepts a value of `G.1X`, `G.2X`, `G.4X`, or `G.8X` for Spark
-    #   sessions. Accepts the value `Z.2X` for Ray sessions.
+    #   Accepts a value of `G.1X`, `G.2X`, `G.4X`, `G.8X`, `G.12X`, `G.16X`,
+    #   `R.1X`, `R.2X`, `R.4X`, or `R.8X` for Spark sessions. Accepts the
+    #   value `Z.2X` for Ray sessions.
+    #
+    #   The `G.12X`, `G.16X`, and `R.1X` through `R.8X` worker types are
+    #   available only for Glue version 4.0 or later Spark ETL jobs in
+    #   select Amazon Web Services Regions. For the supported Regions, see
+    #   [Configuring job properties for Spark jobs][1] in the developer
+    #   guide.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
     # @!attribute [rw] completed_on
@@ -29131,11 +29993,17 @@ module Aws::Glue
     #   schedule.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartColumnStatisticsTaskRunScheduleRequest AWS API Documentation
     #
     class StartColumnStatisticsTaskRunScheduleRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -29513,8 +30381,15 @@ module Aws::Glue
     #
     # @!attribute [rw] worker_type
     #   The type of predefined worker that is allocated when a job runs.
-    #   Accepts a value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs.
-    #   Accepts the value Z.2X for Ray jobs.
+    #   Accepts a value of G.025X, G.1X, G.2X, G.4X, G.8X, G.12X, G.16X,
+    #   R.1X, R.2X, R.4X, or R.8X for Spark jobs. Accepts the value Z.2X for
+    #   Ray jobs.
+    #
+    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
+    #     vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for low volume streaming
+    #     jobs. This worker type is only available for Glue version 3.0 or
+    #     later streaming jobs.
     #
     #   * For the `G.1X` worker type, each worker maps to 1 DPU (4 vCPUs, 16
     #     GB of memory) with 94GB disk, and provides 1 executor per worker.
@@ -29533,29 +30408,74 @@ module Aws::Glue
     #     worker. We recommend this worker type for jobs whose workloads
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs in the following Amazon Web Services
-    #     Regions: US East (Ohio), US East (N. Virginia), US West (Oregon),
-    #     Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific
-    #     (Tokyo), Canada (Central), Europe (Frankfurt), Europe (Ireland),
-    #     and Europe (Stockholm).
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `G.8X` worker type, each worker maps to 8 DPU (32 vCPUs,
     #     128 GB of memory) with 512GB disk, and provides 1 executor per
     #     worker. We recommend this worker type for jobs whose workloads
     #     contain your most demanding transforms, aggregations, joins, and
     #     queries. This worker type is available only for Glue version 3.0
-    #     or later Spark ETL jobs, in the same Amazon Web Services Regions
-    #     as supported for the `G.4X` worker type.
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
-    #   * For the `G.025X` worker type, each worker maps to 0.25 DPU (2
-    #     vCPUs, 4 GB of memory) with 84GB disk, and provides 1 executor per
-    #     worker. We recommend this worker type for low volume streaming
-    #     jobs. This worker type is only available for Glue version 3.0 or
-    #     later streaming jobs.
+    #   * For the `G.12X` worker type, each worker maps to 12 DPU (48 vCPUs,
+    #     192 GB of memory) with 768GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `G.16X` worker type, each worker maps to 16 DPU (64 vCPUs,
+    #     256 GB of memory) with 1024GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for jobs with very large
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.1X` worker type, each worker maps to 1 M-DPU (4 vCPUs,
+    #     32 GB of memory) with 94GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.2X` worker type, each worker maps to 2 M-DPU (8 vCPUs,
+    #     64 GB of memory) with 138GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.4X` worker type, each worker maps to 4 M-DPU (16 vCPUs,
+    #     128 GB of memory) with 256GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
+    #
+    #   * For the `R.8X` worker type, each worker maps to 8 M-DPU (32 vCPUs,
+    #     256 GB of memory) with 512GB disk, and provides 1 executor per
+    #     worker. We recommend this worker type for memory-intensive
+    #     workloads. This worker type is available only for Glue version 4.0
+    #     or later Spark ETL jobs in select Amazon Web Services Regions. For
+    #     the supported Regions, see [Configuring job properties for Spark
+    #     jobs][1] in the developer guide.
     #
     #   * For the `Z.2X` worker type, each worker maps to 2 M-DPU (8vCPUs,
     #     64 GB of memory) with 128 GB disk, and provides up to 8 Ray
     #     workers based on the autoscaler.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
     #   @return [String]
     #
     # @!attribute [rw] number_of_workers
@@ -30056,11 +30976,17 @@ module Aws::Glue
     #   The name of the table.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunRequest AWS API Documentation
     #
     class StopColumnStatisticsTaskRunRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30078,11 +31004,17 @@ module Aws::Glue
     #   schedule.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog where the table resides. If none is
+    #   supplied, the Amazon Web Services account ID is used by default.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopColumnStatisticsTaskRunScheduleRequest AWS API Documentation
     #
     class StopColumnStatisticsTaskRunScheduleRequest < Struct.new(
       :database_name,
-      :table_name)
+      :table_name,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30567,6 +31499,11 @@ module Aws::Glue
     #   Indicates the the state of an asynchronous change to a table.
     #   @return [Types::TableStatus]
     #
+    # @!attribute [rw] rls_properties
+    #   A `RLSProperties` structure that describes the default row-level
+    #   security policy of the table.
+    #   @return [Types::RLSProperties]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Table AWS API Documentation
     #
     class Table < Struct.new(
@@ -30595,7 +31532,8 @@ module Aws::Glue
       :is_multi_dialect_view,
       :is_materialized_view,
       :iceberg_table_metadata,
-      :status)
+      :status,
+      :rls_properties)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -30730,6 +31668,13 @@ module Aws::Glue
     #   resource linking.
     #   @return [Types::TableIdentifier]
     #
+    # @!attribute [rw] federated_table
+    #   A `FederatedTable` structure that references an entity outside the
+    #   Glue Data Catalog. Specify this field to create a federated table,
+    #   which points to a table in an external metastore instead of
+    #   describing data managed in the Glue Data Catalog.
+    #   @return [Types::FederatedTable]
+    #
     # @!attribute [rw] view_definition
     #   A structure that contains all the information that defines the view,
     #   including the dialect or dialects for the view, and the query.
@@ -30751,6 +31696,7 @@ module Aws::Glue
       :table_type,
       :parameters,
       :target_table,
+      :federated_table,
       :view_definition)
       SENSITIVE = []
       include Aws::Structure
@@ -32271,6 +33217,12 @@ module Aws::Glue
     #   crawler.
     #   @return [String]
     #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog in which to store the crawler's output.
+    #   If you omit this value, the existing value on the crawler is
+    #   preserved.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UpdateCrawlerRequest AWS API Documentation
     #
     class UpdateCrawlerRequest < Struct.new(
@@ -32287,7 +33239,8 @@ module Aws::Glue
       :lineage_configuration,
       :lake_formation_configuration,
       :configuration,
-      :crawler_security_configuration)
+      :crawler_security_configuration,
+      :catalog_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -33758,6 +34711,10 @@ module Aws::Glue
     #   understand the guarantees provided, if any.
     #   @return [Boolean]
     #
+    # @!attribute [rw] is_managed
+    #   Specifies whether the materialized view is managed by Glue.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] definer
     #   The definer of a view in SQL.
     #   @return [String]
@@ -33809,6 +34766,7 @@ module Aws::Glue
     #
     class ViewDefinition < Struct.new(
       :is_protected,
+      :is_managed,
       :definer,
       :view_version_id,
       :view_version_token,
@@ -33831,6 +34789,10 @@ module Aws::Glue
     #   query planning. However, setting this flag does not guarantee that
     #   the engine will comply. Refer to the engine's documentation to
     #   understand the guarantees provided, if any.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] is_managed
+    #   Specifies whether the materialized view is managed by Glue.
     #   @return [Boolean]
     #
     # @!attribute [rw] definer
@@ -33886,6 +34848,7 @@ module Aws::Glue
     #
     class ViewDefinitionInput < Struct.new(
       :is_protected,
+      :is_managed,
       :definer,
       :representations,
       :view_version_id,

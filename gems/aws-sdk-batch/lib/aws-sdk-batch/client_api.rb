@@ -121,12 +121,16 @@ module Aws::Batch
     EcsSettings = Shapes::StructureShape.new(name: 'EcsSettings')
     EcsTaskDetails = Shapes::StructureShape.new(name: 'EcsTaskDetails')
     EcsTaskProperties = Shapes::StructureShape.new(name: 'EcsTaskProperties')
+    EksAccessEntry = Shapes::StructureShape.new(name: 'EksAccessEntry')
+    EksAccessEntryDesiredState = Shapes::StringShape.new(name: 'EksAccessEntryDesiredState')
+    EksAccessEntryStatus = Shapes::StringShape.new(name: 'EksAccessEntryStatus')
     EksAnnotationsMap = Shapes::MapShape.new(name: 'EksAnnotationsMap')
     EksAttemptContainerDetail = Shapes::StructureShape.new(name: 'EksAttemptContainerDetail')
     EksAttemptContainerDetails = Shapes::ListShape.new(name: 'EksAttemptContainerDetails')
     EksAttemptDetail = Shapes::StructureShape.new(name: 'EksAttemptDetail')
     EksAttemptDetails = Shapes::ListShape.new(name: 'EksAttemptDetails')
     EksConfiguration = Shapes::StructureShape.new(name: 'EksConfiguration')
+    EksConfigurationUpdate = Shapes::StructureShape.new(name: 'EksConfigurationUpdate')
     EksContainer = Shapes::StructureShape.new(name: 'EksContainer')
     EksContainerDetail = Shapes::StructureShape.new(name: 'EksContainerDetail')
     EksContainerDetails = Shapes::ListShape.new(name: 'EksContainerDetails')
@@ -926,6 +930,10 @@ module Aws::Batch
     EcsTaskProperties.add_member(:network_mode, Shapes::ShapeRef.new(shape: String, location_name: "networkMode"))
     EcsTaskProperties.struct_class = Types::EcsTaskProperties
 
+    EksAccessEntry.add_member(:desired_state, Shapes::ShapeRef.new(shape: EksAccessEntryDesiredState, required: true, location_name: "desiredState"))
+    EksAccessEntry.add_member(:status, Shapes::ShapeRef.new(shape: EksAccessEntryStatus, location_name: "status"))
+    EksAccessEntry.struct_class = Types::EksAccessEntry
+
     EksAnnotationsMap.key = Shapes::ShapeRef.new(shape: String)
     EksAnnotationsMap.value = Shapes::ShapeRef.new(shape: String)
 
@@ -952,7 +960,11 @@ module Aws::Batch
 
     EksConfiguration.add_member(:eks_cluster_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "eksClusterArn"))
     EksConfiguration.add_member(:kubernetes_namespace, Shapes::ShapeRef.new(shape: String, required: true, location_name: "kubernetesNamespace"))
+    EksConfiguration.add_member(:access_entry, Shapes::ShapeRef.new(shape: EksAccessEntry, location_name: "accessEntry"))
     EksConfiguration.struct_class = Types::EksConfiguration
+
+    EksConfigurationUpdate.add_member(:access_entry, Shapes::ShapeRef.new(shape: EksAccessEntry, location_name: "accessEntry"))
+    EksConfigurationUpdate.struct_class = Types::EksConfigurationUpdate
 
     EksContainer.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     EksContainer.add_member(:image, Shapes::ShapeRef.new(shape: String, required: true, location_name: "image"))
@@ -1949,6 +1961,7 @@ module Aws::Batch
     UpdateComputeEnvironmentRequest.add_member(:update_policy, Shapes::ShapeRef.new(shape: UpdatePolicy, location_name: "updatePolicy"))
     UpdateComputeEnvironmentRequest.add_member(:context, Shapes::ShapeRef.new(shape: String, location_name: "context"))
     UpdateComputeEnvironmentRequest.add_member(:ecs_settings, Shapes::ShapeRef.new(shape: EcsSettings, location_name: "ecsSettings"))
+    UpdateComputeEnvironmentRequest.add_member(:eks_configuration, Shapes::ShapeRef.new(shape: EksConfigurationUpdate, location_name: "eksConfiguration"))
     UpdateComputeEnvironmentRequest.struct_class = Types::UpdateComputeEnvironmentRequest
 
     UpdateComputeEnvironmentResponse.add_member(:compute_environment_name, Shapes::ShapeRef.new(shape: String, location_name: "computeEnvironmentName"))

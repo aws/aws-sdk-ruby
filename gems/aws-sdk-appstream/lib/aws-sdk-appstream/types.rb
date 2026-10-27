@@ -2441,6 +2441,15 @@ module Aws::AppStream
     #   access is enabled for the stack.
     #   @return [Types::AgentAccessConfig]
     #
+    # @!attribute [rw] storage_connector_authentication
+    #   Specifies whether users' cloud storage authentication persists
+    #   across streaming sessions. When you specify FORCE\_REAUTHENTICATION,
+    #   WorkSpaces Applications removes the stored authentication for the
+    #   stack's OneDrive and Google Drive connectors when a user's session
+    #   ends. The user links their cloud storage again on their next
+    #   session. The default is REUSE\_CREDENTIALS.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/CreateStackRequest AWS API Documentation
     #
     class CreateStackRequest < Struct.new(
@@ -2457,7 +2466,8 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
-      :agent_access_config)
+      :agent_access_config,
+      :storage_connector_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4889,6 +4899,10 @@ module Aws::AppStream
     #   Accelerated instance families.
     #   @return [String]
     #
+    # @!attribute [rw] image_software_metadata
+    #   The software metadata associated with the image.
+    #   @return [Types::ImageSoftwareMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Image AWS API Documentation
     #
     class Image < Struct.new(
@@ -4914,7 +4928,8 @@ module Aws::AppStream
       :dynamic_app_providers_enabled,
       :image_shared_with_others,
       :managed_software_included,
-      :image_type)
+      :image_type,
+      :image_software_metadata)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5183,6 +5198,22 @@ module Aws::AppStream
     class ImagePermissions < Struct.new(
       :allow_fleet,
       :allow_image_builder)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the software metadata for an image, such as the installed
+    # NVIDIA GRID driver version.
+    #
+    # @!attribute [rw] nvidia_grid_driver_version
+    #   The version of the NVIDIA GRID driver installed on the image. This
+    #   field is empty if no NVIDIA GRID driver is installed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/ImageSoftwareMetadata AWS API Documentation
+    #
+    class ImageSoftwareMetadata < Struct.new(
+      :nvidia_grid_driver_version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5985,6 +6016,15 @@ module Aws::AppStream
     #   enabled.
     #   @return [Types::AgentAccessConfig]
     #
+    # @!attribute [rw] storage_connector_authentication
+    #   Indicates whether users' cloud storage authentication persists
+    #   across streaming sessions. When this attribute is
+    #   FORCE\_REAUTHENTICATION, WorkSpaces Applications removes the stored
+    #   authentication for the stack's OneDrive and Google Drive connectors
+    #   when a user's session ends. The user links their cloud storage
+    #   again on their next session. The default is REUSE\_CREDENTIALS.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/Stack AWS API Documentation
     #
     class Stack < Struct.new(
@@ -6003,7 +6043,8 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
-      :agent_access_config)
+      :agent_access_config,
+      :storage_connector_authentication)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7054,6 +7095,16 @@ module Aws::AppStream
     #   AttributesToDelete with the AGENT\_ACCESS\_CONFIG value.
     #   @return [Types::AgentAccessConfigForUpdate]
     #
+    # @!attribute [rw] storage_connector_authentication
+    #   Specifies whether users' cloud storage authentication persists
+    #   across streaming sessions. When you specify FORCE\_REAUTHENTICATION,
+    #   WorkSpaces Applications removes the stored authentication for the
+    #   stack's OneDrive and Google Drive connectors when a user's session
+    #   ends. The user links their cloud storage again on their next
+    #   session. To clear this attribute, add
+    #   STORAGE\_CONNECTOR\_AUTHENTICATION to AttributesToDelete.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appstream-2016-12-01/UpdateStackRequest AWS API Documentation
     #
     class UpdateStackRequest < Struct.new(
@@ -7071,7 +7122,8 @@ module Aws::AppStream
       :embed_host_domains,
       :streaming_experience_settings,
       :content_redirection,
-      :agent_access_config)
+      :agent_access_config,
+      :storage_connector_authentication)
       SENSITIVE = []
       include Aws::Structure
     end

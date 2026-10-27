@@ -159,6 +159,7 @@ module Aws::S3Vectors
       attr_accessor distance_metric: ("euclidean" | "cosine")
       attr_accessor metadata_configuration: Types::MetadataConfiguration
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor index_mode: ("CLASSIC" | "ENHANCED")
       SENSITIVE: []
     end
 
@@ -276,6 +277,16 @@ module Aws::S3Vectors
       SENSITIVE: []
     end
 
+    class PutVectorBucketDefaultIndexModeInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor vector_bucket_arn: ::String
+      attr_accessor default_index_mode: ("CLASSIC" | "ENHANCED")
+      SENSITIVE: []
+    end
+
+    class PutVectorBucketDefaultIndexModeOutput < Aws::EmptyStructure
+    end
+
     class PutVectorBucketPolicyInput
       attr_accessor vector_bucket_name: ::String
       attr_accessor vector_bucket_arn: ::String
@@ -311,6 +322,7 @@ module Aws::S3Vectors
       attr_accessor top_k: ::Integer
       attr_accessor query_vector: Types::VectorData
       attr_accessor filter: untyped
+      attr_accessor query_mode: ("CLASSIC" | "ENHANCED")
       attr_accessor return_metadata: bool
       attr_accessor return_distance: bool
       attr_accessor next_token: ::String
@@ -362,6 +374,17 @@ module Aws::S3Vectors
     class UntagResourceOutput < Aws::EmptyStructure
     end
 
+    class UpdateIndexModeInput
+      attr_accessor vector_bucket_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor index_arn: ::String
+      attr_accessor index_mode: ("CLASSIC" | "ENHANCED")
+      SENSITIVE: []
+    end
+
+    class UpdateIndexModeOutput < Aws::EmptyStructure
+    end
+
     class ValidationException
       attr_accessor message: ::String
       attr_accessor field_list: ::Array[Types::ValidationExceptionField]
@@ -379,6 +402,7 @@ module Aws::S3Vectors
       attr_accessor vector_bucket_arn: ::String
       attr_accessor creation_time: ::Time
       attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor default_index_mode: ("CLASSIC" | "ENHANCED")
       SENSITIVE: []
     end
 

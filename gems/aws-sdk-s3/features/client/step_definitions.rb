@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'openssl'
-require 'csv'
+require 'securerandom'
 
 Before('@s3', '@client') do
   @client = Aws::S3::Client.new
@@ -163,26 +163,6 @@ Then(/^the bucket name should not be in the request path$/) do
   expect(endpoint.path).not_to include(@bucket_name)
 end
 
-When(/^I put "(.*?)" to the key "(.*?)" with an aes key$/) do |body, key|
-  @aes_key = OpenSSL::Cipher.new('aes-256-cbc').random_key
-  @client.put_object(
-    bucket: @bucket_name,
-    key: key,
-    body: body,
-    sse_customer_algorithm: 'AES256',
-    sse_customer_key: @aes_key
-  )
-end
-
-Then(/^I can download the key "(.*?)" with the aes key$/) do |key|
-  @client.get_object(
-    bucket: @bucket_name,
-    key: key,
-    sse_customer_algorithm: 'AES256',
-    sse_customer_key: @aes_key
-  )
-end
-
 When(/^I get the object with the key "(.*?)"$/) do |key|
   @response = @client.get_object(bucket: @bucket_name, key: key)
 end
@@ -231,7 +211,7 @@ end
 
 When(/^I send an HTTP get request for the presigned url$/) do
   uri = URI(@url)
-  @resp = Net::HTTP.get_response(uri.host, uri.request_uri)
+  @resp = Net::HTTP.get_response(uri)
 end
 
 Then(/^the response should be "(.*?)"$/) do |expected|
@@ -240,26 +220,14 @@ end
 
 When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
   uri = URI(@url)
-  http = Net::HTTP.new(uri.host)
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = uri.scheme == 'https'
   req = Net::HTTP::Put.new(
     uri.request_uri, 'content-length' => body.bytesize.to_s
   )
   req.body = body
   @resp = http.request(req)
   expect(@resp.code).to eq('200')
-end
-
-Then(/^I make an unauthenticated HTTPS GET request for key "(.*?)"$/) do |key|
-  uri = URI.parse("https://#{@bucket_name}.s3.amazonaws.com/#{key}")
-  http = Net::HTTP.new(uri.host, 443)
-  http.use_ssl = true
-  req = Net::HTTP::Get.new(uri.request_uri)
-  @resp = http.request(req)
-end
-
-Then(/^I make an unauthenticated HTTP GET request for key "(.*?)"$/) do |key|
-  uri = URI.parse("http://#{@bucket_name}.s3.amazonaws.com/#{key}")
-  @resp = Net::HTTP.get_response(uri)
 end
 
 When(/^I get an object that doesn't exist with a read block$/) do
@@ -278,13 +246,10 @@ Then(/^an error should be raise and the block should not yield$/) do
   expect(@yielded).to eq([])
 end
 
-Then(/^the response content\-type should be "(.*?)"$/) do |_arg1|
-  expect(@resp.to_hash['content-type']).to eq(['text/plain'])
-end
-
 When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |content_type|
   uri = URI(@url)
-  http = Net::HTTP.new(uri.host)
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = uri.scheme == 'https'
   req = Net::HTTP::Put.new(uri.request_uri, 'content-type' => content_type)
   req.body = 'data'
   @resp = http.request(req)
@@ -304,8 +269,10 @@ Then(/^the keys in my bucket should be$/) do |table|
   expect(keys.sort).to eq(table.rows.map(&:first).sort)
 end
 
-Given(/^I have a bucket configured with a virtual hosted CNAME$/) do
-  @bucket_name = cfg_value('s3', 'virtual_hosted_bucket')
+Then(/^the presigned URL should use virtual-hosted bucket addressing$/) do
+  uri = URI(@url)
+  expect(uri.host).to start_with("#{@bucket_name}.")
+  expect(uri.path).not_to include(@bucket_name)
 end
 
 When(/^I get the bucket location$/) do
@@ -324,150 +291,99 @@ Then(/^I can streaming download key "([^"]*)"$/) do |key|
   expect(resp.context[:response_target]).to be_a(Proc)
 end
 
-Given(/^I put a file with content:$/) do |table|
-  @select_file_name = 'test.csv'
-  csv = Tempfile.new('file.csv')
-  CSV.open(csv.path, 'wb') do |f|
-    table.raw.each { |row| f << row }
+def mrap_access_point
+  @mrap_control.get_multi_region_access_point(
+    account_id: @mrap_account, name: @mrap_name
+  ).access_point
+rescue Aws::S3Control::Errors::ServiceError => e
+  raise unless e.context.http_response.status_code == 404
+end
+
+# MRAP control-plane operations can take up to 30 minutes.
+def wait_for_mrap(deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + 1800)
+  loop do
+    access_point = mrap_access_point
+    return access_point if yield(access_point)
+
+    raise "Timed out waiting for MRAP #{@mrap_name}" if Process.clock_gettime(Process::CLOCK_MONOTONIC) >= deadline
+
+    sleep 10
   end
-  @client.put_object(
-    bucket: @bucket_name,
-    key: @select_file_name,
-    body: File.read(csv.path)
+end
+
+def cleanup_mrap
+  return unless @mrap_bucket
+
+  if @mrap_name
+    deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + 1800
+    # A timed-out create can still be running. Wait before requesting delete.
+    wait_for_mrap(deadline) { |point| point && point.status != 'CREATING' }
+    @mrap_control.delete_multi_region_access_point(
+      account_id: @mrap_account, details: { name: @mrap_name }
+    )
+    wait_for_mrap(deadline, &:nil?)
+    @mrap_name = nil
+  end
+  Aws::S3::Bucket.new(@mrap_bucket, client: @client).delete!
+  @client.wait_until(:bucket_not_exists, bucket: @mrap_bucket)
+  @mrap_bucket = nil
+rescue StandardError => e
+  raise "Cleanup failed for MRAP/bucket #{@mrap_bucket}: #{e.class}: #{e.message}"
+end
+
+Given(/^I create a temporary MRAP$/) do
+  $LOAD_PATH.unshift(File.expand_path('../../../aws-sdk-s3control/lib', __dir__))
+  require 'aws-sdk-s3control'
+
+  identity = Aws::STS::Client.new(
+    region: @client.config.region, credentials: @client.config.credentials
+  ).get_caller_identity
+  @mrap_account = identity.account
+  @mrap_control = Aws::S3Control::Client.new(
+    region: 'us-west-2', credentials: @client.config.credentials
   )
-  csv.unlink
-end
-
-When(/^I select it with query "([^"]*)"$/) do |query|
-  @select_resp = @client.select_object_content(
-    bucket: @bucket_name,
-    key: @select_file_name,
-    expression_type: 'SQL',
-    expression: query,
-    input_serialization: {
-      csv: {
-        file_header_info: 'USE'
-      }
-    },
-    output_serialization: { csv: {} }
-  )
-  @tracker = Hash.new([])
-end
-
-Then(/^response should contain "([^"]*)" event$/) do |type|
-  @select_resp.payload.each do |event|
-    next unless event.event_type == type.to_sym
-
-    @tracker[type.to_sym] << event
+  name = "aws-sdk-mrap-#{SecureRandom.hex(12)}"
+  options = { bucket: name }
+  if @client.config.region != 'us-east-1'
+    options[:create_bucket_configuration] = {
+      location_constraint: @client.config.region
+    }
   end
-  expect(@tracker[:records]).not_to be_nil
-end
+  @client.create_bucket(options)
+  @mrap_bucket = name
+  @client.wait_until(:bucket_exists, bucket: name)
 
-Then(/^the event should have payload member with content "([^"]*)"$/) do |payload|
-  @tracker[:records].each do |e|
-    # same event process twice, same string IO
-    e.payload.rewind
-    expect(e.payload.read.strip).to eq(payload)
-  end
-end
-
-When(/^I select it with query "([^"]*)" with block$/) do |query|
-  @tracker = Hash.new([])
-  @select_resp = @client.select_object_content(
-    bucket: @bucket_name,
-    key: @select_file_name,
-    expression_type: 'SQL',
-    expression: query,
-    input_serialization: {
-      csv: {
-        file_header_info: 'USE'
-      }
-    },
-    output_serialization: { csv: {} }
-  ) do |stream|
-    stream.on_records_event do |e|
-      @tracker[e.event_type] << e
-    end
-  end
-end
-
-Then(/^"([^"]*)" event should be processed "(\d+)" times when it arrives$/) do |type, times|
-  expect(@tracker[type.to_sym].size).to eq(times.to_i)
-end
-
-When(/^I select it with query "([^"]*)" with event stream handler$/) do |string|
-  @tracker = Hash.new([])
-  handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
-  handler.on_records_event do |e|
-    @tracker[:records] << e
-  end
-  @select_resp = @client.select_object_content(
-    bucket: @bucket_name,
-    key: @select_file_name,
-    expression_type: 'SQL',
-    expression: string,
-    input_serialization: {
-      csv: {
-        file_header_info: 'USE'
-      }
-    },
-    output_serialization: { csv: {} },
-    event_stream_handler: handler
-  )
-end
-
-When(/^I select it with query "([^"]*)" with Proc Object$/) do |query|
-  @tracker = Hash.new([])
-  handler = Proc.new do |stream|
-    stream.on_records_event do |e|
-      @tracker[:records] << e
-    end
-  end
-  @select_resp = @client.select_object_content(
-    bucket: @bucket_name,
-    key: @select_file_name,
-    expression_type: 'SQL',
-    expression: query,
-    input_serialization: {
-      csv: {
-        file_header_info: 'USE'
-      }
-    },
-    output_serialization: { csv: {} },
-    event_stream_handler: handler
-  )
-end
-
-When(/^I select it with query "([^"]*)" with handler and block$/) do |query|
-  @tracker = Hash.new([])
-  handler = Aws::S3::EventStreams::SelectObjectContentEventStream.new
-  handler.on_records_event do |e|
-    @tracker[:records] << e
-  end
-  @select_resp = @client.select_object_content(
-    bucket: @bucket_name,
-    key: @select_file_name,
-    expression_type: 'SQL',
-    expression: query,
-    input_serialization: {
-      csv: {
-        file_header_info: 'USE'
-      }
-    },
-    output_serialization: { csv: {} },
-    event_stream_handler: handler
-  ) do |stream|
-    stream.on_records_event do |e|
-      @tracker[:records] << e
-    end
-  end
-end
-
-When(/I have access to an MRAP bucket and CRT/) do
+  @mrap_name = name
   begin
-    @client.head_bucket(bucket: 'ruby-sdk-integtest-mrap-bucket')
-  rescue
-    pending("Account does not have access to the MRAP test bucket: ruby-sdk-integtest-mrap-bucket")
+    @mrap_control.create_multi_region_access_point(
+      account_id: @mrap_account,
+      details: {
+        name: name,
+        public_access_block: {
+          block_public_acls: true, ignore_public_acls: true,
+          block_public_policy: true, restrict_public_buckets: true
+        },
+        regions: [{ bucket: name, bucket_account_id: @mrap_account }]
+      }
+    )
+  rescue Aws::S3Control::Errors::ServiceError => error
+    # A rejection without retries created no MRAP; still clean up its bucket.
+    if error.context.retries.zero? && (400..499).cover?(error.context.http_response.status_code)
+      @mrap_name = nil
+    end
+    raise
   end
-  @bucket_name = "arn:aws:s3::469596866844:accesspoint/mpatcdsojq97c.mrap"
+  point = wait_for_mrap do |access_point|
+    next false if !access_point || access_point.status == 'CREATING'
+
+    raise "MRAP #{name} creation failed: #{access_point.status}" unless access_point.status == 'READY'
+
+    true
+  end
+  partition = identity.arn.split(':')[1]
+  @bucket_name = "arn:#{partition}:s3::#{@mrap_account}:accesspoint/#{point.alias}"
+end
+
+After('@mrap') do
+  cleanup_mrap
 end

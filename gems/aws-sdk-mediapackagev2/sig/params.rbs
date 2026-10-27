@@ -57,7 +57,11 @@ module Aws
       start: ::Time?,
       end: ::Time?,
       time_delay_seconds: ::Integer?,
-      clip_start_time: ::Time?
+      clip_start_time: ::Time?,
+      multiview: {
+        layout: ("LAYOUT_2EH" | "LAYOUT_2PL" | "LAYOUT_3EL" | "LAYOUT_3PL" | "LAYOUT_4E" | "LAYOUT_4PL"),
+        sources: Array[::String]
+      }?
     }
 
       type create_hls_manifest_configuration = {

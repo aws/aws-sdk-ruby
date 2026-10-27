@@ -2394,6 +2394,16 @@
       "min":1,
       "pattern":"^[a-zA-Z0-9\\-]+$|^arn:.*:containergroupdefinition\\/[a-zA-Z0-9\\-]+(:[0-9]+)?$"
     },
+    "ContainerGroupDefinitionRemoveAttribute":{
+      "type":"string",
+      "enum":["TOTAL_VCPU_LIMIT"]
+    },
+    "ContainerGroupDefinitionRemoveAttributeList":{
+      "type":"list",
+      "member":{"shape":"ContainerGroupDefinitionRemoveAttribute"},
+      "max":1,
+      "min":1
+    },
     "ContainerGroupDefinitionStatus":{
       "type":"string",
       "enum":[
@@ -2632,7 +2642,6 @@
       "required":[
         "Name",
         "TotalMemoryLimitMebibytes",
-        "TotalVcpuLimit",
         "OperatingSystem"
       ],
       "members":{
@@ -4271,23 +4280,36 @@
         "c8a.large",
         "c8a.xlarge",
         "c8a.2xlarge",
+        "c8a.4xlarge",
+        "c8a.8xlarge",
         "c8i.large",
         "c8i.xlarge",
         "c8i.2xlarge",
+        "c8i.4xlarge",
+        "c8i.8xlarge",
         "c9g.medium",
         "c9g.large",
         "c9g.xlarge",
         "c9g.2xlarge",
+        "c9g.4xlarge",
+        "c9g.8xlarge",
         "m8a.medium",
         "m8a.large",
         "m8a.xlarge",
         "m8a.2xlarge",
+        "m8a.4xlarge",
+        "m8a.8xlarge",
         "m8i.large",
         "m8i.xlarge",
         "m8i.2xlarge",
+        "m8i.4xlarge",
+        "m8i.8xlarge",
+        "m9g.medium",
         "m9g.large",
         "m9g.xlarge",
-        "m9g.2xlarge"
+        "m9g.2xlarge",
+        "m9g.4xlarge",
+        "m9g.8xlarge"
       ]
     },
     "Event":{
@@ -4633,7 +4655,8 @@
         "PortConfiguration":{"shape":"ContainerPortConfiguration"},
         "ResolvedImageDigest":{"shape":"Sha256"},
         "ServerSdkVersion":{"shape":"ServerSdkVersion"},
-        "LinuxCapabilities":{"shape":"LinuxCapabilities"}
+        "LinuxCapabilities":{"shape":"LinuxCapabilities"},
+        "Vcpu":{"shape":"ContainerVcpu"}
       }
     },
     "GameServerContainerDefinitionInput":{
@@ -4652,7 +4675,8 @@
         "ImageUri":{"shape":"ImageUriString"},
         "PortConfiguration":{"shape":"ContainerPortConfiguration"},
         "ServerSdkVersion":{"shape":"ServerSdkVersion"},
-        "LinuxCapabilities":{"shape":"LinuxCapabilities"}
+        "LinuxCapabilities":{"shape":"LinuxCapabilities"},
+        "Vcpu":{"shape":"ContainerVcpu"}
       }
     },
     "GameServerContainerGroupCounts":{
@@ -7051,7 +7075,8 @@
         "TotalVcpuLimit":{"shape":"ContainerTotalVcpuLimit"},
         "VersionDescription":{"shape":"NonZeroAndMaxString"},
         "SourceVersionNumber":{"shape":"PositiveInteger"},
-        "OperatingSystem":{"shape":"ContainerOperatingSystem"}
+        "OperatingSystem":{"shape":"ContainerOperatingSystem"},
+        "RemoveAttributes":{"shape":"ContainerGroupDefinitionRemoveAttributeList"}
       }
     },
     "UpdateContainerGroupDefinitionOutput":{

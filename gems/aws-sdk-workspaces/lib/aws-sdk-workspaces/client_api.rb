@@ -288,6 +288,7 @@ module Aws::WorkSpaces
     ImageResourceAssociationList = Shapes::ListShape.new(name: 'ImageResourceAssociationList')
     ImageSourceIdentifier = Shapes::UnionShape.new(name: 'ImageSourceIdentifier')
     ImageType = Shapes::StringShape.new(name: 'ImageType')
+    ImageValidationMode = Shapes::StringShape.new(name: 'ImageValidationMode')
     ImportClientBrandingRequest = Shapes::StructureShape.new(name: 'ImportClientBrandingRequest')
     ImportClientBrandingResult = Shapes::StructureShape.new(name: 'ImportClientBrandingResult')
     ImportCustomWorkspaceImageRequest = Shapes::StructureShape.new(name: 'ImportCustomWorkspaceImageRequest')
@@ -1326,6 +1327,7 @@ module Aws::WorkSpaces
     ImportCustomWorkspaceImageRequest.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, required: true, location_name: "Platform"))
     ImportCustomWorkspaceImageRequest.add_member(:os_version, Shapes::ShapeRef.new(shape: OSVersion, required: true, location_name: "OsVersion"))
     ImportCustomWorkspaceImageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    ImportCustomWorkspaceImageRequest.add_member(:image_validation_mode, Shapes::ShapeRef.new(shape: ImageValidationMode, location_name: "ImageValidationMode"))
     ImportCustomWorkspaceImageRequest.struct_class = Types::ImportCustomWorkspaceImageRequest
 
     ImportCustomWorkspaceImageResult.add_member(:image_id, Shapes::ShapeRef.new(shape: WorkspaceImageId, location_name: "ImageId"))

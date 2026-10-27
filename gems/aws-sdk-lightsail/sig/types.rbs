@@ -86,7 +86,7 @@ module Aws::Lightsail
       attr_accessor datapoints_to_alarm: ::Integer
       attr_accessor treat_missing_data: ("breaching" | "notBreaching" | "ignore" | "missing")
       attr_accessor statistic: ("Minimum" | "Maximum" | "Sum" | "Average" | "SampleCount")
-      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage")
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength")
       attr_accessor state: ("OK" | "ALARM" | "INSUFFICIENT_DATA")
       attr_accessor unit: ("Seconds" | "Microseconds" | "Milliseconds" | "Bytes" | "Kilobytes" | "Megabytes" | "Gigabytes" | "Terabytes" | "Bits" | "Kilobits" | "Megabits" | "Gigabits" | "Terabits" | "Percent" | "Count" | "Bytes/Second" | "Kilobytes/Second" | "Megabytes/Second" | "Gigabytes/Second" | "Terabytes/Second" | "Bits/Second" | "Kilobits/Second" | "Megabits/Second" | "Gigabits/Second" | "Terabits/Second" | "Count/Second" | "None")
       attr_accessor contact_protocols: ::Array[("Email" | "SMS")]
@@ -681,6 +681,8 @@ module Aws::Lightsail
       attr_accessor enable_private_origin_access: bool
       attr_accessor default_root_object: ::String
       attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
+      attr_accessor enable_waf: bool
+      attr_accessor waf_rules: ::Array[Types::WafRule]
       SENSITIVE: []
     end
 
@@ -1633,7 +1635,7 @@ module Aws::Lightsail
 
     class GetDistributionMetricDataRequest
       attr_accessor distribution_name: ::String
-      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate")
+      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate" | "WafAllowedRequests" | "WafBlockedRequests")
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor period: ::Integer
@@ -1643,7 +1645,7 @@ module Aws::Lightsail
     end
 
     class GetDistributionMetricDataResult
-      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate")
+      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate" | "WafAllowedRequests" | "WafBlockedRequests")
       attr_accessor metric_data: ::Array[Types::MetricDatapoint]
       SENSITIVE: []
     end
@@ -1705,7 +1707,7 @@ module Aws::Lightsail
 
     class GetInstanceMetricDataRequest
       attr_accessor instance_name: ::String
-      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken")
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength")
       attr_accessor period: ::Integer
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
@@ -1715,7 +1717,7 @@ module Aws::Lightsail
     end
 
     class GetInstanceMetricDataResult
-      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken")
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "BurstCapacityTime" | "BurstCapacityPercentage" | "MetadataNoToken" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength")
       attr_accessor metric_data: ::Array[Types::MetricDatapoint]
       SENSITIVE: []
     end
@@ -2322,6 +2324,7 @@ module Aws::Lightsail
       attr_accessor viewer_minimum_tls_protocol_version: ::String
       attr_accessor default_root_object: ::String
       attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
+      attr_accessor waf: Types::WafConfig
       SENSITIVE: []
     end
 
@@ -2566,7 +2569,7 @@ module Aws::Lightsail
 
     class PutAlarmRequest
       attr_accessor alarm_name: ::String
-      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage")
+      attr_accessor metric_name: ("CPUUtilization" | "NetworkIn" | "NetworkOut" | "StatusCheckFailed" | "StatusCheckFailed_Instance" | "StatusCheckFailed_System" | "ClientTLSNegotiationErrorCount" | "HealthyHostCount" | "UnhealthyHostCount" | "HTTPCode_LB_4XX_Count" | "HTTPCode_LB_5XX_Count" | "HTTPCode_Instance_2XX_Count" | "HTTPCode_Instance_3XX_Count" | "HTTPCode_Instance_4XX_Count" | "HTTPCode_Instance_5XX_Count" | "InstanceResponseTime" | "RejectedConnectionCount" | "RequestCount" | "DatabaseConnections" | "DiskQueueDepth" | "FreeStorageSpace" | "NetworkReceiveThroughput" | "NetworkTransmitThroughput" | "FreeableMemory" | "SwapUsage" | "BurstCapacityTime" | "BurstCapacityPercentage" | "DiskReadOps" | "DiskWriteOps" | "DiskReadBytes" | "DiskWriteBytes" | "DiskTotalReadTime" | "DiskTotalWriteTime" | "DiskQueueLength")
       attr_accessor monitored_resource_name: ::String
       attr_accessor comparison_operator: ("GreaterThanOrEqualToThreshold" | "GreaterThanThreshold" | "LessThanThreshold" | "LessThanOrEqualToThreshold")
       attr_accessor threshold: ::Float
@@ -3136,6 +3139,8 @@ module Aws::Lightsail
       attr_accessor enable_private_origin_access: bool
       attr_accessor default_root_object: ::String
       attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
+      attr_accessor enable_waf: bool
+      attr_accessor waf_rules: ::Array[Types::WafRule]
       SENSITIVE: []
     end
 
@@ -3209,6 +3214,48 @@ module Aws::Lightsail
 
     class UpdateRelationalDatabaseResult
       attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class WafAcfpConfig
+      attr_accessor payload_type: ("JSON" | "FORM_ENCODED")
+      attr_accessor creation_path: ::String
+      attr_accessor registration_page_path: ::String
+      attr_accessor response_inspection: Types::WafResponseInspection
+      SENSITIVE: []
+    end
+
+    class WafAtpConfig
+      attr_accessor login_path: ::String
+      attr_accessor payload_type: ("JSON" | "FORM_ENCODED")
+      attr_accessor username_field: ::String
+      attr_accessor password_field: ::String
+      attr_accessor response_inspection: Types::WafResponseInspection
+      SENSITIVE: []
+    end
+
+    class WafBotControlConfig
+      attr_accessor inspection_level: ("COMMON" | "TARGETED")
+      SENSITIVE: []
+    end
+
+    class WafConfig
+      attr_accessor is_waf_enabled: bool
+      attr_accessor waf_rules: ::Array[Types::WafRule]
+      SENSITIVE: []
+    end
+
+    class WafResponseInspection
+      attr_accessor success_codes: ::Array[::Integer]
+      attr_accessor failure_codes: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class WafRule
+      attr_accessor name: ::String
+      attr_accessor atp_config: Types::WafAtpConfig
+      attr_accessor acfp_config: Types::WafAcfpConfig
+      attr_accessor bot_control_config: Types::WafBotControlConfig
       SENSITIVE: []
     end
   end

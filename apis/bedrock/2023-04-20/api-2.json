@@ -2990,7 +2990,7 @@
       "type":"string",
       "max":64,
       "min":1,
-      "pattern":"[A-Za-z][A-Za-z0-9_]*",
+      "pattern":"\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*",
       "sensitive":true
     },
     "AutomatedReasoningPolicyDefinitionTypeNameList":{
@@ -3024,7 +3024,7 @@
       "type":"string",
       "max":64,
       "min":1,
-      "pattern":"[A-Za-z][A-Za-z0-9_]*"
+      "pattern":"\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*"
     },
     "AutomatedReasoningPolicyDefinitionTypeValuePair":{
       "type":"structure",
@@ -3073,7 +3073,7 @@
       "type":"string",
       "max":64,
       "min":1,
-      "pattern":"[A-Za-z][A-Za-z0-9_]*",
+      "pattern":"\\p{L}[\\p{L}\\p{M}0-9_]*( [\\p{L}\\p{M}0-9_]+)*",
       "sensitive":true
     },
     "AutomatedReasoningPolicyDefinitionVariableNameList":{
@@ -6580,15 +6580,39 @@
       "type":"structure",
       "required":["filters"],
       "members":{
-        "filters":{"shape":"GuardrailContextualGroundingFilters"}
+        "filters":{"shape":"GuardrailContextualGroundingFilters"},
+        "tier":{"shape":"GuardrailContextualGroundingTier"}
       }
     },
     "GuardrailContextualGroundingPolicyConfig":{
       "type":"structure",
       "required":["filtersConfig"],
       "members":{
-        "filtersConfig":{"shape":"GuardrailContextualGroundingFiltersConfig"}
+        "filtersConfig":{"shape":"GuardrailContextualGroundingFiltersConfig"},
+        "tierConfig":{"shape":"GuardrailContextualGroundingTierConfig"}
       }
+    },
+    "GuardrailContextualGroundingTier":{
+      "type":"structure",
+      "required":["tierName"],
+      "members":{
+        "tierName":{"shape":"GuardrailContextualGroundingTierName"}
+      }
+    },
+    "GuardrailContextualGroundingTierConfig":{
+      "type":"structure",
+      "required":["tierName"],
+      "members":{
+        "tierName":{"shape":"GuardrailContextualGroundingTierName"}
+      }
+    },
+    "GuardrailContextualGroundingTierName":{
+      "type":"string",
+      "enum":[
+        "CLASSIC",
+        "STANDARD"
+      ],
+      "sensitive":true
     },
     "GuardrailCrossRegionConfig":{
       "type":"structure",
@@ -6875,7 +6899,7 @@
     "GuardrailRegexesConfig":{
       "type":"list",
       "member":{"shape":"GuardrailRegexConfig"},
-      "max":10,
+      "max":30,
       "min":1
     },
     "GuardrailSensitiveInformationAction":{

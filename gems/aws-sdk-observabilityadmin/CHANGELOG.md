@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.45.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.44.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.43.0 (2026-10-19)
+------------------
+
+* Feature - Adding support for EKS Container Insights Telemetry Rules
+
+1.42.0 (2026-10-12)
+------------------
+
+* Feature - Adding support for TransactionSearch telemetry rules.
+
+1.41.0 (2026-09-30)
+------------------
+
+* Feature - Enablement for Bedrock PaymentManager logs via Observability Admin Telemetry Rule
+
 1.40.0 (2026-09-22)
 ------------------
 

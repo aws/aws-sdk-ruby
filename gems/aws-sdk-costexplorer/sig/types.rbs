@@ -364,7 +364,7 @@ module Aws::CostExplorer
     end
 
     class DimensionValues
-      attr_accessor key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "PAYER_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")
+      attr_accessor key: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "PAYER_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE" | "PRODUCT_ATTRIBUTE")
       attr_accessor values: ::Array[::String]
       attr_accessor match_options: ::Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]
       SENSITIVE: []
@@ -464,6 +464,7 @@ module Aws::CostExplorer
       attr_accessor dimensions: Types::DimensionValues
       attr_accessor tags: Types::TagValues
       attr_accessor cost_categories: Types::CostCategoryValues
+      attr_accessor product_attributes: Types::ProductAttributeValues
       SENSITIVE: []
     end
 
@@ -678,7 +679,8 @@ module Aws::CostExplorer
     class GetDimensionValuesRequest
       attr_accessor search_string: ::String
       attr_accessor time_period: Types::DateInterval
-      attr_accessor dimension: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "PAYER_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE")
+      attr_accessor dimension: ("AZ" | "INSTANCE_TYPE" | "LINKED_ACCOUNT" | "PAYER_ACCOUNT" | "LINKED_ACCOUNT_NAME" | "OPERATION" | "PURCHASE_TYPE" | "REGION" | "SERVICE" | "SERVICE_CODE" | "USAGE_TYPE" | "USAGE_TYPE_GROUP" | "RECORD_TYPE" | "OPERATING_SYSTEM" | "TENANCY" | "SCOPE" | "PLATFORM" | "SUBSCRIPTION_ID" | "LEGAL_ENTITY_NAME" | "DEPLOYMENT_OPTION" | "DATABASE_ENGINE" | "CACHE_ENGINE" | "INSTANCE_TYPE_FAMILY" | "BILLING_ENTITY" | "RESERVATION_ID" | "RESOURCE_ID" | "RIGHTSIZING_TYPE" | "SAVINGS_PLANS_TYPE" | "SAVINGS_PLAN_ARN" | "PAYMENT_OPTION" | "AGREEMENT_END_DATE_TIME_AFTER" | "AGREEMENT_END_DATE_TIME_BEFORE" | "INVOICING_ENTITY" | "ANOMALY_TOTAL_IMPACT_ABSOLUTE" | "ANOMALY_TOTAL_IMPACT_PERCENTAGE" | "PRODUCT_ATTRIBUTE")
+      attr_accessor dimension_key: ::String
       attr_accessor context: ("COST_AND_USAGE" | "RESERVATIONS" | "SAVINGS_PLANS")
       attr_accessor filter: Types::Expression
       attr_accessor sort_by: ::Array[Types::SortDefinition]
@@ -895,7 +897,7 @@ module Aws::CostExplorer
     end
 
     class GroupDefinition
-      attr_accessor type: ("DIMENSION" | "TAG" | "COST_CATEGORY")
+      attr_accessor type: ("DIMENSION" | "TAG" | "COST_CATEGORY" | "PRODUCT_ATTRIBUTE")
       attr_accessor key: ::String
       SENSITIVE: []
     end
@@ -1046,6 +1048,13 @@ module Aws::CostExplorer
       attr_accessor network_out_bytes_per_second: ::String
       attr_accessor network_packets_in_per_second: ::String
       attr_accessor network_packets_out_per_second: ::String
+      SENSITIVE: []
+    end
+
+    class ProductAttributeValues
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor match_options: ::Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "CASE_SENSITIVE" | "CASE_INSENSITIVE" | "GREATER_THAN_OR_EQUAL")]
       SENSITIVE: []
     end
 

@@ -2874,6 +2874,11 @@ module Aws::CleanRooms
     #   The table that this configured table represents.
     #   @return [Types::TableReference]
     #
+    # @!attribute [rw] table_type
+    #   Type of the Configured Table DataSource, example: Glue, Snowflake,
+    #   Athena, Databricks
+    #   @return [String]
+    #
     # @!attribute [rw] create_time
     #   The time the configured table was created.
     #   @return [Time]
@@ -2916,6 +2921,7 @@ module Aws::CleanRooms
       :name,
       :description,
       :table_reference,
+      :table_type,
       :create_time,
       :update_time,
       :analysis_rule_types,
@@ -3388,6 +3394,11 @@ module Aws::CleanRooms
     #   The name of the configured table.
     #   @return [String]
     #
+    # @!attribute [rw] table_type
+    #   Type of the Configured Table DataSource, example: Glue, Snowflake,
+    #   Athena, Databricks
+    #   @return [String]
+    #
     # @!attribute [rw] create_time
     #   The time the configured table was created.
     #   @return [Time]
@@ -3421,6 +3432,7 @@ module Aws::CleanRooms
       :id,
       :arn,
       :name,
+      :table_type,
       :create_time,
       :update_time,
       :analysis_rule_types,
@@ -4568,6 +4580,80 @@ module Aws::CleanRooms
       :allow_duplicates,
       :allow_joins_on_columns_with_different_names,
       :preserve_nulls)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Type of the connector to be used for connecting to Databricks.
+    # Supported connector: Delta Sharing
+    #
+    # @note DatabricksConnectionType is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DatabricksConnectionType is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DatabricksConnectionType corresponding to the set member.
+    #
+    # @!attribute [rw] delta_sharing
+    #   Details about Connector for Databricks
+    #   @return [Types::DatabricksDeltaSharingConnection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DatabricksConnectionType AWS API Documentation
+    #
+    class DatabricksConnectionType < Struct.new(
+      :delta_sharing,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class DeltaSharing < DatabricksConnectionType; end
+      class Unknown < DatabricksConnectionType; end
+    end
+
+    # Details about Delta Sharing Connector for Databricks
+    #
+    # @!attribute [rw] delta_share_endpoint
+    #   The base URL of a Delta Sharing server that hosts shared datasets.
+    #   @return [String]
+    #
+    # @!attribute [rw] share_name
+    #   Name of the Share used for OpenSharing (Delta Sharing) the
+    #   Databricks Table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DatabricksDeltaSharingConnection AWS API Documentation
+    #
+    class DatabricksDeltaSharingConnection < Struct.new(
+      :delta_share_endpoint,
+      :share_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A reference to a table within Databricks.
+    #
+    # @!attribute [rw] schema_name
+    #   Name of the Schema within Databricks.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   Name of the Table within Databricks.
+    #   @return [String]
+    #
+    # @!attribute [rw] workspace_url
+    #   URL for the Databricks Workspace.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_type
+    #   Type of the connector to be used for connecting to Databricks.
+    #   Supported connector: Delta Sharing
+    #   @return [Types::DatabricksConnectionType]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/DatabricksTableReference AWS API Documentation
+    #
+    class DatabricksTableReference < Struct.new(
+      :schema_name,
+      :table_name,
+      :workspace_url,
+      :connection_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11408,12 +11494,18 @@ module Aws::CleanRooms
     #   table reference.
     #   @return [Types::AthenaTableReference]
     #
+    # @!attribute [rw] databricks
+    #   If present, a reference to the Databricks table referred to by this
+    #   table reference.
+    #   @return [Types::DatabricksTableReference]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/TableReference AWS API Documentation
     #
     class TableReference < Struct.new(
       :glue,
       :snowflake,
       :athena,
+      :databricks,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -11422,6 +11514,7 @@ module Aws::CleanRooms
       class Glue < TableReference; end
       class Snowflake < TableReference; end
       class Athena < TableReference; end
+      class Databricks < TableReference; end
       class Unknown < TableReference; end
     end
 

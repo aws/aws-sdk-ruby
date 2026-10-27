@@ -100,6 +100,11 @@ module Aws::MarketplaceMetering
       SENSITIVE: []
     end
 
+    class Metadata
+      attr_accessor agreement_id: ::String
+      SENSITIVE: []
+    end
+
     class MeterUsageRequest
       attr_accessor product_code: ::String
       attr_accessor timestamp: ::Time
@@ -144,6 +149,7 @@ module Aws::MarketplaceMetering
       attr_accessor product_code: ::String
       attr_accessor customer_aws_account_id: ::String
       attr_accessor license_arn: ::String
+      attr_accessor metadata: Types::Metadata
       SENSITIVE: []
     end
 

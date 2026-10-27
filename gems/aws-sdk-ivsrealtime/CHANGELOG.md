@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.73.0 (2026-10-22)
+------------------
+
+* Feature - Adds RevokeConnectionToken operation for Amazon IVS Real-Time Streaming.
+
+1.72.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.71.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.70.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.69.0 (2026-09-18)
 ------------------
 

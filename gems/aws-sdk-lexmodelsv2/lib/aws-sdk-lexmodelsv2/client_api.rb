@@ -2519,7 +2519,7 @@ module Aws::LexModelsV2
     IntentClosingSetting.add_member(:conditional, Shapes::ShapeRef.new(shape: ConditionalSpecification, location_name: "conditional"))
     IntentClosingSetting.struct_class = Types::IntentClosingSetting
 
-    IntentConfirmationSetting.add_member(:prompt_specification, Shapes::ShapeRef.new(shape: PromptSpecification, required: true, location_name: "promptSpecification"))
+    IntentConfirmationSetting.add_member(:prompt_specification, Shapes::ShapeRef.new(shape: PromptSpecification, location_name: "promptSpecification"))
     IntentConfirmationSetting.add_member(:declination_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "declinationResponse"))
     IntentConfirmationSetting.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
     IntentConfirmationSetting.add_member(:confirmation_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "confirmationResponse"))
@@ -4076,8 +4076,8 @@ module Aws::LexModelsV2
     VoiceSettings.add_member(:voice_id, Shapes::ShapeRef.new(shape: VoiceId, required: true, location_name: "voiceId"))
     VoiceSettings.struct_class = Types::VoiceSettings
 
-    WaitAndContinueSpecification.add_member(:waiting_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "waitingResponse"))
-    WaitAndContinueSpecification.add_member(:continue_response, Shapes::ShapeRef.new(shape: ResponseSpecification, required: true, location_name: "continueResponse"))
+    WaitAndContinueSpecification.add_member(:waiting_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "waitingResponse"))
+    WaitAndContinueSpecification.add_member(:continue_response, Shapes::ShapeRef.new(shape: ResponseSpecification, location_name: "continueResponse"))
     WaitAndContinueSpecification.add_member(:still_waiting_response, Shapes::ShapeRef.new(shape: StillWaitingResponseSpecification, location_name: "stillWaitingResponse"))
     WaitAndContinueSpecification.add_member(:active, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "active"))
     WaitAndContinueSpecification.struct_class = Types::WaitAndContinueSpecification

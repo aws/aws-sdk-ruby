@@ -199,12 +199,19 @@ module Aws::Transfer
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1269,6 +1276,9 @@ module Aws::Transfer
     #     CloudWatch Logs, so that you can determine when the client is making
     #     a `SETSTAT` call.
     #
+    #   * To specify which ports your Transfer Family server listens to, use
+    #     the `SftpPorts` parameter.
+    #
     #   * To determine whether your Transfer Family server resumes recent,
     #     negotiated sessions through a unique session ID, use the
     #     `TlsSessionResumptionMode` parameter.
@@ -1302,7 +1312,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
@@ -1350,6 +1360,12 @@ module Aws::Transfer
     #
     #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
     #
+    # @option params [String] :host_key_storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private host
+    #   key material in an Secrets Manager secret.
+    #
     # @return [Types::CreateServerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateServerResponse#server_id #server_id} => String
@@ -1384,6 +1400,12 @@ module Aws::Transfer
     #       passive_ip: "PassiveIp",
     #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
     #       set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
+    #       sftp_ports: [
+    #         {
+    #           sftp_port: 1, # required
+    #           communication_mode: "CLIENT_TALK_FIRST", # accepts CLIENT_TALK_FIRST, SERVER_TALK_FIRST
+    #         },
+    #       ],
     #       as_2_transports: ["HTTP"], # accepts HTTP
     #       proxy_config: {
     #         sftp_mode: "NONE", # accepts NONE, PROXY_PROTOCOL_V2_ENFORCED
@@ -1415,6 +1437,7 @@ module Aws::Transfer
     #       directory_listing_optimization: "ENABLED", # accepts ENABLED, DISABLED
     #     },
     #     ip_address_type: "IPV4", # accepts IPV4, DUALSTACK
+    #     host_key_storage_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SECRETS_MANAGER
     #   })
     #
     # @example Response structure
@@ -1767,6 +1790,17 @@ module Aws::Transfer
     #   Key-value pairs that can be used to group and search for workflows.
     #   Tags are metadata attached to workflows for any purpose.
     #
+    # @option params [Array<String>] :structured_log_destinations
+    #   Specifies the log groups to which your workflow logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #
     # @return [Types::CreateWorkflowResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateWorkflowResponse#workflow_id #workflow_id} => String
@@ -1893,6 +1927,7 @@ module Aws::Transfer
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     structured_log_destinations: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -2569,6 +2604,8 @@ module Aws::Transfer
     #   resp.host_key.tags #=> Array
     #   resp.host_key.tags[0].key #=> String
     #   resp.host_key.tags[0].value #=> String
+    #   resp.host_key.storage_type #=> String, one of "SERVICE_MANAGED", "SECRETS_MANAGER"
+    #   resp.host_key.secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeHostKey AWS API Documentation
     #
@@ -2695,6 +2732,9 @@ module Aws::Transfer
     #   resp.server.protocol_details.passive_ip #=> String
     #   resp.server.protocol_details.tls_session_resumption_mode #=> String, one of "DISABLED", "ENABLED", "ENFORCED"
     #   resp.server.protocol_details.set_stat_option #=> String, one of "DEFAULT", "ENABLE_NO_OP"
+    #   resp.server.protocol_details.sftp_ports #=> Array
+    #   resp.server.protocol_details.sftp_ports[0].sftp_port #=> Integer
+    #   resp.server.protocol_details.sftp_ports[0].communication_mode #=> String, one of "CLIENT_TALK_FIRST", "SERVER_TALK_FIRST"
     #   resp.server.protocol_details.as_2_transports #=> Array
     #   resp.server.protocol_details.as_2_transports[0] #=> String, one of "HTTP"
     #   resp.server.protocol_details.proxy_config.sftp_mode #=> String, one of "NONE", "PROXY_PROTOCOL_V2_ENFORCED"
@@ -2981,6 +3021,8 @@ module Aws::Transfer
     #   resp.workflow.tags #=> Array
     #   resp.workflow.tags[0].key #=> String
     #   resp.workflow.tags[0].value #=> String
+    #   resp.workflow.structured_log_destinations #=> Array
+    #   resp.workflow.structured_log_destinations[0] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribeWorkflow AWS API Documentation
     #
@@ -3131,6 +3173,20 @@ module Aws::Transfer
     # @option params [Array<Types::Tag>] :tags
     #   Key-value pairs that can be used to group and search for host keys.
     #
+    # @option params [String] :storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private host
+    #   key material in an Secrets Manager secret.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   Secrets Manager secret that stores the host key. If you specify a
+    #   customer managed key, its key policy must allow the
+    #   `AWSServiceRoleForTransfer` service-linked role to decrypt the secret.
+    #   If you don't specify a value, Transfer Family uses the Amazon Web
+    #   Services managed key for Secrets Manager.
+    #
     # @return [Types::ImportHostKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ImportHostKeyResponse#server_id #server_id} => String
@@ -3148,6 +3204,8 @@ module Aws::Transfer
     #         value: "TagValue", # required
     #       },
     #     ],
+    #     storage_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SECRETS_MANAGER
+    #     kms_key: "KmsKey",
     #   })
     #
     # @example Response structure
@@ -3595,6 +3653,8 @@ module Aws::Transfer
     #   resp.host_keys[0].description #=> String
     #   resp.host_keys[0].type #=> String
     #   resp.host_keys[0].date_imported #=> Time
+    #   resp.host_keys[0].storage_type #=> String, one of "SERVICE_MANAGED", "SECRETS_MANAGER"
+    #   resp.host_keys[0].secret_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListHostKeys AWS API Documentation
     #
@@ -5008,8 +5068,16 @@ module Aws::Transfer
       req.send_request(options)
     end
 
-    # Updates the description for the host key that's specified by the
-    # `ServerId` and `HostKeyId` parameters.
+    # Updates the host key that's specified by the `ServerId` and
+    # `HostKeyId` parameters. You can update the description of the host
+    # key, change where the host key is stored by specifying the
+    # `StorageType`, and specify the KMS key used to encrypt the host key
+    # when it's stored in Secrets Manager.
+    #
+    # To change a host key's storage type from `SERVICE_MANAGED` to
+    # `SECRETS_MANAGER`, you must have the `transfer:ExportHostKey`
+    # permission. `transfer:ExportHostKey` is a permission-only action that
+    # has no corresponding API operation.
     #
     # @option params [required, String] :server_id
     #   The identifier of the server that contains the host key that you are
@@ -5018,8 +5086,22 @@ module Aws::Transfer
     # @option params [required, String] :host_key_id
     #   The identifier of the host key that you are updating.
     #
-    # @option params [required, String] :description
+    # @option params [String] :description
     #   An updated description for the host key.
+    #
+    # @option params [String] :storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private host
+    #   key material in an Secrets Manager secret.
+    #
+    # @option params [String] :kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   Secrets Manager secret that stores the host key. If you specify a
+    #   customer managed key, its key policy must allow the
+    #   `AWSServiceRoleForTransfer` service-linked role to decrypt the secret.
+    #   If you don't specify a value, Transfer Family uses the Amazon Web
+    #   Services managed key for Secrets Manager.
     #
     # @return [Types::UpdateHostKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -5031,7 +5113,9 @@ module Aws::Transfer
     #   resp = client.update_host_key({
     #     server_id: "ServerId", # required
     #     host_key_id: "HostKeyId", # required
-    #     description: "HostKeyDescription", # required
+    #     description: "HostKeyDescription",
+    #     storage_type: "SERVICE_MANAGED", # accepts SERVICE_MANAGED, SECRETS_MANAGER
+    #     kms_key: "KmsKey",
     #   })
     #
     # @example Response structure
@@ -5153,6 +5237,9 @@ module Aws::Transfer
     #     `ENABLE_NO_OP`, Transfer Family generates a log entry to Amazon
     #     CloudWatch Logs, so that you can determine when the client is making
     #     a `SETSTAT` call.
+    #
+    #   * To specify which ports your Transfer Family server listens to, use
+    #     the `SftpPorts` parameter.
     #
     #   * To determine whether your Transfer Family server resumes recent,
     #     negotiated sessions through a unique session ID, use the
@@ -5334,7 +5421,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
@@ -5416,6 +5503,12 @@ module Aws::Transfer
     #       passive_ip: "PassiveIp",
     #       tls_session_resumption_mode: "DISABLED", # accepts DISABLED, ENABLED, ENFORCED
     #       set_stat_option: "DEFAULT", # accepts DEFAULT, ENABLE_NO_OP
+    #       sftp_ports: [
+    #         {
+    #           sftp_port: 1, # required
+    #           communication_mode: "CLIENT_TALK_FIRST", # accepts CLIENT_TALK_FIRST, SERVER_TALK_FIRST
+    #         },
+    #       ],
     #       as_2_transports: ["HTTP"], # accepts HTTP
     #       proxy_config: {
     #         sftp_mode: "NONE", # accepts NONE, PROXY_PROTOCOL_V2_ENFORCED
@@ -5780,7 +5873,7 @@ module Aws::Transfer
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-transfer'
-      context[:gem_version] = '1.146.0'
+      context[:gem_version] = '1.152.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

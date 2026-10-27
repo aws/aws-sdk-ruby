@@ -199,12 +199,19 @@ module Aws::ManagedGrafana
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -619,7 +626,7 @@ module Aws::ManagedGrafana
     #
     #    </note>
     #
-    #   For more information, see [Amazon Managed Grafana permissions and
+    #   For more information, see [ Amazon Managed Grafana permissions and
     #   policies for Amazon Web Services data sources and notification
     #   channels][1].
     #
@@ -665,7 +672,7 @@ module Aws::ManagedGrafana
     #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
     #   or both to authenticate users for using the Grafana console within a
     #   workspace. For more information, see [User authentication in Amazon
-    #   Managed Grafana][1].
+    #   Managed Grafana ][1].
     #
     #
     #
@@ -815,9 +822,8 @@ module Aws::ManagedGrafana
     end
 
     # Creates a Grafana API key for the workspace. This key can be used to
-    # authenticate requests sent to the workspace's HTTP API. See
-    # [https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html][1]
-    # for available APIs and example requests.
+    # authenticate requests sent to the workspace's HTTP API. See [][1] for
+    # available APIs and example requests.
     #
     # <note markdown="1"> In workspaces compatible with Grafana version 9 or above, use
     # workspace service accounts instead of API keys. API keys will be
@@ -885,10 +891,10 @@ module Aws::ManagedGrafana
     # compatible with Grafana version 9 and above.
     #
     # <note markdown="1"> For more information about service accounts, see [Service accounts][1]
-    # in the *Amazon Managed Grafana User Guide*.
+    # in the <i> Amazon Managed Grafana User Guide</i>.
     #
     #  For more information about the Grafana HTTP APIs, see [Using Grafana
-    # HTTP APIs][2] in the *Amazon Managed Grafana User Guide*.
+    # HTTP APIs][2] in the <i> Amazon Managed Grafana User Guide</i>.
     #
     #  </note>
     #
@@ -906,7 +912,7 @@ module Aws::ManagedGrafana
     #   The permission level to use for this service account.
     #
     #   <note markdown="1"> For more information about the roles and the permissions each has, see
-    #   [User roles][1] in the *Amazon Managed Grafana User Guide*.
+    #   [User roles][1] in the <i> Amazon Managed Grafana User Guide</i>.
     #
     #    </note>
     #
@@ -1896,7 +1902,7 @@ module Aws::ManagedGrafana
     #   `workspaceRoleArn` that the workspace will use for accessing Amazon
     #   Web Services resources.
     #
-    #   For more information on the role and permissions needed, see [Amazon
+    #   For more information on the role and permissions needed, see [ Amazon
     #   Managed Grafana permissions and policies for Amazon Web Services data
     #   sources and notification channels][1]
     #
@@ -2090,7 +2096,7 @@ module Aws::ManagedGrafana
     #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
     #   or both to authenticate users for using the Grafana console within a
     #   workspace. For more information, see [User authentication in Amazon
-    #   Managed Grafana][1].
+    #   Managed Grafana ][1].
     #
     #
     #
@@ -2233,7 +2239,7 @@ module Aws::ManagedGrafana
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-managedgrafana'
-      context[:gem_version] = '1.68.0'
+      context[:gem_version] = '1.71.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

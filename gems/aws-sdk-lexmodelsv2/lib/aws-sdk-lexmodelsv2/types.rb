@@ -4267,9 +4267,9 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] qn_a_intent_configuration
     #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
-    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
-    #   another intent to invoke. If you specify this field, you can't
-    #   specify the `kendraConfiguration` field.
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex V2 can't
+    #   determine another intent to invoke. If you specify this field, you
+    #   can't specify the `kendraConfiguration` field.
     #   @return [Types::QnAIntentConfiguration]
     #
     # @!attribute [rw] q_in_connect_intent_configuration
@@ -8669,6 +8669,10 @@ module Aws::LexModelsV2
     #   correct before placing it. For other intents, such as intents that
     #   simply respond to user questions, you might not need to ask the user
     #   for confirmation before providing the information.
+    #
+    #   Required unless the bot locale's `assistedNluMode` is
+    #   `DialogManager`, in which case Amazon Lex generates the confirmation
+    #   prompt.
     #   @return [Types::PromptSpecification]
     #
     # @!attribute [rw] declination_response
@@ -11723,8 +11727,10 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] assisted_nlu_mode
     #   Specifies the mode for Assisted NLU operation. Use `Primary` to make
-    #   Assisted NLU the primary intent recognition method, or `Fallback` to
-    #   use it only when standard NLU confidence is low.
+    #   Assisted NLU the primary intent recognition method, `Fallback` to
+    #   use it only when standard NLU confidence is low, or `DialogManager`
+    #   to use a large language model to manage the conversation, including
+    #   intent recognition, slot elicitation, and confirmation.
     #   @return [String]
     #
     # @!attribute [rw] intent_disambiguation_settings
@@ -13044,7 +13050,7 @@ module Aws::LexModelsV2
     # @!attribute [rw] slot_resolution_strategy
     #   Specifies whether assisted slot resolution is turned on for the slot
     #   or not. If the value is `EnhancedFallback`, assisted slot resolution
-    #   is activated when Amazon Lex defaults to the
+    #   is activated when Amazon Lex V2 defaults to the
     #   `AMAZON.FallbackIntent`. If the value is `Default`, assisted slot
     #   resolution is turned off.
     #   @return [String]
@@ -15743,9 +15749,9 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] qn_a_intent_configuration
     #   Specifies the configuration of the built-in `Amazon.QnAIntent`. The
-    #   `AMAZON.QnAIntent` intent is called when Amazon Lex can't determine
-    #   another intent to invoke. If you specify this field, you can't
-    #   specify the `kendraConfiguration` field.
+    #   `AMAZON.QnAIntent` intent is called when Amazon Lex V2 can't
+    #   determine another intent to invoke. If you specify this field, you
+    #   can't specify the `kendraConfiguration` field.
     #   @return [Types::QnAIntentConfiguration]
     #
     # @!attribute [rw] q_in_connect_intent_configuration
@@ -16926,12 +16932,14 @@ module Aws::LexModelsV2
     #
     # @!attribute [rw] waiting_response
     #   The response that Amazon Lex sends to indicate that the bot is
-    #   waiting for the conversation to continue.
+    #   waiting for the conversation to continue. Required unless the bot
+    #   locale's `assistedNluMode` is `DialogManager`.
     #   @return [Types::ResponseSpecification]
     #
     # @!attribute [rw] continue_response
     #   The response that Amazon Lex sends to indicate that the bot is ready
-    #   to continue the conversation.
+    #   to continue the conversation. Required unless the bot locale's
+    #   `assistedNluMode` is `DialogManager`.
     #   @return [Types::ResponseSpecification]
     #
     # @!attribute [rw] still_waiting_response

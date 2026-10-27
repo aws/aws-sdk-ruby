@@ -257,7 +257,7 @@ module Aws
       end
 
       describe '#clock_skew?' do
-        let(:context) { double("context", config: config) }
+        let(:context) { double("context", config: config, metadata: {}) }
         let(:config) { double("config", clock_skew: clock_skew) }
         let(:clock_skew) { double('clock_skew', clock_skewed?: clock_skewed) }
         let(:clock_skewed) { true }
@@ -268,6 +268,7 @@ module Aws
           RetryErrorsSvc::Errors::InvalidSignatureException,
           RetryErrorsSvc::Errors::SignatureDoesNotMatch,
           RetryErrorsSvc::Errors::AuthFailure,
+          RetryErrorsSvc::Errors::AccessDeniedException,
           RetryErrorsSvc::Errors::RequestInTheFuture
         ]
 

@@ -3286,6 +3286,10 @@ module Aws::WorkSpaces
     #   tags.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] image_validation_mode
+    #   The image validation mode for the WorkSpace image import.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-2015-04-08/ImportCustomWorkspaceImageRequest AWS API Documentation
     #
     class ImportCustomWorkspaceImageRequest < Struct.new(
@@ -3297,7 +3301,8 @@ module Aws::WorkSpaces
       :infrastructure_configuration_arn,
       :platform,
       :os_version,
-      :tags)
+      :tags,
+      :image_validation_mode)
       SENSITIVE = []
       include Aws::Structure
     end

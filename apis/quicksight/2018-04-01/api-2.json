@@ -5672,6 +5672,11 @@
       "min":0,
       "sensitive":true
     },
+    "AdminAccountEmail":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
     "Agent":{
       "type":"structure",
       "required":[
@@ -8787,6 +8792,10 @@
         "CreateAndUpdateBeeAction":{"shape":"CapabilityState"},
         "ShareBeeAction":{"shape":"CapabilityState"},
         "UseBeeAction":{"shape":"CapabilityState"},
+        "GongAction":{"shape":"CapabilityState"},
+        "CreateAndUpdateGongAction":{"shape":"CapabilityState"},
+        "ShareGongAction":{"shape":"CapabilityState"},
+        "UseGongAction":{"shape":"CapabilityState"},
         "Topic":{"shape":"CapabilityState"},
         "EditVisualWithQ":{"shape":"CapabilityState"},
         "BuildCalculatedFieldWithQ":{"shape":"CapabilityState"},
@@ -8812,7 +8821,187 @@
         "Trigger":{"shape":"CapabilityState"},
         "ScheduleTrigger":{"shape":"CapabilityState"},
         "InboundEmailTrigger":{"shape":"CapabilityState"},
-        "QuickEventTrigger":{"shape":"CapabilityState"}
+        "QuickEventTrigger":{"shape":"CapabilityState"},
+        "FileDataSource":{"shape":"CapabilityState"},
+        "CreateFileDataSource":{"shape":"CapabilityState"},
+        "UpdateFileDataSource":{"shape":"CapabilityState"},
+        "ShareFileDataSource":{"shape":"CapabilityState"},
+        "S3DataSource":{"shape":"CapabilityState"},
+        "CreateS3DataSource":{"shape":"CapabilityState"},
+        "UpdateS3DataSource":{"shape":"CapabilityState"},
+        "ShareS3DataSource":{"shape":"CapabilityState"},
+        "S3AnalyticsDataSource":{"shape":"CapabilityState"},
+        "CreateS3AnalyticsDataSource":{"shape":"CapabilityState"},
+        "UpdateS3AnalyticsDataSource":{"shape":"CapabilityState"},
+        "ShareS3AnalyticsDataSource":{"shape":"CapabilityState"},
+        "S3TablesDataSource":{"shape":"CapabilityState"},
+        "CreateS3TablesDataSource":{"shape":"CapabilityState"},
+        "UpdateS3TablesDataSource":{"shape":"CapabilityState"},
+        "ShareS3TablesDataSource":{"shape":"CapabilityState"},
+        "AthenaDataSource":{"shape":"CapabilityState"},
+        "CreateAthenaDataSource":{"shape":"CapabilityState"},
+        "UpdateAthenaDataSource":{"shape":"CapabilityState"},
+        "ShareAthenaDataSource":{"shape":"CapabilityState"},
+        "RdsDataSource":{"shape":"CapabilityState"},
+        "CreateRdsDataSource":{"shape":"CapabilityState"},
+        "UpdateRdsDataSource":{"shape":"CapabilityState"},
+        "ShareRdsDataSource":{"shape":"CapabilityState"},
+        "RedshiftAutoDiscoveredDataSource":{"shape":"CapabilityState"},
+        "CreateRedshiftAutoDiscoveredDataSource":{"shape":"CapabilityState"},
+        "UpdateRedshiftAutoDiscoveredDataSource":{"shape":"CapabilityState"},
+        "ShareRedshiftAutoDiscoveredDataSource":{"shape":"CapabilityState"},
+        "RedshiftManualDataSource":{"shape":"CapabilityState"},
+        "CreateRedshiftManualDataSource":{"shape":"CapabilityState"},
+        "UpdateRedshiftManualDataSource":{"shape":"CapabilityState"},
+        "ShareRedshiftManualDataSource":{"shape":"CapabilityState"},
+        "OpenSearchDataSource":{"shape":"CapabilityState"},
+        "CreateOpenSearchDataSource":{"shape":"CapabilityState"},
+        "UpdateOpenSearchDataSource":{"shape":"CapabilityState"},
+        "ShareOpenSearchDataSource":{"shape":"CapabilityState"},
+        "TimestreamDataSource":{"shape":"CapabilityState"},
+        "CreateTimestreamDataSource":{"shape":"CapabilityState"},
+        "UpdateTimestreamDataSource":{"shape":"CapabilityState"},
+        "ShareTimestreamDataSource":{"shape":"CapabilityState"},
+        "AuroraDataSource":{"shape":"CapabilityState"},
+        "CreateAuroraDataSource":{"shape":"CapabilityState"},
+        "UpdateAuroraDataSource":{"shape":"CapabilityState"},
+        "ShareAuroraDataSource":{"shape":"CapabilityState"},
+        "MySqlDataSource":{"shape":"CapabilityState"},
+        "CreateMySqlDataSource":{"shape":"CapabilityState"},
+        "UpdateMySqlDataSource":{"shape":"CapabilityState"},
+        "ShareMySqlDataSource":{"shape":"CapabilityState"},
+        "PostgreSqlDataSource":{"shape":"CapabilityState"},
+        "CreatePostgreSqlDataSource":{"shape":"CapabilityState"},
+        "UpdatePostgreSqlDataSource":{"shape":"CapabilityState"},
+        "SharePostgreSqlDataSource":{"shape":"CapabilityState"},
+        "OracleDataSource":{"shape":"CapabilityState"},
+        "CreateOracleDataSource":{"shape":"CapabilityState"},
+        "UpdateOracleDataSource":{"shape":"CapabilityState"},
+        "ShareOracleDataSource":{"shape":"CapabilityState"},
+        "SqlServerDataSource":{"shape":"CapabilityState"},
+        "CreateSqlServerDataSource":{"shape":"CapabilityState"},
+        "UpdateSqlServerDataSource":{"shape":"CapabilityState"},
+        "ShareSqlServerDataSource":{"shape":"CapabilityState"},
+        "MariaDbDataSource":{"shape":"CapabilityState"},
+        "CreateMariaDbDataSource":{"shape":"CapabilityState"},
+        "UpdateMariaDbDataSource":{"shape":"CapabilityState"},
+        "ShareMariaDbDataSource":{"shape":"CapabilityState"},
+        "SnowflakeDataSource":{"shape":"CapabilityState"},
+        "CreateSnowflakeDataSource":{"shape":"CapabilityState"},
+        "UpdateSnowflakeDataSource":{"shape":"CapabilityState"},
+        "ShareSnowflakeDataSource":{"shape":"CapabilityState"},
+        "GoogleBigQueryDataSource":{"shape":"CapabilityState"},
+        "CreateGoogleBigQueryDataSource":{"shape":"CapabilityState"},
+        "UpdateGoogleBigQueryDataSource":{"shape":"CapabilityState"},
+        "ShareGoogleBigQueryDataSource":{"shape":"CapabilityState"},
+        "DatabricksDataSource":{"shape":"CapabilityState"},
+        "CreateDatabricksDataSource":{"shape":"CapabilityState"},
+        "UpdateDatabricksDataSource":{"shape":"CapabilityState"},
+        "ShareDatabricksDataSource":{"shape":"CapabilityState"},
+        "StarburstDataSource":{"shape":"CapabilityState"},
+        "CreateStarburstDataSource":{"shape":"CapabilityState"},
+        "UpdateStarburstDataSource":{"shape":"CapabilityState"},
+        "ShareStarburstDataSource":{"shape":"CapabilityState"},
+        "TrinoDataSource":{"shape":"CapabilityState"},
+        "CreateTrinoDataSource":{"shape":"CapabilityState"},
+        "UpdateTrinoDataSource":{"shape":"CapabilityState"},
+        "ShareTrinoDataSource":{"shape":"CapabilityState"},
+        "ImpalaDataSource":{"shape":"CapabilityState"},
+        "CreateImpalaDataSource":{"shape":"CapabilityState"},
+        "UpdateImpalaDataSource":{"shape":"CapabilityState"},
+        "ShareImpalaDataSource":{"shape":"CapabilityState"},
+        "TeradataDataSource":{"shape":"CapabilityState"},
+        "CreateTeradataDataSource":{"shape":"CapabilityState"},
+        "UpdateTeradataDataSource":{"shape":"CapabilityState"},
+        "ShareTeradataDataSource":{"shape":"CapabilityState"},
+        "PrestoDataSource":{"shape":"CapabilityState"},
+        "CreatePrestoDataSource":{"shape":"CapabilityState"},
+        "UpdatePrestoDataSource":{"shape":"CapabilityState"},
+        "SharePrestoDataSource":{"shape":"CapabilityState"},
+        "SparkDataSource":{"shape":"CapabilityState"},
+        "CreateSparkDataSource":{"shape":"CapabilityState"},
+        "UpdateSparkDataSource":{"shape":"CapabilityState"},
+        "ShareSparkDataSource":{"shape":"CapabilityState"},
+        "ExasolDataSource":{"shape":"CapabilityState"},
+        "CreateExasolDataSource":{"shape":"CapabilityState"},
+        "UpdateExasolDataSource":{"shape":"CapabilityState"},
+        "ShareExasolDataSource":{"shape":"CapabilityState"},
+        "Db2DataSource":{"shape":"CapabilityState"},
+        "CreateDb2DataSource":{"shape":"CapabilityState"},
+        "UpdateDb2DataSource":{"shape":"CapabilityState"},
+        "ShareDb2DataSource":{"shape":"CapabilityState"},
+        "SapHanaDataSource":{"shape":"CapabilityState"},
+        "CreateSapHanaDataSource":{"shape":"CapabilityState"},
+        "UpdateSapHanaDataSource":{"shape":"CapabilityState"},
+        "ShareSapHanaDataSource":{"shape":"CapabilityState"},
+        "DenodoDataSource":{"shape":"CapabilityState"},
+        "CreateDenodoDataSource":{"shape":"CapabilityState"},
+        "UpdateDenodoDataSource":{"shape":"CapabilityState"},
+        "ShareDenodoDataSource":{"shape":"CapabilityState"},
+        "DremioDataSource":{"shape":"CapabilityState"},
+        "CreateDremioDataSource":{"shape":"CapabilityState"},
+        "UpdateDremioDataSource":{"shape":"CapabilityState"},
+        "ShareDremioDataSource":{"shape":"CapabilityState"},
+        "SalesforceDataSource":{"shape":"CapabilityState"},
+        "CreateSalesforceDataSource":{"shape":"CapabilityState"},
+        "UpdateSalesforceDataSource":{"shape":"CapabilityState"},
+        "ShareSalesforceDataSource":{"shape":"CapabilityState"},
+        "RadiantDataSource":{"shape":"CapabilityState"},
+        "CreateRadiantDataSource":{"shape":"CapabilityState"},
+        "UpdateRadiantDataSource":{"shape":"CapabilityState"},
+        "ShareRadiantDataSource":{"shape":"CapabilityState"},
+        "PayPalDataSource":{"shape":"CapabilityState"},
+        "CreatePayPalDataSource":{"shape":"CapabilityState"},
+        "UpdatePayPalDataSource":{"shape":"CapabilityState"},
+        "SharePayPalDataSource":{"shape":"CapabilityState"},
+        "SquareDataSource":{"shape":"CapabilityState"},
+        "CreateSquareDataSource":{"shape":"CapabilityState"},
+        "UpdateSquareDataSource":{"shape":"CapabilityState"},
+        "ShareSquareDataSource":{"shape":"CapabilityState"},
+        "GitHubDataSource":{"shape":"CapabilityState"},
+        "CreateGitHubDataSource":{"shape":"CapabilityState"},
+        "UpdateGitHubDataSource":{"shape":"CapabilityState"},
+        "ShareGitHubDataSource":{"shape":"CapabilityState"},
+        "TwitterDataSource":{"shape":"CapabilityState"},
+        "CreateTwitterDataSource":{"shape":"CapabilityState"},
+        "UpdateTwitterDataSource":{"shape":"CapabilityState"},
+        "ShareTwitterDataSource":{"shape":"CapabilityState"},
+        "JiraDataSource":{"shape":"CapabilityState"},
+        "CreateJiraDataSource":{"shape":"CapabilityState"},
+        "UpdateJiraDataSource":{"shape":"CapabilityState"},
+        "ShareJiraDataSource":{"shape":"CapabilityState"},
+        "ServiceNowDataSource":{"shape":"CapabilityState"},
+        "CreateServiceNowDataSource":{"shape":"CapabilityState"},
+        "UpdateServiceNowDataSource":{"shape":"CapabilityState"},
+        "ShareServiceNowDataSource":{"shape":"CapabilityState"},
+        "AdobeAnalyticsDataSource":{"shape":"CapabilityState"},
+        "CreateAdobeAnalyticsDataSource":{"shape":"CapabilityState"},
+        "UpdateAdobeAnalyticsDataSource":{"shape":"CapabilityState"},
+        "ShareAdobeAnalyticsDataSource":{"shape":"CapabilityState"},
+        "GoogleAnalyticsDataSource":{"shape":"CapabilityState"},
+        "CreateGoogleAnalyticsDataSource":{"shape":"CapabilityState"},
+        "UpdateGoogleAnalyticsDataSource":{"shape":"CapabilityState"},
+        "ShareGoogleAnalyticsDataSource":{"shape":"CapabilityState"},
+        "GoogleSheetsDataSource":{"shape":"CapabilityState"},
+        "CreateGoogleSheetsDataSource":{"shape":"CapabilityState"},
+        "UpdateGoogleSheetsDataSource":{"shape":"CapabilityState"},
+        "ShareGoogleSheetsDataSource":{"shape":"CapabilityState"},
+        "DocumentDbDataSource":{"shape":"CapabilityState"},
+        "CreateDocumentDbDataSource":{"shape":"CapabilityState"},
+        "UpdateDocumentDbDataSource":{"shape":"CapabilityState"},
+        "ShareDocumentDbDataSource":{"shape":"CapabilityState"},
+        "MongoDbDataSource":{"shape":"CapabilityState"},
+        "CreateMongoDbDataSource":{"shape":"CapabilityState"},
+        "UpdateMongoDbDataSource":{"shape":"CapabilityState"},
+        "ShareMongoDbDataSource":{"shape":"CapabilityState"},
+        "MongoAtlasDataSource":{"shape":"CapabilityState"},
+        "CreateMongoAtlasDataSource":{"shape":"CapabilityState"},
+        "UpdateMongoAtlasDataSource":{"shape":"CapabilityState"},
+        "ShareMongoAtlasDataSource":{"shape":"CapabilityState"},
+        "DynamoDbDataSource":{"shape":"CapabilityState"},
+        "CreateDynamoDbDataSource":{"shape":"CapabilityState"},
+        "UpdateDynamoDbDataSource":{"shape":"CapabilityState"},
+        "ShareDynamoDbDataSource":{"shape":"CapabilityState"}
       }
     },
     "CapabilityState":{
@@ -9066,6 +9255,11 @@
     "ClientCredentialsSource":{
       "type":"string",
       "enum":["PLAIN_CREDENTIALS"]
+    },
+    "ClientEmail":{
+      "type":"string",
+      "max":256,
+      "min":1
     },
     "ClientId":{
       "type":"string",
@@ -12475,6 +12669,12 @@
       "min":0,
       "pattern":"arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}"
     },
+    "DataSourceCertThumbprint":{
+      "type":"string",
+      "max":128,
+      "min":1,
+      "sensitive":true
+    },
     "DataSourceCredentials":{
       "type":"structure",
       "members":{
@@ -12483,7 +12683,10 @@
         "SecretArn":{"shape":"SecretArn"},
         "KeyPairCredentials":{"shape":"KeyPairCredentials"},
         "WebProxyCredentials":{"shape":"WebProxyCredentials"},
-        "OAuthClientCredentials":{"shape":"OAuthClientCredentials"}
+        "OAuthClientCredentials":{"shape":"OAuthClientCredentials"},
+        "ServiceAccountCredentials":{"shape":"ServiceAccountCredentials"},
+        "SharePointClientCredentials":{"shape":"SharePointClientCredentials"},
+        "OneDriveClientCredentials":{"shape":"OneDriveClientCredentials"}
       },
       "sensitive":true
     },
@@ -12515,6 +12718,13 @@
         "DIRECT_QUICKSIGHT_SOLE_OWNER",
         "DATASOURCE_NAME"
       ]
+    },
+    "DataSourceKmsKeyArn":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"^arn:[-a-z0-9]*:kms:[-a-z0-9]*:[0-9]{12}:key/.+",
+      "sensitive":true
     },
     "DataSourceList":{
       "type":"list",
@@ -12693,7 +12903,9 @@
       "members":{
         "Host":{"shape":"Host"},
         "Port":{"shape":"Port"},
-        "SqlEndpointPath":{"shape":"SqlEndpointPath"}
+        "SqlEndpointPath":{"shape":"SqlEndpointPath"},
+        "AuthenticationType":{"shape":"AuthenticationType"},
+        "OAuthParameters":{"shape":"OAuthParameters"}
       }
     },
     "DatasetMetadata":{
@@ -13129,7 +13341,9 @@
         "DefaultTextFieldOptions":{"shape":"DefaultTextFieldControlOptions"},
         "DefaultTextAreaOptions":{"shape":"DefaultTextAreaControlOptions"},
         "DefaultSliderOptions":{"shape":"DefaultSliderControlOptions"},
-        "DefaultRelativeDateTimeOptions":{"shape":"DefaultRelativeDateTimeControlOptions"}
+        "DefaultRelativeDateTimeOptions":{"shape":"DefaultRelativeDateTimeControlOptions"},
+        "DefaultHierarchyList":{"shape":"DefaultHierarchyFilterListControlOptions"},
+        "DefaultHierarchyDropdown":{"shape":"DefaultHierarchyFilterDropDownControlOptions"}
       }
     },
     "DefaultFilterDropDownControlOptions":{
@@ -13170,6 +13384,26 @@
       "required":["CanvasSizeOptions"],
       "members":{
         "CanvasSizeOptions":{"shape":"GridLayoutCanvasSizeOptions"}
+      }
+    },
+    "DefaultHierarchyFilterDropDownControlOptions":{
+      "type":"structure",
+      "members":{
+        "DisplayOptions":{"shape":"HierarchyFilterDropDownControlDisplayOptions"},
+        "Type":{"shape":"SheetControlListType"},
+        "CommitMode":{"shape":"CommitMode"},
+        "ControlSortConfigurations":{"shape":"ControlSortConfigurationList"},
+        "ControlTitleFormatText":{"shape":"ControlTitleFormatText"}
+      }
+    },
+    "DefaultHierarchyFilterListControlOptions":{
+      "type":"structure",
+      "members":{
+        "DisplayOptions":{"shape":"HierarchyFilterListControlDisplayOptions"},
+        "Type":{"shape":"SheetControlListType"},
+        "CommitMode":{"shape":"CommitMode"},
+        "ControlSortConfigurations":{"shape":"ControlSortConfigurationList"},
+        "ControlTitleFormatText":{"shape":"ControlTitleFormatText"}
       }
     },
     "DefaultInteractiveLayoutConfiguration":{
@@ -17661,7 +17895,8 @@
         "TimeRangeFilter":{"shape":"TimeRangeFilter"},
         "RelativeDatesFilter":{"shape":"RelativeDatesFilter"},
         "TopBottomFilter":{"shape":"TopBottomFilter"},
-        "NestedFilter":{"shape":"NestedFilter"}
+        "NestedFilter":{"shape":"NestedFilter"},
+        "HierarchyFilter":{"shape":"HierarchyFilter"}
       }
     },
     "FilterAggMetrics":{
@@ -17696,7 +17931,9 @@
         "TextArea":{"shape":"FilterTextAreaControl"},
         "Slider":{"shape":"FilterSliderControl"},
         "RelativeDateTime":{"shape":"FilterRelativeDateTimeControl"},
-        "CrossSheet":{"shape":"FilterCrossSheetControl"}
+        "CrossSheet":{"shape":"FilterCrossSheetControl"},
+        "HierarchyList":{"shape":"HierarchyFilterListControl"},
+        "HierarchyDropdown":{"shape":"HierarchyFilterDropDownControl"}
       }
     },
     "FilterControlList":{
@@ -19663,10 +19900,130 @@
       "type":"string",
       "pattern":"^#[A-F0-9]{6}(?:[A-F0-9]{2})?$"
     },
+    "HierarchyFilter":{
+      "type":"structure",
+      "required":[
+        "FilterId",
+        "Column",
+        "HierarchyLevels",
+        "NullOption",
+        "MatchOperator"
+      ],
+      "members":{
+        "FilterId":{"shape":"ShortRestrictiveResourceId"},
+        "Column":{"shape":"ColumnIdentifier"},
+        "HierarchyLevels":{"shape":"HierarchyFilterLevelList"},
+        "HierarchyTree":{"shape":"HierarchyFilterNode"},
+        "NullOption":{"shape":"FilterNullOption"},
+        "MatchOperator":{"shape":"HierarchyFilterMatchOperator"},
+        "DefaultFilterControlConfiguration":{"shape":"DefaultFilterControlConfiguration"}
+      }
+    },
+    "HierarchyFilterDropDownControl":{
+      "type":"structure",
+      "required":[
+        "FilterControlId",
+        "SourceFilterId"
+      ],
+      "members":{
+        "FilterControlId":{"shape":"ShortRestrictiveResourceId"},
+        "SourceFilterId":{"shape":"ShortRestrictiveResourceId"},
+        "Title":{"shape":"SheetControlTitle"},
+        "DisplayOptions":{"shape":"HierarchyFilterDropDownControlDisplayOptions"},
+        "Type":{"shape":"SheetControlListType"},
+        "CommitMode":{"shape":"CommitMode"},
+        "ControlSortConfigurations":{"shape":"ControlSortConfigurationList"},
+        "ControlTitleFormatText":{"shape":"ControlTitleFormatText"}
+      }
+    },
+    "HierarchyFilterDropDownControlDisplayOptions":{
+      "type":"structure",
+      "members":{
+        "TitleOptions":{"shape":"LabelOptions"},
+        "InfoIconLabelOptions":{"shape":"SheetControlInfoIconLabelOptions"}
+      }
+    },
+    "HierarchyFilterLevel":{
+      "type":"structure",
+      "required":["Column"],
+      "members":{
+        "Column":{"shape":"ColumnIdentifier"}
+      }
+    },
+    "HierarchyFilterLevelList":{
+      "type":"list",
+      "member":{"shape":"HierarchyFilterLevel"},
+      "max":5,
+      "min":1
+    },
+    "HierarchyFilterListControl":{
+      "type":"structure",
+      "required":[
+        "FilterControlId",
+        "SourceFilterId"
+      ],
+      "members":{
+        "FilterControlId":{"shape":"ShortRestrictiveResourceId"},
+        "SourceFilterId":{"shape":"ShortRestrictiveResourceId"},
+        "Title":{"shape":"SheetControlTitle"},
+        "DisplayOptions":{"shape":"HierarchyFilterListControlDisplayOptions"},
+        "Type":{"shape":"SheetControlListType"},
+        "CommitMode":{"shape":"CommitMode"},
+        "ControlSortConfigurations":{"shape":"ControlSortConfigurationList"},
+        "ControlTitleFormatText":{"shape":"ControlTitleFormatText"}
+      }
+    },
+    "HierarchyFilterListControlDisplayOptions":{
+      "type":"structure",
+      "members":{
+        "TitleOptions":{"shape":"LabelOptions"},
+        "InfoIconLabelOptions":{"shape":"SheetControlInfoIconLabelOptions"},
+        "SearchOptions":{"shape":"HierarchyFilterListControlSearchOptions"}
+      }
+    },
+    "HierarchyFilterListControlSearchOptions":{
+      "type":"structure",
+      "members":{
+        "Visibility":{"shape":"Visibility"}
+      }
+    },
+    "HierarchyFilterMatchOperator":{
+      "type":"string",
+      "enum":[
+        "INCLUDE",
+        "EXCLUDE"
+      ]
+    },
+    "HierarchyFilterNode":{
+      "type":"structure",
+      "required":["Column"],
+      "members":{
+        "Column":{"shape":"ColumnIdentifier"},
+        "ParentValue":{"shape":"HierarchyFilterValue"},
+        "HierarchyValues":{"shape":"HierarchyValuesList"},
+        "Children":{"shape":"HierarchyFilterNodeList"}
+      }
+    },
+    "HierarchyFilterNodeList":{
+      "type":"list",
+      "member":{"shape":"HierarchyFilterNode"},
+      "max":1000,
+      "min":0
+    },
+    "HierarchyFilterValue":{
+      "type":"string",
+      "max":512,
+      "sensitive":true
+    },
     "HierarchyId":{
       "type":"string",
       "max":512,
       "min":1
+    },
+    "HierarchyValuesList":{
+      "type":"list",
+      "member":{"shape":"HierarchyFilterValue"},
+      "max":2000
     },
     "HistogramAggregatedFieldWells":{
       "type":"structure",
@@ -23997,6 +24354,17 @@
       "max":512,
       "min":1
     },
+    "OneDriveClientCredentials":{
+      "type":"structure",
+      "required":[
+        "KmsKeyArn",
+        "CertThumbprint"
+      ],
+      "members":{
+        "KmsKeyArn":{"shape":"DataSourceKmsKeyArn"},
+        "CertThumbprint":{"shape":"DataSourceCertThumbprint"}
+      }
+    },
     "OneDriveClientId":{
       "type":"string",
       "max":100,
@@ -27417,6 +27785,19 @@
       "member":{"shape":"SeriesItem"},
       "max":2000
     },
+    "ServiceAccountCredentials":{
+      "type":"structure",
+      "required":[
+        "AdminAccountEmail",
+        "ServiceAccountPrivateKey",
+        "ClientEmail"
+      ],
+      "members":{
+        "AdminAccountEmail":{"shape":"AdminAccountEmail"},
+        "ServiceAccountPrivateKey":{"shape":"PrivateKey"},
+        "ClientEmail":{"shape":"ClientEmail"}
+      }
+    },
     "ServiceNowParameters":{
       "type":"structure",
       "required":["SiteBaseUrl"],
@@ -27503,6 +27884,17 @@
       "required":["BackgroundColor"],
       "members":{
         "BackgroundColor":{"shape":"ConditionalFormattingColor"}
+      }
+    },
+    "SharePointClientCredentials":{
+      "type":"structure",
+      "required":[
+        "KmsKeyArn",
+        "CertThumbprint"
+      ],
+      "members":{
+        "KmsKeyArn":{"shape":"DataSourceKmsKeyArn"},
+        "CertThumbprint":{"shape":"DataSourceCertThumbprint"}
       }
     },
     "SharePointClientId":{

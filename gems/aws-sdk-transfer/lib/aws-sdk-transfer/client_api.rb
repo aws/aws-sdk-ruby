@@ -38,6 +38,7 @@ module Aws::Transfer
     CertificateStatusType = Shapes::StringShape.new(name: 'CertificateStatusType')
     CertificateType = Shapes::StringShape.new(name: 'CertificateType')
     CertificateUsageType = Shapes::StringShape.new(name: 'CertificateUsageType')
+    CommunicationMode = Shapes::StringShape.new(name: 'CommunicationMode')
     CompressionEnum = Shapes::StringShape.new(name: 'CompressionEnum')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ConnectorEgressConfig = Shapes::UnionShape.new(name: 'ConnectorEgressConfig')
@@ -172,6 +173,7 @@ module Aws::Transfer
     HostKeyDescription = Shapes::StringShape.new(name: 'HostKeyDescription')
     HostKeyFingerprint = Shapes::StringShape.new(name: 'HostKeyFingerprint')
     HostKeyId = Shapes::StringShape.new(name: 'HostKeyId')
+    HostKeyStorageType = Shapes::StringShape.new(name: 'HostKeyStorageType')
     HostKeyType = Shapes::StringShape.new(name: 'HostKeyType')
     IdentityCenterApplicationArn = Shapes::StringShape.new(name: 'IdentityCenterApplicationArn')
     IdentityCenterConfig = Shapes::StructureShape.new(name: 'IdentityCenterConfig')
@@ -189,6 +191,7 @@ module Aws::Transfer
     InvalidNextTokenException = Shapes::StructureShape.new(name: 'InvalidNextTokenException')
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     IpAddressType = Shapes::StringShape.new(name: 'IpAddressType')
+    KmsKey = Shapes::StringShape.new(name: 'KmsKey')
     ListAccessesRequest = Shapes::StructureShape.new(name: 'ListAccessesRequest')
     ListAccessesResponse = Shapes::StructureShape.new(name: 'ListAccessesResponse')
     ListAgreementsRequest = Shapes::StructureShape.new(name: 'ListAgreementsRequest')
@@ -323,6 +326,8 @@ module Aws::Transfer
     SftpConnectorTrustedHostKey = Shapes::StringShape.new(name: 'SftpConnectorTrustedHostKey')
     SftpConnectorTrustedHostKeyList = Shapes::ListShape.new(name: 'SftpConnectorTrustedHostKeyList')
     SftpPort = Shapes::IntegerShape.new(name: 'SftpPort')
+    SftpPortWithOptions = Shapes::StructureShape.new(name: 'SftpPortWithOptions')
+    SftpPorts = Shapes::ListShape.new(name: 'SftpPorts')
     SigningAlg = Shapes::StringShape.new(name: 'SigningAlg')
     SourceFileLocation = Shapes::StringShape.new(name: 'SourceFileLocation')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
@@ -547,6 +552,7 @@ module Aws::Transfer
     CreateServerRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     CreateServerRequest.add_member(:s3_storage_options, Shapes::ShapeRef.new(shape: S3StorageOptions, location_name: "S3StorageOptions"))
     CreateServerRequest.add_member(:ip_address_type, Shapes::ShapeRef.new(shape: IpAddressType, location_name: "IpAddressType"))
+    CreateServerRequest.add_member(:host_key_storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "HostKeyStorageType"))
     CreateServerRequest.struct_class = Types::CreateServerRequest
 
     CreateServerResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -583,6 +589,7 @@ module Aws::Transfer
     CreateWorkflowRequest.add_member(:steps, Shapes::ShapeRef.new(shape: WorkflowSteps, required: true, location_name: "Steps"))
     CreateWorkflowRequest.add_member(:on_exception_steps, Shapes::ShapeRef.new(shape: WorkflowSteps, location_name: "OnExceptionSteps"))
     CreateWorkflowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    CreateWorkflowRequest.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     CreateWorkflowRequest.struct_class = Types::CreateWorkflowRequest
 
     CreateWorkflowResponse.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, required: true, location_name: "WorkflowId"))
@@ -830,6 +837,8 @@ module Aws::Transfer
     DescribedHostKey.add_member(:type, Shapes::ShapeRef.new(shape: HostKeyType, location_name: "Type"))
     DescribedHostKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, location_name: "DateImported"))
     DescribedHostKey.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribedHostKey.add_member(:storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "StorageType"))
+    DescribedHostKey.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretId, location_name: "SecretId"))
     DescribedHostKey.struct_class = Types::DescribedHostKey
 
     DescribedIdentityCenterConfig.add_member(:application_arn, Shapes::ShapeRef.new(shape: IdentityCenterApplicationArn, location_name: "ApplicationArn"))
@@ -935,6 +944,7 @@ module Aws::Transfer
     DescribedWorkflow.add_member(:on_exception_steps, Shapes::ShapeRef.new(shape: WorkflowSteps, location_name: "OnExceptionSteps"))
     DescribedWorkflow.add_member(:workflow_id, Shapes::ShapeRef.new(shape: WorkflowId, location_name: "WorkflowId"))
     DescribedWorkflow.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    DescribedWorkflow.add_member(:structured_log_destinations, Shapes::ShapeRef.new(shape: StructuredLogDestinations, location_name: "StructuredLogDestinations"))
     DescribedWorkflow.struct_class = Types::DescribedWorkflow
 
     EfsFileLocation.add_member(:file_system_id, Shapes::ShapeRef.new(shape: EfsFileSystemId, location_name: "FileSystemId"))
@@ -1004,6 +1014,8 @@ module Aws::Transfer
     ImportHostKeyRequest.add_member(:host_key_body, Shapes::ShapeRef.new(shape: HostKey, required: true, location_name: "HostKeyBody"))
     ImportHostKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, location_name: "Description"))
     ImportHostKeyRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
+    ImportHostKeyRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "StorageType"))
+    ImportHostKeyRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
     ImportHostKeyRequest.struct_class = Types::ImportHostKeyRequest
 
     ImportHostKeyResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
@@ -1211,6 +1223,8 @@ module Aws::Transfer
     ListedHostKey.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, location_name: "Description"))
     ListedHostKey.add_member(:type, Shapes::ShapeRef.new(shape: HostKeyType, location_name: "Type"))
     ListedHostKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, location_name: "DateImported"))
+    ListedHostKey.add_member(:storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "StorageType"))
+    ListedHostKey.add_member(:secret_id, Shapes::ShapeRef.new(shape: SecretId, location_name: "SecretId"))
     ListedHostKey.struct_class = Types::ListedHostKey
 
     ListedHostKeys.member = Shapes::ShapeRef.new(shape: ListedHostKey)
@@ -1277,6 +1291,7 @@ module Aws::Transfer
     ProtocolDetails.add_member(:passive_ip, Shapes::ShapeRef.new(shape: PassiveIp, location_name: "PassiveIp"))
     ProtocolDetails.add_member(:tls_session_resumption_mode, Shapes::ShapeRef.new(shape: TlsSessionResumptionMode, location_name: "TlsSessionResumptionMode"))
     ProtocolDetails.add_member(:set_stat_option, Shapes::ShapeRef.new(shape: SetStatOption, location_name: "SetStatOption"))
+    ProtocolDetails.add_member(:sftp_ports, Shapes::ShapeRef.new(shape: SftpPorts, location_name: "SftpPorts"))
     ProtocolDetails.add_member(:as_2_transports, Shapes::ShapeRef.new(shape: As2Transports, location_name: "As2Transports"))
     ProtocolDetails.add_member(:proxy_config, Shapes::ShapeRef.new(shape: ProxyConfig, location_name: "ProxyConfig"))
     ProtocolDetails.struct_class = Types::ProtocolDetails
@@ -1353,6 +1368,12 @@ module Aws::Transfer
     SftpConnectorConnectionDetails.struct_class = Types::SftpConnectorConnectionDetails
 
     SftpConnectorTrustedHostKeyList.member = Shapes::ShapeRef.new(shape: SftpConnectorTrustedHostKey)
+
+    SftpPortWithOptions.add_member(:sftp_port, Shapes::ShapeRef.new(shape: SftpPort, required: true, location_name: "SftpPort"))
+    SftpPortWithOptions.add_member(:communication_mode, Shapes::ShapeRef.new(shape: CommunicationMode, location_name: "CommunicationMode"))
+    SftpPortWithOptions.struct_class = Types::SftpPortWithOptions
+
+    SftpPorts.member = Shapes::ShapeRef.new(shape: SftpPortWithOptions)
 
     SshPublicKey.add_member(:date_imported, Shapes::ShapeRef.new(shape: DateImported, required: true, location_name: "DateImported"))
     SshPublicKey.add_member(:ssh_public_key_body, Shapes::ShapeRef.new(shape: SshPublicKeyBody, required: true, location_name: "SshPublicKeyBody"))
@@ -1518,7 +1539,9 @@ module Aws::Transfer
 
     UpdateHostKeyRequest.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))
     UpdateHostKeyRequest.add_member(:host_key_id, Shapes::ShapeRef.new(shape: HostKeyId, required: true, location_name: "HostKeyId"))
-    UpdateHostKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, required: true, location_name: "Description"))
+    UpdateHostKeyRequest.add_member(:description, Shapes::ShapeRef.new(shape: HostKeyDescription, location_name: "Description"))
+    UpdateHostKeyRequest.add_member(:storage_type, Shapes::ShapeRef.new(shape: HostKeyStorageType, location_name: "StorageType"))
+    UpdateHostKeyRequest.add_member(:kms_key, Shapes::ShapeRef.new(shape: KmsKey, location_name: "KmsKey"))
     UpdateHostKeyRequest.struct_class = Types::UpdateHostKeyRequest
 
     UpdateHostKeyResponse.add_member(:server_id, Shapes::ShapeRef.new(shape: ServerId, required: true, location_name: "ServerId"))

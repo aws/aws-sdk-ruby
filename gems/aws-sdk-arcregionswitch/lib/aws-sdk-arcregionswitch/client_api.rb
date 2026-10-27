@@ -41,6 +41,7 @@ module Aws::ARCRegionswitch
     AuroraProvisionedScalingConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'AuroraProvisionedScalingConfigurationTimeoutMinutesInteger')
     AuroraServerlessScalingConfiguration = Shapes::StructureShape.new(name: 'AuroraServerlessScalingConfiguration')
     AuroraServerlessScalingConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'AuroraServerlessScalingConfigurationTimeoutMinutesInteger')
+    Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     CancelPlanExecutionRequest = Shapes::StructureShape.new(name: 'CancelPlanExecutionRequest')
     CancelPlanExecutionResponse = Shapes::StructureShape.new(name: 'CancelPlanExecutionResponse')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -133,6 +134,7 @@ module Aws::ARCRegionswitch
     LambdaEventSourceMappingUngraceful = Shapes::StructureShape.new(name: 'LambdaEventSourceMappingUngraceful')
     LambdaEventSourceMappingUngracefulBehavior = Shapes::StringShape.new(name: 'LambdaEventSourceMappingUngracefulBehavior')
     LambdaList = Shapes::ListShape.new(name: 'LambdaList')
+    LambdaPayload = Shapes::StringShape.new(name: 'LambdaPayload')
     LambdaUngraceful = Shapes::StructureShape.new(name: 'LambdaUngraceful')
     LambdaUngracefulBehavior = Shapes::StringShape.new(name: 'LambdaUngracefulBehavior')
     Lambdas = Shapes::StructureShape.new(name: 'Lambdas')
@@ -152,6 +154,8 @@ module Aws::ARCRegionswitch
     ListRoute53HealthChecksRequest = Shapes::StructureShape.new(name: 'ListRoute53HealthChecksRequest')
     ListRoute53HealthChecksRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListRoute53HealthChecksRequestMaxResultsInteger')
     ListRoute53HealthChecksResponse = Shapes::StructureShape.new(name: 'ListRoute53HealthChecksResponse')
+    ListServiceQuotaWarningsRequest = Shapes::StructureShape.new(name: 'ListServiceQuotaWarningsRequest')
+    ListServiceQuotaWarningsResponse = Shapes::StructureShape.new(name: 'ListServiceQuotaWarningsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -167,6 +171,7 @@ module Aws::ARCRegionswitch
     ParallelExecutionBlockConfiguration = Shapes::StructureShape.new(name: 'ParallelExecutionBlockConfiguration')
     Plan = Shapes::StructureShape.new(name: 'Plan')
     PlanArn = Shapes::StringShape.new(name: 'PlanArn')
+    PlanArnList = Shapes::ListShape.new(name: 'PlanArnList')
     PlanList = Shapes::ListShape.new(name: 'PlanList')
     PlanName = Shapes::StringShape.new(name: 'PlanName')
     PlanRecoveryTimeObjectiveMinutesInteger = Shapes::IntegerShape.new(name: 'PlanRecoveryTimeObjectiveMinutesInteger')
@@ -190,6 +195,7 @@ module Aws::ARCRegionswitch
     RegionEventSourceMappingMap = Shapes::MapShape.new(name: 'RegionEventSourceMappingMap')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     RegionNeptuneClusterArnMap = Shapes::MapShape.new(name: 'RegionNeptuneClusterArnMap')
+    RegionSsmDocumentMap = Shapes::MapShape.new(name: 'RegionSsmDocumentMap')
     RegionSwitchPlanConfiguration = Shapes::StructureShape.new(name: 'RegionSwitchPlanConfiguration')
     RegionToRunIn = Shapes::StringShape.new(name: 'RegionToRunIn')
     RegionalScalingResource = Shapes::MapShape.new(name: 'RegionalScalingResource')
@@ -221,6 +227,25 @@ module Aws::ARCRegionswitch
     S3ReportOutputConfigurationBucketPathString = Shapes::StringShape.new(name: 'S3ReportOutputConfigurationBucketPathString')
     Service = Shapes::StructureShape.new(name: 'Service')
     ServiceList = Shapes::ListShape.new(name: 'ServiceList')
+    ServiceQuotaWarningStatus = Shapes::StringShape.new(name: 'ServiceQuotaWarningStatus')
+    ServiceQuotaWarningSummary = Shapes::StructureShape.new(name: 'ServiceQuotaWarningSummary')
+    ServiceQuotaWarningSummaryList = Shapes::ListShape.new(name: 'ServiceQuotaWarningSummaryList')
+    SsmDocumentArn = Shapes::StringShape.new(name: 'SsmDocumentArn')
+    SsmDocumentConfig = Shapes::StructureShape.new(name: 'SsmDocumentConfig')
+    SsmDocumentParameters = Shapes::MapShape.new(name: 'SsmDocumentParameters')
+    SsmDocumentVersion = Shapes::StringShape.new(name: 'SsmDocumentVersion')
+    SsmParameterKey = Shapes::StringShape.new(name: 'SsmParameterKey')
+    SsmParameterValue = Shapes::StringShape.new(name: 'SsmParameterValue')
+    SsmParameterValues = Shapes::ListShape.new(name: 'SsmParameterValues')
+    SsmSendCommandConfiguration = Shapes::StructureShape.new(name: 'SsmSendCommandConfiguration')
+    SsmSendCommandConfigurationTimeoutMinutesInteger = Shapes::IntegerShape.new(name: 'SsmSendCommandConfigurationTimeoutMinutesInteger')
+    SsmSendCommandUngraceful = Shapes::StructureShape.new(name: 'SsmSendCommandUngraceful')
+    SsmSendCommandUngracefulBehavior = Shapes::StringShape.new(name: 'SsmSendCommandUngracefulBehavior')
+    SsmTarget = Shapes::StructureShape.new(name: 'SsmTarget')
+    SsmTargetKey = Shapes::StringShape.new(name: 'SsmTargetKey')
+    SsmTargetList = Shapes::ListShape.new(name: 'SsmTargetList')
+    SsmTargetValue = Shapes::StringShape.new(name: 'SsmTargetValue')
+    SsmTargetValueList = Shapes::ListShape.new(name: 'SsmTargetValueList')
     StartPlanExecutionRequest = Shapes::StructureShape.new(name: 'StartPlanExecutionRequest')
     StartPlanExecutionRequestClientTokenString = Shapes::StringShape.new(name: 'StartPlanExecutionRequestClientTokenString')
     StartPlanExecutionResponse = Shapes::StructureShape.new(name: 'StartPlanExecutionResponse')
@@ -253,6 +278,7 @@ module Aws::ARCRegionswitch
     UpdatePlanRequest = Shapes::StructureShape.new(name: 'UpdatePlanRequest')
     UpdatePlanRequestRecoveryTimeObjectiveMinutesInteger = Shapes::IntegerShape.new(name: 'UpdatePlanRequestRecoveryTimeObjectiveMinutesInteger')
     UpdatePlanResponse = Shapes::StructureShape.new(name: 'UpdatePlanResponse')
+    WaitELBTargetGroupHealthy = Shapes::StringShape.new(name: 'WaitELBTargetGroupHealthy')
     Workflow = Shapes::StructureShape.new(name: 'Workflow')
     WorkflowList = Shapes::ListShape.new(name: 'WorkflowList')
     WorkflowTargetAction = Shapes::StringShape.new(name: 'WorkflowTargetAction')
@@ -365,6 +391,7 @@ module Aws::ARCRegionswitch
     CreatePlanRequest.add_member(:associated_alarms, Shapes::ShapeRef.new(shape: AssociatedAlarmMap, location_name: "associatedAlarms"))
     CreatePlanRequest.add_member(:triggers, Shapes::ShapeRef.new(shape: TriggerList, location_name: "triggers"))
     CreatePlanRequest.add_member(:report_configuration, Shapes::ShapeRef.new(shape: ReportConfiguration, location_name: "reportConfiguration"))
+    CreatePlanRequest.add_member(:service_quota_checks_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "serviceQuotaChecksEnabled"))
     CreatePlanRequest.add_member(:name, Shapes::ShapeRef.new(shape: PlanName, required: true, location_name: "name"))
     CreatePlanRequest.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "regions"))
     CreatePlanRequest.add_member(:recovery_approach, Shapes::ShapeRef.new(shape: RecoveryApproach, required: true, location_name: "recoveryApproach"))
@@ -406,6 +433,7 @@ module Aws::ARCRegionswitch
     Ec2AsgCapacityIncreaseConfiguration.add_member(:ungraceful, Shapes::ShapeRef.new(shape: Ec2Ungraceful, location_name: "ungraceful"))
     Ec2AsgCapacityIncreaseConfiguration.add_member(:target_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "targetPercent"))
     Ec2AsgCapacityIncreaseConfiguration.add_member(:capacity_monitoring_approach, Shapes::ShapeRef.new(shape: Ec2AsgCapacityMonitoringApproach, location_name: "capacityMonitoringApproach"))
+    Ec2AsgCapacityIncreaseConfiguration.add_member(:wait_elb_target_group_healthy, Shapes::ShapeRef.new(shape: WaitELBTargetGroupHealthy, location_name: "waitELBTargetGroupHealthy"))
     Ec2AsgCapacityIncreaseConfiguration.struct_class = Types::Ec2AsgCapacityIncreaseConfiguration
 
     Ec2Ungraceful.add_member(:minimum_success_percentage, Shapes::ShapeRef.new(shape: Ec2UngracefulMinimumSuccessPercentageInteger, required: true, location_name: "minimumSuccessPercentage"))
@@ -416,6 +444,7 @@ module Aws::ARCRegionswitch
     EcsCapacityIncreaseConfiguration.add_member(:ungraceful, Shapes::ShapeRef.new(shape: EcsUngraceful, location_name: "ungraceful"))
     EcsCapacityIncreaseConfiguration.add_member(:target_percent, Shapes::ShapeRef.new(shape: Integer, location_name: "targetPercent"))
     EcsCapacityIncreaseConfiguration.add_member(:capacity_monitoring_approach, Shapes::ShapeRef.new(shape: EcsCapacityMonitoringApproach, location_name: "capacityMonitoringApproach"))
+    EcsCapacityIncreaseConfiguration.add_member(:wait_elb_target_group_healthy, Shapes::ShapeRef.new(shape: WaitELBTargetGroupHealthy, location_name: "waitELBTargetGroupHealthy"))
     EcsCapacityIncreaseConfiguration.struct_class = Types::EcsCapacityIncreaseConfiguration
 
     EcsUngraceful.add_member(:minimum_success_percentage, Shapes::ShapeRef.new(shape: EcsUngracefulMinimumSuccessPercentageInteger, required: true, location_name: "minimumSuccessPercentage"))
@@ -467,6 +496,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member(:aurora_provisioned_scaling_config, Shapes::ShapeRef.new(shape: AuroraProvisionedScalingConfiguration, location_name: "auroraProvisionedScalingConfig"))
     ExecutionBlockConfiguration.add_member(:neptune_global_database_config, Shapes::ShapeRef.new(shape: NeptuneGlobalDatabaseConfiguration, location_name: "neptuneGlobalDatabaseConfig"))
     ExecutionBlockConfiguration.add_member(:rds_switchover_read_replica_config, Shapes::ShapeRef.new(shape: RdsSwitchoverReadReplicaConfiguration, location_name: "rdsSwitchoverReadReplicaConfig"))
+    ExecutionBlockConfiguration.add_member(:ssm_send_command_config, Shapes::ShapeRef.new(shape: SsmSendCommandConfiguration, location_name: "ssmSendCommandConfig"))
     ExecutionBlockConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExecutionBlockConfiguration.add_member_subclass(:custom_action_lambda_config, Types::ExecutionBlockConfiguration::CustomActionLambdaConfig)
     ExecutionBlockConfiguration.add_member_subclass(:ec2_asg_capacity_increase_config, Types::ExecutionBlockConfiguration::Ec2AsgCapacityIncreaseConfig)
@@ -486,6 +516,7 @@ module Aws::ARCRegionswitch
     ExecutionBlockConfiguration.add_member_subclass(:aurora_provisioned_scaling_config, Types::ExecutionBlockConfiguration::AuroraProvisionedScalingConfig)
     ExecutionBlockConfiguration.add_member_subclass(:neptune_global_database_config, Types::ExecutionBlockConfiguration::NeptuneGlobalDatabaseConfig)
     ExecutionBlockConfiguration.add_member_subclass(:rds_switchover_read_replica_config, Types::ExecutionBlockConfiguration::RdsSwitchoverReadReplicaConfig)
+    ExecutionBlockConfiguration.add_member_subclass(:ssm_send_command_config, Types::ExecutionBlockConfiguration::SsmSendCommandConfig)
     ExecutionBlockConfiguration.add_member_subclass(:unknown, Types::ExecutionBlockConfiguration::Unknown)
     ExecutionBlockConfiguration.struct_class = Types::ExecutionBlockConfiguration
 
@@ -615,6 +646,7 @@ module Aws::ARCRegionswitch
     Lambdas.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
     Lambdas.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
     Lambdas.add_member(:arn, Shapes::ShapeRef.new(shape: LambdaArn, location_name: "arn"))
+    Lambdas.add_member(:payload, Shapes::ShapeRef.new(shape: LambdaPayload, location_name: "payload"))
     Lambdas.struct_class = Types::Lambdas
 
     ListPlanExecutionEventsRequest.add_member(:plan_arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "planArn"))
@@ -676,6 +708,15 @@ module Aws::ARCRegionswitch
     ListRoute53HealthChecksResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListRoute53HealthChecksResponse.struct_class = Types::ListRoute53HealthChecksResponse
 
+    ListServiceQuotaWarningsRequest.add_member(:plan_arns, Shapes::ShapeRef.new(shape: PlanArnList, location_name: "planArns"))
+    ListServiceQuotaWarningsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    ListServiceQuotaWarningsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListServiceQuotaWarningsRequest.struct_class = Types::ListServiceQuotaWarningsRequest
+
+    ListServiceQuotaWarningsResponse.add_member(:service_quota_warning_summaries, Shapes::ShapeRef.new(shape: ServiceQuotaWarningSummaryList, required: true, location_name: "serviceQuotaWarningSummaries"))
+    ListServiceQuotaWarningsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListServiceQuotaWarningsResponse.struct_class = Types::ListServiceQuotaWarningsResponse
+
     ListTagsForResourceRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "arn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -709,6 +750,7 @@ module Aws::ARCRegionswitch
     Plan.add_member(:associated_alarms, Shapes::ShapeRef.new(shape: AssociatedAlarmMap, location_name: "associatedAlarms"))
     Plan.add_member(:triggers, Shapes::ShapeRef.new(shape: TriggerList, location_name: "triggers"))
     Plan.add_member(:report_configuration, Shapes::ShapeRef.new(shape: ReportConfiguration, location_name: "reportConfiguration"))
+    Plan.add_member(:service_quota_checks_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "serviceQuotaChecksEnabled"))
     Plan.add_member(:name, Shapes::ShapeRef.new(shape: PlanName, required: true, location_name: "name"))
     Plan.add_member(:regions, Shapes::ShapeRef.new(shape: RegionList, required: true, location_name: "regions"))
     Plan.add_member(:recovery_approach, Shapes::ShapeRef.new(shape: RecoveryApproach, required: true, location_name: "recoveryApproach"))
@@ -717,6 +759,8 @@ module Aws::ARCRegionswitch
     Plan.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
     Plan.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     Plan.struct_class = Types::Plan
+
+    PlanArnList.member = Shapes::ShapeRef.new(shape: PlanArn)
 
     PlanList.member = Shapes::ShapeRef.new(shape: AbbreviatedPlan)
 
@@ -763,6 +807,9 @@ module Aws::ARCRegionswitch
 
     RegionNeptuneClusterArnMap.key = Shapes::ShapeRef.new(shape: Region)
     RegionNeptuneClusterArnMap.value = Shapes::ShapeRef.new(shape: NeptuneClusterArn)
+
+    RegionSsmDocumentMap.key = Shapes::ShapeRef.new(shape: Region)
+    RegionSsmDocumentMap.value = Shapes::ShapeRef.new(shape: SsmDocumentConfig)
 
     RegionSwitchPlanConfiguration.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
     RegionSwitchPlanConfiguration.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
@@ -842,6 +889,52 @@ module Aws::ARCRegionswitch
     Service.struct_class = Types::Service
 
     ServiceList.member = Shapes::ShapeRef.new(shape: Service)
+
+    ServiceQuotaWarningSummary.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    ServiceQuotaWarningSummary.add_member(:quota_region, Shapes::ShapeRef.new(shape: Region, required: true, location_name: "quotaRegion"))
+    ServiceQuotaWarningSummary.add_member(:service_code, Shapes::ShapeRef.new(shape: String, location_name: "serviceCode"))
+    ServiceQuotaWarningSummary.add_member(:quota_code, Shapes::ShapeRef.new(shape: String, location_name: "quotaCode"))
+    ServiceQuotaWarningSummary.add_member(:quota_name, Shapes::ShapeRef.new(shape: String, location_name: "quotaName"))
+    ServiceQuotaWarningSummary.add_member(:status, Shapes::ShapeRef.new(shape: ServiceQuotaWarningStatus, required: true, location_name: "status"))
+    ServiceQuotaWarningSummary.add_member(:plan_arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "planArn"))
+    ServiceQuotaWarningSummary.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "requestId"))
+    ServiceQuotaWarningSummary.add_member(:case_id, Shapes::ShapeRef.new(shape: String, location_name: "caseId"))
+    ServiceQuotaWarningSummary.add_member(:warning_message, Shapes::ShapeRef.new(shape: String, location_name: "warningMessage"))
+    ServiceQuotaWarningSummary.add_member(:last_checked_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastCheckedAt"))
+    ServiceQuotaWarningSummary.add_member(:warning_created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "warningCreatedAt"))
+    ServiceQuotaWarningSummary.struct_class = Types::ServiceQuotaWarningSummary
+
+    ServiceQuotaWarningSummaryList.member = Shapes::ShapeRef.new(shape: ServiceQuotaWarningSummary)
+
+    SsmDocumentConfig.add_member(:cross_account_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "crossAccountRole"))
+    SsmDocumentConfig.add_member(:external_id, Shapes::ShapeRef.new(shape: String, location_name: "externalId"))
+    SsmDocumentConfig.add_member(:document_arn, Shapes::ShapeRef.new(shape: SsmDocumentArn, required: true, location_name: "documentArn"))
+    SsmDocumentConfig.add_member(:targets, Shapes::ShapeRef.new(shape: SsmTargetList, required: true, location_name: "targets"))
+    SsmDocumentConfig.add_member(:parameters, Shapes::ShapeRef.new(shape: SsmDocumentParameters, location_name: "parameters"))
+    SsmDocumentConfig.add_member(:document_version, Shapes::ShapeRef.new(shape: SsmDocumentVersion, location_name: "documentVersion"))
+    SsmDocumentConfig.struct_class = Types::SsmDocumentConfig
+
+    SsmDocumentParameters.key = Shapes::ShapeRef.new(shape: SsmParameterKey)
+    SsmDocumentParameters.value = Shapes::ShapeRef.new(shape: SsmParameterValues)
+
+    SsmParameterValues.member = Shapes::ShapeRef.new(shape: SsmParameterValue)
+
+    SsmSendCommandConfiguration.add_member(:timeout_minutes, Shapes::ShapeRef.new(shape: SsmSendCommandConfigurationTimeoutMinutesInteger, location_name: "timeoutMinutes"))
+    SsmSendCommandConfiguration.add_member(:region_documents, Shapes::ShapeRef.new(shape: RegionSsmDocumentMap, required: true, location_name: "regionDocuments"))
+    SsmSendCommandConfiguration.add_member(:retry_interval_minutes, Shapes::ShapeRef.new(shape: Float, required: true, location_name: "retryIntervalMinutes"))
+    SsmSendCommandConfiguration.add_member(:ungraceful, Shapes::ShapeRef.new(shape: SsmSendCommandUngraceful, location_name: "ungraceful"))
+    SsmSendCommandConfiguration.struct_class = Types::SsmSendCommandConfiguration
+
+    SsmSendCommandUngraceful.add_member(:behavior, Shapes::ShapeRef.new(shape: SsmSendCommandUngracefulBehavior, location_name: "behavior"))
+    SsmSendCommandUngraceful.struct_class = Types::SsmSendCommandUngraceful
+
+    SsmTarget.add_member(:key, Shapes::ShapeRef.new(shape: SsmTargetKey, required: true, location_name: "key"))
+    SsmTarget.add_member(:values, Shapes::ShapeRef.new(shape: SsmTargetValueList, required: true, location_name: "values"))
+    SsmTarget.struct_class = Types::SsmTarget
+
+    SsmTargetList.member = Shapes::ShapeRef.new(shape: SsmTarget)
+
+    SsmTargetValueList.member = Shapes::ShapeRef.new(shape: SsmTargetValue)
 
     StartPlanExecutionRequest.add_member(:plan_arn, Shapes::ShapeRef.new(shape: PlanArn, required: true, location_name: "planArn"))
     StartPlanExecutionRequest.add_member(:target_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetRegion"))
@@ -934,6 +1027,7 @@ module Aws::ARCRegionswitch
     UpdatePlanRequest.add_member(:associated_alarms, Shapes::ShapeRef.new(shape: AssociatedAlarmMap, location_name: "associatedAlarms"))
     UpdatePlanRequest.add_member(:triggers, Shapes::ShapeRef.new(shape: TriggerList, location_name: "triggers"))
     UpdatePlanRequest.add_member(:report_configuration, Shapes::ShapeRef.new(shape: ReportConfiguration, location_name: "reportConfiguration"))
+    UpdatePlanRequest.add_member(:service_quota_checks_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "serviceQuotaChecksEnabled"))
     UpdatePlanRequest.struct_class = Types::UpdatePlanRequest
 
     UpdatePlanResponse.add_member(:plan, Shapes::ShapeRef.new(shape: Plan, location_name: "plan"))
@@ -1145,6 +1239,22 @@ module Aws::ARCRegionswitch
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_service_quota_warnings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListServiceQuotaWarnings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListServiceQuotaWarningsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListServiceQuotaWarningsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",

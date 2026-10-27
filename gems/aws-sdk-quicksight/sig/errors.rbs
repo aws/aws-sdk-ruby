@@ -11,98 +11,98 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ConcurrentUpdatingException < ::Aws::Errors::ServiceError
+      class ConcurrentUpdatingException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class CustomerManagedKeyUnavailableException < ::Aws::Errors::ServiceError
+      class CustomerManagedKeyUnavailableException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class DomainNotWhitelistedException < ::Aws::Errors::ServiceError
+      class DomainNotWhitelistedException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class IdentityTypeNotSupportedException < ::Aws::Errors::ServiceError
+      class IdentityTypeNotSupportedException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InternalFailureException < ::Aws::Errors::ServiceError
+      class InternalFailureException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class InvalidDataSetParameterValueException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def request_id: () -> ::String
-      end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidDataSetParameterValueException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
+        def message: () -> ::String
+        def request_id: () -> ::String
+      end
+      class LimitExceededException < ServiceError
         def message: () -> ::String
         def resource_type: () -> ::String
         def request_id: () -> ::String
       end
-      class PreconditionNotMetException < ::Aws::Errors::ServiceError
+      class PreconditionNotMetException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class QuickSightUserNotFoundException < ::Aws::Errors::ServiceError
+      class QuickSightUserNotFoundException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ResourceExistsException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def resource_type: () -> ::String
-        def request_id: () -> ::String
-      end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceExistsException < ServiceError
         def message: () -> ::String
         def resource_type: () -> ::String
         def request_id: () -> ::String
       end
-      class ResourceUnavailableException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
         def resource_type: () -> ::String
         def request_id: () -> ::String
       end
-      class SessionLifetimeInMinutesInvalidException < ::Aws::Errors::ServiceError
+      class ResourceUnavailableException < ServiceError
+        def message: () -> ::String
+        def resource_type: () -> ::String
+        def request_id: () -> ::String
+      end
+      class SessionLifetimeInMinutesInvalidException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class UnsupportedPricingPlanException < ::Aws::Errors::ServiceError
+      class UnsupportedPricingPlanException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class UnsupportedUserEditionException < ::Aws::Errors::ServiceError
+      class UnsupportedUserEditionException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end

@@ -336,6 +336,9 @@ module Aws::DynamoDB
     end
 
     # Represents replicas of the table.
+    #
+    # After a successful disassociation, this list is absent or empty. To
+    # confirm disassociation, also verify that `TableStatus` is `ACTIVE`.
     # @return [Array<Types::ReplicaDescription>]
     def replicas
       data[:replicas]
@@ -395,6 +398,14 @@ module Aws::DynamoDB
     # @return [Boolean]
     def deletion_protection_enabled
       data[:deletion_protection_enabled]
+    end
+
+    # Specifies whether disassociation protection is enabled (`true`) or
+    # disabled (`false`) for the local global table replica. Protection is
+    # enabled by default.
+    # @return [Boolean]
+    def disassociation_protection_enabled
+      data[:disassociation_protection_enabled]
     end
 
     # The maximum number of read and write units for the specified on-demand
@@ -2015,6 +2026,10 @@ module Aws::DynamoDB
     #         delete: {
     #           region_name: "RegionName", # required
     #         },
+    #         disassociate: {
+    #           region_name: "RegionName", # required
+    #           disassociation_mode: "WAIT_FOR_REPLICATION", # required, accepts WAIT_FOR_REPLICATION
+    #         },
     #       },
     #     ],
     #     table_class: "STANDARD", # accepts STANDARD, STANDARD_INFREQUENT_ACCESS
@@ -2039,6 +2054,7 @@ module Aws::DynamoDB
     #       write_units_per_second: 1,
     #     },
     #     global_table_settings_replication_mode: "ENABLED", # accepts ENABLED, DISABLED, ENABLED_WITH_OVERRIDES
+    #     disassociation_protection_enabled: false,
     #     vector_index_updates: [
     #       {
     #         create: {
@@ -2126,8 +2142,8 @@ module Aws::DynamoDB
     # @option options [Types::SSESpecification] :sse_specification
     #   The new server-side encryption settings for the specified table.
     # @option options [Array<Types::ReplicationGroupUpdate>] :replica_updates
-    #   A list of replica update actions (create, delete, or update) for the
-    #   table.
+    #   A list of replica update actions (create, delete, update, or
+    #   disassociate) for the table.
     # @option options [String] :table_class
     #   The table class of the table to be updated. Valid values are
     #   `STANDARD` and `STANDARD_INFREQUENT_ACCESS`.
@@ -2195,6 +2211,17 @@ module Aws::DynamoDB
     #   * `DISABLED`: Remove settings replication on a regional table.
     #     Settings replication needs to be defined to ENABLED again in order
     #     to create a Multi-Account Global Table using this table.
+    # @option options [Boolean] :disassociation_protection_enabled
+    #   Specifies whether disassociation protection is enabled (`true`) or
+    #   disabled (`false`) for the local replica of a multi-Region eventual
+    #   consistency (MREC) global table using Version 2019.11.21.
+    #
+    #   Disassociation protection is enabled by default. If you omit this
+    #   parameter, the existing setting is unchanged. This setting is
+    #   independent of `DeletionProtectionEnabled`.
+    #
+    #   You can't combine this change with any other change in the same
+    #   `UpdateTable` request.
     # @option options [Array<Types::VectorIndexUpdate>] :vector_index_updates
     #   A list of vector indexes to be added to or removed from the table. You
     #   can add or remove one vector index for each `UpdateTable` operation.

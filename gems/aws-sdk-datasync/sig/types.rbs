@@ -733,7 +733,7 @@ module Aws::DataSync
     end
 
     class NfsMountOptions
-      attr_accessor version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")
+      attr_accessor version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1" | "NFS4_2")
       SENSITIVE: []
     end
 
@@ -758,6 +758,7 @@ module Aws::DataSync
       attr_accessor transfer_mode: ("CHANGED" | "ALL")
       attr_accessor security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")
       attr_accessor object_tags: ("PRESERVE" | "NONE")
+      attr_accessor object_metadata: ("PRESERVE" | "NONE")
       SENSITIVE: []
     end
 

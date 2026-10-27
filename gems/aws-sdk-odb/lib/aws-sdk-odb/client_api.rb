@@ -235,13 +235,17 @@ module Aws::Odb
     ExadbVmClusterList = Shapes::ListShape.new(name: 'ExadbVmClusterList')
     ExadbVmClusterStorageDetails = Shapes::StructureShape.new(name: 'ExadbVmClusterStorageDetails')
     ExadbVmClusterSummary = Shapes::StructureShape.new(name: 'ExadbVmClusterSummary')
+    ExascaleConfiguration = Shapes::StructureShape.new(name: 'ExascaleConfiguration')
     ExascaleDbStorageDetails = Shapes::StructureShape.new(name: 'ExascaleDbStorageDetails')
     ExascaleDbStorageVault = Shapes::StructureShape.new(name: 'ExascaleDbStorageVault')
     ExascaleDbStorageVaultList = Shapes::ListShape.new(name: 'ExascaleDbStorageVaultList')
     ExascaleDbStorageVaultSummary = Shapes::StructureShape.new(name: 'ExascaleDbStorageVaultSummary')
+    ExascaleDbStorageVaultType = Shapes::StringShape.new(name: 'ExascaleDbStorageVaultType')
     ExternalIdType = Shapes::StringShape.new(name: 'ExternalIdType')
     FailoverAutonomousDatabaseInput = Shapes::StructureShape.new(name: 'FailoverAutonomousDatabaseInput')
     FailoverAutonomousDatabaseOutput = Shapes::StructureShape.new(name: 'FailoverAutonomousDatabaseOutput')
+    FileSystemConfigurationDetails = Shapes::StructureShape.new(name: 'FileSystemConfigurationDetails')
+    FileSystemConfigurationDetailsList = Shapes::ListShape.new(name: 'FileSystemConfigurationDetailsList')
     FlexComponentList = Shapes::ListShape.new(name: 'FlexComponentList')
     FlexComponentSummary = Shapes::StructureShape.new(name: 'FlexComponentSummary')
     Float = Shapes::FloatShape.new(name: 'Float')
@@ -495,6 +499,7 @@ module Aws::Odb
     StopAutonomousDatabaseOutput = Shapes::StructureShape.new(name: 'StopAutonomousDatabaseOutput')
     StopDbNodeInput = Shapes::StructureShape.new(name: 'StopDbNodeInput')
     StopDbNodeOutput = Shapes::StructureShape.new(name: 'StopDbNodeOutput')
+    StorageManagementType = Shapes::StringShape.new(name: 'StorageManagementType')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     StsAccess = Shapes::StructureShape.new(name: 'StsAccess')
@@ -542,6 +547,8 @@ module Aws::Odb
     UpdateExadbVmClusterInputTotalEcpuCountInteger = Shapes::IntegerShape.new(name: 'UpdateExadbVmClusterInputTotalEcpuCountInteger')
     UpdateExadbVmClusterInputVmFileSystemStorageTotalSizeInGBsInteger = Shapes::IntegerShape.new(name: 'UpdateExadbVmClusterInputVmFileSystemStorageTotalSizeInGBsInteger')
     UpdateExadbVmClusterOutput = Shapes::StructureShape.new(name: 'UpdateExadbVmClusterOutput')
+    UpdateExascaleCloudExadataInfrastructureInput = Shapes::StructureShape.new(name: 'UpdateExascaleCloudExadataInfrastructureInput')
+    UpdateExascaleCloudExadataInfrastructureOutput = Shapes::StructureShape.new(name: 'UpdateExascaleCloudExadataInfrastructureOutput')
     UpdateExascaleDbStorageVaultInput = Shapes::StructureShape.new(name: 'UpdateExascaleDbStorageVaultInput')
     UpdateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger = Shapes::IntegerShape.new(name: 'UpdateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger')
     UpdateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger = Shapes::IntegerShape.new(name: 'UpdateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger')
@@ -556,6 +563,7 @@ module Aws::Odb
     ValidationExceptionField = Shapes::StructureShape.new(name: 'ValidationExceptionField')
     ValidationExceptionFieldList = Shapes::ListShape.new(name: 'ValidationExceptionFieldList')
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
+    VmStorageType = Shapes::StringShape.new(name: 'VmStorageType')
     VpcEndpointType = Shapes::StringShape.new(name: 'VpcEndpointType')
     WalletPasswordSource = Shapes::StringShape.new(name: 'WalletPasswordSource')
     WalletPasswordSourceConfiguration = Shapes::UnionShape.new(name: 'WalletPasswordSourceConfiguration')
@@ -1095,6 +1103,7 @@ module Aws::Odb
     CloudExadataInfrastructure.add_member(:database_server_type, Shapes::ShapeRef.new(shape: String, location_name: "databaseServerType"))
     CloudExadataInfrastructure.add_member(:storage_server_type, Shapes::ShapeRef.new(shape: String, location_name: "storageServerType"))
     CloudExadataInfrastructure.add_member(:compute_model, Shapes::ShapeRef.new(shape: ComputeModel, location_name: "computeModel"))
+    CloudExadataInfrastructure.add_member(:exascale_configuration, Shapes::ShapeRef.new(shape: ExascaleConfiguration, location_name: "exascaleConfiguration"))
     CloudExadataInfrastructure.struct_class = Types::CloudExadataInfrastructure
 
     CloudExadataInfrastructureList.member = Shapes::ShapeRef.new(shape: CloudExadataInfrastructureSummary)
@@ -1137,6 +1146,7 @@ module Aws::Odb
     CloudExadataInfrastructureSummary.add_member(:database_server_type, Shapes::ShapeRef.new(shape: String, location_name: "databaseServerType"))
     CloudExadataInfrastructureSummary.add_member(:storage_server_type, Shapes::ShapeRef.new(shape: String, location_name: "storageServerType"))
     CloudExadataInfrastructureSummary.add_member(:compute_model, Shapes::ShapeRef.new(shape: ComputeModel, location_name: "computeModel"))
+    CloudExadataInfrastructureSummary.add_member(:exascale_configuration, Shapes::ShapeRef.new(shape: ExascaleConfiguration, location_name: "exascaleConfiguration"))
     CloudExadataInfrastructureSummary.struct_class = Types::CloudExadataInfrastructureSummary
 
     CloudExadataInfrastructureUnallocatedResources.add_member(:cloud_autonomous_vm_clusters, Shapes::ShapeRef.new(shape: CloudAutonomousVmClusterResourceDetailsList, location_name: "cloudAutonomousVmClusters"))
@@ -1155,6 +1165,12 @@ module Aws::Odb
     CloudVmCluster.add_member(:cloud_vm_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "cloudVmClusterArn"))
     CloudVmCluster.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: String, location_name: "cloudExadataInfrastructureId"))
     CloudVmCluster.add_member(:cloud_exadata_infrastructure_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "cloudExadataInfrastructureArn"))
+    CloudVmCluster.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "exascaleDbStorageVaultId"))
+    CloudVmCluster.add_member(:exascale_db_storage_vault_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "exascaleDbStorageVaultArn"))
+    CloudVmCluster.add_member(:storage_management_type, Shapes::ShapeRef.new(shape: StorageManagementType, location_name: "storageManagementType"))
+    CloudVmCluster.add_member(:vm_file_system_storage_type, Shapes::ShapeRef.new(shape: VmStorageType, location_name: "vmFileSystemStorageType"))
+    CloudVmCluster.add_member(:vm_backup_storage_type, Shapes::ShapeRef.new(shape: VmStorageType, location_name: "vmBackupStorageType"))
+    CloudVmCluster.add_member(:file_system_configuration_details, Shapes::ShapeRef.new(shape: FileSystemConfigurationDetailsList, location_name: "fileSystemConfigurationDetails"))
     CloudVmCluster.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     CloudVmCluster.add_member(:cpu_core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "cpuCoreCount"))
     CloudVmCluster.add_member(:data_collection_options, Shapes::ShapeRef.new(shape: DataCollectionOptions, location_name: "dataCollectionOptions"))
@@ -1202,6 +1218,12 @@ module Aws::Odb
     CloudVmClusterSummary.add_member(:cloud_vm_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "cloudVmClusterArn"))
     CloudVmClusterSummary.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: String, location_name: "cloudExadataInfrastructureId"))
     CloudVmClusterSummary.add_member(:cloud_exadata_infrastructure_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "cloudExadataInfrastructureArn"))
+    CloudVmClusterSummary.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "exascaleDbStorageVaultId"))
+    CloudVmClusterSummary.add_member(:exascale_db_storage_vault_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "exascaleDbStorageVaultArn"))
+    CloudVmClusterSummary.add_member(:storage_management_type, Shapes::ShapeRef.new(shape: StorageManagementType, location_name: "storageManagementType"))
+    CloudVmClusterSummary.add_member(:vm_file_system_storage_type, Shapes::ShapeRef.new(shape: VmStorageType, location_name: "vmFileSystemStorageType"))
+    CloudVmClusterSummary.add_member(:vm_backup_storage_type, Shapes::ShapeRef.new(shape: VmStorageType, location_name: "vmBackupStorageType"))
+    CloudVmClusterSummary.add_member(:file_system_configuration_details, Shapes::ShapeRef.new(shape: FileSystemConfigurationDetailsList, location_name: "fileSystemConfigurationDetails"))
     CloudVmClusterSummary.add_member(:cluster_name, Shapes::ShapeRef.new(shape: String, location_name: "clusterName"))
     CloudVmClusterSummary.add_member(:cpu_core_count, Shapes::ShapeRef.new(shape: Integer, location_name: "cpuCoreCount"))
     CloudVmClusterSummary.add_member(:data_collection_options, Shapes::ShapeRef.new(shape: DataCollectionOptions, location_name: "dataCollectionOptions"))
@@ -1364,6 +1386,10 @@ module Aws::Odb
     CreateCloudExadataInfrastructureOutput.struct_class = Types::CreateCloudExadataInfrastructureOutput
 
     CreateCloudVmClusterInput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "cloudExadataInfrastructureId"))
+    CreateCloudVmClusterInput.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "exascaleDbStorageVaultId"))
+    CreateCloudVmClusterInput.add_member(:vm_file_system_storage_type, Shapes::ShapeRef.new(shape: VmStorageType, location_name: "vmFileSystemStorageType"))
+    CreateCloudVmClusterInput.add_member(:vm_backup_storage_type, Shapes::ShapeRef.new(shape: VmStorageType, location_name: "vmBackupStorageType"))
+    CreateCloudVmClusterInput.add_member(:file_system_configuration_details, Shapes::ShapeRef.new(shape: FileSystemConfigurationDetailsList, location_name: "fileSystemConfigurationDetails"))
     CreateCloudVmClusterInput.add_member(:cpu_core_count, Shapes::ShapeRef.new(shape: CreateCloudVmClusterInputCpuCoreCountInteger, required: true, location_name: "cpuCoreCount"))
     CreateCloudVmClusterInput.add_member(:display_name, Shapes::ShapeRef.new(shape: ResourceDisplayName, required: true, location_name: "displayName"))
     CreateCloudVmClusterInput.add_member(:gi_version, Shapes::ShapeRef.new(shape: CreateCloudVmClusterInputGiVersionString, required: true, location_name: "giVersion"))
@@ -1425,6 +1451,7 @@ module Aws::Odb
     CreateExascaleDbStorageVaultInput.add_member(:high_capacity_database_storage_total_size_in_g_bs, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputHighCapacityDatabaseStorageTotalSizeInGBsInteger, required: true, location_name: "highCapacityDatabaseStorageTotalSizeInGBs"))
     CreateExascaleDbStorageVaultInput.add_member(:additional_flash_cache_in_percent, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger, location_name: "additionalFlashCacheInPercent"))
     CreateExascaleDbStorageVaultInput.add_member(:autoscale_limit_in_g_bs, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger, location_name: "autoscaleLimitInGBs"))
+    CreateExascaleDbStorageVaultInput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "cloudExadataInfrastructureId"))
     CreateExascaleDbStorageVaultInput.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputAvailabilityZoneIdString, location_name: "availabilityZoneId"))
     CreateExascaleDbStorageVaultInput.add_member(:availability_zone, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputAvailabilityZoneString, location_name: "availabilityZone"))
     CreateExascaleDbStorageVaultInput.add_member(:description, Shapes::ShapeRef.new(shape: CreateExascaleDbStorageVaultInputDescriptionString, location_name: "description"))
@@ -1899,6 +1926,12 @@ module Aws::Odb
     ExadbVmClusterSummary.add_member(:vm_file_system_storage, Shapes::ShapeRef.new(shape: ExadbVmClusterStorageDetails, location_name: "vmFileSystemStorage"))
     ExadbVmClusterSummary.struct_class = Types::ExadbVmClusterSummary
 
+    ExascaleConfiguration.add_member(:total_storage_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "totalStorageSizeInGBs"))
+    ExascaleConfiguration.add_member(:available_storage_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "availableStorageSizeInGBs"))
+    ExascaleConfiguration.add_member(:total_vm_storage_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "totalVmStorageSizeInGBs"))
+    ExascaleConfiguration.add_member(:available_vm_storage_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "availableVmStorageSizeInGBs"))
+    ExascaleConfiguration.struct_class = Types::ExascaleConfiguration
+
     ExascaleDbStorageDetails.add_member(:available_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "availableSizeInGBs"))
     ExascaleDbStorageDetails.add_member(:total_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "totalSizeInGBs"))
     ExascaleDbStorageDetails.struct_class = Types::ExascaleDbStorageDetails
@@ -1909,6 +1942,8 @@ module Aws::Odb
     ExascaleDbStorageVault.add_member(:autoscale_limit_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "autoscaleLimitInGBs"))
     ExascaleDbStorageVault.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     ExascaleDbStorageVault.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    ExascaleDbStorageVault.add_member(:cloud_exadata_infrastructure_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "cloudExadataInfrastructureArn"))
+    ExascaleDbStorageVault.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "cloudExadataInfrastructureId"))
     ExascaleDbStorageVault.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     ExascaleDbStorageVault.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ExascaleDbStorageVault.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
@@ -1925,6 +1960,7 @@ module Aws::Odb
     ExascaleDbStorageVault.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
     ExascaleDbStorageVault.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     ExascaleDbStorageVault.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "timeZone"))
+    ExascaleDbStorageVault.add_member(:vault_type, Shapes::ShapeRef.new(shape: ExascaleDbStorageVaultType, location_name: "vaultType"))
     ExascaleDbStorageVault.struct_class = Types::ExascaleDbStorageVault
 
     ExascaleDbStorageVaultList.member = Shapes::ShapeRef.new(shape: ExascaleDbStorageVaultSummary)
@@ -1935,6 +1971,8 @@ module Aws::Odb
     ExascaleDbStorageVaultSummary.add_member(:autoscale_limit_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "autoscaleLimitInGBs"))
     ExascaleDbStorageVaultSummary.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     ExascaleDbStorageVaultSummary.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
+    ExascaleDbStorageVaultSummary.add_member(:cloud_exadata_infrastructure_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "cloudExadataInfrastructureArn"))
+    ExascaleDbStorageVaultSummary.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "cloudExadataInfrastructureId"))
     ExascaleDbStorageVaultSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     ExascaleDbStorageVaultSummary.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
     ExascaleDbStorageVaultSummary.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
@@ -1951,6 +1989,7 @@ module Aws::Odb
     ExascaleDbStorageVaultSummary.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
     ExascaleDbStorageVaultSummary.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     ExascaleDbStorageVaultSummary.add_member(:time_zone, Shapes::ShapeRef.new(shape: String, location_name: "timeZone"))
+    ExascaleDbStorageVaultSummary.add_member(:vault_type, Shapes::ShapeRef.new(shape: ExascaleDbStorageVaultType, location_name: "vaultType"))
     ExascaleDbStorageVaultSummary.struct_class = Types::ExascaleDbStorageVaultSummary
 
     FailoverAutonomousDatabaseInput.add_member(:autonomous_database_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "autonomousDatabaseId"))
@@ -1962,6 +2001,12 @@ module Aws::Odb
     FailoverAutonomousDatabaseOutput.add_member(:status, Shapes::ShapeRef.new(shape: AutonomousDatabaseResourceStatus, location_name: "status"))
     FailoverAutonomousDatabaseOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
     FailoverAutonomousDatabaseOutput.struct_class = Types::FailoverAutonomousDatabaseOutput
+
+    FileSystemConfigurationDetails.add_member(:mount_point, Shapes::ShapeRef.new(shape: String, location_name: "mountPoint"))
+    FileSystemConfigurationDetails.add_member(:file_system_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "fileSystemSizeInGBs"))
+    FileSystemConfigurationDetails.struct_class = Types::FileSystemConfigurationDetails
+
+    FileSystemConfigurationDetailsList.member = Shapes::ShapeRef.new(shape: FileSystemConfigurationDetails)
 
     FlexComponentList.member = Shapes::ShapeRef.new(shape: FlexComponentSummary)
 
@@ -2242,6 +2287,8 @@ module Aws::Odb
 
     ListExascaleDbStorageVaultsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListExascaleDbStorageVaultsInputMaxResultsInteger, location_name: "maxResults"))
     ListExascaleDbStorageVaultsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: ListExascaleDbStorageVaultsInputNextTokenString, location_name: "nextToken"))
+    ListExascaleDbStorageVaultsInput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, location_name: "cloudExadataInfrastructureId"))
+    ListExascaleDbStorageVaultsInput.add_member(:vault_type, Shapes::ShapeRef.new(shape: ExascaleDbStorageVaultType, location_name: "vaultType"))
     ListExascaleDbStorageVaultsInput.struct_class = Types::ListExascaleDbStorageVaultsInput
 
     ListExascaleDbStorageVaultsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
@@ -2763,6 +2810,17 @@ module Aws::Odb
     UpdateExadbVmClusterOutput.add_member(:exadb_vm_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "exadbVmClusterId"))
     UpdateExadbVmClusterOutput.struct_class = Types::UpdateExadbVmClusterOutput
 
+    UpdateExascaleCloudExadataInfrastructureInput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "cloudExadataInfrastructureId"))
+    UpdateExascaleCloudExadataInfrastructureInput.add_member(:total_storage_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "totalStorageSizeInGBs"))
+    UpdateExascaleCloudExadataInfrastructureInput.add_member(:total_vm_storage_size_in_g_bs, Shapes::ShapeRef.new(shape: Integer, location_name: "totalVmStorageSizeInGBs"))
+    UpdateExascaleCloudExadataInfrastructureInput.struct_class = Types::UpdateExascaleCloudExadataInfrastructureInput
+
+    UpdateExascaleCloudExadataInfrastructureOutput.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    UpdateExascaleCloudExadataInfrastructureOutput.add_member(:status, Shapes::ShapeRef.new(shape: ResourceStatus, location_name: "status"))
+    UpdateExascaleCloudExadataInfrastructureOutput.add_member(:status_reason, Shapes::ShapeRef.new(shape: String, location_name: "statusReason"))
+    UpdateExascaleCloudExadataInfrastructureOutput.add_member(:cloud_exadata_infrastructure_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cloudExadataInfrastructureId"))
+    UpdateExascaleCloudExadataInfrastructureOutput.struct_class = Types::UpdateExascaleCloudExadataInfrastructureOutput
+
     UpdateExascaleDbStorageVaultInput.add_member(:exascale_db_storage_vault_id, Shapes::ShapeRef.new(shape: ResourceIdOrArn, required: true, location_name: "exascaleDbStorageVaultId"))
     UpdateExascaleDbStorageVaultInput.add_member(:additional_flash_cache_in_percent, Shapes::ShapeRef.new(shape: UpdateExascaleDbStorageVaultInputAdditionalFlashCacheInPercentInteger, location_name: "additionalFlashCacheInPercent"))
     UpdateExascaleDbStorageVaultInput.add_member(:autoscale_limit_in_g_bs, Shapes::ShapeRef.new(shape: UpdateExascaleDbStorageVaultInputAutoscaleLimitInGBsInteger, location_name: "autoscaleLimitInGBs"))
@@ -3021,6 +3079,7 @@ module Aws::Odb
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_odb_network, Seahorse::Model::Operation.new.tap do |o|
@@ -3679,6 +3738,7 @@ module Aws::Odb
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -3996,6 +4056,20 @@ module Aws::Odb
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: UpdateExadbVmClusterInput)
         o.output = Shapes::ShapeRef.new(shape: UpdateExadbVmClusterOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_exascale_cloud_exadata_infrastructure, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateExascaleCloudExadataInfrastructure"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateExascaleCloudExadataInfrastructureInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateExascaleCloudExadataInfrastructureOutput)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

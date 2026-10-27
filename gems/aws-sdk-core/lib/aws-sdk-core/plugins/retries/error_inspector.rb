@@ -64,7 +64,8 @@ module Aws
           ]
         )
 
-        # See: https://github.com/aws/aws-sdk-net/blob/5810dfe401e0eac2e59d02276d4b479224b4538e/sdk/src/Core/Amazon.Runtime/Pipeline/RetryHandler/RetryPolicy.cs#L78
+        # Error codes that may indicate clock skew; retryable only when the
+        # computed skew exceeds the detection threshold.
         CLOCK_SKEW_ERRORS = Set.new(
           [
             'RequestTimeTooSkewed',
@@ -72,6 +73,7 @@ module Aws
             'InvalidSignatureException',
             'SignatureDoesNotMatch',
             'AuthFailure',
+            'AccessDeniedException',
             'RequestInTheFuture'
           ]
         )
@@ -128,8 +130,11 @@ module Aws
         end
 
         def clock_skew?(context)
+          return false if clock_skew_correction_disabled?(context.config)
+
+          sent_at = context.metadata[:clock_skew_request_sent_at]
           CLOCK_SKEW_ERRORS.include?(@name) &&
-            context.config.clock_skew.clock_skewed?(context)
+            context.config.clock_skew.clock_skewed?(context, sent_at)
         end
 
         def retryable?(context)
@@ -148,6 +153,10 @@ module Aws
 
         def invalidatable_credentials?(context)
           context.config.credentials.respond_to?(:invalidate) && !context[:signing_credentials].nil?
+
+        def clock_skew_correction_disabled?(config)
+          config.respond_to?(:disable_clock_skew_correction) &&
+            config.disable_clock_skew_correction
         end
 
         def refreshable_credentials?(context)

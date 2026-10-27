@@ -199,12 +199,19 @@ module Aws::Inspector2
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -4994,7 +5001,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers #=> Array
     #   resp.covered_resources[0].resource_metadata.lambda_function.layers[0] #=> String
     #   resp.covered_resources[0].resource_metadata.lambda_function.function_name #=> String
-    #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10", "PYTHON_3_11", "DOTNETCORE_3_1", "DOTNET_6", "DOTNET_7", "RUBY_2_7", "RUBY_3_2", "DOTNET_10", "NODEJS_24_X", "NODEJS_22_X", "JAVA_21", "JAVA_25"
+    #   resp.covered_resources[0].resource_metadata.lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10", "PYTHON_3_11", "DOTNETCORE_3_1", "DOTNET_6", "DOTNET_7", "RUBY_2_7", "RUBY_3_2", "DOTNET_10", "NODEJS_24_X", "NODEJS_22_X", "JAVA_21", "JAVA_25", "PYTHON_3_12", "PYTHON_3_13", "PYTHON_3_14", "RUBY_3_3", "DOTNET_8", "NODEJS_20_X"
     #   resp.covered_resources[0].resource_metadata.code_repository.project_name #=> String
     #   resp.covered_resources[0].resource_metadata.code_repository.integration_arn #=> String
     #   resp.covered_resources[0].resource_metadata.code_repository.provider_type #=> String
@@ -6132,6 +6139,9 @@ module Aws::Inspector2
     #   resp.responses[0].account_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].account_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].account_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].account_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].account_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].account_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].account_aggregation.exploit_available_count #=> Integer
     #   resp.responses[0].account_aggregation.fix_available_count #=> Integer
     #   resp.responses[0].ami_aggregation.ami #=> String
@@ -6145,6 +6155,9 @@ module Aws::Inspector2
     #   resp.responses[0].ami_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].ami_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].ami_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].ami_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].ami_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].ami_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].ami_aggregation.affected_instances #=> Integer
     #   resp.responses[0].aws_ecr_container_aggregation.resource_id #=> String
     #   resp.responses[0].aws_ecr_container_aggregation.image_sha #=> String
@@ -6157,6 +6170,9 @@ module Aws::Inspector2
     #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].aws_ecr_container_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].aws_ecr_container_aggregation.last_in_use_at #=> Time
     #   resp.responses[0].aws_ecr_container_aggregation.in_use_count #=> Integer
     #   resp.responses[0].ec2_instance_aggregation.instance_id #=> String
@@ -6169,12 +6185,18 @@ module Aws::Inspector2
     #   resp.responses[0].ec2_instance_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].ec2_instance_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].ec2_instance_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].ec2_instance_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].ec2_instance_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].ec2_instance_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].ec2_instance_aggregation.network_findings #=> Integer
     #   resp.responses[0].finding_type_aggregation.account_id #=> String
     #   resp.responses[0].finding_type_aggregation.severity_counts.all #=> Integer
     #   resp.responses[0].finding_type_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].finding_type_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].finding_type_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].finding_type_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].finding_type_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].finding_type_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].finding_type_aggregation.exploit_available_count #=> Integer
     #   resp.responses[0].finding_type_aggregation.fix_available_count #=> Integer
     #   resp.responses[0].finding_type_aggregation.cloud_provider #=> String
@@ -6195,12 +6217,18 @@ module Aws::Inspector2
     #   resp.responses[0].image_layer_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].image_layer_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].image_layer_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].image_layer_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].image_layer_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].image_layer_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].package_aggregation.package_name #=> String
     #   resp.responses[0].package_aggregation.account_id #=> String
     #   resp.responses[0].package_aggregation.severity_counts.all #=> Integer
     #   resp.responses[0].package_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].package_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].package_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].package_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].package_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].package_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].repository_aggregation.repository #=> String
     #   resp.responses[0].repository_aggregation.account_id #=> String
     #   resp.responses[0].repository_aggregation.cloud_provider #=> String, one of "AWS", "AZURE"
@@ -6212,6 +6240,9 @@ module Aws::Inspector2
     #   resp.responses[0].repository_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].repository_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].repository_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].repository_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].repository_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].repository_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].repository_aggregation.affected_images #=> Integer
     #   resp.responses[0].title_aggregation.title #=> String
     #   resp.responses[0].title_aggregation.vulnerability_id #=> String
@@ -6220,6 +6251,9 @@ module Aws::Inspector2
     #   resp.responses[0].title_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].title_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].title_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].title_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].title_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].title_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].lambda_layer_aggregation.function_name #=> String
     #   resp.responses[0].lambda_layer_aggregation.resource_id #=> String
     #   resp.responses[0].lambda_layer_aggregation.layer_arn #=> String
@@ -6228,6 +6262,9 @@ module Aws::Inspector2
     #   resp.responses[0].lambda_layer_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].lambda_layer_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].lambda_layer_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].lambda_layer_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].lambda_layer_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].lambda_layer_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].lambda_function_aggregation.resource_id #=> String
     #   resp.responses[0].lambda_function_aggregation.function_name #=> String
     #   resp.responses[0].lambda_function_aggregation.runtime #=> String
@@ -6238,6 +6275,9 @@ module Aws::Inspector2
     #   resp.responses[0].lambda_function_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].lambda_function_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].lambda_function_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].lambda_function_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].lambda_function_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].lambda_function_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].lambda_function_aggregation.last_modified_at #=> Time
     #   resp.responses[0].code_repository_aggregation.project_names #=> String
     #   resp.responses[0].code_repository_aggregation.provider_type #=> String
@@ -6245,6 +6285,9 @@ module Aws::Inspector2
     #   resp.responses[0].code_repository_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].code_repository_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].code_repository_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].code_repository_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].code_repository_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].code_repository_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].code_repository_aggregation.exploit_available_active_findings_count #=> Integer
     #   resp.responses[0].code_repository_aggregation.fix_available_active_findings_count #=> Integer
     #   resp.responses[0].code_repository_aggregation.account_id #=> String
@@ -6264,6 +6307,9 @@ module Aws::Inspector2
     #   resp.responses[0].vm_instance_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].vm_instance_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].vm_instance_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].vm_instance_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].vm_instance_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].vm_instance_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].vm_instance_aggregation.network_findings #=> Integer
     #   resp.responses[0].vm_instance_aggregation.exploit_available_active_findings_count #=> Integer
     #   resp.responses[0].vm_instance_aggregation.fix_available_active_findings_count #=> Integer
@@ -6284,6 +6330,9 @@ module Aws::Inspector2
     #   resp.responses[0].container_image_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].container_image_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].container_image_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].container_image_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].container_image_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].container_image_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].container_image_aggregation.last_in_use_at #=> Time
     #   resp.responses[0].container_image_aggregation.in_use_count #=> Integer
     #   resp.responses[0].container_image_aggregation.exploit_available_active_findings_count #=> Integer
@@ -6303,6 +6352,9 @@ module Aws::Inspector2
     #   resp.responses[0].serverless_function_aggregation.severity_counts.medium #=> Integer
     #   resp.responses[0].serverless_function_aggregation.severity_counts.high #=> Integer
     #   resp.responses[0].serverless_function_aggregation.severity_counts.critical #=> Integer
+    #   resp.responses[0].serverless_function_aggregation.severity_counts.low #=> Integer
+    #   resp.responses[0].serverless_function_aggregation.severity_counts.informational #=> Integer
+    #   resp.responses[0].serverless_function_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].serverless_function_aggregation.last_modified_at #=> Time
     #   resp.responses[0].serverless_function_aggregation.exploit_available_active_findings_count #=> Integer
     #   resp.responses[0].serverless_function_aggregation.fix_available_active_findings_count #=> Integer
@@ -6827,7 +6879,7 @@ module Aws::Inspector2
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.last_in_use_at #=> Time
     #   resp.findings[0].resources[0].details.aws_ecr_container_image.in_use_count #=> Integer
     #   resp.findings[0].resources[0].details.aws_lambda_function.function_name #=> String
-    #   resp.findings[0].resources[0].details.aws_lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10", "PYTHON_3_11", "DOTNETCORE_3_1", "DOTNET_6", "DOTNET_7", "RUBY_2_7", "RUBY_3_2", "DOTNET_10", "NODEJS_24_X", "NODEJS_22_X", "JAVA_21", "JAVA_25"
+    #   resp.findings[0].resources[0].details.aws_lambda_function.runtime #=> String, one of "NODEJS", "NODEJS_12_X", "NODEJS_14_X", "NODEJS_16_X", "JAVA_8", "JAVA_8_AL2", "JAVA_11", "PYTHON_3_7", "PYTHON_3_8", "PYTHON_3_9", "UNSUPPORTED", "NODEJS_18_X", "GO_1_X", "JAVA_17", "PYTHON_3_10", "PYTHON_3_11", "DOTNETCORE_3_1", "DOTNET_6", "DOTNET_7", "RUBY_2_7", "RUBY_3_2", "DOTNET_10", "NODEJS_24_X", "NODEJS_22_X", "JAVA_21", "JAVA_25", "PYTHON_3_12", "PYTHON_3_13", "PYTHON_3_14", "RUBY_3_3", "DOTNET_8", "NODEJS_20_X"
     #   resp.findings[0].resources[0].details.aws_lambda_function.code_sha_256 #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.version #=> String
     #   resp.findings[0].resources[0].details.aws_lambda_function.execution_role_arn #=> String
@@ -8549,7 +8601,7 @@ module Aws::Inspector2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

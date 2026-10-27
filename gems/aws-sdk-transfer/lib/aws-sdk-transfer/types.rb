@@ -1075,6 +1075,9 @@ module Aws::Transfer
     #     to Amazon CloudWatch Logs, so that you can determine when the
     #     client is making a `SETSTAT` call.
     #
+    #   * To specify which ports your Transfer Family server listens to, use
+    #     the `SftpPorts` parameter.
+    #
     #   * To determine whether your Transfer Family server resumes recent,
     #     negotiated sessions through a unique session ID, use the
     #     `TlsSessionResumptionMode` parameter.
@@ -1112,7 +1115,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
@@ -1165,6 +1168,13 @@ module Aws::Transfer
     #   [1]: https://docs.aws.amazon.com/transfer/latest/APIReference/API_EndpointDetails.html
     #   @return [String]
     #
+    # @!attribute [rw] host_key_storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private
+    #   host key material in an Secrets Manager secret.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateServerRequest AWS API Documentation
     #
     class CreateServerRequest < Struct.new(
@@ -1185,7 +1195,8 @@ module Aws::Transfer
       :workflow_details,
       :structured_log_destinations,
       :s3_storage_options,
-      :ip_address_type)
+      :ip_address_type,
+      :host_key_storage_type)
       SENSITIVE = [:host_key]
       include Aws::Structure
     end
@@ -1498,13 +1509,26 @@ module Aws::Transfer
     #   Tags are metadata attached to workflows for any purpose.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your workflow logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/CreateWorkflowRequest AWS API Documentation
     #
     class CreateWorkflowRequest < Struct.new(
       :description,
       :steps,
       :on_exception_steps,
-      :tags)
+      :tags,
+      :structured_log_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2946,6 +2970,16 @@ module Aws::Transfer
     #   Key-value pairs that can be used to group and search for host keys.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`).
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_id
+    #   The ARN of the Secrets Manager secret that stores the host key
+    #   material, when `StorageType` is `SECRETS_MANAGER`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedHostKey AWS API Documentation
     #
     class DescribedHostKey < Struct.new(
@@ -2955,7 +2989,9 @@ module Aws::Transfer
       :description,
       :type,
       :date_imported,
-      :tags)
+      :tags,
+      :storage_type,
+      :secret_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3160,6 +3196,9 @@ module Aws::Transfer
     #     to Amazon CloudWatch Logs, so that you can determine when the
     #     client is making a `SETSTAT` call.
     #
+    #   * To specify which ports your Transfer Family server listens to, use
+    #     the `SftpPorts` parameter.
+    #
     #   * To determine whether your Transfer Family server resumes recent,
     #     negotiated sessions through a unique session ID, use the
     #     `TlsSessionResumptionMode` parameter.
@@ -3343,7 +3382,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
@@ -3776,6 +3815,18 @@ module Aws::Transfer
     #   Tags are metadata attached to workflows for any purpose.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] structured_log_destinations
+    #   Specifies the log groups to which your workflow logs are sent.
+    #
+    #   To specify a log group, you must provide the ARN for an existing log
+    #   group. In this case, the format of the log group is as follows:
+    #
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #
+    #   For example,
+    #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/DescribedWorkflow AWS API Documentation
     #
     class DescribedWorkflow < Struct.new(
@@ -3784,7 +3835,8 @@ module Aws::Transfer
       :steps,
       :on_exception_steps,
       :workflow_id,
-      :tags)
+      :tags,
+      :structured_log_destinations)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4308,13 +4360,31 @@ module Aws::Transfer
     #   Key-value pairs that can be used to group and search for host keys.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private
+    #   host key material in an Secrets Manager secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   Secrets Manager secret that stores the host key. If you specify a
+    #   customer managed key, its key policy must allow the
+    #   `AWSServiceRoleForTransfer` service-linked role to decrypt the
+    #   secret. If you don't specify a value, Transfer Family uses the
+    #   Amazon Web Services managed key for Secrets Manager.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ImportHostKeyRequest AWS API Documentation
     #
     class ImportHostKeyRequest < Struct.new(
       :server_id,
       :host_key_body,
       :description,
-      :tags)
+      :tags,
+      :storage_type,
+      :kms_key)
       SENSITIVE = [:host_key_body]
       include Aws::Structure
     end
@@ -5412,6 +5482,16 @@ module Aws::Transfer
     #   The date on which the host key was added to the server.
     #   @return [Time]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`).
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_id
+    #   The ARN of the Secrets Manager secret that stores the host key
+    #   material, when `StorageType` is `SECRETS_MANAGER`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/ListedHostKey AWS API Documentation
     #
     class ListedHostKey < Struct.new(
@@ -5420,7 +5500,9 @@ module Aws::Transfer
       :fingerprint,
       :description,
       :type,
-      :date_imported)
+      :date_imported,
+      :storage_type,
+      :secret_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5868,6 +5950,37 @@ module Aws::Transfer
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] sftp_ports
+    #   A property used with Transfer Family servers that use the SFTP
+    #   protocol and have `PUBLIC` endpoints. This property accepts a list
+    #   of up to three port configurations that the service opens on the
+    #   server endpoint.
+    #
+    #   Each entry in the list consists of two parameters, the `SftpPort`
+    #   and the `CommunicationMode`. The `SftpPort` takes any integer from
+    #   2000 to 65535, or 22. `CommunicationMode` can be one of the
+    #   following options:
+    #
+    #   * `SERVER_TALK_FIRST`: The server responds to initial TCP
+    #     connections first. Many older clients expect that an SFTP server
+    #     responds with its server string before starting SSH negotiations.
+    #
+    #   * `CLIENT_TALK_FIRST`: The server responds to the initial TCP
+    #     connection only after receiving a data packet. Most modern clients
+    #     support this behavior and send their client string along with the
+    #     initial data packets for SSH negotiation. Additionally, this mode
+    #     is more resilient to TCP retransmissions that can occur during the
+    #     initial TCP connection.
+    #
+    #   The following is an `SftpPorts` example for port 2222 with
+    #   `CLIENT_TALK_FIRST`.
+    #
+    #   `[ { "SftpPort": 2222, "CommunicationMode": "CLIENT_TALK_FIRST" } ]`
+    #
+    #   If you don't specify any configurations during `CreateServer`, the
+    #   service uses port 22 with `SERVER_TALK_FIRST` by default.
+    #   @return [Array<Types::SftpPortWithOptions>]
+    #
     # @!attribute [rw] as_2_transports
     #   Indicates the transport method for the AS2 messages. Currently, only
     #   HTTP is supported.
@@ -5889,6 +6002,7 @@ module Aws::Transfer
       :passive_ip,
       :tls_session_resumption_mode,
       :set_stat_option,
+      :sftp_ports,
       :as_2_transports,
       :proxy_config)
       SENSITIVE = []
@@ -5897,8 +6011,8 @@ module Aws::Transfer
 
     # Contains configuration for PROXY protocol version 2 (PPv2) support on
     # an Transfer Family server. When enabled, Transfer Family reads the
-    # added PPv2 header from incoming connections to extract the original
-    # client IP address. This address is then available in Amazon CloudWatch
+    # added PPv2 header from incoming connections to extract the client's
+    # source IP address. This address is then available in Amazon CloudWatch
     # Logs entries and is passed to custom identity providers during
     # authentication, enabling IP-based access policies. For more
     # information, see [Working with Network Load Balancers][1].
@@ -5909,29 +6023,28 @@ module Aws::Transfer
     #
     # @!attribute [rw] sftp_mode
     #   Specifies whether the Transfer Family server requires or ignores a
-    #   PPv2 header containing the original client IP address on incoming
+    #   PPv2 header containing the client's source IP address on incoming
     #   SFTP connections. If you don't specify a value, the default is
     #   `NONE`
     #
     #   * `NONE`: the server reads and ignores any PPv2 header on incoming
     #     SFTP connections. This is the default value. Use this value when
     #     your SFTP server is not behind an NLB, or when you do not need to
-    #     preserve client source IP addresses through an NLB.
+    #     preserve the client's source IP address through an NLB.
     #
     #   * `PROXY_PROTOCOL_V2_ENFORCED`: the server requires a valid PPv2
     #     header on every incoming SFTP connection. When a valid header is
-    #     present, the server applies it and uses the client IP address from
+    #     present, the server applies it and uses the source IP address from
     #     the header. If a connection arrives without a PPv2 header, the
     #     server refuses the connection and logs an error to Amazon
     #     CloudWatch Logs indicating that the expected PPv2 header was
     #     missing. Use this value when your SFTP server is behind an NLB
     #     with PPv2 enabled on the target group.
     #
-    #     When you enable `PROXY_PROTOCOL_V2_ENFORCED`, the server trusts
-    #     the source IP address in the PPv2 header. You must configure
-    #     security groups on your server's VPC endpoint to restrict inbound
-    #     traffic to only the NLB's private IP addresses. For the full
-    #     requirements, see [Working with Network Load Balancers][1].
+    #     With `PROXY_PROTOCOL_V2_ENFORCED` you must restrict the server's
+    #     VPC endpoint security group to allow inbound traffic only via the
+    #     trusted NLB. For more information, see [Working with Network Load
+    #     Balancers][1].
     #
     #
     #
@@ -6285,6 +6398,33 @@ module Aws::Transfer
     #
     class SftpConnectorConnectionDetails < Struct.new(
       :host_key)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the configuration for a single SFTP port on a Transfer
+    # Family server that uses the SFTP protocol and has a `PUBLIC` endpoint.
+    # Each entry in the `SftpPorts` list is an `SftpPortWithOptions` object
+    # that pairs a port number with a communication mode.
+    #
+    # @!attribute [rw] sftp_port
+    #   The port on which the Transfer Family server listens for SFTP
+    #   connections. Specify any integer from 2000 to 65535, or 22. This
+    #   value is required for each entry in the `SftpPorts` list.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] communication_mode
+    #   Determines whether the server or the client sends data first when a
+    #   client establishes an SFTP connection on this port. Valid values are
+    #   `SERVER_TALK_FIRST` and `CLIENT_TALK_FIRST`. For a description of
+    #   each mode, see the `SftpPorts` property. This value is optional.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/SftpPortWithOptions AWS API Documentation
+    #
+    class SftpPortWithOptions < Struct.new(
+      :sftp_port,
+      :communication_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7301,12 +7441,30 @@ module Aws::Transfer
     #   An updated description for the host key.
     #   @return [String]
     #
+    # @!attribute [rw] storage_type
+    #   Specifies whether the host key is stored by Transfer Family
+    #   (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`). When
+    #   you specify `SECRETS_MANAGER`, Transfer Family stores the private
+    #   host key material in an Secrets Manager secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key
+    #   The Amazon Resource Name (ARN) of the KMS key used to encrypt the
+    #   Secrets Manager secret that stores the host key. If you specify a
+    #   customer managed key, its key policy must allow the
+    #   `AWSServiceRoleForTransfer` service-linked role to decrypt the
+    #   secret. If you don't specify a value, Transfer Family uses the
+    #   Amazon Web Services managed key for Secrets Manager.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/transfer-2018-11-05/UpdateHostKeyRequest AWS API Documentation
     #
     class UpdateHostKeyRequest < Struct.new(
       :server_id,
       :host_key_id,
-      :description)
+      :description,
+      :storage_type,
+      :kms_key)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7426,6 +7584,9 @@ module Aws::Transfer
     #     parameter to `ENABLE_NO_OP`, Transfer Family generates a log entry
     #     to Amazon CloudWatch Logs, so that you can determine when the
     #     client is making a `SETSTAT` call.
+    #
+    #   * To specify which ports your Transfer Family server listens to, use
+    #     the `SftpPorts` parameter.
     #
     #   * To determine whether your Transfer Family server resumes recent,
     #     negotiated sessions through a unique session ID, use the
@@ -7619,7 +7780,7 @@ module Aws::Transfer
     #   To specify a log group, you must provide the ARN for an existing log
     #   group. In this case, the format of the log group is as follows:
     #
-    #   `arn:aws:logs:region-name:amazon-account-id:log-group:log-group-name:*`
+    #   `arn:partition:logs:region-name:amazon-account-id:log-group:log-group-name:*`
     #
     #   For example,
     #   `arn:aws:logs:us-east-1:111122223333:log-group:mytestgroup:*`

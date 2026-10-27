@@ -54,7 +54,7 @@ module Aws::CloudWatchOmni
   autoload :EndpointProvider, 'aws-sdk-cloudwatchomni/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudwatchomni/endpoints'
 
-  GEM_VERSION = '1.0.0'
+  GEM_VERSION = '1.4.0'
 
 end
 

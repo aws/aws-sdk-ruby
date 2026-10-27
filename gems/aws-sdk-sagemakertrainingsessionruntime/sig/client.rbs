@@ -1,0 +1,241 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module SageMakerTrainingSessionRuntime
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerTrainingSessionRuntime/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _ExecuteSamplingOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteSamplingOperationOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerTrainingSessionRuntime/Client.html#execute_sampling_operation-instance_method
+      def execute_sampling_operation: (
+                                        training_session_name: ::String,
+                                        operation_config: {
+                                          sample: {
+                                            prompt: {
+                                              chunks: Array[
+                                                {
+                                                  tokens: Array[::Integer],
+                                                  type: ("encoded_text")
+                                                }
+                                              ]
+                                            },
+                                            num_samples: ::Integer,
+                                            sampling_params: {
+                                              max_tokens: ::Integer,
+                                              temperature: ::Float?,
+                                              top_k: ::Integer?,
+                                              top_p: ::Float?,
+                                              seed: ::Integer?,
+                                              stop: Array[::String]?
+                                            },
+                                            include_prompt_logprobs: bool?,
+                                            topk_prompt_logprobs: ::Integer?,
+                                            model_package_arn: ::String?
+                                          }?,
+                                          compute_logprobs: {
+                                            prompt: {
+                                              chunks: Array[
+                                                {
+                                                  tokens: Array[::Integer],
+                                                  type: ("encoded_text")
+                                                }
+                                              ]
+                                            },
+                                            model_package_arn: ::String?
+                                          }?,
+                                          load_weights_for_sampling: {
+                                            model_package_arn: ::String
+                                          }?
+                                        }
+                                      ) -> _ExecuteSamplingOperationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteSamplingOperationResponseSuccess
+
+      interface _ExecuteTrainingOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ExecuteTrainingOperationOutput]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerTrainingSessionRuntime/Client.html#execute_training_operation-instance_method
+      def execute_training_operation: (
+                                        training_session_name: ::String,
+                                        sequence_number: ::Integer,
+                                        ?client_token: ::String,
+                                        operation_config: {
+                                          forward: {
+                                            loss_fn_name: ("cross_entropy" | "importance_sampling" | "ppo" | "cispo"),
+                                            datum_list: Array[
+                                              Params::datum
+                                            ],
+                                            loss_fn_config: {
+                                            }?
+                                          }?,
+                                          forward_backward: {
+                                            loss_fn_name: ("cross_entropy" | "importance_sampling" | "ppo" | "cispo"),
+                                            datum_list: Array[
+                                              Params::datum
+                                            ],
+                                            loss_fn_config: {
+                                            }?
+                                          }?,
+                                          optimizer_step: {
+                                            adam_params_config: {
+                                              learning_rate: ::Float,
+                                              beta1: ::Float?,
+                                              beta2: ::Float?,
+                                              eps: ::Float?,
+                                              weight_decay: ::Float?,
+                                              grad_clip_norm: ::Float?,
+                                              lora_plus_lr_ratio: ::Float?
+                                            }
+                                          }?,
+                                          save_weights: {
+                                            merge_weights: bool?,
+                                            description: ::String?
+                                          }?,
+                                          save_state: {
+                                            description: ::String?
+                                          }?,
+                                          load_state: {
+                                            model_package_arn: ::String,
+                                            load_optimizer: bool
+                                          }?
+                                        }
+                                      ) -> _ExecuteTrainingOperationResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ExecuteTrainingOperationResponseSuccess
+
+      interface _GetSamplingOperationResultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSamplingOperationResultOutput]
+        def status: () -> ("Pending" | "InProgress" | "Completed" | "Failed" | "Skipped")
+        def operation_result: () -> Types::SampleOperationResult
+        def error_details: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerTrainingSessionRuntime/Client.html#get_sampling_operation_result-instance_method
+      def get_sampling_operation_result: (
+                                           training_session_name: ::String,
+                                           operation_id: ::String
+                                         ) -> _GetSamplingOperationResultResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSamplingOperationResultResponseSuccess
+
+      interface _GetTrainingOperationResultResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTrainingOperationResultOutput]
+        def status: () -> ("Pending" | "InProgress" | "Completed" | "Failed" | "Skipped")
+        def operation_result: () -> Types::OperationResult
+        def error_details: () -> ::String
+        def token_usage: () -> Types::TrainingTokenUsage
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerTrainingSessionRuntime/Client.html#get_training_operation_result-instance_method
+      def get_training_operation_result: (
+                                           training_session_name: ::String,
+                                           operation_id: ::String
+                                         ) -> _GetTrainingOperationResultResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTrainingOperationResultResponseSuccess
+
+      interface _SampleTrainingSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SampleTrainingSessionOutput]
+        def content_type: () -> ::String
+        def body: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerTrainingSessionRuntime/Client.html#sample_training_session-instance_method
+      def sample_training_session: (
+                                     training_session_name: ::String,
+                                     ?content_type: ::String,
+                                     ?accept: ::String,
+                                     ?model_package_arn: ::String,
+                                     ?body: ::String
+                                   ) -> _SampleTrainingSessionResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SampleTrainingSessionResponseSuccess
+
+      interface _SampleTrainingSessionWithResponseStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SampleTrainingSessionWithResponseStreamOutput]
+        def content_type: () -> ::String
+        def body: () -> ::IO
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SageMakerTrainingSessionRuntime/Client.html#sample_training_session_with_response_stream-instance_method
+      def sample_training_session_with_response_stream: (
+                                                          training_session_name: ::String,
+                                                          ?content_type: ::String,
+                                                          ?accept: ::String,
+                                                          ?model_package_arn: ::String,
+                                                          ?body: ::String
+                                                        ) ?{ (*untyped) -> void } -> _SampleTrainingSessionWithResponseStreamResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) ?{ (*untyped) -> void } -> _SampleTrainingSessionWithResponseStreamResponseSuccess
+    end
+  end
+end
+

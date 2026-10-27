@@ -10,6 +10,23 @@
 module Aws::CloudWatch
   module Types
 
+    # Settings that change the content of the notifications and events that
+    # an alarm sends when its state changes. These settings apply to the
+    # alarm's actions, whichever state triggers them.
+    #
+    # @!attribute [rw] alarm_tags_propagation
+    #   Settings for including the alarm's tags in its action notifications
+    #   and state-change events.
+    #   @return [Types::AlarmTagsPropagation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ActionConfiguration AWS API Documentation
+    #
+    class ActionConfiguration < Struct.new(
+      :alarm_tags_propagation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents an individual contributor to a multi-timeseries alarm,
     # containing information about a specific time series and its
     # contribution to the alarm's state.
@@ -165,6 +182,61 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # Includes the alarm's tags in the notifications that the alarm sends
+    # to Amazon SNS topics and Lambda functions. The tags are also included
+    # in the alarm's state-change events in Amazon EventBridge. Other types
+    # of alarm actions don't receive the tags.
+    #
+    # By default, the alarm's tags aren't included.
+    #
+    # Use this to route or filter notifications and events by tag, such as
+    # by team or environment. You can also use it to read the alarm's tags
+    # without looking them up separately.
+    #
+    # To limit which tags are included, specify either `IncludedTagKeys` or
+    # `ExcludedTagKeys`. You can't specify both. If you specify neither,
+    # all of the alarm's tags are included. This includes tags that you add
+    # to the alarm later.
+    #
+    # @!attribute [rw] enabled
+    #   Set to `true` to include the alarm's tags. Set to `false` to stop
+    #   including them.
+    #
+    #   When this is `true`, you must have the
+    #   `cloudwatch:ListTagsForResource` permission on the alarm to create
+    #   or update it.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] included_tag_keys
+    #   The tag keys to include. Only the alarm's tags with these keys are
+    #   included.
+    #
+    #   You can specify 1 to 50 tag keys. Each tag key must be 1 to 128
+    #   characters long.
+    #
+    #   You can't specify both `IncludedTagKeys` and `ExcludedTagKeys`.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] excluded_tag_keys
+    #   The tag keys to exclude. All of the alarm's tags except those with
+    #   these keys are included.
+    #
+    #   You can specify 1 to 50 tag keys. Each tag key must be 1 to 128
+    #   characters long.
+    #
+    #   You can't specify both `IncludedTagKeys` and `ExcludedTagKeys`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AlarmTagsPropagation AWS API Documentation
+    #
+    class AlarmTagsPropagation < Struct.new(
+      :enabled,
+      :included_tag_keys,
+      :excluded_tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An anomaly detection model associated with a particular CloudWatch
     # metric, statistic, or metric math expression. You can use the model to
     # display a band of expected, normal values when the metric is graphed.
@@ -267,11 +339,48 @@ module Aws::CloudWatch
     #   [1]: https://en.wikipedia.org/wiki/Tz_database
     #   @return [String]
     #
+    # @!attribute [rw] adaptation_speed
+    #   The speed at which the anomaly detection model adapts to sustained
+    #   changes in the metric's baseline. Faster adaptation lets the model
+    #   track shifting workloads sooner, but increases the chance that the
+    #   model treats a real, lasting change as normal.
+    #
+    #   Valid values:
+    #
+    #   * `FAST` - The model adapts quickly to sustained changes in the
+    #     baseline.
+    #
+    #   * `NORMAL` - The model adapts at a moderate pace. This is the
+    #     default value.
+    #
+    #   * `SLOW` - The model adapts slowly, reducing the risk of treating a
+    #     real change as normal.
+    #   @return [String]
+    #
+    # @!attribute [rw] outlier_filtering_strength
+    #   The aggressiveness with which CloudWatch filters outliers from the
+    #   metric data that the anomaly detection model uses. Stronger
+    #   filtering excludes more extreme values, which can produce a tighter
+    #   band of expected values but may also suppress legitimate spikes.
+    #
+    #   Valid values:
+    #
+    #   * `MINIMAL` - Excludes only the most extreme outliers.
+    #
+    #   * `MODERATE` - Excludes a moderate range of outliers. This is the
+    #     default value.
+    #
+    #   * `STRICT` - Excludes a wider range of outliers, which can suppress
+    #     legitimate spikes.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/AnomalyDetectorConfiguration AWS API Documentation
     #
     class AnomalyDetectorConfiguration < Struct.new(
       :excluded_time_ranges,
-      :metric_timezone)
+      :metric_timezone,
+      :adaptation_speed,
+      :outlier_filtering_strength)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -422,6 +531,12 @@ module Aws::CloudWatch
     #   specified.
     #   @return [Integer]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/CompositeAlarm AWS API Documentation
     #
     class CompositeAlarm < Struct.new(
@@ -443,7 +558,8 @@ module Aws::CloudWatch
       :actions_suppressed_reason,
       :actions_suppressor,
       :actions_suppressor_wait_period,
-      :actions_suppressor_extension_period)
+      :actions_suppressor_extension_period,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -463,6 +579,44 @@ module Aws::CloudWatch
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the resource ARN and optional metric selections for a
+    # `CreateResourceMetricsConfiguration` request.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource
+    #   to enable detailed monitoring for.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_selections
+    #   Specifies which metrics Amazon CloudWatch collects for the resource.
+    #   If you omit this parameter, Amazon CloudWatch collects all available
+    #   detailed metrics for the resource.
+    #   @return [Array<Types::ResourceMetricSelection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/CreateResourceMetricsConfigurationInput AWS API Documentation
+    #
+    class CreateResourceMetricsConfigurationInput < Struct.new(
+      :resource_arn,
+      :metric_selections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the newly created resource metrics configuration.
+    #
+    # @!attribute [rw] resource_metrics_configuration
+    #   The resource metrics configuration that was created by this
+    #   operation.
+    #   @return [Types::ResourceMetricsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/CreateResourceMetricsConfigurationOutput AWS API Documentation
+    #
+    class CreateResourceMetricsConfigurationOutput < Struct.new(
+      :resource_metrics_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -768,6 +922,28 @@ module Aws::CloudWatch
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteMetricStreamOutput AWS API Documentation
     #
     class DeleteMetricStreamOutput < Aws::EmptyStructure; end
+
+    # Specifies the resource ARN for a `DeleteResourceMetricsConfiguration`
+    # request.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource
+    #   to delete the resource metrics configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteResourceMetricsConfigurationInput AWS API Documentation
+    #
+    class DeleteResourceMetricsConfigurationInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # No data is returned.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/DeleteResourceMetricsConfigurationOutput AWS API Documentation
+    #
+    class DeleteResourceMetricsConfigurationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] alarm_name
     #   The name of the alarm for which to retrieve contributor information.
@@ -2230,10 +2406,69 @@ module Aws::CloudWatch
     #   disabled).
     #   @return [String]
     #
+    # @!attribute [rw] include_filters
+    #   The metric namespaces, and the metric names, that are enriched. This
+    #   parameter is omitted when enrichment is stopped, and when enrichment
+    #   is running with no include filters, which means that every supported
+    #   namespace is in scope.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    #
+    # @!attribute [rw] exclude_filters
+    #   The metric namespaces, and the metric names, that are left
+    #   unenriched. This parameter is omitted when enrichment is stopped,
+    #   and when enrichment is running with no exclude filters, which means
+    #   that nothing is excluded.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that enrichment started for the account. This
+    #   parameter is omitted when enrichment is stopped.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the enrichment configuration for the account
+    #   was last stored.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetOTelEnrichmentOutput AWS API Documentation
     #
     class GetOTelEnrichmentOutput < Struct.new(
-      :status)
+      :status,
+      :include_filters,
+      :exclude_filters,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the resource ARN for a `GetResourceMetricsConfiguration`
+    # request.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource
+    #   to retrieve the resource metrics configuration for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetResourceMetricsConfigurationInput AWS API Documentation
+    #
+    class GetResourceMetricsConfigurationInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the current resource metrics configuration for the specified
+    # resource.
+    #
+    # @!attribute [rw] resource_metrics_configuration
+    #   The resource metrics configuration for the specified resource.
+    #   @return [Types::ResourceMetricsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/GetResourceMetricsConfigurationOutput AWS API Documentation
+    #
+    class GetResourceMetricsConfigurationOutput < Struct.new(
+      :resource_metrics_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3066,6 +3301,12 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
     #   @return [Types::WarmUpConfiguration]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/LogAlarm AWS API Documentation
     #
     class LogAlarm < Struct.new(
@@ -3091,7 +3332,8 @@ module Aws::CloudWatch
       :evaluation_state,
       :action_log_line_count,
       :action_log_line_role_arn,
-      :warm_up_configuration)
+      :warm_up_configuration,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3438,6 +3680,12 @@ module Aws::CloudWatch
     #   The frequency, in seconds, at which the alarm is evaluated.
     #   @return [Integer]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/MetricAlarm AWS API Documentation
     #
     class MetricAlarm < Struct.new(
@@ -3473,7 +3721,8 @@ module Aws::CloudWatch
       :evaluation_window,
       :warm_up_configuration,
       :evaluation_criteria,
-      :evaluation_interval)
+      :evaluation_interval,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4064,6 +4313,40 @@ module Aws::CloudWatch
       include Aws::Structure
     end
 
+    # Selects the metrics in one namespace, for use in the `IncludeFilters`
+    # or `ExcludeFilters` parameter of [StartOTelEnrichment][1] or
+    # [UpdateOTelEnrichment][2].
+    #
+    # A maximum of 100 selectors is allowed across `IncludeFilters` and
+    # `ExcludeFilters` combined.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_StartOTelEnrichment.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateOTelEnrichment.html
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the metrics to select. Namespaces are matched
+    #   exactly and are case-sensitive.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_names
+    #   The names of the metrics to select within the namespace. Metric
+    #   names are matched exactly and are case-sensitive. If this parameter
+    #   is omitted, every metric in the namespace is selected.
+    #
+    #   A maximum of 100 metric names is allowed for each selector.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/OTelEnrichmentMetricSelector AWS API Documentation
+    #
+    class OTelEnrichmentMetricSelector < Struct.new(
+      :namespace,
+      :metric_names)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # This array is empty if the API operation was successful for all the
     # rules specified in the request. If the operation could not process one
     # of the rules, the following data is returned for each of those rules.
@@ -4453,6 +4736,12 @@ module Aws::CloudWatch
     #   specified.
     #   @return [Integer]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutCompositeAlarmInput AWS API Documentation
     #
     class PutCompositeAlarmInput < Struct.new(
@@ -4466,7 +4755,8 @@ module Aws::CloudWatch
       :tags,
       :actions_suppressor,
       :actions_suppressor_wait_period,
-      :actions_suppressor_extension_period)
+      :actions_suppressor_extension_period,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4781,6 +5071,12 @@ module Aws::CloudWatch
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/alarm-warm-up.html
     #   @return [Types::WarmUpConfiguration]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutLogAlarmInput AWS API Documentation
     #
     class PutLogAlarmInput < Struct.new(
@@ -4799,7 +5095,8 @@ module Aws::CloudWatch
       :comparison_operator,
       :treat_missing_data,
       :tags,
-      :warm_up_configuration)
+      :warm_up_configuration,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5344,6 +5641,12 @@ module Aws::CloudWatch
     #   `Metrics`.
     #   @return [Integer]
     #
+    # @!attribute [rw] action_configuration
+    #   Settings that change the content of the notifications and events
+    #   that the alarm sends when its state changes. These settings apply to
+    #   the alarm's actions, whichever state triggers them.
+    #   @return [Types::ActionConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/PutMetricAlarmInput AWS API Documentation
     #
     class PutMetricAlarmInput < Struct.new(
@@ -5372,7 +5675,8 @@ module Aws::CloudWatch
       :evaluation_window,
       :warm_up_configuration,
       :evaluation_criteria,
-      :evaluation_interval)
+      :evaluation_interval,
+      :action_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5624,6 +5928,81 @@ module Aws::CloudWatch
     #
     class ResourceConflict < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies which metrics Amazon CloudWatch collects for a resource
+    # metrics configuration. Include this in a
+    # [CreateResourceMetricsConfiguration][1] or
+    # [UpdateResourceMetricsConfiguration][2] request to limit collection to
+    # a specific set of metrics. If you omit metric selections, Amazon
+    # CloudWatch collects all available detailed metrics for the resource.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html
+    #
+    # @!attribute [rw] include_metrics
+    #   The names of the metrics to collect for the resource. Amazon
+    #   CloudWatch collects only the metrics that you list here.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ResourceMetricSelection AWS API Documentation
+    #
+    class ResourceMetricSelection < Struct.new(
+      :include_metrics)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Represents a resource metrics configuration for an Amazon Web Services
+    # resource. A resource metrics configuration enables detailed metric
+    # collection for the resource that is identified by its Amazon Resource
+    # Name (ARN). Each Amazon Web Services resource can have only one
+    # resource metrics configuration.
+    #
+    # This structure is returned by the
+    # [CreateResourceMetricsConfiguration][1],
+    # [UpdateResourceMetricsConfiguration][2], and
+    # [GetResourceMetricsConfiguration][3] operations.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_CreateResourceMetricsConfiguration.html
+    # [2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UpdateResourceMetricsConfiguration.html
+    # [3]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetResourceMetricsConfiguration.html
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource
+    #   that this configuration applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the resource metrics configuration was
+    #   created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the resource metrics configuration was last
+    #   updated. When the configuration is first created, this value is the
+    #   same as `CreatedAt`.
+    #   @return [Time]
+    #
+    # @!attribute [rw] metric_selections
+    #   The metrics that Amazon CloudWatch collects for the resource. If
+    #   this field is not present, Amazon CloudWatch collects all available
+    #   detailed metrics for the resource.
+    #   @return [Array<Types::ResourceMetricSelection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ResourceMetricsConfiguration AWS API Documentation
+    #
+    class ResourceMetricsConfiguration < Struct.new(
+      :resource_arn,
+      :created_at,
+      :updated_at,
+      :metric_selections)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5982,15 +6361,62 @@ module Aws::CloudWatch
     #
     class StartMetricStreamsOutput < Aws::EmptyStructure; end
 
-    # @api private
+    # @!attribute [rw] include_filters
+    #   The metric namespaces, and the metric names, to enrich. If this
+    #   parameter is omitted, every namespace that Amazon CloudWatch
+    #   supports for enrichment is in scope.
+    #
+    #   A maximum of 100 filters is allowed across `IncludeFilters` and
+    #   `ExcludeFilters` combined.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    #
+    # @!attribute [rw] exclude_filters
+    #   The metric namespaces, and the metric names, to leave unenriched. If
+    #   this parameter is omitted, nothing is excluded.
+    #
+    #   Amazon CloudWatch applies `ExcludeFilters` after `IncludeFilters`,
+    #   so a metric that both parameters match is not enriched.
+    #
+    #   A maximum of 100 filters is allowed across `IncludeFilters` and
+    #   `ExcludeFilters` combined.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartOTelEnrichmentInput AWS API Documentation
     #
-    class StartOTelEnrichmentInput < Aws::EmptyStructure; end
+    class StartOTelEnrichmentInput < Struct.new(
+      :include_filters,
+      :exclude_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
+    # @!attribute [rw] include_filters
+    #   The include filters that are stored for the account.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    #
+    # @!attribute [rw] exclude_filters
+    #   The exclude filters that are stored for the account.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that enrichment started for the account.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the enrichment configuration for the account
+    #   was last stored.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/StartOTelEnrichmentOutput AWS API Documentation
     #
-    class StartOTelEnrichmentOutput < Aws::EmptyStructure; end
+    class StartOTelEnrichmentOutput < Struct.new(
+      :include_filters,
+      :exclude_filters,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Represents a set of statistics that describes a specific metric.
     #
@@ -6157,6 +6583,123 @@ module Aws::CloudWatch
     # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UntagResourceOutput AWS API Documentation
     #
     class UntagResourceOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] include_filters
+    #   The metric namespaces, and the metric names, to enrich. If this
+    #   parameter is omitted, every namespace that Amazon CloudWatch
+    #   supports for enrichment is in scope.
+    #
+    #   A maximum of 100 filters is allowed across `IncludeFilters` and
+    #   `ExcludeFilters` combined.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    #
+    # @!attribute [rw] exclude_filters
+    #   The metric namespaces, and the metric names, to leave unenriched. If
+    #   this parameter is omitted, nothing is excluded.
+    #
+    #   Amazon CloudWatch applies `ExcludeFilters` after `IncludeFilters`,
+    #   so a metric that both parameters match is not enriched.
+    #
+    #   A maximum of 100 filters is allowed across `IncludeFilters` and
+    #   `ExcludeFilters` combined.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UpdateOTelEnrichmentInput AWS API Documentation
+    #
+    class UpdateOTelEnrichmentInput < Struct.new(
+      :include_filters,
+      :exclude_filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] include_filters
+    #   The include filters that are stored for the account after the
+    #   replacement. This parameter is omitted when the request cleared the
+    #   include filters, which means that every supported namespace is in
+    #   scope.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    #
+    # @!attribute [rw] exclude_filters
+    #   The exclude filters that are stored for the account after the
+    #   replacement. This parameter is omitted when the request cleared the
+    #   exclude filters, which means that nothing is excluded.
+    #   @return [Array<Types::OTelEnrichmentMetricSelector>]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that enrichment started for the account.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time that the enrichment configuration for the account
+    #   was last stored.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UpdateOTelEnrichmentOutput AWS API Documentation
+    #
+    class UpdateOTelEnrichmentOutput < Struct.new(
+      :include_filters,
+      :exclude_filters,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the resource ARN and optional replacement metric selections
+    # for an `UpdateResourceMetricsConfiguration` request.
+    #
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services resource
+    #   to update the resource metrics configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] metric_selections
+    #   Specifies which metrics Amazon CloudWatch collects for the resource.
+    #   The selections that you provide completely replace any existing
+    #   metric selections.
+    #
+    #   If you omit this parameter, Amazon CloudWatch removes any existing
+    #   metric selection filter and collects all available detailed metrics
+    #   for the resource.
+    #   @return [Array<Types::ResourceMetricSelection>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UpdateResourceMetricsConfigurationInput AWS API Documentation
+    #
+    class UpdateResourceMetricsConfigurationInput < Struct.new(
+      :resource_arn,
+      :metric_selections)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Returns the updated resource metrics configuration.
+    #
+    # @!attribute [rw] resource_metrics_configuration
+    #   The resource metrics configuration after the update was applied.
+    #   @return [Types::ResourceMetricsConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/UpdateResourceMetricsConfigurationOutput AWS API Documentation
+    #
+    class UpdateResourceMetricsConfigurationOutput < Struct.new(
+      :resource_metrics_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request failed validation. One or more input parameters do not
+    # satisfy the constraints that the operation requires.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/monitoring-2010-08-01/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An evaluation window that aligns the evaluated range to fixed clock
     # boundaries that match the alarm's period, such as the top of the

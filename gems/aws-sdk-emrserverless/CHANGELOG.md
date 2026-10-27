@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.76.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.75.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.74.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2026-10-08)
+------------------
+
+* Feature - This release adds support for system profile logs for lakeformation enabled Spark connect sessions .
+
 1.72.0 (2026-09-11)
 ------------------
 

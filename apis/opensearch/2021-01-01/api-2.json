@@ -1641,6 +1641,11 @@
         "Connection":{"shape":"InboundConnection"}
       }
     },
+    "AcceptedWarningsList":{
+      "type":"list",
+      "member":{"shape":"String"},
+      "max":25
+    },
     "AccessDeniedException":{
       "type":"structure",
       "members":{},
@@ -2289,7 +2294,9 @@
         "ChangeProgressStages":{"shape":"ChangeProgressStageList"},
         "LastUpdatedTime":{"shape":"UpdateTimestamp"},
         "ConfigChangeStatus":{"shape":"ConfigChangeStatus"},
-        "InitiatedBy":{"shape":"InitiatedBy"}
+        "InitiatedBy":{"shape":"InitiatedBy"},
+        "ValidationFailures":{"shape":"ValidationFailures"},
+        "AcceptedWarnings":{"shape":"AcceptedWarningsList"}
       }
     },
     "ClientToken":{
@@ -3687,7 +3694,8 @@
         "DryRunStatus":{"shape":"String"},
         "CreationDate":{"shape":"String"},
         "UpdateDate":{"shape":"String"},
-        "ValidationFailures":{"shape":"ValidationFailures"}
+        "ValidationFailures":{"shape":"ValidationFailures"},
+        "AcceptedWarnings":{"shape":"AcceptedWarningsList"}
       }
     },
     "DryRunResults":{
@@ -3734,7 +3742,8 @@
       "type":"structure",
       "members":{
         "Enabled":{"shape":"Boolean"},
-        "KmsKeyId":{"shape":"KmsKeyId"}
+        "KmsKeyId":{"shape":"KmsKeyId"},
+        "EncryptionMode":{"shape":"EncryptionMode"}
       }
     },
     "EncryptionAtRestOptionsStatus":{
@@ -3747,6 +3756,13 @@
         "Options":{"shape":"EncryptionAtRestOptions"},
         "Status":{"shape":"OptionStatus"}
       }
+    },
+    "EncryptionMode":{
+      "type":"string",
+      "enum":[
+        "DISK",
+        "NATIVE"
+      ]
     },
     "Endpoint":{
       "type":"string",
@@ -6352,7 +6368,8 @@
         "Policy-Min-TLS-1-0-2019-07",
         "Policy-Min-TLS-1-2-2019-07",
         "Policy-Min-TLS-1-2-PFS-2023-10",
-        "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
+        "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08",
+        "Policy-Min-TLS-1-2-FIPS-PQ-2026-10"
       ]
     },
     "Tag":{
@@ -6511,7 +6528,8 @@
         "DeploymentStrategyOptions":{"shape":"DeploymentStrategyOptions"},
         "AutomatedSnapshotPauseOptions":{"shape":"AutomatedSnapshotPauseRequestOptions"},
         "UseCase":{"shape":"DomainUseCase"},
-        "EngineMode":{"shape":"EngineMode"}
+        "EngineMode":{"shape":"EngineMode"},
+        "AcceptedWarnings":{"shape":"AcceptedWarningsList"}
       }
     },
     "UpdateDomainConfigResponse":{
@@ -6769,8 +6787,16 @@
       "type":"structure",
       "members":{
         "Code":{"shape":"String"},
-        "Message":{"shape":"String"}
+        "Message":{"shape":"String"},
+        "Severity":{"shape":"ValidationFailureSeverity"}
       }
+    },
+    "ValidationFailureSeverity":{
+      "type":"string",
+      "enum":[
+        "Critical",
+        "Warning"
+      ]
     },
     "ValidationFailures":{
       "type":"list",

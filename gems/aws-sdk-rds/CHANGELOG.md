@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.327.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.326.0 (2026-10-20)
+------------------
+
+* Feature - Amazon RDS now supports On-Demand Capacity Reservations for DB instances.
+
+1.325.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.324.0 (2026-09-29)
+------------------
+
+* Feature - Adds the TargetResourceConfigurations parameter to CreateBlueGreenDeployment, letting you specify a target KMS key for each resource in the green environment.
+
 1.323.0 (2026-09-11)
 ------------------
 

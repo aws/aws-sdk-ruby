@@ -1,6 +1,51 @@
 Unreleased Changes
 ------------------
 
+1.235.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - Add RBS signatures for `TransferManager`, `MultipartUploadError`, `Errors::NotFound` and `Errors::SlowDown`.
+
+* Issue - Improve object key validation in `TransferManager#download_directory` on Windows.
+
+1.234.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.233.2 (2026-10-06)
+------------------
+
+* Issue - Fix `download_file` on `TransferManager` and `Aws::S3::Object` leaving a corrupt file at the destination when a part raises a non-`StandardError`, and leaving a temp file behind when a caller-provided executor rejects a part.
+
+* Issue - Prevent `upload_directory` and `download_directory` on `TransferManager` from hanging when listing files or objects raises a non-`StandardError`, such as from a `:filter_callback`.
+
+1.233.1 (2026-10-01)
+------------------
+
+* Issue - Fix unbounded memory growth in `upload_stream` on `TransferManager` and `Aws::S3::Object` when the data source outpaces the upload (#3407).
+
+* Issue - Prevent `upload_file`, `upload_stream` and `download_file` on `TransferManager` and `Aws::S3::Object` from hanging when a worker thread is terminated by a non-`StandardError`.
+
+1.233.0 (2026-09-30)
+------------------
+
+* Feature - Amazon S3 adds a new optional S3 Inventory field, IntelligentTieringReferenceDate, reporting the reference date S3 Intelligent-Tiering uses to evaluate an object's tier-transition eligibility. The value is populated for objects in the Intelligent-Tiering storage class and left blank for others.
+
+1.232.3 (2026-09-28)
+------------------
+
+* Issue - Remove `:thread_count` from transfer options even when a custom `:executor` is configured on `TransferManager`, fixing an `ArgumentError` raised on single-part `upload_file` calls.
+
+* Issue - Fix `:thread_count` being ignored by the deprecated `Object#download_file`, which always used the default thread count.
+
+1.232.2 (2026-09-25)
+------------------
+
+* Issue - Ensure the internally-created executor is shutdown on error in `TransferManager` and `Aws::S3::Object` resource methods, preventing leaked worker threads on multipart transfer failures (#3419).
+
 1.232.1 (2026-09-16)
 ------------------
 

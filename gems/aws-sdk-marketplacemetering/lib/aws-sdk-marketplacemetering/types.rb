@@ -298,6 +298,24 @@ module Aws::MarketplaceMetering
       include Aws::Structure
     end
 
+    # Metadata associated with a resolved customer. Includes the
+    # `AgreementId` of the Amazon Web Services Marketplace agreement the
+    # customer accepted.
+    #
+    # @!attribute [rw] agreement_id
+    #   The unique identifier of the Amazon Web Services Marketplace
+    #   agreement the customer accepted. Use it to call Amazon Web Services
+    #   Marketplace Agreement APIs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/Metadata AWS API Documentation
+    #
+    class Metadata < Struct.new(
+      :agreement_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] product_code
     #   Product code is used to uniquely identify a product in Amazon Web
     #   Services Marketplace. The product code should be the same as the one
@@ -467,7 +485,7 @@ module Aws::MarketplaceMetering
 
     # The result of the `ResolveCustomer` operation. Contains the
     # `CustomerIdentifier` along with the `CustomerAWSAccountId`,
-    # `ProductCode`, and `LicenseArn`.
+    # `ProductCode`, `LicenseArn`, and `Metadata`.
     #
     # @!attribute [rw] customer_identifier
     #   The `CustomerIdentifier` is used to identify an individual customer
@@ -503,13 +521,20 @@ module Aws::MarketplaceMetering
     #    </note>
     #   @return [String]
     #
+    # @!attribute [rw] metadata
+    #   The metadata associated with the resolved customer, including the
+    #   `AgreementId` of the Amazon Web Services Marketplace agreement the
+    #   customer accepted.
+    #   @return [Types::Metadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/meteringmarketplace-2016-01-14/ResolveCustomerResult AWS API Documentation
     #
     class ResolveCustomerResult < Struct.new(
       :customer_identifier,
       :product_code,
       :customer_aws_account_id,
-      :license_arn)
+      :license_arn,
+      :metadata)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -2561,6 +2561,25 @@
       ],
       "idempotent":true
     },
+    "RotatePaymentConnectorCredentials":{
+      "name":"RotatePaymentConnectorCredentials",
+      "http":{
+        "method":"POST",
+        "requestUri":"/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}/rotate-credentials",
+        "responseCode":202
+      },
+      "input":{"shape":"RotatePaymentConnectorCredentialsRequest"},
+      "output":{"shape":"RotatePaymentConnectorCredentialsResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ],
+      "idempotent":true
+    },
     "SetTokenVaultCMK":{
       "name":"SetTokenVaultCMK",
       "http":{
@@ -4097,6 +4116,24 @@
         "location":{"shape":"CertificateLocation"}
       }
     },
+    "CertificateBucketOwnerAccountId":{
+      "type":"string",
+      "pattern":"[0-9]{12}"
+    },
+    "CertificateConfiguration":{
+      "type":"structure",
+      "members":{
+        "s3":{"shape":"S3CertificateConfiguration"},
+        "secretsManager":{"shape":"SecretsManagerCertificateConfiguration"}
+      },
+      "union":true
+    },
+    "CertificateConfigurationList":{
+      "type":"list",
+      "member":{"shape":"CertificateConfiguration"},
+      "max":1,
+      "min":1
+    },
     "CertificateLocation":{
       "type":"structure",
       "members":{
@@ -4104,11 +4141,32 @@
       },
       "union":true
     },
+    "CertificateS3Uri":{
+      "type":"string",
+      "pattern":"s3://.{1,2043}"
+    },
+    "CertificateSecretArn":{
+      "type":"string",
+      "pattern":"arn:aws(-[^:]+)?:secretsmanager:[a-z0-9-]+:[0-9]{12}:secret:.+"
+    },
     "Certificates":{
       "type":"list",
       "member":{"shape":"Certificate"},
       "max":200,
       "min":1
+    },
+    "CircuitBreakerConfiguration":{
+      "type":"structure",
+      "members":{
+        "mode":{"shape":"CircuitBreakerMode"}
+      }
+    },
+    "CircuitBreakerMode":{
+      "type":"string",
+      "enum":[
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "ClaimMatchOperatorType":{
       "type":"string",
@@ -4328,6 +4386,25 @@
         "walletSecretSource":{"shape":"SecretSourceType"}
       }
     },
+    "CoinbaseCdpRotationTargets":{
+      "type":"structure",
+      "required":["secrets"],
+      "members":{
+        "secrets":{"shape":"CoinbaseCdpSecrets"}
+      }
+    },
+    "CoinbaseCdpSecret":{
+      "type":"string",
+      "enum":[
+        "API_KEY",
+        "WALLET_SECRET"
+      ]
+    },
+    "CoinbaseCdpSecrets":{
+      "type":"list",
+      "member":{"shape":"CoinbaseCdpSecret"},
+      "min":1
+    },
     "ComponentConfiguration":{
       "type":"structure",
       "required":["configuration"],
@@ -4365,6 +4442,12 @@
       },
       "union":true
     },
+    "ConcreteModelId":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"[a-zA-Z0-9][a-zA-Z0-9\\-._/@:]*"
+    },
     "ConcurrentModificationException":{
       "type":"structure",
       "required":["message"],
@@ -4381,14 +4464,15 @@
       "type":"structure",
       "members":{
         "matchPrincipals":{"shape":"MatchPrincipals"},
-        "matchPaths":{"shape":"MatchPaths"}
+        "matchPaths":{"shape":"MatchPaths"},
+        "matchModels":{"shape":"MatchModels"}
       },
       "union":true
     },
     "Conditions":{
       "type":"list",
       "member":{"shape":"Condition"},
-      "max":2,
+      "max":3,
       "min":0
     },
     "ConfigurationBundleAction":{
@@ -5332,7 +5416,8 @@
         "targetConfiguration":{"shape":"TargetConfiguration"},
         "credentialProviderConfigurations":{"shape":"CredentialProviderConfigurations"},
         "metadataConfiguration":{"shape":"MetadataConfiguration"},
-        "privateEndpoint":{"shape":"PrivateEndpoint"}
+        "privateEndpoint":{"shape":"PrivateEndpoint"},
+        "certificateConfigurations":{"shape":"CertificateConfigurationList"}
       }
     },
     "CreateGatewayTargetResponse":{
@@ -5363,7 +5448,8 @@
         "privateEndpoint":{"shape":"PrivateEndpoint"},
         "privateEndpointManagedResources":{"shape":"PrivateEndpointManagedResources"},
         "authorizationData":{"shape":"AuthorizationData"},
-        "protocolType":{"shape":"TargetProtocolType"}
+        "protocolType":{"shape":"TargetProtocolType"},
+        "certificateConfigurations":{"shape":"CertificateConfigurationList"}
       }
     },
     "CreateHarnessEndpointRequest":{
@@ -5920,6 +6006,13 @@
         "CognitoOauth2"
       ]
     },
+    "CredentialRotationConfig":{
+      "type":"structure",
+      "members":{
+        "coinbaseCDP":{"shape":"CoinbaseCdpRotationTargets"}
+      },
+      "union":true
+    },
     "CredentialsProviderConfiguration":{
       "type":"structure",
       "members":{
@@ -6044,7 +6137,8 @@
         },
         "namespaceTemplates":{"shape":"NamespacesList"},
         "configuration":{"shape":"CustomConfigurationInput"},
-        "memoryRecordSchema":{"shape":"MemoryRecordSchema"}
+        "memoryRecordSchema":{"shape":"MemoryRecordSchema"},
+        "recordExpirySpecification":{"shape":"RecordExpirySpecification"}
       }
     },
     "CustomOauth2ProviderConfigInput":{
@@ -6480,10 +6574,12 @@
     "DeleteConfigurationBundleResponse":{
       "type":"structure",
       "required":[
+        "bundleArn",
         "bundleId",
         "status"
       ],
       "members":{
+        "bundleArn":{"shape":"ConfigurationBundleArn"},
         "bundleId":{"shape":"ConfigurationBundleId"},
         "status":{"shape":"ConfigurationBundleStatus"}
       }
@@ -7109,15 +7205,24 @@
     },
     "DimensionKey":{
       "type":"string",
-      "max":80,
+      "max":128,
       "min":1,
-      "pattern":"(targetName|toolName|qualifiedModelId|\\$\\.context\\.iam\\.principal|\\$\\.context\\.iam\\.sourceIdentity|\\$\\.context\\.jwt\\.[a-zA-Z_][a-zA-Z0-9_\\-\\.]{0,61}[a-zA-Z0-9_])"
+      "pattern":"(targetName|toolName|qualifiedModelId|\\$\\.context\\.iam\\.principal|\\$\\.context\\.iam\\.sourceIdentity|\\$\\.context\\.jwt\\.[a-zA-Z_][a-zA-Z0-9_\\-\\.]{0,61}[a-zA-Z0-9_]|\\$\\.context\\.request\\.header\\.[a-zA-Z0-9!#$%&'+\\.\\^_`|~\\-]+|\\$\\.context\\.request\\.body\\.[a-zA-Z_][a-zA-Z0-9_\\-]*(\\.[a-zA-Z_][a-zA-Z0-9_\\-]*)*)"
     },
     "DimensionKeys":{
       "type":"list",
       "member":{"shape":"DimensionKey"},
       "max":10,
       "min":1
+    },
+    "DimensionRatingScale":{
+      "type":"structure",
+      "members":{
+        "numerical":{"shape":"NumericalScaleDefinitions"},
+        "categorical":{"shape":"CategoricalScaleDefinitions"}
+      },
+      "sensitive":true,
+      "union":true
     },
     "DimensionValue":{
       "type":"string",
@@ -7379,7 +7484,8 @@
         },
         "namespaceTemplates":{"shape":"NamespacesList"},
         "reflectionConfiguration":{"shape":"EpisodicReflectionConfigurationInput"},
-        "memoryRecordSchema":{"shape":"MemoryRecordSchema"}
+        "memoryRecordSchema":{"shape":"MemoryRecordSchema"},
+        "recordExpirySpecification":{"shape":"RecordExpirySpecification"}
       }
     },
     "EpisodicOverrideConfigurationInput":{
@@ -7476,6 +7582,10 @@
         "memoryRecordSchema":{"shape":"MemoryRecordSchema"}
       }
     },
+    "ErrorStatusCodePattern":{
+      "type":"string",
+      "pattern":"[4-5]([0-9]{2}|XX)"
+    },
     "EvaluationConfigDescription":{
       "type":"string",
       "max":200,
@@ -7486,6 +7596,35 @@
     "EvaluationConfigName":{
       "type":"string",
       "pattern":"[a-zA-Z][a-zA-Z0-9_]{0,47}"
+    },
+    "EvaluationDimension":{
+      "type":"structure",
+      "required":[
+        "dimensionName",
+        "dimensionInstruction",
+        "dimensionRatingScale"
+      ],
+      "members":{
+        "dimensionName":{"shape":"EvaluationDimensionName"},
+        "dimensionInstruction":{"shape":"EvaluationDimensionInstruction"},
+        "dimensionRatingScale":{"shape":"DimensionRatingScale"}
+      }
+    },
+    "EvaluationDimensionInstruction":{
+      "type":"string",
+      "max":4000,
+      "min":1,
+      "sensitive":true
+    },
+    "EvaluationDimensionName":{
+      "type":"string",
+      "pattern":"[a-zA-Z][a-zA-Z0-9_]{0,47}"
+    },
+    "EvaluationDimensions":{
+      "type":"list",
+      "member":{"shape":"EvaluationDimension"},
+      "max":50,
+      "min":1
     },
     "EvaluatorArn":{
       "type":"string",
@@ -7640,6 +7779,71 @@
         "LLM_INFERRED",
         "STRICTLY_CONSISTENT"
       ]
+    },
+    "Fallback":{
+      "type":"structure",
+      "required":["targetFallback"],
+      "members":{
+        "triggerOn":{"shape":"FallbackTriggers"},
+        "firstByteTimeoutMilliseconds":{"shape":"FallbackFirstByteTimeoutMillisecondsInteger"},
+        "circuitBreaker":{"shape":"CircuitBreakerConfiguration"},
+        "targetFallback":{"shape":"FallbackTargetFallbackList"}
+      }
+    },
+    "FallbackError":{
+      "type":"string",
+      "enum":[
+        "CONNECTION_ERROR",
+        "FIRST_BYTE_TIMEOUT",
+        "UNROUTABLE"
+      ]
+    },
+    "FallbackFirstByteTimeoutMillisecondsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":900000,
+      "min":50
+    },
+    "FallbackTarget":{
+      "type":"structure",
+      "required":["targetName"],
+      "members":{
+        "targetName":{"shape":"TargetName"},
+        "model":{"shape":"ConcreteModelId"},
+        "triggerOn":{"shape":"FallbackTriggers"},
+        "firstByteTimeoutMilliseconds":{"shape":"FallbackTargetFirstByteTimeoutMillisecondsInteger"}
+      }
+    },
+    "FallbackTargetFallbackList":{
+      "type":"list",
+      "member":{"shape":"FallbackTarget"},
+      "max":2,
+      "min":1
+    },
+    "FallbackTargetFirstByteTimeoutMillisecondsInteger":{
+      "type":"integer",
+      "box":true,
+      "max":900000,
+      "min":50
+    },
+    "FallbackTriggers":{
+      "type":"structure",
+      "members":{
+        "statusCodes":{"shape":"FallbackTriggersStatusCodesList"},
+        "errors":{"shape":"FallbackTriggersErrorsList"}
+      }
+    },
+    "FallbackTriggersErrorsList":{
+      "type":"list",
+      "member":{"shape":"FallbackError"},
+      "max":3,
+      "min":1
+    },
+    "FallbackTriggersStatusCodesList":{
+      "type":"list",
+      "member":{"shape":"ErrorStatusCodePattern"},
+      "max":10,
+      "min":1
     },
     "FilesystemConfiguration":{
       "type":"structure",
@@ -7817,7 +8021,7 @@
       "type":"string",
       "max":170,
       "min":1,
-      "pattern":"arn:aws:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}"
+      "pattern":"arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:policy-engine\\/[a-zA-Z][a-zA-Z0-9-_]{0,99}-[a-zA-Z0-9_]{10}"
     },
     "GatewayPolicyEngineConfiguration":{
       "type":"structure",
@@ -8035,7 +8239,8 @@
         "privateEndpoint":{"shape":"PrivateEndpoint"},
         "privateEndpointManagedResources":{"shape":"PrivateEndpointManagedResources"},
         "authorizationData":{"shape":"AuthorizationData"},
-        "protocolType":{"shape":"TargetProtocolType"}
+        "protocolType":{"shape":"TargetProtocolType"},
+        "certificateConfigurations":{"shape":"CertificateConfigurationList"}
       }
     },
     "GatewayTargetList":{
@@ -8706,7 +8911,8 @@
         "privateEndpoint":{"shape":"PrivateEndpoint"},
         "privateEndpointManagedResources":{"shape":"PrivateEndpointManagedResources"},
         "authorizationData":{"shape":"AuthorizationData"},
-        "protocolType":{"shape":"TargetProtocolType"}
+        "protocolType":{"shape":"TargetProtocolType"},
+        "certificateConfigurations":{"shape":"CertificateConfigurationList"}
       }
     },
     "GetHarnessEndpointRequest":{
@@ -8892,11 +9098,13 @@
         "name":{"shape":"PaymentConnectorName"},
         "description":{"shape":"PaymentsDescription"},
         "type":{"shape":"PaymentConnectorType"},
+        "provisionMode":{"shape":"PaymentConnectorProvisionMode"},
         "credentialProviderConfigurations":{"shape":"CredentialsProviderConfigurations"},
         "createdAt":{"shape":"DateTimestamp"},
         "lastUpdatedAt":{"shape":"DateTimestamp"},
         "status":{"shape":"PaymentConnectorStatus"},
-        "authorizationUrl":{"shape":"PaymentConnectorAuthorizationUrl"}
+        "authorizationUrl":{"shape":"PaymentConnectorAuthorizationUrl"},
+        "credentialsUpdatedAt":{"shape":"DateTimestamp"}
       }
     },
     "GetPaymentCredentialProviderRequest":{
@@ -10401,7 +10609,7 @@
       "type":"string",
       "max":256,
       "min":1,
-      "pattern":"/[a-zA-Z0-9\\-\\._/]+"
+      "pattern":"/[a-zA-Z0-9\\-\\._/{}]+"
     },
     "InferenceProviderTargetConfiguration":{
       "type":"structure",
@@ -11953,7 +12161,8 @@
         "instructions":{"shape":"McpInstructions"},
         "searchType":{"shape":"SearchType"},
         "sessionConfiguration":{"shape":"SessionConfiguration"},
-        "streamingConfiguration":{"shape":"StreamingConfiguration"}
+        "streamingConfiguration":{"shape":"StreamingConfiguration"},
+        "disableMcpListToolsPagination":{"shape":"Boolean"}
       }
     },
     "ManagedResourceDetails":{
@@ -11979,6 +12188,34 @@
         "tags":{"shape":"TagsMap"},
         "routingDomain":{"shape":"RoutingDomain"}
       }
+    },
+    "MatchModelEntry":{
+      "type":"structure",
+      "required":["value"],
+      "members":{
+        "value":{"shape":"ModelPattern"},
+        "operator":{"shape":"MatchOperator"}
+      }
+    },
+    "MatchModels":{
+      "type":"structure",
+      "required":["anyOf"],
+      "members":{
+        "anyOf":{"shape":"MatchModelsAnyOfList"}
+      }
+    },
+    "MatchModelsAnyOfList":{
+      "type":"list",
+      "member":{"shape":"MatchModelEntry"},
+      "max":100,
+      "min":1
+    },
+    "MatchOperator":{
+      "type":"string",
+      "enum":[
+        "StringEquals",
+        "StringLike"
+      ]
     },
     "MatchPathPattern":{
       "type":"string",
@@ -12196,7 +12433,8 @@
         "createdAt":{"shape":"Timestamp"},
         "updatedAt":{"shape":"Timestamp"},
         "status":{"shape":"MemoryStrategyStatus"},
-        "memoryRecordSchema":{"shape":"MemoryRecordSchema"}
+        "memoryRecordSchema":{"shape":"MemoryRecordSchema"},
+        "recordExpiryDurationDays":{"shape":"RecordExpiryDurationDays"}
       }
     },
     "MemoryStrategyId":{
@@ -12371,9 +12609,9 @@
     },
     "ModelPattern":{
       "type":"string",
-      "max":256,
+      "max":2048,
       "min":1,
-      "pattern":"[a-zA-Z0-9\\-\\._\\*\\?@]+(/[a-zA-Z0-9\\-\\._\\*\\?@]+)*"
+      "pattern":"[a-zA-Z0-9\\-\\._\\*\\?@:]+(/[a-zA-Z0-9\\-\\._\\*\\?@:]+)*"
     },
     "ModifyConsolidationConfiguration":{
       "type":"structure",
@@ -12426,7 +12664,8 @@
         },
         "namespaceTemplates":{"shape":"NamespacesList"},
         "configuration":{"shape":"ModifyStrategyConfiguration"},
-        "memoryRecordSchema":{"shape":"MemoryRecordSchema"}
+        "memoryRecordSchema":{"shape":"MemoryRecordSchema"},
+        "recordExpirySpecification":{"shape":"RecordExpirySpecification"}
       }
     },
     "ModifyReflectionConfiguration":{
@@ -12514,7 +12753,7 @@
       "type":"list",
       "member":{"shape":"NamespaceKeyEntry"},
       "max":5,
-      "min":1
+      "min":0
     },
     "NamespaceRegexPattern":{
       "type":"string",
@@ -12973,6 +13212,7 @@
         "paymentConnectorId":{"shape":"PaymentConnectorId"},
         "name":{"shape":"PaymentConnectorName"},
         "type":{"shape":"PaymentConnectorType"},
+        "provisionMode":{"shape":"PaymentConnectorProvisionMode"},
         "status":{"shape":"PaymentConnectorStatus"},
         "lastUpdatedAt":{"shape":"DateTimestamp"}
       }
@@ -13584,7 +13824,8 @@
       "type":"structure",
       "members":{
         "numerical":{"shape":"NumericalScaleDefinitions"},
-        "categorical":{"shape":"CategoricalScaleDefinitions"}
+        "categorical":{"shape":"CategoricalScaleDefinitions"},
+        "multiDimensional":{"shape":"EvaluationDimensions"}
       },
       "sensitive":true,
       "union":true
@@ -13599,6 +13840,23 @@
       "type":"string",
       "max":64,
       "min":1
+    },
+    "RecordExpiryAction":{
+      "type":"string",
+      "enum":["REMOVE"]
+    },
+    "RecordExpiryDurationDays":{
+      "type":"integer",
+      "box":true,
+      "min":31
+    },
+    "RecordExpirySpecification":{
+      "type":"structure",
+      "members":{
+        "recordExpiryDurationDays":{"shape":"RecordExpiryDurationDays"},
+        "action":{"shape":"RecordExpiryAction"}
+      },
+      "union":true
     },
     "RecordIdentifier":{
       "type":"string",
@@ -13975,6 +14233,46 @@
       "max":2000,
       "min":125
     },
+    "RotatePaymentConnectorCredentialsRequest":{
+      "type":"structure",
+      "required":[
+        "paymentManagerId",
+        "paymentConnectorId",
+        "credentialsToRotate"
+      ],
+      "members":{
+        "paymentManagerId":{
+          "shape":"PaymentManagerId",
+          "location":"uri",
+          "locationName":"paymentManagerId"
+        },
+        "paymentConnectorId":{
+          "shape":"PaymentConnectorId",
+          "location":"uri",
+          "locationName":"paymentConnectorId"
+        },
+        "credentialsToRotate":{"shape":"CredentialRotationConfig"},
+        "clientToken":{
+          "shape":"ClientToken",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "RotatePaymentConnectorCredentialsResponse":{
+      "type":"structure",
+      "required":[
+        "paymentConnectorId",
+        "paymentManagerId",
+        "lastUpdatedAt",
+        "status"
+      ],
+      "members":{
+        "paymentConnectorId":{"shape":"PaymentConnectorId"},
+        "paymentManagerId":{"shape":"PaymentManagerId"},
+        "lastUpdatedAt":{"shape":"DateTimestamp"},
+        "status":{"shape":"PaymentConnectorStatus"}
+      }
+    },
     "RouteToTargetAction":{
       "type":"structure",
       "members":{
@@ -14030,6 +14328,14 @@
     "S3BucketUri":{
       "type":"string",
       "pattern":"s3://.{1,2043}"
+    },
+    "S3CertificateConfiguration":{
+      "type":"structure",
+      "required":["uri"],
+      "members":{
+        "uri":{"shape":"CertificateS3Uri"},
+        "bucketOwnerAccountId":{"shape":"CertificateBucketOwnerAccountId"}
+      }
     },
     "S3Configuration":{
       "type":"structure",
@@ -14240,6 +14546,13 @@
         "EXTERNAL"
       ]
     },
+    "SecretsManagerCertificateConfiguration":{
+      "type":"structure",
+      "required":["secretArn"],
+      "members":{
+        "secretArn":{"shape":"CertificateSecretArn"}
+      }
+    },
     "SecretsManagerLocation":{
       "type":"structure",
       "required":["secretArn"],
@@ -14337,7 +14650,8 @@
           "deprecatedSince":"2026-03-02"
         },
         "namespaceTemplates":{"shape":"NamespacesList"},
-        "memoryRecordSchema":{"shape":"MemoryRecordSchema"}
+        "memoryRecordSchema":{"shape":"MemoryRecordSchema"},
+        "recordExpirySpecification":{"shape":"RecordExpirySpecification"}
       }
     },
     "SemanticOverrideConfigurationInput":{
@@ -14611,7 +14925,9 @@
       "type":"structure",
       "required":["targetName"],
       "members":{
-        "targetName":{"shape":"TargetName"}
+        "targetName":{"shape":"TargetName"},
+        "model":{"shape":"ConcreteModelId"},
+        "fallback":{"shape":"Fallback"}
       }
     },
     "Status":{
@@ -14855,7 +15171,8 @@
           "deprecatedSince":"2026-03-02"
         },
         "namespaceTemplates":{"shape":"NamespacesList"},
-        "memoryRecordSchema":{"shape":"MemoryRecordSchema"}
+        "memoryRecordSchema":{"shape":"MemoryRecordSchema"},
+        "recordExpirySpecification":{"shape":"RecordExpirySpecification"}
       }
     },
     "SummaryOverrideConfigurationInput":{
@@ -15070,14 +15387,16 @@
     "TargetTrafficSplitEntry":{
       "type":"structure",
       "required":[
+        "targetName",
         "name",
-        "weight",
-        "targetName"
+        "weight"
       ],
       "members":{
+        "targetName":{"shape":"TargetName"},
+        "model":{"shape":"ConcreteModelId"},
+        "fallback":{"shape":"Fallback"},
         "name":{"shape":"TargetTrafficSplitEntryNameString"},
         "weight":{"shape":"TargetTrafficSplitEntryWeightInteger"},
-        "targetName":{"shape":"TargetName"},
         "description":{"shape":"TargetTrafficSplitEntryDescriptionString"},
         "metadata":{"shape":"TrafficSplitMetadataMap"}
       }
@@ -15559,7 +15878,8 @@
       "type":"structure",
       "required":[
         "bundleId",
-        "parentVersionIds"
+        "parentVersionIds",
+        "commitMessage"
       ],
       "members":{
         "clientToken":{
@@ -15927,7 +16247,8 @@
         "targetConfiguration":{"shape":"TargetConfiguration"},
         "credentialProviderConfigurations":{"shape":"CredentialProviderConfigurations"},
         "metadataConfiguration":{"shape":"MetadataConfiguration"},
-        "privateEndpoint":{"shape":"PrivateEndpoint"}
+        "privateEndpoint":{"shape":"PrivateEndpoint"},
+        "certificateConfigurations":{"shape":"CertificateConfigurationList"}
       }
     },
     "UpdateGatewayTargetResponse":{
@@ -15958,7 +16279,8 @@
         "privateEndpoint":{"shape":"PrivateEndpoint"},
         "privateEndpointManagedResources":{"shape":"PrivateEndpointManagedResources"},
         "authorizationData":{"shape":"AuthorizationData"},
-        "protocolType":{"shape":"TargetProtocolType"}
+        "protocolType":{"shape":"TargetProtocolType"},
+        "certificateConfigurations":{"shape":"CertificateConfigurationList"}
       }
     },
     "UpdateHarnessEndpointRequest":{
@@ -16679,7 +17001,8 @@
           "deprecatedSince":"2026-03-02"
         },
         "namespaceTemplates":{"shape":"NamespacesList"},
-        "memoryRecordSchema":{"shape":"MemoryRecordSchema"}
+        "memoryRecordSchema":{"shape":"MemoryRecordSchema"},
+        "recordExpirySpecification":{"shape":"RecordExpirySpecification"}
       }
     },
     "UserPreferenceOverrideConfigurationInput":{

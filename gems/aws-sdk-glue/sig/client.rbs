@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -211,6 +212,17 @@ module Aws
                                            result_ids: Array[::String]
                                          ) -> _BatchGetDataQualityResultResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDataQualityResultResponseSuccess
+
+      interface _BatchGetDataQualityResultV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDataQualityResultV2Response]
+        def results: () -> ::Array[Types::DataQualityResultV2Item]
+        def results_not_found: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#batch_get_data_quality_result_v2-instance_method
+      def batch_get_data_quality_result_v2: (
+                                              result_ids: Array[::String]
+                                            ) -> _BatchGetDataQualityResultV2ResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDataQualityResultV2ResponseSuccess
 
       interface _BatchGetDataQualityRulesetEvaluationRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDataQualityRulesetEvaluationRunResponse]
@@ -546,7 +558,8 @@ module Aws
                             },
                             ?configuration: ::String,
                             ?crawler_security_configuration: ::String,
-                            ?tags: Hash[::String, ::String]
+                            ?tags: Hash[::String, ::String],
+                            ?catalog_id: ::String
                           ) -> _CreateCrawlerResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCrawlerResponseSuccess
 
@@ -604,7 +617,7 @@ module Aws
         def yarn_endpoint_address: () -> ::String
         def zeppelin_remote_spark_interpreter_port: () -> ::Integer
         def number_of_nodes: () -> ::Integer
-        def worker_type: () -> ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+        def worker_type: () -> ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
         def glue_version: () -> ::String
         def number_of_workers: () -> ::Integer
         def availability_zone: () -> ::String
@@ -625,7 +638,7 @@ module Aws
                                  ?public_key: ::String,
                                  ?public_keys: Array[::String],
                                  ?number_of_nodes: ::Integer,
-                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                                  ?glue_version: ::String,
                                  ?number_of_workers: ::Integer,
                                  ?extra_python_libs_s3_path: ::String,
@@ -714,7 +727,8 @@ module Aws
                                 ?integration_config: {
                                   refresh_interval: ::String?,
                                   source_properties: Hash[::String, ::String]?,
-                                  continuous_sync: bool?
+                                  continuous_sync: bool?,
+                                  target_namespace: ::String?
                                 }
                               ) -> _CreateIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResponseSuccess
@@ -801,7 +815,7 @@ module Aws
                         },
                         ?glue_version: ::String,
                         ?number_of_workers: ::Integer,
-                        ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                        ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                         ?code_gen_configuration_nodes: Hash[::String, Params::code_gen_configuration_node],
                         ?execution_class: ("FLEX" | "STANDARD"),
                         ?source_control_details: Params::source_control_details,
@@ -830,7 +844,7 @@ module Aws
                                  role: ::String,
                                  ?glue_version: ::String,
                                  ?max_capacity: ::Float,
-                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                                  ?number_of_workers: ::Integer,
                                  ?timeout: ::Integer,
                                  ?max_retries: ::Integer,
@@ -1003,7 +1017,7 @@ module Aws
                             },
                             ?max_capacity: ::Float,
                             ?number_of_workers: ::Integer,
-                            ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                            ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                             ?security_configuration: ::String,
                             ?glue_version: ::String,
                             ?tags: Hash[::String, ::String],
@@ -1211,7 +1225,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#delete_column_statistics_task_settings-instance_method
       def delete_column_statistics_task_settings: (
                                                     database_name: ::String,
-                                                    table_name: ::String
+                                                    table_name: ::String,
+                                                    ?catalog_id: ::String
                                                   ) -> _DeleteColumnStatisticsTaskSettingsResponseSuccess
                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteColumnStatisticsTaskSettingsResponseSuccess
 
@@ -1812,7 +1827,8 @@ module Aws
                                              database_name: ::String,
                                              table_name: ::String,
                                              ?max_results: ::Integer,
-                                             ?next_token: ::String
+                                             ?next_token: ::String,
+                                             ?catalog_id: ::String
                                            ) -> _GetColumnStatisticsTaskRunsResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetColumnStatisticsTaskRunsResponseSuccess
 
@@ -1823,7 +1839,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_column_statistics_task_settings-instance_method
       def get_column_statistics_task_settings: (
                                                  database_name: ::String,
-                                                 table_name: ::String
+                                                 table_name: ::String,
+                                                 ?catalog_id: ::String
                                                ) -> _GetColumnStatisticsTaskSettingsResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetColumnStatisticsTaskSettingsResponseSuccess
 
@@ -1991,6 +2008,31 @@ module Aws
                                      result_id: ::String
                                    ) -> _GetDataQualityResultResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataQualityResultResponseSuccess
+
+      interface _GetDataQualityResultV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityResultV2Response]
+        def result_id: () -> ::String
+        def data_source: () -> Types::DataSource
+        def profile_id: () -> ::String
+        def dimensions: () -> ::Hash[::String, ::String]
+        def tags: () -> ::Hash[::String, ::String]
+        def execution_started_on: () -> ::Time
+        def execution_completed_on: () -> ::Time
+        def result_published_on: () -> ::Time
+        def score: () -> ::Float
+        def rule_results: () -> ::Array[Types::DataQualityRuleResult]
+        def analyzer_results: () -> ::Array[Types::DataQualityAnalyzerResult]
+        def observations: () -> ::Array[Types::DataQualityObservation]
+        def evaluation_context: () -> ::String
+        def descriptors: () -> ::Hash[::String, ::String]
+        def aggregated_metrics: () -> Types::DataQualityAggregatedMetrics
+        def ruleset_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_result_v2-instance_method
+      def get_data_quality_result_v2: (
+                                        result_id: ::String
+                                      ) -> _GetDataQualityResultV2ResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataQualityResultV2ResponseSuccess
 
       interface _GetDataQualityRuleRecommendationRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityRuleRecommendationRunResponse]
@@ -2331,7 +2373,7 @@ module Aws
         def role: () -> ::String
         def glue_version: () -> ::String
         def max_capacity: () -> ::Float
-        def worker_type: () -> ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")
+        def worker_type: () -> ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")
         def number_of_workers: () -> ::Integer
         def timeout: () -> ::Integer
         def max_retries: () -> ::Integer
@@ -2675,6 +2717,27 @@ module Aws
                          ) -> _GetStatementResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStatementResponseSuccess
 
+      interface _GetSystemLogsForJobRunResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSystemLogsForJobRunResponse]
+        def system_logs_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_system_logs_for_job_run-instance_method
+      def get_system_logs_for_job_run: (
+                                         job_name: ::String,
+                                         run_id: ::String
+                                       ) -> _GetSystemLogsForJobRunResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSystemLogsForJobRunResponseSuccess
+
+      interface _GetSystemLogsForSessionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSystemLogsForSessionResponse]
+        def system_logs_url: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_system_logs_for_session-instance_method
+      def get_system_logs_for_session: (
+                                         id: ::String
+                                       ) -> _GetSystemLogsForSessionResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSystemLogsForSessionResponseSuccess
+
       interface _GetTableResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTableResponse]
         def table: () -> Types::Table
@@ -2769,6 +2832,7 @@ module Aws
                           requested_columns: Array[::String]?,
                           all_columns_requested: bool?
                         },
+                        ?resource_share_type: ("FEDERATED" | "ALL"),
                         ?include_status_details: bool,
                         ?attributes_to_get: Array[("NAME" | "TABLE_TYPE" | "DEFAULT" | "LATEST_ICEBERG_METADATA")]
                       ) -> _GetTablesResponseSuccess
@@ -3125,6 +3189,25 @@ module Aws
                                        ?max_results: ::Integer
                                      ) -> _ListDataQualityResultsResponseSuccess
                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataQualityResultsResponseSuccess
+
+      interface _ListDataQualityResultsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataQualityResultsV2Response]
+        def results: () -> ::Array[Types::DataQualityResultsV2Description]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_data_quality_results_v2-instance_method
+      def list_data_quality_results_v2: (
+                                          ?filter: {
+                                            data_source: Params::data_source?,
+                                            published_after: ::Time?,
+                                            published_before: ::Time?,
+                                            dimensions: Hash[::String, ::String]?,
+                                            evaluation_context: ::String?
+                                          },
+                                          ?next_token: ::String,
+                                          ?max_results: ::Integer
+                                        ) -> _ListDataQualityResultsV2ResponseSuccess
+                                      | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataQualityResultsV2ResponseSuccess
 
       interface _ListDataQualityRuleRecommendationRunsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataQualityRuleRecommendationRunsResponse]
@@ -3539,11 +3622,118 @@ module Aws
                                 ?integration_config: {
                                   refresh_interval: ::String?,
                                   source_properties: Hash[::String, ::String]?,
-                                  continuous_sync: bool?
+                                  continuous_sync: bool?,
+                                  target_namespace: ::String?
                                 },
                                 ?integration_name: ::String
                               ) -> _ModifyIntegrationResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyIntegrationResponseSuccess
+
+      interface _PublishDataQualityResultV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PublishDataQualityResultV2Response]
+        def result_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#publish_data_quality_result_v2-instance_method
+      def publish_data_quality_result_v2: (
+                                            dimensions: Hash[::String, ::String],
+                                            ?tags: Hash[::String, ::String],
+                                            ?execution_started_on: ::Time,
+                                            ?execution_completed_on: ::Time,
+                                            score: ::Float,
+                                            rule_results: Array[
+                                              {
+                                                name: ::String?,
+                                                description: ::String?,
+                                                evaluation_message: ::String?,
+                                                result: ("PASS" | "FAIL" | "ERROR")?,
+                                                evaluated_metrics: Hash[::String, ::Float]?,
+                                                evaluated_rule: ::String?,
+                                                rule_metrics: Hash[::String, ::Float]?,
+                                                labels: Hash[::String, ::String]?
+                                              }
+                                            ],
+                                            ?analyzer_results: Array[
+                                              {
+                                                name: ::String?,
+                                                description: ::String?,
+                                                evaluation_message: ::String?,
+                                                evaluated_metrics: Hash[::String, ::Float]?,
+                                                evaluated_distributions: Hash[::String, {
+                                                    bin_edges: Array[::String]?,
+                                                    count: Array[::Integer]?,
+                                                    data_type: ::String?
+                                                  }]?
+                                              }
+                                            ],
+                                            ?observations: Array[
+                                              {
+                                                description: ::String?,
+                                                metric_based_observation: {
+                                                  metric_name: ::String?,
+                                                  statistic_id: ::String?,
+                                                  metric_values: {
+                                                    actual_value: ::Float?,
+                                                    expected_value: ::Float?,
+                                                    lower_limit: ::Float?,
+                                                    upper_limit: ::Float?
+                                                  }?,
+                                                  new_rules: Array[::String]?
+                                                }?
+                                              }
+                                            ],
+                                            ?aggregated_metrics: {
+                                              total_rows_processed: ::Float?,
+                                              total_rows_passed: ::Float?,
+                                              total_rows_failed: ::Float?,
+                                              total_rules_processed: ::Float?,
+                                              total_rules_passed: ::Float?,
+                                              total_rules_failed: ::Float?
+                                            },
+                                            ?statistics: Array[
+                                              {
+                                                statistic_id: ::String?,
+                                                profile_id: ::String?,
+                                                run_identifier: {
+                                                  run_id: ::String?,
+                                                  job_run_id: ::String?
+                                                }?,
+                                                statistic_name: ::String?,
+                                                double_value: ::Float?,
+                                                distribution_value: {
+                                                  bin_edges: Array[::String]?,
+                                                  count: Array[::Integer]?,
+                                                  data_type: ::String?
+                                                }?,
+                                                evaluation_level: ("Dataset" | "Column" | "Multicolumn")?,
+                                                columns_referenced: Array[::String]?,
+                                                referenced_datasets: Array[::String]?,
+                                                statistic_properties: Hash[::String, ::String]?,
+                                                recorded_on: ::Time?,
+                                                inclusion_annotation: {
+                                                  value: ("INCLUDE" | "EXCLUDE")?,
+                                                  last_modified_on: ::Time?
+                                                }?
+                                              }
+                                            ],
+                                            ?run_configuration: {
+                                              observations_enabled: ("ALL" | "NONE")?,
+                                              observation_mode: ("SCHEDULED" | "FIXED")?
+                                            },
+                                            ?client_token: ::String,
+                                            evaluation_context: ::String,
+                                            ?descriptors: Hash[::String, ::String],
+                                            ?ruleset_name: ::String,
+                                            ?data_quality_security_configuration: ::String,
+                                            ?telemetry: {
+                                              vcpu_hours: ::Float?,
+                                              flags_enabled: Hash[::String, ::String]?,
+                                              library_version: ::String?,
+                                              spark_version: ::String?,
+                                              host_runtime_version: ::String?,
+                                              engine: ("SPARK" | "PYTHON")?
+                                            }
+                                          ) -> _PublishDataQualityResultV2ResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PublishDataQualityResultV2ResponseSuccess
 
       interface _PutAssetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAssetResponse]
@@ -4006,7 +4196,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#start_column_statistics_task_run_schedule-instance_method
       def start_column_statistics_task_run_schedule: (
                                                        database_name: ::String,
-                                                       table_name: ::String
+                                                       table_name: ::String,
+                                                       ?catalog_id: ::String
                                                      ) -> _StartColumnStatisticsTaskRunScheduleResponseSuccess
                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartColumnStatisticsTaskRunScheduleResponseSuccess
 
@@ -4158,7 +4349,7 @@ module Aws
                            ?notification_property: {
                              notify_delay_after: ::Integer?
                            },
-                           ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                           ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                            ?number_of_workers: ::Integer,
                            ?execution_class: ("FLEX" | "STANDARD"),
                            ?execution_role_session_policy: ::String
@@ -4226,7 +4417,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#stop_column_statistics_task_run-instance_method
       def stop_column_statistics_task_run: (
                                              database_name: ::String,
-                                             table_name: ::String
+                                             table_name: ::String,
+                                             ?catalog_id: ::String
                                            ) -> _StopColumnStatisticsTaskRunResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopColumnStatisticsTaskRunResponseSuccess
 
@@ -4236,7 +4428,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#stop_column_statistics_task_run_schedule-instance_method
       def stop_column_statistics_task_run_schedule: (
                                                       database_name: ::String,
-                                                      table_name: ::String
+                                                      table_name: ::String,
+                                                      ?catalog_id: ::String
                                                     ) -> _StopColumnStatisticsTaskRunScheduleResponseSuccess
                                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopColumnStatisticsTaskRunScheduleResponseSuccess
 
@@ -4494,7 +4687,8 @@ module Aws
                               account_id: ::String?
                             },
                             ?configuration: ::String,
-                            ?crawler_security_configuration: ::String
+                            ?crawler_security_configuration: ::String,
+                            ?catalog_id: ::String
                           ) -> _UpdateCrawlerResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCrawlerResponseSuccess
 
@@ -4665,7 +4859,7 @@ module Aws
                           allocated_capacity: ::Integer?,
                           timeout: ::Integer?,
                           max_capacity: ::Float?,
-                          worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X")?,
+                          worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X")?,
                           number_of_workers: ::Integer?,
                           security_configuration: ::String?,
                           notification_property: {
@@ -4711,7 +4905,7 @@ module Aws
                                  ?role: ::String,
                                  ?glue_version: ::String,
                                  ?max_capacity: ::Float,
-                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.025X" | "G.4X" | "G.8X" | "Z.2X"),
+                                 ?worker_type: ("Standard" | "G.1X" | "G.2X" | "G.4X" | "G.8X" | "G.025X" | "Z.2X" | "G.12X" | "G.16X" | "R.1X" | "R.2X" | "R.4X" | "R.8X"),
                                  ?number_of_workers: ::Integer,
                                  ?timeout: ::Integer,
                                  ?max_retries: ::Integer

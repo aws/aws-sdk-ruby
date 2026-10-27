@@ -199,12 +199,19 @@ module Aws::SESV2
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1348,13 +1355,24 @@ module Aws::SESV2
 
     # Creates an export job for a data source and destination.
     #
+    # Export jobs run asynchronously. This operation returns a `JobId`. Call
+    # `GetExportJob` with that ID until `JobStatus` is `COMPLETED`,
+    # `FAILED`, or `CANCELLED`. When the status is `COMPLETED`, download the
+    # export file from the pre-signed URL in `ExportDestination.S3Url`. When
+    # the status is `FAILED`, see `FailureInfo`. To store a copy in your own
+    # bucket, upload the downloaded file to your bucket. Do not include
+    # `S3Url` in the request.
+    #
     # You can execute this operation no more than once per second.
     #
     # @option params [required, Types::ExportDataSource] :export_data_source
     #   The data source for the export job.
     #
     # @option params [required, Types::ExportDestination] :export_destination
-    #   The destination for the export job.
+    #   The destination for the export job. Specify only `DataFormat`. Do not
+    #   include `S3Url` in this request. SES writes the export file to a
+    #   location that it manages and returns the download URL in
+    #   `GetExportJob`.
     #
     # @return [Types::CreateExportJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3027,6 +3045,10 @@ module Aws::SESV2
 
     # Provides information about an export job.
     #
+    # When the job status is `COMPLETED`, the response includes a pre-signed
+    # URL in `ExportDestination.S3Url` that you use to download the export
+    # file.
+    #
     # @option params [required, String] :job_id
     #   The export job ID.
     #
@@ -3086,6 +3108,42 @@ module Aws::SESV2
     #     export_source_type: "METRICS_DATA", 
     #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
     #     job_status: "PROCESSING", 
+    #     statistics: {
+    #       exported_records_count: 5, 
+    #       processed_records_count: 5, 
+    #     }, 
+    #   }
+    #
+    # @example Example: Get a completed export job
+    #
+    #   # Gets a completed export job and the pre-signed URL for the export file
+    #
+    #   resp = client.get_export_job({
+    #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     completed_timestamp: Time.parse("1688292100000"), 
+    #     created_timestamp: Time.parse("1688292000000"), 
+    #     export_data_source: {
+    #       message_insights_data_source: {
+    #         end_date: Time.parse("1688256000000"), 
+    #         include: {
+    #           subject: [
+    #             "Hello", 
+    #           ], 
+    #         }, 
+    #         start_date: Time.parse("1688169600000"), 
+    #       }, 
+    #     }, 
+    #     export_destination: {
+    #       data_format: "CSV", 
+    #       s3_url: "https://amzn-s3-demo-bucket.s3.us-east-1.amazonaws.com/export-file.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=EXAMPLE&X-Amz-Date=20230702T100500Z&X-Amz-Expires=300&X-Amz-SignedHeaders=host&X-Amz-Signature=EXAMPLE", 
+    #     }, 
+    #     export_source_type: "MESSAGE_INSIGHTS", 
+    #     job_id: "ef28cf62-9d8e-4b60-9283-b09816c99a99", 
+    #     job_status: "COMPLETED", 
     #     statistics: {
     #       exported_records_count: 5, 
     #       processed_records_count: 5, 
@@ -3507,6 +3565,10 @@ module Aws::SESV2
     # email. When you apply a configuration set to an email, all of the
     # rules in that configuration set are applied to the email.
     #
+    # @option params [Hash<String,String>] :filter
+    #   An object that contains filters to apply when listing configuration
+    #   sets. You can filter by a substring of the configuration set name.
+    #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListConfigurationSets` to
     #   indicate the position in the list of configuration sets.
@@ -3527,6 +3589,9 @@ module Aws::SESV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_configuration_sets({
+    #     filter: {
+    #       "CONFIGURATION_SET_NAME_CONTAINS" => "ConfigurationSetFilterValue",
+    #     },
     #     next_token: "NextToken",
     #     page_size: 1,
     #   })
@@ -3900,6 +3965,11 @@ module Aws::SESV2
     # verified as well as those that aren't. This operation returns
     # identities that are associated with Amazon SES and Amazon Pinpoint.
     #
+    # @option params [Hash<String,String>] :filter
+    #   An object that contains filters to apply when listing email
+    #   identities. You can filter by a substring of the identity name, by
+    #   identity type, or by verification status.
+    #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListEmailIdentities` to
     #   indicate the position in the list of identities.
@@ -3923,6 +3993,9 @@ module Aws::SESV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_email_identities({
+    #     filter: {
+    #       "IDENTITY_NAME_CONTAINS" => "IdentityFilterValue",
+    #     },
     #     next_token: "NextToken",
     #     page_size: 1,
     #   })
@@ -4591,6 +4664,10 @@ module Aws::SESV2
     # This operation returns basic information about each tenant, such as
     # tenant name, ID, ARN, and creation timestamp.
     #
+    # @option params [Hash<String,String>] :filter
+    #   An object that contains filters to apply when listing tenants. You can
+    #   filter by a substring of the tenant name or by sending status.
+    #
     # @option params [String] :next_token
     #   A token returned from a previous call to `ListTenants` to indicate the
     #   position in the list of tenants.
@@ -4611,6 +4688,9 @@ module Aws::SESV2
     # @example Request syntax with placeholder values
     #
     #   resp = client.list_tenants({
+    #     filter: {
+    #       "TENANT_NAME_CONTAINS" => "ListTenantsFilterValue",
+    #     },
     #     next_token: "NextToken",
     #     page_size: 1,
     #   })
@@ -4622,6 +4702,7 @@ module Aws::SESV2
     #   resp.tenants[0].tenant_id #=> String
     #   resp.tenants[0].tenant_arn #=> String
     #   resp.tenants[0].created_timestamp #=> Time
+    #   resp.tenants[0].sending_status #=> String, one of "ENABLED", "REINSTATED", "DISABLED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sesv2-2019-09-27/ListTenants AWS API Documentation
@@ -6664,7 +6745,7 @@ module Aws::SESV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sesv2'
-      context[:gem_version] = '1.110.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

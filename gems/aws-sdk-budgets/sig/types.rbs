@@ -415,6 +415,7 @@ module Aws::Budgets
       attr_accessor dimensions: Types::ExpressionDimensionValues
       attr_accessor tags: Types::TagValues
       attr_accessor cost_categories: Types::CostCategoryValues
+      attr_accessor product_attributes: Types::ProductAttributeValues
       SENSITIVE: []
     end
 
@@ -488,6 +489,13 @@ module Aws::Budgets
     class NotificationWithSubscribers
       attr_accessor notification: Types::Notification
       attr_accessor subscribers: ::Array[Types::Subscriber]
+      SENSITIVE: []
+    end
+
+    class ProductAttributeValues
+      attr_accessor key: ::String
+      attr_accessor values: ::Array[::String]
+      attr_accessor match_options: ::Array[("EQUALS" | "ABSENT" | "STARTS_WITH" | "ENDS_WITH" | "CONTAINS" | "GREATER_THAN_OR_EQUAL" | "CASE_SENSITIVE" | "CASE_INSENSITIVE")]
       SENSITIVE: []
     end
 

@@ -3811,6 +3811,111 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain in which the
+    #   designation is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name must be unique within the
+    #   domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The Cedar permit policy that defines what actions holders of this
+    #   designation are allowed to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation.
+    #   Defaults to true when omitted.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDesignationInput AWS API Documentation
+    #
+    class CreateDesignationInput < Struct.new(
+      :domain_identifier,
+      :name,
+      :description,
+      :policy,
+      :deletion_protection)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # A designation defines a named role with a Cedar permit policy that
+    # controls what actions members holding this designation can perform
+    # within a project.
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon DataZone domain in which the
+    #   designation was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name is unique within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] designation_type
+    #   The classification of this designation. MANAGED designations are
+    #   system-defined and cannot be modified or deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The Cedar permit policy that governs what actions holders of this
+    #   designation are allowed to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation. When
+    #   true, DeleteDesignation is rejected until protection is disabled via
+    #   UpdateDesignation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the Amazon DataZone user who created the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the designation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the designation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDesignationOutput AWS API Documentation
+    #
+    class CreateDesignationOutput < Struct.new(
+      :domain_id,
+      :id,
+      :name,
+      :description,
+      :designation_type,
+      :policy,
+      :deletion_protection,
+      :created_by,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The name of the Amazon DataZone domain.
     #   @return [String]
@@ -4141,6 +4246,12 @@ module Aws::DataZone
     #   The user parameters of this Amazon DataZone blueprint.
     #   @return [Array<Types::CustomParameter>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the Amazon DataZone blueprint. The only valid value
+    #   is `TOOLING`, which creates a blueprint that provisions the tooling
+    #   resources of a project.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateEnvironmentBlueprintInput AWS API Documentation
     #
     class CreateEnvironmentBlueprintInput < Struct.new(
@@ -4148,7 +4259,8 @@ module Aws::DataZone
       :name,
       :description,
       :provisioning_properties,
-      :user_parameters)
+      :user_parameters,
+      :blueprint_category)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -4185,6 +4297,12 @@ module Aws::DataZone
     #   The glossary terms attached to this Amazon DataZone blueprint.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the Amazon DataZone blueprint. The only valid value
+    #   is `TOOLING`, which indicates a blueprint that provisions the
+    #   tooling resources of a project.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp at which the environment blueprint was created.
     #   @return [Time]
@@ -4204,6 +4322,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
@@ -5279,13 +5398,20 @@ module Aws::DataZone
     #   The designation of the project membership.
     #   @return [String]
     #
+    # @!attribute [rw] user_created_designation_id
+    #   The ID of the user-created designation to assign to the project
+    #   member. Required when `designation` is `USER_CREATED_DESIGNATION`;
+    #   must not be provided otherwise.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateProjectMembershipInput AWS API Documentation
     #
     class CreateProjectMembershipInput < Struct.new(
       :domain_identifier,
       :project_identifier,
       :member,
-      :designation)
+      :designation,
+      :user_created_designation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7101,6 +7227,28 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique ID of the designation to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDesignationInput AWS API Documentation
+    #
+    class DeleteDesignationInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DeleteDesignationOutput AWS API Documentation
+    #
+    class DeleteDesignationOutput < Aws::EmptyStructure; end
+
     # @!attribute [rw] identifier
     #   The identifier of the Amazon Web Services domain that is to be
     #   deleted.
@@ -7780,6 +7928,63 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # Summary representation of a designation returned by list operations.
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name is unique within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] designation_type
+    #   The classification of this designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the Amazon DataZone user who created the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the designation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the designation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/DesignationSummary AWS API Documentation
+    #
+    class DesignationSummary < Struct.new(
+      :domain_id,
+      :id,
+      :name,
+      :description,
+      :designation_type,
+      :deletion_protection,
+      :created_by,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # Details of a glossary term attached to the inventory asset.
     #
     # @!attribute [rw] name
@@ -8283,6 +8488,11 @@ module Aws::DataZone
     #   The timestamp of when the blueprint was enabled.
     #   @return [Time]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the environment blueprint. The only valid value is
+    #   `TOOLING`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/EnvironmentBlueprintSummary AWS API Documentation
     #
     class EnvironmentBlueprintSummary < Struct.new(
@@ -8292,7 +8502,8 @@ module Aws::DataZone
       :provider,
       :provisioning_properties,
       :created_at,
-      :updated_at)
+      :updated_at,
+      :blueprint_category)
       SENSITIVE = [:description]
       include Aws::Structure
     end
@@ -9914,6 +10125,92 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique ID of the designation to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDesignationInput AWS API Documentation
+    #
+    class GetDesignationInput < Struct.new(
+      :domain_identifier,
+      :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A designation defines a named role with a Cedar permit policy that
+    # controls what actions members holding this designation can perform
+    # within a project.
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name is unique within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] designation_type
+    #   The classification of this designation. MANAGED designations are
+    #   system-defined and cannot be modified or deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The Cedar permit policy that governs what actions holders of this
+    #   designation are allowed to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation. When
+    #   true, DeleteDesignation is rejected until protection is disabled via
+    #   UpdateDesignation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the Amazon DataZone user who created the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the designation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the designation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/GetDesignationOutput AWS API Documentation
+    #
+    class GetDesignationOutput < Struct.new(
+      :domain_id,
+      :id,
+      :name,
+      :description,
+      :designation_type,
+      :policy,
+      :deletion_protection,
+      :created_by,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] identifier
     #   The identifier of the specified Amazon DataZone domain.
     #   @return [String]
@@ -10294,6 +10591,12 @@ module Aws::DataZone
     #   The glossary terms attached to this Amazon DataZone blueprint.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of this Amazon DataZone blueprint. The only valid value
+    #   is `TOOLING`, which indicates a blueprint that provisions the
+    #   tooling resources of a project.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   A timestamp of when this blueprint was created.
     #   @return [Time]
@@ -10313,6 +10616,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at)
       SENSITIVE = [:description]
@@ -11657,6 +11961,11 @@ module Aws::DataZone
     #   Simple Storage Service path and KMS key ARN.
     #   @return [Types::StorageConfig]
     #
+    # @!attribute [rw] notification_configuration
+    #   The notification configuration of the notebook run, including the
+    #   notebook run states that trigger notifications.
+    #   @return [Types::NotificationConfig]
+    #
     # @!attribute [rw] trigger_source
     #   The source that triggered the notebook run.
     #   @return [Types::TriggerSource]
@@ -11706,6 +12015,7 @@ module Aws::DataZone
       :timeout_configuration,
       :environment_configuration,
       :storage_configuration,
+      :notification_configuration,
       :trigger_source,
       :error,
       :created_at,
@@ -13425,10 +13735,17 @@ module Aws::DataZone
     #   for a connection.
     #   @return [Boolean]
     #
+    # @!attribute [rw] role_arn
+    #   The ARN of the IAM role to associate with the connection as the
+    #   project user role. To use this operation, you must have
+    #   `iam:PassRole` permission for this role.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/IamPropertiesInput AWS API Documentation
     #
     class IamPropertiesInput < Struct.new(
-      :glue_lineage_sync_enabled)
+      :glue_lineage_sync_enabled,
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -14846,6 +15163,57 @@ module Aws::DataZone
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDataSourcesOutput AWS API Documentation
     #
     class ListDataSourcesOutput < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designations to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If the results exceed the value of `MaxResults`, the previous call
+    #   returns a pagination token. Specify this token in a subsequent call
+    #   to `ListDesignations` to retrieve the next set of results. If not
+    #   specified, the operation returns the first page of results.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of designations to return in a single call to
+    #   `ListDesignations`. If the number of designations exceeds
+    #   `MaxResults`, the response includes a `NextToken` value. Use that
+    #   token in a subsequent call to `ListDesignations` to retrieve the
+    #   next set of designations. The default value is 20.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDesignationsInput AWS API Documentation
+    #
+    class ListDesignationsInput < Struct.new(
+      :domain_identifier,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The designation summaries that `ListDesignations` returned. Each
+    #   item contains summary information about a designation in the domain.
+    #   @return [Array<Types::DesignationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token that indicates that more results are available.
+    #   Pass this token to a subsequent call to `ListDesignations` to
+    #   retrieve the next page of results. If there are no more results,
+    #   this value is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ListDesignationsOutput AWS API Documentation
+    #
+    class ListDesignationsOutput < Struct.new(
       :items,
       :next_token)
       SENSITIVE = []
@@ -17572,6 +17940,22 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # The notification configuration for a notebook run in Amazon SageMaker
+    # Unified Studio.
+    #
+    # @!attribute [rw] notify_on
+    #   The notebook run states that trigger notifications. You can specify
+    #   up to 7 states, and the ordering of the states is not significant.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/NotificationConfig AWS API Documentation
+    #
+    class NotificationConfig < Struct.new(
+      :notify_on)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The details of a notification generated in Amazon DataZone.
     #
     # @!attribute [rw] identifier
@@ -18407,11 +18791,17 @@ module Aws::DataZone
     #   The designated role of a project member.
     #   @return [String]
     #
+    # @!attribute [rw] user_created_designation_id
+    #   The ID of the user-created designation held by the project member
+    #   when `designation` is `USER_CREATED_DESIGNATION`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ProjectMember AWS API Documentation
     #
     class ProjectMember < Struct.new(
       :member_details,
-      :designation)
+      :designation,
+      :user_created_designation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18427,11 +18817,18 @@ module Aws::DataZone
     #   The designation of the project membership.
     #   @return [String]
     #
+    # @!attribute [rw] user_created_designation_id
+    #   The ID of the user-created designation to assign to this member when
+    #   creating the project. Required when `designation` is
+    #   `USER_CREATED_DESIGNATION`; must not be provided otherwise.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/ProjectMembershipAssignment AWS API Documentation
     #
     class ProjectMembershipAssignment < Struct.new(
       :member,
-      :designation)
+      :designation,
+      :user_created_designation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18440,6 +18837,12 @@ module Aws::DataZone
     #
     # @!attribute [rw] project_designation
     #   The project designation of the project policy grant principal.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_created_designation_id
+    #   The ID of the user-created designation granted to the project
+    #   principal. Required when `projectDesignation` is
+    #   `USER_CREATED_DESIGNATION`; must not be provided otherwise.
     #   @return [String]
     #
     # @!attribute [rw] project_identifier
@@ -18454,6 +18857,7 @@ module Aws::DataZone
     #
     class ProjectPolicyGrantPrincipal < Struct.new(
       :project_designation,
+      :user_created_designation_id,
       :project_identifier,
       :project_grant_filter)
       SENSITIVE = []
@@ -20287,6 +20691,43 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # A single Amazon Simple Storage Service object to import as a notebook
+    # cell.
+    #
+    # @!attribute [rw] key
+    #   The key of the Amazon Simple Storage Service object to import.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/S3File AWS API Documentation
+    #
+    class S3File < Struct.new(
+      :key)
+      SENSITIVE = [:key]
+      include Aws::Structure
+    end
+
+    # The Amazon Simple Storage Service objects to import as the cells of a
+    # notebook, specified as a bucket and an ordered list of object keys.
+    #
+    # @!attribute [rw] bucket
+    #   The name of the Amazon Simple Storage Service bucket that contains
+    #   the files to import.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_list
+    #   The files to import. Cells are created in the order in which you
+    #   list the files. You can specify between 1 and 100 files.
+    #   @return [Array<Types::S3File>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/S3FilesLocation AWS API Documentation
+    #
+    class S3FilesLocation < Struct.new(
+      :bucket,
+      :file_list)
+      SENSITIVE = [:bucket]
+      include Aws::Structure
+    end
+
     # The Amazon S3 properties of a connection.
     #
     # @!attribute [rw] s3_uri
@@ -21168,16 +21609,24 @@ module Aws::DataZone
     #   The Amazon Simple Storage Service URI of the notebook source file.
     #   @return [String]
     #
+    # @!attribute [rw] s3_files
+    #   The Amazon Simple Storage Service objects to import as the
+    #   notebook's cells. One cell is created for each object, in the order
+    #   in which you list them.
+    #   @return [Types::S3FilesLocation]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/SourceLocation AWS API Documentation
     #
     class SourceLocation < Struct.new(
       :s3,
+      :s3_files,
       :unknown)
       SENSITIVE = [:s3]
       include Aws::Structure
       include Aws::Structure::Union
 
       class S3 < SourceLocation; end
+      class S3Files < SourceLocation; end
       class Unknown < SourceLocation; end
     end
 
@@ -21808,8 +22257,9 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] source_location
-    #   The source location of the notebook to import. This specifies the
-    #   Amazon Simple Storage Service URI of the notebook file.
+    #   The source location of the notebook to import. Specify either a
+    #   single Amazon Simple Storage Service URI, or a list of objects to
+    #   import as the notebook's cells.
     #   @return [Types::SourceLocation]
     #
     # @!attribute [rw] name
@@ -21819,6 +22269,11 @@ module Aws::DataZone
     #
     # @!attribute [rw] description
     #   The description of the imported notebook.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the notebook to import. If not specified, defaults to
+    #   `DATA`.
     #   @return [String]
     #
     # @!attribute [rw] client_token
@@ -21837,6 +22292,7 @@ module Aws::DataZone
       :source_location,
       :name,
       :description,
+      :type,
       :client_token)
       SENSITIVE = [:name, :description]
       include Aws::Structure
@@ -21866,6 +22322,10 @@ module Aws::DataZone
     #   The description of the imported notebook.
     #   @return [String]
     #
+    # @!attribute [rw] type
+    #   The type of the imported notebook.
+    #   @return [String]
+    #
     # @!attribute [rw] source_location
     #   The source location from which the notebook was imported.
     #   @return [Types::SourceLocation]
@@ -21887,6 +22347,7 @@ module Aws::DataZone
       :owning_project_id,
       :name,
       :description,
+      :type,
       :source_location,
       :created_at,
       :created_by)
@@ -21927,6 +22388,11 @@ module Aws::DataZone
     #   hours).
     #   @return [Types::TimeoutConfig]
     #
+    # @!attribute [rw] notification_configuration
+    #   The notification configuration for the notebook run. Use this to
+    #   specify the notebook run states that trigger notifications.
+    #   @return [Types::NotificationConfig]
+    #
     # @!attribute [rw] trigger_source
     #   The source that triggered the notebook run.
     #   @return [Types::TriggerSource]
@@ -21961,6 +22427,7 @@ module Aws::DataZone
       :compute_configuration,
       :network_configuration,
       :timeout_configuration,
+      :notification_configuration,
       :trigger_source,
       :metadata,
       :parameters,
@@ -22027,6 +22494,11 @@ module Aws::DataZone
     #   Simple Storage Service path and KMS key ARN.
     #   @return [Types::StorageConfig]
     #
+    # @!attribute [rw] notification_configuration
+    #   The notification configuration of the notebook run, including the
+    #   notebook run states that trigger notifications.
+    #   @return [Types::NotificationConfig]
+    #
     # @!attribute [rw] trigger_source
     #   The source that triggered the notebook run.
     #   @return [Types::TriggerSource]
@@ -22076,6 +22548,7 @@ module Aws::DataZone
       :timeout_configuration,
       :environment_configuration,
       :storage_configuration,
+      :notification_configuration,
       :trigger_source,
       :error,
       :created_at,
@@ -23853,6 +24326,115 @@ module Aws::DataZone
       include Aws::Structure
     end
 
+    # @!attribute [rw] domain_identifier
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] identifier
+    #   The unique ID of the designation to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The updated name of the designation. The name must be unique within
+    #   the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The updated human-readable description of the designation and its
+    #   intended use.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The updated Cedar permit policy.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation. Omit to
+    #   keep the existing value.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDesignationInput AWS API Documentation
+    #
+    class UpdateDesignationInput < Struct.new(
+      :domain_identifier,
+      :identifier,
+      :name,
+      :description,
+      :policy,
+      :deletion_protection)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # A designation defines a named role with a Cedar permit policy that
+    # controls what actions members holding this designation can perform
+    # within a project.
+    #
+    # @!attribute [rw] domain_id
+    #   The identifier of the Amazon DataZone domain that contains the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique ID of the designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the designation. The name is unique within the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A human-readable description of the designation and its intended
+    #   use.
+    #   @return [String]
+    #
+    # @!attribute [rw] designation_type
+    #   The classification of this designation. MANAGED designations are
+    #   system-defined and cannot be modified or deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] policy
+    #   The Cedar permit policy that governs what actions holders of this
+    #   designation are allowed to perform.
+    #   @return [String]
+    #
+    # @!attribute [rw] deletion_protection
+    #   Whether deletion protection is enabled for this designation. When
+    #   true, DeleteDesignation is rejected until protection is disabled via
+    #   UpdateDesignation.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_by
+    #   The identifier of the Amazon DataZone user who created the
+    #   designation.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the designation was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The date and time when the designation was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDesignationOutput AWS API Documentation
+    #
+    class UpdateDesignationOutput < Struct.new(
+      :domain_id,
+      :id,
+      :name,
+      :description,
+      :designation_type,
+      :policy,
+      :deletion_protection,
+      :created_by,
+      :created_at,
+      :last_updated_at)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] identifier
     #   The ID of the Amazon Web Services domain that is to be updated.
     #   @return [String]
@@ -24132,6 +24714,10 @@ module Aws::DataZone
     #   `UpdateEnvironmentBlueprint` action.
     #   @return [Array<Types::CustomParameter>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category to update. The only valid value is `TOOLING`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateEnvironmentBlueprintInput AWS API Documentation
     #
     class UpdateEnvironmentBlueprintInput < Struct.new(
@@ -24139,7 +24725,8 @@ module Aws::DataZone
       :identifier,
       :description,
       :provisioning_properties,
-      :user_parameters)
+      :user_parameters,
+      :blueprint_category)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -24182,6 +24769,11 @@ module Aws::DataZone
     #   `UpdateEnvironmentBlueprint` action.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] blueprint_category
+    #   The category of the environment blueprint. The only valid value is
+    #   `TOOLING`.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The timestamp of when the environment blueprint was created.
     #   @return [Time]
@@ -24201,6 +24793,7 @@ module Aws::DataZone
       :deployment_properties,
       :user_parameters,
       :glossary_terms,
+      :blueprint_category,
       :created_at,
       :updated_at)
       SENSITIVE = [:description]

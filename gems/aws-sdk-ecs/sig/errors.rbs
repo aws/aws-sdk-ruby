@@ -11,95 +11,98 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class AttributeLimitExceededException < ::Aws::Errors::ServiceError
+      class AttributeLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class BlockedException < ::Aws::Errors::ServiceError
+      class BlockedException < ServiceError
         def message: () -> ::String
       end
-      class ClientException < ::Aws::Errors::ServiceError
+      class ClientException < ServiceError
         def message: () -> ::String
       end
-      class ClusterContainsCapacityProviderException < ::Aws::Errors::ServiceError
+      class ClusterContainsCapacityProviderException < ServiceError
         def message: () -> ::String
       end
-      class ClusterContainsContainerInstancesException < ::Aws::Errors::ServiceError
+      class ClusterContainsContainerInstancesException < ServiceError
         def message: () -> ::String
       end
-      class ClusterContainsServicesException < ::Aws::Errors::ServiceError
+      class ClusterContainsServicesException < ServiceError
         def message: () -> ::String
       end
-      class ClusterContainsTasksException < ::Aws::Errors::ServiceError
+      class ClusterContainsTasksException < ServiceError
         def message: () -> ::String
       end
-      class ClusterNotFoundException < ::Aws::Errors::ServiceError
+      class ClusterNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def resource_ids: () -> ::String
         def message: () -> ::String
       end
-      class DaemonNotActiveException < ::Aws::Errors::ServiceError
+      class DaemonNotActiveException < ServiceError
         def message: () -> ::String
       end
-      class DaemonNotFoundException < ::Aws::Errors::ServiceError
+      class DaemonNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class GatewayNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
       end
-      class MissingVersionException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class NamespaceNotFoundException < ::Aws::Errors::ServiceError
+      class MissingVersionException < ServiceError
         def message: () -> ::String
       end
-      class NoUpdateAvailableException < ::Aws::Errors::ServiceError
+      class NamespaceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class PlatformTaskDefinitionIncompatibilityException < ::Aws::Errors::ServiceError
+      class NoUpdateAvailableException < ServiceError
         def message: () -> ::String
       end
-      class PlatformUnknownException < ::Aws::Errors::ServiceError
+      class PlatformTaskDefinitionIncompatibilityException < ServiceError
         def message: () -> ::String
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class PlatformUnknownException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
         def message: () -> ::String
       end
-      class ServerException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServiceDeploymentNotFoundException < ::Aws::Errors::ServiceError
+      class ServerException < ServiceError
         def message: () -> ::String
       end
-      class ServiceNotActiveException < ::Aws::Errors::ServiceError
+      class ServiceDeploymentNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServiceNotFoundException < ::Aws::Errors::ServiceError
+      class ServiceNotActiveException < ServiceError
         def message: () -> ::String
       end
-      class TargetNotConnectedException < ::Aws::Errors::ServiceError
+      class ServiceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TargetNotFoundException < ::Aws::Errors::ServiceError
+      class TargetNotConnectedException < ServiceError
         def message: () -> ::String
       end
-      class TaskSetNotFoundException < ::Aws::Errors::ServiceError
+      class TargetNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedFeatureException < ::Aws::Errors::ServiceError
+      class TaskSetNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class UpdateInProgressException < ::Aws::Errors::ServiceError
+      class UnsupportedFeatureException < ServiceError
+        def message: () -> ::String
+      end
+      class UpdateInProgressException < ServiceError
         def message: () -> ::String
       end
     end

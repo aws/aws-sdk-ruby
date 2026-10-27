@@ -31,7 +31,7 @@ module Aws
       type fsx_protocol = {
       nfs: {
         mount_options: {
-          version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1")?
+          version: ("AUTOMATIC" | "NFS3" | "NFS4_0" | "NFS4_1" | "NFS4_2")?
         }?
       }?,
       smb: Params::fsx_protocol_smb?
@@ -52,7 +52,8 @@ module Aws
       log_level: ("OFF" | "BASIC" | "TRANSFER")?,
       transfer_mode: ("CHANGED" | "ALL")?,
       security_descriptor_copy_flags: ("NONE" | "OWNER_DACL" | "OWNER_DACL_SACL")?,
-      object_tags: ("PRESERVE" | "NONE")?
+      object_tags: ("PRESERVE" | "NONE")?,
+      object_metadata: ("PRESERVE" | "NONE")?
     }
 
       type source_manifest_config = {

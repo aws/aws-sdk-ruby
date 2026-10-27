@@ -199,12 +199,19 @@ module Aws::MarketplaceCatalog
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -966,7 +973,8 @@ module Aws::MarketplaceCatalog
     #   The type of entities to retrieve. Valid values are: `AmiProduct`,
     #   `ContainerProduct`, `DataProduct`, `SaaSProduct`, `ProcurementPolicy`,
     #   `Experience`, `Audience`, `BrandingSettings`, `Offer`, `OfferSet`,
-    #   `Seller`, `ResaleAuthorization`, `Solution`.
+    #   `Seller`, `ResaleAuthorization`, `Solution`,
+    #   `SubsidiaryAuthorization`.
     #
     # @option params [Array<Types::Filter>] :filter_list
     #   An array of filter objects. Each filter object contains two
@@ -1268,6 +1276,51 @@ module Aws::MarketplaceCatalog
     #           },
     #         },
     #       },
+    #       express_private_offer_configuration_filters: {
+    #         entity_id: {
+    #           value_list: ["ExpressPrivateOfferConfigurationEntityIdString"],
+    #         },
+    #         product_id: {
+    #           value_list: ["ExpressPrivateOfferConfigurationProductIdString"],
+    #         },
+    #         state: {
+    #           value_list: ["ACTIVE"], # accepts ACTIVE, INACTIVE
+    #         },
+    #       },
+    #       subsidiary_authorization_filters: {
+    #         entity_id: {
+    #           value_list: ["SubsidiaryAuthorizationEntityIdString"],
+    #         },
+    #         status: {
+    #           value_list: ["Draft"], # accepts Draft, Active, Restricted
+    #         },
+    #         resource_id: {
+    #           value_list: ["SubsidiaryAuthorizationResourceIdString"],
+    #         },
+    #         resource_name: {
+    #           value_list: ["SubsidiaryAuthorizationResourceNameString"],
+    #           wild_card_value: "SubsidiaryAuthorizationResourceNameFilterWildcard",
+    #         },
+    #         name: {
+    #           value_list: ["SubsidiaryAuthorizationNameString"],
+    #           wild_card_value: "SubsidiaryAuthorizationNameFilterWildcard",
+    #         },
+    #         subsidiary_account_id: {
+    #           value_list: ["SubsidiaryAuthorizationSubsidiaryAccountIdString"],
+    #         },
+    #         created_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #         last_modified_date: {
+    #           date_range: {
+    #             after_value: "DateTimeISO8601",
+    #             before_value: "DateTimeISO8601",
+    #           },
+    #         },
+    #       },
     #     },
     #     entity_type_sort: {
     #       data_product_sort: {
@@ -1300,6 +1353,14 @@ module Aws::MarketplaceCatalog
     #       },
     #       offer_set_sort: {
     #         sort_by: "Name", # accepts Name, State, ReleaseDate, SolutionId, EntityId, LastModifiedDate
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       express_private_offer_configuration_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, LastModifiedDate, ProductId, State
+    #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+    #       },
+    #       subsidiary_authorization_sort: {
+    #         sort_by: "EntityId", # accepts EntityId, Status, ResourceId, SubsidiaryAccountId, CreatedDate, LastModifiedDate
     #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
     #       },
     #     },
@@ -1358,6 +1419,14 @@ module Aws::MarketplaceCatalog
     #   resp.entity_summary_list[0].offer_set_summary.associated_offer_ids #=> Array
     #   resp.entity_summary_list[0].offer_set_summary.associated_offer_ids[0] #=> String
     #   resp.entity_summary_list[0].offer_set_summary.solution_id #=> String
+    #   resp.entity_summary_list[0].express_private_offer_configuration_summary.product_id #=> String
+    #   resp.entity_summary_list[0].express_private_offer_configuration_summary.state #=> String, one of "ACTIVE", "INACTIVE"
+    #   resp.entity_summary_list[0].subsidiary_authorization_summary.name #=> String
+    #   resp.entity_summary_list[0].subsidiary_authorization_summary.status #=> String
+    #   resp.entity_summary_list[0].subsidiary_authorization_summary.resource_id #=> String
+    #   resp.entity_summary_list[0].subsidiary_authorization_summary.resource_name #=> String
+    #   resp.entity_summary_list[0].subsidiary_authorization_summary.subsidiary_account_id #=> String
+    #   resp.entity_summary_list[0].subsidiary_authorization_summary.created_date #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ListEntities AWS API Documentation
@@ -1641,7 +1710,7 @@ module Aws::MarketplaceCatalog
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacecatalog'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

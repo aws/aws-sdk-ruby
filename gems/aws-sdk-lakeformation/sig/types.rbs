@@ -57,6 +57,18 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class AttachRLSPolicyRequest
+      attr_accessor name: ::String
+      attr_accessor resource: Types::Resource
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor condition: Types::Condition
+      attr_accessor set_default: bool
+      SENSITIVE: []
+    end
+
+    class AttachRLSPolicyResponse < Aws::EmptyStructure
+    end
+
     class AuditContext
       attr_accessor additional_audit_context: ::String
       SENSITIVE: []
@@ -110,6 +122,12 @@ module Aws::LakeFormation
 
     class CatalogResource
       attr_accessor id: ::String
+      SENSITIVE: []
+    end
+
+    class Column
+      attr_accessor name: ::String
+      attr_accessor type: ::String
       SENSITIVE: []
     end
 
@@ -200,6 +218,16 @@ module Aws::LakeFormation
     end
 
     class CreateLakeFormationOptInResponse < Aws::EmptyStructure
+    end
+
+    class CreateRLSPolicyRequest
+      attr_accessor name: ::String
+      attr_accessor attachment_columns: ::Array[Types::Column]
+      attr_accessor filter_expression: ::String
+      SENSITIVE: []
+    end
+
+    class CreateRLSPolicyResponse < Aws::EmptyStructure
     end
 
     class DataCellsFilter
@@ -319,6 +347,14 @@ module Aws::LakeFormation
     class DeleteObjectsOnCancelResponse < Aws::EmptyStructure
     end
 
+    class DeleteRLSPolicyRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRLSPolicyResponse < Aws::EmptyStructure
+    end
+
     class DeregisterResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -361,6 +397,18 @@ module Aws::LakeFormation
     class DescribeTransactionResponse
       attr_accessor transaction_description: Types::TransactionDescription
       SENSITIVE: []
+    end
+
+    class DetachRLSPolicyRequest
+      attr_accessor name: ::String
+      attr_accessor resource: Types::Resource
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor condition: Types::Condition
+      attr_accessor remove_default: bool
+      SENSITIVE: []
+    end
+
+    class DetachRLSPolicyResponse < Aws::EmptyStructure
     end
 
     class DetailsMap
@@ -504,6 +552,16 @@ module Aws::LakeFormation
       attr_accessor execution_statistics: Types::ExecutionStatistics
       attr_accessor planning_statistics: Types::PlanningStatistics
       attr_accessor query_submission_time: ::Time
+      SENSITIVE: []
+    end
+
+    class GetRLSPolicyRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetRLSPolicyResponse
+      attr_accessor rls_policy: Types::RLSPolicy
       SENSITIVE: []
     end
 
@@ -774,6 +832,33 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class ListRLSPoliciesRequest
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRLSPoliciesResponse
+      attr_accessor rls_policies: ::Array[Types::RLSPolicy]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRLSPolicyAttachmentsRequest
+      attr_accessor resource: Types::Resource
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor policy_name: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRLSPolicyAttachmentsResponse
+      attr_accessor rls_policy_attachments: ::Array[Types::RLSPolicyAttachment]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListResourcesRequest
       attr_accessor filter_condition_list: ::Array[Types::FilterCondition]
       attr_accessor max_results: ::Integer
@@ -891,6 +976,30 @@ module Aws::LakeFormation
       SENSITIVE: []
     end
 
+    class RLSPolicy
+      attr_accessor catalog_id: ::String
+      attr_accessor name: ::String
+      attr_accessor attachment_columns: ::Array[Types::Column]
+      attr_accessor filter_expression: ::String
+      SENSITIVE: []
+    end
+
+    class RLSPolicyAttachment
+      attr_accessor catalog_id: ::String
+      attr_accessor policy_name: ::String
+      attr_accessor principal: Types::DataLakePrincipal
+      attr_accessor resource: Types::Resource
+      attr_accessor condition: Types::Condition
+      attr_accessor default_rls_policy: bool
+      SENSITIVE: []
+    end
+
+    class RLSPolicyResource
+      attr_accessor catalog_id: ::String
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
     class RedshiftConnect
       attr_accessor authorization: ("ENABLED" | "DISABLED")
       SENSITIVE: []
@@ -943,6 +1052,7 @@ module Aws::LakeFormation
       attr_accessor lf_tag: Types::LFTagKeyResource
       attr_accessor lf_tag_policy: Types::LFTagPolicyResource
       attr_accessor lf_tag_expression: Types::LFTagExpressionResource
+      attr_accessor rls_policy: Types::RLSPolicyResource
       SENSITIVE: []
     end
 
@@ -1178,6 +1288,15 @@ module Aws::LakeFormation
     end
 
     class UpdateLakeFormationIdentityCenterConfigurationResponse < Aws::EmptyStructure
+    end
+
+    class UpdateRLSPolicyRequest
+      attr_accessor name: ::String
+      attr_accessor filter_expression: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateRLSPolicyResponse < Aws::EmptyStructure
     end
 
     class UpdateResourceRequest

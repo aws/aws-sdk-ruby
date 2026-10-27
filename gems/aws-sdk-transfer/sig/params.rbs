@@ -29,6 +29,12 @@ module Aws
       passive_ip: ::String?,
       tls_session_resumption_mode: ("DISABLED" | "ENABLED" | "ENFORCED")?,
       set_stat_option: ("DEFAULT" | "ENABLE_NO_OP")?,
+      sftp_ports: Array[
+        {
+          sftp_port: ::Integer,
+          communication_mode: ("CLIENT_TALK_FIRST" | "SERVER_TALK_FIRST")?
+        }
+      ]?,
       as_2_transports: Array[("HTTP")]?,
       proxy_config: {
         sftp_mode: ("NONE" | "PROXY_PROTOCOL_V2_ENFORCED")?

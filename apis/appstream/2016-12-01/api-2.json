@@ -1580,11 +1580,13 @@
     "AppDisplayName":{
       "type":"string",
       "max":100,
+      "min":0,
       "pattern":"^[a-zA-Z0-9][a-zA-Z0-9_. -]{0,99}$"
     },
     "AppName":{
       "type":"string",
       "max":100,
+      "min":0,
       "pattern":"^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,99}$"
     },
     "AppVisibility":{
@@ -2178,7 +2180,8 @@
         "EmbedHostDomains":{"shape":"EmbedHostDomains"},
         "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"},
         "ContentRedirection":{"shape":"ContentRedirection"},
-        "AgentAccessConfig":{"shape":"AgentAccessConfig"}
+        "AgentAccessConfig":{"shape":"AgentAccessConfig"},
+        "StorageConnectorAuthentication":{"shape":"StorageConnectorAuthentication"}
       }
     },
     "CreateStackResult":{
@@ -3067,6 +3070,7 @@
     "FilePath":{
       "type":"string",
       "max":32767,
+      "min":0,
       "sensitive":true
     },
     "Filter":{
@@ -3258,7 +3262,8 @@
         "DynamicAppProvidersEnabled":{"shape":"DynamicAppProvidersEnabled"},
         "ImageSharedWithOthers":{"shape":"ImageSharedWithOthers"},
         "ManagedSoftwareIncluded":{"shape":"Boolean"},
-        "ImageType":{"shape":"ImageType"}
+        "ImageType":{"shape":"ImageType"},
+        "ImageSoftwareMetadata":{"shape":"ImageSoftwareMetadata"}
       }
     },
     "ImageBuilder":{
@@ -3328,11 +3333,13 @@
     "ImageImportDescription":{
       "type":"string",
       "max":256,
+      "min":0,
       "pattern":"^[a-zA-Z0-9_.() -]+$"
     },
     "ImageImportDisplayName":{
       "type":"string",
       "max":100,
+      "min":0,
       "pattern":"^[a-zA-Z0-9_.() -]+$"
     },
     "ImageList":{
@@ -3352,6 +3359,12 @@
         "TRUE",
         "FALSE"
       ]
+    },
+    "ImageSoftwareMetadata":{
+      "type":"structure",
+      "members":{
+        "nvidiaGridDriverVersion":{"shape":"NvidiaGridDriverVersion"}
+      }
     },
     "ImageState":{
       "type":"string",
@@ -3457,7 +3470,8 @@
     "LaunchParameters":{
       "type":"string",
       "max":1024,
-      "pattern":"[^\\x00]+",
+      "min":0,
+      "pattern":"^[^\\x00]+$",
       "sensitive":true
     },
     "LimitExceededException":{
@@ -3577,6 +3591,12 @@
         "EniId":{"shape":"String"}
       }
     },
+    "NvidiaGridDriverVersion":{
+      "type":"string",
+      "max":32,
+      "min":1,
+      "pattern":"^[0-9]+(\\.[0-9]+){1,2}$"
+    },
     "OperationNotPermittedException":{
       "type":"structure",
       "members":{
@@ -3619,6 +3639,7 @@
         "WINDOWS_SERVER_2019",
         "WINDOWS_SERVER_2022",
         "WINDOWS_SERVER_2025",
+        "WINDOWS_11",
         "AMAZON_LINUX2",
         "RHEL8",
         "ROCKY_LINUX8",
@@ -3878,7 +3899,8 @@
         "EmbedHostDomains":{"shape":"EmbedHostDomains"},
         "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"},
         "ContentRedirection":{"shape":"ContentRedirection"},
-        "AgentAccessConfig":{"shape":"AgentAccessConfig"}
+        "AgentAccessConfig":{"shape":"AgentAccessConfig"},
+        "StorageConnectorAuthentication":{"shape":"StorageConnectorAuthentication"}
       }
     },
     "StackAttribute":{
@@ -3897,7 +3919,8 @@
         "ACCESS_ENDPOINTS",
         "STREAMING_EXPERIENCE_SETTINGS",
         "CONTENT_REDIRECTION",
-        "AGENT_ACCESS_CONFIG"
+        "AGENT_ACCESS_CONFIG",
+        "STORAGE_CONNECTOR_AUTHENTICATION"
       ]
     },
     "StackAttributes":{
@@ -4022,6 +4045,13 @@
         "Domains":{"shape":"DomainList"},
         "DomainsRequireAdminConsent":{"shape":"DomainList"}
       }
+    },
+    "StorageConnectorAuthentication":{
+      "type":"string",
+      "enum":[
+        "FORCE_REAUTHENTICATION",
+        "REUSE_CREDENTIALS"
+      ]
     },
     "StorageConnectorList":{
       "type":"list",
@@ -4174,7 +4204,7 @@
     "Timestamp":{"type":"timestamp"},
     "UUID":{
       "type":"string",
-      "pattern":"[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+      "pattern":"^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
     },
     "UntagResourceRequest":{
       "type":"structure",
@@ -4347,7 +4377,8 @@
         "EmbedHostDomains":{"shape":"EmbedHostDomains"},
         "StreamingExperienceSettings":{"shape":"StreamingExperienceSettings"},
         "ContentRedirection":{"shape":"ContentRedirection"},
-        "AgentAccessConfig":{"shape":"AgentAccessConfigForUpdate"}
+        "AgentAccessConfig":{"shape":"AgentAccessConfigForUpdate"},
+        "StorageConnectorAuthentication":{"shape":"StorageConnectorAuthentication"}
       }
     },
     "UpdateStackResult":{

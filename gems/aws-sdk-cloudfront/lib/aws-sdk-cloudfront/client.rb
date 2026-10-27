@@ -199,12 +199,19 @@ module Aws::CloudFront
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -3213,7 +3220,7 @@ module Aws::CloudFront
     #       name: "string", # required
     #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4, sigv4a
-    #       signing_behavior: "never", # required, accepts never, always, no-override
+    #       signing_behavior: "never", # required, accepts never, always, no-override, always-amz-auth
     #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore, mediapackagev2, lambda
     #     },
     #   })
@@ -3224,7 +3231,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.name #=> String
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4", "sigv4a"
-    #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override", "always-amz-auth"
     #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.location #=> String
     #   resp.etag #=> String
@@ -3962,6 +3969,7 @@ module Aws::CloudFront
     #         quantity: 1, # required
     #         items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
     #       },
+    #       ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     },
     #     tags: {
     #       items: [
@@ -3989,6 +3997,7 @@ module Aws::CloudFront
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items #=> Array
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.vpc_origin.vpc_origin_endpoint_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.location #=> String
     #   resp.etag #=> String
     #
@@ -4798,6 +4807,7 @@ module Aws::CloudFront
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items #=> Array
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.vpc_origin.vpc_origin_endpoint_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/DeleteVpcOrigin AWS API Documentation
@@ -6504,7 +6514,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.name #=> String
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4", "sigv4a"
-    #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override", "always-amz-auth"
     #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
     #
@@ -6538,7 +6548,7 @@ module Aws::CloudFront
     #   resp.origin_access_control_config.name #=> String
     #   resp.origin_access_control_config.description #=> String
     #   resp.origin_access_control_config.signing_protocol #=> String, one of "sigv4", "sigv4a"
-    #   resp.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override", "always-amz-auth"
     #   resp.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
     #
@@ -7196,6 +7206,7 @@ module Aws::CloudFront
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items #=> Array
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.vpc_origin.vpc_origin_endpoint_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/GetVpcOrigin AWS API Documentation
@@ -10289,7 +10300,7 @@ module Aws::CloudFront
     #   resp.origin_access_control_list.items[0].description #=> String
     #   resp.origin_access_control_list.items[0].name #=> String
     #   resp.origin_access_control_list.items[0].signing_protocol #=> String, one of "sigv4", "sigv4a"
-    #   resp.origin_access_control_list.items[0].signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control_list.items[0].signing_behavior #=> String, one of "never", "always", "no-override", "always-amz-auth"
     #   resp.origin_access_control_list.items[0].origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListOriginAccessControls AWS API Documentation
@@ -10795,6 +10806,7 @@ module Aws::CloudFront
     #   resp.vpc_origin_list.items[0].arn #=> String
     #   resp.vpc_origin_list.items[0].account_id #=> String
     #   resp.vpc_origin_list.items[0].origin_endpoint_arn #=> String
+    #   resp.vpc_origin_list.items[0].ip_address_type #=> String, one of "ipv4", "dualstack"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/ListVpcOrigins AWS API Documentation
     #
@@ -13064,7 +13076,7 @@ module Aws::CloudFront
     #       name: "string", # required
     #       description: "string",
     #       signing_protocol: "sigv4", # required, accepts sigv4, sigv4a
-    #       signing_behavior: "never", # required, accepts never, always, no-override
+    #       signing_behavior: "never", # required, accepts never, always, no-override, always-amz-auth
     #       origin_access_control_origin_type: "s3", # required, accepts s3, mediastore, mediapackagev2, lambda
     #     },
     #     id: "string", # required
@@ -13077,7 +13089,7 @@ module Aws::CloudFront
     #   resp.origin_access_control.origin_access_control_config.name #=> String
     #   resp.origin_access_control.origin_access_control_config.description #=> String
     #   resp.origin_access_control.origin_access_control_config.signing_protocol #=> String, one of "sigv4", "sigv4a"
-    #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override"
+    #   resp.origin_access_control.origin_access_control_config.signing_behavior #=> String, one of "never", "always", "no-override", "always-amz-auth"
     #   resp.origin_access_control.origin_access_control_config.origin_access_control_origin_type #=> String, one of "s3", "mediastore", "mediapackagev2", "lambda"
     #   resp.etag #=> String
     #
@@ -13725,6 +13737,7 @@ module Aws::CloudFront
     #         quantity: 1, # required
     #         items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
     #       },
+    #       ip_address_type: "ipv4", # accepts ipv4, dualstack
     #     },
     #     id: "string", # required
     #     if_match: "string", # required
@@ -13746,6 +13759,7 @@ module Aws::CloudFront
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.quantity #=> Integer
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items #=> Array
     #   resp.vpc_origin.vpc_origin_endpoint_config.origin_ssl_protocols.items[0] #=> String, one of "SSLv3", "TLSv1", "TLSv1.1", "TLSv1.2"
+    #   resp.vpc_origin.vpc_origin_endpoint_config.ip_address_type #=> String, one of "ipv4", "dualstack"
     #   resp.etag #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/cloudfront-2020-05-31/UpdateVpcOrigin AWS API Documentation
@@ -13815,7 +13829,7 @@ module Aws::CloudFront
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudfront'
-      context[:gem_version] = '1.155.0'
+      context[:gem_version] = '1.160.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

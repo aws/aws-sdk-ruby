@@ -201,12 +201,19 @@ module Aws::Lambda
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -831,6 +838,7 @@ module Aws::Lambda
     #         chained_invoke_options: {
     #           function_name: "NamespacedFunctionName", # required
     #           tenant_id: "TenantId",
+    #           x_amzn_trace_id: "XAmznTraceId",
     #         },
     #       },
     #     ],
@@ -890,8 +898,8 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Creates an [alias][1] for a Lambda function version. Use aliases to
-    # provide clients with a function identifier that you can update to
+    # Creates an [alias][1] for a Lambda Event Function version. Use aliases
+    # to provide clients with a function identifier that you can update to
     # invoke a different version.
     #
     # You can also map an alias to split invocation requests between two
@@ -997,7 +1005,7 @@ module Aws::Lambda
     end
 
     # Creates a capacity provider that manages compute resources for Lambda
-    # functions
+    # Event Functions
     #
     # @option params [required, String] :capacity_provider_name
     #   The name of the capacity provider.
@@ -1180,8 +1188,9 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Creates a mapping between an event source and an Lambda function.
-    # Lambda reads items from the event source and invokes the function.
+    # Creates a mapping between an event source and an Lambda Event
+    # Function. Lambda reads items from the event source and invokes the
+    # function.
     #
     # For details about how to configure different event sources, see the
     # following topics.
@@ -1578,7 +1587,7 @@ module Aws::Lambda
     #     queues: ["Queue"],
     #     source_access_configurations: [
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH, OAUTHBEARER_SCOPE, OAUTHBEARER_AUDIENCE, OAUTHBEARER_LOGICAL_CLUSTER, OAUTHBEARER_IDENTITY_POOL, IAM_AUTH, IAM_OAUTHBEARER_AUTH
     #         uri: "URI",
     #       },
     #     ],
@@ -1595,7 +1604,7 @@ module Aws::Lambda
     #         event_record_format: "JSON", # accepts JSON, SOURCE
     #         access_configs: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH
     #             uri: "Arn",
     #           },
     #         ],
@@ -1613,7 +1622,7 @@ module Aws::Lambda
     #         event_record_format: "JSON", # accepts JSON, SOURCE
     #         access_configs: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH
     #             uri: "Arn",
     #           },
     #         ],
@@ -1666,7 +1675,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -1681,7 +1690,7 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -1689,7 +1698,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -1710,7 +1719,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Creates a Lambda function. To create a function, you need a
+    # Creates a Lambda Event Function. To create a function, you need a
     # [deployment package][1] and an [execution role][2]. The deployment
     # package is a .zip file archive or container image that contains your
     # function code. The execution role grants the function permission to
@@ -2396,7 +2405,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Deletes a Lambda function [alias][1].
+    # Deletes a Lambda Event Function [alias][1].
     #
     #
     #
@@ -2629,7 +2638,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -2644,7 +2653,7 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -2652,7 +2661,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -2673,10 +2682,10 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Deletes a Lambda function. To delete a specific function version, use
-    # the `Qualifier` parameter. Otherwise, all versions and aliases are
-    # deleted. This doesn't require the user to have explicit permissions
-    # for DeleteAlias.
+    # Deletes a Lambda Event Function. To delete a specific function
+    # version, use the `Qualifier` parameter. Otherwise, all versions and
+    # aliases are deleted. This doesn't require the user to have explicit
+    # permissions for DeleteAlias.
     #
     # <note markdown="1"> A deleted Lambda function cannot be recovered. Ensure that you specify
     # the correct function name and version before deleting.
@@ -3096,7 +3105,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns details about a Lambda function [alias][1].
+    # Returns details about a Lambda Event Function [alias][1].
     #
     #
     #
@@ -3718,7 +3727,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -3733,7 +3742,7 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -3741,7 +3750,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -4059,9 +4068,10 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns the version-specific settings of a Lambda function or version.
-    # The output includes only options that can vary between versions of a
-    # function. To modify these settings, use UpdateFunctionConfiguration.
+    # Returns the version-specific settings of a Lambda Event Function or
+    # version. The output includes only options that can vary between
+    # versions of a function. To modify these settings, use
+    # UpdateFunctionConfiguration.
     #
     # To get all of a function's details, including function-level
     # settings, use GetFunction.
@@ -4967,12 +4977,13 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Invokes a Lambda function. You can invoke a function synchronously
-    # (and wait for the response), or asynchronously. By default, Lambda
-    # invokes your function synchronously (i.e. the`InvocationType` is
-    # `RequestResponse`). To invoke a function asynchronously, set
-    # `InvocationType` to `Event`. Lambda passes the `ClientContext` object
-    # to your function for synchronous invocations only.
+    # Invokes a Lambda Event Function. You can invoke a function
+    # synchronously (and wait for the response), or asynchronously. By
+    # default, Lambda invokes your function synchronously (i.e.
+    # the`InvocationType` is `RequestResponse`). To invoke a function
+    # asynchronously, set `InvocationType` to `Event`. Lambda passes the
+    # `ClientContext` object to your function for synchronous invocations
+    # only.
     #
     # For synchronous invocations, the maximum payload size is 6 MB. For
     # asynchronous invocations, the maximum payload size is 1 MB.
@@ -5250,9 +5261,9 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Configure your Lambda functions to stream response payloads back to
-    # clients. For more information, see [Configuring a Lambda function to
-    # stream responses][1].
+    # Configure your Lambda Event Functions to stream response payloads back
+    # to clients. For more information, see [Configuring a Lambda function
+    # to stream responses][1].
     #
     # This operation requires permission for the [lambda:InvokeFunction][2]
     # action. For details on how to set up permissions for cross-account
@@ -5473,7 +5484,7 @@ module Aws::Lambda
       req.send_request(options, &block)
     end
 
-    # Returns a list of [aliases][1] for a Lambda function.
+    # Returns a list of [aliases][1] for a Lambda Event Function.
     #
     #
     #
@@ -5705,8 +5716,9 @@ module Aws::Lambda
     #   name, a partial ARN, or a full ARN.
     #
     # @option params [String] :qualifier
-    #   The function version or alias. If not specified, lists executions for
-    #   the $LATEST version.
+    #   The function version to filter executions by. If you don't specify a
+    #   qualifier, this operation returns executions across all versions of
+    #   the Lambda function.
     #
     # @option params [String] :durable_execution_name
     #   Filter executions by name. Only executions with names that matches
@@ -5899,7 +5911,7 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].queues #=> Array
     #   resp.event_source_mappings[0].queues[0] #=> String
     #   resp.event_source_mappings[0].source_access_configurations #=> Array
-    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.event_source_mappings[0].source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.event_source_mappings[0].source_access_configurations[0].uri #=> String
     #   resp.event_source_mappings[0].self_managed_event_source.endpoints #=> Hash
     #   resp.event_source_mappings[0].self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -5914,7 +5926,7 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.event_source_mappings[0].amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -5922,7 +5934,7 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -6150,7 +6162,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns a list of Lambda functions, with the version-specific
+    # Returns a list of Lambda Event Functions, with the version-specific
     # configuration of each. Lambda returns up to 50 functions per call.
     #
     # Set `FunctionVersion` to `ALL` to include all published versions of
@@ -8109,7 +8121,8 @@ module Aws::Lambda
     #   The unique identifier for the callback operation.
     #
     # @option params [Types::ErrorObject] :error
-    #   Error details describing why the callback operation failed.
+    #   Error details describing why the callback operation failed. The
+    #   combined size of all error fields is limited to 1 MB.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8167,7 +8180,7 @@ module Aws::Lambda
     #
     # @option params [String, StringIO, File] :result
     #   The result data from the successful callback operation. Maximum size
-    #   is 256 KB.
+    #   is 1 MB.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8200,6 +8213,7 @@ module Aws::Lambda
     #
     # @option params [Types::ErrorObject] :error
     #   Optional error details explaining why the execution is being stopped.
+    #   The combined size of all error fields is limited to 1 MB.
     #
     # @return [Types::StopDurableExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8319,7 +8333,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Updates the configuration of a Lambda function [alias][1].
+    # Updates the configuration of a Lambda Event Function [alias][1].
     #
     #
     #
@@ -8919,7 +8933,7 @@ module Aws::Lambda
     #     tumbling_window_in_seconds: 1,
     #     source_access_configurations: [
     #       {
-    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #         type: "BASIC_AUTH", # accepts BASIC_AUTH, VPC_SUBNET, VPC_SECURITY_GROUP, SASL_SCRAM_512_AUTH, SASL_SCRAM_256_AUTH, VIRTUAL_HOST, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH, OAUTHBEARER_SCOPE, OAUTHBEARER_AUDIENCE, OAUTHBEARER_LOGICAL_CLUSTER, OAUTHBEARER_IDENTITY_POOL, IAM_AUTH, IAM_OAUTHBEARER_AUTH
     #         uri: "URI",
     #       },
     #     ],
@@ -8931,7 +8945,7 @@ module Aws::Lambda
     #         event_record_format: "JSON", # accepts JSON, SOURCE
     #         access_configs: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH
     #             uri: "Arn",
     #           },
     #         ],
@@ -8949,7 +8963,7 @@ module Aws::Lambda
     #         event_record_format: "JSON", # accepts JSON, SOURCE
     #         access_configs: [
     #           {
-    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE
+    #             type: "BASIC_AUTH", # accepts BASIC_AUTH, CLIENT_CERTIFICATE_TLS_AUTH, SERVER_ROOT_CA_CERTIFICATE, OAUTHBEARER_AUTH
     #             uri: "Arn",
     #           },
     #         ],
@@ -9002,7 +9016,7 @@ module Aws::Lambda
     #   resp.queues #=> Array
     #   resp.queues[0] #=> String
     #   resp.source_access_configurations #=> Array
-    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.source_access_configurations[0].type #=> String, one of "BASIC_AUTH", "VPC_SUBNET", "VPC_SECURITY_GROUP", "SASL_SCRAM_512_AUTH", "SASL_SCRAM_256_AUTH", "VIRTUAL_HOST", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH", "OAUTHBEARER_SCOPE", "OAUTHBEARER_AUDIENCE", "OAUTHBEARER_LOGICAL_CLUSTER", "OAUTHBEARER_IDENTITY_POOL", "IAM_AUTH", "IAM_OAUTHBEARER_AUTH"
     #   resp.source_access_configurations[0].uri #=> String
     #   resp.self_managed_event_source.endpoints #=> Hash
     #   resp.self_managed_event_source.endpoints["EndPointType"] #=> Array
@@ -9017,7 +9031,7 @@ module Aws::Lambda
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.amazon_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -9025,7 +9039,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_registry_uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.event_record_format #=> String, one of "JSON", "SOURCE"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs #=> Array
-    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE"
+    #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].type #=> String, one of "BASIC_AUTH", "CLIENT_CERTIFICATE_TLS_AUTH", "SERVER_ROOT_CA_CERTIFICATE", "OAUTHBEARER_AUTH"
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
@@ -9046,9 +9060,10 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Updates a Lambda function's code. If code signing is enabled for the
-    # function, the code package must be signed by a trusted publisher. For
-    # more information, see [Configuring code signing for Lambda][1].
+    # Updates a Lambda Event Function's code. If code signing is enabled
+    # for the function, the code package must be signed by a trusted
+    # publisher. For more information, see [Configuring code signing for
+    # Lambda][1].
     #
     # If the function's package type is `Image`, then you must specify the
     # code package in `ImageUri` as the URI of a [container image][2] in the
@@ -9329,7 +9344,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Modify the version-specific settings of a Lambda function.
+    # Modifies the version-specific settings of a Lambda Event Function.
     #
     # When you update a function, Lambda provisions an instance of the
     # function and its supporting resources. If your function connects to a
@@ -10036,7 +10051,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.196.0'
+      context[:gem_version] = '1.203.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

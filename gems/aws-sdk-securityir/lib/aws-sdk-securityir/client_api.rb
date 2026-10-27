@@ -74,6 +74,8 @@ module Aws::SecurityIR
     GetCaseAttachmentUploadUrlResponse = Shapes::StructureShape.new(name: 'GetCaseAttachmentUploadUrlResponse')
     GetCaseRequest = Shapes::StructureShape.new(name: 'GetCaseRequest')
     GetCaseResponse = Shapes::StructureShape.new(name: 'GetCaseResponse')
+    GetFindingMetricsRequest = Shapes::StructureShape.new(name: 'GetFindingMetricsRequest')
+    GetFindingMetricsResponse = Shapes::StructureShape.new(name: 'GetFindingMetricsResponse')
     GetMembershipAccountDetailError = Shapes::StructureShape.new(name: 'GetMembershipAccountDetailError')
     GetMembershipAccountDetailErrors = Shapes::ListShape.new(name: 'GetMembershipAccountDetailErrors')
     GetMembershipAccountDetailItem = Shapes::StructureShape.new(name: 'GetMembershipAccountDetailItem')
@@ -318,6 +320,24 @@ module Aws::SecurityIR
     GetCaseResponse.add_member(:closed_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "closedDate"))
     GetCaseResponse.add_member(:case_metadata, Shapes::ShapeRef.new(shape: CaseMetadata, location_name: "caseMetadata"))
     GetCaseResponse.struct_class = Types::GetCaseResponse
+
+    GetFindingMetricsRequest.add_member(:membership_id, Shapes::ShapeRef.new(shape: MembershipId, required: true, location: "uri", location_name: "membershipId"))
+    GetFindingMetricsRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "startDate"))
+    GetFindingMetricsRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location: "querystring", location_name: "endDate"))
+    GetFindingMetricsRequest.struct_class = Types::GetFindingMetricsRequest
+
+    GetFindingMetricsResponse.add_member(:findings_ingested_security_hub, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsIngestedSecurityHub"))
+    GetFindingMetricsResponse.add_member(:findings_ingested_guard_duty, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsIngestedGuardDuty"))
+    GetFindingMetricsResponse.add_member(:findings_triaged, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsTriaged"))
+    GetFindingMetricsResponse.add_member(:findings_triaged_false_positive, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsTriagedFalsePositive"))
+    GetFindingMetricsResponse.add_member(:findings_investigated, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsInvestigated"))
+    GetFindingMetricsResponse.add_member(:findings_investigated_false_positive, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsInvestigatedFalsePositive"))
+    GetFindingMetricsResponse.add_member(:findings_escalated, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsEscalated"))
+    GetFindingMetricsResponse.add_member(:findings_escalated_false_positive, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsEscalatedFalsePositive"))
+    GetFindingMetricsResponse.add_member(:findings_true_positive, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsTruePositive"))
+    GetFindingMetricsResponse.add_member(:findings_investigated_in_progress, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsInvestigatedInProgress"))
+    GetFindingMetricsResponse.add_member(:findings_escalated_in_progress, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "findingsEscalatedInProgress"))
+    GetFindingMetricsResponse.struct_class = Types::GetFindingMetricsResponse
 
     GetMembershipAccountDetailError.add_member(:account_id, Shapes::ShapeRef.new(shape: AWSAccountId, required: true, location_name: "accountId"))
     GetMembershipAccountDetailError.add_member(:error, Shapes::ShapeRef.new(shape: String, required: true, location_name: "error"))
@@ -782,6 +802,23 @@ module Aws::SecurityIR
         o.http_request_uri = "/v1/cases/{caseId}/get-presigned-url"
         o.input = Shapes::ShapeRef.new(shape: GetCaseAttachmentUploadUrlRequest)
         o.output = Shapes::ShapeRef.new(shape: GetCaseAttachmentUploadUrlResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: SecurityIncidentResponseNotActiveException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidTokenException)
+      end)
+
+      api.add_operation(:get_finding_metrics, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFindingMetrics"
+        o.http_method = "GET"
+        o.http_request_uri = "/v1/membership/{membershipId}/finding-metrics"
+        o.input = Shapes::ShapeRef.new(shape: GetFindingMetricsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFindingMetricsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

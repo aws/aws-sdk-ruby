@@ -199,12 +199,19 @@ module Aws::ElementalInference
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -565,6 +572,7 @@ module Aws::ElementalInference
     #           },
     #           contextual_metadata: {
     #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #             extended_analysis: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -725,6 +733,7 @@ module Aws::ElementalInference
     #           },
     #           contextual_metadata: {
     #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #             extended_analysis: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -757,6 +766,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
     #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].output_config.contextual_metadata.extended_analysis #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -772,6 +782,90 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def create_feed(params = {}, options = {})
       req = build_request(:create_feed, params)
+      req.send_request(options)
+    end
+
+    # Creates a schedule action on a feed. A schedule action applies
+    # configuration changes to the feed at a time that you specify, in the
+    # same way as an UpdateFeed request.
+    #
+    # Elemental Inference validates the targets of the action when you
+    # create it.
+    #
+    # @option params [required, String] :id
+    #   Specifies the ID of the feed that you want to add the schedule action
+    #   to.
+    #
+    # @option params [required, String] :action_name
+    #   A name for the schedule action. The name must be unique within the
+    #   feed. You can reuse the name of an action that you deleted.
+    #
+    # @option params [required, Types::ScheduleActionStartConfiguration] :start_configuration
+    #   Specifies when the action runs.
+    #
+    # @option params [required, Array<Types::ScheduleActionOperation>] :operations
+    #   Specifies the list of configuration changes that you want to make to
+    #   the feed. Elemental Inference applies all the operations in an action
+    #   together, in the order that you specify them. If any operation fails,
+    #   Elemental Inference doesn't apply any of them.
+    #
+    # @return [Types::CreateScheduleActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateScheduleActionResponse#action_name #action_name} => String
+    #   * {Types::CreateScheduleActionResponse#start_configuration #start_configuration} => Types::ScheduleActionStartConfiguration
+    #   * {Types::CreateScheduleActionResponse#operations #operations} => Array&lt;Types::ScheduleActionOperation&gt;
+    #   * {Types::CreateScheduleActionResponse#status #status} => String
+    #   * {Types::CreateScheduleActionResponse#error #error} => Types::ScheduleActionError
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_schedule_action({
+    #     id: "FeedId", # required
+    #     action_name: "ResourceName", # required
+    #     start_configuration: { # required
+    #       fixed_mode_schedule_action_start_settings: {
+    #         scheduled_at: Time.now, # required
+    #       },
+    #     },
+    #     operations: [ # required
+    #       {
+    #         update_output_status: {
+    #           output_name: "ResourceName", # required
+    #           status: "ENABLED", # required, accepts ENABLED, DISABLED
+    #         },
+    #         update_clipping_data_source_configuration: {
+    #           output_name: "ResourceName", # required
+    #           data_source_configuration: { # required
+    #             fixture_id: "FixtureId", # required
+    #           },
+    #         },
+    #         remove_clipping_data_source_configuration: {
+    #           output_name: "ResourceName", # required
+    #         },
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_name #=> String
+    #   resp.start_configuration.fixed_mode_schedule_action_start_settings.scheduled_at #=> Time
+    #   resp.operations #=> Array
+    #   resp.operations[0].update_output_status.output_name #=> String
+    #   resp.operations[0].update_output_status.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.operations[0].update_clipping_data_source_configuration.output_name #=> String
+    #   resp.operations[0].update_clipping_data_source_configuration.data_source_configuration.fixture_id #=> String
+    #   resp.operations[0].remove_clipping_data_source_configuration.output_name #=> String
+    #   resp.status #=> String, one of "PENDING", "COMPLETED", "FAILED"
+    #   resp.error.error_code #=> String, one of "INVALID_ACTION_TARGET", "INTERNAL_ERROR"
+    #   resp.error.error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateScheduleAction AWS API Documentation
+    #
+    # @overload create_schedule_action(params = {})
+    # @param [Hash] params ({})
+    def create_schedule_action(params = {}, options = {})
+      req = build_request(:create_schedule_action, params)
       req.send_request(options)
     end
 
@@ -866,6 +960,43 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def delete_feed_policy(params = {}, options = {})
       req = build_request(:delete_feed_policy, params)
+      req.send_request(options)
+    end
+
+    # Deletes a schedule action from a feed. A deleted action never runs.
+    #
+    # You can delete only an action whose status is PENDING. Deleting an
+    # action doesn't reverse changes that the action already made to the
+    # feed. When you delete or archive a feed, Elemental Inference deletes
+    # all the schedule actions on that feed.
+    #
+    # @option params [required, String] :id
+    #   The ID of the feed that holds the schedule action.
+    #
+    # @option params [required, String] :action_name
+    #   The name of the schedule action that you want to delete.
+    #
+    # @return [Types::DeleteScheduleActionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteScheduleActionResponse#action_name #action_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_schedule_action({
+    #     id: "FeedId", # required
+    #     action_name: "ResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.action_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteScheduleAction AWS API Documentation
+    #
+    # @overload delete_schedule_action(params = {})
+    # @param [Hash] params ({})
+    def delete_schedule_action(params = {}, options = {})
+      req = build_request(:delete_schedule_action, params)
       req.send_request(options)
     end
 
@@ -1030,6 +1161,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
     #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].output_config.contextual_metadata.extended_analysis #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -1219,6 +1351,67 @@ module Aws::ElementalInference
     # @param [Hash] params ({})
     def list_feeds(params = {}, options = {})
       req = build_request(:list_feeds, params)
+      req.send_request(options)
+    end
+
+    # Displays a list of the schedule actions on a feed, including the
+    # status of each action and, for a failed action, information about why
+    # it failed.
+    #
+    # Elemental Inference keeps an action whose status is COMPLETED or
+    # FAILED for about 48 hours after its scheduled time, and then deletes
+    # it automatically.
+    #
+    # @option params [required, String] :id
+    #   The ID of the feed that you want to query.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return for each API request. If you
+    #   don't specify MaxResults, Elemental Inference returns a maximum of 10
+    #   results for each page.
+    #
+    # @option params [String] :next_token
+    #   The token that identifies the batch of results that you want to see.
+    #   To see the next batch, submit the request a second time and specify
+    #   the NextToken value that Elemental Inference returned.
+    #
+    # @return [Types::ListScheduleActionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListScheduleActionsResponse#schedule_actions #schedule_actions} => Array&lt;Types::ScheduleAction&gt;
+    #   * {Types::ListScheduleActionsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_schedule_actions({
+    #     id: "FeedId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.schedule_actions #=> Array
+    #   resp.schedule_actions[0].action_name #=> String
+    #   resp.schedule_actions[0].start_configuration.fixed_mode_schedule_action_start_settings.scheduled_at #=> Time
+    #   resp.schedule_actions[0].operations #=> Array
+    #   resp.schedule_actions[0].operations[0].update_output_status.output_name #=> String
+    #   resp.schedule_actions[0].operations[0].update_output_status.status #=> String, one of "ENABLED", "DISABLED"
+    #   resp.schedule_actions[0].operations[0].update_clipping_data_source_configuration.output_name #=> String
+    #   resp.schedule_actions[0].operations[0].update_clipping_data_source_configuration.data_source_configuration.fixture_id #=> String
+    #   resp.schedule_actions[0].operations[0].remove_clipping_data_source_configuration.output_name #=> String
+    #   resp.schedule_actions[0].status #=> String, one of "PENDING", "COMPLETED", "FAILED"
+    #   resp.schedule_actions[0].error.error_code #=> String, one of "INVALID_ACTION_TARGET", "INTERNAL_ERROR"
+    #   resp.schedule_actions[0].error.error_message #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListScheduleActions AWS API Documentation
+    #
+    # @overload list_schedule_actions(params = {})
+    # @param [Hash] params ({})
+    def list_schedule_actions(params = {}, options = {})
+      req = build_request(:list_schedule_actions, params)
       req.send_request(options)
     end
 
@@ -1569,6 +1762,7 @@ module Aws::ElementalInference
     #           },
     #           contextual_metadata: {
     #             summary_generation: "ENABLED", # accepts ENABLED, DISABLED
+    #             extended_analysis: "ENABLED", # accepts ENABLED, DISABLED
     #           },
     #         },
     #         status: "ENABLED", # required, accepts ENABLED, DISABLED
@@ -1599,6 +1793,7 @@ module Aws::ElementalInference
     #   resp.outputs[0].output_config.subtitling.dictionary #=> String
     #   resp.outputs[0].output_config.subtitling.profanity_filter #=> String, one of "DISABLED", "CENSOR", "DROP"
     #   resp.outputs[0].output_config.contextual_metadata.summary_generation #=> String, one of "ENABLED", "DISABLED"
+    #   resp.outputs[0].output_config.contextual_metadata.extended_analysis #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].status #=> String, one of "ENABLED", "DISABLED"
     #   resp.outputs[0].description #=> String
     #   resp.outputs[0].from_association #=> Boolean
@@ -1635,7 +1830,7 @@ module Aws::ElementalInference
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elementalinference'
-      context[:gem_version] = '1.12.0'
+      context[:gem_version] = '1.17.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

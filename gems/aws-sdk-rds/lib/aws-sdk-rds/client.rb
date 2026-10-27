@@ -201,12 +201,19 @@ module Aws::RDS
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1053,6 +1060,111 @@ module Aws::RDS
     # @param [Hash] params ({})
     def backtrack_db_cluster(params = {}, options = {})
       req = build_request(:backtrack_db_cluster, params)
+      req.send_request(options)
+    end
+
+    # Cancels a DB capacity reservation. Amazon RDS changes the state of the
+    # reservation to `cancelled` and stops reporting available capacity for
+    # it. Amazon RDS then releases the reserved capacity.
+    #
+    # A DB instance that uses the reservation keeps running. It continues on
+    # unreserved capacity, and Amazon RDS doesn't stop it or modify it.
+    # However, Amazon RDS no longer reserves capacity for the DB instance.
+    # If Amazon RDS later moves the DB instance to different hardware, for
+    # example during hardware maintenance, that move can fail when the
+    # Amazon Web Services Region has insufficient capacity for the DB
+    # instance class.
+    #
+    # You can't cancel a reservation in the `active` state during a
+    # capacity commitment. The response of `DescribeDBCapacityReservations`
+    # reports the end of the commitment in `CommitmentInfo`.
+    #
+    # Constraints:
+    #
+    # * The reservation must be in the `active`, `assessing`, or `delayed`
+    #   state.
+    #
+    # * The reservation must not be past its end date.
+    #
+    # @option params [required, String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation to cancel.
+    #   You can specify the identifier, which has the prefix `dbcr-`, or the
+    #   reservation name.
+    #
+    # @return [Types::CancelDBCapacityReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelDBCapacityReservationResponse#db_capacity_reservation #db_capacity_reservation} => Types::DBCapacityReservation
+    #
+    #
+    # @example Example: To cancel a DB capacity reservation
+    #
+    #   # The following example cancels the specified DB capacity reservation. Amazon RDS releases the reserved capacity. A DB
+    #   # instance that uses the reservation keeps running on unreserved capacity.
+    #
+    #   resp = client.cancel_db_capacity_reservation({
+    #     db_capacity_reservation_identifier: "dbcr-7hqk2m9xv4t1bn6cz3ws8dj5fp0gyr2a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_capacity_reservation: {
+    #       available_capacity_per_availability_zone_list: [
+    #         {
+    #           availability_zone: "us-east-1a", 
+    #           available_capacity: 0, 
+    #         }, 
+    #         {
+    #           availability_zone: "us-east-1b", 
+    #           available_capacity: 0, 
+    #         }, 
+    #       ], 
+    #       create_date: Time.parse("2026-09-10T18:22:41.612Z"), 
+    #       db_capacity_reservation_arn: "arn:aws:rds:us-east-1:123456789012:db-capacity-reservation:dbcr-7hqk2m9xv4t1bn6cz3ws8dj5fp0gyr2a", 
+    #       db_capacity_reservation_identifier: "dbcr-7hqk2m9xv4t1bn6cz3ws8dj5fp0gyr2a", 
+    #       db_capacity_reservation_name: "my-mysql-reservation", 
+    #       db_instance_class: "db.m5.large", 
+    #       engine: "mysql", 
+    #       reserved_capacity_per_availability_zone: 2, 
+    #       state: "cancelled", 
+    #       tag_list: [
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_db_capacity_reservation({
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_capacity_reservation.db_capacity_reservation_name #=> String
+    #   resp.db_capacity_reservation.db_instance_class #=> String
+    #   resp.db_capacity_reservation.engine #=> String
+    #   resp.db_capacity_reservation.license_model #=> String
+    #   resp.db_capacity_reservation.reserved_capacity_per_availability_zone #=> Integer
+    #   resp.db_capacity_reservation.available_capacity_per_availability_zone_list #=> Array
+    #   resp.db_capacity_reservation.available_capacity_per_availability_zone_list[0].availability_zone #=> String
+    #   resp.db_capacity_reservation.available_capacity_per_availability_zone_list[0].available_capacity #=> Integer
+    #   resp.db_capacity_reservation.end_date #=> Time
+    #   resp.db_capacity_reservation.create_date #=> Time
+    #   resp.db_capacity_reservation.start_date #=> Time
+    #   resp.db_capacity_reservation.commitment_info.committed_capacity_per_availability_zone #=> Integer
+    #   resp.db_capacity_reservation.commitment_info.commitment_end_date #=> Time
+    #   resp.db_capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "assessing", "scheduled", "delayed", "unsupported"
+    #   resp.db_capacity_reservation.db_capacity_reservation_arn #=> String
+    #   resp.db_capacity_reservation.db_capacity_reservation_identifier #=> String
+    #   resp.db_capacity_reservation.tag_list #=> Array
+    #   resp.db_capacity_reservation.tag_list[0].key #=> String
+    #   resp.db_capacity_reservation.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CancelDBCapacityReservation AWS API Documentation
+    #
+    # @overload cancel_db_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def cancel_db_capacity_reservation(params = {}, options = {})
+      req = build_request(:cancel_db_capacity_reservation, params)
       req.send_request(options)
     end
 
@@ -2249,6 +2361,26 @@ module Aws::RDS
     #
     #   This setting doesn't apply to Amazon Aurora blue/green deployments.
     #
+    # @option params [Array<Types::TargetResourceConfiguration>] :target_resource_configurations
+    #   Specifies resource-level configuration overrides for the green
+    #   environment.
+    #
+    #   Each entry identifies a resource in the blue environment by its Amazon
+    #   Resource Name (ARN). It defines the desired configuration for the
+    #   corresponding resource in the green environment. Any resource that you
+    #   don't include in this parameter retains the same configuration as its
+    #   counterpart in the blue environment.
+    #
+    #   Use this parameter when one or more resources in the green environment
+    #   require a different configuration than what they have in the blue
+    #   environment.
+    #
+    #   Constraints:
+    #
+    #   * You can't specify the same `SourceArn` in more than one entry.
+    #
+    #   ^
+    #
     # @return [Types::CreateBlueGreenDeploymentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateBlueGreenDeploymentResponse#blue_green_deployment #blue_green_deployment} => Types::BlueGreenDeployment
@@ -2395,6 +2527,12 @@ module Aws::RDS
     #     target_storage_type: "TargetStorageType",
     #     target_allocated_storage: 1,
     #     target_storage_throughput: 1,
+    #     target_resource_configurations: [
+    #       {
+    #         source_arn: "DBAndClusterArn", # required
+    #         target_kms_key_id: "KmsKeyIdOrArn",
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2726,6 +2864,405 @@ module Aws::RDS
     # @param [Hash] params ({})
     def create_custom_db_engine_version(params = {}, options = {})
       req = build_request(:create_custom_db_engine_version, params)
+      req.send_request(options)
+    end
+
+    # Creates a DB capacity reservation. A DB capacity reservation reserves
+    # compute and memory capacity for DB instances of one DB instance class
+    # and one database engine. Amazon RDS reserves that capacity in each
+    # Availability Zone that you specify.
+    #
+    # Amazon RDS reserves the same amount of capacity in every Availability
+    # Zone in the request. You set that amount with
+    # `CapacityPerAvailabilityZone`, and you set the Availability Zones with
+    # `AvailabilityZones`. The total reserved capacity is
+    # `CapacityPerAvailabilityZone` multiplied by the number of Availability
+    # Zones.
+    #
+    # Specify `StartDate` and `CommitmentDuration` together to create a
+    # future-dated reservation. A future-dated reservation reserves capacity
+    # for a period that starts later. Amazon RDS holds that capacity for the
+    # length of the commitment.
+    #
+    # A future-dated reservation has the following additional constraints:
+    #
+    # * `DBInstanceClass` must be a `db.c`, `db.m`, `db.r`, `db.t`, or
+    #   `db.x` DB instance class. The letter after `db.` gives the DB
+    #   instance class family. For example, `db.x2g.xlarge` qualifies, and
+    #   `db.z1d.xlarge` doesn't.
+    #
+    # * If `DBInstanceClass` is a `db.m` or `db.r` DB instance class, it
+    #   must be from generation 7 or later. The digit after the family
+    #   letter gives the generation. For example, `db.m7g.xlarge` qualifies,
+    #   and `db.m5.xlarge` doesn't. A `db.c`, `db.t`, or `db.x` DB instance
+    #   class has no generation requirement.
+    #
+    # * The reserved capacity must total at least 32 vCPUs in each
+    #   Availability Zone. Multiply `CapacityPerAvailabilityZone` by the
+    #   number of vCPUs of the DB instance class. The product must be 32 or
+    #   more.
+    #
+    # * `CommitmentDuration` must be at least 14 days. For a `db.x` DB
+    #   instance class, it must be at least 84 days.
+    #
+    # * `StartDate` must be from 5 to 120 days in the future.
+    #
+    # Therefore, a DB instance class with 2 vCPUs needs a
+    # `CapacityPerAvailabilityZone` of 16 or more, a class with 4 vCPUs
+    # needs 8 or more, a class with 8 vCPUs needs 4 or more, and a class
+    # with 16 vCPUs needs 2 or more. For the number of vCPUs of each DB
+    # instance class, see [DB instance classes][1] in the *Amazon RDS User
+    # Guide*.
+    #
+    # <note markdown="1"> You can't modify a future-dated reservation before it starts. You
+    # can't cancel a future-dated reservation in the `scheduled` state. You
+    # can't cancel a reservation in the `active` state during its capacity
+    # commitment. Therefore, you can't cancel a future-dated reservation
+    # from the time that Amazon RDS schedules it until the commitment ends.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+    #
+    # @option params [required, String] :db_capacity_reservation_name
+    #   The name of the DB capacity reservation. This name must be unique for
+    #   your Amazon Web Services account in the Amazon Web Services Region.
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 63 lowercase letters, digits, or hyphens.
+    #
+    #   * First character must be a lowercase letter.
+    #
+    #   * Can't end with a hyphen or contain two consecutive hyphens.
+    #
+    #   * Can't contain more than 16 groups of characters separated by
+    #     hyphens.
+    #
+    #   * Can't begin with `dbcr-`.
+    #
+    # @option params [required, String] :db_instance_class
+    #   The compute and memory capacity to reserve, for example `db.m5.large`.
+    #   Not all DB instance classes are available in all Amazon Web Services
+    #   Regions, or for all database engines. For the full list of DB instance
+    #   classes, and availability for your engine, see [DB instance
+    #   classes][1] in the *Amazon RDS User Guide*.
+    #
+    #   Constraints:
+    #
+    #   * Must be a DB instance class that the specified `Engine` supports.
+    #
+    #   * For RDS for Oracle with `LicenseModel` set to `license-included`,
+    #     some DB instance classes aren't supported. Either choose a
+    #     supported DB instance class, or set `LicenseModel` to
+    #     `bring-your-own-license`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html
+    #
+    # @option params [required, String] :engine
+    #   The database engine to reserve capacity for.
+    #
+    #   Valid Values: `aurora-mysql` \| `aurora-postgresql` \| `mysql` \|
+    #   `postgres` \| `mariadb` \| `oracle-ee` \| `oracle-ee-cdb` \|
+    #   `oracle-se2` \| `oracle-se2-cdb` \| `sqlserver-ee` \| `sqlserver-se`
+    #   \| `sqlserver-web` \| `sqlserver-ex` \| `sqlserver-dev-ee` \|
+    #   `sqlserver-dev-se` \| `db2-ae` \| `db2-ce` \| `db2-se`
+    #
+    #   <note markdown="1"> The Developer Edition engines `sqlserver-dev-ee` and
+    #   `sqlserver-dev-se` support no Multi-AZ DB instance and no read
+    #   replica. Therefore, a reservation for either engine serves Single-AZ
+    #   DB instances only.
+    #
+    #    </note>
+    #
+    # @option params [required, Integer] :capacity_per_availability_zone
+    #   The number of DB instances to reserve in each Availability Zone that
+    #   you list in `AvailabilityZones`. Amazon RDS reserves this number of DB
+    #   instances in every listed Availability Zone.
+    #
+    #   A Single-AZ DB instance uses one unit of reserved capacity, in one
+    #   Availability Zone. A Multi-AZ DB instance is one DB instance, and it
+    #   uses one unit of reserved capacity in each of two Availability Zones.
+    #   Therefore, a Multi-AZ DB instance uses two units in total. A read
+    #   replica uses one unit of reserved capacity, in the same way as any
+    #   other DB instance.
+    #
+    #   Amazon RDS reserves capacity in each Availability Zone separately.
+    #   Reserved capacity in one Availability Zone can't serve a DB instance
+    #   in another Availability Zone. A request for a DB instance fails when
+    #   the Availability Zone of the DB instance has no available capacity.
+    #
+    #   Therefore, set this value to the number of DB instances that you want
+    #   to run at the same time in one Availability Zone. Don't set it to the
+    #   number that you want in total.
+    #
+    #   This value multiplied by the number of Availability Zones counts
+    #   against the DB instances quota for your Amazon Web Services account in
+    #   the Amazon Web Services Region. Your existing DB instances, and the
+    #   unused capacity of your other reservations, count against the same
+    #   quota.
+    #
+    #   To find the value of the DB instances quota, see [Quotas and
+    #   constraints for Amazon RDS][1] in the *Amazon RDS User Guide*.
+    #
+    #   Constraints:
+    #
+    #   * Minimum 1.
+    #
+    #   ^
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Limits.html
+    #
+    # @option params [required, Array<String>] :availability_zones
+    #   A list of Availability Zones for the reservation.
+    #
+    #   You can't change the Availability Zones of a reservation after you
+    #   create it. Reserved capacity in an Availability Zone that no DB
+    #   instance uses stays unused.
+    #
+    #   Constraints:
+    #
+    #   * Must specify one or more Availability Zones.
+    #
+    #   * Each Availability Zone can appear only once.
+    #
+    #   * Each Availability Zone must be in the Amazon Web Services Region of
+    #     the request.
+    #
+    #   * Each Availability Zone must have capacity for the requested DB
+    #     instance class.
+    #
+    #   * Must include two or more Availability Zones to use the reservation
+    #     for a Multi-AZ DB instance.
+    #
+    #   * A DB instance can use reserved capacity only in an Availability Zone
+    #     that its DB subnet group covers.
+    #
+    #   Example: `us-east-1a`
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The date and time when the reservation expires, in Universal
+    #   Coordinated Time (UTC). If you don't specify a value, the reservation
+    #   doesn't expire.
+    #
+    #   To change the expiration of an existing reservation, use
+    #   `ModifyDBCapacityReservation`. That operation takes `EndDateType`
+    #   along with `EndDate`.
+    #
+    #   Constraints:
+    #
+    #   * Must be a date and time in the future.
+    #
+    #   * For a future-dated reservation, must be at or after `StartDate` plus
+    #     `CommitmentDuration`. For example, a reservation that starts on
+    #     2026-12-01 with a 30-day commitment can't expire before 2026-12-31.
+    #     To reserve capacity for one calendar month, set `CommitmentDuration`
+    #     to 30 days or fewer, not to the length of the month.
+    #
+    #   Example: `2026-12-31T23:59:59Z`
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :start_date
+    #   The date and time when the reservation starts, in Universal
+    #   Coordinated Time (UTC). Specify this parameter to create a
+    #   future-dated reservation. If you don't specify a value, the
+    #   reservation starts immediately.
+    #
+    #   A reservation that starts later always carries a capacity commitment.
+    #   Therefore, a request that specifies `StartDate` must also meet every
+    #   constraint of a future-dated reservation, including the minimum
+    #   reserved capacity in each Availability Zone.
+    #
+    #   Constraints:
+    #
+    #   * Must be from 5 to 120 days in the future.
+    #
+    #   * You must also specify `CommitmentDuration`.
+    #
+    #   Example: `2026-12-01T00:00:00Z`
+    #
+    # @option params [Integer] :commitment_duration
+    #   The length of the capacity commitment that you request for a
+    #   future-dated reservation, in seconds. Amazon RDS measures this length
+    #   from `StartDate`.
+    #
+    #   <note markdown="1"> Amazon RDS can grant a shorter capacity commitment than you request.
+    #   Therefore, read `CommitmentEndDate` in `CommitmentInfo` for the
+    #   commitment that Amazon RDS granted.
+    #
+    #    </note>
+    #
+    #   The commitment doesn't end the reservation. Specify `EndDate` to set
+    #   an expiration date. You can't cancel a reservation in the `active`
+    #   state during the commitment.
+    #
+    #   Constraints:
+    #
+    #   * Minimum 1209600, which is 14 days. For a `db.x` DB instance class,
+    #     such as `db.x2g.xlarge`, the minimum is 7257600, which is 84 days.
+    #
+    #   * Must be less than 315576000, which is 10 years.
+    #
+    #   * You must also specify `StartDate`.
+    #
+    #   Example: `2592000`
+    #
+    # @option params [String] :license_model
+    #   The license model to reserve capacity for. Specify this parameter only
+    #   for RDS for Microsoft SQL Server Enterprise Edition, Standard Edition,
+    #   and Developer Edition, for RDS for Oracle, or for RDS for Db2 Standard
+    #   Edition and Advanced Edition. Amazon RDS rejects the request for any
+    #   other engine. This includes Amazon Aurora, the Web and Express
+    #   editions of RDS for Microsoft SQL Server, and RDS for Db2 Community
+    #   Edition.
+    #
+    #   Valid Values:
+    #
+    #   * RDS for Microsoft SQL Server Enterprise Edition and Standard Edition
+    #     - `license-included | bring-your-own-media`
+    #
+    #   * RDS for Microsoft SQL Server Developer Edition -
+    #     `bring-your-own-license`
+    #
+    #   * RDS for Oracle - `bring-your-own-license | license-included`
+    #
+    #   * RDS for Db2 Standard Edition and Advanced Edition -
+    #     `bring-your-own-license | marketplace-license`
+    #
+    #   A DB instance launches into the reservation only when the license
+    #   model of the DB instance matches the license model of the reservation.
+    #   For a reservation that holds no license model, Amazon RDS applies no
+    #   license model check at launch.
+    #
+    #   For RDS for Microsoft SQL Server Enterprise Edition and Standard
+    #   Edition, if you don't specify a value, Amazon RDS uses
+    #   `license-included`.
+    #
+    #   For RDS for Microsoft SQL Server Developer Edition, if you don't
+    #   specify a value, Amazon RDS uses `bring-your-own-license`. That is the
+    #   only license model that these engines accept, and Amazon RDS rejects
+    #   any other value.
+    #
+    #   For RDS for Oracle, if you don't specify a value, Amazon RDS uses the
+    #   only orderable license model for the DB instance class. If more than
+    #   one license model is orderable, you must specify one.
+    #
+    #   For RDS for Db2 Standard Edition and Advanced Edition, if you don't
+    #   specify a value, Amazon RDS uses `bring-your-own-license`. To reserve
+    #   capacity for Db2 DB instances that you license through Amazon Web
+    #   Services Marketplace, specify `marketplace-license`.
+    #
+    #   <note markdown="1"> For RDS for Oracle, the license models that you can reserve depend on
+    #   the engine and the DB instance class. RDS for Oracle Enterprise
+    #   Edition doesn't support `license-included`.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   Tags to assign to the DB capacity reservation.
+    #
+    # @return [Types::CreateDBCapacityReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateDBCapacityReservationResponse#db_capacity_reservation #db_capacity_reservation} => Types::DBCapacityReservation
+    #
+    #
+    # @example Example: To create a DB capacity reservation in two Availability Zones
+    #
+    #   # The following example reserves capacity for two db.m5.large RDS for MySQL DB instances in each of two Availability
+    #   # Zones. Amazon RDS reserves the same capacity in every Availability Zone in the request. The total reserved capacity is
+    #   # four units. Four units serve four Single-AZ DB instances, or two Multi-AZ DB instances, because a Multi-AZ DB instance
+    #   # uses one unit in each of two Availability Zones.
+    #
+    #   resp = client.create_db_capacity_reservation({
+    #     availability_zones: [
+    #       "us-east-1a", 
+    #       "us-east-1b", 
+    #     ], 
+    #     capacity_per_availability_zone: 2, 
+    #     db_capacity_reservation_name: "my-mysql-reservation", 
+    #     db_instance_class: "db.m5.large", 
+    #     engine: "mysql", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_capacity_reservation: {
+    #       available_capacity_per_availability_zone_list: [
+    #         {
+    #           availability_zone: "us-east-1a", 
+    #           available_capacity: 2, 
+    #         }, 
+    #         {
+    #           availability_zone: "us-east-1b", 
+    #           available_capacity: 2, 
+    #         }, 
+    #       ], 
+    #       create_date: Time.parse("2026-09-10T18:22:41.612Z"), 
+    #       db_capacity_reservation_arn: "arn:aws:rds:us-east-1:123456789012:db-capacity-reservation:dbcr-7hqk2m9xv4t1bn6cz3ws8dj5fp0gyr2a", 
+    #       db_capacity_reservation_identifier: "dbcr-7hqk2m9xv4t1bn6cz3ws8dj5fp0gyr2a", 
+    #       db_capacity_reservation_name: "my-mysql-reservation", 
+    #       db_instance_class: "db.m5.large", 
+    #       engine: "mysql", 
+    #       reserved_capacity_per_availability_zone: 2, 
+    #       state: "active", 
+    #       tag_list: [
+    #       ], 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_db_capacity_reservation({
+    #     db_capacity_reservation_name: "DBCapacityReservationName", # required
+    #     db_instance_class: "DBInstanceClass", # required
+    #     engine: "String", # required
+    #     capacity_per_availability_zone: 1, # required
+    #     availability_zones: ["String"], # required
+    #     end_date: Time.now,
+    #     start_date: Time.now,
+    #     commitment_duration: 1,
+    #     license_model: "String",
+    #     tags: [
+    #       {
+    #         key: "String",
+    #         value: "String",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_capacity_reservation.db_capacity_reservation_name #=> String
+    #   resp.db_capacity_reservation.db_instance_class #=> String
+    #   resp.db_capacity_reservation.engine #=> String
+    #   resp.db_capacity_reservation.license_model #=> String
+    #   resp.db_capacity_reservation.reserved_capacity_per_availability_zone #=> Integer
+    #   resp.db_capacity_reservation.available_capacity_per_availability_zone_list #=> Array
+    #   resp.db_capacity_reservation.available_capacity_per_availability_zone_list[0].availability_zone #=> String
+    #   resp.db_capacity_reservation.available_capacity_per_availability_zone_list[0].available_capacity #=> Integer
+    #   resp.db_capacity_reservation.end_date #=> Time
+    #   resp.db_capacity_reservation.create_date #=> Time
+    #   resp.db_capacity_reservation.start_date #=> Time
+    #   resp.db_capacity_reservation.commitment_info.committed_capacity_per_availability_zone #=> Integer
+    #   resp.db_capacity_reservation.commitment_info.commitment_end_date #=> Time
+    #   resp.db_capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "assessing", "scheduled", "delayed", "unsupported"
+    #   resp.db_capacity_reservation.db_capacity_reservation_arn #=> String
+    #   resp.db_capacity_reservation.db_capacity_reservation_identifier #=> String
+    #   resp.db_capacity_reservation.tag_list #=> Array
+    #   resp.db_capacity_reservation.tag_list[0].key #=> String
+    #   resp.db_capacity_reservation.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBCapacityReservation AWS API Documentation
+    #
+    # @overload create_db_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def create_db_capacity_reservation(params = {}, options = {})
+      req = build_request(:create_db_capacity_reservation, params)
       req.send_request(options)
     end
 
@@ -6038,6 +6575,44 @@ module Aws::RDS
     #
     #   ^
     #
+    # @option params [String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation to associate
+    #   with this DB instance. You can specify the identifier, which has the
+    #   prefix `dbcr-`, or the reservation name. When you specify this
+    #   parameter, the DB instance uses reserved capacity from the specified
+    #   reservation.
+    #
+    #   If you specify `AvailabilityZone`, Amazon RDS places the DB instance
+    #   in that Availability Zone, and the reservation must cover it.
+    #
+    #   Constraints:
+    #
+    #   * The reservation must reserve capacity for the DB instance class and
+    #     the database engine of the DB instance.
+    #
+    #   * If the reservation reserves capacity for a specific license model,
+    #     the license model of the DB instance must match it.
+    #
+    #   * The reservation must be in the `active` state, and it must not be
+    #     past its end date.
+    #
+    #   * If you specify `AvailabilityZone`, it must be one of the
+    #     Availability Zones of the reservation.
+    #
+    #   * For a Multi-AZ DB instance, the reservation must cover two or more
+    #     Availability Zones. A Multi-AZ DB instance uses one unit of reserved
+    #     capacity in each of two Availability Zones. If the reservation
+    #     covers more than two Availability Zones, Amazon RDS chooses the two
+    #     that the DB instance uses.
+    #
+    #   * The reservation must have available capacity in each Availability
+    #     Zone that the DB instance uses.
+    #
+    #   * The DB subnet group must be in a VPC with default tenancy.
+    #
+    #   * The DB subnet group must cover each Availability Zone that the DB
+    #     instance uses.
+    #
     # @option params [String] :master_user_authentication_type
     #   Specifies the authentication type for the master user. With IAM master
     #   user authentication, you can configure the master DB user with IAM
@@ -6264,6 +6839,7 @@ module Aws::RDS
     #         ],
     #       },
     #     ],
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier",
     #     master_user_authentication_type: "password", # accepts password, iam-db-auth
     #   })
     #
@@ -6340,6 +6916,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -6453,6 +7030,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstance AWS API Documentation
     #
@@ -6764,11 +7342,15 @@ module Aws::RDS
     #   The Amazon Web Services KMS key identifier is the key ARN, key ID,
     #   alias ARN, or alias name for the KMS key.
     #
-    #   If you create an encrypted read replica in the same Amazon Web
-    #   Services Region as the source DB instance or Multi-AZ DB cluster,
-    #   don't specify a value for this parameter. A read replica in the same
-    #   Amazon Web Services Region is always encrypted with the same KMS key
-    #   as the source DB instance or cluster.
+    #   For a read replica in the same Amazon Web Services Region as the
+    #   source DB instance or Multi-AZ DB cluster, specifying this parameter
+    #   is optional. If you specify a KMS key identifier, the read replica is
+    #   encrypted with that KMS key, which can be different from the KMS key
+    #   of the source.
+    #
+    #   If you don't specify a value for this parameter, the read replica is
+    #   encrypted with the same KMS key as the source DB instance or Multi-AZ
+    #   DB cluster.
     #
     #   If you create an encrypted read replica in a different Amazon Web
     #   Services Region, then you must specify a KMS key identifier for the
@@ -7225,6 +7807,46 @@ module Aws::RDS
     #
     #   ^
     #
+    # @option params [String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation to associate
+    #   with this read replica. You can specify the identifier, which has the
+    #   prefix `dbcr-`, or the reservation name. When you specify this
+    #   parameter, the read replica uses reserved capacity from the specified
+    #   reservation. A read replica uses one unit of reserved capacity, in the
+    #   same way as any other DB instance.
+    #
+    #   If you specify `AvailabilityZone`, Amazon RDS places the DB instance
+    #   in that Availability Zone, and the reservation must cover it.
+    #
+    #   Constraints:
+    #
+    #   * The reservation must reserve capacity for the DB instance class and
+    #     the database engine of the DB instance.
+    #
+    #   * If the reservation reserves capacity for a specific license model,
+    #     the license model of the source DB instance must match it. A read
+    #     replica inherits its license model from the source DB instance.
+    #
+    #   * The reservation must be in the `active` state, and it must not be
+    #     past its end date.
+    #
+    #   * If you specify `AvailabilityZone`, it must be one of the
+    #     Availability Zones of the reservation.
+    #
+    #   * For a Multi-AZ DB instance, the reservation must cover two or more
+    #     Availability Zones. A Multi-AZ DB instance uses one unit of reserved
+    #     capacity in each of two Availability Zones. If the reservation
+    #     covers more than two Availability Zones, Amazon RDS chooses the two
+    #     that the DB instance uses.
+    #
+    #   * The reservation must have available capacity in each Availability
+    #     Zone that the DB instance uses.
+    #
+    #   * The DB subnet group must be in a VPC with default tenancy.
+    #
+    #   * The DB subnet group must cover each Availability Zone that the DB
+    #     instance uses.
+    #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
     #   shapshot is encrypted and in a different region.
@@ -7336,6 +7958,7 @@ module Aws::RDS
     #         ],
     #       },
     #     ],
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier",
     #     source_region: "String",
     #   })
     #
@@ -7412,6 +8035,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -7525,6 +8149,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateDBInstanceReadReplica AWS API Documentation
     #
@@ -10523,6 +11148,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -10636,6 +11262,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DeleteDBInstance AWS API Documentation
     #
@@ -12146,6 +12773,218 @@ module Aws::RDS
     # @param [Hash] params ({})
     def describe_certificates(params = {}, options = {})
       req = build_request(:describe_certificates, params)
+      req.send_request(options)
+    end
+
+    # Describes one or more DB capacity reservations. A DB capacity
+    # reservation reserves capacity for Amazon RDS DB instances in one or
+    # more Availability Zones.
+    #
+    # If you don't specify a `DBCapacityReservationIdentifier`, this
+    # operation returns information about all DB capacity reservations for
+    # your Amazon Web Services account.
+    #
+    # This operation supports pagination.
+    #
+    # @option params [String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation to describe.
+    #   You can specify the identifier, which has the prefix `dbcr-`, or the
+    #   reservation name.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous
+    #   `DescribeDBCapacityReservations` request. If this parameter is
+    #   specified, the response includes only records beyond the marker, up to
+    #   the value specified by `MaxRecords`.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token called a marker is included in the response so that you can
+    #   retrieve the remaining results.
+    #
+    #   Default: 100
+    #
+    #   Constraints:
+    #
+    #   * Must be a minimum of 20.
+    #
+    #   * Can't exceed 100.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   A filter that specifies which DB capacity reservations to describe.
+    #
+    #   Supported filters:
+    #
+    #   * `db-capacity-reservation-name` - Accepts DB capacity reservation
+    #     names. The response includes only the reservations that these names
+    #     identify. Use this filter to describe several reservations by name
+    #     in one request.
+    #
+    #   * `state` - Accepts reservation states. The response includes only the
+    #     reservations in these states.
+    #
+    #   * `engine` - Accepts database engine names. The response includes only
+    #     the reservations that reserve capacity for these engines.
+    #
+    #   * `db-instance-class` - Accepts DB instance classes. The response
+    #     includes only the reservations that reserve capacity for these DB
+    #     instance classes.
+    #
+    #   * `availability-zone` - Accepts Availability Zone names. The response
+    #     includes only the reservations that cover these Availability Zones.
+    #
+    #   When you specify more than one value for a filter, the response
+    #   includes the reservations that match any of those values. When you
+    #   specify more than one filter, the response includes only the
+    #   reservations that match every filter.
+    #
+    #   Amazon RDS rejects the request when a filter name isn't in this list,
+    #   or when a filter specifies no values.
+    #
+    #   <note markdown="1"> The `state` filter doesn't accept `expired`. To find an expired
+    #   reservation, compare `EndDate` against the current date and time.
+    #
+    #    </note>
+    #
+    # @return [Types::DescribeDBCapacityReservationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDBCapacityReservationsResponse#db_capacity_reservations #db_capacity_reservations} => Array&lt;Types::DBCapacityReservation&gt;
+    #   * {Types::DescribeDBCapacityReservationsResponse#marker #marker} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    #
+    # @example Example: To describe a DB capacity reservation
+    #
+    #   # The following example retrieves the details of the specified DB capacity reservation. The response reports the reserved
+    #   # capacity and the available capacity for each Availability Zone of the reservation.
+    #
+    #   resp = client.describe_db_capacity_reservations({
+    #     db_capacity_reservation_identifier: "dbcr-7hqk2m9xv4t1bn6cz3ws8dj5fp0gyr2a", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_capacity_reservations: [
+    #       {
+    #         available_capacity_per_availability_zone_list: [
+    #           {
+    #             availability_zone: "us-east-1a", 
+    #             available_capacity: 1, 
+    #           }, 
+    #           {
+    #             availability_zone: "us-east-1b", 
+    #             available_capacity: 2, 
+    #           }, 
+    #         ], 
+    #         create_date: Time.parse("2026-09-10T18:22:41.612Z"), 
+    #         db_capacity_reservation_arn: "arn:aws:rds:us-east-1:123456789012:db-capacity-reservation:dbcr-7hqk2m9xv4t1bn6cz3ws8dj5fp0gyr2a", 
+    #         db_capacity_reservation_identifier: "dbcr-7hqk2m9xv4t1bn6cz3ws8dj5fp0gyr2a", 
+    #         db_capacity_reservation_name: "my-mysql-reservation", 
+    #         db_instance_class: "db.m5.large", 
+    #         engine: "mysql", 
+    #         reserved_capacity_per_availability_zone: 2, 
+    #         state: "active", 
+    #         tag_list: [
+    #         ], 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Example: To list DB capacity reservations one page at a time
+    #
+    #   # The following example lists the active DB capacity reservations for the AWS account, 20 records at a time. The Marker
+    #   # value comes from the response of the previous DescribeDBCapacityReservations request. Omit Marker for the first request.
+    #   # A Marker is an opaque token. Pass it back without any change, and don't parse it or build one yourself. A Marker expires
+    #   # 24 hours after Amazon RDS issues it. The Marker values in this example are shortened for readability.
+    #
+    #   resp = client.describe_db_capacity_reservations({
+    #     filters: [
+    #       {
+    #         name: "state", 
+    #         values: [
+    #           "active", 
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "eyJ2ZXJzaW9uIjoxLCJ0b2tlbkRldGFpbCI6IkFRSUNBSGhWdjlWNG1RM3JLY0xwWjh0Mlh5RjdiTjB3UmpTNXVF...", 
+    #     max_records: 20, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     db_capacity_reservations: [
+    #       {
+    #         available_capacity_per_availability_zone_list: [
+    #           {
+    #             availability_zone: "us-east-1c", 
+    #             available_capacity: 4, 
+    #           }, 
+    #           {
+    #             availability_zone: "us-east-1d", 
+    #             available_capacity: 4, 
+    #           }, 
+    #         ], 
+    #         create_date: Time.parse("2026-09-08T11:04:07.335Z"), 
+    #         db_capacity_reservation_arn: "arn:aws:rds:us-east-1:123456789012:db-capacity-reservation:dbcr-3npv8ck1zt6wq9db4mhx2js7fr5gy0ea", 
+    #         db_capacity_reservation_identifier: "dbcr-3npv8ck1zt6wq9db4mhx2js7fr5gy0ea", 
+    #         db_capacity_reservation_name: "my-postgres-reservation", 
+    #         db_instance_class: "db.r6g.xlarge", 
+    #         engine: "postgres", 
+    #         reserved_capacity_per_availability_zone: 4, 
+    #         state: "active", 
+    #         tag_list: [
+    #         ], 
+    #       }, 
+    #     ], 
+    #     marker: "eyJ2ZXJzaW9uIjoxLCJ0b2tlbkRldGFpbCI6IkFRSUNBSGkyWnBRN25SeERrVDN2WWJHY0w5c1dtRTB1SmZIYU41...", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_db_capacity_reservations({
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier",
+    #     marker: "String",
+    #     max_records: 1,
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_capacity_reservations #=> Array
+    #   resp.db_capacity_reservations[0].db_capacity_reservation_name #=> String
+    #   resp.db_capacity_reservations[0].db_instance_class #=> String
+    #   resp.db_capacity_reservations[0].engine #=> String
+    #   resp.db_capacity_reservations[0].license_model #=> String
+    #   resp.db_capacity_reservations[0].reserved_capacity_per_availability_zone #=> Integer
+    #   resp.db_capacity_reservations[0].available_capacity_per_availability_zone_list #=> Array
+    #   resp.db_capacity_reservations[0].available_capacity_per_availability_zone_list[0].availability_zone #=> String
+    #   resp.db_capacity_reservations[0].available_capacity_per_availability_zone_list[0].available_capacity #=> Integer
+    #   resp.db_capacity_reservations[0].end_date #=> Time
+    #   resp.db_capacity_reservations[0].create_date #=> Time
+    #   resp.db_capacity_reservations[0].start_date #=> Time
+    #   resp.db_capacity_reservations[0].commitment_info.committed_capacity_per_availability_zone #=> Integer
+    #   resp.db_capacity_reservations[0].commitment_info.commitment_end_date #=> Time
+    #   resp.db_capacity_reservations[0].state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "assessing", "scheduled", "delayed", "unsupported"
+    #   resp.db_capacity_reservations[0].db_capacity_reservation_arn #=> String
+    #   resp.db_capacity_reservations[0].db_capacity_reservation_identifier #=> String
+    #   resp.db_capacity_reservations[0].tag_list #=> Array
+    #   resp.db_capacity_reservations[0].tag_list[0].key #=> String
+    #   resp.db_capacity_reservations[0].tag_list[0].value #=> String
+    #   resp.marker #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeDBCapacityReservations AWS API Documentation
+    #
+    # @overload describe_db_capacity_reservations(params = {})
+    # @param [Hash] params ({})
+    def describe_db_capacity_reservations(params = {}, options = {})
+      req = build_request(:describe_db_capacity_reservations, params)
       req.send_request(options)
     end
 
@@ -14273,6 +15112,7 @@ module Aws::RDS
     #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instances[0].pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instances[0].pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instances[0].latest_restorable_time #=> Time
     #   resp.db_instances[0].multi_az #=> Boolean
     #   resp.db_instances[0].engine_version #=> String
@@ -14386,6 +15226,7 @@ module Aws::RDS
     #   resp.db_instances[0].storage_volume_status #=> String
     #   resp.db_instances[0].storage_operation_status #=> String
     #   resp.db_instances[0].storage_operation_percent_progress #=> Integer
+    #   resp.db_instances[0].db_capacity_reservation_identifier #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -20025,6 +20866,137 @@ module Aws::RDS
       req.send_request(options)
     end
 
+    # Modifies a DB capacity reservation. You can change the reserved
+    # capacity in each Availability Zone of the reservation, and you can
+    # change the end date of the reservation. You can't change the
+    # Availability Zones of an existing reservation.
+    #
+    # The reservation must be in the `active` state. A future-dated
+    # reservation that hasn't started isn't modifiable, and neither is a
+    # reservation that Amazon RDS is already modifying.
+    #
+    # You must specify `CapacityPerAvailabilityZone`, `EndDateType`, or
+    # `EndDate`. A request that specifies none of the three changes nothing,
+    # and Amazon RDS rejects it.
+    #
+    # @option params [required, String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation to modify.
+    #   You can specify the identifier, which has the prefix `dbcr-`, or the
+    #   reservation name.
+    #
+    # @option params [Integer] :capacity_per_availability_zone
+    #   The new number of DB instances to reserve in each Availability Zone of
+    #   the reservation. Amazon RDS applies this number to every Availability
+    #   Zone of the reservation.
+    #
+    #   An increase reserves more capacity at the time of the request, so it
+    #   can fail when the Amazon Web Services Region has insufficient
+    #   capacity.
+    #
+    #   This value multiplied by the number of Availability Zones counts
+    #   against the DB instances quota for your Amazon Web Services account in
+    #   the Amazon Web Services Region. Amazon RDS checks the quota only when
+    #   you increase the value.
+    #
+    #   Constraints:
+    #
+    #   * Minimum 1.
+    #
+    #   * Can't be less than the highest number of DB instances that use the
+    #     reservation in any single Availability Zone of the reservation. That
+    #     number includes a DB instance that holds a unit of reserved capacity
+    #     for a pending modification. To find that number for an Availability
+    #     Zone, subtract `AvailableCapacity` from
+    #     `ReservedCapacityPerAvailabilityZone`.
+    #
+    #   * During a capacity commitment, can't be less than
+    #     `CommittedCapacityPerAvailabilityZone`.
+    #
+    # @option params [String] :end_date_type
+    #   The end date type for the reservation.
+    #
+    #   Valid Values:
+    #
+    #   * `limited` - The reservation has a specific end date. You must also
+    #     specify `EndDate`.
+    #
+    #   * `unlimited` - The reservation doesn't expire. Don't specify
+    #     `EndDate`.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :end_date
+    #   The new end date for the reservation, in Universal Coordinated Time
+    #   (UTC). Required when `EndDateType` is `limited`. Don't specify a
+    #   value when `EndDateType` is `unlimited`.
+    #
+    #   When you specify `EndDate`, you must also specify `EndDateType`.
+    #
+    #   Constraints:
+    #
+    #   * Must be a date and time in the future.
+    #
+    #   * During a capacity commitment, must be at or after
+    #     `CommitmentEndDate`.
+    #
+    # @return [Types::ModifyDBCapacityReservationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ModifyDBCapacityReservationResponse#db_capacity_reservation #db_capacity_reservation} => Types::DBCapacityReservation
+    #
+    #
+    # @example Example: To change the capacity and the end date of a DB capacity reservation
+    #
+    #   # The following example raises the reserved capacity to three DB instances in each Availability Zone of the reservation,
+    #   # and it sets an end date. Set EndDateType to limited to give the reservation an end date. Set EndDateType to unlimited to
+    #   # remove the end date, and specify no EndDate. Amazon RDS applies the modification asynchronously, and it moves the
+    #   # reservation to the pending state. Call DescribeDBCapacityReservations to check when the reservation returns to the
+    #   # active state with the new capacity.
+    #
+    #   resp = client.modify_db_capacity_reservation({
+    #     capacity_per_availability_zone: 3, 
+    #     db_capacity_reservation_identifier: "dbcr-7hqk2m9xv4t1bn6cz3ws8dj5fp0gyr2a", 
+    #     end_date: Time.parse("2026-12-31T23:59:59Z"), 
+    #     end_date_type: "limited", 
+    #   })
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.modify_db_capacity_reservation({
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier", # required
+    #     capacity_per_availability_zone: 1,
+    #     end_date_type: "unlimited", # accepts unlimited, limited
+    #     end_date: Time.now,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.db_capacity_reservation.db_capacity_reservation_name #=> String
+    #   resp.db_capacity_reservation.db_instance_class #=> String
+    #   resp.db_capacity_reservation.engine #=> String
+    #   resp.db_capacity_reservation.license_model #=> String
+    #   resp.db_capacity_reservation.reserved_capacity_per_availability_zone #=> Integer
+    #   resp.db_capacity_reservation.available_capacity_per_availability_zone_list #=> Array
+    #   resp.db_capacity_reservation.available_capacity_per_availability_zone_list[0].availability_zone #=> String
+    #   resp.db_capacity_reservation.available_capacity_per_availability_zone_list[0].available_capacity #=> Integer
+    #   resp.db_capacity_reservation.end_date #=> Time
+    #   resp.db_capacity_reservation.create_date #=> Time
+    #   resp.db_capacity_reservation.start_date #=> Time
+    #   resp.db_capacity_reservation.commitment_info.committed_capacity_per_availability_zone #=> Integer
+    #   resp.db_capacity_reservation.commitment_info.commitment_end_date #=> Time
+    #   resp.db_capacity_reservation.state #=> String, one of "active", "expired", "cancelled", "pending", "failed", "assessing", "scheduled", "delayed", "unsupported"
+    #   resp.db_capacity_reservation.db_capacity_reservation_arn #=> String
+    #   resp.db_capacity_reservation.db_capacity_reservation_identifier #=> String
+    #   resp.db_capacity_reservation.tag_list #=> Array
+    #   resp.db_capacity_reservation.tag_list[0].key #=> String
+    #   resp.db_capacity_reservation.tag_list[0].value #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBCapacityReservation AWS API Documentation
+    #
+    # @overload modify_db_capacity_reservation(params = {})
+    # @param [Hash] params ({})
+    def modify_db_capacity_reservation(params = {}, options = {})
+      req = build_request(:modify_db_capacity_reservation, params)
+      req.send_request(options)
+    end
+
     # Modifies the settings of an Amazon Aurora DB cluster or a Multi-AZ DB
     # cluster. You can change one or more settings by specifying these
     # parameters and the new values in the request.
@@ -22615,6 +23587,136 @@ module Aws::RDS
     #   Additional storage volumes are supported for RDS for Oracle and RDS
     #   for SQL Server DB instances only.
     #
+    # @option params [String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation for the DB
+    #   instance to use. You can specify the identifier, which has the prefix
+    #   `dbcr-`, or the reservation name. After the modification completes,
+    #   the DB instance uses reserved capacity from this reservation.
+    #
+    #   You can't change the DB capacity reservation of a DB instance on its
+    #   own. A request that changes the reservation must also change the DB
+    #   instance class, the Multi-AZ setting, the license model, or the
+    #   engine. Therefore, this request always changes the configuration of
+    #   the DB instance.
+    #
+    #   If the DB instance already uses the reservation that you specify, this
+    #   requirement doesn't apply. You can then change another setting, such
+    #   as the Multi-AZ setting, and keep the reservation.
+    #
+    #   For a DB instance that uses no reservation, change `DBInstanceClass`
+    #   to the DB instance class that the reservation reserves. A reservation
+    #   reserves capacity for one DB instance class, so that change moves the
+    #   DB instance onto the reserved capacity. That change also resizes the
+    #   DB instance, which interrupts it.
+    #
+    #   If the DB instance already runs the DB instance class that the
+    #   reservation reserves, change `MultiAZ` or `LicenseModel` instead. Only
+    #   RDS for Oracle and RDS for Microsoft SQL Server accept a change of
+    #   license model, so `MultiAZ` is the remaining choice for every other
+    #   engine.
+    #
+    #   If you don't specify this parameter, Amazon RDS moves the DB instance
+    #   to unreserved capacity, and it releases the reserved capacity that the
+    #   DB instance holds. A request that changes the DB instance class, the
+    #   Multi-AZ setting, the license model, or the engine moves the DB
+    #   instance to different hardware, and Amazon RDS places the DB instance
+    #   on unreserved capacity. Therefore, to keep the DB instance on reserved
+    #   capacity, specify this parameter in every request that changes any of
+    #   those settings.
+    #
+    #    The DB instance keeps its current reservation until Amazon RDS
+    #   applies
+    #   the modification. Until then, the `DBCapacityReservationIdentifier`
+    #   field of the DB instance still reports that reservation, and
+    #   `PendingModifiedValues` reports no reservation. Amazon RDS releases
+    #   the reserved capacity when it moves the DB instance.
+    #
+    #   Constraints:
+    #
+    #   * If the request changes which DB capacity reservation the DB instance
+    #     uses, it must also set a new value for `DBInstanceClass`, `MultiAZ`,
+    #     `LicenseModel`, or `Engine`. The new value must differ from the
+    #     current value. The only engine change that `ModifyDBInstance`
+    #     supports is a conversion to the CDB architecture. Repeating the
+    #     current value doesn't satisfy this requirement. This requirement
+    #     applies both when the DB instance uses no reservation, and when it
+    #     moves to a different reservation.
+    #
+    #   * The reservation must reserve capacity for the DB instance class that
+    #     the DB instance uses after the modification, and for the database
+    #     engine of the DB instance. Therefore, when the request changes
+    #     `DBInstanceClass`, the reservation reserves capacity for a DB
+    #     instance class that the DB instance doesn't use today.
+    #
+    #   * The reservation must be in the `active` state, and it must not be
+    #     past its end date.
+    #
+    #   * The reservation must have available capacity in each Availability
+    #     Zone that the DB instance uses after the modification.
+    #
+    #   * The reservation must cover the Availability Zone of the DB instance,
+    #     except when the request changes the DB instance from Multi-AZ to
+    #     Single-AZ.
+    #
+    #   * For a Multi-AZ DB instance, the reservation must cover two or more
+    #     Availability Zones. A Multi-AZ DB instance uses one unit of reserved
+    #     capacity in each of two Availability Zones.
+    #
+    #   * If the DB instance is already Multi-AZ, the reservation must cover
+    #     both of its Availability Zones. If the request converts the DB
+    #     instance to Multi-AZ, the reservation must cover the current
+    #     Availability Zone of the DB instance, and Amazon RDS chooses the
+    #     second Availability Zone from the reservation.
+    #
+    #   * If the reservation reserves capacity for a specific license model,
+    #     the license model of the DB instance must match it. Amazon RDS
+    #     checks the license model only when the request specifies
+    #     `LicenseModel`.
+    #
+    #   * You can't specify this parameter together with a change to
+    #     `DBSubnetGroupName`.
+    #
+    #   * You can't specify this parameter together with a change to both
+    #     `DBInstanceClass` and `LicenseModel`. Submit those changes as two
+    #     separate requests.
+    #
+    #   * Can't be specified together with a change to `DBInstanceClass` when
+    #     the request also changes the DB instance from Multi-AZ to Single-AZ.
+    #
+    #   * When the request changes the DB instance from Multi-AZ to Single-AZ,
+    #     the reservation must cover either the primary or the secondary
+    #     Availability Zone of the DB instance. Amazon RDS keeps the DB
+    #     instance in its primary Availability Zone, and it removes the
+    #     standby replica. Therefore, the primary Availability Zone keeps its
+    #     unit of reserved capacity, and the secondary Availability Zone
+    #     releases its unit.
+    #
+    #   * Can't be specified together with `LicenseModel` while a
+    #     modification of the DB instance class or the Multi-AZ setting is
+    #     pending.
+    #
+    #   * Can't be specified together with `DBInstanceClass` or `MultiAZ`
+    #     while a modification of the license model is pending.
+    #
+    #   * When a modification is already pending, the reservation must reserve
+    #     capacity for the DB instance as it will be after both the pending
+    #     modification and the requested modification complete.
+    #
+    #   * The DB subnet group must be in a VPC with default tenancy.
+    #
+    #   * The DB subnet group must cover each Availability Zone that the DB
+    #     instance uses.
+    #
+    #   * Isn't supported for an RDS on Outposts DB instance.
+    #
+    #   * If the reservation expires within one week, you must also enable
+    #     `ApplyImmediately`. Otherwise, choose a reservation with a later end
+    #     date.
+    #
+    #   * Amazon RDS holds a unit of reserved capacity for the DB instance
+    #     when it accepts the request, even when the modification waits for
+    #     the maintenance window.
+    #
     # @option params [Array<Types::TagSpecification>] :tag_specifications
     #   Tags to assign to resources associated with the DB instance.
     #
@@ -22799,6 +23901,7 @@ module Aws::RDS
     #         set_for_delete: false,
     #       },
     #     ],
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier",
     #     tag_specifications: [
     #       {
     #         resource_type: "String",
@@ -22887,6 +23990,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -23000,6 +24104,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyDBInstance AWS API Documentation
     #
@@ -24890,6 +25995,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -25003,6 +26109,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/PromoteReadReplica AWS API Documentation
     #
@@ -25650,6 +26757,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -25763,6 +26871,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RebootDBInstance AWS API Documentation
     #
@@ -29865,6 +30974,44 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
     #
+    # @option params [String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation to associate
+    #   with this DB instance. You can specify the identifier, which has the
+    #   prefix `dbcr-`, or the reservation name. When you specify this
+    #   parameter, the DB instance uses reserved capacity from the specified
+    #   reservation.
+    #
+    #   If you specify `AvailabilityZone`, Amazon RDS places the DB instance
+    #   in that Availability Zone, and the reservation must cover it.
+    #
+    #   Constraints:
+    #
+    #   * The reservation must reserve capacity for the DB instance class and
+    #     the database engine of the DB instance.
+    #
+    #   * If the reservation reserves capacity for a specific license model,
+    #     the license model of the DB instance must match it.
+    #
+    #   * The reservation must be in the `active` state, and it must not be
+    #     past its end date.
+    #
+    #   * If you specify `AvailabilityZone`, it must be one of the
+    #     Availability Zones of the reservation.
+    #
+    #   * For a Multi-AZ DB instance, the reservation must cover two or more
+    #     Availability Zones. A Multi-AZ DB instance uses one unit of reserved
+    #     capacity in each of two Availability Zones. If the reservation
+    #     covers more than two Availability Zones, Amazon RDS chooses the two
+    #     that the DB instance uses.
+    #
+    #   * The reservation must have available capacity in each Availability
+    #     Zone that the DB instance uses.
+    #
+    #   * The DB subnet group must be in a VPC with default tenancy.
+    #
+    #   * The DB subnet group must cover each Availability Zone that the DB
+    #     instance uses.
+    #
     # @option params [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
@@ -30070,6 +31217,7 @@ module Aws::RDS
     #     db_cluster_snapshot_identifier: "String",
     #     backup_retention_period: 1,
     #     preferred_backup_window: "String",
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
@@ -30171,6 +31319,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -30284,6 +31433,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromDBSnapshot AWS API Documentation
     #
@@ -30814,6 +31964,44 @@ module Aws::RDS
     #   Amazon Web Services account has a different default KMS key for each
     #   Amazon Web Services Region.
     #
+    # @option params [String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation to associate
+    #   with this DB instance. You can specify the identifier, which has the
+    #   prefix `dbcr-`, or the reservation name. When you specify this
+    #   parameter, the DB instance uses reserved capacity from the specified
+    #   reservation.
+    #
+    #   If you specify `AvailabilityZone`, Amazon RDS places the DB instance
+    #   in that Availability Zone, and the reservation must cover it.
+    #
+    #   Constraints:
+    #
+    #   * The reservation must reserve capacity for the DB instance class and
+    #     the database engine of the DB instance.
+    #
+    #   * If the reservation reserves capacity for a specific license model,
+    #     the license model of the DB instance must match it.
+    #
+    #   * The reservation must be in the `active` state, and it must not be
+    #     past its end date.
+    #
+    #   * If you specify `AvailabilityZone`, it must be one of the
+    #     Availability Zones of the reservation.
+    #
+    #   * For a Multi-AZ DB instance, the reservation must cover two or more
+    #     Availability Zones. A Multi-AZ DB instance uses one unit of reserved
+    #     capacity in each of two Availability Zones. If the reservation
+    #     covers more than two Availability Zones, Amazon RDS chooses the two
+    #     that the DB instance uses.
+    #
+    #   * The reservation must have available capacity in each Availability
+    #     Zone that the DB instance uses.
+    #
+    #   * The DB subnet group must be in a VPC with default tenancy.
+    #
+    #   * The DB subnet group must cover each Availability Zone that the DB
+    #     instance uses.
+    #
     # @option params [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
@@ -30949,6 +32137,7 @@ module Aws::RDS
     #     network_type: "String",
     #     manage_master_user_password: false,
     #     master_user_secret_kms_key_id: "String",
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
@@ -31048,6 +32237,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -31161,6 +32351,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceFromS3 AWS API Documentation
     #
@@ -31806,6 +32997,44 @@ module Aws::RDS
     #
     #   [1]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
     #
+    # @option params [String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation to associate
+    #   with this DB instance. You can specify the identifier, which has the
+    #   prefix `dbcr-`, or the reservation name. When you specify this
+    #   parameter, the DB instance uses reserved capacity from the specified
+    #   reservation.
+    #
+    #   If you specify `AvailabilityZone`, Amazon RDS places the DB instance
+    #   in that Availability Zone, and the reservation must cover it.
+    #
+    #   Constraints:
+    #
+    #   * The reservation must reserve capacity for the DB instance class and
+    #     the database engine of the DB instance.
+    #
+    #   * If the reservation reserves capacity for a specific license model,
+    #     the license model of the DB instance must match it.
+    #
+    #   * The reservation must be in the `active` state, and it must not be
+    #     past its end date.
+    #
+    #   * If you specify `AvailabilityZone`, it must be one of the
+    #     Availability Zones of the reservation.
+    #
+    #   * For a Multi-AZ DB instance, the reservation must cover two or more
+    #     Availability Zones. A Multi-AZ DB instance uses one unit of reserved
+    #     capacity in each of two Availability Zones. If the reservation
+    #     covers more than two Availability Zones, Amazon RDS chooses the two
+    #     that the DB instance uses.
+    #
+    #   * The reservation must have available capacity in each Availability
+    #     Zone that the DB instance uses.
+    #
+    #   * The DB subnet group must be in a VPC with default tenancy.
+    #
+    #   * The DB subnet group must cover each Availability Zone that the DB
+    #     instance uses.
+    #
     # @option params [Boolean] :dedicated_log_volume
     #   Specifies whether to enable a dedicated log volume (DLV) for the DB
     #   instance.
@@ -32074,6 +33303,7 @@ module Aws::RDS
     #     allocated_storage: 1,
     #     backup_retention_period: 1,
     #     preferred_backup_window: "String",
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier",
     #     dedicated_log_volume: false,
     #     ca_certificate_identifier: "String",
     #     engine_lifecycle_support: "String",
@@ -32175,6 +33405,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -32288,6 +33519,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/RestoreDBInstanceToPointInTime AWS API Documentation
     #
@@ -32727,6 +33959,41 @@ module Aws::RDS
     # @option params [required, String] :db_instance_identifier
     #   The user-supplied instance identifier.
     #
+    # @option params [String] :db_capacity_reservation_identifier
+    #   The identifier or the name of the DB capacity reservation for the DB
+    #   instance to use after it starts. You can specify the identifier, which
+    #   has the prefix `dbcr-`, or the reservation name.
+    #
+    #   Specify this parameter when the DB instance stopped using a
+    #   reservation, or when you want the DB instance to use a different
+    #   reservation.
+    #
+    #   If you omit this parameter, and the DB instance kept a DB capacity
+    #   reservation when it stopped, Amazon RDS starts the DB instance in that
+    #   reservation.
+    #
+    #   If that reservation is deleted, ended, or cancelled, the DB instance
+    #   still starts. Amazon RDS starts the DB instance outside the
+    #   reservation, on unreserved capacity, and it charges on-demand prices
+    #   for the DB instance.
+    #
+    #   If that reservation has no available capacity in the Availability Zone
+    #   of the DB instance, the request fails. Amazon RDS doesn't start the
+    #   DB instance, and it doesn't wait for capacity in that Availability
+    #   Zone. Specify a reservation that has available capacity in that
+    #   Availability Zone, or retry the request after the reservation has
+    #   available capacity.
+    #
+    #   Constraints:
+    #
+    #   * The reservation must be in the `active` state.
+    #
+    #   * The reservation must reserve capacity for the DB instance class and
+    #     the engine of the DB instance.
+    #
+    #   * The reservation must cover the Availability Zone of the DB instance,
+    #     and it must have available capacity in that Availability Zone.
+    #
     # @return [Types::StartDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -32751,6 +34018,7 @@ module Aws::RDS
     #
     #   resp = client.start_db_instance({
     #     db_instance_identifier: "String", # required
+    #     db_capacity_reservation_identifier: "DBCapacityReservationIdentifier",
     #   })
     #
     # @example Response structure
@@ -32826,6 +34094,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -32939,6 +34208,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StartDBInstance AWS API Documentation
     #
@@ -33617,6 +34887,31 @@ module Aws::RDS
     #   The user-supplied instance identifier of the DB Snapshot created
     #   immediately before the DB instance is stopped.
     #
+    # @option params [Boolean] :detach_from_db_capacity_reservation
+    #   Specifies whether the DB instance stops using its DB capacity
+    #   reservation when the DB instance stops. When you specify `true`, the
+    #   DB instance belongs to no reservation after it stops, and a later
+    #   start launches it outside the reservation.
+    #
+    #   By default, a stopped DB instance keeps its DB capacity reservation,
+    #   and a later start returns the DB instance to the same reservation.
+    #
+    #   Every stop releases the unit of reserved capacity that the DB instance
+    #   holds, for either value of this parameter. Another DB instance can
+    #   then use that capacity. This parameter controls the reservation that
+    #   the DB instance belongs to, and it does not control the release of the
+    #   capacity.
+    #
+    #   If the DB instance uses no DB capacity reservation, this parameter has
+    #   no effect.
+    #
+    #   Amazon RDS holds no capacity for a stopped DB instance. When the
+    #   reservation has no available capacity in the Availability Zone of the
+    #   DB instance, a later start waits for capacity in that Availability
+    #   Zone. When the DB instance belongs to no reservation, a later start
+    #   can fail because the Amazon Web Services Region has insufficient
+    #   capacity for the DB instance class.
+    #
     # @return [Types::StopDBInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StopDBInstanceResult#db_instance #db_instance} => Types::DBInstance
@@ -33642,6 +34937,7 @@ module Aws::RDS
     #   resp = client.stop_db_instance({
     #     db_instance_identifier: "String", # required
     #     db_snapshot_identifier: "String",
+    #     detach_from_db_capacity_reservation: false,
     #   })
     #
     # @example Response structure
@@ -33717,6 +35013,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -33830,6 +35127,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/StopDBInstance AWS API Documentation
     #
@@ -34359,6 +35657,7 @@ module Aws::RDS
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].max_allocated_storage #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_throughput #=> Integer
     #   resp.db_instance.pending_modified_values.additional_storage_volumes[0].storage_type #=> String
+    #   resp.db_instance.pending_modified_values.db_capacity_reservation_identifier #=> String
     #   resp.db_instance.latest_restorable_time #=> Time
     #   resp.db_instance.multi_az #=> Boolean
     #   resp.db_instance.engine_version #=> String
@@ -34472,6 +35771,7 @@ module Aws::RDS
     #   resp.db_instance.storage_volume_status #=> String
     #   resp.db_instance.storage_operation_status #=> String
     #   resp.db_instance.storage_operation_percent_progress #=> Integer
+    #   resp.db_instance.db_capacity_reservation_identifier #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/SwitchoverReadReplica AWS API Documentation
     #
@@ -34500,7 +35800,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.323.0'
+      context[:gem_version] = '1.327.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

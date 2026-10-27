@@ -1,0 +1,33 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module EndUserMessaging
+    module Waiters
+
+      class BrandProfileActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    brand_profile_id: ::String
+                  ) -> Client::_GetBrandProfileResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetBrandProfileResponseSuccess
+      end
+
+      class JobSuccess
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    job_id: ::String
+                  ) -> Client::_GetJobResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetJobResponseSuccess
+      end
+    end
+  end
+end

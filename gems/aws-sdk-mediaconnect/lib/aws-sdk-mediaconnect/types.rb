@@ -626,6 +626,13 @@ module Aws::MediaConnect
     #     time when each frame is sent.
     #   @return [String]
     #
+    # @!attribute [rw] ndi_audio_reference_level
+    #   The audio reference level of the NDI receiver, in decibels relative
+    #   to full scale (dBFS). Common values are `-20` (NDI and SMPTE) and
+    #   `-18` (EBU). If you don't specify this field, MediaConnect uses
+    #   `-20`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AddOutputRequest AWS API Documentation
     #
     class AddOutputRequest < Struct.new(
@@ -650,7 +657,8 @@ module Aws::MediaConnect
       :output_tags,
       :router_integration_state,
       :router_integration_transit_encryption,
-      :ndi_output_timecode_source)
+      :ndi_output_timecode_source,
+      :ndi_audio_reference_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -678,6 +686,16 @@ module Aws::MediaConnect
     #
     class AutomaticEncryptionKeyConfiguration < Aws::EmptyStructure; end
 
+    # The configuration for automatic endpoint encryption. In this mode,
+    # MediaConnect determines the encryption key when the endpoint connects.
+    # This type does not require any additional settings.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/AutomaticEndpointEncryptionConfiguration AWS API Documentation
+    #
+    class AutomaticEndpointEncryptionConfiguration < Aws::EmptyStructure; end
+
     # This exception is thrown if the request contains a semantic error. The
     # precise meaning depends on the API, and is documented in the error
     # message.
@@ -689,6 +707,63 @@ module Aws::MediaConnect
     #
     class BadRequestException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An error for a destination endpoint that MediaConnect couldn't
+    # retrieve in a `BatchGetDestinationEndpoint` request.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint that
+    #   MediaConnect couldn't retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BatchGetDestinationEndpointError AWS API Documentation
+    #
+    class BatchGetDestinationEndpointError < Struct.new(
+      :arn,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arns
+    #   The Amazon Resource Names (ARNs) of one or more destination
+    #   endpoints to retrieve. You can specify from 1 to 20 ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BatchGetDestinationEndpointRequest AWS API Documentation
+    #
+    class BatchGetDestinationEndpointRequest < Struct.new(
+      :arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_endpoints
+    #   The destination endpoints that MediaConnect successfully retrieved.
+    #   @return [Array<Types::DestinationEndpoint>]
+    #
+    # @!attribute [rw] errors
+    #   The errors for any destination endpoints that MediaConnect couldn't
+    #   retrieve.
+    #   @return [Array<Types::BatchGetDestinationEndpointError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BatchGetDestinationEndpointResponse AWS API Documentation
+    #
+    class BatchGetDestinationEndpointResponse < Struct.new(
+      :destination_endpoints,
+      :errors)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -863,6 +938,63 @@ module Aws::MediaConnect
     #
     class BatchGetRouterOutputResponse < Struct.new(
       :router_outputs,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An error for a source endpoint that MediaConnect couldn't retrieve in
+    # a `BatchGetSourceEndpoint` request.
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source endpoint that
+    #   MediaConnect couldn't retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The error code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BatchGetSourceEndpointError AWS API Documentation
+    #
+    class BatchGetSourceEndpointError < Struct.new(
+      :arn,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arns
+    #   The Amazon Resource Names (ARNs) of one or more source endpoints to
+    #   retrieve. You can specify from 1 to 20 ARNs.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BatchGetSourceEndpointRequest AWS API Documentation
+    #
+    class BatchGetSourceEndpointRequest < Struct.new(
+      :arns)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_endpoints
+    #   The source endpoints that MediaConnect successfully retrieved.
+    #   @return [Array<Types::SourceEndpoint>]
+    #
+    # @!attribute [rw] errors
+    #   The errors for any source endpoints that MediaConnect couldn't
+    #   retrieve.
+    #   @return [Array<Types::BatchGetSourceEndpointError>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/BatchGetSourceEndpointResponse AWS API Documentation
+    #
+    class BatchGetSourceEndpointResponse < Struct.new(
+      :source_endpoints,
       :errors)
       SENSITIVE = []
       include Aws::Structure
@@ -1157,6 +1289,33 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The color signaling of the video stream.
+    #
+    # @!attribute [rw] colorimetry
+    #   The color primaries that the video stream uses (for example, `BT709`
+    #   or `BT2020`).
+    #   @return [String]
+    #
+    # @!attribute [rw] transfer_characteristics
+    #   The transfer characteristics that the video stream uses (for
+    #   example, `BT601`, `BT709`, `BT2100_PQ`, or `BT2100_HLG`).
+    #   @return [String]
+    #
+    # @!attribute [rw] matrix_coefficients
+    #   The YCbCr matrix coefficients that the video stream uses (for
+    #   example, `BT709` or `BT2020_NCL`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ColorInformation AWS API Documentation
+    #
+    class ColorInformation < Struct.new(
+      :colorimetry,
+      :transfer_characteristics,
+      :matrix_coefficients)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The requested operation would cause a conflict with the current state
     # of a service resource associated with the request. Resolve the
     # conflict before retrying this request.
@@ -1168,6 +1327,68 @@ module Aws::MediaConnect
     #
     class ConflictException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to
+    #   connect.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to connect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ConnectEndpointsRequest AWS API Documentation
+    #
+    class ConnectEndpointsRequest < Struct.new(
+      :destination_endpoint_arn,
+      :source_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the connected destination
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_endpoint_name
+    #   The name of the connected destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the connected source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_endpoint_name
+    #   The name of the connected source endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ConnectEndpointsResponse AWS API Documentation
+    #
+    class ConnectEndpointsResponse < Struct.new(
+      :destination_endpoint_arn,
+      :destination_endpoint_name,
+      :source_endpoint_arn,
+      :source_endpoint_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cross-account sharing details for an endpoint that another account
+    # shares with this account.
+    #
+    # @!attribute [rw] owner_account_id
+    #   The ID of the Amazon Web Services account that owns the shared
+    #   endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ConsumedResourceShareDetails AWS API Documentation
+    #
+    class ConsumedResourceShareDetails < Struct.new(
+      :owner_account_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1459,7 +1680,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The tier level for the router input.
+    #   The tier level for the router input. The tier sets the maximum
+    #   bitrate, in Mbps, for the router input. Valid values include the
+    #   following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] region_name
@@ -1597,7 +1833,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The tier level for the router output.
+    #   The tier level for the router output. The tier sets the maximum
+    #   bitrate, in Mbps, for the router output. Valid values include the
+    #   following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] region_name
@@ -1856,6 +2107,37 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to
+    #   deregister.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeregisterDestinationEndpointRequest AWS API Documentation
+    #
+    class DeregisterDestinationEndpointRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint that was
+    #   deregistered.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the destination endpoint that was deregistered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeregisterDestinationEndpointResponse AWS API Documentation
+    #
+    class DeregisterDestinationEndpointResponse < Struct.new(
+      :arn,
+      :name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] force
     #   Force the deregistration of an instance. Force will deregister an
     #   instance, even if there are bridges running on it.
@@ -1888,6 +2170,36 @@ module Aws::MediaConnect
     class DeregisterGatewayInstanceResponse < Struct.new(
       :gateway_instance_arn,
       :instance_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to deregister.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeregisterSourceEndpointRequest AWS API Documentation
+    #
+    class DeregisterSourceEndpointRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source endpoint that was
+    #   deregistered.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the source endpoint that was deregistered.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DeregisterSourceEndpointResponse AWS API Documentation
+    #
+    class DeregisterSourceEndpointResponse < Struct.new(
+      :arn,
+      :name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2189,6 +2501,440 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The details of a destination endpoint in MediaConnect, including its
+    # configuration, state, and connection details.
+    #
+    # @!attribute [rw] name
+    #   The name of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region in which the destination
+    #   endpoint is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which the destination endpoint is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which the destination endpoint is
+    #   located.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the destination endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the destination endpoint was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lifecycle_management
+    #   The entity that manages the lifecycle of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] messages
+    #   The status messages for the destination endpoint.
+    #   @return [Array<Types::DestinationEndpointMessage>]
+    #
+    # @!attribute [rw] destination_type
+    #   The type of the destination endpoint. Valid values include the
+    #   following:
+    #
+    #   * `STANDARD` – A destination endpoint that represents an external
+    #     destination over a standard protocol, such as RTP, RIST, or SRT.
+    #
+    #   * `ROUTER_INPUT` – A destination endpoint that represents a router
+    #     input.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration settings for the destination endpoint.
+    #   @return [Types::DestinationEndpointConfiguration]
+    #
+    # @!attribute [rw] resource_share_ownership
+    #   Indicates whether this account owns the destination endpoint or
+    #   consumes it from another account through RAM.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_details
+    #   The cross-account sharing details for an endpoint. Endpoints are
+    #   shared through Resource Access Manager (RAM). This is a union type,
+    #   so exactly one of its members is set: `owned` when this account owns
+    #   the endpoint and shares it with other accounts, or `consumed` when
+    #   this account consumes an endpoint that another account shares. To
+    #   change how an endpoint is shared, use RAM.
+    #   @return [Types::ResourceShareDetails]
+    #
+    # @!attribute [rw] registration_state
+    #   The registration state of the destination endpoint. Valid values
+    #   include the following:
+    #
+    #   * `REGISTERED` – The destination endpoint is registered and ready to
+    #     use.
+    #
+    #   * `REGISTERING` – MediaConnect is registering the destination
+    #     endpoint.
+    #
+    #   * `DEREGISTERING` – MediaConnect is deregistering the destination
+    #     endpoint.
+    #
+    #   * `REGISTRATION_FAILED` – MediaConnect couldn't register the
+    #     destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_details
+    #   The connection details for the destination endpoint.
+    #   @return [Types::DestinationEndpointConnectionDetails]
+    #
+    # @!attribute [rw] connection_state
+    #   The connection state of the destination endpoint. Valid values
+    #   include the following:
+    #
+    #   * `CONNECTED` – The destination endpoint is connected to a source
+    #     endpoint.
+    #
+    #   * `DISCONNECTED` – The destination endpoint isn't connected to a
+    #     source endpoint.
+    #
+    #   * `CONNECTING` – The destination endpoint is connecting to a source
+    #     endpoint.
+    #
+    #   * `DISCONNECTING` – The destination endpoint is disconnecting from a
+    #     source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_source
+    #   The Amazon Resource Name (ARN) of the source endpoint that is
+    #   connected to the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] decryption_type
+    #   The type of decryption used for the destination endpoint connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] decryption_configuration
+    #   The encryption settings for an endpoint connection. This is a union
+    #   type, so exactly one of its members is set: `secretsManager` when
+    #   you store the encryption key or passphrase in Secrets Manager, or
+    #   `automatic` when you let MediaConnect determine the encryption key
+    #   when the endpoint connects.
+    #   @return [Types::EndpointEncryptionConfiguration]
+    #
+    # @!attribute [rw] associated_resource_details
+    #   The details of the resource that is associated with the destination
+    #   endpoint.
+    #   @return [Types::DestinationEndpointAssociatedResourceDetails]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the destination endpoint. Each tag is a
+    #   key-value pair.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationEndpoint AWS API Documentation
+    #
+    class DestinationEndpoint < Struct.new(
+      :name,
+      :arn,
+      :id,
+      :description,
+      :region_name,
+      :availability_zone,
+      :availability_zone_id,
+      :created_at,
+      :updated_at,
+      :lifecycle_management,
+      :messages,
+      :destination_type,
+      :configuration,
+      :resource_share_ownership,
+      :resource_share_details,
+      :registration_state,
+      :connection_details,
+      :connection_state,
+      :connected_source,
+      :decryption_type,
+      :decryption_configuration,
+      :associated_resource_details,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the resource that is associated with a destination
+    # endpoint. This is a union type, so exactly one of its members is set,
+    # depending on the type of the destination endpoint.
+    #
+    # @note DestinationEndpointAssociatedResourceDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DestinationEndpointAssociatedResourceDetails corresponding to the set member.
+    #
+    # @!attribute [rw] standard
+    #   The associated resource details for a standard destination endpoint.
+    #   @return [Types::StandardDestinationEndpointAssociatedResourceDetails]
+    #
+    # @!attribute [rw] router_input
+    #   The associated resource details for a destination endpoint that
+    #   represents a router input.
+    #   @return [Types::RouterInputDestinationEndpointAssociatedResourceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationEndpointAssociatedResourceDetails AWS API Documentation
+    #
+    class DestinationEndpointAssociatedResourceDetails < Struct.new(
+      :standard,
+      :router_input,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Standard < DestinationEndpointAssociatedResourceDetails; end
+      class RouterInput < DestinationEndpointAssociatedResourceDetails; end
+      class Unknown < DestinationEndpointAssociatedResourceDetails; end
+    end
+
+    # The configuration settings for a destination endpoint. This is a union
+    # type, so exactly one of its members is set, depending on the type of
+    # the destination endpoint.
+    #
+    # @note DestinationEndpointConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DestinationEndpointConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DestinationEndpointConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] standard
+    #   The configuration settings for a standard destination endpoint,
+    #   which represents an external destination.
+    #   @return [Types::StandardDestinationEndpointConfiguration]
+    #
+    # @!attribute [rw] router_input
+    #   The configuration settings for a destination endpoint that
+    #   represents a router input.
+    #   @return [Types::RouterInputDestinationEndpointConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationEndpointConfiguration AWS API Documentation
+    #
+    class DestinationEndpointConfiguration < Struct.new(
+      :standard,
+      :router_input,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Standard < DestinationEndpointConfiguration; end
+      class RouterInput < DestinationEndpointConfiguration; end
+      class Unknown < DestinationEndpointConfiguration; end
+    end
+
+    # The connection details for a destination endpoint. After the
+    # destination endpoint connects to a source endpoint, MediaConnect
+    # populates these details to describe the connected source. This is a
+    # union type, so exactly one of its members is set, depending on the
+    # destination endpoint type.
+    #
+    # @note DestinationEndpointConnectionDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DestinationEndpointConnectionDetails corresponding to the set member.
+    #
+    # @!attribute [rw] standard
+    #   The connection details for a standard destination endpoint.
+    #   @return [Types::StandardDestinationEndpointConnectionDetails]
+    #
+    # @!attribute [rw] router_input
+    #   The connection details for a destination endpoint that represents a
+    #   router input.
+    #   @return [Types::RouterInputDestinationEndpointConnectionDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationEndpointConnectionDetails AWS API Documentation
+    #
+    class DestinationEndpointConnectionDetails < Struct.new(
+      :standard,
+      :router_input,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Standard < DestinationEndpointConnectionDetails; end
+      class RouterInput < DestinationEndpointConnectionDetails; end
+      class Unknown < DestinationEndpointConnectionDetails; end
+    end
+
+    # A filter to apply when listing destination endpoints. This is a union
+    # type, so exactly one of its members is set.
+    #
+    # @note DestinationEndpointFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] region_names
+    #   Filters the results to destination endpoints in the specified Amazon
+    #   Web Services Regions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] destination_types
+    #   Filters the results to destination endpoints of the specified types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name_contains
+    #   Filters the results to destination endpoints whose names contain the
+    #   specified strings.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationEndpointFilter AWS API Documentation
+    #
+    class DestinationEndpointFilter < Struct.new(
+      :region_names,
+      :destination_types,
+      :name_contains,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RegionNames < DestinationEndpointFilter; end
+      class DestinationTypes < DestinationEndpointFilter; end
+      class NameContains < DestinationEndpointFilter; end
+      class Unknown < DestinationEndpointFilter; end
+    end
+
+    # A status message for a destination endpoint.
+    #
+    # @!attribute [rw] code
+    #   The message code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message text.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationEndpointMessage AWS API Documentation
+    #
+    class DestinationEndpointMessage < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for a router input that is represented by a
+    # destination endpoint.
+    #
+    # @!attribute [rw] endpoint_lifecycle_management
+    #   The entity that manages the lifecycle of the associated destination
+    #   endpoint. Valid values include the following:
+    #
+    #   * `MANAGED` – MediaConnect manages the lifecycle of the associated
+    #     destination endpoint.
+    #
+    #   * `UNMANAGED` – You manage the lifecycle of the associated
+    #     destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_transit_decryption_type
+    #   The type of transit decryption applied to the source content that
+    #   this router input receives. Valid values include the following:
+    #
+    #   * `SECRETS_MANAGER` – The decryption key or passphrase is stored in
+    #     Secrets Manager.
+    #
+    #   * `AUTOMATIC` – MediaConnect determines the decryption key when the
+    #     endpoint connects.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_transit_decryption
+    #   The encryption settings for an endpoint connection. This is a union
+    #   type, so exactly one of its members is set: `secretsManager` when
+    #   you store the encryption key or passphrase in Secrets Manager, or
+    #   `automatic` when you let MediaConnect determine the encryption key
+    #   when the endpoint connects.
+    #   @return [Types::EndpointEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationEndpointRouterInputConfiguration AWS API Documentation
+    #
+    class DestinationEndpointRouterInputConfiguration < Struct.new(
+      :endpoint_lifecycle_management,
+      :source_transit_decryption_type,
+      :source_transit_decryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration details for a router input stream that is represented by
+    # a destination endpoint.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationEndpointRouterInputStreamDetails AWS API Documentation
+    #
+    class DestinationEndpointRouterInputStreamDetails < Aws::EmptyStructure; end
+
+    # The request would cause you to exceed a service quota for destination
+    # endpoints. Delete unused destination endpoints or request a quota
+    # increase, then try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DestinationEndpointServiceQuotaExceededException AWS API Documentation
+    #
+    class DestinationEndpointServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to
+    #   disconnect.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to disconnect.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DisconnectEndpointsRequest AWS API Documentation
+    #
+    class DisconnectEndpointsRequest < Struct.new(
+      :destination_endpoint_arn,
+      :source_endpoint_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the disconnected destination
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_endpoint_name
+    #   The name of the disconnected destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_endpoint_arn
+    #   The Amazon Resource Name (ARN) of the disconnected source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_endpoint_name
+    #   The name of the disconnected source endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/DisconnectEndpointsResponse AWS API Documentation
+    #
+    class DisconnectEndpointsResponse < Struct.new(
+      :destination_endpoint_arn,
+      :destination_endpoint_name,
+      :source_endpoint_arn,
+      :source_endpoint_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Create a bridge with the egress bridge type. An egress bridge is a
     # cloud-to-ground bridge. The content comes from an existing
     # MediaConnect flow and is delivered to your premises.
@@ -2366,6 +3112,61 @@ module Aws::MediaConnect
       :role_arn,
       :secret_arn,
       :url)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The encryption settings for an endpoint connection. This is a union
+    # type, so exactly one of its members is set: `secretsManager` when you
+    # store the encryption key or passphrase in Secrets Manager, or
+    # `automatic` when you let MediaConnect determine the encryption key
+    # when the endpoint connects.
+    #
+    # @note EndpointEncryptionConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note EndpointEncryptionConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of EndpointEncryptionConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] secrets_manager
+    #   The encryption configuration for a connection that uses a key or
+    #   passphrase that you store in Secrets Manager.
+    #   @return [Types::SecretsManagerEndpointEncryptionConfiguration]
+    #
+    # @!attribute [rw] automatic
+    #   The configuration for automatic encryption, where MediaConnect
+    #   determines the encryption key when the endpoint connects.
+    #   @return [Types::AutomaticEndpointEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/EndpointEncryptionConfiguration AWS API Documentation
+    #
+    class EndpointEncryptionConfiguration < Struct.new(
+      :secrets_manager,
+      :automatic,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class SecretsManager < EndpointEncryptionConfiguration; end
+      class Automatic < EndpointEncryptionConfiguration; end
+      class Unknown < EndpointEncryptionConfiguration; end
+    end
+
+    # The configuration for the Secrets Manager secret that holds the key or
+    # passphrase used to encrypt an endpoint connection.
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN of the Secrets Manager secret that holds the key or
+    #   passphrase. The secret must be encrypted with a customer managed
+    #   Amazon Web Services KMS key that is enabled and symmetric; it cannot
+    #   use the Amazon Web Services managed key `aws/secretsmanager`. The
+    #   secret must be in the same Amazon Web Services account and Region as
+    #   the endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/EndpointEncryptionSecretConfiguration AWS API Documentation
+    #
+    class EndpointEncryptionSecretConfiguration < Struct.new(
+      :secret_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3067,6 +3868,31 @@ module Aws::MediaConnect
     end
 
     # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetDestinationEndpointRequest AWS API Documentation
+    #
+    class GetDestinationEndpointRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_endpoint
+    #   The details of the destination endpoint.
+    #   @return [Types::DestinationEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetDestinationEndpointResponse AWS API Documentation
+    #
+    class GetDestinationEndpointResponse < Struct.new(
+      :destination_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the router input to retrieve
     #   information about.
     #   @return [String]
@@ -3213,6 +4039,30 @@ module Aws::MediaConnect
     #
     class GetRouterOutputResponse < Struct.new(
       :router_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetSourceEndpointRequest AWS API Documentation
+    #
+    class GetSourceEndpointRequest < Struct.new(
+      :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_endpoint
+    #   The details of the source endpoint.
+    #   @return [Types::SourceEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/GetSourceEndpointResponse AWS API Documentation
+    #
+    class GetSourceEndpointResponse < Struct.new(
+      :source_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3498,6 +4348,50 @@ module Aws::MediaConnect
     #
     class ListBridgesResponse < Struct.new(
       :bridges,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single request. The
+    #   valid range is 1 to 100. If you don't specify a value, the service
+    #   returns up to 100 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies the next page of results to return. Use
+    #   the token that a previous request returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the list of destination endpoints.
+    #   @return [Array<Types::DestinationEndpointFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListDestinationEndpointsRequest AWS API Documentation
+    #
+    class ListDestinationEndpointsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_endpoints
+    #   The destination endpoints that match the request.
+    #   @return [Array<Types::ListedDestinationEndpoint>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use in the next request to retrieve the next page of
+    #   results. This value is null when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListDestinationEndpointsResponse AWS API Documentation
+    #
+    class ListDestinationEndpointsResponse < Struct.new(
+      :destination_endpoints,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -3965,6 +4859,50 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single request. The
+    #   valid range is 1 to 100. If you don't specify a value, the service
+    #   returns up to 100 results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies the next page of results to return. Use
+    #   the token that a previous request returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the list of source endpoints.
+    #   @return [Array<Types::SourceEndpointFilter>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListSourceEndpointsRequest AWS API Documentation
+    #
+    class ListSourceEndpointsRequest < Struct.new(
+      :max_results,
+      :next_token,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_endpoints
+    #   The source endpoints that match the request.
+    #   @return [Array<Types::ListedSourceEndpoint>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to use in the next request to retrieve the next page of
+    #   results. This value is null when there are no more results to
+    #   return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListSourceEndpointsResponse AWS API Documentation
+    #
+    class ListSourceEndpointsResponse < Struct.new(
+      :source_endpoints,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) of the global resource whose tags you
     #   want to list.
@@ -4047,6 +4985,144 @@ module Aws::MediaConnect
       :bridge_type,
       :name,
       :placement_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a destination endpoint that the
+    # `ListDestinationEndpoints` operation returns.
+    #
+    # @!attribute [rw] name
+    #   The name of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_type
+    #   The type of the destination endpoint. Valid values include the
+    #   following:
+    #
+    #   * `STANDARD` – A destination endpoint that represents an external
+    #     destination over a standard protocol, such as RTP, RIST, or SRT.
+    #
+    #   * `ROUTER_INPUT` – A destination endpoint that represents a router
+    #     input.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region in which the destination
+    #   endpoint is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which the destination endpoint is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which the destination endpoint is
+    #   located.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the destination endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the destination endpoint was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lifecycle_management
+    #   The entity that manages the lifecycle of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_count
+    #   The number of status messages for the destination endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_share_ownership
+    #   Indicates whether this account owns the destination endpoint or
+    #   consumes it from another account through RAM.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_state
+    #   The sharing state of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_state
+    #   The registration state of the destination endpoint. Valid values
+    #   include the following:
+    #
+    #   * `REGISTERED` – The destination endpoint is registered and ready to
+    #     use.
+    #
+    #   * `REGISTERING` – MediaConnect is registering the destination
+    #     endpoint.
+    #
+    #   * `DEREGISTERING` – MediaConnect is deregistering the destination
+    #     endpoint.
+    #
+    #   * `REGISTRATION_FAILED` – MediaConnect couldn't register the
+    #     destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   The connection state of the destination endpoint. Valid values
+    #   include the following:
+    #
+    #   * `CONNECTED` – The destination endpoint is connected to a source
+    #     endpoint.
+    #
+    #   * `DISCONNECTED` – The destination endpoint isn't connected to a
+    #     source endpoint.
+    #
+    #   * `CONNECTING` – The destination endpoint is connecting to a source
+    #     endpoint.
+    #
+    #   * `DISCONNECTING` – The destination endpoint is disconnecting from a
+    #     source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] decryption_type
+    #   The type of decryption used for the destination endpoint connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_source
+    #   The Amazon Resource Name (ARN) of the source endpoint that is
+    #   connected to the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that is associated
+    #   with the destination endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListedDestinationEndpoint AWS API Documentation
+    #
+    class ListedDestinationEndpoint < Struct.new(
+      :name,
+      :arn,
+      :id,
+      :destination_type,
+      :region_name,
+      :availability_zone,
+      :availability_zone_id,
+      :created_at,
+      :updated_at,
+      :lifecycle_management,
+      :message_count,
+      :resource_share_ownership,
+      :resource_share_state,
+      :registration_state,
+      :connection_state,
+      :decryption_type,
+      :connected_source,
+      :associated_resource_arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4436,6 +5512,141 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # A summary of a source endpoint that the `ListSourceEndpoints`
+    # operation returns.
+    #
+    # @!attribute [rw] name
+    #   The name of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_type
+    #   The type of the source endpoint. Valid values include the following:
+    #
+    #   * `STANDARD` – A source endpoint that represents an external source
+    #     over a standard protocol, such as RTP, RIST, or SRT.
+    #
+    #   * `ROUTER_OUTPUT` – A source endpoint that represents a router
+    #     output.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region in which the source
+    #   endpoint is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which the source endpoint is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which the source endpoint is
+    #   located.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the source endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the source endpoint was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lifecycle_management
+    #   The entity that manages the lifecycle of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] message_count
+    #   The number of status messages for the source endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] resource_share_ownership
+    #   Indicates whether this account owns the source endpoint or consumes
+    #   it from another account through RAM.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_state
+    #   The sharing state of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_state
+    #   The registration state of the source endpoint. Valid values include
+    #   the following:
+    #
+    #   * `REGISTERED` – The source endpoint is registered and ready to use.
+    #
+    #   * `REGISTERING` – MediaConnect is registering the source endpoint.
+    #
+    #   * `DEREGISTERING` – MediaConnect is deregistering the source
+    #     endpoint.
+    #
+    #   * `REGISTRATION_FAILED` – MediaConnect couldn't register the source
+    #     endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   The connection state of the source endpoint. Valid values include
+    #   the following:
+    #
+    #   * `CONNECTED` – The source endpoint is connected to a destination
+    #     endpoint.
+    #
+    #   * `DISCONNECTED` – The source endpoint isn't connected to a
+    #     destination endpoint.
+    #
+    #   * `CONNECTING` – The source endpoint is connecting to a destination
+    #     endpoint.
+    #
+    #   * `DISCONNECTING` – The source endpoint is disconnecting from a
+    #     destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of encryption used for the source endpoint connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] connected_destination_count
+    #   The number of destination endpoints that are connected to the source
+    #   endpoint.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] associated_resource_arn
+    #   The Amazon Resource Name (ARN) of the resource that is associated
+    #   with the source endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ListedSourceEndpoint AWS API Documentation
+    #
+    class ListedSourceEndpoint < Struct.new(
+      :name,
+      :arn,
+      :id,
+      :source_type,
+      :region_name,
+      :availability_zone,
+      :availability_zone_id,
+      :created_at,
+      :updated_at,
+      :lifecycle_management,
+      :message_count,
+      :resource_share_ownership,
+      :resource_share_state,
+      :registration_state,
+      :connection_state,
+      :encryption_type,
+      :connected_destination_count,
+      :associated_resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The maintenance setting of a flow.
     #
     # @!attribute [rw] maintenance_day
@@ -4522,6 +5733,16 @@ module Aws::MediaConnect
 
     # Configuration settings for connecting a router input to a flow output.
     #
+    # To connect the router input to the flow output, provide both `flowArn`
+    # and `flowOutputArn`. To disconnect it, call the update operation and
+    # omit both fields while keeping this configuration object.
+    #
+    # <note markdown="1"> You can't change `sourceTransitDecryption` while the router input is
+    # connected to a flow output. To change it, first disconnect the router
+    # input, then update the decryption.
+    #
+    #  </note>
+    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow to connect to.
     #   @return [String]
@@ -4555,6 +5776,17 @@ module Aws::MediaConnect
     # Configuration settings for connecting a router output to a
     # MediaConnect flow source.
     #
+    # To connect the router output to the flow source, provide both
+    # `flowArn` and `flowSourceArn`. To disconnect it, call the update
+    # operation and omit both fields while keeping this configuration
+    # object.
+    #
+    # <note markdown="1"> You can't change `destinationTransitEncryption` while the router
+    # output is connected to a flow source. To change it, first disconnect
+    # the router output, then update the encryption.
+    #
+    #  </note>
+    #
     # @!attribute [rw] flow_arn
     #   The ARN of the flow to connect to this router output.
     #   @return [String]
@@ -4587,6 +5819,18 @@ module Aws::MediaConnect
 
     # Configuration settings for connecting a router input to a MediaLive
     # channel output.
+    #
+    # To connect the router input to the MediaLive channel output, provide
+    # all three of `mediaLiveChannelArn`, `mediaLivePipelineId`, and
+    # `mediaLiveChannelOutputName`. To disconnect it, call the update
+    # operation and omit all three fields while keeping this configuration
+    # object.
+    #
+    # <note markdown="1"> You can't change `sourceTransitDecryption` while the router input is
+    # connected to a MediaLive channel output. To change it, first
+    # disconnect the router input, then update the decryption.
+    #
+    #  </note>
     #
     # @!attribute [rw] media_live_channel_arn
     #   The ARN of the MediaLive channel to connect to this router input.
@@ -4628,6 +5872,17 @@ module Aws::MediaConnect
 
     # Configuration settings for connecting a router output to a MediaLive
     # input.
+    #
+    # To connect the router output to the MediaLive input, provide both
+    # `mediaLiveInputArn` and `mediaLivePipelineId`. To disconnect it, call
+    # the update operation and omit both fields while keeping this
+    # configuration object.
+    #
+    # <note markdown="1"> You can't change `destinationTransitEncryption` while the router
+    # output is connected to a MediaLive input. To change it, first
+    # disconnect the router output, then update the encryption.
+    #
+    #  </note>
     #
     # @!attribute [rw] media_live_input_arn
     #   The ARN of the MediaLive input to connect to this router output.
@@ -5223,6 +6478,11 @@ module Aws::MediaConnect
     #   is `Video`.
     #   @return [String]
     #
+    # @!attribute [rw] color
+    #   The color signaling of the video stream. Used when the `streamType`
+    #   is `Video`.
+    #   @return [Types::ColorInformation]
+    #
     # @!attribute [rw] frame_resolution
     #   The width and height dimensions of the video frame in pixels. Used
     #   when the `streamType` is `Video`.
@@ -5250,6 +6510,7 @@ module Aws::MediaConnect
       :codec,
       :stream_id,
       :scan_mode,
+      :color,
       :frame_resolution,
       :frame_rate,
       :channels,
@@ -5311,16 +6572,29 @@ module Aws::MediaConnect
     # The settings for the NDI® source. This includes the exact name of the
     # upstream NDI sender that you want to connect to your source.
     #
+    # <note markdown="1"> When you update the NDI source, include only the members you want to
+    # change. MediaConnect leaves the members that you don't specify
+    # unchanged.
+    #
+    #  </note>
+    #
     # @!attribute [rw] source_name
     #   The exact name of an existing NDI sender that's registered with
     #   your discovery server. If included, the format of this name must be
     #   `MACHINENAME (ProgramName)`.
     #   @return [String]
     #
+    # @!attribute [rw] audio_reference_level
+    #   The audio reference level of the NDI sender, in decibels relative to
+    #   full scale (dBFS). Common values are `-20` (NDI and SMPTE) and `-18`
+    #   (EBU). If you don't specify this field, MediaConnect uses `-20`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/NdiSourceSettings AWS API Documentation
     #
     class NdiSourceSettings < Struct.new(
-      :source_name)
+      :source_name,
+      :audio_reference_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5535,6 +6809,26 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The cross-account sharing details for an endpoint that this account
+    # owns and shares with other accounts.
+    #
+    # @!attribute [rw] share_state
+    #   The sharing state of the endpoint. Valid values include the
+    #   following:
+    #
+    #   * `SHARED` – The endpoint is shared with one or more accounts.
+    #
+    #   * `UNSHARED` – The endpoint is not shared with other accounts.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/OwnedResourceShareDetails AWS API Documentation
+    #
+    class OwnedResourceShareDetails < Struct.new(
+      :share_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for preferred day and time maintenance settings.
     #
     # @!attribute [rw] day
@@ -5550,6 +6844,38 @@ module Aws::MediaConnect
     class PreferredDayTimeMaintenanceConfiguration < Struct.new(
       :day,
       :time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The networking configuration for a publicly accessible destination
+    # endpoint, including the CIDR blocks that are allowed to connect.
+    #
+    # @!attribute [rw] destination_allow_rules
+    #   The rules that specify which CIDR blocks can connect to the
+    #   destination endpoint. You can specify up to 10 rules.
+    #   @return [Array<Types::PublicDestinationEndpointNetworkingConfigurationAllowRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PublicDestinationEndpointNetworkingConfiguration AWS API Documentation
+    #
+    class PublicDestinationEndpointNetworkingConfiguration < Struct.new(
+      :destination_allow_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule that allows a specific CIDR block to connect to the public
+    # destination endpoint.
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR block that is allowed to connect to the destination
+    #   endpoint, in CIDR notation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PublicDestinationEndpointNetworkingConfigurationAllowRule AWS API Documentation
+    #
+    class PublicDestinationEndpointNetworkingConfigurationAllowRule < Struct.new(
+      :cidr)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5585,6 +6911,48 @@ module Aws::MediaConnect
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # The networking configuration for a publicly accessible source
+    # endpoint, including the CIDR blocks that are allowed to connect.
+    #
+    # @!attribute [rw] source_allow_rules
+    #   The rules that specify which CIDR blocks can connect to the source
+    #   endpoint. You can specify up to 10 rules.
+    #   @return [Array<Types::PublicSourceEndpointNetworkingConfigurationAllowRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PublicSourceEndpointNetworkingConfiguration AWS API Documentation
+    #
+    class PublicSourceEndpointNetworkingConfiguration < Struct.new(
+      :source_allow_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A rule that allows a specific CIDR block to connect to the public
+    # source endpoint.
+    #
+    # @!attribute [rw] cidr
+    #   The CIDR block that is allowed to connect to the source endpoint, in
+    #   CIDR notation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PublicSourceEndpointNetworkingConfigurationAllowRule AWS API Documentation
+    #
+    class PublicSourceEndpointNetworkingConfigurationAllowRule < Struct.new(
+      :cidr)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The TLS encryption configuration for destinations that present a
+    # certificate from a publicly trusted certificate authority. This type
+    # does not require any additional settings.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/PublicTlsEncryptionConfiguration AWS API Documentation
+    #
+    class PublicTlsEncryptionConfiguration < Aws::EmptyStructure; end
 
     # @!attribute [rw] offering_arn
     #   The Amazon Resource Name (ARN) of the offering.
@@ -5625,6 +6993,111 @@ module Aws::MediaConnect
     #
     class PurchaseOfferingResponse < Struct.new(
       :reservation)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] description
+    #   A description to help you identify the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration settings for the destination endpoint.
+    #   @return [Types::DestinationEndpointConfiguration]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region in which to register the
+    #   destination endpoint. Defaults to the current region if not
+    #   specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the destination endpoint. Each tag is a
+    #   key-value pair.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RegisterDestinationEndpointRequest AWS API Documentation
+    #
+    class RegisterDestinationEndpointRequest < Struct.new(
+      :description,
+      :configuration,
+      :region_name,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_endpoint
+    #   The details of the destination endpoint that was registered.
+    #   @return [Types::DestinationEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RegisterDestinationEndpointResponse AWS API Documentation
+    #
+    class RegisterDestinationEndpointResponse < Struct.new(
+      :destination_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region in which to register the
+    #   source endpoint. Defaults to the current region if not specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description to help you identify the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration settings for the source endpoint.
+    #   @return [Types::SourceEndpointConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags to apply to the source endpoint. Each tag is a key-value
+    #   pair.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If this token matches a previous
+    #   request, the service ignores the request, but does not return an
+    #   error.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RegisterSourceEndpointRequest AWS API Documentation
+    #
+    class RegisterSourceEndpointRequest < Struct.new(
+      :region_name,
+      :description,
+      :configuration,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_endpoint
+    #   The details of the source endpoint that was registered.
+    #   @return [Types::SourceEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RegisterSourceEndpointResponse AWS API Documentation
+    #
+    class RegisterSourceEndpointResponse < Struct.new(
+      :source_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5941,6 +7414,40 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The cross-account sharing details for an endpoint. Endpoints are
+    # shared through Resource Access Manager (RAM). This is a union type, so
+    # exactly one of its members is set: `owned` when this account owns the
+    # endpoint and shares it with other accounts, or `consumed` when this
+    # account consumes an endpoint that another account shares. To change
+    # how an endpoint is shared, use RAM.
+    #
+    # @note ResourceShareDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ResourceShareDetails corresponding to the set member.
+    #
+    # @!attribute [rw] owned
+    #   The sharing details for an endpoint that this account owns and
+    #   shares with other accounts through RAM.
+    #   @return [Types::OwnedResourceShareDetails]
+    #
+    # @!attribute [rw] consumed
+    #   The sharing details for an endpoint that another account shares with
+    #   this account through RAM.
+    #   @return [Types::ConsumedResourceShareDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/ResourceShareDetails AWS API Documentation
+    #
+    class ResourceShareDetails < Struct.new(
+      :owned,
+      :consumed,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Owned < ResourceShareDetails; end
+      class Consumed < ResourceShareDetails; end
+      class Unknown < ResourceShareDetails; end
+    end
+
     # A definition of what is being billed for, including the type and
     # amount.
     #
@@ -6112,6 +7619,49 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The configuration settings for a destination endpoint that uses the
+    # RIST protocol.
+    #
+    # @!attribute [rw] destination_address
+    #   The IP address on which the destination endpoint receives content.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_ingest_port
+    #   The port on which the destination endpoint receives content. The
+    #   valid range is 1024 to 65531.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RistStandardDestinationEndpointConfiguration AWS API Documentation
+    #
+    class RistStandardDestinationEndpointConfiguration < Struct.new(
+      :destination_address,
+      :destination_ingest_port)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for a source endpoint that uses the RIST
+    # protocol.
+    #
+    # @!attribute [rw] destination_ingest_port
+    #   The port on the destination that receives the content. The valid
+    #   range is 3000 to 30000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] recovery_latency_milliseconds
+    #   The amount of time, in milliseconds, that the source endpoint allows
+    #   for recovering lost packets. The valid range is 10 to 10000.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RistStandardSourceEndpointConfiguration AWS API Documentation
+    #
+    class RistStandardSourceEndpointConfiguration < Struct.new(
+      :destination_ingest_port,
+      :recovery_latency_milliseconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The content quality analysis configuration for the router input.
     #
     # The content quality analysis feature only monitors the first video
@@ -6189,7 +7739,22 @@ module Aws::MediaConnect
     #   @return [Integer]
     #
     # @!attribute [rw] tier
-    #   The tier level of the router input.
+    #   The tier level for the router input. The tier sets the maximum
+    #   bitrate, in Mbps, for the router input. Valid values include the
+    #   following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] routing_scope
@@ -6251,6 +7816,11 @@ module Aws::MediaConnect
     #   The content quality analysis configuration for the router input.
     #   @return [Types::RouterContentQualityAnalysisConfiguration]
     #
+    # @!attribute [rw] associated_destination_endpoint_arns
+    #   The Amazon Resource Names (ARNs) of one or more destination
+    #   endpoints that are associated with this router input.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInput AWS API Documentation
     #
     class RouterInput < Struct.new(
@@ -6279,7 +7849,8 @@ module Aws::MediaConnect
       :maintenance_schedule_type,
       :maintenance_schedule,
       :content_quality_analysis_type,
-      :content_quality_analysis_configuration)
+      :content_quality_analysis_configuration,
+      :associated_destination_endpoint_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6290,6 +7861,11 @@ module Aws::MediaConnect
     #
     # @note RouterInputConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RouterInputConfiguration corresponding to the set member.
     #
+    # @!attribute [rw] destination_endpoint
+    #   Configuration settings for a router input that is represented by a
+    #   destination endpoint.
+    #   @return [Types::DestinationEndpointRouterInputConfiguration]
+    #
     # @!attribute [rw] standard
     #   The configuration settings for a standard router input, including
     #   the protocol, protocol-specific configuration, network interface,
@@ -6299,6 +7875,18 @@ module Aws::MediaConnect
     # @!attribute [rw] media_live_channel
     #   Configuration settings for connecting a router input to a MediaLive
     #   channel output.
+    #
+    #   To connect the router input to the MediaLive channel output, provide
+    #   all three of `mediaLiveChannelArn`, `mediaLivePipelineId`, and
+    #   `mediaLiveChannelOutputName`. To disconnect it, call the update
+    #   operation and omit all three fields while keeping this configuration
+    #   object.
+    #
+    #   <note markdown="1"> You can't change `sourceTransitDecryption` while the router input
+    #   is connected to a MediaLive channel output. To change it, first
+    #   disconnect the router input, then update the decryption.
+    #
+    #    </note>
     #   @return [Types::MediaLiveChannelRouterInputConfiguration]
     #
     # @!attribute [rw] failover
@@ -6309,6 +7897,17 @@ module Aws::MediaConnect
     # @!attribute [rw] media_connect_flow
     #   Configuration settings for connecting a router input to a flow
     #   output.
+    #
+    #   To connect the router input to the flow output, provide both
+    #   `flowArn` and `flowOutputArn`. To disconnect it, call the update
+    #   operation and omit both fields while keeping this configuration
+    #   object.
+    #
+    #   <note markdown="1"> You can't change `sourceTransitDecryption` while the router input
+    #   is connected to a flow output. To change it, first disconnect the
+    #   router input, then update the decryption.
+    #
+    #    </note>
     #   @return [Types::MediaConnectFlowRouterInputConfiguration]
     #
     # @!attribute [rw] merge
@@ -6319,6 +7918,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputConfiguration AWS API Documentation
     #
     class RouterInputConfiguration < Struct.new(
+      :destination_endpoint,
       :standard,
       :media_live_channel,
       :failover,
@@ -6329,12 +7929,88 @@ module Aws::MediaConnect
       include Aws::Structure
       include Aws::Structure::Union
 
+      class DestinationEndpoint < RouterInputConfiguration; end
       class Standard < RouterInputConfiguration; end
       class MediaLiveChannel < RouterInputConfiguration; end
       class Failover < RouterInputConfiguration; end
       class MediaConnectFlow < RouterInputConfiguration; end
       class Merge < RouterInputConfiguration; end
       class Unknown < RouterInputConfiguration; end
+    end
+
+    # The details of the router input that is associated with a destination
+    # endpoint.
+    #
+    # @!attribute [rw] name
+    #   The name of the router input.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_bitrate
+    #   The maximum bitrate of the router input, in bits per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The state of the router input.
+    #   @return [String]
+    #
+    # @!attribute [rw] messages
+    #   The status messages for the router input.
+    #   @return [Array<Types::RouterInputMessage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputDestinationEndpointAssociatedResourceDetails AWS API Documentation
+    #
+    class RouterInputDestinationEndpointAssociatedResourceDetails < Struct.new(
+      :name,
+      :maximum_bitrate,
+      :state,
+      :messages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for a destination endpoint that represents
+    # a router input.
+    #
+    # @!attribute [rw] router_input_arn
+    #   The Amazon Resource Name (ARN) of the router input that the
+    #   destination endpoint represents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputDestinationEndpointConfiguration AWS API Documentation
+    #
+    class RouterInputDestinationEndpointConfiguration < Struct.new(
+      :router_input_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connection details for a destination endpoint that represents a
+    # router input.
+    #
+    # @!attribute [rw] source_encryption_type
+    #   The type of encryption that the source uses for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_encryption_configuration
+    #   The encryption settings for an endpoint connection. This is a union
+    #   type, so exactly one of its members is set: `secretsManager` when
+    #   you store the encryption key or passphrase in Secrets Manager, or
+    #   `automatic` when you let MediaConnect determine the encryption key
+    #   when the endpoint connects.
+    #   @return [Types::EndpointEncryptionConfiguration]
+    #
+    # @!attribute [rw] source_endpoint_type
+    #   The type of the connected source endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputDestinationEndpointConnectionDetails AWS API Documentation
+    #
+    class RouterInputDestinationEndpointConnectionDetails < Struct.new(
+      :source_encryption_type,
+      :source_encryption_configuration,
+      :source_endpoint_type)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # A filter that can be used to retrieve a list of router inputs.
@@ -6520,6 +8196,11 @@ module Aws::MediaConnect
     #
     # @note RouterInputStreamDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RouterInputStreamDetails corresponding to the set member.
     #
+    # @!attribute [rw] destination_endpoint
+    #   Configuration details for a router input stream that is represented
+    #   by a destination endpoint.
+    #   @return [Types::DestinationEndpointRouterInputStreamDetails]
+    #
     # @!attribute [rw] standard
     #   Configuration details for a standard router input stream type.
     #   @return [Types::StandardRouterInputStreamDetails]
@@ -6547,6 +8228,7 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterInputStreamDetails AWS API Documentation
     #
     class RouterInputStreamDetails < Struct.new(
+      :destination_endpoint,
       :standard,
       :media_live_channel,
       :failover,
@@ -6557,6 +8239,7 @@ module Aws::MediaConnect
       include Aws::Structure
       include Aws::Structure::Union
 
+      class DestinationEndpoint < RouterInputStreamDetails; end
       class Standard < RouterInputStreamDetails; end
       class MediaLiveChannel < RouterInputStreamDetails; end
       class Failover < RouterInputStreamDetails; end
@@ -6852,7 +8535,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The tier level of the router output.
+    #   The tier level for the router output. The tier sets the maximum
+    #   bitrate, in Mbps, for the router output. Valid values include the
+    #   following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] created_at
@@ -6909,6 +8607,11 @@ module Aws::MediaConnect
     #   The fabric configuration settings for the router output.
     #   @return [Types::FabricConfiguration]
     #
+    # @!attribute [rw] associated_source_endpoint_arns
+    #   The Amazon Resource Names (ARNs) of one or more source endpoints
+    #   that are associated with this router output.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutput AWS API Documentation
     #
     class RouterOutput < Struct.new(
@@ -6935,7 +8638,8 @@ module Aws::MediaConnect
       :maintenance_configuration,
       :maintenance_schedule_type,
       :maintenance_schedule,
-      :fabric_configuration)
+      :fabric_configuration,
+      :associated_source_endpoint_arns)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6955,12 +8659,39 @@ module Aws::MediaConnect
     # @!attribute [rw] media_connect_flow
     #   Configuration settings for connecting a router output to a
     #   MediaConnect flow source.
+    #
+    #   To connect the router output to the flow source, provide both
+    #   `flowArn` and `flowSourceArn`. To disconnect it, call the update
+    #   operation and omit both fields while keeping this configuration
+    #   object.
+    #
+    #   <note markdown="1"> You can't change `destinationTransitEncryption` while the router
+    #   output is connected to a flow source. To change it, first disconnect
+    #   the router output, then update the encryption.
+    #
+    #    </note>
     #   @return [Types::MediaConnectFlowRouterOutputConfiguration]
     #
     # @!attribute [rw] media_live_input
     #   Configuration settings for connecting a router output to a MediaLive
     #   input.
+    #
+    #   To connect the router output to the MediaLive input, provide both
+    #   `mediaLiveInputArn` and `mediaLivePipelineId`. To disconnect it,
+    #   call the update operation and omit both fields while keeping this
+    #   configuration object.
+    #
+    #   <note markdown="1"> You can't change `destinationTransitEncryption` while the router
+    #   output is connected to a MediaLive input. To change it, first
+    #   disconnect the router output, then update the encryption.
+    #
+    #    </note>
     #   @return [Types::MediaLiveInputRouterOutputConfiguration]
+    #
+    # @!attribute [rw] source_endpoint
+    #   Configuration settings for a router output that is represented by a
+    #   source endpoint.
+    #   @return [Types::SourceEndpointRouterOutputConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutputConfiguration AWS API Documentation
     #
@@ -6968,6 +8699,7 @@ module Aws::MediaConnect
       :standard,
       :media_connect_flow,
       :media_live_input,
+      :source_endpoint,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -6976,6 +8708,7 @@ module Aws::MediaConnect
       class Standard < RouterOutputConfiguration; end
       class MediaConnectFlow < RouterOutputConfiguration; end
       class MediaLiveInput < RouterOutputConfiguration; end
+      class SourceEndpoint < RouterOutputConfiguration; end
       class Unknown < RouterOutputConfiguration; end
     end
 
@@ -7069,6 +8802,15 @@ module Aws::MediaConnect
     #   minimum latency, and encryption key configuration.
     #   @return [Types::SrtListenerRouterOutputConfiguration]
     #
+    # @!attribute [rw] rtmp_push
+    #   The configuration settings for a router output that pushes a stream
+    #   to a destination using the RTMP (Real-Time Messaging Protocol)
+    #   protocol, or RTMPS (RTMP over TLS) when TLS encryption is specified.
+    #   These settings include the destination address and port, the
+    #   application and stream names, and optional TLS encryption
+    #   configuration.
+    #   @return [Types::RtmpPushRouterOutputConfiguration]
+    #
     # @!attribute [rw] srt_caller
     #   The configuration settings for a router output using the SRT (Secure
     #   Reliable Transport) protocol in caller mode, including the
@@ -7087,6 +8829,7 @@ module Aws::MediaConnect
     class RouterOutputProtocolConfiguration < Struct.new(
       :rist,
       :srt_listener,
+      :rtmp_push,
       :srt_caller,
       :rtp,
       :unknown)
@@ -7096,6 +8839,7 @@ module Aws::MediaConnect
 
       class Rist < RouterOutputProtocolConfiguration; end
       class SrtListener < RouterOutputProtocolConfiguration; end
+      class RtmpPush < RouterOutputProtocolConfiguration; end
       class SrtCaller < RouterOutputProtocolConfiguration; end
       class Rtp < RouterOutputProtocolConfiguration; end
       class Unknown < RouterOutputProtocolConfiguration; end
@@ -7111,6 +8855,81 @@ module Aws::MediaConnect
     #
     class RouterOutputServiceQuotaExceededException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the router output that is associated with a source
+    # endpoint.
+    #
+    # @!attribute [rw] name
+    #   The name of the router output.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum_bitrate
+    #   The maximum bitrate of the router output, in bits per second.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] state
+    #   The state of the router output.
+    #   @return [String]
+    #
+    # @!attribute [rw] messages
+    #   The status messages for the router output.
+    #   @return [Array<Types::RouterOutputMessage>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutputSourceEndpointAssociatedResourceDetails AWS API Documentation
+    #
+    class RouterOutputSourceEndpointAssociatedResourceDetails < Struct.new(
+      :name,
+      :maximum_bitrate,
+      :state,
+      :messages)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for a source endpoint that represents a
+    # router output.
+    #
+    # @!attribute [rw] router_output_arn
+    #   The Amazon Resource Name (ARN) of the router output that the source
+    #   endpoint represents.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutputSourceEndpointConfiguration AWS API Documentation
+    #
+    class RouterOutputSourceEndpointConfiguration < Struct.new(
+      :router_output_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connection details for a source endpoint that represents a router
+    # output.
+    #
+    # @!attribute [rw] destination_decryption_type
+    #   The type of decryption that the destination uses for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_decryption_configuration
+    #   The encryption settings for an endpoint connection. This is a union
+    #   type, so exactly one of its members is set: `secretsManager` when
+    #   you store the encryption key or passphrase in Secrets Manager, or
+    #   `automatic` when you let MediaConnect determine the encryption key
+    #   when the endpoint connects.
+    #   @return [Types::EndpointEncryptionConfiguration]
+    #
+    # @!attribute [rw] destination_endpoint_type
+    #   The type of the connected destination endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutputSourceEndpointConnectionDetails AWS API Documentation
+    #
+    class RouterOutputSourceEndpointConnectionDetails < Struct.new(
+      :destination_decryption_type,
+      :destination_decryption_configuration,
+      :destination_endpoint_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7137,12 +8956,18 @@ module Aws::MediaConnect
     #   output destination.
     #   @return [Types::MediaLiveInputRouterOutputStreamDetails]
     #
+    # @!attribute [rw] source_endpoint
+    #   Configuration details for a router output stream that is represented
+    #   by a source endpoint.
+    #   @return [Types::SourceEndpointRouterOutputStreamDetails]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RouterOutputStreamDetails AWS API Documentation
     #
     class RouterOutputStreamDetails < Struct.new(
       :standard,
       :media_connect_flow,
       :media_live_input,
+      :source_endpoint,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -7151,7 +8976,58 @@ module Aws::MediaConnect
       class Standard < RouterOutputStreamDetails; end
       class MediaConnectFlow < RouterOutputStreamDetails; end
       class MediaLiveInput < RouterOutputStreamDetails; end
+      class SourceEndpoint < RouterOutputStreamDetails; end
       class Unknown < RouterOutputStreamDetails; end
+    end
+
+    # The configuration settings for a router output that pushes a stream to
+    # a destination using the RTMP (Real-Time Messaging Protocol) protocol,
+    # or RTMPS (RTMP over TLS) when TLS encryption is specified. These
+    # settings include the destination address and port, the application and
+    # stream names, and optional TLS encryption configuration.
+    #
+    # @!attribute [rw] destination_address
+    #   The IP address or hostname of the destination RTMP server that the
+    #   router output pushes the stream to. Provide only the server address;
+    #   specify the application and stream names separately.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_port
+    #   The TCP port on the destination RTMP server. For RTMP, valid values
+    #   range from `1024` to `65535`. For RTMPS (RTMP over TLS), valid
+    #   values are `443` or `1024` to `65535`. RTMP typically uses port
+    #   `1935`, and RTMPS typically uses port `443`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] application_name
+    #   The name of the RTMP application on the destination server. Together
+    #   with the stream name, the application name forms the RTMP URL path,
+    #   in the pattern
+    #   `rtmp://destinationAddress/applicationName/streamName`.
+    #   @return [String]
+    #
+    # @!attribute [rw] stream_name
+    #   The name of the RTMP stream that the output publishes to the
+    #   destination application. The stream name forms the final segment of
+    #   the RTMP URL path.
+    #   @return [String]
+    #
+    # @!attribute [rw] tls_encryption
+    #   The TLS encryption settings for the output. When you specify these
+    #   settings, the output uses RTMPS (RTMP over TLS) to establish a
+    #   secure, encrypted connection to the destination server.
+    #   @return [Types::TlsEncryption]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtmpPushRouterOutputConfiguration AWS API Documentation
+    #
+    class RtmpPushRouterOutputConfiguration < Struct.new(
+      :destination_address,
+      :destination_port,
+      :application_name,
+      :stream_name,
+      :tls_encryption)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # The configuration settings for a Router Input using the RTP (Real-Time
@@ -7206,6 +9082,55 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The configuration settings for a destination endpoint that uses the
+    # RTP protocol.
+    #
+    # @!attribute [rw] destination_address
+    #   The IP address on which the destination endpoint receives content.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_ingest_port
+    #   The port on which the destination endpoint receives content. The
+    #   valid range is 1024 to 65531.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] forward_error_correction_state
+    #   Indicates whether forward error correction (FEC) is enabled for the
+    #   destination endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtpStandardDestinationEndpointConfiguration AWS API Documentation
+    #
+    class RtpStandardDestinationEndpointConfiguration < Struct.new(
+      :destination_address,
+      :destination_ingest_port,
+      :forward_error_correction_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for a source endpoint that uses the RTP
+    # protocol.
+    #
+    # @!attribute [rw] destination_ingest_port
+    #   The port on the destination that receives the content. The valid
+    #   range is 3000 to 30000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] forward_error_correction_state
+    #   Indicates whether forward error correction (FEC) is enabled for the
+    #   source endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/RtpStandardSourceEndpointConfiguration AWS API Documentation
+    #
+    class RtpStandardSourceEndpointConfiguration < Struct.new(
+      :destination_ingest_port,
+      :forward_error_correction_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration settings for transit encryption using Secrets
     # Manager, including the secret ARN and role ARN.
     #
@@ -7223,6 +9148,36 @@ module Aws::MediaConnect
     class SecretsManagerEncryptionKeyConfiguration < Struct.new(
       :secret_arn,
       :role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The endpoint encryption configuration for connections that use a key
+    # or passphrase that you store in Secrets Manager.
+    #
+    # @!attribute [rw] encryption_secret_type
+    #   The type of secret used to encrypt the connection. Valid values
+    #   include the following:
+    #
+    #   * `AES_128_KEY` – A 128-bit AES encryption key.
+    #
+    #   * `AES_192_KEY` – A 192-bit AES encryption key.
+    #
+    #   * `AES_256_KEY` – A 256-bit AES encryption key.
+    #
+    #   * `SRT_PASSPHRASE` – An SRT passphrase.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_secret
+    #   The Secrets Manager secret that holds the key or passphrase used to
+    #   encrypt the connection.
+    #   @return [Types::EndpointEncryptionSecretConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SecretsManagerEndpointEncryptionConfiguration AWS API Documentation
+    #
+    class SecretsManagerEndpointEncryptionConfiguration < Struct.new(
+      :encryption_secret_type,
+      :encryption_secret)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7594,6 +9549,391 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The details of a source endpoint in MediaConnect, including its
+    # configuration, state, and connection details.
+    #
+    # @!attribute [rw] name
+    #   The name of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] region_name
+    #   The name of the Amazon Web Services Region in which the source
+    #   endpoint is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone
+    #   The Availability Zone in which the source endpoint is located.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone in which the source endpoint is
+    #   located.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the source endpoint was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the source endpoint was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] lifecycle_management
+    #   The entity that manages the lifecycle of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] messages
+    #   The status messages for the source endpoint.
+    #   @return [Array<Types::SourceEndpointMessage>]
+    #
+    # @!attribute [rw] source_type
+    #   The type of the source endpoint. Valid values include the following:
+    #
+    #   * `STANDARD` – A source endpoint that represents an external source
+    #     over a standard protocol, such as RTP, RIST, or SRT.
+    #
+    #   * `ROUTER_OUTPUT` – A source endpoint that represents a router
+    #     output.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The configuration settings for the source endpoint.
+    #   @return [Types::SourceEndpointConfiguration]
+    #
+    # @!attribute [rw] resource_share_ownership
+    #   Indicates whether this account owns the source endpoint or consumes
+    #   it from another account through RAM.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_share_details
+    #   The cross-account sharing details for an endpoint. Endpoints are
+    #   shared through Resource Access Manager (RAM). This is a union type,
+    #   so exactly one of its members is set: `owned` when this account owns
+    #   the endpoint and shares it with other accounts, or `consumed` when
+    #   this account consumes an endpoint that another account shares. To
+    #   change how an endpoint is shared, use RAM.
+    #   @return [Types::ResourceShareDetails]
+    #
+    # @!attribute [rw] registration_state
+    #   The registration state of the source endpoint. Valid values include
+    #   the following:
+    #
+    #   * `REGISTERED` – The source endpoint is registered and ready to use.
+    #
+    #   * `REGISTERING` – MediaConnect is registering the source endpoint.
+    #
+    #   * `DEREGISTERING` – MediaConnect is deregistering the source
+    #     endpoint.
+    #
+    #   * `REGISTRATION_FAILED` – MediaConnect couldn't register the source
+    #     endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_state
+    #   The connection state of the source endpoint. Valid values include
+    #   the following:
+    #
+    #   * `CONNECTED` – The source endpoint is connected to a destination
+    #     endpoint.
+    #
+    #   * `DISCONNECTED` – The source endpoint isn't connected to a
+    #     destination endpoint.
+    #
+    #   * `CONNECTING` – The source endpoint is connecting to a destination
+    #     endpoint.
+    #
+    #   * `DISCONNECTING` – The source endpoint is disconnecting from a
+    #     destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] connection_details
+    #   The connection details for the source endpoint.
+    #   @return [Types::SourceEndpointConnectionDetails]
+    #
+    # @!attribute [rw] connected_destinations
+    #   The Amazon Resource Names (ARNs) of the destination endpoints that
+    #   are connected to the source endpoint.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of encryption used for the source endpoint connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption settings for an endpoint connection. This is a union
+    #   type, so exactly one of its members is set: `secretsManager` when
+    #   you store the encryption key or passphrase in Secrets Manager, or
+    #   `automatic` when you let MediaConnect determine the encryption key
+    #   when the endpoint connects.
+    #   @return [Types::EndpointEncryptionConfiguration]
+    #
+    # @!attribute [rw] associated_resource_details
+    #   The details of the resource that is associated with the source
+    #   endpoint.
+    #   @return [Types::SourceEndpointAssociatedResourceDetails]
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the source endpoint. Each tag is a
+    #   key-value pair.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourceEndpoint AWS API Documentation
+    #
+    class SourceEndpoint < Struct.new(
+      :name,
+      :arn,
+      :id,
+      :description,
+      :region_name,
+      :availability_zone,
+      :availability_zone_id,
+      :created_at,
+      :updated_at,
+      :lifecycle_management,
+      :messages,
+      :source_type,
+      :configuration,
+      :resource_share_ownership,
+      :resource_share_details,
+      :registration_state,
+      :connection_state,
+      :connection_details,
+      :connected_destinations,
+      :encryption_type,
+      :encryption_configuration,
+      :associated_resource_details,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of the resource that is associated with a source endpoint.
+    # This is a union type, so exactly one of its members is set, depending
+    # on the type of the source endpoint.
+    #
+    # @note SourceEndpointAssociatedResourceDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceEndpointAssociatedResourceDetails corresponding to the set member.
+    #
+    # @!attribute [rw] standard
+    #   The associated resource details for a standard source endpoint.
+    #   @return [Types::StandardSourceEndpointAssociatedResourceDetails]
+    #
+    # @!attribute [rw] router_output
+    #   The associated resource details for a source endpoint that
+    #   represents a router output.
+    #   @return [Types::RouterOutputSourceEndpointAssociatedResourceDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourceEndpointAssociatedResourceDetails AWS API Documentation
+    #
+    class SourceEndpointAssociatedResourceDetails < Struct.new(
+      :standard,
+      :router_output,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Standard < SourceEndpointAssociatedResourceDetails; end
+      class RouterOutput < SourceEndpointAssociatedResourceDetails; end
+      class Unknown < SourceEndpointAssociatedResourceDetails; end
+    end
+
+    # The configuration settings for a source endpoint. This is a union
+    # type, so exactly one of its members is set, depending on the type of
+    # the source endpoint.
+    #
+    # @note SourceEndpointConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SourceEndpointConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceEndpointConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] standard
+    #   The configuration settings for a standard source endpoint, which
+    #   represents an external source.
+    #   @return [Types::StandardSourceEndpointConfiguration]
+    #
+    # @!attribute [rw] router_output
+    #   The configuration settings for a source endpoint that represents a
+    #   router output.
+    #   @return [Types::RouterOutputSourceEndpointConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourceEndpointConfiguration AWS API Documentation
+    #
+    class SourceEndpointConfiguration < Struct.new(
+      :standard,
+      :router_output,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Standard < SourceEndpointConfiguration; end
+      class RouterOutput < SourceEndpointConfiguration; end
+      class Unknown < SourceEndpointConfiguration; end
+    end
+
+    # The connection details for a source endpoint. After the source
+    # endpoint connects to a destination endpoint, MediaConnect populates
+    # these details to describe the connected destination and how the source
+    # delivers content to it. This is a union type, so exactly one of its
+    # members is set, depending on the source endpoint type.
+    #
+    # @note SourceEndpointConnectionDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceEndpointConnectionDetails corresponding to the set member.
+    #
+    # @!attribute [rw] standard
+    #   The connection details for a standard source endpoint.
+    #   @return [Types::StandardSourceEndpointConnectionDetails]
+    #
+    # @!attribute [rw] router_output
+    #   The connection details for a source endpoint that represents a
+    #   router output.
+    #   @return [Types::RouterOutputSourceEndpointConnectionDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourceEndpointConnectionDetails AWS API Documentation
+    #
+    class SourceEndpointConnectionDetails < Struct.new(
+      :standard,
+      :router_output,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Standard < SourceEndpointConnectionDetails; end
+      class RouterOutput < SourceEndpointConnectionDetails; end
+      class Unknown < SourceEndpointConnectionDetails; end
+    end
+
+    # A filter to apply when listing source endpoints. This is a union type,
+    # so exactly one of its members is set.
+    #
+    # @note SourceEndpointFilter is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] region_names
+    #   Filters the results to source endpoints in the specified Amazon Web
+    #   Services Regions.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] source_types
+    #   Filters the results to source endpoints of the specified types.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] name_contains
+    #   Filters the results to source endpoints whose names contain the
+    #   specified strings.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourceEndpointFilter AWS API Documentation
+    #
+    class SourceEndpointFilter < Struct.new(
+      :region_names,
+      :source_types,
+      :name_contains,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RegionNames < SourceEndpointFilter; end
+      class SourceTypes < SourceEndpointFilter; end
+      class NameContains < SourceEndpointFilter; end
+      class Unknown < SourceEndpointFilter; end
+    end
+
+    # A status message for a source endpoint.
+    #
+    # @!attribute [rw] code
+    #   The message code.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   The message text.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourceEndpointMessage AWS API Documentation
+    #
+    class SourceEndpointMessage < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration settings for a router output that is represented by a
+    # source endpoint.
+    #
+    # @!attribute [rw] endpoint_lifecycle_management
+    #   The entity that manages the lifecycle of the associated source
+    #   endpoint. Valid values include the following:
+    #
+    #   * `MANAGED` – MediaConnect manages the lifecycle of the associated
+    #     source endpoint.
+    #
+    #   * `UNMANAGED` – You manage the lifecycle of the associated source
+    #     endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_transit_encryption_type
+    #   The type of transit encryption applied to the destination content
+    #   that this router output sends. Valid values include the following:
+    #
+    #   * `SECRETS_MANAGER` – The encryption key or passphrase is stored in
+    #     Secrets Manager.
+    #
+    #   * `AUTOMATIC` – MediaConnect determines the encryption key when the
+    #     endpoint connects.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_transit_encryption
+    #   The encryption settings for an endpoint connection. This is a union
+    #   type, so exactly one of its members is set: `secretsManager` when
+    #   you store the encryption key or passphrase in Secrets Manager, or
+    #   `automatic` when you let MediaConnect determine the encryption key
+    #   when the endpoint connects.
+    #   @return [Types::EndpointEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourceEndpointRouterOutputConfiguration AWS API Documentation
+    #
+    class SourceEndpointRouterOutputConfiguration < Struct.new(
+      :endpoint_lifecycle_management,
+      :destination_transit_encryption_type,
+      :destination_transit_encryption)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration details for a router output stream that is represented
+    # by a source endpoint.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourceEndpointRouterOutputStreamDetails AWS API Documentation
+    #
+    class SourceEndpointRouterOutputStreamDetails < Aws::EmptyStructure; end
+
+    # The request would cause you to exceed a service quota for source
+    # endpoints. Delete unused source endpoints or request a quota increase,
+    # then try your request again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SourceEndpointServiceQuotaExceededException AWS API Documentation
+    #
+    class SourceEndpointServiceQuotaExceededException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The priority you want to assign to a source. You can have a primary
     # stream and a backup stream or two equally prioritized streams.
     #
@@ -7688,6 +10028,62 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The configuration settings for a destination endpoint that uses SRT in
+    # caller mode.
+    #
+    # @!attribute [rw] source_listener_port
+    #   The port on which the source listens for the connection. The valid
+    #   range is 3000 to 30000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_latency_milliseconds
+    #   The minimum latency, in milliseconds, for the SRT connection. The
+    #   valid range is 10 to 10000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encryption_passphrase
+    #   The configuration for the Secrets Manager secret that holds the key
+    #   or passphrase used to encrypt an endpoint connection.
+    #   @return [Types::EndpointEncryptionSecretConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SrtCallerStandardDestinationEndpointConfiguration AWS API Documentation
+    #
+    class SrtCallerStandardDestinationEndpointConfiguration < Struct.new(
+      :source_listener_port,
+      :minimum_latency_milliseconds,
+      :encryption_passphrase)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for a source endpoint that uses SRT in
+    # caller mode.
+    #
+    # @!attribute [rw] destination_ingest_port
+    #   The port on which the destination listens for the connection. The
+    #   valid range is 3000 to 30000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_latency_milliseconds
+    #   The minimum latency, in milliseconds, for the SRT connection. The
+    #   valid range is 10 to 10000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] encryption_passphrase
+    #   The configuration for the Secrets Manager secret that holds the key
+    #   or passphrase used to encrypt an endpoint connection.
+    #   @return [Types::EndpointEncryptionSecretConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SrtCallerStandardSourceEndpointConfiguration AWS API Documentation
+    #
+    class SrtCallerStandardSourceEndpointConfiguration < Struct.new(
+      :destination_ingest_port,
+      :minimum_latency_milliseconds,
+      :encryption_passphrase)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains the configuration settings for decrypting SRT streams,
     # including the encryption key details and decryption parameters.
     #
@@ -7778,6 +10174,261 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The configuration settings for a destination endpoint that uses SRT in
+    # listener mode.
+    #
+    # @!attribute [rw] destination_address
+    #   The IP address on which the destination endpoint listens for
+    #   incoming connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_ingest_port
+    #   The port on which the destination endpoint listens for incoming
+    #   connections. The valid range is 0 to 65531.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] minimum_latency_milliseconds
+    #   The minimum latency, in milliseconds, for the SRT connection. The
+    #   valid range is 10 to 10000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID that identifies the content for the SRT connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_passphrase
+    #   The configuration for the Secrets Manager secret that holds the key
+    #   or passphrase used to encrypt an endpoint connection.
+    #   @return [Types::EndpointEncryptionSecretConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SrtListenerStandardDestinationEndpointConfiguration AWS API Documentation
+    #
+    class SrtListenerStandardDestinationEndpointConfiguration < Struct.new(
+      :destination_address,
+      :destination_ingest_port,
+      :minimum_latency_milliseconds,
+      :stream_id,
+      :encryption_passphrase)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for a source endpoint that uses SRT in
+    # listener mode.
+    #
+    # @!attribute [rw] source_listener_port
+    #   The port that the source endpoint listens on for incoming
+    #   connections. The valid range is 1024 to 65535.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_address
+    #   The IP address that the source endpoint listens on for incoming
+    #   connections.
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_latency_milliseconds
+    #   The minimum latency, in milliseconds, for the SRT connection. The
+    #   valid range is 10 to 10000.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] stream_id
+    #   The stream ID that identifies the content for the SRT connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_passphrase
+    #   The configuration for the Secrets Manager secret that holds the key
+    #   or passphrase used to encrypt an endpoint connection.
+    #   @return [Types::EndpointEncryptionSecretConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/SrtListenerStandardSourceEndpointConfiguration AWS API Documentation
+    #
+    class SrtListenerStandardSourceEndpointConfiguration < Struct.new(
+      :source_listener_port,
+      :source_address,
+      :minimum_latency_milliseconds,
+      :stream_id,
+      :encryption_passphrase)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The associated resource details for a standard destination endpoint.
+    # This type does not require any additional settings.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardDestinationEndpointAssociatedResourceDetails AWS API Documentation
+    #
+    class StandardDestinationEndpointAssociatedResourceDetails < Aws::EmptyStructure; end
+
+    # The configuration settings for a standard destination endpoint.
+    #
+    # @!attribute [rw] name
+    #   The name of the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_networking_configuration
+    #   The networking configuration for the destination endpoint, which
+    #   determines whether it is publicly accessible or in a virtual private
+    #   cloud (VPC).
+    #   @return [Types::StandardDestinationEndpointNetworkingConfiguration]
+    #
+    # @!attribute [rw] protocol_configuration
+    #   The protocol configuration for the destination endpoint.
+    #   @return [Types::StandardDestinationEndpointProtocolConfiguration]
+    #
+    # @!attribute [rw] destination_networking_type
+    #   The networking type of the destination endpoint. Valid values
+    #   include the following:
+    #
+    #   * `PUBLIC` – The destination endpoint is publicly accessible.
+    #
+    #   * `VPC` – The destination endpoint is in a virtual private cloud
+    #     (VPC).
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used by the destination endpoint. Valid values include
+    #   the following:
+    #
+    #   * `RTP` – Real-time Transport Protocol.
+    #
+    #   * `RIST` – Reliable Internet Stream Transport.
+    #
+    #   * `SRT_CALLER` – Secure Reliable Transport (SRT) in caller mode.
+    #
+    #   * `SRT_LISTENER` – Secure Reliable Transport (SRT) in listener mode.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardDestinationEndpointConfiguration AWS API Documentation
+    #
+    class StandardDestinationEndpointConfiguration < Struct.new(
+      :name,
+      :destination_networking_configuration,
+      :protocol_configuration,
+      :destination_networking_type,
+      :protocol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connection details for a standard destination endpoint.
+    #
+    # @!attribute [rw] source_ip_address
+    #   The IP address of the source that is connected to the destination
+    #   endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_listener_port
+    #   The port on which the source listens for the connection.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] source_encryption_type
+    #   The type of encryption that the source uses for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_encryption_configuration
+    #   The encryption settings for an endpoint connection. This is a union
+    #   type, so exactly one of its members is set: `secretsManager` when
+    #   you store the encryption key or passphrase in Secrets Manager, or
+    #   `automatic` when you let MediaConnect determine the encryption key
+    #   when the endpoint connects.
+    #   @return [Types::EndpointEncryptionConfiguration]
+    #
+    # @!attribute [rw] source_endpoint_type
+    #   The type of the connected source endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardDestinationEndpointConnectionDetails AWS API Documentation
+    #
+    class StandardDestinationEndpointConnectionDetails < Struct.new(
+      :source_ip_address,
+      :source_listener_port,
+      :source_encryption_type,
+      :source_encryption_configuration,
+      :source_endpoint_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The networking configuration for a standard destination endpoint. This
+    # is a union type, so exactly one of its members is set: `public` for a
+    # publicly accessible endpoint, or `vpc` for an endpoint in a virtual
+    # private cloud (VPC).
+    #
+    # @note StandardDestinationEndpointNetworkingConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note StandardDestinationEndpointNetworkingConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StandardDestinationEndpointNetworkingConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] public
+    #   The configuration for a publicly accessible destination endpoint.
+    #   @return [Types::PublicDestinationEndpointNetworkingConfiguration]
+    #
+    # @!attribute [rw] vpc
+    #   The configuration for a destination endpoint in a virtual private
+    #   cloud (VPC).
+    #   @return [Types::VpcDestinationEndpointNetworkingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardDestinationEndpointNetworkingConfiguration AWS API Documentation
+    #
+    class StandardDestinationEndpointNetworkingConfiguration < Struct.new(
+      :public,
+      :vpc,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Public < StandardDestinationEndpointNetworkingConfiguration; end
+      class Vpc < StandardDestinationEndpointNetworkingConfiguration; end
+      class Unknown < StandardDestinationEndpointNetworkingConfiguration; end
+    end
+
+    # The protocol configuration for a standard destination endpoint. This
+    # is a union type, so exactly one of its members is set, depending on
+    # the protocol that the destination endpoint uses.
+    #
+    # @note StandardDestinationEndpointProtocolConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note StandardDestinationEndpointProtocolConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StandardDestinationEndpointProtocolConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] rist
+    #   The configuration settings for a destination endpoint that uses the
+    #   RIST protocol.
+    #   @return [Types::RistStandardDestinationEndpointConfiguration]
+    #
+    # @!attribute [rw] srt_listener
+    #   The configuration settings for a destination endpoint that uses SRT
+    #   in listener mode.
+    #   @return [Types::SrtListenerStandardDestinationEndpointConfiguration]
+    #
+    # @!attribute [rw] srt_caller
+    #   The configuration settings for a destination endpoint that uses SRT
+    #   in caller mode.
+    #   @return [Types::SrtCallerStandardDestinationEndpointConfiguration]
+    #
+    # @!attribute [rw] rtp
+    #   The configuration settings for a destination endpoint that uses the
+    #   RTP protocol.
+    #   @return [Types::RtpStandardDestinationEndpointConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardDestinationEndpointProtocolConfiguration AWS API Documentation
+    #
+    class StandardDestinationEndpointProtocolConfiguration < Struct.new(
+      :rist,
+      :srt_listener,
+      :srt_caller,
+      :rtp,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Rist < StandardDestinationEndpointProtocolConfiguration; end
+      class SrtListener < StandardDestinationEndpointProtocolConfiguration; end
+      class SrtCaller < StandardDestinationEndpointProtocolConfiguration; end
+      class Rtp < StandardDestinationEndpointProtocolConfiguration; end
+      class Unknown < StandardDestinationEndpointProtocolConfiguration; end
+    end
+
     # The configuration settings for a standard router input, including the
     # protocol, protocol-specific configuration, network interface, and
     # availability zone.
@@ -7863,6 +10514,181 @@ module Aws::MediaConnect
       :destination_ip_address)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The associated resource details for a standard source endpoint. This
+    # type does not require any additional settings.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardSourceEndpointAssociatedResourceDetails AWS API Documentation
+    #
+    class StandardSourceEndpointAssociatedResourceDetails < Aws::EmptyStructure; end
+
+    # The configuration settings for a standard source endpoint.
+    #
+    # @!attribute [rw] name
+    #   The name of the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_networking_configuration
+    #   The networking configuration for the source endpoint, which
+    #   determines whether it is publicly accessible or in a virtual private
+    #   cloud (VPC).
+    #   @return [Types::StandardSourceEndpointNetworkingConfiguration]
+    #
+    # @!attribute [rw] protocol_configuration
+    #   The protocol configuration for the source endpoint.
+    #   @return [Types::StandardSourceEndpointProtocolConfiguration]
+    #
+    # @!attribute [rw] source_networking_type
+    #   The networking type of the source endpoint. Valid values include the
+    #   following:
+    #
+    #   * `PUBLIC` – The source endpoint is publicly accessible.
+    #
+    #   * `VPC` – The source endpoint is in a virtual private cloud (VPC).
+    #   @return [String]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol used by the source endpoint. Valid values include the
+    #   following:
+    #
+    #   * `RTP` – Real-time Transport Protocol.
+    #
+    #   * `RIST` – Reliable Internet Stream Transport.
+    #
+    #   * `SRT_CALLER` – Secure Reliable Transport (SRT) in caller mode.
+    #
+    #   * `SRT_LISTENER` – Secure Reliable Transport (SRT) in listener mode.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardSourceEndpointConfiguration AWS API Documentation
+    #
+    class StandardSourceEndpointConfiguration < Struct.new(
+      :name,
+      :source_networking_configuration,
+      :protocol_configuration,
+      :source_networking_type,
+      :protocol)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The connection details for a standard source endpoint.
+    #
+    # @!attribute [rw] destination_ip_address
+    #   The IP address of the destination that receives the content.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_ingest_port
+    #   The port on the destination that receives the content.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] destination_decryption_type
+    #   The type of decryption that the destination uses for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_decryption_configuration
+    #   The encryption settings for an endpoint connection. This is a union
+    #   type, so exactly one of its members is set: `secretsManager` when
+    #   you store the encryption key or passphrase in Secrets Manager, or
+    #   `automatic` when you let MediaConnect determine the encryption key
+    #   when the endpoint connects.
+    #   @return [Types::EndpointEncryptionConfiguration]
+    #
+    # @!attribute [rw] destination_endpoint_type
+    #   The type of the connected destination endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardSourceEndpointConnectionDetails AWS API Documentation
+    #
+    class StandardSourceEndpointConnectionDetails < Struct.new(
+      :destination_ip_address,
+      :destination_ingest_port,
+      :destination_decryption_type,
+      :destination_decryption_configuration,
+      :destination_endpoint_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The networking configuration for a standard source endpoint. This is a
+    # union type, so exactly one of its members is set: `public` for a
+    # publicly accessible endpoint, or `vpc` for an endpoint in a virtual
+    # private cloud (VPC).
+    #
+    # @note StandardSourceEndpointNetworkingConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note StandardSourceEndpointNetworkingConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StandardSourceEndpointNetworkingConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] public
+    #   The configuration for a publicly accessible source endpoint.
+    #   @return [Types::PublicSourceEndpointNetworkingConfiguration]
+    #
+    # @!attribute [rw] vpc
+    #   The configuration for a source endpoint in a virtual private cloud
+    #   (VPC).
+    #   @return [Types::VpcSourceEndpointNetworkingConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardSourceEndpointNetworkingConfiguration AWS API Documentation
+    #
+    class StandardSourceEndpointNetworkingConfiguration < Struct.new(
+      :public,
+      :vpc,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Public < StandardSourceEndpointNetworkingConfiguration; end
+      class Vpc < StandardSourceEndpointNetworkingConfiguration; end
+      class Unknown < StandardSourceEndpointNetworkingConfiguration; end
+    end
+
+    # The protocol configuration for a standard source endpoint. This is a
+    # union type, so exactly one of its members is set, depending on the
+    # protocol that the source endpoint uses.
+    #
+    # @note StandardSourceEndpointProtocolConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note StandardSourceEndpointProtocolConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of StandardSourceEndpointProtocolConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] rist
+    #   The configuration settings for a source endpoint that uses the RIST
+    #   protocol.
+    #   @return [Types::RistStandardSourceEndpointConfiguration]
+    #
+    # @!attribute [rw] srt_listener
+    #   The configuration settings for a source endpoint that uses SRT in
+    #   listener mode.
+    #   @return [Types::SrtListenerStandardSourceEndpointConfiguration]
+    #
+    # @!attribute [rw] srt_caller
+    #   The configuration settings for a source endpoint that uses SRT in
+    #   caller mode.
+    #   @return [Types::SrtCallerStandardSourceEndpointConfiguration]
+    #
+    # @!attribute [rw] rtp
+    #   The configuration settings for a source endpoint that uses the RTP
+    #   protocol.
+    #   @return [Types::RtpStandardSourceEndpointConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/StandardSourceEndpointProtocolConfiguration AWS API Documentation
+    #
+    class StandardSourceEndpointProtocolConfiguration < Struct.new(
+      :rist,
+      :srt_listener,
+      :srt_caller,
+      :rtp,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Rist < StandardSourceEndpointProtocolConfiguration; end
+      class SrtListener < StandardSourceEndpointProtocolConfiguration; end
+      class SrtCaller < StandardSourceEndpointProtocolConfiguration; end
+      class Rtp < StandardSourceEndpointProtocolConfiguration; end
+      class Unknown < StandardSourceEndpointProtocolConfiguration; end
     end
 
     # @!attribute [rw] flow_arn
@@ -8208,6 +11034,50 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # The Transport Layer Security (TLS) encryption settings used to
+    # establish a secure connection to a destination.
+    #
+    # @!attribute [rw] encryption_type
+    #   The type of TLS encryption to use for the connection.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The configuration settings for the specified TLS encryption type.
+    #   @return [Types::TlsEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TlsEncryption AWS API Documentation
+    #
+    class TlsEncryption < Struct.new(
+      :encryption_type,
+      :encryption_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration settings for TLS encryption.
+    #
+    # @note TlsEncryptionConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note TlsEncryptionConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of TlsEncryptionConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] public
+    #   The TLS encryption configuration that validates the destination by
+    #   using a publicly trusted certificate authority.
+    #   @return [Types::PublicTlsEncryptionConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TlsEncryptionConfiguration AWS API Documentation
+    #
+    class TlsEncryptionConfiguration < Struct.new(
+      :public,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Public < TlsEncryptionConfiguration; end
+      class Unknown < TlsEncryptionConfiguration; end
+    end
+
     # The request was denied due to request throttling.
     #
     # @!attribute [rw] message
@@ -8323,6 +11193,13 @@ module Aws::MediaConnect
     #     time when each frame is sent.
     #   @return [String]
     #
+    # @!attribute [rw] ndi_audio_reference_level
+    #   The audio reference level of the NDI receiver, in decibels relative
+    #   to full scale (dBFS). Common values are `-20` (NDI and SMPTE) and
+    #   `-18` (EBU). For NDI outputs, this field is always present and
+    #   defaults to `-20`.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/Transport AWS API Documentation
     #
     class Transport < Struct.new(
@@ -8342,7 +11219,8 @@ module Aws::MediaConnect
       :ndi_speed_hq_quality,
       :ndi_program_name,
       :ndi_source_settings,
-      :ndi_output_timecode_source)
+      :ndi_output_timecode_source,
+      :ndi_audio_reference_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8353,10 +11231,16 @@ module Aws::MediaConnect
     #   The list of transport stream programs in the current flow's source.
     #   @return [Array<Types::TransportStreamProgram>]
     #
+    # @!attribute [rw] ts_id
+    #   The transport stream ID (TSID) of the source, from the Program
+    #   Association Table (PAT).
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/TransportMediaInfo AWS API Documentation
     #
     class TransportMediaInfo < Struct.new(
-      :programs)
+      :programs,
+      :ts_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8370,6 +11254,10 @@ module Aws::MediaConnect
     # @!attribute [rw] codec
     #   The codec used by the stream.
     #   @return [String]
+    #
+    # @!attribute [rw] color
+    #   The color signaling of the video stream.
+    #   @return [Types::ColorInformation]
     #
     # @!attribute [rw] frame_rate
     #   The frame rate used by the video stream.
@@ -8400,6 +11288,7 @@ module Aws::MediaConnect
     class TransportStream < Struct.new(
       :channels,
       :codec,
+      :color,
       :frame_rate,
       :frame_resolution,
       :pid,
@@ -8739,6 +11628,41 @@ module Aws::MediaConnect
     class UpdateBridgeStateResponse < Struct.new(
       :bridge_arn,
       :desired_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the destination endpoint to
+    #   update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description to help you identify the destination endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The updated configuration settings for the destination endpoint.
+    #   @return [Types::DestinationEndpointConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateDestinationEndpointRequest AWS API Documentation
+    #
+    class UpdateDestinationEndpointRequest < Struct.new(
+      :arn,
+      :description,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] destination_endpoint
+    #   The details of the updated destination endpoint.
+    #   @return [Types::DestinationEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateDestinationEndpointResponse AWS API Documentation
+    #
+    class UpdateDestinationEndpointResponse < Struct.new(
+      :destination_endpoint)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9120,6 +12044,13 @@ module Aws::MediaConnect
     #     time when each frame is sent.
     #   @return [String]
     #
+    # @!attribute [rw] ndi_audio_reference_level
+    #   The audio reference level of the NDI receiver, in decibels relative
+    #   to full scale (dBFS). Common values are `-20` (NDI and SMPTE) and
+    #   `-18` (EBU). If you don't specify this field, MediaConnect leaves
+    #   the value unchanged.
+    #   @return [Integer]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateFlowOutputRequest AWS API Documentation
     #
     class UpdateFlowOutputRequest < Struct.new(
@@ -9145,7 +12076,8 @@ module Aws::MediaConnect
       :ndi_speed_hq_quality,
       :router_integration_state,
       :router_integration_transit_encryption,
-      :ndi_output_timecode_source)
+      :ndi_output_timecode_source,
+      :ndi_audio_reference_level)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9520,7 +12452,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The updated tier level for the router input.
+    #   The updated tier level for the router input. The tier sets the
+    #   maximum bitrate, in Mbps, for the router input. Valid values include
+    #   the following:
+    #
+    #   * `INPUT_20` – 20 Mbps
+    #
+    #   * `INPUT_50` – 50 Mbps
+    #
+    #   * `INPUT_100` – 100 Mbps
+    #
+    #   * `INPUT_250` – 250 Mbps
+    #
+    #   * `INPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] transit_encryption
@@ -9626,7 +12573,22 @@ module Aws::MediaConnect
     #   @return [String]
     #
     # @!attribute [rw] tier
-    #   The updated tier level for the router output.
+    #   The updated tier level for the router output. The tier sets the
+    #   maximum bitrate, in Mbps, for the router output. Valid values
+    #   include the following:
+    #
+    #   * `OUTPUT_20` – 20 Mbps
+    #
+    #   * `OUTPUT_50` – 50 Mbps
+    #
+    #   * `OUTPUT_100` – 100 Mbps
+    #
+    #   * `OUTPUT_250` – 250 Mbps
+    #
+    #   * `OUTPUT_500` – 500 Mbps
+    #
+    #   The 250 Mbps and 500 Mbps tiers are high-bitrate tiers that support
+    #   TR-07 (JPEG XS) workflows.
     #   @return [String]
     #
     # @!attribute [rw] maintenance_configuration
@@ -9669,6 +12631,40 @@ module Aws::MediaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the source endpoint to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description to help you identify the source endpoint.
+    #   @return [String]
+    #
+    # @!attribute [rw] configuration
+    #   The updated configuration settings for the source endpoint.
+    #   @return [Types::SourceEndpointConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateSourceEndpointRequest AWS API Documentation
+    #
+    class UpdateSourceEndpointRequest < Struct.new(
+      :arn,
+      :description,
+      :configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] source_endpoint
+    #   The details of the updated source endpoint.
+    #   @return [Types::SourceEndpoint]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/UpdateSourceEndpointResponse AWS API Documentation
+    #
+    class UpdateSourceEndpointResponse < Struct.new(
+      :source_endpoint)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Specifies the configuration for video stream metrics monitoring.
     #
     # @!attribute [rw] black_frames
@@ -9684,6 +12680,27 @@ module Aws::MediaConnect
     class VideoMonitoringSetting < Struct.new(
       :black_frames,
       :frozen_frames)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The networking configuration for a destination endpoint in a virtual
+    # private cloud (VPC).
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups to associate with the destination
+    #   endpoint. You can specify from 1 to 5 security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet to use for the destination endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcDestinationEndpointNetworkingConfiguration AWS API Documentation
+    #
+    class VpcDestinationEndpointNetworkingConfiguration < Struct.new(
+      :security_group_ids,
+      :subnet_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9809,6 +12826,27 @@ module Aws::MediaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcRouterNetworkInterfaceConfiguration AWS API Documentation
     #
     class VpcRouterNetworkInterfaceConfiguration < Struct.new(
+      :security_group_ids,
+      :subnet_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The networking configuration for a source endpoint in a virtual
+    # private cloud (VPC).
+    #
+    # @!attribute [rw] security_group_ids
+    #   The IDs of the security groups to associate with the source
+    #   endpoint. You can specify from 1 to 5 security groups.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_id
+    #   The ID of the subnet to use for the source endpoint.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconnect-2018-11-14/VpcSourceEndpointNetworkingConfiguration AWS API Documentation
+    #
+    class VpcSourceEndpointNetworkingConfiguration < Struct.new(
       :security_group_ids,
       :subnet_id)
       SENSITIVE = []

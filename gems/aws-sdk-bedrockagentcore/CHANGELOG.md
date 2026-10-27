@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.62.0 (2026-10-22)
+------------------
+
+* Feature - Adds the dimension name to evaluation results and batch evaluation summaries. For multi-dimensional LLM-as-a-Judge evaluators, each result and summary now identifies which dimension it corresponds to.
+
+1.61.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.60.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.59.0 (2026-10-19)
+------------------
+
+* Feature - Adds the Builtin.FailureAnalysis evaluator for batch evaluations. GetBatchEvaluation now returns insightResults that group session failures into insights with root causes and suggested fixes.
+
+1.58.0 (2026-10-12)
+------------------
+
+* Feature - AgentCore Memory now supports Long-Term Memory Time-to-Live on Batch APIs.
+
 1.57.0 (2026-09-21)
 ------------------
 

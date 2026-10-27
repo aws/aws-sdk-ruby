@@ -8,6 +8,11 @@
 module Aws::CloudWatch
   module Types
 
+    class ActionConfiguration
+      attr_accessor alarm_tags_propagation: Types::AlarmTagsPropagation
+      SENSITIVE: []
+    end
+
     class AlarmContributor
       attr_accessor contributor_id: ::String
       attr_accessor contributor_attributes: ::Hash[::String, ::String]
@@ -44,6 +49,13 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class AlarmTagsPropagation
+      attr_accessor enabled: bool
+      attr_accessor included_tag_keys: ::Array[::String]
+      attr_accessor excluded_tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class AnomalyDetector
       attr_accessor anomaly_detector_id: ::String
       attr_accessor namespace: ::String
@@ -61,6 +73,8 @@ module Aws::CloudWatch
     class AnomalyDetectorConfiguration
       attr_accessor excluded_time_ranges: ::Array[Types::Range]
       attr_accessor metric_timezone: ::String
+      attr_accessor adaptation_speed: ("FAST" | "NORMAL" | "SLOW")
+      attr_accessor outlier_filtering_strength: ("MINIMAL" | "MODERATE" | "STRICT")
       SENSITIVE: []
     end
 
@@ -93,6 +107,7 @@ module Aws::CloudWatch
       attr_accessor actions_suppressor: ::String
       attr_accessor actions_suppressor_wait_period: ::Integer
       attr_accessor actions_suppressor_extension_period: ::Integer
+      attr_accessor action_configuration: Types::ActionConfiguration
       SENSITIVE: []
     end
 
@@ -101,6 +116,17 @@ module Aws::CloudWatch
 
     class ConflictException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class CreateResourceMetricsConfigurationInput
+      attr_accessor resource_arn: ::String
+      attr_accessor metric_selections: ::Array[Types::ResourceMetricSelection]
+      SENSITIVE: []
+    end
+
+    class CreateResourceMetricsConfigurationOutput
+      attr_accessor resource_metrics_configuration: Types::ResourceMetricsConfiguration
       SENSITIVE: []
     end
 
@@ -189,6 +215,14 @@ module Aws::CloudWatch
     end
 
     class DeleteMetricStreamOutput < Aws::EmptyStructure
+    end
+
+    class DeleteResourceMetricsConfigurationInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteResourceMetricsConfigurationOutput < Aws::EmptyStructure
     end
 
     class DescribeAlarmContributorsInput
@@ -513,6 +547,20 @@ module Aws::CloudWatch
 
     class GetOTelEnrichmentOutput
       attr_accessor status: ("Running" | "Stopped")
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GetResourceMetricsConfigurationInput
+      attr_accessor resource_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetResourceMetricsConfigurationOutput
+      attr_accessor resource_metrics_configuration: Types::ResourceMetricsConfiguration
       SENSITIVE: []
     end
 
@@ -707,6 +755,7 @@ module Aws::CloudWatch
       attr_accessor action_log_line_count: ::Integer
       attr_accessor action_log_line_role_arn: ::String
       attr_accessor warm_up_configuration: Types::WarmUpConfiguration
+      attr_accessor action_configuration: Types::ActionConfiguration
       SENSITIVE: []
     end
 
@@ -777,6 +826,7 @@ module Aws::CloudWatch
       attr_accessor warm_up_configuration: Types::WarmUpConfiguration
       attr_accessor evaluation_criteria: Types::EvaluationCriteria
       attr_accessor evaluation_interval: ::Integer
+      attr_accessor action_configuration: Types::ActionConfiguration
       SENSITIVE: []
     end
 
@@ -871,6 +921,12 @@ module Aws::CloudWatch
       SENSITIVE: []
     end
 
+    class OTelEnrichmentMetricSelector
+      attr_accessor namespace: ::String
+      attr_accessor metric_names: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class PartialFailure
       attr_accessor failure_resource: ::String
       attr_accessor exception_type: ::String
@@ -919,6 +975,7 @@ module Aws::CloudWatch
       attr_accessor actions_suppressor: ::String
       attr_accessor actions_suppressor_wait_period: ::Integer
       attr_accessor actions_suppressor_extension_period: ::Integer
+      attr_accessor action_configuration: Types::ActionConfiguration
       SENSITIVE: []
     end
 
@@ -963,6 +1020,7 @@ module Aws::CloudWatch
       attr_accessor treat_missing_data: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor warm_up_configuration: Types::WarmUpConfiguration
+      attr_accessor action_configuration: Types::ActionConfiguration
       SENSITIVE: []
     end
 
@@ -1003,6 +1061,7 @@ module Aws::CloudWatch
       attr_accessor warm_up_configuration: Types::WarmUpConfiguration
       attr_accessor evaluation_criteria: Types::EvaluationCriteria
       attr_accessor evaluation_interval: ::Integer
+      attr_accessor action_configuration: Types::ActionConfiguration
       SENSITIVE: []
     end
 
@@ -1040,6 +1099,19 @@ module Aws::CloudWatch
 
     class ResourceConflict
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceMetricSelection
+      attr_accessor include_metrics: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ResourceMetricsConfiguration
+      attr_accessor resource_arn: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor metric_selections: ::Array[Types::ResourceMetricSelection]
       SENSITIVE: []
     end
 
@@ -1112,10 +1184,18 @@ module Aws::CloudWatch
     class StartMetricStreamsOutput < Aws::EmptyStructure
     end
 
-    class StartOTelEnrichmentInput < Aws::EmptyStructure
+    class StartOTelEnrichmentInput
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      SENSITIVE: []
     end
 
-    class StartOTelEnrichmentOutput < Aws::EmptyStructure
+    class StartOTelEnrichmentOutput
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
     end
 
     class StatisticSet
@@ -1162,6 +1242,36 @@ module Aws::CloudWatch
     end
 
     class UntagResourceOutput < Aws::EmptyStructure
+    end
+
+    class UpdateOTelEnrichmentInput
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      SENSITIVE: []
+    end
+
+    class UpdateOTelEnrichmentOutput
+      attr_accessor include_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor exclude_filters: ::Array[Types::OTelEnrichmentMetricSelector]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateResourceMetricsConfigurationInput
+      attr_accessor resource_arn: ::String
+      attr_accessor metric_selections: ::Array[Types::ResourceMetricSelection]
+      SENSITIVE: []
+    end
+
+    class UpdateResourceMetricsConfigurationOutput
+      attr_accessor resource_metrics_configuration: Types::ResourceMetricsConfiguration
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
     end
 
     class WallClockWindow

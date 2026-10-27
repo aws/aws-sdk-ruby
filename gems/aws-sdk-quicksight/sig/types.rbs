@@ -1716,6 +1716,10 @@ module Aws::QuickSight
       attr_accessor create_and_update_bee_action: ("DENY" | "ALLOW")
       attr_accessor share_bee_action: ("DENY" | "ALLOW")
       attr_accessor use_bee_action: ("DENY" | "ALLOW")
+      attr_accessor gong_action: ("DENY" | "ALLOW")
+      attr_accessor create_and_update_gong_action: ("DENY" | "ALLOW")
+      attr_accessor share_gong_action: ("DENY" | "ALLOW")
+      attr_accessor use_gong_action: ("DENY" | "ALLOW")
       attr_accessor topic: ("DENY" | "ALLOW")
       attr_accessor edit_visual_with_q: ("DENY" | "ALLOW")
       attr_accessor build_calculated_field_with_q: ("DENY" | "ALLOW")
@@ -1742,6 +1746,186 @@ module Aws::QuickSight
       attr_accessor schedule_trigger: ("DENY" | "ALLOW")
       attr_accessor inbound_email_trigger: ("DENY" | "ALLOW")
       attr_accessor quick_event_trigger: ("DENY" | "ALLOW")
+      attr_accessor file_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_file_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_file_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_file_data_source: ("DENY" | "ALLOW")
+      attr_accessor s3_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_s3_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_s3_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_s3_data_source: ("DENY" | "ALLOW")
+      attr_accessor s3_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_s3_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_s3_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_s3_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor s3_tables_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_s3_tables_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_s3_tables_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_s3_tables_data_source: ("DENY" | "ALLOW")
+      attr_accessor athena_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_athena_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_athena_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_athena_data_source: ("DENY" | "ALLOW")
+      attr_accessor rds_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_rds_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_rds_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_rds_data_source: ("DENY" | "ALLOW")
+      attr_accessor redshift_auto_discovered_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_redshift_auto_discovered_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_redshift_auto_discovered_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_redshift_auto_discovered_data_source: ("DENY" | "ALLOW")
+      attr_accessor redshift_manual_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_redshift_manual_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_redshift_manual_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_redshift_manual_data_source: ("DENY" | "ALLOW")
+      attr_accessor open_search_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_open_search_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_open_search_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_open_search_data_source: ("DENY" | "ALLOW")
+      attr_accessor timestream_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_timestream_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_timestream_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_timestream_data_source: ("DENY" | "ALLOW")
+      attr_accessor aurora_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_aurora_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_aurora_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_aurora_data_source: ("DENY" | "ALLOW")
+      attr_accessor my_sql_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_my_sql_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_my_sql_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_my_sql_data_source: ("DENY" | "ALLOW")
+      attr_accessor postgre_sql_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_postgre_sql_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_postgre_sql_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_postgre_sql_data_source: ("DENY" | "ALLOW")
+      attr_accessor oracle_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_oracle_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_oracle_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_oracle_data_source: ("DENY" | "ALLOW")
+      attr_accessor sql_server_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_sql_server_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_sql_server_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_sql_server_data_source: ("DENY" | "ALLOW")
+      attr_accessor maria_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_maria_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_maria_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_maria_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor snowflake_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_snowflake_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_snowflake_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_snowflake_data_source: ("DENY" | "ALLOW")
+      attr_accessor google_big_query_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_google_big_query_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_google_big_query_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_google_big_query_data_source: ("DENY" | "ALLOW")
+      attr_accessor databricks_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_databricks_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_databricks_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_databricks_data_source: ("DENY" | "ALLOW")
+      attr_accessor starburst_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_starburst_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_starburst_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_starburst_data_source: ("DENY" | "ALLOW")
+      attr_accessor trino_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_trino_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_trino_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_trino_data_source: ("DENY" | "ALLOW")
+      attr_accessor impala_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_impala_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_impala_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_impala_data_source: ("DENY" | "ALLOW")
+      attr_accessor teradata_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_teradata_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_teradata_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_teradata_data_source: ("DENY" | "ALLOW")
+      attr_accessor presto_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_presto_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_presto_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_presto_data_source: ("DENY" | "ALLOW")
+      attr_accessor spark_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_spark_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_spark_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_spark_data_source: ("DENY" | "ALLOW")
+      attr_accessor exasol_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_exasol_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_exasol_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_exasol_data_source: ("DENY" | "ALLOW")
+      attr_accessor db_2_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_db_2_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_db_2_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_db_2_data_source: ("DENY" | "ALLOW")
+      attr_accessor sap_hana_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_sap_hana_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_sap_hana_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_sap_hana_data_source: ("DENY" | "ALLOW")
+      attr_accessor denodo_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_denodo_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_denodo_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_denodo_data_source: ("DENY" | "ALLOW")
+      attr_accessor dremio_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_dremio_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_dremio_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_dremio_data_source: ("DENY" | "ALLOW")
+      attr_accessor salesforce_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_salesforce_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_salesforce_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_salesforce_data_source: ("DENY" | "ALLOW")
+      attr_accessor radiant_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_radiant_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_radiant_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_radiant_data_source: ("DENY" | "ALLOW")
+      attr_accessor pay_pal_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_pay_pal_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_pay_pal_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_pay_pal_data_source: ("DENY" | "ALLOW")
+      attr_accessor square_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_square_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_square_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_square_data_source: ("DENY" | "ALLOW")
+      attr_accessor git_hub_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_git_hub_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_git_hub_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_git_hub_data_source: ("DENY" | "ALLOW")
+      attr_accessor twitter_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_twitter_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_twitter_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_twitter_data_source: ("DENY" | "ALLOW")
+      attr_accessor jira_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_jira_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_jira_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_jira_data_source: ("DENY" | "ALLOW")
+      attr_accessor service_now_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_service_now_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_service_now_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_service_now_data_source: ("DENY" | "ALLOW")
+      attr_accessor adobe_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_adobe_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_adobe_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_adobe_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor google_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_google_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_google_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_google_analytics_data_source: ("DENY" | "ALLOW")
+      attr_accessor google_sheets_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_google_sheets_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_google_sheets_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_google_sheets_data_source: ("DENY" | "ALLOW")
+      attr_accessor document_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_document_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_document_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_document_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor mongo_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_mongo_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_mongo_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_mongo_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor mongo_atlas_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_mongo_atlas_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_mongo_atlas_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_mongo_atlas_data_source: ("DENY" | "ALLOW")
+      attr_accessor dynamo_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor create_dynamo_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor update_dynamo_db_data_source: ("DENY" | "ALLOW")
+      attr_accessor share_dynamo_db_data_source: ("DENY" | "ALLOW")
       SENSITIVE: []
     end
 
@@ -3595,6 +3779,9 @@ module Aws::QuickSight
       attr_accessor key_pair_credentials: Types::KeyPairCredentials
       attr_accessor web_proxy_credentials: Types::WebProxyCredentials
       attr_accessor o_auth_client_credentials: Types::OAuthClientCredentials
+      attr_accessor service_account_credentials: Types::ServiceAccountCredentials
+      attr_accessor share_point_client_credentials: Types::SharePointClientCredentials
+      attr_accessor one_drive_client_credentials: Types::OneDriveClientCredentials
       SENSITIVE: []
     end
 
@@ -3676,6 +3863,8 @@ module Aws::QuickSight
       attr_accessor host: ::String
       attr_accessor port: ::Integer
       attr_accessor sql_endpoint_path: ::String
+      attr_accessor authentication_type: ("PASSWORD" | "KEYPAIR" | "TOKEN" | "X509")
+      attr_accessor o_auth_parameters: Types::OAuthParameters
       SENSITIVE: []
     end
 
@@ -3866,6 +4055,8 @@ module Aws::QuickSight
       attr_accessor default_text_area_options: Types::DefaultTextAreaControlOptions
       attr_accessor default_slider_options: Types::DefaultSliderControlOptions
       attr_accessor default_relative_date_time_options: Types::DefaultRelativeDateTimeControlOptions
+      attr_accessor default_hierarchy_list: Types::DefaultHierarchyFilterListControlOptions
+      attr_accessor default_hierarchy_dropdown: Types::DefaultHierarchyFilterDropDownControlOptions
       SENSITIVE: []
     end
 
@@ -3899,6 +4090,24 @@ module Aws::QuickSight
 
     class DefaultGridLayoutConfiguration
       attr_accessor canvas_size_options: Types::GridLayoutCanvasSizeOptions
+      SENSITIVE: []
+    end
+
+    class DefaultHierarchyFilterDropDownControlOptions
+      attr_accessor display_options: Types::HierarchyFilterDropDownControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
+      SENSITIVE: []
+    end
+
+    class DefaultHierarchyFilterListControlOptions
+      attr_accessor display_options: Types::HierarchyFilterListControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
       SENSITIVE: []
     end
 
@@ -5915,6 +6124,7 @@ module Aws::QuickSight
       attr_accessor relative_dates_filter: Types::RelativeDatesFilter
       attr_accessor top_bottom_filter: Types::TopBottomFilter
       attr_accessor nested_filter: Types::NestedFilter
+      attr_accessor hierarchy_filter: Types::HierarchyFilter
       SENSITIVE: []
     end
 
@@ -5934,6 +6144,8 @@ module Aws::QuickSight
       attr_accessor slider: Types::FilterSliderControl
       attr_accessor relative_date_time: Types::FilterRelativeDateTimeControl
       attr_accessor cross_sheet: Types::FilterCrossSheetControl
+      attr_accessor hierarchy_list: Types::HierarchyFilterListControl
+      attr_accessor hierarchy_dropdown: Types::HierarchyFilterDropDownControl
       SENSITIVE: []
     end
 
@@ -6983,6 +7195,72 @@ module Aws::QuickSight
       attr_accessor actions: ::Array[Types::VisualCustomAction]
       attr_accessor visual_content_alt_text: ::String
       SENSITIVE: []
+    end
+
+    class HierarchyFilter
+      attr_accessor filter_id: ::String
+      attr_accessor column: Types::ColumnIdentifier
+      attr_accessor hierarchy_levels: ::Array[Types::HierarchyFilterLevel]
+      attr_accessor hierarchy_tree: Types::HierarchyFilterNode
+      attr_accessor null_option: ("ALL_VALUES" | "NULLS_ONLY" | "NON_NULLS_ONLY")
+      attr_accessor match_operator: ("INCLUDE" | "EXCLUDE")
+      attr_accessor default_filter_control_configuration: Types::DefaultFilterControlConfiguration
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterDropDownControl
+      attr_accessor filter_control_id: ::String
+      attr_accessor source_filter_id: ::String
+      attr_accessor title: ::String
+      attr_accessor display_options: Types::HierarchyFilterDropDownControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterDropDownControlDisplayOptions
+      attr_accessor title_options: Types::LabelOptions
+      attr_accessor info_icon_label_options: Types::SheetControlInfoIconLabelOptions
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterLevel
+      attr_accessor column: Types::ColumnIdentifier
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterListControl
+      attr_accessor filter_control_id: ::String
+      attr_accessor source_filter_id: ::String
+      attr_accessor title: ::String
+      attr_accessor display_options: Types::HierarchyFilterListControlDisplayOptions
+      attr_accessor type: ("MULTI_SELECT" | "SINGLE_SELECT")
+      attr_accessor commit_mode: ("AUTO" | "MANUAL")
+      attr_accessor control_sort_configurations: ::Array[Types::ControlSortConfiguration]
+      attr_accessor control_title_format_text: Types::ControlTitleFormatText
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterListControlDisplayOptions
+      attr_accessor title_options: Types::LabelOptions
+      attr_accessor info_icon_label_options: Types::SheetControlInfoIconLabelOptions
+      attr_accessor search_options: Types::HierarchyFilterListControlSearchOptions
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterListControlSearchOptions
+      attr_accessor visibility: ("HIDDEN" | "VISIBLE")
+      SENSITIVE: []
+    end
+
+    class HierarchyFilterNode
+      attr_accessor column: Types::ColumnIdentifier
+      attr_accessor parent_value: ::String
+      attr_accessor hierarchy_values: ::Array[::String]
+      attr_accessor children: ::Array[Types::HierarchyFilterNode]
+      SENSITIVE: [:parent_value]
     end
 
     class HistogramAggregatedFieldWells
@@ -8849,6 +9127,12 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class OneDriveClientCredentials
+      attr_accessor kms_key_arn: ::String
+      attr_accessor cert_thumbprint: ::String
+      SENSITIVE: [:kms_key_arn, :cert_thumbprint]
+    end
+
     class OneDriveParameters
       attr_accessor tenant_id: ::String
       attr_accessor client_id: ::String
@@ -10526,6 +10810,13 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class ServiceAccountCredentials
+      attr_accessor admin_account_email: ::String
+      attr_accessor service_account_private_key: ::String
+      attr_accessor client_email: ::String
+      SENSITIVE: [:service_account_private_key]
+    end
+
     class ServiceNowParameters
       attr_accessor site_base_url: ::String
       SENSITIVE: []
@@ -10552,6 +10843,12 @@ module Aws::QuickSight
     class ShapeConditionalFormat
       attr_accessor background_color: Types::ConditionalFormattingColor
       SENSITIVE: []
+    end
+
+    class SharePointClientCredentials
+      attr_accessor kms_key_arn: ::String
+      attr_accessor cert_thumbprint: ::String
+      SENSITIVE: [:kms_key_arn, :cert_thumbprint]
     end
 
     class SharePointParameters

@@ -133,8 +133,15 @@ module Aws::BedrockAgentCoreControl
     CategoricalScaleDefinitions = Shapes::ListShape.new(name: 'CategoricalScaleDefinitions')
     CedarPolicy = Shapes::StructureShape.new(name: 'CedarPolicy')
     Certificate = Shapes::StructureShape.new(name: 'Certificate')
+    CertificateBucketOwnerAccountId = Shapes::StringShape.new(name: 'CertificateBucketOwnerAccountId')
+    CertificateConfiguration = Shapes::UnionShape.new(name: 'CertificateConfiguration')
+    CertificateConfigurationList = Shapes::ListShape.new(name: 'CertificateConfigurationList')
     CertificateLocation = Shapes::UnionShape.new(name: 'CertificateLocation')
+    CertificateS3Uri = Shapes::StringShape.new(name: 'CertificateS3Uri')
+    CertificateSecretArn = Shapes::StringShape.new(name: 'CertificateSecretArn')
     Certificates = Shapes::ListShape.new(name: 'Certificates')
+    CircuitBreakerConfiguration = Shapes::StructureShape.new(name: 'CircuitBreakerConfiguration')
+    CircuitBreakerMode = Shapes::StringShape.new(name: 'CircuitBreakerMode')
     ClaimMatchOperatorType = Shapes::StringShape.new(name: 'ClaimMatchOperatorType')
     ClaimMatchValueType = Shapes::UnionShape.new(name: 'ClaimMatchValueType')
     ClientAuthenticationMethodType = Shapes::StringShape.new(name: 'ClientAuthenticationMethodType')
@@ -162,12 +169,16 @@ module Aws::BedrockAgentCoreControl
     CoinbaseCdpApiKeyIdType = Shapes::StringShape.new(name: 'CoinbaseCdpApiKeyIdType')
     CoinbaseCdpConfigurationInput = Shapes::StructureShape.new(name: 'CoinbaseCdpConfigurationInput')
     CoinbaseCdpConfigurationOutput = Shapes::StructureShape.new(name: 'CoinbaseCdpConfigurationOutput')
+    CoinbaseCdpRotationTargets = Shapes::StructureShape.new(name: 'CoinbaseCdpRotationTargets')
+    CoinbaseCdpSecret = Shapes::StringShape.new(name: 'CoinbaseCdpSecret')
+    CoinbaseCdpSecrets = Shapes::ListShape.new(name: 'CoinbaseCdpSecrets')
     ComponentConfiguration = Shapes::StructureShape.new(name: 'ComponentConfiguration')
     ComponentConfigurationMap = Shapes::MapShape.new(name: 'ComponentConfigurationMap')
     ComponentIdentifier = Shapes::StringShape.new(name: 'ComponentIdentifier')
     CompositeIdentifierEntry = Shapes::StringShape.new(name: 'CompositeIdentifierEntry')
     CompositeIdentifierList = Shapes::ListShape.new(name: 'CompositeIdentifierList')
     ComputeConfiguration = Shapes::UnionShape.new(name: 'ComputeConfiguration')
+    ConcreteModelId = Shapes::StringShape.new(name: 'ConcreteModelId')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     Condition = Shapes::UnionShape.new(name: 'Condition')
     Conditions = Shapes::ListShape.new(name: 'Conditions')
@@ -287,6 +298,7 @@ module Aws::BedrockAgentCoreControl
     CredentialProviderName = Shapes::StringShape.new(name: 'CredentialProviderName')
     CredentialProviderType = Shapes::StringShape.new(name: 'CredentialProviderType')
     CredentialProviderVendorType = Shapes::StringShape.new(name: 'CredentialProviderVendorType')
+    CredentialRotationConfig = Shapes::UnionShape.new(name: 'CredentialRotationConfig')
     CredentialsProviderConfiguration = Shapes::UnionShape.new(name: 'CredentialsProviderConfiguration')
     CredentialsProviderConfigurations = Shapes::ListShape.new(name: 'CredentialsProviderConfigurations')
     CustomClaimValidationType = Shapes::StructureShape.new(name: 'CustomClaimValidationType')
@@ -401,6 +413,7 @@ module Aws::BedrockAgentCoreControl
     DeviceName = Shapes::StringShape.new(name: 'DeviceName')
     DimensionKey = Shapes::StringShape.new(name: 'DimensionKey')
     DimensionKeys = Shapes::ListShape.new(name: 'DimensionKeys')
+    DimensionRatingScale = Shapes::UnionShape.new(name: 'DimensionRatingScale')
     DimensionValue = Shapes::StringShape.new(name: 'DimensionValue')
     DiscoveryUrl = Shapes::StringShape.new(name: 'DiscoveryUrl')
     DiscoveryUrlType = Shapes::StringShape.new(name: 'DiscoveryUrlType')
@@ -442,8 +455,13 @@ module Aws::BedrockAgentCoreControl
     EpisodicReflectionConfiguration = Shapes::StructureShape.new(name: 'EpisodicReflectionConfiguration')
     EpisodicReflectionConfigurationInput = Shapes::StructureShape.new(name: 'EpisodicReflectionConfigurationInput')
     EpisodicReflectionOverride = Shapes::StructureShape.new(name: 'EpisodicReflectionOverride')
+    ErrorStatusCodePattern = Shapes::StringShape.new(name: 'ErrorStatusCodePattern')
     EvaluationConfigDescription = Shapes::StringShape.new(name: 'EvaluationConfigDescription')
     EvaluationConfigName = Shapes::StringShape.new(name: 'EvaluationConfigName')
+    EvaluationDimension = Shapes::StructureShape.new(name: 'EvaluationDimension')
+    EvaluationDimensionInstruction = Shapes::StringShape.new(name: 'EvaluationDimensionInstruction')
+    EvaluationDimensionName = Shapes::StringShape.new(name: 'EvaluationDimensionName')
+    EvaluationDimensions = Shapes::ListShape.new(name: 'EvaluationDimensions')
     EvaluatorArn = Shapes::StringShape.new(name: 'EvaluatorArn')
     EvaluatorConfig = Shapes::UnionShape.new(name: 'EvaluatorConfig')
     EvaluatorDescription = Shapes::StringShape.new(name: 'EvaluatorDescription')
@@ -465,6 +483,15 @@ module Aws::BedrockAgentCoreControl
     ExtractionConfig = Shapes::UnionShape.new(name: 'ExtractionConfig')
     ExtractionConfiguration = Shapes::UnionShape.new(name: 'ExtractionConfiguration')
     ExtractionType = Shapes::StringShape.new(name: 'ExtractionType')
+    Fallback = Shapes::StructureShape.new(name: 'Fallback')
+    FallbackError = Shapes::StringShape.new(name: 'FallbackError')
+    FallbackFirstByteTimeoutMillisecondsInteger = Shapes::IntegerShape.new(name: 'FallbackFirstByteTimeoutMillisecondsInteger')
+    FallbackTarget = Shapes::StructureShape.new(name: 'FallbackTarget')
+    FallbackTargetFallbackList = Shapes::ListShape.new(name: 'FallbackTargetFallbackList')
+    FallbackTargetFirstByteTimeoutMillisecondsInteger = Shapes::IntegerShape.new(name: 'FallbackTargetFirstByteTimeoutMillisecondsInteger')
+    FallbackTriggers = Shapes::StructureShape.new(name: 'FallbackTriggers')
+    FallbackTriggersErrorsList = Shapes::ListShape.new(name: 'FallbackTriggersErrorsList')
+    FallbackTriggersStatusCodesList = Shapes::ListShape.new(name: 'FallbackTriggersStatusCodesList')
     FilesystemConfiguration = Shapes::UnionShape.new(name: 'FilesystemConfiguration')
     FilesystemConfigurations = Shapes::ListShape.new(name: 'FilesystemConfigurations')
     Filter = Shapes::StructureShape.new(name: 'Filter')
@@ -877,6 +904,10 @@ module Aws::BedrockAgentCoreControl
     MCPGatewayConfiguration = Shapes::StructureShape.new(name: 'MCPGatewayConfiguration')
     ManagedResourceDetails = Shapes::StructureShape.new(name: 'ManagedResourceDetails')
     ManagedVpcResource = Shapes::StructureShape.new(name: 'ManagedVpcResource')
+    MatchModelEntry = Shapes::StructureShape.new(name: 'MatchModelEntry')
+    MatchModels = Shapes::StructureShape.new(name: 'MatchModels')
+    MatchModelsAnyOfList = Shapes::ListShape.new(name: 'MatchModelsAnyOfList')
+    MatchOperator = Shapes::StringShape.new(name: 'MatchOperator')
     MatchPathPattern = Shapes::StringShape.new(name: 'MatchPathPattern')
     MatchPaths = Shapes::StructureShape.new(name: 'MatchPaths')
     MatchPathsAnyOfList = Shapes::ListShape.new(name: 'MatchPathsAnyOfList')
@@ -1078,6 +1109,9 @@ module Aws::BedrockAgentCoreControl
     RatingScale = Shapes::UnionShape.new(name: 'RatingScale')
     ReasoningConfiguration = Shapes::StructureShape.new(name: 'ReasoningConfiguration')
     ReasoningConfigurationEffortString = Shapes::StringShape.new(name: 'ReasoningConfigurationEffortString')
+    RecordExpiryAction = Shapes::StringShape.new(name: 'RecordExpiryAction')
+    RecordExpiryDurationDays = Shapes::IntegerShape.new(name: 'RecordExpiryDurationDays')
+    RecordExpirySpecification = Shapes::UnionShape.new(name: 'RecordExpirySpecification')
     RecordIdentifier = Shapes::StringShape.new(name: 'RecordIdentifier')
     RecordingConfig = Shapes::StructureShape.new(name: 'RecordingConfig')
     ReflectionConfiguration = Shapes::UnionShape.new(name: 'ReflectionConfiguration')
@@ -1128,6 +1162,8 @@ module Aws::BedrockAgentCoreControl
     RootVolumeConfiguration = Shapes::StructureShape.new(name: 'RootVolumeConfiguration')
     RootVolumeConfigurationFreeSpaceGiBInteger = Shapes::IntegerShape.new(name: 'RootVolumeConfigurationFreeSpaceGiBInteger')
     RootVolumeConfigurationThroughputInteger = Shapes::IntegerShape.new(name: 'RootVolumeConfigurationThroughputInteger')
+    RotatePaymentConnectorCredentialsRequest = Shapes::StructureShape.new(name: 'RotatePaymentConnectorCredentialsRequest')
+    RotatePaymentConnectorCredentialsResponse = Shapes::StructureShape.new(name: 'RotatePaymentConnectorCredentialsResponse')
     RouteToTargetAction = Shapes::UnionShape.new(name: 'RouteToTargetAction')
     RoutingDomain = Shapes::StringShape.new(name: 'RoutingDomain')
     Rule = Shapes::StructureShape.new(name: 'Rule')
@@ -1137,6 +1173,7 @@ module Aws::BedrockAgentCoreControl
     RuntimeQualifier = Shapes::StringShape.new(name: 'RuntimeQualifier')
     RuntimeTargetConfiguration = Shapes::StructureShape.new(name: 'RuntimeTargetConfiguration')
     S3BucketUri = Shapes::StringShape.new(name: 'S3BucketUri')
+    S3CertificateConfiguration = Shapes::StructureShape.new(name: 'S3CertificateConfiguration')
     S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
     S3FilesAccessPointArn = Shapes::StringShape.new(name: 'S3FilesAccessPointArn')
     S3FilesAccessPointConfiguration = Shapes::StructureShape.new(name: 'S3FilesAccessPointConfiguration')
@@ -1168,6 +1205,7 @@ module Aws::BedrockAgentCoreControl
     SecretJsonKeyType = Shapes::StringShape.new(name: 'SecretJsonKeyType')
     SecretReference = Shapes::StructureShape.new(name: 'SecretReference')
     SecretSourceType = Shapes::StringShape.new(name: 'SecretSourceType')
+    SecretsManagerCertificateConfiguration = Shapes::StructureShape.new(name: 'SecretsManagerCertificateConfiguration')
     SecretsManagerLocation = Shapes::StructureShape.new(name: 'SecretsManagerLocation')
     SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
     SecurityGroupIdentifier = Shapes::StringShape.new(name: 'SecurityGroupIdentifier')
@@ -1708,6 +1746,16 @@ module Aws::BedrockAgentCoreControl
     Certificate.add_member(:location, Shapes::ShapeRef.new(shape: CertificateLocation, required: true, location_name: "location"))
     Certificate.struct_class = Types::Certificate
 
+    CertificateConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: S3CertificateConfiguration, location_name: "s3"))
+    CertificateConfiguration.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManagerCertificateConfiguration, location_name: "secretsManager"))
+    CertificateConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CertificateConfiguration.add_member_subclass(:s3, Types::CertificateConfiguration::S3)
+    CertificateConfiguration.add_member_subclass(:secrets_manager, Types::CertificateConfiguration::SecretsManager)
+    CertificateConfiguration.add_member_subclass(:unknown, Types::CertificateConfiguration::Unknown)
+    CertificateConfiguration.struct_class = Types::CertificateConfiguration
+
+    CertificateConfigurationList.member = Shapes::ShapeRef.new(shape: CertificateConfiguration)
+
     CertificateLocation.add_member(:secrets_manager, Shapes::ShapeRef.new(shape: SecretsManagerLocation, location_name: "secretsManager"))
     CertificateLocation.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     CertificateLocation.add_member_subclass(:secrets_manager, Types::CertificateLocation::SecretsManager)
@@ -1715,6 +1763,9 @@ module Aws::BedrockAgentCoreControl
     CertificateLocation.struct_class = Types::CertificateLocation
 
     Certificates.member = Shapes::ShapeRef.new(shape: Certificate)
+
+    CircuitBreakerConfiguration.add_member(:mode, Shapes::ShapeRef.new(shape: CircuitBreakerMode, location_name: "mode"))
+    CircuitBreakerConfiguration.struct_class = Types::CircuitBreakerConfiguration
 
     ClaimMatchValueType.add_member(:match_value_string, Shapes::ShapeRef.new(shape: MatchValueString, location_name: "matchValueString"))
     ClaimMatchValueType.add_member(:match_value_string_list, Shapes::ShapeRef.new(shape: MatchValueStringList, location_name: "matchValueStringList"))
@@ -1797,6 +1848,11 @@ module Aws::BedrockAgentCoreControl
     CoinbaseCdpConfigurationOutput.add_member(:wallet_secret_source, Shapes::ShapeRef.new(shape: SecretSourceType, location_name: "walletSecretSource"))
     CoinbaseCdpConfigurationOutput.struct_class = Types::CoinbaseCdpConfigurationOutput
 
+    CoinbaseCdpRotationTargets.add_member(:secrets, Shapes::ShapeRef.new(shape: CoinbaseCdpSecrets, required: true, location_name: "secrets"))
+    CoinbaseCdpRotationTargets.struct_class = Types::CoinbaseCdpRotationTargets
+
+    CoinbaseCdpSecrets.member = Shapes::ShapeRef.new(shape: CoinbaseCdpSecret)
+
     ComponentConfiguration.add_member(:configuration, Shapes::ShapeRef.new(shape: Document, required: true, location_name: "configuration"))
     ComponentConfiguration.struct_class = Types::ComponentConfiguration
 
@@ -1816,9 +1872,11 @@ module Aws::BedrockAgentCoreControl
 
     Condition.add_member(:match_principals, Shapes::ShapeRef.new(shape: MatchPrincipals, location_name: "matchPrincipals"))
     Condition.add_member(:match_paths, Shapes::ShapeRef.new(shape: MatchPaths, location_name: "matchPaths"))
+    Condition.add_member(:match_models, Shapes::ShapeRef.new(shape: MatchModels, location_name: "matchModels"))
     Condition.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     Condition.add_member_subclass(:match_principals, Types::Condition::MatchPrincipals)
     Condition.add_member_subclass(:match_paths, Types::Condition::MatchPaths)
+    Condition.add_member_subclass(:match_models, Types::Condition::MatchModels)
     Condition.add_member_subclass(:unknown, Types::Condition::Unknown)
     Condition.struct_class = Types::Condition
 
@@ -2207,6 +2265,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, location_name: "credentialProviderConfigurations"))
     CreateGatewayTargetRequest.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     CreateGatewayTargetRequest.add_member(:private_endpoint, Shapes::ShapeRef.new(shape: PrivateEndpoint, location_name: "privateEndpoint"))
+    CreateGatewayTargetRequest.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     CreateGatewayTargetRequest.struct_class = Types::CreateGatewayTargetRequest
 
     CreateGatewayTargetResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "gatewayArn"))
@@ -2225,6 +2284,7 @@ module Aws::BedrockAgentCoreControl
     CreateGatewayTargetResponse.add_member(:private_endpoint_managed_resources, Shapes::ShapeRef.new(shape: PrivateEndpointManagedResources, location_name: "privateEndpointManagedResources"))
     CreateGatewayTargetResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     CreateGatewayTargetResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: TargetProtocolType, location_name: "protocolType"))
+    CreateGatewayTargetResponse.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     CreateGatewayTargetResponse.struct_class = Types::CreateGatewayTargetResponse
 
     CreateHarnessEndpointRequest.add_member(:harness_id, Shapes::ShapeRef.new(shape: HarnessId, required: true, location: "uri", location_name: "harnessId"))
@@ -2463,6 +2523,12 @@ module Aws::BedrockAgentCoreControl
 
     CredentialProviderConfigurations.member = Shapes::ShapeRef.new(shape: CredentialProviderConfiguration)
 
+    CredentialRotationConfig.add_member(:coinbase_cdp, Shapes::ShapeRef.new(shape: CoinbaseCdpRotationTargets, location_name: "coinbaseCDP"))
+    CredentialRotationConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CredentialRotationConfig.add_member_subclass(:coinbase_cdp, Types::CredentialRotationConfig::CoinbaseCdp)
+    CredentialRotationConfig.add_member_subclass(:unknown, Types::CredentialRotationConfig::Unknown)
+    CredentialRotationConfig.struct_class = Types::CredentialRotationConfig
+
     CredentialsProviderConfiguration.add_member(:coinbase_cdp, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "coinbaseCDP"))
     CredentialsProviderConfiguration.add_member(:stripe_privy, Shapes::ShapeRef.new(shape: PaymentCredentialProviderConfiguration, location_name: "stripePrivy"))
     CredentialsProviderConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -2558,6 +2624,7 @@ module Aws::BedrockAgentCoreControl
     CustomMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     CustomMemoryStrategyInput.add_member(:configuration, Shapes::ShapeRef.new(shape: CustomConfigurationInput, location_name: "configuration"))
     CustomMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    CustomMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     CustomMemoryStrategyInput.struct_class = Types::CustomMemoryStrategyInput
 
     CustomOauth2ProviderConfigInput.add_member(:oauth_discovery, Shapes::ShapeRef.new(shape: Oauth2Discovery, required: true, location_name: "oauthDiscovery"))
@@ -2704,6 +2771,7 @@ module Aws::BedrockAgentCoreControl
     DeleteConfigurationBundleRequest.add_member(:bundle_id, Shapes::ShapeRef.new(shape: ConfigurationBundleId, required: true, location: "uri", location_name: "bundleId"))
     DeleteConfigurationBundleRequest.struct_class = Types::DeleteConfigurationBundleRequest
 
+    DeleteConfigurationBundleResponse.add_member(:bundle_arn, Shapes::ShapeRef.new(shape: ConfigurationBundleArn, required: true, location_name: "bundleArn"))
     DeleteConfigurationBundleResponse.add_member(:bundle_id, Shapes::ShapeRef.new(shape: ConfigurationBundleId, required: true, location_name: "bundleId"))
     DeleteConfigurationBundleResponse.add_member(:status, Shapes::ShapeRef.new(shape: ConfigurationBundleStatus, required: true, location_name: "status"))
     DeleteConfigurationBundleResponse.struct_class = Types::DeleteConfigurationBundleResponse
@@ -2909,6 +2977,14 @@ module Aws::BedrockAgentCoreControl
 
     DimensionKeys.member = Shapes::ShapeRef.new(shape: DimensionKey)
 
+    DimensionRatingScale.add_member(:numerical, Shapes::ShapeRef.new(shape: NumericalScaleDefinitions, location_name: "numerical"))
+    DimensionRatingScale.add_member(:categorical, Shapes::ShapeRef.new(shape: CategoricalScaleDefinitions, location_name: "categorical"))
+    DimensionRatingScale.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DimensionRatingScale.add_member_subclass(:numerical, Types::DimensionRatingScale::Numerical)
+    DimensionRatingScale.add_member_subclass(:categorical, Types::DimensionRatingScale::Categorical)
+    DimensionRatingScale.add_member_subclass(:unknown, Types::DimensionRatingScale::Unknown)
+    DimensionRatingScale.struct_class = Types::DimensionRatingScale
+
     EbsVolumeConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: VolumeName, required: true, location_name: "name"))
     EbsVolumeConfiguration.add_member(:size_gi_b, Shapes::ShapeRef.new(shape: VolumeSizeGiB, required: true, location_name: "sizeGiB"))
     EbsVolumeConfiguration.add_member(:volume_type, Shapes::ShapeRef.new(shape: EbsVolumeType, location_name: "volumeType"))
@@ -2973,6 +3049,7 @@ module Aws::BedrockAgentCoreControl
     EpisodicMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     EpisodicMemoryStrategyInput.add_member(:reflection_configuration, Shapes::ShapeRef.new(shape: EpisodicReflectionConfigurationInput, location_name: "reflectionConfiguration"))
     EpisodicMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    EpisodicMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     EpisodicMemoryStrategyInput.struct_class = Types::EpisodicMemoryStrategyInput
 
     EpisodicOverrideConfigurationInput.add_member(:extraction, Shapes::ShapeRef.new(shape: EpisodicOverrideExtractionConfigurationInput, location_name: "extraction"))
@@ -3011,6 +3088,13 @@ module Aws::BedrockAgentCoreControl
     EpisodicReflectionOverride.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     EpisodicReflectionOverride.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
     EpisodicReflectionOverride.struct_class = Types::EpisodicReflectionOverride
+
+    EvaluationDimension.add_member(:dimension_name, Shapes::ShapeRef.new(shape: EvaluationDimensionName, required: true, location_name: "dimensionName"))
+    EvaluationDimension.add_member(:dimension_instruction, Shapes::ShapeRef.new(shape: EvaluationDimensionInstruction, required: true, location_name: "dimensionInstruction"))
+    EvaluationDimension.add_member(:dimension_rating_scale, Shapes::ShapeRef.new(shape: DimensionRatingScale, required: true, location_name: "dimensionRatingScale"))
+    EvaluationDimension.struct_class = Types::EvaluationDimension
+
+    EvaluationDimensions.member = Shapes::ShapeRef.new(shape: EvaluationDimension)
 
     EvaluatorConfig.add_member(:llm_as_a_judge, Shapes::ShapeRef.new(shape: LlmAsAJudgeEvaluatorConfig, location_name: "llmAsAJudge"))
     EvaluatorConfig.add_member(:code_based, Shapes::ShapeRef.new(shape: CodeBasedEvaluatorConfig, location_name: "codeBased"))
@@ -3067,6 +3151,28 @@ module Aws::BedrockAgentCoreControl
     ExtractionConfiguration.add_member_subclass(:custom_extraction_configuration, Types::ExtractionConfiguration::CustomExtractionConfiguration)
     ExtractionConfiguration.add_member_subclass(:unknown, Types::ExtractionConfiguration::Unknown)
     ExtractionConfiguration.struct_class = Types::ExtractionConfiguration
+
+    Fallback.add_member(:trigger_on, Shapes::ShapeRef.new(shape: FallbackTriggers, location_name: "triggerOn"))
+    Fallback.add_member(:first_byte_timeout_milliseconds, Shapes::ShapeRef.new(shape: FallbackFirstByteTimeoutMillisecondsInteger, location_name: "firstByteTimeoutMilliseconds"))
+    Fallback.add_member(:circuit_breaker, Shapes::ShapeRef.new(shape: CircuitBreakerConfiguration, location_name: "circuitBreaker"))
+    Fallback.add_member(:target_fallback, Shapes::ShapeRef.new(shape: FallbackTargetFallbackList, required: true, location_name: "targetFallback"))
+    Fallback.struct_class = Types::Fallback
+
+    FallbackTarget.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "targetName"))
+    FallbackTarget.add_member(:model, Shapes::ShapeRef.new(shape: ConcreteModelId, location_name: "model"))
+    FallbackTarget.add_member(:trigger_on, Shapes::ShapeRef.new(shape: FallbackTriggers, location_name: "triggerOn"))
+    FallbackTarget.add_member(:first_byte_timeout_milliseconds, Shapes::ShapeRef.new(shape: FallbackTargetFirstByteTimeoutMillisecondsInteger, location_name: "firstByteTimeoutMilliseconds"))
+    FallbackTarget.struct_class = Types::FallbackTarget
+
+    FallbackTargetFallbackList.member = Shapes::ShapeRef.new(shape: FallbackTarget)
+
+    FallbackTriggers.add_member(:status_codes, Shapes::ShapeRef.new(shape: FallbackTriggersStatusCodesList, location_name: "statusCodes"))
+    FallbackTriggers.add_member(:errors, Shapes::ShapeRef.new(shape: FallbackTriggersErrorsList, location_name: "errors"))
+    FallbackTriggers.struct_class = Types::FallbackTriggers
+
+    FallbackTriggersErrorsList.member = Shapes::ShapeRef.new(shape: FallbackError)
+
+    FallbackTriggersStatusCodesList.member = Shapes::ShapeRef.new(shape: ErrorStatusCodePattern)
 
     FilesystemConfiguration.add_member(:session_storage, Shapes::ShapeRef.new(shape: SessionStorageConfiguration, location_name: "sessionStorage"))
     FilesystemConfiguration.add_member(:s3_files_access_point, Shapes::ShapeRef.new(shape: S3FilesAccessPointConfiguration, location_name: "s3FilesAccessPoint"))
@@ -3182,6 +3288,7 @@ module Aws::BedrockAgentCoreControl
     GatewayTarget.add_member(:private_endpoint_managed_resources, Shapes::ShapeRef.new(shape: PrivateEndpointManagedResources, location_name: "privateEndpointManagedResources"))
     GatewayTarget.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     GatewayTarget.add_member(:protocol_type, Shapes::ShapeRef.new(shape: TargetProtocolType, location_name: "protocolType"))
+    GatewayTarget.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     GatewayTarget.struct_class = Types::GatewayTarget
 
     GatewayTargetList.member = Shapes::ShapeRef.new(shape: GatewayTarget)
@@ -3478,6 +3585,7 @@ module Aws::BedrockAgentCoreControl
     GetGatewayTargetResponse.add_member(:private_endpoint_managed_resources, Shapes::ShapeRef.new(shape: PrivateEndpointManagedResources, location_name: "privateEndpointManagedResources"))
     GetGatewayTargetResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     GetGatewayTargetResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: TargetProtocolType, location_name: "protocolType"))
+    GetGatewayTargetResponse.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     GetGatewayTargetResponse.struct_class = Types::GetGatewayTargetResponse
 
     GetHarnessEndpointRequest.add_member(:harness_id, Shapes::ShapeRef.new(shape: HarnessId, required: true, location: "uri", location_name: "harnessId"))
@@ -3547,11 +3655,13 @@ module Aws::BedrockAgentCoreControl
     GetPaymentConnectorResponse.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
     GetPaymentConnectorResponse.add_member(:description, Shapes::ShapeRef.new(shape: PaymentsDescription, location_name: "description"))
     GetPaymentConnectorResponse.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    GetPaymentConnectorResponse.add_member(:provision_mode, Shapes::ShapeRef.new(shape: PaymentConnectorProvisionMode, location_name: "provisionMode"))
     GetPaymentConnectorResponse.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialsProviderConfigurations, required: true, location_name: "credentialProviderConfigurations"))
     GetPaymentConnectorResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "createdAt"))
     GetPaymentConnectorResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     GetPaymentConnectorResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
     GetPaymentConnectorResponse.add_member(:authorization_url, Shapes::ShapeRef.new(shape: PaymentConnectorAuthorizationUrl, location_name: "authorizationUrl"))
+    GetPaymentConnectorResponse.add_member(:credentials_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, location_name: "credentialsUpdatedAt"))
     GetPaymentConnectorResponse.struct_class = Types::GetPaymentConnectorResponse
 
     GetPaymentCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -4672,6 +4782,7 @@ module Aws::BedrockAgentCoreControl
     MCPGatewayConfiguration.add_member(:search_type, Shapes::ShapeRef.new(shape: SearchType, location_name: "searchType"))
     MCPGatewayConfiguration.add_member(:session_configuration, Shapes::ShapeRef.new(shape: SessionConfiguration, location_name: "sessionConfiguration"))
     MCPGatewayConfiguration.add_member(:streaming_configuration, Shapes::ShapeRef.new(shape: StreamingConfiguration, location_name: "streamingConfiguration"))
+    MCPGatewayConfiguration.add_member(:disable_mcp_list_tools_pagination, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableMcpListToolsPagination"))
     MCPGatewayConfiguration.struct_class = Types::MCPGatewayConfiguration
 
     ManagedResourceDetails.add_member(:domain, Shapes::ShapeRef.new(shape: DomainName, location_name: "domain"))
@@ -4686,6 +4797,15 @@ module Aws::BedrockAgentCoreControl
     ManagedVpcResource.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     ManagedVpcResource.add_member(:routing_domain, Shapes::ShapeRef.new(shape: RoutingDomain, location_name: "routingDomain"))
     ManagedVpcResource.struct_class = Types::ManagedVpcResource
+
+    MatchModelEntry.add_member(:value, Shapes::ShapeRef.new(shape: ModelPattern, required: true, location_name: "value"))
+    MatchModelEntry.add_member(:operator, Shapes::ShapeRef.new(shape: MatchOperator, location_name: "operator"))
+    MatchModelEntry.struct_class = Types::MatchModelEntry
+
+    MatchModels.add_member(:any_of, Shapes::ShapeRef.new(shape: MatchModelsAnyOfList, required: true, location_name: "anyOf"))
+    MatchModels.struct_class = Types::MatchModels
+
+    MatchModelsAnyOfList.member = Shapes::ShapeRef.new(shape: MatchModelEntry)
 
     MatchPaths.add_member(:any_of, Shapes::ShapeRef.new(shape: MatchPathsAnyOfList, required: true, location_name: "anyOf"))
     MatchPaths.struct_class = Types::MatchPaths
@@ -4777,6 +4897,7 @@ module Aws::BedrockAgentCoreControl
     MemoryStrategy.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     MemoryStrategy.add_member(:status, Shapes::ShapeRef.new(shape: MemoryStrategyStatus, location_name: "status"))
     MemoryStrategy.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    MemoryStrategy.add_member(:record_expiry_duration_days, Shapes::ShapeRef.new(shape: RecordExpiryDurationDays, location_name: "recordExpiryDurationDays"))
     MemoryStrategy.struct_class = Types::MemoryStrategy
 
     MemoryStrategyInput.add_member(:semantic_memory_strategy, Shapes::ShapeRef.new(shape: SemanticMemoryStrategyInput, location_name: "semanticMemoryStrategy"))
@@ -4874,6 +4995,7 @@ module Aws::BedrockAgentCoreControl
     ModifyMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     ModifyMemoryStrategyInput.add_member(:configuration, Shapes::ShapeRef.new(shape: ModifyStrategyConfiguration, location_name: "configuration"))
     ModifyMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    ModifyMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     ModifyMemoryStrategyInput.struct_class = Types::ModifyMemoryStrategyInput
 
     ModifyReflectionConfiguration.add_member(:episodic_reflection_configuration, Shapes::ShapeRef.new(shape: EpisodicReflectionConfigurationInput, location_name: "episodicReflectionConfiguration"))
@@ -5050,6 +5172,7 @@ module Aws::BedrockAgentCoreControl
     PaymentConnectorSummary.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
     PaymentConnectorSummary.add_member(:name, Shapes::ShapeRef.new(shape: PaymentConnectorName, required: true, location_name: "name"))
     PaymentConnectorSummary.add_member(:type, Shapes::ShapeRef.new(shape: PaymentConnectorType, required: true, location_name: "type"))
+    PaymentConnectorSummary.add_member(:provision_mode, Shapes::ShapeRef.new(shape: PaymentConnectorProvisionMode, location_name: "provisionMode"))
     PaymentConnectorSummary.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
     PaymentConnectorSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
     PaymentConnectorSummary.struct_class = Types::PaymentConnectorSummary
@@ -5254,14 +5377,24 @@ module Aws::BedrockAgentCoreControl
 
     RatingScale.add_member(:numerical, Shapes::ShapeRef.new(shape: NumericalScaleDefinitions, location_name: "numerical"))
     RatingScale.add_member(:categorical, Shapes::ShapeRef.new(shape: CategoricalScaleDefinitions, location_name: "categorical"))
+    RatingScale.add_member(:multi_dimensional, Shapes::ShapeRef.new(shape: EvaluationDimensions, location_name: "multiDimensional"))
     RatingScale.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     RatingScale.add_member_subclass(:numerical, Types::RatingScale::Numerical)
     RatingScale.add_member_subclass(:categorical, Types::RatingScale::Categorical)
+    RatingScale.add_member_subclass(:multi_dimensional, Types::RatingScale::MultiDimensional)
     RatingScale.add_member_subclass(:unknown, Types::RatingScale::Unknown)
     RatingScale.struct_class = Types::RatingScale
 
     ReasoningConfiguration.add_member(:effort, Shapes::ShapeRef.new(shape: ReasoningConfigurationEffortString, location_name: "effort"))
     ReasoningConfiguration.struct_class = Types::ReasoningConfiguration
+
+    RecordExpirySpecification.add_member(:record_expiry_duration_days, Shapes::ShapeRef.new(shape: RecordExpiryDurationDays, location_name: "recordExpiryDurationDays"))
+    RecordExpirySpecification.add_member(:action, Shapes::ShapeRef.new(shape: RecordExpiryAction, location_name: "action"))
+    RecordExpirySpecification.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RecordExpirySpecification.add_member_subclass(:record_expiry_duration_days, Types::RecordExpirySpecification::RecordExpiryDurationDays)
+    RecordExpirySpecification.add_member_subclass(:action, Types::RecordExpirySpecification::Action)
+    RecordExpirySpecification.add_member_subclass(:unknown, Types::RecordExpirySpecification::Unknown)
+    RecordExpirySpecification.struct_class = Types::RecordExpirySpecification
 
     RecordingConfig.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     RecordingConfig.add_member(:s3_location, Shapes::ShapeRef.new(shape: S3Location, location_name: "s3Location"))
@@ -5372,6 +5505,18 @@ module Aws::BedrockAgentCoreControl
     RootVolumeConfiguration.add_member(:free_space_gi_b, Shapes::ShapeRef.new(shape: RootVolumeConfigurationFreeSpaceGiBInteger, location_name: "freeSpaceGiB"))
     RootVolumeConfiguration.struct_class = Types::RootVolumeConfiguration
 
+    RotatePaymentConnectorCredentialsRequest.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location: "uri", location_name: "paymentManagerId"))
+    RotatePaymentConnectorCredentialsRequest.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location: "uri", location_name: "paymentConnectorId"))
+    RotatePaymentConnectorCredentialsRequest.add_member(:credentials_to_rotate, Shapes::ShapeRef.new(shape: CredentialRotationConfig, required: true, location_name: "credentialsToRotate"))
+    RotatePaymentConnectorCredentialsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    RotatePaymentConnectorCredentialsRequest.struct_class = Types::RotatePaymentConnectorCredentialsRequest
+
+    RotatePaymentConnectorCredentialsResponse.add_member(:payment_connector_id, Shapes::ShapeRef.new(shape: PaymentConnectorId, required: true, location_name: "paymentConnectorId"))
+    RotatePaymentConnectorCredentialsResponse.add_member(:payment_manager_id, Shapes::ShapeRef.new(shape: PaymentManagerId, required: true, location_name: "paymentManagerId"))
+    RotatePaymentConnectorCredentialsResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTimestamp, required: true, location_name: "lastUpdatedAt"))
+    RotatePaymentConnectorCredentialsResponse.add_member(:status, Shapes::ShapeRef.new(shape: PaymentConnectorStatus, required: true, location_name: "status"))
+    RotatePaymentConnectorCredentialsResponse.struct_class = Types::RotatePaymentConnectorCredentialsResponse
+
     RouteToTargetAction.add_member(:static_route, Shapes::ShapeRef.new(shape: StaticRoute, location_name: "staticRoute"))
     RouteToTargetAction.add_member(:weighted_route, Shapes::ShapeRef.new(shape: WeightedRoute, location_name: "weightedRoute"))
     RouteToTargetAction.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -5392,6 +5537,10 @@ module Aws::BedrockAgentCoreControl
     RuntimeTargetConfiguration.add_member(:qualifier, Shapes::ShapeRef.new(shape: RuntimeQualifier, location_name: "qualifier"))
     RuntimeTargetConfiguration.add_member(:schema, Shapes::ShapeRef.new(shape: HttpApiSchemaConfiguration, location_name: "schema"))
     RuntimeTargetConfiguration.struct_class = Types::RuntimeTargetConfiguration
+
+    S3CertificateConfiguration.add_member(:uri, Shapes::ShapeRef.new(shape: CertificateS3Uri, required: true, location_name: "uri"))
+    S3CertificateConfiguration.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: CertificateBucketOwnerAccountId, location_name: "bucketOwnerAccountId"))
+    S3CertificateConfiguration.struct_class = Types::S3CertificateConfiguration
 
     S3Configuration.add_member(:uri, Shapes::ShapeRef.new(shape: S3BucketUri, location_name: "uri"))
     S3Configuration.add_member(:bucket_owner_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, location_name: "bucketOwnerAccountId"))
@@ -5448,6 +5597,9 @@ module Aws::BedrockAgentCoreControl
     SecretReference.add_member(:json_key, Shapes::ShapeRef.new(shape: SecretJsonKeyType, required: true, location_name: "jsonKey"))
     SecretReference.struct_class = Types::SecretReference
 
+    SecretsManagerCertificateConfiguration.add_member(:secret_arn, Shapes::ShapeRef.new(shape: CertificateSecretArn, required: true, location_name: "secretArn"))
+    SecretsManagerCertificateConfiguration.struct_class = Types::SecretsManagerCertificateConfiguration
+
     SecretsManagerLocation.add_member(:secret_arn, Shapes::ShapeRef.new(shape: ToolSecretArn, required: true, location_name: "secretArn"))
     SecretsManagerLocation.struct_class = Types::SecretsManagerLocation
 
@@ -5484,6 +5636,7 @@ module Aws::BedrockAgentCoreControl
     SemanticMemoryStrategyInput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, deprecated: true, location_name: "namespaces", metadata: {"deprecatedMessage" => "Use namespaceTemplates instead", "deprecatedSince" => "2026-03-02"}))
     SemanticMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     SemanticMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    SemanticMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     SemanticMemoryStrategyInput.struct_class = Types::SemanticMemoryStrategyInput
 
     SemanticOverrideConfigurationInput.add_member(:extraction, Shapes::ShapeRef.new(shape: SemanticOverrideExtractionConfigurationInput, location_name: "extraction"))
@@ -5570,6 +5723,8 @@ module Aws::BedrockAgentCoreControl
     StaticQueryParameters.value = Shapes::ShapeRef.new(shape: StaticQueryParameterValue)
 
     StaticRoute.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "targetName"))
+    StaticRoute.add_member(:model, Shapes::ShapeRef.new(shape: ConcreteModelId, location_name: "model"))
+    StaticRoute.add_member(:fallback, Shapes::ShapeRef.new(shape: Fallback, location_name: "fallback"))
     StaticRoute.struct_class = Types::StaticRoute
 
     StatusReasons.member = Shapes::ShapeRef.new(shape: StatusReason)
@@ -5656,6 +5811,7 @@ module Aws::BedrockAgentCoreControl
     SummaryMemoryStrategyInput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, deprecated: true, location_name: "namespaces", metadata: {"deprecatedMessage" => "Use namespaceTemplates instead", "deprecatedSince" => "2026-03-02"}))
     SummaryMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     SummaryMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    SummaryMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     SummaryMemoryStrategyInput.struct_class = Types::SummaryMemoryStrategyInput
 
     SummaryOverrideConfigurationInput.add_member(:consolidation, Shapes::ShapeRef.new(shape: SummaryOverrideConsolidationConfigurationInput, location_name: "consolidation"))
@@ -5718,9 +5874,11 @@ module Aws::BedrockAgentCoreControl
 
     TargetTrafficSplitEntries.member = Shapes::ShapeRef.new(shape: TargetTrafficSplitEntry)
 
+    TargetTrafficSplitEntry.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "targetName"))
+    TargetTrafficSplitEntry.add_member(:model, Shapes::ShapeRef.new(shape: ConcreteModelId, location_name: "model"))
+    TargetTrafficSplitEntry.add_member(:fallback, Shapes::ShapeRef.new(shape: Fallback, location_name: "fallback"))
     TargetTrafficSplitEntry.add_member(:name, Shapes::ShapeRef.new(shape: TargetTrafficSplitEntryNameString, required: true, location_name: "name"))
     TargetTrafficSplitEntry.add_member(:weight, Shapes::ShapeRef.new(shape: TargetTrafficSplitEntryWeightInteger, required: true, location_name: "weight"))
-    TargetTrafficSplitEntry.add_member(:target_name, Shapes::ShapeRef.new(shape: TargetName, required: true, location_name: "targetName"))
     TargetTrafficSplitEntry.add_member(:description, Shapes::ShapeRef.new(shape: TargetTrafficSplitEntryDescriptionString, location_name: "description"))
     TargetTrafficSplitEntry.add_member(:metadata, Shapes::ShapeRef.new(shape: TrafficSplitMetadataMap, location_name: "metadata"))
     TargetTrafficSplitEntry.struct_class = Types::TargetTrafficSplitEntry
@@ -5903,7 +6061,7 @@ module Aws::BedrockAgentCoreControl
     UpdateConfigurationBundleRequest.add_member(:components, Shapes::ShapeRef.new(shape: ComponentConfigurationMap, location_name: "components"))
     UpdateConfigurationBundleRequest.add_member(:parent_version_ids, Shapes::ShapeRef.new(shape: ConfigurationBundleVersionList, required: true, location_name: "parentVersionIds"))
     UpdateConfigurationBundleRequest.add_member(:branch_name, Shapes::ShapeRef.new(shape: BranchName, location_name: "branchName"))
-    UpdateConfigurationBundleRequest.add_member(:commit_message, Shapes::ShapeRef.new(shape: UpdateConfigurationBundleRequestCommitMessageString, location_name: "commitMessage"))
+    UpdateConfigurationBundleRequest.add_member(:commit_message, Shapes::ShapeRef.new(shape: UpdateConfigurationBundleRequestCommitMessageString, required: true, location_name: "commitMessage"))
     UpdateConfigurationBundleRequest.add_member(:created_by, Shapes::ShapeRef.new(shape: VersionCreatedBySource, location_name: "createdBy"))
     UpdateConfigurationBundleRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "kmsKeyArn"))
     UpdateConfigurationBundleRequest.struct_class = Types::UpdateConfigurationBundleRequest
@@ -6056,6 +6214,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayTargetRequest.add_member(:credential_provider_configurations, Shapes::ShapeRef.new(shape: CredentialProviderConfigurations, location_name: "credentialProviderConfigurations"))
     UpdateGatewayTargetRequest.add_member(:metadata_configuration, Shapes::ShapeRef.new(shape: MetadataConfiguration, location_name: "metadataConfiguration"))
     UpdateGatewayTargetRequest.add_member(:private_endpoint, Shapes::ShapeRef.new(shape: PrivateEndpoint, location_name: "privateEndpoint"))
+    UpdateGatewayTargetRequest.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     UpdateGatewayTargetRequest.struct_class = Types::UpdateGatewayTargetRequest
 
     UpdateGatewayTargetResponse.add_member(:gateway_arn, Shapes::ShapeRef.new(shape: GatewayArn, required: true, location_name: "gatewayArn"))
@@ -6074,6 +6233,7 @@ module Aws::BedrockAgentCoreControl
     UpdateGatewayTargetResponse.add_member(:private_endpoint_managed_resources, Shapes::ShapeRef.new(shape: PrivateEndpointManagedResources, location_name: "privateEndpointManagedResources"))
     UpdateGatewayTargetResponse.add_member(:authorization_data, Shapes::ShapeRef.new(shape: AuthorizationData, location_name: "authorizationData"))
     UpdateGatewayTargetResponse.add_member(:protocol_type, Shapes::ShapeRef.new(shape: TargetProtocolType, location_name: "protocolType"))
+    UpdateGatewayTargetResponse.add_member(:certificate_configurations, Shapes::ShapeRef.new(shape: CertificateConfigurationList, location_name: "certificateConfigurations"))
     UpdateGatewayTargetResponse.struct_class = Types::UpdateGatewayTargetResponse
 
     UpdateHarnessEndpointRequest.add_member(:harness_id, Shapes::ShapeRef.new(shape: HarnessId, required: true, location: "uri", location_name: "harnessId"))
@@ -6397,6 +6557,7 @@ module Aws::BedrockAgentCoreControl
     UserPreferenceMemoryStrategyInput.add_member(:namespaces, Shapes::ShapeRef.new(shape: NamespacesList, deprecated: true, location_name: "namespaces", metadata: {"deprecatedMessage" => "Use namespaceTemplates instead", "deprecatedSince" => "2026-03-02"}))
     UserPreferenceMemoryStrategyInput.add_member(:namespace_templates, Shapes::ShapeRef.new(shape: NamespacesList, location_name: "namespaceTemplates"))
     UserPreferenceMemoryStrategyInput.add_member(:memory_record_schema, Shapes::ShapeRef.new(shape: MemoryRecordSchema, location_name: "memoryRecordSchema"))
+    UserPreferenceMemoryStrategyInput.add_member(:record_expiry_specification, Shapes::ShapeRef.new(shape: RecordExpirySpecification, location_name: "recordExpirySpecification"))
     UserPreferenceMemoryStrategyInput.struct_class = Types::UserPreferenceMemoryStrategyInput
 
     UserPreferenceOverrideConfigurationInput.add_member(:extraction, Shapes::ShapeRef.new(shape: UserPreferenceOverrideExtractionConfigurationInput, location_name: "extraction"))
@@ -8611,6 +8772,20 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:rotate_payment_connector_credentials, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RotatePaymentConnectorCredentials"
+        o.http_method = "POST"
+        o.http_request_uri = "/payments/managers/{paymentManagerId}/connectors/{paymentConnectorId}/rotate-credentials"
+        o.input = Shapes::ShapeRef.new(shape: RotatePaymentConnectorCredentialsRequest)
+        o.output = Shapes::ShapeRef.new(shape: RotatePaymentConnectorCredentialsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

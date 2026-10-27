@@ -44,7 +44,7 @@ end
 
 group :build do
   gem 'kramdown'
-  gem 'mustache', '< 1.1.3'
+  gem 'mustache'
 end
 
 group :development do
@@ -72,7 +72,7 @@ end
 
 group :test do
   gem 'addressable'
-  gem 'cucumber'
+  gem 'cucumber', '< 12'
   gem 'multipart-post'
   gem 'opentelemetry-sdk'
   gem 'rspec'

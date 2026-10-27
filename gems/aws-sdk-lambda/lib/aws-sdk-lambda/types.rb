@@ -789,11 +789,26 @@ module Aws::Lambda
     #   The tenant identifier for the chained invocation.
     #   @return [String]
     #
+    # @!attribute [rw] x_amzn_trace_id
+    #   The optional X-Ray trace header to use when starting the chained
+    #   invocation. If you omit this value, the child invocation inherits
+    #   the parent durable execution's trace header.
+    #
+    #   Specify this value on the `START` update for the chained invocation
+    #   operation. For more information about the header format, see
+    #   [Tracing header][1] in the *X-Ray Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/ChainedInvokeOptions AWS API Documentation
     #
     class ChainedInvokeOptions < Struct.new(
       :function_name,
-      :tenant_id)
+      :tenant_id,
+      :x_amzn_trace_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4569,22 +4584,22 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] input_payload
-    #   The JSON input payload that was provided when the durable execution
-    #   was started. For asynchronous invocations, this is limited to 256
-    #   KB. For synchronous invocations, this can be up to 6 MB.
+    #   The JSON input payload that you provided when you started the
+    #   durable execution. Asynchronous invocations support up to 1 MB, and
+    #   synchronous invocations support up to 6 MB.
     #   @return [String]
     #
     # @!attribute [rw] result
     #   The JSON result returned by the durable execution if it completed
     #   successfully. This field is only present when the execution status
-    #   is `SUCCEEDED`. The result is limited to 256 KB.
+    #   is `SUCCEEDED`. Asynchronous invocations support up to 1 MB, and
+    #   synchronous invocations support up to 6 MB.
     #   @return [String]
     #
     # @!attribute [rw] error
     #   Error information if the durable execution failed. This field is
     #   only present when the execution status is `FAILED`, `TIMED_OUT`, or
-    #   `STOPPED`. The combined size of all error fields is limited to 256
-    #   KB.
+    #   `STOPPED`. The combined size of all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @!attribute [rw] start_timestamp
@@ -6152,6 +6167,27 @@ module Aws::Lambda
     # @!attribute [rw] type
     #   The type of authentication Lambda uses to access your schema
     #   registry.
+    #
+    #   * `BASIC_AUTH` – The Secrets Manager ARN of your secret key used for
+    #     basic authentication with your Confluent schema registry.
+    #
+    #   * `CLIENT_CERTIFICATE_TLS_AUTH` – The Secrets Manager ARN of your
+    #     secret key containing the certificate chain (X.509 PEM), private
+    #     key (PKCS#8 PEM), and private key password (optional) used for
+    #     mutual TLS authentication with your Confluent schema registry.
+    #
+    #   * `SERVER_ROOT_CA_CERTIFICATE` – The Secrets Manager ARN of your
+    #     secret key containing the root CA certificate (X.509 PEM) used for
+    #     TLS encryption with your Confluent schema registry.
+    #
+    #   * `OAUTHBEARER_AUTH` – The Secrets Manager ARN of your secret key
+    #     containing the OAuth 2.0 credentials that Lambda uses to acquire
+    #     an access token for your Confluent schema registry. For the
+    #     contents of the secret, see [Configuring the OAuth secret][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-cluster-auth.html#smaa-auth-oauth-secret
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -6614,8 +6650,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] qualifier
-    #   The function version or alias. If not specified, lists executions
-    #   for the $LATEST version.
+    #   The function version to filter executions by. If you don't specify
+    #   a qualifier, this operation returns executions across all versions
+    #   of the Lambda function.
     #   @return [String]
     #
     # @!attribute [rw] durable_execution_name
@@ -7567,13 +7604,14 @@ module Aws::Lambda
     # @!attribute [rw] payload
     #   The payload for successful operations. The maximum payload size is 6
     #   MB for synchronous `EXECUTION` operations (RequestResponse
-    #   invocationType), 1 MB for asynchronous `EXECUTION` (Event
-    #   invocationType) and `CHAINED_INVOKE` operations, and 256 KB for
-    #   `CONTEXT`, `STEP`, `WAIT`, and `CALLBACK` operations.
+    #   invocationType), and 1 MB for asynchronous `EXECUTION` (Event
+    #   invocationType), `CHAINED_INVOKE`, `CONTEXT`, `STEP`, `WAIT`, and
+    #   `CALLBACK` operations.
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   The error information for failed operations.
+    #   The error information for failed operations. The combined size of
+    #   all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @!attribute [rw] context_options
@@ -8939,7 +8977,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   Error details describing why the callback operation failed.
+    #   Error details describing why the callback operation failed. The
+    #   combined size of all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SendDurableExecutionCallbackFailureRequest AWS API Documentation
@@ -8977,7 +9016,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] result
     #   The result data from the successful callback operation. Maximum size
-    #   is 256 KB.
+    #   is 1 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SendDurableExecutionCallbackSuccessRequest AWS API Documentation
@@ -9241,6 +9280,48 @@ module Aws::Lambda
     #     Secrets Manager ARN of your secret key containing the root CA
     #     certificate (X.509 PEM) used for TLS encryption of your Apache
     #     Kafka brokers.
+    #
+    #   * `OAUTHBEARER_AUTH` – (Self-managed Apache Kafka) The Secrets
+    #     Manager ARN of your secret key containing the OAuth 2.0
+    #     credentials that Lambda uses for SASL/OAUTHBEARER authentication
+    #     with your Apache Kafka brokers. For the contents of the secret,
+    #     see [Configuring the OAuth secret][1].
+    #
+    #   * `OAUTHBEARER_SCOPE` – (Self-managed Apache Kafka) The OAuth 2.0
+    #     scope that Lambda requests when it acquires an access token. The
+    #     `URI` field holds the scope value, not a secret ARN. This type
+    #     requires `OAUTHBEARER_AUTH`.
+    #
+    #   * `OAUTHBEARER_AUDIENCE` – (Self-managed Apache Kafka) The OAuth 2.0
+    #     audience that Lambda requests when it acquires an access token.
+    #     The `URI` field holds the audience value, not a secret ARN. This
+    #     type requires either `OAUTHBEARER_AUTH` or `IAM_OAUTHBEARER_AUTH`.
+    #
+    #   * `OAUTHBEARER_LOGICAL_CLUSTER` – (Self-managed Apache Kafka) The
+    #     logical cluster identifier that Lambda sends to a Confluent Cloud
+    #     broker. The `URI` field holds the identifier, not a secret ARN.
+    #     This type requires `OAUTHBEARER_AUTH`.
+    #
+    #   * `OAUTHBEARER_IDENTITY_POOL` – (Self-managed Apache Kafka) The
+    #     identity pool identifier that Lambda sends to a Confluent Cloud
+    #     broker. The `URI` field holds the identifier, not a secret ARN.
+    #     This type requires `OAUTHBEARER_AUTH`.
+    #
+    #   * `IAM_AUTH` – (Self-managed Apache Kafka) Authenticate with
+    #     Identity and Access Management (IAM). Your function's execution
+    #     role signs each connection, so there is no secret to provide. Omit
+    #     the `URI` field for this type.
+    #
+    #   * `IAM_OAUTHBEARER_AUTH` – (Self-managed Apache Kafka) Authenticate
+    #     with an Amazon Web Services web identity token over
+    #     SASL/OAUTHBEARER. Lambda requests the token for your function's
+    #     execution role, so there is no secret to provide. Omit the `URI`
+    #     field for this type. This type requires `OAUTHBEARER_AUDIENCE` and
+    #     does not support the other `OAUTHBEARER` types.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/lambda/latest/dg/kafka-cluster-auth.html#smaa-auth-oauth-secret
     #   @return [String]
     #
     # @!attribute [rw] uri
@@ -9357,7 +9438,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] error
     #   Optional error details explaining why the execution is being
-    #   stopped.
+    #   stopped. The combined size of all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/StopDurableExecutionRequest AWS API Documentation

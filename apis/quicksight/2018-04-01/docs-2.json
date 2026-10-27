@@ -524,6 +524,12 @@
         "AdditionalNotes$Text": "<p>The additional notes text.</p>"
       }
     },
+    "AdminAccountEmail": {
+      "base": null,
+      "refs": {
+        "ServiceAccountCredentials$AdminAccountEmail": "<p>The email address of the Google Workspace administrator account that the service account impersonates through domain-wide delegation. This field is required.</p>"
+      }
+    },
     "Agent": {
       "base": "<p>An agent resource in Amazon QuickSight that provides AI-powered conversational experiences.</p>",
       "refs": {
@@ -2258,6 +2264,7 @@
     "AuthenticationType": {
       "base": null,
       "refs": {
+        "DatabricksParameters$AuthenticationType": "<p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>",
         "SnowflakeParameters$AuthenticationType": "<p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>",
         "StarburstParameters$AuthenticationType": "<p>The authentication type that you want to use for your connection. This parameter accepts OAuth and non-OAuth authentication types.</p>"
       }
@@ -3684,6 +3691,10 @@
         "Capabilities$CreateAndUpdateBeeAction": "<p>The ability to create and update Bee actions.</p>",
         "Capabilities$ShareBeeAction": "<p>The ability to share Bee actions.</p>",
         "Capabilities$UseBeeAction": "<p>The ability to use Bee actions.</p>",
+        "Capabilities$GongAction": "<p>The ability to perform actions using Gong connectors.</p>",
+        "Capabilities$CreateAndUpdateGongAction": "<p>The ability to create and update Gong actions.</p>",
+        "Capabilities$ShareGongAction": "<p>The ability to share Gong actions.</p>",
+        "Capabilities$UseGongAction": "<p>The ability to use Gong actions.</p>",
         "Capabilities$Topic": "<p>The ability to perform Topic-related actions.</p>",
         "Capabilities$EditVisualWithQ": "<p>The ability to Edit Visual with AI</p>",
         "Capabilities$BuildCalculatedFieldWithQ": "<p>The ability to Build Calculation with AI</p>",
@@ -3709,7 +3720,187 @@
         "Capabilities$Trigger": "<p>The ability to manage trigger-related settings for flows and automations.</p>",
         "Capabilities$ScheduleTrigger": "<p>The ability to create, view, edit, delete, and run schedule triggers for flows and automations.</p>",
         "Capabilities$InboundEmailTrigger": "<p>The ability to create, view, edit, delete, and run inbound email triggers for flows and automations.</p>",
-        "Capabilities$QuickEventTrigger": "<p>The ability to create, view, edit, delete, and run Quick event triggers for flows and automations.</p>"
+        "Capabilities$QuickEventTrigger": "<p>The ability to create, view, edit, delete, and run Quick event triggers for flows and automations.</p>",
+        "Capabilities$FileDataSource": "<p>The ability to create, update, and share file data sources.</p>",
+        "Capabilities$CreateFileDataSource": "<p>The ability to create file data sources.</p>",
+        "Capabilities$UpdateFileDataSource": "<p>The ability to update file data sources.</p>",
+        "Capabilities$ShareFileDataSource": "<p>The ability to share file data sources.</p>",
+        "Capabilities$S3DataSource": "<p>The ability to create, update, and share Amazon S3 data sources.</p>",
+        "Capabilities$CreateS3DataSource": "<p>The ability to create Amazon S3 data sources.</p>",
+        "Capabilities$UpdateS3DataSource": "<p>The ability to update Amazon S3 data sources.</p>",
+        "Capabilities$ShareS3DataSource": "<p>The ability to share Amazon S3 data sources.</p>",
+        "Capabilities$S3AnalyticsDataSource": "<p>The ability to create, update, and share Amazon S3 Analytics data sources.</p>",
+        "Capabilities$CreateS3AnalyticsDataSource": "<p>The ability to create Amazon S3 Analytics data sources.</p>",
+        "Capabilities$UpdateS3AnalyticsDataSource": "<p>The ability to update Amazon S3 Analytics data sources.</p>",
+        "Capabilities$ShareS3AnalyticsDataSource": "<p>The ability to share Amazon S3 Analytics data sources.</p>",
+        "Capabilities$S3TablesDataSource": "<p>The ability to create, update, and share Amazon S3 Tables data sources.</p>",
+        "Capabilities$CreateS3TablesDataSource": "<p>The ability to create Amazon S3 Tables data sources.</p>",
+        "Capabilities$UpdateS3TablesDataSource": "<p>The ability to update Amazon S3 Tables data sources.</p>",
+        "Capabilities$ShareS3TablesDataSource": "<p>The ability to share Amazon S3 Tables data sources.</p>",
+        "Capabilities$AthenaDataSource": "<p>The ability to create, update, and share Amazon Athena data sources.</p>",
+        "Capabilities$CreateAthenaDataSource": "<p>The ability to create Amazon Athena data sources.</p>",
+        "Capabilities$UpdateAthenaDataSource": "<p>The ability to update Amazon Athena data sources.</p>",
+        "Capabilities$ShareAthenaDataSource": "<p>The ability to share Amazon Athena data sources.</p>",
+        "Capabilities$RdsDataSource": "<p>The ability to create, update, and share auto-discovered Amazon RDS data sources.</p>",
+        "Capabilities$CreateRdsDataSource": "<p>The ability to create auto-discovered Amazon RDS data sources.</p>",
+        "Capabilities$UpdateRdsDataSource": "<p>The ability to update auto-discovered Amazon RDS data sources.</p>",
+        "Capabilities$ShareRdsDataSource": "<p>The ability to share auto-discovered Amazon RDS data sources.</p>",
+        "Capabilities$RedshiftAutoDiscoveredDataSource": "<p>The ability to create, update, and share auto-discovered Amazon Redshift data sources.</p>",
+        "Capabilities$CreateRedshiftAutoDiscoveredDataSource": "<p>The ability to create auto-discovered Amazon Redshift data sources.</p>",
+        "Capabilities$UpdateRedshiftAutoDiscoveredDataSource": "<p>The ability to update auto-discovered Amazon Redshift data sources.</p>",
+        "Capabilities$ShareRedshiftAutoDiscoveredDataSource": "<p>The ability to share auto-discovered Amazon Redshift data sources.</p>",
+        "Capabilities$RedshiftManualDataSource": "<p>The ability to create, update, and share manually configured Amazon Redshift data sources.</p>",
+        "Capabilities$CreateRedshiftManualDataSource": "<p>The ability to create manually configured Amazon Redshift data sources.</p>",
+        "Capabilities$UpdateRedshiftManualDataSource": "<p>The ability to update manually configured Amazon Redshift data sources.</p>",
+        "Capabilities$ShareRedshiftManualDataSource": "<p>The ability to share manually configured Amazon Redshift data sources.</p>",
+        "Capabilities$OpenSearchDataSource": "<p>The ability to create, update, and share Amazon OpenSearch Service data sources.</p>",
+        "Capabilities$CreateOpenSearchDataSource": "<p>The ability to create Amazon OpenSearch Service data sources.</p>",
+        "Capabilities$UpdateOpenSearchDataSource": "<p>The ability to update Amazon OpenSearch Service data sources.</p>",
+        "Capabilities$ShareOpenSearchDataSource": "<p>The ability to share Amazon OpenSearch Service data sources.</p>",
+        "Capabilities$TimestreamDataSource": "<p>The ability to create, update, and share Amazon Timestream data sources.</p>",
+        "Capabilities$CreateTimestreamDataSource": "<p>The ability to create Amazon Timestream data sources.</p>",
+        "Capabilities$UpdateTimestreamDataSource": "<p>The ability to update Amazon Timestream data sources.</p>",
+        "Capabilities$ShareTimestreamDataSource": "<p>The ability to share Amazon Timestream data sources.</p>",
+        "Capabilities$AuroraDataSource": "<p>The ability to create, update, and share Amazon Aurora data sources.</p>",
+        "Capabilities$CreateAuroraDataSource": "<p>The ability to create Amazon Aurora data sources.</p>",
+        "Capabilities$UpdateAuroraDataSource": "<p>The ability to update Amazon Aurora data sources.</p>",
+        "Capabilities$ShareAuroraDataSource": "<p>The ability to share Amazon Aurora data sources.</p>",
+        "Capabilities$MySqlDataSource": "<p>The ability to create, update, and share MySQL data sources.</p>",
+        "Capabilities$CreateMySqlDataSource": "<p>The ability to create MySQL data sources.</p>",
+        "Capabilities$UpdateMySqlDataSource": "<p>The ability to update MySQL data sources.</p>",
+        "Capabilities$ShareMySqlDataSource": "<p>The ability to share MySQL data sources.</p>",
+        "Capabilities$PostgreSqlDataSource": "<p>The ability to create, update, and share PostgreSQL data sources.</p>",
+        "Capabilities$CreatePostgreSqlDataSource": "<p>The ability to create PostgreSQL data sources.</p>",
+        "Capabilities$UpdatePostgreSqlDataSource": "<p>The ability to update PostgreSQL data sources.</p>",
+        "Capabilities$SharePostgreSqlDataSource": "<p>The ability to share PostgreSQL data sources.</p>",
+        "Capabilities$OracleDataSource": "<p>The ability to create, update, and share Oracle data sources.</p>",
+        "Capabilities$CreateOracleDataSource": "<p>The ability to create Oracle data sources.</p>",
+        "Capabilities$UpdateOracleDataSource": "<p>The ability to update Oracle data sources.</p>",
+        "Capabilities$ShareOracleDataSource": "<p>The ability to share Oracle data sources.</p>",
+        "Capabilities$SqlServerDataSource": "<p>The ability to create, update, and share SQL Server data sources.</p>",
+        "Capabilities$CreateSqlServerDataSource": "<p>The ability to create SQL Server data sources.</p>",
+        "Capabilities$UpdateSqlServerDataSource": "<p>The ability to update SQL Server data sources.</p>",
+        "Capabilities$ShareSqlServerDataSource": "<p>The ability to share SQL Server data sources.</p>",
+        "Capabilities$MariaDbDataSource": "<p>The ability to create, update, and share MariaDB data sources.</p>",
+        "Capabilities$CreateMariaDbDataSource": "<p>The ability to create MariaDB data sources.</p>",
+        "Capabilities$UpdateMariaDbDataSource": "<p>The ability to update MariaDB data sources.</p>",
+        "Capabilities$ShareMariaDbDataSource": "<p>The ability to share MariaDB data sources.</p>",
+        "Capabilities$SnowflakeDataSource": "<p>The ability to create, update, and share Snowflake data sources.</p>",
+        "Capabilities$CreateSnowflakeDataSource": "<p>The ability to create Snowflake data sources.</p>",
+        "Capabilities$UpdateSnowflakeDataSource": "<p>The ability to update Snowflake data sources.</p>",
+        "Capabilities$ShareSnowflakeDataSource": "<p>The ability to share Snowflake data sources.</p>",
+        "Capabilities$GoogleBigQueryDataSource": "<p>The ability to create, update, and share Google BigQuery data sources.</p>",
+        "Capabilities$CreateGoogleBigQueryDataSource": "<p>The ability to create Google BigQuery data sources.</p>",
+        "Capabilities$UpdateGoogleBigQueryDataSource": "<p>The ability to update Google BigQuery data sources.</p>",
+        "Capabilities$ShareGoogleBigQueryDataSource": "<p>The ability to share Google BigQuery data sources.</p>",
+        "Capabilities$DatabricksDataSource": "<p>The ability to create, update, and share Databricks data sources.</p>",
+        "Capabilities$CreateDatabricksDataSource": "<p>The ability to create Databricks data sources.</p>",
+        "Capabilities$UpdateDatabricksDataSource": "<p>The ability to update Databricks data sources.</p>",
+        "Capabilities$ShareDatabricksDataSource": "<p>The ability to share Databricks data sources.</p>",
+        "Capabilities$StarburstDataSource": "<p>The ability to create, update, and share Starburst data sources.</p>",
+        "Capabilities$CreateStarburstDataSource": "<p>The ability to create Starburst data sources.</p>",
+        "Capabilities$UpdateStarburstDataSource": "<p>The ability to update Starburst data sources.</p>",
+        "Capabilities$ShareStarburstDataSource": "<p>The ability to share Starburst data sources.</p>",
+        "Capabilities$TrinoDataSource": "<p>The ability to create, update, and share Trino data sources.</p>",
+        "Capabilities$CreateTrinoDataSource": "<p>The ability to create Trino data sources.</p>",
+        "Capabilities$UpdateTrinoDataSource": "<p>The ability to update Trino data sources.</p>",
+        "Capabilities$ShareTrinoDataSource": "<p>The ability to share Trino data sources.</p>",
+        "Capabilities$ImpalaDataSource": "<p>The ability to create, update, and share Impala data sources.</p>",
+        "Capabilities$CreateImpalaDataSource": "<p>The ability to create Impala data sources.</p>",
+        "Capabilities$UpdateImpalaDataSource": "<p>The ability to update Impala data sources.</p>",
+        "Capabilities$ShareImpalaDataSource": "<p>The ability to share Impala data sources.</p>",
+        "Capabilities$TeradataDataSource": "<p>The ability to create, update, and share Teradata data sources.</p>",
+        "Capabilities$CreateTeradataDataSource": "<p>The ability to create Teradata data sources.</p>",
+        "Capabilities$UpdateTeradataDataSource": "<p>The ability to update Teradata data sources.</p>",
+        "Capabilities$ShareTeradataDataSource": "<p>The ability to share Teradata data sources.</p>",
+        "Capabilities$PrestoDataSource": "<p>The ability to create, update, and share Presto data sources.</p>",
+        "Capabilities$CreatePrestoDataSource": "<p>The ability to create Presto data sources.</p>",
+        "Capabilities$UpdatePrestoDataSource": "<p>The ability to update Presto data sources.</p>",
+        "Capabilities$SharePrestoDataSource": "<p>The ability to share Presto data sources.</p>",
+        "Capabilities$SparkDataSource": "<p>The ability to create, update, and share Spark data sources.</p>",
+        "Capabilities$CreateSparkDataSource": "<p>The ability to create Spark data sources.</p>",
+        "Capabilities$UpdateSparkDataSource": "<p>The ability to update Spark data sources.</p>",
+        "Capabilities$ShareSparkDataSource": "<p>The ability to share Spark data sources.</p>",
+        "Capabilities$ExasolDataSource": "<p>The ability to create, update, and share Exasol data sources.</p>",
+        "Capabilities$CreateExasolDataSource": "<p>The ability to create Exasol data sources.</p>",
+        "Capabilities$UpdateExasolDataSource": "<p>The ability to update Exasol data sources.</p>",
+        "Capabilities$ShareExasolDataSource": "<p>The ability to share Exasol data sources.</p>",
+        "Capabilities$Db2DataSource": "<p>The ability to create, update, and share Db2 data sources.</p>",
+        "Capabilities$CreateDb2DataSource": "<p>The ability to create Db2 data sources.</p>",
+        "Capabilities$UpdateDb2DataSource": "<p>The ability to update Db2 data sources.</p>",
+        "Capabilities$ShareDb2DataSource": "<p>The ability to share Db2 data sources.</p>",
+        "Capabilities$SapHanaDataSource": "<p>The ability to create, update, and share SAP HANA data sources.</p>",
+        "Capabilities$CreateSapHanaDataSource": "<p>The ability to create SAP HANA data sources.</p>",
+        "Capabilities$UpdateSapHanaDataSource": "<p>The ability to update SAP HANA data sources.</p>",
+        "Capabilities$ShareSapHanaDataSource": "<p>The ability to share SAP HANA data sources.</p>",
+        "Capabilities$DenodoDataSource": "<p>The ability to create, update, and share Denodo data sources.</p>",
+        "Capabilities$CreateDenodoDataSource": "<p>The ability to create Denodo data sources.</p>",
+        "Capabilities$UpdateDenodoDataSource": "<p>The ability to update Denodo data sources.</p>",
+        "Capabilities$ShareDenodoDataSource": "<p>The ability to share Denodo data sources.</p>",
+        "Capabilities$DremioDataSource": "<p>The ability to create, update, and share Dremio data sources.</p>",
+        "Capabilities$CreateDremioDataSource": "<p>The ability to create Dremio data sources.</p>",
+        "Capabilities$UpdateDremioDataSource": "<p>The ability to update Dremio data sources.</p>",
+        "Capabilities$ShareDremioDataSource": "<p>The ability to share Dremio data sources.</p>",
+        "Capabilities$SalesforceDataSource": "<p>The ability to create, update, and share Salesforce data sources.</p>",
+        "Capabilities$CreateSalesforceDataSource": "<p>The ability to create Salesforce data sources.</p>",
+        "Capabilities$UpdateSalesforceDataSource": "<p>The ability to update Salesforce data sources.</p>",
+        "Capabilities$ShareSalesforceDataSource": "<p>The ability to share Salesforce data sources.</p>",
+        "Capabilities$RadiantDataSource": "<p>The ability to create, update, and share Amazon QuickSight data sources.</p>",
+        "Capabilities$CreateRadiantDataSource": "<p>The ability to create Amazon QuickSight data sources.</p>",
+        "Capabilities$UpdateRadiantDataSource": "<p>The ability to update Amazon QuickSight data sources.</p>",
+        "Capabilities$ShareRadiantDataSource": "<p>The ability to share Amazon QuickSight data sources.</p>",
+        "Capabilities$PayPalDataSource": "<p>The ability to create, update, and share PayPal data sources.</p>",
+        "Capabilities$CreatePayPalDataSource": "<p>The ability to create PayPal data sources.</p>",
+        "Capabilities$UpdatePayPalDataSource": "<p>The ability to update PayPal data sources.</p>",
+        "Capabilities$SharePayPalDataSource": "<p>The ability to share PayPal data sources.</p>",
+        "Capabilities$SquareDataSource": "<p>The ability to create, update, and share Square data sources.</p>",
+        "Capabilities$CreateSquareDataSource": "<p>The ability to create Square data sources.</p>",
+        "Capabilities$UpdateSquareDataSource": "<p>The ability to update Square data sources.</p>",
+        "Capabilities$ShareSquareDataSource": "<p>The ability to share Square data sources.</p>",
+        "Capabilities$GitHubDataSource": "<p>The ability to create, update, and share GitHub data sources.</p>",
+        "Capabilities$CreateGitHubDataSource": "<p>The ability to create GitHub data sources.</p>",
+        "Capabilities$UpdateGitHubDataSource": "<p>The ability to update GitHub data sources.</p>",
+        "Capabilities$ShareGitHubDataSource": "<p>The ability to share GitHub data sources.</p>",
+        "Capabilities$TwitterDataSource": "<p>The ability to create, update, and share Twitter data sources.</p>",
+        "Capabilities$CreateTwitterDataSource": "<p>The ability to create Twitter data sources.</p>",
+        "Capabilities$UpdateTwitterDataSource": "<p>The ability to update Twitter data sources.</p>",
+        "Capabilities$ShareTwitterDataSource": "<p>The ability to share Twitter data sources.</p>",
+        "Capabilities$JiraDataSource": "<p>The ability to create, update, and share Jira data sources.</p>",
+        "Capabilities$CreateJiraDataSource": "<p>The ability to create Jira data sources.</p>",
+        "Capabilities$UpdateJiraDataSource": "<p>The ability to update Jira data sources.</p>",
+        "Capabilities$ShareJiraDataSource": "<p>The ability to share Jira data sources.</p>",
+        "Capabilities$ServiceNowDataSource": "<p>The ability to create, update, and share ServiceNow data sources.</p>",
+        "Capabilities$CreateServiceNowDataSource": "<p>The ability to create ServiceNow data sources.</p>",
+        "Capabilities$UpdateServiceNowDataSource": "<p>The ability to update ServiceNow data sources.</p>",
+        "Capabilities$ShareServiceNowDataSource": "<p>The ability to share ServiceNow data sources.</p>",
+        "Capabilities$AdobeAnalyticsDataSource": "<p>The ability to create, update, and share Adobe Analytics data sources.</p>",
+        "Capabilities$CreateAdobeAnalyticsDataSource": "<p>The ability to create Adobe Analytics data sources.</p>",
+        "Capabilities$UpdateAdobeAnalyticsDataSource": "<p>The ability to update Adobe Analytics data sources.</p>",
+        "Capabilities$ShareAdobeAnalyticsDataSource": "<p>The ability to share Adobe Analytics data sources.</p>",
+        "Capabilities$GoogleAnalyticsDataSource": "<p>The ability to create, update, and share Google Analytics data sources.</p>",
+        "Capabilities$CreateGoogleAnalyticsDataSource": "<p>The ability to create Google Analytics data sources.</p>",
+        "Capabilities$UpdateGoogleAnalyticsDataSource": "<p>The ability to update Google Analytics data sources.</p>",
+        "Capabilities$ShareGoogleAnalyticsDataSource": "<p>The ability to share Google Analytics data sources.</p>",
+        "Capabilities$GoogleSheetsDataSource": "<p>The ability to create, update, and share Google Sheets data sources.</p>",
+        "Capabilities$CreateGoogleSheetsDataSource": "<p>The ability to create Google Sheets data sources.</p>",
+        "Capabilities$UpdateGoogleSheetsDataSource": "<p>The ability to update Google Sheets data sources.</p>",
+        "Capabilities$ShareGoogleSheetsDataSource": "<p>The ability to share Google Sheets data sources.</p>",
+        "Capabilities$DocumentDbDataSource": "<p>The ability to create, update, and share Amazon DocumentDB data sources.</p>",
+        "Capabilities$CreateDocumentDbDataSource": "<p>The ability to create Amazon DocumentDB data sources.</p>",
+        "Capabilities$UpdateDocumentDbDataSource": "<p>The ability to update Amazon DocumentDB data sources.</p>",
+        "Capabilities$ShareDocumentDbDataSource": "<p>The ability to share Amazon DocumentDB data sources.</p>",
+        "Capabilities$MongoDbDataSource": "<p>The ability to create, update, and share MongoDB data sources.</p>",
+        "Capabilities$CreateMongoDbDataSource": "<p>The ability to create MongoDB data sources.</p>",
+        "Capabilities$UpdateMongoDbDataSource": "<p>The ability to update MongoDB data sources.</p>",
+        "Capabilities$ShareMongoDbDataSource": "<p>The ability to share MongoDB data sources.</p>",
+        "Capabilities$MongoAtlasDataSource": "<p>The ability to create, update, and share MongoDB Atlas data sources.</p>",
+        "Capabilities$CreateMongoAtlasDataSource": "<p>The ability to create MongoDB Atlas data sources.</p>",
+        "Capabilities$UpdateMongoAtlasDataSource": "<p>The ability to update MongoDB Atlas data sources.</p>",
+        "Capabilities$ShareMongoAtlasDataSource": "<p>The ability to share MongoDB Atlas data sources.</p>",
+        "Capabilities$DynamoDbDataSource": "<p>The ability to create, update, and share Amazon DynamoDB data sources.</p>",
+        "Capabilities$CreateDynamoDbDataSource": "<p>The ability to create Amazon DynamoDB data sources.</p>",
+        "Capabilities$UpdateDynamoDbDataSource": "<p>The ability to update Amazon DynamoDB data sources.</p>",
+        "Capabilities$ShareDynamoDbDataSource": "<p>The ability to share Amazon DynamoDB data sources.</p>"
       }
     },
     "CapacityBytesRangeFilter": {
@@ -3943,6 +4134,12 @@
       "refs": {
         "ClientCredentialsGrantMetadata$ClientCredentialsSource": "<p>The source of the client credentials configuration.</p>",
         "ReadClientCredentialsGrantMetadata$ClientCredentialsSource": "<p>The source of client credentials for the OAuth2 client credentials grant flow.</p>"
+      }
+    },
+    "ClientEmail": {
+      "base": null,
+      "refs": {
+        "ServiceAccountCredentials$ClientEmail": "<p>The client email address of the Google service account used for domain-wide delegation. This field is required.</p>"
       }
     },
     "ClientId": {
@@ -4198,6 +4395,9 @@
         "DynamicDefaultValue$GroupNameColumn": "<p>The column that contains the group name.</p>",
         "DynamicDefaultValue$DefaultValueColumn": "<p>The column that contains the default value of each user or group.</p>",
         "ExplicitHierarchyColumnList$member": null,
+        "HierarchyFilter$Column": "<p>The column that anchors the filter. This column determines the dataset that the whole filter applies to, so every column in <code>HierarchyLevels</code> and in <code>HierarchyTree</code> must belong to the same dataset.</p>",
+        "HierarchyFilterLevel$Column": "<p>The column that this level of the hierarchy drills down by. This column must belong to the same dataset as <code>HierarchyFilter$Column</code>.</p>",
+        "HierarchyFilterNode$Column": "<p>The column that this node selects values from. This column must match the column of the corresponding level in <code>HierarchyFilter$HierarchyLevels</code>. The node at depth 1 must match the first level, the node at depth 2 must match the second level, and so on.</p>",
         "NestedFilter$Column": "<p>The column that the filter is applied to.</p>",
         "NumericEqualityDrillDownFilter$Column": "<p>The column that the filter is applied to.</p>",
         "NumericEqualityFilter$Column": "<p>The column that the filter is applied to.</p>",
@@ -4434,10 +4634,14 @@
       "refs": {
         "DefaultDateTimePickerControlOptions$CommitMode": "<p>The visibility configuration of the Apply button on a <code>DateTimePickerControl</code>.</p>",
         "DefaultFilterDropDownControlOptions$CommitMode": "<p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>",
+        "DefaultHierarchyFilterDropDownControlOptions$CommitMode": "<p>The visibility configuration of the Apply button on a <code>HierarchyFilterDropDownControl</code>.</p>",
+        "DefaultHierarchyFilterListControlOptions$CommitMode": "<p>The visibility configuration of the Apply button on a <code>HierarchyFilterListControl</code>.</p>",
         "DefaultRelativeDateTimeControlOptions$CommitMode": "<p>The visibility configuration of the Apply button on a <code>RelativeDateTimeControl</code>.</p>",
         "FilterDateTimePickerControl$CommitMode": "<p>The visibility configurationof the Apply button on a <code>DateTimePickerControl</code>.</p>",
         "FilterDropDownControl$CommitMode": "<p>The visibility configuration of the Apply button on a <code>FilterDropDownControl</code>.</p>",
         "FilterRelativeDateTimeControl$CommitMode": "<p>The visibility configuration of the Apply button on a <code>FilterRelativeDateTimeControl</code>.</p>",
+        "HierarchyFilterDropDownControl$CommitMode": "<p>The visibility configuration of the Apply button on a <code>HierarchyFilterDropDownControl</code>.</p>",
+        "HierarchyFilterListControl$CommitMode": "<p>The visibility configuration of the Apply button on a <code>HierarchyFilterListControl</code>.</p>",
         "ParameterDropDownControl$CommitMode": "<p>The visibility configuration of the Apply button on a <code>ParameterDropDownControl</code>.</p>"
       }
     },
@@ -4678,8 +4882,12 @@
       "refs": {
         "DefaultFilterDropDownControlOptions$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>",
         "DefaultFilterListControlOptions$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>",
+        "DefaultHierarchyFilterDropDownControlOptions$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>",
+        "DefaultHierarchyFilterListControlOptions$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>",
         "FilterDropDownControl$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>",
         "FilterListControl$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>",
+        "HierarchyFilterDropDownControl$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>",
+        "HierarchyFilterListControl$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>",
         "ParameterDropDownControl$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>",
         "ParameterListControl$ControlSortConfigurations": "<p>The sort configuration for the values displayed in the control. Only one sort configuration can be applied per control.</p>"
       }
@@ -4700,6 +4908,8 @@
       "base": "<p>The title format text configuration for a sheet control. This is a tagged union type. Specify either <code>PlainText</code> or <code>RichText</code>, but not both.</p>",
       "refs": {
         "DefaultFilterControlConfiguration$ControlTitleFormatText": "<p>The title text format configuration for the default filter control.</p>",
+        "DefaultHierarchyFilterDropDownControlOptions$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
+        "DefaultHierarchyFilterListControlOptions$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
         "FilterDateTimePickerControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
         "FilterDropDownControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
         "FilterListControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
@@ -4707,6 +4917,8 @@
         "FilterSliderControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
         "FilterTextAreaControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
         "FilterTextFieldControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
+        "HierarchyFilterDropDownControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
+        "HierarchyFilterListControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
         "ParameterDateTimePickerControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
         "ParameterDropDownControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
         "ParameterListControl$ControlTitleFormatText": "<p>The title text format configuration for the control.</p>",
@@ -6053,6 +6265,13 @@
         "KnowledgeBaseSummary$DataSourceArn": "<p>The ARN of the data source associated with the knowledge base.</p>"
       }
     },
+    "DataSourceCertThumbprint": {
+      "base": null,
+      "refs": {
+        "OneDriveClientCredentials$CertThumbprint": "<p>The thumbprint of the certificate used for two-legged OAuth (2LO) authentication to OneDrive. This field is required.</p>",
+        "SharePointClientCredentials$CertThumbprint": "<p>The thumbprint of the certificate used for two-legged OAuth (2LO) authentication to SharePoint. This field is required.</p>"
+      }
+    },
     "DataSourceCredentials": {
       "base": "<p>Data source credentials. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>",
       "refs": {
@@ -6076,6 +6295,13 @@
       "base": null,
       "refs": {
         "DataSourceSearchFilter$Name": "<p>The name of the value that you want to use as a filter, for example, <code>\"Name\": \"DIRECT_QUICKSIGHT_OWNER\"</code>.</p> <p>Valid values are defined as follows:</p> <ul> <li> <p> <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any data sources with that ARN listed as one of the owners or viewers of the data sources are returned. Implicit permissions from folders or groups are not considered.</p> </li> <li> <p> <code>DIRECT_QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any data sources with that ARN listed as one of the owners if the data source are returned. Implicit permissions from folders or groups are not considered.</p> </li> <li> <p> <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code>: Provide an ARN of a user or group, and any data sources with that ARN listed as the only owner of the data source are returned. Implicit permissions from folders or groups are not considered.</p> </li> <li> <p> <code>DATASOURCE_NAME</code>: Any data sources whose names have a substring match to the provided value are returned.</p> </li> </ul>"
+      }
+    },
+    "DataSourceKmsKeyArn": {
+      "base": null,
+      "refs": {
+        "OneDriveClientCredentials$KmsKeyArn": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used to encrypt the OneDrive certificate credentials. This field is required.</p>",
+        "SharePointClientCredentials$KmsKeyArn": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used to encrypt the SharePoint certificate credentials. This field is required.</p>"
       }
     },
     "DataSourceList": {
@@ -6538,6 +6764,7 @@
       "refs": {
         "CategoryFilter$DefaultFilterControlConfiguration": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>",
         "CategoryInnerFilter$DefaultFilterControlConfiguration": null,
+        "HierarchyFilter$DefaultFilterControlConfiguration": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>",
         "NumericEqualityFilter$DefaultFilterControlConfiguration": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>",
         "NumericRangeFilter$DefaultFilterControlConfiguration": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>",
         "RelativeDatesFilter$DefaultFilterControlConfiguration": "<p>The default configurations for the associated controls. This applies only for filters that are scoped to multiple sheets.</p>",
@@ -6581,6 +6808,18 @@
       "base": "<p>The options that determine the default settings for a grid layout configuration.</p>",
       "refs": {
         "DefaultInteractiveLayoutConfiguration$Grid": "<p>The options that determine the default settings for a grid layout configuration.</p>"
+      }
+    },
+    "DefaultHierarchyFilterDropDownControlOptions": {
+      "base": "<p>The default options that correspond to the <code>HierarchyDropdown</code> filter control type.</p>",
+      "refs": {
+        "DefaultFilterControlOptions$DefaultHierarchyDropdown": "<p>The default options that correspond to the <code>HierarchyDropdown</code> filter control type.</p>"
+      }
+    },
+    "DefaultHierarchyFilterListControlOptions": {
+      "base": "<p>The default options that correspond to the <code>HierarchyList</code> filter control type.</p>",
+      "refs": {
+        "DefaultFilterControlOptions$DefaultHierarchyList": "<p>The default options that correspond to the <code>HierarchyList</code> filter control type.</p>"
       }
     },
     "DefaultInteractiveLayoutConfiguration": {
@@ -8430,6 +8669,7 @@
         "CustomFilterConfiguration$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
         "CustomFilterListConfiguration$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
         "FilterListConfiguration$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
+        "HierarchyFilter$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
         "NumericEqualityFilter$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
         "NumericRangeFilter$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
         "RelativeDatesFilter$NullOption": "<p>This option determines how null values should be treated when filtering data.</p> <ul> <li> <p> <code>ALL_VALUES</code>: Include null values in filtered results.</p> </li> <li> <p> <code>NULLS_ONLY</code>: Only include null values in filtered results.</p> </li> <li> <p> <code>NON_NULLS_ONLY</code>: Exclude null values from filtered results.</p> </li> </ul>",
@@ -9829,6 +10069,82 @@
         "PanelConfiguration$BackgroundColor": "<p>Sets the background color for each panel.</p>"
       }
     },
+    "HierarchyFilter": {
+      "base": "<p>A <code>HierarchyFilter</code> filters data by drilling down through an ordered list of columns. Each level in the list narrows the data by one column, and the selected values at each level determine which values are available at the next.</p>",
+      "refs": {
+        "Filter$HierarchyFilter": "<p>A <code>HierarchyFilter</code> filters data by drilling down through an ordered list of columns. Each level in the list narrows the data by one column, and the selected values at each level determine which values are available at the next.</p>"
+      }
+    },
+    "HierarchyFilterDropDownControl": {
+      "base": "<p>A control from a hierarchy filter that displays the hierarchy as a dropdown list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>",
+      "refs": {
+        "FilterControl$HierarchyDropdown": "<p>A control from a hierarchy filter that displays the hierarchy as a dropdown list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>"
+      }
+    },
+    "HierarchyFilterDropDownControlDisplayOptions": {
+      "base": "<p>The display options of a control.</p>",
+      "refs": {
+        "DefaultHierarchyFilterDropDownControlOptions$DisplayOptions": "<p>The display options of a control.</p>",
+        "HierarchyFilterDropDownControl$DisplayOptions": "<p>The display options of a control.</p>"
+      }
+    },
+    "HierarchyFilterLevel": {
+      "base": "<p>One level of the drill-down path of a <code>HierarchyFilter</code>.</p>",
+      "refs": {
+        "HierarchyFilterLevelList$member": null
+      }
+    },
+    "HierarchyFilterLevelList": {
+      "base": null,
+      "refs": {
+        "HierarchyFilter$HierarchyLevels": "<p>The ordered list of columns that defines the drill-down path of the filter. The first level is the top of the hierarchy. You can specify a maximum of 5 levels.</p>"
+      }
+    },
+    "HierarchyFilterListControl": {
+      "base": "<p>A control from a hierarchy filter that displays the hierarchy as a list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>",
+      "refs": {
+        "FilterControl$HierarchyList": "<p>A control from a hierarchy filter that displays the hierarchy as a list. You can expand a value to see and select the values beneath it, and select either a single value or multiple values.</p>"
+      }
+    },
+    "HierarchyFilterListControlDisplayOptions": {
+      "base": "<p>The display options of a control.</p>",
+      "refs": {
+        "DefaultHierarchyFilterListControlOptions$DisplayOptions": "<p>The display options of a control.</p>",
+        "HierarchyFilterListControl$DisplayOptions": "<p>The display options of a control.</p>"
+      }
+    },
+    "HierarchyFilterListControlSearchOptions": {
+      "base": "<p>The configuration of the search options in a hierarchy list control.</p>",
+      "refs": {
+        "HierarchyFilterListControlDisplayOptions$SearchOptions": "<p>The configuration of the search options in a hierarchy list control.</p>"
+      }
+    },
+    "HierarchyFilterMatchOperator": {
+      "base": null,
+      "refs": {
+        "HierarchyFilter$MatchOperator": "<p>Determines whether the values selected in <code>HierarchyTree</code> are kept or removed. Choose one of the following options:</p> <ul> <li> <p> <code>INCLUDE</code>: Keep only the selected values.</p> </li> <li> <p> <code>EXCLUDE</code>: Remove the selected values.</p> </li> </ul>"
+      }
+    },
+    "HierarchyFilterNode": {
+      "base": "<p>A node in the selection tree of a <code>HierarchyFilter</code>. Each node records the values that are selected at one level of the hierarchy. Nodes nest through <code>Children</code> to record selections at deeper levels.</p> <p>The tree cannot be deeper than the number of levels declared in <code>HierarchyLevels</code>. A tree can be a maximum of 5 levels deep, and a node can have a maximum of 1,000 children.</p>",
+      "refs": {
+        "HierarchyFilter$HierarchyTree": "<p>The tree of selected values for the filter. Each node records the values that are selected at one level of the hierarchy, and its children record the selections beneath those values. Omit this attribute to define the drill-down path without restricting any values.</p>",
+        "HierarchyFilterNodeList$member": null
+      }
+    },
+    "HierarchyFilterNodeList": {
+      "base": null,
+      "refs": {
+        "HierarchyFilterNode$Children": "<p>The nodes that record the selections at the next level of the hierarchy. You can specify a maximum of 1,000 children per node.</p>"
+      }
+    },
+    "HierarchyFilterValue": {
+      "base": null,
+      "refs": {
+        "HierarchyFilterNode$ParentValue": "<p>The value in the parent node's <code>HierarchyValues</code> that this node belongs to. When a parent selects several values, each of its children repeats one of them here to identify which branch of the hierarchy that child describes.</p> <p>Omit this attribute on the root node of <code>HierarchyTree</code>, which has no parent.</p>",
+        "HierarchyValuesList$member": null
+      }
+    },
     "HierarchyId": {
       "base": null,
       "refs": {
@@ -9838,6 +10154,12 @@
         "ExplicitHierarchy$HierarchyId": "<p>The hierarchy ID of the explicit hierarchy.</p>",
         "NumericalDimensionField$HierarchyId": "<p>The custom hierarchy ID.</p>",
         "PredefinedHierarchy$HierarchyId": "<p>The hierarchy ID of the predefined hierarchy.</p>"
+      }
+    },
+    "HierarchyValuesList": {
+      "base": null,
+      "refs": {
+        "HierarchyFilterNode$HierarchyValues": "<p>The values that are selected at this level of the hierarchy. You can specify a maximum of 2,000 values per node.</p>"
       }
     },
     "HistogramAggregatedFieldWells": {
@@ -10831,6 +11153,8 @@
         "AxisTickLabelOptions$LabelOptions": "<p>Determines whether or not the axis ticks are visible.</p>",
         "DateTimePickerControlDisplayOptions$TitleOptions": "<p>The options to configure the title visibility, name, and font size.</p>",
         "DropDownControlDisplayOptions$TitleOptions": "<p>The options to configure the title visibility, name, and font size.</p>",
+        "HierarchyFilterDropDownControlDisplayOptions$TitleOptions": "<p>The options to configure the title visibility, name, and font size.</p>",
+        "HierarchyFilterListControlDisplayOptions$TitleOptions": "<p>The options to configure the title visibility, name, and font size.</p>",
         "LegendOptions$Title": "<p>The custom title for the legend.</p>",
         "ListControlDisplayOptions$TitleOptions": "<p>The options to configure the title visibility, name, and font size.</p>",
         "RelativeDateTimeControlDisplayOptions$TitleOptions": "<p>The options to configure the title visibility, name, and font size.</p>",
@@ -12554,8 +12878,9 @@
       }
     },
     "OAuthParameters": {
-      "base": "<p>An object that contains information needed to create a data source connection that uses OAuth client credentials. This option is available for data source connections that are made with Snowflake and Starburst.</p>",
+      "base": "<p>An object that contains information needed to create a data source connection that uses OAuth client credentials. This option is available for data source connections that are made with Snowflake, Starburst, and Databricks.</p>",
       "refs": {
+        "DatabricksParameters$OAuthParameters": "<p>An object that contains information needed to create a data source connection between an Quick Sight account and Databricks.</p>",
         "SnowflakeParameters$OAuthParameters": "<p>An object that contains information needed to create a data source connection between an Quick Sight account and Snowflake.</p>",
         "StarburstParameters$OAuthParameters": "<p>An object that contains information needed to create a data source connection between an Quick Sight account and Starburst.</p>"
       }
@@ -12592,6 +12917,12 @@
       "base": null,
       "refs": {
         "JoinInstruction$OnClause": "<p>The join instructions provided in the <code>ON</code> clause of a join.</p>"
+      }
+    },
+    "OneDriveClientCredentials": {
+      "base": "<p>The client credentials for connecting to a Microsoft OneDrive data source using two-legged OAuth (2LO) certificate-based authentication. OneDrive connections access files stored in your OneDrive storage. The tenant ID and client ID are supplied through <code>OneDriveParameters</code>.</p>",
+      "refs": {
+        "DataSourceCredentials$OneDriveClientCredentials": "<p>The client credentials for connecting to a Microsoft OneDrive data source using two-legged OAuth (2LO) certificate-based authentication.</p>"
       }
     },
     "OneDriveClientId": {
@@ -13524,7 +13855,8 @@
     "PrivateKey": {
       "base": null,
       "refs": {
-        "KeyPairCredentials$PrivateKey": "<p>PrivateKey</p>"
+        "KeyPairCredentials$PrivateKey": "<p>PrivateKey</p>",
+        "ServiceAccountCredentials$ServiceAccountPrivateKey": "<p>The private key of the Google service account used for domain-wide delegation. This field is required.</p>"
       }
     },
     "PrivateKeyPassphrase": {
@@ -15343,6 +15675,12 @@
         "LineChartConfiguration$Series": "<p>The series item configuration of a line chart.</p>"
       }
     },
+    "ServiceAccountCredentials": {
+      "base": "<p>The service account credentials used for Google Workspace domain-wide delegation. Use this structure when you authenticate a data source connection using domain-wide delegation across your Google Workspace domain.</p>",
+      "refs": {
+        "DataSourceCredentials$ServiceAccountCredentials": "<p>The service account credentials for connecting to a data source that uses Google Workspace domain-wide delegation.</p>"
+      }
+    },
     "ServiceNowParameters": {
       "base": "<p>The parameters for ServiceNow.</p>",
       "refs": {
@@ -15422,6 +15760,12 @@
       "base": "<p>The shape conditional formatting of a filled map visual.</p>",
       "refs": {
         "FilledMapShapeConditionalFormatting$Format": "<p>The conditional formatting that determines the background color of a filled map's shape.</p>"
+      }
+    },
+    "SharePointClientCredentials": {
+      "base": "<p>The client credentials for connecting to a Microsoft SharePoint data source using two-legged OAuth (2LO) certificate-based authentication. SharePoint connections access documents stored in SharePoint sites and libraries. The tenant ID and client ID are supplied through <code>SharePointParameters</code>.</p>",
+      "refs": {
+        "DataSourceCredentials$SharePointClientCredentials": "<p>The client credentials for connecting to a Microsoft SharePoint data source using two-legged OAuth (2LO) certificate-based authentication.</p>"
       }
     },
     "SharePointClientId": {
@@ -15507,6 +15851,8 @@
       "refs": {
         "DateTimePickerControlDisplayOptions$InfoIconLabelOptions": "<p>The configuration of info icon label options.</p>",
         "DropDownControlDisplayOptions$InfoIconLabelOptions": "<p>The configuration of info icon label options.</p>",
+        "HierarchyFilterDropDownControlDisplayOptions$InfoIconLabelOptions": "<p>The configuration of info icon label options.</p>",
+        "HierarchyFilterListControlDisplayOptions$InfoIconLabelOptions": "<p>The configuration of info icon label options.</p>",
         "ListControlDisplayOptions$InfoIconLabelOptions": "<p>The configuration of info icon label options.</p>",
         "RelativeDateTimeControlDisplayOptions$InfoIconLabelOptions": "<p>The configuration of info icon label options.</p>",
         "SliderControlDisplayOptions$InfoIconLabelOptions": "<p>The configuration of info icon label options.</p>",
@@ -15543,8 +15889,12 @@
       "refs": {
         "DefaultFilterDropDownControlOptions$Type": "<p>The type of the <code>FilterDropDownControl</code>. Choose one of the following options:</p> <ul> <li> <p> <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p> </li> <li> <p> <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p> </li> </ul>",
         "DefaultFilterListControlOptions$Type": "<p>The type of the <code>DefaultFilterListControlOptions</code>. Choose one of the following options:</p> <ul> <li> <p> <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p> </li> <li> <p> <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p> </li> </ul>",
+        "DefaultHierarchyFilterDropDownControlOptions$Type": "<p>The type of the <code>DefaultHierarchyFilterDropDownControlOptions</code>. Choose one of the following options:</p> <ul> <li> <p> <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p> </li> <li> <p> <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p> </li> </ul>",
+        "DefaultHierarchyFilterListControlOptions$Type": "<p>The type of the <code>DefaultHierarchyFilterListControlOptions</code>. Choose one of the following options:</p> <ul> <li> <p> <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p> </li> <li> <p> <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p> </li> </ul>",
         "FilterDropDownControl$Type": "<p>The type of the <code>FilterDropDownControl</code>. Choose one of the following options:</p> <ul> <li> <p> <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p> </li> <li> <p> <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p> </li> </ul>",
         "FilterListControl$Type": "<p>The type of the <code>FilterListControl</code>. Choose one of the following options:</p> <ul> <li> <p> <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p> </li> <li> <p> <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p> </li> </ul>",
+        "HierarchyFilterDropDownControl$Type": "<p>The type of the <code>HierarchyFilterDropDownControl</code>. Choose one of the following options:</p> <ul> <li> <p> <code>MULTI_SELECT</code>: The user can select multiple entries from a dropdown menu.</p> </li> <li> <p> <code>SINGLE_SELECT</code>: The user can select a single entry from a dropdown menu.</p> </li> </ul>",
+        "HierarchyFilterListControl$Type": "<p>The type of the <code>HierarchyFilterListControl</code>. Choose one of the following options:</p> <ul> <li> <p> <code>MULTI_SELECT</code>: The user can select multiple entries from the list.</p> </li> <li> <p> <code>SINGLE_SELECT</code>: The user can select a single entry from the list.</p> </li> </ul>",
         "ParameterDropDownControl$Type": "<p>The type parameter name of the <code>ParameterDropDownControl</code>.</p>",
         "ParameterListControl$Type": "<p>The type of <code>ParameterListControl</code>.</p>"
       }
@@ -15567,6 +15917,8 @@
         "FilterSliderControl$Title": "<p>The title of the <code>FilterSliderControl</code>.</p>",
         "FilterTextAreaControl$Title": "<p>The title of the <code>FilterTextAreaControl</code>.</p>",
         "FilterTextFieldControl$Title": "<p>The title of the <code>FilterTextFieldControl</code>.</p>",
+        "HierarchyFilterDropDownControl$Title": "<p>The title of the <code>HierarchyFilterDropDownControl</code>.</p>",
+        "HierarchyFilterListControl$Title": "<p>The title of the <code>HierarchyFilterListControl</code>.</p>",
         "ParameterDateTimePickerControl$Title": "<p>The title of the <code>ParameterDateTimePickerControl</code>.</p>",
         "ParameterDropDownControl$Title": "<p>The title of the <code>ParameterDropDownControl</code>.</p>",
         "ParameterListControl$Title": "<p>The title of the <code>ParameterListControl</code>.</p>",
@@ -15906,6 +16258,11 @@
         "GrowthRateComputation$ComputationId": "<p>The ID for a computation.</p>",
         "HeaderFooterSectionConfiguration$SectionId": "<p>The unique identifier of the header or footer section.</p>",
         "HeatMapVisual$VisualId": "<p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>",
+        "HierarchyFilter$FilterId": "<p>An identifier that uniquely identifies a filter within a dashboard, analysis, or template.</p>",
+        "HierarchyFilterDropDownControl$FilterControlId": "<p>The ID of the <code>HierarchyFilterDropDownControl</code>.</p>",
+        "HierarchyFilterDropDownControl$SourceFilterId": "<p>The source filter ID of the <code>HierarchyFilterDropDownControl</code>. This must be the <code>FilterId</code> of a <code>HierarchyFilter</code>.</p>",
+        "HierarchyFilterListControl$FilterControlId": "<p>The ID of the <code>HierarchyFilterListControl</code>.</p>",
+        "HierarchyFilterListControl$SourceFilterId": "<p>The source filter ID of the <code>HierarchyFilterListControl</code>. This must be the <code>FilterId</code> of a <code>HierarchyFilter</code>.</p>",
         "HistogramVisual$VisualId": "<p>The unique identifier of a visual. This identifier must be unique within the context of a dashboard, template, or analysis. Two dashboards, analyses, or templates can have visuals with the same identifiers.</p>",
         "ImageCustomAction$CustomActionId": "<p>The ID of the custom action.</p>",
         "ImageStaticFile$StaticFileId": "<p>The ID of the static file that contains an image.</p>",
@@ -20500,6 +20857,7 @@
         "GeospatialMapStyle$BaseMapVisibility": "<p>The state of visibility for the base map.</p>",
         "GridLayoutElementBackgroundStyle$Visibility": "<p>The background visibility of a grid layout element.</p>",
         "GridLayoutElementBorderStyle$Visibility": "<p>The border visibility of a grid layout element.</p>",
+        "HierarchyFilterListControlSearchOptions$Visibility": "<p>The visibility configuration of the search options in a hierarchy list control.</p>",
         "KPISparklineOptions$Visibility": "<p>The visibility of the sparkline.</p>",
         "KPISparklineOptions$TooltipVisibility": "<p>The tooltip visibility of the sparkline.</p>",
         "LabelOptions$Visibility": "<p>Determines whether or not the label is visible.</p>",

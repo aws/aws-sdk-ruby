@@ -400,6 +400,8 @@ module Aws::OpenSearchService
       attr_accessor last_updated_time: ::Time
       attr_accessor config_change_status: ("Pending" | "Initializing" | "Validating" | "ValidationFailed" | "ApplyingChanges" | "Completed" | "PendingUserInput" | "Cancelled")
       attr_accessor initiated_by: ("CUSTOMER" | "SERVICE")
+      attr_accessor validation_failures: ::Array[Types::ValidationFailure]
+      attr_accessor accepted_warnings: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1049,7 +1051,7 @@ module Aws::OpenSearchService
 
     class DomainEndpointOptions
       attr_accessor enforce_https: bool
-      attr_accessor tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10" | "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08")
+      attr_accessor tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10" | "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08" | "Policy-Min-TLS-1-2-FIPS-PQ-2026-10")
       attr_accessor custom_endpoint_enabled: bool
       attr_accessor custom_endpoint: ::String
       attr_accessor custom_endpoint_certificate_arn: ::String
@@ -1160,6 +1162,7 @@ module Aws::OpenSearchService
       attr_accessor creation_date: ::String
       attr_accessor update_date: ::String
       attr_accessor validation_failures: ::Array[Types::ValidationFailure]
+      attr_accessor accepted_warnings: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1193,6 +1196,7 @@ module Aws::OpenSearchService
     class EncryptionAtRestOptions
       attr_accessor enabled: bool
       attr_accessor kms_key_id: ::String
+      attr_accessor encryption_mode: ("DISK" | "NATIVE")
       SENSITIVE: []
     end
 
@@ -2409,6 +2413,7 @@ module Aws::OpenSearchService
       attr_accessor automated_snapshot_pause_options: Types::AutomatedSnapshotPauseRequestOptions
       attr_accessor use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED")
       attr_accessor engine_mode: ("GENERAL" | "OPTIMIZED")
+      attr_accessor accepted_warnings: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -2553,6 +2558,7 @@ module Aws::OpenSearchService
     class ValidationFailure
       attr_accessor code: ::String
       attr_accessor message: ::String
+      attr_accessor severity: ("Critical" | "Warning")
       SENSITIVE: []
     end
 

@@ -11,64 +11,64 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class BucketPermissionException < ::Aws::Errors::ServiceError
+      class BucketPermissionException < ServiceError
         def message: () -> ::String
       end
-      class CanceledJobIdException < ::Aws::Errors::ServiceError
+      class CanceledJobIdException < ServiceError
         def message: () -> ::String
       end
-      class CreateJobQuotaExceededException < ::Aws::Errors::ServiceError
+      class CreateJobQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class ExpiredJobIdException < ::Aws::Errors::ServiceError
+      class ExpiredJobIdException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAccessKeyIdException < ::Aws::Errors::ServiceError
+      class InvalidAccessKeyIdException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAddressException < ::Aws::Errors::ServiceError
+      class InvalidAddressException < ServiceError
         def message: () -> ::String
       end
-      class InvalidCustomsException < ::Aws::Errors::ServiceError
+      class InvalidCustomsException < ServiceError
         def message: () -> ::String
       end
-      class InvalidFileSystemException < ::Aws::Errors::ServiceError
+      class InvalidFileSystemException < ServiceError
         def message: () -> ::String
       end
-      class InvalidJobIdException < ::Aws::Errors::ServiceError
+      class InvalidJobIdException < ServiceError
         def message: () -> ::String
       end
-      class InvalidManifestFieldException < ::Aws::Errors::ServiceError
+      class InvalidManifestFieldException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
       end
-      class InvalidVersionException < ::Aws::Errors::ServiceError
+      class InvalidVersionException < ServiceError
         def message: () -> ::String
       end
-      class MalformedManifestException < ::Aws::Errors::ServiceError
+      class MalformedManifestException < ServiceError
         def message: () -> ::String
       end
-      class MissingCustomsException < ::Aws::Errors::ServiceError
+      class MissingCustomsException < ServiceError
         def message: () -> ::String
       end
-      class MissingManifestFieldException < ::Aws::Errors::ServiceError
+      class MissingManifestFieldException < ServiceError
         def message: () -> ::String
       end
-      class MissingParameterException < ::Aws::Errors::ServiceError
+      class MissingParameterException < ServiceError
         def message: () -> ::String
       end
-      class MultipleRegionsException < ::Aws::Errors::ServiceError
+      class MultipleRegionsException < ServiceError
         def message: () -> ::String
       end
-      class NoSuchBucketException < ::Aws::Errors::ServiceError
+      class NoSuchBucketException < ServiceError
         def message: () -> ::String
       end
-      class UnableToCancelJobIdException < ::Aws::Errors::ServiceError
+      class UnableToCancelJobIdException < ServiceError
         def message: () -> ::String
       end
-      class UnableToUpdateJobIdException < ::Aws::Errors::ServiceError
+      class UnableToUpdateJobIdException < ServiceError
         def message: () -> ::String
       end
     end

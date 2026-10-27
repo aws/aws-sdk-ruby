@@ -199,12 +199,19 @@ module Aws::S3Files
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -548,7 +555,7 @@ module Aws::S3Files
     #   resp.access_point_id #=> String
     #   resp.client_token #=> String
     #   resp.file_system_id #=> String
-    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.owner_id #=> String
     #   resp.posix_user.uid #=> Integer
     #   resp.posix_user.gid #=> Integer
@@ -663,7 +670,7 @@ module Aws::S3Files
     #   resp.prefix #=> String
     #   resp.client_token #=> String
     #   resp.kms_key_id #=> String
-    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.status_message #=> String
     #   resp.role_arn #=> String
     #   resp.owner_id #=> String
@@ -761,7 +768,7 @@ module Aws::S3Files
     #   resp.vpc_id #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
-    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3files-2025-05-05/CreateMountTarget AWS API Documentation
@@ -902,7 +909,7 @@ module Aws::S3Files
     #   resp.access_point_id #=> String
     #   resp.client_token #=> String
     #   resp.file_system_id #=> String
-    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.owner_id #=> String
     #   resp.posix_user.uid #=> Integer
     #   resp.posix_user.gid #=> Integer
@@ -964,7 +971,7 @@ module Aws::S3Files
     #   resp.prefix #=> String
     #   resp.client_token #=> String
     #   resp.kms_key_id #=> String
-    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.status_message #=> String
     #   resp.role_arn #=> String
     #   resp.owner_id #=> String
@@ -1053,7 +1060,7 @@ module Aws::S3Files
     #   resp.vpc_id #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
-    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3files-2025-05-05/GetMountTarget AWS API Documentation
@@ -1139,7 +1146,7 @@ module Aws::S3Files
     #   resp.access_points[0].access_point_arn #=> String
     #   resp.access_points[0].access_point_id #=> String
     #   resp.access_points[0].file_system_id #=> String
-    #   resp.access_points[0].status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.access_points[0].status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.access_points[0].owner_id #=> String
     #   resp.access_points[0].posix_user.uid #=> Integer
     #   resp.access_points[0].posix_user.gid #=> Integer
@@ -1201,7 +1208,7 @@ module Aws::S3Files
     #   resp.file_systems[0].file_system_id #=> String
     #   resp.file_systems[0].name #=> String
     #   resp.file_systems[0].bucket #=> String
-    #   resp.file_systems[0].status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.file_systems[0].status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.file_systems[0].status_message #=> String
     #   resp.file_systems[0].role_arn #=> String
     #   resp.file_systems[0].owner_id #=> String
@@ -1259,7 +1266,7 @@ module Aws::S3Files
     #   resp.mount_targets[0].file_system_id #=> String
     #   resp.mount_targets[0].ipv4_address #=> String
     #   resp.mount_targets[0].ipv6_address #=> String
-    #   resp.mount_targets[0].status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.mount_targets[0].status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.mount_targets[0].status_message #=> String
     #   resp.mount_targets[0].mount_target_id #=> String
     #   resp.mount_targets[0].network_interface_id #=> String
@@ -1507,7 +1514,7 @@ module Aws::S3Files
     #   resp.vpc_id #=> String
     #   resp.security_groups #=> Array
     #   resp.security_groups[0] #=> String
-    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating"
+    #   resp.status #=> String, one of "available", "creating", "deleting", "deleted", "error", "updating", "misconfigured"
     #   resp.status_message #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3files-2025-05-05/UpdateMountTarget AWS API Documentation
@@ -1537,7 +1544,7 @@ module Aws::S3Files
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3files'
-      context[:gem_version] = '1.7.0'
+      context[:gem_version] = '1.10.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

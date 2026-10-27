@@ -199,12 +199,19 @@ module Aws::Lightsail
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -2431,6 +2438,40 @@ module Aws::Lightsail
     #   to return when the origin responds with a given HTTP error code. You
     #   can also specify the HTTP status code to send to the viewer.
     #
+    # @option params [Boolean] :enable_waf
+    #   Specifies whether to enable Web Application Firewall (WAF) for the
+    #   distribution. WAF inspects viewer requests and blocks requests that
+    #   match the WAF rule groups that you enable.
+    #
+    #   When you enable WAF without specifying the `wafRules` parameter, the
+    #   distribution has no WAF rule groups enabled and doesn't block any
+    #   requests.
+    #
+    #   <note markdown="1"> WAF is available only for distributions that use the `medium_1_0` or
+    #   `large_1_0` bundle.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::WafRule>] :waf_rules
+    #   An array of objects that describe the WAF rule groups to enable for
+    #   the distribution.
+    #
+    #   The WAF rule groups that you can specify depend on the bundle of the
+    #   distribution:
+    #
+    #   * `medium_1_0` – Supports the `AWSManagedRulesCommonRuleSet`,
+    #     `AWSManagedRulesKnownBadInputsRuleSet`, and
+    #     `AWSManagedRulesAnonymousIpList` rule groups.
+    #
+    #   * `large_1_0` – Supports the rule groups for `medium_1_0`, plus
+    #     `AWSManagedRulesAdminProtectionRuleSet`,
+    #     `AWSManagedRulesSQLiRuleSet`, `AWSManagedRulesLinuxRuleSet`,
+    #     `AWSManagedRulesUnixRuleSet`, `AWSManagedRulesWindowsRuleSet`,
+    #     `AWSManagedRulesPHPRuleSet`, `AWSManagedRulesWordPressRuleSet`,
+    #     `AWSManagedRulesAmazonIpReputationList`,
+    #     `AWSManagedRulesATPRuleSet`, `AWSManagedRulesACFPRuleSet`, and
+    #     `AWSManagedRulesBotControlRuleSet` rule groups.
+    #
     # @return [Types::CreateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDistributionResult#distribution #distribution} => Types::LightsailDistribution
@@ -2495,6 +2536,34 @@ module Aws::Lightsail
     #         error_caching_min_ttl: 1,
     #       },
     #     ],
+    #     enable_waf: false,
+    #     waf_rules: [
+    #       {
+    #         name: "string", # required
+    #         atp_config: {
+    #           login_path: "string",
+    #           payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #           username_field: "string",
+    #           password_field: "string",
+    #           response_inspection: {
+    #             success_codes: [1],
+    #             failure_codes: [1],
+    #           },
+    #         },
+    #         acfp_config: {
+    #           payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #           creation_path: "string",
+    #           registration_page_path: "string",
+    #           response_inspection: {
+    #             success_codes: [1],
+    #             failure_codes: [1],
+    #           },
+    #         },
+    #         bot_control_config: {
+    #           inspection_level: "COMMON", # accepts COMMON, TARGETED
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2551,6 +2620,25 @@ module Aws::Lightsail
     #   resp.distribution.custom_error_responses[0].response_code #=> String
     #   resp.distribution.custom_error_responses[0].response_page_path #=> String
     #   resp.distribution.custom_error_responses[0].error_caching_min_ttl #=> Integer
+    #   resp.distribution.waf.is_waf_enabled #=> Boolean
+    #   resp.distribution.waf.waf_rules #=> Array
+    #   resp.distribution.waf.waf_rules[0].name #=> String
+    #   resp.distribution.waf.waf_rules[0].atp_config.login_path #=> String
+    #   resp.distribution.waf.waf_rules[0].atp_config.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.distribution.waf.waf_rules[0].atp_config.username_field #=> String
+    #   resp.distribution.waf.waf_rules[0].atp_config.password_field #=> String
+    #   resp.distribution.waf.waf_rules[0].atp_config.response_inspection.success_codes #=> Array
+    #   resp.distribution.waf.waf_rules[0].atp_config.response_inspection.success_codes[0] #=> Integer
+    #   resp.distribution.waf.waf_rules[0].atp_config.response_inspection.failure_codes #=> Array
+    #   resp.distribution.waf.waf_rules[0].atp_config.response_inspection.failure_codes[0] #=> Integer
+    #   resp.distribution.waf.waf_rules[0].acfp_config.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.distribution.waf.waf_rules[0].acfp_config.creation_path #=> String
+    #   resp.distribution.waf.waf_rules[0].acfp_config.registration_page_path #=> String
+    #   resp.distribution.waf.waf_rules[0].acfp_config.response_inspection.success_codes #=> Array
+    #   resp.distribution.waf.waf_rules[0].acfp_config.response_inspection.success_codes[0] #=> Integer
+    #   resp.distribution.waf.waf_rules[0].acfp_config.response_inspection.failure_codes #=> Array
+    #   resp.distribution.waf.waf_rules[0].acfp_config.response_inspection.failure_codes[0] #=> Integer
+    #   resp.distribution.waf.waf_rules[0].bot_control_config.inspection_level #=> String, one of "COMMON", "TARGETED"
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
     #   resp.operation.resource_type #=> String, one of "ContainerService", "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord", "Alarm", "ContactMethod", "Distribution", "Certificate", "Bucket"
@@ -5597,7 +5685,7 @@ module Aws::Lightsail
     #   resp.alarms[0].datapoints_to_alarm #=> Integer
     #   resp.alarms[0].treat_missing_data #=> String, one of "breaching", "notBreaching", "ignore", "missing"
     #   resp.alarms[0].statistic #=> String, one of "Minimum", "Maximum", "Sum", "Average", "SampleCount"
-    #   resp.alarms[0].metric_name #=> String, one of "CPUUtilization", "NetworkIn", "NetworkOut", "StatusCheckFailed", "StatusCheckFailed_Instance", "StatusCheckFailed_System", "ClientTLSNegotiationErrorCount", "HealthyHostCount", "UnhealthyHostCount", "HTTPCode_LB_4XX_Count", "HTTPCode_LB_5XX_Count", "HTTPCode_Instance_2XX_Count", "HTTPCode_Instance_3XX_Count", "HTTPCode_Instance_4XX_Count", "HTTPCode_Instance_5XX_Count", "InstanceResponseTime", "RejectedConnectionCount", "RequestCount", "DatabaseConnections", "DiskQueueDepth", "FreeStorageSpace", "NetworkReceiveThroughput", "NetworkTransmitThroughput", "FreeableMemory", "SwapUsage", "BurstCapacityTime", "BurstCapacityPercentage"
+    #   resp.alarms[0].metric_name #=> String, one of "CPUUtilization", "NetworkIn", "NetworkOut", "StatusCheckFailed", "StatusCheckFailed_Instance", "StatusCheckFailed_System", "ClientTLSNegotiationErrorCount", "HealthyHostCount", "UnhealthyHostCount", "HTTPCode_LB_4XX_Count", "HTTPCode_LB_5XX_Count", "HTTPCode_Instance_2XX_Count", "HTTPCode_Instance_3XX_Count", "HTTPCode_Instance_4XX_Count", "HTTPCode_Instance_5XX_Count", "InstanceResponseTime", "RejectedConnectionCount", "RequestCount", "DatabaseConnections", "DiskQueueDepth", "FreeStorageSpace", "NetworkReceiveThroughput", "NetworkTransmitThroughput", "FreeableMemory", "SwapUsage", "BurstCapacityTime", "BurstCapacityPercentage", "DiskReadOps", "DiskWriteOps", "DiskReadBytes", "DiskWriteBytes", "DiskTotalReadTime", "DiskTotalWriteTime", "DiskQueueLength"
     #   resp.alarms[0].state #=> String, one of "OK", "ALARM", "INSUFFICIENT_DATA"
     #   resp.alarms[0].unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
     #   resp.alarms[0].contact_protocols #=> Array
@@ -7279,6 +7367,22 @@ module Aws::Lightsail
     #
     #     `Unit`: The published unit is `Percent`.
     #
+    #   * <b> <code>WafAllowedRequests</code> </b> - The number of viewer
+    #     requests that Web Application Firewall (WAF) allowed. This metric is
+    #     available only when WAF is enabled for the distribution.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `None`.
+    #
+    #   * <b> <code>WafBlockedRequests</code> </b> - The number of viewer
+    #     requests that WAF blocked. This metric is available only when WAF is
+    #     enabled for the distribution.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `None`.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The start of the time interval for which to get metric data.
     #
@@ -7363,7 +7467,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_distribution_metric_data({
     #     distribution_name: "ResourceName", # required
-    #     metric_name: "Requests", # required, accepts Requests, BytesDownloaded, BytesUploaded, TotalErrorRate, Http4xxErrorRate, Http5xxErrorRate
+    #     metric_name: "Requests", # required, accepts Requests, BytesDownloaded, BytesUploaded, TotalErrorRate, Http4xxErrorRate, Http5xxErrorRate, WafAllowedRequests, WafBlockedRequests
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     period: 1, # required
@@ -7373,7 +7477,7 @@ module Aws::Lightsail
     #
     # @example Response structure
     #
-    #   resp.metric_name #=> String, one of "Requests", "BytesDownloaded", "BytesUploaded", "TotalErrorRate", "Http4xxErrorRate", "Http5xxErrorRate"
+    #   resp.metric_name #=> String, one of "Requests", "BytesDownloaded", "BytesUploaded", "TotalErrorRate", "Http4xxErrorRate", "Http5xxErrorRate", "WafAllowedRequests", "WafBlockedRequests"
     #   resp.metric_data #=> Array
     #   resp.metric_data[0].average #=> Float
     #   resp.metric_data[0].maximum #=> Float
@@ -7475,6 +7579,25 @@ module Aws::Lightsail
     #   resp.distributions[0].custom_error_responses[0].response_code #=> String
     #   resp.distributions[0].custom_error_responses[0].response_page_path #=> String
     #   resp.distributions[0].custom_error_responses[0].error_caching_min_ttl #=> Integer
+    #   resp.distributions[0].waf.is_waf_enabled #=> Boolean
+    #   resp.distributions[0].waf.waf_rules #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].name #=> String
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.login_path #=> String
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.username_field #=> String
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.password_field #=> String
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.response_inspection.success_codes #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.response_inspection.success_codes[0] #=> Integer
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.response_inspection.failure_codes #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.response_inspection.failure_codes[0] #=> Integer
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.creation_path #=> String
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.registration_page_path #=> String
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.response_inspection.success_codes #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.response_inspection.success_codes[0] #=> Integer
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.response_inspection.failure_codes #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.response_inspection.failure_codes[0] #=> Integer
+    #   resp.distributions[0].waf.waf_rules[0].bot_control_config.inspection_level #=> String, one of "COMMON", "TARGETED"
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributions AWS API Documentation
@@ -7951,9 +8074,76 @@ module Aws::Lightsail
     #
     #     `Unit`: The published unit is `Count`.
     #
+    #   * <b> <code>DiskReadOps</code> </b> - The number of read operations
+    #     completed on the system disk of the instance during the period. This
+    #     metric doesn't include activity on additional disks that you attach
+    #     to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   * <b> <code>DiskWriteOps</code> </b> - The number of write operations
+    #     completed on the system disk of the instance during the period. This
+    #     metric doesn't include activity on additional disks that you attach
+    #     to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   * <b> <code>DiskReadBytes</code> </b> - The number of bytes read from
+    #     the system disk of the instance during the period. This metric
+    #     doesn't include activity on additional disks that you attach to the
+    #     instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Bytes`.
+    #
+    #   * <b> <code>DiskWriteBytes</code> </b> - The number of bytes written
+    #     to the system disk of the instance during the period. This metric
+    #     doesn't include activity on additional disks that you attach to the
+    #     instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Bytes`.
+    #
+    #   * <b> <code>DiskTotalReadTime</code> </b> - The total number of
+    #     seconds spent by all read operations that completed on the system
+    #     disk of the instance during the period. This metric doesn't include
+    #     activity on additional disks that you attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Seconds`.
+    #
+    #   * <b> <code>DiskTotalWriteTime</code> </b> - The total number of
+    #     seconds spent by all write operations that completed on the system
+    #     disk of the instance during the period. This metric doesn't include
+    #     activity on additional disks that you attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Seconds`.
+    #
+    #   * <b> <code>DiskQueueLength</code> </b> - The number of read and write
+    #     requests that are waiting to access the system disk of the instance.
+    #     This metric doesn't include activity on additional disks that you
+    #     attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   For more information about system disk performance metrics, see [View
+    #   system disk performance metrics for your Lightsail instance][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-burst-capacity
+    #   [2]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-disk-performance-metrics
     #
     # @option params [required, Integer] :period
     #   The granularity, in seconds, of the returned data points.
@@ -8010,7 +8200,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_instance_metric_data({
     #     instance_name: "ResourceName", # required
-    #     metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, BurstCapacityTime, BurstCapacityPercentage, MetadataNoToken
+    #     metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, BurstCapacityTime, BurstCapacityPercentage, MetadataNoToken, DiskReadOps, DiskWriteOps, DiskReadBytes, DiskWriteBytes, DiskTotalReadTime, DiskTotalWriteTime, DiskQueueLength
     #     period: 1, # required
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
@@ -8020,7 +8210,7 @@ module Aws::Lightsail
     #
     # @example Response structure
     #
-    #   resp.metric_name #=> String, one of "CPUUtilization", "NetworkIn", "NetworkOut", "StatusCheckFailed", "StatusCheckFailed_Instance", "StatusCheckFailed_System", "BurstCapacityTime", "BurstCapacityPercentage", "MetadataNoToken"
+    #   resp.metric_name #=> String, one of "CPUUtilization", "NetworkIn", "NetworkOut", "StatusCheckFailed", "StatusCheckFailed_Instance", "StatusCheckFailed_System", "BurstCapacityTime", "BurstCapacityPercentage", "MetadataNoToken", "DiskReadOps", "DiskWriteOps", "DiskReadBytes", "DiskWriteBytes", "DiskTotalReadTime", "DiskTotalWriteTime", "DiskQueueLength"
     #   resp.metric_data #=> Array
     #   resp.metric_data[0].average #=> Float
     #   resp.metric_data[0].maximum #=> Float
@@ -10249,7 +10439,9 @@ module Aws::Lightsail
     #
     #   * **Instances**: `BurstCapacityPercentage`, `BurstCapacityTime`,
     #     `CPUUtilization`, `NetworkIn`, `NetworkOut`, `StatusCheckFailed`,
-    #     `StatusCheckFailed_Instance`, and `StatusCheckFailed_System`.
+    #     `StatusCheckFailed_Instance`, `StatusCheckFailed_System`,
+    #     `DiskReadOps`, `DiskWriteOps`, `DiskReadBytes`, `DiskWriteBytes`,
+    #     `DiskTotalReadTime`, `DiskTotalWriteTime`, and `DiskQueueLength`.
     #
     #   * **Load balancers**: `ClientTLSNegotiationErrorCount`,
     #     `HealthyHostCount`, `UnhealthyHostCount`, `HTTPCode_LB_4XX_Count`,
@@ -10389,7 +10581,7 @@ module Aws::Lightsail
     #
     #   resp = client.put_alarm({
     #     alarm_name: "ResourceName", # required
-    #     metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput, FreeableMemory, SwapUsage, BurstCapacityTime, BurstCapacityPercentage
+    #     metric_name: "CPUUtilization", # required, accepts CPUUtilization, NetworkIn, NetworkOut, StatusCheckFailed, StatusCheckFailed_Instance, StatusCheckFailed_System, ClientTLSNegotiationErrorCount, HealthyHostCount, UnhealthyHostCount, HTTPCode_LB_4XX_Count, HTTPCode_LB_5XX_Count, HTTPCode_Instance_2XX_Count, HTTPCode_Instance_3XX_Count, HTTPCode_Instance_4XX_Count, HTTPCode_Instance_5XX_Count, InstanceResponseTime, RejectedConnectionCount, RequestCount, DatabaseConnections, DiskQueueDepth, FreeStorageSpace, NetworkReceiveThroughput, NetworkTransmitThroughput, FreeableMemory, SwapUsage, BurstCapacityTime, BurstCapacityPercentage, DiskReadOps, DiskWriteOps, DiskReadBytes, DiskWriteBytes, DiskTotalReadTime, DiskTotalWriteTime, DiskQueueLength
     #     monitored_resource_name: "ResourceName", # required
     #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
     #     threshold: 1.0, # required
@@ -12065,6 +12257,51 @@ module Aws::Lightsail
     #   to return when the origin responds with a given HTTP error code. You
     #   can also specify the HTTP status code to send to the viewer.
     #
+    # @option params [Boolean] :enable_waf
+    #   Specifies whether to enable Web Application Firewall (WAF) for the
+    #   distribution. WAF inspects viewer requests and blocks requests that
+    #   match the WAF rule groups that you enable.
+    #
+    #   When you enable WAF without specifying the `wafRules` parameter, the
+    #   distribution has no WAF rule groups enabled and doesn't block any
+    #   requests.
+    #
+    #   <note markdown="1"> WAF is available only for distributions that use the `medium_1_0` or
+    #   `large_1_0` bundle.
+    #
+    #    Setting this parameter to `false` disables WAF for the distribution
+    #   and removes its WAF rule groups. You must enable the WAF rule groups
+    #   again if you enable WAF again.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::WafRule>] :waf_rules
+    #   An array of objects that describe the WAF rule groups to enable for
+    #   the distribution.
+    #
+    #   The array that you specify replaces the existing WAF rule groups of
+    #   the distribution. To keep a WAF rule group enabled, include it in the
+    #   array. To disable all WAF rule groups, specify an empty array.
+    #
+    #   You can specify this parameter only when WAF is enabled for the
+    #   distribution.
+    #
+    #   The WAF rule groups that you can specify depend on the bundle of the
+    #   distribution:
+    #
+    #   * `medium_1_0` – Supports the `AWSManagedRulesCommonRuleSet`,
+    #     `AWSManagedRulesKnownBadInputsRuleSet`, and
+    #     `AWSManagedRulesAnonymousIpList` rule groups.
+    #
+    #   * `large_1_0` – Supports the rule groups for `medium_1_0`, plus
+    #     `AWSManagedRulesAdminProtectionRuleSet`,
+    #     `AWSManagedRulesSQLiRuleSet`, `AWSManagedRulesLinuxRuleSet`,
+    #     `AWSManagedRulesUnixRuleSet`, `AWSManagedRulesWindowsRuleSet`,
+    #     `AWSManagedRulesPHPRuleSet`, `AWSManagedRulesWordPressRuleSet`,
+    #     `AWSManagedRulesAmazonIpReputationList`,
+    #     `AWSManagedRulesATPRuleSet`, `AWSManagedRulesACFPRuleSet`, and
+    #     `AWSManagedRulesBotControlRuleSet` rule groups.
+    #
     # @return [Types::UpdateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDistributionResult#operation #operation} => Types::Operation
@@ -12120,6 +12357,34 @@ module Aws::Lightsail
     #         response_code: "string",
     #         response_page_path: "string",
     #         error_caching_min_ttl: 1,
+    #       },
+    #     ],
+    #     enable_waf: false,
+    #     waf_rules: [
+    #       {
+    #         name: "string", # required
+    #         atp_config: {
+    #           login_path: "string",
+    #           payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #           username_field: "string",
+    #           password_field: "string",
+    #           response_inspection: {
+    #             success_codes: [1],
+    #             failure_codes: [1],
+    #           },
+    #         },
+    #         acfp_config: {
+    #           payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #           creation_path: "string",
+    #           registration_page_path: "string",
+    #           response_inspection: {
+    #             success_codes: [1],
+    #             failure_codes: [1],
+    #           },
+    #         },
+    #         bot_control_config: {
+    #           inspection_level: "COMMON", # accepts COMMON, TARGETED
+    #         },
     #       },
     #     ],
     #   })
@@ -12721,7 +12986,7 @@ module Aws::Lightsail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.137.0'
+      context[:gem_version] = '1.141.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

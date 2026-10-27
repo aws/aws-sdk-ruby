@@ -3795,6 +3795,42 @@ module Aws::Lightsail
     #   can also specify the HTTP status code to send to the viewer.
     #   @return [Array<Types::DistributionCustomErrorResponse>]
     #
+    # @!attribute [rw] enable_waf
+    #   Specifies whether to enable Web Application Firewall (WAF) for the
+    #   distribution. WAF inspects viewer requests and blocks requests that
+    #   match the WAF rule groups that you enable.
+    #
+    #   When you enable WAF without specifying the `wafRules` parameter, the
+    #   distribution has no WAF rule groups enabled and doesn't block any
+    #   requests.
+    #
+    #   <note markdown="1"> WAF is available only for distributions that use the `medium_1_0` or
+    #   `large_1_0` bundle.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] waf_rules
+    #   An array of objects that describe the WAF rule groups to enable for
+    #   the distribution.
+    #
+    #   The WAF rule groups that you can specify depend on the bundle of the
+    #   distribution:
+    #
+    #   * `medium_1_0` – Supports the `AWSManagedRulesCommonRuleSet`,
+    #     `AWSManagedRulesKnownBadInputsRuleSet`, and
+    #     `AWSManagedRulesAnonymousIpList` rule groups.
+    #
+    #   * `large_1_0` – Supports the rule groups for `medium_1_0`, plus
+    #     `AWSManagedRulesAdminProtectionRuleSet`,
+    #     `AWSManagedRulesSQLiRuleSet`, `AWSManagedRulesLinuxRuleSet`,
+    #     `AWSManagedRulesUnixRuleSet`, `AWSManagedRulesWindowsRuleSet`,
+    #     `AWSManagedRulesPHPRuleSet`, `AWSManagedRulesWordPressRuleSet`,
+    #     `AWSManagedRulesAmazonIpReputationList`,
+    #     `AWSManagedRulesATPRuleSet`, `AWSManagedRulesACFPRuleSet`, and
+    #     `AWSManagedRulesBotControlRuleSet` rule groups.
+    #   @return [Array<Types::WafRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/CreateDistributionRequest AWS API Documentation
     #
     class CreateDistributionRequest < Struct.new(
@@ -3810,7 +3846,9 @@ module Aws::Lightsail
       :viewer_minimum_tls_protocol_version,
       :enable_private_origin_access,
       :default_root_object,
-      :custom_error_responses)
+      :custom_error_responses,
+      :enable_waf,
+      :waf_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7866,6 +7904,22 @@ module Aws::Lightsail
     #     `Statistics`: The most useful statistic is `Average`.
     #
     #     `Unit`: The published unit is `Percent`.
+    #
+    #   * <b> <code>WafAllowedRequests</code> </b> - The number of viewer
+    #     requests that Web Application Firewall (WAF) allowed. This metric
+    #     is available only when WAF is enabled for the distribution.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `None`.
+    #
+    #   * <b> <code>WafBlockedRequests</code> </b> - The number of viewer
+    #     requests that WAF blocked. This metric is available only when WAF
+    #     is enabled for the distribution.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `None`.
     #   @return [String]
     #
     # @!attribute [rw] start_time
@@ -8283,9 +8337,79 @@ module Aws::Lightsail
     #
     #     `Unit`: The published unit is `Count`.
     #
+    #   * <b> <code>DiskReadOps</code> </b> - The number of read operations
+    #     completed on the system disk of the instance during the period.
+    #     This metric doesn't include activity on additional disks that you
+    #     attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   * <b> <code>DiskWriteOps</code> </b> - The number of write
+    #     operations completed on the system disk of the instance during the
+    #     period. This metric doesn't include activity on additional disks
+    #     that you attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   * <b> <code>DiskReadBytes</code> </b> - The number of bytes read
+    #     from the system disk of the instance during the period. This
+    #     metric doesn't include activity on additional disks that you
+    #     attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Bytes`.
+    #
+    #   * <b> <code>DiskWriteBytes</code> </b> - The number of bytes written
+    #     to the system disk of the instance during the period. This metric
+    #     doesn't include activity on additional disks that you attach to
+    #     the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `Bytes`.
+    #
+    #   * <b> <code>DiskTotalReadTime</code> </b> - The total number of
+    #     seconds spent by all read operations that completed on the system
+    #     disk of the instance during the period. This metric doesn't
+    #     include activity on additional disks that you attach to the
+    #     instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Seconds`.
+    #
+    #   * <b> <code>DiskTotalWriteTime</code> </b> - The total number of
+    #     seconds spent by all write operations that completed on the system
+    #     disk of the instance during the period. This metric doesn't
+    #     include activity on additional disks that you attach to the
+    #     instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Seconds`.
+    #
+    #   * <b> <code>DiskQueueLength</code> </b> - The number of read and
+    #     write requests that are waiting to access the system disk of the
+    #     instance. This metric doesn't include activity on additional
+    #     disks that you attach to the instance.
+    #
+    #     `Statistics`: The most useful statistic is `Average`.
+    #
+    #     `Unit`: The published unit is `Count`.
+    #
+    #   For more information about system disk performance metrics, see
+    #   [View system disk performance metrics for your Lightsail
+    #   instance][2].
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-burst-capacity
+    #   [2]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-viewing-instance-disk-performance-metrics
     #   @return [String]
     #
     # @!attribute [rw] period
@@ -11352,6 +11476,11 @@ module Aws::Lightsail
     #   configured for the distribution.
     #   @return [Array<Types::DistributionCustomErrorResponse>]
     #
+    # @!attribute [rw] waf
+    #   An object that describes the Web Application Firewall (WAF)
+    #   configuration of the distribution.
+    #   @return [Types::WafConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/LightsailDistribution AWS API Documentation
     #
     class LightsailDistribution < Struct.new(
@@ -11377,7 +11506,8 @@ module Aws::Lightsail
       :tags,
       :viewer_minimum_tls_protocol_version,
       :default_root_object,
-      :custom_error_responses)
+      :custom_error_responses,
+      :waf)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12715,7 +12845,9 @@ module Aws::Lightsail
     #
     #   * **Instances**: `BurstCapacityPercentage`, `BurstCapacityTime`,
     #     `CPUUtilization`, `NetworkIn`, `NetworkOut`, `StatusCheckFailed`,
-    #     `StatusCheckFailed_Instance`, and `StatusCheckFailed_System`.
+    #     `StatusCheckFailed_Instance`, `StatusCheckFailed_System`,
+    #     `DiskReadOps`, `DiskWriteOps`, `DiskReadBytes`, `DiskWriteBytes`,
+    #     `DiskTotalReadTime`, `DiskTotalWriteTime`, and `DiskQueueLength`.
     #
     #   * **Load balancers**: `ClientTLSNegotiationErrorCount`,
     #     `HealthyHostCount`, `UnhealthyHostCount`, `HTTPCode_LB_4XX_Count`,
@@ -15135,6 +15267,53 @@ module Aws::Lightsail
     #   can also specify the HTTP status code to send to the viewer.
     #   @return [Array<Types::DistributionCustomErrorResponse>]
     #
+    # @!attribute [rw] enable_waf
+    #   Specifies whether to enable Web Application Firewall (WAF) for the
+    #   distribution. WAF inspects viewer requests and blocks requests that
+    #   match the WAF rule groups that you enable.
+    #
+    #   When you enable WAF without specifying the `wafRules` parameter, the
+    #   distribution has no WAF rule groups enabled and doesn't block any
+    #   requests.
+    #
+    #   <note markdown="1"> WAF is available only for distributions that use the `medium_1_0` or
+    #   `large_1_0` bundle.
+    #
+    #    Setting this parameter to `false` disables WAF for the distribution
+    #   and removes its WAF rule groups. You must enable the WAF rule groups
+    #   again if you enable WAF again.
+    #
+    #    </note>
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] waf_rules
+    #   An array of objects that describe the WAF rule groups to enable for
+    #   the distribution.
+    #
+    #   The array that you specify replaces the existing WAF rule groups of
+    #   the distribution. To keep a WAF rule group enabled, include it in
+    #   the array. To disable all WAF rule groups, specify an empty array.
+    #
+    #   You can specify this parameter only when WAF is enabled for the
+    #   distribution.
+    #
+    #   The WAF rule groups that you can specify depend on the bundle of the
+    #   distribution:
+    #
+    #   * `medium_1_0` – Supports the `AWSManagedRulesCommonRuleSet`,
+    #     `AWSManagedRulesKnownBadInputsRuleSet`, and
+    #     `AWSManagedRulesAnonymousIpList` rule groups.
+    #
+    #   * `large_1_0` – Supports the rule groups for `medium_1_0`, plus
+    #     `AWSManagedRulesAdminProtectionRuleSet`,
+    #     `AWSManagedRulesSQLiRuleSet`, `AWSManagedRulesLinuxRuleSet`,
+    #     `AWSManagedRulesUnixRuleSet`, `AWSManagedRulesWindowsRuleSet`,
+    #     `AWSManagedRulesPHPRuleSet`, `AWSManagedRulesWordPressRuleSet`,
+    #     `AWSManagedRulesAmazonIpReputationList`,
+    #     `AWSManagedRulesATPRuleSet`, `AWSManagedRulesACFPRuleSet`, and
+    #     `AWSManagedRulesBotControlRuleSet` rule groups.
+    #   @return [Array<Types::WafRule>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/UpdateDistributionRequest AWS API Documentation
     #
     class UpdateDistributionRequest < Struct.new(
@@ -15149,7 +15328,9 @@ module Aws::Lightsail
       :use_default_certificate,
       :enable_private_origin_access,
       :default_root_object,
-      :custom_error_responses)
+      :custom_error_responses,
+      :enable_waf,
+      :waf_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15519,6 +15700,276 @@ module Aws::Lightsail
     #
     class UpdateRelationalDatabaseResult < Struct.new(
       :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of the account creation fraud prevention
+    # Web Application Firewall (WAF) rule group. The rule group inspects
+    # account creation requests to your application.
+    #
+    # @!attribute [rw] payload_type
+    #   The content type of the request body of account creation requests.
+    #
+    #   The following content types are possible:
+    #
+    #   * `JSON` – The request body is in JSON format.
+    #
+    #   * `FORM_ENCODED` – The request body is form encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_path
+    #   The path of the endpoint that accepts completed account creation
+    #   forms (for example, `/signup/submit`). This endpoint must accept
+    #   `POST` requests.
+    #
+    #   Constraints:
+    #
+    #   * Must start with a forward slash (`/`).
+    #
+    #   * Must contain from 1 to 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] registration_page_path
+    #   The path of the page that displays the account creation form (for
+    #   example, `/signup`).
+    #
+    #   Constraints:
+    #
+    #   * Must start with a forward slash (`/`).
+    #
+    #   * Must contain from 1 to 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_inspection
+    #   An object that describes the HTTP status codes that your application
+    #   returns for successful and failed account creation attempts.
+    #   @return [Types::WafResponseInspection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/WafAcfpConfig AWS API Documentation
+    #
+    class WafAcfpConfig < Struct.new(
+      :payload_type,
+      :creation_path,
+      :registration_page_path,
+      :response_inspection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of the account takeover prevention Web
+    # Application Firewall (WAF) rule group. The rule group inspects login
+    # requests to the login path of your application.
+    #
+    # @!attribute [rw] login_path
+    #   The path of the login endpoint of your application (for example,
+    #   `/login`). Login paths that start with the path that you specify are
+    #   a match.
+    #
+    #   Constraints:
+    #
+    #   * Must start with a forward slash (`/`).
+    #
+    #   * Must contain from 1 to 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] payload_type
+    #   The content type of the request body of login requests.
+    #
+    #   The following content types are possible:
+    #
+    #   * `JSON` – The request body is in JSON format.
+    #
+    #   * `FORM_ENCODED` – The request body is form encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] username_field
+    #   The name of the field in the request body that contains the username
+    #   (for example, `/username` for `JSON` or `username` for
+    #   `FORM_ENCODED`).
+    #
+    #   Constraints:
+    #
+    #   * For a `JSON` payload, must be a JSON pointer that starts with a
+    #     forward slash (`/`).
+    #
+    #   * Must contain from 1 to 512 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] password_field
+    #   The name of the field in the request body that contains the password
+    #   (for example, `/password` for `JSON` or `password` for
+    #   `FORM_ENCODED`).
+    #
+    #   Constraints:
+    #
+    #   * For a `JSON` payload, must be a JSON pointer that starts with a
+    #     forward slash (`/`).
+    #
+    #   * Must contain from 1 to 512 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_inspection
+    #   An object that describes the HTTP status codes that your application
+    #   returns for successful and failed login attempts.
+    #   @return [Types::WafResponseInspection]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/WafAtpConfig AWS API Documentation
+    #
+    class WafAtpConfig < Struct.new(
+      :login_path,
+      :payload_type,
+      :username_field,
+      :password_field,
+      :response_inspection)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the configuration of the bot control Web Application
+    # Firewall (WAF) rule group.
+    #
+    # @!attribute [rw] inspection_level
+    #   The inspection level of the bot control rule group.
+    #
+    #   The following inspection levels are possible:
+    #
+    #   * `COMMON` – Detects a variety of bots that identify themselves,
+    #     such as web scraping frameworks, search engines, and automated
+    #     browsers.
+    #
+    #   * `TARGETED` – Includes the `COMMON` protections, and adds detection
+    #     for sophisticated bots that don't identify themselves. This level
+    #     uses rate limiting, CAPTCHA, and background browser challenges.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/WafBotControlConfig AWS API Documentation
+    #
+    class WafBotControlConfig < Struct.new(
+      :inspection_level)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the Web Application Firewall (WAF) configuration of a
+    # Lightsail distribution.
+    #
+    # @!attribute [rw] is_waf_enabled
+    #   Specifies whether WAF is enabled for the distribution.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] waf_rules
+    #   An array of objects that describe the WAF rule groups enabled for
+    #   the distribution.
+    #   @return [Array<Types::WafRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/WafConfig AWS API Documentation
+    #
+    class WafConfig < Struct.new(
+      :is_waf_enabled,
+      :waf_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the HTTP status codes that your application returns to
+    # indicate successful and failed attempts. The Web Application Firewall
+    # (WAF) rule group uses these status codes to track successful and
+    # failed attempts.
+    #
+    # @!attribute [rw] success_codes
+    #   The HTTP status codes that indicate a successful attempt (for
+    #   example, `200`).
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 10 status codes.
+    #
+    #   * Each status code must be from `0` to `999`.
+    #
+    #   * Can't contain a status code that is also in `failureCodes`.
+    #   @return [Array<Integer>]
+    #
+    # @!attribute [rw] failure_codes
+    #   The HTTP status codes that indicate a failed attempt (for example,
+    #   `401`).
+    #
+    #   Constraints:
+    #
+    #   * Must contain from 1 to 10 status codes.
+    #
+    #   * Each status code must be from `0` to `999`.
+    #
+    #   * Can't contain a status code that is also in `successCodes`.
+    #   @return [Array<Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/WafResponseInspection AWS API Documentation
+    #
+    class WafResponseInspection < Struct.new(
+      :success_codes,
+      :failure_codes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a Web Application Firewall (WAF) rule group for a Lightsail
+    # distribution. A WAF rule group is a set of rules managed by AWS. The
+    # rules inspect viewer requests and block requests that match them.
+    #
+    # @!attribute [rw] name
+    #   The name of the WAF rule group (for example,
+    #   `AWSManagedRulesCommonRuleSet`).
+    #
+    #   For the WAF rule groups that you can specify for each bundle, see
+    #   the `wafRules` parameter of the `CreateDistribution` action.
+    #   @return [String]
+    #
+    # @!attribute [rw] atp_config
+    #   An object that describes the configuration of the account takeover
+    #   prevention rule group.
+    #
+    #   Constraints:
+    #
+    #   * Define this parameter only when the `name` is
+    #     `AWSManagedRulesATPRuleSet`.
+    #
+    #   * This parameter is required when the `name` is
+    #     `AWSManagedRulesATPRuleSet`.
+    #   @return [Types::WafAtpConfig]
+    #
+    # @!attribute [rw] acfp_config
+    #   An object that describes the configuration of the account creation
+    #   fraud prevention rule group.
+    #
+    #   Constraints:
+    #
+    #   * Define this parameter only when the `name` is
+    #     `AWSManagedRulesACFPRuleSet`.
+    #
+    #   * This parameter is required when the `name` is
+    #     `AWSManagedRulesACFPRuleSet`.
+    #   @return [Types::WafAcfpConfig]
+    #
+    # @!attribute [rw] bot_control_config
+    #   An object that describes the configuration of the bot control rule
+    #   group.
+    #
+    #   Constraints:
+    #
+    #   * Define this parameter only when the `name` is
+    #     `AWSManagedRulesBotControlRuleSet`.
+    #
+    #   * This parameter is required when the `name` is
+    #     `AWSManagedRulesBotControlRuleSet`.
+    #   @return [Types::WafBotControlConfig]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/WafRule AWS API Documentation
+    #
+    class WafRule < Struct.new(
+      :name,
+      :atp_config,
+      :acfp_config,
+      :bot_control_config)
       SENSITIVE = []
       include Aws::Structure
     end

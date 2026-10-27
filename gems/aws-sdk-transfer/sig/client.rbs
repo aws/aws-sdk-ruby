@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -231,7 +232,8 @@ module Aws
                            ?s3_storage_options: {
                              directory_listing_optimization: ("ENABLED" | "DISABLED")?
                            },
-                           ?ip_address_type: ("IPV4" | "DUALSTACK")
+                           ?ip_address_type: ("IPV4" | "DUALSTACK"),
+                           ?host_key_storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER")
                          ) -> _CreateServerResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateServerResponseSuccess
 
@@ -322,7 +324,8 @@ module Aws
                                  key: ::String,
                                  value: ::String
                                }
-                             ]
+                             ],
+                             ?structured_log_destinations: Array[::String]
                            ) -> _CreateWorkflowResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateWorkflowResponseSuccess
 
@@ -579,7 +582,9 @@ module Aws
                                  key: ::String,
                                  value: ::String
                                }
-                             ]
+                             ],
+                             ?storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER"),
+                             ?kms_key: ::String
                            ) -> _ImportHostKeyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ImportHostKeyResponseSuccess
 
@@ -1013,7 +1018,9 @@ module Aws
       def update_host_key: (
                              server_id: ::String,
                              host_key_id: ::String,
-                             description: ::String
+                             ?description: ::String,
+                             ?storage_type: ("SERVICE_MANAGED" | "SECRETS_MANAGER"),
+                             ?kms_key: ::String
                            ) -> _UpdateHostKeyResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateHostKeyResponseSuccess
 

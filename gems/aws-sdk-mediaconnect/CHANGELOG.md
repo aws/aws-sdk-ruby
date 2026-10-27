@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.113.0 (2026-10-26)
+------------------
+
+* Feature - This release adds support for managing and sharing endpoint across accounts in AWS Elemental MediaConnect. You can now register endpoints to represent external or service-managed sources and destinations, and share them across AWS accounts.
+
+1.112.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.111.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.110.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.109.0 (2026-10-12)
+------------------
+
+* Feature - This release adds support for MediaConnect Router high-bitrate tiers. It also adds a configurable audio reference level for NDI flows, and enhanced source metadata that includes color information and transport stream ID.
+
+1.108.0 (2026-09-25)
+------------------
+
+* Feature - This release adds support for RTMP push router outputs in AWS Elemental MediaConnect.
+
 1.107.0 (2026-09-11)
 ------------------
 

@@ -263,6 +263,12 @@ module Aws::CleanRooms
     CustomMLMemberAbilities = Shapes::ListShape.new(name: 'CustomMLMemberAbilities')
     CustomMLMemberAbility = Shapes::StringShape.new(name: 'CustomMLMemberAbility')
     DataEncryptionMetadata = Shapes::StructureShape.new(name: 'DataEncryptionMetadata')
+    DatabricksConnectionType = Shapes::UnionShape.new(name: 'DatabricksConnectionType')
+    DatabricksDeltaSharingConnection = Shapes::StructureShape.new(name: 'DatabricksDeltaSharingConnection')
+    DatabricksEndpointUrl = Shapes::StringShape.new(name: 'DatabricksEndpointUrl')
+    DatabricksObject = Shapes::StringShape.new(name: 'DatabricksObject')
+    DatabricksTableReference = Shapes::StructureShape.new(name: 'DatabricksTableReference')
+    DatabricksWorkspaceUrl = Shapes::StringShape.new(name: 'DatabricksWorkspaceUrl')
     DeleteAnalysisTemplateInput = Shapes::StructureShape.new(name: 'DeleteAnalysisTemplateInput')
     DeleteAnalysisTemplateOutput = Shapes::StructureShape.new(name: 'DeleteAnalysisTemplateOutput')
     DeleteCollaborationInput = Shapes::StructureShape.new(name: 'DeleteCollaborationInput')
@@ -694,6 +700,7 @@ module Aws::CleanRooms
     TableAliasList = Shapes::ListShape.new(name: 'TableAliasList')
     TableDescription = Shapes::StringShape.new(name: 'TableDescription')
     TableReference = Shapes::UnionShape.new(name: 'TableReference')
+    TableReferenceType = Shapes::StringShape.new(name: 'TableReferenceType')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
     TagKeys = Shapes::ListShape.new(name: 'TagKeys')
     TagMap = Shapes::MapShape.new(name: 'TagMap')
@@ -1380,6 +1387,7 @@ module Aws::CleanRooms
     ConfiguredTable.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
     ConfiguredTable.add_member(:description, Shapes::ShapeRef.new(shape: TableDescription, location_name: "description"))
     ConfiguredTable.add_member(:table_reference, Shapes::ShapeRef.new(shape: TableReference, required: true, location_name: "tableReference"))
+    ConfiguredTable.add_member(:table_type, Shapes::ShapeRef.new(shape: TableReferenceType, location_name: "tableType"))
     ConfiguredTable.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
     ConfiguredTable.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     ConfiguredTable.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRuleTypeList, required: true, location_name: "analysisRuleTypes"))
@@ -1487,6 +1495,7 @@ module Aws::CleanRooms
     ConfiguredTableSummary.add_member(:id, Shapes::ShapeRef.new(shape: ConfiguredTableIdentifier, required: true, location_name: "id"))
     ConfiguredTableSummary.add_member(:arn, Shapes::ShapeRef.new(shape: ConfiguredTableArn, required: true, location_name: "arn"))
     ConfiguredTableSummary.add_member(:name, Shapes::ShapeRef.new(shape: DisplayName, required: true, location_name: "name"))
+    ConfiguredTableSummary.add_member(:table_type, Shapes::ShapeRef.new(shape: TableReferenceType, location_name: "tableType"))
     ConfiguredTableSummary.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createTime"))
     ConfiguredTableSummary.add_member(:update_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updateTime"))
     ConfiguredTableSummary.add_member(:analysis_rule_types, Shapes::ShapeRef.new(shape: ConfiguredTableAnalysisRuleTypeList, required: true, location_name: "analysisRuleTypes"))
@@ -1723,6 +1732,22 @@ module Aws::CleanRooms
     DataEncryptionMetadata.add_member(:allow_joins_on_columns_with_different_names, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "allowJoinsOnColumnsWithDifferentNames"))
     DataEncryptionMetadata.add_member(:preserve_nulls, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "preserveNulls"))
     DataEncryptionMetadata.struct_class = Types::DataEncryptionMetadata
+
+    DatabricksConnectionType.add_member(:delta_sharing, Shapes::ShapeRef.new(shape: DatabricksDeltaSharingConnection, location_name: "deltaSharing"))
+    DatabricksConnectionType.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DatabricksConnectionType.add_member_subclass(:delta_sharing, Types::DatabricksConnectionType::DeltaSharing)
+    DatabricksConnectionType.add_member_subclass(:unknown, Types::DatabricksConnectionType::Unknown)
+    DatabricksConnectionType.struct_class = Types::DatabricksConnectionType
+
+    DatabricksDeltaSharingConnection.add_member(:delta_share_endpoint, Shapes::ShapeRef.new(shape: DatabricksEndpointUrl, required: true, location_name: "deltaShareEndpoint"))
+    DatabricksDeltaSharingConnection.add_member(:share_name, Shapes::ShapeRef.new(shape: DatabricksObject, required: true, location_name: "shareName"))
+    DatabricksDeltaSharingConnection.struct_class = Types::DatabricksDeltaSharingConnection
+
+    DatabricksTableReference.add_member(:schema_name, Shapes::ShapeRef.new(shape: DatabricksObject, required: true, location_name: "schemaName"))
+    DatabricksTableReference.add_member(:table_name, Shapes::ShapeRef.new(shape: DatabricksObject, required: true, location_name: "tableName"))
+    DatabricksTableReference.add_member(:workspace_url, Shapes::ShapeRef.new(shape: DatabricksWorkspaceUrl, required: true, location_name: "workspaceUrl"))
+    DatabricksTableReference.add_member(:connection_type, Shapes::ShapeRef.new(shape: DatabricksConnectionType, required: true, location_name: "connectionType"))
+    DatabricksTableReference.struct_class = Types::DatabricksTableReference
 
     DeleteAnalysisTemplateInput.add_member(:membership_identifier, Shapes::ShapeRef.new(shape: MembershipIdentifier, required: true, location: "uri", location_name: "membershipIdentifier"))
     DeleteAnalysisTemplateInput.add_member(:analysis_template_identifier, Shapes::ShapeRef.new(shape: AnalysisTemplateIdentifier, required: true, location: "uri", location_name: "analysisTemplateIdentifier"))
@@ -3224,10 +3249,12 @@ module Aws::CleanRooms
     TableReference.add_member(:glue, Shapes::ShapeRef.new(shape: GlueTableReference, location_name: "glue"))
     TableReference.add_member(:snowflake, Shapes::ShapeRef.new(shape: SnowflakeTableReference, location_name: "snowflake"))
     TableReference.add_member(:athena, Shapes::ShapeRef.new(shape: AthenaTableReference, location_name: "athena"))
+    TableReference.add_member(:databricks, Shapes::ShapeRef.new(shape: DatabricksTableReference, location_name: "databricks"))
     TableReference.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     TableReference.add_member_subclass(:glue, Types::TableReference::Glue)
     TableReference.add_member_subclass(:snowflake, Types::TableReference::Snowflake)
     TableReference.add_member_subclass(:athena, Types::TableReference::Athena)
+    TableReference.add_member_subclass(:databricks, Types::TableReference::Databricks)
     TableReference.add_member_subclass(:unknown, Types::TableReference::Unknown)
     TableReference.struct_class = Types::TableReference
 

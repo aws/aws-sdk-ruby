@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -543,7 +544,7 @@ module Aws
         def file_arn: () -> ::String
         def file_id: () -> ::String
         def creation_time: () -> ::String
-        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_attached_file-instance_method
       def create_attached_file: (
@@ -591,7 +592,7 @@ module Aws
                             ?references: Hash[::String, {
                                 value: ::String?,
                                 type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                 arn: ::String?,
                                 status_reason: ::String?
                               }],
@@ -626,6 +627,21 @@ module Aws
                                  ?tags: Hash[::String, ::String]
                                ) -> _CreateContactFlowResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactFlowResponseSuccess
+
+      interface _CreateContactFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactFlowAliasResponse]
+        def contact_flow_arn: () -> ::String
+        def id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#create_contact_flow_alias-instance_method
+      def create_contact_flow_alias: (
+                                       instance_id: ::String,
+                                       ?description: ::String,
+                                       contact_flow_id: ::String,
+                                       contact_flow_version: ::Integer,
+                                       alias_name: ::String
+                                     ) -> _CreateContactFlowAliasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateContactFlowAliasResponseSuccess
 
       interface _CreateContactFlowModuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateContactFlowModuleResponse]
@@ -1414,6 +1430,17 @@ module Aws
                                ) -> _DeleteContactFlowResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactFlowResponseSuccess
 
+      interface _DeleteContactFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactFlowAliasResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#delete_contact_flow_alias-instance_method
+      def delete_contact_flow_alias: (
+                                       instance_id: ::String,
+                                       contact_flow_id: ::String,
+                                       alias_id: ::String
+                                     ) -> _DeleteContactFlowAliasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteContactFlowAliasResponseSuccess
+
       interface _DeleteContactFlowModuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteContactFlowModuleResponse]
       end
@@ -1810,6 +1837,18 @@ module Aws
                                  ) -> _DescribeContactFlowResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContactFlowResponseSuccess
 
+      interface _DescribeContactFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContactFlowAliasResponse]
+        def contact_flow_alias: () -> Types::ContactFlowAliasInfo
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_contact_flow_alias-instance_method
+      def describe_contact_flow_alias: (
+                                         instance_id: ::String,
+                                         contact_flow_id: ::String,
+                                         alias_id: ::String
+                                       ) -> _DescribeContactFlowAliasResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeContactFlowAliasResponseSuccess
+
       interface _DescribeContactFlowModuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContactFlowModuleResponse]
         def contact_flow_module: () -> Types::ContactFlowModule
@@ -1939,7 +1978,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#describe_instance_attribute-instance_method
       def describe_instance_attribute: (
                                          instance_id: ::String,
-                                         attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
+                                         attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING")
                                        ) -> _DescribeInstanceAttributeResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeInstanceAttributeResponseSuccess
 
@@ -2383,7 +2422,7 @@ module Aws
         def file_arn: () -> ::String
         def file_id: () -> ::String
         def creation_time: () -> ::String
-        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
         def file_name: () -> ::String
         def file_size_in_bytes: () -> ::Integer
         def associated_resource_arn: () -> ::String
@@ -2397,7 +2436,8 @@ module Aws
                                instance_id: ::String,
                                file_id: ::String,
                                ?url_expiry_in_seconds: ::Integer,
-                               associated_resource_arn: ::String
+                               associated_resource_arn: ::String,
+                               ?url_content_disposition: ("INLINE" | "ATTACHMENT")
                              ) -> _GetAttachedFileResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttachedFileResponseSuccess
 
@@ -2688,6 +2728,7 @@ module Aws
         def arn: () -> ::String
         def sign_in_config: () -> Types::SignInConfig
         def agent_config: () -> Types::AgentConfig
+        def last_failover_time: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#get_traffic_distribution-instance_method
       def get_traffic_distribution: (
@@ -2858,6 +2899,20 @@ module Aws
                                       ?next_token: ::String
                                     ) -> _ListContactEvaluationsResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactEvaluationsResponseSuccess
+
+      interface _ListContactFlowAliasesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListContactFlowAliasesResponse]
+        def contact_flow_alias_summary_list: () -> ::Array[Types::ContactFlowAliasSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_contact_flow_aliases-instance_method
+      def list_contact_flow_aliases: (
+                                       instance_id: ::String,
+                                       contact_flow_id: ::String,
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _ListContactFlowAliasesResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListContactFlowAliasesResponseSuccess
 
       interface _ListContactFlowModuleAliasesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListContactFlowModuleAliasesResponse]
@@ -3381,6 +3436,22 @@ module Aws
                                                         segment_types: Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary" | "ExtractedInformation")]
                                                       ) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
+
+      interface _ListReplicationFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReplicationFindingsResponse]
+        def replication_findings_list: () -> ::Array[Types::ReplicationFinding]
+        def approximate_drifted_resource_counts: () -> ::Array[Types::ApproximateDriftedResourceCount]
+        def next_token: () -> ::String
+        def resource_replication_statuses: () -> ::Array[Types::ResourceReplicationStatus]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#list_replication_findings-instance_method
+      def list_replication_findings: (
+                                       instance_id: ::String,
+                                       resource_type: ::String,
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListReplicationFindingsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReplicationFindingsResponseSuccess
 
       interface _ListRoutingProfileManualAssignmentQueuesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListRoutingProfileManualAssignmentQueuesResponse]
@@ -4631,7 +4702,7 @@ module Aws
         def file_arn: () -> ::String
         def file_id: () -> ::String
         def creation_time: () -> ::String
-        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+        def file_status: () -> ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
         def created_by: () -> Types::CreatedByInfo
         def upload_url_metadata: () -> Types::UploadUrlMetadata
       end
@@ -4658,6 +4729,9 @@ module Aws
         def participant_id: () -> ::String
         def participant_token: () -> ::String
         def continued_from_contact_id: () -> ::String
+        def connection_credentials: () -> Types::ConnectionCredentials
+        def websocket: () -> Types::Websocket
+        def streaming_id: () -> ::String
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#start_chat_contact-instance_method
       def start_chat_contact: (
@@ -4684,7 +4758,11 @@ module Aws
                                 ?related_contact_id: ::String,
                                 ?segment_attributes: Hash[::String, Params::segment_attribute_value],
                                 ?customer_id: ::String,
-                                ?disconnect_on_customer_exit: Array[("AGENT")]
+                                ?disconnect_on_customer_exit: Array[("AGENT")],
+                                ?connection_types: Array[("WEBSOCKET" | "CONNECTION_CREDENTIALS" | "AUTHENTICATION_SESSION" | "WEBRTC_CONNECTION")],
+                                ?chat_streaming_configuration: {
+                                  streaming_endpoint_arn: ::String
+                                }
                               ) -> _StartChatContactResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartChatContactResponseSuccess
 
@@ -4798,7 +4876,7 @@ module Aws
                                  ?references: Hash[::String, {
                                      value: ::String?,
                                      type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                     status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                     status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                      arn: ::String?,
                                      status_reason: ::String?
                                    }],
@@ -4927,7 +5005,7 @@ module Aws
                                           ?references: Hash[::String, {
                                               value: ::String?,
                                               type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                              status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                              status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                               arn: ::String?,
                                               status_reason: ::String?
                                             }],
@@ -4975,7 +5053,7 @@ module Aws
                                 ?references: Hash[::String, {
                                     value: ::String?,
                                     type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                     arn: ::String?,
                                     status_reason: ::String?
                                   }],
@@ -5039,7 +5117,7 @@ module Aws
                                    ?references: Hash[::String, {
                                        value: ::String?,
                                        type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                       status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                       status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                        arn: ::String?,
                                        status_reason: ::String?
                                      }],
@@ -5250,7 +5328,7 @@ module Aws
                             ?references: Hash[::String, {
                                 value: ::String?,
                                 type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                 arn: ::String?,
                                 status_reason: ::String?
                               }],
@@ -5268,6 +5346,14 @@ module Aws
                             ?system_endpoint: {
                               type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW" | "CONNECT_PHONENUMBER_ARN" | "EMAIL_ADDRESS")?,
                               address: ::String?
+                            },
+                            ?additional_recipients: {
+                              cc_email_addresses: Array[
+                                {
+                                  email_address: ::String,
+                                  display_name: ::String?
+                                }
+                              ]?
                             }
                           ) -> _UpdateContactResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactResponseSuccess
@@ -5301,6 +5387,20 @@ module Aws
                                        }
                                      ) -> _UpdateContactEvaluationResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactEvaluationResponseSuccess
+
+      interface _UpdateContactFlowAliasResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactFlowAliasResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_contact_flow_alias-instance_method
+      def update_contact_flow_alias: (
+                                       instance_id: ::String,
+                                       contact_flow_id: ::String,
+                                       alias_id: ::String,
+                                       ?name: ::String,
+                                       ?description: ::String,
+                                       ?contact_flow_version: ::Integer
+                                     ) -> _UpdateContactFlowAliasResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactFlowAliasResponseSuccess
 
       interface _UpdateContactFlowContentResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateContactFlowContentResponse]
@@ -5597,7 +5697,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_instance_attribute-instance_method
       def update_instance_attribute: (
                                        instance_id: ::String,
-                                       attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING"),
+                                       attribute_type: ("INBOUND_CALLS" | "OUTBOUND_CALLS" | "CONTACTFLOW_LOGS" | "CONTACT_LENS" | "AUTO_RESOLVE_BEST_VOICES" | "USE_CUSTOM_TTS_VOICES" | "EARLY_MEDIA" | "MULTI_PARTY_CONFERENCE" | "AUTO_MUTE_AGENT_ON_HOLD" | "HIGH_VOLUME_OUTBOUND" | "ENHANCED_CONTACT_MONITORING" | "ENHANCED_CHAT_MONITORING" | "MULTI_PARTY_CHAT_CONFERENCE" | "MESSAGE_STREAMING"),
                                        value: ::String,
                                        ?client_token: ::String
                                      ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -5648,6 +5748,24 @@ module Aws
                                          content: Hash[("en_US" | "de_DE" | "es_ES" | "fr_FR" | "id_ID" | "it_IT" | "ja_JP" | "ko_KR" | "pt_BR" | "zh_CN" | "zh_TW"), ::String]
                                        ) -> _UpdateNotificationContentResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotificationContentResponseSuccess
+
+      interface _UpdateOutboundEmailContactMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOutboundEmailContactMessageResponse]
+        def contact_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_outbound_email_contact_message-instance_method
+      def update_outbound_email_contact_message: (
+                                                   instance_id: ::String,
+                                                   contact_id: ::String,
+                                                   email_message: {
+                                                     message_source_type: ("RAW"),
+                                                     raw_message: {
+                                                       body: ::String,
+                                                       content_type: ::String
+                                                     }
+                                                   }
+                                                 ) -> _UpdateOutboundEmailContactMessageResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOutboundEmailContactMessageResponseSuccess
 
       interface _UpdateParticipantAuthenticationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateParticipantAuthenticationResponse]

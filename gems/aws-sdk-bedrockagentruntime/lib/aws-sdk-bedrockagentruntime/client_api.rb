@@ -49,6 +49,7 @@ module Aws::BedrockAgentRuntime
     AgenticRetrieveAction = Shapes::StructureShape.new(name: 'AgenticRetrieveAction')
     AgenticRetrieveActionDetails = Shapes::StructureShape.new(name: 'AgenticRetrieveActionDetails')
     AgenticRetrieveActions = Shapes::ListShape.new(name: 'AgenticRetrieveActions')
+    AgenticRetrieveAppliedInstruction = Shapes::StructureShape.new(name: 'AgenticRetrieveAppliedInstruction')
     AgenticRetrieveBedrockGuardrailConfiguration = Shapes::StructureShape.new(name: 'AgenticRetrieveBedrockGuardrailConfiguration')
     AgenticRetrieveBedrockGuardrailConfigurationGuardrailIdString = Shapes::StringShape.new(name: 'AgenticRetrieveBedrockGuardrailConfigurationGuardrailIdString')
     AgenticRetrieveBedrockGuardrailConfigurationGuardrailVersionString = Shapes::StringShape.new(name: 'AgenticRetrieveBedrockGuardrailConfigurationGuardrailVersionString')
@@ -65,6 +66,7 @@ module Aws::BedrockAgentRuntime
     AgenticRetrieveFullDocExpansionDetails = Shapes::StructureShape.new(name: 'AgenticRetrieveFullDocExpansionDetails')
     AgenticRetrieveGeneratedResponse = Shapes::StructureShape.new(name: 'AgenticRetrieveGeneratedResponse')
     AgenticRetrieveGuardrailWarning = Shapes::StructureShape.new(name: 'AgenticRetrieveGuardrailWarning')
+    AgenticRetrieveInstructionConfiguration = Shapes::StructureShape.new(name: 'AgenticRetrieveInstructionConfiguration')
     AgenticRetrieveMemoryConfiguration = Shapes::StructureShape.new(name: 'AgenticRetrieveMemoryConfiguration')
     AgenticRetrieveMemoryMetadataFilter = Shapes::StructureShape.new(name: 'AgenticRetrieveMemoryMetadataFilter')
     AgenticRetrieveMemoryMetadataFilterLeft = Shapes::UnionShape.new(name: 'AgenticRetrieveMemoryMetadataFilterLeft')
@@ -446,6 +448,9 @@ module Aws::BedrockAgentRuntime
     ManagedSearchConfigurationNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'ManagedSearchConfigurationNumberOfResultsInteger')
     ManagedSearchRerankingConfiguration = Shapes::StructureShape.new(name: 'ManagedSearchRerankingConfiguration')
     ManagedSearchRerankingConfigurationType = Shapes::StringShape.new(name: 'ManagedSearchRerankingConfigurationType')
+    MantleFoundationModelConfiguration = Shapes::StructureShape.new(name: 'MantleFoundationModelConfiguration')
+    MantleFoundationModelModelConfiguration = Shapes::StructureShape.new(name: 'MantleFoundationModelModelConfiguration')
+    MantleProjectId = Shapes::StringShape.new(name: 'MantleProjectId')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
@@ -587,6 +592,8 @@ module Aws::BedrockAgentRuntime
     RetrievalContent = Shapes::StructureShape.new(name: 'RetrievalContent')
     RetrievalFilter = Shapes::UnionShape.new(name: 'RetrievalFilter')
     RetrievalFilterList = Shapes::ListShape.new(name: 'RetrievalFilterList')
+    RetrievalInstructionId = Shapes::StringShape.new(name: 'RetrievalInstructionId')
+    RetrievalInstructionVersion = Shapes::StringShape.new(name: 'RetrievalInstructionVersion')
     RetrievalOverrides = Shapes::StructureShape.new(name: 'RetrievalOverrides')
     RetrievalOverridesMaxNumberOfResultsInteger = Shapes::IntegerShape.new(name: 'RetrievalOverridesMaxNumberOfResultsInteger')
     RetrievalResultConfluenceLocation = Shapes::StructureShape.new(name: 'RetrievalResultConfluenceLocation')
@@ -797,6 +804,10 @@ module Aws::BedrockAgentRuntime
 
     AgenticRetrieveActions.member = Shapes::ShapeRef.new(shape: AgenticRetrieveAction)
 
+    AgenticRetrieveAppliedInstruction.add_member(:id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location_name: "id"))
+    AgenticRetrieveAppliedInstruction.add_member(:version, Shapes::ShapeRef.new(shape: RetrievalInstructionVersion, location_name: "version"))
+    AgenticRetrieveAppliedInstruction.struct_class = Types::AgenticRetrieveAppliedInstruction
+
     AgenticRetrieveBedrockGuardrailConfiguration.add_member(:guardrail_id, Shapes::ShapeRef.new(shape: AgenticRetrieveBedrockGuardrailConfigurationGuardrailIdString, required: true, location_name: "guardrailId"))
     AgenticRetrieveBedrockGuardrailConfiguration.add_member(:guardrail_version, Shapes::ShapeRef.new(shape: AgenticRetrieveBedrockGuardrailConfigurationGuardrailVersionString, required: true, location_name: "guardrailVersion"))
     AgenticRetrieveBedrockGuardrailConfiguration.struct_class = Types::AgenticRetrieveBedrockGuardrailConfiguration
@@ -844,6 +855,10 @@ module Aws::BedrockAgentRuntime
     AgenticRetrieveGuardrailWarning.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     AgenticRetrieveGuardrailWarning.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "version"))
     AgenticRetrieveGuardrailWarning.struct_class = Types::AgenticRetrieveGuardrailWarning
+
+    AgenticRetrieveInstructionConfiguration.add_member(:retrieval_instruction_id, Shapes::ShapeRef.new(shape: RetrievalInstructionId, required: true, location_name: "retrievalInstructionId"))
+    AgenticRetrieveInstructionConfiguration.add_member(:version, Shapes::ShapeRef.new(shape: RetrievalInstructionVersion, location_name: "version"))
+    AgenticRetrieveInstructionConfiguration.struct_class = Types::AgenticRetrieveInstructionConfiguration
 
     AgenticRetrieveMemoryConfiguration.add_member(:memory_id, Shapes::ShapeRef.new(shape: AgentCoreMemoryId, required: true, location_name: "memoryId"))
     AgenticRetrieveMemoryConfiguration.add_member(:persistence_mode, Shapes::ShapeRef.new(shape: AgenticRetrieveMemoryPersistenceMode, location_name: "persistenceMode"))
@@ -952,6 +967,7 @@ module Aws::BedrockAgentRuntime
     AgenticRetrieveStreamRequest.add_member(:messages, Shapes::ShapeRef.new(shape: AgenticRetrieveStreamRequestMessagesList, required: true, location_name: "messages"))
     AgenticRetrieveStreamRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     AgenticRetrieveStreamRequest.add_member(:policy_configuration, Shapes::ShapeRef.new(shape: AgenticRetrievePolicyConfiguration, location_name: "policyConfiguration"))
+    AgenticRetrieveStreamRequest.add_member(:retrieval_instruction_configuration, Shapes::ShapeRef.new(shape: AgenticRetrieveInstructionConfiguration, location_name: "retrievalInstructionConfiguration"))
     AgenticRetrieveStreamRequest.add_member(:retrievers, Shapes::ShapeRef.new(shape: AgenticRetrieveStreamRequestRetrieversList, required: true, location_name: "retrievers"))
     AgenticRetrieveStreamRequest.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "userContext"))
     AgenticRetrieveStreamRequest.struct_class = Types::AgenticRetrieveStreamRequest
@@ -985,6 +1001,7 @@ module Aws::BedrockAgentRuntime
     AgenticRetrieveTraceEvent.struct_class = Types::AgenticRetrieveTraceEvent
 
     AgenticRetrieveTraceEventAttributes.add_member(:actions, Shapes::ShapeRef.new(shape: AgenticRetrieveActions, location_name: "actions"))
+    AgenticRetrieveTraceEventAttributes.add_member(:applied_instruction, Shapes::ShapeRef.new(shape: AgenticRetrieveAppliedInstruction, location_name: "appliedInstruction"))
     AgenticRetrieveTraceEventAttributes.add_member(:failures, Shapes::ShapeRef.new(shape: AgenticRetrieveFailures, location_name: "failures"))
     AgenticRetrieveTraceEventAttributes.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     AgenticRetrieveTraceEventAttributes.add_member(:retrieval_metadata, Shapes::ShapeRef.new(shape: AgenticRetrieveSourceMetadataList, location_name: "retrievalMetadata"))
@@ -1549,6 +1566,7 @@ module Aws::BedrockAgentRuntime
     FlowTraceNodeOutputNextList.member = Shapes::ShapeRef.new(shape: FlowTraceNodeOutputNext)
 
     FoundationModelConfiguration.add_member(:bedrock_foundation_model_configuration, Shapes::ShapeRef.new(shape: BedrockFoundationModelConfiguration, location_name: "bedrockFoundationModelConfiguration"))
+    FoundationModelConfiguration.add_member(:mantle_foundation_model_configuration, Shapes::ShapeRef.new(shape: MantleFoundationModelConfiguration, location_name: "mantleFoundationModelConfiguration"))
     FoundationModelConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: FoundationModelConfigurationType, required: true, location_name: "type"))
     FoundationModelConfiguration.struct_class = Types::FoundationModelConfiguration
 
@@ -2128,6 +2146,13 @@ module Aws::BedrockAgentRuntime
     ManagedSearchRerankingConfiguration.add_member(:bedrock_reranking_configuration, Shapes::ShapeRef.new(shape: ManagedSearchBedrockRerankingConfiguration, location_name: "bedrockRerankingConfiguration"))
     ManagedSearchRerankingConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: ManagedSearchRerankingConfigurationType, required: true, location_name: "type"))
     ManagedSearchRerankingConfiguration.struct_class = Types::ManagedSearchRerankingConfiguration
+
+    MantleFoundationModelConfiguration.add_member(:model_configuration, Shapes::ShapeRef.new(shape: MantleFoundationModelModelConfiguration, required: true, location_name: "modelConfiguration"))
+    MantleFoundationModelConfiguration.struct_class = Types::MantleFoundationModelConfiguration
+
+    MantleFoundationModelModelConfiguration.add_member(:model_arn, Shapes::ShapeRef.new(shape: BedrockModelArn, required: true, location_name: "modelArn"))
+    MantleFoundationModelModelConfiguration.add_member(:project_id, Shapes::ShapeRef.new(shape: MantleProjectId, location_name: "projectId"))
+    MantleFoundationModelModelConfiguration.struct_class = Types::MantleFoundationModelModelConfiguration
 
     Memories.member = Shapes::ShapeRef.new(shape: Memory)
 

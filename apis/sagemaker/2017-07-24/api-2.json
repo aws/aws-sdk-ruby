@@ -960,6 +960,20 @@
         {"shape":"ResourceLimitExceeded"}
       ]
     },
+    "CreateTrainingSession":{
+      "name":"CreateTrainingSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"CreateTrainingSessionRequest"},
+      "output":{"shape":"CreateTrainingSessionResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"},
+        {"shape":"ResourceInUse"},
+        {"shape":"ResourceLimitExceeded"}
+      ]
+    },
     "CreateTransformJob":{
       "name":"CreateTransformJob",
       "http":{
@@ -1668,6 +1682,18 @@
       "errors":[
         {"shape":"ResourceNotFound"},
         {"shape":"ResourceInUse"}
+      ]
+    },
+    "DeleteTrainingSession":{
+      "name":"DeleteTrainingSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DeleteTrainingSessionRequest"},
+      "output":{"shape":"DeleteTrainingSessionResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
       ]
     },
     "DeleteTrial":{
@@ -2540,6 +2566,19 @@
       "errors":[
         {"shape":"ResourceNotFound"}
       ]
+    },
+    "DescribeTrainingSession":{
+      "name":"DescribeTrainingSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeTrainingSessionRequest"},
+      "output":{"shape":"DescribeTrainingSessionResponse"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ],
+      "readonly":true
     },
     "DescribeTransformJob":{
       "name":"DescribeTransformJob",
@@ -3554,6 +3593,16 @@
       "input":{"shape":"ListTrainingPlansRequest"},
       "output":{"shape":"ListTrainingPlansResponse"}
     },
+    "ListTrainingSessions":{
+      "name":"ListTrainingSessions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListTrainingSessionsRequest"},
+      "output":{"shape":"ListTrainingSessionsResponse"},
+      "readonly":true
+    },
     "ListTransformJobs":{
       "name":"ListTransformJobs",
       "http":{
@@ -4025,6 +4074,18 @@
         "requestUri":"/"
       },
       "input":{"shape":"StopTrainingJobRequest"},
+      "errors":[
+        {"shape":"ResourceNotFound"}
+      ]
+    },
+    "StopTrainingSession":{
+      "name":"StopTrainingSession",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"StopTrainingSessionRequest"},
+      "output":{"shape":"StopTrainingSessionResponse"},
       "errors":[
         {"shape":"ResourceNotFound"}
       ]
@@ -6213,6 +6274,13 @@
         "TEXTFILE"
       ]
     },
+    "AthenaStepMetadata":{
+      "type":"structure",
+      "members":{
+        "QueryExecutionId":{"shape":"String256"},
+        "S3OutputLocation":{"shape":"String1024"}
+      }
+    },
     "AthenaWorkGroup":{
       "type":"string",
       "max":128,
@@ -6913,6 +6981,12 @@
         "RecipeName":{"shape":"RecipeName"}
       }
     },
+    "BaseModelArn":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"(arn:[a-z0-9-.]{1,63}:sagemaker:[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)+:([0-9]{12}|aws):hub-content/)[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}/Model/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}(/[0-9]{1,4}\\.[0-9]{1,4}\\.[0-9]{1,4})?"
+    },
     "BaseModelName":{
       "type":"string",
       "max":256,
@@ -7342,6 +7416,14 @@
       "type":"long",
       "box":true,
       "min":0
+    },
+    "BillableTokenUsage":{
+      "type":"structure",
+      "members":{
+        "PrefillTokenCount":{"shape":"JavaLong"},
+        "SampleTokenCount":{"shape":"JavaLong"},
+        "TrainingTokenCount":{"shape":"JavaLong"}
+      }
     },
     "BlockedReason":{
       "type":"string",
@@ -8092,6 +8174,41 @@
         "xx"
       ]
     },
+    "CleanupFailure":{
+      "type":"structure",
+      "members":{
+        "StepName":{"shape":"String256"},
+        "ErrorCode":{"shape":"CleanupFailureErrorCode"},
+        "ErrorMessage":{"shape":"String2048"}
+      }
+    },
+    "CleanupFailureErrorCode":{
+      "type":"string",
+      "enum":[
+        "ClientError",
+        "InternalFailure"
+      ]
+    },
+    "CleanupFailureList":{
+      "type":"list",
+      "member":{"shape":"CleanupFailure"},
+      "max":100,
+      "min":0
+    },
+    "CleanupStepMetadata":{
+      "type":"structure",
+      "members":{
+        "CleanedSteps":{"shape":"CleanupStepNameList"},
+        "FailedSteps":{"shape":"CleanupFailureList"},
+        "SkippedSteps":{"shape":"CleanupStepNameList"}
+      }
+    },
+    "CleanupStepNameList":{
+      "type":"list",
+      "member":{"shape":"String256"},
+      "max":100,
+      "min":0
+    },
     "ClientId":{
       "type":"string",
       "max":1024,
@@ -8110,6 +8227,43 @@
       "max":36,
       "min":1,
       "pattern":"[a-zA-Z0-9-]+"
+    },
+    "ClusterAccountingDatabase":{
+      "type":"structure",
+      "required":[
+        "Endpoint",
+        "SecretArn"
+      ],
+      "members":{
+        "Endpoint":{"shape":"ClusterAccountingDatabaseEndpoint"},
+        "Port":{"shape":"ClusterAccountingDatabasePort"},
+        "Name":{"shape":"ClusterAccountingDatabaseName"},
+        "SecretArn":{"shape":"ClusterAccountingDatabaseSecretArn"}
+      }
+    },
+    "ClusterAccountingDatabaseEndpoint":{
+      "type":"string",
+      "max":255,
+      "min":1,
+      "pattern":"(?=.{1,255}$)([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)(\\.[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?)*"
+    },
+    "ClusterAccountingDatabaseName":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"[a-zA-Z0-9$_]+"
+    },
+    "ClusterAccountingDatabasePort":{
+      "type":"integer",
+      "box":true,
+      "max":65535,
+      "min":1
+    },
+    "ClusterAccountingDatabaseSecretArn":{
+      "type":"string",
+      "max":2048,
+      "min":20,
+      "pattern":"arn:aws[a-z\\-]*:secretsmanager:[a-z0-9\\-]*:[0-9]{12}:secret:.+"
     },
     "ClusterArn":{
       "type":"string",
@@ -8182,7 +8336,7 @@
     },
     "ClusterAvailabilityZoneId":{
       "type":"string",
-      "pattern":"[a-z]{3}\\d-az\\d"
+      "pattern":"[a-z]{3,5}\\d-az\\d"
     },
     "ClusterAvailabilityZones":{
       "type":"list",
@@ -8712,7 +8866,9 @@
         "ml.g7.8xlarge",
         "ml.g7.12xlarge",
         "ml.g7.24xlarge",
-        "ml.g7.48xlarge"
+        "ml.g7.48xlarge",
+        "ml.c8a.16xlarge",
+        "ml.m8a.16xlarge"
       ]
     },
     "ClusterInstanceTypeDetail":{
@@ -9005,7 +9161,8 @@
     "ClusterOrchestratorSlurmConfig":{
       "type":"structure",
       "members":{
-        "SlurmConfigStrategy":{"shape":"ClusterSlurmConfigStrategy"}
+        "SlurmConfigStrategy":{"shape":"ClusterSlurmConfigStrategy"},
+        "AccountingDatabase":{"shape":"ClusterAccountingDatabase"}
       }
     },
     "ClusterPartitionName":{
@@ -11476,6 +11633,33 @@
         "TrainingPlanArn":{"shape":"TrainingPlanArn"}
       }
     },
+    "CreateTrainingSessionRequest":{
+      "type":"structure",
+      "required":[
+        "TrainingSessionName",
+        "LoraConfig",
+        "RoleArn",
+        "ModelConfig",
+        "OutputConfig"
+      ],
+      "members":{
+        "TrainingSessionName":{"shape":"TrainingSessionName"},
+        "ModelPackageGroupArn":{"shape":"ModelPackageGroupArn"},
+        "LoraConfig":{"shape":"LoraConfig"},
+        "RoleArn":{"shape":"RoleArn"},
+        "VpcConfig":{"shape":"VpcConfig"},
+        "ModelConfig":{"shape":"TrainingSessionModelConfig"},
+        "OutputConfig":{"shape":"TrainingSessionOutputConfig"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "CreateTrainingSessionResponse":{
+      "type":"structure",
+      "required":["TrainingSessionArn"],
+      "members":{
+        "TrainingSessionArn":{"shape":"TrainingSessionArn"}
+      }
+    },
     "CreateTransformJobRequest":{
       "type":"structure",
       "required":[
@@ -11719,6 +11903,12 @@
         "Gid":{"shape":"Gid"}
       }
     },
+    "CustomerKmsKeyArn":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"arn:aws[a-z\\-]*:kms:[a-z0-9\\-]+:[0-9]{12}:key/(mrk-)?[a-f0-9\\-]+"
+    },
     "CustomerMetadataKey":{
       "type":"string",
       "max":128,
@@ -11884,6 +12074,22 @@
       "min":1,
       "pattern":"[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
+    "DatabaseConfigurationMetadata":{
+      "type":"structure",
+      "members":{
+        "RollbackStatus":{"shape":"DatabaseConfigurationRollbackStatus"},
+        "Advisory":{"shape":"String"},
+        "FailureMessage":{"shape":"String"}
+      }
+    },
+    "DatabaseConfigurationRollbackStatus":{
+      "type":"string",
+      "enum":[
+        "NotApplicable",
+        "Reverted",
+        "RevertFailed"
+      ]
+    },
     "DatasetDefinition":{
       "type":"structure",
       "members":{
@@ -11962,7 +12168,8 @@
       "type":"string",
       "enum":[
         "InstanceStress",
-        "InstanceConnectivity"
+        "InstanceConnectivity",
+        "MultiNodeTrainingValidation"
       ]
     },
     "DeepHealthChecks":{
@@ -12580,6 +12787,17 @@
       "members":{
         "TrainingJobName":{"shape":"TrainingJobName"}
       }
+    },
+    "DeleteTrainingSessionRequest":{
+      "type":"structure",
+      "required":["TrainingSessionName"],
+      "members":{
+        "TrainingSessionName":{"shape":"TrainingSessionName"}
+      }
+    },
+    "DeleteTrainingSessionResponse":{
+      "type":"structure",
+      "members":{}
     },
     "DeleteTrialComponentRequest":{
       "type":"structure",
@@ -14999,7 +15217,7 @@
       "type":"structure",
       "required":["TrainingPlanName"],
       "members":{
-        "TrainingPlanName":{"shape":"TrainingPlanName"}
+        "TrainingPlanName":{"shape":"TrainingPlanNameOrArn"}
       }
     },
     "DescribeTrainingPlanResponse":{
@@ -15028,6 +15246,20 @@
         "TotalUltraServerCount":{"shape":"UltraServerCount"},
         "TargetResources":{"shape":"SageMakerResourceNames"},
         "ReservedCapacitySummaries":{"shape":"ReservedCapacitySummaries"}
+      }
+    },
+    "DescribeTrainingSessionRequest":{
+      "type":"structure",
+      "required":["TrainingSessionName"],
+      "members":{
+        "TrainingSessionName":{"shape":"TrainingSessionName"}
+      }
+    },
+    "DescribeTrainingSessionResponse":{
+      "type":"structure",
+      "required":["TrainingSessionDetail"],
+      "members":{
+        "TrainingSessionDetail":{"shape":"TrainingSessionDetail"}
       }
     },
     "DescribeTransformJobRequest":{
@@ -15654,6 +15886,27 @@
       "members":{
         "FileSystemId":{"shape":"FileSystemId"},
         "FileSystemPath":{"shape":"FileSystemPath"}
+      }
+    },
+    "EMRServerlessApplicationId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":".*[0-9a-z]+.*"
+    },
+    "EMRServerlessJobRunId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":".*[0-9a-z]+.*"
+    },
+    "EMRServerlessStepMetadata":{
+      "type":"structure",
+      "members":{
+        "ApplicationId":{"shape":"EMRServerlessApplicationId"},
+        "JobRunId":{"shape":"EMRServerlessJobRunId"},
+        "JobRunName":{"shape":"String256"},
+        "LogFilePath":{"shape":"String1024"}
       }
     },
     "EMRStepMetadata":{
@@ -16348,7 +16601,9 @@
         "Cluster":{"shape":"ClusterMetadata"},
         "InstanceGroup":{"shape":"InstanceGroupMetadata"},
         "InstanceGroupScaling":{"shape":"InstanceGroupScalingMetadata"},
-        "Instance":{"shape":"InstanceMetadata"}
+        "Instance":{"shape":"InstanceMetadata"},
+        "DatabaseConfiguration":{"shape":"DatabaseConfigurationMetadata"},
+        "SlurmHealth":{"shape":"SlurmHealthMetadata"}
       },
       "union":true
     },
@@ -17033,6 +17288,51 @@
       "max":128,
       "min":1,
       "pattern":"[\\t\\n\\r -\\uD7FF\\uE000-\\uFFFD]*"
+    },
+    "ForEachSelectorResult":{
+      "type":"structure",
+      "members":{
+        "StepName":{"shape":"String256"},
+        "Index":{
+          "shape":"Integer",
+          "box":true
+        }
+      }
+    },
+    "ForEachStatus":{
+      "type":"string",
+      "enum":[
+        "Succeeded",
+        "Failed",
+        "Stopped"
+      ]
+    },
+    "ForEachStepMetadata":{
+      "type":"structure",
+      "members":{
+        "Status":{"shape":"ForEachStatus"},
+        "InputItemCount":{
+          "shape":"Integer",
+          "box":true
+        },
+        "TotalStepCount":{
+          "shape":"Integer",
+          "box":true
+        },
+        "SucceededStepCount":{
+          "shape":"Integer",
+          "box":true
+        },
+        "FailedStepCount":{
+          "shape":"Integer",
+          "box":true
+        },
+        "StoppedStepCount":{
+          "shape":"Integer",
+          "box":true
+        },
+        "Selector":{"shape":"ForEachSelectorResult"}
+      }
     },
     "ForecastFrequency":{
       "type":"string",
@@ -19417,6 +19717,29 @@
       "type":"string",
       "max":256,
       "min":1
+    },
+    "IterationContext":{
+      "type":"structure",
+      "members":{
+        "ParentStepName":{"shape":"String256"},
+        "Index":{
+          "shape":"Integer",
+          "box":true
+        },
+        "Item":{"shape":"String12800"}
+      }
+    },
+    "JavaBoolean":{
+      "type":"boolean",
+      "box":true
+    },
+    "JavaInteger":{
+      "type":"integer",
+      "box":true
+    },
+    "JavaLong":{
+      "type":"long",
+      "box":true
     },
     "Job":{
       "type":"structure",
@@ -21864,6 +22187,24 @@
         "TrainingPlanSummaries":{"shape":"TrainingPlanSummaries"}
       }
     },
+    "ListTrainingSessionsRequest":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"NextToken"},
+        "MaxResults":{"shape":"MaxResults"},
+        "CreationTimeAfter":{"shape":"Timestamp"},
+        "CreationTimeBefore":{"shape":"Timestamp"},
+        "NameContains":{"shape":"NameContains"},
+        "StatusEquals":{"shape":"TrainingSessionStatus"}
+      }
+    },
+    "ListTrainingSessionsResponse":{
+      "type":"structure",
+      "members":{
+        "NextToken":{"shape":"NextToken"},
+        "TrainingSessionSummaries":{"shape":"TrainingSessionSummaries"}
+      }
+    },
     "ListTransformJobsRequest":{
       "type":"structure",
       "members":{
@@ -22029,6 +22370,22 @@
       "max":2048,
       "min":0,
       "pattern":"(https|s3)://([^/]+)/?(.*)"
+    },
+    "LoraAlpha":{
+      "type":"integer",
+      "box":true,
+      "min":1
+    },
+    "LoraConfig":{
+      "type":"structure",
+      "required":[
+        "Rank",
+        "Alpha"
+      ],
+      "members":{
+        "Rank":{"shape":"Rank"},
+        "Alpha":{"shape":"LoraAlpha"}
+      }
     },
     "MIGProfileType":{
       "type":"string",
@@ -24879,6 +25236,12 @@
       "max":50,
       "min":0
     },
+    "OutputS3Path":{
+      "type":"string",
+      "max":1024,
+      "min":1,
+      "pattern":"(https|s3)://([^/]+)/?(.*)"
+    },
     "OwnershipSettings":{
       "type":"structure",
       "required":["OwnerUserProfileName"],
@@ -25236,7 +25599,8 @@
         "Stopping",
         "Stopped",
         "Failed",
-        "Succeeded"
+        "Succeeded",
+        "CompletedWithFailures"
       ]
     },
     "PipelineExecutionStep":{
@@ -25255,7 +25619,8 @@
           "shape":"Integer",
           "box":true
         },
-        "SelectiveExecutionResult":{"shape":"SelectiveExecutionResult"}
+        "SelectiveExecutionResult":{"shape":"SelectiveExecutionResult"},
+        "IterationContext":{"shape":"IterationContext"}
       }
     },
     "PipelineExecutionStepList":{
@@ -25277,6 +25642,7 @@
         "Callback":{"shape":"CallbackStepMetadata"},
         "Lambda":{"shape":"LambdaStepMetadata"},
         "EMR":{"shape":"EMRStepMetadata"},
+        "EMRServerless":{"shape":"EMRServerlessStepMetadata"},
         "QualityCheck":{"shape":"QualityCheckStepMetadata"},
         "ClarifyCheck":{"shape":"ClarifyCheckStepMetadata"},
         "Fail":{"shape":"FailStepMetadata"},
@@ -25289,7 +25655,10 @@
         "BedrockModelImport":{"shape":"BedrockModelImportMetadata"},
         "InferenceComponent":{"shape":"InferenceComponentMetadata"},
         "Lineage":{"shape":"LineageMetadata"},
-        "Job":{"shape":"JobStepMetadata"}
+        "Job":{"shape":"JobStepMetadata"},
+        "Athena":{"shape":"AthenaStepMetadata"},
+        "Cleanup":{"shape":"CleanupStepMetadata"},
+        "ForEach":{"shape":"ForEachStepMetadata"}
       }
     },
     "PipelineExecutionSummary":{
@@ -25771,7 +26140,40 @@
         "ml.r8i.24xlarge",
         "ml.r8i.32xlarge",
         "ml.r8i.48xlarge",
-        "ml.r8i.96xlarge"
+        "ml.r8i.96xlarge",
+        "ml.m7i-flex.large",
+        "ml.m7i-flex.xlarge",
+        "ml.m7i-flex.2xlarge",
+        "ml.m7i-flex.4xlarge",
+        "ml.m7i-flex.8xlarge",
+        "ml.m7i-flex.12xlarge",
+        "ml.m7i-flex.16xlarge",
+        "ml.c7i-flex.xlarge",
+        "ml.c7i-flex.2xlarge",
+        "ml.c7i-flex.4xlarge",
+        "ml.c7i-flex.8xlarge",
+        "ml.c7i-flex.12xlarge",
+        "ml.c7i-flex.16xlarge",
+        "ml.m8i-flex.large",
+        "ml.m8i-flex.xlarge",
+        "ml.m8i-flex.2xlarge",
+        "ml.m8i-flex.4xlarge",
+        "ml.m8i-flex.8xlarge",
+        "ml.m8i-flex.12xlarge",
+        "ml.m8i-flex.16xlarge",
+        "ml.c8i-flex.xlarge",
+        "ml.c8i-flex.2xlarge",
+        "ml.c8i-flex.4xlarge",
+        "ml.c8i-flex.8xlarge",
+        "ml.c8i-flex.12xlarge",
+        "ml.c8i-flex.16xlarge",
+        "ml.r8i-flex.large",
+        "ml.r8i-flex.xlarge",
+        "ml.r8i-flex.2xlarge",
+        "ml.r8i-flex.4xlarge",
+        "ml.r8i-flex.8xlarge",
+        "ml.r8i-flex.12xlarge",
+        "ml.r8i-flex.16xlarge"
       ]
     },
     "ProcessingJob":{
@@ -26854,6 +27256,12 @@
       "type":"integer",
       "box":true,
       "min":0
+    },
+    "Rank":{
+      "type":"integer",
+      "box":true,
+      "max":256,
+      "min":1
     },
     "RealTimeInferenceConfig":{
       "type":"structure",
@@ -28458,6 +28866,37 @@
         "None"
       ]
     },
+    "SlurmHealthComponent":{
+      "type":"string",
+      "enum":["Slurmdbd"]
+    },
+    "SlurmHealthMetadata":{
+      "type":"structure",
+      "required":[
+        "Component",
+        "Status"
+      ],
+      "members":{
+        "Component":{"shape":"SlurmHealthComponent"},
+        "Status":{"shape":"SlurmHealthStatus"},
+        "Reason":{"shape":"SlurmHealthReason"}
+      }
+    },
+    "SlurmHealthReason":{
+      "type":"string",
+      "enum":[
+        "DaemonDown",
+        "DaemonDisabled",
+        "DbUnreachable"
+      ]
+    },
+    "SlurmHealthStatus":{
+      "type":"string",
+      "enum":[
+        "Healthy",
+        "Unhealthy"
+      ]
+    },
     "SnsTopicArn":{
       "type":"string",
       "max":2048,
@@ -29159,6 +29598,17 @@
         "TrainingJobName":{"shape":"TrainingJobName"}
       }
     },
+    "StopTrainingSessionRequest":{
+      "type":"structure",
+      "required":["TrainingSessionName"],
+      "members":{
+        "TrainingSessionName":{"shape":"TrainingSessionName"}
+      }
+    },
+    "StopTrainingSessionResponse":{
+      "type":"structure",
+      "members":{}
+    },
     "StopTransformJobRequest":{
       "type":"structure",
       "required":["TransformJobName"],
@@ -29195,6 +29645,11 @@
     "String128":{
       "type":"string",
       "max":128,
+      "min":0
+    },
+    "String12800":{
+      "type":"string",
+      "max":12800,
       "min":0
     },
     "String200":{
@@ -30174,7 +30629,40 @@
         "ml.r8i.24xlarge",
         "ml.r8i.32xlarge",
         "ml.r8i.48xlarge",
-        "ml.r8i.96xlarge"
+        "ml.r8i.96xlarge",
+        "ml.m7i-flex.large",
+        "ml.m7i-flex.xlarge",
+        "ml.m7i-flex.2xlarge",
+        "ml.m7i-flex.4xlarge",
+        "ml.m7i-flex.8xlarge",
+        "ml.m7i-flex.12xlarge",
+        "ml.m7i-flex.16xlarge",
+        "ml.c7i-flex.xlarge",
+        "ml.c7i-flex.2xlarge",
+        "ml.c7i-flex.4xlarge",
+        "ml.c7i-flex.8xlarge",
+        "ml.c7i-flex.12xlarge",
+        "ml.c7i-flex.16xlarge",
+        "ml.m8i-flex.large",
+        "ml.m8i-flex.xlarge",
+        "ml.m8i-flex.2xlarge",
+        "ml.m8i-flex.4xlarge",
+        "ml.m8i-flex.8xlarge",
+        "ml.m8i-flex.12xlarge",
+        "ml.m8i-flex.16xlarge",
+        "ml.c8i-flex.xlarge",
+        "ml.c8i-flex.2xlarge",
+        "ml.c8i-flex.4xlarge",
+        "ml.c8i-flex.8xlarge",
+        "ml.c8i-flex.12xlarge",
+        "ml.c8i-flex.16xlarge",
+        "ml.r8i-flex.large",
+        "ml.r8i-flex.xlarge",
+        "ml.r8i-flex.2xlarge",
+        "ml.r8i-flex.4xlarge",
+        "ml.r8i-flex.8xlarge",
+        "ml.r8i-flex.12xlarge",
+        "ml.r8i-flex.16xlarge"
       ]
     },
     "TrainingInstanceTypes":{
@@ -30460,6 +30948,12 @@
       "min":1,
       "pattern":"[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"
     },
+    "TrainingPlanNameOrArn":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"(arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:training-plan/)?[a-zA-Z0-9](-*[a-zA-Z0-9]){0,63}"
+    },
     "TrainingPlanOffering":{
       "type":"structure",
       "required":[
@@ -30577,6 +31071,103 @@
       "max":2048,
       "min":1,
       "pattern":"arn:[\\p{Alnum}\\-]+:lambda:[\\p{Alnum}\\-]+:[0-9]{12}:function:.*"
+    },
+    "TrainingSessionArn":{
+      "type":"string",
+      "max":256,
+      "min":0,
+      "pattern":"arn:(aws[a-z\\-]*):sagemaker:[a-z0-9\\-]+:[0-9]{12}:training-session/[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+    },
+    "TrainingSessionDetail":{
+      "type":"structure",
+      "required":[
+        "TrainingSessionArn",
+        "TrainingSessionName",
+        "TrainingSessionStatus",
+        "CreationTime"
+      ],
+      "members":{
+        "TrainingSessionArn":{"shape":"TrainingSessionArn"},
+        "TrainingSessionName":{"shape":"TrainingSessionName"},
+        "TrainingSessionStatus":{"shape":"TrainingSessionStatus"},
+        "ModelPackageGroupArn":{"shape":"ModelPackageGroupArn"},
+        "CreationTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"},
+        "EndTime":{"shape":"Timestamp"},
+        "ErrorDetails":{"shape":"FailureReason"},
+        "LastReceivedSequenceNumber":{"shape":"JavaInteger"},
+        "BillableTokenUsage":{"shape":"BillableTokenUsage"},
+        "VpcConfig":{"shape":"VpcConfig"},
+        "RoleArn":{"shape":"RoleArn"},
+        "LoraConfig":{"shape":"LoraConfig"},
+        "ModelConfig":{"shape":"TrainingSessionModelConfig"},
+        "OutputConfig":{"shape":"TrainingSessionOutputConfig"},
+        "Tags":{"shape":"TagList"}
+      }
+    },
+    "TrainingSessionModelConfig":{
+      "type":"structure",
+      "required":["BaseModelArn"],
+      "members":{
+        "BaseModelArn":{"shape":"BaseModelArn"},
+        "AcceptEula":{"shape":"JavaBoolean"}
+      }
+    },
+    "TrainingSessionName":{
+      "type":"string",
+      "max":63,
+      "min":1,
+      "pattern":"[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+    },
+    "TrainingSessionOutputConfig":{
+      "type":"structure",
+      "required":["S3Location"],
+      "members":{
+        "S3Location":{"shape":"TrainingSessionS3Location"}
+      }
+    },
+    "TrainingSessionS3Location":{
+      "type":"structure",
+      "required":["Path"],
+      "members":{
+        "Path":{"shape":"OutputS3Path"},
+        "KmsKeyArn":{"shape":"CustomerKmsKeyArn"}
+      }
+    },
+    "TrainingSessionStatus":{
+      "type":"string",
+      "enum":[
+        "Created",
+        "Blocked",
+        "Running",
+        "Failed",
+        "Scheduled",
+        "Stopping",
+        "Stopped",
+        "Expired",
+        "Deleting",
+        "DeletionFailed"
+      ]
+    },
+    "TrainingSessionSummaries":{
+      "type":"list",
+      "member":{"shape":"TrainingSessionSummary"},
+      "max":100,
+      "min":0
+    },
+    "TrainingSessionSummary":{
+      "type":"structure",
+      "required":[
+        "TrainingSessionArn",
+        "TrainingSessionStatus",
+        "CreationTime"
+      ],
+      "members":{
+        "TrainingSessionArn":{"shape":"TrainingSessionArn"},
+        "TrainingSessionStatus":{"shape":"TrainingSessionStatus"},
+        "CreationTime":{"shape":"Timestamp"},
+        "LastModifiedTime":{"shape":"Timestamp"}
+      }
     },
     "TrainingSpecification":{
       "type":"structure",

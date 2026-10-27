@@ -766,7 +766,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: []
     end
@@ -972,7 +972,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:description]
     end
@@ -1080,6 +1080,29 @@ module Aws::DataZone
       SENSITIVE: [:name, :description, :schedule]
     end
 
+    class CreateDesignationInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: ::String
+      attr_accessor deletion_protection: bool
+      SENSITIVE: [:description]
+    end
+
+    class CreateDesignationOutput
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor designation_type: ("MANAGED" | "USER_CREATED")
+      attr_accessor policy: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
     class CreateDomainInput
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -1162,6 +1185,7 @@ module Aws::DataZone
       attr_accessor description: ::String
       attr_accessor provisioning_properties: Types::ProvisioningProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      attr_accessor blueprint_category: ("TOOLING")
       SENSITIVE: [:description]
     end
 
@@ -1174,6 +1198,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor blueprint_category: ("TOOLING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]
@@ -1431,7 +1456,8 @@ module Aws::DataZone
       attr_accessor domain_identifier: ::String
       attr_accessor project_identifier: ::String
       attr_accessor member: Types::Member
-      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
+      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD" | "USER_CREATED_DESIGNATION")
+      attr_accessor user_created_designation_id: ::String
       SENSITIVE: []
     end
 
@@ -1909,6 +1935,15 @@ module Aws::DataZone
       SENSITIVE: [:name, :description, :schedule]
     end
 
+    class DeleteDesignationInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDesignationOutput < Aws::EmptyStructure
+    end
+
     class DeleteDomainInput
       attr_accessor identifier: ::String
       attr_accessor client_token: ::String
@@ -2129,6 +2164,19 @@ module Aws::DataZone
       SENSITIVE: []
     end
 
+    class DesignationSummary
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor designation_type: ("MANAGED" | "USER_CREATED")
+      attr_accessor deletion_protection: bool
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:description]
+    end
+
     class DetailedGlossaryTerm
       attr_accessor name: ::String
       attr_accessor short_description: ::String
@@ -2277,6 +2325,7 @@ module Aws::DataZone
       attr_accessor provisioning_properties: Types::ProvisioningProperties
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
+      attr_accessor blueprint_category: ("TOOLING")
       SENSITIVE: [:description]
     end
 
@@ -2602,7 +2651,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:connection_credentials, :description]
     end
@@ -2702,6 +2751,26 @@ module Aws::DataZone
       attr_accessor started_at: ::Time
       attr_accessor stopped_at: ::Time
       SENSITIVE: []
+    end
+
+    class GetDesignationInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class GetDesignationOutput
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor designation_type: ("MANAGED" | "USER_CREATED")
+      attr_accessor policy: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description]
     end
 
     class GetDomainInput
@@ -2804,6 +2873,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor blueprint_category: ("TOOLING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]
@@ -3153,6 +3223,7 @@ module Aws::DataZone
       attr_accessor timeout_configuration: Types::TimeoutConfig
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor storage_configuration: Types::StorageConfig
+      attr_accessor notification_configuration: Types::NotificationConfig
       attr_accessor trigger_source: Types::TriggerSource
       attr_accessor error: Types::NotebookRunError
       attr_accessor created_at: ::Time
@@ -3452,7 +3523,7 @@ module Aws::DataZone
     class GlueConnection
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor connection_type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor match_criteria: ::Array[::String]
       attr_accessor connection_properties: ::Hash[::String, ::String]
       attr_accessor spark_properties: ::Hash[::String, ::String]
@@ -3476,7 +3547,7 @@ module Aws::DataZone
       attr_accessor physical_connection_requirements: Types::PhysicalConnectionRequirements
       attr_accessor name: ::String
       attr_accessor description: ::String
-      attr_accessor connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA")
+      attr_accessor connection_type: ("SNOWFLAKE" | "BIGQUERY" | "DOCUMENTDB" | "DYNAMODB" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "SAPHANA" | "SQLSERVER" | "TERADATA" | "VERTICA" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor match_criteria: ::String
       attr_accessor validate_credentials: bool
       attr_accessor validate_for_compute_environments: ::Array[("SPARK" | "ATHENA" | "PYTHON")]
@@ -3615,6 +3686,7 @@ module Aws::DataZone
 
     class IamPropertiesInput
       attr_accessor glue_lineage_sync_enabled: bool
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 
@@ -3914,7 +3986,7 @@ module Aws::DataZone
       attr_accessor name: ::String
       attr_accessor environment_identifier: ::String
       attr_accessor project_identifier: ::String
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: []
     end
@@ -3984,6 +4056,19 @@ module Aws::DataZone
 
     class ListDataSourcesOutput
       attr_accessor items: ::Array[Types::DataSourceSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDesignationsInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListDesignationsOutput
+      attr_accessor items: ::Array[Types::DesignationSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -4685,6 +4770,11 @@ module Aws::DataZone
       SENSITIVE: [:name, :description]
     end
 
+    class NotificationConfig
+      attr_accessor notify_on: ::Array[("SUCCEEDED" | "FAILED" | "STOPPED" | "QUEUED" | "STARTING" | "RUNNING" | "STOPPING")]
+      SENSITIVE: []
+    end
+
     class NotificationOutput
       attr_accessor identifier: ::String
       attr_accessor domain_identifier: ::String
@@ -4972,18 +5062,21 @@ module Aws::DataZone
 
     class ProjectMember
       attr_accessor member_details: Types::MemberDetails
-      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
+      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD" | "USER_CREATED_DESIGNATION")
+      attr_accessor user_created_designation_id: ::String
       SENSITIVE: []
     end
 
     class ProjectMembershipAssignment
       attr_accessor member: Types::Member
-      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD")
+      attr_accessor designation: ("PROJECT_OWNER" | "PROJECT_CONTRIBUTOR" | "PROJECT_CATALOG_VIEWER" | "PROJECT_CATALOG_CONSUMER" | "PROJECT_CATALOG_STEWARD" | "USER_CREATED_DESIGNATION")
+      attr_accessor user_created_designation_id: ::String
       SENSITIVE: []
     end
 
     class ProjectPolicyGrantPrincipal
-      attr_accessor project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD")
+      attr_accessor project_designation: ("OWNER" | "CONTRIBUTOR" | "PROJECT_CATALOG_STEWARD" | "USER_CREATED_DESIGNATION")
+      attr_accessor user_created_designation_id: ::String
       attr_accessor project_identifier: ::String
       attr_accessor project_grant_filter: Types::ProjectGrantFilter
       SENSITIVE: []
@@ -5545,6 +5638,17 @@ module Aws::DataZone
       SENSITIVE: [:uri]
     end
 
+    class S3File
+      attr_accessor key: ::String
+      SENSITIVE: [:key]
+    end
+
+    class S3FilesLocation
+      attr_accessor bucket: ::String
+      attr_accessor file_list: ::Array[Types::S3File]
+      SENSITIVE: [:bucket]
+    end
+
     class S3PropertiesInput
       attr_accessor s3_uri: ::String
       attr_accessor s3_access_grant_location_id: ::String
@@ -5800,10 +5904,13 @@ module Aws::DataZone
 
     class SourceLocation
       attr_accessor s3: ::String
+      attr_accessor s3_files: Types::S3FilesLocation
       attr_accessor unknown: untyped
       SENSITIVE: [:s3]
 
       class S3 < SourceLocation
+      end
+      class S3Files < SourceLocation
       end
       class Unknown < SourceLocation
       end
@@ -5962,6 +6069,7 @@ module Aws::DataZone
       attr_accessor source_location: Types::SourceLocation
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor client_token: ::String
       SENSITIVE: [:name, :description]
     end
@@ -5973,6 +6081,7 @@ module Aws::DataZone
       attr_accessor owning_project_id: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
+      attr_accessor type: ("DATA" | "SQL")
       attr_accessor source_location: Types::SourceLocation
       attr_accessor created_at: ::Time
       attr_accessor created_by: ::String
@@ -5987,6 +6096,7 @@ module Aws::DataZone
       attr_accessor compute_configuration: Types::ComputeConfig
       attr_accessor network_configuration: Types::NetworkConfig
       attr_accessor timeout_configuration: Types::TimeoutConfig
+      attr_accessor notification_configuration: Types::NotificationConfig
       attr_accessor trigger_source: Types::TriggerSource
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameters: ::Hash[::String, ::String]
@@ -6009,6 +6119,7 @@ module Aws::DataZone
       attr_accessor timeout_configuration: Types::TimeoutConfig
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor storage_configuration: Types::StorageConfig
+      attr_accessor notification_configuration: Types::NotificationConfig
       attr_accessor trigger_source: Types::TriggerSource
       attr_accessor error: Types::NotebookRunError
       attr_accessor created_at: ::Time
@@ -6451,7 +6562,7 @@ module Aws::DataZone
       attr_accessor physical_endpoints: ::Array[Types::PhysicalEndpoint]
       attr_accessor project_id: ::String
       attr_accessor props: Types::ConnectionPropertiesOutput
-      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT")
+      attr_accessor type: ("ATHENA" | "BIGQUERY" | "DATABRICKS" | "DOCUMENTDB" | "DYNAMODB" | "HYPERPOD" | "IAM" | "MYSQL" | "OPENSEARCH" | "ORACLE" | "POSTGRESQL" | "REDSHIFT" | "S3" | "SAPHANA" | "SNOWFLAKE" | "SPARK" | "SQLSERVER" | "TERADATA" | "VERTICA" | "WORKFLOWS_MWAA" | "AMAZON_Q" | "MLFLOW" | "VPC" | "GIT" | "ICEBERGRESTCATALOG" | "SNOWFLAKEICEBERGRESTCATALOG" | "DATABRICKSICEBERGRESTCATALOG")
       attr_accessor scope: ("DOMAIN" | "PROJECT")
       SENSITIVE: [:description]
     end
@@ -6496,6 +6607,30 @@ module Aws::DataZone
       attr_accessor self_grant_status: Types::SelfGrantStatusOutput
       attr_accessor retain_permissions_on_revoke_failure: bool
       SENSITIVE: [:name, :description, :schedule]
+    end
+
+    class UpdateDesignationInput
+      attr_accessor domain_identifier: ::String
+      attr_accessor identifier: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor policy: ::String
+      attr_accessor deletion_protection: bool
+      SENSITIVE: [:description]
+    end
+
+    class UpdateDesignationOutput
+      attr_accessor domain_id: ::String
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor designation_type: ("MANAGED" | "USER_CREATED")
+      attr_accessor policy: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor created_by: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor last_updated_at: ::Time
+      SENSITIVE: [:description]
     end
 
     class UpdateDomainInput
@@ -6569,6 +6704,7 @@ module Aws::DataZone
       attr_accessor description: ::String
       attr_accessor provisioning_properties: Types::ProvisioningProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
+      attr_accessor blueprint_category: ("TOOLING")
       SENSITIVE: []
     end
 
@@ -6581,6 +6717,7 @@ module Aws::DataZone
       attr_accessor deployment_properties: Types::DeploymentProperties
       attr_accessor user_parameters: ::Array[Types::CustomParameter]
       attr_accessor glossary_terms: ::Array[::String]
+      attr_accessor blueprint_category: ("TOOLING")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:description]

@@ -328,6 +328,24 @@ module Aws
           expect(resp.context.http_request.headers['X-Amz-Date']).
             to eq (now.utc + 1000).strftime("%Y%m%dT%H%M%SZ")
         end
+
+        it 'captures the pre-skew send time when correction is enabled' do
+          client = client_class.new(options.merge(
+            clock_skew: clock_skew, stub_responses: true
+          ))
+          resp = client.example_operation
+          expect(resp.context.metadata[:clock_skew_request_sent_at]).to eq(utc)
+        end
+
+        it 'does not capture the send time when disabled' do
+          client = client_class.new(options.merge(
+            clock_skew: clock_skew,
+            disable_clock_skew_correction: true,
+            stub_responses: true
+          ))
+          resp = client.example_operation
+          expect(resp.context.metadata[:clock_skew_request_sent_at]).to be_nil
+        end
       end
     end
   end

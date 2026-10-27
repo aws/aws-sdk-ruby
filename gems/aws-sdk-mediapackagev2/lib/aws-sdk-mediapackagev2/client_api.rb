@@ -190,6 +190,7 @@ module Aws::MediaPackageV2
     ManifestName = Shapes::StringShape.new(name: 'ManifestName')
     MssManifestLayout = Shapes::StringShape.new(name: 'MssManifestLayout')
     MultiviewConfiguration = Shapes::StructureShape.new(name: 'MultiviewConfiguration')
+    MultiviewFilterConfiguration = Shapes::StructureShape.new(name: 'MultiviewFilterConfiguration')
     MultiviewLayoutList = Shapes::ListShape.new(name: 'MultiviewLayoutList')
     MultiviewLayoutType = Shapes::StringShape.new(name: 'MultiviewLayoutType')
     MultiviewSourceList = Shapes::ListShape.new(name: 'MultiviewSourceList')
@@ -591,6 +592,7 @@ module Aws::MediaPackageV2
     FilterConfiguration.add_member(:end, Shapes::ShapeRef.new(shape: Timestamp, location_name: "End"))
     FilterConfiguration.add_member(:time_delay_seconds, Shapes::ShapeRef.new(shape: FilterConfigurationTimeDelaySecondsInteger, location_name: "TimeDelaySeconds"))
     FilterConfiguration.add_member(:clip_start_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ClipStartTime"))
+    FilterConfiguration.add_member(:multiview, Shapes::ShapeRef.new(shape: MultiviewFilterConfiguration, location_name: "Multiview"))
     FilterConfiguration.struct_class = Types::FilterConfiguration
 
     ForceEndpointErrorConfiguration.add_member(:endpoint_error_conditions, Shapes::ShapeRef.new(shape: EndpointErrorConditions, location_name: "EndpointErrorConditions"))
@@ -893,6 +895,10 @@ module Aws::MediaPackageV2
     MultiviewConfiguration.add_member(:available_sources, Shapes::ShapeRef.new(shape: MultiviewSourceList, required: true, location_name: "AvailableSources"))
     MultiviewConfiguration.add_member(:available_layouts, Shapes::ShapeRef.new(shape: MultiviewLayoutList, required: true, location_name: "AvailableLayouts"))
     MultiviewConfiguration.struct_class = Types::MultiviewConfiguration
+
+    MultiviewFilterConfiguration.add_member(:layout, Shapes::ShapeRef.new(shape: MultiviewLayoutType, required: true, location_name: "Layout"))
+    MultiviewFilterConfiguration.add_member(:sources, Shapes::ShapeRef.new(shape: MultiviewSourceList, required: true, location_name: "Sources"))
+    MultiviewFilterConfiguration.struct_class = Types::MultiviewFilterConfiguration
 
     MultiviewLayoutList.member = Shapes::ShapeRef.new(shape: MultiviewLayoutType)
 

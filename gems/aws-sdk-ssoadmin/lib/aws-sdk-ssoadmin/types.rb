@@ -3275,11 +3275,25 @@ module Aws::SSOAdmin
     #   Use the output of previous API calls to make subsequent calls.
     #   @return [String]
     #
+    # @!attribute [rw] region_scope
+    #   Specifies which Amazon Web Services Regions to list IAM Identity
+    #   Center instances from. Valid values:
+    #
+    #   * `CURRENT_REGION` - Lists only the instances in the Region that you
+    #     call this API from.
+    #
+    #   * `ALL_REGIONS` - Lists the instances that the caller owns or that
+    #     are shared with the caller across all Regions.
+    #
+    #   If you don't specify a value, the default is `CURRENT_REGION`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/sso-admin-2020-07-20/ListInstancesRequest AWS API Documentation
     #
     class ListInstancesRequest < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :region_scope)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4640,7 +4654,7 @@ module Aws::SSOAdmin
     #
     #   <note markdown="1"> You can't set `EncryptionConfiguration` and `PermissionSetsEnabled`
     #   in the same request. To configure both, make two separate
-    #   `UpdateInstance` calls. These calls can be made in parallel.
+    #   `UpdateInstance` calls. You can make these calls in parallel.
     #
     #    </note>
     #   @return [Boolean]

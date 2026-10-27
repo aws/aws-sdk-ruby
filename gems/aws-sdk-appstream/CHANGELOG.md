@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2026-10-26)
+------------------
+
+* Feature - Add Windows 11 to PlatformType enum
+
+1.147.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.146.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.145.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.144.0 (2026-10-13)
+------------------
+
+* Feature - Adds support for administrators to require users to re-authenticate OneDrive and Google Drive storage connectors when a streaming session is reused.
+
+1.143.0 (2026-09-29)
+------------------
+
+* Feature - Add support for NVIDIA GRID driver version metadata in Workspace Applications image responses through the new ImageSoftwareMetadata field.
+
 1.142.0 (2026-09-11)
 ------------------
 

@@ -2772,9 +2772,16 @@ module Aws::Batch
     #   environment.
     #
     #   <note markdown="1"> To create a compute environment that uses EKS resources, the caller
-    #   must have permissions to call `eks:DescribeCluster`.
+    #   must have permissions to call `eks:DescribeCluster`. Additional
+    #   Amazon EKS permissions are required for Batch to manage an access
+    #   entry on the cluster; see [Amazon EKS access entry
+    #   authentication][1] in the *Batch User Guide*.
     #
     #    </note>
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
     #   @return [Types::EksConfiguration]
     #
     # @!attribute [rw] context
@@ -4678,6 +4685,73 @@ module Aws::Batch
       include Aws::Structure
     end
 
+    # Configures whether Batch manages an Amazon EKS access entry on the
+    # cluster for the compute environment. For information on how the fields
+    # interact with the cluster's `authenticationMode` and with other
+    # compute environments that share the cluster, see [Amazon EKS access
+    # entry authentication][1] in the *Batch User Guide*.
+    #
+    # <note markdown="1"> Setting `desiredState=ENABLED` on a single compute environment does
+    # not guarantee that Batch creates an access entry, and setting
+    # `desiredState=DISABLED` on a single compute environment does not
+    # guarantee that Batch deletes one. Batch compares the `desiredState`
+    # across all compute environments that target the same cluster. The
+    # Batch-managed access entry is created only when all compute
+    # environments have `desiredState=ENABLED`, and deleted only when all
+    # have `desiredState=DISABLED`. If you have multiple compute
+    # environments on the same cluster, set `desiredState` consistently
+    # across all of them to avoid uncertainty. For more information, see
+    # [Reconciling desiredState across compute environments][2] in the
+    # *Batch User Guide*.
+    #
+    #  </note>
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
+    # [2]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html#eks-access-entries-reconciliation
+    #
+    # @!attribute [rw] desired_state
+    #   The desired access entry state for the compute environment. Valid
+    #   values:
+    #
+    #   ENABLED
+    #
+    #   : Batch manages an access entry on the cluster for the compute
+    #     environment.
+    #
+    #   DISABLED
+    #
+    #   : Batch deletes the Batch-managed access entry for the cluster. This
+    #     value is rejected if the cluster's `authenticationMode` is `API`,
+    #     because such a cluster doesn't support the `aws-auth` ConfigMap.
+    #
+    #   INHERIT\_FROM\_CLUSTER
+    #
+    #   : Batch defers to the cluster's current access entry `status`. On a
+    #     cluster whose authentication mode is `API`, Batch creates and
+    #     manages an access entry. On a cluster whose authentication mode is
+    #     `API_AND_CONFIG_MAP` or `CONFIG_MAP`, Batch neither adds nor
+    #     removes an access entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The observed state of the access entry on the cluster. `ACTIVE`
+    #   means that an access entry for the compute environment exists on the
+    #   cluster and takes precedence over the `aws-auth` ConfigMap.
+    #   `INACTIVE` means that no Batch-managed access entry is present. This
+    #   is a read-only field returned by `DescribeComputeEnvironments`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksAccessEntry AWS API Documentation
+    #
+    class EksAccessEntry < Struct.new(
+      :desired_state,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that represents the details for an attempt for a job attempt
     # that an Amazon EKS container runs.
     #
@@ -4794,11 +4868,69 @@ module Aws::Batch
     #   [1]: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
     #   @return [String]
     #
+    # @!attribute [rw] access_entry
+    #   The Batch-managed Amazon EKS access entry for the compute
+    #   environment. Set `desiredState` to declare whether Batch manages an
+    #   access entry on the cluster. In a `DescribeComputeEnvironments`
+    #   response, `desiredState` is the value that Batch recorded for the
+    #   compute environment and `status` is the observed state of the access
+    #   entry on the cluster. To change the access entry on an existing
+    #   compute environment, use [ `EksConfigurationUpdate.accessEntry`
+    #   ][1].
+    #
+    #   Whether the entry is provisioned on the cluster depends on the
+    #   cluster's `authenticationMode` and the `desiredState` recorded for
+    #   each Batch compute environment targeting the cluster. For more
+    #   information, see [Amazon EKS access entry authentication][2] in the
+    #   *Batch User Guide*.
+    #
+    #   If you don't specify this field, Batch doesn't record a
+    #   `desiredState` for the compute environment and
+    #   `DescribeComputeEnvironments` doesn't return one. For the purpose
+    #   of provisioning the access entry, Batch behaves as it does for
+    #   `INHERIT_FROM_CLUSTER`.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_EksConfigurationUpdate.html#Batch-Type-EksConfigurationUpdate-accessEntry
+    #   [2]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
+    #   @return [Types::EksAccessEntry]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksConfiguration AWS API Documentation
     #
     class EksConfiguration < Struct.new(
       :eks_cluster_arn,
-      :kubernetes_namespace)
+      :kubernetes_namespace,
+      :access_entry)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that represents the attributes of an Batch compute
+    # environment's Amazon EKS configuration that can be updated. Currently
+    # `accessEntry` is the only attribute that you can change after the
+    # compute environment is created. For more information, see [Amazon EKS
+    # access entry authentication][1] in the *Batch User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
+    #
+    # @!attribute [rw] access_entry
+    #   The updated access entry configuration for the compute environment.
+    #   Set `desiredState` to declare whether Batch will manage an access
+    #   entry on the cluster. For the accepted values, see [
+    #   `EksAccessEntry` ][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/APIReference/API_EksAccessEntry.html
+    #   @return [Types::EksAccessEntry]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/EksConfigurationUpdate AWS API Documentation
+    #
+    class EksConfigurationUpdate < Struct.new(
+      :access_entry)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11314,8 +11446,8 @@ module Aws::Batch
     #   @return [Types::RepositoryCredentials]
     #
     # @!attribute [rw] resource_requirements
-    #   The type and amount of a resource to assign to a container. The only
-    #   supported resource is a GPU.
+    #   The type and amount of a resource to assign to a container. The
+    #   supported resources include `GPU`, `MEMORY`, and `VCPU`.
     #   @return [Array<Types::ResourceRequirement>]
     #
     # @!attribute [rw] secrets
@@ -11890,6 +12022,20 @@ module Aws::Batch
     #   environment.
     #   @return [Types::EcsSettings]
     #
+    # @!attribute [rw] eks_configuration
+    #   Updates the Amazon EKS configuration for the compute environment.
+    #   Only specify this parameter if the compute environment's
+    #   `containerOrchestrationType` is `EKS`. Currently, the `accessEntry`
+    #   setting is the only Amazon EKS configuration that you can change
+    #   after the compute environment is created. For more information, see
+    #   [Amazon EKS access entry authentication][1] in the *Batch User
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/batch/latest/userguide/eks-access-entries.html
+    #   @return [Types::EksConfigurationUpdate]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/batch-2016-08-10/UpdateComputeEnvironmentRequest AWS API Documentation
     #
     class UpdateComputeEnvironmentRequest < Struct.new(
@@ -11900,7 +12046,8 @@ module Aws::Batch
       :service_role,
       :update_policy,
       :context,
-      :ecs_settings)
+      :ecs_settings,
+      :eks_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

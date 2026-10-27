@@ -199,12 +199,19 @@ module Aws::NetworkManager
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -507,6 +514,8 @@ module Aws::NetworkManager
     #   resp.attachment.attachment_policy_rule_number #=> Integer
     #   resp.attachment.segment_name #=> String
     #   resp.attachment.network_function_group_name #=> String
+    #   resp.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.attachment.nat_system_route_support #=> Boolean
     #   resp.attachment.tags #=> Array
     #   resp.attachment.tags[0].key #=> String
     #   resp.attachment.tags[0].value #=> String
@@ -523,7 +532,7 @@ module Aws::NetworkManager
     #   resp.attachment.created_at #=> Time
     #   resp.attachment.updated_at #=> Time
     #   resp.attachment.last_modification_errors #=> Array
-    #   resp.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.attachment.last_modification_errors[0].message #=> String
     #   resp.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.attachment.last_modification_errors[0].request_id #=> String
@@ -763,6 +772,18 @@ module Aws::NetworkManager
     #   The routing policy label to apply to the Connect attachment for
     #   traffic routing decisions.
     #
+    # @option params [String] :nat_gateway_support
+    #   Specifies whether to enable NAT gateway support on the Connect
+    #   attachment. NAT is supported only on Connect attachments that use the
+    #   GRE tunnel protocol. Tunnel-less Connect attachments aren't
+    #   supported. To enable NAT gateway support, you must also specify at
+    #   least one NAT rule. If you don't specify a value, NAT gateway support
+    #   is disabled. Only the core network owner can configure NAT on an
+    #   attachment.
+    #
+    # @option params [Array<Types::NatRuleRequest>] :nat_gateway_rules
+    #   The NAT rules for the Connect attachment, up to 50 rules.
+    #
     # @option params [required, Types::ConnectAttachmentOptions] :options
     #   Options for creating an attachment.
     #
@@ -786,6 +807,14 @@ module Aws::NetworkManager
     #     edge_location: "ExternalRegionCode", # required
     #     transport_attachment_id: "AttachmentId", # required
     #     routing_policy_label: "ConstrainedString",
+    #     nat_gateway_support: "ENABLE", # accepts ENABLE, DISABLE
+    #     nat_gateway_rules: [
+    #       {
+    #         rule_number: 1, # required
+    #         match_source_cidr: "IPAddress", # required
+    #         nat_cidr: "IPAddress", # required
+    #       },
+    #     ],
     #     options: { # required
     #       protocol: "GRE", # accepts GRE, NO_ENCAP
     #     },
@@ -813,6 +842,8 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.connect_attachment.attachment.segment_name #=> String
     #   resp.connect_attachment.attachment.network_function_group_name #=> String
+    #   resp.connect_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.connect_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.connect_attachment.attachment.tags #=> Array
     #   resp.connect_attachment.attachment.tags[0].key #=> String
     #   resp.connect_attachment.attachment.tags[0].value #=> String
@@ -829,7 +860,7 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.created_at #=> Time
     #   resp.connect_attachment.attachment.updated_at #=> Time
     #   resp.connect_attachment.attachment.last_modification_errors #=> Array
-    #   resp.connect_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.connect_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.connect_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.connect_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.connect_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -927,7 +958,7 @@ module Aws::NetworkManager
     #   resp.connect_peer.tags[0].value #=> String
     #   resp.connect_peer.subnet_arn #=> String
     #   resp.connect_peer.last_modification_errors #=> Array
-    #   resp.connect_peer.last_modification_errors[0].code #=> String, one of "EDGE_LOCATION_NO_FREE_IPS", "EDGE_LOCATION_PEER_DUPLICATE", "SUBNET_NOT_FOUND", "IP_OUTSIDE_SUBNET_CIDR_RANGE", "INVALID_INSIDE_CIDR_BLOCK", "NO_ASSOCIATED_CIDR_BLOCK"
+    #   resp.connect_peer.last_modification_errors[0].code #=> String, one of "EDGE_LOCATION_NO_FREE_IPS", "EDGE_LOCATION_PEER_DUPLICATE", "SUBNET_NOT_FOUND", "IP_OUTSIDE_SUBNET_CIDR_RANGE", "INVALID_INSIDE_CIDR_BLOCK", "NO_ASSOCIATED_CIDR_BLOCK", "CREATION_FAILED", "DELETION_FAILED"
     #   resp.connect_peer.last_modification_errors[0].message #=> String
     #   resp.connect_peer.last_modification_errors[0].resource_arn #=> String
     #   resp.connect_peer.last_modification_errors[0].request_id #=> String
@@ -1266,6 +1297,23 @@ module Aws::NetworkManager
     #   One or more core network edge locations that the Direct Connect
     #   gateway attachment is associated with.
     #
+    # @option params [String] :nat_gateway_support
+    #   Specifies whether to enable NAT gateway support on the Direct Connect
+    #   gateway attachment. To enable NAT gateway support, you must also
+    #   specify at least one NAT rule. If you don't specify a value, NAT
+    #   gateway support is disabled. Only the core network owner can configure
+    #   NAT on an attachment.
+    #
+    # @option params [Boolean] :nat_system_route_support
+    #   Specifies whether the core network installs system routes for the NAT
+    #   CIDR blocks of the attachment's NAT rules. System routes have a route
+    #   type of `SYSTEM`. NAT is applied to traffic whether or not this option
+    #   is enabled. The default is `true`.
+    #
+    # @option params [Array<Types::NatRuleRequest>] :nat_gateway_rules
+    #   The NAT rules for the Direct Connect gateway attachment, up to 50
+    #   rules.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The key value tags to apply to the Direct Connect gateway attachment
     #   during creation.
@@ -1287,6 +1335,15 @@ module Aws::NetworkManager
     #     direct_connect_gateway_arn: "DirectConnectGatewayArn", # required
     #     routing_policy_label: "ConstrainedString",
     #     edge_locations: ["ExternalRegionCode"], # required
+    #     nat_gateway_support: "ENABLE", # accepts ENABLE, DISABLE
+    #     nat_system_route_support: false,
+    #     nat_gateway_rules: [
+    #       {
+    #         rule_number: 1, # required
+    #         match_source_cidr: "IPAddress", # required
+    #         nat_cidr: "IPAddress", # required
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -1311,6 +1368,8 @@ module Aws::NetworkManager
     #   resp.direct_connect_gateway_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.direct_connect_gateway_attachment.attachment.segment_name #=> String
     #   resp.direct_connect_gateway_attachment.attachment.network_function_group_name #=> String
+    #   resp.direct_connect_gateway_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.direct_connect_gateway_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.direct_connect_gateway_attachment.attachment.tags #=> Array
     #   resp.direct_connect_gateway_attachment.attachment.tags[0].key #=> String
     #   resp.direct_connect_gateway_attachment.attachment.tags[0].value #=> String
@@ -1327,7 +1386,7 @@ module Aws::NetworkManager
     #   resp.direct_connect_gateway_attachment.attachment.created_at #=> Time
     #   resp.direct_connect_gateway_attachment.attachment.updated_at #=> Time
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors #=> Array
-    #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -1553,6 +1612,25 @@ module Aws::NetworkManager
     #   The routing policy label to apply to the Site-to-Site VPN attachment
     #   for traffic routing decisions.
     #
+    # @option params [String] :nat_gateway_support
+    #   Specifies whether to enable NAT gateway support on the Site-to-Site
+    #   VPN attachment. To enable NAT gateway support, you must also specify
+    #   at least one NAT rule. If you don't specify a value, NAT gateway
+    #   support is disabled. Only the core network owner can configure NAT on
+    #   an attachment.
+    #
+    # @option params [Boolean] :nat_system_route_support
+    #   Specifies whether the core network installs system routes for the NAT
+    #   CIDR blocks of the attachment's NAT rules. System routes have a route
+    #   type of `SYSTEM`. NAT is applied to traffic whether or not this option
+    #   is enabled. The default is `true` for VPN connections that use BGP and
+    #   `false` for VPN connections that use static routing. If the VPN
+    #   connection uses static routing, you must specify `false` or omit this
+    #   parameter.
+    #
+    # @option params [Array<Types::NatRuleRequest>] :nat_gateway_rules
+    #   The NAT rules for the Site-to-Site VPN attachment, up to 50 rules.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags associated with the request.
     #
@@ -1572,6 +1650,15 @@ module Aws::NetworkManager
     #     core_network_id: "CoreNetworkId", # required
     #     vpn_connection_arn: "VpnConnectionArn", # required
     #     routing_policy_label: "ConstrainedString",
+    #     nat_gateway_support: "ENABLE", # accepts ENABLE, DISABLE
+    #     nat_system_route_support: false,
+    #     nat_gateway_rules: [
+    #       {
+    #         rule_number: 1, # required
+    #         match_source_cidr: "IPAddress", # required
+    #         nat_cidr: "IPAddress", # required
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -1596,6 +1683,8 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.site_to_site_vpn_attachment.attachment.segment_name #=> String
     #   resp.site_to_site_vpn_attachment.attachment.network_function_group_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.site_to_site_vpn_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.site_to_site_vpn_attachment.attachment.tags #=> Array
     #   resp.site_to_site_vpn_attachment.attachment.tags[0].key #=> String
     #   resp.site_to_site_vpn_attachment.attachment.tags[0].value #=> String
@@ -1612,7 +1701,7 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.created_at #=> Time
     #   resp.site_to_site_vpn_attachment.attachment.updated_at #=> Time
     #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors #=> Array
-    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -1677,7 +1766,7 @@ module Aws::NetworkManager
     #   resp.transit_gateway_peering.peering.tags[0].value #=> String
     #   resp.transit_gateway_peering.peering.created_at #=> Time
     #   resp.transit_gateway_peering.peering.last_modification_errors #=> Array
-    #   resp.transit_gateway_peering.peering.last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE"
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE", "TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED", "CREATION_FAILED", "DELETION_FAILED"
     #   resp.transit_gateway_peering.peering.last_modification_errors[0].message #=> String
     #   resp.transit_gateway_peering.peering.last_modification_errors[0].resource_arn #=> String
     #   resp.transit_gateway_peering.peering.last_modification_errors[0].request_id #=> String
@@ -1751,6 +1840,8 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.transit_gateway_route_table_attachment.attachment.segment_name #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.network_function_group_name #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.transit_gateway_route_table_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.transit_gateway_route_table_attachment.attachment.tags #=> Array
     #   resp.transit_gateway_route_table_attachment.attachment.tags[0].key #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.tags[0].value #=> String
@@ -1767,7 +1858,7 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.created_at #=> Time
     #   resp.transit_gateway_route_table_attachment.attachment.updated_at #=> Time
     #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors #=> Array
-    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -1801,6 +1892,15 @@ module Aws::NetworkManager
     #   The routing policy label to apply to the VPC attachment for traffic
     #   routing decisions.
     #
+    # @option params [String] :nat_gateway_support
+    #   Specifies whether to enable NAT gateway support on the VPC attachment.
+    #   To enable NAT gateway support, you must also specify at least one NAT
+    #   rule. If you don't specify a value, NAT gateway support is disabled.
+    #   Only the core network owner can configure NAT on an attachment.
+    #
+    # @option params [Array<Types::NatRuleRequest>] :nat_gateway_rules
+    #   The NAT rules for the VPC attachment, up to 50 rules.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The key-value tags associated with the request.
     #
@@ -1827,6 +1927,14 @@ module Aws::NetworkManager
     #       security_group_referencing_support: false,
     #     },
     #     routing_policy_label: "ConstrainedString",
+    #     nat_gateway_support: "ENABLE", # accepts ENABLE, DISABLE
+    #     nat_gateway_rules: [
+    #       {
+    #         rule_number: 1, # required
+    #         match_source_cidr: "IPAddress", # required
+    #         nat_cidr: "IPAddress", # required
+    #       },
+    #     ],
     #     tags: [
     #       {
     #         key: "TagKey",
@@ -1851,6 +1959,8 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.vpc_attachment.attachment.segment_name #=> String
     #   resp.vpc_attachment.attachment.network_function_group_name #=> String
+    #   resp.vpc_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.vpc_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.vpc_attachment.attachment.tags #=> Array
     #   resp.vpc_attachment.attachment.tags[0].key #=> String
     #   resp.vpc_attachment.attachment.tags[0].value #=> String
@@ -1867,7 +1977,7 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.created_at #=> Time
     #   resp.vpc_attachment.attachment.updated_at #=> Time
     #   resp.vpc_attachment.attachment.last_modification_errors #=> Array
-    #   resp.vpc_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.vpc_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.vpc_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.vpc_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -1917,6 +2027,8 @@ module Aws::NetworkManager
     #   resp.attachment.attachment_policy_rule_number #=> Integer
     #   resp.attachment.segment_name #=> String
     #   resp.attachment.network_function_group_name #=> String
+    #   resp.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.attachment.nat_system_route_support #=> Boolean
     #   resp.attachment.tags #=> Array
     #   resp.attachment.tags[0].key #=> String
     #   resp.attachment.tags[0].value #=> String
@@ -1933,7 +2045,7 @@ module Aws::NetworkManager
     #   resp.attachment.created_at #=> Time
     #   resp.attachment.updated_at #=> Time
     #   resp.attachment.last_modification_errors #=> Array
-    #   resp.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.attachment.last_modification_errors[0].message #=> String
     #   resp.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.attachment.last_modification_errors[0].request_id #=> String
@@ -1985,7 +2097,7 @@ module Aws::NetworkManager
     #   resp.connect_peer.tags[0].value #=> String
     #   resp.connect_peer.subnet_arn #=> String
     #   resp.connect_peer.last_modification_errors #=> Array
-    #   resp.connect_peer.last_modification_errors[0].code #=> String, one of "EDGE_LOCATION_NO_FREE_IPS", "EDGE_LOCATION_PEER_DUPLICATE", "SUBNET_NOT_FOUND", "IP_OUTSIDE_SUBNET_CIDR_RANGE", "INVALID_INSIDE_CIDR_BLOCK", "NO_ASSOCIATED_CIDR_BLOCK"
+    #   resp.connect_peer.last_modification_errors[0].code #=> String, one of "EDGE_LOCATION_NO_FREE_IPS", "EDGE_LOCATION_PEER_DUPLICATE", "SUBNET_NOT_FOUND", "IP_OUTSIDE_SUBNET_CIDR_RANGE", "INVALID_INSIDE_CIDR_BLOCK", "NO_ASSOCIATED_CIDR_BLOCK", "CREATION_FAILED", "DELETION_FAILED"
     #   resp.connect_peer.last_modification_errors[0].message #=> String
     #   resp.connect_peer.last_modification_errors[0].resource_arn #=> String
     #   resp.connect_peer.last_modification_errors[0].request_id #=> String
@@ -2341,7 +2453,7 @@ module Aws::NetworkManager
     #   resp.peering.tags[0].value #=> String
     #   resp.peering.created_at #=> Time
     #   resp.peering.last_modification_errors #=> Array
-    #   resp.peering.last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE"
+    #   resp.peering.last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE", "TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED", "CREATION_FAILED", "DELETION_FAILED"
     #   resp.peering.last_modification_errors[0].message #=> String
     #   resp.peering.last_modification_errors[0].resource_arn #=> String
     #   resp.peering.last_modification_errors[0].request_id #=> String
@@ -2717,6 +2829,8 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.connect_attachment.attachment.segment_name #=> String
     #   resp.connect_attachment.attachment.network_function_group_name #=> String
+    #   resp.connect_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.connect_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.connect_attachment.attachment.tags #=> Array
     #   resp.connect_attachment.attachment.tags[0].key #=> String
     #   resp.connect_attachment.attachment.tags[0].value #=> String
@@ -2733,7 +2847,7 @@ module Aws::NetworkManager
     #   resp.connect_attachment.attachment.created_at #=> Time
     #   resp.connect_attachment.attachment.updated_at #=> Time
     #   resp.connect_attachment.attachment.last_modification_errors #=> Array
-    #   resp.connect_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.connect_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.connect_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.connect_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.connect_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -2787,7 +2901,7 @@ module Aws::NetworkManager
     #   resp.connect_peer.tags[0].value #=> String
     #   resp.connect_peer.subnet_arn #=> String
     #   resp.connect_peer.last_modification_errors #=> Array
-    #   resp.connect_peer.last_modification_errors[0].code #=> String, one of "EDGE_LOCATION_NO_FREE_IPS", "EDGE_LOCATION_PEER_DUPLICATE", "SUBNET_NOT_FOUND", "IP_OUTSIDE_SUBNET_CIDR_RANGE", "INVALID_INSIDE_CIDR_BLOCK", "NO_ASSOCIATED_CIDR_BLOCK"
+    #   resp.connect_peer.last_modification_errors[0].code #=> String, one of "EDGE_LOCATION_NO_FREE_IPS", "EDGE_LOCATION_PEER_DUPLICATE", "SUBNET_NOT_FOUND", "IP_OUTSIDE_SUBNET_CIDR_RANGE", "INVALID_INSIDE_CIDR_BLOCK", "NO_ASSOCIATED_CIDR_BLOCK", "CREATION_FAILED", "DELETION_FAILED"
     #   resp.connect_peer.last_modification_errors[0].message #=> String
     #   resp.connect_peer.last_modification_errors[0].resource_arn #=> String
     #   resp.connect_peer.last_modification_errors[0].request_id #=> String
@@ -3347,6 +3461,8 @@ module Aws::NetworkManager
     #   resp.direct_connect_gateway_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.direct_connect_gateway_attachment.attachment.segment_name #=> String
     #   resp.direct_connect_gateway_attachment.attachment.network_function_group_name #=> String
+    #   resp.direct_connect_gateway_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.direct_connect_gateway_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.direct_connect_gateway_attachment.attachment.tags #=> Array
     #   resp.direct_connect_gateway_attachment.attachment.tags[0].key #=> String
     #   resp.direct_connect_gateway_attachment.attachment.tags[0].value #=> String
@@ -3363,7 +3479,7 @@ module Aws::NetworkManager
     #   resp.direct_connect_gateway_attachment.attachment.created_at #=> Time
     #   resp.direct_connect_gateway_attachment.attachment.updated_at #=> Time
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors #=> Array
-    #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -3857,13 +3973,23 @@ module Aws::NetworkManager
     #   Filter by route table destination. Possible Values:
     #   TRANSIT\_GATEWAY\_ATTACHMENT\_ID, RESOURCE\_ID, or RESOURCE\_TYPE.
     #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
     # @return [Types::GetNetworkRoutesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetNetworkRoutesResponse#route_table_arn #route_table_arn} => String
     #   * {Types::GetNetworkRoutesResponse#core_network_segment_edge #core_network_segment_edge} => Types::CoreNetworkSegmentEdgeIdentifier
+    #   * {Types::GetNetworkRoutesResponse#core_network_network_function_group #core_network_network_function_group} => Types::CoreNetworkNetworkFunctionGroupIdentifier
     #   * {Types::GetNetworkRoutesResponse#route_table_type #route_table_type} => String
     #   * {Types::GetNetworkRoutesResponse#route_table_timestamp #route_table_timestamp} => Time
     #   * {Types::GetNetworkRoutesResponse#network_routes #network_routes} => Array&lt;Types::NetworkRoute&gt;
+    #   * {Types::GetNetworkRoutesResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
     #
     # @example Request syntax with placeholder values
     #
@@ -3888,10 +4014,12 @@ module Aws::NetworkManager
     #     supernet_of_matches: ["ConstrainedString"],
     #     prefix_list_ids: ["ConstrainedString"],
     #     states: ["ACTIVE"], # accepts ACTIVE, BLACKHOLE
-    #     types: ["PROPAGATED"], # accepts PROPAGATED, STATIC
+    #     types: ["PROPAGATED"], # accepts PROPAGATED, STATIC, SYSTEM
     #     destination_filters: {
     #       "FilterName" => ["FilterValue"],
     #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
     #   })
     #
     # @example Response structure
@@ -3900,6 +4028,9 @@ module Aws::NetworkManager
     #   resp.core_network_segment_edge.core_network_id #=> String
     #   resp.core_network_segment_edge.segment_name #=> String
     #   resp.core_network_segment_edge.edge_location #=> String
+    #   resp.core_network_network_function_group.core_network_id #=> String
+    #   resp.core_network_network_function_group.network_function_group_name #=> String
+    #   resp.core_network_network_function_group.edge_location #=> String
     #   resp.route_table_type #=> String, one of "TRANSIT_GATEWAY_ROUTE_TABLE", "CORE_NETWORK_SEGMENT", "NETWORK_FUNCTION_GROUP"
     #   resp.route_table_timestamp #=> Time
     #   resp.network_routes #=> Array
@@ -3914,7 +4045,8 @@ module Aws::NetworkManager
     #   resp.network_routes[0].destinations[0].resource_id #=> String
     #   resp.network_routes[0].prefix_list_id #=> String
     #   resp.network_routes[0].state #=> String, one of "ACTIVE", "BLACKHOLE"
-    #   resp.network_routes[0].type #=> String, one of "PROPAGATED", "STATIC"
+    #   resp.network_routes[0].type #=> String, one of "PROPAGATED", "STATIC", "SYSTEM"
+    #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkRoutes AWS API Documentation
     #
@@ -4134,6 +4266,8 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.site_to_site_vpn_attachment.attachment.segment_name #=> String
     #   resp.site_to_site_vpn_attachment.attachment.network_function_group_name #=> String
+    #   resp.site_to_site_vpn_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.site_to_site_vpn_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.site_to_site_vpn_attachment.attachment.tags #=> Array
     #   resp.site_to_site_vpn_attachment.attachment.tags[0].key #=> String
     #   resp.site_to_site_vpn_attachment.attachment.tags[0].value #=> String
@@ -4150,7 +4284,7 @@ module Aws::NetworkManager
     #   resp.site_to_site_vpn_attachment.attachment.created_at #=> Time
     #   resp.site_to_site_vpn_attachment.attachment.updated_at #=> Time
     #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors #=> Array
-    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.site_to_site_vpn_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -4301,7 +4435,7 @@ module Aws::NetworkManager
     #   resp.transit_gateway_peering.peering.tags[0].value #=> String
     #   resp.transit_gateway_peering.peering.created_at #=> Time
     #   resp.transit_gateway_peering.peering.last_modification_errors #=> Array
-    #   resp.transit_gateway_peering.peering.last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE"
+    #   resp.transit_gateway_peering.peering.last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE", "TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED", "CREATION_FAILED", "DELETION_FAILED"
     #   resp.transit_gateway_peering.peering.last_modification_errors[0].message #=> String
     #   resp.transit_gateway_peering.peering.last_modification_errors[0].resource_arn #=> String
     #   resp.transit_gateway_peering.peering.last_modification_errors[0].request_id #=> String
@@ -4398,6 +4532,8 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.transit_gateway_route_table_attachment.attachment.segment_name #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.network_function_group_name #=> String
+    #   resp.transit_gateway_route_table_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.transit_gateway_route_table_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.transit_gateway_route_table_attachment.attachment.tags #=> Array
     #   resp.transit_gateway_route_table_attachment.attachment.tags[0].key #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.tags[0].value #=> String
@@ -4414,7 +4550,7 @@ module Aws::NetworkManager
     #   resp.transit_gateway_route_table_attachment.attachment.created_at #=> Time
     #   resp.transit_gateway_route_table_attachment.attachment.updated_at #=> Time
     #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors #=> Array
-    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.transit_gateway_route_table_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -4460,6 +4596,8 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.vpc_attachment.attachment.segment_name #=> String
     #   resp.vpc_attachment.attachment.network_function_group_name #=> String
+    #   resp.vpc_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.vpc_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.vpc_attachment.attachment.tags #=> Array
     #   resp.vpc_attachment.attachment.tags[0].key #=> String
     #   resp.vpc_attachment.attachment.tags[0].value #=> String
@@ -4476,7 +4614,7 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.created_at #=> Time
     #   resp.vpc_attachment.attachment.updated_at #=> Time
     #   resp.vpc_attachment.attachment.last_modification_errors #=> Array
-    #   resp.vpc_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.vpc_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.vpc_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.vpc_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -4493,6 +4631,88 @@ module Aws::NetworkManager
     # @param [Hash] params ({})
     def get_vpc_attachment(params = {}, options = {})
       req = build_request(:get_vpc_attachment, params)
+      req.send_request(options)
+    end
+
+    # Returns the NAT configurations of core network attachments. You must
+    # specify either a core network ID or an attachment ID. Only the core
+    # network owner can list NAT configurations.
+    #
+    # @option params [String] :core_network_id
+    #   The ID of a core network. Returns the NAT configurations of
+    #   attachments in the core network that support NAT.
+    #
+    # @option params [String] :attachment_id
+    #   The ID of an attachment. Returns the NAT configuration of the
+    #   specified attachment. If you specify both an attachment ID and a core
+    #   network ID, the attachment ID is used.
+    #
+    # @option params [Hash<String,Array>] :filters
+    #   The filters to apply to the results. Values for the same filter are
+    #   joined with OR, and different filters are joined with AND. You can
+    #   specify up to 10 filter values in total. The following filters are
+    #   supported:
+    #
+    #   * `nat-gateway-support`: The state of NAT gateway support on the
+    #     attachment, for example `ENABLED`.
+    #
+    #   * `nat-system-route-support`: Whether system routes are installed for
+    #     the attachment, `true` or `false`.
+    #
+    #   * `rule-number`: The rule number of a NAT rule.
+    #
+    #   * `match-source-cidr`: The source CIDR block of a NAT rule. The value
+    #     must exactly match the CIDR block of the rule.
+    #
+    #   * `nat-cidr`: The NAT CIDR block of a NAT rule. The value must exactly
+    #     match the CIDR block of the rule.
+    #
+    #   * `nat-rule-state`: The state of a NAT rule, for example `ACTIVATED`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return.
+    #
+    # @option params [String] :next_token
+    #   The token for the next page of results.
+    #
+    # @return [Types::ListAttachmentNatConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListAttachmentNatConfigurationsResponse#attachment_nat_configurations #attachment_nat_configurations} => Array&lt;Types::AttachmentNatConfiguration&gt;
+    #   * {Types::ListAttachmentNatConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_attachment_nat_configurations({
+    #     core_network_id: "CoreNetworkId",
+    #     attachment_id: "AttachmentId",
+    #     filters: {
+    #       "FilterName" => ["FilterValue"],
+    #     },
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attachment_nat_configurations #=> Array
+    #   resp.attachment_nat_configurations[0].attachment_id #=> String
+    #   resp.attachment_nat_configurations[0].nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.attachment_nat_configurations[0].nat_system_route_support #=> Boolean
+    #   resp.attachment_nat_configurations[0].nat_gateway_rules #=> Array
+    #   resp.attachment_nat_configurations[0].nat_gateway_rules[0].rule_number #=> Integer
+    #   resp.attachment_nat_configurations[0].nat_gateway_rules[0].match_source_cidr #=> String
+    #   resp.attachment_nat_configurations[0].nat_gateway_rules[0].nat_cidr #=> String
+    #   resp.attachment_nat_configurations[0].nat_gateway_rules[0].state #=> String, one of "CREATING", "MODIFYING", "DELETING", "ACTIVATED", "ACTIVATING", "DEACTIVATED", "DEACTIVATING", "FAILED", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListAttachmentNatConfigurations AWS API Documentation
+    #
+    # @overload list_attachment_nat_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_attachment_nat_configurations(params = {}, options = {})
+      req = build_request(:list_attachment_nat_configurations, params)
       req.send_request(options)
     end
 
@@ -4603,6 +4823,8 @@ module Aws::NetworkManager
     #   resp.attachments[0].attachment_policy_rule_number #=> Integer
     #   resp.attachments[0].segment_name #=> String
     #   resp.attachments[0].network_function_group_name #=> String
+    #   resp.attachments[0].nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.attachments[0].nat_system_route_support #=> Boolean
     #   resp.attachments[0].tags #=> Array
     #   resp.attachments[0].tags[0].key #=> String
     #   resp.attachments[0].tags[0].value #=> String
@@ -4619,7 +4841,7 @@ module Aws::NetworkManager
     #   resp.attachments[0].created_at #=> Time
     #   resp.attachments[0].updated_at #=> Time
     #   resp.attachments[0].last_modification_errors #=> Array
-    #   resp.attachments[0].last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.attachments[0].last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.attachments[0].last_modification_errors[0].message #=> String
     #   resp.attachments[0].last_modification_errors[0].resource_arn #=> String
     #   resp.attachments[0].last_modification_errors[0].request_id #=> String
@@ -4794,7 +5016,49 @@ module Aws::NetworkManager
     #   The edge location to filter routing information by.
     #
     # @option params [Hash<String,Array>] :next_hop_filters
-    #   Filters to apply based on next hop information.
+    #   Filters to apply based on next hop information. Each filter value must
+    #   exactly match the corresponding next hop value. Values for the same
+    #   filter are joined with OR, and different filters are joined with AND.
+    #   The following filters are supported:
+    #
+    #   * `core-network-attachment-id`: The ID of the core network attachment
+    #     for the next hop, for example `attachment-0123456789abcdef0`.
+    #
+    #   * `segment-name`: The name of the segment for the next hop.
+    #
+    #   * `edge-location`: The edge location for the next hop, for example
+    #     `us-east-1`.
+    #
+    #   * `resource-id`: The ID of the resource for the next hop.
+    #
+    #   * `resource-type`: The type of resource for the next hop. The possible
+    #     values are `vpc`, `vpn`, `connect-peer`, `direct-connect-gateway`,
+    #     `transit-gateway-route-table`, `attachment`, and `blackhole`.
+    #
+    #   * `ip-address`: The IP address of the next hop. For a Site-to-Site VPN
+    #     next hop, this is the outside IP address of the AWS side of the VPN
+    #     tunnel. For a Connect peer next hop, this is the core network BGP
+    #     address of the Connect peer. The value must be a single IPv4 or IPv6
+    #     address.
+    #
+    #   You can specify up to 10 filter values in total across
+    #   `NextHopFilters` and the other match parameters in the request. Each
+    #   filter value can be up to 256 characters.
+    #
+    # @option params [Array<String>] :exact_prefix_matches
+    #   Exact prefix values to match when filtering routing information.
+    #
+    # @option params [Array<String>] :longest_prefix_matches
+    #   Filters routing information based on the longest prefix that matches
+    #   each provided IP address.
+    #
+    # @option params [Array<String>] :subnet_of_matches
+    #   Prefix values to filter routing information whose prefix is a subnet
+    #   of the prefixes provided.
+    #
+    # @option params [Array<String>] :supernet_of_matches
+    #   Prefix values to filter routing information whose prefix is a supernet
+    #   of the prefixes provided.
     #
     # @option params [Array<String>] :local_preference_matches
     #   Local preference values to match when filtering routing information.
@@ -4832,6 +5096,10 @@ module Aws::NetworkManager
     #     next_hop_filters: {
     #       "FilterName" => ["FilterValue"],
     #     },
+    #     exact_prefix_matches: ["ConstrainedString"],
+    #     longest_prefix_matches: ["ConstrainedString"],
+    #     subnet_of_matches: ["ConstrainedString"],
+    #     supernet_of_matches: ["ConstrainedString"],
     #     local_preference_matches: ["ConstrainedString"],
     #     exact_as_path_matches: ["ConstrainedString"],
     #     med_matches: ["ConstrainedString"],
@@ -5006,7 +5274,7 @@ module Aws::NetworkManager
     #   resp.peerings[0].tags[0].value #=> String
     #   resp.peerings[0].created_at #=> Time
     #   resp.peerings[0].last_modification_errors #=> Array
-    #   resp.peerings[0].last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE"
+    #   resp.peerings[0].last_modification_errors[0].code #=> String, one of "TRANSIT_GATEWAY_NOT_FOUND", "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", "MISSING_PERMISSIONS", "INTERNAL_ERROR", "EDGE_LOCATION_PEER_DUPLICATE", "INVALID_TRANSIT_GATEWAY_STATE", "TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED", "CREATION_FAILED", "DELETION_FAILED"
     #   resp.peerings[0].last_modification_errors[0].message #=> String
     #   resp.peerings[0].last_modification_errors[0].resource_arn #=> String
     #   resp.peerings[0].last_modification_errors[0].request_id #=> String
@@ -5270,6 +5538,8 @@ module Aws::NetworkManager
     #   resp.attachment.attachment_policy_rule_number #=> Integer
     #   resp.attachment.segment_name #=> String
     #   resp.attachment.network_function_group_name #=> String
+    #   resp.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.attachment.nat_system_route_support #=> Boolean
     #   resp.attachment.tags #=> Array
     #   resp.attachment.tags[0].key #=> String
     #   resp.attachment.tags[0].value #=> String
@@ -5286,7 +5556,7 @@ module Aws::NetworkManager
     #   resp.attachment.created_at #=> Time
     #   resp.attachment.updated_at #=> Time
     #   resp.attachment.last_modification_errors #=> Array
-    #   resp.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.attachment.last_modification_errors[0].message #=> String
     #   resp.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.attachment.last_modification_errors[0].request_id #=> String
@@ -5567,6 +5837,96 @@ module Aws::NetworkManager
       req.send_request(options)
     end
 
+    # Updates the NAT configuration of a core network attachment. You can
+    # enable or disable NAT gateway support, specify whether the core
+    # network installs system routes for the NAT CIDR blocks, and replace
+    # the NAT rules of the attachment. Specify at least one of
+    # `NatGatewaySupport`, `NatSystemRouteSupport`, or `NatGatewayRules`.
+    #
+    # Only the core network owner can update the NAT configuration of an
+    # attachment. The attachment must be in the `AVAILABLE`,
+    # `PENDING_ATTACHMENT_ACCEPTANCE`, or `PENDING_TAG_ACCEPTANCE` state.
+    # Changes are applied asynchronously, and the attachment is in the
+    # `UPDATING` state while they are applied. If the attachment is pending
+    # acceptance, the NAT configuration is stored and is applied after the
+    # attachment is accepted.
+    #
+    # @option params [required, String] :attachment_id
+    #   The ID of the attachment to update the NAT configuration for.
+    #
+    # @option params [String] :nat_gateway_support
+    #   Specifies whether to enable or disable NAT gateway support on the
+    #   attachment. When you disable NAT gateway support, the attachment keeps
+    #   its NAT rules but doesn't apply them. To enable NAT gateway support,
+    #   the attachment must have at least one NAT rule, either specified in
+    #   this request or already configured on the attachment. If you omit this
+    #   parameter, NAT gateway support is unchanged.
+    #
+    # @option params [Boolean] :nat_system_route_support
+    #   Specifies whether the core network installs system routes for the NAT
+    #   CIDR blocks of the attachment's NAT rules. System routes have a route
+    #   type of `SYSTEM`. NAT is applied to traffic whether or not this option
+    #   is enabled. If you omit this parameter, the current value is
+    #   unchanged.
+    #
+    # @option params [Array<Types::NatRuleRequest>] :nat_gateway_rules
+    #   The complete set of NAT rules for the attachment, up to 50 rules. The
+    #   rules that you specify replace the existing rules of the attachment,
+    #   matched by rule number. Existing rules that aren't included in the
+    #   request are deleted. To delete all NAT rules, specify an empty list.
+    #   You can delete all NAT rules only when NAT gateway support is
+    #   disabled, or when you disable it in the same request. If you omit this
+    #   parameter, the existing rules are unchanged.
+    #
+    # @option params [String] :client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::UpdateAttachmentNatConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateAttachmentNatConfigurationResponse#attachment_id #attachment_id} => String
+    #   * {Types::UpdateAttachmentNatConfigurationResponse#nat_gateway_support #nat_gateway_support} => String
+    #   * {Types::UpdateAttachmentNatConfigurationResponse#nat_system_route_support #nat_system_route_support} => Boolean
+    #   * {Types::UpdateAttachmentNatConfigurationResponse#nat_gateway_rules #nat_gateway_rules} => Array&lt;Types::NatRule&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_attachment_nat_configuration({
+    #     attachment_id: "AttachmentId", # required
+    #     nat_gateway_support: "ENABLE", # accepts ENABLE, DISABLE
+    #     nat_system_route_support: false,
+    #     nat_gateway_rules: [
+    #       {
+    #         rule_number: 1, # required
+    #         match_source_cidr: "IPAddress", # required
+    #         nat_cidr: "IPAddress", # required
+    #       },
+    #     ],
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.attachment_id #=> String
+    #   resp.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.nat_system_route_support #=> Boolean
+    #   resp.nat_gateway_rules #=> Array
+    #   resp.nat_gateway_rules[0].rule_number #=> Integer
+    #   resp.nat_gateway_rules[0].match_source_cidr #=> String
+    #   resp.nat_gateway_rules[0].nat_cidr #=> String
+    #   resp.nat_gateway_rules[0].state #=> String, one of "CREATING", "MODIFYING", "DELETING", "ACTIVATED", "ACTIVATING", "DEACTIVATED", "DEACTIVATING", "FAILED", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateAttachmentNatConfiguration AWS API Documentation
+    #
+    # @overload update_attachment_nat_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_attachment_nat_configuration(params = {}, options = {})
+      req = build_request(:update_attachment_nat_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the information for an existing connection. To remove
     # information for any of the parameters, specify an empty string.
     #
@@ -5823,6 +6183,8 @@ module Aws::NetworkManager
     #   resp.direct_connect_gateway_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.direct_connect_gateway_attachment.attachment.segment_name #=> String
     #   resp.direct_connect_gateway_attachment.attachment.network_function_group_name #=> String
+    #   resp.direct_connect_gateway_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.direct_connect_gateway_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.direct_connect_gateway_attachment.attachment.tags #=> Array
     #   resp.direct_connect_gateway_attachment.attachment.tags[0].key #=> String
     #   resp.direct_connect_gateway_attachment.attachment.tags[0].value #=> String
@@ -5839,7 +6201,7 @@ module Aws::NetworkManager
     #   resp.direct_connect_gateway_attachment.attachment.created_at #=> Time
     #   resp.direct_connect_gateway_attachment.attachment.updated_at #=> Time
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors #=> Array
-    #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.direct_connect_gateway_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -6119,6 +6481,8 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.attachment_policy_rule_number #=> Integer
     #   resp.vpc_attachment.attachment.segment_name #=> String
     #   resp.vpc_attachment.attachment.network_function_group_name #=> String
+    #   resp.vpc_attachment.attachment.nat_gateway_support #=> String, one of "ENABLED", "ENABLING", "DISABLED", "DISABLING", "PENDING_ATTACHMENT_ACCEPTANCE"
+    #   resp.vpc_attachment.attachment.nat_system_route_support #=> Boolean
     #   resp.vpc_attachment.attachment.tags #=> Array
     #   resp.vpc_attachment.attachment.tags[0].key #=> String
     #   resp.vpc_attachment.attachment.tags[0].value #=> String
@@ -6135,7 +6499,7 @@ module Aws::NetworkManager
     #   resp.vpc_attachment.attachment.created_at #=> Time
     #   resp.vpc_attachment.attachment.updated_at #=> Time
     #   resp.vpc_attachment.attachment.last_modification_errors #=> Array
-    #   resp.vpc_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPC_UNSUPPORTED_FEATURES"
+    #   resp.vpc_attachment.attachment.last_modification_errors[0].code #=> String, one of "VPC_NOT_FOUND", "SUBNET_NOT_FOUND", "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", "SUBNET_NO_FREE_ADDRESSES", "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", "SUBNET_NO_IPV6_CIDRS", "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", "VPN_CONNECTION_NOT_FOUND", "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", "DIRECT_CONNECT_GATEWAY_NOT_FOUND", "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", "VPN_EXISTING_ASSOCIATIONS", "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", "VPC_UNSUPPORTED_FEATURES", "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", "CREATION_FAILED", "UPDATE_FAILED", "DELETION_FAILED"
     #   resp.vpc_attachment.attachment.last_modification_errors[0].message #=> String
     #   resp.vpc_attachment.attachment.last_modification_errors[0].resource_arn #=> String
     #   resp.vpc_attachment.attachment.last_modification_errors[0].request_id #=> String
@@ -6173,7 +6537,7 @@ module Aws::NetworkManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-networkmanager'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

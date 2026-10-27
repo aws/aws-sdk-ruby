@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -146,6 +147,21 @@ module Aws
                                   ) -> _BatchGetVpcEndpointResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetVpcEndpointResponseSuccess
 
+      interface _CancelIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelIngestionJobResponse]
+        def ingestion_job_id: () -> ::String
+        def collection_id: () -> ::String
+        def ingestion_job_name: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "COMPLETED" | "CANCELLING" | "CANCELLED" | "FAILED" | "CREATE_FAILED" | "CANCEL_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#cancel_ingestion_job-instance_method
+      def cancel_ingestion_job: (
+                                  collection_id: ::String,
+                                  ingestion_job_id: ::String,
+                                  ?client_token: ::String
+                                ) -> _CancelIngestionJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelIngestionJobResponseSuccess
+
       interface _CreateAccessPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateAccessPolicyResponse]
         def access_policy_detail: () -> Types::AccessPolicyDetail
@@ -226,6 +242,66 @@ module Aws
                           }
                         ) -> _CreateIndexResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIndexResponseSuccess
+
+      interface _CreateIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIngestionJobResponse]
+        def ingestion_job_detail: () -> Types::IngestionJobDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#create_ingestion_job-instance_method
+      def create_ingestion_job: (
+                                  collection_id: ::String,
+                                  ingestion_job_name: ::String,
+                                  index_name: ::String,
+                                  ?failure_index_name: ::String,
+                                  source: {
+                                    s3: {
+                                      bucket: ::String?,
+                                      bucket_owner_account_id: ::String?,
+                                      key_prefix: ::String?
+                                    }
+                                  },
+                                  ?tags: Array[
+                                    {
+                                      key: ::String,
+                                      value: ::String
+                                    }
+                                  ],
+                                  ?client_token: ::String
+                                ) -> _CreateIngestionJobResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngestionJobResponseSuccess
+
+      interface _CreateIngestionStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIngestionStreamResponse]
+        def ingestion_stream_detail: () -> Types::IngestionStreamDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#create_ingestion_stream-instance_method
+      def create_ingestion_stream: (
+                                     collection_id: ::String,
+                                     ingestion_stream_name: ::String,
+                                     index_name: ::String,
+                                     ?failure_index_name: ::String,
+                                     source: {
+                                       s3: {
+                                         sqs_arn: ::String,
+                                         buckets: Array[
+                                           {
+                                             bucket: ::String,
+                                             bucket_owner_account_id: ::String?,
+                                             initial_scan: ("ENABLED" | "DISABLED")?
+                                           }
+                                         ]?
+                                       }
+                                     },
+                                     role_arn: ::String,
+                                     ?tags: Array[
+                                       {
+                                         key: ::String,
+                                         value: ::String
+                                       }
+                                     ],
+                                     ?client_token: ::String
+                                   ) -> _CreateIngestionStreamResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIngestionStreamResponseSuccess
 
       interface _CreateLifecyclePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateLifecyclePolicyResponse]
@@ -340,6 +416,21 @@ module Aws
                         ) -> _DeleteIndexResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIndexResponseSuccess
 
+      interface _DeleteIngestionStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteIngestionStreamResponse]
+        def ingestion_stream_id: () -> ::String
+        def collection_id: () -> ::String
+        def ingestion_stream_name: () -> ::String
+        def status: () -> ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED" | "DELETE_FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#delete_ingestion_stream-instance_method
+      def delete_ingestion_stream: (
+                                     collection_id: ::String,
+                                     ingestion_stream_id: ::String,
+                                     ?client_token: ::String
+                                   ) -> _DeleteIngestionStreamResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteIngestionStreamResponseSuccess
+
       interface _DeleteLifecyclePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteLifecyclePolicyResponse]
       end
@@ -413,6 +504,28 @@ module Aws
                        index_name: ::String
                      ) -> _GetIndexResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIndexResponseSuccess
+
+      interface _GetIngestionJobResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIngestionJobResponse]
+        def ingestion_job_detail: () -> Types::IngestionJobDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#get_ingestion_job-instance_method
+      def get_ingestion_job: (
+                               collection_id: ::String,
+                               ingestion_job_id: ::String
+                             ) -> _GetIngestionJobResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngestionJobResponseSuccess
+
+      interface _GetIngestionStreamResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIngestionStreamResponse]
+        def ingestion_stream_detail: () -> Types::IngestionStreamDetail
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#get_ingestion_stream-instance_method
+      def get_ingestion_stream: (
+                                  collection_id: ::String,
+                                  ingestion_stream_id: ::String
+                                ) -> _GetIngestionStreamResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIngestionStreamResponseSuccess
 
       interface _GetPoliciesStatsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPoliciesStatsResponse]
@@ -490,6 +603,32 @@ module Aws
                               ?max_results: ::Integer
                             ) -> _ListCollectionsResponseSuccess
                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollectionsResponseSuccess
+
+      interface _ListIngestionJobsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIngestionJobsResponse]
+        def ingestion_job_summaries: () -> ::Array[Types::IngestionJobSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#list_ingestion_jobs-instance_method
+      def list_ingestion_jobs: (
+                                 collection_id: ::String,
+                                 ?next_token: ::String,
+                                 ?max_results: ::Integer
+                               ) -> _ListIngestionJobsResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngestionJobsResponseSuccess
+
+      interface _ListIngestionStreamsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIngestionStreamsResponse]
+        def ingestion_stream_summaries: () -> ::Array[Types::IngestionStreamSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchServerless/Client.html#list_ingestion_streams-instance_method
+      def list_ingestion_streams: (
+                                    collection_id: ::String,
+                                    ?next_token: ::String,
+                                    ?max_results: ::Integer
+                                  ) -> _ListIngestionStreamsResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIngestionStreamsResponseSuccess
 
       interface _ListLifecyclePoliciesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLifecyclePoliciesResponse]
@@ -622,6 +761,10 @@ module Aws
                                  serverless_vector_acceleration: ("ENABLED" | "DISABLED" | "ALLOWED")
                                },
                                ?deletion_protection: ("ENABLED" | "DISABLED"),
+                               ?encryption_config: {
+                                 a_ws_owned_key: bool?,
+                                 kms_key_arn: ::String?
+                               },
                                ?client_token: ::String
                              ) -> _UpdateCollectionResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCollectionResponseSuccess

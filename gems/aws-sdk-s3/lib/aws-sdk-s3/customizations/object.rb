@@ -380,7 +380,9 @@ module Aws
       #   and {Client#upload_part} can be provided.
       #
       # @option options [Integer] :thread_count (10) The number of parallel multipart uploads.
-      #   An additional thread is used internally for task coordination.
+      #   An additional thread is used internally for task coordination. This also bounds
+      #   how many parts are buffered ahead of the upload, limiting memory usage to roughly
+      #   `2 * :thread_count * :part_size`.
       #
       # @option options [Boolean] :tempfile (false) Normally read data is stored
       #   in memory when building the parts in order to complete the underlying
@@ -405,18 +407,22 @@ module Aws
       # @see Client#upload_part
       def upload_stream(options = {}, &block)
         upload_opts = options.merge(bucket: bucket_name, key: key)
-        executor = DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
-        uploader = MultipartStreamUploader.new(
-          client: client,
-          executor: executor,
-          tempfile: upload_opts.delete(:tempfile),
-          part_size: upload_opts.delete(:part_size)
-        )
-        Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          uploader.upload(upload_opts, &block)
+        thread_count = upload_opts.delete(:thread_count) || DefaultExecutor::DEFAULT_MAX_THREADS
+        executor = DefaultExecutor.new(max_threads: thread_count, max_queue: thread_count)
+        begin
+          uploader = MultipartStreamUploader.new(
+            client: client,
+            executor: executor,
+            tempfile: upload_opts.delete(:tempfile),
+            part_size: upload_opts.delete(:part_size)
+          )
+          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+            uploader.upload(upload_opts, &block)
+          end
+          true
+        ensure
+          executor.shutdown
         end
-        executor.shutdown
-        true
       end
       deprecated(:upload_stream, use: 'Aws::S3::TransferManager#upload_stream', version: 'next major version')
 
@@ -480,17 +486,20 @@ module Aws
       def upload_file(source, options = {})
         upload_opts = options.merge(bucket: bucket_name, key: key)
         executor = DefaultExecutor.new(max_threads: upload_opts.delete(:thread_count))
-        uploader = FileUploader.new(
-          client: client,
-          executor: executor,
-          multipart_threshold: upload_opts.delete(:multipart_threshold)
-        )
-        response = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          uploader.upload(source, upload_opts)
+        begin
+          uploader = FileUploader.new(
+            client: client,
+            executor: executor,
+            multipart_threshold: upload_opts.delete(:multipart_threshold)
+          )
+          response = Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+            uploader.upload(source, upload_opts)
+          end
+          yield response if block_given?
+          true
+        ensure
+          executor.shutdown
         end
-        yield response if block_given?
-        executor.shutdown
-        true
       end
       deprecated(:upload_file, use: 'Aws::S3::TransferManager#upload_file', version: 'next major version')
 
@@ -561,13 +570,16 @@ module Aws
       # @see Client#head_object
       def download_file(destination, options = {})
         download_opts = options.merge(bucket: bucket_name, key: key)
-        executor = DefaultExecutor.new(max_threads: download_opts.delete([:thread_count]))
-        downloader = FileDownloader.new(client: client, executor: executor)
-        Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
-          downloader.download(destination, download_opts)
+        executor = DefaultExecutor.new(max_threads: download_opts.delete(:thread_count))
+        begin
+          downloader = FileDownloader.new(client: client, executor: executor)
+          Aws::Plugins::UserAgent.metric('RESOURCE_MODEL') do
+            downloader.download(destination, download_opts)
+          end
+          true
+        ensure
+          executor.shutdown
         end
-        executor.shutdown
-        true
       end
       deprecated(:download_file, use: 'Aws::S3::TransferManager#download_file', version: 'next major version')
 

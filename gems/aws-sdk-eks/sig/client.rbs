@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -236,7 +237,12 @@ module Aws
                                    ]?,
                                    network_access: {
                                      vpce_ids: Array[::String]?
-                                   }?
+                                   }?,
+                                   endpoint_prefix: ::String?
+                                 }?,
+                                 ack: {
+                                   enable_cross_namespace: bool?,
+                                   disabled_services: Array[::String]?
                                  }?
                                },
                                ?tags: Hash[::String, ::String],
@@ -266,13 +272,7 @@ module Aws
                             ?version: ::String,
                             role_arn: ::String,
                             resources_vpc_config: Params::vpc_config_request,
-                            ?kubernetes_network_config: {
-                              service_ipv_4_cidr: ::String?,
-                              ip_family: ("ipv4" | "ipv6")?,
-                              elastic_load_balancing: {
-                                enabled: bool?
-                              }?
-                            },
+                            ?kubernetes_network_config: Params::kubernetes_network_config_request,
                             ?logging: {
                               cluster_logging: Array[
                                 {
@@ -1114,6 +1114,10 @@ module Aws
                                    network_access: {
                                      vpce_ids: Array[::String]?
                                    }?
+                                 }?,
+                                 ack: {
+                                   enable_cross_namespace: bool?,
+                                   disabled_services: Array[::String]?
                                  }?
                                },
                                ?client_request_token: ::String,
@@ -1152,13 +1156,7 @@ module Aws
                                      node_pools: Array[::String]?,
                                      node_role_arn: ::String?
                                    },
-                                   ?kubernetes_network_config: {
-                                     service_ipv_4_cidr: ::String?,
-                                     ip_family: ("ipv4" | "ipv6")?,
-                                     elastic_load_balancing: {
-                                       enabled: bool?
-                                     }?
-                                   },
+                                   ?kubernetes_network_config: Params::kubernetes_network_config_request,
                                    ?storage_config: {
                                      block_storage: {
                                        enabled: bool?

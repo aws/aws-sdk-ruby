@@ -33,6 +33,19 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class AssociateGatewayWithClusterRequest
+      attr_accessor gateway: ::String
+      attr_accessor cluster: ::String
+      SENSITIVE: []
+    end
+
+    class AssociateGatewayWithClusterResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DISASSOCIATING" | "INACTIVE")
+      SENSITIVE: []
+    end
+
     class Attachment
       attr_accessor id: ::String
       attr_accessor type: ::String
@@ -436,6 +449,24 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class CreateGatewayRequest
+      attr_accessor name: ::String
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor client_token: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor configuration: Types::GatewayConfiguration
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor propagate_tags: ("NONE" | "GATEWAY")
+      SENSITIVE: []
+    end
+
+    class CreateGatewayResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
     class CreateManagedInstancesProviderConfiguration
       attr_accessor infrastructure_role_arn: ::String
       attr_accessor instance_launch_template: Types::InstanceLaunchTemplate
@@ -472,6 +503,7 @@ module Aws::ECS
       attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration
       attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
       attr_accessor vpc_lattice_configurations: ::Array[Types::VpcLatticeConfiguration]
+      attr_accessor gateway_connectors: ::Array[Types::GatewayConnector]
       attr_accessor monitoring: Types::MonitoringConfiguration
       SENSITIVE: []
     end
@@ -810,6 +842,18 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class DeleteGatewayRequest
+      attr_accessor gateway: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteGatewayResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
     class DeleteServiceRequest
       attr_accessor cluster: ::String
       attr_accessor service: ::String
@@ -1059,6 +1103,64 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class DescribeGatewayAlbConfiguration
+      attr_accessor network_configuration: Types::GatewayElbNetworkConfiguration
+      attr_accessor scheme: ("internet-facing" | "internal")
+      attr_accessor access_logs: Types::GatewayElbAccessLogConfiguration
+      attr_accessor web_acl_arn: ::String
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor max_alb_count: ::Integer
+      attr_accessor current_alb_count: ::Integer
+      attr_accessor http_desync: ("monitor" | "defensive" | "strictest")
+      attr_accessor test_traffic_rules: Types::GatewayAlbTestTrafficRules
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayConfiguration
+      attr_accessor host_shared_alb: Types::DescribeGatewayAlbConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HostSharedAlb < DescribeGatewayConfiguration
+      end
+      class Unknown < DescribeGatewayConfiguration
+      end
+    end
+
+    class DescribeGatewayRequest
+      attr_accessor gateway: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayResourcesRequest
+      attr_accessor gateway: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayResourcesResponse
+      attr_accessor gateway_resources: Types::GatewayResources
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayResponse
+      attr_accessor gateway: Types::Gateway
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayRouteRequest
+      attr_accessor gateway_route_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeGatewayRouteResponse
+      attr_accessor gateway_route: Types::GatewayRoute
+      SENSITIVE: []
+    end
+
     class DescribeServiceDeploymentsRequest
       attr_accessor service_deployment_arns: ::Array[::String]
       SENSITIVE: []
@@ -1140,6 +1242,19 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class DisassociateGatewayFromClusterRequest
+      attr_accessor gateway: ::String
+      attr_accessor cluster: ::String
+      SENSITIVE: []
+    end
+
+    class DisassociateGatewayFromClusterResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DISASSOCIATING" | "INACTIVE")
+      SENSITIVE: []
+    end
+
     class DiscoverPollEndpointRequest
       attr_accessor container_instance: ::String
       attr_accessor cluster: ::String
@@ -1189,6 +1304,7 @@ module Aws::ECS
       attr_accessor metric_alarms: ::Array[Types::ManagedMetricAlarm]
       attr_accessor service_security_groups: ::Array[Types::ManagedSecurityGroup]
       attr_accessor log_groups: ::Array[Types::ManagedLogGroup]
+      attr_accessor gateway_connections: ::Array[Types::GatewayConnection]
       SENSITIVE: []
     end
 
@@ -1204,6 +1320,14 @@ module Aws::ECS
       attr_accessor transit_encryption: ("ENABLED" | "DISABLED")
       attr_accessor transit_encryption_port: ::Integer
       attr_accessor authorization_config: Types::EFSAuthorizationConfig
+      SENSITIVE: []
+    end
+
+    class ElbGatewayResources
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor listener_arn: ::String
+      attr_accessor security_group: ::String
+      attr_accessor gateway_route_arns: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1338,6 +1462,236 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class Gateway
+      attr_accessor gateway_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor status_reason: ::String
+      attr_accessor failures: ::Array[Types::GatewayResourceFailure]
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor configuration: Types::DescribeGatewayConfiguration
+      attr_accessor access_type: ("PUBLIC" | "PRIVATE")
+      attr_accessor propagate_tags: ("NONE" | "GATEWAY")
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GatewayAlbTestTrafficRules
+      attr_accessor header: Types::GatewayTestTrafficHeader
+      SENSITIVE: []
+    end
+
+    class GatewayClusterAssociationSummary
+      attr_accessor gateway_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor status: ("ACTIVE" | "DISASSOCIATING" | "INACTIVE")
+      SENSITIVE: []
+    end
+
+    class GatewayConfiguration
+      attr_accessor host_shared_alb: Types::HostSharedAlbConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HostSharedAlb < GatewayConfiguration
+      end
+      class Unknown < GatewayConfiguration
+      end
+    end
+
+    class GatewayConnection
+      attr_accessor gateway_arn: ::String
+      attr_accessor gateway_route_arn: ::String
+      attr_accessor port_name: ::String
+      attr_accessor service_url: ::String
+      attr_accessor access_type: ("PUBLIC" | "PRIVATE")
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor resources: Types::GatewayConnectionResources
+      SENSITIVE: []
+    end
+
+    class GatewayConnectionAlbResources
+      attr_accessor acm_certificate_arn: ::String
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor load_balancer_security_group_arns: ::Array[::String]
+      attr_accessor listener_arn: ::String
+      attr_accessor listener_rule_arn: ::String
+      attr_accessor test_listener_rule_arn: ::String
+      attr_accessor target_group_arn: ::String
+      attr_accessor alternate_target_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayConnectionResources
+      attr_accessor host_shared_alb: ::Array[Types::GatewayConnectionAlbResources]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HostSharedAlb < GatewayConnectionResources
+      end
+      class Unknown < GatewayConnectionResources
+      end
+    end
+
+    class GatewayConnector
+      attr_accessor port_name: ::String
+      attr_accessor health_check: Types::GatewayConnectorHealthCheck
+      attr_accessor filters: Types::GatewayConnectorFilters
+      SENSITIVE: []
+    end
+
+    class GatewayConnectorFilters
+      attr_accessor access_types: ::Array[("PUBLIC" | "PRIVATE")]
+      SENSITIVE: []
+    end
+
+    class GatewayConnectorHealthCheck
+      attr_accessor health_check_protocol: ("HTTP" | "HTTPS")
+      attr_accessor health_check_port: ::Integer
+      attr_accessor health_check_path: ::String
+      attr_accessor health_check_timeout_seconds: ::Integer
+      attr_accessor health_check_interval_seconds: ::Integer
+      attr_accessor healthy_threshold_count: ::Integer
+      attr_accessor unhealthy_threshold_count: ::Integer
+      attr_accessor matcher: Types::GatewayConnectorHealthCheckMatcher
+      SENSITIVE: []
+    end
+
+    class GatewayConnectorHealthCheckMatcher
+      attr_accessor http_code: ::String
+      attr_accessor grpc_code: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayElbAccessLogConfiguration
+      attr_accessor destination: Types::GatewayElbAccessLogDestination
+      SENSITIVE: []
+    end
+
+    class GatewayElbAccessLogDestination
+      attr_accessor s3: Types::GatewayElbAccessLogS3Destination
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class S3 < GatewayElbAccessLogDestination
+      end
+      class Unknown < GatewayElbAccessLogDestination
+      end
+    end
+
+    class GatewayElbAccessLogS3Destination
+      attr_accessor bucket: ::String
+      attr_accessor prefix: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayElbNetworkConfiguration
+      attr_accessor inbound_security_group: ::String
+      attr_accessor subnets: ::Array[::String]
+      attr_accessor ip_address_type: ("ipv4" | "dualstack" | "dualstack-without-public-ipv4")
+      SENSITIVE: []
+    end
+
+    class GatewayInfrastructureResources
+      attr_accessor host_shared_alb: ::Array[Types::ElbGatewayResources]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HostSharedAlb < GatewayInfrastructureResources
+      end
+      class Unknown < GatewayInfrastructureResources
+      end
+    end
+
+    class GatewayNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayOperationError
+      attr_accessor operation: ::String
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayResourceFailure
+      attr_accessor arn: ::String
+      attr_accessor errors: ::Array[Types::GatewayOperationError]
+      SENSITIVE: []
+    end
+
+    class GatewayResources
+      attr_accessor gateway_arn: ::String
+      attr_accessor resources: Types::GatewayInfrastructureResources
+      SENSITIVE: []
+    end
+
+    class GatewayRoute
+      attr_accessor gateway_route_arn: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor service_container_port_name: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      attr_accessor service_url: ::String
+      attr_accessor resources: Types::GatewayRouteResources
+      SENSITIVE: []
+    end
+
+    class GatewayRouteAlbResources
+      attr_accessor acm_certificate_arn: ::String
+      attr_accessor load_balancer_arn: ::String
+      attr_accessor listener_arn: ::String
+      attr_accessor listener_rule_arn: ::String
+      attr_accessor test_listener_rule_arns: ::Array[::String]
+      attr_accessor load_balancer_security_groups: ::Array[Types::GatewayRouteLoadBalancerSecurityGroup]
+      attr_accessor service_security_group_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GatewayRouteLoadBalancerSecurityGroup
+      attr_accessor arn: ::String
+      attr_accessor rule_arns: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class GatewayRouteResources
+      attr_accessor host_shared_alb: ::Array[Types::GatewayRouteAlbResources]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HostSharedAlb < GatewayRouteResources
+      end
+      class Unknown < GatewayRouteResources
+      end
+    end
+
+    class GatewayRouteSummary
+      attr_accessor gateway_route_arn: ::String
+      attr_accessor gateway_arn: ::String
+      attr_accessor cluster_arn: ::String
+      attr_accessor service_arn: ::String
+      attr_accessor service_container_port_name: ::String
+      attr_accessor status: ("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
+    class GatewaySummary
+      attr_accessor gateway_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "DELETED")
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
+    class GatewayTestTrafficHeader
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class GetTaskProtectionRequest
       attr_accessor cluster: ::String
       attr_accessor tasks: ::Array[::String]
@@ -1362,6 +1716,19 @@ module Aws::ECS
     class HostEntry
       attr_accessor hostname: ::String
       attr_accessor ip_address: ::String
+      SENSITIVE: []
+    end
+
+    class HostSharedAlbConfiguration
+      attr_accessor network_configuration: Types::GatewayElbNetworkConfiguration
+      attr_accessor scheme: ("internet-facing" | "internal")
+      attr_accessor web_acl_arn: ::String
+      attr_accessor access_logs: Types::GatewayElbAccessLogConfiguration
+      attr_accessor port: ::Integer
+      attr_accessor protocol: ("HTTP" | "HTTPS")
+      attr_accessor max_alb_count: ::Integer
+      attr_accessor http_desync: ("monitor" | "defensive" | "strictest")
+      attr_accessor test_traffic_rules: Types::GatewayAlbTestTrafficRules
       SENSITIVE: []
     end
 
@@ -1596,6 +1963,52 @@ module Aws::ECS
 
     class ListDaemonsResponse
       attr_accessor daemon_summaries_list: ::Array[Types::DaemonSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayClusterAssociationsRequest
+      attr_accessor gateway: ::String
+      attr_accessor cluster: ::String
+      attr_accessor status: ::Array[("ACTIVE" | "DISASSOCIATING" | "INACTIVE")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayClusterAssociationsResponse
+      attr_accessor gateway_cluster_associations: ::Array[Types::GatewayClusterAssociationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayRoutesRequest
+      attr_accessor gateway: ::String
+      attr_accessor cluster: ::String
+      attr_accessor service: ::String
+      attr_accessor service_container_port_name: ::String
+      attr_accessor status: ::Array[("ACTIVE" | "CREATE_IN_PROGRESS" | "CREATE_FAILED" | "UPDATE_IN_PROGRESS" | "UPDATE_FAILED" | "DELETE_IN_PROGRESS" | "DELETE_FAILED")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewayRoutesResponse
+      attr_accessor gateway_routes: ::Array[Types::GatewayRouteSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysRequest
+      attr_accessor names: ::Array[::String]
+      attr_accessor status: ::Array[("ACTIVE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "DELETED")]
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListGatewaysResponse
+      attr_accessor gateways: ::Array[Types::GatewaySummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -2136,6 +2549,7 @@ module Aws::ECS
 
     class ResolvedConfiguration
       attr_accessor load_balancers: ::Array[Types::ServiceRevisionLoadBalancer]
+      attr_accessor vpc_lattice_configurations: ::Array[Types::ServiceRevisionVpcLatticeConfiguration]
       SENSITIVE: []
     end
 
@@ -2295,7 +2709,19 @@ module Aws::ECS
       attr_accessor services: ::Array[Types::ServiceConnectService]
       attr_accessor log_configuration: Types::LogConfiguration
       attr_accessor access_log_configuration: Types::ServiceConnectAccessLogConfiguration
+      attr_accessor container_configurations: ::Array[Types::ServiceConnectContainerConfiguration]
       SENSITIVE: []
+    end
+
+    class ServiceConnectContainerConfiguration
+      attr_accessor log_level: ("debug" | "info")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class LogLevel < ServiceConnectContainerConfiguration
+      end
+      class Unknown < ServiceConnectContainerConfiguration
+      end
     end
 
     class ServiceConnectService
@@ -2466,6 +2892,7 @@ module Aws::ECS
       attr_accessor resolved_configuration: Types::ResolvedConfiguration
       attr_accessor ecs_managed_resources: Types::ECSManagedResources
       attr_accessor overrides: Types::ServiceRevisionOverrides
+      attr_accessor gateway_connectors: ::Array[Types::GatewayConnector]
       attr_accessor monitoring: Types::MonitoringConfiguration
       SENSITIVE: []
     end
@@ -2488,6 +2915,12 @@ module Aws::ECS
       attr_accessor pending_task_count: ::Integer
       attr_accessor requested_test_traffic_weight: ::Float
       attr_accessor requested_production_traffic_weight: ::Float
+      SENSITIVE: []
+    end
+
+    class ServiceRevisionVpcLatticeConfiguration
+      attr_accessor target_group_arn: ::String
+      attr_accessor production_listener_rule: ::String
       SENSITIVE: []
     end
 
@@ -2939,6 +3372,48 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class UpdateGatewayAlbConfiguration
+      attr_accessor network_configuration: Types::UpdateGatewayNetworkConfiguration
+      attr_accessor max_alb_count: ::Integer
+      attr_accessor web_acl_arn: ::String
+      attr_accessor access_logs: Types::GatewayElbAccessLogConfiguration
+      attr_accessor http_desync: ("monitor" | "defensive" | "strictest")
+      attr_accessor test_traffic_rules: Types::GatewayAlbTestTrafficRules
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayConfiguration
+      attr_accessor host_shared_alb: Types::UpdateGatewayAlbConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class HostSharedAlb < UpdateGatewayConfiguration
+      end
+      class Unknown < UpdateGatewayConfiguration
+      end
+    end
+
+    class UpdateGatewayNetworkConfiguration
+      attr_accessor inbound_security_group: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayRequest
+      attr_accessor gateway: ::String
+      attr_accessor infrastructure_role_arn: ::String
+      attr_accessor deletion_protection: bool
+      attr_accessor configuration: Types::UpdateGatewayConfiguration
+      attr_accessor propagate_tags: ("NONE" | "GATEWAY")
+      SENSITIVE: []
+    end
+
+    class UpdateGatewayResponse
+      attr_accessor gateway_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "DELETED")
+      SENSITIVE: []
+    end
+
     class UpdateInProgressException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -2988,6 +3463,7 @@ module Aws::ECS
       attr_accessor service_connect_configuration: Types::ServiceConnectConfiguration
       attr_accessor volume_configurations: ::Array[Types::ServiceVolumeConfiguration]
       attr_accessor vpc_lattice_configurations: ::Array[Types::VpcLatticeConfiguration]
+      attr_accessor gateway_connectors: ::Array[Types::GatewayConnector]
       attr_accessor monitoring: Types::MonitoringConfiguration
       SENSITIVE: []
     end
@@ -3065,10 +3541,18 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class VpcLatticeAdvancedConfiguration
+      attr_accessor alternate_target_group_arn: ::String
+      attr_accessor production_listener_rule: ::String
+      attr_accessor test_listener_rule: ::String
+      SENSITIVE: []
+    end
+
     class VpcLatticeConfiguration
       attr_accessor role_arn: ::String
       attr_accessor target_group_arn: ::String
       attr_accessor port_name: ::String
+      attr_accessor advanced_configuration: Types::VpcLatticeAdvancedConfiguration
       SENSITIVE: []
     end
   end

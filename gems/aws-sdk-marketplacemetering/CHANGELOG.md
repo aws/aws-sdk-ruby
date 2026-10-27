@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.110.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.109.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.108.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.107.0 (2026-10-14)
+------------------
+
+* Feature - Documentation update - added a Get started pointer to the AWS Marketplace AI Metering Agent Skill in the BatchMeterUsage API reference. No API or behavior change.
+
+1.106.0 (2026-10-09)
+------------------
+
+* Feature - AWS Marketplace Metering Service adds AgreementId to ResolveCustomer API response.
+
 1.105.0 (2026-09-11)
 ------------------
 

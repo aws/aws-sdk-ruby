@@ -121,7 +121,8 @@ module Aws
       output_tags: Hash[::String, ::String]?,
       router_integration_state: ("ENABLED" | "DISABLED")?,
       router_integration_transit_encryption: Params::flow_transit_encryption?,
-      ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")?
+      ndi_output_timecode_source: ("EMBEDDED_TIMECODE" | "UTC_SYSTEM_TIME")?,
+      ndi_audio_reference_level: ::Integer?
     }
 
       type media_stream_output_configuration_request = {
@@ -170,7 +171,8 @@ module Aws
         }?
       }?,
       ndi_source_settings: {
-        source_name: ::String?
+        source_name: ::String?,
+        audio_reference_level: ::Integer?
       }?,
       source_tags: Hash[::String, ::String]?,
       router_integration_state: ("ENABLED" | "DISABLED")?,
@@ -255,6 +257,23 @@ module Aws
           vpc_interface_adapter: ::String
         }
       ]?
+    }
+
+      type endpoint_encryption_configuration = {
+      secrets_manager: {
+        encryption_secret_type: ("AES_128_KEY" | "AES_192_KEY" | "AES_256_KEY" | "SRT_PASSPHRASE")?,
+        encryption_secret: {
+          secret_arn: ::String
+        }
+      }?,
+      automatic: {
+      }?
+    }
+
+      type destination_endpoint_router_input_configuration = {
+      endpoint_lifecycle_management: ("MANAGED" | "UNMANAGED"),
+      source_transit_decryption_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
+      source_transit_decryption: Params::endpoint_encryption_configuration
     }
 
       type srt_listener_router_input_configuration = {
@@ -345,6 +364,7 @@ module Aws
     }
 
       type router_input_configuration = {
+      destination_endpoint: Params::destination_endpoint_router_input_configuration?,
       standard: Params::standard_router_input_configuration?,
       media_live_channel: Params::media_live_channel_router_input_configuration?,
       failover: Params::failover_router_input_configuration?,
@@ -443,6 +463,20 @@ module Aws
       }?
     }
 
+      type rtmp_push_router_output_configuration = {
+      destination_address: ::String,
+      destination_port: ::Integer,
+      application_name: ::String,
+      stream_name: ::String,
+      tls_encryption: {
+        encryption_type: ("PUBLIC")?,
+        encryption_configuration: {
+          public: {
+          }?
+        }
+      }?
+    }
+
       type srt_caller_router_output_configuration = {
       destination_address: ::String,
       destination_port: ::Integer,
@@ -462,6 +496,7 @@ module Aws
         destination_port: ::Integer
       }?,
       srt_listener: Params::srt_listener_router_output_configuration?,
+      rtmp_push: Params::rtmp_push_router_output_configuration?,
       srt_caller: Params::srt_caller_router_output_configuration?,
       rtp: {
         destination_address: ::String,
@@ -473,7 +508,7 @@ module Aws
       type standard_router_output_configuration = {
       network_interface_arn: ::String,
       protocol_configuration: Params::router_output_protocol_configuration,
-      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER" | "RTMP_PUSH")?
     }
 
       type media_connect_flow_router_output_configuration = {
@@ -488,10 +523,134 @@ module Aws
       destination_transit_encryption: Params::media_live_transit_encryption
     }
 
+      type source_endpoint_router_output_configuration = {
+      endpoint_lifecycle_management: ("MANAGED" | "UNMANAGED"),
+      destination_transit_encryption_type: ("SECRETS_MANAGER" | "AUTOMATIC")?,
+      destination_transit_encryption: Params::endpoint_encryption_configuration
+    }
+
       type router_output_configuration = {
       standard: Params::standard_router_output_configuration?,
       media_connect_flow: Params::media_connect_flow_router_output_configuration?,
-      media_live_input: Params::media_live_input_router_output_configuration?
+      media_live_input: Params::media_live_input_router_output_configuration?,
+      source_endpoint: Params::source_endpoint_router_output_configuration?
+    }
+
+      type standard_destination_endpoint_networking_configuration = {
+      public: {
+        destination_allow_rules: Array[
+          {
+            cidr: ::String
+          }
+        ]
+      }?,
+      vpc: {
+        security_group_ids: Array[::String],
+        subnet_id: ::String
+      }?
+    }
+
+      type srt_listener_standard_destination_endpoint_configuration = {
+      destination_address: ::String,
+      destination_ingest_port: ::Integer,
+      minimum_latency_milliseconds: ::Integer,
+      stream_id: ::String?,
+      encryption_passphrase: {
+        secret_arn: ::String
+      }?
+    }
+
+      type standard_destination_endpoint_protocol_configuration = {
+      rist: {
+        destination_address: ::String,
+        destination_ingest_port: ::Integer
+      }?,
+      srt_listener: Params::srt_listener_standard_destination_endpoint_configuration?,
+      srt_caller: {
+        source_listener_port: ::Integer,
+        minimum_latency_milliseconds: ::Integer,
+        encryption_passphrase: {
+          secret_arn: ::String
+        }?
+      }?,
+      rtp: {
+        destination_address: ::String,
+        destination_ingest_port: ::Integer,
+        forward_error_correction_state: ("ENABLED" | "DISABLED")
+      }?
+    }
+
+      type standard_destination_endpoint_configuration = {
+      name: ::String,
+      destination_networking_configuration: Params::standard_destination_endpoint_networking_configuration,
+      protocol_configuration: Params::standard_destination_endpoint_protocol_configuration,
+      destination_networking_type: ("PUBLIC" | "VPC")?,
+      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+    }
+
+      type destination_endpoint_configuration = {
+      standard: Params::standard_destination_endpoint_configuration?,
+      router_input: {
+        router_input_arn: ::String
+      }?
+    }
+
+      type standard_source_endpoint_networking_configuration = {
+      public: {
+        source_allow_rules: Array[
+          {
+            cidr: ::String
+          }
+        ]
+      }?,
+      vpc: {
+        security_group_ids: Array[::String],
+        subnet_id: ::String
+      }?
+    }
+
+      type srt_listener_standard_source_endpoint_configuration = {
+      source_listener_port: ::Integer,
+      source_address: ::String,
+      minimum_latency_milliseconds: ::Integer,
+      stream_id: ::String?,
+      encryption_passphrase: {
+        secret_arn: ::String
+      }?
+    }
+
+      type standard_source_endpoint_protocol_configuration = {
+      rist: {
+        destination_ingest_port: ::Integer,
+        recovery_latency_milliseconds: ::Integer
+      }?,
+      srt_listener: Params::srt_listener_standard_source_endpoint_configuration?,
+      srt_caller: {
+        destination_ingest_port: ::Integer,
+        minimum_latency_milliseconds: ::Integer,
+        encryption_passphrase: {
+          secret_arn: ::String
+        }?
+      }?,
+      rtp: {
+        destination_ingest_port: ::Integer,
+        forward_error_correction_state: ("ENABLED" | "DISABLED")
+      }?
+    }
+
+      type standard_source_endpoint_configuration = {
+      name: ::String,
+      source_networking_configuration: Params::standard_source_endpoint_networking_configuration,
+      protocol_configuration: Params::standard_source_endpoint_protocol_configuration,
+      source_networking_type: ("PUBLIC" | "VPC")?,
+      protocol: ("RTP" | "RIST" | "SRT_CALLER" | "SRT_LISTENER")?
+    }
+
+      type source_endpoint_configuration = {
+      standard: Params::standard_source_endpoint_configuration?,
+      router_output: {
+        router_output_arn: ::String
+      }?
     }
 
       type update_failover_config = {

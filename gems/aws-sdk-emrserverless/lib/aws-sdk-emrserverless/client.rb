@@ -199,12 +199,19 @@ module Aws::EMRServerless
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1033,6 +1040,10 @@ module Aws::EMRServerless
     #   The type of resource to access the dashboard for. Currently, only
     #   `Session` is supported.
     #
+    # @option params [Boolean] :access_system_profile_logs
+    #   Allows access to system profile logs for Lake Formation-enabled
+    #   sessions. Default is false.
+    #
     # @return [Types::GetResourceDashboardResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetResourceDashboardResponse#url #url} => String
@@ -1043,6 +1054,7 @@ module Aws::EMRServerless
     #     application_id: "ApplicationId", # required
     #     resource_id: "ResourceId", # required
     #     resource_type: "SESSION", # required, accepts SESSION
+    #     access_system_profile_logs: false,
     #   })
     #
     # @example Response structure
@@ -1500,8 +1512,12 @@ module Aws::EMRServerless
     #   The tags assigned to the job run.
     #
     # @option params [Integer] :execution_timeout_minutes
-    #   The maximum duration for the job run to run. If the job run runs
-    #   beyond this duration, it will be automatically cancelled.
+    #   The maximum duration, in minutes, for the job run. If the job run
+    #   exceeds this duration, Amazon EMR Serverless cancels it automatically.
+    #
+    #   For BATCH mode job runs, the maximum value is 10080 minutes (7 days)
+    #   starting with Amazon EMR release 7.11. Setting a value of 0 to disable
+    #   the timeout is no longer supported for BATCH mode job runs.
     #
     # @option params [String] :name
     #   The optional job run name. This doesn't have to be unique.
@@ -2105,7 +2121,7 @@ module Aws::EMRServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-emrserverless'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.76.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

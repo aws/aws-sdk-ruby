@@ -730,6 +730,54 @@ module Aws::Health
       include Aws::Structure
     end
 
+    # @!attribute [rw] filter
+    #   Values to narrow the results returned.
+    #   @return [Types::ServiceLifecycleFilter]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return in one batch, between 1 and
+    #   20, inclusive.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeServiceLifecycleRequest AWS API Documentation
+    #
+    class DescribeServiceLifecycleRequest < Struct.new(
+      :filter,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_lifecycles
+    #   The list of service lifecycle entries matching the filter criteria.
+    #   @return [Array<Types::ServiceLifecycle>]
+    #
+    # @!attribute [rw] next_token
+    #   If the results of a search are large, only a portion of the results
+    #   are returned, and a `nextToken` pagination token is returned in the
+    #   response. To retrieve the next batch of results, reissue the search
+    #   request and include the returned token. When all results have been
+    #   returned, the response does not contain a pagination token value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/DescribeServiceLifecycleResponse AWS API Documentation
+    #
+    class DescribeServiceLifecycleResponse < Struct.new(
+      :service_lifecycles,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A JSON set of elements including the `awsAccountId`, `eventArn` and a
     # set of `statusCodes`.
     #
@@ -1361,6 +1409,42 @@ module Aws::Health
       include Aws::Structure
     end
 
+    # A lifecycle event for an Amazon Web Services service version, such as
+    # end-of-support or end-of-life.
+    #
+    # @!attribute [rw] lifecycle_event_type
+    #   The type of lifecycle event (for example, end-of-support,
+    #   end-of-life).
+    #   @return [String]
+    #
+    # @!attribute [rw] date
+    #   The date of the lifecycle event.
+    #   @return [Time]
+    #
+    # @!attribute [rw] regions
+    #   The Amazon Web Services Regions affected by this lifecycle event.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] impact_risks
+    #   The potential impact risks associated with this lifecycle event.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] description
+    #   A description of the lifecycle event.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/LifecycleEvent AWS API Documentation
+    #
+    class LifecycleEvent < Struct.new(
+      :lifecycle_event_type,
+      :date,
+      :regions,
+      :impact_risks,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Error information returned when a
     # [DescribeAffectedEntitiesForOrganization][1] operation can't find or
     # process a specific entity.
@@ -1809,6 +1893,55 @@ module Aws::Health
       :event_type_categories,
       :event_status_codes,
       :personas)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains lifecycle information for an Amazon Web Services service
+    # version, including lifecycle events and version recommendations.
+    #
+    # @!attribute [rw] service
+    #   The name of the Amazon Web Services service.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version of the service.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   A human-readable title for the lifecycle entry.
+    #   @return [String]
+    #
+    # @!attribute [rw] recommended_version
+    #   The recommended version to upgrade to.
+    #   @return [String]
+    #
+    # @!attribute [rw] lifecycle_events
+    #   The list of lifecycle events for this service version.
+    #   @return [Array<Types::LifecycleEvent>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ServiceLifecycle AWS API Documentation
+    #
+    class ServiceLifecycle < Struct.new(
+      :service,
+      :version,
+      :title,
+      :recommended_version,
+      :lifecycle_events)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter for narrowing down service lifecycle results.
+    #
+    # @!attribute [rw] service
+    #   The Amazon Web Services service name to filter by.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/health-2016-08-04/ServiceLifecycleFilter AWS API Documentation
+    #
+    class ServiceLifecycleFilter < Struct.new(
+      :service)
       SENSITIVE = []
       include Aws::Structure
     end

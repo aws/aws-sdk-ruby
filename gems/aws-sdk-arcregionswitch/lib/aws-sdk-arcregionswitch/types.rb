@@ -490,6 +490,11 @@ module Aws::ARCRegionswitch
     #   configuration, and CloudWatch alarm states.
     #   @return [Types::ReportConfiguration]
     #
+    # @!attribute [rw] service_quota_checks_enabled
+    #   Specifies whether to enable service quota checks for the Region
+    #   switch plan.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] name
     #   The name of a Region switch plan.
     #   @return [String]
@@ -524,6 +529,7 @@ module Aws::ARCRegionswitch
       :associated_alarms,
       :triggers,
       :report_configuration,
+      :service_quota_checks_enabled,
       :name,
       :regions,
       :recovery_approach,
@@ -687,6 +693,12 @@ module Aws::ARCRegionswitch
     #   the configuration.
     #   @return [String]
     #
+    # @!attribute [rw] wait_elb_target_group_healthy
+    #   If enabled, the step completes only after each attached ELB target
+    #   group reports a healthy target count that matches the group's new
+    #   desired capacity calculated in the step.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/Ec2AsgCapacityIncreaseConfiguration AWS API Documentation
     #
     class Ec2AsgCapacityIncreaseConfiguration < Struct.new(
@@ -694,7 +706,8 @@ module Aws::ARCRegionswitch
       :asgs,
       :ungraceful,
       :target_percent,
-      :capacity_monitoring_approach)
+      :capacity_monitoring_approach,
+      :wait_elb_target_group_healthy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -739,6 +752,12 @@ module Aws::ARCRegionswitch
     #   example, `Most_Recent`.
     #   @return [String]
     #
+    # @!attribute [rw] wait_elb_target_group_healthy
+    #   If enabled, the step completes only after each attached ELB target
+    #   group reports a healthy target count that matches the service's new
+    #   desired task count calculated in the step.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/EcsCapacityIncreaseConfiguration AWS API Documentation
     #
     class EcsCapacityIncreaseConfiguration < Struct.new(
@@ -746,7 +765,8 @@ module Aws::ARCRegionswitch
       :services,
       :ungraceful,
       :target_percent,
-      :capacity_monitoring_approach)
+      :capacity_monitoring_approach,
+      :wait_elb_target_group_healthy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -976,6 +996,10 @@ module Aws::ARCRegionswitch
     #   An Amazon RDS switchover read replica execution block.
     #   @return [Types::RdsSwitchoverReadReplicaConfiguration]
     #
+    # @!attribute [rw] ssm_send_command_config
+    #   Specifies an AWS Systems Manager `SendCommand` execution block.
+    #   @return [Types::SsmSendCommandConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ExecutionBlockConfiguration AWS API Documentation
     #
     class ExecutionBlockConfiguration < Struct.new(
@@ -997,6 +1021,7 @@ module Aws::ARCRegionswitch
       :aurora_provisioned_scaling_config,
       :neptune_global_database_config,
       :rds_switchover_read_replica_config,
+      :ssm_send_command_config,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1020,6 +1045,7 @@ module Aws::ARCRegionswitch
       class AuroraProvisionedScalingConfig < ExecutionBlockConfiguration; end
       class NeptuneGlobalDatabaseConfig < ExecutionBlockConfiguration; end
       class RdsSwitchoverReadReplicaConfig < ExecutionBlockConfiguration; end
+      class SsmSendCommandConfig < ExecutionBlockConfiguration; end
       class Unknown < ExecutionBlockConfiguration; end
     end
 
@@ -1391,12 +1417,20 @@ module Aws::ARCRegionswitch
     #   @return [String]
     #
     # @!attribute [rw] behavior
-    #   The behavior for a global database, that is, only allow switchover
-    #   or also allow failover.
+    #   The default behavior for the Aurora global database execution block.
+    #   Valid values:
+    #
+    #   * `switchoverOnly` - Calls `SwitchoverGlobalCluster` for a
+    #     zero-data-loss switchover during graceful execution.
+    #
+    #   * `failover` - Calls `FailoverGlobalCluster` with `AllowDataLoss`
+    #     set to `true`. This operation might cause data loss, including
+    #     during graceful execution.
     #   @return [String]
     #
     # @!attribute [rw] ungraceful
-    #   The settings for ungraceful execution.
+    #   The behavior to use when the plan runs in ungraceful mode. If you
+    #   omit this value, Region switch uses the value of `behavior`.
     #   @return [Types::GlobalAuroraUngraceful]
     #
     # @!attribute [rw] global_cluster_identifier
@@ -1422,11 +1456,13 @@ module Aws::ARCRegionswitch
       include Aws::Structure
     end
 
-    # Configuration for handling failures when performing operations on
-    # Aurora global databases.
+    # Configuration for an Aurora global database execution block in
+    # ungraceful mode.
     #
     # @!attribute [rw] ungraceful
-    #   The settings for ungraceful execution.
+    #   The ungraceful behavior. The only valid value is `failover`, which
+    #   calls `FailoverGlobalCluster` with `AllowDataLoss` set to `true` and
+    #   might cause data loss.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/GlobalAuroraUngraceful AWS API Documentation
@@ -1604,13 +1640,29 @@ module Aws::ARCRegionswitch
     #   The Amazon Resource Name (ARN) of the Lambda function.
     #   @return [String]
     #
+    # @!attribute [rw] payload
+    #   The JSON payload to send to the Lambda function invocation. If you
+    #   don't specify a payload, Region switch invokes the function with
+    #   only the execution metadata.
+    #
+    #   If you provide a JSON object, Region switch merges execution
+    #   metadata keys (`InvokedBy`, `PlanArn`, `ExecutionId`, `StepName`)
+    #   into the top level. If one of your keys has the same name as a
+    #   metadata key, your key takes precedence.
+    #
+    #   If you provide any other JSON type (string, number, boolean, or
+    #   array), Region switch forwards it to the Lambda function unchanged,
+    #   without adding metadata.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/Lambdas AWS API Documentation
     #
     class Lambdas < Struct.new(
       :cross_account_role,
       :external_id,
-      :arn)
-      SENSITIVE = []
+      :arn,
+      :payload)
+      SENSITIVE = [:payload]
       include Aws::Structure
     end
 
@@ -1919,6 +1971,57 @@ module Aws::ARCRegionswitch
       include Aws::Structure
     end
 
+    # @!attribute [rw] plan_arns
+    #   The Amazon Resource Names (ARNs) of the plans to return service
+    #   quota warnings for. You can specify up to 100 plan ARNs. Region
+    #   switch ignores any plan ARN that you can't access. If you omit this
+    #   parameter, Region switch returns the warnings for all of your
+    #   accessible plans.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return with this call. Valid values
+    #   are `1` to `100`. If you don't specify a value, the operation
+    #   returns up to the maximum number of results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   Specifies that you want to receive the next page of results. Valid
+    #   only if you received a `nextToken` response in the previous request.
+    #   If you did, it indicates that more output is available. Set this
+    #   parameter to the value provided by the previous call's `nextToken`
+    #   response to request the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ListServiceQuotaWarningsRequest AWS API Documentation
+    #
+    class ListServiceQuotaWarningsRequest < Struct.new(
+      :plan_arns,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] service_quota_warning_summaries
+    #   The service quota warnings for the plans that you can access.
+    #   @return [Array<Types::ServiceQuotaWarningSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token. A response may contain no results while still
+    #   including a `nextToken`. Continue paginating until `nextToken` is
+    #   null to retrieve all results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ListServiceQuotaWarningsResponse AWS API Documentation
+    #
+    class ListServiceQuotaWarningsResponse < Struct.new(
+      :service_quota_warning_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the resource.
     #   @return [String]
@@ -2075,6 +2178,16 @@ module Aws::ARCRegionswitch
     #   The report configuration for a plan.
     #   @return [Types::ReportConfiguration]
     #
+    # @!attribute [rw] service_quota_checks_enabled
+    #   Indicates whether service quota checks are enabled for the Region
+    #   switch plan. When enabled, Region switch compares the applied
+    #   service quota values across the plan's Amazon Web Services Regions
+    #   and creates a warning when a quota in one Region is lower than the
+    #   value required for the matching resource in another Region. Service
+    #   quota checks are advisory and don't prevent you from creating,
+    #   evaluating, or executing a plan.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] name
     #   The name for a plan.
     #   @return [String]
@@ -2115,6 +2228,7 @@ module Aws::ARCRegionswitch
       :associated_alarms,
       :triggers,
       :report_configuration,
+      :service_quota_checks_enabled,
       :name,
       :regions,
       :recovery_approach,
@@ -2547,6 +2661,206 @@ module Aws::ARCRegionswitch
       include Aws::Structure
     end
 
+    # A service quota warning for a plan. Region switch creates a warning
+    # when the applied quota value in one Region of a plan is lower than the
+    # value for the matching resource in another Region or account in the
+    # plan, or when it can't complete a service quota check.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account ID that owns the plan that the
+    #   warning applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_region
+    #   The Amazon Web Services Region that the quota applies to.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_code
+    #   The service code of the service that the quota belongs to, as
+    #   defined in Service Quotas. For example, `ec2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_code
+    #   The quota code of the quota that the warning applies to, as defined
+    #   in Service Quotas.
+    #   @return [String]
+    #
+    # @!attribute [rw] quota_name
+    #   The name of the quota that the warning applies to, as defined in
+    #   Service Quotas.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the service quota warning.
+    #   @return [String]
+    #
+    # @!attribute [rw] plan_arn
+    #   The Amazon Resource Name (ARN) of the plan that the warning applies
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the quota increase request that Region switch submitted,
+    #   if it submitted one for this quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] case_id
+    #   The ID of the support case associated with the quota increase
+    #   request, if Region switch submitted one for this quota.
+    #   @return [String]
+    #
+    # @!attribute [rw] warning_message
+    #   A message that describes the service quota warning.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_checked_at
+    #   The time (UTC) when Region switch last checked this quota.
+    #   @return [Time]
+    #
+    # @!attribute [rw] warning_created_at
+    #   The time (UTC) when Region switch created this warning.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/ServiceQuotaWarningSummary AWS API Documentation
+    #
+    class ServiceQuotaWarningSummary < Struct.new(
+      :account_id,
+      :quota_region,
+      :service_code,
+      :quota_code,
+      :quota_name,
+      :status,
+      :plan_arn,
+      :request_id,
+      :case_id,
+      :warning_message,
+      :last_checked_at,
+      :warning_created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Systems Manager document to run and the managed nodes to target
+    # for a single Amazon Web Services Region.
+    #
+    # @!attribute [rw] cross_account_role
+    #   The cross-account role for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] external_id
+    #   The external ID (secret key) for the configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] document_arn
+    #   The Amazon Resource Name (ARN) of the Systems Manager document to
+    #   run.
+    #   @return [String]
+    #
+    # @!attribute [rw] targets
+    #   The target filters that Systems Manager resolves to managed nodes
+    #   when the command runs. To target specific managed nodes, use the
+    #   `InstanceIds` key. You can specify up to five target filters.
+    #   @return [Array<Types::SsmTarget>]
+    #
+    # @!attribute [rw] parameters
+    #   The parameters that are passed to this Region's Systems Manager
+    #   document. You set parameters for each document, so each Region can
+    #   run its document with its own parameters.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] document_version
+    #   The version of the Systems Manager document to run for this Region.
+    #   When you omit it, Systems Manager runs the document's default
+    #   version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/SsmDocumentConfig AWS API Documentation
+    #
+    class SsmDocumentConfig < Struct.new(
+      :cross_account_role,
+      :external_id,
+      :document_arn,
+      :targets,
+      :parameters,
+      :document_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for an AWS Systems Manager `SendCommand` execution block
+    # in a Region switch plan. This execution block runs a Systems Manager
+    # document on the managed nodes that you target in each Amazon Web
+    # Services Region of the plan.
+    #
+    # @!attribute [rw] timeout_minutes
+    #   The timeout value specified for the configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] region_documents
+    #   The Systems Manager document and target configuration for each
+    #   Amazon Web Services Region in the plan. Provide an entry for each
+    #   Amazon Web Services Region that you want the command to run in.
+    #   @return [Hash<String,Types::SsmDocumentConfig>]
+    #
+    # @!attribute [rw] retry_interval_minutes
+    #   How often, in minutes, Region switch retries the command if it
+    #   returns a failure.
+    #   @return [Float]
+    #
+    # @!attribute [rw] ungraceful
+    #   Specifies the settings that determine how the execution block
+    #   behaves when the plan runs ungracefully, such as whether to skip the
+    #   command.
+    #   @return [Types::SsmSendCommandUngraceful]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/SsmSendCommandConfiguration AWS API Documentation
+    #
+    class SsmSendCommandConfiguration < Struct.new(
+      :timeout_minutes,
+      :region_documents,
+      :retry_interval_minutes,
+      :ungraceful)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The ungraceful execution settings for an AWS Systems Manager
+    # `SendCommand` execution block.
+    #
+    # @!attribute [rw] behavior
+    #   Specifies whether to skip running this command during an ungraceful
+    #   execution. Set to `skip` to skip the command.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/SsmSendCommandUngraceful AWS API Documentation
+    #
+    class SsmSendCommandUngraceful < Struct.new(
+      :behavior)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A single `SendCommand` target filter, consisting of a target key and
+    # the values matched by that key.
+    #
+    # @!attribute [rw] key
+    #   The target key, such as `tag:Environment` or `InstanceIds`.
+    #   @return [String]
+    #
+    # @!attribute [rw] values
+    #   The values matched by this target key. Multiple values combine with
+    #   a logical OR.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/SsmTarget AWS API Documentation
+    #
+    class SsmTarget < Struct.new(
+      :key,
+      :values)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] plan_arn
     #   The Amazon Resource Name (ARN) of the plan to execute.
     #   @return [String]
@@ -2922,6 +3236,11 @@ module Aws::ARCRegionswitch
     #   The updated report configuration for the plan.
     #   @return [Types::ReportConfiguration]
     #
+    # @!attribute [rw] service_quota_checks_enabled
+    #   Specifies whether service quota checks are enabled for the Region
+    #   switch plan.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/arc-region-switch-2022-07-26/UpdatePlanRequest AWS API Documentation
     #
     class UpdatePlanRequest < Struct.new(
@@ -2932,7 +3251,8 @@ module Aws::ARCRegionswitch
       :recovery_time_objective_minutes,
       :associated_alarms,
       :triggers,
-      :report_configuration)
+      :report_configuration,
+      :service_quota_checks_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

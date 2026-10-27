@@ -11,100 +11,100 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class CreateChimeWebhookConfigurationException < ::Aws::Errors::ServiceError
+      class CreateChimeWebhookConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class CreateSlackChannelConfigurationException < ::Aws::Errors::ServiceError
+      class CreateSlackChannelConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class CreateTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+      class CreateTeamsChannelConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class DeleteChimeWebhookConfigurationException < ::Aws::Errors::ServiceError
+      class DeleteChimeWebhookConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class DeleteMicrosoftTeamsUserIdentityException < ::Aws::Errors::ServiceError
+      class DeleteMicrosoftTeamsUserIdentityException < ServiceError
         def message: () -> ::String
       end
-      class DeleteSlackChannelConfigurationException < ::Aws::Errors::ServiceError
+      class DeleteSlackChannelConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class DeleteSlackUserIdentityException < ::Aws::Errors::ServiceError
+      class DeleteSlackUserIdentityException < ServiceError
         def message: () -> ::String
       end
-      class DeleteSlackWorkspaceAuthorizationFault < ::Aws::Errors::ServiceError
+      class DeleteSlackWorkspaceAuthorizationFault < ServiceError
         def message: () -> ::String
       end
-      class DeleteTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+      class DeleteTeamsChannelConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class DeleteTeamsConfiguredTeamException < ::Aws::Errors::ServiceError
+      class DeleteTeamsConfiguredTeamException < ServiceError
         def message: () -> ::String
       end
-      class DescribeChimeWebhookConfigurationsException < ::Aws::Errors::ServiceError
+      class DescribeChimeWebhookConfigurationsException < ServiceError
         def message: () -> ::String
       end
-      class DescribeSlackChannelConfigurationsException < ::Aws::Errors::ServiceError
+      class DescribeSlackChannelConfigurationsException < ServiceError
         def message: () -> ::String
       end
-      class DescribeSlackUserIdentitiesException < ::Aws::Errors::ServiceError
+      class DescribeSlackUserIdentitiesException < ServiceError
         def message: () -> ::String
       end
-      class DescribeSlackWorkspacesException < ::Aws::Errors::ServiceError
+      class DescribeSlackWorkspacesException < ServiceError
         def message: () -> ::String
       end
-      class GetAccountPreferencesException < ::Aws::Errors::ServiceError
+      class GetAccountPreferencesException < ServiceError
         def message: () -> ::String
       end
-      class GetTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+      class GetTeamsChannelConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceError < ::Aws::Errors::ServiceError
+      class InternalServiceError < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ListMicrosoftTeamsConfiguredTeamsException < ::Aws::Errors::ServiceError
+      class ListMicrosoftTeamsConfiguredTeamsException < ServiceError
         def message: () -> ::String
       end
-      class ListMicrosoftTeamsUserIdentitiesException < ::Aws::Errors::ServiceError
+      class ListMicrosoftTeamsUserIdentitiesException < ServiceError
         def message: () -> ::String
       end
-      class ListTeamsChannelConfigurationsException < ::Aws::Errors::ServiceError
+      class ListTeamsChannelConfigurationsException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
       end
-      class UnauthorizedException < ::Aws::Errors::ServiceError
+      class UnauthorizedException < ServiceError
         def message: () -> ::String
       end
-      class UpdateAccountPreferencesException < ::Aws::Errors::ServiceError
+      class UpdateAccountPreferencesException < ServiceError
         def message: () -> ::String
       end
-      class UpdateChimeWebhookConfigurationException < ::Aws::Errors::ServiceError
+      class UpdateChimeWebhookConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class UpdateSlackChannelConfigurationException < ::Aws::Errors::ServiceError
+      class UpdateSlackChannelConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class UpdateTeamsChannelConfigurationException < ::Aws::Errors::ServiceError
+      class UpdateTeamsChannelConfigurationException < ServiceError
         def message: () -> ::String
       end
     end

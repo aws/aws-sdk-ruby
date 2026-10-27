@@ -356,6 +356,9 @@
   "ConnectWisdomService": {
     "models": "wisdom/2020-10-19"
   },
+  "Continuum": {
+    "models": "continuum/2022-07-26"
+  },
   "ControlCatalog": {
     "models": "controlcatalog/2018-05-10"
   },
@@ -506,11 +509,17 @@
   "ElementalInference": {
     "models": "elementalinference/2018-11-14"
   },
+  "EndUserMessaging": {
+    "models": "endusermessaging/2026-09-21"
+  },
   "EntityResolution": {
     "models": "entityresolution/2018-05-10"
   },
   "EventBridge": {
     "models": "eventbridge/2015-10-07"
+  },
+  "EventBridgeV2": {
+    "models": "eventbridgev2/2025-05-15"
   },
   "Evs": {
     "models": "evs/2023-07-27"
@@ -523,18 +532,6 @@
   },
   "FSx": {
     "models": "fsx/2018-03-01"
-  },
-  "FinSpaceData": {
-    "models": "finspace-data/2020-07-13",
-    "addPlugins": [
-      "Aws::FinSpaceData::Plugins::ContentType"
-    ]
-  },
-  "Finspace": {
-    "models": "finspace/2021-03-12",
-    "addPlugins": [
-      "Aws::Finspace::Plugins::ContentType"
-    ]
   },
   "Firehose": {
     "models": "firehose/2015-08-04"
@@ -733,6 +730,9 @@
   },
   "LambdaMicrovms": {
     "models": "lambda-microvms/2025-09-09"
+  },
+  "LambdaWeb": {
+    "models": "lambda-web/2025-03-07"
   },
   "LaunchWizard": {
     "models": "launch-wizard/2018-05-10"
@@ -1228,6 +1228,9 @@
   "SageMakerRuntimeHTTP2": {
     "models": "sagemaker-runtime-http2/2025-10-01"
   },
+  "SageMakerTrainingSessionRuntime": {
+    "models": "sagemakertrainingsessionruntime/2025-02-10"
+  },
   "SagemakerEdgeManager": {
     "models": "sagemaker-edge/2020-09-23"
   },
@@ -1340,9 +1343,6 @@
   },
   "TimestreamWrite": {
     "models": "timestream-write/2018-11-01"
-  },
-  "Tnb": {
-    "models": "tnb/2008-10-21"
   },
   "TranscribeService": {
     "models": "transcribe/2017-10-26"

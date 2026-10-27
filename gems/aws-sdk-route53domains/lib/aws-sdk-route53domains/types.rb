@@ -280,10 +280,21 @@ module Aws::Route53Domains
     #   : The domain name is forbidden.
     #   @return [String]
     #
+    # @!attribute [rw] price
+    #   The price to register the domain name, in the currency that
+    #   `Currency` specifies. If the domain has registry premium pricing,
+    #   this price is different from the standard rate for the TLD that
+    #   `ListPrices` returns. Use `PriceType` to determine which rate
+    #   applies.
+    #
+    #   This element is returned only when `Availability` is `AVAILABLE`.
+    #   @return [Types::PriceWithCurrency]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainAvailabilityResponse AWS API Documentation
     #
     class CheckDomainAvailabilityResponse < Struct.new(
-      :availability)
+      :availability,
+      :price)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -342,23 +353,36 @@ module Aws::Route53Domains
     #   Provides an explanation for when a domain can't be transferred.
     #   @return [String]
     #
+    # @!attribute [rw] price
+    #   The price to transfer the domain name to Route 53, in the currency
+    #   that `Currency` specifies. If the domain has registry premium
+    #   pricing, this price is different from the standard rate for the TLD
+    #   that `ListPrices` returns. Use `PriceType` to determine which rate
+    #   applies.
+    #
+    #   This element is returned only when Route 53 can determine whether
+    #   the domain is transferable.
+    #   @return [Types::PriceWithCurrency]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/CheckDomainTransferabilityResponse AWS API Documentation
     #
     class CheckDomainTransferabilityResponse < Struct.new(
       :transferability,
-      :message)
+      :message,
+      :price)
       SENSITIVE = []
       include Aws::Structure
     end
 
-    # Customer's consent for the owner change request.
+    # The maximum amount that you agree to pay for an operation, and the
+    # currency for that amount.
     #
     # @!attribute [rw] max_price
-    #   Maximum amount the customer agreed to accept.
+    #   The maximum amount that you agree to accept.
     #   @return [Float]
     #
     # @!attribute [rw] currency
-    #   Currency for the `MaxPrice`.
+    #   The currency for the `MaxPrice`.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/Consent AWS API Documentation
@@ -645,19 +669,14 @@ module Aws::Route53Domains
     #   @return [Integer]
     #
     # @!attribute [rw] flags
-    #   Defines the type of key. It can be either a KSK (key-signing-key,
-    #   value 257) or ZSK (zone-signing-key, value 256). Using KSK is always
-    #   encouraged. Only use ZSK if your DNS provider isn't Route 53 and
-    #   you don’t have KSK available.
-    #
-    #   If you have KSK and ZSK keys, always use KSK to create a delegations
-    #   signer (DS) record. If you have ZSK keys only – use ZSK to create a
-    #   DS record.
+    #   The DNSKEY flags that indicate the key type. This field is
+    #   deprecated; the `DnssecKey` response no longer returns the flags.
     #   @return [Integer]
     #
     # @!attribute [rw] public_key
-    #   The base64-encoded public key part of the key pair that is passed to
-    #   the registry .
+    #   The base64-encoded public key of the key pair. This field is
+    #   deprecated; the `DnssecKey` response no longer returns the public
+    #   key.
     #   @return [String]
     #
     # @!attribute [rw] digest_type
@@ -777,10 +796,10 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
-    # Information about the domain price associated with a TLD.
+    # Information about the prices associated with a TLD or a domain name.
     #
     # @!attribute [rw] name
-    #   The name of the TLD for which the prices apply.
+    #   The TLD or domain name that the prices apply to.
     #   @return [String]
     #
     # @!attribute [rw] registration_price
@@ -823,7 +842,9 @@ module Aws::Route53Domains
     #   @return [String]
     #
     # @!attribute [rw] availability
-    #   Whether the domain name is available for registering.
+    #   Specifies whether the domain name is available for registering. This
+    #   element is populated only if you specified `true` for
+    #   `OnlyAvailable` in the request.
     #
     #   <note markdown="1"> You can register only the domains that are designated as
     #   `AVAILABLE`.
@@ -875,11 +896,18 @@ module Aws::Route53Domains
     #   : The domain name is forbidden.
     #   @return [String]
     #
+    # @!attribute [rw] price
+    #   The price to register the suggested domain name, in the currency
+    #   that `Currency` specifies. This element is populated only if you
+    #   specified `true` for `OnlyAvailable` in the request.
+    #   @return [Types::PriceWithCurrency]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/DomainSuggestion AWS API Documentation
     #
     class DomainSuggestion < Struct.new(
       :domain_name,
-      :availability)
+      :availability,
+      :price)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -939,9 +967,16 @@ module Aws::Route53Domains
     #
     #   DONT\_KNOW
     #
-    #   : The TLD registry didn't respond in time or didn't provide a
-    #     definitive answer about domain transferability, which can occur
-    #     due to registry maintenance or temporary delays.
+    #   : The TLD registry didn't reply with a definitive answer about
+    #     whether the domain name can be transferred. Route 53 can return
+    #     this response for a variety of reasons, for example, the registry
+    #     is performing maintenance. Try again later.
+    #
+    #   PENDING
+    #
+    #   : The TLD registry didn't return a response in the expected amount
+    #     of time. When the response is delayed, it usually takes just a few
+    #     extra seconds. You can resubmit the request immediately.
     #
     #   DOMAIN\_IN\_OWN\_ACCOUNT
     #
@@ -1780,6 +1815,35 @@ module Aws::Route53Domains
       include Aws::Structure
     end
 
+    # The GetDomainPrices request includes the following element.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain that you want to get the prices for.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainPricesRequest AWS API Documentation
+    #
+    class GetDomainPricesRequest < Struct.new(
+      :domain_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The GetDomainPrices response includes the following element.
+    #
+    # @!attribute [rw] domain_price
+    #   The registration, transfer, owner change, renewal, and restoration
+    #   prices for the specified domain.
+    #   @return [Types::DomainPrice]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainPricesResponse AWS API Documentation
+    #
+    class GetDomainPricesResponse < Struct.new(
+      :domain_price)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_name
     #   A domain name that you want to use as the basis for a list of
     #   possible domain names. The top-level domain (TLD), such as .com,
@@ -1819,8 +1883,18 @@ module Aws::Route53Domains
     #   If `OnlyAvailable` is `true`, Route 53 returns only domain names
     #   that are available. If `OnlyAvailable` is `false`, Route 53 returns
     #   domain names without checking whether they're available to be
-    #   registered. To determine whether the domain is available, you can
-    #   call `checkDomainAvailability` for each suggestion.
+    #   registered. To determine whether the domain is available, call
+    #   `checkDomainAvailability` for each suggestion.
+    #
+    #   If `OnlyAvailable` is `false`, Route 53 does not return pricing
+    #   information for the suggested domain names.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] only_standard_prices
+    #   If `true`, Route 53 returns only domain names that are priced at the
+    #   standard registration rate for their TLD. If `false`, Route 53
+    #   includes domain names with premium pricing in the suggestions list.
+    #   The default is `true`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/GetDomainSuggestionsRequest AWS API Documentation
@@ -1828,7 +1902,8 @@ module Aws::Route53Domains
     class GetDomainSuggestionsRequest < Struct.new(
       :domain_name,
       :suggestion_count,
-      :only_available)
+      :only_available,
+      :only_standard_prices)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2313,11 +2388,20 @@ module Aws::Route53Domains
     #   The currency specifier.
     #   @return [String]
     #
+    # @!attribute [rw] price_type
+    #   Indicates whether the domain has standard or premium pricing. A
+    #   value of `STANDARD` means the domain is priced at the regular rate
+    #   for its TLD. A value of `REGISTRY_PREMIUM` means the domain has
+    #   registry premium pricing, which may be different than the standard
+    #   rate.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/PriceWithCurrency AWS API Documentation
     #
     class PriceWithCurrency < Struct.new(
       :price,
-      :currency)
+      :currency,
+      :price_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2492,6 +2576,14 @@ module Aws::Route53Domains
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] consent
+    #   Specifies the maximum price that you agree to pay to register the
+    #   domain name. This element is required if the domain has registry
+    #   premium pricing, and optional if the domain is priced at the
+    #   standard rate for its TLD. If you include it and the registration
+    #   price is more than `MaxPrice`, the request fails.
+    #   @return [Types::Consent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RegisterDomainRequest AWS API Documentation
     #
     class RegisterDomainRequest < Struct.new(
@@ -2506,7 +2598,8 @@ module Aws::Route53Domains
       :privacy_protect_registrant_contact,
       :privacy_protect_tech_contact,
       :billing_contact,
-      :privacy_protect_billing_contact)
+      :privacy_protect_billing_contact,
+      :consent)
       SENSITIVE = [:admin_contact, :registrant_contact, :tech_contact, :billing_contact]
       include Aws::Structure
     end
@@ -2595,12 +2688,21 @@ module Aws::Route53Domains
     #   value must match the current expiration date for the domain.
     #   @return [Integer]
     #
+    # @!attribute [rw] consent
+    #   Specifies the maximum price that you agree to pay to renew the
+    #   domain name. This element is required if the domain has registry
+    #   premium pricing, and optional if the domain is priced at the
+    #   standard rate for its TLD. If you include it and the renewal price
+    #   is more than `MaxPrice`, the request fails.
+    #   @return [Types::Consent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RenewDomainRequest AWS API Documentation
     #
     class RenewDomainRequest < Struct.new(
       :domain_name,
       :duration_in_years,
-      :current_expiry_year)
+      :current_expiry_year,
+      :consent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2929,6 +3031,14 @@ module Aws::Route53Domains
     #    </note>
     #   @return [Boolean]
     #
+    # @!attribute [rw] consent
+    #   Specifies the maximum price that you agree to pay to transfer the
+    #   domain name to Route 53. This element is required if the domain has
+    #   registry premium pricing, and optional if the domain is priced at
+    #   the standard rate for its TLD. If you include it and the transfer
+    #   price is more than `MaxPrice`, the request fails.
+    #   @return [Types::Consent]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/TransferDomainRequest AWS API Documentation
     #
     class TransferDomainRequest < Struct.new(
@@ -2945,7 +3055,8 @@ module Aws::Route53Domains
       :privacy_protect_registrant_contact,
       :privacy_protect_tech_contact,
       :billing_contact,
-      :privacy_protect_billing_contact)
+      :privacy_protect_billing_contact,
+      :consent)
       SENSITIVE = [:auth_code, :admin_contact, :registrant_contact, :tech_contact, :billing_contact]
       include Aws::Structure
     end
@@ -3147,8 +3258,9 @@ module Aws::Route53Domains
     #   @return [Types::ContactDetail]
     #
     # @!attribute [rw] consent
-    #   Customer's consent for the owner change request. Required if the
-    #   domain is not free (consent price is more than $0.00).
+    #   The maximum amount that you agree to pay for the owner change.
+    #   Required if the domain is not free (consent price is more than USD
+    #   $0.00).
     #   @return [Types::Consent]
     #
     # @!attribute [rw] billing_contact

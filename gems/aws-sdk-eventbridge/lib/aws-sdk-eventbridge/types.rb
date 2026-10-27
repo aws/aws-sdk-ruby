@@ -1240,7 +1240,7 @@ module Aws::EventBridge
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
     #   @return [Types::LogConfig]
     #
     # @!attribute [rw] tags
@@ -1301,7 +1301,7 @@ module Aws::EventBridge
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
     #   @return [Types::LogConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/CreateEventBusResponse AWS API Documentation
@@ -2062,7 +2062,7 @@ module Aws::EventBridge
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
     #   @return [Types::LogConfig]
     #
     # @!attribute [rw] creation_time
@@ -2072,6 +2072,12 @@ module Aws::EventBridge
     # @!attribute [rw] last_modified_time
     #   The time the event bus was last modified.
     #   @return [Time]
+    #
+    # @!attribute [rw] managed_by
+    #   If the event bus was created on behalf of your account by an Amazon
+    #   Web Services service, this field displays the principal name of the
+    #   service that created the event bus.
+    #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/DescribeEventBusResponse AWS API Documentation
     #
@@ -2084,7 +2090,8 @@ module Aws::EventBridge
       :policy,
       :log_config,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2648,6 +2655,12 @@ module Aws::EventBridge
     #   The time the event bus was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] managed_by
+    #   If the event bus was created on behalf of your account by an Amazon
+    #   Web Services service, this field displays the principal name of the
+    #   service that created the event bus.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/EventBus AWS API Documentation
     #
     class EventBus < Struct.new(
@@ -2656,7 +2669,8 @@ module Aws::EventBridge
       :description,
       :policy,
       :creation_time,
-      :last_modified_time)
+      :last_modified_time,
+      :managed_by)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3664,7 +3678,7 @@ module Aws::EventBridge
     #
     #
     #
-    # [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    # [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
     #
     # @!attribute [rw] include_detail
     #   Whether EventBridge include detailed event information in the
@@ -4993,11 +5007,11 @@ module Aws::EventBridge
       include Aws::Structure
     end
 
-    # This structure includes the custom parameter to be used when the
-    # target is an SQS FIFO queue.
+    # The custom parameters for EventBridge to use for a target that is an
+    # Amazon SQS fair or FIFO queue.
     #
     # @!attribute [rw] message_group_id
-    #   The FIFO message group ID to use as the target.
+    #   The ID of the message group to use as the target.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/SqsParameters AWS API Documentation
@@ -5212,10 +5226,10 @@ module Aws::EventBridge
     #   @return [Types::BatchParameters]
     #
     # @!attribute [rw] sqs_parameters
-    #   Contains the message group ID to use when the target is a FIFO
-    #   queue.
+    #   Contains the message group ID to use when the target is an Amazon
+    #   SQS fair or FIFO queue.
     #
-    #   If you specify an SQS FIFO queue as a target, the queue must have
+    #   If you specify a fair or FIFO queue as a target, the queue must have
     #   content-based deduplication enabled.
     #   @return [Types::SqsParameters]
     #
@@ -5905,7 +5919,7 @@ module Aws::EventBridge
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
     #   @return [Types::LogConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEventBusRequest AWS API Documentation
@@ -5964,7 +5978,7 @@ module Aws::EventBridge
     #
     #
     #
-    #   [1]: https://docs.aws.amazon.com/eb-event-bus-logs.html
+    #   [1]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-bus-logs.html
     #   @return [Types::LogConfig]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eventbridge-2015-10-07/UpdateEventBusResponse AWS API Documentation

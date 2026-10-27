@@ -130,6 +130,7 @@ module Aws::BedrockAgentCore
       attr_accessor memory_id: ::String
       attr_accessor records: ::Array[Types::MemoryRecordCreateInput]
       attr_accessor client_token: ::String
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: []
     end
 
@@ -175,6 +176,7 @@ module Aws::BedrockAgentCore
     class BatchUpdateMemoryRecordsInput
       attr_accessor memory_id: ::String
       attr_accessor records: ::Array[Types::MemoryRecordUpdateInput]
+      attr_accessor record_expiry_specification: Types::RecordExpirySpecification
       SENSITIVE: []
     end
 
@@ -797,6 +799,7 @@ module Aws::BedrockAgentCore
       attr_accessor evaluator_arn: ::String
       attr_accessor evaluator_id: ::String
       attr_accessor evaluator_name: ::String
+      attr_accessor evaluation_dimension_name: ::String
       attr_accessor explanation: ::String
       attr_accessor context: Types::Context
       attr_accessor value: ::Float
@@ -841,6 +844,7 @@ module Aws::BedrockAgentCore
 
     class EvaluatorSummary
       attr_accessor evaluator_id: ::String
+      attr_accessor evaluation_dimension_name: ::String
       attr_accessor statistics: Types::EvaluatorStatistics
       attr_accessor total_evaluated: ::Integer
       attr_accessor total_failed: ::Integer
@@ -1051,6 +1055,7 @@ module Aws::BedrockAgentCore
       attr_accessor data_source_config: Types::DataSourceConfig
       attr_accessor output_config: Types::OutputConfig
       attr_accessor evaluation_results: Types::EvaluationJobResults
+      attr_accessor insight_results: ::Array[Types::InsightResult]
       attr_accessor failure_analysis_result: Types::FailureAnalysisResultContent
       attr_accessor user_intent_result: Types::UserIntentClusteringResultContent
       attr_accessor execution_summary_result: Types::ExecutionSummaryClusteringResultContent
@@ -1780,6 +1785,26 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class InsightResult
+      attr_accessor type: ("FAILURE")
+      attr_accessor name: ::String
+      attr_accessor description: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor affected_session_count: ::Integer
+      attr_accessor sample_sessions: ::Array[Types::SampleSession]
+      attr_accessor root_causes: ::Array[Types::InsightRootCause]
+      SENSITIVE: [:name, :description]
+    end
+
+    class InsightRootCause
+      attr_accessor name: ::String
+      attr_accessor explanation: ::String
+      attr_accessor affected_session_count: ::Integer
+      attr_accessor suggested_fix: ::String
+      attr_accessor sample_sessions: ::Array[Types::SampleSession]
+      SENSITIVE: [:name, :explanation, :suggested_fix]
+    end
+
     class InsightsFailureSignal
       attr_accessor category: ("execution-error-category-authentication" | "execution-error-category-resource-not-found" | "execution-error-category-service-errors" | "execution-error-category-rate-limiting" | "execution-error-category-formatting" | "execution-error-category-timeout" | "execution-error-category-resource-exhaustion" | "execution-error-category-environment" | "execution-error-category-tool-schema" | "task-instruction-category-non-compliance" | "task-instruction-category-problem-id" | "incorrect-actions-category-tool-selection" | "incorrect-actions-category-poor-information-retrieval" | "incorrect-actions-category-clarification" | "incorrect-actions-category-inappropriate-info-request" | "context-handling-error-category-context-handling-failures" | "hallucination-category-hall-capabilities" | "hallucination-category-hall-misunderstand" | "hallucination-category-hall-usage" | "hallucination-category-hall-history" | "hallucination-category-hall-params" | "hallucination-category-fabricate-tool-outputs" | "repetitive-behavior-category-repetition-tool" | "repetitive-behavior-category-repetition-info" | "repetitive-behavior-category-step-repetition" | "orchestration-related-errors-category-reasoning-mismatch" | "orchestration-related-errors-category-goal-deviation" | "orchestration-related-errors-category-premature-termination" | "orchestration-related-errors-category-unaware-termination" | "llm-output-category-nonsensical" | "configuration-mismatch-category-tool-definition" | "coding-use-case-specific-failure-types-category-edge-case-oversights" | "coding-use-case-specific-failure-types-category-dependency-issues" | "other")
       attr_accessor evidence: ::String
@@ -2237,7 +2262,9 @@ module Aws::BedrockAgentCore
       attr_accessor memory_strategy_id: ::String
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
+      attr_accessor timestamp: ::Time
       attr_accessor metadata: ::Hash[::String, Types::MemoryRecordMetadataValue]
+      attr_accessor expires_at: ::Time
       SENSITIVE: []
     end
 
@@ -2315,6 +2342,7 @@ module Aws::BedrockAgentCore
       attr_accessor namespaces: ::Array[::String]
       attr_accessor created_at: ::Time
       attr_accessor score: ::Float
+      attr_accessor timestamp: ::Time
       attr_accessor metadata: ::Hash[::String, Types::MemoryRecordMetadataValue]
       SENSITIVE: []
     end
@@ -2708,6 +2736,20 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class RecordExpirySpecification
+      attr_accessor record_expiry_duration_days: ::Integer
+      attr_accessor action: ("REMOVE")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RecordExpiryDurationDays < RecordExpirySpecification
+      end
+      class Action < RecordExpirySpecification
+      end
+      class Unknown < RecordExpirySpecification
+      end
+    end
+
     class RegistryRecordSummary
       attr_accessor registry_arn: ::String
       attr_accessor record_arn: ::String
@@ -2819,6 +2861,13 @@ module Aws::BedrockAgentCore
       SENSITIVE: []
     end
 
+    class SampleSession
+      attr_accessor session_id: ::String
+      attr_accessor last_seen_at: ::Time
+      attr_accessor findings: ::Array[Types::SessionFinding]
+      SENSITIVE: []
+    end
+
     class SaveBrowserSessionProfileRequest
       attr_accessor trace_id: ::String
       attr_accessor trace_parent: ::String
@@ -2901,6 +2950,15 @@ module Aws::BedrockAgentCore
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       SENSITIVE: []
+    end
+
+    class SessionFinding
+      attr_accessor target_id: ::String
+      attr_accessor target_type: ("SPAN_ID" | "TRACE_ID" | "SPAN_NAME")
+      attr_accessor description: ::String
+      attr_accessor category: ::String
+      attr_accessor confidence: ::Float
+      SENSITIVE: [:description]
     end
 
     class SessionLimits

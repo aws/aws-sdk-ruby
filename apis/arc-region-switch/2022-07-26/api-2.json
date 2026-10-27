@@ -220,6 +220,20 @@
       ],
       "readonly":true
     },
+    "ListServiceQuotaWarnings":{
+      "name":"ListServiceQuotaWarnings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ListServiceQuotaWarningsRequest"},
+      "output":{"shape":"ListServiceQuotaWarningsResponse"},
+      "errors":[
+        {"shape":"AccessDeniedException"},
+        {"shape":"InternalServerException"}
+      ],
+      "readonly":true
+    },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
       "http":{
@@ -566,6 +580,10 @@
       "box":true,
       "min":1
     },
+    "Boolean":{
+      "type":"boolean",
+      "box":true
+    },
     "CancelPlanExecutionRequest":{
       "type":"structure",
       "required":[
@@ -613,6 +631,7 @@
         "associatedAlarms":{"shape":"AssociatedAlarmMap"},
         "triggers":{"shape":"TriggerList"},
         "reportConfiguration":{"shape":"ReportConfiguration"},
+        "serviceQuotaChecksEnabled":{"shape":"Boolean"},
         "name":{"shape":"PlanName"},
         "regions":{"shape":"RegionList"},
         "recoveryApproach":{"shape":"RecoveryApproach"},
@@ -726,7 +745,8 @@
         "asgs":{"shape":"AsgList"},
         "ungraceful":{"shape":"Ec2Ungraceful"},
         "targetPercent":{"shape":"Integer"},
-        "capacityMonitoringApproach":{"shape":"Ec2AsgCapacityMonitoringApproach"}
+        "capacityMonitoringApproach":{"shape":"Ec2AsgCapacityMonitoringApproach"},
+        "waitELBTargetGroupHealthy":{"shape":"WaitELBTargetGroupHealthy"}
       }
     },
     "Ec2AsgCapacityIncreaseConfigurationTimeoutMinutesInteger":{
@@ -762,7 +782,8 @@
         "services":{"shape":"ServiceList"},
         "ungraceful":{"shape":"EcsUngraceful"},
         "targetPercent":{"shape":"Integer"},
-        "capacityMonitoringApproach":{"shape":"EcsCapacityMonitoringApproach"}
+        "capacityMonitoringApproach":{"shape":"EcsCapacityMonitoringApproach"},
+        "waitELBTargetGroupHealthy":{"shape":"WaitELBTargetGroupHealthy"}
       }
     },
     "EcsCapacityIncreaseConfigurationTimeoutMinutesInteger":{
@@ -926,7 +947,8 @@
         "auroraServerlessScalingConfig":{"shape":"AuroraServerlessScalingConfiguration"},
         "auroraProvisionedScalingConfig":{"shape":"AuroraProvisionedScalingConfiguration"},
         "neptuneGlobalDatabaseConfig":{"shape":"NeptuneGlobalDatabaseConfiguration"},
-        "rdsSwitchoverReadReplicaConfig":{"shape":"RdsSwitchoverReadReplicaConfiguration"}
+        "rdsSwitchoverReadReplicaConfig":{"shape":"RdsSwitchoverReadReplicaConfiguration"},
+        "ssmSendCommandConfig":{"shape":"SsmSendCommandConfiguration"}
       },
       "union":true
     },
@@ -950,7 +972,8 @@
         "AuroraServerlessScaling",
         "AuroraProvisionedScaling",
         "NeptuneGlobalDatabase",
-        "RdsSwitchoverReadReplica"
+        "RdsSwitchoverReadReplica",
+        "SSMSendCommand"
       ]
     },
     "ExecutionComment":{
@@ -1321,6 +1344,12 @@
       "max":2,
       "min":1
     },
+    "LambdaPayload":{
+      "type":"string",
+      "max":786432,
+      "min":1,
+      "sensitive":true
+    },
     "LambdaUngraceful":{
       "type":"structure",
       "members":{
@@ -1336,7 +1365,8 @@
       "members":{
         "crossAccountRole":{"shape":"IamRoleArn"},
         "externalId":{"shape":"String"},
-        "arn":{"shape":"LambdaArn"}
+        "arn":{"shape":"LambdaArn"},
+        "payload":{"shape":"LambdaPayload"}
       }
     },
     "ListExecutionEventsMaxResults":{
@@ -1465,6 +1495,22 @@
         "nextToken":{"shape":"NextToken"}
       }
     },
+    "ListServiceQuotaWarningsRequest":{
+      "type":"structure",
+      "members":{
+        "planArns":{"shape":"PlanArnList"},
+        "maxResults":{"shape":"MaxResults"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
+    "ListServiceQuotaWarningsResponse":{
+      "type":"structure",
+      "required":["serviceQuotaWarningSummaries"],
+      "members":{
+        "serviceQuotaWarningSummaries":{"shape":"ServiceQuotaWarningSummaryList"},
+        "nextToken":{"shape":"NextToken"}
+      }
+    },
     "ListTagsForResourceRequest":{
       "type":"structure",
       "required":["arn"],
@@ -1572,6 +1618,7 @@
         "associatedAlarms":{"shape":"AssociatedAlarmMap"},
         "triggers":{"shape":"TriggerList"},
         "reportConfiguration":{"shape":"ReportConfiguration"},
+        "serviceQuotaChecksEnabled":{"shape":"Boolean"},
         "name":{"shape":"PlanName"},
         "regions":{"shape":"RegionList"},
         "recoveryApproach":{"shape":"RecoveryApproach"},
@@ -1584,6 +1631,12 @@
     "PlanArn":{
       "type":"string",
       "pattern":"arn:aws[a-zA-Z-]*:arc-region-switch::[0-9]{12}:plan/([a-zA-Z0-9](?:[a-zA-Z0-9-]{0,30}[a-zA-Z0-9])?):([a-z0-9]{6})"
+    },
+    "PlanArnList":{
+      "type":"list",
+      "member":{"shape":"PlanArn"},
+      "max":100,
+      "min":0
     },
     "PlanList":{
       "type":"list",
@@ -1723,6 +1776,13 @@
       "value":{"shape":"NeptuneClusterArn"},
       "max":2,
       "min":2
+    },
+    "RegionSsmDocumentMap":{
+      "type":"map",
+      "key":{"shape":"Region"},
+      "value":{"shape":"SsmDocumentConfig"},
+      "max":2,
+      "min":1
     },
     "RegionSwitchPlanConfiguration":{
       "type":"structure",
@@ -1936,6 +1996,156 @@
       "member":{"shape":"Service"},
       "max":2,
       "min":2
+    },
+    "ServiceQuotaWarningStatus":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "denied",
+        "insufficientPermissions",
+        "maxRegionSwitchRequestsExceeded",
+        "maxAccountRequestsExceeded"
+      ]
+    },
+    "ServiceQuotaWarningSummary":{
+      "type":"structure",
+      "required":[
+        "accountId",
+        "quotaRegion",
+        "status",
+        "planArn"
+      ],
+      "members":{
+        "accountId":{"shape":"AccountId"},
+        "quotaRegion":{"shape":"Region"},
+        "serviceCode":{"shape":"String"},
+        "quotaCode":{"shape":"String"},
+        "quotaName":{"shape":"String"},
+        "status":{"shape":"ServiceQuotaWarningStatus"},
+        "planArn":{"shape":"PlanArn"},
+        "requestId":{"shape":"String"},
+        "caseId":{"shape":"String"},
+        "warningMessage":{"shape":"String"},
+        "lastCheckedAt":{"shape":"Timestamp"},
+        "warningCreatedAt":{"shape":"Timestamp"}
+      }
+    },
+    "ServiceQuotaWarningSummaryList":{
+      "type":"list",
+      "member":{"shape":"ServiceQuotaWarningSummary"}
+    },
+    "SsmDocumentArn":{
+      "type":"string",
+      "max":256,
+      "min":20,
+      "pattern":"arn:[a-z0-9\\-]+:ssm:[a-z0-9\\-]+:([0-9]{12})?:document/[a-zA-Z0-9_.\\-]+"
+    },
+    "SsmDocumentConfig":{
+      "type":"structure",
+      "required":[
+        "documentArn",
+        "targets"
+      ],
+      "members":{
+        "crossAccountRole":{"shape":"IamRoleArn"},
+        "externalId":{"shape":"String"},
+        "documentArn":{"shape":"SsmDocumentArn"},
+        "targets":{"shape":"SsmTargetList"},
+        "parameters":{"shape":"SsmDocumentParameters"},
+        "documentVersion":{"shape":"SsmDocumentVersion"}
+      }
+    },
+    "SsmDocumentParameters":{
+      "type":"map",
+      "key":{"shape":"SsmParameterKey"},
+      "value":{"shape":"SsmParameterValues"},
+      "max":30,
+      "min":0
+    },
+    "SsmDocumentVersion":{
+      "type":"string",
+      "max":8,
+      "min":1,
+      "pattern":"([$]LATEST|[$]DEFAULT|[1-9][0-9]*)"
+    },
+    "SsmParameterKey":{
+      "type":"string",
+      "max":255,
+      "min":1
+    },
+    "SsmParameterValue":{
+      "type":"string",
+      "max":65535,
+      "min":1,
+      "pattern":".{1,65535}"
+    },
+    "SsmParameterValues":{
+      "type":"list",
+      "member":{"shape":"SsmParameterValue"},
+      "max":50,
+      "min":1
+    },
+    "SsmSendCommandConfiguration":{
+      "type":"structure",
+      "required":[
+        "regionDocuments",
+        "retryIntervalMinutes"
+      ],
+      "members":{
+        "timeoutMinutes":{"shape":"SsmSendCommandConfigurationTimeoutMinutesInteger"},
+        "regionDocuments":{"shape":"RegionSsmDocumentMap"},
+        "retryIntervalMinutes":{"shape":"Float"},
+        "ungraceful":{"shape":"SsmSendCommandUngraceful"}
+      }
+    },
+    "SsmSendCommandConfigurationTimeoutMinutesInteger":{
+      "type":"integer",
+      "box":true,
+      "min":1
+    },
+    "SsmSendCommandUngraceful":{
+      "type":"structure",
+      "members":{
+        "behavior":{"shape":"SsmSendCommandUngracefulBehavior"}
+      }
+    },
+    "SsmSendCommandUngracefulBehavior":{
+      "type":"string",
+      "enum":["skip"]
+    },
+    "SsmTarget":{
+      "type":"structure",
+      "required":[
+        "key",
+        "values"
+      ],
+      "members":{
+        "key":{"shape":"SsmTargetKey"},
+        "values":{"shape":"SsmTargetValueList"}
+      }
+    },
+    "SsmTargetKey":{
+      "type":"string",
+      "max":163,
+      "min":1,
+      "pattern":"[\\p{L}\\p{Z}\\p{N}_.:/=\\-@]*"
+    },
+    "SsmTargetList":{
+      "type":"list",
+      "member":{"shape":"SsmTarget"},
+      "max":5,
+      "min":1
+    },
+    "SsmTargetValue":{
+      "type":"string",
+      "max":256,
+      "min":1
+    },
+    "SsmTargetValueList":{
+      "type":"list",
+      "member":{"shape":"SsmTargetValue"},
+      "max":50,
+      "min":1
     },
     "StartPlanExecutionRequest":{
       "type":"structure",
@@ -2181,7 +2391,8 @@
         "recoveryTimeObjectiveMinutes":{"shape":"UpdatePlanRequestRecoveryTimeObjectiveMinutesInteger"},
         "associatedAlarms":{"shape":"AssociatedAlarmMap"},
         "triggers":{"shape":"TriggerList"},
-        "reportConfiguration":{"shape":"ReportConfiguration"}
+        "reportConfiguration":{"shape":"ReportConfiguration"},
+        "serviceQuotaChecksEnabled":{"shape":"Boolean"}
       }
     },
     "UpdatePlanRequestRecoveryTimeObjectiveMinutesInteger":{
@@ -2195,6 +2406,13 @@
       "members":{
         "plan":{"shape":"Plan"}
       }
+    },
+    "WaitELBTargetGroupHealthy":{
+      "type":"string",
+      "enum":[
+        "enabled",
+        "disabled"
+      ]
     },
     "Workflow":{
       "type":"structure",

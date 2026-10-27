@@ -1160,13 +1160,18 @@
         "RuleIdentifier":{"shape":"RuleIdentifier"}
       }
     },
+    "DeletionProtection":{
+      "type":"string",
+      "enum":["ENABLED"]
+    },
     "DestinationLogsConfiguration":{
       "type":"structure",
       "members":{
         "LogsEncryptionConfiguration":{"shape":"LogsEncryptionConfiguration"},
         "BackupConfiguration":{"shape":"LogsBackupConfiguration"},
         "LogGroupNameConfiguration":{"shape":"LogGroupNameConfiguration"},
-        "TagPropagationConfiguration":{"shape":"TagPropagationConfiguration"}
+        "TagPropagationConfiguration":{"shape":"TagPropagationConfiguration"},
+        "LogGroupDeletionProtection":{"shape":"DeletionProtection"}
       }
     },
     "DestinationMetricsConfiguration":{
@@ -1903,13 +1908,15 @@
         "AWS::BedrockAgentCore::Gateway",
         "AWS::BedrockAgentCore::Memory",
         "AWS::BedrockAgentCore::WorkloadIdentity",
+        "AWS::BedrockAgentCore::PaymentManager",
         "AWS::SecurityHub::Hub",
         "AWS::CloudFront::Distribution",
         "AWS::SecurityHub::HubV2",
         "AWS::CloudWatch::OTelEnrichment",
         "AWS::MSK::Cluster",
         "AWS::S3::Bucket",
-        "AWS::Bedrock::KnowledgeBase"
+        "AWS::Bedrock::KnowledgeBase",
+        "AWS::XRay::TransactionSearchConfig"
       ]
     },
     "ResourceTypes":{
@@ -2314,7 +2321,8 @@
       "enum":[
         "Logs",
         "Metrics",
-        "Traces"
+        "Traces",
+        "Insights"
       ]
     },
     "TestTelemetryPipelineInput":{

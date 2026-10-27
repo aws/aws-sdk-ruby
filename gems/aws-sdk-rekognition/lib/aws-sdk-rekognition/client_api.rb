@@ -201,6 +201,10 @@ module Aws::Rekognition
     FaceRecordList = Shapes::ListShape.new(name: 'FaceRecordList')
     FaceSearchSettings = Shapes::StructureShape.new(name: 'FaceSearchSettings')
     FaceSearchSortBy = Shapes::StringShape.new(name: 'FaceSearchSortBy')
+    FeedbackCode = Shapes::StringShape.new(name: 'FeedbackCode')
+    FeedbackItem = Shapes::StructureShape.new(name: 'FeedbackItem')
+    FeedbackList = Shapes::ListShape.new(name: 'FeedbackList')
+    FeedbackMessage = Shapes::StringShape.new(name: 'FeedbackMessage')
     Float = Shapes::FloatShape.new(name: 'Float')
     FlowDefinitionArn = Shapes::StringShape.new(name: 'FlowDefinitionArn')
     Gender = Shapes::StructureShape.new(name: 'Gender')
@@ -417,6 +421,7 @@ module Aws::Rekognition
     S3Object = Shapes::StructureShape.new(name: 'S3Object')
     S3ObjectName = Shapes::StringShape.new(name: 'S3ObjectName')
     S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
+    SDKTypeString = Shapes::StringShape.new(name: 'SDKTypeString')
     SNSTopicArn = Shapes::StringShape.new(name: 'SNSTopicArn')
     SearchFacesByImageRequest = Shapes::StructureShape.new(name: 'SearchFacesByImageRequest')
     SearchFacesByImageResponse = Shapes::StructureShape.new(name: 'SearchFacesByImageResponse')
@@ -437,6 +442,7 @@ module Aws::Rekognition
     SegmentTypes = Shapes::ListShape.new(name: 'SegmentTypes')
     SegmentTypesInfo = Shapes::ListShape.new(name: 'SegmentTypesInfo')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    SessionMetadata = Shapes::StructureShape.new(name: 'SessionMetadata')
     SessionNotFoundException = Shapes::StructureShape.new(name: 'SessionNotFoundException')
     ShotSegment = Shapes::StructureShape.new(name: 'ShotSegment')
     Smile = Shapes::StructureShape.new(name: 'Smile')
@@ -1206,6 +1212,12 @@ module Aws::Rekognition
     FaceSearchSettings.add_member(:face_match_threshold, Shapes::ShapeRef.new(shape: Percent, location_name: "FaceMatchThreshold"))
     FaceSearchSettings.struct_class = Types::FaceSearchSettings
 
+    FeedbackItem.add_member(:code, Shapes::ShapeRef.new(shape: FeedbackCode, required: true, location_name: "Code"))
+    FeedbackItem.add_member(:message, Shapes::ShapeRef.new(shape: FeedbackMessage, required: true, location_name: "Message"))
+    FeedbackItem.struct_class = Types::FeedbackItem
+
+    FeedbackList.member = Shapes::ShapeRef.new(shape: FeedbackItem)
+
     Gender.add_member(:value, Shapes::ShapeRef.new(shape: GenderType, location_name: "Value"))
     Gender.add_member(:confidence, Shapes::ShapeRef.new(shape: Percent, location_name: "Confidence"))
     Gender.struct_class = Types::Gender
@@ -1293,6 +1305,8 @@ module Aws::Rekognition
     GetFaceLivenessSessionResultsResponse.add_member(:reference_image, Shapes::ShapeRef.new(shape: AuditImage, location_name: "ReferenceImage"))
     GetFaceLivenessSessionResultsResponse.add_member(:audit_images, Shapes::ShapeRef.new(shape: AuditImages, location_name: "AuditImages"))
     GetFaceLivenessSessionResultsResponse.add_member(:challenge, Shapes::ShapeRef.new(shape: Challenge, location_name: "Challenge"))
+    GetFaceLivenessSessionResultsResponse.add_member(:feedback, Shapes::ShapeRef.new(shape: FeedbackList, location_name: "Feedback"))
+    GetFaceLivenessSessionResultsResponse.add_member(:metadata, Shapes::ShapeRef.new(shape: SessionMetadata, location_name: "Metadata"))
     GetFaceLivenessSessionResultsResponse.struct_class = Types::GetFaceLivenessSessionResultsResponse
 
     GetFaceSearchRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
@@ -1920,6 +1934,9 @@ module Aws::Rekognition
     SegmentTypesInfo.member = Shapes::ShapeRef.new(shape: SegmentTypeInfo)
 
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
+
+    SessionMetadata.add_member(:sdk_type, Shapes::ShapeRef.new(shape: SDKTypeString, required: true, location_name: "SDKType"))
+    SessionMetadata.struct_class = Types::SessionMetadata
 
     SessionNotFoundException.struct_class = Types::SessionNotFoundException
 

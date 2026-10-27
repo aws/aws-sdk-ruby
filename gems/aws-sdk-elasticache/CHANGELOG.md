@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.155.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.154.0 (2026-10-20)
+------------------
+
+* Feature - LiveMigration enables customers to migrate from self-hosted EC2 Redis and Valkey clusters to ElastiCache Serverless with near-zero downtime. Customers control the migration through three API-driven phases (prepare, start, complete) that handle traffic proxying, data replication, and cutover.
+
+1.153.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.152.0 (2026-09-29)
+------------------
+
+* Feature - Amazon ElastiCache Serverless now supports public endpoints for Valkey caches. With the new Connection Type parameter, you can create a serverless cache accessible over the internet without any VPC configuration. Public endpoint caches require IAM authentication.
+
+1.151.0 (2026-09-24)
+------------------
+
+* Feature - Added tagging support for ElastiCache Global DataStore.
+
 1.150.0 (2026-09-11)
 ------------------
 

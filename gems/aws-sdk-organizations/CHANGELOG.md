@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.154.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.153.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.152.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.151.0 (2026-10-14)
+------------------
+
+* Feature - With dual-stack enabled, all requests now resolve to the endpoint in the partition's primary Region (for example, organizations.us-east-1.api.aws) and are signed for that Region. Previously, requests from other Regions resolved to a nonexistent endpoint. No API changes.
+
+1.150.0 (2026-09-30)
+------------------
+
+* Feature - Add support for policy operations on the GUARDDUTY POLICY policy type.
+
 1.149.0 (2026-09-11)
 ------------------
 

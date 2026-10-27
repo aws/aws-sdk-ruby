@@ -70,6 +70,9 @@ module Aws::SESV2
     ComplaintSubType = Shapes::StringShape.new(name: 'ComplaintSubType')
     ConcurrentModificationException = Shapes::StructureShape.new(name: 'ConcurrentModificationException')
     ConfigurationOverrides = Shapes::StructureShape.new(name: 'ConfigurationOverrides')
+    ConfigurationSetFilter = Shapes::MapShape.new(name: 'ConfigurationSetFilter')
+    ConfigurationSetFilterKey = Shapes::StringShape.new(name: 'ConfigurationSetFilterKey')
+    ConfigurationSetFilterValue = Shapes::StringShape.new(name: 'ConfigurationSetFilterValue')
     ConfigurationSetName = Shapes::StringShape.new(name: 'ConfigurationSetName')
     ConfigurationSetNameList = Shapes::ListShape.new(name: 'ConfigurationSetNameList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
@@ -292,6 +295,9 @@ module Aws::SESV2
     IdentityCertificate = Shapes::StructureShape.new(name: 'IdentityCertificate')
     IdentityCertificateList = Shapes::ListShape.new(name: 'IdentityCertificateList')
     IdentityCertificateStatus = Shapes::StringShape.new(name: 'IdentityCertificateStatus')
+    IdentityFilter = Shapes::MapShape.new(name: 'IdentityFilter')
+    IdentityFilterKey = Shapes::StringShape.new(name: 'IdentityFilterKey')
+    IdentityFilterValue = Shapes::StringShape.new(name: 'IdentityFilterValue')
     IdentityInfo = Shapes::StructureShape.new(name: 'IdentityInfo')
     IdentityInfoList = Shapes::ListShape.new(name: 'IdentityInfoList')
     IdentityType = Shapes::StringShape.new(name: 'IdentityType')
@@ -371,6 +377,9 @@ module Aws::SESV2
     ListTenantResourcesFilterValue = Shapes::StringShape.new(name: 'ListTenantResourcesFilterValue')
     ListTenantResourcesRequest = Shapes::StructureShape.new(name: 'ListTenantResourcesRequest')
     ListTenantResourcesResponse = Shapes::StructureShape.new(name: 'ListTenantResourcesResponse')
+    ListTenantsFilter = Shapes::MapShape.new(name: 'ListTenantsFilter')
+    ListTenantsFilterKey = Shapes::StringShape.new(name: 'ListTenantsFilterKey')
+    ListTenantsFilterValue = Shapes::StringShape.new(name: 'ListTenantsFilterValue')
     ListTenantsRequest = Shapes::StructureShape.new(name: 'ListTenantsRequest')
     ListTenantsResponse = Shapes::StructureShape.new(name: 'ListTenantsResponse')
     MailFromAttributes = Shapes::StructureShape.new(name: 'MailFromAttributes')
@@ -740,6 +749,9 @@ module Aws::SESV2
 
     ConfigurationOverrides.add_member(:tracking, Shapes::ShapeRef.new(shape: TrackingConfigurationOverrides, location_name: "Tracking"))
     ConfigurationOverrides.struct_class = Types::ConfigurationOverrides
+
+    ConfigurationSetFilter.key = Shapes::ShapeRef.new(shape: ConfigurationSetFilterKey)
+    ConfigurationSetFilter.value = Shapes::ShapeRef.new(shape: ConfigurationSetFilterValue)
 
     ConfigurationSetNameList.member = Shapes::ShapeRef.new(shape: ConfigurationSetName)
 
@@ -1447,6 +1459,9 @@ module Aws::SESV2
 
     IdentityCertificateList.member = Shapes::ShapeRef.new(shape: IdentityCertificate)
 
+    IdentityFilter.key = Shapes::ShapeRef.new(shape: IdentityFilterKey)
+    IdentityFilter.value = Shapes::ShapeRef.new(shape: IdentityFilterValue)
+
     IdentityInfo.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
     IdentityInfo.add_member(:identity_name, Shapes::ShapeRef.new(shape: Identity, location_name: "IdentityName"))
     IdentityInfo.add_member(:sending_enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "SendingEnabled"))
@@ -1510,8 +1525,9 @@ module Aws::SESV2
 
     LimitExceededException.struct_class = Types::LimitExceededException
 
-    ListConfigurationSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
-    ListConfigurationSetsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "PageSize"))
+    ListConfigurationSetsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ConfigurationSetFilter, location_name: "Filter"))
+    ListConfigurationSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListConfigurationSetsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
     ListConfigurationSetsRequest.struct_class = Types::ListConfigurationSetsRequest
 
     ListConfigurationSetsResponse.add_member(:configuration_sets, Shapes::ShapeRef.new(shape: ConfigurationSetNameList, location_name: "ConfigurationSets"))
@@ -1575,8 +1591,9 @@ module Aws::SESV2
     ListDomainDeliverabilityCampaignsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListDomainDeliverabilityCampaignsResponse.struct_class = Types::ListDomainDeliverabilityCampaignsResponse
 
-    ListEmailIdentitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "NextToken"))
-    ListEmailIdentitiesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location: "querystring", location_name: "PageSize"))
+    ListEmailIdentitiesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: IdentityFilter, location_name: "Filter"))
+    ListEmailIdentitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListEmailIdentitiesRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
     ListEmailIdentitiesRequest.struct_class = Types::ListEmailIdentitiesRequest
 
     ListEmailIdentitiesResponse.add_member(:email_identities, Shapes::ShapeRef.new(shape: IdentityInfoList, location_name: "EmailIdentities"))
@@ -1698,6 +1715,10 @@ module Aws::SESV2
     ListTenantResourcesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTenantResourcesResponse.struct_class = Types::ListTenantResourcesResponse
 
+    ListTenantsFilter.key = Shapes::ShapeRef.new(shape: ListTenantsFilterKey)
+    ListTenantsFilter.value = Shapes::ShapeRef.new(shape: ListTenantsFilterValue)
+
+    ListTenantsRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ListTenantsFilter, location_name: "Filter"))
     ListTenantsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListTenantsRequest.add_member(:page_size, Shapes::ShapeRef.new(shape: MaxItems, location_name: "PageSize"))
     ListTenantsRequest.struct_class = Types::ListTenantsRequest
@@ -2188,6 +2209,7 @@ module Aws::SESV2
     TenantInfo.add_member(:tenant_id, Shapes::ShapeRef.new(shape: TenantId, location_name: "TenantId"))
     TenantInfo.add_member(:tenant_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TenantArn"))
     TenantInfo.add_member(:created_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedTimestamp"))
+    TenantInfo.add_member(:sending_status, Shapes::ShapeRef.new(shape: SendingStatus, location_name: "SendingStatus"))
     TenantInfo.struct_class = Types::TenantInfo
 
     TenantInfoList.member = Shapes::ShapeRef.new(shape: TenantInfo)
@@ -3022,8 +3044,8 @@ module Aws::SESV2
 
       api.add_operation(:list_configuration_sets, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListConfigurationSets"
-        o.http_method = "GET"
-        o.http_request_uri = "/v2/email/configuration-sets"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/list-configuration-sets"
         o.input = Shapes::ShapeRef.new(shape: ListConfigurationSetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListConfigurationSetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -3137,8 +3159,8 @@ module Aws::SESV2
 
       api.add_operation(:list_email_identities, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListEmailIdentities"
-        o.http_method = "GET"
-        o.http_request_uri = "/v2/email/identities"
+        o.http_method = "POST"
+        o.http_request_uri = "/v2/email/list-identities"
         o.input = Shapes::ShapeRef.new(shape: ListEmailIdentitiesRequest)
         o.output = Shapes::ShapeRef.new(shape: ListEmailIdentitiesResponse)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)

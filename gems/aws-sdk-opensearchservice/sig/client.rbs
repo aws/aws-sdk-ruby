@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -314,7 +315,8 @@ module Aws
                            },
                            ?encryption_at_rest_options: {
                              enabled: bool?,
-                             kms_key_id: ::String?
+                             kms_key_id: ::String?,
+                             encryption_mode: ("DISK" | "NATIVE")?
                            },
                            ?node_to_node_encryption_options: {
                              enabled: bool?
@@ -326,7 +328,7 @@ module Aws
                              }],
                            ?domain_endpoint_options: {
                              enforce_https: bool?,
-                             tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10" | "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08")?,
+                             tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10" | "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08" | "Policy-Min-TLS-1-2-FIPS-PQ-2026-10")?,
                              custom_endpoint_enabled: bool?,
                              custom_endpoint: ::String?,
                              custom_endpoint_certificate_arn: ::String?
@@ -1482,11 +1484,12 @@ module Aws
                                     }],
                                   ?encryption_at_rest_options: {
                                     enabled: bool?,
-                                    kms_key_id: ::String?
+                                    kms_key_id: ::String?,
+                                    encryption_mode: ("DISK" | "NATIVE")?
                                   },
                                   ?domain_endpoint_options: {
                                     enforce_https: bool?,
-                                    tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10" | "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08")?,
+                                    tls_security_policy: ("Policy-Min-TLS-1-0-2019-07" | "Policy-Min-TLS-1-2-2019-07" | "Policy-Min-TLS-1-2-PFS-2023-10" | "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08" | "Policy-Min-TLS-1-2-FIPS-PQ-2026-10")?,
                                     custom_endpoint_enabled: bool?,
                                     custom_endpoint: ::String?,
                                     custom_endpoint_certificate_arn: ::String?
@@ -1527,7 +1530,8 @@ module Aws
                                     end_time: ::Time?
                                   },
                                   ?use_case: ("SEARCH" | "VECTOR" | "OBSERVABILITY" | "MIXED"),
-                                  ?engine_mode: ("GENERAL" | "OPTIMIZED")
+                                  ?engine_mode: ("GENERAL" | "OPTIMIZED"),
+                                  ?accepted_warnings: Array[::String]
                                 ) -> _UpdateDomainConfigResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDomainConfigResponseSuccess
 

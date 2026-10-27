@@ -1,6 +1,61 @@
 Unreleased Changes
 ------------------
 
+1.26.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.25.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.24.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.23.0 (2026-10-12)
+------------------
+
+* Feature - Adds support for Jira integration provider in AWS Security Agent.
+
+1.22.0 (2026-10-09)
+------------------
+
+* Feature - Adds a test scope field to specify whether a pentest targets a web application or a generative AI application.
+
+1.21.0 (2026-10-08)
+------------------
+
+* Feature - Include model field for suggested remediation steps as part of findings
+
+1.20.0 (2026-10-02)
+------------------
+
+* Feature - Adds trigger filters that control which pull request events, target branches, and labels start an automatic code review.
+
+1.19.0 (2026-09-29)
+------------------
+
+* Feature - Adds support for Azure DevOps and Bitbucket Data Center integration providers.
+
+1.18.0 (2026-09-28)
+------------------
+
+* Feature - Run automated penetration tests directly from your CI-CD pipeline to scan code changes before they ship, gating deployments on the findings
+
+1.17.0 (2026-09-25)
+------------------
+
+* Feature - This release adds the ListActorMessages operation, which returns the multi-factor authentication messages received at an actor's server-generated email address
+
+1.16.0 (2026-09-24)
+------------------
+
+* Feature - Added support for Confluence export, enabling customers to publish security findings to Confluence pages.
+
 1.15.0 (2026-09-11)
 ------------------
 

@@ -8,18 +8,6 @@
 Feature: Smoke tests for AgentRegistry
 
   @agentregistry @smoke
-  Scenario: ListDiscoverableRegistryRecordsNonexistentFailure
-    Given I create a 'Aws::AgentRegistry' client with config:
-      """
-{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
-      """
-    When I call the operation 'list_discoverable_registry_records' with params:
-      """
-{"registry_id":"aaaaaaaaaaaa"}
-      """
-    Then I expect an error was raised
-
-  @agentregistry @smoke
   Scenario: BatchGetDiscoverableRegistryRecordNonexistentFailure
     Given I create a 'Aws::AgentRegistry' client with config:
       """
@@ -40,5 +28,17 @@ Feature: Smoke tests for AgentRegistry
     When I call the operation 'search_discoverable_registry_records' with params:
       """
 {"search_query":"smoke-test","registry_ids":["aaaaaaaaaaaa"]}
+      """
+    Then I expect an error was raised
+
+  @agentregistry @smoke
+  Scenario: ListDiscoverableRegistryRecordsNonexistentFailure
+    Given I create a 'Aws::AgentRegistry' client with config:
+      """
+{"region":"us-east-1","use_fips_endpoint":false,"use_dualstack_endpoint":false}
+      """
+    When I call the operation 'list_discoverable_registry_records' with params:
+      """
+{"registry_id":"aaaaaaaaaaaa"}
       """
     Then I expect an error was raised

@@ -1,6 +1,66 @@
 Unreleased Changes
 ------------------
 
+1.287.0 (2026-10-22)
+------------------
+
+* Feature - Add support for large worker types in AWS Glue
+
+1.286.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.285.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.284.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.283.0 (2026-10-13)
+------------------
+
+* Feature - Amazon Glue releasing support for adding custom namespace for S3 Tables in Glue zero-ETL integration
+
+1.282.0 (2026-10-12)
+------------------
+
+* Feature - Adds new AWS Glue Data Quality APIs to retrieve and list data quality evaluation results. The new GetDataQualityResultV2, BatchGetDataQualityResultV2, and ListDataQualityResultsV2 operations return data quality results published from any supported data processing engine.
+
+1.281.0 (2026-10-08)
+------------------
+
+* Feature - Introduced GetSystemLogsForJobRun and GetSystemLogsForSession APIs, enabling account admins to retrieve system-space logs for FGAC-enabled Glue jobs and sessions.
+
+1.280.0 (2026-10-02)
+------------------
+
+* Feature - Added refresh token grant type to Glue Connection supported OAuth 2.0 grant types
+
+1.279.0 (2026-09-30)
+------------------
+
+* Feature - Enable Catalog ID for crawler, column statistics and materialized views.
+
+1.278.0 (2026-09-29)
+------------------
+
+* Feature - Add support for Glue system-managed materialized views.
+
+1.277.0 (2026-09-28)
+------------------
+
+* Feature - Added a new exception to several batch APIs
+
+1.276.0 (2026-09-25)
+------------------
+
+* Feature - add support for table level federation
+
 1.275.0 (2026-09-22)
 ------------------
 

@@ -125,6 +125,18 @@ module Aws
           expect { subject.upload(large_file, params) }.to raise_error(/multipart upload failed: part 3 failed/)
         end
 
+        it 'aborts instead of completing without a part when a part raises a non-StandardError' do
+          client.stub_responses(:upload_part, lambda { |ctx|
+            raise NoMemoryError, 'part 2 failed' if ctx.params[:part_number] == 2
+
+            { etag: 'etag' }
+          })
+          expect(client).to receive(:abort_multipart_upload).with(params.merge(upload_id: 'MultipartUploadId'))
+          expect(client).not_to receive(:complete_multipart_upload)
+
+          expect { subject.upload(large_file, params) }.to raise_error(MultipartUploadError, /part 2 failed/)
+        end
+
         it 'closes all file parts even when a part upload fails' do
           # Fail the last part so the posting loop can't break early and skip
           # un-posted parts. This keeps the assertion deterministic across MRI
@@ -157,7 +169,13 @@ module Aws
         end
 
         it 'reports when it is unable to abort a failed multipart upload', :jruby_flaky do
-          client.stub_responses(:upload_part, RuntimeError.new('part failed'))
+          client.stub_responses(:upload_part, lambda { |context|
+            if context.params[:part_number] == 2
+              RuntimeError.new('part failed')
+            else
+              { etag: 'etag' }
+            end
+          })
           client.stub_responses(:abort_multipart_upload, RuntimeError.new('network-error'))
           expect do
             subject.upload(large_file, params)
@@ -169,6 +187,23 @@ module Aws
 
           expect(client).to receive(:abort_multipart_upload).with(params.merge(upload_id: 'MultipartUploadId'))
           expect { subject.upload(large_file, params) }.to raise_error(Aws::S3::MultipartUploadError)
+        end
+
+        it 'aborts multipart upload when the executor rejects a task mid-upload' do
+          client.stub_responses(:upload_part, etag: 'etag')
+          executor = DefaultExecutor.new
+          calls = 0
+          allow(executor).to receive(:post).and_wrap_original do |original, *args, &blk|
+            calls += 1
+            raise DefaultExecutor::RejectedExecutionError if calls == 2
+
+            original.call(*args, &blk)
+          end
+          uploader = MultipartFileUploader.new(client: client, executor: executor)
+
+          expect(client).to receive(:abort_multipart_upload)
+            .with(params.merge(upload_id: 'MultipartUploadId')).and_call_original
+          expect { uploader.upload(large_file, params) }.to raise_error(Aws::S3::MultipartUploadError)
         end
       end
     end

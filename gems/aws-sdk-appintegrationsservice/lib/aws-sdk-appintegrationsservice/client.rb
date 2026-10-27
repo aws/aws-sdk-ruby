@@ -199,12 +199,19 @@ module Aws::AppIntegrationsService
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -606,8 +613,9 @@ module Aws::AppIntegrationsService
     #     },
     #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER, A2A_SERVER
     #     auth_config: {
-    #       auth_type: "API_KEY", # accepts API_KEY
+    #       auth_type: "API_KEY", # accepts API_KEY, CONNECT_JWT
     #       credential_provider_identifier: "Arn",
+    #       audience_override: "Identifier",
     #     },
     #   })
     #
@@ -1091,8 +1099,9 @@ module Aws::AppIntegrationsService
     #   resp.iframe_config.sandbox #=> Array
     #   resp.iframe_config.sandbox[0] #=> String
     #   resp.application_type #=> String, one of "STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"
-    #   resp.auth_config.auth_type #=> String, one of "API_KEY"
+    #   resp.auth_config.auth_type #=> String, one of "API_KEY", "CONNECT_JWT"
     #   resp.auth_config.credential_provider_identifier #=> String
+    #   resp.auth_config.audience_override #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/appintegrations-2020-07-29/GetApplication AWS API Documentation
     #
@@ -1745,8 +1754,9 @@ module Aws::AppIntegrationsService
     #     },
     #     application_type: "STANDARD", # accepts STANDARD, SERVICE, MCP_SERVER, A2A_SERVER
     #     auth_config: {
-    #       auth_type: "API_KEY", # accepts API_KEY
+    #       auth_type: "API_KEY", # accepts API_KEY, CONNECT_JWT
     #       credential_provider_identifier: "Arn",
+    #       audience_override: "Identifier",
     #     },
     #   })
     #
@@ -1890,7 +1900,7 @@ module Aws::AppIntegrationsService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.75.0'
+      context[:gem_version] = '1.79.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
