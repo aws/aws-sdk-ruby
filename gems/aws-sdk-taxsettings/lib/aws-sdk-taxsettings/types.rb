@@ -197,6 +197,16 @@ module Aws::TaxSettings
     #   Additional tax information to specify for a TRN in Monaco.
     #   @return [Types::MonacoAdditionalInfo]
     #
+    # @!attribute [rw] germany_additional_info
+    #   Additional tax information to specify for a Tax Registration Number
+    #   (TRN) in Germany.
+    #   @return [Types::GermanyAdditionalInfo]
+    #
+    # @!attribute [rw] mexico_additional_info
+    #   Additional tax information to specify for a Tax Registration Number
+    #   (TRN) in Mexico.
+    #   @return [Types::MexicoAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/AdditionalInfoRequest AWS API Documentation
     #
     class AdditionalInfoRequest < Struct.new(
@@ -223,7 +233,9 @@ module Aws::TaxSettings
       :belgium_additional_info,
       :chile_additional_info,
       :france_additional_info,
-      :monaco_additional_info)
+      :monaco_additional_info,
+      :germany_additional_info,
+      :mexico_additional_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -340,6 +352,16 @@ module Aws::TaxSettings
     #   Additional tax information associated with your TRN in Monaco.
     #   @return [Types::MonacoAdditionalInfo]
     #
+    # @!attribute [rw] germany_additional_info
+    #   Additional tax information associated with your Tax Registration
+    #   Number (TRN) in Germany.
+    #   @return [Types::GermanyAdditionalInfo]
+    #
+    # @!attribute [rw] mexico_additional_info
+    #   Additional tax information associated with your Tax Registration
+    #   Number (TRN) in Mexico.
+    #   @return [Types::MexicoAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/AdditionalInfoResponse AWS API Documentation
     #
     class AdditionalInfoResponse < Struct.new(
@@ -368,7 +390,9 @@ module Aws::TaxSettings
       :belgium_additional_info,
       :chile_additional_info,
       :france_additional_info,
-      :monaco_additional_info)
+      :monaco_additional_info,
+      :germany_additional_info,
+      :mexico_additional_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -923,6 +947,29 @@ module Aws::TaxSettings
       include Aws::Structure
     end
 
+    # Contains additional tax information associated with your Tax
+    # Registration Number (TRN) in Germany, such as the economic
+    # identification number and Steuernummer.
+    #
+    # @!attribute [rw] economic_identification_number
+    #   The economic identification number
+    #   (Wirtschafts-Identifikationsnummer, or W-IdNr) in Germany.
+    #   @return [String]
+    #
+    # @!attribute [rw] steuernummer
+    #   The Steuernummer (tax number issued by the local tax office) in
+    #   Germany.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/GermanyAdditionalInfo AWS API Documentation
+    #
+    class GermanyAdditionalInfo < Struct.new(
+      :economic_identification_number,
+      :steuernummer)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/GetTaxExemptionTypesRequest AWS API Documentation
@@ -1352,6 +1399,37 @@ module Aws::TaxSettings
       :service_tax_codes,
       :tax_information_number,
       :business_registration_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional tax information associated with your Tax
+    # Registration Number (TRN) in Mexico, such as the SAT tax regime and
+    # CFDI usage code.
+    #
+    # @!attribute [rw] tax_regime
+    #   The SAT-assigned tax regime code for your business in Mexico. Must
+    #   be a 3-digit number (for example, `601` for General de Ley Personas
+    #   Morales).
+    #   @return [String]
+    #
+    # @!attribute [rw] tax_regime_full_name
+    #   The full name of the SAT tax regime associated with your business in
+    #   Mexico.
+    #   @return [String]
+    #
+    # @!attribute [rw] cfdi_usage_code
+    #   The SAT CFDI usage code that identifies the purpose of the invoice
+    #   in Mexico (for example, `G01` for goods acquisition, `S01` for no
+    #   tax effects).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/MexicoAdditionalInfo AWS API Documentation
+    #
+    class MexicoAdditionalInfo < Struct.new(
+      :tax_regime,
+      :tax_regime_full_name,
+      :cfdi_usage_code)
       SENSITIVE = []
       include Aws::Structure
     end

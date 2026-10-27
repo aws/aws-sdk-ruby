@@ -1356,7 +1356,7 @@ module Aws::SageMaker
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
       attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
-      attr_accessor on_start_deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity")]
+      attr_accessor on_start_deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]
       attr_accessor status: ("InService" | "Creating" | "Updating" | "Failed" | "Degraded" | "SystemUpdating" | "Deleting")
       attr_accessor training_plan_arn: ::String
       attr_accessor training_plan_status: ::String
@@ -1389,7 +1389,7 @@ module Aws::SageMaker
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
       attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
-      attr_accessor on_start_deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity")]
+      attr_accessor on_start_deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]
       attr_accessor training_plan_arn: ::String
       attr_accessor override_vpc_config: Types::VpcConfig
       attr_accessor scheduled_update_config: Types::ScheduledUpdateConfig
@@ -1584,7 +1584,7 @@ module Aws::SageMaker
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
       attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
-      attr_accessor on_start_deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity")]
+      attr_accessor on_start_deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]
       attr_accessor status: ("InService" | "Creating" | "Updating" | "Failed" | "Degraded" | "SystemUpdating" | "Deleting")
       attr_accessor training_plan_arn: ::String
       attr_accessor training_plan_status: ::String
@@ -1601,7 +1601,7 @@ module Aws::SageMaker
       attr_accessor execution_role: ::String
       attr_accessor threads_per_core: ::Integer
       attr_accessor instance_storage_configs: ::Array[Types::ClusterInstanceStorageConfig]
-      attr_accessor on_start_deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity")]
+      attr_accessor on_start_deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]
       attr_accessor training_plan_arn: ::String
       attr_accessor override_vpc_config: Types::VpcConfig
       attr_accessor scheduled_update_config: Types::ScheduledUpdateConfig
@@ -6907,7 +6907,7 @@ module Aws::SageMaker
     class InstanceGroupHealthCheckConfiguration
       attr_accessor instance_group_name: ::String
       attr_accessor instance_ids: ::Array[::String]
-      attr_accessor deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity")]
+      attr_accessor deep_health_checks: ::Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]
       SENSITIVE: []
     end
 

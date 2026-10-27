@@ -54,6 +54,9 @@ module Aws::ECR
   # * {PullThroughCacheRuleNotFoundException}
   # * {ReferencedImagesNotFoundException}
   # * {RegistryPolicyNotFoundException}
+  # * {ReplicationBackfillInProgressException}
+  # * {ReplicationBackfillInvalidStatusException}
+  # * {ReplicationBackfillNotFoundException}
   # * {RepositoryAlreadyExistsException}
   # * {RepositoryNotEmptyException}
   # * {RepositoryNotFoundException}
@@ -501,6 +504,51 @@ module Aws::ECR
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::ECR::Types::RegistryPolicyNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ReplicationBackfillInProgressException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ReplicationBackfillInProgressException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ReplicationBackfillInvalidStatusException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ReplicationBackfillInvalidStatusException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class ReplicationBackfillNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::ECR::Types::ReplicationBackfillNotFoundException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

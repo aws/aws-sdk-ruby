@@ -41,6 +41,7 @@ module Aws::IVS
     ChannelAdConfigurationArn = Shapes::StringShape.new(name: 'ChannelAdConfigurationArn')
     ChannelArn = Shapes::StringShape.new(name: 'ChannelArn')
     ChannelArnList = Shapes::ListShape.new(name: 'ChannelArnList')
+    ChannelFailoverSlateConfigurationArn = Shapes::StringShape.new(name: 'ChannelFailoverSlateConfigurationArn')
     ChannelLatencyMode = Shapes::StringShape.new(name: 'ChannelLatencyMode')
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
     ChannelName = Shapes::StringShape.new(name: 'ChannelName')
@@ -56,6 +57,8 @@ module Aws::IVS
     CreateAdConfigurationResponse = Shapes::StructureShape.new(name: 'CreateAdConfigurationResponse')
     CreateChannelRequest = Shapes::StructureShape.new(name: 'CreateChannelRequest')
     CreateChannelResponse = Shapes::StructureShape.new(name: 'CreateChannelResponse')
+    CreateFailoverSlateConfigurationRequest = Shapes::StructureShape.new(name: 'CreateFailoverSlateConfigurationRequest')
+    CreateFailoverSlateConfigurationResponse = Shapes::StructureShape.new(name: 'CreateFailoverSlateConfigurationResponse')
     CreatePlaybackRestrictionPolicyRequest = Shapes::StructureShape.new(name: 'CreatePlaybackRestrictionPolicyRequest')
     CreatePlaybackRestrictionPolicyResponse = Shapes::StructureShape.new(name: 'CreatePlaybackRestrictionPolicyResponse')
     CreateRecordingConfigurationRequest = Shapes::StructureShape.new(name: 'CreateRecordingConfigurationRequest')
@@ -64,16 +67,28 @@ module Aws::IVS
     CreateStreamKeyResponse = Shapes::StructureShape.new(name: 'CreateStreamKeyResponse')
     DeleteAdConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteAdConfigurationRequest')
     DeleteChannelRequest = Shapes::StructureShape.new(name: 'DeleteChannelRequest')
+    DeleteFailoverSlateConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteFailoverSlateConfigurationRequest')
     DeletePlaybackKeyPairRequest = Shapes::StructureShape.new(name: 'DeletePlaybackKeyPairRequest')
     DeletePlaybackKeyPairResponse = Shapes::StructureShape.new(name: 'DeletePlaybackKeyPairResponse')
     DeletePlaybackRestrictionPolicyRequest = Shapes::StructureShape.new(name: 'DeletePlaybackRestrictionPolicyRequest')
     DeleteRecordingConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteRecordingConfigurationRequest')
     DeleteStreamKeyRequest = Shapes::StructureShape.new(name: 'DeleteStreamKeyRequest')
     DestinationConfiguration = Shapes::StructureShape.new(name: 'DestinationConfiguration')
+    FailoverSlateActivationThresholdSeconds = Shapes::IntegerShape.new(name: 'FailoverSlateActivationThresholdSeconds')
+    FailoverSlateConfiguration = Shapes::StructureShape.new(name: 'FailoverSlateConfiguration')
+    FailoverSlateConfigurationArn = Shapes::StringShape.new(name: 'FailoverSlateConfigurationArn')
+    FailoverSlateConfigurationList = Shapes::ListShape.new(name: 'FailoverSlateConfigurationList')
+    FailoverSlateConfigurationName = Shapes::StringShape.new(name: 'FailoverSlateConfigurationName')
+    FailoverSlateConfigurationState = Shapes::StringShape.new(name: 'FailoverSlateConfigurationState')
+    FailoverSlateConfigurationSummary = Shapes::StructureShape.new(name: 'FailoverSlateConfigurationSummary')
+    FailoverSlateMaxDisplaySeconds = Shapes::IntegerShape.new(name: 'FailoverSlateMaxDisplaySeconds')
+    FailoverSlateMinDisplaySeconds = Shapes::IntegerShape.new(name: 'FailoverSlateMinDisplaySeconds')
     GetAdConfigurationRequest = Shapes::StructureShape.new(name: 'GetAdConfigurationRequest')
     GetAdConfigurationResponse = Shapes::StructureShape.new(name: 'GetAdConfigurationResponse')
     GetChannelRequest = Shapes::StructureShape.new(name: 'GetChannelRequest')
     GetChannelResponse = Shapes::StructureShape.new(name: 'GetChannelResponse')
+    GetFailoverSlateConfigurationRequest = Shapes::StructureShape.new(name: 'GetFailoverSlateConfigurationRequest')
+    GetFailoverSlateConfigurationResponse = Shapes::StructureShape.new(name: 'GetFailoverSlateConfigurationResponse')
     GetPlaybackKeyPairRequest = Shapes::StructureShape.new(name: 'GetPlaybackKeyPairRequest')
     GetPlaybackKeyPairResponse = Shapes::StructureShape.new(name: 'GetPlaybackKeyPairResponse')
     GetPlaybackRestrictionPolicyRequest = Shapes::StructureShape.new(name: 'GetPlaybackRestrictionPolicyRequest')
@@ -102,6 +117,8 @@ module Aws::IVS
     ListAdConfigurationsResponse = Shapes::StructureShape.new(name: 'ListAdConfigurationsResponse')
     ListChannelsRequest = Shapes::StructureShape.new(name: 'ListChannelsRequest')
     ListChannelsResponse = Shapes::StructureShape.new(name: 'ListChannelsResponse')
+    ListFailoverSlateConfigurationsRequest = Shapes::StructureShape.new(name: 'ListFailoverSlateConfigurationsRequest')
+    ListFailoverSlateConfigurationsResponse = Shapes::StructureShape.new(name: 'ListFailoverSlateConfigurationsResponse')
     ListPlaybackKeyPairsRequest = Shapes::StructureShape.new(name: 'ListPlaybackKeyPairsRequest')
     ListPlaybackKeyPairsResponse = Shapes::StructureShape.new(name: 'ListPlaybackKeyPairsResponse')
     ListPlaybackRestrictionPoliciesRequest = Shapes::StructureShape.new(name: 'ListPlaybackRestrictionPoliciesRequest')
@@ -118,6 +135,7 @@ module Aws::IVS
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxAdConfigurationResults = Shapes::IntegerShape.new(name: 'MaxAdConfigurationResults')
     MaxChannelResults = Shapes::IntegerShape.new(name: 'MaxChannelResults')
+    MaxFailoverSlateConfigurationResults = Shapes::IntegerShape.new(name: 'MaxFailoverSlateConfigurationResults')
     MaxPlaybackKeyPairResults = Shapes::IntegerShape.new(name: 'MaxPlaybackKeyPairResults')
     MaxPlaybackRestrictionPolicyResults = Shapes::IntegerShape.new(name: 'MaxPlaybackRestrictionPolicyResults')
     MaxRecordingConfigurationResults = Shapes::IntegerShape.new(name: 'MaxRecordingConfigurationResults')
@@ -220,6 +238,8 @@ module Aws::IVS
     UpdateAdConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateAdConfigurationResponse')
     UpdateChannelRequest = Shapes::StructureShape.new(name: 'UpdateChannelRequest')
     UpdateChannelResponse = Shapes::StructureShape.new(name: 'UpdateChannelResponse')
+    UpdateFailoverSlateConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateFailoverSlateConfigurationRequest')
+    UpdateFailoverSlateConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateFailoverSlateConfigurationResponse')
     UpdatePlaybackRestrictionPolicyRequest = Shapes::StructureShape.new(name: 'UpdatePlaybackRestrictionPolicyRequest')
     UpdatePlaybackRestrictionPolicyResponse = Shapes::StructureShape.new(name: 'UpdatePlaybackRestrictionPolicyResponse')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
@@ -345,6 +365,7 @@ module Aws::IVS
     Channel.add_member(:multitrack_input_configuration, Shapes::ShapeRef.new(shape: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
     Channel.add_member(:container_format, Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
     Channel.add_member(:ad_configuration_arn, Shapes::ShapeRef.new(shape: ChannelAdConfigurationArn, location_name: "adConfigurationArn"))
+    Channel.add_member(:failover_slate_configuration_arn, Shapes::ShapeRef.new(shape: ChannelFailoverSlateConfigurationArn, location_name: "failoverSlateConfigurationArn"))
     Channel.struct_class = Types::Channel
 
     ChannelArnList.member = Shapes::ShapeRef.new(shape: ChannelArn)
@@ -373,6 +394,7 @@ module Aws::IVS
     ChannelSummary.add_member(:preset, Shapes::ShapeRef.new(shape: TranscodePreset, location_name: "preset"))
     ChannelSummary.add_member(:playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "playbackRestrictionPolicyArn"))
     ChannelSummary.add_member(:ad_configuration_arn, Shapes::ShapeRef.new(shape: ChannelAdConfigurationArn, location_name: "adConfigurationArn"))
+    ChannelSummary.add_member(:failover_slate_configuration_arn, Shapes::ShapeRef.new(shape: ChannelFailoverSlateConfigurationArn, location_name: "failoverSlateConfigurationArn"))
     ChannelSummary.struct_class = Types::ChannelSummary
 
     Channels.member = Shapes::ShapeRef.new(shape: Channel)
@@ -409,11 +431,22 @@ module Aws::IVS
     CreateChannelRequest.add_member(:multitrack_input_configuration, Shapes::ShapeRef.new(shape: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
     CreateChannelRequest.add_member(:container_format, Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
     CreateChannelRequest.add_member(:ad_configuration_arn, Shapes::ShapeRef.new(shape: ChannelAdConfigurationArn, location_name: "adConfigurationArn"))
+    CreateChannelRequest.add_member(:failover_slate_configuration_arn, Shapes::ShapeRef.new(shape: ChannelFailoverSlateConfigurationArn, location_name: "failoverSlateConfigurationArn"))
     CreateChannelRequest.struct_class = Types::CreateChannelRequest
 
     CreateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     CreateChannelResponse.add_member(:stream_key, Shapes::ShapeRef.new(shape: StreamKey, location_name: "streamKey"))
     CreateChannelResponse.struct_class = Types::CreateChannelResponse
+
+    CreateFailoverSlateConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationName, location_name: "name"))
+    CreateFailoverSlateConfigurationRequest.add_member(:activation_threshold_seconds, Shapes::ShapeRef.new(shape: FailoverSlateActivationThresholdSeconds, location_name: "activationThresholdSeconds"))
+    CreateFailoverSlateConfigurationRequest.add_member(:min_slate_display_seconds, Shapes::ShapeRef.new(shape: FailoverSlateMinDisplaySeconds, location_name: "minSlateDisplaySeconds"))
+    CreateFailoverSlateConfigurationRequest.add_member(:max_slate_display_seconds, Shapes::ShapeRef.new(shape: FailoverSlateMaxDisplaySeconds, location_name: "maxSlateDisplaySeconds"))
+    CreateFailoverSlateConfigurationRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    CreateFailoverSlateConfigurationRequest.struct_class = Types::CreateFailoverSlateConfigurationRequest
+
+    CreateFailoverSlateConfigurationResponse.add_member(:failover_slate_configuration, Shapes::ShapeRef.new(shape: FailoverSlateConfiguration, required: true, location_name: "failoverSlateConfiguration"))
+    CreateFailoverSlateConfigurationResponse.struct_class = Types::CreateFailoverSlateConfigurationResponse
 
     CreatePlaybackRestrictionPolicyRequest.add_member(:allowed_countries, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries"))
     CreatePlaybackRestrictionPolicyRequest.add_member(:allowed_origins, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedOriginList, location_name: "allowedOrigins"))
@@ -449,6 +482,9 @@ module Aws::IVS
     DeleteChannelRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "arn"))
     DeleteChannelRequest.struct_class = Types::DeleteChannelRequest
 
+    DeleteFailoverSlateConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationArn, required: true, location_name: "arn"))
+    DeleteFailoverSlateConfigurationRequest.struct_class = Types::DeleteFailoverSlateConfigurationRequest
+
     DeletePlaybackKeyPairRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackKeyPairArn, required: true, location_name: "arn"))
     DeletePlaybackKeyPairRequest.struct_class = Types::DeletePlaybackKeyPairRequest
 
@@ -466,6 +502,26 @@ module Aws::IVS
     DestinationConfiguration.add_member(:s3, Shapes::ShapeRef.new(shape: S3DestinationConfiguration, location_name: "s3"))
     DestinationConfiguration.struct_class = Types::DestinationConfiguration
 
+    FailoverSlateConfiguration.add_member(:arn, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationArn, required: true, location_name: "arn"))
+    FailoverSlateConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationName, location_name: "name"))
+    FailoverSlateConfiguration.add_member(:activation_threshold_seconds, Shapes::ShapeRef.new(shape: FailoverSlateActivationThresholdSeconds, location_name: "activationThresholdSeconds"))
+    FailoverSlateConfiguration.add_member(:min_slate_display_seconds, Shapes::ShapeRef.new(shape: FailoverSlateMinDisplaySeconds, location_name: "minSlateDisplaySeconds"))
+    FailoverSlateConfiguration.add_member(:max_slate_display_seconds, Shapes::ShapeRef.new(shape: FailoverSlateMaxDisplaySeconds, location_name: "maxSlateDisplaySeconds"))
+    FailoverSlateConfiguration.add_member(:state, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationState, required: true, location_name: "state"))
+    FailoverSlateConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    FailoverSlateConfiguration.struct_class = Types::FailoverSlateConfiguration
+
+    FailoverSlateConfigurationList.member = Shapes::ShapeRef.new(shape: FailoverSlateConfigurationSummary)
+
+    FailoverSlateConfigurationSummary.add_member(:arn, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationArn, required: true, location_name: "arn"))
+    FailoverSlateConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationName, location_name: "name"))
+    FailoverSlateConfigurationSummary.add_member(:activation_threshold_seconds, Shapes::ShapeRef.new(shape: FailoverSlateActivationThresholdSeconds, location_name: "activationThresholdSeconds"))
+    FailoverSlateConfigurationSummary.add_member(:min_slate_display_seconds, Shapes::ShapeRef.new(shape: FailoverSlateMinDisplaySeconds, location_name: "minSlateDisplaySeconds"))
+    FailoverSlateConfigurationSummary.add_member(:max_slate_display_seconds, Shapes::ShapeRef.new(shape: FailoverSlateMaxDisplaySeconds, location_name: "maxSlateDisplaySeconds"))
+    FailoverSlateConfigurationSummary.add_member(:state, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationState, required: true, location_name: "state"))
+    FailoverSlateConfigurationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    FailoverSlateConfigurationSummary.struct_class = Types::FailoverSlateConfigurationSummary
+
     GetAdConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: AdConfigurationArn, required: true, location_name: "arn"))
     GetAdConfigurationRequest.struct_class = Types::GetAdConfigurationRequest
 
@@ -477,6 +533,12 @@ module Aws::IVS
 
     GetChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     GetChannelResponse.struct_class = Types::GetChannelResponse
+
+    GetFailoverSlateConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationArn, required: true, location_name: "arn"))
+    GetFailoverSlateConfigurationRequest.struct_class = Types::GetFailoverSlateConfigurationRequest
+
+    GetFailoverSlateConfigurationResponse.add_member(:failover_slate_configuration, Shapes::ShapeRef.new(shape: FailoverSlateConfiguration, required: true, location_name: "failoverSlateConfiguration"))
+    GetFailoverSlateConfigurationResponse.struct_class = Types::GetFailoverSlateConfigurationResponse
 
     GetPlaybackKeyPairRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackKeyPairArn, required: true, location_name: "arn"))
     GetPlaybackKeyPairRequest.struct_class = Types::GetPlaybackKeyPairRequest
@@ -561,6 +623,7 @@ module Aws::IVS
     ListChannelsRequest.add_member(:filter_by_recording_configuration_arn, Shapes::ShapeRef.new(shape: ChannelRecordingConfigurationArn, location_name: "filterByRecordingConfigurationArn"))
     ListChannelsRequest.add_member(:filter_by_playback_restriction_policy_arn, Shapes::ShapeRef.new(shape: ChannelPlaybackRestrictionPolicyArn, location_name: "filterByPlaybackRestrictionPolicyArn"))
     ListChannelsRequest.add_member(:filter_by_ad_configuration_arn, Shapes::ShapeRef.new(shape: ChannelAdConfigurationArn, location_name: "filterByAdConfigurationArn"))
+    ListChannelsRequest.add_member(:filter_by_failover_slate_configuration_arn, Shapes::ShapeRef.new(shape: ChannelFailoverSlateConfigurationArn, location_name: "filterByFailoverSlateConfigurationArn"))
     ListChannelsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListChannelsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxChannelResults, location_name: "maxResults"))
     ListChannelsRequest.struct_class = Types::ListChannelsRequest
@@ -568,6 +631,14 @@ module Aws::IVS
     ListChannelsResponse.add_member(:channels, Shapes::ShapeRef.new(shape: ChannelList, required: true, location_name: "channels"))
     ListChannelsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListChannelsResponse.struct_class = Types::ListChannelsResponse
+
+    ListFailoverSlateConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListFailoverSlateConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxFailoverSlateConfigurationResults, location_name: "maxResults"))
+    ListFailoverSlateConfigurationsRequest.struct_class = Types::ListFailoverSlateConfigurationsRequest
+
+    ListFailoverSlateConfigurationsResponse.add_member(:failover_slate_configurations, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationList, required: true, location_name: "failoverSlateConfigurations"))
+    ListFailoverSlateConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
+    ListFailoverSlateConfigurationsResponse.struct_class = Types::ListFailoverSlateConfigurationsResponse
 
     ListPlaybackKeyPairsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "nextToken"))
     ListPlaybackKeyPairsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxPlaybackKeyPairResults, location_name: "maxResults"))
@@ -814,6 +885,7 @@ module Aws::IVS
     StreamSession.add_member(:ingest_configurations, Shapes::ShapeRef.new(shape: IngestConfigurations, location_name: "ingestConfigurations"))
     StreamSession.add_member(:recording_configuration, Shapes::ShapeRef.new(shape: RecordingConfiguration, location_name: "recordingConfiguration"))
     StreamSession.add_member(:truncated_events, Shapes::ShapeRef.new(shape: StreamEvents, location_name: "truncatedEvents"))
+    StreamSession.add_member(:failover_slate_configuration, Shapes::ShapeRef.new(shape: FailoverSlateConfiguration, location_name: "failoverSlateConfiguration"))
     StreamSession.struct_class = Types::StreamSession
 
     StreamSessionList.member = Shapes::ShapeRef.new(shape: StreamSessionSummary)
@@ -900,10 +972,21 @@ module Aws::IVS
     UpdateChannelRequest.add_member(:multitrack_input_configuration, Shapes::ShapeRef.new(shape: MultitrackInputConfiguration, location_name: "multitrackInputConfiguration"))
     UpdateChannelRequest.add_member(:container_format, Shapes::ShapeRef.new(shape: ContainerFormat, location_name: "containerFormat"))
     UpdateChannelRequest.add_member(:ad_configuration_arn, Shapes::ShapeRef.new(shape: ChannelAdConfigurationArn, location_name: "adConfigurationArn"))
+    UpdateChannelRequest.add_member(:failover_slate_configuration_arn, Shapes::ShapeRef.new(shape: ChannelFailoverSlateConfigurationArn, location_name: "failoverSlateConfigurationArn"))
     UpdateChannelRequest.struct_class = Types::UpdateChannelRequest
 
     UpdateChannelResponse.add_member(:channel, Shapes::ShapeRef.new(shape: Channel, location_name: "channel"))
     UpdateChannelResponse.struct_class = Types::UpdateChannelResponse
+
+    UpdateFailoverSlateConfigurationRequest.add_member(:arn, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationArn, required: true, location_name: "arn"))
+    UpdateFailoverSlateConfigurationRequest.add_member(:name, Shapes::ShapeRef.new(shape: FailoverSlateConfigurationName, location_name: "name"))
+    UpdateFailoverSlateConfigurationRequest.add_member(:activation_threshold_seconds, Shapes::ShapeRef.new(shape: FailoverSlateActivationThresholdSeconds, location_name: "activationThresholdSeconds"))
+    UpdateFailoverSlateConfigurationRequest.add_member(:min_slate_display_seconds, Shapes::ShapeRef.new(shape: FailoverSlateMinDisplaySeconds, location_name: "minSlateDisplaySeconds"))
+    UpdateFailoverSlateConfigurationRequest.add_member(:max_slate_display_seconds, Shapes::ShapeRef.new(shape: FailoverSlateMaxDisplaySeconds, location_name: "maxSlateDisplaySeconds"))
+    UpdateFailoverSlateConfigurationRequest.struct_class = Types::UpdateFailoverSlateConfigurationRequest
+
+    UpdateFailoverSlateConfigurationResponse.add_member(:failover_slate_configuration, Shapes::ShapeRef.new(shape: FailoverSlateConfiguration, required: true, location_name: "failoverSlateConfiguration"))
+    UpdateFailoverSlateConfigurationResponse.struct_class = Types::UpdateFailoverSlateConfigurationResponse
 
     UpdatePlaybackRestrictionPolicyRequest.add_member(:arn, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyArn, required: true, location_name: "arn"))
     UpdatePlaybackRestrictionPolicyRequest.add_member(:allowed_countries, Shapes::ShapeRef.new(shape: PlaybackRestrictionPolicyAllowedCountryList, location_name: "allowedCountries"))
@@ -1024,6 +1107,20 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
+      api.add_operation(:create_failover_slate_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateFailoverSlateConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/CreateFailoverSlateConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: CreateFailoverSlateConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateFailoverSlateConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:create_playback_restriction_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreatePlaybackRestrictionPolicy"
         o.http_method = "POST"
@@ -1087,6 +1184,19 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:delete_failover_slate_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteFailoverSlateConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/DeleteFailoverSlateConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: DeleteFailoverSlateConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
@@ -1159,6 +1269,18 @@ module Aws::IVS
         o.input = Shapes::ShapeRef.new(shape: GetChannelRequest)
         o.output = Shapes::ShapeRef.new(shape: GetChannelResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:get_failover_slate_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetFailoverSlateConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/GetFailoverSlateConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: GetFailoverSlateConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetFailoverSlateConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
@@ -1286,6 +1408,23 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_failover_slate_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListFailoverSlateConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/ListFailoverSlateConfigurations"
+        o.input = Shapes::ShapeRef.new(shape: ListFailoverSlateConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListFailoverSlateConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
           tokens: {
@@ -1494,7 +1633,23 @@ module Aws::IVS
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: PendingVerification)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+      end)
+
+      api.add_operation(:update_failover_slate_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateFailoverSlateConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/UpdateFailoverSlateConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateFailoverSlateConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateFailoverSlateConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
       end)
 
       api.add_operation(:update_playback_restriction_policy, Seahorse::Model::Operation.new.tap do |o|

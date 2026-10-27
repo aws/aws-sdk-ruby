@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.67.0 (2026-10-26)
+------------------
+
+* Feature - fix the sdk documenation issue only
+
 1.66.0 (2026-10-21)
 ------------------
 

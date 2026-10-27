@@ -1440,6 +1440,134 @@ module Aws::ECR
 
     # @!attribute [rw] registry_id
     #   The Amazon Web Services account ID associated with the registry that
+    #   contains the replication backfill to describe. If you do not specify
+    #   a registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_backfill_id
+    #   The ID of the replication backfill to describe.
+    #   @return [String]
+    #
+    # @!attribute [rw] result_status_filter
+    #   The status used to filter the returned results. Each result has a
+    #   status of `COMPLETE` or `FAILED`. If you omit this parameter,
+    #   results with both statuses are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of replication backfill results returned by
+    #   `DescribeReplicationBackfillResults` in paginated output. When this
+    #   parameter is used, `DescribeReplicationBackfillResults` only returns
+    #   `maxResults` results in a single page along with a `nextToken`
+    #   response element. The remaining results of the initial request can
+    #   be seen by sending another `DescribeReplicationBackfillResults`
+    #   request with the returned `nextToken` value. This value can be
+    #   between 1 and 1000. If this parameter is not used, then
+    #   `DescribeReplicationBackfillResults` returns up to 100 results and a
+    #   `nextToken` value, if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `DescribeReplicationBackfillResults` request where `maxResults` was
+    #   used and the results exceeded the value of that parameter.
+    #   Pagination continues from the end of the previous results that
+    #   returned the `nextToken` value. This value is `null` when there are
+    #   no more results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
+    #   used to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeReplicationBackfillResultsRequest AWS API Documentation
+    #
+    class DescribeReplicationBackfillResultsRequest < Struct.new(
+      :registry_id,
+      :replication_backfill_id,
+      :result_status_filter,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_backfill_id
+    #   The ID of the replication backfill.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination Region and registry to which the images are
+    #   replicated.
+    #   @return [Types::ReplicationDestination]
+    #
+    # @!attribute [rw] status
+    #   The current status of the replication backfill.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code for a replication backfill that has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The progress of the replication backfill, including the total,
+    #   completed, and failed replication counts. This value is `null` until
+    #   the replication backfill finishes preparing the set of images to
+    #   replicate. It is therefore `null` while the replication backfill is
+    #   `PREPARING`, and remains `null` if the replication backfill is
+    #   stopped before preparation completes.
+    #   @return [Types::ReplicationBackfillProgress]
+    #
+    # @!attribute [rw] results
+    #   The per-image results for the replication backfill. Results are
+    #   available only after the replication backfill reaches a terminal
+    #   status.
+    #   @return [Array<Types::ReplicationBackfillResult>]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time, in JavaScript date format, when the replication
+    #   backfill was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The date and time, in JavaScript date format, when the replication
+    #   backfill ended. This value is `null` while the replication backfill
+    #   is still in progress.
+    #   @return [Time]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `DescribeReplicationBackfillResults` request. When the results of a
+    #   `DescribeReplicationBackfillResults` request exceed `maxResults`,
+    #   this value can be used to retrieve the next page of results. This
+    #   value is `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/DescribeReplicationBackfillResultsResponse AWS API Documentation
+    #
+    class DescribeReplicationBackfillResultsResponse < Struct.new(
+      :registry_id,
+      :replication_backfill_id,
+      :destination,
+      :status,
+      :failure_code,
+      :progress,
+      :results,
+      :started_at,
+      :ended_at,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The Amazon Web Services account ID associated with the registry that
     #   contains the repositories to be described. If you do not specify a
     #   registry, the default registry is assumed.
     #   @return [String]
@@ -3403,6 +3531,75 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # @!attribute [rw] registry_id
+    #   The Amazon Web Services account ID associated with the registry for
+    #   which to list replication backfills. If you do not specify a
+    #   registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of replication backfill results returned by
+    #   `ListReplicationBackfills` in paginated output. When this parameter
+    #   is used, `ListReplicationBackfills` only returns `maxResults`
+    #   results in a single page along with a `nextToken` response element.
+    #   The remaining results of the initial request can be seen by sending
+    #   another `ListReplicationBackfills` request with the returned
+    #   `nextToken` value. This value can be between 1 and 50. If this
+    #   parameter is not used, then `ListReplicationBackfills` returns up to
+    #   25 results and a `nextToken` value, if applicable.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value returned from a previous paginated
+    #   `ListReplicationBackfills` request where `maxResults` was used and
+    #   the results exceeded the value of that parameter. Pagination
+    #   continues from the end of the previous results that returned the
+    #   `nextToken` value. This value is `null` when there are no more
+    #   results to return.
+    #
+    #   <note markdown="1"> This token should be treated as an opaque identifier that is only
+    #   used to retrieve the next items in a list and not for other
+    #   programmatic purposes.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListReplicationBackfillsRequest AWS API Documentation
+    #
+    class ListReplicationBackfillsRequest < Struct.new(
+      :registry_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] backfills
+    #   A list of the replication backfills for the registry.
+    #   @return [Array<Types::ReplicationBackfillSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` value to include in a future
+    #   `ListReplicationBackfills` request. When the results of a
+    #   `ListReplicationBackfills` request exceed `maxResults`, this value
+    #   can be used to retrieve the next page of results. This value is
+    #   `null` when there are no more results to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ListReplicationBackfillsResponse AWS API Documentation
+    #
+    class ListReplicationBackfillsResponse < Struct.new(
+      :registry_id,
+      :backfills,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon Resource Name (ARN) that identifies the resource for
     #   which to list the tags. Currently, the only supported resource is an
@@ -4093,6 +4290,184 @@ module Aws::ECR
       include Aws::Structure
     end
 
+    # A replication backfill is already in progress for the specified
+    # destination Region. This occurs because only one replication backfill
+    # can be in progress for a given destination Region at a time. Wait for
+    # the in progress backfill to reach a terminal status, or stop it with
+    # the StopReplicationBackfill operation, before starting another one.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationBackfillInProgressException AWS API Documentation
+    #
+    class ReplicationBackfillInProgressException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The requested operation can't be performed on the replication
+    # backfill because it is not in a valid status for that operation. For
+    # example, you can't stop a replication backfill that has already
+    # reached a terminal status. Use the DescribeReplicationBackfillResults
+    # operation to check the current status before retrying.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationBackfillInvalidStatusException AWS API Documentation
+    #
+    class ReplicationBackfillInvalidStatusException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The specified replication backfill could not be found. Check the
+    # specified replication backfill ID and ensure that you are operating on
+    # the correct registry.
+    #
+    # @!attribute [rw] message
+    #   The error message associated with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationBackfillNotFoundException AWS API Documentation
+    #
+    class ReplicationBackfillNotFoundException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the progress of a replication backfill,
+    # including the total, completed, and failed replication counts.
+    #
+    # @!attribute [rw] total_replication_count
+    #   The total number of replications that the backfill will perform.
+    #   Each image and tag combination is counted as a single replication.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] completed_replication_count
+    #   The number of replications that have completed successfully.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_replication_count
+    #   The number of replications that have failed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_codes
+    #   The distinct failure codes for the replications that have failed.
+    #   Each failure code appears at most once, regardless of how many
+    #   replications failed with that code.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationBackfillProgress AWS API Documentation
+    #
+    class ReplicationBackfillProgress < Struct.new(
+      :total_replication_count,
+      :completed_replication_count,
+      :failed_replication_count,
+      :failure_codes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing the result of a single replication during a
+    # replication backfill. Each image and tag combination is replicated as
+    # a single replication.
+    #
+    # @!attribute [rw] repository_name
+    #   The name of the repository that contains the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   An object with identifying information for the image.
+    #   @return [Types::ImageIdentifier]
+    #
+    # @!attribute [rw] status
+    #   The replication status of the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code for a replication that has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] sub_image_failure_codes
+    #   The distinct failure codes for the images referenced by a manifest
+    #   list that failed to replicate. Each failure code appears at most
+    #   once, regardless of how many referenced images failed with that
+    #   code. This field is present only when the image is a manifest list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationBackfillResult AWS API Documentation
+    #
+    class ReplicationBackfillResult < Struct.new(
+      :repository_name,
+      :image_id,
+      :status,
+      :failure_code,
+      :sub_image_failure_codes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object representing a summary of a replication backfill, including
+    # its status, destination, progress, and start and end times.
+    #
+    # @!attribute [rw] replication_backfill_id
+    #   The ID of the replication backfill.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination Region and registry to which the images are
+    #   replicated.
+    #   @return [Types::ReplicationDestination]
+    #
+    # @!attribute [rw] status
+    #   The current status of the replication backfill.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_code
+    #   The failure code for a replication backfill that has failed.
+    #   @return [String]
+    #
+    # @!attribute [rw] progress
+    #   The progress of the replication backfill, including the total,
+    #   completed, and failed replication counts. This value is `null` until
+    #   the replication backfill finishes preparing the set of images to
+    #   replicate. It is therefore `null` while the replication backfill is
+    #   `PREPARING`, and remains `null` if the replication backfill is
+    #   stopped before preparation completes.
+    #   @return [Types::ReplicationBackfillProgress]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time, in JavaScript date format, when the replication
+    #   backfill was started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] ended_at
+    #   The date and time, in JavaScript date format, when the replication
+    #   backfill ended. This value is `null` while the replication backfill
+    #   is still in progress.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/ReplicationBackfillSummary AWS API Documentation
+    #
+    class ReplicationBackfillSummary < Struct.new(
+      :replication_backfill_id,
+      :destination,
+      :status,
+      :failure_code,
+      :progress,
+      :started_at,
+      :ended_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The replication configuration for a registry.
     #
     # @!attribute [rw] rules
@@ -4160,8 +4535,8 @@ module Aws::ECR
     #   The Amazon Resource Name (ARN) that identifies the repository. The
     #   ARN contains the `arn:aws:ecr` namespace, followed by the region of
     #   the repository, Amazon Web Services account ID of the repository
-    #   owner, repository namespace, and repository name. For example,
-    #   `arn:aws:ecr:region:012345678910:repository-namespace/repository-name`.
+    #   owner, and repository name. For example,
+    #   `arn:aws:ecr:region:012345678910:repository/repository-name`.
     #   @return [String]
     #
     # @!attribute [rw] registry_id
@@ -4842,6 +5217,118 @@ module Aws::ECR
       :repository_name,
       :lifecycle_policy_text,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The Amazon Web Services account ID associated with the registry from
+    #   which to start the replication backfill. If you do not specify a
+    #   registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination Region and registry to which the images are
+    #   replicated.
+    #   @return [Types::ReplicationDestination]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartReplicationBackfillRequest AWS API Documentation
+    #
+    class StartReplicationBackfillRequest < Struct.new(
+      :registry_id,
+      :destination)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] replication_backfill_id
+    #   The ID of the replication backfill that was started. Use this value
+    #   to describe or stop the backfill.
+    #   @return [String]
+    #
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination Region and registry to which the images are
+    #   replicated.
+    #   @return [Types::ReplicationDestination]
+    #
+    # @!attribute [rw] status
+    #   The current status of the replication backfill. A newly started
+    #   replication backfill is returned with a status of `PREPARING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time, in JavaScript date format, when the replication
+    #   backfill was started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StartReplicationBackfillResponse AWS API Documentation
+    #
+    class StartReplicationBackfillResponse < Struct.new(
+      :replication_backfill_id,
+      :registry_id,
+      :destination,
+      :status,
+      :started_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The Amazon Web Services account ID associated with the registry that
+    #   contains the replication backfill to stop. If you do not specify a
+    #   registry, the default registry is assumed.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_backfill_id
+    #   The ID of the replication backfill to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StopReplicationBackfillRequest AWS API Documentation
+    #
+    class StopReplicationBackfillRequest < Struct.new(
+      :registry_id,
+      :replication_backfill_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] registry_id
+    #   The registry ID associated with the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] replication_backfill_id
+    #   The ID of the replication backfill.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination
+    #   The destination Region and registry to which the images are
+    #   replicated.
+    #   @return [Types::ReplicationDestination]
+    #
+    # @!attribute [rw] status
+    #   The current status of the replication backfill. When you stop a
+    #   replication backfill, its status is `STOPPED` if the backfill is
+    #   stopped immediately, or `STOPPING` if there are replications still
+    #   in progress that must complete before the backfill stops.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time, in JavaScript date format, when the replication
+    #   backfill was started.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecr-2015-09-21/StopReplicationBackfillResponse AWS API Documentation
+    #
+    class StopReplicationBackfillResponse < Struct.new(
+      :registry_id,
+      :replication_backfill_id,
+      :destination,
+      :status,
+      :started_at)
       SENSITIVE = []
       include Aws::Structure
     end

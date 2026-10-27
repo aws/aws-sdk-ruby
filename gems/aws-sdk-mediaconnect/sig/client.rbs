@@ -163,6 +163,17 @@ module Aws
                                    ) -> _AddFlowVpcInterfacesResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddFlowVpcInterfacesResponseSuccess
 
+      interface _BatchGetDestinationEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetDestinationEndpointResponse]
+        def destination_endpoints: () -> ::Array[Types::DestinationEndpoint]
+        def errors: () -> ::Array[Types::BatchGetDestinationEndpointError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#batch_get_destination_endpoint-instance_method
+      def batch_get_destination_endpoint: (
+                                            arns: Array[::String]
+                                          ) -> _BatchGetDestinationEndpointResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetDestinationEndpointResponseSuccess
+
       interface _BatchGetRouterInputResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetRouterInputResponse]
         def router_inputs: () -> ::Array[Types::RouterInput]
@@ -195,6 +206,31 @@ module Aws
                                      arns: Array[::String]
                                    ) -> _BatchGetRouterOutputResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetRouterOutputResponseSuccess
+
+      interface _BatchGetSourceEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetSourceEndpointResponse]
+        def source_endpoints: () -> ::Array[Types::SourceEndpoint]
+        def errors: () -> ::Array[Types::BatchGetSourceEndpointError]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#batch_get_source_endpoint-instance_method
+      def batch_get_source_endpoint: (
+                                       arns: Array[::String]
+                                     ) -> _BatchGetSourceEndpointResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchGetSourceEndpointResponseSuccess
+
+      interface _ConnectEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ConnectEndpointsResponse]
+        def destination_endpoint_arn: () -> ::String
+        def destination_endpoint_name: () -> ::String
+        def source_endpoint_arn: () -> ::String
+        def source_endpoint_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#connect_endpoints-instance_method
+      def connect_endpoints: (
+                               destination_endpoint_arn: ::String,
+                               source_endpoint_arn: ::String
+                             ) -> _ConnectEndpointsResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ConnectEndpointsResponseSuccess
 
       interface _CreateBridgeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateBridgeResponse]
@@ -402,6 +438,17 @@ module Aws
                                 ) -> _DeleteRouterOutputResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteRouterOutputResponseSuccess
 
+      interface _DeregisterDestinationEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterDestinationEndpointResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#deregister_destination_endpoint-instance_method
+      def deregister_destination_endpoint: (
+                                             arn: ::String
+                                           ) -> _DeregisterDestinationEndpointResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterDestinationEndpointResponseSuccess
+
       interface _DeregisterGatewayInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterGatewayInstanceResponse]
         def gateway_instance_arn: () -> ::String
@@ -413,6 +460,17 @@ module Aws
                                          gateway_instance_arn: ::String
                                        ) -> _DeregisterGatewayInstanceResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterGatewayInstanceResponseSuccess
+
+      interface _DeregisterSourceEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterSourceEndpointResponse]
+        def arn: () -> ::String
+        def name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#deregister_source_endpoint-instance_method
+      def deregister_source_endpoint: (
+                                        arn: ::String
+                                      ) -> _DeregisterSourceEndpointResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterSourceEndpointResponseSuccess
 
       interface _DescribeBridgeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBridgeResponse]
@@ -499,6 +557,30 @@ module Aws
                                 ) -> _DescribeReservationResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReservationResponseSuccess
 
+      interface _DisconnectEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DisconnectEndpointsResponse]
+        def destination_endpoint_arn: () -> ::String
+        def destination_endpoint_name: () -> ::String
+        def source_endpoint_arn: () -> ::String
+        def source_endpoint_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#disconnect_endpoints-instance_method
+      def disconnect_endpoints: (
+                                  destination_endpoint_arn: ::String,
+                                  source_endpoint_arn: ::String
+                                ) -> _DisconnectEndpointsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DisconnectEndpointsResponseSuccess
+
+      interface _GetDestinationEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDestinationEndpointResponse]
+        def destination_endpoint: () -> Types::DestinationEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#get_destination_endpoint-instance_method
+      def get_destination_endpoint: (
+                                      arn: ::String
+                                    ) -> _GetDestinationEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDestinationEndpointResponseSuccess
+
       interface _GetRouterInputResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetRouterInputResponse]
         def router_input: () -> Types::RouterInput
@@ -553,6 +635,16 @@ module Aws
                              ) -> _GetRouterOutputResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetRouterOutputResponseSuccess
 
+      interface _GetSourceEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSourceEndpointResponse]
+        def source_endpoint: () -> Types::SourceEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#get_source_endpoint-instance_method
+      def get_source_endpoint: (
+                                 arn: ::String
+                               ) -> _GetSourceEndpointResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSourceEndpointResponseSuccess
+
       interface _GrantFlowEntitlementsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GrantFlowEntitlementsResponse]
         def entitlements: () -> ::Array[Types::Entitlement]
@@ -579,6 +671,25 @@ module Aws
                           ?next_token: ::String
                         ) -> _ListBridgesResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBridgesResponseSuccess
+
+      interface _ListDestinationEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDestinationEndpointsResponse]
+        def destination_endpoints: () -> ::Array[Types::ListedDestinationEndpoint]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_destination_endpoints-instance_method
+      def list_destination_endpoints: (
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String,
+                                        ?filters: Array[
+                                          {
+                                            region_names: Array[::String]?,
+                                            destination_types: Array[("STANDARD" | "ROUTER_INPUT")]?,
+                                            name_contains: Array[::String]?
+                                          }
+                                        ]
+                                      ) -> _ListDestinationEndpointsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDestinationEndpointsResponseSuccess
 
       interface _ListEntitlementsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListEntitlementsResponse]
@@ -668,7 +779,7 @@ module Aws
                                     region_names: Array[::String]?,
                                     network_interface_arns: Array[::String]?,
                                     routing_scopes: Array[("REGIONAL" | "GLOBAL")]?,
-                                    input_types: Array[("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW" | "MEDIALIVE_CHANNEL")]?
+                                    input_types: Array[("STANDARD" | "FAILOVER" | "MERGE" | "MEDIACONNECT_FLOW" | "MEDIALIVE_CHANNEL" | "DESTINATION_ENDPOINT")]?
                                   }
                                 ]
                               ) -> _ListRouterInputsResponseSuccess
@@ -707,13 +818,32 @@ module Aws
                                      region_names: Array[::String]?,
                                      network_interface_arns: Array[::String]?,
                                      routing_scopes: Array[("REGIONAL" | "GLOBAL")]?,
-                                     output_types: Array[("STANDARD" | "MEDIACONNECT_FLOW" | "MEDIALIVE_INPUT")]?,
+                                     output_types: Array[("STANDARD" | "MEDIACONNECT_FLOW" | "MEDIALIVE_INPUT" | "SOURCE_ENDPOINT")]?,
                                      routed_input_arns: Array[::String]?,
                                      name_contains: Array[::String]?
                                    }
                                  ]
                                ) -> _ListRouterOutputsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRouterOutputsResponseSuccess
+
+      interface _ListSourceEndpointsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSourceEndpointsResponse]
+        def source_endpoints: () -> ::Array[Types::ListedSourceEndpoint]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#list_source_endpoints-instance_method
+      def list_source_endpoints: (
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String,
+                                   ?filters: Array[
+                                     {
+                                       region_names: Array[::String]?,
+                                       source_types: Array[("STANDARD" | "ROUTER_OUTPUT")]?,
+                                       name_contains: Array[::String]?
+                                     }
+                                   ]
+                                 ) -> _ListSourceEndpointsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSourceEndpointsResponseSuccess
 
       interface _ListTagsForGlobalResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForGlobalResourceResponse]
@@ -746,6 +876,34 @@ module Aws
                                start: ::String
                              ) -> _PurchaseOfferingResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PurchaseOfferingResponseSuccess
+
+      interface _RegisterDestinationEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterDestinationEndpointResponse]
+        def destination_endpoint: () -> Types::DestinationEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#register_destination_endpoint-instance_method
+      def register_destination_endpoint: (
+                                           ?description: ::String,
+                                           configuration: Params::destination_endpoint_configuration,
+                                           ?region_name: ::String,
+                                           ?tags: Hash[::String, ::String],
+                                           ?client_token: ::String
+                                         ) -> _RegisterDestinationEndpointResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterDestinationEndpointResponseSuccess
+
+      interface _RegisterSourceEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterSourceEndpointResponse]
+        def source_endpoint: () -> Types::SourceEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#register_source_endpoint-instance_method
+      def register_source_endpoint: (
+                                      ?region_name: ::String,
+                                      ?description: ::String,
+                                      configuration: Params::source_endpoint_configuration,
+                                      ?tags: Hash[::String, ::String],
+                                      ?client_token: ::String
+                                    ) -> _RegisterSourceEndpointResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterSourceEndpointResponseSuccess
 
       interface _RemoveBridgeOutputResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RemoveBridgeOutputResponse]
@@ -1049,6 +1207,18 @@ module Aws
                                ) -> _UpdateBridgeStateResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateBridgeStateResponseSuccess
 
+      interface _UpdateDestinationEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDestinationEndpointResponse]
+        def destination_endpoint: () -> Types::DestinationEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_destination_endpoint-instance_method
+      def update_destination_endpoint: (
+                                         arn: ::String,
+                                         ?description: ::String,
+                                         ?configuration: Params::destination_endpoint_configuration
+                                       ) -> _UpdateDestinationEndpointResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDestinationEndpointResponseSuccess
+
       interface _UpdateFlowResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFlowResponse]
         def flow: () -> Types::Flow
@@ -1247,8 +1417,36 @@ module Aws
                                 ) -> _UpdateRouterOutputResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRouterOutputResponseSuccess
 
+      interface _UpdateSourceEndpointResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSourceEndpointResponse]
+        def source_endpoint: () -> Types::SourceEndpoint
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#update_source_endpoint-instance_method
+      def update_source_endpoint: (
+                                    arn: ::String,
+                                    ?description: ::String,
+                                    ?configuration: Params::source_endpoint_configuration
+                                  ) -> _UpdateSourceEndpointResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSourceEndpointResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/MediaConnect/Client.html#wait_until-instance_method
-      def wait_until: (:flow_active waiter_name, 
+      def wait_until: (:destination_endpoint_connected waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetDestinationEndpointResponseSuccess
+                    | (:destination_endpoint_connected waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetDestinationEndpointResponseSuccess
+                    | (:destination_endpoint_deregistered waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetDestinationEndpointResponseSuccess
+                    | (:destination_endpoint_deregistered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetDestinationEndpointResponseSuccess
+                    | (:destination_endpoint_disconnected waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetDestinationEndpointResponseSuccess
+                    | (:destination_endpoint_disconnected waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetDestinationEndpointResponseSuccess
+                    | (:destination_endpoint_registered waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetDestinationEndpointResponseSuccess
+                    | (:destination_endpoint_registered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetDestinationEndpointResponseSuccess
+                    | (:flow_active waiter_name, 
                     flow_arn: ::String
                   ) -> Client::_DescribeFlowResponseSuccess
                     | (:flow_active waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFlowResponseSuccess
@@ -1292,6 +1490,30 @@ module Aws
                     arn: ::String
                   ) -> Client::_GetRouterOutputResponseSuccess
                     | (:output_unrouted waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetRouterOutputResponseSuccess
+                    | (:source_endpoint_connected waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_connected waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_connecting waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_connecting waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_deregistered waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_deregistered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_disconnected waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_disconnected waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_disconnecting waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_disconnecting waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_registered waiter_name, 
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                    | (:source_endpoint_registered waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetSourceEndpointResponseSuccess
     end
   end
 end

@@ -55,7 +55,7 @@ module Aws::TaxSettings
   autoload :EndpointProvider, 'aws-sdk-taxsettings/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-taxsettings/endpoints'
 
-  GEM_VERSION = '1.49.0'
+  GEM_VERSION = '1.50.0'
 
 end
 

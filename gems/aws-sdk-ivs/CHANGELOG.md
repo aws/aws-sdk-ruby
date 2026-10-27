@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.97.0 (2026-10-26)
+------------------
+
+* Feature - The release adds failover slate configurations, which show viewers a slate during temporary broadcaster network disruptions to reduce viewer drop-off and refresh storms.
+
 1.96.0 (2026-10-21)
 ------------------
 

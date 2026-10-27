@@ -424,6 +424,10 @@ module Aws
                                      response_page_path: ::String?,
                                      error_caching_min_ttl: ::Integer?
                                    }
+                                 ],
+                                 ?enable_waf: bool,
+                                 ?waf_rules: Array[
+                                   Params::waf_rule
                                  ]
                                ) -> _CreateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDistributionResponseSuccess
@@ -1281,13 +1285,13 @@ module Aws
 
       interface _GetDistributionMetricDataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDistributionMetricDataResult]
-        def metric_name: () -> ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate")
+        def metric_name: () -> ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate" | "WafAllowedRequests" | "WafBlockedRequests")
         def metric_data: () -> ::Array[Types::MetricDatapoint]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_distribution_metric_data-instance_method
       def get_distribution_metric_data: (
                                           distribution_name: ::String,
-                                          metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate"),
+                                          metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate" | "WafAllowedRequests" | "WafBlockedRequests"),
                                           start_time: ::Time,
                                           end_time: ::Time,
                                           period: ::Integer,
@@ -2138,6 +2142,10 @@ module Aws
                                      response_page_path: ::String?,
                                      error_caching_min_ttl: ::Integer?
                                    }
+                                 ],
+                                 ?enable_waf: bool,
+                                 ?waf_rules: Array[
+                                   Params::waf_rule
                                  ]
                                ) -> _UpdateDistributionResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDistributionResponseSuccess

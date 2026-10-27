@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.184.0 (2026-10-26)
+------------------
+
+* Feature - This release adds support for EKS management of Gateway API CRDs (Custom Resource Definitions)
+
 1.183.0 (2026-10-21)
 ------------------
 

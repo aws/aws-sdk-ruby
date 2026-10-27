@@ -3,6 +3,13 @@ Unreleased Changes
 
 * Feature - Reduce object allocation overhead for SDK responses. SDK clients now return `Aws::Response`, a subclass of `Seahorse::Client::Response`.
 
+3.261.0 (2026-10-26)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - Adds support for the OAuth 2.0 Token Exchange grant (RFC 8693), enabling applications to exchange identity provider issued JSON Web Tokens (JWTs) for short-lived OAuth access tokens to access supported AWS services without managing separate AWS credentials.
+
 3.260.0 (2026-10-21)
 ------------------
 

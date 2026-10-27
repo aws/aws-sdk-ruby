@@ -534,6 +534,7 @@ module Aws::IVS
     #   resp.channels[0].multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
     #   resp.channels[0].container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.channels[0].ad_configuration_arn #=> String
+    #   resp.channels[0].failover_slate_configuration_arn #=> String
     #   resp.errors #=> Array
     #   resp.errors[0].arn #=> String
     #   resp.errors[0].code #=> String
@@ -797,6 +798,11 @@ module Aws::IVS
     # @option params [String] :ad_configuration_arn
     #   ARN of the ad configuration associated with the channel.
     #
+    # @option params [String] :failover_slate_configuration_arn
+    #   Failover-slate-configuration ARN. A valid ARN value here both
+    #   specifies the ARN and enables failover slate. Default: "" (empty
+    #   string, no failover slate configuration is applied).
+    #
     # @return [Types::CreateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateChannelResponse#channel #channel} => Types::Channel
@@ -823,6 +829,7 @@ module Aws::IVS
     #     },
     #     container_format: "TS", # accepts TS, FRAGMENTED_MP4
     #     ad_configuration_arn: "ChannelAdConfigurationArn",
+    #     failover_slate_configuration_arn: "ChannelFailoverSlateConfigurationArn",
     #   })
     #
     # @example Response structure
@@ -847,6 +854,7 @@ module Aws::IVS
     #   resp.channel.multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
     #   resp.channel.container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.channel.ad_configuration_arn #=> String
+    #   resp.channel.failover_slate_configuration_arn #=> String
     #   resp.stream_key.arn #=> String
     #   resp.stream_key.value #=> String
     #   resp.stream_key.channel_arn #=> String
@@ -859,6 +867,71 @@ module Aws::IVS
     # @param [Hash] params ({})
     def create_channel(params = {}, options = {})
       req = build_request(:create_channel, params)
+      req.send_request(options)
+    end
+
+    # Creates a new failover slate configuration.
+    #
+    # @option params [String] :name
+    #   Failover-slate-configuration name. The value does not need to be
+    #   unique.
+    #
+    # @option params [Integer] :activation_threshold_seconds
+    #   Number of seconds of ingest interruption before the failover slate
+    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #
+    # @option params [Integer] :min_slate_display_seconds
+    #   Minimum number of seconds that the failover slate displays after
+    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #
+    # @option params [Integer] :max_slate_display_seconds
+    #   Maximum number of seconds that the failover slate displays. Minimum:
+    #   `60`. Maximum: `180`. Default: `60`.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
+    #   [Best practices and strategies][1] in *Tagging Amazon Web Services
+    #   Resources and Tag Editor* for details, including restrictions that
+    #   apply to tags and "Tag naming limits and requirements"; Amazon IVS
+    #   has no service-specific constraints beyond what is documented there.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+    #
+    # @return [Types::CreateFailoverSlateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateFailoverSlateConfigurationResponse#failover_slate_configuration #failover_slate_configuration} => Types::FailoverSlateConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_failover_slate_configuration({
+    #     name: "FailoverSlateConfigurationName",
+    #     activation_threshold_seconds: 1,
+    #     min_slate_display_seconds: 1,
+    #     max_slate_display_seconds: 1,
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failover_slate_configuration.arn #=> String
+    #   resp.failover_slate_configuration.name #=> String
+    #   resp.failover_slate_configuration.activation_threshold_seconds #=> Integer
+    #   resp.failover_slate_configuration.min_slate_display_seconds #=> Integer
+    #   resp.failover_slate_configuration.max_slate_display_seconds #=> Integer
+    #   resp.failover_slate_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "CREATED", "UPDATING"
+    #   resp.failover_slate_configuration.tags #=> Hash
+    #   resp.failover_slate_configuration.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/CreateFailoverSlateConfiguration AWS API Documentation
+    #
+    # @overload create_failover_slate_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_failover_slate_configuration(params = {}, options = {})
+      req = build_request(:create_failover_slate_configuration, params)
       req.send_request(options)
     end
 
@@ -1151,6 +1224,28 @@ module Aws::IVS
       req.send_request(options)
     end
 
+    # Deletes the specified failover slate configuration.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the failover slate configuration to be deleted.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_failover_slate_configuration({
+    #     arn: "FailoverSlateConfigurationArn", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/DeleteFailoverSlateConfiguration AWS API Documentation
+    #
+    # @overload delete_failover_slate_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_failover_slate_configuration(params = {}, options = {})
+      req = build_request(:delete_failover_slate_configuration, params)
+      req.send_request(options)
+    end
+
     # Deletes a specified authorization key pair. This invalidates future
     # viewer tokens generated using the key pair’s `privateKey`. For more
     # information, see [Setting Up Private Channels][1] in the *Amazon IVS
@@ -1326,6 +1421,7 @@ module Aws::IVS
     #   resp.channel.multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
     #   resp.channel.container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.channel.ad_configuration_arn #=> String
+    #   resp.channel.failover_slate_configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetChannel AWS API Documentation
     #
@@ -1333,6 +1429,41 @@ module Aws::IVS
     # @param [Hash] params ({})
     def get_channel(params = {}, options = {})
       req = build_request(:get_channel, params)
+      req.send_request(options)
+    end
+
+    # Gets the failover slate configuration for the specified ARN.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the failover slate configuration to be retrieved.
+    #
+    # @return [Types::GetFailoverSlateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetFailoverSlateConfigurationResponse#failover_slate_configuration #failover_slate_configuration} => Types::FailoverSlateConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_failover_slate_configuration({
+    #     arn: "FailoverSlateConfigurationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failover_slate_configuration.arn #=> String
+    #   resp.failover_slate_configuration.name #=> String
+    #   resp.failover_slate_configuration.activation_threshold_seconds #=> Integer
+    #   resp.failover_slate_configuration.min_slate_display_seconds #=> Integer
+    #   resp.failover_slate_configuration.max_slate_display_seconds #=> Integer
+    #   resp.failover_slate_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "CREATED", "UPDATING"
+    #   resp.failover_slate_configuration.tags #=> Hash
+    #   resp.failover_slate_configuration.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetFailoverSlateConfiguration AWS API Documentation
+    #
+    # @overload get_failover_slate_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_failover_slate_configuration(params = {}, options = {})
+      req = build_request(:get_failover_slate_configuration, params)
       req.send_request(options)
     end
 
@@ -1567,6 +1698,7 @@ module Aws::IVS
     #   resp.stream_session.channel.multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
     #   resp.stream_session.channel.container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.stream_session.channel.ad_configuration_arn #=> String
+    #   resp.stream_session.channel.failover_slate_configuration_arn #=> String
     #   resp.stream_session.ingest_configuration.video.avc_profile #=> String
     #   resp.stream_session.ingest_configuration.video.avc_level #=> String
     #   resp.stream_session.ingest_configuration.video.codec #=> String
@@ -1621,6 +1753,14 @@ module Aws::IVS
     #   resp.stream_session.truncated_events[0].type #=> String
     #   resp.stream_session.truncated_events[0].event_time #=> Time
     #   resp.stream_session.truncated_events[0].code #=> String
+    #   resp.stream_session.failover_slate_configuration.arn #=> String
+    #   resp.stream_session.failover_slate_configuration.name #=> String
+    #   resp.stream_session.failover_slate_configuration.activation_threshold_seconds #=> Integer
+    #   resp.stream_session.failover_slate_configuration.min_slate_display_seconds #=> Integer
+    #   resp.stream_session.failover_slate_configuration.max_slate_display_seconds #=> Integer
+    #   resp.stream_session.failover_slate_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "CREATED", "UPDATING"
+    #   resp.stream_session.failover_slate_configuration.tags #=> Hash
+    #   resp.stream_session.failover_slate_configuration.tags["TagKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/GetStreamSession AWS API Documentation
     #
@@ -1800,6 +1940,10 @@ module Aws::IVS
     # @option params [String] :filter_by_ad_configuration_arn
     #   Filters the channel list to match the specified ad configuration ARN.
     #
+    # @option params [String] :filter_by_failover_slate_configuration_arn
+    #   Filters the channel list to match the specified
+    #   failover-slate-configuration ARN.
+    #
     # @option params [String] :next_token
     #   The first channel to retrieve. This is used for pagination; see the
     #   `nextToken` response field.
@@ -1821,6 +1965,7 @@ module Aws::IVS
     #     filter_by_recording_configuration_arn: "ChannelRecordingConfigurationArn",
     #     filter_by_playback_restriction_policy_arn: "ChannelPlaybackRestrictionPolicyArn",
     #     filter_by_ad_configuration_arn: "ChannelAdConfigurationArn",
+    #     filter_by_failover_slate_configuration_arn: "ChannelFailoverSlateConfigurationArn",
     #     next_token: "PaginationToken",
     #     max_results: 1,
     #   })
@@ -1840,6 +1985,7 @@ module Aws::IVS
     #   resp.channels[0].preset #=> String, one of "HIGHER_BANDWIDTH_DELIVERY", "CONSTRAINED_BANDWIDTH_DELIVERY"
     #   resp.channels[0].playback_restriction_policy_arn #=> String
     #   resp.channels[0].ad_configuration_arn #=> String
+    #   resp.channels[0].failover_slate_configuration_arn #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListChannels AWS API Documentation
@@ -1848,6 +1994,54 @@ module Aws::IVS
     # @param [Hash] params ({})
     def list_channels(params = {}, options = {})
       req = build_request(:list_channels, params)
+      req.send_request(options)
+    end
+
+    # Gets summary information about all failover slate configurations in
+    # your account, in the Amazon Web Services region where the API request
+    # is processed.
+    #
+    # @option params [String] :next_token
+    #   The first failover slate configuration to retrieve. This is used for
+    #   pagination; see the `nextToken` response field.
+    #
+    # @option params [Integer] :max_results
+    #   Maximum number of failover slate configurations to return. Default:
+    #   your service quota or 100, whichever is smaller.
+    #
+    # @return [Types::ListFailoverSlateConfigurationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListFailoverSlateConfigurationsResponse#failover_slate_configurations #failover_slate_configurations} => Array&lt;Types::FailoverSlateConfigurationSummary&gt;
+    #   * {Types::ListFailoverSlateConfigurationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_failover_slate_configurations({
+    #     next_token: "PaginationToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failover_slate_configurations #=> Array
+    #   resp.failover_slate_configurations[0].arn #=> String
+    #   resp.failover_slate_configurations[0].name #=> String
+    #   resp.failover_slate_configurations[0].activation_threshold_seconds #=> Integer
+    #   resp.failover_slate_configurations[0].min_slate_display_seconds #=> Integer
+    #   resp.failover_slate_configurations[0].max_slate_display_seconds #=> Integer
+    #   resp.failover_slate_configurations[0].state #=> String, one of "CREATING", "CREATE_FAILED", "CREATED", "UPDATING"
+    #   resp.failover_slate_configurations[0].tags #=> Hash
+    #   resp.failover_slate_configurations[0].tags["TagKey"] #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/ListFailoverSlateConfigurations AWS API Documentation
+    #
+    # @overload list_failover_slate_configurations(params = {})
+    # @param [Hash] params ({})
+    def list_failover_slate_configurations(params = {}, options = {})
+      req = build_request(:list_failover_slate_configurations, params)
       req.send_request(options)
     end
 
@@ -2467,6 +2661,11 @@ module Aws::IVS
     # @option params [String] :ad_configuration_arn
     #   ARN of the ad configuration associated with the channel.
     #
+    # @option params [String] :failover_slate_configuration_arn
+    #   Failover-slate-configuration ARN. A valid ARN value here both
+    #   specifies the ARN and enables failover slate. If this is set to an
+    #   empty string, failover slate configuration is disabled.
+    #
     # @return [Types::UpdateChannelResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateChannelResponse#channel #channel} => Types::Channel
@@ -2490,6 +2689,7 @@ module Aws::IVS
     #     },
     #     container_format: "TS", # accepts TS, FRAGMENTED_MP4
     #     ad_configuration_arn: "ChannelAdConfigurationArn",
+    #     failover_slate_configuration_arn: "ChannelFailoverSlateConfigurationArn",
     #   })
     #
     # @example Response structure
@@ -2514,6 +2714,7 @@ module Aws::IVS
     #   resp.channel.multitrack_input_configuration.maximum_resolution #=> String, one of "SD", "HD", "FULL_HD"
     #   resp.channel.container_format #=> String, one of "TS", "FRAGMENTED_MP4"
     #   resp.channel.ad_configuration_arn #=> String
+    #   resp.channel.failover_slate_configuration_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateChannel AWS API Documentation
     #
@@ -2521,6 +2722,61 @@ module Aws::IVS
     # @param [Hash] params ({})
     def update_channel(params = {}, options = {})
       req = build_request(:update_channel, params)
+      req.send_request(options)
+    end
+
+    # Updates a specified failover slate configuration.
+    #
+    # @option params [required, String] :arn
+    #   ARN of the failover slate configuration to be updated.
+    #
+    # @option params [String] :name
+    #   Failover-slate-configuration name. The value does not need to be
+    #   unique.
+    #
+    # @option params [Integer] :activation_threshold_seconds
+    #   Number of seconds of ingest interruption before the failover slate
+    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #
+    # @option params [Integer] :min_slate_display_seconds
+    #   Minimum number of seconds that the failover slate displays after
+    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #
+    # @option params [Integer] :max_slate_display_seconds
+    #   Maximum number of seconds that the failover slate displays. Minimum:
+    #   `60`. Maximum: `180`. Default: `60`.
+    #
+    # @return [Types::UpdateFailoverSlateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateFailoverSlateConfigurationResponse#failover_slate_configuration #failover_slate_configuration} => Types::FailoverSlateConfiguration
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_failover_slate_configuration({
+    #     arn: "FailoverSlateConfigurationArn", # required
+    #     name: "FailoverSlateConfigurationName",
+    #     activation_threshold_seconds: 1,
+    #     min_slate_display_seconds: 1,
+    #     max_slate_display_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.failover_slate_configuration.arn #=> String
+    #   resp.failover_slate_configuration.name #=> String
+    #   resp.failover_slate_configuration.activation_threshold_seconds #=> Integer
+    #   resp.failover_slate_configuration.min_slate_display_seconds #=> Integer
+    #   resp.failover_slate_configuration.max_slate_display_seconds #=> Integer
+    #   resp.failover_slate_configuration.state #=> String, one of "CREATING", "CREATE_FAILED", "CREATED", "UPDATING"
+    #   resp.failover_slate_configuration.tags #=> Hash
+    #   resp.failover_slate_configuration.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateFailoverSlateConfiguration AWS API Documentation
+    #
+    # @overload update_failover_slate_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_failover_slate_configuration(params = {}, options = {})
+      req = build_request(:update_failover_slate_configuration, params)
       req.send_request(options)
     end
 
@@ -2609,7 +2865,7 @@ module Aws::IVS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.97.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

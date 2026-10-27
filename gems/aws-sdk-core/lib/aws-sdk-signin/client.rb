@@ -481,54 +481,12 @@ module Aws::Signin
 
     # @!group API Operations
 
-    # CreateOAuth2Token API
-    #
-    # Path: /v1/token Request Method: POST Content-Type: application/json or
-    # application/x-www-form-urlencoded
-    #
-    # This API implements OAuth 2.0 flows for AWS Sign-In CLI clients,
-    # supporting both:
-    #
-    # 1.  Authorization code redemption (grant\_type=authorization\_code) -
-    #     NOT idempotent
-    # 2.  Token refresh (grant\_type=refresh\_token) - Idempotent within
-    #     token validity window
-    #
-    # The operation behavior is determined by the grant\_type parameter in
-    # the request body:
-    #
-    # **Authorization Code Flow (NOT Idempotent):**
-    #
-    # * JSON or form-encoded body with client\_id,
-    #   grant\_type=authorization\_code, code, redirect\_uri, code\_verifier
-    # * Returns access\_token, token\_type, expires\_in, refresh\_token, and
-    #   id\_token
-    # * Each authorization code can only be used ONCE for security (prevents
-    #   replay attacks)
-    #
-    # **Token Refresh Flow (Idempotent):**
-    #
-    # * JSON or form-encoded body with client\_id,
-    #   grant\_type=refresh\_token, refresh\_token
-    # * Returns access\_token, token\_type, expires\_in, and refresh\_token
-    #   (no id\_token)
-    # * Multiple calls with same refresh\_token return consistent results
-    #   within validity window
-    #
-    # Authentication and authorization:
-    #
-    # * Confidential clients: sigv4 signing required with
-    #   signin:ExchangeToken permissions
-    # * CLI clients (public): authn/authz skipped based on client\_id &amp;
-    #   grant\_type
-    #
-    # Note: This operation cannot be marked as @idempotent because it
-    # handles both idempotent (token refresh) and non-idempotent (auth code
-    # redemption) flows in a single endpoint.
+    # Exchanges an authorization code or refresh token for an OAuth 2.0
+    # access token and refresh token.
     #
     # @option params [required, Types::CreateOAuth2TokenRequestBody] :token_input
-    #   Flattened token operation inputs The specific operation is determined
-    #   by grant\_type in the request body
+    #   Flattened token operation inputs. The "grant\_type" in the request
+    #   body determines the specific operation.
     #
     # @return [Types::CreateOAuth2TokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -566,12 +524,11 @@ module Aws::Signin
       req.send_request(options)
     end
 
-    # Grants permission to exchange client credentials for an OAuth 2.0
-    # access token scoped to a resource that can be used to access AWS
-    # services from applications
+    # Exchanges client credentials for an OAuth 2.0 access token scoped to a
+    # resource, which you can use to access AWS services from applications.
     #
     # @option params [required, String] :grant_type
-    #   OAuth 2.0 grant type. Must be "client\_credentials".
+    #   The OAuth 2.0 grant type. Must be "client\_credentials".
     #
     # @option params [required, String] :resource
     #   The OAuth resource for which the access token is requested. Example:
@@ -587,7 +544,7 @@ module Aws::Signin
     #
     #   resp = client.create_o_auth_2_token_with_iam({
     #     grant_type: "ClientCredentialsGrantType", # required
-    #     resource: "CreateOAuth2TokenWithIAMRequestResourceString", # required
+    #     resource: "Resource", # required
     #   })
     #
     # @example Response structure
@@ -602,6 +559,67 @@ module Aws::Signin
     # @param [Hash] params ({})
     def create_o_auth_2_token_with_iam(params = {}, options = {})
       req = build_request(:create_o_auth_2_token_with_iam, params)
+      req.send_request(options)
+    end
+
+    # Exchanges a supported token for an OAuth 2.0 access token scoped to a
+    # resource, which you can use to access AWS services from applications.
+    #
+    # @option params [required, String] :grant_type
+    #   The OAuth 2.0 grant type. Currently only supports
+    #   "urn:ietf:params:oauth:grant-type:token-exchange".
+    #
+    # @option params [String] :subject_token
+    #   The subject token that represents the identity of the party on whose
+    #   behalf the request is made. Required when
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
+    #
+    # @option params [String] :subject_token_type
+    #   The token type of the subject token. Currently only supports
+    #   "urn:ietf:params:oauth:token-type:jwt". Required when
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
+    #
+    # @option params [String] :resource
+    #   The OAuth resource for which the access token is requested. Required
+    #   when "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
+    #   Example: "glue.amazonaws.com".
+    #
+    # @option params [String] :scope
+    #   IAM managed policy Amazon Resource Names (ARNs) to apply as session
+    #   policies that further scope down the permissions of the issued access
+    #   token, provided as a space-delimited list. Example:
+    #   "arn:aws:iam::444455556666:policy/MyPolicy".
+    #
+    # @return [Types::CreateOAuth2TokenWithTokenExchangeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateOAuth2TokenWithTokenExchangeResponse#access_token #access_token} => String
+    #   * {Types::CreateOAuth2TokenWithTokenExchangeResponse#issued_token_type #issued_token_type} => String
+    #   * {Types::CreateOAuth2TokenWithTokenExchangeResponse#token_type #token_type} => String
+    #   * {Types::CreateOAuth2TokenWithTokenExchangeResponse#expires_in #expires_in} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_o_auth_2_token_with_token_exchange({
+    #     grant_type: "TokenExchangeGrantType", # required
+    #     subject_token: "SubjectToken",
+    #     subject_token_type: "SubjectTokenType",
+    #     resource: "Resource",
+    #     scope: "Scope",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_token #=> String
+    #   resp.issued_token_type #=> String
+    #   resp.token_type #=> String
+    #   resp.expires_in #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithTokenExchange AWS API Documentation
+    #
+    # @overload create_o_auth_2_token_with_token_exchange(params = {})
+    # @param [Hash] params ({})
+    def create_o_auth_2_token_with_token_exchange(params = {}, options = {})
+      req = build_request(:create_o_auth_2_token_with_token_exchange, params)
       req.send_request(options)
     end
 
@@ -730,28 +748,21 @@ module Aws::Signin
       req.send_request(options)
     end
 
-    # Grants permission to inspect the metadata and state of an OAuth 2.0
-    # access token or refresh token
+    # Inspects the metadata and active state of an OAuth 2.0 access token or
+    # refresh token.
     #
     # Implements RFC 7662 OAuth 2.0 Token Introspection over a
-    # SigV4-authenticated endpoint. Inspects the metadata of an
-    # access\_token or refresh\_token issued by AWS Sign-In and returns the
-    # claims associated with it.
-    #
-    # Inactive token semantics (RFC 7662 §2.2): when the supplied token is
-    # unknown, expired, revoked, malformed, or owned by a different account,
-    # the response body is exactly \{ "active": false } with all other
-    # claims omitted.
+    # SigV4-authenticated endpoint. Returns the claims associated with a
+    # token issued by AWS Sign-In.
     #
     # @option params [required, String] :token
-    #   The string value of the token to introspect. May be either an
-    #   access\_token or a refresh\_token issued by AWS Sign-In.
+    #   The access token or refresh token issued by AWS Sign-In.
     #
     # @option params [String] :token_type_hint
-    #   Optional hint about the type of the token submitted for introspection.
-    #   The server uses this hint to optimize lookup, but still falls back to
-    #   the other token type on miss. Allowed values: access\_token,
-    #   refresh\_token.
+    #   An optional hint about the type of the token submitted for
+    #   introspection, as defined in RFC 7662 §2.1. The server checks both
+    #   token types regardless of the hint. Allowed values: "access\_token",
+    #   "refresh\_token".
     #
     # @return [Types::IntrospectOAuth2TokenWithIAMResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -939,21 +950,11 @@ module Aws::Signin
       req.send_request(options)
     end
 
-    # Grants permission to revoke an OAuth 2.0 refresh token and its
-    # associated refresh tokens
-    #
-    # Revokes a refresh\_token issued by AWS Sign-In, invalidating the
-    # entire token chain so that the refresh\_token can no longer be used to
-    # mint new access\_tokens.
-    #
-    # Idempotency: revoking an already-revoked, expired, or otherwise
-    # invalid token still returns 200 OK with an empty body. Only the
-    # refresh\_token type is accepted.
+    # Revokes an OAuth 2.0 refresh token and its associated token chain.
     #
     # @option params [required, String] :token
-    #   The refresh\_token to revoke. Must be a refresh\_token issued by AWS
-    #   Sign-In (prefix "ASOR"); access\_tokens are not accepted for
-    #   revocation.
+    #   The refresh token to revoke. Must be a refresh token issued by AWS
+    #   Sign-In. Access tokens are not accepted for revocation.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -990,7 +991,7 @@ module Aws::Signin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.260.0'
+      context[:gem_version] = '3.261.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
