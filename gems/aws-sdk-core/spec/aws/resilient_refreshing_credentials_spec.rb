@@ -162,6 +162,28 @@ module Aws
       end
     end
 
+    describe '#refresh_backoff' do
+      it 'stays within 60 to 90 seconds once credentials are expired' do
+        resolver = resolver_class.new(expiration: Time.now - 1)
+        100.times { expect(resolver.send(:refresh_backoff)).to be_between(60, 90) }
+      end
+
+      it 'defaults to 60-90 seconds when there is no expiration' do
+        resolver = resolver_class.new(expiration: nil)
+        100.times { expect(resolver.send(:refresh_backoff)).to be_between(60, 90) }
+      end
+
+      it 'scales the upper bound down to half the remaining lifetime' do
+        resolver = resolver_class.new(expiration: Time.now + 400) # remaining / 2 = 200
+        100.times { expect(resolver.send(:refresh_backoff)).to be_between(60, 200) }
+      end
+
+      it 'caps the upper bound at 600 seconds for long-lived credentials' do
+        resolver = resolver_class.new(expiration: Time.now + 2000) # remaining / 2 = 1000, capped at 600
+        100.times { expect(resolver.send(:refresh_backoff)).to be_between(60, 600) }
+      end
+    end
+
     describe 'advisory window configuration' do
       let(:validating_resolver_class) do
         Class.new do
@@ -216,14 +238,16 @@ module Aws
       end
     end
 
-    it 'raises MissingCredentialsError when the initial fetch returns a stale response, then recovers' do
+    it 'caches and returns a stale initial fetch response rather than raising, then mandatorily refreshes' do
       resolver = build_resolver(resolver_class, 'cachedCredentials' => 'none')
 
       resolver.expect_response('staleCredentials', nil)
-      expect { resolver.credentials }.to raise_error(Errors::MissingCredentialsError)
-
-      resolver.expect_response('freshCredentials', nil)
       expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+      expect(resolver.rate_limited?).to be(false)
+
+      resolver.expect_response('freshCredentials', 120)
+      expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+      expect(resolver.source_calls).to eq(2) # the cached (expired) response is not reused
     end
 
     it 'preserves the underlying source error as the cause of MissingCredentialsError' do

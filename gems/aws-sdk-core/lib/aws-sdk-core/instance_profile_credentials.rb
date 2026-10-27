@@ -191,13 +191,6 @@ module Aws
       raise Aws::Errors::MetadataParserError
     end
 
-    # ARS validates expired credentials service-side, so a cold start that
-    # finds IMDS serving an already-expired response should still use it
-    # rather than fail.
-    def accept_expired_response?
-      true
-    end
-
     def retrieve_credentials
       # Retry loading credentials a configurable number of times if
       # the instance metadata service is not responding.

@@ -124,9 +124,9 @@ module Aws
       end
     end
 
-    # #refresh left behind credentials it considers usable despite the
-    # failure (for example IMDS continuing to serve the last response it
-    # received during an outage).
+    # #refresh raised after already assigning a self-consistent,
+    # not-yet-expired @credentials/@expiration pair (see #currently_valid?),
+    # so that pair was left in place instead of being rolled back.
     def degraded_initial_credentials(error)
       @next_refresh_allowed_at = Time.now + refresh_backoff
       log_refresh_failure(error)
@@ -184,10 +184,13 @@ module Aws
     end
 
     # Checks whether #refresh returned a response whose Expiration is
-    # already in the past, which must be treated as a failed refresh.
+    # already in the past. On an initial fetch (no prior credentials) this
+    # is still the best available response and is cached as a success. On a
+    # refresh, it must be treated as a failure so the existing cached
+    # credentials are retained instead.
     def stale_response?(prior)
       return false if @expiration.nil? || @expiration > Time.now
-      return true if prior[0].nil? && accept_expired_response?
+      return false if prior[0].nil?
 
       @credentials, @expiration = prior
       true
@@ -195,10 +198,6 @@ module Aws
 
     def currently_valid?(prior)
       !@credentials.nil? && !@expiration.nil? && @expiration > Time.now && @expiration != prior[1]
-    end
-
-    def accept_expired_response?
-      false
     end
 
     def handle_failure(error, raise_to_caller:)
@@ -253,7 +252,9 @@ module Aws
     end
 
     def refresh_backoff
-      rand(300..600)
+      remaining = @expiration ? [@expiration - Time.now, 0].max : 0
+      upper = [90, [remaining / 2, 600].min].max
+      rand(60..upper)
     end
 
     def cache_non_recoverable_error(error)

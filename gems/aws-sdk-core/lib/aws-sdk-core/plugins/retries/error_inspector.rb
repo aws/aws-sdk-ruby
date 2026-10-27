@@ -11,7 +11,7 @@ module Aws
         INVALIDATING_AUTH_ERRORS = Set.new(
           %w[
             ExpiredToken
-            InvalidToken
+            ExpiredTokenException
           ]
         )
 
@@ -153,6 +153,7 @@ module Aws
 
         def invalidatable_credentials?(context)
           context.config.credentials.respond_to?(:invalidate) && !context[:signing_credentials].nil?
+        end
 
         def clock_skew_correction_disabled?(config)
           config.respond_to?(:disable_clock_skew_correction) &&

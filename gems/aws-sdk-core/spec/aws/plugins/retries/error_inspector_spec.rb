@@ -14,7 +14,7 @@ module Aws
       describe '#invalidating_auth_error?' do
         invalidating_errors = [
           RetryErrorsSvc::Errors::ExpiredToken,
-          RetryErrorsSvc::Errors::InvalidToken
+          RetryErrorsSvc::Errors::ExpiredTokenException
         ]
 
         invalidating_errors.each do |e|
@@ -31,7 +31,7 @@ module Aws
 
         it 'returns false for other credential errors not named by the SEP' do
           expect(
-            inspector(RetryErrorsSvc::Errors::ExpiredTokenException).invalidating_auth_error?
+            inspector(RetryErrorsSvc::Errors::InvalidToken).invalidating_auth_error?
           ).to be(false)
         end
 
