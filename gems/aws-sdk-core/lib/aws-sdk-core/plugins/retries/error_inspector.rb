@@ -151,8 +151,7 @@ module Aws
         end
 
         def refreshable_credentials?(context)
-          provider = context.config.credentials
-          !provider.respond_to?(:invalidate) && provider.respond_to?(:refresh!)
+          context.config.credentials.respond_to?(:refresh!)
         end
 
         def extract_name(error)

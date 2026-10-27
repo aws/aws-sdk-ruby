@@ -117,9 +117,20 @@ module Aws
           raise error
         end
 
+        return degraded_initial_credentials(error) if @credentials
+
         warn("Initial credential fetch failed: #{error.message}")
         raise Errors::MissingCredentialsError, error.message, cause: error
       end
+    end
+
+    # #refresh left behind credentials it considers usable despite the
+    # failure (for example IMDS continuing to serve the last response it
+    # received during an outage).
+    def degraded_initial_credentials(error)
+      @next_refresh_allowed_at = Time.now + refresh_backoff
+      log_refresh_failure(error)
+      @credentials
     end
 
     def attempt_advisory_refresh
@@ -161,19 +172,33 @@ module Aws
 
     # Calls the source via #refresh. Returns nil on success, or restores
     # prior credentials and returns error on failure so a failed or stale
-    # refresh never discards the cached credentials.
+    # refresh never discards usable cached credentials.
     def call_source
       prior = [@credentials, @expiration]
       @before_refresh&.call(self)
       refresh
-      if !@expiration.nil? && @expiration <= Time.now
-        @credentials, @expiration = prior
-        return StaleCredentialsError.new
-      end
-      nil
+      stale_response?(prior) ? StaleCredentialsError.new : nil
     rescue StandardError => e
-      @credentials, @expiration = prior
+      @credentials, @expiration = prior unless currently_valid?(prior)
       e
+    end
+
+    # Checks whether #refresh returned a response whose Expiration is
+    # already in the past, which must be treated as a failed refresh.
+    def stale_response?(prior)
+      return false if @expiration.nil? || @expiration > Time.now
+      return true if prior[0].nil? && accept_expired_response?
+
+      @credentials, @expiration = prior
+      true
+    end
+
+    def currently_valid?(prior)
+      !@credentials.nil? && !@expiration.nil? && @expiration > Time.now && @expiration != prior[1]
+    end
+
+    def accept_expired_response?
+      false
     end
 
     def handle_failure(error, raise_to_caller:)

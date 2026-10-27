@@ -430,9 +430,7 @@ module Aws
         end
 
         def refresh_credentials?(context, error)
-          error.refreshing_auth_error? &&
-            context.config.credentials.respond_to?(:refresh!) &&
-            !context.config.credentials.respond_to?(:invalidate)
+          error.refreshing_auth_error? && context.config.credentials.respond_to?(:refresh!)
         end
 
         def add_retry_headers(context)
@@ -533,9 +531,7 @@ module Aws
         end
 
         def refresh_credentials?(context, error)
-          error.refreshing_auth_error? &&
-            context.config.credentials.respond_to?(:refresh!) &&
-            !context.config.credentials.respond_to?(:invalidate)
+          error.refreshing_auth_error? && context.config.credentials.respond_to?(:refresh!)
         end
 
         def retry_limit(context)

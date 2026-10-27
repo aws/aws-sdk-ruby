@@ -365,7 +365,7 @@ module Aws
             allow(Kernel).to receive(:rand).and_return(1)
           end
 
-          it 'invalidates the signing credentials and retries, per the Retry SEP' do
+          it 'invalidates the signing credentials and retries' do
             expect(provider).to receive(:invalidate).with(signing_credentials)
 
             test_case_def = [
@@ -443,15 +443,24 @@ module Aws
             handle_with_retry(test_case_def)
           end
 
-          it 'does not refresh when the provider implements invalidate' do
+          it 'also refreshes when the provider implements invalidate' do
             allow(provider).to receive(:invalidate)
+            expect(provider).to receive(:refresh!)
 
-            resp.context.http_response.status_code = 400
-            resp.error = RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil, nil)
-            expect(provider).not_to receive(:refresh!)
-            handle { |_context| resp }
-
-            expect(resp.context.retries).to eq(0)
+            test_case_def = [
+              {
+                response: {
+                  status_code: 400,
+                  error: RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil, nil)
+                },
+                expect: { retries: 1 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { retries: 1 }
+              }
+            ]
+            handle_with_retry(test_case_def)
           end
         end
 

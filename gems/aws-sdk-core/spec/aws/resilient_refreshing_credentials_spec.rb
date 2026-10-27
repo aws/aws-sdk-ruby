@@ -39,6 +39,13 @@ module Aws
           when 'staleCredentials' then set_creds(-1)
           when 'error' then raise 'recoverable refresh failure'
           when 'nonRecoverableError' then raise RefreshingCredentialsTestError
+          when 'partialFailure'
+            # Simulates a provider whose #refresh reassigns @credentials
+            # successfully but raises before reaching the @expiration
+            # assignment (for example a response whose Expiration string
+            # failed to parse), leaving @expiration untouched.
+            @credentials = Credentials.new('MISMATCHED-AKID', 'secret', 'token')
+            raise 'partial refresh failure'
           end
         end
 
@@ -141,6 +148,17 @@ module Aws
         resolver.expect_response('freshCredentials', nil)
 
         expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
+      end
+    end
+
+    describe 'partial refresh failure' do
+      it 'rolls back rather than pairing new credentials with a stale leftover expiration' do
+        resolver = build_resolver(resolver_class, 'cachedCredentials' => 'advisory')
+        cached_expiration = resolver.instance_variable_get(:@expiration)
+        resolver.expect_response('partialFailure', nil)
+
+        expect(resolver.credentials.access_key_id).to eq(@seeded_akid)
+        expect(resolver.instance_variable_get(:@expiration)).to eq(cached_expiration)
       end
     end
 

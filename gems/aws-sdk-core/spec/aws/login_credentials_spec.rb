@@ -204,13 +204,13 @@ module Aws
           expect_token_write_back(expected_token)
         end
 
-        it 'raises MissingCredentialsError when the refresh call fails on initial fetch' do
+        it 'keeps the still-valid on-disk token when the refresh call fails on initial fetch' do
           mock_token_file(login_session, cached_token)
           client.stub_responses(:create_o_auth_2_token, 'InternalError')
-          expect_any_instance_of(LoginCredentials).to receive(:warn).with(/Initial credential fetch failed/)
-          expect do
-            LoginCredentials.new(login_session: login_session, client: client)
-          end.to raise_error(Aws::Errors::MissingCredentialsError)
+          expect_any_instance_of(LoginCredentials).to receive(:warn).with(/Credential refresh failed/)
+          creds = LoginCredentials.new(login_session: login_session, client: client)
+          expect(creds.credentials.access_key_id).to eq('akid')
+          expect(creds.rate_limited?).to be(true)
         end
 
         it 'raises MissingCredentialsError when refresh call fails and token is hard expired' do
@@ -245,6 +245,20 @@ module Aws
           expect do
             LoginCredentials.new(login_session: login_session, client: client)
           end.to raise_error(Errors::InvalidLoginToken, /session has expired/)
+        end
+
+        it 'applies static stability for an unrelated ArgumentError rather than treating it as non-recoverable' do
+          mock_token_file(login_session, cached_token)
+          client.stub_responses(:create_o_auth_2_token, signin_resp)
+          creds = LoginCredentials.new(login_session: login_session, client: client)
+          creds.credentials # establish cached credentials
+
+          allow(creds).to receive(:make_request).and_raise(ArgumentError, 'unrelated argument error')
+          allow(Time).to receive(:now).and_return(time + 650) # inside the 300s advisory window
+          expect_any_instance_of(LoginCredentials).to receive(:warn).with(/Credential refresh failed/)
+
+          expect(creds.credentials.access_key_id).to eq('new_akid') # still the cached value
+          expect(creds.rate_limited?).to be(true)
         end
       end
 

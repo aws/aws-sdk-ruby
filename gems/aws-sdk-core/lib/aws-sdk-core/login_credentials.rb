@@ -66,7 +66,7 @@ module Aws
     # rejection that requires the user to take action, must be raised
     # immediately rather than retried.
     def non_recoverable_error?(error)
-      error.is_a?(Errors::InvalidLoginToken) || error.is_a?(ArgumentError)
+      error.is_a?(Errors::InvalidLoginToken)
     end
 
     def read_cached_token
@@ -88,7 +88,7 @@ module Aws
       required_cached_token_fields = %w[accessToken clientId refreshToken dpopKey]
       missing_fields = required_cached_token_fields.reject { |field| cached_token[field] }
       unless missing_fields.empty?
-        raise ArgumentError, "Cached login token is missing required field(s): #{missing_fields}. " \
+        raise Errors::InvalidLoginToken, "Cached login token is missing required field(s): #{missing_fields}. " \
           'Please reauthenticate.'
       end
 
@@ -98,8 +98,9 @@ module Aws
 
       return if missing_fields.empty?
 
-      raise ArgumentError, "Access token in cached login token is missing required field(s): #{missing_fields}. " \
-        'Please reauthenticate.'
+      raise Errors::InvalidLoginToken,
+            "Access token in cached login token is missing required field(s): #{missing_fields}. " \
+            'Please reauthenticate.'
     end
 
     def update_creds(access_token)

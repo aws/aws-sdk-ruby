@@ -543,16 +543,17 @@ module Aws
           .to_return(status: 200, body: "profile-name\n")
       end
 
-      it 'raises when the first call returns expired credentials' do
-        # A stale response is treated as a failed refresh. On the initial fetch
-        # there are no prior credentials to fall back on, so the refresh lifecycle
-        # raises MissingCredentialsError.
+      it 'accepts an already-expired response on the first call rather than raising' do
+        # A cold start that finds IMDS serving an already-expired response
+        # (for example during a HOSM outage) uses it rather than failing,
+        # since ARS validates expired IMDS credentials service-side.
         stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
           .to_return(status: 200, body: expired_resp)
 
-        expect { InstanceProfileCredentials.new(backoff: 0) }
-          .to raise_error(Aws::Errors::MissingCredentialsError)
+        creds = InstanceProfileCredentials.new(backoff: 0)
+        expect(creds.credentials.set?).to be(true)
+        expect(creds.rate_limited?).to be(true)
       end
 
       it 'provides cached credentials after a read timeout during a refresh' do
