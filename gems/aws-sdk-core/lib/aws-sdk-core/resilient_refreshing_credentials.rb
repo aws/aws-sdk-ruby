@@ -50,6 +50,7 @@ module Aws
       fetch_initial_credentials
     end
 
+    # @api private
     attr_reader :advisory_window
 
     # @return [Credentials]
@@ -83,6 +84,7 @@ module Aws
       end
     end
 
+    # @api private
     def rate_limited?
       !@next_refresh_allowed_at.nil? && Time.now < @next_refresh_allowed_at
     end
