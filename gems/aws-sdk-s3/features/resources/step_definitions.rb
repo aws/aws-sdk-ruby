@@ -132,7 +132,7 @@ Then(/^I should be able to POST an object to the form url$/) do
   expect(resp.code.to_i).to eq(201)
 end
 
-When(/^I create a presigned post with tags$/) do
+When('I create a presigned post with tags') do
   @tag_set = [
     { key: 'project', value: 'presigned-post' },
     { key: 'description', value: 'café / uploads' },
@@ -144,7 +144,7 @@ When(/^I create a presigned post with tags$/) do
   )
 end
 
-Then(/^the uploaded object should have the tags$/) do
+Then('the uploaded object should have the tags') do
   response = @client.get_object_tagging(bucket: @bucket.name, key: 'key')
   expect(response.tag_set.map(&:to_h)).to match_array(@tag_set)
 end

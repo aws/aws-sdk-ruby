@@ -649,7 +649,7 @@ module Aws
         rules = Client.api.operation(:put_object_tagging).input.shape.member(:tagging)
         value = Aws::ParamConverter.convert(rules, value)
         Aws::ParamValidator.validate!(rules, value)
-        with('tagging', Aws::Xml::Builder.new(rules).to_xml(value))
+        with('tagging', Aws::Xml::Builder.new(rules).serialize(value))
       end
 
       # @!endgroup
