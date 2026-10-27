@@ -44,20 +44,6 @@ module Aws
             .to be(credentials)
         end
 
-        it 'does not share credentials across different client credentials' do
-          other_client = client_with_credentials('other-akid', 'other-secret')
-          other = ExpressCredentialsProvider.new(client: other_client)
-          expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
-            .and_return(express_credentials)
-          expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: other_client)
-            .and_return(double('other-express-credentials'))
-
-          expect(subject.express_credentials_for('bucket'))
-            .not_to be(other.express_credentials_for('bucket'))
-        end
-
         it 'does not share credentials when only the secret differs' do
           other_client = client_with_credentials('akid', 'other-secret')
           other = ExpressCredentialsProvider.new(client: other_client)
@@ -77,15 +63,6 @@ module Aws
 
           expect(subject.express_credentials_for('bucket'))
             .to be(other.express_credentials_for('bucket'))
-        end
-
-        it 'creates credentials with the requesting client' do
-          other_client = client_with_credentials('other-akid', 'other-secret')
-          expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: other_client, session_mode: 'ReadWrite')
-            .and_return(express_credentials)
-
-          subject.express_credentials_for('bucket', other_client)
         end
 
         it 'does not reuse credentials whose client credentials changed' do

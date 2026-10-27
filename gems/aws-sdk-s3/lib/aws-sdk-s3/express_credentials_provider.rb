@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'openssl'
 require 'securerandom'
 
 module Aws
@@ -14,7 +13,6 @@ module Aws
     # params as options. See {Client#create_session} for details.
     class ExpressCredentialsProvider
       CACHE_KEY_SECRET = SecureRandom.random_bytes(64)
-      private_constant :CACHE_KEY_SECRET
 
       # @param [Hash] options
       # @option options [Client] :client The S3 client used to create the
@@ -33,9 +31,6 @@ module Aws
         @cache = Aws::S3.express_credentials_cache
       end
 
-      # @param [String] bucket
-      # @param [Client] client The S3 client making the request. Sessions are
-      #  created with its credentials.
       def express_credentials_for(bucket, client = @client)
         if @caching
           cached_credentials_for(bucket, client)
@@ -50,25 +45,16 @@ module Aws
 
       def cached_credentials_for(bucket, client)
         key = cache_key(bucket, client)
-        cached = @cache[key] if @cache.key?(key)
-        return cached if cached && owned_by?(cached, bucket, client, key)
+        cached = @cache[key]
+        return cached if cached && cache_key(bucket, cached.client) == key
 
         @cache[key] = new_credentials_for(bucket, client)
       end
 
-      # The creating client's credentials may have changed since caching.
-      def owned_by?(cached, bucket, client, key)
-        cached.client.equal?(client) || cache_key(bucket, cached.client) == key
-      end
-
       def cache_key(bucket, client)
         creds = client.config.credentials&.credentials
-        identity = OpenSSL::HMAC.hexdigest(
-          'SHA256',
-          CACHE_KEY_SECRET,
-          "#{creds&.access_key_id}#{creds&.secret_access_key}"
-        )
-        "#{identity}#{bucket}"
+        identity = "#{creds&.access_key_id}#{creds&.secret_access_key}"
+        "#{OpenSSL::HMAC.hexdigest('SHA256', CACHE_KEY_SECRET, identity)}#{bucket}"
       end
 
       def new_credentials_for(bucket, client)

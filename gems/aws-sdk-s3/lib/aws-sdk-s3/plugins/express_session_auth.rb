@@ -44,21 +44,16 @@ for different buckets.
 
           private
 
-          # Custom providers may only accept a bucket.
           def express_credentials_for(context, bucket)
             provider = context.config.express_credentials_provider
-            if accepts_client?(provider)
-              provider.express_credentials_for(bucket, context.client)
-            else
-              provider.express_credentials_for(bucket)
-            end
+            args = [bucket]
+            args << context.client if accepts_client?(provider)
+            provider.express_credentials_for(*args)
           end
 
           def accepts_client?(provider)
-            return false unless provider.respond_to?(:express_credentials_for)
-
-            arity = provider.method(:express_credentials_for).arity
-            arity >= 2 || arity <= -2
+            provider.respond_to?(:express_credentials_for) &&
+              provider.method(:express_credentials_for).arity.abs >= 2
           end
 
           def with_metric(credentials, &block)
