@@ -10411,6 +10411,20 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class GetImageFindingsRequest
+      attr_accessor image_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetImageFindingsResult
+      attr_accessor image_findings: ::Array[Types::ImageFinding]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GetInstanceMetadataDefaultsRequest
       attr_accessor dry_run: bool
       SENSITIVE: []
@@ -11464,6 +11478,7 @@ module Aws::EC2
       attr_accessor free_tier_eligible: bool
       attr_accessor public_ssm_parameter_name: ::String
       attr_accessor image_watermarks: ::Array[Types::ImageWatermark]
+      attr_accessor scan_results: Types::ScanResults
       attr_accessor instance_type_specification: Types::InstanceTypeSpecification
       attr_accessor image_id: ::String
       attr_accessor image_location: ::String
@@ -11514,6 +11529,7 @@ module Aws::EC2
       attr_accessor deprecation_time_condition: Types::DeprecationTimeCondition
       attr_accessor creation_date_condition: Types::CreationDateCondition
       attr_accessor image_watermarks: ::Array[Types::ImageWatermarkFilterResponse]
+      attr_accessor scan_result_condition: Types::ScanResultCondition
       SENSITIVE: []
     end
 
@@ -11524,6 +11540,7 @@ module Aws::EC2
       attr_accessor deprecation_time_condition: Types::DeprecationTimeConditionRequest
       attr_accessor creation_date_condition: Types::CreationDateConditionRequest
       attr_accessor image_watermarks: ::Array[Types::ImageWatermarkFilterRequest]
+      attr_accessor scan_result_condition: Types::ScanResultConditionRequest
       SENSITIVE: []
     end
 
@@ -11535,6 +11552,18 @@ module Aws::EC2
       attr_accessor url: ::String
       attr_accessor user_bucket: Types::UserBucket
       SENSITIVE: [:url]
+    end
+
+    class ImageFinding
+      attr_accessor fix_available: bool
+      attr_accessor score: ::Float
+      attr_accessor first_observed_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor title: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor severity_label: ("informational" | "low" | "medium" | "high" | "critical")
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
     end
 
     class ImageMetadata
@@ -17571,6 +17600,39 @@ module Aws::EC2
       attr_accessor upload_policy: ::String
       attr_accessor upload_policy_signature: ::String
       SENSITIVE: [:upload_policy, :upload_policy_signature]
+    end
+
+    class ScanResultCondition
+      attr_accessor max_days_since_last_finding_scan: ::Integer
+      attr_accessor maximum_severity_label: ("informational" | "low" | "medium" | "high" | "critical")
+      attr_accessor max_days_since_informational_fix_available: ::Integer
+      attr_accessor max_days_since_low_fix_available: ::Integer
+      attr_accessor max_days_since_medium_fix_available: ::Integer
+      attr_accessor max_days_since_high_fix_available: ::Integer
+      attr_accessor max_days_since_critical_fix_available: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScanResultConditionRequest
+      attr_accessor max_days_since_last_finding_scan: ::Integer
+      attr_accessor maximum_severity_label: ("informational" | "low" | "medium" | "high" | "critical")
+      attr_accessor max_days_since_informational_fix_available: ::Integer
+      attr_accessor max_days_since_low_fix_available: ::Integer
+      attr_accessor max_days_since_medium_fix_available: ::Integer
+      attr_accessor max_days_since_high_fix_available: ::Integer
+      attr_accessor max_days_since_critical_fix_available: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScanResults
+      attr_accessor highest_finding_severity_label: ("informational" | "low" | "medium" | "high" | "critical")
+      attr_accessor finding_scan_date: ::Time
+      attr_accessor informational_fix_available_since: ::Time
+      attr_accessor low_fix_available_since: ::Time
+      attr_accessor medium_fix_available_since: ::Time
+      attr_accessor high_fix_available_since: ::Time
+      attr_accessor critical_fix_available_since: ::Time
+      SENSITIVE: []
     end
 
     class ScheduledInstance

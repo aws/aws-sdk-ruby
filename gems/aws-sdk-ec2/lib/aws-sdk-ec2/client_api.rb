@@ -1958,6 +1958,10 @@ module Aws::EC2
     GetImageAncestryResult = Shapes::StructureShape.new(name: 'GetImageAncestryResult')
     GetImageBlockPublicAccessStateRequest = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateRequest')
     GetImageBlockPublicAccessStateResult = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateResult')
+    GetImageFindingsEntrySet = Shapes::ListShape.new(name: 'GetImageFindingsEntrySet')
+    GetImageFindingsMaxResults = Shapes::IntegerShape.new(name: 'GetImageFindingsMaxResults')
+    GetImageFindingsRequest = Shapes::StructureShape.new(name: 'GetImageFindingsRequest')
+    GetImageFindingsResult = Shapes::StructureShape.new(name: 'GetImageFindingsResult')
     GetInstanceMetadataDefaultsRequest = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsRequest')
     GetInstanceMetadataDefaultsResult = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsResult')
     GetInstanceTpmEkPubRequest = Shapes::StructureShape.new(name: 'GetInstanceTpmEkPubRequest')
@@ -2159,6 +2163,8 @@ module Aws::EC2
     ImageDescriptionRequest = Shapes::StringShape.new(name: 'ImageDescriptionRequest')
     ImageDiskContainer = Shapes::StructureShape.new(name: 'ImageDiskContainer')
     ImageDiskContainerList = Shapes::ListShape.new(name: 'ImageDiskContainerList')
+    ImageFinding = Shapes::StructureShape.new(name: 'ImageFinding')
+    ImageFindingPathSet = Shapes::ListShape.new(name: 'ImageFindingPathSet')
     ImageId = Shapes::StringShape.new(name: 'ImageId')
     ImageIdList = Shapes::ListShape.new(name: 'ImageIdList')
     ImageIdStringList = Shapes::ListShape.new(name: 'ImageIdStringList')
@@ -2792,6 +2798,8 @@ module Aws::EC2
     MarketplaceProductCodeList = Shapes::ListShape.new(name: 'MarketplaceProductCodeList')
     MarketplaceProductCodeRequest = Shapes::StringShape.new(name: 'MarketplaceProductCodeRequest')
     MarketplaceProductCodeRequestList = Shapes::ListShape.new(name: 'MarketplaceProductCodeRequestList')
+    MaxDaysSinceFixAvailableValue = Shapes::IntegerShape.new(name: 'MaxDaysSinceFixAvailableValue')
+    MaxDaysSinceLastFindingScanValue = Shapes::IntegerShape.new(name: 'MaxDaysSinceLastFindingScanValue')
     MaxIpv4AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv4AddrPerInterface')
     MaxIpv6AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv6AddrPerInterface')
     MaxNetworkInterfaces = Shapes::IntegerShape.new(name: 'MaxNetworkInterfaces')
@@ -3583,6 +3591,9 @@ module Aws::EC2
     S3StorageUploadPolicy = Shapes::StringShape.new(name: 'S3StorageUploadPolicy')
     S3StorageUploadPolicySignature = Shapes::StringShape.new(name: 'S3StorageUploadPolicySignature')
     SSEType = Shapes::StringShape.new(name: 'SSEType')
+    ScanResultCondition = Shapes::StructureShape.new(name: 'ScanResultCondition')
+    ScanResultConditionRequest = Shapes::StructureShape.new(name: 'ScanResultConditionRequest')
+    ScanResults = Shapes::StructureShape.new(name: 'ScanResults')
     Schedule = Shapes::StringShape.new(name: 'Schedule')
     ScheduledInstance = Shapes::StructureShape.new(name: 'ScheduledInstance')
     ScheduledInstanceAvailability = Shapes::StructureShape.new(name: 'ScheduledInstanceAvailability')
@@ -3697,6 +3708,7 @@ module Aws::EC2
     ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     ServiceTypeDetail = Shapes::StructureShape.new(name: 'ServiceTypeDetail')
     ServiceTypeDetailSet = Shapes::ListShape.new(name: 'ServiceTypeDetailSet')
+    SeverityLabel = Shapes::StringShape.new(name: 'SeverityLabel')
     ShutdownBehavior = Shapes::StringShape.new(name: 'ShutdownBehavior')
     SlotDateTimeRangeRequest = Shapes::StructureShape.new(name: 'SlotDateTimeRangeRequest')
     SlotStartTimeRangeRequest = Shapes::StructureShape.new(name: 'SlotStartTimeRangeRequest')
@@ -12290,6 +12302,18 @@ module Aws::EC2
     GetImageBlockPublicAccessStateResult.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
     GetImageBlockPublicAccessStateResult.struct_class = Types::GetImageBlockPublicAccessStateResult
 
+    GetImageFindingsEntrySet.member = Shapes::ShapeRef.new(shape: ImageFinding, location_name: "item")
+
+    GetImageFindingsRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    GetImageFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetImageFindingsMaxResults, location_name: "MaxResults"))
+    GetImageFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetImageFindingsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetImageFindingsRequest.struct_class = Types::GetImageFindingsRequest
+
+    GetImageFindingsResult.add_member(:image_findings, Shapes::ShapeRef.new(shape: GetImageFindingsEntrySet, location_name: "imageFindingSet"))
+    GetImageFindingsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetImageFindingsResult.struct_class = Types::GetImageFindingsResult
+
     GetInstanceMetadataDefaultsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetInstanceMetadataDefaultsRequest.struct_class = Types::GetInstanceMetadataDefaultsRequest
 
@@ -13110,6 +13134,7 @@ module Aws::EC2
     Image.add_member(:free_tier_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "freeTierEligible"))
     Image.add_member(:public_ssm_parameter_name, Shapes::ShapeRef.new(shape: String, location_name: "publicSsmParameterName"))
     Image.add_member(:image_watermarks, Shapes::ShapeRef.new(shape: ImageWatermarkList, location_name: "imageWatermarkSet"))
+    Image.add_member(:scan_results, Shapes::ShapeRef.new(shape: ScanResults, location_name: "scanResults"))
     Image.add_member(:instance_type_specification, Shapes::ShapeRef.new(shape: InstanceTypeSpecification, location_name: "instanceTypeSpecification"))
     Image.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     Image.add_member(:image_location, Shapes::ShapeRef.new(shape: String, location_name: "imageLocation"))
@@ -13156,6 +13181,7 @@ module Aws::EC2
     ImageCriterion.add_member(:deprecation_time_condition, Shapes::ShapeRef.new(shape: DeprecationTimeCondition, location_name: "deprecationTimeCondition"))
     ImageCriterion.add_member(:creation_date_condition, Shapes::ShapeRef.new(shape: CreationDateCondition, location_name: "creationDateCondition"))
     ImageCriterion.add_member(:image_watermarks, Shapes::ShapeRef.new(shape: ImageWatermarkFilterResponseList, location_name: "imageWatermarkSet"))
+    ImageCriterion.add_member(:scan_result_condition, Shapes::ShapeRef.new(shape: ScanResultCondition, location_name: "scanResultCondition"))
     ImageCriterion.struct_class = Types::ImageCriterion
 
     ImageCriterionList.member = Shapes::ShapeRef.new(shape: ImageCriterion, location_name: "item")
@@ -13166,6 +13192,7 @@ module Aws::EC2
     ImageCriterionRequest.add_member(:deprecation_time_condition, Shapes::ShapeRef.new(shape: DeprecationTimeConditionRequest, location_name: "DeprecationTimeCondition"))
     ImageCriterionRequest.add_member(:creation_date_condition, Shapes::ShapeRef.new(shape: CreationDateConditionRequest, location_name: "CreationDateCondition"))
     ImageCriterionRequest.add_member(:image_watermarks, Shapes::ShapeRef.new(shape: ImageWatermarkFilterRequestList, location_name: "ImageWatermark"))
+    ImageCriterionRequest.add_member(:scan_result_condition, Shapes::ShapeRef.new(shape: ScanResultConditionRequest, location_name: "ScanResultCondition"))
     ImageCriterionRequest.struct_class = Types::ImageCriterionRequest
 
     ImageCriterionRequestList.member = Shapes::ShapeRef.new(shape: ImageCriterionRequest, location_name: "ImageCriterion")
@@ -13179,6 +13206,18 @@ module Aws::EC2
     ImageDiskContainer.struct_class = Types::ImageDiskContainer
 
     ImageDiskContainerList.member = Shapes::ShapeRef.new(shape: ImageDiskContainer, location_name: "item")
+
+    ImageFinding.add_member(:fix_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "fixAvailable"))
+    ImageFinding.add_member(:score, Shapes::ShapeRef.new(shape: Double, location_name: "score"))
+    ImageFinding.add_member(:first_observed_at, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "firstObservedAt"))
+    ImageFinding.add_member(:updated_at, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "updatedAt"))
+    ImageFinding.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    ImageFinding.add_member(:paths, Shapes::ShapeRef.new(shape: ImageFindingPathSet, location_name: "pathSet"))
+    ImageFinding.add_member(:severity_label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "severityLabel"))
+    ImageFinding.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "snapshotId"))
+    ImageFinding.struct_class = Types::ImageFinding
+
+    ImageFindingPathSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     ImageIdList.member = Shapes::ShapeRef.new(shape: ImageId, location_name: "item")
 
@@ -18507,6 +18546,33 @@ module Aws::EC2
     S3Storage.add_member(:upload_policy, Shapes::ShapeRef.new(shape: SecureBlob, location_name: "uploadPolicy"))
     S3Storage.add_member(:upload_policy_signature, Shapes::ShapeRef.new(shape: S3StorageUploadPolicySignature, location_name: "uploadPolicySignature"))
     S3Storage.struct_class = Types::S3Storage
+
+    ScanResultCondition.add_member(:max_days_since_last_finding_scan, Shapes::ShapeRef.new(shape: MaxDaysSinceLastFindingScanValue, location_name: "maxDaysSinceLastFindingScan"))
+    ScanResultCondition.add_member(:maximum_severity_label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "maximumSeverityLabel"))
+    ScanResultCondition.add_member(:max_days_since_informational_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceInformationalFixAvailable"))
+    ScanResultCondition.add_member(:max_days_since_low_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceLowFixAvailable"))
+    ScanResultCondition.add_member(:max_days_since_medium_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceMediumFixAvailable"))
+    ScanResultCondition.add_member(:max_days_since_high_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceHighFixAvailable"))
+    ScanResultCondition.add_member(:max_days_since_critical_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceCriticalFixAvailable"))
+    ScanResultCondition.struct_class = Types::ScanResultCondition
+
+    ScanResultConditionRequest.add_member(:max_days_since_last_finding_scan, Shapes::ShapeRef.new(shape: MaxDaysSinceLastFindingScanValue, location_name: "MaxDaysSinceLastFindingScan"))
+    ScanResultConditionRequest.add_member(:maximum_severity_label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "MaximumSeverityLabel"))
+    ScanResultConditionRequest.add_member(:max_days_since_informational_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceInformationalFixAvailable"))
+    ScanResultConditionRequest.add_member(:max_days_since_low_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceLowFixAvailable"))
+    ScanResultConditionRequest.add_member(:max_days_since_medium_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceMediumFixAvailable"))
+    ScanResultConditionRequest.add_member(:max_days_since_high_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceHighFixAvailable"))
+    ScanResultConditionRequest.add_member(:max_days_since_critical_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceCriticalFixAvailable"))
+    ScanResultConditionRequest.struct_class = Types::ScanResultConditionRequest
+
+    ScanResults.add_member(:highest_finding_severity_label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "highestFindingSeverityLabel"))
+    ScanResults.add_member(:finding_scan_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "findingScanDate"))
+    ScanResults.add_member(:informational_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "informationalFixAvailableSince"))
+    ScanResults.add_member(:low_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lowFixAvailableSince"))
+    ScanResults.add_member(:medium_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "mediumFixAvailableSince"))
+    ScanResults.add_member(:high_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "highFixAvailableSince"))
+    ScanResults.add_member(:critical_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "criticalFixAvailableSince"))
+    ScanResults.struct_class = Types::ScanResults
 
     ScheduledInstance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     ScheduledInstance.add_member(:create_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "createDate"))
@@ -26531,6 +26597,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetImageBlockPublicAccessStateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetImageBlockPublicAccessStateResult)
+      end)
+
+      api.add_operation(:get_image_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetImageFindings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetImageFindingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetImageFindingsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_instance_metadata_defaults, Seahorse::Model::Operation.new.tap do |o|

@@ -17406,6 +17406,24 @@ module Aws::BedrockAgentCoreControl
       class Unknown < Oauth2ProviderConfigOutput; end
     end
 
+    # Specifies the client authentication method to use for the on-behalf-of
+    # token exchange.
+    #
+    # @!attribute [rw] client_authentication_method
+    #   The client authentication method to use during the on-behalf-of
+    #   token exchange. The `NO_CLIENT` option omits the `clientId` and
+    #   `clientSecret` during the on-behalf-of token exchange with the
+    #   identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OnBehalfOfAuthenticationConfig AWS API Documentation
+    #
+    class OnBehalfOfAuthenticationConfig < Struct.new(
+      :client_authentication_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for on-behalf-of token exchange.
     #
     # @!attribute [rw] grant_type
@@ -17416,11 +17434,21 @@ module Aws::BedrockAgentCoreControl
     #   Configuration specific to the TOKEN\_EXCHANGE grant type (RFC 8693).
     #   @return [Types::TokenExchangeGrantTypeConfigType]
     #
+    # @!attribute [rw] on_behalf_of_authentication_config
+    #   Specify the client authentication configuration to use for the
+    #   on-behalf-of token exchange. With this configuration, you override
+    #   the provider level client authentication method for the on-behalf-of
+    #   exchange with the identity provider. If you don't specify this
+    #   configuration, we use the provider level client authentication
+    #   method.
+    #   @return [Types::OnBehalfOfAuthenticationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OnBehalfOfTokenExchangeConfigType AWS API Documentation
     #
     class OnBehalfOfTokenExchangeConfigType < Struct.new(
       :grant_type,
-      :token_exchange_grant_type_config)
+      :token_exchange_grant_type_config,
+      :on_behalf_of_authentication_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -19035,6 +19063,42 @@ module Aws::BedrockAgentCoreControl
 
       class RequestHeaderAllowlist < RequestHeaderConfiguration; end
       class Unknown < RequestHeaderConfiguration; end
+    end
+
+    # @!attribute [rw] token_vault_id
+    #   The unique identifier of the token vault to reset. To reset your
+    #   account's default token vault, specify `default`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResetTokenVaultKeyMaterialRequest AWS API Documentation
+    #
+    class ResetTokenVaultKeyMaterialRequest < Struct.new(
+      :token_vault_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] token_vault_id
+    #   The ID of the token vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_configuration
+    #   The KMS configuration for the token vault after the reset. The token
+    #   vault uses an Amazon Web Services managed key.
+    #   @return [Types::KmsConfiguration]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The timestamp when the token vault was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResetTokenVaultKeyMaterialResponse AWS API Documentation
+    #
+    class ResetTokenVaultKeyMaterialResponse < Struct.new(
+      :token_vault_id,
+      :kms_configuration,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Represents a resource within the AgentCore Policy system. Resources

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.661.0 (2026-10-27)
+------------------
+
+* Feature - EC2 AMIs can now show vulnerability data and be targeted directly for scanning.
+
 1.660.0 (2026-10-22)
 ------------------
 

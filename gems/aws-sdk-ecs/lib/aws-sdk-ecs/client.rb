@@ -4678,6 +4678,8 @@ module Aws::ECS
     #   resp.task_definitions[0].container_definitions[0].resource_requirements #=> Array
     #   resp.task_definitions[0].container_definitions[0].resource_requirements[0].value #=> String
     #   resp.task_definitions[0].container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator", "NeuronDevice"
+    #   resp.task_definitions[0].container_definitions[0].resource_requirements[0].sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.task_definitions[0].container_definitions[0].resource_requirements[0].sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.task_definitions[0].container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definitions[0].container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definitions[0].container_definitions[0].firelens_configuration.options["String"] #=> String
@@ -5037,6 +5039,12 @@ module Aws::ECS
     #   resp.container_instance.health_status.details[0].status_reason #=> String
     #   resp.container_instance.health_status.details[0].last_updated #=> Time
     #   resp.container_instance.health_status.details[0].last_status_change #=> Time
+    #   resp.container_instance.gpu_devices #=> Array
+    #   resp.container_instance.gpu_devices[0].gpu_id #=> String
+    #   resp.container_instance.gpu_devices[0].sharing_mode #=> String, one of "IDLE", "NVIDIA_MPS", "DEDICATED"
+    #   resp.container_instance.gpu_devices[0].total_memory_in_mi_b #=> Integer
+    #   resp.container_instance.gpu_devices[0].remaining_memory_in_mi_b #=> Integer
+    #   resp.container_instance.gpu_devices[0].container_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterContainerInstance AWS API Documentation
     #
@@ -5236,6 +5244,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator", "NeuronDevice"
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
@@ -5855,6 +5865,12 @@ module Aws::ECS
     #   resp.container_instances[0].health_status.details[0].status_reason #=> String
     #   resp.container_instances[0].health_status.details[0].last_updated #=> Time
     #   resp.container_instances[0].health_status.details[0].last_status_change #=> Time
+    #   resp.container_instances[0].gpu_devices #=> Array
+    #   resp.container_instances[0].gpu_devices[0].gpu_id #=> String
+    #   resp.container_instances[0].gpu_devices[0].sharing_mode #=> String, one of "IDLE", "NVIDIA_MPS", "DEDICATED"
+    #   resp.container_instances[0].gpu_devices[0].total_memory_in_mi_b #=> Integer
+    #   resp.container_instances[0].gpu_devices[0].remaining_memory_in_mi_b #=> Integer
+    #   resp.container_instances[0].gpu_devices[0].container_count #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -7896,6 +7912,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator", "NeuronDevice"
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
@@ -8275,6 +8293,8 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].containers[0].neuron_device_ids #=> Array
     #   resp.tasks[0].containers[0].neuron_device_ids[0] #=> String
+    #   resp.tasks[0].containers[0].gpu_sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.tasks[0].containers[0].gpu_sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.tasks[0].cpu #=> String
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].desired_status #=> String
@@ -8304,6 +8324,8 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator", "NeuronDevice"
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.tasks[0].overrides.cpu #=> String
     #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
     #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
@@ -11481,6 +11503,12 @@ module Aws::ECS
     #   resp.container_instance.health_status.details[0].status_reason #=> String
     #   resp.container_instance.health_status.details[0].last_updated #=> Time
     #   resp.container_instance.health_status.details[0].last_status_change #=> Time
+    #   resp.container_instance.gpu_devices #=> Array
+    #   resp.container_instance.gpu_devices[0].gpu_id #=> String
+    #   resp.container_instance.gpu_devices[0].sharing_mode #=> String, one of "IDLE", "NVIDIA_MPS", "DEDICATED"
+    #   resp.container_instance.gpu_devices[0].total_memory_in_mi_b #=> Integer
+    #   resp.container_instance.gpu_devices[0].remaining_memory_in_mi_b #=> Integer
+    #   resp.container_instance.gpu_devices[0].container_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/RegisterContainerInstance AWS API Documentation
     #
@@ -12348,8 +12376,14 @@ module Aws::ECS
     #         ],
     #         resource_requirements: [
     #           {
-    #             value: "String", # required
+    #             value: "String",
     #             type: "GPU", # required, accepts GPU, InferenceAccelerator, NeuronDevice
+    #             sharing_strategy: {
+    #               nvidia_mps: {
+    #                 memory: 1, # required
+    #                 max_compute_percent: 1,
+    #               },
+    #             },
     #           },
     #         ],
     #         firelens_configuration: {
@@ -12557,6 +12591,8 @@ module Aws::ECS
     #   resp.task_definition.container_definitions[0].resource_requirements #=> Array
     #   resp.task_definition.container_definitions[0].resource_requirements[0].value #=> String
     #   resp.task_definition.container_definitions[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator", "NeuronDevice"
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.task_definition.container_definitions[0].resource_requirements[0].sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.task_definition.container_definitions[0].firelens_configuration.type #=> String, one of "fluentd", "fluentbit"
     #   resp.task_definition.container_definitions[0].firelens_configuration.options #=> Hash
     #   resp.task_definition.container_definitions[0].firelens_configuration.options["String"] #=> String
@@ -13051,8 +13087,14 @@ module Aws::ECS
     #           memory_reservation: 1,
     #           resource_requirements: [
     #             {
-    #               value: "String", # required
+    #               value: "String",
     #               type: "GPU", # required, accepts GPU, InferenceAccelerator, NeuronDevice
+    #               sharing_strategy: {
+    #                 nvidia_mps: {
+    #                   memory: 1, # required
+    #                   max_compute_percent: 1,
+    #                 },
+    #               },
     #             },
     #           ],
     #         },
@@ -13184,6 +13226,8 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].containers[0].neuron_device_ids #=> Array
     #   resp.tasks[0].containers[0].neuron_device_ids[0] #=> String
+    #   resp.tasks[0].containers[0].gpu_sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.tasks[0].containers[0].gpu_sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.tasks[0].cpu #=> String
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].desired_status #=> String
@@ -13213,6 +13257,8 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator", "NeuronDevice"
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.tasks[0].overrides.cpu #=> String
     #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
     #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
@@ -13500,8 +13546,14 @@ module Aws::ECS
     #           memory_reservation: 1,
     #           resource_requirements: [
     #             {
-    #               value: "String", # required
+    #               value: "String",
     #               type: "GPU", # required, accepts GPU, InferenceAccelerator, NeuronDevice
+    #               sharing_strategy: {
+    #                 nvidia_mps: {
+    #                   memory: 1, # required
+    #                   max_compute_percent: 1,
+    #                 },
+    #               },
     #             },
     #           ],
     #         },
@@ -13619,6 +13671,8 @@ module Aws::ECS
     #   resp.tasks[0].containers[0].gpu_ids[0] #=> String
     #   resp.tasks[0].containers[0].neuron_device_ids #=> Array
     #   resp.tasks[0].containers[0].neuron_device_ids[0] #=> String
+    #   resp.tasks[0].containers[0].gpu_sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.tasks[0].containers[0].gpu_sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.tasks[0].cpu #=> String
     #   resp.tasks[0].created_at #=> Time
     #   resp.tasks[0].desired_status #=> String
@@ -13648,6 +13702,8 @@ module Aws::ECS
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].value #=> String
     #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator", "NeuronDevice"
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.tasks[0].overrides.container_overrides[0].resource_requirements[0].sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.tasks[0].overrides.cpu #=> String
     #   resp.tasks[0].overrides.inference_accelerator_overrides #=> Array
     #   resp.tasks[0].overrides.inference_accelerator_overrides[0].device_name #=> String
@@ -13928,6 +13984,8 @@ module Aws::ECS
     #   resp.task.containers[0].gpu_ids[0] #=> String
     #   resp.task.containers[0].neuron_device_ids #=> Array
     #   resp.task.containers[0].neuron_device_ids[0] #=> String
+    #   resp.task.containers[0].gpu_sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.task.containers[0].gpu_sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.task.cpu #=> String
     #   resp.task.created_at #=> Time
     #   resp.task.desired_status #=> String
@@ -13957,6 +14015,8 @@ module Aws::ECS
     #   resp.task.overrides.container_overrides[0].resource_requirements #=> Array
     #   resp.task.overrides.container_overrides[0].resource_requirements[0].value #=> String
     #   resp.task.overrides.container_overrides[0].resource_requirements[0].type #=> String, one of "GPU", "InferenceAccelerator", "NeuronDevice"
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].sharing_strategy.nvidia_mps.memory #=> Integer
+    #   resp.task.overrides.container_overrides[0].resource_requirements[0].sharing_strategy.nvidia_mps.max_compute_percent #=> Integer
     #   resp.task.overrides.cpu #=> String
     #   resp.task.overrides.inference_accelerator_overrides #=> Array
     #   resp.task.overrides.inference_accelerator_overrides[0].device_name #=> String
@@ -15185,6 +15245,12 @@ module Aws::ECS
     #   resp.container_instance.health_status.details[0].status_reason #=> String
     #   resp.container_instance.health_status.details[0].last_updated #=> Time
     #   resp.container_instance.health_status.details[0].last_status_change #=> Time
+    #   resp.container_instance.gpu_devices #=> Array
+    #   resp.container_instance.gpu_devices[0].gpu_id #=> String
+    #   resp.container_instance.gpu_devices[0].sharing_mode #=> String, one of "IDLE", "NVIDIA_MPS", "DEDICATED"
+    #   resp.container_instance.gpu_devices[0].total_memory_in_mi_b #=> Integer
+    #   resp.container_instance.gpu_devices[0].remaining_memory_in_mi_b #=> Integer
+    #   resp.container_instance.gpu_devices[0].container_count #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/UpdateContainerAgent AWS API Documentation
     #
@@ -15513,6 +15579,12 @@ module Aws::ECS
     #   resp.container_instances[0].health_status.details[0].status_reason #=> String
     #   resp.container_instances[0].health_status.details[0].last_updated #=> Time
     #   resp.container_instances[0].health_status.details[0].last_status_change #=> Time
+    #   resp.container_instances[0].gpu_devices #=> Array
+    #   resp.container_instances[0].gpu_devices[0].gpu_id #=> String
+    #   resp.container_instances[0].gpu_devices[0].sharing_mode #=> String, one of "IDLE", "NVIDIA_MPS", "DEDICATED"
+    #   resp.container_instances[0].gpu_devices[0].total_memory_in_mi_b #=> Integer
+    #   resp.container_instances[0].gpu_devices[0].remaining_memory_in_mi_b #=> Integer
+    #   resp.container_instances[0].gpu_devices[0].container_count #=> Integer
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -17482,7 +17554,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.251.0'
+      context[:gem_version] = '1.252.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

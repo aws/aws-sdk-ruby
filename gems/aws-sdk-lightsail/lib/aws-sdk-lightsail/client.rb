@@ -11295,6 +11295,10 @@ module Aws::Lightsail
     # @option params [required, String] :instance_name
     #   The name of the instance (a virtual private server) to start.
     #
+    # @option params [Types::InstanceAttributeUpdates] :attribute_updates
+    #   An object that describes the attributes to update on the instance
+    #   before it starts.
+    #
     # @return [Types::StartInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartInstanceResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -11303,6 +11307,9 @@ module Aws::Lightsail
     #
     #   resp = client.start_instance({
     #     instance_name: "ResourceName", # required
+    #     attribute_updates: {
+    #       bundle_id: "NonEmptyString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -12986,7 +12993,7 @@ module Aws::Lightsail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.141.0'
+      context[:gem_version] = '1.142.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

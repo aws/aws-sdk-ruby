@@ -10538,6 +10538,20 @@ module Aws
                                                ) -> _GetImageBlockPublicAccessStateResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImageBlockPublicAccessStateResponseSuccess
 
+      interface _GetImageFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImageFindingsResult]
+        def image_findings: () -> ::Array[Types::ImageFinding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_image_findings-instance_method
+      def get_image_findings: (
+                                image_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?dry_run: bool
+                              ) -> _GetImageFindingsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImageFindingsResponseSuccess
+
       interface _GetInstanceMetadataDefaultsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceMetadataDefaultsResult]
         def account_level: () -> Types::InstanceMetadataDefaultsResponse
@@ -13926,7 +13940,16 @@ module Aws
                                                                        maximum_days_since_source_image_created: ::Integer?,
                                                                        maximum_days_since_watermark_created: ::Integer?
                                                                      }
-                                                                   ]?
+                                                                   ]?,
+                                                                   scan_result_condition: {
+                                                                     max_days_since_last_finding_scan: ::Integer?,
+                                                                     maximum_severity_label: ("informational" | "low" | "medium" | "high" | "critical")?,
+                                                                     max_days_since_informational_fix_available: ::Integer?,
+                                                                     max_days_since_low_fix_available: ::Integer?,
+                                                                     max_days_since_medium_fix_available: ::Integer?,
+                                                                     max_days_since_high_fix_available: ::Integer?,
+                                                                     max_days_since_critical_fix_available: ::Integer?
+                                                                   }?
                                                                  }
                                                                ],
                                                                ?dry_run: bool

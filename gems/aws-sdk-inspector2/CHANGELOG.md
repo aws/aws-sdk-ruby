@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2026-10-27)
+------------------
+
+* Feature - Adding support for Machine Image scan
+
 1.87.0 (2026-10-21)
 ------------------
 

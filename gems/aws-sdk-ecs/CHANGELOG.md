@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.252.0 (2026-10-27)
+------------------
+
+* Feature - ECS now supports GPU sharing via NVIDIA Multi-Process Service (MPS) on ECS Managed Instances and ECS EC2, allowing multiple ECS tasks to share a single Nvidia GPU for improved utilization.
+
 1.251.0 (2026-10-21)
 ------------------
 

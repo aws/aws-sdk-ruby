@@ -4418,6 +4418,9 @@ module Aws::BedrockAgentCoreControl
     #             actor_token_content: "NONE", # required, accepts NONE, M2M, AWS_IAM_ID_TOKEN_JWT
     #             actor_token_scopes: ["ScopeType"],
     #           },
+    #           on_behalf_of_authentication_config: {
+    #             client_authentication_method: "NO_CLIENT", # required, accepts NO_CLIENT
+    #           },
     #         },
     #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT
     #         private_key_jwt_config: {
@@ -4573,6 +4576,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.on_behalf_of_authentication_config.client_authentication_method #=> String, one of "NO_CLIENT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
@@ -8914,6 +8918,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.on_behalf_of_authentication_config.client_authentication_method #=> String, one of "NO_CLIENT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
@@ -12131,6 +12136,57 @@ module Aws::BedrockAgentCoreControl
     # @param [Hash] params ({})
     def put_resource_policy(params = {}, options = {})
       req = build_request(:put_resource_policy, params)
+      req.send_request(options)
+    end
+
+    # Resets the key material for a token vault whose customer managed KMS
+    # key has been deleted, and re-encrypts the token vault with an Amazon
+    # Web Services managed key so that you can use the token vault again.
+    #
+    # This operation can't be undone. The reset permanently deletes the
+    # OAuth2 access tokens and refresh tokens stored in the token vault,
+    # including tokens obtained through all supported flows. After the
+    # reset, your agents must complete these flows again to get new tokens,
+    # and for user-delegated flows your users must authorize access again.
+    # The reset doesn't delete your credential providers or their
+    # configuration.
+    #
+    # You can reset a token vault only if its customer managed key has been
+    # deleted. If the key still exists, including when it's disabled or
+    # scheduled for deletion, this operation returns a
+    # `ValidationException`. To use the token vault again, enable the key or
+    # cancel its scheduled deletion in KMS. To switch to a different key,
+    # use `SetTokenVaultCMK`.
+    #
+    # @option params [required, String] :token_vault_id
+    #   The unique identifier of the token vault to reset. To reset your
+    #   account's default token vault, specify `default`.
+    #
+    # @return [Types::ResetTokenVaultKeyMaterialResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetTokenVaultKeyMaterialResponse#token_vault_id #token_vault_id} => String
+    #   * {Types::ResetTokenVaultKeyMaterialResponse#kms_configuration #kms_configuration} => Types::KmsConfiguration
+    #   * {Types::ResetTokenVaultKeyMaterialResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_token_vault_key_material({
+    #     token_vault_id: "TokenVaultIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.token_vault_id #=> String
+    #   resp.kms_configuration.key_type #=> String, one of "CustomerManagedKey", "ServiceManagedKey"
+    #   resp.kms_configuration.kms_key_arn #=> String
+    #   resp.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResetTokenVaultKeyMaterial AWS API Documentation
+    #
+    # @overload reset_token_vault_key_material(params = {})
+    # @param [Hash] params ({})
+    def reset_token_vault_key_material(params = {}, options = {})
+      req = build_request(:reset_token_vault_key_material, params)
       req.send_request(options)
     end
 
@@ -16037,6 +16093,9 @@ module Aws::BedrockAgentCoreControl
     #             actor_token_content: "NONE", # required, accepts NONE, M2M, AWS_IAM_ID_TOKEN_JWT
     #             actor_token_scopes: ["ScopeType"],
     #           },
+    #           on_behalf_of_authentication_config: {
+    #             client_authentication_method: "NO_CLIENT", # required, accepts NO_CLIENT
+    #           },
     #         },
     #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT
     #         private_key_jwt_config: {
@@ -16190,6 +16249,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.on_behalf_of_authentication_config.client_authentication_method #=> String, one of "NO_CLIENT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
@@ -17448,7 +17508,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.84.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

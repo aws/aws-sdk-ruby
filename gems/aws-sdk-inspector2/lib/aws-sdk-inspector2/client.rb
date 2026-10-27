@@ -650,6 +650,9 @@ module Aws::Inspector2
     #   resp.accounts[0].resource_state.code_repository.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_state.code_repository.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED", "BLOCKED_BY_ORGANIZATION_POLICY"
     #   resp.accounts[0].resource_state.code_repository.error_message #=> String
+    #   resp.accounts[0].resource_state.ami.status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.accounts[0].resource_state.ami.error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED", "BLOCKED_BY_ORGANIZATION_POLICY"
+    #   resp.accounts[0].resource_state.ami.error_message #=> String
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -658,6 +661,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_accounts[0].resource_status.ami #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED", "BLOCKED_BY_ORGANIZATION_POLICY"
     #   resp.failed_accounts[0].error_message #=> String
     #
@@ -845,7 +849,7 @@ module Aws::Inspector2
     #   resp.accounts #=> Array
     #   resp.accounts[0].account_id #=> String
     #   resp.accounts[0].free_trial_info #=> Array
-    #   resp.accounts[0].free_trial_info[0].type #=> String, one of "EC2", "ECR", "LAMBDA", "LAMBDA_CODE", "CODE_REPOSITORY", "VM", "CONTAINER_IMAGE", "SERVERLESS_FUNCTION"
+    #   resp.accounts[0].free_trial_info[0].type #=> String, one of "EC2", "ECR", "LAMBDA", "LAMBDA_CODE", "CODE_REPOSITORY", "VM", "CONTAINER_IMAGE", "SERVERLESS_FUNCTION", "MACHINE_IMAGE"
     #   resp.accounts[0].free_trial_info[0].start #=> Time
     #   resp.accounts[0].free_trial_info[0].end #=> Time
     #   resp.accounts[0].free_trial_info[0].status #=> String, one of "ACTIVE", "INACTIVE"
@@ -1686,6 +1690,30 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       machine_image_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_owner_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_platform: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       cloud_provider: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -2149,6 +2177,30 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       machine_image_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_owner_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_platform: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       cloud_provider: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -2269,6 +2321,7 @@ module Aws::Inspector2
     #       bucket_name: "String", # required
     #       key_prefix: "String",
     #       kms_key_arn: "String", # required
+    #       expected_bucket_owner: "AccountId",
     #     },
     #   })
     #
@@ -2430,6 +2483,7 @@ module Aws::Inspector2
     #       bucket_name: "String", # required
     #       key_prefix: "String",
     #       kms_key_arn: "String", # required
+    #       expected_bucket_owner: "AccountId",
     #     },
     #   })
     #
@@ -2619,6 +2673,7 @@ module Aws::Inspector2
     #   resp.auto_enable.lambda #=> Boolean
     #   resp.auto_enable.lambda_code #=> Boolean
     #   resp.auto_enable.code_repository #=> Boolean
+    #   resp.auto_enable.ami #=> Boolean
     #   resp.max_account_limit_reached #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/DescribeOrganizationConfiguration AWS API Documentation
@@ -2663,6 +2718,7 @@ module Aws::Inspector2
     #   resp.accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.accounts[0].resource_status.ami #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -2671,6 +2727,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_accounts[0].resource_status.ami #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED", "BLOCKED_BY_ORGANIZATION_POLICY"
     #   resp.failed_accounts[0].error_message #=> String
     #
@@ -2781,6 +2838,7 @@ module Aws::Inspector2
     #   resp.accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.accounts[0].resource_status.ami #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts #=> Array
     #   resp.failed_accounts[0].account_id #=> String
     #   resp.failed_accounts[0].status #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
@@ -2789,6 +2847,7 @@ module Aws::Inspector2
     #   resp.failed_accounts[0].resource_status.lambda #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.lambda_code #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].resource_status.code_repository #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
+    #   resp.failed_accounts[0].resource_status.ami #=> String, one of "ENABLING", "ENABLED", "DISABLING", "DISABLED", "SUSPENDING", "SUSPENDED"
     #   resp.failed_accounts[0].error_code #=> String, one of "ALREADY_ENABLED", "ENABLE_IN_PROGRESS", "DISABLE_IN_PROGRESS", "SUSPEND_IN_PROGRESS", "RESOURCE_NOT_FOUND", "ACCESS_DENIED", "INTERNAL_ERROR", "SSM_UNAVAILABLE", "SSM_THROTTLED", "EVENTBRIDGE_UNAVAILABLE", "EVENTBRIDGE_THROTTLED", "RESOURCE_SCAN_NOT_DISABLED", "DISASSOCIATE_ALL_MEMBERS", "ACCOUNT_IS_ISOLATED", "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED", "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED", "BLOCKED_BY_ORGANIZATION_POLICY"
     #   resp.failed_accounts[0].error_message #=> String
     #
@@ -3242,6 +3301,7 @@ module Aws::Inspector2
     #
     #   * {Types::GetConfigurationResponse#ecr_configuration #ecr_configuration} => Types::EcrConfigurationState
     #   * {Types::GetConfigurationResponse#ec2_configuration #ec2_configuration} => Types::Ec2ConfigurationState
+    #   * {Types::GetConfigurationResponse#ami_configuration #ami_configuration} => Types::AmiConfigurationState
     #
     # @example Request syntax with placeholder values
     #
@@ -3261,6 +3321,16 @@ module Aws::Inspector2
     #   resp.ec2_configuration.vm_scanner_state.activated #=> Boolean
     #   resp.ec2_configuration.vm_scanner_state.activated_at #=> Time
     #   resp.ec2_configuration.vm_scanner_state.status #=> String, one of "SUCCESS", "PENDING", "FAILED"
+    #   resp.ami_configuration.last_launched_within #=> String, one of "DAYS_180", "DAYS_90", "DAYS_60", "DAYS_30", "DAYS_14", "DAYS_7"
+    #   resp.ami_configuration.created_within #=> String, one of "DAYS_180", "DAYS_90", "DAYS_60", "DAYS_30", "DAYS_14", "DAYS_7"
+    #   resp.ami_configuration.scan_mode_configuration.scan_mode #=> String, one of "SCAN_ALL", "TARGET_SCANNING"
+    #   resp.ami_configuration.scan_mode_configuration.tags #=> Array
+    #   resp.ami_configuration.scan_mode_configuration.tags[0].key #=> String
+    #   resp.ami_configuration.scan_mode_configuration.tags[0].value #=> String
+    #   resp.ami_configuration.scan_mode_configuration.exclude_copied_amis #=> Boolean
+    #   resp.ami_configuration.scan_mode_configuration.exclude_backup_dlm_amis #=> Boolean
+    #   resp.ami_configuration.status #=> String, one of "SUCCESS", "PENDING", "FAILED"
+    #   resp.ami_configuration.updated_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfiguration AWS API Documentation
     #
@@ -3336,7 +3406,7 @@ module Aws::Inspector2
     #
     #   resp = client.get_encryption_key({
     #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
-    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, MACHINE_IMAGE
     #   })
     #
     # @example Response structure
@@ -3381,6 +3451,7 @@ module Aws::Inspector2
     #   resp.destination.bucket_name #=> String
     #   resp.destination.key_prefix #=> String
     #   resp.destination.kms_key_arn #=> String
+    #   resp.destination.expected_bucket_owner #=> String
     #   resp.filter_criteria.finding_arn #=> Array
     #   resp.filter_criteria.finding_arn[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.finding_arn[0].value #=> String
@@ -3534,6 +3605,18 @@ module Aws::Inspector2
     #   resp.filter_criteria.code_repository_provider_type #=> Array
     #   resp.filter_criteria.code_repository_provider_type[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.code_repository_provider_type[0].value #=> String
+    #   resp.filter_criteria.machine_image_id #=> Array
+    #   resp.filter_criteria.machine_image_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.machine_image_id[0].value #=> String
+    #   resp.filter_criteria.machine_image_name #=> Array
+    #   resp.filter_criteria.machine_image_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.machine_image_name[0].value #=> String
+    #   resp.filter_criteria.machine_image_owner_account_id #=> Array
+    #   resp.filter_criteria.machine_image_owner_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.machine_image_owner_account_id[0].value #=> String
+    #   resp.filter_criteria.machine_image_platform #=> Array
+    #   resp.filter_criteria.machine_image_platform[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filter_criteria.machine_image_platform[0].value #=> String
     #   resp.filter_criteria.cloud_provider #=> Array
     #   resp.filter_criteria.cloud_provider[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filter_criteria.cloud_provider[0].value #=> String
@@ -3633,6 +3716,56 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Retrieves the status of a specific on-demand scan for a resource.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource whose on-demand scan status is being requested.
+    #
+    # @option params [required, String] :scan_id
+    #   The unique identifier of the on-demand scan whose status is being
+    #   requested.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of the resource whose on-demand scan status is being
+    #   requested.
+    #
+    # @return [Types::GetOnDemandScanStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetOnDemandScanStatusResponse#scan_id #scan_id} => String
+    #   * {Types::GetOnDemandScanStatusResponse#resource_id #resource_id} => String
+    #   * {Types::GetOnDemandScanStatusResponse#resource_type #resource_type} => String
+    #   * {Types::GetOnDemandScanStatusResponse#scan_status #scan_status} => String
+    #   * {Types::GetOnDemandScanStatusResponse#scan_status_reason #scan_status_reason} => String
+    #   * {Types::GetOnDemandScanStatusResponse#started_at #started_at} => Time
+    #   * {Types::GetOnDemandScanStatusResponse#completed_at #completed_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_on_demand_scan_status({
+    #     resource_id: "ResourceId", # required
+    #     scan_id: "ScanId", # required
+    #     resource_type: "AMI", # required, accepts AMI
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_id #=> String
+    #   resp.resource_id #=> String
+    #   resp.resource_type #=> String, one of "AMI"
+    #   resp.scan_status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED"
+    #   resp.scan_status_reason #=> String, one of "ACCESS_DENIED", "INTERNAL_ERROR", "STORAGE_LIMIT_EXCEEDED", "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED", "UNSUPPORTED_OS", "RESOURCE_TERMINATED"
+    #   resp.started_at #=> Time
+    #   resp.completed_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetOnDemandScanStatus AWS API Documentation
+    #
+    # @overload get_on_demand_scan_status(params = {})
+    # @param [Hash] params ({})
+    def get_on_demand_scan_status(params = {}, options = {})
+      req = build_request(:get_on_demand_scan_status, params)
+      req.send_request(options)
+    end
+
     # Gets details of a software bill of materials (SBOM) report.
     #
     # @option params [required, String] :report_id
@@ -3664,6 +3797,7 @@ module Aws::Inspector2
     #   resp.s3_destination.bucket_name #=> String
     #   resp.s3_destination.key_prefix #=> String
     #   resp.s3_destination.kms_key_arn #=> String
+    #   resp.s3_destination.expected_bucket_owner #=> String
     #   resp.filter_criteria.account_id #=> Array
     #   resp.filter_criteria.account_id[0].comparison #=> String, one of "EQUALS", "NOT_EQUALS"
     #   resp.filter_criteria.account_id[0].value #=> String
@@ -4850,6 +4984,13 @@ module Aws::Inspector2
     #           value: "CoverageStringInput", # required
     #         },
     #       ],
+    #       machine_image_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString",
+    #         },
+    #       ],
     #       last_scanned_at: [
     #         {
     #           start_inclusive: Time.now,
@@ -4979,12 +5120,12 @@ module Aws::Inspector2
     #
     #   resp.next_token #=> String
     #   resp.covered_resources #=> Array
-    #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY", "Microsoft.Compute/virtualMachines", "Microsoft.ContainerRegistry/registry/containerImage", "Microsoft.ContainerRegistry/registry/containerRepository", "Microsoft.Web/sites", "Microsoft.ContainerRegistry/registries"
+    #   resp.covered_resources[0].resource_type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY", "Microsoft.Compute/virtualMachines", "Microsoft.ContainerRegistry/registry/containerImage", "Microsoft.ContainerRegistry/registry/containerRepository", "Microsoft.Web/sites", "Microsoft.ContainerRegistry/registries", "MACHINE_IMAGE"
     #   resp.covered_resources[0].resource_id #=> String
     #   resp.covered_resources[0].account_id #=> String
     #   resp.covered_resources[0].scan_type #=> String, one of "NETWORK", "PACKAGE", "CODE"
     #   resp.covered_resources[0].scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
-    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "PENDING_REVIVAL_SCAN", "INTEGRATION_CONNECTION_LOST", "ACCESS_DENIED_TO_ENCRYPTION_KEY", "UNSUPPORTED_LANGUAGE", "NO_SCAN_CONFIGURATION_ASSOCIATED", "SCAN_IN_PROGRESS", "IMAGE_ARCHIVED", "UNSUPPORTED_CODE_ARTIFACTS", "RESOURCE_UNMANAGED", "RESOURCE_STOPPED"
+    #   resp.covered_resources[0].scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "PENDING_REVIVAL_SCAN", "INTEGRATION_CONNECTION_LOST", "ACCESS_DENIED_TO_ENCRYPTION_KEY", "UNSUPPORTED_LANGUAGE", "NO_SCAN_CONFIGURATION_ASSOCIATED", "SCAN_IN_PROGRESS", "IMAGE_ARCHIVED", "UNSUPPORTED_CODE_ARTIFACTS", "RESOURCE_UNMANAGED", "RESOURCE_STOPPED", "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED", "STORAGE_LIMIT_EXCEEDED", "INVALID_ARTIFACT"
     #   resp.covered_resources[0].resource_metadata.ecr_repository.name #=> String
     #   resp.covered_resources[0].resource_metadata.ecr_repository.scan_frequency #=> String, one of "MANUAL", "SCAN_ON_PUSH", "CONTINUOUS_SCAN"
     #   resp.covered_resources[0].resource_metadata.ecr_image.tags #=> Array
@@ -5018,7 +5159,7 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.code_repository.on_demand_scan.last_scanned_commit_id #=> String
     #   resp.covered_resources[0].resource_metadata.code_repository.on_demand_scan.last_scan_at #=> Time
     #   resp.covered_resources[0].resource_metadata.code_repository.on_demand_scan.scan_status.status_code #=> String, one of "ACTIVE", "INACTIVE"
-    #   resp.covered_resources[0].resource_metadata.code_repository.on_demand_scan.scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "PENDING_REVIVAL_SCAN", "INTEGRATION_CONNECTION_LOST", "ACCESS_DENIED_TO_ENCRYPTION_KEY", "UNSUPPORTED_LANGUAGE", "NO_SCAN_CONFIGURATION_ASSOCIATED", "SCAN_IN_PROGRESS", "IMAGE_ARCHIVED", "UNSUPPORTED_CODE_ARTIFACTS", "RESOURCE_UNMANAGED", "RESOURCE_STOPPED"
+    #   resp.covered_resources[0].resource_metadata.code_repository.on_demand_scan.scan_status.reason #=> String, one of "PENDING_INITIAL_SCAN", "ACCESS_DENIED", "INTERNAL_ERROR", "UNMANAGED_EC2_INSTANCE", "UNSUPPORTED_OS", "SCAN_ELIGIBILITY_EXPIRED", "RESOURCE_TERMINATED", "SUCCESSFUL", "NO_RESOURCES_FOUND", "IMAGE_SIZE_EXCEEDED", "SCAN_FREQUENCY_MANUAL", "SCAN_FREQUENCY_SCAN_ON_PUSH", "EC2_INSTANCE_STOPPED", "PENDING_DISABLE", "NO_INVENTORY", "STALE_INVENTORY", "EXCLUDED_BY_TAG", "UNSUPPORTED_RUNTIME", "UNSUPPORTED_MEDIA_TYPE", "UNSUPPORTED_CONFIG_FILE", "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED", "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED", "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED", "DEEP_INSPECTION_NO_INVENTORY", "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED", "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED", "PENDING_REVIVAL_SCAN", "INTEGRATION_CONNECTION_LOST", "ACCESS_DENIED_TO_ENCRYPTION_KEY", "UNSUPPORTED_LANGUAGE", "NO_SCAN_CONFIGURATION_ASSOCIATED", "SCAN_IN_PROGRESS", "IMAGE_ARCHIVED", "UNSUPPORTED_CODE_ARTIFACTS", "RESOURCE_UNMANAGED", "RESOURCE_STOPPED", "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED", "STORAGE_LIMIT_EXCEEDED", "INVALID_ARTIFACT"
     #   resp.covered_resources[0].resource_metadata.vm_instance.tags #=> Hash
     #   resp.covered_resources[0].resource_metadata.vm_instance.tags["MapKey"] #=> String
     #   resp.covered_resources[0].resource_metadata.vm_instance.platform #=> String, one of "WINDOWS", "LINUX", "UNKNOWN"
@@ -5036,6 +5177,9 @@ module Aws::Inspector2
     #   resp.covered_resources[0].resource_metadata.serverless_function.runtime #=> String
     #   resp.covered_resources[0].resource_metadata.serverless_function.function_tags #=> Hash
     #   resp.covered_resources[0].resource_metadata.serverless_function.function_tags["MapKey"] #=> String
+    #   resp.covered_resources[0].resource_metadata.machine_image.tags #=> Hash
+    #   resp.covered_resources[0].resource_metadata.machine_image.tags["MapKey"] #=> String
+    #   resp.covered_resources[0].resource_metadata.machine_image.platform #=> String, one of "WINDOWS", "LINUX", "UNKNOWN"
     #   resp.covered_resources[0].last_scanned_at #=> Time
     #   resp.covered_resources[0].scan_mode #=> String, one of "EC2_SSM_AGENT_BASED", "EC2_AGENTLESS", "EC2_INSPECTOR_AGENT_BASED", "VM_INSPECTOR_AGENT_BASED"
     #   resp.covered_resources[0].provider #=> String, one of "AWS", "AZURE"
@@ -5153,6 +5297,13 @@ module Aws::Inspector2
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, NOT_EQUALS
     #           value: "CoverageStringInput", # required
+    #         },
+    #       ],
+    #       machine_image_tags: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS
+    #           key: "NonEmptyString", # required
+    #           value: "NonEmptyString",
     #         },
     #       ],
     #       last_scanned_at: [
@@ -5543,6 +5694,18 @@ module Aws::Inspector2
     #   resp.filters[0].criteria.code_repository_provider_type #=> Array
     #   resp.filters[0].criteria.code_repository_provider_type[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.code_repository_provider_type[0].value #=> String
+    #   resp.filters[0].criteria.machine_image_id #=> Array
+    #   resp.filters[0].criteria.machine_image_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.machine_image_id[0].value #=> String
+    #   resp.filters[0].criteria.machine_image_name #=> Array
+    #   resp.filters[0].criteria.machine_image_name[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.machine_image_name[0].value #=> String
+    #   resp.filters[0].criteria.machine_image_owner_account_id #=> Array
+    #   resp.filters[0].criteria.machine_image_owner_account_id[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.machine_image_owner_account_id[0].value #=> String
+    #   resp.filters[0].criteria.machine_image_platform #=> Array
+    #   resp.filters[0].criteria.machine_image_platform[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
+    #   resp.filters[0].criteria.machine_image_platform[0].value #=> String
     #   resp.filters[0].criteria.cloud_provider #=> Array
     #   resp.filters[0].criteria.cloud_provider[0].comparison #=> String, one of "EQUALS", "PREFIX", "NOT_EQUALS"
     #   resp.filters[0].criteria.cloud_provider[0].value #=> String
@@ -5682,6 +5845,7 @@ module Aws::Inspector2
     #         ],
     #         sort_order: "ASC", # accepts ASC, DESC
     #         sort_by: "CRITICAL", # accepts CRITICAL, HIGH, ALL, AFFECTED_INSTANCES
+    #         scan_sources: ["INSTANCE_SCAN"], # accepts INSTANCE_SCAN, MACHINE_IMAGE_SCAN
     #       },
     #       aws_ecr_container_aggregation: {
     #         resource_ids: [
@@ -6159,6 +6323,7 @@ module Aws::Inspector2
     #   resp.responses[0].ami_aggregation.severity_counts.informational #=> Integer
     #   resp.responses[0].ami_aggregation.severity_counts.untriaged #=> Integer
     #   resp.responses[0].ami_aggregation.affected_instances #=> Integer
+    #   resp.responses[0].ami_aggregation.scan_source #=> String, one of "INSTANCE_SCAN", "MACHINE_IMAGE_SCAN"
     #   resp.responses[0].aws_ecr_container_aggregation.resource_id #=> String
     #   resp.responses[0].aws_ecr_container_aggregation.image_sha #=> String
     #   resp.responses[0].aws_ecr_container_aggregation.repository #=> String
@@ -6711,6 +6876,30 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       machine_image_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_owner_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_platform: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       cloud_provider: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -6849,7 +7038,7 @@ module Aws::Inspector2
     #   resp.findings[0].updated_at #=> Time
     #   resp.findings[0].status #=> String, one of "ACTIVE", "SUPPRESSED", "CLOSED"
     #   resp.findings[0].resources #=> Array
-    #   resp.findings[0].resources[0].type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY", "Microsoft.Compute/virtualMachines", "Microsoft.ContainerRegistry/registry/containerImage", "Microsoft.Web/sites"
+    #   resp.findings[0].resources[0].type #=> String, one of "AWS_EC2_INSTANCE", "AWS_ECR_CONTAINER_IMAGE", "AWS_ECR_REPOSITORY", "AWS_LAMBDA_FUNCTION", "CODE_REPOSITORY", "Microsoft.Compute/virtualMachines", "Microsoft.ContainerRegistry/registry/containerImage", "Microsoft.Web/sites", "MACHINE_IMAGE"
     #   resp.findings[0].resources[0].id #=> String
     #   resp.findings[0].resources[0].partition #=> String
     #   resp.findings[0].resources[0].region #=> String
@@ -6897,6 +7086,17 @@ module Aws::Inspector2
     #   resp.findings[0].resources[0].details.code_repository.project_name #=> String
     #   resp.findings[0].resources[0].details.code_repository.integration_arn #=> String
     #   resp.findings[0].resources[0].details.code_repository.provider_type #=> String, one of "GITHUB", "GITLAB_SELF_MANAGED"
+    #   resp.findings[0].resources[0].details.machine_image.machine_image_id #=> String
+    #   resp.findings[0].resources[0].details.machine_image.name #=> String
+    #   resp.findings[0].resources[0].details.machine_image.owner_account_id #=> String
+    #   resp.findings[0].resources[0].details.machine_image.platform #=> String
+    #   resp.findings[0].resources[0].details.machine_image.architecture #=> String, one of "X86_64", "ARM64"
+    #   resp.findings[0].resources[0].details.machine_image.creation_date #=> Time
+    #   resp.findings[0].resources[0].details.machine_image.state #=> String
+    #   resp.findings[0].resources[0].details.machine_image.is_public #=> Boolean
+    #   resp.findings[0].resources[0].details.machine_image.root_device_type #=> String
+    #   resp.findings[0].resources[0].details.machine_image.virtualization_type #=> String
+    #   resp.findings[0].resources[0].details.machine_image.source_resource_id #=> String
     #   resp.findings[0].resources[0].details.vm.type #=> String
     #   resp.findings[0].resources[0].details.vm.vm_name #=> String
     #   resp.findings[0].resources[0].details.vm.vm_image_reference #=> String
@@ -7068,6 +7268,59 @@ module Aws::Inspector2
       req.send_request(options)
     end
 
+    # Lists the on-demand scans for a resource.
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource whose on-demand scans are being listed.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of the resource whose on-demand scans are being listed.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return in a single page of the
+    #   response.
+    #
+    # @option params [String] :next_token
+    #   A pagination token from a previous response used to retrieve the next
+    #   page of results.
+    #
+    # @return [Types::ListOnDemandScansResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListOnDemandScansResponse#items #items} => Array&lt;Types::OnDemandScan&gt;
+    #   * {Types::ListOnDemandScansResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_on_demand_scans({
+    #     resource_id: "ResourceId", # required
+    #     resource_type: "AMI", # required, accepts AMI
+    #     max_results: 1,
+    #     next_token: "OnDemandScanNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].scan_id #=> String
+    #   resp.items[0].resource_id #=> String
+    #   resp.items[0].resource_type #=> String, one of "AMI"
+    #   resp.items[0].scan_status #=> String, one of "IN_PROGRESS", "SUCCESSFUL", "FAILED"
+    #   resp.items[0].scan_status_reason #=> String, one of "ACCESS_DENIED", "INTERNAL_ERROR", "STORAGE_LIMIT_EXCEEDED", "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED", "UNSUPPORTED_OS", "RESOURCE_TERMINATED"
+    #   resp.items[0].started_at #=> Time
+    #   resp.items[0].completed_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListOnDemandScans AWS API Documentation
+    #
+    # @overload list_on_demand_scans(params = {})
+    # @param [Hash] params ({})
+    def list_on_demand_scans(params = {}, options = {})
+      req = build_request(:list_on_demand_scans, params)
+      req.send_request(options)
+    end
+
     # Lists all tags attached to a given resource.
     #
     # @option params [required, String] :resource_arn
@@ -7137,7 +7390,7 @@ module Aws::Inspector2
     #   resp.totals #=> Array
     #   resp.totals[0].account_id #=> String
     #   resp.totals[0].usage #=> Array
-    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN", "LAMBDA_FUNCTION_HOURS", "LAMBDA_FUNCTION_CODE_HOURS", "CODE_REPOSITORY_SAST", "CODE_REPOSITORY_IAC", "CODE_REPOSITORY_SCA", "EC2_AGENTLESS_INSTANCE_HOURS", "AZURE_CONTAINER_IMAGE_INITIAL_SCAN", "AZURE_CONTAINER_IMAGE_RESCAN", "AZURE_VM_AGENT_BASED_INSTANCE_HOURS", "AZURE_SERVERLESS_FUNCTION_HOURS"
+    #   resp.totals[0].usage[0].type #=> String, one of "EC2_INSTANCE_HOURS", "ECR_INITIAL_SCAN", "ECR_RESCAN", "LAMBDA_FUNCTION_HOURS", "LAMBDA_FUNCTION_CODE_HOURS", "CODE_REPOSITORY_SAST", "CODE_REPOSITORY_IAC", "CODE_REPOSITORY_SCA", "EC2_AGENTLESS_INSTANCE_HOURS", "AZURE_CONTAINER_IMAGE_INITIAL_SCAN", "AZURE_CONTAINER_IMAGE_RESCAN", "AZURE_VM_AGENT_BASED_INSTANCE_HOURS", "AZURE_SERVERLESS_FUNCTION_HOURS", "EC2_AMI_HOURS"
     #   resp.totals[0].usage[0].total #=> Float
     #   resp.totals[0].usage[0].estimated_monthly_cost #=> Float
     #   resp.totals[0].usage[0].currency #=> String, one of "USD"
@@ -7167,7 +7420,7 @@ module Aws::Inspector2
     #
     #   resp = client.reset_encryption_key({
     #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
-    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, MACHINE_IMAGE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResetEncryptionKey AWS API Documentation
@@ -7440,6 +7693,47 @@ module Aws::Inspector2
     # @param [Hash] params ({})
     def start_code_security_scan(params = {}, options = {})
       req = build_request(:start_code_security_scan, params)
+      req.send_request(options)
+    end
+
+    # Starts an on-demand scan of the specified resource, such as an Amazon
+    # Machine Image (AMI).
+    #
+    # @option params [required, String] :resource_id
+    #   The ID of the resource to scan on demand.
+    #
+    # @option params [required, String] :resource_type
+    #   The type of the resource to scan on demand.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartOnDemandScanResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartOnDemandScanResponse#scan_id #scan_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_on_demand_scan({
+    #     resource_id: "ResourceId", # required
+    #     resource_type: "AMI", # required, accepts AMI
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.scan_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartOnDemandScan AWS API Documentation
+    #
+    # @overload start_on_demand_scan(params = {})
+    # @param [Hash] params ({})
+    def start_on_demand_scan(params = {}, options = {})
+      req = build_request(:start_on_demand_scan, params)
       req.send_request(options)
     end
 
@@ -7802,6 +8096,10 @@ module Aws::Inspector2
     #   Specifies how the Amazon EC2 automated scan will be updated for your
     #   environment.
     #
+    # @option params [Types::AmiConfiguration] :ami_configuration
+    #   The Amazon Machine Image (AMI) scan configuration to apply to the
+    #   account.
+    #
     # @option params [Types::UpdateConfigurationInheritance] :update_configuration_inheritance
     #   Specifies which scan-type configurations to reset to the delegated
     #   administrator's inherited values for the targeted member account.
@@ -7826,9 +8124,25 @@ module Aws::Inspector2
     #       scan_mode: "EC2_SSM_AGENT_BASED", # required, accepts EC2_SSM_AGENT_BASED, EC2_HYBRID
     #       activate_vm_scanner: false,
     #     },
+    #     ami_configuration: {
+    #       last_launched_within: "DAYS_180", # accepts DAYS_180, DAYS_90, DAYS_60, DAYS_30, DAYS_14, DAYS_7
+    #       created_within: "DAYS_180", # accepts DAYS_180, DAYS_90, DAYS_60, DAYS_30, DAYS_14, DAYS_7
+    #       scan_mode_configuration: { # required
+    #         scan_mode: "SCAN_ALL", # required, accepts SCAN_ALL, TARGET_SCANNING
+    #         tags: [
+    #           {
+    #             key: "AmiTagKey", # required
+    #             value: "AmiTagValue",
+    #           },
+    #         ],
+    #         exclude_copied_amis: false,
+    #         exclude_backup_dlm_amis: false,
+    #       },
+    #     },
     #     update_configuration_inheritance: {
     #       ec2_configuration: "INHERIT_FROM_ADMIN", # accepts INHERIT_FROM_ADMIN
     #       ecr_configuration: "INHERIT_FROM_ADMIN", # accepts INHERIT_FROM_ADMIN
+    #       ami_configuration: "INHERIT_FROM_ADMIN", # accepts INHERIT_FROM_ADMIN
     #     },
     #   })
     #
@@ -8035,7 +8349,7 @@ module Aws::Inspector2
     #   resp = client.update_encryption_key({
     #     kms_key_id: "KmsKeyArn", # required
     #     scan_type: "NETWORK", # required, accepts NETWORK, PACKAGE, CODE
-    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites
+    #     resource_type: "AWS_EC2_INSTANCE", # required, accepts AWS_EC2_INSTANCE, AWS_ECR_CONTAINER_IMAGE, AWS_ECR_REPOSITORY, AWS_LAMBDA_FUNCTION, CODE_REPOSITORY, Microsoft.Compute/virtualMachines, Microsoft.ContainerRegistry/registry/containerImage, Microsoft.Web/sites, MACHINE_IMAGE
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateEncryptionKey AWS API Documentation
@@ -8386,6 +8700,30 @@ module Aws::Inspector2
     #           value: "StringInput", # required
     #         },
     #       ],
+    #       machine_image_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_name: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_owner_account_id: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
+    #       machine_image_platform: [
+    #         {
+    #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
+    #           value: "StringInput", # required
+    #         },
+    #       ],
     #       cloud_provider: [
     #         {
     #           comparison: "EQUALS", # required, accepts EQUALS, PREFIX, NOT_EQUALS
@@ -8563,6 +8901,7 @@ module Aws::Inspector2
     #       lambda: false,
     #       lambda_code: false,
     #       code_repository: false,
+    #       ami: false,
     #     },
     #   })
     #
@@ -8573,6 +8912,7 @@ module Aws::Inspector2
     #   resp.auto_enable.lambda #=> Boolean
     #   resp.auto_enable.lambda_code #=> Boolean
     #   resp.auto_enable.code_repository #=> Boolean
+    #   resp.auto_enable.ami #=> Boolean
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateOrganizationConfiguration AWS API Documentation
     #
@@ -8601,7 +8941,7 @@ module Aws::Inspector2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-inspector2'
-      context[:gem_version] = '1.87.0'
+      context[:gem_version] = '1.88.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

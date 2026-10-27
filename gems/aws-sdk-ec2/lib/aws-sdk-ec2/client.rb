@@ -32271,6 +32271,49 @@ module Aws::EC2
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
     #     `instance-store`).
     #
+    #   * `scan-result.critical-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix
+    #     as available for a `critical` severity finding on the AMI.
+    #
+    #   * `scan-result.finding-scan-date` - The date and time, in the ISO 8601
+    #     format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), of the most
+    #     recent Amazon Inspector scan of the AMI.
+    #
+    #   * `scan-result.high-fix-available-since` - The earliest date and time,
+    #     in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix
+    #     as available for a `high` severity finding on the AMI.
+    #
+    #   * `scan-result.highest-finding-severity-label` - The highest severity
+    #     among the AMI's Amazon Inspector findings, whether or not a fix is
+    #     available. The valid values are the following Amazon Inspector
+    #     severity levels:
+    #
+    #     * `informational` - CVSS score of 0.
+    #
+    #     * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #     * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #     * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #     * `critical` - CVSS score of 9.0 to 10.0.
+    #   * `scan-result.informational-fix-available-since` - The earliest date
+    #     and time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix
+    #     as available for an `informational` severity finding on the AMI.
+    #
+    #   * `scan-result.low-fix-available-since` - The earliest date and time,
+    #     in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix
+    #     as available for a `low` severity finding on the AMI.
+    #
+    #   * `scan-result.medium-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a fix
+    #     as available for a `medium` severity finding on the AMI.
+    #
     #   * `source-image-id` - The ID of the source AMI from which the AMI was
     #     created.
     #
@@ -32432,6 +32475,13 @@ module Aws::EC2
     #   resp.images[0].image_watermarks[0].source_image_id #=> String
     #   resp.images[0].image_watermarks[0].source_image_creation_time #=> Time
     #   resp.images[0].image_watermarks[0].watermark_creation_time #=> Time
+    #   resp.images[0].scan_results.highest_finding_severity_label #=> String, one of "informational", "low", "medium", "high", "critical"
+    #   resp.images[0].scan_results.finding_scan_date #=> Time
+    #   resp.images[0].scan_results.informational_fix_available_since #=> Time
+    #   resp.images[0].scan_results.low_fix_available_since #=> Time
+    #   resp.images[0].scan_results.medium_fix_available_since #=> Time
+    #   resp.images[0].scan_results.high_fix_available_since #=> Time
+    #   resp.images[0].scan_results.critical_fix_available_since #=> Time
     #   resp.images[0].instance_type_specification.supported_instance_types #=> Array
     #   resp.images[0].instance_type_specification.supported_instance_types[0].instance_type #=> String
     #   resp.images[0].instance_type_specification.unsupported_instance_types #=> Array
@@ -54311,6 +54361,13 @@ module Aws::EC2
     #   resp.image_criteria[0].image_watermarks[0].source_image_region #=> String
     #   resp.image_criteria[0].image_watermarks[0].maximum_days_since_source_image_created #=> Integer
     #   resp.image_criteria[0].image_watermarks[0].maximum_days_since_watermark_created #=> Integer
+    #   resp.image_criteria[0].scan_result_condition.max_days_since_last_finding_scan #=> Integer
+    #   resp.image_criteria[0].scan_result_condition.maximum_severity_label #=> String, one of "informational", "low", "medium", "high", "critical"
+    #   resp.image_criteria[0].scan_result_condition.max_days_since_informational_fix_available #=> Integer
+    #   resp.image_criteria[0].scan_result_condition.max_days_since_low_fix_available #=> Integer
+    #   resp.image_criteria[0].scan_result_condition.max_days_since_medium_fix_available #=> Integer
+    #   resp.image_criteria[0].scan_result_condition.max_days_since_high_fix_available #=> Integer
+    #   resp.image_criteria[0].scan_result_condition.max_days_since_critical_fix_available #=> Integer
     #   resp.managed_by #=> String, one of "account", "declarative-policy"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetAllowedImagesSettings AWS API Documentation
@@ -55651,6 +55708,74 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_image_block_public_access_state(params = {}, options = {})
       req = build_request(:get_image_block_public_access_state, params)
+      req.send_request(options)
+    end
+
+    # Describes the Amazon Inspector vulnerability findings for the
+    # specified AMI.
+    #
+    # You can get findings for AMIs that you own, AMIs that are shared with
+    # you, and public AMIs. Amazon Inspector returns findings only for AMIs
+    # that it has scanned.
+    #
+    # @option params [required, String] :image_id
+    #   The ID of the AMI.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #
+    # @option params [String] :next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous request.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetImageFindingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetImageFindingsResult#image_findings #image_findings} => Array&lt;Types::ImageFinding&gt;
+    #   * {Types::GetImageFindingsResult#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_image_findings({
+    #     image_id: "ImageId", # required
+    #     max_results: 1,
+    #     next_token: "String",
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.image_findings #=> Array
+    #   resp.image_findings[0].fix_available #=> Boolean
+    #   resp.image_findings[0].score #=> Float
+    #   resp.image_findings[0].first_observed_at #=> Time
+    #   resp.image_findings[0].updated_at #=> Time
+    #   resp.image_findings[0].title #=> String
+    #   resp.image_findings[0].paths #=> Array
+    #   resp.image_findings[0].paths[0] #=> String
+    #   resp.image_findings[0].severity_label #=> String, one of "informational", "low", "medium", "high", "critical"
+    #   resp.image_findings[0].snapshot_id #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetImageFindings AWS API Documentation
+    #
+    # @overload get_image_findings(params = {})
+    # @param [Hash] params ({})
+    def get_image_findings(params = {}, options = {})
+      req = build_request(:get_image_findings, params)
       req.send_request(options)
     end
 
@@ -71726,6 +71851,15 @@ module Aws::EC2
     #             maximum_days_since_watermark_created: 1,
     #           },
     #         ],
+    #         scan_result_condition: {
+    #           max_days_since_last_finding_scan: 1,
+    #           maximum_severity_label: "informational", # accepts informational, low, medium, high, critical
+    #           max_days_since_informational_fix_available: 1,
+    #           max_days_since_low_fix_available: 1,
+    #           max_days_since_medium_fix_available: 1,
+    #           max_days_since_high_fix_available: 1,
+    #           max_days_since_critical_fix_available: 1,
+    #         },
     #       },
     #     ],
     #     dry_run: false,
@@ -78224,7 +78358,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.660.0'
+      context[:gem_version] = '1.661.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
