@@ -6,7 +6,7 @@ module Aws
   module S3
     describe ExpressCredentialsProvider do
       let(:client) { client_with_credentials('akid', 'secret') }
-      let(:express_credentials) { double('express-credentials', client: client) }
+      let(:express_credentials) { double('express-credentials') }
 
       def client_with_credentials(akid, secret)
         credentials = Aws::Credentials.new(akid, secret)
@@ -27,7 +27,7 @@ module Aws
 
         it 'returns a new set of credentials for the bucket' do
           expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
+            .with(bucket: 'bucket', client: client, base_credentials: client.config.credentials, session_mode: 'ReadWrite')
             .and_return(express_credentials)
 
           expect(subject.express_credentials_for('bucket'))
@@ -36,7 +36,7 @@ module Aws
 
         it 'returns the same set of credentials for the bucket' do
           expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
+            .with(bucket: 'bucket', client: client, base_credentials: client.config.credentials, session_mode: 'ReadWrite')
             .and_return(express_credentials)
 
           credentials = subject.express_credentials_for('bucket')
@@ -65,18 +65,6 @@ module Aws
             .to be(other.express_credentials_for('bucket'))
         end
 
-        it 'does not reuse credentials whose client credentials changed' do
-          other_client = client_with_credentials('akid', 'secret')
-          expect(ExpressCredentials).to receive(:new)
-            .and_return(express_credentials, double('other')).twice
-
-          subject.express_credentials_for('bucket')
-          allow(client.config).to receive(:credentials)
-            .and_return(Aws::Credentials.new('rotated', 'rotated'))
-          expect(subject.express_credentials_for('bucket', other_client))
-            .not_to be(express_credentials)
-        end
-
         it 'does not use the raw credentials in the cache key' do
           cache = Aws::S3.express_credentials_cache
           allow(ExpressCredentials).to receive(:new).and_return(express_credentials)
@@ -100,7 +88,7 @@ module Aws
 
           it 'returns a different set of credentials for the bucket' do
             expect(ExpressCredentials).to receive(:new)
-              .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
+              .with(bucket: 'bucket', client: client, base_credentials: client.config.credentials, session_mode: 'ReadWrite')
               .and_return(express_credentials).twice
 
             credentials = subject.express_credentials_for('bucket')

@@ -32,10 +32,11 @@ module Aws
       end
 
       def express_credentials_for(bucket, client = @client)
+        credentials = client.config.credentials&.credentials
         if @caching
-          cached_credentials_for(bucket, client)
+          cached_credentials_for(bucket, client, credentials)
         else
-          new_credentials_for(bucket, client)
+          new_credentials_for(bucket, client, credentials)
         end
       end
 
@@ -43,24 +44,20 @@ module Aws
 
       private
 
-      def cached_credentials_for(bucket, client)
-        key = cache_key(bucket, client)
-        cached = @cache[key]
-        return cached if cached && cache_key(bucket, cached.client) == key
-
-        @cache[key] = new_credentials_for(bucket, client)
+      def cached_credentials_for(bucket, client, credentials)
+        @cache[cache_key(bucket, credentials)] ||= new_credentials_for(bucket, client, credentials)
       end
 
-      def cache_key(bucket, client)
-        creds = client.config.credentials&.credentials
-        identity = "#{creds&.access_key_id}#{creds&.secret_access_key}"
+      def cache_key(bucket, credentials)
+        identity = "#{credentials&.access_key_id}#{credentials&.secret_access_key}"
         "#{OpenSSL::HMAC.hexdigest('SHA256', CACHE_KEY_SECRET, identity)}#{bucket}"
       end
 
-      def new_credentials_for(bucket, client)
+      def new_credentials_for(bucket, client, credentials)
         ExpressCredentials.new(
           bucket: bucket,
           client: client,
+          base_credentials: credentials,
           **@options
         )
       end

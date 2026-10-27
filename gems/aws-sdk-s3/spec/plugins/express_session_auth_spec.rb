@@ -137,7 +137,7 @@ module Aws
             **options
           )
           c.stub_responses(:create_session, lambda do |ctx|
-            caller_akid = ctx.config.credentials.access_key_id
+            caller_akid = (ctx[:sigv4_credentials] || ctx.config.credentials).credentials.access_key_id
             { credentials: {
               access_key_id: "s3-#{caller_akid}",
               secret_access_key: 's3-secret',
@@ -174,16 +174,15 @@ module Aws
           expect(session_token(client)).to eq('s3-session-akid-b')
         end
 
-        it 'refreshes sessions with the requesting client' do
+        it 'refreshes sessions with the credentials they were created with' do
           provider = Aws::S3::ExpressCredentialsProvider.new
           a = express_client('akid-a', express_credentials_provider: provider)
           b = express_client('akid-b', express_credentials_provider: provider)
           session_token(a)
           credentials = provider.express_credentials_for('bucket--use1-az2--x-s3', b)
-          expect(b).to receive(:create_session).and_call_original
-          expect(a).not_to receive(:create_session)
+          allow(b.config).to receive(:credentials).and_return(Aws::Credentials.new('akid-c', 'secret'))
           credentials.refresh!
-          expect(session_token(b)).to eq('s3-session-akid-b')
+          expect(credentials.credentials.session_token).to eq('s3-session-akid-b')
         end
 
         it 'supports custom providers that only accept a bucket' do
