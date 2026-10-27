@@ -16,14 +16,29 @@ module Aws::Billing
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
     AccountId = Shapes::StringShape.new(name: 'AccountId')
+    AccountList = Shapes::ListShape.new(name: 'AccountList')
     AccountName = Shapes::StringShape.new(name: 'AccountName')
     ActiveTimeRange = Shapes::StructureShape.new(name: 'ActiveTimeRange')
     AdditionalCharge = Shapes::StructureShape.new(name: 'AdditionalCharge')
     AdditionalChargeList = Shapes::ListShape.new(name: 'AdditionalChargeList')
+    AdditionalRecipient = Shapes::StructureShape.new(name: 'AdditionalRecipient')
+    AdditionalRecipients = Shapes::ListShape.new(name: 'AdditionalRecipients')
     Amount = Shapes::StructureShape.new(name: 'Amount')
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
+    ApproverDetails = Shapes::StructureShape.new(name: 'ApproverDetails')
+    ArnString = Shapes::StringShape.new(name: 'ArnString')
+    AssociateContractRequest = Shapes::StructureShape.new(name: 'AssociateContractRequest')
+    AssociateContractResponse = Shapes::StructureShape.new(name: 'AssociateContractResponse')
     AssociateSourceViewsRequest = Shapes::StructureShape.new(name: 'AssociateSourceViewsRequest')
     AssociateSourceViewsResponse = Shapes::StructureShape.new(name: 'AssociateSourceViewsResponse')
+    AssociationStatus = Shapes::StringShape.new(name: 'AssociationStatus')
+    AttestationClientToken = Shapes::StringShape.new(name: 'AttestationClientToken')
+    AttestationDetails = Shapes::StructureShape.new(name: 'AttestationDetails')
+    AttestationQuantities = Shapes::ListShape.new(name: 'AttestationQuantities')
+    AttestationQuantity = Shapes::StructureShape.new(name: 'AttestationQuantity')
+    AttestationQuantityAttestationUnitString = Shapes::StringShape.new(name: 'AttestationQuantityAttestationUnitString')
+    AttestationQuantityAttestationVolumeString = Shapes::StringShape.new(name: 'AttestationQuantityAttestationVolumeString')
+    AttestationValue = Shapes::UnionShape.new(name: 'AttestationValue')
     BillingDomain = Shapes::StringShape.new(name: 'BillingDomain')
     BillingFeature = Shapes::StringShape.new(name: 'BillingFeature')
     BillingFeatureFilter = Shapes::StructureShape.new(name: 'BillingFeatureFilter')
@@ -67,16 +82,28 @@ module Aws::Billing
     BusinessSupportSubscriptionContractList = Shapes::ListShape.new(name: 'BusinessSupportSubscriptionContractList')
     BusinessSupportTierCharge = Shapes::StructureShape.new(name: 'BusinessSupportTierCharge')
     BusinessSupportTierChargeList = Shapes::ListShape.new(name: 'BusinessSupportTierChargeList')
+    CancelContractualInvestmentAttestationRequest = Shapes::StructureShape.new(name: 'CancelContractualInvestmentAttestationRequest')
+    CancelContractualInvestmentAttestationResponse = Shapes::StructureShape.new(name: 'CancelContractualInvestmentAttestationResponse')
+    CancellationReason = Shapes::StringShape.new(name: 'CancellationReason')
     ChargeAccount = Shapes::StructureShape.new(name: 'ChargeAccount')
     ChargeAccountList = Shapes::ListShape.new(name: 'ChargeAccountList')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContractAccount = Shapes::StructureShape.new(name: 'ContractAccount')
     ContractAccountList = Shapes::ListShape.new(name: 'ContractAccountList')
+    ContractDetails = Shapes::UnionShape.new(name: 'ContractDetails')
+    ContractDocumentId = Shapes::StringShape.new(name: 'ContractDocumentId')
+    ContractRestriction = Shapes::StringShape.new(name: 'ContractRestriction')
+    ContractRestrictions = Shapes::ListShape.new(name: 'ContractRestrictions')
+    ContractSummaries = Shapes::ListShape.new(name: 'ContractSummaries')
+    ContractSummary = Shapes::StructureShape.new(name: 'ContractSummary')
+    ContractType = Shapes::StringShape.new(name: 'ContractType')
     CostCategoryName = Shapes::StringShape.new(name: 'CostCategoryName')
     CostCategoryValues = Shapes::StructureShape.new(name: 'CostCategoryValues')
     CreateBillingViewRequest = Shapes::StructureShape.new(name: 'CreateBillingViewRequest')
     CreateBillingViewResponse = Shapes::StructureShape.new(name: 'CreateBillingViewResponse')
+    CreateContractualInvestmentAttestationRequest = Shapes::StructureShape.new(name: 'CreateContractualInvestmentAttestationRequest')
+    CreateContractualInvestmentAttestationResponse = Shapes::StructureShape.new(name: 'CreateContractualInvestmentAttestationResponse')
     CreditAllocationHistoryEntry = Shapes::StructureShape.new(name: 'CreditAllocationHistoryEntry')
     CreditAllocationHistoryList = Shapes::ListShape.new(name: 'CreditAllocationHistoryList')
     CreditData = Shapes::StructureShape.new(name: 'CreditData')
@@ -90,6 +117,8 @@ module Aws::Billing
     DeleteBillingViewResponse = Shapes::StructureShape.new(name: 'DeleteBillingViewResponse')
     Dimension = Shapes::StringShape.new(name: 'Dimension')
     DimensionValues = Shapes::StructureShape.new(name: 'DimensionValues')
+    DisassociateContractRequest = Shapes::StructureShape.new(name: 'DisassociateContractRequest')
+    DisassociateContractResponse = Shapes::StructureShape.new(name: 'DisassociateContractResponse')
     DisassociateSourceViewsRequest = Shapes::StructureShape.new(name: 'DisassociateSourceViewsRequest')
     DisassociateSourceViewsResponse = Shapes::StructureShape.new(name: 'DisassociateSourceViewsResponse')
     EnterpriseSupportBillingMonth = Shapes::StringShape.new(name: 'EnterpriseSupportBillingMonth')
@@ -105,6 +134,8 @@ module Aws::Billing
     GetBillingPreferencesResponse = Shapes::StructureShape.new(name: 'GetBillingPreferencesResponse')
     GetBillingViewRequest = Shapes::StructureShape.new(name: 'GetBillingViewRequest')
     GetBillingViewResponse = Shapes::StructureShape.new(name: 'GetBillingViewResponse')
+    GetContractInformationRequest = Shapes::StructureShape.new(name: 'GetContractInformationRequest')
+    GetContractInformationResponse = Shapes::StructureShape.new(name: 'GetContractInformationResponse')
     GetCreditAllocationHistoryRequest = Shapes::StructureShape.new(name: 'GetCreditAllocationHistoryRequest')
     GetCreditAllocationHistoryRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'GetCreditAllocationHistoryRequestMaxResultsInteger')
     GetCreditAllocationHistoryResponse = Shapes::StructureShape.new(name: 'GetCreditAllocationHistoryResponse')
@@ -116,8 +147,31 @@ module Aws::Billing
     GetEnterpriseSupportContractDetailsResponse = Shapes::StructureShape.new(name: 'GetEnterpriseSupportContractDetailsResponse')
     GetResourcePolicyRequest = Shapes::StructureShape.new(name: 'GetResourcePolicyRequest')
     GetResourcePolicyResponse = Shapes::StructureShape.new(name: 'GetResourcePolicyResponse')
+    IdentifierString = Shapes::StringShape.new(name: 'IdentifierString')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    Interval = Shapes::StructureShape.new(name: 'Interval')
+    Investment = Shapes::UnionShape.new(name: 'Investment')
+    InvestmentAttestation = Shapes::StructureShape.new(name: 'InvestmentAttestation')
+    InvestmentAttestationInvestmentNameString = Shapes::StringShape.new(name: 'InvestmentAttestationInvestmentNameString')
+    InvestmentAttestationOutcomeDescriptionString = Shapes::StringShape.new(name: 'InvestmentAttestationOutcomeDescriptionString')
+    InvestmentAttestationStatus = Shapes::StringShape.new(name: 'InvestmentAttestationStatus')
+    InvestmentAttestations = Shapes::ListShape.new(name: 'InvestmentAttestations')
+    InvestmentDistribution = Shapes::StructureShape.new(name: 'InvestmentDistribution')
+    InvestmentDistributions = Shapes::ListShape.new(name: 'InvestmentDistributions')
+    InvestmentMultiplier = Shapes::StructureShape.new(name: 'InvestmentMultiplier')
+    InvestmentMultiplierInvestmentAttestationInputUnitString = Shapes::StringShape.new(name: 'InvestmentMultiplierInvestmentAttestationInputUnitString')
+    InvestmentMultiplierValueString = Shapes::StringShape.new(name: 'InvestmentMultiplierValueString')
+    InvestmentMultipliers = Shapes::ListShape.new(name: 'InvestmentMultipliers')
+    InvestmentRestriction = Shapes::StructureShape.new(name: 'InvestmentRestriction')
+    InvestmentRestrictions = Shapes::ListShape.new(name: 'InvestmentRestrictions')
+    InvestmentSummaries = Shapes::ListShape.new(name: 'InvestmentSummaries')
+    InvestmentSummary = Shapes::StructureShape.new(name: 'InvestmentSummary')
+    InvestmentSummaryInvestmentNameString = Shapes::StringShape.new(name: 'InvestmentSummaryInvestmentNameString')
+    InvestmentType = Shapes::StringShape.new(name: 'InvestmentType')
+    Investments = Shapes::ListShape.new(name: 'Investments')
+    LegalEntities = Shapes::ListShape.new(name: 'LegalEntities')
+    LegalEntity = Shapes::StructureShape.new(name: 'LegalEntity')
     LinkedAccountCharge = Shapes::StructureShape.new(name: 'LinkedAccountCharge')
     LinkedAccountChargeList = Shapes::ListShape.new(name: 'LinkedAccountChargeList')
     ListBillingViewSegmentsRequest = Shapes::StructureShape.new(name: 'ListBillingViewSegmentsRequest')
@@ -130,6 +184,18 @@ module Aws::Billing
     ListBusinessSupportSubscriptionHistoryRequest = Shapes::StructureShape.new(name: 'ListBusinessSupportSubscriptionHistoryRequest')
     ListBusinessSupportSubscriptionHistoryRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListBusinessSupportSubscriptionHistoryRequestMaxResultsInteger')
     ListBusinessSupportSubscriptionHistoryResponse = Shapes::StructureShape.new(name: 'ListBusinessSupportSubscriptionHistoryResponse')
+    ListContractsRequest = Shapes::StructureShape.new(name: 'ListContractsRequest')
+    ListContractsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListContractsRequestMaxResultsInteger')
+    ListContractsResponse = Shapes::StructureShape.new(name: 'ListContractsResponse')
+    ListContractualInvestmentAttestationsRequest = Shapes::StructureShape.new(name: 'ListContractualInvestmentAttestationsRequest')
+    ListContractualInvestmentAttestationsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListContractualInvestmentAttestationsRequestMaxResultsInteger')
+    ListContractualInvestmentAttestationsResponse = Shapes::StructureShape.new(name: 'ListContractualInvestmentAttestationsResponse')
+    ListContractualInvestmentSummariesRequest = Shapes::StructureShape.new(name: 'ListContractualInvestmentSummariesRequest')
+    ListContractualInvestmentSummariesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListContractualInvestmentSummariesRequestMaxResultsInteger')
+    ListContractualInvestmentSummariesResponse = Shapes::StructureShape.new(name: 'ListContractualInvestmentSummariesResponse')
+    ListContractualInvestmentsRequest = Shapes::StructureShape.new(name: 'ListContractualInvestmentsRequest')
+    ListContractualInvestmentsRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListContractualInvestmentsRequestMaxResultsInteger')
+    ListContractualInvestmentsResponse = Shapes::StructureShape.new(name: 'ListContractualInvestmentsResponse')
     ListEnterpriseSupportLinkedAccountChargesRequest = Shapes::StructureShape.new(name: 'ListEnterpriseSupportLinkedAccountChargesRequest')
     ListEnterpriseSupportLinkedAccountChargesRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListEnterpriseSupportLinkedAccountChargesRequestMaxResultsInteger')
     ListEnterpriseSupportLinkedAccountChargesResponse = Shapes::StructureShape.new(name: 'ListEnterpriseSupportLinkedAccountChargesResponse')
@@ -138,7 +204,11 @@ module Aws::Billing
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MilestoneBasedInvestment = Shapes::StructureShape.new(name: 'MilestoneBasedInvestment')
     Month = Shapes::IntegerShape.new(name: 'Month')
+    MultiplierType = Shapes::StringShape.new(name: 'MultiplierType')
+    OutcomeBasedInvestment = Shapes::StructureShape.new(name: 'OutcomeBasedInvestment')
+    OutcomeBasedInvestmentOutcomeDescriptionString = Shapes::StringShape.new(name: 'OutcomeBasedInvestmentOutcomeDescriptionString')
     PageToken = Shapes::StringShape.new(name: 'PageToken')
     PolicyDocument = Shapes::StringShape.new(name: 'PolicyDocument')
     PreferenceKey = Shapes::StringShape.new(name: 'PreferenceKey')
@@ -147,6 +217,7 @@ module Aws::Billing
     PricingPlanList = Shapes::ListShape.new(name: 'PricingPlanList')
     PricingPlanTier = Shapes::StructureShape.new(name: 'PricingPlanTier')
     PricingPlanTierList = Shapes::ListShape.new(name: 'PricingPlanTierList')
+    PrivatePricingAddendum = Shapes::StructureShape.new(name: 'PrivatePricingAddendum')
     ProductName = Shapes::StringShape.new(name: 'ProductName')
     ProductNames = Shapes::ListShape.new(name: 'ProductNames')
     PromoCode = Shapes::StringShape.new(name: 'PromoCode')
@@ -155,6 +226,8 @@ module Aws::Billing
     QuotaCode = Shapes::StringShape.new(name: 'QuotaCode')
     RedeemCreditsRequest = Shapes::StructureShape.new(name: 'RedeemCreditsRequest')
     RedeemCreditsResponse = Shapes::StructureShape.new(name: 'RedeemCreditsResponse')
+    RejectionReason = Shapes::StringShape.new(name: 'RejectionReason')
+    RejectionReasons = Shapes::ListShape.new(name: 'RejectionReasons')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceId = Shapes::StringShape.new(name: 'ResourceId')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -166,6 +239,8 @@ module Aws::Billing
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     SearchOption = Shapes::StringShape.new(name: 'SearchOption')
     SearchValue = Shapes::StringShape.new(name: 'SearchValue')
+    SensitiveEmail = Shapes::StringShape.new(name: 'SensitiveEmail')
+    SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     ServiceCode = Shapes::StringShape.new(name: 'ServiceCode')
     ServiceLevelAccountUsage = Shapes::StructureShape.new(name: 'ServiceLevelAccountUsage')
     ServiceLevelAccountUsageList = Shapes::ListShape.new(name: 'ServiceLevelAccountUsageList')
@@ -198,6 +273,8 @@ module Aws::Billing
     AccessDeniedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
+    AccountList.member = Shapes::ShapeRef.new(shape: AccountId)
+
     ActiveTimeRange.add_member(:active_after_inclusive, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "activeAfterInclusive"))
     ActiveTimeRange.add_member(:active_before_inclusive, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "activeBeforeInclusive"))
     ActiveTimeRange.struct_class = Types::ActiveTimeRange
@@ -209,9 +286,25 @@ module Aws::Billing
 
     AdditionalChargeList.member = Shapes::ShapeRef.new(shape: AdditionalCharge)
 
+    AdditionalRecipient.add_member(:email, Shapes::ShapeRef.new(shape: SensitiveEmail, required: true, location_name: "email"))
+    AdditionalRecipient.struct_class = Types::AdditionalRecipient
+
+    AdditionalRecipients.member = Shapes::ShapeRef.new(shape: AdditionalRecipient)
+
     Amount.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCode, required: true, location_name: "currencyCode"))
     Amount.add_member(:currency_amount, Shapes::ShapeRef.new(shape: CurrencyAmount, required: true, location_name: "currencyAmount"))
     Amount.struct_class = Types::Amount
+
+    ApproverDetails.add_member(:name, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "name"))
+    ApproverDetails.add_member(:title, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "title"))
+    ApproverDetails.add_member(:email, Shapes::ShapeRef.new(shape: SensitiveEmail, required: true, location_name: "email"))
+    ApproverDetails.struct_class = Types::ApproverDetails
+
+    AssociateContractRequest.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    AssociateContractRequest.add_member(:contract_document_id, Shapes::ShapeRef.new(shape: ContractDocumentId, required: true, location_name: "contractDocumentId"))
+    AssociateContractRequest.struct_class = Types::AssociateContractRequest
+
+    AssociateContractResponse.struct_class = Types::AssociateContractResponse
 
     AssociateSourceViewsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, required: true, location_name: "arn"))
     AssociateSourceViewsRequest.add_member(:source_views, Shapes::ShapeRef.new(shape: BillingViewSourceViewsList, required: true, location_name: "sourceViews"))
@@ -219,6 +312,24 @@ module Aws::Billing
 
     AssociateSourceViewsResponse.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, required: true, location_name: "arn"))
     AssociateSourceViewsResponse.struct_class = Types::AssociateSourceViewsResponse
+
+    AttestationDetails.add_member(:attestation_value, Shapes::ShapeRef.new(shape: AttestationValue, required: true, location_name: "attestationValue"))
+    AttestationDetails.add_member(:investment_distributions, Shapes::ShapeRef.new(shape: InvestmentDistributions, location_name: "investmentDistributions"))
+    AttestationDetails.struct_class = Types::AttestationDetails
+
+    AttestationQuantities.member = Shapes::ShapeRef.new(shape: AttestationQuantity)
+
+    AttestationQuantity.add_member(:attestation_volume, Shapes::ShapeRef.new(shape: AttestationQuantityAttestationVolumeString, required: true, location_name: "attestationVolume"))
+    AttestationQuantity.add_member(:attestation_unit, Shapes::ShapeRef.new(shape: AttestationQuantityAttestationUnitString, required: true, location_name: "attestationUnit"))
+    AttestationQuantity.struct_class = Types::AttestationQuantity
+
+    AttestationValue.add_member(:attestation_amount, Shapes::ShapeRef.new(shape: Amount, location_name: "attestationAmount"))
+    AttestationValue.add_member(:attestation_quantities, Shapes::ShapeRef.new(shape: AttestationQuantities, location_name: "attestationQuantities"))
+    AttestationValue.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AttestationValue.add_member_subclass(:attestation_amount, Types::AttestationValue::AttestationAmount)
+    AttestationValue.add_member_subclass(:attestation_quantities, Types::AttestationValue::AttestationQuantities)
+    AttestationValue.add_member_subclass(:unknown, Types::AttestationValue::Unknown)
+    AttestationValue.struct_class = Types::AttestationValue
 
     BillingFeatureFilter.add_member(:name, Shapes::ShapeRef.new(shape: BillingFeatureFilterName, location_name: "name"))
     BillingFeatureFilter.add_member(:value, Shapes::ShapeRef.new(shape: BillingFeatureFilterValues, location_name: "value"))
@@ -344,6 +455,13 @@ module Aws::Billing
 
     BusinessSupportTierChargeList.member = Shapes::ShapeRef.new(shape: BusinessSupportTierCharge)
 
+    CancelContractualInvestmentAttestationRequest.add_member(:attestation_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "attestationId"))
+    CancelContractualInvestmentAttestationRequest.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    CancelContractualInvestmentAttestationRequest.add_member(:reason, Shapes::ShapeRef.new(shape: CancellationReason, required: true, location_name: "reason"))
+    CancelContractualInvestmentAttestationRequest.struct_class = Types::CancelContractualInvestmentAttestationRequest
+
+    CancelContractualInvestmentAttestationResponse.struct_class = Types::CancelContractualInvestmentAttestationResponse
+
     ChargeAccount.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     ChargeAccount.add_member(:charge_percentage, Shapes::ShapeRef.new(shape: String, required: true, location_name: "chargePercentage"))
     ChargeAccount.struct_class = Types::ChargeAccount
@@ -361,6 +479,23 @@ module Aws::Billing
 
     ContractAccountList.member = Shapes::ShapeRef.new(shape: ContractAccount)
 
+    ContractDetails.add_member(:private_pricing_addendum, Shapes::ShapeRef.new(shape: PrivatePricingAddendum, location_name: "privatePricingAddendum"))
+    ContractDetails.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    ContractDetails.add_member_subclass(:private_pricing_addendum, Types::ContractDetails::PrivatePricingAddendum)
+    ContractDetails.add_member_subclass(:unknown, Types::ContractDetails::Unknown)
+    ContractDetails.struct_class = Types::ContractDetails
+
+    ContractRestrictions.member = Shapes::ShapeRef.new(shape: ContractRestriction)
+
+    ContractSummaries.member = Shapes::ShapeRef.new(shape: ContractSummary)
+
+    ContractSummary.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    ContractSummary.add_member(:contract_term, Shapes::ShapeRef.new(shape: Interval, required: true, location_name: "contractTerm"))
+    ContractSummary.add_member(:contract_type, Shapes::ShapeRef.new(shape: ContractType, location_name: "contractType"))
+    ContractSummary.add_member(:association_status, Shapes::ShapeRef.new(shape: AssociationStatus, required: true, location_name: "associationStatus"))
+    ContractSummary.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
+    ContractSummary.struct_class = Types::ContractSummary
+
     CostCategoryValues.add_member(:key, Shapes::ShapeRef.new(shape: CostCategoryName, required: true, location_name: "key"))
     CostCategoryValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, required: true, location_name: "values"))
     CostCategoryValues.struct_class = Types::CostCategoryValues
@@ -376,6 +511,20 @@ module Aws::Billing
     CreateBillingViewResponse.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, required: true, location_name: "arn"))
     CreateBillingViewResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     CreateBillingViewResponse.struct_class = Types::CreateBillingViewResponse
+
+    CreateContractualInvestmentAttestationRequest.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    CreateContractualInvestmentAttestationRequest.add_member(:investment_summary_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "investmentSummaryId"))
+    CreateContractualInvestmentAttestationRequest.add_member(:investment_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "investmentId"))
+    CreateContractualInvestmentAttestationRequest.add_member(:contract_document_id, Shapes::ShapeRef.new(shape: ContractDocumentId, required: true, location_name: "contractDocumentId"))
+    CreateContractualInvestmentAttestationRequest.add_member(:approver_details, Shapes::ShapeRef.new(shape: ApproverDetails, required: true, location_name: "approverDetails"))
+    CreateContractualInvestmentAttestationRequest.add_member(:investment_disbursed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "investmentDisbursedAt"))
+    CreateContractualInvestmentAttestationRequest.add_member(:attestation_details, Shapes::ShapeRef.new(shape: AttestationDetails, required: true, location_name: "attestationDetails"))
+    CreateContractualInvestmentAttestationRequest.add_member(:additional_recipients, Shapes::ShapeRef.new(shape: AdditionalRecipients, location_name: "additionalRecipients"))
+    CreateContractualInvestmentAttestationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: AttestationClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    CreateContractualInvestmentAttestationRequest.struct_class = Types::CreateContractualInvestmentAttestationRequest
+
+    CreateContractualInvestmentAttestationResponse.add_member(:attestation_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "attestationId"))
+    CreateContractualInvestmentAttestationResponse.struct_class = Types::CreateContractualInvestmentAttestationResponse
 
     CreditAllocationHistoryEntry.add_member(:credit_id, Shapes::ShapeRef.new(shape: CreditId, required: true, location_name: "creditId"))
     CreditAllocationHistoryEntry.add_member(:credit_amount, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "creditAmount"))
@@ -423,6 +572,11 @@ module Aws::Billing
     DimensionValues.add_member(:values, Shapes::ShapeRef.new(shape: Values, required: true, location_name: "values"))
     DimensionValues.struct_class = Types::DimensionValues
 
+    DisassociateContractRequest.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    DisassociateContractRequest.struct_class = Types::DisassociateContractRequest
+
+    DisassociateContractResponse.struct_class = Types::DisassociateContractResponse
+
     DisassociateSourceViewsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: BillingViewArn, required: true, location_name: "arn"))
     DisassociateSourceViewsRequest.add_member(:source_views, Shapes::ShapeRef.new(shape: BillingViewSourceViewsList, required: true, location_name: "sourceViews"))
     DisassociateSourceViewsRequest.struct_class = Types::DisassociateSourceViewsRequest
@@ -461,6 +615,12 @@ module Aws::Billing
 
     GetBillingViewResponse.add_member(:billing_view, Shapes::ShapeRef.new(shape: BillingViewElement, required: true, location_name: "billingView"))
     GetBillingViewResponse.struct_class = Types::GetBillingViewResponse
+
+    GetContractInformationRequest.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    GetContractInformationRequest.struct_class = Types::GetContractInformationRequest
+
+    GetContractInformationResponse.add_member(:contract, Shapes::ShapeRef.new(shape: ContractDetails, required: true, location_name: "contract"))
+    GetContractInformationResponse.struct_class = Types::GetContractInformationResponse
 
     GetCreditAllocationHistoryRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     GetCreditAllocationHistoryRequest.add_member(:credit_id, Shapes::ShapeRef.new(shape: Long, location_name: "creditId"))
@@ -532,6 +692,68 @@ module Aws::Billing
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     InternalServerException.struct_class = Types::InternalServerException
 
+    Interval.add_member(:start_date_inclusive, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "startDateInclusive"))
+    Interval.add_member(:end_date_inclusive, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "endDateInclusive"))
+    Interval.struct_class = Types::Interval
+
+    Investment.add_member(:milestone_based_investment, Shapes::ShapeRef.new(shape: MilestoneBasedInvestment, location_name: "milestoneBasedInvestment"))
+    Investment.add_member(:outcome_based_investment, Shapes::ShapeRef.new(shape: OutcomeBasedInvestment, location_name: "outcomeBasedInvestment"))
+    Investment.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    Investment.add_member_subclass(:milestone_based_investment, Types::Investment::MilestoneBasedInvestment)
+    Investment.add_member_subclass(:outcome_based_investment, Types::Investment::OutcomeBasedInvestment)
+    Investment.add_member_subclass(:unknown, Types::Investment::Unknown)
+    Investment.struct_class = Types::Investment
+
+    InvestmentAttestation.add_member(:attestation_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "attestationId"))
+    InvestmentAttestation.add_member(:investment_name, Shapes::ShapeRef.new(shape: InvestmentAttestationInvestmentNameString, required: true, location_name: "investmentName"))
+    InvestmentAttestation.add_member(:outcome_description, Shapes::ShapeRef.new(shape: InvestmentAttestationOutcomeDescriptionString, required: true, location_name: "outcomeDescription"))
+    InvestmentAttestation.add_member(:investment_summary_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "investmentSummaryId"))
+    InvestmentAttestation.add_member(:investment_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "investmentId"))
+    InvestmentAttestation.add_member(:attested_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "attestedAt"))
+    InvestmentAttestation.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "updatedAt"))
+    InvestmentAttestation.add_member(:attestation_status, Shapes::ShapeRef.new(shape: InvestmentAttestationStatus, required: true, location_name: "attestationStatus"))
+    InvestmentAttestation.add_member(:investment_disbursed_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "investmentDisbursedAt"))
+    InvestmentAttestation.add_member(:attested_value, Shapes::ShapeRef.new(shape: Amount, location_name: "attestedValue"))
+    InvestmentAttestation.add_member(:investment_distributions, Shapes::ShapeRef.new(shape: InvestmentDistributions, location_name: "investmentDistributions"))
+    InvestmentAttestation.add_member(:rejection_reasons, Shapes::ShapeRef.new(shape: RejectionReasons, location_name: "rejectionReasons"))
+    InvestmentAttestation.add_member(:is_cancellable, Shapes::ShapeRef.new(shape: Boolean, location_name: "isCancellable"))
+    InvestmentAttestation.struct_class = Types::InvestmentAttestation
+
+    InvestmentAttestations.member = Shapes::ShapeRef.new(shape: InvestmentAttestation)
+
+    InvestmentDistribution.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
+    InvestmentDistribution.add_member(:investment_amount, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "investmentAmount"))
+    InvestmentDistribution.struct_class = Types::InvestmentDistribution
+
+    InvestmentDistributions.member = Shapes::ShapeRef.new(shape: InvestmentDistribution)
+
+    InvestmentMultiplier.add_member(:value, Shapes::ShapeRef.new(shape: InvestmentMultiplierValueString, required: true, location_name: "value"))
+    InvestmentMultiplier.add_member(:investment_attestation_input_unit, Shapes::ShapeRef.new(shape: InvestmentMultiplierInvestmentAttestationInputUnitString, required: true, location_name: "investmentAttestationInputUnit"))
+    InvestmentMultiplier.add_member(:multiplier_type, Shapes::ShapeRef.new(shape: MultiplierType, required: true, location_name: "multiplierType"))
+    InvestmentMultiplier.struct_class = Types::InvestmentMultiplier
+
+    InvestmentMultipliers.member = Shapes::ShapeRef.new(shape: InvestmentMultiplier)
+
+    InvestmentRestriction.add_member(:amount, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "amount"))
+    InvestmentRestriction.struct_class = Types::InvestmentRestriction
+
+    InvestmentRestrictions.member = Shapes::ShapeRef.new(shape: InvestmentRestriction)
+
+    InvestmentSummaries.member = Shapes::ShapeRef.new(shape: InvestmentSummary)
+
+    InvestmentSummary.add_member(:investment_summary_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "investmentSummaryId"))
+    InvestmentSummary.add_member(:investment_name, Shapes::ShapeRef.new(shape: InvestmentSummaryInvestmentNameString, required: true, location_name: "investmentName"))
+    InvestmentSummary.add_member(:investment_type, Shapes::ShapeRef.new(shape: InvestmentType, required: true, location_name: "investmentType"))
+    InvestmentSummary.add_member(:max_allowed_investment_disbursement_value, Shapes::ShapeRef.new(shape: Amount, location_name: "maxAllowedInvestmentDisbursementValue"))
+    InvestmentSummary.struct_class = Types::InvestmentSummary
+
+    Investments.member = Shapes::ShapeRef.new(shape: Investment)
+
+    LegalEntities.member = Shapes::ShapeRef.new(shape: LegalEntity)
+
+    LegalEntity.add_member(:legal_entity_name, Shapes::ShapeRef.new(shape: SensitiveString, required: true, location_name: "legalEntityName"))
+    LegalEntity.struct_class = Types::LegalEntity
+
     LinkedAccountCharge.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "accountId"))
     LinkedAccountCharge.add_member(:payer_account_id, Shapes::ShapeRef.new(shape: AccountId, required: true, location_name: "payerAccountId"))
     LinkedAccountCharge.add_member(:account_type, Shapes::ShapeRef.new(shape: String, location_name: "accountType"))
@@ -599,6 +821,43 @@ module Aws::Billing
     ListBusinessSupportSubscriptionHistoryResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
     ListBusinessSupportSubscriptionHistoryResponse.struct_class = Types::ListBusinessSupportSubscriptionHistoryResponse
 
+    ListContractsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListContractsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListContractsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListContractsRequest.struct_class = Types::ListContractsRequest
+
+    ListContractsResponse.add_member(:items, Shapes::ShapeRef.new(shape: ContractSummaries, required: true, location_name: "items"))
+    ListContractsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListContractsResponse.struct_class = Types::ListContractsResponse
+
+    ListContractualInvestmentAttestationsRequest.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    ListContractualInvestmentAttestationsRequest.add_member(:investment_summary_id, Shapes::ShapeRef.new(shape: IdentifierString, location_name: "investmentSummaryId"))
+    ListContractualInvestmentAttestationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListContractualInvestmentAttestationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListContractualInvestmentAttestationsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListContractualInvestmentAttestationsRequest.struct_class = Types::ListContractualInvestmentAttestationsRequest
+
+    ListContractualInvestmentAttestationsResponse.add_member(:items, Shapes::ShapeRef.new(shape: InvestmentAttestations, required: true, location_name: "items"))
+    ListContractualInvestmentAttestationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListContractualInvestmentAttestationsResponse.struct_class = Types::ListContractualInvestmentAttestationsResponse
+
+    ListContractualInvestmentSummariesRequest.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    ListContractualInvestmentSummariesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListContractualInvestmentSummariesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListContractualInvestmentSummariesRequestMaxResultsInteger, location_name: "maxResults"))
+    ListContractualInvestmentSummariesRequest.struct_class = Types::ListContractualInvestmentSummariesRequest
+
+    ListContractualInvestmentSummariesResponse.add_member(:items, Shapes::ShapeRef.new(shape: InvestmentSummaries, required: true, location_name: "items"))
+    ListContractualInvestmentSummariesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListContractualInvestmentSummariesResponse.struct_class = Types::ListContractualInvestmentSummariesResponse
+
+    ListContractualInvestmentsRequest.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    ListContractualInvestmentsRequest.add_member(:investment_summary_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "investmentSummaryId"))
+    ListContractualInvestmentsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListContractualInvestmentsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListContractualInvestmentsRequestMaxResultsInteger, location_name: "maxResults"))
+    ListContractualInvestmentsRequest.struct_class = Types::ListContractualInvestmentsRequest
+
+    ListContractualInvestmentsResponse.add_member(:items, Shapes::ShapeRef.new(shape: Investments, required: true, location_name: "items"))
+    ListContractualInvestmentsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "nextToken"))
+    ListContractualInvestmentsResponse.struct_class = Types::ListContractualInvestmentsResponse
+
     ListEnterpriseSupportLinkedAccountChargesRequest.add_member(:billing_month, Shapes::ShapeRef.new(shape: EnterpriseSupportBillingMonth, required: true, location_name: "billingMonth"))
     ListEnterpriseSupportLinkedAccountChargesRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     ListEnterpriseSupportLinkedAccountChargesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListEnterpriseSupportLinkedAccountChargesRequestMaxResultsInteger, location_name: "maxResults"))
@@ -623,6 +882,19 @@ module Aws::Billing
 
     ListTagsForResourceResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "resourceTags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
+
+    MilestoneBasedInvestment.add_member(:investment_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "investmentId"))
+    MilestoneBasedInvestment.add_member(:investment_value, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "investmentValue"))
+    MilestoneBasedInvestment.add_member(:investment_disbursed_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "investmentDisbursedAt"))
+    MilestoneBasedInvestment.struct_class = Types::MilestoneBasedInvestment
+
+    OutcomeBasedInvestment.add_member(:investment_id, Shapes::ShapeRef.new(shape: IdentifierString, required: true, location_name: "investmentId"))
+    OutcomeBasedInvestment.add_member(:outcome_description, Shapes::ShapeRef.new(shape: OutcomeBasedInvestmentOutcomeDescriptionString, required: true, location_name: "outcomeDescription"))
+    OutcomeBasedInvestment.add_member(:attestation_window, Shapes::ShapeRef.new(shape: Interval, required: true, location_name: "attestationWindow"))
+    OutcomeBasedInvestment.add_member(:investment_restrictions, Shapes::ShapeRef.new(shape: InvestmentRestrictions, location_name: "investmentRestrictions"))
+    OutcomeBasedInvestment.add_member(:investment_multipliers, Shapes::ShapeRef.new(shape: InvestmentMultipliers, location_name: "investmentMultipliers"))
+    OutcomeBasedInvestment.add_member(:disbursed_value, Shapes::ShapeRef.new(shape: Amount, required: true, location_name: "disbursedValue"))
+    OutcomeBasedInvestment.struct_class = Types::OutcomeBasedInvestment
 
     PricingPlan.add_member(:pricing_plan_id, Shapes::ShapeRef.new(shape: String, location_name: "pricingPlanId"))
     PricingPlan.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -650,6 +922,14 @@ module Aws::Billing
 
     PricingPlanTierList.member = Shapes::ShapeRef.new(shape: PricingPlanTier)
 
+    PrivatePricingAddendum.add_member(:contract_arn, Shapes::ShapeRef.new(shape: ArnString, required: true, location_name: "contractArn"))
+    PrivatePricingAddendum.add_member(:contract_term, Shapes::ShapeRef.new(shape: Interval, required: true, location_name: "contractTerm"))
+    PrivatePricingAddendum.add_member(:eligible_payer_accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "eligiblePayerAccounts"))
+    PrivatePricingAddendum.add_member(:investment_accounts, Shapes::ShapeRef.new(shape: AccountList, required: true, location_name: "investmentAccounts"))
+    PrivatePricingAddendum.add_member(:legal_entities, Shapes::ShapeRef.new(shape: LegalEntities, required: true, location_name: "legalEntities"))
+    PrivatePricingAddendum.add_member(:contract_restrictions, Shapes::ShapeRef.new(shape: ContractRestrictions, location_name: "contractRestrictions"))
+    PrivatePricingAddendum.struct_class = Types::PrivatePricingAddendum
+
     ProductNames.member = Shapes::ShapeRef.new(shape: ProductName)
 
     PurchaseTypeApplications.member = Shapes::ShapeRef.new(shape: PurchaseType)
@@ -658,6 +938,8 @@ module Aws::Billing
     RedeemCreditsRequest.struct_class = Types::RedeemCreditsRequest
 
     RedeemCreditsResponse.struct_class = Types::RedeemCreditsResponse
+
+    RejectionReasons.member = Shapes::ShapeRef.new(shape: RejectionReason)
 
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, required: true, location_name: "message"))
     ResourceNotFoundException.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
@@ -768,6 +1050,20 @@ module Aws::Billing
         "uid" => "billing-2023-09-07",
       }
 
+      api.add_operation(:associate_contract, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AssociateContract"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: AssociateContractRequest)
+        o.output = Shapes::ShapeRef.new(shape: AssociateContractResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:associate_source_views, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AssociateSourceViews"
         o.http_method = "POST"
@@ -776,6 +1072,20 @@ module Aws::Billing
         o.output = Shapes::ShapeRef.new(shape: AssociateSourceViewsResponse)
         o.errors << Shapes::ShapeRef.new(shape: BillingViewHealthStatusException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:cancel_contractual_investment_attestation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelContractualInvestmentAttestation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CancelContractualInvestmentAttestationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CancelContractualInvestmentAttestationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -800,6 +1110,20 @@ module Aws::Billing
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:create_contractual_investment_attestation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateContractualInvestmentAttestation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateContractualInvestmentAttestationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateContractualInvestmentAttestationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:delete_billing_view, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteBillingView"
         o.http_method = "POST"
@@ -809,6 +1133,19 @@ module Aws::Billing
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:disassociate_contract, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DisassociateContract"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DisassociateContractRequest)
+        o.output = Shapes::ShapeRef.new(shape: DisassociateContractResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
@@ -846,6 +1183,19 @@ module Aws::Billing
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetBillingViewRequest)
         o.output = Shapes::ShapeRef.new(shape: GetBillingViewResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:get_contract_information, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetContractInformation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetContractInformationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetContractInformationResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
@@ -985,6 +1335,81 @@ module Aws::Billing
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListBusinessSupportSubscriptionHistoryRequest)
         o.output = Shapes::ShapeRef.new(shape: ListBusinessSupportSubscriptionHistoryResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_contracts, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContracts"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListContractsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContractsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_contractual_investment_attestations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContractualInvestmentAttestations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListContractualInvestmentAttestationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContractualInvestmentAttestationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_contractual_investment_summaries, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContractualInvestmentSummaries"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListContractualInvestmentSummariesRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContractualInvestmentSummariesResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_contractual_investments, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListContractualInvestments"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListContractualInvestmentsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListContractualInvestmentsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)

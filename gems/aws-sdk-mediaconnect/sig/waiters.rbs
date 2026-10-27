@@ -9,6 +9,46 @@ module Aws
   module MediaConnect
     module Waiters
 
+      class DestinationEndpointConnected
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetDestinationEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetDestinationEndpointResponseSuccess
+      end
+
+      class DestinationEndpointDeregistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetDestinationEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetDestinationEndpointResponseSuccess
+      end
+
+      class DestinationEndpointDisconnected
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetDestinationEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetDestinationEndpointResponseSuccess
+      end
+
+      class DestinationEndpointRegistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetDestinationEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetDestinationEndpointResponseSuccess
+      end
+
       class FlowActive
         def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
                       | (?Hash[Symbol, untyped]) -> void
@@ -117,6 +157,66 @@ module Aws
                     arn: ::String
                   ) -> Client::_GetRouterOutputResponseSuccess
                 | (Hash[Symbol, untyped]) -> Client::_GetRouterOutputResponseSuccess
+      end
+
+      class SourceEndpointConnected
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSourceEndpointResponseSuccess
+      end
+
+      class SourceEndpointConnecting
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSourceEndpointResponseSuccess
+      end
+
+      class SourceEndpointDeregistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSourceEndpointResponseSuccess
+      end
+
+      class SourceEndpointDisconnected
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSourceEndpointResponseSuccess
+      end
+
+      class SourceEndpointDisconnecting
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSourceEndpointResponseSuccess
+      end
+
+      class SourceEndpointRegistered
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    arn: ::String
+                  ) -> Client::_GetSourceEndpointResponseSuccess
+                | (Hash[Symbol, untyped]) -> Client::_GetSourceEndpointResponseSuccess
       end
     end
   end

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.148.0 (2026-10-26)
+------------------
+
+* Feature - Add Windows 11 to PlatformType enum
+
 1.147.0 (2026-10-21)
 ------------------
 

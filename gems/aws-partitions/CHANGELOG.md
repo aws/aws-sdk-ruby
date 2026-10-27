@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Document that custom partition `regionRegex` values are interpreted as regex patterns.
 
+1.1299.0 (2026-10-26)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
 1.1298.0 (2026-10-22)
 ------------------
 

@@ -1445,6 +1445,7 @@ module Aws::Connect
     NotificationStatus = Shapes::StringShape.new(name: 'NotificationStatus')
     NotificationSummaryList = Shapes::ListShape.new(name: 'NotificationSummaryList')
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
+    NullableAdditionalRecipients = Shapes::StructureShape.new(name: 'NullableAdditionalRecipients')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableProficiencyLevel = Shapes::FloatShape.new(name: 'NullableProficiencyLevel')
@@ -1460,6 +1461,7 @@ module Aws::Connect
     OperationalHour = Shapes::StructureShape.new(name: 'OperationalHour')
     OperationalHours = Shapes::ListShape.new(name: 'OperationalHours')
     OperationalStatus = Shapes::StringShape.new(name: 'OperationalStatus')
+    OptionalEmailAddressRecipientList = Shapes::ListShape.new(name: 'OptionalEmailAddressRecipientList')
     Origin = Shapes::StringShape.new(name: 'Origin')
     OriginRegion = Shapes::StringShape.new(name: 'OriginRegion')
     OriginsList = Shapes::ListShape.new(name: 'OriginsList')
@@ -2213,6 +2215,11 @@ module Aws::Connect
     UpdateMetricMetadataResponse = Shapes::StructureShape.new(name: 'UpdateMetricMetadataResponse')
     UpdateNotificationContentRequest = Shapes::StructureShape.new(name: 'UpdateNotificationContentRequest')
     UpdateNotificationContentResponse = Shapes::StructureShape.new(name: 'UpdateNotificationContentResponse')
+    UpdateOutboundEmailContactMessageRequest = Shapes::StructureShape.new(name: 'UpdateOutboundEmailContactMessageRequest')
+    UpdateOutboundEmailContactMessageResponse = Shapes::StructureShape.new(name: 'UpdateOutboundEmailContactMessageResponse')
+    UpdateOutboundEmailContent = Shapes::StructureShape.new(name: 'UpdateOutboundEmailContent')
+    UpdateOutboundEmailMessageSourceType = Shapes::StringShape.new(name: 'UpdateOutboundEmailMessageSourceType')
+    UpdateOutboundRawMessage = Shapes::StructureShape.new(name: 'UpdateOutboundRawMessage')
     UpdateParticipantAuthenticationRequest = Shapes::StructureShape.new(name: 'UpdateParticipantAuthenticationRequest')
     UpdateParticipantAuthenticationResponse = Shapes::StructureShape.new(name: 'UpdateParticipantAuthenticationResponse')
     UpdateParticipantRoleConfigChannelInfo = Shapes::UnionShape.new(name: 'UpdateParticipantRoleConfigChannelInfo')
@@ -7368,6 +7375,9 @@ module Aws::Connect
 
     NotificationSummaryList.member = Shapes::ShapeRef.new(shape: Notification)
 
+    NullableAdditionalRecipients.add_member(:cc_email_addresses, Shapes::ShapeRef.new(shape: OptionalEmailAddressRecipientList, location_name: "CcEmailAddresses"))
+    NullableAdditionalRecipients.struct_class = Types::NullableAdditionalRecipients
+
     NumberCondition.add_member(:field_name, Shapes::ShapeRef.new(shape: String, location_name: "FieldName"))
     NumberCondition.add_member(:min_value, Shapes::ShapeRef.new(shape: NullableProficiencyLimitValue, location_name: "MinValue"))
     NumberCondition.add_member(:max_value, Shapes::ShapeRef.new(shape: NullableProficiencyLimitValue, location_name: "MaxValue"))
@@ -7393,6 +7403,8 @@ module Aws::Connect
     OperationalHour.struct_class = Types::OperationalHour
 
     OperationalHours.member = Shapes::ShapeRef.new(shape: OperationalHour)
+
+    OptionalEmailAddressRecipientList.member = Shapes::ShapeRef.new(shape: EmailAddressInfo)
 
     OriginsList.member = Shapes::ShapeRef.new(shape: Origin)
 
@@ -9616,6 +9628,7 @@ module Aws::Connect
     UpdateContactRequest.add_member(:user_info, Shapes::ShapeRef.new(shape: UserInfo, location_name: "UserInfo"))
     UpdateContactRequest.add_member(:customer_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "CustomerEndpoint"))
     UpdateContactRequest.add_member(:system_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "SystemEndpoint"))
+    UpdateContactRequest.add_member(:additional_recipients, Shapes::ShapeRef.new(shape: NullableAdditionalRecipients, location_name: "AdditionalRecipients"))
     UpdateContactRequest.struct_class = Types::UpdateContactRequest
 
     UpdateContactResponse.struct_class = Types::UpdateContactResponse
@@ -9783,6 +9796,22 @@ module Aws::Connect
     UpdateNotificationContentRequest.struct_class = Types::UpdateNotificationContentRequest
 
     UpdateNotificationContentResponse.struct_class = Types::UpdateNotificationContentResponse
+
+    UpdateOutboundEmailContactMessageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateOutboundEmailContactMessageRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
+    UpdateOutboundEmailContactMessageRequest.add_member(:email_message, Shapes::ShapeRef.new(shape: UpdateOutboundEmailContent, required: true, location_name: "EmailMessage"))
+    UpdateOutboundEmailContactMessageRequest.struct_class = Types::UpdateOutboundEmailContactMessageRequest
+
+    UpdateOutboundEmailContactMessageResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    UpdateOutboundEmailContactMessageResponse.struct_class = Types::UpdateOutboundEmailContactMessageResponse
+
+    UpdateOutboundEmailContent.add_member(:message_source_type, Shapes::ShapeRef.new(shape: UpdateOutboundEmailMessageSourceType, required: true, location_name: "MessageSourceType"))
+    UpdateOutboundEmailContent.add_member(:raw_message, Shapes::ShapeRef.new(shape: UpdateOutboundRawMessage, required: true, location_name: "RawMessage"))
+    UpdateOutboundEmailContent.struct_class = Types::UpdateOutboundEmailContent
+
+    UpdateOutboundRawMessage.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "Body"))
+    UpdateOutboundRawMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: EmailMessageContentType, required: true, location_name: "ContentType"))
+    UpdateOutboundRawMessage.struct_class = Types::UpdateOutboundRawMessage
 
     UpdateParticipantAuthenticationRequest.add_member(:state, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location_name: "State"))
     UpdateParticipantAuthenticationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
@@ -16097,6 +16126,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:update_outbound_email_contact_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOutboundEmailContactMessage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/instances/{InstanceId}/contacts/{ContactId}/outbound-email-message"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOutboundEmailContactMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOutboundEmailContactMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
       api.add_operation(:update_participant_authentication, Seahorse::Model::Operation.new.tap do |o|

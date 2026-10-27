@@ -29,6 +29,9 @@ module Aws
       class CreateGateway420Exception < ServiceError
         def message: () -> ::String
       end
+      class DestinationEndpointServiceQuotaExceededException < ServiceError
+        def message: () -> ::String
+      end
       class ForbiddenException < ServiceError
         def message: () -> ::String
       end
@@ -51,6 +54,9 @@ module Aws
         def message: () -> ::String
       end
       class ServiceUnavailableException < ServiceError
+        def message: () -> ::String
+      end
+      class SourceEndpointServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
       class TooManyRequestsException < ServiceError

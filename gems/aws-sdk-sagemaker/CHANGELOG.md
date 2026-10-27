@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.404.0 (2026-10-26)
+------------------
+
+* Feature - Amazon SageMaker HyperPod adds the MultiNodeTrainingValidation deep health check for clusters orchestrated by Amazon EKS. It validates NVIDIA GPU instances by running a short multi-node training workload and flags instances that produce numerical errors or fall behind expected training time.
+
 1.403.0 (2026-10-21)
 ------------------
 

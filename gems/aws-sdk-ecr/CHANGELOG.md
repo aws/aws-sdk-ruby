@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.138.0 (2026-10-26)
+------------------
+
+* Feature - Add support for ECR replication backfill
+
 1.137.0 (2026-10-21)
 ------------------
 
