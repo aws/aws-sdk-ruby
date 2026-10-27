@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix request failures and incorrect User-Agent entries when configured framework names contain special characters.
+
+* Issue - Fix incorrect service error identification and parsing failures when error prefixes contain special characters.
+
+* Issue - Fix missing or incorrect response header map entries when header prefixes contain special characters.
+
 3.260.0 (2026-10-21)
 ------------------
 
