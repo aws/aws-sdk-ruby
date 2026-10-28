@@ -1,11 +1,9 @@
 Unreleased Changes
 ------------------
 
-* Issue - Fix request failures and incorrect User-Agent entries when configured framework names contain special characters.
+* Feature - Improve User-Agent framework detection with literal matching of configured framework names.
 
-* Issue - Fix incorrect service error identification and parsing failures when error prefixes contain special characters.
-
-* Issue - Fix missing or incorrect response header map entries when header prefixes contain special characters.
+* Issue - Fix service error parsing and response header-map extraction by matching prefixes literally. Custom models that relied on regex matching must use literal prefixes.
 
 3.261.0 (2026-10-26)
 ------------------

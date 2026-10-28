@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Issue - Document that custom partition `regionRegex` values are interpreted as regex patterns.
+* Issue - Clarify that custom partition regionRegex values are regex patterns and should use trusted, reviewed patterns.
 
 1.1299.0 (2026-10-26)
 ------------------
