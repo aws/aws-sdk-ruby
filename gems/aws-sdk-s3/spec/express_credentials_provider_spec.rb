@@ -27,7 +27,7 @@ module Aws
 
         it 'returns a new set of credentials for the bucket' do
           expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: client, base_credentials: client.config.credentials, session_mode: 'ReadWrite')
+            .with(bucket: 'bucket', client: client, base_credentials: having_attributes(access_key_id: 'akid', secret_access_key: 'secret'), session_mode: 'ReadWrite')
             .and_return(express_credentials)
 
           expect(subject.express_credentials_for('bucket'))
@@ -36,7 +36,7 @@ module Aws
 
         it 'returns the same set of credentials for the bucket' do
           expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: client, base_credentials: client.config.credentials, session_mode: 'ReadWrite')
+            .with(bucket: 'bucket', client: client, base_credentials: having_attributes(access_key_id: 'akid', secret_access_key: 'secret'), session_mode: 'ReadWrite')
             .and_return(express_credentials)
 
           credentials = subject.express_credentials_for('bucket')
@@ -88,7 +88,7 @@ module Aws
 
           it 'returns a different set of credentials for the bucket' do
             expect(ExpressCredentials).to receive(:new)
-              .with(bucket: 'bucket', client: client, base_credentials: client.config.credentials, session_mode: 'ReadWrite')
+              .with(bucket: 'bucket', client: client, base_credentials: having_attributes(access_key_id: 'akid', secret_access_key: 'secret'), session_mode: 'ReadWrite')
               .and_return(express_credentials).twice
 
             credentials = subject.express_credentials_for('bucket')

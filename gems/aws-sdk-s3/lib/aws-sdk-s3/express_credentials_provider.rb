@@ -54,6 +54,9 @@ module Aws
       end
 
       def new_credentials_for(bucket, client, credentials)
+        # Sign with this snapshot, but report the provider's UserAgent metrics.
+        credentials = credentials&.dup
+        credentials&.metrics = client.config.credentials.metrics
         ExpressCredentials.new(
           bucket: bucket,
           client: client,

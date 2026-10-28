@@ -117,7 +117,7 @@ module Aws
 
           expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
           # tests that credentials are used in the subsequent call
-          allow(provider).to receive(:express_credentials_for).with(bucket)
+          allow(provider).to receive(:express_credentials_for).with(bucket, client)
            .and_wrap_original do |m, *args|
             credentials = m.call(*args)
             expect_auth(
@@ -193,6 +193,41 @@ module Aws
           end.new
           client = express_client('akid-a', express_credentials_provider: provider)
           expect(session_token(client)).to eq('custom-session')
+        end
+
+        it 'reports the credentials provider metrics when creating sessions' do
+          credentials_provider = Class.new do
+            include Aws::CredentialProvider
+
+            def initialize
+              @metrics = ['CREDENTIALS_STS_ASSUME_ROLE']
+            end
+
+            def credentials
+              Aws::Credentials.new('akid-a', 'secret')
+            end
+          end.new
+          client = Aws::S3::Client.new(stub_responses: true, region: 'us-east-1', credentials: credentials_provider)
+          user_agent = nil
+          client.stub_responses(:create_session, lambda do |ctx|
+            user_agent = ctx.http_request.headers['User-Agent']
+            { credentials: { access_key_id: 's', secret_access_key: 's', session_token: 't', expiration: Time.now + 300 } }
+          end)
+          client.get_object(bucket: 'bucket--use1-az2--x-s3', key: 'key')
+          expect(user_agent[%r{m/(\S+)}, 1].split(',')).to include('i')
+        end
+
+        it 'calls custom providers with only the bucket' do
+          creds = Aws::Credentials.new('custom-akid', 'secret', 'custom-session')
+          impls = [->(_bucket, **opts) { creds if opts.empty? }, ->(_bucket, opts = {}) { creds if opts == {} }]
+          impls.each do |impl|
+            provider = Class.new do
+              define_method(:express_credentials_for, &impl)
+              attr_accessor :client
+            end.new
+            client = express_client('akid-a', express_credentials_provider: provider)
+            expect(session_token(client)).to eq('custom-session')
+          end
         end
       end
 

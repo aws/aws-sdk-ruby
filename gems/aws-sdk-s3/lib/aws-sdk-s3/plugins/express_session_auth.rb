@@ -46,14 +46,11 @@ for different buckets.
 
           def express_credentials_for(context, bucket)
             provider = context.config.express_credentials_provider
-            args = [bucket]
-            args << context.client if accepts_client?(provider)
-            provider.express_credentials_for(*args)
-          end
-
-          def accepts_client?(provider)
-            provider.respond_to?(:express_credentials_for) &&
-              provider.method(:express_credentials_for).arity.abs >= 2
+            if provider.is_a?(ExpressCredentialsProvider)
+              provider.express_credentials_for(bucket, context.client)
+            else
+              provider.express_credentials_for(bucket)
+            end
           end
 
           def with_metric(credentials, &block)
