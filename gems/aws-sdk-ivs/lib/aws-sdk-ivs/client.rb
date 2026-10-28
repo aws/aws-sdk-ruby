@@ -878,15 +878,15 @@ module Aws::IVS
     #
     # @option params [Integer] :activation_threshold_seconds
     #   Number of seconds of ingest interruption before the failover slate
-    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   activates. Default: `3`.
     #
     # @option params [Integer] :min_slate_display_seconds
     #   Minimum number of seconds that the failover slate displays after
-    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   activation. Default: `3`.
     #
     # @option params [Integer] :max_slate_display_seconds
-    #   Maximum number of seconds that the failover slate displays. Minimum:
-    #   `60`. Maximum: `180`. Default: `60`.
+    #   Maximum number of seconds that the failover slate displays. Default:
+    #   `60`.
     #
     # @option params [Hash<String,String>] :tags
     #   Array of 1-50 maps, each of the form `string:string (key:value)`. See
@@ -1849,20 +1849,31 @@ module Aws::IVS
     # @option params [required, Integer] :duration_seconds
     #   Duration of the ad break, in seconds.
     #
+    # @option params [String] :ad_break_id
+    #   Caller-specified unique identifier for the ad break to insert into the
+    #   playlist.
+    #
+    # @option params [Time,DateTime,Date,Integer,String] :target_start_at
+    #   Target time at which the ad break starts.
+    #
     # @return [Types::InsertAdBreakResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InsertAdBreakResponse#ad_break_id #ad_break_id} => String
+    #   * {Types::InsertAdBreakResponse#target_start_at #target_start_at} => Time
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.insert_ad_break({
     #     channel_arn: "ChannelArn", # required
     #     duration_seconds: 1, # required
+    #     ad_break_id: "AdBreakId",
+    #     target_start_at: Time.now,
     #   })
     #
     # @example Response structure
     #
     #   resp.ad_break_id #=> String
+    #   resp.target_start_at #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/InsertAdBreak AWS API Documentation
     #
@@ -2736,15 +2747,15 @@ module Aws::IVS
     #
     # @option params [Integer] :activation_threshold_seconds
     #   Number of seconds of ingest interruption before the failover slate
-    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   activates. Default: `3`.
     #
     # @option params [Integer] :min_slate_display_seconds
     #   Minimum number of seconds that the failover slate displays after
-    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   activation. Default: `3`.
     #
     # @option params [Integer] :max_slate_display_seconds
-    #   Maximum number of seconds that the failover slate displays. Minimum:
-    #   `60`. Maximum: `180`. Default: `60`.
+    #   Maximum number of seconds that the failover slate displays. Default:
+    #   `60`.
     #
     # @return [Types::UpdateFailoverSlateConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2865,7 +2876,7 @@ module Aws::IVS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ivs'
-      context[:gem_version] = '1.97.0'
+      context[:gem_version] = '1.98.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

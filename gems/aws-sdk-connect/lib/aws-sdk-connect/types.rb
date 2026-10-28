@@ -8064,6 +8064,11 @@ module Aws::Connect
     #   used to create a self-assigned task.
     #   @return [String]
     #
+    # @!attribute [rw] contact_hooks
+    #   The event hooks that are set on tasks created by using this
+    #   template.
+    #   @return [Types::TaskTemplateContactHooks]
+    #
     # @!attribute [rw] constraints
     #   Constraints that are applicable to the fields listed. Although this
     #   parameter is marked as optional in the API model, the service
@@ -8115,6 +8120,7 @@ module Aws::Connect
       :description,
       :contact_flow_id,
       :self_assign_flow_id,
+      :contact_hooks,
       :constraints,
       :defaults,
       :status,
@@ -20360,6 +20366,11 @@ module Aws::Connect
     #   used to create a self-assigned task.
     #   @return [String]
     #
+    # @!attribute [rw] contact_hooks
+    #   The event hooks that are set on tasks created by using this
+    #   template.
+    #   @return [Types::TaskTemplateContactHooks]
+    #
     # @!attribute [rw] constraints
     #   Constraints that are applicable to the fields listed. Although this
     #   parameter is marked as optional in the API model, the service
@@ -20409,6 +20420,7 @@ module Aws::Connect
       :description,
       :contact_flow_id,
       :self_assign_flow_id,
+      :contact_hooks,
       :constraints,
       :defaults,
       :fields,
@@ -37279,6 +37291,23 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # The event hooks that are set on tasks created by using this template.
+    #
+    # @!attribute [rw] wrap_up_flow_id
+    #   The identifier of the flow module that runs when an agent attempts
+    #   to disconnect from a task created by referencing this template. If
+    #   no agent ever connects to the task, the flow module runs when the
+    #   task is terminated.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/TaskTemplateContactHooks AWS API Documentation
+    #
+    class TaskTemplateContactHooks < Struct.new(
+      :wrap_up_flow_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a default field and its corresponding value.
     #
     # @!attribute [rw] id
@@ -40674,6 +40703,11 @@ module Aws::Connect
     #   used to create a self-assigned task.
     #   @return [String]
     #
+    # @!attribute [rw] contact_hooks
+    #   The event hooks that are set on tasks created by using this
+    #   template.
+    #   @return [Types::TaskTemplateContactHooks]
+    #
     # @!attribute [rw] constraints
     #   Constraints that are applicable to the fields listed. Although this
     #   parameter is marked as optional in the API model, the service
@@ -40715,6 +40749,7 @@ module Aws::Connect
       :description,
       :contact_flow_id,
       :self_assign_flow_id,
+      :contact_hooks,
       :constraints,
       :defaults,
       :status,
@@ -40757,6 +40792,11 @@ module Aws::Connect
     #   The ContactFlowId for the flow that will be run if this template is
     #   used to create a self-assigned task.
     #   @return [String]
+    #
+    # @!attribute [rw] contact_hooks
+    #   The event hooks that are set on tasks created by using this
+    #   template.
+    #   @return [Types::TaskTemplateContactHooks]
     #
     # @!attribute [rw] constraints
     #   Constraints that are applicable to the fields listed. Although this
@@ -40801,6 +40841,7 @@ module Aws::Connect
       :description,
       :contact_flow_id,
       :self_assign_flow_id,
+      :contact_hooks,
       :constraints,
       :defaults,
       :fields,

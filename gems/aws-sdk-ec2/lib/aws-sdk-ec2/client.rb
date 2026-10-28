@@ -7069,6 +7069,15 @@ module Aws::EC2
     #   Information about the instance types for which to reserve the
     #   capacity.
     #
+    # @option params [Types::InstanceRequirementsRequest] :instance_requirements
+    #   Reserved for internal use.
+    #
+    # @option params [String] :availability_zone
+    #   Reserved for internal use.
+    #
+    # @option params [String] :availability_zone_id
+    #   Reserved for internal use.
+    #
     # @option params [String] :tenancy
     #   Indicates the tenancy of the Capacity Reservation Fleet. All Capacity
     #   Reservations in the Fleet inherit this tenancy. The Capacity
@@ -7155,6 +7164,71 @@ module Aws::EC2
     #         priority: 1,
     #       },
     #     ],
+    #     instance_requirements: {
+    #       v_cpu_count: { # required
+    #         min: 1, # required
+    #         max: 1,
+    #       },
+    #       memory_mi_b: { # required
+    #         min: 1, # required
+    #         max: 1,
+    #       },
+    #       cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services, apple
+    #       memory_gi_b_per_v_cpu: {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       },
+    #       excluded_instance_types: ["ExcludedInstanceType"],
+    #       instance_generations: ["current"], # accepts current, previous
+    #       spot_max_price_percentage_over_lowest_price: 1,
+    #       on_demand_max_price_percentage_over_lowest_price: 1,
+    #       bare_metal: "included", # accepts included, required, excluded
+    #       burstable_performance: "included", # accepts included, required, excluded
+    #       require_hibernate_support: false,
+    #       network_interface_count: {
+    #         min: 1,
+    #         max: 1,
+    #       },
+    #       local_storage: "included", # accepts included, required, excluded
+    #       local_storage_types: ["hdd"], # accepts hdd, ssd
+    #       total_local_storage_gb: {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       },
+    #       baseline_ebs_bandwidth_mbps: {
+    #         min: 1,
+    #         max: 1,
+    #       },
+    #       accelerator_types: ["gpu"], # accepts gpu, fpga, inference, media
+    #       accelerator_count: {
+    #         min: 1,
+    #         max: 1,
+    #       },
+    #       accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #       accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g, l40s, l4, gaudi-hl-205, inferentia2, trainium, trainium2, u30
+    #       accelerator_total_memory_mi_b: {
+    #         min: 1,
+    #         max: 1,
+    #       },
+    #       network_bandwidth_gbps: {
+    #         min: 1.0,
+    #         max: 1.0,
+    #       },
+    #       allowed_instance_types: ["AllowedInstanceType"],
+    #       max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
+    #       baseline_performance_factors: {
+    #         cpu: {
+    #           references: [
+    #             {
+    #               instance_family: "String",
+    #             },
+    #           ],
+    #         },
+    #       },
+    #       require_encryption_in_transit: false,
+    #     },
+    #     availability_zone: "AvailabilityZoneName",
+    #     availability_zone_id: "AvailabilityZoneId",
     #     tenancy: "default", # accepts default
     #     total_target_capacity: 1, # required
     #     end_date: Time.now,
@@ -28383,6 +28457,52 @@ module Aws::EC2
     #   resp.capacity_reservation_fleets[0].instance_type_specifications[0].create_date #=> Time
     #   resp.capacity_reservation_fleets[0].instance_type_specifications[0].weight #=> Float
     #   resp.capacity_reservation_fleets[0].instance_type_specifications[0].priority #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.v_cpu_count.min #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.v_cpu_count.max #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.memory_mi_b.min #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.memory_mi_b.max #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.cpu_manufacturers #=> Array
+    #   resp.capacity_reservation_fleets[0].instance_requirements.cpu_manufacturers[0] #=> String, one of "intel", "amd", "amazon-web-services", "apple"
+    #   resp.capacity_reservation_fleets[0].instance_requirements.memory_gi_b_per_v_cpu.min #=> Float
+    #   resp.capacity_reservation_fleets[0].instance_requirements.memory_gi_b_per_v_cpu.max #=> Float
+    #   resp.capacity_reservation_fleets[0].instance_requirements.excluded_instance_types #=> Array
+    #   resp.capacity_reservation_fleets[0].instance_requirements.excluded_instance_types[0] #=> String
+    #   resp.capacity_reservation_fleets[0].instance_requirements.instance_generations #=> Array
+    #   resp.capacity_reservation_fleets[0].instance_requirements.instance_generations[0] #=> String, one of "current", "previous"
+    #   resp.capacity_reservation_fleets[0].instance_requirements.spot_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.on_demand_max_price_percentage_over_lowest_price #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.bare_metal #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_reservation_fleets[0].instance_requirements.burstable_performance #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_reservation_fleets[0].instance_requirements.require_hibernate_support #=> Boolean
+    #   resp.capacity_reservation_fleets[0].instance_requirements.network_interface_count.min #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.network_interface_count.max #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.local_storage #=> String, one of "included", "required", "excluded"
+    #   resp.capacity_reservation_fleets[0].instance_requirements.local_storage_types #=> Array
+    #   resp.capacity_reservation_fleets[0].instance_requirements.local_storage_types[0] #=> String, one of "hdd", "ssd"
+    #   resp.capacity_reservation_fleets[0].instance_requirements.total_local_storage_gb.min #=> Float
+    #   resp.capacity_reservation_fleets[0].instance_requirements.total_local_storage_gb.max #=> Float
+    #   resp.capacity_reservation_fleets[0].instance_requirements.baseline_ebs_bandwidth_mbps.min #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.baseline_ebs_bandwidth_mbps.max #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_types #=> Array
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_types[0] #=> String, one of "gpu", "fpga", "inference", "media"
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_count.min #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_count.max #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_manufacturers #=> Array
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_names #=> Array
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g", "l40s", "l4", "gaudi-hl-205", "inferentia2", "trainium", "trainium2", "u30"
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.network_bandwidth_gbps.min #=> Float
+    #   resp.capacity_reservation_fleets[0].instance_requirements.network_bandwidth_gbps.max #=> Float
+    #   resp.capacity_reservation_fleets[0].instance_requirements.allowed_instance_types #=> Array
+    #   resp.capacity_reservation_fleets[0].instance_requirements.allowed_instance_types[0] #=> String
+    #   resp.capacity_reservation_fleets[0].instance_requirements.max_spot_price_as_percentage_of_optimal_on_demand_price #=> Integer
+    #   resp.capacity_reservation_fleets[0].instance_requirements.baseline_performance_factors.cpu.references #=> Array
+    #   resp.capacity_reservation_fleets[0].instance_requirements.baseline_performance_factors.cpu.references[0].instance_family #=> String
+    #   resp.capacity_reservation_fleets[0].instance_requirements.require_encryption_in_transit #=> Boolean
+    #   resp.capacity_reservation_fleets[0].availability_zone #=> String
+    #   resp.capacity_reservation_fleets[0].availability_zone_id #=> String
     #   resp.capacity_reservation_fleets[0].tags #=> Array
     #   resp.capacity_reservation_fleets[0].tags[0].key #=> String
     #   resp.capacity_reservation_fleets[0].tags[0].value #=> String
@@ -54657,7 +54777,7 @@ module Aws::EC2
     # @example Request syntax with placeholder values
     #
     #   resp = client.get_capacity_manager_metric_data({
-    #     metric_names: ["reservation-total-capacity-hrs-vcpu"], # required, accepts reservation-total-capacity-hrs-vcpu, reservation-total-capacity-hrs-inst, reservation-max-size-vcpu, reservation-max-size-inst, reservation-min-size-vcpu, reservation-min-size-inst, reservation-unused-total-capacity-hrs-vcpu, reservation-unused-total-capacity-hrs-inst, reservation-unused-total-estimated-cost, reservation-max-unused-size-vcpu, reservation-max-unused-size-inst, reservation-min-unused-size-vcpu, reservation-min-unused-size-inst, reservation-max-utilization, reservation-min-utilization, reservation-avg-utilization-vcpu, reservation-avg-utilization-inst, reservation-total-count, reservation-total-estimated-cost, reservation-avg-future-size-vcpu, reservation-avg-future-size-inst, reservation-min-future-size-vcpu, reservation-min-future-size-inst, reservation-max-future-size-vcpu, reservation-max-future-size-inst, reservation-avg-committed-size-vcpu, reservation-avg-committed-size-inst, reservation-max-committed-size-vcpu, reservation-max-committed-size-inst, reservation-min-committed-size-vcpu, reservation-min-committed-size-inst, reserved-total-usage-hrs-vcpu, reserved-total-usage-hrs-inst, reserved-total-estimated-cost, unreserved-total-usage-hrs-vcpu, unreserved-total-usage-hrs-inst, unreserved-total-estimated-cost, spot-total-usage-hrs-vcpu, spot-total-usage-hrs-inst, spot-total-estimated-cost, spot-avg-run-time-before-interruption-inst, spot-max-run-time-before-interruption-inst, spot-min-run-time-before-interruption-inst, spot-total-interruptions-inst, spot-total-interruptions-vcpu, spot-total-count-inst, spot-total-count-vcpu, spot-interruption-rate-inst, spot-interruption-rate-vcpu
+    #     metric_names: ["reservation-total-capacity-hrs-vcpu"], # required, accepts reservation-total-capacity-hrs-vcpu, reservation-total-capacity-hrs-inst, reservation-max-size-vcpu, reservation-max-size-inst, reservation-min-size-vcpu, reservation-min-size-inst, reservation-unused-total-capacity-hrs-vcpu, reservation-unused-total-capacity-hrs-inst, reservation-unused-total-estimated-cost, reservation-max-unused-size-vcpu, reservation-max-unused-size-inst, reservation-min-unused-size-vcpu, reservation-min-unused-size-inst, reservation-max-utilization, reservation-min-utilization, reservation-avg-utilization-vcpu, reservation-avg-utilization-inst, reservation-total-count, reservation-total-estimated-cost, reservation-avg-future-size-vcpu, reservation-avg-future-size-inst, reservation-min-future-size-vcpu, reservation-min-future-size-inst, reservation-max-future-size-vcpu, reservation-max-future-size-inst, reservation-avg-committed-size-vcpu, reservation-avg-committed-size-inst, reservation-max-committed-size-vcpu, reservation-max-committed-size-inst, reservation-min-committed-size-vcpu, reservation-min-committed-size-inst, reserved-total-usage-hrs-vcpu, reserved-total-usage-hrs-inst, reserved-total-estimated-cost, unreserved-total-usage-hrs-vcpu, unreserved-total-usage-hrs-inst, unreserved-total-estimated-cost, spot-total-usage-hrs-vcpu, spot-total-usage-hrs-inst, spot-total-estimated-cost, spot-avg-run-time-before-interruption-inst, spot-max-run-time-before-interruption-inst, spot-min-run-time-before-interruption-inst, spot-total-interruptions-inst, spot-total-interruptions-vcpu, spot-total-count-inst, spot-total-count-vcpu, spot-interruption-rate-inst, spot-interruption-rate-vcpu, capacity-total-requested-vcpu, capacity-total-fulfilled-vcpu, spot-capacity-total-requested-vcpu, spot-capacity-total-fulfilled-vcpu, capacity-request-fulfillment-rate, avg-inst-az-count-per-requested-vcpu, inst-az-fulfillment-rate, spot-capacity-request-fulfillment-rate, spot-avg-inst-az-count-per-requested-vcpu, spot-inst-az-fulfillment-rate
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     period: 1, # required
@@ -54702,7 +54822,7 @@ module Aws::EC2
     #   resp.metric_data_results[0].dimension.tags[0].value #=> String
     #   resp.metric_data_results[0].timestamp #=> Time
     #   resp.metric_data_results[0].metric_values #=> Array
-    #   resp.metric_data_results[0].metric_values[0].metric #=> String, one of "reservation-total-capacity-hrs-vcpu", "reservation-total-capacity-hrs-inst", "reservation-max-size-vcpu", "reservation-max-size-inst", "reservation-min-size-vcpu", "reservation-min-size-inst", "reservation-unused-total-capacity-hrs-vcpu", "reservation-unused-total-capacity-hrs-inst", "reservation-unused-total-estimated-cost", "reservation-max-unused-size-vcpu", "reservation-max-unused-size-inst", "reservation-min-unused-size-vcpu", "reservation-min-unused-size-inst", "reservation-max-utilization", "reservation-min-utilization", "reservation-avg-utilization-vcpu", "reservation-avg-utilization-inst", "reservation-total-count", "reservation-total-estimated-cost", "reservation-avg-future-size-vcpu", "reservation-avg-future-size-inst", "reservation-min-future-size-vcpu", "reservation-min-future-size-inst", "reservation-max-future-size-vcpu", "reservation-max-future-size-inst", "reservation-avg-committed-size-vcpu", "reservation-avg-committed-size-inst", "reservation-max-committed-size-vcpu", "reservation-max-committed-size-inst", "reservation-min-committed-size-vcpu", "reservation-min-committed-size-inst", "reserved-total-usage-hrs-vcpu", "reserved-total-usage-hrs-inst", "reserved-total-estimated-cost", "unreserved-total-usage-hrs-vcpu", "unreserved-total-usage-hrs-inst", "unreserved-total-estimated-cost", "spot-total-usage-hrs-vcpu", "spot-total-usage-hrs-inst", "spot-total-estimated-cost", "spot-avg-run-time-before-interruption-inst", "spot-max-run-time-before-interruption-inst", "spot-min-run-time-before-interruption-inst", "spot-total-interruptions-inst", "spot-total-interruptions-vcpu", "spot-total-count-inst", "spot-total-count-vcpu", "spot-interruption-rate-inst", "spot-interruption-rate-vcpu"
+    #   resp.metric_data_results[0].metric_values[0].metric #=> String, one of "reservation-total-capacity-hrs-vcpu", "reservation-total-capacity-hrs-inst", "reservation-max-size-vcpu", "reservation-max-size-inst", "reservation-min-size-vcpu", "reservation-min-size-inst", "reservation-unused-total-capacity-hrs-vcpu", "reservation-unused-total-capacity-hrs-inst", "reservation-unused-total-estimated-cost", "reservation-max-unused-size-vcpu", "reservation-max-unused-size-inst", "reservation-min-unused-size-vcpu", "reservation-min-unused-size-inst", "reservation-max-utilization", "reservation-min-utilization", "reservation-avg-utilization-vcpu", "reservation-avg-utilization-inst", "reservation-total-count", "reservation-total-estimated-cost", "reservation-avg-future-size-vcpu", "reservation-avg-future-size-inst", "reservation-min-future-size-vcpu", "reservation-min-future-size-inst", "reservation-max-future-size-vcpu", "reservation-max-future-size-inst", "reservation-avg-committed-size-vcpu", "reservation-avg-committed-size-inst", "reservation-max-committed-size-vcpu", "reservation-max-committed-size-inst", "reservation-min-committed-size-vcpu", "reservation-min-committed-size-inst", "reserved-total-usage-hrs-vcpu", "reserved-total-usage-hrs-inst", "reserved-total-estimated-cost", "unreserved-total-usage-hrs-vcpu", "unreserved-total-usage-hrs-inst", "unreserved-total-estimated-cost", "spot-total-usage-hrs-vcpu", "spot-total-usage-hrs-inst", "spot-total-estimated-cost", "spot-avg-run-time-before-interruption-inst", "spot-max-run-time-before-interruption-inst", "spot-min-run-time-before-interruption-inst", "spot-total-interruptions-inst", "spot-total-interruptions-vcpu", "spot-total-count-inst", "spot-total-count-vcpu", "spot-interruption-rate-inst", "spot-interruption-rate-vcpu", "capacity-total-requested-vcpu", "capacity-total-fulfilled-vcpu", "spot-capacity-total-requested-vcpu", "spot-capacity-total-fulfilled-vcpu", "capacity-request-fulfillment-rate", "avg-inst-az-count-per-requested-vcpu", "inst-az-fulfillment-rate", "spot-capacity-request-fulfillment-rate", "spot-avg-inst-az-count-per-requested-vcpu", "spot-inst-az-fulfillment-rate"
     #   resp.metric_data_results[0].metric_values[0].value #=> Float
     #   resp.next_token #=> String
     #
@@ -54779,7 +54899,7 @@ module Aws::EC2
     #     ],
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
-    #     metric_names: ["reservation-total-capacity-hrs-vcpu"], # required, accepts reservation-total-capacity-hrs-vcpu, reservation-total-capacity-hrs-inst, reservation-max-size-vcpu, reservation-max-size-inst, reservation-min-size-vcpu, reservation-min-size-inst, reservation-unused-total-capacity-hrs-vcpu, reservation-unused-total-capacity-hrs-inst, reservation-unused-total-estimated-cost, reservation-max-unused-size-vcpu, reservation-max-unused-size-inst, reservation-min-unused-size-vcpu, reservation-min-unused-size-inst, reservation-max-utilization, reservation-min-utilization, reservation-avg-utilization-vcpu, reservation-avg-utilization-inst, reservation-total-count, reservation-total-estimated-cost, reservation-avg-future-size-vcpu, reservation-avg-future-size-inst, reservation-min-future-size-vcpu, reservation-min-future-size-inst, reservation-max-future-size-vcpu, reservation-max-future-size-inst, reservation-avg-committed-size-vcpu, reservation-avg-committed-size-inst, reservation-max-committed-size-vcpu, reservation-max-committed-size-inst, reservation-min-committed-size-vcpu, reservation-min-committed-size-inst, reserved-total-usage-hrs-vcpu, reserved-total-usage-hrs-inst, reserved-total-estimated-cost, unreserved-total-usage-hrs-vcpu, unreserved-total-usage-hrs-inst, unreserved-total-estimated-cost, spot-total-usage-hrs-vcpu, spot-total-usage-hrs-inst, spot-total-estimated-cost, spot-avg-run-time-before-interruption-inst, spot-max-run-time-before-interruption-inst, spot-min-run-time-before-interruption-inst, spot-total-interruptions-inst, spot-total-interruptions-vcpu, spot-total-count-inst, spot-total-count-vcpu, spot-interruption-rate-inst, spot-interruption-rate-vcpu
+    #     metric_names: ["reservation-total-capacity-hrs-vcpu"], # required, accepts reservation-total-capacity-hrs-vcpu, reservation-total-capacity-hrs-inst, reservation-max-size-vcpu, reservation-max-size-inst, reservation-min-size-vcpu, reservation-min-size-inst, reservation-unused-total-capacity-hrs-vcpu, reservation-unused-total-capacity-hrs-inst, reservation-unused-total-estimated-cost, reservation-max-unused-size-vcpu, reservation-max-unused-size-inst, reservation-min-unused-size-vcpu, reservation-min-unused-size-inst, reservation-max-utilization, reservation-min-utilization, reservation-avg-utilization-vcpu, reservation-avg-utilization-inst, reservation-total-count, reservation-total-estimated-cost, reservation-avg-future-size-vcpu, reservation-avg-future-size-inst, reservation-min-future-size-vcpu, reservation-min-future-size-inst, reservation-max-future-size-vcpu, reservation-max-future-size-inst, reservation-avg-committed-size-vcpu, reservation-avg-committed-size-inst, reservation-max-committed-size-vcpu, reservation-max-committed-size-inst, reservation-min-committed-size-vcpu, reservation-min-committed-size-inst, reserved-total-usage-hrs-vcpu, reserved-total-usage-hrs-inst, reserved-total-estimated-cost, unreserved-total-usage-hrs-vcpu, unreserved-total-usage-hrs-inst, unreserved-total-estimated-cost, spot-total-usage-hrs-vcpu, spot-total-usage-hrs-inst, spot-total-estimated-cost, spot-avg-run-time-before-interruption-inst, spot-max-run-time-before-interruption-inst, spot-min-run-time-before-interruption-inst, spot-total-interruptions-inst, spot-total-interruptions-vcpu, spot-total-count-inst, spot-total-count-vcpu, spot-interruption-rate-inst, spot-interruption-rate-vcpu, capacity-total-requested-vcpu, capacity-total-fulfilled-vcpu, spot-capacity-total-requested-vcpu, spot-capacity-total-fulfilled-vcpu, capacity-request-fulfillment-rate, avg-inst-az-count-per-requested-vcpu, inst-az-fulfillment-rate, spot-capacity-request-fulfillment-rate, spot-avg-inst-az-count-per-requested-vcpu, spot-inst-az-fulfillment-rate
     #     max_results: 1,
     #     next_token: "NextToken",
     #     dry_run: false,
@@ -54871,6 +54991,160 @@ module Aws::EC2
     # @param [Hash] params ({})
     def get_capacity_manager_monitored_tag_keys(params = {}, options = {})
       req = build_request(:get_capacity_manager_monitored_tag_keys, params)
+      req.send_request(options)
+    end
+
+    # Scores how well each instance type and Availability Zone combination
+    # can support a capacity request, based on current Amazon EC2 capacity.
+    # The response includes a score for each combination and an aggregate
+    # score for all combinations in the request. This action doesn't launch
+    # or reserve instances, and a score doesn't guarantee that a later
+    # launch will succeed.
+    #
+    # Call this action in the Region where you turned on Capacity Manager. A
+    # single request can include Availability Zones in any Region. Real-time
+    # supportability checks are available only to Amazon Web Services
+    # Support customers on the Unified Operations plan.
+    #
+    # For more information, see [Check supportability][1] in the *Amazon EC2
+    # User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-manager-supportability.html
+    #
+    # @option params [required, String] :market_type
+    #   The capacity market to score.
+    #
+    # @option params [required, Integer] :capacity_amount
+    #   The amount of capacity that you need, in the unit that you specify for
+    #   `CapacityUnit`. Each score is relative to this amount.
+    #
+    # @option params [required, String] :capacity_unit
+    #   The unit for `CapacityAmount`.
+    #
+    # @option params [required, Array<String>] :capacity_availability_zone_ids
+    #   The IDs of the Availability Zones to score, such as `use1-az1`. You
+    #   can specify Availability Zones in different Regions. You can specify
+    #   up to 10 Availability Zones.
+    #
+    # @option params [Array<String>] :instance_types
+    #   The instance types to score. You can specify up to 50 instance types.
+    #
+    #   Specify either `InstanceTypes` or `InstanceRequirementsWithMetadata`,
+    #   but not both.
+    #
+    # @option params [Types::InstanceRequirementsWithMetadataRequest] :instance_requirements_with_metadata
+    #   The attributes that the instance types must have, such as vCPU and
+    #   memory ranges. Capacity Manager resolves the attributes into matching
+    #   instance types and scores each one.
+    #
+    #   Specify either `InstanceTypes` or `InstanceRequirementsWithMetadata`,
+    #   but not both.
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #
+    # @return [Types::GetCapacityManagerSupportabilityScoresResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetCapacityManagerSupportabilityScoresResult#aggregate_score #aggregate_score} => String
+    #   * {Types::GetCapacityManagerSupportabilityScoresResult#capacity_manager_supportability_scores #capacity_manager_supportability_scores} => Array&lt;Types::CapacityManagerSupportabilityScore&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_capacity_manager_supportability_scores({
+    #     market_type: "on-demand", # required, accepts on-demand, spot
+    #     capacity_amount: 1, # required
+    #     capacity_unit: "vcpus", # required, accepts vcpus, instances
+    #     capacity_availability_zone_ids: ["String"], # required
+    #     instance_types: ["String"],
+    #     instance_requirements_with_metadata: {
+    #       architecture_types: ["i386"], # accepts i386, x86_64, arm64, x86_64_mac, arm64_mac
+    #       virtualization_types: ["hvm"], # accepts hvm, paravirtual
+    #       instance_requirements: {
+    #         v_cpu_count: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         memory_mi_b: { # required
+    #           min: 1, # required
+    #           max: 1,
+    #         },
+    #         cpu_manufacturers: ["intel"], # accepts intel, amd, amazon-web-services, apple
+    #         memory_gi_b_per_v_cpu: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         excluded_instance_types: ["ExcludedInstanceType"],
+    #         instance_generations: ["current"], # accepts current, previous
+    #         spot_max_price_percentage_over_lowest_price: 1,
+    #         on_demand_max_price_percentage_over_lowest_price: 1,
+    #         bare_metal: "included", # accepts included, required, excluded
+    #         burstable_performance: "included", # accepts included, required, excluded
+    #         require_hibernate_support: false,
+    #         network_interface_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         local_storage: "included", # accepts included, required, excluded
+    #         local_storage_types: ["hdd"], # accepts hdd, ssd
+    #         total_local_storage_gb: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         baseline_ebs_bandwidth_mbps: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_types: ["gpu"], # accepts gpu, fpga, inference, media
+    #         accelerator_count: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
+    #         accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g, l40s, l4, gaudi-hl-205, inferentia2, trainium, trainium2, u30
+    #         accelerator_total_memory_mi_b: {
+    #           min: 1,
+    #           max: 1,
+    #         },
+    #         network_bandwidth_gbps: {
+    #           min: 1.0,
+    #           max: 1.0,
+    #         },
+    #         allowed_instance_types: ["AllowedInstanceType"],
+    #         max_spot_price_as_percentage_of_optimal_on_demand_price: 1,
+    #         baseline_performance_factors: {
+    #           cpu: {
+    #             references: [
+    #               {
+    #                 instance_family: "String",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         require_encryption_in_transit: false,
+    #       },
+    #     },
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.aggregate_score #=> String, one of "high", "medium", "low"
+    #   resp.capacity_manager_supportability_scores #=> Array
+    #   resp.capacity_manager_supportability_scores[0].instance_type #=> String
+    #   resp.capacity_manager_supportability_scores[0].availability_zone_id #=> String
+    #   resp.capacity_manager_supportability_scores[0].score #=> String, one of "high", "medium", "low"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerSupportabilityScores AWS API Documentation
+    #
+    # @overload get_capacity_manager_supportability_scores(params = {})
+    # @param [Hash] params ({})
+    def get_capacity_manager_supportability_scores(params = {}, options = {})
+      req = build_request(:get_capacity_manager_supportability_scores, params)
       req.send_request(options)
     end
 
@@ -78358,7 +78632,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.661.0'
+      context[:gem_version] = '1.662.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -6513,6 +6513,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The supportability score for a single instance type and Availability
+    # Zone combination.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   How well the combination can support the requested capacity right
+    #   now. `high` means that the combination holds several times the
+    #   requested amount. `medium` means that it can cover the request with
+    #   little to spare. `low` means that it holds less than the requested
+    #   amount.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityManagerSupportabilityScore AWS API Documentation
+    #
+    class CapacityManagerSupportabilityScore < Struct.new(
+      :instance_type,
+      :availability_zone_id,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A key-value pair representing a tag associated with a capacity
     # resource in Capacity Manager.
     #
@@ -7186,6 +7215,18 @@ module Aws::EC2
     #   capacity.
     #   @return [Array<Types::FleetCapacityReservation>]
     #
+    # @!attribute [rw] instance_requirements
+    #   Reserved for internal use.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @!attribute [rw] availability_zone
+    #   Reserved for internal use.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   Reserved for internal use.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the Capacity Reservation Fleet.
     #   @return [Array<Types::Tag>]
@@ -7204,6 +7245,9 @@ module Aws::EC2
       :instance_match_criteria,
       :allocation_strategy,
       :instance_type_specifications,
+      :instance_requirements,
+      :availability_zone,
+      :availability_zone_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -10337,6 +10381,18 @@ module Aws::EC2
     #   capacity.
     #   @return [Array<Types::ReservationFleetInstanceSpecification>]
     #
+    # @!attribute [rw] instance_requirements
+    #   Reserved for internal use.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @!attribute [rw] availability_zone
+    #   Reserved for internal use.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   Reserved for internal use.
+    #   @return [String]
+    #
     # @!attribute [rw] tenancy
     #   Indicates the tenancy of the Capacity Reservation Fleet. All
     #   Capacity Reservations in the Fleet inherit this tenancy. The
@@ -10407,6 +10463,9 @@ module Aws::EC2
       :allocation_strategy,
       :client_token,
       :instance_type_specifications,
+      :instance_requirements,
+      :availability_zone,
+      :availability_zone_id,
       :tenancy,
       :total_target_capacity,
       :end_date,
@@ -46856,6 +46915,84 @@ module Aws::EC2
     class GetCapacityManagerMonitoredTagKeysResult < Struct.new(
       :capacity_manager_tag_keys,
       :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] market_type
+    #   The capacity market to score.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_amount
+    #   The amount of capacity that you need, in the unit that you specify
+    #   for `CapacityUnit`. Each score is relative to this amount.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capacity_unit
+    #   The unit for `CapacityAmount`.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_availability_zone_ids
+    #   The IDs of the Availability Zones to score, such as `use1-az1`. You
+    #   can specify Availability Zones in different Regions. You can specify
+    #   up to 10 Availability Zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_types
+    #   The instance types to score. You can specify up to 50 instance
+    #   types.
+    #
+    #   Specify either `InstanceTypes` or
+    #   `InstanceRequirementsWithMetadata`, but not both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_requirements_with_metadata
+    #   The attributes that the instance types must have, such as vCPU and
+    #   memory ranges. Capacity Manager resolves the attributes into
+    #   matching instance types and scores each one.
+    #
+    #   Specify either `InstanceTypes` or
+    #   `InstanceRequirementsWithMetadata`, but not both.
+    #   @return [Types::InstanceRequirementsWithMetadataRequest]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerSupportabilityScoresRequest AWS API Documentation
+    #
+    class GetCapacityManagerSupportabilityScoresRequest < Struct.new(
+      :market_type,
+      :capacity_amount,
+      :capacity_unit,
+      :capacity_availability_zone_ids,
+      :instance_types,
+      :instance_requirements_with_metadata,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregate_score
+    #   The score for all instance type and Availability Zone combinations
+    #   in the request together. A `high` aggregate score with lower
+    #   individual scores means that no single combination can support the
+    #   full request, but the combinations together can.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_manager_supportability_scores
+    #   The score for each instance type and Availability Zone combination
+    #   in the request.
+    #   @return [Array<Types::CapacityManagerSupportabilityScore>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerSupportabilityScoresResult AWS API Documentation
+    #
+    class GetCapacityManagerSupportabilityScoresResult < Struct.new(
+      :aggregate_score,
+      :capacity_manager_supportability_scores)
       SENSITIVE = []
       include Aws::Structure
     end

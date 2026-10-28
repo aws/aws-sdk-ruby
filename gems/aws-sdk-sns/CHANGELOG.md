@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.125.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Issue - Reject SNS messages with an unsupported `Type` or malformed signed fields in `Aws::SNS::MessageVerifier`.
 
 1.124.1 (2026-10-26)

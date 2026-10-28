@@ -974,6 +974,12 @@ module Aws::KafkaConnect
     #   resp.origin_worker_setting.capacity.auto_scaling.max_autoscaling_task_count #=> Integer
     #   resp.origin_worker_setting.capacity.provisioned_capacity.mcu_count #=> Integer
     #   resp.origin_worker_setting.capacity.provisioned_capacity.worker_count #=> Integer
+    #   resp.origin_worker_setting.plugins #=> Array
+    #   resp.origin_worker_setting.plugins[0].custom_plugin.custom_plugin_arn #=> String
+    #   resp.origin_worker_setting.plugins[0].custom_plugin.revision #=> Integer
+    #   resp.origin_worker_setting.worker_configuration.revision #=> Integer
+    #   resp.origin_worker_setting.worker_configuration.worker_configuration_arn #=> String
+    #   resp.origin_worker_setting.use_default_worker_configuration #=> Boolean
     #   resp.origin_connector_configuration #=> Hash
     #   resp.origin_connector_configuration["__string"] #=> String
     #   resp.target_worker_setting.capacity.auto_scaling.max_worker_count #=> Integer
@@ -984,6 +990,12 @@ module Aws::KafkaConnect
     #   resp.target_worker_setting.capacity.auto_scaling.max_autoscaling_task_count #=> Integer
     #   resp.target_worker_setting.capacity.provisioned_capacity.mcu_count #=> Integer
     #   resp.target_worker_setting.capacity.provisioned_capacity.worker_count #=> Integer
+    #   resp.target_worker_setting.plugins #=> Array
+    #   resp.target_worker_setting.plugins[0].custom_plugin.custom_plugin_arn #=> String
+    #   resp.target_worker_setting.plugins[0].custom_plugin.revision #=> Integer
+    #   resp.target_worker_setting.worker_configuration.revision #=> Integer
+    #   resp.target_worker_setting.worker_configuration.worker_configuration_arn #=> String
+    #   resp.target_worker_setting.use_default_worker_configuration #=> Boolean
     #   resp.target_connector_configuration #=> Hash
     #   resp.target_connector_configuration["__string"] #=> String
     #   resp.error_info.code #=> String
@@ -1524,8 +1536,12 @@ module Aws::KafkaConnect
       req.send_request(options)
     end
 
-    # Updates the specified connector. For request body, specify only one
-    # parameter: either `capacity` or `connectorConfiguration`.
+    # Updates the specified connector. In the request body, you can update
+    # either the connector's worker setting or its connector configuration,
+    # but not both in the same request. To update the worker setting,
+    # specify one or more of `capacity`, `plugins`, `workerConfiguration`,
+    # or `useDefaultWorkerConfiguration`. To update the connector
+    # configuration, specify only `connectorConfiguration`.
     #
     # @option params [Types::CapacityUpdate] :capacity
     #   The target capacity.
@@ -1550,6 +1566,33 @@ module Aws::KafkaConnect
     #
     # @option params [required, String] :current_version
     #   The current version of the connector that you want to update.
+    #
+    # @option params [Array<Types::PluginUpdate>] :plugins
+    #   Amazon MSK Connect does not currently support specifying multiple
+    #   plugins as a list. To use more than one plugin for your connector, you
+    #   can create a single custom plugin using a ZIP file that bundles
+    #   multiple plugins together.
+    #
+    #    Specifies which plugin to use for the connector. You must specify a
+    #   single-element list containing one `customPlugin` object. If you
+    #   don't specify this parameter, the connector keeps its current plugin.
+    #
+    # @option params [Types::WorkerConfigurationUpdate] :worker_configuration
+    #   The worker configuration to use with the connector. Specify the Amazon
+    #   Resource Name (ARN) and the revision of the worker configuration. You
+    #   can't specify both `workerConfiguration` and
+    #   `useDefaultWorkerConfiguration` in the same request. If you specify
+    #   neither parameter, the connector keeps its current worker
+    #   configuration.
+    #
+    # @option params [Boolean] :use_default_worker_configuration
+    #   Specifies whether to switch the connector to the default worker
+    #   configuration that Amazon MSK Connect provides. If `true`, the
+    #   connector stops using its custom worker configuration and uses the
+    #   default worker configuration instead. If `false` or not specified, the
+    #   connector keeps its current worker configuration. You can't specify
+    #   both `useDefaultWorkerConfiguration` and `workerConfiguration` in the
+    #   same request.
     #
     # @return [Types::UpdateConnectorResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1584,6 +1627,19 @@ module Aws::KafkaConnect
     #     skip_health_validation: false,
     #     connector_arn: "__string", # required
     #     current_version: "__string", # required
+    #     plugins: [
+    #       {
+    #         custom_plugin: { # required
+    #           custom_plugin_arn: "__string", # required
+    #           revision: 1, # required
+    #         },
+    #       },
+    #     ],
+    #     worker_configuration: {
+    #       revision: 1, # required
+    #       worker_configuration_arn: "__string", # required
+    #     },
+    #     use_default_worker_configuration: false,
     #   })
     #
     # @example Response structure
@@ -1619,7 +1675,7 @@ module Aws::KafkaConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kafkaconnect'
-      context[:gem_version] = '1.67.0'
+      context[:gem_version] = '1.68.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

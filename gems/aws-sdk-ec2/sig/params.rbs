@@ -58,42 +58,6 @@ module Aws
       ]?
     }
 
-      type device_posture_options = {
-      trust_providers: Array[
-        {
-          trust_provider_type: ("crowdstrike" | "jamf" | "jumpcloud")?,
-          tenant_id: ::String?,
-          public_signing_key_url: ::String?
-        }
-      ]?,
-      enabled: bool?
-    }
-
-      type fleet_launch_template_config_request = {
-      launch_template_specification: {
-        launch_template_id: ::String?,
-        launch_template_name: ::String?,
-        version: ::String?,
-        launch_template_specification_user_data: ::String?
-      }?,
-      overrides: Array[
-        Params::fleet_launch_template_overrides_request
-      ]?
-    }
-
-      type placement = {
-      availability_zone_id: ::String?,
-      affinity: ::String?,
-      group_name: ::String?,
-      partition_number: ::Integer?,
-      host_id: ::String?,
-      tenancy: ("default" | "dedicated" | "host")?,
-      spread_domain: ::String?,
-      host_resource_group_arn: ::String?,
-      group_id: ::String?,
-      availability_zone: ::String?
-    }
-
       type instance_requirements_request = {
       v_cpu_count: {
         min: ::Integer,
@@ -156,6 +120,42 @@ module Aws
         }?
       }?,
       require_encryption_in_transit: bool?
+    }
+
+      type device_posture_options = {
+      trust_providers: Array[
+        {
+          trust_provider_type: ("crowdstrike" | "jamf" | "jumpcloud")?,
+          tenant_id: ::String?,
+          public_signing_key_url: ::String?
+        }
+      ]?,
+      enabled: bool?
+    }
+
+      type fleet_launch_template_config_request = {
+      launch_template_specification: {
+        launch_template_id: ::String?,
+        launch_template_name: ::String?,
+        version: ::String?,
+        launch_template_specification_user_data: ::String?
+      }?,
+      overrides: Array[
+        Params::fleet_launch_template_overrides_request
+      ]?
+    }
+
+      type placement = {
+      availability_zone_id: ::String?,
+      affinity: ::String?,
+      group_name: ::String?,
+      partition_number: ::Integer?,
+      host_id: ::String?,
+      tenancy: ("default" | "dedicated" | "host")?,
+      spread_domain: ::String?,
+      host_resource_group_arn: ::String?,
+      group_id: ::String?,
+      availability_zone: ::String?
     }
 
       type fleet_launch_template_overrides_request = {
@@ -529,6 +529,12 @@ module Aws
 
       type vpn_tunnel_log_options_specification = {
       cloud_watch_log_options: Params::cloud_watch_log_options_specification?
+    }
+
+      type instance_requirements_with_metadata_request = {
+      architecture_types: Array[("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac")]?,
+      virtualization_types: Array[("hvm" | "paravirtual")]?,
+      instance_requirements: Params::instance_requirements_request?
     }
 
       type launch_template_config = {

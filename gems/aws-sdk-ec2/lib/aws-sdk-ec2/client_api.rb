@@ -354,6 +354,8 @@ module Aws::EC2
     CapacityAllocationMetadataEntry = Shapes::StructureShape.new(name: 'CapacityAllocationMetadataEntry')
     CapacityAllocationMetadataList = Shapes::ListShape.new(name: 'CapacityAllocationMetadataList')
     CapacityAllocations = Shapes::ListShape.new(name: 'CapacityAllocations')
+    CapacityAmount = Shapes::IntegerShape.new(name: 'CapacityAmount')
+    CapacityAvailabilityZoneIdList = Shapes::ListShape.new(name: 'CapacityAvailabilityZoneIdList')
     CapacityBlock = Shapes::StructureShape.new(name: 'CapacityBlock')
     CapacityBlockExtension = Shapes::StructureShape.new(name: 'CapacityBlockExtension')
     CapacityBlockExtensionOffering = Shapes::StructureShape.new(name: 'CapacityBlockExtensionOffering')
@@ -381,6 +383,8 @@ module Aws::EC2
     CapacityManagerMonitoredTagKeyList = Shapes::ListShape.new(name: 'CapacityManagerMonitoredTagKeyList')
     CapacityManagerMonitoredTagKeyStatus = Shapes::StringShape.new(name: 'CapacityManagerMonitoredTagKeyStatus')
     CapacityManagerStatus = Shapes::StringShape.new(name: 'CapacityManagerStatus')
+    CapacityManagerSupportabilityScore = Shapes::StructureShape.new(name: 'CapacityManagerSupportabilityScore')
+    CapacityManagerSupportabilityScoreSet = Shapes::ListShape.new(name: 'CapacityManagerSupportabilityScoreSet')
     CapacityManagerTagDimension = Shapes::StructureShape.new(name: 'CapacityManagerTagDimension')
     CapacityManagerTagDimensionSet = Shapes::ListShape.new(name: 'CapacityManagerTagDimensionSet')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
@@ -434,6 +438,7 @@ module Aws::EC2
     CapacityReservationTopologySet = Shapes::ListShape.new(name: 'CapacityReservationTopologySet')
     CapacityReservationType = Shapes::StringShape.new(name: 'CapacityReservationType')
     CapacityTenancy = Shapes::StringShape.new(name: 'CapacityTenancy')
+    CapacityUnit = Shapes::StringShape.new(name: 'CapacityUnit')
     CarrierGateway = Shapes::StructureShape.new(name: 'CarrierGateway')
     CarrierGatewayId = Shapes::StringShape.new(name: 'CarrierGatewayId')
     CarrierGatewayIdSet = Shapes::ListShape.new(name: 'CarrierGatewayIdSet')
@@ -1926,6 +1931,8 @@ module Aws::EC2
     GetCapacityManagerMonitoredTagKeysRequest = Shapes::StructureShape.new(name: 'GetCapacityManagerMonitoredTagKeysRequest')
     GetCapacityManagerMonitoredTagKeysRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityManagerMonitoredTagKeysRequestMaxResults')
     GetCapacityManagerMonitoredTagKeysResult = Shapes::StructureShape.new(name: 'GetCapacityManagerMonitoredTagKeysResult')
+    GetCapacityManagerSupportabilityScoresRequest = Shapes::StructureShape.new(name: 'GetCapacityManagerSupportabilityScoresRequest')
+    GetCapacityManagerSupportabilityScoresResult = Shapes::StructureShape.new(name: 'GetCapacityManagerSupportabilityScoresResult')
     GetCapacityReservationUsageRequest = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageRequest')
     GetCapacityReservationUsageRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityReservationUsageRequestMaxResults')
     GetCapacityReservationUsageResult = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageResult')
@@ -3828,6 +3835,9 @@ module Aws::EC2
     SuccessfulSuppressionResponseObject = Shapes::StructureShape.new(name: 'SuccessfulSuppressionResponseObject')
     SuccessfulSuppressionResponseSet = Shapes::ListShape.new(name: 'SuccessfulSuppressionResponseSet')
     SummaryStatus = Shapes::StringShape.new(name: 'SummaryStatus')
+    SupportabilityInstanceTypeList = Shapes::ListShape.new(name: 'SupportabilityInstanceTypeList')
+    SupportabilityMarketType = Shapes::StringShape.new(name: 'SupportabilityMarketType')
+    SupportabilityScore = Shapes::StringShape.new(name: 'SupportabilityScore')
     SupportedAdditionalProcessorFeature = Shapes::StringShape.new(name: 'SupportedAdditionalProcessorFeature')
     SupportedAdditionalProcessorFeatureList = Shapes::ListShape.new(name: 'SupportedAdditionalProcessorFeatureList')
     SupportedInRegion = Shapes::BooleanShape.new(name: 'SupportedInRegion')
@@ -5466,6 +5476,8 @@ module Aws::EC2
 
     CapacityAllocations.member = Shapes::ShapeRef.new(shape: CapacityAllocation, location_name: "item")
 
+    CapacityAvailabilityZoneIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
     CapacityBlock.add_member(:capacity_block_id, Shapes::ShapeRef.new(shape: CapacityBlockId, location_name: "capacityBlockId"))
     CapacityBlock.add_member(:ultraserver_type, Shapes::ShapeRef.new(shape: String, location_name: "ultraserverType"))
     CapacityBlock.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -5597,6 +5609,13 @@ module Aws::EC2
 
     CapacityManagerMonitoredTagKeyList.member = Shapes::ShapeRef.new(shape: CapacityManagerMonitoredTagKey, location_name: "item")
 
+    CapacityManagerSupportabilityScore.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    CapacityManagerSupportabilityScore.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    CapacityManagerSupportabilityScore.add_member(:score, Shapes::ShapeRef.new(shape: SupportabilityScore, location_name: "score"))
+    CapacityManagerSupportabilityScore.struct_class = Types::CapacityManagerSupportabilityScore
+
+    CapacityManagerSupportabilityScoreSet.member = Shapes::ShapeRef.new(shape: CapacityManagerSupportabilityScore, location_name: "item")
+
     CapacityManagerTagDimension.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     CapacityManagerTagDimension.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     CapacityManagerTagDimension.struct_class = Types::CapacityManagerTagDimension
@@ -5693,6 +5712,9 @@ module Aws::EC2
     CapacityReservationFleet.add_member(:instance_match_criteria, Shapes::ShapeRef.new(shape: FleetInstanceMatchCriteria, location_name: "instanceMatchCriteria"))
     CapacityReservationFleet.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: String, location_name: "allocationStrategy"))
     CapacityReservationFleet.add_member(:instance_type_specifications, Shapes::ShapeRef.new(shape: FleetCapacityReservationSet, location_name: "instanceTypeSpecificationSet"))
+    CapacityReservationFleet.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "instanceRequirements"))
+    CapacityReservationFleet.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    CapacityReservationFleet.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     CapacityReservationFleet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     CapacityReservationFleet.struct_class = Types::CapacityReservationFleet
 
@@ -6245,6 +6267,9 @@ module Aws::EC2
     CreateCapacityReservationFleetRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: String, location_name: "AllocationStrategy"))
     CreateCapacityReservationFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateCapacityReservationFleetRequest.add_member(:instance_type_specifications, Shapes::ShapeRef.new(shape: ReservationFleetInstanceSpecificationList, location_name: "InstanceTypeSpecification"))
+    CreateCapacityReservationFleetRequest.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "InstanceRequirements"))
+    CreateCapacityReservationFleetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
+    CreateCapacityReservationFleetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     CreateCapacityReservationFleetRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: FleetCapacityReservationTenancy, location_name: "Tenancy"))
     CreateCapacityReservationFleetRequest.add_member(:total_target_capacity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalTargetCapacity"))
     CreateCapacityReservationFleetRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "EndDate"))
@@ -12154,6 +12179,19 @@ module Aws::EC2
     GetCapacityManagerMonitoredTagKeysResult.add_member(:capacity_manager_tag_keys, Shapes::ShapeRef.new(shape: CapacityManagerMonitoredTagKeyList, location_name: "capacityManagerTagKeySet"))
     GetCapacityManagerMonitoredTagKeysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetCapacityManagerMonitoredTagKeysResult.struct_class = Types::GetCapacityManagerMonitoredTagKeysResult
+
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:market_type, Shapes::ShapeRef.new(shape: SupportabilityMarketType, required: true, location_name: "MarketType"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:capacity_amount, Shapes::ShapeRef.new(shape: CapacityAmount, required: true, location_name: "CapacityAmount"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: CapacityUnit, required: true, location_name: "CapacityUnit"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:capacity_availability_zone_ids, Shapes::ShapeRef.new(shape: CapacityAvailabilityZoneIdList, required: true, location_name: "CapacityAvailabilityZoneId"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:instance_types, Shapes::ShapeRef.new(shape: SupportabilityInstanceTypeList, location_name: "InstanceType"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:instance_requirements_with_metadata, Shapes::ShapeRef.new(shape: InstanceRequirementsWithMetadataRequest, location_name: "InstanceRequirementsWithMetadata"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetCapacityManagerSupportabilityScoresRequest.struct_class = Types::GetCapacityManagerSupportabilityScoresRequest
+
+    GetCapacityManagerSupportabilityScoresResult.add_member(:aggregate_score, Shapes::ShapeRef.new(shape: SupportabilityScore, location_name: "aggregateScore"))
+    GetCapacityManagerSupportabilityScoresResult.add_member(:capacity_manager_supportability_scores, Shapes::ShapeRef.new(shape: CapacityManagerSupportabilityScoreSet, location_name: "capacityManagerSupportabilityScoreSet"))
+    GetCapacityManagerSupportabilityScoresResult.struct_class = Types::GetCapacityManagerSupportabilityScoresResult
 
     GetCapacityReservationUsageRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     GetCapacityReservationUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -19479,6 +19517,8 @@ module Aws::EC2
 
     SuccessfulSuppressionResponseSet.member = Shapes::ShapeRef.new(shape: SuccessfulSuppressionResponseObject, location_name: "item")
 
+    SupportabilityInstanceTypeList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
     SupportedAdditionalProcessorFeatureList.member = Shapes::ShapeRef.new(shape: SupportedAdditionalProcessorFeature, location_name: "item")
 
     SupportedInstanceTypeRequestSet.member = Shapes::ShapeRef.new(shape: InstanceTypeItemRequest, location_name: "Item")
@@ -26471,6 +26511,14 @@ module Aws::EC2
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:get_capacity_manager_supportability_scores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityManagerSupportabilityScores"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityManagerSupportabilityScoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityManagerSupportabilityScoresResult)
       end)
 
       api.add_operation(:get_capacity_reservation_usage, Seahorse::Model::Operation.new.tap do |o|

@@ -145,7 +145,8 @@ module Aws
       def get_attachment: (
                             attachment_id: ::String,
                             connection_token: ::String,
-                            ?url_expiry_in_seconds: ::Integer
+                            ?url_expiry_in_seconds: ::Integer,
+                            ?url_content_disposition: ("INLINE" | "ATTACHMENT")
                           ) -> _GetAttachmentResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetAttachmentResponseSuccess
 

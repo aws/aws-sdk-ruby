@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.662.0 (2026-10-28)
+------------------
+
+* Feature - Amazon EC2 Capacity Manager adds supportability checks and capacity fulfillment metrics. Use GetCapacityManagerSupportabilityScores to score how well instance types and Availability Zones can support a capacity request, and GetCapacityManagerMetricData to retrieve fulfillment metrics.
+
 1.661.0 (2026-10-27)
 ------------------
 

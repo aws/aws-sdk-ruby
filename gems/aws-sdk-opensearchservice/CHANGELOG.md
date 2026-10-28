@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2026-10-28)
+------------------
+
+* Feature - This release adds APIs to simplify setting up a replication relationship between OpenSearch clusters. The APIs include new Switchover and Failover actions for planned switchovers and unplanned failovers to ensure high availability for OpenSearch in the event of disaster in a single region.
+
 1.115.0 (2026-10-21)
 ------------------
 
