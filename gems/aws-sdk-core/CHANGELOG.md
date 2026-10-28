@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Improve User-Agent framework detection with literal matching of configured framework names.
+
+* Issue - Fix service error parsing and response header-map extraction by matching prefixes literally. Custom models that relied on regex matching must use literal prefixes.
+
 3.261.0 (2026-10-26)
 ------------------
 
