@@ -13,6 +13,7 @@ module Aws
     # params as options. See {Client#create_session} for details.
     class ExpressCredentialsProvider
       CACHE_KEY_SECRET = SecureRandom.random_bytes(64)
+      private_constant :CACHE_KEY_SECRET
 
       # @param [Hash] options
       # @option options [Client] :client The S3 client used to create the
