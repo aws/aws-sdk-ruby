@@ -130,7 +130,7 @@ module Aws
           unless value.is_a?(String)
             raise VerificationError, "the #{key} must be a string"
           end
-          if key != NEWLINE_SAFE_KEY && value.include?("\n")
+          if key != NEWLINE_SAFE_KEY && value.match?(/[\r\n]/)
             raise VerificationError, "the #{key} must not contain newlines"
           end
         end
