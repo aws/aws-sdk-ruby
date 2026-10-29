@@ -55,7 +55,7 @@ module Aws::Inspector2
   autoload :EndpointProvider, 'aws-sdk-inspector2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-inspector2/endpoints'
 
-  GEM_VERSION = '1.89.0'
+  GEM_VERSION = '1.90.0'
 
 end
 

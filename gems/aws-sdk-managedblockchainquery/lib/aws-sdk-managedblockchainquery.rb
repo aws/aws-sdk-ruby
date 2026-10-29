@@ -55,7 +55,7 @@ module Aws::ManagedBlockchainQuery
   autoload :EndpointProvider, 'aws-sdk-managedblockchainquery/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-managedblockchainquery/endpoints'
 
-  GEM_VERSION = '1.52.0'
+  GEM_VERSION = '1.53.0'
 
 end
 

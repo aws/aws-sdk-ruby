@@ -7787,6 +7787,14 @@ module Aws::Lightsail
     # @option params [required, String] :instance_name
     #   The name of the instance.
     #
+    # @option params [Boolean] :include_health_status
+    #   Specifies whether to include the instance health status checks in the
+    #   response of your request.
+    #
+    #   When set to `true`, the response includes the `instanceStatus` and
+    #   `systemStatus` of the instance. When omitted or set to `false`, the
+    #   response doesn't include them.
+    #
     # @return [Types::GetInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInstanceResult#instance #instance} => Types::Instance
@@ -7795,6 +7803,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_instance({
     #     instance_name: "ResourceName", # required
+    #     include_health_status: false,
     #   })
     #
     # @example Response structure
@@ -7879,6 +7888,16 @@ module Aws::Lightsail
     #   resp.instance.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.instance.metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.instance.metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
+    #   resp.instance.instance_status.status #=> String, one of "ok", "impaired", "initializing", "insufficient-data", "not-applicable"
+    #   resp.instance.instance_status.details #=> Array
+    #   resp.instance.instance_status.details[0].name #=> String, one of "reachability"
+    #   resp.instance.instance_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instance.instance_status.details[0].impaired_since #=> Time
+    #   resp.instance.system_status.status #=> String, one of "ok", "impaired", "initializing", "insufficient-data", "not-applicable"
+    #   resp.instance.system_status.details #=> Array
+    #   resp.instance.system_status.details[0].name #=> String, one of "reachability"
+    #   resp.instance.system_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instance.system_status.details[0].impaired_since #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstance AWS API Documentation
     #
@@ -8463,6 +8482,14 @@ module Aws::Lightsail
     #   your results are paginated, the response will return a next page token
     #   that you can specify as the page token in a subsequent request.
     #
+    # @option params [Boolean] :include_health_status
+    #   Specifies whether to include the instance health status checks of each
+    #   instance in the response of your request.
+    #
+    #   When set to `true`, the response includes the `instanceStatus` and
+    #   `systemStatus` of each instance. When omitted or set to `false`, the
+    #   response doesn't include them.
+    #
     # @return [Types::GetInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInstancesResult#instances #instances} => Array&lt;Types::Instance&gt;
@@ -8472,6 +8499,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_instances({
     #     page_token: "string",
+    #     include_health_status: false,
     #   })
     #
     # @example Response structure
@@ -8557,6 +8585,16 @@ module Aws::Lightsail
     #   resp.instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.instances[0].metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.instances[0].metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
+    #   resp.instances[0].instance_status.status #=> String, one of "ok", "impaired", "initializing", "insufficient-data", "not-applicable"
+    #   resp.instances[0].instance_status.details #=> Array
+    #   resp.instances[0].instance_status.details[0].name #=> String, one of "reachability"
+    #   resp.instances[0].instance_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instances[0].instance_status.details[0].impaired_since #=> Time
+    #   resp.instances[0].system_status.status #=> String, one of "ok", "impaired", "initializing", "insufficient-data", "not-applicable"
+    #   resp.instances[0].system_status.details #=> Array
+    #   resp.instances[0].system_status.details[0].name #=> String, one of "reachability"
+    #   resp.instances[0].system_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instances[0].system_status.details[0].impaired_since #=> Time
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstances AWS API Documentation
@@ -12993,7 +13031,7 @@ module Aws::Lightsail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.143.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

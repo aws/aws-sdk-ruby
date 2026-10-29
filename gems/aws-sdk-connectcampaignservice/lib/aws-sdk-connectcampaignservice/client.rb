@@ -1220,7 +1220,7 @@ module Aws::ConnectCampaignService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcampaignservice'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.58.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

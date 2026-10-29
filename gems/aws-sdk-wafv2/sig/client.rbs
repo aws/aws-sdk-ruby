@@ -232,6 +232,8 @@ module Aws
                             ?association_config: {
                               request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
                                   default_size_inspection_limit: ("KB_16" | "KB_32" | "KB_48" | "KB_64")
+                                }]?,
+                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
                                 }]?
                             },
                             ?on_source_d_do_s_protection_config: {
@@ -1050,6 +1052,8 @@ module Aws
                             ?association_config: {
                               request_body: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
                                   default_size_inspection_limit: ("KB_16" | "KB_32" | "KB_48" | "KB_64")
+                                }]?,
+                              challenge_javascript_sdk_injection: Hash[("CLOUDFRONT" | "API_GATEWAY" | "COGNITO_USER_POOL" | "APP_RUNNER_SERVICE" | "VERIFIED_ACCESS_INSTANCE" | "AGENTCORE_GATEWAY"), {
                                 }]?
                             },
                             ?on_source_d_do_s_protection_config: {

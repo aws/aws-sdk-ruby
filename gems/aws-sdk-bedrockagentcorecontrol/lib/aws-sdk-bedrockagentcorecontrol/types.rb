@@ -351,6 +351,37 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A port or port range that is reachable through the runtime's session
+    # URL. Specify exactly one of `port` or `portRange`.
+    #
+    # @note AllowedPort is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AllowedPort is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AllowedPort corresponding to the set member.
+    #
+    # @!attribute [rw] port
+    #   A single port that is reachable through the runtime's session URL.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] port_range
+    #   An inclusive range of ports that are reachable through the
+    #   runtime's session URL.
+    #   @return [Types::PortRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AllowedPort AWS API Documentation
+    #
+    class AllowedPort < Struct.new(
+      :port,
+      :port_range,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Port < AllowedPort; end
+      class PortRange < AllowedPort; end
+      class Unknown < AllowedPort; end
+    end
+
     # The configuration that restricts which workloads in the request's
     # identity chain are allowed to invoke the target, identified by their
     # hosting environments and workload identities. At launch, this is
@@ -2319,8 +2350,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::RequestHeaderConfiguration]
     #
     # @!attribute [rw] protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The protocol configuration for the AgentCore Runtime, including the
+    #   protocol, port, and path on which the agent server is available.
     #   @return [Types::ProtocolConfiguration]
     #
     # @!attribute [rw] lifecycle_configuration
@@ -2355,6 +2386,14 @@ module Aws::BedrockAgentCoreControl
     #   Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] allowed_ports
+    #   The additional ports on the AgentCore Runtime that are reachable
+    #   through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
+    #   @return [Array<Types::AllowedPort>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeRequest AWS API Documentation
     #
     class CreateAgentRuntimeRequest < Struct.new(
@@ -2372,7 +2411,8 @@ module Aws::BedrockAgentCoreControl
       :filesystem_configurations,
       :capacity_provider_configuration,
       :tags,
-      :platform_version)
+      :platform_version,
+      :allowed_ports)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -8985,8 +9025,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::AgentRuntimeArtifact]
     #
     # @!attribute [rw] protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The protocol configuration for the AgentCore Runtime, including the
+    #   protocol, port, and path on which the agent server is available.
     #   @return [Types::ProtocolConfiguration]
     #
     # @!attribute [rw] environment_variables
@@ -9019,6 +9059,11 @@ module Aws::BedrockAgentCoreControl
     #   The version of the runtime platform used by the AgentCore Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] allowed_ports
+    #   The additional ports on the AgentCore Runtime that are reachable
+    #   through the runtime's session URL.
+    #   @return [Array<Types::AllowedPort>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeResponse AWS API Documentation
     #
     class GetAgentRuntimeResponse < Struct.new(
@@ -9043,7 +9088,8 @@ module Aws::BedrockAgentCoreControl
       :metadata_configuration,
       :filesystem_configurations,
       :capacity_provider_configuration,
-      :platform_version)
+      :platform_version,
+      :allowed_ports)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -18443,6 +18489,26 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # An inclusive range of ports. The value of `from` must be less than or
+    # equal to the value of `to`.
+    #
+    # @!attribute [rw] from
+    #   The first port in the inclusive range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to
+    #   The last port in the inclusive range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PortRange AWS API Documentation
+    #
+    class PortRange < Struct.new(
+      :from,
+      :to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The private endpoint configuration for a gateway target. Defines how
     # the gateway connects to private resources in your VPC.
     #
@@ -18563,10 +18629,26 @@ module Aws::BedrockAgentCoreControl
     #   which protocol the agent runtime uses to communicate with clients.
     #   @return [String]
     #
+    # @!attribute [rw] port
+    #   The port on which the agent server listens. The port must be between
+    #   `8000` and `12000`, excluding the reserved port `8443`. When this
+    #   field is omitted, the default is `8080` for `HTTP` and `AGUI`,
+    #   `8000` for `MCP`, and `9000` for `A2A`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path
+    #   The path on which the agent server accepts requests. The path must
+    #   begin with `/`. When this field is omitted, the default is
+    #   `/invocations` for `HTTP` and `AGUI`, `/mcp` for `MCP`, and `/` for
+    #   `A2A`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ProtocolConfiguration AWS API Documentation
     #
     class ProtocolConfiguration < Struct.new(
-      :server_protocol)
+      :server_protocol,
+      :port,
+      :path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -21504,8 +21586,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::RequestHeaderConfiguration]
     #
     # @!attribute [rw] protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The updated protocol configuration for the AgentCore Runtime,
+    #   including the protocol, port, and path on which the agent server is
+    #   available.
     #   @return [Types::ProtocolConfiguration]
     #
     # @!attribute [rw] lifecycle_configuration
@@ -21537,6 +21620,14 @@ module Aws::BedrockAgentCoreControl
     #   Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] allowed_ports
+    #   The updated additional ports on the AgentCore Runtime that are
+    #   reachable through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
+    #   @return [Array<Types::AllowedPort>]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -21562,6 +21653,7 @@ module Aws::BedrockAgentCoreControl
       :filesystem_configurations,
       :capacity_provider_configuration,
       :platform_version,
+      :allowed_ports,
       :client_token)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.119.0 (2026-10-29)
+------------------
+
+* Feature - This release adds support for on-demand AMI scanning with Amazon Inspector.
+
 1.118.0 (2026-10-28)
 ------------------
 

@@ -55,7 +55,7 @@ module Aws::SSOAdmin
   autoload :EndpointProvider, 'aws-sdk-ssoadmin/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ssoadmin/endpoints'
 
-  GEM_VERSION = '1.85.0'
+  GEM_VERSION = '1.86.0'
 
 end
 

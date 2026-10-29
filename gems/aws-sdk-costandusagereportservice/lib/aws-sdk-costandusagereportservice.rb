@@ -54,7 +54,7 @@ module Aws::CostandUsageReportService
   autoload :EndpointProvider, 'aws-sdk-costandusagereportservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-costandusagereportservice/endpoints'
 
-  GEM_VERSION = '1.97.0'
+  GEM_VERSION = '1.98.0'
 
 end
 

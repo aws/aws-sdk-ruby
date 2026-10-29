@@ -1734,6 +1734,7 @@ module Aws::Lightsail
 
     class GetInstanceRequest
       attr_accessor instance_name: ::String
+      attr_accessor include_health_status: bool
       SENSITIVE: []
     end
 
@@ -1775,6 +1776,7 @@ module Aws::Lightsail
 
     class GetInstancesRequest
       attr_accessor page_token: ::String
+      attr_accessor include_health_status: bool
       SENSITIVE: []
     end
 
@@ -2158,6 +2160,8 @@ module Aws::Lightsail
       attr_accessor username: ::String
       attr_accessor ssh_key_name: ::String
       attr_accessor metadata_options: Types::InstanceMetadataOptions
+      attr_accessor instance_status: Types::InstanceHealthStatus
+      attr_accessor system_status: Types::InstanceHealthStatus
       SENSITIVE: []
     end
 
@@ -2194,6 +2198,19 @@ module Aws::Lightsail
       attr_accessor cpu_count: ::Integer
       attr_accessor disks: ::Array[Types::Disk]
       attr_accessor ram_size_in_gb: ::Float
+      SENSITIVE: []
+    end
+
+    class InstanceHealthStatus
+      attr_accessor status: ("ok" | "impaired" | "initializing" | "insufficient-data" | "not-applicable")
+      attr_accessor details: ::Array[Types::InstanceHealthStatusDetail]
+      SENSITIVE: []
+    end
+
+    class InstanceHealthStatusDetail
+      attr_accessor name: ("reachability")
+      attr_accessor status: ("passed" | "failed" | "insufficient-data" | "initializing")
+      attr_accessor impaired_since: ::Time
       SENSITIVE: []
     end
 

@@ -107,6 +107,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class AllowedPort
+      attr_accessor port: ::Integer
+      attr_accessor port_range: Types::PortRange
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Port < AllowedPort
+      end
+      class PortRange < AllowedPort
+      end
+      class Unknown < AllowedPort
+      end
+    end
+
     class AllowedWorkloadConfiguration
       attr_accessor hosting_environments: ::Array[Types::HostingEnvironment]
       attr_accessor workload_identities: ::Array[::String]
@@ -680,6 +694,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor platform_version: ::String
+      attr_accessor allowed_ports: ::Array[Types::AllowedPort]
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -2395,6 +2410,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor platform_version: ::String
+      attr_accessor allowed_ports: ::Array[Types::AllowedPort]
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -5032,6 +5048,12 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class PortRange
+      attr_accessor from: ::Integer
+      attr_accessor to: ::Integer
+      SENSITIVE: []
+    end
+
     class PrivateEndpoint
       attr_accessor self_managed_lattice_resource: Types::SelfManagedLatticeResource
       attr_accessor managed_vpc_resource: Types::ManagedVpcResource
@@ -5073,6 +5095,8 @@ module Aws::BedrockAgentCoreControl
 
     class ProtocolConfiguration
       attr_accessor server_protocol: ("MCP" | "HTTP" | "A2A" | "AGUI")
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
       SENSITIVE: []
     end
 
@@ -5959,6 +5983,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor platform_version: ::String
+      attr_accessor allowed_ports: ::Array[Types::AllowedPort]
       attr_accessor client_token: ::String
       SENSITIVE: [:description, :environment_variables]
     end

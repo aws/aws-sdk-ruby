@@ -54,7 +54,7 @@ module Aws::Personalize
   autoload :EndpointProvider, 'aws-sdk-personalize/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-personalize/endpoints'
 
-  GEM_VERSION = '1.107.0'
+  GEM_VERSION = '1.108.0'
 
 end
 

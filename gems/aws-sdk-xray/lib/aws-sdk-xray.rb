@@ -54,7 +54,7 @@ module Aws::XRay
   autoload :EndpointProvider, 'aws-sdk-xray/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-xray/endpoints'
 
-  GEM_VERSION = '1.108.0'
+  GEM_VERSION = '1.109.0'
 
 end
 

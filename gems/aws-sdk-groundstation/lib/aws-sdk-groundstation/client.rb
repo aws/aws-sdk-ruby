@@ -3169,7 +3169,7 @@ module Aws::GroundStation
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-groundstation'
-      context[:gem_version] = '1.94.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

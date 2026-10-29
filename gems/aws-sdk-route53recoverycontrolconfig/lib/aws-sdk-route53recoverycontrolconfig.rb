@@ -55,7 +55,7 @@ module Aws::Route53RecoveryControlConfig
   autoload :EndpointProvider, 'aws-sdk-route53recoverycontrolconfig/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-route53recoverycontrolconfig/endpoints'
 
-  GEM_VERSION = '1.66.0'
+  GEM_VERSION = '1.67.0'
 
 end
 

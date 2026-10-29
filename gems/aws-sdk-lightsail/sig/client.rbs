@@ -1350,7 +1350,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instance-instance_method
       def get_instance: (
-                          instance_name: ::String
+                          instance_name: ::String,
+                          ?include_health_status: bool
                         ) -> _GetInstanceResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstanceResponseSuccess
 
@@ -1430,7 +1431,8 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#get_instances-instance_method
       def get_instances: (
-                           ?page_token: ::String
+                           ?page_token: ::String,
+                           ?include_health_status: bool
                          ) -> _GetInstancesResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetInstancesResponseSuccess
 

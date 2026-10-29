@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.64.0 (2026-10-29)
+------------------
+
+* Feature - Adds AgentCore Runtime session endpoint support, including sessionEndpointUrl on the InvokeAgentRuntime response
+
 1.63.0 (2026-10-28)
 ------------------
 

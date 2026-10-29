@@ -590,6 +590,11 @@ module Aws::WAFV2
     # For Application Load Balancer and AppSync, the limit is fixed at 8 KB
     # (8,192 bytes).
     #
+    # You can also use this to have your CloudFront distributions insert the
+    # WAF challenge JavaScript SDK into the HTML responses that they return.
+    # For more information, see the `ChallengeJavascriptSdkInjection`
+    # setting.
+    #
     #
     #
     # [1]: http://aws.amazon.com/waf/pricing/
@@ -618,10 +623,55 @@ module Aws::WAFV2
     #   [1]: http://aws.amazon.com/waf/pricing/
     #   @return [Hash<String,Types::RequestBodyAssociatedResourceTypeConfig>]
     #
+    # @!attribute [rw] challenge_javascript_sdk_injection
+    #   Specifies the CloudFront distributions that insert the WAF challenge
+    #   JavaScript SDK into the HTML responses that they return. When you
+    #   enable this setting for a distribution, you do not add the SDK to
+    #   your web pages yourself.
+    #
+    #   You can configure this setting only for CloudFront distributions,
+    #   using the `CLOUDFRONT` map key. WAF rejects any other resource type,
+    #   and the setting is not available for regional resources. To
+    #   configure it, use the CloudFront scope.
+    #
+    #   Your web ACL must also contain at least one of the following
+    #   qualifying managed rule groups. WAF Bot Control qualifies only at
+    #   the `TARGETED` inspection level, not at `COMMON`:
+    #
+    #   * The WAF Bot Control managed rule group
+    #     `AWSManagedRulesBotControlRuleSet`, with the inspection level set
+    #     to `TARGETED`.
+    #
+    #   * The WAF Fraud Control account takeover prevention (ATP) managed
+    #     rule group `AWSManagedRulesATPRuleSet`.
+    #
+    #   * The WAF Fraud Control account creation fraud prevention (ACFP)
+    #     managed rule group `AWSManagedRulesACFPRuleSet`.
+    #
+    #   If you remove the last qualifying managed rule group from the web
+    #   ACL, or lower the WAF Bot Control inspection level from `TARGETED`
+    #   to `COMMON`, you must remove this setting in the same update.
+    #   Otherwise, WAF rejects the update.
+    #
+    #   Example JSON: ` { "CLOUDFRONT": {} }`
+    #
+    #   If you omit this setting, CloudFront does not insert the SDK. When
+    #   you omit it from a web ACL that previously used it, cached HTML that
+    #   already contains the SDK is still served until it expires, or until
+    #   you invalidate the cache for that distribution. For more
+    #   information, see [Automatic SDK integration for CloudFront
+    #   distributions][1] in the *WAF Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-challenge-javascript-sdk-injection.html
+    #   @return [Hash<String,Types::ChallengeJavascriptSdkInjectionConfig>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/AssociationConfig AWS API Documentation
     #
     class AssociationConfig < Struct.new(
-      :request_body)
+      :request_body,
+      :challenge_javascript_sdk_injection)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1046,6 +1096,23 @@ module Aws::WAFV2
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Specifies whether the associated CloudFront distribution inserts the
+    # WAF challenge JavaScript SDK into the HTML responses that it returns.
+    # The structure is empty: including it turns insertion on, and removing
+    # it turns insertion off.
+    #
+    # This is used in the `ChallengeJavascriptSdkInjection` map of the
+    # `AssociationConfig` of the web ACL. The map key identifies the
+    # resource type and must be `CLOUDFRONT`.
+    #
+    # JSON specification: `"CLOUDFRONT": {}`
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ChallengeJavascriptSdkInjectionConfig AWS API Documentation
+    #
+    class ChallengeJavascriptSdkInjectionConfig < Aws::EmptyStructure; end
 
     # The result from the inspection of the web request for a valid
     # challenge token.
@@ -1838,6 +1905,11 @@ module Aws::WAFV2
     #
     #   For Application Load Balancer and AppSync, the limit is fixed at 8
     #   KB (8,192 bytes).
+    #
+    #   You can also use this to have your CloudFront distributions insert
+    #   the WAF challenge JavaScript SDK into the HTML responses that they
+    #   return. For more information, see the
+    #   `ChallengeJavascriptSdkInjection` setting.
     #
     #
     #
@@ -11142,6 +11214,11 @@ module Aws::WAFV2
     #   For Application Load Balancer and AppSync, the limit is fixed at 8
     #   KB (8,192 bytes).
     #
+    #   You can also use this to have your CloudFront distributions insert
+    #   the WAF challenge JavaScript SDK into the HTML responses that they
+    #   return. For more information, see the
+    #   `ChallengeJavascriptSdkInjection` setting.
+    #
     #
     #
     #   [1]: http://aws.amazon.com/waf/pricing/
@@ -11977,6 +12054,11 @@ module Aws::WAFV2
     #
     #   For Application Load Balancer and AppSync, the limit is fixed at 8
     #   KB (8,192 bytes).
+    #
+    #   You can also use this to have your CloudFront distributions insert
+    #   the WAF challenge JavaScript SDK into the HTML responses that they
+    #   return. For more information, see the
+    #   `ChallengeJavascriptSdkInjection` setting.
     #
     #
     #

@@ -452,6 +452,12 @@ module Aws::Lightsail
     InstanceHardware = Shapes::StructureShape.new(name: 'InstanceHardware')
     InstanceHealthReason = Shapes::StringShape.new(name: 'InstanceHealthReason')
     InstanceHealthState = Shapes::StringShape.new(name: 'InstanceHealthState')
+    InstanceHealthStatus = Shapes::StructureShape.new(name: 'InstanceHealthStatus')
+    InstanceHealthStatusDetail = Shapes::StructureShape.new(name: 'InstanceHealthStatusDetail')
+    InstanceHealthStatusDetailList = Shapes::ListShape.new(name: 'InstanceHealthStatusDetailList')
+    InstanceHealthStatusDetailName = Shapes::StringShape.new(name: 'InstanceHealthStatusDetailName')
+    InstanceHealthStatusDetailValue = Shapes::StringShape.new(name: 'InstanceHealthStatusDetailValue')
+    InstanceHealthStatusValue = Shapes::StringShape.new(name: 'InstanceHealthStatusValue')
     InstanceHealthSummary = Shapes::StructureShape.new(name: 'InstanceHealthSummary')
     InstanceHealthSummaryList = Shapes::ListShape.new(name: 'InstanceHealthSummaryList')
     InstanceList = Shapes::ListShape.new(name: 'InstanceList')
@@ -2054,6 +2060,7 @@ module Aws::Lightsail
     GetInstancePortStatesResult.struct_class = Types::GetInstancePortStatesResult
 
     GetInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    GetInstanceRequest.add_member(:include_health_status, Shapes::ShapeRef.new(shape: boolean, location_name: "includeHealthStatus"))
     GetInstanceRequest.struct_class = Types::GetInstanceRequest
 
     GetInstanceResult.add_member(:instance, Shapes::ShapeRef.new(shape: Instance, location_name: "instance"))
@@ -2079,6 +2086,7 @@ module Aws::Lightsail
     GetInstanceStateResult.struct_class = Types::GetInstanceStateResult
 
     GetInstancesRequest.add_member(:page_token, Shapes::ShapeRef.new(shape: string, location_name: "pageToken"))
+    GetInstancesRequest.add_member(:include_health_status, Shapes::ShapeRef.new(shape: boolean, location_name: "includeHealthStatus"))
     GetInstancesRequest.struct_class = Types::GetInstancesRequest
 
     GetInstancesResult.add_member(:instances, Shapes::ShapeRef.new(shape: InstanceList, location_name: "instances"))
@@ -2345,6 +2353,8 @@ module Aws::Lightsail
     Instance.add_member(:username, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "username"))
     Instance.add_member(:ssh_key_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "sshKeyName"))
     Instance.add_member(:metadata_options, Shapes::ShapeRef.new(shape: InstanceMetadataOptions, location_name: "metadataOptions"))
+    Instance.add_member(:instance_status, Shapes::ShapeRef.new(shape: InstanceHealthStatus, location_name: "instanceStatus"))
+    Instance.add_member(:system_status, Shapes::ShapeRef.new(shape: InstanceHealthStatus, location_name: "systemStatus"))
     Instance.struct_class = Types::Instance
 
     InstanceAccessDetails.add_member(:cert_key, Shapes::ShapeRef.new(shape: string, location_name: "certKey"))
@@ -2376,6 +2386,17 @@ module Aws::Lightsail
     InstanceHardware.add_member(:disks, Shapes::ShapeRef.new(shape: DiskList, location_name: "disks"))
     InstanceHardware.add_member(:ram_size_in_gb, Shapes::ShapeRef.new(shape: float, location_name: "ramSizeInGb"))
     InstanceHardware.struct_class = Types::InstanceHardware
+
+    InstanceHealthStatus.add_member(:status, Shapes::ShapeRef.new(shape: InstanceHealthStatusValue, location_name: "status"))
+    InstanceHealthStatus.add_member(:details, Shapes::ShapeRef.new(shape: InstanceHealthStatusDetailList, location_name: "details"))
+    InstanceHealthStatus.struct_class = Types::InstanceHealthStatus
+
+    InstanceHealthStatusDetail.add_member(:name, Shapes::ShapeRef.new(shape: InstanceHealthStatusDetailName, location_name: "name"))
+    InstanceHealthStatusDetail.add_member(:status, Shapes::ShapeRef.new(shape: InstanceHealthStatusDetailValue, location_name: "status"))
+    InstanceHealthStatusDetail.add_member(:impaired_since, Shapes::ShapeRef.new(shape: IsoDate, location_name: "impairedSince"))
+    InstanceHealthStatusDetail.struct_class = Types::InstanceHealthStatusDetail
+
+    InstanceHealthStatusDetailList.member = Shapes::ShapeRef.new(shape: InstanceHealthStatusDetail)
 
     InstanceHealthSummary.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
     InstanceHealthSummary.add_member(:instance_health, Shapes::ShapeRef.new(shape: InstanceHealthState, location_name: "instanceHealth"))

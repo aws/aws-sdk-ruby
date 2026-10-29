@@ -688,8 +688,8 @@ module Aws::BedrockAgentCoreControl
     #   the runtime.
     #
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The protocol configuration for the AgentCore Runtime, including the
+    #   protocol, port, and path on which the agent server is available.
     #
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The life cycle configuration for the AgentCore Runtime.
@@ -715,6 +715,13 @@ module Aws::BedrockAgentCoreControl
     #
     # @option params [String] :platform_version
     #   The version of the runtime platform to use for the AgentCore Runtime.
+    #
+    # @option params [Array<Types::AllowedPort>] :allowed_ports
+    #   The additional ports on the AgentCore Runtime that are reachable
+    #   through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
     #
     # @return [Types::CreateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -828,6 +835,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A, AGUI
+    #       port: 1,
+    #       path: "ServerPath",
     #     },
     #     lifecycle_configuration: {
     #       idle_runtime_session_timeout: 1,
@@ -862,6 +871,15 @@ module Aws::BedrockAgentCoreControl
     #       "TagKey" => "TagValue",
     #     },
     #     platform_version: "PlatformVersion",
+    #     allowed_ports: [
+    #       {
+    #         port: 1,
+    #         port_range: {
+    #           from: 1, # required
+    #           to: 1, # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -7190,6 +7208,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::FilesystemConfiguration&gt;
     #   * {Types::GetAgentRuntimeResponse#capacity_provider_configuration #capacity_provider_configuration} => Types::CapacityProviderConfiguration
     #   * {Types::GetAgentRuntimeResponse#platform_version #platform_version} => String
+    #   * {Types::GetAgentRuntimeResponse#allowed_ports #allowed_ports} => Array&lt;Types::AllowedPort&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7227,6 +7246,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_artifact.code_configuration.entry_point #=> Array
     #   resp.agent_runtime_artifact.code_configuration.entry_point[0] #=> String
     #   resp.protocol_configuration.server_protocol #=> String, one of "MCP", "HTTP", "A2A", "AGUI"
+    #   resp.protocol_configuration.port #=> Integer
+    #   resp.protocol_configuration.path #=> String
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
@@ -7284,6 +7305,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.capacity_provider_configuration.capacity_provider_arn #=> String
     #   resp.platform_version #=> String
+    #   resp.allowed_ports #=> Array
+    #   resp.allowed_ports[0].port #=> Integer
+    #   resp.allowed_ports[0].port_range.from #=> Integer
+    #   resp.allowed_ports[0].port_range.to #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -12723,8 +12748,9 @@ module Aws::BedrockAgentCoreControl
     #   through to the runtime.
     #
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The updated protocol configuration for the AgentCore Runtime,
+    #   including the protocol, port, and path on which the agent server is
+    #   available.
     #
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The updated life cycle configuration for the AgentCore Runtime.
@@ -12747,6 +12773,13 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :platform_version
     #   The updated version of the runtime platform to use for the AgentCore
     #   Runtime.
+    #
+    # @option params [Array<Types::AllowedPort>] :allowed_ports
+    #   The updated additional ports on the AgentCore Runtime that are
+    #   reachable through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -12867,6 +12900,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A, AGUI
+    #       port: 1,
+    #       path: "ServerPath",
     #     },
     #     lifecycle_configuration: {
     #       idle_runtime_session_timeout: 1,
@@ -12901,6 +12936,15 @@ module Aws::BedrockAgentCoreControl
     #       capacity_provider_arn: "CapacityProviderArn", # required
     #     },
     #     platform_version: "PlatformVersion",
+    #     allowed_ports: [
+    #       {
+    #         port: 1,
+    #         port_range: {
+    #           from: 1, # required
+    #           to: 1, # required
+    #         },
+    #       },
+    #     ],
     #     client_token: "ClientToken",
     #   })
     #
@@ -17508,7 +17552,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.85.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -72,7 +72,7 @@ module Aws::SageMakerTrainingSessionRuntime
   autoload :Endpoints, 'aws-sdk-sagemakertrainingsessionruntime/endpoints'
   autoload :AsyncClient, 'aws-sdk-sagemakertrainingsessionruntime/async_client'
 
-  GEM_VERSION = '1.4.0'
+  GEM_VERSION = '1.5.0'
 
 end
 

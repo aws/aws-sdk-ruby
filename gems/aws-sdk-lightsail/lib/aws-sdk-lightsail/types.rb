@@ -8523,10 +8523,20 @@ module Aws::Lightsail
     #   The name of the instance.
     #   @return [String]
     #
+    # @!attribute [rw] include_health_status
+    #   Specifies whether to include the instance health status checks in
+    #   the response of your request.
+    #
+    #   When set to `true`, the response includes the `instanceStatus` and
+    #   `systemStatus` of the instance. When omitted or set to `false`, the
+    #   response doesn't include them.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstanceRequest AWS API Documentation
     #
     class GetInstanceRequest < Struct.new(
-      :instance_name)
+      :instance_name,
+      :include_health_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8644,10 +8654,20 @@ module Aws::Lightsail
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] include_health_status
+    #   Specifies whether to include the instance health status checks of
+    #   each instance in the response of your request.
+    #
+    #   When set to `true`, the response includes the `instanceStatus` and
+    #   `systemStatus` of each instance. When omitted or set to `false`, the
+    #   response doesn't include them.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstancesRequest AWS API Documentation
     #
     class GetInstancesRequest < Struct.new(
-      :page_token)
+      :page_token,
+      :include_health_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10346,6 +10366,23 @@ module Aws::Lightsail
     #   The metadata options for the Amazon Lightsail instance.
     #   @return [Types::InstanceMetadataOptions]
     #
+    # @!attribute [rw] instance_status
+    #   Reports impaired functionality that stems from issues internal to
+    #   the instance, such as impaired reachability.
+    #
+    #   This value is returned only when you set `includeHealthStatus` to
+    #   `true` in your request.
+    #   @return [Types::InstanceHealthStatus]
+    #
+    # @!attribute [rw] system_status
+    #   Reports impaired functionality that stems from issues related to the
+    #   systems that support an instance, such as hardware failures and
+    #   network connectivity problems.
+    #
+    #   This value is returned only when you set `includeHealthStatus` to
+    #   `true` in your request.
+    #   @return [Types::InstanceHealthStatus]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/Instance AWS API Documentation
     #
     class Instance < Struct.new(
@@ -10370,7 +10407,9 @@ module Aws::Lightsail
       :state,
       :username,
       :ssh_key_name,
-      :metadata_options)
+      :metadata_options,
+      :instance_status,
+      :system_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10603,6 +10642,78 @@ module Aws::Lightsail
       :cpu_count,
       :disks,
       :ram_size_in_gb)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the status of an Amazon Lightsail instance.
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #
+    #   The following values are possible:
+    #
+    #   * `ok` - All checks are passing. The instance is reachable.
+    #
+    #   * `impaired` - One or more checks have failed.
+    #
+    #   * `initializing` - The instance was recently started, and the checks
+    #     are in progress.
+    #
+    #   * `insufficient-data` - There isn't enough data yet to determine
+    #     the result.
+    #
+    #   * `not-applicable` - The check doesn't apply because the instance
+    #     isn't running.
+    #   @return [String]
+    #
+    # @!attribute [rw] details
+    #   The system instance health or instance health.
+    #   @return [Array<Types::InstanceHealthStatusDetail>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceHealthStatus AWS API Documentation
+    #
+    class InstanceHealthStatus < Struct.new(
+      :status,
+      :details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the instance status.
+    #
+    # @!attribute [rw] name
+    #   The type of instance status. The only possible value is
+    #   `reachability`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status.
+    #
+    #   The following values are possible:
+    #
+    #   * `passed` - The check passed.
+    #
+    #   * `failed` - The check failed.
+    #
+    #   * `initializing` - The check is in progress.
+    #
+    #   * `insufficient-data` - There isn't enough data yet to determine
+    #     the result.
+    #   @return [String]
+    #
+    # @!attribute [rw] impaired_since
+    #   The time when a status check failed. For an instance that was
+    #   launched and impaired, this is the time when the instance was
+    #   launched.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceHealthStatusDetail AWS API Documentation
+    #
+    class InstanceHealthStatusDetail < Struct.new(
+      :name,
+      :status,
+      :impaired_since)
       SENSITIVE = []
       include Aws::Structure
     end

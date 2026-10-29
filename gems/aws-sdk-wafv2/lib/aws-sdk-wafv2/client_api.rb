@@ -59,6 +59,8 @@ module Aws::WAFV2
     CaptchaResponse = Shapes::StructureShape.new(name: 'CaptchaResponse')
     ChallengeAction = Shapes::StructureShape.new(name: 'ChallengeAction')
     ChallengeConfig = Shapes::StructureShape.new(name: 'ChallengeConfig')
+    ChallengeJavascriptSdkInjection = Shapes::MapShape.new(name: 'ChallengeJavascriptSdkInjection')
+    ChallengeJavascriptSdkInjectionConfig = Shapes::StructureShape.new(name: 'ChallengeJavascriptSdkInjectionConfig')
     ChallengeResponse = Shapes::StructureShape.new(name: 'ChallengeResponse')
     CheckCapacityRequest = Shapes::StructureShape.new(name: 'CheckCapacityRequest')
     CheckCapacityResponse = Shapes::StructureShape.new(name: 'CheckCapacityResponse')
@@ -597,6 +599,7 @@ module Aws::WAFV2
     AssociateWebACLResponse.struct_class = Types::AssociateWebACLResponse
 
     AssociationConfig.add_member(:request_body, Shapes::ShapeRef.new(shape: RequestBody, location_name: "RequestBody"))
+    AssociationConfig.add_member(:challenge_javascript_sdk_injection, Shapes::ShapeRef.new(shape: ChallengeJavascriptSdkInjection, location_name: "ChallengeJavascriptSdkInjection"))
     AssociationConfig.struct_class = Types::AssociationConfig
 
     AttributeValues.member = Shapes::ShapeRef.new(shape: AttributeValue)
@@ -637,6 +640,11 @@ module Aws::WAFV2
 
     ChallengeConfig.add_member(:immunity_time_property, Shapes::ShapeRef.new(shape: ImmunityTimeProperty, location_name: "ImmunityTimeProperty"))
     ChallengeConfig.struct_class = Types::ChallengeConfig
+
+    ChallengeJavascriptSdkInjection.key = Shapes::ShapeRef.new(shape: AssociatedResourceType)
+    ChallengeJavascriptSdkInjection.value = Shapes::ShapeRef.new(shape: ChallengeJavascriptSdkInjectionConfig)
+
+    ChallengeJavascriptSdkInjectionConfig.struct_class = Types::ChallengeJavascriptSdkInjectionConfig
 
     ChallengeResponse.add_member(:response_code, Shapes::ShapeRef.new(shape: ResponseCode, location_name: "ResponseCode"))
     ChallengeResponse.add_member(:solve_timestamp, Shapes::ShapeRef.new(shape: SolveTimestamp, location_name: "SolveTimestamp"))

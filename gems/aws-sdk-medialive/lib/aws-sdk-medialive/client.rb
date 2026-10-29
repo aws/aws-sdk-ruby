@@ -8135,7 +8135,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.203.0'
+      context[:gem_version] = '1.204.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

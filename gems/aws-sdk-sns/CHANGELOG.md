@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.126.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 * Issue - Reject carriage returns in signed fields other than `Message` in `Aws::SNS::MessageVerifier`.
 
 1.125.0 (2026-10-28)

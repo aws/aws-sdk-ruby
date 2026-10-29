@@ -6249,6 +6249,14 @@ module Aws::BedrockAgentCore
     #   The identifier of the runtime session.
     #   @return [String]
     #
+    # @!attribute [rw] session_endpoint_url
+    #   The HTTPS endpoint that addresses this runtime session directly.
+    #   This value is returned only when the agent runtime is configured
+    #   with allowed ports and direct runtime access is available for the
+    #   session. If this value is not present, use `InvokeAgentRuntime` to
+    #   communicate with the session.
+    #   @return [String]
+    #
     # @!attribute [rw] mcp_session_id
     #   The identifier of the MCP session.
     #   @return [String]
@@ -6296,6 +6304,7 @@ module Aws::BedrockAgentCore
     #
     class InvokeAgentRuntimeResponse < Struct.new(
       :runtime_session_id,
+      :session_endpoint_url,
       :mcp_session_id,
       :mcp_protocol_version,
       :trace_id,

@@ -598,7 +598,7 @@ module Aws::MarketplaceReporting
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacereporting'
-      context[:gem_version] = '1.30.0'
+      context[:gem_version] = '1.31.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

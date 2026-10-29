@@ -73,7 +73,7 @@ module Aws::QBusiness
   autoload :AsyncClient, 'aws-sdk-qbusiness/async_client'
   autoload :EventStreams, 'aws-sdk-qbusiness/event_streams'
 
-  GEM_VERSION = '1.67.0'
+  GEM_VERSION = '1.68.0'
 
 end
 

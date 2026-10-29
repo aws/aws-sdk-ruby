@@ -54,7 +54,7 @@ module Aws::ElasticsearchService
   autoload :EndpointProvider, 'aws-sdk-elasticsearchservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elasticsearchservice/endpoints'
 
-  GEM_VERSION = '1.130.0'
+  GEM_VERSION = '1.131.0'
 
 end
 

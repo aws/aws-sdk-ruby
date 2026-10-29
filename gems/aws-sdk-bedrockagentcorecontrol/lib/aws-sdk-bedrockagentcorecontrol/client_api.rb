@@ -50,6 +50,8 @@ module Aws::BedrockAgentCoreControl
     AllowedAudienceType = Shapes::StringShape.new(name: 'AllowedAudienceType')
     AllowedClient = Shapes::StringShape.new(name: 'AllowedClient')
     AllowedClientsList = Shapes::ListShape.new(name: 'AllowedClientsList')
+    AllowedPort = Shapes::UnionShape.new(name: 'AllowedPort')
+    AllowedPorts = Shapes::ListShape.new(name: 'AllowedPorts')
     AllowedQueryParameters = Shapes::ListShape.new(name: 'AllowedQueryParameters')
     AllowedRequestHeaders = Shapes::ListShape.new(name: 'AllowedRequestHeaders')
     AllowedResponseHeaders = Shapes::ListShape.new(name: 'AllowedResponseHeaders')
@@ -1089,6 +1091,8 @@ module Aws::BedrockAgentCoreControl
     PolicySummary = Shapes::StructureShape.new(name: 'PolicySummary')
     PolicySummaryList = Shapes::ListShape.new(name: 'PolicySummaryList')
     PolicyValidationMode = Shapes::StringShape.new(name: 'PolicyValidationMode')
+    Port = Shapes::IntegerShape.new(name: 'Port')
+    PortRange = Shapes::StructureShape.new(name: 'PortRange')
     PortalUrlType = Shapes::StringShape.new(name: 'PortalUrlType')
     PrincipalMatchOperator = Shapes::StringShape.new(name: 'PrincipalMatchOperator')
     PrivateEndpoint = Shapes::UnionShape.new(name: 'PrivateEndpoint')
@@ -1228,6 +1232,8 @@ module Aws::BedrockAgentCoreControl
     SensitiveJson = Shapes::DocumentShape.new(name: 'SensitiveJson', document: true)
     SensitiveText = Shapes::StringShape.new(name: 'SensitiveText')
     ServerDefinition = Shapes::StructureShape.new(name: 'ServerDefinition')
+    ServerPath = Shapes::StringShape.new(name: 'ServerPath')
+    ServerPort = Shapes::IntegerShape.new(name: 'ServerPort')
     ServerProtocol = Shapes::StringShape.new(name: 'ServerProtocol')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
@@ -1561,6 +1567,16 @@ module Aws::BedrockAgentCoreControl
     AllowedAudienceList.member = Shapes::ShapeRef.new(shape: AllowedAudience)
 
     AllowedClientsList.member = Shapes::ShapeRef.new(shape: AllowedClient)
+
+    AllowedPort.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
+    AllowedPort.add_member(:port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "portRange"))
+    AllowedPort.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AllowedPort.add_member_subclass(:port, Types::AllowedPort::Port)
+    AllowedPort.add_member_subclass(:port_range, Types::AllowedPort::PortRange)
+    AllowedPort.add_member_subclass(:unknown, Types::AllowedPort::Unknown)
+    AllowedPort.struct_class = Types::AllowedPort
+
+    AllowedPorts.member = Shapes::ShapeRef.new(shape: AllowedPort)
 
     AllowedQueryParameters.member = Shapes::ShapeRef.new(shape: HttpQueryParameterName)
 
@@ -2020,6 +2036,7 @@ module Aws::BedrockAgentCoreControl
     CreateAgentRuntimeRequest.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
     CreateAgentRuntimeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateAgentRuntimeRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
+    CreateAgentRuntimeRequest.add_member(:allowed_ports, Shapes::ShapeRef.new(shape: AllowedPorts, location_name: "allowedPorts"))
     CreateAgentRuntimeRequest.struct_class = Types::CreateAgentRuntimeRequest
 
     CreateAgentRuntimeResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
@@ -3340,6 +3357,7 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeResponse.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     GetAgentRuntimeResponse.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
     GetAgentRuntimeResponse.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
+    GetAgentRuntimeResponse.add_member(:allowed_ports, Shapes::ShapeRef.new(shape: AllowedPorts, location_name: "allowedPorts"))
     GetAgentRuntimeResponse.struct_class = Types::GetAgentRuntimeResponse
 
     GetApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -5335,6 +5353,10 @@ module Aws::BedrockAgentCoreControl
 
     PolicySummaryList.member = Shapes::ShapeRef.new(shape: PolicySummary)
 
+    PortRange.add_member(:from, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "from"))
+    PortRange.add_member(:to, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "to"))
+    PortRange.struct_class = Types::PortRange
+
     PrivateEndpoint.add_member(:self_managed_lattice_resource, Shapes::ShapeRef.new(shape: SelfManagedLatticeResource, location_name: "selfManagedLatticeResource"))
     PrivateEndpoint.add_member(:managed_vpc_resource, Shapes::ShapeRef.new(shape: ManagedVpcResource, location_name: "managedVpcResource"))
     PrivateEndpoint.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -5364,6 +5386,8 @@ module Aws::BedrockAgentCoreControl
     PrivateKeySource.struct_class = Types::PrivateKeySource
 
     ProtocolConfiguration.add_member(:server_protocol, Shapes::ShapeRef.new(shape: ServerProtocol, required: true, location_name: "serverProtocol"))
+    ProtocolConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: ServerPort, location_name: "port"))
+    ProtocolConfiguration.add_member(:path, Shapes::ShapeRef.new(shape: ServerPath, location_name: "path"))
     ProtocolConfiguration.struct_class = Types::ProtocolConfiguration
 
     ProviderPrefix.add_member(:strip, Shapes::ShapeRef.new(shape: Boolean, location_name: "strip"))
@@ -6030,6 +6054,7 @@ module Aws::BedrockAgentCoreControl
     UpdateAgentRuntimeRequest.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     UpdateAgentRuntimeRequest.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
     UpdateAgentRuntimeRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
+    UpdateAgentRuntimeRequest.add_member(:allowed_ports, Shapes::ShapeRef.new(shape: AllowedPorts, location_name: "allowedPorts"))
     UpdateAgentRuntimeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAgentRuntimeRequest.struct_class = Types::UpdateAgentRuntimeRequest
 

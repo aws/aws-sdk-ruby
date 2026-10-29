@@ -7147,7 +7147,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.185.0'
+      context[:gem_version] = '1.186.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2026-10-29)
+------------------
+
+* Feature - Adds Session Endpoint Feature on AgentCore Runtime
+
 1.85.0 (2026-10-28)
 ------------------
 
