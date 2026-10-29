@@ -446,6 +446,7 @@ module Aws::Lightsail
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceAccessDetails = Shapes::StructureShape.new(name: 'InstanceAccessDetails')
     InstanceAccessProtocol = Shapes::StringShape.new(name: 'InstanceAccessProtocol')
+    InstanceAttributeUpdates = Shapes::StructureShape.new(name: 'InstanceAttributeUpdates')
     InstanceEntry = Shapes::StructureShape.new(name: 'InstanceEntry')
     InstanceEntryList = Shapes::ListShape.new(name: 'InstanceEntryList')
     InstanceHardware = Shapes::StructureShape.new(name: 'InstanceHardware')
@@ -2359,6 +2360,9 @@ module Aws::Lightsail
     InstanceAccessDetails.add_member(:host_keys, Shapes::ShapeRef.new(shape: HostKeysList, location_name: "hostKeys"))
     InstanceAccessDetails.struct_class = Types::InstanceAccessDetails
 
+    InstanceAttributeUpdates.add_member(:bundle_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "bundleId"))
+    InstanceAttributeUpdates.struct_class = Types::InstanceAttributeUpdates
+
     InstanceEntry.add_member(:source_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "sourceName"))
     InstanceEntry.add_member(:instance_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "instanceType"))
     InstanceEntry.add_member(:port_info_source, Shapes::ShapeRef.new(shape: PortInfoSourceType, required: true, location_name: "portInfoSource"))
@@ -3021,6 +3025,7 @@ module Aws::Lightsail
     StartGUISessionResult.struct_class = Types::StartGUISessionResult
 
     StartInstanceRequest.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "instanceName"))
+    StartInstanceRequest.add_member(:attribute_updates, Shapes::ShapeRef.new(shape: InstanceAttributeUpdates, location_name: "attributeUpdates"))
     StartInstanceRequest.struct_class = Types::StartInstanceRequest
 
     StartInstanceResult.add_member(:operations, Shapes::ShapeRef.new(shape: OperationList, location_name: "operations"))

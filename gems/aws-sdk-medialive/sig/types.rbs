@@ -5374,18 +5374,24 @@ module Aws::MediaLive
     class MulticastSource
       attr_accessor source_ip: ::String
       attr_accessor url: ::String
+      attr_accessor secondary_source_ip: ::String
+      attr_accessor secondary_url: ::String
       SENSITIVE: []
     end
 
     class MulticastSourceCreateRequest
       attr_accessor source_ip: ::String
       attr_accessor url: ::String
+      attr_accessor secondary_source_ip: ::String
+      attr_accessor secondary_url: ::String
       SENSITIVE: []
     end
 
     class MulticastSourceUpdateRequest
       attr_accessor source_ip: ::String
       attr_accessor url: ::String
+      attr_accessor secondary_source_ip: ::String
+      attr_accessor secondary_url: ::String
       SENSITIVE: []
     end
 

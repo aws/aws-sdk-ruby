@@ -55,7 +55,7 @@ module Aws::LocationService
   autoload :EndpointProvider, 'aws-sdk-locationservice/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-locationservice/endpoints'
 
-  GEM_VERSION = '1.95.0'
+  GEM_VERSION = '1.96.0'
 
 end
 

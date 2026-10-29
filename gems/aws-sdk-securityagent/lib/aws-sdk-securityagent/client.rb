@@ -669,6 +669,11 @@ module Aws::SecurityAgent
     #   resp.deleted[0].assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.deleted[0].assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.deleted[0].assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.deleted[0].assets.client_certificates #=> Array
+    #   resp.deleted[0].assets.client_certificates[0].name #=> String
+    #   resp.deleted[0].assets.client_certificates[0].secret_arn #=> String
+    #   resp.deleted[0].assets.client_certificates[0].origins #=> Array
+    #   resp.deleted[0].assets.client_certificates[0].origins[0] #=> String
     #   resp.deleted[0].exclude_risk_types #=> Array
     #   resp.deleted[0].exclude_risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
     #   resp.deleted[0].service_role #=> String
@@ -1187,6 +1192,11 @@ module Aws::SecurityAgent
     #   resp.code_reviews[0].assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.code_reviews[0].assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.code_reviews[0].assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.code_reviews[0].assets.client_certificates #=> Array
+    #   resp.code_reviews[0].assets.client_certificates[0].name #=> String
+    #   resp.code_reviews[0].assets.client_certificates[0].secret_arn #=> String
+    #   resp.code_reviews[0].assets.client_certificates[0].origins #=> Array
+    #   resp.code_reviews[0].assets.client_certificates[0].origins[0] #=> String
     #   resp.code_reviews[0].service_role #=> String
     #   resp.code_reviews[0].log_config.log_group #=> String
     #   resp.code_reviews[0].log_config.log_stream #=> String
@@ -1452,6 +1462,11 @@ module Aws::SecurityAgent
     #   resp.pentest_jobs[0].trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.pentest_jobs[0].trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.pentest_jobs[0].trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.pentest_jobs[0].client_certificates #=> Array
+    #   resp.pentest_jobs[0].client_certificates[0].name #=> String
+    #   resp.pentest_jobs[0].client_certificates[0].secret_arn #=> String
+    #   resp.pentest_jobs[0].client_certificates[0].origins #=> Array
+    #   resp.pentest_jobs[0].client_certificates[0].origins[0] #=> String
     #   resp.pentest_jobs[0].code_remediation_strategy #=> String, one of "AUTOMATIC", "DISABLED"
     #   resp.pentest_jobs[0].clean_up_strategy #=> String, one of "BEST_EFFORT_DELETE", "RETAIN_ALL"
     #   resp.pentest_jobs[0].disable_managed_skills #=> Array
@@ -1541,6 +1556,11 @@ module Aws::SecurityAgent
     #   resp.pentests[0].assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.pentests[0].assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.pentests[0].assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.pentests[0].assets.client_certificates #=> Array
+    #   resp.pentests[0].assets.client_certificates[0].name #=> String
+    #   resp.pentests[0].assets.client_certificates[0].secret_arn #=> String
+    #   resp.pentests[0].assets.client_certificates[0].origins #=> Array
+    #   resp.pentests[0].assets.client_certificates[0].origins[0] #=> String
     #   resp.pentests[0].exclude_risk_types #=> Array
     #   resp.pentests[0].exclude_risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
     #   resp.pentests[0].service_role #=> String
@@ -1858,6 +1878,11 @@ module Aws::SecurityAgent
     #   resp.threat_models[0].assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.threat_models[0].assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.threat_models[0].assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.threat_models[0].assets.client_certificates #=> Array
+    #   resp.threat_models[0].assets.client_certificates[0].name #=> String
+    #   resp.threat_models[0].assets.client_certificates[0].secret_arn #=> String
+    #   resp.threat_models[0].assets.client_certificates[0].origins #=> Array
+    #   resp.threat_models[0].assets.client_certificates[0].origins[0] #=> String
     #   resp.threat_models[0].scope_docs #=> Array
     #   resp.threat_models[0].scope_docs[0].s3_location #=> String
     #   resp.threat_models[0].scope_docs[0].artifact_id #=> String
@@ -2257,6 +2282,13 @@ module Aws::SecurityAgent
     #           },
     #         },
     #       ],
+    #       client_certificates: [
+    #         {
+    #           name: "ClientCertificateName", # required
+    #           secret_arn: "String", # required
+    #           origins: ["String"], # required
+    #         },
+    #       ],
     #     },
     #     service_role: "ServiceRole",
     #     log_config: {
@@ -2316,6 +2348,11 @@ module Aws::SecurityAgent
     #   resp.assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.assets.client_certificates #=> Array
+    #   resp.assets.client_certificates[0].name #=> String
+    #   resp.assets.client_certificates[0].secret_arn #=> String
+    #   resp.assets.client_certificates[0].origins #=> Array
+    #   resp.assets.client_certificates[0].origins[0] #=> String
     #   resp.service_role #=> String
     #   resp.log_config.log_group #=> String
     #   resp.log_config.log_stream #=> String
@@ -2618,6 +2655,13 @@ module Aws::SecurityAgent
     #           },
     #         },
     #       ],
+    #       client_certificates: [
+    #         {
+    #           name: "ClientCertificateName", # required
+    #           secret_arn: "String", # required
+    #           origins: ["String"], # required
+    #         },
+    #       ],
     #     },
     #     exclude_risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
     #     service_role: "ServiceRole",
@@ -2704,6 +2748,11 @@ module Aws::SecurityAgent
     #   resp.assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.assets.client_certificates #=> Array
+    #   resp.assets.client_certificates[0].name #=> String
+    #   resp.assets.client_certificates[0].secret_arn #=> String
+    #   resp.assets.client_certificates[0].origins #=> Array
+    #   resp.assets.client_certificates[0].origins[0] #=> String
     #   resp.exclude_risk_types #=> Array
     #   resp.exclude_risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
     #   resp.service_role #=> String
@@ -3168,6 +3217,13 @@ module Aws::SecurityAgent
     #           },
     #         },
     #       ],
+    #       client_certificates: [
+    #         {
+    #           name: "ClientCertificateName", # required
+    #           secret_arn: "String", # required
+    #           origins: ["String"], # required
+    #         },
+    #       ],
     #     },
     #     scope_docs: [
     #       {
@@ -3224,6 +3280,11 @@ module Aws::SecurityAgent
     #   resp.assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.assets.client_certificates #=> Array
+    #   resp.assets.client_certificates[0].name #=> String
+    #   resp.assets.client_certificates[0].secret_arn #=> String
+    #   resp.assets.client_certificates[0].origins #=> Array
+    #   resp.assets.client_certificates[0].origins[0] #=> String
     #   resp.scope_docs #=> Array
     #   resp.scope_docs[0].s3_location #=> String
     #   resp.scope_docs[0].artifact_id #=> String
@@ -5749,6 +5810,13 @@ module Aws::SecurityAgent
     #           },
     #         },
     #       ],
+    #       client_certificates: [
+    #         {
+    #           name: "ClientCertificateName", # required
+    #           secret_arn: "String", # required
+    #           origins: ["String"], # required
+    #         },
+    #       ],
     #     },
     #     service_role: "ServiceRole",
     #     log_config: {
@@ -5808,6 +5876,11 @@ module Aws::SecurityAgent
     #   resp.assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.assets.client_certificates #=> Array
+    #   resp.assets.client_certificates[0].name #=> String
+    #   resp.assets.client_certificates[0].secret_arn #=> String
+    #   resp.assets.client_certificates[0].origins #=> Array
+    #   resp.assets.client_certificates[0].origins[0] #=> String
     #   resp.service_role #=> String
     #   resp.log_config.log_group #=> String
     #   resp.log_config.log_stream #=> String
@@ -6209,6 +6282,13 @@ module Aws::SecurityAgent
     #           },
     #         },
     #       ],
+    #       client_certificates: [
+    #         {
+    #           name: "ClientCertificateName", # required
+    #           secret_arn: "String", # required
+    #           origins: ["String"], # required
+    #         },
+    #       ],
     #     },
     #     exclude_risk_types: ["CROSS_SITE_SCRIPTING"], # accepts CROSS_SITE_SCRIPTING, DEFAULT_CREDENTIALS, INSECURE_DIRECT_OBJECT_REFERENCE, PRIVILEGE_ESCALATION, SERVER_SIDE_TEMPLATE_INJECTION, COMMAND_INJECTION, CODE_INJECTION, SQL_INJECTION, ARBITRARY_FILE_UPLOAD, INSECURE_DESERIALIZATION, LOCAL_FILE_INCLUSION, INFORMATION_DISCLOSURE, PATH_TRAVERSAL, SERVER_SIDE_REQUEST_FORGERY, JSON_WEB_TOKEN_VULNERABILITIES, XML_EXTERNAL_ENTITY, FILE_DELETION, OTHER, GRAPHQL_VULNERABILITIES, BUSINESS_LOGIC_VULNERABILITIES, CRYPTOGRAPHIC_VULNERABILITIES, DENIAL_OF_SERVICE, FILE_ACCESS, FILE_CREATION, DATABASE_MODIFICATION, DATABASE_ACCESS, OUTBOUND_SERVICE_REQUEST, UNKNOWN
     #     service_role: "ServiceRole",
@@ -6295,6 +6375,11 @@ module Aws::SecurityAgent
     #   resp.assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.assets.client_certificates #=> Array
+    #   resp.assets.client_certificates[0].name #=> String
+    #   resp.assets.client_certificates[0].secret_arn #=> String
+    #   resp.assets.client_certificates[0].origins #=> Array
+    #   resp.assets.client_certificates[0].origins[0] #=> String
     #   resp.exclude_risk_types #=> Array
     #   resp.exclude_risk_types[0] #=> String, one of "CROSS_SITE_SCRIPTING", "DEFAULT_CREDENTIALS", "INSECURE_DIRECT_OBJECT_REFERENCE", "PRIVILEGE_ESCALATION", "SERVER_SIDE_TEMPLATE_INJECTION", "COMMAND_INJECTION", "CODE_INJECTION", "SQL_INJECTION", "ARBITRARY_FILE_UPLOAD", "INSECURE_DESERIALIZATION", "LOCAL_FILE_INCLUSION", "INFORMATION_DISCLOSURE", "PATH_TRAVERSAL", "SERVER_SIDE_REQUEST_FORGERY", "JSON_WEB_TOKEN_VULNERABILITIES", "XML_EXTERNAL_ENTITY", "FILE_DELETION", "OTHER", "GRAPHQL_VULNERABILITIES", "BUSINESS_LOGIC_VULNERABILITIES", "CRYPTOGRAPHIC_VULNERABILITIES", "DENIAL_OF_SERVICE", "FILE_ACCESS", "FILE_CREATION", "DATABASE_MODIFICATION", "DATABASE_ACCESS", "OUTBOUND_SERVICE_REQUEST", "UNKNOWN"
     #   resp.service_role #=> String
@@ -6730,6 +6815,13 @@ module Aws::SecurityAgent
     #           },
     #         },
     #       ],
+    #       client_certificates: [
+    #         {
+    #           name: "ClientCertificateName", # required
+    #           secret_arn: "String", # required
+    #           origins: ["String"], # required
+    #         },
+    #       ],
     #     },
     #     scope_docs: [
     #       {
@@ -6786,6 +6878,11 @@ module Aws::SecurityAgent
     #   resp.assets.trusted_ca_certificates[0].source.inline_pem #=> String
     #   resp.assets.trusted_ca_certificates[0].source.artifact_id #=> String
     #   resp.assets.trusted_ca_certificates[0].source.s3_location #=> String
+    #   resp.assets.client_certificates #=> Array
+    #   resp.assets.client_certificates[0].name #=> String
+    #   resp.assets.client_certificates[0].secret_arn #=> String
+    #   resp.assets.client_certificates[0].origins #=> Array
+    #   resp.assets.client_certificates[0].origins[0] #=> String
     #   resp.scope_docs #=> Array
     #   resp.scope_docs[0].s3_location #=> String
     #   resp.scope_docs[0].artifact_id #=> String
@@ -6869,7 +6966,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.26.0'
+      context[:gem_version] = '1.27.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

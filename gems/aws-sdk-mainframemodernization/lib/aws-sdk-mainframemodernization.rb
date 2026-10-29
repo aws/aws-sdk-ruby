@@ -54,7 +54,7 @@ module Aws::MainframeModernization
   autoload :EndpointProvider, 'aws-sdk-mainframemodernization/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-mainframemodernization/endpoints'
 
-  GEM_VERSION = '1.59.0'
+  GEM_VERSION = '1.60.0'
 
 end
 

@@ -128,6 +128,10 @@ module Aws::SecurityAgent
     CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
     CiCdConfiguration = Shapes::StructureShape.new(name: 'CiCdConfiguration')
     CleanUpStrategy = Shapes::StringShape.new(name: 'CleanUpStrategy')
+    ClientCertificate = Shapes::StructureShape.new(name: 'ClientCertificate')
+    ClientCertificateList = Shapes::ListShape.new(name: 'ClientCertificateList')
+    ClientCertificateName = Shapes::StringShape.new(name: 'ClientCertificateName')
+    ClientCertificateOriginList = Shapes::ListShape.new(name: 'ClientCertificateOriginList')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     CloudWatchLog = Shapes::StructureShape.new(name: 'CloudWatchLog')
@@ -681,6 +685,7 @@ module Aws::SecurityAgent
     Assets.add_member(:source_code, Shapes::ShapeRef.new(shape: SourceCodeRepositoryList, location_name: "sourceCode"))
     Assets.add_member(:integrated_repositories, Shapes::ShapeRef.new(shape: IntegratedRepositoryList, location_name: "integratedRepositories"))
     Assets.add_member(:trusted_ca_certificates, Shapes::ShapeRef.new(shape: TrustedCaCertificateList, location_name: "trustedCaCertificates"))
+    Assets.add_member(:client_certificates, Shapes::ShapeRef.new(shape: ClientCertificateList, location_name: "clientCertificates"))
     Assets.struct_class = Types::Assets
 
     Authentication.add_member(:provider_type, Shapes::ShapeRef.new(shape: AuthenticationProviderType, location_name: "providerType"))
@@ -990,6 +995,15 @@ module Aws::SecurityAgent
 
     CiCdConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
     CiCdConfiguration.struct_class = Types::CiCdConfiguration
+
+    ClientCertificate.add_member(:name, Shapes::ShapeRef.new(shape: ClientCertificateName, required: true, location_name: "name"))
+    ClientCertificate.add_member(:secret_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "secretArn"))
+    ClientCertificate.add_member(:origins, Shapes::ShapeRef.new(shape: ClientCertificateOriginList, required: true, location_name: "origins"))
+    ClientCertificate.struct_class = Types::ClientCertificate
+
+    ClientCertificateList.member = Shapes::ShapeRef.new(shape: ClientCertificate)
+
+    ClientCertificateOriginList.member = Shapes::ShapeRef.new(shape: String)
 
     CloudWatchLog.add_member(:log_group, Shapes::ShapeRef.new(shape: String, location_name: "logGroup"))
     CloudWatchLog.add_member(:log_stream, Shapes::ShapeRef.new(shape: String, location_name: "logStream"))
@@ -2135,6 +2149,7 @@ module Aws::SecurityAgent
     PentestJob.add_member(:error_information, Shapes::ShapeRef.new(shape: ErrorInformation, location_name: "errorInformation"))
     PentestJob.add_member(:integrated_repositories, Shapes::ShapeRef.new(shape: IntegratedRepositoryList, location_name: "integratedRepositories"))
     PentestJob.add_member(:trusted_ca_certificates, Shapes::ShapeRef.new(shape: TrustedCaCertificateList, location_name: "trustedCaCertificates"))
+    PentestJob.add_member(:client_certificates, Shapes::ShapeRef.new(shape: ClientCertificateList, location_name: "clientCertificates"))
     PentestJob.add_member(:code_remediation_strategy, Shapes::ShapeRef.new(shape: CodeRemediationStrategy, location_name: "codeRemediationStrategy"))
     PentestJob.add_member(:clean_up_strategy, Shapes::ShapeRef.new(shape: CleanUpStrategy, location_name: "cleanUpStrategy"))
     PentestJob.add_member(:disable_managed_skills, Shapes::ShapeRef.new(shape: SkillTypeList, location_name: "disableManagedSkills"))

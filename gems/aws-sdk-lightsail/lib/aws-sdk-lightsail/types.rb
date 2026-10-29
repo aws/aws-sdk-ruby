@@ -10462,6 +10462,45 @@ module Aws::Lightsail
       include Aws::Structure
     end
 
+    # Describes the attributes to update on a Lightsail instance when it
+    # starts.
+    #
+    # @!attribute [rw] bundle_id
+    #   The ID of the bundle to update the instance to.
+    #
+    #   Specify one of the following values for the bundle ID:
+    #
+    #   * <b> <code>auto</code> </b> – Updates an instance that runs on a
+    #     previous-generation bundle to the newer-generation equivalent of
+    #     that bundle. For example, specify `auto` to update an instance
+    #     that runs on `small_2_0` to `small_3_0`.
+    #
+    #   * **Newer-generation bundle ID** – Updates an instance that runs on
+    #     a previous-generation bundle to the specified bundle. For example,
+    #     specify `small_3_0` to update an instance that runs on `small_2_0`
+    #     to `small_3_0`.
+    #
+    #   * **Original bundle ID** – Updates an instance to the
+    #     previous-generation bundle that it ran on before an earlier
+    #     update. For example, specify `small_2_0` to return an instance
+    #     that runs on `small_3_0` to `small_2_0`.
+    #
+    #   <note markdown="1"> The instance must be in the `stopped` state to update its bundle.
+    #
+    #    There is no additional cost to update an instance to a
+    #   newer-generation bundle.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/InstanceAttributeUpdates AWS API Documentation
+    #
+    class InstanceAttributeUpdates < Struct.new(
+      :bundle_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the Amazon Elastic Compute Cloud instance and related
     # resources to be created using the `create cloud formation stack`
     # operation.
@@ -14467,10 +14506,16 @@ module Aws::Lightsail
     #   The name of the instance (a virtual private server) to start.
     #   @return [String]
     #
+    # @!attribute [rw] attribute_updates
+    #   An object that describes the attributes to update on the instance
+    #   before it starts.
+    #   @return [Types::InstanceAttributeUpdates]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/StartInstanceRequest AWS API Documentation
     #
     class StartInstanceRequest < Struct.new(
-      :instance_name)
+      :instance_name,
+      :attribute_updates)
       SENSITIVE = []
       include Aws::Structure
     end

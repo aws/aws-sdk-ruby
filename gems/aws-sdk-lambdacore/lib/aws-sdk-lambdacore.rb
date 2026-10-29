@@ -54,7 +54,7 @@ module Aws::LambdaCore
   autoload :EndpointProvider, 'aws-sdk-lambdacore/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-lambdacore/endpoints'
 
-  GEM_VERSION = '1.7.0'
+  GEM_VERSION = '1.8.0'
 
 end
 

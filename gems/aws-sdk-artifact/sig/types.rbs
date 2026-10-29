@@ -36,7 +36,7 @@ module Aws::Artifact
       attr_accessor name: ::String
       attr_accessor inquiry_content: Types::InquiryContent
       attr_accessor client_token: ::String
-      attr_accessor support_mode: ("AI_ONLY" | "FULL_SUPPORT")
+      attr_accessor support_mode: ("AI_ONLY")
       attr_accessor tags: ::Hash[::String, ::String]
       SENSITIVE: [:name, :inquiry_content]
     end
@@ -154,7 +154,7 @@ module Aws::Artifact
       attr_accessor input_source: ("TEXT" | "FILE")
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      attr_accessor support_mode: ("AI_ONLY" | "FULL_SUPPORT")
+      attr_accessor support_mode: ("AI_ONLY")
       SENSITIVE: []
     end
 

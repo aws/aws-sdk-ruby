@@ -23,17 +23,23 @@ module Aws
 
       class VerificationError < StandardError; end
 
+      # Signable fields per message type.
       # @api private
-      SIGNABLE_KEYS = [
-        'Message',
-        'MessageId',
-        'Subject',
-        'SubscribeURL',
-        'Timestamp',
-        'Token',
-        'TopicArn',
-        'Type'
-      ].freeze
+      SIGNABLE_KEYS_BY_TYPE = {
+        'Notification' => %w[Message MessageId Subject Timestamp TopicArn Type].freeze,
+        'SubscriptionConfirmation' =>
+          %w[Message MessageId SubscribeURL Timestamp Token TopicArn Type].freeze,
+        'UnsubscribeConfirmation' =>
+          %w[Message MessageId SubscribeURL Timestamp Token TopicArn Type].freeze
+      }.freeze
+
+      # Metadata fields that must be present as non-empty strings.
+      # @api private
+      REQUIRED_KEYS = %w[MessageId Timestamp TopicArn].freeze
+
+      # Only Message may contain the newline used as the field delimiter.
+      # @api private
+      NEWLINE_SAFE_KEY = 'Message'
 
       # @api private
       AWS_HOSTNAMES = [
@@ -93,6 +99,41 @@ module Aws
         unless msg['Signature'].is_a?(String) && msg['SigningCertURL'].is_a?(String)
           raise VerificationError, 'the Signature and SigningCertURL must be strings'
         end
+
+        verify_signable_fields!(msg)
+      end
+
+      def verify_signable_fields!(msg)
+        keys = SIGNABLE_KEYS_BY_TYPE[msg['Type']]
+        unless keys
+          raise VerificationError, 'the message Type is not supported'
+        end
+
+        verify_required_keys!(msg)
+        verify_field_values!(msg, keys)
+      end
+
+      def verify_required_keys!(msg)
+        REQUIRED_KEYS.each do |key|
+          value = msg[key]
+          next if value.is_a?(String) && !value.empty?
+
+          raise VerificationError, "the #{key} must be a non-empty string"
+        end
+      end
+
+      def verify_field_values!(msg, keys)
+        keys.each do |key|
+          value = msg[key]
+          next if value.nil?
+
+          unless value.is_a?(String)
+            raise VerificationError, "the #{key} must be a string"
+          end
+          if key != NEWLINE_SAFE_KEY && value.include?("\n")
+            raise VerificationError, "the #{key} must not contain newlines"
+          end
+        end
       end
 
       def is_from_lambda(message)
@@ -130,14 +171,10 @@ module Aws
       end
 
       def canonical_string(message)
-        parts = []
-        SIGNABLE_KEYS.each do |key|
+        SIGNABLE_KEYS_BY_TYPE.fetch(message['Type']).filter_map do |key|
           value = message[key]
-          unless value.nil? or value.empty?
-            parts << "#{key}\n#{value}\n"
-          end
-        end
-        parts.join
+          "#{key}\n#{value}\n" unless value.nil? || value.empty?
+        end.join
       end
 
       def public_key(message)

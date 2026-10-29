@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.47.0 (2026-10-28)
+------------------
+
+* Feature - Update support mode for Assurance Assistance
+
 1.46.0 (2026-10-21)
 ------------------
 

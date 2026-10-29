@@ -317,7 +317,8 @@ module Aws
                                     s3_destination: {
                                       bucket_name: ::String,
                                       key_prefix: ::String?,
-                                      kms_key_arn: ::String
+                                      kms_key_arn: ::String,
+                                      expected_bucket_owner: ::String?
                                     }
                                   ) -> _CreateFindingsReportResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFindingsReportResponseSuccess
@@ -452,7 +453,8 @@ module Aws
                                 s3_destination: {
                                   bucket_name: ::String,
                                   key_prefix: ::String?,
-                                  kms_key_arn: ::String
+                                  kms_key_arn: ::String,
+                                  expected_bucket_owner: ::String?
                                 }
                               ) -> _CreateSbomExportResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSbomExportResponseSuccess
@@ -709,6 +711,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::GetConfigurationResponse]
         def ecr_configuration: () -> Types::EcrConfigurationState
         def ec2_configuration: () -> Types::Ec2ConfigurationState
+        def ami_configuration: () -> Types::AmiConfigurationState
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_configuration-instance_method
       def get_configuration: (
@@ -744,7 +747,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_encryption_key-instance_method
       def get_encryption_key: (
                                 scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+                                resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
                               ) -> _GetEncryptionKeyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEncryptionKeyResponseSuccess
 
@@ -772,6 +775,24 @@ module Aws
                         account_id: ::String
                       ) -> _GetMemberResponseSuccess
                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetMemberResponseSuccess
+
+      interface _GetOnDemandScanStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetOnDemandScanStatusResponse]
+        def scan_id: () -> ::String
+        def resource_id: () -> ::String
+        def resource_type: () -> ("AMI")
+        def scan_status: () -> ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
+        def scan_status_reason: () -> ("ACCESS_DENIED" | "INTERNAL_ERROR" | "STORAGE_LIMIT_EXCEEDED" | "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "UNSUPPORTED_OS" | "RESOURCE_TERMINATED")
+        def started_at: () -> ::Time
+        def completed_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#get_on_demand_scan_status-instance_method
+      def get_on_demand_scan_status: (
+                                       resource_id: ::String,
+                                       scan_id: ::String,
+                                       resource_type: ("AMI")
+                                     ) -> _GetOnDemandScanStatusResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetOnDemandScanStatusResponseSuccess
 
       interface _GetSbomExportResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetSbomExportResponse]
@@ -1219,7 +1240,8 @@ module Aws
                                              }
                                            ]?,
                                            sort_order: ("ASC" | "DESC")?,
-                                           sort_by: ("CRITICAL" | "HIGH" | "ALL" | "AFFECTED_INSTANCES")?
+                                           sort_by: ("CRITICAL" | "HIGH" | "ALL" | "AFFECTED_INSTANCES")?,
+                                           scan_sources: Array[("INSTANCE_SCAN" | "MACHINE_IMAGE_SCAN")]?
                                          }?,
                                          aws_ecr_container_aggregation: {
                                            resource_ids: Array[
@@ -1699,6 +1721,20 @@ module Aws
                         ) -> _ListMembersResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListMembersResponseSuccess
 
+      interface _ListOnDemandScansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListOnDemandScansResponse]
+        def items: () -> ::Array[Types::OnDemandScan]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#list_on_demand_scans-instance_method
+      def list_on_demand_scans: (
+                                  resource_id: ::String,
+                                  resource_type: ("AMI"),
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListOnDemandScansResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListOnDemandScansResponseSuccess
+
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
         def tags: () -> ::Hash[::String, ::String]
@@ -1728,7 +1764,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#reset_encryption_key-instance_method
       def reset_encryption_key: (
                                   scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+                                  resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
                                 ) -> _ResetEncryptionKeyResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetEncryptionKeyResponseSuccess
 
@@ -1798,6 +1834,18 @@ module Aws
                                       }
                                     ) -> _StartCodeSecurityScanResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartCodeSecurityScanResponseSuccess
+
+      interface _StartOnDemandScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartOnDemandScanResponse]
+        def scan_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Inspector2/Client.html#start_on_demand_scan-instance_method
+      def start_on_demand_scan: (
+                                  resource_id: ::String,
+                                  resource_type: ("AMI"),
+                                  ?client_token: ::String
+                                ) -> _StartOnDemandScanResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartOnDemandScanResponseSuccess
 
       interface _StopCisSessionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopCisSessionResponse]
@@ -1913,9 +1961,25 @@ module Aws
                                     scan_mode: ("EC2_SSM_AGENT_BASED" | "EC2_HYBRID"),
                                     activate_vm_scanner: bool?
                                   },
+                                  ?ami_configuration: {
+                                    last_launched_within: ("DAYS_180" | "DAYS_90" | "DAYS_60" | "DAYS_30" | "DAYS_14" | "DAYS_7")?,
+                                    created_within: ("DAYS_180" | "DAYS_90" | "DAYS_60" | "DAYS_30" | "DAYS_14" | "DAYS_7")?,
+                                    scan_mode_configuration: {
+                                      scan_mode: ("SCAN_ALL" | "TARGET_SCANNING"),
+                                      tags: Array[
+                                        {
+                                          key: ::String,
+                                          value: ::String?
+                                        }
+                                      ]?,
+                                      exclude_copied_amis: bool?,
+                                      exclude_backup_dlm_amis: bool?
+                                    }
+                                  },
                                   ?update_configuration_inheritance: {
                                     ec2_configuration: ("INHERIT_FROM_ADMIN")?,
-                                    ecr_configuration: ("INHERIT_FROM_ADMIN")?
+                                    ecr_configuration: ("INHERIT_FROM_ADMIN")?,
+                                    ami_configuration: ("INHERIT_FROM_ADMIN")?
                                   }
                                 ) -> _UpdateConfigurationResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConfigurationResponseSuccess
@@ -1974,7 +2038,7 @@ module Aws
       def update_encryption_key: (
                                    kms_key_id: ::String,
                                    scan_type: ("NETWORK" | "PACKAGE" | "CODE"),
-                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+                                   resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
                                  ) -> _UpdateEncryptionKeyResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEncryptionKeyResponseSuccess
 
@@ -2013,7 +2077,8 @@ module Aws
                                                  ecr: bool,
                                                  lambda: bool?,
                                                  lambda_code: bool?,
-                                                 code_repository: bool?
+                                                 code_repository: bool?,
+                                                 ami: bool?
                                                }
                                              ) -> _UpdateOrganizationConfigurationResponseSuccess
                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOrganizationConfigurationResponseSuccess

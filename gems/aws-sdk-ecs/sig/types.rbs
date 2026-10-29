@@ -241,6 +241,7 @@ module Aws::ECS
       attr_accessor memory_reservation: ::String
       attr_accessor gpu_ids: ::Array[::String]
       attr_accessor neuron_device_ids: ::Array[::String]
+      attr_accessor gpu_sharing_strategy: Types::SharingStrategy
       SENSITIVE: []
     end
 
@@ -322,6 +323,7 @@ module Aws::ECS
       attr_accessor attachments: ::Array[Types::Attachment]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor health_status: Types::ContainerInstanceHealthStatus
+      attr_accessor gpu_devices: ::Array[Types::GpuDevice]
       SENSITIVE: []
     end
 
@@ -1704,6 +1706,15 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class GpuDevice
+      attr_accessor gpu_id: ::String
+      attr_accessor sharing_mode: ("IDLE" | "NVIDIA_MPS" | "DEDICATED")
+      attr_accessor total_memory_in_mi_b: ::Integer
+      attr_accessor remaining_memory_in_mi_b: ::Integer
+      attr_accessor container_count: ::Integer
+      SENSITIVE: []
+    end
+
     class HealthCheck
       attr_accessor command: ::Array[::String]
       attr_accessor interval: ::Integer
@@ -2379,6 +2390,12 @@ module Aws::ECS
       SENSITIVE: []
     end
 
+    class NvidiaMpsAllocation
+      attr_accessor memory: ::Integer
+      attr_accessor max_compute_percent: ::Integer
+      SENSITIVE: []
+    end
+
     class PlacementConstraint
       attr_accessor type: ("distinctInstance" | "memberOf")
       attr_accessor expression: ::String
@@ -2576,6 +2593,7 @@ module Aws::ECS
     class ResourceRequirement
       attr_accessor value: ::String
       attr_accessor type: ("GPU" | "InferenceAccelerator" | "NeuronDevice")
+      attr_accessor sharing_strategy: Types::SharingStrategy
       SENSITIVE: []
     end
 
@@ -2943,6 +2961,17 @@ module Aws::ECS
       attr_accessor principal_arn: ::String
       attr_accessor type: ("user" | "aws_managed")
       SENSITIVE: []
+    end
+
+    class SharingStrategy
+      attr_accessor nvidia_mps: Types::NvidiaMpsAllocation
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class NvidiaMps < SharingStrategy
+      end
+      class Unknown < SharingStrategy
+      end
     end
 
     class StartTaskRequest

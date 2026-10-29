@@ -20938,11 +20938,23 @@ module Aws::MediaLive
     #   pulled from.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_source_ip
+    #   This represents the ip address of the device sending the secondary
+    #   multicast stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_url
+    #   This represents the customer's secondary source URL where the
+    #   redundant multicast stream (SMPTE 2022-7) is pulled from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSource AWS API Documentation
     #
     class MulticastSource < Struct.new(
       :source_ip,
-      :url)
+      :url,
+      :secondary_source_ip,
+      :secondary_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20958,13 +20970,25 @@ module Aws::MediaLive
     # @!attribute [rw] url
     #   This represents the customer's source URL where multicast stream is
     #   pulled from.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_source_ip
+    #   This represents the ip address of the device sending the secondary
+    #   multicast stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_url
+    #   This represents the customer's secondary source URL where the
+    #   redundant multicast stream (SMPTE 2022-7) is pulled from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSourceCreateRequest AWS API Documentation
     #
     class MulticastSourceCreateRequest < Struct.new(
       :source_ip,
-      :url)
+      :url,
+      :secondary_source_ip,
+      :secondary_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20982,11 +21006,23 @@ module Aws::MediaLive
     #   pulled from.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_source_ip
+    #   This represents the ip address of the device sending the secondary
+    #   multicast stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_url
+    #   This represents the customer's secondary source URL where the
+    #   redundant multicast stream (SMPTE 2022-7) is pulled from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSourceUpdateRequest AWS API Documentation
     #
     class MulticastSourceUpdateRequest < Struct.new(
       :source_ip,
-      :url)
+      :url,
+      :secondary_source_ip,
+      :secondary_url)
       SENSITIVE = []
       include Aws::Structure
     end

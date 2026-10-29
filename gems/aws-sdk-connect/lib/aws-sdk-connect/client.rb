@@ -5549,6 +5549,9 @@ module Aws::Connect
     #   The ContactFlowId for the flow that will be run if this template is
     #   used to create a self-assigned task.
     #
+    # @option params [Types::TaskTemplateContactHooks] :contact_hooks
+    #   The event hooks that are set on tasks created by using this template.
+    #
     # @option params [Types::TaskTemplateConstraints] :constraints
     #   Constraints that are applicable to the fields listed. Although this
     #   parameter is marked as optional in the API model, the service requires
@@ -5599,6 +5602,9 @@ module Aws::Connect
     #     description: "TaskTemplateDescription",
     #     contact_flow_id: "ContactFlowId",
     #     self_assign_flow_id: "ContactFlowId",
+    #     contact_hooks: {
+    #       wrap_up_flow_id: "ContactFlowModuleId",
+    #     },
     #     constraints: {
     #       required_fields: [
     #         {
@@ -15769,6 +15775,7 @@ module Aws::Connect
     #   * {Types::GetTaskTemplateResponse#description #description} => String
     #   * {Types::GetTaskTemplateResponse#contact_flow_id #contact_flow_id} => String
     #   * {Types::GetTaskTemplateResponse#self_assign_flow_id #self_assign_flow_id} => String
+    #   * {Types::GetTaskTemplateResponse#contact_hooks #contact_hooks} => Types::TaskTemplateContactHooks
     #   * {Types::GetTaskTemplateResponse#constraints #constraints} => Types::TaskTemplateConstraints
     #   * {Types::GetTaskTemplateResponse#defaults #defaults} => Types::TaskTemplateDefaults
     #   * {Types::GetTaskTemplateResponse#fields #fields} => Array&lt;Types::TaskTemplateField&gt;
@@ -15794,6 +15801,7 @@ module Aws::Connect
     #   resp.description #=> String
     #   resp.contact_flow_id #=> String
     #   resp.self_assign_flow_id #=> String
+    #   resp.contact_hooks.wrap_up_flow_id #=> String
     #   resp.constraints.required_fields #=> Array
     #   resp.constraints.required_fields[0].id.name #=> String
     #   resp.constraints.read_only_fields #=> Array
@@ -31252,6 +31260,9 @@ module Aws::Connect
     #   The ContactFlowId for the flow that will be run if this template is
     #   used to create a self-assigned task.
     #
+    # @option params [Types::TaskTemplateContactHooks] :contact_hooks
+    #   The event hooks that are set on tasks created by using this template.
+    #
     # @option params [Types::TaskTemplateConstraints] :constraints
     #   Constraints that are applicable to the fields listed. Although this
     #   parameter is marked as optional in the API model, the service requires
@@ -31288,6 +31299,7 @@ module Aws::Connect
     #   * {Types::UpdateTaskTemplateResponse#description #description} => String
     #   * {Types::UpdateTaskTemplateResponse#contact_flow_id #contact_flow_id} => String
     #   * {Types::UpdateTaskTemplateResponse#self_assign_flow_id #self_assign_flow_id} => String
+    #   * {Types::UpdateTaskTemplateResponse#contact_hooks #contact_hooks} => Types::TaskTemplateContactHooks
     #   * {Types::UpdateTaskTemplateResponse#constraints #constraints} => Types::TaskTemplateConstraints
     #   * {Types::UpdateTaskTemplateResponse#defaults #defaults} => Types::TaskTemplateDefaults
     #   * {Types::UpdateTaskTemplateResponse#fields #fields} => Array&lt;Types::TaskTemplateField&gt;
@@ -31304,6 +31316,9 @@ module Aws::Connect
     #     description: "TaskTemplateDescription",
     #     contact_flow_id: "ContactFlowId",
     #     self_assign_flow_id: "ContactFlowId",
+    #     contact_hooks: {
+    #       wrap_up_flow_id: "ContactFlowModuleId",
+    #     },
     #     constraints: {
     #       required_fields: [
     #         {
@@ -31359,6 +31374,7 @@ module Aws::Connect
     #   resp.description #=> String
     #   resp.contact_flow_id #=> String
     #   resp.self_assign_flow_id #=> String
+    #   resp.contact_hooks.wrap_up_flow_id #=> String
     #   resp.constraints.required_fields #=> Array
     #   resp.constraints.required_fields[0].id.name #=> String
     #   resp.constraints.read_only_fields #=> Array
@@ -32415,7 +32431,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.290.0'
+      context[:gem_version] = '1.291.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
