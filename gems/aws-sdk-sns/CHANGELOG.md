@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Reject carriage returns in signed fields other than `Message` in `Aws::SNS::MessageVerifier`.
+
 1.125.0 (2026-10-28)
 ------------------
 
