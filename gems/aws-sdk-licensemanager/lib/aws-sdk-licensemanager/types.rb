@@ -453,6 +453,24 @@ module Aws::LicenseManager
     #   [1]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] grant_type
+    #   The type of grant to create. For more information about each type,
+    #   see the preceding description of this operation. Valid values:
+    #
+    #   * `BuyerGrant` - The default grant type if you don't specify a
+    #     value. Conveys the entitlement to use the license.
+    #
+    #   * `DelegateGrant` - Gives the grantee read-only visibility into the
+    #     licenses and grants that you have distributed to buyers, with no
+    #     entitlement to use them.
+    #   @return [String]
+    #
+    # @!attribute [rw] options
+    #   The options for the grant: the status to set after creation, and how
+    #   activating the grant affects other active grants for the same
+    #   product.
+    #   @return [Types::Options]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/CreateGrantRequest AWS API Documentation
     #
     class CreateGrantRequest < Struct.new(
@@ -462,7 +480,9 @@ module Aws::LicenseManager
       :principals,
       :home_region,
       :allowed_operations,
-      :tags)
+      :tags,
+      :grant_type,
+      :options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1987,6 +2007,16 @@ module Aws::LicenseManager
     #   The options specified for the grant.
     #   @return [Types::Options]
     #
+    # @!attribute [rw] grant_type
+    #   The type of the grant. Valid values:
+    #
+    #   * `BuyerGrant` - Grants the entitlement to use the license.
+    #
+    #   * `DelegateGrant` - Gives the grantee read-only visibility into the
+    #     licenses and grants distributed to buyers, with no entitlement to
+    #     use them.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Grant AWS API Documentation
     #
     class Grant < Struct.new(
@@ -2000,7 +2030,8 @@ module Aws::LicenseManager
       :status_reason,
       :version,
       :granted_operations,
-      :options)
+      :options,
+      :grant_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3942,10 +3973,10 @@ module Aws::LicenseManager
       include Aws::Structure
     end
 
-    # The options you can specify when you create a new version of a grant,
-    # such as activation override behavior. For more information, see
-    # [Granted licenses in License Manager][1] in the *License Manager User
-    # Guide*.
+    # The options you can specify when you create a grant or a new version
+    # of a grant, such as activation override behavior. For more
+    # information, see [Granted licenses in License Manager][1] in the
+    # *License Manager User Guide*.
     #
     #
     #
@@ -3955,8 +3986,10 @@ module Aws::LicenseManager
     #   An activation option for your grant that determines the behavior of
     #   activating a grant. Activation options can only be used with granted
     #   licenses sourced from the Amazon Web Services Marketplace.
-    #   Additionally, the operation must specify the value of `ACTIVE` for
-    #   the `Status` parameter.
+    #   Additionally, the operation must activate the grant. For the
+    #   `CreateGrantVersion` operation, specify `ACTIVE` for the `Status`
+    #   parameter. For the `CreateGrant` operation, specify `ACTIVE` for the
+    #   `DesiredStatus` option.
     #
     #   * As a license administrator, you can optionally specify an
     #     `ActivationOverrideBehavior` when activating a grant.
@@ -3982,10 +4015,22 @@ module Aws::LicenseManager
     #     grant.
     #   @return [String]
     #
+    # @!attribute [rw] desired_status
+    #   The status of the grant after License Manager creates it. The only
+    #   supported value is `ACTIVE`. Specify `ACTIVE` to create and activate
+    #   the grant in one request.
+    #
+    #   You can specify this option only for the `CreateGrant` operation,
+    #   and only when the grant principal is an organization or an
+    #   organizational unit (OU). To change the status of an existing grant,
+    #   use the `Status` parameter of the `CreateGrantVersion` operation.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/Options AWS API Documentation
     #
     class Options < Struct.new(
-      :activation_override_behavior)
+      :activation_override_behavior,
+      :desired_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4179,12 +4224,23 @@ module Aws::LicenseManager
     #   Allowed operations.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] grant_type
+    #   The type of the grant through which the license was received. Valid
+    #   values:
+    #
+    #   * `BuyerGrant` - Grants you the entitlement to use the license.
+    #
+    #   * `DelegateGrant` - Gives you read-only visibility into the licenses
+    #     and grants distributed to buyers, with no entitlement to use them.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ReceivedMetadata AWS API Documentation
     #
     class ReceivedMetadata < Struct.new(
       :received_status,
       :received_status_reason,
-      :allowed_operations)
+      :allowed_operations,
+      :grant_type)
       SENSITIVE = []
       include Aws::Structure
     end

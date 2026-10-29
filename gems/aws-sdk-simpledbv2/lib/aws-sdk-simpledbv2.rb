@@ -55,7 +55,7 @@ module Aws::SimpleDBv2
   autoload :EndpointProvider, 'aws-sdk-simpledbv2/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-simpledbv2/endpoints'
 
-  GEM_VERSION = '1.10.0'
+  GEM_VERSION = '1.11.0'
 
 end
 

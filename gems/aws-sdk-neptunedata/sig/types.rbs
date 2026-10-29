@@ -39,6 +39,18 @@ module Aws::Neptunedata
       SENSITIVE: []
     end
 
+    class CancelIndexRebuildInput
+      attr_accessor rebuild_id: ::String
+      SENSITIVE: []
+    end
+
+    class CancelIndexRebuildOutput
+      attr_accessor status: ("PREPARING" | "REBUILDING" | "COMPLETED" | "FAILED" | "CANCELLED" | "CANCELLING")
+      attr_accessor concurrency: ::Integer
+      attr_accessor write_buffer_size: ("LOW" | "MEDIUM" | "HIGH")
+      SENSITIVE: []
+    end
+
     class CancelLoaderJobInput
       attr_accessor load_id: ::String
       SENSITIVE: []
@@ -94,6 +106,13 @@ module Aws::Neptunedata
     class CancelOpenCypherQueryOutput
       attr_accessor status: ::String
       attr_accessor payload: bool
+      SENSITIVE: []
+    end
+
+    class CancelledByMaintenanceException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
       SENSITIVE: []
     end
 
@@ -187,6 +206,12 @@ module Aws::Neptunedata
     class DeleteStatisticsValueMap
       attr_accessor active: bool
       attr_accessor statistics_id: ::String
+      SENSITIVE: []
+    end
+
+    class DictionariesInfo
+      attr_accessor total: Types::StorageMetrics
+      attr_accessor blobs: Types::StorageMetrics
       SENSITIVE: []
     end
 
@@ -314,6 +339,24 @@ module Aws::Neptunedata
       attr_accessor query_id: ::String
       attr_accessor query_string: ::String
       attr_accessor query_eval_stats: Types::QueryEvalStats
+      SENSITIVE: []
+    end
+
+    class GetIndexRebuildStatusInput
+      attr_accessor rebuild_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIndexRebuildStatusOutput
+      attr_accessor status: ("PREPARING" | "REBUILDING" | "COMPLETED" | "FAILED" | "CANCELLED" | "CANCELLING")
+      attr_accessor scope: ("ALL" | "QUADS" | "DICTIONARIES")
+      attr_accessor concurrency: ::Integer
+      attr_accessor write_buffer_size: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor start_time: ::Time
+      attr_accessor progress_percentage: ::Integer
+      attr_accessor estimated_end_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor failure_reason: ::String
       SENSITIVE: []
     end
 
@@ -472,6 +515,18 @@ module Aws::Neptunedata
       SENSITIVE: []
     end
 
+    class GetStorageOutput
+      attr_accessor total_storage_bytes_used: ::Integer
+      attr_accessor quads: Types::QuadsIndexesInfo
+      attr_accessor dictionaries: Types::DictionariesInfo
+      attr_accessor undo_logs: Types::UndoLogsMetrics
+      attr_accessor streams: Types::StorageMetrics
+      attr_accessor dfe_statistics: Types::StorageMetrics
+      attr_accessor schema: Types::StorageMetrics
+      attr_accessor internals: Types::StorageMetrics
+      SENSITIVE: []
+    end
+
     class GremlinQueryStatus
       attr_accessor query_id: ::String
       attr_accessor query_string: ::String
@@ -530,6 +585,11 @@ module Aws::Neptunedata
       attr_accessor accepted_query_count: ::Integer
       attr_accessor running_query_count: ::Integer
       attr_accessor queries: ::Array[Types::GremlinQueryStatus]
+      SENSITIVE: []
+    end
+
+    class ListIndexRebuildsOutput
+      attr_accessor rebuild_ids: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -751,6 +811,21 @@ module Aws::Neptunedata
       SENSITIVE: []
     end
 
+    class QuadsIndexesInfo
+      attr_accessor rdf: Types::QuadsInfo
+      attr_accessor pg: Types::QuadsInfo
+      SENSITIVE: []
+    end
+
+    class QuadsInfo
+      attr_accessor spog: Types::StorageMetrics
+      attr_accessor pogs: Types::StorageMetrics
+      attr_accessor gpso: Types::StorageMetrics
+      attr_accessor osgp: Types::StorageMetrics
+      attr_accessor pzsog: Types::StorageMetrics
+      SENSITIVE: []
+    end
+
     class QueryEvalStats
       attr_accessor waited: ::Integer
       attr_accessor elapsed: ::Integer
@@ -815,6 +890,13 @@ module Aws::Neptunedata
       SENSITIVE: []
     end
 
+    class ResourceNotFoundException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
     class S3Exception
       attr_accessor detailed_message: ::String
       attr_accessor request_id: ::String
@@ -840,6 +922,23 @@ module Aws::Neptunedata
       attr_accessor data: Types::SparqlData
       attr_accessor op: ::String
       attr_accessor is_last_op: bool
+      SENSITIVE: []
+    end
+
+    class StartIndexRebuildInput
+      attr_accessor scope: ("ALL" | "QUADS" | "DICTIONARIES")
+      attr_accessor concurrency: ::Integer
+      attr_accessor write_buffer_size: ("LOW" | "MEDIUM" | "HIGH")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartIndexRebuildOutput
+      attr_accessor status: ("PREPARING" | "REBUILDING" | "COMPLETED" | "FAILED" | "CANCELLED" | "CANCELLING")
+      attr_accessor rebuild_id: ::String
+      attr_accessor scope: ("ALL" | "QUADS" | "DICTIONARIES")
+      attr_accessor concurrency: ::Integer
+      attr_accessor write_buffer_size: ("LOW" | "MEDIUM" | "HIGH")
       SENSITIVE: []
     end
 
@@ -970,6 +1069,12 @@ module Aws::Neptunedata
       SENSITIVE: []
     end
 
+    class StorageMetrics
+      attr_accessor size_in_bytes: ::Integer
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
     class StreamRecordsNotFoundException
       attr_accessor detailed_message: ::String
       attr_accessor request_id: ::String
@@ -1004,7 +1109,20 @@ module Aws::Neptunedata
       SENSITIVE: []
     end
 
+    class UndoLogsMetrics
+      attr_accessor size_in_bytes: ::Integer
+      attr_accessor list_size: ::Integer
+      SENSITIVE: []
+    end
+
     class UnsupportedOperationException
+      attr_accessor detailed_message: ::String
+      attr_accessor request_id: ::String
+      attr_accessor code: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
       attr_accessor detailed_message: ::String
       attr_accessor request_id: ::String
       attr_accessor code: ::String

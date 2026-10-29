@@ -1163,6 +1163,9 @@ module Aws
                                   ?description: ::String,
                                   ?contact_flow_id: ::String,
                                   ?self_assign_flow_id: ::String,
+                                  ?contact_hooks: {
+                                    wrap_up_flow_id: ::String?
+                                  },
                                   ?constraints: Params::task_template_constraints,
                                   ?defaults: Params::task_template_defaults,
                                   ?status: ("ACTIVE" | "INACTIVE"),
@@ -2690,6 +2693,7 @@ module Aws
         def description: () -> ::String
         def contact_flow_id: () -> ::String
         def self_assign_flow_id: () -> ::String
+        def contact_hooks: () -> Types::TaskTemplateContactHooks
         def constraints: () -> Types::TaskTemplateConstraints
         def defaults: () -> Types::TaskTemplateDefaults
         def fields: () -> ::Array[Types::TaskTemplateField]
@@ -6028,6 +6032,7 @@ module Aws
         def description: () -> ::String
         def contact_flow_id: () -> ::String
         def self_assign_flow_id: () -> ::String
+        def contact_hooks: () -> Types::TaskTemplateContactHooks
         def constraints: () -> Types::TaskTemplateConstraints
         def defaults: () -> Types::TaskTemplateDefaults
         def fields: () -> ::Array[Types::TaskTemplateField]
@@ -6043,6 +6048,9 @@ module Aws
                                   ?description: ::String,
                                   ?contact_flow_id: ::String,
                                   ?self_assign_flow_id: ::String,
+                                  ?contact_hooks: {
+                                    wrap_up_flow_id: ::String?
+                                  },
                                   ?constraints: Params::task_template_constraints,
                                   ?defaults: Params::task_template_defaults,
                                   ?status: ("ACTIVE" | "INACTIVE"),

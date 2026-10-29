@@ -6513,6 +6513,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The supportability score for a single instance type and Availability
+    # Zone combination.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   How well the combination can support the requested capacity right
+    #   now. `high` means that the combination holds several times the
+    #   requested amount. `medium` means that it can cover the request with
+    #   little to spare. `low` means that it holds less than the requested
+    #   amount.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityManagerSupportabilityScore AWS API Documentation
+    #
+    class CapacityManagerSupportabilityScore < Struct.new(
+      :instance_type,
+      :availability_zone_id,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A key-value pair representing a tag associated with a capacity
     # resource in Capacity Manager.
     #
@@ -7186,6 +7215,18 @@ module Aws::EC2
     #   capacity.
     #   @return [Array<Types::FleetCapacityReservation>]
     #
+    # @!attribute [rw] instance_requirements
+    #   Reserved for internal use.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @!attribute [rw] availability_zone
+    #   Reserved for internal use.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   Reserved for internal use.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the Capacity Reservation Fleet.
     #   @return [Array<Types::Tag>]
@@ -7204,6 +7245,9 @@ module Aws::EC2
       :instance_match_criteria,
       :allocation_strategy,
       :instance_type_specifications,
+      :instance_requirements,
+      :availability_zone,
+      :availability_zone_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -10337,6 +10381,18 @@ module Aws::EC2
     #   capacity.
     #   @return [Array<Types::ReservationFleetInstanceSpecification>]
     #
+    # @!attribute [rw] instance_requirements
+    #   Reserved for internal use.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @!attribute [rw] availability_zone
+    #   Reserved for internal use.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   Reserved for internal use.
+    #   @return [String]
+    #
     # @!attribute [rw] tenancy
     #   Indicates the tenancy of the Capacity Reservation Fleet. All
     #   Capacity Reservations in the Fleet inherit this tenancy. The
@@ -10407,6 +10463,9 @@ module Aws::EC2
       :allocation_strategy,
       :client_token,
       :instance_type_specifications,
+      :instance_requirements,
+      :availability_zone,
+      :availability_zone_id,
       :tenancy,
       :total_target_capacity,
       :end_date,
@@ -27769,6 +27828,50 @@ module Aws::EC2
     #
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
     #     `instance-store`).
+    #
+    #   * `scan-result.critical-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for a `critical` severity finding on the AMI.
+    #
+    #   * `scan-result.finding-scan-date` - The date and time, in the ISO
+    #     8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), of
+    #     the most recent Amazon Inspector scan of the AMI.
+    #
+    #   * `scan-result.high-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for a `high` severity finding on the AMI.
+    #
+    #   * `scan-result.highest-finding-severity-label` - The highest
+    #     severity among the AMI's Amazon Inspector findings, whether or
+    #     not a fix is available. The valid values are the following Amazon
+    #     Inspector severity levels:
+    #
+    #     * `informational` - CVSS score of 0.
+    #
+    #     * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #     * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #     * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #     * `critical` - CVSS score of 9.0 to 10.0.
+    #   * `scan-result.informational-fix-available-since` - The earliest
+    #     date and time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for an `informational` severity finding on the
+    #     AMI.
+    #
+    #   * `scan-result.low-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for a `low` severity finding on the AMI.
+    #
+    #   * `scan-result.medium-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for a `medium` severity finding on the AMI.
     #
     #   * `source-image-id` - The ID of the source AMI from which the AMI
     #     was created.
@@ -46816,6 +46919,84 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] market_type
+    #   The capacity market to score.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_amount
+    #   The amount of capacity that you need, in the unit that you specify
+    #   for `CapacityUnit`. Each score is relative to this amount.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capacity_unit
+    #   The unit for `CapacityAmount`.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_availability_zone_ids
+    #   The IDs of the Availability Zones to score, such as `use1-az1`. You
+    #   can specify Availability Zones in different Regions. You can specify
+    #   up to 10 Availability Zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_types
+    #   The instance types to score. You can specify up to 50 instance
+    #   types.
+    #
+    #   Specify either `InstanceTypes` or
+    #   `InstanceRequirementsWithMetadata`, but not both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_requirements_with_metadata
+    #   The attributes that the instance types must have, such as vCPU and
+    #   memory ranges. Capacity Manager resolves the attributes into
+    #   matching instance types and scores each one.
+    #
+    #   Specify either `InstanceTypes` or
+    #   `InstanceRequirementsWithMetadata`, but not both.
+    #   @return [Types::InstanceRequirementsWithMetadataRequest]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerSupportabilityScoresRequest AWS API Documentation
+    #
+    class GetCapacityManagerSupportabilityScoresRequest < Struct.new(
+      :market_type,
+      :capacity_amount,
+      :capacity_unit,
+      :capacity_availability_zone_ids,
+      :instance_types,
+      :instance_requirements_with_metadata,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregate_score
+    #   The score for all instance type and Availability Zone combinations
+    #   in the request together. A `high` aggregate score with lower
+    #   individual scores means that no single combination can support the
+    #   full request, but the combinations together can.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_manager_supportability_scores
+    #   The score for each instance type and Availability Zone combination
+    #   in the request.
+    #   @return [Array<Types::CapacityManagerSupportabilityScore>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerSupportabilityScoresResult AWS API Documentation
+    #
+    class GetCapacityManagerSupportabilityScoresResult < Struct.new(
+      :aggregate_score,
+      :capacity_manager_supportability_scores)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] capacity_reservation_id
     #   The ID of the Capacity Reservation.
     #   @return [String]
@@ -47629,6 +47810,62 @@ module Aws::EC2
     class GetImageBlockPublicAccessStateResult < Struct.new(
       :image_block_public_access_state,
       :managed_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetImageFindingsRequest AWS API Documentation
+    #
+    class GetImageFindingsRequest < Struct.new(
+      :image_id,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_findings
+    #   The Amazon Inspector findings for the AMI.
+    #   @return [Array<Types::ImageFinding>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetImageFindingsResult AWS API Documentation
+    #
+    class GetImageFindingsResult < Struct.new(
+      :image_findings,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -51887,6 +52124,15 @@ module Aws::EC2
     #   The watermarks attached to the AMI.
     #   @return [Array<Types::ImageWatermark>]
     #
+    # @!attribute [rw] scan_results
+    #   The Amazon Inspector scan results for the AMI. This information is
+    #   present only for AMIs that Amazon Inspector has scanned.
+    #
+    #   When you share an AMI with other accounts, organizations, or
+    #   organizational units (OUs), or make it public, its scan results are
+    #   available to the accounts that can use the AMI.
+    #   @return [Types::ScanResults]
+    #
     # @!attribute [rw] instance_type_specification
     #   The instance type specification for the AMI, which defines which
     #   instance types are compatible with this image.
@@ -51976,6 +52222,7 @@ module Aws::EC2
       :free_tier_eligible,
       :public_ssm_parameter_name,
       :image_watermarks,
+      :scan_results,
       :instance_type_specification,
       :image_id,
       :image_location,
@@ -52222,6 +52469,13 @@ module Aws::EC2
     #   Maximum: 50 values
     #   @return [Array<Types::ImageWatermarkFilterResponse>]
     #
+    # @!attribute [rw] scan_result_condition
+    #   The Amazon Inspector scan-result criteria that an AMI must meet to
+    #   be allowed. The criteria can limit the highest finding severity, the
+    #   number of days since Amazon Inspector last scanned the AMI, and the
+    #   number of days since Amazon Inspector reported a fix as available.
+    #   @return [Types::ScanResultCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageCriterion AWS API Documentation
     #
     class ImageCriterion < Struct.new(
@@ -52230,7 +52484,8 @@ module Aws::EC2
       :image_names,
       :deprecation_time_condition,
       :creation_date_condition,
-      :image_watermarks)
+      :image_watermarks,
+      :scan_result_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52332,6 +52587,13 @@ module Aws::EC2
     #   Maximum: 50 values
     #   @return [Array<Types::ImageWatermarkFilterRequest>]
     #
+    # @!attribute [rw] scan_result_condition
+    #   The Amazon Inspector scan-result criteria that an AMI must meet to
+    #   be allowed. The criteria can limit the highest finding severity, the
+    #   number of days since Amazon Inspector last scanned the AMI, and the
+    #   number of days since Amazon Inspector reported a fix as available.
+    #   @return [Types::ScanResultConditionRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageCriterionRequest AWS API Documentation
     #
     class ImageCriterionRequest < Struct.new(
@@ -52340,7 +52602,8 @@ module Aws::EC2
       :image_names,
       :deprecation_time_condition,
       :creation_date_condition,
-      :image_watermarks)
+      :image_watermarks,
+      :scan_result_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52384,6 +52647,83 @@ module Aws::EC2
       :url,
       :user_bucket)
       SENSITIVE = [:url]
+      include Aws::Structure
+    end
+
+    # Describes an Amazon Inspector vulnerability finding for an AMI.
+    #
+    # @!attribute [rw] fix_available
+    #   Specifies whether a fix is available for the finding. This value is
+    #   `true` when Amazon Inspector reports a full or partial fix for the
+    #   finding.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] score
+    #   The Amazon Inspector score for the finding.
+    #   @return [Float]
+    #
+    # @!attribute [rw] first_observed_at
+    #   The date and time, in the ISO 8601 format in the UTC time zone
+    #   (YYYY-MM-DDThh:mm:ss.sssZ), when Amazon Inspector first observed the
+    #   finding.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in the ISO 8601 format in the UTC time zone
+    #   (YYYY-MM-DDThh:mm:ss.sssZ), when Amazon Inspector last updated the
+    #   finding.
+    #   @return [Time]
+    #
+    # @!attribute [rw] title
+    #   The title of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   The file paths in the AMI that are affected by the finding. Amazon
+    #   EC2 returns up to 10 file paths for each finding.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] severity_label
+    #   The severity of the finding.
+    #
+    #   The valid values are the following Amazon Inspector severity levels,
+    #   which correspond to CVSS score ranges:
+    #
+    #   * `informational` - CVSS score of 0.
+    #
+    #   * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #   * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #   * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #   * `critical` - CVSS score of 9.0 to 10.0.
+    #
+    #   For more information, see [Software package vulnerability
+    #   severity][1] in the *Amazon Inspector User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the Amazon EBS snapshot of the AMI in which the finding
+    #   was detected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageFinding AWS API Documentation
+    #
+    class ImageFinding < Struct.new(
+      :fix_available,
+      :score,
+      :first_observed_at,
+      :updated_at,
+      :title,
+      :paths,
+      :severity_label,
+      :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -81557,6 +81897,375 @@ module Aws::EC2
       :upload_policy,
       :upload_policy_signature)
       SENSITIVE = [:upload_policy, :upload_policy_signature]
+      include Aws::Structure
+    end
+
+    # The Amazon Inspector scan-result criteria that an AMI must meet to be
+    # allowed. The criteria can limit the highest finding severity. They can
+    # also limit, for each severity, the days since Amazon Inspector
+    # reported a fix as available.
+    #
+    # The severity limit applies to all findings, whether or not a fix is
+    # available. The day limits for each severity apply only to findings
+    # that have a fix available. A scanned AMI that has no fix-available
+    # finding of a given severity meets that severity's day limit. AMIs
+    # that Amazon Inspector has not scanned are not allowed when you specify
+    # this condition.
+    #
+    # @!attribute [rw] max_days_since_last_finding_scan
+    #   The maximum number of days that have elapsed since Amazon Inspector
+    #   last scanned the AMI. For example, a value of `7` allows AMIs that
+    #   were scanned within the last 7 days. AMIs that Amazon Inspector has
+    #   not scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_severity_label
+    #   The maximum severity that an AMI's Amazon Inspector findings can
+    #   have for the AMI to be allowed. Findings count whether or not a fix
+    #   is available. For example, a value of `medium` allows AMIs whose
+    #   highest severity is `informational`, `low`, or `medium`.
+    #
+    #   The valid values are the following Amazon Inspector severity levels,
+    #   which correspond to CVSS score ranges:
+    #
+    #   * `informational` - CVSS score of 0.
+    #
+    #   * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #   * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #   * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #   * `critical` - CVSS score of 9.0 to 10.0.
+    #
+    #   For more information, see [Software package vulnerability
+    #   severity][1] in the *Amazon Inspector User Guide*.
+    #
+    #   A scanned AMI that has no findings meets this limit.
+    #
+    #   AMIs that Amazon Inspector has not scanned are not allowed when you
+    #   specify this condition.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score
+    #   @return [String]
+    #
+    # @!attribute [rw] max_days_since_informational_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for an `informational` severity finding on the AMI. For
+    #   example, a value of `7` does not allow an AMI if Amazon Inspector
+    #   reported such a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `informational` severity finding with a
+    #   fix available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_low_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `low` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `low` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_medium_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `medium` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `medium` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_high_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `high` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `high` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_critical_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `critical` severity finding on the AMI. For example,
+    #   a value of `7` does not allow an AMI if Amazon Inspector reported
+    #   such a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `critical` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScanResultCondition AWS API Documentation
+    #
+    class ScanResultCondition < Struct.new(
+      :max_days_since_last_finding_scan,
+      :maximum_severity_label,
+      :max_days_since_informational_fix_available,
+      :max_days_since_low_fix_available,
+      :max_days_since_medium_fix_available,
+      :max_days_since_high_fix_available,
+      :max_days_since_critical_fix_available)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Inspector scan-result criteria that an AMI must meet to be
+    # allowed. The criteria can limit the highest finding severity. They can
+    # also limit, for each severity, the days since Amazon Inspector
+    # reported a fix as available.
+    #
+    # The severity limit applies to all findings, whether or not a fix is
+    # available. The day limits for each severity apply only to findings
+    # that have a fix available. A scanned AMI that has no fix-available
+    # finding of a given severity meets that severity's day limit. AMIs
+    # that Amazon Inspector has not scanned are not allowed when you specify
+    # this condition.
+    #
+    # @!attribute [rw] max_days_since_last_finding_scan
+    #   The maximum number of days that have elapsed since Amazon Inspector
+    #   last scanned the AMI. For example, a value of `7` allows AMIs that
+    #   were scanned within the last 7 days. AMIs that Amazon Inspector has
+    #   not scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_severity_label
+    #   The maximum severity that an AMI's Amazon Inspector findings can
+    #   have for the AMI to be allowed. Findings count whether or not a fix
+    #   is available. For example, a value of `medium` allows AMIs whose
+    #   highest severity is `informational`, `low`, or `medium`.
+    #
+    #   The valid values are the following Amazon Inspector severity levels,
+    #   which correspond to CVSS score ranges:
+    #
+    #   * `informational` - CVSS score of 0.
+    #
+    #   * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #   * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #   * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #   * `critical` - CVSS score of 9.0 to 10.0.
+    #
+    #   For more information, see [Software package vulnerability
+    #   severity][1] in the *Amazon Inspector User Guide*.
+    #
+    #   A scanned AMI that has no findings meets this limit.
+    #
+    #   AMIs that Amazon Inspector has not scanned are not allowed when you
+    #   specify this condition.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score
+    #   @return [String]
+    #
+    # @!attribute [rw] max_days_since_informational_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for an `informational` severity finding on the AMI. For
+    #   example, a value of `7` does not allow an AMI if Amazon Inspector
+    #   reported such a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `informational` severity finding with a
+    #   fix available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_low_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `low` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `low` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_medium_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `medium` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `medium` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_high_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `high` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `high` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_critical_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `critical` severity finding on the AMI. For example,
+    #   a value of `7` does not allow an AMI if Amazon Inspector reported
+    #   such a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `critical` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScanResultConditionRequest AWS API Documentation
+    #
+    class ScanResultConditionRequest < Struct.new(
+      :max_days_since_last_finding_scan,
+      :maximum_severity_label,
+      :max_days_since_informational_fix_available,
+      :max_days_since_low_fix_available,
+      :max_days_since_medium_fix_available,
+      :max_days_since_high_fix_available,
+      :max_days_since_critical_fix_available)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Inspector scan results for an AMI. This information is
+    # present only for AMIs that Amazon Inspector has scanned.
+    #
+    # When you share an AMI with other accounts, organizations, or
+    # organizational units (OUs), or make it public, its scan results are
+    # available to the accounts that can use the AMI.
+    #
+    # The fix-available dates are specific to the AMI. Each date reflects
+    # when a fix became available for a finding on that AMI, not when the
+    # vendor released the fix. As a result, a date can be later than the
+    # vendor's release date, and AMIs with the same vulnerability can have
+    # different dates.
+    #
+    # @!attribute [rw] highest_finding_severity_label
+    #   The highest severity among the AMI's Amazon Inspector findings,
+    #   whether or not a fix is available.
+    #
+    #   The valid values are the following Amazon Inspector severity levels,
+    #   which correspond to CVSS score ranges:
+    #
+    #   * `informational` - CVSS score of 0.
+    #
+    #   * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #   * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #   * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #   * `critical` - CVSS score of 9.0 to 10.0.
+    #
+    #   For more information, see [Software package vulnerability
+    #   severity][1] in the *Amazon Inspector User Guide*.
+    #
+    #   This value is present only if the AMI has at least one finding.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_scan_date
+    #   The date and time, in the ISO 8601 format in the UTC time zone
+    #   (YYYY-MM-DDThh:mm:ss.sssZ), of the most recent Amazon Inspector scan
+    #   of the AMI.
+    #   @return [Time]
+    #
+    # @!attribute [rw] informational_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for an `informational` severity finding on the
+    #   AMI. This value is present only if the AMI has at least one
+    #   `informational` severity finding with a fix available. Amazon
+    #   Inspector recomputes this value on each scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] low_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for a `low` severity finding on the AMI. This
+    #   value is present only if the AMI has at least one `low` severity
+    #   finding with a fix available. Amazon Inspector recomputes this value
+    #   on each scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] medium_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for a `medium` severity finding on the AMI. This
+    #   value is present only if the AMI has at least one `medium` severity
+    #   finding with a fix available. Amazon Inspector recomputes this value
+    #   on each scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] high_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for a `high` severity finding on the AMI. This
+    #   value is present only if the AMI has at least one `high` severity
+    #   finding with a fix available. Amazon Inspector recomputes this value
+    #   on each scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] critical_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for a `critical` severity finding on the AMI.
+    #   This value is present only if the AMI has at least one `critical`
+    #   severity finding with a fix available. Amazon Inspector recomputes
+    #   this value on each scan.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScanResults AWS API Documentation
+    #
+    class ScanResults < Struct.new(
+      :highest_finding_severity_label,
+      :finding_scan_date,
+      :informational_fix_available_since,
+      :low_fix_available_since,
+      :medium_fix_available_since,
+      :high_fix_available_since,
+      :critical_fix_available_since)
+      SENSITIVE = []
       include Aws::Structure
     end
 

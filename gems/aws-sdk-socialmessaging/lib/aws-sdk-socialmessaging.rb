@@ -54,7 +54,7 @@ module Aws::SocialMessaging
   autoload :EndpointProvider, 'aws-sdk-socialmessaging/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-socialmessaging/endpoints'
 
-  GEM_VERSION = '1.36.0'
+  GEM_VERSION = '1.37.0'
 
 end
 

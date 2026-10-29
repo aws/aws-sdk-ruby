@@ -402,11 +402,14 @@ module Aws
       interface _InsertAdBreakResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InsertAdBreakResponse]
         def ad_break_id: () -> ::String
+        def target_start_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#insert_ad_break-instance_method
       def insert_ad_break: (
                              channel_arn: ::String,
-                             duration_seconds: ::Integer
+                             duration_seconds: ::Integer,
+                             ?ad_break_id: ::String,
+                             ?target_start_at: ::Time
                            ) -> _InsertAdBreakResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InsertAdBreakResponseSuccess
 

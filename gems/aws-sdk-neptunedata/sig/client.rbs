@@ -89,6 +89,18 @@ module Aws
                                 ) -> _CancelGremlinQueryResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelGremlinQueryResponseSuccess
 
+      interface _CancelIndexRebuildResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelIndexRebuildOutput]
+        def status: () -> ("PREPARING" | "REBUILDING" | "COMPLETED" | "FAILED" | "CANCELLED" | "CANCELLING")
+        def concurrency: () -> ::Integer
+        def write_buffer_size: () -> ("LOW" | "MEDIUM" | "HIGH")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#cancel_index_rebuild-instance_method
+      def cancel_index_rebuild: (
+                                  rebuild_id: ::String
+                                ) -> _CancelIndexRebuildResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelIndexRebuildResponseSuccess
+
       interface _CancelLoaderJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CancelLoaderJobOutput]
         def status: () -> ::String
@@ -304,6 +316,24 @@ module Aws
                                     ) -> _GetGremlinQueryStatusResponseSuccess
                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetGremlinQueryStatusResponseSuccess
 
+      interface _GetIndexRebuildStatusResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIndexRebuildStatusOutput]
+        def status: () -> ("PREPARING" | "REBUILDING" | "COMPLETED" | "FAILED" | "CANCELLED" | "CANCELLING")
+        def scope: () -> ("ALL" | "QUADS" | "DICTIONARIES")
+        def concurrency: () -> ::Integer
+        def write_buffer_size: () -> ("LOW" | "MEDIUM" | "HIGH")
+        def start_time: () -> ::Time
+        def progress_percentage: () -> ::Integer
+        def estimated_end_time: () -> ::Time
+        def end_time: () -> ::Time
+        def failure_reason: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_index_rebuild_status-instance_method
+      def get_index_rebuild_status: (
+                                      rebuild_id: ::String
+                                    ) -> _GetIndexRebuildStatusResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIndexRebuildStatusResponseSuccess
+
       interface _GetLoaderJobStatusResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetLoaderJobStatusOutput]
         def status: () -> ::String
@@ -465,6 +495,21 @@ module Aws
                              ) -> _GetSparqlStreamResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSparqlStreamResponseSuccess
 
+      interface _GetStorageInfoResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetStorageOutput]
+        def total_storage_bytes_used: () -> ::Integer
+        def quads: () -> Types::QuadsIndexesInfo
+        def dictionaries: () -> Types::DictionariesInfo
+        def undo_logs: () -> Types::UndoLogsMetrics
+        def streams: () -> Types::StorageMetrics
+        def dfe_statistics: () -> Types::StorageMetrics
+        def schema: () -> Types::StorageMetrics
+        def internals: () -> Types::StorageMetrics
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#get_storage_info-instance_method
+      def get_storage_info: () -> _GetStorageInfoResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetStorageInfoResponseSuccess
+
       interface _ListGremlinQueriesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListGremlinQueriesOutput]
         def accepted_query_count: () -> ::Integer
@@ -476,6 +521,14 @@ module Aws
                                   ?include_waiting: bool
                                 ) -> _ListGremlinQueriesResponseSuccess
                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListGremlinQueriesResponseSuccess
+
+      interface _ListIndexRebuildsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIndexRebuildsOutput]
+        def rebuild_ids: () -> ::Array[::String]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#list_index_rebuilds-instance_method
+      def list_index_rebuilds: () -> _ListIndexRebuildsResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIndexRebuildsResponseSuccess
 
       interface _ListLoaderJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListLoaderJobsOutput]
@@ -566,6 +619,23 @@ module Aws
                                       ?mode: ("disableAutoCompute" | "enableAutoCompute" | "refresh")
                                     ) -> _ManageSparqlStatisticsResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ManageSparqlStatisticsResponseSuccess
+
+      interface _StartIndexRebuildResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartIndexRebuildOutput]
+        def status: () -> ("PREPARING" | "REBUILDING" | "COMPLETED" | "FAILED" | "CANCELLED" | "CANCELLING")
+        def rebuild_id: () -> ::String
+        def scope: () -> ("ALL" | "QUADS" | "DICTIONARIES")
+        def concurrency: () -> ::Integer
+        def write_buffer_size: () -> ("LOW" | "MEDIUM" | "HIGH")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Neptunedata/Client.html#start_index_rebuild-instance_method
+      def start_index_rebuild: (
+                                 ?scope: ("ALL" | "QUADS" | "DICTIONARIES"),
+                                 ?concurrency: ::Integer,
+                                 ?write_buffer_size: ("LOW" | "MEDIUM" | "HIGH"),
+                                 ?client_token: ::String
+                               ) -> _StartIndexRebuildResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIndexRebuildResponseSuccess
 
       interface _StartLoaderJobResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartLoaderJobOutput]

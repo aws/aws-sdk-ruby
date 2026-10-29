@@ -106,6 +106,42 @@ module Aws::Neptunedata
       include Aws::Structure
     end
 
+    # @!attribute [rw] rebuild_id
+    #   The unique identifier of the index rebuild job to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/CancelIndexRebuildInput AWS API Documentation
+    #
+    class CancelIndexRebuildInput < Struct.new(
+      :rebuild_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The status of the cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] concurrency
+    #   The concurrency of the rebuild being cancelled, echoed from the
+    #   original `StartIndexRebuild` request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_buffer_size
+    #   The `WriteBufferSize` of the rebuild being cancelled, echoed from
+    #   the original `StartIndexRebuild` request.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/CancelIndexRebuildOutput AWS API Documentation
+    #
+    class CancelIndexRebuildOutput < Struct.new(
+      :status,
+      :concurrency,
+      :write_buffer_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] load_id
     #   The ID of the load job to be deleted.
     #   @return [String]
@@ -273,6 +309,33 @@ module Aws::Neptunedata
     class CancelOpenCypherQueryOutput < Struct.new(
       :status,
       :payload)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Raised when a request is cancelled because the storage layer entered
+    # maintenance mode. This typically happens during a customer-initiated
+    # operation such as an index rebuild. It should be treated like
+    # `ConcurrentModificationException`.
+    #
+    # @!attribute [rw] detailed_message
+    #   A detailed message describing the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the request in question.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The HTTP status code returned with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/CancelledByMaintenanceException AWS API Documentation
+    #
+    class CancelledByMaintenanceException < Struct.new(
+      :detailed_message,
+      :request_id,
+      :code)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -636,6 +699,28 @@ module Aws::Neptunedata
     class DeleteStatisticsValueMap < Struct.new(
       :active,
       :statistics_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains dictionary storage metrics for the Neptune database,
+    # including total dictionary size and entry count, and the size and
+    # count for blob (large value) entries.
+    #
+    # @!attribute [rw] total
+    #   The total size and entry count across all dictionary entries.
+    #   @return [Types::StorageMetrics]
+    #
+    # @!attribute [rw] blobs
+    #   The size and entry count for the blob (large value) dictionary
+    #   entries.
+    #   @return [Types::StorageMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/DictionariesInfo AWS API Documentation
+    #
+    class DictionariesInfo < Struct.new(
+      :total,
+      :blobs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1110,6 +1195,83 @@ module Aws::Neptunedata
       :query_id,
       :query_string,
       :query_eval_stats)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rebuild_id
+    #   The unique identifier of the index rebuild job returned by the
+    #   StartIndexRebuild operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/GetIndexRebuildStatusInput AWS API Documentation
+    #
+    class GetIndexRebuildStatusInput < Struct.new(
+      :rebuild_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the rebuild operation. See `RebuildStatus` for
+    #   possible values: `PREPARING`, `REBUILDING`, `COMPLETED`, `FAILED`,
+    #   `CANCELLING` or `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The scope of the rebuild operation. See `Scope` for possible values:
+    #   `ALL`, `QUADS`, or `DICTIONARIES`.
+    #   @return [String]
+    #
+    # @!attribute [rw] concurrency
+    #   The concurrency in effect for this rebuild, as echoed from the
+    #   original `StartIndexRebuild` request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_buffer_size
+    #   The `WriteBufferSize` in effect for this rebuild, as echoed from the
+    #   original `StartIndexRebuild` request.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The ISO-8601 timestamp indicating when the index rebuild operation
+    #   started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] progress_percentage
+    #   The percentage of the index rebuild operation that has been
+    #   completed, expressed as an integer from 0 to 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] estimated_end_time
+    #   The estimated ISO-8601 timestamp for when the index rebuild
+    #   operation will complete. The estimate may change as the operation
+    #   progresses.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The ISO-8601 timestamp indicating when the index rebuild operation
+    #   completed. This field is only present when the operation has
+    #   completed (status is `COMPLETED`, `FAILED`, or `CANCELLED`).
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason for the failure, if the rebuild operation failed. This
+    #   field is only populated when the status is `FAILED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/GetIndexRebuildStatusOutput AWS API Documentation
+    #
+    class GetIndexRebuildStatusOutput < Struct.new(
+      :status,
+      :scope,
+      :concurrency,
+      :write_buffer_size,
+      :start_time,
+      :progress_percentage,
+      :estimated_end_time,
+      :end_time,
+      :failure_reason)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1709,6 +1871,70 @@ module Aws::Neptunedata
       include Aws::Structure
     end
 
+    # @!attribute [rw] total_storage_bytes_used
+    #   The approximate total amount of storage used by the Neptune database
+    #   instance, in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] quads
+    #   Contains information about the quad indexes, including counts and
+    #   sizes for both RDF (SPARQL) and Property Graph (Gremlin/openCypher)
+    #   data.
+    #   @return [Types::QuadsIndexesInfo]
+    #
+    # @!attribute [rw] dictionaries
+    #   Contains information about the dictionaries, including total
+    #   dictionary storage and the portion used by blob entries. For
+    #   additional details on the storage of the Neptune dictionary, see
+    #   [Neptune Storage Billing][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/feature-overview-storage.html#feature-overview-storage-billing
+    #   @return [Types::DictionariesInfo]
+    #
+    # @!attribute [rw] undo_logs
+    #   Contains information about the undo logs. The `sizeInBytes` field
+    #   represents the total size of the undo logs in bytes, and the
+    #   `listSize` field represents the number of entries in the undo log
+    #   list.
+    #   @return [Types::UndoLogsMetrics]
+    #
+    # @!attribute [rw] streams
+    #   Contains storage metrics for the Neptune change-log streams,
+    #   including size in bytes and entry count.
+    #   @return [Types::StorageMetrics]
+    #
+    # @!attribute [rw] dfe_statistics
+    #   Contains storage metrics for the Neptune DFE engine statistics,
+    #   including size in bytes and entry count.
+    #   @return [Types::StorageMetrics]
+    #
+    # @!attribute [rw] schema
+    #   Contains storage metrics for the Neptune schema, including size in
+    #   bytes and entry count.
+    #   @return [Types::StorageMetrics]
+    #
+    # @!attribute [rw] internals
+    #   Contains storage metrics for Neptune system metadata, including size
+    #   in bytes and entry count.
+    #   @return [Types::StorageMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/GetStorageOutput AWS API Documentation
+    #
+    class GetStorageOutput < Struct.new(
+      :total_storage_bytes_used,
+      :quads,
+      :dictionaries,
+      :undo_logs,
+      :streams,
+      :dfe_statistics,
+      :schema,
+      :internals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Captures the status of a Gremlin query (see the [Gremlin query status
     # API][1] page).
     #
@@ -1915,6 +2141,20 @@ module Aws::Neptunedata
       :accepted_query_count,
       :running_query_count,
       :queries)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] rebuild_ids
+    #   A list of unique identifiers for index rebuild operations. Use each
+    #   ID with the GetIndexRebuildStatus operation to retrieve detailed
+    #   status information.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/ListIndexRebuildsOutput AWS API Documentation
+    #
+    class ListIndexRebuildsOutput < Struct.new(
+      :rebuild_ids)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2682,6 +2922,67 @@ module Aws::Neptunedata
       include Aws::Structure
     end
 
+    # Contains storage information about quad indexes for both RDF and
+    # Property Graph data models.
+    #
+    # @!attribute [rw] rdf
+    #   Contains quad index information for the RDF (SPARQL) data model.
+    #   @return [Types::QuadsInfo]
+    #
+    # @!attribute [rw] pg
+    #   Contains quad index information for the Property Graph
+    #   (Gremlin/openCypher) data model.
+    #   @return [Types::QuadsInfo]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/QuadsIndexesInfo AWS API Documentation
+    #
+    class QuadsIndexesInfo < Struct.new(
+      :rdf,
+      :pg)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains storage information about quad indexes.
+    #
+    # @!attribute [rw] spog
+    #   Size and count information for the SPOG quad index.
+    #   @return [Types::StorageMetrics]
+    #
+    # @!attribute [rw] pogs
+    #   Size and count information for the POGS quad index.
+    #   @return [Types::StorageMetrics]
+    #
+    # @!attribute [rw] gpso
+    #   Size and count information for the GPSO quad index.
+    #   @return [Types::StorageMetrics]
+    #
+    # @!attribute [rw] osgp
+    #   Size and count information for the OSGP quad index. This index is
+    #   optional. For details on how to enable it and evaluate the benefits
+    #   and costs, see [Neptune Data Model][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/neptune/latest/userguide/feature-overview-data-model.html
+    #   @return [Types::StorageMetrics]
+    #
+    # @!attribute [rw] pzsog
+    #   Size and count information for the PZSOG quad index.
+    #   @return [Types::StorageMetrics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/QuadsInfo AWS API Documentation
+    #
+    class QuadsInfo < Struct.new(
+      :spog,
+      :pogs,
+      :gpso,
+      :osgp,
+      :pzsog)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Structure to capture query statistics such as how many queries are
     # running, accepted or waiting and their details.
     #
@@ -2915,6 +3216,31 @@ module Aws::Neptunedata
       include Aws::Structure
     end
 
+    # Raised when the specified resource could not be found. The resource
+    # might have been deleted or the identifier might be incorrect.
+    #
+    # @!attribute [rw] detailed_message
+    #   A detailed message describing the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the request in question.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The HTTP status code returned with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :detailed_message,
+      :request_id,
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Raised when there is a problem accessing Amazon S3.
     #
     # @!attribute [rw] detailed_message
@@ -3027,6 +3353,110 @@ module Aws::Neptunedata
       :data,
       :op,
       :is_last_op)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scope
+    #   Specifies the scope of the rebuild operation. Possible values are:
+    #
+    #   * `ALL` - Rebuild all (quads and dictionaries). This is the default
+    #     if not specified.
+    #
+    #   * `QUADS` - Rebuild only the quad indexes.
+    #
+    #   * `DICTIONARIES` - Rebuild only the dictionaries.
+    #   @return [String]
+    #
+    # @!attribute [rw] concurrency
+    #   The number of concurrent indexes to rebuild in parallel. If not
+    #   specified, defaults to `1`.
+    #
+    #   Valid values are between `1` and the number of vCPUs available on
+    #   the writer instance. If the value exceeds the available vCPUs, it is
+    #   capped at the maximum instead of returning an
+    #   `InvalidParameterException`. The effective (capped) value is
+    #   returned in the response.
+    #
+    #   Higher concurrency can shorten the overall rebuild, but also
+    #   increases CPU and I/O load during the operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_buffer_size
+    #   Controls the buffer size used for tracking concurrent write
+    #   operations during the index rebuild. If your database has high write
+    #   traffic during the rebuild, a larger buffer prevents the operation
+    #   from failing due to buffer overflow. Possible values are:
+    #
+    #   * `LOW` - Suitable for databases with light to moderate write
+    #     activity. This is the default.
+    #
+    #   * `MEDIUM` - Recommended for databases with sustained write traffic
+    #     or bulk loading.
+    #
+    #   * `HIGH` - Use when rebuilding indexes during heavy write workloads
+    #     or continuous bulk data ingestion.
+    #
+    #   If your rebuild fails and you are actively writing data to the
+    #   database, retry with a higher `writeBufferSize` value. For bulk load
+    #   operations, consider using `HIGH`.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token,
+    #   the SDK automatically generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/StartIndexRebuildInput AWS API Documentation
+    #
+    class StartIndexRebuildInput < Struct.new(
+      :scope,
+      :concurrency,
+      :write_buffer_size,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   The current status of the rebuild operation. See `RebuildStatus` for
+    #   possible values.
+    #   @return [String]
+    #
+    # @!attribute [rw] rebuild_id
+    #   The unique identifier for the index rebuild job. Use this ID with
+    #   the GetIndexRebuildStatus operation to check the progress of the
+    #   rebuild.
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   The scope of the rebuild operation that was requested. See `Scope`
+    #   for possible values: `ALL`, `QUADS`, or `DICTIONARIES`.
+    #   @return [String]
+    #
+    # @!attribute [rw] concurrency
+    #   The effective concurrency used for this rebuild. This is the value
+    #   supplied in the request, capped at the number of vCPUs on the writer
+    #   instance.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] write_buffer_size
+    #   The `WriteBufferSize` applied to this rebuild. See the
+    #   `WriteBufferSize` enum for possible values.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/StartIndexRebuildOutput AWS API Documentation
+    #
+    class StartIndexRebuildOutput < Struct.new(
+      :status,
+      :rebuild_id,
+      :scope,
+      :concurrency,
+      :write_buffer_size)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3873,6 +4303,25 @@ module Aws::Neptunedata
       include Aws::Structure
     end
 
+    # Contains storage size and entry count metrics.
+    #
+    # @!attribute [rw] size_in_bytes
+    #   Storage size in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] count
+    #   The number of entries.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/StorageMetrics AWS API Documentation
+    #
+    class StorageMetrics < Struct.new(
+      :size_in_bytes,
+      :count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Raised when stream records requested by a query cannot be found.
     #
     # @!attribute [rw] detailed_message
@@ -3989,6 +4438,26 @@ module Aws::Neptunedata
       include Aws::Structure
     end
 
+    # Contains storage metrics for the Neptune undo logs, including the
+    # total size in bytes and the number of entries in the undo log list.
+    #
+    # @!attribute [rw] size_in_bytes
+    #   The total size of the undo logs in bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] list_size
+    #   The number of entries in the undo log list.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/UndoLogsMetrics AWS API Documentation
+    #
+    class UndoLogsMetrics < Struct.new(
+      :size_in_bytes,
+      :list_size)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Raised when a request attempts to initiate an operation that is not
     # supported.
     #
@@ -4007,6 +4476,30 @@ module Aws::Neptunedata
     # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/UnsupportedOperationException AWS API Documentation
     #
     class UnsupportedOperationException < Struct.new(
+      :detailed_message,
+      :request_id,
+      :code)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Raised when a parameter value is not valid or is malformed.
+    #
+    # @!attribute [rw] detailed_message
+    #   A detailed message describing the problem.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The ID of the request in question.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   The HTTP status code returned with the exception.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/ValidationException AWS API Documentation
+    #
+    class ValidationException < Struct.new(
       :detailed_message,
       :request_id,
       :code)

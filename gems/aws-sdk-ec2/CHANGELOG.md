@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.662.0 (2026-10-28)
+------------------
+
+* Feature - Amazon EC2 Capacity Manager adds supportability checks and capacity fulfillment metrics. Use GetCapacityManagerSupportabilityScores to score how well instance types and Availability Zones can support a capacity request, and GetCapacityManagerMetricData to retrieve fulfillment metrics.
+
+1.661.0 (2026-10-27)
+------------------
+
+* Feature - EC2 AMIs can now show vulnerability data and be targeted directly for scanning.
+
 1.660.0 (2026-10-22)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.291.0 (2026-10-28)
+------------------
+
+* Feature - Amazon Connect APIs - CreateTaskTemplate and UpdateTaskTemplate accept a new ContactHooks parameter called WrapUpFlowId to identify the flow module that runs when an agent attempts to disconnect from a task created with the template. Use this to verify an agent's work or update external case repos.
+
 1.290.0 (2026-10-26)
 ------------------
 

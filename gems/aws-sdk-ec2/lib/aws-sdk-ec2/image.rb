@@ -277,6 +277,17 @@ module Aws::EC2
       data[:image_watermarks]
     end
 
+    # The Amazon Inspector scan results for the AMI. This information is
+    # present only for AMIs that Amazon Inspector has scanned.
+    #
+    # When you share an AMI with other accounts, organizations, or
+    # organizational units (OUs), or make it public, its scan results are
+    # available to the accounts that can use the AMI.
+    # @return [Types::ScanResults]
+    def scan_results
+      data[:scan_results]
+    end
+
     # The instance type specification for the AMI, which defines which
     # instance types are compatible with this image.
     # @return [Types::InstanceTypeSpecification]

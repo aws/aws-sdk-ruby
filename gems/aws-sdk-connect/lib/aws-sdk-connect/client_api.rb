@@ -2079,6 +2079,7 @@ module Aws::Connect
     TaskNameExpression = Shapes::StringShape.new(name: 'TaskNameExpression')
     TaskTemplateArn = Shapes::StringShape.new(name: 'TaskTemplateArn')
     TaskTemplateConstraints = Shapes::StructureShape.new(name: 'TaskTemplateConstraints')
+    TaskTemplateContactHooks = Shapes::StructureShape.new(name: 'TaskTemplateContactHooks')
     TaskTemplateDefaultFieldValue = Shapes::StructureShape.new(name: 'TaskTemplateDefaultFieldValue')
     TaskTemplateDefaultFieldValueList = Shapes::ListShape.new(name: 'TaskTemplateDefaultFieldValueList')
     TaskTemplateDefaults = Shapes::StructureShape.new(name: 'TaskTemplateDefaults')
@@ -4003,6 +4004,7 @@ module Aws::Connect
     CreateTaskTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: TaskTemplateDescription, location_name: "Description"))
     CreateTaskTemplateRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
     CreateTaskTemplateRequest.add_member(:self_assign_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "SelfAssignFlowId"))
+    CreateTaskTemplateRequest.add_member(:contact_hooks, Shapes::ShapeRef.new(shape: TaskTemplateContactHooks, location_name: "ContactHooks"))
     CreateTaskTemplateRequest.add_member(:constraints, Shapes::ShapeRef.new(shape: TaskTemplateConstraints, location_name: "Constraints"))
     CreateTaskTemplateRequest.add_member(:defaults, Shapes::ShapeRef.new(shape: TaskTemplateDefaults, location_name: "Defaults"))
     CreateTaskTemplateRequest.add_member(:status, Shapes::ShapeRef.new(shape: TaskTemplateStatus, location_name: "Status"))
@@ -5968,6 +5970,7 @@ module Aws::Connect
     GetTaskTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: TaskTemplateDescription, location_name: "Description"))
     GetTaskTemplateResponse.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
     GetTaskTemplateResponse.add_member(:self_assign_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "SelfAssignFlowId"))
+    GetTaskTemplateResponse.add_member(:contact_hooks, Shapes::ShapeRef.new(shape: TaskTemplateContactHooks, location_name: "ContactHooks"))
     GetTaskTemplateResponse.add_member(:constraints, Shapes::ShapeRef.new(shape: TaskTemplateConstraints, location_name: "Constraints"))
     GetTaskTemplateResponse.add_member(:defaults, Shapes::ShapeRef.new(shape: TaskTemplateDefaults, location_name: "Defaults"))
     GetTaskTemplateResponse.add_member(:fields, Shapes::ShapeRef.new(shape: TaskTemplateFields, location_name: "Fields"))
@@ -9329,6 +9332,9 @@ module Aws::Connect
     TaskTemplateConstraints.add_member(:invisible_fields, Shapes::ShapeRef.new(shape: InvisibleTaskTemplateFields, location_name: "InvisibleFields"))
     TaskTemplateConstraints.struct_class = Types::TaskTemplateConstraints
 
+    TaskTemplateContactHooks.add_member(:wrap_up_flow_id, Shapes::ShapeRef.new(shape: ContactFlowModuleId, location_name: "WrapUpFlowId"))
+    TaskTemplateContactHooks.struct_class = Types::TaskTemplateContactHooks
+
     TaskTemplateDefaultFieldValue.add_member(:id, Shapes::ShapeRef.new(shape: TaskTemplateFieldIdentifier, location_name: "Id"))
     TaskTemplateDefaultFieldValue.add_member(:default_value, Shapes::ShapeRef.new(shape: TaskTemplateFieldValue, location_name: "DefaultValue"))
     TaskTemplateDefaultFieldValue.struct_class = Types::TaskTemplateDefaultFieldValue
@@ -9965,6 +9971,7 @@ module Aws::Connect
     UpdateTaskTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: TaskTemplateDescription, location_name: "Description"))
     UpdateTaskTemplateRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
     UpdateTaskTemplateRequest.add_member(:self_assign_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "SelfAssignFlowId"))
+    UpdateTaskTemplateRequest.add_member(:contact_hooks, Shapes::ShapeRef.new(shape: TaskTemplateContactHooks, location_name: "ContactHooks"))
     UpdateTaskTemplateRequest.add_member(:constraints, Shapes::ShapeRef.new(shape: TaskTemplateConstraints, location_name: "Constraints"))
     UpdateTaskTemplateRequest.add_member(:defaults, Shapes::ShapeRef.new(shape: TaskTemplateDefaults, location_name: "Defaults"))
     UpdateTaskTemplateRequest.add_member(:status, Shapes::ShapeRef.new(shape: TaskTemplateStatus, location_name: "Status"))
@@ -9978,6 +9985,7 @@ module Aws::Connect
     UpdateTaskTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: TaskTemplateDescription, location_name: "Description"))
     UpdateTaskTemplateResponse.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
     UpdateTaskTemplateResponse.add_member(:self_assign_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "SelfAssignFlowId"))
+    UpdateTaskTemplateResponse.add_member(:contact_hooks, Shapes::ShapeRef.new(shape: TaskTemplateContactHooks, location_name: "ContactHooks"))
     UpdateTaskTemplateResponse.add_member(:constraints, Shapes::ShapeRef.new(shape: TaskTemplateConstraints, location_name: "Constraints"))
     UpdateTaskTemplateResponse.add_member(:defaults, Shapes::ShapeRef.new(shape: TaskTemplateDefaults, location_name: "Defaults"))
     UpdateTaskTemplateResponse.add_member(:fields, Shapes::ShapeRef.new(shape: TaskTemplateFields, location_name: "Fields"))

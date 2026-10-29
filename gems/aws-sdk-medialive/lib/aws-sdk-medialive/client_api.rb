@@ -4460,14 +4460,20 @@ module Aws::MediaLive
 
     MulticastSource.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIp"))
     MulticastSource.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
+    MulticastSource.add_member(:secondary_source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "secondarySourceIp"))
+    MulticastSource.add_member(:secondary_url, Shapes::ShapeRef.new(shape: __string, location_name: "secondaryUrl"))
     MulticastSource.struct_class = Types::MulticastSource
 
     MulticastSourceCreateRequest.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIp"))
     MulticastSourceCreateRequest.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
+    MulticastSourceCreateRequest.add_member(:secondary_source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "secondarySourceIp"))
+    MulticastSourceCreateRequest.add_member(:secondary_url, Shapes::ShapeRef.new(shape: __string, location_name: "secondaryUrl"))
     MulticastSourceCreateRequest.struct_class = Types::MulticastSourceCreateRequest
 
     MulticastSourceUpdateRequest.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIp"))
     MulticastSourceUpdateRequest.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
+    MulticastSourceUpdateRequest.add_member(:secondary_source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "secondarySourceIp"))
+    MulticastSourceUpdateRequest.add_member(:secondary_url, Shapes::ShapeRef.new(shape: __string, location_name: "secondaryUrl"))
     MulticastSourceUpdateRequest.struct_class = Types::MulticastSourceUpdateRequest
 
     Multiplex.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))

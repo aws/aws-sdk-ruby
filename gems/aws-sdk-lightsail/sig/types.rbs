@@ -2176,6 +2176,11 @@ module Aws::Lightsail
       SENSITIVE: []
     end
 
+    class InstanceAttributeUpdates
+      attr_accessor bundle_id: ::String
+      SENSITIVE: []
+    end
+
     class InstanceEntry
       attr_accessor source_name: ::String
       attr_accessor instance_type: ::String
@@ -2941,6 +2946,7 @@ module Aws::Lightsail
 
     class StartInstanceRequest
       attr_accessor instance_name: ::String
+      attr_accessor attribute_updates: Types::InstanceAttributeUpdates
       SENSITIVE: []
     end
 

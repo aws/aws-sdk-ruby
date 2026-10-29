@@ -54,7 +54,7 @@ module Aws::VoiceID
   autoload :EndpointProvider, 'aws-sdk-voiceid/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-voiceid/endpoints'
 
-  GEM_VERSION = '1.65.0'
+  GEM_VERSION = '1.66.0'
 
 end
 

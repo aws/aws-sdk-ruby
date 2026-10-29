@@ -111,6 +111,7 @@ module Aws::SecurityAgent
       attr_accessor source_code: ::Array[Types::SourceCodeRepository]
       attr_accessor integrated_repositories: ::Array[Types::IntegratedRepository]
       attr_accessor trusted_ca_certificates: ::Array[Types::TrustedCaCertificate]
+      attr_accessor client_certificates: ::Array[Types::ClientCertificate]
       SENSITIVE: []
     end
 
@@ -540,6 +541,13 @@ module Aws::SecurityAgent
 
     class CiCdConfiguration
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class ClientCertificate
+      attr_accessor name: ::String
+      attr_accessor secret_arn: ::String
+      attr_accessor origins: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -1973,6 +1981,7 @@ module Aws::SecurityAgent
       attr_accessor error_information: Types::ErrorInformation
       attr_accessor integrated_repositories: ::Array[Types::IntegratedRepository]
       attr_accessor trusted_ca_certificates: ::Array[Types::TrustedCaCertificate]
+      attr_accessor client_certificates: ::Array[Types::ClientCertificate]
       attr_accessor code_remediation_strategy: ("AUTOMATIC" | "DISABLED")
       attr_accessor clean_up_strategy: ("BEST_EFFORT_DELETE" | "RETAIN_ALL")
       attr_accessor disable_managed_skills: ::Array[("FINDING_PERSONALIZATION" | "LOGIN_OPTIMIZATION")]

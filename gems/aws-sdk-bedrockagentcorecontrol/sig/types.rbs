@@ -4796,9 +4796,15 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    class OnBehalfOfAuthenticationConfig
+      attr_accessor client_authentication_method: ("NO_CLIENT")
+      SENSITIVE: []
+    end
+
     class OnBehalfOfTokenExchangeConfigType
       attr_accessor grant_type: ("TOKEN_EXCHANGE" | "JWT_AUTHORIZATION_GRANT")
       attr_accessor token_exchange_grant_type_config: Types::TokenExchangeGrantTypeConfigType
+      attr_accessor on_behalf_of_authentication_config: Types::OnBehalfOfAuthenticationConfig
       SENSITIVE: []
     end
 
@@ -5220,6 +5226,18 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < RequestHeaderConfiguration
       end
+    end
+
+    class ResetTokenVaultKeyMaterialRequest
+      attr_accessor token_vault_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetTokenVaultKeyMaterialResponse
+      attr_accessor token_vault_id: ::String
+      attr_accessor kms_configuration: Types::KmsConfiguration
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
     end
 
     class Resource

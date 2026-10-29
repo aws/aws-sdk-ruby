@@ -27,6 +27,17 @@ module Aws
 
       before(:each) do
         allow(client).to receive(:create_session).and_return(resp)
+        allow(client).to receive(:build_request).with(:create_session, anything) do |_, params|
+          double('request', context: {}, send_request: client.create_session(params))
+        end
+      end
+
+      it 'signs sessions with the base credentials' do
+        base = Aws::Credentials.new('base-akid', 'base-secret')
+        context = {}
+        allow(client).to receive(:build_request).and_return(double('request', context: context, send_request: resp))
+        ExpressCredentials.new(client: client, bucket: 'bucket', base_credentials: base)
+        expect(context[:sigv4_credentials]).to be(base)
       end
 
       it 'creates a session using the client and options' do

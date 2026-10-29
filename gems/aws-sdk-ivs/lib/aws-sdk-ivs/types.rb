@@ -1056,17 +1056,17 @@ module Aws::IVS
     #
     # @!attribute [rw] activation_threshold_seconds
     #   Number of seconds of ingest interruption before the failover slate
-    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   activates. Default: `3`.
     #   @return [Integer]
     #
     # @!attribute [rw] min_slate_display_seconds
     #   Minimum number of seconds that the failover slate displays after
-    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   activation. Default: `3`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_slate_display_seconds
-    #   Maximum number of seconds that the failover slate displays. Minimum:
-    #   `60`. Maximum: `180`. Default: `60`.
+    #   Maximum number of seconds that the failover slate displays. Default:
+    #   `60`.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -1395,17 +1395,17 @@ module Aws::IVS
     #
     # @!attribute [rw] activation_threshold_seconds
     #   Number of seconds of ingest interruption before the failover slate
-    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   activates. Default: `3`.
     #   @return [Integer]
     #
     # @!attribute [rw] min_slate_display_seconds
     #   Minimum number of seconds that the failover slate displays after
-    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   activation. Default: `3`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_slate_display_seconds
-    #   Maximum number of seconds that the failover slate displays. Minimum:
-    #   `60`. Maximum: `180`. Default: `60`.
+    #   Maximum number of seconds that the failover slate displays. Default:
+    #   `60`.
     #   @return [Integer]
     #
     # @!attribute [rw] state
@@ -1451,17 +1451,17 @@ module Aws::IVS
     #
     # @!attribute [rw] activation_threshold_seconds
     #   Number of seconds of ingest interruption before the failover slate
-    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   activates. Default: `3`.
     #   @return [Integer]
     #
     # @!attribute [rw] min_slate_display_seconds
     #   Minimum number of seconds that the failover slate displays after
-    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   activation. Default: `3`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_slate_display_seconds
-    #   Maximum number of seconds that the failover slate displays. Minimum:
-    #   `60`. Maximum: `180`. Default: `60`.
+    #   Maximum number of seconds that the failover slate displays. Default:
+    #   `60`.
     #   @return [Integer]
     #
     # @!attribute [rw] state
@@ -1825,11 +1825,22 @@ module Aws::IVS
     #   Duration of the ad break, in seconds.
     #   @return [Integer]
     #
+    # @!attribute [rw] ad_break_id
+    #   Caller-specified unique identifier for the ad break to insert into
+    #   the playlist.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_start_at
+    #   Target time at which the ad break starts.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/InsertAdBreakRequest AWS API Documentation
     #
     class InsertAdBreakRequest < Struct.new(
       :channel_arn,
-      :duration_seconds)
+      :duration_seconds,
+      :ad_break_id,
+      :target_start_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1839,10 +1850,15 @@ module Aws::IVS
     #   playlist.
     #   @return [String]
     #
+    # @!attribute [rw] target_start_at
+    #   Target start time for the inserted ad break.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/InsertAdBreakResponse AWS API Documentation
     #
     class InsertAdBreakResponse < Struct.new(
-      :ad_break_id)
+      :ad_break_id,
+      :target_start_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3739,17 +3755,17 @@ module Aws::IVS
     #
     # @!attribute [rw] activation_threshold_seconds
     #   Number of seconds of ingest interruption before the failover slate
-    #   activates. Minimum: `3`. Maximum: `5`. Default: `3`.
+    #   activates. Default: `3`.
     #   @return [Integer]
     #
     # @!attribute [rw] min_slate_display_seconds
     #   Minimum number of seconds that the failover slate displays after
-    #   activation. Minimum: `3`. Maximum: `10`. Default: `3`.
+    #   activation. Default: `3`.
     #   @return [Integer]
     #
     # @!attribute [rw] max_slate_display_seconds
-    #   Maximum number of seconds that the failover slate displays. Minimum:
-    #   `60`. Maximum: `180`. Default: `60`.
+    #   Maximum number of seconds that the failover slate displays. Default:
+    #   `60`.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ivs-2020-07-14/UpdateFailoverSlateConfigurationRequest AWS API Documentation

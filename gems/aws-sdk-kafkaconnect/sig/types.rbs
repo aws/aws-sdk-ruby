@@ -232,6 +232,12 @@ module Aws::KafkaConnect
       SENSITIVE: []
     end
 
+    class CustomPluginUpdate
+      attr_accessor custom_plugin_arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
     class DeleteConnectorRequest
       attr_accessor connector_arn: ::String
       attr_accessor current_version: ::String
@@ -495,6 +501,11 @@ module Aws::KafkaConnect
       SENSITIVE: []
     end
 
+    class PluginUpdate
+      attr_accessor custom_plugin: Types::CustomPluginUpdate
+      SENSITIVE: []
+    end
+
     class ProvisionedCapacity
       attr_accessor mcu_count: ::Integer
       attr_accessor worker_count: ::Integer
@@ -639,6 +650,9 @@ module Aws::KafkaConnect
       attr_accessor skip_health_validation: bool
       attr_accessor connector_arn: ::String
       attr_accessor current_version: ::String
+      attr_accessor plugins: ::Array[Types::PluginUpdate]
+      attr_accessor worker_configuration: Types::WorkerConfigurationUpdate
+      attr_accessor use_default_worker_configuration: bool
       SENSITIVE: [:connector_configuration]
     end
 
@@ -698,6 +712,12 @@ module Aws::KafkaConnect
       SENSITIVE: []
     end
 
+    class WorkerConfigurationUpdate
+      attr_accessor revision: ::Integer
+      attr_accessor worker_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
     class WorkerLogDelivery
       attr_accessor cloud_watch_logs: Types::CloudWatchLogsLogDelivery
       attr_accessor firehose: Types::FirehoseLogDelivery
@@ -714,6 +734,9 @@ module Aws::KafkaConnect
 
     class WorkerSetting
       attr_accessor capacity: Types::CapacityDescription
+      attr_accessor plugins: ::Array[Types::PluginDescription]
+      attr_accessor worker_configuration: Types::WorkerConfigurationDescription
+      attr_accessor use_default_worker_configuration: bool
       SENSITIVE: []
     end
   end

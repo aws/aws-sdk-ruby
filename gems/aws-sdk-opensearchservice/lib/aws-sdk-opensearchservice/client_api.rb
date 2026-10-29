@@ -35,6 +35,8 @@ module Aws::OpenSearchService
     AddDataSourceResponse = Shapes::StructureShape.new(name: 'AddDataSourceResponse')
     AddDirectQueryDataSourceRequest = Shapes::StructureShape.new(name: 'AddDirectQueryDataSourceRequest')
     AddDirectQueryDataSourceResponse = Shapes::StructureShape.new(name: 'AddDirectQueryDataSourceResponse')
+    AddReplicationPeerRequest = Shapes::StructureShape.new(name: 'AddReplicationPeerRequest')
+    AddReplicationPeerResponse = Shapes::StructureShape.new(name: 'AddReplicationPeerResponse')
     AddTagsRequest = Shapes::StructureShape.new(name: 'AddTagsRequest')
     AdditionalLimit = Shapes::StructureShape.new(name: 'AdditionalLimit')
     AdditionalLimitList = Shapes::ListShape.new(name: 'AdditionalLimitList')
@@ -102,6 +104,7 @@ module Aws::OpenSearchService
     CapabilityFailures = Shapes::ListShape.new(name: 'CapabilityFailures')
     CapabilityName = Shapes::StringShape.new(name: 'CapabilityName')
     CapabilityStatus = Shapes::StringShape.new(name: 'CapabilityStatus')
+    CategoryDiffResult = Shapes::StructureShape.new(name: 'CategoryDiffResult')
     ChangeProgressDetails = Shapes::StructureShape.new(name: 'ChangeProgressDetails')
     ChangeProgressStage = Shapes::StructureShape.new(name: 'ChangeProgressStage')
     ChangeProgressStageList = Shapes::ListShape.new(name: 'ChangeProgressStageList')
@@ -117,6 +120,9 @@ module Aws::OpenSearchService
     CognitoOptionsStatus = Shapes::StructureShape.new(name: 'CognitoOptionsStatus')
     ColdStorageOptions = Shapes::StructureShape.new(name: 'ColdStorageOptions')
     CommitMessage = Shapes::StringShape.new(name: 'CommitMessage')
+    CompareDomainConfigurationCategoryMap = Shapes::MapShape.new(name: 'CompareDomainConfigurationCategoryMap')
+    CompareDomainConfigurationRequest = Shapes::StructureShape.new(name: 'CompareDomainConfigurationRequest')
+    CompareDomainConfigurationResponse = Shapes::StructureShape.new(name: 'CompareDomainConfigurationResponse')
     CompatibleVersionsList = Shapes::ListShape.new(name: 'CompatibleVersionsList')
     CompatibleVersionsMap = Shapes::StructureShape.new(name: 'CompatibleVersionsMap')
     ConfigChangeStatus = Shapes::StringShape.new(name: 'ConfigChangeStatus')
@@ -189,6 +195,8 @@ module Aws::OpenSearchService
     DescribeDomainHealthResponse = Shapes::StructureShape.new(name: 'DescribeDomainHealthResponse')
     DescribeDomainNodesRequest = Shapes::StructureShape.new(name: 'DescribeDomainNodesRequest')
     DescribeDomainNodesResponse = Shapes::StructureShape.new(name: 'DescribeDomainNodesResponse')
+    DescribeDomainReplicationRequest = Shapes::StructureShape.new(name: 'DescribeDomainReplicationRequest')
+    DescribeDomainReplicationResponse = Shapes::StructureShape.new(name: 'DescribeDomainReplicationResponse')
     DescribeDomainRequest = Shapes::StructureShape.new(name: 'DescribeDomainRequest')
     DescribeDomainResponse = Shapes::StructureShape.new(name: 'DescribeDomainResponse')
     DescribeDomainsRequest = Shapes::StructureShape.new(name: 'DescribeDomainsRequest')
@@ -219,6 +227,14 @@ module Aws::OpenSearchService
     Description = Shapes::StringShape.new(name: 'Description')
     DetachDataSourceRequest = Shapes::StructureShape.new(name: 'DetachDataSourceRequest')
     DetachDataSourceResponse = Shapes::StructureShape.new(name: 'DetachDataSourceResponse')
+    DiffCount = Shapes::IntegerShape.new(name: 'DiffCount')
+    DiffFieldPath = Shapes::StringShape.new(name: 'DiffFieldPath')
+    DiffFieldPolicy = Shapes::StringShape.new(name: 'DiffFieldPolicy')
+    DiffFieldValue = Shapes::StringShape.new(name: 'DiffFieldValue')
+    DiffItemName = Shapes::StringShape.new(name: 'DiffItemName')
+    DiffItemNameList = Shapes::ListShape.new(name: 'DiffItemNameList')
+    DiffItems = Shapes::StructureShape.new(name: 'DiffItems')
+    DiffStatus = Shapes::StringShape.new(name: 'DiffStatus')
     DirectQueryDataSource = Shapes::StructureShape.new(name: 'DirectQueryDataSource')
     DirectQueryDataSourceDescription = Shapes::StringShape.new(name: 'DirectQueryDataSourceDescription')
     DirectQueryDataSourceList = Shapes::ListShape.new(name: 'DirectQueryDataSourceList')
@@ -232,6 +248,10 @@ module Aws::OpenSearchService
     DissociatePackageResponse = Shapes::StructureShape.new(name: 'DissociatePackageResponse')
     DissociatePackagesRequest = Shapes::StructureShape.new(name: 'DissociatePackagesRequest')
     DissociatePackagesResponse = Shapes::StructureShape.new(name: 'DissociatePackagesResponse')
+    DivergentField = Shapes::StructureShape.new(name: 'DivergentField')
+    DivergentFieldList = Shapes::ListShape.new(name: 'DivergentFieldList')
+    DivergentItem = Shapes::StructureShape.new(name: 'DivergentItem')
+    DivergentItemList = Shapes::ListShape.new(name: 'DivergentItemList')
     DomainArn = Shapes::StringShape.new(name: 'DomainArn')
     DomainConfig = Shapes::StructureShape.new(name: 'DomainConfig')
     DomainEndpointOptions = Shapes::StructureShape.new(name: 'DomainEndpointOptions')
@@ -280,6 +300,8 @@ module Aws::OpenSearchService
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ErrorType = Shapes::StringShape.new(name: 'ErrorType')
     ExportOptions = Shapes::StructureShape.new(name: 'ExportOptions')
+    FailoverReplicationRequest = Shapes::StructureShape.new(name: 'FailoverReplicationRequest')
+    FailoverReplicationResponse = Shapes::StructureShape.new(name: 'FailoverReplicationResponse')
     Filter = Shapes::StructureShape.new(name: 'Filter')
     FilterList = Shapes::ListShape.new(name: 'FilterList')
     GUID = Shapes::StringShape.new(name: 'GUID')
@@ -430,6 +452,8 @@ module Aws::OpenSearchService
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaximumInstanceCount = Shapes::IntegerShape.new(name: 'MaximumInstanceCount')
     Message = Shapes::StringShape.new(name: 'Message')
+    MetadataCategory = Shapes::StringShape.new(name: 'MetadataCategory')
+    MetadataCategoryList = Shapes::ListShape.new(name: 'MetadataCategoryList')
     MigrationError = Shapes::StructureShape.new(name: 'MigrationError')
     MigrationOptions = Shapes::StructureShape.new(name: 'MigrationOptions')
     MigrationSource = Shapes::StructureShape.new(name: 'MigrationSource')
@@ -516,7 +540,14 @@ module Aws::OpenSearchService
     RegisterCapabilityResponse = Shapes::StructureShape.new(name: 'RegisterCapabilityResponse')
     RejectInboundConnectionRequest = Shapes::StructureShape.new(name: 'RejectInboundConnectionRequest')
     RejectInboundConnectionResponse = Shapes::StructureShape.new(name: 'RejectInboundConnectionResponse')
+    RemoveReplicationPeerRequest = Shapes::StructureShape.new(name: 'RemoveReplicationPeerRequest')
+    RemoveReplicationPeerResponse = Shapes::StructureShape.new(name: 'RemoveReplicationPeerResponse')
     RemoveTagsRequest = Shapes::StructureShape.new(name: 'RemoveTagsRequest')
+    ReplicationPeer = Shapes::StructureShape.new(name: 'ReplicationPeer')
+    ReplicationPeerList = Shapes::ListShape.new(name: 'ReplicationPeerList')
+    ReplicationRole = Shapes::StringShape.new(name: 'ReplicationRole')
+    ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
+    ReplicationStatusMessage = Shapes::StringShape.new(name: 'ReplicationStatusMessage')
     RequestId = Shapes::StringShape.new(name: 'RequestId')
     RequirementLevel = Shapes::StringShape.new(name: 'RequirementLevel')
     ReservationToken = Shapes::StringShape.new(name: 'ReservationToken')
@@ -588,6 +619,8 @@ module Aws::OpenSearchService
     StringList = Shapes::ListShape.new(name: 'StringList')
     SubjectKey = Shapes::StringShape.new(name: 'SubjectKey')
     SubjectKeyIdCOption = Shapes::StringShape.new(name: 'SubjectKeyIdCOption')
+    SwitchoverReplicationRequest = Shapes::StructureShape.new(name: 'SwitchoverReplicationRequest')
+    SwitchoverReplicationResponse = Shapes::StructureShape.new(name: 'SwitchoverReplicationResponse')
     TLSSecurityPolicy = Shapes::StringShape.new(name: 'TLSSecurityPolicy')
     Tag = Shapes::StructureShape.new(name: 'Tag')
     TagKey = Shapes::StringShape.new(name: 'TagKey')
@@ -712,6 +745,15 @@ module Aws::OpenSearchService
 
     AddDirectQueryDataSourceResponse.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: String, location_name: "DataSourceArn"))
     AddDirectQueryDataSourceResponse.struct_class = Types::AddDirectQueryDataSourceResponse
+
+    AddReplicationPeerRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    AddReplicationPeerRequest.add_member(:peer_domain_arn, Shapes::ShapeRef.new(shape: DomainArn, required: true, location_name: "PeerDomainArn"))
+    AddReplicationPeerRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    AddReplicationPeerRequest.struct_class = Types::AddReplicationPeerRequest
+
+    AddReplicationPeerResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
+    AddReplicationPeerResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "Status"))
+    AddReplicationPeerResponse.struct_class = Types::AddReplicationPeerResponse
 
     AddTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ARN"))
     AddTagsRequest.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "TagList"))
@@ -937,6 +979,15 @@ module Aws::OpenSearchService
 
     CapabilityFailures.member = Shapes::ShapeRef.new(shape: CapabilityFailure)
 
+    CategoryDiffResult.add_member(:status, Shapes::ShapeRef.new(shape: DiffStatus, location_name: "Status"))
+    CategoryDiffResult.add_member(:in_sync, Shapes::ShapeRef.new(shape: DiffCount, location_name: "InSync"))
+    CategoryDiffResult.add_member(:source_only, Shapes::ShapeRef.new(shape: DiffCount, location_name: "SourceOnly"))
+    CategoryDiffResult.add_member(:target_only, Shapes::ShapeRef.new(shape: DiffCount, location_name: "TargetOnly"))
+    CategoryDiffResult.add_member(:diverged, Shapes::ShapeRef.new(shape: DiffCount, location_name: "Diverged"))
+    CategoryDiffResult.add_member(:items, Shapes::ShapeRef.new(shape: DiffItems, location_name: "Items"))
+    CategoryDiffResult.add_member(:truncated, Shapes::ShapeRef.new(shape: Boolean, location_name: "Truncated"))
+    CategoryDiffResult.struct_class = Types::CategoryDiffResult
+
     ChangeProgressDetails.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ChangeId"))
     ChangeProgressDetails.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ChangeProgressDetails.add_member(:config_change_status, Shapes::ShapeRef.new(shape: ConfigChangeStatus, location_name: "ConfigChangeStatus"))
@@ -1001,6 +1052,19 @@ module Aws::OpenSearchService
 
     ColdStorageOptions.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "Enabled"))
     ColdStorageOptions.struct_class = Types::ColdStorageOptions
+
+    CompareDomainConfigurationCategoryMap.key = Shapes::ShapeRef.new(shape: MetadataCategory)
+    CompareDomainConfigurationCategoryMap.value = Shapes::ShapeRef.new(shape: CategoryDiffResult)
+
+    CompareDomainConfigurationRequest.add_member(:source_domain_arn, Shapes::ShapeRef.new(shape: DomainArn, required: true, location_name: "SourceDomainArn"))
+    CompareDomainConfigurationRequest.add_member(:target_domain_arn, Shapes::ShapeRef.new(shape: DomainArn, required: true, location_name: "TargetDomainArn"))
+    CompareDomainConfigurationRequest.add_member(:categories, Shapes::ShapeRef.new(shape: MetadataCategoryList, required: true, location_name: "Categories"))
+    CompareDomainConfigurationRequest.struct_class = Types::CompareDomainConfigurationRequest
+
+    CompareDomainConfigurationResponse.add_member(:source_domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "SourceDomainArn"))
+    CompareDomainConfigurationResponse.add_member(:target_domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "TargetDomainArn"))
+    CompareDomainConfigurationResponse.add_member(:categories, Shapes::ShapeRef.new(shape: CompareDomainConfigurationCategoryMap, location_name: "Categories"))
+    CompareDomainConfigurationResponse.struct_class = Types::CompareDomainConfigurationResponse
 
     CompatibleVersionsList.member = Shapes::ShapeRef.new(shape: CompatibleVersionsMap)
 
@@ -1265,6 +1329,14 @@ module Aws::OpenSearchService
     DescribeDomainNodesResponse.add_member(:domain_nodes_status_list, Shapes::ShapeRef.new(shape: DomainNodesStatusList, location_name: "DomainNodesStatusList"))
     DescribeDomainNodesResponse.struct_class = Types::DescribeDomainNodesResponse
 
+    DescribeDomainReplicationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    DescribeDomainReplicationRequest.struct_class = Types::DescribeDomainReplicationRequest
+
+    DescribeDomainReplicationResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
+    DescribeDomainReplicationResponse.add_member(:role, Shapes::ShapeRef.new(shape: ReplicationRole, location_name: "Role"))
+    DescribeDomainReplicationResponse.add_member(:peers, Shapes::ShapeRef.new(shape: ReplicationPeerList, location_name: "Peers"))
+    DescribeDomainReplicationResponse.struct_class = Types::DescribeDomainReplicationResponse
+
     DescribeDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     DescribeDomainRequest.struct_class = Types::DescribeDomainRequest
 
@@ -1372,6 +1444,13 @@ module Aws::OpenSearchService
     DetachDataSourceResponse.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "dataSourceArn"))
     DetachDataSourceResponse.struct_class = Types::DetachDataSourceResponse
 
+    DiffItemNameList.member = Shapes::ShapeRef.new(shape: DiffItemName)
+
+    DiffItems.add_member(:source_only, Shapes::ShapeRef.new(shape: DiffItemNameList, location_name: "SourceOnly"))
+    DiffItems.add_member(:target_only, Shapes::ShapeRef.new(shape: DiffItemNameList, location_name: "TargetOnly"))
+    DiffItems.add_member(:diverged, Shapes::ShapeRef.new(shape: DivergentItemList, location_name: "Diverged"))
+    DiffItems.struct_class = Types::DiffItems
+
     DirectQueryDataSource.add_member(:data_source_name, Shapes::ShapeRef.new(shape: DirectQueryDataSourceName, location_name: "DataSourceName"))
     DirectQueryDataSource.add_member(:data_source_type, Shapes::ShapeRef.new(shape: DirectQueryDataSourceType, location_name: "DataSourceType"))
     DirectQueryDataSource.add_member(:description, Shapes::ShapeRef.new(shape: DirectQueryDataSourceDescription, location_name: "Description"))
@@ -1409,6 +1488,20 @@ module Aws::OpenSearchService
 
     DissociatePackagesResponse.add_member(:domain_package_details_list, Shapes::ShapeRef.new(shape: DomainPackageDetailsList, location_name: "DomainPackageDetailsList"))
     DissociatePackagesResponse.struct_class = Types::DissociatePackagesResponse
+
+    DivergentField.add_member(:path, Shapes::ShapeRef.new(shape: DiffFieldPath, location_name: "Path"))
+    DivergentField.add_member(:source_value, Shapes::ShapeRef.new(shape: DiffFieldValue, location_name: "SourceValue"))
+    DivergentField.add_member(:target_value, Shapes::ShapeRef.new(shape: DiffFieldValue, location_name: "TargetValue"))
+    DivergentField.add_member(:policy, Shapes::ShapeRef.new(shape: DiffFieldPolicy, location_name: "Policy"))
+    DivergentField.struct_class = Types::DivergentField
+
+    DivergentFieldList.member = Shapes::ShapeRef.new(shape: DivergentField)
+
+    DivergentItem.add_member(:name, Shapes::ShapeRef.new(shape: DiffItemName, location_name: "Name"))
+    DivergentItem.add_member(:fields, Shapes::ShapeRef.new(shape: DivergentFieldList, location_name: "Fields"))
+    DivergentItem.struct_class = Types::DivergentItem
+
+    DivergentItemList.member = Shapes::ShapeRef.new(shape: DivergentItem)
 
     DomainConfig.add_member(:engine_version, Shapes::ShapeRef.new(shape: VersionStatus, location_name: "EngineVersion"))
     DomainConfig.add_member(:cluster_config, Shapes::ShapeRef.new(shape: ClusterConfigStatus, location_name: "ClusterConfig"))
@@ -1596,6 +1689,15 @@ module Aws::OpenSearchService
     ExportOptions.add_member(:objects, Shapes::ShapeRef.new(shape: SavedObjectIdentifierList, location_name: "objects"))
     ExportOptions.add_member(:include_references_deep, Shapes::ShapeRef.new(shape: Boolean, location_name: "includeReferencesDeep"))
     ExportOptions.struct_class = Types::ExportOptions
+
+    FailoverReplicationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    FailoverReplicationRequest.add_member(:peer_domain_arn, Shapes::ShapeRef.new(shape: DomainArn, required: true, location_name: "PeerDomainArn"))
+    FailoverReplicationRequest.add_member(:allow_data_loss, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "AllowDataLoss"))
+    FailoverReplicationRequest.struct_class = Types::FailoverReplicationRequest
+
+    FailoverReplicationResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
+    FailoverReplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "Status"))
+    FailoverReplicationResponse.struct_class = Types::FailoverReplicationResponse
 
     Filter.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     Filter.add_member(:values, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "Values"))
@@ -2042,6 +2144,8 @@ module Aws::OpenSearchService
     MasterUserOptions.add_member(:master_user_password, Shapes::ShapeRef.new(shape: Password, location_name: "MasterUserPassword"))
     MasterUserOptions.struct_class = Types::MasterUserOptions
 
+    MetadataCategoryList.member = Shapes::ShapeRef.new(shape: MetadataCategory)
+
     MigrationError.add_member(:code, Shapes::ShapeRef.new(shape: String, location_name: "code"))
     MigrationError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     MigrationError.struct_class = Types::MigrationError
@@ -2252,9 +2356,25 @@ module Aws::OpenSearchService
     RejectInboundConnectionResponse.add_member(:connection, Shapes::ShapeRef.new(shape: InboundConnection, location_name: "Connection"))
     RejectInboundConnectionResponse.struct_class = Types::RejectInboundConnectionResponse
 
+    RemoveReplicationPeerRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    RemoveReplicationPeerRequest.add_member(:peer_domain_arn, Shapes::ShapeRef.new(shape: DomainArn, required: true, location_name: "PeerDomainArn"))
+    RemoveReplicationPeerRequest.struct_class = Types::RemoveReplicationPeerRequest
+
+    RemoveReplicationPeerResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
+    RemoveReplicationPeerResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "Status"))
+    RemoveReplicationPeerResponse.struct_class = Types::RemoveReplicationPeerResponse
+
     RemoveTagsRequest.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "ARN"))
     RemoveTagsRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TagKeys"))
     RemoveTagsRequest.struct_class = Types::RemoveTagsRequest
+
+    ReplicationPeer.add_member(:peer_domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "PeerDomainArn"))
+    ReplicationPeer.add_member(:peer_role, Shapes::ShapeRef.new(shape: ReplicationRole, location_name: "PeerRole"))
+    ReplicationPeer.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "Status"))
+    ReplicationPeer.add_member(:status_message, Shapes::ShapeRef.new(shape: ReplicationStatusMessage, location_name: "StatusMessage"))
+    ReplicationPeer.struct_class = Types::ReplicationPeer
+
+    ReplicationPeerList.member = Shapes::ShapeRef.new(shape: ReplicationPeer)
 
     ReservedInstance.add_member(:reservation_name, Shapes::ShapeRef.new(shape: ReservationToken, location_name: "ReservationName"))
     ReservedInstance.add_member(:reserved_instance_id, Shapes::ShapeRef.new(shape: GUID, location_name: "ReservedInstanceId"))
@@ -2441,6 +2561,14 @@ module Aws::OpenSearchService
     StorageTypeList.member = Shapes::ShapeRef.new(shape: StorageType)
 
     StringList.member = Shapes::ShapeRef.new(shape: String)
+
+    SwitchoverReplicationRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    SwitchoverReplicationRequest.add_member(:peer_domain_arn, Shapes::ShapeRef.new(shape: DomainArn, required: true, location_name: "PeerDomainArn"))
+    SwitchoverReplicationRequest.struct_class = Types::SwitchoverReplicationRequest
+
+    SwitchoverReplicationResponse.add_member(:domain_arn, Shapes::ShapeRef.new(shape: DomainArn, location_name: "DomainArn"))
+    SwitchoverReplicationResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationStatus, location_name: "Status"))
+    SwitchoverReplicationResponse.struct_class = Types::SwitchoverReplicationResponse
 
     Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "Key"))
     Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, required: true, location_name: "Value"))
@@ -2728,6 +2856,19 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
       end)
 
+      api.add_operation(:add_replication_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "AddReplicationPeer"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/replication/addPeer"
+        o.input = Shapes::ShapeRef.new(shape: AddReplicationPeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: AddReplicationPeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceAlreadyExistsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:add_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "AddTags"
         o.http_method = "POST"
@@ -2819,6 +2960,18 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:compare_domain_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CompareDomainConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/compareDomainConfiguration"
+        o.input = Shapes::ShapeRef.new(shape: CompareDomainConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: CompareDomainConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:create_application, Seahorse::Model::Operation.new.tap do |o|
@@ -3130,6 +3283,18 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: DependencyFailureException)
       end)
 
+      api.add_operation(:describe_domain_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeDomainReplication"
+        o.http_method = "GET"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/replication"
+        o.input = Shapes::ShapeRef.new(shape: DescribeDomainReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeDomainReplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:describe_domains, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeDomains"
         o.http_method = "POST"
@@ -3320,6 +3485,18 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
+      api.add_operation(:failover_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "FailoverReplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/replication/failover"
+        o.input = Shapes::ShapeRef.new(shape: FailoverReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: FailoverReplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
@@ -3814,6 +3991,18 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
+      api.add_operation(:remove_replication_peer, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RemoveReplicationPeer"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/replication/removePeer"
+        o.input = Shapes::ShapeRef.new(shape: RemoveReplicationPeerRequest)
+        o.output = Shapes::ShapeRef.new(shape: RemoveReplicationPeerResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
       api.add_operation(:remove_tags, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RemoveTags"
         o.http_method = "POST"
@@ -3888,6 +4077,18 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:switchover_replication, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SwitchoverReplication"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/replication/switchover"
+        o.input = Shapes::ShapeRef.new(shape: SwitchoverReplicationRequest)
+        o.output = Shapes::ShapeRef.new(shape: SwitchoverReplicationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)
 
       api.add_operation(:update_application, Seahorse::Model::Operation.new.tap do |o|

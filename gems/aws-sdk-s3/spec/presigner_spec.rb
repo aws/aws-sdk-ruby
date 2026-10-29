@@ -495,8 +495,9 @@ module Aws
             expiration: Time.now + 60 * 5
           }
           client.stub_responses(:create_session, credentials: credentials)
-          expect(client).to receive(:create_session)
-            .with({bucket: bucket}).and_call_original
+          allow(client).to receive(:build_request).and_call_original
+          expect(client).to receive(:build_request)
+            .with(:create_session, {bucket: bucket}).and_call_original
 
           url = subject.presigned_url(:get_object, bucket: bucket, key: 'obj')
           expect(url).to include('X-Amz-Credential=s3-akid')
