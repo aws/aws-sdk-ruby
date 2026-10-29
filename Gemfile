@@ -11,10 +11,8 @@ gem 'csv'
 gem 'http-2'
 gem 'jmespath'
 if defined?(JRUBY_VERSION)
-  gem 'irb', '< 1.17.0'
-  # rdoc >= 8.0.0 depends on rbs, which fails to build its native ext on JRuby
-  # https://github.com/ruby/rbs/issues/3018
-  gem 'rdoc', '< 8.0.0'
+  gem 'irb'
+  gem 'rdoc'
   gem 'jruby-openssl'
 else
   gem 'irb'
@@ -26,7 +24,6 @@ gem 'json'
 gem 'nokogiri'
 gem 'oga'
 gem 'rexml'
-gem 'ruby-ll', '2.1.3' # temporary
 unless defined?(JRUBY_VERSION)
   gem 'libxml-ruby'
   gem 'oj'
@@ -54,12 +51,8 @@ end
 
 group :docs do
   gem 'rdiscount', platforms: :ruby
-  # When updating yard, override app.js from upstream to:
-  # doc-src/templates/default/fulldoc/html/js/app.js
-  # and add patch from PR https://github.com/lsegal/yard/pull/1399
-  # to support jQuery 3.6.0+
-  gem 'yard', '>= 0.9.26'
-  gem 'yard-sitemap', '~> 1.0'
+  gem 'yard'
+  gem 'yard-sitemap'
 end
 
 group :rbs do
@@ -72,7 +65,7 @@ end
 
 group :test do
   gem 'addressable'
-  gem 'cucumber', '< 12'
+  gem 'cucumber'
   gem 'multipart-post'
   gem 'opentelemetry-sdk'
   gem 'rspec'
