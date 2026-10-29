@@ -34,6 +34,10 @@ module Aws
       end
       let(:resp) { double('client-resp', credentials: cognito_creds) }
 
+      before do
+        allow(client).to receive(:get_credentials_for_identity).and_return(resp)
+      end
+
       describe '#initialize' do
 
         it 'constructs a client with passed arguments when not given' do

@@ -17,11 +17,10 @@ module Aws
         SocketError,
         Timeout::Error
       ].each do |error_class|
-        it "returns no credentials for #{error_class}" do
+        it "raises MissingCredentialsError for #{error_class}" do
           stub_request(:get, "http://169.254.170.2#{path}").to_raise(error_class)
-          expect_any_instance_of(ECSCredentials).to receive(:warn)
-          credentials = ECSCredentials.new(credential_path: path, backoff: 0, retries: 0)
-          expect(credentials.set?).to be(false)
+          expect { ECSCredentials.new(credential_path: path, backoff: 0, retries: 0) }
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
       end
     end
@@ -123,28 +122,24 @@ module Aws
           end.to raise_error(ArgumentError, /without a credential path/)
         end
 
-        it 'returns empty credentials on non-200 response with error details' do
+        it 'raises MissingCredentialsError on non-200 response with error details' do
           stub_request(:get, "http://169.254.170.2#{path}")
             .to_return(status: 429, body: 'Rate limit exceeded')
-          expect_any_instance_of(ECSCredentials).to receive(:warn)
-            .with(/Error retrieving ECS Credentials: HTTP 429: Rate limit exceeded/)
-          c = ECSCredentials.new(backoff: 0, retries: 0)
-          expect(c.set?).to be(false)
+          expect { ECSCredentials.new(backoff: 0, retries: 0) }
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
 
-        it 'returns empty credentials on non-200 response without body' do
+        it 'raises MissingCredentialsError on non-200 response without body' do
           stub_request(:get, "http://169.254.170.2#{path}")
             .to_return(status: 500, body: '')
-          expect_any_instance_of(ECSCredentials).to receive(:warn)
-            .with(/Error retrieving ECS Credentials: HTTP 500/)
-          c = ECSCredentials.new(backoff: 0, retries: 0)
-          expect(c.set?).to be(false)
+          expect { ECSCredentials.new(backoff: 0, retries: 0) }
+            .to raise_error(Aws::Errors::MissingCredentialsError)
         end
       end
 
       context 'retries' do
         it 'defaults to 5' do
-          stub_request(:get, "http://169.254.170.2#{path}").to_raise(SocketError)
+          allow_any_instance_of(ECSCredentials).to receive(:refresh)
           expect(ECSCredentials.new(backoff: 0).retries).to be(5)
         end
 
@@ -155,10 +150,12 @@ module Aws
           expect(Kernel).to receive(:sleep).with(1)
           expect(Kernel).to receive(:sleep).with(2)
           expect(Kernel).to receive(:sleep).with(4)
-          ECSCredentials.new(
-            backoff: ->(n) { Kernel.sleep(2**n) },
-            retries: 3
-          )
+          expect do
+            ECSCredentials.new(
+              backoff: ->(n) { Kernel.sleep(2**n) },
+              retries: 3
+            )
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
           assert_requested(expected_request, times: 4)
         end
 
@@ -185,29 +182,25 @@ module Aws
           expect(c.expiration.to_s).to eq(expiration2.to_s)
         end
 
-        it 'retries invalid JSON exactly 3 times' do
-          stub_request(:get, "http://169.254.170.2#{path}")
+        it 'retries invalid JSON exactly 3 times, then raises MissingCredentialsError' do
+          creds_request =
+            stub_request(:get, "http://169.254.170.2#{path}")
             .to_return(status: 200, body: '')
             .to_return(status: 200, body: ' ')
             .to_return(status: 200, body: '{')
             .to_return(status: 200, body: ' ')
           expect do
             ECSCredentials.new(backoff: 0, retries: 0)
-          end.to raise_error(
-            Aws::Errors::MetadataParserError,
-            'Failed to parse metadata service response.'
-          )
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
+          assert_requested(creds_request, times: 4)
         end
 
-        it 'retries errors parsing expiration time 3 times' do
+        it 'raises MissingCredentialsError when the expiration time cannot be parsed' do
           stub_request(:get, "http://169.254.170.2#{path}")
-            .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-            .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
-            .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
             .to_return(status: 200, body: '{ "Expiration": "Expiration" }')
           expect do
             ECSCredentials.new(backoff: 0, retries: 0)
-          end.to raise_error(ArgumentError)
+          end.to raise_error(Aws::Errors::MissingCredentialsError)
         end
       end
 
@@ -218,9 +211,11 @@ module Aws
           end
 
           it 'validates the token for carriage return and newline' do
+            # A malformed token is not a non-recoverable error, so on the
+            # initial fetch it surfaces as MissingCredentialsError.
             expect do
               ECSCredentials.new(backoff: 0, retries: 0)
-            end.to raise_error(ECSCredentials::InvalidTokenError)
+            end.to raise_error(Aws::Errors::MissingCredentialsError)
           end
         end
 
@@ -231,9 +226,11 @@ module Aws
           end
 
           it 'validates the token for carriage return and newline' do
+            # A malformed token is not a non-recoverable error, so on the
+            # initial fetch it surfaces as MissingCredentialsError.
             expect do
               ECSCredentials.new(backoff: 0, retries: 0)
-            end.to raise_error(ECSCredentials::InvalidTokenError)
+            end.to raise_error(Aws::Errors::MissingCredentialsError)
           end
         end
       end
@@ -362,9 +359,12 @@ module Aws
           expect = test_case['expect']
 
           if expect['type'] == 'error'
+            # Host/URI validation fails at construction (ArgumentError). A token
+            # file read failure happens during the initial fetch and, not being a
+            # SEP non-recoverable error, surfaces as MissingCredentialsError.
             error = ArgumentError
             if expect['reason'] =~ /failed to read authorization token/
-              error = ECSCredentials::TokenFileReadError
+              error = Aws::Errors::MissingCredentialsError
             end
             expect { ECSCredentials.new }.to raise_error(error)
           elsif expect['type'] == 'success'
@@ -391,18 +391,11 @@ module Aws
         )
       end
 
-      def handle_expectation(expect)
-        # hacky, but test cases assume we throw errors
-        # our credential providers just return nil when not set
-        case expect['reason']
-        when /301 Moved Permanently/, /401 Unauthorized/,
-             /429 Too Many Requests/, /500 Internal Server Error/
-          creds = ECSCredentials.new(backoff: 0, retries: 0)
-          expect(creds.set?).to be(false)
-        else
-          expect { ECSCredentials.new(backoff: 0, retries: 0) }
-            .to raise_error(RuntimeError)
-        end
+      def handle_expectation(_expect)
+        # A refresh that fails on the initial fetch (no cached credentials to
+        # fall back on) raises MissingCredentialsError.
+        expect { ECSCredentials.new(backoff: 0, retries: 0) }
+          .to raise_error(Aws::Errors::MissingCredentialsError)
       end
 
       test_cases.each do |test_case|
@@ -413,8 +406,11 @@ module Aws
           if expect['type'] == 'error'
             handle_expectation(expect)
           elsif expect['type'] == 'success'
-            c = ECSCredentials.new(backoff: 0, retries: 0)
             credentials = expect['credentials']
+            # The fixture's expiration is a fixed timestamp, freeze the clock
+            # before it so the response is not treated as stale.
+            allow(Time).to receive(:now).and_return(Time.parse(credentials['expiration']) - 3600)
+            c = ECSCredentials.new(backoff: 0, retries: 0)
             expect(c.credentials.access_key_id).to eq(credentials['access_key_id'])
             expect(c.credentials.secret_access_key).to eq(credentials['secret_access_key'])
             expect(c.credentials.session_token).to eq(credentials['session_token'])

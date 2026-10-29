@@ -27,7 +27,7 @@ module Aws
   class SSOCredentials
 
     include CredentialProvider
-    include RefreshingCredentials
+    include ResilientRefreshingCredentials
 
     # @api private
     LEGACY_REQUIRED_OPTS =         [:sso_start_url, :sso_account_id, :sso_region, :sso_role_name].freeze
@@ -115,7 +115,6 @@ module Aws
         @metrics = ['CREDENTIALS_SSO_LEGACY']
       end
 
-      @async_refresh = true
       super
     end
 
@@ -123,6 +122,17 @@ module Aws
     attr_reader :client
 
     private
+
+    # An expired, missing, or malformed cached SSO token (InvalidSSOCredentials
+    # for legacy profiles, InvalidSSOToken for sso_session profiles) and an
+    # UnauthorizedException from the SSO service all require the customer to
+    # re-run `aws sso login`, so they are raised immediately rather than
+    # retried with backoff.
+    def non_recoverable_error?(error)
+      error.is_a?(Errors::InvalidSSOCredentials) ||
+        error.is_a?(Errors::InvalidSSOToken) ||
+        error.is_a?(SSO::Errors::UnauthorizedException)
+    end
 
     def read_cached_token
       cached_token = Json.load(File.read(sso_cache_file))

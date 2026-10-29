@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Remove duplicate `before_refresh` callback during credential refresh.
+
 1.97.0 (2026-10-28)
 ------------------
 
