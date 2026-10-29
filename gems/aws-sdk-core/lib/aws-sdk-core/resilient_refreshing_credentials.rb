@@ -35,6 +35,9 @@ module Aws
       @mutex = Mutex.new
       if options.is_a?(Hash)
         @before_refresh = options.delete(:before_refresh)
+        # @api private
+        # Overrides the advisory refresh window computed from the credential
+        # lifetime. Internal only; not a supported customer option.
         @configured_advisory_window = options.delete(:advisory_refresh_window)
       end
       if @configured_advisory_window && @configured_advisory_window < MANDATORY_REFRESH_WINDOW
@@ -121,7 +124,7 @@ module Aws
 
         return degraded_initial_credentials(error) if @credentials
 
-        warn("Initial credential fetch failed: #{error.message}")
+        log_warning("Initial credential fetch failed: #{error.message}")
         raise Errors::MissingCredentialsError, error.message, cause: error
       end
     end
@@ -270,10 +273,15 @@ module Aws
 
     def log_refresh_failure(error)
       seconds = (@next_refresh_allowed_at - Time.now).round
-      message =
+      log_warning(
         "Credential refresh failed: #{error.message}. The SDK will continue " \
         'using cached credentials. A refresh of these credentials will be ' \
         "attempted again after #{seconds} seconds."
+      )
+    end
+
+    # Routes through the provider client's configured logger when there is one.
+    def log_warning(message)
       logger = respond_to?(:client) && client&.config&.logger
       logger ? logger.warn(message) : warn(message)
     end

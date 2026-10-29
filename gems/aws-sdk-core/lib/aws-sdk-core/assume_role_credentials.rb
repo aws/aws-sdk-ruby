@@ -69,6 +69,7 @@ module Aws
       InvalidIdentityToken
       MalformedPolicyDocument
       PackedPolicyTooLarge
+      RegionDisabled
       RegionDisabledException
     ].freeze
 

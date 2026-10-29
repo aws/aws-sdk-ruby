@@ -136,6 +136,19 @@ module Aws
 
         resolver.credentials
       end
+
+      it 'logs an initial fetch failure through client.config.logger when the resolver exposes a client' do
+        logger = double('logger')
+        client = double('client', config: double('config', logger: logger))
+        resolver = build_resolver(resolver_class, 'cachedCredentials' => 'none')
+        allow(resolver).to receive(:client).and_return(client)
+        resolver.expect_response('error', nil)
+
+        expect(logger).to receive(:warn).with(/Initial credential fetch failed: recoverable refresh failure/)
+        expect(resolver).not_to receive(:warn).with(/Initial credential fetch failed/)
+
+        expect { resolver.credentials }.to raise_error(Errors::MissingCredentialsError)
+      end
     end
 
     describe 'nil expiration' do
