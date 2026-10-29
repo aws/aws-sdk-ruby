@@ -250,6 +250,12 @@ module Aws
         end
         s.reverse!
       end
+
+      # Typed writers used by RpcV2::Builder, which already knows each value's type.
+      #
+      # @api private
+      public :start_map, :start_array, :add_string, :add_auto_integer,
+             :add_auto_float, :add_boolean, :add_byte_string, :add_time
     end
   end
 end
