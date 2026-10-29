@@ -126,6 +126,19 @@ module Aws
                                         ) -> _AddDirectQueryDataSourceResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddDirectQueryDataSourceResponseSuccess
 
+      interface _AddReplicationPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AddReplicationPeerResponse]
+        def domain_arn: () -> ::String
+        def status: () -> ("PENDING_SETUP" | "ACTIVE" | "SWITCHING_OVER" | "FAILING_OVER" | "PENDING_REMOVAL" | "DETACHED" | "EJECTED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#add_replication_peer-instance_method
+      def add_replication_peer: (
+                                  domain_name: ::String,
+                                  peer_domain_arn: ::String,
+                                  ?dry_run: bool
+                                ) -> _AddReplicationPeerResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AddReplicationPeerResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#add_tags-instance_method
       def add_tags: (
                       arn: ::String,
@@ -236,6 +249,20 @@ module Aws
                                             domain_name: ::String
                                           ) -> _CancelServiceSoftwareUpdateResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelServiceSoftwareUpdateResponseSuccess
+
+      interface _CompareDomainConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CompareDomainConfigurationResponse]
+        def source_domain_arn: () -> ::String
+        def target_domain_arn: () -> ::String
+        def categories: () -> ::Hash[::String, Types::CategoryDiffResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#compare_domain_configuration-instance_method
+      def compare_domain_configuration: (
+                                          source_domain_arn: ::String,
+                                          target_domain_arn: ::String,
+                                          categories: Array[::String]
+                                        ) -> _CompareDomainConfigurationResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CompareDomainConfigurationResponseSuccess
 
       interface _CreateApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateApplicationResponse]
@@ -658,6 +685,18 @@ module Aws
                                  ) -> _DescribeDomainNodesResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainNodesResponseSuccess
 
+      interface _DescribeDomainReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainReplicationResponse]
+        def domain_arn: () -> ::String
+        def role: () -> ("PRIMARY" | "SECONDARY")
+        def peers: () -> ::Array[Types::ReplicationPeer]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#describe_domain_replication-instance_method
+      def describe_domain_replication: (
+                                         domain_name: ::String
+                                       ) -> _DescribeDomainReplicationResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeDomainReplicationResponseSuccess
+
       interface _DescribeDomainsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDomainsResponse]
         def domain_status_list: () -> ::Array[Types::DomainStatus]
@@ -834,6 +873,19 @@ module Aws
                                  domain_name: ::String
                                ) -> _DissociatePackagesResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DissociatePackagesResponseSuccess
+
+      interface _FailoverReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::FailoverReplicationResponse]
+        def domain_arn: () -> ::String
+        def status: () -> ("PENDING_SETUP" | "ACTIVE" | "SWITCHING_OVER" | "FAILING_OVER" | "PENDING_REMOVAL" | "DETACHED" | "EJECTED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#failover_replication-instance_method
+      def failover_replication: (
+                                  domain_name: ::String,
+                                  peer_domain_arn: ::String,
+                                  allow_data_loss: bool
+                                ) -> _FailoverReplicationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _FailoverReplicationResponseSuccess
 
       interface _GetApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetApplicationResponse]
@@ -1288,6 +1340,18 @@ module Aws
                                      ) -> _RejectInboundConnectionResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RejectInboundConnectionResponseSuccess
 
+      interface _RemoveReplicationPeerResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RemoveReplicationPeerResponse]
+        def domain_arn: () -> ::String
+        def status: () -> ("PENDING_SETUP" | "ACTIVE" | "SWITCHING_OVER" | "FAILING_OVER" | "PENDING_REMOVAL" | "DETACHED" | "EJECTED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#remove_replication_peer-instance_method
+      def remove_replication_peer: (
+                                     domain_name: ::String,
+                                     peer_domain_arn: ::String
+                                   ) -> _RemoveReplicationPeerResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RemoveReplicationPeerResponseSuccess
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#remove_tags-instance_method
       def remove_tags: (
                          arn: ::String,
@@ -1376,6 +1440,18 @@ module Aws
                                            ?desired_start_time: ::Integer
                                          ) -> _StartServiceSoftwareUpdateResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartServiceSoftwareUpdateResponseSuccess
+
+      interface _SwitchoverReplicationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SwitchoverReplicationResponse]
+        def domain_arn: () -> ::String
+        def status: () -> ("PENDING_SETUP" | "ACTIVE" | "SWITCHING_OVER" | "FAILING_OVER" | "PENDING_REMOVAL" | "DETACHED" | "EJECTED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/OpenSearchService/Client.html#switchover_replication-instance_method
+      def switchover_replication: (
+                                    domain_name: ::String,
+                                    peer_domain_arn: ::String
+                                  ) -> _SwitchoverReplicationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SwitchoverReplicationResponseSuccess
 
       interface _UpdateApplicationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateApplicationResponse]

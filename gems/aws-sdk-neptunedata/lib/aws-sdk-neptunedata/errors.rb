@@ -30,6 +30,7 @@ module Aws::Neptunedata
   # * {AccessDeniedException}
   # * {BadRequestException}
   # * {BulkLoadIdNotFoundException}
+  # * {CancelledByMaintenanceException}
   # * {CancelledByUserException}
   # * {ClientTimeoutException}
   # * {ConcurrentModificationException}
@@ -53,6 +54,7 @@ module Aws::Neptunedata
   # * {QueryLimitException}
   # * {QueryTooLargeException}
   # * {ReadOnlyViolationException}
+  # * {ResourceNotFoundException}
   # * {S3Exception}
   # * {ServerShutdownException}
   # * {StatisticsNotAvailableException}
@@ -61,6 +63,7 @@ module Aws::Neptunedata
   # * {TimeLimitExceededException}
   # * {TooManyRequestsException}
   # * {UnsupportedOperationException}
+  # * {ValidationException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -135,6 +138,41 @@ module Aws::Neptunedata
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Neptunedata::Types::BulkLoadIdNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
+      #   Use `error.data.detailed_message` to access the API member directly.
+      def detailed_message(**kwargs)
+        if kwargs.empty?
+          @data[:detailed_message]
+        else
+          super
+        end
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+
+      def retryable?
+        true
+      end
+    end
+
+    class CancelledByMaintenanceException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptunedata::Types::CancelledByMaintenanceException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -902,6 +940,37 @@ module Aws::Neptunedata
       end
     end
 
+    class ResourceNotFoundException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptunedata::Types::ResourceNotFoundException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
+      #   Use `error.data.detailed_message` to access the API member directly.
+      def detailed_message(**kwargs)
+        if kwargs.empty?
+          @data[:detailed_message]
+        else
+          super
+        end
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+    end
+
     class S3Exception < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -1140,6 +1209,37 @@ module Aws::Neptunedata
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::Neptunedata::Types::UnsupportedOperationException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      # @note This member shadows Exception#detailed_message on Ruby 3.2+.
+      #   Use `error.data.detailed_message` to access the API member directly.
+      def detailed_message(**kwargs)
+        if kwargs.empty?
+          @data[:detailed_message]
+        else
+          super
+        end
+      end
+
+      # @return [String]
+      def request_id
+        @data[:request_id]
+      end
+
+      # @return [String]
+      def code
+        @code || @data[:code]
+      end
+    end
+
+    class ValidationException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Neptunedata::Types::ValidationException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

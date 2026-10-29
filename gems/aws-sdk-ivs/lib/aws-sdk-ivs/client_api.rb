@@ -595,9 +595,12 @@ module Aws::IVS
 
     InsertAdBreakRequest.add_member(:channel_arn, Shapes::ShapeRef.new(shape: ChannelArn, required: true, location_name: "channelArn"))
     InsertAdBreakRequest.add_member(:duration_seconds, Shapes::ShapeRef.new(shape: AdDurationSeconds, required: true, location_name: "durationSeconds"))
+    InsertAdBreakRequest.add_member(:ad_break_id, Shapes::ShapeRef.new(shape: AdBreakId, location_name: "adBreakId"))
+    InsertAdBreakRequest.add_member(:target_start_at, Shapes::ShapeRef.new(shape: Time, location_name: "targetStartAt"))
     InsertAdBreakRequest.struct_class = Types::InsertAdBreakRequest
 
     InsertAdBreakResponse.add_member(:ad_break_id, Shapes::ShapeRef.new(shape: AdBreakId, location_name: "adBreakId"))
+    InsertAdBreakResponse.add_member(:target_start_at, Shapes::ShapeRef.new(shape: Time, location_name: "targetStartAt"))
     InsertAdBreakResponse.struct_class = Types::InsertAdBreakResponse
 
     InternalServerException.add_member(:access_control_allow_origin, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Access-Control-Allow-Origin"))

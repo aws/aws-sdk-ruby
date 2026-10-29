@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.89.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.88.0 (2026-10-27)
+------------------
+
+* Feature - Adding support for Machine Image scan
+
 1.87.0 (2026-10-21)
 ------------------
 

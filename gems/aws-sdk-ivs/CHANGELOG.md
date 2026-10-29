@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.98.0 (2026-10-28)
+------------------
+
+* Feature - InsertAdBreak now allows setting a customized adBreakId on a request and also adds a new field targetStartAt for a delayed ad insertion
+
 1.97.0 (2026-10-26)
 ------------------
 

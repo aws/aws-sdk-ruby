@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+1.236.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Create and cache S3 Express sessions using the credentials of the requesting client.
+
 1.235.0 (2026-10-20)
 ------------------
 

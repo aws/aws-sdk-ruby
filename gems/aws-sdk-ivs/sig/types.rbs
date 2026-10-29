@@ -459,11 +459,14 @@ module Aws::IVS
     class InsertAdBreakRequest
       attr_accessor channel_arn: ::String
       attr_accessor duration_seconds: ::Integer
+      attr_accessor ad_break_id: ::String
+      attr_accessor target_start_at: ::Time
       SENSITIVE: []
     end
 
     class InsertAdBreakResponse
       attr_accessor ad_break_id: ::String
+      attr_accessor target_start_at: ::Time
       SENSITIVE: []
     end
 

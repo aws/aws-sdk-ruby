@@ -1013,6 +1013,8 @@ module Aws::BedrockAgentCoreControl
     Oauth2Discovery = Shapes::UnionShape.new(name: 'Oauth2Discovery')
     Oauth2ProviderConfigInput = Shapes::UnionShape.new(name: 'Oauth2ProviderConfigInput')
     Oauth2ProviderConfigOutput = Shapes::UnionShape.new(name: 'Oauth2ProviderConfigOutput')
+    OnBehalfOfAuthenticationConfig = Shapes::StructureShape.new(name: 'OnBehalfOfAuthenticationConfig')
+    OnBehalfOfClientAuthenticationMethod = Shapes::StringShape.new(name: 'OnBehalfOfClientAuthenticationMethod')
     OnBehalfOfTokenExchangeConfigType = Shapes::StructureShape.new(name: 'OnBehalfOfTokenExchangeConfigType')
     OnBehalfOfTokenExchangeGrantTypeType = Shapes::StringShape.new(name: 'OnBehalfOfTokenExchangeGrantTypeType')
     OnlineEvaluationConfigArn = Shapes::StringShape.new(name: 'OnlineEvaluationConfigArn')
@@ -1140,6 +1142,8 @@ module Aws::BedrockAgentCoreControl
     RequestHeaderAllowlist = Shapes::ListShape.new(name: 'RequestHeaderAllowlist')
     RequestHeaderConfiguration = Shapes::UnionShape.new(name: 'RequestHeaderConfiguration')
     RequiredProperties = Shapes::ListShape.new(name: 'RequiredProperties')
+    ResetTokenVaultKeyMaterialRequest = Shapes::StructureShape.new(name: 'ResetTokenVaultKeyMaterialRequest')
+    ResetTokenVaultKeyMaterialResponse = Shapes::StructureShape.new(name: 'ResetTokenVaultKeyMaterialResponse')
     Resource = Shapes::UnionShape.new(name: 'Resource')
     ResourceAssociationArn = Shapes::StringShape.new(name: 'ResourceAssociationArn')
     ResourceConfigurationIdentifier = Shapes::StringShape.new(name: 'ResourceConfigurationIdentifier')
@@ -5130,8 +5134,12 @@ module Aws::BedrockAgentCoreControl
     Oauth2ProviderConfigOutput.add_member_subclass(:unknown, Types::Oauth2ProviderConfigOutput::Unknown)
     Oauth2ProviderConfigOutput.struct_class = Types::Oauth2ProviderConfigOutput
 
+    OnBehalfOfAuthenticationConfig.add_member(:client_authentication_method, Shapes::ShapeRef.new(shape: OnBehalfOfClientAuthenticationMethod, required: true, location_name: "clientAuthenticationMethod"))
+    OnBehalfOfAuthenticationConfig.struct_class = Types::OnBehalfOfAuthenticationConfig
+
     OnBehalfOfTokenExchangeConfigType.add_member(:grant_type, Shapes::ShapeRef.new(shape: OnBehalfOfTokenExchangeGrantTypeType, required: true, location_name: "grantType"))
     OnBehalfOfTokenExchangeConfigType.add_member(:token_exchange_grant_type_config, Shapes::ShapeRef.new(shape: TokenExchangeGrantTypeConfigType, location_name: "tokenExchangeGrantTypeConfig"))
+    OnBehalfOfTokenExchangeConfigType.add_member(:on_behalf_of_authentication_config, Shapes::ShapeRef.new(shape: OnBehalfOfAuthenticationConfig, location_name: "onBehalfOfAuthenticationConfig"))
     OnBehalfOfTokenExchangeConfigType.struct_class = Types::OnBehalfOfTokenExchangeConfigType
 
     OnlineEvaluationConfigSummary.add_member(:online_evaluation_config_arn, Shapes::ShapeRef.new(shape: OnlineEvaluationConfigArn, required: true, location_name: "onlineEvaluationConfigArn"))
@@ -5469,6 +5477,14 @@ module Aws::BedrockAgentCoreControl
     RequestHeaderConfiguration.struct_class = Types::RequestHeaderConfiguration
 
     RequiredProperties.member = Shapes::ShapeRef.new(shape: String)
+
+    ResetTokenVaultKeyMaterialRequest.add_member(:token_vault_id, Shapes::ShapeRef.new(shape: TokenVaultIdType, required: true, location_name: "tokenVaultId"))
+    ResetTokenVaultKeyMaterialRequest.struct_class = Types::ResetTokenVaultKeyMaterialRequest
+
+    ResetTokenVaultKeyMaterialResponse.add_member(:token_vault_id, Shapes::ShapeRef.new(shape: TokenVaultIdType, required: true, location_name: "tokenVaultId"))
+    ResetTokenVaultKeyMaterialResponse.add_member(:kms_configuration, Shapes::ShapeRef.new(shape: KmsConfiguration, required: true, location_name: "kmsConfiguration"))
+    ResetTokenVaultKeyMaterialResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedDate"))
+    ResetTokenVaultKeyMaterialResponse.struct_class = Types::ResetTokenVaultKeyMaterialResponse
 
     Resource.add_member(:arn, Shapes::ShapeRef.new(shape: BedrockAgentcoreResourceArn, location_name: "arn"))
     Resource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -7129,6 +7145,7 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -8775,6 +8792,21 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:reset_token_vault_key_material, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetTokenVaultKeyMaterial"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/reset-token-vault-key-material"
+        o.input = Shapes::ShapeRef.new(shape: ResetTokenVaultKeyMaterialRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetTokenVaultKeyMaterialResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:rotate_payment_connector_credentials, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RotatePaymentConnectorCredentials"
         o.http_method = "POST"
@@ -8799,6 +8831,7 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -9276,6 +9309,7 @@ module Aws::BedrockAgentCoreControl
         o.output = Shapes::ShapeRef.new(shape: UpdateWorkloadIdentityResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

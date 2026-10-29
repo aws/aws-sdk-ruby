@@ -1946,7 +1946,10 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Lightsail/Client.html#start_instance-instance_method
       def start_instance: (
-                            instance_name: ::String
+                            instance_name: ::String,
+                            ?attribute_updates: {
+                              bundle_id: ::String?
+                            }
                           ) -> _StartInstanceResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartInstanceResponseSuccess
 

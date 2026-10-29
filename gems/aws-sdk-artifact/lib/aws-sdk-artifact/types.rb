@@ -460,7 +460,7 @@ module Aws::Artifact
     #
     # @!attribute [rw] support_mode
     #   Support mode for this inquiry. AI\_ONLY provides AI-generated
-    #   responses. FULL\_SUPPORT includes human expert review.
+    #   responses.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/artifact-2018-05-10/InquiryDetail AWS API Documentation

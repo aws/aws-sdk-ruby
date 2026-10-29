@@ -1506,10 +1506,7 @@ module Aws
                                             }
                                           ]?,
                                           resource_requirements: Array[
-                                            {
-                                              value: ::String,
-                                              type: ("GPU" | "InferenceAccelerator" | "NeuronDevice")
-                                            }
+                                            Params::resource_requirement
                                           ]?,
                                           firelens_configuration: {
                                             type: ("fluentd" | "fluentbit"),

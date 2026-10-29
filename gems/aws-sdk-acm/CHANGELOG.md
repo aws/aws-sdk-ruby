@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2026-10-28)
+------------------
+
+* Feature - AWS Certificate Manager now supports the Automatic Certificate Management Environment (ACME) protocol in the AWS GovCloud (US-East) and AWS GovCloud (US-West) Regions.
+
 1.114.0 (2026-10-21)
 ------------------
 

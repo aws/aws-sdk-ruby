@@ -3,6 +3,11 @@ Unreleased Changes
 
 * Issue - Remove duplicate `before_refresh` callback during credential refresh.
 
+1.97.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.96.0 (2026-10-21)
 ------------------
 

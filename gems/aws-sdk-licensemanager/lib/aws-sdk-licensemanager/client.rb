@@ -720,6 +720,25 @@ module Aws::LicenseManager
     # see [Granted licenses in License Manager][1] in the *License Manager
     # User Guide*.
     #
+    # Set the type of grant with the `GrantType` field:
+    #
+    # * `BuyerGrant` - The default grant type, created by the seller when a
+    #   customer subscribes to a product. The seller creates a license for
+    #   the subscription and a buyer grant for the customer. With a buyer
+    #   grant, the customer can use, consume, and distribute the license,
+    #   according to the permissions the seller sets in the product
+    #   contract.
+    #
+    # * `DelegateGrant` - A delegate grant gives the grantee read-only
+    #   visibility into the licenses and grants that you have distributed to
+    #   buyers for a product. The grantee can monitor that activity on your
+    #   behalf, and can also listen for the related Amazon EventBridge
+    #   events. A delegate grant conveys no entitlement to use the licenses,
+    #   and its only allowed operation is `ListReceivedLicenses`. You must
+    #   create the delegate grant, and its license, from the same Amazon Web
+    #   Services account that you used to create those buyer licenses and
+    #   grants.
+    #
     #
     #
     # [1]: https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html
@@ -768,6 +787,21 @@ module Aws::LicenseManager
     #
     #   [1]: https://docs.aws.amazon.com/license-manager/latest/APIReference/API_TagResource.html
     #
+    # @option params [String] :grant_type
+    #   The type of grant to create. For more information about each type, see
+    #   the preceding description of this operation. Valid values:
+    #
+    #   * `BuyerGrant` - The default grant type if you don't specify a value.
+    #     Conveys the entitlement to use the license.
+    #
+    #   * `DelegateGrant` - Gives the grantee read-only visibility into the
+    #     licenses and grants that you have distributed to buyers, with no
+    #     entitlement to use them.
+    #
+    # @option params [Types::Options] :options
+    #   The options for the grant: the status to set after creation, and how
+    #   activating the grant affects other active grants for the same product.
+    #
     # @return [Types::CreateGrantResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateGrantResponse#grant_arn #grant_arn} => String
@@ -782,13 +816,18 @@ module Aws::LicenseManager
     #     license_arn: "Arn", # required
     #     principals: ["Arn"], # required
     #     home_region: "String", # required
-    #     allowed_operations: ["CreateGrant"], # required, accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken
+    #     allowed_operations: ["CreateGrant"], # required, accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken, ListReceivedLicenses
     #     tags: [
     #       {
     #         key: "String",
     #         value: "String",
     #       },
     #     ],
+    #     grant_type: "BuyerGrant", # accepts BuyerGrant, DelegateGrant
+    #     options: {
+    #       activation_override_behavior: "DISTRIBUTED_GRANTS_ONLY", # accepts DISTRIBUTED_GRANTS_ONLY, ALL_GRANTS_PERMITTED_BY_ISSUER
+    #       desired_status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED, WORKFLOW_COMPLETED
+    #     },
     #   })
     #
     # @example Response structure
@@ -851,12 +890,13 @@ module Aws::LicenseManager
     #     client_token: "ClientToken", # required
     #     grant_arn: "Arn", # required
     #     grant_name: "String",
-    #     allowed_operations: ["CreateGrant"], # accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken
+    #     allowed_operations: ["CreateGrant"], # accepts CreateGrant, CheckoutLicense, CheckoutBorrowLicense, CheckInLicense, ExtendConsumptionLicense, ListPurchasedLicenses, CreateToken, ListReceivedLicenses
     #     status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED, WORKFLOW_COMPLETED
     #     status_reason: "StatusReasonMessage",
     #     source_version: "String",
     #     options: {
     #       activation_override_behavior: "DISTRIBUTED_GRANTS_ONLY", # accepts DISTRIBUTED_GRANTS_ONLY, ALL_GRANTS_PERMITTED_BY_ISSUER
+    #       desired_status: "PENDING_WORKFLOW", # accepts PENDING_WORKFLOW, PENDING_ACCEPT, REJECTED, ACTIVE, FAILED_WORKFLOW, DELETED, PENDING_DELETE, DISABLED, WORKFLOW_COMPLETED
     #     },
     #   })
     #
@@ -1949,8 +1989,10 @@ module Aws::LicenseManager
     #   resp.grant.status_reason #=> String
     #   resp.grant.version #=> String
     #   resp.grant.granted_operations #=> Array
-    #   resp.grant.granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.grant.granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken", "ListReceivedLicenses"
     #   resp.grant.options.activation_override_behavior #=> String, one of "DISTRIBUTED_GRANTS_ONLY", "ALL_GRANTS_PERMITTED_BY_ISSUER"
+    #   resp.grant.options.desired_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
+    #   resp.grant.grant_type #=> String, one of "BuyerGrant", "DelegateGrant"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/GetGrant AWS API Documentation
     #
@@ -2546,8 +2588,10 @@ module Aws::LicenseManager
     #   resp.grants[0].status_reason #=> String
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
-    #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken", "ListReceivedLicenses"
     #   resp.grants[0].options.activation_override_behavior #=> String, one of "DISTRIBUTED_GRANTS_ONLY", "ALL_GRANTS_PERMITTED_BY_ISSUER"
+    #   resp.grants[0].options.desired_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
+    #   resp.grants[0].grant_type #=> String, one of "BuyerGrant", "DelegateGrant"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListDistributedGrants AWS API Documentation
@@ -3325,8 +3369,10 @@ module Aws::LicenseManager
     #   resp.grants[0].status_reason #=> String
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
-    #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken", "ListReceivedLicenses"
     #   resp.grants[0].options.activation_override_behavior #=> String, one of "DISTRIBUTED_GRANTS_ONLY", "ALL_GRANTS_PERMITTED_BY_ISSUER"
+    #   resp.grants[0].options.desired_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
+    #   resp.grants[0].grant_type #=> String, one of "BuyerGrant", "DelegateGrant"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedGrants AWS API Documentation
@@ -3388,8 +3434,10 @@ module Aws::LicenseManager
     #   resp.grants[0].status_reason #=> String
     #   resp.grants[0].version #=> String
     #   resp.grants[0].granted_operations #=> Array
-    #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.grants[0].granted_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken", "ListReceivedLicenses"
     #   resp.grants[0].options.activation_override_behavior #=> String, one of "DISTRIBUTED_GRANTS_ONLY", "ALL_GRANTS_PERMITTED_BY_ISSUER"
+    #   resp.grants[0].options.desired_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "PENDING_DELETE", "DISABLED", "WORKFLOW_COMPLETED"
+    #   resp.grants[0].grant_type #=> String, one of "BuyerGrant", "DelegateGrant"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedGrantsForOrganization AWS API Documentation
@@ -3478,7 +3526,8 @@ module Aws::LicenseManager
     #   resp.licenses[0].received_metadata.received_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.licenses[0].received_metadata.received_status_reason #=> String
     #   resp.licenses[0].received_metadata.allowed_operations #=> Array
-    #   resp.licenses[0].received_metadata.allowed_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.licenses[0].received_metadata.allowed_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken", "ListReceivedLicenses"
+    #   resp.licenses[0].received_metadata.grant_type #=> String, one of "BuyerGrant", "DelegateGrant"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedLicenses AWS API Documentation
@@ -3557,7 +3606,8 @@ module Aws::LicenseManager
     #   resp.licenses[0].received_metadata.received_status #=> String, one of "PENDING_WORKFLOW", "PENDING_ACCEPT", "REJECTED", "ACTIVE", "FAILED_WORKFLOW", "DELETED", "DISABLED", "WORKFLOW_COMPLETED"
     #   resp.licenses[0].received_metadata.received_status_reason #=> String
     #   resp.licenses[0].received_metadata.allowed_operations #=> Array
-    #   resp.licenses[0].received_metadata.allowed_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken"
+    #   resp.licenses[0].received_metadata.allowed_operations[0] #=> String, one of "CreateGrant", "CheckoutLicense", "CheckoutBorrowLicense", "CheckInLicense", "ExtendConsumptionLicense", "ListPurchasedLicenses", "CreateToken", "ListReceivedLicenses"
+    #   resp.licenses[0].received_metadata.grant_type #=> String, one of "BuyerGrant", "DelegateGrant"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/license-manager-2018-08-01/ListReceivedLicensesForOrganization AWS API Documentation
@@ -4393,7 +4443,7 @@ module Aws::LicenseManager
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-licensemanager'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.142.0 (2026-10-27)
+------------------
+
+* Feature - Added the attributeUpdates parameter to the Lightsail StartInstance API, which allows customers to update the attributes of a stopped instance when starting it.
+
 1.141.0 (2026-10-26)
 ------------------
 

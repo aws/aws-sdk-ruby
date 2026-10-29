@@ -370,7 +370,10 @@ module Aws::ECS
     GatewayTestTrafficHeader = Shapes::StructureShape.new(name: 'GatewayTestTrafficHeader')
     GetTaskProtectionRequest = Shapes::StructureShape.new(name: 'GetTaskProtectionRequest')
     GetTaskProtectionResponse = Shapes::StructureShape.new(name: 'GetTaskProtectionResponse')
+    GpuDevice = Shapes::StructureShape.new(name: 'GpuDevice')
+    GpuDevices = Shapes::ListShape.new(name: 'GpuDevices')
     GpuIds = Shapes::ListShape.new(name: 'GpuIds')
+    GpuSharingMode = Shapes::StringShape.new(name: 'GpuSharingMode')
     HealthCheck = Shapes::StructureShape.new(name: 'HealthCheck')
     HealthStatus = Shapes::StringShape.new(name: 'HealthStatus')
     HealthyPercentInteger = Shapes::IntegerShape.new(name: 'HealthyPercentInteger')
@@ -508,6 +511,9 @@ module Aws::ECS
     NetworkMode = Shapes::StringShape.new(name: 'NetworkMode')
     NeuronDeviceIds = Shapes::ListShape.new(name: 'NeuronDeviceIds')
     NoUpdateAvailableException = Shapes::StructureShape.new(name: 'NoUpdateAvailableException')
+    NvidiaMpsAllocation = Shapes::StructureShape.new(name: 'NvidiaMpsAllocation')
+    NvidiaMpsAllocationMaxComputePercentInteger = Shapes::IntegerShape.new(name: 'NvidiaMpsAllocationMaxComputePercentInteger')
+    NvidiaMpsAllocationMemoryInteger = Shapes::IntegerShape.new(name: 'NvidiaMpsAllocationMemoryInteger')
     OSFamily = Shapes::StringShape.new(name: 'OSFamily')
     PidMode = Shapes::StringShape.new(name: 'PidMode')
     PlacementConstraint = Shapes::StructureShape.new(name: 'PlacementConstraint')
@@ -631,6 +637,7 @@ module Aws::ECS
     SettingName = Shapes::StringShape.new(name: 'SettingName')
     SettingType = Shapes::StringShape.new(name: 'SettingType')
     Settings = Shapes::ListShape.new(name: 'Settings')
+    SharingStrategy = Shapes::UnionShape.new(name: 'SharingStrategy')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
     StabilityStatus = Shapes::StringShape.new(name: 'StabilityStatus')
     StartTaskRequest = Shapes::StructureShape.new(name: 'StartTaskRequest')
@@ -944,6 +951,7 @@ module Aws::ECS
     Container.add_member(:memory_reservation, Shapes::ShapeRef.new(shape: String, location_name: "memoryReservation"))
     Container.add_member(:gpu_ids, Shapes::ShapeRef.new(shape: GpuIds, location_name: "gpuIds"))
     Container.add_member(:neuron_device_ids, Shapes::ShapeRef.new(shape: NeuronDeviceIds, location_name: "neuronDeviceIds"))
+    Container.add_member(:gpu_sharing_strategy, Shapes::ShapeRef.new(shape: SharingStrategy, location_name: "gpuSharingStrategy"))
     Container.struct_class = Types::Container
 
     ContainerDefinition.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -1023,6 +1031,7 @@ module Aws::ECS
     ContainerInstance.add_member(:attachments, Shapes::ShapeRef.new(shape: Attachments, location_name: "attachments"))
     ContainerInstance.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ContainerInstance.add_member(:health_status, Shapes::ShapeRef.new(shape: ContainerInstanceHealthStatus, location_name: "healthStatus"))
+    ContainerInstance.add_member(:gpu_devices, Shapes::ShapeRef.new(shape: GpuDevices, location_name: "gpuDevices"))
     ContainerInstance.struct_class = Types::ContainerInstance
 
     ContainerInstanceFieldList.member = Shapes::ShapeRef.new(shape: ContainerInstanceField)
@@ -2136,6 +2145,15 @@ module Aws::ECS
     GetTaskProtectionResponse.add_member(:failures, Shapes::ShapeRef.new(shape: Failures, location_name: "failures"))
     GetTaskProtectionResponse.struct_class = Types::GetTaskProtectionResponse
 
+    GpuDevice.add_member(:gpu_id, Shapes::ShapeRef.new(shape: String, location_name: "gpuId"))
+    GpuDevice.add_member(:sharing_mode, Shapes::ShapeRef.new(shape: GpuSharingMode, location_name: "sharingMode"))
+    GpuDevice.add_member(:total_memory_in_mi_b, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "totalMemoryInMiB"))
+    GpuDevice.add_member(:remaining_memory_in_mi_b, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "remainingMemoryInMiB"))
+    GpuDevice.add_member(:container_count, Shapes::ShapeRef.new(shape: BoxedInteger, location_name: "containerCount"))
+    GpuDevice.struct_class = Types::GpuDevice
+
+    GpuDevices.member = Shapes::ShapeRef.new(shape: GpuDevice)
+
     GpuIds.member = Shapes::ShapeRef.new(shape: String)
 
     HealthCheck.add_member(:command, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "command"))
@@ -2688,6 +2706,10 @@ module Aws::ECS
     NoUpdateAvailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     NoUpdateAvailableException.struct_class = Types::NoUpdateAvailableException
 
+    NvidiaMpsAllocation.add_member(:memory, Shapes::ShapeRef.new(shape: NvidiaMpsAllocationMemoryInteger, required: true, location_name: "memory"))
+    NvidiaMpsAllocation.add_member(:max_compute_percent, Shapes::ShapeRef.new(shape: NvidiaMpsAllocationMaxComputePercentInteger, location_name: "maxComputePercent"))
+    NvidiaMpsAllocation.struct_class = Types::NvidiaMpsAllocation
+
     PlacementConstraint.add_member(:type, Shapes::ShapeRef.new(shape: PlacementConstraintType, location_name: "type"))
     PlacementConstraint.add_member(:expression, Shapes::ShapeRef.new(shape: String, location_name: "expression"))
     PlacementConstraint.struct_class = Types::PlacementConstraint
@@ -2844,8 +2866,9 @@ module Aws::ECS
     ResourceNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
-    ResourceRequirement.add_member(:value, Shapes::ShapeRef.new(shape: String, required: true, location_name: "value"))
+    ResourceRequirement.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     ResourceRequirement.add_member(:type, Shapes::ShapeRef.new(shape: ResourceType, required: true, location_name: "type"))
+    ResourceRequirement.add_member(:sharing_strategy, Shapes::ShapeRef.new(shape: SharingStrategy, location_name: "sharingStrategy"))
     ResourceRequirement.struct_class = Types::ResourceRequirement
 
     ResourceRequirements.member = Shapes::ShapeRef.new(shape: ResourceRequirement)
@@ -3172,6 +3195,12 @@ module Aws::ECS
     Setting.struct_class = Types::Setting
 
     Settings.member = Shapes::ShapeRef.new(shape: Setting)
+
+    SharingStrategy.add_member(:nvidia_mps, Shapes::ShapeRef.new(shape: NvidiaMpsAllocation, location_name: "nvidiaMps"))
+    SharingStrategy.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SharingStrategy.add_member_subclass(:nvidia_mps, Types::SharingStrategy::NvidiaMps)
+    SharingStrategy.add_member_subclass(:unknown, Types::SharingStrategy::Unknown)
+    SharingStrategy.struct_class = Types::SharingStrategy
 
     StartTaskRequest.add_member(:cluster, Shapes::ShapeRef.new(shape: String, location_name: "cluster"))
     StartTaskRequest.add_member(:container_instances, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "containerInstances"))

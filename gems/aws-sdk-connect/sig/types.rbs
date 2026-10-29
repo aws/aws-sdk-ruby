@@ -1895,6 +1895,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor contact_flow_id: ::String
       attr_accessor self_assign_flow_id: ::String
+      attr_accessor contact_hooks: Types::TaskTemplateContactHooks
       attr_accessor constraints: Types::TaskTemplateConstraints
       attr_accessor defaults: Types::TaskTemplateDefaults
       attr_accessor status: ("ACTIVE" | "INACTIVE")
@@ -4456,6 +4457,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor contact_flow_id: ::String
       attr_accessor self_assign_flow_id: ::String
+      attr_accessor contact_hooks: Types::TaskTemplateContactHooks
       attr_accessor constraints: Types::TaskTemplateConstraints
       attr_accessor defaults: Types::TaskTemplateDefaults
       attr_accessor fields: ::Array[Types::TaskTemplateField]
@@ -8614,6 +8616,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class TaskTemplateContactHooks
+      attr_accessor wrap_up_flow_id: ::String
+      SENSITIVE: []
+    end
+
     class TaskTemplateDefaultFieldValue
       attr_accessor id: Types::TaskTemplateFieldIdentifier
       attr_accessor default_value: ::String
@@ -9440,6 +9447,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor contact_flow_id: ::String
       attr_accessor self_assign_flow_id: ::String
+      attr_accessor contact_hooks: Types::TaskTemplateContactHooks
       attr_accessor constraints: Types::TaskTemplateConstraints
       attr_accessor defaults: Types::TaskTemplateDefaults
       attr_accessor status: ("ACTIVE" | "INACTIVE")
@@ -9455,6 +9463,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor contact_flow_id: ::String
       attr_accessor self_assign_flow_id: ::String
+      attr_accessor contact_hooks: Types::TaskTemplateContactHooks
       attr_accessor constraints: Types::TaskTemplateConstraints
       attr_accessor defaults: Types::TaskTemplateDefaults
       attr_accessor fields: ::Array[Types::TaskTemplateField]

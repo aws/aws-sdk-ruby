@@ -520,6 +520,47 @@ module Aws::Neptunedata
       req.send_request(options)
     end
 
+    # Cancels an in-progress index rebuild operation.
+    #
+    # When invoking this operation in a Neptune cluster that has IAM
+    # authentication enabled, the IAM user or role making the request must
+    # have a policy attached that allows the
+    # [neptune-db:CancelIndexRebuild][1] IAM action in that cluster.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelindexrebuild
+    #
+    # @option params [required, String] :rebuild_id
+    #   The unique identifier of the index rebuild job to cancel.
+    #
+    # @return [Types::CancelIndexRebuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelIndexRebuildOutput#status #status} => String
+    #   * {Types::CancelIndexRebuildOutput#concurrency #concurrency} => Integer
+    #   * {Types::CancelIndexRebuildOutput#write_buffer_size #write_buffer_size} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_index_rebuild({
+    #     rebuild_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PREPARING", "REBUILDING", "COMPLETED", "FAILED", "CANCELLED", "CANCELLING"
+    #   resp.concurrency #=> Integer
+    #   resp.write_buffer_size #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/CancelIndexRebuild AWS API Documentation
+    #
+    # @overload cancel_index_rebuild(params = {})
+    # @param [Hash] params ({})
+    def cancel_index_rebuild(params = {}, options = {})
+      req = build_request(:cancel_index_rebuild, params)
+      req.send_request(options)
+    end
+
     # Cancels a specified load job. This is an HTTP `DELETE` request. See
     # [Neptune Loader Get-Status API][1] for more information.
     #
@@ -1477,6 +1518,60 @@ module Aws::Neptunedata
       req.send_request(options)
     end
 
+    # Retrieves the status of an index rebuild operation.
+    #
+    # When invoking this operation in a Neptune cluster that has IAM
+    # authentication enabled, the IAM user or role making the request must
+    # have a policy attached that allows the
+    # [neptune-db:GetIndexRebuildStatus][1] IAM action in that cluster.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getindexrebuildstatus
+    #
+    # @option params [required, String] :rebuild_id
+    #   The unique identifier of the index rebuild job returned by the
+    #   StartIndexRebuild operation.
+    #
+    # @return [Types::GetIndexRebuildStatusOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetIndexRebuildStatusOutput#status #status} => String
+    #   * {Types::GetIndexRebuildStatusOutput#scope #scope} => String
+    #   * {Types::GetIndexRebuildStatusOutput#concurrency #concurrency} => Integer
+    #   * {Types::GetIndexRebuildStatusOutput#write_buffer_size #write_buffer_size} => String
+    #   * {Types::GetIndexRebuildStatusOutput#start_time #start_time} => Time
+    #   * {Types::GetIndexRebuildStatusOutput#progress_percentage #progress_percentage} => Integer
+    #   * {Types::GetIndexRebuildStatusOutput#estimated_end_time #estimated_end_time} => Time
+    #   * {Types::GetIndexRebuildStatusOutput#end_time #end_time} => Time
+    #   * {Types::GetIndexRebuildStatusOutput#failure_reason #failure_reason} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_index_rebuild_status({
+    #     rebuild_id: "String", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PREPARING", "REBUILDING", "COMPLETED", "FAILED", "CANCELLED", "CANCELLING"
+    #   resp.scope #=> String, one of "ALL", "QUADS", "DICTIONARIES"
+    #   resp.concurrency #=> Integer
+    #   resp.write_buffer_size #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #   resp.start_time #=> Time
+    #   resp.progress_percentage #=> Integer
+    #   resp.estimated_end_time #=> Time
+    #   resp.end_time #=> Time
+    #   resp.failure_reason #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/GetIndexRebuildStatus AWS API Documentation
+    #
+    # @overload get_index_rebuild_status(params = {})
+    # @param [Hash] params ({})
+    def get_index_rebuild_status(params = {}, options = {})
+      req = build_request(:get_index_rebuild_status, params)
+      req.send_request(options)
+    end
+
     # Gets status information about a specified load job. Neptune keeps
     # track of the most recent 1,024 bulk load jobs, and stores the last
     # 10,000 error details per job.
@@ -2276,6 +2371,94 @@ module Aws::Neptunedata
       req.send_request(options)
     end
 
+    # Retrieves storage information for the Neptune database instance,
+    # including approximate total storage used and per-category size and
+    # entry counts. Storage categories include:
+    #
+    # * *Quad indexes* - the indexes that store graph data, for both RDF
+    #   (SPARQL) and Property Graph (Gremlin/openCypher) models.
+    #
+    # * *Dictionaries* - the term dictionaries, including total dictionary
+    #   storage and the portion used by blob (large value) entries.
+    #
+    # * *Undo logs* - the undo logs, reported as a total size and the number
+    #   of entries in the undo log list.
+    #
+    # * *Streams* - the change-log streams.
+    #
+    # * *Schema* - the schema.
+    #
+    # * *DFE statistics* - the DFE engine statistics.
+    #
+    # * *System metadata* - internal system metadata.
+    #
+    # When invoking this operation in a Neptune cluster that has IAM
+    # authentication enabled, the IAM user or role making the request must
+    # have a policy attached that allows the [neptune-db:GetStorageInfo][1]
+    # IAM action in that cluster.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstorageinfo
+    #
+    # @return [Types::GetStorageOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetStorageOutput#total_storage_bytes_used #total_storage_bytes_used} => Integer
+    #   * {Types::GetStorageOutput#quads #quads} => Types::QuadsIndexesInfo
+    #   * {Types::GetStorageOutput#dictionaries #dictionaries} => Types::DictionariesInfo
+    #   * {Types::GetStorageOutput#undo_logs #undo_logs} => Types::UndoLogsMetrics
+    #   * {Types::GetStorageOutput#streams #streams} => Types::StorageMetrics
+    #   * {Types::GetStorageOutput#dfe_statistics #dfe_statistics} => Types::StorageMetrics
+    #   * {Types::GetStorageOutput#schema #schema} => Types::StorageMetrics
+    #   * {Types::GetStorageOutput#internals #internals} => Types::StorageMetrics
+    #
+    # @example Response structure
+    #
+    #   resp.total_storage_bytes_used #=> Integer
+    #   resp.quads.rdf.spog.size_in_bytes #=> Integer
+    #   resp.quads.rdf.spog.count #=> Integer
+    #   resp.quads.rdf.pogs.size_in_bytes #=> Integer
+    #   resp.quads.rdf.pogs.count #=> Integer
+    #   resp.quads.rdf.gpso.size_in_bytes #=> Integer
+    #   resp.quads.rdf.gpso.count #=> Integer
+    #   resp.quads.rdf.osgp.size_in_bytes #=> Integer
+    #   resp.quads.rdf.osgp.count #=> Integer
+    #   resp.quads.rdf.pzsog.size_in_bytes #=> Integer
+    #   resp.quads.rdf.pzsog.count #=> Integer
+    #   resp.quads.pg.spog.size_in_bytes #=> Integer
+    #   resp.quads.pg.spog.count #=> Integer
+    #   resp.quads.pg.pogs.size_in_bytes #=> Integer
+    #   resp.quads.pg.pogs.count #=> Integer
+    #   resp.quads.pg.gpso.size_in_bytes #=> Integer
+    #   resp.quads.pg.gpso.count #=> Integer
+    #   resp.quads.pg.osgp.size_in_bytes #=> Integer
+    #   resp.quads.pg.osgp.count #=> Integer
+    #   resp.quads.pg.pzsog.size_in_bytes #=> Integer
+    #   resp.quads.pg.pzsog.count #=> Integer
+    #   resp.dictionaries.total.size_in_bytes #=> Integer
+    #   resp.dictionaries.total.count #=> Integer
+    #   resp.dictionaries.blobs.size_in_bytes #=> Integer
+    #   resp.dictionaries.blobs.count #=> Integer
+    #   resp.undo_logs.size_in_bytes #=> Integer
+    #   resp.undo_logs.list_size #=> Integer
+    #   resp.streams.size_in_bytes #=> Integer
+    #   resp.streams.count #=> Integer
+    #   resp.dfe_statistics.size_in_bytes #=> Integer
+    #   resp.dfe_statistics.count #=> Integer
+    #   resp.schema.size_in_bytes #=> Integer
+    #   resp.schema.count #=> Integer
+    #   resp.internals.size_in_bytes #=> Integer
+    #   resp.internals.count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/GetStorageInfo AWS API Documentation
+    #
+    # @overload get_storage_info(params = {})
+    # @param [Hash] params ({})
+    def get_storage_info(params = {}, options = {})
+      req = build_request(:get_storage_info, params)
+      req.send_request(options)
+    end
+
     # Lists active Gremlin queries. See [Gremlin query status API][1] for
     # details about the output.
     #
@@ -2329,6 +2512,35 @@ module Aws::Neptunedata
     # @param [Hash] params ({})
     def list_gremlin_queries(params = {}, options = {})
       req = build_request(:list_gremlin_queries, params)
+      req.send_request(options)
+    end
+
+    # Retrieves a list of all index rebuild operation identifiers.
+    #
+    # When invoking this operation in a Neptune cluster that has IAM
+    # authentication enabled, the IAM user or role making the request must
+    # have a policy attached that allows the
+    # [neptune-db:ListIndexRebuilds][1] IAM action in that cluster.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listindexrebuilds
+    #
+    # @return [Types::ListIndexRebuildsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListIndexRebuildsOutput#rebuild_ids #rebuild_ids} => Array&lt;String&gt;
+    #
+    # @example Response structure
+    #
+    #   resp.rebuild_ids #=> Array
+    #   resp.rebuild_ids[0] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/ListIndexRebuilds AWS API Documentation
+    #
+    # @overload list_index_rebuilds(params = {})
+    # @param [Hash] params ({})
+    def list_index_rebuilds(params = {}, options = {})
+      req = build_request(:list_index_rebuilds, params)
       req.send_request(options)
     end
 
@@ -2704,6 +2916,103 @@ module Aws::Neptunedata
     # @param [Hash] params ({})
     def manage_sparql_statistics(params = {}, options = {})
       req = build_request(:manage_sparql_statistics, params)
+      req.send_request(options)
+    end
+
+    # Initiates an index rebuild operation to optimize storage and improve
+    # query performance. The rebuild operation reorganizes index to reclaim
+    # space and improve efficiency.
+    #
+    # When invoking this operation in a Neptune cluster that has IAM
+    # authentication enabled, the IAM user or role making the request must
+    # have a policy attached that allows the
+    # [neptune-db:StartIndexRebuild][1] IAM action in that cluster.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#startindexrebuild
+    #
+    # @option params [String] :scope
+    #   Specifies the scope of the rebuild operation. Possible values are:
+    #
+    #   * `ALL` - Rebuild all (quads and dictionaries). This is the default if
+    #     not specified.
+    #
+    #   * `QUADS` - Rebuild only the quad indexes.
+    #
+    #   * `DICTIONARIES` - Rebuild only the dictionaries.
+    #
+    # @option params [Integer] :concurrency
+    #   The number of concurrent indexes to rebuild in parallel. If not
+    #   specified, defaults to `1`.
+    #
+    #   Valid values are between `1` and the number of vCPUs available on the
+    #   writer instance. If the value exceeds the available vCPUs, it is
+    #   capped at the maximum instead of returning an
+    #   `InvalidParameterException`. The effective (capped) value is returned
+    #   in the response.
+    #
+    #   Higher concurrency can shorten the overall rebuild, but also increases
+    #   CPU and I/O load during the operation.
+    #
+    # @option params [String] :write_buffer_size
+    #   Controls the buffer size used for tracking concurrent write operations
+    #   during the index rebuild. If your database has high write traffic
+    #   during the rebuild, a larger buffer prevents the operation from
+    #   failing due to buffer overflow. Possible values are:
+    #
+    #   * `LOW` - Suitable for databases with light to moderate write
+    #     activity. This is the default.
+    #
+    #   * `MEDIUM` - Recommended for databases with sustained write traffic or
+    #     bulk loading.
+    #
+    #   * `HIGH` - Use when rebuilding indexes during heavy write workloads or
+    #     continuous bulk data ingestion.
+    #
+    #   If your rebuild fails and you are actively writing data to the
+    #   database, retry with a higher `writeBufferSize` value. For bulk load
+    #   operations, consider using `HIGH`.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you don't specify a client token, the
+    #   SDK automatically generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @return [Types::StartIndexRebuildOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartIndexRebuildOutput#status #status} => String
+    #   * {Types::StartIndexRebuildOutput#rebuild_id #rebuild_id} => String
+    #   * {Types::StartIndexRebuildOutput#scope #scope} => String
+    #   * {Types::StartIndexRebuildOutput#concurrency #concurrency} => Integer
+    #   * {Types::StartIndexRebuildOutput#write_buffer_size #write_buffer_size} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_index_rebuild({
+    #     scope: "ALL", # accepts ALL, QUADS, DICTIONARIES
+    #     concurrency: 1,
+    #     write_buffer_size: "LOW", # accepts LOW, MEDIUM, HIGH
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.status #=> String, one of "PREPARING", "REBUILDING", "COMPLETED", "FAILED", "CANCELLED", "CANCELLING"
+    #   resp.rebuild_id #=> String
+    #   resp.scope #=> String, one of "ALL", "QUADS", "DICTIONARIES"
+    #   resp.concurrency #=> Integer
+    #   resp.write_buffer_size #=> String, one of "LOW", "MEDIUM", "HIGH"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/neptunedata-2023-08-01/StartIndexRebuild AWS API Documentation
+    #
+    # @overload start_index_rebuild(params = {})
+    # @param [Hash] params ({})
+    def start_index_rebuild(params = {}, options = {})
+      req = build_request(:start_index_rebuild, params)
       req.send_request(options)
     end
 
@@ -3448,7 +3757,7 @@ module Aws::Neptunedata
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-neptunedata'
-      context[:gem_version] = '1.51.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

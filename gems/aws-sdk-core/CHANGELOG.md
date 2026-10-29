@@ -3,6 +3,13 @@ Unreleased Changes
 
 * Feature - Supported AWS credential providers now continue using cached credentials after refresh failures and retry refresh with backoff. This improves resilience to temporary credential source outages and standardizes credential refresh timing. During an outage, requests may reach the service and return authentication errors instead of failing client-side during credential refresh. See https://docs.aws.amazon.com/sdkref/latest/guide/feature-credential-refresh.html for details and the full list of providers. `AssumeRoleCredentials`, `AssumeRoleWebIdentityCredentials`, `SSOCredentials`, `LoginCredentials`, `InstanceProfileCredentials`, and `ECSCredentials` are updated accordingly, and `ExpiredToken`/`ExpiredTokenException` responses are now retried once, after invalidating the credentials that signed the failed request. `ProcessCredentials`, S3 Express, and customer-provided credential providers are out of scope and keep their existing behavior. `InstanceProfileCredentials` and `ECSCredentials` constructed directly now raise instead of silently returning unset credentials when the metadata endpoint is unreachable on the first fetch.
 
+3.262.0 (2026-10-28)
+------------------
+
+* Feature - Improve User-Agent framework detection with literal matching of configured framework names.
+
+* Issue - Fix service error parsing and response header-map extraction by matching prefixes literally. Custom models that relied on regex matching must use literal prefixes.
+
 3.261.0 (2026-10-26)
 ------------------
 
