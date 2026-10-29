@@ -94,6 +94,62 @@ module Aws
           expect { Decoder.new(payload).decode }.not_to raise_error
         end
       end
+
+      # Methods used by RpcV2::Parser; behavior must match #decode.
+      describe 'parser read surface (@api private)' do
+        it 'exposes exactly the intended public methods' do
+          surface = %i[peek_type read_map read_array read_string decode_item nest finish]
+          expect(Decoder.public_instance_methods(false)).to match_array(%i[decode] + surface)
+        end
+
+        it 'reads a map header then members one value at a time' do
+          d = Decoder.new(Encoder.new.add({ 'S' => 'hi', 'N' => 1 }).bytes)
+          expect(d.read_map).to eq(2)
+          expect(d.read_string).to eq('S')
+          expect(d.decode_item).to eq('hi')
+          expect(d.read_string).to eq('N')
+          expect(d.decode_item).to eq(1)
+        end
+
+        it 'reads an array header then elements' do
+          d = Decoder.new(Encoder.new.add([10, 20]).bytes)
+          expect(d.read_array).to eq(2)
+          expect(d.decode_item).to eq(10)
+          expect(d.decode_item).to eq(20)
+        end
+
+        it 'peeks the next item type without consuming it' do
+          d = Decoder.new(Encoder.new.add([1]).bytes)
+          expect(d.peek_type).to eq(:array)
+          expect(d.read_array).to eq(1)
+        end
+
+        it 'preserves OutOfBytesError on underrun' do
+          bytes = [0x62, 0x61].pack('C*').force_encoding(Encoding::BINARY) # text string of 2 bytes, 1 present
+          expect { Decoder.new(bytes).read_string }.to raise_error(OutOfBytesError)
+        end
+
+        it 'preserves the depth guard when driven via decode_item' do
+          payload = ("\xc6".b * 128) + "\x00".b
+          expect { Decoder.new(payload).decode_item }.to raise_error(Error, /Maximum nesting depth/)
+        end
+
+        it 'nest returns the block value and shares the decode_item depth limit' do
+          d = Decoder.new(Encoder.new.add(1).bytes)
+          expect(d.nest { d.decode_item }).to eq(1)
+
+          deep = Decoder.new(Encoder.new.add(1).bytes)
+          nest = ->(n) { n.zero? ? deep.decode_item : deep.nest { nest.call(n - 1) } }
+          expect { nest.call(128) }.to raise_error(Error, /Maximum nesting depth/)
+        end
+
+        it 'finish returns the value, or raises ExtraBytesError like #decode' do
+          d = Decoder.new(Encoder.new.add(1).bytes)
+          expect(d.finish(d.decode_item)).to eq(1)
+          extra = Decoder.new(Encoder.new.add(1).add(2).bytes)
+          expect { extra.finish(extra.decode_item) }.to raise_error(ExtraBytesError)
+        end
+      end
     end
   end
 end
