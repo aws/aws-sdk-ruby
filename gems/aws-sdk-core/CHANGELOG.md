@@ -3,7 +3,7 @@ Unreleased Changes
 
 * Feature - Reduce object allocation overhead for SDK responses. SDK clients now return `Aws::Response`, a subclass of `Seahorse::Client::Response`.
 
-* Issue - Verify the server certificate hostname on `AsyncClient` HTTP/2 connections.
+* Issue - Verify the server certificate hostname for `AsyncClient` HTTP/2 connections when `ssl_verify_peer` is enabled. Connections now fail if the server certificate does not match the endpoint hostname.
 
 3.262.0 (2026-10-28)
 ------------------
