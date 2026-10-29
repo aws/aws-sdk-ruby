@@ -117,7 +117,7 @@ module Aws
 
           expect_auth({"name"=>"sigv4", "signingName"=>"s3express"})
           # tests that credentials are used in the subsequent call
-          allow(provider).to receive(:express_credentials_for).with(bucket, client)
+          allow(provider).to receive(:express_credentials_for).with(bucket)
            .and_wrap_original do |m, *args|
             credentials = m.call(*args)
             expect_auth(
@@ -228,6 +228,37 @@ module Aws
             client = express_client('akid-a', express_credentials_provider: provider)
             expect(session_token(client)).to eq('custom-session')
           end
+        end
+
+        it 'supports subclasses that override the provider' do
+          subclasses = [
+            Class.new(Aws::S3::ExpressCredentialsProvider) do
+              def express_credentials_for(bucket)
+                super
+              end
+            end,
+            Class.new(Aws::S3::ExpressCredentialsProvider) do
+              def express_credentials_for(bucket, client = nil)
+                super
+              end
+            end
+          ]
+          subclasses.each do |subclass|
+            provider = subclass.new
+            clients = %w[akid-a akid-b].map do |a|
+              express_client(a, express_credentials_provider: provider)
+            end
+            expect(clients.map { |c| session_token(c) })
+              .to eq(%w[s3-session-akid-a s3-session-akid-b])
+          end
+        end
+
+        it 'restores the requesting client after resolving credentials' do
+          provider = Aws::S3::ExpressCredentialsProvider.new
+          allow(provider).to receive(:express_credentials_for).and_raise('error')
+          client = express_client('akid-a', express_credentials_provider: provider)
+          expect { session_token(client) }.to raise_error('error')
+          expect(Thread.current[:aws_sdk_s3_express_client]).to be_nil
         end
       end
 

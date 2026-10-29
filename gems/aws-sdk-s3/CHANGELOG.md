@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Fix S3 Express requests raising `ArgumentError` for subclasses of `Aws::S3::ExpressCredentialsProvider` that override `#express_credentials_for`.
+
 1.237.0 (2026-10-29)
 ------------------
 
