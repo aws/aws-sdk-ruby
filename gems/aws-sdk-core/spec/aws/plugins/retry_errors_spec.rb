@@ -473,15 +473,27 @@ module Aws
             handle_with_retry(test_case_def)
           end
 
-          it 'does not refresh when the provider implements invalidate' do
+          it 'invalidates instead of refreshing when the provider implements invalidate' do
             allow(provider).to receive(:invalidate)
-
-            resp.context.http_response.status_code = 400
-            resp.error = RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil, nil)
+            signing_credentials = Credentials.new('akid', 'secret')
+            resp.context[:signing_credentials] = signing_credentials
+            expect(provider).to receive(:invalidate).with(signing_credentials)
             expect(provider).not_to receive(:refresh!)
-            handle { |_context| resp }
 
-            expect(resp.context.retries).to eq(0)
+            test_case_def = [
+              {
+                response: {
+                  status_code: 400,
+                  error: RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil, nil)
+                },
+                expect: { retries: 1 }
+              },
+              {
+                response: { status_code: 200, error: nil },
+                expect: { retries: 1 }
+              }
+            ]
+            handle_with_retry(test_case_def)
           end
         end
 

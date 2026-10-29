@@ -110,7 +110,11 @@ module Aws
           .to_return(status: 200, body: "profile-name\n")
         stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
           .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
-          .to_return(status: 200, body: '{}')
+          .to_return(
+            status: 200,
+            body: %({"Code":"Success","AccessKeyId":"akid","SecretAccessKey":"secret","Token":"token",) +
+                  %("Expiration":"#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"})
+          )
       end
 
       it 'uses endpoint with a scheme and custom port' do
@@ -437,19 +441,36 @@ module Aws
 
       describe 'failure cases' do
         let(:resp) { '{}' }
+        let(:resp_with_creds) do
+          %({"Code":"Success","AccessKeyId":"akid","SecretAccessKey":"secret","Token":"token",) +
+            %("Expiration":"#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}"})
+        end
 
-        it 'given an empty response, entry credentials are returned' do
-          # This handles the case when the service response but returns
-          # a JSON document without credentials (error cases)
+        it 'given a response without credentials on the first fetch, raises MissingCredentialsError' do
+          # The service responded but returned a JSON document without
+          # credentials (error cases), so there is nothing to fall back on
           stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
             .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
             .to_return(status: 200, body: resp)
+          allow_any_instance_of(InstanceProfileCredentials).to receive(:warn)
+          expect { InstanceProfileCredentials.new }
+            .to raise_error(Errors::MissingCredentialsError, /returned no credentials/)
+        end
+
+        it 'given a response without credentials on refresh, keeps the cached credentials and backs off' do
+          stub_request(:get, "#{ipv4_endpoint_creds_path}profile-name")
+            .with(headers: { 'x-aws-ec2-metadata-token' => 'my-token' })
+            .to_return(
+              { status: 200, body: resp_with_creds },
+              { status: 200, body: '{"Code":"AssumeRoleUnauthorizedAccess","Message":"denied"}' }
+            )
           c = InstanceProfileCredentials.new
-          expect(c.set?).to be(false)
-          expect(c.credentials.access_key_id).to be(nil)
-          expect(c.credentials.secret_access_key).to be(nil)
-          expect(c.credentials.session_token).to be(nil)
-          expect(c.expiration).to be(nil)
+          expect(c.credentials.access_key_id).to eq('akid')
+
+          allow(Time).to receive(:now).and_return(Time.now + 3570) # inside the mandatory window
+          expect(c).to receive(:warn).with(/Credential refresh failed: .*AssumeRoleUnauthorizedAccess/)
+          expect(c.credentials.access_key_id).to eq('akid')
+          expect(c.send(:rate_limited?)).to be(true)
         end
 
         it 'raises MissingCredentialsError on non-200 response from profile endpoint' do

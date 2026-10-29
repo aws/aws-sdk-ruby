@@ -261,6 +261,24 @@ module Aws
         expect(resp.context.retries).to eq(1)
       end
 
+      it 'invalidates instead of refreshing for a rejected-credentials error when the provider implements invalidate' do
+        provider = double('credential_provider', invalidate: nil, refresh!: nil)
+        signing_credentials = Credentials.new('akid', 'secret')
+        config.credentials = provider
+        resp.context[:signing_credentials] = signing_credentials
+
+        expect(provider).to receive(:invalidate).with(signing_credentials).once
+        expect(provider).not_to receive(:refresh!)
+        resp.error = RetryErrorsSvc::Errors::InvalidClientTokenId.new(nil, nil)
+        attempt = 0
+        handle do |_context|
+          attempt += 1
+          resp.error = nil if attempt > 1
+          resp
+        end
+        expect(resp.context.retries).to eq(1)
+      end
+
       it 'retries a clock skew error rather than invalidating credentials' do
         resp.error = RetryErrorsSvc::Errors::RequestExpired.new(nil, nil)
         resp.context.http_response.headers['date'] = (Time.now + 10*60).iso8601

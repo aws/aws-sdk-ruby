@@ -33,6 +33,10 @@ module Aws
     # Raised when the token file is invalid.
     class InvalidTokenError < RuntimeError; end
 
+    # @api private
+    # Raised when the container credential service responds without credentials.
+    class MissingCredentialsResponse < RuntimeError; end
+
     # These are the errors we trap when attempting to talk to the
     # instance metadata service.  Any of these imply the service
     # is not present, no responding or some other non-recoverable
@@ -195,10 +199,21 @@ module Aws
       c = retry_errors([Aws::Json::ParseError], max_retries: 3) do
         Aws::Json.load(retrieve_credentials.to_s)
       end
+      raise_if_missing_credentials(c)
       @credentials = Credentials.new(c['AccessKeyId'], c['SecretAccessKey'], c['Token'])
       @expiration = c['Expiration'] ? Time.iso8601(c['Expiration']) : nil
     rescue Aws::Json::ParseError
       raise Aws::Errors::MetadataParserError
+    end
+
+    # A response without an access key ID is a failed refresh, so the cached
+    # credentials are kept rather than replaced with empty ones.
+    def raise_if_missing_credentials(creds_hash)
+      return if creds_hash['AccessKeyId'] && !creds_hash['AccessKeyId'].empty?
+
+      raise MissingCredentialsResponse,
+            "Container credential service returned no credentials (Code: #{creds_hash['Code'].inspect}, " \
+            "Message: #{creds_hash['Message'].inspect})"
     end
 
     def retrieve_credentials

@@ -144,12 +144,18 @@ module Aws
             networking? ||
             checksum? ||
             endpoint_discovery?(context) ||
-            (invalidating_auth_error? && invalidatable_credentials?(context)) ||
-            (refreshing_auth_error? && refreshable_credentials?(context)) ||
+            auth_error_retryable?(context) ||
             clock_skew?(context)
         end
 
         private
+
+        def auth_error_retryable?(context)
+          return false unless invalidating_auth_error? || refreshing_auth_error?
+          return invalidatable_credentials?(context) if context.config.credentials.respond_to?(:invalidate)
+
+          refreshing_auth_error? && refreshable_credentials?(context)
+        end
 
         def invalidatable_credentials?(context)
           context.config.credentials.respond_to?(:invalidate) && !context[:signing_credentials].nil?

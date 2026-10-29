@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - `CognitoIdentityCredentials` now continues using cached credentials after refresh failures and retries refresh with backoff. See https://docs.aws.amazon.com/sdkref/latest/guide/feature-credential-refresh.html for details.
+
 * Issue - Remove duplicate `before_refresh` callback during credential refresh.
 
 1.97.0 (2026-10-28)

@@ -458,7 +458,7 @@ module Aws
 
         # Marks the credentials that signed this request stale, if the provider supports invalidation
         def invalidate_credentials(context, error_inspector)
-          return unless error_inspector.invalidating_auth_error?
+          return unless error_inspector.invalidating_auth_error? || error_inspector.refreshing_auth_error?
 
           provider = context.config.credentials
           signed_with = context[:signing_credentials]
@@ -561,7 +561,7 @@ module Aws
 
         # Marks the credentials that signed this request stale, if the provider supports invalidation
         def invalidate_credentials(context, error_inspector)
-          return unless error_inspector.invalidating_auth_error?
+          return unless error_inspector.invalidating_auth_error? || error_inspector.refreshing_auth_error?
 
           provider = context.config.credentials
           signed_with = context[:signing_credentials]

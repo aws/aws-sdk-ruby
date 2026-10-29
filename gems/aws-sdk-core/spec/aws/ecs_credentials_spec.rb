@@ -102,17 +102,31 @@ module Aws
       context 'failure cases' do
         let(:resp) { '{}' }
 
-        it 'given an empty response, entry credentials are returned' do
-          # This handles the case when the service response but returns
-          # a JSON document without credentials (error cases)
+        it 'given a response without credentials on the first fetch, raises MissingCredentialsError' do
+          # The service responded but returned a JSON document without
+          # credentials (error cases), so there is nothing to fall back on
           stub_request(:get, "http://169.254.170.2#{path}")
             .to_return(status: 200, body: resp)
+          allow_any_instance_of(ECSCredentials).to receive(:warn)
+          expect { ECSCredentials.new }
+            .to raise_error(Errors::MissingCredentialsError, /returned no credentials/)
+        end
+
+        it 'given a response without credentials on refresh, keeps the cached credentials and backs off' do
+          expiration = (Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')
+          stub_request(:get, "http://169.254.170.2#{path}")
+            .to_return(
+              { status: 200, body: %({"AccessKeyId":"akid","SecretAccessKey":"secret","Token":"token",) +
+                                   %("Expiration":"#{expiration}"}) },
+              { status: 200, body: resp }
+            )
           c = ECSCredentials.new
-          expect(c.set?).to be(false)
-          expect(c.credentials.access_key_id).to be(nil)
-          expect(c.credentials.secret_access_key).to be(nil)
-          expect(c.credentials.session_token).to be(nil)
-          expect(c.expiration).to be(nil)
+          expect(c.credentials.access_key_id).to eq('akid')
+
+          allow(Time).to receive(:now).and_return(Time.now + 3570) # inside the mandatory window
+          expect(c).to receive(:warn).with(/Credential refresh failed: .*returned no credentials/)
+          expect(c.credentials.access_key_id).to eq('akid')
+          expect(c.send(:rate_limited?)).to be(true)
         end
 
         it 'raises if credential path or endpoint is not set' do
@@ -344,7 +358,11 @@ module Aws
         uri = URI(request['uri'])
         headers = request['headers']
 
-        resp = { body: '{}', status: 200 }
+        resp = {
+          body: '{"AccessKeyId":"akid","SecretAccessKey":"secret","Token":"token",' \
+                "\"Expiration\":\"#{(Time.now.utc + 3600).strftime('%Y-%m-%dT%H:%M:%SZ')}\"}",
+          status: 200
+        }
         if headers.empty?
           stub_request(method, uri).and_return(**resp)
         else

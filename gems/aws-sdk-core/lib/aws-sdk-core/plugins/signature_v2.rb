@@ -18,10 +18,15 @@ module Aws
       class Handler < Seahorse::Client::Handler
 
         def call(context)
-          apply_signature(
+          signature = apply_signature(
             context.http_request,
             context.config.v2_signer
           )
+          # Record the signing credentials so the retry layer can invalidate
+          # them on an auth failure and only if they still match
+          if signature['AWSAccessKeyId']
+            context[:signing_credentials] = Credentials.new(signature['AWSAccessKeyId'], nil, nil)
+          end
           @handler.call(context)
         end
 
@@ -48,6 +53,7 @@ module Aws
 
           req.body = param_list.to_io
 
+          signature
         end
       end
     end

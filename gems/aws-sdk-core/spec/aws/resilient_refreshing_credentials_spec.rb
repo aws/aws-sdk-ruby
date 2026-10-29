@@ -465,7 +465,37 @@ module Aws
             expect(provider.source_calls).to be <= 2
             expect(provider.credentials.access_key_id).to eq('AKID-1')
           end
+
+          it "refreshes through invalidation and retries successfully for #{code} when the source is healthy (#{retry_mode} retries)" do
+            healthy_class = Class.new(provider_class) do
+              def refresh
+                @source_calls += 1
+                @credentials = Credentials.new("AKID-#{@source_calls}", 'secret', 'token')
+                @expiration = Time.now + 3600
+              end
+            end
+            stub_request(:post, 'https://sts.us-east-1.amazonaws.com/')
+              .to_return({ status: 403, body: error_body(code) },
+                         { status: 200, body: get_caller_identity_body })
+            provider = healthy_class.new
+            client = STS::Client.new(
+              region: 'us-east-1',
+              credentials: provider,
+              retry_mode: retry_mode,
+              retry_backoff: ->(_context) {}
+            )
+
+            expect(client.get_caller_identity.account).to eq('123456789012')
+            expect(provider.source_calls).to eq(2) # initial fetch + one mandatory refresh
+            expect(provider.credentials.access_key_id).to eq('AKID-2')
+          end
         end
+      end
+
+      def get_caller_identity_body
+        '<GetCallerIdentityResponse><GetCallerIdentityResult><Arn>arn:aws:iam::123456789012:user/u</Arn>' \
+          '<UserId>u</UserId><Account>123456789012</Account></GetCallerIdentityResult>' \
+          '<ResponseMetadata><RequestId>id</RequestId></ResponseMetadata></GetCallerIdentityResponse>'
       end
     end
   end
