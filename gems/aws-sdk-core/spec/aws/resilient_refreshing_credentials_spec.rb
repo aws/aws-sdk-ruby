@@ -410,5 +410,63 @@ module Aws
         expect(resolver.credentials.access_key_id).to eq('FRESH-AKID')
       end
     end
+
+    # End to end through a real client: a target-service rejection must route
+    # through Invalidate() and the lifecycle, never through #refresh!, so a
+    # credential source outage keeps static stability and the refresh backoff.
+    describe 'target-service rejection during a credential source outage' do
+      let(:provider_class) do
+        Class.new do
+          include CredentialProvider
+          include ResilientRefreshingCredentials
+
+          attr_reader :source_calls
+
+          def initialize(options = {})
+            @source_calls = 0
+            super
+          end
+
+          def refresh
+            @source_calls += 1
+            raise Errno::ECONNREFUSED, 'credential source down' if @source_calls > 1
+
+            @credentials = Credentials.new('AKID-1', 'secret', 'token')
+            @expiration = Time.now + 3600
+          end
+        end
+      end
+
+      def error_body(code)
+        '<ErrorResponse><Error><Type>Sender</Type>' \
+          "<Code>#{code}</Code><Message>rejected</Message></Error>" \
+          '<RequestId>id</RequestId></ErrorResponse>'
+      end
+
+      %w[standard legacy].each do |retry_mode|
+        %w[ExpiredToken InvalidClientTokenId].each do |code|
+          it "keeps cached credentials and applies the backoff for #{code} (#{retry_mode} retries)" do
+            stub_request(:post, 'https://sts.us-east-1.amazonaws.com/')
+              .to_return(status: 403, body: error_body(code))
+            provider = provider_class.new
+            client = STS::Client.new(
+              region: 'us-east-1',
+              credentials: provider,
+              retry_mode: retry_mode,
+              retry_backoff: ->(_context) {}
+            )
+            allow(provider).to receive(:warn)
+
+            3.times do
+              expect { client.get_caller_identity }.to raise_error(STS::Errors.const_get(code))
+            end
+
+            # initial fetch + at most one refresh attempt; the backoff gates the rest
+            expect(provider.source_calls).to be <= 2
+            expect(provider.credentials.access_key_id).to eq('AKID-1')
+          end
+        end
+      end
+    end
   end
 end

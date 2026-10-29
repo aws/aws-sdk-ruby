@@ -247,6 +247,21 @@ module Aws
           end.to raise_error(Errors::InvalidLoginToken, /session has expired/)
         end
 
+        it 'raises immediately for a Sign-In ValidationException' do
+          mock_token_file(login_session, cached_token)
+          client.stub_responses(:create_o_auth_2_token, signin_resp)
+          creds = LoginCredentials.new(login_session: login_session, client: client)
+          creds.credentials # establish cached credentials
+
+          client.stub_responses(
+            :create_o_auth_2_token,
+            Signin::Errors::ValidationException.new(nil, 'invalid refresh token')
+          )
+          allow(Time).to receive(:now).and_return(time + 650) # inside the 300s advisory window
+          expect { creds.credentials }.to raise_error(Errors::InvalidLoginToken, /invalid refresh token/)
+          expect(creds.rate_limited?).to be(false)
+        end
+
         it 'applies static stability for an unrelated ArgumentError rather than treating it as non-recoverable' do
           mock_token_file(login_session, cached_token)
           client.stub_responses(:create_o_auth_2_token, signin_resp)

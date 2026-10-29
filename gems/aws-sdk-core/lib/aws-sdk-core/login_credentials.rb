@@ -122,6 +122,9 @@ module Aws
       raise Errors::InvalidLoginToken, signin_rejection_message(e.error) if non_recoverable_signin_error?(e)
 
       raise
+    rescue Signin::Errors::ValidationException => e
+      raise Errors::InvalidLoginToken,
+            "Unable to refresh credentials because Sign-In rejected the request: #{e.message}. Please reauthenticate."
     end
 
     def non_recoverable_signin_error?(error)
