@@ -83,7 +83,7 @@ requests are made, and retries are disabled.
         private
 
         def stub_responses(context)
-          resp = Seahorse::Client::Response.new(context: context)
+          resp = Aws::Response.new(context: context)
           async_mode = context.client.is_a? Seahorse::Client::AsyncBase
           stub = context.client.next_stub(context)
           stub[:mutex].synchronize { apply_stub(stub, resp, async_mode) }

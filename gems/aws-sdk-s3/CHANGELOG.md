@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - Add `tagging` to `Aws::S3::PresignedPost`, accepting the same tagging structure as `put_object_tagging` and serializing it to XML in the signed POST form.
 
+* Feature - Reduce object allocation overhead when generating S3 presigned URLs.
+
 1.236.0 (2026-10-28)
 ------------------
 
