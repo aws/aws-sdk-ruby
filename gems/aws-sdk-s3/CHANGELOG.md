@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Issue - Fix S3 Express requests raising `ArgumentError` for subclasses of `Aws::S3::ExpressCredentialsProvider` that override `#express_credentials_for`.
 
+* Issue - Custom providers that delegate to `Aws::S3::ExpressCredentialsProvider` now create sessions with the requesting client.
+
 1.237.0 (2026-10-29)
 ------------------
 
