@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Improve request serialization and response parsing performance for services that use the Smithy RPC v2 CBOR protocol.
+
 3.263.0 (2026-10-29)
 ------------------
 

@@ -104,6 +104,45 @@ module Aws
           end.to raise_error(Error)
         end
       end
+
+      describe 'non-ASCII text strings' do
+        def hex(value)
+          Encoder.new.add(value).bytes.unpack1('H*')
+        end
+
+        it 'encodes non-ASCII text after a non-ASCII container header' do
+          expect(hex('ключ' => 'значение', 'n' => 300, 'e' => 'é'))
+            .to eq('a368d0bad0bbd18ed18770d0b7d0bdd0b0d187d0b5d0bdd0b8d0b5616e19012c616562c3a9')
+        end
+
+        it 'encodes non-ASCII text next to byte strings' do
+          expect(hex(["\xff\xfe".b, 'héllo', "\x80".b, 'ñ'])).to eq('8442fffe6668c3a96c6c6f418062c3b1')
+        end
+
+        it 'transcodes non-UTF-8 strings and frozen strings' do
+          latin1 = 'caf'.encode('ISO-8859-1') + "\xe9".dup.force_encoding('ISO-8859-1')
+          expect(hex([latin1])).to eq('8165636166c3a9')
+          expect(hex(['naïve'.freeze])).to eq('81666e61c3af7665')
+        end
+
+        it 'keeps the buffer BINARY and leaves the caller string unchanged' do
+          value = +'éa'
+          encoder = Encoder.new.add([value, 'ü'])
+          expect(encoder.bytes.encoding).to eq(Encoding::BINARY)
+          expect(value.encoding).to eq(Encoding::UTF_8)
+        end
+
+        it 'transcodes ASCII-only strings in other encodings to the same bytes' do
+          expect(hex(['abc'.encode('US-ASCII'), 'abc'.encode('UTF-16LE')])).to eq('826361626363616263')
+        end
+
+        it 'raises for strings that cannot be transcoded to UTF-8' do
+          expect { Encoder.new.add("a\xffb".dup.force_encoding('US-ASCII')) }
+            .to raise_error(Encoding::InvalidByteSequenceError)
+          expect { Encoder.new.add("a\x81b".dup.force_encoding('Windows-1252')) }
+            .to raise_error(Encoding::UndefinedConversionError)
+        end
+      end
     end
   end
 end

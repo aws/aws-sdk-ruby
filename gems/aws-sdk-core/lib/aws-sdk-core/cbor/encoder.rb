@@ -7,7 +7,7 @@ module Aws
     # Pure ruby implementation of CBOR encoder.
     class Encoder
       def initialize
-        @buffer = String.new
+        @buffer = String.new(capacity: 1024, encoding: Encoding::BINARY)
       end
 
       # @return the encoded bytes in CBOR format for all added data
@@ -71,22 +71,29 @@ module Aws
 
       MAX_INTEGER = 18_446_744_073_709_551_616 # 2^64
 
+      # Frozen single-byte BINARY strings, so emitting a byte allocates nothing.
+      BYTE = Array.new(256) do |i|
+        (+"\x00").tap { |s| s.setbyte(0, i) }.force_encoding(Encoding::BINARY).freeze
+      end.freeze
+
       def head(major_type, value)
-        @buffer <<
-          case value
-          when 0...24
-            [major_type + value].pack('C') # 8-bit unsigned
-          when 0...256
-            [major_type + 24, value].pack('CC')
-          when 0...65_536
-            [major_type + 25, value].pack('Cn')
-          when 0...4_294_967_296
-            [major_type + 26, value].pack('CN')
-          when 0...MAX_INTEGER
-            [major_type + 27, value].pack('CQ>')
-          else
-            raise Error, "Value is too large to encode: #{value}"
-          end
+        buf = @buffer
+        if value < 24
+          buf << BYTE[major_type + value] # 8-bit unsigned
+        elsif value < 256
+          buf << BYTE[major_type + 24] << BYTE[value]
+        elsif value < 65_536
+          buf << BYTE[major_type + 25] <<
+            BYTE[(value >> 8) & 0xFF] << BYTE[value & 0xFF]
+        elsif value < 4_294_967_296
+          buf << BYTE[major_type + 26] <<
+            BYTE[(value >> 24) & 0xFF] << BYTE[(value >> 16) & 0xFF] <<
+            BYTE[(value >> 8) & 0xFF] << BYTE[value & 0xFF]
+        elsif value < MAX_INTEGER
+          buf << BYTE[major_type + 27] << [value].pack('Q>')
+        else
+          raise Error, "Value is too large to encode: #{value}"
+        end
       end
 
       # streaming style, lower level interface
@@ -192,9 +199,13 @@ module Aws
       end
 
       def add_string(value)
-        value = value.encode(Encoding::UTF_8).force_encoding(Encoding::BINARY)
+        # UTF-8 and ASCII-only strings already have their UTF-8 bytes; anything else is
+        # transcoded, which raises for invalid bytes as before.
+        value = value.encode(Encoding::UTF_8) unless value.encoding == Encoding::UTF_8 || value.ascii_only?
         head(MAJOR_TYPE_STR, value.bytesize)
-        @buffer << value
+        # ASCII-only strings append to the BINARY buffer as is; others need a binary copy,
+        # or Ruby raises Encoding::CompatibilityError.
+        @buffer << (value.ascii_only? ? value : value.b)
       end
 
       # caller is responsible for adding length values
@@ -238,6 +249,12 @@ module Aws
         end
         s.reverse!
       end
+
+      # Typed writers used by RpcV2::Builder, which already knows each value's type.
+      #
+      # @api private
+      public :start_map, :start_array, :add_string, :add_auto_integer,
+             :add_auto_float, :add_boolean, :add_byte_string, :add_time
     end
   end
 end

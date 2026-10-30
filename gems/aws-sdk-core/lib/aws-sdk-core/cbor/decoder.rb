@@ -304,6 +304,28 @@ module Aws
 
         raise OutOfBytesError.new(n_bytes, @buffer.bytesize - @pos)
       end
+
+      # Applies the #decode_item nesting limit to containers that RpcV2::Parser reads directly.
+      def nest
+        @depth += 1
+        raise Error, "Maximum nesting depth (#{MAX_DEPTH}) exceeded" if @depth > MAX_DEPTH
+
+        yield
+      ensure
+        @depth -= 1
+      end
+
+      # The trailing-bytes check from #decode, for callers that read the top-level item themselves.
+      def finish(value)
+        return value if @pos == @buffer.size
+
+        raise ExtraBytesError.new(@pos, @buffer.size)
+      end
+
+      # Used by RpcV2::Parser to read containers and values incrementally.
+      #
+      # @api private
+      public :peek_type, :read_map, :read_array, :read_string, :decode_item, :nest, :finish
     end
   end
 end
