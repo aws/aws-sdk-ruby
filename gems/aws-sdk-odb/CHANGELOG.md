@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.36.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.35.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.34.0 (2026-10-26)
+------------------
+
+* Feature - Adds support for Exascale storage with Oracle Exadata Database Service on Dedicated Infrastructure
+
 1.33.0 (2026-10-21)
 ------------------
 

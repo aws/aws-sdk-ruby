@@ -1570,7 +1570,7 @@ module Aws::KMS
     #     key_id: "KeyIdType", # required
     #     grantee_principal: "PrincipalIdType",
     #     retiring_principal: "PrincipalIdType",
-    #     operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateMac, VerifyMac, DeriveSharedSecret
+    #     operations: ["Decrypt"], # required, accepts Decrypt, Encrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext, ReEncryptFrom, ReEncryptTo, Sign, Verify, GetPublicKey, CreateGrant, RetireGrant, DescribeKey, GenerateDataKeyPair, GenerateDataKeyPairWithoutPlaintext, GenerateMac, VerifyMac, DeriveSharedSecret, Encapsulate, Decapsulate
     #     constraints: {
     #       encryption_context_subset: {
     #         "EncryptionContextKey" => "EncryptionContextValue",
@@ -1923,6 +1923,9 @@ module Aws::KMS
     #   * For asymmetric KMS keys with ML-DSA key pairs, specify
     #     `SIGN_VERIFY`.
     #
+    #   * For asymmetric KMS keys with ML-KEM key pairs, specify
+    #     `ENCAPSULATE_DECAPSULATE`.
+    #
     #   * For asymmetric KMS keys with SM2 key pairs (China Regions only),
     #     specify `ENCRYPT_DECRYPT`, `SIGN_VERIFY`, or `KEY_AGREEMENT`.
     #
@@ -2017,6 +2020,15 @@ module Aws::KMS
     #     * `ML_DSA_65`
     #
     #     * `ML_DSA_87`
+    #   * Asymmetric ML-KEM key pairs (establishing shared secrets)
+    #
+    #     * `ML_KEM_512`
+    #
+    #     * `ML_KEM_768`
+    #
+    #     * `ML_KEM_1024`
+    #     The ML-KEM key specs are not available in China Regions.
+    #
     #   * SM2 key pairs (encryption and decryption -or- signing and
     #     verification -or- deriving shared secrets)
     #
@@ -2518,9 +2530,9 @@ module Aws::KMS
     #   resp = client.create_key({
     #     policy: "PolicyType",
     #     description: "DescriptionType",
-    #     key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC, KEY_AGREEMENT
+    #     key_usage: "SIGN_VERIFY", # accepts SIGN_VERIFY, ENCRYPT_DECRYPT, GENERATE_VERIFY_MAC, KEY_AGREEMENT, ENCAPSULATE_DECAPSULATE
     #     customer_master_key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2
-    #     key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2, ML_DSA_44, ML_DSA_65, ML_DSA_87, ECC_NIST_EDWARDS25519
+    #     key_spec: "RSA_2048", # accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SYMMETRIC_DEFAULT, HMAC_224, HMAC_256, HMAC_384, HMAC_512, SM2, ML_DSA_44, ML_DSA_65, ML_DSA_87, ECC_NIST_EDWARDS25519, ML_KEM_512, ML_KEM_768, ML_KEM_1024
     #     origin: "AWS_KMS", # accepts AWS_KMS, EXTERNAL, AWS_CLOUDHSM, EXTERNAL_KEY_STORE
     #     custom_key_store_id: "CustomKeyStoreIdType",
     #     bypass_policy_lockout_safety_check: false,
@@ -2542,7 +2554,7 @@ module Aws::KMS
     #   resp.key_metadata.creation_date #=> Time
     #   resp.key_metadata.enabled #=> Boolean
     #   resp.key_metadata.description #=> String
-    #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
+    #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT", "ENCAPSULATE_DECAPSULATE"
     #   resp.key_metadata.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
     #   resp.key_metadata.deletion_date #=> Time
     #   resp.key_metadata.valid_to #=> Time
@@ -2552,13 +2564,15 @@ module Aws::KMS
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #   resp.key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519"
+    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519", "ML_KEM_512", "ML_KEM_768", "ML_KEM_1024"
     #   resp.key_metadata.encryption_algorithms #=> Array
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.key_metadata.signing_algorithms #=> Array
     #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"
     #   resp.key_metadata.key_agreement_algorithms #=> Array
     #   resp.key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
+    #   resp.key_metadata.encapsulation_algorithms #=> Array
+    #   resp.key_metadata.encapsulation_algorithms[0] #=> String, one of "ML_KEM"
     #   resp.key_metadata.multi_region #=> Boolean
     #   resp.key_metadata.multi_region_configuration.multi_region_key_type #=> String, one of "PRIMARY", "REPLICA"
     #   resp.key_metadata.multi_region_configuration.primary_key.arn #=> String
@@ -2578,6 +2592,173 @@ module Aws::KMS
     # @param [Hash] params ({})
     def create_key(params = {}, options = {})
       req = build_request(:create_key, params)
+      req.send_request(options)
+    end
+
+    # Recovers the shared secret that was encapsulated with the public key
+    # of an ML-KEM KMS key. Module-Lattice-Based Key-Encapsulation Mechanism
+    # (ML-KEM), specified in [FIPS 203][1] on the NIST website, is a
+    # post-quantum algorithm for establishing a shared secret between two
+    # parties. For an example of how two parties establish a shared secret
+    # over an insecure channel using ML-KEM, see [ML-KEM keys in KMS][2] in
+    # the *Key Management Service Developer Guide*.
+    #
+    # The Decapsulate operation is not available in China Regions.
+    #
+    # `Decapsulate` returns the shared secret as a 32-byte value. You can
+    # use it directly as key material, or run it through a key derivation
+    # function to derive multiple keys and nonces.
+    #
+    # `Decapsulate` returns an `InvalidCiphertextException` when the length
+    # of the `SharedSecretCiphertextBlob` is inconsistent with the ML-KEM
+    # key spec. In all other cases, `Decapsulate` returns a 32-byte
+    # pseudo-random value. This is true even when the
+    # `SharedSecretCiphertextBlob` was created using a different ML-KEM key
+    # or altered from its original value. This behavior is a security
+    # feature called *implicit rejection* that helps protect against
+    # chosen-ciphertext attacks.
+    #
+    #  Because a response does not indicate that the ciphertext and key are
+    # valid, confirm the two parties derived the same shared secret before
+    # using it.
+    #
+    # The KMS key that you use for this operation must be in a compatible
+    # key state. For details, see [Key states of KMS keys][3] in the *Key
+    # Management Service Developer Guide*.
+    #
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
+    # in a different Amazon Web Services account, specify the key ARN or
+    # alias ARN in the value of the `KeyId` parameter.
+    #
+    # **Required permissions**: [kms:Decapsulate][4] (key policy)
+    #
+    # **Related operations:**
+    #
+    # * Encapsulate
+    #
+    # * CreateKey
+    #
+    # * GetPublicKey
+    #
+    # * DescribeKey
+    #
+    # **Eventual consistency**: The KMS API follows an eventual consistency
+    # model. For more information, see [KMS eventual consistency][5].
+    #
+    #
+    #
+    # [1]: https://csrc.nist.gov/pubs/fips/203/final
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/pqkeys.html#mlkem
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
+    #
+    # @option params [required, String] :key_id
+    #   Identifies the asymmetric ML-KEM KMS key whose public key was used to
+    #   produce the encapsulated shared secret. KMS uses the private key in
+    #   the specified key pair to decapsulate the shared secret.
+    #
+    #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
+    #   ARN. When using an alias name, prefix it with `"alias/"`. To specify a
+    #   KMS key in a different Amazon Web Services account, you must use the
+    #   key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #
+    # @option params [required, String, StringIO, File] :shared_secret_ciphertext_blob
+    #   The encapsulated (ciphertext) form of the shared secret to recover.
+    #   This is the `SharedSecretCiphertextBlob` value that the Encapsulate
+    #   operation returns. When you use the HTTP API or the Amazon Web
+    #   Services CLI, the value is Base64-encoded. Otherwise, it is not
+    #   Base64-encoded.
+    #
+    # @option params [required, String] :encapsulation_algorithm
+    #   Specifies the key encapsulation algorithm used to recover the shared
+    #   secret. The only valid value is `ML_KEM`.
+    #
+    # @option params [Array<String>] :grant_tokens
+    #   A list of grant tokens.
+    #
+    #   Use a grant token when your permission to call this operation comes
+    #   from a new grant that has not yet achieved *eventual consistency*. For
+    #   more information, see [Grant token][1] and [Using a grant token][2] in
+    #   the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
+    #
+    # @return [Types::DecapsulateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DecapsulateResponse#key_id #key_id} => String
+    #   * {Types::DecapsulateResponse#shared_secret #shared_secret} => String
+    #   * {Types::DecapsulateResponse#encapsulation_algorithm #encapsulation_algorithm} => String
+    #
+    #
+    # @example Example: To recover a shared secret from its encapsulated ciphertext
+    #
+    #   # Recovers a shared secret from its encapsulated ciphertext (SharedSecretCiphertextBlob) using the private key in an
+    #   # asymmetric ML-KEM KMS key. Your peer calls Encapsulate to generate the shared secret and ciphertext.
+    #
+    #   resp = client.decapsulate({
+    #     encapsulation_algorithm: "ML_KEM", # The requested key encapsulation algorithm. The only valid value is ML_KEM.
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The asymmetric ML-KEM KMS key that recovers the shared secret.
+    #     shared_secret_ciphertext_blob: "<binary data>", # The encapsulated shared secret that you received from your peer.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     encapsulation_algorithm: "ML_KEM", # The key encapsulation algorithm used to recover the shared secret.
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the asymmetric ML-KEM KMS key that recovered the shared secret.
+    #     shared_secret: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=", # The raw shared secret. It matches the shared secret that Encapsulate returned to your peer.
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.decapsulate({
+    #     key_id: "KeyIdType", # required
+    #     shared_secret_ciphertext_blob: "data", # required
+    #     encapsulation_algorithm: "ML_KEM", # required, accepts ML_KEM
+    #     grant_tokens: ["GrantTokenType"],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_id #=> String
+    #   resp.shared_secret #=> String
+    #   resp.encapsulation_algorithm #=> String, one of "ML_KEM"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Decapsulate AWS API Documentation
+    #
+    # @overload decapsulate(params = {})
+    # @param [Hash] params ({})
+    def decapsulate(params = {}, options = {})
+      req = build_request(:decapsulate, params)
       req.send_request(options)
     end
 
@@ -4099,7 +4280,7 @@ module Aws::KMS
     #   resp.key_metadata.creation_date #=> Time
     #   resp.key_metadata.enabled #=> Boolean
     #   resp.key_metadata.description #=> String
-    #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
+    #   resp.key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT", "ENCAPSULATE_DECAPSULATE"
     #   resp.key_metadata.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
     #   resp.key_metadata.deletion_date #=> Time
     #   resp.key_metadata.valid_to #=> Time
@@ -4109,13 +4290,15 @@ module Aws::KMS
     #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #   resp.key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519"
+    #   resp.key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519", "ML_KEM_512", "ML_KEM_768", "ML_KEM_1024"
     #   resp.key_metadata.encryption_algorithms #=> Array
     #   resp.key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.key_metadata.signing_algorithms #=> Array
     #   resp.key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"
     #   resp.key_metadata.key_agreement_algorithms #=> Array
     #   resp.key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
+    #   resp.key_metadata.encapsulation_algorithms #=> Array
+    #   resp.key_metadata.encapsulation_algorithms[0] #=> String, one of "ML_KEM"
     #   resp.key_metadata.multi_region #=> Boolean
     #   resp.key_metadata.multi_region_configuration.multi_region_key_type #=> String, one of "PRIMARY", "REPLICA"
     #   resp.key_metadata.multi_region_configuration.primary_key.arn #=> String
@@ -4631,6 +4814,157 @@ module Aws::KMS
     # @param [Hash] params ({})
     def enable_key_rotation(params = {}, options = {})
       req = build_request(:enable_key_rotation, params)
+      req.send_request(options)
+    end
+
+    # Generates a shared secret and its encapsulated (ciphertext) form using
+    # the public key of an ML-KEM KMS key pair. Module-Lattice-Based
+    # Key-Encapsulation Mechanism (ML-KEM), specified in [FIPS 203][1] on
+    # the NIST website, is a post-quantum algorithm for establishing a
+    # shared secret between two parties.
+    #
+    # For an example of how two parties establish a shared secret over an
+    # insecure channel using ML-KEM, see [ML-KEM keys in KMS][2] in the *Key
+    # Management Service Developer Guide*.
+    #
+    # The Encapsulate operation is not available in China Regions.
+    #
+    # The KMS key that you use for this operation must be in a compatible
+    # key state. For details, see [Key states of KMS keys][3] in the *Key
+    # Management Service Developer Guide*.
+    #
+    # **Cross-account use**: Yes. To perform this operation with a KMS key
+    # in a different Amazon Web Services account, specify the key ARN or
+    # alias ARN in the value of the `KeyId` parameter.
+    #
+    # **Required permissions**: [kms:Encapsulate][4] (key policy)
+    #
+    # **Related operations:**
+    #
+    # * Decapsulate
+    #
+    # * DeriveSharedSecret
+    #
+    # * CreateKey
+    #
+    # * GetPublicKey
+    #
+    # * DescribeKey
+    #
+    # **Eventual consistency**: The KMS API follows an eventual consistency
+    # model. For more information, see [KMS eventual consistency][5].
+    #
+    #
+    #
+    # [1]: https://csrc.nist.gov/pubs/fips/203/final
+    # [2]: https://docs.aws.amazon.com/kms/latest/developerguide/pqkeys.html#mlkem
+    # [3]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+    # [4]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+    # [5]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
+    #
+    # @option params [required, String] :key_id
+    #   Identifies an asymmetric ML-KEM KMS key. KMS uses the public key in
+    #   the specified key pair to encapsulate the shared secret. ML-KEM KMS
+    #   keys have a `KeySpec` value of `ML_KEM_512`, `ML_KEM_768`, or
+    #   `ML_KEM_1024` and a `KeyUsage` value of `ENCAPSULATE_DECAPSULATE`. To
+    #   find the `KeySpec` and `KeyUsage` of a KMS key, use the DescribeKey
+    #   operation.
+    #
+    #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
+    #   ARN. When using an alias name, prefix it with `"alias/"`. To specify a
+    #   KMS key in a different Amazon Web Services account, you must use the
+    #   key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #
+    # @option params [required, String] :encapsulation_algorithm
+    #   Specifies the key encapsulation algorithm used to generate the shared
+    #   secret and its encapsulated form. The only valid value is `ML_KEM`.
+    #
+    # @option params [Array<String>] :grant_tokens
+    #   A list of grant tokens.
+    #
+    #   Use a grant token when your permission to call this operation comes
+    #   from a new grant that has not yet achieved *eventual consistency*. For
+    #   more information, see [Grant token][1] and [Using a grant token][2] in
+    #   the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
+    #
+    # @option params [Boolean] :dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
+    #
+    # @return [Types::EncapsulateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::EncapsulateResponse#key_id #key_id} => String
+    #   * {Types::EncapsulateResponse#shared_secret #shared_secret} => String
+    #   * {Types::EncapsulateResponse#shared_secret_ciphertext_blob #shared_secret_ciphertext_blob} => String
+    #   * {Types::EncapsulateResponse#encapsulation_algorithm #encapsulation_algorithm} => String
+    #
+    #
+    # @example Example: To generate a shared secret and its encapsulated ciphertext
+    #
+    #   # Generates a shared secret and its encapsulated ciphertext (SharedSecretCiphertextBlob) using the public key in an
+    #   # asymmetric ML-KEM KMS key. Send the ciphertext to your peer, who calls Decapsulate to recover the same shared secret.
+    #
+    #   resp = client.encapsulate({
+    #     encapsulation_algorithm: "ML_KEM", # The requested key encapsulation algorithm. The only valid value is ML_KEM.
+    #     key_id: "1234abcd-12ab-34cd-56ef-1234567890ab", # The asymmetric ML-KEM KMS key that generates the shared secret.
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     encapsulation_algorithm: "ML_KEM", # The key encapsulation algorithm used to generate the shared secret.
+    #     key_id: "arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab", # The key ARN of the asymmetric ML-KEM KMS key that generated the shared secret.
+    #     shared_secret: "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8=", # The raw shared secret.
+    #     shared_secret_ciphertext_blob: "<binary data>", # The encapsulated shared secret. Send this ciphertext to your peer, who calls Decapsulate with the same KMS key to recover the same shared secret.
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.encapsulate({
+    #     key_id: "KeyIdType", # required
+    #     encapsulation_algorithm: "ML_KEM", # required, accepts ML_KEM
+    #     grant_tokens: ["GrantTokenType"],
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.key_id #=> String
+    #   resp.shared_secret #=> String
+    #   resp.shared_secret_ciphertext_blob #=> String
+    #   resp.encapsulation_algorithm #=> String, one of "ML_KEM"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/Encapsulate AWS API Documentation
+    #
+    # @overload encapsulate(params = {})
+    # @param [Hash] params ({})
+    def encapsulate(params = {}, options = {})
+      req = build_request(:encapsulate, params)
       req.send_request(options)
     end
 
@@ -5246,6 +5580,12 @@ module Aws::KMS
     # 5280][1]. The private key is a DER-encoded PKCS8 PrivateKeyInfo, as
     # specified in [RFC 5958][2].
     #
+    # <note markdown="1"> For ML-KEM data key pairs, the DER-encoded PKCS8 PrivateKeyInfo
+    # contains the private key in seed format. As a result, the length of
+    # the private key is the same for all ML-KEM key pair specs.
+    #
+    #  </note>
+    #
     # `GenerateDataKeyPair` also supports [Amazon Web Services Nitro
     # Enclaves][3], which provide an isolated compute environment in Amazon
     # EC2. To call `GenerateDataKeyPair` for an Amazon Web Services Nitro
@@ -5363,7 +5703,8 @@ module Aws::KMS
     #   that permits you to use ECC KMS keys only to sign and verify, and the
     #   rule that permits you to use ML-DSA key pairs to sign and verify only
     #   are not effective on data key pairs, which are used outside of KMS.
-    #   The SM2 key spec is only available in China Regions.
+    #   The SM2 key spec is only available in China Regions. The ML-KEM key
+    #   specs are not available in China Regions.
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -5492,7 +5833,7 @@ module Aws::KMS
     #       "EncryptionContextKey" => "EncryptionContextValue",
     #     },
     #     key_id: "KeyIdType", # required
-    #     key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2, ECC_NIST_EDWARDS25519
+    #     key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2, ECC_NIST_EDWARDS25519, ML_KEM_512, ML_KEM_768, ML_KEM_1024
     #     grant_tokens: ["GrantTokenType"],
     #     recipient: {
     #       key_encryption_algorithm: "RSAES_OAEP_SHA_256", # accepts RSAES_OAEP_SHA_256
@@ -5507,7 +5848,7 @@ module Aws::KMS
     #   resp.private_key_plaintext #=> String
     #   resp.public_key #=> String
     #   resp.key_id #=> String
-    #   resp.key_pair_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2", "ECC_NIST_EDWARDS25519"
+    #   resp.key_pair_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2", "ECC_NIST_EDWARDS25519", "ML_KEM_512", "ML_KEM_768", "ML_KEM_1024"
     #   resp.ciphertext_for_recipient #=> String
     #   resp.key_material_id #=> String
     #
@@ -5550,6 +5891,12 @@ module Aws::KMS
     # or KMS key that is used to encrypt the private key. The public key is
     # a DER-encoded X.509 SubjectPublicKeyInfo, as specified in [RFC
     # 5280][1].
+    #
+    # <note markdown="1"> For ML-KEM data key pairs, the DER-encoded PKCS8 PrivateKeyInfo
+    # contains the private key in seed format. As a result, the length of
+    # the private key is the same for all ML-KEM key pair specs.
+    #
+    #  </note>
     #
     # You can use an optional encryption context to add additional security
     # to the encryption operation. If you specify an `EncryptionContext`,
@@ -5649,7 +5996,8 @@ module Aws::KMS
     #   that permits you to use ECC KMS keys only to sign and verify, and the
     #   rule that permits you to use ML-DSA key pairs to sign and verify only
     #   are not effective on data key pairs, which are used outside of KMS.
-    #   The SM2 key spec is only available in China Regions.
+    #   The SM2 key spec is only available in China Regions. The ML-KEM key
+    #   specs are not available in China Regions.
     #
     # @option params [Array<String>] :grant_tokens
     #   A list of grant tokens.
@@ -5710,7 +6058,7 @@ module Aws::KMS
     #       "EncryptionContextKey" => "EncryptionContextValue",
     #     },
     #     key_id: "KeyIdType", # required
-    #     key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2, ECC_NIST_EDWARDS25519
+    #     key_pair_spec: "RSA_2048", # required, accepts RSA_2048, RSA_3072, RSA_4096, ECC_NIST_P256, ECC_NIST_P384, ECC_NIST_P521, ECC_SECG_P256K1, SM2, ECC_NIST_EDWARDS25519, ML_KEM_512, ML_KEM_768, ML_KEM_1024
     #     grant_tokens: ["GrantTokenType"],
     #     dry_run: false,
     #   })
@@ -5720,7 +6068,7 @@ module Aws::KMS
     #   resp.private_key_ciphertext_blob #=> String
     #   resp.public_key #=> String
     #   resp.key_id #=> String
-    #   resp.key_pair_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2", "ECC_NIST_EDWARDS25519"
+    #   resp.key_pair_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SM2", "ECC_NIST_EDWARDS25519", "ML_KEM_512", "ML_KEM_768", "ML_KEM_1024"
     #   resp.key_material_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GenerateDataKeyPairWithoutPlaintext AWS API Documentation
@@ -6283,7 +6631,8 @@ module Aws::KMS
     # CloudTrail for `DisabledException` entries, as there could be
     # infrequent workflows that are dependent on the key. By looking for
     # this exception, you can identify potential dependencies and workload
-    # failures before they occur.
+    # failures before they occur. CloudTrail remains the authoritative
+    # source for all API calls made to your key.
     #
     #  </note>
     #
@@ -6364,7 +6713,7 @@ module Aws::KMS
     # @example Response structure
     #
     #   resp.key_id #=> String
-    #   resp.key_last_usage.operation #=> String, one of "Decrypt", "DeriveSharedSecret", "Encrypt", "GenerateDataKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateDataKeyWithoutPlaintext", "GenerateMac", "ReEncrypt", "Sign", "Verify", "VerifyMac"
+    #   resp.key_last_usage.operation #=> String, one of "Decrypt", "DeriveSharedSecret", "Encrypt", "GenerateDataKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateDataKeyWithoutPlaintext", "GenerateMac", "ReEncrypt", "Sign", "Verify", "VerifyMac", "Encapsulate", "Decapsulate"
     #   resp.key_last_usage.timestamp #=> Time
     #   resp.key_last_usage.cloud_trail_event_id #=> String
     #   resp.key_last_usage.kms_request_id #=> String
@@ -6985,6 +7334,7 @@ module Aws::KMS
     #   * {Types::GetPublicKeyResponse#encryption_algorithms #encryption_algorithms} => Array&lt;String&gt;
     #   * {Types::GetPublicKeyResponse#signing_algorithms #signing_algorithms} => Array&lt;String&gt;
     #   * {Types::GetPublicKeyResponse#key_agreement_algorithms #key_agreement_algorithms} => Array&lt;String&gt;
+    #   * {Types::GetPublicKeyResponse#encapsulation_algorithms #encapsulation_algorithms} => Array&lt;String&gt;
     #
     #
     # @example Example: To download the public key of an asymmetric KMS key
@@ -7021,14 +7371,16 @@ module Aws::KMS
     #   resp.key_id #=> String
     #   resp.public_key #=> String
     #   resp.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519"
-    #   resp.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
+    #   resp.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519", "ML_KEM_512", "ML_KEM_768", "ML_KEM_1024"
+    #   resp.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT", "ENCAPSULATE_DECAPSULATE"
     #   resp.encryption_algorithms #=> Array
     #   resp.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.signing_algorithms #=> Array
     #   resp.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"
     #   resp.key_agreement_algorithms #=> Array
     #   resp.key_agreement_algorithms[0] #=> String, one of "ECDH"
+    #   resp.encapsulation_algorithms #=> Array
+    #   resp.encapsulation_algorithms[0] #=> String, one of "ML_KEM"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetPublicKey AWS API Documentation
     #
@@ -7772,7 +8124,7 @@ module Aws::KMS
     #   resp.grants[0].retiring_principal #=> String
     #   resp.grants[0].issuing_account #=> String
     #   resp.grants[0].operations #=> Array
-    #   resp.grants[0].operations[0] #=> String, one of "Decrypt", "Encrypt", "GenerateDataKey", "GenerateDataKeyWithoutPlaintext", "ReEncryptFrom", "ReEncryptTo", "Sign", "Verify", "GetPublicKey", "CreateGrant", "RetireGrant", "DescribeKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateMac", "VerifyMac", "DeriveSharedSecret"
+    #   resp.grants[0].operations[0] #=> String, one of "Decrypt", "Encrypt", "GenerateDataKey", "GenerateDataKeyWithoutPlaintext", "ReEncryptFrom", "ReEncryptTo", "Sign", "Verify", "GetPublicKey", "CreateGrant", "RetireGrant", "DescribeKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateMac", "VerifyMac", "DeriveSharedSecret", "Encapsulate", "Decapsulate"
     #   resp.grants[0].constraints.encryption_context_subset #=> Hash
     #   resp.grants[0].constraints.encryption_context_subset["EncryptionContextKey"] #=> String
     #   resp.grants[0].constraints.encryption_context_equals #=> Hash
@@ -8468,7 +8820,7 @@ module Aws::KMS
     #   resp.grants[0].retiring_principal #=> String
     #   resp.grants[0].issuing_account #=> String
     #   resp.grants[0].operations #=> Array
-    #   resp.grants[0].operations[0] #=> String, one of "Decrypt", "Encrypt", "GenerateDataKey", "GenerateDataKeyWithoutPlaintext", "ReEncryptFrom", "ReEncryptTo", "Sign", "Verify", "GetPublicKey", "CreateGrant", "RetireGrant", "DescribeKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateMac", "VerifyMac", "DeriveSharedSecret"
+    #   resp.grants[0].operations[0] #=> String, one of "Decrypt", "Encrypt", "GenerateDataKey", "GenerateDataKeyWithoutPlaintext", "ReEncryptFrom", "ReEncryptTo", "Sign", "Verify", "GetPublicKey", "CreateGrant", "RetireGrant", "DescribeKey", "GenerateDataKeyPair", "GenerateDataKeyPairWithoutPlaintext", "GenerateMac", "VerifyMac", "DeriveSharedSecret", "Encapsulate", "Decapsulate"
     #   resp.grants[0].constraints.encryption_context_subset #=> Hash
     #   resp.grants[0].constraints.encryption_context_subset["EncryptionContextKey"] #=> String
     #   resp.grants[0].constraints.encryption_context_equals #=> Hash
@@ -9353,7 +9705,7 @@ module Aws::KMS
     #   resp.replica_key_metadata.creation_date #=> Time
     #   resp.replica_key_metadata.enabled #=> Boolean
     #   resp.replica_key_metadata.description #=> String
-    #   resp.replica_key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT"
+    #   resp.replica_key_metadata.key_usage #=> String, one of "SIGN_VERIFY", "ENCRYPT_DECRYPT", "GENERATE_VERIFY_MAC", "KEY_AGREEMENT", "ENCAPSULATE_DECAPSULATE"
     #   resp.replica_key_metadata.key_state #=> String, one of "Creating", "Enabled", "Disabled", "PendingDeletion", "PendingImport", "PendingReplicaDeletion", "Unavailable", "Updating"
     #   resp.replica_key_metadata.deletion_date #=> Time
     #   resp.replica_key_metadata.valid_to #=> Time
@@ -9363,13 +9715,15 @@ module Aws::KMS
     #   resp.replica_key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
     #   resp.replica_key_metadata.key_manager #=> String, one of "AWS", "CUSTOMER"
     #   resp.replica_key_metadata.customer_master_key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2"
-    #   resp.replica_key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519"
+    #   resp.replica_key_metadata.key_spec #=> String, one of "RSA_2048", "RSA_3072", "RSA_4096", "ECC_NIST_P256", "ECC_NIST_P384", "ECC_NIST_P521", "ECC_SECG_P256K1", "SYMMETRIC_DEFAULT", "HMAC_224", "HMAC_256", "HMAC_384", "HMAC_512", "SM2", "ML_DSA_44", "ML_DSA_65", "ML_DSA_87", "ECC_NIST_EDWARDS25519", "ML_KEM_512", "ML_KEM_768", "ML_KEM_1024"
     #   resp.replica_key_metadata.encryption_algorithms #=> Array
     #   resp.replica_key_metadata.encryption_algorithms[0] #=> String, one of "SYMMETRIC_DEFAULT", "RSAES_OAEP_SHA_1", "RSAES_OAEP_SHA_256", "SM2PKE"
     #   resp.replica_key_metadata.signing_algorithms #=> Array
     #   resp.replica_key_metadata.signing_algorithms[0] #=> String, one of "RSASSA_PSS_SHA_256", "RSASSA_PSS_SHA_384", "RSASSA_PSS_SHA_512", "RSASSA_PKCS1_V1_5_SHA_256", "RSASSA_PKCS1_V1_5_SHA_384", "RSASSA_PKCS1_V1_5_SHA_512", "ECDSA_SHA_256", "ECDSA_SHA_384", "ECDSA_SHA_512", "SM2DSA", "ML_DSA_SHAKE_256", "ED25519_SHA_512", "ED25519_PH_SHA_512"
     #   resp.replica_key_metadata.key_agreement_algorithms #=> Array
     #   resp.replica_key_metadata.key_agreement_algorithms[0] #=> String, one of "ECDH"
+    #   resp.replica_key_metadata.encapsulation_algorithms #=> Array
+    #   resp.replica_key_metadata.encapsulation_algorithms[0] #=> String, one of "ML_KEM"
     #   resp.replica_key_metadata.multi_region #=> Boolean
     #   resp.replica_key_metadata.multi_region_configuration.multi_region_key_type #=> String, one of "PRIMARY", "REPLICA"
     #   resp.replica_key_metadata.multi_region_configuration.primary_key.arn #=> String
@@ -11562,7 +11916,7 @@ module Aws::KMS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-kms'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.138.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -319,6 +319,17 @@ module Aws
       }?
     }
 
+      type resource_requirement = {
+      value: ::String?,
+      type: ("GPU" | "InferenceAccelerator" | "NeuronDevice"),
+      sharing_strategy: {
+        nvidia_mps: {
+          memory: ::Integer,
+          max_compute_percent: ::Integer?
+        }?
+      }?
+    }
+
       type task_override = {
       container_overrides: Array[
         Params::container_override
@@ -357,10 +368,7 @@ module Aws
       memory: ::Integer?,
       memory_reservation: ::Integer?,
       resource_requirements: Array[
-        {
-          value: ::String,
-          type: ("GPU" | "InferenceAccelerator" | "NeuronDevice")
-        }
+        Params::resource_requirement
       ]?
     }
 

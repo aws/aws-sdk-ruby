@@ -246,7 +246,7 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor schema: Types::AnalysisSchema
-      attr_accessor format: ("SQL" | "PYSPARK_1_0")
+      attr_accessor format: ("SQL" | "PYSPARK_1_0" | "PYSPARK_2_0")
       attr_accessor source: Types::AnalysisSource
       attr_accessor source_metadata: Types::AnalysisSourceMetadata
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
@@ -460,7 +460,7 @@ module Aws::CleanRooms
       attr_accessor create_time: ::Time
       attr_accessor update_time: ::Time
       attr_accessor schema: Types::AnalysisSchema
-      attr_accessor format: ("SQL" | "PYSPARK_1_0")
+      attr_accessor format: ("SQL" | "PYSPARK_1_0" | "PYSPARK_2_0")
       attr_accessor source: Types::AnalysisSource
       attr_accessor source_metadata: Types::AnalysisSourceMetadata
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
@@ -942,7 +942,7 @@ module Aws::CleanRooms
       attr_accessor description: ::String
       attr_accessor membership_identifier: ::String
       attr_accessor name: ::String
-      attr_accessor format: ("SQL" | "PYSPARK_1_0")
+      attr_accessor format: ("SQL" | "PYSPARK_1_0" | "PYSPARK_2_0")
       attr_accessor source: Types::AnalysisSource
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor analysis_parameters: ::Array[Types::AnalysisParameter]
@@ -2813,6 +2813,7 @@ module Aws::CleanRooms
     end
 
     class ProtectedJobS3OutputConfigurationInput
+      attr_accessor result_format: ("CSV" | "PARQUET")
       attr_accessor bucket: ::String
       attr_accessor key_prefix: ::String
       SENSITIVE: []

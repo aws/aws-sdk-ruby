@@ -1386,11 +1386,8 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
-    #   Settings for vulnerability scans that Amazon Inspector runs during
-    #   image creation. For AMI output, Amazon Inspector scans the test
-    #   instance. For container output, Amazon Inspector scans the container
-    #   image that Image Builder pushes to the Amazon ECR repository specified
-    #   in `ecrConfiguration`.
+    #   The settings that determine whether and how Amazon Inspector scans the
+    #   image for vulnerabilities.
     #
     # @option params [Array<Types::WorkflowConfiguration>] :workflows
     #   The array of workflow configuration objects for the build. If you
@@ -1502,6 +1499,11 @@ module Aws::Imagebuilder
     #       ecr_configuration: {
     #         repository_name: "NonEmptyString",
     #         container_tags: ["NonEmptyString"],
+    #       },
+    #       image_scanning_types: ["TEST_INSTANCE_CVE"], # accepts TEST_INSTANCE_CVE, ON_DEMAND_AMI_CVE
+    #       scan_result_condition: {
+    #         maximum_severity_label: "INFORMATIONAL", # required, accepts INFORMATIONAL, LOW, MEDIUM, HIGH
+    #         fix_available: false,
     #       },
     #     },
     #     workflows: [
@@ -1617,8 +1619,8 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
-    #   Contains settings for vulnerability scans that Amazon Inspector runs
-    #   against the test instance during image creation.
+    #   The settings that determine whether and how Amazon Inspector scans the
+    #   images that this pipeline creates.
     #
     # @option params [Array<Types::WorkflowConfiguration>] :workflows
     #   The array of workflow configuration objects for builds that this
@@ -1750,6 +1752,11 @@ module Aws::Imagebuilder
     #       ecr_configuration: {
     #         repository_name: "NonEmptyString",
     #         container_tags: ["NonEmptyString"],
+    #       },
+    #       image_scanning_types: ["TEST_INSTANCE_CVE"], # accepts TEST_INSTANCE_CVE, ON_DEMAND_AMI_CVE
+    #       scan_result_condition: {
+    #         maximum_severity_label: "INFORMATIONAL", # required, accepts INFORMATIONAL, LOW, MEDIUM, HIGH
+    #         fix_available: false,
     #       },
     #     },
     #     workflows: [
@@ -3975,6 +3982,10 @@ module Aws::Imagebuilder
     #   resp.image.image_scanning_configuration.ecr_configuration.repository_name #=> String
     #   resp.image.image_scanning_configuration.ecr_configuration.container_tags #=> Array
     #   resp.image.image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
+    #   resp.image.image_scanning_configuration.image_scanning_types #=> Array
+    #   resp.image.image_scanning_configuration.image_scanning_types[0] #=> String, one of "TEST_INSTANCE_CVE", "ON_DEMAND_AMI_CVE"
+    #   resp.image.image_scanning_configuration.scan_result_condition.maximum_severity_label #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH"
+    #   resp.image.image_scanning_configuration.scan_result_condition.fix_available #=> Boolean
     #   resp.image.deprecation_time #=> Time
     #   resp.image.lifecycle_execution_id #=> String
     #   resp.image.execution_role #=> String
@@ -4083,6 +4094,10 @@ module Aws::Imagebuilder
     #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.repository_name #=> String
     #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.container_tags #=> Array
     #   resp.image_pipeline.image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
+    #   resp.image_pipeline.image_scanning_configuration.image_scanning_types #=> Array
+    #   resp.image_pipeline.image_scanning_configuration.image_scanning_types[0] #=> String, one of "TEST_INSTANCE_CVE", "ON_DEMAND_AMI_CVE"
+    #   resp.image_pipeline.image_scanning_configuration.scan_result_condition.maximum_severity_label #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH"
+    #   resp.image_pipeline.image_scanning_configuration.scan_result_condition.fix_available #=> Boolean
     #   resp.image_pipeline.image_tags #=> Hash
     #   resp.image_pipeline.image_tags["TagKey"] #=> String
     #   resp.image_pipeline.execution_role #=> String
@@ -6351,6 +6366,10 @@ module Aws::Imagebuilder
     #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.repository_name #=> String
     #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.container_tags #=> Array
     #   resp.image_pipeline_list[0].image_scanning_configuration.ecr_configuration.container_tags[0] #=> String
+    #   resp.image_pipeline_list[0].image_scanning_configuration.image_scanning_types #=> Array
+    #   resp.image_pipeline_list[0].image_scanning_configuration.image_scanning_types[0] #=> String, one of "TEST_INSTANCE_CVE", "ON_DEMAND_AMI_CVE"
+    #   resp.image_pipeline_list[0].image_scanning_configuration.scan_result_condition.maximum_severity_label #=> String, one of "INFORMATIONAL", "LOW", "MEDIUM", "HIGH"
+    #   resp.image_pipeline_list[0].image_scanning_configuration.scan_result_condition.fix_available #=> Boolean
     #   resp.image_pipeline_list[0].image_tags #=> Hash
     #   resp.image_pipeline_list[0].image_tags["TagKey"] #=> String
     #   resp.image_pipeline_list[0].execution_role #=> String
@@ -8823,8 +8842,8 @@ module Aws::Imagebuilder
     #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
     #
     # @option params [Types::ImageScanningConfiguration] :image_scanning_configuration
-    #   Contains settings for vulnerability scans that Amazon Inspector runs
-    #   against the test instance during image creation.
+    #   The updated settings that determine whether and how Amazon Inspector
+    #   scans the images that this pipeline creates.
     #
     # @option params [Array<Types::WorkflowConfiguration>] :workflows
     #   The array of workflow configuration objects for builds that this
@@ -8909,6 +8928,11 @@ module Aws::Imagebuilder
     #       ecr_configuration: {
     #         repository_name: "NonEmptyString",
     #         container_tags: ["NonEmptyString"],
+    #       },
+    #       image_scanning_types: ["TEST_INSTANCE_CVE"], # accepts TEST_INSTANCE_CVE, ON_DEMAND_AMI_CVE
+    #       scan_result_condition: {
+    #         maximum_severity_label: "INFORMATIONAL", # required, accepts INFORMATIONAL, LOW, MEDIUM, HIGH
+    #         fix_available: false,
     #       },
     #     },
     #     workflows: [
@@ -9351,7 +9375,7 @@ module Aws::Imagebuilder
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-imagebuilder'
-      context[:gem_version] = '1.117.0'
+      context[:gem_version] = '1.119.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

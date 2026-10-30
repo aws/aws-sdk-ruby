@@ -688,8 +688,8 @@ module Aws::BedrockAgentCoreControl
     #   the runtime.
     #
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The protocol configuration for the AgentCore Runtime, including the
+    #   protocol, port, and path on which the agent server is available.
     #
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The life cycle configuration for the AgentCore Runtime.
@@ -715,6 +715,13 @@ module Aws::BedrockAgentCoreControl
     #
     # @option params [String] :platform_version
     #   The version of the runtime platform to use for the AgentCore Runtime.
+    #
+    # @option params [Array<Types::AllowedPort>] :allowed_ports
+    #   The additional ports on the AgentCore Runtime that are reachable
+    #   through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
     #
     # @return [Types::CreateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -828,6 +835,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A, AGUI
+    #       port: 1,
+    #       path: "ServerPath",
     #     },
     #     lifecycle_configuration: {
     #       idle_runtime_session_timeout: 1,
@@ -862,6 +871,15 @@ module Aws::BedrockAgentCoreControl
     #       "TagKey" => "TagValue",
     #     },
     #     platform_version: "PlatformVersion",
+    #     allowed_ports: [
+    #       {
+    #         port: 1,
+    #         port_range: {
+    #           from: 1, # required
+    #           to: 1, # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -4418,6 +4436,9 @@ module Aws::BedrockAgentCoreControl
     #             actor_token_content: "NONE", # required, accepts NONE, M2M, AWS_IAM_ID_TOKEN_JWT
     #             actor_token_scopes: ["ScopeType"],
     #           },
+    #           on_behalf_of_authentication_config: {
+    #             client_authentication_method: "NO_CLIENT", # required, accepts NO_CLIENT
+    #           },
     #         },
     #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT
     #         private_key_jwt_config: {
@@ -4573,6 +4594,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.on_behalf_of_authentication_config.client_authentication_method #=> String, one of "NO_CLIENT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
@@ -7186,6 +7208,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::FilesystemConfiguration&gt;
     #   * {Types::GetAgentRuntimeResponse#capacity_provider_configuration #capacity_provider_configuration} => Types::CapacityProviderConfiguration
     #   * {Types::GetAgentRuntimeResponse#platform_version #platform_version} => String
+    #   * {Types::GetAgentRuntimeResponse#allowed_ports #allowed_ports} => Array&lt;Types::AllowedPort&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7223,6 +7246,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_artifact.code_configuration.entry_point #=> Array
     #   resp.agent_runtime_artifact.code_configuration.entry_point[0] #=> String
     #   resp.protocol_configuration.server_protocol #=> String, one of "MCP", "HTTP", "A2A", "AGUI"
+    #   resp.protocol_configuration.port #=> Integer
+    #   resp.protocol_configuration.path #=> String
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
@@ -7280,6 +7305,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.capacity_provider_configuration.capacity_provider_arn #=> String
     #   resp.platform_version #=> String
+    #   resp.allowed_ports #=> Array
+    #   resp.allowed_ports[0].port #=> Integer
+    #   resp.allowed_ports[0].port_range.from #=> Integer
+    #   resp.allowed_ports[0].port_range.to #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -8914,6 +8943,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.on_behalf_of_authentication_config.client_authentication_method #=> String, one of "NO_CLIENT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
@@ -12134,6 +12164,57 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Resets the key material for a token vault whose customer managed KMS
+    # key has been deleted, and re-encrypts the token vault with an Amazon
+    # Web Services managed key so that you can use the token vault again.
+    #
+    # This operation can't be undone. The reset permanently deletes the
+    # OAuth2 access tokens and refresh tokens stored in the token vault,
+    # including tokens obtained through all supported flows. After the
+    # reset, your agents must complete these flows again to get new tokens,
+    # and for user-delegated flows your users must authorize access again.
+    # The reset doesn't delete your credential providers or their
+    # configuration.
+    #
+    # You can reset a token vault only if its customer managed key has been
+    # deleted. If the key still exists, including when it's disabled or
+    # scheduled for deletion, this operation returns a
+    # `ValidationException`. To use the token vault again, enable the key or
+    # cancel its scheduled deletion in KMS. To switch to a different key,
+    # use `SetTokenVaultCMK`.
+    #
+    # @option params [required, String] :token_vault_id
+    #   The unique identifier of the token vault to reset. To reset your
+    #   account's default token vault, specify `default`.
+    #
+    # @return [Types::ResetTokenVaultKeyMaterialResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetTokenVaultKeyMaterialResponse#token_vault_id #token_vault_id} => String
+    #   * {Types::ResetTokenVaultKeyMaterialResponse#kms_configuration #kms_configuration} => Types::KmsConfiguration
+    #   * {Types::ResetTokenVaultKeyMaterialResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_token_vault_key_material({
+    #     token_vault_id: "TokenVaultIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.token_vault_id #=> String
+    #   resp.kms_configuration.key_type #=> String, one of "CustomerManagedKey", "ServiceManagedKey"
+    #   resp.kms_configuration.kms_key_arn #=> String
+    #   resp.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResetTokenVaultKeyMaterial AWS API Documentation
+    #
+    # @overload reset_token_vault_key_material(params = {})
+    # @param [Hash] params ({})
+    def reset_token_vault_key_material(params = {}, options = {})
+      req = build_request(:reset_token_vault_key_material, params)
+      req.send_request(options)
+    end
+
     # Replaces the service-managed credentials of a payment connector with
     # newly issued credentials.
     #
@@ -12667,8 +12748,9 @@ module Aws::BedrockAgentCoreControl
     #   through to the runtime.
     #
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The updated protocol configuration for the AgentCore Runtime,
+    #   including the protocol, port, and path on which the agent server is
+    #   available.
     #
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The updated life cycle configuration for the AgentCore Runtime.
@@ -12691,6 +12773,13 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :platform_version
     #   The updated version of the runtime platform to use for the AgentCore
     #   Runtime.
+    #
+    # @option params [Array<Types::AllowedPort>] :allowed_ports
+    #   The updated additional ports on the AgentCore Runtime that are
+    #   reachable through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -12811,6 +12900,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A, AGUI
+    #       port: 1,
+    #       path: "ServerPath",
     #     },
     #     lifecycle_configuration: {
     #       idle_runtime_session_timeout: 1,
@@ -12845,6 +12936,15 @@ module Aws::BedrockAgentCoreControl
     #       capacity_provider_arn: "CapacityProviderArn", # required
     #     },
     #     platform_version: "PlatformVersion",
+    #     allowed_ports: [
+    #       {
+    #         port: 1,
+    #         port_range: {
+    #           from: 1, # required
+    #           to: 1, # required
+    #         },
+    #       },
+    #     ],
     #     client_token: "ClientToken",
     #   })
     #
@@ -16037,6 +16137,9 @@ module Aws::BedrockAgentCoreControl
     #             actor_token_content: "NONE", # required, accepts NONE, M2M, AWS_IAM_ID_TOKEN_JWT
     #             actor_token_scopes: ["ScopeType"],
     #           },
+    #           on_behalf_of_authentication_config: {
+    #             client_authentication_method: "NO_CLIENT", # required, accepts NO_CLIENT
+    #           },
     #         },
     #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT
     #         private_key_jwt_config: {
@@ -16190,6 +16293,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.on_behalf_of_authentication_config.client_authentication_method #=> String, one of "NO_CLIENT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
@@ -17448,7 +17552,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -180,9 +180,24 @@ module Aws
                               maximum_resolution: ("SD" | "HD" | "FULL_HD")?
                             },
                             ?container_format: ("TS" | "FRAGMENTED_MP4"),
-                            ?ad_configuration_arn: ::String
+                            ?ad_configuration_arn: ::String,
+                            ?failover_slate_configuration_arn: ::String
                           ) -> _CreateChannelResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateChannelResponseSuccess
+
+      interface _CreateFailoverSlateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateFailoverSlateConfigurationResponse]
+        def failover_slate_configuration: () -> Types::FailoverSlateConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#create_failover_slate_configuration-instance_method
+      def create_failover_slate_configuration: (
+                                                 ?name: ::String,
+                                                 ?activation_threshold_seconds: ::Integer,
+                                                 ?min_slate_display_seconds: ::Integer,
+                                                 ?max_slate_display_seconds: ::Integer,
+                                                 ?tags: Hash[::String, ::String]
+                                               ) -> _CreateFailoverSlateConfigurationResponseSuccess
+                                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFailoverSlateConfigurationResponseSuccess
 
       interface _CreatePlaybackRestrictionPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreatePlaybackRestrictionPolicyResponse]
@@ -248,6 +263,12 @@ module Aws
                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#delete_failover_slate_configuration-instance_method
+      def delete_failover_slate_configuration: (
+                                                 arn: ::String
+                                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _DeletePlaybackKeyPairResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeletePlaybackKeyPairResponse]
       end
@@ -294,6 +315,16 @@ module Aws
                          arn: ::String
                        ) -> _GetChannelResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetChannelResponseSuccess
+
+      interface _GetFailoverSlateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetFailoverSlateConfigurationResponse]
+        def failover_slate_configuration: () -> Types::FailoverSlateConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#get_failover_slate_configuration-instance_method
+      def get_failover_slate_configuration: (
+                                              arn: ::String
+                                            ) -> _GetFailoverSlateConfigurationResponseSuccess
+                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetFailoverSlateConfigurationResponseSuccess
 
       interface _GetPlaybackKeyPairResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetPlaybackKeyPairResponse]
@@ -371,11 +402,14 @@ module Aws
       interface _InsertAdBreakResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InsertAdBreakResponse]
         def ad_break_id: () -> ::String
+        def target_start_at: () -> ::Time
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#insert_ad_break-instance_method
       def insert_ad_break: (
                              channel_arn: ::String,
-                             duration_seconds: ::Integer
+                             duration_seconds: ::Integer,
+                             ?ad_break_id: ::String,
+                             ?target_start_at: ::Time
                            ) -> _InsertAdBreakResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _InsertAdBreakResponseSuccess
 
@@ -402,10 +436,23 @@ module Aws
                            ?filter_by_recording_configuration_arn: ::String,
                            ?filter_by_playback_restriction_policy_arn: ::String,
                            ?filter_by_ad_configuration_arn: ::String,
+                           ?filter_by_failover_slate_configuration_arn: ::String,
                            ?next_token: ::String,
                            ?max_results: ::Integer
                          ) -> _ListChannelsResponseSuccess
                        | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListChannelsResponseSuccess
+
+      interface _ListFailoverSlateConfigurationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListFailoverSlateConfigurationsResponse]
+        def failover_slate_configurations: () -> ::Array[Types::FailoverSlateConfigurationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#list_failover_slate_configurations-instance_method
+      def list_failover_slate_configurations: (
+                                                ?next_token: ::String,
+                                                ?max_results: ::Integer
+                                              ) -> _ListFailoverSlateConfigurationsResponseSuccess
+                                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFailoverSlateConfigurationsResponseSuccess
 
       interface _ListPlaybackKeyPairsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListPlaybackKeyPairsResponse]
@@ -582,9 +629,24 @@ module Aws
                               maximum_resolution: ("SD" | "HD" | "FULL_HD")?
                             },
                             ?container_format: ("TS" | "FRAGMENTED_MP4"),
-                            ?ad_configuration_arn: ::String
+                            ?ad_configuration_arn: ::String,
+                            ?failover_slate_configuration_arn: ::String
                           ) -> _UpdateChannelResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateChannelResponseSuccess
+
+      interface _UpdateFailoverSlateConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateFailoverSlateConfigurationResponse]
+        def failover_slate_configuration: () -> Types::FailoverSlateConfiguration
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/IVS/Client.html#update_failover_slate_configuration-instance_method
+      def update_failover_slate_configuration: (
+                                                 arn: ::String,
+                                                 ?name: ::String,
+                                                 ?activation_threshold_seconds: ::Integer,
+                                                 ?min_slate_display_seconds: ::Integer,
+                                                 ?max_slate_display_seconds: ::Integer
+                                               ) -> _UpdateFailoverSlateConfigurationResponseSuccess
+                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateFailoverSlateConfigurationResponseSuccess
 
       interface _UpdatePlaybackRestrictionPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdatePlaybackRestrictionPolicyResponse]

@@ -1,6 +1,22 @@
 Unreleased Changes
 ------------------
 
+1.237.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Feature - Add `tagging` to `Aws::S3::PresignedPost`, accepting the same tagging structure as `put_object_tagging` and serializing it to XML in the signed POST form.
+
+* Feature - Reduce object allocation overhead when generating S3 presigned URLs.
+
+1.236.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+* Issue - Create and cache S3 Express sessions using the credentials of the requesting client.
+
 1.235.0 (2026-10-20)
 ------------------
 

@@ -73,6 +73,7 @@ module Aws::TimestreamInfluxDB
     DeleteDbClusterOutput = Shapes::StructureShape.new(name: 'DeleteDbClusterOutput')
     DeleteDbInstanceInput = Shapes::StructureShape.new(name: 'DeleteDbInstanceInput')
     DeleteDbInstanceOutput = Shapes::StructureShape.new(name: 'DeleteDbInstanceOutput')
+    DeploymentConfiguration = Shapes::UnionShape.new(name: 'DeploymentConfiguration')
     DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
     Duration = Shapes::StructureShape.new(name: 'Duration')
     DurationType = Shapes::StringShape.new(name: 'DurationType')
@@ -126,6 +127,7 @@ module Aws::TimestreamInfluxDB
     InfluxDBv3CoreParametersWalMaxWriteBufferSizeInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3CoreParametersWalMaxWriteBufferSizeInteger')
     InfluxDBv3CoreParametersWalReplayConcurrencyLimitInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3CoreParametersWalReplayConcurrencyLimitInteger')
     InfluxDBv3CoreParametersWalSnapshotSizeInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3CoreParametersWalSnapshotSizeInteger')
+    InfluxDBv3EnterpriseDeploymentConfiguration = Shapes::StructureShape.new(name: 'InfluxDBv3EnterpriseDeploymentConfiguration')
     InfluxDBv3EnterpriseParameters = Shapes::StructureShape.new(name: 'InfluxDBv3EnterpriseParameters')
     InfluxDBv3EnterpriseParametersCompactionMaxNumFilesPerPlanInteger = Shapes::IntegerShape.new(name: 'InfluxDBv3EnterpriseParametersCompactionMaxNumFilesPerPlanInteger')
     InfluxDBv3EnterpriseParametersCompactionMultipliersString = Shapes::StringShape.new(name: 'InfluxDBv3EnterpriseParametersCompactionMultipliersString')
@@ -177,6 +179,9 @@ module Aws::TimestreamInfluxDB
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     NetworkType = Shapes::StringShape.new(name: 'NetworkType')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NodeGroup = Shapes::StructureShape.new(name: 'NodeGroup')
+    NodeGroupCountInteger = Shapes::IntegerShape.new(name: 'NodeGroupCountInteger')
+    NodeGroupList = Shapes::ListShape.new(name: 'NodeGroupList')
     Organization = Shapes::StringShape.new(name: 'Organization')
     Parameters = Shapes::UnionShape.new(name: 'Parameters')
     Password = Shapes::StringShape.new(name: 'Password')
@@ -255,7 +260,8 @@ module Aws::TimestreamInfluxDB
     CreateDbBackupOutput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     CreateDbBackupOutput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ResourceDeploymentType, location_name: "deploymentType"))
     CreateDbBackupOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
-    CreateDbBackupOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "clusterConfiguration"))
+    CreateDbBackupOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, deprecated: true, location_name: "clusterConfiguration", metadata: {"deprecatedMessage" => "Use deploymentConfiguration instead."}))
+    CreateDbBackupOutput.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     CreateDbBackupOutput.add_member(:db_parameter_group_id, Shapes::ShapeRef.new(shape: DbParameterGroupId, location_name: "dbParameterGroupId"))
     CreateDbBackupOutput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
     CreateDbBackupOutput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
@@ -278,7 +284,7 @@ module Aws::TimestreamInfluxDB
     CreateDbClusterInput.add_member(:bucket, Shapes::ShapeRef.new(shape: Bucket, location_name: "bucket"))
     CreateDbClusterInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
     CreateDbClusterInput.add_member(:db_parameter_group_identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, location_name: "dbParameterGroupIdentifier"))
-    CreateDbClusterInput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, required: true, location_name: "dbInstanceType"))
+    CreateDbClusterInput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
     CreateDbClusterInput.add_member(:db_storage_type, Shapes::ShapeRef.new(shape: DbStorageType, location_name: "dbStorageType"))
     CreateDbClusterInput.add_member(:allocated_storage, Shapes::ShapeRef.new(shape: AllocatedStorage, location_name: "allocatedStorage"))
     CreateDbClusterInput.add_member(:network_type, Shapes::ShapeRef.new(shape: NetworkType, location_name: "networkType"))
@@ -286,6 +292,7 @@ module Aws::TimestreamInfluxDB
     CreateDbClusterInput.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: VpcSubnetIdList, required: true, location_name: "vpcSubnetIds"))
     CreateDbClusterInput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, required: true, location_name: "vpcSecurityGroupIds"))
     CreateDbClusterInput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ClusterDeploymentType, location_name: "deploymentType"))
+    CreateDbClusterInput.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     CreateDbClusterInput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     CreateDbClusterInput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
     CreateDbClusterInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
@@ -465,7 +472,8 @@ module Aws::TimestreamInfluxDB
     DeleteDbBackupOutput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     DeleteDbBackupOutput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ResourceDeploymentType, location_name: "deploymentType"))
     DeleteDbBackupOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
-    DeleteDbBackupOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "clusterConfiguration"))
+    DeleteDbBackupOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, deprecated: true, location_name: "clusterConfiguration", metadata: {"deprecatedMessage" => "Use deploymentConfiguration instead."}))
+    DeleteDbBackupOutput.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     DeleteDbBackupOutput.add_member(:db_parameter_group_id, Shapes::ShapeRef.new(shape: DbParameterGroupId, location_name: "dbParameterGroupId"))
     DeleteDbBackupOutput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
     DeleteDbBackupOutput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
@@ -521,6 +529,12 @@ module Aws::TimestreamInfluxDB
     DeleteDbInstanceOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     DeleteDbInstanceOutput.struct_class = Types::DeleteDbInstanceOutput
 
+    DeploymentConfiguration.add_member(:influx_d_bv_3_enterprise, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseDeploymentConfiguration, location_name: "InfluxDBv3Enterprise"))
+    DeploymentConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    DeploymentConfiguration.add_member_subclass(:influx_d_bv_3_enterprise, Types::DeploymentConfiguration::InfluxDBv3Enterprise)
+    DeploymentConfiguration.add_member_subclass(:unknown, Types::DeploymentConfiguration::Unknown)
+    DeploymentConfiguration.struct_class = Types::DeploymentConfiguration
+
     Duration.add_member(:duration_type, Shapes::ShapeRef.new(shape: DurationType, required: true, location_name: "durationType"))
     Duration.add_member(:value, Shapes::ShapeRef.new(shape: DurationValueLong, required: true, location_name: "value"))
     Duration.struct_class = Types::Duration
@@ -539,7 +553,8 @@ module Aws::TimestreamInfluxDB
     GetDbBackupOutput.add_member(:engine_type, Shapes::ShapeRef.new(shape: EngineType, location_name: "engineType"))
     GetDbBackupOutput.add_member(:deployment_type, Shapes::ShapeRef.new(shape: ResourceDeploymentType, location_name: "deploymentType"))
     GetDbBackupOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
-    GetDbBackupOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "clusterConfiguration"))
+    GetDbBackupOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, deprecated: true, location_name: "clusterConfiguration", metadata: {"deprecatedMessage" => "Use deploymentConfiguration instead."}))
+    GetDbBackupOutput.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     GetDbBackupOutput.add_member(:db_parameter_group_id, Shapes::ShapeRef.new(shape: DbParameterGroupId, location_name: "dbParameterGroupId"))
     GetDbBackupOutput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
     GetDbBackupOutput.add_member(:log_delivery_configuration, Shapes::ShapeRef.new(shape: LogDeliveryConfiguration, location_name: "logDeliveryConfiguration"))
@@ -582,7 +597,8 @@ module Aws::TimestreamInfluxDB
     GetDbClusterOutput.add_member(:vpc_subnet_ids, Shapes::ShapeRef.new(shape: VpcSubnetIdList, location_name: "vpcSubnetIds"))
     GetDbClusterOutput.add_member(:vpc_security_group_ids, Shapes::ShapeRef.new(shape: VpcSecurityGroupIdList, location_name: "vpcSecurityGroupIds"))
     GetDbClusterOutput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
-    GetDbClusterOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, location_name: "clusterConfiguration"))
+    GetDbClusterOutput.add_member(:cluster_configuration, Shapes::ShapeRef.new(shape: ClusterConfiguration, deprecated: true, location_name: "clusterConfiguration", metadata: {"deprecatedMessage" => "Use deploymentConfiguration instead."}))
+    GetDbClusterOutput.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     GetDbClusterOutput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationOutputList, location_name: "dbBackupConfigurations"))
     GetDbClusterOutput.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "kmsKeyId"))
     GetDbClusterOutput.struct_class = Types::GetDbClusterOutput
@@ -708,6 +724,9 @@ module Aws::TimestreamInfluxDB
     InfluxDBv3CoreParameters.add_member(:plugin_repository_secret_arn, Shapes::ShapeRef.new(shape: PluginRepositorySecretArn, location_name: "pluginRepositorySecretArn"))
     InfluxDBv3CoreParameters.struct_class = Types::InfluxDBv3CoreParameters
 
+    InfluxDBv3EnterpriseDeploymentConfiguration.add_member(:node_groups, Shapes::ShapeRef.new(shape: NodeGroupList, required: true, location_name: "nodeGroups"))
+    InfluxDBv3EnterpriseDeploymentConfiguration.struct_class = Types::InfluxDBv3EnterpriseDeploymentConfiguration
+
     InfluxDBv3EnterpriseParameters.add_member(:query_file_limit, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersQueryFileLimitInteger, location_name: "queryFileLimit"))
     InfluxDBv3EnterpriseParameters.add_member(:query_log_size, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersQueryLogSizeInteger, location_name: "queryLogSize"))
     InfluxDBv3EnterpriseParameters.add_member(:log_filter, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersLogFilterString, location_name: "logFilter"))
@@ -749,9 +768,9 @@ module Aws::TimestreamInfluxDB
     InfluxDBv3EnterpriseParameters.add_member(:hard_delete_default_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "hardDeleteDefaultDuration"))
     InfluxDBv3EnterpriseParameters.add_member(:plugin_repository_url, Shapes::ShapeRef.new(shape: String, location_name: "pluginRepositoryUrl"))
     InfluxDBv3EnterpriseParameters.add_member(:plugin_repository_secret_arn, Shapes::ShapeRef.new(shape: PluginRepositorySecretArn, location_name: "pluginRepositorySecretArn"))
-    InfluxDBv3EnterpriseParameters.add_member(:ingest_query_instances, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersIngestQueryInstancesInteger, required: true, location_name: "ingestQueryInstances"))
-    InfluxDBv3EnterpriseParameters.add_member(:query_only_instances, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersQueryOnlyInstancesInteger, required: true, location_name: "queryOnlyInstances"))
-    InfluxDBv3EnterpriseParameters.add_member(:dedicated_compactor, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "dedicatedCompactor"))
+    InfluxDBv3EnterpriseParameters.add_member(:ingest_query_instances, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersIngestQueryInstancesInteger, deprecated: true, location_name: "ingestQueryInstances", metadata: {"box" => true, "deprecatedMessage" => "Use deploymentConfiguration instead."}))
+    InfluxDBv3EnterpriseParameters.add_member(:query_only_instances, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersQueryOnlyInstancesInteger, deprecated: true, location_name: "queryOnlyInstances", metadata: {"box" => true, "deprecatedMessage" => "Use deploymentConfiguration instead."}))
+    InfluxDBv3EnterpriseParameters.add_member(:dedicated_compactor, Shapes::ShapeRef.new(shape: Boolean, deprecated: true, location_name: "dedicatedCompactor", metadata: {"box" => true, "deprecatedMessage" => "Use deploymentConfiguration instead."}))
     InfluxDBv3EnterpriseParameters.add_member(:compaction_row_limit, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersCompactionRowLimitInteger, location_name: "compactionRowLimit"))
     InfluxDBv3EnterpriseParameters.add_member(:compaction_max_num_files_per_plan, Shapes::ShapeRef.new(shape: InfluxDBv3EnterpriseParametersCompactionMaxNumFilesPerPlanInteger, location_name: "compactionMaxNumFilesPerPlan"))
     InfluxDBv3EnterpriseParameters.add_member(:compaction_gen_2_duration, Shapes::ShapeRef.new(shape: Duration, location_name: "compactionGen2Duration"))
@@ -827,6 +846,13 @@ module Aws::TimestreamInfluxDB
     MaintenanceSchedule.add_member(:timezone, Shapes::ShapeRef.new(shape: IanaTimezone, required: true, location_name: "timezone"))
     MaintenanceSchedule.add_member(:preferred_maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, required: true, location_name: "preferredMaintenanceWindow"))
     MaintenanceSchedule.struct_class = Types::MaintenanceSchedule
+
+    NodeGroup.add_member(:instance_modes, Shapes::ShapeRef.new(shape: InstanceModeList, required: true, location_name: "instanceModes"))
+    NodeGroup.add_member(:instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, required: true, location_name: "instanceType"))
+    NodeGroup.add_member(:count, Shapes::ShapeRef.new(shape: NodeGroupCountInteger, required: true, location_name: "count"))
+    NodeGroup.struct_class = Types::NodeGroup
+
+    NodeGroupList.member = Shapes::ShapeRef.new(shape: NodeGroup)
 
     Parameters.add_member(:influx_d_bv_2, Shapes::ShapeRef.new(shape: InfluxDBv2Parameters, location_name: "InfluxDBv2"))
     Parameters.add_member(:influx_d_bv_3_core, Shapes::ShapeRef.new(shape: InfluxDBv3CoreParameters, location_name: "InfluxDBv3Core"))
@@ -948,6 +974,7 @@ module Aws::TimestreamInfluxDB
     UpdateDbClusterInput.add_member(:db_parameter_group_identifier, Shapes::ShapeRef.new(shape: DbParameterGroupIdentifier, location_name: "dbParameterGroupIdentifier"))
     UpdateDbClusterInput.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
     UpdateDbClusterInput.add_member(:db_instance_type, Shapes::ShapeRef.new(shape: DbInstanceType, location_name: "dbInstanceType"))
+    UpdateDbClusterInput.add_member(:deployment_configuration, Shapes::ShapeRef.new(shape: DeploymentConfiguration, location_name: "deploymentConfiguration"))
     UpdateDbClusterInput.add_member(:failover_mode, Shapes::ShapeRef.new(shape: FailoverMode, location_name: "failoverMode"))
     UpdateDbClusterInput.add_member(:maintenance_schedule, Shapes::ShapeRef.new(shape: MaintenanceSchedule, location_name: "maintenanceSchedule"))
     UpdateDbClusterInput.add_member(:db_backup_configurations, Shapes::ShapeRef.new(shape: DbBackupConfigurationInputList, location_name: "dbBackupConfigurations"))

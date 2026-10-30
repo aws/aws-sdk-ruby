@@ -3023,6 +3023,11 @@ module Aws::WAFV2
     #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
     #   (8,192 bytes).
     #
+    #   You can also use this to have your CloudFront distributions insert the
+    #   WAF challenge JavaScript SDK into the HTML responses that they return.
+    #   For more information, see the `ChallengeJavascriptSdkInjection`
+    #   setting.
+    #
     #
     #
     #   [1]: http://aws.amazon.com/waf/pricing/
@@ -8336,6 +8341,11 @@ module Aws::WAFV2
     #   For Application Load Balancer and AppSync, the limit is fixed at 8 KB
     #   (8,192 bytes).
     #
+    #   You can also use this to have your CloudFront distributions insert the
+    #   WAF challenge JavaScript SDK into the HTML responses that they return.
+    #   For more information, see the `ChallengeJavascriptSdkInjection`
+    #   setting.
+    #
     #
     #
     #   [1]: http://aws.amazon.com/waf/pricing/
@@ -8401,7 +8411,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.142.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

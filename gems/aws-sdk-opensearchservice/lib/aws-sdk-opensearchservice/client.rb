@@ -648,6 +648,56 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Starts replicating a domain to a peer domain in another AWS Region. A
+    # domain can have one peer. The domain you call becomes the primary and
+    # the peer becomes the secondary, which receives a copy of the
+    # primary's indexes and serves read requests.
+    #
+    # Replication is established asynchronously. Use the
+    # `DescribeDomainReplication` operation to check whether the
+    # relationship has reached the `ACTIVE` state.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :peer_domain_arn
+    #   The Amazon Resource Name (ARN) of the domain to replicate to. The peer
+    #   must be in a different Region from the domain you are calling, and in
+    #   the same AWS account.
+    #
+    # @option params [Boolean] :dry_run
+    #   When `true`, validates the request and reports whether replication
+    #   could be established, without changing either domain.
+    #
+    # @return [Types::AddReplicationPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::AddReplicationPeerResponse#domain_arn #domain_arn} => String
+    #   * {Types::AddReplicationPeerResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.add_replication_peer({
+    #     domain_name: "DomainName", # required
+    #     peer_domain_arn: "DomainArn", # required
+    #     dry_run: false,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_arn #=> String
+    #   resp.status #=> String, one of "PENDING_SETUP", "ACTIVE", "SWITCHING_OVER", "FAILING_OVER", "PENDING_REMOVAL", "DETACHED", "EJECTED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/AddReplicationPeer AWS API Documentation
+    #
+    # @overload add_replication_peer(params = {})
+    # @param [Hash] params ({})
+    def add_replication_peer(params = {}, options = {})
+      req = build_request(:add_replication_peer, params)
+      req.send_request(options)
+    end
+
     # Attaches tags to an existing Amazon OpenSearch Service domain, data
     # source, or application.
     #
@@ -1025,6 +1075,98 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def cancel_service_software_update(params = {}, options = {})
       req = build_request(:cancel_service_software_update, params)
+      req.send_request(options)
+    end
+
+    # Compares the metadata of two domains and reports where they differ.
+    # Use this operation to check that a secondary domain is configured
+    # consistently with its primary before you rely on it, because
+    # replication copies index data but does not copy domain metadata such
+    # as index templates, ingest pipelines, or security roles.
+    #
+    # You choose which categories to compare. The response reports, for each
+    # category, how many items match, how many exist on only one domain, and
+    # which fields diverge.
+    #
+    # @option params [required, String] :source_domain_arn
+    #   The Amazon Resource Name (ARN) of the domain to compare from.
+    #
+    # @option params [required, String] :target_domain_arn
+    #   The Amazon Resource Name (ARN) of the domain to compare against.
+    #
+    # @option params [required, Array<String>] :categories
+    #   The metadata categories to compare. At least one is required, and only
+    #   the categories you name are read and returned.
+    #
+    #   * `aliases`
+    #
+    #   * `alerting_monitors`
+    #
+    #   * `cluster_settings`
+    #
+    #   * `component_templates`
+    #
+    #   * `ingest_pipelines`
+    #
+    #   * `ism_policies` — index state management policies
+    #
+    #   * `security_action_groups`
+    #
+    #   * `security_internal_users`
+    #
+    #   * `security_role_mappings`
+    #
+    #   * `security_roles`
+    #
+    #   * `templates` — index templates
+    #
+    #   The set of categories grows over time, so this list is not fixed. A
+    #   category the service does not recognise is rejected with the supported
+    #   categories named in the error message.
+    #
+    # @return [Types::CompareDomainConfigurationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CompareDomainConfigurationResponse#source_domain_arn #source_domain_arn} => String
+    #   * {Types::CompareDomainConfigurationResponse#target_domain_arn #target_domain_arn} => String
+    #   * {Types::CompareDomainConfigurationResponse#categories #categories} => Hash&lt;String,Types::CategoryDiffResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.compare_domain_configuration({
+    #     source_domain_arn: "DomainArn", # required
+    #     target_domain_arn: "DomainArn", # required
+    #     categories: ["MetadataCategory"], # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.source_domain_arn #=> String
+    #   resp.target_domain_arn #=> String
+    #   resp.categories #=> Hash
+    #   resp.categories["MetadataCategory"].status #=> String, one of "compared", "error"
+    #   resp.categories["MetadataCategory"].in_sync #=> Integer
+    #   resp.categories["MetadataCategory"].source_only #=> Integer
+    #   resp.categories["MetadataCategory"].target_only #=> Integer
+    #   resp.categories["MetadataCategory"].diverged #=> Integer
+    #   resp.categories["MetadataCategory"].items.source_only #=> Array
+    #   resp.categories["MetadataCategory"].items.source_only[0] #=> String
+    #   resp.categories["MetadataCategory"].items.target_only #=> Array
+    #   resp.categories["MetadataCategory"].items.target_only[0] #=> String
+    #   resp.categories["MetadataCategory"].items.diverged #=> Array
+    #   resp.categories["MetadataCategory"].items.diverged[0].name #=> String
+    #   resp.categories["MetadataCategory"].items.diverged[0].fields #=> Array
+    #   resp.categories["MetadataCategory"].items.diverged[0].fields[0].path #=> String
+    #   resp.categories["MetadataCategory"].items.diverged[0].fields[0].source_value #=> String
+    #   resp.categories["MetadataCategory"].items.diverged[0].fields[0].target_value #=> String
+    #   resp.categories["MetadataCategory"].items.diverged[0].fields[0].policy #=> String, one of "redacted"
+    #   resp.categories["MetadataCategory"].truncated #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/CompareDomainConfiguration AWS API Documentation
+    #
+    # @overload compare_domain_configuration(params = {})
+    # @param [Hash] params ({})
+    def compare_domain_configuration(params = {}, options = {})
+      req = build_request(:compare_domain_configuration, params)
       req.send_request(options)
     end
 
@@ -3088,6 +3230,50 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Describes the replication arrangement that a domain participates in,
+    # including the domain's role and the state of its relationship with
+    # each peer.
+    #
+    # A domain that is not replicating is returned with an empty `Peers`
+    # list and no `Role`. Returns `ResourceNotFoundException` if the domain
+    # does not exist.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @return [Types::DescribeDomainReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeDomainReplicationResponse#domain_arn #domain_arn} => String
+    #   * {Types::DescribeDomainReplicationResponse#role #role} => String
+    #   * {Types::DescribeDomainReplicationResponse#peers #peers} => Array&lt;Types::ReplicationPeer&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_domain_replication({
+    #     domain_name: "DomainName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_arn #=> String
+    #   resp.role #=> String, one of "PRIMARY", "SECONDARY"
+    #   resp.peers #=> Array
+    #   resp.peers[0].peer_domain_arn #=> String
+    #   resp.peers[0].peer_role #=> String, one of "PRIMARY", "SECONDARY"
+    #   resp.peers[0].status #=> String, one of "PENDING_SETUP", "ACTIVE", "SWITCHING_OVER", "FAILING_OVER", "PENDING_REMOVAL", "DETACHED", "EJECTED", "FAILED"
+    #   resp.peers[0].status_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/DescribeDomainReplication AWS API Documentation
+    #
+    # @overload describe_domain_replication(params = {})
+    # @param [Hash] params ({})
+    def describe_domain_replication(params = {}, options = {})
+      req = build_request(:describe_domain_replication, params)
+      req.send_request(options)
+    end
+
     # Returns domain configuration information about the specified Amazon
     # OpenSearch Service domains.
     #
@@ -4071,6 +4257,58 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def dissociate_packages(params = {}, options = {})
       req = build_request(:dissociate_packages, params)
+      req.send_request(options)
+    end
+
+    # Promotes a secondary domain to primary without coordinating with the
+    # current primary. Use this operation when the primary is unreachable
+    # and you cannot wait for it to recover.
+    #
+    # Writes that had not yet replicated when the primary became unreachable
+    # are lost. You must set `AllowDataLoss` to acknowledge this. To promote
+    # a domain without losing writes, use the `SwitchoverReplication`
+    # operation instead.
+    #
+    # Call this operation in the Region of the domain you want to promote.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :peer_domain_arn
+    #   The Amazon Resource Name (ARN) of the relationship's current primary.
+    #   The request is rejected if this domain is no longer the peer of the
+    #   domain you are calling.
+    #
+    # @option params [required, Boolean] :allow_data_loss
+    #   Acknowledges that writes which had not yet replicated are lost. You
+    #   must set this to `true`; the request is rejected otherwise.
+    #
+    # @return [Types::FailoverReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::FailoverReplicationResponse#domain_arn #domain_arn} => String
+    #   * {Types::FailoverReplicationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.failover_replication({
+    #     domain_name: "DomainName", # required
+    #     peer_domain_arn: "DomainArn", # required
+    #     allow_data_loss: false, # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_arn #=> String
+    #   resp.status #=> String, one of "PENDING_SETUP", "ACTIVE", "SWITCHING_OVER", "FAILING_OVER", "PENDING_REMOVAL", "DETACHED", "EJECTED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/FailoverReplication AWS API Documentation
+    #
+    # @overload failover_replication(params = {})
+    # @param [Hash] params ({})
+    def failover_replication(params = {}, options = {})
+      req = build_request(:failover_replication, params)
       req.send_request(options)
     end
 
@@ -5671,6 +5909,46 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Stops replicating a domain to its peer. Replication ends for both
+    # domains, and each domain keeps the data it holds at that point.
+    # Neither domain is deleted.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :peer_domain_arn
+    #   The Amazon Resource Name (ARN) of the peer to stop replicating with.
+    #   Both domains are named so that the request identifies exactly one
+    #   replication relationship.
+    #
+    # @return [Types::RemoveReplicationPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RemoveReplicationPeerResponse#domain_arn #domain_arn} => String
+    #   * {Types::RemoveReplicationPeerResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.remove_replication_peer({
+    #     domain_name: "DomainName", # required
+    #     peer_domain_arn: "DomainArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_arn #=> String
+    #   resp.status #=> String, one of "PENDING_SETUP", "ACTIVE", "SWITCHING_OVER", "FAILING_OVER", "PENDING_REMOVAL", "DETACHED", "EJECTED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/RemoveReplicationPeer AWS API Documentation
+    #
+    # @overload remove_replication_peer(params = {})
+    # @param [Hash] params ({})
+    def remove_replication_peer(params = {}, options = {})
+      req = build_request(:remove_replication_peer, params)
+      req.send_request(options)
+    end
+
     # Removes the specified set of tags from an Amazon OpenSearch Service
     # domain, data source, or application. For more information, see [
     # Tagging Amazon OpenSearch Service resources][1].
@@ -5952,6 +6230,51 @@ module Aws::OpenSearchService
     # @param [Hash] params ({})
     def start_service_software_update(params = {}, options = {})
       req = build_request(:start_service_software_update, params)
+      req.send_request(options)
+    end
+
+    # Promotes a secondary domain to primary, coordinating with the current
+    # primary so that no writes are lost. Use this operation for planned
+    # role changes, such as testing your recovery procedure or moving write
+    # traffic to another Region.
+    #
+    # Call this operation in the Region of the domain you want to promote.
+    # If the current primary is unreachable, use the `FailoverReplication`
+    # operation instead.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of an OpenSearch Service domain. Domain names are unique
+    #   across the domains owned by an account within an Amazon Web Services
+    #   Region.
+    #
+    # @option params [required, String] :peer_domain_arn
+    #   The Amazon Resource Name (ARN) of the relationship's current primary.
+    #   The request is rejected if this domain is no longer the peer of the
+    #   domain you are calling.
+    #
+    # @return [Types::SwitchoverReplicationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SwitchoverReplicationResponse#domain_arn #domain_arn} => String
+    #   * {Types::SwitchoverReplicationResponse#status #status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.switchover_replication({
+    #     domain_name: "DomainName", # required
+    #     peer_domain_arn: "DomainArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_arn #=> String
+    #   resp.status #=> String, one of "PENDING_SETUP", "ACTIVE", "SWITCHING_OVER", "FAILING_OVER", "PENDING_REMOVAL", "DETACHED", "EJECTED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/SwitchoverReplication AWS API Documentation
+    #
+    # @overload switchover_replication(params = {})
+    # @param [Hash] params ({})
+    def switchover_replication(params = {}, options = {})
+      req = build_request(:switchover_replication, params)
       req.send_request(options)
     end
 
@@ -7138,7 +7461,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.115.0'
+      context[:gem_version] = '1.117.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

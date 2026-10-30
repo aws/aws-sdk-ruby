@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.186.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.185.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.184.0 (2026-10-26)
+------------------
+
+* Feature - This release adds support for EKS management of Gateway API CRDs (Custom Resource Definitions)
+
 1.183.0 (2026-10-21)
 ------------------
 

@@ -54,7 +54,7 @@ module Aws::CodePipeline
   autoload :EndpointProvider, 'aws-sdk-codepipeline/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codepipeline/endpoints'
 
-  GEM_VERSION = '1.123.0'
+  GEM_VERSION = '1.125.0'
 
 end
 

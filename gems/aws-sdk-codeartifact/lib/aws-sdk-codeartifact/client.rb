@@ -4055,7 +4055,7 @@ module Aws::CodeArtifact
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codeartifact'
-      context[:gem_version] = '1.83.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

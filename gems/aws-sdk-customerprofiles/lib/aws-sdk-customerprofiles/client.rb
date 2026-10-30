@@ -4159,6 +4159,9 @@ module Aws::CustomerProfiles
     #   * {Types::GetProfileObjectTypeTemplateResponse#template_id #template_id} => String
     #   * {Types::GetProfileObjectTypeTemplateResponse#source_name #source_name} => String
     #   * {Types::GetProfileObjectTypeTemplateResponse#source_object #source_object} => String
+    #   * {Types::GetProfileObjectTypeTemplateResponse#default_max_profile_object_count #default_max_profile_object_count} => Integer
+    #   * {Types::GetProfileObjectTypeTemplateResponse#default_max_profile_object_count_effective_after #default_max_profile_object_count_effective_after} => Time
+    #   * {Types::GetProfileObjectTypeTemplateResponse#store_only #store_only} => Boolean
     #   * {Types::GetProfileObjectTypeTemplateResponse#allow_profile_creation #allow_profile_creation} => Boolean
     #   * {Types::GetProfileObjectTypeTemplateResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
     #   * {Types::GetProfileObjectTypeTemplateResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
@@ -4175,6 +4178,9 @@ module Aws::CustomerProfiles
     #   resp.template_id #=> String
     #   resp.source_name #=> String
     #   resp.source_object #=> String
+    #   resp.default_max_profile_object_count #=> Integer
+    #   resp.default_max_profile_object_count_effective_after #=> Time
+    #   resp.store_only #=> Boolean
     #   resp.allow_profile_creation #=> Boolean
     #   resp.source_last_updated_timestamp_format #=> String
     #   resp.fields #=> Hash
@@ -8523,7 +8529,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

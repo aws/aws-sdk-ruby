@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2026-10-29)
+------------------
+
+* Feature - Adds support for the PySpark 2.0 analysis template format and for choosing the file format (CSV or Parquet) of protected job results written to Amazon S3, including in a membership's default job result configuration.
+
+1.85.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.84.0 (2026-10-21)
 ------------------
 

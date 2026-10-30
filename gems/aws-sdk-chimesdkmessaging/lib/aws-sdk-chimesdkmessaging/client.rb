@@ -3333,7 +3333,7 @@ module Aws::ChimeSDKMessaging
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-chimesdkmessaging'
-      context[:gem_version] = '1.72.0'
+      context[:gem_version] = '1.74.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

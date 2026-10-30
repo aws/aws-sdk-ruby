@@ -2495,7 +2495,7 @@ module Aws::CodeCatalyst
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codecatalyst'
-      context[:gem_version] = '1.57.0'
+      context[:gem_version] = '1.59.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.99.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.98.0 (2026-10-28)
+------------------
+
+* Feature - InsertAdBreak now allows setting a customized adBreakId on a request and also adds a new field targetStartAt for a delayed ad insertion
+
+1.97.0 (2026-10-26)
+------------------
+
+* Feature - The release adds failover slate configurations, which show viewers a slate during temporary broadcaster network disruptions to reduce viewer drop-off and refresh storms.
+
 1.96.0 (2026-10-21)
 ------------------
 

@@ -2438,6 +2438,40 @@ module Aws::Lightsail
     #   to return when the origin responds with a given HTTP error code. You
     #   can also specify the HTTP status code to send to the viewer.
     #
+    # @option params [Boolean] :enable_waf
+    #   Specifies whether to enable Web Application Firewall (WAF) for the
+    #   distribution. WAF inspects viewer requests and blocks requests that
+    #   match the WAF rule groups that you enable.
+    #
+    #   When you enable WAF without specifying the `wafRules` parameter, the
+    #   distribution has no WAF rule groups enabled and doesn't block any
+    #   requests.
+    #
+    #   <note markdown="1"> WAF is available only for distributions that use the `medium_1_0` or
+    #   `large_1_0` bundle.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::WafRule>] :waf_rules
+    #   An array of objects that describe the WAF rule groups to enable for
+    #   the distribution.
+    #
+    #   The WAF rule groups that you can specify depend on the bundle of the
+    #   distribution:
+    #
+    #   * `medium_1_0` – Supports the `AWSManagedRulesCommonRuleSet`,
+    #     `AWSManagedRulesKnownBadInputsRuleSet`, and
+    #     `AWSManagedRulesAnonymousIpList` rule groups.
+    #
+    #   * `large_1_0` – Supports the rule groups for `medium_1_0`, plus
+    #     `AWSManagedRulesAdminProtectionRuleSet`,
+    #     `AWSManagedRulesSQLiRuleSet`, `AWSManagedRulesLinuxRuleSet`,
+    #     `AWSManagedRulesUnixRuleSet`, `AWSManagedRulesWindowsRuleSet`,
+    #     `AWSManagedRulesPHPRuleSet`, `AWSManagedRulesWordPressRuleSet`,
+    #     `AWSManagedRulesAmazonIpReputationList`,
+    #     `AWSManagedRulesATPRuleSet`, `AWSManagedRulesACFPRuleSet`, and
+    #     `AWSManagedRulesBotControlRuleSet` rule groups.
+    #
     # @return [Types::CreateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::CreateDistributionResult#distribution #distribution} => Types::LightsailDistribution
@@ -2502,6 +2536,34 @@ module Aws::Lightsail
     #         error_caching_min_ttl: 1,
     #       },
     #     ],
+    #     enable_waf: false,
+    #     waf_rules: [
+    #       {
+    #         name: "string", # required
+    #         atp_config: {
+    #           login_path: "string",
+    #           payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #           username_field: "string",
+    #           password_field: "string",
+    #           response_inspection: {
+    #             success_codes: [1],
+    #             failure_codes: [1],
+    #           },
+    #         },
+    #         acfp_config: {
+    #           payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #           creation_path: "string",
+    #           registration_page_path: "string",
+    #           response_inspection: {
+    #             success_codes: [1],
+    #             failure_codes: [1],
+    #           },
+    #         },
+    #         bot_control_config: {
+    #           inspection_level: "COMMON", # accepts COMMON, TARGETED
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -2558,6 +2620,25 @@ module Aws::Lightsail
     #   resp.distribution.custom_error_responses[0].response_code #=> String
     #   resp.distribution.custom_error_responses[0].response_page_path #=> String
     #   resp.distribution.custom_error_responses[0].error_caching_min_ttl #=> Integer
+    #   resp.distribution.waf.is_waf_enabled #=> Boolean
+    #   resp.distribution.waf.waf_rules #=> Array
+    #   resp.distribution.waf.waf_rules[0].name #=> String
+    #   resp.distribution.waf.waf_rules[0].atp_config.login_path #=> String
+    #   resp.distribution.waf.waf_rules[0].atp_config.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.distribution.waf.waf_rules[0].atp_config.username_field #=> String
+    #   resp.distribution.waf.waf_rules[0].atp_config.password_field #=> String
+    #   resp.distribution.waf.waf_rules[0].atp_config.response_inspection.success_codes #=> Array
+    #   resp.distribution.waf.waf_rules[0].atp_config.response_inspection.success_codes[0] #=> Integer
+    #   resp.distribution.waf.waf_rules[0].atp_config.response_inspection.failure_codes #=> Array
+    #   resp.distribution.waf.waf_rules[0].atp_config.response_inspection.failure_codes[0] #=> Integer
+    #   resp.distribution.waf.waf_rules[0].acfp_config.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.distribution.waf.waf_rules[0].acfp_config.creation_path #=> String
+    #   resp.distribution.waf.waf_rules[0].acfp_config.registration_page_path #=> String
+    #   resp.distribution.waf.waf_rules[0].acfp_config.response_inspection.success_codes #=> Array
+    #   resp.distribution.waf.waf_rules[0].acfp_config.response_inspection.success_codes[0] #=> Integer
+    #   resp.distribution.waf.waf_rules[0].acfp_config.response_inspection.failure_codes #=> Array
+    #   resp.distribution.waf.waf_rules[0].acfp_config.response_inspection.failure_codes[0] #=> Integer
+    #   resp.distribution.waf.waf_rules[0].bot_control_config.inspection_level #=> String, one of "COMMON", "TARGETED"
     #   resp.operation.id #=> String
     #   resp.operation.resource_name #=> String
     #   resp.operation.resource_type #=> String, one of "ContainerService", "Instance", "StaticIp", "KeyPair", "InstanceSnapshot", "Domain", "PeeredVpc", "LoadBalancer", "LoadBalancerTlsCertificate", "Disk", "DiskSnapshot", "RelationalDatabase", "RelationalDatabaseSnapshot", "ExportSnapshotRecord", "CloudFormationStackRecord", "Alarm", "ContactMethod", "Distribution", "Certificate", "Bucket"
@@ -7286,6 +7367,22 @@ module Aws::Lightsail
     #
     #     `Unit`: The published unit is `Percent`.
     #
+    #   * <b> <code>WafAllowedRequests</code> </b> - The number of viewer
+    #     requests that Web Application Firewall (WAF) allowed. This metric is
+    #     available only when WAF is enabled for the distribution.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `None`.
+    #
+    #   * <b> <code>WafBlockedRequests</code> </b> - The number of viewer
+    #     requests that WAF blocked. This metric is available only when WAF is
+    #     enabled for the distribution.
+    #
+    #     `Statistics`: The most useful statistic is `Sum`.
+    #
+    #     `Unit`: The published unit is `None`.
+    #
     # @option params [required, Time,DateTime,Date,Integer,String] :start_time
     #   The start of the time interval for which to get metric data.
     #
@@ -7370,7 +7467,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_distribution_metric_data({
     #     distribution_name: "ResourceName", # required
-    #     metric_name: "Requests", # required, accepts Requests, BytesDownloaded, BytesUploaded, TotalErrorRate, Http4xxErrorRate, Http5xxErrorRate
+    #     metric_name: "Requests", # required, accepts Requests, BytesDownloaded, BytesUploaded, TotalErrorRate, Http4xxErrorRate, Http5xxErrorRate, WafAllowedRequests, WafBlockedRequests
     #     start_time: Time.now, # required
     #     end_time: Time.now, # required
     #     period: 1, # required
@@ -7380,7 +7477,7 @@ module Aws::Lightsail
     #
     # @example Response structure
     #
-    #   resp.metric_name #=> String, one of "Requests", "BytesDownloaded", "BytesUploaded", "TotalErrorRate", "Http4xxErrorRate", "Http5xxErrorRate"
+    #   resp.metric_name #=> String, one of "Requests", "BytesDownloaded", "BytesUploaded", "TotalErrorRate", "Http4xxErrorRate", "Http5xxErrorRate", "WafAllowedRequests", "WafBlockedRequests"
     #   resp.metric_data #=> Array
     #   resp.metric_data[0].average #=> Float
     #   resp.metric_data[0].maximum #=> Float
@@ -7482,6 +7579,25 @@ module Aws::Lightsail
     #   resp.distributions[0].custom_error_responses[0].response_code #=> String
     #   resp.distributions[0].custom_error_responses[0].response_page_path #=> String
     #   resp.distributions[0].custom_error_responses[0].error_caching_min_ttl #=> Integer
+    #   resp.distributions[0].waf.is_waf_enabled #=> Boolean
+    #   resp.distributions[0].waf.waf_rules #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].name #=> String
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.login_path #=> String
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.username_field #=> String
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.password_field #=> String
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.response_inspection.success_codes #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.response_inspection.success_codes[0] #=> Integer
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.response_inspection.failure_codes #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].atp_config.response_inspection.failure_codes[0] #=> Integer
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.payload_type #=> String, one of "JSON", "FORM_ENCODED"
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.creation_path #=> String
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.registration_page_path #=> String
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.response_inspection.success_codes #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.response_inspection.success_codes[0] #=> Integer
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.response_inspection.failure_codes #=> Array
+    #   resp.distributions[0].waf.waf_rules[0].acfp_config.response_inspection.failure_codes[0] #=> Integer
+    #   resp.distributions[0].waf.waf_rules[0].bot_control_config.inspection_level #=> String, one of "COMMON", "TARGETED"
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetDistributions AWS API Documentation
@@ -7671,6 +7787,14 @@ module Aws::Lightsail
     # @option params [required, String] :instance_name
     #   The name of the instance.
     #
+    # @option params [Boolean] :include_health_status
+    #   Specifies whether to include the instance health status checks in the
+    #   response of your request.
+    #
+    #   When set to `true`, the response includes the `instanceStatus` and
+    #   `systemStatus` of the instance. When omitted or set to `false`, the
+    #   response doesn't include them.
+    #
     # @return [Types::GetInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInstanceResult#instance #instance} => Types::Instance
@@ -7679,6 +7803,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_instance({
     #     instance_name: "ResourceName", # required
+    #     include_health_status: false,
     #   })
     #
     # @example Response structure
@@ -7763,6 +7888,16 @@ module Aws::Lightsail
     #   resp.instance.metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.instance.metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.instance.metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
+    #   resp.instance.instance_status.status #=> String, one of "ok", "impaired", "initializing", "insufficient-data", "not-applicable"
+    #   resp.instance.instance_status.details #=> Array
+    #   resp.instance.instance_status.details[0].name #=> String, one of "reachability"
+    #   resp.instance.instance_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instance.instance_status.details[0].impaired_since #=> Time
+    #   resp.instance.system_status.status #=> String, one of "ok", "impaired", "initializing", "insufficient-data", "not-applicable"
+    #   resp.instance.system_status.details #=> Array
+    #   resp.instance.system_status.details[0].name #=> String, one of "reachability"
+    #   resp.instance.system_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instance.system_status.details[0].impaired_since #=> Time
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstance AWS API Documentation
     #
@@ -8347,6 +8482,14 @@ module Aws::Lightsail
     #   your results are paginated, the response will return a next page token
     #   that you can specify as the page token in a subsequent request.
     #
+    # @option params [Boolean] :include_health_status
+    #   Specifies whether to include the instance health status checks of each
+    #   instance in the response of your request.
+    #
+    #   When set to `true`, the response includes the `instanceStatus` and
+    #   `systemStatus` of each instance. When omitted or set to `false`, the
+    #   response doesn't include them.
+    #
     # @return [Types::GetInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetInstancesResult#instances #instances} => Array&lt;Types::Instance&gt;
@@ -8356,6 +8499,7 @@ module Aws::Lightsail
     #
     #   resp = client.get_instances({
     #     page_token: "string",
+    #     include_health_status: false,
     #   })
     #
     # @example Response structure
@@ -8441,6 +8585,16 @@ module Aws::Lightsail
     #   resp.instances[0].metadata_options.http_endpoint #=> String, one of "disabled", "enabled"
     #   resp.instances[0].metadata_options.http_put_response_hop_limit #=> Integer
     #   resp.instances[0].metadata_options.http_protocol_ipv_6 #=> String, one of "disabled", "enabled"
+    #   resp.instances[0].instance_status.status #=> String, one of "ok", "impaired", "initializing", "insufficient-data", "not-applicable"
+    #   resp.instances[0].instance_status.details #=> Array
+    #   resp.instances[0].instance_status.details[0].name #=> String, one of "reachability"
+    #   resp.instances[0].instance_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instances[0].instance_status.details[0].impaired_since #=> Time
+    #   resp.instances[0].system_status.status #=> String, one of "ok", "impaired", "initializing", "insufficient-data", "not-applicable"
+    #   resp.instances[0].system_status.details #=> Array
+    #   resp.instances[0].system_status.details[0].name #=> String, one of "reachability"
+    #   resp.instances[0].system_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
+    #   resp.instances[0].system_status.details[0].impaired_since #=> Time
     #   resp.next_page_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lightsail-2016-11-28/GetInstances AWS API Documentation
@@ -11179,6 +11333,10 @@ module Aws::Lightsail
     # @option params [required, String] :instance_name
     #   The name of the instance (a virtual private server) to start.
     #
+    # @option params [Types::InstanceAttributeUpdates] :attribute_updates
+    #   An object that describes the attributes to update on the instance
+    #   before it starts.
+    #
     # @return [Types::StartInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartInstanceResult#operations #operations} => Array&lt;Types::Operation&gt;
@@ -11187,6 +11345,9 @@ module Aws::Lightsail
     #
     #   resp = client.start_instance({
     #     instance_name: "ResourceName", # required
+    #     attribute_updates: {
+    #       bundle_id: "NonEmptyString",
+    #     },
     #   })
     #
     # @example Response structure
@@ -12141,6 +12302,51 @@ module Aws::Lightsail
     #   to return when the origin responds with a given HTTP error code. You
     #   can also specify the HTTP status code to send to the viewer.
     #
+    # @option params [Boolean] :enable_waf
+    #   Specifies whether to enable Web Application Firewall (WAF) for the
+    #   distribution. WAF inspects viewer requests and blocks requests that
+    #   match the WAF rule groups that you enable.
+    #
+    #   When you enable WAF without specifying the `wafRules` parameter, the
+    #   distribution has no WAF rule groups enabled and doesn't block any
+    #   requests.
+    #
+    #   <note markdown="1"> WAF is available only for distributions that use the `medium_1_0` or
+    #   `large_1_0` bundle.
+    #
+    #    Setting this parameter to `false` disables WAF for the distribution
+    #   and removes its WAF rule groups. You must enable the WAF rule groups
+    #   again if you enable WAF again.
+    #
+    #    </note>
+    #
+    # @option params [Array<Types::WafRule>] :waf_rules
+    #   An array of objects that describe the WAF rule groups to enable for
+    #   the distribution.
+    #
+    #   The array that you specify replaces the existing WAF rule groups of
+    #   the distribution. To keep a WAF rule group enabled, include it in the
+    #   array. To disable all WAF rule groups, specify an empty array.
+    #
+    #   You can specify this parameter only when WAF is enabled for the
+    #   distribution.
+    #
+    #   The WAF rule groups that you can specify depend on the bundle of the
+    #   distribution:
+    #
+    #   * `medium_1_0` – Supports the `AWSManagedRulesCommonRuleSet`,
+    #     `AWSManagedRulesKnownBadInputsRuleSet`, and
+    #     `AWSManagedRulesAnonymousIpList` rule groups.
+    #
+    #   * `large_1_0` – Supports the rule groups for `medium_1_0`, plus
+    #     `AWSManagedRulesAdminProtectionRuleSet`,
+    #     `AWSManagedRulesSQLiRuleSet`, `AWSManagedRulesLinuxRuleSet`,
+    #     `AWSManagedRulesUnixRuleSet`, `AWSManagedRulesWindowsRuleSet`,
+    #     `AWSManagedRulesPHPRuleSet`, `AWSManagedRulesWordPressRuleSet`,
+    #     `AWSManagedRulesAmazonIpReputationList`,
+    #     `AWSManagedRulesATPRuleSet`, `AWSManagedRulesACFPRuleSet`, and
+    #     `AWSManagedRulesBotControlRuleSet` rule groups.
+    #
     # @return [Types::UpdateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpdateDistributionResult#operation #operation} => Types::Operation
@@ -12196,6 +12402,34 @@ module Aws::Lightsail
     #         response_code: "string",
     #         response_page_path: "string",
     #         error_caching_min_ttl: 1,
+    #       },
+    #     ],
+    #     enable_waf: false,
+    #     waf_rules: [
+    #       {
+    #         name: "string", # required
+    #         atp_config: {
+    #           login_path: "string",
+    #           payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #           username_field: "string",
+    #           password_field: "string",
+    #           response_inspection: {
+    #             success_codes: [1],
+    #             failure_codes: [1],
+    #           },
+    #         },
+    #         acfp_config: {
+    #           payload_type: "JSON", # accepts JSON, FORM_ENCODED
+    #           creation_path: "string",
+    #           registration_page_path: "string",
+    #           response_inspection: {
+    #             success_codes: [1],
+    #             failure_codes: [1],
+    #           },
+    #         },
+    #         bot_control_config: {
+    #           inspection_level: "COMMON", # accepts COMMON, TARGETED
+    #         },
     #       },
     #     ],
     #   })
@@ -12797,7 +13031,7 @@ module Aws::Lightsail
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lightsail'
-      context[:gem_version] = '1.140.0'
+      context[:gem_version] = '1.144.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

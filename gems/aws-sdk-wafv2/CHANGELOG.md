@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.144.0 (2026-10-29)
+------------------
+
+* Feature - AWS WAF customers using Targeted Bot Control, ATP, or ACFP managed rule groups can now enable automatic Challenge JavaScript SDK injection. When enabled, Amazon CloudFront injects the script tag into HTML responses on your behalf, removing the need for manual integration.
+
+1.143.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.142.0 (2026-10-21)
 ------------------
 

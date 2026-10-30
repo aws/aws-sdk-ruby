@@ -582,6 +582,7 @@ module Aws::Odb
       attr_accessor database_server_type: ::String
       attr_accessor storage_server_type: ::String
       attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor exascale_configuration: Types::ExascaleConfiguration
       SENSITIVE: []
     end
 
@@ -624,6 +625,7 @@ module Aws::Odb
       attr_accessor database_server_type: ::String
       attr_accessor storage_server_type: ::String
       attr_accessor compute_model: ("ECPU" | "OCPU")
+      attr_accessor exascale_configuration: Types::ExascaleConfiguration
       SENSITIVE: []
     end
 
@@ -646,6 +648,12 @@ module Aws::Odb
       attr_accessor cloud_vm_cluster_arn: ::String
       attr_accessor cloud_exadata_infrastructure_id: ::String
       attr_accessor cloud_exadata_infrastructure_arn: ::String
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor exascale_db_storage_vault_arn: ::String
+      attr_accessor storage_management_type: ("ASM" | "EXASCALE")
+      attr_accessor vm_file_system_storage_type: ("LOCAL" | "EXASCALE")
+      attr_accessor vm_backup_storage_type: ("LOCAL" | "EXASCALE")
+      attr_accessor file_system_configuration_details: ::Array[Types::FileSystemConfigurationDetails]
       attr_accessor cluster_name: ::String
       attr_accessor cpu_core_count: ::Integer
       attr_accessor data_collection_options: Types::DataCollectionOptions
@@ -693,6 +701,12 @@ module Aws::Odb
       attr_accessor cloud_vm_cluster_arn: ::String
       attr_accessor cloud_exadata_infrastructure_id: ::String
       attr_accessor cloud_exadata_infrastructure_arn: ::String
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor exascale_db_storage_vault_arn: ::String
+      attr_accessor storage_management_type: ("ASM" | "EXASCALE")
+      attr_accessor vm_file_system_storage_type: ("LOCAL" | "EXASCALE")
+      attr_accessor vm_backup_storage_type: ("LOCAL" | "EXASCALE")
+      attr_accessor file_system_configuration_details: ::Array[Types::FileSystemConfigurationDetails]
       attr_accessor cluster_name: ::String
       attr_accessor cpu_core_count: ::Integer
       attr_accessor data_collection_options: Types::DataCollectionOptions
@@ -879,6 +893,10 @@ module Aws::Odb
 
     class CreateCloudVmClusterInput
       attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor exascale_db_storage_vault_id: ::String
+      attr_accessor vm_file_system_storage_type: ("LOCAL" | "EXASCALE")
+      attr_accessor vm_backup_storage_type: ("LOCAL" | "EXASCALE")
+      attr_accessor file_system_configuration_details: ::Array[Types::FileSystemConfigurationDetails]
       attr_accessor cpu_core_count: ::Integer
       attr_accessor display_name: ::String
       attr_accessor gi_version: ::String
@@ -948,6 +966,7 @@ module Aws::Odb
       attr_accessor high_capacity_database_storage_total_size_in_g_bs: ::Integer
       attr_accessor additional_flash_cache_in_percent: ::Integer
       attr_accessor autoscale_limit_in_g_bs: ::Integer
+      attr_accessor cloud_exadata_infrastructure_id: ::String
       attr_accessor availability_zone_id: ::String
       attr_accessor availability_zone: ::String
       attr_accessor description: ::String
@@ -1506,6 +1525,14 @@ module Aws::Odb
       SENSITIVE: []
     end
 
+    class ExascaleConfiguration
+      attr_accessor total_storage_size_in_g_bs: ::Integer
+      attr_accessor available_storage_size_in_g_bs: ::Integer
+      attr_accessor total_vm_storage_size_in_g_bs: ::Integer
+      attr_accessor available_vm_storage_size_in_g_bs: ::Integer
+      SENSITIVE: []
+    end
+
     class ExascaleDbStorageDetails
       attr_accessor available_size_in_g_bs: ::Integer
       attr_accessor total_size_in_g_bs: ::Integer
@@ -1519,6 +1546,8 @@ module Aws::Odb
       attr_accessor autoscale_limit_in_g_bs: ::Integer
       attr_accessor availability_zone: ::String
       attr_accessor availability_zone_id: ::String
+      attr_accessor cloud_exadata_infrastructure_arn: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor display_name: ::String
@@ -1535,6 +1564,7 @@ module Aws::Odb
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
       attr_accessor status_reason: ::String
       attr_accessor time_zone: ::String
+      attr_accessor vault_type: ("EXASCALE_INFRASTRUCTURE" | "DEDICATED_INFRASTRUCTURE")
       SENSITIVE: []
     end
 
@@ -1545,6 +1575,8 @@ module Aws::Odb
       attr_accessor autoscale_limit_in_g_bs: ::Integer
       attr_accessor availability_zone: ::String
       attr_accessor availability_zone_id: ::String
+      attr_accessor cloud_exadata_infrastructure_arn: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
       attr_accessor display_name: ::String
@@ -1561,6 +1593,7 @@ module Aws::Odb
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
       attr_accessor status_reason: ::String
       attr_accessor time_zone: ::String
+      attr_accessor vault_type: ("EXASCALE_INFRASTRUCTURE" | "DEDICATED_INFRASTRUCTURE")
       SENSITIVE: []
     end
 
@@ -1575,6 +1608,12 @@ module Aws::Odb
       attr_accessor display_name: ::String
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS" | "STOPPING" | "STOPPED" | "STARTING" | "UNAVAILABLE" | "RESTORE_IN_PROGRESS" | "RESTORE_FAILED" | "BACKUP_IN_PROGRESS" | "SCALE_IN_PROGRESS" | "AVAILABLE_NEEDS_ATTENTION" | "RESTARTING" | "RECREATING" | "ROLE_CHANGE_IN_PROGRESS" | "UPGRADING" | "INACCESSIBLE" | "STANDBY")
       attr_accessor status_reason: ::String
+      SENSITIVE: []
+    end
+
+    class FileSystemConfigurationDetails
+      attr_accessor mount_point: ::String
+      attr_accessor file_system_size_in_g_bs: ::Integer
       SENSITIVE: []
     end
 
@@ -1972,6 +2011,8 @@ module Aws::Odb
     class ListExascaleDbStorageVaultsInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor vault_type: ("EXASCALE_INFRASTRUCTURE" | "DEDICATED_INFRASTRUCTURE")
       SENSITIVE: []
     end
 
@@ -2605,6 +2646,21 @@ module Aws::Odb
       attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
       attr_accessor status_reason: ::String
       attr_accessor exadb_vm_cluster_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateExascaleCloudExadataInfrastructureInput
+      attr_accessor cloud_exadata_infrastructure_id: ::String
+      attr_accessor total_storage_size_in_g_bs: ::Integer
+      attr_accessor total_vm_storage_size_in_g_bs: ::Integer
+      SENSITIVE: []
+    end
+
+    class UpdateExascaleCloudExadataInfrastructureOutput
+      attr_accessor display_name: ::String
+      attr_accessor status: ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+      attr_accessor status_reason: ::String
+      attr_accessor cloud_exadata_infrastructure_id: ::String
       SENSITIVE: []
     end
 

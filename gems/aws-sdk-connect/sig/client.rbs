@@ -592,7 +592,7 @@ module Aws
                             ?references: Hash[::String, {
                                 value: ::String?,
                                 type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                 arn: ::String?,
                                 status_reason: ::String?
                               }],
@@ -1163,6 +1163,9 @@ module Aws
                                   ?description: ::String,
                                   ?contact_flow_id: ::String,
                                   ?self_assign_flow_id: ::String,
+                                  ?contact_hooks: {
+                                    wrap_up_flow_id: ::String?
+                                  },
                                   ?constraints: Params::task_template_constraints,
                                   ?defaults: Params::task_template_defaults,
                                   ?status: ("ACTIVE" | "INACTIVE"),
@@ -2690,6 +2693,7 @@ module Aws
         def description: () -> ::String
         def contact_flow_id: () -> ::String
         def self_assign_flow_id: () -> ::String
+        def contact_hooks: () -> Types::TaskTemplateContactHooks
         def constraints: () -> Types::TaskTemplateConstraints
         def defaults: () -> Types::TaskTemplateDefaults
         def fields: () -> ::Array[Types::TaskTemplateField]
@@ -3433,7 +3437,33 @@ module Aws
                                                         ?max_results: ::Integer,
                                                         ?next_token: ::String,
                                                         output_type: ("Raw" | "Redacted"),
-                                                        segment_types: Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary" | "ExtractedInformation")]
+                                                        segment_types: Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary" | "ExtractedInformation")],
+                                                        ?list_filter: {
+                                                          categories_attribute_filter: {
+                                                            or_conditions: Array[
+                                                              {
+                                                                tag_conditions: Array[
+                                                                  {
+                                                                    tag_key: ::String?,
+                                                                    tag_value: ::String?
+                                                                  }
+                                                                ]?
+                                                              }
+                                                            ]?,
+                                                            and_condition: {
+                                                              tag_conditions: Array[
+                                                                {
+                                                                  tag_key: ::String?,
+                                                                  tag_value: ::String?
+                                                                }
+                                                              ]?
+                                                            }?,
+                                                            tag_condition: {
+                                                              tag_key: ::String?,
+                                                              tag_value: ::String?
+                                                            }?
+                                                          }?
+                                                        }
                                                       ) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
                                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListRealtimeContactAnalysisSegmentsV2ResponseSuccess
 
@@ -4876,7 +4906,7 @@ module Aws
                                  ?references: Hash[::String, {
                                      value: ::String?,
                                      type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                     status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                     status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                      arn: ::String?,
                                      status_reason: ::String?
                                    }],
@@ -5005,7 +5035,7 @@ module Aws
                                           ?references: Hash[::String, {
                                               value: ::String?,
                                               type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                              status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                              status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                               arn: ::String?,
                                               status_reason: ::String?
                                             }],
@@ -5053,7 +5083,7 @@ module Aws
                                 ?references: Hash[::String, {
                                     value: ::String?,
                                     type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                    status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                     arn: ::String?,
                                     status_reason: ::String?
                                   }],
@@ -5117,7 +5147,7 @@ module Aws
                                    ?references: Hash[::String, {
                                        value: ::String?,
                                        type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                       status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                       status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                        arn: ::String?,
                                        status_reason: ::String?
                                      }],
@@ -5328,7 +5358,7 @@ module Aws
                             ?references: Hash[::String, {
                                 value: ::String?,
                                 type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED"),
-                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")?,
+                                status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")?,
                                 arn: ::String?,
                                 status_reason: ::String?
                               }],
@@ -5346,6 +5376,14 @@ module Aws
                             ?system_endpoint: {
                               type: ("TELEPHONE_NUMBER" | "VOIP" | "CONTACT_FLOW" | "CONNECT_PHONENUMBER_ARN" | "EMAIL_ADDRESS")?,
                               address: ::String?
+                            },
+                            ?additional_recipients: {
+                              cc_email_addresses: Array[
+                                {
+                                  email_address: ::String,
+                                  display_name: ::String?
+                                }
+                              ]?
                             }
                           ) -> _UpdateContactResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateContactResponseSuccess
@@ -5741,6 +5779,24 @@ module Aws
                                        ) -> _UpdateNotificationContentResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateNotificationContentResponseSuccess
 
+      interface _UpdateOutboundEmailContactMessageResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateOutboundEmailContactMessageResponse]
+        def contact_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Connect/Client.html#update_outbound_email_contact_message-instance_method
+      def update_outbound_email_contact_message: (
+                                                   instance_id: ::String,
+                                                   contact_id: ::String,
+                                                   email_message: {
+                                                     message_source_type: ("RAW"),
+                                                     raw_message: {
+                                                       body: ::String,
+                                                       content_type: ::String
+                                                     }
+                                                   }
+                                                 ) -> _UpdateOutboundEmailContactMessageResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateOutboundEmailContactMessageResponseSuccess
+
       interface _UpdateParticipantAuthenticationResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateParticipantAuthenticationResponse]
       end
@@ -6002,6 +6058,7 @@ module Aws
         def description: () -> ::String
         def contact_flow_id: () -> ::String
         def self_assign_flow_id: () -> ::String
+        def contact_hooks: () -> Types::TaskTemplateContactHooks
         def constraints: () -> Types::TaskTemplateConstraints
         def defaults: () -> Types::TaskTemplateDefaults
         def fields: () -> ::Array[Types::TaskTemplateField]
@@ -6017,6 +6074,9 @@ module Aws
                                   ?description: ::String,
                                   ?contact_flow_id: ::String,
                                   ?self_assign_flow_id: ::String,
+                                  ?contact_hooks: {
+                                    wrap_up_flow_id: ::String?
+                                  },
                                   ?constraints: Params::task_template_constraints,
                                   ?defaults: Params::task_template_defaults,
                                   ?status: ("ACTIVE" | "INACTIVE"),

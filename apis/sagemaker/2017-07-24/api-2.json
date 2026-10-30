@@ -5275,6 +5275,30 @@
       "max":10000000,
       "min":0
     },
+    "AcceleratorPartitionLayout":{
+      "type":"structure",
+      "members":{
+        "AcceleratorPartitionTypes":{"shape":"AcceleratorPartitionTypeList"}
+      }
+    },
+    "AcceleratorPartitionLayouts":{
+      "type":"list",
+      "member":{"shape":"AcceleratorPartitionLayout"},
+      "max":32,
+      "min":0
+    },
+    "AcceleratorPartitionType":{
+      "type":"string",
+      "max":32,
+      "min":0,
+      "pattern":"mig-[0-9]+g\\.[0-9]+gb([+-][a-z0-9.]+)*"
+    },
+    "AcceleratorPartitionTypeList":{
+      "type":"list",
+      "member":{"shape":"AcceleratorPartitionType"},
+      "max":32,
+      "min":0
+    },
     "AcceleratorsAmount":{
       "type":"integer",
       "box":true,
@@ -12168,7 +12192,8 @@
       "type":"string",
       "enum":[
         "InstanceStress",
-        "InstanceConnectivity"
+        "InstanceConnectivity",
+        "MultiNodeTrainingValidation"
       ]
     },
     "DeepHealthChecks":{
@@ -18770,7 +18795,8 @@
         "NumberOfCpuCoresRequired":{"shape":"NumberOfCpuCores"},
         "NumberOfAcceleratorDevicesRequired":{"shape":"NumberOfAcceleratorDevices"},
         "MinMemoryRequiredInMb":{"shape":"MemoryInMb"},
-        "MaxMemoryRequiredInMb":{"shape":"MemoryInMb"}
+        "MaxMemoryRequiredInMb":{"shape":"MemoryInMb"},
+        "AcceleratorPartitionType":{"shape":"AcceleratorPartitionType"}
       }
     },
     "InferenceComponentContainerSpecification":{
@@ -25473,7 +25499,8 @@
         "CurrentServerlessConfig":{"shape":"ProductionVariantServerlessConfig"},
         "DesiredServerlessConfig":{"shape":"ProductionVariantServerlessConfig"},
         "ManagedInstanceScaling":{"shape":"ProductionVariantManagedInstanceScaling"},
-        "RoutingConfig":{"shape":"ProductionVariantRoutingConfig"}
+        "RoutingConfig":{"shape":"ProductionVariantRoutingConfig"},
+        "AcceleratorPartitionLayouts":{"shape":"AcceleratorPartitionLayouts"}
       }
     },
     "PendingProductionVariantSummaryList":{
@@ -26414,8 +26441,15 @@
         "ManagedInstanceScaling":{"shape":"ProductionVariantManagedInstanceScaling"},
         "RoutingConfig":{"shape":"ProductionVariantRoutingConfig"},
         "InferenceAmiVersion":{"shape":"ProductionVariantInferenceAmiVersion"},
-        "CapacityReservationConfig":{"shape":"ProductionVariantCapacityReservationConfig"}
+        "CapacityReservationConfig":{"shape":"ProductionVariantCapacityReservationConfig"},
+        "AcceleratorPartitionLayouts":{"shape":"ProductionVariantAcceleratorPartitionLayoutsList"}
       }
+    },
+    "ProductionVariantAcceleratorPartitionLayoutsList":{
+      "type":"list",
+      "member":{"shape":"AcceleratorPartitionLayout"},
+      "max":32,
+      "min":1
     },
     "ProductionVariantAcceleratorType":{
       "type":"string",
@@ -26844,7 +26878,8 @@
         "DesiredServerlessConfig":{"shape":"ProductionVariantServerlessConfig"},
         "ManagedInstanceScaling":{"shape":"ProductionVariantManagedInstanceScaling"},
         "RoutingConfig":{"shape":"ProductionVariantRoutingConfig"},
-        "CapacityReservationConfig":{"shape":"ProductionVariantCapacityReservationSummary"}
+        "CapacityReservationConfig":{"shape":"ProductionVariantCapacityReservationSummary"},
+        "AcceleratorPartitionLayouts":{"shape":"AcceleratorPartitionLayouts"}
       }
     },
     "ProductionVariantSummaryList":{

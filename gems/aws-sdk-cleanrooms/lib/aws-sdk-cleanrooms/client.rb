@@ -518,7 +518,7 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_templates[0].update_time #=> Time
     #   resp.collaboration_analysis_templates[0].schema.referenced_tables #=> Array
     #   resp.collaboration_analysis_templates[0].schema.referenced_tables[0] #=> String
-    #   resp.collaboration_analysis_templates[0].format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.collaboration_analysis_templates[0].format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.collaboration_analysis_templates[0].source.text #=> String
     #   resp.collaboration_analysis_templates[0].source.artifacts.entry_point.location.bucket #=> String
     #   resp.collaboration_analysis_templates[0].source.artifacts.entry_point.location.key #=> String
@@ -861,7 +861,7 @@ module Aws::CleanRooms
     #     description: "ResourceDescription",
     #     membership_identifier: "MembershipIdentifier", # required
     #     name: "TableAlias", # required
-    #     format: "SQL", # required, accepts SQL, PYSPARK_1_0
+    #     format: "SQL", # required, accepts SQL, PYSPARK_1_0, PYSPARK_2_0
     #     source: { # required
     #       text: "AnalysisTemplateText",
     #       artifacts: {
@@ -929,7 +929,7 @@ module Aws::CleanRooms
     #   resp.analysis_template.update_time #=> Time
     #   resp.analysis_template.schema.referenced_tables #=> Array
     #   resp.analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.analysis_template.source.text #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.bucket #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.key #=> String
@@ -2278,6 +2278,7 @@ module Aws::CleanRooms
     #     default_job_result_configuration: {
     #       output_configuration: { # required
     #         s3: {
+    #           result_format: "CSV", # accepts CSV, PARQUET
     #           bucket: "ProtectedJobS3OutputConfigurationInputBucketString", # required
     #           key_prefix: "KeyPrefix",
     #         },
@@ -2329,6 +2330,7 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_job_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_job_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_job_result_configuration.role_arn #=> String
@@ -2943,7 +2945,7 @@ module Aws::CleanRooms
     #   resp.analysis_template.update_time #=> Time
     #   resp.analysis_template.schema.referenced_tables #=> Array
     #   resp.analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.analysis_template.source.text #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.bucket #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.key #=> String
@@ -3064,7 +3066,7 @@ module Aws::CleanRooms
     #   resp.collaboration_analysis_template.update_time #=> Time
     #   resp.collaboration_analysis_template.schema.referenced_tables #=> Array
     #   resp.collaboration_analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.collaboration_analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.collaboration_analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.collaboration_analysis_template.source.text #=> String
     #   resp.collaboration_analysis_template.source.artifacts.entry_point.location.bucket #=> String
     #   resp.collaboration_analysis_template.source.artifacts.entry_point.location.key #=> String
@@ -3921,6 +3923,7 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_job_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_job_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_job_result_configuration.role_arn #=> String
@@ -6334,7 +6337,7 @@ module Aws::CleanRooms
     #   resp.analysis_template.update_time #=> Time
     #   resp.analysis_template.schema.referenced_tables #=> Array
     #   resp.analysis_template.schema.referenced_tables[0] #=> String
-    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0"
+    #   resp.analysis_template.format #=> String, one of "SQL", "PYSPARK_1_0", "PYSPARK_2_0"
     #   resp.analysis_template.source.text #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.bucket #=> String
     #   resp.analysis_template.source.artifacts.entry_point.location.key #=> String
@@ -7412,6 +7415,7 @@ module Aws::CleanRooms
     #     default_job_result_configuration: {
     #       output_configuration: { # required
     #         s3: {
+    #           result_format: "CSV", # accepts CSV, PARQUET
     #           bucket: "ProtectedJobS3OutputConfigurationInputBucketString", # required
     #           key_prefix: "KeyPrefix",
     #         },
@@ -7462,6 +7466,7 @@ module Aws::CleanRooms
     #   resp.membership.default_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_result_configuration.output_configuration.s3.single_file_output #=> Boolean
     #   resp.membership.default_result_configuration.role_arn #=> String
+    #   resp.membership.default_job_result_configuration.output_configuration.s3.result_format #=> String, one of "CSV", "PARQUET"
     #   resp.membership.default_job_result_configuration.output_configuration.s3.bucket #=> String
     #   resp.membership.default_job_result_configuration.output_configuration.s3.key_prefix #=> String
     #   resp.membership.default_job_result_configuration.role_arn #=> String
@@ -7712,7 +7717,7 @@ module Aws::CleanRooms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cleanrooms'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

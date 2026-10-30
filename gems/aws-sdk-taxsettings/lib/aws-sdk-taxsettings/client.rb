@@ -596,6 +596,14 @@ module Aws::TaxSettings
     # * For Amazon Web Services accounts created through Organizations, you
     #   can call this API operation when you don't have a billing address.
     #
+    # **Colombia**
+    #
+    # * You can provide a Registro Único Tributario (RUT) document in the
+    #   **verificationDetails** field.
+    #
+    # * If you provide the RUT document, you do not need to provide address
+    #   and legal name. These will be populated based on your document.
+    #
     # **Georgia**
     #
     # * The valid `personType` values are `Physical Person` and `Business`.
@@ -807,6 +815,18 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **Germany**
+    #
+    # * You must provide at least one of the following: a Tax Registration
+    #   Number (TRN) (`registrationId`), the `economicIdentificationNumber`,
+    #   or the `steuernummer`.
+    #
+    # * You can optionally specify the `economicIdentificationNumber`
+    #   (Wirtschafts-Identifikationsnummer, or W-IdNr) and the
+    #   `steuernummer` (tax number issued by the local tax office) in the
+    #   `germanyAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
     # **Poland**
     #
     # * You can optionally specify the `taxRegistrationNumberType` in the
@@ -951,6 +971,15 @@ module Aws::TaxSettings
     #         },
     #         monaco_additional_info: {
     #           business_number: "BusinessNumber", # required
+    #         },
+    #         germany_additional_info: {
+    #           economic_identification_number: "EconomicIdentificationNumber",
+    #           steuernummer: "Steuernummer",
+    #         },
+    #         mexico_additional_info: {
+    #           tax_regime: "MexicoTaxRegimeCode",
+    #           tax_regime_full_name: "MexicoTaxRegimeFullName",
+    #           cfdi_usage_code: "MexicoCfdiUsageCode",
     #         },
     #       },
     #       verification_details: {
@@ -1171,6 +1200,11 @@ module Aws::TaxSettings
     #   resp.tax_registration.additional_tax_information.france_additional_info.siren_number #=> String
     #   resp.tax_registration.additional_tax_information.france_additional_info.e_invoice_routing_code #=> String
     #   resp.tax_registration.additional_tax_information.monaco_additional_info.business_number #=> String
+    #   resp.tax_registration.additional_tax_information.germany_additional_info.economic_identification_number #=> String
+    #   resp.tax_registration.additional_tax_information.germany_additional_info.steuernummer #=> String
+    #   resp.tax_registration.additional_tax_information.mexico_additional_info.tax_regime #=> String
+    #   resp.tax_registration.additional_tax_information.mexico_additional_info.tax_regime_full_name #=> String
+    #   resp.tax_registration.additional_tax_information.mexico_additional_info.cfdi_usage_code #=> String
     #   resp.tax_registration.legal_address.address_line_1 #=> String
     #   resp.tax_registration.legal_address.address_line_2 #=> String
     #   resp.tax_registration.legal_address.address_line_3 #=> String
@@ -1424,6 +1458,11 @@ module Aws::TaxSettings
     #   resp.account_details[0].tax_registration.additional_tax_information.france_additional_info.siren_number #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.france_additional_info.e_invoice_routing_code #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.monaco_additional_info.business_number #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.germany_additional_info.economic_identification_number #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.germany_additional_info.steuernummer #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.mexico_additional_info.tax_regime #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.mexico_additional_info.tax_regime_full_name #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.mexico_additional_info.cfdi_usage_code #=> String
     #   resp.account_details[0].tax_registration.jurisdiction.state_or_region #=> String
     #   resp.account_details[0].tax_registration.jurisdiction.country_code #=> String
     #   resp.account_details[0].tax_inheritance_details.parent_entity_id #=> String
@@ -1592,6 +1631,14 @@ module Aws::TaxSettings
     #
     # * For Amazon Web Services accounts created through Organizations, you
     #   can call this API operation when you don't have a billing address.
+    #
+    # **Colombia**
+    #
+    # * You can provide a Registro Único Tributario (RUT) document in the
+    #   **verificationDetails** field.
+    #
+    # * If you provide the RUT document, you do not need to provide address
+    #   and legal name. These will be populated based on your document.
     #
     # **Georgia**
     #
@@ -1804,6 +1851,18 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **Germany**
+    #
+    # * You must provide at least one of the following: a Tax Registration
+    #   Number (TRN) (`registrationId`), the `economicIdentificationNumber`,
+    #   or the `steuernummer`.
+    #
+    # * You can optionally specify the `economicIdentificationNumber`
+    #   (Wirtschafts-Identifikationsnummer, or W-IdNr) and the
+    #   `steuernummer` (tax number issued by the local tax office) in the
+    #   `germanyAdditionalInfo` field of the `additionalTaxInformation`
+    #   object.
+    #
     # **Poland**
     #
     # * You can optionally specify the `taxRegistrationNumberType` in the
@@ -1948,6 +2007,15 @@ module Aws::TaxSettings
     #         monaco_additional_info: {
     #           business_number: "BusinessNumber", # required
     #         },
+    #         germany_additional_info: {
+    #           economic_identification_number: "EconomicIdentificationNumber",
+    #           steuernummer: "Steuernummer",
+    #         },
+    #         mexico_additional_info: {
+    #           tax_regime: "MexicoTaxRegimeCode",
+    #           tax_regime_full_name: "MexicoTaxRegimeFullName",
+    #           cfdi_usage_code: "MexicoCfdiUsageCode",
+    #         },
     #       },
     #       verification_details: {
     #         date_of_birth: "DateOfBirth",
@@ -1999,7 +2067,7 @@ module Aws::TaxSettings
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-taxsettings'
-      context[:gem_version] = '1.49.0'
+      context[:gem_version] = '1.52.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

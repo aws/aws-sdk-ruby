@@ -516,6 +516,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::CreateDbBackupOutput#deployment_type #deployment_type} => String
     #   * {Types::CreateDbBackupOutput#kms_key_id #kms_key_id} => String
     #   * {Types::CreateDbBackupOutput#cluster_configuration #cluster_configuration} => Types::ClusterConfiguration
+    #   * {Types::CreateDbBackupOutput#deployment_configuration #deployment_configuration} => Types::DeploymentConfiguration
     #   * {Types::CreateDbBackupOutput#db_parameter_group_id #db_parameter_group_id} => String
     #   * {Types::CreateDbBackupOutput#db_instance_type #db_instance_type} => String
     #   * {Types::CreateDbBackupOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
@@ -557,6 +558,11 @@ module Aws::TimestreamInfluxDB
     #   resp.cluster_configuration.ingest_query_instances #=> Integer
     #   resp.cluster_configuration.query_only_instances #=> Integer
     #   resp.cluster_configuration.dedicated_compactor #=> Boolean
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups #=> Array
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_modes #=> Array
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].count #=> Integer
     #   resp.db_parameter_group_id #=> String
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
     #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
@@ -633,8 +639,12 @@ module Aws::TimestreamInfluxDB
     #   parameter groups specify how the database is configured. For example,
     #   DB parameter groups can specify the limit for query concurrency.
     #
-    # @option params [required, String] :db_instance_type
+    # @option params [String] :db_instance_type
     #   The Timestream for InfluxDB DB instance type to run InfluxDB on.
+    #
+    #   Optional when you define the cluster topology with
+    #   deploymentConfiguration, because the instance type is then specified
+    #   per node group.
     #
     # @option params [String] :db_storage_type
     #   The Timestream for InfluxDB DB storage type to read and write InfluxDB
@@ -674,6 +684,14 @@ module Aws::TimestreamInfluxDB
     # @option params [String] :deployment_type
     #   Specifies the type of cluster to create.
     #
+    # @option params [Types::DeploymentConfiguration] :deployment_configuration
+    #   The compute topology for the cluster, defined as a set of node groups.
+    #   Use deploymentConfiguration to allocate compute per function: ingest,
+    #   query, compaction, and processing. A deployment configuration becomes
+    #   the source of truth for the cluster's topology. Timestream for
+    #   InfluxDB then ignores any node-count parameters in the associated DB
+    #   parameter group.
+    #
     # @option params [String] :failover_mode
     #   Specifies the behavior of failure recovery when the primary node of
     #   the cluster fails.
@@ -712,7 +730,7 @@ module Aws::TimestreamInfluxDB
     #     bucket: "Bucket",
     #     port: 1,
     #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
-    #     db_instance_type: "db.influx.medium", # required, accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge, db.influx.24xlarge
+    #     db_instance_type: "db.influx.medium", # accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge, db.influx.24xlarge
     #     db_storage_type: "InfluxIOIncludedT1", # accepts InfluxIOIncludedT1, InfluxIOIncludedT2, InfluxIOIncludedT3
     #     allocated_storage: 1,
     #     network_type: "IPV4", # accepts IPV4, DUAL
@@ -720,6 +738,17 @@ module Aws::TimestreamInfluxDB
     #     vpc_subnet_ids: ["VpcSubnetId"], # required
     #     vpc_security_group_ids: ["VpcSecurityGroupId"], # required
     #     deployment_type: "MULTI_NODE_READ_REPLICAS", # accepts MULTI_NODE_READ_REPLICAS
+    #     deployment_configuration: {
+    #       influx_d_bv_3_enterprise: {
+    #         node_groups: [ # required
+    #           {
+    #             instance_modes: ["PRIMARY"], # required, accepts PRIMARY, STANDBY, REPLICA, INGEST, QUERY, COMPACT, PROCESS
+    #             instance_type: "db.influx.medium", # required, accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge, db.influx.24xlarge
+    #             count: 1, # required
+    #           },
+    #         ],
+    #       },
+    #     },
     #     failover_mode: "AUTOMATIC", # accepts AUTOMATIC, NO_FAILOVER
     #     log_delivery_configuration: {
     #       s3_configuration: { # required
@@ -1247,9 +1276,9 @@ module Aws::TimestreamInfluxDB
     #         },
     #         plugin_repository_url: "String",
     #         plugin_repository_secret_arn: "PluginRepositorySecretArn",
-    #         ingest_query_instances: 1, # required
-    #         query_only_instances: 1, # required
-    #         dedicated_compactor: false, # required
+    #         ingest_query_instances: 1,
+    #         query_only_instances: 1,
+    #         dedicated_compactor: false,
     #         compaction_row_limit: 1,
     #         compaction_max_num_files_per_plan: 1,
     #         compaction_gen_2_duration: {
@@ -1503,6 +1532,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::DeleteDbBackupOutput#deployment_type #deployment_type} => String
     #   * {Types::DeleteDbBackupOutput#kms_key_id #kms_key_id} => String
     #   * {Types::DeleteDbBackupOutput#cluster_configuration #cluster_configuration} => Types::ClusterConfiguration
+    #   * {Types::DeleteDbBackupOutput#deployment_configuration #deployment_configuration} => Types::DeploymentConfiguration
     #   * {Types::DeleteDbBackupOutput#db_parameter_group_id #db_parameter_group_id} => String
     #   * {Types::DeleteDbBackupOutput#db_instance_type #db_instance_type} => String
     #   * {Types::DeleteDbBackupOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
@@ -1539,6 +1569,11 @@ module Aws::TimestreamInfluxDB
     #   resp.cluster_configuration.ingest_query_instances #=> Integer
     #   resp.cluster_configuration.query_only_instances #=> Integer
     #   resp.cluster_configuration.dedicated_compactor #=> Boolean
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups #=> Array
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_modes #=> Array
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].count #=> Integer
     #   resp.db_parameter_group_id #=> String
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
     #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
@@ -1715,6 +1750,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbBackupOutput#deployment_type #deployment_type} => String
     #   * {Types::GetDbBackupOutput#kms_key_id #kms_key_id} => String
     #   * {Types::GetDbBackupOutput#cluster_configuration #cluster_configuration} => Types::ClusterConfiguration
+    #   * {Types::GetDbBackupOutput#deployment_configuration #deployment_configuration} => Types::DeploymentConfiguration
     #   * {Types::GetDbBackupOutput#db_parameter_group_id #db_parameter_group_id} => String
     #   * {Types::GetDbBackupOutput#db_instance_type #db_instance_type} => String
     #   * {Types::GetDbBackupOutput#log_delivery_configuration #log_delivery_configuration} => Types::LogDeliveryConfiguration
@@ -1751,6 +1787,11 @@ module Aws::TimestreamInfluxDB
     #   resp.cluster_configuration.ingest_query_instances #=> Integer
     #   resp.cluster_configuration.query_only_instances #=> Integer
     #   resp.cluster_configuration.dedicated_compactor #=> Boolean
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups #=> Array
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_modes #=> Array
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].count #=> Integer
     #   resp.db_parameter_group_id #=> String
     #   resp.db_instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
     #   resp.log_delivery_configuration.s3_configuration.bucket_name #=> String
@@ -1810,6 +1851,7 @@ module Aws::TimestreamInfluxDB
     #   * {Types::GetDbClusterOutput#vpc_security_group_ids #vpc_security_group_ids} => Array&lt;String&gt;
     #   * {Types::GetDbClusterOutput#failover_mode #failover_mode} => String
     #   * {Types::GetDbClusterOutput#cluster_configuration #cluster_configuration} => Types::ClusterConfiguration
+    #   * {Types::GetDbClusterOutput#deployment_configuration #deployment_configuration} => Types::DeploymentConfiguration
     #   * {Types::GetDbClusterOutput#db_backup_configurations #db_backup_configurations} => Array&lt;Types::DbBackupConfigurationOutput&gt;
     #   * {Types::GetDbClusterOutput#kms_key_id #kms_key_id} => String
     #
@@ -1852,6 +1894,11 @@ module Aws::TimestreamInfluxDB
     #   resp.cluster_configuration.ingest_query_instances #=> Integer
     #   resp.cluster_configuration.query_only_instances #=> Integer
     #   resp.cluster_configuration.dedicated_compactor #=> Boolean
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups #=> Array
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_modes #=> Array
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_modes[0] #=> String, one of "PRIMARY", "STANDBY", "REPLICA", "INGEST", "QUERY", "COMPACT", "PROCESS"
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].instance_type #=> String, one of "db.influx.medium", "db.influx.large", "db.influx.xlarge", "db.influx.2xlarge", "db.influx.4xlarge", "db.influx.8xlarge", "db.influx.12xlarge", "db.influx.16xlarge", "db.influx.24xlarge"
+    #   resp.deployment_configuration.influx_d_bv_3_enterprise.node_groups[0].count #=> Integer
     #   resp.db_backup_configurations #=> Array
     #   resp.db_backup_configurations[0].type #=> String, one of "HOURLY", "DAILY", "WEEKLY", "MONTHLY", "CUSTOM_SCHEDULE", "CONTINUOUS"
     #   resp.db_backup_configurations[0].retention_days #=> Integer
@@ -2782,6 +2829,19 @@ module Aws::TimestreamInfluxDB
     # @option params [String] :db_instance_type
     #   Update the DB cluster to use the specified DB instance Type.
     #
+    #   You can't specify both dbInstanceType and deploymentConfiguration in
+    #   the same request. When you use deploymentConfiguration, the instance
+    #   type is specified per node group.
+    #
+    # @option params [Types::DeploymentConfiguration] :deployment_configuration
+    #   The updated compute topology for the cluster, defined as a set of node
+    #   groups. Use deploymentConfiguration to change the cluster's topology
+    #   or scale its compute in a single call. You can't specify both
+    #   deploymentConfiguration and dbInstanceType in the same request. When
+    #   you provide a deployment configuration, Timestream for InfluxDB
+    #   ignores any node-count parameters in the associated DB parameter
+    #   group.
+    #
     # @option params [String] :failover_mode
     #   Update the DB cluster's failover behavior.
     #
@@ -2809,6 +2869,17 @@ module Aws::TimestreamInfluxDB
     #     db_parameter_group_identifier: "DbParameterGroupIdentifier",
     #     port: 1,
     #     db_instance_type: "db.influx.medium", # accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge, db.influx.24xlarge
+    #     deployment_configuration: {
+    #       influx_d_bv_3_enterprise: {
+    #         node_groups: [ # required
+    #           {
+    #             instance_modes: ["PRIMARY"], # required, accepts PRIMARY, STANDBY, REPLICA, INGEST, QUERY, COMPACT, PROCESS
+    #             instance_type: "db.influx.medium", # required, accepts db.influx.medium, db.influx.large, db.influx.xlarge, db.influx.2xlarge, db.influx.4xlarge, db.influx.8xlarge, db.influx.12xlarge, db.influx.16xlarge, db.influx.24xlarge
+    #             count: 1, # required
+    #           },
+    #         ],
+    #       },
+    #     },
     #     failover_mode: "AUTOMATIC", # accepts AUTOMATIC, NO_FAILOVER
     #     maintenance_schedule: {
     #       timezone: "IanaTimezone", # required
@@ -3012,7 +3083,7 @@ module Aws::TimestreamInfluxDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-timestreaminfluxdb'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.55.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

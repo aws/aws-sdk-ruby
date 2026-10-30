@@ -339,6 +339,15 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#create_cloud_vm_cluster-instance_method
       def create_cloud_vm_cluster: (
                                      cloud_exadata_infrastructure_id: ::String,
+                                     ?exascale_db_storage_vault_id: ::String,
+                                     ?vm_file_system_storage_type: ("LOCAL" | "EXASCALE"),
+                                     ?vm_backup_storage_type: ("LOCAL" | "EXASCALE"),
+                                     ?file_system_configuration_details: Array[
+                                       {
+                                         mount_point: ::String?,
+                                         file_system_size_in_g_bs: ::Integer?
+                                       }
+                                     ],
                                      cpu_core_count: ::Integer,
                                      display_name: ::String,
                                      gi_version: ::String,
@@ -416,6 +425,7 @@ module Aws
                                               high_capacity_database_storage_total_size_in_g_bs: ::Integer,
                                               ?additional_flash_cache_in_percent: ::Integer,
                                               ?autoscale_limit_in_g_bs: ::Integer,
+                                              ?cloud_exadata_infrastructure_id: ::String,
                                               ?availability_zone_id: ::String,
                                               ?availability_zone: ::String,
                                               ?description: ::String,
@@ -948,7 +958,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#list_exascale_db_storage_vaults-instance_method
       def list_exascale_db_storage_vaults: (
                                              ?max_results: ::Integer,
-                                             ?next_token: ::String
+                                             ?next_token: ::String,
+                                             ?cloud_exadata_infrastructure_id: ::String,
+                                             ?vault_type: ("EXASCALE_INFRASTRUCTURE" | "DEDICATED_INFRASTRUCTURE")
                                            ) -> _ListExascaleDbStorageVaultsResponseSuccess
                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListExascaleDbStorageVaultsResponseSuccess
 
@@ -1333,6 +1345,21 @@ module Aws
                                      ?vm_file_system_storage_total_size_in_g_bs: ::Integer
                                    ) -> _UpdateExadbVmClusterResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExadbVmClusterResponseSuccess
+
+      interface _UpdateExascaleCloudExadataInfrastructureResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateExascaleCloudExadataInfrastructureOutput]
+        def display_name: () -> ::String
+        def status: () -> ("AVAILABLE" | "FAILED" | "PROVISIONING" | "TERMINATED" | "TERMINATING" | "UPDATING" | "MAINTENANCE_IN_PROGRESS")
+        def status_reason: () -> ::String
+        def cloud_exadata_infrastructure_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Odb/Client.html#update_exascale_cloud_exadata_infrastructure-instance_method
+      def update_exascale_cloud_exadata_infrastructure: (
+                                                          cloud_exadata_infrastructure_id: ::String,
+                                                          total_storage_size_in_g_bs: ::Integer,
+                                                          ?total_vm_storage_size_in_g_bs: ::Integer
+                                                        ) -> _UpdateExascaleCloudExadataInfrastructureResponseSuccess
+                                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateExascaleCloudExadataInfrastructureResponseSuccess
 
       interface _UpdateExascaleDbStorageVaultResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateExascaleDbStorageVaultOutput]

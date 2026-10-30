@@ -1548,6 +1548,13 @@ module Aws::EC2
       SENSITIVE: []
     end
 
+    class CapacityManagerSupportabilityScore
+      attr_accessor instance_type: ::String
+      attr_accessor availability_zone_id: ::String
+      attr_accessor score: ("high" | "medium" | "low")
+      SENSITIVE: []
+    end
+
     class CapacityManagerTagDimension
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -1651,6 +1658,9 @@ module Aws::EC2
       attr_accessor instance_match_criteria: ("open")
       attr_accessor allocation_strategy: ::String
       attr_accessor instance_type_specifications: ::Array[Types::FleetCapacityReservation]
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
     end
@@ -2289,6 +2299,9 @@ module Aws::EC2
       attr_accessor allocation_strategy: ::String
       attr_accessor client_token: ::String
       attr_accessor instance_type_specifications: ::Array[Types::ReservationFleetInstanceSpecification]
+      attr_accessor instance_requirements: Types::InstanceRequirementsRequest
+      attr_accessor availability_zone: ::String
+      attr_accessor availability_zone_id: ::String
       attr_accessor tenancy: ("default")
       attr_accessor total_target_capacity: ::Integer
       attr_accessor end_date: ::Time
@@ -10155,7 +10168,7 @@ module Aws::EC2
     end
 
     class GetCapacityManagerMetricDataRequest
-      attr_accessor metric_names: ::Array[("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu")]
+      attr_accessor metric_names: ::Array[("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu" | "capacity-total-requested-vcpu" | "capacity-total-fulfilled-vcpu" | "spot-capacity-total-requested-vcpu" | "spot-capacity-total-fulfilled-vcpu" | "capacity-request-fulfillment-rate" | "avg-inst-az-count-per-requested-vcpu" | "inst-az-fulfillment-rate" | "spot-capacity-request-fulfillment-rate" | "spot-avg-inst-az-count-per-requested-vcpu" | "spot-inst-az-fulfillment-rate")]
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor period: ::Integer
@@ -10178,7 +10191,7 @@ module Aws::EC2
       attr_accessor filter_by: ::Array[Types::CapacityManagerCondition]
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
-      attr_accessor metric_names: ::Array[("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu")]
+      attr_accessor metric_names: ::Array[("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu" | "capacity-total-requested-vcpu" | "capacity-total-fulfilled-vcpu" | "spot-capacity-total-requested-vcpu" | "spot-capacity-total-fulfilled-vcpu" | "capacity-request-fulfillment-rate" | "avg-inst-az-count-per-requested-vcpu" | "inst-az-fulfillment-rate" | "spot-capacity-request-fulfillment-rate" | "spot-avg-inst-az-count-per-requested-vcpu" | "spot-inst-az-fulfillment-rate")]
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor dry_run: bool
@@ -10201,6 +10214,23 @@ module Aws::EC2
     class GetCapacityManagerMonitoredTagKeysResult
       attr_accessor capacity_manager_tag_keys: ::Array[Types::CapacityManagerMonitoredTagKey]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetCapacityManagerSupportabilityScoresRequest
+      attr_accessor market_type: ("on-demand" | "spot")
+      attr_accessor capacity_amount: ::Integer
+      attr_accessor capacity_unit: ("vcpus" | "instances")
+      attr_accessor capacity_availability_zone_ids: ::Array[::String]
+      attr_accessor instance_types: ::Array[::String]
+      attr_accessor instance_requirements_with_metadata: Types::InstanceRequirementsWithMetadataRequest
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetCapacityManagerSupportabilityScoresResult
+      attr_accessor aggregate_score: ("high" | "medium" | "low")
+      attr_accessor capacity_manager_supportability_scores: ::Array[Types::CapacityManagerSupportabilityScore]
       SENSITIVE: []
     end
 
@@ -10408,6 +10438,20 @@ module Aws::EC2
     class GetImageBlockPublicAccessStateResult
       attr_accessor image_block_public_access_state: ::String
       attr_accessor managed_by: ("account" | "declarative-policy")
+      SENSITIVE: []
+    end
+
+    class GetImageFindingsRequest
+      attr_accessor image_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class GetImageFindingsResult
+      attr_accessor image_findings: ::Array[Types::ImageFinding]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -11464,6 +11508,7 @@ module Aws::EC2
       attr_accessor free_tier_eligible: bool
       attr_accessor public_ssm_parameter_name: ::String
       attr_accessor image_watermarks: ::Array[Types::ImageWatermark]
+      attr_accessor scan_results: Types::ScanResults
       attr_accessor instance_type_specification: Types::InstanceTypeSpecification
       attr_accessor image_id: ::String
       attr_accessor image_location: ::String
@@ -11514,6 +11559,7 @@ module Aws::EC2
       attr_accessor deprecation_time_condition: Types::DeprecationTimeCondition
       attr_accessor creation_date_condition: Types::CreationDateCondition
       attr_accessor image_watermarks: ::Array[Types::ImageWatermarkFilterResponse]
+      attr_accessor scan_result_condition: Types::ScanResultCondition
       SENSITIVE: []
     end
 
@@ -11524,6 +11570,7 @@ module Aws::EC2
       attr_accessor deprecation_time_condition: Types::DeprecationTimeConditionRequest
       attr_accessor creation_date_condition: Types::CreationDateConditionRequest
       attr_accessor image_watermarks: ::Array[Types::ImageWatermarkFilterRequest]
+      attr_accessor scan_result_condition: Types::ScanResultConditionRequest
       SENSITIVE: []
     end
 
@@ -11535,6 +11582,18 @@ module Aws::EC2
       attr_accessor url: ::String
       attr_accessor user_bucket: Types::UserBucket
       SENSITIVE: [:url]
+    end
+
+    class ImageFinding
+      attr_accessor fix_available: bool
+      attr_accessor score: ::Float
+      attr_accessor first_observed_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor title: ::String
+      attr_accessor paths: ::Array[::String]
+      attr_accessor severity_label: ("informational" | "low" | "medium" | "high" | "critical")
+      attr_accessor snapshot_id: ::String
+      SENSITIVE: []
     end
 
     class ImageMetadata
@@ -13948,7 +14007,7 @@ module Aws::EC2
     end
 
     class MetricValue
-      attr_accessor metric: ("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu")
+      attr_accessor metric: ("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu" | "capacity-total-requested-vcpu" | "capacity-total-fulfilled-vcpu" | "spot-capacity-total-requested-vcpu" | "spot-capacity-total-fulfilled-vcpu" | "capacity-request-fulfillment-rate" | "avg-inst-az-count-per-requested-vcpu" | "inst-az-fulfillment-rate" | "spot-capacity-request-fulfillment-rate" | "spot-avg-inst-az-count-per-requested-vcpu" | "spot-inst-az-fulfillment-rate")
       attr_accessor value: ::Float
       SENSITIVE: []
     end
@@ -17571,6 +17630,39 @@ module Aws::EC2
       attr_accessor upload_policy: ::String
       attr_accessor upload_policy_signature: ::String
       SENSITIVE: [:upload_policy, :upload_policy_signature]
+    end
+
+    class ScanResultCondition
+      attr_accessor max_days_since_last_finding_scan: ::Integer
+      attr_accessor maximum_severity_label: ("informational" | "low" | "medium" | "high" | "critical")
+      attr_accessor max_days_since_informational_fix_available: ::Integer
+      attr_accessor max_days_since_low_fix_available: ::Integer
+      attr_accessor max_days_since_medium_fix_available: ::Integer
+      attr_accessor max_days_since_high_fix_available: ::Integer
+      attr_accessor max_days_since_critical_fix_available: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScanResultConditionRequest
+      attr_accessor max_days_since_last_finding_scan: ::Integer
+      attr_accessor maximum_severity_label: ("informational" | "low" | "medium" | "high" | "critical")
+      attr_accessor max_days_since_informational_fix_available: ::Integer
+      attr_accessor max_days_since_low_fix_available: ::Integer
+      attr_accessor max_days_since_medium_fix_available: ::Integer
+      attr_accessor max_days_since_high_fix_available: ::Integer
+      attr_accessor max_days_since_critical_fix_available: ::Integer
+      SENSITIVE: []
+    end
+
+    class ScanResults
+      attr_accessor highest_finding_severity_label: ("informational" | "low" | "medium" | "high" | "critical")
+      attr_accessor finding_scan_date: ::Time
+      attr_accessor informational_fix_available_since: ::Time
+      attr_accessor low_fix_available_since: ::Time
+      attr_accessor medium_fix_available_since: ::Time
+      attr_accessor high_fix_available_since: ::Time
+      attr_accessor critical_fix_available_since: ::Time
+      SENSITIVE: []
     end
 
     class ScheduledInstance

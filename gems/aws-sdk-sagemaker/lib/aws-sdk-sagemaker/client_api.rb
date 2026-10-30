@@ -92,6 +92,10 @@ module Aws::SageMaker
     AbsoluteBorrowLimitResourceList = Shapes::ListShape.new(name: 'AbsoluteBorrowLimitResourceList')
     AcceleratorPartitionConfig = Shapes::StructureShape.new(name: 'AcceleratorPartitionConfig')
     AcceleratorPartitionConfigCountInteger = Shapes::IntegerShape.new(name: 'AcceleratorPartitionConfigCountInteger')
+    AcceleratorPartitionLayout = Shapes::StructureShape.new(name: 'AcceleratorPartitionLayout')
+    AcceleratorPartitionLayouts = Shapes::ListShape.new(name: 'AcceleratorPartitionLayouts')
+    AcceleratorPartitionType = Shapes::StringShape.new(name: 'AcceleratorPartitionType')
+    AcceleratorPartitionTypeList = Shapes::ListShape.new(name: 'AcceleratorPartitionTypeList')
     AcceleratorsAmount = Shapes::IntegerShape.new(name: 'AcceleratorsAmount')
     Accept = Shapes::StringShape.new(name: 'Accept')
     AcceptEula = Shapes::BooleanShape.new(name: 'AcceptEula')
@@ -2345,6 +2349,7 @@ module Aws::SageMaker
     ProductId = Shapes::StringShape.new(name: 'ProductId')
     ProductListings = Shapes::ListShape.new(name: 'ProductListings')
     ProductionVariant = Shapes::StructureShape.new(name: 'ProductionVariant')
+    ProductionVariantAcceleratorPartitionLayoutsList = Shapes::ListShape.new(name: 'ProductionVariantAcceleratorPartitionLayoutsList')
     ProductionVariantAcceleratorType = Shapes::StringShape.new(name: 'ProductionVariantAcceleratorType')
     ProductionVariantCapacityReservationConfig = Shapes::StructureShape.new(name: 'ProductionVariantCapacityReservationConfig')
     ProductionVariantCapacityReservationSummary = Shapes::StructureShape.new(name: 'ProductionVariantCapacityReservationSummary')
@@ -3323,6 +3328,13 @@ module Aws::SageMaker
     AcceleratorPartitionConfig.add_member(:type, Shapes::ShapeRef.new(shape: MIGProfileType, required: true, location_name: "Type"))
     AcceleratorPartitionConfig.add_member(:count, Shapes::ShapeRef.new(shape: AcceleratorPartitionConfigCountInteger, required: true, location_name: "Count", metadata: {"box" => true}))
     AcceleratorPartitionConfig.struct_class = Types::AcceleratorPartitionConfig
+
+    AcceleratorPartitionLayout.add_member(:accelerator_partition_types, Shapes::ShapeRef.new(shape: AcceleratorPartitionTypeList, location_name: "AcceleratorPartitionTypes"))
+    AcceleratorPartitionLayout.struct_class = Types::AcceleratorPartitionLayout
+
+    AcceleratorPartitionLayouts.member = Shapes::ShapeRef.new(shape: AcceleratorPartitionLayout)
+
+    AcceleratorPartitionTypeList.member = Shapes::ShapeRef.new(shape: AcceleratorPartitionType)
 
     ActionSource.add_member(:source_uri, Shapes::ShapeRef.new(shape: SourceUri, required: true, location_name: "SourceUri"))
     ActionSource.add_member(:source_type, Shapes::ShapeRef.new(shape: String256, location_name: "SourceType"))
@@ -8557,6 +8569,7 @@ module Aws::SageMaker
     InferenceComponentComputeResourceRequirements.add_member(:number_of_accelerator_devices_required, Shapes::ShapeRef.new(shape: NumberOfAcceleratorDevices, location_name: "NumberOfAcceleratorDevicesRequired"))
     InferenceComponentComputeResourceRequirements.add_member(:min_memory_required_in_mb, Shapes::ShapeRef.new(shape: MemoryInMb, required: true, location_name: "MinMemoryRequiredInMb"))
     InferenceComponentComputeResourceRequirements.add_member(:max_memory_required_in_mb, Shapes::ShapeRef.new(shape: MemoryInMb, location_name: "MaxMemoryRequiredInMb"))
+    InferenceComponentComputeResourceRequirements.add_member(:accelerator_partition_type, Shapes::ShapeRef.new(shape: AcceleratorPartitionType, location_name: "AcceleratorPartitionType"))
     InferenceComponentComputeResourceRequirements.struct_class = Types::InferenceComponentComputeResourceRequirements
 
     InferenceComponentContainerSpecification.add_member(:image, Shapes::ShapeRef.new(shape: ContainerImage, location_name: "Image"))
@@ -11230,6 +11243,7 @@ module Aws::SageMaker
     PendingProductionVariantSummary.add_member(:desired_serverless_config, Shapes::ShapeRef.new(shape: ProductionVariantServerlessConfig, location_name: "DesiredServerlessConfig"))
     PendingProductionVariantSummary.add_member(:managed_instance_scaling, Shapes::ShapeRef.new(shape: ProductionVariantManagedInstanceScaling, location_name: "ManagedInstanceScaling"))
     PendingProductionVariantSummary.add_member(:routing_config, Shapes::ShapeRef.new(shape: ProductionVariantRoutingConfig, location_name: "RoutingConfig"))
+    PendingProductionVariantSummary.add_member(:accelerator_partition_layouts, Shapes::ShapeRef.new(shape: AcceleratorPartitionLayouts, location_name: "AcceleratorPartitionLayouts"))
     PendingProductionVariantSummary.struct_class = Types::PendingProductionVariantSummary
 
     PendingProductionVariantSummaryList.member = Shapes::ShapeRef.new(shape: PendingProductionVariantSummary)
@@ -11515,7 +11529,10 @@ module Aws::SageMaker
     ProductionVariant.add_member(:routing_config, Shapes::ShapeRef.new(shape: ProductionVariantRoutingConfig, location_name: "RoutingConfig"))
     ProductionVariant.add_member(:inference_ami_version, Shapes::ShapeRef.new(shape: ProductionVariantInferenceAmiVersion, location_name: "InferenceAmiVersion"))
     ProductionVariant.add_member(:capacity_reservation_config, Shapes::ShapeRef.new(shape: ProductionVariantCapacityReservationConfig, location_name: "CapacityReservationConfig"))
+    ProductionVariant.add_member(:accelerator_partition_layouts, Shapes::ShapeRef.new(shape: ProductionVariantAcceleratorPartitionLayoutsList, location_name: "AcceleratorPartitionLayouts"))
     ProductionVariant.struct_class = Types::ProductionVariant
+
+    ProductionVariantAcceleratorPartitionLayoutsList.member = Shapes::ShapeRef.new(shape: AcceleratorPartitionLayout)
 
     ProductionVariantCapacityReservationConfig.add_member(:capacity_reservation_preference, Shapes::ShapeRef.new(shape: CapacityReservationPreference, location_name: "CapacityReservationPreference"))
     ProductionVariantCapacityReservationConfig.add_member(:ml_reservation_arn, Shapes::ShapeRef.new(shape: MlReservationArn, location_name: "MlReservationArn"))
@@ -11579,6 +11596,7 @@ module Aws::SageMaker
     ProductionVariantSummary.add_member(:managed_instance_scaling, Shapes::ShapeRef.new(shape: ProductionVariantManagedInstanceScaling, location_name: "ManagedInstanceScaling"))
     ProductionVariantSummary.add_member(:routing_config, Shapes::ShapeRef.new(shape: ProductionVariantRoutingConfig, location_name: "RoutingConfig"))
     ProductionVariantSummary.add_member(:capacity_reservation_config, Shapes::ShapeRef.new(shape: ProductionVariantCapacityReservationSummary, location_name: "CapacityReservationConfig"))
+    ProductionVariantSummary.add_member(:accelerator_partition_layouts, Shapes::ShapeRef.new(shape: AcceleratorPartitionLayouts, location_name: "AcceleratorPartitionLayouts"))
     ProductionVariantSummary.struct_class = Types::ProductionVariantSummary
 
     ProductionVariantSummaryList.member = Shapes::ShapeRef.new(shape: ProductionVariantSummary)

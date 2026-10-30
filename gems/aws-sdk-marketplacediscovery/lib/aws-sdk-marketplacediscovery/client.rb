@@ -3737,7 +3737,7 @@ module Aws::MarketplaceDiscovery
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-marketplacediscovery'
-      context[:gem_version] = '1.13.0'
+      context[:gem_version] = '1.15.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

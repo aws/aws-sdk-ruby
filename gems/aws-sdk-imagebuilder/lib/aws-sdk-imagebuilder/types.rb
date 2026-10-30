@@ -1615,8 +1615,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] image_scanning_configuration
-    #   Contains settings for vulnerability scans that Amazon Inspector runs
-    #   against the test instance during image creation.
+    #   The settings that determine whether and how Amazon Inspector scans
+    #   the images that this pipeline creates.
     #   @return [Types::ImageScanningConfiguration]
     #
     # @!attribute [rw] workflows
@@ -1920,11 +1920,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] image_scanning_configuration
-    #   Settings for vulnerability scans that Amazon Inspector runs during
-    #   image creation. For AMI output, Amazon Inspector scans the test
-    #   instance. For container output, Amazon Inspector scans the container
-    #   image that Image Builder pushes to the Amazon ECR repository
-    #   specified in `ecrConfiguration`.
+    #   The settings that determine whether and how Amazon Inspector scans
+    #   the image for vulnerabilities.
     #   @return [Types::ImageScanningConfiguration]
     #
     # @!attribute [rw] workflows
@@ -4250,10 +4247,8 @@ module Aws::Imagebuilder
     #   @return [Types::ImageScanState]
     #
     # @!attribute [rw] image_scanning_configuration
-    #   Settings for the vulnerability scans that Amazon Inspector runs for
-    #   this image. For AMI output, Amazon Inspector scans the test instance
-    #   during image creation. For container output, Amazon Inspector scans
-    #   the container image in its Amazon ECR repository.
+    #   The settings that determine whether and how Amazon Inspector scans
+    #   this image.
     #   @return [Types::ImageScanningConfiguration]
     #
     # @!attribute [rw] deprecation_time
@@ -4522,8 +4517,8 @@ module Aws::Imagebuilder
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] image_scanning_configuration
-    #   Contains settings for vulnerability scans that Amazon Inspector runs
-    #   against the test instance during image creation.
+    #   The settings that determine whether and how Amazon Inspector scans
+    #   the images that the pipeline creates.
     #   @return [Types::ImageScanningConfiguration]
     #
     # @!attribute [rw] image_tags
@@ -4993,23 +4988,67 @@ module Aws::Imagebuilder
     #
     # @!attribute [rw] image_scanning_enabled
     #   Specifies whether Amazon Inspector scans for vulnerabilities when
-    #   you create a new image, and whether Image Builder saves the
-    #   findings. Amazon Inspector must be enabled in the account. Image
-    #   tests must also be enabled. For AMI output, Amazon Inspector scans
-    #   the test instance. For container output, Amazon Inspector scans the
-    #   container image that Image Builder pushes to the Amazon ECR
-    #   repository from your `ecrConfiguration` settings.
+    #   you create a new image. You must also enable image tests. For AMI
+    #   output, `imageScanningTypes` sets whether Amazon Inspector scans the
+    #   test instance or the output AMI. For container output, Amazon
+    #   Inspector scans the container image that Image Builder pushes to the
+    #   Amazon ECR repository from your `ecrConfiguration` settings.
+    #
+    #   To use container image scans, you must activate Amazon Inspector for
+    #   Amazon ECR scanning in your account. The Image Builder
+    #   `ListImageScanFindings` operation returns the findings of these
+    #   scans.
     #   @return [Boolean]
     #
     # @!attribute [rw] ecr_configuration
     #   Contains Amazon ECR settings for vulnerability scans.
     #   @return [Types::EcrConfiguration]
     #
+    # @!attribute [rw] image_scanning_types
+    #   The type of vulnerability scan that Image Builder runs for AMI
+    #   output when `imageScanningEnabled` is `true`. Specify a single
+    #   value. If you omit `imageScanningTypes`, Image Builder uses
+    #   `TEST_INSTANCE_CVE`. The scan types work as follows:
+    #
+    #   * With `TEST_INSTANCE_CVE`, Amazon Inspector scans the test instance
+    #     during image tests. To use this scan, you must activate Amazon
+    #     Inspector for Amazon EC2 scanning in your account. The Image
+    #     Builder `ListImageScanFindings` operation returns the findings.
+    #
+    #   * With `ON_DEMAND_AMI_CVE`, Amazon Inspector starts an on-demand
+    #     scan of the output AMI during image tests. To use this scan, you
+    #     must build from an image recipe, but you do not need to activate
+    #     Amazon Inspector in your account. The Amazon EC2
+    #     [GetImageFindings][1] operation returns the findings.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageFindings.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] scan_result_condition
+    #   The condition that the output AMI's scan results must meet for the
+    #   image to pass. You can set `scanResultCondition` only when
+    #   `imageScanningTypes` is `ON_DEMAND_AMI_CVE`. If you omit it, Image
+    #   Builder starts the scan but does not wait for it or use its results
+    #   to pass or fail the image.
+    #
+    #   When you set `scanResultCondition`, the test phase waits for the
+    #   scan to finish. Then Image Builder checks the findings against the
+    #   condition. By default, Image Builder counts only findings that have
+    #   a fix available. To count every finding, set `fixAvailable` to
+    #   `false`. If a counted finding exceeds `maximumSeverityLabel`, Image
+    #   Builder fails the image in the test phase and does not distribute
+    #   the AMI.
+    #   @return [Types::ScanResultCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ImageScanningConfiguration AWS API Documentation
     #
     class ImageScanningConfiguration < Struct.new(
       :image_scanning_enabled,
-      :ecr_configuration)
+      :ecr_configuration,
+      :image_scanning_types,
+      :scan_result_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8808,6 +8847,32 @@ module Aws::Imagebuilder
       include Aws::Structure
     end
 
+    # A condition that sets which findings from an on-demand AMI scan fail
+    # the image. Image Builder checks the output AMI's findings against
+    # this condition during the test phase.
+    #
+    # @!attribute [rw] maximum_severity_label
+    #   The maximum severity allowed for findings on the output AMI. A
+    #   finding above this severity fails the image, unless `fixAvailable`
+    #   excludes it. Valid values are `INFORMATIONAL`, `LOW`, `MEDIUM`, and
+    #   `HIGH`. A `CRITICAL` finding that counts always fails the image.
+    #   @return [String]
+    #
+    # @!attribute [rw] fix_available
+    #   Specifies whether only findings that have a fix available count
+    #   toward `maximumSeverityLabel`. When `false`, Image Builder counts
+    #   every finding. The default is `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/imagebuilder-2019-12-02/ScanResultCondition AWS API Documentation
+    #
+    class ScanResultCondition < Struct.new(
+      :maximum_severity_label,
+      :fix_available)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A schedule configures when and how often a pipeline will automatically
     # create a new image.
     #
@@ -9462,8 +9527,8 @@ module Aws::Imagebuilder
     #   @return [String]
     #
     # @!attribute [rw] image_scanning_configuration
-    #   Contains settings for vulnerability scans that Amazon Inspector runs
-    #   against the test instance during image creation.
+    #   The updated settings that determine whether and how Amazon Inspector
+    #   scans the images that this pipeline creates.
     #   @return [Types::ImageScanningConfiguration]
     #
     # @!attribute [rw] workflows

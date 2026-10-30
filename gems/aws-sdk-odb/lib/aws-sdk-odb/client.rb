@@ -1285,6 +1285,27 @@ module Aws::Odb
     #   The unique identifier of the Exadata infrastructure for this VM
     #   cluster.
     #
+    # @option params [String] :exascale_db_storage_vault_id
+    #   The unique identifier or Amazon Resource Name (ARN) of the Exascale
+    #   storage vault to use for the VM cluster. Specify this value to create
+    #   a VM cluster that uses Exascale storage on dedicated Exadata
+    #   infrastructure.
+    #
+    # @option params [String] :vm_file_system_storage_type
+    #   The type of storage to use for the VM file systems. Specify `EXASCALE`
+    #   to store the VM file systems in Exascale storage on the storage
+    #   servers, or `LOCAL` to store them on the database servers.
+    #
+    # @option params [String] :vm_backup_storage_type
+    #   The type of storage to use for VM backups. Specify `EXASCALE` to store
+    #   VM backups in Exascale storage on the storage servers, or `LOCAL` to
+    #   store them on the database servers.
+    #
+    # @option params [Array<Types::FileSystemConfigurationDetails>] :file_system_configuration_details
+    #   The list of file system configurations for the VM cluster. Each entry
+    #   specifies the mount point of a file system and its size, in gigabytes
+    #   (GB).
+    #
     # @option params [required, Integer] :cpu_core_count
     #   The number of CPU cores to enable on the VM cluster.
     #
@@ -1396,6 +1417,15 @@ module Aws::Odb
     #
     #   resp = client.create_cloud_vm_cluster({
     #     cloud_exadata_infrastructure_id: "ResourceIdOrArn", # required
+    #     exascale_db_storage_vault_id: "ResourceIdOrArn",
+    #     vm_file_system_storage_type: "LOCAL", # accepts LOCAL, EXASCALE
+    #     vm_backup_storage_type: "LOCAL", # accepts LOCAL, EXASCALE
+    #     file_system_configuration_details: [
+    #       {
+    #         mount_point: "String",
+    #         file_system_size_in_g_bs: 1,
+    #       },
+    #     ],
     #     cpu_core_count: 1, # required
     #     display_name: "ResourceDisplayName", # required
     #     gi_version: "CreateCloudVmClusterInputGiVersionString", # required
@@ -1494,8 +1524,7 @@ module Aws::Odb
     #   (SCAN) listener.
     #
     # @option params [Integer] :scan_listener_port_tcp_ssl
-    #   The port number for TCP connections with SSL to the Single Client
-    #   Access Name (SCAN) listener.
+    #   Reserved for future use.
     #
     # @option params [String] :shape_attribute
     #   The shape attribute for the Exascale VM cluster.
@@ -1578,6 +1607,9 @@ module Aws::Odb
 
     # Creates an Exascale storage vault.
     #
+    # To create the Exascale storage vault on dedicated Exadata
+    # infrastructure, specify `cloudExadataInfrastructureId`.
+    #
     # @option params [required, String] :display_name
     #   A user-friendly name for the Exascale storage vault.
     #
@@ -1590,6 +1622,16 @@ module Aws::Odb
     #
     # @option params [Integer] :autoscale_limit_in_g_bs
     #   The autoscale limit in gigabytes (GB) for the Exascale storage vault.
+    #
+    # @option params [String] :cloud_exadata_infrastructure_id
+    #   The unique identifier or Amazon Resource Name (ARN) of the Exadata
+    #   infrastructure on which to create the Exascale storage vault. Specify
+    #   this value to create the Exascale storage vault on dedicated Exadata
+    #   infrastructure that has Exascale storage configured. If you specify
+    #   `availabilityZone` or `availabilityZoneId`, the value must match the
+    #   Availability Zone of the Exadata infrastructure. If you specify
+    #   neither, the service uses the Availability Zone of the Exadata
+    #   infrastructure.
     #
     # @option params [String] :availability_zone_id
     #   The Availability Zone ID for the Exascale storage vault.
@@ -1635,6 +1677,7 @@ module Aws::Odb
     #     high_capacity_database_storage_total_size_in_g_bs: 1, # required
     #     additional_flash_cache_in_percent: 1,
     #     autoscale_limit_in_g_bs: 1,
+    #     cloud_exadata_infrastructure_id: "ResourceIdOrArn",
     #     availability_zone_id: "CreateExascaleDbStorageVaultInputAvailabilityZoneIdString",
     #     availability_zone: "CreateExascaleDbStorageVaultInputAvailabilityZoneString",
     #     description: "CreateExascaleDbStorageVaultInputDescriptionString",
@@ -2675,6 +2718,10 @@ module Aws::Odb
     #   resp.cloud_exadata_infrastructure.database_server_type #=> String
     #   resp.cloud_exadata_infrastructure.storage_server_type #=> String
     #   resp.cloud_exadata_infrastructure.compute_model #=> String, one of "ECPU", "OCPU"
+    #   resp.cloud_exadata_infrastructure.exascale_configuration.total_storage_size_in_g_bs #=> Integer
+    #   resp.cloud_exadata_infrastructure.exascale_configuration.available_storage_size_in_g_bs #=> Integer
+    #   resp.cloud_exadata_infrastructure.exascale_configuration.total_vm_storage_size_in_g_bs #=> Integer
+    #   resp.cloud_exadata_infrastructure.exascale_configuration.available_vm_storage_size_in_g_bs #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetCloudExadataInfrastructure AWS API Documentation
     #
@@ -2751,6 +2798,14 @@ module Aws::Odb
     #   resp.cloud_vm_cluster.cloud_vm_cluster_arn #=> String
     #   resp.cloud_vm_cluster.cloud_exadata_infrastructure_id #=> String
     #   resp.cloud_vm_cluster.cloud_exadata_infrastructure_arn #=> String
+    #   resp.cloud_vm_cluster.exascale_db_storage_vault_id #=> String
+    #   resp.cloud_vm_cluster.exascale_db_storage_vault_arn #=> String
+    #   resp.cloud_vm_cluster.storage_management_type #=> String, one of "ASM", "EXASCALE"
+    #   resp.cloud_vm_cluster.vm_file_system_storage_type #=> String, one of "LOCAL", "EXASCALE"
+    #   resp.cloud_vm_cluster.vm_backup_storage_type #=> String, one of "LOCAL", "EXASCALE"
+    #   resp.cloud_vm_cluster.file_system_configuration_details #=> Array
+    #   resp.cloud_vm_cluster.file_system_configuration_details[0].mount_point #=> String
+    #   resp.cloud_vm_cluster.file_system_configuration_details[0].file_system_size_in_g_bs #=> Integer
     #   resp.cloud_vm_cluster.cluster_name #=> String
     #   resp.cloud_vm_cluster.cpu_core_count #=> Integer
     #   resp.cloud_vm_cluster.data_collection_options.is_diagnostics_events_enabled #=> Boolean
@@ -3047,6 +3102,8 @@ module Aws::Odb
     #   resp.exascale_db_storage_vault.autoscale_limit_in_g_bs #=> Integer
     #   resp.exascale_db_storage_vault.availability_zone #=> String
     #   resp.exascale_db_storage_vault.availability_zone_id #=> String
+    #   resp.exascale_db_storage_vault.cloud_exadata_infrastructure_arn #=> String
+    #   resp.exascale_db_storage_vault.cloud_exadata_infrastructure_id #=> String
     #   resp.exascale_db_storage_vault.created_at #=> Time
     #   resp.exascale_db_storage_vault.description #=> String
     #   resp.exascale_db_storage_vault.display_name #=> String
@@ -3066,6 +3123,7 @@ module Aws::Odb
     #   resp.exascale_db_storage_vault.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
     #   resp.exascale_db_storage_vault.status_reason #=> String
     #   resp.exascale_db_storage_vault.time_zone #=> String
+    #   resp.exascale_db_storage_vault.vault_type #=> String, one of "EXASCALE_INFRASTRUCTURE", "DEDICATED_INFRASTRUCTURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/GetExascaleDbStorageVault AWS API Documentation
     #
@@ -4179,6 +4237,10 @@ module Aws::Odb
     #   resp.cloud_exadata_infrastructures[0].database_server_type #=> String
     #   resp.cloud_exadata_infrastructures[0].storage_server_type #=> String
     #   resp.cloud_exadata_infrastructures[0].compute_model #=> String, one of "ECPU", "OCPU"
+    #   resp.cloud_exadata_infrastructures[0].exascale_configuration.total_storage_size_in_g_bs #=> Integer
+    #   resp.cloud_exadata_infrastructures[0].exascale_configuration.available_storage_size_in_g_bs #=> Integer
+    #   resp.cloud_exadata_infrastructures[0].exascale_configuration.total_vm_storage_size_in_g_bs #=> Integer
+    #   resp.cloud_exadata_infrastructures[0].exascale_configuration.available_vm_storage_size_in_g_bs #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListCloudExadataInfrastructures AWS API Documentation
     #
@@ -4233,6 +4295,14 @@ module Aws::Odb
     #   resp.cloud_vm_clusters[0].cloud_vm_cluster_arn #=> String
     #   resp.cloud_vm_clusters[0].cloud_exadata_infrastructure_id #=> String
     #   resp.cloud_vm_clusters[0].cloud_exadata_infrastructure_arn #=> String
+    #   resp.cloud_vm_clusters[0].exascale_db_storage_vault_id #=> String
+    #   resp.cloud_vm_clusters[0].exascale_db_storage_vault_arn #=> String
+    #   resp.cloud_vm_clusters[0].storage_management_type #=> String, one of "ASM", "EXASCALE"
+    #   resp.cloud_vm_clusters[0].vm_file_system_storage_type #=> String, one of "LOCAL", "EXASCALE"
+    #   resp.cloud_vm_clusters[0].vm_backup_storage_type #=> String, one of "LOCAL", "EXASCALE"
+    #   resp.cloud_vm_clusters[0].file_system_configuration_details #=> Array
+    #   resp.cloud_vm_clusters[0].file_system_configuration_details[0].mount_point #=> String
+    #   resp.cloud_vm_clusters[0].file_system_configuration_details[0].file_system_size_in_g_bs #=> Integer
     #   resp.cloud_vm_clusters[0].cluster_name #=> String
     #   resp.cloud_vm_clusters[0].cpu_core_count #=> Integer
     #   resp.cloud_vm_clusters[0].data_collection_options.is_diagnostics_events_enabled #=> Boolean
@@ -4642,6 +4712,24 @@ module Aws::Odb
     #   The token returned from a previous paginated request. Pagination
     #   continues from the end of the items returned by the previous request.
     #
+    # @option params [String] :cloud_exadata_infrastructure_id
+    #   The unique identifier or Amazon Resource Name (ARN) of an Exadata
+    #   infrastructure. If you specify this value, the operation returns only
+    #   the Exascale storage vaults on that infrastructure that you own or
+    #   that are shared with you. The infrastructure can be one that's shared
+    #   with you through Amazon Web Services Resource Access Manager (Amazon
+    #   Web Services RAM). You can't combine this filter with a `vaultType`
+    #   of `EXASCALE_INFRASTRUCTURE`.
+    #
+    # @option params [String] :vault_type
+    #   The type of Exascale storage vaults to return. Specify
+    #   `DEDICATED_INFRASTRUCTURE` to return Exascale storage vaults on
+    #   dedicated Exadata infrastructure, or `EXASCALE_INFRASTRUCTURE` to
+    #   return Exascale storage vaults for Exascale VM clusters. If you don't
+    #   specify a value, the operation returns both types. You can't combine
+    #   `EXASCALE_INFRASTRUCTURE` with the `cloudExadataInfrastructureId`
+    #   filter.
+    #
     # @return [Types::ListExascaleDbStorageVaultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListExascaleDbStorageVaultsOutput#next_token #next_token} => String
@@ -4654,6 +4742,8 @@ module Aws::Odb
     #   resp = client.list_exascale_db_storage_vaults({
     #     max_results: 1,
     #     next_token: "ListExascaleDbStorageVaultsInputNextTokenString",
+    #     cloud_exadata_infrastructure_id: "ResourceIdOrArn",
+    #     vault_type: "EXASCALE_INFRASTRUCTURE", # accepts EXASCALE_INFRASTRUCTURE, DEDICATED_INFRASTRUCTURE
     #   })
     #
     # @example Response structure
@@ -4667,6 +4757,8 @@ module Aws::Odb
     #   resp.exascale_db_storage_vaults[0].autoscale_limit_in_g_bs #=> Integer
     #   resp.exascale_db_storage_vaults[0].availability_zone #=> String
     #   resp.exascale_db_storage_vaults[0].availability_zone_id #=> String
+    #   resp.exascale_db_storage_vaults[0].cloud_exadata_infrastructure_arn #=> String
+    #   resp.exascale_db_storage_vaults[0].cloud_exadata_infrastructure_id #=> String
     #   resp.exascale_db_storage_vaults[0].created_at #=> Time
     #   resp.exascale_db_storage_vaults[0].description #=> String
     #   resp.exascale_db_storage_vaults[0].display_name #=> String
@@ -4686,6 +4778,7 @@ module Aws::Odb
     #   resp.exascale_db_storage_vaults[0].status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
     #   resp.exascale_db_storage_vaults[0].status_reason #=> String
     #   resp.exascale_db_storage_vaults[0].time_zone #=> String
+    #   resp.exascale_db_storage_vaults[0].vault_type #=> String, one of "EXASCALE_INFRASTRUCTURE", "DEDICATED_INFRASTRUCTURE"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListExascaleDbStorageVaults AWS API Documentation
     #
@@ -5965,6 +6058,56 @@ module Aws::Odb
       req.send_request(options)
     end
 
+    # Configures or updates the Exascale storage on an Exadata
+    # infrastructure. After you configure Exascale storage, you can create
+    # Exascale storage vaults on the infrastructure and VM clusters that use
+    # Exascale storage.
+    #
+    # @option params [required, String] :cloud_exadata_infrastructure_id
+    #   The unique identifier or Amazon Resource Name (ARN) of the Exadata
+    #   infrastructure to update.
+    #
+    # @option params [required, Integer] :total_storage_size_in_g_bs
+    #   The total amount of Exascale storage, in gigabytes (GB), to configure
+    #   on the Exadata infrastructure.
+    #
+    # @option params [Integer] :total_vm_storage_size_in_g_bs
+    #   The total amount of Exascale storage, in gigabytes (GB), to allocate
+    #   for VM storage on the Exadata infrastructure. VM clusters that store
+    #   their VM file systems or VM backups in Exascale storage use this
+    #   capacity.
+    #
+    # @return [Types::UpdateExascaleCloudExadataInfrastructureOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateExascaleCloudExadataInfrastructureOutput#display_name #display_name} => String
+    #   * {Types::UpdateExascaleCloudExadataInfrastructureOutput#status #status} => String
+    #   * {Types::UpdateExascaleCloudExadataInfrastructureOutput#status_reason #status_reason} => String
+    #   * {Types::UpdateExascaleCloudExadataInfrastructureOutput#cloud_exadata_infrastructure_id #cloud_exadata_infrastructure_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_exascale_cloud_exadata_infrastructure({
+    #     cloud_exadata_infrastructure_id: "ResourceIdOrArn", # required
+    #     total_storage_size_in_g_bs: 1, # required
+    #     total_vm_storage_size_in_g_bs: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.display_name #=> String
+    #   resp.status #=> String, one of "AVAILABLE", "FAILED", "PROVISIONING", "TERMINATED", "TERMINATING", "UPDATING", "MAINTENANCE_IN_PROGRESS"
+    #   resp.status_reason #=> String
+    #   resp.cloud_exadata_infrastructure_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateExascaleCloudExadataInfrastructure AWS API Documentation
+    #
+    # @overload update_exascale_cloud_exadata_infrastructure(params = {})
+    # @param [Hash] params ({})
+    def update_exascale_cloud_exadata_infrastructure(params = {}, options = {})
+      req = build_request(:update_exascale_cloud_exadata_infrastructure, params)
+      req.send_request(options)
+    end
+
     # Updates the specified Exascale storage vault.
     #
     # @option params [required, String] :exascale_db_storage_vault_id
@@ -6190,7 +6333,7 @@ module Aws::Odb
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-odb'
-      context[:gem_version] = '1.33.0'
+      context[:gem_version] = '1.36.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

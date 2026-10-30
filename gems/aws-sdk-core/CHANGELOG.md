@@ -3,6 +3,27 @@ Unreleased Changes
 
 * Issue - Reuse a single read buffer when computing request checksums in a header.
 
+3.263.0 (2026-10-29)
+------------------
+
+* Feature - Reduce object allocation overhead for SDK responses. SDK clients now return `Aws::Response`, a subclass of `Seahorse::Client::Response`.
+
+* Issue - Verify the server certificate hostname for `AsyncClient` HTTP/2 connections when `ssl_verify_peer` is enabled. Connections now fail if the server certificate does not match the endpoint hostname.
+
+3.262.0 (2026-10-28)
+------------------
+
+* Feature - Improve User-Agent framework detection with literal matching of configured framework names.
+
+* Issue - Fix service error parsing and response header-map extraction by matching prefixes literally. Custom models that relied on regex matching must use literal prefixes.
+
+3.261.0 (2026-10-26)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - Adds support for the OAuth 2.0 Token Exchange grant (RFC 8693), enabling applications to exchange identity provider issued JSON Web Tokens (JWTs) for short-lived OAuth access tokens to access supported AWS services without managing separate AWS credentials.
+
 3.260.0 (2026-10-21)
 ------------------
 

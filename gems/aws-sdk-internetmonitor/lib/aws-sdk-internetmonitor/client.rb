@@ -1677,7 +1677,7 @@ module Aws::InternetMonitor
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-internetmonitor'
-      context[:gem_version] = '1.60.0'
+      context[:gem_version] = '1.62.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

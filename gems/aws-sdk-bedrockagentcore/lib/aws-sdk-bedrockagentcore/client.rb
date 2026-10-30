@@ -2985,6 +2985,7 @@ module Aws::BedrockAgentCore
     # @return [Types::InvokeAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::InvokeAgentRuntimeResponse#runtime_session_id #runtime_session_id} => String
+    #   * {Types::InvokeAgentRuntimeResponse#session_endpoint_url #session_endpoint_url} => String
     #   * {Types::InvokeAgentRuntimeResponse#mcp_session_id #mcp_session_id} => String
     #   * {Types::InvokeAgentRuntimeResponse#mcp_protocol_version #mcp_protocol_version} => String
     #   * {Types::InvokeAgentRuntimeResponse#trace_id #trace_id} => String
@@ -3019,6 +3020,7 @@ module Aws::BedrockAgentCore
     # @example Response structure
     #
     #   resp.runtime_session_id #=> String
+    #   resp.session_endpoint_url #=> String
     #   resp.mcp_session_id #=> String
     #   resp.mcp_protocol_version #=> String
     #   resp.trace_id #=> String
@@ -6666,7 +6668,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.64.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

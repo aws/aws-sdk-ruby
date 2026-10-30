@@ -1205,6 +1205,7 @@ module Aws::DocDB
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -1977,6 +1978,7 @@ module Aws::DocDB
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -2843,6 +2845,7 @@ module Aws::DocDB
     #   resp.db_clusters[0].storage_type #=> String
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_clusters[0].serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_clusters[0].serverless_v2_platform_version #=> String
     #   resp.db_clusters[0].master_user_secret.secret_arn #=> String
     #   resp.db_clusters[0].master_user_secret.secret_status #=> String
     #   resp.db_clusters[0].master_user_secret.kms_key_id #=> String
@@ -3748,6 +3751,90 @@ module Aws::DocDB
       req.send_request(options)
     end
 
+    # Describes the properties of specific platform versions for Amazon
+    # DocumentDB Serverless v2.
+    #
+    # @option params [String] :serverless_v2_platform_version
+    #   A specific platform version to return details for.
+    #
+    #   Example: `3`
+    #
+    # @option params [String] :engine
+    #   The database engine to return platform version details for.
+    #
+    # @option params [Array<Types::Filter>] :filters
+    #   This parameter isn't currently supported.
+    #
+    # @option params [Boolean] :default_only
+    #   Specifies whether to return only the default platform versions for
+    #   each engine. The default platform version is the version used for new
+    #   DB clusters.
+    #
+    # @option params [Boolean] :include_all
+    #   Specifies whether to also include platform versions that are no longer
+    #   in use. If you don't specify a value, the response includes only
+    #   active platform versions.
+    #
+    # @option params [Integer] :max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token (marker) is included in the response so that the remaining
+    #   results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #
+    # @option params [String] :marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond the
+    #   marker, up to the value specified by `MaxRecords`.
+    #
+    # @return [Types::ServerlessV2PlatformVersionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ServerlessV2PlatformVersionsMessage#marker #marker} => String
+    #   * {Types::ServerlessV2PlatformVersionsMessage#serverless_v2_platform_versions #serverless_v2_platform_versions} => Array&lt;Types::ServerlessV2PlatformVersionInfo&gt;
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_serverless_v2_platform_versions({
+    #     serverless_v2_platform_version: "String",
+    #     engine: "String",
+    #     filters: [
+    #       {
+    #         name: "String", # required
+    #         values: ["String"], # required
+    #       },
+    #     ],
+    #     default_only: false,
+    #     include_all: false,
+    #     max_records: 1,
+    #     marker: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.marker #=> String
+    #   resp.serverless_v2_platform_versions #=> Array
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_platform_version #=> String
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_platform_version_description #=> String
+    #   resp.serverless_v2_platform_versions[0].engine #=> String
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_features_support.min_capacity #=> Float
+    #   resp.serverless_v2_platform_versions[0].serverless_v2_features_support.max_capacity #=> Float
+    #   resp.serverless_v2_platform_versions[0].status #=> String
+    #   resp.serverless_v2_platform_versions[0].is_default #=> Boolean
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeServerlessV2PlatformVersions AWS API Documentation
+    #
+    # @overload describe_serverless_v2_platform_versions(params = {})
+    # @param [Hash] params ({})
+    def describe_serverless_v2_platform_versions(params = {}, options = {})
+      req = build_request(:describe_serverless_v2_platform_versions, params)
+      req.send_request(options)
+    end
+
     # Forces a failover for a cluster.
     #
     # A failover for a cluster promotes one of the Amazon DocumentDB
@@ -3835,6 +3922,7 @@ module Aws::DocDB
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -4332,6 +4420,7 @@ module Aws::DocDB
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -5467,6 +5556,7 @@ module Aws::DocDB
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -5729,6 +5819,7 @@ module Aws::DocDB
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -5815,6 +5906,7 @@ module Aws::DocDB
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -5901,6 +5993,7 @@ module Aws::DocDB
     #   resp.db_cluster.storage_type #=> String
     #   resp.db_cluster.serverless_v2_scaling_configuration.min_capacity #=> Float
     #   resp.db_cluster.serverless_v2_scaling_configuration.max_capacity #=> Float
+    #   resp.db_cluster.serverless_v2_platform_version #=> String
     #   resp.db_cluster.master_user_secret.secret_arn #=> String
     #   resp.db_cluster.master_user_secret.secret_status #=> String
     #   resp.db_cluster.master_user_secret.kms_key_id #=> String
@@ -6012,7 +6105,7 @@ module Aws::DocDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-docdb'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

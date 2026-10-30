@@ -67,21 +67,276 @@ module Aws::MediaConnect
   # The following table lists the valid waiter names, the operations they call,
   # and the default `:delay` and `:max_attempts` values.
   #
-  # | waiter_name     | params                     | :delay   | :max_attempts |
-  # | --------------- | -------------------------- | -------- | ------------- |
-  # | flow_active     | {Client#describe_flow}     | 3        | 40            |
-  # | flow_deleted    | {Client#describe_flow}     | 3        | 40            |
-  # | flow_standby    | {Client#describe_flow}     | 3        | 40            |
-  # | input_active    | {Client#get_router_input}  | 3        | 40            |
-  # | input_deleted   | {Client#get_router_input}  | 3        | 40            |
-  # | input_standby   | {Client#get_router_input}  | 3        | 40            |
-  # | output_active   | {Client#get_router_output} | 3        | 40            |
-  # | output_deleted  | {Client#get_router_output} | 3        | 40            |
-  # | output_routed   | {Client#get_router_output} | 3        | 40            |
-  # | output_standby  | {Client#get_router_output} | 3        | 40            |
-  # | output_unrouted | {Client#get_router_output} | 3        | 40            |
+  # | waiter_name                       | params                            | :delay   | :max_attempts |
+  # | --------------------------------- | --------------------------------- | -------- | ------------- |
+  # | destination_endpoint_connected    | {Client#get_destination_endpoint} | 3        | 40            |
+  # | destination_endpoint_deregistered | {Client#get_destination_endpoint} | 3        | 40            |
+  # | destination_endpoint_disconnected | {Client#get_destination_endpoint} | 3        | 40            |
+  # | destination_endpoint_registered   | {Client#get_destination_endpoint} | 3        | 40            |
+  # | flow_active                       | {Client#describe_flow}            | 3        | 40            |
+  # | flow_deleted                      | {Client#describe_flow}            | 3        | 40            |
+  # | flow_standby                      | {Client#describe_flow}            | 3        | 40            |
+  # | input_active                      | {Client#get_router_input}         | 3        | 40            |
+  # | input_deleted                     | {Client#get_router_input}         | 3        | 40            |
+  # | input_standby                     | {Client#get_router_input}         | 3        | 40            |
+  # | output_active                     | {Client#get_router_output}        | 3        | 40            |
+  # | output_deleted                    | {Client#get_router_output}        | 3        | 40            |
+  # | output_routed                     | {Client#get_router_output}        | 3        | 40            |
+  # | output_standby                    | {Client#get_router_output}        | 3        | 40            |
+  # | output_unrouted                   | {Client#get_router_output}        | 3        | 40            |
+  # | source_endpoint_connected         | {Client#get_source_endpoint}      | 3        | 40            |
+  # | source_endpoint_connecting        | {Client#get_source_endpoint}      | 3        | 40            |
+  # | source_endpoint_deregistered      | {Client#get_source_endpoint}      | 3        | 40            |
+  # | source_endpoint_disconnected      | {Client#get_source_endpoint}      | 3        | 40            |
+  # | source_endpoint_disconnecting     | {Client#get_source_endpoint}      | 3        | 40            |
+  # | source_endpoint_registered        | {Client#get_source_endpoint}      | 3        | 40            |
   #
   module Waiters
+
+    # Wait until the Destination Endpoint is CONNECTED
+    class DestinationEndpointConnected
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_destination_endpoint,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "destination_endpoint.connection_state",
+                "state" => "success",
+                "expected" => "CONNECTED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "destination_endpoint.connection_state",
+                "state" => "failure",
+                "expected" => "DISCONNECTED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_destination_endpoint)
+      # @return (see Client#get_destination_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Destination Endpoint is deregistered
+    class DestinationEndpointDeregistered
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_destination_endpoint,
+            acceptors: [
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "NotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "destination_endpoint.registration_state",
+                "state" => "failure",
+                "expected" => "REGISTRATION_FAILED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_destination_endpoint)
+      # @return (see Client#get_destination_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Destination Endpoint is DISCONNECTED
+    class DestinationEndpointDisconnected
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_destination_endpoint,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "destination_endpoint.connection_state",
+                "state" => "success",
+                "expected" => "DISCONNECTED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "destination_endpoint.connection_state",
+                "state" => "failure",
+                "expected" => "CONNECTED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_destination_endpoint)
+      # @return (see Client#get_destination_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Destination Endpoint is registered
+    class DestinationEndpointRegistered
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_destination_endpoint,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "destination_endpoint.registration_state",
+                "state" => "success",
+                "expected" => "REGISTERED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "destination_endpoint.registration_state",
+                "state" => "failure",
+                "expected" => "REGISTRATION_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "destination_endpoint.registration_state",
+                "state" => "failure",
+                "expected" => "DEREGISTERING"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_destination_endpoint)
+      # @return (see Client#get_destination_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
 
     # Wait until a flow is active
     class FlowActive
@@ -766,6 +1021,359 @@ module Aws::MediaConnect
 
       # @option (see Client#get_router_output)
       # @return (see Client#get_router_output)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Source Endpoint is CONNECTED
+    class SourceEndpointConnected
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_source_endpoint,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.connection_state",
+                "state" => "success",
+                "expected" => "CONNECTED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_source_endpoint)
+      # @return (see Client#get_source_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Source Endpoint has begun connecting
+    class SourceEndpointConnecting
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_source_endpoint,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.connection_state",
+                "state" => "success",
+                "expected" => "CONNECTING"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.connection_state",
+                "state" => "success",
+                "expected" => "CONNECTED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_source_endpoint)
+      # @return (see Client#get_source_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Source Endpoint is deregistered
+    class SourceEndpointDeregistered
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_source_endpoint,
+            acceptors: [
+              {
+                "matcher" => "error",
+                "state" => "success",
+                "expected" => "NotFoundException"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.registration_state",
+                "state" => "failure",
+                "expected" => "REGISTRATION_FAILED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_source_endpoint)
+      # @return (see Client#get_source_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Source Endpoint is DISCONNECTED
+    class SourceEndpointDisconnected
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_source_endpoint,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.connection_state",
+                "state" => "success",
+                "expected" => "DISCONNECTED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_source_endpoint)
+      # @return (see Client#get_source_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Source Endpoint has begun disconnecting
+    class SourceEndpointDisconnecting
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_source_endpoint,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.connection_state",
+                "state" => "success",
+                "expected" => "DISCONNECTING"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.connection_state",
+                "state" => "success",
+                "expected" => "DISCONNECTED"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_source_endpoint)
+      # @return (see Client#get_source_endpoint)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    # Wait until the Source Endpoint is registered
+    class SourceEndpointRegistered
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (3)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 3,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :get_source_endpoint,
+            acceptors: [
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.registration_state",
+                "state" => "success",
+                "expected" => "REGISTERED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.registration_state",
+                "state" => "failure",
+                "expected" => "REGISTRATION_FAILED"
+              },
+              {
+                "matcher" => "path",
+                "argument" => "source_endpoint.registration_state",
+                "state" => "failure",
+                "expected" => "DEREGISTERING"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "InternalServerErrorException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "ServiceUnavailableException"
+              },
+              {
+                "matcher" => "error",
+                "state" => "retry",
+                "expected" => "TooManyRequestsException"
+              }
+            ]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#get_source_endpoint)
+      # @return (see Client#get_source_endpoint)
       def wait(params = {})
         @waiter.wait(client: @client, params: params)
       end

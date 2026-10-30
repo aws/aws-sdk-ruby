@@ -2890,7 +2890,7 @@ module Aws::ACM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-acm'
-      context[:gem_version] = '1.114.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

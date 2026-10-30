@@ -44,6 +44,17 @@ module Aws
       }?
     }
 
+      type exporter_configuration = {
+      open_search_configuration: {
+        domain_arn: ::String
+      }?,
+      kafka_configuration: {
+        cluster_arn: ::String,
+        topic_filter: ::String?,
+        consumer_group_filter: ::String?
+      }?
+    }
+
     end
   end
 end

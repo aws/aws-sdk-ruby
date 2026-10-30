@@ -1728,6 +1728,11 @@ module Aws::EKS
     #       ip_family: "ipv4", # accepts ipv4, ipv6
     #       elastic_load_balancing: {
     #         enabled: false,
+    #         gateway_api: {
+    #           crds: {
+    #             managed: false,
+    #           },
+    #         },
     #       },
     #     },
     #     logging: {
@@ -1852,6 +1857,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -3043,6 +3049,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -3410,6 +3417,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -3939,6 +3947,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -5748,6 +5757,7 @@ module Aws::EKS
     #   resp.cluster.kubernetes_network_config.service_ipv_6_cidr #=> String
     #   resp.cluster.kubernetes_network_config.ip_family #=> String, one of "ipv4", "ipv6"
     #   resp.cluster.kubernetes_network_config.elastic_load_balancing.enabled #=> Boolean
+    #   resp.cluster.kubernetes_network_config.elastic_load_balancing.gateway_api.crds.managed #=> Boolean
     #   resp.cluster.logging.cluster_logging #=> Array
     #   resp.cluster.logging.cluster_logging[0].types #=> Array
     #   resp.cluster.logging.cluster_logging[0].types[0] #=> String, one of "api", "audit", "authenticator", "controllerManager", "scheduler"
@@ -6453,6 +6463,11 @@ module Aws::EKS
     #       ip_family: "ipv4", # accepts ipv4, ipv6
     #       elastic_load_balancing: {
     #         enabled: false,
+    #         gateway_api: {
+    #           crds: {
+    #             managed: false,
+    #           },
+    #         },
     #       },
     #     },
     #     storage_config: {
@@ -7132,7 +7147,7 @@ module Aws::EKS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eks'
-      context[:gem_version] = '1.183.0'
+      context[:gem_version] = '1.186.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

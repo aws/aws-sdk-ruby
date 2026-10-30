@@ -824,7 +824,9 @@ module Aws::PrometheusService
     # configure this role with a policy that allows it to scrape metrics
     # from your source. For Amazon EKS sources, see [Configuring your Amazon
     # EKS cluster][1] in the *Amazon Managed Service for Prometheus User
-    # Guide*.
+    # Guide*. For a Kafka exporter, grant this role access with a cluster
+    # policy on the Amazon MSK cluster instead. For details, see
+    # `KafkaExporterConfiguration`.
     #
     # The `scrapeConfiguration` parameter contains the base-64 encoded YAML
     # configuration for the scraper.
@@ -885,8 +887,9 @@ module Aws::PrometheusService
     #
     # @option params [Array<Types::ExporterConfiguration>] :exporters
     #   The exporter configurations for the scraper. You can configure at most
-    #   one Amazon OpenSearch Service domain. If you don't specify a value,
-    #   the scraper is created without an exporter configuration.
+    #   one exporter, for either an Amazon OpenSearch Service domain or an
+    #   Amazon MSK cluster. If you don't specify a value, the scraper is
+    #   created without an exporter configuration.
     #
     # @return [Types::CreateScraperResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1015,6 +1018,11 @@ module Aws::PrometheusService
     #       {
     #         open_search_configuration: {
     #           domain_arn: "OpenSearchDomainArn", # required
+    #         },
+    #         kafka_configuration: {
+    #           cluster_arn: "MskClusterArn", # required
+    #           topic_filter: "KafkaExporterFilter",
+    #           consumer_group_filter: "KafkaExporterFilter",
     #         },
     #       },
     #     ],
@@ -1762,6 +1770,9 @@ module Aws::PrometheusService
     #   resp.scraper.role_configuration.target_role_arn #=> String
     #   resp.scraper.exporters #=> Array
     #   resp.scraper.exporters[0].open_search_configuration.domain_arn #=> String
+    #   resp.scraper.exporters[0].kafka_configuration.cluster_arn #=> String
+    #   resp.scraper.exporters[0].kafka_configuration.topic_filter #=> String
+    #   resp.scraper.exporters[0].kafka_configuration.consumer_group_filter #=> String
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -2257,6 +2268,9 @@ module Aws::PrometheusService
     #   resp.scrapers[0].role_configuration.target_role_arn #=> String
     #   resp.scrapers[0].exporters #=> Array
     #   resp.scrapers[0].exporters[0].open_search_configuration.domain_arn #=> String
+    #   resp.scrapers[0].exporters[0].kafka_configuration.cluster_arn #=> String
+    #   resp.scrapers[0].exporters[0].kafka_configuration.topic_filter #=> String
+    #   resp.scrapers[0].exporters[0].kafka_configuration.consumer_group_filter #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ListScrapers AWS API Documentation
@@ -2869,8 +2883,10 @@ module Aws::PrometheusService
     #
     # @option params [Array<Types::ExporterConfiguration>] :exporters
     #   The exporter configurations for the scraper. You can configure at most
-    #   one Amazon OpenSearch Service domain. If you don't specify a value,
-    #   the existing exporter configuration remains unchanged.
+    #   one exporter, for either an Amazon OpenSearch Service domain or an
+    #   Amazon MSK cluster. If you don't specify a value, the existing
+    #   exporter configuration remains unchanged. Specify an empty list to
+    #   remove the exporter.
     #
     # @return [Types::UpdateScraperResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -2933,6 +2949,11 @@ module Aws::PrometheusService
     #       {
     #         open_search_configuration: {
     #           domain_arn: "OpenSearchDomainArn", # required
+    #         },
+    #         kafka_configuration: {
+    #           cluster_arn: "MskClusterArn", # required
+    #           topic_filter: "KafkaExporterFilter",
+    #           consumer_group_filter: "KafkaExporterFilter",
     #         },
     #       },
     #     ],
@@ -3139,7 +3160,7 @@ module Aws::PrometheusService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-prometheusservice'
-      context[:gem_version] = '1.82.0'
+      context[:gem_version] = '1.85.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

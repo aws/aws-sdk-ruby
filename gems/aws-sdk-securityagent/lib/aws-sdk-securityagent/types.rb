@@ -400,6 +400,12 @@ module Aws::SecurityAgent
     #   certificate.
     #   @return [Array<Types::TrustedCaCertificate>]
     #
+    # @!attribute [rw] client_certificates
+    #   The client certificates for mutual TLS (mTLS) authentication to
+    #   target hosts. Each certificate is stored in Secrets Manager and
+    #   scoped to specific target origins.
+    #   @return [Array<Types::ClientCertificate>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/Assets AWS API Documentation
     #
     class Assets < Struct.new(
@@ -408,7 +414,8 @@ module Aws::SecurityAgent
       :documents,
       :source_code,
       :integrated_repositories,
-      :trusted_ca_certificates)
+      :trusted_ca_certificates,
+      :client_certificates)
       SENSITIVE = [:trusted_ca_certificates]
       include Aws::Structure
     end
@@ -1846,6 +1853,35 @@ module Aws::SecurityAgent
     #
     class CiCdConfiguration < Struct.new(
       :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A client certificate for mutual TLS (mTLS) authentication to target
+    # hosts.
+    #
+    # @!attribute [rw] name
+    #   A customer-chosen name for this client certificate, used in error
+    #   messages and console display.
+    #   @return [String]
+    #
+    # @!attribute [rw] secret_arn
+    #   The ARN of the Secrets Manager secret containing the certificate and
+    #   private key.
+    #   @return [String]
+    #
+    # @!attribute [rw] origins
+    #   The origins (scheme://host\[:port\]) this certificate applies to.
+    #   Paths are not supported. Each hostname can have at most one client
+    #   certificate.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/ClientCertificate AWS API Documentation
+    #
+    class ClientCertificate < Struct.new(
+      :name,
+      :secret_arn,
+      :origins)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7149,6 +7185,11 @@ module Aws::SecurityAgent
     #   during the pentest job.
     #   @return [Array<Types::TrustedCaCertificate>]
     #
+    # @!attribute [rw] client_certificates
+    #   The client certificates for mutual TLS (mTLS) authentication to
+    #   target hosts during the pentest job.
+    #   @return [Array<Types::ClientCertificate>]
+    #
     # @!attribute [rw] code_remediation_strategy
     #   The code remediation strategy for the pentest job.
     #   @return [String]
@@ -7238,6 +7279,7 @@ module Aws::SecurityAgent
       :error_information,
       :integrated_repositories,
       :trusted_ca_certificates,
+      :client_certificates,
       :code_remediation_strategy,
       :clean_up_strategy,
       :disable_managed_skills,

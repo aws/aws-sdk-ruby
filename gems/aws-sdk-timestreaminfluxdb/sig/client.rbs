@@ -94,6 +94,7 @@ module Aws
         def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
         def kms_key_id: () -> ::String
         def cluster_configuration: () -> Types::ClusterConfiguration
+        def deployment_configuration: () -> Types::DeploymentConfiguration
         def db_parameter_group_id: () -> ::String
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
@@ -131,7 +132,7 @@ module Aws
                                ?bucket: ::String,
                                ?port: ::Integer,
                                ?db_parameter_group_identifier: ::String,
-                               db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
+                               ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
                                ?db_storage_type: ("InfluxIOIncludedT1" | "InfluxIOIncludedT2" | "InfluxIOIncludedT3"),
                                ?allocated_storage: ::Integer,
                                ?network_type: ("IPV4" | "DUAL"),
@@ -139,6 +140,7 @@ module Aws
                                vpc_subnet_ids: Array[::String],
                                vpc_security_group_ids: Array[::String],
                                ?deployment_type: ("MULTI_NODE_READ_REPLICAS"),
+                               ?deployment_configuration: Params::deployment_configuration,
                                ?failover_mode: ("AUTOMATIC" | "NO_FAILOVER"),
                                ?log_delivery_configuration: {
                                  s3_configuration: {
@@ -475,9 +477,9 @@ module Aws
                                            }?,
                                            plugin_repository_url: ::String?,
                                            plugin_repository_secret_arn: ::String?,
-                                           ingest_query_instances: ::Integer,
-                                           query_only_instances: ::Integer,
-                                           dedicated_compactor: bool,
+                                           ingest_query_instances: ::Integer?,
+                                           query_only_instances: ::Integer?,
+                                           dedicated_compactor: bool?,
                                            compaction_row_limit: ::Integer?,
                                            compaction_max_num_files_per_plan: ::Integer?,
                                            compaction_gen_2_duration: {
@@ -533,6 +535,7 @@ module Aws
         def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
         def kms_key_id: () -> ::String
         def cluster_configuration: () -> Types::ClusterConfiguration
+        def deployment_configuration: () -> Types::DeploymentConfiguration
         def db_parameter_group_id: () -> ::String
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
@@ -615,6 +618,7 @@ module Aws
         def deployment_type: () -> ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
         def kms_key_id: () -> ::String
         def cluster_configuration: () -> Types::ClusterConfiguration
+        def deployment_configuration: () -> Types::DeploymentConfiguration
         def db_parameter_group_id: () -> ::String
         def db_instance_type: () -> ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
         def log_delivery_configuration: () -> Types::LogDeliveryConfiguration
@@ -662,6 +666,7 @@ module Aws
         def vpc_security_group_ids: () -> ::Array[::String]
         def failover_mode: () -> ("AUTOMATIC" | "NO_FAILOVER")
         def cluster_configuration: () -> Types::ClusterConfiguration
+        def deployment_configuration: () -> Types::DeploymentConfiguration
         def db_backup_configurations: () -> ::Array[Types::DbBackupConfigurationOutput]
         def kms_key_id: () -> ::String
       end
@@ -913,6 +918,7 @@ module Aws
                                ?db_parameter_group_identifier: ::String,
                                ?port: ::Integer,
                                ?db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
+                               ?deployment_configuration: Params::deployment_configuration,
                                ?failover_mode: ("AUTOMATIC" | "NO_FAILOVER"),
                                ?maintenance_schedule: {
                                  timezone: ::String,

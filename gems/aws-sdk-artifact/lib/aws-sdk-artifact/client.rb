@@ -547,7 +547,7 @@ module Aws::Artifact
     #       },
     #     },
     #     client_token: "IdempotentClientToken",
-    #     support_mode: "AI_ONLY", # accepts AI_ONLY, FULL_SUPPORT
+    #     support_mode: "AI_ONLY", # accepts AI_ONLY
     #     tags: {
     #       "TagKey" => "TagValue",
     #     },
@@ -716,7 +716,7 @@ module Aws::Artifact
     #   resp.compliance_inquiry_detail.input_source #=> String, one of "TEXT", "FILE"
     #   resp.compliance_inquiry_detail.created_at #=> Time
     #   resp.compliance_inquiry_detail.updated_at #=> Time
-    #   resp.compliance_inquiry_detail.support_mode #=> String, one of "AI_ONLY", "FULL_SUPPORT"
+    #   resp.compliance_inquiry_detail.support_mode #=> String, one of "AI_ONLY"
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #
@@ -1523,7 +1523,7 @@ module Aws::Artifact
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-artifact'
-      context[:gem_version] = '1.46.0'
+      context[:gem_version] = '1.48.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

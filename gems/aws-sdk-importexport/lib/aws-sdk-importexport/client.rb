@@ -831,7 +831,7 @@ module Aws::ImportExport
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-importexport'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.81.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

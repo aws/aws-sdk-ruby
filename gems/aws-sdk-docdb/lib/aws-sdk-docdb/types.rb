@@ -1490,6 +1490,11 @@ module Aws::DocDB
     #   cluster.
     #   @return [Types::ServerlessV2ScalingConfigurationInfo]
     #
+    # @!attribute [rw] serverless_v2_platform_version
+    #   The version of the Amazon DocumentDB Serverless platform used by the
+    #   cluster.
+    #   @return [String]
+    #
     # @!attribute [rw] master_user_secret
     #   The secret managed by Amazon DocumentDB in Amazon Web Services
     #   Secrets Manager for the master user password.
@@ -1555,6 +1560,7 @@ module Aws::DocDB
       :io_optimized_next_allowed_modification_time,
       :storage_type,
       :serverless_v2_scaling_configuration,
+      :serverless_v2_platform_version,
       :master_user_secret,
       :network_type,
       :copy_tags_to_snapshot)
@@ -3570,6 +3576,65 @@ module Aws::DocDB
       :filters,
       :marker,
       :max_records)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The input for the `DescribeServerlessV2PlatformVersions` operation.
+    #
+    # @!attribute [rw] serverless_v2_platform_version
+    #   A specific platform version to return details for.
+    #
+    #   Example: `3`
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The database engine to return platform version details for.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   This parameter isn't currently supported.
+    #   @return [Array<Types::Filter>]
+    #
+    # @!attribute [rw] default_only
+    #   Specifies whether to return only the default platform versions for
+    #   each engine. The default platform version is the version used for
+    #   new DB clusters.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_all
+    #   Specifies whether to also include platform versions that are no
+    #   longer in use. If you don't specify a value, the response includes
+    #   only active platform versions.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_records
+    #   The maximum number of records to include in the response. If more
+    #   records exist than the specified `MaxRecords` value, a pagination
+    #   token (marker) is included in the response so that the remaining
+    #   results can be retrieved.
+    #
+    #   Default: 100
+    #
+    #   Constraints: Minimum 20, maximum 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/DescribeServerlessV2PlatformVersionsMessage AWS API Documentation
+    #
+    class DescribeServerlessV2PlatformVersionsMessage < Struct.new(
+      :serverless_v2_platform_version,
+      :engine,
+      :filters,
+      :default_only,
+      :include_all,
+      :max_records,
+      :marker)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6009,6 +6074,79 @@ module Aws::DocDB
     class ServerlessV2FeaturesSupport < Struct.new(
       :min_capacity,
       :max_capacity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains details about a specific Amazon DocumentDB Serverless
+    # platform version, including its version number, status, engine, and
+    # supported features.
+    #
+    # @!attribute [rw] serverless_v2_platform_version
+    #   The version number of the serverless platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_platform_version_description
+    #   The description of the serverless platform.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The name of the database engine.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_features_support
+    #   Specifies any Amazon DocumentDB Serverless v2 properties or limits
+    #   that differ between platform versions. You can retrieve the platform
+    #   version of an existing cluster and check whether it supports
+    #   specific features before you use them.
+    #   @return [Types::ServerlessV2FeaturesSupport]
+    #
+    # @!attribute [rw] status
+    #   The status of the serverless platform. Valid statuses are the
+    #   following:
+    #
+    #   * `enabled` - The platform version is in use.
+    #
+    #   * `disabled` - The platform version is not in use.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_default
+    #   Specifies whether this platform version is the default version for
+    #   the engine. The default platform version is the version used for new
+    #   DB clusters.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ServerlessV2PlatformVersionInfo AWS API Documentation
+    #
+    class ServerlessV2PlatformVersionInfo < Struct.new(
+      :serverless_v2_platform_version,
+      :serverless_v2_platform_version_description,
+      :engine,
+      :serverless_v2_features_support,
+      :status,
+      :is_default)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the result of a successful invocation of the
+    # `DescribeServerlessV2PlatformVersions` operation.
+    #
+    # @!attribute [rw] marker
+    #   An optional pagination token provided by a previous request. If this
+    #   parameter is specified, the response includes only records beyond
+    #   the marker, up to the value specified by `MaxRecords`.
+    #   @return [String]
+    #
+    # @!attribute [rw] serverless_v2_platform_versions
+    #   A list of `ServerlessV2PlatformVersionInfo` elements.
+    #   @return [Array<Types::ServerlessV2PlatformVersionInfo>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/docdb-2014-10-31/ServerlessV2PlatformVersionsMessage AWS API Documentation
+    #
+    class ServerlessV2PlatformVersionsMessage < Struct.new(
+      :marker,
+      :serverless_v2_platform_versions)
       SENSITIVE = []
       include Aws::Structure
     end

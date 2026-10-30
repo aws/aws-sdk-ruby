@@ -1098,7 +1098,7 @@ module Aws::AIOps
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-aiops'
-      context[:gem_version] = '1.24.0'
+      context[:gem_version] = '1.26.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

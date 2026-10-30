@@ -51,6 +51,7 @@ module Aws::KafkaConnect
     CustomPluginRevisionSummary = Shapes::StructureShape.new(name: 'CustomPluginRevisionSummary')
     CustomPluginState = Shapes::StringShape.new(name: 'CustomPluginState')
     CustomPluginSummary = Shapes::StructureShape.new(name: 'CustomPluginSummary')
+    CustomPluginUpdate = Shapes::StructureShape.new(name: 'CustomPluginUpdate')
     DeleteConnectorRequest = Shapes::StructureShape.new(name: 'DeleteConnectorRequest')
     DeleteConnectorResponse = Shapes::StructureShape.new(name: 'DeleteConnectorResponse')
     DeleteCustomPluginRequest = Shapes::StructureShape.new(name: 'DeleteCustomPluginRequest')
@@ -96,6 +97,7 @@ module Aws::KafkaConnect
     PauseConnectorResponse = Shapes::StructureShape.new(name: 'PauseConnectorResponse')
     Plugin = Shapes::StructureShape.new(name: 'Plugin')
     PluginDescription = Shapes::StructureShape.new(name: 'PluginDescription')
+    PluginUpdate = Shapes::StructureShape.new(name: 'PluginUpdate')
     ProvisionedCapacity = Shapes::StructureShape.new(name: 'ProvisionedCapacity')
     ProvisionedCapacityDescription = Shapes::StructureShape.new(name: 'ProvisionedCapacityDescription')
     ProvisionedCapacityUpdate = Shapes::StructureShape.new(name: 'ProvisionedCapacityUpdate')
@@ -135,6 +137,7 @@ module Aws::KafkaConnect
     WorkerConfigurationRevisionSummary = Shapes::StructureShape.new(name: 'WorkerConfigurationRevisionSummary')
     WorkerConfigurationState = Shapes::StringShape.new(name: 'WorkerConfigurationState')
     WorkerConfigurationSummary = Shapes::StructureShape.new(name: 'WorkerConfigurationSummary')
+    WorkerConfigurationUpdate = Shapes::StructureShape.new(name: 'WorkerConfigurationUpdate')
     WorkerLogDelivery = Shapes::StructureShape.new(name: 'WorkerLogDelivery')
     WorkerLogDeliveryDescription = Shapes::StructureShape.new(name: 'WorkerLogDeliveryDescription')
     WorkerSetting = Shapes::StructureShape.new(name: 'WorkerSetting')
@@ -148,6 +151,7 @@ module Aws::KafkaConnect
     __listOfCustomPluginSummary = Shapes::ListShape.new(name: '__listOfCustomPluginSummary')
     __listOfPlugin = Shapes::ListShape.new(name: '__listOfPlugin')
     __listOfPluginDescription = Shapes::ListShape.new(name: '__listOfPluginDescription')
+    __listOfPluginUpdate = Shapes::ListShape.new(name: '__listOfPluginUpdate')
     __listOfWorkerConfigurationSummary = Shapes::ListShape.new(name: '__listOfWorkerConfigurationSummary')
     __listOf__string = Shapes::ListShape.new(name: '__listOf__string')
     __long = Shapes::IntegerShape.new(name: '__long')
@@ -332,6 +336,10 @@ module Aws::KafkaConnect
     CustomPluginSummary.add_member(:name, Shapes::ShapeRef.new(shape: __string, location_name: "name"))
     CustomPluginSummary.struct_class = Types::CustomPluginSummary
 
+    CustomPluginUpdate.add_member(:custom_plugin_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "customPluginArn"))
+    CustomPluginUpdate.add_member(:revision, Shapes::ShapeRef.new(shape: __longMin1, required: true, location_name: "revision", metadata: {"box" => true}))
+    CustomPluginUpdate.struct_class = Types::CustomPluginUpdate
+
     DeleteConnectorRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectorArn"))
     DeleteConnectorRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, location: "querystring", location_name: "currentVersion"))
     DeleteConnectorRequest.struct_class = Types::DeleteConnectorRequest
@@ -513,6 +521,9 @@ module Aws::KafkaConnect
     PluginDescription.add_member(:custom_plugin, Shapes::ShapeRef.new(shape: CustomPluginDescription, location_name: "customPlugin"))
     PluginDescription.struct_class = Types::PluginDescription
 
+    PluginUpdate.add_member(:custom_plugin, Shapes::ShapeRef.new(shape: CustomPluginUpdate, required: true, location_name: "customPlugin"))
+    PluginUpdate.struct_class = Types::PluginUpdate
+
     ProvisionedCapacity.add_member(:mcu_count, Shapes::ShapeRef.new(shape: __integerMin1Max8, required: true, location_name: "mcuCount"))
     ProvisionedCapacity.add_member(:worker_count, Shapes::ShapeRef.new(shape: __integer, required: true, location_name: "workerCount"))
     ProvisionedCapacity.struct_class = Types::ProvisionedCapacity
@@ -613,6 +624,9 @@ module Aws::KafkaConnect
     UpdateConnectorRequest.add_member(:skip_health_validation, Shapes::ShapeRef.new(shape: __boolean, location_name: "skipHealthValidation"))
     UpdateConnectorRequest.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, required: true, location: "uri", location_name: "connectorArn"))
     UpdateConnectorRequest.add_member(:current_version, Shapes::ShapeRef.new(shape: __string, required: true, location: "querystring", location_name: "currentVersion"))
+    UpdateConnectorRequest.add_member(:plugins, Shapes::ShapeRef.new(shape: __listOfPluginUpdate, location_name: "plugins"))
+    UpdateConnectorRequest.add_member(:worker_configuration, Shapes::ShapeRef.new(shape: WorkerConfigurationUpdate, location_name: "workerConfiguration"))
+    UpdateConnectorRequest.add_member(:use_default_worker_configuration, Shapes::ShapeRef.new(shape: __boolean, location_name: "useDefaultWorkerConfiguration"))
     UpdateConnectorRequest.struct_class = Types::UpdateConnectorRequest
 
     UpdateConnectorResponse.add_member(:connector_arn, Shapes::ShapeRef.new(shape: __string, location_name: "connectorArn"))
@@ -655,6 +669,10 @@ module Aws::KafkaConnect
     WorkerConfigurationSummary.add_member(:worker_configuration_state, Shapes::ShapeRef.new(shape: WorkerConfigurationState, location_name: "workerConfigurationState"))
     WorkerConfigurationSummary.struct_class = Types::WorkerConfigurationSummary
 
+    WorkerConfigurationUpdate.add_member(:revision, Shapes::ShapeRef.new(shape: __longMin1, required: true, location_name: "revision", metadata: {"box" => true}))
+    WorkerConfigurationUpdate.add_member(:worker_configuration_arn, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "workerConfigurationArn"))
+    WorkerConfigurationUpdate.struct_class = Types::WorkerConfigurationUpdate
+
     WorkerLogDelivery.add_member(:cloud_watch_logs, Shapes::ShapeRef.new(shape: CloudWatchLogsLogDelivery, location_name: "cloudWatchLogs"))
     WorkerLogDelivery.add_member(:firehose, Shapes::ShapeRef.new(shape: FirehoseLogDelivery, location_name: "firehose"))
     WorkerLogDelivery.add_member(:s3, Shapes::ShapeRef.new(shape: S3LogDelivery, location_name: "s3"))
@@ -666,6 +684,9 @@ module Aws::KafkaConnect
     WorkerLogDeliveryDescription.struct_class = Types::WorkerLogDeliveryDescription
 
     WorkerSetting.add_member(:capacity, Shapes::ShapeRef.new(shape: CapacityDescription, location_name: "capacity"))
+    WorkerSetting.add_member(:plugins, Shapes::ShapeRef.new(shape: __listOfPluginDescription, location_name: "plugins"))
+    WorkerSetting.add_member(:worker_configuration, Shapes::ShapeRef.new(shape: WorkerConfigurationDescription, location_name: "workerConfiguration"))
+    WorkerSetting.add_member(:use_default_worker_configuration, Shapes::ShapeRef.new(shape: __boolean, location_name: "useDefaultWorkerConfiguration"))
     WorkerSetting.struct_class = Types::WorkerSetting
 
     __listOfConnectorOperationStep.member = Shapes::ShapeRef.new(shape: ConnectorOperationStep)
@@ -679,6 +700,8 @@ module Aws::KafkaConnect
     __listOfPlugin.member = Shapes::ShapeRef.new(shape: Plugin)
 
     __listOfPluginDescription.member = Shapes::ShapeRef.new(shape: PluginDescription)
+
+    __listOfPluginUpdate.member = Shapes::ShapeRef.new(shape: PluginUpdate)
 
     __listOfWorkerConfigurationSummary.member = Shapes::ShapeRef.new(shape: WorkerConfigurationSummary)
 

@@ -54,7 +54,7 @@ module Aws::KinesisAnalytics
   autoload :EndpointProvider, 'aws-sdk-kinesisanalytics/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-kinesisanalytics/endpoints'
 
-  GEM_VERSION = '1.94.0'
+  GEM_VERSION = '1.96.0'
 
 end
 

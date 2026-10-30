@@ -810,7 +810,8 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSOAdmin/Client.html#list_instances-instance_method
       def list_instances: (
                             ?max_results: ::Integer,
-                            ?next_token: ::String
+                            ?next_token: ::String,
+                            ?region_scope: ("CURRENT_REGION" | "ALL_REGIONS")
                           ) -> _ListInstancesResponseSuccess
                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListInstancesResponseSuccess
 

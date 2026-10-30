@@ -50,6 +50,8 @@ module Aws::BedrockAgentCoreControl
     AllowedAudienceType = Shapes::StringShape.new(name: 'AllowedAudienceType')
     AllowedClient = Shapes::StringShape.new(name: 'AllowedClient')
     AllowedClientsList = Shapes::ListShape.new(name: 'AllowedClientsList')
+    AllowedPort = Shapes::UnionShape.new(name: 'AllowedPort')
+    AllowedPorts = Shapes::ListShape.new(name: 'AllowedPorts')
     AllowedQueryParameters = Shapes::ListShape.new(name: 'AllowedQueryParameters')
     AllowedRequestHeaders = Shapes::ListShape.new(name: 'AllowedRequestHeaders')
     AllowedResponseHeaders = Shapes::ListShape.new(name: 'AllowedResponseHeaders')
@@ -1013,6 +1015,8 @@ module Aws::BedrockAgentCoreControl
     Oauth2Discovery = Shapes::UnionShape.new(name: 'Oauth2Discovery')
     Oauth2ProviderConfigInput = Shapes::UnionShape.new(name: 'Oauth2ProviderConfigInput')
     Oauth2ProviderConfigOutput = Shapes::UnionShape.new(name: 'Oauth2ProviderConfigOutput')
+    OnBehalfOfAuthenticationConfig = Shapes::StructureShape.new(name: 'OnBehalfOfAuthenticationConfig')
+    OnBehalfOfClientAuthenticationMethod = Shapes::StringShape.new(name: 'OnBehalfOfClientAuthenticationMethod')
     OnBehalfOfTokenExchangeConfigType = Shapes::StructureShape.new(name: 'OnBehalfOfTokenExchangeConfigType')
     OnBehalfOfTokenExchangeGrantTypeType = Shapes::StringShape.new(name: 'OnBehalfOfTokenExchangeGrantTypeType')
     OnlineEvaluationConfigArn = Shapes::StringShape.new(name: 'OnlineEvaluationConfigArn')
@@ -1087,6 +1091,8 @@ module Aws::BedrockAgentCoreControl
     PolicySummary = Shapes::StructureShape.new(name: 'PolicySummary')
     PolicySummaryList = Shapes::ListShape.new(name: 'PolicySummaryList')
     PolicyValidationMode = Shapes::StringShape.new(name: 'PolicyValidationMode')
+    Port = Shapes::IntegerShape.new(name: 'Port')
+    PortRange = Shapes::StructureShape.new(name: 'PortRange')
     PortalUrlType = Shapes::StringShape.new(name: 'PortalUrlType')
     PrincipalMatchOperator = Shapes::StringShape.new(name: 'PrincipalMatchOperator')
     PrivateEndpoint = Shapes::UnionShape.new(name: 'PrivateEndpoint')
@@ -1140,6 +1146,8 @@ module Aws::BedrockAgentCoreControl
     RequestHeaderAllowlist = Shapes::ListShape.new(name: 'RequestHeaderAllowlist')
     RequestHeaderConfiguration = Shapes::UnionShape.new(name: 'RequestHeaderConfiguration')
     RequiredProperties = Shapes::ListShape.new(name: 'RequiredProperties')
+    ResetTokenVaultKeyMaterialRequest = Shapes::StructureShape.new(name: 'ResetTokenVaultKeyMaterialRequest')
+    ResetTokenVaultKeyMaterialResponse = Shapes::StructureShape.new(name: 'ResetTokenVaultKeyMaterialResponse')
     Resource = Shapes::UnionShape.new(name: 'Resource')
     ResourceAssociationArn = Shapes::StringShape.new(name: 'ResourceAssociationArn')
     ResourceConfigurationIdentifier = Shapes::StringShape.new(name: 'ResourceConfigurationIdentifier')
@@ -1224,6 +1232,8 @@ module Aws::BedrockAgentCoreControl
     SensitiveJson = Shapes::DocumentShape.new(name: 'SensitiveJson', document: true)
     SensitiveText = Shapes::StringShape.new(name: 'SensitiveText')
     ServerDefinition = Shapes::StructureShape.new(name: 'ServerDefinition')
+    ServerPath = Shapes::StringShape.new(name: 'ServerPath')
+    ServerPort = Shapes::IntegerShape.new(name: 'ServerPort')
     ServerProtocol = Shapes::StringShape.new(name: 'ServerProtocol')
     ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
     ServiceName = Shapes::StringShape.new(name: 'ServiceName')
@@ -1557,6 +1567,16 @@ module Aws::BedrockAgentCoreControl
     AllowedAudienceList.member = Shapes::ShapeRef.new(shape: AllowedAudience)
 
     AllowedClientsList.member = Shapes::ShapeRef.new(shape: AllowedClient)
+
+    AllowedPort.add_member(:port, Shapes::ShapeRef.new(shape: Port, location_name: "port"))
+    AllowedPort.add_member(:port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "portRange"))
+    AllowedPort.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    AllowedPort.add_member_subclass(:port, Types::AllowedPort::Port)
+    AllowedPort.add_member_subclass(:port_range, Types::AllowedPort::PortRange)
+    AllowedPort.add_member_subclass(:unknown, Types::AllowedPort::Unknown)
+    AllowedPort.struct_class = Types::AllowedPort
+
+    AllowedPorts.member = Shapes::ShapeRef.new(shape: AllowedPort)
 
     AllowedQueryParameters.member = Shapes::ShapeRef.new(shape: HttpQueryParameterName)
 
@@ -2016,6 +2036,7 @@ module Aws::BedrockAgentCoreControl
     CreateAgentRuntimeRequest.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
     CreateAgentRuntimeRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagsMap, location_name: "tags"))
     CreateAgentRuntimeRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
+    CreateAgentRuntimeRequest.add_member(:allowed_ports, Shapes::ShapeRef.new(shape: AllowedPorts, location_name: "allowedPorts"))
     CreateAgentRuntimeRequest.struct_class = Types::CreateAgentRuntimeRequest
 
     CreateAgentRuntimeResponse.add_member(:agent_runtime_arn, Shapes::ShapeRef.new(shape: AgentRuntimeArn, required: true, location_name: "agentRuntimeArn"))
@@ -3336,6 +3357,7 @@ module Aws::BedrockAgentCoreControl
     GetAgentRuntimeResponse.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     GetAgentRuntimeResponse.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
     GetAgentRuntimeResponse.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
+    GetAgentRuntimeResponse.add_member(:allowed_ports, Shapes::ShapeRef.new(shape: AllowedPorts, location_name: "allowedPorts"))
     GetAgentRuntimeResponse.struct_class = Types::GetAgentRuntimeResponse
 
     GetApiKeyCredentialProviderRequest.add_member(:name, Shapes::ShapeRef.new(shape: CredentialProviderName, required: true, location_name: "name"))
@@ -5130,8 +5152,12 @@ module Aws::BedrockAgentCoreControl
     Oauth2ProviderConfigOutput.add_member_subclass(:unknown, Types::Oauth2ProviderConfigOutput::Unknown)
     Oauth2ProviderConfigOutput.struct_class = Types::Oauth2ProviderConfigOutput
 
+    OnBehalfOfAuthenticationConfig.add_member(:client_authentication_method, Shapes::ShapeRef.new(shape: OnBehalfOfClientAuthenticationMethod, required: true, location_name: "clientAuthenticationMethod"))
+    OnBehalfOfAuthenticationConfig.struct_class = Types::OnBehalfOfAuthenticationConfig
+
     OnBehalfOfTokenExchangeConfigType.add_member(:grant_type, Shapes::ShapeRef.new(shape: OnBehalfOfTokenExchangeGrantTypeType, required: true, location_name: "grantType"))
     OnBehalfOfTokenExchangeConfigType.add_member(:token_exchange_grant_type_config, Shapes::ShapeRef.new(shape: TokenExchangeGrantTypeConfigType, location_name: "tokenExchangeGrantTypeConfig"))
+    OnBehalfOfTokenExchangeConfigType.add_member(:on_behalf_of_authentication_config, Shapes::ShapeRef.new(shape: OnBehalfOfAuthenticationConfig, location_name: "onBehalfOfAuthenticationConfig"))
     OnBehalfOfTokenExchangeConfigType.struct_class = Types::OnBehalfOfTokenExchangeConfigType
 
     OnlineEvaluationConfigSummary.add_member(:online_evaluation_config_arn, Shapes::ShapeRef.new(shape: OnlineEvaluationConfigArn, required: true, location_name: "onlineEvaluationConfigArn"))
@@ -5327,6 +5353,10 @@ module Aws::BedrockAgentCoreControl
 
     PolicySummaryList.member = Shapes::ShapeRef.new(shape: PolicySummary)
 
+    PortRange.add_member(:from, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "from"))
+    PortRange.add_member(:to, Shapes::ShapeRef.new(shape: Port, required: true, location_name: "to"))
+    PortRange.struct_class = Types::PortRange
+
     PrivateEndpoint.add_member(:self_managed_lattice_resource, Shapes::ShapeRef.new(shape: SelfManagedLatticeResource, location_name: "selfManagedLatticeResource"))
     PrivateEndpoint.add_member(:managed_vpc_resource, Shapes::ShapeRef.new(shape: ManagedVpcResource, location_name: "managedVpcResource"))
     PrivateEndpoint.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -5356,6 +5386,8 @@ module Aws::BedrockAgentCoreControl
     PrivateKeySource.struct_class = Types::PrivateKeySource
 
     ProtocolConfiguration.add_member(:server_protocol, Shapes::ShapeRef.new(shape: ServerProtocol, required: true, location_name: "serverProtocol"))
+    ProtocolConfiguration.add_member(:port, Shapes::ShapeRef.new(shape: ServerPort, location_name: "port"))
+    ProtocolConfiguration.add_member(:path, Shapes::ShapeRef.new(shape: ServerPath, location_name: "path"))
     ProtocolConfiguration.struct_class = Types::ProtocolConfiguration
 
     ProviderPrefix.add_member(:strip, Shapes::ShapeRef.new(shape: Boolean, location_name: "strip"))
@@ -5469,6 +5501,14 @@ module Aws::BedrockAgentCoreControl
     RequestHeaderConfiguration.struct_class = Types::RequestHeaderConfiguration
 
     RequiredProperties.member = Shapes::ShapeRef.new(shape: String)
+
+    ResetTokenVaultKeyMaterialRequest.add_member(:token_vault_id, Shapes::ShapeRef.new(shape: TokenVaultIdType, required: true, location_name: "tokenVaultId"))
+    ResetTokenVaultKeyMaterialRequest.struct_class = Types::ResetTokenVaultKeyMaterialRequest
+
+    ResetTokenVaultKeyMaterialResponse.add_member(:token_vault_id, Shapes::ShapeRef.new(shape: TokenVaultIdType, required: true, location_name: "tokenVaultId"))
+    ResetTokenVaultKeyMaterialResponse.add_member(:kms_configuration, Shapes::ShapeRef.new(shape: KmsConfiguration, required: true, location_name: "kmsConfiguration"))
+    ResetTokenVaultKeyMaterialResponse.add_member(:last_modified_date, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "lastModifiedDate"))
+    ResetTokenVaultKeyMaterialResponse.struct_class = Types::ResetTokenVaultKeyMaterialResponse
 
     Resource.add_member(:arn, Shapes::ShapeRef.new(shape: BedrockAgentcoreResourceArn, location_name: "arn"))
     Resource.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -6014,6 +6054,7 @@ module Aws::BedrockAgentCoreControl
     UpdateAgentRuntimeRequest.add_member(:filesystem_configurations, Shapes::ShapeRef.new(shape: FilesystemConfigurations, location_name: "filesystemConfigurations"))
     UpdateAgentRuntimeRequest.add_member(:capacity_provider_configuration, Shapes::ShapeRef.new(shape: CapacityProviderConfiguration, location_name: "capacityProviderConfiguration"))
     UpdateAgentRuntimeRequest.add_member(:platform_version, Shapes::ShapeRef.new(shape: PlatformVersion, location_name: "platformVersion"))
+    UpdateAgentRuntimeRequest.add_member(:allowed_ports, Shapes::ShapeRef.new(shape: AllowedPorts, location_name: "allowedPorts"))
     UpdateAgentRuntimeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
     UpdateAgentRuntimeRequest.struct_class = Types::UpdateAgentRuntimeRequest
 
@@ -7129,6 +7170,7 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -8775,6 +8817,21 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:reset_token_vault_key_material, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ResetTokenVaultKeyMaterial"
+        o.http_method = "POST"
+        o.http_request_uri = "/identities/reset-token-vault-key-material"
+        o.input = Shapes::ShapeRef.new(shape: ResetTokenVaultKeyMaterialRequest)
+        o.output = Shapes::ShapeRef.new(shape: ResetTokenVaultKeyMaterialResponse)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:rotate_payment_connector_credentials, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RotatePaymentConnectorCredentials"
         o.http_method = "POST"
@@ -8799,6 +8856,7 @@ module Aws::BedrockAgentCoreControl
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
@@ -9276,6 +9334,7 @@ module Aws::BedrockAgentCoreControl
         o.output = Shapes::ShapeRef.new(shape: UpdateWorkloadIdentityResponse)
         o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

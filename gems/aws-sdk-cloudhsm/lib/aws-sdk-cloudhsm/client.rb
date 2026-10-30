@@ -1672,7 +1672,7 @@ module Aws::CloudHSM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudhsm'
-      context[:gem_version] = '1.93.0'
+      context[:gem_version] = '1.95.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -5269,11 +5269,37 @@ module Aws::MediaLive
     #   Bandwidth Reduction Filter Settings
     #   @return [Types::BandwidthReductionFilterSettings]
     #
+    # @!attribute [rw] auto_filter_settings
+    #   System-managed filter selection. Resolves to the perceptual filter
+    #   at strength 1 where the codec is eligible (AV1 and H.265
+    #   unconditionally; H.264 only at enhanced\_quality), and to no filter
+    #   otherwise. An empty / undefined filter\_settings\_choice is treated
+    #   as "auto". Carries no body (extends EmptySettings, which sets
+    #   additionalProperties: false), mirroring the
+    #   ColorSpacePassthroughSettings empty-settings pattern.
+    #   @return [Types::AutoFilterSettings]
+    #
+    # @!attribute [rw] none_filter_settings
+    #   Explicitly disables the video filter. This is the customer opt-out:
+    #   a video description set to "none" never has a filter applied and
+    #   is never overridden by the system-managed "auto" default. Carries
+    #   no body (extends EmptySettings, which sets additionalProperties:
+    #   false), mirroring the ColorSpacePassthroughSettings empty-settings
+    #   pattern.
+    #   @return [Types::NoneFilterSettings]
+    #
+    # @!attribute [rw] perceptual_filter_settings
+    #   Perceptual Filter Settings
+    #   @return [Types::PerceptualFilterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264FilterSettings AWS API Documentation
     #
     class H264FilterSettings < Struct.new(
       :temporal_filter_settings,
-      :bandwidth_reduction_filter_settings)
+      :bandwidth_reduction_filter_settings,
+      :auto_filter_settings,
+      :none_filter_settings,
+      :perceptual_filter_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5580,6 +5606,17 @@ module Aws::MediaLive
     #   bandwidth for this output.
     #   @return [Integer]
     #
+    # @!attribute [rw] allow_explicit_weighted_prediction
+    #   Specifies whether the encoder may apply explicit weighted prediction
+    #   (EWP), an H.264 coding tool that can improve compression. EWP
+    #   applies a scaling factor and offset to reference frames, which helps
+    #   when brightness changes between frames, such as during a fade. When
+    #   this setting is enabled, the encoder decides whether to apply EWP
+    #   based on the output's other codec settings, such as profile and
+    #   quality level. We recommend that you keep the default, enabled. When
+    #   disabled, the encoder never applies EWP.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H264Settings AWS API Documentation
     #
     class H264Settings < Struct.new(
@@ -5626,7 +5663,8 @@ module Aws::MediaLive
       :timecode_insertion,
       :timecode_burnin_settings,
       :min_qp,
-      :min_bitrate)
+      :min_bitrate,
+      :allow_explicit_weighted_prediction)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5680,11 +5718,37 @@ module Aws::MediaLive
     #   Bandwidth Reduction Filter Settings
     #   @return [Types::BandwidthReductionFilterSettings]
     #
+    # @!attribute [rw] auto_filter_settings
+    #   System-managed filter selection. Resolves to the perceptual filter
+    #   at strength 1 where the codec is eligible (AV1 and H.265
+    #   unconditionally; H.264 only at enhanced\_quality), and to no filter
+    #   otherwise. An empty / undefined filter\_settings\_choice is treated
+    #   as "auto". Carries no body (extends EmptySettings, which sets
+    #   additionalProperties: false), mirroring the
+    #   ColorSpacePassthroughSettings empty-settings pattern.
+    #   @return [Types::AutoFilterSettings]
+    #
+    # @!attribute [rw] none_filter_settings
+    #   Explicitly disables the video filter. This is the customer opt-out:
+    #   a video description set to "none" never has a filter applied and
+    #   is never overridden by the system-managed "auto" default. Carries
+    #   no body (extends EmptySettings, which sets additionalProperties:
+    #   false), mirroring the ColorSpacePassthroughSettings empty-settings
+    #   pattern.
+    #   @return [Types::NoneFilterSettings]
+    #
+    # @!attribute [rw] perceptual_filter_settings
+    #   Perceptual Filter Settings
+    #   @return [Types::PerceptualFilterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/H265FilterSettings AWS API Documentation
     #
     class H265FilterSettings < Struct.new(
       :temporal_filter_settings,
-      :bandwidth_reduction_filter_settings)
+      :bandwidth_reduction_filter_settings,
+      :auto_filter_settings,
+      :none_filter_settings,
+      :perceptual_filter_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18943,6 +19007,10 @@ module Aws::MediaLive
     #   leave the field empty to use the default, which is 8 bit.
     #   @return [String]
     #
+    # @!attribute [rw] filter_settings
+    #   Optional filters that you can apply to an encode.
+    #   @return [Types::Av1FilterSettings]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1Settings AWS API Documentation
     #
     class Av1Settings < Struct.new(
@@ -18969,7 +19037,8 @@ module Aws::MediaLive
       :spatial_aq,
       :temporal_aq,
       :timecode_insertion,
-      :bit_depth)
+      :bit_depth,
+      :filter_settings)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20869,11 +20938,23 @@ module Aws::MediaLive
     #   pulled from.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_source_ip
+    #   This represents the ip address of the device sending the secondary
+    #   multicast stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_url
+    #   This represents the customer's secondary source URL where the
+    #   redundant multicast stream (SMPTE 2022-7) is pulled from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSource AWS API Documentation
     #
     class MulticastSource < Struct.new(
       :source_ip,
-      :url)
+      :url,
+      :secondary_source_ip,
+      :secondary_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20889,13 +20970,25 @@ module Aws::MediaLive
     # @!attribute [rw] url
     #   This represents the customer's source URL where multicast stream is
     #   pulled from.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_source_ip
+    #   This represents the ip address of the device sending the secondary
+    #   multicast stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_url
+    #   This represents the customer's secondary source URL where the
+    #   redundant multicast stream (SMPTE 2022-7) is pulled from.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSourceCreateRequest AWS API Documentation
     #
     class MulticastSourceCreateRequest < Struct.new(
       :source_ip,
-      :url)
+      :url,
+      :secondary_source_ip,
+      :secondary_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -20913,11 +21006,23 @@ module Aws::MediaLive
     #   pulled from.
     #   @return [String]
     #
+    # @!attribute [rw] secondary_source_ip
+    #   This represents the ip address of the device sending the secondary
+    #   multicast stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] secondary_url
+    #   This represents the customer's secondary source URL where the
+    #   redundant multicast stream (SMPTE 2022-7) is pulled from.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/MulticastSourceUpdateRequest AWS API Documentation
     #
     class MulticastSourceUpdateRequest < Struct.new(
       :source_ip,
-      :url)
+      :url,
+      :secondary_source_ip,
+      :secondary_url)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23673,6 +23778,85 @@ module Aws::MediaLive
     #
     class TextCaptionPositionSettings < Struct.new(
       :y_position_percentage)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # System-managed filter selection. Resolves to the perceptual filter at
+    # strength 1 where the codec is eligible (AV1 and H.265 unconditionally;
+    # H.264 only at enhanced\_quality), and to no filter otherwise. An empty
+    # / undefined filter\_settings\_choice is treated as "auto". Carries
+    # no body (extends EmptySettings, which sets additionalProperties:
+    # false), mirroring the ColorSpacePassthroughSettings empty-settings
+    # pattern.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/AutoFilterSettings AWS API Documentation
+    #
+    class AutoFilterSettings < Aws::EmptyStructure; end
+
+    # Av1 Filter Settings
+    #
+    # @!attribute [rw] auto_filter_settings
+    #   System-managed filter selection. Resolves to the perceptual filter
+    #   at strength 1 where the codec is eligible (AV1 and H.265
+    #   unconditionally; H.264 only at enhanced\_quality), and to no filter
+    #   otherwise. An empty / undefined filter\_settings\_choice is treated
+    #   as "auto". Carries no body (extends EmptySettings, which sets
+    #   additionalProperties: false), mirroring the
+    #   ColorSpacePassthroughSettings empty-settings pattern.
+    #   @return [Types::AutoFilterSettings]
+    #
+    # @!attribute [rw] none_filter_settings
+    #   Explicitly disables the video filter. This is the customer opt-out:
+    #   a video description set to "none" never has a filter applied and
+    #   is never overridden by the system-managed "auto" default. Carries
+    #   no body (extends EmptySettings, which sets additionalProperties:
+    #   false), mirroring the ColorSpacePassthroughSettings empty-settings
+    #   pattern.
+    #   @return [Types::NoneFilterSettings]
+    #
+    # @!attribute [rw] perceptual_filter_settings
+    #   Perceptual Filter Settings
+    #   @return [Types::PerceptualFilterSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/Av1FilterSettings AWS API Documentation
+    #
+    class Av1FilterSettings < Struct.new(
+      :auto_filter_settings,
+      :none_filter_settings,
+      :perceptual_filter_settings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Explicitly disables the video filter. This is the customer opt-out: a
+    # video description set to "none" never has a filter applied and is
+    # never overridden by the system-managed "auto" default. Carries no
+    # body (extends EmptySettings, which sets additionalProperties: false),
+    # mirroring the ColorSpacePassthroughSettings empty-settings pattern.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/NoneFilterSettings AWS API Documentation
+    #
+    class NoneFilterSettings < Aws::EmptyStructure; end
+
+    # Perceptual Filter Settings
+    #
+    # @!attribute [rw] strength
+    #   Selects the perceptual noise filter strength. Strength 1 (perceptual
+    #   lite) is the recommended default and adds approximately 30% of an
+    #   AVC encode of compute on the highest rendition. Strength 2 adds
+    #   approximately 60% of an AVC encode of compute and can introduce
+    #   slight softening on noisy content.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/medialive-2017-10-14/PerceptualFilterSettings AWS API Documentation
+    #
+    class PerceptualFilterSettings < Struct.new(
+      :strength)
       SENSITIVE = []
       include Aws::Structure
     end

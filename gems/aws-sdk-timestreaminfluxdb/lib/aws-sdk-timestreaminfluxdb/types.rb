@@ -25,6 +25,9 @@ module Aws::TimestreamInfluxDB
 
     # Configuration for node modes in the DbCluster.
     #
+    # Deprecated. Use deploymentConfiguration to define the cluster topology
+    # instead.
+    #
     # @!attribute [rw] ingest_query_instances
     #   The number of instances in the DbCluster which can both ingest and
     #   query.
@@ -150,7 +153,14 @@ module Aws::TimestreamInfluxDB
     #
     # @!attribute [rw] cluster_configuration
     #   The cluster configuration of the resource at the time of backup.
+    #
+    #   Deprecated. Use deploymentConfiguration to view the cluster topology
+    #   instead.
     #   @return [Types::ClusterConfiguration]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   The deployment configuration of the resource at the time of backup.
+    #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] db_parameter_group_id
     #   The identifier of the DB parameter group associated with the backup.
@@ -224,6 +234,7 @@ module Aws::TimestreamInfluxDB
       :deployment_type,
       :kms_key_id,
       :cluster_configuration,
+      :deployment_configuration,
       :db_parameter_group_id,
       :db_instance_type,
       :log_delivery_configuration,
@@ -299,6 +310,10 @@ module Aws::TimestreamInfluxDB
     #
     # @!attribute [rw] db_instance_type
     #   The Timestream for InfluxDB DB instance type to run InfluxDB on.
+    #
+    #   Optional when you define the cluster topology with
+    #   deploymentConfiguration, because the instance type is then specified
+    #   per node group.
     #   @return [String]
     #
     # @!attribute [rw] db_storage_type
@@ -345,6 +360,15 @@ module Aws::TimestreamInfluxDB
     # @!attribute [rw] deployment_type
     #   Specifies the type of cluster to create.
     #   @return [String]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   The compute topology for the cluster, defined as a set of node
+    #   groups. Use deploymentConfiguration to allocate compute per
+    #   function: ingest, query, compaction, and processing. A deployment
+    #   configuration becomes the source of truth for the cluster's
+    #   topology. Timestream for InfluxDB then ignores any node-count
+    #   parameters in the associated DB parameter group.
+    #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] failover_mode
     #   Specifies the behavior of failure recovery when the primary node of
@@ -393,6 +417,7 @@ module Aws::TimestreamInfluxDB
       :vpc_subnet_ids,
       :vpc_security_group_ids,
       :deployment_type,
+      :deployment_configuration,
       :failover_mode,
       :log_delivery_configuration,
       :maintenance_schedule,
@@ -1249,7 +1274,14 @@ module Aws::TimestreamInfluxDB
     #
     # @!attribute [rw] cluster_configuration
     #   The cluster configuration of the resource at the time of backup.
+    #
+    #   Deprecated. Use deploymentConfiguration to view the cluster topology
+    #   instead.
     #   @return [Types::ClusterConfiguration]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   The deployment configuration of the resource at the time of backup.
+    #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] db_parameter_group_id
     #   The identifier of the DB parameter group associated with the backup.
@@ -1323,6 +1355,7 @@ module Aws::TimestreamInfluxDB
       :deployment_type,
       :kms_key_id,
       :cluster_configuration,
+      :deployment_configuration,
       :db_parameter_group_id,
       :db_instance_type,
       :log_delivery_configuration,
@@ -1549,6 +1582,32 @@ module Aws::TimestreamInfluxDB
       include Aws::Structure
     end
 
+    # Defines the compute topology of a Timestream for InfluxDB cluster as a
+    # set of node groups for a specific database engine. For InfluxDB 3
+    # Enterprise, use the InfluxDBv3Enterprise member to allocate compute
+    # per function: ingest, query, compaction, and processing.
+    #
+    # @note DeploymentConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DeploymentConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DeploymentConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] influx_d_bv_3_enterprise
+    #   The deployment configuration for an InfluxDB 3 Enterprise cluster.
+    #   @return [Types::InfluxDBv3EnterpriseDeploymentConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/DeploymentConfiguration AWS API Documentation
+    #
+    class DeploymentConfiguration < Struct.new(
+      :influx_d_bv_3_enterprise,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class InfluxDBv3Enterprise < DeploymentConfiguration; end
+      class Unknown < DeploymentConfiguration; end
+    end
+
     # Duration for InfluxDB parameters in Timestream for InfluxDB.
     #
     # @!attribute [rw] duration_type
@@ -1628,7 +1687,14 @@ module Aws::TimestreamInfluxDB
     #
     # @!attribute [rw] cluster_configuration
     #   The cluster configuration of the resource at the time of backup.
+    #
+    #   Deprecated. Use deploymentConfiguration to view the cluster topology
+    #   instead.
     #   @return [Types::ClusterConfiguration]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   The deployment configuration of the resource at the time of backup.
+    #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] db_parameter_group_id
     #   The identifier of the DB parameter group associated with the backup.
@@ -1702,6 +1768,7 @@ module Aws::TimestreamInfluxDB
       :deployment_type,
       :kms_key_id,
       :cluster_configuration,
+      :deployment_configuration,
       :db_parameter_group_id,
       :db_instance_type,
       :log_delivery_configuration,
@@ -1848,7 +1915,16 @@ module Aws::TimestreamInfluxDB
     #
     # @!attribute [rw] cluster_configuration
     #   Configuration for node modes in the DbCluster.
+    #
+    #   Deprecated. Use deploymentConfiguration to view the cluster topology
+    #   instead.
     #   @return [Types::ClusterConfiguration]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   The current compute topology of the cluster, as a set of node
+    #   groups. The returned topology reflects the cluster's actual
+    #   provisioned nodes.
+    #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] db_backup_configurations
     #   The backup configurations for the DB cluster.
@@ -1887,6 +1963,7 @@ module Aws::TimestreamInfluxDB
       :vpc_security_group_ids,
       :failover_mode,
       :cluster_configuration,
+      :deployment_configuration,
       :db_backup_configurations,
       :kms_key_id)
       SENSITIVE = []
@@ -2731,6 +2808,24 @@ module Aws::TimestreamInfluxDB
       include Aws::Structure
     end
 
+    # The compute topology for an InfluxDB 3 Enterprise cluster, expressed
+    # as a list of node groups.
+    #
+    # @!attribute [rw] node_groups
+    #   The node groups that make up the cluster. Across all node groups,
+    #   the cluster must include 1 to 4 nodes with the INGEST mode, 0 to 14
+    #   nodes with the QUERY mode, and exactly one node with the COMPACT
+    #   mode.
+    #   @return [Array<Types::NodeGroup>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/InfluxDBv3EnterpriseDeploymentConfiguration AWS API Documentation
+    #
+    class InfluxDBv3EnterpriseDeploymentConfiguration < Struct.new(
+      :node_groups)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # All the customer-modifiable InfluxDB v3 Enterprise parameters in
     # Timestream for InfluxDB.
     #
@@ -2996,15 +3091,30 @@ module Aws::TimestreamInfluxDB
     # @!attribute [rw] ingest_query_instances
     #   Specifies number of instances in the DbCluster which can both ingest
     #   and query.
+    #
+    #   Deprecated. Use deploymentConfiguration on CreateDbCluster or
+    #   UpdateDbCluster to define the cluster topology instead. When you
+    #   supply a deployment configuration, Timestream for InfluxDB ignores
+    #   this parameter.
     #   @return [Integer]
     #
     # @!attribute [rw] query_only_instances
     #   Specifies number of instances in the DbCluster which can only query.
+    #
+    #   Deprecated. Use deploymentConfiguration on CreateDbCluster or
+    #   UpdateDbCluster to define the cluster topology instead. When you
+    #   supply a deployment configuration, Timestream for InfluxDB ignores
+    #   this parameter.
     #   @return [Integer]
     #
     # @!attribute [rw] dedicated_compactor
     #   Specifies if the compactor instance should be a standalone instance
     #   or not.
+    #
+    #   Deprecated. Use deploymentConfiguration on CreateDbCluster or
+    #   UpdateDbCluster to define the cluster topology instead. When you
+    #   supply a deployment configuration, Timestream for InfluxDB ignores
+    #   this parameter.
     #   @return [Boolean]
     #
     # @!attribute [rw] compaction_row_limit
@@ -3452,6 +3562,48 @@ module Aws::TimestreamInfluxDB
     class MaintenanceSchedule < Struct.new(
       :timezone,
       :preferred_maintenance_window)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A group of one or more nodes in a Timestream for InfluxDB cluster that
+    # share the same instance modes and instance type. A cluster's compute
+    # topology is defined as a list of node groups.
+    #
+    # @!attribute [rw] instance_modes
+    #   The functions that the nodes in this group perform. Provide from 1
+    #   to 4 unique modes. Valid modes:
+    #
+    #   * INGEST – Nodes in this mode ingest data. Across all node groups,
+    #     INGEST nodes must total between 1 and 4.
+    #
+    #   * QUERY – Nodes in this mode query data. Across all node groups,
+    #     QUERY nodes must total between 0 and 14.
+    #
+    #   * COMPACT – Nodes in this mode compact data. Exactly one node across
+    #     all node groups must have this mode. If the cluster has more than
+    #     three non-compaction nodes, place the COMPACT node in its own
+    #     dedicated node group.
+    #
+    #   * PROCESS – Nodes in this mode process data with the processing
+    #     engine.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_type
+    #   The Timestream for InfluxDB DB instance type to run InfluxDB on for
+    #   the nodes in this group.
+    #   @return [String]
+    #
+    # @!attribute [rw] count
+    #   The number of nodes in this group. Valid values are 1 to 13.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/timestream-influxdb-2023-01-27/NodeGroup AWS API Documentation
+    #
+    class NodeGroup < Struct.new(
+      :instance_modes,
+      :instance_type,
+      :count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3981,7 +4133,21 @@ module Aws::TimestreamInfluxDB
     #
     # @!attribute [rw] db_instance_type
     #   Update the DB cluster to use the specified DB instance Type.
+    #
+    #   You can't specify both dbInstanceType and deploymentConfiguration
+    #   in the same request. When you use deploymentConfiguration, the
+    #   instance type is specified per node group.
     #   @return [String]
+    #
+    # @!attribute [rw] deployment_configuration
+    #   The updated compute topology for the cluster, defined as a set of
+    #   node groups. Use deploymentConfiguration to change the cluster's
+    #   topology or scale its compute in a single call. You can't specify
+    #   both deploymentConfiguration and dbInstanceType in the same request.
+    #   When you provide a deployment configuration, Timestream for InfluxDB
+    #   ignores any node-count parameters in the associated DB parameter
+    #   group.
+    #   @return [Types::DeploymentConfiguration]
     #
     # @!attribute [rw] failover_mode
     #   Update the DB cluster's failover behavior.
@@ -4004,6 +4170,7 @@ module Aws::TimestreamInfluxDB
       :db_parameter_group_identifier,
       :port,
       :db_instance_type,
+      :deployment_configuration,
       :failover_mode,
       :maintenance_schedule,
       :db_backup_configurations)
