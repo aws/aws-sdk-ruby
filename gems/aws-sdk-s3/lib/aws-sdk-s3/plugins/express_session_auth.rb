@@ -44,13 +44,14 @@ for different buckets.
 
           private
 
+          # Providers are called with only the bucket; the default provider
+          # reads the requesting client from this thread-local.
           def express_credentials_for(context, bucket)
-            provider = context.config.express_credentials_provider
-            if provider.is_a?(ExpressCredentialsProvider)
-              provider.express_credentials_for(bucket, context.client)
-            else
-              provider.express_credentials_for(bucket)
-            end
+            previous = Thread.current[:aws_sdk_s3_express_client]
+            Thread.current[:aws_sdk_s3_express_client] = context.client
+            context.config.express_credentials_provider.express_credentials_for(bucket)
+          ensure
+            Thread.current[:aws_sdk_s3_express_client] = previous
           end
 
           def with_metric(credentials, &block)
