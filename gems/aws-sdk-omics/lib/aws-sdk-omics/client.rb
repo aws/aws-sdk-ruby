@@ -3622,6 +3622,7 @@ module Aws::Omics
     #   * {Types::GetRunResponse#vpc_config #vpc_config} => Types::VpcConfigResponse
     #   * {Types::GetRunResponse#engine_settings #engine_settings} => Hash,Array,String,Numeric,Boolean
     #   * {Types::GetRunResponse#session_policy #session_policy} => String
+    #   * {Types::GetRunResponse#output_uri_prefix_mode #output_uri_prefix_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3683,6 +3684,7 @@ module Aws::Omics
     #   resp.vpc_config.vpc_id #=> String
     #   resp.vpc_config.vpc_owner_account_id #=> String
     #   resp.session_policy #=> String
+    #   resp.output_uri_prefix_mode #=> String, one of "SERVICE_DEFINED", "NONE_WITH_OVERWRITE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6569,6 +6571,11 @@ module Aws::Omics
     #   serialized using the same format as its surroundings and requires no
     #   additional encoding or escaping.
     #
+    # @option params [String] :output_uri_prefix_mode
+    #   You can control the path prefixes that the service adds beneath
+    #   `outputUri`. If you don't specify a value, the service uses
+    #   `SERVICE_DEFINED`, which adds a run-specific prefix.
+    #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartRunResponse#arn #arn} => String
@@ -6611,6 +6618,7 @@ module Aws::Omics
     #     session_policy: "SessionPolicy",
     #     engine_settings: {
     #     },
+    #     output_uri_prefix_mode: "SERVICE_DEFINED", # accepts SERVICE_DEFINED, NONE_WITH_OVERWRITE
     #   })
     #
     # @example Response structure
@@ -7439,7 +7447,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.86.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

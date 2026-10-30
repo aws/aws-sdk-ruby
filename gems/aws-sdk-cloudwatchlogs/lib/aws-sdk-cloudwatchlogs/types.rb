@@ -1464,11 +1464,36 @@ module Aws::CloudWatchLogs
     #   The type of policy to delete.
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to preview the impact of deleting the policy
+    #   without deleting it. If you specify `true`, CloudWatch Logs does not
+    #   delete the policy and returns the estimated impact in
+    #   `dryRunResult`. The default is `false`.
+    #
+    #   Specifying `dryRun` is valid only when you specify
+    #   `RETENTION_POLICY` for `policyType`. Only one dry run can be in
+    #   progress for an account at a time.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteAccountPolicyRequest AWS API Documentation
     #
     class DeleteAccountPolicyRequest < Struct.new(
       :policy_name,
-      :policy_type)
+      :policy_type,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] dry_run_result
+    #   The estimated impact of deleting the policy. This field is returned
+    #   only when the request specifies `dryRun` as `true`.
+    #   @return [Types::DryRunResult]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteAccountPolicyResponse AWS API Documentation
+    #
+    class DeleteAccountPolicyResponse < Struct.new(
+      :dry_run_result)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3393,6 +3418,61 @@ module Aws::CloudWatchLogs
     #
     class DisassociateSourceFromS3TableIntegrationResponse < Struct.new(
       :identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the estimated impact of creating, updating, or deleting an
+    # account-level retention policy. The analysis compares the effective
+    # retention period of each log group, which accounts for all
+    # account-level retention policies that apply to it, before and after
+    # the change. Log groups in the Delivery class are not included.
+    #
+    # @!attribute [rw] total_matched_log_groups
+    #   The number of log groups in the scope of the policy that were
+    #   analyzed. This value is the sum of
+    #   `increasedRetentionLogGroupCount`,
+    #   `decreasedRetentionLogGroupCount`, and
+    #   `unchangedRetentionLogGroupCount`, and does not include log groups
+    #   that could not be analyzed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] increased_retention_log_group_count
+    #   The number of log groups whose effective retention period would
+    #   become longer.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] decreased_retention_log_group_count
+    #   The number of log groups whose effective retention period would
+    #   become shorter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] unchanged_retention_log_group_count
+    #   The number of log groups whose effective retention period would not
+    #   change.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failed_analysis_count
+    #   The number of log groups in the scope of the policy that could not
+    #   be analyzed. These log groups are not included in
+    #   `totalMatchedLogGroups`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] top_log_groups_impacted
+    #   Up to 20 log groups in the scope of the policy, sorted by stored
+    #   bytes in descending order. This list can include log groups whose
+    #   effective retention period would not change.
+    #   @return [Array<Types::LogGroupImpact>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DryRunResult AWS API Documentation
+    #
+    class DryRunResult < Struct.new(
+      :total_matched_log_groups,
+      :increased_retention_log_group_count,
+      :decreased_retention_log_group_count,
+      :unchanged_retention_log_group_count,
+      :failed_analysis_count,
+      :top_log_groups_impacted)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6132,6 +6212,16 @@ module Aws::CloudWatchLogs
     #   operations until it is explicitly disabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] retention_policy_name
+    #   The name of the account-level retention policy that determines the
+    #   retention period of this log group. This field is returned only when
+    #   an account-level retention policy applies to the log group. When it
+    #   is returned, `retentionInDays` shows the retention period from that
+    #   policy instead of the retention period set on the log group. If the
+    #   policy specifies that log events never expire, `retentionInDays` is
+    #   not returned.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroup AWS API Documentation
     #
     class LogGroup < Struct.new(
@@ -6147,7 +6237,8 @@ module Aws::CloudWatchLogs
       :log_group_class,
       :log_group_arn,
       :deletion_protection_enabled,
-      :bearer_token_authentication_enabled)
+      :bearer_token_authentication_enabled,
+      :retention_policy_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6169,6 +6260,40 @@ module Aws::CloudWatchLogs
     class LogGroupField < Struct.new(
       :name,
       :percent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the estimated effect of an account-level retention policy
+    # change on one log group.
+    #
+    # @!attribute [rw] log_group_name
+    #   The name of the log group.
+    #   @return [String]
+    #
+    # @!attribute [rw] current_retention
+    #   The current effective retention period of the log group, in days. A
+    #   value of `NEVER_EXPIRE` indicates that log events in the log group
+    #   never expire.
+    #   @return [String]
+    #
+    # @!attribute [rw] proposed_retention
+    #   The effective retention period of the log group, in days, after the
+    #   change. A value of `NEVER_EXPIRE` indicates that log events in the
+    #   log group would never expire.
+    #   @return [String]
+    #
+    # @!attribute [rw] stored_bytes
+    #   The number of bytes stored in the log group.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/LogGroupImpact AWS API Documentation
+    #
+    class LogGroupImpact < Struct.new(
+      :log_group_name,
+      :current_retention,
+      :proposed_retention,
+      :stored_bytes)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7888,6 +8013,18 @@ module Aws::CloudWatchLogs
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions-recursion-prevention.html
     #   @return [String]
     #
+    # @!attribute [rw] dry_run
+    #   Specifies whether to preview the impact of the policy without
+    #   creating or updating it. If you specify `true`, CloudWatch Logs
+    #   validates the request, does not save the policy, and returns the
+    #   estimated impact in `dryRunResult` instead of `accountPolicy`. The
+    #   default is `false`.
+    #
+    #   Specifying `dryRun` is valid only when you specify
+    #   `RETENTION_POLICY` for `policyType`. Only one dry run can be in
+    #   progress for an account at a time.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutAccountPolicyRequest AWS API Documentation
     #
     class PutAccountPolicyRequest < Struct.new(
@@ -7895,7 +8032,8 @@ module Aws::CloudWatchLogs
       :policy_document,
       :policy_type,
       :scope,
-      :selection_criteria)
+      :selection_criteria,
+      :dry_run)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7904,10 +8042,17 @@ module Aws::CloudWatchLogs
     #   The account policy that you created.
     #   @return [Types::AccountPolicy]
     #
+    # @!attribute [rw] dry_run_result
+    #   The estimated impact of the policy on log groups in the account.
+    #   This field is returned only when the request specifies `dryRun` as
+    #   `true`.
+    #   @return [Types::DryRunResult]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutAccountPolicyResponse AWS API Documentation
     #
     class PutAccountPolicyResponse < Struct.new(
-      :account_policy)
+      :account_policy,
+      :dry_run_result)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -251,6 +251,9 @@ module Aws::Connect
     Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignId = Shapes::StringShape.new(name: 'CampaignId')
     CaseSlaConfiguration = Shapes::StructureShape.new(name: 'CaseSlaConfiguration')
+    CategoriesAttributeAndCondition = Shapes::StructureShape.new(name: 'CategoriesAttributeAndCondition')
+    CategoriesAttributeFilter = Shapes::StructureShape.new(name: 'CategoriesAttributeFilter')
+    CategoriesAttributeOrConditionList = Shapes::ListShape.new(name: 'CategoriesAttributeOrConditionList')
     Channel = Shapes::StringShape.new(name: 'Channel')
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
     ChannelToCountMap = Shapes::MapShape.new(name: 'ChannelToCountMap')
@@ -1689,6 +1692,7 @@ module Aws::Connect
     RealTimeContactAnalysisSegmentTranscript = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentTranscript')
     RealTimeContactAnalysisSegmentType = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSegmentType')
     RealTimeContactAnalysisSegmentTypes = Shapes::ListShape.new(name: 'RealTimeContactAnalysisSegmentTypes')
+    RealTimeContactAnalysisSegmentsFilter = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentsFilter')
     RealTimeContactAnalysisSentimentLabel = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSentimentLabel')
     RealTimeContactAnalysisStatus = Shapes::StringShape.new(name: 'RealTimeContactAnalysisStatus')
     RealTimeContactAnalysisSupportedChannel = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSupportedChannel')
@@ -1812,6 +1816,7 @@ module Aws::Connect
     RuleCapabilityTiers = Shapes::ListShape.new(name: 'RuleCapabilityTiers')
     RuleFunction = Shapes::StringShape.new(name: 'RuleFunction')
     RuleId = Shapes::StringShape.new(name: 'RuleId')
+    RuleId256 = Shapes::StringShape.new(name: 'RuleId256')
     RuleName = Shapes::StringShape.new(name: 'RuleName')
     RulePublishStatus = Shapes::StringShape.new(name: 'RulePublishStatus')
     RuleSearchSummary = Shapes::StructureShape.new(name: 'RuleSearchSummary')
@@ -3113,6 +3118,16 @@ module Aws::Connect
     CaseSlaConfiguration.add_member(:target_field_values, Shapes::ShapeRef.new(shape: SlaFieldValueUnionList, location_name: "TargetFieldValues"))
     CaseSlaConfiguration.add_member(:target_sla_minutes, Shapes::ShapeRef.new(shape: TargetSlaMinutes, required: true, location_name: "TargetSlaMinutes"))
     CaseSlaConfiguration.struct_class = Types::CaseSlaConfiguration
+
+    CategoriesAttributeAndCondition.add_member(:tag_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "TagConditions"))
+    CategoriesAttributeAndCondition.struct_class = Types::CategoriesAttributeAndCondition
+
+    CategoriesAttributeFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: CategoriesAttributeOrConditionList, location_name: "OrConditions"))
+    CategoriesAttributeFilter.add_member(:and_condition, Shapes::ShapeRef.new(shape: CategoriesAttributeAndCondition, location_name: "AndCondition"))
+    CategoriesAttributeFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
+    CategoriesAttributeFilter.struct_class = Types::CategoriesAttributeFilter
+
+    CategoriesAttributeOrConditionList.member = Shapes::ShapeRef.new(shape: CategoriesAttributeAndCondition)
 
     ChannelList.member = Shapes::ShapeRef.new(shape: Channel)
 
@@ -6844,6 +6859,7 @@ module Aws::Connect
     ListRealtimeContactAnalysisSegmentsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     ListRealtimeContactAnalysisSegmentsV2Request.add_member(:output_type, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisOutputType, required: true, location_name: "OutputType"))
     ListRealtimeContactAnalysisSegmentsV2Request.add_member(:segment_types, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentTypes, required: true, location_name: "SegmentTypes"))
+    ListRealtimeContactAnalysisSegmentsV2Request.add_member(:list_filter, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentsFilter, location_name: "ListFilter"))
     ListRealtimeContactAnalysisSegmentsV2Request.struct_class = Types::ListRealtimeContactAnalysisSegmentsV2Request
 
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:channel, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSupportedChannel, required: true, location_name: "Channel"))
@@ -7865,6 +7881,7 @@ module Aws::Connect
 
     RealTimeContactAnalysisAttachments.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisAttachment)
 
+    RealTimeContactAnalysisCategoryDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId256, location_name: "RuleId"))
     RealTimeContactAnalysisCategoryDetails.add_member(:points_of_interest, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisPointsOfInterest, required: true, location_name: "PointsOfInterest"))
     RealTimeContactAnalysisCategoryDetails.struct_class = Types::RealTimeContactAnalysisCategoryDetails
 
@@ -7939,6 +7956,9 @@ module Aws::Connect
     RealTimeContactAnalysisSegmentTranscript.struct_class = Types::RealTimeContactAnalysisSegmentTranscript
 
     RealTimeContactAnalysisSegmentTypes.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentType)
+
+    RealTimeContactAnalysisSegmentsFilter.add_member(:categories_attribute_filter, Shapes::ShapeRef.new(shape: CategoriesAttributeFilter, location_name: "CategoriesAttributeFilter"))
+    RealTimeContactAnalysisSegmentsFilter.struct_class = Types::RealTimeContactAnalysisSegmentsFilter
 
     RealTimeContactAnalysisTimeData.add_member(:absolute_time, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTimeInstant, location_name: "AbsoluteTime"))
     RealTimeContactAnalysisTimeData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))

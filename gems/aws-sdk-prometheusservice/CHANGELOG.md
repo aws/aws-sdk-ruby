@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.85.0 (2026-10-30)
+------------------
+
+* Feature - Managed Prometheus collectors now support Amazon MSK consumer-group metrics for Amazon Managed Service for Prometheus and CloudWatch.
+
 1.84.0 (2026-10-29)
 ------------------
 

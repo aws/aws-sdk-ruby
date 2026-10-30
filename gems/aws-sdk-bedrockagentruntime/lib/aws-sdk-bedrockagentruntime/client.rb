@@ -945,6 +945,9 @@ module Aws::BedrockAgentRuntime
     #
     #   # For :trace_event event available at #on_trace_event_event callback and response eventstream enumerator:
     #   event.attributes.actions #=> Array
+    #   event.attributes.actions[0].code_execution.documents #=> Array
+    #   event.attributes.actions[0].code_execution.documents[0].document_id #=> String
+    #   event.attributes.actions[0].code_execution.documents[0].source_retriever.identifier #=> String
     #   event.attributes.actions[0].full_document_expansion.document_id #=> String
     #   event.attributes.actions[0].full_document_expansion.source_retriever.identifier #=> String
     #   event.attributes.actions[0].memory_retrieve.input_query.text #=> String
@@ -970,7 +973,7 @@ module Aws::BedrockAgentRuntime
     #   event.attributes.retrieval_response[0].metadata #=> Hash
     #   event.attributes.retrieval_response[0].source_retriever.identifier #=> String
     #   event.attributes.status #=> String, one of "IN_PROGRESS", "SUCCEEDED", "FAILED"
-    #   event.attributes.step #=> String, one of "Planning", "Retrieval", "SpeculativeRetrieval", "FullDocumentExpansion", "SessionHistoryLoad"
+    #   event.attributes.step #=> String, one of "Planning", "Retrieval", "SpeculativeRetrieval", "FullDocumentExpansion", "SessionHistoryLoad", "CodeExecution"
     #   event.attributes.warnings #=> Array
     #   event.attributes.warnings[0].guardrail.action #=> String, one of "INTERVENED", "NONE"
     #   event.attributes.warnings[0].guardrail.id #=> String
@@ -8489,7 +8492,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.88.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

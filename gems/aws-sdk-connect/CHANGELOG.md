@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.293.0 (2026-10-30)
+------------------
+
+* Feature - Amazon Connect adds tag-based access control for Contact Lens rules. ListRealtimeContactAnalysisSegmentsV2 adds a ListFilter to return only category segments whose rules match given tags. PreEvaluationFilter now supports contact evaluation resources for OnContactEvaluationSubmit rules.
+
 1.292.0 (2026-10-29)
 ------------------
 

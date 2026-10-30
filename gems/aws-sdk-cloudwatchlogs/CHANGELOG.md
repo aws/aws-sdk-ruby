@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2026-10-30)
+------------------
+
+* Feature - Adds support for account-level retention policies in Amazon CloudWatch Logs. Customers can now use PutAccountPolicy with the new RETENTION POLICY type to set default log retention across all log groups in an account. Includes dry-run mode to preview the impact of policy changes before applying them.
+
 1.170.0 (2026-10-29)
 ------------------
 

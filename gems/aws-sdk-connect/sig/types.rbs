@@ -825,6 +825,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class CategoriesAttributeAndCondition
+      attr_accessor tag_conditions: ::Array[Types::TagCondition]
+      SENSITIVE: []
+    end
+
+    class CategoriesAttributeFilter
+      attr_accessor or_conditions: ::Array[Types::CategoriesAttributeAndCondition]
+      attr_accessor and_condition: Types::CategoriesAttributeAndCondition
+      attr_accessor tag_condition: Types::TagCondition
+      SENSITIVE: []
+    end
+
     class ChatContactMetrics
       attr_accessor multi_party: bool
       attr_accessor total_messages: ::Integer
@@ -5599,6 +5611,7 @@ module Aws::Connect
       attr_accessor next_token: ::String
       attr_accessor output_type: ("Raw" | "Redacted")
       attr_accessor segment_types: ::Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary" | "ExtractedInformation")]
+      attr_accessor list_filter: Types::RealTimeContactAnalysisSegmentsFilter
       SENSITIVE: []
     end
 
@@ -6537,7 +6550,7 @@ module Aws::Connect
     end
 
     class PreEvaluationFilter
-      attr_accessor resource_type: ("CONTACT")
+      attr_accessor resource_type: ("CONTACT" | "CONTACT_EVALUATION")
       attr_accessor filter_type: ("TAG")
       attr_accessor filter_key: ::String
       attr_accessor filter_value: ::String
@@ -6841,6 +6854,7 @@ module Aws::Connect
     end
 
     class RealTimeContactAnalysisCategoryDetails
+      attr_accessor rule_id: ::String
       attr_accessor points_of_interest: ::Array[Types::RealTimeContactAnalysisPointOfInterest]
       SENSITIVE: []
     end
@@ -6923,6 +6937,11 @@ module Aws::Connect
       attr_accessor time: Types::RealTimeContactAnalysisTimeData
       attr_accessor redaction: Types::RealTimeContactAnalysisTranscriptItemRedaction
       attr_accessor sentiment: ("POSITIVE" | "NEGATIVE" | "NEUTRAL")
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisSegmentsFilter
+      attr_accessor categories_attribute_filter: Types::CategoriesAttributeFilter
       SENSITIVE: []
     end
 

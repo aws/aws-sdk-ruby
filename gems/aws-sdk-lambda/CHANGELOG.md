@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.206.0 (2026-10-30)
+------------------
+
+* Feature - Adds ConsumptionMode to SelfManagedKafkaEventSourceConfig, letting Lambda event source mappings consume self-managed Apache Kafka topics as a queue. Set ConsumptionMode to Queue when creating an event source mapping.
+
 1.205.0 (2026-10-29)
 ------------------
 

@@ -575,7 +575,7 @@ module Aws
       type pre_evaluation_filters = {
       and_conditions: Array[
         {
-          resource_type: ("CONTACT"),
+          resource_type: ("CONTACT" | "CONTACT_EVALUATION"),
           filter_type: ("TAG"),
           filter_key: ::String,
           filter_value: ::String,

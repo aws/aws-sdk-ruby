@@ -100,6 +100,8 @@ module Aws::PrometheusService
     IgnoreNearExpectedRatioDouble = Shapes::FloatShape.new(name: 'IgnoreNearExpectedRatioDouble')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     InternalServerException = Shapes::StructureShape.new(name: 'InternalServerException')
+    KafkaExporterConfiguration = Shapes::StructureShape.new(name: 'KafkaExporterConfiguration')
+    KafkaExporterFilter = Shapes::StringShape.new(name: 'KafkaExporterFilter')
     KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     LabelName = Shapes::StringShape.new(name: 'LabelName')
     LabelSet = Shapes::MapShape.new(name: 'LabelSet')
@@ -130,6 +132,7 @@ module Aws::PrometheusService
     LoggingDestinations = Shapes::ListShape.new(name: 'LoggingDestinations')
     LoggingFilter = Shapes::StructureShape.new(name: 'LoggingFilter')
     LoggingFilterQspThresholdLong = Shapes::IntegerShape.new(name: 'LoggingFilterQspThresholdLong')
+    MskClusterArn = Shapes::StringShape.new(name: 'MskClusterArn')
     OpenSearchDomainArn = Shapes::StringShape.new(name: 'OpenSearchDomainArn')
     OpenSearchExporterConfiguration = Shapes::StructureShape.new(name: 'OpenSearchExporterConfiguration')
     PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
@@ -514,8 +517,10 @@ module Aws::PrometheusService
     EksConfiguration.struct_class = Types::EksConfiguration
 
     ExporterConfiguration.add_member(:open_search_configuration, Shapes::ShapeRef.new(shape: OpenSearchExporterConfiguration, location_name: "openSearchConfiguration"))
+    ExporterConfiguration.add_member(:kafka_configuration, Shapes::ShapeRef.new(shape: KafkaExporterConfiguration, location_name: "kafkaConfiguration"))
     ExporterConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ExporterConfiguration.add_member_subclass(:open_search_configuration, Types::ExporterConfiguration::OpenSearchConfiguration)
+    ExporterConfiguration.add_member_subclass(:kafka_configuration, Types::ExporterConfiguration::KafkaConfiguration)
     ExporterConfiguration.add_member_subclass(:unknown, Types::ExporterConfiguration::Unknown)
     ExporterConfiguration.struct_class = Types::ExporterConfiguration
 
@@ -539,6 +544,11 @@ module Aws::PrometheusService
     InternalServerException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     InternalServerException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location: "header", location_name: "Retry-After"))
     InternalServerException.struct_class = Types::InternalServerException
+
+    KafkaExporterConfiguration.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: MskClusterArn, required: true, location_name: "clusterArn"))
+    KafkaExporterConfiguration.add_member(:topic_filter, Shapes::ShapeRef.new(shape: KafkaExporterFilter, location_name: "topicFilter"))
+    KafkaExporterConfiguration.add_member(:consumer_group_filter, Shapes::ShapeRef.new(shape: KafkaExporterFilter, location_name: "consumerGroupFilter"))
+    KafkaExporterConfiguration.struct_class = Types::KafkaExporterConfiguration
 
     LabelSet.key = Shapes::ShapeRef.new(shape: LabelName)
     LabelSet.value = Shapes::ShapeRef.new(shape: LabelValue)

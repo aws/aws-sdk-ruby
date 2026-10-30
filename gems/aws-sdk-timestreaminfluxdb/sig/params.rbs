@@ -1,0 +1,25 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module TimestreamInfluxDB
+    module Params
+      type deployment_configuration = {
+      influx_d_bv_3_enterprise: {
+        node_groups: Array[
+          {
+            instance_modes: Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")],
+            instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge"),
+            count: ::Integer
+          }
+        ]
+      }?
+    }
+
+    end
+  end
+end

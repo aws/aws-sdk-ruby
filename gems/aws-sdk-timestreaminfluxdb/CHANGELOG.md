@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.55.0 (2026-10-30)
+------------------
+
+* Feature - Add DeploymentConfiguration field to CreateDbCluster and UpdateDbCluster APIs to support creation of heterogenous InfluxDB v3 Enterprise clusters.
+
 1.54.0 (2026-10-29)
 ------------------
 

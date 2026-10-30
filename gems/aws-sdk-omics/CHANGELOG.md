@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.87.0 (2026-10-30)
+------------------
+
+* Feature - Adds the outputUriPrefixMode parameter to StartRun and GetRun. You can now write run outputs directly under outputUri, without the prefixes the service adds by default. When you opt in, outputs overwrite existing objects at the same keys.
+
 1.86.0 (2026-10-29)
 ------------------
 

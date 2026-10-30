@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.116.0 (2026-10-30)
+------------------
+
+* Feature - Amazon DocumentDB now returns ServerlessV2PlatformVersion in DBCluster API responses and adds the DescribeServerlessV2PlatformVersions API to discover available platform versions and their capabilities.
+
 1.115.0 (2026-10-29)
 ------------------
 

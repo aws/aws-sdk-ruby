@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.407.0 (2026-10-30)
+------------------
+
+* Feature - Create endpoints with AcceleratorPartitionLayouts on ProductionVariant and deploy inference components with AcceleratorPartitionType in ComputeResourceRequirements to divide accelerators into hardware-isolated NVIDIA MIG partitions, running multiple models per GPU. P4d, P5, G7, G7e.
+
 1.406.0 (2026-10-29)
 ------------------
 

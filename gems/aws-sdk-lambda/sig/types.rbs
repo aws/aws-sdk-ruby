@@ -1997,6 +1997,7 @@ module Aws::Lambda
     class SelfManagedKafkaEventSourceConfig
       attr_accessor consumer_group_id: ::String
       attr_accessor schema_registry_config: Types::KafkaSchemaRegistryConfig
+      attr_accessor consumption_mode: ("Stream" | "Queue")
       SENSITIVE: []
     end
 

@@ -250,12 +250,17 @@ module Aws
                                   ) -> _CreateScheduledQueryResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduledQueryResponseSuccess
 
+      interface _DeleteAccountPolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteAccountPolicyResponse]
+        def dry_run_result: () -> Types::DryRunResult
+      end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_account_policy-instance_method
       def delete_account_policy: (
                                    policy_name: ::String,
-                                   policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
-                                 ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
-                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                   policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY" | "RETENTION_POLICY"),
+                                   ?dry_run: bool
+                                 ) -> _DeleteAccountPolicyResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteAccountPolicyResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#delete_data_protection_policy-instance_method
       def delete_data_protection_policy: (
@@ -404,7 +409,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#describe_account_policies-instance_method
       def describe_account_policies: (
-                                       policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY"),
+                                       policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY" | "RETENTION_POLICY"),
                                        ?policy_name: ::String,
                                        ?account_identifiers: Array[::String],
                                        ?next_token: ::String
@@ -1129,14 +1134,16 @@ module Aws
       interface _PutAccountPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::PutAccountPolicyResponse]
         def account_policy: () -> Types::AccountPolicy
+        def dry_run_result: () -> Types::DryRunResult
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#put_account_policy-instance_method
       def put_account_policy: (
                                 policy_name: ::String,
                                 policy_document: ::String,
-                                policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY"),
+                                policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY" | "RETENTION_POLICY"),
                                 ?scope: ("ALL"),
-                                ?selection_criteria: ::String
+                                ?selection_criteria: ::String,
+                                ?dry_run: bool
                               ) -> _PutAccountPolicyResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutAccountPolicyResponseSuccess
 

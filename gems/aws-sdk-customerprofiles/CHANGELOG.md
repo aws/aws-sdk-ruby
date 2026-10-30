@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.102.0 (2026-10-30)
+------------------
+
+* Feature - Adds support for template ingestion controls in the GetProfileObjectTypeTemplate API response.
+
 1.101.0 (2026-10-29)
 ------------------
 

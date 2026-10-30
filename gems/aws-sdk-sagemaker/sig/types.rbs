@@ -271,6 +271,11 @@ module Aws::SageMaker
       SENSITIVE: []
     end
 
+    class AcceleratorPartitionLayout
+      attr_accessor accelerator_partition_types: ::Array[::String]
+      SENSITIVE: []
+    end
+
     class ActionSource
       attr_accessor source_uri: ::String
       attr_accessor source_type: ::String
@@ -6683,6 +6688,7 @@ module Aws::SageMaker
       attr_accessor number_of_accelerator_devices_required: ::Float
       attr_accessor min_memory_required_in_mb: ::Integer
       attr_accessor max_memory_required_in_mb: ::Integer
+      attr_accessor accelerator_partition_type: ::String
       SENSITIVE: []
     end
 
@@ -9978,6 +9984,7 @@ module Aws::SageMaker
       attr_accessor desired_serverless_config: Types::ProductionVariantServerlessConfig
       attr_accessor managed_instance_scaling: Types::ProductionVariantManagedInstanceScaling
       attr_accessor routing_config: Types::ProductionVariantRoutingConfig
+      attr_accessor accelerator_partition_layouts: ::Array[Types::AcceleratorPartitionLayout]
       SENSITIVE: []
     end
 
@@ -10294,6 +10301,7 @@ module Aws::SageMaker
       attr_accessor routing_config: Types::ProductionVariantRoutingConfig
       attr_accessor inference_ami_version: ("al2-ami-sagemaker-inference-gpu-2" | "al2-ami-sagemaker-inference-gpu-2-1" | "al2-ami-sagemaker-inference-gpu-3-1" | "al2-ami-sagemaker-inference-neuron-2" | "al2023-ami-sagemaker-inference-gpu-4-1")
       attr_accessor capacity_reservation_config: Types::ProductionVariantCapacityReservationConfig
+      attr_accessor accelerator_partition_layouts: ::Array[Types::AcceleratorPartitionLayout]
       SENSITIVE: []
     end
 
@@ -10374,6 +10382,7 @@ module Aws::SageMaker
       attr_accessor managed_instance_scaling: Types::ProductionVariantManagedInstanceScaling
       attr_accessor routing_config: Types::ProductionVariantRoutingConfig
       attr_accessor capacity_reservation_config: Types::ProductionVariantCapacityReservationSummary
+      attr_accessor accelerator_partition_layouts: ::Array[Types::AcceleratorPartitionLayout]
       SENSITIVE: []
     end
 
