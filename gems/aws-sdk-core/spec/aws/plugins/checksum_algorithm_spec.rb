@@ -214,6 +214,23 @@ module Aws
           expect(resp.context.http_request.headers['x-amz-checksum-crc32']).to eq(original_checksum)
         end
 
+        it 'computes the checksum of a multi-chunk body with a single read buffer' do
+          stub_const('Aws::Plugins::ChecksumAlgorithm::CHECKSUM_CHUNK_SIZE', 4)
+          payload = 'hello world'
+          io = StringIO.new(payload)
+          buffers = []
+          allow(io).to receive(:read).and_wrap_original do |read, length, buffer|
+            buffers << buffer
+            read.call(length, buffer)
+          end
+
+          resp = client.http_checksum_operation(body: io)
+          expected = Base64.strict_encode64([Zlib.crc32(payload)].pack('N'))
+          expect(resp.context.http_request.headers['x-amz-checksum-crc32']).to eq(expected)
+          expect(buffers.first).to be_a(String)
+          expect(buffers.uniq(&:object_id).size).to eq(1)
+        end
+
         file = File.expand_path('checksum_request.json', __dir__)
         test_cases = JSON.load_file(file)
 

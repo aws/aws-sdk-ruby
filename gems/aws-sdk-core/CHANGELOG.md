@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Reuse a single read buffer when computing request checksums in a header.
+
 3.263.0 (2026-10-29)
 ------------------
 

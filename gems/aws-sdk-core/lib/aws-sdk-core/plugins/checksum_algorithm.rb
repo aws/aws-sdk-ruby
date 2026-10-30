@@ -376,12 +376,8 @@ module Aws
         end
 
         def update_in_chunks(digest, io)
-          loop do
-            chunk = io.read(CHECKSUM_CHUNK_SIZE)
-            break unless chunk
-
-            digest.update(chunk)
-          end
+          chunk = ''.b
+          digest.update(chunk) while io.read(CHECKSUM_CHUNK_SIZE, chunk)
           io.rewind
         end
 
