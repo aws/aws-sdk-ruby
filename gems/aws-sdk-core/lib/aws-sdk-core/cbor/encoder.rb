@@ -198,11 +198,10 @@ module Aws
         @buffer << value
       end
 
-      # Encodings that need no transcoding before writing a CBOR text string.
-      UTF8_COMPATIBLE = [Encoding::UTF_8, Encoding::US_ASCII].freeze
-
       def add_string(value)
-        value = value.encode(Encoding::UTF_8) unless UTF8_COMPATIBLE.include?(value.encoding)
+        # UTF-8 and ASCII-only strings already have their UTF-8 bytes; anything else is
+        # transcoded, which raises for invalid bytes as before.
+        value = value.encode(Encoding::UTF_8) unless value.encoding == Encoding::UTF_8 || value.ascii_only?
         head(MAJOR_TYPE_STR, value.bytesize)
         # ASCII-only strings append to the BINARY buffer as is; others need a binary copy,
         # or Ruby raises Encoding::CompatibilityError.

@@ -131,6 +131,17 @@ module Aws
           expect(encoder.bytes.encoding).to eq(Encoding::BINARY)
           expect(value.encoding).to eq(Encoding::UTF_8)
         end
+
+        it 'transcodes ASCII-only strings in other encodings to the same bytes' do
+          expect(hex(['abc'.encode('US-ASCII'), 'abc'.encode('UTF-16LE')])).to eq('826361626363616263')
+        end
+
+        it 'raises for strings that cannot be transcoded to UTF-8' do
+          expect { Encoder.new.add("a\xffb".dup.force_encoding('US-ASCII')) }
+            .to raise_error(Encoding::InvalidByteSequenceError)
+          expect { Encoder.new.add("a\x81b".dup.force_encoding('Windows-1252')) }
+            .to raise_error(Encoding::UndefinedConversionError)
+        end
       end
     end
   end

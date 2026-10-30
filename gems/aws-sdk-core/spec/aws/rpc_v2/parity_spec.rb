@@ -71,6 +71,14 @@ module Aws
               l: %w[a b], m: { 'k' => 'v' }, u: { a: 'x' }, child: { s: 'nested' }, renamed: 'w' }
           },
           'Symbol and BINARY String for a string member' => -> { { s: :sym, child: { s: "\xff".b } } },
+          'non-UTF-8 strings with invalid bytes' => lambda {
+            { s: "a\xffb".dup.force_encoding('US-ASCII'), l: ['abc'.encode('UTF-16LE')],
+              m: { "caf\xe9".dup.force_encoding('ISO-8859-1') => 'v' } }
+          },
+          'valid non-UTF-8 strings' => lambda {
+            { s: 'abc'.encode('US-ASCII'), l: ['abc'.encode('UTF-16LE'), 'é'.encode('UTF-16BE')],
+              m: { 'k'.encode('ISO-8859-1') => 'v'.encode('Shift_JIS') } }
+          },
           'Integer for a float member, Float for an integer member' => -> { { f: 1, i: 2.5 } },
           'String for an integer member, BigDecimal for a float member' => -> { { i: '3', f: BigDecimal('1.25') } },
           'non-boolean for a boolean member, Integer for a timestamp member' => -> { { b: 'yes', t: 5 } },
