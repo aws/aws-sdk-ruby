@@ -16,7 +16,8 @@ permissions:
 
 jobs:
   benchmark:
-    runs-on: ubuntu-latest
+    # ruby/setup-ruby has no Ruby < 3.2 for ubuntu-26.04, which ubuntu-latest now points to
+    runs-on: ${{ matrix.ruby < 3.2 && 'ubuntu-24.04' || 'ubuntu-latest' }}
     env:
       GH_EVENT: ${{github.event_name}}
       GH_REF: ${{github.head_ref}}
