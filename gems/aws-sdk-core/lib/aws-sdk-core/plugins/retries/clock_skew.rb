@@ -39,7 +39,7 @@ module Aws
 
         # Whether a response indicates skew large enough to warrant a retry; records nothing.
         # @param context [Seahorse::Client::RequestContext]
-        # @param sent_at [Time, nil] raw (pre-skew) send time, for the midpoint calculation
+        # @param sent_at [Time, nil] raw (pre-skew) send time, to discard slow requests
         def clock_skewed?(context, sent_at = nil)
           candidate = candidate_skew(context, sent_at)
           !!candidate && candidate.abs > CLOCK_SKEW_THRESHOLD
@@ -47,7 +47,7 @@ module Aws
 
         # Called on every response; records the skew candidate when one can be computed.
         # @param context [Seahorse::Client::RequestContext]
-        # @param sent_at [Time, nil] raw (pre-skew) send time, for the midpoint calculation
+        # @param sent_at [Time, nil] raw (pre-skew) send time, to discard slow requests
         def update_clock_correction(context, sent_at = nil)
           candidate = candidate_skew(context, sent_at)
           return if candidate.nil?
@@ -71,26 +71,38 @@ module Aws
           end
         end
 
+        # Called at the start of every attempt. Records the raw client time at
+        # which the attempt's response headers arrive, before the body is read.
+        # Retries reuse the same response, so the listener is added only once.
+        # @param context [Seahorse::Client::RequestContext]
+        def track_response_received_at(context)
+          context.metadata.delete(:clock_skew_response_received_at)
+          return unless context.retries.zero?
+
+          context.http_response.on_headers do
+            context.metadata[:clock_skew_response_received_at] = Time.now.utc
+          end
+        end
+
         private
 
         # Single source of truth for skew computation; returns a Float skew or nil.
+        # The candidate is the server Date minus the time the response headers were
+        # received (the current time if that was not recorded).
         # @param context [Seahorse::Client::RequestContext]
-        # @param sent_at [Time, nil] raw (pre-skew) send time; midpoint when present, else server - now
+        # @param sent_at [Time, nil] raw (pre-skew) send time; used only to discard slow requests
         # @return [Float, nil]
         def candidate_skew(context, sent_at = nil)
           response = context.http_response
           server_time = server_time(response)
           # No candidate if the Date header is absent/unparseable or the response was cached.
           return nil if server_time.nil? || response.headers['age']
-          return server_time - Time.now.utc unless sent_at
 
-          received_at = Time.now.utc
-          elapsed = received_at - sent_at
+          received_at = context.metadata[:clock_skew_response_received_at] || Time.now.utc
           # Discard if the request was too slow for the measurement to be trusted.
-          return nil if elapsed > MAX_TRUSTED_REQUEST_DURATION
+          return nil if sent_at && received_at - sent_at > MAX_TRUSTED_REQUEST_DURATION
 
-          # Midpoint formula (NTP clock offset, RFC 5905 section 8).
-          server_time - (sent_at + (elapsed / 2.0))
+          server_time - received_at
         end
 
         ##

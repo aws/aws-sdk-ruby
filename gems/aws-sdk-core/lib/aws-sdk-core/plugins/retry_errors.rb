@@ -294,6 +294,7 @@ module Aws
         def call(context)
           context.metadata[:retries] ||= {}
           config = context.config
+          config.clock_skew.track_response_received_at(context)
 
           get_send_token(config)
           add_retry_headers(context)
@@ -492,6 +493,7 @@ module Aws
       class LegacyHandler < Seahorse::Client::Handler
 
         def call(context)
+          context.config.clock_skew.track_response_received_at(context)
           response = with_metric { @handler.call(context) }
           if response.error
             error_inspector = Retries::ErrorInspector.new(

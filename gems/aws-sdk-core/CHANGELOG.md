@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Issue - Compute clock skew corrections from the time response headers are received instead of the request round-trip midpoint, so long-running requests no longer record server processing time as clock skew.
+
 3.263.0 (2026-10-29)
 ------------------
 

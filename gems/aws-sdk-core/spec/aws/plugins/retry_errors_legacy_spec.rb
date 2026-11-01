@@ -225,6 +225,22 @@ module Aws
         expect(resp.context.retries).to eq(1)
       end
 
+      it 'detects clock skew from the time the response headers arrived' do
+        t = Time.utc(2026, 1, 1)
+        resp.error = RetryErrorsSvc::Errors::RequestTimeTooSkewed.new(nil, nil)
+        handle do |context|
+          # server - headers received = 248s (above the 4 minute threshold);
+          # server - body done = 230s (below it).
+          allow(Time).to receive(:now).and_return((t + 2).getlocal)
+          context.http_response.signal_headers(403, 'date' => (t + 250).httpdate)
+          allow(Time).to receive(:now).and_return((t + 20).getlocal)
+          context.http_response.signal_done
+          resp
+        end
+        expect(resp.context.retries).to eq(3)
+        expect(resp.context.http_response.instance_variable_get(:@listeners)[:headers].size).to eq(1)
+      end
+
       it 'retries if endpoint discovery error is detected' do
         config.api.endpoint_operation = :describe_endpoints
         DescribeEndpointsRequest = Seahorse::Model::Shapes::StructureShape.new(

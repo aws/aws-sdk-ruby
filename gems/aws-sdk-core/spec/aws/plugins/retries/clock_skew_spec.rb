@@ -10,18 +10,17 @@ module Aws
       # @param endpoint [URI, String] the endpoint the request points at
       # @param server_time [String, nil] the timestamp returned by the server
       def build_context(endpoint, server_time)
-        response = double('response', headers: { 'date' => server_time })
-        request  = double('request', endpoint: endpoint)
-
-        double('context', http_response: response, http_request: request)
+        build_context_with_headers(endpoint, 'date' => server_time)
       end
 
-      # Builds a context whose response carries arbitrary headers (e.g. 'age').
-      def build_context_with_headers(endpoint, headers)
+      # Builds a context whose response carries arbitrary headers (e.g. 'age')
+      # and, optionally, the time the response headers were received.
+      def build_context_with_headers(endpoint, headers, received_at = nil)
         response = double('response', headers: headers)
         request  = double('request', endpoint: endpoint)
+        metadata = { clock_skew_response_received_at: received_at }
 
-        double('context', http_response: response, http_request: request)
+        double('context', http_response: response, http_request: request, metadata: metadata)
       end
 
       subject { Retries::ClockSkew.new }
@@ -391,20 +390,129 @@ module Aws
         end
       end
 
-      describe 'candidate skew (midpoint + guards)' do
+      describe 'candidate skew (server Date - response headers received time)' do
+        let(:t) { Time.utc(2026, 1, 1) }
+
+        # Records one response and returns the stored correction.
+        def correction_for(date:, received_at:, sent_at: t, endpoint: 'https://example.com')
+          headers = date ? { 'date' => date.httpdate } : {}
+          ctx = build_context_with_headers(endpoint, headers, received_at)
+          subject.update_clock_correction(ctx, sent_at)
+          subject.clock_correction(endpoint)
+        end
+
+        it 'is 0 when the clocks agree' do
+          expect(correction_for(date: t + 2, received_at: t + 2)).to eq(0)
+        end
+
+        it 'is positive when the server clock is ahead' do
+          expect(correction_for(date: t + 3602, received_at: t + 2)).to eq(3600)
+        end
+
+        it 'is negative when the server clock is behind' do
+          expect(correction_for(date: t - 3598, received_at: t + 2)).to eq(-3600)
+        end
+
+        it 'is 0 for a 620s request when the clocks agree (midpoint would give +310s)' do
+          expect(correction_for(date: t + 620, received_at: t + 620)).to eq(0)
+        end
+
+        it 'is +600s for a 620s request when the server clock is 10 minutes ahead' do
+          expect(correction_for(date: t + 1220, received_at: t + 620)).to eq(600)
+        end
+
+        it 'attributes response latency to skew' do
+          expect(correction_for(date: t + 1, received_at: t + 2)).to eq(-1)
+        end
+
+        it 'keeps a round trip of exactly 900s' do
+          expect(correction_for(date: t + 4500, received_at: t + 900)).to eq(3600)
+        end
+
+        it 'discards a round trip of 901s' do
+          expect(correction_for(date: t + 4501, received_at: t + 901)).to eq(0)
+        end
+
+        it 'discards a response without a Date header' do
+          expect(correction_for(date: nil, received_at: t + 2)).to eq(0)
+        end
+
+        it 'discards a cached response with an Age header' do
+          ctx = build_context_with_headers(
+            endpoint, { 'date' => (t + 3602).httpdate, 'age' => '30' }, t + 2
+          )
+          subject.update_clock_correction(ctx, t)
+          expect(subject.clock_correction(endpoint)).to eq(0)
+          expect(subject.clock_skewed?(ctx, t)).to be false
+        end
+
+        it 'uses the headers received time, not the current time' do
+          # The body finished 10 seconds after the headers arrived.
+          allow(Time).to receive(:now).and_return((t + 12).getlocal)
+          expect(correction_for(date: t + 3602, received_at: t + 2)).to eq(3600)
+        end
+
+        it 'uses the headers received time for the max trusted duration check' do
+          # Headers at 899s are trusted even though the body finished after 901s.
+          allow(Time).to receive(:now).and_return((t + 901).getlocal)
+          expect(correction_for(date: t + 899, received_at: t + 899)).to eq(0)
+          expect(correction_for(date: t + 4499, received_at: t + 899)).to eq(3600)
+        end
+
+        it 'uses the headers received time for clock_skewed?' do
+          allow(Time).to receive(:now).and_return((t + 1000).getlocal)
+          # server - headers received = 241s; server - now would be -757s.
+          above = build_context_with_headers(endpoint, { 'date' => (t + 243).httpdate }, t + 2)
+          below = build_context_with_headers(endpoint, { 'date' => (t + 241).httpdate }, t + 2)
+          expect(subject.clock_skewed?(above, t)).to be true
+          expect(subject.clock_skewed?(below, t)).to be false
+        end
+
+        it 'records the correction per endpoint' do
+          expect(correction_for(date: t + 3602, received_at: t + 2, endpoint: 'https://a.example.com')).to eq(3600)
+          expect(correction_for(date: t + 2, received_at: t + 2, endpoint: 'https://b.example.com')).to eq(0)
+          expect(subject.clock_correction('https://a.example.com')).to eq(3600)
+        end
+      end
+
+      describe '#track_response_received_at' do
+        let(:t) { Time.utc(2026, 1, 1) }
+        let(:http_response) { Seahorse::Client::Http::Response.new }
+        let(:ctx) { Seahorse::Client::RequestContext.new(http_response: http_response) }
+
+        it 'records the raw time the response headers arrive' do
+          subject.track_response_received_at(ctx)
+          expect(ctx.metadata[:clock_skew_response_received_at]).to be_nil
+
+          allow(Time).to receive(:now).and_return((t + 2).getlocal)
+          http_response.signal_headers(200, 'date' => (t + 3602).httpdate)
+          allow(Time).to receive(:now).and_return((t + 10).getlocal)
+          http_response.signal_data('body')
+          http_response.signal_done
+
+          expect(ctx.metadata[:clock_skew_response_received_at]).to eq(t + 2)
+          expect(ctx.metadata[:clock_skew_response_received_at]).to be_utc
+        end
+
+        it 'clears the previous attempt time and adds the listener only once' do
+          subject.track_response_received_at(ctx)
+          http_response.signal_headers(200, {})
+          expect(ctx.metadata[:clock_skew_response_received_at]).not_to be_nil
+
+          ctx.retries += 1
+          http_response.reset
+          subject.track_response_received_at(ctx)
+          expect(ctx.metadata[:clock_skew_response_received_at]).to be_nil
+          expect(http_response.instance_variable_get(:@listeners)[:headers].size).to eq(1)
+
+          allow(Time).to receive(:now).and_return((t + 5).getlocal)
+          http_response.signal_headers(200, {})
+          expect(ctx.metadata[:clock_skew_response_received_at]).to eq(t + 5)
+        end
+      end
+
+      describe 'candidate skew (guards)' do
         describe '#update_clock_correction with a send time' do
-          it 'uses the midpoint formula to discount network transit' do
-            sent_at = Time.now.utc
-            # server generated its Date 100s ahead of the client, response takes 10s
-            server_time = (sent_at + 100).httpdate
-            ctx = build_context_with_headers(endpoint, 'date' => server_time)
-            allow(Time).to receive(:now).and_return(sent_at.getlocal + 10)
-
-            subject.update_clock_correction(ctx, sent_at)
-            # midpoint = sent_at + 5s, so skew ~= 100 - 5 = 95s
-            expect(subject.clock_correction(endpoint)).to be_within(1).of(95)
-          end
-
           it 'discards the candidate when elapsed exceeds the max trusted duration' do
             sent_at = Time.now.utc
             server_time = (sent_at + 100).httpdate
@@ -461,8 +569,8 @@ module Aws
           end
         end
 
-        describe 'legacy fallback (no send time)' do
-          it 'computes skew as server_time - now' do
+        describe 'no headers received time recorded' do
+          it 'falls back to server_time - now' do
             server_time = (Time.now.utc + 1000).to_s
             ctx = build_context_with_headers(endpoint, 'date' => server_time)
             subject.update_clock_correction(ctx)
