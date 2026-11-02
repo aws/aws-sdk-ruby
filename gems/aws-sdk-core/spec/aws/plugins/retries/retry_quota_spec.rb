@@ -17,66 +17,37 @@ module Aws
         end
       end
 
-      context 'new retries' do
-        before { allow(RetryErrors).to receive(:new_retries?).and_return(true) }
+      describe '#checkout_capacity' do
+        let(:error) { double('ErrorInspector', throttling_error?: false) }
 
-        describe '#checkout_capacity' do
-          let(:error) { double('ErrorInspector', throttling_error?: false) }
+        it 'returns the requested capacity when available' do
+          initial_capacity = retry_quota.instance_variable_get(:@available_capacity)
 
-          it 'returns the requested capacity when available' do
-            initial_capacity = retry_quota.instance_variable_get(:@available_capacity)
+          checked_out_capacity = retry_quota.checkout_capacity(error)
+          expect(checked_out_capacity).to eq(Retries::RetryQuota::RETRY_COST)
 
-            checked_out_capacity = retry_quota.checkout_capacity(error)
-            expect(checked_out_capacity).to eq(Retries::RetryQuota::RETRY_COST)
-
-            expect(retry_quota.instance_variable_get(:@available_capacity))
-              .to eq(initial_capacity - checked_out_capacity)
-          end
-
-          it 'checks out the throttling cost when the error is a throttling error' do
-            error = double('ErrorInspector', throttling_error?: true)
-
-            checked_out_capacity = retry_quota.checkout_capacity(error)
-            expect(checked_out_capacity).to eq(Retries::RetryQuota::THROTTLING_RETRY_COST)
-          end
-
-          it 'returns 0 when there is insufficient capacity' do
-            retry_quota.instance_variable_set(:@available_capacity, 1)
-
-            expect(retry_quota.checkout_capacity(error)).to eq(0)
-          end
+          expect(retry_quota.instance_variable_get(:@available_capacity))
+            .to eq(initial_capacity - checked_out_capacity)
         end
-      end
 
-      # TODO: Remove this context when new retries become default
-      context 'old retries' do
-        before { allow(RetryErrors).to receive(:new_retries?).and_return(false) }
+        it 'checks out the throttling cost when the error is a throttling error' do
+          error = double('ErrorInspector', throttling_error?: true)
 
-        describe '#checkout_capacity' do
-          let(:error) { double('ErrorInspector', networking?: false) }
+          checked_out_capacity = retry_quota.checkout_capacity(error)
+          expect(checked_out_capacity).to eq(Retries::RetryQuota::THROTTLING_RETRY_COST)
+        end
 
-          it 'returns the requested capacity when available' do
-            initial_capacity = retry_quota.instance_variable_get(:@available_capacity)
+        it 'checks out RETRY_COST for a networking (timeout) error' do
+          error = double('ErrorInspector', throttling_error?: false, networking?: true)
 
-            checked_out_capacity = retry_quota.checkout_capacity(error)
-            expect(checked_out_capacity).to eq(Retries::RetryQuota::LEGACY_RETRY_COST)
+          checked_out_capacity = retry_quota.checkout_capacity(error)
+          expect(checked_out_capacity).to eq(Retries::RetryQuota::RETRY_COST)
+        end
 
-            expect(retry_quota.instance_variable_get(:@available_capacity))
-              .to eq(initial_capacity - checked_out_capacity)
-          end
+        it 'returns 0 when there is insufficient capacity' do
+          retry_quota.instance_variable_set(:@available_capacity, 1)
 
-          it 'checks out the timeout cost when the error is a networking error' do
-            error = double('ErrorInspector', networking?: true)
-
-            checked_out_capacity = retry_quota.checkout_capacity(error)
-            expect(checked_out_capacity).to eq(Retries::RetryQuota::TIMEOUT_RETRY_COST)
-          end
-
-          it 'returns 0 when there is insufficient capacity' do
-            retry_quota.instance_variable_set(:@available_capacity, 1)
-
-            expect(retry_quota.checkout_capacity(error)).to eq(0)
-          end
+          expect(retry_quota.checkout_capacity(error)).to eq(0)
         end
       end
 

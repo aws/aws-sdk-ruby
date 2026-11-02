@@ -9,10 +9,8 @@ module Aws
       class RetryQuota
         INITIAL_RETRY_TOKENS = 500
         RETRY_COST = 14
-        LEGACY_RETRY_COST = 5 # TODO: Remove when new retries become default
         NO_RETRY_INCREMENT = 1
         THROTTLING_RETRY_COST = 5
-        TIMEOUT_RETRY_COST = 10 # TODO: Remove when new retries become default
 
         def initialize(opts = {})
           @mutex              = Mutex.new
@@ -26,12 +24,8 @@ module Aws
         # @return [Integer] The amount of capacity checked out
         def checkout_capacity(error_inspector)
           @mutex.synchronize do
-            # TODO: Remove gate and keep only the new_retries branch
-            capacity_amount = if RetryErrors.new_retries?
-                                error_inspector.throttling_error? ? THROTTLING_RETRY_COST : RETRY_COST
-                              else
-                                error_inspector.networking? ? TIMEOUT_RETRY_COST : LEGACY_RETRY_COST
-                              end
+            capacity_amount =
+              error_inspector.throttling_error? ? THROTTLING_RETRY_COST : RETRY_COST
 
             # unable to acquire capacity
             return 0 if capacity_amount > @available_capacity
@@ -43,7 +37,7 @@ module Aws
 
         # capacity_amount refers to the amount of capacity requested from
         # the last retry. It can either be RETRY_COST,
-        # THROTTLING_RETRY_COST/TIMEOUT_RETRY_COST, or unset.
+        # THROTTLING_RETRY_COST, or unset.
         def release(capacity_amount)
           # Implementation note:  The release() method is called for
           # every API call.  In the common case where the request is
