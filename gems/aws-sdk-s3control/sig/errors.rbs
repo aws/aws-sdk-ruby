@@ -11,38 +11,38 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def message: () -> ::String
       end
-      class BucketAlreadyExists < ::Aws::Errors::ServiceError
+      class BucketAlreadyExists < ServiceError
       end
-      class BucketAlreadyOwnedByYou < ::Aws::Errors::ServiceError
+      class BucketAlreadyOwnedByYou < ServiceError
       end
-      class IdempotencyException < ::Aws::Errors::ServiceError
+      class IdempotencyException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
         def message: () -> ::String
       end
-      class JobStatusException < ::Aws::Errors::ServiceError
+      class JobStatusException < ServiceError
         def message: () -> ::String
       end
-      class NoSuchPublicAccessBlockConfiguration < ::Aws::Errors::ServiceError
+      class NoSuchPublicAccessBlockConfiguration < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def message: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
       end
     end

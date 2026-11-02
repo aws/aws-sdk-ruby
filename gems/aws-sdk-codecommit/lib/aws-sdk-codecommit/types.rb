@@ -806,8 +806,8 @@ module Aws::CodeCommit
     end
 
     # Cannot create the branch with the specified name because the commit
-    # conflicts with an existing branch with the same name. Branch names
-    # must be unique.
+    # conflicts with an existing branch with the same name.      Branch
+    # names must be unique.</p>
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/BranchNameExistsException AWS API Documentation
     #
@@ -1636,8 +1636,8 @@ module Aws::CodeCommit
     #   Services account. Repository names are limited to 100 alphanumeric,
     #   dash, and underscore characters, and cannot include certain
     #   characters. For more information about the limits on repository
-    #   names, see [Quotas][1] in the *CodeCommit User Guide*. The suffix
-    #   .git is prohibited.
+    #   names, see [Quotas][1] in the <i> CodeCommit User Guide</i>. The
+    #   suffix .git is prohibited.
     #
     #    </note>
     #
@@ -1667,8 +1667,8 @@ module Aws::CodeCommit
     #   The ID of the encryption key. You can view the ID of an encryption
     #   key in the KMS console, or use the KMS APIs to programmatically
     #   retrieve a key ID. For more information about acceptable values for
-    #   kmsKeyID, see [KeyId][1] in the Decrypt API description in the *Key
-    #   Management Service API Reference*.
+    #   kmsKeyID, see [KeyId][1] in the Decrypt API description in the <i>
+    #   Key Management Service API Reference</i>.
     #
     #   If no key is specified, the default `aws/codecommit` Amazon Web
     #   Services managed key is used.
@@ -2650,7 +2650,7 @@ module Aws::CodeCommit
 
     # The specified file exceeds the file size limit for CodeCommit. For
     # more information about limits in CodeCommit, see [Quotas][1] in the
-    # *CodeCommit User Guide*.
+    # <i> CodeCommit User Guide</i>.
     #
     #
     #
@@ -3812,8 +3812,8 @@ module Aws::CodeCommit
 
     # The description for the approval rule template is not valid because it
     # exceeds the maximum characters allowed for a description. For more
-    # information about limits in CodeCommit, see [Quotas][1] in the
-    # *CodeCommit User Guide*.
+    # information about limits in CodeCommit, see [Quotas][1] in the <i>
+    # CodeCommit User Guide</i>.
     #
     #
     #
@@ -3825,8 +3825,8 @@ module Aws::CodeCommit
 
     # The name of the approval rule template is not valid. Template names
     # must be between 1 and 100 valid characters in length. For more
-    # information about limits in CodeCommit, see [Quotas][1] in the
-    # *CodeCommit User Guide*.
+    # information about limits in CodeCommit, see [Quotas][1] in the <i>
+    # CodeCommit User Guide</i>.
     #
     #
     #
@@ -4050,7 +4050,7 @@ module Aws::CodeCommit
     class InvalidReactionUserArnException < Aws::EmptyStructure; end
 
     # The value of the reaction is not valid. For more information, see the
-    # [CodeCommit User Guide][1].
+    # [ CodeCommit User Guide][1].
     #
     #
     #
@@ -4156,7 +4156,7 @@ module Aws::CodeCommit
     class InvalidRepositoryTriggerRegionException < Aws::EmptyStructure; end
 
     # The value for the resource ARN is not valid. For more information
-    # about resources in CodeCommit, see [CodeCommit Resources and
+    # about resources in CodeCommit, see [ CodeCommit Resources and
     # Operations][1] in the CodeCommit User Guide.
     #
     #
@@ -6080,7 +6080,7 @@ module Aws::CodeCommit
     #   The emoji reaction you want to add or update. To remove a reaction,
     #   provide a value of blank or null. You can also provide the value of
     #   none. For information about emoji reaction values supported in
-    #   CodeCommit, see the [CodeCommit User Guide][1].
+    #   CodeCommit, see the [ CodeCommit User Guide][1].
     #
     #
     #
@@ -6560,10 +6560,8 @@ module Aws::CodeCommit
     # @!attribute [rw] events
     #   The repository events that cause the trigger to run actions in
     #   another service, such as sending a notification through Amazon SNS.
-    #
-    #   <note markdown="1"> The valid value "all" cannot be used with any other values.
-    #
-    #    </note>
+    #   </p> <note> <p>The valid value "all" cannot be used with any other
+    #   values.</p> </note>
     #   @return [Array<String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codecommit-2015-04-13/RepositoryTrigger AWS API Documentation
@@ -6631,8 +6629,8 @@ module Aws::CodeCommit
     class RepositoryTriggersListRequiredException < Aws::EmptyStructure; end
 
     # A valid Amazon Resource Name (ARN) for an CodeCommit resource is
-    # required. For a list of valid resources in CodeCommit, see [CodeCommit
-    # Resources and Operations][1] in the CodeCommit User Guide.
+    # required. For a list of valid resources in CodeCommit, see [
+    # CodeCommit Resources and Operations][1] in the CodeCommit User Guide.
     #
     #
     #
@@ -7326,8 +7324,8 @@ module Aws::CodeCommit
     #   The ID of the encryption key. You can view the ID of an encryption
     #   key in the KMS console, or use the KMS APIs to programmatically
     #   retrieve a key ID. For more information about acceptable values for
-    #   keyID, see [KeyId][1] in the Decrypt API description in the *Key
-    #   Management Service API Reference*.
+    #   keyID, see [KeyId][1] in the Decrypt API description in the <i> Key
+    #   Management Service API Reference</i>.
     #
     #
     #

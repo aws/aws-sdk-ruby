@@ -11,31 +11,31 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class BadGatewayException < ::Aws::Errors::ServiceError
+      class BadGatewayException < ServiceError
         def message: () -> ::String
       end
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class ForbiddenException < ::Aws::Errors::ServiceError
+      class ForbiddenException < ServiceError
         def message: () -> ::String
       end
-      class GatewayTimeoutException < ::Aws::Errors::ServiceError
+      class GatewayTimeoutException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerErrorException < ::Aws::Errors::ServiceError
+      class InternalServerErrorException < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def message: () -> ::String
       end
-      class UnprocessableEntityException < ::Aws::Errors::ServiceError
+      class UnprocessableEntityException < ServiceError
         def element_path: () -> ::String
         def error_message: () -> ::String
       end

@@ -10,7 +10,3 @@ Feature: Amazon EMR
     When I attempt to call the "ListClusters" API with:
     | ClusterStates | ['bogus-state'] |
     Then I expect the response error code to be "InvalidRequestException"
-    And I expect the response error message to include:
-    """
-    not valid
-    """

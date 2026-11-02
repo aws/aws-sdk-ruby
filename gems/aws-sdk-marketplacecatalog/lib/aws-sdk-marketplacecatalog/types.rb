@@ -1373,6 +1373,17 @@ module Aws::MarketplaceCatalog
     #   An object that contains summary information about the offer set.
     #   @return [Types::OfferSetSummary]
     #
+    # @!attribute [rw] express_private_offer_configuration_summary
+    #   An object that contains summary information about the express
+    #   private offer configuration.
+    #   @return [Types::ExpressPrivateOfferConfigurationSummary]
+    #
+    # @!attribute [rw] subsidiary_authorization_summary
+    #   An object that contains summary information about the subsidiary
+    #   authorization, such as its status and authorized resource, when the
+    #   entity type is `SubsidiaryAuthorization`.
+    #   @return [Types::SubsidiaryAuthorizationSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntitySummary AWS API Documentation
     #
     class EntitySummary < Struct.new(
@@ -1389,7 +1400,9 @@ module Aws::MarketplaceCatalog
       :offer_summary,
       :resale_authorization_summary,
       :machine_learning_product_summary,
-      :offer_set_summary)
+      :offer_set_summary,
+      :express_private_offer_configuration_summary,
+      :subsidiary_authorization_summary)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1432,6 +1445,14 @@ module Aws::MarketplaceCatalog
     #   A filter for offer sets.
     #   @return [Types::OfferSetFilters]
     #
+    # @!attribute [rw] express_private_offer_configuration_filters
+    #   A filter for express private offer configurations.
+    #   @return [Types::ExpressPrivateOfferConfigurationFilters]
+    #
+    # @!attribute [rw] subsidiary_authorization_filters
+    #   A filter for subsidiary authorizations.
+    #   @return [Types::SubsidiaryAuthorizationFilters]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityTypeFilters AWS API Documentation
     #
     class EntityTypeFilters < Struct.new(
@@ -1443,6 +1464,8 @@ module Aws::MarketplaceCatalog
       :resale_authorization_filters,
       :machine_learning_product_filters,
       :offer_set_filters,
+      :express_private_offer_configuration_filters,
+      :subsidiary_authorization_filters,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1456,6 +1479,8 @@ module Aws::MarketplaceCatalog
       class ResaleAuthorizationFilters < EntityTypeFilters; end
       class MachineLearningProductFilters < EntityTypeFilters; end
       class OfferSetFilters < EntityTypeFilters; end
+      class ExpressPrivateOfferConfigurationFilters < EntityTypeFilters; end
+      class SubsidiaryAuthorizationFilters < EntityTypeFilters; end
       class Unknown < EntityTypeFilters; end
     end
 
@@ -1495,6 +1520,14 @@ module Aws::MarketplaceCatalog
     #   A sort for offer sets.
     #   @return [Types::OfferSetSort]
     #
+    # @!attribute [rw] express_private_offer_configuration_sort
+    #   A sort for express private offer configurations.
+    #   @return [Types::ExpressPrivateOfferConfigurationSort]
+    #
+    # @!attribute [rw] subsidiary_authorization_sort
+    #   A sort for subsidiary authorizations.
+    #   @return [Types::SubsidiaryAuthorizationSort]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/EntityTypeSort AWS API Documentation
     #
     class EntityTypeSort < Struct.new(
@@ -1506,6 +1539,8 @@ module Aws::MarketplaceCatalog
       :resale_authorization_sort,
       :machine_learning_product_sort,
       :offer_set_sort,
+      :express_private_offer_configuration_sort,
+      :subsidiary_authorization_sort,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1519,6 +1554,8 @@ module Aws::MarketplaceCatalog
       class ResaleAuthorizationSort < EntityTypeSort; end
       class MachineLearningProductSort < EntityTypeSort; end
       class OfferSetSort < EntityTypeSort; end
+      class ExpressPrivateOfferConfigurationSort < EntityTypeSort; end
+      class SubsidiaryAuthorizationSort < EntityTypeSort; end
       class Unknown < EntityTypeSort; end
     end
 
@@ -1558,6 +1595,129 @@ module Aws::MarketplaceCatalog
     class ErrorScope < Struct.new(
       :name,
       :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the `EntityId` of an express private offer
+    # configuration.
+    #
+    # @!attribute [rw] value_list
+    #   A list of `EntityId` values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationEntityIdFilter AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationEntityIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter fields for the express private offer configuration entity.
+    #
+    # @!attribute [rw] entity_id
+    #   You can filter on the `EntityId` of an express private offer
+    #   configuration.
+    #   @return [Types::ExpressPrivateOfferConfigurationEntityIdFilter]
+    #
+    # @!attribute [rw] product_id
+    #   You can filter on the `ProductId` of an express private offer
+    #   configuration.
+    #   @return [Types::ExpressPrivateOfferConfigurationProductIdFilter]
+    #
+    # @!attribute [rw] state
+    #   The state of the express private offer configuration to filter on.
+    #   Valid values are the following:
+    #
+    #   * `ACTIVE` – The configuration is active and you can use it to
+    #     generate offers.
+    #
+    #   * `INACTIVE` – The configuration is deprecated or deleted.
+    #   @return [Types::ExpressPrivateOfferConfigurationStateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationFilters AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationFilters < Struct.new(
+      :entity_id,
+      :product_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the `ProductId` of an express private offer
+    # configuration.
+    #
+    # @!attribute [rw] value_list
+    #   A list of `ProductId` values to filter on.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationProductIdFilter AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationProductIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The sort fields for express private offer configurations.
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort by. Valid values are `EntityId`,
+    #   `LastModifiedDate`, `ProductId`, and `State`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sorting order. Valid values are `ASCENDING` and `DESCENDING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationSort AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationSort < Struct.new(
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the `State` of an express private offer configuration.
+    #
+    # @!attribute [rw] value_list
+    #   A list of `State` values to filter on. Valid values are `ACTIVE` and
+    #   `INACTIVE`.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationStateFilter AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationStateFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summarized information about an express private offer configuration.
+    #
+    # @!attribute [rw] product_id
+    #   The product ID associated with the express private offer
+    #   configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the express private offer configuration. Valid values
+    #   are the following:
+    #
+    #   * `ACTIVE` – The configuration is active and you can use it to
+    #     generate offers.
+    #
+    #   * `INACTIVE` – The configuration is deprecated or deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/ExpressPrivateOfferConfigurationSummary AWS API Documentation
+    #
+    class ExpressPrivateOfferConfigurationSummary < Struct.new(
+      :product_id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1833,7 +1993,8 @@ module Aws::MarketplaceCatalog
     #   The type of entities to retrieve. Valid values are: `AmiProduct`,
     #   `ContainerProduct`, `DataProduct`, `SaaSProduct`,
     #   `ProcurementPolicy`, `Experience`, `Audience`, `BrandingSettings`,
-    #   `Offer`, `OfferSet`, `Seller`, `ResaleAuthorization`, `Solution`.
+    #   `Offer`, `OfferSet`, `Seller`, `ResaleAuthorization`, `Solution`,
+    #   `SubsidiaryAuthorization`.
     #   @return [String]
     #
     # @!attribute [rw] filter_list
@@ -3682,6 +3843,340 @@ module Aws::MarketplaceCatalog
     class StartChangeSetResponse < Struct.new(
       :change_set_id,
       :change_set_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the date a subsidiary authorization was created.
+    #
+    # @!attribute [rw] date_range
+    #   A date range to filter by. The operation returns subsidiary
+    #   authorizations with creation dates that fall within this range.
+    #   @return [Types::SubsidiaryAuthorizationCreatedDateFilterDateRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationCreatedDateFilter AWS API Documentation
+    #
+    class SubsidiaryAuthorizationCreatedDateFilter < Struct.new(
+      :date_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A date range for filtering subsidiary authorizations by creation date.
+    #
+    # @!attribute [rw] after_value
+    #   The start date (inclusive) of the date range. The operation returns
+    #   subsidiary authorizations created on or after this date.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_value
+    #   The end date (inclusive) of the date range. The operation returns
+    #   subsidiary authorizations created on or before this date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationCreatedDateFilterDateRange AWS API Documentation
+    #
+    class SubsidiaryAuthorizationCreatedDateFilterDateRange < Struct.new(
+      :after_value,
+      :before_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for subsidiary authorization entity IDs. Each ID begins
+    # with `subauthz-` followed by 13 alphanumeric characters.
+    #
+    # @!attribute [rw] value_list
+    #   A list of entity IDs to filter by. The operation returns subsidiary
+    #   authorizations with an entity ID that matches any value in this
+    #   list. You can include up to 10 entity IDs in this list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationEntityIdFilter AWS API Documentation
+    #
+    class SubsidiaryAuthorizationEntityIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filters that you can use with the `ListEntities` operation to
+    # filter subsidiary authorizations. You can filter by `EntityId`,
+    # `Status`, `ResourceId`, `ResourceName`, `Name`, `SubsidiaryAccountId`,
+    # `CreatedDate`, and `LastModifiedDate`. You can add only one wildcard
+    # filter in a single `ListEntities` request.
+    #
+    # @!attribute [rw] entity_id
+    #   A filter that matches subsidiary authorizations by entity ID.
+    #   @return [Types::SubsidiaryAuthorizationEntityIdFilter]
+    #
+    # @!attribute [rw] status
+    #   A filter that matches subsidiary authorizations by status.
+    #   @return [Types::SubsidiaryAuthorizationStatusFilter]
+    #
+    # @!attribute [rw] resource_id
+    #   A filter that matches subsidiary authorizations by the ID of the
+    #   authorized resource.
+    #   @return [Types::SubsidiaryAuthorizationResourceIdFilter]
+    #
+    # @!attribute [rw] resource_name
+    #   A filter that matches subsidiary authorizations by the name of the
+    #   authorized resource.
+    #   @return [Types::SubsidiaryAuthorizationResourceNameFilter]
+    #
+    # @!attribute [rw] name
+    #   A filter that matches subsidiary authorizations by name.
+    #   @return [Types::SubsidiaryAuthorizationNameFilter]
+    #
+    # @!attribute [rw] subsidiary_account_id
+    #   A filter that matches subsidiary authorizations by the AWS account
+    #   ID of the subsidiary account.
+    #   @return [Types::SubsidiaryAuthorizationSubsidiaryAccountIdFilter]
+    #
+    # @!attribute [rw] created_date
+    #   A filter that matches subsidiary authorizations by creation date.
+    #   @return [Types::SubsidiaryAuthorizationCreatedDateFilter]
+    #
+    # @!attribute [rw] last_modified_date
+    #   A filter that matches subsidiary authorizations by last modified
+    #   date.
+    #   @return [Types::SubsidiaryAuthorizationLastModifiedDateFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationFilters AWS API Documentation
+    #
+    class SubsidiaryAuthorizationFilters < Struct.new(
+      :entity_id,
+      :status,
+      :resource_id,
+      :resource_name,
+      :name,
+      :subsidiary_account_id,
+      :created_date,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the date a subsidiary authorization was last modified.
+    #
+    # @!attribute [rw] date_range
+    #   A date range to filter by. The operation returns subsidiary
+    #   authorizations with last modified dates that fall within this range.
+    #   @return [Types::SubsidiaryAuthorizationLastModifiedDateFilterDateRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationLastModifiedDateFilter AWS API Documentation
+    #
+    class SubsidiaryAuthorizationLastModifiedDateFilter < Struct.new(
+      :date_range)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A date range for filtering subsidiary authorizations by last modified
+    # date.
+    #
+    # @!attribute [rw] after_value
+    #   The start date (inclusive) of the date range. The operation returns
+    #   subsidiary authorizations last modified on or after this date.
+    #   @return [String]
+    #
+    # @!attribute [rw] before_value
+    #   The end date (inclusive) of the date range. The operation returns
+    #   subsidiary authorizations last modified on or before this date.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationLastModifiedDateFilterDateRange AWS API Documentation
+    #
+    class SubsidiaryAuthorizationLastModifiedDateFilterDateRange < Struct.new(
+      :after_value,
+      :before_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for subsidiary authorization names.
+    #
+    # @!attribute [rw] value_list
+    #   A list of names to filter by. The operation returns subsidiary
+    #   authorizations with a name that matches any value in this list. You
+    #   can include up to 10 names in this list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] wild_card_value
+    #   A partial name to filter by. The operation returns subsidiary
+    #   authorizations whose name contains this value. The value must be at
+    #   least 3 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationNameFilter AWS API Documentation
+    #
+    class SubsidiaryAuthorizationNameFilter < Struct.new(
+      :value_list,
+      :wild_card_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the IDs of resources that subsidiary authorizations
+    # apply to.
+    #
+    # @!attribute [rw] value_list
+    #   A list of resource IDs to filter by. The operation returns
+    #   subsidiary authorizations for resources with an ID that matches any
+    #   value in this list. You can include up to 10 resource IDs in this
+    #   list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationResourceIdFilter AWS API Documentation
+    #
+    class SubsidiaryAuthorizationResourceIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the names of resources that subsidiary authorizations
+    # apply to.
+    #
+    # @!attribute [rw] value_list
+    #   A list of resource names to filter by. The operation returns
+    #   subsidiary authorizations for resources with a name that matches any
+    #   value in this list. You can include up to 10 resource names in this
+    #   list.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] wild_card_value
+    #   A partial resource name to filter by. The operation returns
+    #   subsidiary authorizations for resources whose name contains this
+    #   value. The value must be at least 3 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationResourceNameFilter AWS API Documentation
+    #
+    class SubsidiaryAuthorizationResourceNameFilter < Struct.new(
+      :value_list,
+      :wild_card_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the field to sort subsidiary authorizations by and the order
+    # (ascending or descending) to apply.
+    #
+    # @!attribute [rw] sort_by
+    #   The field to sort subsidiary authorizations by. Valid values are
+    #   `EntityId`, `Status`, `ResourceId`, `SubsidiaryAccountId`,
+    #   `CreatedDate`, and `LastModifiedDate`.
+    #   @return [String]
+    #
+    # @!attribute [rw] sort_order
+    #   The sorting order. Can be `ASCENDING` or `DESCENDING`. The default
+    #   value is `DESCENDING`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationSort AWS API Documentation
+    #
+    class SubsidiaryAuthorizationSort < Struct.new(
+      :sort_by,
+      :sort_order)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for subsidiary authorization statuses.
+    #
+    # @!attribute [rw] value_list
+    #   A list of statuses to filter by. The operation returns subsidiary
+    #   authorizations with a status that matches a value in this list.
+    #   Valid values are:
+    #
+    #   * `Draft` - The subsidiary authorization was created but not yet
+    #     released. The subsidiary account can't see it.
+    #
+    #   * `Active` - The subsidiary account can use the subsidiary
+    #     authorization to create offers for the authorized product.
+    #
+    #   * `Restricted` - The subsidiary authorization was discarded while in
+    #     `Draft` or revoked while `Active`. It can't be used to create new
+    #     offers. This status is final.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationStatusFilter AWS API Documentation
+    #
+    class SubsidiaryAuthorizationStatusFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The filter for the AWS account IDs of subsidiary accounts.
+    #
+    # @!attribute [rw] value_list
+    #   A list of AWS account IDs to filter by. The operation returns
+    #   subsidiary authorizations whose subsidiary account ID matches any
+    #   value in this list. You can include up to 10 account IDs in this
+    #   list.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationSubsidiaryAccountIdFilter AWS API Documentation
+    #
+    class SubsidiaryAuthorizationSubsidiaryAccountIdFilter < Struct.new(
+      :value_list)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An object that contains summary information about a subsidiary
+    # authorization, including its name, status, authorized resource,
+    # subsidiary account, and creation date. A subsidiary authorization lets
+    # a seller authorize one of its subsidiary accounts to create offers for
+    # one of its products.
+    #
+    # @!attribute [rw] name
+    #   The name of the subsidiary authorization.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the subsidiary authorization. Valid values are:
+    #
+    #   * `Draft` - The subsidiary authorization was created but not yet
+    #     released. The subsidiary account can't see it.
+    #
+    #   * `Active` - The subsidiary account can use the subsidiary
+    #     authorization to create offers for the authorized product.
+    #
+    #   * `Restricted` - The subsidiary authorization was discarded while in
+    #     `Draft` or revoked while `Active`. It can't be used to create new
+    #     offers. This status is final.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that the subsidiary authorization applies to.
+    #   Currently, this is always a product ID, such as `prod-example123`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_name
+    #   The name of the resource that the subsidiary authorization applies
+    #   to. Currently, this is always a product name.
+    #   @return [String]
+    #
+    # @!attribute [rw] subsidiary_account_id
+    #   The 12-digit AWS account ID of the subsidiary account.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_date
+    #   The date the subsidiary authorization was created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/marketplace-catalog-2018-09-17/SubsidiaryAuthorizationSummary AWS API Documentation
+    #
+    class SubsidiaryAuthorizationSummary < Struct.new(
+      :name,
+      :status,
+      :resource_id,
+      :resource_name,
+      :subsidiary_account_id,
+      :created_date)
       SENSITIVE = []
       include Aws::Structure
     end

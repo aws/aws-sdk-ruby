@@ -95,6 +95,7 @@ module Aws::CloudWatchLogs
     Days = Shapes::IntegerShape.new(name: 'Days')
     DefaultValue = Shapes::FloatShape.new(name: 'DefaultValue')
     DeleteAccountPolicyRequest = Shapes::StructureShape.new(name: 'DeleteAccountPolicyRequest')
+    DeleteAccountPolicyResponse = Shapes::StructureShape.new(name: 'DeleteAccountPolicyResponse')
     DeleteDataProtectionPolicyRequest = Shapes::StructureShape.new(name: 'DeleteDataProtectionPolicyRequest')
     DeleteDeliveryDestinationPolicyRequest = Shapes::StructureShape.new(name: 'DeleteDeliveryDestinationPolicyRequest')
     DeleteDeliveryDestinationRequest = Shapes::StructureShape.new(name: 'DeleteDeliveryDestinationRequest')
@@ -128,6 +129,7 @@ module Aws::CloudWatchLogs
     DeliveryDestination = Shapes::StructureShape.new(name: 'DeliveryDestination')
     DeliveryDestinationConfiguration = Shapes::StructureShape.new(name: 'DeliveryDestinationConfiguration')
     DeliveryDestinationName = Shapes::StringShape.new(name: 'DeliveryDestinationName')
+    DeliveryDestinationNames = Shapes::ListShape.new(name: 'DeliveryDestinationNames')
     DeliveryDestinationPolicy = Shapes::StringShape.new(name: 'DeliveryDestinationPolicy')
     DeliveryDestinationType = Shapes::StringShape.new(name: 'DeliveryDestinationType')
     DeliveryDestinationTypes = Shapes::ListShape.new(name: 'DeliveryDestinationTypes')
@@ -144,6 +146,7 @@ module Aws::CloudWatchLogs
     DeliverySourceConfigurationSupportedValues = Shapes::ListShape.new(name: 'DeliverySourceConfigurationSupportedValues')
     DeliverySourceConfigurationValue = Shapes::StringShape.new(name: 'DeliverySourceConfigurationValue')
     DeliverySourceName = Shapes::StringShape.new(name: 'DeliverySourceName')
+    DeliverySourceNames = Shapes::ListShape.new(name: 'DeliverySourceNames')
     DeliverySourceStatus = Shapes::StringShape.new(name: 'DeliverySourceStatus')
     DeliverySourceStatusReason = Shapes::StringShape.new(name: 'DeliverySourceStatusReason')
     DeliverySources = Shapes::ListShape.new(name: 'DeliverySources')
@@ -209,6 +212,9 @@ module Aws::CloudWatchLogs
     DisassociateSourceFromS3TableIntegrationRequest = Shapes::StructureShape.new(name: 'DisassociateSourceFromS3TableIntegrationRequest')
     DisassociateSourceFromS3TableIntegrationResponse = Shapes::StructureShape.new(name: 'DisassociateSourceFromS3TableIntegrationResponse')
     Distribution = Shapes::StringShape.new(name: 'Distribution')
+    DryRun = Shapes::BooleanShape.new(name: 'DryRun')
+    DryRunCount = Shapes::IntegerShape.new(name: 'DryRunCount')
+    DryRunResult = Shapes::StructureShape.new(name: 'DryRunResult')
     DynamicTokenPosition = Shapes::IntegerShape.new(name: 'DynamicTokenPosition')
     EmitSystemFields = Shapes::ListShape.new(name: 'EmitSystemFields')
     EncryptionKey = Shapes::StringShape.new(name: 'EncryptionKey')
@@ -259,6 +265,7 @@ module Aws::CloudWatchLogs
     FilterLogEventsResponse = Shapes::StructureShape.new(name: 'FilterLogEventsResponse')
     FilterName = Shapes::StringShape.new(name: 'FilterName')
     FilterPattern = Shapes::StringShape.new(name: 'FilterPattern')
+    FilterResourceArns = Shapes::ListShape.new(name: 'FilterResourceArns')
     FilteredLogEvent = Shapes::StructureShape.new(name: 'FilteredLogEvent')
     FilteredLogEvents = Shapes::ListShape.new(name: 'FilteredLogEvents')
     Flatten = Shapes::BooleanShape.new(name: 'Flatten')
@@ -409,6 +416,8 @@ module Aws::CloudWatchLogs
     LogGroupFieldList = Shapes::ListShape.new(name: 'LogGroupFieldList')
     LogGroupIdentifier = Shapes::StringShape.new(name: 'LogGroupIdentifier')
     LogGroupIdentifiers = Shapes::ListShape.new(name: 'LogGroupIdentifiers')
+    LogGroupImpact = Shapes::StructureShape.new(name: 'LogGroupImpact')
+    LogGroupImpacts = Shapes::ListShape.new(name: 'LogGroupImpacts')
     LogGroupName = Shapes::StringShape.new(name: 'LogGroupName')
     LogGroupNamePattern = Shapes::StringShape.new(name: 'LogGroupNamePattern')
     LogGroupNameRegexPattern = Shapes::StringShape.new(name: 'LogGroupNameRegexPattern')
@@ -577,6 +586,7 @@ module Aws::CloudWatchLogs
     ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
     ResultField = Shapes::StructureShape.new(name: 'ResultField')
     ResultRows = Shapes::ListShape.new(name: 'ResultRows')
+    RetentionValue = Shapes::StringShape.new(name: 'RetentionValue')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
     S3Configuration = Shapes::StructureShape.new(name: 'S3Configuration')
     S3DeliveryConfiguration = Shapes::StructureShape.new(name: 'S3DeliveryConfiguration')
@@ -966,7 +976,11 @@ module Aws::CloudWatchLogs
 
     DeleteAccountPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "policyName"))
     DeleteAccountPolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
+    DeleteAccountPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "dryRun"))
     DeleteAccountPolicyRequest.struct_class = Types::DeleteAccountPolicyRequest
+
+    DeleteAccountPolicyResponse.add_member(:dry_run_result, Shapes::ShapeRef.new(shape: DryRunResult, location_name: "dryRunResult"))
+    DeleteAccountPolicyResponse.struct_class = Types::DeleteAccountPolicyResponse
 
     DeleteDataProtectionPolicyRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
     DeleteDataProtectionPolicyRequest.struct_class = Types::DeleteDataProtectionPolicyRequest
@@ -1074,6 +1088,8 @@ module Aws::CloudWatchLogs
     DeliveryDestinationConfiguration.add_member(:destination_resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "destinationResourceArn"))
     DeliveryDestinationConfiguration.struct_class = Types::DeliveryDestinationConfiguration
 
+    DeliveryDestinationNames.member = Shapes::ShapeRef.new(shape: DeliveryDestinationName)
+
     DeliveryDestinationTypes.member = Shapes::ShapeRef.new(shape: DeliveryDestinationType)
 
     DeliveryDestinations.member = Shapes::ShapeRef.new(shape: DeliveryDestination)
@@ -1104,6 +1120,8 @@ module Aws::CloudWatchLogs
 
     DeliverySourceConfigurationSupportedValues.member = Shapes::ShapeRef.new(shape: DeliverySourceConfigurationSchemaField)
 
+    DeliverySourceNames.member = Shapes::ShapeRef.new(shape: DeliverySourceName)
+
     DeliverySources.member = Shapes::ShapeRef.new(shape: DeliverySource)
 
     DescribeAccountPoliciesRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
@@ -1130,6 +1148,7 @@ module Aws::CloudWatchLogs
 
     DescribeDeliveriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeDeliveriesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeDeliveriesRequest.add_member(:delivery_source_names, Shapes::ShapeRef.new(shape: DeliverySourceNames, location_name: "deliverySourceNames"))
     DescribeDeliveriesRequest.struct_class = Types::DescribeDeliveriesRequest
 
     DescribeDeliveriesResponse.add_member(:deliveries, Shapes::ShapeRef.new(shape: Deliveries, location_name: "deliveries"))
@@ -1138,6 +1157,7 @@ module Aws::CloudWatchLogs
 
     DescribeDeliveryDestinationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeDeliveryDestinationsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeDeliveryDestinationsRequest.add_member(:names, Shapes::ShapeRef.new(shape: DeliveryDestinationNames, location_name: "names"))
     DescribeDeliveryDestinationsRequest.struct_class = Types::DescribeDeliveryDestinationsRequest
 
     DescribeDeliveryDestinationsResponse.add_member(:delivery_destinations, Shapes::ShapeRef.new(shape: DeliveryDestinations, location_name: "deliveryDestinations"))
@@ -1146,6 +1166,7 @@ module Aws::CloudWatchLogs
 
     DescribeDeliverySourcesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     DescribeDeliverySourcesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeLimit, location_name: "limit"))
+    DescribeDeliverySourcesRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: FilterResourceArns, location_name: "resourceArns"))
     DescribeDeliverySourcesRequest.struct_class = Types::DescribeDeliverySourcesRequest
 
     DescribeDeliverySourcesResponse.add_member(:delivery_sources, Shapes::ShapeRef.new(shape: DeliverySources, location_name: "deliverySources"))
@@ -1333,6 +1354,14 @@ module Aws::CloudWatchLogs
     DisassociateSourceFromS3TableIntegrationResponse.add_member(:identifier, Shapes::ShapeRef.new(shape: S3TableIntegrationSourceIdentifier, location_name: "identifier"))
     DisassociateSourceFromS3TableIntegrationResponse.struct_class = Types::DisassociateSourceFromS3TableIntegrationResponse
 
+    DryRunResult.add_member(:total_matched_log_groups, Shapes::ShapeRef.new(shape: DryRunCount, location_name: "totalMatchedLogGroups"))
+    DryRunResult.add_member(:increased_retention_log_group_count, Shapes::ShapeRef.new(shape: DryRunCount, location_name: "increasedRetentionLogGroupCount"))
+    DryRunResult.add_member(:decreased_retention_log_group_count, Shapes::ShapeRef.new(shape: DryRunCount, location_name: "decreasedRetentionLogGroupCount"))
+    DryRunResult.add_member(:unchanged_retention_log_group_count, Shapes::ShapeRef.new(shape: DryRunCount, location_name: "unchangedRetentionLogGroupCount"))
+    DryRunResult.add_member(:failed_analysis_count, Shapes::ShapeRef.new(shape: DryRunCount, location_name: "failedAnalysisCount"))
+    DryRunResult.add_member(:top_log_groups_impacted, Shapes::ShapeRef.new(shape: LogGroupImpacts, location_name: "topLogGroupsImpacted"))
+    DryRunResult.struct_class = Types::DryRunResult
+
     EmitSystemFields.member = Shapes::ShapeRef.new(shape: SystemField)
 
     Entity.add_member(:key_attributes, Shapes::ShapeRef.new(shape: EntityKeyAttributes, location_name: "keyAttributes"))
@@ -1408,6 +1437,8 @@ module Aws::CloudWatchLogs
     FilterLogEventsResponse.add_member(:searched_log_streams, Shapes::ShapeRef.new(shape: SearchedLogStreams, location_name: "searchedLogStreams"))
     FilterLogEventsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     FilterLogEventsResponse.struct_class = Types::FilterLogEventsResponse
+
+    FilterResourceArns.member = Shapes::ShapeRef.new(shape: Arn)
 
     FilteredLogEvent.add_member(:log_stream_name, Shapes::ShapeRef.new(shape: LogStreamName, location_name: "logStreamName"))
     FilteredLogEvent.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "timestamp"))
@@ -1857,6 +1888,7 @@ module Aws::CloudWatchLogs
     LogGroup.add_member(:log_group_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "logGroupArn"))
     LogGroup.add_member(:deletion_protection_enabled, Shapes::ShapeRef.new(shape: DeletionProtectionEnabled, location_name: "deletionProtectionEnabled"))
     LogGroup.add_member(:bearer_token_authentication_enabled, Shapes::ShapeRef.new(shape: BearerTokenAuthenticationEnabled, location_name: "bearerTokenAuthenticationEnabled"))
+    LogGroup.add_member(:retention_policy_name, Shapes::ShapeRef.new(shape: PolicyName, location_name: "retentionPolicyName"))
     LogGroup.struct_class = Types::LogGroup
 
     LogGroupArnList.member = Shapes::ShapeRef.new(shape: LogGroupArn)
@@ -1868,6 +1900,14 @@ module Aws::CloudWatchLogs
     LogGroupFieldList.member = Shapes::ShapeRef.new(shape: LogGroupField)
 
     LogGroupIdentifiers.member = Shapes::ShapeRef.new(shape: LogGroupIdentifier)
+
+    LogGroupImpact.add_member(:log_group_name, Shapes::ShapeRef.new(shape: LogGroupName, location_name: "logGroupName"))
+    LogGroupImpact.add_member(:current_retention, Shapes::ShapeRef.new(shape: RetentionValue, location_name: "currentRetention"))
+    LogGroupImpact.add_member(:proposed_retention, Shapes::ShapeRef.new(shape: RetentionValue, location_name: "proposedRetention"))
+    LogGroupImpact.add_member(:stored_bytes, Shapes::ShapeRef.new(shape: StoredBytes, location_name: "storedBytes"))
+    LogGroupImpact.struct_class = Types::LogGroupImpact
+
+    LogGroupImpacts.member = Shapes::ShapeRef.new(shape: LogGroupImpact)
 
     LogGroupNames.member = Shapes::ShapeRef.new(shape: LogGroupName)
 
@@ -2112,9 +2152,11 @@ module Aws::CloudWatchLogs
     PutAccountPolicyRequest.add_member(:policy_type, Shapes::ShapeRef.new(shape: PolicyType, required: true, location_name: "policyType"))
     PutAccountPolicyRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
     PutAccountPolicyRequest.add_member(:selection_criteria, Shapes::ShapeRef.new(shape: SelectionCriteria, location_name: "selectionCriteria"))
+    PutAccountPolicyRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: DryRun, location_name: "dryRun"))
     PutAccountPolicyRequest.struct_class = Types::PutAccountPolicyRequest
 
     PutAccountPolicyResponse.add_member(:account_policy, Shapes::ShapeRef.new(shape: AccountPolicy, location_name: "accountPolicy"))
+    PutAccountPolicyResponse.add_member(:dry_run_result, Shapes::ShapeRef.new(shape: DryRunResult, location_name: "dryRunResult"))
     PutAccountPolicyResponse.struct_class = Types::PutAccountPolicyResponse
 
     PutBearerTokenAuthenticationRequest.add_member(:log_group_identifier, Shapes::ShapeRef.new(shape: LogGroupIdentifier, required: true, location_name: "logGroupIdentifier"))
@@ -2868,7 +2910,7 @@ module Aws::CloudWatchLogs
         o.http_method = "POST"
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DeleteAccountPolicyRequest)
-        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: DeleteAccountPolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)

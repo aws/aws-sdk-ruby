@@ -11,27 +11,27 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RestApiClientException < ::Aws::Errors::ServiceError
+      class RestApiClientException < ServiceError
         def rest_api_status_code: () -> ::String
         def rest_api_response: () -> ::String
       end
-      class RestApiServerException < ::Aws::Errors::ServiceError
+      class RestApiServerException < ServiceError
         def rest_api_status_code: () -> ::String
         def rest_api_response: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
     end

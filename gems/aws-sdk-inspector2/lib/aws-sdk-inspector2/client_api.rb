@@ -34,8 +34,18 @@ module Aws::Inspector2
     AggregationType = Shapes::StringShape.new(name: 'AggregationType')
     AmiAggregation = Shapes::StructureShape.new(name: 'AmiAggregation')
     AmiAggregationResponse = Shapes::StructureShape.new(name: 'AmiAggregationResponse')
+    AmiConfiguration = Shapes::StructureShape.new(name: 'AmiConfiguration')
+    AmiConfigurationState = Shapes::StructureShape.new(name: 'AmiConfigurationState')
+    AmiConfigurationStatus = Shapes::StringShape.new(name: 'AmiConfigurationStatus')
     AmiId = Shapes::StringShape.new(name: 'AmiId')
+    AmiScanDuration = Shapes::StringShape.new(name: 'AmiScanDuration')
+    AmiScanMode = Shapes::StringShape.new(name: 'AmiScanMode')
+    AmiScanModeConfiguration = Shapes::StructureShape.new(name: 'AmiScanModeConfiguration')
     AmiSortBy = Shapes::StringShape.new(name: 'AmiSortBy')
+    AmiTagFilter = Shapes::StructureShape.new(name: 'AmiTagFilter')
+    AmiTagFilterList = Shapes::ListShape.new(name: 'AmiTagFilterList')
+    AmiTagKey = Shapes::StringShape.new(name: 'AmiTagKey')
+    AmiTagValue = Shapes::StringShape.new(name: 'AmiTagValue')
     Architecture = Shapes::StringShape.new(name: 'Architecture')
     ArchitectureList = Shapes::ListShape.new(name: 'ArchitectureList')
     Arn = Shapes::StringShape.new(name: 'Arn')
@@ -457,6 +467,8 @@ module Aws::Inspector2
     GetFindingsReportStatusResponse = Shapes::StructureShape.new(name: 'GetFindingsReportStatusResponse')
     GetMemberRequest = Shapes::StructureShape.new(name: 'GetMemberRequest')
     GetMemberResponse = Shapes::StructureShape.new(name: 'GetMemberResponse')
+    GetOnDemandScanStatusRequest = Shapes::StructureShape.new(name: 'GetOnDemandScanStatusRequest')
+    GetOnDemandScanStatusResponse = Shapes::StructureShape.new(name: 'GetOnDemandScanStatusResponse')
     GetSbomExportRequest = Shapes::StructureShape.new(name: 'GetSbomExportRequest')
     GetSbomExportResponse = Shapes::StructureShape.new(name: 'GetSbomExportResponse')
     GitHubAuthCode = Shapes::StringShape.new(name: 'GitHubAuthCode')
@@ -548,6 +560,9 @@ module Aws::Inspector2
     ListMembersMaxResults = Shapes::IntegerShape.new(name: 'ListMembersMaxResults')
     ListMembersRequest = Shapes::StructureShape.new(name: 'ListMembersRequest')
     ListMembersResponse = Shapes::StructureShape.new(name: 'ListMembersResponse')
+    ListOnDemandScansRequest = Shapes::StructureShape.new(name: 'ListOnDemandScansRequest')
+    ListOnDemandScansRequestMaxResultsInteger = Shapes::IntegerShape.new(name: 'ListOnDemandScansRequestMaxResultsInteger')
+    ListOnDemandScansResponse = Shapes::StructureShape.new(name: 'ListOnDemandScansResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     ListUsageTotalsMaxResults = Shapes::IntegerShape.new(name: 'ListUsageTotalsMaxResults')
@@ -555,6 +570,11 @@ module Aws::Inspector2
     ListUsageTotalsRequest = Shapes::StructureShape.new(name: 'ListUsageTotalsRequest')
     ListUsageTotalsResponse = Shapes::StructureShape.new(name: 'ListUsageTotalsResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MachineImageDetails = Shapes::StructureShape.new(name: 'MachineImageDetails')
+    MachineImageDetailsMachineImageIdString = Shapes::StringShape.new(name: 'MachineImageDetailsMachineImageIdString')
+    MachineImageDetailsSourceResourceIdString = Shapes::StringShape.new(name: 'MachineImageDetailsSourceResourceIdString')
+    MachineImageMetadata = Shapes::StructureShape.new(name: 'MachineImageMetadata')
+    MachineImagePlatform = Shapes::StringShape.new(name: 'MachineImagePlatform')
     MapComparison = Shapes::StringShape.new(name: 'MapComparison')
     MapFilter = Shapes::StructureShape.new(name: 'MapFilter')
     MapFilterList = Shapes::ListShape.new(name: 'MapFilterList')
@@ -577,6 +597,12 @@ module Aws::Inspector2
     NonEmptyStringList = Shapes::ListShape.new(name: 'NonEmptyStringList')
     NumberFilter = Shapes::StructureShape.new(name: 'NumberFilter')
     NumberFilterList = Shapes::ListShape.new(name: 'NumberFilterList')
+    OnDemandResourceType = Shapes::StringShape.new(name: 'OnDemandResourceType')
+    OnDemandScan = Shapes::StructureShape.new(name: 'OnDemandScan')
+    OnDemandScanList = Shapes::ListShape.new(name: 'OnDemandScanList')
+    OnDemandScanNextToken = Shapes::StringShape.new(name: 'OnDemandScanNextToken')
+    OnDemandScanStatus = Shapes::StringShape.new(name: 'OnDemandScanStatus')
+    OnDemandScanStatusReason = Shapes::StringShape.new(name: 'OnDemandScanStatusReason')
     OneAccountIdFilterList = Shapes::ListShape.new(name: 'OneAccountIdFilterList')
     OneTimeSchedule = Shapes::StructureShape.new(name: 'OneTimeSchedule')
     Operation = Shapes::StringShape.new(name: 'Operation')
@@ -669,7 +695,10 @@ module Aws::Inspector2
     SbomReportFormat = Shapes::StringShape.new(name: 'SbomReportFormat')
     ScanConfigurationArn = Shapes::StringShape.new(name: 'ScanConfigurationArn')
     ScanConfigurationName = Shapes::StringShape.new(name: 'ScanConfigurationName')
+    ScanId = Shapes::StringShape.new(name: 'ScanId')
     ScanMode = Shapes::StringShape.new(name: 'ScanMode')
+    ScanSource = Shapes::StringShape.new(name: 'ScanSource')
+    ScanSourceList = Shapes::ListShape.new(name: 'ScanSourceList')
     ScanStatus = Shapes::StructureShape.new(name: 'ScanStatus')
     ScanStatusCode = Shapes::StringShape.new(name: 'ScanStatusCode')
     ScanStatusReason = Shapes::StringShape.new(name: 'ScanStatusReason')
@@ -711,6 +740,8 @@ module Aws::Inspector2
     StartCisSessionResponse = Shapes::StructureShape.new(name: 'StartCisSessionResponse')
     StartCodeSecurityScanRequest = Shapes::StructureShape.new(name: 'StartCodeSecurityScanRequest')
     StartCodeSecurityScanResponse = Shapes::StructureShape.new(name: 'StartCodeSecurityScanResponse')
+    StartOnDemandScanRequest = Shapes::StructureShape.new(name: 'StartOnDemandScanRequest')
+    StartOnDemandScanResponse = Shapes::StructureShape.new(name: 'StartOnDemandScanResponse')
     State = Shapes::StructureShape.new(name: 'State')
     Status = Shapes::StringShape.new(name: 'Status')
     StatusCounts = Shapes::StructureShape.new(name: 'StatusCounts')
@@ -947,6 +978,7 @@ module Aws::Inspector2
     AmiAggregation.add_member(:amis, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "amis"))
     AmiAggregation.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "sortOrder"))
     AmiAggregation.add_member(:sort_by, Shapes::ShapeRef.new(shape: AmiSortBy, location_name: "sortBy"))
+    AmiAggregation.add_member(:scan_sources, Shapes::ShapeRef.new(shape: ScanSourceList, location_name: "scanSources"))
     AmiAggregation.struct_class = Types::AmiAggregation
 
     AmiAggregationResponse.add_member(:ami, Shapes::ShapeRef.new(shape: AmiId, required: true, location_name: "ami"))
@@ -958,7 +990,32 @@ module Aws::Inspector2
     AmiAggregationResponse.add_member(:cloud_account_id, Shapes::ShapeRef.new(shape: ProviderAccountId, location_name: "cloudAccountId"))
     AmiAggregationResponse.add_member(:severity_counts, Shapes::ShapeRef.new(shape: SeverityCounts, location_name: "severityCounts"))
     AmiAggregationResponse.add_member(:affected_instances, Shapes::ShapeRef.new(shape: Long, location_name: "affectedInstances"))
+    AmiAggregationResponse.add_member(:scan_source, Shapes::ShapeRef.new(shape: ScanSource, location_name: "scanSource"))
     AmiAggregationResponse.struct_class = Types::AmiAggregationResponse
+
+    AmiConfiguration.add_member(:last_launched_within, Shapes::ShapeRef.new(shape: AmiScanDuration, location_name: "lastLaunchedWithin"))
+    AmiConfiguration.add_member(:created_within, Shapes::ShapeRef.new(shape: AmiScanDuration, location_name: "createdWithin"))
+    AmiConfiguration.add_member(:scan_mode_configuration, Shapes::ShapeRef.new(shape: AmiScanModeConfiguration, required: true, location_name: "scanModeConfiguration"))
+    AmiConfiguration.struct_class = Types::AmiConfiguration
+
+    AmiConfigurationState.add_member(:last_launched_within, Shapes::ShapeRef.new(shape: AmiScanDuration, location_name: "lastLaunchedWithin"))
+    AmiConfigurationState.add_member(:created_within, Shapes::ShapeRef.new(shape: AmiScanDuration, location_name: "createdWithin"))
+    AmiConfigurationState.add_member(:scan_mode_configuration, Shapes::ShapeRef.new(shape: AmiScanModeConfiguration, location_name: "scanModeConfiguration"))
+    AmiConfigurationState.add_member(:status, Shapes::ShapeRef.new(shape: AmiConfigurationStatus, location_name: "status"))
+    AmiConfigurationState.add_member(:updated_at, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "updatedAt"))
+    AmiConfigurationState.struct_class = Types::AmiConfigurationState
+
+    AmiScanModeConfiguration.add_member(:scan_mode, Shapes::ShapeRef.new(shape: AmiScanMode, required: true, location_name: "scanMode"))
+    AmiScanModeConfiguration.add_member(:tags, Shapes::ShapeRef.new(shape: AmiTagFilterList, location_name: "tags"))
+    AmiScanModeConfiguration.add_member(:exclude_copied_amis, Shapes::ShapeRef.new(shape: Boolean, location_name: "excludeCopiedAmis"))
+    AmiScanModeConfiguration.add_member(:exclude_backup_dlm_amis, Shapes::ShapeRef.new(shape: Boolean, location_name: "excludeBackupDlmAmis"))
+    AmiScanModeConfiguration.struct_class = Types::AmiScanModeConfiguration
+
+    AmiTagFilter.add_member(:key, Shapes::ShapeRef.new(shape: AmiTagKey, required: true, location_name: "key"))
+    AmiTagFilter.add_member(:value, Shapes::ShapeRef.new(shape: AmiTagValue, location_name: "value"))
+    AmiTagFilter.struct_class = Types::AmiTagFilter
+
+    AmiTagFilterList.member = Shapes::ShapeRef.new(shape: AmiTagFilter)
 
     ArchitectureList.member = Shapes::ShapeRef.new(shape: Architecture)
 
@@ -985,6 +1042,7 @@ module Aws::Inspector2
     AutoEnable.add_member(:lambda, Shapes::ShapeRef.new(shape: Boolean, location_name: "lambda"))
     AutoEnable.add_member(:lambda_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "lambdaCode"))
     AutoEnable.add_member(:code_repository, Shapes::ShapeRef.new(shape: Boolean, location_name: "codeRepository"))
+    AutoEnable.add_member(:ami, Shapes::ShapeRef.new(shape: Boolean, location_name: "ami"))
     AutoEnable.struct_class = Types::AutoEnable
 
     AwsConfigConnectorArnFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: AwsConfigConnectorArnComparison, required: true, location_name: "comparison"))
@@ -1625,6 +1683,7 @@ module Aws::Inspector2
     CoverageFilterCriteria.add_member(:lambda_function_name, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lambdaFunctionName"))
     CoverageFilterCriteria.add_member(:lambda_function_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "lambdaFunctionTags"))
     CoverageFilterCriteria.add_member(:lambda_function_runtime, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "lambdaFunctionRuntime"))
+    CoverageFilterCriteria.add_member(:machine_image_tags, Shapes::ShapeRef.new(shape: CoverageMapFilterList, location_name: "machineImageTags"))
     CoverageFilterCriteria.add_member(:last_scanned_at, Shapes::ShapeRef.new(shape: CoverageDateFilterList, location_name: "lastScannedAt"))
     CoverageFilterCriteria.add_member(:scan_mode, Shapes::ShapeRef.new(shape: CoverageStringFilterList, location_name: "scanMode"))
     CoverageFilterCriteria.add_member(:image_pulled_at, Shapes::ShapeRef.new(shape: CoverageDateFilterList, location_name: "imagePulledAt"))
@@ -1863,6 +1922,7 @@ module Aws::Inspector2
     Destination.add_member(:bucket_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "bucketName"))
     Destination.add_member(:key_prefix, Shapes::ShapeRef.new(shape: String, location_name: "keyPrefix"))
     Destination.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "kmsKeyArn"))
+    Destination.add_member(:expected_bucket_owner, Shapes::ShapeRef.new(shape: AccountId, location_name: "expectedBucketOwner"))
     Destination.struct_class = Types::Destination
 
     DetectionPlatforms.member = Shapes::ShapeRef.new(shape: NonEmptyString)
@@ -2078,6 +2138,10 @@ module Aws::Inspector2
     FilterCriteria.add_member(:epss_score, Shapes::ShapeRef.new(shape: NumberFilterList, location_name: "epssScore"))
     FilterCriteria.add_member(:code_repository_project_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeRepositoryProjectName"))
     FilterCriteria.add_member(:code_repository_provider_type, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "codeRepositoryProviderType"))
+    FilterCriteria.add_member(:machine_image_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "machineImageId"))
+    FilterCriteria.add_member(:machine_image_name, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "machineImageName"))
+    FilterCriteria.add_member(:machine_image_owner_account_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "machineImageOwnerAccountId"))
+    FilterCriteria.add_member(:machine_image_platform, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "machineImagePlatform"))
     FilterCriteria.add_member(:cloud_provider, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "cloudProvider"))
     FilterCriteria.add_member(:cloud_provider_region, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "cloudProviderRegion"))
     FilterCriteria.add_member(:cloud_provider_account_id, Shapes::ShapeRef.new(shape: StringFilterList, location_name: "cloudProviderAccountId"))
@@ -2267,6 +2331,7 @@ module Aws::Inspector2
 
     GetConfigurationResponse.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: EcrConfigurationState, location_name: "ecrConfiguration"))
     GetConfigurationResponse.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2ConfigurationState, location_name: "ec2Configuration"))
+    GetConfigurationResponse.add_member(:ami_configuration, Shapes::ShapeRef.new(shape: AmiConfigurationState, location_name: "amiConfiguration"))
     GetConfigurationResponse.struct_class = Types::GetConfigurationResponse
 
     GetDelegatedAdminAccountRequest.struct_class = Types::GetDelegatedAdminAccountRequest
@@ -2305,6 +2370,20 @@ module Aws::Inspector2
 
     GetMemberResponse.add_member(:member, Shapes::ShapeRef.new(shape: Member, location_name: "member"))
     GetMemberResponse.struct_class = Types::GetMemberResponse
+
+    GetOnDemandScanStatusRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
+    GetOnDemandScanStatusRequest.add_member(:scan_id, Shapes::ShapeRef.new(shape: ScanId, required: true, location_name: "scanId"))
+    GetOnDemandScanStatusRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: OnDemandResourceType, required: true, location_name: "resourceType"))
+    GetOnDemandScanStatusRequest.struct_class = Types::GetOnDemandScanStatusRequest
+
+    GetOnDemandScanStatusResponse.add_member(:scan_id, Shapes::ShapeRef.new(shape: ScanId, required: true, location_name: "scanId"))
+    GetOnDemandScanStatusResponse.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
+    GetOnDemandScanStatusResponse.add_member(:resource_type, Shapes::ShapeRef.new(shape: OnDemandResourceType, required: true, location_name: "resourceType"))
+    GetOnDemandScanStatusResponse.add_member(:scan_status, Shapes::ShapeRef.new(shape: OnDemandScanStatus, required: true, location_name: "scanStatus"))
+    GetOnDemandScanStatusResponse.add_member(:scan_status_reason, Shapes::ShapeRef.new(shape: OnDemandScanStatusReason, location_name: "scanStatusReason"))
+    GetOnDemandScanStatusResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startedAt"))
+    GetOnDemandScanStatusResponse.add_member(:completed_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "completedAt"))
+    GetOnDemandScanStatusResponse.struct_class = Types::GetOnDemandScanStatusResponse
 
     GetSbomExportRequest.add_member(:report_id, Shapes::ShapeRef.new(shape: ReportId, required: true, location_name: "reportId"))
     GetSbomExportRequest.struct_class = Types::GetSbomExportRequest
@@ -2599,6 +2678,16 @@ module Aws::Inspector2
     ListMembersResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListMembersResponse.struct_class = Types::ListMembersResponse
 
+    ListOnDemandScansRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
+    ListOnDemandScansRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: OnDemandResourceType, required: true, location_name: "resourceType"))
+    ListOnDemandScansRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListOnDemandScansRequestMaxResultsInteger, location_name: "maxResults"))
+    ListOnDemandScansRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: OnDemandScanNextToken, location_name: "nextToken"))
+    ListOnDemandScansRequest.struct_class = Types::ListOnDemandScansRequest
+
+    ListOnDemandScansResponse.add_member(:items, Shapes::ShapeRef.new(shape: OnDemandScanList, required: true, location_name: "items"))
+    ListOnDemandScansResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: OnDemandScanNextToken, location_name: "nextToken"))
+    ListOnDemandScansResponse.struct_class = Types::ListOnDemandScansResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -2613,6 +2702,23 @@ module Aws::Inspector2
     ListUsageTotalsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: ListUsageTotalsNextToken, location_name: "nextToken"))
     ListUsageTotalsResponse.add_member(:totals, Shapes::ShapeRef.new(shape: UsageTotalList, location_name: "totals"))
     ListUsageTotalsResponse.struct_class = Types::ListUsageTotalsResponse
+
+    MachineImageDetails.add_member(:machine_image_id, Shapes::ShapeRef.new(shape: MachineImageDetailsMachineImageIdString, required: true, location_name: "machineImageId"))
+    MachineImageDetails.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "name"))
+    MachineImageDetails.add_member(:owner_account_id, Shapes::ShapeRef.new(shape: ProviderAccountId, location_name: "ownerAccountId"))
+    MachineImageDetails.add_member(:platform, Shapes::ShapeRef.new(shape: Platform, location_name: "platform"))
+    MachineImageDetails.add_member(:architecture, Shapes::ShapeRef.new(shape: Architecture, location_name: "architecture"))
+    MachineImageDetails.add_member(:creation_date, Shapes::ShapeRef.new(shape: DateTimeTimestamp, location_name: "creationDate"))
+    MachineImageDetails.add_member(:state, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "state"))
+    MachineImageDetails.add_member(:is_public, Shapes::ShapeRef.new(shape: Boolean, location_name: "isPublic"))
+    MachineImageDetails.add_member(:root_device_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "rootDeviceType"))
+    MachineImageDetails.add_member(:virtualization_type, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "virtualizationType"))
+    MachineImageDetails.add_member(:source_resource_id, Shapes::ShapeRef.new(shape: MachineImageDetailsSourceResourceIdString, location_name: "sourceResourceId"))
+    MachineImageDetails.struct_class = Types::MachineImageDetails
+
+    MachineImageMetadata.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "tags"))
+    MachineImageMetadata.add_member(:platform, Shapes::ShapeRef.new(shape: MachineImagePlatform, location_name: "platform"))
+    MachineImageMetadata.struct_class = Types::MachineImageMetadata
 
     MapFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: MapComparison, required: true, location_name: "comparison"))
     MapFilter.add_member(:key, Shapes::ShapeRef.new(shape: MapKey, required: true, location_name: "key"))
@@ -2661,6 +2767,17 @@ module Aws::Inspector2
     NumberFilter.struct_class = Types::NumberFilter
 
     NumberFilterList.member = Shapes::ShapeRef.new(shape: NumberFilter)
+
+    OnDemandScan.add_member(:scan_id, Shapes::ShapeRef.new(shape: ScanId, required: true, location_name: "scanId"))
+    OnDemandScan.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
+    OnDemandScan.add_member(:resource_type, Shapes::ShapeRef.new(shape: OnDemandResourceType, required: true, location_name: "resourceType"))
+    OnDemandScan.add_member(:scan_status, Shapes::ShapeRef.new(shape: OnDemandScanStatus, required: true, location_name: "scanStatus"))
+    OnDemandScan.add_member(:scan_status_reason, Shapes::ShapeRef.new(shape: OnDemandScanStatusReason, location_name: "scanStatusReason"))
+    OnDemandScan.add_member(:started_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startedAt"))
+    OnDemandScan.add_member(:completed_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "completedAt"))
+    OnDemandScan.struct_class = Types::OnDemandScan
+
+    OnDemandScanList.member = Shapes::ShapeRef.new(shape: OnDemandScan)
 
     OneAccountIdFilterList.member = Shapes::ShapeRef.new(shape: CisStringFilter)
 
@@ -2808,6 +2925,7 @@ module Aws::Inspector2
     ResourceDetails.add_member(:aws_ecr_container_image, Shapes::ShapeRef.new(shape: AwsEcrContainerImageDetails, location_name: "awsEcrContainerImage"))
     ResourceDetails.add_member(:aws_lambda_function, Shapes::ShapeRef.new(shape: AwsLambdaFunctionDetails, location_name: "awsLambdaFunction"))
     ResourceDetails.add_member(:code_repository, Shapes::ShapeRef.new(shape: CodeRepositoryDetails, location_name: "codeRepository"))
+    ResourceDetails.add_member(:machine_image, Shapes::ShapeRef.new(shape: MachineImageDetails, location_name: "machineImage"))
     ResourceDetails.add_member(:vm, Shapes::ShapeRef.new(shape: Vm, location_name: "vm"))
     ResourceDetails.add_member(:image, Shapes::ShapeRef.new(shape: Image, location_name: "image"))
     ResourceDetails.add_member(:serverless_function, Shapes::ShapeRef.new(shape: ServerlessFunction, location_name: "serverlessFunction"))
@@ -2858,6 +2976,7 @@ module Aws::Inspector2
     ResourceScanMetadata.add_member(:container_repository, Shapes::ShapeRef.new(shape: ContainerRepositoryMetadata, location_name: "containerRepository"))
     ResourceScanMetadata.add_member(:container_registry, Shapes::ShapeRef.new(shape: ContainerRegistryMetadata, location_name: "containerRegistry"))
     ResourceScanMetadata.add_member(:serverless_function, Shapes::ShapeRef.new(shape: ServerlessFunctionMetadata, location_name: "serverlessFunction"))
+    ResourceScanMetadata.add_member(:machine_image, Shapes::ShapeRef.new(shape: MachineImageMetadata, location_name: "machineImage"))
     ResourceScanMetadata.struct_class = Types::ResourceScanMetadata
 
     ResourceState.add_member(:ec2, Shapes::ShapeRef.new(shape: State, required: true, location_name: "ec2"))
@@ -2865,6 +2984,7 @@ module Aws::Inspector2
     ResourceState.add_member(:lambda, Shapes::ShapeRef.new(shape: State, location_name: "lambda"))
     ResourceState.add_member(:lambda_code, Shapes::ShapeRef.new(shape: State, location_name: "lambdaCode"))
     ResourceState.add_member(:code_repository, Shapes::ShapeRef.new(shape: State, location_name: "codeRepository"))
+    ResourceState.add_member(:ami, Shapes::ShapeRef.new(shape: State, location_name: "ami"))
     ResourceState.struct_class = Types::ResourceState
 
     ResourceStatus.add_member(:ec2, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "ec2"))
@@ -2872,6 +2992,7 @@ module Aws::Inspector2
     ResourceStatus.add_member(:lambda, Shapes::ShapeRef.new(shape: Status, location_name: "lambda"))
     ResourceStatus.add_member(:lambda_code, Shapes::ShapeRef.new(shape: Status, location_name: "lambdaCode"))
     ResourceStatus.add_member(:code_repository, Shapes::ShapeRef.new(shape: Status, location_name: "codeRepository"))
+    ResourceStatus.add_member(:ami, Shapes::ShapeRef.new(shape: Status, location_name: "ami"))
     ResourceStatus.struct_class = Types::ResourceStatus
 
     ResourceStringFilter.add_member(:comparison, Shapes::ShapeRef.new(shape: ResourceStringComparison, required: true, location_name: "comparison"))
@@ -2883,6 +3004,8 @@ module Aws::Inspector2
     ResourceTagFilterList.member = Shapes::ShapeRef.new(shape: TagFilter)
 
     RuleSetCategories.member = Shapes::ShapeRef.new(shape: RuleSetCategory)
+
+    ScanSourceList.member = Shapes::ShapeRef.new(shape: ScanSource)
 
     ScanStatus.add_member(:status_code, Shapes::ShapeRef.new(shape: ScanStatusCode, required: true, location_name: "statusCode"))
     ScanStatus.add_member(:reason, Shapes::ShapeRef.new(shape: ScanStatusReason, required: true, location_name: "reason"))
@@ -3024,6 +3147,14 @@ module Aws::Inspector2
     StartCodeSecurityScanResponse.add_member(:scan_id, Shapes::ShapeRef.new(shape: CodeSecurityUuid, location_name: "scanId"))
     StartCodeSecurityScanResponse.add_member(:status, Shapes::ShapeRef.new(shape: CodeScanStatus, location_name: "status"))
     StartCodeSecurityScanResponse.struct_class = Types::StartCodeSecurityScanResponse
+
+    StartOnDemandScanRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "resourceId"))
+    StartOnDemandScanRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: OnDemandResourceType, required: true, location_name: "resourceType"))
+    StartOnDemandScanRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartOnDemandScanRequest.struct_class = Types::StartOnDemandScanRequest
+
+    StartOnDemandScanResponse.add_member(:scan_id, Shapes::ShapeRef.new(shape: ScanId, required: true, location_name: "scanId"))
+    StartOnDemandScanResponse.struct_class = Types::StartOnDemandScanResponse
 
     State.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
     State.add_member(:error_code, Shapes::ShapeRef.new(shape: ErrorCode, required: true, location_name: "errorCode"))
@@ -3185,11 +3316,13 @@ module Aws::Inspector2
 
     UpdateConfigurationInheritance.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: InheritanceMode, location_name: "ec2Configuration"))
     UpdateConfigurationInheritance.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: InheritanceMode, location_name: "ecrConfiguration"))
+    UpdateConfigurationInheritance.add_member(:ami_configuration, Shapes::ShapeRef.new(shape: InheritanceMode, location_name: "amiConfiguration"))
     UpdateConfigurationInheritance.struct_class = Types::UpdateConfigurationInheritance
 
     UpdateConfigurationRequest.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "accountId"))
     UpdateConfigurationRequest.add_member(:ecr_configuration, Shapes::ShapeRef.new(shape: EcrConfiguration, location_name: "ecrConfiguration"))
     UpdateConfigurationRequest.add_member(:ec2_configuration, Shapes::ShapeRef.new(shape: Ec2Configuration, location_name: "ec2Configuration"))
+    UpdateConfigurationRequest.add_member(:ami_configuration, Shapes::ShapeRef.new(shape: AmiConfiguration, location_name: "amiConfiguration"))
     UpdateConfigurationRequest.add_member(:update_configuration_inheritance, Shapes::ShapeRef.new(shape: UpdateConfigurationInheritance, location_name: "updateConfigurationInheritance"))
     UpdateConfigurationRequest.struct_class = Types::UpdateConfigurationRequest
 
@@ -3956,6 +4089,19 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:get_on_demand_scan_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetOnDemandScanStatus"
+        o.http_method = "POST"
+        o.http_request_uri = "/ondemand/scan/status"
+        o.input = Shapes::ShapeRef.new(shape: GetOnDemandScanStatusRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetOnDemandScanStatusResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:get_sbom_export, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetSbomExport"
         o.http_method = "POST"
@@ -4254,6 +4400,24 @@ module Aws::Inspector2
         )
       end)
 
+      api.add_operation(:list_on_demand_scans, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListOnDemandScans"
+        o.http_method = "POST"
+        o.http_request_uri = "/ondemand/scans"
+        o.input = Shapes::ShapeRef.new(shape: ListOnDemandScansRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListOnDemandScansResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "GET"
@@ -4367,6 +4531,19 @@ module Aws::Inspector2
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
+      api.add_operation(:start_on_demand_scan, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartOnDemandScan"
+        o.http_method = "POST"
+        o.http_request_uri = "/ondemand/scan"
+        o.input = Shapes::ShapeRef.new(shape: StartOnDemandScanRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartOnDemandScanResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:stop_cis_session, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StopCisSession"
         o.http_method = "PUT"
@@ -4452,6 +4629,7 @@ module Aws::Inspector2
         o.http_request_uri = "/configuration/update"
         o.input = Shapes::ShapeRef.new(shape: UpdateConfigurationRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

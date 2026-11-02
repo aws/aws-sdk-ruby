@@ -11,40 +11,40 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AuthException < ::Aws::Errors::ServiceError
+      class AuthException < ServiceError
         def message: () -> ::String
       end
-      class EC2InstanceNotFoundException < ::Aws::Errors::ServiceError
+      class EC2InstanceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class EC2InstanceStateInvalidException < ::Aws::Errors::ServiceError
+      class EC2InstanceStateInvalidException < ServiceError
         def message: () -> ::String
       end
-      class EC2InstanceTypeInvalidException < ::Aws::Errors::ServiceError
+      class EC2InstanceTypeInvalidException < ServiceError
         def message: () -> ::String
       end
-      class EC2InstanceUnavailableException < ::Aws::Errors::ServiceError
+      class EC2InstanceUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class InvalidArgsException < ::Aws::Errors::ServiceError
+      class InvalidArgsException < ServiceError
         def message: () -> ::String
       end
-      class SerialConsoleAccessDisabledException < ::Aws::Errors::ServiceError
+      class SerialConsoleAccessDisabledException < ServiceError
         def message: () -> ::String
       end
-      class SerialConsoleSessionLimitExceededException < ::Aws::Errors::ServiceError
+      class SerialConsoleSessionLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class SerialConsoleSessionUnavailableException < ::Aws::Errors::ServiceError
+      class SerialConsoleSessionUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class SerialConsoleSessionUnsupportedException < ::Aws::Errors::ServiceError
+      class SerialConsoleSessionUnsupportedException < ServiceError
         def message: () -> ::String
       end
-      class ServiceException < ::Aws::Errors::ServiceError
+      class ServiceException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
     end

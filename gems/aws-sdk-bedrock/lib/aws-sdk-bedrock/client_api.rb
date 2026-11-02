@@ -512,6 +512,9 @@ module Aws::Bedrock
     GuardrailContextualGroundingFiltersConfig = Shapes::ListShape.new(name: 'GuardrailContextualGroundingFiltersConfig')
     GuardrailContextualGroundingPolicy = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingPolicy')
     GuardrailContextualGroundingPolicyConfig = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingPolicyConfig')
+    GuardrailContextualGroundingTier = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingTier')
+    GuardrailContextualGroundingTierConfig = Shapes::StructureShape.new(name: 'GuardrailContextualGroundingTierConfig')
+    GuardrailContextualGroundingTierName = Shapes::StringShape.new(name: 'GuardrailContextualGroundingTierName')
     GuardrailCrossRegionConfig = Shapes::StructureShape.new(name: 'GuardrailCrossRegionConfig')
     GuardrailCrossRegionDetails = Shapes::StructureShape.new(name: 'GuardrailCrossRegionDetails')
     GuardrailCrossRegionGuardrailProfileArn = Shapes::StringShape.new(name: 'GuardrailCrossRegionGuardrailProfileArn')
@@ -2665,10 +2668,18 @@ module Aws::Bedrock
     GuardrailContextualGroundingFiltersConfig.member = Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilterConfig)
 
     GuardrailContextualGroundingPolicy.add_member(:filters, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFilters, required: true, location_name: "filters"))
+    GuardrailContextualGroundingPolicy.add_member(:tier, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingTier, location_name: "tier"))
     GuardrailContextualGroundingPolicy.struct_class = Types::GuardrailContextualGroundingPolicy
 
     GuardrailContextualGroundingPolicyConfig.add_member(:filters_config, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingFiltersConfig, required: true, location_name: "filtersConfig"))
+    GuardrailContextualGroundingPolicyConfig.add_member(:tier_config, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingTierConfig, location_name: "tierConfig"))
     GuardrailContextualGroundingPolicyConfig.struct_class = Types::GuardrailContextualGroundingPolicyConfig
+
+    GuardrailContextualGroundingTier.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingTierName, required: true, location_name: "tierName"))
+    GuardrailContextualGroundingTier.struct_class = Types::GuardrailContextualGroundingTier
+
+    GuardrailContextualGroundingTierConfig.add_member(:tier_name, Shapes::ShapeRef.new(shape: GuardrailContextualGroundingTierName, required: true, location_name: "tierName"))
+    GuardrailContextualGroundingTierConfig.struct_class = Types::GuardrailContextualGroundingTierConfig
 
     GuardrailCrossRegionConfig.add_member(:guardrail_profile_identifier, Shapes::ShapeRef.new(shape: GuardrailCrossRegionGuardrailProfileIdentifier, required: true, location_name: "guardrailProfileIdentifier"))
     GuardrailCrossRegionConfig.struct_class = Types::GuardrailCrossRegionConfig

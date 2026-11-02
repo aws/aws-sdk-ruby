@@ -11,54 +11,54 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
       end
-      class HumanLoopQuotaExceededException < ::Aws::Errors::ServiceError
+      class HumanLoopQuotaExceededException < ServiceError
         def resource_type: () -> ::String
         def quota_code: () -> ::String
         def service_code: () -> ::String
       end
-      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+      class IdempotentParameterMismatchException < ServiceError
       end
-      class ImageTooLargeException < ::Aws::Errors::ServiceError
+      class ImageTooLargeException < ServiceError
       end
-      class InternalServerError < ::Aws::Errors::ServiceError
+      class InternalServerError < ServiceError
       end
-      class InvalidImageFormatException < ::Aws::Errors::ServiceError
+      class InvalidImageFormatException < ServiceError
       end
-      class InvalidManifestException < ::Aws::Errors::ServiceError
+      class InvalidManifestException < ServiceError
       end
-      class InvalidPaginationTokenException < ::Aws::Errors::ServiceError
+      class InvalidPaginationTokenException < ServiceError
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
       end
-      class InvalidPolicyRevisionIdException < ::Aws::Errors::ServiceError
+      class InvalidPolicyRevisionIdException < ServiceError
       end
-      class InvalidS3ObjectException < ::Aws::Errors::ServiceError
+      class InvalidS3ObjectException < ServiceError
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
       end
-      class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
+      class MalformedPolicyDocumentException < ServiceError
       end
-      class ProvisionedThroughputExceededException < ::Aws::Errors::ServiceError
+      class ProvisionedThroughputExceededException < ServiceError
       end
-      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsException < ServiceError
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
-      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+      class ResourceNotReadyException < ServiceError
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
       end
-      class SessionNotFoundException < ::Aws::Errors::ServiceError
+      class SessionNotFoundException < ServiceError
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
       end
-      class VideoTooLargeException < ::Aws::Errors::ServiceError
+      class VideoTooLargeException < ServiceError
       end
     end
   end

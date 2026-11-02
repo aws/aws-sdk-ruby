@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.171.0 (2026-10-30)
+------------------
+
+* Feature - Adds support for account-level retention policies in Amazon CloudWatch Logs. Customers can now use PutAccountPolicy with the new RETENTION POLICY type to set default log retention across all log groups in an account. Includes dry-run mode to preview the impact of policy changes before applying them.
+
+1.170.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.169.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.168.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.167.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.166.0 (2026-10-19)
+------------------
+
+* Feature - Amazon CloudWatch Logs now supports filtering DescribeDeliverySources by resourceArns, DescribeDeliveryDestinations by names, and DescribeDeliveries by deliverySourceNames.
+
 1.165.0 (2026-09-30)
 ------------------
 

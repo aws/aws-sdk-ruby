@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.206.0 (2026-10-30)
+------------------
+
+* Feature - Adds ConsumptionMode to SelfManagedKafkaEventSourceConfig, letting Lambda event source mappings consume self-managed Apache Kafka topics as a queue. Set ConsumptionMode to Queue when creating an event source mapping.
+
+1.205.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.204.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.203.0 (2026-10-22)
+------------------
+
+* Feature - AWS Lambda durable functions now supports payloads up to 1 MB for checkpoints, callback completion, and error details.
+
+1.202.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.201.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.200.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.199.0 (2026-10-14)
 ------------------
 

@@ -11,64 +11,64 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class WAFBadRequestException < ::Aws::Errors::ServiceError
+      class WAFBadRequestException < ServiceError
         def message: () -> ::String
       end
-      class WAFDisallowedNameException < ::Aws::Errors::ServiceError
+      class WAFDisallowedNameException < ServiceError
         def message: () -> ::String
       end
-      class WAFEntityMigrationException < ::Aws::Errors::ServiceError
+      class WAFEntityMigrationException < ServiceError
         def message: () -> ::String
         def migration_error_type: () -> ::String
         def migration_error_reason: () -> ::String
       end
-      class WAFInternalErrorException < ::Aws::Errors::ServiceError
+      class WAFInternalErrorException < ServiceError
         def message: () -> ::String
       end
-      class WAFInvalidAccountException < ::Aws::Errors::ServiceError
+      class WAFInvalidAccountException < ServiceError
       end
-      class WAFInvalidOperationException < ::Aws::Errors::ServiceError
+      class WAFInvalidOperationException < ServiceError
         def message: () -> ::String
       end
-      class WAFInvalidParameterException < ::Aws::Errors::ServiceError
+      class WAFInvalidParameterException < ServiceError
         def field: () -> ::String
         def parameter: () -> ::String
         def reason: () -> ::String
       end
-      class WAFInvalidPermissionPolicyException < ::Aws::Errors::ServiceError
+      class WAFInvalidPermissionPolicyException < ServiceError
         def message: () -> ::String
       end
-      class WAFInvalidRegexPatternException < ::Aws::Errors::ServiceError
+      class WAFInvalidRegexPatternException < ServiceError
         def message: () -> ::String
       end
-      class WAFLimitsExceededException < ::Aws::Errors::ServiceError
+      class WAFLimitsExceededException < ServiceError
         def message: () -> ::String
       end
-      class WAFNonEmptyEntityException < ::Aws::Errors::ServiceError
+      class WAFNonEmptyEntityException < ServiceError
         def message: () -> ::String
       end
-      class WAFNonexistentContainerException < ::Aws::Errors::ServiceError
+      class WAFNonexistentContainerException < ServiceError
         def message: () -> ::String
       end
-      class WAFNonexistentItemException < ::Aws::Errors::ServiceError
+      class WAFNonexistentItemException < ServiceError
         def message: () -> ::String
       end
-      class WAFReferencedItemException < ::Aws::Errors::ServiceError
+      class WAFReferencedItemException < ServiceError
         def message: () -> ::String
       end
-      class WAFServiceLinkedRoleErrorException < ::Aws::Errors::ServiceError
+      class WAFServiceLinkedRoleErrorException < ServiceError
         def message: () -> ::String
       end
-      class WAFStaleDataException < ::Aws::Errors::ServiceError
+      class WAFStaleDataException < ServiceError
         def message: () -> ::String
       end
-      class WAFSubscriptionNotFoundException < ::Aws::Errors::ServiceError
+      class WAFSubscriptionNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class WAFTagOperationException < ::Aws::Errors::ServiceError
+      class WAFTagOperationException < ServiceError
         def message: () -> ::String
       end
-      class WAFTagOperationInternalErrorException < ::Aws::Errors::ServiceError
+      class WAFTagOperationInternalErrorException < ServiceError
         def message: () -> ::String
       end
     end

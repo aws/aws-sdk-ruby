@@ -938,6 +938,11 @@ module Aws::CodeDeploy
     #   optional value, both of which you define.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] ec2_deployment_options
+    #   Options that control how CodeDeploy manages Amazon EC2 Auto Scaling
+    #   groups during a deployment.
+    #   @return [Types::EC2DeploymentOptions]
+    #
     # @!attribute [rw] termination_hook_enabled
     #   This parameter only applies if you are using CodeDeploy with Amazon
     #   EC2 Auto Scaling. For more information, see [Integrating CodeDeploy
@@ -983,6 +988,7 @@ module Aws::CodeDeploy
       :ecs_services,
       :on_premises_tag_set,
       :tags,
+      :ec2_deployment_options,
       :termination_hook_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -1138,6 +1144,11 @@ module Aws::CodeDeploy
     #    </note>
     #   @return [Types::AlarmConfiguration]
     #
+    # @!attribute [rw] ec2_deployment_options
+    #   Options that control how CodeDeploy manages Amazon EC2 Auto Scaling
+    #   groups during a deployment.
+    #   @return [Types::EC2DeploymentOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/CreateDeploymentInput AWS API Documentation
     #
     class CreateDeploymentInput < Struct.new(
@@ -1152,7 +1163,8 @@ module Aws::CodeDeploy
       :update_outdated_instances_only,
       :file_exists_behavior,
       :deployment_mode,
-      :override_alarm_configuration)
+      :override_alarm_configuration,
+      :ec2_deployment_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1527,6 +1539,11 @@ module Aws::CodeDeploy
     #   `<clustername>:<servicename>`.
     #   @return [Array<Types::ECSService>]
     #
+    # @!attribute [rw] ec2_deployment_options
+    #   Options that control how CodeDeploy manages Amazon EC2 Auto Scaling
+    #   groups during a deployment.
+    #   @return [Types::EC2DeploymentOptions]
+    #
     # @!attribute [rw] termination_hook_enabled
     #   Indicates whether the deployment group was configured to have
     #   CodeDeploy install a termination hook into an Auto Scaling group.
@@ -1565,6 +1582,7 @@ module Aws::CodeDeploy
       :on_premises_tag_set,
       :compute_platform,
       :ecs_services,
+      :ec2_deployment_options,
       :termination_hook_enabled)
       SENSITIVE = []
       include Aws::Structure
@@ -1793,6 +1811,11 @@ module Aws::CodeDeploy
     #   group.
     #   @return [Types::AlarmConfiguration]
     #
+    # @!attribute [rw] ec2_deployment_options
+    #   Options that control how CodeDeploy manages Amazon EC2 Auto Scaling
+    #   groups during a deployment.
+    #   @return [Types::EC2DeploymentOptions]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/DeploymentInfo AWS API Documentation
     #
     class DeploymentInfo < Struct.new(
@@ -1826,7 +1849,8 @@ module Aws::CodeDeploy
       :compute_platform,
       :external_id,
       :related_deployments,
-      :override_alarm_configuration)
+      :override_alarm_configuration,
+      :ec2_deployment_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2075,6 +2099,50 @@ module Aws::CodeDeploy
       :script_name,
       :message,
       :log_tail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options that control how CodeDeploy manages Amazon EC2 Auto Scaling
+    # groups during a deployment.
+    #
+    # @!attribute [rw] auto_scaling_group_processes_to_suspend
+    #   The Amazon EC2 Auto Scaling processes to suspend during the
+    #   deployment. CodeDeploy suspends these processes before it deploys to
+    #   instances in an Auto Scaling group, and resumes them when the
+    #   deployment succeeds, fails, or is stopped. Valid values are
+    #   `Terminate`, `AZRebalance`, `InstanceRefresh`, and
+    #   `ScheduledActions`.
+    #
+    #   This parameter applies only to in-place deployments on the
+    #   EC2/On-premises compute platform. If the list is empty, or if the
+    #   deployment does not target instances in an Auto Scaling group, no
+    #   processes are suspended.
+    #
+    #   The service role for the deployment group must have permission to
+    #   call `autoscaling:SuspendProcesses` and
+    #   `autoscaling:ResumeProcesses` on the target Auto Scaling groups. If
+    #   the processes cannot be suspended, the deployment fails before any
+    #   instance is updated.
+    #
+    #   If you suspend `ScheduledActions`, scheduled actions with a start
+    #   time during the deployment are skipped and do not run after the
+    #   process resumes.
+    #
+    #   <note markdown="1"> If CodeDeploy cannot resume the processes, the deployment fails and
+    #   the processes stay suspended until you resume them with the Auto
+    #   Scaling `ResumeProcesses` action. While `Terminate` is suspended,
+    #   Auto Scaling does not replace unhealthy instances. If you suspend
+    #   `Terminate`, configure a trigger that notifies you when a deployment
+    #   fails.
+    #
+    #    </note>
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/EC2DeploymentOptions AWS API Documentation
+    #
+    class EC2DeploymentOptions < Struct.new(
+      :auto_scaling_group_processes_to_suspend)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2976,6 +3044,15 @@ module Aws::CodeDeploy
     # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidAutoScalingGroupException AWS API Documentation
     #
     class InvalidAutoScalingGroupException < Aws::EmptyStructure; end
+
+    # The `autoScalingGroupProcessesToSuspend` list in
+    # `ec2DeploymentOptions` contains a process that is not valid. Valid
+    # values are `Terminate`, `AZRebalance`, `InstanceRefresh`, and
+    # `ScheduledActions`. Process names are case sensitive.
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/codedeploy-2014-10-06/InvalidAutoScalingGroupProcessToSuspendException AWS API Documentation
+    #
+    class InvalidAutoScalingGroupProcessToSuspendException < Aws::EmptyStructure; end
 
     # The configuration for the blue/green deployment group was provided in
     # an invalid format. For information about deployment configuration
@@ -5146,6 +5223,11 @@ module Aws::CodeDeploy
     #   groups.
     #   @return [Types::OnPremisesTagSet]
     #
+    # @!attribute [rw] ec2_deployment_options
+    #   Options that control how CodeDeploy manages Amazon EC2 Auto Scaling
+    #   groups during a deployment.
+    #   @return [Types::EC2DeploymentOptions]
+    #
     # @!attribute [rw] termination_hook_enabled
     #   This parameter only applies if you are using CodeDeploy with Amazon
     #   EC2 Auto Scaling. For more information, see [Integrating CodeDeploy
@@ -5191,6 +5273,7 @@ module Aws::CodeDeploy
       :ec2_tag_set,
       :ecs_services,
       :on_premises_tag_set,
+      :ec2_deployment_options,
       :termination_hook_enabled)
       SENSITIVE = []
       include Aws::Structure

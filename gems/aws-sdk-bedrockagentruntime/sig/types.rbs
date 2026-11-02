@@ -101,6 +101,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class AgenticRetrieveAction
+      attr_accessor code_execution: Types::AgenticRetrieveCodeExecutionDetails
       attr_accessor full_document_expansion: Types::AgenticRetrieveFullDocExpansionDetails
       attr_accessor memory_retrieve: Types::AgenticRetrieveMemoryRetrieveDetails
       attr_accessor retrieve: Types::AgenticRetrieveActionDetails
@@ -111,6 +112,12 @@ module Aws::BedrockAgentRuntime
       attr_accessor input_query: Types::AgenticRetrieveMessageContent
       attr_accessor source_retrievers: ::Array[Types::AgenticRetrieveSourceRetriever]
       SENSITIVE: [:input_query]
+    end
+
+    class AgenticRetrieveAppliedInstruction
+      attr_accessor id: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
     end
 
     class AgenticRetrieveBedrockGuardrailConfiguration
@@ -138,6 +145,17 @@ module Aws::BedrockAgentRuntime
 
     class AgenticRetrieveCitationReference
       attr_accessor result_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class AgenticRetrieveCodeExecutionDetails
+      attr_accessor documents: ::Array[Types::AgenticRetrieveCodeExecutionDocument]
+      SENSITIVE: []
+    end
+
+    class AgenticRetrieveCodeExecutionDocument
+      attr_accessor document_id: ::String
+      attr_accessor source_retriever: Types::AgenticRetrieveSourceRetriever
       SENSITIVE: []
     end
 
@@ -171,6 +189,12 @@ module Aws::BedrockAgentRuntime
       attr_accessor action: ("INTERVENED" | "NONE")
       attr_accessor id: ::String
       attr_accessor message: ::String
+      attr_accessor version: ::String
+      SENSITIVE: []
+    end
+
+    class AgenticRetrieveInstructionConfiguration
+      attr_accessor retrieval_instruction_id: ::String
       attr_accessor version: ::String
       SENSITIVE: []
     end
@@ -316,6 +340,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor messages: ::Array[Types::AgenticRetrieveMessage]
       attr_accessor next_token: ::String
       attr_accessor policy_configuration: Types::AgenticRetrievePolicyConfiguration
+      attr_accessor retrieval_instruction_configuration: Types::AgenticRetrieveInstructionConfiguration
       attr_accessor retrievers: ::Array[Types::AgenticRetriever]
       attr_accessor user_context: Types::UserContext
       SENSITIVE: [:user_context]
@@ -336,12 +361,13 @@ module Aws::BedrockAgentRuntime
 
     class AgenticRetrieveTraceEventAttributes
       attr_accessor actions: ::Array[Types::AgenticRetrieveAction]
+      attr_accessor applied_instruction: Types::AgenticRetrieveAppliedInstruction
       attr_accessor failures: ::Array[Types::AgenticRetrieveFailure]
       attr_accessor message: ::String
       attr_accessor retrieval_metadata: ::Array[Types::AgenticRetrieveSourceMetadata]
       attr_accessor retrieval_response: ::Array[Types::AgenticRetrieveTraceResultItem]
       attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
-      attr_accessor step: ("Planning" | "Retrieval" | "SpeculativeRetrieval" | "FullDocumentExpansion" | "SessionHistoryLoad")
+      attr_accessor step: ("Planning" | "Retrieval" | "SpeculativeRetrieval" | "FullDocumentExpansion" | "SessionHistoryLoad" | "CodeExecution")
       attr_accessor warnings: ::Array[Types::AgenticRetrieveWarning]
       SENSITIVE: []
     end

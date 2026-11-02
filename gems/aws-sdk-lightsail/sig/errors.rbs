@@ -11,49 +11,49 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def code: () -> ::String
         def docs: () -> ::String
         def message: () -> ::String
         def tip: () -> ::String
       end
-      class AccountSetupInProgressException < ::Aws::Errors::ServiceError
+      class AccountSetupInProgressException < ServiceError
         def code: () -> ::String
         def docs: () -> ::String
         def message: () -> ::String
         def tip: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
         def code: () -> ::String
         def docs: () -> ::String
         def message: () -> ::String
         def tip: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def code: () -> ::String
         def docs: () -> ::String
         def message: () -> ::String
         def tip: () -> ::String
       end
-      class OperationFailureException < ::Aws::Errors::ServiceError
+      class OperationFailureException < ServiceError
         def code: () -> ::String
         def docs: () -> ::String
         def message: () -> ::String
         def tip: () -> ::String
       end
-      class RegionSetupInProgressException < ::Aws::Errors::ServiceError
+      class RegionSetupInProgressException < ServiceError
         def code: () -> ::String
         def docs: () -> ::String
         def message: () -> ::String
         def tip: () -> ::String
       end
-      class ServiceException < ::Aws::Errors::ServiceError
+      class ServiceException < ServiceError
         def code: () -> ::String
         def docs: () -> ::String
         def message: () -> ::String
         def tip: () -> ::String
       end
-      class UnauthenticatedException < ::Aws::Errors::ServiceError
+      class UnauthenticatedException < ServiceError
         def code: () -> ::String
         def docs: () -> ::String
         def message: () -> ::String

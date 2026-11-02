@@ -11,64 +11,64 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AlreadyExistsException < ::Aws::Errors::ServiceError
+      class AlreadyExistsException < ServiceError
       end
-      class CFNRegistryException < ::Aws::Errors::ServiceError
+      class CFNRegistryException < ServiceError
         def message: () -> ::String
       end
-      class ChangeSetNotFoundException < ::Aws::Errors::ServiceError
+      class ChangeSetNotFoundException < ServiceError
       end
-      class ConcurrentResourcesLimitExceededException < ::Aws::Errors::ServiceError
+      class ConcurrentResourcesLimitExceededException < ServiceError
       end
-      class CreatedButModifiedException < ::Aws::Errors::ServiceError
+      class CreatedButModifiedException < ServiceError
       end
-      class GeneratedTemplateNotFoundException < ::Aws::Errors::ServiceError
+      class GeneratedTemplateNotFoundException < ServiceError
       end
-      class HookResultNotFoundException < ::Aws::Errors::ServiceError
+      class HookResultNotFoundException < ServiceError
       end
-      class InsufficientCapabilitiesException < ::Aws::Errors::ServiceError
+      class InsufficientCapabilitiesException < ServiceError
       end
-      class InvalidChangeSetStatusException < ::Aws::Errors::ServiceError
+      class InvalidChangeSetStatusException < ServiceError
       end
-      class InvalidOperationException < ::Aws::Errors::ServiceError
+      class InvalidOperationException < ServiceError
       end
-      class InvalidStateTransitionException < ::Aws::Errors::ServiceError
+      class InvalidStateTransitionException < ServiceError
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
       end
-      class NameAlreadyExistsException < ::Aws::Errors::ServiceError
+      class NameAlreadyExistsException < ServiceError
       end
-      class OperationIdAlreadyExistsException < ::Aws::Errors::ServiceError
+      class OperationIdAlreadyExistsException < ServiceError
       end
-      class OperationInProgressException < ::Aws::Errors::ServiceError
+      class OperationInProgressException < ServiceError
       end
-      class OperationNotFoundException < ::Aws::Errors::ServiceError
+      class OperationNotFoundException < ServiceError
       end
-      class OperationStatusCheckFailedException < ::Aws::Errors::ServiceError
+      class OperationStatusCheckFailedException < ServiceError
       end
-      class ResourceScanInProgressException < ::Aws::Errors::ServiceError
+      class ResourceScanInProgressException < ServiceError
       end
-      class ResourceScanLimitExceededException < ::Aws::Errors::ServiceError
+      class ResourceScanLimitExceededException < ServiceError
       end
-      class ResourceScanNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceScanNotFoundException < ServiceError
       end
-      class StackInstanceNotFoundException < ::Aws::Errors::ServiceError
+      class StackInstanceNotFoundException < ServiceError
       end
-      class StackNotFoundException < ::Aws::Errors::ServiceError
+      class StackNotFoundException < ServiceError
       end
-      class StackRefactorNotFoundException < ::Aws::Errors::ServiceError
+      class StackRefactorNotFoundException < ServiceError
       end
-      class StackSetNotEmptyException < ::Aws::Errors::ServiceError
+      class StackSetNotEmptyException < ServiceError
       end
-      class StackSetNotFoundException < ::Aws::Errors::ServiceError
+      class StackSetNotFoundException < ServiceError
       end
-      class StaleRequestException < ::Aws::Errors::ServiceError
+      class StaleRequestException < ServiceError
       end
-      class TokenAlreadyExistsException < ::Aws::Errors::ServiceError
+      class TokenAlreadyExistsException < ServiceError
       end
-      class TypeConfigurationNotFoundException < ::Aws::Errors::ServiceError
+      class TypeConfigurationNotFoundException < ServiceError
       end
-      class TypeNotFoundException < ::Aws::Errors::ServiceError
+      class TypeNotFoundException < ServiceError
       end
     end
   end

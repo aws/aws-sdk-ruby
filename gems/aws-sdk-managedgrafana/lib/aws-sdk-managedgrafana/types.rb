@@ -305,7 +305,7 @@ module Aws::ManagedGrafana
     #
     #    </note>
     #
-    #   For more information, see [Amazon Managed Grafana permissions and
+    #   For more information, see [ Amazon Managed Grafana permissions and
     #   policies for Amazon Web Services data sources and notification
     #   channels][1].
     #
@@ -359,7 +359,7 @@ module Aws::ManagedGrafana
     #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
     #   or both to authenticate users for using the Grafana console within a
     #   workspace. For more information, see [User authentication in Amazon
-    #   Managed Grafana][1].
+    #   Managed Grafana ][1].
     #
     #
     #
@@ -473,7 +473,8 @@ module Aws::ManagedGrafana
     #   The permission level to use for this service account.
     #
     #   <note markdown="1"> For more information about the roles and the permissions each has,
-    #   see [User roles][1] in the *Amazon Managed Grafana User Guide*.
+    #   see [User roles][1] in the <i> Amazon Managed Grafana User
+    #   Guide</i>.
     #
     #    </note>
     #
@@ -1179,8 +1180,8 @@ module Aws::ManagedGrafana
     #   Prefix list IDs have the format `pl-1a2b3c4d `.
     #
     #   For more information about prefix lists, see [Group CIDR blocks
-    #   using managed prefix lists][1]in the *Amazon Virtual Private Cloud
-    #   User Guide*.
+    #   using managed prefix lists][1]in the <i> Amazon Virtual Private
+    #   Cloud User Guide</i>.
     #
     #
     #
@@ -1198,8 +1199,8 @@ module Aws::ManagedGrafana
     #   VPC endpoint IDs have the format `vpce-1a2b3c4d `.
     #
     #   For more information about creating an interface VPC endpoint, see
-    #   [Interface VPC endpoints][1] in the *Amazon Managed Grafana User
-    #   Guide*.
+    #   [Interface VPC endpoints][1] in the <i> Amazon Managed Grafana User
+    #   Guide</i>.
     #
     #   <note markdown="1"> The only VPC endpoints that can be specified here are interface VPC
     #   endpoints for Grafana workspaces (using the
@@ -1660,7 +1661,7 @@ module Aws::ManagedGrafana
     #   Specifies whether this workspace uses SAML 2.0, IAM Identity Center,
     #   or both to authenticate users for using the Grafana console within a
     #   workspace. For more information, see [User authentication in Amazon
-    #   Managed Grafana][1].
+    #   Managed Grafana ][1].
     #
     #
     #
@@ -1769,9 +1770,9 @@ module Aws::ManagedGrafana
     #   `workspaceRoleArn` that the workspace will use for accessing Amazon
     #   Web Services resources.
     #
-    #   For more information on the role and permissions needed, see [Amazon
-    #   Managed Grafana permissions and policies for Amazon Web Services
-    #   data sources and notification channels][1]
+    #   For more information on the role and permissions needed, see [
+    #   Amazon Managed Grafana permissions and policies for Amazon Web
+    #   Services data sources and notification channels][1]
     #
     #   <note markdown="1"> Do not use this to convert a `CUSTOMER_MANAGED` workspace to
     #   `SERVICE_MANAGED`. Do not include this parameter if you want to
@@ -2096,7 +2097,7 @@ module Aws::ManagedGrafana
     #   For more information about converting between customer and service
     #   managed, see [Managing permissions for data sources and notification
     #   channels][1]. For more information about the roles and permissions
-    #   that must be managed for customer managed workspaces, see [Amazon
+    #   that must be managed for customer managed workspaces, see [ Amazon
     #   Managed Grafana permissions and policies for Amazon Web Services
     #   data sources and notification channels][2]
     #

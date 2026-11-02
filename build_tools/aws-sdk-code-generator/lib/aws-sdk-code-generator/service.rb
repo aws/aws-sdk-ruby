@@ -174,18 +174,10 @@ module AwsSdkCodeGenerator
     # @return [Boolean] true if any operation requires endpoint_discovery
     attr_reader :require_endpoint_discovery
 
-    # @return [String] the service_id
+    # @return [String] the service_id. Falls back to the service name, never to
+    #   serviceFullName/serviceAbbreviation, which are documentation identifiers.
     def service_id
-      metadata = @api['metadata']
-      return metadata['serviceId'] if metadata['serviceId']
-
-      name = metadata['serviceAbbreviation'] || metadata['serviceFullName']
-      name = name.gsub(/AWS/, '').gsub(/Amazon/, '')
-      name = name.gsub(/[^a-zA-Z0-9 ]+/, '')
-      name = name.gsub(/^[0-9]+/, '')
-      name = name.strip
-
-      name
+      @api['metadata']['serviceId'] || name
     end
 
     # @return [Boolean] true if the service is deprecated

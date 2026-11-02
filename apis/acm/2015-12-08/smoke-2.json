@@ -1,19 +1,6 @@
 {
   "version" : 2,
   "testCases" : [ {
-    "id" : "ListCertificatesSuccess",
-    "operationName" : "ListCertificates",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-west-2",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "SearchCertificatesSuccess",
     "operationName" : "SearchCertificates",
     "input" : { },
@@ -34,6 +21,19 @@
     },
     "expectation" : {
       "failure" : { }
+    },
+    "config" : {
+      "region" : "us-west-2",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "ListCertificatesSuccess",
+    "operationName" : "ListCertificates",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
     },
     "config" : {
       "region" : "us-west-2",

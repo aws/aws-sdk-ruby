@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2026-10-29)
+------------------
+
+* Feature - Adds Session Endpoint Feature on AgentCore Runtime
+
+1.85.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2026-10-27)
+------------------
+
+* Feature - Adds the ResetTokenVaultKeyMaterial API, which restores a token vault whose customer managed key was deleted by moving it to an AWS owned key. The reset permanently deletes the stored OAuth 2.0 tokens, users must consent again. Adds on-behalf-of token exchange client authentication override option.
+
+1.83.0 (2026-10-22)
+------------------
+
+* Feature - Adds model-based routing and fallback to AgentCore Gateway rules. Rules can match the requested model, route to a specific model, and fall back across inference targets with an optional circuit breaker. Adds multi-dimensional rating scales for AgentCore Evaluations LLM-as-a-Judge evaluators.
+
+1.82.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.81.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.80.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.79.0 (2026-10-14)
 ------------------
 

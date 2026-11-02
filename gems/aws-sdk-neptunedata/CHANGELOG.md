@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.53.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.52.0 (2026-10-28)
+------------------
+
+* Feature - Get Storage API analyzes storage usage to identify database bloat and your storage footprint. Index Rebuild API triggers on-demand index reconstruction to eliminate bloat and restore query performance.
+
+1.51.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.50.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.49.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.48.0 (2026-09-11)
 ------------------
 

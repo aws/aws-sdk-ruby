@@ -11,11 +11,11 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class RequestError < ::Aws::Errors::ServiceError
+      class RequestError < ServiceError
         def message: () -> ::String
         def turk_error_code: () -> ::String
       end
-      class ServiceFault < ::Aws::Errors::ServiceError
+      class ServiceFault < ServiceError
         def message: () -> ::String
         def turk_error_code: () -> ::String
       end

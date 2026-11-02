@@ -3221,6 +3221,48 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # The parameters for disassociating the local replica from a global
+    # table using Version 2019.11.21 with multi-Region eventual consistency
+    # (MREC).
+    #
+    # After disassociation completes, the replica remains a standalone
+    # regional table that keeps its data, indexes, and table settings.
+    #
+    # For request requirements, see [UpdateTable][1]. For prerequisites, the
+    # protection update, and completion checks, see [Disassociating a global
+    # table replica][2] in the *Amazon DynamoDB Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_UpdateTable.html
+    # [2]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables-disassociate.html
+    #
+    # @!attribute [rw] region_name
+    #   The Region of the replica to disassociate. Set this value to the
+    #   Region where you send the `UpdateTable` request. You must use
+    #   credentials for the account that owns the replica.
+    #   @return [String]
+    #
+    # @!attribute [rw] disassociation_mode
+    #   The mode for handling pending replication before disassociation
+    #   completes. You must specify `WAIT_FOR_REPLICATION`. For more
+    #   information, see [Disassociating a global table replica][1] in the
+    #   *Amazon DynamoDB Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables-disassociate.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DisassociateReplicationGroupMemberAction AWS API Documentation
+    #
+    class DisassociateReplicationGroupMemberAction < Struct.new(
+      :region_name,
+      :disassociation_mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # There was an attempt to insert an item with the same primary key as an
     # item that already exists in the DynamoDB table.
     #
@@ -8025,6 +8067,13 @@ module Aws::DynamoDB
     #   `DeleteTableReplica` action in the destination Region, deleting the
     #   replica and all if its items in the destination Region.
     #
+    # * The local replica to be disassociated from a global table and
+    #   retained as a standalone regional table.
+    #
+    # Each `ReplicationGroupUpdate` contains exactly one action. A
+    # `Disassociate` action must be the only replica update in the request;
+    # including other updates causes the request to fail.
+    #
     # <note markdown="1"> When you manually remove a table or global table replica, you do not
     # automatically remove any associated scalable targets, scaling
     # policies, or CloudWatch alarms.
@@ -8043,12 +8092,18 @@ module Aws::DynamoDB
     #   The parameters required for deleting a replica for the table.
     #   @return [Types::DeleteReplicationGroupMemberAction]
     #
+    # @!attribute [rw] disassociate
+    #   The parameters for disassociating the local replica from the global
+    #   table and retaining it as a standalone regional table.
+    #   @return [Types::DisassociateReplicationGroupMemberAction]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ReplicationGroupUpdate AWS API Documentation
     #
     class ReplicationGroupUpdate < Struct.new(
       :create,
       :update,
-      :delete)
+      :delete,
+      :disassociate)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9581,6 +9636,9 @@ module Aws::DynamoDB
     #
     # @!attribute [rw] replicas
     #   Represents replicas of the table.
+    #
+    #   After a successful disassociation, this list is absent or empty. To
+    #   confirm disassociation, also verify that `TableStatus` is `ACTIVE`.
     #   @return [Array<Types::ReplicaDescription>]
     #
     # @!attribute [rw] global_table_witnesses
@@ -9623,6 +9681,12 @@ module Aws::DynamoDB
     # @!attribute [rw] deletion_protection_enabled
     #   Indicates whether deletion protection is enabled (true) or disabled
     #   (false) on the table.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] disassociation_protection_enabled
+    #   Specifies whether disassociation protection is enabled (`true`) or
+    #   disabled (`false`) for the local global table replica. Protection is
+    #   enabled by default.
     #   @return [Boolean]
     #
     # @!attribute [rw] on_demand_throughput
@@ -9720,6 +9784,7 @@ module Aws::DynamoDB
       :archival_summary,
       :table_class_summary,
       :deletion_protection_enabled,
+      :disassociation_protection_enabled,
       :on_demand_throughput,
       :warm_throughput,
       :multi_region_consistency,
@@ -11306,8 +11371,8 @@ module Aws::DynamoDB
     #   @return [Types::SSESpecification]
     #
     # @!attribute [rw] replica_updates
-    #   A list of replica update actions (create, delete, or update) for the
-    #   table.
+    #   A list of replica update actions (create, delete, update, or
+    #   disassociate) for the table.
     #   @return [Array<Types::ReplicationGroupUpdate>]
     #
     # @!attribute [rw] table_class
@@ -11393,6 +11458,19 @@ module Aws::DynamoDB
     #     to create a Multi-Account Global Table using this table.
     #   @return [String]
     #
+    # @!attribute [rw] disassociation_protection_enabled
+    #   Specifies whether disassociation protection is enabled (`true`) or
+    #   disabled (`false`) for the local replica of a multi-Region eventual
+    #   consistency (MREC) global table using Version 2019.11.21.
+    #
+    #   Disassociation protection is enabled by default. If you omit this
+    #   parameter, the existing setting is unchanged. This setting is
+    #   independent of `DeletionProtectionEnabled`.
+    #
+    #   You can't combine this change with any other change in the same
+    #   `UpdateTable` request.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] vector_index_updates
     #   A list of vector indexes to be added to or removed from the table.
     #   You can add or remove one vector index for each `UpdateTable`
@@ -11421,6 +11499,7 @@ module Aws::DynamoDB
       :on_demand_throughput,
       :warm_throughput,
       :global_table_settings_replication_mode,
+      :disassociation_protection_enabled,
       :vector_index_updates)
       SENSITIVE = []
       include Aws::Structure

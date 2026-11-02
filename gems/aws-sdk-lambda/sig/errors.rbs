@@ -11,230 +11,230 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AliasLimitExceededException < ::Aws::Errors::ServiceError
+      class AliasLimitExceededException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class CallbackTimeoutException < ::Aws::Errors::ServiceError
+      class CallbackTimeoutException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class CapacityProviderLimitExceededException < ::Aws::Errors::ServiceError
+      class CapacityProviderLimitExceededException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class CodeArtifactUserDeletedException < ::Aws::Errors::ServiceError
+      class CodeArtifactUserDeletedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class CodeArtifactUserFailedException < ::Aws::Errors::ServiceError
+      class CodeArtifactUserFailedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class CodeArtifactUserPendingException < ::Aws::Errors::ServiceError
+      class CodeArtifactUserPendingException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class CodeSigningConfigNotFoundException < ::Aws::Errors::ServiceError
+      class CodeSigningConfigNotFoundException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class CodeStorageExceededException < ::Aws::Errors::ServiceError
+      class CodeStorageExceededException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class CodeVerificationFailedException < ::Aws::Errors::ServiceError
+      class CodeVerificationFailedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class DurableExecutionAlreadyStartedException < ::Aws::Errors::ServiceError
+      class DurableExecutionAlreadyStartedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class EC2AccessDeniedException < ::Aws::Errors::ServiceError
+      class EC2AccessDeniedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class EC2ThrottledException < ::Aws::Errors::ServiceError
+      class EC2ThrottledException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class EC2UnexpectedException < ::Aws::Errors::ServiceError
+      class EC2UnexpectedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
         def ec2_error_code: () -> ::String
       end
-      class EFSIOException < ::Aws::Errors::ServiceError
+      class EFSIOException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class EFSMountConnectivityException < ::Aws::Errors::ServiceError
+      class EFSMountConnectivityException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class EFSMountFailureException < ::Aws::Errors::ServiceError
+      class EFSMountFailureException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class EFSMountTimeoutException < ::Aws::Errors::ServiceError
+      class EFSMountTimeoutException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ENILimitReachedException < ::Aws::Errors::ServiceError
+      class ENILimitReachedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ENINotReadyException < ::Aws::Errors::ServiceError
+      class ENINotReadyException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class FunctionVersionsPerCapacityProviderLimitExceededException < ::Aws::Errors::ServiceError
+      class FunctionVersionsPerCapacityProviderLimitExceededException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class InvalidCodeSignatureException < ::Aws::Errors::ServiceError
+      class InvalidCodeSignatureException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class InvalidRequestContentException < ::Aws::Errors::ServiceError
+      class InvalidRequestContentException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class InvalidRuntimeException < ::Aws::Errors::ServiceError
+      class InvalidRuntimeException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class InvalidSecurityGroupIDException < ::Aws::Errors::ServiceError
+      class InvalidSecurityGroupIDException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class InvalidSubnetIDException < ::Aws::Errors::ServiceError
+      class InvalidSubnetIDException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class InvalidZipFileException < ::Aws::Errors::ServiceError
+      class InvalidZipFileException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class KMSAccessDeniedException < ::Aws::Errors::ServiceError
+      class KMSAccessDeniedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class KMSDisabledException < ::Aws::Errors::ServiceError
+      class KMSDisabledException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class KMSInvalidStateException < ::Aws::Errors::ServiceError
+      class KMSInvalidStateException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class KMSNotFoundException < ::Aws::Errors::ServiceError
+      class KMSNotFoundException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ModeNotSupportedException < ::Aws::Errors::ServiceError
+      class ModeNotSupportedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class NoPublishedVersionException < ::Aws::Errors::ServiceError
+      class NoPublishedVersionException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class PolicyLengthExceededException < ::Aws::Errors::ServiceError
+      class PolicyLengthExceededException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class PreconditionFailedException < ::Aws::Errors::ServiceError
+      class PreconditionFailedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ProvisionedConcurrencyConfigNotFoundException < ::Aws::Errors::ServiceError
+      class ProvisionedConcurrencyConfigNotFoundException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class PublicPolicyException < ::Aws::Errors::ServiceError
+      class PublicPolicyException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class RecursiveInvocationException < ::Aws::Errors::ServiceError
+      class RecursiveInvocationException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class RequestTooLargeException < ::Aws::Errors::ServiceError
+      class RequestTooLargeException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ResourceConflictException < ::Aws::Errors::ServiceError
+      class ResourceConflictException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+      class ResourceNotReadyException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class S3FilesMountConnectivityException < ::Aws::Errors::ServiceError
+      class S3FilesMountConnectivityException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class S3FilesMountFailureException < ::Aws::Errors::ServiceError
+      class S3FilesMountFailureException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class S3FilesMountTimeoutException < ::Aws::Errors::ServiceError
+      class S3FilesMountTimeoutException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class SerializedRequestEntityTooLargeException < ::Aws::Errors::ServiceError
+      class SerializedRequestEntityTooLargeException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ServiceException < ::Aws::Errors::ServiceError
+      class ServiceException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class SnapStartException < ::Aws::Errors::ServiceError
+      class SnapStartException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class SnapStartNotReadyException < ::Aws::Errors::ServiceError
+      class SnapStartNotReadyException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class SnapStartRegenerationFailureException < ::Aws::Errors::ServiceError
+      class SnapStartRegenerationFailureException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class SnapStartTimeoutException < ::Aws::Errors::ServiceError
+      class SnapStartTimeoutException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class SubnetIPAddressLimitReachedException < ::Aws::Errors::ServiceError
+      class SubnetIPAddressLimitReachedException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def retry_after_seconds: () -> ::String
         def type: () -> ::String
         def message: () -> ::String
         def reason: () -> ::String
       end
-      class UnsupportedMediaTypeException < ::Aws::Errors::ServiceError
+      class UnsupportedMediaTypeException < ServiceError
         def type: () -> ::String
         def message: () -> ::String
       end

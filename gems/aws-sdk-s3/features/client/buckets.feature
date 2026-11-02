@@ -64,8 +64,9 @@ Feature: S3 Buckets
     And the bucket name should not be in the request path
     And the location constraint should be "us-west-2"
 
+  @mrap @veryslow
   Scenario: Get and Put Objects in an MRAP Bucket
-    Given I have access to an MRAP bucket and CRT
+    Given I create a temporary MRAP
     When I put "abc" to the key "object-key"
     When I get the object with the key "object-key"
     Then the body #read method should return "abc"

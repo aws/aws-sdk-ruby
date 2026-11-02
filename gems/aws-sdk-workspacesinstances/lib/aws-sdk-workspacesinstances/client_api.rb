@@ -107,6 +107,8 @@ module Aws::WorkspacesInstances
     ManagedInstanceRequest = Shapes::StructureShape.new(name: 'ManagedInstanceRequest')
     MarketTypeEnum = Shapes::StringShape.new(name: 'MarketTypeEnum')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    ModifyVolumeRequest = Shapes::StructureShape.new(name: 'ModifyVolumeRequest')
+    ModifyVolumeResponse = Shapes::StructureShape.new(name: 'ModifyVolumeResponse')
     NestedVirtualizationEnum = Shapes::StringShape.new(name: 'NestedVirtualizationEnum')
     NetworkInterfaceId = Shapes::StringShape.new(name: 'NetworkInterfaceId')
     NetworkInterfaces = Shapes::ListShape.new(name: 'NetworkInterfaces')
@@ -161,6 +163,8 @@ module Aws::WorkspacesInstances
     ValidationExceptionReason = Shapes::StringShape.new(name: 'ValidationExceptionReason')
     VirtualName = Shapes::StringShape.new(name: 'VirtualName')
     VolumeId = Shapes::StringShape.new(name: 'VolumeId')
+    VolumeModificationRateExceededException = Shapes::StructureShape.new(name: 'VolumeModificationRateExceededException')
+    VolumeSizeInGB = Shapes::IntegerShape.new(name: 'VolumeSizeInGB')
     VolumeTypeEnum = Shapes::StringShape.new(name: 'VolumeTypeEnum')
     WorkspaceInstance = Shapes::StructureShape.new(name: 'WorkspaceInstance')
     WorkspaceInstanceError = Shapes::StructureShape.new(name: 'WorkspaceInstanceError')
@@ -218,7 +222,7 @@ module Aws::WorkspacesInstances
     CreateVolumeRequest.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
     CreateVolumeRequest.add_member(:iops, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "Iops"))
     CreateVolumeRequest.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: KmsKeyId, location_name: "KmsKeyId"))
-    CreateVolumeRequest.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "SizeInGB"))
+    CreateVolumeRequest.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: VolumeSizeInGB, location_name: "SizeInGB"))
     CreateVolumeRequest.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "SnapshotId"))
     CreateVolumeRequest.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecifications, location_name: "TagSpecifications"))
     CreateVolumeRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "Throughput"))
@@ -446,6 +450,21 @@ module Aws::WorkspacesInstances
     ManagedInstanceRequest.add_member(:user_data, Shapes::ShapeRef.new(shape: UserData, location_name: "UserData"))
     ManagedInstanceRequest.struct_class = Types::ManagedInstanceRequest
 
+    ModifyVolumeRequest.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, required: true, location_name: "VolumeId"))
+    ModifyVolumeRequest.add_member(:size_in_gb, Shapes::ShapeRef.new(shape: VolumeSizeInGB, location_name: "SizeInGB"))
+    ModifyVolumeRequest.add_member(:volume_type, Shapes::ShapeRef.new(shape: VolumeTypeEnum, location_name: "VolumeType"))
+    ModifyVolumeRequest.add_member(:iops, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "Iops"))
+    ModifyVolumeRequest.add_member(:throughput, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "Throughput"))
+    ModifyVolumeRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    ModifyVolumeRequest.struct_class = Types::ModifyVolumeRequest
+
+    ModifyVolumeResponse.add_member(:volume_id, Shapes::ShapeRef.new(shape: VolumeId, location_name: "VolumeId"))
+    ModifyVolumeResponse.add_member(:target_size, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "TargetSize"))
+    ModifyVolumeResponse.add_member(:target_volume_type, Shapes::ShapeRef.new(shape: VolumeTypeEnum, location_name: "TargetVolumeType"))
+    ModifyVolumeResponse.add_member(:target_iops, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "TargetIops"))
+    ModifyVolumeResponse.add_member(:target_throughput, Shapes::ShapeRef.new(shape: NonNegativeInteger, location_name: "TargetThroughput"))
+    ModifyVolumeResponse.struct_class = Types::ModifyVolumeResponse
+
     NetworkInterfaces.member = Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecification)
 
     Placement.add_member(:affinity, Shapes::ShapeRef.new(shape: String64, location_name: "Affinity"))
@@ -552,6 +571,11 @@ module Aws::WorkspacesInstances
     ValidationExceptionField.struct_class = Types::ValidationExceptionField
 
     ValidationExceptionFieldList.member = Shapes::ShapeRef.new(shape: ValidationExceptionField)
+
+    VolumeModificationRateExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
+    VolumeModificationRateExceededException.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceId"))
+    VolumeModificationRateExceededException.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ResourceType"))
+    VolumeModificationRateExceededException.struct_class = Types::VolumeModificationRateExceededException
 
     WorkspaceInstance.add_member(:provision_state, Shapes::ShapeRef.new(shape: ProvisionStateEnum, location_name: "ProvisionState"))
     WorkspaceInstance.add_member(:workspace_instance_id, Shapes::ShapeRef.new(shape: WorkspaceInstanceId, location_name: "WorkspaceInstanceId"))
@@ -749,6 +773,22 @@ module Aws::WorkspacesInstances
             "next_token" => "next_token"
           }
         )
+      end)
+
+      api.add_operation(:modify_volume, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyVolume"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyVolumeRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyVolumeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: VolumeModificationRateExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

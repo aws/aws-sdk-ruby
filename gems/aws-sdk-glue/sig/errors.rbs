@@ -11,155 +11,155 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class AlreadyExistsException < ::Aws::Errors::ServiceError
+      class AlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class ColumnStatisticsTaskNotRunningException < ::Aws::Errors::ServiceError
+      class ColumnStatisticsTaskNotRunningException < ServiceError
         def message: () -> ::String
       end
-      class ColumnStatisticsTaskRunningException < ::Aws::Errors::ServiceError
+      class ColumnStatisticsTaskRunningException < ServiceError
         def message: () -> ::String
       end
-      class ColumnStatisticsTaskStoppingException < ::Aws::Errors::ServiceError
+      class ColumnStatisticsTaskStoppingException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentRunsExceededException < ::Aws::Errors::ServiceError
+      class ConcurrentRunsExceededException < ServiceError
         def message: () -> ::String
       end
-      class ConditionCheckFailureException < ::Aws::Errors::ServiceError
+      class ConditionCheckFailureException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class CrawlerNotRunningException < ::Aws::Errors::ServiceError
+      class CrawlerNotRunningException < ServiceError
         def message: () -> ::String
       end
-      class CrawlerRunningException < ::Aws::Errors::ServiceError
+      class CrawlerRunningException < ServiceError
         def message: () -> ::String
       end
-      class CrawlerStoppingException < ::Aws::Errors::ServiceError
+      class CrawlerStoppingException < ServiceError
         def message: () -> ::String
       end
-      class EntityNotFoundException < ::Aws::Errors::ServiceError
+      class EntityNotFoundException < ServiceError
         def message: () -> ::String
         def from_federation_source: () -> ::String
       end
-      class FederatedResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class FederatedResourceAlreadyExistsException < ServiceError
         def message: () -> ::String
         def associated_glue_resource: () -> ::String
       end
-      class FederationSourceException < ::Aws::Errors::ServiceError
+      class FederationSourceException < ServiceError
         def federation_source_error_code: () -> ::String
         def message: () -> ::String
       end
-      class FederationSourceRetryableException < ::Aws::Errors::ServiceError
+      class FederationSourceRetryableException < ServiceError
         def message: () -> ::String
       end
-      class GlueEncryptionException < ::Aws::Errors::ServiceError
+      class GlueEncryptionException < ServiceError
         def message: () -> ::String
       end
-      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+      class IdempotentParameterMismatchException < ServiceError
         def message: () -> ::String
       end
-      class IllegalBlueprintStateException < ::Aws::Errors::ServiceError
+      class IllegalBlueprintStateException < ServiceError
         def message: () -> ::String
       end
-      class IllegalSessionStateException < ::Aws::Errors::ServiceError
+      class IllegalSessionStateException < ServiceError
         def message: () -> ::String
       end
-      class IllegalWorkflowStateException < ::Aws::Errors::ServiceError
+      class IllegalWorkflowStateException < ServiceError
         def message: () -> ::String
       end
-      class IntegrationConflictOperationFault < ::Aws::Errors::ServiceError
+      class IntegrationConflictOperationFault < ServiceError
         def message: () -> ::String
       end
-      class IntegrationNotFoundFault < ::Aws::Errors::ServiceError
+      class IntegrationNotFoundFault < ServiceError
         def message: () -> ::String
       end
-      class IntegrationQuotaExceededFault < ::Aws::Errors::ServiceError
+      class IntegrationQuotaExceededFault < ServiceError
         def message: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
         def message: () -> ::String
         def from_federation_source: () -> ::String
       end
-      class InvalidIntegrationStateFault < ::Aws::Errors::ServiceError
+      class InvalidIntegrationStateFault < ServiceError
         def message: () -> ::String
       end
-      class InvalidStateException < ::Aws::Errors::ServiceError
+      class InvalidStateException < ServiceError
         def message: () -> ::String
       end
-      class KMSKeyNotAccessibleFault < ::Aws::Errors::ServiceError
+      class KMSKeyNotAccessibleFault < ServiceError
         def message: () -> ::String
       end
-      class MLTransformNotReadyException < ::Aws::Errors::ServiceError
+      class MLTransformNotReadyException < ServiceError
         def message: () -> ::String
       end
-      class MaterializedViewRefreshTaskNotRunningException < ::Aws::Errors::ServiceError
+      class MaterializedViewRefreshTaskNotRunningException < ServiceError
         def message: () -> ::String
       end
-      class MaterializedViewRefreshTaskRunningException < ::Aws::Errors::ServiceError
+      class MaterializedViewRefreshTaskRunningException < ServiceError
         def message: () -> ::String
       end
-      class MaterializedViewRefreshTaskStoppingException < ::Aws::Errors::ServiceError
+      class MaterializedViewRefreshTaskStoppingException < ServiceError
         def message: () -> ::String
       end
-      class NoScheduleException < ::Aws::Errors::ServiceError
+      class NoScheduleException < ServiceError
         def message: () -> ::String
       end
-      class OperationNotSupportedException < ::Aws::Errors::ServiceError
+      class OperationNotSupportedException < ServiceError
         def message: () -> ::String
       end
-      class OperationTimeoutException < ::Aws::Errors::ServiceError
+      class OperationTimeoutException < ServiceError
         def message: () -> ::String
       end
-      class PermissionTypeMismatchException < ::Aws::Errors::ServiceError
+      class PermissionTypeMismatchException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+      class ResourceNotReadyException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNumberLimitExceededException < ::Aws::Errors::ServiceError
+      class ResourceNumberLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class SchedulerNotRunningException < ::Aws::Errors::ServiceError
+      class SchedulerNotRunningException < ServiceError
         def message: () -> ::String
       end
-      class SchedulerRunningException < ::Aws::Errors::ServiceError
+      class SchedulerRunningException < ServiceError
         def message: () -> ::String
       end
-      class SchedulerTransitioningException < ::Aws::Errors::ServiceError
+      class SchedulerTransitioningException < ServiceError
         def message: () -> ::String
       end
-      class SessionBusyException < ::Aws::Errors::ServiceError
+      class SessionBusyException < ServiceError
         def message: () -> ::String
       end
-      class TargetResourceNotFound < ::Aws::Errors::ServiceError
+      class TargetResourceNotFound < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
-      class VersionMismatchException < ::Aws::Errors::ServiceError
+      class VersionMismatchException < ServiceError
         def message: () -> ::String
       end
     end

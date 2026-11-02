@@ -4162,6 +4162,77 @@ module Aws::DevOpsAgent
       include Aws::Structure
     end
 
+    # Represents a channel in a Microsoft Teams team that the DevOps Agent
+    # service can send notifications to.
+    #
+    # @!attribute [rw] channel_name
+    #   The name of the Microsoft Teams channel.
+    #   @return [String]
+    #
+    # @!attribute [rw] channel_id
+    #   The unique identifier of the Microsoft Teams channel, for example
+    #   19:abc123def456@thread.tacv2.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MSTeamsChannel AWS API Documentation
+    #
+    class MSTeamsChannel < Struct.new(
+      :channel_name,
+      :channel_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Configuration for connecting a Microsoft Teams team to the DevOps
+    # Agent service. Use this configuration to specify which team to connect
+    # and how to route agent notifications to channels within that team.
+    #
+    # @!attribute [rw] team_id
+    #   The identifier of the Microsoft Teams team to connect to the DevOps
+    #   Agent service.
+    #   @return [String]
+    #
+    # @!attribute [rw] team_name
+    #   The name of the Microsoft Teams team to connect to the DevOps Agent
+    #   service.
+    #   @return [String]
+    #
+    # @!attribute [rw] transmission_target
+    #   The Microsoft Teams channels that receive agent notifications.
+    #   @return [Types::MSTeamsTransmissionTarget]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MSTeamsConfiguration AWS API Documentation
+    #
+    class MSTeamsConfiguration < Struct.new(
+      :team_id,
+      :team_name,
+      :transmission_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the Microsoft Teams channels that receive different types of
+    # agent notifications.
+    #
+    # @!attribute [rw] ops_oncall_target
+    #   The Microsoft Teams channel that receives notifications from the
+    #   On-call Agent.
+    #   @return [Types::MSTeamsChannel]
+    #
+    # @!attribute [rw] ops_sre_target
+    #   The Microsoft Teams channel that receives notifications from the SRE
+    #   Agent.
+    #   @return [Types::MSTeamsChannel]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/devops-agent-2026-01-01/MSTeamsTransmissionTarget AWS API Documentation
+    #
+    class MSTeamsTransmissionTarget < Struct.new(
+      :ops_oncall_target,
+      :ops_sre_target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A message in a conversation, either from the user or the assistant.
     #
     # @note Message is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Message corresponding to the set member.
@@ -6075,6 +6146,11 @@ module Aws::DevOpsAgent
     #   Remote A2A agent integration configuration (SigV4 auth).
     #   @return [Types::RemoteAgentSigV4Configuration]
     #
+    # @!attribute [rw] msteams
+    #   The configuration for connecting a Microsoft Teams team to the
+    #   DevOps Agent service.
+    #   @return [Types::MSTeamsConfiguration]
+    #
     # @!attribute [rw] release_management
     #   Release management network environment configuration
     #   @return [Types::ReleaseManagementConfiguration]
@@ -6101,6 +6177,7 @@ module Aws::DevOpsAgent
       :mcpserversigv4,
       :remoteagent,
       :remoteagentsigv4,
+      :msteams,
       :release_management,
       :unknown)
       SENSITIVE = []
@@ -6126,6 +6203,7 @@ module Aws::DevOpsAgent
       class Mcpserversigv4 < ServiceConfiguration; end
       class Remoteagent < ServiceConfiguration; end
       class Remoteagentsigv4 < ServiceConfiguration; end
+      class Msteams < ServiceConfiguration; end
       class ReleaseManagement < ServiceConfiguration; end
       class Unknown < ServiceConfiguration; end
     end

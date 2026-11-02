@@ -1314,6 +1314,96 @@ module Aws::WorkspacesInstances
       include Aws::Structure
     end
 
+    # Contains the parameters for modifying a volume, including the target
+    # size, volume type, IOPS, or throughput.
+    #
+    # @!attribute [rw] volume_id
+    #   Specifies the identifier of the volume to modify.
+    #   @return [String]
+    #
+    # @!attribute [rw] size_in_gb
+    #   Specifies the target size of the volume, in GiB. The target size
+    #   must be greater than or equal to the current size of the volume. If
+    #   you don't specify a size, the current size is retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] volume_type
+    #   Specifies the target Amazon Elastic Block Store (Amazon EBS) volume
+    #   type. If you don't specify a volume type, the current volume type
+    #   is retained.
+    #   @return [String]
+    #
+    # @!attribute [rw] iops
+    #   Specifies the target IOPS rate of the volume. This parameter is
+    #   valid only for `gp3`, `io1`, and `io2` volumes. If you don't
+    #   specify IOPS and keep the same volume type, the current IOPS rate is
+    #   retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] throughput
+    #   Specifies the target throughput of the volume, in MiB/s. This
+    #   parameter is valid only for `gp3` volumes. If you don't specify
+    #   throughput and the volume remains `gp3`, the current throughput is
+    #   retained.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] client_token
+    #   Unique token to ensure idempotent volume modification, preventing
+    #   duplicate volume modifications.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/ModifyVolumeRequest AWS API Documentation
+    #
+    class ModifyVolumeRequest < Struct.new(
+      :volume_id,
+      :size_in_gb,
+      :volume_type,
+      :iops,
+      :throughput,
+      :client_token)
+      SENSITIVE = [:client_token]
+      include Aws::Structure
+    end
+
+    # Contains the target configuration of the volume after the
+    # modification, including the size, volume type, IOPS, and throughput
+    # where applicable.
+    #
+    # @!attribute [rw] volume_id
+    #   Specifies the identifier of the modified volume.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_size
+    #   Specifies the target size of the volume, in GiB.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_volume_type
+    #   Specifies the target Amazon EBS volume type.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_iops
+    #   Specifies the target IOPS rate of the volume.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] target_throughput
+    #   Specifies the target throughput of the volume, in MiB/s.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/ModifyVolumeResponse AWS API Documentation
+    #
+    class ModifyVolumeResponse < Struct.new(
+      :volume_id,
+      :target_size,
+      :target_volume_type,
+      :target_iops,
+      :target_throughput)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Defines instance placement configuration for WorkSpace Instance.
     #
     # @!attribute [rw] affinity
@@ -1716,6 +1806,35 @@ module Aws::WorkspacesInstances
       :name,
       :reason,
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The volume has a previous modification that is still in progress, or
+    # has reached the limit of four modifications in a rolling 24-hour
+    # period. Wait for the current modification to finish, or wait until the
+    # time indicated in the error message, and then retry the request.
+    #
+    # @!attribute [rw] message
+    #   Specifies the reason that the modification request was rejected.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   Specifies the identifier of the volume for which the modification
+    #   request was rejected.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   Specifies the type of the resource for which the modification
+    #   request was rejected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/workspaces-instances-2022-07-26/VolumeModificationRateExceededException AWS API Documentation
+    #
+    class VolumeModificationRateExceededException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
       SENSITIVE = []
       include Aws::Structure
     end

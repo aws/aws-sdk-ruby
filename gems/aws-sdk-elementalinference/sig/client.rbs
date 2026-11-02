@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -136,6 +137,42 @@ module Aws
                        ) -> _CreateFeedResponseSuccess
                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateFeedResponseSuccess
 
+      interface _CreateScheduleActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateScheduleActionResponse]
+        def action_name: () -> ::String
+        def start_configuration: () -> Types::ScheduleActionStartConfiguration
+        def operations: () -> ::Array[Types::ScheduleActionOperation]
+        def status: () -> ("PENDING" | "COMPLETED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#create_schedule_action-instance_method
+      def create_schedule_action: (
+                                    id: ::String,
+                                    action_name: ::String,
+                                    start_configuration: {
+                                      fixed_mode_schedule_action_start_settings: {
+                                        scheduled_at: ::Time
+                                      }?
+                                    },
+                                    operations: Array[
+                                      {
+                                        update_output_status: {
+                                          output_name: ::String,
+                                          status: ("ENABLED" | "DISABLED")
+                                        }?,
+                                        update_clipping_data_source_configuration: {
+                                          output_name: ::String,
+                                          data_source_configuration: {
+                                            fixture_id: ::String
+                                          }
+                                        }?,
+                                        remove_clipping_data_source_configuration: {
+                                          output_name: ::String
+                                        }?
+                                      }
+                                    ]
+                                  ) -> _CreateScheduleActionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateScheduleActionResponseSuccess
+
       interface _DeleteDictionaryResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDictionaryResponse]
         def arn: () -> ::String
@@ -165,6 +202,17 @@ module Aws
                                 id: ::String
                               ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _DeleteScheduleActionResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteScheduleActionResponse]
+        def action_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#delete_schedule_action-instance_method
+      def delete_schedule_action: (
+                                    id: ::String,
+                                    action_name: ::String
+                                  ) -> _DeleteScheduleActionResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteScheduleActionResponseSuccess
 
       interface _DisassociateFeedResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DisassociateFeedResponse]
@@ -271,6 +319,19 @@ module Aws
                         ?next_token: ::String
                       ) -> _ListFeedsResponseSuccess
                     | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListFeedsResponseSuccess
+
+      interface _ListScheduleActionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListScheduleActionsResponse]
+        def schedule_actions: () -> ::Array[Types::ScheduleAction]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ElementalInference/Client.html#list_schedule_actions-instance_method
+      def list_schedule_actions: (
+                                   id: ::String,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListScheduleActionsResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListScheduleActionsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]

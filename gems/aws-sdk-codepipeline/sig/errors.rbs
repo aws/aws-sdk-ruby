@@ -11,103 +11,103 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ActionExecutionNotFoundException < ::Aws::Errors::ServiceError
+      class ActionExecutionNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ActionNotFoundException < ::Aws::Errors::ServiceError
+      class ActionNotFoundException < ServiceError
       end
-      class ActionTypeAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ActionTypeAlreadyExistsException < ServiceError
       end
-      class ActionTypeNotFoundException < ::Aws::Errors::ServiceError
+      class ActionTypeNotFoundException < ServiceError
       end
-      class ApprovalAlreadyCompletedException < ::Aws::Errors::ServiceError
+      class ApprovalAlreadyCompletedException < ServiceError
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentPipelineExecutionsLimitExceededException < ::Aws::Errors::ServiceError
+      class ConcurrentPipelineExecutionsLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ConditionNotOverridableException < ::Aws::Errors::ServiceError
+      class ConditionNotOverridableException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class DuplicatedStopRequestException < ::Aws::Errors::ServiceError
+      class DuplicatedStopRequestException < ServiceError
         def message: () -> ::String
       end
-      class InvalidActionDeclarationException < ::Aws::Errors::ServiceError
+      class InvalidActionDeclarationException < ServiceError
       end
-      class InvalidApprovalTokenException < ::Aws::Errors::ServiceError
+      class InvalidApprovalTokenException < ServiceError
       end
-      class InvalidArnException < ::Aws::Errors::ServiceError
+      class InvalidArnException < ServiceError
         def message: () -> ::String
       end
-      class InvalidBlockerDeclarationException < ::Aws::Errors::ServiceError
+      class InvalidBlockerDeclarationException < ServiceError
       end
-      class InvalidClientTokenException < ::Aws::Errors::ServiceError
+      class InvalidClientTokenException < ServiceError
       end
-      class InvalidJobException < ::Aws::Errors::ServiceError
+      class InvalidJobException < ServiceError
       end
-      class InvalidJobStateException < ::Aws::Errors::ServiceError
+      class InvalidJobStateException < ServiceError
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
       end
-      class InvalidNonceException < ::Aws::Errors::ServiceError
+      class InvalidNonceException < ServiceError
       end
-      class InvalidStageDeclarationException < ::Aws::Errors::ServiceError
+      class InvalidStageDeclarationException < ServiceError
       end
-      class InvalidStructureException < ::Aws::Errors::ServiceError
+      class InvalidStructureException < ServiceError
       end
-      class InvalidTagsException < ::Aws::Errors::ServiceError
+      class InvalidTagsException < ServiceError
         def message: () -> ::String
       end
-      class InvalidWebhookAuthenticationParametersException < ::Aws::Errors::ServiceError
+      class InvalidWebhookAuthenticationParametersException < ServiceError
       end
-      class InvalidWebhookFilterPatternException < ::Aws::Errors::ServiceError
+      class InvalidWebhookFilterPatternException < ServiceError
       end
-      class JobNotFoundException < ::Aws::Errors::ServiceError
+      class JobNotFoundException < ServiceError
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
       end
-      class NotLatestPipelineExecutionException < ::Aws::Errors::ServiceError
+      class NotLatestPipelineExecutionException < ServiceError
       end
-      class OutputVariablesSizeExceededException < ::Aws::Errors::ServiceError
+      class OutputVariablesSizeExceededException < ServiceError
         def message: () -> ::String
       end
-      class PipelineExecutionNotFoundException < ::Aws::Errors::ServiceError
+      class PipelineExecutionNotFoundException < ServiceError
       end
-      class PipelineExecutionNotStoppableException < ::Aws::Errors::ServiceError
+      class PipelineExecutionNotStoppableException < ServiceError
         def message: () -> ::String
       end
-      class PipelineExecutionOutdatedException < ::Aws::Errors::ServiceError
+      class PipelineExecutionOutdatedException < ServiceError
         def message: () -> ::String
       end
-      class PipelineNameInUseException < ::Aws::Errors::ServiceError
+      class PipelineNameInUseException < ServiceError
       end
-      class PipelineNotFoundException < ::Aws::Errors::ServiceError
+      class PipelineNotFoundException < ServiceError
       end
-      class PipelineVersionNotFoundException < ::Aws::Errors::ServiceError
+      class PipelineVersionNotFoundException < ServiceError
       end
-      class RequestFailedException < ::Aws::Errors::ServiceError
+      class RequestFailedException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
-      class StageNotFoundException < ::Aws::Errors::ServiceError
+      class StageNotFoundException < ServiceError
       end
-      class StageNotRetryableException < ::Aws::Errors::ServiceError
+      class StageNotRetryableException < ServiceError
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
       end
-      class UnableToRollbackStageException < ::Aws::Errors::ServiceError
+      class UnableToRollbackStageException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
       end
-      class WebhookNotFoundException < ::Aws::Errors::ServiceError
+      class WebhookNotFoundException < ServiceError
       end
     end
   end

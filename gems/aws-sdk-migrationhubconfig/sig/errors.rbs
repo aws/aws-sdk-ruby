@@ -11,22 +11,22 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class DryRunOperation < ::Aws::Errors::ServiceError
+      class DryRunOperation < ServiceError
         def message: () -> ::String
       end
-      class InternalServerError < ::Aws::Errors::ServiceError
+      class InternalServerError < ServiceError
         def message: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
         def message: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
         def retry_after_seconds: () -> ::String
       end

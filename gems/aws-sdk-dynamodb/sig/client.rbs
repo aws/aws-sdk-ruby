@@ -28,6 +28,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -1219,6 +1220,10 @@ module Aws
                               }?,
                               delete: {
                                 region_name: ::String
+                              }?,
+                              disassociate: {
+                                region_name: ::String,
+                                disassociation_mode: ("WAIT_FOR_REPLICATION")
                               }?
                             }
                           ],
@@ -1244,6 +1249,7 @@ module Aws
                             write_units_per_second: ::Integer?
                           },
                           ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES"),
+                          ?disassociation_protection_enabled: bool,
                           ?vector_index_updates: Array[
                             {
                               create: {

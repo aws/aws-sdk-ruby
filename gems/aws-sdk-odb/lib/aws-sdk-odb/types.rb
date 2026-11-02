@@ -2758,7 +2758,7 @@ module Aws::Odb
     #   @return [Time]
     #
     # @!attribute [rw] total_storage_size_in_g_bs
-    #   The total amount of storage, in gigabytes (GB), on the the Exadata
+    #   The total amount of storage, in gigabytes (GB), on the Exadata
     #   infrastructure.
     #   @return [Integer]
     #
@@ -2786,6 +2786,12 @@ module Aws::Odb
     #   legacy physical measure of compute resources. OCPUs are based on the
     #   physical core of a processor with hyper-threading enabled.
     #   @return [String]
+    #
+    # @!attribute [rw] exascale_configuration
+    #   The Exascale storage configuration of the Exadata infrastructure.
+    #   This value is present only when Exascale storage is configured on
+    #   the infrastructure.
+    #   @return [Types::ExascaleConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CloudExadataInfrastructure AWS API Documentation
     #
@@ -2827,7 +2833,8 @@ module Aws::Odb
       :percent_progress,
       :database_server_type,
       :storage_server_type,
-      :compute_model)
+      :compute_model,
+      :exascale_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2988,7 +2995,7 @@ module Aws::Odb
     #   @return [Time]
     #
     # @!attribute [rw] total_storage_size_in_g_bs
-    #   The total amount of storage, in gigabytes (GB), on the the Exadata
+    #   The total amount of storage, in gigabytes (GB), on the Exadata
     #   infrastructure.
     #   @return [Integer]
     #
@@ -3016,6 +3023,12 @@ module Aws::Odb
     #   legacy physical measure of compute resources. OCPUs are based on the
     #   physical core of a processor with hyper-threading enabled.
     #   @return [String]
+    #
+    # @!attribute [rw] exascale_configuration
+    #   The Exascale storage configuration of the Exadata infrastructure.
+    #   This value is present only when Exascale storage is configured on
+    #   the infrastructure.
+    #   @return [Types::ExascaleConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/CloudExadataInfrastructureSummary AWS API Documentation
     #
@@ -3057,7 +3070,8 @@ module Aws::Odb
       :percent_progress,
       :database_server_type,
       :storage_server_type,
-      :compute_model)
+      :compute_model,
+      :exascale_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3141,6 +3155,37 @@ module Aws::Odb
     #   The Amazon Resource Name (ARN) of the Exadata infrastructure that
     #   this VM cluster belongs to.
     #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault that the VM
+    #   cluster uses. This value is present only for VM clusters that use an
+    #   Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_arn
+    #   The Amazon Resource Name (ARN) of the Exascale storage vault that
+    #   the VM cluster uses. This value is present only for VM clusters that
+    #   use an Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_management_type
+    #   The type of storage management for the VM cluster. A value of `ASM`
+    #   indicates Oracle Automatic Storage Management, and `EXASCALE`
+    #   indicates Exascale storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_file_system_storage_type
+    #   The type of storage that the VM cluster uses for its VM file
+    #   systems.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_backup_storage_type
+    #   The type of storage that the VM cluster uses for VM backups.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_configuration_details
+    #   The list of file system configurations for the VM cluster.
+    #   @return [Array<Types::FileSystemConfigurationDetails>]
     #
     # @!attribute [rw] cluster_name
     #   The name of the Grid Infrastructure (GI) cluster.
@@ -3323,6 +3368,12 @@ module Aws::Odb
       :cloud_vm_cluster_arn,
       :cloud_exadata_infrastructure_id,
       :cloud_exadata_infrastructure_arn,
+      :exascale_db_storage_vault_id,
+      :exascale_db_storage_vault_arn,
+      :storage_management_type,
+      :vm_file_system_storage_type,
+      :vm_backup_storage_type,
+      :file_system_configuration_details,
       :cluster_name,
       :cpu_core_count,
       :data_collection_options,
@@ -3394,6 +3445,37 @@ module Aws::Odb
     #   The Amazon Resource Name (ARN) of the Exadata infrastructure that
     #   this VM cluster belongs to.
     #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier of the Exascale storage vault that the VM
+    #   cluster uses. This value is present only for VM clusters that use an
+    #   Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] exascale_db_storage_vault_arn
+    #   The Amazon Resource Name (ARN) of the Exascale storage vault that
+    #   the VM cluster uses. This value is present only for VM clusters that
+    #   use an Exascale storage vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] storage_management_type
+    #   The type of storage management for the VM cluster. A value of `ASM`
+    #   indicates Oracle Automatic Storage Management, and `EXASCALE`
+    #   indicates Exascale storage.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_file_system_storage_type
+    #   The type of storage that the VM cluster uses for its VM file
+    #   systems.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_backup_storage_type
+    #   The type of storage that the VM cluster uses for VM backups.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_configuration_details
+    #   The list of file system configurations for the VM cluster.
+    #   @return [Array<Types::FileSystemConfigurationDetails>]
     #
     # @!attribute [rw] cluster_name
     #   The name of the Grid Infrastructure (GI) cluster.
@@ -3577,6 +3659,12 @@ module Aws::Odb
       :cloud_vm_cluster_arn,
       :cloud_exadata_infrastructure_id,
       :cloud_exadata_infrastructure_arn,
+      :exascale_db_storage_vault_id,
+      :exascale_db_storage_vault_arn,
+      :storage_management_type,
+      :vm_file_system_storage_type,
+      :vm_backup_storage_type,
+      :file_system_configuration_details,
       :cluster_name,
       :cpu_core_count,
       :data_collection_options,
@@ -4307,6 +4395,31 @@ module Aws::Odb
     #   cluster.
     #   @return [String]
     #
+    # @!attribute [rw] exascale_db_storage_vault_id
+    #   The unique identifier or Amazon Resource Name (ARN) of the Exascale
+    #   storage vault to use for the VM cluster. Specify this value to
+    #   create a VM cluster that uses Exascale storage on dedicated Exadata
+    #   infrastructure.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_file_system_storage_type
+    #   The type of storage to use for the VM file systems. Specify
+    #   `EXASCALE` to store the VM file systems in Exascale storage on the
+    #   storage servers, or `LOCAL` to store them on the database servers.
+    #   @return [String]
+    #
+    # @!attribute [rw] vm_backup_storage_type
+    #   The type of storage to use for VM backups. Specify `EXASCALE` to
+    #   store VM backups in Exascale storage on the storage servers, or
+    #   `LOCAL` to store them on the database servers.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_configuration_details
+    #   The list of file system configurations for the VM cluster. Each
+    #   entry specifies the mount point of a file system and its size, in
+    #   gigabytes (GB).
+    #   @return [Array<Types::FileSystemConfigurationDetails>]
+    #
     # @!attribute [rw] cpu_core_count
     #   The number of CPU cores to enable on the VM cluster.
     #   @return [Integer]
@@ -4431,6 +4544,10 @@ module Aws::Odb
     #
     class CreateCloudVmClusterInput < Struct.new(
       :cloud_exadata_infrastructure_id,
+      :exascale_db_storage_vault_id,
+      :vm_file_system_storage_type,
+      :vm_backup_storage_type,
+      :file_system_configuration_details,
       :cpu_core_count,
       :display_name,
       :gi_version,
@@ -4551,8 +4668,7 @@ module Aws::Odb
     #   @return [Integer]
     #
     # @!attribute [rw] scan_listener_port_tcp_ssl
-    #   The port number for TCP connections with SSL to the Single Client
-    #   Access Name (SCAN) listener.
+    #   Reserved for future use.
     #   @return [Integer]
     #
     # @!attribute [rw] shape_attribute
@@ -4659,6 +4775,17 @@ module Aws::Odb
     #   vault.
     #   @return [Integer]
     #
+    # @!attribute [rw] cloud_exadata_infrastructure_id
+    #   The unique identifier or Amazon Resource Name (ARN) of the Exadata
+    #   infrastructure on which to create the Exascale storage vault.
+    #   Specify this value to create the Exascale storage vault on dedicated
+    #   Exadata infrastructure that has Exascale storage configured. If you
+    #   specify `availabilityZone` or `availabilityZoneId`, the value must
+    #   match the Availability Zone of the Exadata infrastructure. If you
+    #   specify neither, the service uses the Availability Zone of the
+    #   Exadata infrastructure.
+    #   @return [String]
+    #
     # @!attribute [rw] availability_zone_id
     #   The Availability Zone ID for the Exascale storage vault.
     #   @return [String]
@@ -4704,6 +4831,7 @@ module Aws::Odb
       :high_capacity_database_storage_total_size_in_g_bs,
       :additional_flash_cache_in_percent,
       :autoscale_limit_in_g_bs,
+      :cloud_exadata_infrastructure_id,
       :availability_zone_id,
       :availability_zone,
       :description,
@@ -6639,8 +6767,7 @@ module Aws::Odb
     #   @return [Integer]
     #
     # @!attribute [rw] scan_listener_port_tcp_ssl
-    #   The port number for TCP connections with SSL to the Single Client
-    #   Access Name (SCAN) listener for the Exascale VM cluster.
+    #   Reserved for future use.
     #   @return [Integer]
     #
     # @!attribute [rw] shape
@@ -6910,8 +7037,7 @@ module Aws::Odb
     #   @return [Integer]
     #
     # @!attribute [rw] scan_listener_port_tcp_ssl
-    #   The port number for TCP connections with SSL to the Single Client
-    #   Access Name (SCAN) listener for the Exascale VM cluster.
+    #   Reserved for future use.
     #   @return [Integer]
     #
     # @!attribute [rw] shape
@@ -7020,6 +7146,40 @@ module Aws::Odb
       include Aws::Structure
     end
 
+    # The Exascale storage configuration of an Exadata infrastructure.
+    #
+    # @!attribute [rw] total_storage_size_in_g_bs
+    #   The total amount of Exascale storage, in gigabytes (GB), configured
+    #   on the Exadata infrastructure.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_storage_size_in_g_bs
+    #   The amount of Exascale storage, in gigabytes (GB), that's available
+    #   on the Exadata infrastructure.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_vm_storage_size_in_g_bs
+    #   The total amount of Exascale VM storage, in gigabytes (GB), on the
+    #   Exadata infrastructure. VM clusters use Exascale VM storage for
+    #   their VM file systems and VM backups.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] available_vm_storage_size_in_g_bs
+    #   The amount of Exascale VM storage, in gigabytes (GB), that's
+    #   available on the Exadata infrastructure.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ExascaleConfiguration AWS API Documentation
+    #
+    class ExascaleConfiguration < Struct.new(
+      :total_storage_size_in_g_bs,
+      :available_storage_size_in_g_bs,
+      :total_vm_storage_size_in_g_bs,
+      :available_vm_storage_size_in_g_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The storage details for an Exascale storage vault.
     #
     # @!attribute [rw] available_size_in_g_bs
@@ -7067,6 +7227,18 @@ module Aws::Odb
     #   The Availability Zone ID for the Exascale storage vault.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Exadata infrastructure that
+    #   hosts the Exascale storage vault. This value is present only for
+    #   vaults on dedicated Exadata infrastructure.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_id
+    #   The unique identifier of the Exadata infrastructure that hosts the
+    #   Exascale storage vault. This value is present only for vaults on
+    #   dedicated Exadata infrastructure.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The date and time when the Exascale storage vault was created.
     #   @return [Time]
@@ -7139,6 +7311,10 @@ module Aws::Odb
     #   The time zone of the Exascale storage vault.
     #   @return [String]
     #
+    # @!attribute [rw] vault_type
+    #   The type of infrastructure that hosts the Exascale storage vault.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ExascaleDbStorageVault AWS API Documentation
     #
     class ExascaleDbStorageVault < Struct.new(
@@ -7148,6 +7324,8 @@ module Aws::Odb
       :autoscale_limit_in_g_bs,
       :availability_zone,
       :availability_zone_id,
+      :cloud_exadata_infrastructure_arn,
+      :cloud_exadata_infrastructure_id,
       :created_at,
       :description,
       :display_name,
@@ -7163,7 +7341,8 @@ module Aws::Odb
       :percent_progress,
       :status,
       :status_reason,
-      :time_zone)
+      :time_zone,
+      :vault_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7196,6 +7375,18 @@ module Aws::Odb
     #   The Availability Zone ID for the Exascale storage vault.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_exadata_infrastructure_arn
+    #   The Amazon Resource Name (ARN) of the Exadata infrastructure that
+    #   hosts the Exascale storage vault. This value is present only for
+    #   vaults on dedicated Exadata infrastructure.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_id
+    #   The unique identifier of the Exadata infrastructure that hosts the
+    #   Exascale storage vault. This value is present only for vaults on
+    #   dedicated Exadata infrastructure.
+    #   @return [String]
+    #
     # @!attribute [rw] created_at
     #   The date and time when the Exascale storage vault was created.
     #   @return [Time]
@@ -7268,6 +7459,10 @@ module Aws::Odb
     #   The time zone of the Exascale storage vault.
     #   @return [String]
     #
+    # @!attribute [rw] vault_type
+    #   The type of infrastructure that hosts the Exascale storage vault.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ExascaleDbStorageVaultSummary AWS API Documentation
     #
     class ExascaleDbStorageVaultSummary < Struct.new(
@@ -7277,6 +7472,8 @@ module Aws::Odb
       :autoscale_limit_in_g_bs,
       :availability_zone,
       :availability_zone_id,
+      :cloud_exadata_infrastructure_arn,
+      :cloud_exadata_infrastructure_id,
       :created_at,
       :description,
       :display_name,
@@ -7292,7 +7489,8 @@ module Aws::Odb
       :percent_progress,
       :status,
       :status_reason,
-      :time_zone)
+      :time_zone,
+      :vault_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7341,6 +7539,25 @@ module Aws::Odb
       :display_name,
       :status,
       :status_reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration of a file system on a VM cluster.
+    #
+    # @!attribute [rw] mount_point
+    #   The mount point of the file system.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_system_size_in_g_bs
+    #   The size of the file system, in gigabytes (GB).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/FileSystemConfigurationDetails AWS API Documentation
+    #
+    class FileSystemConfigurationDetails < Struct.new(
+      :mount_point,
+      :file_system_size_in_g_bs)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8634,11 +8851,33 @@ module Aws::Odb
     #   request.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_exadata_infrastructure_id
+    #   The unique identifier or Amazon Resource Name (ARN) of an Exadata
+    #   infrastructure. If you specify this value, the operation returns
+    #   only the Exascale storage vaults on that infrastructure that you own
+    #   or that are shared with you. The infrastructure can be one that's
+    #   shared with you through Amazon Web Services Resource Access Manager
+    #   (Amazon Web Services RAM). You can't combine this filter with a
+    #   `vaultType` of `EXASCALE_INFRASTRUCTURE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] vault_type
+    #   The type of Exascale storage vaults to return. Specify
+    #   `DEDICATED_INFRASTRUCTURE` to return Exascale storage vaults on
+    #   dedicated Exadata infrastructure, or `EXASCALE_INFRASTRUCTURE` to
+    #   return Exascale storage vaults for Exascale VM clusters. If you
+    #   don't specify a value, the operation returns both types. You can't
+    #   combine `EXASCALE_INFRASTRUCTURE` with the
+    #   `cloudExadataInfrastructureId` filter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/ListExascaleDbStorageVaultsInput AWS API Documentation
     #
     class ListExascaleDbStorageVaultsInput < Struct.new(
       :max_results,
-      :next_token)
+      :next_token,
+      :cloud_exadata_infrastructure_id,
+      :vault_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -11042,6 +11281,62 @@ module Aws::Odb
       :status,
       :status_reason,
       :exadb_vm_cluster_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] cloud_exadata_infrastructure_id
+    #   The unique identifier or Amazon Resource Name (ARN) of the Exadata
+    #   infrastructure to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_storage_size_in_g_bs
+    #   The total amount of Exascale storage, in gigabytes (GB), to
+    #   configure on the Exadata infrastructure.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_vm_storage_size_in_g_bs
+    #   The total amount of Exascale storage, in gigabytes (GB), to allocate
+    #   for VM storage on the Exadata infrastructure. VM clusters that store
+    #   their VM file systems or VM backups in Exascale storage use this
+    #   capacity.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateExascaleCloudExadataInfrastructureInput AWS API Documentation
+    #
+    class UpdateExascaleCloudExadataInfrastructureInput < Struct.new(
+      :cloud_exadata_infrastructure_id,
+      :total_storage_size_in_g_bs,
+      :total_vm_storage_size_in_g_bs)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] display_name
+    #   The user-friendly name of the updated Exadata infrastructure.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the Exadata infrastructure after the update
+    #   operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Additional information about the status of the Exadata
+    #   infrastructure after the update operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_exadata_infrastructure_id
+    #   The unique identifier of the updated Exadata infrastructure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/odb-2024-08-20/UpdateExascaleCloudExadataInfrastructureOutput AWS API Documentation
+    #
+    class UpdateExascaleCloudExadataInfrastructureOutput < Struct.new(
+      :display_name,
+      :status,
+      :status_reason,
+      :cloud_exadata_infrastructure_id)
       SENSITIVE = []
       include Aws::Structure
     end

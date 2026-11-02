@@ -201,12 +201,19 @@ module Aws::Lambda
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1395,6 +1402,9 @@ module Aws::Lambda
     #   when you set `BatchSize` to a value greater than 10, you must set
     #   `MaximumBatchingWindowInSeconds` to at least 1.
     #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
+    #
     # @option params [Integer] :parallelization_factor
     #   (Kinesis and DynamoDB Streams only) The number of batches to process
     #   from each shard concurrently.
@@ -1405,9 +1415,15 @@ module Aws::Lambda
     #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams, Amazon
     #   DocumentDB, Amazon MSK, and self-managed Apache Kafka.
     #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
+    #
     # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which to
     #   start reading. `StartingPositionTimestamp` cannot be in the future.
+    #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
     #
     # @option params [Types::DestinationConfig] :destination_config
     #   (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka)
@@ -1428,6 +1444,12 @@ module Aws::Lambda
     #   Discard records after the specified number of retries. The default
     #   value is infinite (-1). When set to infinite (-1), failed records are
     #   retried until the record expires.
+    #
+    #   For Kafka `Stream` consumption mode, the default is `-1` (infinite
+    #   retries; capped at 10 when an on-failure destination is configured).
+    #   For Kafka `Queue` consumption mode, the default is `0`, and if no
+    #   on-failure destination is configured the Kafka broker performs
+    #   retries.
     #
     # @option params [Hash<String,String>] :tags
     #   A list of tags to apply to the event source mapping.
@@ -1625,6 +1647,7 @@ module Aws::Lambda
     #           },
     #         ],
     #       },
+    #       consumption_mode: "Stream", # accepts Stream, Queue
     #     },
     #     document_db_event_source_config: {
     #       database_name: "DatabaseName",
@@ -1695,6 +1718,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
+    #   resp.self_managed_kafka_event_source_config.consumption_mode #=> String, one of "Stream", "Queue"
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
     #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
@@ -2658,6 +2682,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
+    #   resp.self_managed_kafka_event_source_config.consumption_mode #=> String, one of "Stream", "Queue"
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
     #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
@@ -2779,7 +2804,7 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Removes a concurrent execution limit from a function.
+    # Removes a concurrent execution limit from a Lambda Event Function.
     #
     # @option params [required, String] :function_name
     #   The name or ARN of the Lambda function.
@@ -3747,6 +3772,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
+    #   resp.self_managed_kafka_event_source_config.consumption_mode #=> String, one of "Stream", "Queue"
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
     #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
@@ -3764,10 +3790,10 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns information about the function or function version, with a
-    # link to download the deployment package that's valid for 10 minutes.
-    # If you specify a function version, only details that are specific to
-    # that version are returned.
+    # Returns information about a Lambda Event Function or function version,
+    # with a link to download the deployment package that's valid for 10
+    # minutes. If you specify a function version, only details that are
+    # specific to that version are returned.
     #
     # @option params [required, String] :function_name
     #   The name or ARN of the Lambda function, version, or alias.
@@ -5931,6 +5957,7 @@ module Aws::Lambda
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
+    #   resp.event_source_mappings[0].self_managed_kafka_event_source_config.consumption_mode #=> String, one of "Stream", "Queue"
     #   resp.event_source_mappings[0].document_db_event_source_config.database_name #=> String
     #   resp.event_source_mappings[0].document_db_event_source_config.collection_name #=> String
     #   resp.event_source_mappings[0].document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
@@ -5949,7 +5976,8 @@ module Aws::Lambda
     end
 
     # Retrieves a list of configurations for asynchronous invocation for a
-    # function.
+    # Lambda Event Function. To retrieve more configurations, use the
+    # `Marker` parameter.
     #
     # To configure options for asynchronous invocation, use
     # PutFunctionEventInvokeConfig.
@@ -6765,8 +6793,9 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Returns a list of [versions][1], with the version-specific
-    # configuration of each. Lambda returns up to 50 versions per call.
+    # Returns a list of [versions][1] of a Lambda Event Function, with the
+    # version-specific configuration of each. Lambda returns up to 50
+    # versions per call.
     #
     #
     #
@@ -7122,8 +7151,8 @@ module Aws::Lambda
     end
 
     # Creates a [version][1] from the current code and configuration of a
-    # function. Use versions to create a snapshot of your function code and
-    # configuration that doesn't change.
+    # Lambda Event Function. Use versions to create a snapshot of your
+    # function code and configuration that doesn't change.
     #
     # Lambda doesn't publish a version if the function's configuration and
     # code haven't changed since the last version. Use UpdateFunctionCode
@@ -7396,8 +7425,8 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Sets the maximum number of simultaneous executions for a function, and
-    # reserves capacity for that concurrency level.
+    # Sets the maximum number of simultaneous executions for a Lambda Event
+    # Function, and reserves capacity for that concurrency level.
     #
     # Concurrency settings apply to the function as a whole, including all
     # published versions and the unpublished version. Reserving concurrency
@@ -7619,7 +7648,8 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Sets your function's [recursive loop detection][1] configuration.
+    # Sets the [recursive loop detection][1] configuration for a Lambda
+    # Event Function.
     #
     # When you configure a Lambda function to output to the same service or
     # resource that invokes the function, it's possible to create an
@@ -8114,7 +8144,8 @@ module Aws::Lambda
     #   The unique identifier for the callback operation.
     #
     # @option params [Types::ErrorObject] :error
-    #   Error details describing why the callback operation failed.
+    #   Error details describing why the callback operation failed. The
+    #   combined size of all error fields is limited to 1 MB.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8172,7 +8203,7 @@ module Aws::Lambda
     #
     # @option params [String, StringIO, File] :result
     #   The result data from the successful callback operation. Maximum size
-    #   is 256 KB.
+    #   is 1 MB.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -8205,6 +8236,7 @@ module Aws::Lambda
     #
     # @option params [Types::ErrorObject] :error
     #   Optional error details explaining why the execution is being stopped.
+    #   The combined size of all error fields is limited to 1 MB.
     #
     # @return [Types::StopDurableExecutionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -8766,6 +8798,9 @@ module Aws::Lambda
     #   when you set `BatchSize` to a value greater than 10, you must set
     #   `MaximumBatchingWindowInSeconds` to at least 1.
     #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
+    #
     # @option params [Integer] :parallelization_factor
     #   (Kinesis and DynamoDB Streams only) The number of batches to process
     #   from each shard concurrently.
@@ -8789,6 +8824,12 @@ module Aws::Lambda
     #   Discard records after the specified number of retries. The default
     #   value is infinite (-1). When set to infinite (-1), failed records are
     #   retried until the record expires.
+    #
+    #   For Kafka `Stream` consumption mode, the default is `-1` (infinite
+    #   retries; capped at 10 when an on-failure destination is configured).
+    #   For Kafka `Queue` consumption mode, the default is `0`, and if no
+    #   on-failure destination is configured the Kafka broker performs
+    #   retries.
     #
     # @option params [Integer] :tumbling_window_in_seconds
     #   (Kinesis and DynamoDB Streams only) The duration in seconds of a
@@ -8964,6 +9005,7 @@ module Aws::Lambda
     #           },
     #         ],
     #       },
+    #       consumption_mode: "Stream", # accepts Stream, Queue
     #     },
     #     document_db_event_source_config: {
     #       database_name: "DatabaseName",
@@ -9034,6 +9076,7 @@ module Aws::Lambda
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.access_configs[0].uri #=> String
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs #=> Array
     #   resp.self_managed_kafka_event_source_config.schema_registry_config.schema_validation_configs[0].attribute #=> String, one of "KEY", "VALUE"
+    #   resp.self_managed_kafka_event_source_config.consumption_mode #=> String, one of "Stream", "Queue"
     #   resp.document_db_event_source_config.database_name #=> String
     #   resp.document_db_event_source_config.collection_name #=> String
     #   resp.document_db_event_source_config.full_document #=> String, one of "UpdateLookup", "Default"
@@ -9917,7 +9960,8 @@ module Aws::Lambda
       req.send_request(options)
     end
 
-    # Updates the configuration for a Lambda function URL.
+    # Updates the configuration for a function URL of a Lambda Event
+    # Function.
     #
     # @option params [required, String] :function_name
     #   The name or ARN of the Lambda function.
@@ -10042,7 +10086,7 @@ module Aws::Lambda
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambda'
-      context[:gem_version] = '1.199.0'
+      context[:gem_version] = '1.206.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

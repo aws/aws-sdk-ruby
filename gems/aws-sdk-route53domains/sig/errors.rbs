@@ -11,30 +11,30 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class DnssecLimitExceeded < ::Aws::Errors::ServiceError
+      class DnssecLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class DomainLimitExceeded < ::Aws::Errors::ServiceError
+      class DomainLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class DuplicateRequest < ::Aws::Errors::ServiceError
+      class DuplicateRequest < ServiceError
         def request_id: () -> ::String
         def message: () -> ::String
       end
-      class InvalidInput < ::Aws::Errors::ServiceError
+      class InvalidInput < ServiceError
         def message: () -> ::String
       end
-      class OperationLimitExceeded < ::Aws::Errors::ServiceError
+      class OperationLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class TLDInMaintenance < ::Aws::Errors::ServiceError
+      class TLDInMaintenance < ServiceError
         def message: () -> ::String
         def tld: () -> ::String
       end
-      class TLDRulesViolation < ::Aws::Errors::ServiceError
+      class TLDRulesViolation < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedTLD < ::Aws::Errors::ServiceError
+      class UnsupportedTLD < ServiceError
         def message: () -> ::String
       end
     end

@@ -11,25 +11,25 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+      class InvalidParameterCombinationException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
         def message: () -> ::String
       end
-      class NoSuchDomainException < ::Aws::Errors::ServiceError
+      class NoSuchDomainException < ServiceError
         def message: () -> ::String
       end
-      class NoSuchExportException < ::Aws::Errors::ServiceError
+      class NoSuchExportException < ServiceError
         def message: () -> ::String
       end
-      class NumberExportsLimitExceeded < ::Aws::Errors::ServiceError
+      class NumberExportsLimitExceeded < ServiceError
         def message: () -> ::String
       end
     end

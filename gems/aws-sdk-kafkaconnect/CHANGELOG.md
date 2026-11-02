@@ -1,6 +1,36 @@
 Unreleased Changes
 ------------------
 
+1.69.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.68.0 (2026-10-28)
+------------------
+
+* Feature - Amazon MSK Connect now supports updating a connector's custom plugin and worker configuration via the UpdateConnector API. MSK Connect checks connector and task health after the update and rolls back on failure. Each call returns an operation ARN to track with DescribeConnectorOperation.
+
+1.67.0 (2026-10-22)
+------------------
+
+* Feature - Amazon MSK Connect now supports pausing and resuming connectors via the asynchronous PauseConnector and ResumeConnector APIs. Paused connectors keep their configuration and committed offsets and resume where they left off. Each call returns an operation ARN to track with DescribeConnectorOperation.
+
+1.66.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.65.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.64.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.63.0 (2026-09-11)
 ------------------
 

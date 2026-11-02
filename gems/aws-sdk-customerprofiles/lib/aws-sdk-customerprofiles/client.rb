@@ -199,12 +199,19 @@ module Aws::CustomerProfiles
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -4152,6 +4159,9 @@ module Aws::CustomerProfiles
     #   * {Types::GetProfileObjectTypeTemplateResponse#template_id #template_id} => String
     #   * {Types::GetProfileObjectTypeTemplateResponse#source_name #source_name} => String
     #   * {Types::GetProfileObjectTypeTemplateResponse#source_object #source_object} => String
+    #   * {Types::GetProfileObjectTypeTemplateResponse#default_max_profile_object_count #default_max_profile_object_count} => Integer
+    #   * {Types::GetProfileObjectTypeTemplateResponse#default_max_profile_object_count_effective_after #default_max_profile_object_count_effective_after} => Time
+    #   * {Types::GetProfileObjectTypeTemplateResponse#store_only #store_only} => Boolean
     #   * {Types::GetProfileObjectTypeTemplateResponse#allow_profile_creation #allow_profile_creation} => Boolean
     #   * {Types::GetProfileObjectTypeTemplateResponse#source_last_updated_timestamp_format #source_last_updated_timestamp_format} => String
     #   * {Types::GetProfileObjectTypeTemplateResponse#fields #fields} => Hash&lt;String,Types::ObjectTypeField&gt;
@@ -4168,6 +4178,9 @@ module Aws::CustomerProfiles
     #   resp.template_id #=> String
     #   resp.source_name #=> String
     #   resp.source_object #=> String
+    #   resp.default_max_profile_object_count #=> Integer
+    #   resp.default_max_profile_object_count_effective_after #=> Time
+    #   resp.store_only #=> Boolean
     #   resp.allow_profile_creation #=> Boolean
     #   resp.source_last_updated_timestamp_format #=> String
     #   resp.fields #=> Hash
@@ -8516,7 +8529,7 @@ module Aws::CustomerProfiles
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-customerprofiles'
-      context[:gem_version] = '1.96.0'
+      context[:gem_version] = '1.102.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

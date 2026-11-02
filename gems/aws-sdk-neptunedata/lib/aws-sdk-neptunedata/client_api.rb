@@ -22,6 +22,8 @@ module Aws::Neptunedata
     BulkLoadIdNotFoundException = Shapes::StructureShape.new(name: 'BulkLoadIdNotFoundException')
     CancelGremlinQueryInput = Shapes::StructureShape.new(name: 'CancelGremlinQueryInput')
     CancelGremlinQueryOutput = Shapes::StructureShape.new(name: 'CancelGremlinQueryOutput')
+    CancelIndexRebuildInput = Shapes::StructureShape.new(name: 'CancelIndexRebuildInput')
+    CancelIndexRebuildOutput = Shapes::StructureShape.new(name: 'CancelIndexRebuildOutput')
     CancelLoaderJobInput = Shapes::StructureShape.new(name: 'CancelLoaderJobInput')
     CancelLoaderJobOutput = Shapes::StructureShape.new(name: 'CancelLoaderJobOutput')
     CancelMLDataProcessingJobInput = Shapes::StructureShape.new(name: 'CancelMLDataProcessingJobInput')
@@ -32,6 +34,7 @@ module Aws::Neptunedata
     CancelMLModelTransformJobOutput = Shapes::StructureShape.new(name: 'CancelMLModelTransformJobOutput')
     CancelOpenCypherQueryInput = Shapes::StructureShape.new(name: 'CancelOpenCypherQueryInput')
     CancelOpenCypherQueryOutput = Shapes::StructureShape.new(name: 'CancelOpenCypherQueryOutput')
+    CancelledByMaintenanceException = Shapes::StructureShape.new(name: 'CancelledByMaintenanceException')
     CancelledByUserException = Shapes::StructureShape.new(name: 'CancelledByUserException')
     Classes = Shapes::ListShape.new(name: 'Classes')
     ClientTimeoutException = Shapes::StructureShape.new(name: 'ClientTimeoutException')
@@ -46,6 +49,7 @@ module Aws::Neptunedata
     DeletePropertygraphStatisticsOutput = Shapes::StructureShape.new(name: 'DeletePropertygraphStatisticsOutput')
     DeleteSparqlStatisticsOutput = Shapes::StructureShape.new(name: 'DeleteSparqlStatisticsOutput')
     DeleteStatisticsValueMap = Shapes::StructureShape.new(name: 'DeleteStatisticsValueMap')
+    DictionariesInfo = Shapes::StructureShape.new(name: 'DictionariesInfo')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     DocumentValuedMap = Shapes::MapShape.new(name: 'DocumentValuedMap')
     EdgeLabels = Shapes::ListShape.new(name: 'EdgeLabels')
@@ -72,6 +76,8 @@ module Aws::Neptunedata
     GetEngineStatusOutput = Shapes::StructureShape.new(name: 'GetEngineStatusOutput')
     GetGremlinQueryStatusInput = Shapes::StructureShape.new(name: 'GetGremlinQueryStatusInput')
     GetGremlinQueryStatusOutput = Shapes::StructureShape.new(name: 'GetGremlinQueryStatusOutput')
+    GetIndexRebuildStatusInput = Shapes::StructureShape.new(name: 'GetIndexRebuildStatusInput')
+    GetIndexRebuildStatusOutput = Shapes::StructureShape.new(name: 'GetIndexRebuildStatusOutput')
     GetLoaderJobStatusInput = Shapes::StructureShape.new(name: 'GetLoaderJobStatusInput')
     GetLoaderJobStatusOutput = Shapes::StructureShape.new(name: 'GetLoaderJobStatusOutput')
     GetMLDataProcessingJobInput = Shapes::StructureShape.new(name: 'GetMLDataProcessingJobInput')
@@ -96,6 +102,7 @@ module Aws::Neptunedata
     GetSparqlStreamInput = Shapes::StructureShape.new(name: 'GetSparqlStreamInput')
     GetSparqlStreamInputLimitLong = Shapes::IntegerShape.new(name: 'GetSparqlStreamInputLimitLong')
     GetSparqlStreamOutput = Shapes::StructureShape.new(name: 'GetSparqlStreamOutput')
+    GetStorageOutput = Shapes::StructureShape.new(name: 'GetStorageOutput')
     GraphSummaryType = Shapes::StringShape.new(name: 'GraphSummaryType')
     GremlinQueries = Shapes::ListShape.new(name: 'GremlinQueries')
     GremlinQueryStatus = Shapes::StructureShape.new(name: 'GremlinQueryStatus')
@@ -109,6 +116,7 @@ module Aws::Neptunedata
     IteratorType = Shapes::StringShape.new(name: 'IteratorType')
     ListGremlinQueriesInput = Shapes::StructureShape.new(name: 'ListGremlinQueriesInput')
     ListGremlinQueriesOutput = Shapes::StructureShape.new(name: 'ListGremlinQueriesOutput')
+    ListIndexRebuildsOutput = Shapes::StructureShape.new(name: 'ListIndexRebuildsOutput')
     ListLoaderJobsInput = Shapes::StructureShape.new(name: 'ListLoaderJobsInput')
     ListLoaderJobsInputLimitInteger = Shapes::IntegerShape.new(name: 'ListLoaderJobsInputLimitInteger')
     ListLoaderJobsOutput = Shapes::StructureShape.new(name: 'ListLoaderJobsOutput')
@@ -162,6 +170,8 @@ module Aws::Neptunedata
     PropertygraphRecordsList = Shapes::ListShape.new(name: 'PropertygraphRecordsList')
     PropertygraphSummary = Shapes::StructureShape.new(name: 'PropertygraphSummary')
     PropertygraphSummaryValueMap = Shapes::StructureShape.new(name: 'PropertygraphSummaryValueMap')
+    QuadsIndexesInfo = Shapes::StructureShape.new(name: 'QuadsIndexesInfo')
+    QuadsInfo = Shapes::StructureShape.new(name: 'QuadsInfo')
     QueryEvalStats = Shapes::StructureShape.new(name: 'QueryEvalStats')
     QueryLanguageVersion = Shapes::StructureShape.new(name: 'QueryLanguageVersion')
     QueryLimitExceededException = Shapes::StructureShape.new(name: 'QueryLimitExceededException')
@@ -170,14 +180,21 @@ module Aws::Neptunedata
     RDFGraphSummary = Shapes::StructureShape.new(name: 'RDFGraphSummary')
     RDFGraphSummaryValueMap = Shapes::StructureShape.new(name: 'RDFGraphSummaryValueMap')
     ReadOnlyViolationException = Shapes::StructureShape.new(name: 'ReadOnlyViolationException')
+    RebuildConcurrency = Shapes::IntegerShape.new(name: 'RebuildConcurrency')
+    RebuildIdList = Shapes::ListShape.new(name: 'RebuildIdList')
+    RebuildStatus = Shapes::StringShape.new(name: 'RebuildStatus')
     RefreshStatisticsIdMap = Shapes::StructureShape.new(name: 'RefreshStatisticsIdMap')
     ReportAsText = Shapes::BlobShape.new(name: 'ReportAsText')
+    ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     S3BucketRegion = Shapes::StringShape.new(name: 'S3BucketRegion')
     S3Exception = Shapes::StructureShape.new(name: 'S3Exception')
+    Scope = Shapes::StringShape.new(name: 'Scope')
     ServerShutdownException = Shapes::StructureShape.new(name: 'ServerShutdownException')
     SparqlData = Shapes::StructureShape.new(name: 'SparqlData')
     SparqlRecord = Shapes::StructureShape.new(name: 'SparqlRecord')
     SparqlRecordsList = Shapes::ListShape.new(name: 'SparqlRecordsList')
+    StartIndexRebuildInput = Shapes::StructureShape.new(name: 'StartIndexRebuildInput')
+    StartIndexRebuildOutput = Shapes::StructureShape.new(name: 'StartIndexRebuildOutput')
     StartLoaderJobInput = Shapes::StructureShape.new(name: 'StartLoaderJobInput')
     StartLoaderJobOutput = Shapes::StructureShape.new(name: 'StartLoaderJobOutput')
     StartMLDataProcessingJobInput = Shapes::StructureShape.new(name: 'StartMLDataProcessingJobInput')
@@ -190,6 +207,7 @@ module Aws::Neptunedata
     StatisticsAutoGenerationMode = Shapes::StringShape.new(name: 'StatisticsAutoGenerationMode')
     StatisticsNotAvailableException = Shapes::StructureShape.new(name: 'StatisticsNotAvailableException')
     StatisticsSummary = Shapes::StructureShape.new(name: 'StatisticsSummary')
+    StorageMetrics = Shapes::StructureShape.new(name: 'StorageMetrics')
     StreamRecordsNotFoundException = Shapes::StructureShape.new(name: 'StreamRecordsNotFoundException')
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
@@ -200,7 +218,10 @@ module Aws::Neptunedata
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TimeLimitExceededException = Shapes::StructureShape.new(name: 'TimeLimitExceededException')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    UndoLogsMetrics = Shapes::StructureShape.new(name: 'UndoLogsMetrics')
     UnsupportedOperationException = Shapes::StructureShape.new(name: 'UnsupportedOperationException')
+    ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
+    WriteBufferSize = Shapes::StringShape.new(name: 'WriteBufferSize')
 
     AccessDeniedException.add_member(:detailed_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "detailedMessage"))
     AccessDeniedException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
@@ -222,6 +243,14 @@ module Aws::Neptunedata
 
     CancelGremlinQueryOutput.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     CancelGremlinQueryOutput.struct_class = Types::CancelGremlinQueryOutput
+
+    CancelIndexRebuildInput.add_member(:rebuild_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "rebuildId"))
+    CancelIndexRebuildInput.struct_class = Types::CancelIndexRebuildInput
+
+    CancelIndexRebuildOutput.add_member(:status, Shapes::ShapeRef.new(shape: RebuildStatus, required: true, location_name: "status"))
+    CancelIndexRebuildOutput.add_member(:concurrency, Shapes::ShapeRef.new(shape: RebuildConcurrency, required: true, location_name: "concurrency"))
+    CancelIndexRebuildOutput.add_member(:write_buffer_size, Shapes::ShapeRef.new(shape: WriteBufferSize, required: true, location_name: "writeBufferSize"))
+    CancelIndexRebuildOutput.struct_class = Types::CancelIndexRebuildOutput
 
     CancelLoaderJobInput.add_member(:load_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "loadId"))
     CancelLoaderJobInput.struct_class = Types::CancelLoaderJobInput
@@ -260,6 +289,11 @@ module Aws::Neptunedata
     CancelOpenCypherQueryOutput.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "status"))
     CancelOpenCypherQueryOutput.add_member(:payload, Shapes::ShapeRef.new(shape: Boolean, location_name: "payload"))
     CancelOpenCypherQueryOutput.struct_class = Types::CancelOpenCypherQueryOutput
+
+    CancelledByMaintenanceException.add_member(:detailed_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "detailedMessage"))
+    CancelledByMaintenanceException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
+    CancelledByMaintenanceException.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    CancelledByMaintenanceException.struct_class = Types::CancelledByMaintenanceException
 
     CancelledByUserException.add_member(:detailed_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "detailedMessage"))
     CancelledByUserException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
@@ -329,6 +363,10 @@ module Aws::Neptunedata
     DeleteStatisticsValueMap.add_member(:active, Shapes::ShapeRef.new(shape: Boolean, location_name: "active"))
     DeleteStatisticsValueMap.add_member(:statistics_id, Shapes::ShapeRef.new(shape: String, location_name: "statisticsId"))
     DeleteStatisticsValueMap.struct_class = Types::DeleteStatisticsValueMap
+
+    DictionariesInfo.add_member(:total, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "total"))
+    DictionariesInfo.add_member(:blobs, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "blobs"))
+    DictionariesInfo.struct_class = Types::DictionariesInfo
 
     DocumentValuedMap.key = Shapes::ShapeRef.new(shape: String)
     DocumentValuedMap.value = Shapes::ShapeRef.new(shape: Document)
@@ -433,6 +471,20 @@ module Aws::Neptunedata
     GetGremlinQueryStatusOutput.add_member(:query_string, Shapes::ShapeRef.new(shape: String, location_name: "queryString"))
     GetGremlinQueryStatusOutput.add_member(:query_eval_stats, Shapes::ShapeRef.new(shape: QueryEvalStats, location_name: "queryEvalStats"))
     GetGremlinQueryStatusOutput.struct_class = Types::GetGremlinQueryStatusOutput
+
+    GetIndexRebuildStatusInput.add_member(:rebuild_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "rebuildId"))
+    GetIndexRebuildStatusInput.struct_class = Types::GetIndexRebuildStatusInput
+
+    GetIndexRebuildStatusOutput.add_member(:status, Shapes::ShapeRef.new(shape: RebuildStatus, required: true, location_name: "status"))
+    GetIndexRebuildStatusOutput.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "scope"))
+    GetIndexRebuildStatusOutput.add_member(:concurrency, Shapes::ShapeRef.new(shape: RebuildConcurrency, required: true, location_name: "concurrency"))
+    GetIndexRebuildStatusOutput.add_member(:write_buffer_size, Shapes::ShapeRef.new(shape: WriteBufferSize, required: true, location_name: "writeBufferSize"))
+    GetIndexRebuildStatusOutput.add_member(:start_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "startTime"))
+    GetIndexRebuildStatusOutput.add_member(:progress_percentage, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "progressPercentage"))
+    GetIndexRebuildStatusOutput.add_member(:estimated_end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "estimatedEndTime"))
+    GetIndexRebuildStatusOutput.add_member(:end_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "endTime"))
+    GetIndexRebuildStatusOutput.add_member(:failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "failureReason"))
+    GetIndexRebuildStatusOutput.struct_class = Types::GetIndexRebuildStatusOutput
 
     GetLoaderJobStatusInput.add_member(:load_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "loadId"))
     GetLoaderJobStatusInput.add_member(:details, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "details"))
@@ -545,6 +597,16 @@ module Aws::Neptunedata
     GetSparqlStreamOutput.add_member(:total_records, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "totalRecords"))
     GetSparqlStreamOutput.struct_class = Types::GetSparqlStreamOutput
 
+    GetStorageOutput.add_member(:total_storage_bytes_used, Shapes::ShapeRef.new(shape: Long, location_name: "totalStorageBytesUsed"))
+    GetStorageOutput.add_member(:quads, Shapes::ShapeRef.new(shape: QuadsIndexesInfo, location_name: "quads"))
+    GetStorageOutput.add_member(:dictionaries, Shapes::ShapeRef.new(shape: DictionariesInfo, location_name: "dictionaries"))
+    GetStorageOutput.add_member(:undo_logs, Shapes::ShapeRef.new(shape: UndoLogsMetrics, location_name: "undoLogs"))
+    GetStorageOutput.add_member(:streams, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "streams"))
+    GetStorageOutput.add_member(:dfe_statistics, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "dfeStatistics"))
+    GetStorageOutput.add_member(:schema, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "schema"))
+    GetStorageOutput.add_member(:internals, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "internals"))
+    GetStorageOutput.struct_class = Types::GetStorageOutput
+
     GremlinQueries.member = Shapes::ShapeRef.new(shape: GremlinQueryStatus)
 
     GremlinQueryStatus.add_member(:query_id, Shapes::ShapeRef.new(shape: String, location_name: "queryId"))
@@ -589,6 +651,9 @@ module Aws::Neptunedata
     ListGremlinQueriesOutput.add_member(:running_query_count, Shapes::ShapeRef.new(shape: Integer, location_name: "runningQueryCount"))
     ListGremlinQueriesOutput.add_member(:queries, Shapes::ShapeRef.new(shape: GremlinQueries, location_name: "queries"))
     ListGremlinQueriesOutput.struct_class = Types::ListGremlinQueriesOutput
+
+    ListIndexRebuildsOutput.add_member(:rebuild_ids, Shapes::ShapeRef.new(shape: RebuildIdList, required: true, location_name: "rebuildIds"))
+    ListIndexRebuildsOutput.struct_class = Types::ListIndexRebuildsOutput
 
     ListLoaderJobsInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListLoaderJobsInputLimitInteger, location: "querystring", location_name: "limit"))
     ListLoaderJobsInput.add_member(:include_queued_loads, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeQueuedLoads"))
@@ -767,6 +832,17 @@ module Aws::Neptunedata
     PropertygraphSummaryValueMap.add_member(:graph_summary, Shapes::ShapeRef.new(shape: PropertygraphSummary, location_name: "graphSummary"))
     PropertygraphSummaryValueMap.struct_class = Types::PropertygraphSummaryValueMap
 
+    QuadsIndexesInfo.add_member(:rdf, Shapes::ShapeRef.new(shape: QuadsInfo, location_name: "RDF"))
+    QuadsIndexesInfo.add_member(:pg, Shapes::ShapeRef.new(shape: QuadsInfo, location_name: "PG"))
+    QuadsIndexesInfo.struct_class = Types::QuadsIndexesInfo
+
+    QuadsInfo.add_member(:spog, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "SPOG"))
+    QuadsInfo.add_member(:pogs, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "POGS"))
+    QuadsInfo.add_member(:gpso, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "GPSO"))
+    QuadsInfo.add_member(:osgp, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "OSGP"))
+    QuadsInfo.add_member(:pzsog, Shapes::ShapeRef.new(shape: StorageMetrics, location_name: "PZSOG"))
+    QuadsInfo.struct_class = Types::QuadsInfo
+
     QueryEvalStats.add_member(:waited, Shapes::ShapeRef.new(shape: Integer, location_name: "waited"))
     QueryEvalStats.add_member(:elapsed, Shapes::ShapeRef.new(shape: Integer, location_name: "elapsed"))
     QueryEvalStats.add_member(:cancelled, Shapes::ShapeRef.new(shape: Boolean, location_name: "cancelled"))
@@ -810,8 +886,15 @@ module Aws::Neptunedata
     ReadOnlyViolationException.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     ReadOnlyViolationException.struct_class = Types::ReadOnlyViolationException
 
+    RebuildIdList.member = Shapes::ShapeRef.new(shape: String)
+
     RefreshStatisticsIdMap.add_member(:statistics_id, Shapes::ShapeRef.new(shape: String, location_name: "statisticsId"))
     RefreshStatisticsIdMap.struct_class = Types::RefreshStatisticsIdMap
+
+    ResourceNotFoundException.add_member(:detailed_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "detailedMessage"))
+    ResourceNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
+    ResourceNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
     S3Exception.add_member(:detailed_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "detailedMessage"))
     S3Exception.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
@@ -834,6 +917,19 @@ module Aws::Neptunedata
     SparqlRecord.struct_class = Types::SparqlRecord
 
     SparqlRecordsList.member = Shapes::ShapeRef.new(shape: SparqlRecord)
+
+    StartIndexRebuildInput.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location: "querystring", location_name: "scope"))
+    StartIndexRebuildInput.add_member(:concurrency, Shapes::ShapeRef.new(shape: RebuildConcurrency, location: "querystring", location_name: "concurrency"))
+    StartIndexRebuildInput.add_member(:write_buffer_size, Shapes::ShapeRef.new(shape: WriteBufferSize, location: "querystring", location_name: "writeBufferSize"))
+    StartIndexRebuildInput.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    StartIndexRebuildInput.struct_class = Types::StartIndexRebuildInput
+
+    StartIndexRebuildOutput.add_member(:status, Shapes::ShapeRef.new(shape: RebuildStatus, required: true, location_name: "status"))
+    StartIndexRebuildOutput.add_member(:rebuild_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "rebuildId"))
+    StartIndexRebuildOutput.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, required: true, location_name: "scope"))
+    StartIndexRebuildOutput.add_member(:concurrency, Shapes::ShapeRef.new(shape: RebuildConcurrency, required: true, location_name: "concurrency"))
+    StartIndexRebuildOutput.add_member(:write_buffer_size, Shapes::ShapeRef.new(shape: WriteBufferSize, required: true, location_name: "writeBufferSize"))
+    StartIndexRebuildOutput.struct_class = Types::StartIndexRebuildOutput
 
     StartLoaderJobInput.add_member(:source, Shapes::ShapeRef.new(shape: String, required: true, location_name: "source"))
     StartLoaderJobInput.add_member(:format, Shapes::ShapeRef.new(shape: Format, required: true, location_name: "format"))
@@ -940,6 +1036,10 @@ module Aws::Neptunedata
     StatisticsSummary.add_member(:predicate_count, Shapes::ShapeRef.new(shape: Integer, location_name: "predicateCount"))
     StatisticsSummary.struct_class = Types::StatisticsSummary
 
+    StorageMetrics.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "sizeInBytes"))
+    StorageMetrics.add_member(:count, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "count"))
+    StorageMetrics.struct_class = Types::StorageMetrics
+
     StreamRecordsNotFoundException.add_member(:detailed_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "detailedMessage"))
     StreamRecordsNotFoundException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
     StreamRecordsNotFoundException.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
@@ -971,10 +1071,19 @@ module Aws::Neptunedata
     TooManyRequestsException.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     TooManyRequestsException.struct_class = Types::TooManyRequestsException
 
+    UndoLogsMetrics.add_member(:size_in_bytes, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "sizeInBytes"))
+    UndoLogsMetrics.add_member(:list_size, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "listSize"))
+    UndoLogsMetrics.struct_class = Types::UndoLogsMetrics
+
     UnsupportedOperationException.add_member(:detailed_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "detailedMessage"))
     UnsupportedOperationException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
     UnsupportedOperationException.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
     UnsupportedOperationException.struct_class = Types::UnsupportedOperationException
+
+    ValidationException.add_member(:detailed_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "detailedMessage"))
+    ValidationException.add_member(:request_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "requestId"))
+    ValidationException.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
+    ValidationException.struct_class = Types::ValidationException
 
 
     # @api private
@@ -1015,6 +1124,30 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterException)
+      end)
+
+      api.add_operation(:cancel_index_rebuild, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelIndexRebuild"
+        o.http_method = "POST"
+        o.http_request_uri = "/storage/indexes/rebuilds/{rebuildId}/cancel"
+        o.input = Shapes::ShapeRef.new(shape: CancelIndexRebuildInput)
+        o.output = Shapes::ShapeRef.new(shape: CancelIndexRebuildOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: CancelledByMaintenanceException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: CancelledByUserException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionsFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerShutdownException)
+        o.errors << Shapes::ShapeRef.new(shape: ReadOnlyViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
       end)
 
       api.add_operation(:cancel_loader_job, Seahorse::Model::Operation.new.tap do |o|
@@ -1230,6 +1363,7 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: CancelledByMaintenanceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: CancelledByUserException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
@@ -1258,6 +1392,7 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: CancelledByMaintenanceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: CancelledByUserException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
@@ -1286,6 +1421,7 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: CancelledByMaintenanceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: CancelledByUserException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
@@ -1315,6 +1451,7 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: CancelledByMaintenanceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: CancelledByUserException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
@@ -1344,6 +1481,7 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
         o.errors << Shapes::ShapeRef.new(shape: QueryLimitException)
+        o.errors << Shapes::ShapeRef.new(shape: CancelledByMaintenanceException)
         o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
         o.errors << Shapes::ShapeRef.new(shape: CancelledByUserException)
         o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
@@ -1399,6 +1537,26 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterException)
+      end)
+
+      api.add_operation(:get_index_rebuild_status, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetIndexRebuildStatus"
+        o.http_method = "GET"
+        o.http_request_uri = "/storage/indexes/rebuilds/{rebuildId}"
+        o.input = Shapes::ShapeRef.new(shape: GetIndexRebuildStatusInput)
+        o.output = Shapes::ShapeRef.new(shape: GetIndexRebuildStatusOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionsFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:get_loader_job_status, Seahorse::Model::Operation.new.tap do |o|
@@ -1647,6 +1805,26 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
+      api.add_operation(:get_storage_info, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetStorageInfo"
+        o.http_method = "GET"
+        o.http_request_uri = "/storage/info"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: GetStorageOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionsFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerShutdownException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+      end)
+
       api.add_operation(:list_gremlin_queries, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListGremlinQueries"
         o.http_method = "GET"
@@ -1669,6 +1847,25 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterException)
+      end)
+
+      api.add_operation(:list_index_rebuilds, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListIndexRebuilds"
+        o.http_method = "GET"
+        o.http_request_uri = "/storage/indexes/rebuilds"
+        o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.output = Shapes::ShapeRef.new(shape: ListIndexRebuildsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionsFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
       end)
 
       api.add_operation(:list_loader_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -1832,6 +2029,30 @@ module Aws::Neptunedata
         o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         o.errors << Shapes::ShapeRef.new(shape: MissingParameterException)
+      end)
+
+      api.add_operation(:start_index_rebuild, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartIndexRebuild"
+        o.http_method = "POST"
+        o.http_request_uri = "/storage/indexes/rebuilds"
+        o.input = Shapes::ShapeRef.new(shape: StartIndexRebuildInput)
+        o.output = Shapes::ShapeRef.new(shape: StartIndexRebuildOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ClientTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: IllegalArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+        o.errors << Shapes::ShapeRef.new(shape: MemoryLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: MethodNotAllowedException)
+        o.errors << Shapes::ShapeRef.new(shape: PreconditionsFailedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerShutdownException)
+        o.errors << Shapes::ShapeRef.new(shape: ReadOnlyViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConstraintViolationException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+        o.errors << Shapes::ShapeRef.new(shape: ConcurrentModificationException)
       end)
 
       api.add_operation(:start_loader_job, Seahorse::Model::Operation.new.tap do |o|

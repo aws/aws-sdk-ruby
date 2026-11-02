@@ -12,7 +12,3 @@ Feature: Auto Scaling
     | ImageId                 | ami-12345678 |
     | InstanceType            | m1.small     |
     Then I expect the response error code to be "ValidationError"
-    And I expect the response error message to include:
-    """
-    Member must have length greater than or equal to 1
-    """

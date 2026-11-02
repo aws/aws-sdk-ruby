@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.23.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.22.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.21.0 (2026-10-21)
+------------------
+
+* Feature - Adds support for Microsoft Teams as a notification service. Associations can now be created and updated with a Microsoft Teams team and channel configuration using the DevOps Agent API and SDKs.
+
+1.20.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.19.0 (2026-10-19)
+------------------
+
+* Feature - Documentation update release for AWS service
+
 1.18.0 (2026-10-12)
 ------------------
 

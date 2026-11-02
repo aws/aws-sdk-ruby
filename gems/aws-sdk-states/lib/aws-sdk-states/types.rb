@@ -1764,7 +1764,7 @@ module Aws::States
     class GetActivityTaskOutput < Struct.new(
       :task_token,
       :input)
-      SENSITIVE = [:input]
+      SENSITIVE = [:task_token, :input]
       include Aws::Structure
     end
 
@@ -3600,7 +3600,7 @@ module Aws::States
       :task_token,
       :error,
       :cause)
-      SENSITIVE = [:error, :cause]
+      SENSITIVE = [:task_token, :error, :cause]
       include Aws::Structure
     end
 
@@ -3623,7 +3623,7 @@ module Aws::States
     #
     class SendTaskHeartbeatInput < Struct.new(
       :task_token)
-      SENSITIVE = []
+      SENSITIVE = [:task_token]
       include Aws::Structure
     end
 
@@ -3652,7 +3652,7 @@ module Aws::States
     class SendTaskSuccessInput < Struct.new(
       :task_token,
       :output)
-      SENSITIVE = [:output]
+      SENSITIVE = [:task_token, :output]
       include Aws::Structure
     end
 

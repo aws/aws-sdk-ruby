@@ -11,34 +11,34 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AuthorizationErrorException < ::Aws::Errors::ServiceError
+      class AuthorizationErrorException < ServiceError
         def message: () -> ::String
       end
-      class ConflictErrorException < ::Aws::Errors::ServiceError
+      class ConflictErrorException < ServiceError
         def message: () -> ::String
       end
-      class HomeRegionNotSetException < ::Aws::Errors::ServiceError
+      class HomeRegionNotSetException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+      class OperationNotPermittedException < ServiceError
         def message: () -> ::String
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServerInternalErrorException < ::Aws::Errors::ServiceError
+      class ServerInternalErrorException < ServiceError
         def message: () -> ::String
       end
     end

@@ -5030,6 +5030,15 @@
       "input":{"shape":"GetCapacityManagerMonitoredTagKeysRequest"},
       "output":{"shape":"GetCapacityManagerMonitoredTagKeysResult"}
     },
+    "GetCapacityManagerSupportabilityScores":{
+      "name":"GetCapacityManagerSupportabilityScores",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetCapacityManagerSupportabilityScoresRequest"},
+      "output":{"shape":"GetCapacityManagerSupportabilityScoresResult"}
+    },
     "GetCapacityReservationUsage":{
       "name":"GetCapacityReservationUsage",
       "http":{
@@ -5164,6 +5173,15 @@
       },
       "input":{"shape":"GetImageBlockPublicAccessStateRequest"},
       "output":{"shape":"GetImageBlockPublicAccessStateResult"}
+    },
+    "GetImageFindings":{
+      "name":"GetImageFindings",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetImageFindingsRequest"},
+      "output":{"shape":"GetImageFindingsResult"}
     },
     "GetInstanceMetadataDefaults":{
       "name":"GetInstanceMetadataDefaults",
@@ -5515,6 +5533,15 @@
       },
       "input":{"shape":"GetSubnetCidrReservationsRequest"},
       "output":{"shape":"GetSubnetCidrReservationsResult"}
+    },
+    "GetTransitGatewayAttachmentNatConfiguration":{
+      "name":"GetTransitGatewayAttachmentNatConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetTransitGatewayAttachmentNatConfigurationRequest"},
+      "output":{"shape":"GetTransitGatewayAttachmentNatConfigurationResult"}
     },
     "GetTransitGatewayAttachmentPropagations":{
       "name":"GetTransitGatewayAttachmentPropagations",
@@ -6237,6 +6264,15 @@
       },
       "input":{"shape":"ModifyTransitGatewayRequest"},
       "output":{"shape":"ModifyTransitGatewayResult"}
+    },
+    "ModifyTransitGatewayAttachmentNatConfiguration":{
+      "name":"ModifyTransitGatewayAttachmentNatConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ModifyTransitGatewayAttachmentNatConfigurationRequest"},
+      "output":{"shape":"ModifyTransitGatewayAttachmentNatConfigurationResult"}
     },
     "ModifyTransitGatewayMeteringPolicy":{
       "name":"ModifyTransitGatewayMeteringPolicy",
@@ -8598,6 +8634,39 @@
         "succeeded",
         "failed"
       ]
+    },
+    "AnalysisTransitGatewayPolicyTableEntry":{
+      "type":"structure",
+      "members":{
+        "RuleNumber":{
+          "shape":"Integer",
+          "locationName":"ruleNumber"
+        },
+        "Protocol":{
+          "shape":"String",
+          "locationName":"protocol"
+        },
+        "SourceCidr":{
+          "shape":"String",
+          "locationName":"sourceCidr"
+        },
+        "DestinationCidr":{
+          "shape":"String",
+          "locationName":"destinationCidr"
+        },
+        "SourcePortRange":{
+          "shape":"PortRange",
+          "locationName":"sourcePortRange"
+        },
+        "DestinationPortRange":{
+          "shape":"PortRange",
+          "locationName":"destinationPortRange"
+        },
+        "TargetRouteTableId":{
+          "shape":"String",
+          "locationName":"targetRouteTableId"
+        }
+      }
     },
     "ApplianceModeSupportValue":{
       "type":"string",
@@ -11307,6 +11376,19 @@
         "locationName":"item"
       }
     },
+    "CapacityAmount":{
+      "type":"integer",
+      "min":1
+    },
+    "CapacityAvailabilityZoneIdList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      },
+      "max":10,
+      "min":0
+    },
     "CapacityBlock":{
       "type":"structure",
       "members":{
@@ -11849,6 +11931,30 @@
         "disabled"
       ]
     },
+    "CapacityManagerSupportabilityScore":{
+      "type":"structure",
+      "members":{
+        "InstanceType":{
+          "shape":"String",
+          "locationName":"instanceType"
+        },
+        "AvailabilityZoneId":{
+          "shape":"AvailabilityZoneId",
+          "locationName":"availabilityZoneId"
+        },
+        "Score":{
+          "shape":"SupportabilityScore",
+          "locationName":"score"
+        }
+      }
+    },
+    "CapacityManagerSupportabilityScoreSet":{
+      "type":"list",
+      "member":{
+        "shape":"CapacityManagerSupportabilityScore",
+        "locationName":"item"
+      }
+    },
     "CapacityManagerTagDimension":{
       "type":"structure",
       "members":{
@@ -12251,6 +12357,18 @@
           "shape":"FleetCapacityReservationSet",
           "locationName":"instanceTypeSpecificationSet"
         },
+        "InstanceRequirements":{
+          "shape":"InstanceRequirementsRequest",
+          "locationName":"instanceRequirements"
+        },
+        "AvailabilityZone":{
+          "shape":"String",
+          "locationName":"availabilityZone"
+        },
+        "AvailabilityZoneId":{
+          "shape":"String",
+          "locationName":"availabilityZoneId"
+        },
         "Tags":{
           "shape":"TagList",
           "locationName":"tagSet"
@@ -12636,6 +12754,13 @@
       "enum":[
         "default",
         "dedicated"
+      ]
+    },
+    "CapacityUnit":{
+      "type":"string",
+      "enum":[
+        "vcpus",
+        "instances"
       ]
     },
     "CarrierGateway":{
@@ -14219,6 +14344,9 @@
           "shape":"ReservationFleetInstanceSpecificationList",
           "locationName":"InstanceTypeSpecification"
         },
+        "InstanceRequirements":{"shape":"InstanceRequirementsRequest"},
+        "AvailabilityZone":{"shape":"AvailabilityZoneName"},
+        "AvailabilityZoneId":{"shape":"AvailabilityZoneId"},
         "Tenancy":{"shape":"FleetCapacityReservationTenancy"},
         "TotalTargetCapacity":{"shape":"Integer"},
         "EndDate":{"shape":"MillisecondDateTime"},
@@ -29574,6 +29702,14 @@
           "shape":"TransitGatewayRouteTableRoute",
           "locationName":"transitGatewayRouteTableRoute"
         },
+        "TransitGatewayPolicyTable":{
+          "shape":"AnalysisComponent",
+          "locationName":"transitGatewayPolicyTable"
+        },
+        "TransitGatewayPolicyTableEntry":{
+          "shape":"AnalysisTransitGatewayPolicyTableEntry",
+          "locationName":"transitGatewayPolicyTableEntry"
+        },
         "TransitGatewayAttachment":{
           "shape":"AnalysisComponent",
           "locationName":"transitGatewayAttachment"
@@ -31296,6 +31432,43 @@
         }
       }
     },
+    "GetCapacityManagerSupportabilityScoresRequest":{
+      "type":"structure",
+      "required":[
+        "MarketType",
+        "CapacityAmount",
+        "CapacityUnit",
+        "CapacityAvailabilityZoneIds"
+      ],
+      "members":{
+        "MarketType":{"shape":"SupportabilityMarketType"},
+        "CapacityAmount":{"shape":"CapacityAmount"},
+        "CapacityUnit":{"shape":"CapacityUnit"},
+        "CapacityAvailabilityZoneIds":{
+          "shape":"CapacityAvailabilityZoneIdList",
+          "locationName":"CapacityAvailabilityZoneId"
+        },
+        "InstanceTypes":{
+          "shape":"SupportabilityInstanceTypeList",
+          "locationName":"InstanceType"
+        },
+        "InstanceRequirementsWithMetadata":{"shape":"InstanceRequirementsWithMetadataRequest"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "GetCapacityManagerSupportabilityScoresResult":{
+      "type":"structure",
+      "members":{
+        "AggregateScore":{
+          "shape":"SupportabilityScore",
+          "locationName":"aggregateScore"
+        },
+        "CapacityManagerSupportabilityScores":{
+          "shape":"CapacityManagerSupportabilityScoreSet",
+          "locationName":"capacityManagerSupportabilityScoreSet"
+        }
+      }
+    },
     "GetCapacityReservationUsageRequest":{
       "type":"structure",
       "required":["CapacityReservationId"],
@@ -31717,6 +31890,41 @@
         "ManagedBy":{
           "shape":"ManagedBy",
           "locationName":"managedBy"
+        }
+      }
+    },
+    "GetImageFindingsEntrySet":{
+      "type":"list",
+      "member":{
+        "shape":"ImageFinding",
+        "locationName":"item"
+      }
+    },
+    "GetImageFindingsMaxResults":{
+      "type":"integer",
+      "max":1000,
+      "min":1
+    },
+    "GetImageFindingsRequest":{
+      "type":"structure",
+      "required":["ImageId"],
+      "members":{
+        "ImageId":{"shape":"ImageId"},
+        "MaxResults":{"shape":"GetImageFindingsMaxResults"},
+        "NextToken":{"shape":"String"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "GetImageFindingsResult":{
+      "type":"structure",
+      "members":{
+        "ImageFindings":{
+          "shape":"GetImageFindingsEntrySet",
+          "locationName":"imageFindingSet"
+        },
+        "NextToken":{
+          "shape":"String",
+          "locationName":"nextToken"
         }
       }
     },
@@ -32803,6 +33011,35 @@
         "NextToken":{
           "shape":"String",
           "locationName":"nextToken"
+        }
+      }
+    },
+    "GetTransitGatewayAttachmentNatConfigurationRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "GetTransitGatewayAttachmentNatConfigurationResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayAttachmentId":{
+          "shape":"TransitGatewayAttachmentId",
+          "locationName":"transitGatewayAttachmentId"
+        },
+        "NatGatewaySupport":{
+          "shape":"TransitGatewayAttachmentNatGatewaySupportState",
+          "locationName":"natGatewaySupport"
+        },
+        "NatSystemRouteSupport":{
+          "shape":"TransitGatewayAttachmentNatSystemRouteSupportValue",
+          "locationName":"natSystemRouteSupport"
+        },
+        "NatGatewayRules":{
+          "shape":"TransitGatewayNatRuleList",
+          "locationName":"natGatewayRuleSet"
         }
       }
     },
@@ -34101,6 +34338,10 @@
           "shape":"ImageWatermarkList",
           "locationName":"imageWatermarkSet"
         },
+        "ScanResults":{
+          "shape":"ScanResults",
+          "locationName":"scanResults"
+        },
         "InstanceTypeSpecification":{
           "shape":"InstanceTypeSpecification",
           "locationName":"instanceTypeSpecification"
@@ -34300,6 +34541,10 @@
         "ImageWatermarks":{
           "shape":"ImageWatermarkFilterResponseList",
           "locationName":"imageWatermarkSet"
+        },
+        "ScanResultCondition":{
+          "shape":"ScanResultCondition",
+          "locationName":"scanResultCondition"
         }
       }
     },
@@ -34330,7 +34575,8 @@
         "ImageWatermarks":{
           "shape":"ImageWatermarkFilterRequestList",
           "locationName":"ImageWatermark"
-        }
+        },
+        "ScanResultCondition":{"shape":"ScanResultConditionRequest"}
       }
     },
     "ImageCriterionRequestList":{
@@ -34360,6 +34606,50 @@
       "type":"list",
       "member":{
         "shape":"ImageDiskContainer",
+        "locationName":"item"
+      }
+    },
+    "ImageFinding":{
+      "type":"structure",
+      "members":{
+        "FixAvailable":{
+          "shape":"Boolean",
+          "locationName":"fixAvailable"
+        },
+        "Score":{
+          "shape":"Double",
+          "locationName":"score"
+        },
+        "FirstObservedAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"firstObservedAt"
+        },
+        "UpdatedAt":{
+          "shape":"MillisecondDateTime",
+          "locationName":"updatedAt"
+        },
+        "Title":{
+          "shape":"String",
+          "locationName":"title"
+        },
+        "Paths":{
+          "shape":"ImageFindingPathSet",
+          "locationName":"pathSet"
+        },
+        "SeverityLabel":{
+          "shape":"SeverityLabel",
+          "locationName":"severityLabel"
+        },
+        "SnapshotId":{
+          "shape":"SnapshotId",
+          "locationName":"snapshotId"
+        }
+      }
+    },
+    "ImageFindingPathSet":{
+      "type":"list",
+      "member":{
+        "shape":"String",
         "locationName":"item"
       }
     },
@@ -37352,6 +37642,10 @@
         "ApplicationStatus":{
           "shape":"ApplicationStatusSummary",
           "locationName":"applicationStatus"
+        },
+        "PerformanceStatus":{
+          "shape":"PerformanceStatusSummary",
+          "locationName":"performanceStatus"
         }
       }
     },
@@ -44251,6 +44545,16 @@
         "locationName":"item"
       }
     },
+    "MaxDaysSinceFixAvailableValue":{
+      "type":"integer",
+      "max":2147483647,
+      "min":0
+    },
+    "MaxDaysSinceLastFindingScanValue":{
+      "type":"integer",
+      "max":2147483647,
+      "min":0
+    },
     "MaxIpv4AddrPerInterface":{"type":"integer"},
     "MaxIpv6AddrPerInterface":{"type":"integer"},
     "MaxNetworkInterfaces":{"type":"integer"},
@@ -44451,7 +44755,17 @@
         "spot-total-count-inst",
         "spot-total-count-vcpu",
         "spot-interruption-rate-inst",
-        "spot-interruption-rate-vcpu"
+        "spot-interruption-rate-vcpu",
+        "capacity-total-requested-vcpu",
+        "capacity-total-fulfilled-vcpu",
+        "spot-capacity-total-requested-vcpu",
+        "spot-capacity-total-fulfilled-vcpu",
+        "capacity-request-fulfillment-rate",
+        "avg-inst-az-count-per-requested-vcpu",
+        "inst-az-fulfillment-rate",
+        "spot-capacity-request-fulfillment-rate",
+        "spot-avg-inst-az-count-per-requested-vcpu",
+        "spot-inst-az-fulfillment-rate"
       ]
     },
     "MetricDataResult":{
@@ -46059,6 +46373,42 @@
         "TrafficMirrorSession":{
           "shape":"TrafficMirrorSession",
           "locationName":"trafficMirrorSession"
+        }
+      }
+    },
+    "ModifyTransitGatewayAttachmentNatConfigurationRequest":{
+      "type":"structure",
+      "required":["TransitGatewayAttachmentId"],
+      "members":{
+        "TransitGatewayAttachmentId":{"shape":"TransitGatewayAttachmentId"},
+        "NatGatewaySupport":{"shape":"TransitGatewayAttachmentNatGatewaySupportValue"},
+        "NatSystemRouteSupport":{"shape":"TransitGatewayAttachmentNatSystemRouteSupportValue"},
+        "NatGatewayRules":{
+          "shape":"TransitGatewayNatRuleRequestList",
+          "locationName":"NatGatewayRule"
+        },
+        "ResetNatGatewayRules":{"shape":"Boolean"},
+        "DryRun":{"shape":"Boolean"}
+      }
+    },
+    "ModifyTransitGatewayAttachmentNatConfigurationResult":{
+      "type":"structure",
+      "members":{
+        "TransitGatewayAttachmentId":{
+          "shape":"TransitGatewayAttachmentId",
+          "locationName":"transitGatewayAttachmentId"
+        },
+        "NatGatewaySupport":{
+          "shape":"TransitGatewayAttachmentNatGatewaySupportState",
+          "locationName":"natGatewaySupport"
+        },
+        "NatSystemRouteSupport":{
+          "shape":"TransitGatewayAttachmentNatSystemRouteSupportValue",
+          "locationName":"natSystemRouteSupport"
+        },
+        "NatGatewayRules":{
+          "shape":"TransitGatewayNatRuleList",
+          "locationName":"natGatewayRuleSet"
         }
       }
     },
@@ -48916,6 +49266,10 @@
           "shape":"TransitGatewayRouteTableRoute",
           "locationName":"transitGatewayRouteTableRoute"
         },
+        "TransitGatewayPolicyTableEntry":{
+          "shape":"AnalysisTransitGatewayPolicyTableEntry",
+          "locationName":"transitGatewayPolicyTableEntry"
+        },
         "Explanations":{
           "shape":"ExplanationList",
           "locationName":"explanationSet"
@@ -49138,6 +49492,23 @@
       "member":{
         "shape":"PerformanceFactorReferenceRequest",
         "locationName":"item"
+      }
+    },
+    "PerformanceStatusSummary":{
+      "type":"structure",
+      "members":{
+        "Status":{
+          "shape":"SummaryStatus",
+          "locationName":"status"
+        },
+        "ImpairedSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"impairedSince"
+        },
+        "Remediation":{
+          "shape":"String",
+          "locationName":"remediation"
+        }
       }
     },
     "Period":{
@@ -54173,6 +54544,84 @@
         "none"
       ]
     },
+    "ScanResultCondition":{
+      "type":"structure",
+      "members":{
+        "MaxDaysSinceLastFindingScan":{
+          "shape":"MaxDaysSinceLastFindingScanValue",
+          "locationName":"maxDaysSinceLastFindingScan"
+        },
+        "MaximumSeverityLabel":{
+          "shape":"SeverityLabel",
+          "locationName":"maximumSeverityLabel"
+        },
+        "MaxDaysSinceInformationalFixAvailable":{
+          "shape":"MaxDaysSinceFixAvailableValue",
+          "locationName":"maxDaysSinceInformationalFixAvailable"
+        },
+        "MaxDaysSinceLowFixAvailable":{
+          "shape":"MaxDaysSinceFixAvailableValue",
+          "locationName":"maxDaysSinceLowFixAvailable"
+        },
+        "MaxDaysSinceMediumFixAvailable":{
+          "shape":"MaxDaysSinceFixAvailableValue",
+          "locationName":"maxDaysSinceMediumFixAvailable"
+        },
+        "MaxDaysSinceHighFixAvailable":{
+          "shape":"MaxDaysSinceFixAvailableValue",
+          "locationName":"maxDaysSinceHighFixAvailable"
+        },
+        "MaxDaysSinceCriticalFixAvailable":{
+          "shape":"MaxDaysSinceFixAvailableValue",
+          "locationName":"maxDaysSinceCriticalFixAvailable"
+        }
+      }
+    },
+    "ScanResultConditionRequest":{
+      "type":"structure",
+      "members":{
+        "MaxDaysSinceLastFindingScan":{"shape":"MaxDaysSinceLastFindingScanValue"},
+        "MaximumSeverityLabel":{"shape":"SeverityLabel"},
+        "MaxDaysSinceInformationalFixAvailable":{"shape":"MaxDaysSinceFixAvailableValue"},
+        "MaxDaysSinceLowFixAvailable":{"shape":"MaxDaysSinceFixAvailableValue"},
+        "MaxDaysSinceMediumFixAvailable":{"shape":"MaxDaysSinceFixAvailableValue"},
+        "MaxDaysSinceHighFixAvailable":{"shape":"MaxDaysSinceFixAvailableValue"},
+        "MaxDaysSinceCriticalFixAvailable":{"shape":"MaxDaysSinceFixAvailableValue"}
+      }
+    },
+    "ScanResults":{
+      "type":"structure",
+      "members":{
+        "HighestFindingSeverityLabel":{
+          "shape":"SeverityLabel",
+          "locationName":"highestFindingSeverityLabel"
+        },
+        "FindingScanDate":{
+          "shape":"MillisecondDateTime",
+          "locationName":"findingScanDate"
+        },
+        "InformationalFixAvailableSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"informationalFixAvailableSince"
+        },
+        "LowFixAvailableSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"lowFixAvailableSince"
+        },
+        "MediumFixAvailableSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"mediumFixAvailableSince"
+        },
+        "HighFixAvailableSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"highFixAvailableSince"
+        },
+        "CriticalFixAvailableSince":{
+          "shape":"MillisecondDateTime",
+          "locationName":"criticalFixAvailableSince"
+        }
+      }
+    },
     "Schedule":{
       "type":"string",
       "enum":["hourly"]
@@ -55660,6 +56109,16 @@
         "shape":"ServiceTypeDetail",
         "locationName":"item"
       }
+    },
+    "SeverityLabel":{
+      "type":"string",
+      "enum":[
+        "informational",
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
     },
     "ShutdownBehavior":{
       "type":"string",
@@ -57527,6 +57986,30 @@
         "initializing"
       ]
     },
+    "SupportabilityInstanceTypeList":{
+      "type":"list",
+      "member":{
+        "shape":"String",
+        "locationName":"item"
+      },
+      "max":50,
+      "min":0
+    },
+    "SupportabilityMarketType":{
+      "type":"string",
+      "enum":[
+        "on-demand",
+        "spot"
+      ]
+    },
+    "SupportabilityScore":{
+      "type":"string",
+      "enum":[
+        "high",
+        "medium",
+        "low"
+      ]
+    },
     "SupportedAdditionalProcessorFeature":{
       "type":"string",
       "enum":[
@@ -58512,6 +58995,10 @@
         "Tags":{
           "shape":"TagList",
           "locationName":"tagSet"
+        },
+        "NatGatewaySupport":{
+          "shape":"TransitGatewayAttachmentNatGatewaySupportState",
+          "locationName":"natGatewaySupport"
         }
       }
     },
@@ -58575,6 +59062,29 @@
         "shape":"TransitGatewayAttachment",
         "locationName":"item"
       }
+    },
+    "TransitGatewayAttachmentNatGatewaySupportState":{
+      "type":"string",
+      "enum":[
+        "enabled",
+        "disabled",
+        "enabling",
+        "disabling"
+      ]
+    },
+    "TransitGatewayAttachmentNatGatewaySupportValue":{
+      "type":"string",
+      "enum":[
+        "enable",
+        "disable"
+      ]
+    },
+    "TransitGatewayAttachmentNatSystemRouteSupportValue":{
+      "type":"string",
+      "enum":[
+        "enable",
+        "disable"
+      ]
     },
     "TransitGatewayAttachmentPropagation":{
       "type":"structure",
@@ -59283,6 +59793,62 @@
           "locationName":"groupIpAddress"
         }
       }
+    },
+    "TransitGatewayNatRule":{
+      "type":"structure",
+      "members":{
+        "RuleNumber":{
+          "shape":"Integer",
+          "locationName":"ruleNumber"
+        },
+        "MatchSourceCidr":{
+          "shape":"String",
+          "locationName":"matchSourceCidr"
+        },
+        "NatCidr":{
+          "shape":"String",
+          "locationName":"natCidr"
+        },
+        "State":{
+          "shape":"TransitGatewayNatRuleState",
+          "locationName":"state"
+        }
+      }
+    },
+    "TransitGatewayNatRuleList":{
+      "type":"list",
+      "member":{
+        "shape":"TransitGatewayNatRule",
+        "locationName":"item"
+      },
+      "max":50,
+      "min":0
+    },
+    "TransitGatewayNatRuleRequest":{
+      "type":"structure",
+      "members":{
+        "RuleNumber":{"shape":"Integer"},
+        "MatchSourceCidr":{"shape":"String"},
+        "NatCidr":{"shape":"String"}
+      }
+    },
+    "TransitGatewayNatRuleRequestList":{
+      "type":"list",
+      "member":{
+        "shape":"TransitGatewayNatRuleRequest",
+        "locationName":"item"
+      },
+      "max":50,
+      "min":0
+    },
+    "TransitGatewayNatRuleState":{
+      "type":"string",
+      "enum":[
+        "pending",
+        "activated",
+        "deactivated",
+        "deleting"
+      ]
     },
     "TransitGatewayNetworkInterfaceIdList":{
       "type":"list",
@@ -59997,7 +60563,8 @@
       "type":"string",
       "enum":[
         "static",
-        "propagated"
+        "propagated",
+        "system"
       ]
     },
     "TransitGatewayState":{

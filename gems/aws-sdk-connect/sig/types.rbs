@@ -247,6 +247,13 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ApproximateDriftedResourceCount
+      attr_accessor region: ::String
+      attr_accessor count: ::Integer
+      attr_accessor timestamp: ::Time
+      SENSITIVE: []
+    end
+
     class AssignContactCategoryActionDefinition < Aws::EmptyStructure
     end
 
@@ -461,7 +468,7 @@ module Aws::Connect
       attr_accessor file_id: ::String
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor file_use_case_type: ("CONTACT_ANALYSIS" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_REDACTED" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "ATTACHMENT" | "VOICE_RECORDING")
       attr_accessor associated_resource_arn: ::String
@@ -496,7 +503,7 @@ module Aws::Connect
     class AttachmentReference
       attr_accessor name: ::String
       attr_accessor value: ::String
-      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor arn: ::String
       SENSITIVE: []
     end
@@ -818,6 +825,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class CategoriesAttributeAndCondition
+      attr_accessor tag_conditions: ::Array[Types::TagCondition]
+      SENSITIVE: []
+    end
+
+    class CategoriesAttributeFilter
+      attr_accessor or_conditions: ::Array[Types::CategoriesAttributeAndCondition]
+      attr_accessor and_condition: Types::CategoriesAttributeAndCondition
+      attr_accessor tag_condition: Types::TagCondition
+      SENSITIVE: []
+    end
+
     class ChatContactMetrics
       attr_accessor multi_party: bool
       attr_accessor total_messages: ::Integer
@@ -999,7 +1018,7 @@ module Aws::Connect
     class ContactAnalysisReference
       attr_accessor name: ::String
       attr_accessor value: ::String
-      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor arn: ::String
       attr_accessor analytics_mode: ("PostContact" | "RealTime" | "ContactLens" | "AutomatedInteraction")
       attr_accessor is_redacted: bool
@@ -1375,7 +1394,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       SENSITIVE: []
     end
 
@@ -1888,6 +1907,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor contact_flow_id: ::String
       attr_accessor self_assign_flow_id: ::String
+      attr_accessor contact_hooks: Types::TaskTemplateContactHooks
       attr_accessor constraints: Types::TaskTemplateConstraints
       attr_accessor defaults: Types::TaskTemplateDefaults
       attr_accessor status: ("ACTIVE" | "INACTIVE")
@@ -4237,6 +4257,7 @@ module Aws::Connect
       attr_accessor file_id: ::String
       attr_accessor url_expiry_in_seconds: ::Integer
       attr_accessor associated_resource_arn: ::String
+      attr_accessor url_content_disposition: ("INLINE" | "ATTACHMENT")
       SENSITIVE: []
     end
 
@@ -4244,7 +4265,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor file_name: ::String
       attr_accessor file_size_in_bytes: ::Integer
       attr_accessor associated_resource_arn: ::String
@@ -4448,6 +4469,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor contact_flow_id: ::String
       attr_accessor self_assign_flow_id: ::String
+      attr_accessor contact_hooks: Types::TaskTemplateContactHooks
       attr_accessor constraints: Types::TaskTemplateConstraints
       attr_accessor defaults: Types::TaskTemplateDefaults
       attr_accessor fields: ::Array[Types::TaskTemplateField]
@@ -4484,6 +4506,7 @@ module Aws::Connect
       attr_accessor arn: ::String
       attr_accessor sign_in_config: Types::SignInConfig
       attr_accessor agent_config: Types::AgentConfig
+      attr_accessor last_failover_time: ::Time
       SENSITIVE: []
     end
 
@@ -5588,6 +5611,7 @@ module Aws::Connect
       attr_accessor next_token: ::String
       attr_accessor output_type: ("Raw" | "Redacted")
       attr_accessor segment_types: ::Array[("Transcript" | "Categories" | "Issues" | "Event" | "Attachments" | "PostContactSummary" | "ExtractedInformation")]
+      attr_accessor list_filter: Types::RealTimeContactAnalysisSegmentsFilter
       SENSITIVE: []
     end
 
@@ -5596,6 +5620,22 @@ module Aws::Connect
       attr_accessor status: ("IN_PROGRESS" | "FAILED" | "COMPLETED")
       attr_accessor segments: ::Array[Types::RealtimeContactAnalysisSegment]
       attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplicationFindingsRequest
+      attr_accessor instance_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplicationFindingsResponse
+      attr_accessor replication_findings_list: ::Array[Types::ReplicationFinding]
+      attr_accessor approximate_drifted_resource_counts: ::Array[Types::ApproximateDriftedResourceCount]
+      attr_accessor next_token: ::String
+      attr_accessor resource_replication_statuses: ::Array[Types::ResourceReplicationStatus]
       SENSITIVE: []
     end
 
@@ -6251,6 +6291,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class NullableAdditionalRecipients
+      attr_accessor cc_email_addresses: ::Array[Types::EmailAddressInfo]
+      SENSITIVE: []
+    end
+
     class NumberCondition
       attr_accessor field_name: ::String
       attr_accessor min_value: ::Integer
@@ -6505,7 +6550,7 @@ module Aws::Connect
     end
 
     class PreEvaluationFilter
-      attr_accessor resource_type: ("CONTACT")
+      attr_accessor resource_type: ("CONTACT" | "CONTACT_EVALUATION")
       attr_accessor filter_type: ("TAG")
       attr_accessor filter_key: ::String
       attr_accessor filter_value: ::String
@@ -6809,6 +6854,7 @@ module Aws::Connect
     end
 
     class RealTimeContactAnalysisCategoryDetails
+      attr_accessor rule_id: ::String
       attr_accessor points_of_interest: ::Array[Types::RealTimeContactAnalysisPointOfInterest]
       SENSITIVE: []
     end
@@ -6891,6 +6937,11 @@ module Aws::Connect
       attr_accessor time: Types::RealTimeContactAnalysisTimeData
       attr_accessor redaction: Types::RealTimeContactAnalysisTranscriptItemRedaction
       attr_accessor sentiment: ("POSITIVE" | "NEGATIVE" | "NEUTRAL")
+      SENSITIVE: []
+    end
+
+    class RealTimeContactAnalysisSegmentsFilter
+      attr_accessor categories_attribute_filter: Types::CategoriesAttributeFilter
       SENSITIVE: []
     end
 
@@ -7007,7 +7058,7 @@ module Aws::Connect
     class Reference
       attr_accessor value: ::String
       attr_accessor type: ("URL" | "ATTACHMENT" | "CONTACT_ANALYSIS" | "NUMBER" | "STRING" | "DATE" | "EMAIL" | "EMAIL_MESSAGE" | "EMAIL_MESSAGE_PLAIN_TEXT" | "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED" | "EMAIL_MESSAGE_REDACTED")
-      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor status: ("AVAILABLE" | "DELETED" | "APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor arn: ::String
       attr_accessor status_reason: ::String
       SENSITIVE: []
@@ -7081,6 +7132,18 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class ReplicationFinding
+      attr_accessor arn: ::String
+      attr_accessor id: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor name: ::String
+      attr_accessor operation: ::String
+      attr_accessor reference_code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class ReplicationStatusSummary
       attr_accessor region: ::String
       attr_accessor replication_status: ("INSTANCE_REPLICATION_COMPLETE" | "INSTANCE_REPLICATION_IN_PROGRESS" | "INSTANCE_REPLICATION_FAILED" | "INSTANCE_REPLICA_DELETING" | "INSTANCE_REPLICATION_DELETION_FAILED" | "RESOURCE_REPLICATION_NOT_STARTED")
@@ -7112,6 +7175,12 @@ module Aws::Connect
 
     class ResourceNotReadyException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ResourceReplicationStatus
+      attr_accessor region: ::String
+      attr_accessor status: ::String
       SENSITIVE: []
     end
 
@@ -7909,6 +7978,7 @@ module Aws::Connect
       attr_accessor hierarchy_restricted_resources: ::Array[::String]
       attr_accessor allowed_access_control_hierarchy_group_id: ::String
       attr_accessor granular_access_control_configuration: Types::GranularAccessControlConfiguration
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
       SENSITIVE: []
     end
 
@@ -7931,6 +8001,7 @@ module Aws::Connect
       attr_accessor security_profile_name: ::String
       attr_accessor description: ::String
       attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
       SENSITIVE: []
     end
 
@@ -7940,6 +8011,7 @@ module Aws::Connect
       attr_accessor name: ::String
       attr_accessor last_modified_time: ::Time
       attr_accessor last_modified_region: ::String
+      attr_accessor type: ("AWS_MANAGED" | "CUSTOMER_MANAGED")
       SENSITIVE: []
     end
 
@@ -8109,7 +8181,7 @@ module Aws::Connect
       attr_accessor file_arn: ::String
       attr_accessor file_id: ::String
       attr_accessor creation_time: ::String
-      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED")
+      attr_accessor file_status: ("APPROVED" | "REJECTED" | "PROCESSING" | "FAILED" | "DRAFTING")
       attr_accessor created_by: Types::CreatedByInfo
       attr_accessor upload_url_metadata: Types::UploadUrlMetadata
       SENSITIVE: []
@@ -8563,6 +8635,11 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class TaskTemplateContactHooks
+      attr_accessor wrap_up_flow_id: ::String
+      SENSITIVE: []
+    end
+
     class TaskTemplateDefaultFieldValue
       attr_accessor id: Types::TaskTemplateFieldIdentifier
       attr_accessor default_value: ::String
@@ -8936,6 +9013,7 @@ module Aws::Connect
       attr_accessor user_info: Types::UserInfo
       attr_accessor customer_endpoint: Types::Endpoint
       attr_accessor system_endpoint: Types::Endpoint
+      attr_accessor additional_recipients: Types::NullableAdditionalRecipients
       SENSITIVE: [:name, :description]
     end
 
@@ -9158,6 +9236,30 @@ module Aws::Connect
     class UpdateNotificationContentResponse < Aws::EmptyStructure
     end
 
+    class UpdateOutboundEmailContactMessageRequest
+      attr_accessor instance_id: ::String
+      attr_accessor contact_id: ::String
+      attr_accessor email_message: Types::UpdateOutboundEmailContent
+      SENSITIVE: []
+    end
+
+    class UpdateOutboundEmailContactMessageResponse
+      attr_accessor contact_id: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateOutboundEmailContent
+      attr_accessor message_source_type: ("RAW")
+      attr_accessor raw_message: Types::UpdateOutboundRawMessage
+      SENSITIVE: []
+    end
+
+    class UpdateOutboundRawMessage
+      attr_accessor body: ::String
+      attr_accessor content_type: ::String
+      SENSITIVE: [:body]
+    end
+
     class UpdateParticipantAuthenticationRequest
       attr_accessor state: ::String
       attr_accessor instance_id: ::String
@@ -9364,6 +9466,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor contact_flow_id: ::String
       attr_accessor self_assign_flow_id: ::String
+      attr_accessor contact_hooks: Types::TaskTemplateContactHooks
       attr_accessor constraints: Types::TaskTemplateConstraints
       attr_accessor defaults: Types::TaskTemplateDefaults
       attr_accessor status: ("ACTIVE" | "INACTIVE")
@@ -9379,6 +9482,7 @@ module Aws::Connect
       attr_accessor description: ::String
       attr_accessor contact_flow_id: ::String
       attr_accessor self_assign_flow_id: ::String
+      attr_accessor contact_hooks: Types::TaskTemplateContactHooks
       attr_accessor constraints: Types::TaskTemplateConstraints
       attr_accessor defaults: Types::TaskTemplateDefaults
       attr_accessor fields: ::Array[Types::TaskTemplateField]

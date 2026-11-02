@@ -11,21 +11,21 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class DuplicateResourceException < ::Aws::Errors::ServiceError
+      class DuplicateResourceException < ServiceError
       end
-      class InvalidParametersException < ::Aws::Errors::ServiceError
+      class InvalidParametersException < ServiceError
       end
-      class InvalidStateException < ::Aws::Errors::ServiceError
+      class InvalidStateException < ServiceError
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
       end
-      class OperationNotSupportedException < ::Aws::Errors::ServiceError
+      class OperationNotSupportedException < ServiceError
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
-      class TagOptionNotMigratedException < ::Aws::Errors::ServiceError
+      class TagOptionNotMigratedException < ServiceError
       end
     end
   end

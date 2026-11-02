@@ -8,6 +8,17 @@
 module Aws
   module NetworkFirewall
     module Waiters
+
+      class FirewallPolicyActive
+        def initialize: (?client: Client, ?max_attempts: Integer, ?delay: Integer, ?before_attempt: Proc, ?before_wait: Proc) -> void
+                      | (?Hash[Symbol, untyped]) -> void
+
+        def wait: (
+                    ?firewall_policy_name: ::String,
+                    ?firewall_policy_arn: ::String
+                  ) -> Client::_DescribeFirewallPolicyResponseSuccess
+                | (?Hash[Symbol, untyped]) -> Client::_DescribeFirewallPolicyResponseSuccess
+      end
     end
   end
 end

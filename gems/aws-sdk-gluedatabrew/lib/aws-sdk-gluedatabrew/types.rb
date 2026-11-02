@@ -133,8 +133,8 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] condition
     #   A specific condition to apply to a recipe action. For more
-    #   information, see [Recipe structure][1] in the *Glue DataBrew
-    #   Developer Guide*.
+    #   information, see [Recipe structure][1] in the <i> Glue DataBrew
+    #   Developer Guide</i>.
     #
     #
     #
@@ -594,8 +594,8 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] cron_expression
     #   The date or dates and time or times when the jobs are to be run. For
-    #   more information, see [Cron expressions][1] in the *Glue DataBrew
-    #   Developer Guide*.
+    #   more information, see [Cron expressions][1] in the <i> Glue DataBrew
+    #   Developer Guide</i>.
     #
     #
     #
@@ -1828,7 +1828,7 @@ module Aws::GlueDataBrew
     # @!attribute [rw] cron_expression
     #   The date or dates and time or times when the jobs are to be run for
     #   the schedule. For more information, see [Cron expressions][1] in the
-    #   *Glue DataBrew Developer Guide*.
+    #   <i> Glue DataBrew Developer Guide</i>.
     #
     #
     #
@@ -1982,7 +1982,7 @@ module Aws::GlueDataBrew
 
     # Represents a structure for defining parameter conditions. Supported
     # conditions are described here: [Supported conditions for dynamic
-    # datasets][1] in the *Glue DataBrew Developer Guide*.
+    # datasets][1] in the <i> Glue DataBrew Developer Guide</i>.
     #
     #
     #
@@ -3447,7 +3447,8 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] cron_expression
     #   The dates and times when the job is to run. For more information,
-    #   see [Cron expressions][1] in the *Glue DataBrew Developer Guide*.
+    #   see [Cron expressions][1] in the <i> Glue DataBrew Developer
+    #   Guide</i>.
     #
     #
     #
@@ -4111,8 +4112,8 @@ module Aws::GlueDataBrew
     #
     # @!attribute [rw] cron_expression
     #   The date or dates and time or times when the jobs are to be run. For
-    #   more information, see [Cron expressions][1] in the *Glue DataBrew
-    #   Developer Guide*.
+    #   more information, see [Cron expressions][1] in the <i> Glue DataBrew
+    #   Developer Guide</i>.
     #
     #
     #

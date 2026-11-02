@@ -1876,6 +1876,57 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # Describes an entry in a transit gateway policy table.
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number for the policy table entry. Entries are evaluated in
+    #   ascending order of rule number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] protocol
+    #   The protocol number. A value of `-1` means that the entry matches
+    #   all protocols.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_cidr
+    #   The source CIDR block. If this value is not present, the entry
+    #   matches any source address.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_cidr
+    #   The destination CIDR block. If this value is not present, the entry
+    #   matches any destination address.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_port_range
+    #   The source port range. If this value is not present, the entry
+    #   matches any source port.
+    #   @return [Types::PortRange]
+    #
+    # @!attribute [rw] destination_port_range
+    #   The destination port range. If this value is not present, the entry
+    #   matches any destination port.
+    #   @return [Types::PortRange]
+    #
+    # @!attribute [rw] target_route_table_id
+    #   The ID of the transit gateway route table to which the entry routes
+    #   matching traffic.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/AnalysisTransitGatewayPolicyTableEntry AWS API Documentation
+    #
+    class AnalysisTransitGatewayPolicyTableEntry < Struct.new(
+      :rule_number,
+      :protocol,
+      :source_cidr,
+      :destination_cidr,
+      :source_port_range,
+      :destination_port_range,
+      :target_route_table_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes the application-level health status for an instance.
     #
     # @!attribute [rw] status
@@ -6462,6 +6513,35 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The supportability score for a single instance type and Availability
+    # Zone combination.
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   The ID of the Availability Zone.
+    #   @return [String]
+    #
+    # @!attribute [rw] score
+    #   How well the combination can support the requested capacity right
+    #   now. `high` means that the combination holds several times the
+    #   requested amount. `medium` means that it can cover the request with
+    #   little to spare. `low` means that it holds less than the requested
+    #   amount.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/CapacityManagerSupportabilityScore AWS API Documentation
+    #
+    class CapacityManagerSupportabilityScore < Struct.new(
+      :instance_type,
+      :availability_zone_id,
+      :score)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A key-value pair representing a tag associated with a capacity
     # resource in Capacity Manager.
     #
@@ -7135,6 +7215,18 @@ module Aws::EC2
     #   capacity.
     #   @return [Array<Types::FleetCapacityReservation>]
     #
+    # @!attribute [rw] instance_requirements
+    #   Reserved for internal use.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @!attribute [rw] availability_zone
+    #   Reserved for internal use.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   Reserved for internal use.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags assigned to the Capacity Reservation Fleet.
     #   @return [Array<Types::Tag>]
@@ -7153,6 +7245,9 @@ module Aws::EC2
       :instance_match_criteria,
       :allocation_strategy,
       :instance_type_specifications,
+      :instance_requirements,
+      :availability_zone,
+      :availability_zone_id,
       :tags)
       SENSITIVE = []
       include Aws::Structure
@@ -10286,6 +10381,18 @@ module Aws::EC2
     #   capacity.
     #   @return [Array<Types::ReservationFleetInstanceSpecification>]
     #
+    # @!attribute [rw] instance_requirements
+    #   Reserved for internal use.
+    #   @return [Types::InstanceRequirementsRequest]
+    #
+    # @!attribute [rw] availability_zone
+    #   Reserved for internal use.
+    #   @return [String]
+    #
+    # @!attribute [rw] availability_zone_id
+    #   Reserved for internal use.
+    #   @return [String]
+    #
     # @!attribute [rw] tenancy
     #   Indicates the tenancy of the Capacity Reservation Fleet. All
     #   Capacity Reservations in the Fleet inherit this tenancy. The
@@ -10356,6 +10463,9 @@ module Aws::EC2
       :allocation_strategy,
       :client_token,
       :instance_type_specifications,
+      :instance_requirements,
+      :availability_zone,
+      :availability_zone_id,
       :tenancy,
       :total_target_capacity,
       :end_date,
@@ -27719,6 +27829,50 @@ module Aws::EC2
     #   * `root-device-type` - The type of the root device volume (`ebs` \|
     #     `instance-store`).
     #
+    #   * `scan-result.critical-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for a `critical` severity finding on the AMI.
+    #
+    #   * `scan-result.finding-scan-date` - The date and time, in the ISO
+    #     8601 format in the UTC time zone (YYYY-MM-DDThh:mm:ss.sssZ), of
+    #     the most recent Amazon Inspector scan of the AMI.
+    #
+    #   * `scan-result.high-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for a `high` severity finding on the AMI.
+    #
+    #   * `scan-result.highest-finding-severity-label` - The highest
+    #     severity among the AMI's Amazon Inspector findings, whether or
+    #     not a fix is available. The valid values are the following Amazon
+    #     Inspector severity levels:
+    #
+    #     * `informational` - CVSS score of 0.
+    #
+    #     * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #     * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #     * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #     * `critical` - CVSS score of 9.0 to 10.0.
+    #   * `scan-result.informational-fix-available-since` - The earliest
+    #     date and time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for an `informational` severity finding on the
+    #     AMI.
+    #
+    #   * `scan-result.low-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for a `low` severity finding on the AMI.
+    #
+    #   * `scan-result.medium-fix-available-since` - The earliest date and
+    #     time, in the ISO 8601 format in the UTC time zone
+    #     (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported a
+    #     fix as available for a `medium` severity finding on the AMI.
+    #
     #   * `source-image-id` - The ID of the source AMI from which the AMI
     #     was created.
     #
@@ -43705,6 +43859,14 @@ module Aws::EC2
     #   The transit gateway route table route.
     #   @return [Types::TransitGatewayRouteTableRoute]
     #
+    # @!attribute [rw] transit_gateway_policy_table
+    #   The transit gateway policy table.
+    #   @return [Types::AnalysisComponent]
+    #
+    # @!attribute [rw] transit_gateway_policy_table_entry
+    #   The transit gateway policy table entry.
+    #   @return [Types::AnalysisTransitGatewayPolicyTableEntry]
+    #
     # @!attribute [rw] transit_gateway_attachment
     #   The transit gateway attachment.
     #   @return [Types::AnalysisComponent]
@@ -43777,6 +43939,8 @@ module Aws::EC2
       :transit_gateway,
       :transit_gateway_route_table,
       :transit_gateway_route_table_route,
+      :transit_gateway_policy_table,
+      :transit_gateway_policy_table_entry,
       :transit_gateway_attachment,
       :component_account,
       :component_region,
@@ -46755,6 +46919,84 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # @!attribute [rw] market_type
+    #   The capacity market to score.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_amount
+    #   The amount of capacity that you need, in the unit that you specify
+    #   for `CapacityUnit`. Each score is relative to this amount.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] capacity_unit
+    #   The unit for `CapacityAmount`.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_availability_zone_ids
+    #   The IDs of the Availability Zones to score, such as `use1-az1`. You
+    #   can specify Availability Zones in different Regions. You can specify
+    #   up to 10 Availability Zones.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_types
+    #   The instance types to score. You can specify up to 50 instance
+    #   types.
+    #
+    #   Specify either `InstanceTypes` or
+    #   `InstanceRequirementsWithMetadata`, but not both.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] instance_requirements_with_metadata
+    #   The attributes that the instance types must have, such as vCPU and
+    #   memory ranges. Capacity Manager resolves the attributes into
+    #   matching instance types and scores each one.
+    #
+    #   Specify either `InstanceTypes` or
+    #   `InstanceRequirementsWithMetadata`, but not both.
+    #   @return [Types::InstanceRequirementsWithMetadataRequest]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerSupportabilityScoresRequest AWS API Documentation
+    #
+    class GetCapacityManagerSupportabilityScoresRequest < Struct.new(
+      :market_type,
+      :capacity_amount,
+      :capacity_unit,
+      :capacity_availability_zone_ids,
+      :instance_types,
+      :instance_requirements_with_metadata,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aggregate_score
+    #   The score for all instance type and Availability Zone combinations
+    #   in the request together. A `high` aggregate score with lower
+    #   individual scores means that no single combination can support the
+    #   full request, but the combinations together can.
+    #   @return [String]
+    #
+    # @!attribute [rw] capacity_manager_supportability_scores
+    #   The score for each instance type and Availability Zone combination
+    #   in the request.
+    #   @return [Array<Types::CapacityManagerSupportabilityScore>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerSupportabilityScoresResult AWS API Documentation
+    #
+    class GetCapacityManagerSupportabilityScoresResult < Struct.new(
+      :aggregate_score,
+      :capacity_manager_supportability_scores)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] capacity_reservation_id
     #   The ID of the Capacity Reservation.
     #   @return [String]
@@ -47568,6 +47810,62 @@ module Aws::EC2
     class GetImageBlockPublicAccessStateResult < Struct.new(
       :image_block_public_access_state,
       :managed_by)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of items to return for this request. To get the
+    #   next page of items, make another request with the token returned in
+    #   the output. For more information, see [Pagination][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token returned from a previous paginated request. Pagination
+    #   continues from the end of the items returned by the previous
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetImageFindingsRequest AWS API Documentation
+    #
+    class GetImageFindingsRequest < Struct.new(
+      :image_id,
+      :max_results,
+      :next_token,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] image_findings
+    #   The Amazon Inspector findings for the AMI.
+    #   @return [Array<Types::ImageFinding>]
+    #
+    # @!attribute [rw] next_token
+    #   The token to include in another request to get the next page of
+    #   items. This value is `null` when there are no more items to return.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetImageFindingsResult AWS API Documentation
+    #
+    class GetImageFindingsResult < Struct.new(
+      :image_findings,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -49860,6 +50158,54 @@ module Aws::EC2
     end
 
     # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayAttachmentNatConfigurationRequest AWS API Documentation
+    #
+    class GetTransitGatewayAttachmentNatConfigurationRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_support
+    #   The state of NAT gateway support for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Specifies whether the transit gateway installs routes for the NAT
+    #   CIDRs in the route tables to which the attachment propagates.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT gateway rules for the attachment.
+    #   @return [Array<Types::TransitGatewayNatRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetTransitGatewayAttachmentNatConfigurationResult AWS API Documentation
+    #
+    class GetTransitGatewayAttachmentNatConfigurationResult < Struct.new(
+      :transit_gateway_attachment_id,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
     #   The ID of the attachment.
     #   @return [String]
     #
@@ -51778,6 +52124,15 @@ module Aws::EC2
     #   The watermarks attached to the AMI.
     #   @return [Array<Types::ImageWatermark>]
     #
+    # @!attribute [rw] scan_results
+    #   The Amazon Inspector scan results for the AMI. This information is
+    #   present only for AMIs that Amazon Inspector has scanned.
+    #
+    #   When you share an AMI with other accounts, organizations, or
+    #   organizational units (OUs), or make it public, its scan results are
+    #   available to the accounts that can use the AMI.
+    #   @return [Types::ScanResults]
+    #
     # @!attribute [rw] instance_type_specification
     #   The instance type specification for the AMI, which defines which
     #   instance types are compatible with this image.
@@ -51867,6 +52222,7 @@ module Aws::EC2
       :free_tier_eligible,
       :public_ssm_parameter_name,
       :image_watermarks,
+      :scan_results,
       :instance_type_specification,
       :image_id,
       :image_location,
@@ -52113,6 +52469,13 @@ module Aws::EC2
     #   Maximum: 50 values
     #   @return [Array<Types::ImageWatermarkFilterResponse>]
     #
+    # @!attribute [rw] scan_result_condition
+    #   The Amazon Inspector scan-result criteria that an AMI must meet to
+    #   be allowed. The criteria can limit the highest finding severity, the
+    #   number of days since Amazon Inspector last scanned the AMI, and the
+    #   number of days since Amazon Inspector reported a fix as available.
+    #   @return [Types::ScanResultCondition]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageCriterion AWS API Documentation
     #
     class ImageCriterion < Struct.new(
@@ -52121,7 +52484,8 @@ module Aws::EC2
       :image_names,
       :deprecation_time_condition,
       :creation_date_condition,
-      :image_watermarks)
+      :image_watermarks,
+      :scan_result_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52223,6 +52587,13 @@ module Aws::EC2
     #   Maximum: 50 values
     #   @return [Array<Types::ImageWatermarkFilterRequest>]
     #
+    # @!attribute [rw] scan_result_condition
+    #   The Amazon Inspector scan-result criteria that an AMI must meet to
+    #   be allowed. The criteria can limit the highest finding severity, the
+    #   number of days since Amazon Inspector last scanned the AMI, and the
+    #   number of days since Amazon Inspector reported a fix as available.
+    #   @return [Types::ScanResultConditionRequest]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageCriterionRequest AWS API Documentation
     #
     class ImageCriterionRequest < Struct.new(
@@ -52231,7 +52602,8 @@ module Aws::EC2
       :image_names,
       :deprecation_time_condition,
       :creation_date_condition,
-      :image_watermarks)
+      :image_watermarks,
+      :scan_result_condition)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -52275,6 +52647,83 @@ module Aws::EC2
       :url,
       :user_bucket)
       SENSITIVE = [:url]
+      include Aws::Structure
+    end
+
+    # Describes an Amazon Inspector vulnerability finding for an AMI.
+    #
+    # @!attribute [rw] fix_available
+    #   Specifies whether a fix is available for the finding. This value is
+    #   `true` when Amazon Inspector reports a full or partial fix for the
+    #   finding.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] score
+    #   The Amazon Inspector score for the finding.
+    #   @return [Float]
+    #
+    # @!attribute [rw] first_observed_at
+    #   The date and time, in the ISO 8601 format in the UTC time zone
+    #   (YYYY-MM-DDThh:mm:ss.sssZ), when Amazon Inspector first observed the
+    #   finding.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time, in the ISO 8601 format in the UTC time zone
+    #   (YYYY-MM-DDThh:mm:ss.sssZ), when Amazon Inspector last updated the
+    #   finding.
+    #   @return [Time]
+    #
+    # @!attribute [rw] title
+    #   The title of the finding.
+    #   @return [String]
+    #
+    # @!attribute [rw] paths
+    #   The file paths in the AMI that are affected by the finding. Amazon
+    #   EC2 returns up to 10 file paths for each finding.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] severity_label
+    #   The severity of the finding.
+    #
+    #   The valid values are the following Amazon Inspector severity levels,
+    #   which correspond to CVSS score ranges:
+    #
+    #   * `informational` - CVSS score of 0.
+    #
+    #   * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #   * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #   * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #   * `critical` - CVSS score of 9.0 to 10.0.
+    #
+    #   For more information, see [Software package vulnerability
+    #   severity][1] in the *Amazon Inspector User Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score
+    #   @return [String]
+    #
+    # @!attribute [rw] snapshot_id
+    #   The ID of the Amazon EBS snapshot of the AMI in which the finding
+    #   was detected.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ImageFinding AWS API Documentation
+    #
+    class ImageFinding < Struct.new(
+      :fix_available,
+      :score,
+      :first_observed_at,
+      :updated_at,
+      :title,
+      :paths,
+      :severity_label,
+      :snapshot_id)
+      SENSITIVE = []
       include Aws::Structure
     end
 
@@ -57139,7 +57588,8 @@ module Aws::EC2
     end
 
     # Describes the status of an instance, including system status, instance
-    # status, attached EBS status, and application status.
+    # status, attached EBS status, application status, and performance
+    # status.
     #
     # @!attribute [rw] availability_zone
     #   The Availability Zone of the instance.
@@ -57191,6 +57641,12 @@ module Aws::EC2
     #   Reports the application-level health status for the instance.
     #   @return [Types::ApplicationStatusSummary]
     #
+    # @!attribute [rw] performance_status
+    #   Reports the performance-related health status for the instance. This
+    #   information is returned only when performance status checks are
+    #   enabled for the instance.
+    #   @return [Types::PerformanceStatusSummary]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/InstanceStatus AWS API Documentation
     #
     class InstanceStatus < Struct.new(
@@ -57204,7 +57660,8 @@ module Aws::EC2
       :instance_status,
       :system_status,
       :attached_ebs_status,
-      :application_status)
+      :application_status,
+      :performance_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -65631,8 +66088,8 @@ module Aws::EC2
     # @!attribute [rw] device_posture_options
     #   The device posture options for the Client VPN endpoint. Specifying
     #   this parameter replaces the entire device posture configuration for
-    #   the endpoint. To remove all device trust providers, specify an empty
-    #   list.
+    #   the endpoint. To disable device posture and remove all device trust
+    #   providers, specify `false` for `Enabled`.
     #   @return [Types::DevicePostureOptions]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyClientVpnEndpointRequest AWS API Documentation
@@ -68875,6 +69332,95 @@ module Aws::EC2
     #
     class ModifyTrafficMirrorSessionResult < Struct.new(
       :traffic_mirror_session)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_support
+    #   Specifies whether to enable or disable NAT gateway support for the
+    #   attachment. To enable NAT gateway support, the attachment must have
+    #   at least one NAT gateway rule. You can't modify the NAT
+    #   configuration while NAT gateway support is `enabling` or
+    #   `disabling`. If you omit this parameter, the current value doesn't
+    #   change.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Specifies whether the transit gateway installs routes for the NAT
+    #   CIDRs in the route tables to which the attachment propagates. For
+    #   VPC attachments, the transit gateway always installs these routes.
+    #   You can enable or disable this option only for Amazon Web Services
+    #   Direct Connect gateway attachments and Site-to-Site VPN attachments
+    #   that use dynamic routing. For these attachments, the default is
+    #   `enable`. If you omit this parameter, the current value doesn't
+    #   change.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT gateway rules for the attachment. The rules that you specify
+    #   replace all existing NAT gateway rules for the attachment. You can
+    #   specify up to 50 rules for an attachment. If you omit this
+    #   parameter, the existing rules don't change. To remove all rules,
+    #   use `ResetNatGatewayRules`.
+    #   @return [Array<Types::TransitGatewayNatRuleRequest>]
+    #
+    # @!attribute [rw] reset_nat_gateway_rules
+    #   Specifies whether to remove all NAT gateway rules from the
+    #   attachment. If you omit this parameter, the transit gateway doesn't
+    #   remove any rules. You can't specify this parameter together with
+    #   `NatGatewayRules`. Because you can't enable NAT gateway support
+    #   without rules, also set `NatGatewaySupport` to `disable` in the same
+    #   request if NAT gateway support is currently enabled.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks whether you have the required permissions for the action,
+    #   without actually making the request, and provides an error response.
+    #   If you have the required permissions, the error response is
+    #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayAttachmentNatConfigurationRequest AWS API Documentation
+    #
+    class ModifyTransitGatewayAttachmentNatConfigurationRequest < Struct.new(
+      :transit_gateway_attachment_id,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules,
+      :reset_nat_gateway_rules,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] transit_gateway_attachment_id
+    #   The ID of the transit gateway attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_support
+    #   The state of NAT gateway support for the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Specifies whether the transit gateway installs routes for the NAT
+    #   CIDRs in the route tables to which the attachment propagates.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT gateway rules for the attachment.
+    #   @return [Array<Types::TransitGatewayNatRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ModifyTransitGatewayAttachmentNatConfigurationResult AWS API Documentation
+    #
+    class ModifyTransitGatewayAttachmentNatConfigurationResult < Struct.new(
+      :transit_gateway_attachment_id,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -73503,6 +74049,10 @@ module Aws::EC2
     #   The route in a transit gateway route table.
     #   @return [Types::TransitGatewayRouteTableRoute]
     #
+    # @!attribute [rw] transit_gateway_policy_table_entry
+    #   The entry in a transit gateway policy table.
+    #   @return [Types::AnalysisTransitGatewayPolicyTableEntry]
+    #
     # @!attribute [rw] explanations
     #   The explanation codes.
     #   @return [Array<Types::Explanation>]
@@ -73541,6 +74091,7 @@ module Aws::EC2
       :additional_details,
       :transit_gateway,
       :transit_gateway_route_table_route,
+      :transit_gateway_policy_table_entry,
       :explanations,
       :elastic_load_balancer_listener,
       :firewall_stateless_rule,
@@ -73934,6 +74485,33 @@ module Aws::EC2
     #
     class PerformanceFactorReferenceRequest < Struct.new(
       :instance_family)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides a summary of the performance status check results for an
+    # instance.
+    #
+    # @!attribute [rw] status
+    #   The current status.
+    #   @return [String]
+    #
+    # @!attribute [rw] impaired_since
+    #   The date and time when the performance status became impaired.
+    #   @return [Time]
+    #
+    # @!attribute [rw] remediation
+    #   The recommended action to remediate the impaired instance, if one is
+    #   available. This value is returned only when the instance is
+    #   impaired.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/PerformanceStatusSummary AWS API Documentation
+    #
+    class PerformanceStatusSummary < Struct.new(
+      :status,
+      :impaired_since,
+      :remediation)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -81322,6 +81900,375 @@ module Aws::EC2
       include Aws::Structure
     end
 
+    # The Amazon Inspector scan-result criteria that an AMI must meet to be
+    # allowed. The criteria can limit the highest finding severity. They can
+    # also limit, for each severity, the days since Amazon Inspector
+    # reported a fix as available.
+    #
+    # The severity limit applies to all findings, whether or not a fix is
+    # available. The day limits for each severity apply only to findings
+    # that have a fix available. A scanned AMI that has no fix-available
+    # finding of a given severity meets that severity's day limit. AMIs
+    # that Amazon Inspector has not scanned are not allowed when you specify
+    # this condition.
+    #
+    # @!attribute [rw] max_days_since_last_finding_scan
+    #   The maximum number of days that have elapsed since Amazon Inspector
+    #   last scanned the AMI. For example, a value of `7` allows AMIs that
+    #   were scanned within the last 7 days. AMIs that Amazon Inspector has
+    #   not scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_severity_label
+    #   The maximum severity that an AMI's Amazon Inspector findings can
+    #   have for the AMI to be allowed. Findings count whether or not a fix
+    #   is available. For example, a value of `medium` allows AMIs whose
+    #   highest severity is `informational`, `low`, or `medium`.
+    #
+    #   The valid values are the following Amazon Inspector severity levels,
+    #   which correspond to CVSS score ranges:
+    #
+    #   * `informational` - CVSS score of 0.
+    #
+    #   * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #   * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #   * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #   * `critical` - CVSS score of 9.0 to 10.0.
+    #
+    #   For more information, see [Software package vulnerability
+    #   severity][1] in the *Amazon Inspector User Guide*.
+    #
+    #   A scanned AMI that has no findings meets this limit.
+    #
+    #   AMIs that Amazon Inspector has not scanned are not allowed when you
+    #   specify this condition.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score
+    #   @return [String]
+    #
+    # @!attribute [rw] max_days_since_informational_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for an `informational` severity finding on the AMI. For
+    #   example, a value of `7` does not allow an AMI if Amazon Inspector
+    #   reported such a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `informational` severity finding with a
+    #   fix available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_low_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `low` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `low` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_medium_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `medium` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `medium` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_high_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `high` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `high` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_critical_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `critical` severity finding on the AMI. For example,
+    #   a value of `7` does not allow an AMI if Amazon Inspector reported
+    #   such a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `critical` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScanResultCondition AWS API Documentation
+    #
+    class ScanResultCondition < Struct.new(
+      :max_days_since_last_finding_scan,
+      :maximum_severity_label,
+      :max_days_since_informational_fix_available,
+      :max_days_since_low_fix_available,
+      :max_days_since_medium_fix_available,
+      :max_days_since_high_fix_available,
+      :max_days_since_critical_fix_available)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Inspector scan-result criteria that an AMI must meet to be
+    # allowed. The criteria can limit the highest finding severity. They can
+    # also limit, for each severity, the days since Amazon Inspector
+    # reported a fix as available.
+    #
+    # The severity limit applies to all findings, whether or not a fix is
+    # available. The day limits for each severity apply only to findings
+    # that have a fix available. A scanned AMI that has no fix-available
+    # finding of a given severity meets that severity's day limit. AMIs
+    # that Amazon Inspector has not scanned are not allowed when you specify
+    # this condition.
+    #
+    # @!attribute [rw] max_days_since_last_finding_scan
+    #   The maximum number of days that have elapsed since Amazon Inspector
+    #   last scanned the AMI. For example, a value of `7` allows AMIs that
+    #   were scanned within the last 7 days. AMIs that Amazon Inspector has
+    #   not scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] maximum_severity_label
+    #   The maximum severity that an AMI's Amazon Inspector findings can
+    #   have for the AMI to be allowed. Findings count whether or not a fix
+    #   is available. For example, a value of `medium` allows AMIs whose
+    #   highest severity is `informational`, `low`, or `medium`.
+    #
+    #   The valid values are the following Amazon Inspector severity levels,
+    #   which correspond to CVSS score ranges:
+    #
+    #   * `informational` - CVSS score of 0.
+    #
+    #   * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #   * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #   * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #   * `critical` - CVSS score of 9.0 to 10.0.
+    #
+    #   For more information, see [Software package vulnerability
+    #   severity][1] in the *Amazon Inspector User Guide*.
+    #
+    #   A scanned AMI that has no findings meets this limit.
+    #
+    #   AMIs that Amazon Inspector has not scanned are not allowed when you
+    #   specify this condition.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score
+    #   @return [String]
+    #
+    # @!attribute [rw] max_days_since_informational_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for an `informational` severity finding on the AMI. For
+    #   example, a value of `7` does not allow an AMI if Amazon Inspector
+    #   reported such a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `informational` severity finding with a
+    #   fix available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_low_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `low` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `low` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_medium_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `medium` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `medium` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_high_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `high` severity finding on the AMI. For example, a
+    #   value of `7` does not allow an AMI if Amazon Inspector reported such
+    #   a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `high` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_days_since_critical_fix_available
+    #   The maximum number of days since Amazon Inspector reported a fix as
+    #   available for a `critical` severity finding on the AMI. For example,
+    #   a value of `7` does not allow an AMI if Amazon Inspector reported
+    #   such a fix more than 7 days ago.
+    #
+    #   A scanned AMI that has no `critical` severity finding with a fix
+    #   available meets this limit. AMIs that Amazon Inspector has not
+    #   scanned are not allowed.
+    #
+    #   Constraints: Minimum value of 0. Maximum value of 2147483647.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScanResultConditionRequest AWS API Documentation
+    #
+    class ScanResultConditionRequest < Struct.new(
+      :max_days_since_last_finding_scan,
+      :maximum_severity_label,
+      :max_days_since_informational_fix_available,
+      :max_days_since_low_fix_available,
+      :max_days_since_medium_fix_available,
+      :max_days_since_high_fix_available,
+      :max_days_since_critical_fix_available)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon Inspector scan results for an AMI. This information is
+    # present only for AMIs that Amazon Inspector has scanned.
+    #
+    # When you share an AMI with other accounts, organizations, or
+    # organizational units (OUs), or make it public, its scan results are
+    # available to the accounts that can use the AMI.
+    #
+    # The fix-available dates are specific to the AMI. Each date reflects
+    # when a fix became available for a finding on that AMI, not when the
+    # vendor released the fix. As a result, a date can be later than the
+    # vendor's release date, and AMIs with the same vulnerability can have
+    # different dates.
+    #
+    # @!attribute [rw] highest_finding_severity_label
+    #   The highest severity among the AMI's Amazon Inspector findings,
+    #   whether or not a fix is available.
+    #
+    #   The valid values are the following Amazon Inspector severity levels,
+    #   which correspond to CVSS score ranges:
+    #
+    #   * `informational` - CVSS score of 0.
+    #
+    #   * `low` - CVSS score of 0.1 to 3.9.
+    #
+    #   * `medium` - CVSS score of 4.0 to 6.9.
+    #
+    #   * `high` - CVSS score of 7.0 to 8.9.
+    #
+    #   * `critical` - CVSS score of 9.0 to 10.0.
+    #
+    #   For more information, see [Software package vulnerability
+    #   severity][1] in the *Amazon Inspector User Guide*.
+    #
+    #   This value is present only if the AMI has at least one finding.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/inspector/latest/user/findings-understanding-severity.html#findings-understanding-package-score
+    #   @return [String]
+    #
+    # @!attribute [rw] finding_scan_date
+    #   The date and time, in the ISO 8601 format in the UTC time zone
+    #   (YYYY-MM-DDThh:mm:ss.sssZ), of the most recent Amazon Inspector scan
+    #   of the AMI.
+    #   @return [Time]
+    #
+    # @!attribute [rw] informational_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for an `informational` severity finding on the
+    #   AMI. This value is present only if the AMI has at least one
+    #   `informational` severity finding with a fix available. Amazon
+    #   Inspector recomputes this value on each scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] low_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for a `low` severity finding on the AMI. This
+    #   value is present only if the AMI has at least one `low` severity
+    #   finding with a fix available. Amazon Inspector recomputes this value
+    #   on each scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] medium_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for a `medium` severity finding on the AMI. This
+    #   value is present only if the AMI has at least one `medium` severity
+    #   finding with a fix available. Amazon Inspector recomputes this value
+    #   on each scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] high_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for a `high` severity finding on the AMI. This
+    #   value is present only if the AMI has at least one `high` severity
+    #   finding with a fix available. Amazon Inspector recomputes this value
+    #   on each scan.
+    #   @return [Time]
+    #
+    # @!attribute [rw] critical_fix_available_since
+    #   The earliest date and time, in the ISO 8601 format in the UTC time
+    #   zone (YYYY-MM-DDThh:mm:ss.sssZ), at which Amazon Inspector reported
+    #   a fix as available for a `critical` severity finding on the AMI.
+    #   This value is present only if the AMI has at least one `critical`
+    #   severity finding with a fix available. Amazon Inspector recomputes
+    #   this value on each scan.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/ScanResults AWS API Documentation
+    #
+    class ScanResults < Struct.new(
+      :highest_finding_severity_label,
+      :finding_scan_date,
+      :informational_fix_available_since,
+      :low_fix_available_since,
+      :medium_fix_available_since,
+      :high_fix_available_since,
+      :critical_fix_available_since)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Describes a Scheduled Instance.
     #
     # @!attribute [rw] availability_zone
@@ -87307,6 +88254,11 @@ module Aws::EC2
     #   The tags for the attachment.
     #   @return [Array<Types::Tag>]
     #
+    # @!attribute [rw] nat_gateway_support
+    #   The state of NAT gateway support for the attachment. Only the owner
+    #   of the transit gateway receives this parameter.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayAttachment AWS API Documentation
     #
     class TransitGatewayAttachment < Struct.new(
@@ -87319,7 +88271,8 @@ module Aws::EC2
       :state,
       :association,
       :creation_time,
-      :tags)
+      :tags,
+      :nat_gateway_support)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -88103,6 +89056,80 @@ module Aws::EC2
       :transit_gateway_multicast_domain_id,
       :registered_network_interface_ids,
       :group_ip_address)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about a NAT gateway rule for a transit gateway
+    # attachment, including the rule number, the source CIDR block, the
+    # translated CIDR block, and the state of the rule.
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] match_source_cidr
+    #   The IPv4 CIDR block of the source addresses to translate.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_cidr
+    #   The IPv4 CIDR block that the transit gateway translates the source
+    #   addresses to.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the NAT gateway rule. The possible values are:
+    #
+    #   * `pending` - The transit gateway is applying a change to the rule.
+    #
+    #   * `activated` - The rule is in effect because NAT gateway support is
+    #     enabled for the attachment.
+    #
+    #   * `deactivated` - The rule isn't in effect because NAT gateway
+    #     support is disabled for the attachment.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayNatRule AWS API Documentation
+    #
+    class TransitGatewayNatRule < Struct.new(
+      :rule_number,
+      :match_source_cidr,
+      :nat_cidr,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a NAT gateway rule to apply to a transit gateway attachment.
+    # A NAT gateway rule translates source addresses in the
+    # `MatchSourceCidr` range to the corresponding addresses in the
+    # `NatCidr` range.
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number. Valid values are 1 to 32766. Each rule number must
+    #   be unique within the request.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] match_source_cidr
+    #   The IPv4 CIDR block of the source addresses to translate. The CIDR
+    #   block can't overlap the multicast range (`224.0.0.0/4`) or the
+    #   link-local range (`169.254.0.0/16`).
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_cidr
+    #   The IPv4 CIDR block to translate the source addresses to. The CIDR
+    #   block must be in a private (RFC 1918) or shared address space (RFC
+    #   6598) range, and must have the same prefix length as
+    #   `MatchSourceCidr`. The CIDR blocks in the rules for an attachment
+    #   can't overlap each other.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/TransitGatewayNatRuleRequest AWS API Documentation
+    #
+    class TransitGatewayNatRuleRequest < Struct.new(
+      :rule_number,
+      :match_source_cidr,
+      :nat_cidr)
       SENSITIVE = []
       include Aws::Structure
     end

@@ -198,6 +198,134 @@ HqOUdKigPDHYLRo=
                            /certificate does not match expected X509 PEM format/)
         end
 
+        context 'canonical string integrity' do
+          let(:sig_key) { OpenSSL::PKey::RSA.new(2048) }
+          let(:topic_a) { 'arn:aws:sns:us-east-1:111111111111:topic-a' }
+          let(:topic_b) { 'arn:aws:sns:us-east-1:222222222222:topic-b' }
+          let(:payload) { '{"action":"run"}' }
+
+          before(:each) do
+            allow(verifier).to receive(:public_key).and_return(sig_key.public_key)
+          end
+
+          def sign(msg)
+            canonical = verifier.send(:canonical_string, msg)
+            msg.merge(
+              'Signature' =>
+                Base64.strict_encode64(sig_key.sign(OpenSSL::Digest.new('SHA1'), canonical))
+            )
+          end
+
+          def base_message(overrides = {})
+            {
+              'Type' => 'Notification',
+              'MessageId' => 'message-id',
+              'TopicArn' => topic_a,
+              'Message' => "line one\nline two",
+              'Timestamp' => '2026-10-26T00:00:01.000Z',
+              'SignatureVersion' => '1',
+              'SigningCertURL' => signing_cert_url
+            }.merge(overrides)
+          end
+
+          # A message whose Message value embeds newline-delimited tokens that
+          # mimic the canonical-string field separators.
+          let(:signed) do
+            sign(base_message(
+              'Message' => [
+                payload, 'MessageId', 'other-id', 'Timestamp', 'other-ts',
+                'TopicArn', topic_b, 'Type', 'Notification'
+              ].join("\n")
+            ))
+          end
+
+          it 'verifies a message with a multi-line Message' do
+            expect(verifier.authenticate!(Json.dump(sign(base_message)))).to be(true)
+            expect(verifier.authentic?(Json.dump(signed))).to be(true)
+          end
+
+          it 'verifies confirmation messages' do
+            %w[SubscriptionConfirmation UnsubscribeConfirmation].each do |type|
+              msg = sign(base_message(
+                'Type' => type,
+                'Token' => 'token',
+                'SubscribeURL' => 'https://sns.us-east-1.amazonaws.com/?Action=ConfirmSubscription'
+              ))
+              expect(verifier.authentic?(Json.dump(msg))).to be(true)
+            end
+          end
+
+          # The same signed bytes re-split so the leftover tokens land in Type.
+          it 'rejects a message re-split so the leftover bytes land in Type' do
+            resplit = signed.merge(
+              'Type' => [
+                'Notification', 'MessageId', 'message-id', 'Timestamp',
+                '2026-10-26T00:00:01.000Z', 'TopicArn', topic_a,
+                'Type', 'Notification'
+              ].join("\n"),
+              'MessageId' => 'other-id',
+              'TopicArn' => topic_b,
+              'Message' => payload,
+              'Timestamp' => 'other-ts'
+            )
+            expect(verifier.authentic?(Json.dump(resplit))).to be(false)
+          end
+
+          it 'rejects a message re-split so the leftover bytes land in Timestamp' do
+            resplit = signed.merge(
+              'Message' => payload,
+              'MessageId' => 'other-id',
+              'Timestamp' => [
+                'other-ts', 'TopicArn', topic_b, 'Type', 'Notification',
+                'MessageId', 'message-id', 'Timestamp', '2026-10-26T00:00:01.000Z'
+              ].join("\n"),
+              'TopicArn' => topic_a,
+              'Type' => 'Notification'
+            )
+            expect(verifier.authentic?(Json.dump(resplit))).to be(false)
+          end
+
+          it 'returns false for an unknown or missing Type' do
+            unknown = base_message('Type' => 'Other').merge('Signature' => 'c2ln')
+            expect(verifier.authentic?(Json.dump(unknown))).to be(false)
+            missing = base_message.tap { |m| m.delete('Type') }.merge('Signature' => 'c2ln')
+            expect(verifier.authentic?(Json.dump(missing))).to be(false)
+          end
+
+          it 'returns false when a required field is missing' do
+            %w[TopicArn MessageId Timestamp].each do |required|
+              msg = base_message.tap { |m| m.delete(required) }.merge('Signature' => 'c2ln')
+              expect(verifier.authentic?(Json.dump(msg))).to be(false)
+            end
+          end
+
+          it 'raises when a metadata field contains a newline' do
+            msg = sign(base_message('TopicArn' => "#{topic_a}\nType\nNotification"))
+            expect {
+              verifier.authenticate!(Json.dump(msg))
+            }.to raise_error(MessageVerifier::VerificationError, /must not contain newlines/)
+          end
+
+          it 'raises when a metadata field contains a carriage return' do
+            msg = sign(base_message('MessageId' => "a\rb"))
+            expect {
+              verifier.authenticate!(Json.dump(msg))
+            }.to raise_error(MessageVerifier::VerificationError, /must not contain newlines/)
+          end
+
+          it 'raises when Subject contains a newline' do
+            msg = sign(base_message('Subject' => "a\nb"))
+            expect {
+              verifier.authenticate!(Json.dump(msg))
+            }.to raise_error(MessageVerifier::VerificationError, /must not contain newlines/)
+          end
+
+          it 'returns false when a signable field is not a string' do
+            msg = base_message('Message' => 1, 'Signature' => 'c2ln')
+            expect(verifier.authentic?(Json.dump(msg))).to be(false)
+          end
+        end
+
       end
 
       describe '#authentic?' do
@@ -217,6 +345,27 @@ HqOUdKigPDHYLRo=
               expect(verifier.authentic?(msg)).to be(false)
             end
           end
+        end
+
+        it 'returns false for a body that is not a JSON object' do
+          expect(verifier.authentic?('[]')).to be(false)
+          expect(verifier.authentic?('not json')).to be(false)
+        end
+
+        it 'returns false when the signing fields are not strings' do
+          msg = Json.load(message_SHA1)
+          msg['Signature'] = 1
+          expect(verifier.authentic?(Json.dump(msg))).to be(false)
+
+          msg = Json.load(message_SHA1)
+          msg['SigningCertURL'] = []
+          expect(verifier.authentic?(Json.dump(msg))).to be(false)
+        end
+
+        it 'returns false when the SigningCertURL is not a valid URI' do
+          msg = Json.load(message_SHA1)
+          msg['SigningCertURL'] = 'https://sns.us-east-2.amazonaws.com/ bad.pem'
+          expect(verifier.authentic?(Json.dump(msg))).to be(false)
         end
 
       end

@@ -153,6 +153,7 @@ module Aws::Inspector2
       attr_accessor amis: ::Array[Types::StringFilter]
       attr_accessor sort_order: ("ASC" | "DESC")
       attr_accessor sort_by: ("CRITICAL" | "HIGH" | "ALL" | "AFFECTED_INSTANCES")
+      attr_accessor scan_sources: ::Array[("INSTANCE_SCAN" | "MACHINE_IMAGE_SCAN")]
       SENSITIVE: []
     end
 
@@ -166,6 +167,37 @@ module Aws::Inspector2
       attr_accessor cloud_account_id: ::String
       attr_accessor severity_counts: Types::SeverityCounts
       attr_accessor affected_instances: ::Integer
+      attr_accessor scan_source: ("INSTANCE_SCAN" | "MACHINE_IMAGE_SCAN")
+      SENSITIVE: []
+    end
+
+    class AmiConfiguration
+      attr_accessor last_launched_within: ("DAYS_180" | "DAYS_90" | "DAYS_60" | "DAYS_30" | "DAYS_14" | "DAYS_7")
+      attr_accessor created_within: ("DAYS_180" | "DAYS_90" | "DAYS_60" | "DAYS_30" | "DAYS_14" | "DAYS_7")
+      attr_accessor scan_mode_configuration: Types::AmiScanModeConfiguration
+      SENSITIVE: []
+    end
+
+    class AmiConfigurationState
+      attr_accessor last_launched_within: ("DAYS_180" | "DAYS_90" | "DAYS_60" | "DAYS_30" | "DAYS_14" | "DAYS_7")
+      attr_accessor created_within: ("DAYS_180" | "DAYS_90" | "DAYS_60" | "DAYS_30" | "DAYS_14" | "DAYS_7")
+      attr_accessor scan_mode_configuration: Types::AmiScanModeConfiguration
+      attr_accessor status: ("SUCCESS" | "PENDING" | "FAILED")
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class AmiScanModeConfiguration
+      attr_accessor scan_mode: ("SCAN_ALL" | "TARGET_SCANNING")
+      attr_accessor tags: ::Array[Types::AmiTagFilter]
+      attr_accessor exclude_copied_amis: bool
+      attr_accessor exclude_backup_dlm_amis: bool
+      SENSITIVE: []
+    end
+
+    class AmiTagFilter
+      attr_accessor key: ::String
+      attr_accessor value: ::String
       SENSITIVE: []
     end
 
@@ -199,6 +231,7 @@ module Aws::Inspector2
       attr_accessor lambda: bool
       attr_accessor lambda_code: bool
       attr_accessor code_repository: bool
+      attr_accessor ami: bool
       SENSITIVE: []
     end
 
@@ -940,6 +973,7 @@ module Aws::Inspector2
       attr_accessor lambda_function_name: ::Array[Types::CoverageStringFilter]
       attr_accessor lambda_function_tags: ::Array[Types::CoverageMapFilter]
       attr_accessor lambda_function_runtime: ::Array[Types::CoverageStringFilter]
+      attr_accessor machine_image_tags: ::Array[Types::CoverageMapFilter]
       attr_accessor last_scanned_at: ::Array[Types::CoverageDateFilter]
       attr_accessor scan_mode: ::Array[Types::CoverageStringFilter]
       attr_accessor image_pulled_at: ::Array[Types::CoverageDateFilter]
@@ -983,7 +1017,7 @@ module Aws::Inspector2
     end
 
     class CoveredResource
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.ContainerRegistry/registry/containerRepository" | "Microsoft.Web/sites" | "Microsoft.ContainerRegistry/registries")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.ContainerRegistry/registry/containerRepository" | "Microsoft.Web/sites" | "Microsoft.ContainerRegistry/registries" | "MACHINE_IMAGE")
       attr_accessor resource_id: ::String
       attr_accessor account_id: ::String
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
@@ -1245,6 +1279,7 @@ module Aws::Inspector2
       attr_accessor bucket_name: ::String
       attr_accessor key_prefix: ::String
       attr_accessor kms_key_arn: ::String
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 
@@ -1504,6 +1539,10 @@ module Aws::Inspector2
       attr_accessor epss_score: ::Array[Types::NumberFilter]
       attr_accessor code_repository_project_name: ::Array[Types::StringFilter]
       attr_accessor code_repository_provider_type: ::Array[Types::StringFilter]
+      attr_accessor machine_image_id: ::Array[Types::StringFilter]
+      attr_accessor machine_image_name: ::Array[Types::StringFilter]
+      attr_accessor machine_image_owner_account_id: ::Array[Types::StringFilter]
+      attr_accessor machine_image_platform: ::Array[Types::StringFilter]
       attr_accessor cloud_provider: ::Array[Types::StringFilter]
       attr_accessor cloud_provider_region: ::Array[Types::StringFilter]
       attr_accessor cloud_provider_account_id: ::Array[Types::StringFilter]
@@ -1600,7 +1639,7 @@ module Aws::Inspector2
     end
 
     class FreeTrialInfo
-      attr_accessor type: ("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE" | "CODE_REPOSITORY" | "VM" | "CONTAINER_IMAGE" | "SERVERLESS_FUNCTION")
+      attr_accessor type: ("EC2" | "ECR" | "LAMBDA" | "LAMBDA_CODE" | "CODE_REPOSITORY" | "VM" | "CONTAINER_IMAGE" | "SERVERLESS_FUNCTION" | "MACHINE_IMAGE")
       attr_accessor start: ::Time
       attr_accessor end: ::Time
       attr_accessor status: ("ACTIVE" | "INACTIVE")
@@ -1721,6 +1760,7 @@ module Aws::Inspector2
     class GetConfigurationResponse
       attr_accessor ecr_configuration: Types::EcrConfigurationState
       attr_accessor ec2_configuration: Types::Ec2ConfigurationState
+      attr_accessor ami_configuration: Types::AmiConfigurationState
       SENSITIVE: []
     end
 
@@ -1745,7 +1785,7 @@ module Aws::Inspector2
 
     class GetEncryptionKeyRequest
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
       SENSITIVE: []
     end
 
@@ -1776,6 +1816,24 @@ module Aws::Inspector2
 
     class GetMemberResponse
       attr_accessor member: Types::Member
+      SENSITIVE: []
+    end
+
+    class GetOnDemandScanStatusRequest
+      attr_accessor resource_id: ::String
+      attr_accessor scan_id: ::String
+      attr_accessor resource_type: ("AMI")
+      SENSITIVE: []
+    end
+
+    class GetOnDemandScanStatusResponse
+      attr_accessor scan_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("AMI")
+      attr_accessor scan_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
+      attr_accessor scan_status_reason: ("ACCESS_DENIED" | "INTERNAL_ERROR" | "STORAGE_LIMIT_EXCEEDED" | "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "UNSUPPORTED_OS" | "RESOURCE_TERMINATED")
+      attr_accessor started_at: ::Time
+      attr_accessor completed_at: ::Time
       SENSITIVE: []
     end
 
@@ -2158,6 +2216,20 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class ListOnDemandScansRequest
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("AMI")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListOnDemandScansResponse
+      attr_accessor items: ::Array[Types::OnDemandScan]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -2178,6 +2250,27 @@ module Aws::Inspector2
     class ListUsageTotalsResponse
       attr_accessor next_token: ::String
       attr_accessor totals: ::Array[Types::UsageTotal]
+      SENSITIVE: []
+    end
+
+    class MachineImageDetails
+      attr_accessor machine_image_id: ::String
+      attr_accessor name: ::String
+      attr_accessor owner_account_id: ::String
+      attr_accessor platform: ::String
+      attr_accessor architecture: ("X86_64" | "ARM64")
+      attr_accessor creation_date: ::Time
+      attr_accessor state: ::String
+      attr_accessor is_public: bool
+      attr_accessor root_device_type: ::String
+      attr_accessor virtualization_type: ::String
+      attr_accessor source_resource_id: ::String
+      SENSITIVE: []
+    end
+
+    class MachineImageMetadata
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor platform: ("WINDOWS" | "LINUX" | "UNKNOWN")
       SENSITIVE: []
     end
 
@@ -2230,6 +2323,17 @@ module Aws::Inspector2
     class NumberFilter
       attr_accessor upper_inclusive: ::Float
       attr_accessor lower_inclusive: ::Float
+      SENSITIVE: []
+    end
+
+    class OnDemandScan
+      attr_accessor scan_id: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("AMI")
+      attr_accessor scan_status: ("IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
+      attr_accessor scan_status_reason: ("ACCESS_DENIED" | "INTERNAL_ERROR" | "STORAGE_LIMIT_EXCEEDED" | "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "UNSUPPORTED_OS" | "RESOURCE_TERMINATED")
+      attr_accessor started_at: ::Time
+      attr_accessor completed_at: ::Time
       SENSITIVE: []
     end
 
@@ -2379,7 +2483,7 @@ module Aws::Inspector2
 
     class ResetEncryptionKeyRequest
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
       SENSITIVE: []
     end
 
@@ -2387,7 +2491,7 @@ module Aws::Inspector2
     end
 
     class Resource
-      attr_accessor type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+      attr_accessor type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
       attr_accessor id: ::String
       attr_accessor partition: ::String
       attr_accessor region: ::String
@@ -2404,6 +2508,7 @@ module Aws::Inspector2
       attr_accessor aws_ecr_container_image: Types::AwsEcrContainerImageDetails
       attr_accessor aws_lambda_function: Types::AwsLambdaFunctionDetails
       attr_accessor code_repository: Types::CodeRepositoryDetails
+      attr_accessor machine_image: Types::MachineImageDetails
       attr_accessor vm: Types::Vm
       attr_accessor image: Types::Image
       attr_accessor serverless_function: Types::ServerlessFunction
@@ -2456,6 +2561,7 @@ module Aws::Inspector2
       attr_accessor container_repository: Types::ContainerRepositoryMetadata
       attr_accessor container_registry: Types::ContainerRegistryMetadata
       attr_accessor serverless_function: Types::ServerlessFunctionMetadata
+      attr_accessor machine_image: Types::MachineImageMetadata
       SENSITIVE: []
     end
 
@@ -2465,6 +2571,7 @@ module Aws::Inspector2
       attr_accessor lambda: Types::State
       attr_accessor lambda_code: Types::State
       attr_accessor code_repository: Types::State
+      attr_accessor ami: Types::State
       SENSITIVE: []
     end
 
@@ -2474,6 +2581,7 @@ module Aws::Inspector2
       attr_accessor lambda: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor lambda_code: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor code_repository: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
+      attr_accessor ami: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       SENSITIVE: []
     end
 
@@ -2485,7 +2593,7 @@ module Aws::Inspector2
 
     class ScanStatus
       attr_accessor status_code: ("ACTIVE" | "INACTIVE")
-      attr_accessor reason: ("PENDING_INITIAL_SCAN" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "UNMANAGED_EC2_INSTANCE" | "UNSUPPORTED_OS" | "SCAN_ELIGIBILITY_EXPIRED" | "RESOURCE_TERMINATED" | "SUCCESSFUL" | "NO_RESOURCES_FOUND" | "IMAGE_SIZE_EXCEEDED" | "SCAN_FREQUENCY_MANUAL" | "SCAN_FREQUENCY_SCAN_ON_PUSH" | "EC2_INSTANCE_STOPPED" | "PENDING_DISABLE" | "NO_INVENTORY" | "STALE_INVENTORY" | "EXCLUDED_BY_TAG" | "UNSUPPORTED_RUNTIME" | "UNSUPPORTED_MEDIA_TYPE" | "UNSUPPORTED_CONFIG_FILE" | "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED" | "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED" | "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "DEEP_INSPECTION_NO_INVENTORY" | "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED" | "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED" | "PENDING_REVIVAL_SCAN" | "INTEGRATION_CONNECTION_LOST" | "ACCESS_DENIED_TO_ENCRYPTION_KEY" | "UNSUPPORTED_LANGUAGE" | "NO_SCAN_CONFIGURATION_ASSOCIATED" | "SCAN_IN_PROGRESS" | "IMAGE_ARCHIVED" | "UNSUPPORTED_CODE_ARTIFACTS" | "RESOURCE_UNMANAGED" | "RESOURCE_STOPPED")
+      attr_accessor reason: ("PENDING_INITIAL_SCAN" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "UNMANAGED_EC2_INSTANCE" | "UNSUPPORTED_OS" | "SCAN_ELIGIBILITY_EXPIRED" | "RESOURCE_TERMINATED" | "SUCCESSFUL" | "NO_RESOURCES_FOUND" | "IMAGE_SIZE_EXCEEDED" | "SCAN_FREQUENCY_MANUAL" | "SCAN_FREQUENCY_SCAN_ON_PUSH" | "EC2_INSTANCE_STOPPED" | "PENDING_DISABLE" | "NO_INVENTORY" | "STALE_INVENTORY" | "EXCLUDED_BY_TAG" | "UNSUPPORTED_RUNTIME" | "UNSUPPORTED_MEDIA_TYPE" | "UNSUPPORTED_CONFIG_FILE" | "DEEP_INSPECTION_PACKAGE_COLLECTION_LIMIT_EXCEEDED" | "DEEP_INSPECTION_DAILY_SSM_INVENTORY_LIMIT_EXCEEDED" | "DEEP_INSPECTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "DEEP_INSPECTION_NO_INVENTORY" | "AGENTLESS_INSTANCE_STORAGE_LIMIT_EXCEEDED" | "AGENTLESS_INSTANCE_COLLECTION_TIME_LIMIT_EXCEEDED" | "PENDING_REVIVAL_SCAN" | "INTEGRATION_CONNECTION_LOST" | "ACCESS_DENIED_TO_ENCRYPTION_KEY" | "UNSUPPORTED_LANGUAGE" | "NO_SCAN_CONFIGURATION_ASSOCIATED" | "SCAN_IN_PROGRESS" | "IMAGE_ARCHIVED" | "UNSUPPORTED_CODE_ARTIFACTS" | "RESOURCE_UNMANAGED" | "RESOURCE_STOPPED" | "EXTRACTION_COLLECTION_TIME_LIMIT_EXCEEDED" | "STORAGE_LIMIT_EXCEEDED" | "INVALID_ARTIFACT")
       SENSITIVE: []
     end
 
@@ -2669,6 +2777,18 @@ module Aws::Inspector2
       SENSITIVE: []
     end
 
+    class StartOnDemandScanRequest
+      attr_accessor resource_id: ::String
+      attr_accessor resource_type: ("AMI")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class StartOnDemandScanResponse
+      attr_accessor scan_id: ::String
+      SENSITIVE: []
+    end
+
     class State
       attr_accessor status: ("ENABLING" | "ENABLED" | "DISABLING" | "DISABLED" | "SUSPENDING" | "SUSPENDED")
       attr_accessor error_code: ("ALREADY_ENABLED" | "ENABLE_IN_PROGRESS" | "DISABLE_IN_PROGRESS" | "SUSPEND_IN_PROGRESS" | "RESOURCE_NOT_FOUND" | "ACCESS_DENIED" | "INTERNAL_ERROR" | "SSM_UNAVAILABLE" | "SSM_THROTTLED" | "EVENTBRIDGE_UNAVAILABLE" | "EVENTBRIDGE_THROTTLED" | "RESOURCE_SCAN_NOT_DISABLED" | "DISASSOCIATE_ALL_MEMBERS" | "ACCOUNT_IS_ISOLATED" | "EC2_SSM_RESOURCE_DATA_SYNC_LIMIT_EXCEEDED" | "EC2_SSM_ASSOCIATION_VERSION_LIMIT_EXCEEDED" | "BLOCKED_BY_ORGANIZATION_POLICY")
@@ -2841,6 +2961,7 @@ module Aws::Inspector2
     class UpdateConfigurationInheritance
       attr_accessor ec2_configuration: ("INHERIT_FROM_ADMIN")
       attr_accessor ecr_configuration: ("INHERIT_FROM_ADMIN")
+      attr_accessor ami_configuration: ("INHERIT_FROM_ADMIN")
       SENSITIVE: []
     end
 
@@ -2848,6 +2969,7 @@ module Aws::Inspector2
       attr_accessor account_id: ::String
       attr_accessor ecr_configuration: Types::EcrConfiguration
       attr_accessor ec2_configuration: Types::Ec2Configuration
+      attr_accessor ami_configuration: Types::AmiConfiguration
       attr_accessor update_configuration_inheritance: Types::UpdateConfigurationInheritance
       SENSITIVE: []
     end
@@ -2893,7 +3015,7 @@ module Aws::Inspector2
     class UpdateEncryptionKeyRequest
       attr_accessor kms_key_id: ::String
       attr_accessor scan_type: ("NETWORK" | "PACKAGE" | "CODE")
-      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites")
+      attr_accessor resource_type: ("AWS_EC2_INSTANCE" | "AWS_ECR_CONTAINER_IMAGE" | "AWS_ECR_REPOSITORY" | "AWS_LAMBDA_FUNCTION" | "CODE_REPOSITORY" | "Microsoft.Compute/virtualMachines" | "Microsoft.ContainerRegistry/registry/containerImage" | "Microsoft.Web/sites" | "MACHINE_IMAGE")
       SENSITIVE: []
     end
 
@@ -2959,7 +3081,7 @@ module Aws::Inspector2
     end
 
     class Usage
-      attr_accessor type: ("EC2_INSTANCE_HOURS" | "ECR_INITIAL_SCAN" | "ECR_RESCAN" | "LAMBDA_FUNCTION_HOURS" | "LAMBDA_FUNCTION_CODE_HOURS" | "CODE_REPOSITORY_SAST" | "CODE_REPOSITORY_IAC" | "CODE_REPOSITORY_SCA" | "EC2_AGENTLESS_INSTANCE_HOURS" | "AZURE_CONTAINER_IMAGE_INITIAL_SCAN" | "AZURE_CONTAINER_IMAGE_RESCAN" | "AZURE_VM_AGENT_BASED_INSTANCE_HOURS" | "AZURE_SERVERLESS_FUNCTION_HOURS")
+      attr_accessor type: ("EC2_INSTANCE_HOURS" | "ECR_INITIAL_SCAN" | "ECR_RESCAN" | "LAMBDA_FUNCTION_HOURS" | "LAMBDA_FUNCTION_CODE_HOURS" | "CODE_REPOSITORY_SAST" | "CODE_REPOSITORY_IAC" | "CODE_REPOSITORY_SCA" | "EC2_AGENTLESS_INSTANCE_HOURS" | "AZURE_CONTAINER_IMAGE_INITIAL_SCAN" | "AZURE_CONTAINER_IMAGE_RESCAN" | "AZURE_VM_AGENT_BASED_INSTANCE_HOURS" | "AZURE_SERVERLESS_FUNCTION_HOURS" | "EC2_AMI_HOURS")
       attr_accessor total: ::Float
       attr_accessor estimated_monthly_cost: ::Float
       attr_accessor currency: ("USD")

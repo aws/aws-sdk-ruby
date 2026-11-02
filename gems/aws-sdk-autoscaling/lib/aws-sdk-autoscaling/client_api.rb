@@ -22,6 +22,8 @@ module Aws::AutoScaling
     AcceleratorTotalMemoryMiBRequest = Shapes::StructureShape.new(name: 'AcceleratorTotalMemoryMiBRequest')
     AcceleratorType = Shapes::StringShape.new(name: 'AcceleratorType')
     AcceleratorTypes = Shapes::ListShape.new(name: 'AcceleratorTypes')
+    AccountSetting = Shapes::StructureShape.new(name: 'AccountSetting')
+    AccountSettings = Shapes::ListShape.new(name: 'AccountSettings')
     ActiveInstanceRefreshNotFoundFault = Shapes::StructureShape.new(name: 'ActiveInstanceRefreshNotFoundFault', error: {"code" => "ActiveInstanceRefreshNotFound", "httpStatusCode" => 400, "senderFault" => true})
     Activities = Shapes::ListShape.new(name: 'Activities')
     ActivitiesType = Shapes::StructureShape.new(name: 'ActivitiesType')
@@ -123,6 +125,8 @@ module Aws::AutoScaling
     DeleteWarmPoolType = Shapes::StructureShape.new(name: 'DeleteWarmPoolType')
     DeletionProtection = Shapes::StringShape.new(name: 'DeletionProtection')
     DescribeAccountLimitsAnswer = Shapes::StructureShape.new(name: 'DescribeAccountLimitsAnswer')
+    DescribeAccountSettingsAnswer = Shapes::StructureShape.new(name: 'DescribeAccountSettingsAnswer')
+    DescribeAccountSettingsType = Shapes::StructureShape.new(name: 'DescribeAccountSettingsType')
     DescribeAdjustmentTypesAnswer = Shapes::StructureShape.new(name: 'DescribeAdjustmentTypesAnswer')
     DescribeAutoScalingInstancesType = Shapes::StructureShape.new(name: 'DescribeAutoScalingInstancesType')
     DescribeAutoScalingNotificationTypesAnswer = Shapes::StructureShape.new(name: 'DescribeAutoScalingNotificationTypesAnswer')
@@ -339,6 +343,8 @@ module Aws::AutoScaling
     Progress = Shapes::IntegerShape.new(name: 'Progress')
     PropagateAtLaunch = Shapes::BooleanShape.new(name: 'PropagateAtLaunch')
     ProtectedFromScaleIn = Shapes::BooleanShape.new(name: 'ProtectedFromScaleIn')
+    PutAccountSettingAnswer = Shapes::StructureShape.new(name: 'PutAccountSettingAnswer')
+    PutAccountSettingType = Shapes::StructureShape.new(name: 'PutAccountSettingType')
     PutLifecycleHookAnswer = Shapes::StructureShape.new(name: 'PutLifecycleHookAnswer')
     PutLifecycleHookType = Shapes::StructureShape.new(name: 'PutLifecycleHookType')
     PutNotificationConfigurationType = Shapes::StructureShape.new(name: 'PutNotificationConfigurationType')
@@ -457,6 +463,16 @@ module Aws::AutoScaling
     AcceleratorTotalMemoryMiBRequest.struct_class = Types::AcceleratorTotalMemoryMiBRequest
 
     AcceleratorTypes.member = Shapes::ShapeRef.new(shape: AcceleratorType)
+
+    AccountSetting.add_member(:name, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, location_name: "Name"))
+    AccountSetting.add_member(:value, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, location_name: "Value"))
+    AccountSetting.add_member(:enforcement_type, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, location_name: "EnforcementType"))
+    AccountSetting.add_member(:enforcement_date, Shapes::ShapeRef.new(shape: TimestampType, location_name: "EnforcementDate"))
+    AccountSetting.add_member(:default_value, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, location_name: "DefaultValue"))
+    AccountSetting.add_member(:enforced_value, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, location_name: "EnforcedValue"))
+    AccountSetting.struct_class = Types::AccountSetting
+
+    AccountSettings.member = Shapes::ShapeRef.new(shape: AccountSetting)
 
     ActiveInstanceRefreshNotFoundFault.add_member(:message, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "message"))
     ActiveInstanceRefreshNotFoundFault.struct_class = Types::ActiveInstanceRefreshNotFoundFault
@@ -804,6 +820,15 @@ module Aws::AutoScaling
     DescribeAccountLimitsAnswer.add_member(:number_of_auto_scaling_groups, Shapes::ShapeRef.new(shape: NumberOfAutoScalingGroups, location_name: "NumberOfAutoScalingGroups"))
     DescribeAccountLimitsAnswer.add_member(:number_of_launch_configurations, Shapes::ShapeRef.new(shape: NumberOfLaunchConfigurations, location_name: "NumberOfLaunchConfigurations"))
     DescribeAccountLimitsAnswer.struct_class = Types::DescribeAccountLimitsAnswer
+
+    DescribeAccountSettingsAnswer.add_member(:settings, Shapes::ShapeRef.new(shape: AccountSettings, location_name: "Settings"))
+    DescribeAccountSettingsAnswer.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeAccountSettingsAnswer.struct_class = Types::DescribeAccountSettingsAnswer
+
+    DescribeAccountSettingsType.add_member(:name, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, location_name: "Name"))
+    DescribeAccountSettingsType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
+    DescribeAccountSettingsType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+    DescribeAccountSettingsType.struct_class = Types::DescribeAccountSettingsType
 
     DescribeAdjustmentTypesAnswer.add_member(:adjustment_types, Shapes::ShapeRef.new(shape: AdjustmentTypes, location_name: "AdjustmentTypes"))
     DescribeAdjustmentTypesAnswer.struct_class = Types::DescribeAdjustmentTypesAnswer
@@ -1429,6 +1454,12 @@ module Aws::AutoScaling
     ProcessesType.add_member(:processes, Shapes::ShapeRef.new(shape: Processes, location_name: "Processes"))
     ProcessesType.struct_class = Types::ProcessesType
 
+    PutAccountSettingAnswer.struct_class = Types::PutAccountSettingAnswer
+
+    PutAccountSettingType.add_member(:name, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, required: true, location_name: "Name"))
+    PutAccountSettingType.add_member(:value, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, required: true, location_name: "Value"))
+    PutAccountSettingType.struct_class = Types::PutAccountSettingType
+
     PutLifecycleHookAnswer.struct_class = Types::PutLifecycleHookAnswer
 
     PutLifecycleHookType.add_member(:lifecycle_hook_name, Shapes::ShapeRef.new(shape: AsciiStringMaxLen255, required: true, location_name: "LifecycleHookName"))
@@ -1978,6 +2009,15 @@ module Aws::AutoScaling
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
       end)
 
+      api.add_operation(:describe_account_settings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeAccountSettings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeAccountSettingsType)
+        o.output = Shapes::ShapeRef.new(shape: DescribeAccountSettingsAnswer)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
+      end)
+
       api.add_operation(:describe_adjustment_types, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeAdjustmentTypes"
         o.http_method = "POST"
@@ -2351,6 +2391,14 @@ module Aws::AutoScaling
         o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchError)
         o.errors << Shapes::ShapeRef.new(shape: IdempotentCallInProgressFault)
+      end)
+
+      api.add_operation(:put_account_setting, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "PutAccountSetting"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: PutAccountSettingType)
+        o.output = Shapes::ShapeRef.new(shape: PutAccountSettingAnswer)
       end)
 
       api.add_operation(:put_lifecycle_hook, Seahorse::Model::Operation.new.tap do |o|

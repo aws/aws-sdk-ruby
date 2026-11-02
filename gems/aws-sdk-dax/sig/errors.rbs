@@ -11,63 +11,63 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ClusterAlreadyExistsFault < ServiceError
       end
-      class ClusterNotFoundFault < ::Aws::Errors::ServiceError
+      class ClusterNotFoundFault < ServiceError
       end
-      class ClusterQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      class ClusterQuotaForCustomerExceededFault < ServiceError
       end
-      class InsufficientClusterCapacityFault < ::Aws::Errors::ServiceError
+      class InsufficientClusterCapacityFault < ServiceError
       end
-      class InvalidARNFault < ::Aws::Errors::ServiceError
+      class InvalidARNFault < ServiceError
       end
-      class InvalidClusterStateFault < ::Aws::Errors::ServiceError
+      class InvalidClusterStateFault < ServiceError
       end
-      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+      class InvalidParameterCombinationException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidParameterGroupStateFault < ServiceError
       end
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
         def message: () -> ::String
       end
-      class InvalidSubnet < ::Aws::Errors::ServiceError
+      class InvalidSubnet < ServiceError
       end
-      class InvalidVPCNetworkStateFault < ::Aws::Errors::ServiceError
+      class InvalidVPCNetworkStateFault < ServiceError
       end
-      class NodeNotFoundFault < ::Aws::Errors::ServiceError
+      class NodeNotFoundFault < ServiceError
       end
-      class NodeQuotaForClusterExceededFault < ::Aws::Errors::ServiceError
+      class NodeQuotaForClusterExceededFault < ServiceError
       end
-      class NodeQuotaForCustomerExceededFault < ::Aws::Errors::ServiceError
+      class NodeQuotaForCustomerExceededFault < ServiceError
       end
-      class ParameterGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ParameterGroupAlreadyExistsFault < ServiceError
       end
-      class ParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class ParameterGroupNotFoundFault < ServiceError
       end
-      class ParameterGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ParameterGroupQuotaExceededFault < ServiceError
       end
-      class ServiceLinkedRoleNotFoundFault < ::Aws::Errors::ServiceError
+      class ServiceLinkedRoleNotFoundFault < ServiceError
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
       end
-      class SubnetGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class SubnetGroupAlreadyExistsFault < ServiceError
       end
-      class SubnetGroupInUseFault < ::Aws::Errors::ServiceError
+      class SubnetGroupInUseFault < ServiceError
       end
-      class SubnetGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class SubnetGroupNotFoundFault < ServiceError
       end
-      class SubnetGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SubnetGroupQuotaExceededFault < ServiceError
       end
-      class SubnetInUse < ::Aws::Errors::ServiceError
+      class SubnetInUse < ServiceError
       end
-      class SubnetNotAllowedFault < ::Aws::Errors::ServiceError
+      class SubnetNotAllowedFault < ServiceError
       end
-      class SubnetQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SubnetQuotaExceededFault < ServiceError
       end
-      class TagNotFoundFault < ::Aws::Errors::ServiceError
+      class TagNotFoundFault < ServiceError
       end
-      class TagQuotaPerResourceExceeded < ::Aws::Errors::ServiceError
+      class TagQuotaPerResourceExceeded < ServiceError
       end
     end
   end

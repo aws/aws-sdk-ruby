@@ -244,6 +244,7 @@ module Aws
                      ?db_cluster_snapshot_identifier: ::String,
                      ?backup_retention_period: ::Integer,
                      ?preferred_backup_window: ::String,
+                     ?db_capacity_reservation_identifier: ::String,
                      ?dedicated_log_volume: bool,
                      ?ca_certificate_identifier: ::String,
                      ?engine_lifecycle_support: ::String,

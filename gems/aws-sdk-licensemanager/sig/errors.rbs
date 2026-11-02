@@ -11,57 +11,57 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class AuthorizationException < ::Aws::Errors::ServiceError
+      class AuthorizationException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class EntitlementNotAllowedException < ::Aws::Errors::ServiceError
+      class EntitlementNotAllowedException < ServiceError
         def message: () -> ::String
       end
-      class FailedDependencyException < ::Aws::Errors::ServiceError
+      class FailedDependencyException < ServiceError
         def message: () -> ::String
         def error_code: () -> ::String
       end
-      class FilterLimitExceededException < ::Aws::Errors::ServiceError
+      class FilterLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
         def message: () -> ::String
       end
-      class InvalidResourceStateException < ::Aws::Errors::ServiceError
+      class InvalidResourceStateException < ServiceError
         def message: () -> ::String
       end
-      class LicenseUsageException < ::Aws::Errors::ServiceError
+      class LicenseUsageException < ServiceError
         def message: () -> ::String
       end
-      class NoEntitlementsAllowedException < ::Aws::Errors::ServiceError
+      class NoEntitlementsAllowedException < ServiceError
         def message: () -> ::String
       end
-      class RateLimitExceededException < ::Aws::Errors::ServiceError
+      class RateLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class RedirectException < ::Aws::Errors::ServiceError
+      class RedirectException < ServiceError
         def location: () -> ::String
         def message: () -> ::String
       end
-      class ResourceLimitExceededException < ::Aws::Errors::ServiceError
+      class ResourceLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServerInternalException < ::Aws::Errors::ServiceError
+      class ServerInternalException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedDigitalSignatureMethodException < ::Aws::Errors::ServiceError
+      class UnsupportedDigitalSignatureMethodException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
     end

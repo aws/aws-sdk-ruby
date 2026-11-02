@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -683,6 +684,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeFlowOperationResponse]
         def firewall_arn: () -> ::String
         def availability_zone: () -> ::String
+        def availability_zone_id: () -> ::String
         def vpc_endpoint_association_arn: () -> ::String
         def vpc_endpoint_id: () -> ::String
         def flow_operation_id: () -> ::String
@@ -696,6 +698,7 @@ module Aws
       def describe_flow_operation: (
                                      firewall_arn: ::String,
                                      ?availability_zone: ::String,
+                                     ?availability_zone_id: ::String,
                                      ?vpc_endpoint_association_arn: ::String,
                                      ?vpc_endpoint_id: ::String,
                                      flow_operation_id: ::String
@@ -974,6 +977,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::ListFlowOperationResultsResponse]
         def firewall_arn: () -> ::String
         def availability_zone: () -> ::String
+        def availability_zone_id: () -> ::String
         def vpc_endpoint_association_arn: () -> ::String
         def vpc_endpoint_id: () -> ::String
         def flow_operation_id: () -> ::String
@@ -990,6 +994,7 @@ module Aws
                                          ?next_token: ::String,
                                          ?max_results: ::Integer,
                                          ?availability_zone: ::String,
+                                         ?availability_zone_id: ::String,
                                          ?vpc_endpoint_id: ::String,
                                          ?vpc_endpoint_association_arn: ::String
                                        ) -> _ListFlowOperationResultsResponseSuccess
@@ -1004,6 +1009,7 @@ module Aws
       def list_flow_operations: (
                                   firewall_arn: ::String,
                                   ?availability_zone: ::String,
+                                  ?availability_zone_id: ::String,
                                   ?vpc_endpoint_association_arn: ::String,
                                   ?vpc_endpoint_id: ::String,
                                   ?flow_operation_type: ("FLOW_FLUSH" | "FLOW_CAPTURE"),
@@ -1145,6 +1151,7 @@ module Aws
       def start_flow_capture: (
                                 firewall_arn: ::String,
                                 ?availability_zone: ::String,
+                                ?availability_zone_id: ::String,
                                 ?vpc_endpoint_association_arn: ::String,
                                 ?vpc_endpoint_id: ::String,
                                 ?minimum_flow_age_in_seconds: ::Integer,
@@ -1164,6 +1171,7 @@ module Aws
       def start_flow_flush: (
                               firewall_arn: ::String,
                               ?availability_zone: ::String,
+                              ?availability_zone_id: ::String,
                               ?vpc_endpoint_association_arn: ::String,
                               ?vpc_endpoint_id: ::String,
                               ?minimum_flow_age_in_seconds: ::Integer,
@@ -1587,6 +1595,13 @@ module Aws
                                                  update_token: ::String
                                                ) -> _UpdateTLSInspectionConfigurationResponseSuccess
                                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTLSInspectionConfigurationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/NetworkFirewall/Client.html#wait_until-instance_method
+      def wait_until: (:firewall_policy_active waiter_name, 
+                    ?firewall_policy_name: ::String,
+                    ?firewall_policy_arn: ::String
+                  ) -> Client::_DescribeFirewallPolicyResponseSuccess
+                    | (:firewall_policy_active waiter_name, ?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeFirewallPolicyResponseSuccess
     end
   end
 end

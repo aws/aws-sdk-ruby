@@ -11,45 +11,45 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class ApiKeyLimitExceededException < ::Aws::Errors::ServiceError
+      class ApiKeyLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ApiKeyValidityOutOfBoundsException < ::Aws::Errors::ServiceError
+      class ApiKeyValidityOutOfBoundsException < ServiceError
         def message: () -> ::String
       end
-      class ApiLimitExceededException < ::Aws::Errors::ServiceError
+      class ApiLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def message: () -> ::String
         def reason: () -> ::String
         def detail: () -> ::String
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class GraphQLSchemaException < ::Aws::Errors::ServiceError
+      class GraphQLSchemaException < ServiceError
         def message: () -> ::String
       end
-      class InternalFailureException < ::Aws::Errors::ServiceError
+      class InternalFailureException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class UnauthorizedException < ::Aws::Errors::ServiceError
+      class UnauthorizedException < ServiceError
         def message: () -> ::String
       end
     end

@@ -11,133 +11,133 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessPointAlreadyExists < ::Aws::Errors::ServiceError
+      class AccessPointAlreadyExists < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
         def access_point_id: () -> ::String
       end
-      class AccessPointLimitExceeded < ::Aws::Errors::ServiceError
+      class AccessPointLimitExceeded < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class AccessPointNotFound < ::Aws::Errors::ServiceError
+      class AccessPointNotFound < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class AvailabilityZonesMismatch < ::Aws::Errors::ServiceError
+      class AvailabilityZonesMismatch < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class BadRequest < ::Aws::Errors::ServiceError
+      class BadRequest < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class DependencyTimeout < ::Aws::Errors::ServiceError
+      class DependencyTimeout < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class FileSystemAlreadyExists < ::Aws::Errors::ServiceError
+      class FileSystemAlreadyExists < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
         def file_system_id: () -> ::String
       end
-      class FileSystemInUse < ::Aws::Errors::ServiceError
+      class FileSystemInUse < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class FileSystemLimitExceeded < ::Aws::Errors::ServiceError
+      class FileSystemLimitExceeded < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class FileSystemNotFound < ::Aws::Errors::ServiceError
+      class FileSystemNotFound < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class IncorrectFileSystemLifeCycleState < ::Aws::Errors::ServiceError
+      class IncorrectFileSystemLifeCycleState < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class IncorrectMountTargetState < ::Aws::Errors::ServiceError
+      class IncorrectMountTargetState < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class InsufficientThroughputCapacity < ::Aws::Errors::ServiceError
+      class InsufficientThroughputCapacity < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class InternalServerError < ::Aws::Errors::ServiceError
+      class InternalServerError < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class InvalidPolicyException < ::Aws::Errors::ServiceError
+      class InvalidPolicyException < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class IpAddressInUse < ::Aws::Errors::ServiceError
+      class IpAddressInUse < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class MountTargetConflict < ::Aws::Errors::ServiceError
+      class MountTargetConflict < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class MountTargetNotFound < ::Aws::Errors::ServiceError
+      class MountTargetNotFound < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class NetworkInterfaceLimitExceeded < ::Aws::Errors::ServiceError
+      class NetworkInterfaceLimitExceeded < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class NoFreeAddressesInSubnet < ::Aws::Errors::ServiceError
+      class NoFreeAddressesInSubnet < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class PolicyNotFound < ::Aws::Errors::ServiceError
+      class PolicyNotFound < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class ReplicationAlreadyExists < ::Aws::Errors::ServiceError
+      class ReplicationAlreadyExists < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class ReplicationNotFound < ::Aws::Errors::ServiceError
+      class ReplicationNotFound < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class SecurityGroupLimitExceeded < ::Aws::Errors::ServiceError
+      class SecurityGroupLimitExceeded < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class SecurityGroupNotFound < ::Aws::Errors::ServiceError
+      class SecurityGroupNotFound < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class SubnetNotFound < ::Aws::Errors::ServiceError
+      class SubnetNotFound < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class ThroughputLimitExceeded < ::Aws::Errors::ServiceError
+      class ThroughputLimitExceeded < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class TooManyRequests < ::Aws::Errors::ServiceError
+      class TooManyRequests < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class UnsupportedAvailabilityZone < ::Aws::Errors::ServiceError
+      class UnsupportedAvailabilityZone < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end

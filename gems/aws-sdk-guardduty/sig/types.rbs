@@ -867,6 +867,7 @@ module Aws::GuardDuty
     class DestinationProperties
       attr_accessor destination_arn: ::String
       attr_accessor kms_key_arn: ::String
+      attr_accessor expected_bucket_owner: ::String
       SENSITIVE: []
     end
 

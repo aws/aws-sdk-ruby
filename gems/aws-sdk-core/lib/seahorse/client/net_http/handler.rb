@@ -49,7 +49,7 @@ module Seahorse
               context.http_response
             )
           end
-          Response.new(context: context)
+          Aws::Response.new(context: context)
         end
 
         # @param [Configuration] config

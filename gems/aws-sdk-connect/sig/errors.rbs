@@ -11,96 +11,96 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class ConditionalOperationFailedException < ::Aws::Errors::ServiceError
+      class ConditionalOperationFailedException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class ContactFlowNotPublishedException < ::Aws::Errors::ServiceError
+      class ContactFlowNotPublishedException < ServiceError
         def message: () -> ::String
       end
-      class ContactNotFoundException < ::Aws::Errors::ServiceError
+      class ContactNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ContactNotTerminatedException < ::Aws::Errors::ServiceError
+      class ContactNotTerminatedException < ServiceError
         def message: () -> ::String
       end
-      class DestinationNotAllowedException < ::Aws::Errors::ServiceError
+      class DestinationNotAllowedException < ServiceError
         def message: () -> ::String
       end
-      class DuplicateResourceException < ::Aws::Errors::ServiceError
+      class DuplicateResourceException < ServiceError
         def message: () -> ::String
       end
-      class IdempotencyException < ::Aws::Errors::ServiceError
+      class IdempotencyException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
-      class InvalidActiveRegionException < ::Aws::Errors::ServiceError
+      class InvalidActiveRegionException < ServiceError
         def message: () -> ::String
       end
-      class InvalidContactFlowException < ::Aws::Errors::ServiceError
+      class InvalidContactFlowException < ServiceError
         def problems: () -> ::String
       end
-      class InvalidContactFlowModuleException < ::Aws::Errors::ServiceError
+      class InvalidContactFlowModuleException < ServiceError
         def problems: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
         def message: () -> ::String
         def reason: () -> ::String
       end
-      class InvalidTestCaseException < ::Aws::Errors::ServiceError
+      class InvalidTestCaseException < ServiceError
         def problems: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class MaximumResultReturnedException < ::Aws::Errors::ServiceError
+      class MaximumResultReturnedException < ServiceError
         def message: () -> ::String
       end
-      class OutboundContactNotPermittedException < ::Aws::Errors::ServiceError
+      class OutboundContactNotPermittedException < ServiceError
         def message: () -> ::String
       end
-      class OutputTypeNotFoundException < ::Aws::Errors::ServiceError
+      class OutputTypeNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class PropertyValidationException < ::Aws::Errors::ServiceError
+      class PropertyValidationException < ServiceError
         def message: () -> ::String
         def property_list: () -> ::String
       end
-      class ResourceConflictException < ::Aws::Errors::ServiceError
+      class ResourceConflictException < ServiceError
         def message: () -> ::String
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
         def message: () -> ::String
         def resource_type: () -> ::String
         def resource_id: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+      class ResourceNotReadyException < ServiceError
         def message: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
         def reason: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def message: () -> ::String
       end
-      class UserNotFoundException < ::Aws::Errors::ServiceError
+      class UserNotFoundException < ServiceError
         def message: () -> ::String
       end
     end

@@ -67,9 +67,10 @@ module Aws
           data[name] = {}
           prefix = ref.location_name || ''
           headers.each do |header_name, header_value|
-            if match = header_name.match(/^#{prefix}(.+)/i)
-              data[name][match[1]] = header_value
-            end
+            next unless header_name.length > prefix.length &&
+                        header_name[0, prefix.length].casecmp?(prefix)
+
+            data[name][header_name[prefix.length..-1]] = header_value
           end
         end
 

@@ -14,6 +14,7 @@ module Aws
 
       def initialize(options = {})
         @client = options[:client]
+        @base_credentials = options[:base_credentials]
         @create_session_params = {}
         options.each_pair do |key, value|
           if self.class.create_session_options.include?(key)
@@ -30,7 +31,9 @@ module Aws
       private
 
       def refresh
-        c = @client.create_session(@create_session_params).credentials
+        request = @client.build_request(:create_session, @create_session_params)
+        request.context[:sigv4_credentials] = @base_credentials if @base_credentials
+        c = request.send_request.credentials
         @credentials = Credentials.new(
           c.access_key_id,
           c.secret_access_key,

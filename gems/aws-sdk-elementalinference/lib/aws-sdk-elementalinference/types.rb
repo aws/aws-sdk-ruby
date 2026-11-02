@@ -415,6 +415,72 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   Specifies the ID of the feed that you want to add the schedule
+    #   action to.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_name
+    #   A name for the schedule action. The name must be unique within the
+    #   feed. You can reuse the name of an action that you deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_configuration
+    #   Specifies when the action runs.
+    #   @return [Types::ScheduleActionStartConfiguration]
+    #
+    # @!attribute [rw] operations
+    #   Specifies the list of configuration changes that you want to make to
+    #   the feed. Elemental Inference applies all the operations in an
+    #   action together, in the order that you specify them. If any
+    #   operation fails, Elemental Inference doesn't apply any of them.
+    #   @return [Array<Types::ScheduleActionOperation>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateScheduleActionRequest AWS API Documentation
+    #
+    class CreateScheduleActionRequest < Struct.new(
+      :id,
+      :action_name,
+      :start_configuration,
+      :operations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_name
+    #   The name that you specified.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_configuration
+    #   Specifies when the action runs.
+    #   @return [Types::ScheduleActionStartConfiguration]
+    #
+    # @!attribute [rw] operations
+    #   The configuration changes that the action makes to the feed.
+    #   @return [Array<Types::ScheduleActionOperation>]
+    #
+    # @!attribute [rw] status
+    #   The status of the action. After you create the action successfully,
+    #   Elemental Inference sets the status to PENDING.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   A description of why the action failed. Elemental Inference returns
+    #   this property only when the status is FAILED.
+    #   @return [Types::ScheduleActionError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/CreateScheduleActionResponse AWS API Documentation
+    #
+    class CreateScheduleActionResponse < Struct.new(
+      :action_name,
+      :start_configuration,
+      :operations,
+      :status,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A type of OutputConfig, used when the output in a feed is for the crop
     # feature.
     #
@@ -532,6 +598,35 @@ module Aws::ElementalInference
       :arn,
       :id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] id
+    #   The ID of the feed that holds the schedule action.
+    #   @return [String]
+    #
+    # @!attribute [rw] action_name
+    #   The name of the schedule action that you want to delete.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteScheduleActionRequest AWS API Documentation
+    #
+    class DeleteScheduleActionRequest < Struct.new(
+      :id,
+      :action_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] action_name
+    #   The name of the schedule action that Elemental Inference deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/DeleteScheduleActionResponse AWS API Documentation
+    #
+    class DeleteScheduleActionResponse < Struct.new(
+      :action_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -689,6 +784,26 @@ module Aws::ElementalInference
       :name,
       :association,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Sets the time at which a schedule action runs once. This is a type of
+    # ScheduleActionStartConfiguration.
+    #
+    # @!attribute [rw] scheduled_at
+    #   The UTC time at which the action runs. Specify the time in whole
+    #   seconds. For the range of times that you can specify, see the AWS
+    #   Elemental Inference User Guide.
+    #
+    #   This time is approximate. The change can take a few minutes to take
+    #   effect on the media that the feed is processing.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/FixedModeScheduleActionStartSettings AWS API Documentation
+    #
+    class FixedModeScheduleActionStartSettings < Struct.new(
+      :scheduled_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1110,6 +1225,50 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # @!attribute [rw] id
+    #   The ID of the feed that you want to query.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return for each API request. If you
+    #   don't specify MaxResults, Elemental Inference returns a maximum of
+    #   10 results for each page.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies the batch of results that you want to see.
+    #   To see the next batch, submit the request a second time and specify
+    #   the NextToken value that Elemental Inference returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListScheduleActionsRequest AWS API Documentation
+    #
+    class ListScheduleActionsRequest < Struct.new(
+      :id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] schedule_actions
+    #   A list of the schedule actions on the feed.
+    #   @return [Array<Types::ScheduleAction>]
+    #
+    # @!attribute [rw] next_token
+    #   The token that identifies the next batch of results. Elemental
+    #   Inference returns it only when more results are available.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ListScheduleActionsResponse AWS API Documentation
+    #
+    class ListScheduleActionsResponse < Struct.new(
+      :schedule_actions,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The ARN of the resource whose tags you want to query.
     #   @return [String]
@@ -1198,6 +1357,22 @@ module Aws::ElementalInference
     #
     class PutFeedPolicyResponse < Aws::EmptyStructure; end
 
+    # Removes the game from an event clipping output at the action's
+    # scheduled time. This is a type of ScheduleActionOperation, and the
+    # output must be an event clipping output.
+    #
+    # @!attribute [rw] output_name
+    #   The name of the output that you want to remove the game from.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/RemoveClippingDataSourceConfiguration AWS API Documentation
+    #
+    class RemoveClippingDataSourceConfiguration < Struct.new(
+      :output_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The resource specified in the action doesn't exist.
     #
     # @!attribute [rw] message
@@ -1209,6 +1384,148 @@ module Aws::ElementalInference
       :message)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # Describes one schedule action on a feed, including the changes it
+    # makes and whether it has run yet. Elemental Inference returns this
+    # structure in the ListScheduleActions operation.
+    #
+    # @!attribute [rw] action_name
+    #   The name of the schedule action. The name is unique within the feed.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_configuration
+    #   Specifies when the action runs.
+    #   @return [Types::ScheduleActionStartConfiguration]
+    #
+    # @!attribute [rw] operations
+    #   The configuration changes that the action makes to the feed.
+    #   @return [Array<Types::ScheduleActionOperation>]
+    #
+    # @!attribute [rw] status
+    #   The status of the action. Valid values are the following:
+    #
+    #   PENDING
+    #
+    #   : The action is waiting for its scheduled time.
+    #
+    #   COMPLETED
+    #
+    #   : Elemental Inference applied all the action's operations to the
+    #     feed.
+    #
+    #   FAILED
+    #
+    #   : Elemental Inference couldn't apply the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] error
+    #   A description of why the action failed. Elemental Inference returns
+    #   this property only when the status is FAILED.
+    #   @return [Types::ScheduleActionError]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ScheduleAction AWS API Documentation
+    #
+    class ScheduleAction < Struct.new(
+      :action_name,
+      :start_configuration,
+      :operations,
+      :status,
+      :error)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the cause of a schedule action failure, including the
+    # failure type and a description of what went wrong.
+    #
+    # @!attribute [rw] error_code
+    #   The type of failure. Valid values are the following:
+    #
+    #   INVALID\_ACTION\_TARGET
+    #
+    #   : The action referred to something that didn't exist or wasn't
+    #     valid at the scheduled time, for example an output that you
+    #     deleted.
+    #
+    #   INTERNAL\_ERROR
+    #
+    #   : An unexpected error prevented the action from completing.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A description of the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ScheduleActionError AWS API Documentation
+    #
+    class ScheduleActionError < Struct.new(
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Holds one typed configuration change that a schedule action makes to a
+    # feed. Each operation must contain exactly one property.
+    #
+    # @note ScheduleActionOperation is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ScheduleActionOperation is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ScheduleActionOperation corresponding to the set member.
+    #
+    # @!attribute [rw] update_output_status
+    #   The operation type that enables or disables an output.
+    #   @return [Types::UpdateOutputStatus]
+    #
+    # @!attribute [rw] update_clipping_data_source_configuration
+    #   The operation type that attaches a game to an event clipping output.
+    #   @return [Types::UpdateClippingDataSourceConfiguration]
+    #
+    # @!attribute [rw] remove_clipping_data_source_configuration
+    #   The operation type that removes the game from an event clipping
+    #   output.
+    #   @return [Types::RemoveClippingDataSourceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ScheduleActionOperation AWS API Documentation
+    #
+    class ScheduleActionOperation < Struct.new(
+      :update_output_status,
+      :update_clipping_data_source_configuration,
+      :remove_clipping_data_source_configuration,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class UpdateOutputStatus < ScheduleActionOperation; end
+      class UpdateClippingDataSourceConfiguration < ScheduleActionOperation; end
+      class RemoveClippingDataSourceConfiguration < ScheduleActionOperation; end
+      class Unknown < ScheduleActionOperation; end
+    end
+
+    # Holds the typed start settings that determine when a schedule action
+    # runs. Currently, only fixed mode is supported.
+    #
+    # @note ScheduleActionStartConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note ScheduleActionStartConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ScheduleActionStartConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] fixed_mode_schedule_action_start_settings
+    #   The start settings type for an action that runs once, at a fixed
+    #   time.
+    #   @return [Types::FixedModeScheduleActionStartSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/ScheduleActionStartConfiguration AWS API Documentation
+    #
+    class ScheduleActionStartConfiguration < Struct.new(
+      :fixed_mode_schedule_action_start_settings,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class FixedModeScheduleActionStartSettings < ScheduleActionStartConfiguration; end
+      class Unknown < ScheduleActionStartConfiguration; end
     end
 
     # A filter for a fixture search. It is used in the filters array of a
@@ -1464,6 +1781,27 @@ module Aws::ElementalInference
       include Aws::Structure
     end
 
+    # Attaches a game to an event clipping output at the action's scheduled
+    # time. This is a type of ScheduleActionOperation, and the output must
+    # be an event clipping output.
+    #
+    # @!attribute [rw] output_name
+    #   The name of the output that you want to attach the game to.
+    #   @return [String]
+    #
+    # @!attribute [rw] data_source_configuration
+    #   The game that you want to attach to the output.
+    #   @return [Types::DataSourceConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/UpdateClippingDataSourceConfiguration AWS API Documentation
+    #
+    class UpdateClippingDataSourceConfiguration < Struct.new(
+      :output_name,
+      :data_source_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] id
     #   The ID of the dictionary to update.
     #   @return [String]
@@ -1665,6 +2003,28 @@ module Aws::ElementalInference
       :status,
       :description,
       :from_association)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables or disables an output at the action's scheduled time. This is
+    # a type of ScheduleActionOperation.
+    #
+    # @!attribute [rw] output_name
+    #   The name of the output that you want to enable or disable. The
+    #   output must exist in the feed when you create the action.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies whether the output is enabled or disabled after the action
+    #   runs.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elementalinference-2018-11-14/UpdateOutputStatus AWS API Documentation
+    #
+    class UpdateOutputStatus < Struct.new(
+      :output_name,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

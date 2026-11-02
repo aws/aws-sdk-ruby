@@ -11,37 +11,37 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class ConnectorFailureException < ::Aws::Errors::ServiceError
+      class ConnectorFailureException < ServiceError
         def message: () -> ::String
       end
-      class ConnectorTimeoutException < ::Aws::Errors::ServiceError
+      class ConnectorTimeoutException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class QueryTimeoutException < ::Aws::Errors::ServiceError
+      class QueryTimeoutException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
     end

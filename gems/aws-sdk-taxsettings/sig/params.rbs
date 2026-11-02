@@ -118,6 +118,15 @@ module Aws
       }?,
       monaco_additional_info: {
         business_number: ::String
+      }?,
+      germany_additional_info: {
+        economic_identification_number: ::String?,
+        steuernummer: ::String?
+      }?,
+      mexico_additional_info: {
+        tax_regime: ::String?,
+        tax_regime_full_name: ::String?,
+        cfdi_usage_code: ::String?
       }?
     }
 

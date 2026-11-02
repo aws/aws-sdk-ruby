@@ -1,6 +1,41 @@
 Unreleased Changes
 ------------------
 
+1.663.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.662.0 (2026-10-28)
+------------------
+
+* Feature - Amazon EC2 Capacity Manager adds supportability checks and capacity fulfillment metrics. Use GetCapacityManagerSupportabilityScores to score how well instance types and Availability Zones can support a capacity request, and GetCapacityManagerMetricData to retrieve fulfillment metrics.
+
+1.661.0 (2026-10-27)
+------------------
+
+* Feature - EC2 AMIs can now show vulnerability data and be targeted directly for scanning.
+
+1.660.0 (2026-10-22)
+------------------
+
+* Feature - AWS Transit Gateway now provides managed one-to-one NAT directly on its attachments, through integration with Regional Private NAT Gateway. Use ModifyTransitGatewayAttachmentNatConfiguration to enable NAT and configure NAT rules, and GetTransitGatewayAttachmentNatConfiguration to view them.
+
+1.659.0 (2026-10-21)
+------------------
+
+* Feature - Adds new response fields to DescribeInstanceStatus and Network Insights analysis results.
+
+1.658.0 (2026-10-20)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.657.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.656.0 (2026-10-14)
 ------------------
 

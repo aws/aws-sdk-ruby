@@ -98,8 +98,8 @@ module Aws::KafkaConnect
 
     class ConnectorOperationSummary
       attr_accessor connector_operation_arn: ::String
-      attr_accessor connector_operation_type: ("UPDATE_WORKER_SETTING" | "UPDATE_CONNECTOR_CONFIGURATION" | "ISOLATE_CONNECTOR" | "RESTORE_CONNECTOR" | "RESTART_CONNECTOR")
-      attr_accessor connector_operation_state: ("PENDING" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "RESTART_IN_PROGRESS" | "RESTART_COMPLETE" | "RESTART_FAILED")
+      attr_accessor connector_operation_type: ("UPDATE_WORKER_SETTING" | "UPDATE_CONNECTOR_CONFIGURATION" | "ISOLATE_CONNECTOR" | "RESTORE_CONNECTOR" | "RESTART_CONNECTOR" | "PAUSE_CONNECTOR" | "RESUME_CONNECTOR")
+      attr_accessor connector_operation_state: ("PENDING" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "PAUSE_COMPLETE" | "PAUSE_FAILED" | "RESUME_COMPLETE" | "RESUME_FAILED" | "PAUSE_IN_PROGRESS" | "RESUME_IN_PROGRESS" | "RESTART_IN_PROGRESS" | "RESTART_COMPLETE" | "RESTART_FAILED")
       attr_accessor creation_time: ::Time
       attr_accessor end_time: ::Time
       SENSITIVE: []
@@ -110,7 +110,7 @@ module Aws::KafkaConnect
       attr_accessor connector_arn: ::String
       attr_accessor connector_description: ::String
       attr_accessor connector_name: ::String
-      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "RESTARTING")
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "PAUSED" | "RESTARTING" | "PAUSING" | "RESUMING")
       attr_accessor creation_time: ::Time
       attr_accessor current_version: ::String
       attr_accessor kafka_cluster: Types::KafkaClusterDescription
@@ -146,7 +146,7 @@ module Aws::KafkaConnect
     class CreateConnectorResponse
       attr_accessor connector_arn: ::String
       attr_accessor connector_name: ::String
-      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "RESTARTING")
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "PAUSED" | "RESTARTING" | "PAUSING" | "RESUMING")
       SENSITIVE: []
     end
 
@@ -232,6 +232,12 @@ module Aws::KafkaConnect
       SENSITIVE: []
     end
 
+    class CustomPluginUpdate
+      attr_accessor custom_plugin_arn: ::String
+      attr_accessor revision: ::Integer
+      SENSITIVE: []
+    end
+
     class DeleteConnectorRequest
       attr_accessor connector_arn: ::String
       attr_accessor current_version: ::String
@@ -240,7 +246,7 @@ module Aws::KafkaConnect
 
     class DeleteConnectorResponse
       attr_accessor connector_arn: ::String
-      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "RESTARTING")
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "PAUSED" | "RESTARTING" | "PAUSING" | "RESUMING")
       SENSITIVE: []
     end
 
@@ -274,8 +280,8 @@ module Aws::KafkaConnect
     class DescribeConnectorOperationResponse
       attr_accessor connector_arn: ::String
       attr_accessor connector_operation_arn: ::String
-      attr_accessor connector_operation_state: ("PENDING" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "RESTART_IN_PROGRESS" | "RESTART_COMPLETE" | "RESTART_FAILED")
-      attr_accessor connector_operation_type: ("UPDATE_WORKER_SETTING" | "UPDATE_CONNECTOR_CONFIGURATION" | "ISOLATE_CONNECTOR" | "RESTORE_CONNECTOR" | "RESTART_CONNECTOR")
+      attr_accessor connector_operation_state: ("PENDING" | "UPDATE_IN_PROGRESS" | "UPDATE_COMPLETE" | "UPDATE_FAILED" | "ROLLBACK_IN_PROGRESS" | "ROLLBACK_FAILED" | "ROLLBACK_COMPLETE" | "PAUSE_COMPLETE" | "PAUSE_FAILED" | "RESUME_COMPLETE" | "RESUME_FAILED" | "PAUSE_IN_PROGRESS" | "RESUME_IN_PROGRESS" | "RESTART_IN_PROGRESS" | "RESTART_COMPLETE" | "RESTART_FAILED")
+      attr_accessor connector_operation_type: ("UPDATE_WORKER_SETTING" | "UPDATE_CONNECTOR_CONFIGURATION" | "ISOLATE_CONNECTOR" | "RESTORE_CONNECTOR" | "RESTART_CONNECTOR" | "PAUSE_CONNECTOR" | "RESUME_CONNECTOR")
       attr_accessor operation_steps: ::Array[Types::ConnectorOperationStep]
       attr_accessor origin_worker_setting: Types::WorkerSetting
       attr_accessor origin_connector_configuration: ::Hash[::String, ::String]
@@ -298,7 +304,7 @@ module Aws::KafkaConnect
       attr_accessor connector_configuration: ::Hash[::String, ::String]
       attr_accessor connector_description: ::String
       attr_accessor connector_name: ::String
-      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "RESTARTING")
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "PAUSED" | "RESTARTING" | "PAUSING" | "RESUMING")
       attr_accessor creation_time: ::Time
       attr_accessor current_version: ::String
       attr_accessor kafka_cluster: Types::KafkaClusterDescription
@@ -474,6 +480,17 @@ module Aws::KafkaConnect
       SENSITIVE: []
     end
 
+    class PauseConnectorRequest
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class PauseConnectorResponse
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_operation_arn: ::String
+      SENSITIVE: []
+    end
+
     class Plugin
       attr_accessor custom_plugin: Types::CustomPlugin
       SENSITIVE: []
@@ -481,6 +498,11 @@ module Aws::KafkaConnect
 
     class PluginDescription
       attr_accessor custom_plugin: Types::CustomPluginDescription
+      SENSITIVE: []
+    end
+
+    class PluginUpdate
+      attr_accessor custom_plugin: Types::CustomPluginUpdate
       SENSITIVE: []
     end
 
@@ -509,6 +531,17 @@ module Aws::KafkaConnect
     end
 
     class RestartConnectorResponse
+      attr_accessor connector_arn: ::String
+      attr_accessor connector_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeConnectorRequest
+      attr_accessor connector_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ResumeConnectorResponse
       attr_accessor connector_arn: ::String
       attr_accessor connector_operation_arn: ::String
       SENSITIVE: []
@@ -614,14 +647,18 @@ module Aws::KafkaConnect
     class UpdateConnectorRequest
       attr_accessor capacity: Types::CapacityUpdate
       attr_accessor connector_configuration: ::Hash[::String, ::String]
+      attr_accessor skip_health_validation: bool
       attr_accessor connector_arn: ::String
       attr_accessor current_version: ::String
+      attr_accessor plugins: ::Array[Types::PluginUpdate]
+      attr_accessor worker_configuration: Types::WorkerConfigurationUpdate
+      attr_accessor use_default_worker_configuration: bool
       SENSITIVE: [:connector_configuration]
     end
 
     class UpdateConnectorResponse
       attr_accessor connector_arn: ::String
-      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "RESTARTING")
+      attr_accessor connector_state: ("RUNNING" | "CREATING" | "UPDATING" | "DELETING" | "FAILED" | "PAUSED" | "RESTARTING" | "PAUSING" | "RESUMING")
       attr_accessor connector_operation_arn: ::String
       SENSITIVE: []
     end
@@ -675,6 +712,12 @@ module Aws::KafkaConnect
       SENSITIVE: []
     end
 
+    class WorkerConfigurationUpdate
+      attr_accessor revision: ::Integer
+      attr_accessor worker_configuration_arn: ::String
+      SENSITIVE: []
+    end
+
     class WorkerLogDelivery
       attr_accessor cloud_watch_logs: Types::CloudWatchLogsLogDelivery
       attr_accessor firehose: Types::FirehoseLogDelivery
@@ -691,6 +734,9 @@ module Aws::KafkaConnect
 
     class WorkerSetting
       attr_accessor capacity: Types::CapacityDescription
+      attr_accessor plugins: ::Array[Types::PluginDescription]
+      attr_accessor worker_configuration: Types::WorkerConfigurationDescription
+      attr_accessor use_default_worker_configuration: bool
       SENSITIVE: []
     end
   end

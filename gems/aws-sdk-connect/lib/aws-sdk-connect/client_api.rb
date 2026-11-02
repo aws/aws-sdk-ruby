@@ -109,6 +109,8 @@ module Aws::Connect
     ApplicationPermissions = Shapes::ListShape.new(name: 'ApplicationPermissions')
     ApplicationType = Shapes::StringShape.new(name: 'ApplicationType')
     Applications = Shapes::ListShape.new(name: 'Applications')
+    ApproximateDriftedResourceCount = Shapes::StructureShape.new(name: 'ApproximateDriftedResourceCount')
+    ApproximateDriftedResourceCounts = Shapes::ListShape.new(name: 'ApproximateDriftedResourceCounts')
     ApproximateTotalCount = Shapes::IntegerShape.new(name: 'ApproximateTotalCount')
     ArtifactId = Shapes::StringShape.new(name: 'ArtifactId')
     ArtifactStatus = Shapes::StringShape.new(name: 'ArtifactStatus')
@@ -249,6 +251,9 @@ module Aws::Connect
     Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignId = Shapes::StringShape.new(name: 'CampaignId')
     CaseSlaConfiguration = Shapes::StructureShape.new(name: 'CaseSlaConfiguration')
+    CategoriesAttributeAndCondition = Shapes::StructureShape.new(name: 'CategoriesAttributeAndCondition')
+    CategoriesAttributeFilter = Shapes::StructureShape.new(name: 'CategoriesAttributeFilter')
+    CategoriesAttributeOrConditionList = Shapes::ListShape.new(name: 'CategoriesAttributeOrConditionList')
     Channel = Shapes::StringShape.new(name: 'Channel')
     ChannelList = Shapes::ListShape.new(name: 'ChannelList')
     ChannelToCountMap = Shapes::MapShape.new(name: 'ChannelToCountMap')
@@ -388,6 +393,7 @@ module Aws::Connect
     Contacts = Shapes::ListShape.new(name: 'Contacts')
     Content = Shapes::StringShape.new(name: 'Content')
     ContentAttributes = Shapes::StructureShape.new(name: 'ContentAttributes')
+    ContentDisposition = Shapes::StringShape.new(name: 'ContentDisposition')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     ControlPlaneAttributeFilter = Shapes::StructureShape.new(name: 'ControlPlaneAttributeFilter')
     ControlPlaneTagFilter = Shapes::StructureShape.new(name: 'ControlPlaneTagFilter')
@@ -1274,6 +1280,8 @@ module Aws::Connect
     ListQuickConnectsResponse = Shapes::StructureShape.new(name: 'ListQuickConnectsResponse')
     ListRealtimeContactAnalysisSegmentsV2Request = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsV2Request')
     ListRealtimeContactAnalysisSegmentsV2Response = Shapes::StructureShape.new(name: 'ListRealtimeContactAnalysisSegmentsV2Response')
+    ListReplicationFindingsRequest = Shapes::StructureShape.new(name: 'ListReplicationFindingsRequest')
+    ListReplicationFindingsResponse = Shapes::StructureShape.new(name: 'ListReplicationFindingsResponse')
     ListRoutingProfileManualAssignmentQueuesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfileManualAssignmentQueuesRequest')
     ListRoutingProfileManualAssignmentQueuesResponse = Shapes::StructureShape.new(name: 'ListRoutingProfileManualAssignmentQueuesResponse')
     ListRoutingProfileQueuesRequest = Shapes::StructureShape.new(name: 'ListRoutingProfileQueuesRequest')
@@ -1440,6 +1448,7 @@ module Aws::Connect
     NotificationStatus = Shapes::StringShape.new(name: 'NotificationStatus')
     NotificationSummaryList = Shapes::ListShape.new(name: 'NotificationSummaryList')
     NotificationType = Shapes::StringShape.new(name: 'NotificationType')
+    NullableAdditionalRecipients = Shapes::StructureShape.new(name: 'NullableAdditionalRecipients')
     NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
     NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
     NullableProficiencyLevel = Shapes::FloatShape.new(name: 'NullableProficiencyLevel')
@@ -1455,6 +1464,7 @@ module Aws::Connect
     OperationalHour = Shapes::StructureShape.new(name: 'OperationalHour')
     OperationalHours = Shapes::ListShape.new(name: 'OperationalHours')
     OperationalStatus = Shapes::StringShape.new(name: 'OperationalStatus')
+    OptionalEmailAddressRecipientList = Shapes::ListShape.new(name: 'OptionalEmailAddressRecipientList')
     Origin = Shapes::StringShape.new(name: 'Origin')
     OriginRegion = Shapes::StringShape.new(name: 'OriginRegion')
     OriginsList = Shapes::ListShape.new(name: 'OriginsList')
@@ -1682,6 +1692,7 @@ module Aws::Connect
     RealTimeContactAnalysisSegmentTranscript = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentTranscript')
     RealTimeContactAnalysisSegmentType = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSegmentType')
     RealTimeContactAnalysisSegmentTypes = Shapes::ListShape.new(name: 'RealTimeContactAnalysisSegmentTypes')
+    RealTimeContactAnalysisSegmentsFilter = Shapes::StructureShape.new(name: 'RealTimeContactAnalysisSegmentsFilter')
     RealTimeContactAnalysisSentimentLabel = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSentimentLabel')
     RealTimeContactAnalysisStatus = Shapes::StringShape.new(name: 'RealTimeContactAnalysisStatus')
     RealTimeContactAnalysisSupportedChannel = Shapes::StringShape.new(name: 'RealTimeContactAnalysisSupportedChannel')
@@ -1733,6 +1744,13 @@ module Aws::Connect
     ReplicateInstanceRequest = Shapes::StructureShape.new(name: 'ReplicateInstanceRequest')
     ReplicateInstanceResponse = Shapes::StructureShape.new(name: 'ReplicateInstanceResponse')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
+    ReplicationFinding = Shapes::StructureShape.new(name: 'ReplicationFinding')
+    ReplicationFindingMessage = Shapes::StringShape.new(name: 'ReplicationFindingMessage')
+    ReplicationFindingOperation = Shapes::StringShape.new(name: 'ReplicationFindingOperation')
+    ReplicationFindingReferenceCode = Shapes::StringShape.new(name: 'ReplicationFindingReferenceCode')
+    ReplicationFindingResourceName = Shapes::StringShape.new(name: 'ReplicationFindingResourceName')
+    ReplicationFindingResourceType = Shapes::StringShape.new(name: 'ReplicationFindingResourceType')
+    ReplicationFindingsList = Shapes::ListShape.new(name: 'ReplicationFindingsList')
     ReplicationStatusReason = Shapes::StringShape.new(name: 'ReplicationStatusReason')
     ReplicationStatusSummary = Shapes::StructureShape.new(name: 'ReplicationStatusSummary')
     ReplicationStatusSummaryList = Shapes::ListShape.new(name: 'ReplicationStatusSummaryList')
@@ -1745,6 +1763,9 @@ module Aws::Connect
     ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResourceNotReadyException = Shapes::StructureShape.new(name: 'ResourceNotReadyException')
+    ResourceReplicationStatus = Shapes::StructureShape.new(name: 'ResourceReplicationStatus')
+    ResourceReplicationStatusValue = Shapes::StringShape.new(name: 'ResourceReplicationStatusValue')
+    ResourceReplicationStatuses = Shapes::ListShape.new(name: 'ResourceReplicationStatuses')
     ResourceTagsSearchCriteria = Shapes::StructureShape.new(name: 'ResourceTagsSearchCriteria')
     ResourceType = Shapes::StringShape.new(name: 'ResourceType')
     ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
@@ -1795,6 +1816,7 @@ module Aws::Connect
     RuleCapabilityTiers = Shapes::ListShape.new(name: 'RuleCapabilityTiers')
     RuleFunction = Shapes::StringShape.new(name: 'RuleFunction')
     RuleId = Shapes::StringShape.new(name: 'RuleId')
+    RuleId256 = Shapes::StringShape.new(name: 'RuleId256')
     RuleName = Shapes::StringShape.new(name: 'RuleName')
     RulePublishStatus = Shapes::StringShape.new(name: 'RulePublishStatus')
     RuleSearchSummary = Shapes::StructureShape.new(name: 'RuleSearchSummary')
@@ -1912,6 +1934,7 @@ module Aws::Connect
     SecurityProfileSearchSummary = Shapes::StructureShape.new(name: 'SecurityProfileSearchSummary')
     SecurityProfileSummary = Shapes::StructureShape.new(name: 'SecurityProfileSummary')
     SecurityProfileSummaryList = Shapes::ListShape.new(name: 'SecurityProfileSummaryList')
+    SecurityProfileType = Shapes::StringShape.new(name: 'SecurityProfileType')
     SecurityProfiles = Shapes::ListShape.new(name: 'SecurityProfiles')
     SecurityProfiles100 = Shapes::ListShape.new(name: 'SecurityProfiles100')
     SecurityProfilesSearchFilter = Shapes::StructureShape.new(name: 'SecurityProfilesSearchFilter')
@@ -2061,6 +2084,7 @@ module Aws::Connect
     TaskNameExpression = Shapes::StringShape.new(name: 'TaskNameExpression')
     TaskTemplateArn = Shapes::StringShape.new(name: 'TaskTemplateArn')
     TaskTemplateConstraints = Shapes::StructureShape.new(name: 'TaskTemplateConstraints')
+    TaskTemplateContactHooks = Shapes::StructureShape.new(name: 'TaskTemplateContactHooks')
     TaskTemplateDefaultFieldValue = Shapes::StructureShape.new(name: 'TaskTemplateDefaultFieldValue')
     TaskTemplateDefaultFieldValueList = Shapes::ListShape.new(name: 'TaskTemplateDefaultFieldValueList')
     TaskTemplateDefaults = Shapes::StructureShape.new(name: 'TaskTemplateDefaults')
@@ -2197,6 +2221,11 @@ module Aws::Connect
     UpdateMetricMetadataResponse = Shapes::StructureShape.new(name: 'UpdateMetricMetadataResponse')
     UpdateNotificationContentRequest = Shapes::StructureShape.new(name: 'UpdateNotificationContentRequest')
     UpdateNotificationContentResponse = Shapes::StructureShape.new(name: 'UpdateNotificationContentResponse')
+    UpdateOutboundEmailContactMessageRequest = Shapes::StructureShape.new(name: 'UpdateOutboundEmailContactMessageRequest')
+    UpdateOutboundEmailContactMessageResponse = Shapes::StructureShape.new(name: 'UpdateOutboundEmailContactMessageResponse')
+    UpdateOutboundEmailContent = Shapes::StructureShape.new(name: 'UpdateOutboundEmailContent')
+    UpdateOutboundEmailMessageSourceType = Shapes::StringShape.new(name: 'UpdateOutboundEmailMessageSourceType')
+    UpdateOutboundRawMessage = Shapes::StructureShape.new(name: 'UpdateOutboundRawMessage')
     UpdateParticipantAuthenticationRequest = Shapes::StructureShape.new(name: 'UpdateParticipantAuthenticationRequest')
     UpdateParticipantAuthenticationResponse = Shapes::StructureShape.new(name: 'UpdateParticipantAuthenticationResponse')
     UpdateParticipantRoleConfigChannelInfo = Shapes::UnionShape.new(name: 'UpdateParticipantRoleConfigChannelInfo')
@@ -2620,6 +2649,13 @@ module Aws::Connect
     ApplicationPermissions.member = Shapes::ShapeRef.new(shape: Permission)
 
     Applications.member = Shapes::ShapeRef.new(shape: Application)
+
+    ApproximateDriftedResourceCount.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "Region"))
+    ApproximateDriftedResourceCount.add_member(:count, Shapes::ShapeRef.new(shape: ApproximateTotalCount, required: true, location_name: "Count"))
+    ApproximateDriftedResourceCount.add_member(:timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "Timestamp"))
+    ApproximateDriftedResourceCount.struct_class = Types::ApproximateDriftedResourceCount
+
+    ApproximateDriftedResourceCounts.member = Shapes::ShapeRef.new(shape: ApproximateDriftedResourceCount)
 
     AssignContactCategoryActionDefinition.struct_class = Types::AssignContactCategoryActionDefinition
 
@@ -3082,6 +3118,16 @@ module Aws::Connect
     CaseSlaConfiguration.add_member(:target_field_values, Shapes::ShapeRef.new(shape: SlaFieldValueUnionList, location_name: "TargetFieldValues"))
     CaseSlaConfiguration.add_member(:target_sla_minutes, Shapes::ShapeRef.new(shape: TargetSlaMinutes, required: true, location_name: "TargetSlaMinutes"))
     CaseSlaConfiguration.struct_class = Types::CaseSlaConfiguration
+
+    CategoriesAttributeAndCondition.add_member(:tag_conditions, Shapes::ShapeRef.new(shape: TagAndConditionList, location_name: "TagConditions"))
+    CategoriesAttributeAndCondition.struct_class = Types::CategoriesAttributeAndCondition
+
+    CategoriesAttributeFilter.add_member(:or_conditions, Shapes::ShapeRef.new(shape: CategoriesAttributeOrConditionList, location_name: "OrConditions"))
+    CategoriesAttributeFilter.add_member(:and_condition, Shapes::ShapeRef.new(shape: CategoriesAttributeAndCondition, location_name: "AndCondition"))
+    CategoriesAttributeFilter.add_member(:tag_condition, Shapes::ShapeRef.new(shape: TagCondition, location_name: "TagCondition"))
+    CategoriesAttributeFilter.struct_class = Types::CategoriesAttributeFilter
+
+    CategoriesAttributeOrConditionList.member = Shapes::ShapeRef.new(shape: CategoriesAttributeAndCondition)
 
     ChannelList.member = Shapes::ShapeRef.new(shape: Channel)
 
@@ -3973,6 +4019,7 @@ module Aws::Connect
     CreateTaskTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: TaskTemplateDescription, location_name: "Description"))
     CreateTaskTemplateRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
     CreateTaskTemplateRequest.add_member(:self_assign_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "SelfAssignFlowId"))
+    CreateTaskTemplateRequest.add_member(:contact_hooks, Shapes::ShapeRef.new(shape: TaskTemplateContactHooks, location_name: "ContactHooks"))
     CreateTaskTemplateRequest.add_member(:constraints, Shapes::ShapeRef.new(shape: TaskTemplateConstraints, location_name: "Constraints"))
     CreateTaskTemplateRequest.add_member(:defaults, Shapes::ShapeRef.new(shape: TaskTemplateDefaults, location_name: "Defaults"))
     CreateTaskTemplateRequest.add_member(:status, Shapes::ShapeRef.new(shape: TaskTemplateStatus, location_name: "Status"))
@@ -5780,6 +5827,7 @@ module Aws::Connect
     GetAttachedFileRequest.add_member(:file_id, Shapes::ShapeRef.new(shape: FileId, required: true, location: "uri", location_name: "FileId"))
     GetAttachedFileRequest.add_member(:url_expiry_in_seconds, Shapes::ShapeRef.new(shape: URLExpiryInSeconds, location: "querystring", location_name: "urlExpiryInSeconds"))
     GetAttachedFileRequest.add_member(:associated_resource_arn, Shapes::ShapeRef.new(shape: ARN, required: true, location: "querystring", location_name: "associatedResourceArn"))
+    GetAttachedFileRequest.add_member(:url_content_disposition, Shapes::ShapeRef.new(shape: ContentDisposition, location: "querystring", location_name: "urlContentDisposition"))
     GetAttachedFileRequest.struct_class = Types::GetAttachedFileRequest
 
     GetAttachedFileResponse.add_member(:file_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "FileArn"))
@@ -5937,6 +5985,7 @@ module Aws::Connect
     GetTaskTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: TaskTemplateDescription, location_name: "Description"))
     GetTaskTemplateResponse.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
     GetTaskTemplateResponse.add_member(:self_assign_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "SelfAssignFlowId"))
+    GetTaskTemplateResponse.add_member(:contact_hooks, Shapes::ShapeRef.new(shape: TaskTemplateContactHooks, location_name: "ContactHooks"))
     GetTaskTemplateResponse.add_member(:constraints, Shapes::ShapeRef.new(shape: TaskTemplateConstraints, location_name: "Constraints"))
     GetTaskTemplateResponse.add_member(:defaults, Shapes::ShapeRef.new(shape: TaskTemplateDefaults, location_name: "Defaults"))
     GetTaskTemplateResponse.add_member(:fields, Shapes::ShapeRef.new(shape: TaskTemplateFields, location_name: "Fields"))
@@ -5965,6 +6014,7 @@ module Aws::Connect
     GetTrafficDistributionResponse.add_member(:arn, Shapes::ShapeRef.new(shape: ACGRTrafficDistributionGroupArn, location_name: "Arn"))
     GetTrafficDistributionResponse.add_member(:sign_in_config, Shapes::ShapeRef.new(shape: SignInConfig, location_name: "SignInConfig"))
     GetTrafficDistributionResponse.add_member(:agent_config, Shapes::ShapeRef.new(shape: AgentConfig, location_name: "AgentConfig"))
+    GetTrafficDistributionResponse.add_member(:last_failover_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastFailoverTime"))
     GetTrafficDistributionResponse.struct_class = Types::GetTrafficDistributionResponse
 
     GlobalResiliencyMetadata.add_member(:active_region, Shapes::ShapeRef.new(shape: ActiveRegion, location_name: "ActiveRegion"))
@@ -6809,6 +6859,7 @@ module Aws::Connect
     ListRealtimeContactAnalysisSegmentsV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     ListRealtimeContactAnalysisSegmentsV2Request.add_member(:output_type, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisOutputType, required: true, location_name: "OutputType"))
     ListRealtimeContactAnalysisSegmentsV2Request.add_member(:segment_types, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentTypes, required: true, location_name: "SegmentTypes"))
+    ListRealtimeContactAnalysisSegmentsV2Request.add_member(:list_filter, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentsFilter, location_name: "ListFilter"))
     ListRealtimeContactAnalysisSegmentsV2Request.struct_class = Types::ListRealtimeContactAnalysisSegmentsV2Request
 
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:channel, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSupportedChannel, required: true, location_name: "Channel"))
@@ -6816,6 +6867,18 @@ module Aws::Connect
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:segments, Shapes::ShapeRef.new(shape: RealtimeContactAnalysisSegments, required: true, location_name: "Segments"))
     ListRealtimeContactAnalysisSegmentsV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
     ListRealtimeContactAnalysisSegmentsV2Response.struct_class = Types::ListRealtimeContactAnalysisSegmentsV2Response
+
+    ListReplicationFindingsRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceIdOrArn, required: true, location: "uri", location_name: "InstanceId"))
+    ListReplicationFindingsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: ReplicationFindingResourceType, required: true, location: "querystring", location_name: "resourceType"))
+    ListReplicationFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResult100, location: "querystring", location_name: "maxResults", metadata: {"box" => true}))
+    ListReplicationFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location: "querystring", location_name: "nextToken"))
+    ListReplicationFindingsRequest.struct_class = Types::ListReplicationFindingsRequest
+
+    ListReplicationFindingsResponse.add_member(:replication_findings_list, Shapes::ShapeRef.new(shape: ReplicationFindingsList, required: true, location_name: "ReplicationFindingsList"))
+    ListReplicationFindingsResponse.add_member(:approximate_drifted_resource_counts, Shapes::ShapeRef.new(shape: ApproximateDriftedResourceCounts, location_name: "ApproximateDriftedResourceCounts"))
+    ListReplicationFindingsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: LargeNextToken, location_name: "NextToken"))
+    ListReplicationFindingsResponse.add_member(:resource_replication_statuses, Shapes::ShapeRef.new(shape: ResourceReplicationStatuses, location_name: "ResourceReplicationStatuses"))
+    ListReplicationFindingsResponse.struct_class = Types::ListReplicationFindingsResponse
 
     ListRoutingProfileManualAssignmentQueuesRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
     ListRoutingProfileManualAssignmentQueuesRequest.add_member(:routing_profile_id, Shapes::ShapeRef.new(shape: RoutingProfileId, required: true, location: "uri", location_name: "RoutingProfileId"))
@@ -7331,6 +7394,9 @@ module Aws::Connect
 
     NotificationSummaryList.member = Shapes::ShapeRef.new(shape: Notification)
 
+    NullableAdditionalRecipients.add_member(:cc_email_addresses, Shapes::ShapeRef.new(shape: OptionalEmailAddressRecipientList, location_name: "CcEmailAddresses"))
+    NullableAdditionalRecipients.struct_class = Types::NullableAdditionalRecipients
+
     NumberCondition.add_member(:field_name, Shapes::ShapeRef.new(shape: String, location_name: "FieldName"))
     NumberCondition.add_member(:min_value, Shapes::ShapeRef.new(shape: NullableProficiencyLimitValue, location_name: "MinValue"))
     NumberCondition.add_member(:max_value, Shapes::ShapeRef.new(shape: NullableProficiencyLimitValue, location_name: "MaxValue"))
@@ -7356,6 +7422,8 @@ module Aws::Connect
     OperationalHour.struct_class = Types::OperationalHour
 
     OperationalHours.member = Shapes::ShapeRef.new(shape: OperationalHour)
+
+    OptionalEmailAddressRecipientList.member = Shapes::ShapeRef.new(shape: EmailAddressInfo)
 
     OriginsList.member = Shapes::ShapeRef.new(shape: Origin)
 
@@ -7813,6 +7881,7 @@ module Aws::Connect
 
     RealTimeContactAnalysisAttachments.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisAttachment)
 
+    RealTimeContactAnalysisCategoryDetails.add_member(:rule_id, Shapes::ShapeRef.new(shape: RuleId256, location_name: "RuleId"))
     RealTimeContactAnalysisCategoryDetails.add_member(:points_of_interest, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisPointsOfInterest, required: true, location_name: "PointsOfInterest"))
     RealTimeContactAnalysisCategoryDetails.struct_class = Types::RealTimeContactAnalysisCategoryDetails
 
@@ -7887,6 +7956,9 @@ module Aws::Connect
     RealTimeContactAnalysisSegmentTranscript.struct_class = Types::RealTimeContactAnalysisSegmentTranscript
 
     RealTimeContactAnalysisSegmentTypes.member = Shapes::ShapeRef.new(shape: RealTimeContactAnalysisSegmentType)
+
+    RealTimeContactAnalysisSegmentsFilter.add_member(:categories_attribute_filter, Shapes::ShapeRef.new(shape: CategoriesAttributeFilter, location_name: "CategoriesAttributeFilter"))
+    RealTimeContactAnalysisSegmentsFilter.struct_class = Types::RealTimeContactAnalysisSegmentsFilter
 
     RealTimeContactAnalysisTimeData.add_member(:absolute_time, Shapes::ShapeRef.new(shape: RealTimeContactAnalysisTimeInstant, location_name: "AbsoluteTime"))
     RealTimeContactAnalysisTimeData.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -8037,6 +8109,18 @@ module Aws::Connect
     ReplicationConfiguration.add_member(:global_sign_in_endpoint, Shapes::ShapeRef.new(shape: GlobalSignInEndpoint, location_name: "GlobalSignInEndpoint"))
     ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
 
+    ReplicationFinding.add_member(:arn, Shapes::ShapeRef.new(shape: ARN, required: true, location_name: "Arn"))
+    ReplicationFinding.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
+    ReplicationFinding.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "Region"))
+    ReplicationFinding.add_member(:resource_type, Shapes::ShapeRef.new(shape: ReplicationFindingResourceType, required: true, location_name: "ResourceType"))
+    ReplicationFinding.add_member(:name, Shapes::ShapeRef.new(shape: ReplicationFindingResourceName, location_name: "Name"))
+    ReplicationFinding.add_member(:operation, Shapes::ShapeRef.new(shape: ReplicationFindingOperation, location_name: "Operation"))
+    ReplicationFinding.add_member(:reference_code, Shapes::ShapeRef.new(shape: ReplicationFindingReferenceCode, location_name: "ReferenceCode"))
+    ReplicationFinding.add_member(:message, Shapes::ShapeRef.new(shape: ReplicationFindingMessage, location_name: "Message"))
+    ReplicationFinding.struct_class = Types::ReplicationFinding
+
+    ReplicationFindingsList.member = Shapes::ShapeRef.new(shape: ReplicationFinding)
+
     ReplicationStatusSummary.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "Region"))
     ReplicationStatusSummary.add_member(:replication_status, Shapes::ShapeRef.new(shape: InstanceReplicationStatus, location_name: "ReplicationStatus"))
     ReplicationStatusSummary.add_member(:replication_status_reason, Shapes::ShapeRef.new(shape: ReplicationStatusReason, location_name: "ReplicationStatusReason"))
@@ -8062,6 +8146,12 @@ module Aws::Connect
 
     ResourceNotReadyException.add_member(:message, Shapes::ShapeRef.new(shape: Message, location_name: "Message"))
     ResourceNotReadyException.struct_class = Types::ResourceNotReadyException
+
+    ResourceReplicationStatus.add_member(:region, Shapes::ShapeRef.new(shape: AwsRegion, required: true, location_name: "Region"))
+    ResourceReplicationStatus.add_member(:status, Shapes::ShapeRef.new(shape: ResourceReplicationStatusValue, required: true, location_name: "Status"))
+    ResourceReplicationStatus.struct_class = Types::ResourceReplicationStatus
+
+    ResourceReplicationStatuses.member = Shapes::ShapeRef.new(shape: ResourceReplicationStatus)
 
     ResourceTagsSearchCriteria.add_member(:tag_search_condition, Shapes::ShapeRef.new(shape: TagSearchCondition, location_name: "TagSearchCondition"))
     ResourceTagsSearchCriteria.struct_class = Types::ResourceTagsSearchCriteria
@@ -8712,6 +8802,7 @@ module Aws::Connect
     SecurityProfile.add_member(:hierarchy_restricted_resources, Shapes::ShapeRef.new(shape: HierarchyRestrictedResourceList, location_name: "HierarchyRestrictedResources"))
     SecurityProfile.add_member(:allowed_access_control_hierarchy_group_id, Shapes::ShapeRef.new(shape: HierarchyGroupId, location_name: "AllowedAccessControlHierarchyGroupId"))
     SecurityProfile.add_member(:granular_access_control_configuration, Shapes::ShapeRef.new(shape: GranularAccessControlConfiguration, location_name: "GranularAccessControlConfiguration"))
+    SecurityProfile.add_member(:type, Shapes::ShapeRef.new(shape: SecurityProfileType, location_name: "Type"))
     SecurityProfile.struct_class = Types::SecurityProfile
 
     SecurityProfileIds.member = Shapes::ShapeRef.new(shape: SecurityProfileId)
@@ -8732,6 +8823,7 @@ module Aws::Connect
     SecurityProfileSearchSummary.add_member(:security_profile_name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "SecurityProfileName"))
     SecurityProfileSearchSummary.add_member(:description, Shapes::ShapeRef.new(shape: SecurityProfileDescription, location_name: "Description"))
     SecurityProfileSearchSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, location_name: "Tags"))
+    SecurityProfileSearchSummary.add_member(:type, Shapes::ShapeRef.new(shape: SecurityProfileType, location_name: "Type"))
     SecurityProfileSearchSummary.struct_class = Types::SecurityProfileSearchSummary
 
     SecurityProfileSummary.add_member(:id, Shapes::ShapeRef.new(shape: SecurityProfileId, location_name: "Id"))
@@ -8739,6 +8831,7 @@ module Aws::Connect
     SecurityProfileSummary.add_member(:name, Shapes::ShapeRef.new(shape: SecurityProfileName, location_name: "Name"))
     SecurityProfileSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
     SecurityProfileSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: RegionName, location_name: "LastModifiedRegion"))
+    SecurityProfileSummary.add_member(:type, Shapes::ShapeRef.new(shape: SecurityProfileType, location_name: "Type"))
     SecurityProfileSummary.struct_class = Types::SecurityProfileSummary
 
     SecurityProfileSummaryList.member = Shapes::ShapeRef.new(shape: SecurityProfileSummary)
@@ -9259,6 +9352,9 @@ module Aws::Connect
     TaskTemplateConstraints.add_member(:invisible_fields, Shapes::ShapeRef.new(shape: InvisibleTaskTemplateFields, location_name: "InvisibleFields"))
     TaskTemplateConstraints.struct_class = Types::TaskTemplateConstraints
 
+    TaskTemplateContactHooks.add_member(:wrap_up_flow_id, Shapes::ShapeRef.new(shape: ContactFlowModuleId, location_name: "WrapUpFlowId"))
+    TaskTemplateContactHooks.struct_class = Types::TaskTemplateContactHooks
+
     TaskTemplateDefaultFieldValue.add_member(:id, Shapes::ShapeRef.new(shape: TaskTemplateFieldIdentifier, location_name: "Id"))
     TaskTemplateDefaultFieldValue.add_member(:default_value, Shapes::ShapeRef.new(shape: TaskTemplateFieldValue, location_name: "DefaultValue"))
     TaskTemplateDefaultFieldValue.struct_class = Types::TaskTemplateDefaultFieldValue
@@ -9558,6 +9654,7 @@ module Aws::Connect
     UpdateContactRequest.add_member(:user_info, Shapes::ShapeRef.new(shape: UserInfo, location_name: "UserInfo"))
     UpdateContactRequest.add_member(:customer_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "CustomerEndpoint"))
     UpdateContactRequest.add_member(:system_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "SystemEndpoint"))
+    UpdateContactRequest.add_member(:additional_recipients, Shapes::ShapeRef.new(shape: NullableAdditionalRecipients, location_name: "AdditionalRecipients"))
     UpdateContactRequest.struct_class = Types::UpdateContactRequest
 
     UpdateContactResponse.struct_class = Types::UpdateContactResponse
@@ -9726,6 +9823,22 @@ module Aws::Connect
 
     UpdateNotificationContentResponse.struct_class = Types::UpdateNotificationContentResponse
 
+    UpdateOutboundEmailContactMessageRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location: "uri", location_name: "InstanceId"))
+    UpdateOutboundEmailContactMessageRequest.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location: "uri", location_name: "ContactId"))
+    UpdateOutboundEmailContactMessageRequest.add_member(:email_message, Shapes::ShapeRef.new(shape: UpdateOutboundEmailContent, required: true, location_name: "EmailMessage"))
+    UpdateOutboundEmailContactMessageRequest.struct_class = Types::UpdateOutboundEmailContactMessageRequest
+
+    UpdateOutboundEmailContactMessageResponse.add_member(:contact_id, Shapes::ShapeRef.new(shape: ContactId, required: true, location_name: "ContactId"))
+    UpdateOutboundEmailContactMessageResponse.struct_class = Types::UpdateOutboundEmailContactMessageResponse
+
+    UpdateOutboundEmailContent.add_member(:message_source_type, Shapes::ShapeRef.new(shape: UpdateOutboundEmailMessageSourceType, required: true, location_name: "MessageSourceType"))
+    UpdateOutboundEmailContent.add_member(:raw_message, Shapes::ShapeRef.new(shape: UpdateOutboundRawMessage, required: true, location_name: "RawMessage"))
+    UpdateOutboundEmailContent.struct_class = Types::UpdateOutboundEmailContent
+
+    UpdateOutboundRawMessage.add_member(:body, Shapes::ShapeRef.new(shape: Body, required: true, location_name: "Body"))
+    UpdateOutboundRawMessage.add_member(:content_type, Shapes::ShapeRef.new(shape: EmailMessageContentType, required: true, location_name: "ContentType"))
+    UpdateOutboundRawMessage.struct_class = Types::UpdateOutboundRawMessage
+
     UpdateParticipantAuthenticationRequest.add_member(:state, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location_name: "State"))
     UpdateParticipantAuthenticationRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
     UpdateParticipantAuthenticationRequest.add_member(:code, Shapes::ShapeRef.new(shape: AuthorizationCode, location_name: "Code"))
@@ -9878,6 +9991,7 @@ module Aws::Connect
     UpdateTaskTemplateRequest.add_member(:description, Shapes::ShapeRef.new(shape: TaskTemplateDescription, location_name: "Description"))
     UpdateTaskTemplateRequest.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
     UpdateTaskTemplateRequest.add_member(:self_assign_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "SelfAssignFlowId"))
+    UpdateTaskTemplateRequest.add_member(:contact_hooks, Shapes::ShapeRef.new(shape: TaskTemplateContactHooks, location_name: "ContactHooks"))
     UpdateTaskTemplateRequest.add_member(:constraints, Shapes::ShapeRef.new(shape: TaskTemplateConstraints, location_name: "Constraints"))
     UpdateTaskTemplateRequest.add_member(:defaults, Shapes::ShapeRef.new(shape: TaskTemplateDefaults, location_name: "Defaults"))
     UpdateTaskTemplateRequest.add_member(:status, Shapes::ShapeRef.new(shape: TaskTemplateStatus, location_name: "Status"))
@@ -9891,6 +10005,7 @@ module Aws::Connect
     UpdateTaskTemplateResponse.add_member(:description, Shapes::ShapeRef.new(shape: TaskTemplateDescription, location_name: "Description"))
     UpdateTaskTemplateResponse.add_member(:contact_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "ContactFlowId"))
     UpdateTaskTemplateResponse.add_member(:self_assign_flow_id, Shapes::ShapeRef.new(shape: ContactFlowId, location_name: "SelfAssignFlowId"))
+    UpdateTaskTemplateResponse.add_member(:contact_hooks, Shapes::ShapeRef.new(shape: TaskTemplateContactHooks, location_name: "ContactHooks"))
     UpdateTaskTemplateResponse.add_member(:constraints, Shapes::ShapeRef.new(shape: TaskTemplateConstraints, location_name: "Constraints"))
     UpdateTaskTemplateResponse.add_member(:defaults, Shapes::ShapeRef.new(shape: TaskTemplateDefaults, location_name: "Defaults"))
     UpdateTaskTemplateResponse.add_member(:fields, Shapes::ShapeRef.new(shape: TaskTemplateFields, location_name: "Fields"))
@@ -14038,6 +14153,25 @@ module Aws::Connect
         )
       end)
 
+      api.add_operation(:list_replication_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReplicationFindings"
+        o.http_method = "GET"
+        o.http_request_uri = "/replication-findings/{InstanceId}"
+        o.input = Shapes::ShapeRef.new(shape: ListReplicationFindingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReplicationFindingsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_routing_profile_manual_assignment_queues, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListRoutingProfileManualAssignmentQueues"
         o.http_method = "GET"
@@ -16020,6 +16154,20 @@ module Aws::Connect
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+      end)
+
+      api.add_operation(:update_outbound_email_contact_message, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateOutboundEmailContactMessage"
+        o.http_method = "PUT"
+        o.http_request_uri = "/instances/{InstanceId}/contacts/{ContactId}/outbound-email-message"
+        o.input = Shapes::ShapeRef.new(shape: UpdateOutboundEmailContactMessageRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateOutboundEmailContactMessageResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
       end)
 
       api.add_operation(:update_participant_authentication, Seahorse::Model::Operation.new.tap do |o|

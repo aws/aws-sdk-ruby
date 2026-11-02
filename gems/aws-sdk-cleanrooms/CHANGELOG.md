@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.86.0 (2026-10-29)
+------------------
+
+* Feature - Adds support for the PySpark 2.0 analysis template format and for choosing the file format (CSV or Parquet) of protected job results written to Amazon S3, including in a membership's default job result configuration.
+
+1.85.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.84.0 (2026-10-21)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.83.0 (2026-10-20)
+------------------
+
+* Feature - This release allows customers and their partners to easily collaborate with data stored in Databricks, without having to move or share their underlying data among collaborators.
+
+1.82.0 (2026-10-19)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.81.0 (2026-09-11)
 ------------------
 

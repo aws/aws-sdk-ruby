@@ -318,6 +318,10 @@ module Aws::DevOpsAgent
     MCPToolDetailsList = Shapes::ListShape.new(name: 'MCPToolDetailsList')
     MCPToolsList = Shapes::ListShape.new(name: 'MCPToolsList')
     MCPToolsListMemberString = Shapes::StringShape.new(name: 'MCPToolsListMemberString')
+    MSTeamsChannel = Shapes::StructureShape.new(name: 'MSTeamsChannel')
+    MSTeamsChannelId = Shapes::StringShape.new(name: 'MSTeamsChannelId')
+    MSTeamsConfiguration = Shapes::StructureShape.new(name: 'MSTeamsConfiguration')
+    MSTeamsTransmissionTarget = Shapes::StructureShape.new(name: 'MSTeamsTransmissionTarget')
     MaxIpv4AddressesPerEni = Shapes::IntegerShape.new(name: 'MaxIpv4AddressesPerEni')
     Message = Shapes::UnionShape.new(name: 'Message')
     MessageContent = Shapes::StringShape.new(name: 'MessageContent')
@@ -1489,6 +1493,19 @@ module Aws::DevOpsAgent
 
     MCPToolsList.member = Shapes::ShapeRef.new(shape: MCPToolsListMemberString)
 
+    MSTeamsChannel.add_member(:channel_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "channelName"))
+    MSTeamsChannel.add_member(:channel_id, Shapes::ShapeRef.new(shape: MSTeamsChannelId, required: true, location_name: "channelId"))
+    MSTeamsChannel.struct_class = Types::MSTeamsChannel
+
+    MSTeamsConfiguration.add_member(:team_id, Shapes::ShapeRef.new(shape: Guid, required: true, location_name: "teamId"))
+    MSTeamsConfiguration.add_member(:team_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "teamName"))
+    MSTeamsConfiguration.add_member(:transmission_target, Shapes::ShapeRef.new(shape: MSTeamsTransmissionTarget, required: true, location_name: "transmissionTarget"))
+    MSTeamsConfiguration.struct_class = Types::MSTeamsConfiguration
+
+    MSTeamsTransmissionTarget.add_member(:ops_oncall_target, Shapes::ShapeRef.new(shape: MSTeamsChannel, location_name: "opsOncallTarget"))
+    MSTeamsTransmissionTarget.add_member(:ops_sre_target, Shapes::ShapeRef.new(shape: MSTeamsChannel, location_name: "opsSRETarget"))
+    MSTeamsTransmissionTarget.struct_class = Types::MSTeamsTransmissionTarget
+
     Message.add_member(:user_message, Shapes::ShapeRef.new(shape: UserMessage, location_name: "userMessage"))
     Message.add_member(:assistant_message, Shapes::ShapeRef.new(shape: AssistantMessage, location_name: "assistantMessage"))
     Message.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
@@ -1929,6 +1946,7 @@ module Aws::DevOpsAgent
     ServiceConfiguration.add_member(:mcpserversigv4, Shapes::ShapeRef.new(shape: MCPServerSigV4Configuration, location_name: "mcpserversigv4"))
     ServiceConfiguration.add_member(:remoteagent, Shapes::ShapeRef.new(shape: RemoteAgentConfiguration, location_name: "remoteagent"))
     ServiceConfiguration.add_member(:remoteagentsigv4, Shapes::ShapeRef.new(shape: RemoteAgentSigV4Configuration, location_name: "remoteagentsigv4"))
+    ServiceConfiguration.add_member(:msteams, Shapes::ShapeRef.new(shape: MSTeamsConfiguration, location_name: "msteams"))
     ServiceConfiguration.add_member(:release_management, Shapes::ShapeRef.new(shape: ReleaseManagementConfiguration, location_name: "releaseManagement"))
     ServiceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     ServiceConfiguration.add_member_subclass(:source_aws, Types::ServiceConfiguration::SourceAws)
@@ -1950,6 +1968,7 @@ module Aws::DevOpsAgent
     ServiceConfiguration.add_member_subclass(:mcpserversigv4, Types::ServiceConfiguration::Mcpserversigv4)
     ServiceConfiguration.add_member_subclass(:remoteagent, Types::ServiceConfiguration::Remoteagent)
     ServiceConfiguration.add_member_subclass(:remoteagentsigv4, Types::ServiceConfiguration::Remoteagentsigv4)
+    ServiceConfiguration.add_member_subclass(:msteams, Types::ServiceConfiguration::Msteams)
     ServiceConfiguration.add_member_subclass(:release_management, Types::ServiceConfiguration::ReleaseManagement)
     ServiceConfiguration.add_member_subclass(:unknown, Types::ServiceConfiguration::Unknown)
     ServiceConfiguration.struct_class = Types::ServiceConfiguration

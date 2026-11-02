@@ -1023,6 +1023,19 @@ module Aws::SocialMessaging
     #   Account is onboarded for Meta's Marketing Messages API.
     #   @return [String]
     #
+    # @!attribute [rw] direct_send_enforcement_status
+    #   The Direct Send enforcement status for the WhatsApp Business
+    #   Account. Enforcement applies when an account repeatedly sends
+    #   messages in a category that does not match the content. This field
+    #   is not present when no enforcement is active.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_send_enforcement_status_expires_at
+    #   The time when the current Direct Send enforcement is expected to
+    #   lift. This field is not present for permanent enforcement or when no
+    #   enforcement is active.
+    #   @return [Time]
+    #
     # @!attribute [rw] dataset_id
     #   The Meta Conversions API dataset ID associated with this WhatsApp
     #   Business Account. This value is a numeric string of 10 to 20 digits.
@@ -1046,6 +1059,8 @@ module Aws::SocialMessaging
       :waba_name,
       :event_destinations,
       :marketing_messages_onboarding_status,
+      :direct_send_enforcement_status,
+      :direct_send_enforcement_status_expires_at,
       :dataset_id,
       :phone_numbers)
       SENSITIVE = []
@@ -1119,6 +1134,19 @@ module Aws::SocialMessaging
     #   Account is onboarded for Meta's Marketing Messages API.
     #   @return [String]
     #
+    # @!attribute [rw] direct_send_enforcement_status
+    #   The Direct Send enforcement status for the WhatsApp Business
+    #   Account. Enforcement applies when an account repeatedly sends
+    #   messages in a category that does not match the content. This field
+    #   is not present when no enforcement is active.
+    #   @return [String]
+    #
+    # @!attribute [rw] direct_send_enforcement_status_expires_at
+    #   The time when the current Direct Send enforcement is expected to
+    #   lift. This field is not present for permanent enforcement or when no
+    #   enforcement is active.
+    #   @return [Time]
+    #
     # @!attribute [rw] dataset_id
     #   The Meta Conversions API dataset ID associated with this WhatsApp
     #   Business Account. This value is a numeric string of 10 to 20 digits.
@@ -1137,6 +1165,8 @@ module Aws::SocialMessaging
       :waba_name,
       :event_destinations,
       :marketing_messages_onboarding_status,
+      :direct_send_enforcement_status,
+      :direct_send_enforcement_status_expires_at,
       :dataset_id)
       SENSITIVE = []
       include Aws::Structure
@@ -2075,6 +2105,19 @@ module Aws::SocialMessaging
     #   The category of the template (for example, UTILITY or MARKETING).
     #   @return [String]
     #
+    # @!attribute [rw] template_source
+    #   The source of the template. A value of AUTO\_GENERATED indicates
+    #   that the template was created automatically from a message that you
+    #   sent. This field is not present for templates that you created
+    #   manually.
+    #   @return [String]
+    #
+    # @!attribute [rw] correct_category
+    #   The category that the template content actually belongs to, when it
+    #   differs from the template's current category. This field is present
+    #   only when the template has been flagged as miscategorized.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/socialmessaging-2024-01-01/TemplateSummary AWS API Documentation
     #
     class TemplateSummary < Struct.new(
@@ -2083,7 +2126,9 @@ module Aws::SocialMessaging
       :template_status,
       :template_quality_score,
       :template_language,
-      :template_category)
+      :template_category,
+      :template_source,
+      :correct_category)
       SENSITIVE = []
       include Aws::Structure
     end

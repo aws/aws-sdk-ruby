@@ -611,6 +611,43 @@ module Aws::BedrockAgent
       SENSITIVE: [:variants]
     end
 
+    class CreateRetrievalInstructionRequest
+      attr_accessor client_token: ::String
+      attr_accessor name: ::String
+      attr_accessor instruction: Types::RetrievalInstructionContent
+      attr_accessor description: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor tags: ::Hash[::String, ::String]
+      SENSITIVE: [:name, :instruction, :description]
+    end
+
+    class CreateRetrievalInstructionResponse
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor retrieval_instruction_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor last_transition_status: ("CREATING" | "UPDATING" | "CREATE_SUCCESSFUL" | "CREATE_FAILED" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:name]
+    end
+
+    class CreateRetrievalInstructionVersionRequest
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor description: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:description]
+    end
+
+    class CreateRetrievalInstructionVersionResponse
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor retrieval_instruction_arn: ::String
+      attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: [:description]
+    end
+
     class CreateVpcConfigurationRequest
       attr_accessor knowledge_base_id: ::String
       attr_accessor client_token: ::String
@@ -872,6 +909,19 @@ module Aws::BedrockAgent
     class DeleteResourcePolicyResponse
       attr_accessor resource_arn: ::String
       attr_accessor revision_id: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRetrievalInstructionRequest
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor retrieval_instruction_version: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteRetrievalInstructionResponse
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor retrieval_instruction_arn: ::String
+      attr_accessor version: ::String
       SENSITIVE: []
     end
 
@@ -1487,6 +1537,29 @@ module Aws::BedrockAgent
       SENSITIVE: []
     end
 
+    class GetRetrievalInstructionRequest
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor retrieval_instruction_version: ::String
+      SENSITIVE: []
+    end
+
+    class GetRetrievalInstructionResponse
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor retrieval_instruction_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor last_transition_status: ("CREATING" | "UPDATING" | "CREATE_SUCCESSFUL" | "CREATE_FAILED" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED")
+      attr_accessor instruction: Types::RetrievalInstructionContent
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor description: ::String
+      attr_accessor customer_encryption_key_arn: ::String
+      attr_accessor last_transition_status_reasons: ::Array[Types::RetrievalInstructionFailureReason]
+      attr_accessor version: ::String
+      attr_accessor latest_version: ::String
+      SENSITIVE: [:name, :instruction, :description]
+    end
+
     class GetVpcConfigurationRequest
       attr_accessor knowledge_base_id: ::String
       attr_accessor vpc_configuration_id: ::String
@@ -1910,6 +1983,32 @@ module Aws::BedrockAgent
 
     class ListPromptsResponse
       attr_accessor prompt_summaries: ::Array[Types::PromptSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRetrievalInstructionVersionsRequest
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRetrievalInstructionVersionsResponse
+      attr_accessor retrieval_instruction_version_summaries: ::Array[Types::RetrievalInstructionVersionSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRetrievalInstructionsRequest
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRetrievalInstructionsResponse
+      attr_accessor retrieval_instruction_summaries: ::Array[Types::RetrievalInstructionSummary]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -2561,6 +2660,39 @@ module Aws::BedrockAgent
       end
     end
 
+    class RetrievalInstructionContent
+      attr_accessor retrieval_guidance: ::String
+      attr_accessor persona: ::String
+      attr_accessor answer_format: ::String
+      attr_accessor answer_policy: ::String
+      SENSITIVE: [:retrieval_guidance, :persona, :answer_format, :answer_policy]
+    end
+
+    class RetrievalInstructionFailureReason
+      attr_accessor field_name: ("RETRIEVAL_GUIDANCE" | "PERSONA" | "ANSWER_FORMAT" | "ANSWER_POLICY")
+      attr_accessor code: ("CONTENT_REJECTED" | "CLIENT_ERROR" | "INTERNAL_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class RetrievalInstructionSummary
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor retrieval_instruction_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor last_transition_status: ("CREATING" | "UPDATING" | "CREATE_SUCCESSFUL" | "CREATE_FAILED" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor description: ::String
+      SENSITIVE: [:name, :description]
+    end
+
+    class RetrievalInstructionVersionSummary
+      attr_accessor version: ::String
+      attr_accessor created_at: ::Time
+      SENSITIVE: []
+    end
+
     class S3Content
       attr_accessor s3_location: Types::S3Location
       SENSITIVE: []
@@ -3122,6 +3254,24 @@ module Aws::BedrockAgent
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: [:variants]
+    end
+
+    class UpdateRetrievalInstructionRequest
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor instruction: Types::RetrievalInstructionContent
+      attr_accessor description: ::String
+      SENSITIVE: [:instruction, :description]
+    end
+
+    class UpdateRetrievalInstructionResponse
+      attr_accessor retrieval_instruction_id: ::String
+      attr_accessor retrieval_instruction_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor status: ("ACTIVE" | "INACTIVE")
+      attr_accessor last_transition_status: ("CREATING" | "UPDATING" | "CREATE_SUCCESSFUL" | "CREATE_FAILED" | "UPDATE_SUCCESSFUL" | "UPDATE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: [:name]
     end
 
     class UrlConfiguration

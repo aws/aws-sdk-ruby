@@ -17,10 +17,12 @@
     "ListCustomPlugins": "<p>Returns a list of all of the custom plugins in this account and Region.</p>",
     "ListTagsForResource": "<p>Lists all the tags attached to the specified resource.</p>",
     "ListWorkerConfigurations": "<p>Returns a list of all of the worker configurations in this account and Region.</p>",
+    "PauseConnector": "<p>Pauses the specified connector. The operation runs asynchronously. To track the pause, pass the connector operation ARN from the response to <code>DescribeConnectorOperation</code>.</p>",
     "RestartConnector": "<p>Restarts the specified connector. By default, this operation restarts the connector and all of its tasks. This operation is asynchronous and returns a connector operation ARN that you can pass to <code>DescribeConnectorOperation</code> to track the state of the restart.</p>",
+    "ResumeConnector": "<p>Resumes the specified paused connector. The operation runs asynchronously. To track the resume, pass the connector operation ARN from the response to <code>DescribeConnectorOperation</code>.</p>",
     "TagResource": "<p>Attaches tags to the specified resource.</p>",
     "UntagResource": "<p>Removes tags from the specified resource.</p>",
-    "UpdateConnector": "<p>Updates the specified connector. For request body, specify only one parameter: either <code>capacity</code> or <code>connectorConfiguration</code>.</p>"
+    "UpdateConnector": "<p>Updates the specified connector. In the request body, you can update either the connector's worker setting or its connector configuration, but not both in the same request. To update the worker setting, specify one or more of <code>capacity</code>, <code>plugins</code>, <code>workerConfiguration</code>, or <code>useDefaultWorkerConfiguration</code>. To update the connector configuration, specify only <code>connectorConfiguration</code>.</p>"
   },
   "shapes": {
     "ApacheKafkaCluster": {
@@ -68,7 +70,7 @@
       "refs": {
         "ConnectorSummary$capacity": "<p>The connector's compute capacity settings.</p>",
         "DescribeConnectorResponse$capacity": "<p>Information about the capacity of the connector, whether it is auto scaled or provisioned.</p>",
-        "WorkerSetting$capacity": null
+        "WorkerSetting$capacity": "<p>Specifies the compute capacity settings of the connector.</p>"
       }
     },
     "CapacityUpdate": {
@@ -243,6 +245,12 @@
       "base": "<p>A summary of the custom plugin.</p>",
       "refs": {
         "__listOfCustomPluginSummary$member": null
+      }
+    },
+    "CustomPluginUpdate": {
+      "base": "<p>Details about a custom plugin to use when you update a connector via <code>UpdateConnector</code>.</p>",
+      "refs": {
+        "PluginUpdate$customPlugin": "<p>The custom plugin to use for the connector.</p>"
       }
     },
     "DeleteConnectorRequest": {
@@ -448,6 +456,14 @@
       "base": "<p>HTTP Status Code 404: Resource not found due to incorrect input. Correct your request and then retry it.</p>",
       "refs": {}
     },
+    "PauseConnectorRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "PauseConnectorResponse": {
+      "base": null,
+      "refs": {}
+    },
     "Plugin": {
       "base": "<p>A plugin is an Amazon Web Services resource that contains the code that defines your connector logic. </p>",
       "refs": {
@@ -458,6 +474,12 @@
       "base": "<p>The description of the plugin.</p>",
       "refs": {
         "__listOfPluginDescription$member": null
+      }
+    },
+    "PluginUpdate": {
+      "base": "<p>A custom plugin to use when you update a connector via <code>UpdateConnector</code>.</p>",
+      "refs": {
+        "__listOfPluginUpdate$member": null
       }
     },
     "ProvisionedCapacity": {
@@ -483,6 +505,14 @@
       "refs": {}
     },
     "RestartConnectorResponse": {
+      "base": null,
+      "refs": {}
+    },
+    "ResumeConnectorRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ResumeConnectorResponse": {
       "base": null,
       "refs": {}
     },
@@ -641,7 +671,8 @@
       "base": "<p>The description of the worker configuration.</p>",
       "refs": {
         "ConnectorSummary$workerConfiguration": "<p>The worker configurations that are in use with the connector.</p>",
-        "DescribeConnectorResponse$workerConfiguration": "<p>Specifies which worker configuration was used for the connector.</p>"
+        "DescribeConnectorResponse$workerConfiguration": "<p>Specifies which worker configuration was used for the connector.</p>",
+        "WorkerSetting$workerConfiguration": "<p>Specifies which worker configuration the connector uses.</p>"
       }
     },
     "WorkerConfigurationRevisionDescription": {
@@ -672,6 +703,12 @@
         "__listOfWorkerConfigurationSummary$member": null
       }
     },
+    "WorkerConfigurationUpdate": {
+      "base": "<p>The worker configuration to use when you update a connector via <code>UpdateConnector</code>.</p>",
+      "refs": {
+        "UpdateConnectorRequest$workerConfiguration": "<p>The worker configuration to use with the connector. Specify the Amazon Resource Name (ARN) and the revision of the worker configuration. You can't specify both <code>workerConfiguration</code> and <code>useDefaultWorkerConfiguration</code> in the same request. If you specify neither parameter, the connector keeps its current worker configuration.</p>"
+      }
+    },
     "WorkerLogDelivery": {
       "base": "<p>Workers can send worker logs to different destination types. This configuration specifies the details of these destinations.</p>",
       "refs": {
@@ -700,7 +737,10 @@
         "FirehoseLogDeliveryDescription$enabled": "<p>Specifies whether connector logs get delivered to Amazon Kinesis Data Firehose.</p>",
         "RestartConnectorRequest$onlyFailedTasks": "<p>Specifies whether to restart only the connector's failed tasks. If <code>true</code>, the operation restarts only the tasks that are currently in a failed state, and healthy tasks continue running. If <code>false</code> or not specified, the operation restarts the connector and all of its tasks.</p>",
         "S3LogDelivery$enabled": "<p>Specifies whether connector logs get sent to the specified Amazon S3 destination.</p>",
-        "S3LogDeliveryDescription$enabled": "<p>Specifies whether connector logs get sent to the specified Amazon S3 destination.</p>"
+        "S3LogDeliveryDescription$enabled": "<p>Specifies whether connector logs get sent to the specified Amazon S3 destination.</p>",
+        "UpdateConnectorRequest$skipHealthValidation": "<p>Specifies whether the update bypasses connector-level and task-level health checks. If <code>true</code>, the update skips the health checks. The update stays in effect even if the connector or its tasks are unhealthy, and Amazon MSK Connect doesn't roll it back. If <code>false</code> or not specified, the health checks run. If they fail, MSK Connect automatically rolls the connector back to its previous configuration, and the update doesn't take effect. To update a connector that is in the <code>PAUSED</code> state, you must set this parameter to <code>true</code>.</p>",
+        "UpdateConnectorRequest$useDefaultWorkerConfiguration": "<p>Specifies whether to switch the connector to the default worker configuration that Amazon MSK Connect provides. If <code>true</code>, the connector stops using its custom worker configuration and uses the default worker configuration instead. If <code>false</code> or not specified, the connector keeps its current worker configuration. You can't specify both <code>useDefaultWorkerConfiguration</code> and <code>workerConfiguration</code> in the same request.</p>",
+        "WorkerSetting$useDefaultWorkerConfiguration": "<p>Specifies whether the connector uses the default worker configuration instead of a custom worker configuration.</p>"
       }
     },
     "__integer": {
@@ -776,7 +816,14 @@
       "base": null,
       "refs": {
         "ConnectorSummary$plugins": "<p>Specifies which plugins were used for this connector.</p>",
-        "DescribeConnectorResponse$plugins": "<p>Specifies which plugins were used for this connector.</p>"
+        "DescribeConnectorResponse$plugins": "<p>Specifies which plugins were used for this connector.</p>",
+        "WorkerSetting$plugins": "<p>Specifies which plugins the connector uses.</p>"
+      }
+    },
+    "__listOfPluginUpdate": {
+      "base": null,
+      "refs": {
+        "UpdateConnectorRequest$plugins": "<p><important> <p>Amazon MSK Connect does not currently support specifying multiple plugins as a list. To use more than one plugin for your connector, you can create a single custom plugin using a ZIP file that bundles multiple plugins together.</p> </important> <p>Specifies which plugin to use for the connector. You must specify a single-element list containing one <code>customPlugin</code> object. If you don't specify this parameter, the connector keeps its current plugin.</p></p>"
       }
     },
     "__listOfWorkerConfigurationSummary": {
@@ -810,7 +857,9 @@
       "base": null,
       "refs": {
         "CustomPlugin$revision": "<p>The revision of the custom plugin.</p>",
-        "WorkerConfiguration$revision": "<p>The revision of the worker configuration.</p>"
+        "CustomPluginUpdate$revision": "<p>The revision of the custom plugin.</p>",
+        "WorkerConfiguration$revision": "<p>The revision of the worker configuration.</p>",
+        "WorkerConfigurationUpdate$revision": "<p>The revision of the worker configuration.</p>"
       }
     },
     "__sensitiveString": {
@@ -855,6 +904,7 @@
         "CustomPluginSummary$customPluginArn": "<p>The Amazon Resource Name (ARN) of the custom plugin.</p>",
         "CustomPluginSummary$description": "<p>A description of the custom plugin.</p>",
         "CustomPluginSummary$name": "<p>The name of the custom plugin.</p>",
+        "CustomPluginUpdate$customPluginArn": "<p>The Amazon Resource Name (ARN) of the custom plugin.</p>",
         "DeleteConnectorRequest$connectorArn": "<p>The Amazon Resource Name (ARN) of the connector that you want to delete.</p>",
         "DeleteConnectorRequest$currentVersion": "<p>The current version of the connector that you want to delete.</p>",
         "DeleteConnectorResponse$connectorArn": "<p>The Amazon Resource Name (ARN) of the connector that you requested to delete.</p>",
@@ -898,9 +948,15 @@
         "ListWorkerConfigurationsRequest$namePrefix": "<p>Lists worker configuration names that start with the specified text string.</p>",
         "ListWorkerConfigurationsResponse$nextToken": "<p>If the response of a ListWorkerConfigurations operation is truncated, it will include a NextToken. Send this NextToken in a subsequent request to continue listing from where the previous operation left off.</p>",
         "NotFoundException$message": null,
+        "PauseConnectorRequest$connectorArn": "<p>The Amazon Resource Name (ARN) of the connector that you want to pause.</p>",
+        "PauseConnectorResponse$connectorArn": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
+        "PauseConnectorResponse$connectorOperationArn": "<p>The Amazon Resource Name (ARN) of the connector operation created to perform the pause.</p>",
         "RestartConnectorRequest$connectorArn": "<p>The Amazon Resource Name (ARN) of the connector that you want to restart.</p>",
         "RestartConnectorResponse$connectorArn": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
         "RestartConnectorResponse$connectorOperationArn": "<p>The Amazon Resource Name (ARN) of the connector operation created to perform the restart.</p>",
+        "ResumeConnectorRequest$connectorArn": "<p>The Amazon Resource Name (ARN) of the connector that you want to resume.</p>",
+        "ResumeConnectorResponse$connectorArn": "<p>The Amazon Resource Name (ARN) of the connector.</p>",
+        "ResumeConnectorResponse$connectorOperationArn": "<p>The Amazon Resource Name (ARN) of the connector operation created to perform the resume.</p>",
         "S3Location$bucketArn": "<p>The Amazon Resource Name (ARN) of an S3 bucket.</p>",
         "S3Location$fileKey": "<p>The file key for an object in an S3 bucket.</p>",
         "S3Location$objectVersion": "<p>The version of an object in an S3 bucket.</p>",
@@ -929,6 +985,7 @@
         "WorkerConfigurationSummary$description": "<p>The description of a worker configuration.</p>",
         "WorkerConfigurationSummary$name": "<p>The name of the worker configuration.</p>",
         "WorkerConfigurationSummary$workerConfigurationArn": "<p>The Amazon Resource Name (ARN) of the worker configuration.</p>",
+        "WorkerConfigurationUpdate$workerConfigurationArn": "<p>The Amazon Resource Name (ARN) of the worker configuration.</p>",
         "__listOf__string$member": null
       }
     },

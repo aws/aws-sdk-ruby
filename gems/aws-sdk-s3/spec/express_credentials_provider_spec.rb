@@ -5,8 +5,13 @@ require_relative 'spec_helper'
 module Aws
   module S3
     describe ExpressCredentialsProvider do
-      let(:client) { double('client') }
+      let(:client) { client_with_credentials('akid', 'secret') }
       let(:express_credentials) { double('express-credentials') }
+
+      def client_with_credentials(akid, secret)
+        credentials = Aws::Credentials.new(akid, secret)
+        double('client', config: double('config', credentials: credentials))
+      end
 
       subject do
         ExpressCredentialsProvider.new(
@@ -22,7 +27,7 @@ module Aws
 
         it 'returns a new set of credentials for the bucket' do
           expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
+            .with(bucket: 'bucket', client: client, base_credentials: having_attributes(access_key_id: 'akid', secret_access_key: 'secret'), session_mode: 'ReadWrite')
             .and_return(express_credentials)
 
           expect(subject.express_credentials_for('bucket'))
@@ -31,12 +36,45 @@ module Aws
 
         it 'returns the same set of credentials for the bucket' do
           expect(ExpressCredentials).to receive(:new)
-            .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
+            .with(bucket: 'bucket', client: client, base_credentials: having_attributes(access_key_id: 'akid', secret_access_key: 'secret'), session_mode: 'ReadWrite')
             .and_return(express_credentials)
 
           credentials = subject.express_credentials_for('bucket')
           expect(subject.express_credentials_for('bucket'))
             .to be(credentials)
+        end
+
+        it 'does not share credentials when only the secret differs' do
+          other_client = client_with_credentials('akid', 'other-secret')
+          other = ExpressCredentialsProvider.new(client: other_client)
+          expect(ExpressCredentials).to receive(:new)
+            .and_return(express_credentials, double('other')).twice
+
+          expect(subject.express_credentials_for('bucket'))
+            .not_to be(other.express_credentials_for('bucket'))
+        end
+
+        it 'shares credentials across clients with the same credentials' do
+          other = ExpressCredentialsProvider.new(
+            client: client_with_credentials('akid', 'secret')
+          )
+          expect(ExpressCredentials).to receive(:new)
+            .once.and_return(express_credentials)
+
+          expect(subject.express_credentials_for('bucket'))
+            .to be(other.express_credentials_for('bucket'))
+        end
+
+        it 'does not use the raw credentials in the cache key' do
+          cache = Aws::S3.express_credentials_cache
+          allow(ExpressCredentials).to receive(:new).and_return(express_credentials)
+          allow(cache).to receive(:[]=).and_call_original
+
+          subject.express_credentials_for('bucket')
+          expect(cache).to have_received(:[]=) do |key, _value|
+            expect(key).to match(/\A\h{64}bucket\z/)
+            expect(key).not_to include('akid', 'secret')
+          end
         end
 
         context 'caching disabled' do
@@ -50,7 +88,7 @@ module Aws
 
           it 'returns a different set of credentials for the bucket' do
             expect(ExpressCredentials).to receive(:new)
-              .with(bucket: 'bucket', client: client, session_mode: 'ReadWrite')
+              .with(bucket: 'bucket', client: client, base_credentials: having_attributes(access_key_id: 'akid', secret_access_key: 'secret'), session_mode: 'ReadWrite')
               .and_return(express_credentials).twice
 
             credentials = subject.express_credentials_for('bucket')

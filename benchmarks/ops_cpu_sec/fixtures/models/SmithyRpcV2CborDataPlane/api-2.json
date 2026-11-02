@@ -1,0 +1,801 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "1999-12-31",
+    "auth": [
+      "aws.auth#sigv4"
+    ],
+    "endpointPrefix": "smithyrpcv2cbordataplane",
+    "protocol": "smithy-rpc-v2-cbor",
+    "protocols": [
+      "smithy-rpc-v2-cbor"
+    ],
+    "serviceFullName": "Smithy RPC v2 CBOR Data Plane",
+    "serviceId": "RpcCborDataPlane",
+    "signatureVersion": "v4",
+    "signingName": "example",
+    "targetPrefix": "SmithyRpcV2CborDataPlane",
+    "uid": "rpccbordataplane-1999-12-31"
+  },
+  "operations": {
+    "GetItem": {
+      "name": "GetItem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetItemInput"
+      },
+      "output": {
+        "shape": "GetItemOutput"
+      }
+    },
+    "GetMetricData": {
+      "name": "GetMetricData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMetricDataInput"
+      },
+      "output": {
+        "shape": "GetMetricDataOutput"
+      }
+    },
+    "Healthcheck": {
+      "name": "Healthcheck",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "output": {
+        "shape": "HealthcheckOutput"
+      },
+      "readonly": true
+    },
+    "PutItem": {
+      "name": "PutItem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutItemInput"
+      },
+      "output": {
+        "shape": "PutItemOutput"
+      }
+    },
+    "PutMetricData": {
+      "name": "PutMetricData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutMetricDataInput"
+      }
+    }
+  },
+  "shapes": {
+    "AttributeNameList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "AttributeValue": {
+      "type": "structure",
+      "members": {
+        "S": {
+          "shape": "String"
+        },
+        "N": {
+          "shape": "String"
+        },
+        "B": {
+          "shape": "Blob"
+        },
+        "SS": {
+          "shape": "StringSet"
+        },
+        "NS": {
+          "shape": "NumberSet"
+        },
+        "BS": {
+          "shape": "BinarySet"
+        },
+        "M": {
+          "shape": "AttributeValueMap"
+        },
+        "L": {
+          "shape": "AttributeValueList"
+        },
+        "NULL": {
+          "shape": "Boolean"
+        },
+        "BOOL": {
+          "shape": "Boolean"
+        }
+      },
+      "union": true
+    },
+    "AttributeValueList": {
+      "type": "list",
+      "member": {
+        "shape": "AttributeValue"
+      }
+    },
+    "AttributeValueMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "AttributeValue"
+      }
+    },
+    "BinarySet": {
+      "type": "list",
+      "member": {
+        "shape": "Blob"
+      }
+    },
+    "Blob": {
+      "type": "blob"
+    },
+    "Boolean": {
+      "type": "boolean",
+      "box": true
+    },
+    "ConsumedCapacity": {
+      "type": "structure",
+      "members": {
+        "TableName": {
+          "shape": "String"
+        },
+        "CapacityUnits": {
+          "shape": "Double"
+        },
+        "ReadCapacityUnits": {
+          "shape": "Double"
+        },
+        "WriteCapacityUnits": {
+          "shape": "Double"
+        }
+      }
+    },
+    "Counts": {
+      "type": "list",
+      "member": {
+        "shape": "Double"
+      }
+    },
+    "Dimension": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Value"
+      ],
+      "members": {
+        "Name": {
+          "shape": "DimensionNameString"
+        },
+        "Value": {
+          "shape": "DimensionValueString"
+        }
+      }
+    },
+    "DimensionNameString": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
+    "DimensionValueString": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "Dimensions": {
+      "type": "list",
+      "member": {
+        "shape": "Dimension"
+      },
+      "max": 30,
+      "min": 0
+    },
+    "Double": {
+      "type": "double",
+      "box": true
+    },
+    "Entity": {
+      "type": "structure",
+      "members": {
+        "KeyAttributes": {
+          "shape": "EntityKeyAttributesMap"
+        },
+        "Attributes": {
+          "shape": "EntityAttributesMap"
+        }
+      }
+    },
+    "EntityAttributesMap": {
+      "type": "map",
+      "key": {
+        "shape": "EntityAttributesMapKeyString"
+      },
+      "value": {
+        "shape": "EntityAttributesMapValueString"
+      },
+      "max": 10,
+      "min": 0
+    },
+    "EntityAttributesMapKeyString": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "EntityAttributesMapValueString": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
+    },
+    "EntityKeyAttributesMap": {
+      "type": "map",
+      "key": {
+        "shape": "EntityKeyAttributesMapKeyString"
+      },
+      "value": {
+        "shape": "EntityKeyAttributesMapValueString"
+      },
+      "max": 4,
+      "min": 2
+    },
+    "EntityKeyAttributesMapKeyString": {
+      "type": "string",
+      "max": 32,
+      "min": 1
+    },
+    "EntityKeyAttributesMapValueString": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
+    },
+    "EntityMetricDataList": {
+      "type": "list",
+      "member": {
+        "shape": "EntityMetricDatum"
+      }
+    },
+    "EntityMetricDatum": {
+      "type": "structure",
+      "members": {
+        "Entity": {
+          "shape": "Entity"
+        },
+        "MetricData": {
+          "shape": "MetricData"
+        }
+      }
+    },
+    "ExpectedAttributeMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "ExpectedAttributeValue"
+      }
+    },
+    "ExpectedAttributeValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "AttributeValue"
+        },
+        "Exists": {
+          "shape": "Boolean"
+        },
+        "ComparisonOperator": {
+          "shape": "String"
+        },
+        "AttributeValueList": {
+          "shape": "AttributeValueList"
+        }
+      }
+    },
+    "ExpressionAttributeNameMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "String"
+      }
+    },
+    "ExpressionAttributeValueMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "AttributeValue"
+      }
+    },
+    "GetItemInput": {
+      "type": "structure",
+      "required": [
+        "TableName",
+        "Key"
+      ],
+      "members": {
+        "TableName": {
+          "shape": "String"
+        },
+        "Key": {
+          "shape": "AttributeValueMap"
+        },
+        "AttributesToGet": {
+          "shape": "AttributeNameList"
+        },
+        "ConsistentRead": {
+          "shape": "Boolean"
+        },
+        "ReturnConsumedCapacity": {
+          "shape": "String"
+        },
+        "ProjectionExpression": {
+          "shape": "String"
+        },
+        "ExpressionAttributeNames": {
+          "shape": "ExpressionAttributeNameMap"
+        }
+      }
+    },
+    "GetItemOutput": {
+      "type": "structure",
+      "members": {
+        "Item": {
+          "shape": "AttributeValueMap"
+        },
+        "ConsumedCapacity": {
+          "shape": "ConsumedCapacity"
+        }
+      }
+    },
+    "GetMetricDataInput": {
+      "type": "structure",
+      "required": [
+        "MetricDataQueries",
+        "StartTime",
+        "EndTime"
+      ],
+      "members": {
+        "MetricDataQueries": {
+          "shape": "MetricDataQueries"
+        },
+        "StartTime": {
+          "shape": "Timestamp"
+        },
+        "EndTime": {
+          "shape": "Timestamp"
+        },
+        "NextToken": {
+          "shape": "String"
+        },
+        "ScanBy": {
+          "shape": "ScanBy"
+        },
+        "MaxDatapoints": {
+          "shape": "Integer"
+        },
+        "LabelOptions": {
+          "shape": "LabelOptions"
+        }
+      }
+    },
+    "GetMetricDataOutput": {
+      "type": "structure",
+      "members": {
+        "MetricDataResults": {
+          "shape": "MetricDataResults"
+        },
+        "NextToken": {
+          "shape": "String"
+        },
+        "Messages": {
+          "shape": "MetricDataResultMessages"
+        }
+      }
+    },
+    "HealthcheckOutput": {
+      "type": "structure",
+      "members": {
+        "ok": {
+          "shape": "String"
+        }
+      }
+    },
+    "Integer": {
+      "type": "integer",
+      "box": true
+    },
+    "ItemCollectionMetrics": {
+      "type": "structure",
+      "members": {
+        "ItemCollectionKey": {
+          "shape": "AttributeValueMap"
+        },
+        "SizeEstimateRangeGB": {
+          "shape": "SizeEstimateRange"
+        }
+      }
+    },
+    "LabelOptions": {
+      "type": "structure",
+      "members": {
+        "Timezone": {
+          "shape": "String"
+        }
+      }
+    },
+    "MessageData": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "String"
+        },
+        "Value": {
+          "shape": "String"
+        }
+      }
+    },
+    "Metric": {
+      "type": "structure",
+      "members": {
+        "Namespace": {
+          "shape": "String"
+        },
+        "MetricName": {
+          "shape": "String"
+        },
+        "Dimensions": {
+          "shape": "Dimensions"
+        }
+      }
+    },
+    "MetricData": {
+      "type": "list",
+      "member": {
+        "shape": "MetricDatum"
+      }
+    },
+    "MetricDataQueries": {
+      "type": "list",
+      "member": {
+        "shape": "MetricDataQuery"
+      }
+    },
+    "MetricDataQuery": {
+      "type": "structure",
+      "required": [
+        "Id"
+      ],
+      "members": {
+        "Id": {
+          "shape": "MetricDataQueryIdString"
+        },
+        "MetricStat": {
+          "shape": "MetricStat"
+        },
+        "Expression": {
+          "shape": "MetricDataQueryExpressionString"
+        },
+        "Label": {
+          "shape": "String"
+        },
+        "ReturnData": {
+          "shape": "Boolean"
+        },
+        "Period": {
+          "shape": "MetricDataQueryPeriodInteger"
+        },
+        "AccountId": {
+          "shape": "String"
+        }
+      }
+    },
+    "MetricDataQueryExpressionString": {
+      "type": "string",
+      "max": 2048,
+      "min": 1
+    },
+    "MetricDataQueryIdString": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
+    "MetricDataQueryPeriodInteger": {
+      "type": "integer",
+      "box": true,
+      "min": 1
+    },
+    "MetricDataResult": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "String"
+        },
+        "Label": {
+          "shape": "String"
+        },
+        "Timestamps": {
+          "shape": "Timestamps"
+        },
+        "Values": {
+          "shape": "Values"
+        },
+        "StatusCode": {
+          "shape": "StatusCode"
+        },
+        "Messages": {
+          "shape": "MetricDataResultMessages"
+        }
+      }
+    },
+    "MetricDataResultMessages": {
+      "type": "list",
+      "member": {
+        "shape": "MessageData"
+      }
+    },
+    "MetricDataResults": {
+      "type": "list",
+      "member": {
+        "shape": "MetricDataResult"
+      }
+    },
+    "MetricDatum": {
+      "type": "structure",
+      "required": [
+        "MetricName"
+      ],
+      "members": {
+        "MetricName": {
+          "shape": "String"
+        },
+        "Dimensions": {
+          "shape": "Dimensions"
+        },
+        "Timestamp": {
+          "shape": "Timestamp"
+        },
+        "Value": {
+          "shape": "Double"
+        },
+        "StatisticValues": {
+          "shape": "StatisticSet"
+        },
+        "Values": {
+          "shape": "Values"
+        },
+        "Counts": {
+          "shape": "Counts"
+        },
+        "Unit": {
+          "shape": "StandardUnit"
+        },
+        "StorageResolution": {
+          "shape": "Integer"
+        }
+      }
+    },
+    "MetricStat": {
+      "type": "structure",
+      "required": [
+        "Metric",
+        "Period",
+        "Stat"
+      ],
+      "members": {
+        "Metric": {
+          "shape": "Metric"
+        },
+        "Period": {
+          "shape": "Integer"
+        },
+        "Stat": {
+          "shape": "String"
+        },
+        "Unit": {
+          "shape": "StandardUnit"
+        }
+      }
+    },
+    "NumberSet": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "PutItemInput": {
+      "type": "structure",
+      "required": [
+        "TableName",
+        "Item"
+      ],
+      "members": {
+        "TableName": {
+          "shape": "String"
+        },
+        "Item": {
+          "shape": "AttributeValueMap"
+        },
+        "Expected": {
+          "shape": "ExpectedAttributeMap"
+        },
+        "ReturnValues": {
+          "shape": "String"
+        },
+        "ReturnConsumedCapacity": {
+          "shape": "String"
+        },
+        "ReturnItemCollectionMetrics": {
+          "shape": "String"
+        },
+        "ConditionalOperator": {
+          "shape": "String"
+        },
+        "ConditionExpression": {
+          "shape": "String"
+        },
+        "ExpressionAttributeNames": {
+          "shape": "ExpressionAttributeNameMap"
+        },
+        "ExpressionAttributeValues": {
+          "shape": "ExpressionAttributeValueMap"
+        },
+        "ReturnValuesOnConditionCheckFailure": {
+          "shape": "String"
+        }
+      }
+    },
+    "PutItemOutput": {
+      "type": "structure",
+      "members": {
+        "Attributes": {
+          "shape": "AttributeValueMap"
+        },
+        "ConsumedCapacity": {
+          "shape": "ConsumedCapacity"
+        },
+        "ItemCollectionMetrics": {
+          "shape": "ItemCollectionMetrics"
+        }
+      }
+    },
+    "PutMetricDataInput": {
+      "type": "structure",
+      "required": [
+        "Namespace"
+      ],
+      "members": {
+        "Namespace": {
+          "shape": "String"
+        },
+        "MetricData": {
+          "shape": "MetricData"
+        },
+        "EntityMetricData": {
+          "shape": "EntityMetricDataList"
+        },
+        "StrictEntityValidation": {
+          "shape": "Boolean"
+        }
+      }
+    },
+    "ScanBy": {
+      "type": "string",
+      "enum": [
+        "TimestampDescending",
+        "TimestampAscending"
+      ]
+    },
+    "SizeEstimateRange": {
+      "type": "list",
+      "member": {
+        "shape": "Double"
+      }
+    },
+    "StandardUnit": {
+      "type": "string",
+      "enum": [
+        "Seconds",
+        "Microseconds",
+        "Milliseconds",
+        "Bytes",
+        "Kilobytes",
+        "Megabytes",
+        "Gigabytes",
+        "Terabytes",
+        "Bits",
+        "Kilobits",
+        "Megabits",
+        "Gigabits",
+        "Terabits",
+        "Percent",
+        "Count",
+        "Bytes/Second",
+        "Kilobytes/Second",
+        "Megabytes/Second",
+        "Gigabytes/Second",
+        "Terabytes/Second",
+        "Bits/Second",
+        "Kilobits/Second",
+        "Megabits/Second",
+        "Gigabits/Second",
+        "Terabits/Second",
+        "Count/Second",
+        "None"
+      ]
+    },
+    "StatisticSet": {
+      "type": "structure",
+      "required": [
+        "SampleCount",
+        "Sum",
+        "Minimum",
+        "Maximum"
+      ],
+      "members": {
+        "SampleCount": {
+          "shape": "Double"
+        },
+        "Sum": {
+          "shape": "Double"
+        },
+        "Minimum": {
+          "shape": "Double"
+        },
+        "Maximum": {
+          "shape": "Double"
+        }
+      }
+    },
+    "StatusCode": {
+      "type": "string",
+      "enum": [
+        "Complete",
+        "InternalError",
+        "PartialData",
+        "Forbidden"
+      ]
+    },
+    "String": {
+      "type": "string"
+    },
+    "StringSet": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "Timestamp": {
+      "type": "timestamp"
+    },
+    "Timestamps": {
+      "type": "list",
+      "member": {
+        "shape": "Timestamp"
+      }
+    },
+    "Values": {
+      "type": "list",
+      "member": {
+        "shape": "Double"
+      }
+    }
+  }
+}

@@ -45,6 +45,7 @@ module Aws
   autoload :Pager, 'aws-sdk-core/pager'
   autoload :ParamConverter, 'aws-sdk-core/param_converter'
   autoload :ParamValidator, 'aws-sdk-core/param_validator'
+  autoload :Response, 'aws-sdk-core/response'
   autoload :SharedConfig, 'aws-sdk-core/shared_config'
   autoload :Structure, 'aws-sdk-core/structure'
   autoload :EmptyStructure, 'aws-sdk-core/structure'

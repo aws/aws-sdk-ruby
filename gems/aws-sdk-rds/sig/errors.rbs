@@ -11,297 +11,305 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AuthorizationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class AuthorizationAlreadyExistsFault < ServiceError
       end
-      class AuthorizationNotFoundFault < ::Aws::Errors::ServiceError
+      class AuthorizationNotFoundFault < ServiceError
       end
-      class AuthorizationQuotaExceededFault < ::Aws::Errors::ServiceError
+      class AuthorizationQuotaExceededFault < ServiceError
       end
-      class BackupPolicyNotFoundFault < ::Aws::Errors::ServiceError
+      class BackupPolicyNotFoundFault < ServiceError
       end
-      class BlueGreenDeploymentAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class BlueGreenDeploymentAlreadyExistsFault < ServiceError
       end
-      class BlueGreenDeploymentNotFoundFault < ::Aws::Errors::ServiceError
+      class BlueGreenDeploymentNotFoundFault < ServiceError
       end
-      class CertificateNotFoundFault < ::Aws::Errors::ServiceError
+      class CertificateNotFoundFault < ServiceError
       end
-      class CreateCustomDBEngineVersionFault < ::Aws::Errors::ServiceError
+      class CreateCustomDBEngineVersionFault < ServiceError
       end
-      class CustomAvailabilityZoneNotFoundFault < ::Aws::Errors::ServiceError
+      class CustomAvailabilityZoneNotFoundFault < ServiceError
       end
-      class CustomDBEngineVersionAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class CustomDBEngineVersionAlreadyExistsFault < ServiceError
       end
-      class CustomDBEngineVersionNotFoundFault < ::Aws::Errors::ServiceError
+      class CustomDBEngineVersionNotFoundFault < ServiceError
       end
-      class CustomDBEngineVersionQuotaExceededFault < ::Aws::Errors::ServiceError
+      class CustomDBEngineVersionQuotaExceededFault < ServiceError
       end
-      class DBClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBCapacityReservationAlreadyExistsFault < ServiceError
       end
-      class DBClusterAutomatedBackupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBCapacityReservationNotFoundFault < ServiceError
       end
-      class DBClusterAutomatedBackupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBCapacityReservationUnsupportedFault < ServiceError
       end
-      class DBClusterBacktrackNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterAlreadyExistsFault < ServiceError
       end
-      class DBClusterEndpointAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBClusterAutomatedBackupNotFoundFault < ServiceError
       end
-      class DBClusterEndpointNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterAutomatedBackupQuotaExceededFault < ServiceError
       end
-      class DBClusterEndpointQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBClusterBacktrackNotFoundFault < ServiceError
       end
-      class DBClusterNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterEndpointAlreadyExistsFault < ServiceError
       end
-      class DBClusterParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterEndpointNotFoundFault < ServiceError
       end
-      class DBClusterQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBClusterEndpointQuotaExceededFault < ServiceError
       end
-      class DBClusterRoleAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBClusterNotFoundFault < ServiceError
       end
-      class DBClusterRoleNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterParameterGroupNotFoundFault < ServiceError
       end
-      class DBClusterRoleQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBClusterQuotaExceededFault < ServiceError
       end
-      class DBClusterSnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBClusterRoleAlreadyExistsFault < ServiceError
       end
-      class DBClusterSnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterRoleNotFoundFault < ServiceError
       end
-      class DBInstanceAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBClusterRoleQuotaExceededFault < ServiceError
       end
-      class DBInstanceAutomatedBackupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBClusterSnapshotAlreadyExistsFault < ServiceError
       end
-      class DBInstanceAutomatedBackupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBClusterSnapshotNotFoundFault < ServiceError
       end
-      class DBInstanceNotFoundFault < ::Aws::Errors::ServiceError
+      class DBInstanceAlreadyExistsFault < ServiceError
       end
-      class DBInstanceNotReadyFault < ::Aws::Errors::ServiceError
+      class DBInstanceAutomatedBackupNotFoundFault < ServiceError
       end
-      class DBInstanceRoleAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBInstanceAutomatedBackupQuotaExceededFault < ServiceError
       end
-      class DBInstanceRoleNotFoundFault < ::Aws::Errors::ServiceError
+      class DBInstanceNotFoundFault < ServiceError
       end
-      class DBInstanceRoleQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBInstanceNotReadyFault < ServiceError
       end
-      class DBLogFileNotFoundFault < ::Aws::Errors::ServiceError
+      class DBInstanceRoleAlreadyExistsFault < ServiceError
       end
-      class DBParameterGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBInstanceRoleNotFoundFault < ServiceError
       end
-      class DBParameterGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBInstanceRoleQuotaExceededFault < ServiceError
       end
-      class DBParameterGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBLogFileNotFoundFault < ServiceError
       end
-      class DBProxyAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBParameterGroupAlreadyExistsFault < ServiceError
       end
-      class DBProxyEndpointAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBParameterGroupNotFoundFault < ServiceError
       end
-      class DBProxyEndpointNotFoundFault < ::Aws::Errors::ServiceError
+      class DBParameterGroupQuotaExceededFault < ServiceError
       end
-      class DBProxyEndpointQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBProxyAlreadyExistsFault < ServiceError
       end
-      class DBProxyNotFoundFault < ::Aws::Errors::ServiceError
+      class DBProxyEndpointAlreadyExistsFault < ServiceError
       end
-      class DBProxyQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBProxyEndpointNotFoundFault < ServiceError
       end
-      class DBProxyTargetAlreadyRegisteredFault < ::Aws::Errors::ServiceError
+      class DBProxyEndpointQuotaExceededFault < ServiceError
       end
-      class DBProxyTargetGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBProxyNotFoundFault < ServiceError
       end
-      class DBProxyTargetNotFoundFault < ::Aws::Errors::ServiceError
+      class DBProxyQuotaExceededFault < ServiceError
       end
-      class DBSecurityGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBProxyTargetAlreadyRegisteredFault < ServiceError
       end
-      class DBSecurityGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBProxyTargetGroupNotFoundFault < ServiceError
       end
-      class DBSecurityGroupNotSupportedFault < ::Aws::Errors::ServiceError
+      class DBProxyTargetNotFoundFault < ServiceError
       end
-      class DBSecurityGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBSecurityGroupAlreadyExistsFault < ServiceError
       end
-      class DBShardGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBSecurityGroupNotFoundFault < ServiceError
       end
-      class DBShardGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBSecurityGroupNotSupportedFault < ServiceError
       end
-      class DBSnapshotAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBSecurityGroupQuotaExceededFault < ServiceError
       end
-      class DBSnapshotNotFoundFault < ::Aws::Errors::ServiceError
+      class DBShardGroupAlreadyExistsFault < ServiceError
       end
-      class DBSnapshotTenantDatabaseNotFoundFault < ::Aws::Errors::ServiceError
+      class DBShardGroupNotFoundFault < ServiceError
       end
-      class DBSubnetGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DBSnapshotAlreadyExistsFault < ServiceError
       end
-      class DBSubnetGroupDoesNotCoverEnoughAZs < ::Aws::Errors::ServiceError
+      class DBSnapshotNotFoundFault < ServiceError
       end
-      class DBSubnetGroupNotAllowedFault < ::Aws::Errors::ServiceError
+      class DBSnapshotTenantDatabaseNotFoundFault < ServiceError
       end
-      class DBSubnetGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class DBSubnetGroupAlreadyExistsFault < ServiceError
       end
-      class DBSubnetGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBSubnetGroupDoesNotCoverEnoughAZs < ServiceError
       end
-      class DBSubnetQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBSubnetGroupNotAllowedFault < ServiceError
       end
-      class DBUpgradeDependencyFailureFault < ::Aws::Errors::ServiceError
+      class DBSubnetGroupNotFoundFault < ServiceError
       end
-      class DomainNotFoundFault < ::Aws::Errors::ServiceError
+      class DBSubnetGroupQuotaExceededFault < ServiceError
       end
-      class Ec2ImagePropertiesNotSupportedFault < ::Aws::Errors::ServiceError
+      class DBSubnetQuotaExceededFault < ServiceError
       end
-      class EventSubscriptionQuotaExceededFault < ::Aws::Errors::ServiceError
+      class DBUpgradeDependencyFailureFault < ServiceError
       end
-      class ExportTaskAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class DomainNotFoundFault < ServiceError
       end
-      class ExportTaskNotFoundFault < ::Aws::Errors::ServiceError
+      class Ec2ImagePropertiesNotSupportedFault < ServiceError
       end
-      class GlobalClusterAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class EventSubscriptionQuotaExceededFault < ServiceError
       end
-      class GlobalClusterNotFoundFault < ::Aws::Errors::ServiceError
+      class ExportTaskAlreadyExistsFault < ServiceError
       end
-      class GlobalClusterQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ExportTaskNotFoundFault < ServiceError
       end
-      class IamRoleMissingPermissionsFault < ::Aws::Errors::ServiceError
+      class GlobalClusterAlreadyExistsFault < ServiceError
       end
-      class IamRoleNotFoundFault < ::Aws::Errors::ServiceError
+      class GlobalClusterNotFoundFault < ServiceError
       end
-      class InstanceQuotaExceededFault < ::Aws::Errors::ServiceError
+      class GlobalClusterQuotaExceededFault < ServiceError
       end
-      class InsufficientAvailableIPsInSubnetFault < ::Aws::Errors::ServiceError
+      class IamRoleMissingPermissionsFault < ServiceError
       end
-      class InsufficientDBClusterCapacityFault < ::Aws::Errors::ServiceError
+      class IamRoleNotFoundFault < ServiceError
       end
-      class InsufficientDBInstanceCapacityFault < ::Aws::Errors::ServiceError
+      class InstanceQuotaExceededFault < ServiceError
       end
-      class InsufficientStorageClusterCapacityFault < ::Aws::Errors::ServiceError
+      class InsufficientAvailableIPsInSubnetFault < ServiceError
       end
-      class IntegrationAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class InsufficientDBClusterCapacityFault < ServiceError
       end
-      class IntegrationConflictOperationFault < ::Aws::Errors::ServiceError
+      class InsufficientDBInstanceCapacityFault < ServiceError
       end
-      class IntegrationNotFoundFault < ::Aws::Errors::ServiceError
+      class InsufficientStorageClusterCapacityFault < ServiceError
       end
-      class IntegrationQuotaExceededFault < ::Aws::Errors::ServiceError
+      class IntegrationAlreadyExistsFault < ServiceError
       end
-      class InvalidBlueGreenDeploymentStateFault < ::Aws::Errors::ServiceError
+      class IntegrationConflictOperationFault < ServiceError
       end
-      class InvalidCustomDBEngineVersionStateFault < ::Aws::Errors::ServiceError
+      class IntegrationNotFoundFault < ServiceError
       end
-      class InvalidDBClusterAutomatedBackupStateFault < ::Aws::Errors::ServiceError
+      class IntegrationQuotaExceededFault < ServiceError
       end
-      class InvalidDBClusterCapacityFault < ::Aws::Errors::ServiceError
+      class InvalidBlueGreenDeploymentStateFault < ServiceError
       end
-      class InvalidDBClusterEndpointStateFault < ::Aws::Errors::ServiceError
+      class InvalidCustomDBEngineVersionStateFault < ServiceError
       end
-      class InvalidDBClusterSnapshotStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBCapacityReservationStateFault < ServiceError
       end
-      class InvalidDBClusterStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBClusterAutomatedBackupStateFault < ServiceError
       end
-      class InvalidDBInstanceAutomatedBackupStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBClusterCapacityFault < ServiceError
       end
-      class InvalidDBInstanceStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBClusterEndpointStateFault < ServiceError
       end
-      class InvalidDBParameterGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBClusterSnapshotStateFault < ServiceError
       end
-      class InvalidDBProxyEndpointStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBClusterStateFault < ServiceError
       end
-      class InvalidDBProxyStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBInstanceAutomatedBackupStateFault < ServiceError
       end
-      class InvalidDBSecurityGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBInstanceStateFault < ServiceError
       end
-      class InvalidDBShardGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBParameterGroupStateFault < ServiceError
       end
-      class InvalidDBSnapshotStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBProxyEndpointStateFault < ServiceError
       end
-      class InvalidDBSubnetGroupFault < ::Aws::Errors::ServiceError
+      class InvalidDBProxyStateFault < ServiceError
       end
-      class InvalidDBSubnetGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBSecurityGroupStateFault < ServiceError
       end
-      class InvalidDBSubnetStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBShardGroupStateFault < ServiceError
       end
-      class InvalidEventSubscriptionStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBSnapshotStateFault < ServiceError
       end
-      class InvalidExportOnlyFault < ::Aws::Errors::ServiceError
+      class InvalidDBSubnetGroupFault < ServiceError
       end
-      class InvalidExportSourceStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBSubnetGroupStateFault < ServiceError
       end
-      class InvalidExportTaskStateFault < ::Aws::Errors::ServiceError
+      class InvalidDBSubnetStateFault < ServiceError
       end
-      class InvalidGlobalClusterStateFault < ::Aws::Errors::ServiceError
+      class InvalidEventSubscriptionStateFault < ServiceError
       end
-      class InvalidIntegrationStateFault < ::Aws::Errors::ServiceError
+      class InvalidExportOnlyFault < ServiceError
       end
-      class InvalidOptionGroupStateFault < ::Aws::Errors::ServiceError
+      class InvalidExportSourceStateFault < ServiceError
       end
-      class InvalidResourceStateFault < ::Aws::Errors::ServiceError
+      class InvalidExportTaskStateFault < ServiceError
       end
-      class InvalidRestoreFault < ::Aws::Errors::ServiceError
+      class InvalidGlobalClusterStateFault < ServiceError
       end
-      class InvalidS3BucketFault < ::Aws::Errors::ServiceError
+      class InvalidIntegrationStateFault < ServiceError
       end
-      class InvalidSubnet < ::Aws::Errors::ServiceError
+      class InvalidOptionGroupStateFault < ServiceError
       end
-      class InvalidVPCNetworkStateFault < ::Aws::Errors::ServiceError
+      class InvalidResourceStateFault < ServiceError
       end
-      class KMSKeyNotAccessibleFault < ::Aws::Errors::ServiceError
+      class InvalidRestoreFault < ServiceError
       end
-      class MaxDBShardGroupLimitReached < ::Aws::Errors::ServiceError
+      class InvalidS3BucketFault < ServiceError
       end
-      class NetworkTypeNotSupported < ::Aws::Errors::ServiceError
+      class InvalidSubnet < ServiceError
       end
-      class OptionGroupAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class InvalidVPCNetworkStateFault < ServiceError
       end
-      class OptionGroupNotFoundFault < ::Aws::Errors::ServiceError
+      class KMSKeyNotAccessibleFault < ServiceError
       end
-      class OptionGroupQuotaExceededFault < ::Aws::Errors::ServiceError
+      class MaxDBShardGroupLimitReached < ServiceError
       end
-      class PointInTimeRestoreNotEnabledFault < ::Aws::Errors::ServiceError
+      class NetworkTypeNotSupported < ServiceError
       end
-      class ProvisionedIopsNotAvailableInAZFault < ::Aws::Errors::ServiceError
+      class OptionGroupAlreadyExistsFault < ServiceError
       end
-      class ReservedDBInstanceAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class OptionGroupNotFoundFault < ServiceError
       end
-      class ReservedDBInstanceNotFoundFault < ::Aws::Errors::ServiceError
+      class OptionGroupQuotaExceededFault < ServiceError
       end
-      class ReservedDBInstanceQuotaExceededFault < ::Aws::Errors::ServiceError
+      class PointInTimeRestoreNotEnabledFault < ServiceError
       end
-      class ReservedDBInstancesOfferingNotFoundFault < ::Aws::Errors::ServiceError
+      class ProvisionedIopsNotAvailableInAZFault < ServiceError
       end
-      class ResourceNotFoundFault < ::Aws::Errors::ServiceError
+      class ReservedDBInstanceAlreadyExistsFault < ServiceError
       end
-      class SNSInvalidTopicFault < ::Aws::Errors::ServiceError
+      class ReservedDBInstanceNotFoundFault < ServiceError
       end
-      class SNSNoAuthorizationFault < ::Aws::Errors::ServiceError
+      class ReservedDBInstanceQuotaExceededFault < ServiceError
       end
-      class SNSTopicArnNotFoundFault < ::Aws::Errors::ServiceError
+      class ReservedDBInstancesOfferingNotFoundFault < ServiceError
       end
-      class SharedSnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ResourceNotFoundFault < ServiceError
       end
-      class SnapshotQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SNSInvalidTopicFault < ServiceError
       end
-      class SourceClusterNotSupportedFault < ::Aws::Errors::ServiceError
+      class SNSNoAuthorizationFault < ServiceError
       end
-      class SourceDatabaseNotSupportedFault < ::Aws::Errors::ServiceError
+      class SNSTopicArnNotFoundFault < ServiceError
       end
-      class SourceNotFoundFault < ::Aws::Errors::ServiceError
+      class SharedSnapshotQuotaExceededFault < ServiceError
       end
-      class StorageQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SnapshotQuotaExceededFault < ServiceError
       end
-      class StorageTypeNotAvailableFault < ::Aws::Errors::ServiceError
+      class SourceClusterNotSupportedFault < ServiceError
       end
-      class StorageTypeNotSupportedFault < ::Aws::Errors::ServiceError
+      class SourceDatabaseNotSupportedFault < ServiceError
       end
-      class SubnetAlreadyInUse < ::Aws::Errors::ServiceError
+      class SourceNotFoundFault < ServiceError
       end
-      class SubscriptionAlreadyExistFault < ::Aws::Errors::ServiceError
+      class StorageQuotaExceededFault < ServiceError
       end
-      class SubscriptionCategoryNotFoundFault < ::Aws::Errors::ServiceError
+      class StorageTypeNotAvailableFault < ServiceError
       end
-      class SubscriptionNotFoundFault < ::Aws::Errors::ServiceError
+      class StorageTypeNotSupportedFault < ServiceError
       end
-      class TenantDatabaseAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class SubnetAlreadyInUse < ServiceError
       end
-      class TenantDatabaseNotFoundFault < ::Aws::Errors::ServiceError
+      class SubscriptionAlreadyExistFault < ServiceError
       end
-      class TenantDatabaseQuotaExceededFault < ::Aws::Errors::ServiceError
+      class SubscriptionCategoryNotFoundFault < ServiceError
       end
-      class UnsupportedDBEngineVersionFault < ::Aws::Errors::ServiceError
+      class SubscriptionNotFoundFault < ServiceError
       end
-      class VpcEncryptionControlViolationException < ::Aws::Errors::ServiceError
+      class TenantDatabaseAlreadyExistsFault < ServiceError
+      end
+      class TenantDatabaseNotFoundFault < ServiceError
+      end
+      class TenantDatabaseQuotaExceededFault < ServiceError
+      end
+      class UnsupportedDBEngineVersionFault < ServiceError
+      end
+      class VpcEncryptionControlViolationException < ServiceError
       end
     end
   end

@@ -2329,6 +2329,27 @@ module Aws::EKS
       include Aws::Structure
     end
 
+    # Indicates the current configuration of Gateway API custom resource
+    # definition (CRD) management on your EKS Auto Mode cluster. For
+    # example, if CRD management is enabled or disabled. For more
+    # information, see EKS Auto Mode load balancing capability in the
+    # *Amazon EKS User Guide*.
+    #
+    # @!attribute [rw] managed
+    #   Indicates if Gateway API CRD management is enabled on your EKS Auto
+    #   Mode cluster. If CRD management is enabled, EKS Auto Mode will
+    #   create and update the Gateway API CRDs in your EKS Auto Mode
+    #   cluster.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/CrdManagementConfiguration AWS API Documentation
+    #
+    class CrdManagementConfiguration < Struct.new(
+      :managed)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The access configuration information for the cluster.
     #
     # @!attribute [rw] bootstrap_cluster_creator_admin_permissions
@@ -4801,10 +4822,18 @@ module Aws::EKS
     #   Services account.
     #   @return [Boolean]
     #
+    # @!attribute [rw] gateway_api
+    #   Indicates the current configuration of the Kubernetes Gateway API
+    #   for the load balancing capability on your EKS Auto Mode cluster. For
+    #   more information, see EKS Auto Mode load balancing capability in the
+    #   *Amazon EKS User Guide*.
+    #   @return [Types::GatewayApiConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/ElasticLoadBalancing AWS API Documentation
     #
     class ElasticLoadBalancing < Struct.new(
-      :enabled)
+      :enabled,
+      :gateway_api)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5052,6 +5081,25 @@ module Aws::EKS
     class FargateProfileSelector < Struct.new(
       :namespace,
       :labels)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Indicates the current configuration of the Kubernetes Gateway API for
+    # the load balancing capability on your EKS Auto Mode cluster. For more
+    # information, see EKS Auto Mode load balancing capability in the
+    # *Amazon EKS User Guide*.
+    #
+    # @!attribute [rw] crds
+    #   Indicates the current configuration of Gateway API custom resource
+    #   definition (CRD) management on your EKS Auto Mode cluster. For
+    #   example, if CRD management is enabled or disabled.
+    #   @return [Types::CrdManagementConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/eks-2017-11-01/GatewayApiConfiguration AWS API Documentation
+    #
+    class GatewayApiConfiguration < Struct.new(
+      :crds)
       SENSITIVE = []
       include Aws::Structure
     end

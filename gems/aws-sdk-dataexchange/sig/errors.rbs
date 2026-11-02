@@ -11,31 +11,31 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def resource_id: () -> ::String
-        def resource_type: () -> ::String
-      end
-      class InternalServerException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
         def resource_id: () -> ::String
         def resource_type: () -> ::String
       end
-      class ServiceLimitExceededException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+        def resource_type: () -> ::String
+      end
+      class ServiceLimitExceededException < ServiceError
         def limit_name: () -> ::String
         def limit_value: () -> ::String
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
         def exception_cause: () -> ::String
       end

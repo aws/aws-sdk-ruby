@@ -199,12 +199,19 @@ module Aws::BedrockAgentCoreControl
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -681,8 +688,8 @@ module Aws::BedrockAgentCoreControl
     #   the runtime.
     #
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The protocol configuration for the AgentCore Runtime, including the
+    #   protocol, port, and path on which the agent server is available.
     #
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The life cycle configuration for the AgentCore Runtime.
@@ -708,6 +715,13 @@ module Aws::BedrockAgentCoreControl
     #
     # @option params [String] :platform_version
     #   The version of the runtime platform to use for the AgentCore Runtime.
+    #
+    # @option params [Array<Types::AllowedPort>] :allowed_ports
+    #   The additional ports on the AgentCore Runtime that are reachable
+    #   through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
     #
     # @return [Types::CreateAgentRuntimeResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -821,6 +835,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A, AGUI
+    #       port: 1,
+    #       path: "ServerPath",
     #     },
     #     lifecycle_configuration: {
     #       idle_runtime_session_timeout: 1,
@@ -855,6 +871,15 @@ module Aws::BedrockAgentCoreControl
     #       "TagKey" => "TagValue",
     #     },
     #     platform_version: "PlatformVersion",
+    #     allowed_ports: [
+    #       {
+    #         port: 1,
+    #         port_range: {
+    #           from: 1, # required
+    #           to: 1, # required
+    #         },
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1896,6 +1921,27 @@ module Aws::BedrockAgentCoreControl
     #               label: "CategoricalScaleDefinitionLabelString", # required
     #             },
     #           ],
+    #           multi_dimensional: [
+    #             {
+    #               dimension_name: "EvaluationDimensionName", # required
+    #               dimension_instruction: "EvaluationDimensionInstruction", # required
+    #               dimension_rating_scale: { # required
+    #                 numerical: [
+    #                   {
+    #                     definition: "String", # required
+    #                     value: 1.0, # required
+    #                     label: "NumericalScaleDefinitionLabelString", # required
+    #                   },
+    #                 ],
+    #                 categorical: [
+    #                   {
+    #                     definition: "String", # required
+    #                     label: "CategoricalScaleDefinitionLabelString", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
     #         },
     #         model_config: { # required
     #           bedrock_evaluator_model_config: {
@@ -2474,6 +2520,14 @@ module Aws::BedrockAgentCoreControl
     #         match_paths: {
     #           any_of: ["MatchPathPattern"], # required
     #         },
+    #         match_models: {
+    #           any_of: [ # required
+    #             {
+    #               value: "ModelPattern", # required
+    #               operator: "StringEquals", # accepts StringEquals, StringLike
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     actions: [ # required
@@ -2503,13 +2557,57 @@ module Aws::BedrockAgentCoreControl
     #         route_to_target: {
     #           static_route: {
     #             target_name: "TargetName", # required
+    #             model: "ConcreteModelId",
+    #             fallback: {
+    #               trigger_on: {
+    #                 status_codes: ["ErrorStatusCodePattern"],
+    #                 errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #               },
+    #               first_byte_timeout_milliseconds: 1,
+    #               circuit_breaker: {
+    #                 mode: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
+    #               target_fallback: [ # required
+    #                 {
+    #                   target_name: "TargetName", # required
+    #                   model: "ConcreteModelId",
+    #                   trigger_on: {
+    #                     status_codes: ["ErrorStatusCodePattern"],
+    #                     errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                   },
+    #                   first_byte_timeout_milliseconds: 1,
+    #                 },
+    #               ],
+    #             },
     #           },
     #           weighted_route: {
     #             traffic_split: [ # required
     #               {
+    #                 target_name: "TargetName", # required
+    #                 model: "ConcreteModelId",
+    #                 fallback: {
+    #                   trigger_on: {
+    #                     status_codes: ["ErrorStatusCodePattern"],
+    #                     errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                   },
+    #                   first_byte_timeout_milliseconds: 1,
+    #                   circuit_breaker: {
+    #                     mode: "ENABLED", # accepts ENABLED, DISABLED
+    #                   },
+    #                   target_fallback: [ # required
+    #                     {
+    #                       target_name: "TargetName", # required
+    #                       model: "ConcreteModelId",
+    #                       trigger_on: {
+    #                         status_codes: ["ErrorStatusCodePattern"],
+    #                         errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                       },
+    #                       first_byte_timeout_milliseconds: 1,
+    #                     },
+    #                   ],
+    #                 },
     #                 name: "TargetTrafficSplitEntryNameString", # required
     #                 weight: 1, # required
-    #                 target_name: "TargetName", # required
     #                 description: "TargetTrafficSplitEntryDescriptionString",
     #                 metadata: {
     #                   "TrafficSplitMetadataKey" => "TrafficSplitMetadataValue",
@@ -2534,6 +2632,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.conditions[0].match_principals.any_of[0].iam_principal.operator #=> String, one of "StringEquals", "StringLike"
     #   resp.conditions[0].match_paths.any_of #=> Array
     #   resp.conditions[0].match_paths.any_of[0] #=> String
+    #   resp.conditions[0].match_models.any_of #=> Array
+    #   resp.conditions[0].match_models.any_of[0].value #=> String
+    #   resp.conditions[0].match_models.any_of[0].operator #=> String, one of "StringEquals", "StringLike"
     #   resp.actions #=> Array
     #   resp.actions[0].configuration_bundle.static_override.bundle_arn #=> String
     #   resp.actions[0].configuration_bundle.static_override.bundle_version #=> String
@@ -2546,10 +2647,40 @@ module Aws::BedrockAgentCoreControl
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
     #   resp.actions[0].route_to_target.static_route.target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.static_route.fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].weight #=> Integer
-    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].description #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
@@ -4305,6 +4436,9 @@ module Aws::BedrockAgentCoreControl
     #             actor_token_content: "NONE", # required, accepts NONE, M2M, AWS_IAM_ID_TOKEN_JWT
     #             actor_token_scopes: ["ScopeType"],
     #           },
+    #           on_behalf_of_authentication_config: {
+    #             client_authentication_method: "NO_CLIENT", # required, accepts NO_CLIENT
+    #           },
     #         },
     #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT
     #         private_key_jwt_config: {
@@ -4460,6 +4594,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.on_behalf_of_authentication_config.client_authentication_method #=> String, one of "NO_CLIENT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
@@ -7073,6 +7208,7 @@ module Aws::BedrockAgentCoreControl
     #   * {Types::GetAgentRuntimeResponse#filesystem_configurations #filesystem_configurations} => Array&lt;Types::FilesystemConfiguration&gt;
     #   * {Types::GetAgentRuntimeResponse#capacity_provider_configuration #capacity_provider_configuration} => Types::CapacityProviderConfiguration
     #   * {Types::GetAgentRuntimeResponse#platform_version #platform_version} => String
+    #   * {Types::GetAgentRuntimeResponse#allowed_ports #allowed_ports} => Array&lt;Types::AllowedPort&gt;
     #
     # @example Request syntax with placeholder values
     #
@@ -7110,6 +7246,8 @@ module Aws::BedrockAgentCoreControl
     #   resp.agent_runtime_artifact.code_configuration.entry_point #=> Array
     #   resp.agent_runtime_artifact.code_configuration.entry_point[0] #=> String
     #   resp.protocol_configuration.server_protocol #=> String, one of "MCP", "HTTP", "A2A", "AGUI"
+    #   resp.protocol_configuration.port #=> Integer
+    #   resp.protocol_configuration.path #=> String
     #   resp.environment_variables #=> Hash
     #   resp.environment_variables["EnvironmentVariableKey"] #=> String
     #   resp.authorizer_configuration.custom_jwt_authorizer.discovery_url #=> String
@@ -7167,6 +7305,10 @@ module Aws::BedrockAgentCoreControl
     #   resp.filesystem_configurations[0].capacity_provider_volume.mount_path #=> String
     #   resp.capacity_provider_configuration.capacity_provider_arn #=> String
     #   resp.platform_version #=> String
+    #   resp.allowed_ports #=> Array
+    #   resp.allowed_ports[0].port #=> Integer
+    #   resp.allowed_ports[0].port_range.from #=> Integer
+    #   resp.allowed_ports[0].port_range.to #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntime AWS API Documentation
     #
@@ -7838,6 +7980,16 @@ module Aws::BedrockAgentCoreControl
     #   resp.evaluator_config.llm_as_a_judge.rating_scale.categorical #=> Array
     #   resp.evaluator_config.llm_as_a_judge.rating_scale.categorical[0].definition #=> String
     #   resp.evaluator_config.llm_as_a_judge.rating_scale.categorical[0].label #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional #=> Array
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_name #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_instruction #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.numerical #=> Array
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.numerical[0].definition #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.numerical[0].value #=> Float
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.numerical[0].label #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.categorical #=> Array
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.categorical[0].definition #=> String
+    #   resp.evaluator_config.llm_as_a_judge.rating_scale.multi_dimensional[0].dimension_rating_scale.categorical[0].label #=> String
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.model_id #=> String
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.max_tokens #=> Integer
     #   resp.evaluator_config.llm_as_a_judge.model_config.bedrock_evaluator_model_config.inference_config.temperature #=> Float
@@ -8103,6 +8255,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.conditions[0].match_principals.any_of[0].iam_principal.operator #=> String, one of "StringEquals", "StringLike"
     #   resp.conditions[0].match_paths.any_of #=> Array
     #   resp.conditions[0].match_paths.any_of[0] #=> String
+    #   resp.conditions[0].match_models.any_of #=> Array
+    #   resp.conditions[0].match_models.any_of[0].value #=> String
+    #   resp.conditions[0].match_models.any_of[0].operator #=> String, one of "StringEquals", "StringLike"
     #   resp.actions #=> Array
     #   resp.actions[0].configuration_bundle.static_override.bundle_arn #=> String
     #   resp.actions[0].configuration_bundle.static_override.bundle_version #=> String
@@ -8115,10 +8270,40 @@ module Aws::BedrockAgentCoreControl
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
     #   resp.actions[0].route_to_target.static_route.target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.static_route.fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].weight #=> Integer
-    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].description #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
@@ -8758,6 +8943,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.on_behalf_of_authentication_config.client_authentication_method #=> String, one of "NO_CLIENT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
@@ -10672,6 +10858,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.gateway_rules[0].conditions[0].match_principals.any_of[0].iam_principal.operator #=> String, one of "StringEquals", "StringLike"
     #   resp.gateway_rules[0].conditions[0].match_paths.any_of #=> Array
     #   resp.gateway_rules[0].conditions[0].match_paths.any_of[0] #=> String
+    #   resp.gateway_rules[0].conditions[0].match_models.any_of #=> Array
+    #   resp.gateway_rules[0].conditions[0].match_models.any_of[0].value #=> String
+    #   resp.gateway_rules[0].conditions[0].match_models.any_of[0].operator #=> String, one of "StringEquals", "StringLike"
     #   resp.gateway_rules[0].actions #=> Array
     #   resp.gateway_rules[0].actions[0].configuration_bundle.static_override.bundle_arn #=> String
     #   resp.gateway_rules[0].actions[0].configuration_bundle.static_override.bundle_version #=> String
@@ -10684,10 +10873,40 @@ module Aws::BedrockAgentCoreControl
     #   resp.gateway_rules[0].actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata #=> Hash
     #   resp.gateway_rules[0].actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
     #   resp.gateway_rules[0].actions[0].route_to_target.static_route.target_name #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.model #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.trigger_on.status_codes #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.trigger_on.status_codes[0] #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.trigger_on.errors #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].target_name #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].model #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.gateway_rules[0].actions[0].route_to_target.static_route.fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].model #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes[0] #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].target_name #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].model #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].name #=> String
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].weight #=> Integer
-    #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].description #=> String
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].metadata #=> Hash
     #   resp.gateway_rules[0].actions[0].route_to_target.weighted_route.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
@@ -11945,6 +12164,57 @@ module Aws::BedrockAgentCoreControl
       req.send_request(options)
     end
 
+    # Resets the key material for a token vault whose customer managed KMS
+    # key has been deleted, and re-encrypts the token vault with an Amazon
+    # Web Services managed key so that you can use the token vault again.
+    #
+    # This operation can't be undone. The reset permanently deletes the
+    # OAuth2 access tokens and refresh tokens stored in the token vault,
+    # including tokens obtained through all supported flows. After the
+    # reset, your agents must complete these flows again to get new tokens,
+    # and for user-delegated flows your users must authorize access again.
+    # The reset doesn't delete your credential providers or their
+    # configuration.
+    #
+    # You can reset a token vault only if its customer managed key has been
+    # deleted. If the key still exists, including when it's disabled or
+    # scheduled for deletion, this operation returns a
+    # `ValidationException`. To use the token vault again, enable the key or
+    # cancel its scheduled deletion in KMS. To switch to a different key,
+    # use `SetTokenVaultCMK`.
+    #
+    # @option params [required, String] :token_vault_id
+    #   The unique identifier of the token vault to reset. To reset your
+    #   account's default token vault, specify `default`.
+    #
+    # @return [Types::ResetTokenVaultKeyMaterialResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ResetTokenVaultKeyMaterialResponse#token_vault_id #token_vault_id} => String
+    #   * {Types::ResetTokenVaultKeyMaterialResponse#kms_configuration #kms_configuration} => Types::KmsConfiguration
+    #   * {Types::ResetTokenVaultKeyMaterialResponse#last_modified_date #last_modified_date} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.reset_token_vault_key_material({
+    #     token_vault_id: "TokenVaultIdType", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.token_vault_id #=> String
+    #   resp.kms_configuration.key_type #=> String, one of "CustomerManagedKey", "ServiceManagedKey"
+    #   resp.kms_configuration.kms_key_arn #=> String
+    #   resp.last_modified_date #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResetTokenVaultKeyMaterial AWS API Documentation
+    #
+    # @overload reset_token_vault_key_material(params = {})
+    # @param [Hash] params ({})
+    def reset_token_vault_key_material(params = {}, options = {})
+      req = build_request(:reset_token_vault_key_material, params)
+      req.send_request(options)
+    end
+
     # Replaces the service-managed credentials of a payment connector with
     # newly issued credentials.
     #
@@ -12478,8 +12748,9 @@ module Aws::BedrockAgentCoreControl
     #   through to the runtime.
     #
     # @option params [Types::ProtocolConfiguration] :protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The updated protocol configuration for the AgentCore Runtime,
+    #   including the protocol, port, and path on which the agent server is
+    #   available.
     #
     # @option params [Types::LifecycleConfiguration] :lifecycle_configuration
     #   The updated life cycle configuration for the AgentCore Runtime.
@@ -12502,6 +12773,13 @@ module Aws::BedrockAgentCoreControl
     # @option params [String] :platform_version
     #   The updated version of the runtime platform to use for the AgentCore
     #   Runtime.
+    #
+    # @option params [Array<Types::AllowedPort>] :allowed_ports
+    #   The updated additional ports on the AgentCore Runtime that are
+    #   reachable through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
@@ -12622,6 +12900,8 @@ module Aws::BedrockAgentCoreControl
     #     },
     #     protocol_configuration: {
     #       server_protocol: "MCP", # required, accepts MCP, HTTP, A2A, AGUI
+    #       port: 1,
+    #       path: "ServerPath",
     #     },
     #     lifecycle_configuration: {
     #       idle_runtime_session_timeout: 1,
@@ -12656,6 +12936,15 @@ module Aws::BedrockAgentCoreControl
     #       capacity_provider_arn: "CapacityProviderArn", # required
     #     },
     #     platform_version: "PlatformVersion",
+    #     allowed_ports: [
+    #       {
+    #         port: 1,
+    #         port_range: {
+    #           from: 1, # required
+    #           to: 1, # required
+    #         },
+    #       },
+    #     ],
     #     client_token: "ClientToken",
     #   })
     #
@@ -13230,6 +13519,27 @@ module Aws::BedrockAgentCoreControl
     #               label: "CategoricalScaleDefinitionLabelString", # required
     #             },
     #           ],
+    #           multi_dimensional: [
+    #             {
+    #               dimension_name: "EvaluationDimensionName", # required
+    #               dimension_instruction: "EvaluationDimensionInstruction", # required
+    #               dimension_rating_scale: { # required
+    #                 numerical: [
+    #                   {
+    #                     definition: "String", # required
+    #                     value: 1.0, # required
+    #                     label: "NumericalScaleDefinitionLabelString", # required
+    #                   },
+    #                 ],
+    #                 categorical: [
+    #                   {
+    #                     definition: "String", # required
+    #                     label: "CategoricalScaleDefinitionLabelString", # required
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
     #         },
     #         model_config: { # required
     #           bedrock_evaluator_model_config: {
@@ -13307,6 +13617,15 @@ module Aws::BedrockAgentCoreControl
     end
 
     # Updates an existing gateway.
+    #
+    # Replaces the entire gateway configuration. Any optional field that you
+    # omit, including fields in `protocolConfiguration`, is reset. For
+    # information about retrieving the current configuration, see
+    # [GetGateway][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetGateway.html
     #
     # @option params [required, String] :gateway_identifier
     #   The identifier of the gateway to update.
@@ -13752,6 +14071,14 @@ module Aws::BedrockAgentCoreControl
     #         match_paths: {
     #           any_of: ["MatchPathPattern"], # required
     #         },
+    #         match_models: {
+    #           any_of: [ # required
+    #             {
+    #               value: "ModelPattern", # required
+    #               operator: "StringEquals", # accepts StringEquals, StringLike
+    #             },
+    #           ],
+    #         },
     #       },
     #     ],
     #     actions: [
@@ -13781,13 +14108,57 @@ module Aws::BedrockAgentCoreControl
     #         route_to_target: {
     #           static_route: {
     #             target_name: "TargetName", # required
+    #             model: "ConcreteModelId",
+    #             fallback: {
+    #               trigger_on: {
+    #                 status_codes: ["ErrorStatusCodePattern"],
+    #                 errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #               },
+    #               first_byte_timeout_milliseconds: 1,
+    #               circuit_breaker: {
+    #                 mode: "ENABLED", # accepts ENABLED, DISABLED
+    #               },
+    #               target_fallback: [ # required
+    #                 {
+    #                   target_name: "TargetName", # required
+    #                   model: "ConcreteModelId",
+    #                   trigger_on: {
+    #                     status_codes: ["ErrorStatusCodePattern"],
+    #                     errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                   },
+    #                   first_byte_timeout_milliseconds: 1,
+    #                 },
+    #               ],
+    #             },
     #           },
     #           weighted_route: {
     #             traffic_split: [ # required
     #               {
+    #                 target_name: "TargetName", # required
+    #                 model: "ConcreteModelId",
+    #                 fallback: {
+    #                   trigger_on: {
+    #                     status_codes: ["ErrorStatusCodePattern"],
+    #                     errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                   },
+    #                   first_byte_timeout_milliseconds: 1,
+    #                   circuit_breaker: {
+    #                     mode: "ENABLED", # accepts ENABLED, DISABLED
+    #                   },
+    #                   target_fallback: [ # required
+    #                     {
+    #                       target_name: "TargetName", # required
+    #                       model: "ConcreteModelId",
+    #                       trigger_on: {
+    #                         status_codes: ["ErrorStatusCodePattern"],
+    #                         errors: ["CONNECTION_ERROR"], # accepts CONNECTION_ERROR, FIRST_BYTE_TIMEOUT, UNROUTABLE
+    #                       },
+    #                       first_byte_timeout_milliseconds: 1,
+    #                     },
+    #                   ],
+    #                 },
     #                 name: "TargetTrafficSplitEntryNameString", # required
     #                 weight: 1, # required
-    #                 target_name: "TargetName", # required
     #                 description: "TargetTrafficSplitEntryDescriptionString",
     #                 metadata: {
     #                   "TrafficSplitMetadataKey" => "TrafficSplitMetadataValue",
@@ -13812,6 +14183,9 @@ module Aws::BedrockAgentCoreControl
     #   resp.conditions[0].match_principals.any_of[0].iam_principal.operator #=> String, one of "StringEquals", "StringLike"
     #   resp.conditions[0].match_paths.any_of #=> Array
     #   resp.conditions[0].match_paths.any_of[0] #=> String
+    #   resp.conditions[0].match_models.any_of #=> Array
+    #   resp.conditions[0].match_models.any_of[0].value #=> String
+    #   resp.conditions[0].match_models.any_of[0].operator #=> String, one of "StringEquals", "StringLike"
     #   resp.actions #=> Array
     #   resp.actions[0].configuration_bundle.static_override.bundle_arn #=> String
     #   resp.actions[0].configuration_bundle.static_override.bundle_version #=> String
@@ -13824,10 +14198,40 @@ module Aws::BedrockAgentCoreControl
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].configuration_bundle.weighted_override.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
     #   resp.actions[0].route_to_target.static_route.target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.static_route.fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.static_route.fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.first_byte_timeout_milliseconds #=> Integer
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.circuit_breaker.mode #=> String, one of "ENABLED", "DISABLED"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].target_name #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].model #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.status_codes[0] #=> String
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors #=> Array
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].trigger_on.errors[0] #=> String, one of "CONNECTION_ERROR", "FIRST_BYTE_TIMEOUT", "UNROUTABLE"
+    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].fallback.target_fallback[0].first_byte_timeout_milliseconds #=> Integer
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].weight #=> Integer
-    #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].target_name #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].description #=> String
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata #=> Hash
     #   resp.actions[0].route_to_target.weighted_route.traffic_split[0].metadata["TrafficSplitMetadataKey"] #=> String
@@ -15733,6 +16137,9 @@ module Aws::BedrockAgentCoreControl
     #             actor_token_content: "NONE", # required, accepts NONE, M2M, AWS_IAM_ID_TOKEN_JWT
     #             actor_token_scopes: ["ScopeType"],
     #           },
+    #           on_behalf_of_authentication_config: {
+    #             client_authentication_method: "NO_CLIENT", # required, accepts NO_CLIENT
+    #           },
     #         },
     #         client_authentication_method: "CLIENT_SECRET_BASIC", # accepts CLIENT_SECRET_BASIC, CLIENT_SECRET_POST, AWS_IAM_ID_TOKEN_JWT, PRIVATE_KEY_JWT
     #         private_key_jwt_config: {
@@ -15886,6 +16293,7 @@ module Aws::BedrockAgentCoreControl
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_content #=> String, one of "NONE", "M2M", "AWS_IAM_ID_TOKEN_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes #=> Array
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.token_exchange_grant_type_config.actor_token_scopes[0] #=> String
+    #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.on_behalf_of_token_exchange_config.on_behalf_of_authentication_config.client_authentication_method #=> String, one of "NO_CLIENT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.client_authentication_method #=> String, one of "CLIENT_SECRET_BASIC", "CLIENT_SECRET_POST", "AWS_IAM_ID_TOKEN_JWT", "PRIVATE_KEY_JWT"
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.self_managed_lattice_resource.resource_configuration_identifier #=> String
     #   resp.oauth2_provider_config_output.custom_oauth_2_provider_config.private_endpoint.managed_vpc_resource.vpc_identifier #=> String
@@ -17144,7 +17552,7 @@ module Aws::BedrockAgentCoreControl
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcorecontrol'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.86.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -11,67 +11,67 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AlreadyExistsException < ::Aws::Errors::ServiceError
+      class AlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class ClientTokenConflictException < ::Aws::Errors::ServiceError
+      class ClientTokenConflictException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentOperationException < ::Aws::Errors::ServiceError
+      class ConcurrentOperationException < ServiceError
         def message: () -> ::String
       end
-      class GeneralServiceException < ::Aws::Errors::ServiceError
+      class GeneralServiceException < ServiceError
         def message: () -> ::String
       end
-      class HandlerFailureException < ::Aws::Errors::ServiceError
+      class HandlerFailureException < ServiceError
         def message: () -> ::String
       end
-      class HandlerInternalFailureException < ::Aws::Errors::ServiceError
+      class HandlerInternalFailureException < ServiceError
         def message: () -> ::String
       end
-      class InvalidCredentialsException < ::Aws::Errors::ServiceError
+      class InvalidCredentialsException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRequestException < ::Aws::Errors::ServiceError
+      class InvalidRequestException < ServiceError
         def message: () -> ::String
       end
-      class NetworkFailureException < ::Aws::Errors::ServiceError
+      class NetworkFailureException < ServiceError
         def message: () -> ::String
       end
-      class NotStabilizedException < ::Aws::Errors::ServiceError
+      class NotStabilizedException < ServiceError
         def message: () -> ::String
       end
-      class NotUpdatableException < ::Aws::Errors::ServiceError
+      class NotUpdatableException < ServiceError
         def message: () -> ::String
       end
-      class PrivateTypeException < ::Aws::Errors::ServiceError
+      class PrivateTypeException < ServiceError
         def message: () -> ::String
       end
-      class RequestTokenNotFoundException < ::Aws::Errors::ServiceError
+      class RequestTokenNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ResourceConflictException < ::Aws::Errors::ServiceError
+      class ResourceConflictException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServiceInternalErrorException < ::Aws::Errors::ServiceError
+      class ServiceInternalErrorException < ServiceError
         def message: () -> ::String
       end
-      class ServiceLimitExceededException < ::Aws::Errors::ServiceError
+      class ServiceLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class TypeNotFoundException < ::Aws::Errors::ServiceError
+      class TypeNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedActionException < ::Aws::Errors::ServiceError
+      class UnsupportedActionException < ServiceError
         def message: () -> ::String
       end
     end

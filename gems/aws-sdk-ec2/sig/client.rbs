@@ -27,6 +27,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_host_prefix_injection: bool,
                       ?disable_request_compression: bool,
                       ?endpoint: String,
@@ -1332,6 +1333,9 @@ module Aws
                                                    priority: ::Integer?
                                                  }
                                                ],
+                                               ?instance_requirements: Params::instance_requirements_request,
+                                               ?availability_zone: ::String,
+                                               ?availability_zone_id: ::String,
                                                ?tenancy: ("default"),
                                                total_target_capacity: ::Integer,
                                                ?end_date: ::Time,
@@ -10257,7 +10261,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_capacity_manager_metric_data-instance_method
       def get_capacity_manager_metric_data: (
-                                              metric_names: Array[("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu")],
+                                              metric_names: Array[("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu" | "capacity-total-requested-vcpu" | "capacity-total-fulfilled-vcpu" | "spot-capacity-total-requested-vcpu" | "spot-capacity-total-fulfilled-vcpu" | "capacity-request-fulfillment-rate" | "avg-inst-az-count-per-requested-vcpu" | "inst-az-fulfillment-rate" | "spot-capacity-request-fulfillment-rate" | "spot-avg-inst-az-count-per-requested-vcpu" | "spot-inst-az-fulfillment-rate")],
                                               start_time: ::Time,
                                               end_time: ::Time,
                                               period: ::Integer,
@@ -10296,7 +10300,7 @@ module Aws
                                                     ],
                                                     start_time: ::Time,
                                                     end_time: ::Time,
-                                                    metric_names: Array[("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu")],
+                                                    metric_names: Array[("reservation-total-capacity-hrs-vcpu" | "reservation-total-capacity-hrs-inst" | "reservation-max-size-vcpu" | "reservation-max-size-inst" | "reservation-min-size-vcpu" | "reservation-min-size-inst" | "reservation-unused-total-capacity-hrs-vcpu" | "reservation-unused-total-capacity-hrs-inst" | "reservation-unused-total-estimated-cost" | "reservation-max-unused-size-vcpu" | "reservation-max-unused-size-inst" | "reservation-min-unused-size-vcpu" | "reservation-min-unused-size-inst" | "reservation-max-utilization" | "reservation-min-utilization" | "reservation-avg-utilization-vcpu" | "reservation-avg-utilization-inst" | "reservation-total-count" | "reservation-total-estimated-cost" | "reservation-avg-future-size-vcpu" | "reservation-avg-future-size-inst" | "reservation-min-future-size-vcpu" | "reservation-min-future-size-inst" | "reservation-max-future-size-vcpu" | "reservation-max-future-size-inst" | "reservation-avg-committed-size-vcpu" | "reservation-avg-committed-size-inst" | "reservation-max-committed-size-vcpu" | "reservation-max-committed-size-inst" | "reservation-min-committed-size-vcpu" | "reservation-min-committed-size-inst" | "reserved-total-usage-hrs-vcpu" | "reserved-total-usage-hrs-inst" | "reserved-total-estimated-cost" | "unreserved-total-usage-hrs-vcpu" | "unreserved-total-usage-hrs-inst" | "unreserved-total-estimated-cost" | "spot-total-usage-hrs-vcpu" | "spot-total-usage-hrs-inst" | "spot-total-estimated-cost" | "spot-avg-run-time-before-interruption-inst" | "spot-max-run-time-before-interruption-inst" | "spot-min-run-time-before-interruption-inst" | "spot-total-interruptions-inst" | "spot-total-interruptions-vcpu" | "spot-total-count-inst" | "spot-total-count-vcpu" | "spot-interruption-rate-inst" | "spot-interruption-rate-vcpu" | "capacity-total-requested-vcpu" | "capacity-total-fulfilled-vcpu" | "spot-capacity-total-requested-vcpu" | "spot-capacity-total-fulfilled-vcpu" | "capacity-request-fulfillment-rate" | "avg-inst-az-count-per-requested-vcpu" | "inst-az-fulfillment-rate" | "spot-capacity-request-fulfillment-rate" | "spot-avg-inst-az-count-per-requested-vcpu" | "spot-inst-az-fulfillment-rate")],
                                                     ?max_results: ::Integer,
                                                     ?next_token: ::String,
                                                     ?dry_run: bool
@@ -10315,6 +10319,23 @@ module Aws
                                                      ?dry_run: bool
                                                    ) -> _GetCapacityManagerMonitoredTagKeysResponseSuccess
                                                  | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapacityManagerMonitoredTagKeysResponseSuccess
+
+      interface _GetCapacityManagerSupportabilityScoresResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCapacityManagerSupportabilityScoresResult]
+        def aggregate_score: () -> ("high" | "medium" | "low")
+        def capacity_manager_supportability_scores: () -> ::Array[Types::CapacityManagerSupportabilityScore]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_capacity_manager_supportability_scores-instance_method
+      def get_capacity_manager_supportability_scores: (
+                                                        market_type: ("on-demand" | "spot"),
+                                                        capacity_amount: ::Integer,
+                                                        capacity_unit: ("vcpus" | "instances"),
+                                                        capacity_availability_zone_ids: Array[::String],
+                                                        ?instance_types: Array[::String],
+                                                        ?instance_requirements_with_metadata: Params::instance_requirements_with_metadata_request,
+                                                        ?dry_run: bool
+                                                      ) -> _GetCapacityManagerSupportabilityScoresResponseSuccess
+                                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCapacityManagerSupportabilityScoresResponseSuccess
 
       interface _GetCapacityReservationUsageResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCapacityReservationUsageResult]
@@ -10536,6 +10557,20 @@ module Aws
                                                  ?dry_run: bool
                                                ) -> _GetImageBlockPublicAccessStateResponseSuccess
                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImageBlockPublicAccessStateResponseSuccess
+
+      interface _GetImageFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetImageFindingsResult]
+        def image_findings: () -> ::Array[Types::ImageFinding]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_image_findings-instance_method
+      def get_image_findings: (
+                                image_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String,
+                                ?dry_run: bool
+                              ) -> _GetImageFindingsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetImageFindingsResponseSuccess
 
       interface _GetInstanceMetadataDefaultsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetInstanceMetadataDefaultsResult]
@@ -11184,11 +11219,7 @@ module Aws
                                        ?target_capacity_unit_type: ("vcpu" | "memory-mib" | "units"),
                                        ?single_availability_zone: bool,
                                        ?region_names: Array[::String],
-                                       ?instance_requirements_with_metadata: {
-                                         architecture_types: Array[("i386" | "x86_64" | "arm64" | "x86_64_mac" | "arm64_mac")]?,
-                                         virtualization_types: Array[("hvm" | "paravirtual")]?,
-                                         instance_requirements: Params::instance_requirements_request?
-                                       },
+                                       ?instance_requirements_with_metadata: Params::instance_requirements_with_metadata_request,
                                        ?dry_run: bool,
                                        ?max_results: ::Integer,
                                        ?next_token: ::String,
@@ -11216,6 +11247,20 @@ module Aws
                                           ?max_results: ::Integer
                                         ) -> _GetSubnetCidrReservationsResponseSuccess
                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSubnetCidrReservationsResponseSuccess
+
+      interface _GetTransitGatewayAttachmentNatConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTransitGatewayAttachmentNatConfigurationResult]
+        def transit_gateway_attachment_id: () -> ::String
+        def nat_gateway_support: () -> ("enabled" | "disabled" | "enabling" | "disabling")
+        def nat_system_route_support: () -> ("enable" | "disable")
+        def nat_gateway_rules: () -> ::Array[Types::TransitGatewayNatRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_transit_gateway_attachment_nat_configuration-instance_method
+      def get_transit_gateway_attachment_nat_configuration: (
+                                                              transit_gateway_attachment_id: ::String,
+                                                              ?dry_run: bool
+                                                            ) -> _GetTransitGatewayAttachmentNatConfigurationResponseSuccess
+                                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTransitGatewayAttachmentNatConfigurationResponseSuccess
 
       interface _GetTransitGatewayAttachmentPropagationsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTransitGatewayAttachmentPropagationsResult]
@@ -12839,6 +12884,30 @@ module Aws
                                   ) -> _ModifyTransitGatewayResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTransitGatewayResponseSuccess
 
+      interface _ModifyTransitGatewayAttachmentNatConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTransitGatewayAttachmentNatConfigurationResult]
+        def transit_gateway_attachment_id: () -> ::String
+        def nat_gateway_support: () -> ("enabled" | "disabled" | "enabling" | "disabling")
+        def nat_system_route_support: () -> ("enable" | "disable")
+        def nat_gateway_rules: () -> ::Array[Types::TransitGatewayNatRule]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#modify_transit_gateway_attachment_nat_configuration-instance_method
+      def modify_transit_gateway_attachment_nat_configuration: (
+                                                                 transit_gateway_attachment_id: ::String,
+                                                                 ?nat_gateway_support: ("enable" | "disable"),
+                                                                 ?nat_system_route_support: ("enable" | "disable"),
+                                                                 ?nat_gateway_rules: Array[
+                                                                   {
+                                                                     rule_number: ::Integer?,
+                                                                     match_source_cidr: ::String?,
+                                                                     nat_cidr: ::String?
+                                                                   }
+                                                                 ],
+                                                                 ?reset_nat_gateway_rules: bool,
+                                                                 ?dry_run: bool
+                                                               ) -> _ModifyTransitGatewayAttachmentNatConfigurationResponseSuccess
+                                                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ModifyTransitGatewayAttachmentNatConfigurationResponseSuccess
+
       interface _ModifyTransitGatewayMeteringPolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ModifyTransitGatewayMeteringPolicyResult]
         def transit_gateway_metering_policy: () -> Types::TransitGatewayMeteringPolicy
@@ -13887,7 +13956,16 @@ module Aws
                                                                        maximum_days_since_source_image_created: ::Integer?,
                                                                        maximum_days_since_watermark_created: ::Integer?
                                                                      }
-                                                                   ]?
+                                                                   ]?,
+                                                                   scan_result_condition: {
+                                                                     max_days_since_last_finding_scan: ::Integer?,
+                                                                     maximum_severity_label: ("informational" | "low" | "medium" | "high" | "critical")?,
+                                                                     max_days_since_informational_fix_available: ::Integer?,
+                                                                     max_days_since_low_fix_available: ::Integer?,
+                                                                     max_days_since_medium_fix_available: ::Integer?,
+                                                                     max_days_since_high_fix_available: ::Integer?,
+                                                                     max_days_since_critical_fix_available: ::Integer?
+                                                                   }?
                                                                  }
                                                                ],
                                                                ?dry_run: bool

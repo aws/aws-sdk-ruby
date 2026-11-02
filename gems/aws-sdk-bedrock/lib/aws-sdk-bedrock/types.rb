@@ -8423,10 +8423,15 @@ module Aws::Bedrock
     #   The filter details for the guardrails contextual grounding policy.
     #   @return [Array<Types::GuardrailContextualGroundingFilter>]
     #
+    # @!attribute [rw] tier
+    #   The tier that your guardrail uses for contextual grounding.
+    #   @return [Types::GuardrailContextualGroundingTier]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContextualGroundingPolicy AWS API Documentation
     #
     class GuardrailContextualGroundingPolicy < Struct.new(
-      :filters)
+      :filters,
+      :tier)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8439,11 +8444,72 @@ module Aws::Bedrock
     #   grounding policy.
     #   @return [Array<Types::GuardrailContextualGroundingFilterConfig>]
     #
+    # @!attribute [rw] tier_config
+    #   The tier that your guardrail uses for contextual grounding.
+    #   @return [Types::GuardrailContextualGroundingTierConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContextualGroundingPolicyConfig AWS API Documentation
     #
     class GuardrailContextualGroundingPolicyConfig < Struct.new(
-      :filters_config)
+      :filters_config,
+      :tier_config)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies the tier that your guardrail uses for contextual grounding
+    # checks.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for contextual grounding. Valid
+    #   values include:
+    #
+    #   * `CLASSIC` tier – Provides established contextual grounding
+    #     functionality supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier, with support for reasoning, conversational content
+    #     and more comprehensive language support. This tier requires that
+    #     your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContextualGroundingTier AWS API Documentation
+    #
+    class GuardrailContextualGroundingTier < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
+      include Aws::Structure
+    end
+
+    # Specifies the tier that your guardrail uses for contextual grounding
+    # checks.
+    #
+    # @!attribute [rw] tier_name
+    #   The tier that your guardrail uses for contextual grounding. Valid
+    #   values include:
+    #
+    #   * `CLASSIC` tier – Provides established contextual grounding
+    #     functionality supporting English, French, and Spanish languages.
+    #
+    #   * `STANDARD` tier – Provides a more robust solution than the
+    #     `CLASSIC` tier, with support for reasoning, conversational content
+    #     and more comprehensive language support. This tier requires that
+    #     your guardrail use [cross-Region inference][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-cross-region.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-2023-04-20/GuardrailContextualGroundingTierConfig AWS API Documentation
+    #
+    class GuardrailContextualGroundingTierConfig < Struct.new(
+      :tier_name)
+      SENSITIVE = [:tier_name]
       include Aws::Structure
     end
 
@@ -13088,7 +13154,7 @@ module Aws::Bedrock
     #
     #   The following example would return data sources with an animals
     #   attribute that is a list containing a cat member (for example,
-    #   `["dog", "cat"] `): `"listContains": { "key": "animals", "value":
+    #   `["dog", "cat"]`): `"listContains": { "key": "animals", "value":
     #   "cat" }`
     #   @return [Types::FilterAttribute]
     #

@@ -11,73 +11,73 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class ApplicationNotSupportedException < ::Aws::Errors::ServiceError
+      class ApplicationNotSupportedException < ServiceError
       end
-      class ComputeNotCompatibleException < ::Aws::Errors::ServiceError
+      class ComputeNotCompatibleException < ServiceError
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class IncompatibleApplicationsException < ::Aws::Errors::ServiceError
+      class IncompatibleApplicationsException < ServiceError
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterCombinationException < ::Aws::Errors::ServiceError
+      class InvalidParameterCombinationException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterValuesException < ::Aws::Errors::ServiceError
+      class InvalidParameterValuesException < ServiceError
         def message: () -> ::String
       end
-      class InvalidResourceStateException < ::Aws::Errors::ServiceError
+      class InvalidResourceStateException < ServiceError
         def message: () -> ::String
       end
-      class OperatingSystemNotCompatibleException < ::Aws::Errors::ServiceError
+      class OperatingSystemNotCompatibleException < ServiceError
       end
-      class OperationInProgressException < ::Aws::Errors::ServiceError
+      class OperationInProgressException < ServiceError
         def message: () -> ::String
       end
-      class OperationNotSupportedException < ::Aws::Errors::ServiceError
+      class OperationNotSupportedException < ServiceError
         def message: () -> ::String
         def reason: () -> ::String
       end
-      class ResourceAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class ResourceAssociatedException < ::Aws::Errors::ServiceError
+      class ResourceAssociatedException < ServiceError
         def message: () -> ::String
       end
-      class ResourceCreationFailedException < ::Aws::Errors::ServiceError
+      class ResourceCreationFailedException < ServiceError
         def message: () -> ::String
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def resource_id: () -> ::String
-      end
-      class ResourceLimitExceededException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
         def message: () -> ::String
         def resource_id: () -> ::String
       end
-      class ResourceUnavailableException < ::Aws::Errors::ServiceError
+      class ResourceLimitExceededException < ServiceError
+        def message: () -> ::String
+      end
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
         def resource_id: () -> ::String
       end
-      class UnsupportedNetworkConfigurationException < ::Aws::Errors::ServiceError
+      class ResourceUnavailableException < ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+      end
+      class UnsupportedNetworkConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedWorkspaceConfigurationException < ::Aws::Errors::ServiceError
+      class UnsupportedWorkspaceConfigurationException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
-      class WorkspacesDefaultRoleNotFoundException < ::Aws::Errors::ServiceError
+      class WorkspacesDefaultRoleNotFoundException < ServiceError
         def message: () -> ::String
       end
     end

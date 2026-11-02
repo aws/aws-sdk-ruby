@@ -11,113 +11,113 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccountNotManagementOrDelegatedAdministratorException < ::Aws::Errors::ServiceError
+      class AccountNotManagementOrDelegatedAdministratorException < ServiceError
       end
-      class CallerIsNotManagementAccountException < ::Aws::Errors::ServiceError
+      class CallerIsNotManagementAccountException < ServiceError
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class CredentialReportExpiredException < ::Aws::Errors::ServiceError
+      class CredentialReportExpiredException < ServiceError
         def message: () -> ::String
       end
-      class CredentialReportNotPresentException < ::Aws::Errors::ServiceError
+      class CredentialReportNotPresentException < ServiceError
         def message: () -> ::String
       end
-      class CredentialReportNotReadyException < ::Aws::Errors::ServiceError
+      class CredentialReportNotReadyException < ServiceError
         def message: () -> ::String
       end
-      class DeleteConflictException < ::Aws::Errors::ServiceError
+      class DeleteConflictException < ServiceError
         def message: () -> ::String
       end
-      class DuplicateCertificateException < ::Aws::Errors::ServiceError
+      class DuplicateCertificateException < ServiceError
         def message: () -> ::String
       end
-      class DuplicateSSHPublicKeyException < ::Aws::Errors::ServiceError
+      class DuplicateSSHPublicKeyException < ServiceError
         def message: () -> ::String
       end
-      class EntityAlreadyExistsException < ::Aws::Errors::ServiceError
+      class EntityAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class EntityTemporarilyUnmodifiableException < ::Aws::Errors::ServiceError
+      class EntityTemporarilyUnmodifiableException < ServiceError
         def message: () -> ::String
       end
-      class FeatureDisabledException < ::Aws::Errors::ServiceError
+      class FeatureDisabledException < ServiceError
         def message: () -> ::String
       end
-      class FeatureEnabledException < ::Aws::Errors::ServiceError
+      class FeatureEnabledException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAuthenticationCodeException < ::Aws::Errors::ServiceError
+      class InvalidAuthenticationCodeException < ServiceError
         def message: () -> ::String
       end
-      class InvalidCertificateException < ::Aws::Errors::ServiceError
+      class InvalidCertificateException < ServiceError
         def message: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPublicKeyException < ::Aws::Errors::ServiceError
+      class InvalidPublicKeyException < ServiceError
         def message: () -> ::String
       end
-      class InvalidUserTypeException < ::Aws::Errors::ServiceError
+      class InvalidUserTypeException < ServiceError
         def message: () -> ::String
       end
-      class KeyPairMismatchException < ::Aws::Errors::ServiceError
+      class KeyPairMismatchException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class MalformedCertificateException < ::Aws::Errors::ServiceError
+      class MalformedCertificateException < ServiceError
         def message: () -> ::String
       end
-      class MalformedPolicyDocumentException < ::Aws::Errors::ServiceError
+      class MalformedPolicyDocumentException < ServiceError
         def message: () -> ::String
       end
-      class NameConflictException < ::Aws::Errors::ServiceError
+      class NameConflictException < ServiceError
         def message: () -> ::String
       end
-      class NoSuchEntityException < ::Aws::Errors::ServiceError
+      class NoSuchEntityException < ServiceError
         def message: () -> ::String
       end
-      class OpenIdIdpCommunicationErrorException < ::Aws::Errors::ServiceError
+      class OpenIdIdpCommunicationErrorException < ServiceError
         def message: () -> ::String
       end
-      class OrganizationNotFoundException < ::Aws::Errors::ServiceError
+      class OrganizationNotFoundException < ServiceError
       end
-      class OrganizationNotInAllFeaturesModeException < ::Aws::Errors::ServiceError
+      class OrganizationNotInAllFeaturesModeException < ServiceError
       end
-      class PasswordPolicyViolationException < ::Aws::Errors::ServiceError
+      class PasswordPolicyViolationException < ServiceError
         def message: () -> ::String
       end
-      class PolicyEvaluationException < ::Aws::Errors::ServiceError
+      class PolicyEvaluationException < ServiceError
         def message: () -> ::String
       end
-      class PolicyNotAttachableException < ::Aws::Errors::ServiceError
+      class PolicyNotAttachableException < ServiceError
         def message: () -> ::String
       end
-      class ReportGenerationLimitExceededException < ::Aws::Errors::ServiceError
+      class ReportGenerationLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class RoleModifiedException < ::Aws::Errors::ServiceError
+      class RoleModifiedException < ServiceError
         def message: () -> ::String
       end
-      class RoleTemplateDisabledException < ::Aws::Errors::ServiceError
+      class RoleTemplateDisabledException < ServiceError
         def message: () -> ::String
       end
-      class ServiceAccessNotEnabledException < ::Aws::Errors::ServiceError
+      class ServiceAccessNotEnabledException < ServiceError
       end
-      class ServiceFailureException < ::Aws::Errors::ServiceError
+      class ServiceFailureException < ServiceError
         def message: () -> ::String
       end
-      class ServiceNotSupportedException < ::Aws::Errors::ServiceError
+      class ServiceNotSupportedException < ServiceError
         def message: () -> ::String
       end
-      class UnmodifiableEntityException < ::Aws::Errors::ServiceError
+      class UnmodifiableEntityException < ServiceError
         def message: () -> ::String
       end
-      class UnrecognizedPublicKeyEncodingException < ::Aws::Errors::ServiceError
+      class UnrecognizedPublicKeyEncodingException < ServiceError
         def message: () -> ::String
       end
     end

@@ -11,53 +11,53 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def message: () -> ::String
       end
-      class DatabaseErrorException < ::Aws::Errors::ServiceError
+      class DatabaseErrorException < ServiceError
         def message: () -> ::String
       end
-      class DatabaseNotFoundException < ::Aws::Errors::ServiceError
+      class DatabaseNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class DatabaseResumingException < ::Aws::Errors::ServiceError
+      class DatabaseResumingException < ServiceError
         def message: () -> ::String
       end
-      class DatabaseUnavailableException < ::Aws::Errors::ServiceError
+      class DatabaseUnavailableException < ServiceError
       end
-      class ForbiddenException < ::Aws::Errors::ServiceError
+      class ForbiddenException < ServiceError
         def message: () -> ::String
       end
-      class HttpEndpointNotEnabledException < ::Aws::Errors::ServiceError
+      class HttpEndpointNotEnabledException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerErrorException < ::Aws::Errors::ServiceError
+      class InternalServerErrorException < ServiceError
       end
-      class InvalidResourceStateException < ::Aws::Errors::ServiceError
+      class InvalidResourceStateException < ServiceError
         def message: () -> ::String
       end
-      class InvalidSecretException < ::Aws::Errors::ServiceError
+      class InvalidSecretException < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class SecretsErrorException < ::Aws::Errors::ServiceError
+      class SecretsErrorException < ServiceError
         def message: () -> ::String
       end
-      class ServiceUnavailableError < ::Aws::Errors::ServiceError
+      class ServiceUnavailableError < ServiceError
       end
-      class StatementTimeoutException < ::Aws::Errors::ServiceError
+      class StatementTimeoutException < ServiceError
         def message: () -> ::String
         def db_connection_id: () -> ::String
       end
-      class TransactionNotFoundException < ::Aws::Errors::ServiceError
+      class TransactionNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedResultException < ::Aws::Errors::ServiceError
+      class UnsupportedResultException < ServiceError
         def message: () -> ::String
       end
     end

@@ -134,10 +134,10 @@ module Seahorse
 
           let(:http_request) { context.http_request }
 
-          it 'returns a Response object from #call' do
+          it 'returns a pageable Aws::Response from #call' do
             stub_request(:any, endpoint)
             resp = make_request
-            expect(resp).to be_kind_of(Response)
+            expect(resp).to be_kind_of(Aws::Response)
           end
 
           it 'populates the #context of the returned response' do

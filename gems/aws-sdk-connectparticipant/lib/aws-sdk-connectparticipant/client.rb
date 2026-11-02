@@ -199,12 +199,19 @@ module Aws::ConnectParticipant
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -861,6 +868,18 @@ module Aws::ConnectParticipant
     #   ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
     #   2019-11-08T02:41:28.172Z.
     #
+    # @option params [String] :url_content_disposition
+    #   Specifies how a browser handles the file at the pre-signed URL. The
+    #   following values are valid:
+    #
+    #   INLINE
+    #
+    #   : Displays the file in the browser.
+    #
+    #   ATTACHMENT
+    #
+    #   : Downloads the file. This is the default behavior.
+    #
     # @return [Types::GetAttachmentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetAttachmentResponse#url #url} => String
@@ -873,6 +892,7 @@ module Aws::ConnectParticipant
     #     attachment_id: "ArtifactId", # required
     #     connection_token: "ParticipantToken", # required
     #     url_expiry_in_seconds: 1,
+    #     url_content_disposition: "INLINE", # accepts INLINE, ATTACHMENT
     #   })
     #
     # @example Response structure
@@ -1206,17 +1226,17 @@ module Aws::ConnectParticipant
     #   [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_StartOutboundChatContact.html
     #
     # @option params [required, String] :content
-    #   The content of the message.
+    #   The content of the message. Maximum of 16,384 bytes for all content
+    #   types (`text/plain`, `text/markdown`, `application/json`, and
+    #   `application/vnd.amazonaws.connect.message.interactive.response`).
     #
-    #   * For `text/plain` and `text/markdown`, the Length Constraints are
-    #     Minimum of 1, Maximum of 1024.
+    #   Some messaging channels enforce lower limits. For channel-specific
+    #   message size limits, see [Chat message size limits by channel][1] in
+    #   the *Amazon Connect Customer Administrator Guide*.
     #
-    #   * For `application/json`, the Length Constraints are Minimum of 1,
-    #     Maximum of 12000.
     #
-    #   * For
-    #     `application/vnd.amazonaws.connect.message.interactive.response`,
-    #     the Length Constraints are Minimum of 1, Maximum of 12288.
+    #
+    #   [1]: https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html#chat-message-size-limits
     #
     # @option params [String] :client_token
     #   A unique, case-sensitive identifier that you provide to ensure the
@@ -1336,7 +1356,7 @@ module Aws::ConnectParticipant
     #   resp.upload_metadata.url #=> String
     #   resp.upload_metadata.url_expiry #=> String
     #   resp.upload_metadata.headers_to_include #=> Hash
-    #   resp.upload_metadata.headers_to_include["UploadMetadataSignedHeadersKey"] #=> String
+    #   resp.upload_metadata.headers_to_include["UrlMetadataSignedHeadersKey"] #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectparticipant-2018-09-07/StartAttachmentUpload AWS API Documentation
     #
@@ -1365,7 +1385,7 @@ module Aws::ConnectParticipant
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectparticipant'
-      context[:gem_version] = '1.84.0'
+      context[:gem_version] = '1.89.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

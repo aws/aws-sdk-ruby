@@ -856,6 +856,26 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # Details about a custom plugin to use when you update a connector via
+    # `UpdateConnector`.
+    #
+    # @!attribute [rw] custom_plugin_arn
+    #   The Amazon Resource Name (ARN) of the custom plugin.
+    #   @return [String]
+    #
+    # @!attribute [rw] revision
+    #   The revision of the custom plugin.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/CustomPluginUpdate AWS API Documentation
+    #
+    class CustomPluginUpdate < Struct.new(
+      :custom_plugin_arn,
+      :revision)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] connector_arn
     #   The Amazon Resource Name (ARN) of the connector that you want to
     #   delete.
@@ -1669,6 +1689,37 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   pause.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/PauseConnectorRequest AWS API Documentation
+    #
+    class PauseConnectorRequest < Struct.new(
+      :connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_operation_arn
+    #   The Amazon Resource Name (ARN) of the connector operation created to
+    #   perform the pause.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/PauseConnectorResponse AWS API Documentation
+    #
+    class PauseConnectorResponse < Struct.new(
+      :connector_arn,
+      :connector_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A plugin is an Amazon Web Services resource that contains the code
     # that defines your connector logic.
     #
@@ -1693,6 +1744,21 @@ module Aws::KafkaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/PluginDescription AWS API Documentation
     #
     class PluginDescription < Struct.new(
+      :custom_plugin)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A custom plugin to use when you update a connector via
+    # `UpdateConnector`.
+    #
+    # @!attribute [rw] custom_plugin
+    #   The custom plugin to use for the connector.
+    #   @return [Types::CustomPluginUpdate]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/PluginUpdate AWS API Documentation
+    #
+    class PluginUpdate < Struct.new(
       :custom_plugin)
       SENSITIVE = []
       include Aws::Structure
@@ -1792,6 +1858,37 @@ module Aws::KafkaConnect
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/RestartConnectorResponse AWS API Documentation
     #
     class RestartConnectorResponse < Struct.new(
+      :connector_arn,
+      :connector_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector that you want to
+    #   resume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/ResumeConnectorRequest AWS API Documentation
+    #
+    class ResumeConnectorRequest < Struct.new(
+      :connector_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] connector_arn
+    #   The Amazon Resource Name (ARN) of the connector.
+    #   @return [String]
+    #
+    # @!attribute [rw] connector_operation_arn
+    #   The Amazon Resource Name (ARN) of the connector operation created to
+    #   perform the resume.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/ResumeConnectorResponse AWS API Documentation
+    #
+    class ResumeConnectorResponse < Struct.new(
       :connector_arn,
       :connector_operation_arn)
       SENSITIVE = []
@@ -2099,6 +2196,18 @@ module Aws::KafkaConnect
     #   connector.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] skip_health_validation
+    #   Specifies whether the update bypasses connector-level and task-level
+    #   health checks. If `true`, the update skips the health checks. The
+    #   update stays in effect even if the connector or its tasks are
+    #   unhealthy, and Amazon MSK Connect doesn't roll it back. If `false`
+    #   or not specified, the health checks run. If they fail, MSK Connect
+    #   automatically rolls the connector back to its previous
+    #   configuration, and the update doesn't take effect. To update a
+    #   connector that is in the `PAUSED` state, you must set this parameter
+    #   to `true`.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] connector_arn
     #   The Amazon Resource Name (ARN) of the connector that you want to
     #   update.
@@ -2108,13 +2217,48 @@ module Aws::KafkaConnect
     #   The current version of the connector that you want to update.
     #   @return [String]
     #
+    # @!attribute [rw] plugins
+    #   Amazon MSK Connect does not currently support specifying multiple
+    #   plugins as a list. To use more than one plugin for your connector,
+    #   you can create a single custom plugin using a ZIP file that bundles
+    #   multiple plugins together.
+    #
+    #    Specifies which plugin to use for the connector. You must specify a
+    #   single-element list containing one `customPlugin` object. If you
+    #   don't specify this parameter, the connector keeps its current
+    #   plugin.
+    #   @return [Array<Types::PluginUpdate>]
+    #
+    # @!attribute [rw] worker_configuration
+    #   The worker configuration to use with the connector. Specify the
+    #   Amazon Resource Name (ARN) and the revision of the worker
+    #   configuration. You can't specify both `workerConfiguration` and
+    #   `useDefaultWorkerConfiguration` in the same request. If you specify
+    #   neither parameter, the connector keeps its current worker
+    #   configuration.
+    #   @return [Types::WorkerConfigurationUpdate]
+    #
+    # @!attribute [rw] use_default_worker_configuration
+    #   Specifies whether to switch the connector to the default worker
+    #   configuration that Amazon MSK Connect provides. If `true`, the
+    #   connector stops using its custom worker configuration and uses the
+    #   default worker configuration instead. If `false` or not specified,
+    #   the connector keeps its current worker configuration. You can't
+    #   specify both `useDefaultWorkerConfiguration` and
+    #   `workerConfiguration` in the same request.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/UpdateConnectorRequest AWS API Documentation
     #
     class UpdateConnectorRequest < Struct.new(
       :capacity,
       :connector_configuration,
+      :skip_health_validation,
       :connector_arn,
-      :current_version)
+      :current_version,
+      :plugins,
+      :worker_configuration,
+      :use_default_worker_configuration)
       SENSITIVE = [:connector_configuration]
       include Aws::Structure
     end
@@ -2310,6 +2454,26 @@ module Aws::KafkaConnect
       include Aws::Structure
     end
 
+    # The worker configuration to use when you update a connector via
+    # `UpdateConnector`.
+    #
+    # @!attribute [rw] revision
+    #   The revision of the worker configuration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] worker_configuration_arn
+    #   The Amazon Resource Name (ARN) of the worker configuration.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/WorkerConfigurationUpdate AWS API Documentation
+    #
+    class WorkerConfigurationUpdate < Struct.new(
+      :revision,
+      :worker_configuration_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Workers can send worker logs to different destination types. This
     # configuration specifies the details of these destinations.
     #
@@ -2363,13 +2527,29 @@ module Aws::KafkaConnect
     # Details about worker setting of a connector
     #
     # @!attribute [rw] capacity
-    #   A description of the connector's capacity.
+    #   Specifies the compute capacity settings of the connector.
     #   @return [Types::CapacityDescription]
+    #
+    # @!attribute [rw] plugins
+    #   Specifies which plugins the connector uses.
+    #   @return [Array<Types::PluginDescription>]
+    #
+    # @!attribute [rw] worker_configuration
+    #   Specifies which worker configuration the connector uses.
+    #   @return [Types::WorkerConfigurationDescription]
+    #
+    # @!attribute [rw] use_default_worker_configuration
+    #   Specifies whether the connector uses the default worker
+    #   configuration instead of a custom worker configuration.
+    #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kafkaconnect-2021-09-14/WorkerSetting AWS API Documentation
     #
     class WorkerSetting < Struct.new(
-      :capacity)
+      :capacity,
+      :plugins,
+      :worker_configuration,
+      :use_default_worker_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

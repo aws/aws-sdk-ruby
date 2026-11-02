@@ -728,6 +728,14 @@ module Aws::IVSRealTime
       SENSITIVE: []
     end
 
+    class RevokeConnectionTokenRequest
+      attr_accessor token_id: ::String
+      SENSITIVE: []
+    end
+
+    class RevokeConnectionTokenResponse < Aws::EmptyStructure
+    end
+
     class S3DestinationConfiguration
       attr_accessor storage_configuration_arn: ::String
       attr_accessor encoder_configuration_arns: ::Array[::String]

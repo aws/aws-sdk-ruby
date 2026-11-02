@@ -377,6 +377,29 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class DescribeReplicationBackfillResultsRequest
+      attr_accessor registry_id: ::String
+      attr_accessor replication_backfill_id: ::String
+      attr_accessor result_status_filter: ("COMPLETE" | "FAILED")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeReplicationBackfillResultsResponse
+      attr_accessor registry_id: ::String
+      attr_accessor replication_backfill_id: ::String
+      attr_accessor destination: Types::ReplicationDestination
+      attr_accessor status: ("PREPARING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
+      attr_accessor failure_code: ::String
+      attr_accessor progress: Types::ReplicationBackfillProgress
+      attr_accessor results: ::Array[Types::ReplicationBackfillResult]
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class DescribeRepositoriesRequest
       attr_accessor registry_id: ::String
       attr_accessor repository_names: ::Array[::String]
@@ -880,6 +903,20 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class ListReplicationBackfillsRequest
+      attr_accessor registry_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListReplicationBackfillsResponse
+      attr_accessor registry_id: ::String
+      attr_accessor backfills: ::Array[Types::ReplicationBackfillSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTagsForResourceRequest
       attr_accessor resource_arn: ::String
       SENSITIVE: []
@@ -1084,6 +1121,49 @@ module Aws::ECR
       SENSITIVE: []
     end
 
+    class ReplicationBackfillInProgressException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationBackfillInvalidStatusException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationBackfillNotFoundException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ReplicationBackfillProgress
+      attr_accessor total_replication_count: ::Integer
+      attr_accessor completed_replication_count: ::Integer
+      attr_accessor failed_replication_count: ::Integer
+      attr_accessor failure_codes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReplicationBackfillResult
+      attr_accessor repository_name: ::String
+      attr_accessor image_id: Types::ImageIdentifier
+      attr_accessor status: ("COMPLETE" | "FAILED")
+      attr_accessor failure_code: ::String
+      attr_accessor sub_image_failure_codes: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReplicationBackfillSummary
+      attr_accessor replication_backfill_id: ::String
+      attr_accessor destination: Types::ReplicationDestination
+      attr_accessor status: ("PREPARING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
+      attr_accessor failure_code: ::String
+      attr_accessor progress: Types::ReplicationBackfillProgress
+      attr_accessor started_at: ::Time
+      attr_accessor ended_at: ::Time
+      SENSITIVE: []
+    end
+
     class ReplicationConfiguration
       attr_accessor rules: ::Array[Types::ReplicationRule]
       SENSITIVE: []
@@ -1275,6 +1355,36 @@ module Aws::ECR
       attr_accessor repository_name: ::String
       attr_accessor lifecycle_policy_text: ::String
       attr_accessor status: ("IN_PROGRESS" | "COMPLETE" | "EXPIRED" | "FAILED")
+      SENSITIVE: []
+    end
+
+    class StartReplicationBackfillRequest
+      attr_accessor registry_id: ::String
+      attr_accessor destination: Types::ReplicationDestination
+      SENSITIVE: []
+    end
+
+    class StartReplicationBackfillResponse
+      attr_accessor replication_backfill_id: ::String
+      attr_accessor registry_id: ::String
+      attr_accessor destination: Types::ReplicationDestination
+      attr_accessor status: ("PREPARING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
+      attr_accessor started_at: ::Time
+      SENSITIVE: []
+    end
+
+    class StopReplicationBackfillRequest
+      attr_accessor registry_id: ::String
+      attr_accessor replication_backfill_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopReplicationBackfillResponse
+      attr_accessor registry_id: ::String
+      attr_accessor replication_backfill_id: ::String
+      attr_accessor destination: Types::ReplicationDestination
+      attr_accessor status: ("PREPARING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
+      attr_accessor started_at: ::Time
       SENSITIVE: []
     end
 

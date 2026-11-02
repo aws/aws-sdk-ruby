@@ -201,12 +201,19 @@ module Aws::CloudWatchLogs
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1589,14 +1596,40 @@ module Aws::CloudWatchLogs
     # @option params [required, String] :policy_type
     #   The type of policy to delete.
     #
-    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    # @option params [Boolean] :dry_run
+    #   Specifies whether to preview the impact of deleting the policy without
+    #   deleting it. If you specify `true`, CloudWatch Logs does not delete
+    #   the policy and returns the estimated impact in `dryRunResult`. The
+    #   default is `false`.
+    #
+    #   Specifying `dryRun` is valid only when you specify `RETENTION_POLICY`
+    #   for `policyType`. Only one dry run can be in progress for an account
+    #   at a time.
+    #
+    # @return [Types::DeleteAccountPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DeleteAccountPolicyResponse#dry_run_result #dry_run_result} => Types::DryRunResult
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.delete_account_policy({
     #     policy_name: "PolicyName", # required
-    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY, RETENTION_POLICY
+    #     dry_run: false,
     #   })
+    #
+    # @example Response structure
+    #
+    #   resp.dry_run_result.total_matched_log_groups #=> Integer
+    #   resp.dry_run_result.increased_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.decreased_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.unchanged_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.failed_analysis_count #=> Integer
+    #   resp.dry_run_result.top_log_groups_impacted #=> Array
+    #   resp.dry_run_result.top_log_groups_impacted[0].log_group_name #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].current_retention #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].proposed_retention #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].stored_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DeleteAccountPolicy AWS API Documentation
     #
@@ -2267,7 +2300,7 @@ module Aws::CloudWatchLogs
     # @example Request syntax with placeholder values
     #
     #   resp = client.describe_account_policies({
-    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY, RETENTION_POLICY
     #     policy_name: "PolicyName",
     #     account_identifiers: ["AccountId"],
     #     next_token: "NextToken",
@@ -2279,7 +2312,7 @@ module Aws::CloudWatchLogs
     #   resp.account_policies[0].policy_name #=> String
     #   resp.account_policies[0].policy_document #=> String
     #   resp.account_policies[0].last_updated_time #=> Integer
-    #   resp.account_policies[0].policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY"
+    #   resp.account_policies[0].policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY", "RETENTION_POLICY"
     #   resp.account_policies[0].scope #=> String, one of "ALL"
     #   resp.account_policies[0].selection_criteria #=> String
     #   resp.account_policies[0].account_id #=> String
@@ -2419,6 +2452,10 @@ module Aws::CloudWatchLogs
     #   Optionally specify the maximum number of deliveries to return in the
     #   response.
     #
+    # @option params [Array<String>] :delivery_source_names
+    #   An array of delivery source names that filters the results to
+    #   deliveries associated with any specified delivery source.
+    #
     # @return [Types::DescribeDeliveriesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDeliveriesResponse#deliveries #deliveries} => Array&lt;Types::Delivery&gt;
@@ -2431,6 +2468,7 @@ module Aws::CloudWatchLogs
     #   resp = client.describe_deliveries({
     #     next_token: "NextToken",
     #     limit: 1,
+    #     delivery_source_names: ["DeliverySourceName"],
     #   })
     #
     # @example Response structure
@@ -2470,6 +2508,10 @@ module Aws::CloudWatchLogs
     #   Optionally specify the maximum number of delivery destinations to
     #   return in the response.
     #
+    # @option params [Array<String>] :names
+    #   An array of delivery destination names that filters the results to
+    #   delivery destinations with any specified name.
+    #
     # @return [Types::DescribeDeliveryDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDeliveryDestinationsResponse#delivery_destinations #delivery_destinations} => Array&lt;Types::DeliveryDestination&gt;
@@ -2482,6 +2524,7 @@ module Aws::CloudWatchLogs
     #   resp = client.describe_delivery_destinations({
     #     next_token: "NextToken",
     #     limit: 1,
+    #     names: ["DeliveryDestinationName"],
     #   })
     #
     # @example Response structure
@@ -2517,6 +2560,10 @@ module Aws::CloudWatchLogs
     #   Optionally specify the maximum number of delivery sources to return in
     #   the response.
     #
+    # @option params [Array<String>] :resource_arns
+    #   An array of Amazon Resource Names (ARNs) that filters the results to
+    #   delivery sources associated with any specified ARN.
+    #
     # @return [Types::DescribeDeliverySourcesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::DescribeDeliverySourcesResponse#delivery_sources #delivery_sources} => Array&lt;Types::DeliverySource&gt;
@@ -2529,6 +2576,7 @@ module Aws::CloudWatchLogs
     #   resp = client.describe_delivery_sources({
     #     next_token: "NextToken",
     #     limit: 1,
+    #     resource_arns: ["Arn"],
     #   })
     #
     # @example Response structure
@@ -3066,6 +3114,7 @@ module Aws::CloudWatchLogs
     #   resp.log_groups[0].log_group_arn #=> String
     #   resp.log_groups[0].deletion_protection_enabled #=> Boolean
     #   resp.log_groups[0].bearer_token_authentication_enabled #=> Boolean
+    #   resp.log_groups[0].retention_policy_name #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/DescribeLogGroups AWS API Documentation
@@ -6445,18 +6494,30 @@ module Aws::CloudWatchLogs
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Subscriptions-recursion-prevention.html
     #
+    # @option params [Boolean] :dry_run
+    #   Specifies whether to preview the impact of the policy without creating
+    #   or updating it. If you specify `true`, CloudWatch Logs validates the
+    #   request, does not save the policy, and returns the estimated impact in
+    #   `dryRunResult` instead of `accountPolicy`. The default is `false`.
+    #
+    #   Specifying `dryRun` is valid only when you specify `RETENTION_POLICY`
+    #   for `policyType`. Only one dry run can be in progress for an account
+    #   at a time.
+    #
     # @return [Types::PutAccountPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::PutAccountPolicyResponse#account_policy #account_policy} => Types::AccountPolicy
+    #   * {Types::PutAccountPolicyResponse#dry_run_result #dry_run_result} => Types::DryRunResult
     #
     # @example Request syntax with placeholder values
     #
     #   resp = client.put_account_policy({
     #     policy_name: "PolicyName", # required
     #     policy_document: "AccountPolicyDocument", # required
-    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY
+    #     policy_type: "DATA_PROTECTION_POLICY", # required, accepts DATA_PROTECTION_POLICY, SUBSCRIPTION_FILTER_POLICY, FIELD_INDEX_POLICY, TRANSFORMER_POLICY, METRIC_EXTRACTION_POLICY, RETENTION_POLICY
     #     scope: "ALL", # accepts ALL
     #     selection_criteria: "SelectionCriteria",
+    #     dry_run: false,
     #   })
     #
     # @example Response structure
@@ -6464,10 +6525,20 @@ module Aws::CloudWatchLogs
     #   resp.account_policy.policy_name #=> String
     #   resp.account_policy.policy_document #=> String
     #   resp.account_policy.last_updated_time #=> Integer
-    #   resp.account_policy.policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY"
+    #   resp.account_policy.policy_type #=> String, one of "DATA_PROTECTION_POLICY", "SUBSCRIPTION_FILTER_POLICY", "FIELD_INDEX_POLICY", "TRANSFORMER_POLICY", "METRIC_EXTRACTION_POLICY", "RETENTION_POLICY"
     #   resp.account_policy.scope #=> String, one of "ALL"
     #   resp.account_policy.selection_criteria #=> String
     #   resp.account_policy.account_id #=> String
+    #   resp.dry_run_result.total_matched_log_groups #=> Integer
+    #   resp.dry_run_result.increased_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.decreased_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.unchanged_retention_log_group_count #=> Integer
+    #   resp.dry_run_result.failed_analysis_count #=> Integer
+    #   resp.dry_run_result.top_log_groups_impacted #=> Array
+    #   resp.dry_run_result.top_log_groups_impacted[0].log_group_name #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].current_retention #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].proposed_retention #=> String
+    #   resp.dry_run_result.top_log_groups_impacted[0].stored_bytes #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/logs-2014-03-28/PutAccountPolicy AWS API Documentation
     #
@@ -6969,7 +7040,12 @@ module Aws::CloudWatchLogs
     #     `AD_DECISION_SERVER_LOGS`, `MANIFEST_SERVICE_LOGS`, and
     #     `TRANSCODE_LOGS`.
     #
+    #   * For Amazon ECS, the valid value is `ACTION_LOGS`.
+    #
     #   * For Entity Resolution, the valid value is `WORKFLOW_LOGS`.
+    #
+    #   * For Amazon EventBridge Event Bus (Custom), the valid values are
+    #     `INFO_LOGS` and `ERROR_LOGS`.
     #
     #   * For IAM Identity Center, the valid value is `ERROR_LOGS`.
     #
@@ -6979,7 +7055,8 @@ module Aws::CloudWatchLogs
     #   * For Network Load Balancer, the valid value is `NLB_ACCESS_LOGS`.
     #
     #   * For PCS, the valid values are `PCS_SCHEDULER_LOGS`,
-    #     `PCS_JOBCOMP_LOGS`, and `PCS_SCHEDULER_AUDIT_LOGS`.
+    #     `PCS_JOBCOMP_LOGS`, `PCS_SCHEDULER_AUDIT_LOGS`, and
+    #     `PCS_SCALING_LOGS`.
     #
     #   * For Amazon Q, the valid values are `EVENT_LOGS` and `SYNC_JOB_LOGS`.
     #
@@ -7805,7 +7882,7 @@ module Aws::CloudWatchLogs
     #
     # * **Supported principals** - Policy only applies when operations are
     #   invoked by Amazon Web Services service principals (not IAM users,
-    #   roles, or cross-account principals
+    #   roles, or cross-account principals)
     #
     # * **Policy limits** - An account can have a maximum of 10 policies
     #   without resourceARN and one per LogGroup resourceARN
@@ -9709,7 +9786,7 @@ module Aws::CloudWatchLogs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-cloudwatchlogs'
-      context[:gem_version] = '1.165.0'
+      context[:gem_version] = '1.171.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

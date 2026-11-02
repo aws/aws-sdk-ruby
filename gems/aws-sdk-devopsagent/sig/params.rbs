@@ -60,6 +60,23 @@ module Aws
       ]?
     }
 
+      type ms_teams_transmission_target = {
+      ops_oncall_target: {
+        channel_name: ::String,
+        channel_id: ::String
+      }?,
+      ops_sre_target: {
+        channel_name: ::String,
+        channel_id: ::String
+      }?
+    }
+
+      type ms_teams_configuration = {
+      team_id: ::String,
+      team_name: ::String,
+      transmission_target: Params::ms_teams_transmission_target
+    }
+
       type release_management_configuration = {
       name: ::String,
       network_access: {
@@ -147,6 +164,7 @@ module Aws
       }?,
       remoteagentsigv4: {
       }?,
+      msteams: Params::ms_teams_configuration?,
       release_management: Params::release_management_configuration?
     }
 

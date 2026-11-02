@@ -11,61 +11,61 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class AlreadyExistsException < ::Aws::Errors::ServiceError
+      class AlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class ConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class EntityNotFoundException < ::Aws::Errors::ServiceError
+      class EntityNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ExpiredException < ::Aws::Errors::ServiceError
+      class ExpiredException < ServiceError
         def message: () -> ::String
       end
-      class GlueEncryptionException < ::Aws::Errors::ServiceError
+      class GlueEncryptionException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
         def message: () -> ::String
       end
-      class OperationTimeoutException < ::Aws::Errors::ServiceError
+      class OperationTimeoutException < ServiceError
         def message: () -> ::String
       end
-      class PermissionTypeMismatchException < ::Aws::Errors::ServiceError
+      class PermissionTypeMismatchException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotReadyException < ::Aws::Errors::ServiceError
+      class ResourceNotReadyException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNumberLimitExceededException < ::Aws::Errors::ServiceError
+      class ResourceNumberLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class StatisticsNotReadyYetException < ::Aws::Errors::ServiceError
+      class StatisticsNotReadyYetException < ServiceError
         def message: () -> ::String
       end
-      class ThrottledException < ::Aws::Errors::ServiceError
+      class ThrottledException < ServiceError
         def message: () -> ::String
       end
-      class TransactionCanceledException < ::Aws::Errors::ServiceError
+      class TransactionCanceledException < ServiceError
         def message: () -> ::String
       end
-      class TransactionCommitInProgressException < ::Aws::Errors::ServiceError
+      class TransactionCommitInProgressException < ServiceError
         def message: () -> ::String
       end
-      class TransactionCommittedException < ::Aws::Errors::ServiceError
+      class TransactionCommittedException < ServiceError
         def message: () -> ::String
       end
-      class WorkUnitsNotReadyYetException < ::Aws::Errors::ServiceError
+      class WorkUnitsNotReadyYetException < ServiceError
         def message: () -> ::String
       end
     end

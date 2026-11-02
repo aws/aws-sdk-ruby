@@ -11,65 +11,65 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ForbiddenException < ::Aws::Errors::ServiceError
+      class ForbiddenException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
         def resource_name: () -> ::String
       end
-      class ServiceFailureException < ::Aws::Errors::ServiceError
+      class ServiceFailureException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
         def retry_after_seconds: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
         def resource_name: () -> ::String
       end
-      class UnauthorizedException < ::Aws::Errors::ServiceError
+      class UnauthorizedException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class UnprocessableEntityException < ::Aws::Errors::ServiceError
+      class UnprocessableEntityException < ServiceError
         def code: () -> ::String
         def message: () -> ::String
         def request_id: () -> ::String

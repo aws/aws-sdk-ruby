@@ -1,0 +1,647 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module Continuum
+    class Client < ::Seahorse::Client::Base
+      include ::Aws::ClientStubs
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#initialize-instance_method
+      def self.new: (
+                      ?credentials: untyped,
+                      ?region: String,
+                      ?access_key_id: String,
+                      ?account_id: String,
+                      ?active_endpoint_cache: bool,
+                      ?adaptive_retry_wait_to_fill: bool,
+                      ?auth_scheme_preference: Array[String],
+                      ?client_side_monitoring: bool,
+                      ?client_side_monitoring_client_id: String,
+                      ?client_side_monitoring_host: String,
+                      ?client_side_monitoring_port: Integer,
+                      ?client_side_monitoring_publisher: untyped,
+                      ?convert_params: bool,
+                      ?correct_clock_skew: bool,
+                      ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
+                      ?disable_host_prefix_injection: bool,
+                      ?disable_request_compression: bool,
+                      ?endpoint: String,
+                      ?endpoint_cache_max_entries: Integer,
+                      ?endpoint_cache_max_threads: Integer,
+                      ?endpoint_cache_poll_interval: Integer,
+                      ?endpoint_discovery: bool,
+                      ?ignore_configured_endpoint_urls: bool,
+                      ?log_formatter: untyped,
+                      ?log_level: Symbol,
+                      ?logger: untyped,
+                      ?max_attempts: Integer,
+                      ?profile: String,
+                      ?request_checksum_calculation: String,
+                      ?request_min_compression_size_bytes: Integer,
+                      ?response_checksum_validation: String,
+                      ?retry_backoff: Proc,
+                      ?retry_base_delay: Float,
+                      ?retry_jitter: (:none | :equal | :full | ^(Integer) -> Integer),
+                      ?retry_limit: Integer,
+                      ?retry_max_delay: Integer,
+                      ?retry_mode: ("legacy" | "standard" | "adaptive"),
+                      ?sdk_ua_app_id: String,
+                      ?secret_access_key: String,
+                      ?session_token: String,
+                      ?sigv4a_signing_region_set: Array[String],
+                      ?stub_responses: untyped,
+                      ?telemetry_provider: Aws::Telemetry::TelemetryProviderBase,
+                      ?token_provider: untyped,
+                      ?use_dualstack_endpoint: bool,
+                      ?use_fips_endpoint: bool,
+                      ?validate_params: bool,
+                      ?endpoint_provider: untyped,
+                      ?http_proxy: String,
+                      ?http_open_timeout: (Float | Integer),
+                      ?http_read_timeout: (Float | Integer),
+                      ?http_idle_timeout: (Float | Integer),
+                      ?http_continue_timeout: (Float | Integer),
+                      ?ssl_timeout: (Float | Integer | nil),
+                      ?http_wire_trace: bool,
+                      ?ssl_verify_peer: bool,
+                      ?ssl_ca_bundle: String,
+                      ?ssl_ca_directory: String,
+                      ?ssl_ca_store: String,
+                      ?on_chunk_received: Proc,
+                      ?on_chunk_sent: Proc,
+                      ?raise_response_errors: bool
+                    ) -> instance
+                  | (?Hash[Symbol, untyped]) -> instance
+
+
+      interface _AssociateCollectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::AssociateCollectorOutput]
+        def environment_id: () -> ::String
+        def environment_arn: () -> ::String
+        def associated_collector: () -> Types::AssociatedCollector
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#associate_collector-instance_method
+      def associate_collector: (
+                                 environment_id: ::String,
+                                 ?client_token: ::String,
+                                 collector_arn: ::String,
+                                 collector_data_access_role_arn: ::String
+                               ) -> _AssociateCollectorResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _AssociateCollectorResponseSuccess
+
+      interface _CreateCodeFindingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeFindingOutput]
+        def finding_id: () -> ::String
+        def finding_arn: () -> ::String
+        def title: () -> ::String
+        def status: () -> ("SUBMITTED" | "VALIDATING" | "CONFIRMED" | "DISCARDED")
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#create_code_finding-instance_method
+      def create_code_finding: (
+                                 environment_id: ::String,
+                                 ocsf_document: {
+                                 },
+                                 ?client_token: ::String
+                               ) -> _CreateCodeFindingResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeFindingResponseSuccess
+
+      interface _CreateCodeScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCodeScanOutput]
+        def scan: () -> Types::CodeScanSummary
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#create_code_scan-instance_method
+      def create_code_scan: (
+                              environment_id: ::String,
+                              ?client_token: ::String
+                            ) -> _CreateCodeScanResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCodeScanResponseSuccess
+
+      interface _CreateCollectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateCollectorOutput]
+        def collector_id: () -> ::String
+        def collector_arn: () -> ::String
+        def type: () -> ("AWS_COLLECTOR")
+        def status: () -> ("ACTIVE" | "PENDING_DELETION")
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#create_collector-instance_method
+      def create_collector: (
+                              ?type: ("AWS_COLLECTOR"),
+                              ?kubernetes_cluster_role: {
+                                role_arn: ::String,
+                                external_id: ::String?
+                              },
+                              ?client_token: ::String
+                            ) -> _CreateCollectorResponseSuccess
+                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCollectorResponseSuccess
+
+      interface _CreateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateEnvironmentOutput]
+        def environment_id: () -> ::String
+        def environment_arn: () -> ::String
+        def status: () -> ("ACTIVE")
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#create_environment-instance_method
+      def create_environment: (
+                                name: ::String,
+                                ?configuration: {
+                                  code_configuration: {
+                                    source_configuration: Params::environment_source_configuration?,
+                                    environment_configuration: {
+                                      network: {
+                                        allowed_domains: Array[::String]?
+                                      }?,
+                                      scan_frequency: ::String?,
+                                      patch_creation_policy: ("ENABLED" | "DISABLED")?
+                                    }?
+                                  }?
+                                }
+                              ) -> _CreateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateEnvironmentResponseSuccess
+
+      interface _CreateIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateIntegrationOutput]
+        def integration_id: () -> ::String
+        def integration_arn: () -> ::String
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#create_integration-instance_method
+      def create_integration: (
+                                ?client_token: ::String,
+                                name: ::String,
+                                provider_configuration: {
+                                  github: {
+                                    authorization: {
+                                      authorization_code: ::String,
+                                      state: ::String,
+                                      redirect_url: ::String?
+                                    },
+                                    organization_name: ::String?
+                                  }?,
+                                  gitlab: {
+                                    instance_url: ::String,
+                                    target_type: ("GROUP" | "PROJECT"),
+                                    target_path: ::String,
+                                    access_token: ::String
+                                  }?,
+                                  s3: {
+                                    bucket: ::String,
+                                    role_arn: ::String,
+                                    external_id: ::String
+                                  }?
+                                }
+                              ) -> _CreateIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateIntegrationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#delete_collector-instance_method
+      def delete_collector: (
+                              collector_id: ::String
+                            ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#delete_environment-instance_method
+      def delete_environment: (
+                                environment_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#delete_integration-instance_method
+      def delete_integration: (
+                                integration_id: ::String
+                              ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#disassociate_collector-instance_method
+      def disassociate_collector: (
+                                    environment_id: ::String,
+                                    collector_arn: ::String
+                                  ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
+      interface _GetCodeFindingResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeFindingOutput]
+        def type: () -> ("CONTINUUM_CODE_VULN" | "CUSTOMER_CODE_VULN")
+        def title: () -> ::String
+        def severity: () -> ("UNKNOWN" | "INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH" | "CRITICAL" | "FATAL" | "OTHER")
+        def summary: () -> ::String
+        def detailed_description: () -> ::String
+        def category: () -> ::String
+        def sub_category: () -> ::String
+        def cwe_ids: () -> ::Array[::String]
+        def owasp_category: () -> ::String
+        def mitigation: () -> ::String
+        def file_path: () -> ::String
+        def line_number: () -> ::Integer
+        def cve_id: () -> ::String
+        def cvss_base_score: () -> ::Float
+        def affected_packages: () -> ::Array[Types::AffectedPackage]
+        def vulnerable_code: () -> ::String
+        def relevant_inputs: () -> ::Array[::String]
+        def steps_to_reproduce: () -> ::Array[::String]
+        def validation: () -> Types::FindingValidation
+        def end_line: () -> ::Integer
+        def mitre_techniques: () -> ::Array[::String]
+        def remediation_references: () -> ::Array[::String]
+        def ocsf_class: () -> ("VULNERABILITY_FINDING" | "APPLICATION_SECURITY_POSTURE_FINDING")
+        def ocsf_schema_version: () -> ::String
+        def product_name: () -> ::String
+        def product_vendor_name: () -> ::String
+        def product_version: () -> ::String
+        def source_status: () -> ::String
+        def source_status_id: () -> ::Integer
+        def first_seen_at: () -> ::Time
+        def finding_types: () -> ::Array[::String]
+        def vulnerabilities: () -> ::Array[Types::FindingVulnerability]
+        def resources: () -> ::Array[Types::FindingResource]
+        def posture: () -> Types::FindingPosture
+        def finding_id: () -> ::String
+        def finding_arn: () -> ::String
+        def environment_id: () -> ::String
+        def source: () -> ::String
+        def source_finding_id: () -> ::String
+        def reported_at: () -> ::Time
+        def status: () -> ("SUBMITTED" | "VALIDATING" | "CONFIRMED" | "DISCARDED")
+        def status_updated_at: () -> ::Time
+        def created_at: () -> ::Time
+        def scan_run_id: () -> ::String
+        def status_message: () -> ::String
+        def discard_reason: () -> ("SCANNER_VALIDATED_FALSE_POSITIVE" | "SCANNER_NEEDS_REVIEW" | "FALSE_POSITIVE_VALIDATED_AGAINST_CONTEXT" | "DUPLICATE_OF_OPEN_ISSUE" | "DUPLICATE_OF_CLOSED_ISSUE" | "COMPENSATING_CONTROL_PRESENT" | "OUT_OF_SCOPE" | "INSUFFICIENT_EVIDENCE" | "PROCESSING_FAILED" | "SOURCE_REPO_NOT_FOUND")
+        def discard_reasoning: () -> ::String
+        def duplicate_of_issue_id: () -> ::String
+        def created_issue_id: () -> ::String
+        def completed_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#get_code_finding-instance_method
+      def get_code_finding: (
+                              environment_id: ::String,
+                              finding_id: ::String
+                            ) -> _GetCodeFindingResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeFindingResponseSuccess
+
+      interface _GetCodeIssueResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeIssueOutput]
+        def issue_id: () -> ::String
+        def issue_arn: () -> ::String
+        def name: () -> ::String
+        def synopsis: () -> ::String
+        def severity: () -> ("LOW" | "MEDIUM" | "HIGH" | "CRITICAL")
+        def confidence: () -> ::Integer
+        def severity_reasoning: () -> ::String
+        def summary: () -> ::String
+        def finding_ids: () -> ::Array[::String]
+        def status: () -> ("CREATED" | "IN_PROGRESS" | "COMPLETED" | "FAILED")
+        def phase: () -> ("VALIDATION" | "PRIORITIZATION" | "REMEDIATION")
+        def status_reason: () -> ("INTERNAL_ERROR" | "REMEDIATION_FAILED")
+        def status_message: () -> ::String
+        def status_updated_at: () -> ::Time
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def evidence_availability: () -> ("NONE" | "AVAILABLE")
+        def patch_delivery: () -> Types::IssuePatchDelivery
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#get_code_issue-instance_method
+      def get_code_issue: (
+                            environment_id: ::String,
+                            issue_id: ::String
+                          ) -> _GetCodeIssueResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeIssueResponseSuccess
+
+      interface _GetCodeIssueArtifactResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeIssueArtifactOutput]
+        def artifact_id: () -> ::String
+        def artifact_type: () -> ("EVIDENCE" | "AGENT_COMMUNICATION" | "VALIDATION_EVIDENCE" | "REMEDIATION_PROPOSAL" | "DECISION" | "PATCH")
+        def media_type: () -> ::String
+        def body: () -> Types::IssueArtifactBody
+        def metadata: () -> untyped
+        def producer: () -> Types::IssueArtifactProducerSummary
+        def created_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#get_code_issue_artifact-instance_method
+      def get_code_issue_artifact: (
+                                     environment_id: ::String,
+                                     issue_id: ::String,
+                                     artifact_id: ::String
+                                   ) -> _GetCodeIssueArtifactResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeIssueArtifactResponseSuccess
+
+      interface _GetCodeScanResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCodeScanOutput]
+        def scan: () -> Types::CodeScanData
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#get_code_scan-instance_method
+      def get_code_scan: (
+                           environment_id: ::String,
+                           scan_run_id: ::String
+                         ) -> _GetCodeScanResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCodeScanResponseSuccess
+
+      interface _GetCollectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCollectorOutput]
+        def collector_id: () -> ::String
+        def collector_arn: () -> ::String
+        def type: () -> ("AWS_COLLECTOR")
+        def status: () -> ("ACTIVE" | "PENDING_DELETION")
+        def config_recorder_arn: () -> ::String
+        def kubernetes_cluster_role_arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#get_collector-instance_method
+      def get_collector: (
+                           collector_id: ::String
+                         ) -> _GetCollectorResponseSuccess
+                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollectorResponseSuccess
+
+      interface _GetCollectorDataAccessAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetCollectorDataAccessAuthorizationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#get_collector_data_access_authorization-instance_method
+      def get_collector_data_access_authorization: (
+                                                     account_id: ::String,
+                                                     collector_id: ::String,
+                                                     ?environment_arn: ::String
+                                                   ) -> _GetCollectorDataAccessAuthorizationResponseSuccess
+                                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetCollectorDataAccessAuthorizationResponseSuccess
+
+      interface _GetEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetEnvironmentOutput]
+        def environment_id: () -> ::String
+        def environment_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ACTIVE")
+        def status_message: () -> ::String
+        def status_updated_at: () -> ::Time
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+        def configuration: () -> Types::EnvironmentConfigurationDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#get_environment-instance_method
+      def get_environment: (
+                             environment_id: ::String
+                           ) -> _GetEnvironmentResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetEnvironmentResponseSuccess
+
+      interface _GetIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetIntegrationOutput]
+        def integration_id: () -> ::String
+        def integration_arn: () -> ::String
+        def name: () -> ::String
+        def integration_type: () -> ("GITHUB" | "GITLAB" | "S3")
+        def provider_details: () -> Types::ProviderDetails
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#get_integration-instance_method
+      def get_integration: (
+                             integration_id: ::String
+                           ) -> _GetIntegrationResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetIntegrationResponseSuccess
+
+      interface _GetResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetResourcePolicyOutput]
+        def arn: () -> ::String
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#get_resource_policy-instance_method
+      def get_resource_policy: (
+                                 arn: ::String
+                               ) -> _GetResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetResourcePolicyResponseSuccess
+
+      interface _ListAssociatedCollectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedCollectorsOutput]
+        def associated_collectors: () -> ::Array[Types::AssociatedCollector]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#list_associated_collectors-instance_method
+      def list_associated_collectors: (
+                                        environment_id: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListAssociatedCollectorsResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedCollectorsResponseSuccess
+
+      interface _ListAssociatedEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListAssociatedEnvironmentsOutput]
+        def associated_environments: () -> ::Array[Types::AssociatedEnvironment]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#list_associated_environments-instance_method
+      def list_associated_environments: (
+                                          collector_id: ::String,
+                                          ?max_results: ::Integer,
+                                          ?next_token: ::String
+                                        ) -> _ListAssociatedEnvironmentsResponseSuccess
+                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListAssociatedEnvironmentsResponseSuccess
+
+      interface _ListCodeFindingsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeFindingsOutput]
+        def items: () -> ::Array[Types::FindingSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#list_code_findings-instance_method
+      def list_code_findings: (
+                                environment_id: ::String,
+                                ?max_results: ::Integer,
+                                ?next_token: ::String
+                              ) -> _ListCodeFindingsResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeFindingsResponseSuccess
+
+      interface _ListCodeIssueArtifactsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeIssueArtifactsOutput]
+        def items: () -> ::Array[Types::IssueArtifactItem]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#list_code_issue_artifacts-instance_method
+      def list_code_issue_artifacts: (
+                                       environment_id: ::String,
+                                       issue_id: ::String,
+                                       ?artifact_type: ("EVIDENCE" | "AGENT_COMMUNICATION" | "VALIDATION_EVIDENCE" | "REMEDIATION_PROPOSAL" | "DECISION" | "PATCH"),
+                                       ?max_results: ::Integer,
+                                       ?next_token: ::String
+                                     ) -> _ListCodeIssueArtifactsResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeIssueArtifactsResponseSuccess
+
+      interface _ListCodeIssuesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeIssuesOutput]
+        def items: () -> ::Array[Types::IssueSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#list_code_issues-instance_method
+      def list_code_issues: (
+                              environment_id: ::String,
+                              ?max_results: ::Integer,
+                              ?next_token: ::String
+                            ) -> _ListCodeIssuesResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeIssuesResponseSuccess
+
+      interface _ListCodeScansResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCodeScansOutput]
+        def scans: () -> ::Array[Types::CodeScanSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#list_code_scans-instance_method
+      def list_code_scans: (
+                             environment_id: ::String,
+                             ?max_results: ::Integer,
+                             ?next_token: ::String
+                           ) -> _ListCodeScansResponseSuccess
+                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCodeScansResponseSuccess
+
+      interface _ListCollectorsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListCollectorsOutput]
+        def items: () -> ::Array[Types::CollectorSummary]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#list_collectors-instance_method
+      def list_collectors: (
+                           ) -> _ListCollectorsResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCollectorsResponseSuccess
+
+      interface _ListEnvironmentsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListEnvironmentsOutput]
+        def items: () -> ::Array[Types::EnvironmentListEntry]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#list_environments-instance_method
+      def list_environments: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListEnvironmentsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListEnvironmentsResponseSuccess
+
+      interface _ListIntegrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListIntegrationsOutput]
+        def items: () -> ::Array[Types::IntegrationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#list_integrations-instance_method
+      def list_integrations: (
+                               ?max_results: ::Integer,
+                               ?next_token: ::String
+                             ) -> _ListIntegrationsResponseSuccess
+                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListIntegrationsResponseSuccess
+
+      interface _PutResourcePolicyResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::PutResourcePolicyOutput]
+        def arn: () -> ::String
+        def policy: () -> ::String
+        def revision_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#put_resource_policy-instance_method
+      def put_resource_policy: (
+                                 arn: ::String,
+                                 ?policy: ::String,
+                                 ?expected_revision_id: ::String
+                               ) -> _PutResourcePolicyResponseSuccess
+                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _StartIntegrationAuthorizationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartIntegrationAuthorizationOutput]
+        def state: () -> ::String
+        def code_challenge: () -> ::String
+        def code_challenge_method: () -> ("S256")
+        def expires_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#start_integration_authorization-instance_method
+      def start_integration_authorization: (
+                                             provider_type: ("GITHUB"),
+                                             ?name: ::String
+                                           ) -> _StartIntegrationAuthorizationResponseSuccess
+                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartIntegrationAuthorizationResponseSuccess
+
+      interface _UpdateCollectorResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateCollectorOutput]
+        def collector_id: () -> ::String
+        def collector_arn: () -> ::String
+        def type: () -> ("AWS_COLLECTOR")
+        def status: () -> ("ACTIVE" | "PENDING_DELETION")
+        def config_recorder_arn: () -> ::String
+        def kubernetes_cluster_role_arn: () -> ::String
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#update_collector-instance_method
+      def update_collector: (
+                              collector_id: ::String,
+                              ?name: ::String,
+                              ?kubernetes_cluster_role: {
+                                set: {
+                                  role_arn: ::String,
+                                  external_id: ::String?
+                                }?,
+                                remove: {
+                                }?
+                              }
+                            ) -> _UpdateCollectorResponseSuccess
+                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCollectorResponseSuccess
+
+      interface _UpdateEnvironmentResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateEnvironmentOutput]
+        def environment_id: () -> ::String
+        def environment_arn: () -> ::String
+        def name: () -> ::String
+        def status: () -> ("ACTIVE")
+        def status_message: () -> ::String
+        def status_updated_at: () -> ::Time
+        def created_at: () -> ::Time
+        def configuration: () -> Types::EnvironmentConfigurationDetails
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#update_environment-instance_method
+      def update_environment: (
+                                environment_id: ::String,
+                                ?name: ::String,
+                                ?configuration: {
+                                  code_configuration: {
+                                    source_configuration: Params::environment_source_configuration?,
+                                    environment_configuration: {
+                                      network: {
+                                        allowed_domains: Array[::String]?
+                                      }?,
+                                      scan_frequency: ::String?,
+                                      patch_creation_policy: ("ENABLED" | "DISABLED")?
+                                    }?
+                                  }?
+                                }
+                              ) -> _UpdateEnvironmentResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateEnvironmentResponseSuccess
+
+      interface _UpdateIntegrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateIntegrationOutput]
+        def integration_id: () -> ::String
+        def integration_arn: () -> ::String
+        def name: () -> ::String
+        def integration_type: () -> ("GITHUB" | "GITLAB" | "S3")
+        def provider_details: () -> Types::ProviderDetails
+        def created_at: () -> ::Time
+        def updated_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#update_integration-instance_method
+      def update_integration: (
+                                integration_id: ::String,
+                                provider_configuration: {
+                                  s3: {
+                                    role_arn: ::String,
+                                    external_id: ::String?
+                                  }?
+                                }
+                              ) -> _UpdateIntegrationResponseSuccess
+                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateIntegrationResponseSuccess
+
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Continuum/Client.html#wait_until-instance_method
+      def wait_until: (:code_scan_succeeded waiter_name, 
+                    environment_id: ::String,
+                    scan_run_id: ::String
+                  ) -> Client::_GetCodeScanResponseSuccess
+                    | (:code_scan_succeeded waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_GetCodeScanResponseSuccess
+    end
+  end
+end
+

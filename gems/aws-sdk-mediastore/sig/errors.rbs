@@ -11,22 +11,22 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ContainerInUseException < ::Aws::Errors::ServiceError
+      class ContainerInUseException < ServiceError
         def message: () -> ::String
       end
-      class ContainerNotFoundException < ::Aws::Errors::ServiceError
+      class ContainerNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class CorsPolicyNotFoundException < ::Aws::Errors::ServiceError
+      class CorsPolicyNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerError < ::Aws::Errors::ServiceError
+      class InternalServerError < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class PolicyNotFoundException < ::Aws::Errors::ServiceError
+      class PolicyNotFoundException < ServiceError
         def message: () -> ::String
       end
     end

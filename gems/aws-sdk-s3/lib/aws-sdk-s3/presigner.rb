@@ -251,7 +251,7 @@ module Aws
             time: time
           ).to_s
 
-          Seahorse::Client::Response.new(context: context, data: url)
+          Aws::Response.new(context: context, data: url)
         end
         # Return the headers
         x_amz_headers

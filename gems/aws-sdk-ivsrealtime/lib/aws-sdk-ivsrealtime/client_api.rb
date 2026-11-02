@@ -33,6 +33,7 @@ module Aws::IVSRealTime
     CompositionThumbnailConfiguration = Shapes::StructureShape.new(name: 'CompositionThumbnailConfiguration')
     CompositionThumbnailConfigurationList = Shapes::ListShape.new(name: 'CompositionThumbnailConfigurationList')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+    ConnectionTokenId = Shapes::StringShape.new(name: 'ConnectionTokenId')
     CreateEncoderConfigurationRequest = Shapes::StructureShape.new(name: 'CreateEncoderConfigurationRequest')
     CreateEncoderConfigurationResponse = Shapes::StructureShape.new(name: 'CreateEncoderConfigurationResponse')
     CreateIngestConfigurationRequest = Shapes::StructureShape.new(name: 'CreateIngestConfigurationRequest')
@@ -202,6 +203,8 @@ module Aws::IVSRealTime
     ReplicationType = Shapes::StringShape.new(name: 'ReplicationType')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RevokeConnectionTokenRequest = Shapes::StructureShape.new(name: 'RevokeConnectionTokenRequest')
+    RevokeConnectionTokenResponse = Shapes::StructureShape.new(name: 'RevokeConnectionTokenResponse')
     S3BucketName = Shapes::StringShape.new(name: 'S3BucketName')
     S3DestinationConfiguration = Shapes::StructureShape.new(name: 'S3DestinationConfiguration')
     S3Detail = Shapes::StructureShape.new(name: 'S3Detail')
@@ -829,6 +832,11 @@ module Aws::IVSRealTime
     ResourceNotFoundException.add_member(:x_amzn_error_type, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "x-amzn-ErrorType"))
     ResourceNotFoundException.add_member(:exception_message, Shapes::ShapeRef.new(shape: errorMessage, location_name: "exceptionMessage"))
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
+
+    RevokeConnectionTokenRequest.add_member(:token_id, Shapes::ShapeRef.new(shape: ConnectionTokenId, required: true, location_name: "tokenId"))
+    RevokeConnectionTokenRequest.struct_class = Types::RevokeConnectionTokenRequest
+
+    RevokeConnectionTokenResponse.struct_class = Types::RevokeConnectionTokenResponse
 
     S3DestinationConfiguration.add_member(:storage_configuration_arn, Shapes::ShapeRef.new(shape: StorageConfigurationArn, required: true, location_name: "storageConfigurationArn"))
     S3DestinationConfiguration.add_member(:encoder_configuration_arns, Shapes::ShapeRef.new(shape: EncoderConfigurationArnList, required: true, location_name: "encoderConfigurationArns"))
@@ -1459,6 +1467,17 @@ module Aws::IVSRealTime
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:revoke_connection_token, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RevokeConnectionToken"
+        o.http_method = "POST"
+        o.http_request_uri = "/RevokeConnectionToken"
+        o.input = Shapes::ShapeRef.new(shape: RevokeConnectionTokenRequest)
+        o.output = Shapes::ShapeRef.new(shape: RevokeConnectionTokenResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 

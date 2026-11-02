@@ -314,6 +314,27 @@
       ],
       "readonly":true
     },
+    "PauseConnector":{
+      "name":"PauseConnector",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/v1/connectors/{connectorArn}/pause",
+        "responseCode":200
+      },
+      "input":{"shape":"PauseConnectorRequest"},
+      "output":{"shape":"PauseConnectorResponse"},
+      "errors":[
+        {"shape":"ConflictException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ForbiddenException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"}
+      ],
+      "idempotent":true
+    },
     "RestartConnector":{
       "name":"RestartConnector",
       "http":{
@@ -332,6 +353,27 @@
         {"shape":"UnauthorizedException"},
         {"shape":"InternalServerErrorException"}
       ]
+    },
+    "ResumeConnector":{
+      "name":"ResumeConnector",
+      "http":{
+        "method":"PUT",
+        "requestUri":"/v1/connectors/{connectorArn}/resume",
+        "responseCode":200
+      },
+      "input":{"shape":"ResumeConnectorRequest"},
+      "output":{"shape":"ResumeConnectorResponse"},
+      "errors":[
+        {"shape":"ConflictException"},
+        {"shape":"NotFoundException"},
+        {"shape":"BadRequestException"},
+        {"shape":"ForbiddenException"},
+        {"shape":"ServiceUnavailableException"},
+        {"shape":"TooManyRequestsException"},
+        {"shape":"UnauthorizedException"},
+        {"shape":"InternalServerErrorException"}
+      ],
+      "idempotent":true
     },
     "TagResource":{
       "name":"TagResource",
@@ -539,6 +581,12 @@
         "ROLLBACK_IN_PROGRESS",
         "ROLLBACK_FAILED",
         "ROLLBACK_COMPLETE",
+        "PAUSE_COMPLETE",
+        "PAUSE_FAILED",
+        "RESUME_COMPLETE",
+        "RESUME_FAILED",
+        "PAUSE_IN_PROGRESS",
+        "RESUME_IN_PROGRESS",
         "RESTART_IN_PROGRESS",
         "RESTART_COMPLETE",
         "RESTART_FAILED"
@@ -588,7 +636,9 @@
         "UPDATE_CONNECTOR_CONFIGURATION",
         "ISOLATE_CONNECTOR",
         "RESTORE_CONNECTOR",
-        "RESTART_CONNECTOR"
+        "RESTART_CONNECTOR",
+        "PAUSE_CONNECTOR",
+        "RESUME_CONNECTOR"
       ]
     },
     "ConnectorState":{
@@ -599,7 +649,10 @@
         "UPDATING",
         "DELETING",
         "FAILED",
-        "RESTARTING"
+        "PAUSED",
+        "RESTARTING",
+        "PAUSING",
+        "RESUMING"
       ]
     },
     "ConnectorSummary":{
@@ -784,6 +837,20 @@
         "description":{"shape":"__string"},
         "latestRevision":{"shape":"CustomPluginRevisionSummary"},
         "name":{"shape":"__string"}
+      }
+    },
+    "CustomPluginUpdate":{
+      "type":"structure",
+      "required":[
+        "customPluginArn",
+        "revision"
+      ],
+      "members":{
+        "customPluginArn":{"shape":"__string"},
+        "revision":{
+          "shape":"__longMin1",
+          "box":true
+        }
       }
     },
     "DeleteConnectorRequest":{
@@ -1203,6 +1270,24 @@
       },
       "exception":true
     },
+    "PauseConnectorRequest":{
+      "type":"structure",
+      "required":["connectorArn"],
+      "members":{
+        "connectorArn":{
+          "shape":"__string",
+          "location":"uri",
+          "locationName":"connectorArn"
+        }
+      }
+    },
+    "PauseConnectorResponse":{
+      "type":"structure",
+      "members":{
+        "connectorArn":{"shape":"__string"},
+        "connectorOperationArn":{"shape":"__string"}
+      }
+    },
     "Plugin":{
       "type":"structure",
       "required":["customPlugin"],
@@ -1214,6 +1299,13 @@
       "type":"structure",
       "members":{
         "customPlugin":{"shape":"CustomPluginDescription"}
+      }
+    },
+    "PluginUpdate":{
+      "type":"structure",
+      "required":["customPlugin"],
+      "members":{
+        "customPlugin":{"shape":"CustomPluginUpdate"}
       }
     },
     "ProvisionedCapacity":{
@@ -1262,6 +1354,24 @@
       }
     },
     "RestartConnectorResponse":{
+      "type":"structure",
+      "members":{
+        "connectorArn":{"shape":"__string"},
+        "connectorOperationArn":{"shape":"__string"}
+      }
+    },
+    "ResumeConnectorRequest":{
+      "type":"structure",
+      "required":["connectorArn"],
+      "members":{
+        "connectorArn":{
+          "shape":"__string",
+          "location":"uri",
+          "locationName":"connectorArn"
+        }
+      }
+    },
+    "ResumeConnectorResponse":{
       "type":"structure",
       "members":{
         "connectorArn":{"shape":"__string"},
@@ -1457,6 +1567,7 @@
       "members":{
         "capacity":{"shape":"CapacityUpdate"},
         "connectorConfiguration":{"shape":"ConnectorConfigurationUpdate"},
+        "skipHealthValidation":{"shape":"__boolean"},
         "connectorArn":{
           "shape":"__string",
           "location":"uri",
@@ -1466,7 +1577,10 @@
           "shape":"__string",
           "location":"querystring",
           "locationName":"currentVersion"
-        }
+        },
+        "plugins":{"shape":"__listOfPluginUpdate"},
+        "workerConfiguration":{"shape":"WorkerConfigurationUpdate"},
+        "useDefaultWorkerConfiguration":{"shape":"__boolean"}
       }
     },
     "UpdateConnectorResponse":{
@@ -1545,6 +1659,20 @@
         "workerConfigurationState":{"shape":"WorkerConfigurationState"}
       }
     },
+    "WorkerConfigurationUpdate":{
+      "type":"structure",
+      "required":[
+        "revision",
+        "workerConfigurationArn"
+      ],
+      "members":{
+        "revision":{
+          "shape":"__longMin1",
+          "box":true
+        },
+        "workerConfigurationArn":{"shape":"__string"}
+      }
+    },
     "WorkerLogDelivery":{
       "type":"structure",
       "members":{
@@ -1564,7 +1692,10 @@
     "WorkerSetting":{
       "type":"structure",
       "members":{
-        "capacity":{"shape":"CapacityDescription"}
+        "capacity":{"shape":"CapacityDescription"},
+        "plugins":{"shape":"__listOfPluginDescription"},
+        "workerConfiguration":{"shape":"WorkerConfigurationDescription"},
+        "useDefaultWorkerConfiguration":{"shape":"__boolean"}
       }
     },
     "__boolean":{"type":"boolean"},
@@ -1602,6 +1733,10 @@
     "__listOfPluginDescription":{
       "type":"list",
       "member":{"shape":"PluginDescription"}
+    },
+    "__listOfPluginUpdate":{
+      "type":"list",
+      "member":{"shape":"PluginUpdate"}
     },
     "__listOfWorkerConfigurationSummary":{
       "type":"list",

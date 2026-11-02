@@ -11,16 +11,16 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
       end
-      class UnauthorizedException < ::Aws::Errors::ServiceError
+      class UnauthorizedException < ServiceError
         def message: () -> ::String
       end
     end

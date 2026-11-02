@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'securerandom'
+
 module Aws
   module S3
     # @api private
@@ -10,9 +12,12 @@ module Aws
     # Returns Credentials class for S3 Express. Accepts CreateSession
     # params as options. See {Client#create_session} for details.
     class ExpressCredentialsProvider
+      CACHE_KEY_SECRET = SecureRandom.random_bytes(64)
+      private_constant :CACHE_KEY_SECRET
+
       # @param [Hash] options
       # @option options [Client] :client The S3 client used to create the
-      #  session.
+      #  session when one is not given to {#express_credentials_for}.
       # @option options [String] :session_mode (see: {Client#create_session})
       # @option options [Boolean] :caching (true) When true, credentials will
       #  be cached.
@@ -27,11 +32,12 @@ module Aws
         @cache = Aws::S3.express_credentials_cache
       end
 
-      def express_credentials_for(bucket)
+      def express_credentials_for(bucket, client = @client)
+        credentials = client.config.credentials&.credentials
         if @caching
-          cached_credentials_for(bucket)
+          cached_credentials_for(bucket, client, credentials)
         else
-          new_credentials_for(bucket)
+          new_credentials_for(bucket, client, credentials)
         end
       end
 
@@ -39,18 +45,23 @@ module Aws
 
       private
 
-      def cached_credentials_for(bucket)
-        if @cache.key?(bucket)
-          @cache[bucket]
-        else
-          @cache[bucket] = new_credentials_for(bucket)
-        end
+      def cached_credentials_for(bucket, client, credentials)
+        @cache[cache_key(bucket, credentials)] ||= new_credentials_for(bucket, client, credentials)
       end
 
-      def new_credentials_for(bucket)
+      def cache_key(bucket, credentials)
+        identity = "#{credentials&.access_key_id}#{credentials&.secret_access_key}"
+        "#{OpenSSL::HMAC.hexdigest('SHA256', CACHE_KEY_SECRET, identity)}#{bucket}"
+      end
+
+      def new_credentials_for(bucket, client, credentials)
+        # Sign with this snapshot, but report the provider's UserAgent metrics.
+        credentials = credentials&.dup
+        credentials&.metrics = client.config.credentials.metrics
         ExpressCredentials.new(
           bucket: bucket,
-          client: @client,
+          client: client,
+          base_credentials: credentials,
           **@options
         )
       end

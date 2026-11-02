@@ -199,12 +199,19 @@ module Aws::Omics
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -3615,6 +3622,7 @@ module Aws::Omics
     #   * {Types::GetRunResponse#vpc_config #vpc_config} => Types::VpcConfigResponse
     #   * {Types::GetRunResponse#engine_settings #engine_settings} => Hash,Array,String,Numeric,Boolean
     #   * {Types::GetRunResponse#session_policy #session_policy} => String
+    #   * {Types::GetRunResponse#output_uri_prefix_mode #output_uri_prefix_mode} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -3676,6 +3684,7 @@ module Aws::Omics
     #   resp.vpc_config.vpc_id #=> String
     #   resp.vpc_config.vpc_owner_account_id #=> String
     #   resp.session_policy #=> String
+    #   resp.output_uri_prefix_mode #=> String, one of "SERVICE_DEFINED", "NONE_WITH_OVERWRITE"
     #
     #
     # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
@@ -6562,6 +6571,11 @@ module Aws::Omics
     #   serialized using the same format as its surroundings and requires no
     #   additional encoding or escaping.
     #
+    # @option params [String] :output_uri_prefix_mode
+    #   You can control the path prefixes that the service adds beneath
+    #   `outputUri`. If you don't specify a value, the service uses
+    #   `SERVICE_DEFINED`, which adds a run-specific prefix.
+    #
     # @return [Types::StartRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::StartRunResponse#arn #arn} => String
@@ -6604,6 +6618,7 @@ module Aws::Omics
     #     session_policy: "SessionPolicy",
     #     engine_settings: {
     #     },
+    #     output_uri_prefix_mode: "SERVICE_DEFINED", # accepts SERVICE_DEFINED, NONE_WITH_OVERWRITE
     #   })
     #
     # @example Response structure
@@ -7432,7 +7447,7 @@ module Aws::Omics
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-omics'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.87.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

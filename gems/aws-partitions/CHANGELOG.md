@@ -1,6 +1,31 @@
 Unreleased Changes
 ------------------
 
+1.1300.0 (2026-10-30)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1299.1 (2026-10-28)
+------------------
+
+* Issue - Clarify that custom partition regionRegex values are regex patterns and should use trusted, reviewed patterns.
+
+1.1299.0 (2026-10-26)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
+1.1298.0 (2026-10-22)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::Continuum`.
+
+1.1297.0 (2026-10-21)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
 1.1296.0 (2026-10-14)
 ------------------
 

@@ -128,7 +128,14 @@ module Aws
                            recovery_period: ::Integer?
                          }?
                        },
-                       ?evaluation_interval: ::Integer
+                       ?evaluation_interval: ::Integer,
+                       ?action_configuration: {
+                         alarm_tags_propagation: {
+                           enabled: bool,
+                           included_tag_keys: Array[::String]?,
+                           excluded_tag_keys: Array[::String]?
+                         }?
+                       }
                      ) -> Alarm
                    | (?Hash[Symbol, untyped]) -> Alarm
 

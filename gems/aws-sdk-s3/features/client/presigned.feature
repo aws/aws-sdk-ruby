@@ -26,14 +26,17 @@ Feature: S3 Presigned Operations
     Then I get the object with the key "test"
     And the body #read method should return "hello"
 
-  Scenario: Presigned GET with virtual-hosted bucket
-    Given I have a bucket configured with a virtual hosted CNAME
+  @slow
+  Scenario: Presigned PUT and GET with a virtual-hosted bucket
     When I create a presigned url for "put_object" with:
-    | key | test        |
-    | acl | public-read |
-    And I send an HTTP put request for the presigned url with body "hello"
-    Then I make an unauthenticated HTTP GET request for key "test"
-    And the response should be "hello"
+    | key | test |
+    Then the presigned URL should use virtual-hosted bucket addressing
+    When I send an HTTP put request for the presigned url with body "hello"
+    And I create a presigned url for "get_object" with:
+    | key | test |
+    Then the presigned URL should use virtual-hosted bucket addressing
+    When I send an HTTP get request for the presigned url
+    Then the response should be "hello"
 
   Scenario: Presigning a put object request with x-amz-*
     When I create a presigned url for "put_object" with:

@@ -11,121 +11,121 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
       end
-      class ConformancePackTemplateValidationException < ::Aws::Errors::ServiceError
+      class ConformancePackTemplateValidationException < ServiceError
       end
-      class IdempotentParameterMismatch < ::Aws::Errors::ServiceError
+      class IdempotentParameterMismatch < ServiceError
         def message: () -> ::String
       end
-      class InsufficientDeliveryPolicyException < ::Aws::Errors::ServiceError
+      class InsufficientDeliveryPolicyException < ServiceError
       end
-      class InsufficientPermissionsException < ::Aws::Errors::ServiceError
+      class InsufficientPermissionsException < ServiceError
       end
-      class InvalidConfigurationRecorderNameException < ::Aws::Errors::ServiceError
+      class InvalidConfigurationRecorderNameException < ServiceError
       end
-      class InvalidDeliveryChannelNameException < ::Aws::Errors::ServiceError
+      class InvalidDeliveryChannelNameException < ServiceError
       end
-      class InvalidExpressionException < ::Aws::Errors::ServiceError
+      class InvalidExpressionException < ServiceError
       end
-      class InvalidLimitException < ::Aws::Errors::ServiceError
+      class InvalidLimitException < ServiceError
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
       end
-      class InvalidParameterValueException < ::Aws::Errors::ServiceError
+      class InvalidParameterValueException < ServiceError
       end
-      class InvalidRecordingGroupException < ::Aws::Errors::ServiceError
+      class InvalidRecordingGroupException < ServiceError
       end
-      class InvalidResultTokenException < ::Aws::Errors::ServiceError
+      class InvalidResultTokenException < ServiceError
       end
-      class InvalidRoleException < ::Aws::Errors::ServiceError
+      class InvalidRoleException < ServiceError
       end
-      class InvalidS3KeyPrefixException < ::Aws::Errors::ServiceError
+      class InvalidS3KeyPrefixException < ServiceError
       end
-      class InvalidS3KmsKeyArnException < ::Aws::Errors::ServiceError
+      class InvalidS3KmsKeyArnException < ServiceError
       end
-      class InvalidSNSTopicARNException < ::Aws::Errors::ServiceError
+      class InvalidSNSTopicARNException < ServiceError
       end
-      class InvalidTimeRangeException < ::Aws::Errors::ServiceError
+      class InvalidTimeRangeException < ServiceError
       end
-      class LastDeliveryChannelDeleteFailedException < ::Aws::Errors::ServiceError
+      class LastDeliveryChannelDeleteFailedException < ServiceError
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
       end
-      class MaxActiveResourcesExceededException < ::Aws::Errors::ServiceError
+      class MaxActiveResourcesExceededException < ServiceError
       end
-      class MaxNumberOfConfigRulesExceededException < ::Aws::Errors::ServiceError
+      class MaxNumberOfConfigRulesExceededException < ServiceError
       end
-      class MaxNumberOfConfigurationRecordersExceededException < ::Aws::Errors::ServiceError
+      class MaxNumberOfConfigurationRecordersExceededException < ServiceError
       end
-      class MaxNumberOfConformancePacksExceededException < ::Aws::Errors::ServiceError
+      class MaxNumberOfConformancePacksExceededException < ServiceError
       end
-      class MaxNumberOfConnectorsExceededException < ::Aws::Errors::ServiceError
+      class MaxNumberOfConnectorsExceededException < ServiceError
       end
-      class MaxNumberOfDeliveryChannelsExceededException < ::Aws::Errors::ServiceError
+      class MaxNumberOfDeliveryChannelsExceededException < ServiceError
       end
-      class MaxNumberOfOrganizationConfigRulesExceededException < ::Aws::Errors::ServiceError
+      class MaxNumberOfOrganizationConfigRulesExceededException < ServiceError
       end
-      class MaxNumberOfOrganizationConformancePacksExceededException < ::Aws::Errors::ServiceError
+      class MaxNumberOfOrganizationConformancePacksExceededException < ServiceError
       end
-      class MaxNumberOfRetentionConfigurationsExceededException < ::Aws::Errors::ServiceError
+      class MaxNumberOfRetentionConfigurationsExceededException < ServiceError
       end
-      class NoAvailableConfigurationRecorderException < ::Aws::Errors::ServiceError
+      class NoAvailableConfigurationRecorderException < ServiceError
       end
-      class NoAvailableDeliveryChannelException < ::Aws::Errors::ServiceError
+      class NoAvailableDeliveryChannelException < ServiceError
       end
-      class NoAvailableOrganizationException < ::Aws::Errors::ServiceError
+      class NoAvailableOrganizationException < ServiceError
       end
-      class NoRunningConfigurationRecorderException < ::Aws::Errors::ServiceError
+      class NoRunningConfigurationRecorderException < ServiceError
       end
-      class NoSuchBucketException < ::Aws::Errors::ServiceError
+      class NoSuchBucketException < ServiceError
       end
-      class NoSuchConfigRuleException < ::Aws::Errors::ServiceError
+      class NoSuchConfigRuleException < ServiceError
       end
-      class NoSuchConfigRuleInConformancePackException < ::Aws::Errors::ServiceError
+      class NoSuchConfigRuleInConformancePackException < ServiceError
       end
-      class NoSuchConfigurationAggregatorException < ::Aws::Errors::ServiceError
+      class NoSuchConfigurationAggregatorException < ServiceError
       end
-      class NoSuchConfigurationRecorderException < ::Aws::Errors::ServiceError
+      class NoSuchConfigurationRecorderException < ServiceError
       end
-      class NoSuchConformancePackException < ::Aws::Errors::ServiceError
+      class NoSuchConformancePackException < ServiceError
       end
-      class NoSuchDeliveryChannelException < ::Aws::Errors::ServiceError
+      class NoSuchDeliveryChannelException < ServiceError
       end
-      class NoSuchOrganizationConfigRuleException < ::Aws::Errors::ServiceError
+      class NoSuchOrganizationConfigRuleException < ServiceError
       end
-      class NoSuchOrganizationConformancePackException < ::Aws::Errors::ServiceError
+      class NoSuchOrganizationConformancePackException < ServiceError
       end
-      class NoSuchRemediationConfigurationException < ::Aws::Errors::ServiceError
+      class NoSuchRemediationConfigurationException < ServiceError
       end
-      class NoSuchRemediationExceptionException < ::Aws::Errors::ServiceError
+      class NoSuchRemediationExceptionException < ServiceError
       end
-      class NoSuchRetentionConfigurationException < ::Aws::Errors::ServiceError
+      class NoSuchRetentionConfigurationException < ServiceError
       end
-      class OrganizationAccessDeniedException < ::Aws::Errors::ServiceError
+      class OrganizationAccessDeniedException < ServiceError
       end
-      class OrganizationAllFeaturesNotEnabledException < ::Aws::Errors::ServiceError
+      class OrganizationAllFeaturesNotEnabledException < ServiceError
       end
-      class OrganizationConformancePackTemplateValidationException < ::Aws::Errors::ServiceError
+      class OrganizationConformancePackTemplateValidationException < ServiceError
       end
-      class OversizedConfigurationItemException < ::Aws::Errors::ServiceError
+      class OversizedConfigurationItemException < ServiceError
       end
-      class RemediationInProgressException < ::Aws::Errors::ServiceError
+      class RemediationInProgressException < ServiceError
       end
-      class ResourceConcurrentModificationException < ::Aws::Errors::ServiceError
+      class ResourceConcurrentModificationException < ServiceError
         def message: () -> ::String
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
       end
-      class ResourceNotDiscoveredException < ::Aws::Errors::ServiceError
+      class ResourceNotDiscoveredException < ServiceError
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
       end
-      class UnmodifiableEntityException < ::Aws::Errors::ServiceError
+      class UnmodifiableEntityException < ServiceError
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
       end
     end
   end

@@ -51,7 +51,8 @@ module Aws
 
       type self_managed_kafka_event_source_config = {
       consumer_group_id: ::String?,
-      schema_registry_config: Params::kafka_schema_registry_config?
+      schema_registry_config: Params::kafka_schema_registry_config?,
+      consumption_mode: ("Stream" | "Queue")?
     }
 
       type cors = {

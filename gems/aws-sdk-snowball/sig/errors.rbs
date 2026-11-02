@@ -11,39 +11,39 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ClusterLimitExceededException < ::Aws::Errors::ServiceError
+      class ClusterLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def conflict_resource: () -> ::String
         def message: () -> ::String
       end
-      class Ec2RequestFailedException < ::Aws::Errors::ServiceError
+      class Ec2RequestFailedException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAddressException < ::Aws::Errors::ServiceError
+      class InvalidAddressException < ServiceError
         def message: () -> ::String
       end
-      class InvalidInputCombinationException < ::Aws::Errors::ServiceError
+      class InvalidInputCombinationException < ServiceError
         def message: () -> ::String
       end
-      class InvalidJobStateException < ::Aws::Errors::ServiceError
+      class InvalidJobStateException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidResourceException < ::Aws::Errors::ServiceError
+      class InvalidResourceException < ServiceError
         def message: () -> ::String
         def resource_type: () -> ::String
       end
-      class KMSRequestFailedException < ::Aws::Errors::ServiceError
+      class KMSRequestFailedException < ServiceError
         def message: () -> ::String
       end
-      class ReturnShippingLabelAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ReturnShippingLabelAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedAddressException < ::Aws::Errors::ServiceError
+      class UnsupportedAddressException < ServiceError
         def message: () -> ::String
       end
     end

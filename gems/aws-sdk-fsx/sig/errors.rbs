@@ -11,141 +11,141 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessPointAlreadyOwnedByYou < ::Aws::Errors::ServiceError
+      class AccessPointAlreadyOwnedByYou < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class ActiveDirectoryError < ::Aws::Errors::ServiceError
+      class ActiveDirectoryError < ServiceError
         def active_directory_id: () -> ::String
         def type: () -> ::String
         def message: () -> ::String
       end
-      class BackupBeingCopied < ::Aws::Errors::ServiceError
+      class BackupBeingCopied < ServiceError
         def message: () -> ::String
         def backup_id: () -> ::String
       end
-      class BackupInProgress < ::Aws::Errors::ServiceError
+      class BackupInProgress < ServiceError
         def message: () -> ::String
       end
-      class BackupNotFound < ::Aws::Errors::ServiceError
+      class BackupNotFound < ServiceError
         def message: () -> ::String
       end
-      class BackupRestoring < ::Aws::Errors::ServiceError
+      class BackupRestoring < ServiceError
         def message: () -> ::String
         def file_system_id: () -> ::String
       end
-      class BadRequest < ::Aws::Errors::ServiceError
+      class BadRequest < ServiceError
         def message: () -> ::String
       end
-      class DataRepositoryAssociationNotFound < ::Aws::Errors::ServiceError
+      class DataRepositoryAssociationNotFound < ServiceError
         def message: () -> ::String
       end
-      class DataRepositoryTaskEnded < ::Aws::Errors::ServiceError
+      class DataRepositoryTaskEnded < ServiceError
         def message: () -> ::String
       end
-      class DataRepositoryTaskExecuting < ::Aws::Errors::ServiceError
+      class DataRepositoryTaskExecuting < ServiceError
         def message: () -> ::String
       end
-      class DataRepositoryTaskNotFound < ::Aws::Errors::ServiceError
+      class DataRepositoryTaskNotFound < ServiceError
         def message: () -> ::String
       end
-      class FileCacheNotFound < ::Aws::Errors::ServiceError
+      class FileCacheNotFound < ServiceError
         def message: () -> ::String
       end
-      class FileSystemNotFound < ::Aws::Errors::ServiceError
+      class FileSystemNotFound < ServiceError
         def message: () -> ::String
       end
-      class IncompatibleParameterError < ::Aws::Errors::ServiceError
+      class IncompatibleParameterError < ServiceError
         def parameter: () -> ::String
         def message: () -> ::String
       end
-      class IncompatibleRegionForMultiAZ < ::Aws::Errors::ServiceError
+      class IncompatibleRegionForMultiAZ < ServiceError
         def message: () -> ::String
       end
-      class InternalServerError < ::Aws::Errors::ServiceError
+      class InternalServerError < ServiceError
         def message: () -> ::String
       end
-      class InvalidAccessPoint < ::Aws::Errors::ServiceError
+      class InvalidAccessPoint < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class InvalidDataRepositoryType < ::Aws::Errors::ServiceError
+      class InvalidDataRepositoryType < ServiceError
         def message: () -> ::String
       end
-      class InvalidDestinationKmsKey < ::Aws::Errors::ServiceError
+      class InvalidDestinationKmsKey < ServiceError
         def message: () -> ::String
       end
-      class InvalidExportPath < ::Aws::Errors::ServiceError
+      class InvalidExportPath < ServiceError
         def message: () -> ::String
       end
-      class InvalidImportPath < ::Aws::Errors::ServiceError
+      class InvalidImportPath < ServiceError
         def message: () -> ::String
       end
-      class InvalidNetworkSettings < ::Aws::Errors::ServiceError
+      class InvalidNetworkSettings < ServiceError
         def message: () -> ::String
         def invalid_subnet_id: () -> ::String
         def invalid_security_group_id: () -> ::String
         def invalid_route_table_id: () -> ::String
       end
-      class InvalidPerUnitStorageThroughput < ::Aws::Errors::ServiceError
+      class InvalidPerUnitStorageThroughput < ServiceError
         def message: () -> ::String
       end
-      class InvalidRegion < ::Aws::Errors::ServiceError
+      class InvalidRegion < ServiceError
         def message: () -> ::String
       end
-      class InvalidRequest < ::Aws::Errors::ServiceError
+      class InvalidRequest < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class InvalidSourceKmsKey < ::Aws::Errors::ServiceError
+      class InvalidSourceKmsKey < ServiceError
         def message: () -> ::String
       end
-      class MissingFileCacheConfiguration < ::Aws::Errors::ServiceError
+      class MissingFileCacheConfiguration < ServiceError
         def message: () -> ::String
       end
-      class MissingFileSystemConfiguration < ::Aws::Errors::ServiceError
+      class MissingFileSystemConfiguration < ServiceError
         def message: () -> ::String
       end
-      class MissingVolumeConfiguration < ::Aws::Errors::ServiceError
+      class MissingVolumeConfiguration < ServiceError
         def message: () -> ::String
       end
-      class NotServiceResourceError < ::Aws::Errors::ServiceError
+      class NotServiceResourceError < ServiceError
         def resource_arn: () -> ::String
         def message: () -> ::String
       end
-      class ResourceDoesNotSupportTagging < ::Aws::Errors::ServiceError
+      class ResourceDoesNotSupportTagging < ServiceError
         def resource_arn: () -> ::String
         def message: () -> ::String
       end
-      class ResourceNotFound < ::Aws::Errors::ServiceError
+      class ResourceNotFound < ServiceError
         def resource_arn: () -> ::String
         def message: () -> ::String
       end
-      class S3AccessPointAttachmentNotFound < ::Aws::Errors::ServiceError
+      class S3AccessPointAttachmentNotFound < ServiceError
         def message: () -> ::String
       end
-      class ServiceLimitExceeded < ::Aws::Errors::ServiceError
+      class ServiceLimitExceeded < ServiceError
         def limit: () -> ::String
         def message: () -> ::String
       end
-      class SnapshotNotFound < ::Aws::Errors::ServiceError
+      class SnapshotNotFound < ServiceError
         def message: () -> ::String
       end
-      class SourceBackupUnavailable < ::Aws::Errors::ServiceError
+      class SourceBackupUnavailable < ServiceError
         def message: () -> ::String
         def backup_id: () -> ::String
       end
-      class StorageVirtualMachineNotFound < ::Aws::Errors::ServiceError
+      class StorageVirtualMachineNotFound < ServiceError
         def message: () -> ::String
       end
-      class TooManyAccessPoints < ::Aws::Errors::ServiceError
+      class TooManyAccessPoints < ServiceError
         def error_code: () -> ::String
         def message: () -> ::String
       end
-      class UnsupportedOperation < ::Aws::Errors::ServiceError
+      class UnsupportedOperation < ServiceError
         def message: () -> ::String
       end
-      class VolumeNotFound < ::Aws::Errors::ServiceError
+      class VolumeNotFound < ServiceError
         def message: () -> ::String
       end
     end

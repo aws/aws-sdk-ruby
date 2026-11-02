@@ -11,80 +11,80 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class EmptyUploadException < ::Aws::Errors::ServiceError
+      class EmptyUploadException < ServiceError
         def message: () -> ::String
       end
-      class ImageAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ImageAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class ImageDigestDoesNotMatchException < ::Aws::Errors::ServiceError
+      class ImageDigestDoesNotMatchException < ServiceError
         def message: () -> ::String
       end
-      class ImageNotFoundException < ::Aws::Errors::ServiceError
+      class ImageNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ImageTagAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ImageTagAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class InvalidLayerException < ::Aws::Errors::ServiceError
+      class InvalidLayerException < ServiceError
         def message: () -> ::String
       end
-      class InvalidLayerPartException < ::Aws::Errors::ServiceError
+      class InvalidLayerPartException < ServiceError
         def registry_id: () -> ::String
         def repository_name: () -> ::String
         def upload_id: () -> ::String
         def last_valid_byte_received: () -> ::String
         def message: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
       end
-      class InvalidTagParameterException < ::Aws::Errors::ServiceError
+      class InvalidTagParameterException < ServiceError
         def message: () -> ::String
       end
-      class LayerAlreadyExistsException < ::Aws::Errors::ServiceError
+      class LayerAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class LayerPartTooSmallException < ::Aws::Errors::ServiceError
+      class LayerPartTooSmallException < ServiceError
         def message: () -> ::String
       end
-      class LayersNotFoundException < ::Aws::Errors::ServiceError
+      class LayersNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ReferencedImagesNotFoundException < ::Aws::Errors::ServiceError
+      class ReferencedImagesNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RegistryNotFoundException < ::Aws::Errors::ServiceError
+      class RegistryNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RepositoryAlreadyExistsException < ::Aws::Errors::ServiceError
+      class RepositoryAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class RepositoryCatalogDataNotFoundException < ::Aws::Errors::ServiceError
+      class RepositoryCatalogDataNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RepositoryNotEmptyException < ::Aws::Errors::ServiceError
+      class RepositoryNotEmptyException < ServiceError
         def message: () -> ::String
       end
-      class RepositoryNotFoundException < ::Aws::Errors::ServiceError
+      class RepositoryNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RepositoryPolicyNotFoundException < ::Aws::Errors::ServiceError
+      class RepositoryPolicyNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServerException < ::Aws::Errors::ServiceError
+      class ServerException < ServiceError
         def message: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedCommandException < ::Aws::Errors::ServiceError
+      class UnsupportedCommandException < ServiceError
         def message: () -> ::String
       end
-      class UploadNotFoundException < ::Aws::Errors::ServiceError
+      class UploadNotFoundException < ServiceError
         def message: () -> ::String
       end
     end

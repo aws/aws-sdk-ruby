@@ -61,7 +61,7 @@ module Aws::Amplify
     #   Compute role allows the Amplify Hosting compute service to securely
     #   access specific Amazon Web Services resources based on the role's
     #   permissions. For more information about the SSR Compute role, see
-    #   [Adding an SSR Compute role][1] in the *Amplify User Guide*.
+    #   [Adding an SSR Compute role][1] in the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -428,7 +428,7 @@ module Aws::Amplify
     #   ensure that your clients always interact with the correct version of
     #   server-side assets, regardless of when a deployment occurs. For more
     #   information about skew protection, see [Skew protection for Amplify
-    #   deployments][1] in the *Amplify User Guide*.
+    #   deployments][1] in the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -525,8 +525,8 @@ module Aws::Amplify
     #   SSR app. The Compute role allows the Amplify Hosting compute service
     #   to securely access specific Amazon Web Services resources based on
     #   the role's permissions. For more information about the SSR Compute
-    #   role, see [Adding an SSR Compute role][1] in the *Amplify User
-    #   Guide*.
+    #   role, see [Adding an SSR Compute role][1] in the <i> Amplify User
+    #   Guide</i>.
     #
     #
     #
@@ -574,8 +574,8 @@ module Aws::Amplify
     #
     # For more information about how Amplify applies an optimal cache
     # configuration for your app based on the type of content that is being
-    # served, see [Managing cache configuration][1] in the *Amplify User
-    # guide*.
+    # served, see [Managing cache configuration][1] in the <i> Amplify User
+    # guide</i>.
     #
     #
     #
@@ -616,8 +616,8 @@ module Aws::Amplify
     #   added to Certificate Manager in your Amazon Web Services account.
     #   Make sure you request (or import) the certificate in the US East (N.
     #   Virginia) Region (us-east-1). For more information about using ACM,
-    #   see [Importing certificates into Certificate Manager][1] in the *ACM
-    #   User guide*.
+    #   see [Importing certificates into Certificate Manager ][1] in the <i>
+    #   ACM User guide</i>.
     #
     #
     #
@@ -660,8 +660,8 @@ module Aws::Amplify
     #   added to Certificate Manager in your Amazon Web Services account.
     #   Make sure you request (or import) the certificate in the US East (N.
     #   Virginia) Region (us-east-1). For more information about using ACM,
-    #   see [Importing certificates into Certificate Manager][1] in the *ACM
-    #   User guide*.
+    #   see [Importing certificates into Certificate Manager ][1] in the <i>
+    #   ACM User guide</i>.
     #
     #
     #
@@ -723,8 +723,8 @@ module Aws::Amplify
     #   app. The SSR Compute role allows the Amplify Hosting compute service
     #   to securely access specific Amazon Web Services resources based on
     #   the role's permissions. For more information about the SSR Compute
-    #   role, see [Adding an SSR Compute role][1] in the *Amplify User
-    #   Guide*.
+    #   role, see [Adding an SSR Compute role][1] in the <i> Amplify User
+    #   Guide</i>.
     #
     #
     #
@@ -978,7 +978,7 @@ module Aws::Amplify
     #   ensure that your clients always interact with the correct version of
     #   server-side assets, regardless of when a deployment occurs. For more
     #   information about skew protection, see [Skew protection for Amplify
-    #   deployments][1] in the *Amplify User Guide*.
+    #   deployments][1] in the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -1057,7 +1057,7 @@ module Aws::Amplify
     #   compute service to securely access specific Amazon Web Services
     #   resources based on the role's permissions. For more information
     #   about the SSR Compute role, see [Adding an SSR Compute role][1] in
-    #   the *Amplify User Guide*.
+    #   the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -1580,8 +1580,8 @@ module Aws::Amplify
     #   : Amplify is waiting for CNAME records corresponding to subdomains
     #     to be propagated. If your custom domain is on Route 53, Amplify
     #     handles this for you automatically. For more information about
-    #     custom domains, see [Setting up custom domains][1] in the *Amplify
-    #     Hosting User Guide*.
+    #     custom domains, see [Setting up custom domains][1] in the <i>
+    #     Amplify Hosting User Guide</i>.
     #
     #   UPDATE\_COMPLETE
     #
@@ -1945,7 +1945,7 @@ module Aws::Amplify
     # Use `JobConfig` to apply configuration to jobs, such as customizing
     # the build instance size when you create or update an Amplify app. For
     # more information about customizable build instances, see [Custom build
-    # instances][1] in the *Amplify User Guide*.
+    # instances][1] in the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -2873,8 +2873,8 @@ module Aws::Amplify
     #   app. The SSR Compute role allows the Amplify Hosting compute service
     #   to securely access specific Amazon Web Services resources based on
     #   the role's permissions. For more information about the SSR Compute
-    #   role, see [Adding an SSR Compute role][1] in the *Amplify User
-    #   Guide*.
+    #   role, see [Adding an SSR Compute role][1] in the <i> Amplify User
+    #   Guide</i>.
     #
     #
     #
@@ -3080,7 +3080,7 @@ module Aws::Amplify
     #   ensure that your clients always interact with the correct version of
     #   server-side assets, regardless of when a deployment occurs. For more
     #   information about skew protection, see [Skew protection for Amplify
-    #   deployments][1] in the *Amplify User Guide*.
+    #   deployments][1] in the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -3155,7 +3155,7 @@ module Aws::Amplify
     #   compute service to securely access specific Amazon Web Services
     #   resources based on the role's permissions. For more information
     #   about the SSR Compute role, see [Adding an SSR Compute role][1] in
-    #   the *Amplify User Guide*.
+    #   the <i> Amplify User Guide</i>.
     #
     #
     #
@@ -3308,7 +3308,7 @@ module Aws::Amplify
     # Firewall support enables you to protect your web applications with a
     # direct integration with WAF. For more information about using WAF
     # protections for an Amplify application, see [Firewall support for
-    # hosted sites][1] in the *Amplify User Guide*.
+    # hosted sites][1] in the <i> Amplify User Guide</i>.
     #
     #
     #

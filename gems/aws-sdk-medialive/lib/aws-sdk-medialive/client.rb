@@ -199,12 +199,19 @@ module Aws::MediaLive
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -1222,6 +1229,8 @@ module Aws::MediaLive
     #         {
     #           source_ip: "__string",
     #           url: "__string", # required
+    #           secondary_source_ip: "__string",
+    #           secondary_url: "__string",
     #         },
     #       ],
     #     },
@@ -1312,6 +1321,8 @@ module Aws::MediaLive
     #   resp.input.multicast_settings.sources #=> Array
     #   resp.input.multicast_settings.sources[0].source_ip #=> String
     #   resp.input.multicast_settings.sources[0].url #=> String
+    #   resp.input.multicast_settings.sources[0].secondary_source_ip #=> String
+    #   resp.input.multicast_settings.sources[0].secondary_url #=> String
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups #=> Array
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps #=> Array
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps[0].media_index #=> Integer
@@ -1611,6 +1622,8 @@ module Aws::MediaLive
     #   resp.input.multicast_settings.sources #=> Array
     #   resp.input.multicast_settings.sources[0].source_ip #=> String
     #   resp.input.multicast_settings.sources[0].url #=> String
+    #   resp.input.multicast_settings.sources[0].secondary_source_ip #=> String
+    #   resp.input.multicast_settings.sources[0].secondary_url #=> String
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups #=> Array
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps #=> Array
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps[0].media_index #=> Integer
@@ -2144,6 +2157,8 @@ module Aws::MediaLive
     #   resp.multicast_settings.sources #=> Array
     #   resp.multicast_settings.sources[0].source_ip #=> String
     #   resp.multicast_settings.sources[0].url #=> String
+    #   resp.multicast_settings.sources[0].secondary_source_ip #=> String
+    #   resp.multicast_settings.sources[0].secondary_url #=> String
     #   resp.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups #=> Array
     #   resp.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps #=> Array
     #   resp.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps[0].media_index #=> Integer
@@ -3206,6 +3221,8 @@ module Aws::MediaLive
     #   resp.inputs[0].multicast_settings.sources #=> Array
     #   resp.inputs[0].multicast_settings.sources[0].source_ip #=> String
     #   resp.inputs[0].multicast_settings.sources[0].url #=> String
+    #   resp.inputs[0].multicast_settings.sources[0].secondary_source_ip #=> String
+    #   resp.inputs[0].multicast_settings.sources[0].secondary_url #=> String
     #   resp.inputs[0].smpte_2110_receiver_group_settings.smpte_2110_receiver_groups #=> Array
     #   resp.inputs[0].smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps #=> Array
     #   resp.inputs[0].smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps[0].media_index #=> Integer
@@ -4211,6 +4228,8 @@ module Aws::MediaLive
     #         {
     #           source_ip: "__string",
     #           url: "__string", # required
+    #           secondary_source_ip: "__string",
+    #           secondary_url: "__string",
     #         },
     #       ],
     #     },
@@ -4295,6 +4314,8 @@ module Aws::MediaLive
     #   resp.input.multicast_settings.sources #=> Array
     #   resp.input.multicast_settings.sources[0].source_ip #=> String
     #   resp.input.multicast_settings.sources[0].url #=> String
+    #   resp.input.multicast_settings.sources[0].secondary_source_ip #=> String
+    #   resp.input.multicast_settings.sources[0].secondary_url #=> String
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups #=> Array
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps #=> Array
     #   resp.input.smpte_2110_receiver_group_settings.smpte_2110_receiver_groups[0].sdp_settings.ancillary_sdps[0].media_index #=> Integer
@@ -8114,7 +8135,7 @@ module Aws::MediaLive
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-medialive'
-      context[:gem_version] = '1.198.0'
+      context[:gem_version] = '1.204.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

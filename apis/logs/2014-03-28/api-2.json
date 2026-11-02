@@ -214,6 +214,7 @@
         "requestUri":"/"
       },
       "input":{"shape":"DeleteAccountPolicyRequest"},
+      "output":{"shape":"DeleteAccountPolicyResponse"},
       "errors":[
         {"shape":"InvalidParameterException"},
         {"shape":"ResourceNotFoundException"},
@@ -2370,7 +2371,14 @@
       ],
       "members":{
         "policyName":{"shape":"PolicyName"},
-        "policyType":{"shape":"PolicyType"}
+        "policyType":{"shape":"PolicyType"},
+        "dryRun":{"shape":"DryRun"}
+      }
+    },
+    "DeleteAccountPolicyResponse":{
+      "type":"structure",
+      "members":{
+        "dryRunResult":{"shape":"DryRunResult"}
       }
     },
     "DeleteDataProtectionPolicyRequest":{
@@ -2608,6 +2616,12 @@
       "min":1,
       "pattern":"[\\w-]*"
     },
+    "DeliveryDestinationNames":{
+      "type":"list",
+      "member":{"shape":"DeliveryDestinationName"},
+      "max":20,
+      "min":1
+    },
     "DeliveryDestinationPolicy":{
       "type":"string",
       "max":51200,
@@ -2716,6 +2730,12 @@
       "min":1,
       "pattern":"[\\w-]*"
     },
+    "DeliverySourceNames":{
+      "type":"list",
+      "member":{"shape":"DeliverySourceName"},
+      "max":20,
+      "min":1
+    },
     "DeliverySourceStatus":{
       "type":"string",
       "enum":[
@@ -2776,7 +2796,8 @@
       "type":"structure",
       "members":{
         "nextToken":{"shape":"NextToken"},
-        "limit":{"shape":"DescribeLimit"}
+        "limit":{"shape":"DescribeLimit"},
+        "deliverySourceNames":{"shape":"DeliverySourceNames"}
       }
     },
     "DescribeDeliveriesResponse":{
@@ -2790,7 +2811,8 @@
       "type":"structure",
       "members":{
         "nextToken":{"shape":"NextToken"},
-        "limit":{"shape":"DescribeLimit"}
+        "limit":{"shape":"DescribeLimit"},
+        "names":{"shape":"DeliveryDestinationNames"}
       }
     },
     "DescribeDeliveryDestinationsResponse":{
@@ -2804,7 +2826,8 @@
       "type":"structure",
       "members":{
         "nextToken":{"shape":"NextToken"},
-        "limit":{"shape":"DescribeLimit"}
+        "limit":{"shape":"DescribeLimit"},
+        "resourceArns":{"shape":"FilterResourceArns"}
       }
     },
     "DescribeDeliverySourcesResponse":{
@@ -3172,6 +3195,22 @@
         "ByLogStream"
       ]
     },
+    "DryRun":{"type":"boolean"},
+    "DryRunCount":{
+      "type":"integer",
+      "min":0
+    },
+    "DryRunResult":{
+      "type":"structure",
+      "members":{
+        "totalMatchedLogGroups":{"shape":"DryRunCount"},
+        "increasedRetentionLogGroupCount":{"shape":"DryRunCount"},
+        "decreasedRetentionLogGroupCount":{"shape":"DryRunCount"},
+        "unchangedRetentionLogGroupCount":{"shape":"DryRunCount"},
+        "failedAnalysisCount":{"shape":"DryRunCount"},
+        "topLogGroupsImpacted":{"shape":"LogGroupImpacts"}
+      }
+    },
     "DynamicTokenPosition":{"type":"integer"},
     "EmitSystemFields":{
       "type":"list",
@@ -3456,6 +3495,12 @@
       "type":"string",
       "max":1024,
       "min":0
+    },
+    "FilterResourceArns":{
+      "type":"list",
+      "member":{"shape":"Arn"},
+      "max":20,
+      "min":1
     },
     "FilteredLogEvent":{
       "type":"structure",
@@ -4430,7 +4475,8 @@
         "logGroupClass":{"shape":"LogGroupClass"},
         "logGroupArn":{"shape":"Arn"},
         "deletionProtectionEnabled":{"shape":"DeletionProtectionEnabled"},
-        "bearerTokenAuthenticationEnabled":{"shape":"BearerTokenAuthenticationEnabled"}
+        "bearerTokenAuthenticationEnabled":{"shape":"BearerTokenAuthenticationEnabled"},
+        "retentionPolicyName":{"shape":"PolicyName"}
       }
     },
     "LogGroupArn":{
@@ -4472,6 +4518,19 @@
     "LogGroupIdentifiers":{
       "type":"list",
       "member":{"shape":"LogGroupIdentifier"}
+    },
+    "LogGroupImpact":{
+      "type":"structure",
+      "members":{
+        "logGroupName":{"shape":"LogGroupName"},
+        "currentRetention":{"shape":"RetentionValue"},
+        "proposedRetention":{"shape":"RetentionValue"},
+        "storedBytes":{"shape":"StoredBytes"}
+      }
+    },
+    "LogGroupImpacts":{
+      "type":"list",
+      "member":{"shape":"LogGroupImpact"}
     },
     "LogGroupName":{
       "type":"string",
@@ -5053,7 +5112,8 @@
         "SUBSCRIPTION_FILTER_POLICY",
         "FIELD_INDEX_POLICY",
         "TRANSFORMER_POLICY",
-        "METRIC_EXTRACTION_POLICY"
+        "METRIC_EXTRACTION_POLICY",
+        "RETENTION_POLICY"
       ]
     },
     "Priority":{
@@ -5106,13 +5166,15 @@
         "policyDocument":{"shape":"AccountPolicyDocument"},
         "policyType":{"shape":"PolicyType"},
         "scope":{"shape":"Scope"},
-        "selectionCriteria":{"shape":"SelectionCriteria"}
+        "selectionCriteria":{"shape":"SelectionCriteria"},
+        "dryRun":{"shape":"DryRun"}
       }
     },
     "PutAccountPolicyResponse":{
       "type":"structure",
       "members":{
-        "accountPolicy":{"shape":"AccountPolicy"}
+        "accountPolicy":{"shape":"AccountPolicy"},
+        "dryRunResult":{"shape":"DryRunResult"}
       }
     },
     "PutBearerTokenAuthenticationRequest":{
@@ -5702,6 +5764,11 @@
     "ResultRows":{
       "type":"list",
       "member":{"shape":"ResultField"}
+    },
+    "RetentionValue":{
+      "type":"string",
+      "max":12,
+      "min":1
     },
     "RoleArn":{
       "type":"string",

@@ -11,111 +11,111 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class BatchWriteException < ::Aws::Errors::ServiceError
+      class BatchWriteException < ServiceError
         def index: () -> ::String
         def type: () -> ::String
         def message: () -> ::String
       end
-      class CannotListParentOfRootException < ::Aws::Errors::ServiceError
+      class CannotListParentOfRootException < ServiceError
         def message: () -> ::String
       end
-      class DirectoryAlreadyExistsException < ::Aws::Errors::ServiceError
+      class DirectoryAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class DirectoryDeletedException < ::Aws::Errors::ServiceError
+      class DirectoryDeletedException < ServiceError
         def message: () -> ::String
       end
-      class DirectoryNotDisabledException < ::Aws::Errors::ServiceError
+      class DirectoryNotDisabledException < ServiceError
         def message: () -> ::String
       end
-      class DirectoryNotEnabledException < ::Aws::Errors::ServiceError
+      class DirectoryNotEnabledException < ServiceError
         def message: () -> ::String
       end
-      class FacetAlreadyExistsException < ::Aws::Errors::ServiceError
+      class FacetAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class FacetInUseException < ::Aws::Errors::ServiceError
+      class FacetInUseException < ServiceError
         def message: () -> ::String
       end
-      class FacetNotFoundException < ::Aws::Errors::ServiceError
+      class FacetNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class FacetValidationException < ::Aws::Errors::ServiceError
+      class FacetValidationException < ServiceError
         def message: () -> ::String
       end
-      class IncompatibleSchemaException < ::Aws::Errors::ServiceError
+      class IncompatibleSchemaException < ServiceError
         def message: () -> ::String
       end
-      class IndexedAttributeMissingException < ::Aws::Errors::ServiceError
+      class IndexedAttributeMissingException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
-      class InvalidArnException < ::Aws::Errors::ServiceError
+      class InvalidArnException < ServiceError
         def message: () -> ::String
       end
-      class InvalidAttachmentException < ::Aws::Errors::ServiceError
+      class InvalidAttachmentException < ServiceError
         def message: () -> ::String
       end
-      class InvalidFacetUpdateException < ::Aws::Errors::ServiceError
+      class InvalidFacetUpdateException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRuleException < ::Aws::Errors::ServiceError
+      class InvalidRuleException < ServiceError
         def message: () -> ::String
       end
-      class InvalidSchemaDocException < ::Aws::Errors::ServiceError
+      class InvalidSchemaDocException < ServiceError
         def message: () -> ::String
       end
-      class InvalidTaggingRequestException < ::Aws::Errors::ServiceError
+      class InvalidTaggingRequestException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class LinkNameAlreadyInUseException < ::Aws::Errors::ServiceError
+      class LinkNameAlreadyInUseException < ServiceError
         def message: () -> ::String
       end
-      class NotIndexException < ::Aws::Errors::ServiceError
+      class NotIndexException < ServiceError
         def message: () -> ::String
       end
-      class NotNodeException < ::Aws::Errors::ServiceError
+      class NotNodeException < ServiceError
         def message: () -> ::String
       end
-      class NotPolicyException < ::Aws::Errors::ServiceError
+      class NotPolicyException < ServiceError
         def message: () -> ::String
       end
-      class ObjectAlreadyDetachedException < ::Aws::Errors::ServiceError
+      class ObjectAlreadyDetachedException < ServiceError
         def message: () -> ::String
       end
-      class ObjectNotDetachedException < ::Aws::Errors::ServiceError
+      class ObjectNotDetachedException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RetryableConflictException < ::Aws::Errors::ServiceError
+      class RetryableConflictException < ServiceError
         def message: () -> ::String
       end
-      class SchemaAlreadyExistsException < ::Aws::Errors::ServiceError
+      class SchemaAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class SchemaAlreadyPublishedException < ::Aws::Errors::ServiceError
+      class SchemaAlreadyPublishedException < ServiceError
         def message: () -> ::String
       end
-      class StillContainsLinksException < ::Aws::Errors::ServiceError
+      class StillContainsLinksException < ServiceError
         def message: () -> ::String
       end
-      class UnsupportedIndexTypeException < ::Aws::Errors::ServiceError
+      class UnsupportedIndexTypeException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
     end

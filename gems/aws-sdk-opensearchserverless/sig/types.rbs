@@ -96,6 +96,21 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class CancelIngestionJobRequest
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CancelIngestionJobResponse
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_job_name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "COMPLETED" | "CANCELLING" | "CANCELLED" | "FAILED" | "CREATE_FAILED" | "CANCEL_FAILED")
+      SENSITIVE: []
+    end
+
     class CapacityDetails
       attr_accessor capacity_in_ocu: ::Float
       attr_accessor autoscaling_status: ("ACTION_SCALING_UP" | "ACTION_SCALING_DOWN" | "NO_ACTION")
@@ -298,6 +313,39 @@ module Aws::OpenSearchServerless
     class CreateIndexResponse < Aws::EmptyStructure
     end
 
+    class CreateIngestionJobRequest
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_job_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor failure_index_name: ::String
+      attr_accessor source: Types::IngestionJobSource
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIngestionJobResponse
+      attr_accessor ingestion_job_detail: Types::IngestionJobDetail
+      SENSITIVE: []
+    end
+
+    class CreateIngestionStreamRequest
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_stream_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor failure_index_name: ::String
+      attr_accessor source: Types::IngestionStreamSource
+      attr_accessor role_arn: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateIngestionStreamResponse
+      attr_accessor ingestion_stream_detail: Types::IngestionStreamDetail
+      SENSITIVE: []
+    end
+
     class CreateLifecyclePolicyRequest
       attr_accessor type: ("retention")
       attr_accessor name: ::String
@@ -416,6 +464,21 @@ module Aws::OpenSearchServerless
     class DeleteIndexResponse < Aws::EmptyStructure
     end
 
+    class DeleteIngestionStreamRequest
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_stream_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteIngestionStreamResponse
+      attr_accessor ingestion_stream_id: ::String
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_stream_name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED" | "DELETE_FAILED")
+      SENSITIVE: []
+    end
+
     class DeleteLifecyclePolicyRequest
       attr_accessor type: ("retention")
       attr_accessor name: ::String
@@ -523,6 +586,28 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class GetIngestionJobRequest
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_job_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIngestionJobResponse
+      attr_accessor ingestion_job_detail: Types::IngestionJobDetail
+      SENSITIVE: []
+    end
+
+    class GetIngestionStreamRequest
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_stream_id: ::String
+      SENSITIVE: []
+    end
+
+    class GetIngestionStreamResponse
+      attr_accessor ingestion_stream_detail: Types::IngestionStreamDetail
+      SENSITIVE: []
+    end
+
     class GetPoliciesStatsRequest < Aws::EmptyStructure
     end
 
@@ -569,6 +654,107 @@ module Aws::OpenSearchServerless
       attr_accessor application_description: ::String
       attr_accessor user_attribute: ("UserId" | "UserName" | "Email")
       attr_accessor group_attribute: ("GroupId" | "GroupName")
+      SENSITIVE: []
+    end
+
+    class IngestionAlert
+      attr_accessor code: ("SOURCE_ACCESS_DENIED" | "SOURCE_RESOURCE_NOT_FOUND" | "DESTINATION_ACCESS_DENIED" | "DESTINATION_RESOURCE_NOT_FOUND" | "INTERNAL_SERVER_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IngestionFailureReason
+      attr_accessor code: ("SOURCE_ACCESS_DENIED" | "SOURCE_RESOURCE_NOT_FOUND" | "DESTINATION_ACCESS_DENIED" | "DESTINATION_RESOURCE_NOT_FOUND" | "INTERNAL_SERVER_ERROR")
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class IngestionJobDetail
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_job_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor failure_index_name: ::String
+      attr_accessor source: Types::IngestionJobSource
+      attr_accessor status: ("CREATING" | "ACTIVE" | "COMPLETED" | "CANCELLING" | "CANCELLED" | "FAILED" | "CREATE_FAILED" | "CANCEL_FAILED")
+      attr_accessor state: ("STARTING" | "SCANNING" | "INGESTION_IN_PROGRESS" | "INGESTION_COMPLETE" | "STOPPED" | "FAILED")
+      attr_accessor statistics: Types::IngestionStatistics
+      attr_accessor revision: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor failure_reasons: ::Array[Types::IngestionFailureReason]
+      attr_accessor active_alerts: ::Array[Types::IngestionAlert]
+      SENSITIVE: []
+    end
+
+    class IngestionJobS3Source
+      attr_accessor bucket: ::String
+      attr_accessor bucket_owner_account_id: ::String
+      attr_accessor key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class IngestionJobSource
+      attr_accessor s3: Types::IngestionJobS3Source
+      SENSITIVE: []
+    end
+
+    class IngestionJobSummary
+      attr_accessor ingestion_job_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor ingestion_job_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "COMPLETED" | "CANCELLING" | "CANCELLED" | "FAILED" | "CREATE_FAILED" | "CANCEL_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class IngestionStatistics
+      attr_accessor s3: Types::S3Statistics
+      SENSITIVE: []
+    end
+
+    class IngestionStreamDetail
+      attr_accessor ingestion_stream_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor collection_id: ::String
+      attr_accessor ingestion_stream_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor failure_index_name: ::String
+      attr_accessor source: Types::IngestionStreamSource
+      attr_accessor role_arn: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor state: ("STARTING" | "SCANNING" | "INGESTION_IN_PROGRESS" | "INGESTION_COMPLETE" | "STOPPED" | "FAILED")
+      attr_accessor statistics: Types::IngestionStatistics
+      attr_accessor revision: ::Integer
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
+      attr_accessor failure_reasons: ::Array[Types::IngestionFailureReason]
+      attr_accessor active_alerts: ::Array[Types::IngestionAlert]
+      SENSITIVE: []
+    end
+
+    class IngestionStreamS3Source
+      attr_accessor sqs_arn: ::String
+      attr_accessor buckets: ::Array[Types::StreamBucketConfig]
+      SENSITIVE: []
+    end
+
+    class IngestionStreamSource
+      attr_accessor s3: Types::IngestionStreamS3Source
+      SENSITIVE: []
+    end
+
+    class IngestionStreamSummary
+      attr_accessor ingestion_stream_id: ::String
+      attr_accessor arn: ::String
+      attr_accessor ingestion_stream_name: ::String
+      attr_accessor index_name: ::String
+      attr_accessor status: ("CREATING" | "ACTIVE" | "DELETING" | "DELETED" | "CREATE_FAILED" | "DELETE_FAILED")
+      attr_accessor created_at: ::Time
+      attr_accessor updated_at: ::Time
       SENSITIVE: []
     end
 
@@ -662,6 +848,32 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class ListIngestionJobsRequest
+      attr_accessor collection_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIngestionJobsResponse
+      attr_accessor ingestion_job_summaries: ::Array[Types::IngestionJobSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListIngestionStreamsRequest
+      attr_accessor collection_id: ::String
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class ListIngestionStreamsResponse
+      attr_accessor ingestion_stream_summaries: ::Array[Types::IngestionStreamSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListLifecyclePoliciesRequest
       attr_accessor type: ("retention")
       attr_accessor resources: ::Array[::String]
@@ -733,6 +945,13 @@ module Aws::OpenSearchServerless
 
     class ResourceNotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class S3Statistics
+      attr_accessor objects_discovered: ::Integer
+      attr_accessor objects_ingested: ::Integer
+      attr_accessor objects_failed: ::Integer
       SENSITIVE: []
     end
 
@@ -809,6 +1028,13 @@ module Aws::OpenSearchServerless
       SENSITIVE: []
     end
 
+    class StreamBucketConfig
+      attr_accessor bucket: ::String
+      attr_accessor bucket_owner_account_id: ::String
+      attr_accessor initial_scan: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class Tag
       attr_accessor key: ::String
       attr_accessor value: ::String
@@ -865,6 +1091,7 @@ module Aws::OpenSearchServerless
       attr_accessor type: ("SEARCH" | "TIMESERIES" | "VECTORSEARCH")
       attr_accessor description: ::String
       attr_accessor vector_options: Types::VectorOptions
+      attr_accessor kms_key_arn: ::String
       attr_accessor arn: ::String
       attr_accessor created_date: ::Integer
       attr_accessor last_modified_date: ::Integer
@@ -902,6 +1129,7 @@ module Aws::OpenSearchServerless
       attr_accessor description: ::String
       attr_accessor vector_options: Types::VectorOptions
       attr_accessor deletion_protection: ("ENABLED" | "DISABLED")
+      attr_accessor encryption_config: Types::EncryptionConfig
       attr_accessor client_token: ::String
       SENSITIVE: []
     end

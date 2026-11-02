@@ -72,6 +72,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/CompositeAlarm.html#actions_suppressor_extension_period-instance_method
       def actions_suppressor_extension_period: () -> ::Integer
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/CompositeAlarm.html#action_configuration-instance_method
+      def action_configuration: () -> Types::ActionConfiguration
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatch/CompositeAlarm.html#load-instance_method

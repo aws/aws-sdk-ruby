@@ -11,88 +11,88 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class IdempotentParameterMismatchException < ::Aws::Errors::ServiceError
+      class IdempotentParameterMismatchException < ServiceError
         def message: () -> ::String
       end
-      class InvalidClientTokenException < ::Aws::Errors::ServiceError
+      class InvalidClientTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidMaxResultsException < ::Aws::Errors::ServiceError
+      class InvalidMaxResultsException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidParameterException < ::Aws::Errors::ServiceError
+      class InvalidParameterException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPolicyException < ::Aws::Errors::ServiceError
+      class InvalidPolicyException < ServiceError
         def message: () -> ::String
       end
-      class InvalidResourceTypeException < ::Aws::Errors::ServiceError
+      class InvalidResourceTypeException < ServiceError
         def message: () -> ::String
       end
-      class InvalidStateTransitionException < ::Aws::Errors::ServiceError
+      class InvalidStateTransitionException < ServiceError
         def message: () -> ::String
       end
-      class MalformedArnException < ::Aws::Errors::ServiceError
+      class MalformedArnException < ServiceError
         def message: () -> ::String
       end
-      class MalformedPolicyTemplateException < ::Aws::Errors::ServiceError
+      class MalformedPolicyTemplateException < ServiceError
         def message: () -> ::String
       end
-      class MissingRequiredParameterException < ::Aws::Errors::ServiceError
+      class MissingRequiredParameterException < ServiceError
         def message: () -> ::String
       end
-      class OperationNotPermittedException < ::Aws::Errors::ServiceError
+      class OperationNotPermittedException < ServiceError
         def message: () -> ::String
       end
-      class PermissionAlreadyExistsException < ::Aws::Errors::ServiceError
+      class PermissionAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class PermissionLimitExceededException < ::Aws::Errors::ServiceError
+      class PermissionLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class PermissionVersionsLimitExceededException < ::Aws::Errors::ServiceError
+      class PermissionVersionsLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ResourceArnNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceArnNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ResourceShareInvitationAlreadyAcceptedException < ::Aws::Errors::ServiceError
+      class ResourceShareInvitationAlreadyAcceptedException < ServiceError
         def message: () -> ::String
       end
-      class ResourceShareInvitationAlreadyRejectedException < ::Aws::Errors::ServiceError
+      class ResourceShareInvitationAlreadyRejectedException < ServiceError
         def message: () -> ::String
       end
-      class ResourceShareInvitationArnNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceShareInvitationArnNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ResourceShareInvitationExpiredException < ::Aws::Errors::ServiceError
+      class ResourceShareInvitationExpiredException < ServiceError
         def message: () -> ::String
       end
-      class ResourceShareLimitExceededException < ::Aws::Errors::ServiceError
+      class ResourceShareLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ServerInternalException < ::Aws::Errors::ServiceError
+      class ServerInternalException < ServiceError
         def message: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class TagLimitExceededException < ::Aws::Errors::ServiceError
+      class TagLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class TagPolicyViolationException < ::Aws::Errors::ServiceError
+      class TagPolicyViolationException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class UnknownResourceException < ::Aws::Errors::ServiceError
+      class UnknownResourceException < ServiceError
         def message: () -> ::String
       end
-      class UnmatchedPolicyPermissionException < ::Aws::Errors::ServiceError
+      class UnmatchedPolicyPermissionException < ServiceError
         def message: () -> ::String
       end
     end

@@ -11,63 +11,63 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class InternalException < ::Aws::Errors::ServiceError
+      class InternalException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class InternalServerException < ::Aws::Errors::ServiceError
+      class InternalServerException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class InvalidAccessException < ::Aws::Errors::ServiceError
+      class InvalidAccessException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class InvalidInputException < ::Aws::Errors::ServiceError
+      class InvalidInputException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class OrganizationNotFoundException < ::Aws::Errors::ServiceError
+      class OrganizationNotFoundException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class OrganizationalUnitNotFoundException < ::Aws::Errors::ServiceError
+      class OrganizationalUnitNotFoundException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class ResourceConflictException < ::Aws::Errors::ServiceError
+      class ResourceConflictException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class ResourceInUseException < ::Aws::Errors::ServiceError
+      class ResourceInUseException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
         def code: () -> ::String
       end

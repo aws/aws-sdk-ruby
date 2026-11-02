@@ -61,6 +61,8 @@ module Aws::KMS
     DataKeyPairSpec = Shapes::StringShape.new(name: 'DataKeyPairSpec')
     DataKeySpec = Shapes::StringShape.new(name: 'DataKeySpec')
     DateType = Shapes::TimestampShape.new(name: 'DateType')
+    DecapsulateRequest = Shapes::StructureShape.new(name: 'DecapsulateRequest')
+    DecapsulateResponse = Shapes::StructureShape.new(name: 'DecapsulateResponse')
     DecryptRequest = Shapes::StructureShape.new(name: 'DecryptRequest')
     DecryptResponse = Shapes::StructureShape.new(name: 'DecryptResponse')
     DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
@@ -86,6 +88,10 @@ module Aws::KMS
     DryRunOperationException = Shapes::StructureShape.new(name: 'DryRunOperationException')
     EnableKeyRequest = Shapes::StructureShape.new(name: 'EnableKeyRequest')
     EnableKeyRotationRequest = Shapes::StructureShape.new(name: 'EnableKeyRotationRequest')
+    EncapsulateRequest = Shapes::StructureShape.new(name: 'EncapsulateRequest')
+    EncapsulateResponse = Shapes::StructureShape.new(name: 'EncapsulateResponse')
+    EncapsulationAlgorithmSpec = Shapes::StringShape.new(name: 'EncapsulationAlgorithmSpec')
+    EncapsulationAlgorithmSpecList = Shapes::ListShape.new(name: 'EncapsulationAlgorithmSpecList')
     EncryptRequest = Shapes::StructureShape.new(name: 'EncryptRequest')
     EncryptResponse = Shapes::StructureShape.new(name: 'EncryptResponse')
     EncryptionAlgorithmSpec = Shapes::StringShape.new(name: 'EncryptionAlgorithmSpec')
@@ -384,6 +390,18 @@ module Aws::KMS
     CustomKeyStoresListEntry.add_member(:xks_proxy_configuration, Shapes::ShapeRef.new(shape: XksProxyConfigurationType, location_name: "XksProxyConfiguration"))
     CustomKeyStoresListEntry.struct_class = Types::CustomKeyStoresListEntry
 
+    DecapsulateRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    DecapsulateRequest.add_member(:shared_secret_ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, required: true, location_name: "SharedSecretCiphertextBlob"))
+    DecapsulateRequest.add_member(:encapsulation_algorithm, Shapes::ShapeRef.new(shape: EncapsulationAlgorithmSpec, required: true, location_name: "EncapsulationAlgorithm"))
+    DecapsulateRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    DecapsulateRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
+    DecapsulateRequest.struct_class = Types::DecapsulateRequest
+
+    DecapsulateResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+    DecapsulateResponse.add_member(:shared_secret, Shapes::ShapeRef.new(shape: PlaintextType, location_name: "SharedSecret"))
+    DecapsulateResponse.add_member(:encapsulation_algorithm, Shapes::ShapeRef.new(shape: EncapsulationAlgorithmSpec, location_name: "EncapsulationAlgorithm"))
+    DecapsulateResponse.struct_class = Types::DecapsulateResponse
+
     DecryptRequest.add_member(:ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "CiphertextBlob"))
     DecryptRequest.add_member(:encryption_context, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContext"))
     DecryptRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
@@ -478,6 +496,20 @@ module Aws::KMS
     EnableKeyRotationRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     EnableKeyRotationRequest.add_member(:rotation_period_in_days, Shapes::ShapeRef.new(shape: RotationPeriodInDaysType, location_name: "RotationPeriodInDays"))
     EnableKeyRotationRequest.struct_class = Types::EnableKeyRotationRequest
+
+    EncapsulateRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
+    EncapsulateRequest.add_member(:encapsulation_algorithm, Shapes::ShapeRef.new(shape: EncapsulationAlgorithmSpec, required: true, location_name: "EncapsulationAlgorithm"))
+    EncapsulateRequest.add_member(:grant_tokens, Shapes::ShapeRef.new(shape: GrantTokenList, location_name: "GrantTokens"))
+    EncapsulateRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "DryRun"))
+    EncapsulateRequest.struct_class = Types::EncapsulateRequest
+
+    EncapsulateResponse.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, location_name: "KeyId"))
+    EncapsulateResponse.add_member(:shared_secret, Shapes::ShapeRef.new(shape: PlaintextType, location_name: "SharedSecret"))
+    EncapsulateResponse.add_member(:shared_secret_ciphertext_blob, Shapes::ShapeRef.new(shape: CiphertextType, location_name: "SharedSecretCiphertextBlob"))
+    EncapsulateResponse.add_member(:encapsulation_algorithm, Shapes::ShapeRef.new(shape: EncapsulationAlgorithmSpec, location_name: "EncapsulationAlgorithm"))
+    EncapsulateResponse.struct_class = Types::EncapsulateResponse
+
+    EncapsulationAlgorithmSpecList.member = Shapes::ShapeRef.new(shape: EncapsulationAlgorithmSpec)
 
     EncryptRequest.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyIdType, required: true, location_name: "KeyId"))
     EncryptRequest.add_member(:plaintext, Shapes::ShapeRef.new(shape: PlaintextType, required: true, location_name: "Plaintext"))
@@ -631,6 +663,7 @@ module Aws::KMS
     GetPublicKeyResponse.add_member(:encryption_algorithms, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpecList, location_name: "EncryptionAlgorithms"))
     GetPublicKeyResponse.add_member(:signing_algorithms, Shapes::ShapeRef.new(shape: SigningAlgorithmSpecList, location_name: "SigningAlgorithms"))
     GetPublicKeyResponse.add_member(:key_agreement_algorithms, Shapes::ShapeRef.new(shape: KeyAgreementAlgorithmSpecList, location_name: "KeyAgreementAlgorithms"))
+    GetPublicKeyResponse.add_member(:encapsulation_algorithms, Shapes::ShapeRef.new(shape: EncapsulationAlgorithmSpecList, location_name: "EncapsulationAlgorithms"))
     GetPublicKeyResponse.struct_class = Types::GetPublicKeyResponse
 
     GrantConstraints.add_member(:encryption_context_subset, Shapes::ShapeRef.new(shape: EncryptionContextType, location_name: "EncryptionContextSubset"))
@@ -750,6 +783,7 @@ module Aws::KMS
     KeyMetadata.add_member(:encryption_algorithms, Shapes::ShapeRef.new(shape: EncryptionAlgorithmSpecList, location_name: "EncryptionAlgorithms"))
     KeyMetadata.add_member(:signing_algorithms, Shapes::ShapeRef.new(shape: SigningAlgorithmSpecList, location_name: "SigningAlgorithms"))
     KeyMetadata.add_member(:key_agreement_algorithms, Shapes::ShapeRef.new(shape: KeyAgreementAlgorithmSpecList, location_name: "KeyAgreementAlgorithms"))
+    KeyMetadata.add_member(:encapsulation_algorithms, Shapes::ShapeRef.new(shape: EncapsulationAlgorithmSpecList, location_name: "EncapsulationAlgorithms"))
     KeyMetadata.add_member(:multi_region, Shapes::ShapeRef.new(shape: NullableBooleanType, location_name: "MultiRegion"))
     KeyMetadata.add_member(:multi_region_configuration, Shapes::ShapeRef.new(shape: MultiRegionConfiguration, location_name: "MultiRegionConfiguration"))
     KeyMetadata.add_member(:pending_deletion_window_in_days, Shapes::ShapeRef.new(shape: PendingWindowInDaysType, location_name: "PendingDeletionWindowInDays"))
@@ -1204,6 +1238,24 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: XksKeyNotFoundException)
       end)
 
+      api.add_operation(:decapsulate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "Decapsulate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DecapsulateRequest)
+        o.output = Shapes::ShapeRef.new(shape: DecapsulateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KeyUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeyUsageException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidCiphertextException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
+      end)
+
       api.add_operation(:decrypt, Seahorse::Model::Operation.new.tap do |o|
         o.name = "Decrypt"
         o.http_method = "POST"
@@ -1374,6 +1426,23 @@ module Aws::KMS
         o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
         o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
         o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
+      end)
+
+      api.add_operation(:encapsulate, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "Encapsulate"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: EncapsulateRequest)
+        o.output = Shapes::ShapeRef.new(shape: EncapsulateResponse)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledException)
+        o.errors << Shapes::ShapeRef.new(shape: KeyUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGrantTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidKeyUsageException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+        o.errors << Shapes::ShapeRef.new(shape: DryRunOperationException)
       end)
 
       api.add_operation(:encrypt, Seahorse::Model::Operation.new.tap do |o|

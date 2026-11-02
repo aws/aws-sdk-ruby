@@ -11,61 +11,61 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class CustomerNotEntitledException < ::Aws::Errors::ServiceError
+      class CustomerNotEntitledException < ServiceError
         def message: () -> ::String
       end
-      class DisabledApiException < ::Aws::Errors::ServiceError
+      class DisabledApiException < ServiceError
         def message: () -> ::String
       end
-      class DuplicateRequestException < ::Aws::Errors::ServiceError
+      class DuplicateRequestException < ServiceError
         def message: () -> ::String
       end
-      class ExpiredTokenException < ::Aws::Errors::ServiceError
+      class ExpiredTokenException < ServiceError
         def message: () -> ::String
       end
-      class IdempotencyConflictException < ::Aws::Errors::ServiceError
+      class IdempotencyConflictException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceErrorException < ::Aws::Errors::ServiceError
+      class InternalServiceErrorException < ServiceError
         def message: () -> ::String
       end
-      class InvalidCustomerIdentifierException < ::Aws::Errors::ServiceError
+      class InvalidCustomerIdentifierException < ServiceError
         def message: () -> ::String
       end
-      class InvalidEndpointRegionException < ::Aws::Errors::ServiceError
+      class InvalidEndpointRegionException < ServiceError
         def message: () -> ::String
       end
-      class InvalidLicenseException < ::Aws::Errors::ServiceError
+      class InvalidLicenseException < ServiceError
         def message: () -> ::String
       end
-      class InvalidProductCodeException < ::Aws::Errors::ServiceError
+      class InvalidProductCodeException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPublicKeyVersionException < ::Aws::Errors::ServiceError
+      class InvalidPublicKeyVersionException < ServiceError
         def message: () -> ::String
       end
-      class InvalidRegionException < ::Aws::Errors::ServiceError
+      class InvalidRegionException < ServiceError
         def message: () -> ::String
       end
-      class InvalidTagException < ::Aws::Errors::ServiceError
+      class InvalidTagException < ServiceError
         def message: () -> ::String
       end
-      class InvalidTokenException < ::Aws::Errors::ServiceError
+      class InvalidTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidUsageAllocationsException < ::Aws::Errors::ServiceError
+      class InvalidUsageAllocationsException < ServiceError
         def message: () -> ::String
       end
-      class InvalidUsageDimensionException < ::Aws::Errors::ServiceError
+      class InvalidUsageDimensionException < ServiceError
         def message: () -> ::String
       end
-      class PlatformNotSupportedException < ::Aws::Errors::ServiceError
+      class PlatformNotSupportedException < ServiceError
         def message: () -> ::String
       end
-      class ThrottlingException < ::Aws::Errors::ServiceError
+      class ThrottlingException < ServiceError
         def message: () -> ::String
       end
-      class TimestampOutOfBoundsException < ::Aws::Errors::ServiceError
+      class TimestampOutOfBoundsException < ServiceError
         def message: () -> ::String
       end
     end

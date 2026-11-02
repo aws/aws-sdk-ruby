@@ -1071,6 +1071,8 @@ module Aws::Imagebuilder
     class ImageScanningConfiguration
       attr_accessor image_scanning_enabled: bool
       attr_accessor ecr_configuration: Types::EcrConfiguration
+      attr_accessor image_scanning_types: ::Array[("TEST_INSTANCE_CVE" | "ON_DEMAND_AMI_CVE")]
+      attr_accessor scan_result_condition: Types::ScanResultCondition
       SENSITIVE: []
     end
 
@@ -1946,6 +1948,12 @@ module Aws::Imagebuilder
     class S3Logs
       attr_accessor s3_bucket_name: ::String
       attr_accessor s3_key_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class ScanResultCondition
+      attr_accessor maximum_severity_label: ("INFORMATIONAL" | "LOW" | "MEDIUM" | "HIGH")
+      attr_accessor fix_available: bool
       SENSITIVE: []
     end
 

@@ -11,83 +11,83 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedFault < ::Aws::Errors::ServiceError
+      class AccessDeniedFault < ServiceError
         def message: () -> ::String
       end
-      class CollectorNotFoundFault < ::Aws::Errors::ServiceError
+      class CollectorNotFoundFault < ServiceError
         def message: () -> ::String
       end
-      class FailedDependencyFault < ::Aws::Errors::ServiceError
+      class FailedDependencyFault < ServiceError
         def message: () -> ::String
       end
-      class InsufficientResourceCapacityFault < ::Aws::Errors::ServiceError
+      class InsufficientResourceCapacityFault < ServiceError
         def message: () -> ::String
       end
-      class InvalidCertificateFault < ::Aws::Errors::ServiceError
+      class InvalidCertificateFault < ServiceError
         def message: () -> ::String
       end
-      class InvalidOperationFault < ::Aws::Errors::ServiceError
+      class InvalidOperationFault < ServiceError
         def message: () -> ::String
       end
-      class InvalidResourceStateFault < ::Aws::Errors::ServiceError
+      class InvalidResourceStateFault < ServiceError
         def message: () -> ::String
       end
-      class InvalidSubnet < ::Aws::Errors::ServiceError
+      class InvalidSubnet < ServiceError
         def message: () -> ::String
       end
-      class KMSAccessDeniedFault < ::Aws::Errors::ServiceError
+      class KMSAccessDeniedFault < ServiceError
         def message: () -> ::String
       end
-      class KMSDisabledFault < ::Aws::Errors::ServiceError
+      class KMSDisabledFault < ServiceError
         def message: () -> ::String
       end
-      class KMSFault < ::Aws::Errors::ServiceError
+      class KMSFault < ServiceError
         def message: () -> ::String
       end
-      class KMSInvalidStateFault < ::Aws::Errors::ServiceError
+      class KMSInvalidStateFault < ServiceError
         def message: () -> ::String
       end
-      class KMSKeyNotAccessibleFault < ::Aws::Errors::ServiceError
+      class KMSKeyNotAccessibleFault < ServiceError
         def message: () -> ::String
       end
-      class KMSNotFoundFault < ::Aws::Errors::ServiceError
+      class KMSNotFoundFault < ServiceError
         def message: () -> ::String
       end
-      class KMSThrottlingFault < ::Aws::Errors::ServiceError
+      class KMSThrottlingFault < ServiceError
         def message: () -> ::String
       end
-      class ReplicationSubnetGroupDoesNotCoverEnoughAZs < ::Aws::Errors::ServiceError
+      class ReplicationSubnetGroupDoesNotCoverEnoughAZs < ServiceError
         def message: () -> ::String
       end
-      class ResourceAlreadyExistsFault < ::Aws::Errors::ServiceError
+      class ResourceAlreadyExistsFault < ServiceError
         def message: () -> ::String
         def resource_arn: () -> ::String
       end
-      class ResourceNotFoundFault < ::Aws::Errors::ServiceError
+      class ResourceNotFoundFault < ServiceError
         def message: () -> ::String
       end
-      class ResourceQuotaExceededFault < ::Aws::Errors::ServiceError
+      class ResourceQuotaExceededFault < ServiceError
         def message: () -> ::String
       end
-      class S3AccessDeniedFault < ::Aws::Errors::ServiceError
+      class S3AccessDeniedFault < ServiceError
         def message: () -> ::String
       end
-      class S3ResourceNotFoundFault < ::Aws::Errors::ServiceError
+      class S3ResourceNotFoundFault < ServiceError
         def message: () -> ::String
       end
-      class SNSInvalidTopicFault < ::Aws::Errors::ServiceError
+      class SNSInvalidTopicFault < ServiceError
         def message: () -> ::String
       end
-      class SNSNoAuthorizationFault < ::Aws::Errors::ServiceError
+      class SNSNoAuthorizationFault < ServiceError
         def message: () -> ::String
       end
-      class StorageQuotaExceededFault < ::Aws::Errors::ServiceError
+      class StorageQuotaExceededFault < ServiceError
         def message: () -> ::String
       end
-      class SubnetAlreadyInUse < ::Aws::Errors::ServiceError
+      class SubnetAlreadyInUse < ServiceError
         def message: () -> ::String
       end
-      class UpgradeDependencyFailureFault < ::Aws::Errors::ServiceError
+      class UpgradeDependencyFailureFault < ServiceError
         def message: () -> ::String
       end
     end

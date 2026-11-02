@@ -130,6 +130,12 @@ module Aws::RDS
       SENSITIVE: []
     end
 
+    class AvailableCapacityPerAvailabilityZone
+      attr_accessor availability_zone: ::String
+      attr_accessor available_capacity: ::Integer
+      SENSITIVE: []
+    end
+
     class AvailableProcessorFeature
       attr_accessor name: ::String
       attr_accessor default_value: ::String
@@ -172,6 +178,16 @@ module Aws::RDS
     class BlueGreenDeploymentTask
       attr_accessor name: ::String
       attr_accessor status: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDBCapacityReservationRequest
+      attr_accessor db_capacity_reservation_identifier: ::String
+      SENSITIVE: []
+    end
+
+    class CancelDBCapacityReservationResponse
+      attr_accessor db_capacity_reservation: Types::DBCapacityReservation
       SENSITIVE: []
     end
 
@@ -376,6 +392,25 @@ module Aws::RDS
       SENSITIVE: []
     end
 
+    class CreateDBCapacityReservationRequest
+      attr_accessor db_capacity_reservation_name: ::String
+      attr_accessor db_instance_class: ::String
+      attr_accessor engine: ::String
+      attr_accessor capacity_per_availability_zone: ::Integer
+      attr_accessor availability_zones: ::Array[::String]
+      attr_accessor end_date: ::Time
+      attr_accessor start_date: ::Time
+      attr_accessor commitment_duration: ::Integer
+      attr_accessor license_model: ::String
+      attr_accessor tags: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class CreateDBCapacityReservationResponse
+      attr_accessor db_capacity_reservation: Types::DBCapacityReservation
+      SENSITIVE: []
+    end
+
     class CreateDBClusterEndpointMessage
       attr_accessor db_cluster_identifier: ::String
       attr_accessor db_cluster_endpoint_identifier: ::String
@@ -548,6 +583,7 @@ module Aws::RDS
       attr_accessor engine_lifecycle_support: ::String
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor db_capacity_reservation_identifier: ::String
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       SENSITIVE: [:master_user_password, :tde_credential_password]
     end
@@ -602,6 +638,7 @@ module Aws::RDS
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
+      attr_accessor db_capacity_reservation_identifier: ::String
       attr_accessor source_region: ::String
       SENSITIVE: [:pre_signed_url]
     end
@@ -809,6 +846,39 @@ module Aws::RDS
     end
 
     class CustomDBEngineVersionQuotaExceededFault < Aws::EmptyStructure
+    end
+
+    class DBCapacityReservation
+      attr_accessor db_capacity_reservation_name: ::String
+      attr_accessor db_instance_class: ::String
+      attr_accessor engine: ::String
+      attr_accessor license_model: ::String
+      attr_accessor reserved_capacity_per_availability_zone: ::Integer
+      attr_accessor available_capacity_per_availability_zone_list: ::Array[Types::AvailableCapacityPerAvailabilityZone]
+      attr_accessor end_date: ::Time
+      attr_accessor create_date: ::Time
+      attr_accessor start_date: ::Time
+      attr_accessor commitment_info: Types::DBCapacityReservationCommitmentInfo
+      attr_accessor state: ("active" | "expired" | "cancelled" | "pending" | "failed" | "assessing" | "scheduled" | "delayed" | "unsupported")
+      attr_accessor db_capacity_reservation_arn: ::String
+      attr_accessor db_capacity_reservation_identifier: ::String
+      attr_accessor tag_list: ::Array[Types::Tag]
+      SENSITIVE: []
+    end
+
+    class DBCapacityReservationAlreadyExistsFault < Aws::EmptyStructure
+    end
+
+    class DBCapacityReservationCommitmentInfo
+      attr_accessor committed_capacity_per_availability_zone: ::Integer
+      attr_accessor commitment_end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class DBCapacityReservationNotFoundFault < Aws::EmptyStructure
+    end
+
+    class DBCapacityReservationUnsupportedFault < Aws::EmptyStructure
     end
 
     class DBCluster
@@ -1289,6 +1359,7 @@ module Aws::RDS
       attr_accessor storage_volume_status: ::String
       attr_accessor storage_operation_status: ::String
       attr_accessor storage_operation_percent_progress: ::Integer
+      attr_accessor db_capacity_reservation_identifier: ::String
       SENSITIVE: []
     end
 
@@ -1960,6 +2031,20 @@ module Aws::RDS
       attr_accessor certificate_identifier: ::String
       attr_accessor filters: ::Array[Types::Filter]
       attr_accessor max_records: ::Integer
+      attr_accessor marker: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDBCapacityReservationsRequest
+      attr_accessor db_capacity_reservation_identifier: ::String
+      attr_accessor marker: ::String
+      attr_accessor max_records: ::Integer
+      attr_accessor filters: ::Array[Types::Filter]
+      SENSITIVE: []
+    end
+
+    class DescribeDBCapacityReservationsResponse
+      attr_accessor db_capacity_reservations: ::Array[Types::DBCapacityReservation]
       attr_accessor marker: ::String
       SENSITIVE: []
     end
@@ -2769,6 +2854,9 @@ module Aws::RDS
     class InvalidCustomDBEngineVersionStateFault < Aws::EmptyStructure
     end
 
+    class InvalidDBCapacityReservationStateFault < Aws::EmptyStructure
+    end
+
     class InvalidDBClusterAutomatedBackupStateFault < Aws::EmptyStructure
     end
 
@@ -2962,6 +3050,19 @@ module Aws::RDS
       SENSITIVE: []
     end
 
+    class ModifyDBCapacityReservationRequest
+      attr_accessor db_capacity_reservation_identifier: ::String
+      attr_accessor capacity_per_availability_zone: ::Integer
+      attr_accessor end_date_type: ("unlimited" | "limited")
+      attr_accessor end_date: ::Time
+      SENSITIVE: []
+    end
+
+    class ModifyDBCapacityReservationResponse
+      attr_accessor db_capacity_reservation: Types::DBCapacityReservation
+      SENSITIVE: []
+    end
+
     class ModifyDBClusterEndpointMessage
       attr_accessor db_cluster_endpoint_identifier: ::String
       attr_accessor endpoint_type: ::String
@@ -3109,6 +3210,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor engine: ::String
       attr_accessor additional_storage_volumes: ::Array[Types::ModifyAdditionalStorageVolume]
+      attr_accessor db_capacity_reservation_identifier: ::String
       attr_accessor tag_specifications: ::Array[Types::TagSpecification]
       attr_accessor master_user_authentication_type: ("password" | "iam-db-auth")
       attr_accessor engine_lifecycle_support: ::String
@@ -3522,6 +3624,7 @@ module Aws::RDS
       attr_accessor dedicated_log_volume: bool
       attr_accessor engine: ::String
       attr_accessor additional_storage_volumes: ::Array[Types::AdditionalStorageVolume]
+      attr_accessor db_capacity_reservation_identifier: ::String
       SENSITIVE: [:master_user_password]
     end
 
@@ -3996,6 +4099,7 @@ module Aws::RDS
       attr_accessor db_cluster_snapshot_identifier: ::String
       attr_accessor backup_retention_period: ::Integer
       attr_accessor preferred_backup_window: ::String
+      attr_accessor db_capacity_reservation_identifier: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
@@ -4061,6 +4165,7 @@ module Aws::RDS
       attr_accessor network_type: ::String
       attr_accessor manage_master_user_password: bool
       attr_accessor master_user_secret_kms_key_id: ::String
+      attr_accessor db_capacity_reservation_identifier: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
@@ -4120,6 +4225,7 @@ module Aws::RDS
       attr_accessor allocated_storage: ::Integer
       attr_accessor backup_retention_period: ::Integer
       attr_accessor preferred_backup_window: ::String
+      attr_accessor db_capacity_reservation_identifier: ::String
       attr_accessor dedicated_log_volume: bool
       attr_accessor ca_certificate_identifier: ::String
       attr_accessor engine_lifecycle_support: ::String
@@ -4300,6 +4406,7 @@ module Aws::RDS
 
     class StartDBInstanceMessage
       attr_accessor db_instance_identifier: ::String
+      attr_accessor db_capacity_reservation_identifier: ::String
       SENSITIVE: []
     end
 
@@ -4355,6 +4462,7 @@ module Aws::RDS
     class StopDBInstanceMessage
       attr_accessor db_instance_identifier: ::String
       attr_accessor db_snapshot_identifier: ::String
+      attr_accessor detach_from_db_capacity_reservation: bool
       SENSITIVE: []
     end
 

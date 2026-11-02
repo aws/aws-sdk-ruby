@@ -11,25 +11,25 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class BadRequestError < ::Aws::Errors::ServiceError
+      class BadRequestError < ServiceError
         def message: () -> ::String
       end
-      class ForbiddenError < ::Aws::Errors::ServiceError
+      class ForbiddenError < ServiceError
         def message: () -> ::String
       end
-      class InternalServerError < ::Aws::Errors::ServiceError
+      class InternalServerError < ServiceError
         def message: () -> ::String
       end
-      class RateLimitError < ::Aws::Errors::ServiceError
+      class RateLimitError < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundError < ::Aws::Errors::ServiceError
+      class ResourceNotFoundError < ServiceError
         def message: () -> ::String
       end
-      class UnauthorizedError < ::Aws::Errors::ServiceError
+      class UnauthorizedError < ServiceError
         def message: () -> ::String
       end
-      class ValidationError < ::Aws::Errors::ServiceError
+      class ValidationError < ServiceError
         def reasons: () -> ::String
         def message: () -> ::String
       end

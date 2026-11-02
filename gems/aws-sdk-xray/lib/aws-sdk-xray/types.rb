@@ -173,6 +173,40 @@ module Aws::XRay
     #
     class CancelTraceRetrievalResult < Aws::EmptyStructure; end
 
+    # Contains the settings for the CloudWatch Logs log groups that X-Ray
+    # creates for Transaction Search.
+    #
+    # @!attribute [rw] spans_log_group_kms_key_id
+    #   The ARN of an AWS Key Management Service (AWS KMS) key that you
+    #   create and manage, in the same account and Region, used to encrypt
+    #   the `aws/spans` log group. Key IDs and alias ARNs are not supported.
+    #
+    #   X-Ray applies the key only when it creates `aws/spans`. If the
+    #   account already has an `aws/spans` log group, X-Ray fails the
+    #   request with an `InvalidRequestException` and does not change the
+    #   log group. To enable Transaction Search with the existing log group
+    #   as it is, call `UpdateTraceSegmentDestination` again without
+    #   `SpansLogGroupKmsKeyId`. To set or change the key of the existing
+    #   log group, use the CloudWatch Logs `AssociateKmsKey` operation.
+    #
+    #   You need `kms:DescribeKey` permission on the key, and the key policy
+    #   must allow CloudWatch Logs to use the key. For more information, see
+    #   [Encrypt log data in CloudWatch Logs using AWS Key Management
+    #   Service][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/encrypt-log-data-kms.html
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/CloudWatchLogsConfiguration AWS API Documentation
+    #
+    class CloudWatchLogsConfiguration < Struct.new(
+      :spans_log_group_kms_key_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] group_name
     #   The case-sensitive name of the new group. Default is a reserved name
     #   and names must be unique.
@@ -3909,10 +3943,17 @@ module Aws::XRay
     #   The configured destination of trace segments.
     #   @return [String]
     #
+    # @!attribute [rw] cloud_watch_logs_configuration
+    #   Specifies settings for the CloudWatch Logs log groups that X-Ray
+    #   creates for Transaction Search. Specify this only when `Destination`
+    #   is `CloudWatchLogs`.
+    #   @return [Types::CloudWatchLogsConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/xray-2016-04-12/UpdateTraceSegmentDestinationRequest AWS API Documentation
     #
     class UpdateTraceSegmentDestinationRequest < Struct.new(
-      :destination)
+      :destination,
+      :cloud_watch_logs_configuration)
       SENSITIVE = []
       include Aws::Structure
     end

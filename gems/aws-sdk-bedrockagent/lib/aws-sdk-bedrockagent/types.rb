@@ -2866,6 +2866,159 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_token
+    #   A caller-supplied token that makes a retried create return the
+    #   existing resource rather than a second one. The window is 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Specifies the name of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] instruction
+    #   The instruction content, as a set of named fields. Get does not
+    #   return this field until the create review passes.
+    #   @return [Types::RetrievalInstructionContent]
+    #
+    # @!attribute [rw] description
+    #   Specifies a description of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_encryption_key_arn
+    #   The Amazon Resource Name (ARN) of a customer managed AWS Key
+    #   Management Service (AWS KMS) key used to encrypt the instruction
+    #   content at rest. If you omit it, the service uses an AWS owned key.
+    #   You fix the key at create and cannot change it later.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   Tags for the retrieval instruction.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateRetrievalInstructionRequest AWS API Documentation
+    #
+    class CreateRetrievalInstructionRequest < Struct.new(
+      :client_token,
+      :name,
+      :instruction,
+      :description,
+      :customer_encryption_key_arn,
+      :tags)
+      SENSITIVE = [:name, :instruction, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the newly created retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_instruction_arn
+    #   The ARN of the newly created retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Always INACTIVE on this response. The content review has not run
+    #   when this call returns, so the resource is not yet usable.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_transition_status
+    #   Always CREATING on this response. Poll GetRetrievalInstruction until
+    #   this member is neither CREATING nor UPDATING, then read the outcome
+    #   from it.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   When you created the retrieval instruction.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   When the retrieval instruction was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateRetrievalInstructionResponse AWS API Documentation
+    #
+    class CreateRetrievalInstructionResponse < Struct.new(
+      :retrieval_instruction_id,
+      :retrieval_instruction_arn,
+      :name,
+      :status,
+      :last_transition_status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:name]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction to version.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A description of this version. Independent of the retrieval
+    #   instruction's own description.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A caller-supplied token that makes a retried call return the version
+    #   created by the first call rather than a second version. The window
+    #   is 8 hours.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateRetrievalInstructionVersionRequest AWS API Documentation
+    #
+    class CreateRetrievalInstructionVersionRequest < Struct.new(
+      :retrieval_instruction_id,
+      :description,
+      :client_token)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_instruction_arn
+    #   The ARN of the retrieval instruction. Versions do not have their own
+    #   ARN.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The number of the version created. Versions are numbered from 1 and
+    #   allocated monotonically; a number is never reused, even after the
+    #   version is deleted.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   When this version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   The description of this version, when one was supplied.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/CreateRetrievalInstructionVersionResponse AWS API Documentation
+    #
+    class CreateRetrievalInstructionVersionResponse < Struct.new(
+      :retrieval_instruction_id,
+      :retrieval_instruction_arn,
+      :version,
+      :created_at,
+      :description)
+      SENSITIVE = [:description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] knowledge_base_id
     #   The unique identifier of the knowledge base to associate this VPC
     #   configuration with.
@@ -3864,6 +4017,50 @@ module Aws::BedrockAgent
     class DeleteResourcePolicyResponse < Struct.new(
       :resource_arn,
       :revision_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_instruction_version
+    #   The version to delete. Omit this field to delete the retrieval
+    #   instruction itself, which you can do only when it has no versions;
+    #   while any version exists the service rejects the request with
+    #   ConflictException. You cannot delete DRAFT on its own; deleting the
+    #   retrieval instruction removes it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteRetrievalInstructionRequest AWS API Documentation
+    #
+    class DeleteRetrievalInstructionRequest < Struct.new(
+      :retrieval_instruction_id,
+      :retrieval_instruction_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the deleted retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_instruction_arn
+    #   The ARN of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] version
+    #   The version that you deleted. Absent when you deleted the whole
+    #   retrieval instruction.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/DeleteRetrievalInstructionResponse AWS API Documentation
+    #
+    class DeleteRetrievalInstructionResponse < Struct.new(
+      :retrieval_instruction_id,
+      :retrieval_instruction_arn,
+      :version)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5903,6 +6100,122 @@ module Aws::BedrockAgent
       include Aws::Structure
     end
 
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction to get.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_instruction_version
+    #   The version to return: a version number, or DRAFT for the retrieval
+    #   instruction's current reviewed content. When omitted, DRAFT is
+    #   used. This default is permanent: omitting
+    #   retrievalInstructionVersion will never resolve to a numbered
+    #   version.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetRetrievalInstructionRequest AWS API Documentation
+    #
+    class GetRetrievalInstructionRequest < Struct.new(
+      :retrieval_instruction_id,
+      :retrieval_instruction_version)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_instruction_arn
+    #   The ARN of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Specifies whether you can use the instruction. You can resolve only
+    #   an ACTIVE instruction at retrieval time. Monotone: INACTIVE to
+    #   ACTIVE once, never back. Numbered versions are always ACTIVE.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_transition_status
+    #   The outcome or in-progress state of the most recent create or
+    #   update. CREATING or UPDATING means the operation is still running.
+    #   Independent of status. Always has a value from the create 202
+    #   onward. On a numbered version this is always CREATE\_SUCCESSFUL: a
+    #   version is created once, from reviewed content, and is immutable.
+    #   @return [String]
+    #
+    # @!attribute [rw] instruction
+    #   The reviewed content this instruction serves — what
+    #   AgenticRetrieveStream resolves while status is ACTIVE. Absent until
+    #   the first create review passes. Always present on a numbered
+    #   version.
+    #   @return [Types::RetrievalInstructionContent]
+    #
+    # @!attribute [rw] created_at
+    #   When the retrieval instruction was created. On a numbered version,
+    #   when that version was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   When the retrieval instruction was last updated. Equal to createdAt
+    #   on a numbered version, which is immutable.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A description of the retrieval instruction. On a numbered version,
+    #   the description of that version.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_encryption_key_arn
+    #   The ARN of the customer managed KMS key protecting this content,
+    #   when one was supplied at create.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_transition_status_reasons
+    #   Why the most recent create or update was rejected. One entry for
+    #   each rejected field, or a single entry when the review itself
+    #   failed. Each entry has a machine-readable code and a message, and
+    #   names the field when it applies to one. The service includes this
+    #   field only when lastTransitionStatus is CREATE\_FAILED or
+    #   UPDATE\_FAILED. Never present on a numbered version.
+    #   @return [Array<Types::RetrievalInstructionFailureReason>]
+    #
+    # @!attribute [rw] version
+    #   The version this response describes: a version number, or DRAFT.
+    #   @return [String]
+    #
+    # @!attribute [rw] latest_version
+    #   The largest version number that currently exists for this retrieval
+    #   instruction, that is, the newest version you can retrieve. Present
+    #   only on a DRAFT read, and only when at least one version exists.
+    #   Because version numbers are never reused, deleting versions can
+    #   leave gaps: this is the newest existing version, not a count and not
+    #   the highest number ever created.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/GetRetrievalInstructionResponse AWS API Documentation
+    #
+    class GetRetrievalInstructionResponse < Struct.new(
+      :retrieval_instruction_id,
+      :retrieval_instruction_arn,
+      :name,
+      :status,
+      :last_transition_status,
+      :instruction,
+      :created_at,
+      :updated_at,
+      :description,
+      :customer_encryption_key_arn,
+      :last_transition_status_reasons,
+      :version,
+      :latest_version)
+      SENSITIVE = [:name, :instruction, :description]
+      include Aws::Structure
+    end
+
     # @!attribute [rw] knowledge_base_id
     #   The unique identifier of the knowledge base that owns the VPC
     #   configuration.
@@ -7639,6 +7952,90 @@ module Aws::BedrockAgent
     #
     class ListPromptsResponse < Struct.new(
       :prompt_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction whose versions to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of versions to return in a single page.
+    #   The service enforces the effective upper bound.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous
+    #   ListRetrievalInstructionVersions response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListRetrievalInstructionVersionsRequest AWS API Documentation
+    #
+    class ListRetrievalInstructionVersionsRequest < Struct.new(
+      :retrieval_instruction_id,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_version_summaries
+    #   The version summaries in this page, newest first.
+    #   @return [Array<Types::RetrievalInstructionVersionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to pass to the next
+    #   ListRetrievalInstructionVersions call, absent on the last page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListRetrievalInstructionVersionsResponse AWS API Documentation
+    #
+    class ListRetrievalInstructionVersionsResponse < Struct.new(
+      :retrieval_instruction_version_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] status
+    #   Return only instructions with this availability status.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single page. The
+    #   effective upper bound is enforced service-side.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token from a previous ListRetrievalInstructions
+    #   response.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListRetrievalInstructionsRequest AWS API Documentation
+    #
+    class ListRetrievalInstructionsRequest < Struct.new(
+      :status,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_summaries
+    #   The retrieval instruction summaries in this page.
+    #   @return [Array<Types::RetrievalInstructionSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to pass to the next ListRetrievalInstructions
+    #   call, absent on the last page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/ListRetrievalInstructionsResponse AWS API Documentation
+    #
+    class ListRetrievalInstructionsResponse < Struct.new(
+      :retrieval_instruction_summaries,
       :next_token)
       SENSITIVE = []
       include Aws::Structure
@@ -10132,6 +10529,154 @@ module Aws::BedrockAgent
       class Unknown < RetrievalFlowNodeServiceConfiguration; end
     end
 
+    # The instruction content, as a set of named fields. Every field is
+    # optional; at least one must be present. Service-side validation
+    # enforces per-field and aggregate size limits.
+    #
+    # @!attribute [rw] retrieval_guidance
+    #   How to interpret and decompose the question, and what to prioritise
+    #   when searching.
+    #   @return [String]
+    #
+    # @!attribute [rw] persona
+    #   Who the assistant is: identity, tone and language.
+    #   @return [String]
+    #
+    # @!attribute [rw] answer_format
+    #   How the answer is structured, including how sources are cited.
+    #   @return [String]
+    #
+    # @!attribute [rw] answer_policy
+    #   Whether and how to answer: how strongly an answer must be supported,
+    #   and what to do with questions outside scope.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RetrievalInstructionContent AWS API Documentation
+    #
+    class RetrievalInstructionContent < Struct.new(
+      :retrieval_guidance,
+      :persona,
+      :answer_format,
+      :answer_policy)
+      SENSITIVE = [:retrieval_guidance, :persona, :answer_format, :answer_policy]
+      include Aws::Structure
+    end
+
+    # One reason the most recent create or update did not succeed. code
+    # drives programmatic branching (fix the text, fix the configuration, or
+    # retry); message carries the specific cause.
+    #
+    # @!attribute [rw] field_name
+    #   The instruction field this entry is about. Present on review
+    #   rejections of a specific field; absent when the failure applies to
+    #   the whole review, because a client-side execution failure or a
+    #   service fault has no single field.
+    #   @return [String]
+    #
+    # @!attribute [rw] code
+    #   Stable, machine-readable classification by fault attribution. Valid
+    #   values:
+    #
+    #   * CONTENT\_REJECTED – The review rejected the named field's
+    #     content; revise the text and resubmit.
+    #
+    #   * CLIENT\_ERROR – The review could not run for a customer-side
+    #     reason, for example the customer managed AWS KMS key could not be
+    #     used; fix the configuration and resubmit.
+    #
+    #   * INTERNAL\_ERROR – The review could not complete due to a service
+    #     fault; retry the create or update.
+    #
+    #   New values may be added over time; your client should tolerate
+    #   values it does not recognize and treat them as a failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   Human-readable explanation of the specific cause. Never contains the
+    #   customer's own text.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RetrievalInstructionFailureReason AWS API Documentation
+    #
+    class RetrievalInstructionFailureReason < Struct.new(
+      :field_name,
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a retrieval instruction, without the content.
+    #
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_instruction_arn
+    #   The ARN of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Whether the instruction can be used. Only ACTIVE is resolvable at
+    #   retrieval time.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_transition_status
+    #   The outcome or in-progress state of the most recent create or update
+    #   of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   When you created the retrieval instruction.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   When the retrieval instruction was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A description of the retrieval instruction.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RetrievalInstructionSummary AWS API Documentation
+    #
+    class RetrievalInstructionSummary < Struct.new(
+      :retrieval_instruction_id,
+      :retrieval_instruction_arn,
+      :name,
+      :status,
+      :last_transition_status,
+      :created_at,
+      :updated_at,
+      :description)
+      SENSITIVE = [:name, :description]
+      include Aws::Structure
+    end
+
+    # A summary of one numbered version of a retrieval instruction, without
+    # the content.
+    #
+    # @!attribute [rw] version
+    #   The version number.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   When this version was created.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/RetrievalInstructionVersionSummary AWS API Documentation
+    #
+    class RetrievalInstructionVersionSummary < Struct.new(
+      :version,
+      :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about the content to ingest into a knowledge base
     # connected to an Amazon S3 data source.
     #
@@ -12245,6 +12790,76 @@ module Aws::BedrockAgent
       :created_at,
       :updated_at)
       SENSITIVE = [:variants]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] instruction
+    #   The replacement instruction content. This is a full replacement of
+    #   all four fields, not a patch. During UPDATING, Get continues to
+    #   return the previously-served content until the update review passes.
+    #   @return [Types::RetrievalInstructionContent]
+    #
+    # @!attribute [rw] description
+    #   A replacement description; applied together with the content when
+    #   the review passes. Omit to clear.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateRetrievalInstructionRequest AWS API Documentation
+    #
+    class UpdateRetrievalInstructionRequest < Struct.new(
+      :retrieval_instruction_id,
+      :instruction,
+      :description)
+      SENSITIVE = [:instruction, :description]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] retrieval_instruction_id
+    #   The identifier of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] retrieval_instruction_arn
+    #   The ARN of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the retrieval instruction.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Whether the instruction can be used. An update never lowers status.
+    #   Unchanged from the previous value on this response.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_transition_status
+    #   Always UPDATING on this response. Poll GetRetrievalInstruction until
+    #   this member is neither CREATING nor UPDATING, then read the outcome
+    #   from it.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   When you created the retrieval instruction.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   When the retrieval instruction was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agent-2023-06-05/UpdateRetrievalInstructionResponse AWS API Documentation
+    #
+    class UpdateRetrievalInstructionResponse < Struct.new(
+      :retrieval_instruction_id,
+      :retrieval_instruction_arn,
+      :name,
+      :status,
+      :last_transition_status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = [:name]
       include Aws::Structure
     end
 

@@ -77,7 +77,7 @@ module Aws
 
       type nlu_improvement_specification = {
       enabled: bool,
-      assisted_nlu_mode: ("Primary" | "Fallback")?,
+      assisted_nlu_mode: ("Primary" | "Fallback" | "DialogManager")?,
       intent_disambiguation_settings: {
         enabled: bool,
         max_disambiguation_intents: ::Integer?,
@@ -274,7 +274,7 @@ module Aws
     }
 
       type intent_confirmation_setting = {
-      prompt_specification: Params::prompt_specification,
+      prompt_specification: Params::prompt_specification?,
       declination_response: Params::response_specification?,
       active: bool?,
       confirmation_response: Params::response_specification?,
@@ -375,8 +375,8 @@ module Aws
     }
 
       type wait_and_continue_specification = {
-      waiting_response: Params::response_specification,
-      continue_response: Params::response_specification,
+      waiting_response: Params::response_specification?,
+      continue_response: Params::response_specification?,
       still_waiting_response: Params::still_waiting_response_specification?,
       active: bool?
     }

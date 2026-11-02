@@ -11,7 +11,7 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
     end

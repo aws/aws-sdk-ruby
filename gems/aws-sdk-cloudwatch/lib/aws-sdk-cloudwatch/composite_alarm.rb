@@ -172,6 +172,14 @@ module Aws::CloudWatch
       data[:actions_suppressor_extension_period]
     end
 
+    # Settings that change the content of the notifications and events that
+    # the alarm sends when its state changes. These settings apply to the
+    # alarm's actions, whichever state triggers them.
+    # @return [Types::ActionConfiguration]
+    def action_configuration
+      data[:action_configuration]
+    end
+
     # @!endgroup
 
     # @return [Client]

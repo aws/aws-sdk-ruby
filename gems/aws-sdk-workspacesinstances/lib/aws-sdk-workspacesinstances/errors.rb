@@ -34,6 +34,7 @@ module Aws::WorkspacesInstances
   # * {ServiceQuotaExceededException}
   # * {ThrottlingException}
   # * {ValidationException}
+  # * {VolumeModificationRateExceededException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
   # if they are not defined above.
@@ -225,6 +226,31 @@ module Aws::WorkspacesInstances
       # @return [String]
       def field_list
         @data[:field_list]
+      end
+    end
+
+    class VolumeModificationRateExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::WorkspacesInstances::Types::VolumeModificationRateExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def resource_id
+        @data[:resource_id]
+      end
+
+      # @return [String]
+      def resource_type
+        @data[:resource_type]
       end
     end
 

@@ -11,51 +11,51 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AnalysisNotFoundException < ::Aws::Errors::ServiceError
+      class AnalysisNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class BackfillLimitExceededException < ::Aws::Errors::ServiceError
+      class BackfillLimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class BillExpirationException < ::Aws::Errors::ServiceError
+      class BillExpirationException < ServiceError
         def message: () -> ::String
       end
-      class BillingViewHealthStatusException < ::Aws::Errors::ServiceError
+      class BillingViewHealthStatusException < ServiceError
         def message: () -> ::String
       end
-      class DataUnavailableException < ::Aws::Errors::ServiceError
+      class DataUnavailableException < ServiceError
         def message: () -> ::String
       end
-      class GenerationExistsException < ::Aws::Errors::ServiceError
+      class GenerationExistsException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class RequestChangedException < ::Aws::Errors::ServiceError
+      class RequestChangedException < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFoundException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def resource_name: () -> ::String
-      end
-      class ServiceQuotaExceededException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-      end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class ResourceNotFoundException < ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
-      class UnknownMonitorException < ::Aws::Errors::ServiceError
+      class ServiceQuotaExceededException < ServiceError
         def message: () -> ::String
       end
-      class UnknownSubscriptionException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class UnknownMonitorException < ServiceError
         def message: () -> ::String
       end
-      class UnresolvableUsageUnitException < ::Aws::Errors::ServiceError
+      class UnknownSubscriptionException < ServiceError
+        def message: () -> ::String
+      end
+      class UnresolvableUsageUnitException < ServiceError
         def message: () -> ::String
       end
     end

@@ -79,9 +79,11 @@ module Aws::MediaLive
     AudioType = Shapes::StringShape.new(name: 'AudioType')
     AudioWatermarkSettings = Shapes::StructureShape.new(name: 'AudioWatermarkSettings')
     AuthenticationScheme = Shapes::StringShape.new(name: 'AuthenticationScheme')
+    AutoFilterSettings = Shapes::StructureShape.new(name: 'AutoFilterSettings')
     AutomaticInputFailoverSettings = Shapes::StructureShape.new(name: 'AutomaticInputFailoverSettings')
     Av1BitDepth = Shapes::StringShape.new(name: 'Av1BitDepth')
     Av1ColorSpaceSettings = Shapes::StructureShape.new(name: 'Av1ColorSpaceSettings')
+    Av1FilterSettings = Shapes::StructureShape.new(name: 'Av1FilterSettings')
     Av1GopSizeUnits = Shapes::StringShape.new(name: 'Av1GopSizeUnits')
     Av1Level = Shapes::StringShape.new(name: 'Av1Level')
     Av1LookAheadRateControl = Shapes::StringShape.new(name: 'Av1LookAheadRateControl')
@@ -434,6 +436,7 @@ module Aws::MediaLive
     GlobalConfigurationOutputLockingMode = Shapes::StringShape.new(name: 'GlobalConfigurationOutputLockingMode')
     GlobalConfigurationOutputTimingSource = Shapes::StringShape.new(name: 'GlobalConfigurationOutputTimingSource')
     H264AdaptiveQuantization = Shapes::StringShape.new(name: 'H264AdaptiveQuantization')
+    H264AllowExplicitWeightedPrediction = Shapes::StringShape.new(name: 'H264AllowExplicitWeightedPrediction')
     H264ColorMetadata = Shapes::StringShape.new(name: 'H264ColorMetadata')
     H264ColorSpaceSettings = Shapes::StructureShape.new(name: 'H264ColorSpaceSettings')
     H264EntropyEncoding = Shapes::StringShape.new(name: 'H264EntropyEncoding')
@@ -809,6 +812,7 @@ module Aws::MediaLive
     NodeInterfaceMappingCreateRequest = Shapes::StructureShape.new(name: 'NodeInterfaceMappingCreateRequest')
     NodeRole = Shapes::StringShape.new(name: 'NodeRole')
     NodeState = Shapes::StringShape.new(name: 'NodeState')
+    NoneFilterSettings = Shapes::StructureShape.new(name: 'NoneFilterSettings')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     NotFoundExceptionResponseContent = Shapes::StructureShape.new(name: 'NotFoundExceptionResponseContent')
     Offering = Shapes::StructureShape.new(name: 'Offering')
@@ -825,6 +829,8 @@ module Aws::MediaLive
     OutputUsage = Shapes::StringShape.new(name: 'OutputUsage')
     PassThroughSettings = Shapes::StructureShape.new(name: 'PassThroughSettings')
     PauseStateScheduleActionSettings = Shapes::StructureShape.new(name: 'PauseStateScheduleActionSettings')
+    PerceptualFilterSettings = Shapes::StructureShape.new(name: 'PerceptualFilterSettings')
+    PerceptualFilterStrength = Shapes::StringShape.new(name: 'PerceptualFilterStrength')
     PipelineDetail = Shapes::StructureShape.new(name: 'PipelineDetail')
     PipelineId = Shapes::StringShape.new(name: 'PipelineId')
     PipelineLockingMethod = Shapes::StringShape.new(name: 'PipelineLockingMethod')
@@ -1113,7 +1119,6 @@ module Aws::MediaLive
     __doubleMin0Max5000 = Shapes::FloatShape.new(name: '__doubleMin0Max5000')
     __doubleMin1 = Shapes::FloatShape.new(name: '__doubleMin1')
     __doubleMin1Max65535 = Shapes::FloatShape.new(name: '__doubleMin1Max65535')
-    __doubleMin250Max5000 = Shapes::FloatShape.new(name: '__doubleMin250Max5000')
     __doubleMin32Max46 = Shapes::FloatShape.new(name: '__doubleMin32Max46')
     __doubleMinNegative100Max0 = Shapes::FloatShape.new(name: '__doubleMinNegative100Max0')
     __doubleMinNegative1Max5 = Shapes::FloatShape.new(name: '__doubleMinNegative1Max5')
@@ -1350,7 +1355,7 @@ module Aws::MediaLive
     AacSettings.add_member(:vbr_quality, Shapes::ShapeRef.new(shape: AacVbrQuality, location_name: "vbrQuality"))
     AacSettings.struct_class = Types::AacSettings
 
-    AbWatermarkingCustomProfile.add_member(:embedding_frequency, Shapes::ShapeRef.new(shape: __doubleMin250Max5000, required: true, location_name: "embeddingFrequency"))
+    AbWatermarkingCustomProfile.add_member(:embedding_frequency, Shapes::ShapeRef.new(shape: __double, required: true, location_name: "embeddingFrequency"))
     AbWatermarkingCustomProfile.add_member(:scene_cut, Shapes::ShapeRef.new(shape: __doubleMinNegative1Max5, required: true, location_name: "sceneCut"))
     AbWatermarkingCustomProfile.add_member(:target_psnr, Shapes::ShapeRef.new(shape: __doubleMin32Max46, required: true, location_name: "targetPsnr"))
     AbWatermarkingCustomProfile.struct_class = Types::AbWatermarkingCustomProfile
@@ -1506,6 +1511,8 @@ module Aws::MediaLive
     AudioWatermarkSettings.add_member(:nielsen_watermarks_settings, Shapes::ShapeRef.new(shape: NielsenWatermarksSettings, location_name: "nielsenWatermarksSettings"))
     AudioWatermarkSettings.struct_class = Types::AudioWatermarkSettings
 
+    AutoFilterSettings.struct_class = Types::AutoFilterSettings
+
     AutomaticInputFailoverSettings.add_member(:error_clear_time_msec, Shapes::ShapeRef.new(shape: __integerMin1, location_name: "errorClearTimeMsec"))
     AutomaticInputFailoverSettings.add_member(:failover_conditions, Shapes::ShapeRef.new(shape: __listOfFailoverCondition, location_name: "failoverConditions"))
     AutomaticInputFailoverSettings.add_member(:input_preference, Shapes::ShapeRef.new(shape: InputPreference, location_name: "inputPreference"))
@@ -1518,6 +1525,11 @@ module Aws::MediaLive
     Av1ColorSpaceSettings.add_member(:rec_709_settings, Shapes::ShapeRef.new(shape: Rec709Settings, location_name: "rec709Settings"))
     Av1ColorSpaceSettings.add_member(:hlg_2020_settings, Shapes::ShapeRef.new(shape: Hlg2020Settings, location_name: "hlg2020Settings"))
     Av1ColorSpaceSettings.struct_class = Types::Av1ColorSpaceSettings
+
+    Av1FilterSettings.add_member(:auto_filter_settings, Shapes::ShapeRef.new(shape: AutoFilterSettings, location_name: "autoFilterSettings"))
+    Av1FilterSettings.add_member(:none_filter_settings, Shapes::ShapeRef.new(shape: NoneFilterSettings, location_name: "noneFilterSettings"))
+    Av1FilterSettings.add_member(:perceptual_filter_settings, Shapes::ShapeRef.new(shape: PerceptualFilterSettings, location_name: "perceptualFilterSettings"))
+    Av1FilterSettings.struct_class = Types::Av1FilterSettings
 
     Av1Settings.add_member(:afd_signaling, Shapes::ShapeRef.new(shape: AfdSignaling, location_name: "afdSignaling"))
     Av1Settings.add_member(:buf_size, Shapes::ShapeRef.new(shape: __integerMin50000Max24000000, location_name: "bufSize"))
@@ -1543,6 +1555,7 @@ module Aws::MediaLive
     Av1Settings.add_member(:temporal_aq, Shapes::ShapeRef.new(shape: Av1TemporalAq, location_name: "temporalAq"))
     Av1Settings.add_member(:timecode_insertion, Shapes::ShapeRef.new(shape: Av1TimecodeInsertionBehavior, location_name: "timecodeInsertion"))
     Av1Settings.add_member(:bit_depth, Shapes::ShapeRef.new(shape: Av1BitDepth, location_name: "bitDepth"))
+    Av1Settings.add_member(:filter_settings, Shapes::ShapeRef.new(shape: Av1FilterSettings, location_name: "filterSettings"))
     Av1Settings.struct_class = Types::Av1Settings
 
     AvailBlanking.add_member(:avail_blanking_image, Shapes::ShapeRef.new(shape: InputLocation, location_name: "availBlankingImage"))
@@ -3333,6 +3346,9 @@ module Aws::MediaLive
 
     H264FilterSettings.add_member(:temporal_filter_settings, Shapes::ShapeRef.new(shape: TemporalFilterSettings, location_name: "temporalFilterSettings"))
     H264FilterSettings.add_member(:bandwidth_reduction_filter_settings, Shapes::ShapeRef.new(shape: BandwidthReductionFilterSettings, location_name: "bandwidthReductionFilterSettings"))
+    H264FilterSettings.add_member(:auto_filter_settings, Shapes::ShapeRef.new(shape: AutoFilterSettings, location_name: "autoFilterSettings"))
+    H264FilterSettings.add_member(:none_filter_settings, Shapes::ShapeRef.new(shape: NoneFilterSettings, location_name: "noneFilterSettings"))
+    H264FilterSettings.add_member(:perceptual_filter_settings, Shapes::ShapeRef.new(shape: PerceptualFilterSettings, location_name: "perceptualFilterSettings"))
     H264FilterSettings.struct_class = Types::H264FilterSettings
 
     H264Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H264AdaptiveQuantization, location_name: "adaptiveQuantization"))
@@ -3379,6 +3395,7 @@ module Aws::MediaLive
     H264Settings.add_member(:timecode_burnin_settings, Shapes::ShapeRef.new(shape: TimecodeBurninSettings, location_name: "timecodeBurninSettings"))
     H264Settings.add_member(:min_qp, Shapes::ShapeRef.new(shape: __integerMin1Max51, location_name: "minQp"))
     H264Settings.add_member(:min_bitrate, Shapes::ShapeRef.new(shape: __integerMin0, location_name: "minBitrate"))
+    H264Settings.add_member(:allow_explicit_weighted_prediction, Shapes::ShapeRef.new(shape: H264AllowExplicitWeightedPrediction, location_name: "allowExplicitWeightedPrediction"))
     H264Settings.struct_class = Types::H264Settings
 
     H265ColorSpaceSettings.add_member(:color_space_passthrough_settings, Shapes::ShapeRef.new(shape: ColorSpacePassthroughSettings, location_name: "colorSpacePassthroughSettings"))
@@ -3391,6 +3408,9 @@ module Aws::MediaLive
 
     H265FilterSettings.add_member(:temporal_filter_settings, Shapes::ShapeRef.new(shape: TemporalFilterSettings, location_name: "temporalFilterSettings"))
     H265FilterSettings.add_member(:bandwidth_reduction_filter_settings, Shapes::ShapeRef.new(shape: BandwidthReductionFilterSettings, location_name: "bandwidthReductionFilterSettings"))
+    H265FilterSettings.add_member(:auto_filter_settings, Shapes::ShapeRef.new(shape: AutoFilterSettings, location_name: "autoFilterSettings"))
+    H265FilterSettings.add_member(:none_filter_settings, Shapes::ShapeRef.new(shape: NoneFilterSettings, location_name: "noneFilterSettings"))
+    H265FilterSettings.add_member(:perceptual_filter_settings, Shapes::ShapeRef.new(shape: PerceptualFilterSettings, location_name: "perceptualFilterSettings"))
     H265FilterSettings.struct_class = Types::H265FilterSettings
 
     H265Settings.add_member(:adaptive_quantization, Shapes::ShapeRef.new(shape: H265AdaptiveQuantization, location_name: "adaptiveQuantization"))
@@ -4440,14 +4460,20 @@ module Aws::MediaLive
 
     MulticastSource.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIp"))
     MulticastSource.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
+    MulticastSource.add_member(:secondary_source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "secondarySourceIp"))
+    MulticastSource.add_member(:secondary_url, Shapes::ShapeRef.new(shape: __string, location_name: "secondaryUrl"))
     MulticastSource.struct_class = Types::MulticastSource
 
     MulticastSourceCreateRequest.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIp"))
     MulticastSourceCreateRequest.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
+    MulticastSourceCreateRequest.add_member(:secondary_source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "secondarySourceIp"))
+    MulticastSourceCreateRequest.add_member(:secondary_url, Shapes::ShapeRef.new(shape: __string, location_name: "secondaryUrl"))
     MulticastSourceCreateRequest.struct_class = Types::MulticastSourceCreateRequest
 
     MulticastSourceUpdateRequest.add_member(:source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "sourceIp"))
     MulticastSourceUpdateRequest.add_member(:url, Shapes::ShapeRef.new(shape: __string, required: true, location_name: "url"))
+    MulticastSourceUpdateRequest.add_member(:secondary_source_ip, Shapes::ShapeRef.new(shape: __string, location_name: "secondarySourceIp"))
+    MulticastSourceUpdateRequest.add_member(:secondary_url, Shapes::ShapeRef.new(shape: __string, location_name: "secondaryUrl"))
     MulticastSourceUpdateRequest.struct_class = Types::MulticastSourceUpdateRequest
 
     Multiplex.add_member(:arn, Shapes::ShapeRef.new(shape: __string, location_name: "arn"))
@@ -4631,6 +4657,8 @@ module Aws::MediaLive
     NodeInterfaceMappingCreateRequest.add_member(:physical_interface_name, Shapes::ShapeRef.new(shape: __string, location_name: "physicalInterfaceName"))
     NodeInterfaceMappingCreateRequest.struct_class = Types::NodeInterfaceMappingCreateRequest
 
+    NoneFilterSettings.struct_class = Types::NoneFilterSettings
+
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: __string, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
 
@@ -4716,6 +4744,9 @@ module Aws::MediaLive
 
     PauseStateScheduleActionSettings.add_member(:pipelines, Shapes::ShapeRef.new(shape: __listOfPipelinePauseStateSettings, location_name: "pipelines"))
     PauseStateScheduleActionSettings.struct_class = Types::PauseStateScheduleActionSettings
+
+    PerceptualFilterSettings.add_member(:strength, Shapes::ShapeRef.new(shape: PerceptualFilterStrength, required: true, location_name: "strength"))
+    PerceptualFilterSettings.struct_class = Types::PerceptualFilterSettings
 
     PipelineDetail.add_member(:active_input_attachment_name, Shapes::ShapeRef.new(shape: __string, location_name: "activeInputAttachmentName"))
     PipelineDetail.add_member(:active_input_switch_action_name, Shapes::ShapeRef.new(shape: __string, location_name: "activeInputSwitchActionName"))

@@ -149,6 +149,39 @@ module Aws
         end
       end
 
+      context 'framework metadata' do
+        def user_agent_for(frameworks, caller_line)
+          allow(Kernel).to receive(:caller).and_return([caller_line])
+          client = client_class.new(
+            stub_responses: true, user_agent_frameworks: frameworks
+          )
+          resp = client.example_operation
+          resp.context.http_request.headers['User-Agent']
+        end
+
+        it 'adds a configured framework that is loaded' do
+          ua = user_agent_for(
+            ['aws-record'], '/x/gems/aws-record-2.0.0/lib/aws-record.rb:1'
+          )
+          expect(ua).to include('lib/aws-record#2.0.0')
+        end
+
+        it 'adds a framework whose name has a dot' do
+          ua = user_agent_for(['a.c'], '/x/gems/a.c-1.2.3/lib/a.rb:1')
+          expect(ua).to include('lib/a.c#1.2.3')
+        end
+
+        it 'does not add a different gem for a framework name with a dot' do
+          ua = user_agent_for(['a.c'], '/x/gems/abc-1.2.3/lib/abc.rb:1')
+          expect(ua).not_to include('lib/abc#1.2.3')
+        end
+
+        it 'sends the request when a framework name has a parenthesis' do
+          ua = user_agent_for(['('], '/x/gems/abc-1.2.3/lib/abc.rb:1')
+          expect(ua).not_to include('lib/')
+        end
+      end
+
       context 'test runner' do
         tests = JSON.load_file(
           File.join(File.dirname(__FILE__), 'user_agent_tests.json')

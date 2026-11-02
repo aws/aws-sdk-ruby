@@ -15,12 +15,11 @@ module Aws::HealthLake
     include Seahorse::Model
 
     AccessDeniedException = Shapes::StructureShape.new(name: 'AccessDeniedException')
+    AgentErrorType = Shapes::StringShape.new(name: 'AgentErrorType')
     AgentInputMessage = Shapes::StructureShape.new(name: 'AgentInputMessage')
     AgentInputMessageType = Shapes::StringShape.new(name: 'AgentInputMessageType')
-    AgentMessageOutOfContextException = Shapes::StructureShape.new(name: 'AgentMessageOutOfContextException')
     AgentMessageString = Shapes::StringShape.new(name: 'AgentMessageString')
-    AgentOutputMessage = Shapes::StructureShape.new(name: 'AgentOutputMessage')
-    AgentOutputMessageType = Shapes::StringShape.new(name: 'AgentOutputMessageType')
+    AgentOutputMessageStream = Shapes::StructureShape.new(name: 'AgentOutputMessageStream')
     AmazonResourceName = Shapes::StringShape.new(name: 'AmazonResourceName')
     AnalyticsConfiguration = Shapes::StructureShape.new(name: 'AnalyticsConfiguration')
     AnalyticsStatus = Shapes::StringShape.new(name: 'AnalyticsStatus')
@@ -40,7 +39,6 @@ module Aws::HealthLake
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     ContinuousBackupRestoreConfiguration = Shapes::StructureShape.new(name: 'ContinuousBackupRestoreConfiguration')
     ConversationIdString = Shapes::StringShape.new(name: 'ConversationIdString')
-    ConversationNotFoundException = Shapes::StructureShape.new(name: 'ConversationNotFoundException')
     CreateDataTransformationProfileRequest = Shapes::StructureShape.new(name: 'CreateDataTransformationProfileRequest')
     CreateDataTransformationProfileResponse = Shapes::StructureShape.new(name: 'CreateDataTransformationProfileResponse')
     CreateDataTransformationProfileSource = Shapes::UnionShape.new(name: 'CreateDataTransformationProfileSource')
@@ -84,8 +82,10 @@ module Aws::HealthLake
     DescribeFHIRImportJobRequest = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobRequest')
     DescribeFHIRImportJobResponse = Shapes::StructureShape.new(name: 'DescribeFHIRImportJobResponse')
     EncryptionKeyID = Shapes::StringShape.new(name: 'EncryptionKeyID')
+    EndOfOutputEvent = Shapes::StructureShape.new(name: 'EndOfOutputEvent')
     ErrorCategory = Shapes::StringShape.new(name: 'ErrorCategory')
     ErrorCause = Shapes::StructureShape.new(name: 'ErrorCause')
+    ErrorEvent = Shapes::StructureShape.new(name: 'ErrorEvent')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     ExistingVersionedProfileSource = Shapes::StructureShape.new(name: 'ExistingVersionedProfileSource')
     ExportJobProperties = Shapes::StructureShape.new(name: 'ExportJobProperties')
@@ -99,6 +99,7 @@ module Aws::HealthLake
     HealthLakeBoolean = Shapes::BooleanShape.new(name: 'HealthLakeBoolean')
     HealthLakeString = Shapes::StringShape.new(name: 'HealthLakeString')
     HealthLakeTimestamp = Shapes::TimestampShape.new(name: 'HealthLakeTimestamp')
+    HeartbeatEvent = Shapes::StructureShape.new(name: 'HeartbeatEvent')
     IamRoleArn = Shapes::StringShape.new(name: 'IamRoleArn')
     IdentityProviderConfiguration = Shapes::StructureShape.new(name: 'IdentityProviderConfiguration')
     ImportJobProperties = Shapes::StructureShape.new(name: 'ImportJobProperties')
@@ -134,7 +135,6 @@ module Aws::HealthLake
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NlpConfiguration = Shapes::StructureShape.new(name: 'NlpConfiguration')
     NlpStatus = Shapes::StringShape.new(name: 'NlpStatus')
-    NotImplementedOperationException = Shapes::StructureShape.new(name: 'NotImplementedOperationException')
     OutputDataConfig = Shapes::UnionShape.new(name: 'OutputDataConfig')
     PreloadDataConfig = Shapes::StructureShape.new(name: 'PreloadDataConfig')
     PreloadDataType = Shapes::StringShape.new(name: 'PreloadDataType')
@@ -147,6 +147,7 @@ module Aws::HealthLake
     ProfileMappingValue = Shapes::StringShape.new(name: 'ProfileMappingValue')
     ProfileNameString = Shapes::StringShape.new(name: 'ProfileNameString')
     ProfileVersion = Shapes::IntegerShape.new(name: 'ProfileVersion')
+    ProgressEvent = Shapes::StructureShape.new(name: 'ProgressEvent')
     PublishDataTransformationProfileRequest = Shapes::StructureShape.new(name: 'PublishDataTransformationProfileRequest')
     PublishDataTransformationProfileResponse = Shapes::StructureShape.new(name: 'PublishDataTransformationProfileResponse')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -178,6 +179,7 @@ module Aws::HealthLake
     TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     TargetFormat = Shapes::StringShape.new(name: 'TargetFormat')
+    TextMessageEvent = Shapes::StructureShape.new(name: 'TextMessageEvent')
     ThrottlingException = Shapes::StructureShape.new(name: 'ThrottlingException')
     TransformationInputDataConfig = Shapes::StructureShape.new(name: 'TransformationInputDataConfig')
     TransformationJobProgressReport = Shapes::StructureShape.new(name: 'TransformationJobProgressReport')
@@ -186,8 +188,6 @@ module Aws::HealthLake
     TransformationJobSummary = Shapes::StructureShape.new(name: 'TransformationJobSummary')
     TransformationJobSummaryList = Shapes::ListShape.new(name: 'TransformationJobSummaryList')
     TransformationOutputDataConfig = Shapes::StructureShape.new(name: 'TransformationOutputDataConfig')
-    UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
-    UnsupportedMIMETypeException = Shapes::StructureShape.new(name: 'UnsupportedMIMETypeException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateDataTransformationProfileRequest = Shapes::StructureShape.new(name: 'UpdateDataTransformationProfileRequest')
@@ -206,13 +206,12 @@ module Aws::HealthLake
     AgentInputMessage.add_member(:type, Shapes::ShapeRef.new(shape: AgentInputMessageType, required: true, location_name: "Type"))
     AgentInputMessage.struct_class = Types::AgentInputMessage
 
-    AgentMessageOutOfContextException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    AgentMessageOutOfContextException.struct_class = Types::AgentMessageOutOfContextException
-
-    AgentOutputMessage.add_member(:body, Shapes::ShapeRef.new(shape: AgentMessageString, required: true, location_name: "Body"))
-    AgentOutputMessage.add_member(:type, Shapes::ShapeRef.new(shape: AgentOutputMessageType, required: true, location_name: "Type"))
-    AgentOutputMessage.add_member(:options_list, Shapes::ShapeRef.new(shape: DataTransformationChatOptionsList, location_name: "OptionsList"))
-    AgentOutputMessage.struct_class = Types::AgentOutputMessage
+    AgentOutputMessageStream.add_member(:text_message_event, Shapes::ShapeRef.new(shape: TextMessageEvent, event: true, location_name: "TextMessageEvent"))
+    AgentOutputMessageStream.add_member(:progress_event, Shapes::ShapeRef.new(shape: ProgressEvent, event: true, location_name: "ProgressEvent"))
+    AgentOutputMessageStream.add_member(:heartbeat_event, Shapes::ShapeRef.new(shape: HeartbeatEvent, event: true, location_name: "HeartbeatEvent"))
+    AgentOutputMessageStream.add_member(:error_event, Shapes::ShapeRef.new(shape: ErrorEvent, event: true, location_name: "ErrorEvent"))
+    AgentOutputMessageStream.add_member(:end_of_output_event, Shapes::ShapeRef.new(shape: EndOfOutputEvent, event: true, location_name: "EndOfOutputEvent"))
+    AgentOutputMessageStream.struct_class = Types::AgentOutputMessageStream
 
     AnalyticsConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: AnalyticsStatus, location_name: "Status"))
     AnalyticsConfiguration.struct_class = Types::AnalyticsConfiguration
@@ -228,9 +227,6 @@ module Aws::HealthLake
 
     ContinuousBackupRestoreConfiguration.add_member(:restore_point_time, Shapes::ShapeRef.new(shape: HealthLakeTimestamp, location_name: "RestorePointTime"))
     ContinuousBackupRestoreConfiguration.struct_class = Types::ContinuousBackupRestoreConfiguration
-
-    ConversationNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    ConversationNotFoundException.struct_class = Types::ConversationNotFoundException
 
     CreateDataTransformationProfileRequest.add_member(:source_format, Shapes::ShapeRef.new(shape: SourceFormat, required: true, location_name: "SourceFormat"))
     CreateDataTransformationProfileRequest.add_member(:source, Shapes::ShapeRef.new(shape: CreateDataTransformationProfileSource, required: true, location_name: "Source"))
@@ -385,9 +381,18 @@ module Aws::HealthLake
     DescribeFHIRImportJobResponse.add_member(:import_job_properties, Shapes::ShapeRef.new(shape: ImportJobProperties, required: true, location_name: "ImportJobProperties"))
     DescribeFHIRImportJobResponse.struct_class = Types::DescribeFHIRImportJobResponse
 
+    EndOfOutputEvent.add_member(:final_response_message, Shapes::ShapeRef.new(shape: AgentMessageString, required: true, location_name: "FinalResponseMessage"))
+    EndOfOutputEvent.add_member(:options, Shapes::ShapeRef.new(shape: DataTransformationChatOptionsList, location_name: "Options"))
+    EndOfOutputEvent.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationIdString, location_name: "ConversationId"))
+    EndOfOutputEvent.struct_class = Types::EndOfOutputEvent
+
     ErrorCause.add_member(:error_message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "ErrorMessage"))
     ErrorCause.add_member(:error_category, Shapes::ShapeRef.new(shape: ErrorCategory, location_name: "ErrorCategory"))
     ErrorCause.struct_class = Types::ErrorCause
+
+    ErrorEvent.add_member(:error, Shapes::ShapeRef.new(shape: AgentErrorType, required: true, location_name: "Error"))
+    ErrorEvent.add_member(:message, Shapes::ShapeRef.new(shape: AgentMessageString, required: true, location_name: "Message"))
+    ErrorEvent.struct_class = Types::ErrorEvent
 
     ExistingVersionedProfileSource.add_member(:profile_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ProfileId"))
     ExistingVersionedProfileSource.add_member(:version, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Version"))
@@ -423,6 +428,8 @@ module Aws::HealthLake
     GetDataTransformationProfileResponse.add_member(:change_description, Shapes::ShapeRef.new(shape: ChangeDescription, location_name: "ChangeDescription"))
     GetDataTransformationProfileResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: DateTime, required: true, location_name: "LastUpdatedAt"))
     GetDataTransformationProfileResponse.struct_class = Types::GetDataTransformationProfileResponse
+
+    HeartbeatEvent.struct_class = Types::HeartbeatEvent
 
     IdentityProviderConfiguration.add_member(:authorization_strategy, Shapes::ShapeRef.new(shape: AuthorizationStrategy, required: true, location_name: "AuthorizationStrategy"))
     IdentityProviderConfiguration.add_member(:fine_grained_authorization_enabled, Shapes::ShapeRef.new(shape: HealthLakeBoolean, location_name: "FineGrainedAuthorizationEnabled"))
@@ -552,9 +559,6 @@ module Aws::HealthLake
     NlpConfiguration.add_member(:status, Shapes::ShapeRef.new(shape: NlpStatus, location_name: "Status"))
     NlpConfiguration.struct_class = Types::NlpConfiguration
 
-    NotImplementedOperationException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    NotImplementedOperationException.struct_class = Types::NotImplementedOperationException
-
     OutputDataConfig.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: S3Configuration, location_name: "S3Configuration"))
     OutputDataConfig.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     OutputDataConfig.add_member_subclass(:s3_configuration, Types::OutputDataConfig::S3Configuration)
@@ -572,6 +576,9 @@ module Aws::HealthLake
 
     ProfileMappingSource.add_member(:profile_mapping, Shapes::ShapeRef.new(shape: StringMap, required: true, location_name: "ProfileMapping"))
     ProfileMappingSource.struct_class = Types::ProfileMappingSource
+
+    ProgressEvent.add_member(:message, Shapes::ShapeRef.new(shape: AgentMessageString, required: true, location_name: "Message"))
+    ProgressEvent.struct_class = Types::ProgressEvent
 
     PublishDataTransformationProfileRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileIdString, required: true, location_name: "ProfileId"))
     PublishDataTransformationProfileRequest.add_member(:source_format, Shapes::ShapeRef.new(shape: SourceFormat, required: true, location_name: "SourceFormat"))
@@ -694,6 +701,9 @@ module Aws::HealthLake
 
     TagResourceResponse.struct_class = Types::TagResourceResponse
 
+    TextMessageEvent.add_member(:message, Shapes::ShapeRef.new(shape: AgentMessageString, required: true, location_name: "Message"))
+    TextMessageEvent.struct_class = Types::TextMessageEvent
+
     ThrottlingException.add_member(:message, Shapes::ShapeRef.new(shape: HealthLakeString, location_name: "Message"))
     ThrottlingException.struct_class = Types::ThrottlingException
 
@@ -737,12 +747,6 @@ module Aws::HealthLake
     TransformationOutputDataConfig.add_member(:s3_configuration, Shapes::ShapeRef.new(shape: DataTransformationS3Configuration, required: true, location_name: "S3Configuration"))
     TransformationOutputDataConfig.struct_class = Types::TransformationOutputDataConfig
 
-    UnauthorizedException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    UnauthorizedException.struct_class = Types::UnauthorizedException
-
-    UnsupportedMIMETypeException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Message"))
-    UnsupportedMIMETypeException.struct_class = Types::UnsupportedMIMETypeException
-
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "ResourceARN"))
     UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "TagKeys"))
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
@@ -774,13 +778,11 @@ module Aws::HealthLake
     UpdateFHIRDatastoreResponse.struct_class = Types::UpdateFHIRDatastoreResponse
 
     UpdateProfileWithAgentRequest.add_member(:profile_id, Shapes::ShapeRef.new(shape: ProfileIdString, required: true, location_name: "ProfileId"))
-    UpdateProfileWithAgentRequest.add_member(:source_format, Shapes::ShapeRef.new(shape: SourceFormat, required: true, location_name: "SourceFormat"))
     UpdateProfileWithAgentRequest.add_member(:input_message, Shapes::ShapeRef.new(shape: AgentInputMessage, required: true, location_name: "InputMessage"))
     UpdateProfileWithAgentRequest.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationIdString, location_name: "ConversationId"))
     UpdateProfileWithAgentRequest.struct_class = Types::UpdateProfileWithAgentRequest
 
-    UpdateProfileWithAgentResponse.add_member(:agent_response, Shapes::ShapeRef.new(shape: AgentOutputMessage, required: true, location_name: "AgentResponse"))
-    UpdateProfileWithAgentResponse.add_member(:conversation_id, Shapes::ShapeRef.new(shape: ConversationIdString, required: true, location_name: "ConversationId"))
+    UpdateProfileWithAgentResponse.add_member(:agent_response, Shapes::ShapeRef.new(shape: AgentOutputMessageStream, required: true, eventstream: true, location_name: "AgentResponse"))
     UpdateProfileWithAgentResponse.struct_class = Types::UpdateProfileWithAgentResponse
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: HealthLakeString, location_name: "Message"))
@@ -798,6 +800,7 @@ module Aws::HealthLake
         "endpointPrefix" => "healthlake",
         "jsonVersion" => "1.0",
         "protocol" => "json",
+        "protocolSettings" => {"h2" => "optional"},
         "protocols" => ["json"],
         "serviceAbbreviation" => "HealthLake",
         "serviceFullName" => "Amazon HealthLake",
@@ -1199,16 +1202,11 @@ module Aws::HealthLake
         }
         o.input = Shapes::ShapeRef.new(shape: UpdateProfileWithAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateProfileWithAgentResponse)
-        o.errors << Shapes::ShapeRef.new(shape: NotImplementedOperationException)
-        o.errors << Shapes::ShapeRef.new(shape: ConversationNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
-        o.errors << Shapes::ShapeRef.new(shape: AgentMessageOutOfContextException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-        o.errors << Shapes::ShapeRef.new(shape: UnsupportedMIMETypeException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
-        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
       end)
     end
 

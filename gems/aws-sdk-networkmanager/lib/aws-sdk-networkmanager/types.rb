@@ -293,6 +293,19 @@ module Aws::NetworkManager
     #   The name of the network function group.
     #   @return [String]
     #
+    # @!attribute [rw] nat_gateway_support
+    #   The state of NAT gateway support on the attachment. This is returned
+    #   only to the core network owner for attachment types that support
+    #   NAT.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Indicates whether the core network installs system routes for the
+    #   NAT CIDR blocks of the attachment's NAT rules. This is returned
+    #   only to the core network owner for attachment types that support
+    #   NAT.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The tags associated with the attachment.
     #   @return [Array<Types::Tag>]
@@ -333,6 +346,8 @@ module Aws::NetworkManager
       :attachment_policy_rule_number,
       :segment_name,
       :network_function_group_name,
+      :nat_gateway_support,
+      :nat_system_route_support,
       :tags,
       :proposed_segment_change,
       :proposed_network_function_group_change,
@@ -368,6 +383,36 @@ module Aws::NetworkManager
       :message,
       :resource_arn,
       :request_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes the NAT configuration of a core network attachment.
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_support
+    #   The state of NAT gateway support on the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Indicates whether the core network installs system routes for the
+    #   NAT CIDR blocks of the attachment's NAT rules.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT rules of the attachment.
+    #   @return [Array<Types::NatRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/AttachmentNatConfiguration AWS API Documentation
+    #
+    class AttachmentNatConfiguration < Struct.new(
+      :attachment_id,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -997,8 +1042,8 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] routing_policy_association_details
-    #   The names of the routing policies and other association details in
-    #   the core network change values.
+    #   The names of the routing policies and other association details in a
+    #   core network change event.
     #   @return [Array<Types::RoutingPolicyAssociationDetail>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/CoreNetworkChangeEventValues AWS API Documentation
@@ -1071,8 +1116,8 @@ module Aws::NetworkManager
     #   @return [Boolean]
     #
     # @!attribute [rw] routing_policy_direction
-    #   The routing policy direction (inbound/outbound) in a core network
-    #   change event.
+    #   The routing policy direction (inbound/outbound) in the core network
+    #   change values.
     #   @return [String]
     #
     # @!attribute [rw] routing_policy
@@ -1471,6 +1516,20 @@ module Aws::NetworkManager
     #   traffic routing decisions.
     #   @return [String]
     #
+    # @!attribute [rw] nat_gateway_support
+    #   Specifies whether to enable NAT gateway support on the Connect
+    #   attachment. NAT is supported only on Connect attachments that use
+    #   the GRE tunnel protocol. Tunnel-less Connect attachments aren't
+    #   supported. To enable NAT gateway support, you must also specify at
+    #   least one NAT rule. If you don't specify a value, NAT gateway
+    #   support is disabled. Only the core network owner can configure NAT
+    #   on an attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT rules for the Connect attachment, up to 50 rules.
+    #   @return [Array<Types::NatRuleRequest>]
+    #
     # @!attribute [rw] options
     #   Options for creating an attachment.
     #   @return [Types::ConnectAttachmentOptions]
@@ -1493,6 +1552,8 @@ module Aws::NetworkManager
       :edge_location,
       :transport_attachment_id,
       :routing_policy_label,
+      :nat_gateway_support,
+      :nat_gateway_rules,
       :options,
       :tags,
       :client_token)
@@ -1831,6 +1892,26 @@ module Aws::NetworkManager
     #   gateway attachment is associated with.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] nat_gateway_support
+    #   Specifies whether to enable NAT gateway support on the Direct
+    #   Connect gateway attachment. To enable NAT gateway support, you must
+    #   also specify at least one NAT rule. If you don't specify a value,
+    #   NAT gateway support is disabled. Only the core network owner can
+    #   configure NAT on an attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Specifies whether the core network installs system routes for the
+    #   NAT CIDR blocks of the attachment's NAT rules. System routes have a
+    #   route type of `SYSTEM`. NAT is applied to traffic whether or not
+    #   this option is enabled. The default is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT rules for the Direct Connect gateway attachment, up to 50
+    #   rules.
+    #   @return [Array<Types::NatRuleRequest>]
+    #
     # @!attribute [rw] tags
     #   The key value tags to apply to the Direct Connect gateway attachment
     #   during creation.
@@ -1850,6 +1931,9 @@ module Aws::NetworkManager
       :direct_connect_gateway_arn,
       :routing_policy_label,
       :edge_locations,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules,
       :tags,
       :client_token)
       SENSITIVE = []
@@ -2025,6 +2109,28 @@ module Aws::NetworkManager
     #   for traffic routing decisions.
     #   @return [String]
     #
+    # @!attribute [rw] nat_gateway_support
+    #   Specifies whether to enable NAT gateway support on the Site-to-Site
+    #   VPN attachment. To enable NAT gateway support, you must also specify
+    #   at least one NAT rule. If you don't specify a value, NAT gateway
+    #   support is disabled. Only the core network owner can configure NAT
+    #   on an attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Specifies whether the core network installs system routes for the
+    #   NAT CIDR blocks of the attachment's NAT rules. System routes have a
+    #   route type of `SYSTEM`. NAT is applied to traffic whether or not
+    #   this option is enabled. The default is `true` for VPN connections
+    #   that use BGP and `false` for VPN connections that use static
+    #   routing. If the VPN connection uses static routing, you must specify
+    #   `false` or omit this parameter.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT rules for the Site-to-Site VPN attachment, up to 50 rules.
+    #   @return [Array<Types::NatRuleRequest>]
+    #
     # @!attribute [rw] tags
     #   The tags associated with the request.
     #   @return [Array<Types::Tag>]
@@ -2042,6 +2148,9 @@ module Aws::NetworkManager
       :core_network_id,
       :vpn_connection_arn,
       :routing_policy_label,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules,
       :tags,
       :client_token)
       SENSITIVE = []
@@ -2175,6 +2284,18 @@ module Aws::NetworkManager
     #   routing decisions.
     #   @return [String]
     #
+    # @!attribute [rw] nat_gateway_support
+    #   Specifies whether to enable NAT gateway support on the VPC
+    #   attachment. To enable NAT gateway support, you must also specify at
+    #   least one NAT rule. If you don't specify a value, NAT gateway
+    #   support is disabled. Only the core network owner can configure NAT
+    #   on an attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT rules for the VPC attachment, up to 50 rules.
+    #   @return [Array<Types::NatRuleRequest>]
+    #
     # @!attribute [rw] tags
     #   The key-value tags associated with the request.
     #   @return [Array<Types::Tag>]
@@ -2194,6 +2315,8 @@ module Aws::NetworkManager
       :subnet_arns,
       :options,
       :routing_policy_label,
+      :nat_gateway_support,
+      :nat_gateway_rules,
       :tags,
       :client_token)
       SENSITIVE = []
@@ -3751,6 +3874,14 @@ module Aws::NetworkManager
     #   TRANSIT\_GATEWAY\_ATTACHMENT\_ID, RESOURCE\_ID, or RESOURCE\_TYPE.
     #   @return [Hash<String,Array<String>>]
     #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkRoutesRequest AWS API Documentation
     #
     class GetNetworkRoutesRequest < Struct.new(
@@ -3763,7 +3894,9 @@ module Aws::NetworkManager
       :prefix_list_ids,
       :states,
       :types,
-      :destination_filters)
+      :destination_filters,
+      :max_results,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3775,6 +3908,12 @@ module Aws::NetworkManager
     # @!attribute [rw] core_network_segment_edge
     #   Describes a core network segment edge.
     #   @return [Types::CoreNetworkSegmentEdgeIdentifier]
+    #
+    # @!attribute [rw] core_network_network_function_group
+    #   Describes the network function group route table that the routes are
+    #   from. This field is present only when you specify
+    #   `CoreNetworkNetworkFunctionGroup` in `RouteTableIdentifier`.
+    #   @return [Types::CoreNetworkNetworkFunctionGroupIdentifier]
     #
     # @!attribute [rw] route_table_type
     #   The route table type.
@@ -3788,14 +3927,20 @@ module Aws::NetworkManager
     #   The network routes.
     #   @return [Array<Types::NetworkRoute>]
     #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/GetNetworkRoutesResponse AWS API Documentation
     #
     class GetNetworkRoutesResponse < Struct.new(
       :route_table_arn,
       :core_network_segment_edge,
+      :core_network_network_function_group,
       :route_table_type,
       :route_table_timestamp,
-      :network_routes)
+      :network_routes,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4312,6 +4457,78 @@ module Aws::NetworkManager
     end
 
     # @!attribute [rw] core_network_id
+    #   The ID of a core network. Returns the NAT configurations of
+    #   attachments in the core network that support NAT.
+    #   @return [String]
+    #
+    # @!attribute [rw] attachment_id
+    #   The ID of an attachment. Returns the NAT configuration of the
+    #   specified attachment. If you specify both an attachment ID and a
+    #   core network ID, the attachment ID is used.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The filters to apply to the results. Values for the same filter are
+    #   joined with OR, and different filters are joined with AND. You can
+    #   specify up to 10 filter values in total. The following filters are
+    #   supported:
+    #
+    #   * `nat-gateway-support`: The state of NAT gateway support on the
+    #     attachment, for example `ENABLED`.
+    #
+    #   * `nat-system-route-support`: Whether system routes are installed
+    #     for the attachment, `true` or `false`.
+    #
+    #   * `rule-number`: The rule number of a NAT rule.
+    #
+    #   * `match-source-cidr`: The source CIDR block of a NAT rule. The
+    #     value must exactly match the CIDR block of the rule.
+    #
+    #   * `nat-cidr`: The NAT CIDR block of a NAT rule. The value must
+    #     exactly match the CIDR block of the rule.
+    #
+    #   * `nat-rule-state`: The state of a NAT rule, for example
+    #     `ACTIVATED`.
+    #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListAttachmentNatConfigurationsRequest AWS API Documentation
+    #
+    class ListAttachmentNatConfigurationsRequest < Struct.new(
+      :core_network_id,
+      :attachment_id,
+      :filters,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment_nat_configurations
+    #   The NAT configurations of the attachments.
+    #   @return [Array<Types::AttachmentNatConfiguration>]
+    #
+    # @!attribute [rw] next_token
+    #   The token for the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/ListAttachmentNatConfigurationsResponse AWS API Documentation
+    #
+    class ListAttachmentNatConfigurationsResponse < Struct.new(
+      :attachment_nat_configurations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] core_network_id
     #   The ID of the core network to list attachment routing policy
     #   associations for.
     #   @return [String]
@@ -4551,8 +4768,56 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] next_hop_filters
-    #   Filters to apply based on next hop information.
+    #   Filters to apply based on next hop information. Each filter value
+    #   must exactly match the corresponding next hop value. Values for the
+    #   same filter are joined with OR, and different filters are joined
+    #   with AND. The following filters are supported:
+    #
+    #   * `core-network-attachment-id`: The ID of the core network
+    #     attachment for the next hop, for example
+    #     `attachment-0123456789abcdef0`.
+    #
+    #   * `segment-name`: The name of the segment for the next hop.
+    #
+    #   * `edge-location`: The edge location for the next hop, for example
+    #     `us-east-1`.
+    #
+    #   * `resource-id`: The ID of the resource for the next hop.
+    #
+    #   * `resource-type`: The type of resource for the next hop. The
+    #     possible values are `vpc`, `vpn`, `connect-peer`,
+    #     `direct-connect-gateway`, `transit-gateway-route-table`,
+    #     `attachment`, and `blackhole`.
+    #
+    #   * `ip-address`: The IP address of the next hop. For a Site-to-Site
+    #     VPN next hop, this is the outside IP address of the AWS side of
+    #     the VPN tunnel. For a Connect peer next hop, this is the core
+    #     network BGP address of the Connect peer. The value must be a
+    #     single IPv4 or IPv6 address.
+    #
+    #   You can specify up to 10 filter values in total across
+    #   `NextHopFilters` and the other match parameters in the request. Each
+    #   filter value can be up to 256 characters.
     #   @return [Hash<String,Array<String>>]
+    #
+    # @!attribute [rw] exact_prefix_matches
+    #   Exact prefix values to match when filtering routing information.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] longest_prefix_matches
+    #   Filters routing information based on the longest prefix that matches
+    #   each provided IP address.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] subnet_of_matches
+    #   Prefix values to filter routing information whose prefix is a subnet
+    #   of the prefixes provided.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] supernet_of_matches
+    #   Prefix values to filter routing information whose prefix is a
+    #   supernet of the prefixes provided.
+    #   @return [Array<String>]
     #
     # @!attribute [rw] local_preference_matches
     #   Local preference values to match when filtering routing information.
@@ -4587,6 +4852,10 @@ module Aws::NetworkManager
       :segment_name,
       :edge_location,
       :next_hop_filters,
+      :exact_prefix_matches,
+      :longest_prefix_matches,
+      :subnet_of_matches,
+      :supernet_of_matches,
       :local_preference_matches,
       :exact_as_path_matches,
       :med_matches,
@@ -4780,6 +5049,96 @@ module Aws::NetworkManager
       :address,
       :latitude,
       :longitude)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a NAT rule of an attachment.
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number. Rule numbers identify the rules of an attachment
+    #   and don't set the order in which rules are evaluated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] match_source_cidr
+    #   The source CIDR block that the rule matches for traffic from the
+    #   attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_cidr
+    #   The CIDR block that matching source addresses are translated to.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the NAT rule. The possible values are the following:
+    #
+    #   * `CREATING`: The rule is being created.
+    #
+    #   * `MODIFYING`: The rule is being modified.
+    #
+    #   * `DELETING`: The rule is being deleted.
+    #
+    #   * `ACTIVATING`: NAT gateway support is being enabled, and the rule
+    #     is being applied.
+    #
+    #   * `ACTIVATED`: NAT gateway support is enabled, and the rule is
+    #     applied.
+    #
+    #   * `DEACTIVATING`: NAT gateway support is being disabled, and the
+    #     rule is being removed from use.
+    #
+    #   * `DEACTIVATED`: NAT gateway support is disabled, and the rule
+    #     isn't applied.
+    #
+    #   * `FAILED`: The attachment failed to be created, and the rule isn't
+    #     applied.
+    #
+    #   * `PENDING_ATTACHMENT_ACCEPTANCE`: The attachment is pending
+    #     acceptance. The rule is applied after the attachment is accepted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NatRule AWS API Documentation
+    #
+    class NatRule < Struct.new(
+      :rule_number,
+      :match_source_cidr,
+      :nat_cidr,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Describes a NAT rule to configure on an attachment. Source addresses
+    # in the source CIDR block of traffic from the attachment are translated
+    # to the same host addresses in the NAT CIDR block. Traffic to an
+    # address in the NAT CIDR block is translated back to the matching
+    # address in the source CIDR block.
+    #
+    # @!attribute [rw] rule_number
+    #   The rule number, from 1 to 32766. Each rule number must be unique
+    #   for the attachment.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] match_source_cidr
+    #   The IPv4 CIDR block to match against the source address of traffic
+    #   from the attachment. The CIDR block can't overlap with the
+    #   multicast range (224.0.0.0/4).
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_cidr
+    #   The IPv4 CIDR block to translate matching source addresses to. The
+    #   prefix length must be the same as the prefix length of
+    #   `MatchSourceCidr`. The CIDR block must be within a private (RFC
+    #   1918) or shared address space (RFC 6598) range. The CIDR blocks of
+    #   the NAT rules of an attachment can't overlap with each other.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NatRuleRequest AWS API Documentation
+    #
+    class NatRuleRequest < Struct.new(
+      :rule_number,
+      :match_source_cidr,
+      :nat_cidr)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4983,7 +5342,9 @@ module Aws::NetworkManager
     #   @return [String]
     #
     # @!attribute [rw] type
-    #   The route type. The possible values are `propagated` and `static`.
+    #   The route type. The possible values are `PROPAGATED`, `STATIC`, and
+    #   `SYSTEM`. A `SYSTEM` route is installed by the core network for the
+    #   NAT CIDR block of an attachment's NAT rule.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/NetworkRoute AWS API Documentation
@@ -5197,7 +5558,7 @@ module Aws::NetworkManager
     #   @return [Time]
     #
     # @!attribute [rw] last_modification_errors
-    #   Describes the error associated with the Connect peer request.
+    #   Describes the error associated with the peering request.
     #   @return [Array<Types::PeeringError>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/Peering AWS API Documentation
@@ -5270,7 +5631,7 @@ module Aws::NetworkManager
     # Information about a prefix list association with a core network.
     #
     # @!attribute [rw] core_network_id
-    #   The core network id in the association.
+    #   The ID of the core network in the association.
     #   @return [String]
     #
     # @!attribute [rw] prefix_list_arn
@@ -6343,6 +6704,90 @@ module Aws::NetworkManager
     # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UntagResourceResponse AWS API Documentation
     #
     class UntagResourceResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment to update the NAT configuration for.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_support
+    #   Specifies whether to enable or disable NAT gateway support on the
+    #   attachment. When you disable NAT gateway support, the attachment
+    #   keeps its NAT rules but doesn't apply them. To enable NAT gateway
+    #   support, the attachment must have at least one NAT rule, either
+    #   specified in this request or already configured on the attachment.
+    #   If you omit this parameter, NAT gateway support is unchanged.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Specifies whether the core network installs system routes for the
+    #   NAT CIDR blocks of the attachment's NAT rules. System routes have a
+    #   route type of `SYSTEM`. NAT is applied to traffic whether or not
+    #   this option is enabled. If you omit this parameter, the current
+    #   value is unchanged.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The complete set of NAT rules for the attachment, up to 50 rules.
+    #   The rules that you specify replace the existing rules of the
+    #   attachment, matched by rule number. Existing rules that aren't
+    #   included in the request are deleted. To delete all NAT rules,
+    #   specify an empty list. You can delete all NAT rules only when NAT
+    #   gateway support is disabled, or when you disable it in the same
+    #   request. If you omit this parameter, the existing rules are
+    #   unchanged.
+    #   @return [Array<Types::NatRuleRequest>]
+    #
+    # @!attribute [rw] client_token
+    #   The client token associated with the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateAttachmentNatConfigurationRequest AWS API Documentation
+    #
+    class UpdateAttachmentNatConfigurationRequest < Struct.new(
+      :attachment_id,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attachment_id
+    #   The ID of the attachment.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_gateway_support
+    #   The state of NAT gateway support on the attachment. The transitional
+    #   states `ENABLING` and `DISABLING` change to `ENABLED` or `DISABLED`
+    #   after the update is applied. The state is
+    #   `PENDING_ATTACHMENT_ACCEPTANCE` when NAT gateway support is enabled
+    #   on an attachment that is pending acceptance.
+    #   @return [String]
+    #
+    # @!attribute [rw] nat_system_route_support
+    #   Indicates whether the core network installs system routes for the
+    #   NAT CIDR blocks of the attachment's NAT rules.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] nat_gateway_rules
+    #   The NAT rules of the attachment, including rules that are being
+    #   deleted.
+    #   @return [Array<Types::NatRule>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/networkmanager-2019-07-05/UpdateAttachmentNatConfigurationResponse AWS API Documentation
+    #
+    class UpdateAttachmentNatConfigurationResponse < Struct.new(
+      :attachment_id,
+      :nat_gateway_support,
+      :nat_system_route_support,
+      :nat_gateway_rules)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # @!attribute [rw] global_network_id
     #   The ID of the global network.

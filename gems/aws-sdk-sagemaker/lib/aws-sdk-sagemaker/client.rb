@@ -199,12 +199,19 @@ module Aws::SageMaker
     #     the required types.
     #
     #   @option options [Boolean] :correct_clock_skew (true)
-    #     Used only in `standard` and `adaptive` retry modes. Specifies whether to apply
-    #     a clock skew correction and retry requests with skewed client clocks.
+    #     Used only in `standard` and `adaptive` retry modes. Specifies whether
+    #     to apply a clock skew correction and retry requests with skewed client
+    #     clocks. Takes effect only when `disable_clock_skew_correction` is not set.
     #
     #   @option options [String] :defaults_mode ("legacy")
     #     See {Aws::DefaultsModeConfiguration} for a list of the
     #     accepted modes and the configuration defaults that are included.
+    #
+    #   @option options [Boolean] :disable_clock_skew_correction
+    #     Used only in `standard` and `adaptive` retry modes. When `true`, the
+    #     SDK does not apply a clock skew correction, does not update its stored
+    #     skew from responses, and does not retry clock skew errors. Clock skew
+    #     correction is enabled by default.
     #
     #   @option options [Boolean] :disable_host_prefix_injection (false)
     #     When `true`, the SDK will not prepend the modeled host prefix to the endpoint.
@@ -2897,7 +2904,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
-    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #         training_plan_arn: "TrainingPlanArn",
     #         override_vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -3002,7 +3009,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
-    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #         training_plan_arn: "TrainingPlanArn",
     #         override_vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -4904,6 +4911,11 @@ module Aws::SageMaker
     #           capacity_reservation_preference: "capacity-reservations-only", # accepts capacity-reservations-only
     #           ml_reservation_arn: "MlReservationArn",
     #         },
+    #         accelerator_partition_layouts: [
+    #           {
+    #             accelerator_partition_types: ["AcceleratorPartitionType"],
+    #           },
+    #         ],
     #       },
     #     ],
     #     data_capture_config: {
@@ -5026,6 +5038,11 @@ module Aws::SageMaker
     #           capacity_reservation_preference: "capacity-reservations-only", # accepts capacity-reservations-only
     #           ml_reservation_arn: "MlReservationArn",
     #         },
+    #         accelerator_partition_layouts: [
+    #           {
+    #             accelerator_partition_types: ["AcceleratorPartitionType"],
+    #           },
+    #         ],
     #       },
     #     ],
     #     execution_role_arn: "RoleArn",
@@ -6493,6 +6510,7 @@ module Aws::SageMaker
     #         number_of_accelerator_devices_required: 1.0,
     #         min_memory_required_in_mb: 1, # required
     #         max_memory_required_in_mb: 1,
+    #         accelerator_partition_type: "AcceleratorPartitionType",
     #       },
     #       base_inference_component_name: "InferenceComponentName",
     #       data_cache_config: {
@@ -6534,6 +6552,7 @@ module Aws::SageMaker
     #           number_of_accelerator_devices_required: 1.0,
     #           min_memory_required_in_mb: 1, # required
     #           max_memory_required_in_mb: 1,
+    #           accelerator_partition_type: "AcceleratorPartitionType",
     #         },
     #         base_inference_component_name: "InferenceComponentName",
     #         data_cache_config: {
@@ -15306,7 +15325,7 @@ module Aws::SageMaker
     #   resp.instance_groups[0].instance_storage_configs[0].fsx_open_zfs_config.dns_name #=> String
     #   resp.instance_groups[0].instance_storage_configs[0].fsx_open_zfs_config.mount_path #=> String
     #   resp.instance_groups[0].on_start_deep_health_checks #=> Array
-    #   resp.instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity"
+    #   resp.instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity", "MultiNodeTrainingValidation"
     #   resp.instance_groups[0].status #=> String, one of "InService", "Creating", "Updating", "Failed", "Degraded", "SystemUpdating", "Deleting"
     #   resp.instance_groups[0].training_plan_arn #=> String
     #   resp.instance_groups[0].training_plan_status #=> String
@@ -15381,7 +15400,7 @@ module Aws::SageMaker
     #   resp.restricted_instance_groups[0].instance_storage_configs[0].fsx_open_zfs_config.dns_name #=> String
     #   resp.restricted_instance_groups[0].instance_storage_configs[0].fsx_open_zfs_config.mount_path #=> String
     #   resp.restricted_instance_groups[0].on_start_deep_health_checks #=> Array
-    #   resp.restricted_instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity"
+    #   resp.restricted_instance_groups[0].on_start_deep_health_checks[0] #=> String, one of "InstanceStress", "InstanceConnectivity", "MultiNodeTrainingValidation"
     #   resp.restricted_instance_groups[0].status #=> String, one of "InService", "Creating", "Updating", "Failed", "Degraded", "SystemUpdating", "Deleting"
     #   resp.restricted_instance_groups[0].training_plan_arn #=> String
     #   resp.restricted_instance_groups[0].training_plan_status #=> String
@@ -16645,6 +16664,9 @@ module Aws::SageMaker
     #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].total_instance_count #=> Integer
     #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].available_instance_count #=> Integer
     #   resp.production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].used_by_current_endpoint #=> Integer
+    #   resp.production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.capture_status #=> String, one of "Started", "Stopped"
     #   resp.data_capture_config.current_sampling_percentage #=> Integer
@@ -16713,6 +16735,9 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
     #   resp.pending_deployment_summary.production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.pending_deployment_summary.production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.pending_deployment_summary.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.pending_deployment_summary.start_time #=> Time
     #   resp.pending_deployment_summary.shadow_production_variants #=> Array
     #   resp.pending_deployment_summary.shadow_production_variants[0].variant_name #=> String
@@ -16748,6 +16773,9 @@ module Aws::SageMaker
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.routing_strategy #=> String, one of "LEAST_OUTSTANDING_REQUESTS", "RANDOM", "PREFIX_AWARE"
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.prefix_aware_routing_config.prefix_length #=> Integer
     #   resp.pending_deployment_summary.shadow_production_variants[0].routing_config.prefix_aware_routing_config.concurrency_threshold #=> Integer
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.pending_deployment_summary.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.explainer_config.clarify_explainer_config.enable_explanations #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.features_attribute #=> String
     #   resp.explainer_config.clarify_explainer_config.inference_config.content_template #=> String
@@ -16813,6 +16841,9 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].total_instance_count #=> Integer
     #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].available_instance_count #=> Integer
     #   resp.shadow_production_variants[0].capacity_reservation_config.ec2_capacity_reservations[0].used_by_current_endpoint #=> Integer
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.metrics_config.enable_enhanced_metrics #=> Boolean
     #   resp.metrics_config.enable_detailed_observability #=> Boolean
     #   resp.metrics_config.metric_publish_frequency_in_seconds #=> Integer
@@ -16897,6 +16928,9 @@ module Aws::SageMaker
     #   resp.production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2", "al2023-ami-sagemaker-inference-gpu-4-1"
     #   resp.production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
     #   resp.production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
+    #   resp.production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.data_capture_config.enable_capture #=> Boolean
     #   resp.data_capture_config.initial_sampling_percentage #=> Integer
     #   resp.data_capture_config.destination_s3_uri #=> String
@@ -16973,6 +17007,9 @@ module Aws::SageMaker
     #   resp.shadow_production_variants[0].inference_ami_version #=> String, one of "al2-ami-sagemaker-inference-gpu-2", "al2-ami-sagemaker-inference-gpu-2-1", "al2-ami-sagemaker-inference-gpu-3-1", "al2-ami-sagemaker-inference-neuron-2", "al2023-ami-sagemaker-inference-gpu-4-1"
     #   resp.shadow_production_variants[0].capacity_reservation_config.capacity_reservation_preference #=> String, one of "capacity-reservations-only"
     #   resp.shadow_production_variants[0].capacity_reservation_config.ml_reservation_arn #=> String
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types #=> Array
+    #   resp.shadow_production_variants[0].accelerator_partition_layouts[0].accelerator_partition_types[0] #=> String
     #   resp.execution_role_arn #=> String
     #   resp.vpc_config.security_group_ids #=> Array
     #   resp.vpc_config.security_group_ids[0] #=> String
@@ -17911,6 +17948,7 @@ module Aws::SageMaker
     #   resp.specification.compute_resource_requirements.number_of_accelerator_devices_required #=> Float
     #   resp.specification.compute_resource_requirements.min_memory_required_in_mb #=> Integer
     #   resp.specification.compute_resource_requirements.max_memory_required_in_mb #=> Integer
+    #   resp.specification.compute_resource_requirements.accelerator_partition_type #=> String
     #   resp.specification.base_inference_component_name #=> String
     #   resp.specification.data_cache_config.enable_caching #=> Boolean
     #   resp.specification.scheduling_config.placement_strategy #=> String, one of "SPREAD", "BINPACK"
@@ -17934,6 +17972,7 @@ module Aws::SageMaker
     #   resp.specifications[0].compute_resource_requirements.number_of_accelerator_devices_required #=> Float
     #   resp.specifications[0].compute_resource_requirements.min_memory_required_in_mb #=> Integer
     #   resp.specifications[0].compute_resource_requirements.max_memory_required_in_mb #=> Integer
+    #   resp.specifications[0].compute_resource_requirements.accelerator_partition_type #=> String
     #   resp.specifications[0].base_inference_component_name #=> String
     #   resp.specifications[0].data_cache_config.enable_caching #=> Boolean
     #   resp.specifications[0].scheduling_config.placement_strategy #=> String, one of "SPREAD", "BINPACK"
@@ -29853,7 +29892,7 @@ module Aws::SageMaker
     #       {
     #         instance_group_name: "ClusterInstanceGroupName", # required
     #         instance_ids: ["ClusterNodeId"],
-    #         deep_health_checks: ["InstanceStress"], # required, accepts InstanceStress, InstanceConnectivity
+    #         deep_health_checks: ["InstanceStress"], # required, accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #       },
     #     ],
     #   })
@@ -31001,7 +31040,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
-    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #         training_plan_arn: "TrainingPlanArn",
     #         override_vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -31106,7 +31145,7 @@ module Aws::SageMaker
     #             },
     #           },
     #         ],
-    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity
+    #         on_start_deep_health_checks: ["InstanceStress"], # accepts InstanceStress, InstanceConnectivity, MultiNodeTrainingValidation
     #         training_plan_arn: "TrainingPlanArn",
     #         override_vpc_config: {
     #           security_group_ids: ["SecurityGroupId"], # required
@@ -32805,6 +32844,7 @@ module Aws::SageMaker
     #         number_of_accelerator_devices_required: 1.0,
     #         min_memory_required_in_mb: 1, # required
     #         max_memory_required_in_mb: 1,
+    #         accelerator_partition_type: "AcceleratorPartitionType",
     #       },
     #       base_inference_component_name: "InferenceComponentName",
     #       data_cache_config: {
@@ -32846,6 +32886,7 @@ module Aws::SageMaker
     #           number_of_accelerator_devices_required: 1.0,
     #           min_memory_required_in_mb: 1, # required
     #           max_memory_required_in_mb: 1,
+    #           accelerator_partition_type: "AcceleratorPartitionType",
     #         },
     #         base_inference_component_name: "InferenceComponentName",
     #         data_cache_config: {
@@ -35113,7 +35154,7 @@ module Aws::SageMaker
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-sagemaker'
-      context[:gem_version] = '1.400.0'
+      context[:gem_version] = '1.407.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

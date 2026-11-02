@@ -790,9 +790,9 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] x_amzn_trace_id
-    #   The optional X-Ray trace header to use when starting the chained
-    #   invocation. If you omit this value, the child invocation inherits
-    #   the parent durable execution's trace header.
+    #   The X-Ray trace header to use when starting the chained invocation.
+    #   This parameter is optional. If you omit this value, the child
+    #   invocation inherits the parent durable execution's trace header.
     #
     #   Specify this value on the `START` update for the chained invocation
     #   operation. For more information about the header format, see
@@ -1624,6 +1624,9 @@ module Aws::Lambda
     #   Related setting: For Kinesis, DynamoDB, and Amazon SQS event
     #   sources, when you set `BatchSize` to a value greater than 10, you
     #   must set `MaximumBatchingWindowInSeconds` to at least 1.
+    #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -1636,12 +1639,18 @@ module Aws::Lambda
     #   Amazon Kinesis and Amazon DynamoDB Stream event sources.
     #   `AT_TIMESTAMP` is supported only for Amazon Kinesis streams, Amazon
     #   DocumentDB, Amazon MSK, and self-managed Apache Kafka.
+    #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
     #   @return [String]
     #
     # @!attribute [rw] starting_position_timestamp
     #   With `StartingPosition` set to `AT_TIMESTAMP`, the time from which
     #   to start reading. `StartingPositionTimestamp` cannot be in the
     #   future.
+    #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
     #   @return [Time]
     #
     # @!attribute [rw] destination_config
@@ -1667,6 +1676,12 @@ module Aws::Lambda
     #   Kafka) Discard records after the specified number of retries. The
     #   default value is infinite (-1). When set to infinite (-1), failed
     #   records are retried until the record expires.
+    #
+    #   For Kafka `Stream` consumption mode, the default is `-1` (infinite
+    #   retries; capped at 10 when an on-failure destination is configured).
+    #   For Kafka `Queue` consumption mode, the default is `0`, and if no
+    #   on-failure destination is configured the Kafka broker performs
+    #   retries.
     #   @return [Integer]
     #
     # @!attribute [rw] tags
@@ -4584,22 +4599,22 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] input_payload
-    #   The JSON input payload that was provided when the durable execution
-    #   was started. For asynchronous invocations, this is limited to 256
-    #   KB. For synchronous invocations, this can be up to 6 MB.
+    #   The JSON input payload that you provided when you started the
+    #   durable execution. Asynchronous invocations support up to 1 MB, and
+    #   synchronous invocations support up to 6 MB.
     #   @return [String]
     #
     # @!attribute [rw] result
     #   The JSON result returned by the durable execution if it completed
     #   successfully. This field is only present when the execution status
-    #   is `SUCCEEDED`. The result is limited to 256 KB.
+    #   is `SUCCEEDED`. Asynchronous invocations support up to 1 MB, and
+    #   synchronous invocations support up to 6 MB.
     #   @return [String]
     #
     # @!attribute [rw] error
     #   Error information if the durable execution failed. This field is
     #   only present when the execution status is `FAILED`, `TIMED_OUT`, or
-    #   `STOPPED`. The combined size of all error fields is limited to 256
-    #   KB.
+    #   `STOPPED`. The combined size of all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @!attribute [rw] start_timestamp
@@ -7604,13 +7619,14 @@ module Aws::Lambda
     # @!attribute [rw] payload
     #   The payload for successful operations. The maximum payload size is 6
     #   MB for synchronous `EXECUTION` operations (RequestResponse
-    #   invocationType), 1 MB for asynchronous `EXECUTION` (Event
-    #   invocationType) and `CHAINED_INVOKE` operations, and 256 KB for
-    #   `CONTEXT`, `STEP`, `WAIT`, and `CALLBACK` operations.
+    #   invocationType), and 1 MB for asynchronous `EXECUTION` (Event
+    #   invocationType), `CHAINED_INVOKE`, `CONTEXT`, `STEP`, `WAIT`, and
+    #   `CALLBACK` operations.
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   The error information for failed operations.
+    #   The error information for failed operations. The combined size of
+    #   all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @!attribute [rw] context_options
@@ -8962,11 +8978,35 @@ module Aws::Lambda
     #   Specific configuration settings for a Kafka schema registry.
     #   @return [Types::KafkaSchemaRegistryConfig]
     #
+    # @!attribute [rw] consumption_mode
+    #   The mode that Lambda uses to consume records from your self-managed
+    #   Apache Kafka topic. The default is `Stream`.
+    #
+    #   * `Stream` – Lambda consumes records using a Kafka consumer group
+    #     and preserves the order of records within each partition. This is
+    #     the default when you omit `ConsumptionMode`.
+    #
+    #   * `Queue` – Lambda consumes records using a Kafka share group.
+    #     Multiple consumers can process records from the same partitions
+    #     concurrently. Queue mode does not preserve per-partition order.
+    #     Queue mode requires an Apache Kafka cluster running version 4.2 or
+    #     later with share groups enabled.
+    #
+    #   You cannot change `ConsumptionMode` after you create the event
+    #   source mapping. To use a different consumption mode, create a new
+    #   event source mapping.
+    #
+    #   When `ConsumptionMode` is `Queue`, the `StartingPosition`,
+    #   `StartingPositionTimestamp`, and `MaximumBatchingWindowInSeconds`
+    #   parameters are not supported.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SelfManagedKafkaEventSourceConfig AWS API Documentation
     #
     class SelfManagedKafkaEventSourceConfig < Struct.new(
       :consumer_group_id,
-      :schema_registry_config)
+      :schema_registry_config,
+      :consumption_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8976,7 +9016,8 @@ module Aws::Lambda
     #   @return [String]
     #
     # @!attribute [rw] error
-    #   Error details describing why the callback operation failed.
+    #   Error details describing why the callback operation failed. The
+    #   combined size of all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SendDurableExecutionCallbackFailureRequest AWS API Documentation
@@ -9014,7 +9055,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] result
     #   The result data from the successful callback operation. Maximum size
-    #   is 256 KB.
+    #   is 1 MB.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/SendDurableExecutionCallbackSuccessRequest AWS API Documentation
@@ -9436,7 +9477,7 @@ module Aws::Lambda
     #
     # @!attribute [rw] error
     #   Optional error details explaining why the execution is being
-    #   stopped.
+    #   stopped. The combined size of all error fields is limited to 1 MB.
     #   @return [Types::ErrorObject]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/lambda-2015-03-31/StopDurableExecutionRequest AWS API Documentation
@@ -9920,6 +9961,9 @@ module Aws::Lambda
     #   Related setting: For Kinesis, DynamoDB, and Amazon SQS event
     #   sources, when you set `BatchSize` to a value greater than 10, you
     #   must set `MaximumBatchingWindowInSeconds` to at least 1.
+    #
+    #   Not supported for Kafka event source mappings when `ConsumptionMode`
+    #   is `Queue`.
     #   @return [Integer]
     #
     # @!attribute [rw] parallelization_factor
@@ -9950,6 +9994,12 @@ module Aws::Lambda
     #   Kafka) Discard records after the specified number of retries. The
     #   default value is infinite (-1). When set to infinite (-1), failed
     #   records are retried until the record expires.
+    #
+    #   For Kafka `Stream` consumption mode, the default is `-1` (infinite
+    #   retries; capped at 10 when an on-failure destination is configured).
+    #   For Kafka `Queue` consumption mode, the default is `0`, and if no
+    #   on-failure destination is configured the Kafka broker performs
+    #   retries.
     #   @return [Integer]
     #
     # @!attribute [rw] tumbling_window_in_seconds

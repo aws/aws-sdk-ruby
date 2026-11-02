@@ -30,8 +30,11 @@ module Aws::Signin
   # * {AccessDeniedException}
   # * {ConflictException}
   # * {InternalServerException}
+  # * {InvalidGrantException}
+  # * {InvalidScopeException}
   # * {ResourceNotFoundException}
   # * {ServiceQuotaExceededException}
+  # * {ServiceUnavailableException}
   # * {TooManyRequestsError}
   # * {ValidationException}
   #
@@ -101,6 +104,46 @@ module Aws::Signin
       end
     end
 
+    class InvalidGrantException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Signin::Types::InvalidGrantException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error
+        @data[:error]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class InvalidScopeException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Signin::Types::InvalidScopeException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error
+        @data[:error]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
     class ResourceNotFoundException < ServiceError
 
       # @param [Seahorse::Client::RequestContext] context
@@ -138,6 +181,30 @@ module Aws::Signin
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ServiceUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::Signin::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def error
+        @data[:error]
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      def retryable?
+        true
       end
     end
 

@@ -1,0 +1,16 @@
+inherit_from: ../../.rubocop.yml
+
+# Benchmark and generator scripts: allow the current method and module sizes,
+# so that RuboCop still flags anything that grows beyond them.
+Metrics/AbcSize:
+  Max: 48
+Metrics/ClassLength:
+  Max: 105
+Metrics/CyclomaticComplexity:
+  Max: 18
+Metrics/MethodLength:
+  Max: 25
+Metrics/ModuleLength:
+  Max: 115
+Metrics/PerceivedComplexity:
+  Max: 19

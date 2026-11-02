@@ -11,40 +11,40 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ActiveInstanceRefreshNotFoundFault < ::Aws::Errors::ServiceError
+      class ActiveInstanceRefreshNotFoundFault < ServiceError
         def message: () -> ::String
       end
-      class AlreadyExistsFault < ::Aws::Errors::ServiceError
+      class AlreadyExistsFault < ServiceError
         def message: () -> ::String
       end
-      class IdempotentCallInProgressFault < ::Aws::Errors::ServiceError
+      class IdempotentCallInProgressFault < ServiceError
         def message: () -> ::String
       end
-      class IdempotentParameterMismatchError < ::Aws::Errors::ServiceError
+      class IdempotentParameterMismatchError < ServiceError
         def message: () -> ::String
       end
-      class InstanceRefreshInProgressFault < ::Aws::Errors::ServiceError
+      class InstanceRefreshInProgressFault < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextToken < ::Aws::Errors::ServiceError
+      class InvalidNextToken < ServiceError
         def message: () -> ::String
       end
-      class IrreversibleInstanceRefreshFault < ::Aws::Errors::ServiceError
+      class IrreversibleInstanceRefreshFault < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededFault < ::Aws::Errors::ServiceError
+      class LimitExceededFault < ServiceError
         def message: () -> ::String
       end
-      class ResourceContentionFault < ::Aws::Errors::ServiceError
+      class ResourceContentionFault < ServiceError
         def message: () -> ::String
       end
-      class ResourceInUseFault < ::Aws::Errors::ServiceError
+      class ResourceInUseFault < ServiceError
         def message: () -> ::String
       end
-      class ScalingActivityInProgressFault < ::Aws::Errors::ServiceError
+      class ScalingActivityInProgressFault < ServiceError
         def message: () -> ::String
       end
-      class ServiceLinkedRoleFailure < ::Aws::Errors::ServiceError
+      class ServiceLinkedRoleFailure < ServiceError
         def message: () -> ::String
       end
     end

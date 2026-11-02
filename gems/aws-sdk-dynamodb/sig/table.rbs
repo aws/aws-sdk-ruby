@@ -90,6 +90,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#deletion_protection_enabled-instance_method
       def deletion_protection_enabled: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#disassociation_protection_enabled-instance_method
+      def disassociation_protection_enabled: () -> bool
+
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Table.html#on_demand_throughput-instance_method
       def on_demand_throughput: () -> Types::OnDemandThroughput
 
@@ -338,6 +341,10 @@ module Aws
                         }?,
                         delete: {
                           region_name: ::String
+                        }?,
+                        disassociate: {
+                          region_name: ::String,
+                          disassociation_mode: ("WAIT_FOR_REPLICATION")
                         }?
                       }
                     ],
@@ -363,6 +370,7 @@ module Aws
                       write_units_per_second: ::Integer?
                     },
                     ?global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES"),
+                    ?disassociation_protection_enabled: bool,
                     ?vector_index_updates: Array[
                       {
                         create: {

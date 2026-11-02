@@ -11,16 +11,16 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class ResourceInUse < ::Aws::Errors::ServiceError
+      class ResourceInUse < ServiceError
         def message: () -> ::String
       end
-      class ResourceLimitExceeded < ::Aws::Errors::ServiceError
+      class ResourceLimitExceeded < ServiceError
         def message: () -> ::String
       end
-      class ResourceNotFound < ::Aws::Errors::ServiceError
+      class ResourceNotFound < ServiceError
         def message: () -> ::String
       end
     end

@@ -120,6 +120,7 @@ module Aws::EC2
     AnalysisRouteTableRoute = Shapes::StructureShape.new(name: 'AnalysisRouteTableRoute')
     AnalysisSecurityGroupRule = Shapes::StructureShape.new(name: 'AnalysisSecurityGroupRule')
     AnalysisStatus = Shapes::StringShape.new(name: 'AnalysisStatus')
+    AnalysisTransitGatewayPolicyTableEntry = Shapes::StructureShape.new(name: 'AnalysisTransitGatewayPolicyTableEntry')
     ApplianceModeSupportValue = Shapes::StringShape.new(name: 'ApplianceModeSupportValue')
     ApplicationStatus = Shapes::StructureShape.new(name: 'ApplicationStatus')
     ApplicationStatusCheckAssociationObject = Shapes::StructureShape.new(name: 'ApplicationStatusCheckAssociationObject')
@@ -353,6 +354,8 @@ module Aws::EC2
     CapacityAllocationMetadataEntry = Shapes::StructureShape.new(name: 'CapacityAllocationMetadataEntry')
     CapacityAllocationMetadataList = Shapes::ListShape.new(name: 'CapacityAllocationMetadataList')
     CapacityAllocations = Shapes::ListShape.new(name: 'CapacityAllocations')
+    CapacityAmount = Shapes::IntegerShape.new(name: 'CapacityAmount')
+    CapacityAvailabilityZoneIdList = Shapes::ListShape.new(name: 'CapacityAvailabilityZoneIdList')
     CapacityBlock = Shapes::StructureShape.new(name: 'CapacityBlock')
     CapacityBlockExtension = Shapes::StructureShape.new(name: 'CapacityBlockExtension')
     CapacityBlockExtensionOffering = Shapes::StructureShape.new(name: 'CapacityBlockExtensionOffering')
@@ -380,6 +383,8 @@ module Aws::EC2
     CapacityManagerMonitoredTagKeyList = Shapes::ListShape.new(name: 'CapacityManagerMonitoredTagKeyList')
     CapacityManagerMonitoredTagKeyStatus = Shapes::StringShape.new(name: 'CapacityManagerMonitoredTagKeyStatus')
     CapacityManagerStatus = Shapes::StringShape.new(name: 'CapacityManagerStatus')
+    CapacityManagerSupportabilityScore = Shapes::StructureShape.new(name: 'CapacityManagerSupportabilityScore')
+    CapacityManagerSupportabilityScoreSet = Shapes::ListShape.new(name: 'CapacityManagerSupportabilityScoreSet')
     CapacityManagerTagDimension = Shapes::StructureShape.new(name: 'CapacityManagerTagDimension')
     CapacityManagerTagDimensionSet = Shapes::ListShape.new(name: 'CapacityManagerTagDimensionSet')
     CapacityReservation = Shapes::StructureShape.new(name: 'CapacityReservation')
@@ -433,6 +438,7 @@ module Aws::EC2
     CapacityReservationTopologySet = Shapes::ListShape.new(name: 'CapacityReservationTopologySet')
     CapacityReservationType = Shapes::StringShape.new(name: 'CapacityReservationType')
     CapacityTenancy = Shapes::StringShape.new(name: 'CapacityTenancy')
+    CapacityUnit = Shapes::StringShape.new(name: 'CapacityUnit')
     CarrierGateway = Shapes::StructureShape.new(name: 'CarrierGateway')
     CarrierGatewayId = Shapes::StringShape.new(name: 'CarrierGatewayId')
     CarrierGatewayIdSet = Shapes::ListShape.new(name: 'CarrierGatewayIdSet')
@@ -1925,6 +1931,8 @@ module Aws::EC2
     GetCapacityManagerMonitoredTagKeysRequest = Shapes::StructureShape.new(name: 'GetCapacityManagerMonitoredTagKeysRequest')
     GetCapacityManagerMonitoredTagKeysRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityManagerMonitoredTagKeysRequestMaxResults')
     GetCapacityManagerMonitoredTagKeysResult = Shapes::StructureShape.new(name: 'GetCapacityManagerMonitoredTagKeysResult')
+    GetCapacityManagerSupportabilityScoresRequest = Shapes::StructureShape.new(name: 'GetCapacityManagerSupportabilityScoresRequest')
+    GetCapacityManagerSupportabilityScoresResult = Shapes::StructureShape.new(name: 'GetCapacityManagerSupportabilityScoresResult')
     GetCapacityReservationUsageRequest = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageRequest')
     GetCapacityReservationUsageRequestMaxResults = Shapes::IntegerShape.new(name: 'GetCapacityReservationUsageRequestMaxResults')
     GetCapacityReservationUsageResult = Shapes::StructureShape.new(name: 'GetCapacityReservationUsageResult')
@@ -1957,6 +1965,10 @@ module Aws::EC2
     GetImageAncestryResult = Shapes::StructureShape.new(name: 'GetImageAncestryResult')
     GetImageBlockPublicAccessStateRequest = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateRequest')
     GetImageBlockPublicAccessStateResult = Shapes::StructureShape.new(name: 'GetImageBlockPublicAccessStateResult')
+    GetImageFindingsEntrySet = Shapes::ListShape.new(name: 'GetImageFindingsEntrySet')
+    GetImageFindingsMaxResults = Shapes::IntegerShape.new(name: 'GetImageFindingsMaxResults')
+    GetImageFindingsRequest = Shapes::StructureShape.new(name: 'GetImageFindingsRequest')
+    GetImageFindingsResult = Shapes::StructureShape.new(name: 'GetImageFindingsResult')
     GetInstanceMetadataDefaultsRequest = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsRequest')
     GetInstanceMetadataDefaultsResult = Shapes::StructureShape.new(name: 'GetInstanceMetadataDefaultsResult')
     GetInstanceTpmEkPubRequest = Shapes::StructureShape.new(name: 'GetInstanceTpmEkPubRequest')
@@ -2040,6 +2052,8 @@ module Aws::EC2
     GetSubnetCidrReservationsMaxResults = Shapes::IntegerShape.new(name: 'GetSubnetCidrReservationsMaxResults')
     GetSubnetCidrReservationsRequest = Shapes::StructureShape.new(name: 'GetSubnetCidrReservationsRequest')
     GetSubnetCidrReservationsResult = Shapes::StructureShape.new(name: 'GetSubnetCidrReservationsResult')
+    GetTransitGatewayAttachmentNatConfigurationRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentNatConfigurationRequest')
+    GetTransitGatewayAttachmentNatConfigurationResult = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentNatConfigurationResult')
     GetTransitGatewayAttachmentPropagationsRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsRequest')
     GetTransitGatewayAttachmentPropagationsResult = Shapes::StructureShape.new(name: 'GetTransitGatewayAttachmentPropagationsResult')
     GetTransitGatewayMeteringPolicyEntriesRequest = Shapes::StructureShape.new(name: 'GetTransitGatewayMeteringPolicyEntriesRequest')
@@ -2156,6 +2170,8 @@ module Aws::EC2
     ImageDescriptionRequest = Shapes::StringShape.new(name: 'ImageDescriptionRequest')
     ImageDiskContainer = Shapes::StructureShape.new(name: 'ImageDiskContainer')
     ImageDiskContainerList = Shapes::ListShape.new(name: 'ImageDiskContainerList')
+    ImageFinding = Shapes::StructureShape.new(name: 'ImageFinding')
+    ImageFindingPathSet = Shapes::ListShape.new(name: 'ImageFindingPathSet')
     ImageId = Shapes::StringShape.new(name: 'ImageId')
     ImageIdList = Shapes::ListShape.new(name: 'ImageIdList')
     ImageIdStringList = Shapes::ListShape.new(name: 'ImageIdStringList')
@@ -2789,6 +2805,8 @@ module Aws::EC2
     MarketplaceProductCodeList = Shapes::ListShape.new(name: 'MarketplaceProductCodeList')
     MarketplaceProductCodeRequest = Shapes::StringShape.new(name: 'MarketplaceProductCodeRequest')
     MarketplaceProductCodeRequestList = Shapes::ListShape.new(name: 'MarketplaceProductCodeRequestList')
+    MaxDaysSinceFixAvailableValue = Shapes::IntegerShape.new(name: 'MaxDaysSinceFixAvailableValue')
+    MaxDaysSinceLastFindingScanValue = Shapes::IntegerShape.new(name: 'MaxDaysSinceLastFindingScanValue')
     MaxIpv4AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv4AddrPerInterface')
     MaxIpv6AddrPerInterface = Shapes::IntegerShape.new(name: 'MaxIpv6AddrPerInterface')
     MaxNetworkInterfaces = Shapes::IntegerShape.new(name: 'MaxNetworkInterfaces')
@@ -2942,6 +2960,8 @@ module Aws::EC2
     ModifyTrafficMirrorFilterRuleResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorFilterRuleResult')
     ModifyTrafficMirrorSessionRequest = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionRequest')
     ModifyTrafficMirrorSessionResult = Shapes::StructureShape.new(name: 'ModifyTrafficMirrorSessionResult')
+    ModifyTransitGatewayAttachmentNatConfigurationRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayAttachmentNatConfigurationRequest')
+    ModifyTransitGatewayAttachmentNatConfigurationResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayAttachmentNatConfigurationResult')
     ModifyTransitGatewayMeteringPolicyRequest = Shapes::StructureShape.new(name: 'ModifyTransitGatewayMeteringPolicyRequest')
     ModifyTransitGatewayMeteringPolicyResult = Shapes::StructureShape.new(name: 'ModifyTransitGatewayMeteringPolicyResult')
     ModifyTransitGatewayOptions = Shapes::StructureShape.new(name: 'ModifyTransitGatewayOptions')
@@ -3175,6 +3195,7 @@ module Aws::EC2
     PerformanceFactorReferenceRequest = Shapes::StructureShape.new(name: 'PerformanceFactorReferenceRequest')
     PerformanceFactorReferenceSet = Shapes::ListShape.new(name: 'PerformanceFactorReferenceSet')
     PerformanceFactorReferenceSetRequest = Shapes::ListShape.new(name: 'PerformanceFactorReferenceSetRequest')
+    PerformanceStatusSummary = Shapes::StructureShape.new(name: 'PerformanceStatusSummary')
     Period = Shapes::IntegerShape.new(name: 'Period')
     PeriodType = Shapes::StringShape.new(name: 'PeriodType')
     PermissionGroup = Shapes::StringShape.new(name: 'PermissionGroup')
@@ -3577,6 +3598,9 @@ module Aws::EC2
     S3StorageUploadPolicy = Shapes::StringShape.new(name: 'S3StorageUploadPolicy')
     S3StorageUploadPolicySignature = Shapes::StringShape.new(name: 'S3StorageUploadPolicySignature')
     SSEType = Shapes::StringShape.new(name: 'SSEType')
+    ScanResultCondition = Shapes::StructureShape.new(name: 'ScanResultCondition')
+    ScanResultConditionRequest = Shapes::StructureShape.new(name: 'ScanResultConditionRequest')
+    ScanResults = Shapes::StructureShape.new(name: 'ScanResults')
     Schedule = Shapes::StringShape.new(name: 'Schedule')
     ScheduledInstance = Shapes::StructureShape.new(name: 'ScheduledInstance')
     ScheduledInstanceAvailability = Shapes::StructureShape.new(name: 'ScheduledInstanceAvailability')
@@ -3691,6 +3715,7 @@ module Aws::EC2
     ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     ServiceTypeDetail = Shapes::StructureShape.new(name: 'ServiceTypeDetail')
     ServiceTypeDetailSet = Shapes::ListShape.new(name: 'ServiceTypeDetailSet')
+    SeverityLabel = Shapes::StringShape.new(name: 'SeverityLabel')
     ShutdownBehavior = Shapes::StringShape.new(name: 'ShutdownBehavior')
     SlotDateTimeRangeRequest = Shapes::StructureShape.new(name: 'SlotDateTimeRangeRequest')
     SlotStartTimeRangeRequest = Shapes::StructureShape.new(name: 'SlotStartTimeRangeRequest')
@@ -3810,6 +3835,9 @@ module Aws::EC2
     SuccessfulSuppressionResponseObject = Shapes::StructureShape.new(name: 'SuccessfulSuppressionResponseObject')
     SuccessfulSuppressionResponseSet = Shapes::ListShape.new(name: 'SuccessfulSuppressionResponseSet')
     SummaryStatus = Shapes::StringShape.new(name: 'SummaryStatus')
+    SupportabilityInstanceTypeList = Shapes::ListShape.new(name: 'SupportabilityInstanceTypeList')
+    SupportabilityMarketType = Shapes::StringShape.new(name: 'SupportabilityMarketType')
+    SupportabilityScore = Shapes::StringShape.new(name: 'SupportabilityScore')
     SupportedAdditionalProcessorFeature = Shapes::StringShape.new(name: 'SupportedAdditionalProcessorFeature')
     SupportedAdditionalProcessorFeatureList = Shapes::ListShape.new(name: 'SupportedAdditionalProcessorFeatureList')
     SupportedInRegion = Shapes::BooleanShape.new(name: 'SupportedInRegion')
@@ -3910,6 +3938,9 @@ module Aws::EC2
     TransitGatewayAttachmentId = Shapes::StringShape.new(name: 'TransitGatewayAttachmentId')
     TransitGatewayAttachmentIdStringList = Shapes::ListShape.new(name: 'TransitGatewayAttachmentIdStringList')
     TransitGatewayAttachmentList = Shapes::ListShape.new(name: 'TransitGatewayAttachmentList')
+    TransitGatewayAttachmentNatGatewaySupportState = Shapes::StringShape.new(name: 'TransitGatewayAttachmentNatGatewaySupportState')
+    TransitGatewayAttachmentNatGatewaySupportValue = Shapes::StringShape.new(name: 'TransitGatewayAttachmentNatGatewaySupportValue')
+    TransitGatewayAttachmentNatSystemRouteSupportValue = Shapes::StringShape.new(name: 'TransitGatewayAttachmentNatSystemRouteSupportValue')
     TransitGatewayAttachmentPropagation = Shapes::StructureShape.new(name: 'TransitGatewayAttachmentPropagation')
     TransitGatewayAttachmentPropagationList = Shapes::ListShape.new(name: 'TransitGatewayAttachmentPropagationList')
     TransitGatewayAttachmentResourceType = Shapes::StringShape.new(name: 'TransitGatewayAttachmentResourceType')
@@ -3959,6 +3990,11 @@ module Aws::EC2
     TransitGatewayMulticastGroupList = Shapes::ListShape.new(name: 'TransitGatewayMulticastGroupList')
     TransitGatewayMulticastRegisteredGroupMembers = Shapes::StructureShape.new(name: 'TransitGatewayMulticastRegisteredGroupMembers')
     TransitGatewayMulticastRegisteredGroupSources = Shapes::StructureShape.new(name: 'TransitGatewayMulticastRegisteredGroupSources')
+    TransitGatewayNatRule = Shapes::StructureShape.new(name: 'TransitGatewayNatRule')
+    TransitGatewayNatRuleList = Shapes::ListShape.new(name: 'TransitGatewayNatRuleList')
+    TransitGatewayNatRuleRequest = Shapes::StructureShape.new(name: 'TransitGatewayNatRuleRequest')
+    TransitGatewayNatRuleRequestList = Shapes::ListShape.new(name: 'TransitGatewayNatRuleRequestList')
+    TransitGatewayNatRuleState = Shapes::StringShape.new(name: 'TransitGatewayNatRuleState')
     TransitGatewayNetworkInterfaceIdList = Shapes::ListShape.new(name: 'TransitGatewayNetworkInterfaceIdList')
     TransitGatewayOptions = Shapes::StructureShape.new(name: 'TransitGatewayOptions')
     TransitGatewayPeeringAttachment = Shapes::StructureShape.new(name: 'TransitGatewayPeeringAttachment')
@@ -4653,6 +4689,15 @@ module Aws::EC2
     AnalysisSecurityGroupRule.add_member(:prefix_list_id, Shapes::ShapeRef.new(shape: String, location_name: "prefixListId"))
     AnalysisSecurityGroupRule.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
     AnalysisSecurityGroupRule.struct_class = Types::AnalysisSecurityGroupRule
+
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "ruleNumber"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:protocol, Shapes::ShapeRef.new(shape: String, location_name: "protocol"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:source_cidr, Shapes::ShapeRef.new(shape: String, location_name: "sourceCidr"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:destination_cidr, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidr"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:source_port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "sourcePortRange"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:destination_port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "destinationPortRange"))
+    AnalysisTransitGatewayPolicyTableEntry.add_member(:target_route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "targetRouteTableId"))
+    AnalysisTransitGatewayPolicyTableEntry.struct_class = Types::AnalysisTransitGatewayPolicyTableEntry
 
     ApplicationStatus.add_member(:status, Shapes::ShapeRef.new(shape: ApplicationStatusEnum, location_name: "status"))
     ApplicationStatus.add_member(:status_time_stamp, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "statusTimeStamp"))
@@ -5431,6 +5476,8 @@ module Aws::EC2
 
     CapacityAllocations.member = Shapes::ShapeRef.new(shape: CapacityAllocation, location_name: "item")
 
+    CapacityAvailabilityZoneIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
     CapacityBlock.add_member(:capacity_block_id, Shapes::ShapeRef.new(shape: CapacityBlockId, location_name: "capacityBlockId"))
     CapacityBlock.add_member(:ultraserver_type, Shapes::ShapeRef.new(shape: String, location_name: "ultraserverType"))
     CapacityBlock.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
@@ -5562,6 +5609,13 @@ module Aws::EC2
 
     CapacityManagerMonitoredTagKeyList.member = Shapes::ShapeRef.new(shape: CapacityManagerMonitoredTagKey, location_name: "item")
 
+    CapacityManagerSupportabilityScore.add_member(:instance_type, Shapes::ShapeRef.new(shape: String, location_name: "instanceType"))
+    CapacityManagerSupportabilityScore.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "availabilityZoneId"))
+    CapacityManagerSupportabilityScore.add_member(:score, Shapes::ShapeRef.new(shape: SupportabilityScore, location_name: "score"))
+    CapacityManagerSupportabilityScore.struct_class = Types::CapacityManagerSupportabilityScore
+
+    CapacityManagerSupportabilityScoreSet.member = Shapes::ShapeRef.new(shape: CapacityManagerSupportabilityScore, location_name: "item")
+
     CapacityManagerTagDimension.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "key"))
     CapacityManagerTagDimension.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
     CapacityManagerTagDimension.struct_class = Types::CapacityManagerTagDimension
@@ -5658,6 +5712,9 @@ module Aws::EC2
     CapacityReservationFleet.add_member(:instance_match_criteria, Shapes::ShapeRef.new(shape: FleetInstanceMatchCriteria, location_name: "instanceMatchCriteria"))
     CapacityReservationFleet.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: String, location_name: "allocationStrategy"))
     CapacityReservationFleet.add_member(:instance_type_specifications, Shapes::ShapeRef.new(shape: FleetCapacityReservationSet, location_name: "instanceTypeSpecificationSet"))
+    CapacityReservationFleet.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "instanceRequirements"))
+    CapacityReservationFleet.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
+    CapacityReservationFleet.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZoneId"))
     CapacityReservationFleet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
     CapacityReservationFleet.struct_class = Types::CapacityReservationFleet
 
@@ -6210,6 +6267,9 @@ module Aws::EC2
     CreateCapacityReservationFleetRequest.add_member(:allocation_strategy, Shapes::ShapeRef.new(shape: String, location_name: "AllocationStrategy"))
     CreateCapacityReservationFleetRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateCapacityReservationFleetRequest.add_member(:instance_type_specifications, Shapes::ShapeRef.new(shape: ReservationFleetInstanceSpecificationList, location_name: "InstanceTypeSpecification"))
+    CreateCapacityReservationFleetRequest.add_member(:instance_requirements, Shapes::ShapeRef.new(shape: InstanceRequirementsRequest, location_name: "InstanceRequirements"))
+    CreateCapacityReservationFleetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: AvailabilityZoneName, location_name: "AvailabilityZone"))
+    CreateCapacityReservationFleetRequest.add_member(:availability_zone_id, Shapes::ShapeRef.new(shape: AvailabilityZoneId, location_name: "AvailabilityZoneId"))
     CreateCapacityReservationFleetRequest.add_member(:tenancy, Shapes::ShapeRef.new(shape: FleetCapacityReservationTenancy, location_name: "Tenancy"))
     CreateCapacityReservationFleetRequest.add_member(:total_target_capacity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "TotalTargetCapacity"))
     CreateCapacityReservationFleetRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "EndDate"))
@@ -11620,6 +11680,8 @@ module Aws::EC2
     Explanation.add_member(:transit_gateway, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGateway"))
     Explanation.add_member(:transit_gateway_route_table, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayRouteTable"))
     Explanation.add_member(:transit_gateway_route_table_route, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableRoute, location_name: "transitGatewayRouteTableRoute"))
+    Explanation.add_member(:transit_gateway_policy_table, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayPolicyTable"))
+    Explanation.add_member(:transit_gateway_policy_table_entry, Shapes::ShapeRef.new(shape: AnalysisTransitGatewayPolicyTableEntry, location_name: "transitGatewayPolicyTableEntry"))
     Explanation.add_member(:transit_gateway_attachment, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGatewayAttachment"))
     Explanation.add_member(:component_account, Shapes::ShapeRef.new(shape: ComponentAccount, location_name: "componentAccount"))
     Explanation.add_member(:component_region, Shapes::ShapeRef.new(shape: ComponentRegion, location_name: "componentRegion"))
@@ -12118,6 +12180,19 @@ module Aws::EC2
     GetCapacityManagerMonitoredTagKeysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetCapacityManagerMonitoredTagKeysResult.struct_class = Types::GetCapacityManagerMonitoredTagKeysResult
 
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:market_type, Shapes::ShapeRef.new(shape: SupportabilityMarketType, required: true, location_name: "MarketType"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:capacity_amount, Shapes::ShapeRef.new(shape: CapacityAmount, required: true, location_name: "CapacityAmount"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:capacity_unit, Shapes::ShapeRef.new(shape: CapacityUnit, required: true, location_name: "CapacityUnit"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:capacity_availability_zone_ids, Shapes::ShapeRef.new(shape: CapacityAvailabilityZoneIdList, required: true, location_name: "CapacityAvailabilityZoneId"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:instance_types, Shapes::ShapeRef.new(shape: SupportabilityInstanceTypeList, location_name: "InstanceType"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:instance_requirements_with_metadata, Shapes::ShapeRef.new(shape: InstanceRequirementsWithMetadataRequest, location_name: "InstanceRequirementsWithMetadata"))
+    GetCapacityManagerSupportabilityScoresRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetCapacityManagerSupportabilityScoresRequest.struct_class = Types::GetCapacityManagerSupportabilityScoresRequest
+
+    GetCapacityManagerSupportabilityScoresResult.add_member(:aggregate_score, Shapes::ShapeRef.new(shape: SupportabilityScore, location_name: "aggregateScore"))
+    GetCapacityManagerSupportabilityScoresResult.add_member(:capacity_manager_supportability_scores, Shapes::ShapeRef.new(shape: CapacityManagerSupportabilityScoreSet, location_name: "capacityManagerSupportabilityScoreSet"))
+    GetCapacityManagerSupportabilityScoresResult.struct_class = Types::GetCapacityManagerSupportabilityScoresResult
+
     GetCapacityReservationUsageRequest.add_member(:capacity_reservation_id, Shapes::ShapeRef.new(shape: CapacityReservationId, required: true, location_name: "CapacityReservationId"))
     GetCapacityReservationUsageRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
     GetCapacityReservationUsageRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetCapacityReservationUsageRequestMaxResults, location_name: "MaxResults"))
@@ -12264,6 +12339,18 @@ module Aws::EC2
     GetImageBlockPublicAccessStateResult.add_member(:image_block_public_access_state, Shapes::ShapeRef.new(shape: String, location_name: "imageBlockPublicAccessState"))
     GetImageBlockPublicAccessStateResult.add_member(:managed_by, Shapes::ShapeRef.new(shape: ManagedBy, location_name: "managedBy"))
     GetImageBlockPublicAccessStateResult.struct_class = Types::GetImageBlockPublicAccessStateResult
+
+    GetImageFindingsEntrySet.member = Shapes::ShapeRef.new(shape: ImageFinding, location_name: "item")
+
+    GetImageFindingsRequest.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageId, required: true, location_name: "ImageId"))
+    GetImageFindingsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: GetImageFindingsMaxResults, location_name: "MaxResults"))
+    GetImageFindingsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+    GetImageFindingsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetImageFindingsRequest.struct_class = Types::GetImageFindingsRequest
+
+    GetImageFindingsResult.add_member(:image_findings, Shapes::ShapeRef.new(shape: GetImageFindingsEntrySet, location_name: "imageFindingSet"))
+    GetImageFindingsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+    GetImageFindingsResult.struct_class = Types::GetImageFindingsResult
 
     GetInstanceMetadataDefaultsRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
     GetInstanceMetadataDefaultsRequest.struct_class = Types::GetInstanceMetadataDefaultsRequest
@@ -12692,6 +12779,16 @@ module Aws::EC2
     GetSubnetCidrReservationsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     GetSubnetCidrReservationsResult.struct_class = Types::GetSubnetCidrReservationsResult
 
+    GetTransitGatewayAttachmentNatConfigurationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    GetTransitGatewayAttachmentNatConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    GetTransitGatewayAttachmentNatConfigurationRequest.struct_class = Types::GetTransitGatewayAttachmentNatConfigurationRequest
+
+    GetTransitGatewayAttachmentNatConfigurationResult.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "transitGatewayAttachmentId"))
+    GetTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatGatewaySupportState, location_name: "natGatewaySupport"))
+    GetTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatSystemRouteSupportValue, location_name: "natSystemRouteSupport"))
+    GetTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: TransitGatewayNatRuleList, location_name: "natGatewayRuleSet"))
+    GetTransitGatewayAttachmentNatConfigurationResult.struct_class = Types::GetTransitGatewayAttachmentNatConfigurationResult
+
     GetTransitGatewayAttachmentPropagationsRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
     GetTransitGatewayAttachmentPropagationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
     GetTransitGatewayAttachmentPropagationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: TransitGatewayMaxResults, location_name: "MaxResults"))
@@ -13075,6 +13172,7 @@ module Aws::EC2
     Image.add_member(:free_tier_eligible, Shapes::ShapeRef.new(shape: Boolean, location_name: "freeTierEligible"))
     Image.add_member(:public_ssm_parameter_name, Shapes::ShapeRef.new(shape: String, location_name: "publicSsmParameterName"))
     Image.add_member(:image_watermarks, Shapes::ShapeRef.new(shape: ImageWatermarkList, location_name: "imageWatermarkSet"))
+    Image.add_member(:scan_results, Shapes::ShapeRef.new(shape: ScanResults, location_name: "scanResults"))
     Image.add_member(:instance_type_specification, Shapes::ShapeRef.new(shape: InstanceTypeSpecification, location_name: "instanceTypeSpecification"))
     Image.add_member(:image_id, Shapes::ShapeRef.new(shape: String, location_name: "imageId"))
     Image.add_member(:image_location, Shapes::ShapeRef.new(shape: String, location_name: "imageLocation"))
@@ -13121,6 +13219,7 @@ module Aws::EC2
     ImageCriterion.add_member(:deprecation_time_condition, Shapes::ShapeRef.new(shape: DeprecationTimeCondition, location_name: "deprecationTimeCondition"))
     ImageCriterion.add_member(:creation_date_condition, Shapes::ShapeRef.new(shape: CreationDateCondition, location_name: "creationDateCondition"))
     ImageCriterion.add_member(:image_watermarks, Shapes::ShapeRef.new(shape: ImageWatermarkFilterResponseList, location_name: "imageWatermarkSet"))
+    ImageCriterion.add_member(:scan_result_condition, Shapes::ShapeRef.new(shape: ScanResultCondition, location_name: "scanResultCondition"))
     ImageCriterion.struct_class = Types::ImageCriterion
 
     ImageCriterionList.member = Shapes::ShapeRef.new(shape: ImageCriterion, location_name: "item")
@@ -13131,6 +13230,7 @@ module Aws::EC2
     ImageCriterionRequest.add_member(:deprecation_time_condition, Shapes::ShapeRef.new(shape: DeprecationTimeConditionRequest, location_name: "DeprecationTimeCondition"))
     ImageCriterionRequest.add_member(:creation_date_condition, Shapes::ShapeRef.new(shape: CreationDateConditionRequest, location_name: "CreationDateCondition"))
     ImageCriterionRequest.add_member(:image_watermarks, Shapes::ShapeRef.new(shape: ImageWatermarkFilterRequestList, location_name: "ImageWatermark"))
+    ImageCriterionRequest.add_member(:scan_result_condition, Shapes::ShapeRef.new(shape: ScanResultConditionRequest, location_name: "ScanResultCondition"))
     ImageCriterionRequest.struct_class = Types::ImageCriterionRequest
 
     ImageCriterionRequestList.member = Shapes::ShapeRef.new(shape: ImageCriterionRequest, location_name: "ImageCriterion")
@@ -13144,6 +13244,18 @@ module Aws::EC2
     ImageDiskContainer.struct_class = Types::ImageDiskContainer
 
     ImageDiskContainerList.member = Shapes::ShapeRef.new(shape: ImageDiskContainer, location_name: "item")
+
+    ImageFinding.add_member(:fix_available, Shapes::ShapeRef.new(shape: Boolean, location_name: "fixAvailable"))
+    ImageFinding.add_member(:score, Shapes::ShapeRef.new(shape: Double, location_name: "score"))
+    ImageFinding.add_member(:first_observed_at, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "firstObservedAt"))
+    ImageFinding.add_member(:updated_at, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "updatedAt"))
+    ImageFinding.add_member(:title, Shapes::ShapeRef.new(shape: String, location_name: "title"))
+    ImageFinding.add_member(:paths, Shapes::ShapeRef.new(shape: ImageFindingPathSet, location_name: "pathSet"))
+    ImageFinding.add_member(:severity_label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "severityLabel"))
+    ImageFinding.add_member(:snapshot_id, Shapes::ShapeRef.new(shape: SnapshotId, location_name: "snapshotId"))
+    ImageFinding.struct_class = Types::ImageFinding
+
+    ImageFindingPathSet.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
 
     ImageIdList.member = Shapes::ShapeRef.new(shape: ImageId, location_name: "item")
 
@@ -13969,6 +14081,7 @@ module Aws::EC2
     InstanceStatus.add_member(:system_status, Shapes::ShapeRef.new(shape: InstanceStatusSummary, location_name: "systemStatus"))
     InstanceStatus.add_member(:attached_ebs_status, Shapes::ShapeRef.new(shape: EbsStatusSummary, location_name: "attachedEbsStatus"))
     InstanceStatus.add_member(:application_status, Shapes::ShapeRef.new(shape: ApplicationStatusSummary, location_name: "applicationStatus"))
+    InstanceStatus.add_member(:performance_status, Shapes::ShapeRef.new(shape: PerformanceStatusSummary, location_name: "performanceStatus"))
     InstanceStatus.struct_class = Types::InstanceStatus
 
     InstanceStatusDetails.add_member(:impaired_since, Shapes::ShapeRef.new(shape: DateTime, location_name: "impairedSince"))
@@ -16064,6 +16177,20 @@ module Aws::EC2
     ModifyTrafficMirrorSessionResult.add_member(:traffic_mirror_session, Shapes::ShapeRef.new(shape: TrafficMirrorSession, location_name: "trafficMirrorSession"))
     ModifyTrafficMirrorSessionResult.struct_class = Types::ModifyTrafficMirrorSessionResult
 
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, required: true, location_name: "TransitGatewayAttachmentId"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatGatewaySupportValue, location_name: "NatGatewaySupport"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatSystemRouteSupportValue, location_name: "NatSystemRouteSupport"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: TransitGatewayNatRuleRequestList, location_name: "NatGatewayRule"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:reset_nat_gateway_rules, Shapes::ShapeRef.new(shape: Boolean, location_name: "ResetNatGatewayRules"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+    ModifyTransitGatewayAttachmentNatConfigurationRequest.struct_class = Types::ModifyTransitGatewayAttachmentNatConfigurationRequest
+
+    ModifyTransitGatewayAttachmentNatConfigurationResult.add_member(:transit_gateway_attachment_id, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentId, location_name: "transitGatewayAttachmentId"))
+    ModifyTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatGatewaySupportState, location_name: "natGatewaySupport"))
+    ModifyTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatSystemRouteSupportValue, location_name: "natSystemRouteSupport"))
+    ModifyTransitGatewayAttachmentNatConfigurationResult.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: TransitGatewayNatRuleList, location_name: "natGatewayRuleSet"))
+    ModifyTransitGatewayAttachmentNatConfigurationResult.struct_class = Types::ModifyTransitGatewayAttachmentNatConfigurationResult
+
     ModifyTransitGatewayMeteringPolicyRequest.add_member(:transit_gateway_metering_policy_id, Shapes::ShapeRef.new(shape: TransitGatewayMeteringPolicyId, required: true, location_name: "TransitGatewayMeteringPolicyId"))
     ModifyTransitGatewayMeteringPolicyRequest.add_member(:add_middlebox_attachment_ids, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentIdStringList, location_name: "AddMiddleboxAttachmentId"))
     ModifyTransitGatewayMeteringPolicyRequest.add_member(:remove_middlebox_attachment_ids, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentIdStringList, location_name: "RemoveMiddleboxAttachmentId"))
@@ -16957,6 +17084,7 @@ module Aws::EC2
     PathComponent.add_member(:additional_details, Shapes::ShapeRef.new(shape: AdditionalDetailList, location_name: "additionalDetailSet"))
     PathComponent.add_member(:transit_gateway, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "transitGateway"))
     PathComponent.add_member(:transit_gateway_route_table_route, Shapes::ShapeRef.new(shape: TransitGatewayRouteTableRoute, location_name: "transitGatewayRouteTableRoute"))
+    PathComponent.add_member(:transit_gateway_policy_table_entry, Shapes::ShapeRef.new(shape: AnalysisTransitGatewayPolicyTableEntry, location_name: "transitGatewayPolicyTableEntry"))
     PathComponent.add_member(:explanations, Shapes::ShapeRef.new(shape: ExplanationList, location_name: "explanationSet"))
     PathComponent.add_member(:elastic_load_balancer_listener, Shapes::ShapeRef.new(shape: AnalysisComponent, location_name: "elasticLoadBalancerListener"))
     PathComponent.add_member(:firewall_stateless_rule, Shapes::ShapeRef.new(shape: FirewallStatelessRule, location_name: "firewallStatelessRule"))
@@ -17027,6 +17155,11 @@ module Aws::EC2
     PerformanceFactorReferenceSet.member = Shapes::ShapeRef.new(shape: PerformanceFactorReference, location_name: "item")
 
     PerformanceFactorReferenceSetRequest.member = Shapes::ShapeRef.new(shape: PerformanceFactorReferenceRequest, location_name: "item")
+
+    PerformanceStatusSummary.add_member(:status, Shapes::ShapeRef.new(shape: SummaryStatus, location_name: "status"))
+    PerformanceStatusSummary.add_member(:impaired_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "impairedSince"))
+    PerformanceStatusSummary.add_member(:remediation, Shapes::ShapeRef.new(shape: String, location_name: "remediation"))
+    PerformanceStatusSummary.struct_class = Types::PerformanceStatusSummary
 
     Phase1DHGroupNumbersList.member = Shapes::ShapeRef.new(shape: Phase1DHGroupNumbersListValue, location_name: "item")
 
@@ -18452,6 +18585,33 @@ module Aws::EC2
     S3Storage.add_member(:upload_policy_signature, Shapes::ShapeRef.new(shape: S3StorageUploadPolicySignature, location_name: "uploadPolicySignature"))
     S3Storage.struct_class = Types::S3Storage
 
+    ScanResultCondition.add_member(:max_days_since_last_finding_scan, Shapes::ShapeRef.new(shape: MaxDaysSinceLastFindingScanValue, location_name: "maxDaysSinceLastFindingScan"))
+    ScanResultCondition.add_member(:maximum_severity_label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "maximumSeverityLabel"))
+    ScanResultCondition.add_member(:max_days_since_informational_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceInformationalFixAvailable"))
+    ScanResultCondition.add_member(:max_days_since_low_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceLowFixAvailable"))
+    ScanResultCondition.add_member(:max_days_since_medium_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceMediumFixAvailable"))
+    ScanResultCondition.add_member(:max_days_since_high_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceHighFixAvailable"))
+    ScanResultCondition.add_member(:max_days_since_critical_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "maxDaysSinceCriticalFixAvailable"))
+    ScanResultCondition.struct_class = Types::ScanResultCondition
+
+    ScanResultConditionRequest.add_member(:max_days_since_last_finding_scan, Shapes::ShapeRef.new(shape: MaxDaysSinceLastFindingScanValue, location_name: "MaxDaysSinceLastFindingScan"))
+    ScanResultConditionRequest.add_member(:maximum_severity_label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "MaximumSeverityLabel"))
+    ScanResultConditionRequest.add_member(:max_days_since_informational_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceInformationalFixAvailable"))
+    ScanResultConditionRequest.add_member(:max_days_since_low_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceLowFixAvailable"))
+    ScanResultConditionRequest.add_member(:max_days_since_medium_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceMediumFixAvailable"))
+    ScanResultConditionRequest.add_member(:max_days_since_high_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceHighFixAvailable"))
+    ScanResultConditionRequest.add_member(:max_days_since_critical_fix_available, Shapes::ShapeRef.new(shape: MaxDaysSinceFixAvailableValue, location_name: "MaxDaysSinceCriticalFixAvailable"))
+    ScanResultConditionRequest.struct_class = Types::ScanResultConditionRequest
+
+    ScanResults.add_member(:highest_finding_severity_label, Shapes::ShapeRef.new(shape: SeverityLabel, location_name: "highestFindingSeverityLabel"))
+    ScanResults.add_member(:finding_scan_date, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "findingScanDate"))
+    ScanResults.add_member(:informational_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "informationalFixAvailableSince"))
+    ScanResults.add_member(:low_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "lowFixAvailableSince"))
+    ScanResults.add_member(:medium_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "mediumFixAvailableSince"))
+    ScanResults.add_member(:high_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "highFixAvailableSince"))
+    ScanResults.add_member(:critical_fix_available_since, Shapes::ShapeRef.new(shape: MillisecondDateTime, location_name: "criticalFixAvailableSince"))
+    ScanResults.struct_class = Types::ScanResults
+
     ScheduledInstance.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
     ScheduledInstance.add_member(:create_date, Shapes::ShapeRef.new(shape: DateTime, location_name: "createDate"))
     ScheduledInstance.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
@@ -19357,6 +19517,8 @@ module Aws::EC2
 
     SuccessfulSuppressionResponseSet.member = Shapes::ShapeRef.new(shape: SuccessfulSuppressionResponseObject, location_name: "item")
 
+    SupportabilityInstanceTypeList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
     SupportedAdditionalProcessorFeatureList.member = Shapes::ShapeRef.new(shape: SupportedAdditionalProcessorFeature, location_name: "item")
 
     SupportedInstanceTypeRequestSet.member = Shapes::ShapeRef.new(shape: InstanceTypeItemRequest, location_name: "Item")
@@ -19605,6 +19767,7 @@ module Aws::EC2
     TransitGatewayAttachment.add_member(:association, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentAssociation, location_name: "association"))
     TransitGatewayAttachment.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
     TransitGatewayAttachment.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
+    TransitGatewayAttachment.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: TransitGatewayAttachmentNatGatewaySupportState, location_name: "natGatewaySupport"))
     TransitGatewayAttachment.struct_class = Types::TransitGatewayAttachment
 
     TransitGatewayAttachmentAssociation.add_member(:transit_gateway_route_table_id, Shapes::ShapeRef.new(shape: String, location_name: "transitGatewayRouteTableId"))
@@ -19795,6 +19958,21 @@ module Aws::EC2
     TransitGatewayMulticastRegisteredGroupSources.add_member(:registered_network_interface_ids, Shapes::ShapeRef.new(shape: ValueStringList, location_name: "registeredNetworkInterfaceIds"))
     TransitGatewayMulticastRegisteredGroupSources.add_member(:group_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "groupIpAddress"))
     TransitGatewayMulticastRegisteredGroupSources.struct_class = Types::TransitGatewayMulticastRegisteredGroupSources
+
+    TransitGatewayNatRule.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "ruleNumber"))
+    TransitGatewayNatRule.add_member(:match_source_cidr, Shapes::ShapeRef.new(shape: String, location_name: "matchSourceCidr"))
+    TransitGatewayNatRule.add_member(:nat_cidr, Shapes::ShapeRef.new(shape: String, location_name: "natCidr"))
+    TransitGatewayNatRule.add_member(:state, Shapes::ShapeRef.new(shape: TransitGatewayNatRuleState, location_name: "state"))
+    TransitGatewayNatRule.struct_class = Types::TransitGatewayNatRule
+
+    TransitGatewayNatRuleList.member = Shapes::ShapeRef.new(shape: TransitGatewayNatRule, location_name: "item")
+
+    TransitGatewayNatRuleRequest.add_member(:rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "RuleNumber"))
+    TransitGatewayNatRuleRequest.add_member(:match_source_cidr, Shapes::ShapeRef.new(shape: String, location_name: "MatchSourceCidr"))
+    TransitGatewayNatRuleRequest.add_member(:nat_cidr, Shapes::ShapeRef.new(shape: String, location_name: "NatCidr"))
+    TransitGatewayNatRuleRequest.struct_class = Types::TransitGatewayNatRuleRequest
+
+    TransitGatewayNatRuleRequestList.member = Shapes::ShapeRef.new(shape: TransitGatewayNatRuleRequest, location_name: "item")
 
     TransitGatewayNetworkInterfaceIdList.member = Shapes::ShapeRef.new(shape: NetworkInterfaceId, location_name: "item")
 
@@ -26335,6 +26513,14 @@ module Aws::EC2
         )
       end)
 
+      api.add_operation(:get_capacity_manager_supportability_scores, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetCapacityManagerSupportabilityScores"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetCapacityManagerSupportabilityScoresRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetCapacityManagerSupportabilityScoresResult)
+      end)
+
       api.add_operation(:get_capacity_reservation_usage, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetCapacityReservationUsage"
         o.http_method = "POST"
@@ -26459,6 +26645,20 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetImageBlockPublicAccessStateRequest)
         o.output = Shapes::ShapeRef.new(shape: GetImageBlockPublicAccessStateResult)
+      end)
+
+      api.add_operation(:get_image_findings, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetImageFindings"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetImageFindingsRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetImageFindingsResult)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_instance_metadata_defaults, Seahorse::Model::Operation.new.tap do |o|
@@ -26861,6 +27061,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: GetSubnetCidrReservationsRequest)
         o.output = Shapes::ShapeRef.new(shape: GetSubnetCidrReservationsResult)
+      end)
+
+      api.add_operation(:get_transit_gateway_attachment_nat_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTransitGatewayAttachmentNatConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetTransitGatewayAttachmentNatConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTransitGatewayAttachmentNatConfigurationResult)
       end)
 
       api.add_operation(:get_transit_gateway_attachment_propagations, Seahorse::Model::Operation.new.tap do |o|
@@ -27569,6 +27777,14 @@ module Aws::EC2
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ModifyTransitGatewayRequest)
         o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayResult)
+      end)
+
+      api.add_operation(:modify_transit_gateway_attachment_nat_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ModifyTransitGatewayAttachmentNatConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ModifyTransitGatewayAttachmentNatConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: ModifyTransitGatewayAttachmentNatConfigurationResult)
       end)
 
       api.add_operation(:modify_transit_gateway_metering_policy, Seahorse::Model::Operation.new.tap do |o|

@@ -107,6 +107,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class AllowedPort
+      attr_accessor port: ::Integer
+      attr_accessor port_range: Types::PortRange
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Port < AllowedPort
+      end
+      class PortRange < AllowedPort
+      end
+      class Unknown < AllowedPort
+      end
+    end
+
     class AllowedWorkloadConfiguration
       attr_accessor hosting_environments: ::Array[Types::HostingEnvironment]
       attr_accessor workload_identities: ::Array[::String]
@@ -364,6 +378,11 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    class CircuitBreakerConfiguration
+      attr_accessor mode: ("ENABLED" | "DISABLED")
+      SENSITIVE: []
+    end
+
     class ClaimMatchValueType
       attr_accessor match_value_string: ::String
       attr_accessor match_value_string_list: ::Array[::String]
@@ -494,12 +513,15 @@ module Aws::BedrockAgentCoreControl
     class Condition
       attr_accessor match_principals: Types::MatchPrincipals
       attr_accessor match_paths: Types::MatchPaths
+      attr_accessor match_models: Types::MatchModels
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class MatchPrincipals < Condition
       end
       class MatchPaths < Condition
+      end
+      class MatchModels < Condition
       end
       class Unknown < Condition
       end
@@ -672,6 +694,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor platform_version: ::String
+      attr_accessor allowed_ports: ::Array[Types::AllowedPort]
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -1942,6 +1965,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class DimensionRatingScale
+      attr_accessor numerical: ::Array[Types::NumericalScaleDefinition]
+      attr_accessor categorical: ::Array[Types::CategoricalScaleDefinition]
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Numerical < DimensionRatingScale
+      end
+      class Categorical < DimensionRatingScale
+      end
+      class Unknown < DimensionRatingScale
+      end
+    end
+
     class EbsVolumeConfiguration
       attr_accessor name: ::String
       attr_accessor size_gi_b: ::Integer
@@ -2075,6 +2112,13 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: [:append_to_prompt]
     end
 
+    class EvaluationDimension
+      attr_accessor dimension_name: ::String
+      attr_accessor dimension_instruction: ::String
+      attr_accessor dimension_rating_scale: Types::DimensionRatingScale
+      SENSITIVE: [:dimension_instruction, :dimension_rating_scale]
+    end
+
     class EvaluatorConfig
       attr_accessor llm_as_a_judge: Types::LlmAsAJudgeEvaluatorConfig
       attr_accessor code_based: Types::CodeBasedEvaluatorConfig
@@ -2153,6 +2197,28 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < ExtractionConfiguration
       end
+    end
+
+    class Fallback
+      attr_accessor trigger_on: Types::FallbackTriggers
+      attr_accessor first_byte_timeout_milliseconds: ::Integer
+      attr_accessor circuit_breaker: Types::CircuitBreakerConfiguration
+      attr_accessor target_fallback: ::Array[Types::FallbackTarget]
+      SENSITIVE: []
+    end
+
+    class FallbackTarget
+      attr_accessor target_name: ::String
+      attr_accessor model: ::String
+      attr_accessor trigger_on: Types::FallbackTriggers
+      attr_accessor first_byte_timeout_milliseconds: ::Integer
+      SENSITIVE: [:target_name]
+    end
+
+    class FallbackTriggers
+      attr_accessor status_codes: ::Array[::String]
+      attr_accessor errors: ::Array[("CONNECTION_ERROR" | "FIRST_BYTE_TIMEOUT" | "UNROUTABLE")]
+      SENSITIVE: []
     end
 
     class FilesystemConfiguration
@@ -2344,6 +2410,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor platform_version: ::String
+      attr_accessor allowed_ports: ::Array[Types::AllowedPort]
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -4306,6 +4373,17 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class MatchModelEntry
+      attr_accessor value: ::String
+      attr_accessor operator: ("StringEquals" | "StringLike")
+      SENSITIVE: []
+    end
+
+    class MatchModels
+      attr_accessor any_of: ::Array[Types::MatchModelEntry]
+      SENSITIVE: []
+    end
+
     class MatchPaths
       attr_accessor any_of: ::Array[::String]
       SENSITIVE: []
@@ -4734,9 +4812,15 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    class OnBehalfOfAuthenticationConfig
+      attr_accessor client_authentication_method: ("NO_CLIENT")
+      SENSITIVE: []
+    end
+
     class OnBehalfOfTokenExchangeConfigType
       attr_accessor grant_type: ("TOKEN_EXCHANGE" | "JWT_AUTHORIZATION_GRANT")
       attr_accessor token_exchange_grant_type_config: Types::TokenExchangeGrantTypeConfigType
+      attr_accessor on_behalf_of_authentication_config: Types::OnBehalfOfAuthenticationConfig
       SENSITIVE: []
     end
 
@@ -4964,6 +5048,12 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class PortRange
+      attr_accessor from: ::Integer
+      attr_accessor to: ::Integer
+      SENSITIVE: []
+    end
+
     class PrivateEndpoint
       attr_accessor self_managed_lattice_resource: Types::SelfManagedLatticeResource
       attr_accessor managed_vpc_resource: Types::ManagedVpcResource
@@ -5005,6 +5095,8 @@ module Aws::BedrockAgentCoreControl
 
     class ProtocolConfiguration
       attr_accessor server_protocol: ("MCP" | "HTTP" | "A2A" | "AGUI")
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
       SENSITIVE: []
     end
 
@@ -5034,12 +5126,15 @@ module Aws::BedrockAgentCoreControl
     class RatingScale
       attr_accessor numerical: ::Array[Types::NumericalScaleDefinition]
       attr_accessor categorical: ::Array[Types::CategoricalScaleDefinition]
+      attr_accessor multi_dimensional: ::Array[Types::EvaluationDimension]
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class Numerical < RatingScale
       end
       class Categorical < RatingScale
+      end
+      class MultiDimensional < RatingScale
       end
       class Unknown < RatingScale
       end
@@ -5155,6 +5250,18 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < RequestHeaderConfiguration
       end
+    end
+
+    class ResetTokenVaultKeyMaterialRequest
+      attr_accessor token_vault_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetTokenVaultKeyMaterialResponse
+      attr_accessor token_vault_id: ::String
+      attr_accessor kms_configuration: Types::KmsConfiguration
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
     end
 
     class Resource
@@ -5504,6 +5611,8 @@ module Aws::BedrockAgentCoreControl
 
     class StaticRoute
       attr_accessor target_name: ::String
+      attr_accessor model: ::String
+      attr_accessor fallback: Types::Fallback
       SENSITIVE: [:target_name]
     end
 
@@ -5691,9 +5800,11 @@ module Aws::BedrockAgentCoreControl
     end
 
     class TargetTrafficSplitEntry
+      attr_accessor target_name: ::String
+      attr_accessor model: ::String
+      attr_accessor fallback: Types::Fallback
       attr_accessor name: ::String
       attr_accessor weight: ::Integer
-      attr_accessor target_name: ::String
       attr_accessor description: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
       SENSITIVE: [:target_name]
@@ -5872,6 +5983,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor platform_version: ::String
+      attr_accessor allowed_ports: ::Array[Types::AllowedPort]
       attr_accessor client_token: ::String
       SENSITIVE: [:description, :environment_variables]
     end

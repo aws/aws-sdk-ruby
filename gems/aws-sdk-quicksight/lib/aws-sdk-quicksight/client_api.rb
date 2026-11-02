@@ -47,6 +47,7 @@ module Aws::QuickSight
     AdditionalDashboardIdList = Shapes::ListShape.new(name: 'AdditionalDashboardIdList')
     AdditionalNotes = Shapes::StructureShape.new(name: 'AdditionalNotes')
     AdditionalNotesText = Shapes::StringShape.new(name: 'AdditionalNotesText')
+    AdminAccountEmail = Shapes::StringShape.new(name: 'AdminAccountEmail')
     Agent = Shapes::StructureShape.new(name: 'Agent')
     AgentActionConnectorsList = Shapes::ListShape.new(name: 'AgentActionConnectorsList')
     AgentArn = Shapes::StringShape.new(name: 'AgentArn')
@@ -414,6 +415,7 @@ module Aws::QuickSight
     ClientCredentialsGrantDetails = Shapes::StructureShape.new(name: 'ClientCredentialsGrantDetails')
     ClientCredentialsGrantMetadata = Shapes::StructureShape.new(name: 'ClientCredentialsGrantMetadata')
     ClientCredentialsSource = Shapes::StringShape.new(name: 'ClientCredentialsSource')
+    ClientEmail = Shapes::StringShape.new(name: 'ClientEmail')
     ClientId = Shapes::StringShape.new(name: 'ClientId')
     ClientSecret = Shapes::StringShape.new(name: 'ClientSecret')
     ClusterId = Shapes::StringShape.new(name: 'ClusterId')
@@ -742,10 +744,12 @@ module Aws::QuickSight
     DataSetUseAs = Shapes::StringShape.new(name: 'DataSetUseAs')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceArn = Shapes::StringShape.new(name: 'DataSourceArn')
+    DataSourceCertThumbprint = Shapes::StringShape.new(name: 'DataSourceCertThumbprint')
     DataSourceCredentials = Shapes::StructureShape.new(name: 'DataSourceCredentials')
     DataSourceErrorInfo = Shapes::StructureShape.new(name: 'DataSourceErrorInfo')
     DataSourceErrorInfoType = Shapes::StringShape.new(name: 'DataSourceErrorInfoType')
     DataSourceFilterAttribute = Shapes::StringShape.new(name: 'DataSourceFilterAttribute')
+    DataSourceKmsKeyArn = Shapes::StringShape.new(name: 'DataSourceKmsKeyArn')
     DataSourceList = Shapes::ListShape.new(name: 'DataSourceList')
     DataSourceParameters = Shapes::StructureShape.new(name: 'DataSourceParameters')
     DataSourceParametersList = Shapes::ListShape.new(name: 'DataSourceParametersList')
@@ -1792,6 +1796,7 @@ module Aws::QuickSight
     OAuthTokenEndpointUrl = Shapes::StringShape.new(name: 'OAuthTokenEndpointUrl')
     OAuthUsername = Shapes::StringShape.new(name: 'OAuthUsername')
     OnClause = Shapes::StringShape.new(name: 'OnClause')
+    OneDriveClientCredentials = Shapes::StructureShape.new(name: 'OneDriveClientCredentials')
     OneDriveClientId = Shapes::StringShape.new(name: 'OneDriveClientId')
     OneDriveParameters = Shapes::StructureShape.new(name: 'OneDriveParameters')
     OneDriveTenantId = Shapes::StringShape.new(name: 'OneDriveTenantId')
@@ -2192,6 +2197,7 @@ module Aws::QuickSight
     Separator = Shapes::StringShape.new(name: 'Separator')
     SeriesItem = Shapes::StructureShape.new(name: 'SeriesItem')
     SeriesItemList = Shapes::ListShape.new(name: 'SeriesItemList')
+    ServiceAccountCredentials = Shapes::StructureShape.new(name: 'ServiceAccountCredentials')
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
     ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
@@ -2204,6 +2210,7 @@ module Aws::QuickSight
     SetParameterValueConfiguration = Shapes::StructureShape.new(name: 'SetParameterValueConfiguration')
     SetParameterValueConfigurationList = Shapes::ListShape.new(name: 'SetParameterValueConfigurationList')
     ShapeConditionalFormat = Shapes::StructureShape.new(name: 'ShapeConditionalFormat')
+    SharePointClientCredentials = Shapes::StructureShape.new(name: 'SharePointClientCredentials')
     SharePointClientId = Shapes::StringShape.new(name: 'SharePointClientId')
     SharePointDomain = Shapes::StringShape.new(name: 'SharePointDomain')
     SharePointParameters = Shapes::StructureShape.new(name: 'SharePointParameters')
@@ -6134,6 +6141,9 @@ module Aws::QuickSight
     DataSourceCredentials.add_member(:key_pair_credentials, Shapes::ShapeRef.new(shape: KeyPairCredentials, location_name: "KeyPairCredentials"))
     DataSourceCredentials.add_member(:web_proxy_credentials, Shapes::ShapeRef.new(shape: WebProxyCredentials, location_name: "WebProxyCredentials"))
     DataSourceCredentials.add_member(:o_auth_client_credentials, Shapes::ShapeRef.new(shape: OAuthClientCredentials, location_name: "OAuthClientCredentials"))
+    DataSourceCredentials.add_member(:service_account_credentials, Shapes::ShapeRef.new(shape: ServiceAccountCredentials, location_name: "ServiceAccountCredentials"))
+    DataSourceCredentials.add_member(:share_point_client_credentials, Shapes::ShapeRef.new(shape: SharePointClientCredentials, location_name: "SharePointClientCredentials"))
+    DataSourceCredentials.add_member(:one_drive_client_credentials, Shapes::ShapeRef.new(shape: OneDriveClientCredentials, location_name: "OneDriveClientCredentials"))
     DataSourceCredentials.struct_class = Types::DataSourceCredentials
 
     DataSourceErrorInfo.add_member(:type, Shapes::ShapeRef.new(shape: DataSourceErrorInfoType, location_name: "Type"))
@@ -10257,6 +10267,10 @@ module Aws::QuickSight
     OAuthParameters.add_member(:identity_provider_ca_certificates_bundle_s3_uri, Shapes::ShapeRef.new(shape: CACertificatesBundleS3Uri, location_name: "IdentityProviderCACertificatesBundleS3Uri"))
     OAuthParameters.struct_class = Types::OAuthParameters
 
+    OneDriveClientCredentials.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: DataSourceKmsKeyArn, required: true, location_name: "KmsKeyArn"))
+    OneDriveClientCredentials.add_member(:cert_thumbprint, Shapes::ShapeRef.new(shape: DataSourceCertThumbprint, required: true, location_name: "CertThumbprint"))
+    OneDriveClientCredentials.struct_class = Types::OneDriveClientCredentials
+
     OneDriveParameters.add_member(:tenant_id, Shapes::ShapeRef.new(shape: OneDriveTenantId, location_name: "TenantId"))
     OneDriveParameters.add_member(:client_id, Shapes::ShapeRef.new(shape: OneDriveClientId, location_name: "ClientId"))
     OneDriveParameters.add_member(:auth_type, Shapes::ShapeRef.new(shape: AuthType, location_name: "AuthType"))
@@ -11584,6 +11598,11 @@ module Aws::QuickSight
 
     SeriesItemList.member = Shapes::ShapeRef.new(shape: SeriesItem)
 
+    ServiceAccountCredentials.add_member(:admin_account_email, Shapes::ShapeRef.new(shape: AdminAccountEmail, required: true, location_name: "AdminAccountEmail"))
+    ServiceAccountCredentials.add_member(:service_account_private_key, Shapes::ShapeRef.new(shape: PrivateKey, required: true, location_name: "ServiceAccountPrivateKey"))
+    ServiceAccountCredentials.add_member(:client_email, Shapes::ShapeRef.new(shape: ClientEmail, required: true, location_name: "ClientEmail"))
+    ServiceAccountCredentials.struct_class = Types::ServiceAccountCredentials
+
     ServiceNowParameters.add_member(:site_base_url, Shapes::ShapeRef.new(shape: SiteBaseUrl, required: true, location_name: "SiteBaseUrl"))
     ServiceNowParameters.struct_class = Types::ServiceNowParameters
 
@@ -11607,6 +11626,10 @@ module Aws::QuickSight
 
     ShapeConditionalFormat.add_member(:background_color, Shapes::ShapeRef.new(shape: ConditionalFormattingColor, required: true, location_name: "BackgroundColor"))
     ShapeConditionalFormat.struct_class = Types::ShapeConditionalFormat
+
+    SharePointClientCredentials.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: DataSourceKmsKeyArn, required: true, location_name: "KmsKeyArn"))
+    SharePointClientCredentials.add_member(:cert_thumbprint, Shapes::ShapeRef.new(shape: DataSourceCertThumbprint, required: true, location_name: "CertThumbprint"))
+    SharePointClientCredentials.struct_class = Types::SharePointClientCredentials
 
     SharePointParameters.add_member(:share_point_domain, Shapes::ShapeRef.new(shape: SharePointDomain, required: true, location_name: "SharePointDomain"))
     SharePointParameters.add_member(:tenant_id, Shapes::ShapeRef.new(shape: SharePointTenantId, location_name: "TenantId"))

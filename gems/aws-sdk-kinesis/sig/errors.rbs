@@ -11,28 +11,28 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class DryRunOperationException < ::Aws::Errors::ServiceError
+      class DryRunOperationException < ServiceError
         def message: () -> ::String
       end
-      class ExpiredIteratorException < ::Aws::Errors::ServiceError
+      class ExpiredIteratorException < ServiceError
         def message: () -> ::String
       end
-      class ExpiredNextTokenException < ::Aws::Errors::ServiceError
+      class ExpiredNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidArgumentException < ::Aws::Errors::ServiceError
+      class InvalidArgumentException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ProvisionedThroughputExceededException < ::Aws::Errors::ServiceError
+      class ProvisionedThroughputExceededException < ServiceError
         def message: () -> ::String
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
         def message: () -> ::String
       end
     end

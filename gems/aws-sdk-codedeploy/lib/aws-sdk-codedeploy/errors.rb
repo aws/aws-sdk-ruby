@@ -73,6 +73,7 @@ module Aws::CodeDeploy
   # * {InvalidArnException}
   # * {InvalidAutoRollbackConfigException}
   # * {InvalidAutoScalingGroupException}
+  # * {InvalidAutoScalingGroupProcessToSuspendException}
   # * {InvalidBlueGreenDeploymentConfigurationException}
   # * {InvalidBucketNameFilterException}
   # * {InvalidComputePlatformException}
@@ -602,6 +603,16 @@ module Aws::CodeDeploy
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::CodeDeploy::Types::InvalidAutoScalingGroupException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+    end
+
+    class InvalidAutoScalingGroupProcessToSuspendException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::CodeDeploy::Types::InvalidAutoScalingGroupProcessToSuspendException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end

@@ -11,35 +11,35 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class ForbiddenException < ::Aws::Errors::ServiceError
+      class ForbiddenException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class InternalServerErrorException < ::Aws::Errors::ServiceError
+      class InternalServerErrorException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class MethodNotAllowedException < ::Aws::Errors::ServiceError
+      class MethodNotAllowedException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class PayloadTooLargeException < ::Aws::Errors::ServiceError
+      class PayloadTooLargeException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def message: () -> ::String
         def request_id: () -> ::String
       end

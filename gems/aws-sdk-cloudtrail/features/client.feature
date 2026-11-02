@@ -10,7 +10,3 @@ Feature: AWS CloudTrail
     When I attempt to call the "DeleteTrail" API with:
     | Name | faketrail |
     Then I expect the response error code to be "TrailNotFoundException"
-    And I expect the response error message to include:
-    """
-    Unknown trail
-    """

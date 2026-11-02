@@ -11,71 +11,71 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class BadRequestException < ::Aws::Errors::ServiceError
+      class BadRequestException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class ForbiddenException < ::Aws::Errors::ServiceError
+      class ForbiddenException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class InternalServerErrorException < ::Aws::Errors::ServiceError
+      class InternalServerErrorException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class ServiceUnavailableException < ::Aws::Errors::ServiceError
+      class ServiceUnavailableException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class TooManyRequestsException < ::Aws::Errors::ServiceError
+      class TooManyRequestsException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class UnauthorizedException < ::Aws::Errors::ServiceError
+      class UnauthorizedException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class TopicExistsException < ::Aws::Errors::ServiceError
+      class TopicExistsException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class ClusterConnectivityException < ::Aws::Errors::ServiceError
+      class ClusterConnectivityException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class KafkaTimeoutException < ::Aws::Errors::ServiceError
+      class KafkaTimeoutException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class UnknownTopicOrPartitionException < ::Aws::Errors::ServiceError
+      class UnknownTopicOrPartitionException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class ControllerMovedException < ::Aws::Errors::ServiceError
+      class ControllerMovedException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class NotControllerException < ::Aws::Errors::ServiceError
+      class NotControllerException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class ReassignmentInProgressException < ::Aws::Errors::ServiceError
+      class ReassignmentInProgressException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class GroupSubscribedToTopicException < ::Aws::Errors::ServiceError
+      class GroupSubscribedToTopicException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end
-      class KafkaRequestException < ::Aws::Errors::ServiceError
+      class KafkaRequestException < ServiceError
         def invalid_parameter: () -> ::String
         def message: () -> ::String
       end

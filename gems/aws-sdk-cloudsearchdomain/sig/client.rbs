@@ -25,6 +25,7 @@ module Aws
                       ?convert_params: bool,
                       ?correct_clock_skew: bool,
                       ?defaults_mode: String,
+                      ?disable_clock_skew_correction: bool,
                       ?disable_request_compression: bool,
                       ?log_formatter: untyped,
                       ?log_level: Symbol,

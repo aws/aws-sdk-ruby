@@ -316,6 +316,7 @@ module Aws::Lambda
     KMSKeyArn = Shapes::StringShape.new(name: 'KMSKeyArn')
     KMSKeyArnNonEmpty = Shapes::StringShape.new(name: 'KMSKeyArnNonEmpty')
     KMSNotFoundException = Shapes::StructureShape.new(name: 'KMSNotFoundException')
+    KafkaEventSourceMappingConsumptionMode = Shapes::StringShape.new(name: 'KafkaEventSourceMappingConsumptionMode')
     KafkaSchemaRegistryAccessConfig = Shapes::StructureShape.new(name: 'KafkaSchemaRegistryAccessConfig')
     KafkaSchemaRegistryAccessConfigList = Shapes::ListShape.new(name: 'KafkaSchemaRegistryAccessConfigList')
     KafkaSchemaRegistryAuthType = Shapes::StringShape.new(name: 'KafkaSchemaRegistryAuthType')
@@ -2147,6 +2148,7 @@ module Aws::Lambda
 
     SelfManagedKafkaEventSourceConfig.add_member(:consumer_group_id, Shapes::ShapeRef.new(shape: URI, location_name: "ConsumerGroupId"))
     SelfManagedKafkaEventSourceConfig.add_member(:schema_registry_config, Shapes::ShapeRef.new(shape: KafkaSchemaRegistryConfig, location_name: "SchemaRegistryConfig"))
+    SelfManagedKafkaEventSourceConfig.add_member(:consumption_mode, Shapes::ShapeRef.new(shape: KafkaEventSourceMappingConsumptionMode, location_name: "ConsumptionMode"))
     SelfManagedKafkaEventSourceConfig.struct_class = Types::SelfManagedKafkaEventSourceConfig
 
     SendDurableExecutionCallbackFailureRequest.add_member(:callback_id, Shapes::ShapeRef.new(shape: CallbackId, required: true, location: "uri", location_name: "CallbackId"))

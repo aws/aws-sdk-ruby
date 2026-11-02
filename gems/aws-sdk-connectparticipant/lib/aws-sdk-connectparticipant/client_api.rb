@@ -42,6 +42,7 @@ module Aws::ConnectParticipant
     ConnectionType = Shapes::StringShape.new(name: 'ConnectionType')
     ConnectionTypeList = Shapes::ListShape.new(name: 'ConnectionTypeList')
     ContactId = Shapes::StringShape.new(name: 'ContactId')
+    ContentDisposition = Shapes::StringShape.new(name: 'ContentDisposition')
     ContentType = Shapes::StringShape.new(name: 'ContentType')
     CreateParticipantConnectionRequest = Shapes::StructureShape.new(name: 'CreateParticipantConnectionRequest')
     CreateParticipantConnectionResponse = Shapes::StructureShape.new(name: 'CreateParticipantConnectionResponse')
@@ -69,6 +70,7 @@ module Aws::ConnectParticipant
     MessageMetadata = Shapes::StructureShape.new(name: 'MessageMetadata')
     MessageProcessingMetadata = Shapes::StructureShape.new(name: 'MessageProcessingMetadata')
     MessageProcessingStatus = Shapes::StringShape.new(name: 'MessageProcessingStatus')
+    MetadataUrl = Shapes::StringShape.new(name: 'MetadataUrl')
     MostRecent = Shapes::IntegerShape.new(name: 'MostRecent')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NonEmptyClientToken = Shapes::StringShape.new(name: 'NonEmptyClientToken')
@@ -100,10 +102,9 @@ module Aws::ConnectParticipant
     URI = Shapes::StringShape.new(name: 'URI')
     URLExpiryInSeconds = Shapes::IntegerShape.new(name: 'URLExpiryInSeconds')
     UploadMetadata = Shapes::StructureShape.new(name: 'UploadMetadata')
-    UploadMetadataSignedHeaders = Shapes::MapShape.new(name: 'UploadMetadataSignedHeaders')
-    UploadMetadataSignedHeadersKey = Shapes::StringShape.new(name: 'UploadMetadataSignedHeadersKey')
-    UploadMetadataSignedHeadersValue = Shapes::StringShape.new(name: 'UploadMetadataSignedHeadersValue')
-    UploadMetadataUrl = Shapes::StringShape.new(name: 'UploadMetadataUrl')
+    UrlMetadataSignedHeaders = Shapes::MapShape.new(name: 'UrlMetadataSignedHeaders')
+    UrlMetadataSignedHeadersKey = Shapes::StringShape.new(name: 'UrlMetadataSignedHeadersKey')
+    UrlMetadataSignedHeadersValue = Shapes::StringShape.new(name: 'UrlMetadataSignedHeadersValue')
     ValidationException = Shapes::StructureShape.new(name: 'ValidationException')
     View = Shapes::StructureShape.new(name: 'View')
     ViewAction = Shapes::StringShape.new(name: 'ViewAction')
@@ -188,6 +189,7 @@ module Aws::ConnectParticipant
     GetAttachmentRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: ArtifactId, required: true, location_name: "AttachmentId"))
     GetAttachmentRequest.add_member(:connection_token, Shapes::ShapeRef.new(shape: ParticipantToken, required: true, location: "header", location_name: "X-Amz-Bearer"))
     GetAttachmentRequest.add_member(:url_expiry_in_seconds, Shapes::ShapeRef.new(shape: URLExpiryInSeconds, location_name: "UrlExpiryInSeconds"))
+    GetAttachmentRequest.add_member(:url_content_disposition, Shapes::ShapeRef.new(shape: ContentDisposition, location_name: "UrlContentDisposition"))
     GetAttachmentRequest.struct_class = Types::GetAttachmentRequest
 
     GetAttachmentResponse.add_member(:url, Shapes::ShapeRef.new(shape: PreSignedAttachmentUrl, location_name: "Url"))
@@ -302,13 +304,13 @@ module Aws::ConnectParticipant
 
     Transcript.member = Shapes::ShapeRef.new(shape: Item)
 
-    UploadMetadata.add_member(:url, Shapes::ShapeRef.new(shape: UploadMetadataUrl, location_name: "Url"))
+    UploadMetadata.add_member(:url, Shapes::ShapeRef.new(shape: MetadataUrl, location_name: "Url"))
     UploadMetadata.add_member(:url_expiry, Shapes::ShapeRef.new(shape: ISO8601Datetime, location_name: "UrlExpiry"))
-    UploadMetadata.add_member(:headers_to_include, Shapes::ShapeRef.new(shape: UploadMetadataSignedHeaders, location_name: "HeadersToInclude"))
+    UploadMetadata.add_member(:headers_to_include, Shapes::ShapeRef.new(shape: UrlMetadataSignedHeaders, location_name: "HeadersToInclude"))
     UploadMetadata.struct_class = Types::UploadMetadata
 
-    UploadMetadataSignedHeaders.key = Shapes::ShapeRef.new(shape: UploadMetadataSignedHeadersKey)
-    UploadMetadataSignedHeaders.value = Shapes::ShapeRef.new(shape: UploadMetadataSignedHeadersValue)
+    UrlMetadataSignedHeaders.key = Shapes::ShapeRef.new(shape: UrlMetadataSignedHeadersKey)
+    UrlMetadataSignedHeaders.value = Shapes::ShapeRef.new(shape: UrlMetadataSignedHeadersValue)
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: Reason, required: true, location_name: "Message"))
     ValidationException.struct_class = Types::ValidationException

@@ -131,8 +131,10 @@ module Aws::LicenseManager
       attr_accessor license_arn: ::String
       attr_accessor principals: ::Array[::String]
       attr_accessor home_region: ::String
-      attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+      attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken" | "ListReceivedLicenses")]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor grant_type: ("BuyerGrant" | "DelegateGrant")
+      attr_accessor options: Types::Options
       SENSITIVE: []
     end
 
@@ -147,7 +149,7 @@ module Aws::LicenseManager
       attr_accessor client_token: ::String
       attr_accessor grant_arn: ::String
       attr_accessor grant_name: ::String
-      attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+      attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken" | "ListReceivedLicenses")]
       attr_accessor status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
       attr_accessor status_reason: ::String
       attr_accessor source_version: ::String
@@ -589,8 +591,9 @@ module Aws::LicenseManager
       attr_accessor grant_status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
       attr_accessor status_reason: ::String
       attr_accessor version: ::String
-      attr_accessor granted_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+      attr_accessor granted_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken" | "ListReceivedLicenses")]
       attr_accessor options: Types::Options
+      attr_accessor grant_type: ("BuyerGrant" | "DelegateGrant")
       SENSITIVE: []
     end
 
@@ -1115,6 +1118,7 @@ module Aws::LicenseManager
 
     class Options
       attr_accessor activation_override_behavior: ("DISTRIBUTED_GRANTS_ONLY" | "ALL_GRANTS_PERMITTED_BY_ISSUER")
+      attr_accessor desired_status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")
       SENSITIVE: []
     end
 
@@ -1161,7 +1165,8 @@ module Aws::LicenseManager
     class ReceivedMetadata
       attr_accessor received_status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "DISABLED" | "WORKFLOW_COMPLETED")
       attr_accessor received_status_reason: ::String
-      attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")]
+      attr_accessor allowed_operations: ::Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken" | "ListReceivedLicenses")]
+      attr_accessor grant_type: ("BuyerGrant" | "DelegateGrant")
       SENSITIVE: []
     end
 

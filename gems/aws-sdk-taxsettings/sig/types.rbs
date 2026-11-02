@@ -55,6 +55,8 @@ module Aws::TaxSettings
       attr_accessor chile_additional_info: Types::ChileAdditionalInfo
       attr_accessor france_additional_info: Types::FranceAdditionalInfo
       attr_accessor monaco_additional_info: Types::MonacoAdditionalInfo
+      attr_accessor germany_additional_info: Types::GermanyAdditionalInfo
+      attr_accessor mexico_additional_info: Types::MexicoAdditionalInfo
       SENSITIVE: []
     end
 
@@ -85,6 +87,8 @@ module Aws::TaxSettings
       attr_accessor chile_additional_info: Types::ChileAdditionalInfo
       attr_accessor france_additional_info: Types::FranceAdditionalInfo
       attr_accessor monaco_additional_info: Types::MonacoAdditionalInfo
+      attr_accessor germany_additional_info: Types::GermanyAdditionalInfo
+      attr_accessor mexico_additional_info: Types::MexicoAdditionalInfo
       SENSITIVE: []
     end
 
@@ -245,6 +249,12 @@ module Aws::TaxSettings
       SENSITIVE: []
     end
 
+    class GermanyAdditionalInfo
+      attr_accessor economic_identification_number: ::String
+      attr_accessor steuernummer: ::String
+      SENSITIVE: []
+    end
+
     class GetTaxExemptionTypesRequest < Aws::EmptyStructure
     end
 
@@ -372,6 +382,13 @@ module Aws::TaxSettings
       attr_accessor service_tax_codes: ::Array[("Consultancy" | "Digital Service And Electronic Medium" | "IT Services" | "Training Or Coaching")]
       attr_accessor tax_information_number: ::String
       attr_accessor business_registration_number: ::String
+      SENSITIVE: []
+    end
+
+    class MexicoAdditionalInfo
+      attr_accessor tax_regime: ::String
+      attr_accessor tax_regime_full_name: ::String
+      attr_accessor cfdi_usage_code: ::String
       SENSITIVE: []
     end
 

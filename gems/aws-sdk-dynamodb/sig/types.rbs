@@ -589,6 +589,12 @@ module Aws::DynamoDB
       SENSITIVE: []
     end
 
+    class DisassociateReplicationGroupMemberAction
+      attr_accessor region_name: ::String
+      attr_accessor disassociation_mode: ("WAIT_FOR_REPLICATION")
+      SENSITIVE: []
+    end
+
     class DuplicateItemException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1415,6 +1421,7 @@ module Aws::DynamoDB
       attr_accessor create: Types::CreateReplicationGroupMemberAction
       attr_accessor update: Types::UpdateReplicationGroupMemberAction
       attr_accessor delete: Types::DeleteReplicationGroupMemberAction
+      attr_accessor disassociate: Types::DisassociateReplicationGroupMemberAction
       SENSITIVE: []
     end
 
@@ -1650,6 +1657,7 @@ module Aws::DynamoDB
       attr_accessor archival_summary: Types::ArchivalSummary
       attr_accessor table_class_summary: Types::TableClassSummary
       attr_accessor deletion_protection_enabled: bool
+      attr_accessor disassociation_protection_enabled: bool
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor warm_throughput: Types::TableWarmThroughputDescription
       attr_accessor multi_region_consistency: ("EVENTUAL" | "STRONG")
@@ -1914,6 +1922,7 @@ module Aws::DynamoDB
       attr_accessor on_demand_throughput: Types::OnDemandThroughput
       attr_accessor warm_throughput: Types::WarmThroughput
       attr_accessor global_table_settings_replication_mode: ("ENABLED" | "DISABLED" | "ENABLED_WITH_OVERRIDES")
+      attr_accessor disassociation_protection_enabled: bool
       attr_accessor vector_index_updates: ::Array[Types::VectorIndexUpdate]
       SENSITIVE: []
     end

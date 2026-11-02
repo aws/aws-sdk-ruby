@@ -297,6 +297,61 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection that the ingestion job
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_job_id
+    #   The unique identifier of the ingestion job to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CancelIngestionJobRequest AWS API Documentation
+    #
+    class CancelIngestionJobRequest < Struct.new(
+      :collection_id,
+      :ingestion_job_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingestion_job_id
+    #   The unique identifier of the cancelled ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection that the ingestion job
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_job_name
+    #   The name of the cancelled ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the ingestion job.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CancelIngestionJobResponse AWS API Documentation
+    #
+    class CancelIngestionJobResponse < Struct.new(
+      :ingestion_job_id,
+      :collection_id,
+      :ingestion_job_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Capacity details for an OpenSearch Serverless collection group,
     # including the current capacity and autoscaling status.
     #
@@ -1120,6 +1175,136 @@ module Aws::OpenSearchServerless
     #
     class CreateIndexResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection to ingest data into.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_job_name
+    #   The name of the ingestion job. The name must be unique within the
+    #   collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to ingest documents into.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_index_name
+    #   The name of the index where documents that fail to be ingested are
+    #   recorded.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Amazon S3 source to ingest data from.
+    #   @return [Types::IngestionJobSource]
+    #
+    # @!attribute [rw] tags
+    #   An arbitrary set of tags (key–value pairs) to associate with the
+    #   ingestion job.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateIngestionJobRequest AWS API Documentation
+    #
+    class CreateIngestionJobRequest < Struct.new(
+      :collection_id,
+      :ingestion_job_name,
+      :index_name,
+      :failure_index_name,
+      :source,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingestion_job_detail
+    #   Details about the created ingestion job.
+    #   @return [Types::IngestionJobDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateIngestionJobResponse AWS API Documentation
+    #
+    class CreateIngestionJobResponse < Struct.new(
+      :ingestion_job_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection to ingest data into.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_stream_name
+    #   The name of the ingestion stream. The name must be unique within the
+    #   collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index to ingest documents into.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_index_name
+    #   The name of the index where documents that fail to be ingested are
+    #   recorded.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Amazon S3 source to ingest data from, including the Amazon SQS
+    #   queue that receives S3 event notifications.
+    #   @return [Types::IngestionStreamSource]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that OpenSearch
+    #   Serverless assumes to read data from the source. The role must be in
+    #   the same account as the collection.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   An arbitrary set of tags (key–value pairs) to associate with the
+    #   ingestion stream.
+    #   @return [Array<Types::Tag>]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateIngestionStreamRequest AWS API Documentation
+    #
+    class CreateIngestionStreamRequest < Struct.new(
+      :collection_id,
+      :ingestion_stream_name,
+      :index_name,
+      :failure_index_name,
+      :source,
+      :role_arn,
+      :tags,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingestion_stream_detail
+    #   Details about the created ingestion stream.
+    #   @return [Types::IngestionStreamDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/CreateIngestionStreamResponse AWS API Documentation
+    #
+    class CreateIngestionStreamResponse < Struct.new(
+      :ingestion_stream_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] type
     #   The type of lifecycle policy.
     #   @return [String]
@@ -1528,6 +1713,61 @@ module Aws::OpenSearchServerless
     #
     class DeleteIndexResponse < Aws::EmptyStructure; end
 
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection that the ingestion stream
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_stream_id
+    #   The unique identifier of the ingestion stream to delete.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   Unique, case-sensitive identifier to ensure idempotency of the
+    #   request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteIngestionStreamRequest AWS API Documentation
+    #
+    class DeleteIngestionStreamRequest < Struct.new(
+      :collection_id,
+      :ingestion_stream_id,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingestion_stream_id
+    #   The unique identifier of the deleted ingestion stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection that the ingestion stream
+    #   belonged to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_stream_name
+    #   The name of the deleted ingestion stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the ingestion stream.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/DeleteIngestionStreamResponse AWS API Documentation
+    #
+    class DeleteIngestionStreamResponse < Struct.new(
+      :ingestion_stream_id,
+      :collection_id,
+      :ingestion_stream_name,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] type
     #   The type of lifecycle policy.
     #   @return [String]
@@ -1872,6 +2112,66 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection that the ingestion job
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_job_id
+    #   The unique identifier of the ingestion job to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetIngestionJobRequest AWS API Documentation
+    #
+    class GetIngestionJobRequest < Struct.new(
+      :collection_id,
+      :ingestion_job_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingestion_job_detail
+    #   Details about the requested ingestion job.
+    #   @return [Types::IngestionJobDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetIngestionJobResponse AWS API Documentation
+    #
+    class GetIngestionJobResponse < Struct.new(
+      :ingestion_job_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection that the ingestion stream
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_stream_id
+    #   The unique identifier of the ingestion stream to retrieve.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetIngestionStreamRequest AWS API Documentation
+    #
+    class GetIngestionStreamRequest < Struct.new(
+      :collection_id,
+      :ingestion_stream_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingestion_stream_detail
+    #   Details about the requested ingestion stream.
+    #   @return [Types::IngestionStreamDetail]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetIngestionStreamResponse AWS API Documentation
+    #
+    class GetIngestionStreamResponse < Struct.new(
+      :ingestion_stream_detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @api private
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/GetPoliciesStatsRequest AWS API Documentation
@@ -2032,6 +2332,410 @@ module Aws::OpenSearchServerless
       :application_description,
       :user_attribute,
       :group_attribute)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An active alert about a running ingestion — operational issues or
+    # updates to processing state. Cleared when the issue resolves.
+    #
+    # @!attribute [rw] code
+    #   The code that identifies the alert.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the alert.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionAlert AWS API Documentation
+    #
+    class IngestionAlert < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A terminal failure reason explaining why an ingestion stopped.
+    #
+    # @!attribute [rw] code
+    #   The code that identifies the reason for the failure.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the reason for the failure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionFailureReason AWS API Documentation
+    #
+    class IngestionFailureReason < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an ingestion job.
+    #
+    # @!attribute [rw] ingestion_job_id
+    #   The unique identifier of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection that the ingestion job
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_job_name
+    #   The name of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index that documents are ingested into.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_index_name
+    #   The name of the index where documents that fail to be ingested are
+    #   recorded.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Amazon S3 source that the ingestion job ingests data from.
+    #   @return [Types::IngestionJobSource]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the ingestion job. For example,
+    #   `CREATING`, `ACTIVE`, `COMPLETED`, or `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current processing state of the ingestion job. For example,
+    #   `SCANNING`, `INGESTION_IN_PROGRESS`, or `INGESTION_COMPLETE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistics
+    #   Processing statistics for the ingestion job, such as the number of
+    #   Amazon S3 objects discovered, ingested, and failed.
+    #   @return [Types::IngestionStatistics]
+    #
+    # @!attribute [rw] revision
+    #   The revision number of the ingestion job.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the ingestion job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the ingestion job was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The reasons that the ingestion job reached a terminal failure state,
+    #   if applicable.
+    #   @return [Array<Types::IngestionFailureReason>]
+    #
+    # @!attribute [rw] active_alerts
+    #   Active alerts about operational issues that currently affect the
+    #   ingestion job. Alerts are cleared when the issue is resolved.
+    #   @return [Array<Types::IngestionAlert>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionJobDetail AWS API Documentation
+    #
+    class IngestionJobDetail < Struct.new(
+      :ingestion_job_id,
+      :arn,
+      :collection_id,
+      :ingestion_job_name,
+      :index_name,
+      :failure_index_name,
+      :source,
+      :status,
+      :state,
+      :statistics,
+      :revision,
+      :created_at,
+      :updated_at,
+      :failure_reasons,
+      :active_alerts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 source configuration for an ingestion job.
+    #
+    # @!attribute [rw] bucket
+    #   The name or Amazon Resource Name (ARN) of the Amazon S3 bucket to
+    #   ingest data from.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_owner_account_id
+    #   The Amazon Web Services account ID that owns the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_prefix
+    #   A key prefix that limits ingestion to objects in the Amazon S3
+    #   bucket whose keys begin with the prefix.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionJobS3Source AWS API Documentation
+    #
+    class IngestionJobS3Source < Struct.new(
+      :bucket,
+      :bucket_owner_account_id,
+      :key_prefix)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source that an ingestion job ingests data from.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon S3 source configuration for the ingestion job.
+    #   @return [Types::IngestionJobS3Source]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionJobSource AWS API Documentation
+    #
+    class IngestionJobSource < Struct.new(
+      :s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an ingestion job.
+    #
+    # @!attribute [rw] ingestion_job_id
+    #   The unique identifier of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_job_name
+    #   The name of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index that documents are ingested into.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the ingestion job.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the ingestion job was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the ingestion job was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionJobSummary AWS API Documentation
+    #
+    class IngestionJobSummary < Struct.new(
+      :ingestion_job_id,
+      :arn,
+      :ingestion_job_name,
+      :index_name,
+      :status,
+      :created_at,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Processing statistics for an ingestion job or ingestion stream.
+    #
+    # @!attribute [rw] s3
+    #   Processing statistics for the Amazon S3 source.
+    #   @return [Types::S3Statistics]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionStatistics AWS API Documentation
+    #
+    class IngestionStatistics < Struct.new(
+      :s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about an ingestion stream.
+    #
+    # @!attribute [rw] ingestion_stream_id
+    #   The unique identifier of the ingestion stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the ingestion stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection that the ingestion stream
+    #   belongs to.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_stream_name
+    #   The name of the ingestion stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index that documents are ingested into.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_index_name
+    #   The name of the index where documents that fail to be ingested are
+    #   recorded.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The Amazon S3 source that the ingestion stream ingests data from.
+    #   @return [Types::IngestionStreamSource]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that OpenSearch
+    #   Serverless assumes to read data from the source.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the ingestion stream. For example,
+    #   `CREATING`, `ACTIVE`, or `DELETING`.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The current processing state of the ingestion stream. For example,
+    #   `STARTING` or `INGESTION_IN_PROGRESS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] statistics
+    #   Processing statistics for the ingestion stream, such as the number
+    #   of Amazon S3 objects discovered, ingested, and failed.
+    #   @return [Types::IngestionStatistics]
+    #
+    # @!attribute [rw] revision
+    #   The revision number of the ingestion stream.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the ingestion stream was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the ingestion stream was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reasons
+    #   The reasons that the ingestion stream reached a terminal failure
+    #   state, if applicable.
+    #   @return [Array<Types::IngestionFailureReason>]
+    #
+    # @!attribute [rw] active_alerts
+    #   Active alerts about operational issues that currently affect the
+    #   ingestion stream. Alerts are cleared when the issue is resolved.
+    #   @return [Array<Types::IngestionAlert>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionStreamDetail AWS API Documentation
+    #
+    class IngestionStreamDetail < Struct.new(
+      :ingestion_stream_id,
+      :arn,
+      :collection_id,
+      :ingestion_stream_name,
+      :index_name,
+      :failure_index_name,
+      :source,
+      :role_arn,
+      :status,
+      :state,
+      :statistics,
+      :revision,
+      :created_at,
+      :updated_at,
+      :failure_reasons,
+      :active_alerts)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Amazon S3 source configuration for an ingestion stream.
+    #
+    # @!attribute [rw] sqs_arn
+    #   The Amazon Resource Name (ARN) of the Amazon SQS queue that receives
+    #   Amazon S3 event notifications for the source buckets.
+    #   @return [String]
+    #
+    # @!attribute [rw] buckets
+    #   The configuration for each Amazon S3 bucket that the ingestion
+    #   stream ingests data from.
+    #   @return [Array<Types::StreamBucketConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionStreamS3Source AWS API Documentation
+    #
+    class IngestionStreamS3Source < Struct.new(
+      :sqs_arn,
+      :buckets)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source that an ingestion stream ingests data from.
+    #
+    # @!attribute [rw] s3
+    #   The Amazon S3 source configuration for the ingestion stream.
+    #   @return [Types::IngestionStreamS3Source]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionStreamSource AWS API Documentation
+    #
+    class IngestionStreamSource < Struct.new(
+      :s3)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Summary information about an ingestion stream.
+    #
+    # @!attribute [rw] ingestion_stream_id
+    #   The unique identifier of the ingestion stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the ingestion stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] ingestion_stream_name
+    #   The name of the ingestion stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] index_name
+    #   The name of the index that documents are ingested into.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current lifecycle status of the ingestion stream.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time when the ingestion stream was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the ingestion stream was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/IngestionStreamSummary AWS API Documentation
+    #
+    class IngestionStreamSummary < Struct.new(
+      :ingestion_stream_id,
+      :arn,
+      :ingestion_stream_name,
+      :index_name,
+      :status,
+      :created_at,
+      :updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2355,6 +3059,111 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection to list ingestion jobs for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListIngestionJobs` operation returns a `nextToken`,
+    #   you can include the returned `nextToken` in subsequent
+    #   `ListIngestionJobs` operations, which returns results in the next
+    #   page.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid values are 1–100. If
+    #   you don't specify a value, the default is 100. You can use
+    #   `nextToken` to get the next page of results.
+    #
+    #   A response can contain fewer results than `maxResults`, or no
+    #   results, and still include a `nextToken`. To retrieve all results,
+    #   continue to make the call with the returned `nextToken` until no
+    #   `nextToken` is returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListIngestionJobsRequest AWS API Documentation
+    #
+    class ListIngestionJobsRequest < Struct.new(
+      :collection_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingestion_job_summaries
+    #   Summary information about each ingestion job.
+    #   @return [Array<Types::IngestionJobSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListIngestionJobsResponse AWS API Documentation
+    #
+    class ListIngestionJobsResponse < Struct.new(
+      :ingestion_job_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] collection_id
+    #   The unique identifier of the collection to list ingestion streams
+    #   for.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   If your initial `ListIngestionStreams` operation returns a
+    #   `nextToken`, you can include the returned `nextToken` in subsequent
+    #   `ListIngestionStreams` operations, which returns results in the next
+    #   page.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid values are 1–100. If
+    #   you don't specify a value, the default is 100. You can use
+    #   `nextToken` to get the next page of results.
+    #
+    #   A response can contain fewer results than `maxResults`, or no
+    #   results, and still include a `nextToken`. To retrieve all results,
+    #   continue to make the call with the returned `nextToken` until no
+    #   `nextToken` is returned.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListIngestionStreamsRequest AWS API Documentation
+    #
+    class ListIngestionStreamsRequest < Struct.new(
+      :collection_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] ingestion_stream_summaries
+    #   Summary information about each ingestion stream.
+    #   @return [Array<Types::IngestionStreamSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   When `nextToken` is returned, there are more results available. The
+    #   value of `nextToken` is a unique pagination token for each page.
+    #   Make the call again using the returned token to retrieve the next
+    #   page.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/ListIngestionStreamsResponse AWS API Documentation
+    #
+    class ListIngestionStreamsResponse < Struct.new(
+      :ingestion_stream_summaries,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] type
     #   The type of lifecycle policy.
     #   @return [String]
@@ -2608,6 +3417,31 @@ module Aws::OpenSearchServerless
     #
     class ResourceNotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Processing statistics for the Amazon S3 objects in an ingestion
+    # source.
+    #
+    # @!attribute [rw] objects_discovered
+    #   The number of Amazon S3 objects discovered for ingestion.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] objects_ingested
+    #   The number of Amazon S3 objects successfully ingested.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] objects_failed
+    #   The number of Amazon S3 objects that failed to be ingested.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/S3Statistics AWS API Documentation
+    #
+    class S3Statistics < Struct.new(
+      :objects_discovered,
+      :objects_ingested,
+      :objects_failed)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2896,6 +3730,37 @@ module Aws::OpenSearchServerless
       include Aws::Structure
     end
 
+    # S3 bucket configuration for SQS-driven ingestion. The scan mode
+    # controls only the optional one-time delta scan of existing objects in
+    # this bucket.
+    #
+    # @!attribute [rw] bucket
+    #   The name or Amazon Resource Name (ARN) of the Amazon S3 bucket to
+    #   ingest data from.
+    #   @return [String]
+    #
+    # @!attribute [rw] bucket_owner_account_id
+    #   The AWS account ID that owns the S3 bucket. Optional. If omitted,
+    #   the control plane derives it from the account segment of sqsArn.
+    #   @return [String]
+    #
+    # @!attribute [rw] initial_scan
+    #   Specifies whether to perform a one-time scan of the objects that
+    #   already exist in the bucket before the stream begins processing
+    #   Amazon S3 event notifications. If `DISABLED`, only new objects are
+    #   ingested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearchserverless-2021-11-01/StreamBucketConfig AWS API Documentation
+    #
+    class StreamBucketConfig < Struct.new(
+      :bucket,
+      :bucket_owner_account_id,
+      :initial_scan)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A map of key-value pairs associated to an OpenSearch Serverless
     # resource.
     #
@@ -3078,6 +3943,12 @@ module Aws::OpenSearchServerless
     #   collection.
     #   @return [Types::VectorOptions]
     #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the Amazon Web Services Key
+    #   Management Service (Amazon Web Services KMS) key used to encrypt the
+    #   collection.
+    #   @return [String]
+    #
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the collection.
     #   @return [String]
@@ -3104,6 +3975,7 @@ module Aws::OpenSearchServerless
       :type,
       :description,
       :vector_options,
+      :kms_key_arn,
       :arn,
       :created_date,
       :last_modified_date,
@@ -3172,8 +4044,9 @@ module Aws::OpenSearchServerless
     #   @return [String]
     #
     # @!attribute [rw] capacity_limits
-    #   Updated capacity limits for the collection group, in OpenSearch
-    #   Compute Units (OCUs).
+    #   The updated capacity limits for the collection group, in OpenSearch
+    #   Compute Units (OCUs). Updates to capacity limits are not
+    #   incremental. Any field not specified resets to its default value.
     #   @return [Types::CollectionGroupCapacityLimits]
     #
     # @!attribute [rw] client_token
@@ -3225,6 +4098,10 @@ module Aws::OpenSearchServerless
     #   collection. When set to `ENABLED`, the collection cannot be deleted.
     #   @return [String]
     #
+    # @!attribute [rw] encryption_config
+    #   Encryption settings for a collection.
+    #   @return [Types::EncryptionConfig]
+    #
     # @!attribute [rw] client_token
     #   Unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -3240,6 +4117,7 @@ module Aws::OpenSearchServerless
       :description,
       :vector_options,
       :deletion_protection,
+      :encryption_config,
       :client_token)
       SENSITIVE = []
       include Aws::Structure

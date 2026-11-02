@@ -11,55 +11,55 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AttributeDoesNotExist < ::Aws::Errors::ServiceError
+      class AttributeDoesNotExist < ServiceError
         def box_usage: () -> ::String
       end
-      class DuplicateItemName < ::Aws::Errors::ServiceError
+      class DuplicateItemName < ServiceError
         def box_usage: () -> ::String
       end
-      class InvalidNextToken < ::Aws::Errors::ServiceError
+      class InvalidNextToken < ServiceError
         def box_usage: () -> ::String
       end
-      class InvalidNumberPredicates < ::Aws::Errors::ServiceError
+      class InvalidNumberPredicates < ServiceError
         def box_usage: () -> ::String
       end
-      class InvalidNumberValueTests < ::Aws::Errors::ServiceError
+      class InvalidNumberValueTests < ServiceError
         def box_usage: () -> ::String
       end
-      class InvalidParameterValue < ::Aws::Errors::ServiceError
+      class InvalidParameterValue < ServiceError
         def box_usage: () -> ::String
       end
-      class InvalidQueryExpression < ::Aws::Errors::ServiceError
+      class InvalidQueryExpression < ServiceError
         def box_usage: () -> ::String
       end
-      class MissingParameter < ::Aws::Errors::ServiceError
+      class MissingParameter < ServiceError
         def box_usage: () -> ::String
       end
-      class NoSuchDomain < ::Aws::Errors::ServiceError
+      class NoSuchDomain < ServiceError
         def box_usage: () -> ::String
       end
-      class NumberDomainAttributesExceeded < ::Aws::Errors::ServiceError
+      class NumberDomainAttributesExceeded < ServiceError
         def box_usage: () -> ::String
       end
-      class NumberDomainBytesExceeded < ::Aws::Errors::ServiceError
+      class NumberDomainBytesExceeded < ServiceError
         def box_usage: () -> ::String
       end
-      class NumberDomainsExceeded < ::Aws::Errors::ServiceError
+      class NumberDomainsExceeded < ServiceError
         def box_usage: () -> ::String
       end
-      class NumberItemAttributesExceeded < ::Aws::Errors::ServiceError
+      class NumberItemAttributesExceeded < ServiceError
         def box_usage: () -> ::String
       end
-      class NumberSubmittedAttributesExceeded < ::Aws::Errors::ServiceError
+      class NumberSubmittedAttributesExceeded < ServiceError
         def box_usage: () -> ::String
       end
-      class NumberSubmittedItemsExceeded < ::Aws::Errors::ServiceError
+      class NumberSubmittedItemsExceeded < ServiceError
         def box_usage: () -> ::String
       end
-      class RequestTimeout < ::Aws::Errors::ServiceError
+      class RequestTimeout < ServiceError
         def box_usage: () -> ::String
       end
-      class TooManyRequestedAttributes < ::Aws::Errors::ServiceError
+      class TooManyRequestedAttributes < ServiceError
         def box_usage: () -> ::String
       end
     end

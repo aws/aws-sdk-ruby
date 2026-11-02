@@ -37,6 +37,8 @@ module Aws::NetworkManager
     AttachmentErrorList = Shapes::ListShape.new(name: 'AttachmentErrorList')
     AttachmentId = Shapes::StringShape.new(name: 'AttachmentId')
     AttachmentList = Shapes::ListShape.new(name: 'AttachmentList')
+    AttachmentNatConfiguration = Shapes::StructureShape.new(name: 'AttachmentNatConfiguration')
+    AttachmentNatConfigurationList = Shapes::ListShape.new(name: 'AttachmentNatConfigurationList')
     AttachmentRoutingPolicyAssociationSummary = Shapes::StructureShape.new(name: 'AttachmentRoutingPolicyAssociationSummary')
     AttachmentRoutingPolicyAssociationsList = Shapes::ListShape.new(name: 'AttachmentRoutingPolicyAssociationsList')
     AttachmentState = Shapes::StringShape.new(name: 'AttachmentState')
@@ -44,6 +46,7 @@ module Aws::NetworkManager
     Bandwidth = Shapes::StructureShape.new(name: 'Bandwidth')
     BgpOptions = Shapes::StructureShape.new(name: 'BgpOptions')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    BoxedBoolean = Shapes::BooleanShape.new(name: 'BoxedBoolean')
     ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
     ChangeSetState = Shapes::StringShape.new(name: 'ChangeSetState')
     ChangeStatus = Shapes::StringShape.new(name: 'ChangeStatus')
@@ -272,6 +275,8 @@ module Aws::NetworkManager
     LinkIdList = Shapes::ListShape.new(name: 'LinkIdList')
     LinkList = Shapes::ListShape.new(name: 'LinkList')
     LinkState = Shapes::StringShape.new(name: 'LinkState')
+    ListAttachmentNatConfigurationsRequest = Shapes::StructureShape.new(name: 'ListAttachmentNatConfigurationsRequest')
+    ListAttachmentNatConfigurationsResponse = Shapes::StructureShape.new(name: 'ListAttachmentNatConfigurationsResponse')
     ListAttachmentRoutingPolicyAssociationsRequest = Shapes::StructureShape.new(name: 'ListAttachmentRoutingPolicyAssociationsRequest')
     ListAttachmentRoutingPolicyAssociationsResponse = Shapes::StructureShape.new(name: 'ListAttachmentRoutingPolicyAssociationsResponse')
     ListAttachmentsRequest = Shapes::StructureShape.new(name: 'ListAttachmentsRequest')
@@ -295,6 +300,14 @@ module Aws::NetworkManager
     Location = Shapes::StructureShape.new(name: 'Location')
     Long = Shapes::IntegerShape.new(name: 'Long')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
+    NatGatewaySupportState = Shapes::StringShape.new(name: 'NatGatewaySupportState')
+    NatGatewaySupportValue = Shapes::StringShape.new(name: 'NatGatewaySupportValue')
+    NatRule = Shapes::StructureShape.new(name: 'NatRule')
+    NatRuleList = Shapes::ListShape.new(name: 'NatRuleList')
+    NatRuleNumber = Shapes::IntegerShape.new(name: 'NatRuleNumber')
+    NatRuleRequest = Shapes::StructureShape.new(name: 'NatRuleRequest')
+    NatRuleRequestList = Shapes::ListShape.new(name: 'NatRuleRequestList')
+    NatRuleState = Shapes::StringShape.new(name: 'NatRuleState')
     NetworkFunctionGroup = Shapes::StructureShape.new(name: 'NetworkFunctionGroup')
     NetworkFunctionGroupList = Shapes::ListShape.new(name: 'NetworkFunctionGroupList')
     NetworkFunctionGroupName = Shapes::StringShape.new(name: 'NetworkFunctionGroupName')
@@ -420,6 +433,8 @@ module Aws::NetworkManager
     TunnelProtocol = Shapes::StringShape.new(name: 'TunnelProtocol')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdateAttachmentNatConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateAttachmentNatConfigurationRequest')
+    UpdateAttachmentNatConfigurationResponse = Shapes::StructureShape.new(name: 'UpdateAttachmentNatConfigurationResponse')
     UpdateConnectionRequest = Shapes::StructureShape.new(name: 'UpdateConnectionRequest')
     UpdateConnectionResponse = Shapes::StructureShape.new(name: 'UpdateConnectionResponse')
     UpdateCoreNetworkRequest = Shapes::StructureShape.new(name: 'UpdateCoreNetworkRequest')
@@ -517,6 +532,8 @@ module Aws::NetworkManager
     Attachment.add_member(:attachment_policy_rule_number, Shapes::ShapeRef.new(shape: Integer, location_name: "AttachmentPolicyRuleNumber"))
     Attachment.add_member(:segment_name, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "SegmentName"))
     Attachment.add_member(:network_function_group_name, Shapes::ShapeRef.new(shape: NetworkFunctionGroupName, location_name: "NetworkFunctionGroupName"))
+    Attachment.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: NatGatewaySupportState, location_name: "NatGatewaySupport"))
+    Attachment.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "NatSystemRouteSupport"))
     Attachment.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     Attachment.add_member(:proposed_segment_change, Shapes::ShapeRef.new(shape: ProposedSegmentChange, location_name: "ProposedSegmentChange"))
     Attachment.add_member(:proposed_network_function_group_change, Shapes::ShapeRef.new(shape: ProposedNetworkFunctionGroupChange, location_name: "ProposedNetworkFunctionGroupChange"))
@@ -534,6 +551,14 @@ module Aws::NetworkManager
     AttachmentErrorList.member = Shapes::ShapeRef.new(shape: AttachmentError)
 
     AttachmentList.member = Shapes::ShapeRef.new(shape: Attachment)
+
+    AttachmentNatConfiguration.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
+    AttachmentNatConfiguration.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: NatGatewaySupportState, location_name: "NatGatewaySupport"))
+    AttachmentNatConfiguration.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "NatSystemRouteSupport"))
+    AttachmentNatConfiguration.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: NatRuleList, location_name: "NatGatewayRules"))
+    AttachmentNatConfiguration.struct_class = Types::AttachmentNatConfiguration
+
+    AttachmentNatConfigurationList.member = Shapes::ShapeRef.new(shape: AttachmentNatConfiguration)
 
     AttachmentRoutingPolicyAssociationSummary.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
     AttachmentRoutingPolicyAssociationSummary.add_member(:pending_routing_policies, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "PendingRoutingPolicies"))
@@ -793,6 +818,8 @@ module Aws::NetworkManager
     CreateConnectAttachmentRequest.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, required: true, location_name: "EdgeLocation"))
     CreateConnectAttachmentRequest.add_member(:transport_attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location_name: "TransportAttachmentId"))
     CreateConnectAttachmentRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
+    CreateConnectAttachmentRequest.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: NatGatewaySupportValue, location_name: "NatGatewaySupport"))
+    CreateConnectAttachmentRequest.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: NatRuleRequestList, location_name: "NatGatewayRules"))
     CreateConnectAttachmentRequest.add_member(:options, Shapes::ShapeRef.new(shape: ConnectAttachmentOptions, required: true, location_name: "Options"))
     CreateConnectAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateConnectAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
@@ -866,6 +893,9 @@ module Aws::NetworkManager
     CreateDirectConnectGatewayAttachmentRequest.add_member(:direct_connect_gateway_arn, Shapes::ShapeRef.new(shape: DirectConnectGatewayArn, required: true, location_name: "DirectConnectGatewayArn"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:edge_locations, Shapes::ShapeRef.new(shape: ExternalRegionCodeList, required: true, location_name: "EdgeLocations"))
+    CreateDirectConnectGatewayAttachmentRequest.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: NatGatewaySupportValue, location_name: "NatGatewaySupport"))
+    CreateDirectConnectGatewayAttachmentRequest.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "NatSystemRouteSupport"))
+    CreateDirectConnectGatewayAttachmentRequest.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: NatRuleRequestList, location_name: "NatGatewayRules"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateDirectConnectGatewayAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateDirectConnectGatewayAttachmentRequest.struct_class = Types::CreateDirectConnectGatewayAttachmentRequest
@@ -904,6 +934,9 @@ module Aws::NetworkManager
     CreateSiteToSiteVpnAttachmentRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location_name: "CoreNetworkId"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:vpn_connection_arn, Shapes::ShapeRef.new(shape: VpnConnectionArn, required: true, location_name: "VpnConnectionArn"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
+    CreateSiteToSiteVpnAttachmentRequest.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: NatGatewaySupportValue, location_name: "NatGatewaySupport"))
+    CreateSiteToSiteVpnAttachmentRequest.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "NatSystemRouteSupport"))
+    CreateSiteToSiteVpnAttachmentRequest.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: NatRuleRequestList, location_name: "NatGatewayRules"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateSiteToSiteVpnAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateSiteToSiteVpnAttachmentRequest.struct_class = Types::CreateSiteToSiteVpnAttachmentRequest
@@ -935,6 +968,8 @@ module Aws::NetworkManager
     CreateVpcAttachmentRequest.add_member(:subnet_arns, Shapes::ShapeRef.new(shape: SubnetArnList, required: true, location_name: "SubnetArns"))
     CreateVpcAttachmentRequest.add_member(:options, Shapes::ShapeRef.new(shape: VpcOptions, location_name: "Options"))
     CreateVpcAttachmentRequest.add_member(:routing_policy_label, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "RoutingPolicyLabel"))
+    CreateVpcAttachmentRequest.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: NatGatewaySupportValue, location_name: "NatGatewaySupport"))
+    CreateVpcAttachmentRequest.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: NatRuleRequestList, location_name: "NatGatewayRules"))
     CreateVpcAttachmentRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreateVpcAttachmentRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
     CreateVpcAttachmentRequest.struct_class = Types::CreateVpcAttachmentRequest
@@ -1292,13 +1327,17 @@ module Aws::NetworkManager
     GetNetworkRoutesRequest.add_member(:states, Shapes::ShapeRef.new(shape: RouteStateList, location_name: "States"))
     GetNetworkRoutesRequest.add_member(:types, Shapes::ShapeRef.new(shape: RouteTypeList, location_name: "Types"))
     GetNetworkRoutesRequest.add_member(:destination_filters, Shapes::ShapeRef.new(shape: FilterMap, location_name: "DestinationFilters"))
+    GetNetworkRoutesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetNetworkRoutesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetNetworkRoutesRequest.struct_class = Types::GetNetworkRoutesRequest
 
     GetNetworkRoutesResponse.add_member(:route_table_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "RouteTableArn"))
     GetNetworkRoutesResponse.add_member(:core_network_segment_edge, Shapes::ShapeRef.new(shape: CoreNetworkSegmentEdgeIdentifier, location_name: "CoreNetworkSegmentEdge"))
+    GetNetworkRoutesResponse.add_member(:core_network_network_function_group, Shapes::ShapeRef.new(shape: CoreNetworkNetworkFunctionGroupIdentifier, location_name: "CoreNetworkNetworkFunctionGroup"))
     GetNetworkRoutesResponse.add_member(:route_table_type, Shapes::ShapeRef.new(shape: RouteTableType, location_name: "RouteTableType"))
     GetNetworkRoutesResponse.add_member(:route_table_timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "RouteTableTimestamp"))
     GetNetworkRoutesResponse.add_member(:network_routes, Shapes::ShapeRef.new(shape: NetworkRouteList, location_name: "NetworkRoutes"))
+    GetNetworkRoutesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     GetNetworkRoutesResponse.struct_class = Types::GetNetworkRoutesResponse
 
     GetNetworkTelemetryRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
@@ -1424,6 +1463,17 @@ module Aws::NetworkManager
 
     LinkList.member = Shapes::ShapeRef.new(shape: Link)
 
+    ListAttachmentNatConfigurationsRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, location_name: "CoreNetworkId"))
+    ListAttachmentNatConfigurationsRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
+    ListAttachmentNatConfigurationsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterMap, location_name: "Filters"))
+    ListAttachmentNatConfigurationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListAttachmentNatConfigurationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAttachmentNatConfigurationsRequest.struct_class = Types::ListAttachmentNatConfigurationsRequest
+
+    ListAttachmentNatConfigurationsResponse.add_member(:attachment_nat_configurations, Shapes::ShapeRef.new(shape: AttachmentNatConfigurationList, required: true, location_name: "AttachmentNatConfigurations"))
+    ListAttachmentNatConfigurationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListAttachmentNatConfigurationsResponse.struct_class = Types::ListAttachmentNatConfigurationsResponse
+
     ListAttachmentRoutingPolicyAssociationsRequest.add_member(:core_network_id, Shapes::ShapeRef.new(shape: CoreNetworkId, required: true, location: "uri", location_name: "coreNetworkId"))
     ListAttachmentRoutingPolicyAssociationsRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location: "querystring", location_name: "attachmentId"))
     ListAttachmentRoutingPolicyAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxResults"))
@@ -1479,6 +1529,10 @@ module Aws::NetworkManager
     ListCoreNetworkRoutingInformationRequest.add_member(:segment_name, Shapes::ShapeRef.new(shape: ConstrainedString, required: true, location_name: "SegmentName"))
     ListCoreNetworkRoutingInformationRequest.add_member(:edge_location, Shapes::ShapeRef.new(shape: ExternalRegionCode, required: true, location_name: "EdgeLocation"))
     ListCoreNetworkRoutingInformationRequest.add_member(:next_hop_filters, Shapes::ShapeRef.new(shape: FilterMap, location_name: "NextHopFilters"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:exact_prefix_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "ExactPrefixMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:longest_prefix_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "LongestPrefixMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:subnet_of_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "SubnetOfMatches"))
+    ListCoreNetworkRoutingInformationRequest.add_member(:supernet_of_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "SupernetOfMatches"))
     ListCoreNetworkRoutingInformationRequest.add_member(:local_preference_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "LocalPreferenceMatches"))
     ListCoreNetworkRoutingInformationRequest.add_member(:exact_as_path_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "ExactAsPathMatches"))
     ListCoreNetworkRoutingInformationRequest.add_member(:med_matches, Shapes::ShapeRef.new(shape: ConstrainedStringList, location_name: "MedMatches"))
@@ -1529,6 +1583,21 @@ module Aws::NetworkManager
     Location.add_member(:latitude, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Latitude"))
     Location.add_member(:longitude, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Longitude"))
     Location.struct_class = Types::Location
+
+    NatRule.add_member(:rule_number, Shapes::ShapeRef.new(shape: NatRuleNumber, location_name: "RuleNumber"))
+    NatRule.add_member(:match_source_cidr, Shapes::ShapeRef.new(shape: IPAddress, location_name: "MatchSourceCidr"))
+    NatRule.add_member(:nat_cidr, Shapes::ShapeRef.new(shape: IPAddress, location_name: "NatCidr"))
+    NatRule.add_member(:state, Shapes::ShapeRef.new(shape: NatRuleState, location_name: "State"))
+    NatRule.struct_class = Types::NatRule
+
+    NatRuleList.member = Shapes::ShapeRef.new(shape: NatRule)
+
+    NatRuleRequest.add_member(:rule_number, Shapes::ShapeRef.new(shape: NatRuleNumber, required: true, location_name: "RuleNumber"))
+    NatRuleRequest.add_member(:match_source_cidr, Shapes::ShapeRef.new(shape: IPAddress, required: true, location_name: "MatchSourceCidr"))
+    NatRuleRequest.add_member(:nat_cidr, Shapes::ShapeRef.new(shape: IPAddress, required: true, location_name: "NatCidr"))
+    NatRuleRequest.struct_class = Types::NatRuleRequest
+
+    NatRuleRequestList.member = Shapes::ShapeRef.new(shape: NatRuleRequest)
 
     NetworkFunctionGroup.add_member(:name, Shapes::ShapeRef.new(shape: ConstrainedString, location_name: "Name"))
     NetworkFunctionGroup.struct_class = Types::NetworkFunctionGroup
@@ -1894,6 +1963,19 @@ module Aws::NetworkManager
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdateAttachmentNatConfigurationRequest.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, required: true, location: "uri", location_name: "attachmentId"))
+    UpdateAttachmentNatConfigurationRequest.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: NatGatewaySupportValue, location_name: "NatGatewaySupport"))
+    UpdateAttachmentNatConfigurationRequest.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "NatSystemRouteSupport"))
+    UpdateAttachmentNatConfigurationRequest.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: NatRuleRequestList, location_name: "NatGatewayRules"))
+    UpdateAttachmentNatConfigurationRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    UpdateAttachmentNatConfigurationRequest.struct_class = Types::UpdateAttachmentNatConfigurationRequest
+
+    UpdateAttachmentNatConfigurationResponse.add_member(:attachment_id, Shapes::ShapeRef.new(shape: AttachmentId, location_name: "AttachmentId"))
+    UpdateAttachmentNatConfigurationResponse.add_member(:nat_gateway_support, Shapes::ShapeRef.new(shape: NatGatewaySupportState, location_name: "NatGatewaySupport"))
+    UpdateAttachmentNatConfigurationResponse.add_member(:nat_system_route_support, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "NatSystemRouteSupport"))
+    UpdateAttachmentNatConfigurationResponse.add_member(:nat_gateway_rules, Shapes::ShapeRef.new(shape: NatRuleList, location_name: "NatGatewayRules"))
+    UpdateAttachmentNatConfigurationResponse.struct_class = Types::UpdateAttachmentNatConfigurationResponse
 
     UpdateConnectionRequest.add_member(:global_network_id, Shapes::ShapeRef.new(shape: GlobalNetworkId, required: true, location: "uri", location_name: "globalNetworkId"))
     UpdateConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location: "uri", location_name: "connectionId"))
@@ -2865,6 +2947,12 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:get_network_telemetry, Seahorse::Model::Operation.new.tap do |o|
@@ -3019,6 +3107,25 @@ module Aws::NetworkManager
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:list_attachment_nat_configurations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListAttachmentNatConfigurations"
+        o.http_method = "POST"
+        o.http_request_uri = "/nat-configurations"
+        o.input = Shapes::ShapeRef.new(shape: ListAttachmentNatConfigurationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListAttachmentNatConfigurationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:list_attachment_routing_policy_associations, Seahorse::Model::Operation.new.tap do |o|
@@ -3341,6 +3448,21 @@ module Aws::NetworkManager
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
+      api.add_operation(:update_attachment_nat_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateAttachmentNatConfiguration"
+        o.http_method = "PATCH"
+        o.http_request_uri = "/attachments/{attachmentId}/nat-configuration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateAttachmentNatConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateAttachmentNatConfigurationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)

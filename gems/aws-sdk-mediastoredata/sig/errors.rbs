@@ -11,16 +11,16 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ContainerNotFoundException < ::Aws::Errors::ServiceError
+      class ContainerNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class InternalServerError < ::Aws::Errors::ServiceError
+      class InternalServerError < ServiceError
         def message: () -> ::String
       end
-      class ObjectNotFoundException < ::Aws::Errors::ServiceError
+      class ObjectNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class RequestedRangeNotSatisfiableException < ::Aws::Errors::ServiceError
+      class RequestedRangeNotSatisfiableException < ServiceError
         def message: () -> ::String
       end
     end

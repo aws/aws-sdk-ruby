@@ -1047,7 +1047,7 @@ module Aws::DevOpsAgent
     class ListServicesInput
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
-      attr_accessor filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
+      attr_accessor filter_service_type: ("github" | "slack" | "azure" | "azuredevops" | "msteams" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
       SENSITIVE: []
     end
 
@@ -1227,6 +1227,25 @@ module Aws::DevOpsAgent
     class MCPToolDetail
       attr_accessor name: ::String
       attr_accessor tool_classification: ("READ_ONLY" | "MUTATIVE" | "DESTRUCTIVE")
+      SENSITIVE: []
+    end
+
+    class MSTeamsChannel
+      attr_accessor channel_name: ::String
+      attr_accessor channel_id: ::String
+      SENSITIVE: []
+    end
+
+    class MSTeamsConfiguration
+      attr_accessor team_id: ::String
+      attr_accessor team_name: ::String
+      attr_accessor transmission_target: Types::MSTeamsTransmissionTarget
+      SENSITIVE: []
+    end
+
+    class MSTeamsTransmissionTarget
+      attr_accessor ops_oncall_target: Types::MSTeamsChannel
+      attr_accessor ops_sre_target: Types::MSTeamsChannel
       SENSITIVE: []
     end
 
@@ -1535,7 +1554,7 @@ module Aws::DevOpsAgent
 
     class RegisteredService
       attr_accessor service_id: ::String
-      attr_accessor service_type: ("github" | "slack" | "azure" | "azuredevops" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
+      attr_accessor service_type: ("github" | "slack" | "azure" | "azuredevops" | "msteams" | "dynatrace" | "servicenow" | "pagerduty" | "gitlab" | "eventChannel" | "mcpservernewrelic" | "mcpservergrafana" | "mcpserverdatadog" | "mcpserver" | "mcpserversplunk" | "azureidentity" | "mcpserversigv4" | "remoteagent" | "remoteagentsigv4")
       attr_accessor name: ::String
       attr_accessor accessible_resources: ::Array[untyped]
       attr_accessor additional_service_details: Types::AdditionalServiceDetails
@@ -1810,6 +1829,7 @@ module Aws::DevOpsAgent
       attr_accessor mcpserversigv4: Types::MCPServerSigV4Configuration
       attr_accessor remoteagent: Types::RemoteAgentConfiguration
       attr_accessor remoteagentsigv4: Types::RemoteAgentSigV4Configuration
+      attr_accessor msteams: Types::MSTeamsConfiguration
       attr_accessor release_management: Types::ReleaseManagementConfiguration
       attr_accessor unknown: untyped
       SENSITIVE: []
@@ -1851,6 +1871,8 @@ module Aws::DevOpsAgent
       class Remoteagent < ServiceConfiguration
       end
       class Remoteagentsigv4 < ServiceConfiguration
+      end
+      class Msteams < ServiceConfiguration
       end
       class ReleaseManagement < ServiceConfiguration
       end

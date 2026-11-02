@@ -139,6 +139,7 @@
     "ListTagsForResource": "<p>Lists the tags associated with the specified resource.</p> <note> <p>This feature is currently available only for AgentCore Runtime, Browser, Browser Profile, Code Interpreter tool, and Gateway.</p> </note>",
     "ListWorkloadIdentities": "<p>Lists all workload identities in your account.</p>",
     "PutResourcePolicy": "<p>Creates or updates a resource-based policy for a resource with the specified resourceArn.</p> <note> <p>This feature is currently available only for AgentCore Runtime and Gateway.</p> </note>",
+    "ResetTokenVaultKeyMaterial": "<p>Resets the key material for a token vault whose customer managed KMS key has been deleted, and re-encrypts the token vault with an Amazon Web Services managed key so that you can use the token vault again.</p> <important> <p>This operation can't be undone. The reset permanently deletes the OAuth2 access tokens and refresh tokens stored in the token vault, including tokens obtained through all supported flows. After the reset, your agents must complete these flows again to get new tokens, and for user-delegated flows your users must authorize access again. The reset doesn't delete your credential providers or their configuration.</p> </important> <p>You can reset a token vault only if its customer managed key has been deleted. If the key still exists, including when it's disabled or scheduled for deletion, this operation returns a <code>ValidationException</code>. To use the token vault again, enable the key or cancel its scheduled deletion in KMS. To switch to a different key, use <code>SetTokenVaultCMK</code>.</p>",
     "RotatePaymentConnectorCredentials": "<p>Replaces the service-managed credentials of a payment connector with newly issued credentials.</p> <p>Use this operation only for payment connectors with a <code>provisionMode</code> of <code>QUICK_CREATE</code>. For payment connectors with a <code>provisionMode</code> of <code>MANUAL</code>, call <code>UpdatePaymentCredentialProvider</code> instead after rotating credentials with the payment provider directly.</p> <p>The rotation finishes before the response is returned, and only one rotation runs at a time for a given payment connector. When it succeeds, the new credential is in effect and the payment connector stays in the <code>READY</code> state. When it fails, an error is returned, the payment connector and its existing credential are left unchanged, and you can retry the request.</p> <p>Rotation replaces the credential on the connector's credential provider, so every payment connector that uses that provider is affected. Replace any copy of the previous credential that you use outside AgentCore.</p>",
     "SetTokenVaultCMK": "<p>Sets the customer master key (CMK) for a token vault.</p>",
     "StartPolicyGeneration": "<p>Initiates the AI-powered generation of Dogwood policies from natural language descriptions within the AgentCore Policy system. This feature enables both technical and non-technical users to create policies by describing their authorization requirements in plain English, which is then automatically translated into formal Dogwood policy statements. The generation process analyzes the natural language input along with the Gateway's tool context to produce validated policy options. Generated policy assets are automatically deleted after 7 days, so you should review and create policies from the generated assets within this timeframe. Once created, policies are permanent and not subject to this expiration. Generated policies should be reviewed and tested in log-only mode before deploying to production. Use this when you want to describe policy intent naturally rather than learning Dogwood syntax, though generated policies may require refinement for complex scenarios.</p>",
@@ -155,7 +156,7 @@
     "UpdateDataset": "<p> Updates a dataset's metadata. Synchronous operation. Only provided fields are updated; omitted fields remain unchanged. To modify dataset content, use <code>AddDatasetExamples</code>, <code>UpdateDatasetExamples</code>, or <code>DeleteDatasetExamples</code>. </p>",
     "UpdateDatasetExamples": "<p> Updates multiple existing examples in-place on DRAFT. All examples are validated against the dataset's schema type before any writes occur. If any example fails validation, the entire batch is rejected (all-or-nothing semantics). </p>",
     "UpdateEvaluator": "<p> Updates a custom evaluator's configuration, description, or evaluation level. Built-in evaluators cannot be updated. The evaluator must not be locked for modification. </p>",
-    "UpdateGateway": "<p>Updates an existing gateway.</p>",
+    "UpdateGateway": "<p>Updates an existing gateway.</p> <p>Replaces the entire gateway configuration. Any optional field that you omit, including fields in <code>protocolConfiguration</code>, is reset. For information about retrieving the current configuration, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_GetGateway.html\">GetGateway</a>.</p>",
     "UpdateGatewayRateLimit": "<p>Updates the entries of a gateway rate limit. The dimension keys are immutable after creation.</p>",
     "UpdateGatewayRule": "<p>Updates a gateway rule's priority, conditions, actions, or description.</p>",
     "UpdateGatewayTarget": "<p>Updates an existing gateway target.</p> <p>You cannot update a target that is in a pending authorization state (<code>CREATE_PENDING_AUTH</code>, <code>UPDATE_PENDING_AUTH</code>, or <code>SYNCHRONIZE_PENDING_AUTH</code>). Wait for the authorization to complete or fail before updating the target.</p>",
@@ -450,6 +451,20 @@
       "base": null,
       "refs": {
         "CustomJWTAuthorizerConfiguration$allowedClients": "<p>Represents individual client IDs that are validated in the incoming JWT token validation process.</p>"
+      }
+    },
+    "AllowedPort": {
+      "base": "<p>A port or port range that is reachable through the runtime's session URL. Specify exactly one of <code>port</code> or <code>portRange</code>.</p>",
+      "refs": {
+        "AllowedPorts$member": null
+      }
+    },
+    "AllowedPorts": {
+      "base": "<p>Additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. The list can contain up to five non-overlapping entries.</p>",
+      "refs": {
+        "CreateAgentRuntimeRequest$allowedPorts": "<p>The additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. Specify one to five non-overlapping entries, each containing either a single port or an inclusive port range. Ports must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>.</p>",
+        "GetAgentRuntimeResponse$allowedPorts": "<p>The additional ports on the AgentCore Runtime that are reachable through the runtime's session URL.</p>",
+        "UpdateAgentRuntimeRequest$allowedPorts": "<p>The updated additional ports on the AgentCore Runtime that are reachable through the runtime's session URL. Specify one to five non-overlapping entries, each containing either a single port or an inclusive port range. Ports must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>.</p>"
       }
     },
     "AllowedQueryParameters": {
@@ -773,7 +788,7 @@
         "FilterValue$booleanValue": "<p> The boolean value for true/false filtering conditions. </p>",
         "GetEvaluatorResponse$lockedForModification": "<p> Whether the evaluator is locked for modification due to being referenced by active online evaluation configurations. </p>",
         "InterceptorInputConfiguration$passRequestHeaders": "<p>Indicates whether to pass request headers as input into the interceptor. When set to true, request headers will be passed.</p>",
-        "MCPGatewayConfiguration$disableMcpListToolsPagination": "<p>Specifies whether pagination is disabled for the Model Context Protocol (MCP) <code>tools/list</code> operation. When set to <code>true</code>, the gateway returns the complete list of tools in a single response without a pagination cursor. When set to <code>false</code> or omitted, the gateway returns tools in paginated responses.</p>",
+        "MCPGatewayConfiguration$disableMcpListToolsPagination": "<p>Specifies whether the gateway disables pagination for the Model Context Protocol (MCP) <code>tools/list</code> operation. When set to <code>true</code>, the gateway returns the complete list of tools in a single response without a pagination cursor. When set to <code>false</code> or omitted, the gateway returns tools in paginated responses. For information about changing this value on an existing gateway, see <a href=\"https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_UpdateGateway.html\">UpdateGateway</a>.</p>",
         "ProviderPrefix$strip": "<p>Whether clients can omit the provider prefix from model IDs. If <code>true</code>, the gateway accepts model IDs without the prefix and restores the full prefixed form before forwarding to the provider. The default is <code>false</code>.</p>",
         "RecordingConfig$enabled": "<p>Indicates whether recording is enabled for the browser. When set to true, browser sessions are recorded.</p>",
         "RootVolumeConfiguration$encrypted": "<p>Specifies whether to encrypt the volume. Encrypted volumes can be attached only to instances that support Amazon EBS encryption. If you create a volume from a snapshot, you cannot specify an encryption value.</p>",
@@ -1064,6 +1079,7 @@
     "CategoricalScaleDefinitions": {
       "base": null,
       "refs": {
+        "DimensionRatingScale$categorical": "<p> The categorical rating scale with named categories and definitions for qualitative evaluation of the dimension. </p>",
         "RatingScale$categorical": "<p> The categorical rating scale with named categories and definitions for qualitative evaluation. </p>"
       }
     },
@@ -1127,6 +1143,18 @@
         "CreateCodeInterpreterRequest$certificates": "<p>A list of certificates to install in the code interpreter.</p>",
         "GetBrowserResponse$certificates": "<p>The list of certificates configured for the browser.</p>",
         "GetCodeInterpreterResponse$certificates": "<p>The list of certificates configured for the code interpreter.</p>"
+      }
+    },
+    "CircuitBreakerConfiguration": {
+      "base": "<p>Specifies whether the circuit breaker monitors failures for the targets in a fallback chain.</p>",
+      "refs": {
+        "Fallback$circuitBreaker": "<p>Specifies whether the gateway temporarily stops sending your requests to a failing target. The circuit breaker tracks each combination of target and model separately. With the circuit breaker enabled, the gateway skips one or more targets and models that fail repeatedly, and your requests go to the next target in the chain. The gateway always tries the last remaining target in the chain. The gateway enables the circuit breaker by default.</p>"
+      }
+    },
+    "CircuitBreakerMode": {
+      "base": null,
+      "refs": {
+        "CircuitBreakerConfiguration$mode": "<p>Specifies whether you want the circuit breaker turned on. To turn it off, set this value to <code>DISABLED</code>. The default is <code>ENABLED</code>.</p>"
       }
     },
     "ClaimMatchOperatorType": {
@@ -1430,12 +1458,20 @@
         "GetCapacityProviderOutput$computeConfiguration": "<p>The compute configuration for the capacity provider.</p>"
       }
     },
+    "ConcreteModelId": {
+      "base": null,
+      "refs": {
+        "FallbackTarget$model": "<p>The model ID to send to this fallback target. If you don't specify a model, the gateway sends the model from the original request.</p>",
+        "StaticRoute$model": "<p>The model ID to send to the target. Supported only for inference targets. If you don't specify a model, the gateway sends the model from the original request.</p>",
+        "TargetTrafficSplitEntry$model": "<p>The model ID to send to the target for this variant. Supported only for inference targets. If you don't specify a model, the gateway sends the model from the original request.</p>"
+      }
+    },
     "ConcurrentModificationException": {
       "base": "<p>Exception thrown when a resource is modified concurrently by multiple requests.</p>",
       "refs": {}
     },
     "Condition": {
-      "base": "<p>A condition that determines when a gateway rule applies. Conditions can match on principals or request paths.</p>",
+      "base": "<p>A condition that determines when a gateway rule applies. Conditions can match on principals, request paths, or the requested model.</p>",
       "refs": {
         "Conditions$member": null
       }
@@ -2965,6 +3001,12 @@
         "UpdateGatewayRateLimitResponse$dimensionKeys": "<p>The ordered list of dimension key names that define the scope of this rate limit.</p>"
       }
     },
+    "DimensionRatingScale": {
+      "base": "<p> The rating scale for one dimension of an LLM-as-a-judge evaluator, supporting either a numerical or a categorical scale. </p>",
+      "refs": {
+        "EvaluationDimension$dimensionRatingScale": "<p> The rating scale for this dimension, which can be numerical or categorical. A dimension's rating scale cannot itself be multi-dimensional. </p>"
+      }
+    },
     "DimensionValue": {
       "base": "<p>A dimension value in a rule entry (exact value or <code>*</code> wildcard).</p>",
       "refs": {
@@ -3245,6 +3287,12 @@
         "CustomReflectionConfiguration$episodicReflectionOverride": "<p>The configuration for a reflection strategy to override the default one.</p>"
       }
     },
+    "ErrorStatusCodePattern": {
+      "base": null,
+      "refs": {
+        "FallbackTriggersStatusCodesList$member": null
+      }
+    },
     "EvaluationConfigDescription": {
       "base": null,
       "refs": {
@@ -3260,6 +3308,30 @@
         "CreateOnlineEvaluationConfigRequest$onlineEvaluationConfigName": "<p> The name of the online evaluation configuration. Must be unique within your account. </p>",
         "GetOnlineEvaluationConfigResponse$onlineEvaluationConfigName": "<p> The name of the online evaluation configuration. </p>",
         "OnlineEvaluationConfigSummary$onlineEvaluationConfigName": "<p> The name of the online evaluation configuration. </p>"
+      }
+    },
+    "EvaluationDimension": {
+      "base": "<p> A single dimension of an LLM-as-a-judge evaluator, defining what the evaluator model should judge for that dimension and how it should be scored. </p>",
+      "refs": {
+        "EvaluationDimensions$member": null
+      }
+    },
+    "EvaluationDimensionInstruction": {
+      "base": "<p> The instruction to the evaluator model for one dimension of an LLM-as-a-judge evaluator, describing what the model should judge for that dimension. </p>",
+      "refs": {
+        "EvaluationDimension$dimensionInstruction": "<p> The instruction to the evaluator model for this dimension, describing what the model should judge when scoring the dimension. </p>"
+      }
+    },
+    "EvaluationDimensionName": {
+      "base": "<p> The name of a dimension in an LLM-as-a-judge evaluator. </p>",
+      "refs": {
+        "EvaluationDimension$dimensionName": "<p> The name of the dimension. This name is unique within the evaluator and identifies the dimension's results. </p>"
+      }
+    },
+    "EvaluationDimensions": {
+      "base": "<p> The list of dimensions for an LLM-as-a-judge evaluator that uses a multi-dimensional rating scale. An evaluator can have up to 50 dimensions. </p>",
+      "refs": {
+        "RatingScale$multiDimensional": "<p> A list of dimensions that lets an LLM-as-a-judge evaluator score several dimensions of the same target in a single evaluation. Each dimension has its own instruction and rating scale, and produces its own result. </p>"
       }
     },
     "EvaluatorArn": {
@@ -3424,6 +3496,62 @@
       "base": "<p>The extraction type for a metadata field, determining how the value is obtained during memory processing.</p>",
       "refs": {
         "MetadataSchemaEntry$extractionType": "<p>Specifies whether the metadata value is extracted by the LLM or passed through deterministically from the event.</p>"
+      }
+    },
+    "Fallback": {
+      "base": "<p>The fallback configuration for a route to an inference target. Defines an ordered list of fallback targets to try when a request to the route's target fails, and the conditions that trigger a fallback. A fallback can occur only before the gateway sends the first byte of the response to the caller. After a streaming response starts, the gateway doesn't fall back.</p>",
+      "refs": {
+        "StaticRoute$fallback": "<p>The fallback configuration for this route. Supported only for inference targets.</p>",
+        "TargetTrafficSplitEntry$fallback": "<p>The fallback configuration for this variant. Supported only for inference targets.</p>"
+      }
+    },
+    "FallbackError": {
+      "base": null,
+      "refs": {
+        "FallbackTriggersErrorsList$member": null
+      }
+    },
+    "FallbackFirstByteTimeoutMillisecondsInteger": {
+      "base": null,
+      "refs": {
+        "Fallback$firstByteTimeoutMilliseconds": "<p>The maximum time, in milliseconds, from sending the request to the route's target until the first byte of the response body arrives. If the time expires, the gateway abandons the request and treats it as a <code>FIRST_BYTE_TIMEOUT</code> error. If you don't specify a value, no timeout is enforced.</p>"
+      }
+    },
+    "FallbackTarget": {
+      "base": "<p>Specifies a target to send the request to when the previous target in the fallback chain fails. Includes the target name, the model to send, and the conditions that trigger a fallback from this target to the next one.</p>",
+      "refs": {
+        "FallbackTargetFallbackList$member": null
+      }
+    },
+    "FallbackTargetFallbackList": {
+      "base": null,
+      "refs": {
+        "Fallback$targetFallback": "<p>The ordered list of fallback targets. The gateway tries each target in order until a response doesn't match that target's triggers, and returns that response to the caller. If every target fails, the gateway returns the last response. You can specify up to two fallback targets. Each combination of target and model, including the route's target, can appear only once.</p>"
+      }
+    },
+    "FallbackTargetFirstByteTimeoutMillisecondsInteger": {
+      "base": null,
+      "refs": {
+        "FallbackTarget$firstByteTimeoutMilliseconds": "<p>The maximum time, in milliseconds, from sending the request to this target until the first byte of the response body arrives. This setting isn't inherited from the route. If you don't specify a value, no timeout is enforced.</p>"
+      }
+    },
+    "FallbackTriggers": {
+      "base": "<p>The conditions that trigger a fallback to the next target. A fallback occurs if the response matches any of the specified status codes or errors.</p>",
+      "refs": {
+        "Fallback$triggerOn": "<p>The status codes and errors from the route's target that cause the gateway to send the request to the first fallback target. If you omit <code>triggerOn</code>, the gateway falls back on <code>5XX</code> status codes and on the <code>CONNECTION_ERROR</code>, <code>FIRST_BYTE_TIMEOUT</code>, and <code>UNROUTABLE</code> errors. If you specify <code>triggerOn</code>, only the status codes and errors that you list trigger a fallback.</p>",
+        "FallbackTarget$triggerOn": "<p>The status codes and errors from this target that cause the gateway to send the request to the next fallback target. This setting isn't inherited from the route. If you omit it, the gateway uses the default triggers: <code>5XX</code> status codes and the <code>CONNECTION_ERROR</code>, <code>FIRST_BYTE_TIMEOUT</code>, and <code>UNROUTABLE</code> errors.</p>"
+      }
+    },
+    "FallbackTriggersErrorsList": {
+      "base": null,
+      "refs": {
+        "FallbackTriggers$errors": "<p>The errors that trigger a fallback. You can specify the following:</p> <ul> <li> <p> <code>CONNECTION_ERROR</code> – The gateway couldn't connect to the target because the connection was refused, reset, or timed out. The request didn't reach the target.</p> </li> <li> <p> <code>FIRST_BYTE_TIMEOUT</code> – The target accepted the connection but didn't return the first byte of the response within <code>firstByteTimeoutMilliseconds</code>. The gateway abandons the request before any of the response reaches you.</p> </li> <li> <p> <code>UNROUTABLE</code> – The gateway couldn't route the request to the target, for example because the target doesn't exist or doesn't support the request path. These errors don't count toward the circuit breaker.</p> </li> </ul>"
+      }
+    },
+    "FallbackTriggersStatusCodesList": {
+      "base": null,
+      "refs": {
+        "FallbackTriggers$statusCodes": "<p>The HTTP status codes returned by the target that trigger a fallback. You can specify the following:</p> <ul> <li> <p>An exact status code – A three-digit code, such as <code>429</code>.</p> </li> <li> <p>A class of status codes – The first digit followed by <code>XX</code>, such as <code>5XX</code>, which matches every code from 500 to 599.</p> </li> </ul> <p>Only 4XX and 5XX codes are supported. Throttling by the gateway itself doesn't trigger a fallback.</p>"
       }
     },
     "FilesystemConfiguration": {
@@ -5210,6 +5338,7 @@
       "base": "<p>Contains the KMS configuration for a resource.</p>",
       "refs": {
         "GetTokenVaultResponse$kmsConfiguration": "<p>The KMS configuration for the token vault.</p>",
+        "ResetTokenVaultKeyMaterialResponse$kmsConfiguration": "<p>The KMS configuration for the token vault after the reset. The token vault uses an Amazon Web Services managed key.</p>",
         "SetTokenVaultCMKRequest$kmsConfiguration": "<p>The KMS configuration for the token vault, including the key type and KMS key ARN.</p>",
         "SetTokenVaultCMKResponse$kmsConfiguration": "<p>The KMS configuration for the token vault.</p>"
       }
@@ -5867,6 +5996,30 @@
         "PrivateEndpoint$managedVpcResource": "<p>Configuration for connecting to a private resource using a managed VPC Lattice resource. The gateway creates and manages the VPC Lattice resources on your behalf.</p>"
       }
     },
+    "MatchModelEntry": {
+      "base": "<p>A model ID or pattern to match against the requested model, and the operator to use for the comparison.</p>",
+      "refs": {
+        "MatchModelsAnyOfList$member": null
+      }
+    },
+    "MatchModels": {
+      "base": "<p>A condition that matches inference requests based on the requested model.</p>",
+      "refs": {
+        "Condition$matchModels": "<p>A condition that matches on the model requested in an inference request.</p>"
+      }
+    },
+    "MatchModelsAnyOfList": {
+      "base": null,
+      "refs": {
+        "MatchModels$anyOf": "<p>A list of model entries. The condition is met if the requested model matches any of the entries.</p>"
+      }
+    },
+    "MatchOperator": {
+      "base": null,
+      "refs": {
+        "MatchModelEntry$operator": "<p>The operator to use when comparing the requested model to the value:</p> <ul> <li> <p> <code>StringEquals</code> – Requires an exact match.</p> </li> <li> <p> <code>StringLike</code> – Supports wildcard patterns using <code>*</code> and <code>?</code>. This is the default.</p> </li> </ul>"
+      }
+    },
     "MatchPathPattern": {
       "base": null,
       "refs": {
@@ -6237,6 +6390,7 @@
     "ModelPattern": {
       "base": null,
       "refs": {
+        "MatchModelEntry$value": "<p>The model ID or pattern to match. With the <code>StringLike</code> operator, you can use <code>*</code> and <code>?</code> as wildcards, for example <code>anthropic.claude-*</code>.</p>",
         "ModelEntry$model": "<p>The model ID or glob pattern that identifies the model (for example, <code>anthropic.claude-opus-*</code> or <code>openai.gpt-oss-*</code>).</p>"
       }
     },
@@ -6529,6 +6683,7 @@
     "NumericalScaleDefinitions": {
       "base": null,
       "refs": {
+        "DimensionRatingScale$numerical": "<p> The numerical rating scale with defined score values and descriptions for quantitative evaluation of the dimension. </p>",
         "RatingScale$numerical": "<p> The numerical rating scale with defined score values and descriptions for quantitative evaluation. </p>"
       }
     },
@@ -6657,6 +6812,18 @@
         "CreateOauth2CredentialProviderResponse$oauth2ProviderConfigOutput": null,
         "GetOauth2CredentialProviderResponse$oauth2ProviderConfigOutput": "<p>The configuration output for the OAuth2 provider.</p>",
         "UpdateOauth2CredentialProviderResponse$oauth2ProviderConfigOutput": "<p>The configuration output for the OAuth2 provider.</p>"
+      }
+    },
+    "OnBehalfOfAuthenticationConfig": {
+      "base": "<p>Specifies the client authentication method to use for the on-behalf-of token exchange.</p>",
+      "refs": {
+        "OnBehalfOfTokenExchangeConfigType$onBehalfOfAuthenticationConfig": "<p>Specify the client authentication configuration to use for the on-behalf-of token exchange. With this configuration, you override the provider level client authentication method for the on-behalf-of exchange with the identity provider. If you don't specify this configuration, we use the provider level client authentication method.</p>"
+      }
+    },
+    "OnBehalfOfClientAuthenticationMethod": {
+      "base": null,
+      "refs": {
+        "OnBehalfOfAuthenticationConfig$clientAuthenticationMethod": "<p>The client authentication method to use during the on-behalf-of token exchange. The <code>NO_CLIENT</code> option omits the <code>clientId</code> and <code>clientSecret</code> during the on-behalf-of token exchange with the identity provider.</p>"
       }
     },
     "OnBehalfOfTokenExchangeConfigType": {
@@ -7278,6 +7445,20 @@
         "UpdatePolicyRequest$validationMode": "<p>The validation mode for the policy update. Determines how Cedar analyzer validation results are handled during policy updates. FAIL_ON_ANY_FINDINGS runs the Cedar analyzer and fails the update if validation issues are detected, ensuring the policy conforms to the Cedar schema and tool context. IGNORE_ALL_FINDINGS runs the Cedar analyzer but allows updates despite validation warnings. Use FAIL_ON_ANY_FINDINGS to ensure policy correctness during updates, especially when modifying policy logic or conditions.</p>"
       }
     },
+    "Port": {
+      "base": "<p>A port between <code>8000</code> and <code>12000</code>. Port <code>8443</code> is reserved and cannot be used.</p>",
+      "refs": {
+        "AllowedPort$port": "<p>A single port that is reachable through the runtime's session URL.</p>",
+        "PortRange$from": "<p>The first port in the inclusive range.</p>",
+        "PortRange$to": "<p>The last port in the inclusive range.</p>"
+      }
+    },
+    "PortRange": {
+      "base": "<p>An inclusive range of ports. The value of <code>from</code> must be less than or equal to the value of <code>to</code>.</p>",
+      "refs": {
+        "AllowedPort$portRange": "<p>An inclusive range of ports that are reachable through the runtime's session URL.</p>"
+      }
+    },
     "PortalUrlType": {
       "base": null,
       "refs": {
@@ -7374,9 +7555,9 @@
     "ProtocolConfiguration": {
       "base": "<p>The protocol configuration for an agent runtime. This structure defines how the agent runtime communicates with clients.</p>",
       "refs": {
-        "CreateAgentRuntimeRequest$protocolConfiguration": null,
-        "GetAgentRuntimeResponse$protocolConfiguration": null,
-        "UpdateAgentRuntimeRequest$protocolConfiguration": null
+        "CreateAgentRuntimeRequest$protocolConfiguration": "<p>The protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.</p>",
+        "GetAgentRuntimeResponse$protocolConfiguration": "<p>The protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.</p>",
+        "UpdateAgentRuntimeRequest$protocolConfiguration": "<p>The updated protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.</p>"
       }
     },
     "Provider": {
@@ -7698,6 +7879,14 @@
       "refs": {
         "SchemaDefinition$required": "<p>The required fields in the schema definition. These fields must be provided when using the schema.</p>"
       }
+    },
+    "ResetTokenVaultKeyMaterialRequest": {
+      "base": null,
+      "refs": {}
+    },
+    "ResetTokenVaultKeyMaterialResponse": {
+      "base": null,
+      "refs": {}
     },
     "Resource": {
       "base": "<p>Represents a resource within the AgentCore Policy system. Resources are the targets of policy evaluation. Currently, only AgentCore Gateways are supported as resources for policy enforcement.</p>",
@@ -8370,6 +8559,18 @@
         "UpdatedServerDefinition$optionalValue": "<p>The updated server definition value.</p>"
       }
     },
+    "ServerPath": {
+      "base": "<p>The path on which the agent server accepts requests. The path must begin with <code>/</code> and can contain up to 2,048 characters.</p>",
+      "refs": {
+        "ProtocolConfiguration$path": "<p>The path on which the agent server accepts requests. The path must begin with <code>/</code>. When this field is omitted, the default is <code>/invocations</code> for <code>HTTP</code> and <code>AGUI</code>, <code>/mcp</code> for <code>MCP</code>, and <code>/</code> for <code>A2A</code>.</p>"
+      }
+    },
+    "ServerPort": {
+      "base": "<p>A port between <code>8000</code> and <code>12000</code>. Port <code>8443</code> is reserved and cannot be used.</p>",
+      "refs": {
+        "ProtocolConfiguration$port": "<p>The port on which the agent server listens. The port must be between <code>8000</code> and <code>12000</code>, excluding the reserved port <code>8443</code>. When this field is omitted, the default is <code>8080</code> for <code>HTTP</code> and <code>AGUI</code>, <code>8000</code> for <code>MCP</code>, and <code>9000</code> for <code>A2A</code>.</p>"
+      }
+    },
     "ServerProtocol": {
       "base": null,
       "refs": {
@@ -8989,6 +9190,7 @@
       "refs": {
         "CreateGatewayTargetRequest$name": "<p>The name of the gateway target. The name must be unique within the gateway.</p>",
         "CreateGatewayTargetResponse$name": "<p>The name of the target.</p>",
+        "FallbackTarget$targetName": "<p>The name of the gateway target to fall back to. The target must be an inference target.</p>",
         "GatewayTarget$name": "<p>The name of the gateway target.</p>",
         "GetGatewayTargetResponse$name": "<p>The name of the gateway target.</p>",
         "StaticRoute$targetName": "<p>The name of the target to route requests to.</p>",
@@ -9180,6 +9382,7 @@
         "OnlineEvaluationConfigSummary$updatedAt": "<p> The timestamp when the online evaluation configuration was last updated. </p>",
         "PaymentCredentialProviderItem$createdTime": "<p>The timestamp when the payment credential provider was created.</p>",
         "PaymentCredentialProviderItem$lastUpdatedTime": "<p>The timestamp when the payment credential provider was last updated.</p>",
+        "ResetTokenVaultKeyMaterialResponse$lastModifiedDate": "<p>The timestamp when the token vault was last modified.</p>",
         "SetTokenVaultCMKResponse$lastModifiedDate": "<p>The timestamp when the token vault was last modified.</p>",
         "UpdateApiKeyCredentialProviderResponse$createdTime": "<p>The timestamp when the API key credential provider was created.</p>",
         "UpdateApiKeyCredentialProviderResponse$lastUpdatedTime": "<p>The timestamp when the API key credential provider was last updated.</p>",
@@ -9246,6 +9449,8 @@
       "refs": {
         "GetTokenVaultRequest$tokenVaultId": "<p>The unique identifier of the token vault to retrieve.</p>",
         "GetTokenVaultResponse$tokenVaultId": "<p>The ID of the token vault.</p>",
+        "ResetTokenVaultKeyMaterialRequest$tokenVaultId": "<p>The unique identifier of the token vault to reset. To reset your account's default token vault, specify <code>default</code>.</p>",
+        "ResetTokenVaultKeyMaterialResponse$tokenVaultId": "<p>The ID of the token vault.</p>",
         "SetTokenVaultCMKRequest$tokenVaultId": "<p>The unique identifier of the token vault to update.</p>",
         "SetTokenVaultCMKResponse$tokenVaultId": "<p>The ID of the token vault.</p>"
       }

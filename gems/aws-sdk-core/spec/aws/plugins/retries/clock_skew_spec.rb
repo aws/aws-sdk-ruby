@@ -16,6 +16,14 @@ module Aws
         double('context', http_response: response, http_request: request)
       end
 
+      # Builds a context whose response carries arbitrary headers (e.g. 'age').
+      def build_context_with_headers(endpoint, headers)
+        response = double('response', headers: headers)
+        request  = double('request', endpoint: endpoint)
+
+        double('context', http_response: response, http_request: request)
+      end
+
       subject { Retries::ClockSkew.new }
 
       let(:endpoint)    { 'example_endpoint' }
@@ -83,9 +91,21 @@ module Aws
 
         context 'server time matches the clients time' do
           let(:server_time) { Time.now.utc.to_s }
-          it 'does not update the corrections' do
+          it 'records a near-zero correction (unconditional recording)' do
             subject.update_clock_correction(context)
-            expect(subject.clock_correction(endpoint)).to be 0
+            expect(subject.clock_correction(endpoint)).to be_within(5).of(0)
+          end
+        end
+
+        context 'a previously stored correction is healed by a healthy response' do
+          it 'overwrites a stale correction with a near-zero value' do
+            skewed = build_context(endpoint, (Time.now.utc + 1000).to_s)
+            subject.update_clock_correction(skewed)
+            expect(subject.clock_correction(endpoint)).to be_within(5).of(1000)
+
+            healthy = build_context(endpoint, Time.now.utc.to_s)
+            subject.update_clock_correction(healthy)
+            expect(subject.clock_correction(endpoint)).to be_within(5).of(0)
           end
         end
 
@@ -367,6 +387,86 @@ module Aws
             expect(subject.instance_variable_get(:@endpoint_estimated_skews).keys).to contain_exactly(
               'http://EXAMPLE.COM:80', 'http://example.com:80'
             )
+          end
+        end
+      end
+
+      describe 'candidate skew (midpoint + guards)' do
+        describe '#update_clock_correction with a send time' do
+          it 'uses the midpoint formula to discount network transit' do
+            sent_at = Time.now.utc
+            # server generated its Date 100s ahead of the client, response takes 10s
+            server_time = (sent_at + 100).httpdate
+            ctx = build_context_with_headers(endpoint, 'date' => server_time)
+            allow(Time).to receive(:now).and_return(sent_at.getlocal + 10)
+
+            subject.update_clock_correction(ctx, sent_at)
+            # midpoint = sent_at + 5s, so skew ~= 100 - 5 = 95s
+            expect(subject.clock_correction(endpoint)).to be_within(1).of(95)
+          end
+
+          it 'discards the candidate when elapsed exceeds the max trusted duration' do
+            sent_at = Time.now.utc
+            server_time = (sent_at + 100).httpdate
+            ctx = build_context_with_headers(endpoint, 'date' => server_time)
+            # elapsed = 16 minutes > 15 minute max trusted duration
+            allow(Time).to receive(:now).and_return(sent_at.getlocal + (16 * 60))
+
+            subject.update_clock_correction(ctx, sent_at)
+            expect(subject.clock_correction(endpoint)).to eq(0)
+          end
+
+          it 'keeps the candidate at exactly the max trusted duration boundary' do
+            sent_at = Time.now.utc
+            server_time = (sent_at + 1000).httpdate
+            ctx = build_context_with_headers(endpoint, 'date' => server_time)
+            # elapsed = exactly 15 minutes (900s): NOT discarded
+            allow(Time).to receive(:now).and_return(sent_at.getlocal + (15 * 60))
+
+            subject.update_clock_correction(ctx, sent_at)
+            expect(subject.clock_correction(endpoint)).not_to eq(0)
+          end
+        end
+
+        describe 'Age header guard' do
+          it 'does not record a correction when an Age header is present' do
+            server_time = (Time.now.utc - 3600).httpdate
+            ctx = build_context_with_headers(
+              endpoint, 'date' => server_time, 'age' => '3600'
+            )
+            subject.update_clock_correction(ctx)
+            expect(subject.clock_correction(endpoint)).to eq(0)
+          end
+
+          it 'is not clock_skewed? when an Age header is present' do
+            server_time = (Time.now.utc - 3600).httpdate
+            ctx = build_context_with_headers(
+              endpoint, 'date' => server_time, 'age' => '3600'
+            )
+            expect(subject.clock_skewed?(ctx)).to be false
+          end
+        end
+
+        describe '#clock_skewed? threshold boundary (4 minutes)' do
+          it 'is false when skew is below the 4 minute threshold' do
+            server_time = (Time.now.utc + 239).to_s
+            ctx = build_context_with_headers(endpoint, 'date' => server_time)
+            expect(subject.clock_skewed?(ctx)).to be false
+          end
+
+          it 'is true when skew exceeds the 4 minute threshold' do
+            server_time = (Time.now.utc + 241).to_s
+            ctx = build_context_with_headers(endpoint, 'date' => server_time)
+            expect(subject.clock_skewed?(ctx)).to be true
+          end
+        end
+
+        describe 'legacy fallback (no send time)' do
+          it 'computes skew as server_time - now' do
+            server_time = (Time.now.utc + 1000).to_s
+            ctx = build_context_with_headers(endpoint, 'date' => server_time)
+            subject.update_clock_correction(ctx)
+            expect(subject.clock_correction(endpoint)).to be_within(5).of(1000)
           end
         end
       end

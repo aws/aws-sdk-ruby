@@ -11,385 +11,385 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ActorDoesNotExistException < ::Aws::Errors::ServiceError
+      class ActorDoesNotExistException < ServiceError
       end
-      class ApprovalRuleContentRequiredException < ::Aws::Errors::ServiceError
+      class ApprovalRuleContentRequiredException < ServiceError
       end
-      class ApprovalRuleDoesNotExistException < ::Aws::Errors::ServiceError
+      class ApprovalRuleDoesNotExistException < ServiceError
       end
-      class ApprovalRuleNameAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ApprovalRuleNameAlreadyExistsException < ServiceError
       end
-      class ApprovalRuleNameRequiredException < ::Aws::Errors::ServiceError
+      class ApprovalRuleNameRequiredException < ServiceError
       end
-      class ApprovalRuleTemplateContentRequiredException < ::Aws::Errors::ServiceError
+      class ApprovalRuleTemplateContentRequiredException < ServiceError
       end
-      class ApprovalRuleTemplateDoesNotExistException < ::Aws::Errors::ServiceError
+      class ApprovalRuleTemplateDoesNotExistException < ServiceError
       end
-      class ApprovalRuleTemplateInUseException < ::Aws::Errors::ServiceError
+      class ApprovalRuleTemplateInUseException < ServiceError
       end
-      class ApprovalRuleTemplateNameAlreadyExistsException < ::Aws::Errors::ServiceError
+      class ApprovalRuleTemplateNameAlreadyExistsException < ServiceError
       end
-      class ApprovalRuleTemplateNameRequiredException < ::Aws::Errors::ServiceError
+      class ApprovalRuleTemplateNameRequiredException < ServiceError
       end
-      class ApprovalStateRequiredException < ::Aws::Errors::ServiceError
+      class ApprovalStateRequiredException < ServiceError
       end
-      class AuthorDoesNotExistException < ::Aws::Errors::ServiceError
+      class AuthorDoesNotExistException < ServiceError
       end
-      class BeforeCommitIdAndAfterCommitIdAreSameException < ::Aws::Errors::ServiceError
+      class BeforeCommitIdAndAfterCommitIdAreSameException < ServiceError
       end
-      class BlobIdDoesNotExistException < ::Aws::Errors::ServiceError
+      class BlobIdDoesNotExistException < ServiceError
       end
-      class BlobIdRequiredException < ::Aws::Errors::ServiceError
+      class BlobIdRequiredException < ServiceError
       end
-      class BranchDoesNotExistException < ::Aws::Errors::ServiceError
+      class BranchDoesNotExistException < ServiceError
       end
-      class BranchNameExistsException < ::Aws::Errors::ServiceError
+      class BranchNameExistsException < ServiceError
       end
-      class BranchNameIsTagNameException < ::Aws::Errors::ServiceError
+      class BranchNameIsTagNameException < ServiceError
       end
-      class BranchNameRequiredException < ::Aws::Errors::ServiceError
+      class BranchNameRequiredException < ServiceError
       end
-      class CannotDeleteApprovalRuleFromTemplateException < ::Aws::Errors::ServiceError
+      class CannotDeleteApprovalRuleFromTemplateException < ServiceError
       end
-      class CannotModifyApprovalRuleFromTemplateException < ::Aws::Errors::ServiceError
+      class CannotModifyApprovalRuleFromTemplateException < ServiceError
       end
-      class ClientRequestTokenRequiredException < ::Aws::Errors::ServiceError
+      class ClientRequestTokenRequiredException < ServiceError
       end
-      class CommentContentRequiredException < ::Aws::Errors::ServiceError
+      class CommentContentRequiredException < ServiceError
       end
-      class CommentContentSizeLimitExceededException < ::Aws::Errors::ServiceError
+      class CommentContentSizeLimitExceededException < ServiceError
       end
-      class CommentDeletedException < ::Aws::Errors::ServiceError
+      class CommentDeletedException < ServiceError
       end
-      class CommentDoesNotExistException < ::Aws::Errors::ServiceError
+      class CommentDoesNotExistException < ServiceError
       end
-      class CommentIdRequiredException < ::Aws::Errors::ServiceError
+      class CommentIdRequiredException < ServiceError
       end
-      class CommentNotCreatedByCallerException < ::Aws::Errors::ServiceError
+      class CommentNotCreatedByCallerException < ServiceError
       end
-      class CommitDoesNotExistException < ::Aws::Errors::ServiceError
+      class CommitDoesNotExistException < ServiceError
       end
-      class CommitIdDoesNotExistException < ::Aws::Errors::ServiceError
+      class CommitIdDoesNotExistException < ServiceError
       end
-      class CommitIdRequiredException < ::Aws::Errors::ServiceError
+      class CommitIdRequiredException < ServiceError
       end
-      class CommitIdsLimitExceededException < ::Aws::Errors::ServiceError
+      class CommitIdsLimitExceededException < ServiceError
       end
-      class CommitIdsListRequiredException < ::Aws::Errors::ServiceError
+      class CommitIdsListRequiredException < ServiceError
       end
-      class CommitMessageLengthExceededException < ::Aws::Errors::ServiceError
+      class CommitMessageLengthExceededException < ServiceError
       end
-      class CommitRequiredException < ::Aws::Errors::ServiceError
+      class CommitRequiredException < ServiceError
       end
-      class ConcurrentReferenceUpdateException < ::Aws::Errors::ServiceError
+      class ConcurrentReferenceUpdateException < ServiceError
       end
-      class DefaultBranchCannotBeDeletedException < ::Aws::Errors::ServiceError
+      class DefaultBranchCannotBeDeletedException < ServiceError
       end
-      class DirectoryNameConflictsWithFileNameException < ::Aws::Errors::ServiceError
+      class DirectoryNameConflictsWithFileNameException < ServiceError
       end
-      class EncryptionIntegrityChecksFailedException < ::Aws::Errors::ServiceError
+      class EncryptionIntegrityChecksFailedException < ServiceError
       end
-      class EncryptionKeyAccessDeniedException < ::Aws::Errors::ServiceError
+      class EncryptionKeyAccessDeniedException < ServiceError
       end
-      class EncryptionKeyDisabledException < ::Aws::Errors::ServiceError
+      class EncryptionKeyDisabledException < ServiceError
       end
-      class EncryptionKeyInvalidIdException < ::Aws::Errors::ServiceError
+      class EncryptionKeyInvalidIdException < ServiceError
       end
-      class EncryptionKeyInvalidUsageException < ::Aws::Errors::ServiceError
+      class EncryptionKeyInvalidUsageException < ServiceError
       end
-      class EncryptionKeyNotFoundException < ::Aws::Errors::ServiceError
+      class EncryptionKeyNotFoundException < ServiceError
       end
-      class EncryptionKeyRequiredException < ::Aws::Errors::ServiceError
+      class EncryptionKeyRequiredException < ServiceError
       end
-      class EncryptionKeyUnavailableException < ::Aws::Errors::ServiceError
+      class EncryptionKeyUnavailableException < ServiceError
       end
-      class FileContentAndSourceFileSpecifiedException < ::Aws::Errors::ServiceError
+      class FileContentAndSourceFileSpecifiedException < ServiceError
       end
-      class FileContentRequiredException < ::Aws::Errors::ServiceError
+      class FileContentRequiredException < ServiceError
       end
-      class FileContentSizeLimitExceededException < ::Aws::Errors::ServiceError
+      class FileContentSizeLimitExceededException < ServiceError
       end
-      class FileDoesNotExistException < ::Aws::Errors::ServiceError
+      class FileDoesNotExistException < ServiceError
       end
-      class FileEntryRequiredException < ::Aws::Errors::ServiceError
+      class FileEntryRequiredException < ServiceError
       end
-      class FileModeRequiredException < ::Aws::Errors::ServiceError
+      class FileModeRequiredException < ServiceError
       end
-      class FileNameConflictsWithDirectoryNameException < ::Aws::Errors::ServiceError
+      class FileNameConflictsWithDirectoryNameException < ServiceError
       end
-      class FilePathConflictsWithSubmodulePathException < ::Aws::Errors::ServiceError
+      class FilePathConflictsWithSubmodulePathException < ServiceError
       end
-      class FileTooLargeException < ::Aws::Errors::ServiceError
+      class FileTooLargeException < ServiceError
       end
-      class FolderContentSizeLimitExceededException < ::Aws::Errors::ServiceError
+      class FolderContentSizeLimitExceededException < ServiceError
       end
-      class FolderDoesNotExistException < ::Aws::Errors::ServiceError
+      class FolderDoesNotExistException < ServiceError
       end
-      class IdempotencyParameterMismatchException < ::Aws::Errors::ServiceError
+      class IdempotencyParameterMismatchException < ServiceError
       end
-      class InvalidActorArnException < ::Aws::Errors::ServiceError
+      class InvalidActorArnException < ServiceError
       end
-      class InvalidApprovalRuleContentException < ::Aws::Errors::ServiceError
+      class InvalidApprovalRuleContentException < ServiceError
       end
-      class InvalidApprovalRuleNameException < ::Aws::Errors::ServiceError
+      class InvalidApprovalRuleNameException < ServiceError
       end
-      class InvalidApprovalRuleTemplateContentException < ::Aws::Errors::ServiceError
+      class InvalidApprovalRuleTemplateContentException < ServiceError
       end
-      class InvalidApprovalRuleTemplateDescriptionException < ::Aws::Errors::ServiceError
+      class InvalidApprovalRuleTemplateDescriptionException < ServiceError
       end
-      class InvalidApprovalRuleTemplateNameException < ::Aws::Errors::ServiceError
+      class InvalidApprovalRuleTemplateNameException < ServiceError
       end
-      class InvalidApprovalStateException < ::Aws::Errors::ServiceError
+      class InvalidApprovalStateException < ServiceError
       end
-      class InvalidAuthorArnException < ::Aws::Errors::ServiceError
+      class InvalidAuthorArnException < ServiceError
       end
-      class InvalidBlobIdException < ::Aws::Errors::ServiceError
+      class InvalidBlobIdException < ServiceError
       end
-      class InvalidBranchNameException < ::Aws::Errors::ServiceError
+      class InvalidBranchNameException < ServiceError
       end
-      class InvalidClientRequestTokenException < ::Aws::Errors::ServiceError
+      class InvalidClientRequestTokenException < ServiceError
       end
-      class InvalidCommentIdException < ::Aws::Errors::ServiceError
+      class InvalidCommentIdException < ServiceError
       end
-      class InvalidCommitException < ::Aws::Errors::ServiceError
+      class InvalidCommitException < ServiceError
       end
-      class InvalidCommitIdException < ::Aws::Errors::ServiceError
+      class InvalidCommitIdException < ServiceError
       end
-      class InvalidConflictDetailLevelException < ::Aws::Errors::ServiceError
+      class InvalidConflictDetailLevelException < ServiceError
       end
-      class InvalidConflictResolutionException < ::Aws::Errors::ServiceError
+      class InvalidConflictResolutionException < ServiceError
       end
-      class InvalidConflictResolutionStrategyException < ::Aws::Errors::ServiceError
+      class InvalidConflictResolutionStrategyException < ServiceError
       end
-      class InvalidContinuationTokenException < ::Aws::Errors::ServiceError
+      class InvalidContinuationTokenException < ServiceError
       end
-      class InvalidDeletionParameterException < ::Aws::Errors::ServiceError
+      class InvalidDeletionParameterException < ServiceError
       end
-      class InvalidDescriptionException < ::Aws::Errors::ServiceError
+      class InvalidDescriptionException < ServiceError
       end
-      class InvalidDestinationCommitSpecifierException < ::Aws::Errors::ServiceError
+      class InvalidDestinationCommitSpecifierException < ServiceError
       end
-      class InvalidEmailException < ::Aws::Errors::ServiceError
+      class InvalidEmailException < ServiceError
       end
-      class InvalidFileLocationException < ::Aws::Errors::ServiceError
+      class InvalidFileLocationException < ServiceError
       end
-      class InvalidFileModeException < ::Aws::Errors::ServiceError
+      class InvalidFileModeException < ServiceError
       end
-      class InvalidFilePositionException < ::Aws::Errors::ServiceError
+      class InvalidFilePositionException < ServiceError
       end
-      class InvalidMaxConflictFilesException < ::Aws::Errors::ServiceError
+      class InvalidMaxConflictFilesException < ServiceError
       end
-      class InvalidMaxMergeHunksException < ::Aws::Errors::ServiceError
+      class InvalidMaxMergeHunksException < ServiceError
       end
-      class InvalidMaxResultsException < ::Aws::Errors::ServiceError
+      class InvalidMaxResultsException < ServiceError
       end
-      class InvalidMergeOptionException < ::Aws::Errors::ServiceError
+      class InvalidMergeOptionException < ServiceError
       end
-      class InvalidOrderException < ::Aws::Errors::ServiceError
+      class InvalidOrderException < ServiceError
       end
-      class InvalidOverrideStatusException < ::Aws::Errors::ServiceError
+      class InvalidOverrideStatusException < ServiceError
       end
-      class InvalidParentCommitIdException < ::Aws::Errors::ServiceError
+      class InvalidParentCommitIdException < ServiceError
       end
-      class InvalidPathException < ::Aws::Errors::ServiceError
+      class InvalidPathException < ServiceError
       end
-      class InvalidPullRequestEventTypeException < ::Aws::Errors::ServiceError
+      class InvalidPullRequestEventTypeException < ServiceError
       end
-      class InvalidPullRequestIdException < ::Aws::Errors::ServiceError
+      class InvalidPullRequestIdException < ServiceError
       end
-      class InvalidPullRequestStatusException < ::Aws::Errors::ServiceError
+      class InvalidPullRequestStatusException < ServiceError
       end
-      class InvalidPullRequestStatusUpdateException < ::Aws::Errors::ServiceError
+      class InvalidPullRequestStatusUpdateException < ServiceError
       end
-      class InvalidReactionUserArnException < ::Aws::Errors::ServiceError
+      class InvalidReactionUserArnException < ServiceError
       end
-      class InvalidReactionValueException < ::Aws::Errors::ServiceError
+      class InvalidReactionValueException < ServiceError
       end
-      class InvalidReferenceNameException < ::Aws::Errors::ServiceError
+      class InvalidReferenceNameException < ServiceError
       end
-      class InvalidRelativeFileVersionEnumException < ::Aws::Errors::ServiceError
+      class InvalidRelativeFileVersionEnumException < ServiceError
       end
-      class InvalidReplacementContentException < ::Aws::Errors::ServiceError
+      class InvalidReplacementContentException < ServiceError
       end
-      class InvalidReplacementTypeException < ::Aws::Errors::ServiceError
+      class InvalidReplacementTypeException < ServiceError
       end
-      class InvalidRepositoryDescriptionException < ::Aws::Errors::ServiceError
+      class InvalidRepositoryDescriptionException < ServiceError
       end
-      class InvalidRepositoryNameException < ::Aws::Errors::ServiceError
+      class InvalidRepositoryNameException < ServiceError
       end
-      class InvalidRepositoryTriggerBranchNameException < ::Aws::Errors::ServiceError
+      class InvalidRepositoryTriggerBranchNameException < ServiceError
       end
-      class InvalidRepositoryTriggerCustomDataException < ::Aws::Errors::ServiceError
+      class InvalidRepositoryTriggerCustomDataException < ServiceError
       end
-      class InvalidRepositoryTriggerDestinationArnException < ::Aws::Errors::ServiceError
+      class InvalidRepositoryTriggerDestinationArnException < ServiceError
       end
-      class InvalidRepositoryTriggerEventsException < ::Aws::Errors::ServiceError
+      class InvalidRepositoryTriggerEventsException < ServiceError
       end
-      class InvalidRepositoryTriggerNameException < ::Aws::Errors::ServiceError
+      class InvalidRepositoryTriggerNameException < ServiceError
       end
-      class InvalidRepositoryTriggerRegionException < ::Aws::Errors::ServiceError
+      class InvalidRepositoryTriggerRegionException < ServiceError
       end
-      class InvalidResourceArnException < ::Aws::Errors::ServiceError
+      class InvalidResourceArnException < ServiceError
       end
-      class InvalidRevisionIdException < ::Aws::Errors::ServiceError
+      class InvalidRevisionIdException < ServiceError
       end
-      class InvalidRuleContentSha256Exception < ::Aws::Errors::ServiceError
+      class InvalidRuleContentSha256Exception < ServiceError
       end
-      class InvalidSortByException < ::Aws::Errors::ServiceError
+      class InvalidSortByException < ServiceError
       end
-      class InvalidSourceCommitSpecifierException < ::Aws::Errors::ServiceError
+      class InvalidSourceCommitSpecifierException < ServiceError
       end
-      class InvalidSystemTagUsageException < ::Aws::Errors::ServiceError
+      class InvalidSystemTagUsageException < ServiceError
       end
-      class InvalidTagKeysListException < ::Aws::Errors::ServiceError
+      class InvalidTagKeysListException < ServiceError
       end
-      class InvalidTagsMapException < ::Aws::Errors::ServiceError
+      class InvalidTagsMapException < ServiceError
       end
-      class InvalidTargetBranchException < ::Aws::Errors::ServiceError
+      class InvalidTargetBranchException < ServiceError
       end
-      class InvalidTargetException < ::Aws::Errors::ServiceError
+      class InvalidTargetException < ServiceError
       end
-      class InvalidTargetsException < ::Aws::Errors::ServiceError
+      class InvalidTargetsException < ServiceError
       end
-      class InvalidTitleException < ::Aws::Errors::ServiceError
+      class InvalidTitleException < ServiceError
       end
-      class ManualMergeRequiredException < ::Aws::Errors::ServiceError
+      class ManualMergeRequiredException < ServiceError
       end
-      class MaximumBranchesExceededException < ::Aws::Errors::ServiceError
+      class MaximumBranchesExceededException < ServiceError
       end
-      class MaximumConflictResolutionEntriesExceededException < ::Aws::Errors::ServiceError
+      class MaximumConflictResolutionEntriesExceededException < ServiceError
       end
-      class MaximumFileContentToLoadExceededException < ::Aws::Errors::ServiceError
+      class MaximumFileContentToLoadExceededException < ServiceError
       end
-      class MaximumFileEntriesExceededException < ::Aws::Errors::ServiceError
+      class MaximumFileEntriesExceededException < ServiceError
       end
-      class MaximumItemsToCompareExceededException < ::Aws::Errors::ServiceError
+      class MaximumItemsToCompareExceededException < ServiceError
       end
-      class MaximumNumberOfApprovalsExceededException < ::Aws::Errors::ServiceError
+      class MaximumNumberOfApprovalsExceededException < ServiceError
       end
-      class MaximumOpenPullRequestsExceededException < ::Aws::Errors::ServiceError
+      class MaximumOpenPullRequestsExceededException < ServiceError
       end
-      class MaximumRepositoryNamesExceededException < ::Aws::Errors::ServiceError
+      class MaximumRepositoryNamesExceededException < ServiceError
       end
-      class MaximumRepositoryTriggersExceededException < ::Aws::Errors::ServiceError
+      class MaximumRepositoryTriggersExceededException < ServiceError
       end
-      class MaximumRuleTemplatesAssociatedWithRepositoryException < ::Aws::Errors::ServiceError
+      class MaximumRuleTemplatesAssociatedWithRepositoryException < ServiceError
       end
-      class MergeOptionRequiredException < ::Aws::Errors::ServiceError
+      class MergeOptionRequiredException < ServiceError
       end
-      class MultipleConflictResolutionEntriesException < ::Aws::Errors::ServiceError
+      class MultipleConflictResolutionEntriesException < ServiceError
       end
-      class MultipleRepositoriesInPullRequestException < ::Aws::Errors::ServiceError
+      class MultipleRepositoriesInPullRequestException < ServiceError
       end
-      class NameLengthExceededException < ::Aws::Errors::ServiceError
+      class NameLengthExceededException < ServiceError
       end
-      class NoChangeException < ::Aws::Errors::ServiceError
+      class NoChangeException < ServiceError
       end
-      class NumberOfRuleTemplatesExceededException < ::Aws::Errors::ServiceError
+      class NumberOfRuleTemplatesExceededException < ServiceError
       end
-      class NumberOfRulesExceededException < ::Aws::Errors::ServiceError
+      class NumberOfRulesExceededException < ServiceError
       end
-      class OperationNotAllowedException < ::Aws::Errors::ServiceError
+      class OperationNotAllowedException < ServiceError
       end
-      class OverrideAlreadySetException < ::Aws::Errors::ServiceError
+      class OverrideAlreadySetException < ServiceError
       end
-      class OverrideStatusRequiredException < ::Aws::Errors::ServiceError
+      class OverrideStatusRequiredException < ServiceError
       end
-      class ParentCommitDoesNotExistException < ::Aws::Errors::ServiceError
+      class ParentCommitDoesNotExistException < ServiceError
       end
-      class ParentCommitIdOutdatedException < ::Aws::Errors::ServiceError
+      class ParentCommitIdOutdatedException < ServiceError
       end
-      class ParentCommitIdRequiredException < ::Aws::Errors::ServiceError
+      class ParentCommitIdRequiredException < ServiceError
       end
-      class PathDoesNotExistException < ::Aws::Errors::ServiceError
+      class PathDoesNotExistException < ServiceError
       end
-      class PathRequiredException < ::Aws::Errors::ServiceError
+      class PathRequiredException < ServiceError
       end
-      class PullRequestAlreadyClosedException < ::Aws::Errors::ServiceError
+      class PullRequestAlreadyClosedException < ServiceError
       end
-      class PullRequestApprovalRulesNotSatisfiedException < ::Aws::Errors::ServiceError
+      class PullRequestApprovalRulesNotSatisfiedException < ServiceError
       end
-      class PullRequestCannotBeApprovedByAuthorException < ::Aws::Errors::ServiceError
+      class PullRequestCannotBeApprovedByAuthorException < ServiceError
       end
-      class PullRequestDoesNotExistException < ::Aws::Errors::ServiceError
+      class PullRequestDoesNotExistException < ServiceError
       end
-      class PullRequestIdRequiredException < ::Aws::Errors::ServiceError
+      class PullRequestIdRequiredException < ServiceError
       end
-      class PullRequestStatusRequiredException < ::Aws::Errors::ServiceError
+      class PullRequestStatusRequiredException < ServiceError
       end
-      class PutFileEntryConflictException < ::Aws::Errors::ServiceError
+      class PutFileEntryConflictException < ServiceError
       end
-      class ReactionLimitExceededException < ::Aws::Errors::ServiceError
+      class ReactionLimitExceededException < ServiceError
       end
-      class ReactionValueRequiredException < ::Aws::Errors::ServiceError
+      class ReactionValueRequiredException < ServiceError
       end
-      class ReferenceDoesNotExistException < ::Aws::Errors::ServiceError
+      class ReferenceDoesNotExistException < ServiceError
       end
-      class ReferenceNameRequiredException < ::Aws::Errors::ServiceError
+      class ReferenceNameRequiredException < ServiceError
       end
-      class ReferenceTypeNotSupportedException < ::Aws::Errors::ServiceError
+      class ReferenceTypeNotSupportedException < ServiceError
       end
-      class ReplacementContentRequiredException < ::Aws::Errors::ServiceError
+      class ReplacementContentRequiredException < ServiceError
       end
-      class ReplacementTypeRequiredException < ::Aws::Errors::ServiceError
+      class ReplacementTypeRequiredException < ServiceError
       end
-      class RepositoryDoesNotExistException < ::Aws::Errors::ServiceError
+      class RepositoryDoesNotExistException < ServiceError
       end
-      class RepositoryLimitExceededException < ::Aws::Errors::ServiceError
+      class RepositoryLimitExceededException < ServiceError
       end
-      class RepositoryNameExistsException < ::Aws::Errors::ServiceError
+      class RepositoryNameExistsException < ServiceError
       end
-      class RepositoryNameRequiredException < ::Aws::Errors::ServiceError
+      class RepositoryNameRequiredException < ServiceError
       end
-      class RepositoryNamesRequiredException < ::Aws::Errors::ServiceError
+      class RepositoryNamesRequiredException < ServiceError
       end
-      class RepositoryNotAssociatedWithPullRequestException < ::Aws::Errors::ServiceError
+      class RepositoryNotAssociatedWithPullRequestException < ServiceError
       end
-      class RepositoryTriggerBranchNameListRequiredException < ::Aws::Errors::ServiceError
+      class RepositoryTriggerBranchNameListRequiredException < ServiceError
       end
-      class RepositoryTriggerDestinationArnRequiredException < ::Aws::Errors::ServiceError
+      class RepositoryTriggerDestinationArnRequiredException < ServiceError
       end
-      class RepositoryTriggerEventsListRequiredException < ::Aws::Errors::ServiceError
+      class RepositoryTriggerEventsListRequiredException < ServiceError
       end
-      class RepositoryTriggerNameRequiredException < ::Aws::Errors::ServiceError
+      class RepositoryTriggerNameRequiredException < ServiceError
       end
-      class RepositoryTriggersListRequiredException < ::Aws::Errors::ServiceError
+      class RepositoryTriggersListRequiredException < ServiceError
       end
-      class ResourceArnRequiredException < ::Aws::Errors::ServiceError
+      class ResourceArnRequiredException < ServiceError
       end
-      class RestrictedSourceFileException < ::Aws::Errors::ServiceError
+      class RestrictedSourceFileException < ServiceError
       end
-      class RevisionIdRequiredException < ::Aws::Errors::ServiceError
+      class RevisionIdRequiredException < ServiceError
       end
-      class RevisionNotCurrentException < ::Aws::Errors::ServiceError
+      class RevisionNotCurrentException < ServiceError
       end
-      class SameFileContentException < ::Aws::Errors::ServiceError
+      class SameFileContentException < ServiceError
       end
-      class SamePathRequestException < ::Aws::Errors::ServiceError
+      class SamePathRequestException < ServiceError
       end
-      class SourceAndDestinationAreSameException < ::Aws::Errors::ServiceError
+      class SourceAndDestinationAreSameException < ServiceError
       end
-      class SourceFileOrContentRequiredException < ::Aws::Errors::ServiceError
+      class SourceFileOrContentRequiredException < ServiceError
       end
-      class TagKeysListRequiredException < ::Aws::Errors::ServiceError
+      class TagKeysListRequiredException < ServiceError
       end
-      class TagPolicyException < ::Aws::Errors::ServiceError
+      class TagPolicyException < ServiceError
       end
-      class TagsMapRequiredException < ::Aws::Errors::ServiceError
+      class TagsMapRequiredException < ServiceError
       end
-      class TargetRequiredException < ::Aws::Errors::ServiceError
+      class TargetRequiredException < ServiceError
       end
-      class TargetsRequiredException < ::Aws::Errors::ServiceError
+      class TargetsRequiredException < ServiceError
       end
-      class TipOfSourceReferenceIsDifferentException < ::Aws::Errors::ServiceError
+      class TipOfSourceReferenceIsDifferentException < ServiceError
       end
-      class TipsDivergenceExceededException < ::Aws::Errors::ServiceError
+      class TipsDivergenceExceededException < ServiceError
       end
-      class TitleRequiredException < ::Aws::Errors::ServiceError
+      class TitleRequiredException < ServiceError
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TooManyTagsException < ServiceError
       end
-      class ValidationException < ::Aws::Errors::ServiceError
+      class ValidationException < ServiceError
       end
     end
   end

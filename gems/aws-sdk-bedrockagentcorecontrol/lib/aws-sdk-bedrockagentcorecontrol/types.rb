@@ -351,6 +351,37 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A port or port range that is reachable through the runtime's session
+    # URL. Specify exactly one of `port` or `portRange`.
+    #
+    # @note AllowedPort is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note AllowedPort is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of AllowedPort corresponding to the set member.
+    #
+    # @!attribute [rw] port
+    #   A single port that is reachable through the runtime's session URL.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] port_range
+    #   An inclusive range of ports that are reachable through the
+    #   runtime's session URL.
+    #   @return [Types::PortRange]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/AllowedPort AWS API Documentation
+    #
+    class AllowedPort < Struct.new(
+      :port,
+      :port_range,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Port < AllowedPort; end
+      class PortRange < AllowedPort; end
+      class Unknown < AllowedPort; end
+    end
+
     # The configuration that restricts which workloads in the request's
     # identity chain are allowed to invoke the target, identified by their
     # hosting environments and workload identities. At launch, this is
@@ -1255,6 +1286,22 @@ module Aws::BedrockAgentCoreControl
       class Unknown < CertificateLocation; end
     end
 
+    # Specifies whether the circuit breaker monitors failures for the
+    # targets in a fallback chain.
+    #
+    # @!attribute [rw] mode
+    #   Specifies whether you want the circuit breaker turned on. To turn it
+    #   off, set this value to `DISABLED`. The default is `ENABLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CircuitBreakerConfiguration AWS API Documentation
+    #
+    class CircuitBreakerConfiguration < Struct.new(
+      :mode)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The value or values to match for.
     #
     # * Include a `matchValueString` with the `EQUALS` operator to specify a
@@ -1716,7 +1763,7 @@ module Aws::BedrockAgentCoreControl
     end
 
     # A condition that determines when a gateway rule applies. Conditions
-    # can match on principals or request paths.
+    # can match on principals, request paths, or the requested model.
     #
     # @note Condition is a union - when making an API calls you must set exactly one of the members.
     #
@@ -1731,11 +1778,17 @@ module Aws::BedrockAgentCoreControl
     #   A condition that matches on the request path.
     #   @return [Types::MatchPaths]
     #
+    # @!attribute [rw] match_models
+    #   A condition that matches on the model requested in an inference
+    #   request.
+    #   @return [Types::MatchModels]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Condition AWS API Documentation
     #
     class Condition < Struct.new(
       :match_principals,
       :match_paths,
+      :match_models,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -1743,6 +1796,7 @@ module Aws::BedrockAgentCoreControl
 
       class MatchPrincipals < Condition; end
       class MatchPaths < Condition; end
+      class MatchModels < Condition; end
       class Unknown < Condition; end
     end
 
@@ -2296,8 +2350,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::RequestHeaderConfiguration]
     #
     # @!attribute [rw] protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The protocol configuration for the AgentCore Runtime, including the
+    #   protocol, port, and path on which the agent server is available.
     #   @return [Types::ProtocolConfiguration]
     #
     # @!attribute [rw] lifecycle_configuration
@@ -2332,6 +2386,14 @@ module Aws::BedrockAgentCoreControl
     #   Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] allowed_ports
+    #   The additional ports on the AgentCore Runtime that are reachable
+    #   through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
+    #   @return [Array<Types::AllowedPort>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/CreateAgentRuntimeRequest AWS API Documentation
     #
     class CreateAgentRuntimeRequest < Struct.new(
@@ -2349,7 +2411,8 @@ module Aws::BedrockAgentCoreControl
       :filesystem_configurations,
       :capacity_provider_configuration,
       :tags,
-      :platform_version)
+      :platform_version,
+      :allowed_ports)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -7296,6 +7359,38 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # The rating scale for one dimension of an LLM-as-a-judge evaluator,
+    # supporting either a numerical or a categorical scale.
+    #
+    # @note DimensionRatingScale is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note DimensionRatingScale is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of DimensionRatingScale corresponding to the set member.
+    #
+    # @!attribute [rw] numerical
+    #   The numerical rating scale with defined score values and
+    #   descriptions for quantitative evaluation of the dimension.
+    #   @return [Array<Types::NumericalScaleDefinition>]
+    #
+    # @!attribute [rw] categorical
+    #   The categorical rating scale with named categories and definitions
+    #   for qualitative evaluation of the dimension.
+    #   @return [Array<Types::CategoricalScaleDefinition>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/DimensionRatingScale AWS API Documentation
+    #
+    class DimensionRatingScale < Struct.new(
+      :numerical,
+      :categorical,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Numerical < DimensionRatingScale; end
+      class Categorical < DimensionRatingScale; end
+      class Unknown < DimensionRatingScale; end
+    end
+
     # The configuration for an Amazon EBS-backed persistent volume. The
     # service creates persistent volumes when a session first launches, and
     # the volumes survive instance termination. The volumes persist until
@@ -7866,6 +7961,36 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # A single dimension of an LLM-as-a-judge evaluator, defining what the
+    # evaluator model should judge for that dimension and how it should be
+    # scored.
+    #
+    # @!attribute [rw] dimension_name
+    #   The name of the dimension. This name is unique within the evaluator
+    #   and identifies the dimension's results.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_instruction
+    #   The instruction to the evaluator model for this dimension,
+    #   describing what the model should judge when scoring the dimension.
+    #   @return [String]
+    #
+    # @!attribute [rw] dimension_rating_scale
+    #   The rating scale for this dimension, which can be numerical or
+    #   categorical. A dimension's rating scale cannot itself be
+    #   multi-dimensional.
+    #   @return [Types::DimensionRatingScale]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/EvaluationDimension AWS API Documentation
+    #
+    class EvaluationDimension < Struct.new(
+      :dimension_name,
+      :dimension_instruction,
+      :dimension_rating_scale)
+      SENSITIVE = [:dimension_instruction, :dimension_rating_scale]
+      include Aws::Structure
+    end
+
     # The configuration that defines how an evaluator assesses agent
     # performance, including the evaluation method and parameters.
     #
@@ -8081,6 +8206,145 @@ module Aws::BedrockAgentCoreControl
 
       class CustomExtractionConfiguration < ExtractionConfiguration; end
       class Unknown < ExtractionConfiguration; end
+    end
+
+    # The fallback configuration for a route to an inference target. Defines
+    # an ordered list of fallback targets to try when a request to the
+    # route's target fails, and the conditions that trigger a fallback. A
+    # fallback can occur only before the gateway sends the first byte of the
+    # response to the caller. After a streaming response starts, the gateway
+    # doesn't fall back.
+    #
+    # @!attribute [rw] trigger_on
+    #   The status codes and errors from the route's target that cause the
+    #   gateway to send the request to the first fallback target. If you
+    #   omit `triggerOn`, the gateway falls back on `5XX` status codes and
+    #   on the `CONNECTION_ERROR`, `FIRST_BYTE_TIMEOUT`, and `UNROUTABLE`
+    #   errors. If you specify `triggerOn`, only the status codes and errors
+    #   that you list trigger a fallback.
+    #   @return [Types::FallbackTriggers]
+    #
+    # @!attribute [rw] first_byte_timeout_milliseconds
+    #   The maximum time, in milliseconds, from sending the request to the
+    #   route's target until the first byte of the response body arrives.
+    #   If the time expires, the gateway abandons the request and treats it
+    #   as a `FIRST_BYTE_TIMEOUT` error. If you don't specify a value, no
+    #   timeout is enforced.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] circuit_breaker
+    #   Specifies whether the gateway temporarily stops sending your
+    #   requests to a failing target. The circuit breaker tracks each
+    #   combination of target and model separately. With the circuit breaker
+    #   enabled, the gateway skips one or more targets and models that fail
+    #   repeatedly, and your requests go to the next target in the chain.
+    #   The gateway always tries the last remaining target in the chain. The
+    #   gateway enables the circuit breaker by default.
+    #   @return [Types::CircuitBreakerConfiguration]
+    #
+    # @!attribute [rw] target_fallback
+    #   The ordered list of fallback targets. The gateway tries each target
+    #   in order until a response doesn't match that target's triggers,
+    #   and returns that response to the caller. If every target fails, the
+    #   gateway returns the last response. You can specify up to two
+    #   fallback targets. Each combination of target and model, including
+    #   the route's target, can appear only once.
+    #   @return [Array<Types::FallbackTarget>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/Fallback AWS API Documentation
+    #
+    class Fallback < Struct.new(
+      :trigger_on,
+      :first_byte_timeout_milliseconds,
+      :circuit_breaker,
+      :target_fallback)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Specifies a target to send the request to when the previous target in
+    # the fallback chain fails. Includes the target name, the model to send,
+    # and the conditions that trigger a fallback from this target to the
+    # next one.
+    #
+    # @!attribute [rw] target_name
+    #   The name of the gateway target to fall back to. The target must be
+    #   an inference target.
+    #   @return [String]
+    #
+    # @!attribute [rw] model
+    #   The model ID to send to this fallback target. If you don't specify
+    #   a model, the gateway sends the model from the original request.
+    #   @return [String]
+    #
+    # @!attribute [rw] trigger_on
+    #   The status codes and errors from this target that cause the gateway
+    #   to send the request to the next fallback target. This setting isn't
+    #   inherited from the route. If you omit it, the gateway uses the
+    #   default triggers: `5XX` status codes and the `CONNECTION_ERROR`,
+    #   `FIRST_BYTE_TIMEOUT`, and `UNROUTABLE` errors.
+    #   @return [Types::FallbackTriggers]
+    #
+    # @!attribute [rw] first_byte_timeout_milliseconds
+    #   The maximum time, in milliseconds, from sending the request to this
+    #   target until the first byte of the response body arrives. This
+    #   setting isn't inherited from the route. If you don't specify a
+    #   value, no timeout is enforced.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/FallbackTarget AWS API Documentation
+    #
+    class FallbackTarget < Struct.new(
+      :target_name,
+      :model,
+      :trigger_on,
+      :first_byte_timeout_milliseconds)
+      SENSITIVE = [:target_name]
+      include Aws::Structure
+    end
+
+    # The conditions that trigger a fallback to the next target. A fallback
+    # occurs if the response matches any of the specified status codes or
+    # errors.
+    #
+    # @!attribute [rw] status_codes
+    #   The HTTP status codes returned by the target that trigger a
+    #   fallback. You can specify the following:
+    #
+    #   * An exact status code – A three-digit code, such as `429`.
+    #
+    #   * A class of status codes – The first digit followed by `XX`, such
+    #     as `5XX`, which matches every code from 500 to 599.
+    #
+    #   Only 4XX and 5XX codes are supported. Throttling by the gateway
+    #   itself doesn't trigger a fallback.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] errors
+    #   The errors that trigger a fallback. You can specify the following:
+    #
+    #   * `CONNECTION_ERROR` – The gateway couldn't connect to the target
+    #     because the connection was refused, reset, or timed out. The
+    #     request didn't reach the target.
+    #
+    #   * `FIRST_BYTE_TIMEOUT` – The target accepted the connection but
+    #     didn't return the first byte of the response within
+    #     `firstByteTimeoutMilliseconds`. The gateway abandons the request
+    #     before any of the response reaches you.
+    #
+    #   * `UNROUTABLE` – The gateway couldn't route the request to the
+    #     target, for example because the target doesn't exist or doesn't
+    #     support the request path. These errors don't count toward the
+    #     circuit breaker.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/FallbackTriggers AWS API Documentation
+    #
+    class FallbackTriggers < Struct.new(
+      :status_codes,
+      :errors)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Configuration for a filesystem that can be mounted into the AgentCore
@@ -8761,8 +9025,8 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::AgentRuntimeArtifact]
     #
     # @!attribute [rw] protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The protocol configuration for the AgentCore Runtime, including the
+    #   protocol, port, and path on which the agent server is available.
     #   @return [Types::ProtocolConfiguration]
     #
     # @!attribute [rw] environment_variables
@@ -8795,6 +9059,11 @@ module Aws::BedrockAgentCoreControl
     #   The version of the runtime platform used by the AgentCore Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] allowed_ports
+    #   The additional ports on the AgentCore Runtime that are reachable
+    #   through the runtime's session URL.
+    #   @return [Array<Types::AllowedPort>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/GetAgentRuntimeResponse AWS API Documentation
     #
     class GetAgentRuntimeResponse < Struct.new(
@@ -8819,7 +9088,8 @@ module Aws::BedrockAgentCoreControl
       :metadata_configuration,
       :filesystem_configurations,
       :capacity_provider_configuration,
-      :platform_version)
+      :platform_version,
+      :allowed_ports)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure
     end
@@ -15728,11 +15998,16 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::StreamingConfiguration]
     #
     # @!attribute [rw] disable_mcp_list_tools_pagination
-    #   Specifies whether pagination is disabled for the Model Context
-    #   Protocol (MCP) `tools/list` operation. When set to `true`, the
-    #   gateway returns the complete list of tools in a single response
+    #   Specifies whether the gateway disables pagination for the Model
+    #   Context Protocol (MCP) `tools/list` operation. When set to `true`,
+    #   the gateway returns the complete list of tools in a single response
     #   without a pagination cursor. When set to `false` or omitted, the
-    #   gateway returns tools in paginated responses.
+    #   gateway returns tools in paginated responses. For information about
+    #   changing this value on an existing gateway, see [UpdateGateway][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/bedrock-agentcore-control/latest/APIReference/API_UpdateGateway.html
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MCPGatewayConfiguration AWS API Documentation
@@ -15818,6 +16093,49 @@ module Aws::BedrockAgentCoreControl
       :security_group_ids,
       :tags,
       :routing_domain)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A model ID or pattern to match against the requested model, and the
+    # operator to use for the comparison.
+    #
+    # @!attribute [rw] value
+    #   The model ID or pattern to match. With the `StringLike` operator,
+    #   you can use `*` and `?` as wildcards, for example
+    #   `anthropic.claude-*`.
+    #   @return [String]
+    #
+    # @!attribute [rw] operator
+    #   The operator to use when comparing the requested model to the value:
+    #
+    #   * `StringEquals` – Requires an exact match.
+    #
+    #   * `StringLike` – Supports wildcard patterns using `*` and `?`. This
+    #     is the default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MatchModelEntry AWS API Documentation
+    #
+    class MatchModelEntry < Struct.new(
+      :value,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A condition that matches inference requests based on the requested
+    # model.
+    #
+    # @!attribute [rw] any_of
+    #   A list of model entries. The condition is met if the requested model
+    #   matches any of the entries.
+    #   @return [Array<Types::MatchModelEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/MatchModels AWS API Documentation
+    #
+    class MatchModels < Struct.new(
+      :any_of)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -17134,6 +17452,24 @@ module Aws::BedrockAgentCoreControl
       class Unknown < Oauth2ProviderConfigOutput; end
     end
 
+    # Specifies the client authentication method to use for the on-behalf-of
+    # token exchange.
+    #
+    # @!attribute [rw] client_authentication_method
+    #   The client authentication method to use during the on-behalf-of
+    #   token exchange. The `NO_CLIENT` option omits the `clientId` and
+    #   `clientSecret` during the on-behalf-of token exchange with the
+    #   identity provider.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OnBehalfOfAuthenticationConfig AWS API Documentation
+    #
+    class OnBehalfOfAuthenticationConfig < Struct.new(
+      :client_authentication_method)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Configuration for on-behalf-of token exchange.
     #
     # @!attribute [rw] grant_type
@@ -17144,11 +17480,21 @@ module Aws::BedrockAgentCoreControl
     #   Configuration specific to the TOKEN\_EXCHANGE grant type (RFC 8693).
     #   @return [Types::TokenExchangeGrantTypeConfigType]
     #
+    # @!attribute [rw] on_behalf_of_authentication_config
+    #   Specify the client authentication configuration to use for the
+    #   on-behalf-of token exchange. With this configuration, you override
+    #   the provider level client authentication method for the on-behalf-of
+    #   exchange with the identity provider. If you don't specify this
+    #   configuration, we use the provider level client authentication
+    #   method.
+    #   @return [Types::OnBehalfOfAuthenticationConfig]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/OnBehalfOfTokenExchangeConfigType AWS API Documentation
     #
     class OnBehalfOfTokenExchangeConfigType < Struct.new(
       :grant_type,
-      :token_exchange_grant_type_config)
+      :token_exchange_grant_type_config,
+      :on_behalf_of_authentication_config)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18143,6 +18489,26 @@ module Aws::BedrockAgentCoreControl
       include Aws::Structure
     end
 
+    # An inclusive range of ports. The value of `from` must be less than or
+    # equal to the value of `to`.
+    #
+    # @!attribute [rw] from
+    #   The first port in the inclusive range.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] to
+    #   The last port in the inclusive range.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/PortRange AWS API Documentation
+    #
+    class PortRange < Struct.new(
+      :from,
+      :to)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The private endpoint configuration for a gateway target. Defines how
     # the gateway connects to private resources in your VPC.
     #
@@ -18263,10 +18629,26 @@ module Aws::BedrockAgentCoreControl
     #   which protocol the agent runtime uses to communicate with clients.
     #   @return [String]
     #
+    # @!attribute [rw] port
+    #   The port on which the agent server listens. The port must be between
+    #   `8000` and `12000`, excluding the reserved port `8443`. When this
+    #   field is omitted, the default is `8080` for `HTTP` and `AGUI`,
+    #   `8000` for `MCP`, and `9000` for `A2A`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] path
+    #   The path on which the agent server accepts requests. The path must
+    #   begin with `/`. When this field is omitted, the default is
+    #   `/invocations` for `HTTP` and `AGUI`, `/mcp` for `MCP`, and `/` for
+    #   `A2A`.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ProtocolConfiguration AWS API Documentation
     #
     class ProtocolConfiguration < Struct.new(
-      :server_protocol)
+      :server_protocol,
+      :port,
+      :path)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -18369,11 +18751,19 @@ module Aws::BedrockAgentCoreControl
     #   for qualitative evaluation.
     #   @return [Array<Types::CategoricalScaleDefinition>]
     #
+    # @!attribute [rw] multi_dimensional
+    #   A list of dimensions that lets an LLM-as-a-judge evaluator score
+    #   several dimensions of the same target in a single evaluation. Each
+    #   dimension has its own instruction and rating scale, and produces its
+    #   own result.
+    #   @return [Array<Types::EvaluationDimension>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/RatingScale AWS API Documentation
     #
     class RatingScale < Struct.new(
       :numerical,
       :categorical,
+      :multi_dimensional,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
@@ -18381,6 +18771,7 @@ module Aws::BedrockAgentCoreControl
 
       class Numerical < RatingScale; end
       class Categorical < RatingScale; end
+      class MultiDimensional < RatingScale; end
       class Unknown < RatingScale; end
     end
 
@@ -18754,6 +19145,42 @@ module Aws::BedrockAgentCoreControl
 
       class RequestHeaderAllowlist < RequestHeaderConfiguration; end
       class Unknown < RequestHeaderConfiguration; end
+    end
+
+    # @!attribute [rw] token_vault_id
+    #   The unique identifier of the token vault to reset. To reset your
+    #   account's default token vault, specify `default`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResetTokenVaultKeyMaterialRequest AWS API Documentation
+    #
+    class ResetTokenVaultKeyMaterialRequest < Struct.new(
+      :token_vault_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] token_vault_id
+    #   The ID of the token vault.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_configuration
+    #   The KMS configuration for the token vault after the reset. The token
+    #   vault uses an Amazon Web Services managed key.
+    #   @return [Types::KmsConfiguration]
+    #
+    # @!attribute [rw] last_modified_date
+    #   The timestamp when the token vault was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/ResetTokenVaultKeyMaterialResponse AWS API Documentation
+    #
+    class ResetTokenVaultKeyMaterialResponse < Struct.new(
+      :token_vault_id,
+      :kms_configuration,
+      :last_modified_date)
+      SENSITIVE = []
+      include Aws::Structure
     end
 
     # Represents a resource within the AgentCore Policy system. Resources
@@ -19971,10 +20398,23 @@ module Aws::BedrockAgentCoreControl
     #   The name of the target to route requests to.
     #   @return [String]
     #
+    # @!attribute [rw] model
+    #   The model ID to send to the target. Supported only for inference
+    #   targets. If you don't specify a model, the gateway sends the model
+    #   from the original request.
+    #   @return [String]
+    #
+    # @!attribute [rw] fallback
+    #   The fallback configuration for this route. Supported only for
+    #   inference targets.
+    #   @return [Types::Fallback]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/StaticRoute AWS API Documentation
     #
     class StaticRoute < Struct.new(
-      :target_name)
+      :target_name,
+      :model,
+      :fallback)
       SENSITIVE = [:target_name]
       include Aws::Structure
     end
@@ -20617,6 +21057,21 @@ module Aws::BedrockAgentCoreControl
 
     # An entry in a target traffic split configuration.
     #
+    # @!attribute [rw] target_name
+    #   The name of the target to route traffic to.
+    #   @return [String]
+    #
+    # @!attribute [rw] model
+    #   The model ID to send to the target for this variant. Supported only
+    #   for inference targets. If you don't specify a model, the gateway
+    #   sends the model from the original request.
+    #   @return [String]
+    #
+    # @!attribute [rw] fallback
+    #   The fallback configuration for this variant. Supported only for
+    #   inference targets.
+    #   @return [Types::Fallback]
+    #
     # @!attribute [rw] name
     #   The name of this traffic split variant.
     #   @return [String]
@@ -20624,10 +21079,6 @@ module Aws::BedrockAgentCoreControl
     # @!attribute [rw] weight
     #   The percentage of traffic to route to this variant.
     #   @return [Integer]
-    #
-    # @!attribute [rw] target_name
-    #   The name of the target to route traffic to.
-    #   @return [String]
     #
     # @!attribute [rw] description
     #   The description of this traffic split variant.
@@ -20640,9 +21091,11 @@ module Aws::BedrockAgentCoreControl
     # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-control-2023-06-05/TargetTrafficSplitEntry AWS API Documentation
     #
     class TargetTrafficSplitEntry < Struct.new(
+      :target_name,
+      :model,
+      :fallback,
       :name,
       :weight,
-      :target_name,
       :description,
       :metadata)
       SENSITIVE = [:target_name]
@@ -21133,8 +21586,9 @@ module Aws::BedrockAgentCoreControl
     #   @return [Types::RequestHeaderConfiguration]
     #
     # @!attribute [rw] protocol_configuration
-    #   The protocol configuration for an agent runtime. This structure
-    #   defines how the agent runtime communicates with clients.
+    #   The updated protocol configuration for the AgentCore Runtime,
+    #   including the protocol, port, and path on which the agent server is
+    #   available.
     #   @return [Types::ProtocolConfiguration]
     #
     # @!attribute [rw] lifecycle_configuration
@@ -21166,6 +21620,14 @@ module Aws::BedrockAgentCoreControl
     #   Runtime.
     #   @return [String]
     #
+    # @!attribute [rw] allowed_ports
+    #   The updated additional ports on the AgentCore Runtime that are
+    #   reachable through the runtime's session URL. Specify one to five
+    #   non-overlapping entries, each containing either a single port or an
+    #   inclusive port range. Ports must be between `8000` and `12000`,
+    #   excluding the reserved port `8443`.
+    #   @return [Array<Types::AllowedPort>]
+    #
     # @!attribute [rw] client_token
     #   A unique, case-sensitive identifier to ensure idempotency of the
     #   request.
@@ -21191,6 +21653,7 @@ module Aws::BedrockAgentCoreControl
       :filesystem_configurations,
       :capacity_provider_configuration,
       :platform_version,
+      :allowed_ports,
       :client_token)
       SENSITIVE = [:description, :environment_variables]
       include Aws::Structure

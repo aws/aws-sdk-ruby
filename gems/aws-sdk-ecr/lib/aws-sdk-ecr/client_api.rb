@@ -90,6 +90,8 @@ module Aws::ECR
     DescribePullThroughCacheRulesResponse = Shapes::StructureShape.new(name: 'DescribePullThroughCacheRulesResponse')
     DescribeRegistryRequest = Shapes::StructureShape.new(name: 'DescribeRegistryRequest')
     DescribeRegistryResponse = Shapes::StructureShape.new(name: 'DescribeRegistryResponse')
+    DescribeReplicationBackfillResultsRequest = Shapes::StructureShape.new(name: 'DescribeReplicationBackfillResultsRequest')
+    DescribeReplicationBackfillResultsResponse = Shapes::StructureShape.new(name: 'DescribeReplicationBackfillResultsResponse')
     DescribeRepositoriesRequest = Shapes::StructureShape.new(name: 'DescribeRepositoriesRequest')
     DescribeRepositoriesResponse = Shapes::StructureShape.new(name: 'DescribeRepositoriesResponse')
     DescribeRepositoryCreationTemplatesRequest = Shapes::StructureShape.new(name: 'DescribeRepositoryCreationTemplatesRequest')
@@ -232,6 +234,8 @@ module Aws::ECR
     ListImagesResponse = Shapes::StructureShape.new(name: 'ListImagesResponse')
     ListPullTimeUpdateExclusionsRequest = Shapes::StructureShape.new(name: 'ListPullTimeUpdateExclusionsRequest')
     ListPullTimeUpdateExclusionsResponse = Shapes::StructureShape.new(name: 'ListPullTimeUpdateExclusionsResponse')
+    ListReplicationBackfillsRequest = Shapes::StructureShape.new(name: 'ListReplicationBackfillsRequest')
+    ListReplicationBackfillsResponse = Shapes::StructureShape.new(name: 'ListReplicationBackfillsResponse')
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
@@ -239,6 +243,7 @@ module Aws::ECR
     MediaTypeList = Shapes::ListShape.new(name: 'MediaTypeList')
     Metric = Shapes::StringShape.new(name: 'Metric')
     NextToken = Shapes::StringShape.new(name: 'NextToken')
+    NonNegativeInteger = Shapes::IntegerShape.new(name: 'NonNegativeInteger')
     PTCValidateFailure = Shapes::StringShape.new(name: 'PTCValidateFailure')
     PackageManager = Shapes::StringShape.new(name: 'PackageManager')
     PackageVulnerabilityDetails = Shapes::StructureShape.new(name: 'PackageVulnerabilityDetails')
@@ -295,10 +300,23 @@ module Aws::ECR
     RelatedVulnerability = Shapes::StringShape.new(name: 'RelatedVulnerability')
     Release = Shapes::StringShape.new(name: 'Release')
     Remediation = Shapes::StructureShape.new(name: 'Remediation')
+    ReplicationBackfillError = Shapes::StringShape.new(name: 'ReplicationBackfillError')
+    ReplicationBackfillId = Shapes::StringShape.new(name: 'ReplicationBackfillId')
+    ReplicationBackfillInProgressException = Shapes::StructureShape.new(name: 'ReplicationBackfillInProgressException')
+    ReplicationBackfillInvalidStatusException = Shapes::StructureShape.new(name: 'ReplicationBackfillInvalidStatusException')
+    ReplicationBackfillNotFoundException = Shapes::StructureShape.new(name: 'ReplicationBackfillNotFoundException')
+    ReplicationBackfillProgress = Shapes::StructureShape.new(name: 'ReplicationBackfillProgress')
+    ReplicationBackfillResult = Shapes::StructureShape.new(name: 'ReplicationBackfillResult')
+    ReplicationBackfillResultList = Shapes::ListShape.new(name: 'ReplicationBackfillResultList')
+    ReplicationBackfillResultStatus = Shapes::StringShape.new(name: 'ReplicationBackfillResultStatus')
+    ReplicationBackfillStatus = Shapes::StringShape.new(name: 'ReplicationBackfillStatus')
+    ReplicationBackfillSummary = Shapes::StructureShape.new(name: 'ReplicationBackfillSummary')
+    ReplicationBackfillSummaryList = Shapes::ListShape.new(name: 'ReplicationBackfillSummaryList')
     ReplicationConfiguration = Shapes::StructureShape.new(name: 'ReplicationConfiguration')
     ReplicationDestination = Shapes::StructureShape.new(name: 'ReplicationDestination')
     ReplicationDestinationList = Shapes::ListShape.new(name: 'ReplicationDestinationList')
     ReplicationError = Shapes::StringShape.new(name: 'ReplicationError')
+    ReplicationErrorList = Shapes::ListShape.new(name: 'ReplicationErrorList')
     ReplicationRule = Shapes::StructureShape.new(name: 'ReplicationRule')
     ReplicationRuleList = Shapes::ListShape.new(name: 'ReplicationRuleList')
     ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
@@ -367,7 +385,11 @@ module Aws::ECR
     StartImageScanResponse = Shapes::StructureShape.new(name: 'StartImageScanResponse')
     StartLifecyclePolicyPreviewRequest = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewRequest')
     StartLifecyclePolicyPreviewResponse = Shapes::StructureShape.new(name: 'StartLifecyclePolicyPreviewResponse')
+    StartReplicationBackfillRequest = Shapes::StructureShape.new(name: 'StartReplicationBackfillRequest')
+    StartReplicationBackfillResponse = Shapes::StructureShape.new(name: 'StartReplicationBackfillResponse')
     Status = Shapes::StringShape.new(name: 'Status')
+    StopReplicationBackfillRequest = Shapes::StructureShape.new(name: 'StopReplicationBackfillRequest')
+    StopReplicationBackfillResponse = Shapes::StructureShape.new(name: 'StopReplicationBackfillResponse')
     String = Shapes::StringShape.new(name: 'String')
     SubjectIdentifier = Shapes::StructureShape.new(name: 'SubjectIdentifier')
     Tag = Shapes::StructureShape.new(name: 'Tag')
@@ -701,6 +723,25 @@ module Aws::ECR
     DescribeRegistryResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     DescribeRegistryResponse.add_member(:replication_configuration, Shapes::ShapeRef.new(shape: ReplicationConfiguration, location_name: "replicationConfiguration"))
     DescribeRegistryResponse.struct_class = Types::DescribeRegistryResponse
+
+    DescribeReplicationBackfillResultsRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DescribeReplicationBackfillResultsRequest.add_member(:replication_backfill_id, Shapes::ShapeRef.new(shape: ReplicationBackfillId, required: true, location_name: "replicationBackfillId"))
+    DescribeReplicationBackfillResultsRequest.add_member(:result_status_filter, Shapes::ShapeRef.new(shape: ReplicationBackfillResultStatus, location_name: "resultStatusFilter"))
+    DescribeReplicationBackfillResultsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+    DescribeReplicationBackfillResultsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeReplicationBackfillResultsRequest.struct_class = Types::DescribeReplicationBackfillResultsRequest
+
+    DescribeReplicationBackfillResultsResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    DescribeReplicationBackfillResultsResponse.add_member(:replication_backfill_id, Shapes::ShapeRef.new(shape: ReplicationBackfillId, location_name: "replicationBackfillId"))
+    DescribeReplicationBackfillResultsResponse.add_member(:destination, Shapes::ShapeRef.new(shape: ReplicationDestination, location_name: "destination"))
+    DescribeReplicationBackfillResultsResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationBackfillStatus, location_name: "status"))
+    DescribeReplicationBackfillResultsResponse.add_member(:failure_code, Shapes::ShapeRef.new(shape: ReplicationBackfillError, location_name: "failureCode"))
+    DescribeReplicationBackfillResultsResponse.add_member(:progress, Shapes::ShapeRef.new(shape: ReplicationBackfillProgress, location_name: "progress"))
+    DescribeReplicationBackfillResultsResponse.add_member(:results, Shapes::ShapeRef.new(shape: ReplicationBackfillResultList, location_name: "results"))
+    DescribeReplicationBackfillResultsResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: Date, location_name: "startedAt"))
+    DescribeReplicationBackfillResultsResponse.add_member(:ended_at, Shapes::ShapeRef.new(shape: Date, location_name: "endedAt"))
+    DescribeReplicationBackfillResultsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    DescribeReplicationBackfillResultsResponse.struct_class = Types::DescribeReplicationBackfillResultsResponse
 
     DescribeRepositoriesRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
     DescribeRepositoriesRequest.add_member(:repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "repositoryNames"))
@@ -1093,6 +1134,16 @@ module Aws::ECR
     ListPullTimeUpdateExclusionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
     ListPullTimeUpdateExclusionsResponse.struct_class = Types::ListPullTimeUpdateExclusionsResponse
 
+    ListReplicationBackfillsRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    ListReplicationBackfillsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: FiftyMaxResults, location_name: "maxResults"))
+    ListReplicationBackfillsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListReplicationBackfillsRequest.struct_class = Types::ListReplicationBackfillsRequest
+
+    ListReplicationBackfillsResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    ListReplicationBackfillsResponse.add_member(:backfills, Shapes::ShapeRef.new(shape: ReplicationBackfillSummaryList, location_name: "backfills"))
+    ListReplicationBackfillsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListReplicationBackfillsResponse.struct_class = Types::ListReplicationBackfillsResponse
+
     ListTagsForResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "resourceArn"))
     ListTagsForResourceRequest.struct_class = Types::ListTagsForResourceRequest
 
@@ -1251,6 +1302,41 @@ module Aws::ECR
     Remediation.add_member(:recommendation, Shapes::ShapeRef.new(shape: Recommendation, location_name: "recommendation"))
     Remediation.struct_class = Types::Remediation
 
+    ReplicationBackfillInProgressException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReplicationBackfillInProgressException.struct_class = Types::ReplicationBackfillInProgressException
+
+    ReplicationBackfillInvalidStatusException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReplicationBackfillInvalidStatusException.struct_class = Types::ReplicationBackfillInvalidStatusException
+
+    ReplicationBackfillNotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ExceptionMessage, location_name: "message"))
+    ReplicationBackfillNotFoundException.struct_class = Types::ReplicationBackfillNotFoundException
+
+    ReplicationBackfillProgress.add_member(:total_replication_count, Shapes::ShapeRef.new(shape: NonNegativeInteger, required: true, location_name: "totalReplicationCount"))
+    ReplicationBackfillProgress.add_member(:completed_replication_count, Shapes::ShapeRef.new(shape: NonNegativeInteger, required: true, location_name: "completedReplicationCount"))
+    ReplicationBackfillProgress.add_member(:failed_replication_count, Shapes::ShapeRef.new(shape: NonNegativeInteger, required: true, location_name: "failedReplicationCount"))
+    ReplicationBackfillProgress.add_member(:failure_codes, Shapes::ShapeRef.new(shape: ReplicationErrorList, required: true, location_name: "failureCodes"))
+    ReplicationBackfillProgress.struct_class = Types::ReplicationBackfillProgress
+
+    ReplicationBackfillResult.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+    ReplicationBackfillResult.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, required: true, location_name: "imageId"))
+    ReplicationBackfillResult.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationBackfillResultStatus, required: true, location_name: "status"))
+    ReplicationBackfillResult.add_member(:failure_code, Shapes::ShapeRef.new(shape: ReplicationError, location_name: "failureCode"))
+    ReplicationBackfillResult.add_member(:sub_image_failure_codes, Shapes::ShapeRef.new(shape: ReplicationErrorList, location_name: "subImageFailureCodes"))
+    ReplicationBackfillResult.struct_class = Types::ReplicationBackfillResult
+
+    ReplicationBackfillResultList.member = Shapes::ShapeRef.new(shape: ReplicationBackfillResult)
+
+    ReplicationBackfillSummary.add_member(:replication_backfill_id, Shapes::ShapeRef.new(shape: ReplicationBackfillId, required: true, location_name: "replicationBackfillId"))
+    ReplicationBackfillSummary.add_member(:destination, Shapes::ShapeRef.new(shape: ReplicationDestination, required: true, location_name: "destination"))
+    ReplicationBackfillSummary.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationBackfillStatus, required: true, location_name: "status"))
+    ReplicationBackfillSummary.add_member(:failure_code, Shapes::ShapeRef.new(shape: ReplicationBackfillError, location_name: "failureCode"))
+    ReplicationBackfillSummary.add_member(:progress, Shapes::ShapeRef.new(shape: ReplicationBackfillProgress, location_name: "progress"))
+    ReplicationBackfillSummary.add_member(:started_at, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "startedAt"))
+    ReplicationBackfillSummary.add_member(:ended_at, Shapes::ShapeRef.new(shape: Date, location_name: "endedAt"))
+    ReplicationBackfillSummary.struct_class = Types::ReplicationBackfillSummary
+
+    ReplicationBackfillSummaryList.member = Shapes::ShapeRef.new(shape: ReplicationBackfillSummary)
+
     ReplicationConfiguration.add_member(:rules, Shapes::ShapeRef.new(shape: ReplicationRuleList, required: true, location_name: "rules"))
     ReplicationConfiguration.struct_class = Types::ReplicationConfiguration
 
@@ -1259,6 +1345,8 @@ module Aws::ECR
     ReplicationDestination.struct_class = Types::ReplicationDestination
 
     ReplicationDestinationList.member = Shapes::ShapeRef.new(shape: ReplicationDestination)
+
+    ReplicationErrorList.member = Shapes::ShapeRef.new(shape: ReplicationError)
 
     ReplicationRule.add_member(:destinations, Shapes::ShapeRef.new(shape: ReplicationDestinationList, required: true, location_name: "destinations"))
     ReplicationRule.add_member(:repository_filters, Shapes::ShapeRef.new(shape: RepositoryFilterList, location_name: "repositoryFilters"))
@@ -1412,6 +1500,28 @@ module Aws::ECR
     StartLifecyclePolicyPreviewResponse.add_member(:lifecycle_policy_text, Shapes::ShapeRef.new(shape: LifecyclePolicyText, location_name: "lifecyclePolicyText"))
     StartLifecyclePolicyPreviewResponse.add_member(:status, Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewStatus, location_name: "status"))
     StartLifecyclePolicyPreviewResponse.struct_class = Types::StartLifecyclePolicyPreviewResponse
+
+    StartReplicationBackfillRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    StartReplicationBackfillRequest.add_member(:destination, Shapes::ShapeRef.new(shape: ReplicationDestination, required: true, location_name: "destination"))
+    StartReplicationBackfillRequest.struct_class = Types::StartReplicationBackfillRequest
+
+    StartReplicationBackfillResponse.add_member(:replication_backfill_id, Shapes::ShapeRef.new(shape: ReplicationBackfillId, location_name: "replicationBackfillId"))
+    StartReplicationBackfillResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    StartReplicationBackfillResponse.add_member(:destination, Shapes::ShapeRef.new(shape: ReplicationDestination, location_name: "destination"))
+    StartReplicationBackfillResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationBackfillStatus, location_name: "status"))
+    StartReplicationBackfillResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: Date, location_name: "startedAt"))
+    StartReplicationBackfillResponse.struct_class = Types::StartReplicationBackfillResponse
+
+    StopReplicationBackfillRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    StopReplicationBackfillRequest.add_member(:replication_backfill_id, Shapes::ShapeRef.new(shape: ReplicationBackfillId, required: true, location_name: "replicationBackfillId"))
+    StopReplicationBackfillRequest.struct_class = Types::StopReplicationBackfillRequest
+
+    StopReplicationBackfillResponse.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+    StopReplicationBackfillResponse.add_member(:replication_backfill_id, Shapes::ShapeRef.new(shape: ReplicationBackfillId, location_name: "replicationBackfillId"))
+    StopReplicationBackfillResponse.add_member(:destination, Shapes::ShapeRef.new(shape: ReplicationDestination, location_name: "destination"))
+    StopReplicationBackfillResponse.add_member(:status, Shapes::ShapeRef.new(shape: ReplicationBackfillStatus, location_name: "status"))
+    StopReplicationBackfillResponse.add_member(:started_at, Shapes::ShapeRef.new(shape: Date, location_name: "startedAt"))
+    StopReplicationBackfillResponse.struct_class = Types::StopReplicationBackfillResponse
 
     SubjectIdentifier.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, required: true, location_name: "imageDigest"))
     SubjectIdentifier.struct_class = Types::SubjectIdentifier
@@ -1886,6 +1996,24 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
+      api.add_operation(:describe_replication_backfill_results, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeReplicationBackfillResults"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeReplicationBackfillResultsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeReplicationBackfillResultsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationBackfillNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:describe_repositories, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeRepositories"
         o.http_method = "POST"
@@ -2088,6 +2216,23 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: ServerException)
       end)
 
+      api.add_operation(:list_replication_backfills, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListReplicationBackfills"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListReplicationBackfillsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListReplicationBackfillsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTagsForResource"
         o.http_method = "POST"
@@ -2261,6 +2406,32 @@ module Aws::ECR
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: LifecyclePolicyPreviewInProgressException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+      end)
+
+      api.add_operation(:start_replication_backfill, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartReplicationBackfill"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartReplicationBackfillRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartReplicationBackfillResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationBackfillInProgressException)
+      end)
+
+      api.add_operation(:stop_replication_backfill, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopReplicationBackfill"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopReplicationBackfillRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopReplicationBackfillResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ServerException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationBackfillNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ReplicationBackfillInvalidStatusException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

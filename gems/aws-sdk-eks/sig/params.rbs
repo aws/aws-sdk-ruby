@@ -17,6 +17,21 @@ module Aws
       control_plane_egress_mode: ("AWS_MANAGED" | "CUSTOMER_ROUTED" | "CUSTOMER_ISOLATED")?
     }
 
+      type elastic_load_balancing = {
+      enabled: bool?,
+      gateway_api: {
+        crds: {
+          managed: bool?
+        }?
+      }?
+    }
+
+      type kubernetes_network_config_request = {
+      service_ipv_4_cidr: ::String?,
+      ip_family: ("ipv4" | "ipv6")?,
+      elastic_load_balancing: Params::elastic_load_balancing?
+    }
+
       type remote_network_config_request = {
       remote_node_networks: Array[
         {

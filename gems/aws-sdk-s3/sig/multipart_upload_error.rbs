@@ -1,0 +1,9 @@
+module Aws
+  module S3
+    class MultipartUploadError < StandardError
+      def initialize: (String message, ?Array[Exception] errors) -> void
+
+      attr_reader errors: Array[Exception]
+    end
+  end
+end

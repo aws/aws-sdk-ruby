@@ -127,6 +127,12 @@ module Aws
   # {Service} names are those used by the the AWS SDK for Ruby. They
   # correspond to the service's module.
   #
+  # ## Custom Partitions
+  #
+  # Custom partition `regionRegex` values are interpreted as regex patterns.
+  # Use only trusted, reviewed patterns, as malformed or inefficient patterns
+  # can cause errors or slow endpoint resolution.
+  #
   module Partitions
 
     class << self
@@ -356,6 +362,7 @@ module Aws
             'ConnectHealth' => 'health-agent',
             'ConnectParticipant' => 'participant.connect',
             'ConnectWisdomService' => 'wisdom',
+            'Continuum' => 'continuum',
             'ControlCatalog' => 'controlcatalog',
             'ControlTower' => 'controltower',
             'CostExplorer' => 'ce',
@@ -409,8 +416,6 @@ module Aws
             'FIS' => 'fis',
             'FMS' => 'fms',
             'FSx' => 'fsx',
-            'FinSpaceData' => 'finspace-api',
-            'Finspace' => 'finspace',
             'Firehose' => 'firehose',
             'ForecastQueryService' => 'forecastquery',
             'ForecastService' => 'forecast',
@@ -659,7 +664,6 @@ module Aws
             'TimestreamInfluxDB' => 'timestream-influxdb',
             'TimestreamQuery' => 'query.timestream',
             'TimestreamWrite' => 'ingest.timestream',
-            'Tnb' => 'tnb',
             'TranscribeService' => 'transcribe',
             'TranscribeStreamingService' => 'transcribestreaming',
             'Transfer' => 'transfer',

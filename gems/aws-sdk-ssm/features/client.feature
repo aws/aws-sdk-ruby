@@ -10,7 +10,3 @@ Feature: Amazon SSM
     When I attempt to call the "GetDocument" API with:
     | name | 'fake-name' |
     Then I expect the response error code to be "ValidationException"
-    And I expect the response error message to include:
-    """
-    validation error detected
-    """

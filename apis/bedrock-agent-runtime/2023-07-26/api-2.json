@@ -900,6 +900,7 @@
     "AgenticRetrieveAction":{
       "type":"structure",
       "members":{
+        "codeExecution":{"shape":"AgenticRetrieveCodeExecutionDetails"},
         "fullDocumentExpansion":{"shape":"AgenticRetrieveFullDocExpansionDetails"},
         "memoryRetrieve":{"shape":"AgenticRetrieveMemoryRetrieveDetails"},
         "retrieve":{"shape":"AgenticRetrieveActionDetails"}
@@ -919,6 +920,14 @@
     "AgenticRetrieveActions":{
       "type":"list",
       "member":{"shape":"AgenticRetrieveAction"}
+    },
+    "AgenticRetrieveAppliedInstruction":{
+      "type":"structure",
+      "required":["id"],
+      "members":{
+        "id":{"shape":"RetrievalInstructionId"},
+        "version":{"shape":"RetrievalInstructionVersion"}
+      }
     },
     "AgenticRetrieveBedrockGuardrailConfiguration":{
       "type":"structure",
@@ -985,6 +994,23 @@
       "type":"list",
       "member":{"shape":"AgenticRetrieveCitationReference"}
     },
+    "AgenticRetrieveCodeExecutionDetails":{
+      "type":"structure",
+      "members":{
+        "documents":{"shape":"AgenticRetrieveCodeExecutionDocumentList"}
+      }
+    },
+    "AgenticRetrieveCodeExecutionDocument":{
+      "type":"structure",
+      "members":{
+        "documentId":{"shape":"String"},
+        "sourceRetriever":{"shape":"AgenticRetrieveSourceRetriever"}
+      }
+    },
+    "AgenticRetrieveCodeExecutionDocumentList":{
+      "type":"list",
+      "member":{"shape":"AgenticRetrieveCodeExecutionDocument"}
+    },
     "AgenticRetrieveConfiguration":{
       "type":"structure",
       "members":{
@@ -1039,6 +1065,14 @@
         "id":{"shape":"String"},
         "message":{"shape":"String"},
         "version":{"shape":"String"}
+      }
+    },
+    "AgenticRetrieveInstructionConfiguration":{
+      "type":"structure",
+      "required":["retrievalInstructionId"],
+      "members":{
+        "retrievalInstructionId":{"shape":"RetrievalInstructionId"},
+        "version":{"shape":"RetrievalInstructionVersion"}
       }
     },
     "AgenticRetrieveMemoryConfiguration":{
@@ -1293,7 +1327,8 @@
         "Retrieval",
         "SpeculativeRetrieval",
         "FullDocumentExpansion",
-        "SessionHistoryLoad"
+        "SessionHistoryLoad",
+        "CodeExecution"
       ]
     },
     "AgenticRetrieveStreamRequest":{
@@ -1310,6 +1345,7 @@
         "messages":{"shape":"AgenticRetrieveStreamRequestMessagesList"},
         "nextToken":{"shape":"NextToken"},
         "policyConfiguration":{"shape":"AgenticRetrievePolicyConfiguration"},
+        "retrievalInstructionConfiguration":{"shape":"AgenticRetrieveInstructionConfiguration"},
         "retrievers":{"shape":"AgenticRetrieveStreamRequestRetrieversList"},
         "userContext":{"shape":"UserContext"}
       }
@@ -1373,6 +1409,7 @@
       ],
       "members":{
         "actions":{"shape":"AgenticRetrieveActions"},
+        "appliedInstruction":{"shape":"AgenticRetrieveAppliedInstruction"},
         "failures":{"shape":"AgenticRetrieveFailures"},
         "message":{"shape":"String"},
         "retrievalMetadata":{"shape":"AgenticRetrieveSourceMetadataList"},
@@ -5631,6 +5668,18 @@
       "type":"list",
       "member":{"shape":"RetrievalFilter"},
       "min":2
+    },
+    "RetrievalInstructionId":{
+      "type":"string",
+      "max":64,
+      "min":1,
+      "pattern":"^[a-z0-9]+$"
+    },
+    "RetrievalInstructionVersion":{
+      "type":"string",
+      "max":9,
+      "min":1,
+      "pattern":"^(DRAFT|[1-9][0-9]{0,8})$"
     },
     "RetrievalOverrides":{
       "type":"structure",

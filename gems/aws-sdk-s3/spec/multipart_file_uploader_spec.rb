@@ -169,7 +169,13 @@ module Aws
         end
 
         it 'reports when it is unable to abort a failed multipart upload', :jruby_flaky do
-          client.stub_responses(:upload_part, RuntimeError.new('part failed'))
+          client.stub_responses(:upload_part, lambda { |context|
+            if context.params[:part_number] == 2
+              RuntimeError.new('part failed')
+            else
+              { etag: 'etag' }
+            end
+          })
           client.stub_responses(:abort_multipart_upload, RuntimeError.new('network-error'))
           expect do
             subject.upload(large_file, params)

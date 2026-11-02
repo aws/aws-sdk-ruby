@@ -11,64 +11,64 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class AcceleratorNotDisabledException < ::Aws::Errors::ServiceError
+      class AcceleratorNotDisabledException < ServiceError
         def message: () -> ::String
       end
-      class AcceleratorNotFoundException < ::Aws::Errors::ServiceError
+      class AcceleratorNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class AccessDeniedException < ::Aws::Errors::ServiceError
+      class AccessDeniedException < ServiceError
         def message: () -> ::String
       end
-      class AssociatedEndpointGroupFoundException < ::Aws::Errors::ServiceError
+      class AssociatedEndpointGroupFoundException < ServiceError
         def message: () -> ::String
       end
-      class AssociatedListenerFoundException < ::Aws::Errors::ServiceError
+      class AssociatedListenerFoundException < ServiceError
         def message: () -> ::String
       end
-      class AttachmentNotFoundException < ::Aws::Errors::ServiceError
+      class AttachmentNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ByoipCidrNotFoundException < ::Aws::Errors::ServiceError
+      class ByoipCidrNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ConflictException < ::Aws::Errors::ServiceError
+      class ConflictException < ServiceError
         def message: () -> ::String
       end
-      class EndpointAlreadyExistsException < ::Aws::Errors::ServiceError
+      class EndpointAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class EndpointGroupAlreadyExistsException < ::Aws::Errors::ServiceError
+      class EndpointGroupAlreadyExistsException < ServiceError
         def message: () -> ::String
       end
-      class EndpointGroupNotFoundException < ::Aws::Errors::ServiceError
+      class EndpointGroupNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class EndpointNotFoundException < ::Aws::Errors::ServiceError
+      class EndpointNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class IncorrectCidrStateException < ::Aws::Errors::ServiceError
+      class IncorrectCidrStateException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceErrorException < ::Aws::Errors::ServiceError
+      class InternalServiceErrorException < ServiceError
         def message: () -> ::String
       end
-      class InvalidArgumentException < ::Aws::Errors::ServiceError
+      class InvalidArgumentException < ServiceError
         def message: () -> ::String
       end
-      class InvalidNextTokenException < ::Aws::Errors::ServiceError
+      class InvalidNextTokenException < ServiceError
         def message: () -> ::String
       end
-      class InvalidPortRangeException < ::Aws::Errors::ServiceError
+      class InvalidPortRangeException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class ListenerNotFoundException < ::Aws::Errors::ServiceError
+      class ListenerNotFoundException < ServiceError
         def message: () -> ::String
       end
-      class TransactionInProgressException < ::Aws::Errors::ServiceError
+      class TransactionInProgressException < ServiceError
         def message: () -> ::String
       end
     end

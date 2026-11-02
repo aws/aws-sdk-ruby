@@ -643,26 +643,81 @@ module Aws::ACM
       end
     end
 
-    context "ACM-ACME in us-gov-west-1 returns partition error" do
+    context "ACM-ACME standard endpoint for us-gov-west-1" do
       let(:expected) do
-        {"error" => "ACME operations are only available in commercial AWS partitions"}
+        {"endpoint" => {"url" => "https://acm-acme.us-gov-west-1.api.aws"}}
       end
 
       it 'produces the expected output from the EndpointProvider' do
         params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: false, service_type: "ACM-ACME"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ACM-ACME standard endpoint for us-gov-east-1" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://acm-acme.us-gov-east-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-east-1", use_fips: false, use_dual_stack: false, service_type: "ACM-ACME"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ACM-ACME in cn-north-1 returns partition error" do
+      let(:expected) do
+        {"error" => "ACME operations are only available in the aws and aws-us-gov partitions"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: false, service_type: "ACM-ACME"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])
       end
     end
 
-    context "ACM-ACME in cn-north-1 returns partition error" do
+    context "ACM-ACME in cn-northwest-1 returns partition error" do
       let(:expected) do
-        {"error" => "ACME operations are only available in commercial AWS partitions"}
+        {"error" => "ACME operations are only available in the aws and aws-us-gov partitions"}
       end
 
       it 'produces the expected output from the EndpointProvider' do
-        params = EndpointParameters.new(**{region: "cn-north-1", use_fips: false, use_dual_stack: false, service_type: "ACM-ACME"})
+        params = EndpointParameters.new(**{region: "cn-northwest-1", use_fips: false, use_dual_stack: false, service_type: "ACM-ACME"})
+        expect do
+          subject.resolve_endpoint(params)
+        end.to raise_error(ArgumentError, expected['error'])
+      end
+    end
+
+    context "ACM-ACME with DualStack enabled for us-gov-west-1" do
+      let(:expected) do
+        {"endpoint" => {"url" => "https://acm-acme.us-gov-west-1.api.aws"}}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: false, use_dual_stack: true, service_type: "ACM-ACME"})
+        endpoint = subject.resolve_endpoint(params)
+        expect(endpoint.url).to eq(expected['endpoint']['url'])
+        expect(endpoint.headers).to eq(expected['endpoint']['headers'] || {})
+        expect(endpoint.properties).to eq(expected['endpoint']['properties'] || {})
+      end
+    end
+
+    context "ACM-ACME FIPS in us-gov-west-1 returns error" do
+      let(:expected) do
+        {"error" => "FIPS endpoints are not available for ACME operations"}
+      end
+
+      it 'produces the expected output from the EndpointProvider' do
+        params = EndpointParameters.new(**{region: "us-gov-west-1", use_fips: true, use_dual_stack: false, service_type: "ACM-ACME"})
         expect do
           subject.resolve_endpoint(params)
         end.to raise_error(ArgumentError, expected['error'])

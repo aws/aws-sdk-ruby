@@ -119,6 +119,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor result_rows: ::Integer
       attr_accessor result_size: ::Integer
       attr_accessor redshift_query_id: ::Integer
+      attr_accessor redshift_query_uuid: ::String
       attr_accessor query_parameters: ::Array[Types::SqlParameter]
       attr_accessor sub_statements: ::Array[Types::SubStatementData]
       attr_accessor workgroup_name: ::String
@@ -413,6 +414,7 @@ module Aws::RedshiftDataAPIService
       attr_accessor result_rows: ::Integer
       attr_accessor result_size: ::Integer
       attr_accessor redshift_query_id: ::Integer
+      attr_accessor redshift_query_uuid: ::String
       attr_accessor has_result_set: bool
       SENSITIVE: []
     end

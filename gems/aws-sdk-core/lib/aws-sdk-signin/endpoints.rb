@@ -21,6 +21,15 @@ module Aws::Signin
       end
     end
 
+    class CreateOAuth2TokenWithTokenExchange
+      def self.build(context)
+        Aws::Signin::EndpointParameters.create(
+          context.config,
+          is_o_auth_endpoint: true,
+        )
+      end
+    end
+
     class DeleteConsoleAuthorizationConfiguration
       def self.build(context)
         Aws::Signin::EndpointParameters.create(
@@ -107,6 +116,8 @@ module Aws::Signin
       case context.operation_name
       when :create_o_auth_2_token_with_iam
         CreateOAuth2TokenWithIAM.build(context)
+      when :create_o_auth_2_token_with_token_exchange
+        CreateOAuth2TokenWithTokenExchange.build(context)
       when :delete_console_authorization_configuration
         DeleteConsoleAuthorizationConfiguration.build(context)
       when :delete_resource_permission_statement

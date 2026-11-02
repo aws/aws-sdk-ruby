@@ -35,8 +35,9 @@ module Aws::Signin
     CreateOAuth2TokenResponse = Shapes::StructureShape.new(name: 'CreateOAuth2TokenResponse')
     CreateOAuth2TokenResponseBody = Shapes::StructureShape.new(name: 'CreateOAuth2TokenResponseBody')
     CreateOAuth2TokenWithIAMRequest = Shapes::StructureShape.new(name: 'CreateOAuth2TokenWithIAMRequest')
-    CreateOAuth2TokenWithIAMRequestResourceString = Shapes::StringShape.new(name: 'CreateOAuth2TokenWithIAMRequestResourceString')
     CreateOAuth2TokenWithIAMResponse = Shapes::StructureShape.new(name: 'CreateOAuth2TokenWithIAMResponse')
+    CreateOAuth2TokenWithTokenExchangeRequest = Shapes::StructureShape.new(name: 'CreateOAuth2TokenWithTokenExchangeRequest')
+    CreateOAuth2TokenWithTokenExchangeResponse = Shapes::StructureShape.new(name: 'CreateOAuth2TokenWithTokenExchangeResponse')
     DeleteConsoleAuthorizationConfigurationInput = Shapes::StructureShape.new(name: 'DeleteConsoleAuthorizationConfigurationInput')
     DeleteConsoleAuthorizationConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteConsoleAuthorizationConfigurationOutput')
     DeleteResourcePermissionStatementInput = Shapes::StructureShape.new(name: 'DeleteResourcePermissionStatementInput')
@@ -54,6 +55,9 @@ module Aws::Signin
     IntrospectOAuth2TokenWithIAMResponse = Shapes::StructureShape.new(name: 'IntrospectOAuth2TokenWithIAMResponse')
     IntrospectedTokenType = Shapes::StringShape.new(name: 'IntrospectedTokenType')
     IntrospectionToken = Shapes::StringShape.new(name: 'IntrospectionToken')
+    InvalidGrantException = Shapes::StructureShape.new(name: 'InvalidGrantException')
+    InvalidScopeException = Shapes::StructureShape.new(name: 'InvalidScopeException')
+    IssuedOAuthAccessTokenType = Shapes::StringShape.new(name: 'IssuedOAuthAccessTokenType')
     ListResourcePermissionStatementsInput = Shapes::StructureShape.new(name: 'ListResourcePermissionStatementsInput')
     ListResourcePermissionStatementsOutput = Shapes::StructureShape.new(name: 'ListResourcePermissionStatementsOutput')
     Long = Shapes::IntegerShape.new(name: 'Long')
@@ -73,18 +77,24 @@ module Aws::Signin
     RedirectUri = Shapes::StringShape.new(name: 'RedirectUri')
     RefreshToken = Shapes::StringShape.new(name: 'RefreshToken')
     RequestedRegion = Shapes::StringShape.new(name: 'RequestedRegion')
+    Resource = Shapes::StringShape.new(name: 'Resource')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     RevocationToken = Shapes::StringShape.new(name: 'RevocationToken')
     RevokeOAuth2TokenWithIAMRequest = Shapes::StructureShape.new(name: 'RevokeOAuth2TokenWithIAMRequest')
     RevokeOAuth2TokenWithIAMResponse = Shapes::StructureShape.new(name: 'RevokeOAuth2TokenWithIAMResponse')
+    Scope = Shapes::StringShape.new(name: 'Scope')
     ServiceQuotaExceededException = Shapes::StructureShape.new(name: 'ServiceQuotaExceededException')
+    ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     SigninResourceBasedPolicy = Shapes::StructureShape.new(name: 'SigninResourceBasedPolicy')
     SourceIp = Shapes::StringShape.new(name: 'SourceIp')
     SourceVpc = Shapes::StringShape.new(name: 'SourceVpc')
     SourceVpce = Shapes::StringShape.new(name: 'SourceVpce')
     StatementId = Shapes::StringShape.new(name: 'StatementId')
     String = Shapes::StringShape.new(name: 'String')
+    SubjectToken = Shapes::StringShape.new(name: 'SubjectToken')
+    SubjectTokenType = Shapes::StringShape.new(name: 'SubjectTokenType')
     TargetId = Shapes::StringShape.new(name: 'TargetId')
+    TokenExchangeGrantType = Shapes::StringShape.new(name: 'TokenExchangeGrantType')
     TokenExpiresIn = Shapes::IntegerShape.new(name: 'TokenExpiresIn')
     TokenType = Shapes::StringShape.new(name: 'TokenType')
     TokenTypeHint = Shapes::StringShape.new(name: 'TokenTypeHint')
@@ -139,13 +149,26 @@ module Aws::Signin
     CreateOAuth2TokenResponseBody.struct_class = Types::CreateOAuth2TokenResponseBody
 
     CreateOAuth2TokenWithIAMRequest.add_member(:grant_type, Shapes::ShapeRef.new(shape: ClientCredentialsGrantType, required: true, location_name: "grant_type"))
-    CreateOAuth2TokenWithIAMRequest.add_member(:resource, Shapes::ShapeRef.new(shape: CreateOAuth2TokenWithIAMRequestResourceString, required: true, location_name: "resource"))
+    CreateOAuth2TokenWithIAMRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, required: true, location_name: "resource"))
     CreateOAuth2TokenWithIAMRequest.struct_class = Types::CreateOAuth2TokenWithIAMRequest
 
     CreateOAuth2TokenWithIAMResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: OAuthAccessToken, required: true, location_name: "access_token"))
     CreateOAuth2TokenWithIAMResponse.add_member(:token_type, Shapes::ShapeRef.new(shape: BearerTokenType, required: true, location_name: "token_type"))
     CreateOAuth2TokenWithIAMResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: TokenExpiresIn, required: true, location_name: "expires_in"))
     CreateOAuth2TokenWithIAMResponse.struct_class = Types::CreateOAuth2TokenWithIAMResponse
+
+    CreateOAuth2TokenWithTokenExchangeRequest.add_member(:grant_type, Shapes::ShapeRef.new(shape: TokenExchangeGrantType, required: true, location_name: "grant_type"))
+    CreateOAuth2TokenWithTokenExchangeRequest.add_member(:subject_token, Shapes::ShapeRef.new(shape: SubjectToken, location_name: "subject_token"))
+    CreateOAuth2TokenWithTokenExchangeRequest.add_member(:subject_token_type, Shapes::ShapeRef.new(shape: SubjectTokenType, location_name: "subject_token_type"))
+    CreateOAuth2TokenWithTokenExchangeRequest.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
+    CreateOAuth2TokenWithTokenExchangeRequest.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "scope"))
+    CreateOAuth2TokenWithTokenExchangeRequest.struct_class = Types::CreateOAuth2TokenWithTokenExchangeRequest
+
+    CreateOAuth2TokenWithTokenExchangeResponse.add_member(:access_token, Shapes::ShapeRef.new(shape: OAuthAccessToken, required: true, location_name: "access_token"))
+    CreateOAuth2TokenWithTokenExchangeResponse.add_member(:issued_token_type, Shapes::ShapeRef.new(shape: IssuedOAuthAccessTokenType, location_name: "issued_token_type"))
+    CreateOAuth2TokenWithTokenExchangeResponse.add_member(:token_type, Shapes::ShapeRef.new(shape: BearerTokenType, required: true, location_name: "token_type"))
+    CreateOAuth2TokenWithTokenExchangeResponse.add_member(:expires_in, Shapes::ShapeRef.new(shape: TokenExpiresIn, required: true, location_name: "expires_in"))
+    CreateOAuth2TokenWithTokenExchangeResponse.struct_class = Types::CreateOAuth2TokenWithTokenExchangeResponse
 
     DeleteConsoleAuthorizationConfigurationInput.add_member(:target_id, Shapes::ShapeRef.new(shape: TargetId, location_name: "targetId"))
     DeleteConsoleAuthorizationConfigurationInput.struct_class = Types::DeleteConsoleAuthorizationConfigurationInput
@@ -195,8 +218,16 @@ module Aws::Signin
     IntrospectOAuth2TokenWithIAMResponse.add_member(:jti, Shapes::ShapeRef.new(shape: String, location_name: "jti"))
     IntrospectOAuth2TokenWithIAMResponse.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "account_id"))
     IntrospectOAuth2TokenWithIAMResponse.add_member(:signin_session, Shapes::ShapeRef.new(shape: String, location_name: "signin_session"))
-    IntrospectOAuth2TokenWithIAMResponse.add_member(:resource, Shapes::ShapeRef.new(shape: String, location_name: "resource"))
+    IntrospectOAuth2TokenWithIAMResponse.add_member(:resource, Shapes::ShapeRef.new(shape: Resource, location_name: "resource"))
     IntrospectOAuth2TokenWithIAMResponse.struct_class = Types::IntrospectOAuth2TokenWithIAMResponse
+
+    InvalidGrantException.add_member(:error, Shapes::ShapeRef.new(shape: OAuth2ErrorCode, required: true, location_name: "error"))
+    InvalidGrantException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InvalidGrantException.struct_class = Types::InvalidGrantException
+
+    InvalidScopeException.add_member(:error, Shapes::ShapeRef.new(shape: OAuth2ErrorCode, required: true, location_name: "error"))
+    InvalidScopeException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    InvalidScopeException.struct_class = Types::InvalidScopeException
 
     ListResourcePermissionStatementsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ConsolePermissionMaxResults, location_name: "maxResults"))
     ListResourcePermissionStatementsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -260,6 +291,10 @@ module Aws::Signin
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     ServiceQuotaExceededException.struct_class = Types::ServiceQuotaExceededException
 
+    ServiceUnavailableException.add_member(:error, Shapes::ShapeRef.new(shape: OAuth2ErrorCode, required: true, location_name: "error"))
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     SigninResourceBasedPolicy.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "Version"))
     SigninResourceBasedPolicy.add_member(:statement, Shapes::ShapeRef.new(shape: PolicyStatements, location_name: "Statement"))
     SigninResourceBasedPolicy.struct_class = Types::SigninResourceBasedPolicy
@@ -315,6 +350,22 @@ module Aws::Signin
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+      end)
+
+      api.add_operation(:create_o_auth_2_token_with_token_exchange, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateOAuth2TokenWithTokenExchange"
+        o.http_method = "POST"
+        o.http_request_uri = "/v1/token?x-amz-oauth-token-method=token-exchange"
+        o['authtype'] = "none"
+        o['auth'] = ["smithy.api#noAuth"]
+        o.input = Shapes::ShapeRef.new(shape: CreateOAuth2TokenWithTokenExchangeRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateOAuth2TokenWithTokenExchangeResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidGrantException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidScopeException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsError)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
       end)
 
       api.add_operation(:delete_console_authorization_configuration, Seahorse::Model::Operation.new.tap do |o|

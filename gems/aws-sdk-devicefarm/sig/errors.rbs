@@ -11,42 +11,42 @@ module Aws
       class ServiceError < ::Aws::Errors::ServiceError
       end
 
-      class ArgumentException < ::Aws::Errors::ServiceError
+      class ArgumentException < ServiceError
         def message: () -> ::String
       end
-      class CannotDeleteException < ::Aws::Errors::ServiceError
+      class CannotDeleteException < ServiceError
         def message: () -> ::String
       end
-      class IdempotencyException < ::Aws::Errors::ServiceError
+      class IdempotencyException < ServiceError
         def message: () -> ::String
       end
-      class InternalServiceException < ::Aws::Errors::ServiceError
+      class InternalServiceException < ServiceError
         def message: () -> ::String
       end
-      class InvalidOperationException < ::Aws::Errors::ServiceError
+      class InvalidOperationException < ServiceError
         def message: () -> ::String
       end
-      class LimitExceededException < ::Aws::Errors::ServiceError
+      class LimitExceededException < ServiceError
         def message: () -> ::String
       end
-      class NotEligibleException < ::Aws::Errors::ServiceError
+      class NotEligibleException < ServiceError
         def message: () -> ::String
       end
-      class NotFoundException < ::Aws::Errors::ServiceError
+      class NotFoundException < ServiceError
         def message: () -> ::String
       end
-      class ServiceAccountException < ::Aws::Errors::ServiceError
+      class ServiceAccountException < ServiceError
         def message: () -> ::String
       end
-      class TagOperationException < ::Aws::Errors::ServiceError
-        def message: () -> ::String
-        def resource_name: () -> ::String
-      end
-      class TagPolicyException < ::Aws::Errors::ServiceError
+      class TagOperationException < ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
-      class TooManyTagsException < ::Aws::Errors::ServiceError
+      class TagPolicyException < ServiceError
+        def message: () -> ::String
+        def resource_name: () -> ::String
+      end
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
         def resource_name: () -> ::String
       end
