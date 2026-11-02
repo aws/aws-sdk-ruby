@@ -96,18 +96,18 @@ module Aws
 
       option(
         :retry_mode,
-        default: 'legacy', # TODO: Change to 'standard' when new retries become default
+        default: 'standard',
         doc_type: String,
         rbs_type: '("legacy" | "standard" | "adaptive")',
         docstring: <<~DOCS) do |cfg|
           Specifies which retry algorithm to use. Values are:
 
-          * `legacy` - The pre-existing retry behavior. This is the default
-            value if no retry mode is provided.
+          * `legacy` - The pre-existing retry behavior.
 
           * `standard` - A standardized set of retry rules across the AWS SDKs.
             This includes support for retry quotas, which limit the number of
-            unsuccessful retries a client can make.
+            unsuccessful retries a client can make. This is the default value
+            if no retry mode is provided.
 
           * `adaptive` - A retry mode that includes all the functionality of
             `standard` mode along with automatic client side throttling.
@@ -123,7 +123,8 @@ module Aws
           An integer representing the maximum number attempts that will be made for
           a single request, including the initial attempt.  For example,
           setting this value to 5 will result in a request being retried up to
-          4 times. Used in `standard` and `adaptive` retry modes.
+          4 times. Used in `standard` and `adaptive` retry modes. Defaults to 3,
+          except for DynamoDB and DynamoDB Streams, which default to 4.
         DOCS
         resolve_max_attempts(cfg)
       end
@@ -177,17 +178,6 @@ module Aws
       DYNAMODB_SERVICES = Set['DynamoDB', 'DynamoDB Streams'].freeze
 
       class << self
-        # TODO: Remove this gate and hardcode new retry behavior once
-        # AWS_NEW_RETRIES_2026 is enabled by default, which includes:
-        # - Default retry_mode to 'standard'
-        # - Default max_attempts to 4 for DynamoDB
-        # - Remove the old retries branch in Handler#call
-        # - Remove the old retries branch in #exponential_backoff
-        # - Remove LEGACY_RETRY_COST and TIMEOUT_RETRY_COST from RetryQuota
-        def new_retries?
-          ENV.fetch('AWS_NEW_RETRIES_2026', 'false').downcase == 'true'
-        end
-
         def resolve_retry_mode(cfg)
           default_mode_value =
             if cfg.respond_to?(:defaults_mode_config_resolver)
@@ -197,7 +187,7 @@ module Aws
           value = ENV['AWS_RETRY_MODE'] ||
                   Aws.shared_config.retry_mode(profile: cfg.profile) ||
                   default_mode_value ||
-                  (new_retries? ? 'standard' : 'legacy') # TODO: default to 'standard' when new retries become default
+                  'standard'
           # Raise if provided value is not one of the retry modes
           if value != 'legacy' && value != 'standard' && value != 'adaptive'
             raise ArgumentError,
@@ -225,9 +215,6 @@ module Aws
         end
 
         def default_max_attempts(cfg)
-          # TODO: Remove gate and keep only the new retries branch
-          return 3 unless new_retries?
-
           service_id = cfg.api.metadata['serviceId'] if cfg.respond_to?(:api)
           DYNAMODB_SERVICES.include?(service_id) ? 4 : 3
         end
@@ -327,30 +314,20 @@ module Aws
           capacity_amount = config.retry_quota.checkout_capacity(error_inspector)
           context.metadata[:retries][:capacity_amount] = capacity_amount
 
-          # TODO: Remove gate and keep only the new retries branch
-          if new_retries?
-            return response if capacity_amount <= 0 && !long_polling_operation?(context)
+          # Long polling operations back off even once the retry quota is
+          # depleted, so the delay is applied before the capacity check.
+          return response if capacity_amount <= 0 && !long_polling_operation?(context)
 
-            service_id = context.config.api.metadata['serviceId']
-            delay = backoff(context, error_inspector, service_id)
-            Kernel.sleep(delay)
+          service_id = context.config.api.metadata['serviceId']
+          delay = backoff(context, error_inspector, service_id)
+          Kernel.sleep(delay)
 
-            return response if capacity_amount <= 0
-          else
-            return response unless capacity_amount > 0
-
-            delay = exponential_backoff(context.retries)
-            Kernel.sleep(delay)
-          end
+          return response if capacity_amount <= 0
 
           retry_request(context, error_inspector)
         end
 
         private
-
-        def new_retries?
-          RetryErrors.new_retries?
-        end
 
         # True when clock skew correction is turned off. The fallback
         # correct_clock_skew option is folded in by the option resolver.
@@ -416,20 +393,15 @@ module Aws
           [backoff_duration, exp_backoff + 5].min
         end
 
-        # TODO: Remove gate, remove default nil params, keep only new retries branch
-        def exponential_backoff(retries, error_inspector = nil, service_id = nil)
-          if new_retries?
-            backoff_scalar = if error_inspector.throttling_error?
-                               1
-                             elsif DYNAMODB_SERVICES.include?(service_id)
-                               0.025
-                             else
-                               0.05
-                             end
-            Kernel.rand * [backoff_scalar * 2**retries, MAX_BACKOFF].min
-          else
-            [Kernel.rand * 2**retries, MAX_BACKOFF].min
-          end
+        def exponential_backoff(retries, error_inspector, service_id)
+          backoff_scalar = if error_inspector.throttling_error?
+                             1
+                           elsif DYNAMODB_SERVICES.include?(service_id)
+                             0.025
+                           else
+                             0.05
+                           end
+          Kernel.rand * [backoff_scalar * 2**retries, MAX_BACKOFF].min
         end
 
         def parse_retry_after(context)
