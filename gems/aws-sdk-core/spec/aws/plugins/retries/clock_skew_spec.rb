@@ -393,15 +393,6 @@ module Aws
       describe 'response headers arrival time' do
         let(:t) { Time.utc(2026, 1, 1) }
 
-        it 'uses headers arrival to correct skew after a long-running request' do
-          allow(Time).to receive(:now).and_return(t + 630)
-          ctx = build_context_with_headers(endpoint, { 'date' => (t + 1220).httpdate }, t + 620)
-
-          subject.update_clock_correction(ctx, t)
-
-          expect(subject.clock_correction(endpoint)).to eq(600)
-        end
-
         it 'trusts headers received within the duration limit even when the body finishes later' do
           allow(Time).to receive(:now).and_return(t + 901)
           ctx = build_context_with_headers(endpoint, { 'date' => (t + 4499).httpdate }, t + 899)

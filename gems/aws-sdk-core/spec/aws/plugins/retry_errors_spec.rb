@@ -187,7 +187,11 @@ module Aws
           Seahorse::Client::Response.new(context: context)
         end
 
-        it 'does not interpret a long-running request as clock skew' do
+        it 'replaces a stale correction with zero after a long-running request' do
+          clock_skew = client.config.clock_skew
+          clock_skew.send(:set_clock_correction, endpoint, -300)
+          expect(clock_skew.clock_correction(endpoint)).to eq(-300)
+
           allow(send_handler).to receive(:call) do |context|
             respond(context, received_at: now + 620, server_time: now + 620)
           end
@@ -197,30 +201,17 @@ module Aws
           expect(client.config.clock_skew.clock_correction(endpoint)).to eq(0)
         end
 
-        it 'uses headers arrival to correct skew even when an error body arrives later' do
-          client.config.max_attempts = 1
-          allow(send_handler).to receive(:call) do |context|
+        it 'signs the retry and later operations using headers arrival despite a delayed error body' do
+          expect(send_handler).to receive(:call).ordered do |context|
+            expect(context.http_request.headers['X-Amz-Date']).to eq('20260101T000000Z')
             respond(
               context, received_at: now + 2, server_time: now + 302,
               body_finished_at: now + 20, error_code: 'RequestTimeTooSkewed'
             )
           end
-
-          expect { client.get_caller_identity }.to raise_error(Aws::STS::Errors::RequestTimeTooSkewed)
-          expect(client.config.clock_skew.clock_correction(endpoint)).to eq(300)
-        end
-
-        it 'signs the retry and later operations with the learned correction' do
           expect(send_handler).to receive(:call).ordered do |context|
-            expect(context.http_request.headers['X-Amz-Date']).to eq('20260101T000000Z')
-            respond(
-              context, received_at: now + 2, server_time: now + 302,
-              error_code: 'RequestTimeTooSkewed'
-            )
-          end
-          expect(send_handler).to receive(:call).ordered do |context|
-            expect(context.http_request.headers['X-Amz-Date']).to eq('20260101T000502Z')
-            respond(context, received_at: now + 4, server_time: now + 304)
+            expect(context.http_request.headers['X-Amz-Date']).to eq('20260101T000520Z')
+            respond(context, received_at: now + 22, server_time: now + 322)
           end
           expect(send_handler).to receive(:call).ordered do |context|
             expect(context.http_request.headers['X-Amz-Date']).to eq('20260101T000600Z')
