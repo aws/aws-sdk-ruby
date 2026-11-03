@@ -71,19 +71,6 @@ module Aws
           end
         end
 
-        # Called at the start of every attempt. Records the raw client time at
-        # which the attempt's response headers arrive, before the body is read.
-        # Retries reuse the same response, so the listener is added only once.
-        # @param context [Seahorse::Client::RequestContext]
-        def track_response_received_at(context)
-          context.metadata.delete(:clock_skew_response_received_at)
-          return unless context.retries.zero?
-
-          context.http_response.on_headers do
-            context.metadata[:clock_skew_response_received_at] = Time.now.utc
-          end
-        end
-
         private
 
         # Single source of truth for skew computation; returns a Float skew or nil.
@@ -98,7 +85,7 @@ module Aws
           # No candidate if the Date header is absent/unparseable or the response was cached.
           return nil if server_time.nil? || response.headers['age']
 
-          received_at = context.metadata[:clock_skew_response_received_at] || Time.now.utc
+          received_at = context.metadata[:response_received_at] || Time.now.utc
           # Discard if the request was too slow for the measurement to be trusted.
           return nil if sent_at && received_at - sent_at > MAX_TRUSTED_REQUEST_DURATION
 

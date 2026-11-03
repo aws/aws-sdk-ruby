@@ -177,6 +177,16 @@ module Aws
       DYNAMODB_SERVICES = Set['DynamoDB', 'DynamoDB Streams'].freeze
 
       class << self
+        # @api private
+        # HTTP retries preserve the listener, so register it only once.
+        def track_response_time(context)
+          return unless context.retries.zero?
+
+          context.http_response.on_headers do
+            context.metadata[:response_received_at] = Time.now.utc
+          end
+        end
+
         # TODO: Remove this gate and hardcode new retry behavior once
         # AWS_NEW_RETRIES_2026 is enabled by default, which includes:
         # - Default retry_mode to 'standard'
@@ -294,7 +304,7 @@ module Aws
         def call(context)
           context.metadata[:retries] ||= {}
           config = context.config
-          config.clock_skew.track_response_received_at(context)
+          RetryErrors.track_response_time(context)
 
           get_send_token(config)
           add_retry_headers(context)
@@ -452,6 +462,7 @@ module Aws
           context.config.credentials.refresh! if refresh_credentials?(context, error)
           context.http_request.body.rewind
           context.http_response.reset
+          context.metadata.delete(:response_received_at)
           call(context)
         end
 
@@ -493,7 +504,7 @@ module Aws
       class LegacyHandler < Seahorse::Client::Handler
 
         def call(context)
-          context.config.clock_skew.track_response_received_at(context)
+          RetryErrors.track_response_time(context)
           response = with_metric { @handler.call(context) }
           if response.error
             error_inspector = Retries::ErrorInspector.new(
@@ -532,6 +543,7 @@ module Aws
           context.config.credentials.refresh! if refresh_credentials?(context, error)
           context.http_request.body.rewind
           context.http_response.reset
+          context.metadata.delete(:response_received_at)
           call(context)
         end
 
