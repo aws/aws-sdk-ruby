@@ -75,6 +75,7 @@ group :test do
   gem 'cucumber', '< 12'
   gem 'multipart-post'
   gem 'opentelemetry-sdk'
+  gem 'ostruct'
   gem 'rspec'
   gem 'webmock'
 end
