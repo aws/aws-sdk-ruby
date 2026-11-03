@@ -140,6 +140,8 @@ module Aws
         end
 
         context 'expired token with refresh token' do
+          before { allow(Time).to receive(:now).and_return(time) }
+
           let(:old_expiration) { (time.utc + 60).to_datetime.rfc3339 }
           let(:new_expiration) { (time.utc + 900).to_datetime.rfc3339 }
 
@@ -204,6 +206,62 @@ module Aws
             expect(creds.account_id).to eq('123456789012')
             expect(provider.expiration).to eq(Time.parse(new_expiration))
             expect_token_write_back(expected_token)
+          end
+
+          context 'with a signInRegion' do
+            let(:clients) { [] }
+
+            def refresh(token)
+              mock_token_file(login_session, token)
+              allow(Aws::Signin::Client).to receive(:new).and_wrap_original do |m, *args|
+                m.call(*args).tap do |c|
+                  c.stub_responses(:create_o_auth2_token, signin_resp)
+                  clients << c
+                end
+              end
+              LoginCredentialsProvider.new(login_session: login_session, region: 'us-west-2', stub_responses: true)
+            end
+
+            def last_request
+              clients.flat_map(&:api_requests).last.http_request
+            end
+
+            def dpop_htu(request)
+              JSON.parse(Base64.urlsafe_decode64(request.headers['DPoP'].split('.')[1]))['htu']
+            end
+
+            it 'refreshes in the signInRegion instead of the configured region' do
+              refresh(cached_token.merge(signInRegion: 'us-east-1'))
+              expect(last_request.endpoint.host).to include('us-east-1')
+              expect(URI(dpop_htu(last_request)).host).to eq(last_request.endpoint.host)
+              expect_token_write_back(expected_token.merge(signInRegion: 'us-east-1'))
+            end
+
+            it 'refreshes in the configured region when signInRegion is missing' do
+              refresh(cached_token)
+              expect(last_request.endpoint.host).to include('us-west-2')
+              expect_token_write_back(expected_token)
+            end
+
+            it 'refreshes in the configured region when signInRegion is empty' do
+              refresh(cached_token.merge(signInRegion: ''))
+              expect(last_request.endpoint.host).to include('us-west-2')
+              expect_token_write_back(expected_token.merge(signInRegion: ''))
+            end
+
+            it 'reuses the configured client and one client per signInRegion' do
+              provider = refresh(cached_token.merge(signInRegion: 'us-west-2'))
+              expect(provider.send(:signin_client, 'us-east-1')).to be(provider.send(:signin_client, 'us-east-1'))
+              expect(clients.size).to eq(2)
+            end
+
+            it 'uses a given client for every refresh' do
+              mock_token_file(login_session, cached_token.merge(signInRegion: 'us-east-1'))
+              client.stub_responses(:create_o_auth2_token, signin_resp)
+              expect(Aws::Signin::Client).not_to receive(:new)
+              LoginCredentialsProvider.new(login_session: login_session, client: client)
+              expect(client.api_requests.last.http_request.endpoint.host).to include('us-west-2')
+            end
           end
         end
 
