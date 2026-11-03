@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Support refreshing login credentials in the cached sign-in region, falling back to the configured region when missing or empty.
+
 3.263.0 (2026-10-29)
 ------------------
 
