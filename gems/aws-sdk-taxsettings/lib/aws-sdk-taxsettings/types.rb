@@ -362,6 +362,11 @@ module Aws::TaxSettings
     #   Number (TRN) in Mexico.
     #   @return [Types::MexicoAdditionalInfo]
     #
+    # @!attribute [rw] colombia_additional_info
+    #   Additional tax information associated with your Tax Registration
+    #   Number (TRN) in Colombia.
+    #   @return [Types::ColombiaAdditionalInfo]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/AdditionalInfoResponse AWS API Documentation
     #
     class AdditionalInfoResponse < Struct.new(
@@ -392,7 +397,8 @@ module Aws::TaxSettings
       :france_additional_info,
       :monaco_additional_info,
       :germany_additional_info,
-      :mexico_additional_info)
+      :mexico_additional_info,
+      :colombia_additional_info)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -777,6 +783,35 @@ module Aws::TaxSettings
     class ChileAdditionalInfo < Struct.new(
       :document_type,
       :business_activity)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains additional tax information associated with your Tax
+    # Registration Number (TRN) in Colombia, derived from your Registro
+    # Único Tributario (RUT) document.
+    #
+    # @!attribute [rw] responsibility_codes
+    #   The DIAN fiscal responsibility codes from Box 53 of the RUT document
+    #   (for example, `48` for value-added tax (VAT) responsibility).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] taxpayer_type_code
+    #   The taxpayer category from Box 24 of the RUT document (`1` for a
+    #   legal entity, `2` for a natural person).
+    #   @return [String]
+    #
+    # @!attribute [rw] issue_date
+    #   The issue date of the RUT document from Box 61, in `YYYY-MM-DD`
+    #   format.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/ColombiaAdditionalInfo AWS API Documentation
+    #
+    class ColombiaAdditionalInfo < Struct.new(
+      :responsibility_codes,
+      :taxpayer_type_code,
+      :issue_date)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1949,7 +1984,8 @@ module Aws::TaxSettings
     #
     # @!attribute [rw] status
     #   The status of your TRN. This can be either `Verified`, `Pending`,
-    #   `Deleted`, or `Rejected`.
+    #   `Deleted`, or `Rejected`. If the status is `Rejected`, see
+    #   `statusReason` for the reason.
     #   @return [String]
     #
     # @!attribute [rw] sector
@@ -1973,6 +2009,11 @@ module Aws::TaxSettings
     #   Additional tax information associated with your TRN.
     #   @return [Types::AdditionalInfoResponse]
     #
+    # @!attribute [rw] status_reason
+    #   The reason that your TRN was rejected. This is returned only when
+    #   `status` is `Rejected`.
+    #   @return [Types::TaxRegistrationStatusReason]
+    #
     # @!attribute [rw] legal_address
     #   The legal address associated with your TRN registration.
     #   @return [Types::Address]
@@ -1988,6 +2029,7 @@ module Aws::TaxSettings
       :tax_document_metadatas,
       :certified_email_id,
       :additional_tax_information,
+      :status_reason,
       :legal_address)
       SENSITIVE = []
       include Aws::Structure
@@ -2110,6 +2152,27 @@ module Aws::TaxSettings
       include Aws::Structure
     end
 
+    # The reason that a tax registration was rejected.
+    #
+    # @!attribute [rw] code
+    #   A code that identifies the rejection reason (for example,
+    #   `NIT_MISMATCH` or `ENCRYPTED_PDF`). If the reason isn't recognized,
+    #   the value is `OTHER`. New codes might be added in the future.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A description of the rejection reason in English.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/taxsettings-2018-05-10/TaxRegistrationStatusReason AWS API Documentation
+    #
+    class TaxRegistrationStatusReason < Struct.new(
+      :code,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Your TRN information with jurisdiction details. This doesn't contain
     # the full legal address associated with the TRN information.
     #
@@ -2128,7 +2191,8 @@ module Aws::TaxSettings
     #
     # @!attribute [rw] status
     #   The status of your TRN. This can be either `Verified`, `Pending`,
-    #   `Deleted`, or `Rejected`.
+    #   `Deleted`, or `Rejected`. If the status is `Rejected`, see
+    #   `statusReason` for the reason.
     #   @return [String]
     #
     # @!attribute [rw] sector
@@ -2152,6 +2216,11 @@ module Aws::TaxSettings
     #   Additional tax information associated with your TRN.
     #   @return [Types::AdditionalInfoResponse]
     #
+    # @!attribute [rw] status_reason
+    #   The reason that your TRN was rejected. This is returned only when
+    #   `status` is `Rejected`.
+    #   @return [Types::TaxRegistrationStatusReason]
+    #
     # @!attribute [rw] jurisdiction
     #   The jurisdiction associated with your TRN information.
     #   @return [Types::Jurisdiction]
@@ -2167,6 +2236,7 @@ module Aws::TaxSettings
       :tax_document_metadatas,
       :certified_email_id,
       :additional_tax_information,
+      :status_reason,
       :jurisdiction)
       SENSITIVE = []
       include Aws::Structure

@@ -816,6 +816,12 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class CaseEntry
+      attr_accessor case_id: ::String
+      attr_accessor case_reference_number: ::String
+      SENSITIVE: []
+    end
+
     class CaseSlaConfiguration
       attr_accessor name: ::String
       attr_accessor type: ("CaseField")
@@ -1002,6 +1008,7 @@ module Aws::Connect
       attr_accessor disconnect_reason: ::String
       attr_accessor contact_evaluations: ::Hash[::String, Types::ContactEvaluation]
       attr_accessor task_template_info: Types::TaskTemplateInfoV2
+      attr_accessor cases: ::Array[Types::CaseEntry]
       attr_accessor contact_details: Types::ContactDetails
       attr_accessor outbound_strategy: Types::OutboundStrategy
       attr_accessor attributes: ::Hash[::String, ::String]

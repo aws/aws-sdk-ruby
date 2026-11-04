@@ -10022,6 +10022,373 @@ module Aws::SecurityHub
       req.send_request(options)
     end
 
+    # Returns a list of resources that contain a specific software package.
+    # You identify the package with `PackageName` and `PackageType`. To
+    # narrow the results to one version of the package, include
+    # `PackageVersion`.
+    #
+    # You can use the `Scopes` parameter to define the data boundary for the
+    # query. Currently, `Scopes` supports `AwsOrganizations`, which lets you
+    # retrieve resources from your entire organization or from specific
+    # organizational units. Only the delegated administrator account can use
+    # `Scopes`.
+    #
+    # You can use the `Filters` parameter to further refine results based on
+    # resource attributes, such as `ResourceType` or `Region`.
+    #
+    # @option params [required, String] :package_name
+    #   The name of the software package, for example `openssl`. This value
+    #   must match the `PackageName` returned by `GetSoftwareV2`.
+    #
+    # @option params [required, String] :package_type
+    #   The type of the software package, for example `operating-system`,
+    #   `application`, or `library`. This value must match the `PackageType`
+    #   returned by `GetSoftwareV2`.
+    #
+    # @option params [String] :package_version
+    #   The version of the software package, for example `3.0.8`. If you omit
+    #   this value, the response includes resources that contain any version
+    #   of the package.
+    #
+    # @option params [Types::SoftwareFilters] :filters
+    #   Filters the returned resources based on a set of criteria. You can
+    #   nest composite filters up to three levels deep.
+    #
+    # @option params [Types::SoftwareScopes] :scopes
+    #   Limits the results to resources from specific organizational units or
+    #   from the delegated administrator's organization. Only the delegated
+    #   administrator account can use this parameter. Other accounts receive
+    #   an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees resources from all accounts across the entire
+    #   organization. Other accounts see only their own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #
+    # @option params [Array<Types::SortCriterion>] :sort_criteria
+    #   The resource attribute used to sort the list of returned resources,
+    #   for example `Region` or `ResourceType`. You can specify one sort
+    #   criterion.
+    #
+    # @option params [String] :next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue listing
+    #   data, set the value of this parameter to the value returned in the
+    #   previous response.
+    #
+    #   A token expires one hour after it's issued. If you change the request
+    #   parameters between calls, the token is no longer valid and the request
+    #   fails with a `ValidationException`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Valid values are 1–100. The
+    #   default is 100.
+    #
+    # @return [Types::GetSoftwareResourcesV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSoftwareResourcesV2Response#software_resources #software_resources} => Array&lt;Types::SoftwareResourceResult&gt;
+    #   * {Types::GetSoftwareResourcesV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_software_resources_v2({
+    #     package_name: "NonEmptyString", # required
+    #     package_type: "NonEmptyString", # required
+    #     package_version: "NonEmptyString",
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "AccountId", # accepts AccountId, PackageName, PackageVersion, PackageType, Region, ResourceRegion, ResourceType, ResourceId, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition
+    #               filter: {
+    #                 value: "NonEmptyString",
+    #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #               },
+    #             },
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive SoftwareCompositeFilterList
+    #           },
+    #           operator: "AND", # accepts AND, OR
+    #         },
+    #       ],
+    #       composite_operator: "AND", # accepts AND, OR
+    #     },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString",
+    #         },
+    #       ],
+    #     },
+    #     sort_criteria: [
+    #       {
+    #         field: "NonEmptyString",
+    #         sort_order: "asc", # accepts asc, desc
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.software_resources #=> Array
+    #   resp.software_resources[0].account_id #=> String
+    #   resp.software_resources[0].resource_type #=> String
+    #   resp.software_resources[0].region #=> String
+    #   resp.software_resources[0].resource_id #=> String
+    #   resp.software_resources[0].resource_provider #=> String
+    #   resp.software_resources[0].resource_owner_org_id #=> String
+    #   resp.software_resources[0].resource_owner_account_id #=> String
+    #   resp.software_resources[0].resource_cloud_partition #=> String
+    #   resp.software_resources[0].resource_region #=> String
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareResourcesV2 AWS API Documentation
+    #
+    # @overload get_software_resources_v2(params = {})
+    # @param [Hash] params ({})
+    def get_software_resources_v2(params = {}, options = {})
+      req = build_request(:get_software_resources_v2, params)
+      req.send_request(options)
+    end
+
+    # Retrieves aggregated counts of software packages installed on your
+    # resources, grouped by a field that you specify. For example, you can
+    # return the most common package types or the accounts with the most
+    # installed packages.
+    #
+    # Each count is the number of package-to-resource pairs that match the
+    # grouping value. A package installed on three resources contributes
+    # three to the count.
+    #
+    # You can use the `Scopes` parameter to define the data boundary for the
+    # query. Currently, `Scopes` supports `AwsOrganizations`, which lets you
+    # aggregate software from your entire organization or from specific
+    # organizational units. Only the delegated administrator account can use
+    # `Scopes`.
+    #
+    # This operation doesn't paginate. Use `MaxStatisticResults` to control
+    # how many grouping values are returned.
+    #
+    # @option params [required, Array<Types::SoftwareGroupByRule>] :group_by_rules
+    #   How software statistics should be aggregated and organized in the
+    #   response.
+    #
+    # @option params [Types::SoftwareScopes] :scopes
+    #   Limits the results to software on resources from specific
+    #   organizational units or from the delegated administrator's
+    #   organization. Only the delegated administrator account can use this
+    #   parameter. Other accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees statistics from all accounts across the entire
+    #   organization. Other accounts see only statistics for software on their
+    #   own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #
+    # @option params [String] :sort_order
+    #   Sorts aggregated statistics by count. The default is descending, which
+    #   returns the values with the highest counts first.
+    #
+    # @option params [Integer] :max_statistic_results
+    #   The maximum number of grouping values to return. Valid values are
+    #   1–400. The default is 400.
+    #
+    # @return [Types::GetSoftwareStatisticsV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSoftwareStatisticsV2Response#group_by_results #group_by_results} => Array&lt;Types::GroupByResult&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_software_statistics_v2({
+    #     group_by_rules: [ # required
+    #       {
+    #         group_by_field: "AccountId", # required, accepts AccountId, PackageName, PackageVersion, PackageType, Region, ResourceRegion, ResourceType, ResourceId, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition
+    #         filters: {
+    #           composite_filters: [
+    #             {
+    #               string_filters: [
+    #                 {
+    #                   field_name: "AccountId", # accepts AccountId, PackageName, PackageVersion, PackageType, Region, ResourceRegion, ResourceType, ResourceId, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition
+    #                   filter: {
+    #                     value: "NonEmptyString",
+    #                     comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #                   },
+    #                 },
+    #               ],
+    #               nested_composite_filters: {
+    #                 # recursive SoftwareCompositeFilterList
+    #               },
+    #               operator: "AND", # accepts AND, OR
+    #             },
+    #           ],
+    #           composite_operator: "AND", # accepts AND, OR
+    #         },
+    #       },
+    #     ],
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString",
+    #         },
+    #       ],
+    #     },
+    #     sort_order: "asc", # accepts asc, desc
+    #     max_statistic_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.group_by_results #=> Array
+    #   resp.group_by_results[0].group_by_field #=> String
+    #   resp.group_by_results[0].group_by_values #=> Array
+    #   resp.group_by_results[0].group_by_values[0].field_value #=> String
+    #   resp.group_by_results[0].group_by_values[0].count #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareStatisticsV2 AWS API Documentation
+    #
+    # @overload get_software_statistics_v2(params = {})
+    # @param [Hash] params ({})
+    def get_software_statistics_v2(params = {}, options = {})
+      req = build_request(:get_software_statistics_v2, params)
+      req.send_request(options)
+    end
+
+    # Returns a list of software packages installed on your resources. Each
+    # result identifies a package by name, version, and type, and includes
+    # the number of resources that contain that package.
+    #
+    # You can use the `Scopes` parameter to define the data boundary for the
+    # query. Currently, `Scopes` supports `AwsOrganizations`, which lets you
+    # retrieve software from your entire organization or from specific
+    # organizational units. Only the delegated administrator account can use
+    # `Scopes`.
+    #
+    # You can use the `Filters` parameter to refine results based on package
+    # and resource attributes. You can use `Scopes` and `Filters`
+    # independently or together. When both are provided, `Scopes` narrows
+    # the data set first, and then `Filters` refines results within that
+    # scoped data set.
+    #
+    # To list the resources that contain a specific package, use
+    # `GetSoftwareResourcesV2`. To get counts of software grouped by a
+    # field, use `GetSoftwareStatisticsV2`.
+    #
+    # @option params [Types::SoftwareFilters] :filters
+    #   Filters software packages based on a set of criteria. You can nest
+    #   composite filters up to three levels deep.
+    #
+    # @option params [Types::SoftwareScopes] :scopes
+    #   Limits the results to software on resources from specific
+    #   organizational units or from the delegated administrator's
+    #   organization. Only the delegated administrator account can use this
+    #   parameter. Other accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees software from all accounts across the entire
+    #   organization. Other accounts see only software on their own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #
+    # @option params [Array<Types::SortCriterion>] :sort_criteria
+    #   The software attributes used to sort the list of returned software
+    #   packages. You can't sort by `ResourceCount`.
+    #
+    # @option params [String] :next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue listing
+    #   data, set the value of this parameter to the value returned in the
+    #   previous response.
+    #
+    #   A token expires one hour after it's issued. If you change `Filters`
+    #   or `SortCriteria` between calls, the token is no longer valid and the
+    #   request fails with a `ValidationException`.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Valid values are 1–100. The
+    #   default is 100.
+    #
+    # @return [Types::GetSoftwareV2Response] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSoftwareV2Response#software #software} => Array&lt;Types::SoftwareResult&gt;
+    #   * {Types::GetSoftwareV2Response#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_software_v2({
+    #     filters: {
+    #       composite_filters: [
+    #         {
+    #           string_filters: [
+    #             {
+    #               field_name: "AccountId", # accepts AccountId, PackageName, PackageVersion, PackageType, Region, ResourceRegion, ResourceType, ResourceId, ResourceProvider, ResourceOwnerAccountId, ResourceOwnerOrgId, ResourceCloudPartition
+    #               filter: {
+    #                 value: "NonEmptyString",
+    #                 comparison: "EQUALS", # accepts EQUALS, PREFIX, NOT_EQUALS, PREFIX_NOT_EQUALS, CONTAINS, NOT_CONTAINS, CONTAINS_WORD
+    #               },
+    #             },
+    #           ],
+    #           nested_composite_filters: {
+    #             # recursive SoftwareCompositeFilterList
+    #           },
+    #           operator: "AND", # accepts AND, OR
+    #         },
+    #       ],
+    #       composite_operator: "AND", # accepts AND, OR
+    #     },
+    #     scopes: {
+    #       aws_organizations: [
+    #         {
+    #           organization_id: "NonEmptyString",
+    #           organizational_unit_id: "NonEmptyString",
+    #         },
+    #       ],
+    #     },
+    #     sort_criteria: [
+    #       {
+    #         field: "NonEmptyString",
+    #         sort_order: "asc", # accepts asc, desc
+    #       },
+    #     ],
+    #     next_token: "NextToken",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.software #=> Array
+    #   resp.software[0].package_name #=> String
+    #   resp.software[0].package_version #=> String
+    #   resp.software[0].package_type #=> String
+    #   resp.software[0].resource_count #=> Integer
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareV2 AWS API Documentation
+    #
+    # @overload get_software_v2(params = {})
+    # @param [Hash] params ({})
+    def get_software_v2(params = {}, options = {})
+      req = build_request(:get_software_v2, params)
+      req.send_request(options)
+    end
+
     # <note markdown="1"> We recommend using Organizations instead of Security Hub CSPM
     # invitations to manage your member accounts. For information, see
     # [Managing Security Hub CSPM administrator and member accounts with
@@ -14687,7 +15054,7 @@ module Aws::SecurityHub
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityhub'
-      context[:gem_version] = '1.173.0'
+      context[:gem_version] = '1.174.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

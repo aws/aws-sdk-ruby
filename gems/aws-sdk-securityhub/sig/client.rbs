@@ -5099,6 +5099,88 @@ module Aws
                                            ) -> _GetSecurityControlDefinitionResponseSuccess
                                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSecurityControlDefinitionResponseSuccess
 
+      interface _GetSoftwareResourcesV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSoftwareResourcesV2Response]
+        def software_resources: () -> ::Array[Types::SoftwareResourceResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_software_resources_v2-instance_method
+      def get_software_resources_v2: (
+                                       package_name: ::String,
+                                       package_type: ::String,
+                                       ?package_version: ::String,
+                                       ?filters: Params::software_filters,
+                                       ?scopes: {
+                                         aws_organizations: Array[
+                                           {
+                                             organization_id: ::String?,
+                                             organizational_unit_id: ::String?
+                                           }
+                                         ]?
+                                       },
+                                       ?sort_criteria: Array[
+                                         {
+                                           field: ::String?,
+                                           sort_order: ("asc" | "desc")?
+                                         }
+                                       ],
+                                       ?next_token: ::String,
+                                       ?max_results: ::Integer
+                                     ) -> _GetSoftwareResourcesV2ResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSoftwareResourcesV2ResponseSuccess
+
+      interface _GetSoftwareStatisticsV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSoftwareStatisticsV2Response]
+        def group_by_results: () -> ::Array[Types::GroupByResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_software_statistics_v2-instance_method
+      def get_software_statistics_v2: (
+                                        group_by_rules: Array[
+                                          {
+                                            group_by_field: ("AccountId" | "PackageName" | "PackageVersion" | "PackageType" | "Region" | "ResourceRegion" | "ResourceType" | "ResourceId" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition"),
+                                            filters: Params::software_filters?
+                                          }
+                                        ],
+                                        ?scopes: {
+                                          aws_organizations: Array[
+                                            {
+                                              organization_id: ::String?,
+                                              organizational_unit_id: ::String?
+                                            }
+                                          ]?
+                                        },
+                                        ?sort_order: ("asc" | "desc"),
+                                        ?max_statistic_results: ::Integer
+                                      ) -> _GetSoftwareStatisticsV2ResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSoftwareStatisticsV2ResponseSuccess
+
+      interface _GetSoftwareV2ResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSoftwareV2Response]
+        def software: () -> ::Array[Types::SoftwareResult]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SecurityHub/Client.html#get_software_v2-instance_method
+      def get_software_v2: (
+                             ?filters: Params::software_filters,
+                             ?scopes: {
+                               aws_organizations: Array[
+                                 {
+                                   organization_id: ::String?,
+                                   organizational_unit_id: ::String?
+                                 }
+                               ]?
+                             },
+                             ?sort_criteria: Array[
+                               {
+                                 field: ::String?,
+                                 sort_order: ("asc" | "desc")?
+                               }
+                             ],
+                             ?next_token: ::String,
+                             ?max_results: ::Integer
+                           ) -> _GetSoftwareV2ResponseSuccess
+                         | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSoftwareV2ResponseSuccess
+
       interface _InviteMembersResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InviteMembersResponse]
         def unprocessed_accounts: () -> ::Array[Types::Result]

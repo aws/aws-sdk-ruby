@@ -121,6 +121,11 @@ module Aws::RolesAnywhere
     #   Specifies whether the trust anchor is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] crl_dp_revocation_enabled
+    #   Specifies whether the trust anchor checks certificate revocation
+    #   status against CRL distribution points.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] tags
     #   The tags to attach to the trust anchor.
     #   @return [Array<Types::Tag>]
@@ -136,6 +141,7 @@ module Aws::RolesAnywhere
       :name,
       :source,
       :enabled,
+      :crl_dp_revocation_enabled,
       :tags,
       :notification_settings)
       SENSITIVE = []
@@ -849,6 +855,26 @@ module Aws::RolesAnywhere
       include Aws::Structure
     end
 
+    # The request has failed due to a temporary failure of the service.
+    #
+    # @!attribute [rw] message
+    #   The exception message.
+    #   @return [String]
+    #
+    # @!attribute [rw] retry_after_seconds
+    #   The recommended number of seconds after which the client should
+    #   retry the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :message,
+      :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The trust anchor type and its related certificate data.
     #
     # @!attribute [rw] source_type
@@ -1089,6 +1115,11 @@ module Aws::RolesAnywhere
     #   Indicates whether the trust anchor is enabled.
     #   @return [Boolean]
     #
+    # @!attribute [rw] crl_dp_revocation_enabled
+    #   Specifies whether the trust anchor checks certificate revocation
+    #   status against CRL distribution points.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] created_at
     #   The ISO-8601 timestamp when the trust anchor was created.
     #   @return [Time]
@@ -1110,6 +1141,7 @@ module Aws::RolesAnywhere
       :name,
       :source,
       :enabled,
+      :crl_dp_revocation_enabled,
       :created_at,
       :updated_at,
       :notification_settings)
@@ -1237,12 +1269,18 @@ module Aws::RolesAnywhere
     #   The trust anchor type and its related certificate data.
     #   @return [Types::Source]
     #
+    # @!attribute [rw] crl_dp_revocation_enabled
+    #   Specifies whether the trust anchor checks certificate revocation
+    #   status against CRL distribution points.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rolesanywhere-2018-05-10/UpdateTrustAnchorRequest AWS API Documentation
     #
     class UpdateTrustAnchorRequest < Struct.new(
       :trust_anchor_id,
       :name,
-      :source)
+      :source,
+      :crl_dp_revocation_enabled)
       SENSITIVE = []
       include Aws::Structure
     end

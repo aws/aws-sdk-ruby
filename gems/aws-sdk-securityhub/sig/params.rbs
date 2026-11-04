@@ -1492,6 +1492,41 @@ module Aws
       operator: ("AND" | "OR")?
     }
 
+      type software_filters = {
+      composite_filters: Array[
+        Params::software_composite_filter
+      ]?,
+      composite_operator: ("AND" | "OR")?
+    }
+
+      type software_composite_filter = {
+      string_filters: Array[
+        {
+          field_name: ("AccountId" | "PackageName" | "PackageVersion" | "PackageType" | "Region" | "ResourceRegion" | "ResourceType" | "ResourceId" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition")?,
+          filter: {
+            value: ::String?,
+            comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+          }?
+        }
+      ]?,
+      nested_composite_filters: Array[
+        {
+          string_filters: Array[
+            {
+              field_name: ("AccountId" | "PackageName" | "PackageVersion" | "PackageType" | "Region" | "ResourceRegion" | "ResourceType" | "ResourceId" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition")?,
+              filter: {
+                value: ::String?,
+                comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS" | "PREFIX_NOT_EQUALS" | "CONTAINS" | "NOT_CONTAINS" | "CONTAINS_WORD")?
+              }?
+            }
+          ]?,
+          nested_composite_filters: untyped?,
+          operator: ("AND" | "OR")?
+        }
+      ]?,
+      operator: ("AND" | "OR")?
+    }
+
     end
   end
 end

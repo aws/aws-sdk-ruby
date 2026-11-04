@@ -1551,7 +1551,7 @@ module Aws::EC2
     class CapacityManagerSupportabilityScore
       attr_accessor instance_type: ::String
       attr_accessor availability_zone_id: ::String
-      attr_accessor score: ("high" | "medium" | "low")
+      attr_accessor score: ("high" | "medium" | "low" | "unsupported")
       SENSITIVE: []
     end
 
@@ -10229,7 +10229,7 @@ module Aws::EC2
     end
 
     class GetCapacityManagerSupportabilityScoresResult
-      attr_accessor aggregate_score: ("high" | "medium" | "low")
+      attr_accessor aggregate_score: ("high" | "medium" | "low" | "unsupported")
       attr_accessor capacity_manager_supportability_scores: ::Array[Types::CapacityManagerSupportabilityScore]
       SENSITIVE: []
     end

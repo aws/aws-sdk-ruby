@@ -300,6 +300,23 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # The resource ARN or a tag in the request isn't valid. Specify the ARN
+    # of a supported resource in the Amazon Web Services account and Region
+    # of the request. Tag keys can have a maximum length of 128 characters,
+    # and tag values can have a maximum length of 256 characters. Correct
+    # the ARN or the tags, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/InvalidTagParameterException AWS API Documentation
+    #
+    class InvalidTagParameterException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The provided Task ID is not valid. Please provide a valid Task ID and
     # try again.
     #
@@ -532,6 +549,32 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for
+    #   which to list the tags. Currently, the only supported resource is an
+    #   Amazon Polly lexicon.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListTagsForResourceInput AWS API Documentation
+    #
+    class ListTagsForResourceInput < Struct.new(
+      :resource_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] tags
+    #   The tags for the resource.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListTagsForResourceOutput AWS API Documentation
+    #
+    class ListTagsForResourceOutput < Struct.new(
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Speech marks are not supported for the `OutputFormat` selected. Speech
     # marks are only available for content in `json` format.
     #
@@ -573,8 +616,8 @@ module Aws::Polly
     end
 
     # @!attribute [rw] name
-    #   Name of the lexicon. The name must follow the regular express format
-    #   \[0-9A-Za-z\]\{1,20}. That is, the name is a case-sensitive
+    #   Name of the lexicon. The name must follow the regular expression
+    #   format \[0-9A-Za-z\]\{1,20}. That is, the name is a case-sensitive
     #   alphanumeric string up to 20 characters long.
     #   @return [String]
     #
@@ -582,11 +625,21 @@ module Aws::Polly
     #   Content of the PLS lexicon as string data.
     #   @return [String]
     #
+    # @!attribute [rw] tags
+    #   The metadata that you apply to the lexicon to help you categorize
+    #   and organize it. Each tag consists of a key and an optional value,
+    #   both of which you define. Tag keys can have a maximum character
+    #   length of 128 characters, and tag values can have a maximum length
+    #   of 256 characters. You can't replace the tags of an existing
+    #   lexicon by overwriting it with PutLexicon.
+    #   @return [Hash<String,String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconInput AWS API Documentation
     #
     class PutLexiconInput < Struct.new(
       :name,
-      :content)
+      :content,
+      :tags)
       SENSITIVE = [:content]
       include Aws::Structure
     end
@@ -594,6 +647,31 @@ module Aws::Polly
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexiconOutput AWS API Documentation
     #
     class PutLexiconOutput < Aws::EmptyStructure; end
+
+    # Amazon Polly can't find the specified resource. Verify that the
+    # resource exists in the Amazon Web Services account and Region of the
+    # request and that its ARN is spelled correctly, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The identifier of the resource that wasn't found.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource that wasn't found.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ResourceNotFoundException AWS API Documentation
+    #
+    class ResourceNotFoundException < Struct.new(
+      :message,
+      :resource_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # An unknown condition has caused a service failure.
     #
@@ -1141,6 +1219,30 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   Currently, the only supported resource is an Amazon Polly lexicon.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the resource, as key-value pairs. Tag keys can
+    #   have a maximum character length of 128 characters, and tag values
+    #   can have a maximum length of 256 characters.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/TagResourceInput AWS API Documentation
+    #
+    class TagResourceInput < Struct.new(
+      :resource_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/TagResourceOutput AWS API Documentation
+    #
+    class TagResourceOutput < Aws::EmptyStructure; end
+
     # Contains text content to be synthesized into speech.
     #
     # @!attribute [rw] text
@@ -1225,6 +1327,21 @@ module Aws::Polly
       include Aws::Structure
     end
 
+    # The list of tags on the resource is over the limit. The maximum number
+    # of tags that can be applied to a resource is 50. Remove unused tags or
+    # reduce the number of tags in the request, and then try again.
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/TooManyTagsException AWS API Documentation
+    #
+    class TooManyTagsException < Struct.new(
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The alphabet specified by the lexicon is not a supported alphabet.
     # Valid values are `ipa`, `x-sampa`, `x-amazon-pinyin`,
     # `x-amazon-jyutping`, `x-amazon-pron-kana`, and `x-amazon-yomigana`.
@@ -1259,6 +1376,29 @@ module Aws::Polly
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # @!attribute [rw] resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags. Currently, the only supported resource is an Amazon Polly
+    #   lexicon.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   The keys of the tags to be removed.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/UntagResourceInput AWS API Documentation
+    #
+    class UntagResourceInput < Struct.new(
+      :resource_arn,
+      :tag_keys)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/UntagResourceOutput AWS API Documentation
+    #
+    class UntagResourceOutput < Aws::EmptyStructure; end
 
     # The input fails to satisfy the constraints specified by the service.
     #

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.664.0 (2026-11-04)
+------------------
+
+* Feature - Add the Unsupported SupportabilityScore to GetCapacityManagerSupportabilityScores.
+
 1.663.0 (2026-10-29)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.18.0 (2026-11-04)
+------------------
+
+* Feature - Adding support to Environment Variables in MWAA Serverless
+
 1.17.0 (2026-10-29)
 ------------------
 

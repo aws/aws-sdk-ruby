@@ -578,6 +578,13 @@ module Aws::TaxSettings
     # To call this API operation for specific countries, see the following
     # country-specific requirements.
     #
+    # **Argentina**
+    #
+    # * `RegistrationType` valid values are `CUIT` (Clave Única de
+    #   Identificación Tributaria) and `CDI` (Clave de Identificación).
+    #
+    # ^
+    #
     # **Bangladesh**
     #
     # * You must specify the tax registration certificate document in the
@@ -774,6 +781,14 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **Uruguay**
+    #
+    # * `RegistrationType` valid values are `RUT` (Registro Único
+    #   Tributario), `NIE` (Numero de Identificacion del Extranjero), and
+    #   `CI` (Cedula Identidad).
+    #
+    # ^
+    #
     # **Philippines**
     #
     # * You can optionally specify the `isVatRegistered` in the
@@ -859,7 +874,7 @@ module Aws::TaxSettings
     #     account_ids: ["AccountId"], # required
     #     tax_registration_entry: { # required
     #       registration_id: "RegistrationId", # required
-    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC, PAN, NIP
+    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC, PAN, NIP, CUIT, CDI, RUT, NIE, CI
     #       legal_name: "LegalName",
     #       legal_address: {
     #         address_line_1: "AddressLine1",
@@ -1137,7 +1152,7 @@ module Aws::TaxSettings
     # @example Response structure
     #
     #   resp.tax_registration.registration_id #=> String
-    #   resp.tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC", "PAN", "NIP"
+    #   resp.tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC", "PAN", "NIP", "CUIT", "CDI", "RUT", "NIE", "CI"
     #   resp.tax_registration.legal_name #=> String
     #   resp.tax_registration.status #=> String, one of "Verified", "Pending", "Deleted", "Rejected"
     #   resp.tax_registration.sector #=> String, one of "Business", "Individual", "Government"
@@ -1205,6 +1220,12 @@ module Aws::TaxSettings
     #   resp.tax_registration.additional_tax_information.mexico_additional_info.tax_regime #=> String
     #   resp.tax_registration.additional_tax_information.mexico_additional_info.tax_regime_full_name #=> String
     #   resp.tax_registration.additional_tax_information.mexico_additional_info.cfdi_usage_code #=> String
+    #   resp.tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes #=> Array
+    #   resp.tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes[0] #=> String
+    #   resp.tax_registration.additional_tax_information.colombia_additional_info.taxpayer_type_code #=> String
+    #   resp.tax_registration.additional_tax_information.colombia_additional_info.issue_date #=> String
+    #   resp.tax_registration.status_reason.code #=> String
+    #   resp.tax_registration.status_reason.message #=> String
     #   resp.tax_registration.legal_address.address_line_1 #=> String
     #   resp.tax_registration.legal_address.address_line_2 #=> String
     #   resp.tax_registration.legal_address.address_line_3 #=> String
@@ -1395,7 +1416,7 @@ module Aws::TaxSettings
     #   resp.account_details #=> Array
     #   resp.account_details[0].account_id #=> String
     #   resp.account_details[0].tax_registration.registration_id #=> String
-    #   resp.account_details[0].tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC", "PAN", "NIP"
+    #   resp.account_details[0].tax_registration.registration_type #=> String, one of "VAT", "GST", "CPF", "CNPJ", "SST", "TIN", "NRIC", "PAN", "NIP", "CUIT", "CDI", "RUT", "NIE", "CI"
     #   resp.account_details[0].tax_registration.legal_name #=> String
     #   resp.account_details[0].tax_registration.status #=> String, one of "Verified", "Pending", "Deleted", "Rejected"
     #   resp.account_details[0].tax_registration.sector #=> String, one of "Business", "Individual", "Government"
@@ -1463,6 +1484,12 @@ module Aws::TaxSettings
     #   resp.account_details[0].tax_registration.additional_tax_information.mexico_additional_info.tax_regime #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.mexico_additional_info.tax_regime_full_name #=> String
     #   resp.account_details[0].tax_registration.additional_tax_information.mexico_additional_info.cfdi_usage_code #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes #=> Array
+    #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.responsibility_codes[0] #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.taxpayer_type_code #=> String
+    #   resp.account_details[0].tax_registration.additional_tax_information.colombia_additional_info.issue_date #=> String
+    #   resp.account_details[0].tax_registration.status_reason.code #=> String
+    #   resp.account_details[0].tax_registration.status_reason.message #=> String
     #   resp.account_details[0].tax_registration.jurisdiction.state_or_region #=> String
     #   resp.account_details[0].tax_registration.jurisdiction.country_code #=> String
     #   resp.account_details[0].tax_inheritance_details.parent_entity_id #=> String
@@ -1613,6 +1640,13 @@ module Aws::TaxSettings
     #
     # To call this API operation for specific countries, see the following
     # country-specific requirements.
+    #
+    # **Argentina**
+    #
+    # * `RegistrationType` valid values are `CUIT` (Clave Única de
+    #   Identificación Tributaria) and `CDI` (Clave de Identificación).
+    #
+    # ^
     #
     # **Bangladesh**
     #
@@ -1810,6 +1844,14 @@ module Aws::TaxSettings
     #
     # ^
     #
+    # **Uruguay**
+    #
+    # * `RegistrationType` valid values are `RUT` (Registro Único
+    #   Tributario), `NIE` (Numero de Identificacion del Extranjero), and
+    #   `CI` (Cedula Identidad).
+    #
+    # ^
+    #
     # **Philippines**
     #
     # * You can optionally specify the `isVatRegistered` in the
@@ -1894,7 +1936,7 @@ module Aws::TaxSettings
     #     account_id: "AccountId",
     #     tax_registration_entry: { # required
     #       registration_id: "RegistrationId", # required
-    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC, PAN, NIP
+    #       registration_type: "VAT", # required, accepts VAT, GST, CPF, CNPJ, SST, TIN, NRIC, PAN, NIP, CUIT, CDI, RUT, NIE, CI
     #       legal_name: "LegalName",
     #       legal_address: {
     #         address_line_1: "AddressLine1",
@@ -2067,7 +2109,7 @@ module Aws::TaxSettings
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-taxsettings'
-      context[:gem_version] = '1.52.0'
+      context[:gem_version] = '1.53.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

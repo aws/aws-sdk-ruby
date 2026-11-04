@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.173.0 (2026-11-04)
+------------------
+
+* Feature - Add Ubuntu 24.04, Ubuntu 26.04, RHEL 9, RHEL10, Rocky 9 and Rocky 10 to OperatingSystemName and documentation update for WorkspaceProperties Protocols.
+
 1.172.0 (2026-10-29)
 ------------------
 

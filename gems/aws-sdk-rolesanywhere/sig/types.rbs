@@ -36,6 +36,7 @@ module Aws::RolesAnywhere
       attr_accessor name: ::String
       attr_accessor source: Types::Source
       attr_accessor enabled: bool
+      attr_accessor crl_dp_revocation_enabled: bool
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor notification_settings: ::Array[Types::NotificationSetting]
       SENSITIVE: []
@@ -246,6 +247,12 @@ module Aws::RolesAnywhere
       SENSITIVE: []
     end
 
+    class ServiceUnavailableException
+      attr_accessor message: ::String
+      attr_accessor retry_after_seconds: ::Integer
+      SENSITIVE: []
+    end
+
     class Source
       attr_accessor source_type: ("AWS_ACM_PCA" | "CERTIFICATE_BUNDLE" | "SELF_SIGNED_REPOSITORY")
       attr_accessor source_data: Types::SourceData
@@ -321,6 +328,7 @@ module Aws::RolesAnywhere
       attr_accessor name: ::String
       attr_accessor source: Types::Source
       attr_accessor enabled: bool
+      attr_accessor crl_dp_revocation_enabled: bool
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor notification_settings: ::Array[Types::NotificationSettingDetail]
@@ -363,6 +371,7 @@ module Aws::RolesAnywhere
       attr_accessor trust_anchor_id: ::String
       attr_accessor name: ::String
       attr_accessor source: Types::Source
+      attr_accessor crl_dp_revocation_enabled: bool
       SENSITIVE: []
     end
 

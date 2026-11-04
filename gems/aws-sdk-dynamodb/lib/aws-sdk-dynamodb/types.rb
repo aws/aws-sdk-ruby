@@ -1189,6 +1189,312 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Contains the bulk put bytes used during a bulk operation.
+    #
+    # @!attribute [rw] bulk_put_bytes
+    #   The number of bulk put bytes.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BulkOperationBytes AWS API Documentation
+    #
+    class BulkOperationBytes < Struct.new(
+      :bulk_put_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains detailed information about a bulk operation.
+    #
+    # @!attribute [rw] bulk_operation_arn
+    #   The Amazon Resource Name (ARN) of the bulk operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] bulk_operation_status
+    #   The current status of the bulk operation can be one of the following
+    #   values:
+    #
+    #   IN\_PROGRESS
+    #
+    #   : DynamoDB is processing the input.
+    #
+    #   COMPLETED
+    #
+    #   : The bulk operation finished without parsing or validation errors.
+    #     Condition-check failures do not cause the operation to complete
+    #     with errors.
+    #
+    #   COMPLETED\_WITH\_ERRORS
+    #
+    #   : The bulk operation finished, but DynamoDB couldn't process at
+    #     least one input item because of a parsing or validation error.
+    #     When you enable `ERROR` output, DynamoDB writes the details to the
+    #     configured Amazon S3 output location.
+    #
+    #   CANCELLING
+    #
+    #   : DynamoDB accepted a cancellation request and is stopping the
+    #     operation.
+    #
+    #   CANCELLED
+    #
+    #   : DynamoDB stopped the operation after a cancellation request.
+    #
+    #   FAILED
+    #
+    #   : The bulk operation failed. DynamoDB might write some items before
+    #     the operation reaches this status. See [FailureCode][1] and
+    #     [FailureMessage][2] for details.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BulkOperationDescription.html#DDB-Type-BulkOperationDescription-FailureCode
+    #   [2]: https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_BulkOperationDescription.html#DDB-Type-BulkOperationDescription-FailureMessage
+    #   @return [String]
+    #
+    # @!attribute [rw] table_details
+    #   A list containing identifying information for the table targeted by
+    #   the bulk operation.
+    #   @return [Array<Types::BulkOperationTableDetail>]
+    #
+    # @!attribute [rw] client_token
+    #   The idempotency token associated with the start request.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_s3_configuration
+    #   The Amazon S3 input configuration associated with the bulk
+    #   operation.
+    #   @return [Types::InputS3Configuration]
+    #
+    # @!attribute [rw] output_s3_configuration
+    #   The Amazon S3 output configuration associated with the bulk
+    #   operation.
+    #   @return [Types::OutputS3Configuration]
+    #
+    # @!attribute [rw] start_time
+    #   The time when DynamoDB accepted the start request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the operation reached a terminal status. DynamoDB
+    #   omits this value while the operation remains in progress.
+    #   @return [Time]
+    #
+    # @!attribute [rw] processed_item_count
+    #   The number of input items that DynamoDB has processed. This count
+    #   includes successful writes, parsing or validation failures, and
+    #   condition-check failures.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] processed_input_bytes
+    #   The number of bytes that DynamoDB has read from the Amazon S3 input
+    #   objects.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] total_input_bytes
+    #   The total size, in bytes, of the Amazon S3 input objects. DynamoDB
+    #   omits this value until the initial input-size calculation completes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] bulk_operation_usage
+    #   Usage information for the table and its indexes.
+    #   @return [Array<Types::BulkOperationUsage>]
+    #
+    # @!attribute [rw] failed_item_count
+    #   The number of processed input items that failed because of parsing
+    #   or validation errors. This count is included in
+    #   `ProcessedItemCount`. Condition-check failures do not increase this
+    #   count.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] failure_code
+    #   A code that identifies why the bulk operation failed or was
+    #   cancelled. DynamoDB returns this value only when
+    #   `BulkOperationStatus` is `FAILED` or `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] failure_message
+    #   A message that describes why the bulk operation failed or was
+    #   cancelled. DynamoDB returns this value only when
+    #   `BulkOperationStatus` is `FAILED` or `CANCELLED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_write_request_units
+    #   The maximum write request unit rate configured for the bulk
+    #   operation.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] performance_tier
+    #   The performance tier selected for the bulk operation. Valid values
+    #   are `STANDARD` and `ACCELERATED`. If the start request omitted this
+    #   value, DynamoDB uses `STANDARD`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BulkOperationDescription AWS API Documentation
+    #
+    class BulkOperationDescription < Struct.new(
+      :bulk_operation_arn,
+      :bulk_operation_status,
+      :table_details,
+      :client_token,
+      :input_s3_configuration,
+      :output_s3_configuration,
+      :start_time,
+      :end_time,
+      :processed_item_count,
+      :processed_input_bytes,
+      :total_input_bytes,
+      :bulk_operation_usage,
+      :failed_item_count,
+      :failure_code,
+      :failure_message,
+      :max_write_request_units,
+      :performance_tier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains summary information about a bulk operation.
+    #
+    # @!attribute [rw] bulk_operation_arn
+    #   The Amazon Resource Name (ARN) of the bulk operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] bulk_operation_status
+    #   The current status of the bulk operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] start_time
+    #   The time when DynamoDB accepted the start request.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_time
+    #   The time when the operation reached a terminal status. DynamoDB
+    #   omits this value while the operation remains in progress.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BulkOperationSummary AWS API Documentation
+    #
+    class BulkOperationSummary < Struct.new(
+      :bulk_operation_arn,
+      :bulk_operation_status,
+      :start_time,
+      :end_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains identifying information for a table associated with a bulk
+    # operation.
+    #
+    # @!attribute [rw] table_name
+    #   The name or ARN of the table associated with the bulk operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_id
+    #   The unique identifier of the table associated with the bulk
+    #   operation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BulkOperationTableDetail AWS API Documentation
+    #
+    class BulkOperationTableDetail < Struct.new(
+      :table_name,
+      :table_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the bytes used during a bulk operation, including a breakdown
+    # for the table and its indexes.
+    #
+    # @!attribute [rw] table_name
+    #   The name or ARN of the table associated with the reported usage.
+    #   @return [String]
+    #
+    # @!attribute [rw] bulk_put_bytes
+    #   The total number of bulk put bytes used by the operation. This value
+    #   excludes bulk put vector bytes.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] table
+    #   The number of bulk put bytes for the table, excluding its indexes.
+    #   @return [Types::BulkOperationBytes]
+    #
+    # @!attribute [rw] local_secondary_indexes
+    #   The bulk put bytes used on each local secondary index affected by
+    #   the operation, keyed by index name.
+    #   @return [Hash<String,Types::BulkOperationBytes>]
+    #
+    # @!attribute [rw] global_secondary_indexes
+    #   The bulk put bytes used on each global secondary index affected by
+    #   the operation, keyed by index name.
+    #   @return [Hash<String,Types::BulkOperationBytes>]
+    #
+    # @!attribute [rw] vector_indexes
+    #   The bulk put vector bytes used on each vector index affected by the
+    #   operation, keyed by index name.
+    #   @return [Hash<String,Types::BulkOperationVectorBytes>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BulkOperationUsage AWS API Documentation
+    #
+    class BulkOperationUsage < Struct.new(
+      :table_name,
+      :bulk_put_bytes,
+      :table,
+      :local_secondary_indexes,
+      :global_secondary_indexes,
+      :vector_indexes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the bulk put vector bytes used by a vector index during a
+    # bulk operation.
+    #
+    # @!attribute [rw] bulk_put_vector_bytes
+    #   The number of bulk put vector bytes used on the vector index.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/BulkOperationVectorBytes AWS API Documentation
+    #
+    class BulkOperationVectorBytes < Struct.new(
+      :bulk_put_vector_bytes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bulk_operation_arn
+    #   The Amazon Resource Name (ARN) of the bulk operation to cancel.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CancelBulkOperationInput AWS API Documentation
+    #
+    class CancelBulkOperationInput < Struct.new(
+      :bulk_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bulk_operation_arn
+    #   The Amazon Resource Name (ARN) of the bulk operation for which
+    #   DynamoDB accepted the cancellation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] bulk_operation_status
+    #   The status returned after DynamoDB accepts the cancellation request.
+    #   This value is `CANCELLING`. Use `DescribeBulkOperation` to determine
+    #   when the operation reaches `CANCELLED`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CancelBulkOperationOutput AWS API Documentation
+    #
+    class CancelBulkOperationOutput < Struct.new(
+      :bulk_operation_arn,
+      :bulk_operation_status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An ordered list of errors for each item in the request which caused
     # the transaction to get cancelled. The values of the list are ordered
     # according to the ordering of the `TransactWriteItems` request
@@ -2834,6 +3140,30 @@ module Aws::DynamoDB
     #
     class DescribeBackupOutput < Struct.new(
       :backup_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bulk_operation_arn
+    #   The Amazon Resource Name (ARN) of the bulk operation to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBulkOperationInput AWS API Documentation
+    #
+    class DescribeBulkOperationInput < Struct.new(
+      :bulk_operation_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bulk_operation_description
+    #   Contains detailed information about the bulk operation.
+    #   @return [Types::BulkOperationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBulkOperationOutput AWS API Documentation
+    #
+    class DescribeBulkOperationOutput < Struct.new(
+      :bulk_operation_description)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5253,6 +5583,52 @@ module Aws::DynamoDB
       include Aws::Structure
     end
 
+    # Contains the Amazon S3 location and format settings for bulk operation
+    # input. The `S3Bucket` and `InputFormat` fields are required.
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The Amazon Web Services account ID of the input bucket owner. If you
+    #   omit this value, DynamoDB uses the Amazon Web Services account ID of
+    #   the requester.
+    #
+    #   <note markdown="1"> `S3BucketOwner` is required when the bucket is owned by another
+    #   Amazon Web Services account.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the Amazon S3 bucket that contains the input objects.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   An optional key prefix that limits the input to matching objects in
+    #   the Amazon S3 bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_format
+    #   The format of the input objects. `DYNAMODB_JSON` uses JSON Lines,
+    #   with one JSON record per line. `ION` uses a sequence of Ion structs.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_compression_type
+    #   The compression type of the input objects. Valid values are `GZIP`,
+    #   `ZSTD`, and `NONE`. If you don't specify a value, DynamoDB uses
+    #   `NONE`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/InputS3Configuration AWS API Documentation
+    #
+    class InputS3Configuration < Struct.new(
+      :s3_bucket_owner,
+      :s3_bucket,
+      :s3_key_prefix,
+      :input_format,
+      :input_compression_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An error occurred on the server side.
     #
     # @!attribute [rw] message
@@ -5713,6 +6089,46 @@ module Aws::DynamoDB
     class ListBackupsOutput < Struct.new(
       :backup_summaries,
       :last_evaluated_backup_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] max_results
+    #   The maximum number of bulk operation summaries to return in one
+    #   page. If you don't specify a value, DynamoDB uses 10.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to `ListBulkOperations`. When provided in this
+    #   manner, the API fetches the next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBulkOperationsInput AWS API Documentation
+    #
+    class ListBulkOperationsInput < Struct.new(
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bulk_operations_summary_list
+    #   A list of bulk operation summaries for the current Amazon Web
+    #   Services account and Amazon Web Services Region.
+    #   @return [Array<Types::BulkOperationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   If this value is returned, there are additional results to be
+    #   displayed. To retrieve them, call `ListBulkOperations` again, with
+    #   `NextToken` set to this value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBulkOperationsOutput AWS API Documentation
+    #
+    class ListBulkOperationsOutput < Struct.new(
+      :bulk_operations_summary_list,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6178,6 +6594,73 @@ module Aws::DynamoDB
     #
     class OnDemandThroughputOverride < Struct.new(
       :max_read_request_units)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the Amazon S3 location, encryption settings, and output types
+    # for a bulk operation. The `S3Bucket` and `OutputType` fields are
+    # required.
+    #
+    # @!attribute [rw] s3_bucket_owner
+    #   The Amazon Web Services account ID of the output bucket owner. If
+    #   you omit this value, DynamoDB uses the Amazon Web Services account
+    #   ID of the requester.
+    #
+    #   <note markdown="1"> `S3BucketOwner` is required when the bucket is owned by another
+    #   Amazon Web Services account.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_bucket
+    #   The name of the Amazon S3 bucket where DynamoDB writes output
+    #   records.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_key_prefix
+    #   An optional key prefix under which DynamoDB writes the output
+    #   records.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_algorithm
+    #   The server-side encryption algorithm for the output objects. Valid
+    #   values are `AES256` and `KMS`. If you don't specify a value, Amazon
+    #   S3 applies the destination bucket's default encryption settings.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_sse_kms_key_id
+    #   The identifier of the KMS key that encrypts the output objects.
+    #   Specify this value when `S3SseAlgorithm` is `KMS`. Don't specify it
+    #   when the algorithm is `AES256`.
+    #   @return [String]
+    #
+    # @!attribute [rw] output_type
+    #   The following values describe the types of output that DynamoDB
+    #   writes for individual input items. Include one or both values.
+    #
+    #   ERROR
+    #
+    #   : Reports input records or input objects that DynamoDB couldn't
+    #     process. This includes malformed input and item validation
+    #     failures, such as a missing or incorrectly typed primary key
+    #     attribute or an item that exceeds a DynamoDB limit.
+    #
+    #   CONDITION\_CHECK\_FAILURE
+    #
+    #   : Reports the attempted item and, when present, the existing item
+    #     for a write whose condition expression evaluates to false.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/OutputS3Configuration AWS API Documentation
+    #
+    class OutputS3Configuration < Struct.new(
+      :s3_bucket_owner,
+      :s3_bucket,
+      :s3_key_prefix,
+      :s3_sse_algorithm,
+      :s3_sse_kms_key_id,
+      :output_type)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9023,10 +9506,9 @@ module Aws::DynamoDB
     #   expression can reference attributes defined in the vector index
     #   search schema, including `HASH` and `INLINE_FILTER` key elements.
     #
-    #   Only the equality operator (`=`) is supported for `HASH` attributes.
-    #   Comparison and range operators are supported for `INLINE_FILTER`
-    #   attributes. Only top-level attributes from the search schema can be
-    #   referenced.
+    #   The `HASH` and `INLINE_FILTER` attributes support only the equality
+    #   operator (`=`). You can reference only top-level attributes from the
+    #   search schema.
     #   @return [String]
     #
     # @!attribute [rw] top_k
@@ -9185,6 +9667,73 @@ module Aws::DynamoDB
       :time_to_live_description,
       :sse_description,
       :vector_indexes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that ensures the bulk operation
+    #   starts no more than one time. During the 8 hours after the initial
+    #   request, repeated requests that use the same token and parameters
+    #   return the same bulk operation. If a request reuses the token with
+    #   different parameters, DynamoDB returns an
+    #   `IdempotentParameterMismatchException`. If you omit the token, an
+    #   Amazon Web Services SDK automatically generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] input_s3_configuration
+    #   The Amazon S3 location, data format, and compression settings for
+    #   the input objects.
+    #   @return [Types::InputS3Configuration]
+    #
+    # @!attribute [rw] output_s3_configuration
+    #   The Amazon S3 location, encryption settings, and output types for
+    #   the bulk operation.
+    #   @return [Types::OutputS3Configuration]
+    #
+    # @!attribute [rw] table_name
+    #   The name or ARN of the existing DynamoDB table that receives the
+    #   items.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_write_request_units
+    #   The maximum rate, in write request units per second, at which the
+    #   bulk operation attempts to write. The value must be at least 1,024.
+    #   With this setting, you limit only the bulk operation; the table's
+    #   provisioned or on-demand capacity settings don't change. The actual
+    #   write rate can be lower.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] performance_tier
+    #   The performance tier for the bulk operation. Valid values are
+    #   `STANDARD` and `ACCELERATED`. If you don't specify a value, the
+    #   operation uses `STANDARD`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/StartBulkPutItemsInput AWS API Documentation
+    #
+    class StartBulkPutItemsInput < Struct.new(
+      :client_token,
+      :input_s3_configuration,
+      :output_s3_configuration,
+      :table_name,
+      :max_write_request_units,
+      :performance_tier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] bulk_operation_description
+    #   Contains detailed information about a bulk operation.
+    #   @return [Types::BulkOperationDescription]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/StartBulkPutItemsOutput AWS API Documentation
+    #
+    class StartBulkPutItemsOutput < Struct.new(
+      :bulk_operation_description)
       SENSITIVE = []
       include Aws::Structure
     end

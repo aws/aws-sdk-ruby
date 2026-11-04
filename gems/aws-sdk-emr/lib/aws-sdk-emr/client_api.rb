@@ -343,6 +343,7 @@ module Aws::EMR
     StartSessionOutput = Shapes::StructureShape.new(name: 'StartSessionOutput')
     Statistic = Shapes::StringShape.new(name: 'Statistic')
     Step = Shapes::StructureShape.new(name: 'Step')
+    StepAdditionalInfo = Shapes::StructureShape.new(name: 'StepAdditionalInfo')
     StepCancellationOption = Shapes::StringShape.new(name: 'StepCancellationOption')
     StepConfig = Shapes::StructureShape.new(name: 'StepConfig')
     StepConfigList = Shapes::ListShape.new(name: 'StepConfigList')
@@ -1697,7 +1698,12 @@ module Aws::EMR
     Step.add_member(:execution_role_arn, Shapes::ShapeRef.new(shape: OptionalArnType, location_name: "ExecutionRoleArn"))
     Step.add_member(:log_uri, Shapes::ShapeRef.new(shape: String, location_name: "LogUri"))
     Step.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "EncryptionKeyArn"))
+    Step.add_member(:additional_info, Shapes::ShapeRef.new(shape: StepAdditionalInfo, location_name: "AdditionalInfo"))
     Step.struct_class = Types::Step
+
+    StepAdditionalInfo.add_member(:resource_manager_application_ids, Shapes::ShapeRef.new(shape: StringList, location_name: "ResourceManagerApplicationIds"))
+    StepAdditionalInfo.add_member(:resource_manager, Shapes::ShapeRef.new(shape: String, location_name: "ResourceManager"))
+    StepAdditionalInfo.struct_class = Types::StepAdditionalInfo
 
     StepConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Name"))
     StepConfig.add_member(:action_on_failure, Shapes::ShapeRef.new(shape: ActionOnFailure, location_name: "ActionOnFailure"))
@@ -1744,6 +1750,7 @@ module Aws::EMR
     StepSummary.add_member(:status, Shapes::ShapeRef.new(shape: StepStatus, location_name: "Status"))
     StepSummary.add_member(:log_uri, Shapes::ShapeRef.new(shape: String, location_name: "LogUri"))
     StepSummary.add_member(:encryption_key_arn, Shapes::ShapeRef.new(shape: String, location_name: "EncryptionKeyArn"))
+    StepSummary.add_member(:additional_info, Shapes::ShapeRef.new(shape: StepAdditionalInfo, location_name: "AdditionalInfo"))
     StepSummary.struct_class = Types::StepSummary
 
     StepSummaryList.member = Shapes::ShapeRef.new(shape: StepSummary)

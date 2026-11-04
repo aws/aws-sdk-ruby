@@ -4187,6 +4187,11 @@ module Aws::IoTSiteWise
     #   The processing input source.
     #   @return [Types::ProcessingInput]
     #
+    # @!attribute [rw] job_name
+    #   An optional name for the export job. When omitted, one will be
+    #   created based on type of job and start time.
+    #   @return [String]
+    #
     # @!attribute [rw] error_report_location
     #   The location where the error report will be written on failure.
     #   @return [Types::ExportErrorReportLocation]
@@ -4196,6 +4201,7 @@ module Aws::IoTSiteWise
       :client_token,
       :destination_s3_uri,
       :input,
+      :job_name,
       :error_report_location)
       SENSITIVE = []
       include Aws::Structure
@@ -7044,6 +7050,10 @@ module Aws::IoTSiteWise
     #   The name of the workspace that contains the dataset export job.
     #   @return [String]
     #
+    # @!attribute [rw] job_name
+    #   The name of the dataset export job.
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   The current status of the dataset export job.
     #   @return [String]
@@ -7073,6 +7083,7 @@ module Aws::IoTSiteWise
     class DescribeDatasetExportJobResponse < Struct.new(
       :job_id,
       :workspace_name,
+      :job_name,
       :status,
       :started_at,
       :completed_at,
@@ -8986,6 +8997,10 @@ module Aws::IoTSiteWise
     #   &lt;p&gt;The unique identifier for the dataset export job.&lt;/p&gt;
     #   @return [String]
     #
+    # @!attribute [rw] job_name
+    #   &lt;p&gt;The name of the dataset export job.&lt;/p&gt;
+    #   @return [String]
+    #
     # @!attribute [rw] status
     #   &lt;p&gt;The current status of the dataset export job.&lt;/p&gt;
     #   @return [String]
@@ -9005,6 +9020,7 @@ module Aws::IoTSiteWise
     #
     class ExportJobSummary < Struct.new(
       :job_id,
+      :job_name,
       :status,
       :started_at,
       :completed_at,

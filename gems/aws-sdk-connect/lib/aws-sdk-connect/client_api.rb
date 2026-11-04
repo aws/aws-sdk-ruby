@@ -250,6 +250,10 @@ module Aws::Connect
     CalculationExpression = Shapes::StringShape.new(name: 'CalculationExpression')
     Campaign = Shapes::StructureShape.new(name: 'Campaign')
     CampaignId = Shapes::StringShape.new(name: 'CampaignId')
+    CaseEntries = Shapes::ListShape.new(name: 'CaseEntries')
+    CaseEntry = Shapes::StructureShape.new(name: 'CaseEntry')
+    CaseId = Shapes::StringShape.new(name: 'CaseId')
+    CaseReferenceNumber = Shapes::StringShape.new(name: 'CaseReferenceNumber')
     CaseSlaConfiguration = Shapes::StructureShape.new(name: 'CaseSlaConfiguration')
     CategoriesAttributeAndCondition = Shapes::StructureShape.new(name: 'CategoriesAttributeAndCondition')
     CategoriesAttributeFilter = Shapes::StructureShape.new(name: 'CategoriesAttributeFilter')
@@ -3112,6 +3116,12 @@ module Aws::Connect
     Campaign.add_member(:campaign_id, Shapes::ShapeRef.new(shape: CampaignId, location_name: "CampaignId"))
     Campaign.struct_class = Types::Campaign
 
+    CaseEntries.member = Shapes::ShapeRef.new(shape: CaseEntry)
+
+    CaseEntry.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "CaseId"))
+    CaseEntry.add_member(:case_reference_number, Shapes::ShapeRef.new(shape: CaseReferenceNumber, location_name: "CaseReferenceNumber"))
+    CaseEntry.struct_class = Types::CaseEntry
+
     CaseSlaConfiguration.add_member(:name, Shapes::ShapeRef.new(shape: SlaName, required: true, location_name: "Name"))
     CaseSlaConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: SlaType, required: true, location_name: "Type"))
     CaseSlaConfiguration.add_member(:field_id, Shapes::ShapeRef.new(shape: FieldValueId, location_name: "FieldId"))
@@ -3273,6 +3283,7 @@ module Aws::Connect
     Contact.add_member(:disconnect_reason, Shapes::ShapeRef.new(shape: String, location_name: "DisconnectReason"))
     Contact.add_member(:contact_evaluations, Shapes::ShapeRef.new(shape: ContactEvaluations, location_name: "ContactEvaluations"))
     Contact.add_member(:task_template_info, Shapes::ShapeRef.new(shape: TaskTemplateInfoV2, location_name: "TaskTemplateInfo"))
+    Contact.add_member(:cases, Shapes::ShapeRef.new(shape: CaseEntries, location_name: "Cases"))
     Contact.add_member(:contact_details, Shapes::ShapeRef.new(shape: ContactDetails, location_name: "ContactDetails"))
     Contact.add_member(:outbound_strategy, Shapes::ShapeRef.new(shape: OutboundStrategy, location_name: "OutboundStrategy"))
     Contact.add_member(:attributes, Shapes::ShapeRef.new(shape: Attributes, location_name: "Attributes"))

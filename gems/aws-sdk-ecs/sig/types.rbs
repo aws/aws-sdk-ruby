@@ -764,6 +764,7 @@ module Aws::ECS
     class DaemonVolume
       attr_accessor name: ::String
       attr_accessor host: Types::HostVolumeProperties
+      attr_accessor log_driver_volume_configuration: Types::LogDriverVolumeConfiguration
       SENSITIVE: []
     end
 
@@ -2141,6 +2142,11 @@ module Aws::ECS
       attr_accessor log_driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens")
       attr_accessor options: ::Hash[::String, ::String]
       attr_accessor secret_options: ::Array[Types::Secret]
+      SENSITIVE: []
+    end
+
+    class LogDriverVolumeConfiguration
+      attr_accessor driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens")
       SENSITIVE: []
     end
 

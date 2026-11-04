@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.115.0 (2026-11-04)
+------------------
+
+* Feature - Adds DefaultAmiList to DescribePlatformVersion to return the default AMI for each processor architecture that a platform version supports.
+
 1.114.0 (2026-10-29)
 ------------------
 

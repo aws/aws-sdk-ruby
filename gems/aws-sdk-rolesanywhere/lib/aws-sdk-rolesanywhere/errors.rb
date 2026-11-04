@@ -29,6 +29,7 @@ module Aws::RolesAnywhere
   # ## Error Classes
   # * {AccessDeniedException}
   # * {ResourceNotFoundException}
+  # * {ServiceUnavailableException}
   # * {TooManyTagsException}
   # * {ValidationException}
   #
@@ -65,6 +66,30 @@ module Aws::RolesAnywhere
       # @return [String]
       def message
         @message || @data[:message]
+      end
+    end
+
+    class ServiceUnavailableException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::RolesAnywhere::Types::ServiceUnavailableException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+
+      # @return [String]
+      def retry_after_seconds
+        @data[:retry_after_seconds]
+      end
+
+      def retryable?
+        true
       end
     end
 

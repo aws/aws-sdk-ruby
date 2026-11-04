@@ -481,6 +481,41 @@ module Aws::S3Tables
 
     # @!group API Operations
 
+    # Completes the migration of a table. The table's most recent migration
+    # must be in the `succeeded`, `failed` or `cancelled` state. After you
+    # complete the migration, you can't sync the table again, and you can
+    # write to and maintain the table as you do any other table: compaction
+    # starts, and unreferenced file removal follows the table bucket's
+    # configuration. You can't undo this operation. Calling it again for
+    # the same table returns a `ConflictException`.
+    #
+    # Permissions
+    # : * You must have the `s3tables:CompleteTableMigration` permission to
+    #     use this operation.
+    #
+    #   ^
+    #
+    # @option params [required, String] :table_arn
+    #   The Amazon Resource Name (ARN) of the migrated table to complete the
+    #   migration of.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.complete_table_migration({
+    #     table_arn: "TableARN", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/CompleteTableMigration AWS API Documentation
+    #
+    # @overload complete_table_migration(params = {})
+    # @param [Hash] params ({})
+    def complete_table_migration(params = {}, options = {})
+      req = build_request(:complete_table_migration, params)
+      req.send_request(options)
+    end
+
     # Creates a namespace. A namespace is a logical grouping of tables
     # within your table bucket, which you can use to organize tables. For
     # more information, see [Create a namespace][1] in the *Amazon Simple
@@ -1724,6 +1759,113 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
+    # Gets the details of a migration, including its state, the reason it
+    # failed, its statistics and the location of its reports. Identify the
+    # migration by its `migrationId`, or specify the `tableARN` of a
+    # destination table to get that table's most recent migration.
+    #
+    # Permissions
+    # : * You must have the `s3tables:GetTableMigration` permission to use
+    #     this operation.
+    #
+    #   ^
+    #
+    # @option params [String] :migration_id
+    #   The ID of the migration to get. Specify either `migrationId` or
+    #   `tableARN`, not both.
+    #
+    # @option params [String] :table_arn
+    #   The Amazon Resource Name (ARN) of the destination table. Gets the
+    #   table's most recent migration. Specify either `tableARN` or
+    #   `migrationId`, not both.
+    #
+    # @return [Types::GetTableMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetTableMigrationResponse#migration_id #migration_id} => String
+    #   * {Types::GetTableMigrationResponse#table_bucket_arn #table_bucket_arn} => String
+    #   * {Types::GetTableMigrationResponse#namespace #namespace} => String
+    #   * {Types::GetTableMigrationResponse#table_arn #table_arn} => String
+    #   * {Types::GetTableMigrationResponse#name #name} => String
+    #   * {Types::GetTableMigrationResponse#type #type} => String
+    #   * {Types::GetTableMigrationResponse#state #state} => String
+    #   * {Types::GetTableMigrationResponse#role_arn #role_arn} => String
+    #   * {Types::GetTableMigrationResponse#review_migration_plan #review_migration_plan} => Boolean
+    #   * {Types::GetTableMigrationResponse#has_valid_plan #has_valid_plan} => Boolean
+    #   * {Types::GetTableMigrationResponse#created_at #created_at} => Time
+    #   * {Types::GetTableMigrationResponse#state_updated_at #state_updated_at} => Time
+    #   * {Types::GetTableMigrationResponse#failure_reason #failure_reason} => Types::MigrationFailureReason
+    #   * {Types::GetTableMigrationResponse#planning_stats #planning_stats} => Types::PlanningStats
+    #   * {Types::GetTableMigrationResponse#migration_stats #migration_stats} => Types::MigrationStats
+    #   * {Types::GetTableMigrationResponse#source_type #source_type} => String
+    #   * {Types::GetTableMigrationResponse#source #source} => Types::SourceConfiguration
+    #   * {Types::GetTableMigrationResponse#data_migration #data_migration} => Types::DataMigrationOverview
+    #   * {Types::GetTableMigrationResponse#migration_output #migration_output} => Types::MigrationOutputOverview
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_table_migration({
+    #     migration_id: "MigrationId",
+    #     table_arn: "TableARN",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_id #=> String
+    #   resp.table_bucket_arn #=> String
+    #   resp.namespace #=> String
+    #   resp.table_arn #=> String
+    #   resp.name #=> String
+    #   resp.type #=> String, one of "start", "sync"
+    #   resp.state #=> String, one of "new", "planning", "pendingReview", "queued", "migrating", "succeeded", "failed", "cancelling", "cancelled"
+    #   resp.role_arn #=> String
+    #   resp.review_migration_plan #=> Boolean
+    #   resp.has_valid_plan #=> Boolean
+    #   resp.created_at #=> Time
+    #   resp.state_updated_at #=> Time
+    #   resp.failure_reason.code #=> String, one of "rolePermissions", "sourcePermissions", "destinationPermissions", "resourceNotFound", "sourceNotSupported", "objectMigrationReport", "objectCompatibilityReport", "tableCompatibilityReport", "internalError", "reportBucketNotSupported"
+    #   resp.failure_reason.detail #=> String
+    #   resp.planning_stats.objects_scanned #=> Integer
+    #   resp.planning_stats.objects_planned #=> Integer
+    #   resp.planning_stats.partition_count #=> Integer
+    #   resp.migration_stats.objects_migrated #=> Integer
+    #   resp.migration_stats.objects_failed_migration #=> Integer
+    #   resp.migration_stats.objects_pending_migration #=> Integer
+    #   resp.source_type #=> String, one of "glueTable"
+    #   resp.source.glue_table.catalog_id #=> String
+    #   resp.source.glue_table.database_name #=> String
+    #   resp.source.glue_table.table_name #=> String
+    #   resp.data_migration.maintenance_settings.iceberg_compaction.target_file_size_mb #=> Integer
+    #   resp.data_migration.maintenance_settings.iceberg_compaction.strategy #=> String, one of "auto", "binpack", "sort", "z-order"
+    #   resp.data_migration.maintenance_settings.iceberg_snapshot_management.min_snapshots_to_keep #=> Integer
+    #   resp.data_migration.maintenance_settings.iceberg_snapshot_management.max_snapshot_age_hours #=> Integer
+    #   resp.data_migration.migration_policies.unmatched_source_fields_policy #=> String, one of "fail", "drop"
+    #   resp.data_migration.migration_policies.incompatible_values_policy #=> String, one of "fail", "setNull"
+    #   resp.migration_output.bucket #=> String
+    #   resp.migration_output.table_compatibility_report.prefix #=> String
+    #   resp.migration_output.table_compatibility_report.key #=> String
+    #   resp.migration_output.table_compatibility_report.checksum_crc64nvme #=> String
+    #   resp.migration_output.table_compatibility_report.invalid_findings #=> Hash
+    #   resp.migration_output.table_compatibility_report.invalid_findings["FindingCategory"] #=> Integer
+    #   resp.migration_output.object_compatibility_report.prefix #=> String
+    #   resp.migration_output.object_compatibility_report.key #=> String
+    #   resp.migration_output.object_compatibility_report.checksum_crc64nvme #=> String
+    #   resp.migration_output.object_compatibility_report.invalid_findings #=> Hash
+    #   resp.migration_output.object_compatibility_report.invalid_findings["FindingCategory"] #=> Integer
+    #   resp.migration_output.object_migration_report.prefix #=> String
+    #   resp.migration_output.object_migration_report.key #=> String
+    #   resp.migration_output.object_migration_report.checksum_crc64nvme #=> String
+    #   resp.migration_output.object_migration_report.invalid_findings #=> Hash
+    #   resp.migration_output.object_migration_report.invalid_findings["FindingCategory"] #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableMigration AWS API Documentation
+    #
+    # @overload get_table_migration(params = {})
+    # @param [Hash] params ({})
+    def get_table_migration(params = {}, options = {})
+      req = build_request(:get_table_migration, params)
+      req.send_request(options)
+    end
+
     # Gets details about a table policy. For more information, see [Viewing
     # a table policy][1] in the *Amazon Simple Storage Service User Guide*.
     #
@@ -2103,6 +2245,102 @@ module Aws::S3Tables
     # @param [Hash] params ({})
     def list_table_buckets(params = {}, options = {})
       req = build_request(:list_table_buckets, params)
+      req.send_request(options)
+    end
+
+    # Lists the migrations whose destination is in a table bucket, a
+    # namespace or a table. Specify a `tableBucketARN` to list the
+    # migrations into a table bucket, and add a `namespace`, or a
+    # `namespace` and a `name`, to narrow the list. Or specify a `tableARN`
+    # to list the migrations into a table.
+    #
+    # Migrations are listed newest first. Results are paginated: use
+    # `maxResults` to set the page size, and pass the `nextToken` from a
+    # response to retrieve the next page of results. A page can contain
+    # fewer migrations than `maxResults`, or none, and still return a
+    # `nextToken`. Continue until a response has no `nextToken`.
+    #
+    # Permissions
+    # : * You must have the `s3tables:ListTableMigrations` permission to use
+    #     this operation.
+    #
+    #   ^
+    #
+    # @option params [String] :table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket to list migrations
+    #   for.
+    #
+    # @option params [String] :namespace
+    #   The namespace to list migrations for. Requires `tableBucketARN`.
+    #
+    # @option params [String] :name
+    #   The name of the table to list migrations for. Requires
+    #   `tableBucketARN` and `namespace`.
+    #
+    # @option params [String] :table_arn
+    #   The Amazon Resource Name (ARN) of the table to list migrations for.
+    #   The list includes the migrations into this table. To also list
+    #   migrations into an earlier table of the same name, specify
+    #   `tableBucketARN`, `namespace` and `name` instead. Specify either
+    #   `tableARN` or `tableBucketARN`, not both.
+    #
+    # @option params [String] :state
+    #   The state to filter the list by. For the valid values, see the `state`
+    #   member of `GetTableMigration`.
+    #
+    # @option params [Boolean] :has_valid_plan
+    #   The `hasValidPlan` value to filter the list by. Migrations that are
+    #   still planning aren't listed, whichever value you specify.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of migrations to return, from 1 to 1,000. If you
+    #   don't specify a value, the default is 100.
+    #
+    # @option params [String] :next_token
+    #   The `nextToken` from a previous response, to get the next page of
+    #   results.
+    #
+    # @return [Types::ListTableMigrationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTableMigrationsResponse#migrations #migrations} => Array&lt;Types::MigrationSummary&gt;
+    #   * {Types::ListTableMigrationsResponse#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_table_migrations({
+    #     table_bucket_arn: "TableBucketARN",
+    #     namespace: "NamespaceName",
+    #     name: "TableName",
+    #     table_arn: "TableARN",
+    #     state: "new", # accepts new, planning, pendingReview, queued, migrating, succeeded, failed, cancelling, cancelled
+    #     has_valid_plan: false,
+    #     max_results: 1,
+    #     next_token: "NextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migrations #=> Array
+    #   resp.migrations[0].migration_id #=> String
+    #   resp.migrations[0].table_bucket_arn #=> String
+    #   resp.migrations[0].namespace #=> String
+    #   resp.migrations[0].table_arn #=> String
+    #   resp.migrations[0].name #=> String
+    #   resp.migrations[0].type #=> String, one of "start", "sync"
+    #   resp.migrations[0].state #=> String, one of "new", "planning", "pendingReview", "queued", "migrating", "succeeded", "failed", "cancelling", "cancelled"
+    #   resp.migrations[0].has_valid_plan #=> Boolean
+    #   resp.migrations[0].created_at #=> Time
+    #   resp.migrations[0].state_updated_at #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/ListTableMigrations AWS API Documentation
+    #
+    # @overload list_table_migrations(params = {})
+    # @param [Hash] params ({})
+    def list_table_migrations(params = {}, options = {})
+      req = build_request(:list_table_migrations, params)
       req.send_request(options)
     end
 
@@ -2788,6 +3026,279 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
+    # Starts migrating an Amazon Web Services Glue Data Catalog table into a
+    # new table in a table bucket. The migration runs asynchronously: this
+    # operation returns the migration ID and its initial state, and you
+    # track progress with `GetTableMigration`.
+    #
+    # The namespace must already exist, and a table with the specified name
+    # must not. The migration creates the table during planning and commits
+    # data to it as it runs. Until you call `CompleteTableMigration`, you
+    # can read the table but you can't write to it. If the migration fails
+    # or is cancelled, the table and the data already committed to it
+    # remain.
+    #
+    # The migration first checks the source and the destination, and writes
+    # the table compatibility and object compatibility reports to the bucket
+    # that you specify in `migrationOutput`. If you set
+    # `reviewMigrationPlan` to `true`, the migration waits in the
+    # `pendingReview` state so that you can review the reports, and
+    # continues only when you call `UpdateTableMigration` with
+    # `requestedState` set to `queued`. If you don't continue or cancel the
+    # migration within 30 days, the migration fails. Otherwise it continues
+    # to migrate the data, and writes the object migration report when the
+    # migration ends. If planning fails, the migration writes no object
+    # migration report.
+    #
+    # Permissions
+    # : * You must have the `s3tables:StartTableMigration` permission to use
+    #     this operation.
+    #
+    #   * You must have the `iam:PassRole` permission on the role that you
+    #     specify in `roleARN`, with a condition that allows passing it to
+    #     `migration.s3tables.amazonaws.com`. The associated resource is the
+    #     table bucket.
+    #
+    #   * If `destinationTable` specifies SSE-KMS encryption, you must have
+    #     the `kms:DescribeKey` and `kms:GenerateDataKey` permissions on the
+    #     KMS key. You must also grant the S3 Tables maintenance principal
+    #     access to the key. For more information, see [Permissions
+    #     requirements for S3 Tables SSE-KMS encryption][1].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the migration uses
+    #   to read the source table and its data and to write the destination
+    #   table and the reports. The role must be in your account, and its trust
+    #   policy must allow `migration.s3tables.amazonaws.com` to assume it. You
+    #   can limit the trust policy to the destination table bucket with the
+    #   `aws:SourceArn` and `aws:SourceAccount` condition keys.
+    #
+    # @option params [required, Types::DestinationTable] :destination_table
+    #   The table to create and migrate the source into.
+    #
+    # @option params [required, String] :source_type
+    #   The type of the source. It must match the member that you set in
+    #   `source`.
+    #
+    # @option params [required, Types::SourceConfiguration] :source
+    #   The source table to migrate.
+    #
+    # @option params [Types::DataMigrationSettings] :data_migration
+    #   The maintenance settings and migration policies for the destination
+    #   table.
+    #
+    # @option params [Boolean] :review_migration_plan
+    #   Specifies whether the migration waits in the `pendingReview` state, so
+    #   that you can review the compatibility reports before it migrates any
+    #   data. If `true`, the migration continues when you call
+    #   `UpdateTableMigration` with `requestedState` set to `queued`. If you
+    #   don't continue or cancel the migration within 30 days, the migration
+    #   fails. The default is `false`.
+    #
+    # @option params [required, Types::MigrationOutputConfiguration] :migration_output
+    #   The bucket and prefixes that the migration writes its reports to. The
+    #   bucket must be a general purpose bucket in your account and in the
+    #   same Region as the table bucket, and the migration role must be able
+    #   to write objects to it. Otherwise, the migration fails when it writes
+    #   its first report.
+    #
+    # @return [Types::StartTableMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartTableMigrationResponse#migration_id #migration_id} => String
+    #   * {Types::StartTableMigrationResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_table_migration({
+    #     role_arn: "RoleArn", # required
+    #     destination_table: { # required
+    #       table_bucket_arn: "TableBucketARN", # required
+    #       namespace: "NamespaceName", # required
+    #       name: "TableName", # required
+    #       encryption_configuration: {
+    #         sse_algorithm: "AES256", # required, accepts AES256, aws:kms
+    #         kms_key_arn: "EncryptionConfigurationKmsKeyArnString",
+    #       },
+    #       storage_class_configuration: {
+    #         storage_class: "STANDARD", # required, accepts STANDARD, INTELLIGENT_TIERING
+    #       },
+    #       tags: {
+    #         "TagKey" => "TagValue",
+    #       },
+    #       properties: {
+    #         write_format: "parquet", # accepts parquet
+    #         iceberg_format_version: 1,
+    #         compression_codec: "zstd", # accepts zstd, snappy, gzip, uncompressed
+    #         dictionary_encoding: false,
+    #       },
+    #       schema: {
+    #         type: "struct", # required, accepts struct
+    #         fields: [ # required
+    #           {
+    #             id: 1, # required
+    #             name: "String", # required
+    #             type: { # required
+    #             },
+    #             required: false, # required
+    #             doc: "String",
+    #           },
+    #         ],
+    #         schema_id: 1,
+    #         identifier_field_ids: [1],
+    #       },
+    #       iceberg_sort_order: {
+    #         order_id: 1, # required
+    #         fields: [ # required
+    #           {
+    #             source_id: 1, # required
+    #             transform: "String", # required
+    #             direction: "asc", # required, accepts asc, desc
+    #             null_order: "nulls-first", # required, accepts nulls-first, nulls-last
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     source_type: "glueTable", # required, accepts glueTable
+    #     source: { # required
+    #       glue_table: {
+    #         catalog_id: "GlueTableSourceCatalogIdString", # required
+    #         database_name: "GlueTableSourceDatabaseNameString", # required
+    #         table_name: "GlueTableSourceTableNameString", # required
+    #       },
+    #     },
+    #     data_migration: {
+    #       maintenance_settings: {
+    #         iceberg_compaction: {
+    #           target_file_size_mb: 1,
+    #           strategy: "auto", # accepts auto, binpack, sort, z-order
+    #         },
+    #         iceberg_snapshot_management: {
+    #           min_snapshots_to_keep: 1,
+    #           max_snapshot_age_hours: 1,
+    #         },
+    #       },
+    #       migration_policies: {
+    #         unmatched_source_fields_policy: "fail", # accepts fail, drop
+    #         incompatible_values_policy: "fail", # accepts fail, setNull
+    #       },
+    #     },
+    #     review_migration_plan: false,
+    #     migration_output: { # required
+    #       bucket: "S3BucketARN", # required
+    #       prefixes: {
+    #         table_compatibility_report: "MigrationReportPrefix",
+    #         object_compatibility_report: "MigrationReportPrefix",
+    #         object_migration_report: "MigrationReportPrefix",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_id #=> String
+    #   resp.state #=> String, one of "new", "planning", "pendingReview", "queued", "migrating", "succeeded", "failed", "cancelling", "cancelled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/StartTableMigration AWS API Documentation
+    #
+    # @overload start_table_migration(params = {})
+    # @param [Hash] params ({})
+    def start_table_migration(params = {}, options = {})
+      req = build_request(:start_table_migration, params)
+      req.send_request(options)
+    end
+
+    # Migrates the changes in the source table since the previous start or
+    # sync, such as added and deleted source objects, into the destination
+    # table. The sync runs asynchronously: this operation returns the
+    # migration ID of the sync and its initial state, and you track progress
+    # with `GetTableMigration`.
+    #
+    # A sync uses the source, destination and data migration settings of the
+    # table's migration, and plans the work and writes its reports in the
+    # same way as `StartTableMigration`. You can sync after a start or sync
+    # that succeeded, failed or was cancelled, if an earlier start or sync
+    # of the table has a valid plan (`hasValidPlan`). You can't sync a
+    # table while a start or sync is in progress for it, and you can sync a
+    # table until you call `CompleteTableMigration` for it. If a source
+    # object that an earlier migration migrated has since been overwritten,
+    # the sync fails.
+    #
+    # Permissions
+    # : * You must have the `s3tables:SyncTableMigration` permission to use
+    #     this operation.
+    #
+    #   * You must have the `iam:PassRole` permission on the role that you
+    #     specify in `roleARN`, with a condition that allows passing it to
+    #     `migration.s3tables.amazonaws.com`. The associated resource is the
+    #     table.
+    #
+    # @option params [required, String] :role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the sync uses to
+    #   read the source table and its data and to write the destination table
+    #   and the reports. The role must be in your account, and its trust
+    #   policy must allow `migration.s3tables.amazonaws.com` to assume it. You
+    #   can limit the trust policy to the destination table bucket with the
+    #   `aws:SourceArn` and `aws:SourceAccount` condition keys.
+    #
+    # @option params [required, String] :table_arn
+    #   The Amazon Resource Name (ARN) of the destination table to sync. The
+    #   table must have a migration, and you must not have called
+    #   `CompleteTableMigration` for it.
+    #
+    # @option params [Boolean] :review_migration_plan
+    #   Specifies whether the sync waits in the `pendingReview` state, so that
+    #   you can review the compatibility reports before it migrates any data.
+    #   If `true`, the migration continues when you call
+    #   `UpdateTableMigration` with `requestedState` set to `queued`. If you
+    #   don't continue or cancel the migration within 30 days, the migration
+    #   fails. The default is `false`.
+    #
+    # @option params [required, Types::MigrationOutputConfiguration] :migration_output
+    #   The bucket and prefixes that the sync writes its reports to. The
+    #   bucket must be a general purpose bucket in your account and in the
+    #   same Region as the table bucket, and the migration role must be able
+    #   to write objects to it. Otherwise, the migration fails when it writes
+    #   its first report.
+    #
+    # @return [Types::SyncTableMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::SyncTableMigrationResponse#migration_id #migration_id} => String
+    #   * {Types::SyncTableMigrationResponse#state #state} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.sync_table_migration({
+    #     role_arn: "RoleArn", # required
+    #     table_arn: "TableARN", # required
+    #     review_migration_plan: false,
+    #     migration_output: { # required
+    #       bucket: "S3BucketARN", # required
+    #       prefixes: {
+    #         table_compatibility_report: "MigrationReportPrefix",
+    #         object_compatibility_report: "MigrationReportPrefix",
+    #         object_migration_report: "MigrationReportPrefix",
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_id #=> String
+    #   resp.state #=> String, one of "new", "planning", "pendingReview", "queued", "migrating", "succeeded", "failed", "cancelling", "cancelled"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/SyncTableMigration AWS API Documentation
+    #
+    # @overload sync_table_migration(params = {})
+    # @param [Hash] params ({})
+    def sync_table_migration(params = {}, options = {})
+      req = build_request(:sync_table_migration, params)
+      req.send_request(options)
+    end
+
     # Applies one or more user-defined tags to an Amazon S3 Tables resource
     # or updates existing tags. Each tag is a label consisting of a key and
     # value pair. Tags can help you organize, track costs for, and control
@@ -2963,6 +3474,73 @@ module Aws::S3Tables
       req.send_request(options)
     end
 
+    # Requests a state change for a migration. Identify the migration by its
+    # `migrationId` or by the `tableARN` of its destination table.
+    #
+    # Set `requestedState` to `queued` to continue a migration in the
+    # `pendingReview` state; the migration moves to `queued` or `migrating`.
+    # Set it to `cancelled` to cancel a migration in the `new`, `planning`,
+    # `pendingReview`, `queued` or `migrating` state; the migration moves to
+    # `cancelling`, finishes the work in progress, and then ends in the
+    # `cancelled` state, or in the `failed` state if any objects failed to
+    # migrate. Data that the migration already committed stays in the
+    # destination table.
+    #
+    # Permissions
+    # : * You must have the `s3tables:UpdateTableMigration` permission to
+    #     use this operation.
+    #
+    #   ^
+    #
+    # @option params [String] :table_arn
+    #   The Amazon Resource Name (ARN) of the destination table. Updates the
+    #   table's most recent migration. Until the migration creates the
+    #   destination table, specify `migrationId`. Specify either `tableARN` or
+    #   `migrationId`, not both.
+    #
+    # @option params [String] :migration_id
+    #   The ID of the migration to update. Specify either `migrationId` or
+    #   `tableARN`, not both.
+    #
+    # @option params [required, String] :requested_state
+    #   The state to move the migration to: `queued` to continue a migration
+    #   in the `pendingReview` state, or `cancelled` to cancel a migration in
+    #   the `new`, `planning`, `pendingReview`, `queued` or `migrating` state.
+    #
+    # @option params [String] :update_description
+    #   A description of the update, up to 1,024 characters, with no control
+    #   characters. `GetTableMigration` doesn't return it.
+    #
+    # @return [Types::UpdateTableMigrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateTableMigrationResponse#migration_id #migration_id} => String
+    #   * {Types::UpdateTableMigrationResponse#state #state} => String
+    #   * {Types::UpdateTableMigrationResponse#table_arn #table_arn} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_table_migration({
+    #     table_arn: "TableARN",
+    #     migration_id: "MigrationId",
+    #     requested_state: "queued", # required, accepts queued, cancelled
+    #     update_description: "UpdateTableMigrationRequestUpdateDescriptionString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.migration_id #=> String
+    #   resp.state #=> String, one of "new", "planning", "pendingReview", "queued", "migrating", "succeeded", "failed", "cancelling", "cancelled"
+    #   resp.table_arn #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/UpdateTableMigration AWS API Documentation
+    #
+    # @overload update_table_migration(params = {})
+    # @param [Hash] params ({})
+    def update_table_migration(params = {}, options = {})
+      req = build_request(:update_table_migration, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -2981,7 +3559,7 @@ module Aws::S3Tables
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3tables'
-      context[:gem_version] = '1.40.0'
+      context[:gem_version] = '1.41.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
