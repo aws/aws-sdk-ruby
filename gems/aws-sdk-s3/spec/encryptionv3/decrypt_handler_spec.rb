@@ -1,4 +1,5 @@
 require_relative '../spec_helper'
+require 'ostruct'
 require 'base64'
 require 'openssl'
 

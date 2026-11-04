@@ -75,6 +75,7 @@ group :test do
   gem 'cucumber', '< 12'
   gem 'multipart-post'
   gem 'opentelemetry-sdk'
+  gem 'ostruct' # Specs require it directly; Oj 3.17.8 removed its runtime dependency.
   gem 'rspec'
   gem 'webmock'
 end
