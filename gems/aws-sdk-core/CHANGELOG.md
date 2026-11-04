@@ -3,6 +3,8 @@ Unreleased Changes
 
 * Feature - Support refreshing login credentials in the cached sign-in region, falling back to the configured region when missing or empty.
 
+* Issue - Fix clock skew correction for long-running requests and slow response downloads by using the time response headers are received.
+
 3.263.0 (2026-10-29)
 ------------------
 
