@@ -17,7 +17,8 @@ module Aws
 
       # @param [Hash] options
       # @option options [Client] :client The S3 client used to create the
-      #  session when one is not given to {#express_credentials_for}.
+      #  session outside of a request when one is not given to
+      #  {#express_credentials_for}.
       # @option options [String] :session_mode (see: {Client#create_session})
       # @option options [Boolean] :caching (true) When true, credentials will
       #  be cached.
@@ -32,7 +33,8 @@ module Aws
         @cache = Aws::S3.express_credentials_cache
       end
 
-      def express_credentials_for(bucket, client = @client)
+      def express_credentials_for(bucket, client = nil)
+        client ||= Thread.current[:aws_sdk_s3_express_client] || @client
         credentials = client.config.credentials&.credentials
         if @caching
           cached_credentials_for(bucket, client, credentials)
