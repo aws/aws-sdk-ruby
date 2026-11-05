@@ -300,7 +300,7 @@ module Aws
       instance_storage_configs: Array[
         Params::cluster_instance_storage_config
       ]?,
-      on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity")]?,
+      on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]?,
       training_plan_arn: ::String?,
       override_vpc_config: {
         security_group_ids: Array[::String],
@@ -352,7 +352,7 @@ module Aws
       instance_storage_configs: Array[
         Params::cluster_instance_storage_config
       ]?,
-      on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity")]?,
+      on_start_deep_health_checks: Array[("InstanceStress" | "InstanceConnectivity" | "MultiNodeTrainingValidation")]?,
       training_plan_arn: ::String?,
       override_vpc_config: {
         security_group_ids: Array[::String],
@@ -828,7 +828,12 @@ module Aws
       capacity_reservation_config: {
         capacity_reservation_preference: ("capacity-reservations-only")?,
         ml_reservation_arn: ::String?
-      }?
+      }?,
+      accelerator_partition_layouts: Array[
+        {
+          accelerator_partition_types: Array[::String]?
+        }
+      ]?
     }
 
       type feature_definition = {
@@ -968,7 +973,8 @@ module Aws
         number_of_cpu_cores_required: ::Float?,
         number_of_accelerator_devices_required: ::Float?,
         min_memory_required_in_mb: ::Integer,
-        max_memory_required_in_mb: ::Integer?
+        max_memory_required_in_mb: ::Integer?,
+        accelerator_partition_type: ::String?
       }?,
       base_inference_component_name: ::String?,
       data_cache_config: {

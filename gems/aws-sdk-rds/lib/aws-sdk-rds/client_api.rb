@@ -1097,6 +1097,7 @@ module Aws::RDS
     CopyDBSnapshotMessage.add_member(:snapshot_target, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotTarget"))
     CopyDBSnapshotMessage.add_member(:copy_option_group, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyOptionGroup"))
     CopyDBSnapshotMessage.add_member(:snapshot_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotAvailabilityZone"))
+    CopyDBSnapshotMessage.add_member(:tag_specifications, Shapes::ShapeRef.new(shape: TagSpecificationList, location_name: "TagSpecifications"))
     CopyDBSnapshotMessage.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     CopyDBSnapshotMessage.struct_class = Types::CopyDBSnapshotMessage
 
@@ -3639,6 +3640,7 @@ module Aws::RDS
     OptionGroup.add_member(:source_option_group, Shapes::ShapeRef.new(shape: String, location_name: "SourceOptionGroup"))
     OptionGroup.add_member(:source_account_id, Shapes::ShapeRef.new(shape: String, location_name: "SourceAccountId"))
     OptionGroup.add_member(:copy_timestamp, Shapes::ShapeRef.new(shape: TStamp, location_name: "CopyTimestamp"))
+    OptionGroup.add_member(:source_region, Shapes::ShapeRef.new(shape: String, location_name: "SourceRegion"))
     OptionGroup.struct_class = Types::OptionGroup
 
     OptionGroupAlreadyExistsFault.struct_class = Types::OptionGroupAlreadyExistsFault
@@ -3668,6 +3670,7 @@ module Aws::RDS
     OptionGroupOption.add_member(:option_group_option_settings, Shapes::ShapeRef.new(shape: OptionGroupOptionSettingsList, location_name: "OptionGroupOptionSettings"))
     OptionGroupOption.add_member(:option_group_option_versions, Shapes::ShapeRef.new(shape: OptionGroupOptionVersionsList, location_name: "OptionGroupOptionVersions"))
     OptionGroupOption.add_member(:copyable_cross_account, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyableCrossAccount"))
+    OptionGroupOption.add_member(:copyable_cross_region, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "CopyableCrossRegion"))
     OptionGroupOption.struct_class = Types::OptionGroupOption
 
     OptionGroupOptionSetting.add_member(:setting_name, Shapes::ShapeRef.new(shape: String, location_name: "SettingName"))

@@ -66,6 +66,22 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # A recipient copied as a viewer on the executive approval request, in
+    # addition to the approver.
+    #
+    # @!attribute [rw] email
+    #   The email address of the recipient. This value is 3–256 characters
+    #   and must be a valid email address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AdditionalRecipient AWS API Documentation
+    #
+    class AdditionalRecipient < Struct.new(
+      :email)
+      SENSITIVE = [:email]
+      include Aws::Structure
+    end
+
     # A monetary amount with a currency code. Used throughout the Billing
     # API to represent credit balances, allocations, and adjustments.
     #
@@ -86,6 +102,58 @@ module Aws::Billing
       SENSITIVE = []
       include Aws::Structure
     end
+
+    # Information about the executive approver who signs off on an
+    # investment attestation.
+    #
+    # @!attribute [rw] name
+    #   The name of the approver as it appears on the contract. This value
+    #   can be up to 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] title
+    #   The title of the approver, such as `Chief Financial Officer`. This
+    #   value can be up to 256 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] email
+    #   The email address of the approver. This value is 3–256 characters
+    #   and must be a valid email address.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ApproverDetails AWS API Documentation
+    #
+    class ApproverDetails < Struct.new(
+      :name,
+      :title,
+      :email)
+      SENSITIVE = [:name, :title, :email]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the contract to associate with
+    #   your account.
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_document_id
+    #   The contract ID from the contract document. It can be found in the
+    #   top right corner of your contract's pages. This value confirms that
+    #   you have access to the contract you are associating.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AssociateContractRequest AWS API Documentation
+    #
+    class AssociateContractRequest < Struct.new(
+      :contract_arn,
+      :contract_document_id)
+      SENSITIVE = [:contract_document_id]
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AssociateContractResponse AWS API Documentation
+    #
+    class AssociateContractResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the billing view to associate
@@ -116,6 +184,90 @@ module Aws::Billing
       :arn)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The details of an investment attestation submission, including the
+    # value being attested and how the resulting investment is distributed.
+    #
+    # @!attribute [rw] attestation_value
+    #   The value being attested, expressed as either a monetary amount or
+    #   one or more quantities. Exactly one form is set.
+    #   @return [Types::AttestationValue]
+    #
+    # @!attribute [rw] investment_distributions
+    #   The distribution of the resulting investment across the eligible
+    #   investment accounts on the contract. If you omit this value, the
+    #   full investment is allocated to the single eligible investment
+    #   account on the contract. This value is required when multiple
+    #   investment accounts are eligible. When you provide this value, the
+    #   sum of all distributions must equal the resulting monetary
+    #   investment value (the attested amount, or the value computed from
+    #   the attested quantities using the investment multipliers). The list
+    #   contains at most 200 distributions.
+    #   @return [Array<Types::InvestmentDistribution>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AttestationDetails AWS API Documentation
+    #
+    class AttestationDetails < Struct.new(
+      :attestation_value,
+      :investment_distributions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A quantity-based attestation value, such as a count of workloads
+    # migrated.
+    #
+    # @!attribute [rw] attestation_volume
+    #   The number of units being attested, expressed as a decimal string to
+    #   preserve precision. The value is digits with an optional decimal
+    #   point and is 1–1000 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] attestation_unit
+    #   The unit of the attestation, such as `workloads migrated`. This
+    #   value is 1–1000 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AttestationQuantity AWS API Documentation
+    #
+    class AttestationQuantity < Struct.new(
+      :attestation_volume,
+      :attestation_unit)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The value being attested. This is a union in which exactly one member
+    # is set. Set `attestationAmount` to attest a monetary amount directly,
+    # or set `attestationQuantities` to attest one or more quantities that
+    # are converted to a value using the investment's multipliers.
+    #
+    # @note AttestationValue is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] attestation_amount
+    #   The value attested as a monetary amount. This form is valid only
+    #   when the investment has no multiplier.
+    #   @return [Types::Amount]
+    #
+    # @!attribute [rw] attestation_quantities
+    #   The value attested as one or more quantities, each with its own
+    #   unit. The list contains at most 50 quantities.
+    #   @return [Array<Types::AttestationQuantity>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/AttestationValue AWS API Documentation
+    #
+    class AttestationValue < Struct.new(
+      :attestation_amount,
+      :attestation_quantities,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class AttestationAmount < AttestationValue; end
+      class AttestationQuantities < AttestationValue; end
+      class Unknown < AttestationValue; end
     end
 
     # A filter that narrows the set of preferences returned by
@@ -654,6 +806,34 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] attestation_id
+    #   The identifier of the investment attestation to cancel.
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the contract that contains the
+    #   attested investment.
+    #   @return [String]
+    #
+    # @!attribute [rw] reason
+    #   The reason for the cancellation. This value can be 1 to 80
+    #   characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/CancelContractualInvestmentAttestationRequest AWS API Documentation
+    #
+    class CancelContractualInvestmentAttestationRequest < Struct.new(
+      :attestation_id,
+      :contract_arn,
+      :reason)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/CancelContractualInvestmentAttestationResponse AWS API Documentation
+    #
+    class CancelContractualInvestmentAttestationResponse < Aws::EmptyStructure; end
+
     # An account that is charged all or a portion of the total Support
     # charge and the percentage of the charge allocated to it.
     #
@@ -716,6 +896,78 @@ module Aws::Billing
     class ContractAccount < Struct.new(
       :account_id,
       :is_gdn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a contract returned by `GetContractInformation`. This
+    # is a union in which exactly one member is set, corresponding to the
+    # contract type. For a private pricing addendum, the
+    # `privatePricingAddendum` member is set. Check which member is present
+    # to determine the contract type.
+    #
+    # @note ContractDetails is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of ContractDetails corresponding to the set member.
+    #
+    # @!attribute [rw] private_pricing_addendum
+    #   The details of a private pricing addendum contract. This member is
+    #   set when the contract is a private pricing addendum.
+    #   @return [Types::PrivatePricingAddendum]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ContractDetails AWS API Documentation
+    #
+    class ContractDetails < Struct.new(
+      :private_pricing_addendum,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class PrivatePricingAddendum < ContractDetails; end
+      class Unknown < ContractDetails; end
+    end
+
+    # A summary of a private pricing contract visible to your account.
+    # `ListContracts` returns these summaries.
+    #
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the contract. Pass this value to
+    #   operations such as `GetContractInformation`,
+    #   `ListContractualInvestmentSummaries`, and `AssociateContract`.
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_term
+    #   The contract term period of the contract, expressed as an interval
+    #   with an inclusive start date and an inclusive end date.
+    #   @return [Types::Interval]
+    #
+    # @!attribute [rw] contract_type
+    #   The classification of the contract. Valid values are
+    #   `Cross-Service`, `Service-Specific`, and `Other`. `Cross-Service`
+    #   applies across multiple Amazon Web Services services.
+    #   `Service-Specific` applies to a specific Amazon Web Services
+    #   service. `Other` applies to other arrangements.
+    #   @return [String]
+    #
+    # @!attribute [rw] association_status
+    #   Indicates whether the contract is currently associated with your
+    #   account. Valid values are `ASSOCIATED` and `NOT_ASSOCIATED`.
+    #   `ASSOCIATED` means the contract is associated with your account.
+    #   `NOT_ASSOCIATED` means the contract is not associated with your
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_updated_at
+    #   The time when the contract was last associated with your account.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ContractSummary AWS API Documentation
+    #
+    class ContractSummary < Struct.new(
+      :contract_arn,
+      :contract_term,
+      :contract_type,
+      :association_status,
+      :last_updated_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -804,6 +1056,86 @@ module Aws::Billing
     class CreateBillingViewResponse < Struct.new(
       :arn,
       :created_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the contract that contains the
+    #   investment being attested.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_summary_id
+    #   The identifier of the investment summary being attested. This is the
+    #   parent to the investmentId.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_id
+    #   The identifier of the investment (outcome) being attested.
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_document_id
+    #   The contract ID from the contract document, located in the top-right
+    #   corner of the private pricing contract pages. This value confirms
+    #   that you have access to the contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] approver_details
+    #   The details of the executive who authorized the attestation, under
+    #   the terms of the private pricing contract. The executive receives a
+    #   click-to-accept email to confirm the attestation.
+    #   @return [Types::ApproverDetails]
+    #
+    # @!attribute [rw] investment_disbursed_at
+    #   The date on which the investment is disbursed to the investment
+    #   accounts. The disbursement date is subject to review timelines.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attestation_details
+    #   The details of the attestation, including the value being claimed
+    #   and how the resulting investment is distributed across investment
+    #   accounts.
+    #   @return [Types::AttestationDetails]
+    #
+    # @!attribute [rw] additional_recipients
+    #   The email addresses to copy as viewers on the executive approval
+    #   request.
+    #   @return [Array<Types::AdditionalRecipient>]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If you retry a request that completed
+    #   successfully using the same client token and parameters, the retry
+    #   completes without performing any further actions.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/CreateContractualInvestmentAttestationRequest AWS API Documentation
+    #
+    class CreateContractualInvestmentAttestationRequest < Struct.new(
+      :contract_arn,
+      :investment_summary_id,
+      :investment_id,
+      :contract_document_id,
+      :approver_details,
+      :investment_disbursed_at,
+      :attestation_details,
+      :additional_recipients,
+      :client_token)
+      SENSITIVE = [:contract_document_id]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] attestation_id
+    #   The identifier of the submitted attestation.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/CreateContractualInvestmentAttestationResponse AWS API Documentation
+    #
+    class CreateContractualInvestmentAttestationResponse < Struct.new(
+      :attestation_id)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1030,6 +1362,23 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the contract to disassociate from
+    #   your account.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/DisassociateContractRequest AWS API Documentation
+    #
+    class DisassociateContractRequest < Struct.new(
+      :contract_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/DisassociateContractResponse AWS API Documentation
+    #
+    class DisassociateContractResponse < Aws::EmptyStructure; end
+
     # @!attribute [rw] arn
     #   The Amazon Resource Name (ARN) of the billing view to disassociate
     #   source views from.
@@ -1187,6 +1536,32 @@ module Aws::Billing
     #
     class GetBillingViewResponse < Struct.new(
       :billing_view)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the contract to retrieve
+    #   information about.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetContractInformationRequest AWS API Documentation
+    #
+    class GetContractInformationRequest < Struct.new(
+      :contract_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract
+    #   The contract details such as term (duration), eligible payer
+    #   accounts, investment accounts, and legal entities.
+    #   @return [Types::ContractDetails]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/GetContractInformationResponse AWS API Documentation
+    #
+    class GetContractInformationResponse < Struct.new(
+      :contract)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1580,6 +1955,283 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # A time period bounded by an inclusive start date and an inclusive end
+    # date.
+    #
+    # @!attribute [rw] start_date_inclusive
+    #   The start date of the interval. This date is included in the
+    #   interval.
+    #   @return [Time]
+    #
+    # @!attribute [rw] end_date_inclusive
+    #   The end date of the interval. This date is included in the interval.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/Interval AWS API Documentation
+    #
+    class Interval < Struct.new(
+      :start_date_inclusive,
+      :end_date_inclusive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An investment within an investment summary. This is a union in which
+    # exactly one member is set. The `milestoneBasedInvestment` member
+    # represents a fixed, scheduled investment. The `outcomeBasedInvestment`
+    # member represents an attestable investment awarded upon completion of
+    # a defined outcome. Check which member is present to determine the
+    # investment type.
+    #
+    # @note Investment is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of Investment corresponding to the set member.
+    #
+    # @!attribute [rw] milestone_based_investment
+    #   An investment with a fixed value that is disbursed on a schedule.
+    #   This member is set for a milestone-based investment and corresponds
+    #   to the `MILESTONE_BASED` investment type.
+    #   @return [Types::MilestoneBasedInvestment]
+    #
+    # @!attribute [rw] outcome_based_investment
+    #   An investment that is awarded upon completion of a defined outcome.
+    #   This member is set for an outcome-based (attestable) investment and
+    #   corresponds to the `OUTCOME_BASED` investment type.
+    #   @return [Types::OutcomeBasedInvestment]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/Investment AWS API Documentation
+    #
+    class Investment < Struct.new(
+      :milestone_based_investment,
+      :outcome_based_investment,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class MilestoneBasedInvestment < Investment; end
+      class OutcomeBasedInvestment < Investment; end
+      class Unknown < Investment; end
+    end
+
+    # A summary of a submitted investment attestation, as returned by
+    # `ListContractualInvestmentAttestations`.
+    #
+    # @!attribute [rw] attestation_id
+    #   The identifier of the attestation. This value is returned by
+    #   `CreateContractualInvestmentAttestation` and is used to cancel the
+    #   attestation with `CancelContractualInvestmentAttestation`. This
+    #   value is 1–36 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_name
+    #   The name of the investment summary that contains the attested
+    #   outcome. This value is 1–400 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcome_description
+    #   The description of the attested outcome. This value is 1–2048
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_summary_id
+    #   The identifier of the investment summary that was attested, as
+    #   returned by `ListContractualInvestmentSummaries`.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_id
+    #   The identifier of the investment that was attested, as returned by
+    #   `ListContractualInvestments`.
+    #   @return [String]
+    #
+    # @!attribute [rw] attested_at
+    #   The date on which the attestation was submitted.
+    #   @return [Time]
+    #
+    # @!attribute [rw] updated_at
+    #   The date on which the attestation was last updated.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attestation_status
+    #   The current status of the attestation. Valid values are
+    #   `PENDING_REVIEW`, `PENDING_C_LEVEL_APPROVAL`,
+    #   `PENDING_CANCELLATION`, `REJECTED`, `CANCELLED`, and `DISBURSED`.
+    #   The values `DISBURSED`, `REJECTED`, and `CANCELLED` are terminal.
+    #   The other values indicate the attestation is still in progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_disbursed_at
+    #   The start date on which the investment is disbursed to the
+    #   investment accounts. This is not the same as the time of
+    #   disbursement, but reflects the date you submitted with the
+    #   attestation.
+    #   @return [Time]
+    #
+    # @!attribute [rw] attested_value
+    #   The monetary value attested.
+    #   @return [Types::Amount]
+    #
+    # @!attribute [rw] investment_distributions
+    #   The distribution of the attested investment across the eligible
+    #   investment accounts. The list contains at most 200 distributions.
+    #   @return [Array<Types::InvestmentDistribution>]
+    #
+    # @!attribute [rw] rejection_reasons
+    #   The reasons the attestation was rejected. This value is present only
+    #   when `attestationStatus` is `REJECTED`. The list contains at most 30
+    #   reasons.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] is_cancellable
+    #   Indicates whether the attestation can be canceled with
+    #   `CancelContractualInvestmentAttestation`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/InvestmentAttestation AWS API Documentation
+    #
+    class InvestmentAttestation < Struct.new(
+      :attestation_id,
+      :investment_name,
+      :outcome_description,
+      :investment_summary_id,
+      :investment_id,
+      :attested_at,
+      :updated_at,
+      :attestation_status,
+      :investment_disbursed_at,
+      :attested_value,
+      :investment_distributions,
+      :rejection_reasons,
+      :is_cancellable)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An allocation of an investment disbursement to a specific recipient
+    # account. The account is the target account that receives the
+    # investment, not your account.
+    #
+    # @!attribute [rw] account_id
+    #   The recipient Amazon Web Services account ID that receives this
+    #   portion of the investment. This must be one of the eligible
+    #   investment accounts on the contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_amount
+    #   The monetary value allocated to the recipient account.
+    #   @return [Types::Amount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/InvestmentDistribution AWS API Documentation
+    #
+    class InvestmentDistribution < Struct.new(
+      :account_id,
+      :investment_amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A multiplier used to convert attestation input into an investment
+    # value.
+    #
+    # @!attribute [rw] value
+    #   The multiplier value, expressed as a decimal string to preserve
+    #   precision. The value is digits with an optional decimal point and is
+    #   1–1000 characters. The terms of the contract define this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_attestation_input_unit
+    #   The unit of the attestation input that the multiplier applies to,
+    #   such as `workloads migrated`. This value is 1–1000 characters. The
+    #   terms of the contract define this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] multiplier_type
+    #   The type of the multiplier. A value of `PERCENTAGE` applies a
+    #   percentage of a value. A value of `CURRENCY_AMOUNT` applies a
+    #   currency amount per unit of attestation input. The terms of the
+    #   contract define this value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/InvestmentMultiplier AWS API Documentation
+    #
+    class InvestmentMultiplier < Struct.new(
+      :value,
+      :investment_attestation_input_unit,
+      :multiplier_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A restriction that caps the value that can be disbursed for an
+    # investment. The cap applies for each attestation window.
+    #
+    # @!attribute [rw] amount
+    #   The maximum monetary amount allowed under the restriction.
+    #   @return [Types::Amount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/InvestmentRestriction AWS API Documentation
+    #
+    class InvestmentRestriction < Struct.new(
+      :amount)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Detailed information about an investment summary within a contract or
+    # a private pricing addendum.
+    #
+    # @!attribute [rw] investment_summary_id
+    #   The identifier of the investment summary. Pass this value to
+    #   `ListContractualInvestments` to list the investments within the
+    #   summary, and to `CreateContractualInvestmentAttestation` to attest
+    #   an investment. This value is 1–36 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_name
+    #   The name of the investment summary, used to reference the investment
+    #   against a term in the physical contract. This value is 1–400
+    #   characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_type
+    #   The type of the investment summary. Valid values are
+    #   `MILESTONE_BASED` and `OUTCOME_BASED`. `OUTCOME_BASED` investments
+    #   can be attested to, upon completion of outcomes. `MILESTONE_BASED`
+    #   are automatically triggered by Amazon Web Services, based on the
+    #   time schedule in the contract.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_allowed_investment_disbursement_value
+    #   The maximum monetary value that can be disbursed against the
+    #   investment summary, inclusive of all outcomes combined under the
+    #   summary.
+    #   @return [Types::Amount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/InvestmentSummary AWS API Documentation
+    #
+    class InvestmentSummary < Struct.new(
+      :investment_summary_id,
+      :investment_name,
+      :investment_type,
+      :max_allowed_investment_disbursement_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A legal entity on a private pricing contract. It can be found on your
+    # contract's signature page.
+    #
+    # @!attribute [rw] legal_entity_name
+    #   The name of the legal entity as it appears on the contract document.
+    #   This value can be up to 256 characters.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/LegalEntity AWS API Documentation
+    #
+    class LegalEntity < Struct.new(
+      :legal_entity_name)
+      SENSITIVE = [:legal_entity_name]
+      include Aws::Structure
+    end
+
     # Enterprise Support charges for a linked account.
     #
     # @!attribute [rw] account_id
@@ -1928,6 +2580,189 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of contracts to return in a single call. Minimum
+    #   value of 1, maximum value of 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractsRequest AWS API Documentation
+    #
+    class ListContractsRequest < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of contracts that your Amazon Web Services account is an
+    #   eligible payer account of.
+    #   @return [Array<Types::ContractSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use on subsequent calls to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractsResponse AWS API Documentation
+    #
+    class ListContractsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the contract whose attestations
+    #   you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_summary_id
+    #   The identifier of a specific investment summary to filter the
+    #   attestations by. If omitted, attestations for all investment
+    #   summaries in the contract are returned.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of attestations to return in a single call.
+    #   Minimum value of 1, maximum value of 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractualInvestmentAttestationsRequest AWS API Documentation
+    #
+    class ListContractualInvestmentAttestationsRequest < Struct.new(
+      :contract_arn,
+      :investment_summary_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of investment attestations submitted under the contract.
+    #   @return [Array<Types::InvestmentAttestation>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use on subsequent calls to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractualInvestmentAttestationsResponse AWS API Documentation
+    #
+    class ListContractualInvestmentAttestationsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the contract whose investment
+    #   summaries you want to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of investment summaries to return in a single
+    #   call. Minimum value of 1, maximum value of 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractualInvestmentSummariesRequest AWS API Documentation
+    #
+    class ListContractualInvestmentSummariesRequest < Struct.new(
+      :contract_arn,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of investment summaries under the contract. It includes the
+    #   investment name, maximum investment amount, and investment type. It
+    #   does not provide investment details. Use this to know if the
+    #   contract has investment terms and what type.
+    #   @return [Array<Types::InvestmentSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use on subsequent calls to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractualInvestmentSummariesResponse AWS API Documentation
+    #
+    class ListContractualInvestmentSummariesResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the contract that contains the
+    #   investment summary.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_summary_id
+    #   The identifier of the investment summary whose investments you want
+    #   to list.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token that indicates the next set of results to
+    #   retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of investments to return in a single call.
+    #   Minimum value of 1, maximum value of 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractualInvestmentsRequest AWS API Documentation
+    #
+    class ListContractualInvestmentsRequest < Struct.new(
+      :contract_arn,
+      :investment_summary_id,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of investments for the investment summary.
+    #   @return [Array<Types::Investment>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use on subsequent calls to retrieve the next
+    #   set of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/ListContractualInvestmentsResponse AWS API Documentation
+    #
+    class ListContractualInvestmentsResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request structure for ListEnterpriseSupportLinkedAccountCharges.
     #
     # @!attribute [rw] billing_month
@@ -2046,6 +2881,83 @@ module Aws::Billing
       include Aws::Structure
     end
 
+    # An investment with a fixed value that is disbursed on a schedule. This
+    # corresponds to the `MILESTONE_BASED` investment type.
+    #
+    # @!attribute [rw] investment_id
+    #   The identifier of the investment, as returned by
+    #   `ListContractualInvestments`. This value is 1–36 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] investment_value
+    #   The total value of the investment, including its currency and
+    #   amount.
+    #   @return [Types::Amount]
+    #
+    # @!attribute [rw] investment_disbursed_at
+    #   The date on which the investment is disbursed to the investment
+    #   accounts.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/MilestoneBasedInvestment AWS API Documentation
+    #
+    class MilestoneBasedInvestment < Struct.new(
+      :investment_id,
+      :investment_value,
+      :investment_disbursed_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An investment that is awarded upon completion of a defined outcome.
+    # This corresponds to the `OUTCOME_BASED` investment type and is claimed
+    # through `CreateContractualInvestmentAttestation`.
+    #
+    # @!attribute [rw] investment_id
+    #   The identifier of the investment, as returned by
+    #   `ListContractualInvestments`. This value is 1–36 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] outcome_description
+    #   The description of what must be completed to attest the outcome.
+    #   This value is 1–2048 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] attestation_window
+    #   The time window, expressed as an interval with inclusive start and
+    #   end dates, during which outcomes can be attested to.
+    #   @return [Types::Interval]
+    #
+    # @!attribute [rw] investment_restrictions
+    #   The restrictions that cap the value that can be disbursed for the
+    #   investment. The list contains at most 10 restrictions.
+    #   @return [Array<Types::InvestmentRestriction>]
+    #
+    # @!attribute [rw] investment_multipliers
+    #   The multipliers used to compute the investment value from the
+    #   attestation input. The list contains at most 200 multipliers.
+    #   Multipliers are derived from the terms of the private pricing
+    #   contract.
+    #   @return [Array<Types::InvestmentMultiplier>]
+    #
+    # @!attribute [rw] disbursed_value
+    #   The total value already disbursed against the investment. This value
+    #   can be distributed among the investment accounts distribution.
+    #   @return [Types::Amount]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/OutcomeBasedInvestment AWS API Documentation
+    #
+    class OutcomeBasedInvestment < Struct.new(
+      :investment_id,
+      :outcome_description,
+      :attestation_window,
+      :investment_restrictions,
+      :investment_multipliers,
+      :disbursed_value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A pricing plan for Enterprise Support billing.
     #
     # @!attribute [rw] pricing_plan_id
@@ -2150,6 +3062,54 @@ module Aws::Billing
       :incremental,
       :increment,
       :increment_charge)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The details of a private pricing addendum contract.
+    #
+    # @!attribute [rw] contract_arn
+    #   The Amazon Resource Name (ARN) of the private pricing addendum.
+    #   @return [String]
+    #
+    # @!attribute [rw] contract_term
+    #   The contract term period of the private pricing addendum, expressed
+    #   as an interval with an inclusive start date and an inclusive end
+    #   date.
+    #   @return [Types::Interval]
+    #
+    # @!attribute [rw] eligible_payer_accounts
+    #   The payer accounts that are eligible under the private pricing
+    #   addendum. The list contains at most 100 account IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] investment_accounts
+    #   The accounts that are eligible to receive investments under the
+    #   private pricing addendum. An `InvestmentDistribution` must target
+    #   one of these accounts. The list contains at most 100 account IDs.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] legal_entities
+    #   The legal entities on the private pricing addendum. The list
+    #   contains at most 10 legal entities.
+    #   @return [Array<Types::LegalEntity>]
+    #
+    # @!attribute [rw] contract_restrictions
+    #   The restrictions that limit the self-service actions you can take on
+    #   the private pricing addendum. An empty or absent value indicates
+    #   that no restrictions apply. The list contains at most 10
+    #   restrictions.
+    #   @return [Array<String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/billing-2023-09-07/PrivatePricingAddendum AWS API Documentation
+    #
+    class PrivatePricingAddendum < Struct.new(
+      :contract_arn,
+      :contract_term,
+      :eligible_payer_accounts,
+      :investment_accounts,
+      :legal_entities,
+      :contract_restrictions)
       SENSITIVE = []
       include Aws::Structure
     end

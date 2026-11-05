@@ -936,6 +936,7 @@ module Aws
         def vpc_config: () -> Types::VpcConfigResponse
         def engine_settings: () -> untyped
         def session_policy: () -> ::String
+        def output_uri_prefix_mode: () -> ("SERVICE_DEFINED" | "NONE_WITH_OVERWRITE")
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Omics/Client.html#get_run-instance_method
       def get_run: (
@@ -1778,7 +1779,8 @@ module Aws
                        ?configuration_name: ::String,
                        ?session_policy: ::String,
                        ?engine_settings: {
-                       }
+                       },
+                       ?output_uri_prefix_mode: ("SERVICE_DEFINED" | "NONE_WITH_OVERWRITE")
                      ) -> _StartRunResponseSuccess
                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartRunResponseSuccess
 

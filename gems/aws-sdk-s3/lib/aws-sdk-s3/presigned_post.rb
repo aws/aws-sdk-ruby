@@ -155,7 +155,7 @@ module Aws
     #
     # The string `${filename}` is automatically replaced with the name of the
     # file provided by the user and is recognized by all form fields. It is
-    # not supported with `starts_with` conditions.
+    # not supported with `starts_with` conditions or {#tagging}.
     #
     # If the browser or client provides a full or partial path to the file,
     # only the text following the last slash (/) or backslash (\) will be used
@@ -174,6 +174,28 @@ module Aws
     #   }
     # })
     # ```
+    #
+    # ### Object Tags
+    #
+    # Use `:tagging` or {#tagging} to add tags to the uploaded object. Pass
+    # the same structure as the `:tagging` parameter of
+    # {Client#put_object_tagging}. The SDK serializes it to XML and adds
+    # an exact-match condition to the POST policy.
+    #
+    # ```ruby
+    # post = bucket.presigned_post(
+    #   key: 'object-key',
+    #   tagging: { tag_set: [{ key: 'project', value: 'example' }] }
+    # )
+    #
+    # # Or set tags on an existing presigned post:
+    # post = bucket.presigned_post(key: 'object-key')
+    # post.tagging(tag_set: [{ key: 'project', value: 'example' }])
+    # ```
+    #
+    # Include `post.fields['tagging']` unchanged in the submitted form.
+    # When rendering it as an HTML input value, HTML-escape it just like
+    # the other form fields.
     #
     class PresignedPost
       @@allowed_fields = []
@@ -240,6 +262,8 @@ module Aws
       #   See {PresignedPost#server_side_encryption_customer_key}.
       # @option options [String] :server_side_encryption_customer_key_starts_with
       #   See {PresignedPost#server_side_encryption_customer_key_starts_with}.
+      # @option options [Hash, Types::Tagging] :tagging
+      #   See {PresignedPost#tagging}.
       def initialize(credentials, bucket_region, bucket_name, options = {})
         @credentials = credentials.credentials
         @bucket_region = bucket_region
@@ -601,6 +625,31 @@ module Aws
       define_field(:server_side_encryption_customer_key_starts_with) do |prefix|
         field_name = 'x-amz-server-side-encryption-customer-key'
         starts_with(field_name, prefix)
+      end
+
+      # @!endgroup
+
+      # @!group Object Tagging
+
+      # @!method tagging(value)
+      #   Tags to store with the uploaded object. Accepts the same structure
+      #   as the `:tagging` parameter of {Client#put_object_tagging}, containing
+      #   a required `:tag_set` array of tags with `:key` and `:value` strings.
+      #   Serializes the tags to XML and requires an exact match in the POST
+      #   policy. The `${filename}` variable is not supported in tags.
+      #
+      #   @example
+      #     post.tagging(tag_set: [{ key: 'project', value: 'example' }])
+      #
+      #   @param [Hash, Types::Tagging] value
+      #   @raise [ArgumentError] If the tagging parameters are invalid.
+      #   @see Client#put_object_tagging
+      #   @return [self]
+      define_field(:tagging) do |value|
+        rules = Client.api.operation(:put_object_tagging).input.shape.member(:tagging)
+        value = Aws::ParamConverter.convert(rules, value)
+        Aws::ParamValidator.validate!(rules, value)
+        with('tagging', Aws::Xml::Builder.new(rules).serialize(value))
       end
 
       # @!endgroup

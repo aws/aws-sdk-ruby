@@ -127,6 +127,12 @@ module Aws
   # {Service} names are those used by the the AWS SDK for Ruby. They
   # correspond to the service's module.
   #
+  # ## Custom Partitions
+  #
+  # Custom partition `regionRegex` values are interpreted as regex patterns.
+  # Use only trusted, reviewed patterns, as malformed or inefficient patterns
+  # can cause errors or slow endpoint resolution.
+  #
   module Partitions
 
     class << self

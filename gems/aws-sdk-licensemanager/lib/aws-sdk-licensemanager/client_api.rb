@@ -126,6 +126,7 @@ module Aws::LicenseManager
     Grant = Shapes::StructureShape.new(name: 'Grant')
     GrantList = Shapes::ListShape.new(name: 'GrantList')
     GrantStatus = Shapes::StringShape.new(name: 'GrantStatus')
+    GrantType = Shapes::StringShape.new(name: 'GrantType')
     GrantedLicense = Shapes::StructureShape.new(name: 'GrantedLicense')
     GrantedLicenseList = Shapes::ListShape.new(name: 'GrantedLicenseList')
     ISO8601DateTime = Shapes::StringShape.new(name: 'ISO8601DateTime')
@@ -402,6 +403,8 @@ module Aws::LicenseManager
     CreateGrantRequest.add_member(:home_region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "HomeRegion"))
     CreateGrantRequest.add_member(:allowed_operations, Shapes::ShapeRef.new(shape: AllowedOperationList, required: true, location_name: "AllowedOperations"))
     CreateGrantRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateGrantRequest.add_member(:grant_type, Shapes::ShapeRef.new(shape: GrantType, location_name: "GrantType"))
+    CreateGrantRequest.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
     CreateGrantRequest.struct_class = Types::CreateGrantRequest
 
     CreateGrantResponse.add_member(:grant_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "GrantArn"))
@@ -745,6 +748,7 @@ module Aws::LicenseManager
     Grant.add_member(:version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Version"))
     Grant.add_member(:granted_operations, Shapes::ShapeRef.new(shape: AllowedOperationList, required: true, location_name: "GrantedOperations"))
     Grant.add_member(:options, Shapes::ShapeRef.new(shape: Options, location_name: "Options"))
+    Grant.add_member(:grant_type, Shapes::ShapeRef.new(shape: GrantType, location_name: "GrantType"))
     Grant.struct_class = Types::Grant
 
     GrantList.member = Shapes::ShapeRef.new(shape: Grant)
@@ -1167,6 +1171,7 @@ module Aws::LicenseManager
     NoEntitlementsAllowedException.struct_class = Types::NoEntitlementsAllowedException
 
     Options.add_member(:activation_override_behavior, Shapes::ShapeRef.new(shape: ActivationOverrideBehavior, location_name: "ActivationOverrideBehavior"))
+    Options.add_member(:desired_status, Shapes::ShapeRef.new(shape: GrantStatus, location_name: "DesiredStatus"))
     Options.struct_class = Types::Options
 
     OrRuleStatement.add_member(:matching_rule_statements, Shapes::ShapeRef.new(shape: MatchingRuleStatementList, location_name: "MatchingRuleStatements"))
@@ -1206,6 +1211,7 @@ module Aws::LicenseManager
     ReceivedMetadata.add_member(:received_status, Shapes::ShapeRef.new(shape: ReceivedStatus, location_name: "ReceivedStatus"))
     ReceivedMetadata.add_member(:received_status_reason, Shapes::ShapeRef.new(shape: StatusReasonMessage, location_name: "ReceivedStatusReason"))
     ReceivedMetadata.add_member(:allowed_operations, Shapes::ShapeRef.new(shape: AllowedOperationList, location_name: "AllowedOperations"))
+    ReceivedMetadata.add_member(:grant_type, Shapes::ShapeRef.new(shape: GrantType, location_name: "GrantType"))
     ReceivedMetadata.struct_class = Types::ReceivedMetadata
 
     RedirectException.add_member(:location, Shapes::ShapeRef.new(shape: Location, location_name: "Location"))

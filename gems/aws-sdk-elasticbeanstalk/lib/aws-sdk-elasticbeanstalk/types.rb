@@ -1060,6 +1060,12 @@ module Aws::ElasticBeanstalk
     #   using CodeBuild or CodeCommit. For application versions built from a
     #   source bundle in Amazon S3, processing is optional.
     #
+    #   For application versions with `ImageConfiguration.Build`, `Process`
+    #   determines when Elastic Beanstalk builds the container image. Set it
+    #   to `true` to build the image when you create the application
+    #   version. If you don't, Elastic Beanstalk builds the image when you
+    #   first deploy the application version to an environment.
+    #
     #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration
     #   files. It doesn't validate your application's configuration files,
     #   like proxy server or Docker configuration.
@@ -1449,6 +1455,26 @@ module Aws::ElasticBeanstalk
     #
     class CustomAmi < Struct.new(
       :virtualization_type,
+      :image_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An AMI that Elastic Beanstalk uses by default for a platform version
+    # and processor architecture.
+    #
+    # @!attribute [rw] architecture
+    #   The processor architecture of the AMI.
+    #   @return [String]
+    #
+    # @!attribute [rw] image_id
+    #   The ID of the AMI.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/DefaultAmi AWS API Documentation
+    #
+    class DefaultAmi < Struct.new(
+      :architecture,
       :image_id)
       SENSITIVE = []
       include Aws::Structure
@@ -2795,6 +2821,9 @@ module Aws::ElasticBeanstalk
     #
     #   If you specify `Build`, also specify the request's `SourceBundle`
     #   parameter, and don't specify `Source`.
+    #
+    #   To build the image when you create the application version instead
+    #   of on first deployment, also set `Process` to `true`.
     #   @return [Types::ImageBuildConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/elasticbeanstalk-2010-12-01/ImageConfiguration AWS API Documentation
@@ -3520,8 +3549,22 @@ module Aws::ElasticBeanstalk
     #   @return [Array<Types::PlatformFramework>]
     #
     # @!attribute [rw] custom_ami_list
-    #   The custom AMIs supported by the platform version.
+    #   The AMIs of the platform version, by virtualization type. For
+    #   Elastic Beanstalk managed platforms, these are the default `x86_64`
+    #   AMIs; for custom platforms, the `hvm` entry is the AMI built for the
+    #   platform version. To find a managed platform's default AMIs for
+    #   every supported processor architecture, including `arm64`, use
+    #   `DefaultAmiList`.
     #   @return [Array<Types::CustomAmi>]
+    #
+    # @!attribute [rw] default_ami_list
+    #   The AMIs that Elastic Beanstalk uses by default for the platform
+    #   version, one for each supported processor architecture. When an
+    #   environment doesn't specify a custom AMI, Elastic Beanstalk chooses
+    #   the default AMI that matches the environment's architecture.
+    #
+    #   This list isn't returned for custom platforms.
+    #   @return [Array<Types::DefaultAmi>]
     #
     # @!attribute [rw] supported_tier_list
     #   The tiers supported by the platform version.
@@ -3570,6 +3613,7 @@ module Aws::ElasticBeanstalk
       :programming_languages,
       :frameworks,
       :custom_ami_list,
+      :default_ami_list,
       :supported_tier_list,
       :supported_addon_list,
       :platform_lifecycle_state,

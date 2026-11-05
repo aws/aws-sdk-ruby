@@ -288,6 +288,7 @@ module Aws
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Mgn/Client.html#create_network_migration_definition-instance_method
       def create_network_migration_definition: (
+                                                 ?client_token: ::String,
                                                  name: ::String,
                                                  ?description: ::String,
                                                  ?source_configurations: Array[

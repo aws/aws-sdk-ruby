@@ -196,6 +196,72 @@ module Aws::DynamoDB
       SENSITIVE: []
     end
 
+    class BulkOperationBytes
+      attr_accessor bulk_put_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class BulkOperationDescription
+      attr_accessor bulk_operation_arn: ::String
+      attr_accessor bulk_operation_status: ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "CANCELLING" | "CANCELLED" | "FAILED")
+      attr_accessor table_details: ::Array[Types::BulkOperationTableDetail]
+      attr_accessor client_token: ::String
+      attr_accessor input_s3_configuration: Types::InputS3Configuration
+      attr_accessor output_s3_configuration: Types::OutputS3Configuration
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      attr_accessor processed_item_count: ::Integer
+      attr_accessor processed_input_bytes: ::Integer
+      attr_accessor total_input_bytes: ::Integer
+      attr_accessor bulk_operation_usage: ::Array[Types::BulkOperationUsage]
+      attr_accessor failed_item_count: ::Integer
+      attr_accessor failure_code: ::String
+      attr_accessor failure_message: ::String
+      attr_accessor max_write_request_units: ::Integer
+      attr_accessor performance_tier: ("STANDARD" | "ACCELERATED")
+      SENSITIVE: []
+    end
+
+    class BulkOperationSummary
+      attr_accessor bulk_operation_arn: ::String
+      attr_accessor bulk_operation_status: ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "CANCELLING" | "CANCELLED" | "FAILED")
+      attr_accessor start_time: ::Time
+      attr_accessor end_time: ::Time
+      SENSITIVE: []
+    end
+
+    class BulkOperationTableDetail
+      attr_accessor table_name: ::String
+      attr_accessor table_id: ::String
+      SENSITIVE: []
+    end
+
+    class BulkOperationUsage
+      attr_accessor table_name: ::String
+      attr_accessor bulk_put_bytes: ::Integer
+      attr_accessor table: Types::BulkOperationBytes
+      attr_accessor local_secondary_indexes: ::Hash[::String, Types::BulkOperationBytes]
+      attr_accessor global_secondary_indexes: ::Hash[::String, Types::BulkOperationBytes]
+      attr_accessor vector_indexes: ::Hash[::String, Types::BulkOperationVectorBytes]
+      SENSITIVE: []
+    end
+
+    class BulkOperationVectorBytes
+      attr_accessor bulk_put_vector_bytes: ::Integer
+      SENSITIVE: []
+    end
+
+    class CancelBulkOperationInput
+      attr_accessor bulk_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CancelBulkOperationOutput
+      attr_accessor bulk_operation_arn: ::String
+      attr_accessor bulk_operation_status: ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "CANCELLING" | "CANCELLED" | "FAILED")
+      SENSITIVE: []
+    end
+
     class CancellationReason
       attr_accessor item: ::Hash[::String, Types::AttributeValue]
       attr_accessor code: ::String
@@ -458,6 +524,16 @@ module Aws::DynamoDB
 
     class DescribeBackupOutput
       attr_accessor backup_description: Types::BackupDescription
+      SENSITIVE: []
+    end
+
+    class DescribeBulkOperationInput
+      attr_accessor bulk_operation_arn: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeBulkOperationOutput
+      attr_accessor bulk_operation_description: Types::BulkOperationDescription
       SENSITIVE: []
     end
 
@@ -946,6 +1022,15 @@ module Aws::DynamoDB
       SENSITIVE: []
     end
 
+    class InputS3Configuration
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor input_format: ("DYNAMODB_JSON" | "ION")
+      attr_accessor input_compression_type: ("GZIP" | "ZSTD" | "NONE")
+      SENSITIVE: []
+    end
+
     class InternalServerError
       attr_accessor message: ::String
       SENSITIVE: []
@@ -1033,6 +1118,18 @@ module Aws::DynamoDB
     class ListBackupsOutput
       attr_accessor backup_summaries: ::Array[Types::BackupSummary]
       attr_accessor last_evaluated_backup_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ListBulkOperationsInput
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListBulkOperationsOutput
+      attr_accessor bulk_operations_summary_list: ::Array[Types::BulkOperationSummary]
+      attr_accessor next_token: ::String
       SENSITIVE: []
     end
 
@@ -1144,6 +1241,16 @@ module Aws::DynamoDB
 
     class OnDemandThroughputOverride
       attr_accessor max_read_request_units: ::Integer
+      SENSITIVE: []
+    end
+
+    class OutputS3Configuration
+      attr_accessor s3_bucket_owner: ::String
+      attr_accessor s3_bucket: ::String
+      attr_accessor s3_key_prefix: ::String
+      attr_accessor s3_sse_algorithm: ("AES256" | "KMS")
+      attr_accessor s3_sse_kms_key_id: ::String
+      attr_accessor output_type: ::Array[("ERROR" | "CONDITION_CHECK_FAILURE")]
       SENSITIVE: []
     end
 
@@ -1591,6 +1698,21 @@ module Aws::DynamoDB
       attr_accessor time_to_live_description: Types::TimeToLiveDescription
       attr_accessor sse_description: Types::SSEDescription
       attr_accessor vector_indexes: ::Array[Types::VectorIndexInfo]
+      SENSITIVE: []
+    end
+
+    class StartBulkPutItemsInput
+      attr_accessor client_token: ::String
+      attr_accessor input_s3_configuration: Types::InputS3Configuration
+      attr_accessor output_s3_configuration: Types::OutputS3Configuration
+      attr_accessor table_name: ::String
+      attr_accessor max_write_request_units: ::Integer
+      attr_accessor performance_tier: ("STANDARD" | "ACCELERATED")
+      SENSITIVE: []
+    end
+
+    class StartBulkPutItemsOutput
+      attr_accessor bulk_operation_description: Types::BulkOperationDescription
       SENSITIVE: []
     end
 

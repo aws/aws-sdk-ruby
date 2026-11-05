@@ -818,6 +818,7 @@ module Aws
       interface _InvokeAgentRuntimeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::InvokeAgentRuntimeResponse]
         def runtime_session_id: () -> ::String
+        def session_endpoint_url: () -> ::String
         def mcp_session_id: () -> ::String
         def mcp_protocol_version: () -> ::String
         def trace_id: () -> ::String

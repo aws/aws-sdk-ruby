@@ -697,8 +697,9 @@ module Aws::PrometheusService
     #
     # @!attribute [rw] exporters
     #   The exporter configurations for the scraper. You can configure at
-    #   most one Amazon OpenSearch Service domain. If you don't specify a
-    #   value, the scraper is created without an exporter configuration.
+    #   most one exporter, for either an Amazon OpenSearch Service domain or
+    #   an Amazon MSK cluster. If you don't specify a value, the scraper is
+    #   created without an exporter configuration.
     #   @return [Array<Types::ExporterConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/CreateScraperRequest AWS API Documentation
@@ -1445,16 +1446,23 @@ module Aws::PrometheusService
     #   Amazon OpenSearch Service domain.
     #   @return [Types::OpenSearchExporterConfiguration]
     #
+    # @!attribute [rw] kafka_configuration
+    #   The configuration that the scraper uses to collect metrics from an
+    #   Amazon MSK cluster through a managed Kafka exporter.
+    #   @return [Types::KafkaExporterConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ExporterConfiguration AWS API Documentation
     #
     class ExporterConfiguration < Struct.new(
       :open_search_configuration,
+      :kafka_configuration,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class OpenSearchConfiguration < ExporterConfiguration; end
+      class KafkaConfiguration < ExporterConfiguration; end
       class Unknown < ExporterConfiguration; end
     end
 
@@ -1533,6 +1541,55 @@ module Aws::PrometheusService
     class InternalServerException < Struct.new(
       :message,
       :retry_after_seconds)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for collecting broker, topic, and consumer-group
+    # metrics from an Amazon MSK cluster through a managed Kafka exporter.
+    # The cluster must be active, have IAM authentication enabled, and be in
+    # the same account and Region as the scraper. Provisioned clusters with
+    # Standard brokers are supported. MSK Serverless clusters are not
+    # supported.
+    #
+    # Use a VPC source that can connect to the cluster's IAM bootstrap
+    # brokers. The exporter authenticates with the scraper's service-linked
+    # role. Metrics can be sent to an Amazon Managed Service for Prometheus
+    # workspace or a CloudWatch dataset.
+    #
+    # You must have an Amazon MSK cluster policy that grants the scraper's
+    # service-linked role access to the cluster. Without this policy, the
+    # scraper collects no Kafka metrics. For the required actions and
+    # example policies, see [Grant the scraper access to the cluster][1] in
+    # the *Amazon Managed Service for Prometheus User Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/prometheus/latest/userguide/prom-msk-kafka-exporter.html#prom-msk-kafka-exporter-access
+    #
+    # @!attribute [rw] cluster_arn
+    #   The Amazon Resource Name (ARN) of the Amazon MSK cluster.
+    #   @return [String]
+    #
+    # @!attribute [rw] topic_filter
+    #   An anchored RE2 regular expression that selects the Kafka topics to
+    #   monitor. The expression must start with `^` and end with `$`. If
+    #   omitted, the default is `^.*$`, which selects all topics.
+    #   @return [String]
+    #
+    # @!attribute [rw] consumer_group_filter
+    #   An anchored RE2 regular expression that selects the Kafka consumer
+    #   groups to monitor. The expression must start with `^` and end with
+    #   `$`. If omitted, the default is `^.*$`, which selects all consumer
+    #   groups.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/KafkaExporterConfiguration AWS API Documentation
+    #
+    class KafkaExporterConfiguration < Struct.new(
+      :cluster_arn,
+      :topic_filter,
+      :consumer_group_filter)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2619,8 +2676,8 @@ module Aws::PrometheusService
     #
     # @!attribute [rw] exporters
     #   The exporter configurations for the scraper, if configured. The list
-    #   contains at most one configuration for an Amazon OpenSearch Service
-    #   domain.
+    #   contains at most one configuration, for either an Amazon OpenSearch
+    #   Service domain or an Amazon MSK cluster.
     #   @return [Array<Types::ExporterConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperDescription AWS API Documentation
@@ -2762,8 +2819,8 @@ module Aws::PrometheusService
     #
     # @!attribute [rw] exporters
     #   The exporter configurations for the scraper, if configured. The list
-    #   contains at most one configuration for an Amazon OpenSearch Service
-    #   domain.
+    #   contains at most one configuration, for either an Amazon OpenSearch
+    #   Service domain or an Amazon MSK cluster.
     #   @return [Array<Types::ExporterConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/ScraperSummary AWS API Documentation
@@ -3087,8 +3144,10 @@ module Aws::PrometheusService
     #
     # @!attribute [rw] exporters
     #   The exporter configurations for the scraper. You can configure at
-    #   most one Amazon OpenSearch Service domain. If you don't specify a
-    #   value, the existing exporter configuration remains unchanged.
+    #   most one exporter, for either an Amazon OpenSearch Service domain or
+    #   an Amazon MSK cluster. If you don't specify a value, the existing
+    #   exporter configuration remains unchanged. Specify an empty list to
+    #   remove the exporter.
     #   @return [Array<Types::ExporterConfiguration>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/amp-2020-08-01/UpdateScraperRequest AWS API Documentation

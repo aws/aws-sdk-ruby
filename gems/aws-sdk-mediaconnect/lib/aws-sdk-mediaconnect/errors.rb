@@ -33,6 +33,7 @@ module Aws::MediaConnect
   # * {CreateBridge420Exception}
   # * {CreateFlow420Exception}
   # * {CreateGateway420Exception}
+  # * {DestinationEndpointServiceQuotaExceededException}
   # * {ForbiddenException}
   # * {GrantFlowEntitlements420Exception}
   # * {InternalServerErrorException}
@@ -41,6 +42,7 @@ module Aws::MediaConnect
   # * {RouterNetworkInterfaceServiceQuotaExceededException}
   # * {RouterOutputServiceQuotaExceededException}
   # * {ServiceUnavailableException}
+  # * {SourceEndpointServiceQuotaExceededException}
   # * {TooManyRequestsException}
   #
   # Additionally, error classes are dynamically generated for service errors based on the error code
@@ -133,6 +135,21 @@ module Aws::MediaConnect
       # @param [Seahorse::Client::RequestContext] context
       # @param [String] message
       # @param [Aws::MediaConnect::Types::CreateGateway420Exception] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
+      end
+    end
+
+    class DestinationEndpointServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MediaConnect::Types::DestinationEndpointServiceQuotaExceededException] data
       def initialize(context, message, data = Aws::EmptyStructure.new)
         super(context, message, data)
       end
@@ -268,6 +285,21 @@ module Aws::MediaConnect
 
       def retryable?
         true
+      end
+    end
+
+    class SourceEndpointServiceQuotaExceededException < ServiceError
+
+      # @param [Seahorse::Client::RequestContext] context
+      # @param [String] message
+      # @param [Aws::MediaConnect::Types::SourceEndpointServiceQuotaExceededException] data
+      def initialize(context, message, data = Aws::EmptyStructure.new)
+        super(context, message, data)
+      end
+
+      # @return [String]
+      def message
+        @message || @data[:message]
       end
     end
 

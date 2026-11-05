@@ -276,6 +276,17 @@ module Aws
                               ?snapshot_target: ::String,
                               ?copy_option_group: bool,
                               ?snapshot_availability_zone: ::String,
+                              ?tag_specifications: Array[
+                                {
+                                  resource_type: ::String?,
+                                  tags: Array[
+                                    {
+                                      key: ::String?,
+                                      value: ::String?
+                                    }
+                                  ]?
+                                }
+                              ],
                               ?source_region: ::String
                             ) -> _CopyDBSnapshotResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CopyDBSnapshotResponseSuccess

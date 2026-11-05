@@ -457,7 +457,20 @@ module Aws
                               ?connector_configuration: Hash[::String, ::String],
                               ?skip_health_validation: bool,
                               connector_arn: ::String,
-                              current_version: ::String
+                              current_version: ::String,
+                              ?plugins: Array[
+                                {
+                                  custom_plugin: {
+                                    custom_plugin_arn: ::String,
+                                    revision: ::Integer
+                                  }
+                                }
+                              ],
+                              ?worker_configuration: {
+                                revision: ::Integer,
+                                worker_configuration_arn: ::String
+                              },
+                              ?use_default_worker_configuration: bool
                             ) -> _UpdateConnectorResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateConnectorResponseSuccess
     end

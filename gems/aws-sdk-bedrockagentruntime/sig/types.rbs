@@ -101,6 +101,7 @@ module Aws::BedrockAgentRuntime
     end
 
     class AgenticRetrieveAction
+      attr_accessor code_execution: Types::AgenticRetrieveCodeExecutionDetails
       attr_accessor full_document_expansion: Types::AgenticRetrieveFullDocExpansionDetails
       attr_accessor memory_retrieve: Types::AgenticRetrieveMemoryRetrieveDetails
       attr_accessor retrieve: Types::AgenticRetrieveActionDetails
@@ -144,6 +145,17 @@ module Aws::BedrockAgentRuntime
 
     class AgenticRetrieveCitationReference
       attr_accessor result_index: ::Integer
+      SENSITIVE: []
+    end
+
+    class AgenticRetrieveCodeExecutionDetails
+      attr_accessor documents: ::Array[Types::AgenticRetrieveCodeExecutionDocument]
+      SENSITIVE: []
+    end
+
+    class AgenticRetrieveCodeExecutionDocument
+      attr_accessor document_id: ::String
+      attr_accessor source_retriever: Types::AgenticRetrieveSourceRetriever
       SENSITIVE: []
     end
 
@@ -355,7 +367,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor retrieval_metadata: ::Array[Types::AgenticRetrieveSourceMetadata]
       attr_accessor retrieval_response: ::Array[Types::AgenticRetrieveTraceResultItem]
       attr_accessor status: ("IN_PROGRESS" | "SUCCEEDED" | "FAILED")
-      attr_accessor step: ("Planning" | "Retrieval" | "SpeculativeRetrieval" | "FullDocumentExpansion" | "SessionHistoryLoad")
+      attr_accessor step: ("Planning" | "Retrieval" | "SpeculativeRetrieval" | "FullDocumentExpansion" | "SessionHistoryLoad" | "CodeExecution")
       attr_accessor warnings: ::Array[Types::AgenticRetrieveWarning]
       SENSITIVE: []
     end

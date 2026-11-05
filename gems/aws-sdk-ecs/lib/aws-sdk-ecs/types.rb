@@ -1394,6 +1394,12 @@ module Aws::ECS
     #   The IDs of each Neuron device assigned to the container.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] gpu_sharing_strategy
+    #   The GPU sharing strategy that the task definition specifies for the
+    #   container. This field is present only for containers whose resource
+    #   requirements include `sharingStrategy`.
+    #   @return [Types::SharingStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/Container AWS API Documentation
     #
     class Container < Struct.new(
@@ -1414,7 +1420,8 @@ module Aws::ECS
       :memory,
       :memory_reservation,
       :gpu_ids,
-      :neuron_device_ids)
+      :neuron_device_ids,
+      :gpu_sharing_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2567,6 +2574,12 @@ module Aws::ECS
     #   An object representing the health status of the container instance.
     #   @return [Types::ContainerInstanceHealthStatus]
     #
+    # @!attribute [rw] gpu_devices
+    #   The state of each GPU on the container instance, including its
+    #   sharing mode and available memory. This field is present only for
+    #   container instances that support GPU sharing.
+    #   @return [Array<Types::GpuDevice>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ContainerInstance AWS API Documentation
     #
     class ContainerInstance < Struct.new(
@@ -2587,7 +2600,8 @@ module Aws::ECS
       :registered_at,
       :attachments,
       :tags,
-      :health_status)
+      :health_status,
+      :gpu_devices)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5279,11 +5293,24 @@ module Aws::ECS
     #   it's stored.
     #   @return [Types::HostVolumeProperties]
     #
+    # @!attribute [rw] log_driver_volume_configuration
+    #   The log driver volume configuration. With a log driver volume, the
+    #   containers in a daemon task can read the log files that a log driver
+    #   writes for the other tasks on the container instance. To read the
+    #   log files, mount the volume into a container in the daemon task with
+    #   `mountPoints`.
+    #
+    #   Use `host` to bind mount a path on the container instance. Use
+    #   `logDriverVolumeConfiguration` to read the log output of other
+    #   tasks. You can't specify both for the same volume.
+    #   @return [Types::LogDriverVolumeConfiguration]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DaemonVolume AWS API Documentation
     #
     class DaemonVolume < Struct.new(
       :name,
-      :host)
+      :host,
+      :log_driver_volume_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9607,6 +9634,61 @@ module Aws::ECS
       include Aws::Structure
     end
 
+    # The state of a GPU on a container instance, including its sharing mode
+    # and the memory that's available for new containers.
+    #
+    # @!attribute [rw] gpu_id
+    #   The ID of the GPU. This ID matches the GPU IDs in the `gpuIds` of
+    #   the containers that Amazon ECS assigned to the GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] sharing_mode
+    #   How the GPU is shared between containers.
+    #
+    #   Valid values:
+    #
+    #   * `IDLE` - No containers are assigned to the GPU, and all of its
+    #     memory is available.
+    #
+    #   * `NVIDIA_MPS` - One or more containers share the GPU by using
+    #     NVIDIA Multi-Process Service (MPS).
+    #
+    #   * `DEDICATED` - One container has exclusive use of the GPU.
+    #   @return [String]
+    #
+    # @!attribute [rw] total_memory_in_mi_b
+    #   The total amount of GPU memory, in MiB, that the Amazon ECS
+    #   container agent reported for the GPU. This is the memory that's
+    #   available to containers, and it can be less than the nominal memory
+    #   of the GPU.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] remaining_memory_in_mi_b
+    #   The amount of GPU memory, in MiB, that's available to allocate to
+    #   new containers that use the `nvidiaMps` sharing strategy. Amazon ECS
+    #   calculates this value from the memory that it allocated to
+    #   containers on the GPU, not from the memory that the containers use.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] container_count
+    #   The number of containers that Amazon ECS assigned to the GPU. This
+    #   value is `0` when the sharing mode is `IDLE` and `1` when the
+    #   sharing mode is `DEDICATED`. Amazon ECS counts the containers that
+    #   it assigned to the GPU, not the processes that are running on it.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/GpuDevice AWS API Documentation
+    #
+    class GpuDevice < Struct.new(
+      :gpu_id,
+      :sharing_mode,
+      :total_memory_in_mi_b,
+      :remaining_memory_in_mi_b,
+      :container_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object representing a container health check. Health check
     # parameters that are specified in a container definition override any
     # Docker health checks that exist in the container image (such as those
@@ -12268,6 +12350,9 @@ module Aws::ECS
     #   are `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`,`syslog`,
     #   `splunk`, and `awsfirelens`.
     #
+    #   For tasks on Amazon ECS Managed Instances, the supported log drivers
+    #   are `awslogs`, `splunk`, `awsfirelens`, and `json-file`.
+    #
     # * This parameter requires version 1.18 of the Docker Remote API or
     #   greater on your container instance.
     #
@@ -12298,6 +12383,9 @@ module Aws::ECS
     #   For tasks hosted on Amazon EC2 instances, the supported log drivers
     #   are `awslogs`, `fluentd`, `gelf`, `json-file`, `journald`, `syslog`,
     #   `splunk`, and `awsfirelens`.
+    #
+    #   For tasks on Amazon ECS Managed Instances, the supported log drivers
+    #   are `awslogs`, `splunk`, `awsfirelens`, and `json-file`.
     #
     #   For more information about using the `awslogs` log driver, see [Send
     #   Amazon ECS logs to CloudWatch][1] in the *Amazon Elastic Container
@@ -12558,6 +12646,32 @@ module Aws::ECS
       :log_driver,
       :options,
       :secret_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration for a log driver volume in a daemon task definition.
+    # The volume contains the log files for each container on the container
+    # instance that uses the specified log driver in its `logConfiguration`.
+    # Containers that use a different log driver don't write log files to
+    # the volume.
+    #
+    # For the `json-file` log driver, the volume has one directory for each
+    # container, named with the container ID. Each directory contains the
+    # container's log file, `<container-id>-json.log`, and any rotated log
+    # files. After a container stops and Amazon ECS removes it, Amazon ECS
+    # deletes the container's directory. Read the log files before the
+    # container is removed.
+    #
+    # @!attribute [rw] driver
+    #   The log driver whose log files the volume contains. The only
+    #   supported value is `json-file`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/LogDriverVolumeConfiguration AWS API Documentation
+    #
+    class LogDriverVolumeConfiguration < Struct.new(
+      :driver)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -13681,6 +13795,43 @@ module Aws::ECS
     #
     class NoUpdateAvailableException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The GPU memory and compute limits for a container that shares a GPU by
+    # using NVIDIA Multi-Process Service (MPS). Amazon ECS assigns the
+    # container a single GPU that has enough memory available. Other
+    # containers that use MPS can share the same GPU.
+    #
+    # @!attribute [rw] memory
+    #   The amount of GPU memory, in MiB, to allocate to the container.
+    #   Amazon ECS assigns the container a GPU that has at least the
+    #   specified amount of memory available, and sets the
+    #   `CUDA_MPS_PINNED_DEVICE_MEM_LIMIT` environment variable in the
+    #   container to limit its memory to this amount. The memory must be
+    #   available on a single GPU. If more than one container in a task uses
+    #   `nvidiaMps`, Amazon ECS assigns them the same GPU, which must have
+    #   enough memory available for all of them.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_compute_percent
+    #   The maximum percentage of the GPU's compute capacity that the
+    #   container can use. Amazon ECS sets the
+    #   `CUDA_MPS_ACTIVE_THREAD_PERCENTAGE` environment variable in the
+    #   container to this value. This value is a limit, not a reservation.
+    #
+    #   If you don't specify this parameter, Amazon ECS doesn't set
+    #   `CUDA_MPS_ACTIVE_THREAD_PERCENTAGE`, and the active thread
+    #   percentage of the MPS server on the container instance applies. By
+    #   default, this is 100 percent.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/NvidiaMpsAllocation AWS API Documentation
+    #
+    class NvidiaMpsAllocation < Struct.new(
+      :memory,
+      :max_compute_percent)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -15366,6 +15517,9 @@ module Aws::ECS
     # @!attribute [rw] value
     #   The value for the specified resource type.
     #
+    #   You must specify this parameter unless the type is `GPU` and you
+    #   specify `sharingStrategy`.
+    #
     #   When the type is `GPU`, the value is the number of physical `GPUs`
     #   the Amazon ECS container agent reserves for the container. The
     #   number of GPUs that's reserved for all containers in a task can't
@@ -15392,11 +15546,26 @@ module Aws::ECS
     #   The type of resource to assign to a container.
     #   @return [String]
     #
+    # @!attribute [rw] sharing_strategy
+    #   The strategy that the container uses to share a GPU with other
+    #   containers. Specify a sharing strategy only when the type is `GPU`.
+    #   For a GPU resource requirement, specify either `value` or
+    #   `sharingStrategy`, but not both. If you don't specify a sharing
+    #   strategy, the container has exclusive use of each GPU that Amazon
+    #   ECS assigns to it. The containers in a task that request GPUs must
+    #   all use the same option.
+    #
+    #   You can use GPU sharing with tasks that run on Amazon EC2 instances
+    #   or Amazon ECS Managed Instances. Task definitions that require
+    #   `EXTERNAL` compatibility don't support GPU sharing.
+    #   @return [Types::SharingStrategy]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/ResourceRequirement AWS API Documentation
     #
     class ResourceRequirement < Struct.new(
       :value,
-      :type)
+      :type,
+      :sharing_strategy)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -16489,6 +16658,9 @@ module Aws::ECS
     #     For tasks hosted on Amazon EC2 instances, the supported log
     #     drivers are `awslogs`, `fluentd`, `gelf`, `json-file`,
     #     `journald`,`syslog`, `splunk`, and `awsfirelens`.
+    #
+    #     For tasks on Amazon ECS Managed Instances, the supported log
+    #     drivers are `awslogs`, `splunk`, `awsfirelens`, and `json-file`.
     #
     #   * This parameter requires version 1.18 of the Docker Remote API or
     #     greater on your container instance.
@@ -17917,6 +18089,33 @@ module Aws::ECS
       :type)
       SENSITIVE = []
       include Aws::Structure
+    end
+
+    # The strategy that a container uses to share a GPU with other
+    # containers. Specify exactly one member.
+    #
+    # @note SharingStrategy is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SharingStrategy is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SharingStrategy corresponding to the set member.
+    #
+    # @!attribute [rw] nvidia_mps
+    #   Shares a GPU between containers by using NVIDIA Multi-Process
+    #   Service (MPS). You specify the GPU memory to allocate to the
+    #   container and, optionally, the maximum percentage of the GPU's
+    #   compute capacity that the container can use.
+    #   @return [Types::NvidiaMpsAllocation]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/SharingStrategy AWS API Documentation
+    #
+    class SharingStrategy < Struct.new(
+      :nvidia_mps,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class NvidiaMps < SharingStrategy; end
+      class Unknown < SharingStrategy; end
     end
 
     # <zonbook />

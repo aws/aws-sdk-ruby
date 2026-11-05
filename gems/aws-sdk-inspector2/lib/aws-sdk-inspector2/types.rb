@@ -390,12 +390,17 @@ module Aws::Inspector2
     #   The value to sort results by.
     #   @return [String]
     #
+    # @!attribute [rw] scan_sources
+    #   The scan sources to filter the aggregation results by.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AmiAggregation AWS API Documentation
     #
     class AmiAggregation < Struct.new(
       :amis,
       :sort_order,
-      :sort_by)
+      :sort_by,
+      :scan_sources)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -457,6 +462,11 @@ module Aws::Inspector2
     #   The IDs of Amazon EC2 instances using this AMI.
     #   @return [Integer]
     #
+    # @!attribute [rw] scan_source
+    #   The source of the scan that generated the findings for the Amazon
+    #   Machine Image (AMI).
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AmiAggregationResponse AWS API Documentation
     #
     class AmiAggregationResponse < Struct.new(
@@ -468,7 +478,126 @@ module Aws::Inspector2
       :cloud_org_id,
       :cloud_account_id,
       :severity_counts,
-      :affected_instances)
+      :affected_instances,
+      :scan_source)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The configuration that controls how Amazon Machine Images (AMIs) are
+    # scanned for an account.
+    #
+    # @!attribute [rw] last_launched_within
+    #   Restricts scanning to AMIs that were last launched within the
+    #   specified duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_within
+    #   Restricts scanning to AMIs that were created within the specified
+    #   duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_mode_configuration
+    #   The scan mode configuration that determines which AMIs are scanned.
+    #   @return [Types::AmiScanModeConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AmiConfiguration AWS API Documentation
+    #
+    class AmiConfiguration < Struct.new(
+      :last_launched_within,
+      :created_within,
+      :scan_mode_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The current state of the Amazon Machine Image (AMI) scan configuration
+    # for an account.
+    #
+    # @!attribute [rw] last_launched_within
+    #   Restricts scanning to AMIs that were last launched within the
+    #   specified duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_within
+    #   Restricts scanning to AMIs that were created within the specified
+    #   duration.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_mode_configuration
+    #   The scan mode configuration that determines which AMIs are scanned.
+    #   @return [Types::AmiScanModeConfiguration]
+    #
+    # @!attribute [rw] status
+    #   The status of the AMI scan configuration.
+    #   @return [String]
+    #
+    # @!attribute [rw] updated_at
+    #   The date and time when the AMI scan configuration was last updated.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AmiConfigurationState AWS API Documentation
+    #
+    class AmiConfigurationState < Struct.new(
+      :last_launched_within,
+      :created_within,
+      :scan_mode_configuration,
+      :status,
+      :updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The scan mode configuration that determines which Amazon Machine
+    # Images (AMIs) are scanned.
+    #
+    # @!attribute [rw] scan_mode
+    #   The scan mode that determines whether all AMIs are scanned or only
+    #   those matching the specified tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tag filters used to select which AMIs are scanned when using
+    #   targeted scanning.
+    #   @return [Array<Types::AmiTagFilter>]
+    #
+    # @!attribute [rw] exclude_copied_amis
+    #   Whether to exclude AMIs that are copies of other AMIs from scanning.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] exclude_backup_dlm_amis
+    #   Whether to exclude AMIs created by Amazon Data Lifecycle Manager
+    #   (DLM) backups from scanning.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AmiScanModeConfiguration AWS API Documentation
+    #
+    class AmiScanModeConfiguration < Struct.new(
+      :scan_mode,
+      :tags,
+      :exclude_copied_amis,
+      :exclude_backup_dlm_amis)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A filter that matches Amazon Machine Images (AMIs) by tag key and,
+    # optionally, tag value.
+    #
+    # @!attribute [rw] key
+    #   The tag key to match against an AMI's tags.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The tag value to match against an AMI's tags. If omitted, the
+    #   filter matches on the tag key alone.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AmiTagFilter AWS API Documentation
+    #
+    class AmiTagFilter < Struct.new(
+      :key,
+      :value)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -584,6 +713,12 @@ module Aws::Inspector2
     #   for new members of your Amazon Inspector organization.
     #   @return [Boolean]
     #
+    # @!attribute [rw] ami
+    #   Represents whether Amazon Machine Image (AMI) scans are
+    #   automatically enabled for new members of your Amazon Inspector
+    #   organization.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/AutoEnable AWS API Documentation
     #
     class AutoEnable < Struct.new(
@@ -591,7 +726,8 @@ module Aws::Inspector2
       :ecr,
       :lambda,
       :lambda_code,
-      :code_repository)
+      :code_repository,
+      :ami)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3384,6 +3520,10 @@ module Aws::Inspector2
     #   filtered by runtime.
     #   @return [Array<Types::CoverageStringFilter>]
     #
+    # @!attribute [rw] machine_image_tags
+    #   The machine image tags to filter coverage results by.
+    #   @return [Array<Types::CoverageMapFilter>]
+    #
     # @!attribute [rw] last_scanned_at
     #   Filters Amazon Web Services resources based on whether Amazon
     #   Inspector has checked them for vulnerabilities within the specified
@@ -3486,6 +3626,7 @@ module Aws::Inspector2
       :lambda_function_name,
       :lambda_function_tags,
       :lambda_function_runtime,
+      :machine_image_tags,
       :last_scanned_at,
       :scan_mode,
       :image_pulled_at,
@@ -4415,12 +4556,19 @@ module Aws::Inspector2
     #   The ARN of the KMS key used to encrypt data when exporting findings.
     #   @return [String]
     #
+    # @!attribute [rw] expected_bucket_owner
+    #   The Amazon Web Services account ID of the expected owner of the
+    #   Amazon S3 bucket. If the actual bucket owner does not match, the
+    #   export request fails.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/Destination AWS API Documentation
     #
     class Destination < Struct.new(
       :bucket_name,
       :key_prefix,
-      :kms_key_arn)
+      :kms_key_arn,
+      :expected_bucket_owner)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -5398,6 +5546,24 @@ module Aws::Inspector2
     #   (such as GitHub, GitLab, etc.).
     #   @return [Array<Types::StringFilter>]
     #
+    # @!attribute [rw] machine_image_id
+    #   The ID of the Amazon Machine Image (AMI) used to filter findings.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] machine_image_name
+    #   The name of the Amazon Machine Image (AMI) used to filter findings.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] machine_image_owner_account_id
+    #   The ID of the Amazon Web Services account that owns the Amazon
+    #   Machine Image (AMI) used to filter findings.
+    #   @return [Array<Types::StringFilter>]
+    #
+    # @!attribute [rw] machine_image_platform
+    #   The platform of the Amazon Machine Image (AMI) used to filter
+    #   findings.
+    #   @return [Array<Types::StringFilter>]
+    #
     # @!attribute [rw] cloud_provider
     #   Filter criteria for the cloud provider.
     #   @return [Array<Types::StringFilter>]
@@ -5523,6 +5689,10 @@ module Aws::Inspector2
       :epss_score,
       :code_repository_project_name,
       :code_repository_provider_type,
+      :machine_image_id,
+      :machine_image_name,
+      :machine_image_owner_account_id,
+      :machine_image_platform,
       :cloud_provider,
       :cloud_provider_region,
       :cloud_provider_account_id,
@@ -6340,11 +6510,17 @@ module Aws::Inspector2
     #   configured for your environment.
     #   @return [Types::Ec2ConfigurationState]
     #
+    # @!attribute [rw] ami_configuration
+    #   The current state of the Amazon Machine Image (AMI) scan
+    #   configuration for the account.
+    #   @return [Types::AmiConfigurationState]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetConfigurationResponse AWS API Documentation
     #
     class GetConfigurationResponse < Struct.new(
       :ecr_configuration,
-      :ec2_configuration)
+      :ec2_configuration,
+      :ami_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6503,6 +6679,75 @@ module Aws::Inspector2
     #
     class GetMemberResponse < Struct.new(
       :member)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] resource_id
+    #   The ID of the resource whose on-demand scan status is being
+    #   requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_id
+    #   The unique identifier of the on-demand scan whose status is being
+    #   requested.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource whose on-demand scan status is being
+    #   requested.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetOnDemandScanStatusRequest AWS API Documentation
+    #
+    class GetOnDemandScanStatusRequest < Struct.new(
+      :resource_id,
+      :scan_id,
+      :resource_type)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_id
+    #   The unique identifier of the on-demand scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that was scanned.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource that was scanned.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status
+    #   The current status of the on-demand scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status_reason
+    #   The reason associated with the current on-demand scan status.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time, in ISO 8601 format, when the on-demand scan
+    #   started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_at
+    #   The date and time, in ISO 8601 format, when the on-demand scan
+    #   completed. This field is absent if the scan has not completed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/GetOnDemandScanStatusResponse AWS API Documentation
+    #
+    class GetOnDemandScanStatusResponse < Struct.new(
+      :scan_id,
+      :resource_id,
+      :resource_type,
+      :scan_status,
+      :scan_status_reason,
+      :started_at,
+      :completed_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8012,6 +8257,54 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_id
+    #   The ID of the resource whose on-demand scans are being listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource whose on-demand scans are being listed.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return in a single page of the
+    #   response.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token from a previous response used to retrieve the
+    #   next page of results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListOnDemandScansRequest AWS API Documentation
+    #
+    class ListOnDemandScansRequest < Struct.new(
+      :resource_id,
+      :resource_type,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of on-demand scans that match the request.
+    #   @return [Array<Types::OnDemandScan>]
+    #
+    # @!attribute [rw] next_token
+    #   A pagination token to use in a subsequent request to retrieve the
+    #   next page of results. This field is absent when there are no more
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ListOnDemandScansResponse AWS API Documentation
+    #
+    class ListOnDemandScansResponse < Struct.new(
+      :items,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] resource_arn
     #   The Amazon resource number (ARN) of the resource to list tags of.
     #   @return [String]
@@ -8080,6 +8373,90 @@ module Aws::Inspector2
     class ListUsageTotalsResponse < Struct.new(
       :next_token,
       :totals)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details about a machine image resource scanned directly by Inspector.
+    #
+    # @!attribute [rw] machine_image_id
+    #   The machine image ID (e.g., ami-0abcdef1234567890)
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   Human-readable image name
+    #   @return [String]
+    #
+    # @!attribute [rw] owner_account_id
+    #   Account ID that owns the image
+    #   @return [String]
+    #
+    # @!attribute [rw] platform
+    #   OS platform (Linux/Windows)
+    #   @return [String]
+    #
+    # @!attribute [rw] architecture
+    #   CPU architecture (x86\_64/arm64)
+    #   @return [String]
+    #
+    # @!attribute [rw] creation_date
+    #   When the image was created
+    #   @return [Time]
+    #
+    # @!attribute [rw] state
+    #   Image state (available/pending/deregistered)
+    #   @return [String]
+    #
+    # @!attribute [rw] is_public
+    #   Whether the image is publicly shared
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] root_device_type
+    #   Root device type (ebs/instance-store) — AWS-specific
+    #   @return [String]
+    #
+    # @!attribute [rw] virtualization_type
+    #   Virtualization type (hvm/paravirtual) — AWS-specific
+    #   @return [String]
+    #
+    # @!attribute [rw] source_resource_id
+    #   Source resource the image was created from (nullable)
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/MachineImageDetails AWS API Documentation
+    #
+    class MachineImageDetails < Struct.new(
+      :machine_image_id,
+      :name,
+      :owner_account_id,
+      :platform,
+      :architecture,
+      :creation_date,
+      :state,
+      :is_public,
+      :root_device_type,
+      :virtualization_type,
+      :source_resource_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains metadata about a machine image associated with a covered
+    # resource.
+    #
+    # @!attribute [rw] tags
+    #   The tags associated with the machine image.
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] platform
+    #   The platform of the machine image.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/MachineImageMetadata AWS API Documentation
+    #
+    class MachineImageMetadata < Struct.new(
+      :tags,
+      :platform)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8262,6 +8639,52 @@ module Aws::Inspector2
     class NumberFilter < Struct.new(
       :upper_inclusive,
       :lower_inclusive)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Details of a single on-demand scan of a resource.
+    #
+    # @!attribute [rw] scan_id
+    #   The unique identifier of the on-demand scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The ID of the resource that was scanned.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource that was scanned.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status
+    #   The current status of the on-demand scan.
+    #   @return [String]
+    #
+    # @!attribute [rw] scan_status_reason
+    #   The reason associated with the current on-demand scan status.
+    #   @return [String]
+    #
+    # @!attribute [rw] started_at
+    #   The date and time, in ISO 8601 format, when the on-demand scan
+    #   started.
+    #   @return [Time]
+    #
+    # @!attribute [rw] completed_at
+    #   The date and time, in ISO 8601 format, when the on-demand scan
+    #   completed. This field is absent if the scan has not completed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/OnDemandScan AWS API Documentation
+    #
+    class OnDemandScan < Struct.new(
+      :scan_id,
+      :resource_id,
+      :resource_type,
+      :scan_status,
+      :scan_status_reason,
+      :started_at,
+      :completed_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8883,6 +9306,11 @@ module Aws::Inspector2
     #   finding.
     #   @return [Types::CodeRepositoryDetails]
     #
+    # @!attribute [rw] machine_image
+    #   Details about a machine image resource scanned directly by
+    #   Inspector.
+    #   @return [Types::MachineImageDetails]
+    #
     # @!attribute [rw] vm
     #   An object that contains details about a VM instance involved in the
     #   finding.
@@ -8905,6 +9333,7 @@ module Aws::Inspector2
       :aws_ecr_container_image,
       :aws_lambda_function,
       :code_repository,
+      :machine_image,
       :vm,
       :image,
       :serverless_function)
@@ -9109,6 +9538,10 @@ module Aws::Inspector2
     #   The serverless function metadata associated with a covered resource.
     #   @return [Types::ServerlessFunctionMetadata]
     #
+    # @!attribute [rw] machine_image
+    #   The machine image metadata associated with a covered resource.
+    #   @return [Types::MachineImageMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceScanMetadata AWS API Documentation
     #
     class ResourceScanMetadata < Struct.new(
@@ -9121,7 +9554,8 @@ module Aws::Inspector2
       :container_image,
       :container_repository,
       :container_registry,
-      :serverless_function)
+      :serverless_function,
+      :machine_image)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9154,6 +9588,11 @@ module Aws::Inspector2
     #   account.
     #   @return [Types::State]
     #
+    # @!attribute [rw] ami
+    #   An object that described the state of Amazon Inspector scans for an
+    #   account.
+    #   @return [Types::State]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceState AWS API Documentation
     #
     class ResourceState < Struct.new(
@@ -9161,7 +9600,8 @@ module Aws::Inspector2
       :ecr,
       :lambda,
       :lambda_code,
-      :code_repository)
+      :code_repository,
+      :ami)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9191,6 +9631,10 @@ module Aws::Inspector2
     #   The status of Amazon Inspector scanning for code repositories.
     #   @return [String]
     #
+    # @!attribute [rw] ami
+    #   The status of Amazon Machine Image (AMI) scanning for the account.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/ResourceStatus AWS API Documentation
     #
     class ResourceStatus < Struct.new(
@@ -9198,7 +9642,8 @@ module Aws::Inspector2
       :ecr,
       :lambda,
       :lambda_code,
-      :code_repository)
+      :code_repository,
+      :ami)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9277,6 +9722,9 @@ module Aws::Inspector2
     #   error for this resource. Amazon Inspector service will automatically
     #   resolve the issue and resume the scanning. No action required from
     #   the user.
+    #
+    #   `INVALID_ARTIFACT` - Amazon Inspector couldn't scan this resource
+    #   because its artifact is malformed and couldn't be safely extracted.
     #
     #   `NO_INVENTORY` - Amazon Inspector couldn't find software
     #   application inventory to scan for vulnerabilities. This might be
@@ -10019,6 +10467,45 @@ module Aws::Inspector2
       include Aws::Structure
     end
 
+    # @!attribute [rw] resource_id
+    #   The ID of the resource to scan on demand.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of the resource to scan on demand.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartOnDemandScanRequest AWS API Documentation
+    #
+    class StartOnDemandScanRequest < Struct.new(
+      :resource_id,
+      :resource_type,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] scan_id
+    #   The unique identifier assigned to the on-demand scan that was
+    #   started.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/StartOnDemandScanResponse AWS API Documentation
+    #
+    class StartOnDemandScanResponse < Struct.new(
+      :scan_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # An object that described the state of Amazon Inspector scans for an
     # account.
     #
@@ -10593,11 +11080,21 @@ module Aws::Inspector2
     #   configuration is not changed.
     #   @return [String]
     #
+    # @!attribute [rw] ami_configuration
+    #   The inheritance behavior for a scan-type configuration. Used with
+    #   `UpdateConfigurationInheritance` to reset a member account's
+    #   configuration to inherit from the delegated administrator. The only
+    #   valid value is `INHERIT_FROM_ADMIN`, which resets the member
+    #   account's configuration so that it inherits scan settings from the
+    #   delegated administrator.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/inspector2-2020-06-08/UpdateConfigurationInheritance AWS API Documentation
     #
     class UpdateConfigurationInheritance < Struct.new(
       :ec2_configuration,
-      :ecr_configuration)
+      :ecr_configuration,
+      :ami_configuration)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10621,6 +11118,11 @@ module Aws::Inspector2
     #   environment.
     #   @return [Types::Ec2Configuration]
     #
+    # @!attribute [rw] ami_configuration
+    #   The Amazon Machine Image (AMI) scan configuration to apply to the
+    #   account.
+    #   @return [Types::AmiConfiguration]
+    #
     # @!attribute [rw] update_configuration_inheritance
     #   Specifies which scan-type configurations to reset to the delegated
     #   administrator's inherited values for the targeted member account.
@@ -10637,6 +11139,7 @@ module Aws::Inspector2
       :account_id,
       :ecr_configuration,
       :ec2_configuration,
+      :ami_configuration,
       :update_configuration_inheritance)
       SENSITIVE = []
       include Aws::Structure

@@ -681,6 +681,8 @@ module Aws::Lightsail
       attr_accessor enable_private_origin_access: bool
       attr_accessor default_root_object: ::String
       attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
+      attr_accessor enable_waf: bool
+      attr_accessor waf_rules: ::Array[Types::WafRule]
       SENSITIVE: []
     end
 
@@ -1633,7 +1635,7 @@ module Aws::Lightsail
 
     class GetDistributionMetricDataRequest
       attr_accessor distribution_name: ::String
-      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate")
+      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate" | "WafAllowedRequests" | "WafBlockedRequests")
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
       attr_accessor period: ::Integer
@@ -1643,7 +1645,7 @@ module Aws::Lightsail
     end
 
     class GetDistributionMetricDataResult
-      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate")
+      attr_accessor metric_name: ("Requests" | "BytesDownloaded" | "BytesUploaded" | "TotalErrorRate" | "Http4xxErrorRate" | "Http5xxErrorRate" | "WafAllowedRequests" | "WafBlockedRequests")
       attr_accessor metric_data: ::Array[Types::MetricDatapoint]
       SENSITIVE: []
     end
@@ -1732,6 +1734,7 @@ module Aws::Lightsail
 
     class GetInstanceRequest
       attr_accessor instance_name: ::String
+      attr_accessor include_health_status: bool
       SENSITIVE: []
     end
 
@@ -1773,6 +1776,7 @@ module Aws::Lightsail
 
     class GetInstancesRequest
       attr_accessor page_token: ::String
+      attr_accessor include_health_status: bool
       SENSITIVE: []
     end
 
@@ -2156,6 +2160,8 @@ module Aws::Lightsail
       attr_accessor username: ::String
       attr_accessor ssh_key_name: ::String
       attr_accessor metadata_options: Types::InstanceMetadataOptions
+      attr_accessor instance_status: Types::InstanceHealthStatus
+      attr_accessor system_status: Types::InstanceHealthStatus
       SENSITIVE: []
     end
 
@@ -2174,6 +2180,11 @@ module Aws::Lightsail
       SENSITIVE: []
     end
 
+    class InstanceAttributeUpdates
+      attr_accessor bundle_id: ::String
+      SENSITIVE: []
+    end
+
     class InstanceEntry
       attr_accessor source_name: ::String
       attr_accessor instance_type: ::String
@@ -2187,6 +2198,19 @@ module Aws::Lightsail
       attr_accessor cpu_count: ::Integer
       attr_accessor disks: ::Array[Types::Disk]
       attr_accessor ram_size_in_gb: ::Float
+      SENSITIVE: []
+    end
+
+    class InstanceHealthStatus
+      attr_accessor status: ("ok" | "impaired" | "initializing" | "insufficient-data" | "not-applicable")
+      attr_accessor details: ::Array[Types::InstanceHealthStatusDetail]
+      SENSITIVE: []
+    end
+
+    class InstanceHealthStatusDetail
+      attr_accessor name: ("reachability")
+      attr_accessor status: ("passed" | "failed" | "insufficient-data" | "initializing")
+      attr_accessor impaired_since: ::Time
       SENSITIVE: []
     end
 
@@ -2322,6 +2346,7 @@ module Aws::Lightsail
       attr_accessor viewer_minimum_tls_protocol_version: ::String
       attr_accessor default_root_object: ::String
       attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
+      attr_accessor waf: Types::WafConfig
       SENSITIVE: []
     end
 
@@ -2938,6 +2963,7 @@ module Aws::Lightsail
 
     class StartInstanceRequest
       attr_accessor instance_name: ::String
+      attr_accessor attribute_updates: Types::InstanceAttributeUpdates
       SENSITIVE: []
     end
 
@@ -3136,6 +3162,8 @@ module Aws::Lightsail
       attr_accessor enable_private_origin_access: bool
       attr_accessor default_root_object: ::String
       attr_accessor custom_error_responses: ::Array[Types::DistributionCustomErrorResponse]
+      attr_accessor enable_waf: bool
+      attr_accessor waf_rules: ::Array[Types::WafRule]
       SENSITIVE: []
     end
 
@@ -3209,6 +3237,48 @@ module Aws::Lightsail
 
     class UpdateRelationalDatabaseResult
       attr_accessor operations: ::Array[Types::Operation]
+      SENSITIVE: []
+    end
+
+    class WafAcfpConfig
+      attr_accessor payload_type: ("JSON" | "FORM_ENCODED")
+      attr_accessor creation_path: ::String
+      attr_accessor registration_page_path: ::String
+      attr_accessor response_inspection: Types::WafResponseInspection
+      SENSITIVE: []
+    end
+
+    class WafAtpConfig
+      attr_accessor login_path: ::String
+      attr_accessor payload_type: ("JSON" | "FORM_ENCODED")
+      attr_accessor username_field: ::String
+      attr_accessor password_field: ::String
+      attr_accessor response_inspection: Types::WafResponseInspection
+      SENSITIVE: []
+    end
+
+    class WafBotControlConfig
+      attr_accessor inspection_level: ("COMMON" | "TARGETED")
+      SENSITIVE: []
+    end
+
+    class WafConfig
+      attr_accessor is_waf_enabled: bool
+      attr_accessor waf_rules: ::Array[Types::WafRule]
+      SENSITIVE: []
+    end
+
+    class WafResponseInspection
+      attr_accessor success_codes: ::Array[::Integer]
+      attr_accessor failure_codes: ::Array[::Integer]
+      SENSITIVE: []
+    end
+
+    class WafRule
+      attr_accessor name: ::String
+      attr_accessor atp_config: Types::WafAtpConfig
+      attr_accessor acfp_config: Types::WafAcfpConfig
+      attr_accessor bot_control_config: Types::WafBotControlConfig
       SENSITIVE: []
     end
   end

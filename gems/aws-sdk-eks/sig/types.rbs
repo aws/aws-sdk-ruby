@@ -534,6 +534,11 @@ module Aws::EKS
       SENSITIVE: []
     end
 
+    class CrdManagementConfiguration
+      attr_accessor managed: bool
+      SENSITIVE: []
+    end
+
     class CreateAccessConfigRequest
       attr_accessor bootstrap_cluster_creator_admin_permissions: bool
       attr_accessor authentication_mode: ("API" | "API_AND_CONFIG_MAP" | "CONFIG_MAP")
@@ -1085,6 +1090,7 @@ module Aws::EKS
 
     class ElasticLoadBalancing
       attr_accessor enabled: bool
+      attr_accessor gateway_api: Types::GatewayApiConfiguration
       SENSITIVE: []
     end
 
@@ -1140,6 +1146,11 @@ module Aws::EKS
     class FargateProfileSelector
       attr_accessor namespace: ::String
       attr_accessor labels: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class GatewayApiConfiguration
+      attr_accessor crds: Types::CrdManagementConfiguration
       SENSITIVE: []
     end
 

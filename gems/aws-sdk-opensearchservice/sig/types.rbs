@@ -85,6 +85,19 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class AddReplicationPeerRequest
+      attr_accessor domain_name: ::String
+      attr_accessor peer_domain_arn: ::String
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class AddReplicationPeerResponse
+      attr_accessor domain_arn: ::String
+      attr_accessor status: ("PENDING_SETUP" | "ACTIVE" | "SWITCHING_OVER" | "FAILING_OVER" | "PENDING_REMOVAL" | "DETACHED" | "EJECTED" | "FAILED")
+      SENSITIVE: []
+    end
+
     class AddTagsRequest
       attr_accessor arn: ::String
       attr_accessor tag_list: ::Array[Types::Tag]
@@ -371,6 +384,17 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class CategoryDiffResult
+      attr_accessor status: ("compared" | "error")
+      attr_accessor in_sync: ::Integer
+      attr_accessor source_only: ::Integer
+      attr_accessor target_only: ::Integer
+      attr_accessor diverged: ::Integer
+      attr_accessor items: Types::DiffItems
+      attr_accessor truncated: bool
+      SENSITIVE: []
+    end
+
     class ChangeProgressDetails
       attr_accessor change_id: ::String
       attr_accessor message: ::String
@@ -449,6 +473,20 @@ module Aws::OpenSearchService
 
     class ColdStorageOptions
       attr_accessor enabled: bool
+      SENSITIVE: []
+    end
+
+    class CompareDomainConfigurationRequest
+      attr_accessor source_domain_arn: ::String
+      attr_accessor target_domain_arn: ::String
+      attr_accessor categories: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class CompareDomainConfigurationResponse
+      attr_accessor source_domain_arn: ::String
+      attr_accessor target_domain_arn: ::String
+      attr_accessor categories: ::Hash[::String, Types::CategoryDiffResult]
       SENSITIVE: []
     end
 
@@ -815,6 +853,18 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class DescribeDomainReplicationRequest
+      attr_accessor domain_name: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeDomainReplicationResponse
+      attr_accessor domain_arn: ::String
+      attr_accessor role: ("PRIMARY" | "SECONDARY")
+      attr_accessor peers: ::Array[Types::ReplicationPeer]
+      SENSITIVE: []
+    end
+
     class DescribeDomainRequest
       attr_accessor domain_name: ::String
       SENSITIVE: []
@@ -968,6 +1018,13 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class DiffItems
+      attr_accessor source_only: ::Array[::String]
+      attr_accessor target_only: ::Array[::String]
+      attr_accessor diverged: ::Array[Types::DivergentItem]
+      SENSITIVE: []
+    end
+
     class DirectQueryDataSource
       attr_accessor data_source_name: ::String
       attr_accessor data_source_type: Types::DirectQueryDataSourceType
@@ -1017,6 +1074,20 @@ module Aws::OpenSearchService
 
     class DissociatePackagesResponse
       attr_accessor domain_package_details_list: ::Array[Types::DomainPackageDetails]
+      SENSITIVE: []
+    end
+
+    class DivergentField
+      attr_accessor path: ::String
+      attr_accessor source_value: ::String
+      attr_accessor target_value: ::String
+      attr_accessor policy: ("redacted")
+      SENSITIVE: []
+    end
+
+    class DivergentItem
+      attr_accessor name: ::String
+      attr_accessor fields: ::Array[Types::DivergentField]
       SENSITIVE: []
     end
 
@@ -1227,6 +1298,19 @@ module Aws::OpenSearchService
       attr_accessor types: ::Array[::String]
       attr_accessor objects: ::Array[Types::SavedObjectIdentifier]
       attr_accessor include_references_deep: bool
+      SENSITIVE: []
+    end
+
+    class FailoverReplicationRequest
+      attr_accessor domain_name: ::String
+      attr_accessor peer_domain_arn: ::String
+      attr_accessor allow_data_loss: bool
+      SENSITIVE: []
+    end
+
+    class FailoverReplicationResponse
+      attr_accessor domain_arn: ::String
+      attr_accessor status: ("PENDING_SETUP" | "ACTIVE" | "SWITCHING_OVER" | "FAILING_OVER" | "PENDING_REMOVAL" | "DETACHED" | "EJECTED" | "FAILED")
       SENSITIVE: []
     end
 
@@ -2088,9 +2172,29 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class RemoveReplicationPeerRequest
+      attr_accessor domain_name: ::String
+      attr_accessor peer_domain_arn: ::String
+      SENSITIVE: []
+    end
+
+    class RemoveReplicationPeerResponse
+      attr_accessor domain_arn: ::String
+      attr_accessor status: ("PENDING_SETUP" | "ACTIVE" | "SWITCHING_OVER" | "FAILING_OVER" | "PENDING_REMOVAL" | "DETACHED" | "EJECTED" | "FAILED")
+      SENSITIVE: []
+    end
+
     class RemoveTagsRequest
       attr_accessor arn: ::String
       attr_accessor tag_keys: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ReplicationPeer
+      attr_accessor peer_domain_arn: ::String
+      attr_accessor peer_role: ("PRIMARY" | "SECONDARY")
+      attr_accessor status: ("PENDING_SETUP" | "ACTIVE" | "SWITCHING_OVER" | "FAILING_OVER" | "PENDING_REMOVAL" | "DETACHED" | "EJECTED" | "FAILED")
+      attr_accessor status_message: ::String
       SENSITIVE: []
     end
 
@@ -2327,6 +2431,18 @@ module Aws::OpenSearchService
     class StorageTypeLimit
       attr_accessor limit_name: ::String
       attr_accessor limit_values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SwitchoverReplicationRequest
+      attr_accessor domain_name: ::String
+      attr_accessor peer_domain_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SwitchoverReplicationResponse
+      attr_accessor domain_arn: ::String
+      attr_accessor status: ("PENDING_SETUP" | "ACTIVE" | "SWITCHING_OVER" | "FAILING_OVER" | "PENDING_REMOVAL" | "DETACHED" | "EJECTED" | "FAILED")
       SENSITIVE: []
     end
 

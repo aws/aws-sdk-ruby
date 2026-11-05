@@ -15,7 +15,7 @@ module Aws::CloudWatchLogs
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
       attr_accessor last_updated_time: ::Integer
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY" | "RETENTION_POLICY")
       attr_accessor scope: ("ALL")
       attr_accessor selection_criteria: ::String
       attr_accessor account_id: ::String
@@ -308,7 +308,13 @@ module Aws::CloudWatchLogs
 
     class DeleteAccountPolicyRequest
       attr_accessor policy_name: ::String
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY" | "RETENTION_POLICY")
+      attr_accessor dry_run: bool
+      SENSITIVE: []
+    end
+
+    class DeleteAccountPolicyResponse
+      attr_accessor dry_run_result: Types::DryRunResult
       SENSITIVE: []
     end
 
@@ -491,7 +497,7 @@ module Aws::CloudWatchLogs
     end
 
     class DescribeAccountPoliciesRequest
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY" | "RETENTION_POLICY")
       attr_accessor policy_name: ::String
       attr_accessor account_identifiers: ::Array[::String]
       attr_accessor next_token: ::String
@@ -792,6 +798,16 @@ module Aws::CloudWatchLogs
 
     class DisassociateSourceFromS3TableIntegrationResponse
       attr_accessor identifier: ::String
+      SENSITIVE: []
+    end
+
+    class DryRunResult
+      attr_accessor total_matched_log_groups: ::Integer
+      attr_accessor increased_retention_log_group_count: ::Integer
+      attr_accessor decreased_retention_log_group_count: ::Integer
+      attr_accessor unchanged_retention_log_group_count: ::Integer
+      attr_accessor failed_analysis_count: ::Integer
+      attr_accessor top_log_groups_impacted: ::Array[Types::LogGroupImpact]
       SENSITIVE: []
     end
 
@@ -1449,12 +1465,21 @@ module Aws::CloudWatchLogs
       attr_accessor log_group_arn: ::String
       attr_accessor deletion_protection_enabled: bool
       attr_accessor bearer_token_authentication_enabled: bool
+      attr_accessor retention_policy_name: ::String
       SENSITIVE: []
     end
 
     class LogGroupField
       attr_accessor name: ::String
       attr_accessor percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class LogGroupImpact
+      attr_accessor log_group_name: ::String
+      attr_accessor current_retention: ::String
+      attr_accessor proposed_retention: ::String
+      attr_accessor stored_bytes: ::Integer
       SENSITIVE: []
     end
 
@@ -1731,14 +1756,16 @@ module Aws::CloudWatchLogs
     class PutAccountPolicyRequest
       attr_accessor policy_name: ::String
       attr_accessor policy_document: ::String
-      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY")
+      attr_accessor policy_type: ("DATA_PROTECTION_POLICY" | "SUBSCRIPTION_FILTER_POLICY" | "FIELD_INDEX_POLICY" | "TRANSFORMER_POLICY" | "METRIC_EXTRACTION_POLICY" | "RETENTION_POLICY")
       attr_accessor scope: ("ALL")
       attr_accessor selection_criteria: ::String
+      attr_accessor dry_run: bool
       SENSITIVE: []
     end
 
     class PutAccountPolicyResponse
       attr_accessor account_policy: Types::AccountPolicy
+      attr_accessor dry_run_result: Types::DryRunResult
       SENSITIVE: []
     end
 

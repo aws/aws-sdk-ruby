@@ -33,6 +33,35 @@ module Aws
         expect(resp.next_marker).to be(nil)
       end
 
+      describe 'response paging' do
+        let(:client) { Client.new(options.merge(stub_responses: true)) }
+
+        it 'pages through list_objects_v2 results' do
+          client.stub_responses(
+            :list_objects_v2,
+            [
+              { contents: [{ key: 'a' }], is_truncated: true,
+                next_continuation_token: 'token' },
+              { contents: [{ key: 'b' }], is_truncated: false }
+            ]
+          )
+          resp = client.list_objects_v2(bucket: 'b')
+          expect(resp.next_page?).to be(true)
+          keys = resp.each_page.flat_map { |page| page.contents.map(&:key) }
+          expect(keys).to eq(%w[a b])
+          expect(client.api_requests.last[:params])
+            .to include(continuation_token: 'token')
+        end
+
+        it 'returns a single page for nonpaginated operations' do
+          resp = client.head_bucket(bucket: 'b')
+          expect(resp.last_page?).to be(true)
+          expect(resp.each_page.to_a).to eq([resp])
+          expect { resp.next_page }
+            .to raise_error(Aws::PageableResponse::LastPageError)
+        end
+      end
+
       describe 'request ids' do
         it 'populates request id and host id in the response context' do
           options.merge!(stub_responses: true)

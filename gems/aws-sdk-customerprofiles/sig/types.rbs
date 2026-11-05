@@ -1308,6 +1308,9 @@ module Aws::CustomerProfiles
       attr_accessor template_id: ::String
       attr_accessor source_name: ::String
       attr_accessor source_object: ::String
+      attr_accessor default_max_profile_object_count: ::Integer
+      attr_accessor default_max_profile_object_count_effective_after: ::Time
+      attr_accessor store_only: bool
       attr_accessor allow_profile_creation: bool
       attr_accessor source_last_updated_timestamp_format: ::String
       attr_accessor fields: ::Hash[::String, Types::ObjectTypeField]

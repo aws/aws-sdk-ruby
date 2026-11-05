@@ -48,6 +48,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
       attr_accessor kms_key_id: ::String
       attr_accessor cluster_configuration: Types::ClusterConfiguration
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
       attr_accessor db_parameter_group_id: ::String
       attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
@@ -80,6 +81,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor vpc_subnet_ids: ::Array[::String]
       attr_accessor vpc_security_group_ids: ::Array[::String]
       attr_accessor deployment_type: ("MULTI_NODE_READ_REPLICAS")
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
       attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
@@ -274,6 +276,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
       attr_accessor kms_key_id: ::String
       attr_accessor cluster_configuration: Types::ClusterConfiguration
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
       attr_accessor db_parameter_group_id: ::String
       attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
@@ -338,6 +341,17 @@ module Aws::TimestreamInfluxDB
       SENSITIVE: []
     end
 
+    class DeploymentConfiguration
+      attr_accessor influx_d_bv_3_enterprise: Types::InfluxDBv3EnterpriseDeploymentConfiguration
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class InfluxDBv3Enterprise < DeploymentConfiguration
+      end
+      class Unknown < DeploymentConfiguration
+      end
+    end
+
     class Duration
       attr_accessor duration_type: ("hours" | "minutes" | "seconds" | "milliseconds" | "days")
       attr_accessor value: ::Integer
@@ -362,6 +376,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor deployment_type: ("SINGLE_AZ" | "WITH_MULTIAZ_STANDBY" | "MULTI_NODE_READ_REPLICAS")
       attr_accessor kms_key_id: ::String
       attr_accessor cluster_configuration: Types::ClusterConfiguration
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
       attr_accessor db_parameter_group_id: ::String
       attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
       attr_accessor log_delivery_configuration: Types::LogDeliveryConfiguration
@@ -409,6 +424,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor vpc_security_group_ids: ::Array[::String]
       attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
       attr_accessor cluster_configuration: Types::ClusterConfiguration
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
       attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfigurationOutput]
       attr_accessor kms_key_id: ::String
       SENSITIVE: []
@@ -544,6 +560,11 @@ module Aws::TimestreamInfluxDB
       attr_accessor hard_delete_default_duration: Types::Duration
       attr_accessor plugin_repository_url: ::String
       attr_accessor plugin_repository_secret_arn: ::String
+      SENSITIVE: []
+    end
+
+    class InfluxDBv3EnterpriseDeploymentConfiguration
+      attr_accessor node_groups: ::Array[Types::NodeGroup]
       SENSITIVE: []
     end
 
@@ -697,6 +718,13 @@ module Aws::TimestreamInfluxDB
       SENSITIVE: []
     end
 
+    class NodeGroup
+      attr_accessor instance_modes: ::Array[("PRIMARY" | "STANDBY" | "REPLICA" | "INGEST" | "QUERY" | "COMPACT" | "PROCESS")]
+      attr_accessor instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+      attr_accessor count: ::Integer
+      SENSITIVE: []
+    end
+
     class Parameters
       attr_accessor influx_d_bv_2: Types::InfluxDBv2Parameters
       attr_accessor influx_d_bv_3_core: Types::InfluxDBv3CoreParameters
@@ -845,6 +873,7 @@ module Aws::TimestreamInfluxDB
       attr_accessor db_parameter_group_identifier: ::String
       attr_accessor port: ::Integer
       attr_accessor db_instance_type: ("db.influx.medium" | "db.influx.large" | "db.influx.xlarge" | "db.influx.2xlarge" | "db.influx.4xlarge" | "db.influx.8xlarge" | "db.influx.12xlarge" | "db.influx.16xlarge" | "db.influx.24xlarge")
+      attr_accessor deployment_configuration: Types::DeploymentConfiguration
       attr_accessor failover_mode: ("AUTOMATIC" | "NO_FAILOVER")
       attr_accessor maintenance_schedule: Types::MaintenanceSchedule
       attr_accessor db_backup_configurations: ::Array[Types::DbBackupConfiguration]

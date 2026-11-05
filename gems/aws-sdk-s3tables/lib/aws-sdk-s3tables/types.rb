@@ -37,6 +37,19 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the migrated table to complete the
+    #   migration of.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/CompleteTableMigrationRequest AWS API Documentation
+    #
+    class CompleteTableMigrationRequest < Struct.new(
+      :table_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The request failed because there is a conflict with a previous write.
     # You can retry the request.
     #
@@ -240,6 +253,62 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # The maintenance settings and migration policies for the destination
+    # table.
+    #
+    # @!attribute [rw] maintenance_settings
+    #   The maintenance settings for the destination table. The migration
+    #   applies them when it creates the table: snapshot management starts
+    #   then, and compaction starts after you complete the migration. If you
+    #   don't specify a setting, the migration uses its default: a target
+    #   file size of 512 MB, the binpack compaction strategy, at least 3
+    #   snapshots, and a maximum snapshot age of 120 hours. Unreferenced
+    #   file removal follows the table bucket's configuration after you
+    #   complete the migration.
+    #   @return [Types::MaintenanceSettings]
+    #
+    # @!attribute [rw] migration_policies
+    #   The policies for source data that doesn't fit the destination
+    #   schema.
+    #   @return [Types::MigrationPolicies]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/DataMigrationOverview AWS API Documentation
+    #
+    class DataMigrationOverview < Struct.new(
+      :maintenance_settings,
+      :migration_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The maintenance settings and migration policies for the destination
+    # table.
+    #
+    # @!attribute [rw] maintenance_settings
+    #   The maintenance settings for the destination table. The migration
+    #   applies them when it creates the table: snapshot management starts
+    #   then, and compaction starts after you complete the migration. If you
+    #   don't specify a setting, the migration uses its default: a target
+    #   file size of 512 MB, the binpack compaction strategy, at least 3
+    #   snapshots, and a maximum snapshot age of 120 hours. Unreferenced
+    #   file removal follows the table bucket's configuration after you
+    #   complete the migration.
+    #   @return [Types::MaintenanceSettings]
+    #
+    # @!attribute [rw] migration_policies
+    #   The policies for source data that doesn't fit the destination
+    #   schema.
+    #   @return [Types::MigrationPolicies]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/DataMigrationSettings AWS API Documentation
+    #
+    class DataMigrationSettings < Struct.new(
+      :maintenance_settings,
+      :migration_policies)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket associated with
     #   the namespace.
@@ -391,6 +460,101 @@ module Aws::S3Tables
       :namespace,
       :name,
       :version_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The table that a migration creates in a table bucket and migrates the
+    # source into.
+    #
+    # @!attribute [rw] table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket to create the
+    #   table in.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace to create the table in.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the table to create.
+    #   @return [String]
+    #
+    # @!attribute [rw] encryption_configuration
+    #   The encryption configuration for the table. If you don't specify
+    #   one, the table uses the default encryption configuration of its
+    #   table bucket. If you specify an encryption configuration, the
+    #   migration role must have the `s3tables:PutTableEncryption`
+    #   permission. If you choose SSE-KMS, the migration role must have the
+    #   `kms:DescribeKey`, `kms:GenerateDataKey` and `kms:Decrypt`
+    #   permissions on the KMS key, and the S3 Tables maintenance principal
+    #   must have access to it. For more information, see [Permissions
+    #   requirements for S3 Tables SSE-KMS encryption][1].
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables-kms-permissions.html
+    #   @return [Types::EncryptionConfiguration]
+    #
+    # @!attribute [rw] storage_class_configuration
+    #   The storage class configuration for the table. If you don't specify
+    #   one, the table inherits the storage class configuration of its table
+    #   bucket. If you specify a storage class configuration, the migration
+    #   role must have the `s3tables:PutTableStorageClass` permission.
+    #   @return [Types::StorageClassConfiguration]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the table. A tag is a key-value pair that you
+    #   apply to your resources. For more information, see [Tagging for cost
+    #   allocation or attribute-based access control (ABAC)][1]. If you
+    #   specify tags, the migration role must have the
+    #   `s3tables:TagResource` permission.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/tagging.html
+    #   @return [Hash<String,String>]
+    #
+    # @!attribute [rw] properties
+    #   The properties of the destination table, such as its Iceberg format
+    #   version and the format of its data files.
+    #   @return [Types::MigrationTableProperties]
+    #
+    # @!attribute [rw] schema
+    #   The schema of the table to create. If you don't specify a schema,
+    #   the migration infers it from the source table, with every column
+    #   optional. A schema that you specify must include every partition
+    #   column of the source table. It can leave out other columns only if
+    #   `unmatchedSourceFieldsPolicy` is `drop`. A struct column must have
+    #   the same fields as the source column. Column default values aren't
+    #   supported. If you mark a column as required, every source object
+    #   must have a value for it: an object with a null value in a required
+    #   column fails to migrate. The destination table is partitioned in the
+    #   same way as the source table. To specify fields in
+    #   `icebergSortOrder`, you must specify a schema.
+    #   @return [Types::IcebergSchemaV2]
+    #
+    # @!attribute [rw] iceberg_sort_order
+    #   The sort order of the rows within each data file that the migration
+    #   writes. A sort order can have up to five fields, each naming a
+    #   column of the schema that you specify by its field ID, so to use a
+    #   sort order you must specify a schema. `StartTableMigration` rejects
+    #   a field that names no column of the schema, or whose transform
+    #   doesn't fit the column's type.
+    #   @return [Types::IcebergSortOrder]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/DestinationTable AWS API Documentation
+    #
+    class DestinationTable < Struct.new(
+      :table_bucket_arn,
+      :namespace,
+      :name,
+      :encryption_configuration,
+      :storage_class_configuration,
+      :tags,
+      :properties,
+      :schema,
+      :iceberg_sort_order)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -864,6 +1028,177 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # @!attribute [rw] migration_id
+    #   The ID of the migration to get. Specify either `migrationId` or
+    #   `tableARN`, not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the destination table. Gets the
+    #   table's most recent migration. Specify either `tableARN` or
+    #   `migrationId`, not both.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableMigrationRequest AWS API Documentation
+    #
+    class GetTableMigrationRequest < Struct.new(
+      :migration_id,
+      :table_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migration_id
+    #   The ID of the migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket that contains the
+    #   destination table.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the destination table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the destination table, once the
+    #   migration creates it.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the destination table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the migration. Valid values:
+    #
+    #   * `start` - A migration that `StartTableMigration` started.
+    #
+    #   * `sync` - A migration that `SyncTableMigration` started.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the migration. Valid values:
+    #
+    #   * `new` - S3 Tables accepted the request.
+    #
+    #   * `planning` - The migration is checking the source table, its
+    #     objects and the destination for compatibility, and writing the
+    #     compatibility reports.
+    #
+    #   * `pendingReview` - Planning finished, and the migration waits for
+    #     you to continue or cancel it with `UpdateTableMigration`.
+    #
+    #   * `queued` - The migration is waiting to start migrating data.
+    #
+    #   * `migrating` - The migration is running the plan from the
+    #     `planning` state: it copies data and commits it to the destination
+    #     table. A migration reaches this state only if `hasValidPlan` is
+    #     `true`.
+    #
+    #   * `succeeded` - Every planned object migrated.
+    #
+    #   * `failed` - The migration failed. Check `failureReason` for the
+    #     cause.
+    #
+    #   * `cancelling` - You cancelled the migration, and it is finishing
+    #     the work in progress.
+    #
+    #   * `cancelled` - The migration is cancelled.
+    #
+    #   A migration ends in the `succeeded`, `failed` or `cancelled` state.
+    #   You can cancel it until it ends.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the migration
+    #   uses.
+    #   @return [String]
+    #
+    # @!attribute [rw] review_migration_plan
+    #   A Boolean value that specifies whether the migration waits in the
+    #   `pendingReview` state, so that you can review the compatibility
+    #   reports before it migrates any data.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] has_valid_plan
+    #   A Boolean value that specifies whether planning produced a plan that
+    #   the migration can run. If planning hasn't finished, this value
+    #   isn't returned.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the migration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state_updated_at
+    #   The date and time that the migration's state last changed.
+    #   @return [Time]
+    #
+    # @!attribute [rw] failure_reason
+    #   The reason that the migration failed. The code names the cause, such
+    #   as a migration role that S3 Tables can't assume or an Amazon Web
+    #   Services Glue table that doesn't exist, or the report that lists
+    #   the findings. This value is returned only when the migration is in
+    #   the `failed` state.
+    #   @return [Types::MigrationFailureReason]
+    #
+    # @!attribute [rw] planning_stats
+    #   Statistics about the source and the partitions in the migration.
+    #   This value is returned after planning finishes.
+    #   @return [Types::PlanningStats]
+    #
+    # @!attribute [rw] migration_stats
+    #   The number of objects that migrated, failed or are pending. These
+    #   counts are set when planning finishes and updated when the migration
+    #   ends.
+    #   @return [Types::MigrationStats]
+    #
+    # @!attribute [rw] source_type
+    #   The type of the migration's source.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source table of the migration.
+    #   @return [Types::SourceConfiguration]
+    #
+    # @!attribute [rw] data_migration
+    #   The maintenance settings and migration policies for the destination
+    #   table.
+    #   @return [Types::DataMigrationOverview]
+    #
+    # @!attribute [rw] migration_output
+    #   The bucket and prefixes for the migration's reports, and the
+    #   location of each report once it is written.
+    #   @return [Types::MigrationOutputOverview]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GetTableMigrationResponse AWS API Documentation
+    #
+    class GetTableMigrationResponse < Struct.new(
+      :migration_id,
+      :table_bucket_arn,
+      :namespace,
+      :table_arn,
+      :name,
+      :type,
+      :state,
+      :role_arn,
+      :review_migration_plan,
+      :has_valid_plan,
+      :created_at,
+      :state_updated_at,
+      :failure_reason,
+      :planning_stats,
+      :migration_stats,
+      :source_type,
+      :source,
+      :data_migration,
+      :migration_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] table_bucket_arn
     #   The Amazon Resource Name (ARN) of the table bucket that contains the
     #   table.
@@ -1180,6 +1515,38 @@ module Aws::S3Tables
     #
     class GetTableStorageClassResponse < Struct.new(
       :storage_class_configuration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An Amazon Web Services Glue Data Catalog table to migrate. The table
+    # must be an external Apache Hive table whose data is stored as Parquet
+    # in a general purpose bucket in the same account and Region as the
+    # table bucket. Views, transactional (ACID) tables, tables in an open
+    # table format such as Apache Iceberg, and tables registered with Amazon
+    # Web Services Lake Formation can't be migrated. If the table can't be
+    # migrated, the migration fails, and the table compatibility report
+    # lists the reason.
+    #
+    # @!attribute [rw] catalog_id
+    #   The ID of the Data Catalog that contains the table. It must be your
+    #   account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] database_name
+    #   The name of the database that contains the table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The name of the table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/GlueTableSource AWS API Documentation
+    #
+    class GlueTableSource < Struct.new(
+      :catalog_id,
+      :database_name,
+      :table_name)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1604,6 +1971,81 @@ module Aws::S3Tables
     end
 
     # @!attribute [rw] table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket to list
+    #   migrations for.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace to list migrations for. Requires `tableBucketARN`.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the table to list migrations for. Requires
+    #   `tableBucketARN` and `namespace`.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the table to list migrations for.
+    #   The list includes the migrations into this table. To also list
+    #   migrations into an earlier table of the same name, specify
+    #   `tableBucketARN`, `namespace` and `name` instead. Specify either
+    #   `tableARN` or `tableBucketARN`, not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state to filter the list by. For the valid values, see the
+    #   `state` member of `GetTableMigration`.
+    #   @return [String]
+    #
+    # @!attribute [rw] has_valid_plan
+    #   The `hasValidPlan` value to filter the list by. Migrations that are
+    #   still planning aren't listed, whichever value you specify.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of migrations to return, from 1 to 1,000. If you
+    #   don't specify a value, the default is 100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] next_token
+    #   The `nextToken` from a previous response, to get the next page of
+    #   results.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/ListTableMigrationsRequest AWS API Documentation
+    #
+    class ListTableMigrationsRequest < Struct.new(
+      :table_bucket_arn,
+      :namespace,
+      :name,
+      :table_arn,
+      :state,
+      :has_valid_plan,
+      :max_results,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migrations
+    #   The migrations, newest first.
+    #   @return [Array<Types::MigrationSummary>]
+    #
+    # @!attribute [rw] next_token
+    #   A token to pass as `nextToken` to get the next page of results. If
+    #   there are no more results, this value isn't returned.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/ListTableMigrationsResponse AWS API Documentation
+    #
+    class ListTableMigrationsResponse < Struct.new(
+      :migrations,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_bucket_arn
     #   The Amazon resource Name (ARN) of the table bucket.
     #   @return [String]
     #
@@ -1693,6 +2135,32 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # The maintenance settings for the destination table. The migration
+    # applies them when it creates the table: snapshot management starts
+    # then, and compaction starts after you complete the migration. If you
+    # don't specify a setting, the migration uses its default: a target
+    # file size of 512 MB, the binpack compaction strategy, at least 3
+    # snapshots, and a maximum snapshot age of 120 hours. Unreferenced file
+    # removal follows the table bucket's configuration after you complete
+    # the migration.
+    #
+    # @!attribute [rw] iceberg_compaction
+    #   The compaction settings.
+    #   @return [Types::MigrationCompactionSettings]
+    #
+    # @!attribute [rw] iceberg_snapshot_management
+    #   The snapshot management settings.
+    #   @return [Types::MigrationSnapshotManagementSettings]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MaintenanceSettings AWS API Documentation
+    #
+    class MaintenanceSettings < Struct.new(
+      :iceberg_compaction,
+      :iceberg_snapshot_management)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains information about tables that are managed by S3 Tables,
     # including replication information for replica tables.
     #
@@ -1720,6 +2188,418 @@ module Aws::S3Tables
     #
     class MethodNotAllowedException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The compaction settings that a migration applies to the destination
+    # table.
+    #
+    # @!attribute [rw] target_file_size_mb
+    #   The target size, from 64 to 512 MB, of the data files that the
+    #   migration writes, and of the files that compaction writes after you
+    #   complete the migration. The default is 512.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] strategy
+    #   The compaction strategy. The only valid value is `binpack`, which is
+    #   the default.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationCompactionSettings AWS API Documentation
+    #
+    class MigrationCompactionSettings < Struct.new(
+      :target_file_size_mb,
+      :strategy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The reason that a migration failed: a code and, when there is one, the
+    # resource or reason it applies to. This value is returned only when the
+    # migration is in the `failed` state.
+    #
+    # @!attribute [rw] code
+    #   The failure code. It names the cause or the report that lists the
+    #   findings. Valid values:
+    #
+    #   * `rolePermissions` - S3 Tables couldn't assume the migration role,
+    #     or the role doesn't have a permission that the migration needs.
+    #     `detail` is the role ARN.
+    #
+    #   * `sourcePermissions` - The migration role couldn't read the Amazon
+    #     Web Services Glue table or the source objects. `detail` names the
+    #     table (`database.table`) or the source bucket.
+    #
+    #   * `destinationPermissions` - The migration role couldn't write to
+    #     the table bucket or the report bucket. `detail` names the bucket.
+    #
+    #   * `resourceNotFound` - A resource that you specified doesn't exist,
+    #     such as the Amazon Web Services Glue table or the source bucket.
+    #     `detail` names it.
+    #
+    #   * `sourceNotSupported` - The source table can't be migrated, for
+    #     example because it is empty, has too many objects, or has columns
+    #     or partitions that can't be migrated. The table compatibility
+    #     report lists the findings.
+    #
+    #   * `tableCompatibilityReport` - The migration couldn't create the
+    #     destination table, for example because a table with that name
+    #     already exists or the KMS key can't be used. For a sync, the
+    #     destination table changed after the previous migration. The table
+    #     compatibility report lists the finding.
+    #
+    #   * `objectCompatibilityReport` - Some source objects can't be
+    #     migrated, for example because they are archived, or because they
+    #     were overwritten after an earlier migration migrated them. The
+    #     object compatibility report lists them.
+    #
+    #   * `objectMigrationReport` - Some source objects failed to migrate.
+    #     The object migration report lists them and the cause for each.
+    #
+    #   * `reportBucketNotSupported` - The report bucket can't receive the
+    #     migration's reports, for example because it is in a different
+    #     Region than the table bucket.
+    #
+    #   * `internalError` - S3 Tables encountered an internal error. Retry
+    #     the migration, and contact Amazon Web Services Support if the
+    #     error persists.
+    #   @return [String]
+    #
+    # @!attribute [rw] detail
+    #   The resource that the failure applies to, such as the role ARN, the
+    #   Amazon Web Services Glue table (`database.table`) or a bucket. For
+    #   `sourceNotSupported`, the reason that the source isn't supported,
+    #   such as `EMPTY_TABLE`. This value isn't returned for the report
+    #   codes or for `internalError`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationFailureReason AWS API Documentation
+    #
+    class MigrationFailureReason < Struct.new(
+      :code,
+      :detail)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The bucket and prefixes that a migration writes its reports to. Every
+    # report goes to one bucket, each under its own prefix.
+    #
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that the migration writes every report
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefixes
+    #   The key prefix for each report.
+    #   @return [Types::MigrationReportPrefixes]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationOutputConfiguration AWS API Documentation
+    #
+    class MigrationOutputConfiguration < Struct.new(
+      :bucket,
+      :prefixes)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Where a migration writes its reports, and the location of each report
+    # once it is written.
+    #
+    # @!attribute [rw] bucket
+    #   The general purpose bucket that the migration writes every report
+    #   to.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_compatibility_report
+    #   The table compatibility report: the sample object that the schema is
+    #   inferred from, the table-level findings, and one row for each
+    #   destination column with its type change and how the migration
+    #   policies apply to it. The migration writes it when planning
+    #   finishes, before any data migrates. If planning fails, the report
+    #   might not be written.
+    #   @return [Types::ReportOverview]
+    #
+    # @!attribute [rw] object_compatibility_report
+    #   The object compatibility report: one row for each source object
+    #   under the source table's location, with whether the migration
+    #   includes the object and its most severe finding. The migration
+    #   writes it when planning finishes. If planning fails, the report
+    #   might not be written.
+    #   @return [Types::ReportOverview]
+    #
+    # @!attribute [rw] object_migration_report
+    #   The object migration report: one row for each source object that the
+    #   migration tried to migrate, with whether it migrated, how it was
+    #   transformed, and why it failed. The migration writes it once, when
+    #   the migration ends. It isn't written if planning fails or if a sync
+    #   has nothing to migrate.
+    #   @return [Types::ReportOverview]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationOutputOverview AWS API Documentation
+    #
+    class MigrationOutputOverview < Struct.new(
+      :bucket,
+      :table_compatibility_report,
+      :object_compatibility_report,
+      :object_migration_report)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The policies for source data that doesn't fit the destination schema.
+    #
+    # @!attribute [rw] unmatched_source_fields_policy
+    #   The migration policy for a source field that has no matching column
+    #   in the destination schema. Valid values:
+    #
+    #   * `fail` - Fails the migration. This is the default.
+    #
+    #   * `drop` - Leaves source columns that the destination schema
+    #     doesn't have out of the destination table, and doesn't migrate
+    #     source objects outside the Amazon Web Services Glue table's
+    #     partition locations.
+    #
+    #   A destination schema that leaves out a partition column or a field
+    #   of a struct column fails the migration under either value.
+    #   @return [String]
+    #
+    # @!attribute [rw] incompatible_values_policy
+    #   The migration policy for a source value that the destination
+    #   column's type can't hold. Valid values:
+    #
+    #   * `fail` - Fails the migration. This is the default.
+    #
+    #   * `setNull` - Writes null for a value that the destination column's
+    #     type can't hold. If a column's type in a source object is
+    #     incompatible with the destination column's type, the column is
+    #     null for that whole object.
+    #
+    #   A required column, or a type that migration doesn't support, fails
+    #   the migration under either value.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationPolicies AWS API Documentation
+    #
+    class MigrationPolicies < Struct.new(
+      :unmatched_source_fields_policy,
+      :incompatible_values_policy)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The key prefix for each report. If you don't specify a prefix for a
+    # report, its keys start at the root of the bucket.
+    #
+    # @!attribute [rw] table_compatibility_report
+    #   The key prefix for the table compatibility report, up to 512 bytes.
+    #   If not specified, the report's keys start at the root of the
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_compatibility_report
+    #   The key prefix for the object compatibility report, up to 512 bytes.
+    #   If not specified, the report's keys start at the root of the
+    #   bucket.
+    #   @return [String]
+    #
+    # @!attribute [rw] object_migration_report
+    #   The key prefix for the object migration report, up to 512 bytes. If
+    #   not specified, the report's keys start at the root of the bucket.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationReportPrefixes AWS API Documentation
+    #
+    class MigrationReportPrefixes < Struct.new(
+      :table_compatibility_report,
+      :object_compatibility_report,
+      :object_migration_report)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The snapshot management settings that a migration applies to the
+    # destination table.
+    #
+    # @!attribute [rw] min_snapshots_to_keep
+    #   The minimum number of snapshots to keep. The value must be 3 or
+    #   more. The default is 3.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_snapshot_age_hours
+    #   The maximum age, in hours, of a snapshot before it can be expired.
+    #   The default is 120.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationSnapshotManagementSettings AWS API Documentation
+    #
+    class MigrationSnapshotManagementSettings < Struct.new(
+      :min_snapshots_to_keep,
+      :max_snapshot_age_hours)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The number of source objects that migrated, failed or are pending. For
+    # a sync, the counts cover every object of the table after the sync,
+    # including objects that earlier migrations migrated. The counts are set
+    # when planning finishes and updated when the migration ends.
+    #
+    # @!attribute [rw] objects_migrated
+    #   The number of source objects whose data the migration wrote to the
+    #   destination table. Migrated data can be queried after the migration
+    #   commits it. If the migration fails or is cancelled, some migrated
+    #   objects might not be committed.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] objects_failed_migration
+    #   The number of source objects that didn't migrate, because they
+    #   failed or because another object, such as an object in the same
+    #   partition, failed. The object migration report lists the cause for
+    #   each object.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] objects_pending_migration
+    #   The number of source objects that haven't migrated or failed yet.
+    #   When a migration fails or is cancelled, these are the objects that
+    #   it didn't migrate.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationStats AWS API Documentation
+    #
+    class MigrationStats < Struct.new(
+      :objects_migrated,
+      :objects_failed_migration,
+      :objects_pending_migration)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A summary of a migration.
+    #
+    # @!attribute [rw] migration_id
+    #   The ID of the migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_bucket_arn
+    #   The Amazon Resource Name (ARN) of the table bucket that contains the
+    #   destination table.
+    #   @return [String]
+    #
+    # @!attribute [rw] namespace
+    #   The namespace of the destination table.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the destination table, once the
+    #   migration creates it.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the destination table.
+    #   @return [String]
+    #
+    # @!attribute [rw] type
+    #   The type of the migration. Valid values:
+    #
+    #   * `start` - A migration that `StartTableMigration` started.
+    #
+    #   * `sync` - A migration that `SyncTableMigration` started.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the migration. Valid values:
+    #
+    #   * `new` - S3 Tables accepted the request.
+    #
+    #   * `planning` - The migration is checking the source table, its
+    #     objects and the destination for compatibility, and writing the
+    #     compatibility reports.
+    #
+    #   * `pendingReview` - Planning finished, and the migration waits for
+    #     you to continue or cancel it with `UpdateTableMigration`.
+    #
+    #   * `queued` - The migration is waiting to start migrating data.
+    #
+    #   * `migrating` - The migration is running the plan from the
+    #     `planning` state: it copies data and commits it to the destination
+    #     table. A migration reaches this state only if `hasValidPlan` is
+    #     `true`.
+    #
+    #   * `succeeded` - Every planned object migrated.
+    #
+    #   * `failed` - The migration failed. Check `failureReason` for the
+    #     cause.
+    #
+    #   * `cancelling` - You cancelled the migration, and it is finishing
+    #     the work in progress.
+    #
+    #   * `cancelled` - The migration is cancelled.
+    #   @return [String]
+    #
+    # @!attribute [rw] has_valid_plan
+    #   A Boolean value that specifies whether planning produced a plan that
+    #   the migration can run. If planning hasn't finished, this value
+    #   isn't returned.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time that the migration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] state_updated_at
+    #   The date and time that the migration's state last changed.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationSummary AWS API Documentation
+    #
+    class MigrationSummary < Struct.new(
+      :migration_id,
+      :table_bucket_arn,
+      :namespace,
+      :table_arn,
+      :name,
+      :type,
+      :state,
+      :has_valid_plan,
+      :created_at,
+      :state_updated_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The properties of the data files that a migration writes. The
+    # migration also sets the compression codec and dictionary encoding as
+    # the destination table's write properties, so they remain the table's
+    # defaults after you complete the migration.
+    #
+    # @!attribute [rw] write_format
+    #   The file format of the data files. The only supported format is
+    #   `parquet`, the default.
+    #   @return [String]
+    #
+    # @!attribute [rw] iceberg_format_version
+    #   The Iceberg format version of the destination table. Valid values
+    #   are `2` and `3`. The default is `2`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compression_codec
+    #   The compression codec of the data files. The default is `zstd`.
+    #   @return [String]
+    #
+    # @!attribute [rw] dictionary_encoding
+    #   Specifies whether the data files use dictionary encoding. The
+    #   default is `true`.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/MigrationTableProperties AWS API Documentation
+    #
+    class MigrationTableProperties < Struct.new(
+      :write_format,
+      :iceberg_format_version,
+      :compression_codec,
+      :dictionary_encoding)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1774,6 +2654,38 @@ module Aws::S3Tables
     #
     class NotFoundException < Struct.new(
       :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Statistics about the source and the partitions in a migration.
+    #
+    # @!attribute [rw] objects_scanned
+    #   The number of source objects that the migration found under the
+    #   source table's location, whether or not it migrates them. The
+    #   object compatibility report has one row for each.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] objects_planned
+    #   The number of source objects in the migration. For a start, these
+    #   are the data files in the Amazon Web Services Glue table's
+    #   partitions, or under the table's location if the table isn't
+    #   partitioned. For a sync, these are all the data files of the table
+    #   after the sync, including files that earlier migrations migrated.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] partition_count
+    #   The number of partitions in the destination table after this
+    #   migration, or 0 if the source table isn't partitioned. This value
+    #   is returned when planning produces a valid plan.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/PlanningStats AWS API Documentation
+    #
+    class PlanningStats < Struct.new(
+      :objects_scanned,
+      :objects_planned,
+      :partition_count)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2137,6 +3049,49 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # A report of a migration: the prefix it is written under and, once it
+    # is written, its key, its checksum and, for the compatibility reports,
+    # the number of blocking findings in each category.
+    #
+    # @!attribute [rw] prefix
+    #   The key prefix that the report is written under.
+    #   @return [String]
+    #
+    # @!attribute [rw] key
+    #   The key of the report object in the bucket. For the object
+    #   compatibility and object migration reports, this is the report's
+    #   manifest; for the table compatibility report, it is the report
+    #   itself. This value is returned after the migration writes the
+    #   report. A migration doesn't always write every report. For example,
+    #   a migration that fails during planning doesn't write the object
+    #   migration report.
+    #   @return [String]
+    #
+    # @!attribute [rw] checksum_crc64nvme
+    #   The Base64-encoded CRC64NVME checksum of the object that `key`
+    #   names. For a report that has a manifest, the manifest lists the
+    #   checksum of each report file. This value is returned after the
+    #   migration writes the report.
+    #   @return [String]
+    #
+    # @!attribute [rw] invalid_findings
+    #   For the compatibility reports, the number of blocking findings in
+    #   each category. The object compatibility report counts each blocked
+    #   object once, under its most severe finding. Categories with no
+    #   blocking findings are left out.
+    #   @return [Hash<String,Integer>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/ReportOverview AWS API Documentation
+    #
+    class ReportOverview < Struct.new(
+      :prefix,
+      :key,
+      :checksum_crc64nvme,
+      :invalid_findings)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains details about a schema field.
     #
     # @!attribute [rw] id
@@ -2227,6 +3182,114 @@ module Aws::S3Tables
       include Aws::Structure
     end
 
+    # The source to migrate from. Set exactly one member, and set
+    # `sourceType` to match it.
+    #
+    # @note SourceConfiguration is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note SourceConfiguration is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of SourceConfiguration corresponding to the set member.
+    #
+    # @!attribute [rw] glue_table
+    #   An Amazon Web Services Glue Data Catalog table to migrate. The table
+    #   must be an external Apache Hive table whose data is stored as
+    #   Parquet in a general purpose bucket in the same account and Region
+    #   as the table bucket. Views, transactional (ACID) tables, tables in
+    #   an open table format such as Apache Iceberg, and tables registered
+    #   with Amazon Web Services Lake Formation can't be migrated. If the
+    #   table can't be migrated, the migration fails, and the table
+    #   compatibility report lists the reason.
+    #   @return [Types::GlueTableSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/SourceConfiguration AWS API Documentation
+    #
+    class SourceConfiguration < Struct.new(
+      :glue_table,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class GlueTable < SourceConfiguration; end
+      class Unknown < SourceConfiguration; end
+    end
+
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the migration
+    #   uses to read the source table and its data and to write the
+    #   destination table and the reports. The role must be in your account,
+    #   and its trust policy must allow `migration.s3tables.amazonaws.com`
+    #   to assume it. You can limit the trust policy to the destination
+    #   table bucket with the `aws:SourceArn` and `aws:SourceAccount`
+    #   condition keys.
+    #   @return [String]
+    #
+    # @!attribute [rw] destination_table
+    #   The table to create and migrate the source into.
+    #   @return [Types::DestinationTable]
+    #
+    # @!attribute [rw] source_type
+    #   The type of the source. It must match the member that you set in
+    #   `source`.
+    #   @return [String]
+    #
+    # @!attribute [rw] source
+    #   The source table to migrate.
+    #   @return [Types::SourceConfiguration]
+    #
+    # @!attribute [rw] data_migration
+    #   The maintenance settings and migration policies for the destination
+    #   table.
+    #   @return [Types::DataMigrationSettings]
+    #
+    # @!attribute [rw] review_migration_plan
+    #   Specifies whether the migration waits in the `pendingReview` state,
+    #   so that you can review the compatibility reports before it migrates
+    #   any data. If `true`, the migration continues when you call
+    #   `UpdateTableMigration` with `requestedState` set to `queued`. If you
+    #   don't continue or cancel the migration within 30 days, the
+    #   migration fails. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] migration_output
+    #   The bucket and prefixes that the migration writes its reports to.
+    #   The bucket must be a general purpose bucket in your account and in
+    #   the same Region as the table bucket, and the migration role must be
+    #   able to write objects to it. Otherwise, the migration fails when it
+    #   writes its first report.
+    #   @return [Types::MigrationOutputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/StartTableMigrationRequest AWS API Documentation
+    #
+    class StartTableMigrationRequest < Struct.new(
+      :role_arn,
+      :destination_table,
+      :source_type,
+      :source,
+      :data_migration,
+      :review_migration_plan,
+      :migration_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migration_id
+    #   The ID of the migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the migration when the request is accepted, such as
+    #   `planning`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/StartTableMigrationResponse AWS API Documentation
+    #
+    class StartTableMigrationResponse < Struct.new(
+      :migration_id,
+      :state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The configuration details for the storage class of tables or table
     # buckets. This allows you to optimize storage costs by selecting the
     # appropriate storage class based on your access patterns and
@@ -2242,6 +3305,67 @@ module Aws::S3Tables
     #
     class StorageClassConfiguration < Struct.new(
       :storage_class)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role that the sync uses to
+    #   read the source table and its data and to write the destination
+    #   table and the reports. The role must be in your account, and its
+    #   trust policy must allow `migration.s3tables.amazonaws.com` to assume
+    #   it. You can limit the trust policy to the destination table bucket
+    #   with the `aws:SourceArn` and `aws:SourceAccount` condition keys.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the destination table to sync. The
+    #   table must have a migration, and you must not have called
+    #   `CompleteTableMigration` for it.
+    #   @return [String]
+    #
+    # @!attribute [rw] review_migration_plan
+    #   Specifies whether the sync waits in the `pendingReview` state, so
+    #   that you can review the compatibility reports before it migrates any
+    #   data. If `true`, the migration continues when you call
+    #   `UpdateTableMigration` with `requestedState` set to `queued`. If you
+    #   don't continue or cancel the migration within 30 days, the
+    #   migration fails. The default is `false`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] migration_output
+    #   The bucket and prefixes that the sync writes its reports to. The
+    #   bucket must be a general purpose bucket in your account and in the
+    #   same Region as the table bucket, and the migration role must be able
+    #   to write objects to it. Otherwise, the migration fails when it
+    #   writes its first report.
+    #   @return [Types::MigrationOutputConfiguration]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/SyncTableMigrationRequest AWS API Documentation
+    #
+    class SyncTableMigrationRequest < Struct.new(
+      :role_arn,
+      :table_arn,
+      :review_migration_plan,
+      :migration_output)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migration_id
+    #   The migration ID of the sync.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the migration when the request is accepted, such as
+    #   `planning`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/SyncTableMigrationResponse AWS API Documentation
+    #
+    class SyncTableMigrationResponse < Struct.new(
+      :migration_id,
+      :state)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -2766,6 +3890,64 @@ module Aws::S3Tables
       :namespace,
       :version_token,
       :metadata_location)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the destination table. Updates the
+    #   table's most recent migration. Until the migration creates the
+    #   destination table, specify `migrationId`. Specify either `tableARN`
+    #   or `migrationId`, not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] migration_id
+    #   The ID of the migration to update. Specify either `migrationId` or
+    #   `tableARN`, not both.
+    #   @return [String]
+    #
+    # @!attribute [rw] requested_state
+    #   The state to move the migration to: `queued` to continue a migration
+    #   in the `pendingReview` state, or `cancelled` to cancel a migration
+    #   in the `new`, `planning`, `pendingReview`, `queued` or `migrating`
+    #   state.
+    #   @return [String]
+    #
+    # @!attribute [rw] update_description
+    #   A description of the update, up to 1,024 characters, with no control
+    #   characters. `GetTableMigration` doesn't return it.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/UpdateTableMigrationRequest AWS API Documentation
+    #
+    class UpdateTableMigrationRequest < Struct.new(
+      :table_arn,
+      :migration_id,
+      :requested_state,
+      :update_description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] migration_id
+    #   The ID of the migration.
+    #   @return [String]
+    #
+    # @!attribute [rw] state
+    #   The state of the migration after the update, such as `queued`,
+    #   `migrating` or `cancelling`.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_arn
+    #   The Amazon Resource Name (ARN) of the destination table.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/s3tables-2018-05-10/UpdateTableMigrationResponse AWS API Documentation
+    #
+    class UpdateTableMigrationResponse < Struct.new(
+      :migration_id,
+      :state,
+      :table_arn)
       SENSITIVE = []
       include Aws::Structure
     end

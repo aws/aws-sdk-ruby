@@ -48,6 +48,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#copy_timestamp-instance_method
       def copy_timestamp: () -> ::Time
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#source_region-instance_method
+      def source_region: () -> ::String
+
       def client: () -> Client
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroup.html#load-instance_method

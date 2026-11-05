@@ -755,7 +755,7 @@ module Aws::MarketplaceDiscovery
 
     class ReviewSourceSummary
       attr_accessor source_name: ::String
-      attr_accessor source_id: ("AWS_MARKETPLACE")
+      attr_accessor source_id: ("AWS_MARKETPLACE" | "G2" | "PEERSPOT")
       attr_accessor source_url: ::String
       attr_accessor average_rating: ::String
       attr_accessor total_reviews: ::Integer

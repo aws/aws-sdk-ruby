@@ -912,6 +912,12 @@ module Aws::ElasticBeanstalk
     #   using CodeBuild or CodeCommit. For application versions built from a
     #   source bundle in Amazon S3, processing is optional.
     #
+    #   For application versions with `ImageConfiguration.Build`, `Process`
+    #   determines when Elastic Beanstalk builds the container image. Set it
+    #   to `true` to build the image when you create the application version.
+    #   If you don't, Elastic Beanstalk builds the image when you first
+    #   deploy the application version to an environment.
+    #
     #   <note markdown="1"> The `Process` option validates Elastic Beanstalk configuration files.
     #   It doesn't validate your application's configuration files, like
     #   proxy server or Docker configuration.
@@ -3367,6 +3373,9 @@ module Aws::ElasticBeanstalk
     #   resp.platform_description.custom_ami_list #=> Array
     #   resp.platform_description.custom_ami_list[0].virtualization_type #=> String
     #   resp.platform_description.custom_ami_list[0].image_id #=> String
+    #   resp.platform_description.default_ami_list #=> Array
+    #   resp.platform_description.default_ami_list[0].architecture #=> String, one of "x86_64", "arm64"
+    #   resp.platform_description.default_ami_list[0].image_id #=> String
     #   resp.platform_description.supported_tier_list #=> Array
     #   resp.platform_description.supported_tier_list[0] #=> String
     #   resp.platform_description.supported_addon_list #=> Array
@@ -5050,7 +5059,7 @@ module Aws::ElasticBeanstalk
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-elasticbeanstalk'
-      context[:gem_version] = '1.112.0'
+      context[:gem_version] = '1.115.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

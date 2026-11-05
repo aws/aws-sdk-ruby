@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.330.0 (2026-11-04)
+------------------
+
+* Feature - Adding support for copying and tagging option groups with cross-Region DB snapshot copies, in the same account or across accounts.
+
+1.329.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.328.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.327.0 (2026-10-21)
 ------------------
 

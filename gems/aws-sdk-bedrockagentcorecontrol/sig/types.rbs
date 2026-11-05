@@ -107,6 +107,20 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class AllowedPort
+      attr_accessor port: ::Integer
+      attr_accessor port_range: Types::PortRange
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Port < AllowedPort
+      end
+      class PortRange < AllowedPort
+      end
+      class Unknown < AllowedPort
+      end
+    end
+
     class AllowedWorkloadConfiguration
       attr_accessor hosting_environments: ::Array[Types::HostingEnvironment]
       attr_accessor workload_identities: ::Array[::String]
@@ -680,6 +694,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor platform_version: ::String
+      attr_accessor allowed_ports: ::Array[Types::AllowedPort]
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -2395,6 +2410,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor platform_version: ::String
+      attr_accessor allowed_ports: ::Array[Types::AllowedPort]
       SENSITIVE: [:description, :environment_variables]
     end
 
@@ -4796,9 +4812,15 @@ module Aws::BedrockAgentCoreControl
       end
     end
 
+    class OnBehalfOfAuthenticationConfig
+      attr_accessor client_authentication_method: ("NO_CLIENT")
+      SENSITIVE: []
+    end
+
     class OnBehalfOfTokenExchangeConfigType
       attr_accessor grant_type: ("TOKEN_EXCHANGE" | "JWT_AUTHORIZATION_GRANT")
       attr_accessor token_exchange_grant_type_config: Types::TokenExchangeGrantTypeConfigType
+      attr_accessor on_behalf_of_authentication_config: Types::OnBehalfOfAuthenticationConfig
       SENSITIVE: []
     end
 
@@ -5026,6 +5048,12 @@ module Aws::BedrockAgentCoreControl
       SENSITIVE: []
     end
 
+    class PortRange
+      attr_accessor from: ::Integer
+      attr_accessor to: ::Integer
+      SENSITIVE: []
+    end
+
     class PrivateEndpoint
       attr_accessor self_managed_lattice_resource: Types::SelfManagedLatticeResource
       attr_accessor managed_vpc_resource: Types::ManagedVpcResource
@@ -5067,6 +5095,8 @@ module Aws::BedrockAgentCoreControl
 
     class ProtocolConfiguration
       attr_accessor server_protocol: ("MCP" | "HTTP" | "A2A" | "AGUI")
+      attr_accessor port: ::Integer
+      attr_accessor path: ::String
       SENSITIVE: []
     end
 
@@ -5220,6 +5250,18 @@ module Aws::BedrockAgentCoreControl
       end
       class Unknown < RequestHeaderConfiguration
       end
+    end
+
+    class ResetTokenVaultKeyMaterialRequest
+      attr_accessor token_vault_id: ::String
+      SENSITIVE: []
+    end
+
+    class ResetTokenVaultKeyMaterialResponse
+      attr_accessor token_vault_id: ::String
+      attr_accessor kms_configuration: Types::KmsConfiguration
+      attr_accessor last_modified_date: ::Time
+      SENSITIVE: []
     end
 
     class Resource
@@ -5941,6 +5983,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor filesystem_configurations: ::Array[Types::FilesystemConfiguration]
       attr_accessor capacity_provider_configuration: Types::CapacityProviderConfiguration
       attr_accessor platform_version: ::String
+      attr_accessor allowed_ports: ::Array[Types::AllowedPort]
       attr_accessor client_token: ::String
       SENSITIVE: [:description, :environment_variables]
     end

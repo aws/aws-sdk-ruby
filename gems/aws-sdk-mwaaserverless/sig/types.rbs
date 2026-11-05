@@ -42,6 +42,7 @@ module Aws::MWAAServerless
       attr_accessor logging_configuration: Types::LoggingConfiguration
       attr_accessor engine_version: ::Integer
       attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor environment: Types::Environment
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor trigger_mode: ::String
       SENSITIVE: []
@@ -80,6 +81,11 @@ module Aws::MWAAServerless
     class EncryptionConfiguration
       attr_accessor type: ("AWS_MANAGED_KEY" | "CUSTOMER_MANAGED_KEY")
       attr_accessor kms_key_id: ::String
+      SENSITIVE: []
+    end
+
+    class Environment
+      attr_accessor variables: ::Hash[::String, ::String]
       SENSITIVE: []
     end
 
@@ -132,6 +138,7 @@ module Aws::MWAAServerless
       attr_accessor schedule_configuration: Types::ScheduleConfiguration
       attr_accessor role_arn: ::String
       attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor environment: Types::Environment
       attr_accessor trigger_mode: ::String
       attr_accessor workflow_definition: ::String
       SENSITIVE: []
@@ -349,6 +356,7 @@ module Aws::MWAAServerless
       attr_accessor logging_configuration: Types::LoggingConfiguration
       attr_accessor engine_version: ::Integer
       attr_accessor network_configuration: Types::NetworkConfiguration
+      attr_accessor environment: Types::Environment
       attr_accessor trigger_mode: ::String
       SENSITIVE: []
     end

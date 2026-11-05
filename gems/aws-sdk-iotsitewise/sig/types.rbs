@@ -993,6 +993,7 @@ module Aws::IoTSiteWise
       attr_accessor client_token: ::String
       attr_accessor destination_s3_uri: ::String
       attr_accessor input: Types::ProcessingInput
+      attr_accessor job_name: ::String
       attr_accessor error_report_location: Types::ExportErrorReportLocation
       SENSITIVE: []
     end
@@ -1708,6 +1709,7 @@ module Aws::IoTSiteWise
     class DescribeDatasetExportJobResponse
       attr_accessor job_id: ::String
       attr_accessor workspace_name: ::String
+      attr_accessor job_name: ::String
       attr_accessor status: ("SUBMITTED" | "RUNNING" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
@@ -2182,6 +2184,7 @@ module Aws::IoTSiteWise
 
     class ExportJobSummary
       attr_accessor job_id: ::String
+      attr_accessor job_name: ::String
       attr_accessor status: ("SUBMITTED" | "RUNNING" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time

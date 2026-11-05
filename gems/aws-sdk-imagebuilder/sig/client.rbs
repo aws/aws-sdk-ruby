@@ -213,13 +213,7 @@ module Aws
                           ?enhanced_image_metadata_enabled: bool,
                           ?tags: Hash[::String, ::String],
                           client_token: ::String,
-                          ?image_scanning_configuration: {
-                            image_scanning_enabled: bool?,
-                            ecr_configuration: {
-                              repository_name: ::String?,
-                              container_tags: Array[::String]?
-                            }?
-                          },
+                          ?image_scanning_configuration: Params::image_scanning_configuration,
                           ?workflows: Array[
                             Params::workflow_configuration
                           ],
@@ -254,13 +248,7 @@ module Aws
                                    ?tags: Hash[::String, ::String],
                                    ?image_tags: Hash[::String, ::String],
                                    client_token: ::String,
-                                   ?image_scanning_configuration: {
-                                     image_scanning_enabled: bool?,
-                                     ecr_configuration: {
-                                       repository_name: ::String?,
-                                       container_tags: Array[::String]?
-                                     }?
-                                   },
+                                   ?image_scanning_configuration: Params::image_scanning_configuration,
                                    ?workflows: Array[
                                      Params::workflow_configuration
                                    ],
@@ -1378,13 +1366,7 @@ module Aws
                                    ?schedule: Params::schedule,
                                    ?status: ("DISABLED" | "ENABLED"),
                                    client_token: ::String,
-                                   ?image_scanning_configuration: {
-                                     image_scanning_enabled: bool?,
-                                     ecr_configuration: {
-                                       repository_name: ::String?,
-                                       container_tags: Array[::String]?
-                                     }?
-                                   },
+                                   ?image_scanning_configuration: Params::image_scanning_configuration,
                                    ?workflows: Array[
                                      Params::workflow_configuration
                                    ],

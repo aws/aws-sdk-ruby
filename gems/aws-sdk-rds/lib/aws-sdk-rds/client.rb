@@ -1965,14 +1965,29 @@ module Aws::RDS
     #
     # @option params [Boolean] :copy_option_group
     #   Specifies whether to copy the DB option group associated with the
-    #   source DB snapshot to the target Amazon Web Services account and
-    #   associate with the target DB snapshot. The associated option group can
-    #   be copied only with cross-account snapshot copy calls.
+    #   source DB snapshot to the target Amazon Web Services account or Amazon
+    #   Web Services Region and associate it with the target DB snapshot.
     #
     # @option params [String] :snapshot_availability_zone
     #   Specifies the name of the Availability Zone where RDS stores the DB
     #   snapshot. This value is valid only for snapshots that RDS stores on a
     #   Dedicated Local Zone.
+    #
+    # @option params [Array<Types::TagSpecification>] :tag_specifications
+    #   Tags to assign to the copied option group. By default, the copied
+    #   option group isn't tagged.
+    #
+    #   Valid Values:
+    #
+    #   * `og` - The copied option group.
+    #
+    #   ^
+    #
+    #   Constraints:
+    #
+    #   * Can only be specified when `CopyOptionGroup` is `true`
+    #
+    #   ^
     #
     # @option params [String] :source_region
     #   The source region of the snapshot. This is only needed when the
@@ -2043,6 +2058,17 @@ module Aws::RDS
     #     snapshot_target: "String",
     #     copy_option_group: false,
     #     snapshot_availability_zone: "String",
+    #     tag_specifications: [
+    #       {
+    #         resource_type: "String",
+    #         tags: [
+    #           {
+    #             key: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     source_region: "String",
     #   })
     #
@@ -2229,6 +2255,7 @@ module Aws::RDS
     #   resp.option_group.source_option_group #=> String
     #   resp.option_group.source_account_id #=> String
     #   resp.option_group.copy_timestamp #=> Time
+    #   resp.option_group.source_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CopyOptionGroup AWS API Documentation
     #
@@ -9809,6 +9836,7 @@ module Aws::RDS
     #   resp.option_group.source_option_group #=> String
     #   resp.option_group.source_account_id #=> String
     #   resp.option_group.copy_timestamp #=> Time
+    #   resp.option_group.source_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/CreateOptionGroup AWS API Documentation
     #
@@ -18298,6 +18326,7 @@ module Aws::RDS
     #   resp.option_group_options[0].option_group_option_versions[0].version #=> String
     #   resp.option_group_options[0].option_group_option_versions[0].is_default #=> Boolean
     #   resp.option_group_options[0].copyable_cross_account #=> Boolean
+    #   resp.option_group_options[0].copyable_cross_region #=> Boolean
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroupOptions AWS API Documentation
@@ -18458,6 +18487,7 @@ module Aws::RDS
     #   resp.option_groups_list[0].source_option_group #=> String
     #   resp.option_groups_list[0].source_account_id #=> String
     #   resp.option_groups_list[0].copy_timestamp #=> Time
+    #   resp.option_groups_list[0].source_region #=> String
     #   resp.marker #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/DescribeOptionGroups AWS API Documentation
@@ -25597,6 +25627,7 @@ module Aws::RDS
     #   resp.option_group.source_option_group #=> String
     #   resp.option_group.source_account_id #=> String
     #   resp.option_group.copy_timestamp #=> Time
+    #   resp.option_group.source_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/ModifyOptionGroup AWS API Documentation
     #
@@ -35800,7 +35831,7 @@ module Aws::RDS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rds'
-      context[:gem_version] = '1.327.0'
+      context[:gem_version] = '1.330.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

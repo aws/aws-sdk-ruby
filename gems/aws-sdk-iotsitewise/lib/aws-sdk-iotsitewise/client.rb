@@ -2648,6 +2648,10 @@ module Aws::IoTSiteWise
     # @option params [required, Types::ProcessingInput] :input
     #   The processing input source.
     #
+    # @option params [String] :job_name
+    #   An optional name for the export job. When omitted, one will be created
+    #   based on type of job and start time.
+    #
     # @option params [required, Types::ExportErrorReportLocation] :error_report_location
     #   The location where the error report will be written on failure.
     #
@@ -2699,6 +2703,7 @@ module Aws::IoTSiteWise
     #         export_data_types: ["VIDEO"], # accepts VIDEO, TELEMETRY, ANNOTATION
     #       },
     #     },
+    #     job_name: "DatasetExportJobNameInput",
     #     error_report_location: { # required
     #       s3_uri: "S3Uri", # required
     #     },
@@ -5266,6 +5271,7 @@ module Aws::IoTSiteWise
     #
     #   * {Types::DescribeDatasetExportJobResponse#job_id #job_id} => String
     #   * {Types::DescribeDatasetExportJobResponse#workspace_name #workspace_name} => String
+    #   * {Types::DescribeDatasetExportJobResponse#job_name #job_name} => String
     #   * {Types::DescribeDatasetExportJobResponse#status #status} => String
     #   * {Types::DescribeDatasetExportJobResponse#started_at #started_at} => Time
     #   * {Types::DescribeDatasetExportJobResponse#completed_at #completed_at} => Time
@@ -5284,6 +5290,7 @@ module Aws::IoTSiteWise
     #
     #   resp.job_id #=> String
     #   resp.workspace_name #=> String
+    #   resp.job_name #=> String
     #   resp.status #=> String, one of "SUBMITTED", "RUNNING", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"
     #   resp.started_at #=> Time
     #   resp.completed_at #=> Time
@@ -8538,6 +8545,7 @@ module Aws::IoTSiteWise
     #
     #   resp.jobs #=> Array
     #   resp.jobs[0].job_id #=> String
+    #   resp.jobs[0].job_name #=> String
     #   resp.jobs[0].status #=> String, one of "SUBMITTED", "RUNNING", "COMPLETED", "COMPLETED_WITH_ERRORS", "FAILED"
     #   resp.jobs[0].started_at #=> Time
     #   resp.jobs[0].completed_at #=> Time
@@ -11514,7 +11522,7 @@ module Aws::IoTSiteWise
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-iotsitewise'
-      context[:gem_version] = '1.113.0'
+      context[:gem_version] = '1.116.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

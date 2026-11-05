@@ -10,28 +10,15 @@
 module Aws::Signin
   module Types
 
-    # Error thrown for access denied scenarios with flexible HTTP status
-    # mapping
-    #
-    # Runtime HTTP Status Code Mapping:
-    #
-    # * HTTP 401 (Unauthorized): TOKEN\_EXPIRED, AUTHCODE\_EXPIRED
-    # * HTTP 403 (Forbidden): USER\_CREDENTIALS\_CHANGED,
-    #   INSUFFICIENT\_PERMISSIONS
-    #
-    # The specific HTTP status code is determined at runtime based on the
-    # error enum value. Consumers should use the error field to determine
-    # the specific access denial reason.
+    # You do not have sufficient access to perform this action.
     #
     # @!attribute [rw] error
-    #   OAuth 2.0 error code indicating the specific type of access denial
-    #   Can be TOKEN\_EXPIRED, AUTHCODE\_EXPIRED,
-    #   USER\_CREDENTIALS\_CHANGED, or INSUFFICIENT\_PERMISSIONS
+    #   One of TOKEN\_EXPIRED, AUTHCODE\_EXPIRED,
+    #   USER\_CREDENTIALS\_CHANGED, or INSUFFICIENT\_PERMISSIONS.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Detailed message explaining the access denial Provides specific
-    #   information about why access was denied
+    #   The reason access was denied.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/AccessDeniedException AWS API Documentation
@@ -43,20 +30,19 @@ module Aws::Signin
       include Aws::Structure
     end
 
-    # AWS credentials structure containing temporary access credentials
-    #
-    # Scoped, temporary AWS credentials with a 15-minute duration.
+    # Contains the scoped, temporary AWS credentials used to sign requests
+    # with SigV4. Valid for 15 minutes.
     #
     # @!attribute [rw] access_key_id
-    #   AWS access key ID for temporary credentials
+    #   The AWS access key ID for the temporary credentials.
     #   @return [String]
     #
     # @!attribute [rw] secret_access_key
-    #   AWS secret access key for temporary credentials
+    #   The AWS secret access key used to sign requests.
     #   @return [String]
     #
     # @!attribute [rw] session_token
-    #   AWS session token for temporary credentials
+    #   The session token that validates the temporary security credentials.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/AccessToken AWS API Documentation
@@ -100,8 +86,8 @@ module Aws::Signin
     # grant\_type parameter in the request body.
     #
     # @!attribute [rw] token_input
-    #   Flattened token operation inputs The specific operation is
-    #   determined by grant\_type in the request body
+    #   Flattened token operation inputs. The "grant\_type" in the request
+    #   body determines the specific operation.
     #   @return [Types::CreateOAuth2TokenRequestBody]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenRequest AWS API Documentation
@@ -112,42 +98,43 @@ module Aws::Signin
       include Aws::Structure
     end
 
-    # Request body payload for CreateOAuth2Token operation
-    #
-    # The operation type is determined by the grant\_type parameter:
-    #
-    # * grant\_type=authorization\_code: Requires code, redirect\_uri,
-    #   code\_verifier
-    # * grant\_type=refresh\_token: Requires refresh\_token
+    # The request body for creating an OAuth 2.0 token. Supports both the
+    # authorization code and refresh token flows, selected by the
+    # "grant\_type" parameter.
     #
     # @!attribute [rw] client_id
-    #   The client identifier (ARN) used during Sign-In onboarding Required
-    #   for both authorization code and refresh token flows
+    #   The OAuth 2.0 client identifier. Expected values:
+    #   "arn:aws:signin:::devtools/same-device" or
+    #   "arn:aws:signin:::devtools/cross-device".
     #   @return [String]
     #
     # @!attribute [rw] grant_type
-    #   OAuth 2.0 grant type - determines which flow is used Must be
-    #   "authorization\_code" or "refresh\_token"
+    #   The OAuth 2.0 grant type. Supported values:
+    #
+    #   * "authorization\_code" - Exchange an authorization code for tokens.
+    #   * "refresh\_token" - Use a refresh token to obtain a new access
+    #     token.
     #   @return [String]
     #
     # @!attribute [rw] code
-    #   The authorization code received from /v1/authorize Required only
-    #   when grant\_type=authorization\_code
+    #   The authorization code received from the "/v1/authorize" endpoint.
+    #   Required when "grant\_type=authorization\_code".
     #   @return [String]
     #
     # @!attribute [rw] redirect_uri
-    #   The redirect URI that must match the original authorization request
-    #   Required only when grant\_type=authorization\_code
+    #   The redirect URI that was used in the original authorization
+    #   request. Must match exactly. Required when
+    #   "grant\_type=authorization\_code".
     #   @return [String]
     #
     # @!attribute [rw] code_verifier
-    #   PKCE code verifier to prove possession of the original code
-    #   challenge Required only when grant\_type=authorization\_code
+    #   The PKCE code verifier that proves possession of the original code
+    #   challenge. Required when "grant\_type=authorization\_code".
     #   @return [String]
     #
     # @!attribute [rw] refresh_token
-    #   The refresh token returned from auth\_code redemption Required only
-    #   when grant\_type=refresh\_token
+    #   The refresh token issued by a previous token response. Required when
+    #   "grant\_type=refresh\_token".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenRequestBody AWS API Documentation
@@ -170,8 +157,8 @@ module Aws::Signin
     # grant\_type from the original request.
     #
     # @!attribute [rw] token_output
-    #   Flattened token operation outputs The specific response fields
-    #   depend on the grant\_type used in the request
+    #   Flattened token operation outputs. The specific response fields
+    #   depend on the grant\_type used in the request.
     #   @return [Types::CreateOAuth2TokenResponseBody]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenResponse AWS API Documentation
@@ -182,40 +169,35 @@ module Aws::Signin
       include Aws::Structure
     end
 
-    # Response body payload for CreateOAuth2Token operation
-    #
-    # The response content depends on the grant\_type from the request:
-    #
-    # * grant\_type=authorization\_code: Returns all fields including
-    #   refresh\_token and id\_token
-    # * grant\_type=refresh\_token: Returns access\_token, token\_type,
-    #   expires\_in, refresh\_token (no id\_token)
+    # The response body for an OAuth 2.0 token request. The fields returned
+    # depend on the "grant\_type". The authorization code flow returns
+    # "refresh\_token" and "id\_token". The refresh token flow omits
+    # "id\_token".
     #
     # @!attribute [rw] access_token
-    #   Scoped-down AWS credentials (15 minute duration) Present for both
-    #   authorization code redemption and token refresh
+    #   The access token issued by the authorization server. The token
+    #   contains temporary AWS security credentials that you use to sign
+    #   requests with SigV4.
     #   @return [Types::AccessToken]
     #
     # @!attribute [rw] token_type
-    #   Token type indicating this is AWS SigV4 credentials Value is
-    #   "aws\_sigv4" for both flows
+    #   The type of token issued. Value is "aws\_sigv4".
     #   @return [String]
     #
     # @!attribute [rw] expires_in
-    #   Time to expiry in seconds (maximum 900) Present for both
-    #   authorization code redemption and token refresh
+    #   The number of seconds until the access token expires. Maximum value
+    #   is 900 seconds (15 minutes).
     #   @return [Integer]
     #
     # @!attribute [rw] refresh_token
-    #   Encrypted refresh token with cnf.jkt (SHA-256 thumbprint of
-    #   presented jwk) Always present in responses (required for both flows)
+    #   A refresh token that can be used to obtain new access tokens without
+    #   re-authenticating.
     #   @return [String]
     #
     # @!attribute [rw] id_token
-    #   ID token containing user identity information Present only in
-    #   authorization code redemption response
-    #   (grant\_type=authorization\_code) Not included in token refresh
-    #   responses
+    #   A JSON Web Token (JWT) containing user identity claims. Present only
+    #   when "grant\_type=authorization\_code". Not included in refresh
+    #   token responses.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenResponseBody AWS API Documentation
@@ -233,7 +215,7 @@ module Aws::Signin
     # Input structure for CreateOAuth2TokenWithIAM operation
     #
     # @!attribute [rw] grant_type
-    #   OAuth 2.0 grant type. Must be "client\_credentials".
+    #   The OAuth 2.0 grant type. Must be "client\_credentials".
     #   @return [String]
     #
     # @!attribute [rw] resource
@@ -252,27 +234,108 @@ module Aws::Signin
 
     # Output structure for CreateOAuth2TokenWithIAM operation
     #
-    # Contains the JWT access token, token type, and expiration per RFC 6749
-    # §5.1.
+    # Contains the access token, token type, and expiration as defined in
+    # RFC 6749 §5.1.
     #
     # @!attribute [rw] access_token
-    #   JWT access token containing principal identity, resource scope, and
-    #   session metadata
+    #   Access token containing principal identity, resource scope, and
+    #   session metadata.
     #   @return [String]
     #
     # @!attribute [rw] token_type
-    #   Always "Bearer" per OAuth 2.1 specification
+    #   The token type. Always "Bearer" as defined in RFC 6749.
     #   @return [String]
     #
     # @!attribute [rw] expires_in
-    #   Token lifetime in seconds. Value is the minimum of session validity
-    #   and 1 hour.
+    #   Token lifetime in seconds. Value is the minimum of the caller's
+    #   session validity and 1 hour (3600 seconds).
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithIAMResponse AWS API Documentation
     #
     class CreateOAuth2TokenWithIAMResponse < Struct.new(
       :access_token,
+      :token_type,
+      :expires_in)
+      SENSITIVE = [:access_token]
+      include Aws::Structure
+    end
+
+    # Input structure for CreateOAuth2TokenWithTokenExchange operation
+    #
+    # @!attribute [rw] grant_type
+    #   The OAuth 2.0 grant type. Currently only supports
+    #   "urn:ietf:params:oauth:grant-type:token-exchange".
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_token
+    #   The subject token that represents the identity of the party on whose
+    #   behalf the request is made. Required when
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
+    #   @return [String]
+    #
+    # @!attribute [rw] subject_token_type
+    #   The token type of the subject token. Currently only supports
+    #   "urn:ietf:params:oauth:token-type:jwt". Required when
+    #   "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
+    #   @return [String]
+    #
+    # @!attribute [rw] resource
+    #   The OAuth resource for which the access token is requested. Required
+    #   when "grant\_type=urn:ietf:params:oauth:grant-type:token-exchange".
+    #   Example: "glue.amazonaws.com".
+    #   @return [String]
+    #
+    # @!attribute [rw] scope
+    #   IAM managed policy Amazon Resource Names (ARNs) to apply as session
+    #   policies that further scope down the permissions of the issued
+    #   access token, provided as a space-delimited list. Example:
+    #   "arn:aws:iam::444455556666:policy/MyPolicy".
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithTokenExchangeRequest AWS API Documentation
+    #
+    class CreateOAuth2TokenWithTokenExchangeRequest < Struct.new(
+      :grant_type,
+      :subject_token,
+      :subject_token_type,
+      :resource,
+      :scope)
+      SENSITIVE = [:subject_token]
+      include Aws::Structure
+    end
+
+    # Output structure for CreateOAuth2TokenWithTokenExchange operation.
+    #
+    # Contains the access token, issued token type, token type, and
+    # expiration as defined in RFC 6749 §5.1 and RFC 8693 §2.2.1.
+    #
+    # @!attribute [rw] access_token
+    #   Access token containing principal identity, resource scope, and
+    #   session metadata.
+    #   @return [String]
+    #
+    # @!attribute [rw] issued_token_type
+    #   The token type of the issued token. Always
+    #   "urn:ietf:params:oauth:token-type:access\_token" as defined in RFC
+    #   8693 §2.2.1.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_type
+    #   The token type. Currently only supports "Bearer" as defined in RFC
+    #   6749.
+    #   @return [String]
+    #
+    # @!attribute [rw] expires_in
+    #   Token lifetime in seconds. Value is the minimum of the subject
+    #   token's validity and 1 hour (3600 seconds).
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateOAuth2TokenWithTokenExchangeResponse AWS API Documentation
+    #
+    class CreateOAuth2TokenWithTokenExchangeResponse < Struct.new(
+      :access_token,
+      :issued_token_type,
       :token_type,
       :expires_in)
       SENSITIVE = [:access_token]
@@ -405,21 +468,14 @@ module Aws::Signin
       include Aws::Structure
     end
 
-    # Error thrown when an internal server error occurs
-    #
-    # HTTP Status Code: 500 Internal Server Error
-    #
-    # Used for unexpected server-side errors that prevent request
-    # processing.
+    # The request failed because of an internal server error.
     #
     # @!attribute [rw] error
-    #   OAuth 2.0 error code indicating server error Will be SERVER\_ERROR
-    #   for internal server errors
+    #   Will be server\_error.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Detailed message explaining the server error May include error
-    #   details for debugging purposes
+    #   The server error detail.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/InternalServerException AWS API Documentation
@@ -437,15 +493,14 @@ module Aws::Signin
     # an optional hint about the token's type.
     #
     # @!attribute [rw] token
-    #   The string value of the token to introspect. May be either an
-    #   access\_token or a refresh\_token issued by AWS Sign-In.
+    #   The access token or refresh token issued by AWS Sign-In.
     #   @return [String]
     #
     # @!attribute [rw] token_type_hint
-    #   Optional hint about the type of the token submitted for
-    #   introspection. The server uses this hint to optimize lookup, but
-    #   still falls back to the other token type on miss. Allowed values:
-    #   access\_token, refresh\_token.
+    #   An optional hint about the type of the token submitted for
+    #   introspection, as defined in RFC 7662 §2.1. The server checks both
+    #   token types regardless of the hint. Allowed values: "access\_token",
+    #   "refresh\_token".
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/IntrospectOAuth2TokenWithIAMRequest AWS API Documentation
@@ -463,8 +518,8 @@ module Aws::Signin
     # other claims are omitted when the token is inactive.
     #
     # @!attribute [rw] active
-    #   Indicates whether the token is currently active. `true` only when
-    #   the token is valid, has not expired, has not been revoked, and
+    #   Indicates whether the token is currently active. Returns "true" only
+    #   when the token is valid, has not expired, has not been revoked, and
     #   belongs to the caller's account.
     #   @return [Boolean]
     #
@@ -473,9 +528,8 @@ module Aws::Signin
     #   @return [String]
     #
     # @!attribute [rw] user_id
-    #   User identifier matching sts:GetCallerIdentity's `UserId` field for
-    #   the token's subject principal (e.g. "AIDAEXAMPLE" for an IAM user,
-    #   or "AROAEXAMPLE:session-name" for an assumed role).
+    #   User identifier matching the "UserId" field from
+    #   "sts:GetCallerIdentity" for the token's subject principal.
     #   @return [String]
     #
     # @!attribute [rw] token_type
@@ -496,15 +550,13 @@ module Aws::Signin
     #   @return [Integer]
     #
     # @!attribute [rw] sub
-    #   Subject of the token: the IAM principal ARN. For assumed-role
-    #   sessions, this is the session ARN (matches sts:GetCallerIdentity's
-    #   `Arn` field), e.g.
-    #   arn:aws:sts::123456789012:assumed-role/MyRole/session-name.
+    #   The IAM principal Amazon Resource Name (ARN). For assumed-role
+    #   sessions, this is the session ARN.
     #   @return [String]
     #
     # @!attribute [rw] aud
-    #   Audience of the token: the OAuth resource the token is scoped to
-    #   (for example, "aws-mcp.amazonaws.com"). Omitted for refresh tokens.
+    #   The OAuth resource the token is scoped to. Omitted for refresh
+    #   tokens. Example: "aws-mcp.amazonaws.com".
     #   @return [String]
     #
     # @!attribute [rw] iss
@@ -525,8 +577,8 @@ module Aws::Signin
     #   @return [String]
     #
     # @!attribute [rw] resource
-    #   The OAuth resource the token is scoped to during Human OAuth flow.
-    #   Only present for refresh token introspection.
+    #   The OAuth resource the token is scoped to. Only present for refresh
+    #   token introspection.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/IntrospectOAuth2TokenWithIAMResponse AWS API Documentation
@@ -546,6 +598,43 @@ module Aws::Signin
       :account_id,
       :signin_session,
       :resource)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request failed because the provided grant is invalid or expired.
+    #
+    # @!attribute [rw] error
+    #   Will be invalid\_grant.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/InvalidGrantException AWS API Documentation
+    #
+    class InvalidGrantException < Struct.new(
+      :error,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The request failed because the requested scope is invalid or exceeds
+    # the scope that can be granted.
+    #
+    # @!attribute [rw] error
+    #   Will be invalid\_scope.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/InvalidScopeException AWS API Documentation
+    #
+    class InvalidScopeException < Struct.new(
+      :error,
+      :message)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -777,9 +866,8 @@ module Aws::Signin
     # revoke.
     #
     # @!attribute [rw] token
-    #   The refresh\_token to revoke. Must be a refresh\_token issued by AWS
-    #   Sign-In (prefix "ASOR"); access\_tokens are not accepted for
-    #   revocation.
+    #   The refresh token to revoke. Must be a refresh token issued by AWS
+    #   Sign-In. Access tokens are not accepted for revocation.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/RevokeOAuth2TokenWithIAMRequest AWS API Documentation
@@ -825,6 +913,25 @@ module Aws::Signin
       include Aws::Structure
     end
 
+    # The request failed because a dependency is temporarily unavailable.
+    # You can retry the request.
+    #
+    # @!attribute [rw] error
+    #   Will be service\_unavailable.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/ServiceUnavailableException AWS API Documentation
+    #
+    class ServiceUnavailableException < Struct.new(
+      :error,
+      :message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # SignIn resource-based policy document
     #
     # @!attribute [rw] version
@@ -844,29 +951,15 @@ module Aws::Signin
       include Aws::Structure
     end
 
-    # Error thrown when rate limit is exceeded
-    #
-    # HTTP Status Code: 429 Too Many Requests
-    #
-    # Possible OAuth2ErrorCode values:
-    #
-    # * INVALID\_REQUEST: Rate limiting, too many requests, abuse prevention
-    #
-    # Possible causes:
-    #
-    # * Too many token requests from the same client
-    # * Rate limiting based on client\_id or IP address
-    # * Abuse prevention mechanisms triggered
-    # * Service protection against excessive token generation
+    # The request failed because you exceeded the request rate limit for
+    # this operation.
     #
     # @!attribute [rw] error
-    #   OAuth 2.0 error code indicating the specific type of error Will be
-    #   INVALID\_REQUEST for rate limiting scenarios
+    #   Will be rate\_exceeded.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Detailed message about the rate limiting May include retry-after
-    #   information or rate limit details
+    #   Details about the rate limit.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/TooManyRequestsError AWS API Documentation
@@ -878,21 +971,15 @@ module Aws::Signin
       include Aws::Structure
     end
 
-    # Error thrown when request validation fails
-    #
-    # HTTP Status Code: 400 Bad Request
-    #
-    # Used for request validation errors such as malformed parameters,
-    # missing required fields, or invalid parameter values.
+    # The request failed because it contains a malformed, missing, or
+    # invalid parameter.
     #
     # @!attribute [rw] error
-    #   OAuth 2.0 error code indicating validation failure Will be
-    #   INVALID\_REQUEST for validation errors
+    #   The specific code depends on which validation failed.
     #   @return [String]
     #
     # @!attribute [rw] message
-    #   Detailed message explaining the validation failure Provides specific
-    #   information about which validation failed
+    #   The validation constraint that failed.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/ValidationException AWS API Documentation

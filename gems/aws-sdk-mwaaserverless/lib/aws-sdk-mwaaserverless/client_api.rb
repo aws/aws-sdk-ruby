@@ -27,6 +27,10 @@ module Aws::MWAAServerless
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
     EngineVersion = Shapes::IntegerShape.new(name: 'EngineVersion')
+    Environment = Shapes::StructureShape.new(name: 'Environment')
+    EnvironmentVariableKey = Shapes::StringShape.new(name: 'EnvironmentVariableKey')
+    EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
+    EnvironmentVariablesMap = Shapes::MapShape.new(name: 'EnvironmentVariablesMap')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
     GenericMap = Shapes::MapShape.new(name: 'GenericMap')
     GenericString = Shapes::StringShape.new(name: 'GenericString')
@@ -138,6 +142,7 @@ module Aws::MWAAServerless
     CreateWorkflowRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     CreateWorkflowRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     CreateWorkflowRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    CreateWorkflowRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     CreateWorkflowRequest.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "Tags"))
     CreateWorkflowRequest.add_member(:trigger_mode, Shapes::ShapeRef.new(shape: GenericString, location_name: "TriggerMode"))
     CreateWorkflowRequest.struct_class = Types::CreateWorkflowRequest
@@ -167,6 +172,12 @@ module Aws::MWAAServerless
     EncryptionConfiguration.add_member(:type, Shapes::ShapeRef.new(shape: EncryptionType, required: true, location_name: "Type"))
     EncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    Environment.add_member(:variables, Shapes::ShapeRef.new(shape: EnvironmentVariablesMap, location_name: "Variables"))
+    Environment.struct_class = Types::Environment
+
+    EnvironmentVariablesMap.key = Shapes::ShapeRef.new(shape: EnvironmentVariableKey)
+    EnvironmentVariablesMap.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
 
     GenericMap.key = Shapes::ShapeRef.new(shape: GenericString)
     GenericMap.value = Shapes::ShapeRef.new(shape: GenericString)
@@ -213,6 +224,7 @@ module Aws::MWAAServerless
     GetWorkflowResponse.add_member(:schedule_configuration, Shapes::ShapeRef.new(shape: ScheduleConfiguration, location_name: "ScheduleConfiguration"))
     GetWorkflowResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleArn"))
     GetWorkflowResponse.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    GetWorkflowResponse.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     GetWorkflowResponse.add_member(:trigger_mode, Shapes::ShapeRef.new(shape: GenericString, location_name: "TriggerMode"))
     GetWorkflowResponse.add_member(:workflow_definition, Shapes::ShapeRef.new(shape: GenericString, location_name: "WorkflowDefinition"))
     GetWorkflowResponse.struct_class = Types::GetWorkflowResponse
@@ -384,6 +396,7 @@ module Aws::MWAAServerless
     UpdateWorkflowRequest.add_member(:logging_configuration, Shapes::ShapeRef.new(shape: LoggingConfiguration, location_name: "LoggingConfiguration"))
     UpdateWorkflowRequest.add_member(:engine_version, Shapes::ShapeRef.new(shape: EngineVersion, location_name: "EngineVersion"))
     UpdateWorkflowRequest.add_member(:network_configuration, Shapes::ShapeRef.new(shape: NetworkConfiguration, location_name: "NetworkConfiguration"))
+    UpdateWorkflowRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
     UpdateWorkflowRequest.add_member(:trigger_mode, Shapes::ShapeRef.new(shape: GenericString, location_name: "TriggerMode"))
     UpdateWorkflowRequest.struct_class = Types::UpdateWorkflowRequest
 

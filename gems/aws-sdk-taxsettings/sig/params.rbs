@@ -118,6 +118,15 @@ module Aws
       }?,
       monaco_additional_info: {
         business_number: ::String
+      }?,
+      germany_additional_info: {
+        economic_identification_number: ::String?,
+        steuernummer: ::String?
+      }?,
+      mexico_additional_info: {
+        tax_regime: ::String?,
+        tax_regime_full_name: ::String?,
+        cfdi_usage_code: ::String?
       }?
     }
 
@@ -130,7 +139,7 @@ module Aws
 
       type tax_registration_entry = {
       registration_id: ::String,
-      registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP"),
+      registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP" | "CUIT" | "CDI" | "RUT" | "NIE" | "CI"),
       legal_name: ::String?,
       legal_address: Params::address?,
       sector: ("Business" | "Individual" | "Government")?,

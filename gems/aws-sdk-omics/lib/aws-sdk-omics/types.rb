@@ -686,8 +686,11 @@ module Aws::Omics
     # [1]: https://docs.aws.amazon.com/omics/latest/dev/workflows-ecr.html
     #
     # @!attribute [rw] registry_mappings
-    #   Mapping that provides the ECR repository path where upstream
-    #   container images are pulled and synchronized.
+    #   The mappings between upstream container registries and repository
+    #   prefixes in your Amazon Elastic Container Registry (Amazon ECR)
+    #   private registry. The list can include both pull through cache
+    #   mappings and mappings for registries that Amazon Web Services
+    #   HealthOmics copies images from.
     #   @return [Array<Types::RegistryMapping>]
     #
     # @!attribute [rw] image_mappings
@@ -4105,6 +4108,12 @@ module Aws::Omics
     #   on the IAM role.
     #   @return [String]
     #
+    # @!attribute [rw] output_uri_prefix_mode
+    #   The service returns the value that the `StartRun` request specified
+    #   for `outputUriPrefixMode`. The service returns `SERVICE_DEFINED` if
+    #   the request did not specify a value.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/GetRunResponse AWS API Documentation
     #
     class GetRunResponse < Struct.new(
@@ -4150,7 +4159,8 @@ module Aws::Omics
       :configuration,
       :vpc_config,
       :engine_settings,
-      :session_policy)
+      :session_policy,
+      :output_uri_prefix_mode)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -7175,9 +7185,14 @@ module Aws::Omics
       include Aws::Structure
     end
 
-    # If you are using the ECR pull through cache feature, the registry
-    # mapping maps between the ECR repository and the upstream registry
-    # where container images are pulled and synchronized.
+    # Maps an upstream container registry to a repository prefix in your
+    # Amazon Elastic Container Registry (Amazon ECR) private registry. For
+    # registries that Amazon ECR pull through cache supports, you create a
+    # pull through cache rule that synchronizes the upstream repositories
+    # with your private repositories. You can also use some registries that
+    # pull through cache doesn't support. For these registries, specify
+    # `credentialArn`, and Amazon Web Services HealthOmics copies each image
+    # into a private Amazon ECR repository the first time a task needs it.
     #
     # @!attribute [rw] upstream_registry_url
     #   The URI of the upstream registry.
@@ -8528,6 +8543,12 @@ module Aws::Omics
     #   engine (for example, Nextflow profiles).
     #   @return [Hash,Array,String,Numeric,Boolean]
     #
+    # @!attribute [rw] output_uri_prefix_mode
+    #   You can control the path prefixes that the service adds beneath
+    #   `outputUri`. If you don't specify a value, the service uses
+    #   `SERVICE_DEFINED`, which adds a run-specific prefix.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/omics-2022-11-28/StartRunRequest AWS API Documentation
     #
     class StartRunRequest < Struct.new(
@@ -8554,7 +8575,8 @@ module Aws::Omics
       :scratch_storage_mode,
       :configuration_name,
       :session_policy,
-      :engine_settings)
+      :engine_settings,
+      :output_uri_prefix_mode)
       SENSITIVE = []
       include Aws::Structure
     end

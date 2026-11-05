@@ -95,7 +95,7 @@ module Aws
                                          }?
                                        },
                                        ?client_token: ::String,
-                                       ?support_mode: ("AI_ONLY" | "FULL_SUPPORT"),
+                                       ?support_mode: ("AI_ONLY"),
                                        ?tags: Hash[::String, ::String]
                                      ) -> _CreateComplianceInquiryResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateComplianceInquiryResponseSuccess

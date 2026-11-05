@@ -10129,7 +10129,9 @@
           "ap-southeast-1" : { },
           "ap-southeast-2" : { },
           "ap-southeast-3" : { },
+          "ap-southeast-4" : { },
           "ap-southeast-5" : { },
+          "ap-southeast-7" : { },
           "ca-central-1" : {
             "variants" : [ {
               "hostname" : "email-fips.ca-central-1.amazonaws.com",
@@ -10141,6 +10143,7 @@
           "eu-central-2" : { },
           "eu-north-1" : { },
           "eu-south-1" : { },
+          "eu-south-2" : { },
           "eu-west-1" : { },
           "eu-west-2" : { },
           "eu-west-3" : { },
@@ -26612,6 +26615,7 @@
       },
       "textract" : {
         "endpoints" : {
+          "ap-northeast-1" : { },
           "ap-northeast-2" : {
             "variants" : [ {
               "hostname" : "textract.ap-northeast-2.api.aws",
@@ -26654,6 +26658,7 @@
               "tags" : [ "dualstack" ]
             } ]
           },
+          "eu-central-2" : { },
           "eu-south-2" : {
             "variants" : [ {
               "hostname" : "textract.eu-south-2.api.aws",
@@ -39213,6 +39218,11 @@
           "eu-isoe-west-1" : { }
         }
       },
+      "securityhub" : {
+        "endpoints" : {
+          "eu-isoe-west-1" : { }
+        }
+      },
       "servicecatalog" : {
         "endpoints" : {
           "eu-isoe-west-1" : { }
@@ -40309,7 +40319,17 @@
           "eusc-de-east-1" : { }
         }
       },
+      "codebuild" : {
+        "endpoints" : {
+          "eusc-de-east-1" : { }
+        }
+      },
       "codedeploy" : {
+        "endpoints" : {
+          "eusc-de-east-1" : { }
+        }
+      },
+      "codepipeline" : {
         "endpoints" : {
           "eusc-de-east-1" : { }
         }
@@ -40761,12 +40781,22 @@
           "eusc-de-east-1" : { }
         }
       },
+      "transcribestreaming" : {
+        "endpoints" : {
+          "eusc-de-east-1" : { }
+        }
+      },
       "transfer" : {
         "endpoints" : {
           "eusc-de-east-1" : { }
         }
       },
       "trustedadvisor" : {
+        "endpoints" : {
+          "eusc-de-east-1" : { }
+        }
+      },
+      "verifiedpermissions" : {
         "endpoints" : {
           "eusc-de-east-1" : { }
         }

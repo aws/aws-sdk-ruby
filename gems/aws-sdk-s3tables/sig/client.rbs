@@ -79,6 +79,12 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#complete_table_migration-instance_method
+      def complete_table_migration: (
+                                      table_arn: ::String
+                                    ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
+
       interface _CreateNamespaceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateNamespaceResponse]
         def table_bucket_arn: () -> ::String
@@ -114,21 +120,7 @@ module Aws
                                   }
                                 ]
                               }?,
-                              schema_v2: {
-                                type: ("struct"),
-                                fields: Array[
-                                  {
-                                    id: ::Integer,
-                                    name: ::String,
-                                    type: {
-                                    },
-                                    required: bool,
-                                    doc: ::String?
-                                  }
-                                ],
-                                schema_id: ::Integer?,
-                                identifier_field_ids: Array[::Integer]?
-                              }?,
+                              schema_v2: Params::iceberg_schema_v2?,
                               partition_spec: {
                                 fields: Array[
                                   {
@@ -140,17 +132,7 @@ module Aws
                                 ],
                                 spec_id: ::Integer?
                               }?,
-                              write_order: {
-                                order_id: ::Integer,
-                                fields: Array[
-                                  {
-                                    source_id: ::Integer,
-                                    transform: ::String,
-                                    direction: ("asc" | "desc"),
-                                    null_order: ("nulls-first" | "nulls-last")
-                                  }
-                                ]
-                              }?,
+                              write_order: Params::iceberg_sort_order?,
                               properties: Hash[::String, ::String]?
                             }?
                           },
@@ -420,6 +402,35 @@ module Aws
                                        ) -> _GetTableMetadataLocationResponseSuccess
                                      | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableMetadataLocationResponseSuccess
 
+      interface _GetTableMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetTableMigrationResponse]
+        def migration_id: () -> ::String
+        def table_bucket_arn: () -> ::String
+        def namespace: () -> ::String
+        def table_arn: () -> ::String
+        def name: () -> ::String
+        def type: () -> ("start" | "sync")
+        def state: () -> ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
+        def role_arn: () -> ::String
+        def review_migration_plan: () -> bool
+        def has_valid_plan: () -> bool
+        def created_at: () -> ::Time
+        def state_updated_at: () -> ::Time
+        def failure_reason: () -> Types::MigrationFailureReason
+        def planning_stats: () -> Types::PlanningStats
+        def migration_stats: () -> Types::MigrationStats
+        def source_type: () -> ("glueTable")
+        def source: () -> Types::SourceConfiguration
+        def data_migration: () -> Types::DataMigrationOverview
+        def migration_output: () -> Types::MigrationOutputOverview
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#get_table_migration-instance_method
+      def get_table_migration: (
+                                 ?migration_id: ::String,
+                                 ?table_arn: ::String
+                               ) -> _GetTableMigrationResponseSuccess
+                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetTableMigrationResponseSuccess
+
       interface _GetTablePolicyResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTablePolicyResponse]
         def resource_policy: () -> ::String
@@ -516,6 +527,24 @@ module Aws
                                 ?type: ("customer" | "aws")
                               ) -> _ListTableBucketsResponseSuccess
                             | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTableBucketsResponseSuccess
+
+      interface _ListTableMigrationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListTableMigrationsResponse]
+        def migrations: () -> ::Array[Types::MigrationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#list_table_migrations-instance_method
+      def list_table_migrations: (
+                                   ?table_bucket_arn: ::String,
+                                   ?namespace: ::String,
+                                   ?name: ::String,
+                                   ?table_arn: ::String,
+                                   ?state: ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled"),
+                                   ?has_valid_plan: bool,
+                                   ?max_results: ::Integer,
+                                   ?next_token: ::String
+                                 ) -> _ListTableMigrationsResponseSuccess
+                               | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListTableMigrationsResponseSuccess
 
       interface _ListTablesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTablesResponse]
@@ -692,6 +721,78 @@ module Aws
                         ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _StartTableMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartTableMigrationResponse]
+        def migration_id: () -> ::String
+        def state: () -> ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#start_table_migration-instance_method
+      def start_table_migration: (
+                                   role_arn: ::String,
+                                   destination_table: {
+                                     table_bucket_arn: ::String,
+                                     namespace: ::String,
+                                     name: ::String,
+                                     encryption_configuration: {
+                                       sse_algorithm: ("AES256" | "aws:kms"),
+                                       kms_key_arn: ::String?
+                                     }?,
+                                     storage_class_configuration: {
+                                       storage_class: ("STANDARD" | "INTELLIGENT_TIERING")
+                                     }?,
+                                     tags: Hash[::String, ::String]?,
+                                     properties: {
+                                       write_format: ("parquet")?,
+                                       iceberg_format_version: ::Integer?,
+                                       compression_codec: ("zstd" | "snappy" | "gzip" | "uncompressed")?,
+                                       dictionary_encoding: bool?
+                                     }?,
+                                     schema: Params::iceberg_schema_v2?,
+                                     iceberg_sort_order: Params::iceberg_sort_order?
+                                   },
+                                   source_type: ("glueTable"),
+                                   source: {
+                                     glue_table: {
+                                       catalog_id: ::String,
+                                       database_name: ::String,
+                                       table_name: ::String
+                                     }?
+                                   },
+                                   ?data_migration: {
+                                     maintenance_settings: {
+                                       iceberg_compaction: {
+                                         target_file_size_mb: ::Integer?,
+                                         strategy: ("auto" | "binpack" | "sort" | "z-order")?
+                                       }?,
+                                       iceberg_snapshot_management: {
+                                         min_snapshots_to_keep: ::Integer?,
+                                         max_snapshot_age_hours: ::Integer?
+                                       }?
+                                     }?,
+                                     migration_policies: {
+                                       unmatched_source_fields_policy: ("fail" | "drop")?,
+                                       incompatible_values_policy: ("fail" | "setNull")?
+                                     }?
+                                   },
+                                   ?review_migration_plan: bool,
+                                   migration_output: Params::migration_output_configuration
+                                 ) -> _StartTableMigrationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartTableMigrationResponseSuccess
+
+      interface _SyncTableMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::SyncTableMigrationResponse]
+        def migration_id: () -> ::String
+        def state: () -> ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#sync_table_migration-instance_method
+      def sync_table_migration: (
+                                  role_arn: ::String,
+                                  table_arn: ::String,
+                                  ?review_migration_plan: bool,
+                                  migration_output: Params::migration_output_configuration
+                                ) -> _SyncTableMigrationResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SyncTableMigrationResponseSuccess
+
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]
       end
@@ -729,6 +830,21 @@ module Aws
                                             metadata_location: ::String
                                           ) -> _UpdateTableMetadataLocationResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableMetadataLocationResponseSuccess
+
+      interface _UpdateTableMigrationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateTableMigrationResponse]
+        def migration_id: () -> ::String
+        def state: () -> ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
+        def table_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/S3Tables/Client.html#update_table_migration-instance_method
+      def update_table_migration: (
+                                    ?table_arn: ::String,
+                                    ?migration_id: ::String,
+                                    requested_state: ("queued" | "cancelled"),
+                                    ?update_description: ::String
+                                  ) -> _UpdateTableMigrationResponseSuccess
+                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTableMigrationResponseSuccess
     end
   end
 end

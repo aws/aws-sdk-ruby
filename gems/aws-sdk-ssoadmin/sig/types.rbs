@@ -898,6 +898,7 @@ module Aws::SSOAdmin
     class ListInstancesRequest
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
+      attr_accessor region_scope: ("CURRENT_REGION" | "ALL_REGIONS")
       SENSITIVE: []
     end
 

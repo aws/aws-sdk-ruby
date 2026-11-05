@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2026-11-04)
+------------------
+
+* Feature - GetListing and SearchListings APIs now return G2 and PeerSpot review sources in review summaries.
+
+1.15.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.14.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.13.0 (2026-10-21)
 ------------------
 

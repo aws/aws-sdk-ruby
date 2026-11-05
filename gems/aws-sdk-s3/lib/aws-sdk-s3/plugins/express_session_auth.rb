@@ -35,8 +35,7 @@ for different buckets.
             if context[:auth_scheme]['name'] == 'sigv4-s3express' &&
                !context.config.disable_s3_express_session_auth
               bucket = context.params[:bucket]
-              credentials_provider = context.config.express_credentials_provider
-              credentials = credentials_provider.express_credentials_for(bucket)
+              credentials = express_credentials_for(context, bucket)
               context[:sigv4_credentials] = credentials # Sign will use this
             end
 
@@ -44,6 +43,15 @@ for different buckets.
           end
 
           private
+
+          def express_credentials_for(context, bucket)
+            provider = context.config.express_credentials_provider
+            if provider.is_a?(ExpressCredentialsProvider)
+              provider.express_credentials_for(bucket, context.client)
+            else
+              provider.express_credentials_for(bucket)
+            end
+          end
 
           def with_metric(credentials, &block)
             return block.call unless credentials

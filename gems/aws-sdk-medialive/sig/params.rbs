@@ -1031,6 +1031,13 @@ module Aws
       bandwidth_reduction_filter_settings: {
         post_filter_sharpening: ("DISABLED" | "SHARPENING_1" | "SHARPENING_2" | "SHARPENING_3")?,
         strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4")?
+      }?,
+      auto_filter_settings: {
+      }?,
+      none_filter_settings: {
+      }?,
+      perceptual_filter_settings: {
+        strength: ("STRENGTH_1" | "STRENGTH_2")
       }?
     }
 
@@ -1082,7 +1089,8 @@ module Aws
         prefix: ::String?
       }?,
       min_qp: ::Integer?,
-      min_bitrate: ::Integer?
+      min_bitrate: ::Integer?,
+      allow_explicit_weighted_prediction: ("DISABLED" | "ENABLED")?
     }
 
       type h265_color_space_settings = {
@@ -1110,6 +1118,13 @@ module Aws
       bandwidth_reduction_filter_settings: {
         post_filter_sharpening: ("DISABLED" | "SHARPENING_1" | "SHARPENING_2" | "SHARPENING_3")?,
         strength: ("AUTO" | "STRENGTH_1" | "STRENGTH_2" | "STRENGTH_3" | "STRENGTH_4")?
+      }?,
+      auto_filter_settings: {
+      }?,
+      none_filter_settings: {
+      }?,
+      perceptual_filter_settings: {
+        strength: ("STRENGTH_1" | "STRENGTH_2")
       }?
     }
 
@@ -1206,6 +1221,16 @@ module Aws
       }?
     }
 
+      type av_1_filter_settings = {
+      auto_filter_settings: {
+      }?,
+      none_filter_settings: {
+      }?,
+      perceptual_filter_settings: {
+        strength: ("STRENGTH_1" | "STRENGTH_2")
+      }?
+    }
+
       type av_1_settings = {
       afd_signaling: ("AUTO" | "FIXED" | "NONE")?,
       buf_size: ::Integer?,
@@ -1234,7 +1259,8 @@ module Aws
       spatial_aq: ("DISABLED" | "ENABLED")?,
       temporal_aq: ("DISABLED" | "ENABLED")?,
       timecode_insertion: ("DISABLED" | "METADATA_OBU")?,
-      bit_depth: ("DEPTH_10" | "DEPTH_8")?
+      bit_depth: ("DEPTH_10" | "DEPTH_8")?,
+      filter_settings: Params::av_1_filter_settings?
     }
 
       type video_codec_settings = {

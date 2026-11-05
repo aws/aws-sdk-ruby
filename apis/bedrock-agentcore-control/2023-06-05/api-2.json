@@ -619,6 +619,7 @@
         {"shape":"UnauthorizedException"},
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServerException"}
@@ -2561,6 +2562,25 @@
       ],
       "idempotent":true
     },
+    "ResetTokenVaultKeyMaterial":{
+      "name":"ResetTokenVaultKeyMaterial",
+      "http":{
+        "method":"POST",
+        "requestUri":"/identities/reset-token-vault-key-material",
+        "responseCode":200
+      },
+      "input":{"shape":"ResetTokenVaultKeyMaterialRequest"},
+      "output":{"shape":"ResetTokenVaultKeyMaterialResponse"},
+      "errors":[
+        {"shape":"UnauthorizedException"},
+        {"shape":"ValidationException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"ThrottlingException"},
+        {"shape":"InternalServerException"}
+      ]
+    },
     "RotatePaymentConnectorCredentials":{
       "name":"RotatePaymentConnectorCredentials",
       "http":{
@@ -2594,6 +2614,7 @@
         {"shape":"ConcurrentModificationException"},
         {"shape":"ValidationException"},
         {"shape":"AccessDeniedException"},
+        {"shape":"ConflictException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
         {"shape":"InternalServerException"}
@@ -3219,6 +3240,7 @@
       "errors":[
         {"shape":"UnauthorizedException"},
         {"shape":"ValidationException"},
+        {"shape":"ConflictException"},
         {"shape":"AccessDeniedException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"ThrottlingException"},
@@ -3505,6 +3527,20 @@
     "AllowedClientsList":{
       "type":"list",
       "member":{"shape":"AllowedClient"},
+      "min":1
+    },
+    "AllowedPort":{
+      "type":"structure",
+      "members":{
+        "port":{"shape":"Port"},
+        "portRange":{"shape":"PortRange"}
+      },
+      "union":true
+    },
+    "AllowedPorts":{
+      "type":"list",
+      "member":{"shape":"AllowedPort"},
+      "max":5,
       "min":1
     },
     "AllowedQueryParameters":{
@@ -4868,7 +4904,8 @@
         "filesystemConfigurations":{"shape":"FilesystemConfigurations"},
         "capacityProviderConfiguration":{"shape":"CapacityProviderConfiguration"},
         "tags":{"shape":"TagsMap"},
-        "platformVersion":{"shape":"PlatformVersion"}
+        "platformVersion":{"shape":"PlatformVersion"},
+        "allowedPorts":{"shape":"AllowedPorts"}
       }
     },
     "CreateAgentRuntimeResponse":{
@@ -8347,7 +8384,8 @@
         "metadataConfiguration":{"shape":"RuntimeMetadataConfiguration"},
         "filesystemConfigurations":{"shape":"FilesystemConfigurations"},
         "capacityProviderConfiguration":{"shape":"CapacityProviderConfiguration"},
-        "platformVersion":{"shape":"PlatformVersion"}
+        "platformVersion":{"shape":"PlatformVersion"},
+        "allowedPorts":{"shape":"AllowedPorts"}
       }
     },
     "GetApiKeyCredentialProviderRequest":{
@@ -12996,12 +13034,24 @@
       },
       "union":true
     },
+    "OnBehalfOfAuthenticationConfig":{
+      "type":"structure",
+      "required":["clientAuthenticationMethod"],
+      "members":{
+        "clientAuthenticationMethod":{"shape":"OnBehalfOfClientAuthenticationMethod"}
+      }
+    },
+    "OnBehalfOfClientAuthenticationMethod":{
+      "type":"string",
+      "enum":["NO_CLIENT"]
+    },
     "OnBehalfOfTokenExchangeConfigType":{
       "type":"structure",
       "required":["grantType"],
       "members":{
         "grantType":{"shape":"OnBehalfOfTokenExchangeGrantTypeType"},
-        "tokenExchangeGrantTypeConfig":{"shape":"TokenExchangeGrantTypeConfigType"}
+        "tokenExchangeGrantTypeConfig":{"shape":"TokenExchangeGrantTypeConfigType"},
+        "onBehalfOfAuthenticationConfig":{"shape":"OnBehalfOfAuthenticationConfig"}
       }
     },
     "OnBehalfOfTokenExchangeGrantTypeType":{
@@ -13679,6 +13729,23 @@
         "IGNORE_ALL_FINDINGS"
       ]
     },
+    "Port":{
+      "type":"integer",
+      "box":true,
+      "max":12000,
+      "min":8000
+    },
+    "PortRange":{
+      "type":"structure",
+      "required":[
+        "from",
+        "to"
+      ],
+      "members":{
+        "from":{"shape":"Port"},
+        "to":{"shape":"Port"}
+      }
+    },
     "PortalUrlType":{
       "type":"string",
       "max":2000,
@@ -13751,7 +13818,9 @@
       "type":"structure",
       "required":["serverProtocol"],
       "members":{
-        "serverProtocol":{"shape":"ServerProtocol"}
+        "serverProtocol":{"shape":"ServerProtocol"},
+        "port":{"shape":"ServerPort"},
+        "path":{"shape":"ServerPath"}
       }
     },
     "Provider":{
@@ -14084,6 +14153,26 @@
     "RequiredProperties":{
       "type":"list",
       "member":{"shape":"String"}
+    },
+    "ResetTokenVaultKeyMaterialRequest":{
+      "type":"structure",
+      "required":["tokenVaultId"],
+      "members":{
+        "tokenVaultId":{"shape":"TokenVaultIdType"}
+      }
+    },
+    "ResetTokenVaultKeyMaterialResponse":{
+      "type":"structure",
+      "required":[
+        "tokenVaultId",
+        "kmsConfiguration",
+        "lastModifiedDate"
+      ],
+      "members":{
+        "tokenVaultId":{"shape":"TokenVaultIdType"},
+        "kmsConfiguration":{"shape":"KmsConfiguration"},
+        "lastModifiedDate":{"shape":"Timestamp"}
+      }
     },
     "Resource":{
       "type":"structure",
@@ -14700,6 +14789,18 @@
         "schemaVersion":{"shape":"SchemaVersion"},
         "inlineContent":{"shape":"InlineContent"}
       }
+    },
+    "ServerPath":{
+      "type":"string",
+      "max":2048,
+      "min":1,
+      "pattern":"/[A-Za-z0-9\\-._~/%]*"
+    },
+    "ServerPort":{
+      "type":"integer",
+      "box":true,
+      "max":12000,
+      "min":8000
     },
     "ServerProtocol":{
       "type":"string",
@@ -15784,6 +15885,7 @@
         "filesystemConfigurations":{"shape":"FilesystemConfigurations"},
         "capacityProviderConfiguration":{"shape":"CapacityProviderConfiguration"},
         "platformVersion":{"shape":"PlatformVersion"},
+        "allowedPorts":{"shape":"AllowedPorts"},
         "clientToken":{
           "shape":"ClientToken",
           "idempotencyToken":true

@@ -376,6 +376,7 @@ module Aws::MarketplaceCatalog
       attr_accessor machine_learning_product_summary: Types::MachineLearningProductSummary
       attr_accessor offer_set_summary: Types::OfferSetSummary
       attr_accessor express_private_offer_configuration_summary: Types::ExpressPrivateOfferConfigurationSummary
+      attr_accessor subsidiary_authorization_summary: Types::SubsidiaryAuthorizationSummary
       SENSITIVE: []
     end
 
@@ -389,6 +390,7 @@ module Aws::MarketplaceCatalog
       attr_accessor machine_learning_product_filters: Types::MachineLearningProductFilters
       attr_accessor offer_set_filters: Types::OfferSetFilters
       attr_accessor express_private_offer_configuration_filters: Types::ExpressPrivateOfferConfigurationFilters
+      attr_accessor subsidiary_authorization_filters: Types::SubsidiaryAuthorizationFilters
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -410,6 +412,8 @@ module Aws::MarketplaceCatalog
       end
       class ExpressPrivateOfferConfigurationFilters < EntityTypeFilters
       end
+      class SubsidiaryAuthorizationFilters < EntityTypeFilters
+      end
       class Unknown < EntityTypeFilters
       end
     end
@@ -424,6 +428,7 @@ module Aws::MarketplaceCatalog
       attr_accessor machine_learning_product_sort: Types::MachineLearningProductSort
       attr_accessor offer_set_sort: Types::OfferSetSort
       attr_accessor express_private_offer_configuration_sort: Types::ExpressPrivateOfferConfigurationSort
+      attr_accessor subsidiary_authorization_sort: Types::SubsidiaryAuthorizationSort
       attr_accessor unknown: untyped
       SENSITIVE: []
 
@@ -444,6 +449,8 @@ module Aws::MarketplaceCatalog
       class OfferSetSort < EntityTypeSort
       end
       class ExpressPrivateOfferConfigurationSort < EntityTypeSort
+      end
+      class SubsidiaryAuthorizationSort < EntityTypeSort
       end
       class Unknown < EntityTypeSort
       end
@@ -1100,6 +1107,88 @@ module Aws::MarketplaceCatalog
     class StartChangeSetResponse
       attr_accessor change_set_id: ::String
       attr_accessor change_set_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationCreatedDateFilter
+      attr_accessor date_range: Types::SubsidiaryAuthorizationCreatedDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationCreatedDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationEntityIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationFilters
+      attr_accessor entity_id: Types::SubsidiaryAuthorizationEntityIdFilter
+      attr_accessor status: Types::SubsidiaryAuthorizationStatusFilter
+      attr_accessor resource_id: Types::SubsidiaryAuthorizationResourceIdFilter
+      attr_accessor resource_name: Types::SubsidiaryAuthorizationResourceNameFilter
+      attr_accessor name: Types::SubsidiaryAuthorizationNameFilter
+      attr_accessor subsidiary_account_id: Types::SubsidiaryAuthorizationSubsidiaryAccountIdFilter
+      attr_accessor created_date: Types::SubsidiaryAuthorizationCreatedDateFilter
+      attr_accessor last_modified_date: Types::SubsidiaryAuthorizationLastModifiedDateFilter
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationLastModifiedDateFilter
+      attr_accessor date_range: Types::SubsidiaryAuthorizationLastModifiedDateFilterDateRange
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationLastModifiedDateFilterDateRange
+      attr_accessor after_value: ::String
+      attr_accessor before_value: ::String
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationNameFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationResourceIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationResourceNameFilter
+      attr_accessor value_list: ::Array[::String]
+      attr_accessor wild_card_value: ::String
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationSort
+      attr_accessor sort_by: ("EntityId" | "Status" | "ResourceId" | "SubsidiaryAccountId" | "CreatedDate" | "LastModifiedDate")
+      attr_accessor sort_order: ("ASCENDING" | "DESCENDING")
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationStatusFilter
+      attr_accessor value_list: ::Array[("Draft" | "Active" | "Restricted")]
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationSubsidiaryAccountIdFilter
+      attr_accessor value_list: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class SubsidiaryAuthorizationSummary
+      attr_accessor name: ::String
+      attr_accessor status: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_name: ::String
+      attr_accessor subsidiary_account_id: ::String
+      attr_accessor created_date: ::String
       SENSITIVE: []
     end
 

@@ -24,7 +24,13 @@ module Aws::ACM
             end
             return Aws::Endpoints::Endpoint.new(url: "https://acm-acme.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}")
           end
-          raise ArgumentError, "ACME operations are only available in commercial AWS partitions"
+          if Aws::Endpoints::Matchers.string_equals?(Aws::Endpoints::Matchers.attr(partition_result, "name"), "aws-us-gov")
+            if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true)
+              raise ArgumentError, "FIPS endpoints are not available for ACME operations"
+            end
+            return Aws::Endpoints::Endpoint.new(url: "https://acm-acme.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}")
+          end
+          raise ArgumentError, "ACME operations are only available in the aws and aws-us-gov partitions"
         end
         if Aws::Endpoints::Matchers.boolean_equals?(parameters.use_fips, true) && Aws::Endpoints::Matchers.boolean_equals?(parameters.use_dual_stack, true)
           return Aws::Endpoints::Endpoint.new(url: "https://acm-fips.#{parameters.region}.#{partition_result['dualStackDnsSuffix']}")

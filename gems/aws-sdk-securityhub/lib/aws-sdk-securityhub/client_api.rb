@@ -1052,6 +1052,12 @@ module Aws::SecurityHub
     GetResourcesV2Response = Shapes::StructureShape.new(name: 'GetResourcesV2Response')
     GetSecurityControlDefinitionRequest = Shapes::StructureShape.new(name: 'GetSecurityControlDefinitionRequest')
     GetSecurityControlDefinitionResponse = Shapes::StructureShape.new(name: 'GetSecurityControlDefinitionResponse')
+    GetSoftwareResourcesV2Request = Shapes::StructureShape.new(name: 'GetSoftwareResourcesV2Request')
+    GetSoftwareResourcesV2Response = Shapes::StructureShape.new(name: 'GetSoftwareResourcesV2Response')
+    GetSoftwareStatisticsV2Request = Shapes::StructureShape.new(name: 'GetSoftwareStatisticsV2Request')
+    GetSoftwareStatisticsV2Response = Shapes::StructureShape.new(name: 'GetSoftwareStatisticsV2Response')
+    GetSoftwareV2Request = Shapes::StructureShape.new(name: 'GetSoftwareV2Request')
+    GetSoftwareV2Response = Shapes::StructureShape.new(name: 'GetSoftwareV2Response')
     GranularityField = Shapes::StringShape.new(name: 'GranularityField')
     GroupByField = Shapes::StringShape.new(name: 'GroupByField')
     GroupByResult = Shapes::StructureShape.new(name: 'GroupByResult')
@@ -1402,8 +1408,22 @@ module Aws::SecurityHub
     Signal = Shapes::StructureShape.new(name: 'Signal')
     SignalsList = Shapes::ListShape.new(name: 'SignalsList')
     SizeBytes = Shapes::IntegerShape.new(name: 'SizeBytes')
+    SoftwareCompositeFilter = Shapes::StructureShape.new(name: 'SoftwareCompositeFilter')
+    SoftwareCompositeFilterList = Shapes::ListShape.new(name: 'SoftwareCompositeFilterList')
+    SoftwareFilters = Shapes::StructureShape.new(name: 'SoftwareFilters')
+    SoftwareGroupByField = Shapes::StringShape.new(name: 'SoftwareGroupByField')
+    SoftwareGroupByRule = Shapes::StructureShape.new(name: 'SoftwareGroupByRule')
+    SoftwareGroupByRules = Shapes::ListShape.new(name: 'SoftwareGroupByRules')
+    SoftwareList = Shapes::ListShape.new(name: 'SoftwareList')
     SoftwarePackage = Shapes::StructureShape.new(name: 'SoftwarePackage')
     SoftwarePackageList = Shapes::ListShape.new(name: 'SoftwarePackageList')
+    SoftwareResourceResult = Shapes::StructureShape.new(name: 'SoftwareResourceResult')
+    SoftwareResourceResultList = Shapes::ListShape.new(name: 'SoftwareResourceResultList')
+    SoftwareResult = Shapes::StructureShape.new(name: 'SoftwareResult')
+    SoftwareScopes = Shapes::StructureShape.new(name: 'SoftwareScopes')
+    SoftwareStringField = Shapes::StringShape.new(name: 'SoftwareStringField')
+    SoftwareStringFilter = Shapes::StructureShape.new(name: 'SoftwareStringFilter')
+    SoftwareStringFilterList = Shapes::ListShape.new(name: 'SoftwareStringFilterList')
     SortCriteria = Shapes::ListShape.new(name: 'SortCriteria')
     SortCriterion = Shapes::StructureShape.new(name: 'SortCriterion')
     SortOrder = Shapes::StringShape.new(name: 'SortOrder')
@@ -6727,6 +6747,40 @@ module Aws::SecurityHub
     GetSecurityControlDefinitionResponse.add_member(:security_control_definition, Shapes::ShapeRef.new(shape: SecurityControlDefinition, required: true, location_name: "SecurityControlDefinition"))
     GetSecurityControlDefinitionResponse.struct_class = Types::GetSecurityControlDefinitionResponse
 
+    GetSoftwareResourcesV2Request.add_member(:package_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "PackageName"))
+    GetSoftwareResourcesV2Request.add_member(:package_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "PackageType"))
+    GetSoftwareResourcesV2Request.add_member(:package_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PackageVersion"))
+    GetSoftwareResourcesV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: SoftwareFilters, location_name: "Filters"))
+    GetSoftwareResourcesV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: SoftwareScopes, location_name: "Scopes"))
+    GetSoftwareResourcesV2Request.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
+    GetSoftwareResourcesV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSoftwareResourcesV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetSoftwareResourcesV2Request.struct_class = Types::GetSoftwareResourcesV2Request
+
+    GetSoftwareResourcesV2Response.add_member(:software_resources, Shapes::ShapeRef.new(shape: SoftwareResourceResultList, required: true, location_name: "SoftwareResources"))
+    GetSoftwareResourcesV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSoftwareResourcesV2Response.struct_class = Types::GetSoftwareResourcesV2Response
+
+    GetSoftwareStatisticsV2Request.add_member(:group_by_rules, Shapes::ShapeRef.new(shape: SoftwareGroupByRules, required: true, location_name: "GroupByRules"))
+    GetSoftwareStatisticsV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: SoftwareScopes, location_name: "Scopes"))
+    GetSoftwareStatisticsV2Request.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
+    GetSoftwareStatisticsV2Request.add_member(:max_statistic_results, Shapes::ShapeRef.new(shape: MaxStatisticResults, location_name: "MaxStatisticResults"))
+    GetSoftwareStatisticsV2Request.struct_class = Types::GetSoftwareStatisticsV2Request
+
+    GetSoftwareStatisticsV2Response.add_member(:group_by_results, Shapes::ShapeRef.new(shape: GroupByResults, required: true, location_name: "GroupByResults"))
+    GetSoftwareStatisticsV2Response.struct_class = Types::GetSoftwareStatisticsV2Response
+
+    GetSoftwareV2Request.add_member(:filters, Shapes::ShapeRef.new(shape: SoftwareFilters, location_name: "Filters"))
+    GetSoftwareV2Request.add_member(:scopes, Shapes::ShapeRef.new(shape: SoftwareScopes, location_name: "Scopes"))
+    GetSoftwareV2Request.add_member(:sort_criteria, Shapes::ShapeRef.new(shape: SortCriteria, location_name: "SortCriteria"))
+    GetSoftwareV2Request.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSoftwareV2Request.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    GetSoftwareV2Request.struct_class = Types::GetSoftwareV2Request
+
+    GetSoftwareV2Response.add_member(:software, Shapes::ShapeRef.new(shape: SoftwareList, required: true, location_name: "Software"))
+    GetSoftwareV2Response.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    GetSoftwareV2Response.struct_class = Types::GetSoftwareV2Response
+
     GroupByResult.add_member(:group_by_field, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "GroupByField"))
     GroupByResult.add_member(:group_by_values, Shapes::ShapeRef.new(shape: GroupByValues, location_name: "GroupByValues"))
     GroupByResult.struct_class = Types::GroupByResult
@@ -8103,6 +8157,25 @@ module Aws::SecurityHub
 
     SignalsList.member = Shapes::ShapeRef.new(shape: Signal)
 
+    SoftwareCompositeFilter.add_member(:string_filters, Shapes::ShapeRef.new(shape: SoftwareStringFilterList, location_name: "StringFilters"))
+    SoftwareCompositeFilter.add_member(:nested_composite_filters, Shapes::ShapeRef.new(shape: SoftwareCompositeFilterList, location_name: "NestedCompositeFilters"))
+    SoftwareCompositeFilter.add_member(:operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "Operator"))
+    SoftwareCompositeFilter.struct_class = Types::SoftwareCompositeFilter
+
+    SoftwareCompositeFilterList.member = Shapes::ShapeRef.new(shape: SoftwareCompositeFilter)
+
+    SoftwareFilters.add_member(:composite_filters, Shapes::ShapeRef.new(shape: SoftwareCompositeFilterList, location_name: "CompositeFilters"))
+    SoftwareFilters.add_member(:composite_operator, Shapes::ShapeRef.new(shape: AllowedOperators, location_name: "CompositeOperator"))
+    SoftwareFilters.struct_class = Types::SoftwareFilters
+
+    SoftwareGroupByRule.add_member(:group_by_field, Shapes::ShapeRef.new(shape: SoftwareGroupByField, required: true, location_name: "GroupByField"))
+    SoftwareGroupByRule.add_member(:filters, Shapes::ShapeRef.new(shape: SoftwareFilters, location_name: "Filters"))
+    SoftwareGroupByRule.struct_class = Types::SoftwareGroupByRule
+
+    SoftwareGroupByRules.member = Shapes::ShapeRef.new(shape: SoftwareGroupByRule)
+
+    SoftwareList.member = Shapes::ShapeRef.new(shape: SoftwareResult)
+
     SoftwarePackage.add_member(:name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Name"))
     SoftwarePackage.add_member(:version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Version"))
     SoftwarePackage.add_member(:epoch, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Epoch"))
@@ -8117,6 +8190,34 @@ module Aws::SecurityHub
     SoftwarePackage.struct_class = Types::SoftwarePackage
 
     SoftwarePackageList.member = Shapes::ShapeRef.new(shape: SoftwarePackage)
+
+    SoftwareResourceResult.add_member(:account_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "AccountId"))
+    SoftwareResourceResult.add_member(:resource_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceType"))
+    SoftwareResourceResult.add_member(:region, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Region"))
+    SoftwareResourceResult.add_member(:resource_id, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "ResourceId"))
+    SoftwareResourceResult.add_member(:resource_provider, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceProvider"))
+    SoftwareResourceResult.add_member(:resource_owner_org_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceOwnerOrgId"))
+    SoftwareResourceResult.add_member(:resource_owner_account_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceOwnerAccountId"))
+    SoftwareResourceResult.add_member(:resource_cloud_partition, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceCloudPartition"))
+    SoftwareResourceResult.add_member(:resource_region, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "ResourceRegion"))
+    SoftwareResourceResult.struct_class = Types::SoftwareResourceResult
+
+    SoftwareResourceResultList.member = Shapes::ShapeRef.new(shape: SoftwareResourceResult)
+
+    SoftwareResult.add_member(:package_name, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "PackageName"))
+    SoftwareResult.add_member(:package_version, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "PackageVersion"))
+    SoftwareResult.add_member(:package_type, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "PackageType"))
+    SoftwareResult.add_member(:resource_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ResourceCount"))
+    SoftwareResult.struct_class = Types::SoftwareResult
+
+    SoftwareScopes.add_member(:aws_organizations, Shapes::ShapeRef.new(shape: AwsOrganizationScopeList, location_name: "AwsOrganizations"))
+    SoftwareScopes.struct_class = Types::SoftwareScopes
+
+    SoftwareStringFilter.add_member(:field_name, Shapes::ShapeRef.new(shape: SoftwareStringField, location_name: "FieldName"))
+    SoftwareStringFilter.add_member(:filter, Shapes::ShapeRef.new(shape: StringFilter, location_name: "Filter"))
+    SoftwareStringFilter.struct_class = Types::SoftwareStringFilter
+
+    SoftwareStringFilterList.member = Shapes::ShapeRef.new(shape: SoftwareStringFilter)
 
     SortCriteria.member = Shapes::ShapeRef.new(shape: SortCriterion)
 
@@ -9830,6 +9931,66 @@ module Aws::SecurityHub
         o.errors << Shapes::ShapeRef.new(shape: InvalidAccessException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_software_resources_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSoftwareResourcesV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/softwarev2/resources"
+        o.input = Shapes::ShapeRef.new(shape: GetSoftwareResourcesV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetSoftwareResourcesV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:get_software_statistics_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSoftwareStatisticsV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/softwarev2/statistics"
+        o.input = Shapes::ShapeRef.new(shape: GetSoftwareStatisticsV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetSoftwareStatisticsV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+      end)
+
+      api.add_operation(:get_software_v2, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSoftwareV2"
+        o.http_method = "POST"
+        o.http_request_uri = "/softwarev2"
+        o.input = Shapes::ShapeRef.new(shape: GetSoftwareV2Request)
+        o.output = Shapes::ShapeRef.new(shape: GetSoftwareV2Response)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationalUnitNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OrganizationNotFoundException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
       end)
 
       api.add_operation(:invite_members, Seahorse::Model::Operation.new.tap do |o|

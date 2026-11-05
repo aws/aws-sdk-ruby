@@ -29,6 +29,12 @@ module Aws
         def request_id: () -> ::String
         def code: () -> ::String
       end
+      class CancelledByMaintenanceException < ServiceError
+        def detailed_message: () -> ::String
+                          | (**untyped) -> String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
       class CancelledByUserException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
@@ -167,6 +173,12 @@ module Aws
         def request_id: () -> ::String
         def code: () -> ::String
       end
+      class ResourceNotFoundException < ServiceError
+        def detailed_message: () -> ::String
+                          | (**untyped) -> String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
       class S3Exception < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
@@ -210,6 +222,12 @@ module Aws
         def code: () -> ::String
       end
       class UnsupportedOperationException < ServiceError
+        def detailed_message: () -> ::String
+                          | (**untyped) -> String
+        def request_id: () -> ::String
+        def code: () -> ::String
+      end
+      class ValidationException < ServiceError
         def detailed_message: () -> ::String
                           | (**untyped) -> String
         def request_id: () -> ::String

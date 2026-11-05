@@ -334,6 +334,30 @@ module Aws
           value: ::String
         }
       ]?,
+      machine_image_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      machine_image_name: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      machine_image_owner_account_id: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
+      machine_image_platform: Array[
+        {
+          comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
+          value: ::String
+        }
+      ]?,
       cloud_provider: Array[
         {
           comparison: ("EQUALS" | "PREFIX" | "NOT_EQUALS"),
@@ -558,6 +582,13 @@ module Aws
         {
           comparison: ("EQUALS" | "NOT_EQUALS"),
           value: ::String
+        }
+      ]?,
+      machine_image_tags: Array[
+        {
+          comparison: ("EQUALS"),
+          key: ::String,
+          value: ::String?
         }
       ]?,
       last_scanned_at: Array[

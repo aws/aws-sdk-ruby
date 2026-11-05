@@ -446,6 +446,29 @@ module Aws
                              ) -> _DescribeRegistryResponseSuccess
                            | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRegistryResponseSuccess
 
+      interface _DescribeReplicationBackfillResultsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeReplicationBackfillResultsResponse]
+        def registry_id: () -> ::String
+        def replication_backfill_id: () -> ::String
+        def destination: () -> Types::ReplicationDestination
+        def status: () -> ("PREPARING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
+        def failure_code: () -> ::String
+        def progress: () -> Types::ReplicationBackfillProgress
+        def results: () -> ::Array[Types::ReplicationBackfillResult]
+        def started_at: () -> ::Time
+        def ended_at: () -> ::Time
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#describe_replication_backfill_results-instance_method
+      def describe_replication_backfill_results: (
+                                                   ?registry_id: ::String,
+                                                   replication_backfill_id: ::String,
+                                                   ?result_status_filter: ("COMPLETE" | "FAILED"),
+                                                   ?max_results: ::Integer,
+                                                   ?next_token: ::String
+                                                 ) -> _DescribeReplicationBackfillResultsResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeReplicationBackfillResultsResponseSuccess
+
       interface _DescribeRepositoriesResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRepositoriesResponse]
         def repositories: () -> ::Array[Types::Repository]
@@ -655,6 +678,20 @@ module Aws
                                               ?next_token: ::String
                                             ) -> _ListPullTimeUpdateExclusionsResponseSuccess
                                           | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListPullTimeUpdateExclusionsResponseSuccess
+
+      interface _ListReplicationBackfillsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListReplicationBackfillsResponse]
+        def registry_id: () -> ::String
+        def backfills: () -> ::Array[Types::ReplicationBackfillSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#list_replication_backfills-instance_method
+      def list_replication_backfills: (
+                                        ?registry_id: ::String,
+                                        ?max_results: ::Integer,
+                                        ?next_token: ::String
+                                      ) -> _ListReplicationBackfillsResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListReplicationBackfillsResponseSuccess
 
       interface _ListTagsForResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTagsForResourceResponse]
@@ -883,6 +920,39 @@ module Aws
                                             ?lifecycle_policy_text: ::String
                                           ) -> _StartLifecyclePolicyPreviewResponseSuccess
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartLifecyclePolicyPreviewResponseSuccess
+
+      interface _StartReplicationBackfillResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartReplicationBackfillResponse]
+        def replication_backfill_id: () -> ::String
+        def registry_id: () -> ::String
+        def destination: () -> Types::ReplicationDestination
+        def status: () -> ("PREPARING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
+        def started_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#start_replication_backfill-instance_method
+      def start_replication_backfill: (
+                                        ?registry_id: ::String,
+                                        destination: {
+                                          region: ::String,
+                                          registry_id: ::String
+                                        }
+                                      ) -> _StartReplicationBackfillResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartReplicationBackfillResponseSuccess
+
+      interface _StopReplicationBackfillResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopReplicationBackfillResponse]
+        def registry_id: () -> ::String
+        def replication_backfill_id: () -> ::String
+        def destination: () -> Types::ReplicationDestination
+        def status: () -> ("PREPARING" | "IN_PROGRESS" | "COMPLETE" | "FAILED" | "STOPPING" | "STOPPED")
+        def started_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ECR/Client.html#stop_replication_backfill-instance_method
+      def stop_replication_backfill: (
+                                       ?registry_id: ::String,
+                                       replication_backfill_id: ::String
+                                     ) -> _StopReplicationBackfillResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopReplicationBackfillResponseSuccess
 
       interface _TagResourceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::TagResourceResponse]

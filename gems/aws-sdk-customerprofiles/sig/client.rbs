@@ -989,6 +989,9 @@ module Aws
         def template_id: () -> ::String
         def source_name: () -> ::String
         def source_object: () -> ::String
+        def default_max_profile_object_count: () -> ::Integer
+        def default_max_profile_object_count_effective_after: () -> ::Time
+        def store_only: () -> bool
         def allow_profile_creation: () -> bool
         def source_last_updated_timestamp_format: () -> ::String
         def fields: () -> ::Hash[::String, Types::ObjectTypeField]

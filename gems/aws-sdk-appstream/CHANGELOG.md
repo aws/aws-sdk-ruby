@@ -1,6 +1,26 @@
 Unreleased Changes
 ------------------
 
+1.151.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.150.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.149.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.148.0 (2026-10-26)
+------------------
+
+* Feature - Add Windows 11 to PlatformType enum
+
 1.147.0 (2026-10-21)
 ------------------
 

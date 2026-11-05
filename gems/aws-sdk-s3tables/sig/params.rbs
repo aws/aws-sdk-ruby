@@ -1,0 +1,52 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws
+  module S3Tables
+    module Params
+      type iceberg_schema_v2 = {
+      type: ("struct"),
+      fields: Array[
+        Params::schema_v2_field
+      ],
+      schema_id: ::Integer?,
+      identifier_field_ids: Array[::Integer]?
+    }
+
+      type schema_v2_field = {
+      id: ::Integer,
+      name: ::String,
+      type: {
+      },
+      required: bool,
+      doc: ::String?
+    }
+
+      type iceberg_sort_order = {
+      order_id: ::Integer,
+      fields: Array[
+        {
+          source_id: ::Integer,
+          transform: ::String,
+          direction: ("asc" | "desc"),
+          null_order: ("nulls-first" | "nulls-last")
+        }
+      ]
+    }
+
+      type migration_output_configuration = {
+      bucket: ::String,
+      prefixes: {
+        table_compatibility_report: ::String?,
+        object_compatibility_report: ::String?,
+        object_migration_report: ::String?
+      }?
+    }
+
+    end
+  end
+end

@@ -302,6 +302,12 @@ module Aws::ElasticBeanstalk
       SENSITIVE: []
     end
 
+    class DefaultAmi
+      attr_accessor architecture: ("x86_64" | "arm64")
+      attr_accessor image_id: ::String
+      SENSITIVE: []
+    end
+
     class DeleteApplicationMessage
       attr_accessor application_name: ::String
       attr_accessor terminate_env_by_force: bool
@@ -790,6 +796,7 @@ module Aws::ElasticBeanstalk
       attr_accessor programming_languages: ::Array[Types::PlatformProgrammingLanguage]
       attr_accessor frameworks: ::Array[Types::PlatformFramework]
       attr_accessor custom_ami_list: ::Array[Types::CustomAmi]
+      attr_accessor default_ami_list: ::Array[Types::DefaultAmi]
       attr_accessor supported_tier_list: ::Array[::String]
       attr_accessor supported_addon_list: ::Array[::String]
       attr_accessor platform_lifecycle_state: ::String

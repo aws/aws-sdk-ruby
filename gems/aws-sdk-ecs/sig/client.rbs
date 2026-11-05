@@ -1348,6 +1348,9 @@ module Aws
                                                  name: ::String?,
                                                  host: {
                                                    source_path: ::String?
+                                                 }?,
+                                                 log_driver_volume_configuration: {
+                                                   driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens")
                                                  }?
                                                }
                                              ],
@@ -1506,10 +1509,7 @@ module Aws
                                             }
                                           ]?,
                                           resource_requirements: Array[
-                                            {
-                                              value: ::String,
-                                              type: ("GPU" | "InferenceAccelerator" | "NeuronDevice")
-                                            }
+                                            Params::resource_requirement
                                           ]?,
                                           firelens_configuration: {
                                             type: ("fluentd" | "fluentbit"),

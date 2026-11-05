@@ -10122,6 +10122,11 @@ module Aws::CleanRooms
 
     # Contains input information for protected jobs with an S3 output type.
     #
+    # @!attribute [rw] result_format
+    #   The file format of the protected job results. If you don't specify
+    #   a format, results are written as CSV.
+    #   @return [String]
+    #
     # @!attribute [rw] bucket
     #   The S3 bucket for job output.
     #   @return [String]
@@ -10133,6 +10138,7 @@ module Aws::CleanRooms
     # @see http://docs.aws.amazon.com/goto/WebAPI/cleanrooms-2022-02-17/ProtectedJobS3OutputConfigurationInput AWS API Documentation
     #
     class ProtectedJobS3OutputConfigurationInput < Struct.new(
+      :result_format,
       :bucket,
       :key_prefix)
       SENSITIVE = []

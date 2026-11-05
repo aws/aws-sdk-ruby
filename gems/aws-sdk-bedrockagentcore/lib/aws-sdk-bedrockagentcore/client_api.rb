@@ -432,6 +432,7 @@ module Aws::BedrockAgentCore
     InvokeAgentRuntimeRequestTraceParentString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestTraceParentString')
     InvokeAgentRuntimeRequestTraceStateString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeRequestTraceStateString')
     InvokeAgentRuntimeResponse = Shapes::StructureShape.new(name: 'InvokeAgentRuntimeResponse')
+    InvokeAgentRuntimeResponseSessionEndpointUrlString = Shapes::StringShape.new(name: 'InvokeAgentRuntimeResponseSessionEndpointUrlString')
     InvokeBrowserRequest = Shapes::StructureShape.new(name: 'InvokeBrowserRequest')
     InvokeBrowserResponse = Shapes::StructureShape.new(name: 'InvokeBrowserResponse')
     InvokeCodeInterpreterRequest = Shapes::StructureShape.new(name: 'InvokeCodeInterpreterRequest')
@@ -2288,6 +2289,7 @@ module Aws::BedrockAgentCore
     InvokeAgentRuntimeRequest[:payload_member] = InvokeAgentRuntimeRequest.member(:payload)
 
     InvokeAgentRuntimeResponse.add_member(:runtime_session_id, Shapes::ShapeRef.new(shape: SessionId, location: "header", location_name: "X-Amzn-Bedrock-AgentCore-Runtime-Session-Id"))
+    InvokeAgentRuntimeResponse.add_member(:session_endpoint_url, Shapes::ShapeRef.new(shape: InvokeAgentRuntimeResponseSessionEndpointUrlString, location: "header", location_name: "X-Amzn-Bedrock-AgentCore-Runtime-Session-Endpoint-Url"))
     InvokeAgentRuntimeResponse.add_member(:mcp_session_id, Shapes::ShapeRef.new(shape: SessionId, location: "header", location_name: "Mcp-Session-Id"))
     InvokeAgentRuntimeResponse.add_member(:mcp_protocol_version, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "Mcp-Protocol-Version"))
     InvokeAgentRuntimeResponse.add_member(:trace_id, Shapes::ShapeRef.new(shape: String, location: "header", location_name: "X-Amzn-Trace-Id"))

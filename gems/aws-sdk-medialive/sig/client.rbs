@@ -389,7 +389,9 @@ module Aws
                             sources: Array[
                               {
                                 source_ip: ::String?,
-                                url: ::String
+                                url: ::String,
+                                secondary_source_ip: ::String?,
+                                secondary_url: ::String?
                               }
                             ]?
                           },
@@ -1261,7 +1263,9 @@ module Aws
                             sources: Array[
                               {
                                 source_ip: ::String?,
-                                url: ::String
+                                url: ::String,
+                                secondary_source_ip: ::String?,
+                                secondary_url: ::String?
                               }
                             ]?
                           },

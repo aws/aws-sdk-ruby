@@ -2931,6 +2931,7 @@ module Aws::CleanRooms
     ProtectedJobS3Output.add_member(:location, Shapes::ShapeRef.new(shape: String, required: true, location_name: "location"))
     ProtectedJobS3Output.struct_class = Types::ProtectedJobS3Output
 
+    ProtectedJobS3OutputConfigurationInput.add_member(:result_format, Shapes::ShapeRef.new(shape: ResultFormat, location_name: "resultFormat"))
     ProtectedJobS3OutputConfigurationInput.add_member(:bucket, Shapes::ShapeRef.new(shape: ProtectedJobS3OutputConfigurationInputBucketString, required: true, location_name: "bucket"))
     ProtectedJobS3OutputConfigurationInput.add_member(:key_prefix, Shapes::ShapeRef.new(shape: KeyPrefix, location_name: "keyPrefix"))
     ProtectedJobS3OutputConfigurationInput.struct_class = Types::ProtectedJobS3OutputConfigurationInput

@@ -177,13 +177,18 @@ module Aws
                           license_arn: ::String,
                           principals: Array[::String],
                           home_region: ::String,
-                          allowed_operations: Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")],
+                          allowed_operations: Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken" | "ListReceivedLicenses")],
                           ?tags: Array[
                             {
                               key: ::String?,
                               value: ::String?
                             }
-                          ]
+                          ],
+                          ?grant_type: ("BuyerGrant" | "DelegateGrant"),
+                          ?options: {
+                            activation_override_behavior: ("DISTRIBUTED_GRANTS_ONLY" | "ALL_GRANTS_PERMITTED_BY_ISSUER")?,
+                            desired_status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")?
+                          }
                         ) -> _CreateGrantResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGrantResponseSuccess
 
@@ -198,12 +203,13 @@ module Aws
                                   client_token: ::String,
                                   grant_arn: ::String,
                                   ?grant_name: ::String,
-                                  ?allowed_operations: Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken")],
+                                  ?allowed_operations: Array[("CreateGrant" | "CheckoutLicense" | "CheckoutBorrowLicense" | "CheckInLicense" | "ExtendConsumptionLicense" | "ListPurchasedLicenses" | "CreateToken" | "ListReceivedLicenses")],
                                   ?status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED"),
                                   ?status_reason: ::String,
                                   ?source_version: ::String,
                                   ?options: {
-                                    activation_override_behavior: ("DISTRIBUTED_GRANTS_ONLY" | "ALL_GRANTS_PERMITTED_BY_ISSUER")?
+                                    activation_override_behavior: ("DISTRIBUTED_GRANTS_ONLY" | "ALL_GRANTS_PERMITTED_BY_ISSUER")?,
+                                    desired_status: ("PENDING_WORKFLOW" | "PENDING_ACCEPT" | "REJECTED" | "ACTIVE" | "FAILED_WORKFLOW" | "DELETED" | "PENDING_DELETE" | "DISABLED" | "WORKFLOW_COMPLETED")?
                                   }
                                 ) -> _CreateGrantVersionResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateGrantVersionResponseSuccess

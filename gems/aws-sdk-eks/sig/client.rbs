@@ -272,13 +272,7 @@ module Aws
                             ?version: ::String,
                             role_arn: ::String,
                             resources_vpc_config: Params::vpc_config_request,
-                            ?kubernetes_network_config: {
-                              service_ipv_4_cidr: ::String?,
-                              ip_family: ("ipv4" | "ipv6")?,
-                              elastic_load_balancing: {
-                                enabled: bool?
-                              }?
-                            },
+                            ?kubernetes_network_config: Params::kubernetes_network_config_request,
                             ?logging: {
                               cluster_logging: Array[
                                 {
@@ -1162,13 +1156,7 @@ module Aws
                                      node_pools: Array[::String]?,
                                      node_role_arn: ::String?
                                    },
-                                   ?kubernetes_network_config: {
-                                     service_ipv_4_cidr: ::String?,
-                                     ip_family: ("ipv4" | "ipv6")?,
-                                     elastic_load_balancing: {
-                                       enabled: bool?
-                                     }?
-                                   },
+                                   ?kubernetes_network_config: Params::kubernetes_network_config_request,
                                    ?storage_config: {
                                      block_storage: {
                                        enabled: bool?

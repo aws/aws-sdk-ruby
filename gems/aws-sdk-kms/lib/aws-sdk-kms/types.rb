@@ -932,6 +932,9 @@ module Aws::KMS
     #   * For asymmetric KMS keys with ML-DSA key pairs, specify
     #     `SIGN_VERIFY`.
     #
+    #   * For asymmetric KMS keys with ML-KEM key pairs, specify
+    #     `ENCAPSULATE_DECAPSULATE`.
+    #
     #   * For asymmetric KMS keys with SM2 key pairs (China Regions only),
     #     specify `ENCRYPT_DECRYPT`, `SIGN_VERIFY`, or `KEY_AGREEMENT`.
     #
@@ -1033,6 +1036,15 @@ module Aws::KMS
     #     * `ML_DSA_65`
     #
     #     * `ML_DSA_87`
+    #   * Asymmetric ML-KEM key pairs (establishing shared secrets)
+    #
+    #     * `ML_KEM_512`
+    #
+    #     * `ML_KEM_768`
+    #
+    #     * `ML_KEM_1024`
+    #     The ML-KEM key specs are not available in China Regions.
+    #
     #   * SM2 key pairs (encryption and decryption -or- signing and
     #     verification -or- deriving shared secrets)
     #
@@ -1606,6 +1618,109 @@ module Aws::KMS
       :custom_key_store_type,
       :xks_proxy_configuration)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   Identifies the asymmetric ML-KEM KMS key whose public key was used
+    #   to produce the encapsulated shared secret. KMS uses the private key
+    #   in the specified key pair to decapsulate the shared secret.
+    #
+    #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
+    #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
+    #   a KMS key in a different Amazon Web Services account, you must use
+    #   the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_secret_ciphertext_blob
+    #   The encapsulated (ciphertext) form of the shared secret to recover.
+    #   This is the `SharedSecretCiphertextBlob` value that the Encapsulate
+    #   operation returns. When you use the HTTP API or the Amazon Web
+    #   Services CLI, the value is Base64-encoded. Otherwise, it is not
+    #   Base64-encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] encapsulation_algorithm
+    #   Specifies the key encapsulation algorithm used to recover the shared
+    #   secret. The only valid value is `ML_KEM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   Use a grant token when your permission to call this operation comes
+    #   from a new grant that has not yet achieved *eventual consistency*.
+    #   For more information, see [Grant token][1] and [Using a grant
+    #   token][2] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecapsulateRequest AWS API Documentation
+    #
+    class DecapsulateRequest < Struct.new(
+      :key_id,
+      :shared_secret_ciphertext_blob,
+      :encapsulation_algorithm,
+      :grant_tokens,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   The identifier of the ML-KEM KMS key used to decapsulate the shared
+    #   secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_secret
+    #   The plaintext shared secret recovered from the encapsulated form. It
+    #   is a 32-byte value that matches the shared secret held by the
+    #   encapsulating party. When you use the HTTP API or the Amazon Web
+    #   Services CLI, the value is Base64-encoded. Otherwise, it is not
+    #   Base64-encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] encapsulation_algorithm
+    #   The key encapsulation algorithm used to recover the shared secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/DecapsulateResponse AWS API Documentation
+    #
+    class DecapsulateResponse < Struct.new(
+      :key_id,
+      :shared_secret,
+      :encapsulation_algorithm)
+      SENSITIVE = [:shared_secret]
       include Aws::Structure
     end
 
@@ -2452,6 +2567,116 @@ module Aws::KMS
     end
 
     # @!attribute [rw] key_id
+    #   Identifies an asymmetric ML-KEM KMS key. KMS uses the public key in
+    #   the specified key pair to encapsulate the shared secret. ML-KEM KMS
+    #   keys have a `KeySpec` value of `ML_KEM_512`, `ML_KEM_768`, or
+    #   `ML_KEM_1024` and a `KeyUsage` value of `ENCAPSULATE_DECAPSULATE`.
+    #   To find the `KeySpec` and `KeyUsage` of a KMS key, use the
+    #   DescribeKey operation.
+    #
+    #   To specify a KMS key, use its key ID, key ARN, alias name, or alias
+    #   ARN. When using an alias name, prefix it with `"alias/"`. To specify
+    #   a KMS key in a different Amazon Web Services account, you must use
+    #   the key ARN or alias ARN.
+    #
+    #   For example:
+    #
+    #   * Key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Key ARN:
+    #     `arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
+    #
+    #   * Alias name: `alias/ExampleAlias`
+    #
+    #   * Alias ARN: `arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias`
+    #
+    #   To get the key ID and key ARN for a KMS key, use ListKeys or
+    #   DescribeKey. To get the alias name and alias ARN, use ListAliases.
+    #   @return [String]
+    #
+    # @!attribute [rw] encapsulation_algorithm
+    #   Specifies the key encapsulation algorithm used to generate the
+    #   shared secret and its encapsulated form. The only valid value is
+    #   `ML_KEM`.
+    #   @return [String]
+    #
+    # @!attribute [rw] grant_tokens
+    #   A list of grant tokens.
+    #
+    #   Use a grant token when your permission to call this operation comes
+    #   from a new grant that has not yet achieved *eventual consistency*.
+    #   For more information, see [Grant token][1] and [Using a grant
+    #   token][2] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token
+    #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/using-grant-token.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] dry_run
+    #   Checks if your request will succeed. `DryRun` is an optional
+    #   parameter.
+    #
+    #   To learn more about how to use this parameter, see [Testing your
+    #   permissions][1] in the *Key Management Service Developer Guide*.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/kms/latest/developerguide/testing-permissions.html
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncapsulateRequest AWS API Documentation
+    #
+    class EncapsulateRequest < Struct.new(
+      :key_id,
+      :encapsulation_algorithm,
+      :grant_tokens,
+      :dry_run)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
+    #   The identifier of the ML-KEM KMS key used to encapsulate the shared
+    #   secret.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_secret
+    #   The plaintext shared secret. It is a 32-byte cryptographically
+    #   random value that both parties can use directly as key material or
+    #   pass through a key derivation function to generate multiple keys and
+    #   nonces. When you use the HTTP API or the Amazon Web Services CLI,
+    #   the value is Base64-encoded. Otherwise, it is not Base64-encoded.
+    #   @return [String]
+    #
+    # @!attribute [rw] shared_secret_ciphertext_blob
+    #   The encapsulated form of the shared secret. Pass this value to the
+    #   Decapsulate operation to recover the shared secret. When you use the
+    #   HTTP API or the Amazon Web Services CLI, the value is
+    #   Base64-encoded. Otherwise, it is not Base64-encoded. The length of
+    #   `SharedSecretCiphertextBlob` depends on the ML-KEM key spec. Before
+    #   Base64 encoding, the encapsulated shared secret is 768 bytes for
+    #   `ML_KEM_512`, 1088 bytes for `ML_KEM_768`, and 1568 bytes for
+    #   `ML_KEM_1024`.
+    #   @return [String]
+    #
+    # @!attribute [rw] encapsulation_algorithm
+    #   The key encapsulation algorithm used to generate the shared secret.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/EncapsulateResponse AWS API Documentation
+    #
+    class EncapsulateResponse < Struct.new(
+      :key_id,
+      :shared_secret,
+      :shared_secret_ciphertext_blob,
+      :encapsulation_algorithm)
+      SENSITIVE = [:shared_secret]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] key_id
     #   Identifies the KMS key to use in the encryption operation. The KMS
     #   key must have a `KeyUsage` of `ENCRYPT_DECRYPT`. To find the
     #   `KeyUsage` of a KMS key, use the DescribeKey operation.
@@ -2666,7 +2891,7 @@ module Aws::KMS
     #   verify, and the rule that permits you to use ML-DSA key pairs to
     #   sign and verify only are not effective on data key pairs, which are
     #   used outside of KMS. The SM2 key spec is only available in China
-    #   Regions.
+    #   Regions. The ML-KEM key specs are not available in China Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -2876,7 +3101,7 @@ module Aws::KMS
     #   verify, and the rule that permits you to use ML-DSA key pairs to
     #   sign and verify only are not effective on data key pairs, which are
     #   used outside of KMS. The SM2 key spec is only available in China
-    #   Regions.
+    #   Regions. The ML-KEM key specs are not available in China Regions.
     #   @return [String]
     #
     # @!attribute [rw] grant_tokens
@@ -3510,7 +3735,7 @@ module Aws::KMS
     # @!attribute [rw] key_last_usage
     #   Contains usage information about the last time the KMS key was used
     #   for a successful cryptographic operation. If the key has not been
-    #   used since tracking began, this response element is empty.
+    #   used since tracking began, this response element is an empty object.
     #   @return [Types::KeyLastUsageData]
     #
     # @!attribute [rw] tracking_start_date
@@ -3886,6 +4111,12 @@ module Aws::KMS
     #   `KEY_AGREEMENT`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] encapsulation_algorithms
+    #   The key encapsulation algorithm used to establish a shared secret.
+    #   This field is present only when the KMS key has a `KeyUsage` value
+    #   of `ENCAPSULATE_DECAPSULATE`.
+    #   @return [Array<String>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/kms-2014-11-01/GetPublicKeyResponse AWS API Documentation
     #
     class GetPublicKeyResponse < Struct.new(
@@ -3896,7 +4127,8 @@ module Aws::KMS
       :key_usage,
       :encryption_algorithms,
       :signing_algorithms,
-      :key_agreement_algorithms)
+      :key_agreement_algorithms,
+      :encapsulation_algorithms)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4338,6 +4570,10 @@ module Aws::KMS
     # From the ImportKeyMaterial operation, the request was rejected because
     # KMS could not decrypt the encrypted (wrapped) key material.
     #
+    # From the Decapsulate operation, the request was rejected because the
+    # length of the `SharedSecretCiphertextBlob` is inconsistent with the
+    # specified ML-KEM key spec.
+    #
     # @!attribute [rw] message
     #   @return [String]
     #
@@ -4404,8 +4640,10 @@ module Aws::KMS
     # messages, the `KeyUsage` must be `SIGN_VERIFY`. For generating and
     # verifying message authentication codes (MACs), the `KeyUsage` must be
     # `GENERATE_VERIFY_MAC`. For deriving key agreement secrets, the
-    # `KeyUsage` must be `KEY_AGREEMENT`. To find the `KeyUsage` of a KMS
-    # key, use the DescribeKey operation.
+    # `KeyUsage` must be `KEY_AGREEMENT`. For encapsulating and
+    # decapsulating shared secrets, the `KeyUsage` must be
+    # `ENCAPSULATE_DECAPSULATE`. To find the `KeyUsage` of a KMS key, use
+    # the DescribeKey operation.
     #
     # To find the encryption or signing algorithms supported for a
     # particular KMS key, use the DescribeKey operation.
@@ -4726,6 +4964,12 @@ module Aws::KMS
     #   The key agreement algorithm used to derive a shared secret.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] encapsulation_algorithms
+    #   The key encapsulation algorithm that the KMS key supports. This
+    #   field appears only for KMS keys with a `KeyUsage` value of
+    #   `ENCAPSULATE_DECAPSULATE`.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] multi_region
     #   Indicates whether the KMS key is a multi-Region (`True`) or regional
     #   (`False`) key. This value is `True` for multi-Region primary and
@@ -4829,6 +5073,7 @@ module Aws::KMS
       :encryption_algorithms,
       :signing_algorithms,
       :key_agreement_algorithms,
+      :encapsulation_algorithms,
       :multi_region,
       :multi_region_configuration,
       :pending_deletion_window_in_days,

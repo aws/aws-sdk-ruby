@@ -139,7 +139,9 @@ module Aws
                                     request_header_allowlist: Array[::String]?
                                   },
                                   ?protocol_configuration: {
-                                    server_protocol: ("MCP" | "HTTP" | "A2A" | "AGUI")
+                                    server_protocol: ("MCP" | "HTTP" | "A2A" | "AGUI"),
+                                    port: ::Integer?,
+                                    path: ::String?
                                   },
                                   ?lifecycle_configuration: {
                                     idle_runtime_session_timeout: ::Integer?,
@@ -153,7 +155,16 @@ module Aws
                                     capacity_provider_arn: ::String
                                   },
                                   ?tags: Hash[::String, ::String],
-                                  ?platform_version: ::String
+                                  ?platform_version: ::String,
+                                  ?allowed_ports: Array[
+                                    {
+                                      port: ::Integer?,
+                                      port_range: {
+                                        from: ::Integer,
+                                        to: ::Integer
+                                      }?
+                                    }
+                                  ]
                                 ) -> _CreateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateAgentRuntimeResponseSuccess
 
@@ -1414,6 +1425,7 @@ module Aws
         def filesystem_configurations: () -> ::Array[Types::FilesystemConfiguration]
         def capacity_provider_configuration: () -> Types::CapacityProviderConfiguration
         def platform_version: () -> ::String
+        def allowed_ports: () -> ::Array[Types::AllowedPort]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#get_agent_runtime-instance_method
       def get_agent_runtime: (
@@ -2606,6 +2618,18 @@ module Aws
                                ) -> _PutResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
 
+      interface _ResetTokenVaultKeyMaterialResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ResetTokenVaultKeyMaterialResponse]
+        def token_vault_id: () -> ::String
+        def kms_configuration: () -> Types::KmsConfiguration
+        def last_modified_date: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/BedrockAgentCoreControl/Client.html#reset_token_vault_key_material-instance_method
+      def reset_token_vault_key_material: (
+                                            token_vault_id: ::String
+                                          ) -> _ResetTokenVaultKeyMaterialResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ResetTokenVaultKeyMaterialResponseSuccess
+
       interface _RotatePaymentConnectorCredentialsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RotatePaymentConnectorCredentialsResponse]
         def payment_connector_id: () -> ::String
@@ -2737,7 +2761,9 @@ module Aws
                                     request_header_allowlist: Array[::String]?
                                   },
                                   ?protocol_configuration: {
-                                    server_protocol: ("MCP" | "HTTP" | "A2A" | "AGUI")
+                                    server_protocol: ("MCP" | "HTTP" | "A2A" | "AGUI"),
+                                    port: ::Integer?,
+                                    path: ::String?
                                   },
                                   ?lifecycle_configuration: {
                                     idle_runtime_session_timeout: ::Integer?,
@@ -2754,6 +2780,15 @@ module Aws
                                     capacity_provider_arn: ::String
                                   },
                                   ?platform_version: ::String,
+                                  ?allowed_ports: Array[
+                                    {
+                                      port: ::Integer?,
+                                      port_range: {
+                                        from: ::Integer,
+                                        to: ::Integer
+                                      }?
+                                    }
+                                  ],
                                   ?client_token: ::String
                                 ) -> _UpdateAgentRuntimeResponseSuccess
                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateAgentRuntimeResponseSuccess

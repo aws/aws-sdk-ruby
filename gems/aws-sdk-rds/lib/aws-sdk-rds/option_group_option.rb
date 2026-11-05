@@ -144,6 +144,13 @@ module Aws::RDS
       data[:copyable_cross_account]
     end
 
+    # Indicates whether the option can be copied across Amazon Web Services
+    # Regions.
+    # @return [Boolean]
+    def copyable_cross_region
+      data[:copyable_cross_region]
+    end
+
     # @!endgroup
 
     # @return [Client]

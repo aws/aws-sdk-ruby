@@ -1,6 +1,21 @@
 Unreleased Changes
 ------------------
 
+1.75.0 (2026-11-04)
+------------------
+
+* Feature - Amazon Lookout for Equipment reached end of support on October 7, 2026. All Lookout for Equipment APIs are now marked as deprecated.
+
+1.74.0 (2026-10-29)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
+1.73.0 (2026-10-28)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.72.0 (2026-10-21)
 ------------------
 

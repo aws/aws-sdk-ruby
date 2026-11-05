@@ -91,6 +91,57 @@ module Aws
           expect(URI.decode_www_form(actual_url)).to eq(URI.decode_www_form(expected_url))
         end
 
+        context 'response paging' do
+          let(:responses) { [] }
+
+          before do
+            captured = responses
+            client.handle(step: :initialize, priority: 99) do |context|
+              @handler.call(context).tap { |resp| captured << resp }
+            end
+          end
+
+          it 'presigns paginated and nonpaginated operations' do
+            url = subject.presigned_url(
+              :get_object,
+              bucket: 'examplebucket',
+              key: 'test.txt'
+            )
+            expect(url).to start_with('https://examplebucket.s3.amazonaws.com/test.txt?')
+            url = subject.presigned_url(:list_objects_v2, bucket: 'examplebucket')
+            expect(url).to start_with('https://examplebucket.s3.amazonaws.com/?')
+            expect(url).to include('list-type=2')
+            url, headers = subject.presigned_request(
+              :list_objects_v2, bucket: 'examplebucket'
+            )
+            expect(url).to include('list-type=2')
+            expect(headers).to eq({})
+          end
+
+          it 'returns single-page responses to request handlers' do
+            subject.presigned_url(:get_object, bucket: 'bkt', key: 'k')
+            subject.presigned_url(:list_objects_v2, bucket: 'bkt')
+            responses.each do |resp|
+              expect(resp).to be_a(Aws::Response)
+              expect(resp.last_page?).to be(true)
+              expect(resp.next_page?).to be(false)
+              expect(resp.data).to start_with('https://bkt.s3.amazonaws.com/')
+            end
+            expect(responses.size).to eq(2)
+          end
+
+          it 'does not extend each response with a module' do
+            subject.presigned_url(:get_object, bucket: 'bkt', key: 'k')
+            subject.presigned_url(:list_objects_v2, bucket: 'bkt')
+            subject.presigned_request(:list_objects_v2, bucket: 'bkt')
+            expect(responses.size).to eq(3)
+            responses.each do |resp|
+              expect(resp.singleton_class.ancestors.drop(1))
+                .to eq(resp.class.ancestors)
+            end
+          end
+        end
+
         it 'can sign with a given time' do
           actual_url = subject.presigned_url(
             :get_object,
@@ -444,8 +495,9 @@ module Aws
             expiration: Time.now + 60 * 5
           }
           client.stub_responses(:create_session, credentials: credentials)
-          expect(client).to receive(:create_session)
-            .with({bucket: bucket}).and_call_original
+          allow(client).to receive(:build_request).and_call_original
+          expect(client).to receive(:build_request)
+            .with(:create_session, {bucket: bucket}).and_call_original
 
           url = subject.presigned_url(:get_object, bucket: bucket, key: 'obj')
           expect(url).to include('X-Amz-Credential=s3-akid')

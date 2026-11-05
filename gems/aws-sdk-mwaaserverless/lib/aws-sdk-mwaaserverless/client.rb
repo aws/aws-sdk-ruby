@@ -578,6 +578,11 @@ module Aws::MWAAServerless
     #   customers. This configuration enables secure access to VPC-only
     #   resources like RDS databases or private endpoints.
     #
+    # @option params [Types::Environment] :environment
+    #   The environment variables to set for tasks in the workflow. If you
+    #   don't specify this parameter, the workflow has no environment
+    #   variables.
+    #
     # @option params [Hash<String,String>] :tags
     #   A map of tags to assign to the workflow resource. Tags are key-value
     #   pairs that are used for resource organization and cost allocation.
@@ -625,6 +630,11 @@ module Aws::MWAAServerless
     #     network_configuration: {
     #       security_group_ids: ["SecurityGroupString"],
     #       subnet_ids: ["SubnetString"],
+    #     },
+    #     environment: {
+    #       variables: {
+    #         "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #       },
     #     },
     #     tags: {
     #       "TagKey" => "TagValue",
@@ -796,6 +806,7 @@ module Aws::MWAAServerless
     #   * {Types::GetWorkflowResponse#schedule_configuration #schedule_configuration} => Types::ScheduleConfiguration
     #   * {Types::GetWorkflowResponse#role_arn #role_arn} => String
     #   * {Types::GetWorkflowResponse#network_configuration #network_configuration} => Types::NetworkConfiguration
+    #   * {Types::GetWorkflowResponse#environment #environment} => Types::Environment
     #   * {Types::GetWorkflowResponse#trigger_mode #trigger_mode} => String
     #   * {Types::GetWorkflowResponse#workflow_definition #workflow_definition} => String
     #
@@ -832,6 +843,8 @@ module Aws::MWAAServerless
     #   resp.network_configuration.security_group_ids[0] #=> String
     #   resp.network_configuration.subnet_ids #=> Array
     #   resp.network_configuration.subnet_ids[0] #=> String
+    #   resp.environment.variables #=> Hash
+    #   resp.environment.variables["EnvironmentVariableKey"] #=> String
     #   resp.trigger_mode #=> String
     #   resp.workflow_definition #=> String
     #
@@ -1180,8 +1193,8 @@ module Aws::MWAAServerless
     #   definition using standard parameter substitution syntax.
     #
     # @option params [String] :workflow_version
-    #   Optional. The specific version of the workflow to execute. If not
-    #   specified, the latest version is used.
+    #   Optional. The specific version of the workflow to execute. If you
+    #   don't specify a version, we use the latest version.
     #
     # @return [Types::StartWorkflowRunResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -1362,6 +1375,14 @@ module Aws::MWAAServerless
     # @option params [Types::NetworkConfiguration] :network_configuration
     #   Updated network configuration for the workflow execution environment.
     #
+    # @option params [Types::Environment] :environment
+    #   The environment variables to set for tasks in the workflow.
+    #
+    #   The variables that you specify replace all existing environment
+    #   variables for the workflow. If you don't specify this parameter, the
+    #   workflow has no environment variables. To keep existing environment
+    #   variables, include them in the request.
+    #
     # @option params [String] :trigger_mode
     #   The trigger mode for the workflow execution.
     #
@@ -1397,6 +1418,11 @@ module Aws::MWAAServerless
     #     network_configuration: {
     #       security_group_ids: ["SecurityGroupString"],
     #       subnet_ids: ["SubnetString"],
+    #     },
+    #     environment: {
+    #       variables: {
+    #         "EnvironmentVariableKey" => "EnvironmentVariableValue",
+    #       },
     #     },
     #     trigger_mode: "GenericString",
     #   })
@@ -1436,7 +1462,7 @@ module Aws::MWAAServerless
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mwaaserverless'
-      context[:gem_version] = '1.15.0'
+      context[:gem_version] = '1.18.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

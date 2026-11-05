@@ -203,7 +203,8 @@ variable AWS_SDK_UA_APP_ID or the shared config profile attribute sdk_ua_app_id.
             end
 
             # Frameworks may be aws-record, aws-sdk-rails, etc.
-            regex = /gems\/(?<name>#{frameworks_cfg.join('|')})-(?<version>\d+\.\d+\.\d+)/.freeze
+            names = frameworks_cfg.map { |f| Regexp.escape(f.to_s) }.join('|')
+            regex = /gems\/(?<name>#{names})-(?<version>\d+\.\d+\.\d+)/.freeze
             frameworks = {}
             Kernel.caller.each do |line|
               match = line.match(regex)

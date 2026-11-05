@@ -1061,6 +1061,17 @@ module Aws
       }?
     }
 
+      type on_behalf_of_token_exchange_config_type = {
+      grant_type: ("TOKEN_EXCHANGE" | "JWT_AUTHORIZATION_GRANT"),
+      token_exchange_grant_type_config: {
+        actor_token_content: ("NONE" | "M2M" | "AWS_IAM_ID_TOKEN_JWT"),
+        actor_token_scopes: Array[::String]?
+      }?,
+      on_behalf_of_authentication_config: {
+        client_authentication_method: ("NO_CLIENT")
+      }?
+    }
+
       type private_key_jwt_config = {
       private_key_source: {
         kms_key_source: {
@@ -1081,13 +1092,7 @@ module Aws
         json_key: ::String
       }?,
       client_secret_source: ("MANAGED" | "EXTERNAL")?,
-      on_behalf_of_token_exchange_config: {
-        grant_type: ("TOKEN_EXCHANGE" | "JWT_AUTHORIZATION_GRANT"),
-        token_exchange_grant_type_config: {
-          actor_token_content: ("NONE" | "M2M" | "AWS_IAM_ID_TOKEN_JWT"),
-          actor_token_scopes: Array[::String]?
-        }?
-      }?,
+      on_behalf_of_token_exchange_config: Params::on_behalf_of_token_exchange_config_type?,
       client_authentication_method: ("CLIENT_SECRET_BASIC" | "CLIENT_SECRET_POST" | "AWS_IAM_ID_TOKEN_JWT" | "PRIVATE_KEY_JWT")?,
       private_key_jwt_config: Params::private_key_jwt_config?,
       private_endpoint: Params::private_endpoint?,

@@ -30,6 +30,15 @@ module Aws::DynamoDB
       end
     end
 
+    class CancelBulkOperation
+      def self.build(context)
+        Aws::DynamoDB::EndpointParameters.create(
+          context.config,
+          resource_arn: context.params[:bulk_operation_arn],
+        )
+      end
+    end
+
     class CreateBackup
       def self.build(context)
         Aws::DynamoDB::EndpointParameters.create(
@@ -98,6 +107,15 @@ module Aws::DynamoDB
         Aws::DynamoDB::EndpointParameters.create(
           context.config,
           resource_arn: context.params[:backup_arn],
+        )
+      end
+    end
+
+    class DescribeBulkOperation
+      def self.build(context)
+        Aws::DynamoDB::EndpointParameters.create(
+          context.config,
+          resource_arn: context.params[:bulk_operation_arn],
         )
       end
     end
@@ -355,6 +373,15 @@ module Aws::DynamoDB
       end
     end
 
+    class StartBulkPutItems
+      def self.build(context)
+        Aws::DynamoDB::EndpointParameters.create(
+          context.config,
+          resource_arn: context.params[:table_name],
+        )
+      end
+    end
+
     class TagResource
       def self.build(context)
         Aws::DynamoDB::EndpointParameters.create(
@@ -479,6 +506,8 @@ module Aws::DynamoDB
         BatchGetItem.build(context)
       when :batch_write_item
         BatchWriteItem.build(context)
+      when :cancel_bulk_operation
+        CancelBulkOperation.build(context)
       when :create_backup
         CreateBackup.build(context)
       when :create_global_table
@@ -495,6 +524,8 @@ module Aws::DynamoDB
         DeleteTable.build(context)
       when :describe_backup
         DescribeBackup.build(context)
+      when :describe_bulk_operation
+        DescribeBulkOperation.build(context)
       when :describe_continuous_backups
         DescribeContinuousBackups.build(context)
       when :describe_contributor_insights
@@ -551,6 +582,8 @@ module Aws::DynamoDB
         Scan.build(context)
       when :search_vectors
         SearchVectors.build(context)
+      when :start_bulk_put_items
+        StartBulkPutItems.build(context)
       when :tag_resource
         TagResource.build(context)
       when :transact_get_items

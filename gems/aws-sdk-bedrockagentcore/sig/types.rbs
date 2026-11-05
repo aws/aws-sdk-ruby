@@ -1878,6 +1878,7 @@ module Aws::BedrockAgentCore
 
     class InvokeAgentRuntimeResponse
       attr_accessor runtime_session_id: ::String
+      attr_accessor session_endpoint_url: ::String
       attr_accessor mcp_session_id: ::String
       attr_accessor mcp_protocol_version: ::String
       attr_accessor trace_id: ::String

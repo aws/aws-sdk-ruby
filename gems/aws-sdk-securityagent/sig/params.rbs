@@ -55,6 +55,13 @@ module Aws
             s3_location: ::String?
           }
         }
+      ]?,
+      client_certificates: Array[
+        {
+          name: ::String,
+          secret_arn: ::String,
+          origins: Array[::String]
+        }
       ]?
     }
 
