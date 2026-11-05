@@ -151,6 +151,7 @@ module Aws
       context 'AwsChunkedTrailerDigestIO' do
         let(:subject) do
           ChecksumAlgorithm::AwsChunkedTrailerDigestIO.new(
+            buffer_enabled: true,
             io: StringIO.new('x' * (32 * 1024)),
             algorithm: 'CRC32',
             location_name: 'x-amz-checksum-crc32'
@@ -165,6 +166,7 @@ module Aws
           it 'returns zero bytes for empty content' do
             expected_empty_trailer = "0\r\nx-amz-checksum-crc32:AAAAAA==\r\n\r\n".bytesize
             subject = ChecksumAlgorithm::AwsChunkedTrailerDigestIO.new(
+              buffer_enabled: true,
               io: StringIO.new(''),
               algorithm: 'CRC32',
               location_name: 'x-amz-checksum-crc32'

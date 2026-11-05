@@ -55,13 +55,32 @@ module Seahorse
           contents
         end
 
+        # @api private
+        def buffer_supported?
+          return @buffer_enabled unless @buffer_enabled.nil?
+
+          @buffer_enabled = detect_read_buffer_support
+        end
+
         # @param [#read, #size, #rewind] io
         def body=(io)
+          @buffer_enabled = nil
           @body = case io
             when nil then StringIO.new('')
             when String then StringIO.new(io)
             else io
           end
+        end
+
+        private
+
+        # Only probe ArgumentError falls back. Payload errors must propagate.
+        def detect_read_buffer_support
+          buffer = "\0".b
+          @body.read(0, buffer)
+          buffer.empty?
+        rescue ArgumentError
+          false
         end
 
       end
