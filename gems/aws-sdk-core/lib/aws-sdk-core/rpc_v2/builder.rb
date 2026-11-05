@@ -20,14 +20,26 @@ module Aws
         return nil if @rules.shape.struct_class == EmptyStructure
         return RpcV2.encode(format(@rules, params)) unless RpcV2.engine == CborEngine
 
-        encoder = Cbor::Encoder.new
-        write(encoder, kind_of(@rules.shape), @rules, params)
-        encoder.bytes
+        begin
+          encoder = Cbor::Encoder.new
+          write(encoder, kind_of(@rules.shape), @rules, params)
+          encoder.bytes
+        rescue Fallback
+          RpcV2.encode(format(@rules, params))
+        rescue StandardError => e
+          raise if defined?(::Timeout::Error) && e.is_a?(::Timeout::Error) # raised into the thread by timeout < 0.4
+
+          # Invalid params: #format formats all params before encoding and merges :name with "name", so its
+          # result or error applies. The fast path has no side effects.
+          RpcV2.encode(format(@rules, params))
+        end
       end
 
       private
 
-      MAP_HEADER = Cbor::Encoder::BYTE[0xa0] # empty definite-length map; low 5 bits patched with the count
+      # Raised before the fast path reads an IO or iterates a list or map that isn't an Array or Hash.
+      class Fallback < StandardError; end
+      private_constant :Fallback
 
       # Writes value with the writer kind cached for its shape.
       def write(encoder, kind, ref, value)
@@ -38,9 +50,13 @@ module Aws
 
           encoder.add_string(value)
         when :list
-          value.is_a?(Array) ? write_list(encoder, ref, value) : encoder.add(format(ref, value))
+          raise Fallback unless value.is_a?(Array)
+
+          write_list(encoder, ref, value)
         when :map
-          value.is_a?(Hash) ? write_map(encoder, ref, value) : encoder.add(format(ref, value))
+          raise Fallback unless value.is_a?(Hash)
+
+          write_map(encoder, ref, value)
         when :integer
           value.is_a?(Integer) ? encoder.add_auto_integer(value) : encoder.add(value)
         when :float
@@ -49,7 +65,10 @@ module Aws
           value == true || value == false ? encoder.add_boolean(value) : encoder.add(value)
         when :timestamp
           value.is_a?(Time) ? encoder.add_time(value) : encoder.add(value)
-        when :blob then encoder.add_byte_string(blob(value))
+        when :blob
+          raise Fallback unless value.is_a?(String)
+
+          encoder.add_byte_string(blob(value))
         else encoder.add(value)
         end
       end
@@ -69,38 +88,31 @@ module Aws
         end
       end
 
-      # Present, non-nil members as a definite-length map, in params order. The map header is written as a
-      # one-byte placeholder and patched with the member count (replaced by a longer header for 24+ members).
+      # Present, non-nil members as a definite-length map, in params order. Values without #each_pair raise
+      # NoMethodError, handled in #serialize.
       def write_structure(encoder, ref, values)
         shape = ref.shape
         table = member_table(shape)
-        buffer = encoder.bytes
-        start = buffer.bytesize
-        buffer << MAP_HEADER
-        count = 0
-        values.each_pair do |key, value|
-          if key.is_a?(Symbol)
-            next if value.nil? || !(entry = table[key])
-          else
-            # Original order: member? first (it calls key.to_sym, which raises for e.g. Integer keys).
-            next unless shape.member?(key) && !value.nil?
+        encoder.add_counted_map do
+          count = 0
+          values.each_pair do |key, value|
+            if key.is_a?(Symbol)
+              next if value.nil? || !(entry = table[key])
+            else
+              # member? first, like #structure (key.to_sym raises for e.g. Integer keys).
+              next unless shape.member?(key) && !value.nil?
 
-            entry = table[sym = key.to_sym]
-            # The original merges :name and "name" into one entry (keyed by location_name).
-            if values.is_a?(Hash) && values.key?(sym) && entry[1].location_name
-              buffer.slice!(start..)
-              return encoder.add(structure(ref, values))
+              # #structure merges :name and "name" into one entry.
+              raise Fallback if values.compare_by_identity? || values.key?(key.to_sym)
+
+              entry = table[key.to_sym]
             end
+            encoder.add_encoded(entry[0])
+            write(encoder, entry[2], entry[1], value)
+            count += 1
           end
-          buffer << entry[0]
-          write(encoder, entry[2], entry[1], value)
-          count += 1
+          count
         end
-        return buffer.setbyte(start, 0xa0 + count) if count < 24
-
-        header = Cbor::Encoder.new
-        header.start_map(count)
-        buffer[start, 1] = header.bytes # longer header; shifts the members right
       end
 
       def write_list(encoder, ref, values)

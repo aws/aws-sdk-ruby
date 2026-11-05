@@ -99,7 +99,21 @@ module Aws
           'the same member as Symbol and String' => -> { { s: 'a', 's' => 'b' } },
           'the same member as Symbol and String, custom location_name' => -> { { renamed: 'a', 'renamed' => 'b', i: 1 } },
           'String before Symbol for the same member' => -> { { i: 1, 'renamed' => 'b', renamed: 'a' } },
-          'nil Symbol value plus String value for the same member' => -> { { renamed: nil, 'renamed' => 'b' } }
+          'nil Symbol value plus String value for the same member' => -> { { renamed: nil, 'renamed' => 'b' } },
+          'an IO blob before the same member as Symbol and String' => lambda {
+            { bl: StringIO.new('payload'), renamed: 'a', 'renamed' => 'b' }
+          },
+          'a nested IO blob before the same member as Symbol and String' => lambda {
+            { child: { bl: StringIO.new('payload') }, s: 'a', 's' => 'b' }
+          },
+          'the same member as Symbol and BINARY String' => -> { { renamed: 'a', 'renamed'.b => 'b' } },
+          'the same member as two String keys of a compare_by_identity Hash' => lambda {
+            {}.compare_by_identity.tap { |h| h[+'renamed'] = 'a'; h[+'renamed'] = 'b' }
+          },
+          'an unencodable value overwritten by its String twin' => -> { { s: { 'x' => Set['a'] }, 's' => 'ok' } },
+          'an unencodable value before a value the original fails to format' => -> { { b: Set['a'], child: 'x' } },
+          'an IO for a list' => -> { { l: StringIO.new("a\nb\n") } },
+          'an IO for a structure' => -> { { child: StringIO.new('x') } }
         }.each do |name, params|
           it("matches for #{name}") { expect_parity(params) }
         end

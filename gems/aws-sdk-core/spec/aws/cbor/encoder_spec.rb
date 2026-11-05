@@ -105,6 +105,20 @@ module Aws
         end
       end
 
+      describe '#add_counted_map' do
+        it 'writes the header for the count the block returns' do
+          [0, 1, 23, 24, 300].each do |n|
+            encoder = Encoder.new
+            encoder.add_counted_map do
+              n.times { |i| encoder.add("k#{i}").add(i) }
+              n
+            end
+            expected = Encoder.new.add((0...n).to_h { |i| ["k#{i}", i] }).bytes
+            expect(encoder.bytes).to eq(expected)
+          end
+        end
+      end
+
       describe 'non-ASCII text strings' do
         def hex(value)
           Encoder.new.add(value).bytes.unpack1('H*')
