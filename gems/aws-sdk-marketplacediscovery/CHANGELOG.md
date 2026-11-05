@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.16.0 (2026-11-04)
+------------------
+
+* Feature - GetListing and SearchListings APIs now return G2 and PeerSpot review sources in review summaries.
+
 1.15.0 (2026-10-29)
 ------------------
 

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.181.0 (2026-11-04)
+------------------
+
+* Feature - Adds StartBulkPutItems, DescribeBulkOperation, ListBulkOperations, and CancelBulkOperation for asynchronously loading Amazon S3 datasets into existing DynamoDB tables.
+
 1.180.0 (2026-10-29)
 ------------------
 

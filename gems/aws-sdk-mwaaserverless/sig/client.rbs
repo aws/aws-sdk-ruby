@@ -120,6 +120,9 @@ module Aws
                                security_group_ids: Array[::String]?,
                                subnet_ids: Array[::String]?
                              },
+                             ?environment: {
+                               variables: Hash[::String, ::String]?
+                             },
                              ?tags: Hash[::String, ::String],
                              ?trigger_mode: ::String
                            ) -> _CreateWorkflowResponseSuccess
@@ -181,6 +184,7 @@ module Aws
         def schedule_configuration: () -> Types::ScheduleConfiguration
         def role_arn: () -> ::String
         def network_configuration: () -> Types::NetworkConfiguration
+        def environment: () -> Types::Environment
         def trigger_mode: () -> ::String
         def workflow_definition: () -> ::String
       end
@@ -351,6 +355,9 @@ module Aws
                              ?network_configuration: {
                                security_group_ids: Array[::String]?,
                                subnet_ids: Array[::String]?
+                             },
+                             ?environment: {
+                               variables: Hash[::String, ::String]?
                              },
                              ?trigger_mode: ::String
                            ) -> _UpdateWorkflowResponseSuccess

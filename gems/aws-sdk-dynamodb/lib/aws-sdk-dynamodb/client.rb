@@ -1174,6 +1174,39 @@ module Aws::DynamoDB
       req.send_request(options)
     end
 
+    # Cancels an in-progress bulk operation asynchronously. Cancellation
+    # doesn't remove items that the operation has already written. Use
+    # `DescribeBulkOperation` to monitor the operation until it reaches a
+    # terminal status.
+    #
+    # @option params [required, String] :bulk_operation_arn
+    #   The Amazon Resource Name (ARN) of the bulk operation to cancel.
+    #
+    # @return [Types::CancelBulkOperationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CancelBulkOperationOutput#bulk_operation_arn #bulk_operation_arn} => String
+    #   * {Types::CancelBulkOperationOutput#bulk_operation_status #bulk_operation_status} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.cancel_bulk_operation({
+    #     bulk_operation_arn: "BulkOperationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bulk_operation_arn #=> String
+    #   resp.bulk_operation_status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "CANCELLING", "CANCELLED", "FAILED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/CancelBulkOperation AWS API Documentation
+    #
+    # @overload cancel_bulk_operation(params = {})
+    # @param [Hash] params ({})
+    def cancel_bulk_operation(params = {}, options = {})
+      req = build_request(:cancel_bulk_operation, params)
+      req.send_request(options)
+    end
+
     # Creates a backup for an existing table.
     #
     # Each time you create an on-demand backup, the entire table data is
@@ -2715,6 +2748,76 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def describe_backup(params = {}, options = {})
       req = build_request(:describe_backup, params)
+      req.send_request(options)
+    end
+
+    # Describes the specified bulk operation.
+    #
+    # @option params [required, String] :bulk_operation_arn
+    #   The Amazon Resource Name (ARN) of the bulk operation to describe.
+    #
+    # @return [Types::DescribeBulkOperationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeBulkOperationOutput#bulk_operation_description #bulk_operation_description} => Types::BulkOperationDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_bulk_operation({
+    #     bulk_operation_arn: "BulkOperationArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bulk_operation_description.bulk_operation_arn #=> String
+    #   resp.bulk_operation_description.bulk_operation_status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "CANCELLING", "CANCELLED", "FAILED"
+    #   resp.bulk_operation_description.table_details #=> Array
+    #   resp.bulk_operation_description.table_details[0].table_name #=> String
+    #   resp.bulk_operation_description.table_details[0].table_id #=> String
+    #   resp.bulk_operation_description.client_token #=> String
+    #   resp.bulk_operation_description.input_s3_configuration.s3_bucket_owner #=> String
+    #   resp.bulk_operation_description.input_s3_configuration.s3_bucket #=> String
+    #   resp.bulk_operation_description.input_s3_configuration.s3_key_prefix #=> String
+    #   resp.bulk_operation_description.input_s3_configuration.input_format #=> String, one of "DYNAMODB_JSON", "ION"
+    #   resp.bulk_operation_description.input_s3_configuration.input_compression_type #=> String, one of "GZIP", "ZSTD", "NONE"
+    #   resp.bulk_operation_description.output_s3_configuration.s3_bucket_owner #=> String
+    #   resp.bulk_operation_description.output_s3_configuration.s3_bucket #=> String
+    #   resp.bulk_operation_description.output_s3_configuration.s3_key_prefix #=> String
+    #   resp.bulk_operation_description.output_s3_configuration.s3_sse_algorithm #=> String, one of "AES256", "KMS"
+    #   resp.bulk_operation_description.output_s3_configuration.s3_sse_kms_key_id #=> String
+    #   resp.bulk_operation_description.output_s3_configuration.output_type #=> Array
+    #   resp.bulk_operation_description.output_s3_configuration.output_type[0] #=> String, one of "ERROR", "CONDITION_CHECK_FAILURE"
+    #   resp.bulk_operation_description.start_time #=> Time
+    #   resp.bulk_operation_description.end_time #=> Time
+    #   resp.bulk_operation_description.processed_item_count #=> Integer
+    #   resp.bulk_operation_description.processed_input_bytes #=> Integer
+    #   resp.bulk_operation_description.total_input_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage #=> Array
+    #   resp.bulk_operation_description.bulk_operation_usage[0].table_name #=> String
+    #   resp.bulk_operation_description.bulk_operation_usage[0].bulk_put_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage[0].table.bulk_put_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage[0].local_secondary_indexes #=> Hash
+    #   resp.bulk_operation_description.bulk_operation_usage[0].local_secondary_indexes["IndexName"].bulk_put_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage[0].global_secondary_indexes #=> Hash
+    #   resp.bulk_operation_description.bulk_operation_usage[0].global_secondary_indexes["IndexName"].bulk_put_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage[0].vector_indexes #=> Hash
+    #   resp.bulk_operation_description.bulk_operation_usage[0].vector_indexes["IndexName"].bulk_put_vector_bytes #=> Integer
+    #   resp.bulk_operation_description.failed_item_count #=> Integer
+    #   resp.bulk_operation_description.failure_code #=> String
+    #   resp.bulk_operation_description.failure_message #=> String
+    #   resp.bulk_operation_description.max_write_request_units #=> Integer
+    #   resp.bulk_operation_description.performance_tier #=> String, one of "STANDARD", "ACCELERATED"
+    #
+    #
+    # The following waiters are defined for this operation (see {Client#wait_until} for detailed usage):
+    #
+    #   * bulk_operation_completed
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/DescribeBulkOperation AWS API Documentation
+    #
+    # @overload describe_bulk_operation(params = {})
+    # @param [Hash] params ({})
+    def describe_bulk_operation(params = {}, options = {})
+      req = build_request(:describe_bulk_operation, params)
       req.send_request(options)
     end
 
@@ -4676,6 +4779,52 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def list_backups(params = {}, options = {})
       req = build_request(:list_backups, params)
+      req.send_request(options)
+    end
+
+    # Lists bulk operations that started within the past 90 days for the
+    # current Amazon Web Services account and Amazon Web Services Region,
+    # with the most recent operations first. Results are paginated. Use the
+    # `NextToken` parameter to retrieve additional results.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of bulk operation summaries to return in one page.
+    #   If you don't specify a value, DynamoDB uses 10.
+    #
+    # @option params [String] :next_token
+    #   An optional string that, if supplied, must be copied from the output
+    #   of a previous call to `ListBulkOperations`. When provided in this
+    #   manner, the API fetches the next page of results.
+    #
+    # @return [Types::ListBulkOperationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListBulkOperationsOutput#bulk_operations_summary_list #bulk_operations_summary_list} => Array&lt;Types::BulkOperationSummary&gt;
+    #   * {Types::ListBulkOperationsOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_bulk_operations({
+    #     max_results: 1,
+    #     next_token: "BulkOperationNextToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bulk_operations_summary_list #=> Array
+    #   resp.bulk_operations_summary_list[0].bulk_operation_arn #=> String
+    #   resp.bulk_operations_summary_list[0].bulk_operation_status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "CANCELLING", "CANCELLED", "FAILED"
+    #   resp.bulk_operations_summary_list[0].start_time #=> Time
+    #   resp.bulk_operations_summary_list[0].end_time #=> Time
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/ListBulkOperations AWS API Documentation
+    #
+    # @overload list_bulk_operations(params = {})
+    # @param [Hash] params ({})
+    def list_bulk_operations(params = {}, options = {})
+      req = build_request(:list_bulk_operations, params)
       req.send_request(options)
     end
 
@@ -7132,10 +7281,9 @@ module Aws::DynamoDB
     #   expression can reference attributes defined in the vector index search
     #   schema, including `HASH` and `INLINE_FILTER` key elements.
     #
-    #   Only the equality operator (`=`) is supported for `HASH` attributes.
-    #   Comparison and range operators are supported for `INLINE_FILTER`
-    #   attributes. Only top-level attributes from the search schema can be
-    #   referenced.
+    #   The `HASH` and `INLINE_FILTER` attributes support only the equality
+    #   operator (`=`). You can reference only top-level attributes from the
+    #   search schema.
     #
     # @option params [required, Integer] :top_k
     #   The number of most similar results to return.
@@ -7233,6 +7381,124 @@ module Aws::DynamoDB
     # @param [Hash] params ({})
     def search_vectors(params = {}, options = {})
       req = build_request(:search_vectors, params)
+      req.send_request(options)
+    end
+
+    # Starts an asynchronous bulk operation that reads items from Amazon S3
+    # and writes them to an existing DynamoDB table, so you can efficiently
+    # load or migrate large datasets.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that ensures the bulk operation
+    #   starts no more than one time. During the 8 hours after the initial
+    #   request, repeated requests that use the same token and parameters
+    #   return the same bulk operation. If a request reuses the token with
+    #   different parameters, DynamoDB returns an
+    #   `IdempotentParameterMismatchException`. If you omit the token, an
+    #   Amazon Web Services SDK automatically generates one.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, Types::InputS3Configuration] :input_s3_configuration
+    #   The Amazon S3 location, data format, and compression settings for the
+    #   input objects.
+    #
+    # @option params [required, Types::OutputS3Configuration] :output_s3_configuration
+    #   The Amazon S3 location, encryption settings, and output types for the
+    #   bulk operation.
+    #
+    # @option params [required, String] :table_name
+    #   The name or ARN of the existing DynamoDB table that receives the
+    #   items.
+    #
+    # @option params [Integer] :max_write_request_units
+    #   The maximum rate, in write request units per second, at which the bulk
+    #   operation attempts to write. The value must be at least 1,024. With
+    #   this setting, you limit only the bulk operation; the table's
+    #   provisioned or on-demand capacity settings don't change. The actual
+    #   write rate can be lower.
+    #
+    # @option params [String] :performance_tier
+    #   The performance tier for the bulk operation. Valid values are
+    #   `STANDARD` and `ACCELERATED`. If you don't specify a value, the
+    #   operation uses `STANDARD`.
+    #
+    # @return [Types::StartBulkPutItemsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartBulkPutItemsOutput#bulk_operation_description #bulk_operation_description} => Types::BulkOperationDescription
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_bulk_put_items({
+    #     client_token: "ClientToken",
+    #     input_s3_configuration: { # required
+    #       s3_bucket_owner: "S3BucketOwner",
+    #       s3_bucket: "S3Bucket", # required
+    #       s3_key_prefix: "S3Prefix",
+    #       input_format: "DYNAMODB_JSON", # required, accepts DYNAMODB_JSON, ION
+    #       input_compression_type: "GZIP", # accepts GZIP, ZSTD, NONE
+    #     },
+    #     output_s3_configuration: { # required
+    #       s3_bucket_owner: "S3BucketOwner",
+    #       s3_bucket: "S3Bucket",
+    #       s3_key_prefix: "S3Prefix",
+    #       s3_sse_algorithm: "AES256", # accepts AES256, KMS
+    #       s3_sse_kms_key_id: "S3SseKmsKeyId",
+    #       output_type: ["ERROR"], # required, accepts ERROR, CONDITION_CHECK_FAILURE
+    #     },
+    #     table_name: "TableArn", # required
+    #     max_write_request_units: 1,
+    #     performance_tier: "STANDARD", # accepts STANDARD, ACCELERATED
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.bulk_operation_description.bulk_operation_arn #=> String
+    #   resp.bulk_operation_description.bulk_operation_status #=> String, one of "IN_PROGRESS", "COMPLETED", "COMPLETED_WITH_ERRORS", "CANCELLING", "CANCELLED", "FAILED"
+    #   resp.bulk_operation_description.table_details #=> Array
+    #   resp.bulk_operation_description.table_details[0].table_name #=> String
+    #   resp.bulk_operation_description.table_details[0].table_id #=> String
+    #   resp.bulk_operation_description.client_token #=> String
+    #   resp.bulk_operation_description.input_s3_configuration.s3_bucket_owner #=> String
+    #   resp.bulk_operation_description.input_s3_configuration.s3_bucket #=> String
+    #   resp.bulk_operation_description.input_s3_configuration.s3_key_prefix #=> String
+    #   resp.bulk_operation_description.input_s3_configuration.input_format #=> String, one of "DYNAMODB_JSON", "ION"
+    #   resp.bulk_operation_description.input_s3_configuration.input_compression_type #=> String, one of "GZIP", "ZSTD", "NONE"
+    #   resp.bulk_operation_description.output_s3_configuration.s3_bucket_owner #=> String
+    #   resp.bulk_operation_description.output_s3_configuration.s3_bucket #=> String
+    #   resp.bulk_operation_description.output_s3_configuration.s3_key_prefix #=> String
+    #   resp.bulk_operation_description.output_s3_configuration.s3_sse_algorithm #=> String, one of "AES256", "KMS"
+    #   resp.bulk_operation_description.output_s3_configuration.s3_sse_kms_key_id #=> String
+    #   resp.bulk_operation_description.output_s3_configuration.output_type #=> Array
+    #   resp.bulk_operation_description.output_s3_configuration.output_type[0] #=> String, one of "ERROR", "CONDITION_CHECK_FAILURE"
+    #   resp.bulk_operation_description.start_time #=> Time
+    #   resp.bulk_operation_description.end_time #=> Time
+    #   resp.bulk_operation_description.processed_item_count #=> Integer
+    #   resp.bulk_operation_description.processed_input_bytes #=> Integer
+    #   resp.bulk_operation_description.total_input_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage #=> Array
+    #   resp.bulk_operation_description.bulk_operation_usage[0].table_name #=> String
+    #   resp.bulk_operation_description.bulk_operation_usage[0].bulk_put_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage[0].table.bulk_put_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage[0].local_secondary_indexes #=> Hash
+    #   resp.bulk_operation_description.bulk_operation_usage[0].local_secondary_indexes["IndexName"].bulk_put_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage[0].global_secondary_indexes #=> Hash
+    #   resp.bulk_operation_description.bulk_operation_usage[0].global_secondary_indexes["IndexName"].bulk_put_bytes #=> Integer
+    #   resp.bulk_operation_description.bulk_operation_usage[0].vector_indexes #=> Hash
+    #   resp.bulk_operation_description.bulk_operation_usage[0].vector_indexes["IndexName"].bulk_put_vector_bytes #=> Integer
+    #   resp.bulk_operation_description.failed_item_count #=> Integer
+    #   resp.bulk_operation_description.failure_code #=> String
+    #   resp.bulk_operation_description.failure_message #=> String
+    #   resp.bulk_operation_description.max_write_request_units #=> Integer
+    #   resp.bulk_operation_description.performance_tier #=> String, one of "STANDARD", "ACCELERATED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/dynamodb-2012-08-10/StartBulkPutItems AWS API Documentation
+    #
+    # @overload start_bulk_put_items(params = {})
+    # @param [Hash] params ({})
+    def start_bulk_put_items(params = {}, options = {})
+      req = build_request(:start_bulk_put_items, params)
       req.send_request(options)
     end
 
@@ -9433,7 +9699,7 @@ module Aws::DynamoDB
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-dynamodb'
-      context[:gem_version] = '1.180.0'
+      context[:gem_version] = '1.181.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
@@ -9501,6 +9767,7 @@ module Aws::DynamoDB
     #
     # | waiter_name                          | params                                          | :delay   | :max_attempts |
     # | ------------------------------------ | ----------------------------------------------- | -------- | ------------- |
+    # | bulk_operation_completed             | {Client#describe_bulk_operation}                | 20       | 180           |
     # | contributor_insights_enabled         | {Client#describe_contributor_insights}          | 20       | 30            |
     # | export_completed                     | {Client#describe_export}                        | 20       | 60            |
     # | import_completed                     | {Client#describe_import}                        | 20       | 60            |
@@ -9557,6 +9824,7 @@ module Aws::DynamoDB
 
     def waiters
       {
+        bulk_operation_completed: Waiters::BulkOperationCompleted,
         contributor_insights_enabled: Waiters::ContributorInsightsEnabled,
         export_completed: Waiters::ExportCompleted,
         import_completed: Waiters::ImportCompleted,

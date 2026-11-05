@@ -22347,6 +22347,49 @@ module Aws::QuickSight
       include Aws::Structure
     end
 
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account whose service role
+    #   configuration you want to describe.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeResourcePermissionsRequest AWS API Documentation
+    #
+    class DescribeResourcePermissionsRequest < Struct.new(
+      :aws_account_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role_type
+    #   The type of service role that Amazon Quick Sight uses for your
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_managed_role_arn
+    #   The ARN of the customer-managed role that Amazon Quick Sight uses
+    #   for your account. Amazon Quick Sight returns this value only when
+    #   `RoleType` is `CUSTOMER_MANAGED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeResourcePermissionsResponse AWS API Documentation
+    #
+    class DescribeResourcePermissionsResponse < Struct.new(
+      :role_type,
+      :customer_managed_role_arn,
+      :request_id,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] role
     #   The name of the role whose permissions you want described.
     #   @return [String]
@@ -36256,9 +36299,9 @@ module Aws::QuickSight
     # tenant ID and client ID are supplied through `OneDriveParameters`.
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
-    #   (AWS KMS) key used to encrypt the OneDrive certificate credentials.
-    #   This field is required.
+    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
+    #   key used to encrypt the OneDrive certificate credentials. This field
+    #   is required.
     #   @return [String]
     #
     # @!attribute [rw] cert_thumbprint
@@ -43062,9 +43105,9 @@ module Aws::QuickSight
     # `SharePointParameters`.
     #
     # @!attribute [rw] kms_key_arn
-    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
-    #   (AWS KMS) key used to encrypt the SharePoint certificate
-    #   credentials. This field is required.
+    #   The Amazon Resource Name (ARN) of the Key Management Service (KMS)
+    #   key used to encrypt the SharePoint certificate credentials. This
+    #   field is required.
     #   @return [String]
     #
     # @!attribute [rw] cert_thumbprint
@@ -52740,6 +52783,86 @@ module Aws::QuickSight
       :request_id,
       :schedule_id,
       :arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] aws_account_id
+    #   The ID of the Amazon Web Services account whose service role
+    #   configuration you want to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_type
+    #   The type of service role that you want Amazon Quick Sight to use.
+    #   The only supported value for this operation is `CUSTOMER_MANAGED`.
+    #   Requests that specify `QUICKSIGHT_MANAGED` are rejected.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_managed_role_arn
+    #   The ARN of the customer-managed role that you want Amazon Quick
+    #   Sight to use. To use this operation, you must have the
+    #   `iam:PassRole` permission for the role.
+    #
+    #   Configure the role as follows:
+    #
+    #   * The role must belong to the Amazon Web Services account specified
+    #     by `AwsAccountId`.
+    #
+    #   * Configure the role trust policy to allow the Amazon Quick Sight
+    #     service principal to call `sts:AssumeRole`.
+    #
+    #   * Attach a permissions policy that allows access to the resources
+    #     that you want Amazon Quick Sight to use.
+    #
+    #   * To use features that rely on session tags, configure the role
+    #     trust policy to allow the Amazon Quick Sight service principal to
+    #     call `sts:TagSession`.
+    #
+    #   If the role doesn't exist or its trust policy doesn't allow
+    #   `sts:AssumeRole`, the request returns an `AccessDeniedException`.
+    #
+    #   When you call this operation, Amazon Quick Sight attempts to assume
+    #   the role with session tags and records whether the attempt succeeds.
+    #   If you later add or remove `sts:TagSession` from the trust policy,
+    #   call this operation again with the same role ARN to refresh the
+    #   stored capability.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateResourcePermissionsRequest AWS API Documentation
+    #
+    class UpdateResourcePermissionsRequest < Struct.new(
+      :aws_account_id,
+      :role_type,
+      :customer_managed_role_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role_type
+    #   The type of service role that Amazon Quick Sight uses for your
+    #   account after the update. This value is `CUSTOMER_MANAGED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_managed_role_arn
+    #   The ARN of the customer-managed role that Amazon Quick Sight uses
+    #   for your account after the update.
+    #   @return [String]
+    #
+    # @!attribute [rw] request_id
+    #   The Amazon Web Services request ID for this operation.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The HTTP status of the request.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateResourcePermissionsResponse AWS API Documentation
+    #
+    class UpdateResourcePermissionsResponse < Struct.new(
+      :role_type,
+      :customer_managed_role_arn,
+      :request_id,
+      :status)
       SENSITIVE = []
       include Aws::Structure
     end

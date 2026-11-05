@@ -2302,6 +2302,25 @@ module Aws
                         ) -> _GetJobRunsResponseSuccess
                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobRunsResponseSuccess
 
+      interface _GetJobUpgradeAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetJobUpgradeAnalysisResponse]
+        def job_name: () -> ::String
+        def analysis_id: () -> ::String
+        def status: () -> ("OBSERVING" | "WAITING_FOR_CONSENT" | "UPGRADING" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "STOPPED")
+        def source_version: () -> ::String
+        def target_version: () -> ::String
+        def analysis_type: () -> ("AUTO_UPGRADE")
+        def auto_upgrade_evaluation_summary: () -> ::String
+        def error_message: () -> ::String
+        def auto_upgrade_eligibility_summary: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_job_upgrade_analysis-instance_method
+      def get_job_upgrade_analysis: (
+                                      analysis_id: ::String,
+                                      job_name: ::String
+                                    ) -> _GetJobUpgradeAnalysisResponseSuccess
+                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetJobUpgradeAnalysisResponseSuccess
+
       interface _GetJobsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetJobsResponse]
         def jobs: () -> ::Array[Types::Job]
@@ -4356,6 +4375,19 @@ module Aws
                          ) -> _StartJobRunResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartJobRunResponseSuccess
 
+      interface _StartJobUpgradeAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartJobUpgradeAnalysisResponse]
+        def analysis_id: () -> ::String
+        def job_name: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#start_job_upgrade_analysis-instance_method
+      def start_job_upgrade_analysis: (
+                                        job_name: ::String,
+                                        ?analysis_id: ::String,
+                                        ?upgrade_consent: ("APPROVE" | "DECLINE")
+                                      ) -> _StartJobUpgradeAnalysisResponseSuccess
+                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartJobUpgradeAnalysisResponseSuccess
+
       interface _StartMLEvaluationTaskRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StartMLEvaluationTaskRunResponse]
         def task_run_id: () -> ::String
@@ -4450,6 +4482,16 @@ module Aws
                                    crawler_name: ::String
                                  ) -> _StopCrawlerScheduleResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopCrawlerScheduleResponseSuccess
+
+      interface _StopJobUpgradeAnalysisResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StopJobUpgradeAnalysisResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#stop_job_upgrade_analysis-instance_method
+      def stop_job_upgrade_analysis: (
+                                       job_name: ::String,
+                                       analysis_id: ::String
+                                     ) -> _StopJobUpgradeAnalysisResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StopJobUpgradeAnalysisResponseSuccess
 
       interface _StopMaterializedViewRefreshTaskRunResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::StopMaterializedViewRefreshTaskRunResponse]

@@ -226,7 +226,7 @@ module Aws::CloudWatchLogs
       attr_accessor log_group_name: ::String
       attr_accessor kms_key_id: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS")
       attr_accessor deletion_protection_enabled: bool
       SENSITIVE: []
     end
@@ -655,7 +655,7 @@ module Aws::CloudWatchLogs
       attr_accessor next_token: ::String
       attr_accessor limit: ::Integer
       attr_accessor include_linked_accounts: bool
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS")
       attr_accessor log_group_identifiers: ::Array[::String]
       SENSITIVE: []
     end
@@ -1243,7 +1243,7 @@ module Aws::CloudWatchLogs
     class ListAggregateLogGroupSummariesRequest
       attr_accessor account_identifiers: ::Array[::String]
       attr_accessor include_linked_accounts: bool
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS")
       attr_accessor log_group_name_pattern: ::String
       attr_accessor data_sources: ::Array[Types::DataSourceFilter]
       attr_accessor group_by: ("DATA_SOURCE_NAME_TYPE_AND_FORMAT" | "DATA_SOURCE_NAME_AND_TYPE")
@@ -1312,7 +1312,7 @@ module Aws::CloudWatchLogs
 
     class ListLogGroupsRequest
       attr_accessor log_group_name_pattern: ::String
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS")
       attr_accessor include_linked_accounts: bool
       attr_accessor account_identifiers: ::Array[::String]
       attr_accessor next_token: ::String
@@ -1461,7 +1461,7 @@ module Aws::CloudWatchLogs
       attr_accessor kms_key_id: ::String
       attr_accessor data_protection_status: ("ACTIVATED" | "DELETED" | "ARCHIVED" | "DISABLED")
       attr_accessor inherited_properties: ::Array[("ACCOUNT_DATA_PROTECTION")]
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS")
       attr_accessor log_group_arn: ::String
       attr_accessor deletion_protection_enabled: bool
       attr_accessor bearer_token_authentication_enabled: bool
@@ -1486,7 +1486,7 @@ module Aws::CloudWatchLogs
     class LogGroupSummary
       attr_accessor log_group_name: ::String
       attr_accessor log_group_arn: ::String
-      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY")
+      attr_accessor log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS")
       SENSITIVE: []
     end
 

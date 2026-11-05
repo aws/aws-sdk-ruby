@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.146.0 (2026-11-05)
+------------------
+
+* Feature - AWS WAF customers who monetize AI traffic on Web ACLs can now configure payments through connected accounts (Stripe).
+
+1.145.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.144.0 (2026-10-29)
 ------------------
 

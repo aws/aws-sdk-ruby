@@ -3217,6 +3217,26 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # Information about a case associated with a contact.
+    #
+    # @!attribute [rw] case_id
+    #   Unique identifier of the case in UUID format.
+    #   @return [String]
+    #
+    # @!attribute [rw] case_reference_number
+    #   A friendly number for the case. Reference numbers are not guaranteed
+    #   to be unique.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/CaseEntry AWS API Documentation
+    #
+    class CaseEntry < Struct.new(
+      :case_id,
+      :case_reference_number)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The SLA configuration for Case SlaAssignmentType.
     #
     # @!attribute [rw] name
@@ -4092,6 +4112,11 @@ module Aws::Connect
     #   information about the task template.
     #   @return [Types::TaskTemplateInfoV2]
     #
+    # @!attribute [rw] cases
+    #   A list of cases associated with the contact. This field is populated
+    #   when one or more cases have been linked to the contact.
+    #   @return [Array<Types::CaseEntry>]
+    #
     # @!attribute [rw] contact_details
     #   A map of string key/value pairs that contain user-defined attributes
     #   which are lightly typed within the contact. This object is used only
@@ -4161,6 +4186,7 @@ module Aws::Connect
       :disconnect_reason,
       :contact_evaluations,
       :task_template_info,
+      :cases,
       :contact_details,
       :outbound_strategy,
       :attributes,

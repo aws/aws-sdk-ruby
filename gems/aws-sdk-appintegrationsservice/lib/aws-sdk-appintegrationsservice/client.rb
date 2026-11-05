@@ -1032,6 +1032,7 @@ module Aws::AppIntegrationsService
     #   * {Types::GetApplicationResponse#publications #publications} => Array&lt;Types::Publication&gt;
     #   * {Types::GetApplicationResponse#created_time #created_time} => Time
     #   * {Types::GetApplicationResponse#last_modified_time #last_modified_time} => Time
+    #   * {Types::GetApplicationResponse#last_modified_region #last_modified_region} => String
     #   * {Types::GetApplicationResponse#tags #tags} => Hash&lt;String,String&gt;
     #   * {Types::GetApplicationResponse#permissions #permissions} => Array&lt;String&gt;
     #   * {Types::GetApplicationResponse#is_service #is_service} => Boolean
@@ -1087,6 +1088,7 @@ module Aws::AppIntegrationsService
     #   resp.publications[0].description #=> String
     #   resp.created_time #=> Time
     #   resp.last_modified_time #=> Time
+    #   resp.last_modified_region #=> String
     #   resp.tags #=> Hash
     #   resp.tags["TagKey"] #=> String
     #   resp.permissions #=> Array
@@ -1344,6 +1346,7 @@ module Aws::AppIntegrationsService
     #   resp.applications[0].namespace #=> String
     #   resp.applications[0].created_time #=> Time
     #   resp.applications[0].last_modified_time #=> Time
+    #   resp.applications[0].last_modified_region #=> String
     #   resp.applications[0].is_service #=> Boolean
     #   resp.applications[0].application_type #=> String, one of "STANDARD", "SERVICE", "MCP_SERVER", "A2A_SERVER"
     #   resp.next_token #=> String
@@ -1900,7 +1903,7 @@ module Aws::AppIntegrationsService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-appintegrationsservice'
-      context[:gem_version] = '1.81.0'
+      context[:gem_version] = '1.83.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.11.0 (2026-11-05)
+------------------
+
+* Feature - AWS Lambda MicroVMs now support the x86-64 CPU architecture, which you can select in addition to ARM64 (Graviton) when launching a MicroVM.
+
+1.10.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.9.0 (2026-10-29)
 ------------------
 

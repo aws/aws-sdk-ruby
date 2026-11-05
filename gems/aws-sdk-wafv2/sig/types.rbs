@@ -195,6 +195,24 @@ module Aws::WAFV2
       SENSITIVE: []
     end
 
+    class ConnectedAccountChainConfig
+      attr_accessor chain: ("BASE" | "SOLANA")
+      attr_accessor prices: ::Array[Types::ConnectedAccountPrice]
+      SENSITIVE: []
+    end
+
+    class ConnectedAccountConfig
+      attr_accessor connected_account_arn: ::String
+      attr_accessor payment_networks: ::Array[Types::ConnectedAccountChainConfig]
+      SENSITIVE: []
+    end
+
+    class ConnectedAccountPrice
+      attr_accessor amount: ::String
+      attr_accessor currency: ("USDC")
+      SENSITIVE: []
+    end
+
     class CookieMatchPattern
       attr_accessor all: Types::All
       attr_accessor included_cookies: ::Array[::String]
@@ -1212,6 +1230,7 @@ module Aws::WAFV2
 
     class MonetizationConfig
       attr_accessor crypto_config: Types::CryptoConfig
+      attr_accessor connected_account_configs: ::Array[Types::ConnectedAccountConfig]
       attr_accessor currency_mode: ("REAL" | "TEST")
       SENSITIVE: []
     end

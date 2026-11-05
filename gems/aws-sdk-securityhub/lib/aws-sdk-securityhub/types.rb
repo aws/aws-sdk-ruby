@@ -27799,6 +27799,225 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # @!attribute [rw] package_name
+    #   The name of the software package, for example `openssl`. This value
+    #   must match the `PackageName` returned by `GetSoftwareV2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   The type of the software package, for example `operating-system`,
+    #   `application`, or `library`. This value must match the `PackageType`
+    #   returned by `GetSoftwareV2`.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_version
+    #   The version of the software package, for example `3.0.8`. If you
+    #   omit this value, the response includes resources that contain any
+    #   version of the package.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   Filters the returned resources based on a set of criteria. You can
+    #   nest composite filters up to three levels deep.
+    #   @return [Types::SoftwareFilters]
+    #
+    # @!attribute [rw] scopes
+    #   Limits the results to resources from specific organizational units
+    #   or from the delegated administrator's organization. Only the
+    #   delegated administrator account can use this parameter. Other
+    #   accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees resources from all accounts across the entire
+    #   organization. Other accounts see only their own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #   @return [Types::SoftwareScopes]
+    #
+    # @!attribute [rw] sort_criteria
+    #   The resource attribute used to sort the list of returned resources,
+    #   for example `Region` or `ResourceType`. You can specify one sort
+    #   criterion.
+    #   @return [Array<Types::SortCriterion>]
+    #
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #
+    #   A token expires one hour after it's issued. If you change the
+    #   request parameters between calls, the token is no longer valid and
+    #   the request fails with a `ValidationException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid values are 1–100. The
+    #   default is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareResourcesV2Request AWS API Documentation
+    #
+    class GetSoftwareResourcesV2Request < Struct.new(
+      :package_name,
+      :package_type,
+      :package_version,
+      :filters,
+      :scopes,
+      :sort_criteria,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] software_resources
+    #   An array of resources that contain the specified software package.
+    #   @return [Array<Types::SoftwareResourceResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareResourcesV2Response AWS API Documentation
+    #
+    class GetSoftwareResourcesV2Response < Struct.new(
+      :software_resources,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_by_rules
+    #   How software statistics should be aggregated and organized in the
+    #   response.
+    #   @return [Array<Types::SoftwareGroupByRule>]
+    #
+    # @!attribute [rw] scopes
+    #   Limits the results to software on resources from specific
+    #   organizational units or from the delegated administrator's
+    #   organization. Only the delegated administrator account can use this
+    #   parameter. Other accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees statistics from all accounts across the entire
+    #   organization. Other accounts see only statistics for software on
+    #   their own resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #   @return [Types::SoftwareScopes]
+    #
+    # @!attribute [rw] sort_order
+    #   Sorts aggregated statistics by count. The default is descending,
+    #   which returns the values with the highest counts first.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_statistic_results
+    #   The maximum number of grouping values to return. Valid values are
+    #   1–400. The default is 400.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareStatisticsV2Request AWS API Documentation
+    #
+    class GetSoftwareStatisticsV2Request < Struct.new(
+      :group_by_rules,
+      :scopes,
+      :sort_order,
+      :max_statistic_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] group_by_results
+    #   The aggregated statistics about software based on the specified
+    #   grouping rule.
+    #   @return [Array<Types::GroupByResult>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareStatisticsV2Response AWS API Documentation
+    #
+    class GetSoftwareStatisticsV2Response < Struct.new(
+      :group_by_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] filters
+    #   Filters software packages based on a set of criteria. You can nest
+    #   composite filters up to three levels deep.
+    #   @return [Types::SoftwareFilters]
+    #
+    # @!attribute [rw] scopes
+    #   Limits the results to software on resources from specific
+    #   organizational units or from the delegated administrator's
+    #   organization. Only the delegated administrator account can use this
+    #   parameter. Other accounts receive an `AccessDeniedException`.
+    #
+    #   This parameter is optional. If you omit it, the delegated
+    #   administrator sees software from all accounts across the entire
+    #   organization. Other accounts see only software on their own
+    #   resources.
+    #
+    #   You can specify up to 10 entries in `Scopes.AwsOrganizations`. If
+    #   multiple entries are specified, the entries are combined using OR
+    #   logic.
+    #   @return [Types::SoftwareScopes]
+    #
+    # @!attribute [rw] sort_criteria
+    #   The software attributes used to sort the list of returned software
+    #   packages. You can't sort by `ResourceCount`.
+    #   @return [Array<Types::SortCriterion>]
+    #
+    # @!attribute [rw] next_token
+    #   The token required for pagination. On your first call, set the value
+    #   of this parameter to `NULL`. For subsequent calls, to continue
+    #   listing data, set the value of this parameter to the value returned
+    #   in the previous response.
+    #
+    #   A token expires one hour after it's issued. If you change `Filters`
+    #   or `SortCriteria` between calls, the token is no longer valid and
+    #   the request fails with a `ValidationException`.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   The maximum number of results to return. Valid values are 1–100. The
+    #   default is 100.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareV2Request AWS API Documentation
+    #
+    class GetSoftwareV2Request < Struct.new(
+      :filters,
+      :scopes,
+      :sort_criteria,
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] software
+    #   An array of software packages returned by the operation.
+    #   @return [Array<Types::SoftwareResult>]
+    #
+    # @!attribute [rw] next_token
+    #   The pagination token to use to request the next page of results.
+    #   Otherwise, this parameter is null.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/GetSoftwareV2Response AWS API Documentation
+    #
+    class GetSoftwareV2Response < Struct.new(
+      :software,
+      :next_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Represents finding statistics grouped by `GroupedByField`.
     #
     # @!attribute [rw] group_by_field
@@ -34559,6 +34778,81 @@ module Aws::SecurityHub
       include Aws::Structure
     end
 
+    # Enables the creation of criteria for software packages in Security
+    # Hub.
+    #
+    # @!attribute [rw] string_filters
+    #   Enables filtering based on string field values.
+    #   @return [Array<Types::SoftwareStringFilter>]
+    #
+    # @!attribute [rw] nested_composite_filters
+    #   Provides an additional level of filtering, creating a three-layer
+    #   nested structure. The first layer is a `CompositeFilters` array with
+    #   a `CompositeOperator` (`AND`/`OR`). The second layer is a
+    #   `CompositeFilter` object that contains direct filters and
+    #   `NestedCompositeFilters`. The third layer is
+    #   `NestedCompositeFilters`, which contains additional filter
+    #   conditions.
+    #   @return [Array<Types::SoftwareCompositeFilter>]
+    #
+    # @!attribute [rw] operator
+    #   The logical operator used to combine multiple filter conditions.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareCompositeFilter AWS API Documentation
+    #
+    class SoftwareCompositeFilter < Struct.new(
+      :string_filters,
+      :nested_composite_filters,
+      :operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of software packages and the resources that contain
+    # them.
+    #
+    # @!attribute [rw] composite_filters
+    #   A collection of complex filtering conditions that can be applied to
+    #   software packages.
+    #   @return [Array<Types::SoftwareCompositeFilter>]
+    #
+    # @!attribute [rw] composite_operator
+    #   The logical operator used to combine multiple filter conditions in
+    #   the structure.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareFilters AWS API Documentation
+    #
+    class SoftwareFilters < Struct.new(
+      :composite_filters,
+      :composite_operator)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the configuration for organizing and categorizing software
+    # packages installed on your resources.
+    #
+    # @!attribute [rw] group_by_field
+    #   Specifies the attribute that software statistics should be grouped
+    #   by.
+    #   @return [String]
+    #
+    # @!attribute [rw] filters
+    #   The criteria used to select the software packages included in the
+    #   statistics. You can nest composite filters up to three levels deep.
+    #   @return [Types::SoftwareFilters]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareGroupByRule AWS API Documentation
+    #
+    class SoftwareGroupByRule < Struct.new(
+      :group_by_field,
+      :filters)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Information about a software package.
     #
     # @!attribute [rw] name
@@ -34621,6 +34915,146 @@ module Aws::SecurityHub
       :remediation,
       :source_layer_hash,
       :source_layer_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a resource that contains a software
+    # package.
+    #
+    # @!attribute [rw] account_id
+    #   The Amazon Web Services account that recorded the resource data in
+    #   Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_type
+    #   The type of resource, for example `AWS::EC2::Instance` or
+    #   `AWS::Lambda::Function`.
+    #   @return [String]
+    #
+    # @!attribute [rw] region
+    #   The Amazon Web Services Region that recorded the resource data in
+    #   Security Hub.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_id
+    #   The unique identifier for a resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_provider
+    #   The cloud provider where the resource exists. Valid values are `AWS`
+    #   and `Azure`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_org_id
+    #   The identifier of the cloud organization that owns the resource. For
+    #   Amazon Web Services resources, this is the Organizations ID. For
+    #   Azure resources, this is the Azure tenant ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_owner_account_id
+    #   The identifier of the cloud account that owns the resource. For
+    #   Amazon Web Services resources, this is the Amazon Web Services
+    #   account ID. For Azure resources, this is the Azure subscription ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_cloud_partition
+    #   The cloud partition where the resource exists. For Amazon Web
+    #   Services, valid values include `aws`, `aws-cn`, and `aws-us-gov`.
+    #   This field isn't returned for cloud providers that don't use
+    #   partitions.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_region
+    #   The native cloud region where the resource is located. For Amazon
+    #   Web Services, this is an Amazon Web Services Region (for example,
+    #   `us-east-1`). For Azure resources, this is the Azure region (for
+    #   example, `westus2`).
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareResourceResult AWS API Documentation
+    #
+    class SoftwareResourceResult < Struct.new(
+      :account_id,
+      :resource_type,
+      :region,
+      :resource_id,
+      :resource_provider,
+      :resource_owner_org_id,
+      :resource_owner_account_id,
+      :resource_cloud_partition,
+      :resource_region)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Provides information about a software package installed on one or more
+    # of your resources.
+    #
+    # @!attribute [rw] package_name
+    #   The name of the software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_version
+    #   The version of the software package.
+    #   @return [String]
+    #
+    # @!attribute [rw] package_type
+    #   The type of the software package, for example `operating-system`,
+    #   `application`, or `library`.
+    #   @return [String]
+    #
+    # @!attribute [rw] resource_count
+    #   The number of resources that contain this software package. To list
+    #   these resources, call `GetSoftwareResourcesV2`.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareResult AWS API Documentation
+    #
+    class SoftwareResult < Struct.new(
+      :package_name,
+      :package_version,
+      :package_type,
+      :resource_count)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Defines the data boundary for a software query. Scopes determine which
+    # organizational units or organizations to retrieve data from.
+    #
+    # @!attribute [rw] aws_organizations
+    #   A list of Organizations scopes to include in the query results. Each
+    #   entry in the list specifies an organization or organizational unit
+    #   to include for the delegated administrator's account. If the list
+    #   specifies multiple entries, the entries are combined using OR logic.
+    #   @return [Array<Types::AwsOrganizationScope>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareScopes AWS API Documentation
+    #
+    class SoftwareScopes < Struct.new(
+      :aws_organizations)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Enables filtering of software packages based on string field values.
+    #
+    # @!attribute [rw] field_name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] filter
+    #   The string value and comparison operator to filter on. Supported
+    #   comparisons are `EQUALS`, `NOT_EQUALS`, `PREFIX`, and
+    #   `PREFIX_NOT_EQUALS`.
+    #   @return [Types::StringFilter]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityhub-2018-10-26/SoftwareStringFilter AWS API Documentation
+    #
+    class SoftwareStringFilter < Struct.new(
+      :field_name,
+      :filter)
       SENSITIVE = []
       include Aws::Structure
     end

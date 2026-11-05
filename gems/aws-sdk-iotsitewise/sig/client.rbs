@@ -600,6 +600,7 @@ module Aws
                                            export_data_types: Array[("VIDEO" | "TELEMETRY" | "ANNOTATION")]?
                                          }?
                                        },
+                                       ?job_name: ::String,
                                        error_report_location: {
                                          s3_uri: ::String
                                        }
@@ -1230,6 +1231,7 @@ module Aws
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeDatasetExportJobResponse]
         def job_id: () -> ::String
         def workspace_name: () -> ::String
+        def job_name: () -> ::String
         def status: () -> ("SUBMITTED" | "RUNNING" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "FAILED")
         def started_at: () -> ::Time
         def completed_at: () -> ::Time

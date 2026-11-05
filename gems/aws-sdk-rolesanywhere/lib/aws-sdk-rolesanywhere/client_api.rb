@@ -81,6 +81,7 @@ module Aws::RolesAnywhere
     ScalarProfileRequest = Shapes::StructureShape.new(name: 'ScalarProfileRequest')
     ScalarSubjectRequest = Shapes::StructureShape.new(name: 'ScalarSubjectRequest')
     ScalarTrustAnchorRequest = Shapes::StructureShape.new(name: 'ScalarTrustAnchorRequest')
+    ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
     Source = Shapes::StructureShape.new(name: 'Source')
     SourceData = Shapes::UnionShape.new(name: 'SourceData')
     SourceDataX509CertificateDataString = Shapes::StringShape.new(name: 'SourceDataX509CertificateDataString')
@@ -138,6 +139,7 @@ module Aws::RolesAnywhere
     CreateTrustAnchorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, required: true, location_name: "name"))
     CreateTrustAnchorRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "source"))
     CreateTrustAnchorRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    CreateTrustAnchorRequest.add_member(:crl_dp_revocation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "crlDpRevocationEnabled"))
     CreateTrustAnchorRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreateTrustAnchorRequest.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettings, location_name: "notificationSettings"))
     CreateTrustAnchorRequest.struct_class = Types::CreateTrustAnchorRequest
@@ -308,6 +310,10 @@ module Aws::RolesAnywhere
     ScalarTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "trustAnchorId"))
     ScalarTrustAnchorRequest.struct_class = Types::ScalarTrustAnchorRequest
 
+    ServiceUnavailableException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
+    ServiceUnavailableException.add_member(:retry_after_seconds, Shapes::ShapeRef.new(shape: Integer, location_name: "retryAfterSeconds"))
+    ServiceUnavailableException.struct_class = Types::ServiceUnavailableException
+
     Source.add_member(:source_type, Shapes::ShapeRef.new(shape: TrustAnchorType, location_name: "sourceType"))
     Source.add_member(:source_data, Shapes::ShapeRef.new(shape: SourceData, location_name: "sourceData"))
     Source.struct_class = Types::Source
@@ -369,6 +375,7 @@ module Aws::RolesAnywhere
     TrustAnchorDetail.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     TrustAnchorDetail.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
     TrustAnchorDetail.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+    TrustAnchorDetail.add_member(:crl_dp_revocation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "crlDpRevocationEnabled"))
     TrustAnchorDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "createdAt"))
     TrustAnchorDetail.add_member(:updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, location_name: "updatedAt"))
     TrustAnchorDetail.add_member(:notification_settings, Shapes::ShapeRef.new(shape: NotificationSettingDetails, location_name: "notificationSettings"))
@@ -402,6 +409,7 @@ module Aws::RolesAnywhere
     UpdateTrustAnchorRequest.add_member(:trust_anchor_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location: "uri", location_name: "trustAnchorId"))
     UpdateTrustAnchorRequest.add_member(:name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "name"))
     UpdateTrustAnchorRequest.add_member(:source, Shapes::ShapeRef.new(shape: Source, location_name: "source"))
+    UpdateTrustAnchorRequest.add_member(:crl_dp_revocation_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "crlDpRevocationEnabled"))
     UpdateTrustAnchorRequest.struct_class = Types::UpdateTrustAnchorRequest
 
     ValidationException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -434,6 +442,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: ProfileDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:create_trust_anchor, Seahorse::Model::Operation.new.tap do |o|
@@ -444,6 +453,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: TrustAnchorDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_attribute_mapping, Seahorse::Model::Operation.new.tap do |o|
@@ -455,6 +465,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_crl, Seahorse::Model::Operation.new.tap do |o|
@@ -465,6 +476,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: CrlDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -475,6 +487,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: ProfileDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:delete_trust_anchor, Seahorse::Model::Operation.new.tap do |o|
@@ -485,6 +498,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: TrustAnchorDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:disable_crl, Seahorse::Model::Operation.new.tap do |o|
@@ -495,6 +509,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: CrlDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:disable_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -505,6 +520,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: ProfileDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:disable_trust_anchor, Seahorse::Model::Operation.new.tap do |o|
@@ -515,6 +531,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: TrustAnchorDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:enable_crl, Seahorse::Model::Operation.new.tap do |o|
@@ -525,6 +542,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: CrlDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:enable_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -535,6 +553,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: ProfileDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:enable_trust_anchor, Seahorse::Model::Operation.new.tap do |o|
@@ -545,6 +564,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: TrustAnchorDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:get_crl, Seahorse::Model::Operation.new.tap do |o|
@@ -554,6 +574,7 @@ module Aws::RolesAnywhere
         o.input = Shapes::ShapeRef.new(shape: ScalarCrlRequest)
         o.output = Shapes::ShapeRef.new(shape: CrlDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:get_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -564,6 +585,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: ProfileDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:get_subject, Seahorse::Model::Operation.new.tap do |o|
@@ -574,6 +596,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: SubjectDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:get_trust_anchor, Seahorse::Model::Operation.new.tap do |o|
@@ -585,6 +608,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:import_crl, Seahorse::Model::Operation.new.tap do |o|
@@ -595,6 +619,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: CrlDetailResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:list_crls, Seahorse::Model::Operation.new.tap do |o|
@@ -605,6 +630,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: ListCrlsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
@@ -620,6 +646,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: ListProfilesResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
@@ -635,6 +662,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: ListSubjectsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
@@ -651,6 +679,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:list_trust_anchors, Seahorse::Model::Operation.new.tap do |o|
@@ -661,6 +690,7 @@ module Aws::RolesAnywhere
         o.output = Shapes::ShapeRef.new(shape: ListTrustAnchorsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o[:pager] = Aws::Pager.new(
           tokens: {
             "next_token" => "next_token"
@@ -677,6 +707,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:put_notification_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -688,6 +719,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:reset_notification_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -699,6 +731,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -710,6 +743,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
       end)
 
@@ -722,6 +756,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:update_crl, Seahorse::Model::Operation.new.tap do |o|
@@ -733,6 +768,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:update_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -744,6 +780,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
 
       api.add_operation(:update_trust_anchor, Seahorse::Model::Operation.new.tap do |o|
@@ -755,6 +792,7 @@ module Aws::RolesAnywhere
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
       end)
     end
 

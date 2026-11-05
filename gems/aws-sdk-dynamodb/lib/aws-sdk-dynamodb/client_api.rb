@@ -72,6 +72,26 @@ module Aws::DynamoDB
     BinarySetAttributeValue = Shapes::ListShape.new(name: 'BinarySetAttributeValue')
     BooleanAttributeValue = Shapes::BooleanShape.new(name: 'BooleanAttributeValue')
     BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
+    BulkOperationArn = Shapes::StringShape.new(name: 'BulkOperationArn')
+    BulkOperationBytes = Shapes::StructureShape.new(name: 'BulkOperationBytes')
+    BulkOperationDescription = Shapes::StructureShape.new(name: 'BulkOperationDescription')
+    BulkOperationEndTime = Shapes::TimestampShape.new(name: 'BulkOperationEndTime')
+    BulkOperationInputFormat = Shapes::StringShape.new(name: 'BulkOperationInputFormat')
+    BulkOperationItemCount = Shapes::IntegerShape.new(name: 'BulkOperationItemCount')
+    BulkOperationMaxWriteRequestUnits = Shapes::IntegerShape.new(name: 'BulkOperationMaxWriteRequestUnits')
+    BulkOperationNextToken = Shapes::StringShape.new(name: 'BulkOperationNextToken')
+    BulkOperationPerformanceTier = Shapes::StringShape.new(name: 'BulkOperationPerformanceTier')
+    BulkOperationStartTime = Shapes::TimestampShape.new(name: 'BulkOperationStartTime')
+    BulkOperationStatus = Shapes::StringShape.new(name: 'BulkOperationStatus')
+    BulkOperationSummary = Shapes::StructureShape.new(name: 'BulkOperationSummary')
+    BulkOperationTableDetail = Shapes::StructureShape.new(name: 'BulkOperationTableDetail')
+    BulkOperationTableDetails = Shapes::ListShape.new(name: 'BulkOperationTableDetails')
+    BulkOperationUsage = Shapes::StructureShape.new(name: 'BulkOperationUsage')
+    BulkOperationUsageMultiple = Shapes::ListShape.new(name: 'BulkOperationUsageMultiple')
+    BulkOperationVectorBytes = Shapes::StructureShape.new(name: 'BulkOperationVectorBytes')
+    BulkOperationsSummaryList = Shapes::ListShape.new(name: 'BulkOperationsSummaryList')
+    CancelBulkOperationInput = Shapes::StructureShape.new(name: 'CancelBulkOperationInput')
+    CancelBulkOperationOutput = Shapes::StructureShape.new(name: 'CancelBulkOperationOutput')
     CancellationReason = Shapes::StructureShape.new(name: 'CancellationReason')
     CancellationReasonList = Shapes::ListShape.new(name: 'CancellationReasonList')
     Capacity = Shapes::StructureShape.new(name: 'Capacity')
@@ -134,6 +154,8 @@ module Aws::DynamoDB
     DeletionProtectionEnabled = Shapes::BooleanShape.new(name: 'DeletionProtectionEnabled')
     DescribeBackupInput = Shapes::StructureShape.new(name: 'DescribeBackupInput')
     DescribeBackupOutput = Shapes::StructureShape.new(name: 'DescribeBackupOutput')
+    DescribeBulkOperationInput = Shapes::StructureShape.new(name: 'DescribeBulkOperationInput')
+    DescribeBulkOperationOutput = Shapes::StructureShape.new(name: 'DescribeBulkOperationOutput')
     DescribeContinuousBackupsInput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsInput')
     DescribeContinuousBackupsOutput = Shapes::StructureShape.new(name: 'DescribeContinuousBackupsOutput')
     DescribeContributorInsightsInput = Shapes::StructureShape.new(name: 'DescribeContributorInsightsInput')
@@ -256,6 +278,7 @@ module Aws::DynamoDB
     InputCompressionType = Shapes::StringShape.new(name: 'InputCompressionType')
     InputFormat = Shapes::StringShape.new(name: 'InputFormat')
     InputFormatOptions = Shapes::StructureShape.new(name: 'InputFormatOptions')
+    InputS3Configuration = Shapes::StructureShape.new(name: 'InputS3Configuration')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerObject = Shapes::IntegerShape.new(name: 'IntegerObject')
     InternalServerError = Shapes::StructureShape.new(name: 'InternalServerError')
@@ -292,6 +315,9 @@ module Aws::DynamoDB
     ListAttributeValue = Shapes::ListShape.new(name: 'ListAttributeValue')
     ListBackupsInput = Shapes::StructureShape.new(name: 'ListBackupsInput')
     ListBackupsOutput = Shapes::StructureShape.new(name: 'ListBackupsOutput')
+    ListBulkOperationsInput = Shapes::StructureShape.new(name: 'ListBulkOperationsInput')
+    ListBulkOperationsMaxLimit = Shapes::IntegerShape.new(name: 'ListBulkOperationsMaxLimit')
+    ListBulkOperationsOutput = Shapes::StructureShape.new(name: 'ListBulkOperationsOutput')
     ListContributorInsightsInput = Shapes::StructureShape.new(name: 'ListContributorInsightsInput')
     ListContributorInsightsLimit = Shapes::IntegerShape.new(name: 'ListContributorInsightsLimit')
     ListContributorInsightsOutput = Shapes::StructureShape.new(name: 'ListContributorInsightsOutput')
@@ -327,6 +353,9 @@ module Aws::DynamoDB
     NumberSetAttributeValue = Shapes::ListShape.new(name: 'NumberSetAttributeValue')
     OnDemandThroughput = Shapes::StructureShape.new(name: 'OnDemandThroughput')
     OnDemandThroughputOverride = Shapes::StructureShape.new(name: 'OnDemandThroughputOverride')
+    OutputS3Configuration = Shapes::StructureShape.new(name: 'OutputS3Configuration')
+    OutputTypeEnum = Shapes::StringShape.new(name: 'OutputTypeEnum')
+    OutputTypeList = Shapes::ListShape.new(name: 'OutputTypeList')
     ParameterizedStatement = Shapes::StructureShape.new(name: 'ParameterizedStatement')
     ParameterizedStatements = Shapes::ListShape.new(name: 'ParameterizedStatements')
     PartiQLBatchRequest = Shapes::ListShape.new(name: 'PartiQLBatchRequest')
@@ -342,6 +371,7 @@ module Aws::DynamoDB
     PositiveIntegerObject = Shapes::IntegerShape.new(name: 'PositiveIntegerObject')
     PositiveLongObject = Shapes::IntegerShape.new(name: 'PositiveLongObject')
     PreparedStatementParameters = Shapes::ListShape.new(name: 'PreparedStatementParameters')
+    ProcessedInputBytes = Shapes::IntegerShape.new(name: 'ProcessedInputBytes')
     ProcessedItemCount = Shapes::IntegerShape.new(name: 'ProcessedItemCount')
     Projection = Shapes::StructureShape.new(name: 'Projection')
     ProjectionExpression = Shapes::StringShape.new(name: 'ProjectionExpression')
@@ -437,10 +467,13 @@ module Aws::DynamoDB
     SearchVectorList = Shapes::ListShape.new(name: 'SearchVectorList')
     SearchVectorsInput = Shapes::StructureShape.new(name: 'SearchVectorsInput')
     SearchVectorsOutput = Shapes::StructureShape.new(name: 'SearchVectorsOutput')
+    SecondaryIndexesBulkBytesMap = Shapes::MapShape.new(name: 'SecondaryIndexesBulkBytesMap')
     SecondaryIndexesCapacityMap = Shapes::MapShape.new(name: 'SecondaryIndexesCapacityMap')
     Select = Shapes::StringShape.new(name: 'Select')
     SourceTableDetails = Shapes::StructureShape.new(name: 'SourceTableDetails')
     SourceTableFeatureDetails = Shapes::StructureShape.new(name: 'SourceTableFeatureDetails')
+    StartBulkPutItemsInput = Shapes::StructureShape.new(name: 'StartBulkPutItemsInput')
+    StartBulkPutItemsOutput = Shapes::StructureShape.new(name: 'StartBulkPutItemsOutput')
     StreamArn = Shapes::StringShape.new(name: 'StreamArn')
     StreamEnabled = Shapes::BooleanShape.new(name: 'StreamEnabled')
     StreamSpecification = Shapes::StructureShape.new(name: 'StreamSpecification')
@@ -480,6 +513,7 @@ module Aws::DynamoDB
     TimeToLiveSpecification = Shapes::StructureShape.new(name: 'TimeToLiveSpecification')
     TimeToLiveStatus = Shapes::StringShape.new(name: 'TimeToLiveStatus')
     TopKInteger = Shapes::IntegerShape.new(name: 'TopKInteger')
+    TotalInputBytes = Shapes::IntegerShape.new(name: 'TotalInputBytes')
     TransactGetItem = Shapes::StructureShape.new(name: 'TransactGetItem')
     TransactGetItemList = Shapes::ListShape.new(name: 'TransactGetItemList')
     TransactGetItemsInput = Shapes::StructureShape.new(name: 'TransactGetItemsInput')
@@ -527,6 +561,7 @@ module Aws::DynamoDB
     VectorIndexUpdate = Shapes::StructureShape.new(name: 'VectorIndexUpdate')
     VectorIndexUpdateList = Shapes::ListShape.new(name: 'VectorIndexUpdateList')
     VectorIndexes = Shapes::ListShape.new(name: 'VectorIndexes')
+    VectorIndexesBulkVectorBytesMap = Shapes::MapShape.new(name: 'VectorIndexesBulkVectorBytesMap')
     VectorIndexesCapacityMap = Shapes::MapShape.new(name: 'VectorIndexesCapacityMap')
     WarmThroughput = Shapes::StructureShape.new(name: 'WarmThroughput')
     WitnessStatus = Shapes::StringShape.new(name: 'WitnessStatus')
@@ -697,6 +732,62 @@ module Aws::DynamoDB
     BillingModeSummary.struct_class = Types::BillingModeSummary
 
     BinarySetAttributeValue.member = Shapes::ShapeRef.new(shape: BinaryAttributeValue)
+
+    BulkOperationBytes.add_member(:bulk_put_bytes, Shapes::ShapeRef.new(shape: NonNegativeLongObject, location_name: "BulkPutBytes"))
+    BulkOperationBytes.struct_class = Types::BulkOperationBytes
+
+    BulkOperationDescription.add_member(:bulk_operation_arn, Shapes::ShapeRef.new(shape: BulkOperationArn, location_name: "BulkOperationArn"))
+    BulkOperationDescription.add_member(:bulk_operation_status, Shapes::ShapeRef.new(shape: BulkOperationStatus, location_name: "BulkOperationStatus"))
+    BulkOperationDescription.add_member(:table_details, Shapes::ShapeRef.new(shape: BulkOperationTableDetails, location_name: "TableDetails"))
+    BulkOperationDescription.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
+    BulkOperationDescription.add_member(:input_s3_configuration, Shapes::ShapeRef.new(shape: InputS3Configuration, location_name: "InputS3Configuration"))
+    BulkOperationDescription.add_member(:output_s3_configuration, Shapes::ShapeRef.new(shape: OutputS3Configuration, location_name: "OutputS3Configuration"))
+    BulkOperationDescription.add_member(:start_time, Shapes::ShapeRef.new(shape: BulkOperationStartTime, location_name: "StartTime"))
+    BulkOperationDescription.add_member(:end_time, Shapes::ShapeRef.new(shape: BulkOperationEndTime, location_name: "EndTime"))
+    BulkOperationDescription.add_member(:processed_item_count, Shapes::ShapeRef.new(shape: BulkOperationItemCount, location_name: "ProcessedItemCount"))
+    BulkOperationDescription.add_member(:processed_input_bytes, Shapes::ShapeRef.new(shape: ProcessedInputBytes, location_name: "ProcessedInputBytes"))
+    BulkOperationDescription.add_member(:total_input_bytes, Shapes::ShapeRef.new(shape: TotalInputBytes, location_name: "TotalInputBytes"))
+    BulkOperationDescription.add_member(:bulk_operation_usage, Shapes::ShapeRef.new(shape: BulkOperationUsageMultiple, location_name: "BulkOperationUsage"))
+    BulkOperationDescription.add_member(:failed_item_count, Shapes::ShapeRef.new(shape: BulkOperationItemCount, location_name: "FailedItemCount"))
+    BulkOperationDescription.add_member(:failure_code, Shapes::ShapeRef.new(shape: FailureCode, location_name: "FailureCode"))
+    BulkOperationDescription.add_member(:failure_message, Shapes::ShapeRef.new(shape: FailureMessage, location_name: "FailureMessage"))
+    BulkOperationDescription.add_member(:max_write_request_units, Shapes::ShapeRef.new(shape: BulkOperationMaxWriteRequestUnits, location_name: "MaxWriteRequestUnits"))
+    BulkOperationDescription.add_member(:performance_tier, Shapes::ShapeRef.new(shape: BulkOperationPerformanceTier, location_name: "PerformanceTier"))
+    BulkOperationDescription.struct_class = Types::BulkOperationDescription
+
+    BulkOperationSummary.add_member(:bulk_operation_arn, Shapes::ShapeRef.new(shape: BulkOperationArn, required: true, location_name: "BulkOperationArn"))
+    BulkOperationSummary.add_member(:bulk_operation_status, Shapes::ShapeRef.new(shape: BulkOperationStatus, required: true, location_name: "BulkOperationStatus"))
+    BulkOperationSummary.add_member(:start_time, Shapes::ShapeRef.new(shape: BulkOperationStartTime, required: true, location_name: "StartTime"))
+    BulkOperationSummary.add_member(:end_time, Shapes::ShapeRef.new(shape: BulkOperationEndTime, location_name: "EndTime"))
+    BulkOperationSummary.struct_class = Types::BulkOperationSummary
+
+    BulkOperationTableDetail.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableName"))
+    BulkOperationTableDetail.add_member(:table_id, Shapes::ShapeRef.new(shape: TableId, location_name: "TableId"))
+    BulkOperationTableDetail.struct_class = Types::BulkOperationTableDetail
+
+    BulkOperationTableDetails.member = Shapes::ShapeRef.new(shape: BulkOperationTableDetail)
+
+    BulkOperationUsage.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableName"))
+    BulkOperationUsage.add_member(:bulk_put_bytes, Shapes::ShapeRef.new(shape: NonNegativeLongObject, location_name: "BulkPutBytes"))
+    BulkOperationUsage.add_member(:table, Shapes::ShapeRef.new(shape: BulkOperationBytes, location_name: "Table"))
+    BulkOperationUsage.add_member(:local_secondary_indexes, Shapes::ShapeRef.new(shape: SecondaryIndexesBulkBytesMap, location_name: "LocalSecondaryIndexes"))
+    BulkOperationUsage.add_member(:global_secondary_indexes, Shapes::ShapeRef.new(shape: SecondaryIndexesBulkBytesMap, location_name: "GlobalSecondaryIndexes"))
+    BulkOperationUsage.add_member(:vector_indexes, Shapes::ShapeRef.new(shape: VectorIndexesBulkVectorBytesMap, location_name: "VectorIndexes"))
+    BulkOperationUsage.struct_class = Types::BulkOperationUsage
+
+    BulkOperationUsageMultiple.member = Shapes::ShapeRef.new(shape: BulkOperationUsage)
+
+    BulkOperationVectorBytes.add_member(:bulk_put_vector_bytes, Shapes::ShapeRef.new(shape: NonNegativeLongObject, location_name: "BulkPutVectorBytes"))
+    BulkOperationVectorBytes.struct_class = Types::BulkOperationVectorBytes
+
+    BulkOperationsSummaryList.member = Shapes::ShapeRef.new(shape: BulkOperationSummary)
+
+    CancelBulkOperationInput.add_member(:bulk_operation_arn, Shapes::ShapeRef.new(shape: BulkOperationArn, required: true, location_name: "BulkOperationArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
+    CancelBulkOperationInput.struct_class = Types::CancelBulkOperationInput
+
+    CancelBulkOperationOutput.add_member(:bulk_operation_arn, Shapes::ShapeRef.new(shape: BulkOperationArn, required: true, location_name: "BulkOperationArn"))
+    CancelBulkOperationOutput.add_member(:bulk_operation_status, Shapes::ShapeRef.new(shape: BulkOperationStatus, required: true, location_name: "BulkOperationStatus"))
+    CancelBulkOperationOutput.struct_class = Types::CancelBulkOperationOutput
 
     CancellationReason.add_member(:item, Shapes::ShapeRef.new(shape: AttributeMap, location_name: "Item"))
     CancellationReason.add_member(:code, Shapes::ShapeRef.new(shape: Code, location_name: "Code"))
@@ -896,6 +987,12 @@ module Aws::DynamoDB
 
     DescribeBackupOutput.add_member(:backup_description, Shapes::ShapeRef.new(shape: BackupDescription, location_name: "BackupDescription"))
     DescribeBackupOutput.struct_class = Types::DescribeBackupOutput
+
+    DescribeBulkOperationInput.add_member(:bulk_operation_arn, Shapes::ShapeRef.new(shape: BulkOperationArn, required: true, location_name: "BulkOperationArn", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
+    DescribeBulkOperationInput.struct_class = Types::DescribeBulkOperationInput
+
+    DescribeBulkOperationOutput.add_member(:bulk_operation_description, Shapes::ShapeRef.new(shape: BulkOperationDescription, required: true, location_name: "BulkOperationDescription"))
+    DescribeBulkOperationOutput.struct_class = Types::DescribeBulkOperationOutput
 
     DescribeContinuousBackupsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     DescribeContinuousBackupsInput.struct_class = Types::DescribeContinuousBackupsInput
@@ -1282,6 +1379,13 @@ module Aws::DynamoDB
     InputFormatOptions.add_member(:csv, Shapes::ShapeRef.new(shape: CsvOptions, location_name: "Csv"))
     InputFormatOptions.struct_class = Types::InputFormatOptions
 
+    InputS3Configuration.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: S3BucketOwner, location_name: "S3BucketOwner"))
+    InputS3Configuration.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, required: true, location_name: "S3Bucket"))
+    InputS3Configuration.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "S3KeyPrefix"))
+    InputS3Configuration.add_member(:input_format, Shapes::ShapeRef.new(shape: BulkOperationInputFormat, required: true, location_name: "InputFormat"))
+    InputS3Configuration.add_member(:input_compression_type, Shapes::ShapeRef.new(shape: InputCompressionType, location_name: "InputCompressionType"))
+    InputS3Configuration.struct_class = Types::InputS3Configuration
+
     InternalServerError.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     InternalServerError.struct_class = Types::InternalServerError
 
@@ -1372,6 +1476,14 @@ module Aws::DynamoDB
     ListBackupsOutput.add_member(:last_evaluated_backup_arn, Shapes::ShapeRef.new(shape: BackupArn, location_name: "LastEvaluatedBackupArn"))
     ListBackupsOutput.struct_class = Types::ListBackupsOutput
 
+    ListBulkOperationsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListBulkOperationsMaxLimit, location_name: "MaxResults"))
+    ListBulkOperationsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: BulkOperationNextToken, location_name: "NextToken"))
+    ListBulkOperationsInput.struct_class = Types::ListBulkOperationsInput
+
+    ListBulkOperationsOutput.add_member(:bulk_operations_summary_list, Shapes::ShapeRef.new(shape: BulkOperationsSummaryList, location_name: "BulkOperationsSummaryList"))
+    ListBulkOperationsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: BulkOperationNextToken, location_name: "NextToken"))
+    ListBulkOperationsOutput.struct_class = Types::ListBulkOperationsOutput
+
     ListContributorInsightsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
     ListContributorInsightsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextTokenString, location_name: "NextToken"))
     ListContributorInsightsInput.add_member(:max_results, Shapes::ShapeRef.new(shape: ListContributorInsightsLimit, location_name: "MaxResults"))
@@ -1461,6 +1573,16 @@ module Aws::DynamoDB
 
     OnDemandThroughputOverride.add_member(:max_read_request_units, Shapes::ShapeRef.new(shape: LongObject, location_name: "MaxReadRequestUnits"))
     OnDemandThroughputOverride.struct_class = Types::OnDemandThroughputOverride
+
+    OutputS3Configuration.add_member(:s3_bucket_owner, Shapes::ShapeRef.new(shape: S3BucketOwner, location_name: "S3BucketOwner"))
+    OutputS3Configuration.add_member(:s3_bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "S3Bucket"))
+    OutputS3Configuration.add_member(:s3_key_prefix, Shapes::ShapeRef.new(shape: S3Prefix, location_name: "S3KeyPrefix"))
+    OutputS3Configuration.add_member(:s3_sse_algorithm, Shapes::ShapeRef.new(shape: S3SseAlgorithm, location_name: "S3SseAlgorithm"))
+    OutputS3Configuration.add_member(:s3_sse_kms_key_id, Shapes::ShapeRef.new(shape: S3SseKmsKeyId, location_name: "S3SseKmsKeyId"))
+    OutputS3Configuration.add_member(:output_type, Shapes::ShapeRef.new(shape: OutputTypeList, required: true, location_name: "OutputType"))
+    OutputS3Configuration.struct_class = Types::OutputS3Configuration
+
+    OutputTypeList.member = Shapes::ShapeRef.new(shape: OutputTypeEnum)
 
     ParameterizedStatement.add_member(:statement, Shapes::ShapeRef.new(shape: PartiQLStatement, required: true, location_name: "Statement"))
     ParameterizedStatement.add_member(:parameters, Shapes::ShapeRef.new(shape: PreparedStatementParameters, location_name: "Parameters"))
@@ -1826,6 +1948,9 @@ module Aws::DynamoDB
     SearchVectorsOutput.add_member(:search_results, Shapes::ShapeRef.new(shape: SearchResultList, location_name: "SearchResults"))
     SearchVectorsOutput.struct_class = Types::SearchVectorsOutput
 
+    SecondaryIndexesBulkBytesMap.key = Shapes::ShapeRef.new(shape: IndexName)
+    SecondaryIndexesBulkBytesMap.value = Shapes::ShapeRef.new(shape: BulkOperationBytes)
+
     SecondaryIndexesCapacityMap.key = Shapes::ShapeRef.new(shape: IndexName)
     SecondaryIndexesCapacityMap.value = Shapes::ShapeRef.new(shape: Capacity)
 
@@ -1848,6 +1973,17 @@ module Aws::DynamoDB
     SourceTableFeatureDetails.add_member(:sse_description, Shapes::ShapeRef.new(shape: SSEDescription, location_name: "SSEDescription"))
     SourceTableFeatureDetails.add_member(:vector_indexes, Shapes::ShapeRef.new(shape: VectorIndexes, location_name: "VectorIndexes"))
     SourceTableFeatureDetails.struct_class = Types::SourceTableFeatureDetails
+
+    StartBulkPutItemsInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    StartBulkPutItemsInput.add_member(:input_s3_configuration, Shapes::ShapeRef.new(shape: InputS3Configuration, required: true, location_name: "InputS3Configuration"))
+    StartBulkPutItemsInput.add_member(:output_s3_configuration, Shapes::ShapeRef.new(shape: OutputS3Configuration, required: true, location_name: "OutputS3Configuration"))
+    StartBulkPutItemsInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableArn, required: true, location_name: "TableName", metadata: {"contextParam" => {"name" => "ResourceArn"}}))
+    StartBulkPutItemsInput.add_member(:max_write_request_units, Shapes::ShapeRef.new(shape: BulkOperationMaxWriteRequestUnits, location_name: "MaxWriteRequestUnits"))
+    StartBulkPutItemsInput.add_member(:performance_tier, Shapes::ShapeRef.new(shape: BulkOperationPerformanceTier, location_name: "PerformanceTier"))
+    StartBulkPutItemsInput.struct_class = Types::StartBulkPutItemsInput
+
+    StartBulkPutItemsOutput.add_member(:bulk_operation_description, Shapes::ShapeRef.new(shape: BulkOperationDescription, required: true, location_name: "BulkOperationDescription"))
+    StartBulkPutItemsOutput.struct_class = Types::StartBulkPutItemsOutput
 
     StreamSpecification.add_member(:stream_enabled, Shapes::ShapeRef.new(shape: StreamEnabled, required: true, location_name: "StreamEnabled"))
     StreamSpecification.add_member(:stream_view_type, Shapes::ShapeRef.new(shape: StreamViewType, location_name: "StreamViewType"))
@@ -2179,6 +2315,9 @@ module Aws::DynamoDB
 
     VectorIndexes.member = Shapes::ShapeRef.new(shape: VectorIndexInfo)
 
+    VectorIndexesBulkVectorBytesMap.key = Shapes::ShapeRef.new(shape: IndexName)
+    VectorIndexesBulkVectorBytesMap.value = Shapes::ShapeRef.new(shape: BulkOperationVectorBytes)
+
     VectorIndexesCapacityMap.key = Shapes::ShapeRef.new(shape: IndexName)
     VectorIndexesCapacityMap.value = Shapes::ShapeRef.new(shape: VectorCapacity)
 
@@ -2260,6 +2399,17 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ReplicatedWriteConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:cancel_bulk_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CancelBulkOperation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: CancelBulkOperationInput)
+        o.output = Shapes::ShapeRef.new(shape: CancelBulkOperationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:create_backup, Seahorse::Model::Operation.new.tap do |o|
@@ -2377,6 +2527,17 @@ module Aws::DynamoDB
         o.output = Shapes::ShapeRef.new(shape: DescribeBackupOutput)
         o.errors << Shapes::ShapeRef.new(shape: BackupNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+      end)
+
+      api.add_operation(:describe_bulk_operation, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeBulkOperation"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: DescribeBulkOperationInput)
+        o.output = Shapes::ShapeRef.new(shape: DescribeBulkOperationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:describe_continuous_backups, Seahorse::Model::Operation.new.tap do |o|
@@ -2636,6 +2797,22 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
+      api.add_operation(:list_bulk_operations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListBulkOperations"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: ListBulkOperationsInput)
+        o.output = Shapes::ShapeRef.new(shape: ListBulkOperationsOutput)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_contributor_insights, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListContributorInsights"
         o.http_method = "POST"
@@ -2842,6 +3019,20 @@ module Aws::DynamoDB
         o.errors << Shapes::ShapeRef.new(shape: RequestLimitExceeded)
         o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:start_bulk_put_items, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartBulkPutItems"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.endpoint_discovery = {
+        }
+        o.input = Shapes::ShapeRef.new(shape: StartBulkPutItemsInput)
+        o.output = Shapes::ShapeRef.new(shape: StartBulkPutItemsOutput)
+        o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|

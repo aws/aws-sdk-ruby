@@ -312,6 +312,7 @@ module Aws
                                   data_source_id: ::String,
                                   document_id: ::String,
                                   knowledge_base_id: ::String,
+                                  ?media_id: ::String,
                                   ?output_format: ("RAW" | "EXTRACTED"),
                                   ?user_context: {
                                     user_id: ::String

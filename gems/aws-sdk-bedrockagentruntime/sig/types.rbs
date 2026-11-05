@@ -1201,6 +1201,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor data_source_id: ::String
       attr_accessor document_id: ::String
       attr_accessor knowledge_base_id: ::String
+      attr_accessor media_id: ::String
       attr_accessor output_format: ("RAW" | "EXTRACTED")
       attr_accessor user_context: Types::UserContext
       SENSITIVE: [:user_context]

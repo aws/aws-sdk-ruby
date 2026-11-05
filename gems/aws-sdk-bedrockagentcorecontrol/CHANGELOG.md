@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.88.0 (2026-11-05)
+------------------
+
+* Feature - Adds support for OAuth2 Authorization Server Metadata (RFC 8414) discovery URLs in custom JWT authorizer and OAuth2 credential provider configurations.
+
+1.87.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.86.0 (2026-10-29)
 ------------------
 

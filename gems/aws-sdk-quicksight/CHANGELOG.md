@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.208.0 (2026-11-05)
+------------------
+
+* Feature - Amazon QuickSight adds APIs to view account service role settings and switch to or replace a customer-managed IAM role.
+
+1.207.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.206.0 (2026-10-29)
 ------------------
 

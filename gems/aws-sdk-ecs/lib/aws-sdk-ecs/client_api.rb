@@ -451,6 +451,7 @@ module Aws::ECS
     LogConfiguration = Shapes::StructureShape.new(name: 'LogConfiguration')
     LogConfigurationOptionsMap = Shapes::MapShape.new(name: 'LogConfigurationOptionsMap')
     LogDriver = Shapes::StringShape.new(name: 'LogDriver')
+    LogDriverVolumeConfiguration = Shapes::StructureShape.new(name: 'LogDriverVolumeConfiguration')
     Long = Shapes::IntegerShape.new(name: 'Long')
     ManagedAgent = Shapes::StructureShape.new(name: 'ManagedAgent')
     ManagedAgentName = Shapes::StringShape.new(name: 'ManagedAgentName')
@@ -1420,6 +1421,7 @@ module Aws::ECS
 
     DaemonVolume.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     DaemonVolume.add_member(:host, Shapes::ShapeRef.new(shape: HostVolumeProperties, location_name: "host"))
+    DaemonVolume.add_member(:log_driver_volume_configuration, Shapes::ShapeRef.new(shape: LogDriverVolumeConfiguration, location_name: "logDriverVolumeConfiguration"))
     DaemonVolume.struct_class = Types::DaemonVolume
 
     DaemonVolumeList.member = Shapes::ShapeRef.new(shape: DaemonVolume)
@@ -2497,6 +2499,9 @@ module Aws::ECS
 
     LogConfigurationOptionsMap.key = Shapes::ShapeRef.new(shape: String)
     LogConfigurationOptionsMap.value = Shapes::ShapeRef.new(shape: String)
+
+    LogDriverVolumeConfiguration.add_member(:driver, Shapes::ShapeRef.new(shape: LogDriver, required: true, location_name: "driver"))
+    LogDriverVolumeConfiguration.struct_class = Types::LogDriverVolumeConfiguration
 
     ManagedAgent.add_member(:last_started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastStartedAt"))
     ManagedAgent.add_member(:name, Shapes::ShapeRef.new(shape: ManagedAgentName, location_name: "name"))

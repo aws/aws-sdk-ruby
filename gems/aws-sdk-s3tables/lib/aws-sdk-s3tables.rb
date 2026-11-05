@@ -23,7 +23,7 @@ Aws::Plugins::GlobalConfiguration.add_identifier(:s3tables)
 # structure.
 #
 #     s3_tables = Aws::S3Tables::Client.new
-#     resp = s3_tables.create_namespace(params)
+#     resp = s3_tables.complete_table_migration(params)
 #
 # See {Client} for more information.
 #
@@ -55,7 +55,7 @@ module Aws::S3Tables
   autoload :EndpointProvider, 'aws-sdk-s3tables/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-s3tables/endpoints'
 
-  GEM_VERSION = '1.40.0'
+  GEM_VERSION = '1.41.0'
 
 end
 

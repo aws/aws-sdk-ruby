@@ -65,6 +65,9 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#copyable_cross_account-instance_method
       def copyable_cross_account: () -> bool
 
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/RDS/OptionGroupOption.html#copyable_cross_region-instance_method
+      def copyable_cross_region: () -> bool
+
       def client: () -> Client
 
 

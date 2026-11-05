@@ -105,6 +105,13 @@ module Aws::RDS
       data[:copy_timestamp]
     end
 
+    # Specifies the Amazon Web Services Region for the option group from
+    # which this option group is copied.
+    # @return [String]
+    def source_region
+      data[:source_region]
+    end
+
     # @!endgroup
 
     # @return [Client]

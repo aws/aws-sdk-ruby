@@ -37,6 +37,7 @@ module Aws::AppIntegrationsService
       attr_accessor namespace: ::String
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor is_service: bool
       attr_accessor application_type: ("STANDARD" | "SERVICE" | "MCP_SERVER" | "A2A_SERVER")
       SENSITIVE: []
@@ -251,6 +252,7 @@ module Aws::AppIntegrationsService
       attr_accessor publications: ::Array[Types::Publication]
       attr_accessor created_time: ::Time
       attr_accessor last_modified_time: ::Time
+      attr_accessor last_modified_region: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor permissions: ::Array[::String]
       attr_accessor is_service: bool

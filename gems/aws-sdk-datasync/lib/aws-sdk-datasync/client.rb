@@ -647,7 +647,7 @@ module Aws::DataSync
     # @option params [required, String] :authentication_type
     #   Specifies the authentication method DataSync uses to access your Azure
     #   Blob Storage. DataSync can access blob storage using a shared access
-    #   signature (SAS).
+    #   signature (SAS) or an OpenID Connect (OIDC) token.
     #
     # @option params [Types::AzureBlobSasConfiguration] :sas_configuration
     #   Specifies the SAS configuration that allows DataSync to access your
@@ -659,6 +659,12 @@ module Aws::DataSync
     #   Web Services account's secrets manager secret.
     #
     #    </note>
+    #
+    # @option params [Types::AzureFederatedIdentityConfig] :federated_identity
+    #   Specifies the federated identity configuration that allows DataSync to
+    #   access your Azure Blob Storage using an OpenID Connect (OIDC) token
+    #   instead of a shared access signature (SAS). Provide either
+    #   `FederatedIdentity` or `SasConfiguration`, but not both.
     #
     # @option params [String] :blob_type
     #   Specifies the type of blob that you want your objects or files to be
@@ -761,9 +767,16 @@ module Aws::DataSync
     #
     #   resp = client.create_location_azure_blob({
     #     container_url: "AzureBlobContainerUrl", # required
-    #     authentication_type: "SAS", # required, accepts SAS, NONE
+    #     authentication_type: "SAS", # required, accepts SAS, NONE, OIDC
     #     sas_configuration: {
     #       token: "AzureBlobSasToken", # required
+    #     },
+    #     federated_identity: {
+    #       aws_iam_role: "IamRoleArn",
+    #       azure_oidc: {
+    #         tenant_id: "AzureGuidString", # required
+    #         client_id: "AzureGuidString", # required
+    #       },
     #     },
     #     blob_type: "BLOCK", # accepts BLOCK
     #     access_tier: "HOT", # accepts HOT, COOL, ARCHIVE
@@ -1683,6 +1696,13 @@ module Aws::DataSync
     #
     #    </note>
     #
+    # @option params [Types::ObjectStorageFederatedIdentityConfig] :federated_identity
+    #   Specifies the federated identity configuration that allows DataSync to
+    #   access your object storage using an OpenID Connect (OIDC) token
+    #   instead of a long-term access key and secret key. Provide either
+    #   `FederatedIdentity` or the `AccessKey`/`SecretKey` credentials, but
+    #   not both.
+    #
     # @option params [Array<String>] :agent_arns
     #   (Optional) Specifies the Amazon Resource Names (ARNs) of the DataSync
     #   agents that can connect with your object storage system. If you are
@@ -1784,6 +1804,17 @@ module Aws::DataSync
     #     bucket_name: "ObjectStorageBucketName", # required
     #     access_key: "ObjectStorageAccessKey",
     #     secret_key: "ObjectStorageSecretKey",
+    #     federated_identity: {
+    #       aws_iam_role: "IamRoleArn",
+    #       external_identity: {
+    #         google_oidc: {
+    #           project_name: "ProjectNameString", # required
+    #           project_number: "ProjectNumberString", # required
+    #           identity_pool_name: "GoogleIdentityFederationResourceString", # required
+    #           identity_provider_name: "GoogleIdentityFederationResourceString", # required
+    #         },
+    #       },
+    #     },
     #     agent_arns: ["AgentArn"],
     #     tags: [
     #       {
@@ -2268,9 +2299,7 @@ module Aws::DataSync
     #     higher performance than Basic mode. Enhanced mode tasks optimize the
     #     data transfer process by listing, preparing, transferring, and
     #     verifying data in parallel. Enhanced mode is currently available for
-    #     transfers between Amazon S3 locations, transfers between Azure Blob
-    #     and Amazon S3 without an agent, and transfers between other clouds
-    #     and Amazon S3 without an agent.
+    #     all transfers except those that use Amazon S3 on Outposts.
     #
     #     <note markdown="1"> To create an Enhanced mode task, the IAM role that you use to call
     #     the `CreateTask` operation must have the
@@ -2538,6 +2567,7 @@ module Aws::DataSync
     #   * {Types::DescribeLocationAzureBlobResponse#location_arn #location_arn} => String
     #   * {Types::DescribeLocationAzureBlobResponse#location_uri #location_uri} => String
     #   * {Types::DescribeLocationAzureBlobResponse#authentication_type #authentication_type} => String
+    #   * {Types::DescribeLocationAzureBlobResponse#federated_identity #federated_identity} => Types::AzureFederatedIdentityConfig
     #   * {Types::DescribeLocationAzureBlobResponse#blob_type #blob_type} => String
     #   * {Types::DescribeLocationAzureBlobResponse#access_tier #access_tier} => String
     #   * {Types::DescribeLocationAzureBlobResponse#agent_arns #agent_arns} => Array&lt;String&gt;
@@ -2556,7 +2586,10 @@ module Aws::DataSync
     #
     #   resp.location_arn #=> String
     #   resp.location_uri #=> String
-    #   resp.authentication_type #=> String, one of "SAS", "NONE"
+    #   resp.authentication_type #=> String, one of "SAS", "NONE", "OIDC"
+    #   resp.federated_identity.aws_iam_role #=> String
+    #   resp.federated_identity.azure_oidc.tenant_id #=> String
+    #   resp.federated_identity.azure_oidc.client_id #=> String
     #   resp.blob_type #=> String, one of "BLOCK"
     #   resp.access_tier #=> String, one of "HOT", "COOL", "ARCHIVE"
     #   resp.agent_arns #=> Array
@@ -2931,6 +2964,7 @@ module Aws::DataSync
     #   * {Types::DescribeLocationObjectStorageResponse#location_arn #location_arn} => String
     #   * {Types::DescribeLocationObjectStorageResponse#location_uri #location_uri} => String
     #   * {Types::DescribeLocationObjectStorageResponse#access_key #access_key} => String
+    #   * {Types::DescribeLocationObjectStorageResponse#federated_identity #federated_identity} => Types::ObjectStorageFederatedIdentityConfig
     #   * {Types::DescribeLocationObjectStorageResponse#server_port #server_port} => Integer
     #   * {Types::DescribeLocationObjectStorageResponse#server_protocol #server_protocol} => String
     #   * {Types::DescribeLocationObjectStorageResponse#agent_arns #agent_arns} => Array&lt;String&gt;
@@ -2951,6 +2985,11 @@ module Aws::DataSync
     #   resp.location_arn #=> String
     #   resp.location_uri #=> String
     #   resp.access_key #=> String
+    #   resp.federated_identity.aws_iam_role #=> String
+    #   resp.federated_identity.external_identity.google_oidc.project_name #=> String
+    #   resp.federated_identity.external_identity.google_oidc.project_number #=> String
+    #   resp.federated_identity.external_identity.google_oidc.identity_pool_name #=> String
+    #   resp.federated_identity.external_identity.google_oidc.identity_provider_name #=> String
     #   resp.server_port #=> Integer
     #   resp.server_protocol #=> String, one of "HTTPS", "HTTP"
     #   resp.agent_arns #=> Array
@@ -3347,19 +3386,6 @@ module Aws::DataSync
     # response. If you get a truncated list of agents in a response, the
     # response contains a marker that you can specify in your next request
     # to fetch the next page of agents.
-    #
-    # `ListAgents` is eventually consistent. This means the result of
-    # running the operation might not reflect that you just created or
-    # deleted an agent. For example, if you create an agent with
-    # [CreateAgent][1] and then immediately run `ListAgents`, that agent
-    # might not show up in the list right away. In situations like this, you
-    # can always confirm whether an agent has been created (or deleted) by
-    # using [DescribeAgent][2].
-    #
-    #
-    #
-    # [1]: https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateAgent.html
-    # [2]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeAgent.html
     #
     # @option params [Integer] :max_results
     #   Specifies the maximum number of DataSync agents to list in a response.
@@ -3901,11 +3927,17 @@ module Aws::DataSync
     # @option params [String] :authentication_type
     #   Specifies the authentication method DataSync uses to access your Azure
     #   Blob Storage. DataSync can access blob storage using a shared access
-    #   signature (SAS).
+    #   signature (SAS) or an OpenID Connect (OIDC) token.
     #
     # @option params [Types::AzureBlobSasConfiguration] :sas_configuration
     #   Specifies the SAS configuration that allows DataSync to access your
     #   Azure Blob Storage.
+    #
+    # @option params [Types::AzureFederatedIdentityConfig] :federated_identity
+    #   Specifies the federated identity configuration that allows DataSync to
+    #   access your Azure Blob Storage using an OpenID Connect (OIDC) token
+    #   instead of a shared access signature (SAS). Provide either
+    #   `FederatedIdentity` or `SasConfiguration`, but not both.
     #
     # @option params [String] :blob_type
     #   Specifies the type of blob that you want your objects or files to be
@@ -3965,9 +3997,16 @@ module Aws::DataSync
     #   resp = client.update_location_azure_blob({
     #     location_arn: "LocationArn", # required
     #     subdirectory: "AzureBlobSubdirectory",
-    #     authentication_type: "SAS", # accepts SAS, NONE
+    #     authentication_type: "SAS", # accepts SAS, NONE, OIDC
     #     sas_configuration: {
     #       token: "AzureBlobSasToken", # required
+    #     },
+    #     federated_identity: {
+    #       aws_iam_role: "IamRoleArn",
+    #       azure_oidc: {
+    #         tenant_id: "AzureGuidString", # required
+    #         client_id: "AzureGuidString", # required
+    #       },
     #     },
     #     blob_type: "BLOCK", # accepts BLOCK
     #     access_tier: "HOT", # accepts HOT, COOL, ARCHIVE
@@ -4585,6 +4624,13 @@ module Aws::DataSync
     #
     #    </note>
     #
+    # @option params [Types::ObjectStorageFederatedIdentityConfig] :federated_identity
+    #   Specifies the federated identity configuration that allows DataSync to
+    #   access your object storage using an OpenID Connect (OIDC) token
+    #   instead of a long-term access key and secret key. Provide either
+    #   `FederatedIdentity` or the `AccessKey`/`SecretKey` credentials, but
+    #   not both.
+    #
     # @option params [Array<String>] :agent_arns
     #   (Optional) Specifies the Amazon Resource Names (ARNs) of the DataSync
     #   agents that can connect with your object storage system. If you are
@@ -4649,6 +4695,17 @@ module Aws::DataSync
     #     server_hostname: "ServerHostname",
     #     access_key: "ObjectStorageAccessKey",
     #     secret_key: "ObjectStorageSecretKey",
+    #     federated_identity: {
+    #       aws_iam_role: "IamRoleArn",
+    #       external_identity: {
+    #         google_oidc: {
+    #           project_name: "ProjectNameString", # required
+    #           project_number: "ProjectNumberString", # required
+    #           identity_pool_name: "GoogleIdentityFederationResourceString", # required
+    #           identity_provider_name: "GoogleIdentityFederationResourceString", # required
+    #         },
+    #       },
+    #     },
     #     agent_arns: ["AgentArn"],
     #     server_certificate: "data",
     #     cmk_secret_config: {
@@ -5203,7 +5260,7 @@ module Aws::DataSync
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datasync'
-      context[:gem_version] = '1.135.0'
+      context[:gem_version] = '1.137.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

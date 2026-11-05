@@ -29,6 +29,9 @@ module Aws::DataSync
     AzureBlobSasToken = Shapes::StringShape.new(name: 'AzureBlobSasToken')
     AzureBlobSubdirectory = Shapes::StringShape.new(name: 'AzureBlobSubdirectory')
     AzureBlobType = Shapes::StringShape.new(name: 'AzureBlobType')
+    AzureFederatedIdentityConfig = Shapes::StructureShape.new(name: 'AzureFederatedIdentityConfig')
+    AzureGuidString = Shapes::StringShape.new(name: 'AzureGuidString')
+    AzureOidcConfig = Shapes::StructureShape.new(name: 'AzureOidcConfig')
     BytesPerSecond = Shapes::IntegerShape.new(name: 'BytesPerSecond')
     CancelTaskExecutionRequest = Shapes::StructureShape.new(name: 'CancelTaskExecutionRequest')
     CancelTaskExecutionResponse = Shapes::StructureShape.new(name: 'CancelTaskExecutionResponse')
@@ -124,6 +127,8 @@ module Aws::DataSync
     FsxUpdateProtocolSmb = Shapes::StructureShape.new(name: 'FsxUpdateProtocolSmb')
     FsxWindowsSubdirectory = Shapes::StringShape.new(name: 'FsxWindowsSubdirectory')
     Gid = Shapes::StringShape.new(name: 'Gid')
+    GoogleIdentityFederationResourceString = Shapes::StringShape.new(name: 'GoogleIdentityFederationResourceString')
+    GoogleOidcConfig = Shapes::StructureShape.new(name: 'GoogleOidcConfig')
     HdfsAuthenticationType = Shapes::StringShape.new(name: 'HdfsAuthenticationType')
     HdfsBlockSize = Shapes::IntegerShape.new(name: 'HdfsBlockSize')
     HdfsDataTransferProtection = Shapes::StringShape.new(name: 'HdfsDataTransferProtection')
@@ -180,6 +185,8 @@ module Aws::DataSync
     ObjectStorageAccessKey = Shapes::StringShape.new(name: 'ObjectStorageAccessKey')
     ObjectStorageBucketName = Shapes::StringShape.new(name: 'ObjectStorageBucketName')
     ObjectStorageCertificate = Shapes::BlobShape.new(name: 'ObjectStorageCertificate')
+    ObjectStorageExternalIdentityConfig = Shapes::StructureShape.new(name: 'ObjectStorageExternalIdentityConfig')
+    ObjectStorageFederatedIdentityConfig = Shapes::StructureShape.new(name: 'ObjectStorageFederatedIdentityConfig')
     ObjectStorageSecretKey = Shapes::StringShape.new(name: 'ObjectStorageSecretKey')
     ObjectStorageServerPort = Shapes::IntegerShape.new(name: 'ObjectStorageServerPort')
     ObjectStorageServerProtocol = Shapes::StringShape.new(name: 'ObjectStorageServerProtocol')
@@ -198,6 +205,8 @@ module Aws::DataSync
     PreserveDeletedFiles = Shapes::StringShape.new(name: 'PreserveDeletedFiles')
     PreserveDevices = Shapes::StringShape.new(name: 'PreserveDevices')
     PrivateLinkConfig = Shapes::StructureShape.new(name: 'PrivateLinkConfig')
+    ProjectNameString = Shapes::StringShape.new(name: 'ProjectNameString')
+    ProjectNumberString = Shapes::StringShape.new(name: 'ProjectNumberString')
     QopConfiguration = Shapes::StructureShape.new(name: 'QopConfiguration')
     ReportDestination = Shapes::StructureShape.new(name: 'ReportDestination')
     ReportDestinationS3 = Shapes::StructureShape.new(name: 'ReportDestinationS3')
@@ -314,6 +323,14 @@ module Aws::DataSync
     AzureBlobSasConfiguration.add_member(:token, Shapes::ShapeRef.new(shape: AzureBlobSasToken, required: true, location_name: "Token"))
     AzureBlobSasConfiguration.struct_class = Types::AzureBlobSasConfiguration
 
+    AzureFederatedIdentityConfig.add_member(:aws_iam_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "AwsIamRole"))
+    AzureFederatedIdentityConfig.add_member(:azure_oidc, Shapes::ShapeRef.new(shape: AzureOidcConfig, location_name: "AzureOidc"))
+    AzureFederatedIdentityConfig.struct_class = Types::AzureFederatedIdentityConfig
+
+    AzureOidcConfig.add_member(:tenant_id, Shapes::ShapeRef.new(shape: AzureGuidString, required: true, location_name: "TenantId"))
+    AzureOidcConfig.add_member(:client_id, Shapes::ShapeRef.new(shape: AzureGuidString, required: true, location_name: "ClientId"))
+    AzureOidcConfig.struct_class = Types::AzureOidcConfig
+
     CancelTaskExecutionRequest.add_member(:task_execution_arn, Shapes::ShapeRef.new(shape: TaskExecutionArn, required: true, location_name: "TaskExecutionArn"))
     CancelTaskExecutionRequest.struct_class = Types::CancelTaskExecutionRequest
 
@@ -337,6 +354,7 @@ module Aws::DataSync
     CreateLocationAzureBlobRequest.add_member(:container_url, Shapes::ShapeRef.new(shape: AzureBlobContainerUrl, required: true, location_name: "ContainerUrl"))
     CreateLocationAzureBlobRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AzureBlobAuthenticationType, required: true, location_name: "AuthenticationType"))
     CreateLocationAzureBlobRequest.add_member(:sas_configuration, Shapes::ShapeRef.new(shape: AzureBlobSasConfiguration, location_name: "SasConfiguration"))
+    CreateLocationAzureBlobRequest.add_member(:federated_identity, Shapes::ShapeRef.new(shape: AzureFederatedIdentityConfig, location_name: "FederatedIdentity"))
     CreateLocationAzureBlobRequest.add_member(:blob_type, Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
     CreateLocationAzureBlobRequest.add_member(:access_tier, Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
     CreateLocationAzureBlobRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: AzureBlobSubdirectory, location_name: "Subdirectory"))
@@ -441,6 +459,7 @@ module Aws::DataSync
     CreateLocationObjectStorageRequest.add_member(:bucket_name, Shapes::ShapeRef.new(shape: ObjectStorageBucketName, required: true, location_name: "BucketName"))
     CreateLocationObjectStorageRequest.add_member(:access_key, Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
     CreateLocationObjectStorageRequest.add_member(:secret_key, Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
+    CreateLocationObjectStorageRequest.add_member(:federated_identity, Shapes::ShapeRef.new(shape: ObjectStorageFederatedIdentityConfig, location_name: "FederatedIdentity"))
     CreateLocationObjectStorageRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     CreateLocationObjectStorageRequest.add_member(:tags, Shapes::ShapeRef.new(shape: InputTagList, location_name: "Tags"))
     CreateLocationObjectStorageRequest.add_member(:server_certificate, Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
@@ -537,6 +556,7 @@ module Aws::DataSync
     DescribeLocationAzureBlobResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     DescribeLocationAzureBlobResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
     DescribeLocationAzureBlobResponse.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AzureBlobAuthenticationType, location_name: "AuthenticationType"))
+    DescribeLocationAzureBlobResponse.add_member(:federated_identity, Shapes::ShapeRef.new(shape: AzureFederatedIdentityConfig, location_name: "FederatedIdentity"))
     DescribeLocationAzureBlobResponse.add_member(:blob_type, Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
     DescribeLocationAzureBlobResponse.add_member(:access_tier, Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
     DescribeLocationAzureBlobResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
@@ -639,6 +659,7 @@ module Aws::DataSync
     DescribeLocationObjectStorageResponse.add_member(:location_arn, Shapes::ShapeRef.new(shape: LocationArn, location_name: "LocationArn"))
     DescribeLocationObjectStorageResponse.add_member(:location_uri, Shapes::ShapeRef.new(shape: LocationUri, location_name: "LocationUri"))
     DescribeLocationObjectStorageResponse.add_member(:access_key, Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
+    DescribeLocationObjectStorageResponse.add_member(:federated_identity, Shapes::ShapeRef.new(shape: ObjectStorageFederatedIdentityConfig, location_name: "FederatedIdentity"))
     DescribeLocationObjectStorageResponse.add_member(:server_port, Shapes::ShapeRef.new(shape: ObjectStorageServerPort, location_name: "ServerPort"))
     DescribeLocationObjectStorageResponse.add_member(:server_protocol, Shapes::ShapeRef.new(shape: ObjectStorageServerProtocol, location_name: "ServerProtocol"))
     DescribeLocationObjectStorageResponse.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
@@ -789,6 +810,12 @@ module Aws::DataSync
     FsxUpdateProtocolSmb.add_member(:custom_secret_config, Shapes::ShapeRef.new(shape: CustomSecretConfig, location_name: "CustomSecretConfig"))
     FsxUpdateProtocolSmb.struct_class = Types::FsxUpdateProtocolSmb
 
+    GoogleOidcConfig.add_member(:project_name, Shapes::ShapeRef.new(shape: ProjectNameString, required: true, location_name: "ProjectName"))
+    GoogleOidcConfig.add_member(:project_number, Shapes::ShapeRef.new(shape: ProjectNumberString, required: true, location_name: "ProjectNumber"))
+    GoogleOidcConfig.add_member(:identity_pool_name, Shapes::ShapeRef.new(shape: GoogleIdentityFederationResourceString, required: true, location_name: "IdentityPoolName"))
+    GoogleOidcConfig.add_member(:identity_provider_name, Shapes::ShapeRef.new(shape: GoogleIdentityFederationResourceString, required: true, location_name: "IdentityProviderName"))
+    GoogleOidcConfig.struct_class = Types::GoogleOidcConfig
+
     HdfsNameNode.add_member(:hostname, Shapes::ShapeRef.new(shape: HdfsServerHostname, required: true, location_name: "Hostname"))
     HdfsNameNode.add_member(:port, Shapes::ShapeRef.new(shape: HdfsServerPort, required: true, location_name: "Port"))
     HdfsNameNode.struct_class = Types::HdfsNameNode
@@ -873,6 +900,13 @@ module Aws::DataSync
 
     NfsMountOptions.add_member(:version, Shapes::ShapeRef.new(shape: NfsVersion, location_name: "Version"))
     NfsMountOptions.struct_class = Types::NfsMountOptions
+
+    ObjectStorageExternalIdentityConfig.add_member(:google_oidc, Shapes::ShapeRef.new(shape: GoogleOidcConfig, location_name: "GoogleOidc"))
+    ObjectStorageExternalIdentityConfig.struct_class = Types::ObjectStorageExternalIdentityConfig
+
+    ObjectStorageFederatedIdentityConfig.add_member(:aws_iam_role, Shapes::ShapeRef.new(shape: IamRoleArn, location_name: "AwsIamRole"))
+    ObjectStorageFederatedIdentityConfig.add_member(:external_identity, Shapes::ShapeRef.new(shape: ObjectStorageExternalIdentityConfig, location_name: "ExternalIdentity"))
+    ObjectStorageFederatedIdentityConfig.struct_class = Types::ObjectStorageFederatedIdentityConfig
 
     OnPremConfig.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, required: true, location_name: "AgentArns"))
     OnPremConfig.struct_class = Types::OnPremConfig
@@ -1063,6 +1097,7 @@ module Aws::DataSync
     UpdateLocationAzureBlobRequest.add_member(:subdirectory, Shapes::ShapeRef.new(shape: AzureBlobSubdirectory, location_name: "Subdirectory"))
     UpdateLocationAzureBlobRequest.add_member(:authentication_type, Shapes::ShapeRef.new(shape: AzureBlobAuthenticationType, location_name: "AuthenticationType"))
     UpdateLocationAzureBlobRequest.add_member(:sas_configuration, Shapes::ShapeRef.new(shape: AzureBlobSasConfiguration, location_name: "SasConfiguration"))
+    UpdateLocationAzureBlobRequest.add_member(:federated_identity, Shapes::ShapeRef.new(shape: AzureFederatedIdentityConfig, location_name: "FederatedIdentity"))
     UpdateLocationAzureBlobRequest.add_member(:blob_type, Shapes::ShapeRef.new(shape: AzureBlobType, location_name: "BlobType"))
     UpdateLocationAzureBlobRequest.add_member(:access_tier, Shapes::ShapeRef.new(shape: AzureAccessTier, location_name: "AccessTier"))
     UpdateLocationAzureBlobRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
@@ -1147,6 +1182,7 @@ module Aws::DataSync
     UpdateLocationObjectStorageRequest.add_member(:server_hostname, Shapes::ShapeRef.new(shape: ServerHostname, location_name: "ServerHostname"))
     UpdateLocationObjectStorageRequest.add_member(:access_key, Shapes::ShapeRef.new(shape: ObjectStorageAccessKey, location_name: "AccessKey"))
     UpdateLocationObjectStorageRequest.add_member(:secret_key, Shapes::ShapeRef.new(shape: ObjectStorageSecretKey, location_name: "SecretKey"))
+    UpdateLocationObjectStorageRequest.add_member(:federated_identity, Shapes::ShapeRef.new(shape: ObjectStorageFederatedIdentityConfig, location_name: "FederatedIdentity"))
     UpdateLocationObjectStorageRequest.add_member(:agent_arns, Shapes::ShapeRef.new(shape: AgentArnList, location_name: "AgentArns"))
     UpdateLocationObjectStorageRequest.add_member(:server_certificate, Shapes::ShapeRef.new(shape: ObjectStorageCertificate, location_name: "ServerCertificate"))
     UpdateLocationObjectStorageRequest.add_member(:cmk_secret_config, Shapes::ShapeRef.new(shape: CmkSecretConfig, location_name: "CmkSecretConfig"))

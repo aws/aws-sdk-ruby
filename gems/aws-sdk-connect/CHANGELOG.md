@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.294.0 (2026-11-04)
+------------------
+
+* Feature - Adds support for retrieving associated cases in contact responses. The Contact object now includes a Cases field containing case IDs and reference numbers linked to the contact.
+
 1.293.0 (2026-10-30)
 ------------------
 

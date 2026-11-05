@@ -1,6 +1,53 @@
 {
   "version" : 2,
   "testCases" : [ {
+    "id" : "ListFulfillmentOptionsFailure",
+    "operationName" : "ListFulfillmentOptions",
+    "input" : {
+      "productId" : "non-existent-product-id"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetOfferFailure",
+    "operationName" : "GetOffer",
+    "input" : {
+      "offerId" : "non-existent-offer-id"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "SearchFacetsSuccess",
+    "operationName" : "SearchFacets",
+    "input" : { },
+    "expectation" : {
+      "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
     "id" : "ListPurchaseOptionsSuccess",
     "operationName" : "ListPurchaseOptions",
     "input" : {
@@ -11,6 +58,23 @@
     },
     "expectation" : {
       "success" : { }
+    },
+    "config" : {
+      "region" : "us-east-1",
+      "useFips" : false,
+      "useDualstack" : false,
+      "useAccountIdRouting" : true
+    }
+  }, {
+    "id" : "GetOfferTermsFailure",
+    "operationName" : "GetOfferTerms",
+    "input" : {
+      "offerId" : "non-existent-offer-id"
+    },
+    "expectation" : {
+      "failure" : {
+        "errorId" : "ResourceNotFoundException"
+      }
     },
     "config" : {
       "region" : "us-east-1",
@@ -53,70 +117,6 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "SearchFacetsSuccess",
-    "operationName" : "SearchFacets",
-    "input" : { },
-    "expectation" : {
-      "success" : { }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetOfferFailure",
-    "operationName" : "GetOffer",
-    "input" : {
-      "offerId" : "non-existent-offer-id"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "ListFulfillmentOptionsFailure",
-    "operationName" : "ListFulfillmentOptions",
-    "input" : {
-      "productId" : "non-existent-product-id"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
-    "id" : "GetProductFailure",
-    "operationName" : "GetProduct",
-    "input" : {
-      "productId" : "non-existent-product-id"
-    },
-    "expectation" : {
-      "failure" : {
-        "errorId" : "ResourceNotFoundException"
-      }
-    },
-    "config" : {
-      "region" : "us-east-1",
-      "useFips" : false,
-      "useDualstack" : false,
-      "useAccountIdRouting" : true
-    }
-  }, {
     "id" : "SearchListingsSuccess",
     "operationName" : "SearchListings",
     "input" : { },
@@ -130,10 +130,10 @@
       "useAccountIdRouting" : true
     }
   }, {
-    "id" : "GetOfferTermsFailure",
-    "operationName" : "GetOfferTerms",
+    "id" : "GetProductFailure",
+    "operationName" : "GetProduct",
     "input" : {
-      "offerId" : "non-existent-offer-id"
+      "productId" : "non-existent-product-id"
     },
     "expectation" : {
       "failure" : {

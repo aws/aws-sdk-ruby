@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.143.0 (2026-11-04)
+------------------
+
+* Feature - Added StepAdditionalInfo on DescribeStep and ListSteps to surface YARN application IDs for steps.
+
 1.142.0 (2026-10-29)
 ------------------
 

@@ -40,6 +40,7 @@ module Aws::Glue
     AmazonRedshiftNodeData = Shapes::StructureShape.new(name: 'AmazonRedshiftNodeData')
     AmazonRedshiftSource = Shapes::StructureShape.new(name: 'AmazonRedshiftSource')
     AmazonRedshiftTarget = Shapes::StructureShape.new(name: 'AmazonRedshiftTarget')
+    AnalysisType = Shapes::StringShape.new(name: 'AnalysisType')
     AnnotationError = Shapes::StructureShape.new(name: 'AnnotationError')
     AnnotationErrorList = Shapes::ListShape.new(name: 'AnnotationErrorList')
     AnnotationList = Shapes::ListShape.new(name: 'AnnotationList')
@@ -77,6 +78,8 @@ module Aws::Glue
     AuthorizationCode = Shapes::StringShape.new(name: 'AuthorizationCode')
     AuthorizationCodeProperties = Shapes::StructureShape.new(name: 'AuthorizationCodeProperties')
     AutoDataQuality = Shapes::StructureShape.new(name: 'AutoDataQuality')
+    AutoUpgradeMetadata = Shapes::StructureShape.new(name: 'AutoUpgradeMetadata')
+    AutoUpgradeStatus = Shapes::StringShape.new(name: 'AutoUpgradeStatus')
     BackfillError = Shapes::StructureShape.new(name: 'BackfillError')
     BackfillErrorCode = Shapes::StringShape.new(name: 'BackfillErrorCode')
     BackfillErroredPartitionsList = Shapes::ListShape.new(name: 'BackfillErroredPartitionsList')
@@ -834,6 +837,8 @@ module Aws::Glue
     GetJobRunResponse = Shapes::StructureShape.new(name: 'GetJobRunResponse')
     GetJobRunsRequest = Shapes::StructureShape.new(name: 'GetJobRunsRequest')
     GetJobRunsResponse = Shapes::StructureShape.new(name: 'GetJobRunsResponse')
+    GetJobUpgradeAnalysisRequest = Shapes::StructureShape.new(name: 'GetJobUpgradeAnalysisRequest')
+    GetJobUpgradeAnalysisResponse = Shapes::StructureShape.new(name: 'GetJobUpgradeAnalysisResponse')
     GetJobsRequest = Shapes::StructureShape.new(name: 'GetJobsRequest')
     GetJobsResponse = Shapes::StructureShape.new(name: 'GetJobsResponse')
     GetMLTaskRunRequest = Shapes::StructureShape.new(name: 'GetMLTaskRunRequest')
@@ -995,6 +1000,7 @@ module Aws::Glue
     IcebergTargetList = Shapes::ListShape.new(name: 'IcebergTargetList')
     IcebergTransformString = Shapes::StringShape.new(name: 'IcebergTransformString')
     IcebergUpdateAction = Shapes::StringShape.new(name: 'IcebergUpdateAction')
+    Id = Shapes::StringShape.new(name: 'Id')
     IdString = Shapes::StringShape.new(name: 'IdString')
     IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
     IdentityCenterInstanceArn = Shapes::StringShape.new(name: 'IdentityCenterInstanceArn')
@@ -1257,6 +1263,7 @@ module Aws::Glue
     MongoDBTargetList = Shapes::ListShape.new(name: 'MongoDBTargetList')
     MySQLCatalogSource = Shapes::StructureShape.new(name: 'MySQLCatalogSource')
     MySQLCatalogTarget = Shapes::StructureShape.new(name: 'MySQLCatalogTarget')
+    Name = Shapes::StringShape.new(name: 'Name')
     NameString = Shapes::StringShape.new(name: 'NameString')
     NameStringList = Shapes::ListShape.new(name: 'NameStringList')
     NewRules = Shapes::ListShape.new(name: 'NewRules')
@@ -1638,6 +1645,8 @@ module Aws::Glue
     StartImportLabelsTaskRunResponse = Shapes::StructureShape.new(name: 'StartImportLabelsTaskRunResponse')
     StartJobRunRequest = Shapes::StructureShape.new(name: 'StartJobRunRequest')
     StartJobRunResponse = Shapes::StructureShape.new(name: 'StartJobRunResponse')
+    StartJobUpgradeAnalysisRequest = Shapes::StructureShape.new(name: 'StartJobUpgradeAnalysisRequest')
+    StartJobUpgradeAnalysisResponse = Shapes::StructureShape.new(name: 'StartJobUpgradeAnalysisResponse')
     StartMLEvaluationTaskRunRequest = Shapes::StructureShape.new(name: 'StartMLEvaluationTaskRunRequest')
     StartMLEvaluationTaskRunResponse = Shapes::StructureShape.new(name: 'StartMLEvaluationTaskRunResponse')
     StartMLLabelingSetGenerationTaskRunRequest = Shapes::StructureShape.new(name: 'StartMLLabelingSetGenerationTaskRunRequest')
@@ -1663,6 +1672,7 @@ module Aws::Glue
     StatisticPropertiesMap = Shapes::MapShape.new(name: 'StatisticPropertiesMap')
     StatisticSummary = Shapes::StructureShape.new(name: 'StatisticSummary')
     StatisticSummaryList = Shapes::ListShape.new(name: 'StatisticSummaryList')
+    Status = Shapes::StringShape.new(name: 'Status')
     StatusDetails = Shapes::StructureShape.new(name: 'StatusDetails')
     StopColumnStatisticsTaskRunRequest = Shapes::StructureShape.new(name: 'StopColumnStatisticsTaskRunRequest')
     StopColumnStatisticsTaskRunResponse = Shapes::StructureShape.new(name: 'StopColumnStatisticsTaskRunResponse')
@@ -1672,6 +1682,8 @@ module Aws::Glue
     StopCrawlerResponse = Shapes::StructureShape.new(name: 'StopCrawlerResponse')
     StopCrawlerScheduleRequest = Shapes::StructureShape.new(name: 'StopCrawlerScheduleRequest')
     StopCrawlerScheduleResponse = Shapes::StructureShape.new(name: 'StopCrawlerScheduleResponse')
+    StopJobUpgradeAnalysisRequest = Shapes::StructureShape.new(name: 'StopJobUpgradeAnalysisRequest')
+    StopJobUpgradeAnalysisResponse = Shapes::StructureShape.new(name: 'StopJobUpgradeAnalysisResponse')
     StopMaterializedViewRefreshTaskRunRequest = Shapes::StructureShape.new(name: 'StopMaterializedViewRefreshTaskRunRequest')
     StopMaterializedViewRefreshTaskRunResponse = Shapes::StructureShape.new(name: 'StopMaterializedViewRefreshTaskRunResponse')
     StopSessionRequest = Shapes::StructureShape.new(name: 'StopSessionRequest')
@@ -1863,6 +1875,7 @@ module Aws::Glue
     UpdateXMLClassifierRequest = Shapes::StructureShape.new(name: 'UpdateXMLClassifierRequest')
     UpdatedAt = Shapes::TimestampShape.new(name: 'UpdatedAt')
     UpdatedTimestamp = Shapes::StringShape.new(name: 'UpdatedTimestamp')
+    UpgradeConsent = Shapes::StringShape.new(name: 'UpgradeConsent')
     UpsertRedshiftTargetOptions = Shapes::StructureShape.new(name: 'UpsertRedshiftTargetOptions')
     UriString = Shapes::StringShape.new(name: 'UriString')
     Url = Shapes::StringShape.new(name: 'Url')
@@ -2099,6 +2112,12 @@ module Aws::Glue
     AutoDataQuality.add_member(:is_enabled, Shapes::ShapeRef.new(shape: BooleanValue, location_name: "IsEnabled"))
     AutoDataQuality.add_member(:evaluation_context, Shapes::ShapeRef.new(shape: EnclosedInStringProperty, location_name: "EvaluationContext"))
     AutoDataQuality.struct_class = Types::AutoDataQuality
+
+    AutoUpgradeMetadata.add_member(:target_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "TargetVersion"))
+    AutoUpgradeMetadata.add_member(:source_version, Shapes::ShapeRef.new(shape: GlueVersionString, location_name: "SourceVersion"))
+    AutoUpgradeMetadata.add_member(:status, Shapes::ShapeRef.new(shape: AutoUpgradeStatus, location_name: "Status"))
+    AutoUpgradeMetadata.add_member(:analysis_id, Shapes::ShapeRef.new(shape: IdString, location_name: "AnalysisId"))
+    AutoUpgradeMetadata.struct_class = Types::AutoUpgradeMetadata
 
     BackfillError.add_member(:code, Shapes::ShapeRef.new(shape: BackfillErrorCode, location_name: "Code"))
     BackfillError.add_member(:partitions, Shapes::ShapeRef.new(shape: BackfillErroredPartitionsList, location_name: "Partitions"))
@@ -5096,6 +5115,21 @@ module Aws::Glue
     GetJobRunsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     GetJobRunsResponse.struct_class = Types::GetJobRunsResponse
 
+    GetJobUpgradeAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "analysisId"))
+    GetJobUpgradeAnalysisRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    GetJobUpgradeAnalysisRequest.struct_class = Types::GetJobUpgradeAnalysisRequest
+
+    GetJobUpgradeAnalysisResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    GetJobUpgradeAnalysisResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "analysisId"))
+    GetJobUpgradeAnalysisResponse.add_member(:status, Shapes::ShapeRef.new(shape: Status, required: true, location_name: "status"))
+    GetJobUpgradeAnalysisResponse.add_member(:source_version, Shapes::ShapeRef.new(shape: String, location_name: "sourceVersion"))
+    GetJobUpgradeAnalysisResponse.add_member(:target_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "targetVersion"))
+    GetJobUpgradeAnalysisResponse.add_member(:analysis_type, Shapes::ShapeRef.new(shape: AnalysisType, location_name: "analysisType"))
+    GetJobUpgradeAnalysisResponse.add_member(:auto_upgrade_evaluation_summary, Shapes::ShapeRef.new(shape: String, location_name: "autoUpgradeEvaluationSummary"))
+    GetJobUpgradeAnalysisResponse.add_member(:error_message, Shapes::ShapeRef.new(shape: String, location_name: "errorMessage"))
+    GetJobUpgradeAnalysisResponse.add_member(:auto_upgrade_eligibility_summary, Shapes::ShapeRef.new(shape: String, location_name: "autoUpgradeEligibilitySummary"))
+    GetJobUpgradeAnalysisResponse.struct_class = Types::GetJobUpgradeAnalysisResponse
+
     GetJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: GenericString, location_name: "NextToken"))
     GetJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: PageSize, location_name: "MaxResults"))
     GetJobsRequest.struct_class = Types::GetJobsRequest
@@ -6052,6 +6086,7 @@ module Aws::Glue
     Job.add_member(:source_control_details, Shapes::ShapeRef.new(shape: SourceControlDetails, location_name: "SourceControlDetails"))
     Job.add_member(:maintenance_window, Shapes::ShapeRef.new(shape: MaintenanceWindow, location_name: "MaintenanceWindow"))
     Job.add_member(:profile_name, Shapes::ShapeRef.new(shape: NameString, location_name: "ProfileName"))
+    Job.add_member(:auto_upgrade_metadata, Shapes::ShapeRef.new(shape: AutoUpgradeMetadata, location_name: "AutoUpgradeMetadata"))
     Job.struct_class = Types::Job
 
     JobBookmarkEntry.add_member(:job_name, Shapes::ShapeRef.new(shape: JobName, location_name: "JobName"))
@@ -8028,6 +8063,15 @@ module Aws::Glue
     StartJobRunResponse.add_member(:job_run_id, Shapes::ShapeRef.new(shape: IdString, location_name: "JobRunId"))
     StartJobRunResponse.struct_class = Types::StartJobRunResponse
 
+    StartJobUpgradeAnalysisRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    StartJobUpgradeAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: Id, location_name: "analysisId"))
+    StartJobUpgradeAnalysisRequest.add_member(:upgrade_consent, Shapes::ShapeRef.new(shape: UpgradeConsent, location_name: "upgradeConsent"))
+    StartJobUpgradeAnalysisRequest.struct_class = Types::StartJobUpgradeAnalysisRequest
+
+    StartJobUpgradeAnalysisResponse.add_member(:analysis_id, Shapes::ShapeRef.new(shape: Id, location_name: "analysisId"))
+    StartJobUpgradeAnalysisResponse.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, location_name: "jobName"))
+    StartJobUpgradeAnalysisResponse.struct_class = Types::StartJobUpgradeAnalysisResponse
+
     StartMLEvaluationTaskRunRequest.add_member(:transform_id, Shapes::ShapeRef.new(shape: HashString, required: true, location_name: "TransformId"))
     StartMLEvaluationTaskRunRequest.struct_class = Types::StartMLEvaluationTaskRunRequest
 
@@ -8151,6 +8195,12 @@ module Aws::Glue
     StopCrawlerScheduleRequest.struct_class = Types::StopCrawlerScheduleRequest
 
     StopCrawlerScheduleResponse.struct_class = Types::StopCrawlerScheduleResponse
+
+    StopJobUpgradeAnalysisRequest.add_member(:job_name, Shapes::ShapeRef.new(shape: Name, required: true, location_name: "jobName"))
+    StopJobUpgradeAnalysisRequest.add_member(:analysis_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "analysisId"))
+    StopJobUpgradeAnalysisRequest.struct_class = Types::StopJobUpgradeAnalysisRequest
+
+    StopJobUpgradeAnalysisResponse.struct_class = Types::StopJobUpgradeAnalysisResponse
 
     StopMaterializedViewRefreshTaskRunRequest.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, required: true, location_name: "CatalogId"))
     StopMaterializedViewRefreshTaskRunRequest.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -11059,6 +11109,19 @@ module Aws::Glue
         )
       end)
 
+      api.add_operation(:get_job_upgrade_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetJobUpgradeAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetJobUpgradeAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetJobUpgradeAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:get_jobs, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetJobs"
         o.http_method = "POST"
@@ -12690,6 +12753,21 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: ConcurrentRunsExceededException)
       end)
 
+      api.add_operation(:start_job_upgrade_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartJobUpgradeAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StartJobUpgradeAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartJobUpgradeAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNumberLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+      end)
+
       api.add_operation(:start_ml_evaluation_task_run, Seahorse::Model::Operation.new.tap do |o|
         o.name = "StartMLEvaluationTaskRun"
         o.http_method = "POST"
@@ -12804,6 +12882,20 @@ module Aws::Glue
         o.errors << Shapes::ShapeRef.new(shape: SchedulerNotRunningException)
         o.errors << Shapes::ShapeRef.new(shape: SchedulerTransitioningException)
         o.errors << Shapes::ShapeRef.new(shape: OperationTimeoutException)
+      end)
+
+      api.add_operation(:stop_job_upgrade_analysis, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StopJobUpgradeAnalysis"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: StopJobUpgradeAnalysisRequest)
+        o.output = Shapes::ShapeRef.new(shape: StopJobUpgradeAnalysisResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInputException)
+        o.errors << Shapes::ShapeRef.new(shape: EntityNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotSupportedException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
       end)
 
       api.add_operation(:stop_materialized_view_refresh_task_run, Seahorse::Model::Operation.new.tap do |o|

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+3.279.0 (2026-11-05)
+------------------
+
+* Feature - Added a dependency on the new `aws-sdk-accountaccessruntime` gem.
+
 3.278.0 (2026-10-22)
 ------------------
 

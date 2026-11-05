@@ -562,7 +562,7 @@ module Aws::LambdaMicrovms
     #
     # @option params [Array<String>] :egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #
     # @option params [Array<Types::CpuConfiguration>] :cpu_configurations
     #   The list of supported CPU configurations for the MicroVM.
@@ -641,7 +641,7 @@ module Aws::LambdaMicrovms
     #     egress_network_connectors: ["NetworkConnector"],
     #     cpu_configurations: [
     #       {
-    #         architecture: "ARM_64", # required, accepts ARM_64
+    #         architecture: "ARM_64", # required, accepts ARM_64, X86_64
     #       },
     #     ],
     #     resources: [
@@ -697,7 +697,7 @@ module Aws::LambdaMicrovms
     #   resp.egress_network_connectors #=> Array
     #   resp.egress_network_connectors[0] #=> String
     #   resp.cpu_configurations #=> Array
-    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.resources #=> Array
     #   resp.resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.additional_os_capabilities #=> Array
@@ -977,8 +977,8 @@ module Aws::LambdaMicrovms
     #   resp.image_version #=> String
     #   resp.build_id #=> String
     #   resp.build_state #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESSFUL", "FAILED"
-    #   resp.architecture #=> String, one of "ARM_64"
-    #   resp.chipset #=> String, one of "GRAVITON"
+    #   resp.architecture #=> String, one of "ARM_64", "X86_64"
+    #   resp.chipset #=> String, one of "GRAVITON", "INTEL"
     #   resp.chipset_generation #=> String
     #   resp.state_reason #=> String
     #   resp.created_at #=> Time
@@ -1046,7 +1046,7 @@ module Aws::LambdaMicrovms
     #   resp.egress_network_connectors #=> Array
     #   resp.egress_network_connectors[0] #=> String
     #   resp.cpu_configurations #=> Array
-    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.resources #=> Array
     #   resp.resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.additional_os_capabilities #=> Array
@@ -1121,7 +1121,9 @@ module Aws::LambdaMicrovms
     #   resp.items #=> Array
     #   resp.items[0].image_arn #=> String
     #   resp.items[0].image_version #=> String
-    #   resp.items[0].status #=> String, one of "AVAILABLE", "DEPRECATED"
+    #   resp.items[0].status #=> String, one of "AVAILABLE", "DEPRECATED", "RECALLED"
+    #   resp.items[0].supported_cpu_configurations #=> Array
+    #   resp.items[0].supported_cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.items[0].created_at #=> Time
     #   resp.items[0].updated_at #=> Time
     #
@@ -1216,8 +1218,8 @@ module Aws::LambdaMicrovms
     #     next_token: "String",
     #     image_identifier: "MicrovmImageIdentifier", # required
     #     image_version: "NonBlankString", # required
-    #     architecture: "ARM_64", # accepts ARM_64
-    #     chipset: "GRAVITON", # accepts GRAVITON
+    #     architecture: "ARM_64", # accepts ARM_64, X86_64
+    #     chipset: "GRAVITON", # accepts GRAVITON, INTEL
     #     chipset_generation: "NonBlankString",
     #   })
     #
@@ -1229,8 +1231,8 @@ module Aws::LambdaMicrovms
     #   resp.items[0].image_version #=> String
     #   resp.items[0].build_id #=> String
     #   resp.items[0].build_state #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESSFUL", "FAILED"
-    #   resp.items[0].architecture #=> String, one of "ARM_64"
-    #   resp.items[0].chipset #=> String, one of "GRAVITON"
+    #   resp.items[0].architecture #=> String, one of "ARM_64", "X86_64"
+    #   resp.items[0].chipset #=> String, one of "GRAVITON", "INTEL"
     #   resp.items[0].chipset_generation #=> String
     #   resp.items[0].state_reason #=> String
     #   resp.items[0].created_at #=> Time
@@ -1287,7 +1289,7 @@ module Aws::LambdaMicrovms
     #   resp.items[0].egress_network_connectors #=> Array
     #   resp.items[0].egress_network_connectors[0] #=> String
     #   resp.items[0].cpu_configurations #=> Array
-    #   resp.items[0].cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.items[0].cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.items[0].resources #=> Array
     #   resp.items[0].resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.items[0].additional_os_capabilities #=> Array
@@ -1489,7 +1491,8 @@ module Aws::LambdaMicrovms
     #   The list of ingress network connectors to configure for the MicroVM.
     #
     # @option params [Array<String>] :egress_network_connectors
-    #   The list of egress network connectors to configure for the MicroVM.
+    #   The list of egress network connectors available to the MicroVM at
+    #   runtime.
     #
     # @option params [required, String] :image_identifier
     #   The identifier (ARN or ID) of the MicroVM image to run.
@@ -1726,7 +1729,7 @@ module Aws::LambdaMicrovms
     #
     # @option params [Array<String>] :egress_network_connectors
     #   The list of egress network connectors available to the MicroVM at
-    #   runtime.
+    #   image build time.
     #
     # @option params [Array<Types::CpuConfiguration>] :cpu_configurations
     #   The list of supported CPU configurations for the MicroVM.
@@ -1797,7 +1800,7 @@ module Aws::LambdaMicrovms
     #     egress_network_connectors: ["NetworkConnector"],
     #     cpu_configurations: [
     #       {
-    #         architecture: "ARM_64", # required, accepts ARM_64
+    #         architecture: "ARM_64", # required, accepts ARM_64, X86_64
     #       },
     #     ],
     #     resources: [
@@ -1850,7 +1853,7 @@ module Aws::LambdaMicrovms
     #   resp.egress_network_connectors #=> Array
     #   resp.egress_network_connectors[0] #=> String
     #   resp.cpu_configurations #=> Array
-    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.resources #=> Array
     #   resp.resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.additional_os_capabilities #=> Array
@@ -1936,7 +1939,7 @@ module Aws::LambdaMicrovms
     #   resp.egress_network_connectors #=> Array
     #   resp.egress_network_connectors[0] #=> String
     #   resp.cpu_configurations #=> Array
-    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64"
+    #   resp.cpu_configurations[0].architecture #=> String, one of "ARM_64", "X86_64"
     #   resp.resources #=> Array
     #   resp.resources[0].minimum_memory_in_mi_b #=> Integer
     #   resp.additional_os_capabilities #=> Array
@@ -1993,7 +1996,7 @@ module Aws::LambdaMicrovms
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-lambdamicrovms'
-      context[:gem_version] = '1.9.0'
+      context[:gem_version] = '1.11.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

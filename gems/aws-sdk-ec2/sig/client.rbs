@@ -10322,7 +10322,7 @@ module Aws
 
       interface _GetCapacityManagerSupportabilityScoresResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetCapacityManagerSupportabilityScoresResult]
-        def aggregate_score: () -> ("high" | "medium" | "low")
+        def aggregate_score: () -> ("high" | "medium" | "low" | "unsupported")
         def capacity_manager_supportability_scores: () -> ::Array[Types::CapacityManagerSupportabilityScore]
       end
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/EC2/Client.html#get_capacity_manager_supportability_scores-instance_method

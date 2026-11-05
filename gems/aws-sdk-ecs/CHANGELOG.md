@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.255.0 (2026-11-04)
+------------------
+
+* Feature - Amazon ECS Managed Instances now supports the json-file log driver in task definitions. Daemon task definition volumes also support logDriverVolumeConfiguration, letting managed daemons read those logs.
+
 1.254.0 (2026-10-29)
 ------------------
 

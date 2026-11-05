@@ -5502,6 +5502,19 @@ module Aws::QuickSight
       SENSITIVE: []
     end
 
+    class DescribeResourcePermissionsRequest
+      attr_accessor aws_account_id: ::String
+      SENSITIVE: []
+    end
+
+    class DescribeResourcePermissionsResponse
+      attr_accessor role_type: ("QUICKSIGHT_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor customer_managed_role_arn: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
+      SENSITIVE: []
+    end
+
     class DescribeRoleCustomPermissionRequest
       attr_accessor role: ("ADMIN" | "AUTHOR" | "READER" | "ADMIN_PRO" | "AUTHOR_PRO" | "READER_PRO")
       attr_accessor aws_account_id: ::String
@@ -13349,6 +13362,21 @@ module Aws::QuickSight
       attr_accessor request_id: ::String
       attr_accessor schedule_id: ::String
       attr_accessor arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResourcePermissionsRequest
+      attr_accessor aws_account_id: ::String
+      attr_accessor role_type: ("QUICKSIGHT_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor customer_managed_role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateResourcePermissionsResponse
+      attr_accessor role_type: ("QUICKSIGHT_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor customer_managed_role_arn: ::String
+      attr_accessor request_id: ::String
+      attr_accessor status: ::Integer
       SENSITIVE: []
     end
 

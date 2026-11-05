@@ -168,6 +168,7 @@ module Aws::Mgn
     end
 
     class CreateNetworkMigrationDefinitionRequest
+      attr_accessor client_token: ::String
       attr_accessor name: ::String
       attr_accessor description: ::String
       attr_accessor source_configurations: ::Array[Types::SourceConfiguration]
@@ -1349,7 +1350,7 @@ module Aws::Mgn
     class NetworkMigrationDefinitionSummary
       attr_accessor network_migration_definition_id: ::String
       attr_accessor name: ::String
-      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR")
+      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR" | "MIGRATION_PLANNING_ARTIFACTS")
       attr_accessor arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor scope_tags: ::Hash[::String, ::String]
@@ -1660,7 +1661,7 @@ module Aws::Mgn
     end
 
     class SourceConfiguration
-      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR")
+      attr_accessor source_environment: ("NSX" | "VSPHERE" | "FORTIGATE_FIREWALL" | "PALO_ALTO_FIREWALL" | "CISCO_ACI" | "LOGICAL_MODEL" | "MODELIZE_IT" | "AWS_DISCOVERY_COLLECTOR" | "MIGRATION_PLANNING_ARTIFACTS")
       attr_accessor source_s3_configuration: Types::SourceS3Configuration
       SENSITIVE: []
     end

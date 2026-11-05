@@ -35,6 +35,9 @@ module Aws
       class InvalidSsmlException < ServiceError
         def message: () -> ::String
       end
+      class InvalidTagParameterException < ServiceError
+        def message: () -> ::String
+      end
       class InvalidTaskIdException < ServiceError
         def message: () -> ::String
       end
@@ -56,6 +59,11 @@ module Aws
       class MaxLexiconsNumberExceededException < ServiceError
         def message: () -> ::String
       end
+      class ResourceNotFoundException < ServiceError
+        def message: () -> ::String
+        def resource_id: () -> ::String
+        def resource_type: () -> ::String
+      end
       class SsmlMarksNotSupportedForTextTypeException < ServiceError
         def message: () -> ::String
       end
@@ -63,6 +71,9 @@ module Aws
         def message: () -> ::String
       end
       class TextLengthExceededException < ServiceError
+        def message: () -> ::String
+      end
+      class TooManyTagsException < ServiceError
         def message: () -> ::String
       end
       class UnsupportedPlsAlphabetException < ServiceError

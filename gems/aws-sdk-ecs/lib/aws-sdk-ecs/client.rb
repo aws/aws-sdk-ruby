@@ -6366,6 +6366,7 @@ module Aws::ECS
     #   resp.daemon_task_definition.volumes #=> Array
     #   resp.daemon_task_definition.volumes[0].name #=> String
     #   resp.daemon_task_definition.volumes[0].host.source_path #=> String
+    #   resp.daemon_task_definition.volumes[0].log_driver_volume_configuration.driver #=> String, one of "json-file", "syslog", "journald", "gelf", "fluentd", "awslogs", "splunk", "awsfirelens"
     #   resp.daemon_task_definition.cpu #=> String
     #   resp.daemon_task_definition.memory #=> String
     #   resp.daemon_task_definition.status #=> String, one of "ACTIVE", "DELETE_IN_PROGRESS", "DELETED"
@@ -11800,6 +11801,9 @@ module Aws::ECS
     #         name: "String",
     #         host: {
     #           source_path: "String",
+    #         },
+    #         log_driver_volume_configuration: {
+    #           driver: "json-file", # required, accepts json-file, syslog, journald, gelf, fluentd, awslogs, splunk, awsfirelens
     #         },
     #       },
     #     ],
@@ -17554,7 +17558,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.254.0'
+      context[:gem_version] = '1.255.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

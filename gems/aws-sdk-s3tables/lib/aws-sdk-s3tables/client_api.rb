@@ -18,6 +18,9 @@ module Aws::S3Tables
     AccountId = Shapes::StringShape.new(name: 'AccountId')
     BadRequestException = Shapes::StructureShape.new(name: 'BadRequestException')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+    ChecksumCRC64NVME = Shapes::StringShape.new(name: 'ChecksumCRC64NVME')
+    CompleteTableMigrationRequest = Shapes::StructureShape.new(name: 'CompleteTableMigrationRequest')
+    CompressionCodec = Shapes::StringShape.new(name: 'CompressionCodec')
     ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
     CreateNamespaceRequest = Shapes::StructureShape.new(name: 'CreateNamespaceRequest')
     CreateNamespaceRequestNamespaceList = Shapes::ListShape.new(name: 'CreateNamespaceRequestNamespaceList')
@@ -26,6 +29,9 @@ module Aws::S3Tables
     CreateTableBucketResponse = Shapes::StructureShape.new(name: 'CreateTableBucketResponse')
     CreateTableRequest = Shapes::StructureShape.new(name: 'CreateTableRequest')
     CreateTableResponse = Shapes::StructureShape.new(name: 'CreateTableResponse')
+    DataFileFormat = Shapes::StringShape.new(name: 'DataFileFormat')
+    DataMigrationOverview = Shapes::StructureShape.new(name: 'DataMigrationOverview')
+    DataMigrationSettings = Shapes::StructureShape.new(name: 'DataMigrationSettings')
     DeleteNamespaceRequest = Shapes::StructureShape.new(name: 'DeleteNamespaceRequest')
     DeleteTableBucketEncryptionRequest = Shapes::StructureShape.new(name: 'DeleteTableBucketEncryptionRequest')
     DeleteTableBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteTableBucketMetricsConfigurationRequest')
@@ -35,10 +41,13 @@ module Aws::S3Tables
     DeleteTablePolicyRequest = Shapes::StructureShape.new(name: 'DeleteTablePolicyRequest')
     DeleteTableReplicationRequest = Shapes::StructureShape.new(name: 'DeleteTableReplicationRequest')
     DeleteTableRequest = Shapes::StructureShape.new(name: 'DeleteTableRequest')
+    DestinationTable = Shapes::StructureShape.new(name: 'DestinationTable')
     Document = Shapes::DocumentShape.new(name: 'Document', document: true)
     EncryptionConfiguration = Shapes::StructureShape.new(name: 'EncryptionConfiguration')
     EncryptionConfigurationKmsKeyArnString = Shapes::StringShape.new(name: 'EncryptionConfigurationKmsKeyArnString')
     ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
+    FindingCategory = Shapes::StringShape.new(name: 'FindingCategory')
+    FindingCategoryCounts = Shapes::MapShape.new(name: 'FindingCategoryCounts')
     ForbiddenException = Shapes::StructureShape.new(name: 'ForbiddenException')
     GetNamespaceRequest = Shapes::StructureShape.new(name: 'GetNamespaceRequest')
     GetNamespaceResponse = Shapes::StructureShape.new(name: 'GetNamespaceResponse')
@@ -64,6 +73,8 @@ module Aws::S3Tables
     GetTableMaintenanceJobStatusResponse = Shapes::StructureShape.new(name: 'GetTableMaintenanceJobStatusResponse')
     GetTableMetadataLocationRequest = Shapes::StructureShape.new(name: 'GetTableMetadataLocationRequest')
     GetTableMetadataLocationResponse = Shapes::StructureShape.new(name: 'GetTableMetadataLocationResponse')
+    GetTableMigrationRequest = Shapes::StructureShape.new(name: 'GetTableMigrationRequest')
+    GetTableMigrationResponse = Shapes::StructureShape.new(name: 'GetTableMigrationResponse')
     GetTablePolicyRequest = Shapes::StructureShape.new(name: 'GetTablePolicyRequest')
     GetTablePolicyResponse = Shapes::StructureShape.new(name: 'GetTablePolicyResponse')
     GetTableRecordExpirationConfigurationRequest = Shapes::StructureShape.new(name: 'GetTableRecordExpirationConfigurationRequest')
@@ -78,6 +89,10 @@ module Aws::S3Tables
     GetTableResponse = Shapes::StructureShape.new(name: 'GetTableResponse')
     GetTableStorageClassRequest = Shapes::StructureShape.new(name: 'GetTableStorageClassRequest')
     GetTableStorageClassResponse = Shapes::StructureShape.new(name: 'GetTableStorageClassResponse')
+    GlueTableSource = Shapes::StructureShape.new(name: 'GlueTableSource')
+    GlueTableSourceCatalogIdString = Shapes::StringShape.new(name: 'GlueTableSourceCatalogIdString')
+    GlueTableSourceDatabaseNameString = Shapes::StringShape.new(name: 'GlueTableSourceDatabaseNameString')
+    GlueTableSourceTableNameString = Shapes::StringShape.new(name: 'GlueTableSourceTableNameString')
     IAMRole = Shapes::StringShape.new(name: 'IAMRole')
     IcebergCompactionSettings = Shapes::StructureShape.new(name: 'IcebergCompactionSettings')
     IcebergCompactionStrategy = Shapes::StringShape.new(name: 'IcebergCompactionStrategy')
@@ -94,6 +109,7 @@ module Aws::S3Tables
     IcebergSortFieldList = Shapes::ListShape.new(name: 'IcebergSortFieldList')
     IcebergSortOrder = Shapes::StructureShape.new(name: 'IcebergSortOrder')
     IcebergUnreferencedFileRemovalSettings = Shapes::StructureShape.new(name: 'IcebergUnreferencedFileRemovalSettings')
+    IncompatibleValuesPolicy = Shapes::StringShape.new(name: 'IncompatibleValuesPolicy')
     Integer = Shapes::IntegerShape.new(name: 'Integer')
     IntegerList = Shapes::ListShape.new(name: 'IntegerList')
     InternalServerErrorException = Shapes::StructureShape.new(name: 'InternalServerErrorException')
@@ -107,6 +123,9 @@ module Aws::S3Tables
     ListTableBucketsRequest = Shapes::StructureShape.new(name: 'ListTableBucketsRequest')
     ListTableBucketsRequestPrefixString = Shapes::StringShape.new(name: 'ListTableBucketsRequestPrefixString')
     ListTableBucketsResponse = Shapes::StructureShape.new(name: 'ListTableBucketsResponse')
+    ListTableMigrationsLimit = Shapes::IntegerShape.new(name: 'ListTableMigrationsLimit')
+    ListTableMigrationsRequest = Shapes::StructureShape.new(name: 'ListTableMigrationsRequest')
+    ListTableMigrationsResponse = Shapes::StructureShape.new(name: 'ListTableMigrationsResponse')
     ListTablesLimit = Shapes::IntegerShape.new(name: 'ListTablesLimit')
     ListTablesRequest = Shapes::StructureShape.new(name: 'ListTablesRequest')
     ListTablesRequestPrefixString = Shapes::StringShape.new(name: 'ListTablesRequestPrefixString')
@@ -114,10 +133,32 @@ module Aws::S3Tables
     ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
     ListTagsForResourceResponse = Shapes::StructureShape.new(name: 'ListTagsForResourceResponse')
     Long = Shapes::IntegerShape.new(name: 'Long')
+    MaintenanceSettings = Shapes::StructureShape.new(name: 'MaintenanceSettings')
     MaintenanceStatus = Shapes::StringShape.new(name: 'MaintenanceStatus')
     ManagedTableInformation = Shapes::StructureShape.new(name: 'ManagedTableInformation')
     MetadataLocation = Shapes::StringShape.new(name: 'MetadataLocation')
     MethodNotAllowedException = Shapes::StructureShape.new(name: 'MethodNotAllowedException')
+    MigrationCompactionSettings = Shapes::StructureShape.new(name: 'MigrationCompactionSettings')
+    MigrationFailureCode = Shapes::StringShape.new(name: 'MigrationFailureCode')
+    MigrationFailureDetail = Shapes::StringShape.new(name: 'MigrationFailureDetail')
+    MigrationFailureReason = Shapes::StructureShape.new(name: 'MigrationFailureReason')
+    MigrationId = Shapes::StringShape.new(name: 'MigrationId')
+    MigrationMinSnapshotsToKeep = Shapes::IntegerShape.new(name: 'MigrationMinSnapshotsToKeep')
+    MigrationOutputConfiguration = Shapes::StructureShape.new(name: 'MigrationOutputConfiguration')
+    MigrationOutputOverview = Shapes::StructureShape.new(name: 'MigrationOutputOverview')
+    MigrationPolicies = Shapes::StructureShape.new(name: 'MigrationPolicies')
+    MigrationReportPrefix = Shapes::StringShape.new(name: 'MigrationReportPrefix')
+    MigrationReportPrefixes = Shapes::StructureShape.new(name: 'MigrationReportPrefixes')
+    MigrationRequestedState = Shapes::StringShape.new(name: 'MigrationRequestedState')
+    MigrationSnapshotManagementSettings = Shapes::StructureShape.new(name: 'MigrationSnapshotManagementSettings')
+    MigrationSourceType = Shapes::StringShape.new(name: 'MigrationSourceType')
+    MigrationState = Shapes::StringShape.new(name: 'MigrationState')
+    MigrationStats = Shapes::StructureShape.new(name: 'MigrationStats')
+    MigrationSummary = Shapes::StructureShape.new(name: 'MigrationSummary')
+    MigrationSummaryList = Shapes::ListShape.new(name: 'MigrationSummaryList')
+    MigrationTableProperties = Shapes::StructureShape.new(name: 'MigrationTableProperties')
+    MigrationTargetFileSizeMB = Shapes::IntegerShape.new(name: 'MigrationTargetFileSizeMB')
+    MigrationType = Shapes::StringShape.new(name: 'MigrationType')
     NamespaceId = Shapes::StringShape.new(name: 'NamespaceId')
     NamespaceList = Shapes::ListShape.new(name: 'NamespaceList')
     NamespaceName = Shapes::StringShape.new(name: 'NamespaceName')
@@ -126,6 +167,7 @@ module Aws::S3Tables
     NextToken = Shapes::StringShape.new(name: 'NextToken')
     NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
     OpenTableFormat = Shapes::StringShape.new(name: 'OpenTableFormat')
+    PlanningStats = Shapes::StructureShape.new(name: 'PlanningStats')
     PositiveInteger = Shapes::IntegerShape.new(name: 'PositiveInteger')
     PutTableBucketEncryptionRequest = Shapes::StructureShape.new(name: 'PutTableBucketEncryptionRequest')
     PutTableBucketMaintenanceConfigurationRequest = Shapes::StructureShape.new(name: 'PutTableBucketMaintenanceConfigurationRequest')
@@ -146,17 +188,26 @@ module Aws::S3Tables
     ReplicationDestinations = Shapes::ListShape.new(name: 'ReplicationDestinations')
     ReplicationInformation = Shapes::StructureShape.new(name: 'ReplicationInformation')
     ReplicationStatus = Shapes::StringShape.new(name: 'ReplicationStatus')
+    ReportObjectKey = Shapes::StringShape.new(name: 'ReportObjectKey')
+    ReportOverview = Shapes::StructureShape.new(name: 'ReportOverview')
     ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
     ResourcePolicy = Shapes::StringShape.new(name: 'ResourcePolicy')
+    RoleArn = Shapes::StringShape.new(name: 'RoleArn')
+    S3BucketARN = Shapes::StringShape.new(name: 'S3BucketARN')
     SSEAlgorithm = Shapes::StringShape.new(name: 'SSEAlgorithm')
     SchemaField = Shapes::StructureShape.new(name: 'SchemaField')
     SchemaFieldList = Shapes::ListShape.new(name: 'SchemaFieldList')
     SchemaV2Field = Shapes::StructureShape.new(name: 'SchemaV2Field')
     SchemaV2FieldList = Shapes::ListShape.new(name: 'SchemaV2FieldList')
     SchemaV2FieldType = Shapes::StringShape.new(name: 'SchemaV2FieldType')
+    SourceConfiguration = Shapes::UnionShape.new(name: 'SourceConfiguration')
+    StartTableMigrationRequest = Shapes::StructureShape.new(name: 'StartTableMigrationRequest')
+    StartTableMigrationResponse = Shapes::StructureShape.new(name: 'StartTableMigrationResponse')
     StorageClass = Shapes::StringShape.new(name: 'StorageClass')
     StorageClassConfiguration = Shapes::StructureShape.new(name: 'StorageClassConfiguration')
     String = Shapes::StringShape.new(name: 'String')
+    SyncTableMigrationRequest = Shapes::StructureShape.new(name: 'SyncTableMigrationRequest')
+    SyncTableMigrationResponse = Shapes::StructureShape.new(name: 'SyncTableMigrationResponse')
     SyntheticTimestamp_date_time = Shapes::TimestampShape.new(name: 'SyntheticTimestamp_date_time', timestampFormat: "iso8601")
     TableARN = Shapes::StringShape.new(name: 'TableARN')
     TableBucketARN = Shapes::StringShape.new(name: 'TableBucketARN')
@@ -200,10 +251,14 @@ module Aws::S3Tables
     TagValue = Shapes::StringShape.new(name: 'TagValue')
     Tags = Shapes::MapShape.new(name: 'Tags')
     TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
+    UnmatchedSourceFieldsPolicy = Shapes::StringShape.new(name: 'UnmatchedSourceFieldsPolicy')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateTableMetadataLocationRequest = Shapes::StructureShape.new(name: 'UpdateTableMetadataLocationRequest')
     UpdateTableMetadataLocationResponse = Shapes::StructureShape.new(name: 'UpdateTableMetadataLocationResponse')
+    UpdateTableMigrationRequest = Shapes::StructureShape.new(name: 'UpdateTableMigrationRequest')
+    UpdateTableMigrationRequestUpdateDescriptionString = Shapes::StringShape.new(name: 'UpdateTableMigrationRequestUpdateDescriptionString')
+    UpdateTableMigrationResponse = Shapes::StructureShape.new(name: 'UpdateTableMigrationResponse')
     VersionToken = Shapes::StringShape.new(name: 'VersionToken')
     WarehouseLocation = Shapes::StringShape.new(name: 'WarehouseLocation')
 
@@ -212,6 +267,9 @@ module Aws::S3Tables
 
     BadRequestException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     BadRequestException.struct_class = Types::BadRequestException
+
+    CompleteTableMigrationRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, required: true, location: "querystring", location_name: "tableARN"))
+    CompleteTableMigrationRequest.struct_class = Types::CompleteTableMigrationRequest
 
     ConflictException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ConflictException.struct_class = Types::ConflictException
@@ -249,6 +307,14 @@ module Aws::S3Tables
     CreateTableResponse.add_member(:version_token, Shapes::ShapeRef.new(shape: VersionToken, required: true, location_name: "versionToken"))
     CreateTableResponse.struct_class = Types::CreateTableResponse
 
+    DataMigrationOverview.add_member(:maintenance_settings, Shapes::ShapeRef.new(shape: MaintenanceSettings, required: true, location_name: "maintenanceSettings"))
+    DataMigrationOverview.add_member(:migration_policies, Shapes::ShapeRef.new(shape: MigrationPolicies, required: true, location_name: "migrationPolicies"))
+    DataMigrationOverview.struct_class = Types::DataMigrationOverview
+
+    DataMigrationSettings.add_member(:maintenance_settings, Shapes::ShapeRef.new(shape: MaintenanceSettings, location_name: "maintenanceSettings"))
+    DataMigrationSettings.add_member(:migration_policies, Shapes::ShapeRef.new(shape: MigrationPolicies, location_name: "migrationPolicies"))
+    DataMigrationSettings.struct_class = Types::DataMigrationSettings
+
     DeleteNamespaceRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
     DeleteNamespaceRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location: "uri", location_name: "namespace"))
     DeleteNamespaceRequest.struct_class = Types::DeleteNamespaceRequest
@@ -284,9 +350,23 @@ module Aws::S3Tables
     DeleteTableRequest.add_member(:version_token, Shapes::ShapeRef.new(shape: VersionToken, location: "querystring", location_name: "versionToken"))
     DeleteTableRequest.struct_class = Types::DeleteTableRequest
 
+    DestinationTable.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location_name: "tableBucketARN"))
+    DestinationTable.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespace"))
+    DestinationTable.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "name"))
+    DestinationTable.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, location_name: "encryptionConfiguration"))
+    DestinationTable.add_member(:storage_class_configuration, Shapes::ShapeRef.new(shape: StorageClassConfiguration, location_name: "storageClassConfiguration"))
+    DestinationTable.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    DestinationTable.add_member(:properties, Shapes::ShapeRef.new(shape: MigrationTableProperties, location_name: "properties"))
+    DestinationTable.add_member(:schema, Shapes::ShapeRef.new(shape: IcebergSchemaV2, location_name: "schema"))
+    DestinationTable.add_member(:iceberg_sort_order, Shapes::ShapeRef.new(shape: IcebergSortOrder, location_name: "icebergSortOrder"))
+    DestinationTable.struct_class = Types::DestinationTable
+
     EncryptionConfiguration.add_member(:sse_algorithm, Shapes::ShapeRef.new(shape: SSEAlgorithm, required: true, location_name: "sseAlgorithm"))
     EncryptionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: EncryptionConfigurationKmsKeyArnString, location_name: "kmsKeyArn"))
     EncryptionConfiguration.struct_class = Types::EncryptionConfiguration
+
+    FindingCategoryCounts.key = Shapes::ShapeRef.new(shape: FindingCategory)
+    FindingCategoryCounts.value = Shapes::ShapeRef.new(shape: Long)
 
     ForbiddenException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     ForbiddenException.struct_class = Types::ForbiddenException
@@ -389,6 +469,31 @@ module Aws::S3Tables
     GetTableMetadataLocationResponse.add_member(:warehouse_location, Shapes::ShapeRef.new(shape: WarehouseLocation, required: true, location_name: "warehouseLocation"))
     GetTableMetadataLocationResponse.struct_class = Types::GetTableMetadataLocationResponse
 
+    GetTableMigrationRequest.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, location: "querystring", location_name: "migrationId"))
+    GetTableMigrationRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, location: "querystring", location_name: "tableARN"))
+    GetTableMigrationRequest.struct_class = Types::GetTableMigrationRequest
+
+    GetTableMigrationResponse.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, required: true, location_name: "migrationId"))
+    GetTableMigrationResponse.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location_name: "tableBucketARN"))
+    GetTableMigrationResponse.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespace"))
+    GetTableMigrationResponse.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, location_name: "tableARN"))
+    GetTableMigrationResponse.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "name"))
+    GetTableMigrationResponse.add_member(:type, Shapes::ShapeRef.new(shape: MigrationType, required: true, location_name: "type"))
+    GetTableMigrationResponse.add_member(:state, Shapes::ShapeRef.new(shape: MigrationState, required: true, location_name: "state"))
+    GetTableMigrationResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleARN"))
+    GetTableMigrationResponse.add_member(:review_migration_plan, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "reviewMigrationPlan"))
+    GetTableMigrationResponse.add_member(:has_valid_plan, Shapes::ShapeRef.new(shape: Boolean, location_name: "hasValidPlan"))
+    GetTableMigrationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    GetTableMigrationResponse.add_member(:state_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "stateUpdatedAt"))
+    GetTableMigrationResponse.add_member(:failure_reason, Shapes::ShapeRef.new(shape: MigrationFailureReason, location_name: "failureReason"))
+    GetTableMigrationResponse.add_member(:planning_stats, Shapes::ShapeRef.new(shape: PlanningStats, location_name: "planningStats"))
+    GetTableMigrationResponse.add_member(:migration_stats, Shapes::ShapeRef.new(shape: MigrationStats, location_name: "migrationStats"))
+    GetTableMigrationResponse.add_member(:source_type, Shapes::ShapeRef.new(shape: MigrationSourceType, required: true, location_name: "sourceType"))
+    GetTableMigrationResponse.add_member(:source, Shapes::ShapeRef.new(shape: SourceConfiguration, required: true, location_name: "source"))
+    GetTableMigrationResponse.add_member(:data_migration, Shapes::ShapeRef.new(shape: DataMigrationOverview, required: true, location_name: "dataMigration"))
+    GetTableMigrationResponse.add_member(:migration_output, Shapes::ShapeRef.new(shape: MigrationOutputOverview, required: true, location_name: "migrationOutput"))
+    GetTableMigrationResponse.struct_class = Types::GetTableMigrationResponse
+
     GetTablePolicyRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
     GetTablePolicyRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location: "uri", location_name: "namespace"))
     GetTablePolicyRequest.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location: "uri", location_name: "name"))
@@ -458,6 +563,11 @@ module Aws::S3Tables
 
     GetTableStorageClassResponse.add_member(:storage_class_configuration, Shapes::ShapeRef.new(shape: StorageClassConfiguration, required: true, location_name: "storageClassConfiguration"))
     GetTableStorageClassResponse.struct_class = Types::GetTableStorageClassResponse
+
+    GlueTableSource.add_member(:catalog_id, Shapes::ShapeRef.new(shape: GlueTableSourceCatalogIdString, required: true, location_name: "catalogId"))
+    GlueTableSource.add_member(:database_name, Shapes::ShapeRef.new(shape: GlueTableSourceDatabaseNameString, required: true, location_name: "databaseName"))
+    GlueTableSource.add_member(:table_name, Shapes::ShapeRef.new(shape: GlueTableSourceTableNameString, required: true, location_name: "tableName"))
+    GlueTableSource.struct_class = Types::GlueTableSource
 
     IcebergCompactionSettings.add_member(:target_file_size_mb, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "targetFileSizeMB"))
     IcebergCompactionSettings.add_member(:strategy, Shapes::ShapeRef.new(shape: IcebergCompactionStrategy, location_name: "strategy"))
@@ -540,6 +650,20 @@ module Aws::S3Tables
     ListTableBucketsResponse.add_member(:continuation_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "continuationToken"))
     ListTableBucketsResponse.struct_class = Types::ListTableBucketsResponse
 
+    ListTableMigrationsRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, location: "querystring", location_name: "tableBucketARN"))
+    ListTableMigrationsRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, location: "querystring", location_name: "namespace"))
+    ListTableMigrationsRequest.add_member(:name, Shapes::ShapeRef.new(shape: TableName, location: "querystring", location_name: "name"))
+    ListTableMigrationsRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, location: "querystring", location_name: "tableARN"))
+    ListTableMigrationsRequest.add_member(:state, Shapes::ShapeRef.new(shape: MigrationState, location: "querystring", location_name: "state"))
+    ListTableMigrationsRequest.add_member(:has_valid_plan, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "hasValidPlan"))
+    ListTableMigrationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListTableMigrationsLimit, location: "querystring", location_name: "maxResults"))
+    ListTableMigrationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location: "querystring", location_name: "nextToken"))
+    ListTableMigrationsRequest.struct_class = Types::ListTableMigrationsRequest
+
+    ListTableMigrationsResponse.add_member(:migrations, Shapes::ShapeRef.new(shape: MigrationSummaryList, required: true, location_name: "migrations"))
+    ListTableMigrationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+    ListTableMigrationsResponse.struct_class = Types::ListTableMigrationsResponse
+
     ListTablesRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
     ListTablesRequest.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, location: "querystring", location_name: "namespace"))
     ListTablesRequest.add_member(:prefix, Shapes::ShapeRef.new(shape: ListTablesRequestPrefixString, location: "querystring", location_name: "prefix"))
@@ -557,11 +681,71 @@ module Aws::S3Tables
     ListTagsForResourceResponse.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     ListTagsForResourceResponse.struct_class = Types::ListTagsForResourceResponse
 
+    MaintenanceSettings.add_member(:iceberg_compaction, Shapes::ShapeRef.new(shape: MigrationCompactionSettings, location_name: "icebergCompaction"))
+    MaintenanceSettings.add_member(:iceberg_snapshot_management, Shapes::ShapeRef.new(shape: MigrationSnapshotManagementSettings, location_name: "icebergSnapshotManagement"))
+    MaintenanceSettings.struct_class = Types::MaintenanceSettings
+
     ManagedTableInformation.add_member(:replication_information, Shapes::ShapeRef.new(shape: ReplicationInformation, location_name: "replicationInformation"))
     ManagedTableInformation.struct_class = Types::ManagedTableInformation
 
     MethodNotAllowedException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     MethodNotAllowedException.struct_class = Types::MethodNotAllowedException
+
+    MigrationCompactionSettings.add_member(:target_file_size_mb, Shapes::ShapeRef.new(shape: MigrationTargetFileSizeMB, location_name: "targetFileSizeMB"))
+    MigrationCompactionSettings.add_member(:strategy, Shapes::ShapeRef.new(shape: IcebergCompactionStrategy, location_name: "strategy"))
+    MigrationCompactionSettings.struct_class = Types::MigrationCompactionSettings
+
+    MigrationFailureReason.add_member(:code, Shapes::ShapeRef.new(shape: MigrationFailureCode, required: true, location_name: "code"))
+    MigrationFailureReason.add_member(:detail, Shapes::ShapeRef.new(shape: MigrationFailureDetail, location_name: "detail"))
+    MigrationFailureReason.struct_class = Types::MigrationFailureReason
+
+    MigrationOutputConfiguration.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketARN, required: true, location_name: "bucket"))
+    MigrationOutputConfiguration.add_member(:prefixes, Shapes::ShapeRef.new(shape: MigrationReportPrefixes, location_name: "prefixes"))
+    MigrationOutputConfiguration.struct_class = Types::MigrationOutputConfiguration
+
+    MigrationOutputOverview.add_member(:bucket, Shapes::ShapeRef.new(shape: S3BucketARN, required: true, location_name: "bucket"))
+    MigrationOutputOverview.add_member(:table_compatibility_report, Shapes::ShapeRef.new(shape: ReportOverview, required: true, location_name: "tableCompatibilityReport"))
+    MigrationOutputOverview.add_member(:object_compatibility_report, Shapes::ShapeRef.new(shape: ReportOverview, required: true, location_name: "objectCompatibilityReport"))
+    MigrationOutputOverview.add_member(:object_migration_report, Shapes::ShapeRef.new(shape: ReportOverview, required: true, location_name: "objectMigrationReport"))
+    MigrationOutputOverview.struct_class = Types::MigrationOutputOverview
+
+    MigrationPolicies.add_member(:unmatched_source_fields_policy, Shapes::ShapeRef.new(shape: UnmatchedSourceFieldsPolicy, location_name: "unmatchedSourceFieldsPolicy"))
+    MigrationPolicies.add_member(:incompatible_values_policy, Shapes::ShapeRef.new(shape: IncompatibleValuesPolicy, location_name: "incompatibleValuesPolicy"))
+    MigrationPolicies.struct_class = Types::MigrationPolicies
+
+    MigrationReportPrefixes.add_member(:table_compatibility_report, Shapes::ShapeRef.new(shape: MigrationReportPrefix, location_name: "tableCompatibilityReport"))
+    MigrationReportPrefixes.add_member(:object_compatibility_report, Shapes::ShapeRef.new(shape: MigrationReportPrefix, location_name: "objectCompatibilityReport"))
+    MigrationReportPrefixes.add_member(:object_migration_report, Shapes::ShapeRef.new(shape: MigrationReportPrefix, location_name: "objectMigrationReport"))
+    MigrationReportPrefixes.struct_class = Types::MigrationReportPrefixes
+
+    MigrationSnapshotManagementSettings.add_member(:min_snapshots_to_keep, Shapes::ShapeRef.new(shape: MigrationMinSnapshotsToKeep, location_name: "minSnapshotsToKeep"))
+    MigrationSnapshotManagementSettings.add_member(:max_snapshot_age_hours, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "maxSnapshotAgeHours"))
+    MigrationSnapshotManagementSettings.struct_class = Types::MigrationSnapshotManagementSettings
+
+    MigrationStats.add_member(:objects_migrated, Shapes::ShapeRef.new(shape: Long, location_name: "objectsMigrated"))
+    MigrationStats.add_member(:objects_failed_migration, Shapes::ShapeRef.new(shape: Long, location_name: "objectsFailedMigration"))
+    MigrationStats.add_member(:objects_pending_migration, Shapes::ShapeRef.new(shape: Long, location_name: "objectsPendingMigration"))
+    MigrationStats.struct_class = Types::MigrationStats
+
+    MigrationSummary.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, required: true, location_name: "migrationId"))
+    MigrationSummary.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location_name: "tableBucketARN"))
+    MigrationSummary.add_member(:namespace, Shapes::ShapeRef.new(shape: NamespaceName, required: true, location_name: "namespace"))
+    MigrationSummary.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, location_name: "tableARN"))
+    MigrationSummary.add_member(:name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "name"))
+    MigrationSummary.add_member(:type, Shapes::ShapeRef.new(shape: MigrationType, required: true, location_name: "type"))
+    MigrationSummary.add_member(:state, Shapes::ShapeRef.new(shape: MigrationState, required: true, location_name: "state"))
+    MigrationSummary.add_member(:has_valid_plan, Shapes::ShapeRef.new(shape: Boolean, location_name: "hasValidPlan"))
+    MigrationSummary.add_member(:created_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "createdAt"))
+    MigrationSummary.add_member(:state_updated_at, Shapes::ShapeRef.new(shape: SyntheticTimestamp_date_time, required: true, location_name: "stateUpdatedAt"))
+    MigrationSummary.struct_class = Types::MigrationSummary
+
+    MigrationSummaryList.member = Shapes::ShapeRef.new(shape: MigrationSummary)
+
+    MigrationTableProperties.add_member(:write_format, Shapes::ShapeRef.new(shape: DataFileFormat, location_name: "writeFormat"))
+    MigrationTableProperties.add_member(:iceberg_format_version, Shapes::ShapeRef.new(shape: Integer, location_name: "icebergFormatVersion"))
+    MigrationTableProperties.add_member(:compression_codec, Shapes::ShapeRef.new(shape: CompressionCodec, location_name: "compressionCodec"))
+    MigrationTableProperties.add_member(:dictionary_encoding, Shapes::ShapeRef.new(shape: Boolean, location_name: "dictionaryEncoding"))
+    MigrationTableProperties.struct_class = Types::MigrationTableProperties
 
     NamespaceList.member = Shapes::ShapeRef.new(shape: NamespaceName)
 
@@ -577,6 +761,11 @@ module Aws::S3Tables
 
     NotFoundException.add_member(:message, Shapes::ShapeRef.new(shape: ErrorMessage, location_name: "message"))
     NotFoundException.struct_class = Types::NotFoundException
+
+    PlanningStats.add_member(:objects_scanned, Shapes::ShapeRef.new(shape: Long, location_name: "objectsScanned"))
+    PlanningStats.add_member(:objects_planned, Shapes::ShapeRef.new(shape: Long, location_name: "objectsPlanned"))
+    PlanningStats.add_member(:partition_count, Shapes::ShapeRef.new(shape: Long, location_name: "partitionCount"))
+    PlanningStats.struct_class = Types::PlanningStats
 
     PutTableBucketEncryptionRequest.add_member(:table_bucket_arn, Shapes::ShapeRef.new(shape: TableBucketARN, required: true, location: "uri", location_name: "tableBucketARN"))
     PutTableBucketEncryptionRequest.add_member(:encryption_configuration, Shapes::ShapeRef.new(shape: EncryptionConfiguration, required: true, location_name: "encryptionConfiguration"))
@@ -658,6 +847,12 @@ module Aws::S3Tables
     ReplicationInformation.add_member(:source_table_arn, Shapes::ShapeRef.new(shape: TableARN, required: true, location_name: "sourceTableARN"))
     ReplicationInformation.struct_class = Types::ReplicationInformation
 
+    ReportOverview.add_member(:prefix, Shapes::ShapeRef.new(shape: MigrationReportPrefix, location_name: "prefix"))
+    ReportOverview.add_member(:key, Shapes::ShapeRef.new(shape: ReportObjectKey, location_name: "key"))
+    ReportOverview.add_member(:checksum_crc64nvme, Shapes::ShapeRef.new(shape: ChecksumCRC64NVME, location_name: "checksumCRC64NVME"))
+    ReportOverview.add_member(:invalid_findings, Shapes::ShapeRef.new(shape: FindingCategoryCounts, location_name: "invalidFindings"))
+    ReportOverview.struct_class = Types::ReportOverview
+
     SchemaField.add_member(:id, Shapes::ShapeRef.new(shape: Integer, location_name: "id"))
     SchemaField.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
     SchemaField.add_member(:type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "type"))
@@ -675,8 +870,37 @@ module Aws::S3Tables
 
     SchemaV2FieldList.member = Shapes::ShapeRef.new(shape: SchemaV2Field)
 
+    SourceConfiguration.add_member(:glue_table, Shapes::ShapeRef.new(shape: GlueTableSource, location_name: "glueTable"))
+    SourceConfiguration.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    SourceConfiguration.add_member_subclass(:glue_table, Types::SourceConfiguration::GlueTable)
+    SourceConfiguration.add_member_subclass(:unknown, Types::SourceConfiguration::Unknown)
+    SourceConfiguration.struct_class = Types::SourceConfiguration
+
+    StartTableMigrationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleARN"))
+    StartTableMigrationRequest.add_member(:destination_table, Shapes::ShapeRef.new(shape: DestinationTable, required: true, location_name: "destinationTable"))
+    StartTableMigrationRequest.add_member(:source_type, Shapes::ShapeRef.new(shape: MigrationSourceType, required: true, location_name: "sourceType"))
+    StartTableMigrationRequest.add_member(:source, Shapes::ShapeRef.new(shape: SourceConfiguration, required: true, location_name: "source"))
+    StartTableMigrationRequest.add_member(:data_migration, Shapes::ShapeRef.new(shape: DataMigrationSettings, location_name: "dataMigration"))
+    StartTableMigrationRequest.add_member(:review_migration_plan, Shapes::ShapeRef.new(shape: Boolean, location_name: "reviewMigrationPlan"))
+    StartTableMigrationRequest.add_member(:migration_output, Shapes::ShapeRef.new(shape: MigrationOutputConfiguration, required: true, location_name: "migrationOutput"))
+    StartTableMigrationRequest.struct_class = Types::StartTableMigrationRequest
+
+    StartTableMigrationResponse.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, required: true, location_name: "migrationId"))
+    StartTableMigrationResponse.add_member(:state, Shapes::ShapeRef.new(shape: MigrationState, required: true, location_name: "state"))
+    StartTableMigrationResponse.struct_class = Types::StartTableMigrationResponse
+
     StorageClassConfiguration.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, required: true, location_name: "storageClass"))
     StorageClassConfiguration.struct_class = Types::StorageClassConfiguration
+
+    SyncTableMigrationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "roleARN"))
+    SyncTableMigrationRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, required: true, location_name: "tableARN"))
+    SyncTableMigrationRequest.add_member(:review_migration_plan, Shapes::ShapeRef.new(shape: Boolean, location_name: "reviewMigrationPlan"))
+    SyncTableMigrationRequest.add_member(:migration_output, Shapes::ShapeRef.new(shape: MigrationOutputConfiguration, required: true, location_name: "migrationOutput"))
+    SyncTableMigrationRequest.struct_class = Types::SyncTableMigrationRequest
+
+    SyncTableMigrationResponse.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, required: true, location_name: "migrationId"))
+    SyncTableMigrationResponse.add_member(:state, Shapes::ShapeRef.new(shape: MigrationState, required: true, location_name: "state"))
+    SyncTableMigrationResponse.struct_class = Types::SyncTableMigrationResponse
 
     TableBucketMaintenanceConfiguration.key = Shapes::ShapeRef.new(shape: TableBucketMaintenanceType)
     TableBucketMaintenanceConfiguration.value = Shapes::ShapeRef.new(shape: TableBucketMaintenanceConfigurationValue)
@@ -810,6 +1034,17 @@ module Aws::S3Tables
     UpdateTableMetadataLocationResponse.add_member(:metadata_location, Shapes::ShapeRef.new(shape: MetadataLocation, required: true, location_name: "metadataLocation"))
     UpdateTableMetadataLocationResponse.struct_class = Types::UpdateTableMetadataLocationResponse
 
+    UpdateTableMigrationRequest.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, location: "querystring", location_name: "tableARN"))
+    UpdateTableMigrationRequest.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, location: "querystring", location_name: "migrationId"))
+    UpdateTableMigrationRequest.add_member(:requested_state, Shapes::ShapeRef.new(shape: MigrationRequestedState, required: true, location_name: "requestedState"))
+    UpdateTableMigrationRequest.add_member(:update_description, Shapes::ShapeRef.new(shape: UpdateTableMigrationRequestUpdateDescriptionString, location_name: "updateDescription"))
+    UpdateTableMigrationRequest.struct_class = Types::UpdateTableMigrationRequest
+
+    UpdateTableMigrationResponse.add_member(:migration_id, Shapes::ShapeRef.new(shape: MigrationId, required: true, location_name: "migrationId"))
+    UpdateTableMigrationResponse.add_member(:state, Shapes::ShapeRef.new(shape: MigrationState, required: true, location_name: "state"))
+    UpdateTableMigrationResponse.add_member(:table_arn, Shapes::ShapeRef.new(shape: TableARN, location_name: "tableARN"))
+    UpdateTableMigrationResponse.struct_class = Types::UpdateTableMigrationResponse
+
 
     # @api private
     API = Seahorse::Model::Api.new.tap do |api|
@@ -828,6 +1063,21 @@ module Aws::S3Tables
         "signingName" => "s3tables",
         "uid" => "s3tables-2018-05-10",
       }
+
+      api.add_operation(:complete_table_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CompleteTableMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/complete-table-migration"
+        o.input = Shapes::ShapeRef.new(shape: CompleteTableMigrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
 
       api.add_operation(:create_namespace, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateNamespace"
@@ -1185,6 +1435,20 @@ module Aws::S3Tables
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:get_table_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetTableMigration"
+        o.http_method = "GET"
+        o.http_request_uri = "/get-table-migration"
+        o.input = Shapes::ShapeRef.new(shape: GetTableMigrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: GetTableMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:get_table_policy, Seahorse::Model::Operation.new.tap do |o|
         o.name = "GetTablePolicy"
         o.http_method = "GET"
@@ -1308,6 +1572,26 @@ module Aws::S3Tables
           limit_key: "max_buckets",
           tokens: {
             "continuation_token" => "continuation_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_table_migrations, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListTableMigrations"
+        o.http_method = "GET"
+        o.http_request_uri = "/list-table-migrations"
+        o.input = Shapes::ShapeRef.new(shape: ListTableMigrationsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListTableMigrationsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
           }
         )
       end)
@@ -1502,6 +1786,36 @@ module Aws::S3Tables
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
       end)
 
+      api.add_operation(:start_table_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "StartTableMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/start-table-migration"
+        o.input = Shapes::ShapeRef.new(shape: StartTableMigrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: StartTableMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:sync_table_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "SyncTableMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/sync-table-migration"
+        o.input = Shapes::ShapeRef.new(shape: SyncTableMigrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: SyncTableMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
       api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
         o.name = "TagResource"
         o.http_method = "POST"
@@ -1539,6 +1853,21 @@ module Aws::S3Tables
         o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
         o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
         o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+      end)
+
+      api.add_operation(:update_table_migration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateTableMigration"
+        o.http_method = "POST"
+        o.http_request_uri = "/update-table-migration"
+        o.input = Shapes::ShapeRef.new(shape: UpdateTableMigrationRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateTableMigrationResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerErrorException)
+        o.errors << Shapes::ShapeRef.new(shape: ForbiddenException)
+        o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: BadRequestException)

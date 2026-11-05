@@ -12907,6 +12907,45 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Describes the service role configuration for your Amazon Quick Sight
+    # account.
+    #
+    # Call this operation in the Amazon Web Services Region where your
+    # Amazon Quick Sight account is registered (the home Region).
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account whose service role
+    #   configuration you want to describe.
+    #
+    # @return [Types::DescribeResourcePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::DescribeResourcePermissionsResponse#role_type #role_type} => String
+    #   * {Types::DescribeResourcePermissionsResponse#customer_managed_role_arn #customer_managed_role_arn} => String
+    #   * {Types::DescribeResourcePermissionsResponse#request_id #request_id} => String
+    #   * {Types::DescribeResourcePermissionsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.describe_resource_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_type #=> String, one of "QUICKSIGHT_MANAGED", "CUSTOMER_MANAGED"
+    #   resp.customer_managed_role_arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/DescribeResourcePermissions AWS API Documentation
+    #
+    # @overload describe_resource_permissions(params = {})
+    # @param [Hash] params ({})
+    def describe_resource_permissions(params = {}, options = {})
+      req = build_request(:describe_resource_permissions, params)
+      req.send_request(options)
+    end
+
     # Describes all custom permissions that are mapped to a role.
     #
     # @option params [required, String] :role
@@ -26289,6 +26328,87 @@ module Aws::QuickSight
       req.send_request(options)
     end
 
+    # Updates the service role configuration that Amazon Quick Sight uses to
+    # access resources in your Amazon Web Services account. To use this
+    # operation, you must have the `quicksight:UpdateResourcePermissions`
+    # and `iam:PassRole` permissions.
+    #
+    # Call this operation in the Amazon Web Services Region where your
+    # Amazon Quick Sight account is registered (the home Region). You can
+    # switch from a role managed by Amazon Quick Sight to a customer-managed
+    # role, or replace one customer-managed role with another. You can't
+    # use this operation to switch back to a role managed by Amazon Quick
+    # Sight.
+    #
+    # @option params [required, String] :aws_account_id
+    #   The ID of the Amazon Web Services account whose service role
+    #   configuration you want to update.
+    #
+    # @option params [required, String] :role_type
+    #   The type of service role that you want Amazon Quick Sight to use. The
+    #   only supported value for this operation is `CUSTOMER_MANAGED`.
+    #   Requests that specify `QUICKSIGHT_MANAGED` are rejected.
+    #
+    # @option params [required, String] :customer_managed_role_arn
+    #   The ARN of the customer-managed role that you want Amazon Quick Sight
+    #   to use. To use this operation, you must have the `iam:PassRole`
+    #   permission for the role.
+    #
+    #   Configure the role as follows:
+    #
+    #   * The role must belong to the Amazon Web Services account specified by
+    #     `AwsAccountId`.
+    #
+    #   * Configure the role trust policy to allow the Amazon Quick Sight
+    #     service principal to call `sts:AssumeRole`.
+    #
+    #   * Attach a permissions policy that allows access to the resources that
+    #     you want Amazon Quick Sight to use.
+    #
+    #   * To use features that rely on session tags, configure the role trust
+    #     policy to allow the Amazon Quick Sight service principal to call
+    #     `sts:TagSession`.
+    #
+    #   If the role doesn't exist or its trust policy doesn't allow
+    #   `sts:AssumeRole`, the request returns an `AccessDeniedException`.
+    #
+    #   When you call this operation, Amazon Quick Sight attempts to assume
+    #   the role with session tags and records whether the attempt succeeds.
+    #   If you later add or remove `sts:TagSession` from the trust policy,
+    #   call this operation again with the same role ARN to refresh the stored
+    #   capability.
+    #
+    # @return [Types::UpdateResourcePermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateResourcePermissionsResponse#role_type #role_type} => String
+    #   * {Types::UpdateResourcePermissionsResponse#customer_managed_role_arn #customer_managed_role_arn} => String
+    #   * {Types::UpdateResourcePermissionsResponse#request_id #request_id} => String
+    #   * {Types::UpdateResourcePermissionsResponse#status #status} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_resource_permissions({
+    #     aws_account_id: "AwsAccountId", # required
+    #     role_type: "QUICKSIGHT_MANAGED", # required, accepts QUICKSIGHT_MANAGED, CUSTOMER_MANAGED
+    #     customer_managed_role_arn: "RoleArn", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.role_type #=> String, one of "QUICKSIGHT_MANAGED", "CUSTOMER_MANAGED"
+    #   resp.customer_managed_role_arn #=> String
+    #   resp.request_id #=> String
+    #   resp.status #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/quicksight-2018-04-01/UpdateResourcePermissions AWS API Documentation
+    #
+    # @overload update_resource_permissions(params = {})
+    # @param [Hash] params ({})
+    def update_resource_permissions(params = {}, options = {})
+      req = build_request(:update_resource_permissions, params)
+      req.send_request(options)
+    end
+
     # Updates the custom permissions that are associated with a role.
     #
     # @option params [required, String] :custom_permissions_name
@@ -28048,7 +28168,7 @@ module Aws::QuickSight
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-quicksight'
-      context[:gem_version] = '1.206.0'
+      context[:gem_version] = '1.208.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

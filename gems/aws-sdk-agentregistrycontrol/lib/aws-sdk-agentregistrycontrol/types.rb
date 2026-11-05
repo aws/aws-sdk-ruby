@@ -594,8 +594,9 @@ module Aws::AgentRegistryControl
     # bearer tokens against an OpenID Connect identity provider.
     #
     # @!attribute [rw] discovery_url
-    #   The OpenID Connect discovery URL used to retrieve the identity
-    #   provider's metadata and signing keys.
+    #   The OpenID Connect discovery or OAuth 2.0 authorization server
+    #   metadata URL used to retrieve the identity provider's metadata and
+    #   signing keys.
     #   @return [String]
     #
     # @!attribute [rw] allowed_audience

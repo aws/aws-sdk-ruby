@@ -146,6 +146,17 @@ module Aws
                             ) -> _BatchWriteItemResponseSuccess
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchWriteItemResponseSuccess
 
+      interface _CancelBulkOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CancelBulkOperationOutput]
+        def bulk_operation_arn: () -> ::String
+        def bulk_operation_status: () -> ("IN_PROGRESS" | "COMPLETED" | "COMPLETED_WITH_ERRORS" | "CANCELLING" | "CANCELLED" | "FAILED")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#cancel_bulk_operation-instance_method
+      def cancel_bulk_operation: (
+                                   bulk_operation_arn: ::String
+                                 ) -> _CancelBulkOperationResponseSuccess
+                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CancelBulkOperationResponseSuccess
+
       interface _CreateBackupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateBackupOutput]
         def backup_details: () -> Types::BackupDetails
@@ -298,6 +309,16 @@ module Aws
                              backup_arn: ::String
                            ) -> _DescribeBackupResponseSuccess
                          | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBackupResponseSuccess
+
+      interface _DescribeBulkOperationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeBulkOperationOutput]
+        def bulk_operation_description: () -> Types::BulkOperationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#describe_bulk_operation-instance_method
+      def describe_bulk_operation: (
+                                     bulk_operation_arn: ::String
+                                   ) -> _DescribeBulkOperationResponseSuccess
+                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeBulkOperationResponseSuccess
 
       interface _DescribeContinuousBackupsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeContinuousBackupsOutput]
@@ -634,6 +655,18 @@ module Aws
                         ) -> _ListBackupsResponseSuccess
                       | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBackupsResponseSuccess
 
+      interface _ListBulkOperationsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListBulkOperationsOutput]
+        def bulk_operations_summary_list: () -> ::Array[Types::BulkOperationSummary]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#list_bulk_operations-instance_method
+      def list_bulk_operations: (
+                                  ?max_results: ::Integer,
+                                  ?next_token: ::String
+                                ) -> _ListBulkOperationsResponseSuccess
+                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListBulkOperationsResponseSuccess
+
       interface _ListContributorInsightsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListContributorInsightsOutput]
         def contributor_insights_summaries: () -> ::Array[Types::ContributorInsightsSummary]
@@ -893,6 +926,34 @@ module Aws
                             top_k: ::Integer
                           ) -> _SearchVectorsResponseSuccess
                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _SearchVectorsResponseSuccess
+
+      interface _StartBulkPutItemsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::StartBulkPutItemsOutput]
+        def bulk_operation_description: () -> Types::BulkOperationDescription
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#start_bulk_put_items-instance_method
+      def start_bulk_put_items: (
+                                  ?client_token: ::String,
+                                  input_s3_configuration: {
+                                    s3_bucket_owner: ::String?,
+                                    s3_bucket: ::String,
+                                    s3_key_prefix: ::String?,
+                                    input_format: ("DYNAMODB_JSON" | "ION"),
+                                    input_compression_type: ("GZIP" | "ZSTD" | "NONE")?
+                                  },
+                                  output_s3_configuration: {
+                                    s3_bucket_owner: ::String?,
+                                    s3_bucket: ::String?,
+                                    s3_key_prefix: ::String?,
+                                    s3_sse_algorithm: ("AES256" | "KMS")?,
+                                    s3_sse_kms_key_id: ::String?,
+                                    output_type: Array[("ERROR" | "CONDITION_CHECK_FAILURE")]
+                                  },
+                                  table_name: ::String,
+                                  ?max_write_request_units: ::Integer,
+                                  ?performance_tier: ("STANDARD" | "ACCELERATED")
+                                ) -> _StartBulkPutItemsResponseSuccess
+                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _StartBulkPutItemsResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#tag_resource-instance_method
       def tag_resource: (
@@ -1322,7 +1383,11 @@ module Aws
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTimeToLiveResponseSuccess
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/DynamoDB/Client.html#wait_until-instance_method
-      def wait_until: (:contributor_insights_enabled waiter_name, 
+      def wait_until: (:bulk_operation_completed waiter_name, 
+                    bulk_operation_arn: ::String
+                  ) -> Client::_DescribeBulkOperationResponseSuccess
+                    | (:bulk_operation_completed waiter_name, Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> Client::_DescribeBulkOperationResponseSuccess
+                    | (:contributor_insights_enabled waiter_name, 
                     table_name: ::String,
                     ?index_name: ::String
                   ) -> Client::_DescribeContributorInsightsResponseSuccess

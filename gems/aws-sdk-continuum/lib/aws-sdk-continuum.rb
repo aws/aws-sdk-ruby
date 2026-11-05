@@ -55,7 +55,7 @@ module Aws::Continuum
   autoload :EndpointProvider, 'aws-sdk-continuum/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-continuum/endpoints'
 
-  GEM_VERSION = '1.2.0'
+  GEM_VERSION = '1.3.0'
 
 end
 

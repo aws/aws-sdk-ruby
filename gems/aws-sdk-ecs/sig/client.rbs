@@ -1348,6 +1348,9 @@ module Aws
                                                  name: ::String?,
                                                  host: {
                                                    source_path: ::String?
+                                                 }?,
+                                                 log_driver_volume_configuration: {
+                                                   driver: ("json-file" | "syslog" | "journald" | "gelf" | "fluentd" | "awslogs" | "splunk" | "awsfirelens")
                                                  }?
                                                }
                                              ],

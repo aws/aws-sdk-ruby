@@ -163,6 +163,12 @@ module Aws::MWAAServerless
     #   VPC-only resources like RDS databases or private endpoints.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set for tasks in the workflow. If you
+    #   don't specify this parameter, the workflow has no environment
+    #   variables.
+    #   @return [Types::Environment]
+    #
     # @!attribute [rw] tags
     #   A map of tags to assign to the workflow resource. Tags are key-value
     #   pairs that are used for resource organization and cost allocation.
@@ -185,6 +191,7 @@ module Aws::MWAAServerless
       :logging_configuration,
       :engine_version,
       :network_configuration,
+      :environment,
       :tags,
       :trigger_mode)
       SENSITIVE = []
@@ -270,7 +277,7 @@ module Aws::MWAAServerless
     #
     # @!attribute [rw] version_id
     #   Optional. The version ID of the workflow definition file in Amazon
-    #   S3. If not specified, the latest version is used.
+    #   S3. If you don't specify a version, we use the latest version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/DefinitionS3Location AWS API Documentation
@@ -344,6 +351,42 @@ module Aws::MWAAServerless
       :type,
       :kms_key_id)
       SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains the environment variables that tasks in a workflow use during
+    # execution.
+    #
+    # @!attribute [rw] variables
+    #   A map of environment variable names to values. Your workflow tasks
+    #   use these variables while they run. You can specify up to 50
+    #   environment variables. Each name must be between 1 and 128
+    #   characters, start with a letter, and contain only letters, numbers,
+    #   and underscores. Each value can be up to 255 characters.
+    #
+    #   Names that start with `AWS_` or `AIRFLOW__` are reserved. You can
+    #   use the following Apache Airflow secrets backend settings, which are
+    #   exceptions:
+    #
+    #   * `AIRFLOW__WORKERS__SECRETS_BACKEND` – The secrets backend class
+    #     that workers use.
+    #
+    #   * `AIRFLOW__WORKERS__SECRETS_BACKEND_KWARGS` – The keyword arguments
+    #     for the secrets backend, as a JSON string.
+    #
+    #   * `AIRFLOW__WORKERS__SECRETS_BACKEND_KWARG__*` – Names with this
+    #     prefix, for additional secrets backend configuration.
+    #
+    #   If you set `EncryptionConfiguration` to use a customer managed AWS
+    #   KMS key, we encrypt the environment variables with that key.
+    #   Otherwise, we store them with default encryption at rest.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/Environment AWS API Documentation
+    #
+    class Environment < Struct.new(
+      :variables)
+      SENSITIVE = [:variables]
       include Aws::Structure
     end
 
@@ -557,6 +600,11 @@ module Aws::MWAAServerless
     #   The network configuration for the workflow execution environment.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] environment
+    #   The environment variables that tasks in the workflow use during
+    #   execution.
+    #   @return [Types::Environment]
+    #
     # @!attribute [rw] trigger_mode
     #   The trigger mode for the workflow execution.
     #   @return [String]
@@ -584,6 +632,7 @@ module Aws::MWAAServerless
       :schedule_configuration,
       :role_arn,
       :network_configuration,
+      :environment,
       :trigger_mode,
       :workflow_definition)
       SENSITIVE = []
@@ -1005,8 +1054,8 @@ module Aws::MWAAServerless
     #   @return [String]
     #
     # @!attribute [rw] version_id
-    #   The version ID of the object in Amazon S3. If not specified, the
-    #   latest version is used.
+    #   Specifies the version ID of the object in Amazon S3. If you don't
+    #   specify a version, we use the latest version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/S3Location AWS API Documentation
@@ -1107,8 +1156,8 @@ module Aws::MWAAServerless
     #   @return [Hash<String,Hash,Array,String,Numeric,Boolean>]
     #
     # @!attribute [rw] workflow_version
-    #   Optional. The specific version of the workflow to execute. If not
-    #   specified, the latest version is used.
+    #   Optional. The specific version of the workflow to execute. If you
+    #   don't specify a version, we use the latest version.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mwaa-serverless-2024-07-26/StartWorkflowRunRequest AWS API Documentation
@@ -1360,6 +1409,15 @@ module Aws::MWAAServerless
     #   environment.
     #   @return [Types::NetworkConfiguration]
     #
+    # @!attribute [rw] environment
+    #   The environment variables to set for tasks in the workflow.
+    #
+    #   The variables that you specify replace all existing environment
+    #   variables for the workflow. If you don't specify this parameter,
+    #   the workflow has no environment variables. To keep existing
+    #   environment variables, include them in the request.
+    #   @return [Types::Environment]
+    #
     # @!attribute [rw] trigger_mode
     #   The trigger mode for the workflow execution.
     #   @return [String]
@@ -1375,6 +1433,7 @@ module Aws::MWAAServerless
       :logging_configuration,
       :engine_version,
       :network_configuration,
+      :environment,
       :trigger_mode)
       SENSITIVE = []
       include Aws::Structure

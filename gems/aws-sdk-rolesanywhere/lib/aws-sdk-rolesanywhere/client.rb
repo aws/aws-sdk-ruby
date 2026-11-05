@@ -599,6 +599,10 @@ module Aws::RolesAnywhere
     # @option params [Boolean] :enabled
     #   Specifies whether the trust anchor is enabled.
     #
+    # @option params [Boolean] :crl_dp_revocation_enabled
+    #   Specifies whether the trust anchor checks certificate revocation
+    #   status against CRL distribution points.
+    #
     # @option params [Array<Types::Tag>] :tags
     #   The tags to attach to the trust anchor.
     #
@@ -621,6 +625,7 @@ module Aws::RolesAnywhere
     #       },
     #     },
     #     enabled: false,
+    #     crl_dp_revocation_enabled: false,
     #     tags: [
     #       {
     #         key: "TagKey", # required
@@ -646,6 +651,7 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.crl_dp_revocation_enabled #=> Boolean
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
@@ -875,6 +881,7 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.crl_dp_revocation_enabled #=> Boolean
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
@@ -1006,6 +1013,7 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.crl_dp_revocation_enabled #=> Boolean
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
@@ -1138,6 +1146,7 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.crl_dp_revocation_enabled #=> Boolean
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
@@ -1319,6 +1328,7 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.crl_dp_revocation_enabled #=> Boolean
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
@@ -1627,6 +1637,7 @@ module Aws::RolesAnywhere
     #   resp.trust_anchors[0].source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchors[0].source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchors[0].enabled #=> Boolean
+    #   resp.trust_anchors[0].crl_dp_revocation_enabled #=> Boolean
     #   resp.trust_anchors[0].created_at #=> Time
     #   resp.trust_anchors[0].updated_at #=> Time
     #   resp.trust_anchors[0].notification_settings #=> Array
@@ -1840,6 +1851,7 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.crl_dp_revocation_enabled #=> Boolean
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
@@ -1942,6 +1954,7 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.crl_dp_revocation_enabled #=> Boolean
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
@@ -2173,6 +2186,10 @@ module Aws::RolesAnywhere
     # @option params [Types::Source] :source
     #   The trust anchor type and its related certificate data.
     #
+    # @option params [Boolean] :crl_dp_revocation_enabled
+    #   Specifies whether the trust anchor checks certificate revocation
+    #   status against CRL distribution points.
+    #
     # @return [Types::TrustAnchorDetailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::TrustAnchorDetailResponse#trust_anchor #trust_anchor} => Types::TrustAnchorDetail
@@ -2189,6 +2206,7 @@ module Aws::RolesAnywhere
     #         acm_pca_arn: "String",
     #       },
     #     },
+    #     crl_dp_revocation_enabled: false,
     #   })
     #
     # @example Response structure
@@ -2200,6 +2218,7 @@ module Aws::RolesAnywhere
     #   resp.trust_anchor.source.source_data.x509_certificate_data #=> String
     #   resp.trust_anchor.source.source_data.acm_pca_arn #=> String
     #   resp.trust_anchor.enabled #=> Boolean
+    #   resp.trust_anchor.crl_dp_revocation_enabled #=> Boolean
     #   resp.trust_anchor.created_at #=> Time
     #   resp.trust_anchor.updated_at #=> Time
     #   resp.trust_anchor.notification_settings #=> Array
@@ -2236,7 +2255,7 @@ module Aws::RolesAnywhere
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-rolesanywhere'
-      context[:gem_version] = '1.62.0'
+      context[:gem_version] = '1.63.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -2015,9 +2015,9 @@ module Aws::RDS
     #
     # @!attribute [rw] copy_option_group
     #   Specifies whether to copy the DB option group associated with the
-    #   source DB snapshot to the target Amazon Web Services account and
-    #   associate with the target DB snapshot. The associated option group
-    #   can be copied only with cross-account snapshot copy calls.
+    #   source DB snapshot to the target Amazon Web Services account or
+    #   Amazon Web Services Region and associate it with the target DB
+    #   snapshot.
     #   @return [Boolean]
     #
     # @!attribute [rw] snapshot_availability_zone
@@ -2025,6 +2025,23 @@ module Aws::RDS
     #   snapshot. This value is valid only for snapshots that RDS stores on
     #   a Dedicated Local Zone.
     #   @return [String]
+    #
+    # @!attribute [rw] tag_specifications
+    #   Tags to assign to the copied option group. By default, the copied
+    #   option group isn't tagged.
+    #
+    #   Valid Values:
+    #
+    #   * `og` - The copied option group.
+    #
+    #   ^
+    #
+    #   Constraints:
+    #
+    #   * Can only be specified when `CopyOptionGroup` is `true`
+    #
+    #   ^
+    #   @return [Array<Types::TagSpecification>]
     #
     # @!attribute [rw] source_region
     #   The source region of the snapshot. This is only needed when the
@@ -2045,6 +2062,7 @@ module Aws::RDS
       :snapshot_target,
       :copy_option_group,
       :snapshot_availability_zone,
+      :tag_specifications,
       :source_region)
       SENSITIVE = [:pre_signed_url]
       include Aws::Structure
@@ -23167,6 +23185,11 @@ module Aws::RDS
     #   Indicates when the option group was copied.
     #   @return [Time]
     #
+    # @!attribute [rw] source_region
+    #   Specifies the Amazon Web Services Region for the option group from
+    #   which this option group is copied.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroup AWS API Documentation
     #
     class OptionGroup < Struct.new(
@@ -23180,7 +23203,8 @@ module Aws::RDS
       :option_group_arn,
       :source_option_group,
       :source_account_id,
-      :copy_timestamp)
+      :copy_timestamp,
+      :source_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -23304,6 +23328,11 @@ module Aws::RDS
     #   Services accounts.
     #   @return [Boolean]
     #
+    # @!attribute [rw] copyable_cross_region
+    #   Indicates whether the option can be copied across Amazon Web
+    #   Services Regions.
+    #   @return [Boolean]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/rds-2014-10-31/OptionGroupOption AWS API Documentation
     #
     class OptionGroupOption < Struct.new(
@@ -23323,7 +23352,8 @@ module Aws::RDS
       :supports_option_version_downgrade,
       :option_group_option_settings,
       :option_group_option_versions,
-      :copyable_cross_account)
+      :copyable_cross_account,
+      :copyable_cross_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -31507,8 +31537,9 @@ module Aws::RDS
     end
 
     # The tags to apply to resources when creating or modifying a DB
-    # instance or DB cluster. When you specify a tag, you must specify the
-    # resource type to tag, otherwise the request will fail.
+    # instance or DB cluster, or when copying a DB instance snapshot. When
+    # you specify a tag, you must specify the resource type to tag,
+    # otherwise the request will fail.
     #
     # @!attribute [rw] resource_type
     #   The type of resource to tag on creation.
@@ -31518,6 +31549,8 @@ module Aws::RDS
     #   * `auto-backup` - The DB instance's automated backup.
     #
     #   * `cluster-auto-backup` - The DB cluster's automated backup.
+    #
+    #   * `og` - The copied option group. Valid only for `CopyDBSnapshot`.
     #   @return [String]
     #
     # @!attribute [rw] tags

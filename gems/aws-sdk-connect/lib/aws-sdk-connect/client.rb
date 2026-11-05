@@ -8454,6 +8454,9 @@ module Aws::Connect
     #   resp.contact.contact_evaluations["EvaluationId"].export_location #=> String
     #   resp.contact.task_template_info.arn #=> String
     #   resp.contact.task_template_info.name #=> String
+    #   resp.contact.cases #=> Array
+    #   resp.contact.cases[0].case_id #=> String
+    #   resp.contact.cases[0].case_reference_number #=> String
     #   resp.contact.contact_details.name #=> String
     #   resp.contact.contact_details.description #=> String
     #   resp.contact.outbound_strategy.type #=> String, one of "AGENT_FIRST"
@@ -32487,7 +32490,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.293.0'
+      context[:gem_version] = '1.294.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

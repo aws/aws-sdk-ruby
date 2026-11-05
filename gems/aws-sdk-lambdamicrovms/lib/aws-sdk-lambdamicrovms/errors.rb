@@ -84,6 +84,10 @@ module Aws::LambdaMicrovms
       def resource_type
         @data[:resource_type]
       end
+
+      def retryable?
+        true
+      end
     end
 
     class InsufficientCapacityException < ServiceError

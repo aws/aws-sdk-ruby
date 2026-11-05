@@ -117,6 +117,7 @@ module Aws
                                    }?
                                  },
                                  ?enabled: bool,
+                                 ?crl_dp_revocation_enabled: bool,
                                  ?tags: Array[
                                    {
                                      key: ::String,
@@ -470,7 +471,8 @@ module Aws
                                      x509_certificate_data: ::String?,
                                      acm_pca_arn: ::String?
                                    }?
-                                 }
+                                 },
+                                 ?crl_dp_revocation_enabled: bool
                                ) -> _UpdateTrustAnchorResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateTrustAnchorResponseSuccess
     end

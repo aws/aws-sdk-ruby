@@ -18,6 +18,11 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class CompleteTableMigrationRequest
+      attr_accessor table_arn: ::String
+      SENSITIVE: []
+    end
+
     class ConflictException
       attr_accessor message: ::String
       SENSITIVE: []
@@ -63,6 +68,18 @@ module Aws::S3Tables
     class CreateTableResponse
       attr_accessor table_arn: ::String
       attr_accessor version_token: ::String
+      SENSITIVE: []
+    end
+
+    class DataMigrationOverview
+      attr_accessor maintenance_settings: Types::MaintenanceSettings
+      attr_accessor migration_policies: Types::MigrationPolicies
+      SENSITIVE: []
+    end
+
+    class DataMigrationSettings
+      attr_accessor maintenance_settings: Types::MaintenanceSettings
+      attr_accessor migration_policies: Types::MigrationPolicies
       SENSITIVE: []
     end
 
@@ -116,6 +133,19 @@ module Aws::S3Tables
       attr_accessor namespace: ::String
       attr_accessor name: ::String
       attr_accessor version_token: ::String
+      SENSITIVE: []
+    end
+
+    class DestinationTable
+      attr_accessor table_bucket_arn: ::String
+      attr_accessor namespace: ::String
+      attr_accessor name: ::String
+      attr_accessor encryption_configuration: Types::EncryptionConfiguration
+      attr_accessor storage_class_configuration: Types::StorageClassConfiguration
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor properties: Types::MigrationTableProperties
+      attr_accessor schema: Types::IcebergSchemaV2
+      attr_accessor iceberg_sort_order: Types::IcebergSortOrder
       SENSITIVE: []
     end
 
@@ -276,6 +306,35 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class GetTableMigrationRequest
+      attr_accessor migration_id: ::String
+      attr_accessor table_arn: ::String
+      SENSITIVE: []
+    end
+
+    class GetTableMigrationResponse
+      attr_accessor migration_id: ::String
+      attr_accessor table_bucket_arn: ::String
+      attr_accessor namespace: ::String
+      attr_accessor table_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("start" | "sync")
+      attr_accessor state: ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
+      attr_accessor role_arn: ::String
+      attr_accessor review_migration_plan: bool
+      attr_accessor has_valid_plan: bool
+      attr_accessor created_at: ::Time
+      attr_accessor state_updated_at: ::Time
+      attr_accessor failure_reason: Types::MigrationFailureReason
+      attr_accessor planning_stats: Types::PlanningStats
+      attr_accessor migration_stats: Types::MigrationStats
+      attr_accessor source_type: ("glueTable")
+      attr_accessor source: Types::SourceConfiguration
+      attr_accessor data_migration: Types::DataMigrationOverview
+      attr_accessor migration_output: Types::MigrationOutputOverview
+      SENSITIVE: []
+    end
+
     class GetTablePolicyRequest
       attr_accessor table_bucket_arn: ::String
       attr_accessor namespace: ::String
@@ -371,6 +430,13 @@ module Aws::S3Tables
 
     class GetTableStorageClassResponse
       attr_accessor storage_class_configuration: Types::StorageClassConfiguration
+      SENSITIVE: []
+    end
+
+    class GlueTableSource
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name: ::String
       SENSITIVE: []
     end
 
@@ -481,6 +547,24 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class ListTableMigrationsRequest
+      attr_accessor table_bucket_arn: ::String
+      attr_accessor namespace: ::String
+      attr_accessor name: ::String
+      attr_accessor table_arn: ::String
+      attr_accessor state: ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
+      attr_accessor has_valid_plan: bool
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListTableMigrationsResponse
+      attr_accessor migrations: ::Array[Types::MigrationSummary]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class ListTablesRequest
       attr_accessor table_bucket_arn: ::String
       attr_accessor namespace: ::String
@@ -506,6 +590,12 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class MaintenanceSettings
+      attr_accessor iceberg_compaction: Types::MigrationCompactionSettings
+      attr_accessor iceberg_snapshot_management: Types::MigrationSnapshotManagementSettings
+      SENSITIVE: []
+    end
+
     class ManagedTableInformation
       attr_accessor replication_information: Types::ReplicationInformation
       SENSITIVE: []
@@ -513,6 +603,80 @@ module Aws::S3Tables
 
     class MethodNotAllowedException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class MigrationCompactionSettings
+      attr_accessor target_file_size_mb: ::Integer
+      attr_accessor strategy: ("auto" | "binpack" | "sort" | "z-order")
+      SENSITIVE: []
+    end
+
+    class MigrationFailureReason
+      attr_accessor code: ("rolePermissions" | "sourcePermissions" | "destinationPermissions" | "resourceNotFound" | "sourceNotSupported" | "objectMigrationReport" | "objectCompatibilityReport" | "tableCompatibilityReport" | "internalError" | "reportBucketNotSupported")
+      attr_accessor detail: ::String
+      SENSITIVE: []
+    end
+
+    class MigrationOutputConfiguration
+      attr_accessor bucket: ::String
+      attr_accessor prefixes: Types::MigrationReportPrefixes
+      SENSITIVE: []
+    end
+
+    class MigrationOutputOverview
+      attr_accessor bucket: ::String
+      attr_accessor table_compatibility_report: Types::ReportOverview
+      attr_accessor object_compatibility_report: Types::ReportOverview
+      attr_accessor object_migration_report: Types::ReportOverview
+      SENSITIVE: []
+    end
+
+    class MigrationPolicies
+      attr_accessor unmatched_source_fields_policy: ("fail" | "drop")
+      attr_accessor incompatible_values_policy: ("fail" | "setNull")
+      SENSITIVE: []
+    end
+
+    class MigrationReportPrefixes
+      attr_accessor table_compatibility_report: ::String
+      attr_accessor object_compatibility_report: ::String
+      attr_accessor object_migration_report: ::String
+      SENSITIVE: []
+    end
+
+    class MigrationSnapshotManagementSettings
+      attr_accessor min_snapshots_to_keep: ::Integer
+      attr_accessor max_snapshot_age_hours: ::Integer
+      SENSITIVE: []
+    end
+
+    class MigrationStats
+      attr_accessor objects_migrated: ::Integer
+      attr_accessor objects_failed_migration: ::Integer
+      attr_accessor objects_pending_migration: ::Integer
+      SENSITIVE: []
+    end
+
+    class MigrationSummary
+      attr_accessor migration_id: ::String
+      attr_accessor table_bucket_arn: ::String
+      attr_accessor namespace: ::String
+      attr_accessor table_arn: ::String
+      attr_accessor name: ::String
+      attr_accessor type: ("start" | "sync")
+      attr_accessor state: ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
+      attr_accessor has_valid_plan: bool
+      attr_accessor created_at: ::Time
+      attr_accessor state_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class MigrationTableProperties
+      attr_accessor write_format: ("parquet")
+      attr_accessor iceberg_format_version: ::Integer
+      attr_accessor compression_codec: ("zstd" | "snappy" | "gzip" | "uncompressed")
+      attr_accessor dictionary_encoding: bool
       SENSITIVE: []
     end
 
@@ -528,6 +692,13 @@ module Aws::S3Tables
 
     class NotFoundException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PlanningStats
+      attr_accessor objects_scanned: ::Integer
+      attr_accessor objects_planned: ::Integer
+      attr_accessor partition_count: ::Integer
       SENSITIVE: []
     end
 
@@ -639,6 +810,14 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class ReportOverview
+      attr_accessor prefix: ::String
+      attr_accessor key: ::String
+      attr_accessor checksum_crc64nvme: ::String
+      attr_accessor invalid_findings: ::Hash[("access" | "metadata" | "data" | "internal"), ::Integer]
+      SENSITIVE: []
+    end
+
     class SchemaField
       attr_accessor id: ::Integer
       attr_accessor name: ::String
@@ -656,8 +835,50 @@ module Aws::S3Tables
       SENSITIVE: []
     end
 
+    class SourceConfiguration
+      attr_accessor glue_table: Types::GlueTableSource
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class GlueTable < SourceConfiguration
+      end
+      class Unknown < SourceConfiguration
+      end
+    end
+
+    class StartTableMigrationRequest
+      attr_accessor role_arn: ::String
+      attr_accessor destination_table: Types::DestinationTable
+      attr_accessor source_type: ("glueTable")
+      attr_accessor source: Types::SourceConfiguration
+      attr_accessor data_migration: Types::DataMigrationSettings
+      attr_accessor review_migration_plan: bool
+      attr_accessor migration_output: Types::MigrationOutputConfiguration
+      SENSITIVE: []
+    end
+
+    class StartTableMigrationResponse
+      attr_accessor migration_id: ::String
+      attr_accessor state: ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
+      SENSITIVE: []
+    end
+
     class StorageClassConfiguration
       attr_accessor storage_class: ("STANDARD" | "INTELLIGENT_TIERING")
+      SENSITIVE: []
+    end
+
+    class SyncTableMigrationRequest
+      attr_accessor role_arn: ::String
+      attr_accessor table_arn: ::String
+      attr_accessor review_migration_plan: bool
+      attr_accessor migration_output: Types::MigrationOutputConfiguration
+      SENSITIVE: []
+    end
+
+    class SyncTableMigrationResponse
+      attr_accessor migration_id: ::String
+      attr_accessor state: ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
       SENSITIVE: []
     end
 
@@ -817,6 +1038,21 @@ module Aws::S3Tables
       attr_accessor namespace: ::Array[::String]
       attr_accessor version_token: ::String
       attr_accessor metadata_location: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTableMigrationRequest
+      attr_accessor table_arn: ::String
+      attr_accessor migration_id: ::String
+      attr_accessor requested_state: ("queued" | "cancelled")
+      attr_accessor update_description: ::String
+      SENSITIVE: []
+    end
+
+    class UpdateTableMigrationResponse
+      attr_accessor migration_id: ::String
+      attr_accessor state: ("new" | "planning" | "pendingReview" | "queued" | "migrating" | "succeeded" | "failed" | "cancelling" | "cancelled")
+      attr_accessor table_arn: ::String
       SENSITIVE: []
     end
   end

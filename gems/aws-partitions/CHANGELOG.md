@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.1302.0 (2026-11-05)
+------------------
+
+* Feature - Added support for enumerating regions for `Aws::AccountAccessRuntime`.
+
+1.1301.0 (2026-11-04)
+------------------
+
+* Feature - Updated the partitions source data that determines the AWS service regions and endpoints.
+
 1.1300.0 (2026-10-30)
 ------------------
 

@@ -1105,6 +1105,7 @@ module Aws::LookoutEquipment
         o.name = "CreateDataset"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateDatasetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1119,6 +1120,7 @@ module Aws::LookoutEquipment
         o.name = "CreateInferenceScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateInferenceSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateInferenceSchedulerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1134,6 +1136,7 @@ module Aws::LookoutEquipment
         o.name = "CreateLabel"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateLabelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLabelResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1149,6 +1152,7 @@ module Aws::LookoutEquipment
         o.name = "CreateLabelGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateLabelGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateLabelGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1163,6 +1167,7 @@ module Aws::LookoutEquipment
         o.name = "CreateModel"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateModelRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateModelResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1178,6 +1183,7 @@ module Aws::LookoutEquipment
         o.name = "CreateRetrainingScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: CreateRetrainingSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: CreateRetrainingSchedulerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1192,6 +1198,7 @@ module Aws::LookoutEquipment
         o.name = "DeleteDataset"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1206,6 +1213,7 @@ module Aws::LookoutEquipment
         o.name = "DeleteInferenceScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteInferenceSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1220,6 +1228,7 @@ module Aws::LookoutEquipment
         o.name = "DeleteLabel"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteLabelRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1234,6 +1243,7 @@ module Aws::LookoutEquipment
         o.name = "DeleteLabelGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteLabelGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1248,6 +1258,7 @@ module Aws::LookoutEquipment
         o.name = "DeleteModel"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteModelRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1262,6 +1273,7 @@ module Aws::LookoutEquipment
         o.name = "DeleteResourcePolicy"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
@@ -1276,6 +1288,7 @@ module Aws::LookoutEquipment
         o.name = "DeleteRetrainingScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DeleteRetrainingSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1290,6 +1303,7 @@ module Aws::LookoutEquipment
         o.name = "DescribeDataIngestionJob"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeDataIngestionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDataIngestionJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1303,6 +1317,7 @@ module Aws::LookoutEquipment
         o.name = "DescribeDataset"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeDatasetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1316,6 +1331,7 @@ module Aws::LookoutEquipment
         o.name = "DescribeInferenceScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeInferenceSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeInferenceSchedulerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1329,6 +1345,7 @@ module Aws::LookoutEquipment
         o.name = "DescribeLabel"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeLabelRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLabelResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1342,6 +1359,7 @@ module Aws::LookoutEquipment
         o.name = "DescribeLabelGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeLabelGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeLabelGroupResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1355,6 +1373,7 @@ module Aws::LookoutEquipment
         o.name = "DescribeModel"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeModelRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeModelResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1368,6 +1387,7 @@ module Aws::LookoutEquipment
         o.name = "DescribeModelVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeModelVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeModelVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1381,6 +1401,7 @@ module Aws::LookoutEquipment
         o.name = "DescribeResourcePolicy"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeResourcePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1394,6 +1415,7 @@ module Aws::LookoutEquipment
         o.name = "DescribeRetrainingScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: DescribeRetrainingSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeRetrainingSchedulerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1407,6 +1429,7 @@ module Aws::LookoutEquipment
         o.name = "ImportDataset"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ImportDatasetRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportDatasetResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1422,6 +1445,7 @@ module Aws::LookoutEquipment
         o.name = "ImportModelVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ImportModelVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: ImportModelVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1437,6 +1461,7 @@ module Aws::LookoutEquipment
         o.name = "ListDataIngestionJobs"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListDataIngestionJobsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDataIngestionJobsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1455,6 +1480,7 @@ module Aws::LookoutEquipment
         o.name = "ListDatasets"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListDatasetsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListDatasetsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1473,6 +1499,7 @@ module Aws::LookoutEquipment
         o.name = "ListInferenceEvents"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListInferenceEventsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInferenceEventsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1492,6 +1519,7 @@ module Aws::LookoutEquipment
         o.name = "ListInferenceExecutions"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListInferenceExecutionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInferenceExecutionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1511,6 +1539,7 @@ module Aws::LookoutEquipment
         o.name = "ListInferenceSchedulers"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListInferenceSchedulersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListInferenceSchedulersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1529,6 +1558,7 @@ module Aws::LookoutEquipment
         o.name = "ListLabelGroups"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListLabelGroupsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLabelGroupsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1547,6 +1577,7 @@ module Aws::LookoutEquipment
         o.name = "ListLabels"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListLabelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListLabelsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1565,6 +1596,7 @@ module Aws::LookoutEquipment
         o.name = "ListModelVersions"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListModelVersionsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListModelVersionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1584,6 +1616,7 @@ module Aws::LookoutEquipment
         o.name = "ListModels"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListModelsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListModelsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1602,6 +1635,7 @@ module Aws::LookoutEquipment
         o.name = "ListRetrainingSchedulers"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListRetrainingSchedulersRequest)
         o.output = Shapes::ShapeRef.new(shape: ListRetrainingSchedulersResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1620,6 +1654,7 @@ module Aws::LookoutEquipment
         o.name = "ListSensorStatistics"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListSensorStatisticsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListSensorStatisticsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1639,6 +1674,7 @@ module Aws::LookoutEquipment
         o.name = "ListTagsForResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: ListTagsForResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: ListTagsForResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1652,6 +1688,7 @@ module Aws::LookoutEquipment
         o.name = "PutResourcePolicy"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: PutResourcePolicyRequest)
         o.output = Shapes::ShapeRef.new(shape: PutResourcePolicyResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1667,6 +1704,7 @@ module Aws::LookoutEquipment
         o.name = "StartDataIngestionJob"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartDataIngestionJobRequest)
         o.output = Shapes::ShapeRef.new(shape: StartDataIngestionJobResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1682,6 +1720,7 @@ module Aws::LookoutEquipment
         o.name = "StartInferenceScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartInferenceSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: StartInferenceSchedulerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1696,6 +1735,7 @@ module Aws::LookoutEquipment
         o.name = "StartRetrainingScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StartRetrainingSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: StartRetrainingSchedulerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1710,6 +1750,7 @@ module Aws::LookoutEquipment
         o.name = "StopInferenceScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StopInferenceSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: StopInferenceSchedulerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1724,6 +1765,7 @@ module Aws::LookoutEquipment
         o.name = "StopRetrainingScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: StopRetrainingSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: StopRetrainingSchedulerResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1738,6 +1780,7 @@ module Aws::LookoutEquipment
         o.name = "TagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1752,6 +1795,7 @@ module Aws::LookoutEquipment
         o.name = "UntagResource"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
         o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1765,6 +1809,7 @@ module Aws::LookoutEquipment
         o.name = "UpdateActiveModelVersion"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateActiveModelVersionRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateActiveModelVersionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
@@ -1779,6 +1824,7 @@ module Aws::LookoutEquipment
         o.name = "UpdateInferenceScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateInferenceSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1793,6 +1839,7 @@ module Aws::LookoutEquipment
         o.name = "UpdateLabelGroup"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateLabelGroupRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1807,6 +1854,7 @@ module Aws::LookoutEquipment
         o.name = "UpdateModel"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateModelRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
@@ -1821,6 +1869,7 @@ module Aws::LookoutEquipment
         o.name = "UpdateRetrainingScheduler"
         o.http_method = "POST"
         o.http_request_uri = "/"
+        o.deprecated = true
         o.input = Shapes::ShapeRef.new(shape: UpdateRetrainingSchedulerRequest)
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)

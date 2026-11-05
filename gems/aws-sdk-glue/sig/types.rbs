@@ -202,6 +202,14 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class AutoUpgradeMetadata
+      attr_accessor target_version: ::String
+      attr_accessor source_version: ::String
+      attr_accessor status: ("OBSERVING" | "UPGRADING" | "UPGRADE_SUCCEEDED" | "UPGRADE_FAILED" | "STOPPED" | "WAITING_FOR_CONSENT")
+      attr_accessor analysis_id: ::String
+      SENSITIVE: []
+    end
+
     class BackfillError
       attr_accessor code: ("ENCRYPTED_PARTITION_ERROR" | "INTERNAL_ERROR" | "INVALID_PARTITION_TYPE_DATA_ERROR" | "MISSING_PARTITION_VALUE_ERROR" | "UNSUPPORTED_PARTITION_CHARACTER_ERROR")
       attr_accessor partitions: ::Array[Types::PartitionValueList]
@@ -3888,6 +3896,25 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class GetJobUpgradeAnalysisRequest
+      attr_accessor analysis_id: ::String
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
+    class GetJobUpgradeAnalysisResponse
+      attr_accessor job_name: ::String
+      attr_accessor analysis_id: ::String
+      attr_accessor status: ("OBSERVING" | "WAITING_FOR_CONSENT" | "UPGRADING" | "SUCCEEDED" | "FAILED" | "TIMEOUT" | "STOPPED")
+      attr_accessor source_version: ::String
+      attr_accessor target_version: ::String
+      attr_accessor analysis_type: ("AUTO_UPGRADE")
+      attr_accessor auto_upgrade_evaluation_summary: ::String
+      attr_accessor error_message: ::String
+      attr_accessor auto_upgrade_eligibility_summary: ::String
+      SENSITIVE: []
+    end
+
     class GetJobsRequest
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
@@ -5051,6 +5078,7 @@ module Aws::Glue
       attr_accessor source_control_details: Types::SourceControlDetails
       attr_accessor maintenance_window: ::String
       attr_accessor profile_name: ::String
+      attr_accessor auto_upgrade_metadata: Types::AutoUpgradeMetadata
       SENSITIVE: [:code_gen_configuration_nodes]
     end
 
@@ -7468,6 +7496,19 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class StartJobUpgradeAnalysisRequest
+      attr_accessor job_name: ::String
+      attr_accessor analysis_id: ::String
+      attr_accessor upgrade_consent: ("APPROVE" | "DECLINE")
+      SENSITIVE: []
+    end
+
+    class StartJobUpgradeAnalysisResponse
+      attr_accessor analysis_id: ::String
+      attr_accessor job_name: ::String
+      SENSITIVE: []
+    end
+
     class StartMLEvaluationTaskRunRequest
       attr_accessor transform_id: ::String
       SENSITIVE: []
@@ -7629,6 +7670,15 @@ module Aws::Glue
     end
 
     class StopCrawlerScheduleResponse < Aws::EmptyStructure
+    end
+
+    class StopJobUpgradeAnalysisRequest
+      attr_accessor job_name: ::String
+      attr_accessor analysis_id: ::String
+      SENSITIVE: []
+    end
+
+    class StopJobUpgradeAnalysisResponse < Aws::EmptyStructure
     end
 
     class StopMaterializedViewRefreshTaskRunRequest

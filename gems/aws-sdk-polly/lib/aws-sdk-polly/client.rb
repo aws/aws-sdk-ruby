@@ -898,11 +898,65 @@ module Aws::Polly
       req.send_request(options)
     end
 
+    # Lists the tags for an Amazon Polly resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) that identifies the resource for which
+    #   to list the tags. Currently, the only supported resource is an Amazon
+    #   Polly lexicon.
+    #
+    # @return [Types::ListTagsForResourceOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListTagsForResourceOutput#tags #tags} => Hash&lt;String,String&gt;
+    #
+    #
+    # @example Example: To list the tags on a lexicon
+    #
+    #   # The following example lists the tags associated with a pronunciation lexicon.
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "arn:aws:polly:us-east-1:111122223333:lexicon/example", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     tags: {
+    #       "Environment" => "Production", 
+    #       "Project" => "Narration", 
+    #     }, 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_tags_for_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.tags #=> Hash
+    #   resp.tags["TagKey"] #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/ListTagsForResource AWS API Documentation
+    #
+    # @overload list_tags_for_resource(params = {})
+    # @param [Hash] params ({})
+    def list_tags_for_resource(params = {}, options = {})
+      req = build_request(:list_tags_for_resource, params)
+      req.send_request(options)
+    end
+
     # Stores a pronunciation lexicon in an Amazon Web Services Region. If a
     # lexicon with the same name already exists in the region, it is
     # overwritten by the new lexicon. Lexicon operations have eventual
     # consistency, therefore, it might take some time before the lexicon is
     # available to the SynthesizeSpeech operation.
+    #
+    # Overwriting a lexicon keeps its existing tags. You can specify tags
+    # only when you create a lexicon. If you specify tags for a lexicon that
+    # already exists, the request fails with a `ValidationException`. To
+    # change the tags of an existing lexicon, use `TagResource` and
+    # `UntagResource`.
     #
     # For more information, see [Managing Lexicons][1].
     #
@@ -911,12 +965,20 @@ module Aws::Polly
     # [1]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
     #
     # @option params [required, String] :name
-    #   Name of the lexicon. The name must follow the regular express format
-    #   \[0-9A-Za-z\]\{1,20}. That is, the name is a case-sensitive
+    #   Name of the lexicon. The name must follow the regular expression
+    #   format \[0-9A-Za-z\]\{1,20}. That is, the name is a case-sensitive
     #   alphanumeric string up to 20 characters long.
     #
     # @option params [required, String] :content
     #   Content of the PLS lexicon as string data.
+    #
+    # @option params [Hash<String,String>] :tags
+    #   The metadata that you apply to the lexicon to help you categorize and
+    #   organize it. Each tag consists of a key and an optional value, both of
+    #   which you define. Tag keys can have a maximum character length of 128
+    #   characters, and tag values can have a maximum length of 256
+    #   characters. You can't replace the tags of an existing lexicon by
+    #   overwriting it with PutLexicon.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -939,6 +1001,9 @@ module Aws::Polly
     #   resp = client.put_lexicon({
     #     name: "LexiconName", # required
     #     content: "LexiconContent", # required
+    #     tags: {
+    #       "TagKey" => "TagValue",
+    #     },
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/PutLexicon AWS API Documentation
@@ -1238,6 +1303,101 @@ module Aws::Polly
       req.send_request(options, &block)
     end
 
+    # Adds specified tags to a resource with the specified ARN. Existing
+    # tags on a resource are not changed if they are not specified in the
+    # request parameters. If you specify a tag key that already exists on
+    # the resource, the value in the request replaces the existing value.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource to which to add tags.
+    #   Currently, the only supported resource is an Amazon Polly lexicon.
+    #
+    # @option params [required, Hash<String,String>] :tags
+    #   The tags to add to the resource, as key-value pairs. Tag keys can have
+    #   a maximum character length of 128 characters, and tag values can have
+    #   a maximum length of 256 characters.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To add tags to a lexicon
+    #
+    #   # The following example adds the specified tags to a pronunciation lexicon.
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "arn:aws:polly:us-east-1:111122223333:lexicon/example", 
+    #     tags: {
+    #       "Environment" => "Production", 
+    #       "Project" => "Narration", 
+    #     }, 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.tag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tags: { # required
+    #       "TagKey" => "TagValue",
+    #     },
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/TagResource AWS API Documentation
+    #
+    # @overload tag_resource(params = {})
+    # @param [Hash] params ({})
+    def tag_resource(params = {}, options = {})
+      req = build_request(:tag_resource, params)
+      req.send_request(options)
+    end
+
+    # Deletes specified tags from a resource.
+    #
+    # @option params [required, String] :resource_arn
+    #   The Amazon Resource Name (ARN) of the resource from which to remove
+    #   tags. Currently, the only supported resource is an Amazon Polly
+    #   lexicon.
+    #
+    # @option params [required, Array<String>] :tag_keys
+    #   The keys of the tags to be removed.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    #
+    # @example Example: To remove tags from a lexicon
+    #
+    #   # The following example removes the tags with the specified keys from a pronunciation lexicon.
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "arn:aws:polly:us-east-1:111122223333:lexicon/example", 
+    #     tag_keys: [
+    #       "Environment", 
+    #     ], 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.untag_resource({
+    #     resource_arn: "AmazonResourceName", # required
+    #     tag_keys: ["TagKey"], # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/polly-2016-06-10/UntagResource AWS API Documentation
+    #
+    # @overload untag_resource(params = {})
+    # @param [Hash] params ({})
+    def untag_resource(params = {}, options = {})
+      req = build_request(:untag_resource, params)
+      req.send_request(options)
+    end
+
     # @!endgroup
 
     # @param params ({})
@@ -1256,7 +1416,7 @@ module Aws::Polly
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-polly'
-      context[:gem_version] = '1.134.0'
+      context[:gem_version] = '1.135.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

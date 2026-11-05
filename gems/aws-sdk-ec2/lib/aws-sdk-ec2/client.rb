@@ -55133,11 +55133,11 @@ module Aws::EC2
     #
     # @example Response structure
     #
-    #   resp.aggregate_score #=> String, one of "high", "medium", "low"
+    #   resp.aggregate_score #=> String, one of "high", "medium", "low", "unsupported"
     #   resp.capacity_manager_supportability_scores #=> Array
     #   resp.capacity_manager_supportability_scores[0].instance_type #=> String
     #   resp.capacity_manager_supportability_scores[0].availability_zone_id #=> String
-    #   resp.capacity_manager_supportability_scores[0].score #=> String, one of "high", "medium", "low"
+    #   resp.capacity_manager_supportability_scores[0].score #=> String, one of "high", "medium", "low", "unsupported"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ec2-2016-11-15/GetCapacityManagerSupportabilityScores AWS API Documentation
     #
@@ -78632,7 +78632,7 @@ module Aws::EC2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ec2'
-      context[:gem_version] = '1.663.0'
+      context[:gem_version] = '1.664.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

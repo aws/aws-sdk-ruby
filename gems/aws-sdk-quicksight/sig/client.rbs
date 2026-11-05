@@ -2406,6 +2406,19 @@ module Aws
                                      ) -> _DescribeRefreshScheduleResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeRefreshScheduleResponseSuccess
 
+      interface _DescribeResourcePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DescribeResourcePermissionsResponse]
+        def role_type: () -> ("QUICKSIGHT_MANAGED" | "CUSTOMER_MANAGED")
+        def customer_managed_role_arn: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#describe_resource_permissions-instance_method
+      def describe_resource_permissions: (
+                                           aws_account_id: ::String
+                                         ) -> _DescribeResourcePermissionsResponseSuccess
+                                       | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeResourcePermissionsResponseSuccess
+
       interface _DescribeRoleCustomPermissionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DescribeRoleCustomPermissionResponse]
         def custom_permissions_name: () -> ::String
@@ -5361,6 +5374,21 @@ module Aws
                                      schedule: Params::refresh_schedule
                                    ) -> _UpdateRefreshScheduleResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateRefreshScheduleResponseSuccess
+
+      interface _UpdateResourcePermissionsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateResourcePermissionsResponse]
+        def role_type: () -> ("QUICKSIGHT_MANAGED" | "CUSTOMER_MANAGED")
+        def customer_managed_role_arn: () -> ::String
+        def request_id: () -> ::String
+        def status: () -> ::Integer
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/QuickSight/Client.html#update_resource_permissions-instance_method
+      def update_resource_permissions: (
+                                         aws_account_id: ::String,
+                                         role_type: ("QUICKSIGHT_MANAGED" | "CUSTOMER_MANAGED"),
+                                         customer_managed_role_arn: ::String
+                                       ) -> _UpdateResourcePermissionsResponseSuccess
+                                     | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateResourcePermissionsResponseSuccess
 
       interface _UpdateRoleCustomPermissionResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateRoleCustomPermissionResponse]

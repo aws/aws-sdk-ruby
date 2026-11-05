@@ -1335,6 +1335,105 @@ module Aws::WAFV2
       include Aws::Structure
     end
 
+    # A per-network configuration for a connected account, specifying the
+    # blockchain network and the price per request. Unlike `PaymentNetwork`,
+    # you do not provide a wallet address; the receiving address is managed
+    # for the connected account.
+    #
+    # @!attribute [rw] chain
+    #   The blockchain network for receiving payments through the connected
+    #   account. Test networks are not supported for connected accounts.
+    #
+    #   Valid values:
+    #
+    #   * `BASE` - Base mainnet.
+    #
+    #   * `SOLANA` - Solana mainnet.
+    #   @return [String]
+    #
+    # @!attribute [rw] prices
+    #   The price configuration for this network. Currently supports a
+    #   single price entry in USDC.
+    #   @return [Array<Types::ConnectedAccountPrice>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ConnectedAccountChainConfig AWS API Documentation
+    #
+    class ConnectedAccountChainConfig < Struct.new(
+      :chain,
+      :prices)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # A connected account configuration for AI bot monetization. Specifies
+    # the connected account that payments settle to and the per-network
+    # pricing. Settlement through a connected account is an alternative to
+    # the self-managed wallets in `CryptoConfig`; wallet addresses are
+    # managed for the connected account rather than configured by you. If
+    # the referenced connected account is not active or not enabled for
+    # crypto settlement, the `CreateWebACL`, `UpdateWebACL`,
+    # `CreateRuleGroup`, or `UpdateRuleGroup` request that includes it is
+    # rejected. Specifically, a request that references the account is
+    # rejected with `WAFInvalidOperationException` if the account or its
+    # crypto settlement capability isn't active,
+    # `WAFNonexistentItemException` if the ARN no longer exists,
+    # `AccessDeniedException` if you don't have
+    # `payments:GetConnectedAccount`, or `WAFInvalidParameterException` if
+    # the ARN is invalid or the partition is unsupported. Connected accounts
+    # are available only in the commercial Amazon Web Services partition.
+    #
+    # @!attribute [rw] connected_account_arn
+    #   The Amazon Resource Name (ARN) of the connected account that
+    #   payments settle to. You obtain this ARN from Payment preferences
+    #   &gt; Connected accounts in the Amazon Web Services Billing and Cost
+    #   Management console. For more information, see [Managing connected
+    #   accounts][1]. The connected account must be active and enabled for
+    #   crypto settlement; otherwise the request is rejected. To use a
+    #   connected account, you must have the `payments:GetConnectedAccount`
+    #   permission on this ARN.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-connected-accounts.html
+    #   @return [String]
+    #
+    # @!attribute [rw] payment_networks
+    #   The per-network configurations for the connected account. You can
+    #   specify 1 to 2 networks. Each entry specifies a blockchain network
+    #   and the price for each request.
+    #   @return [Array<Types::ConnectedAccountChainConfig>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ConnectedAccountConfig AWS API Documentation
+    #
+    class ConnectedAccountConfig < Struct.new(
+      :connected_account_arn,
+      :payment_networks)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The price per request for a connected account payment network,
+    # specifying the amount and cryptocurrency.
+    #
+    # @!attribute [rw] amount
+    #   The price per request as a decimal string in the specified currency.
+    #   Valid values range from 0.01 to 999999.99 USDC, with up to two
+    #   decimal places. Sub-cent amounts are not supported.
+    #   @return [String]
+    #
+    # @!attribute [rw] currency
+    #   The cryptocurrency for payment. Currently only `USDC` is supported.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/ConnectedAccountPrice AWS API Documentation
+    #
+    class ConnectedAccountPrice < Struct.new(
+      :amount,
+      :currency)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # The filter to use to identify the subset of cookies to inspect in a
     # web request.
     #
@@ -7126,7 +7225,9 @@ module Aws::WAFV2
     end
 
     # The monetization configuration for a web ACL or rule group. Specifies
-    # the cryptocurrency payment networks and currency mode for AI bot
+    # the payment settlement options (self-managed crypto wallets in
+    # `CryptoConfig`, a connected account in `ConnectedAccountConfigs`, or
+    # both) and the currency mode for artificial intelligence (AI) bot
     # monetization. You must provide this configuration when any rule in the
     # web ACL or rule group uses the `Monetize` action.
     #
@@ -7135,18 +7236,36 @@ module Aws::WAFV2
     #   networks and wallet addresses where you receive payments.
     #   @return [Types::CryptoConfig]
     #
+    # @!attribute [rw] connected_account_configs
+    #   The connected account configurations for settling AI bot payments
+    #   through a connected account with a supported third-party payment
+    #   provider (Stripe), as an alternative to the self-managed wallets in
+    #   `CryptoConfig`. You can provide `CryptoConfig`,
+    #   `ConnectedAccountConfigs`, or both; however, a given blockchain
+    #   network (chain) can be used by only one of them. Currently supports
+    #   exactly one connected account.
+    #   @return [Array<Types::ConnectedAccountConfig>]
+    #
     # @!attribute [rw] currency_mode
-    #   Specifies whether the configuration uses real or test currency. Set
-    #   to `REAL` to settle payments in USDC on production blockchain
-    #   networks (Base, Solana). Set to `TEST` to settle on testnet networks
-    #   (Base Sepolia, Solana Devnet) with tokens that have no monetary
-    #   value. If not specified, defaults to `REAL`.
+    #   Specifies whether the configuration uses real or test currency. If
+    #   not specified, defaults to `REAL`. Connected account configurations
+    #   support production settlement only; `TEST` is not supported when
+    #   `ConnectedAccountConfigs` is present.
+    #
+    #   Valid values:
+    #
+    #   * `REAL` - Settle payments in USDC on production blockchain networks
+    #     (Base, Solana).
+    #
+    #   * `TEST` - Settle on testnet networks (Base Sepolia, Solana Devnet)
+    #     with tokens that have no monetary value.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/wafv2-2019-07-29/MonetizationConfig AWS API Documentation
     #
     class MonetizationConfig < Struct.new(
       :crypto_config,
+      :connected_account_configs,
       :currency_mode)
       SENSITIVE = []
       include Aws::Structure
@@ -12087,7 +12206,7 @@ module Aws::WAFV2
     # @!attribute [rw] monetization_config
     #   The monetization configuration for the web ACL. Required when any
     #   rule in the web ACL uses the `Monetize` action. Specifies the
-    #   cryptocurrency payment networks and currency mode for AI bot
+    #   payment settlement options and currency mode for AI bot
     #   monetization.
     #   @return [Types::MonetizationConfig]
     #

@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+1.291.0 (2026-11-05)
+------------------
+
+* Feature - AWS Glue Spark ETL jobs can now auto-upgrade to the latest version. Set GlueVersion to Auto, then track progress with the AutoVersionStatus field in GetJob. Use StartJobUpgradeAnalysis to approve or decline an upgrade, GetJobUpgradeAnalysis to view details, and StopJobUpgradeAnalysis to stop it.
+
+1.290.0 (2026-11-04)
+------------------
+
+* Feature - Code Generated Changes, see `./build_tools` or `aws-sdk-core`'s CHANGELOG.md for details.
+
 1.289.0 (2026-10-29)
 ------------------
 

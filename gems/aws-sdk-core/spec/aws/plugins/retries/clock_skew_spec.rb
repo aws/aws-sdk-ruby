@@ -10,18 +10,17 @@ module Aws
       # @param endpoint [URI, String] the endpoint the request points at
       # @param server_time [String, nil] the timestamp returned by the server
       def build_context(endpoint, server_time)
-        response = double('response', headers: { 'date' => server_time })
-        request  = double('request', endpoint: endpoint)
-
-        double('context', http_response: response, http_request: request)
+        build_context_with_headers(endpoint, 'date' => server_time)
       end
 
-      # Builds a context whose response carries arbitrary headers (e.g. 'age').
-      def build_context_with_headers(endpoint, headers)
+      # Builds a context whose response carries arbitrary headers (e.g. 'age')
+      # and, optionally, the time the response headers were received.
+      def build_context_with_headers(endpoint, headers, received_at = nil)
         response = double('response', headers: headers)
         request  = double('request', endpoint: endpoint)
+        metadata = { response_received_at: received_at }
 
-        double('context', http_response: response, http_request: request)
+        double('context', http_response: response, http_request: request, metadata: metadata)
       end
 
       subject { Retries::ClockSkew.new }
@@ -391,20 +390,28 @@ module Aws
         end
       end
 
-      describe 'candidate skew (midpoint + guards)' do
+      describe 'response headers arrival time' do
+        let(:t) { Time.utc(2026, 1, 1) }
+
+        it 'trusts headers received within the duration limit even when the body finishes later' do
+          allow(Time).to receive(:now).and_return(t + 901)
+          ctx = build_context_with_headers(endpoint, { 'date' => (t + 4499).httpdate }, t + 899)
+
+          subject.update_clock_correction(ctx, t)
+
+          expect(subject.clock_correction(endpoint)).to eq(3600)
+        end
+
+        it 'uses headers arrival to decide whether skew exceeds the retry threshold' do
+          allow(Time).to receive(:now).and_return(t + 1000)
+          ctx = build_context_with_headers(endpoint, { 'date' => (t + 241).httpdate }, t + 2)
+
+          expect(subject.clock_skewed?(ctx, t)).to be(false)
+        end
+      end
+
+      describe 'candidate skew (guards)' do
         describe '#update_clock_correction with a send time' do
-          it 'uses the midpoint formula to discount network transit' do
-            sent_at = Time.now.utc
-            # server generated its Date 100s ahead of the client, response takes 10s
-            server_time = (sent_at + 100).httpdate
-            ctx = build_context_with_headers(endpoint, 'date' => server_time)
-            allow(Time).to receive(:now).and_return(sent_at.getlocal + 10)
-
-            subject.update_clock_correction(ctx, sent_at)
-            # midpoint = sent_at + 5s, so skew ~= 100 - 5 = 95s
-            expect(subject.clock_correction(endpoint)).to be_within(1).of(95)
-          end
-
           it 'discards the candidate when elapsed exceeds the max trusted duration' do
             sent_at = Time.now.utc
             server_time = (sent_at + 100).httpdate
@@ -461,8 +468,8 @@ module Aws
           end
         end
 
-        describe 'legacy fallback (no send time)' do
-          it 'computes skew as server_time - now' do
+        describe 'no headers received time recorded' do
+          it 'falls back to server_time - now' do
             server_time = (Time.now.utc + 1000).to_s
             ctx = build_context_with_headers(endpoint, 'date' => server_time)
             subject.update_clock_correction(ctx)

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.63.0 (2026-11-04)
+------------------
+
+* Feature - Adds the crlDpRevocationEnabled field to enable automatic revocation checking using CRL distribution points in X.509 certificates.
+
 1.62.0 (2026-10-29)
 ------------------
 

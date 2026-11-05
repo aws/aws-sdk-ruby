@@ -6321,6 +6321,52 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class GetSoftwareResourcesV2Request
+      attr_accessor package_name: ::String
+      attr_accessor package_type: ::String
+      attr_accessor package_version: ::String
+      attr_accessor filters: Types::SoftwareFilters
+      attr_accessor scopes: Types::SoftwareScopes
+      attr_accessor sort_criteria: ::Array[Types::SortCriterion]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSoftwareResourcesV2Response
+      attr_accessor software_resources: ::Array[Types::SoftwareResourceResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class GetSoftwareStatisticsV2Request
+      attr_accessor group_by_rules: ::Array[Types::SoftwareGroupByRule]
+      attr_accessor scopes: Types::SoftwareScopes
+      attr_accessor sort_order: ("asc" | "desc")
+      attr_accessor max_statistic_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSoftwareStatisticsV2Response
+      attr_accessor group_by_results: ::Array[Types::GroupByResult]
+      SENSITIVE: []
+    end
+
+    class GetSoftwareV2Request
+      attr_accessor filters: Types::SoftwareFilters
+      attr_accessor scopes: Types::SoftwareScopes
+      attr_accessor sort_criteria: ::Array[Types::SortCriterion]
+      attr_accessor next_token: ::String
+      attr_accessor max_results: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetSoftwareV2Response
+      attr_accessor software: ::Array[Types::SoftwareResult]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
     class GroupByResult
       attr_accessor group_by_field: ::String
       attr_accessor group_by_values: ::Array[Types::GroupByValue]
@@ -7954,6 +8000,25 @@ module Aws::SecurityHub
       SENSITIVE: []
     end
 
+    class SoftwareCompositeFilter
+      attr_accessor string_filters: ::Array[Types::SoftwareStringFilter]
+      attr_accessor nested_composite_filters: ::Array[Types::SoftwareCompositeFilter]
+      attr_accessor operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class SoftwareFilters
+      attr_accessor composite_filters: ::Array[Types::SoftwareCompositeFilter]
+      attr_accessor composite_operator: ("AND" | "OR")
+      SENSITIVE: []
+    end
+
+    class SoftwareGroupByRule
+      attr_accessor group_by_field: ("AccountId" | "PackageName" | "PackageVersion" | "PackageType" | "Region" | "ResourceRegion" | "ResourceType" | "ResourceId" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition")
+      attr_accessor filters: Types::SoftwareFilters
+      SENSITIVE: []
+    end
+
     class SoftwarePackage
       attr_accessor name: ::String
       attr_accessor version: ::String
@@ -7966,6 +8031,38 @@ module Aws::SecurityHub
       attr_accessor remediation: ::String
       attr_accessor source_layer_hash: ::String
       attr_accessor source_layer_arn: ::String
+      SENSITIVE: []
+    end
+
+    class SoftwareResourceResult
+      attr_accessor account_id: ::String
+      attr_accessor resource_type: ::String
+      attr_accessor region: ::String
+      attr_accessor resource_id: ::String
+      attr_accessor resource_provider: ::String
+      attr_accessor resource_owner_org_id: ::String
+      attr_accessor resource_owner_account_id: ::String
+      attr_accessor resource_cloud_partition: ::String
+      attr_accessor resource_region: ::String
+      SENSITIVE: []
+    end
+
+    class SoftwareResult
+      attr_accessor package_name: ::String
+      attr_accessor package_version: ::String
+      attr_accessor package_type: ::String
+      attr_accessor resource_count: ::Integer
+      SENSITIVE: []
+    end
+
+    class SoftwareScopes
+      attr_accessor aws_organizations: ::Array[Types::AwsOrganizationScope]
+      SENSITIVE: []
+    end
+
+    class SoftwareStringFilter
+      attr_accessor field_name: ("AccountId" | "PackageName" | "PackageVersion" | "PackageType" | "Region" | "ResourceRegion" | "ResourceType" | "ResourceId" | "ResourceProvider" | "ResourceOwnerAccountId" | "ResourceOwnerOrgId" | "ResourceCloudPartition")
+      attr_accessor filter: Types::StringFilter
       SENSITIVE: []
     end
 

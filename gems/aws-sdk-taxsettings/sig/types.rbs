@@ -89,6 +89,7 @@ module Aws::TaxSettings
       attr_accessor monaco_additional_info: Types::MonacoAdditionalInfo
       attr_accessor germany_additional_info: Types::GermanyAdditionalInfo
       attr_accessor mexico_additional_info: Types::MexicoAdditionalInfo
+      attr_accessor colombia_additional_info: Types::ColombiaAdditionalInfo
       SENSITIVE: []
     end
 
@@ -190,6 +191,13 @@ module Aws::TaxSettings
     class ChileAdditionalInfo
       attr_accessor document_type: ("Invoice" | "Receipt")
       attr_accessor business_activity: ::String
+      SENSITIVE: []
+    end
+
+    class ColombiaAdditionalInfo
+      attr_accessor responsibility_codes: ::Array[::String]
+      attr_accessor taxpayer_type_code: ::String
+      attr_accessor issue_date: ::String
       SENSITIVE: []
     end
 
@@ -543,13 +551,14 @@ module Aws::TaxSettings
 
     class TaxRegistration
       attr_accessor registration_id: ::String
-      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP")
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP" | "CUIT" | "CDI" | "RUT" | "NIE" | "CI")
       attr_accessor legal_name: ::String
       attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
       attr_accessor sector: ("Business" | "Individual" | "Government")
       attr_accessor tax_document_metadatas: ::Array[Types::TaxDocumentMetadata]
       attr_accessor certified_email_id: ::String
       attr_accessor additional_tax_information: Types::AdditionalInfoResponse
+      attr_accessor status_reason: Types::TaxRegistrationStatusReason
       attr_accessor legal_address: Types::Address
       SENSITIVE: []
     end
@@ -568,7 +577,7 @@ module Aws::TaxSettings
 
     class TaxRegistrationEntry
       attr_accessor registration_id: ::String
-      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP")
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP" | "CUIT" | "CDI" | "RUT" | "NIE" | "CI")
       attr_accessor legal_name: ::String
       attr_accessor legal_address: Types::Address
       attr_accessor sector: ("Business" | "Individual" | "Government")
@@ -578,15 +587,22 @@ module Aws::TaxSettings
       SENSITIVE: []
     end
 
+    class TaxRegistrationStatusReason
+      attr_accessor code: ::String
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
     class TaxRegistrationWithJurisdiction
       attr_accessor registration_id: ::String
-      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP")
+      attr_accessor registration_type: ("VAT" | "GST" | "CPF" | "CNPJ" | "SST" | "TIN" | "NRIC" | "PAN" | "NIP" | "CUIT" | "CDI" | "RUT" | "NIE" | "CI")
       attr_accessor legal_name: ::String
       attr_accessor status: ("Verified" | "Pending" | "Deleted" | "Rejected")
       attr_accessor sector: ("Business" | "Individual" | "Government")
       attr_accessor tax_document_metadatas: ::Array[Types::TaxDocumentMetadata]
       attr_accessor certified_email_id: ::String
       attr_accessor additional_tax_information: Types::AdditionalInfoResponse
+      attr_accessor status_reason: Types::TaxRegistrationStatusReason
       attr_accessor jurisdiction: Types::Jurisdiction
       SENSITIVE: []
     end
