@@ -26,7 +26,6 @@ gem 'json'
 gem 'nokogiri'
 gem 'oga'
 gem 'rexml'
-gem 'ruby-ll', '2.1.3' # temporary
 unless defined?(JRUBY_VERSION)
   gem 'libxml-ruby'
   gem 'oj'
