@@ -71,26 +71,22 @@ module Aws
 
       MAX_INTEGER = 18_446_744_073_709_551_616 # 2^64
 
-      # Frozen single-byte BINARY strings, so emitting a byte allocates nothing.
-      BYTE = Array.new(256) do |i|
-        (+"\x00").tap { |s| s.setbyte(0, i) }.force_encoding(Encoding::BINARY).freeze
-      end.freeze
-
+      # Appending an Integer to the BINARY buffer adds it as one byte, without allocating.
       def head(major_type, value)
         buf = @buffer
         if value < 24
-          buf << BYTE[major_type + value] # 8-bit unsigned
+          raise Error, "Value is too large to encode: #{value}" if value < 0
+
+          buf << (major_type + value) # 8-bit unsigned
         elsif value < 256
-          buf << BYTE[major_type + 24] << BYTE[value]
+          buf << (major_type + 24) << value
         elsif value < 65_536
-          buf << BYTE[major_type + 25] <<
-            BYTE[(value >> 8) & 0xFF] << BYTE[value & 0xFF]
+          buf << (major_type + 25) << (value >> 8) << (value & 0xFF)
         elsif value < 4_294_967_296
-          buf << BYTE[major_type + 26] <<
-            BYTE[(value >> 24) & 0xFF] << BYTE[(value >> 16) & 0xFF] <<
-            BYTE[(value >> 8) & 0xFF] << BYTE[value & 0xFF]
+          buf << (major_type + 26) << (value >> 24) << ((value >> 16) & 0xFF) <<
+            ((value >> 8) & 0xFF) << (value & 0xFF)
         elsif value < MAX_INTEGER
-          buf << BYTE[major_type + 27] << [value].pack('Q>')
+          buf << (major_type + 27) << [value].pack('Q>')
         else
           raise Error, "Value is too large to encode: #{value}"
         end
@@ -232,7 +228,24 @@ module Aws
       end
 
       def add_tag(tag)
-        head(MAJOR_TYPE_TAG, tag)
+        return head(MAJOR_TYPE_TAG, tag) if tag.is_a?(Integer)
+
+        # Tagged takes any tag object; #head only handles Integers.
+        @buffer <<
+          case tag
+          when 0...24
+            [MAJOR_TYPE_TAG + tag].pack('C') # 8-bit unsigned
+          when 0...256
+            [MAJOR_TYPE_TAG + 24, tag].pack('CC')
+          when 0...65_536
+            [MAJOR_TYPE_TAG + 25, tag].pack('Cn')
+          when 0...4_294_967_296
+            [MAJOR_TYPE_TAG + 26, tag].pack('CN')
+          when 0...MAX_INTEGER
+            [MAJOR_TYPE_TAG + 27, tag].pack('CQ>')
+          else
+            raise Error, "Value is too large to encode: #{tag}"
+          end
       end
 
       def add_time(value)

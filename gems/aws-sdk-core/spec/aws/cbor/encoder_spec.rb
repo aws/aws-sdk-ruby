@@ -103,6 +103,31 @@ module Aws
             Encoder.new.send(:head, 0x00, 18_446_744_073_709_551_617)
           end.to raise_error(Error)
         end
+
+        it 'raises on negative values instead of writing a malformed header' do
+          expect { Encoder.new.start_map(-1) }.to raise_error(Error, 'Value is too large to encode: -1')
+          expect { Encoder.new.start_array(-1) }.to raise_error(Error, 'Value is too large to encode: -1')
+          expect { Encoder.new.add(Tagged.new(-1, 1)) }.to raise_error(Error, 'Value is too large to encode: -1')
+        end
+
+        it 'writes each header size at its boundaries' do
+          [[23, '17'], [24, '1818'], [255, '18ff'], [256, '190100'], [65_535, '19ffff'],
+           [65_536, '1a00010000'], [4_294_967_295, '1affffffff'], [4_294_967_296, '1b0000000100000000']].each do |v, h|
+            expect(Encoder.new.add(v).bytes.unpack1('H*')).to eq(h)
+          end
+        end
+      end
+
+      describe 'non-Integer tags' do
+        it 'encodes them' do
+          expect(Encoder.new.add(Tagged.new(1.5, 0)).bytes.unpack1('H*')).to eq('c100')
+          expect(Encoder.new.add(Tagged.new(300.5, 0)).bytes.unpack1('H*')).to eq('d9012c00')
+        end
+
+        it 'raises Cbor::Error for unencodable tags' do
+          expect { Encoder.new.add(Tagged.new(nil, 0)) }.to raise_error(Error, 'Value is too large to encode: ')
+          expect { Encoder.new.add(Tagged.new('x', 0)) }.to raise_error(Error, 'Value is too large to encode: x')
+        end
       end
 
       describe '#add_counted_map' do
