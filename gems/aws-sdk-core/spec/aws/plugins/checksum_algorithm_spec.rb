@@ -221,7 +221,7 @@ module Aws
           io = StringIO.new(payload)
           buffers = []
           allow(io).to receive(:read).and_wrap_original do |read, length, buffer|
-            buffers << buffer
+            buffers << buffer unless length.zero?
             read.call(length, buffer)
           end
 
@@ -335,7 +335,7 @@ module Aws
           client.public_send(operation, body: io, checksum_algorithm: 'CRC32')
         end
 
-        %w[trailer].each do |location|
+        %w[header trailer].each do |location|
           context "checksum in #{location}",
                   skip: location == 'trailer' && defined?(JRUBY_VERSION) && 'Trailer checksums are disabled on JRuby' do
             let(:placement) { location }
