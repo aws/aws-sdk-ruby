@@ -30,7 +30,7 @@ module Aws
                 'B' => { 'shape' => 'Bool' }, 'T' => { 'shape' => 'Time' }, 'Bl' => { 'shape' => 'Blob' },
                 'L' => { 'shape' => 'StrList' }, 'M' => { 'shape' => 'StrMap' }, 'U' => { 'shape' => 'Un' },
                 'Child' => { 'shape' => 'Item' }, 'Renamed' => { 'shape' => 'Str', 'locationName' => 'wire' },
-                'Wide' => { 'shape' => 'Wide' }
+                'Wide' => { 'shape' => 'Wide' }, 'FU' => { 'shape' => 'FlatUn' }
               }
             },
             'Wide' => {
@@ -41,6 +41,12 @@ module Aws
               'type' => 'structure', 'union' => true,
               'members' => { 'A' => { 'shape' => 'Str' }, 'N' => { 'shape' => 'Int' } }
             },
+            # A union with a flattened list member, which query-compatible parsing defaults to [].
+            'FlatUn' => {
+              'type' => 'structure', 'union' => true,
+              'members' => { 'FL' => { 'shape' => 'FlatList' }, 'A' => { 'shape' => 'Str' } }
+            },
+            'FlatList' => { 'type' => 'list', 'member' => { 'shape' => 'Str' }, 'flattened' => true },
             'StrList' => { 'type' => 'list', 'member' => { 'shape' => 'Str' } },
             'StrMap' => { 'type' => 'map', 'key' => { 'shape' => 'Str' }, 'value' => { 'shape' => 'Str' } },
             'Str' => { 'type' => 'string' }, 'Int' => { 'type' => 'integer' }, 'Dbl' => { 'type' => 'double' },
@@ -120,15 +126,25 @@ module Aws
       end
 
       describe Parser do
-        def expect_parity(bytes)
-          parser = Parser.new(output)
+        def expect_parity(bytes, query_compatible: false)
+          parser = Parser.new(output, query_compatible: query_compatible)
           old = outcome { normalize(parser.send(:parse_ref, output, RpcV2.decode(bytes.dup), nil)) }
           new = outcome { normalize(parser.parse(bytes.dup)) }
           expect(new).to eq(old)
         end
 
+        # Hash equality ignores order, so compare containers as ordered pairs.
         def normalize(value)
-          value.respond_to?(:to_h) ? [value.class.name, value.to_h] : value
+          case value
+          when Struct then [value.class.name, value.each_pair.map { |k, v| [k, normalize(v)] }]
+          when Hash then [:hash, value.map { |k, v| [k, normalize(v)] }]
+          when Array then value.map { |v| normalize(v) }
+          else value
+          end
+        end
+
+        def text(str)
+          b(0x60 + str.bytesize) + str.b
         end
 
         def cbor(value)
@@ -166,9 +182,35 @@ module Aws
             deep = (1..130).reduce('S' => 'leaf') { |inner, _| { 'Child' => inner } }
             cbor(deep)
           },
-          'truncated body' => -> { cbor('S' => 'abcdef')[0..-3] }
+          'truncated body' => -> { cbor('S' => 'abcdef')[0..-3] },
+          'a non-map body with trailing bytes' => -> { b(0x05, 0x01) },
+          'a malformed member value with trailing bytes' => -> { cbor('Child' => 5) + b(0x01) },
+          'a list claiming more elements than the body holds' => -> { cbor('L' => [])[0..-2] + b(0x9a, 0x00, 0x0f, 0x42, 0x40) },
+          # {"M": {"k": "v", "k": null}}
+          'a duplicate map key whose last value is null' => lambda {
+            b(0xa1) + text('M') + b(0xa2) + text('k') + text('v') + text('k') + b(0xf6)
+          },
+          # {"M": {"k": "v1", "j": "x", "k": null, "k": "v2"}}
+          'duplicate map keys, null in between' => lambda {
+            b(0xa1) + text('M') + b(0xa4) + text('k') + text('v1') + text('j') + text('x') +
+              text('k') + b(0xf6) + text('k') + text('v2')
+          },
+          # {"U": {}, "U": {"A": "x"}}
+          'an empty union overwritten by a duplicate key' => lambda {
+            b(0xa2) + text('U') + b(0xa0) + text('U') + b(0xa1) + text('A') + text('x')
+          }
         }.each do |name, body|
           it("matches for #{name}") { expect_parity(instance_exec(&body)) }
+        end
+
+        {
+          'a union whose flattened list member comes first' => -> { cbor('FU' => { 'A' => 'x' }) },
+          'a union with only its flattened list member' => -> { cbor('FU' => { 'FL' => ['y'] }) },
+          'a structure with flattened members unset' => -> { cbor('S' => 'x') }
+        }.each do |name, body|
+          it("matches for #{name} when query compatible") do
+            expect_parity(instance_exec(&body), query_compatible: true)
+          end
         end
 
         it 'raises the same error as before for an empty union' do

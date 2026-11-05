@@ -10,10 +10,11 @@ module Aws
         @depth = 0
       end
 
+      # With a block, the block reads the item from the decoder instead of #decode_item.
       def decode
         return nil if @buffer.nil? || @buffer.empty?
 
-        val = decode_item
+        val = block_given? ? yield(self) : decode_item
         return val unless @pos != @buffer.size
 
         raise ExtraBytesError.new(@pos, @buffer.size)
@@ -305,27 +306,42 @@ module Aws
         raise OutOfBytesError.new(n_bytes, @buffer.bytesize - @pos)
       end
 
-      # Applies the #decode_item nesting limit to containers that RpcV2::Parser reads directly.
-      def nest
+      # Reads a definite-length map, yielding each key and the map's size. The block must read the key's
+      # value. Counts toward the #decode_item nesting limit.
+      def each_map_key
         @depth += 1
         raise Error, "Maximum nesting depth (#{MAX_DEPTH}) exceeded" if @depth > MAX_DEPTH
 
-        yield
+        size = read_map
+        i = 0
+        while i < size
+          yield read_string, size
+          i += 1
+        end
       ensure
         @depth -= 1
       end
 
-      # The trailing-bytes check from #decode, for callers that read the top-level item themselves.
-      def finish(value)
-        return value if @pos == @buffer.size
+      # Reads a definite-length array, yielding once per element. The block must read the element.
+      # Counts toward the #decode_item nesting limit.
+      def each_array_element
+        @depth += 1
+        raise Error, "Maximum nesting depth (#{MAX_DEPTH}) exceeded" if @depth > MAX_DEPTH
 
-        raise ExtraBytesError.new(@pos, @buffer.size)
+        size = read_array
+        i = 0
+        while i < size
+          yield
+          i += 1
+        end
+      ensure
+        @depth -= 1
       end
 
-      # Used by RpcV2::Parser to read containers and values incrementally.
+      # Incremental readers used by RpcV2::Parser.
       #
       # @api private
-      public :peek_type, :read_map, :read_array, :read_string, :decode_item, :nest, :finish
+      public :peek_type, :decode_item, :each_map_key, :each_array_element
     end
   end
 end

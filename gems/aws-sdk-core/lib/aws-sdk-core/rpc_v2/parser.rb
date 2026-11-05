@@ -19,8 +19,12 @@ module Aws
         return {} if cbor.empty?
         return parse_ref(@rules, RpcV2.decode(cbor), target) unless RpcV2.engine == CborEngine
 
-        decoder = Cbor::Decoder.new(cbor.force_encoding(Encoding::BINARY))
-        decoder.finish(read(decoder, @rules, target))
+        begin
+          Cbor::Decoder.new(cbor.force_encoding(Encoding::BINARY)).decode { |decoder| read(decoder, @rules, target) }
+        rescue NoMethodError
+          # A malformed value can fail before the rest of the body is decoded; decode errors come first.
+          parse_ref(@rules, RpcV2.decode(cbor), target)
+        end
       end
 
       private
@@ -30,15 +34,15 @@ module Aws
         when StructureShape
           return read_fallback(decoder, ref, target) unless decoder.peek_type == :map
 
-          decoder.nest { ref.shape.union ? read_union(decoder, ref, target) : read_structure(decoder, ref, target) }
+          ref.shape.union ? read_union(decoder, ref, target) : read_structure(decoder, ref, target)
         when ListShape
           return read_fallback(decoder, ref, target) unless target.nil? && decoder.peek_type == :array
 
-          decoder.nest { read_list(decoder, ref) }
+          read_list(decoder, ref)
         when MapShape
           return read_fallback(decoder, ref, target) unless target.nil? && decoder.peek_type == :map
 
-          decoder.nest { read_map(decoder, ref) }
+          read_map(decoder, ref)
         else
           decoder.decode_item # scalars: same as the original decode
         end
@@ -53,8 +57,7 @@ module Aws
         shape = ref.shape
         target ||= shape.struct_class.new
         lut = lookup_table(shape)
-        decoder.read_map.times do
-          key = decoder.read_string
+        decoder.each_map_key do |key|
           if (pair = lut[key])
             target[pair[0]] = read(decoder, pair[1])
           else
@@ -65,25 +68,31 @@ module Aws
         target
       end
 
-      # Builds the member subclass directly for the normal case: one known member with a non-nil value.
-      # Anything else (empty, unknown key, __type, null value, several keys) is collected and handed to the
-      # original #structure, so it returns or raises exactly as before.
+      # Builds the member subclass directly for one known member with a non-nil value. Anything else (empty,
+      # unknown key, __type, null value, several keys, query-compatible defaults) goes to #structure.
       def read_union(decoder, ref, target)
-        count = decoder.read_map
+        shape = ref.shape
+        direct = target.nil? && !(@query_compatible && query_compatible_defaults?(shape))
         values = {}
-        if target.nil? && count == 1
-          key = decoder.read_string
-          if (pair = lookup_table(ref.shape)[key])
+        union = nil
+        decoder.each_map_key do |key, size|
+          if direct && size == 1 && (pair = lookup_table(shape)[key])
             value = read(decoder, pair[1])
-            return build_union(ref.shape, pair[0], value) unless value.nil?
+            if value.nil?
+              values[key] = nil
+            else
+              union = build_union(shape, pair[0], value)
+            end
           else
-            value = decoder.decode_item
+            values[key] = decoder.decode_item
           end
-          values[key] = value
-          count = 0
         end
-        count.times { values[decoder.read_string] = decoder.decode_item }
-        structure(ref, values, target)
+        union || structure(ref, values, target)
+      end
+
+      # Whether #apply_query_compatible could set a member of this union.
+      def query_compatible_defaults?(shape)
+        shape.members.any? { |_, ref| flattened_list?(ref.shape) || flattened_map?(ref.shape) }
       end
 
       def build_union(shape, member, value)
@@ -94,20 +103,22 @@ module Aws
 
       def read_list(decoder, ref)
         member_ref = ref.shape.member
-        count = decoder.read_array
-        list = Array.new(count)
-        count.times { |i| list[i] = read(decoder, member_ref) }
+        list = []
+        decoder.each_array_element { list << read(decoder, member_ref) }
         list
       end
 
+      # Duplicate keys keep their first position and last value, as in Decoder#decode; nulls are dropped.
       def read_map(decoder, ref)
         value_ref = ref.shape.value
         map = {}
-        decoder.read_map.times do
-          key = decoder.read_string
+        nils = false
+        decoder.each_map_key do |key|
           value = read(decoder, value_ref)
-          map[key] = value unless value.nil?
+          nils = true if value.nil?
+          map[key] = value
         end
+        map.compact! if nils
         map
       end
 

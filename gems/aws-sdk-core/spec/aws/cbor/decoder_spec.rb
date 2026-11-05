@@ -98,35 +98,33 @@ module Aws
       # Methods used by RpcV2::Parser; behavior must match #decode.
       describe 'parser read surface (@api private)' do
         it 'exposes exactly the intended public methods' do
-          surface = %i[peek_type read_map read_array read_string decode_item nest finish]
+          surface = %i[peek_type decode_item each_map_key each_array_element]
           expect(Decoder.public_instance_methods(false)).to match_array(%i[decode] + surface)
         end
 
-        it 'reads a map header then members one value at a time' do
+        it 'yields each map key with the map size, the block reading the value' do
           d = Decoder.new(Encoder.new.add({ 'S' => 'hi', 'N' => 1 }).bytes)
-          expect(d.read_map).to eq(2)
-          expect(d.read_string).to eq('S')
-          expect(d.decode_item).to eq('hi')
-          expect(d.read_string).to eq('N')
-          expect(d.decode_item).to eq(1)
+          pairs = []
+          d.each_map_key { |key, size| pairs << [key, size, d.decode_item] }
+          expect(pairs).to eq([['S', 2, 'hi'], ['N', 2, 1]])
         end
 
-        it 'reads an array header then elements' do
+        it 'yields once per array element, the block reading it' do
           d = Decoder.new(Encoder.new.add([10, 20]).bytes)
-          expect(d.read_array).to eq(2)
-          expect(d.decode_item).to eq(10)
-          expect(d.decode_item).to eq(20)
+          elements = []
+          d.each_array_element { elements << d.decode_item }
+          expect(elements).to eq([10, 20])
         end
 
         it 'peeks the next item type without consuming it' do
           d = Decoder.new(Encoder.new.add([1]).bytes)
           expect(d.peek_type).to eq(:array)
-          expect(d.read_array).to eq(1)
+          expect(d.decode_item).to eq([1])
         end
 
         it 'preserves OutOfBytesError on underrun' do
-          bytes = [0x62, 0x61].pack('C*').force_encoding(Encoding::BINARY) # text string of 2 bytes, 1 present
-          expect { Decoder.new(bytes).read_string }.to raise_error(OutOfBytesError)
+          bytes = [0xa1, 0x62, 0x61].pack('C*').force_encoding(Encoding::BINARY) # map with a truncated 2-byte key
+          expect { Decoder.new(bytes).each_map_key { nil } }.to raise_error(OutOfBytesError)
         end
 
         it 'preserves the depth guard when driven via decode_item' do
@@ -134,20 +132,20 @@ module Aws
           expect { Decoder.new(payload).decode_item }.to raise_error(Error, /Maximum nesting depth/)
         end
 
-        it 'nest returns the block value and shares the decode_item depth limit' do
-          d = Decoder.new(Encoder.new.add(1).bytes)
-          expect(d.nest { d.decode_item }).to eq(1)
+        it 'counts maps and arrays read with blocks toward the decode_item depth limit' do
+          deep = Decoder.new(Encoder.new.add((1..127).reduce([1]) { |inner, _| [inner] }).bytes)
+          read = -> { deep.peek_type == :array ? deep.each_array_element { read.call } : deep.decode_item }
+          expect { read.call }.to raise_error(Error, /Maximum nesting depth/)
 
-          deep = Decoder.new(Encoder.new.add(1).bytes)
-          nest = ->(n) { n.zero? ? deep.decode_item : deep.nest { nest.call(n - 1) } }
-          expect { nest.call(128) }.to raise_error(Error, /Maximum nesting depth/)
+          ok = Decoder.new(Encoder.new.add((1..126).reduce([1]) { |inner, _| [inner] }).bytes)
+          read_ok = -> { ok.peek_type == :array ? ok.each_array_element { read_ok.call } : ok.decode_item }
+          expect { read_ok.call }.not_to raise_error
         end
 
-        it 'finish returns the value, or raises ExtraBytesError like #decode' do
-          d = Decoder.new(Encoder.new.add(1).bytes)
-          expect(d.finish(d.decode_item)).to eq(1)
+        it 'reads the item with the block passed to decode, then raises ExtraBytesError like #decode' do
+          expect(Decoder.new(Encoder.new.add(1).bytes).decode(&:decode_item)).to eq(1)
           extra = Decoder.new(Encoder.new.add(1).add(2).bytes)
-          expect { extra.finish(extra.decode_item) }.to raise_error(ExtraBytesError)
+          expect { extra.decode(&:decode_item) }.to raise_error(ExtraBytesError)
         end
       end
     end
