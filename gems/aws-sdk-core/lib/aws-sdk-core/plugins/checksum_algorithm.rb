@@ -331,14 +331,15 @@ module Aws
             headers[algorithm_header] = checksum_properties[:algorithm]
           end
 
+          return unless %w[header trailer].include?(checksum_properties[:in])
+
+          body = context.http_request.body
+          buffer_enabled = context.http_request.buffer_supported? if body.respond_to?(:read)
           case checksum_properties[:in]
           when 'header'
-            apply_request_checksum(context, headers, checksum_properties)
+            apply_request_checksum(context, headers, checksum_properties, buffer_enabled)
           when 'trailer'
-            buffer_enabled = context.http_request.buffer_supported?
             apply_request_trailer_checksum(context, headers, checksum_properties, buffer_enabled)
-          else
-            # nothing
           end
         end
 
@@ -356,19 +357,20 @@ module Aws
           context[:skip_trailer_checksums]
         end
 
-        def apply_request_checksum(context, headers, checksum_properties)
+        def apply_request_checksum(context, headers, checksum_properties, buffer_enabled)
           header_name = checksum_properties[:name]
           headers[header_name] = calculate_checksum(
             checksum_properties[:algorithm],
-            context.http_request.body
+            context.http_request.body,
+            buffer_enabled
           )
         end
 
-        def calculate_checksum(algorithm, body)
+        def calculate_checksum(algorithm, body, buffer_enabled)
           digest = ChecksumAlgorithm.digest_for_algorithm(algorithm)
           if body.respond_to?(:read)
             body.rewind
-            update_in_chunks(digest, body)
+            update_in_chunks(digest, body, buffer_enabled)
             body.rewind
           else
             digest.update(body)
@@ -376,10 +378,26 @@ module Aws
           digest.base64digest
         end
 
-        def update_in_chunks(digest, io)
-          chunk = ''.b
-          digest.update(chunk) while io.read(CHECKSUM_CHUNK_SIZE, chunk)
+        def update_in_chunks(digest, io, buffer_enabled)
+          if buffer_enabled
+            update_in_chunks_with_buffer(digest, io)
+          else
+            update_in_chunks_without_buffer(digest, io)
+          end
           io.rewind
+        end
+
+        def update_in_chunks_with_buffer(digest, io)
+          buffer = ''.b
+          while (chunk = io.read(CHECKSUM_CHUNK_SIZE, buffer))
+            digest.update(chunk)
+          end
+        end
+
+        def update_in_chunks_without_buffer(digest, io)
+          while (chunk = io.read(CHECKSUM_CHUNK_SIZE))
+            digest.update(chunk)
+          end
         end
 
         def apply_request_trailer_checksum(context, headers, checksum_properties, buffer_enabled)
