@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Reduce memory allocations when streaming request bodies with checksum trailers while preserving compatibility with custom IO bodies.
+
 3.265.0 (2026-11-06)
 ------------------
 
@@ -58,8 +60,6 @@ Unreleased Changes
 ------------------
 
 * Feature - Improve RBS support for service-specific error handling by making modeled errors inherit from each service's `ServiceError`.
-
-* Issue - Reduce memory allocations when streaming request bodies with checksum trailers.
 
 3.257.0 (2026-09-14)
 ------------------
