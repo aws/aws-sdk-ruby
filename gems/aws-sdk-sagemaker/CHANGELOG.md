@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.409.0 (2026-11-05)
+------------------
+
+* Feature - Fixed the ImageDeleted and ImageVersionDeleted waiters to succeed on the ResourceNotFound error returned by DescribeImage and DescribeImageVersion
+
 1.408.0 (2026-11-04)
 ------------------
 

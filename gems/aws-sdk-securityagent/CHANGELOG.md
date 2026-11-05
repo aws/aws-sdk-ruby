@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.30.0 (2026-11-05)
+------------------
+
+* Feature - Adds support for IAM Identity Center groups as Agent Space members. CreateMembership, DeleteMembership, and ListMemberships now accept the GROUP member type. ListMemberships can filter by USER, GROUP, or ALL, and returns group display name and description.
+
 1.29.0 (2026-11-04)
 ------------------
 

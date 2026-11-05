@@ -2875,6 +2875,22 @@ module Aws::WAFV2
     #           },
     #         ],
     #       },
+    #       connected_account_configs: [
+    #         {
+    #           connected_account_arn: "ConnectedAccountArn", # required
+    #           payment_networks: [ # required
+    #             {
+    #               chain: "BASE", # required, accepts BASE, SOLANA
+    #               prices: [ # required
+    #                 {
+    #                   amount: "ConnectedAccountPriceAmount", # required
+    #                   currency: "USDC", # required, accepts USDC
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #       ],
     #       currency_mode: "REAL", # accepts REAL, TEST
     #     },
     #   })
@@ -4985,6 +5001,13 @@ module Aws::WAFV2
     #   resp.rule_group.monetization_config.crypto_config.payment_networks[0].prices #=> Array
     #   resp.rule_group.monetization_config.crypto_config.payment_networks[0].prices[0].amount #=> String
     #   resp.rule_group.monetization_config.crypto_config.payment_networks[0].prices[0].currency #=> String, one of "USDC"
+    #   resp.rule_group.monetization_config.connected_account_configs #=> Array
+    #   resp.rule_group.monetization_config.connected_account_configs[0].connected_account_arn #=> String
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks #=> Array
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks[0].chain #=> String, one of "BASE", "SOLANA"
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks[0].prices #=> Array
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks[0].prices[0].amount #=> String
+    #   resp.rule_group.monetization_config.connected_account_configs[0].payment_networks[0].prices[0].currency #=> String, one of "USDC"
     #   resp.rule_group.monetization_config.currency_mode #=> String, one of "REAL", "TEST"
     #   resp.lock_token #=> String
     #
@@ -8144,6 +8167,22 @@ module Aws::WAFV2
     #           },
     #         ],
     #       },
+    #       connected_account_configs: [
+    #         {
+    #           connected_account_arn: "ConnectedAccountArn", # required
+    #           payment_networks: [ # required
+    #             {
+    #               chain: "BASE", # required, accepts BASE, SOLANA
+    #               prices: [ # required
+    #                 {
+    #                   amount: "ConnectedAccountPriceAmount", # required
+    #                   currency: "USDC", # required, accepts USDC
+    #                 },
+    #               ],
+    #             },
+    #           ],
+    #         },
+    #       ],
     #       currency_mode: "REAL", # accepts REAL, TEST
     #     },
     #   })
@@ -8411,7 +8450,7 @@ module Aws::WAFV2
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-wafv2'
-      context[:gem_version] = '1.145.0'
+      context[:gem_version] = '1.146.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

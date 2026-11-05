@@ -45,6 +45,7 @@ module Aws
       end
       class UnprocessableContentException < ServiceError
         def message: () -> ::String
+        def reason: () -> ::String
       end
       class ValidationException < ServiceError
         def message: () -> ::String

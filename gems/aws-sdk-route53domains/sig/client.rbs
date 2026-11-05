@@ -433,6 +433,20 @@ module Aws
                                           ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                                         | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
 
+      interface _RestoreDomainResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RestoreDomainResponse]
+        def operation_id: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Route53Domains/Client.html#restore_domain-instance_method
+      def restore_domain: (
+                            domain_name: ::String,
+                            ?consent: {
+                              max_price: ::Float,
+                              currency: ::String
+                            }
+                          ) -> _RestoreDomainResponseSuccess
+                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RestoreDomainResponseSuccess
+
       interface _RetrieveDomainAuthCodeResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RetrieveDomainAuthCodeResponse]
         def auth_code: () -> ::String

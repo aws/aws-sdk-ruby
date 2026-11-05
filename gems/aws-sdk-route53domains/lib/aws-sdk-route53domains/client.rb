@@ -2178,6 +2178,75 @@ module Aws::Route53Domains
       req.send_request(options)
     end
 
+    # Restores a domain that has expired, or was deleted, before it becomes
+    # available for others to register. The cost of restoring your domain is
+    # billed to your Amazon Web Services account.
+    #
+    # Not every TLD registry supports restoring domains, and the period
+    # during which a domain can be restored varies by TLD. To find out
+    # whether your domain can be restored and the period during which you
+    # can restore it, see [Domains that you can register with Amazon Route
+    # 53][1] in the *Amazon Route 53 Developer Guide*.
+    #
+    # Restoring a domain typically costs more, and sometimes much more, than
+    # registering or renewing a domain. To get the restoration price for a
+    # domain before you restore it, use [GetDomainPrices][2].
+    #
+    # Restoration is asynchronous. The response includes an operation ID
+    # that you can use with [GetOperationDetail][3] to track the progress of
+    # the request. When the restoration succeeds, the domain reappears in
+    # the response to [ListDomains][4].
+    #
+    # For more information, see [Restoring an expired or deleted domain][5]
+    # in the *Amazon Route 53 Developer Guide*.
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
+    # [2]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetDomainPrices.html
+    # [3]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
+    # [4]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListDomains.html
+    # [5]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-restore-expired.html
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain that you want to restore. The domain must have
+    #   been registered to the Amazon Web Services account that submits the
+    #   request.
+    #
+    # @option params [Types::Consent] :consent
+    #   Specifies the maximum price that you agree to pay to restore the
+    #   domain name. This element is required if the domain has registry
+    #   premium pricing, and optional if the domain is priced at the standard
+    #   rate for its TLD. If you include it and the restoration price is more
+    #   than `MaxPrice`, the request fails.
+    #
+    # @return [Types::RestoreDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RestoreDomainResponse#operation_id #operation_id} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.restore_domain({
+    #     domain_name: "DomainName", # required
+    #     consent: {
+    #       max_price: 1.0, # required
+    #       currency: "Currency", # required
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.operation_id #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/route53domains-2014-05-15/RestoreDomain AWS API Documentation
+    #
+    # @overload restore_domain(params = {})
+    # @param [Hash] params ({})
+    def restore_domain(params = {}, options = {})
+      req = build_request(:restore_domain, params)
+      req.send_request(options)
+    end
+
     # This operation returns the authorization code for the domain. To
     # transfer a domain to another registrar, you provide this value to the
     # new registrar.
@@ -3003,7 +3072,7 @@ module Aws::Route53Domains
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-route53domains'
-      context[:gem_version] = '1.107.0'
+      context[:gem_version] = '1.108.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

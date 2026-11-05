@@ -147,6 +147,14 @@ module Aws::QConnect
     #   The time the AI Agent was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the AI Agent was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the AI Agent was last modified.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the AI Agent.
     #   @return [String]
@@ -181,6 +189,8 @@ module Aws::QConnect
       :type,
       :configuration,
       :modified_time,
+      :last_modified_time,
+      :last_modified_region,
       :description,
       :visibility_status,
       :tags,
@@ -221,6 +231,14 @@ module Aws::QConnect
     #   The time the AI Agent was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the AI Agent was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the AI Agent was last modified.
+    #   @return [String]
+    #
     # @!attribute [rw] visibility_status
     #   The visibility status of the AI Agent.
     #   @return [String]
@@ -258,6 +276,8 @@ module Aws::QConnect
       :type,
       :ai_agent_arn,
       :modified_time,
+      :last_modified_time,
+      :last_modified_region,
       :visibility_status,
       :configuration,
       :origin,
@@ -408,6 +428,15 @@ module Aws::QConnect
     #   The time the AI Guardrail was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the AI Guardrail was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the AI Guardrail was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AIGuardrailData AWS API Documentation
     #
     class AIGuardrailData < Struct.new(
@@ -427,7 +456,9 @@ module Aws::QConnect
       :contextual_grounding_policy_config,
       :tags,
       :status,
-      :modified_time)
+      :modified_time,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = [:blocked_input_messaging, :blocked_outputs_messaging, :description]
       include Aws::Structure
     end
@@ -479,6 +510,15 @@ module Aws::QConnect
     #   The time the AI Guardrail was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the AI Guardrail was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the AI Guardrail was last
+    #   modified.
+    #   @return [String]
+    #
     # @!attribute [rw] visibility_status
     #   The visibility status of the AI Guardrail.
     #   @return [String]
@@ -505,6 +545,8 @@ module Aws::QConnect
       :ai_guardrail_id,
       :ai_guardrail_arn,
       :modified_time,
+      :last_modified_time,
+      :last_modified_region,
       :visibility_status,
       :description,
       :status,
@@ -654,6 +696,15 @@ module Aws::QConnect
     #   The time the AI Prompt was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the AI Prompt was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the AI Prompt was last
+    #   modified.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the AI Prompt.
     #   @return [String]
@@ -692,6 +743,8 @@ module Aws::QConnect
       :template_configuration,
       :inference_configuration,
       :modified_time,
+      :last_modified_time,
+      :last_modified_region,
       :description,
       :visibility_status,
       :tags,
@@ -762,6 +815,15 @@ module Aws::QConnect
     #   The time the AI Prompt was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the AI Prompt was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the AI Prompt was last
+    #   modified.
+    #   @return [String]
+    #
     # @!attribute [rw] template_type
     #   The type of the prompt template for this AI Prompt.
     #   @return [String]
@@ -808,6 +870,8 @@ module Aws::QConnect
       :type,
       :ai_prompt_arn,
       :modified_time,
+      :last_modified_time,
+      :last_modified_region,
       :template_type,
       :model_id,
       :api_format,
@@ -1189,6 +1253,15 @@ module Aws::QConnect
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the assistant association was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the assistant association was
+    #   last modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AssistantAssociationData AWS API Documentation
     #
     class AssistantAssociationData < Struct.new(
@@ -1198,7 +1271,9 @@ module Aws::QConnect
       :assistant_arn,
       :association_type,
       :association_data,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1292,6 +1367,15 @@ module Aws::QConnect
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the assistant association was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the assistant association was
+    #   last modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AssistantAssociationSummary AWS API Documentation
     #
     class AssistantAssociationSummary < Struct.new(
@@ -1301,7 +1385,9 @@ module Aws::QConnect
       :assistant_arn,
       :association_type,
       :association_data,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1391,6 +1477,29 @@ module Aws::QConnect
     #   The list of orchestrator configurations for the assistant.
     #   @return [Array<Types::OrchestratorConfigurationEntry>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the assistant was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the assistant was last
+    #   modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] assistant_global_resiliency_status
+    #   Whether Amazon Connect Global Resiliency replicates the Connect
+    #   instance this assistant is associated with, and so whether resources
+    #   created under this assistant must satisfy the replication group's
+    #   model parity constraint. Answered from the ACGR side per request
+    #   rather than stored, so it reflects the customer's replication state
+    #   now.
+    #
+    #   Absent means "not applicable or not known" - never read an absent
+    #   field as DISABLED. It is absent on the operations that return an
+    #   assistant which is not yet associated with a Connect instance,
+    #   because replication cannot be established until it is.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AssistantData AWS API Documentation
     #
     class AssistantData < Struct.new(
@@ -1405,7 +1514,10 @@ module Aws::QConnect
       :integration_configuration,
       :capability_configuration,
       :ai_agent_configuration,
-      :orchestrator_configuration_list)
+      :orchestrator_configuration_list,
+      :last_modified_time,
+      :last_modified_region,
+      :assistant_global_resiliency_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1497,6 +1609,15 @@ module Aws::QConnect
     #   The list of orchestrator configurations for the assistant.
     #   @return [Array<Types::OrchestratorConfigurationEntry>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the assistant was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the assistant was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/AssistantSummary AWS API Documentation
     #
     class AssistantSummary < Struct.new(
@@ -1511,7 +1632,9 @@ module Aws::QConnect
       :integration_configuration,
       :capability_configuration,
       :ai_agent_configuration,
-      :orchestrator_configuration_list)
+      :orchestrator_configuration_list,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1999,6 +2122,19 @@ module Aws::QConnect
     #   The expiration time of the URL as an epoch timestamp.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the content was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the content was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_hash
+    #   The Base64-encoded SHA-256 hash of the content file. Amazon Connect
+    #   Global Resiliency returns this field only for replicated content.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ContentData AWS API Documentation
     #
     class ContentData < Struct.new(
@@ -2015,7 +2151,10 @@ module Aws::QConnect
       :tags,
       :link_out_uri,
       :url,
-      :url_expiry)
+      :url_expiry,
+      :last_modified_time,
+      :last_modified_region,
+      :file_hash)
       SENSITIVE = [:url]
       include Aws::Structure
     end
@@ -2153,6 +2292,19 @@ module Aws::QConnect
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the content was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the content was last modified.
+    #   @return [String]
+    #
+    # @!attribute [rw] file_hash
+    #   The Base64-encoded SHA-256 hash of the content file. Amazon Connect
+    #   Global Resiliency returns this field only for replicated content.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ContentSummary AWS API Documentation
     #
     class ContentSummary < Struct.new(
@@ -2166,7 +2318,10 @@ module Aws::QConnect
       :content_type,
       :status,
       :metadata,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region,
+      :file_hash)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6314,6 +6469,15 @@ module Aws::QConnect
     #   List of failure reasons on ingestion per file.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the knowledge base was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the knowledge base was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/KnowledgeBaseData AWS API Documentation
     #
     class KnowledgeBaseData < Struct.new(
@@ -6330,7 +6494,9 @@ module Aws::QConnect
       :description,
       :tags,
       :ingestion_status,
-      :ingestion_failure_reasons)
+      :ingestion_failure_reasons,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -6396,6 +6562,15 @@ module Aws::QConnect
     #   resource.
     #   @return [Hash<String,String>]
     #
+    # @!attribute [rw] last_modified_time
+    #   The timestamp when the knowledge base was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the knowledge base was last
+    #   modified.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/KnowledgeBaseSummary AWS API Documentation
     #
     class KnowledgeBaseSummary < Struct.new(
@@ -6409,7 +6584,9 @@ module Aws::QConnect
       :rendering_configuration,
       :server_side_encryption_configuration,
       :description,
-      :tags)
+      :tags,
+      :last_modified_time,
+      :last_modified_region)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -8226,6 +8403,13 @@ module Aws::QConnect
     #   available for use.
     #   @return [Time]
     #
+    # @!attribute [rw] global_resiliency_status
+    #   Whether this model is published in every Region of the caller's
+    #   Amazon Connect Global Resiliency replication group, and so can be
+    #   referenced by an AI Prompt that replicates. Present only for callers
+    #   to which global resiliency applies.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ModelSummary AWS API Documentation
     #
     class ModelSummary < Struct.new(
@@ -8236,7 +8420,8 @@ module Aws::QConnect
       :supported_ai_prompt_types,
       :model_lifecycle,
       :legacy_timestamp,
-      :end_of_life_timestamp)
+      :end_of_life_timestamp,
+      :global_resiliency_status)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9260,6 +9445,11 @@ module Aws::QConnect
     #   The timestamp when the quick response data was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the quick response was last
+    #   modified.
+    #   @return [String]
+    #
     # @!attribute [rw] contents
     #   The contents of the quick response.
     #   @return [Types::QuickResponseContents]
@@ -9316,6 +9506,7 @@ module Aws::QConnect
       :status,
       :created_time,
       :last_modified_time,
+      :last_modified_region,
       :contents,
       :description,
       :grouping_configuration,
@@ -9578,6 +9769,11 @@ module Aws::QConnect
     #   modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the quick response was last
+    #   modified.
+    #   @return [String]
+    #
     # @!attribute [rw] is_active
     #   Whether the quick response is active.
     #   @return [Boolean]
@@ -9639,6 +9835,7 @@ module Aws::QConnect
       :contents,
       :created_time,
       :last_modified_time,
+      :last_modified_region,
       :is_active,
       :description,
       :grouping_configuration,
@@ -9697,6 +9894,11 @@ module Aws::QConnect
     #   The timestamp when the quick response summary was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the quick response was last
+    #   modified.
+    #   @return [String]
+    #
     # @!attribute [rw] description
     #   The description of the quick response.
     #   @return [String]
@@ -9732,6 +9934,7 @@ module Aws::QConnect
       :status,
       :created_time,
       :last_modified_time,
+      :last_modified_region,
       :description,
       :last_modified_by,
       :is_active,
@@ -9863,6 +10066,94 @@ module Aws::QConnect
     end
 
     # @!attribute [rw] assistant_id
+    #   The identifier of the Amazon Q in Connect assistant.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_kms_key
+    #   The replica Region KMS key to register for the assistant.
+    #   @return [Types::ReplicaKmsKey]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]..
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RegisterAssistantReplicaKeyRequest AWS API Documentation
+    #
+    class RegisterAssistantReplicaKeyRequest < Struct.new(
+      :assistant_id,
+      :replica_kms_key,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assistant
+    #   The assistant data.
+    #   @return [Types::AssistantData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RegisterAssistantReplicaKeyResponse AWS API Documentation
+    #
+    class RegisterAssistantReplicaKeyResponse < Struct.new(
+      :assistant)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base_id
+    #   The identifier of the knowledge base.
+    #   @return [String]
+    #
+    # @!attribute [rw] replica_kms_key
+    #   The replica Region KMS key to register for the knowledge base.
+    #   @return [Types::ReplicaKmsKey]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1]..
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RegisterKnowledgeBaseReplicaKeyRequest AWS API Documentation
+    #
+    class RegisterKnowledgeBaseReplicaKeyRequest < Struct.new(
+      :knowledge_base_id,
+      :replica_kms_key,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] knowledge_base
+    #   Information about the knowledge base.
+    #   @return [Types::KnowledgeBaseData]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RegisterKnowledgeBaseReplicaKeyResponse AWS API Documentation
+    #
+    class RegisterKnowledgeBaseReplicaKeyResponse < Struct.new(
+      :knowledge_base)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] assistant_id
     #   The identifier of the Amazon Q in Connect assistant. Can be either
     #   the ID or the ARN. URLs cannot contain the ARN.
     #   @return [String]
@@ -9990,6 +10281,22 @@ module Aws::QConnect
     #
     class RenderingConfiguration < Struct.new(
       :template_uri)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Contains information about the KMS key used to encrypt data in a
+    # replica Amazon Web Services Region, including its Amazon Resource Name
+    # (ARN).
+    #
+    # @!attribute [rw] arn
+    #   The Amazon Resource Name (ARN) of the KMS key in the replica Region.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ReplicaKmsKey AWS API Documentation
+    #
+    class ReplicaKmsKey < Struct.new(
+      :arn)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -10798,10 +11105,17 @@ module Aws::QConnect
     #   [2]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
     #   @return [String]
     #
+    # @!attribute [rw] replica_kms_keys
+    #   The list of KMS keys used to encrypt data for this resource's
+    #   replicas in other Amazon Web Services Regions. Each entry
+    #   corresponds to a Region where a replica is configured.
+    #   @return [Array<Types::ReplicaKmsKey>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ServerSideEncryptionConfiguration AWS API Documentation
     #
     class ServerSideEncryptionConfiguration < Struct.new(
-      :kms_key_id)
+      :kms_key_id,
+      :replica_kms_keys)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -12105,10 +12419,15 @@ module Aws::QConnect
     # @!attribute [rw] message
     #   @return [String]
     #
+    # @!attribute [rw] reason
+    #   The reason the content could not be processed.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UnprocessableContentException AWS API Documentation
     #
     class UnprocessableContentException < Struct.new(
-      :message)
+      :message,
+      :reason)
       SENSITIVE = []
       include Aws::Structure
     end

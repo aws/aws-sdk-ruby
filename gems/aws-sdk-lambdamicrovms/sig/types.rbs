@@ -38,7 +38,7 @@ module Aws::LambdaMicrovms
     end
 
     class CpuConfiguration
-      attr_accessor architecture: ("ARM_64")
+      attr_accessor architecture: ("ARM_64" | "X86_64")
       SENSITIVE: []
     end
 
@@ -145,8 +145,8 @@ module Aws::LambdaMicrovms
       attr_accessor image_version: ::String
       attr_accessor build_id: ::String
       attr_accessor build_state: ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
-      attr_accessor architecture: ("ARM_64")
-      attr_accessor chipset: ("GRAVITON")
+      attr_accessor architecture: ("ARM_64" | "X86_64")
+      attr_accessor chipset: ("GRAVITON" | "INTEL")
       attr_accessor chipset_generation: ::String
       attr_accessor state_reason: ::String
       attr_accessor created_at: ::Time
@@ -284,8 +284,8 @@ module Aws::LambdaMicrovms
       attr_accessor next_token: ::String
       attr_accessor image_identifier: ::String
       attr_accessor image_version: ::String
-      attr_accessor architecture: ("ARM_64")
-      attr_accessor chipset: ("GRAVITON")
+      attr_accessor architecture: ("ARM_64" | "X86_64")
+      attr_accessor chipset: ("GRAVITON" | "INTEL")
       attr_accessor chipset_generation: ::String
       SENSITIVE: []
     end
@@ -373,7 +373,8 @@ module Aws::LambdaMicrovms
     class ManagedMicrovmImageVersion
       attr_accessor image_arn: ::String
       attr_accessor image_version: ::String
-      attr_accessor status: ("AVAILABLE" | "DEPRECATED")
+      attr_accessor status: ("AVAILABLE" | "DEPRECATED" | "RECALLED")
+      attr_accessor supported_cpu_configurations: ::Array[Types::CpuConfiguration]
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       SENSITIVE: []
@@ -396,8 +397,8 @@ module Aws::LambdaMicrovms
       attr_accessor image_version: ::String
       attr_accessor build_id: ::String
       attr_accessor build_state: ("PENDING" | "IN_PROGRESS" | "SUCCESSFUL" | "FAILED")
-      attr_accessor architecture: ("ARM_64")
-      attr_accessor chipset: ("GRAVITON")
+      attr_accessor architecture: ("ARM_64" | "X86_64")
+      attr_accessor chipset: ("GRAVITON" | "INTEL")
       attr_accessor chipset_generation: ::String
       attr_accessor state_reason: ::String
       attr_accessor created_at: ::Time

@@ -37,6 +37,20 @@ module Aws
       smb: Params::fsx_protocol_smb?
     }
 
+      type object_storage_external_identity_config = {
+      google_oidc: {
+        project_name: ::String,
+        project_number: ::String,
+        identity_pool_name: ::String,
+        identity_provider_name: ::String
+      }?
+    }
+
+      type object_storage_federated_identity_config = {
+      aws_iam_role: ::String?,
+      external_identity: Params::object_storage_external_identity_config?
+    }
+
       type options = {
       verify_mode: ("POINT_IN_TIME_CONSISTENT" | "ONLY_FILES_TRANSFERRED" | "NONE")?,
       overwrite_mode: ("ALWAYS" | "NEVER")?,

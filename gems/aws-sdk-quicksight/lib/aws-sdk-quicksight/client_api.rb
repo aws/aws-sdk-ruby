@@ -1024,6 +1024,8 @@ module Aws::QuickSight
     DescribeQuickSightQSearchConfigurationResponse = Shapes::StructureShape.new(name: 'DescribeQuickSightQSearchConfigurationResponse')
     DescribeRefreshScheduleRequest = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleRequest')
     DescribeRefreshScheduleResponse = Shapes::StructureShape.new(name: 'DescribeRefreshScheduleResponse')
+    DescribeResourcePermissionsRequest = Shapes::StructureShape.new(name: 'DescribeResourcePermissionsRequest')
+    DescribeResourcePermissionsResponse = Shapes::StructureShape.new(name: 'DescribeResourcePermissionsResponse')
     DescribeRoleCustomPermissionRequest = Shapes::StructureShape.new(name: 'DescribeRoleCustomPermissionRequest')
     DescribeRoleCustomPermissionResponse = Shapes::StructureShape.new(name: 'DescribeRoleCustomPermissionResponse')
     DescribeSelfUpgradeConfigurationRequest = Shapes::StructureShape.new(name: 'DescribeSelfUpgradeConfigurationRequest')
@@ -2199,6 +2201,7 @@ module Aws::QuickSight
     SeriesItemList = Shapes::ListShape.new(name: 'SeriesItemList')
     ServiceAccountCredentials = Shapes::StructureShape.new(name: 'ServiceAccountCredentials')
     ServiceNowParameters = Shapes::StructureShape.new(name: 'ServiceNowParameters')
+    ServiceRoleType = Shapes::StringShape.new(name: 'ServiceRoleType')
     ServiceType = Shapes::StringShape.new(name: 'ServiceType')
     SessionLifetimeInMinutes = Shapes::IntegerShape.new(name: 'SessionLifetimeInMinutes')
     SessionLifetimeInMinutesInvalidException = Shapes::StructureShape.new(name: 'SessionLifetimeInMinutesInvalidException')
@@ -2746,6 +2749,8 @@ module Aws::QuickSight
     UpdateRefreshScheduleRequest = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleRequest')
     UpdateRefreshScheduleResponse = Shapes::StructureShape.new(name: 'UpdateRefreshScheduleResponse')
     UpdateResourcePermissionList = Shapes::ListShape.new(name: 'UpdateResourcePermissionList')
+    UpdateResourcePermissionsRequest = Shapes::StructureShape.new(name: 'UpdateResourcePermissionsRequest')
+    UpdateResourcePermissionsResponse = Shapes::StructureShape.new(name: 'UpdateResourcePermissionsResponse')
     UpdateRoleCustomPermissionRequest = Shapes::StructureShape.new(name: 'UpdateRoleCustomPermissionRequest')
     UpdateRoleCustomPermissionResponse = Shapes::StructureShape.new(name: 'UpdateRoleCustomPermissionResponse')
     UpdateSPICECapacityConfigurationRequest = Shapes::StructureShape.new(name: 'UpdateSPICECapacityConfigurationRequest')
@@ -7418,6 +7423,15 @@ module Aws::QuickSight
     DescribeRefreshScheduleResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
     DescribeRefreshScheduleResponse.add_member(:arn, Shapes::ShapeRef.new(shape: Arn, location_name: "Arn"))
     DescribeRefreshScheduleResponse.struct_class = Types::DescribeRefreshScheduleResponse
+
+    DescribeResourcePermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    DescribeResourcePermissionsRequest.struct_class = Types::DescribeResourcePermissionsRequest
+
+    DescribeResourcePermissionsResponse.add_member(:role_type, Shapes::ShapeRef.new(shape: ServiceRoleType, location_name: "RoleType"))
+    DescribeResourcePermissionsResponse.add_member(:customer_managed_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CustomerManagedRoleArn"))
+    DescribeResourcePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    DescribeResourcePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    DescribeResourcePermissionsResponse.struct_class = Types::DescribeResourcePermissionsResponse
 
     DescribeRoleCustomPermissionRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location: "uri", location_name: "Role"))
     DescribeRoleCustomPermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -13704,6 +13718,17 @@ module Aws::QuickSight
 
     UpdateResourcePermissionList.member = Shapes::ShapeRef.new(shape: ResourcePermission)
 
+    UpdateResourcePermissionsRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
+    UpdateResourcePermissionsRequest.add_member(:role_type, Shapes::ShapeRef.new(shape: ServiceRoleType, required: true, location_name: "RoleType"))
+    UpdateResourcePermissionsRequest.add_member(:customer_managed_role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "CustomerManagedRoleArn"))
+    UpdateResourcePermissionsRequest.struct_class = Types::UpdateResourcePermissionsRequest
+
+    UpdateResourcePermissionsResponse.add_member(:role_type, Shapes::ShapeRef.new(shape: ServiceRoleType, location_name: "RoleType"))
+    UpdateResourcePermissionsResponse.add_member(:customer_managed_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "CustomerManagedRoleArn"))
+    UpdateResourcePermissionsResponse.add_member(:request_id, Shapes::ShapeRef.new(shape: String, location_name: "RequestId"))
+    UpdateResourcePermissionsResponse.add_member(:status, Shapes::ShapeRef.new(shape: StatusCode, location: "statusCode", location_name: "Status"))
+    UpdateResourcePermissionsResponse.struct_class = Types::UpdateResourcePermissionsResponse
+
     UpdateRoleCustomPermissionRequest.add_member(:custom_permissions_name, Shapes::ShapeRef.new(shape: RoleName, required: true, location_name: "CustomPermissionsName"))
     UpdateRoleCustomPermissionRequest.add_member(:role, Shapes::ShapeRef.new(shape: Role, required: true, location: "uri", location_name: "Role"))
     UpdateRoleCustomPermissionRequest.add_member(:aws_account_id, Shapes::ShapeRef.new(shape: AwsAccountId, required: true, location: "uri", location_name: "AwsAccountId"))
@@ -16285,6 +16310,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 
+      api.add_operation(:describe_resource_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeResourcePermissions"
+        o.http_method = "GET"
+        o.http_request_uri = "/accounts/{AwsAccountId}/account-resource-permissions"
+        o.input = Shapes::ShapeRef.new(shape: DescribeResourcePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeResourcePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
       api.add_operation(:describe_role_custom_permission, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DescribeRoleCustomPermission"
         o.http_method = "GET"
@@ -18644,6 +18682,19 @@ module Aws::QuickSight
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
+      end)
+
+      api.add_operation(:update_resource_permissions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateResourcePermissions"
+        o.http_method = "PUT"
+        o.http_request_uri = "/accounts/{AwsAccountId}/account-resource-permissions"
+        o.input = Shapes::ShapeRef.new(shape: UpdateResourcePermissionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateResourcePermissionsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: InternalFailureException)
       end)
 

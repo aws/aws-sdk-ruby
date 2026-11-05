@@ -1,0 +1,89 @@
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing guide for more information:
+# https://github.com/aws/aws-sdk-ruby/blob/version-3/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+module Aws::AccountAccessRuntime
+  module Types
+
+    class AccessDeniedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class AccessDetails
+      attr_accessor account_id: ::String
+      attr_accessor account_name: ::String
+      attr_accessor role_arn: ::String
+      SENSITIVE: []
+    end
+
+    class CredentialsDetails
+      attr_accessor programmatic_access: Types::ProgrammaticAccessDetails
+      attr_accessor unknown: untyped
+      SENSITIVE: [:programmatic_access]
+
+      class ProgrammaticAccess < CredentialsDetails
+      end
+      class Unknown < CredentialsDetails
+      end
+    end
+
+    class GetRoleCredentialsRequest
+      attr_accessor tenant_id: ::String
+      attr_accessor role_arn: ::String
+      attr_accessor access_type: ("PROGRAMMATIC_ACCESS")
+      attr_accessor session_name: ::String
+      attr_accessor session_duration: ::Integer
+      SENSITIVE: []
+    end
+
+    class GetRoleCredentialsResponse
+      attr_accessor credentials_details: Types::CredentialsDetails
+      SENSITIVE: [:credentials_details]
+    end
+
+    class InternalServerException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ListRolesRequest
+      attr_accessor tenant_id: ::String
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListRolesResponse
+      attr_accessor roles: ::Array[Types::AccessDetails]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ProgrammaticAccessDetails
+      attr_accessor access_key_id: ::String
+      attr_accessor secret_access_key: ::String
+      attr_accessor session_token: ::String
+      attr_accessor expires_at: ::Time
+      SENSITIVE: []
+    end
+
+    class ThrottlingException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class UnauthorizedException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class ValidationException
+      attr_accessor message: ::String
+      SENSITIVE: []
+    end
+  end
+end

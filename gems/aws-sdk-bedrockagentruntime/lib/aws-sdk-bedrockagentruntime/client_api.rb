@@ -457,6 +457,7 @@ module Aws::BedrockAgentRuntime
     MaxResults = Shapes::IntegerShape.new(name: 'MaxResults')
     MaxTokens = Shapes::IntegerShape.new(name: 'MaxTokens')
     MaximumLength = Shapes::IntegerShape.new(name: 'MaximumLength')
+    MediaId = Shapes::StringShape.new(name: 'MediaId')
     Memories = Shapes::ListShape.new(name: 'Memories')
     Memory = Shapes::UnionShape.new(name: 'Memory')
     MemoryId = Shapes::StringShape.new(name: 'MemoryId')
@@ -1658,6 +1659,7 @@ module Aws::BedrockAgentRuntime
     GetDocumentContentRequest.add_member(:data_source_id, Shapes::ShapeRef.new(shape: DataSourceId, required: true, location: "uri", location_name: "dataSourceId"))
     GetDocumentContentRequest.add_member(:document_id, Shapes::ShapeRef.new(shape: DocumentId, required: true, location: "uri", location_name: "documentId"))
     GetDocumentContentRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: KnowledgeBaseIdentifier, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    GetDocumentContentRequest.add_member(:media_id, Shapes::ShapeRef.new(shape: MediaId, location_name: "mediaId"))
     GetDocumentContentRequest.add_member(:output_format, Shapes::ShapeRef.new(shape: DocumentOutputFormat, location_name: "outputFormat"))
     GetDocumentContentRequest.add_member(:user_context, Shapes::ShapeRef.new(shape: UserContext, location_name: "userContext"))
     GetDocumentContentRequest.struct_class = Types::GetDocumentContentRequest

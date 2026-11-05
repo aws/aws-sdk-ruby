@@ -102,6 +102,11 @@ module Aws::AppIntegrationsService
     #   The time when the application was last modified.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the application was last
+    #   modified.
+    #   @return [String]
+    #
     # @!attribute [rw] is_service
     #   Indicates whether the application is a service.
     #   @return [Boolean]
@@ -119,6 +124,7 @@ module Aws::AppIntegrationsService
       :namespace,
       :created_time,
       :last_modified_time,
+      :last_modified_region,
       :is_service,
       :application_type)
       SENSITIVE = []
@@ -169,7 +175,7 @@ module Aws::AppIntegrationsService
     end
 
     # The request conflicts with the current state of the resource. Verify
-    # the application's current state and retry the request.
+    # the resource's current state and retry the request.
     #
     # @!attribute [rw] message
     #   @return [String]
@@ -931,6 +937,11 @@ module Aws::AppIntegrationsService
     #   The last modified time of the Application.
     #   @return [Time]
     #
+    # @!attribute [rw] last_modified_region
+    #   The Amazon Web Services Region where the application was last
+    #   modified.
+    #   @return [String]
+    #
     # @!attribute [rw] tags
     #   The tags used to organize, track, or control access for this
     #   resource. For example, \{ "tags": \{"key1":"value1",
@@ -981,6 +992,7 @@ module Aws::AppIntegrationsService
       :publications,
       :created_time,
       :last_modified_time,
+      :last_modified_region,
       :tags,
       :permissions,
       :is_service,

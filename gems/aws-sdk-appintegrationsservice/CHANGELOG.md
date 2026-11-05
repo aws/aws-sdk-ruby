@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.83.0 (2026-11-05)
+------------------
+
+* Feature - This release adds a LastModifiedRegion field to GetApplication and ListApplications so customers can see which Region an application was last modified in.
+
 1.82.0 (2026-11-04)
 ------------------
 

@@ -1441,8 +1441,10 @@ module Aws::BedrockAgentRuntime
       req.send_request(options)
     end
 
-    # Retrieves the content of an ingested document from a knowledge base.
-    # Returns a pre-signed URL for secure document access.
+    # Retrieves the content of an ingested document from a knowledge base,
+    # or of an image embedded in the document. Returns a pre-signed URL for
+    # downloading the content. Use this operation to display the source of a
+    # `Retrieve` result.
     #
     # @option params [required, String] :data_source_id
     #   The unique identifier of the data source that contains the document.
@@ -1454,9 +1456,29 @@ module Aws::BedrockAgentRuntime
     #   The unique identifier of the knowledge base that contains the
     #   document.
     #
+    # @option params [String] :media_id
+    #   The unique identifier (in UUID format) of an image embedded in the
+    #   specified document. Set this parameter to the `_media_id` value in the
+    #   metadata of the corresponding `Retrieve` result. If you specify this
+    #   parameter, the response contains a pre-signed URL for the image
+    #   instead of the document, and you must omit `outputFormat` or set it to
+    #   `RAW`.
+    #
     # @option params [String] :output_format
-    #   The output format for the document content. `RAW` returns the original
-    #   file. `EXTRACTED` returns parsed text as JSON. Defaults to `RAW`.
+    #   The output format for the content. You can specify one of the
+    #   following values:
+    #
+    #   RAW
+    #
+    #   : Returns the original document, or the selected image if you specify
+    #     `mediaId`.
+    #
+    #   EXTRACTED
+    #
+    #   : Returns parsed document text as JSON.
+    #
+    #   If you omit this parameter, the default is `RAW`. You can't use
+    #   `EXTRACTED` with `mediaId`.
     #
     # @option params [Types::UserContext] :user_context
     #   Contains information about the user making the request. This is used
@@ -1475,6 +1497,7 @@ module Aws::BedrockAgentRuntime
     #     data_source_id: "DataSourceId", # required
     #     document_id: "DocumentId", # required
     #     knowledge_base_id: "KnowledgeBaseIdentifier", # required
+    #     media_id: "MediaId",
     #     output_format: "RAW", # accepts RAW, EXTRACTED
     #     user_context: {
     #       user_id: "String", # required
@@ -8492,7 +8515,7 @@ module Aws::BedrockAgentRuntime
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentruntime'
-      context[:gem_version] = '1.90.0'
+      context[:gem_version] = '1.91.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

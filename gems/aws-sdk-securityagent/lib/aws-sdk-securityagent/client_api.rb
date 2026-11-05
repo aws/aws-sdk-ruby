@@ -259,6 +259,7 @@ module Aws::SecurityAgent
     GitLabRepositoryResource = Shapes::StructureShape.new(name: 'GitLabRepositoryResource')
     GitLabResourceCapabilities = Shapes::StructureShape.new(name: 'GitLabResourceCapabilities')
     GitLabTokenType = Shapes::StringShape.new(name: 'GitLabTokenType')
+    GroupMetadata = Shapes::StructureShape.new(name: 'GroupMetadata')
     HostAddress = Shapes::StringShape.new(name: 'HostAddress')
     HttpVerification = Shapes::StructureShape.new(name: 'HttpVerification')
     IamRoles = Shapes::ListShape.new(name: 'IamRoles')
@@ -1670,6 +1671,10 @@ module Aws::SecurityAgent
     GitLabResourceCapabilities.add_member(:remediate_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "remediateCode"))
     GitLabResourceCapabilities.struct_class = Types::GitLabResourceCapabilities
 
+    GroupMetadata.add_member(:display_name, Shapes::ShapeRef.new(shape: String, location_name: "displayName"))
+    GroupMetadata.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    GroupMetadata.struct_class = Types::GroupMetadata
+
     HttpVerification.add_member(:token, Shapes::ShapeRef.new(shape: String, location_name: "token"))
     HttpVerification.add_member(:route_path, Shapes::ShapeRef.new(shape: String, location_name: "routePath"))
     HttpVerification.struct_class = Types::HttpVerification
@@ -2069,8 +2074,10 @@ module Aws::SecurityAgent
     LogLocation.struct_class = Types::LogLocation
 
     MemberMetadata.add_member(:user, Shapes::ShapeRef.new(shape: UserMetadata, location_name: "user"))
+    MemberMetadata.add_member(:group, Shapes::ShapeRef.new(shape: GroupMetadata, location_name: "group"))
     MemberMetadata.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
     MemberMetadata.add_member_subclass(:user, Types::MemberMetadata::User)
+    MemberMetadata.add_member_subclass(:group, Types::MemberMetadata::Group)
     MemberMetadata.add_member_subclass(:unknown, Types::MemberMetadata::Unknown)
     MemberMetadata.struct_class = Types::MemberMetadata
 

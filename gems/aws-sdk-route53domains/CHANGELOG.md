@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.108.0 (2026-11-05)
+------------------
+
+* Feature - Route 53 Domains now supports restoring domains. This release adds the RestoreDomain API to self-serve domain restoration.
+
 1.107.0 (2026-11-04)
 ------------------
 

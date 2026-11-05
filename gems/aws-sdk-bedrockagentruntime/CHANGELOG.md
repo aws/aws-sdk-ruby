@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.91.0 (2026-11-05)
+------------------
+
+* Feature - Amazon Bedrock Managed Knowledge Base now supports an optional mediaId parameter in GetDocumentContent that you can use to retrieve images embedded in source documents.
+
 1.90.0 (2026-11-04)
 ------------------
 

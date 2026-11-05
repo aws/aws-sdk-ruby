@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.173.0 (2026-11-05)
+------------------
+
+* Feature - Adds account-level retention policies with dry run preview and the Essentials log group class to Amazon CloudWatch Logs
+
 1.172.0 (2026-11-04)
 ------------------
 

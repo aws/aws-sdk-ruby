@@ -1082,12 +1082,15 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] log_group_class
     #   Use this parameter to specify the log group class for this log
-    #   group. There are three classes:
+    #   group. There are four classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * The `Essentials` log class supports a subset of CloudWatch Logs
+    #     features and incurs lower costs.
     #
     #   * Use the `Delivery` log class only for delivering Lambda logs to
     #     store in Amazon S3 or Amazon Data Firehose. Log events in log
@@ -2814,13 +2817,20 @@ module Aws::CloudWatchLogs
     #   the specified log group class. If you omit this parameter, log
     #   groups of all classes can be returned.
     #
-    #   Specifies the log group class for this log group. There are three
+    #   If you specify either `INFREQUENT_ACCESS` or `ESSENTIALS`, the
+    #   results include log groups in both the Infrequent Access and
+    #   Essentials log classes.
+    #
+    #   Specifies the log group class for this log group. There are four
     #   classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * The `Essentials` log class supports a subset of CloudWatch Logs
+    #     features and incurs lower costs.
     #
     #   * Use the `Delivery` log class only for delivering Lambda logs to
     #     store in Amazon S3 or Amazon Data Firehose. Log events in log
@@ -6158,12 +6168,15 @@ module Aws::CloudWatchLogs
     #
     # @!attribute [rw] log_group_class
     #   This specifies the log group class for this log group. There are
-    #   three classes:
+    #   four classes:
     #
     #   * The `Standard` log class supports all CloudWatch Logs features.
     #
     #   * The `Infrequent Access` log class supports a subset of CloudWatch
     #     Logs features and incurs lower costs.
+    #
+    #   * The `Essentials` log class supports a subset of CloudWatch Logs
+    #     features and incurs lower costs.
     #
     #   * Use the `Delivery` log class only for delivering Lambda logs to
     #     store in Amazon S3 or Amazon Data Firehose. Log events in log
@@ -6171,8 +6184,8 @@ module Aws::CloudWatchLogs
     #     one day. This log class doesn't offer rich CloudWatch Logs
     #     capabilities such as CloudWatch Logs Insights queries.
     #
-    #   For details about the features supported by the Standard and
-    #   Infrequent Access classes, see [Log classes][1]
+    #   For details about the features supported by the Standard, Infrequent
+    #   Access, and Essentials classes, see [Log classes][1]
     #
     #
     #
@@ -7959,6 +7972,36 @@ module Aws::CloudWatchLogs
     #   types are `FIELD_INDEX` and `FACET`. Field names within `Fields` and
     #   `FieldsV2` must be mutually exclusive.
     #
+    #   **Retention policy**
+    #
+    #   A retention policy must include the following attributes in a JSON
+    #   block:
+    #
+    #   retentionInDays
+    #
+    #   : The number of days to retain log events. Valid values are 30, 60,
+    #     90, 120, 150, 180, 365, 400, 545, 731, 1096, 1827, 2192, 2557,
+    #     2922, 3288, and 3653. To retain log events indefinitely, specify
+    #     the string `NEVER_EXPIRE`.
+    #
+    #   enforcementMode
+    #
+    #   : Specifies which log groups the policy applies to. Valid values are
+    #     `NEW_ONLY` and `RETROACTIVE`.
+    #
+    #     `RETROACTIVE` applies the policy to every log group that matches
+    #     the selection criteria, including log groups that existed before
+    #     you created the policy.
+    #
+    #     `NEW_ONLY` applies the policy only to log groups that are created
+    #     after you create the policy. Log groups that already existed when
+    #     you created the policy keep their own retention period.
+    #
+    #   The following is an example of a retention policy document.
+    #
+    #   `"policyDocument": "{"retentionInDays": 90, "enforcementMode":
+    #   "RETROACTIVE"}"`
+    #
     #
     #
     #   [1]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/mask-sensitive-log-data-types.html
@@ -7982,8 +8025,8 @@ module Aws::CloudWatchLogs
     #   in the account or a data source name and type combination.
     #
     #   Specifying `selectionCriteria` is valid only when you specify
-    #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY` or
-    #   `TRANSFORMER_POLICY`for `policyType`.
+    #   `SUBSCRIPTION_FILTER_POLICY`, `FIELD_INDEX_POLICY`,
+    #   `TRANSFORMER_POLICY`, or `RETENTION_POLICY` for `policyType`.
     #
     #   * If `policyType` is `SUBSCRIPTION_FILTER_POLICY`, the only
     #     supported `selectionCriteria` filter is `LogGroupName NOT IN []`
@@ -8000,6 +8043,11 @@ module Aws::CloudWatchLogs
     #     When you specify `selectionCriteria` for a field index policy you
     #     can use either `LogGroupNamePrefix` by itself or `DataSourceName`
     #     and `DataSourceType` together.
+    #
+    #   * If `policyType` is `RETENTION_POLICY`, the only supported
+    #     `selectionCriteria` filter is `LogGroupNamePrefix`. If you omit
+    #     `selectionCriteria`, the retention policy applies to all log
+    #     groups in the account.
     #
     #   The `selectionCriteria` string can be up to 25KB in length. The
     #   length is determined by using its UTF-8 bytes.

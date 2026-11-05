@@ -457,6 +457,7 @@ module Aws::LambdaMicrovms
     ManagedMicrovmImageVersion.add_member(:image_arn, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "imageArn"))
     ManagedMicrovmImageVersion.add_member(:image_version, Shapes::ShapeRef.new(shape: NonBlankString, required: true, location_name: "imageVersion"))
     ManagedMicrovmImageVersion.add_member(:status, Shapes::ShapeRef.new(shape: ManagedMicrovmImageVersionStatus, location_name: "status"))
+    ManagedMicrovmImageVersion.add_member(:supported_cpu_configurations, Shapes::ShapeRef.new(shape: CpuConfigurationList, location_name: "supportedCpuConfigurations"))
     ManagedMicrovmImageVersion.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "createdAt"))
     ManagedMicrovmImageVersion.add_member(:updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "updatedAt"))
     ManagedMicrovmImageVersion.struct_class = Types::ManagedMicrovmImageVersion

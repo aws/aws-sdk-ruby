@@ -71,6 +71,7 @@ module Aws::QConnect
     AssistantCapabilityConfiguration = Shapes::StructureShape.new(name: 'AssistantCapabilityConfiguration')
     AssistantCapabilityType = Shapes::StringShape.new(name: 'AssistantCapabilityType')
     AssistantData = Shapes::StructureShape.new(name: 'AssistantData')
+    AssistantGlobalResiliencyStatus = Shapes::StringShape.new(name: 'AssistantGlobalResiliencyStatus')
     AssistantIntegrationConfiguration = Shapes::StructureShape.new(name: 'AssistantIntegrationConfiguration')
     AssistantList = Shapes::ListShape.new(name: 'AssistantList')
     AssistantStatus = Shapes::StringShape.new(name: 'AssistantStatus')
@@ -81,6 +82,7 @@ module Aws::QConnect
     AssociationConfigurationList = Shapes::ListShape.new(name: 'AssociationConfigurationList')
     AssociationType = Shapes::StringShape.new(name: 'AssociationType')
     AttachmentFileName = Shapes::StringShape.new(name: 'AttachmentFileName')
+    AwsRegion = Shapes::StringShape.new(name: 'AwsRegion')
     BedrockFoundationModelConfigurationForParsing = Shapes::StructureShape.new(name: 'BedrockFoundationModelConfigurationForParsing')
     BedrockKnowledgeBaseArn = Shapes::StringShape.new(name: 'BedrockKnowledgeBaseArn')
     BedrockModelArnForParsing = Shapes::StringShape.new(name: 'BedrockModelArnForParsing')
@@ -263,6 +265,7 @@ module Aws::QConnect
     GetRecommendationsResponse = Shapes::StructureShape.new(name: 'GetRecommendationsResponse')
     GetSessionRequest = Shapes::StructureShape.new(name: 'GetSessionRequest')
     GetSessionResponse = Shapes::StructureShape.new(name: 'GetSessionResponse')
+    GlobalResiliencyStatus = Shapes::StringShape.new(name: 'GlobalResiliencyStatus')
     GroupingConfiguration = Shapes::StructureShape.new(name: 'GroupingConfiguration')
     GroupingCriteria = Shapes::StringShape.new(name: 'GroupingCriteria')
     GroupingValue = Shapes::StringShape.new(name: 'GroupingValue')
@@ -514,6 +517,10 @@ module Aws::QConnect
     RecommendationTriggerType = Shapes::StringShape.new(name: 'RecommendationTriggerType')
     RecommendationType = Shapes::StringShape.new(name: 'RecommendationType')
     ReferenceType = Shapes::StringShape.new(name: 'ReferenceType')
+    RegisterAssistantReplicaKeyRequest = Shapes::StructureShape.new(name: 'RegisterAssistantReplicaKeyRequest')
+    RegisterAssistantReplicaKeyResponse = Shapes::StructureShape.new(name: 'RegisterAssistantReplicaKeyResponse')
+    RegisterKnowledgeBaseReplicaKeyRequest = Shapes::StructureShape.new(name: 'RegisterKnowledgeBaseReplicaKeyRequest')
+    RegisterKnowledgeBaseReplicaKeyResponse = Shapes::StructureShape.new(name: 'RegisterKnowledgeBaseReplicaKeyResponse')
     Relevance = Shapes::StringShape.new(name: 'Relevance')
     RelevanceLevel = Shapes::StringShape.new(name: 'RelevanceLevel')
     RelevanceScore = Shapes::FloatShape.new(name: 'RelevanceScore')
@@ -524,6 +531,8 @@ module Aws::QConnect
     RenderMessageTemplateRequest = Shapes::StructureShape.new(name: 'RenderMessageTemplateRequest')
     RenderMessageTemplateResponse = Shapes::StructureShape.new(name: 'RenderMessageTemplateResponse')
     RenderingConfiguration = Shapes::StructureShape.new(name: 'RenderingConfiguration')
+    ReplicaKmsKey = Shapes::StructureShape.new(name: 'ReplicaKmsKey')
+    ReplicaKmsKeyList = Shapes::ListShape.new(name: 'ReplicaKmsKeyList')
     RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
     ResultData = Shapes::StructureShape.new(name: 'ResultData')
@@ -648,6 +657,7 @@ module Aws::QConnect
     TopK = Shapes::IntegerShape.new(name: 'TopK')
     UnauthorizedException = Shapes::StructureShape.new(name: 'UnauthorizedException')
     UnprocessableContentException = Shapes::StructureShape.new(name: 'UnprocessableContentException')
+    UnprocessableContentReason = Shapes::StringShape.new(name: 'UnprocessableContentReason')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
     UpdateAIAgentRequest = Shapes::StructureShape.new(name: 'UpdateAIAgentRequest')
@@ -742,6 +752,8 @@ module Aws::QConnect
     AIAgentData.add_member(:type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location_name: "type"))
     AIAgentData.add_member(:configuration, Shapes::ShapeRef.new(shape: AIAgentConfiguration, required: true, location_name: "configuration"))
     AIAgentData.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIAgentData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AIAgentData.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     AIAgentData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     AIAgentData.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
     AIAgentData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -756,6 +768,8 @@ module Aws::QConnect
     AIAgentSummary.add_member(:type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location_name: "type"))
     AIAgentSummary.add_member(:ai_agent_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "aiAgentArn"))
     AIAgentSummary.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIAgentSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AIAgentSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     AIAgentSummary.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
     AIAgentSummary.add_member(:configuration, Shapes::ShapeRef.new(shape: AIAgentConfiguration, location_name: "configuration"))
     AIAgentSummary.add_member(:origin, Shapes::ShapeRef.new(shape: Origin, location_name: "origin"))
@@ -798,6 +812,8 @@ module Aws::QConnect
     AIGuardrailData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     AIGuardrailData.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
     AIGuardrailData.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIGuardrailData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AIGuardrailData.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     AIGuardrailData.struct_class = Types::AIGuardrailData
 
     AIGuardrailSensitiveInformationPolicyConfig.add_member(:pii_entities_config, Shapes::ShapeRef.new(shape: GuardrailPiiEntitiesConfig, location_name: "piiEntitiesConfig"))
@@ -812,6 +828,8 @@ module Aws::QConnect
     AIGuardrailSummary.add_member(:ai_guardrail_id, Shapes::ShapeRef.new(shape: Uuid, required: true, location_name: "aiGuardrailId"))
     AIGuardrailSummary.add_member(:ai_guardrail_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "aiGuardrailArn"))
     AIGuardrailSummary.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIGuardrailSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AIGuardrailSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     AIGuardrailSummary.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
     AIGuardrailSummary.add_member(:description, Shapes::ShapeRef.new(shape: AIGuardrailDescription, location_name: "description"))
     AIGuardrailSummary.add_member(:status, Shapes::ShapeRef.new(shape: Status, location_name: "status"))
@@ -843,6 +861,8 @@ module Aws::QConnect
     AIPromptData.add_member(:template_configuration, Shapes::ShapeRef.new(shape: AIPromptTemplateConfiguration, required: true, location_name: "templateConfiguration"))
     AIPromptData.add_member(:inference_configuration, Shapes::ShapeRef.new(shape: AIPromptInferenceConfiguration, location_name: "inferenceConfiguration"))
     AIPromptData.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIPromptData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AIPromptData.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     AIPromptData.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     AIPromptData.add_member(:visibility_status, Shapes::ShapeRef.new(shape: VisibilityStatus, required: true, location_name: "visibilityStatus"))
     AIPromptData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
@@ -863,6 +883,8 @@ module Aws::QConnect
     AIPromptSummary.add_member(:type, Shapes::ShapeRef.new(shape: AIPromptType, required: true, location_name: "type"))
     AIPromptSummary.add_member(:ai_prompt_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location_name: "aiPromptArn"))
     AIPromptSummary.add_member(:modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "modifiedTime"))
+    AIPromptSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AIPromptSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     AIPromptSummary.add_member(:template_type, Shapes::ShapeRef.new(shape: AIPromptTemplateType, required: true, location_name: "templateType"))
     AIPromptSummary.add_member(:model_id, Shapes::ShapeRef.new(shape: AIPromptModelIdentifier, required: true, location_name: "modelId"))
     AIPromptSummary.add_member(:api_format, Shapes::ShapeRef.new(shape: AIPromptAPIFormat, required: true, location_name: "apiFormat"))
@@ -943,6 +965,8 @@ module Aws::QConnect
     AssistantAssociationData.add_member(:association_type, Shapes::ShapeRef.new(shape: AssociationType, required: true, location_name: "associationType"))
     AssistantAssociationData.add_member(:association_data, Shapes::ShapeRef.new(shape: AssistantAssociationOutputData, required: true, location_name: "associationData"))
     AssistantAssociationData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    AssistantAssociationData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AssistantAssociationData.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     AssistantAssociationData.struct_class = Types::AssistantAssociationData
 
     AssistantAssociationIdList.member = Shapes::ShapeRef.new(shape: UuidOrArn)
@@ -970,6 +994,8 @@ module Aws::QConnect
     AssistantAssociationSummary.add_member(:association_type, Shapes::ShapeRef.new(shape: AssociationType, required: true, location_name: "associationType"))
     AssistantAssociationSummary.add_member(:association_data, Shapes::ShapeRef.new(shape: AssistantAssociationOutputData, required: true, location_name: "associationData"))
     AssistantAssociationSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    AssistantAssociationSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AssistantAssociationSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     AssistantAssociationSummary.struct_class = Types::AssistantAssociationSummary
 
     AssistantAssociationSummaryList.member = Shapes::ShapeRef.new(shape: AssistantAssociationSummary)
@@ -989,6 +1015,9 @@ module Aws::QConnect
     AssistantData.add_member(:capability_configuration, Shapes::ShapeRef.new(shape: AssistantCapabilityConfiguration, location_name: "capabilityConfiguration"))
     AssistantData.add_member(:ai_agent_configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationMap, location_name: "aiAgentConfiguration"))
     AssistantData.add_member(:orchestrator_configuration_list, Shapes::ShapeRef.new(shape: OrchestratorConfigurationList, location_name: "orchestratorConfigurationList"))
+    AssistantData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AssistantData.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
+    AssistantData.add_member(:assistant_global_resiliency_status, Shapes::ShapeRef.new(shape: AssistantGlobalResiliencyStatus, location_name: "assistantGlobalResiliencyStatus"))
     AssistantData.struct_class = Types::AssistantData
 
     AssistantIntegrationConfiguration.add_member(:topic_integration_arn, Shapes::ShapeRef.new(shape: GenericArn, location_name: "topicIntegrationArn"))
@@ -1008,6 +1037,8 @@ module Aws::QConnect
     AssistantSummary.add_member(:capability_configuration, Shapes::ShapeRef.new(shape: AssistantCapabilityConfiguration, location_name: "capabilityConfiguration"))
     AssistantSummary.add_member(:ai_agent_configuration, Shapes::ShapeRef.new(shape: AIAgentConfigurationMap, location_name: "aiAgentConfiguration"))
     AssistantSummary.add_member(:orchestrator_configuration_list, Shapes::ShapeRef.new(shape: OrchestratorConfigurationList, location_name: "orchestratorConfigurationList"))
+    AssistantSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    AssistantSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     AssistantSummary.struct_class = Types::AssistantSummary
 
     AssociationConfiguration.add_member(:association_id, Shapes::ShapeRef.new(shape: Uuid, location_name: "associationId"))
@@ -1122,6 +1153,9 @@ module Aws::QConnect
     ContentData.add_member(:link_out_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "linkOutUri"))
     ContentData.add_member(:url, Shapes::ShapeRef.new(shape: Url, required: true, location_name: "url"))
     ContentData.add_member(:url_expiry, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "urlExpiry"))
+    ContentData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    ContentData.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
+    ContentData.add_member(:file_hash, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fileHash"))
     ContentData.struct_class = Types::ContentData
 
     ContentDataDetails.add_member(:text_data, Shapes::ShapeRef.new(shape: TextData, required: true, location_name: "textData"))
@@ -1156,6 +1190,9 @@ module Aws::QConnect
     ContentSummary.add_member(:status, Shapes::ShapeRef.new(shape: ContentStatus, required: true, location_name: "status"))
     ContentSummary.add_member(:metadata, Shapes::ShapeRef.new(shape: ContentMetadata, required: true, location_name: "metadata"))
     ContentSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    ContentSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    ContentSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
+    ContentSummary.add_member(:file_hash, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "fileHash"))
     ContentSummary.struct_class = Types::ContentSummary
 
     ContentSummaryList.member = Shapes::ShapeRef.new(shape: ContentSummary)
@@ -1972,6 +2009,8 @@ module Aws::QConnect
     KnowledgeBaseData.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
     KnowledgeBaseData.add_member(:ingestion_status, Shapes::ShapeRef.new(shape: SyncStatus, location_name: "ingestionStatus"))
     KnowledgeBaseData.add_member(:ingestion_failure_reasons, Shapes::ShapeRef.new(shape: FailureReason, location_name: "ingestionFailureReasons"))
+    KnowledgeBaseData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    KnowledgeBaseData.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     KnowledgeBaseData.struct_class = Types::KnowledgeBaseData
 
     KnowledgeBaseList.member = Shapes::ShapeRef.new(shape: KnowledgeBaseSummary)
@@ -1987,6 +2026,8 @@ module Aws::QConnect
     KnowledgeBaseSummary.add_member(:server_side_encryption_configuration, Shapes::ShapeRef.new(shape: ServerSideEncryptionConfiguration, location_name: "serverSideEncryptionConfiguration"))
     KnowledgeBaseSummary.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
     KnowledgeBaseSummary.add_member(:tags, Shapes::ShapeRef.new(shape: Tags, location_name: "tags"))
+    KnowledgeBaseSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastModifiedTime"))
+    KnowledgeBaseSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     KnowledgeBaseSummary.struct_class = Types::KnowledgeBaseSummary
 
     KnowledgeSource.add_member(:assistant_association_ids, Shapes::ShapeRef.new(shape: AssistantAssociationIdList, location_name: "assistantAssociationIds"))
@@ -2376,6 +2417,7 @@ module Aws::QConnect
     ModelSummary.add_member(:model_lifecycle, Shapes::ShapeRef.new(shape: ModelLifecycle, location_name: "modelLifecycle"))
     ModelSummary.add_member(:legacy_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "legacyTimestamp"))
     ModelSummary.add_member(:end_of_life_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "endOfLifeTimestamp"))
+    ModelSummary.add_member(:global_resiliency_status, Shapes::ShapeRef.new(shape: GlobalResiliencyStatus, location_name: "globalResiliencyStatus"))
     ModelSummary.struct_class = Types::ModelSummary
 
     ModelSummaryList.member = Shapes::ShapeRef.new(shape: ModelSummary)
@@ -2593,6 +2635,7 @@ module Aws::QConnect
     QuickResponseData.add_member(:status, Shapes::ShapeRef.new(shape: QuickResponseStatus, required: true, location_name: "status"))
     QuickResponseData.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "createdTime"))
     QuickResponseData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "lastModifiedTime"))
+    QuickResponseData.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     QuickResponseData.add_member(:contents, Shapes::ShapeRef.new(shape: QuickResponseContents, location_name: "contents"))
     QuickResponseData.add_member(:description, Shapes::ShapeRef.new(shape: QuickResponseDescription, location_name: "description"))
     QuickResponseData.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
@@ -2650,6 +2693,7 @@ module Aws::QConnect
     QuickResponseSearchResultData.add_member(:contents, Shapes::ShapeRef.new(shape: QuickResponseContents, required: true, location_name: "contents"))
     QuickResponseSearchResultData.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "createdTime"))
     QuickResponseSearchResultData.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "lastModifiedTime"))
+    QuickResponseSearchResultData.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     QuickResponseSearchResultData.add_member(:is_active, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "isActive"))
     QuickResponseSearchResultData.add_member(:description, Shapes::ShapeRef.new(shape: QuickResponseDescription, location_name: "description"))
     QuickResponseSearchResultData.add_member(:grouping_configuration, Shapes::ShapeRef.new(shape: GroupingConfiguration, location_name: "groupingConfiguration"))
@@ -2673,6 +2717,7 @@ module Aws::QConnect
     QuickResponseSummary.add_member(:status, Shapes::ShapeRef.new(shape: QuickResponseStatus, required: true, location_name: "status"))
     QuickResponseSummary.add_member(:created_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "createdTime"))
     QuickResponseSummary.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: SyntheticTimestamp_epoch_seconds, required: true, location_name: "lastModifiedTime"))
+    QuickResponseSummary.add_member(:last_modified_region, Shapes::ShapeRef.new(shape: AwsRegion, location_name: "lastModifiedRegion"))
     QuickResponseSummary.add_member(:description, Shapes::ShapeRef.new(shape: QuickResponseDescription, location_name: "description"))
     QuickResponseSummary.add_member(:last_modified_by, Shapes::ShapeRef.new(shape: GenericArn, location_name: "lastModifiedBy"))
     QuickResponseSummary.add_member(:is_active, Shapes::ShapeRef.new(shape: Boolean, location_name: "isActive"))
@@ -2713,6 +2758,22 @@ module Aws::QConnect
 
     RecommendationTriggerList.member = Shapes::ShapeRef.new(shape: RecommendationTrigger)
 
+    RegisterAssistantReplicaKeyRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
+    RegisterAssistantReplicaKeyRequest.add_member(:replica_kms_key, Shapes::ShapeRef.new(shape: ReplicaKmsKey, required: true, location_name: "replicaKmsKey"))
+    RegisterAssistantReplicaKeyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    RegisterAssistantReplicaKeyRequest.struct_class = Types::RegisterAssistantReplicaKeyRequest
+
+    RegisterAssistantReplicaKeyResponse.add_member(:assistant, Shapes::ShapeRef.new(shape: AssistantData, required: true, location_name: "assistant"))
+    RegisterAssistantReplicaKeyResponse.struct_class = Types::RegisterAssistantReplicaKeyResponse
+
+    RegisterKnowledgeBaseReplicaKeyRequest.add_member(:knowledge_base_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "knowledgeBaseId"))
+    RegisterKnowledgeBaseReplicaKeyRequest.add_member(:replica_kms_key, Shapes::ShapeRef.new(shape: ReplicaKmsKey, required: true, location_name: "replicaKmsKey"))
+    RegisterKnowledgeBaseReplicaKeyRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    RegisterKnowledgeBaseReplicaKeyRequest.struct_class = Types::RegisterKnowledgeBaseReplicaKeyRequest
+
+    RegisterKnowledgeBaseReplicaKeyResponse.add_member(:knowledge_base, Shapes::ShapeRef.new(shape: KnowledgeBaseData, required: true, location_name: "knowledgeBase"))
+    RegisterKnowledgeBaseReplicaKeyResponse.struct_class = Types::RegisterKnowledgeBaseReplicaKeyResponse
+
     RemoveAssistantAIAgentRequest.add_member(:assistant_id, Shapes::ShapeRef.new(shape: UuidOrArn, required: true, location: "uri", location_name: "assistantId"))
     RemoveAssistantAIAgentRequest.add_member(:ai_agent_type, Shapes::ShapeRef.new(shape: AIAgentType, required: true, location: "querystring", location_name: "aiAgentType"))
     RemoveAssistantAIAgentRequest.add_member(:orchestrator_use_case, Shapes::ShapeRef.new(shape: NonEmptyString, location: "querystring", location_name: "orchestratorUseCase"))
@@ -2738,6 +2799,11 @@ module Aws::QConnect
 
     RenderingConfiguration.add_member(:template_uri, Shapes::ShapeRef.new(shape: Uri, location_name: "templateUri"))
     RenderingConfiguration.struct_class = Types::RenderingConfiguration
+
+    ReplicaKmsKey.add_member(:arn, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "arn"))
+    ReplicaKmsKey.struct_class = Types::ReplicaKmsKey
+
+    ReplicaKmsKeyList.member = Shapes::ShapeRef.new(shape: ReplicaKmsKey)
 
     RequestTimeoutException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
     RequestTimeoutException.struct_class = Types::RequestTimeoutException
@@ -2920,6 +2986,7 @@ module Aws::QConnect
     SendMessageResponse.struct_class = Types::SendMessageResponse
 
     ServerSideEncryptionConfiguration.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "kmsKeyId"))
+    ServerSideEncryptionConfiguration.add_member(:replica_kms_keys, Shapes::ShapeRef.new(shape: ReplicaKmsKeyList, location_name: "replicaKmsKeys"))
     ServerSideEncryptionConfiguration.struct_class = Types::ServerSideEncryptionConfiguration
 
     ServiceQuotaExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
@@ -3221,6 +3288,7 @@ module Aws::QConnect
     UnauthorizedException.struct_class = Types::UnauthorizedException
 
     UnprocessableContentException.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "message"))
+    UnprocessableContentException.add_member(:reason, Shapes::ShapeRef.new(shape: UnprocessableContentReason, location_name: "reason"))
     UnprocessableContentException.struct_class = Types::UnprocessableContentException
 
     UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: Arn, required: true, location: "uri", location_name: "resourceArn"))
@@ -4431,6 +4499,34 @@ module Aws::QConnect
         )
       end)
 
+      api.add_operation(:register_assistant_replica_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterAssistantReplicaKey"
+        o.http_method = "PUT"
+        o.http_request_uri = "/assistants/{assistantId}/replicaKey"
+        o.input = Shapes::ShapeRef.new(shape: RegisterAssistantReplicaKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterAssistantReplicaKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
+      api.add_operation(:register_knowledge_base_replica_key, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterKnowledgeBaseReplicaKey"
+        o.http_method = "PUT"
+        o.http_request_uri = "/knowledgeBases/{knowledgeBaseId}/replicaKey"
+        o.input = Shapes::ShapeRef.new(shape: RegisterKnowledgeBaseReplicaKeyRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterKnowledgeBaseReplicaKeyResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+      end)
+
       api.add_operation(:remove_assistant_ai_agent, Seahorse::Model::Operation.new.tap do |o|
         o.name = "RemoveAssistantAIAgent"
         o.http_method = "DELETE"
@@ -4438,6 +4534,7 @@ module Aws::QConnect
         o.input = Shapes::ShapeRef.new(shape: RemoveAssistantAIAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: RemoveAssistantAIAgentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
@@ -4666,6 +4763,7 @@ module Aws::QConnect
         o.input = Shapes::ShapeRef.new(shape: UpdateAssistantAIAgentRequest)
         o.output = Shapes::ShapeRef.new(shape: UpdateAssistantAIAgentResponse)
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)

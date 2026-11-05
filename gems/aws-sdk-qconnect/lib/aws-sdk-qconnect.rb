@@ -55,7 +55,7 @@ module Aws::QConnect
   autoload :EndpointProvider, 'aws-sdk-qconnect/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-qconnect/endpoints'
 
-  GEM_VERSION = '1.69.0'
+  GEM_VERSION = '1.70.0'
 
 end
 

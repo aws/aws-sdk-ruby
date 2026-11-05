@@ -810,6 +810,35 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # <text>The auto-upgrade assessment information for a job configured with glueVersion=auto.</text>
+    #
+    # @!attribute [rw] target_version
+    #   <text>The target Glue runtime version the job is being upgraded to.</text>
+    #   @return [String]
+    #
+    # @!attribute [rw] source_version
+    #   <text>The source Glue runtime version the job was running before auto-version was enabled.</text>
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   <text>The current auto-upgrade lifecycle status (OBSERVING, UPGRADING, UPGRADE_SUCCEEDED, UPGRADE_FAILED, STOPPED, WAITING_FOR_CONSENT).</text>
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   <text>The unique identifier of the auto-upgrade assessment analysis.</text>
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/AutoUpgradeMetadata AWS API Documentation
+    #
+    class AutoUpgradeMetadata < Struct.new(
+      :target_version,
+      :source_version,
+      :status,
+      :analysis_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # A list of errors that can occur when registering partition indexes for
     # an existing table.
     #
@@ -15630,6 +15659,82 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the upgrade analysis to retrieve.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job associated with the analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobUpgradeAnalysisRequest AWS API Documentation
+    #
+    class GetJobUpgradeAnalysisRequest < Struct.new(
+      :analysis_id,
+      :job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] job_name
+    #   The name of the job associated with this analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the upgrade analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] source_version
+    #   The Glue version the job was running before the upgrade, for example
+    #   `4.0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] target_version
+    #   The Glue version the job will be upgraded to, for example `6.0`.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_type
+    #   The type of upgrade analysis. For auto-upgrade jobs, this value is
+    #   `AUTO_UPGRADE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_upgrade_evaluation_summary
+    #   The Amazon S3 URI of the terminal-state evaluation summary,
+    #   available once the analysis reaches a terminal status (`SUCCEEDED`
+    #   or `FAILED`).
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   The reason the analysis did not complete.
+    #   @return [String]
+    #
+    # @!attribute [rw] auto_upgrade_eligibility_summary
+    #   The Amazon S3 URI of the consent report summarizing upgrade
+    #   assessment findings. Populated when the analysis reaches
+    #   `WAITING_FOR_CONSENT` and remains available in all subsequent
+    #   states.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobUpgradeAnalysisResponse AWS API Documentation
+    #
+    class GetJobUpgradeAnalysisResponse < Struct.new(
+      :job_name,
+      :analysis_id,
+      :status,
+      :source_version,
+      :target_version,
+      :analysis_type,
+      :auto_upgrade_evaluation_summary,
+      :error_message,
+      :auto_upgrade_eligibility_summary)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] next_token
     #   A continuation token, if this is a continuation call.
     #   @return [String]
@@ -20571,6 +20676,10 @@ module Aws::Glue
     #   The name of an Glue usage profile associated with the job.
     #   @return [String]
     #
+    # @!attribute [rw] auto_upgrade_metadata
+    #   <text>The auto-upgrade assessment information for a job configured with glueVersion=auto. This field is null when the job is not configured to auto.</text>
+    #   @return [Types::AutoUpgradeMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/Job AWS API Documentation
     #
     class Job < Struct.new(
@@ -20600,7 +20709,8 @@ module Aws::Glue
       :execution_class,
       :source_control_details,
       :maintenance_window,
-      :profile_name)
+      :profile_name,
+      :auto_upgrade_metadata)
       SENSITIVE = [:code_gen_configuration_nodes]
       include Aws::Structure
     end
@@ -30536,6 +30646,46 @@ module Aws::Glue
       include Aws::Structure
     end
 
+    # @!attribute [rw] job_name
+    #   The name of the job associated with the analysis to resume.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the upgrade analysis. The analysis must be
+    #   in `WAITING_FOR_CONSENT` status.
+    #   @return [String]
+    #
+    # @!attribute [rw] upgrade_consent
+    #   The customer's decision on whether to proceed with the upgrade.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobUpgradeAnalysisRequest AWS API Documentation
+    #
+    class StartJobUpgradeAnalysisRequest < Struct.new(
+      :job_name,
+      :analysis_id,
+      :upgrade_consent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the upgrade analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] job_name
+    #   The name of the job associated with this analysis.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobUpgradeAnalysisResponse AWS API Documentation
+    #
+    class StartJobUpgradeAnalysisResponse < Struct.new(
+      :analysis_id,
+      :job_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] transform_id
     #   The unique identifier of the machine learning transform.
     #   @return [String]
@@ -31054,6 +31204,27 @@ module Aws::Glue
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopCrawlerScheduleResponse AWS API Documentation
     #
     class StopCrawlerScheduleResponse < Aws::EmptyStructure; end
+
+    # @!attribute [rw] job_name
+    #   The name of the job associated with the analysis.
+    #   @return [String]
+    #
+    # @!attribute [rw] analysis_id
+    #   The unique identifier of the analysis to stop.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopJobUpgradeAnalysisRequest AWS API Documentation
+    #
+    class StopJobUpgradeAnalysisRequest < Struct.new(
+      :job_name,
+      :analysis_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopJobUpgradeAnalysisResponse AWS API Documentation
+    #
+    class StopJobUpgradeAnalysisResponse < Aws::EmptyStructure; end
 
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog where the table reside. If none is

@@ -240,6 +240,7 @@ module Aws
         def publications: () -> ::Array[Types::Publication]
         def created_time: () -> ::Time
         def last_modified_time: () -> ::Time
+        def last_modified_region: () -> ::String
         def tags: () -> ::Hash[::String, ::String]
         def permissions: () -> ::Array[::String]
         def is_service: () -> bool

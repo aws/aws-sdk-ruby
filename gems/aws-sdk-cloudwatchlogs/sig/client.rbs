@@ -197,7 +197,7 @@ module Aws
                               log_group_name: ::String,
                               ?kms_key_id: ::String,
                               ?tags: Hash[::String, ::String],
-                              ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY"),
+                              ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS"),
                               ?deletion_protection_enabled: bool
                             ) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> ::Seahorse::Client::_ResponseSuccess[::Aws::EmptyStructure]
@@ -567,7 +567,7 @@ module Aws
                                  ?next_token: ::String,
                                  ?limit: ::Integer,
                                  ?include_linked_accounts: bool,
-                                 ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY"),
+                                 ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS"),
                                  ?log_group_identifiers: Array[::String]
                                ) -> _DescribeLogGroupsResponseSuccess
                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DescribeLogGroupsResponseSuccess
@@ -975,7 +975,7 @@ module Aws
       def list_aggregate_log_group_summaries: (
                                                 ?account_identifiers: Array[::String],
                                                 ?include_linked_accounts: bool,
-                                                ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY"),
+                                                ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS"),
                                                 ?log_group_name_pattern: ::String,
                                                 ?data_sources: Array[
                                                   {
@@ -1036,7 +1036,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/CloudWatchLogs/Client.html#list_log_groups-instance_method
       def list_log_groups: (
                              ?log_group_name_pattern: ::String,
-                             ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY"),
+                             ?log_group_class: ("STANDARD" | "INFREQUENT_ACCESS" | "DELIVERY" | "ESSENTIALS"),
                              ?include_linked_accounts: bool,
                              ?account_identifiers: Array[::String],
                              ?next_token: ::String,

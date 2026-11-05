@@ -532,7 +532,7 @@ module Aws
                                application_id: ::String,
                                agent_space_id: ::String,
                                membership_id: ::String,
-                               member_type: ("USER"),
+                               member_type: ("USER" | "GROUP"),
                                ?config: {
                                  user: {
                                    role: ("MEMBER")?
@@ -799,7 +799,7 @@ module Aws
                                application_id: ::String,
                                agent_space_id: ::String,
                                membership_id: ::String,
-                               ?member_type: ("USER")
+                               ?member_type: ("USER" | "GROUP")
                              ) -> _DeleteMembershipResponseSuccess
                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteMembershipResponseSuccess
 
@@ -1135,7 +1135,7 @@ module Aws
       def list_memberships: (
                               application_id: ::String,
                               agent_space_id: ::String,
-                              ?member_type: ("USER" | "ALL"),
+                              ?member_type: ("USER" | "GROUP" | "ALL"),
                               ?max_results: ::Integer,
                               ?next_token: ::String
                             ) -> _ListMembershipsResponseSuccess

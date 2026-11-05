@@ -2484,8 +2484,8 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Creates a new membership, granting a user access to an agent space
-    # within an application.
+    # Creates a new membership, granting a user or group access to an agent
+    # space within an application.
     #
     # @option params [required, String] :application_id
     #   The unique identifier of the application that contains the agent
@@ -2498,7 +2498,9 @@ module Aws::SecurityAgent
     #   The unique identifier for the membership.
     #
     # @option params [required, String] :member_type
-    #   The type of member. Currently, only USER is supported.
+    #   The type of member. Use USER for an individual user or GROUP for an
+    #   IAM Identity Center group. All members of a group have access to the
+    #   agent space.
     #
     # @option params [Types::MembershipConfig] :config
     #   The configuration for the membership, such as the user role.
@@ -2511,7 +2513,7 @@ module Aws::SecurityAgent
     #     application_id: "ApplicationId", # required
     #     agent_space_id: "AgentSpaceId", # required
     #     membership_id: "MembershipId", # required
-    #     member_type: "USER", # required, accepts USER
+    #     member_type: "USER", # required, accepts USER, GROUP
     #     config: {
     #       user: {
     #         role: "MEMBER", # accepts MEMBER
@@ -3409,7 +3411,8 @@ module Aws::SecurityAgent
       req.send_request(options)
     end
 
-    # Deletes a membership, revoking a user's access to an agent space.
+    # Deletes a membership, revoking a user's or group's access to an
+    # agent space.
     #
     # @option params [required, String] :application_id
     #   The unique identifier of the application that contains the agent
@@ -3432,7 +3435,7 @@ module Aws::SecurityAgent
     #     application_id: "ApplicationId", # required
     #     agent_space_id: "AgentSpaceId", # required
     #     membership_id: "MembershipId", # required
-    #     member_type: "USER", # accepts USER
+    #     member_type: "USER", # accepts USER, GROUP
     #   })
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/DeleteMembership AWS API Documentation
@@ -4585,7 +4588,7 @@ module Aws::SecurityAgent
     #   resp = client.list_memberships({
     #     application_id: "ApplicationId", # required
     #     agent_space_id: "AgentSpaceId", # required
-    #     member_type: "USER", # accepts USER, ALL
+    #     member_type: "USER", # accepts USER, GROUP, ALL
     #     max_results: 1,
     #     next_token: "NextToken",
     #   })
@@ -4596,10 +4599,12 @@ module Aws::SecurityAgent
     #   resp.membership_summaries[0].membership_id #=> String
     #   resp.membership_summaries[0].application_id #=> String
     #   resp.membership_summaries[0].agent_space_id #=> String
-    #   resp.membership_summaries[0].member_type #=> String, one of "USER"
+    #   resp.membership_summaries[0].member_type #=> String, one of "USER", "GROUP"
     #   resp.membership_summaries[0].config.user.role #=> String, one of "MEMBER"
     #   resp.membership_summaries[0].metadata.user.username #=> String
     #   resp.membership_summaries[0].metadata.user.email #=> String
+    #   resp.membership_summaries[0].metadata.group.display_name #=> String
+    #   resp.membership_summaries[0].metadata.group.description #=> String
     #   resp.membership_summaries[0].created_at #=> Time
     #   resp.membership_summaries[0].updated_at #=> Time
     #   resp.membership_summaries[0].created_by #=> String
@@ -6966,7 +6971,7 @@ module Aws::SecurityAgent
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-securityagent'
-      context[:gem_version] = '1.29.0'
+      context[:gem_version] = '1.30.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -149,6 +149,8 @@ module Aws::Route53Domains
     ResendContactReachabilityEmailRequest = Shapes::StructureShape.new(name: 'ResendContactReachabilityEmailRequest')
     ResendContactReachabilityEmailResponse = Shapes::StructureShape.new(name: 'ResendContactReachabilityEmailResponse')
     ResendOperationAuthorizationRequest = Shapes::StructureShape.new(name: 'ResendOperationAuthorizationRequest')
+    RestoreDomainRequest = Shapes::StructureShape.new(name: 'RestoreDomainRequest')
+    RestoreDomainResponse = Shapes::StructureShape.new(name: 'RestoreDomainResponse')
     RetrieveDomainAuthCodeRequest = Shapes::StructureShape.new(name: 'RetrieveDomainAuthCodeRequest')
     RetrieveDomainAuthCodeResponse = Shapes::StructureShape.new(name: 'RetrieveDomainAuthCodeResponse')
     SortCondition = Shapes::StructureShape.new(name: 'SortCondition')
@@ -545,6 +547,13 @@ module Aws::Route53Domains
 
     ResendOperationAuthorizationRequest.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, required: true, location_name: "OperationId"))
     ResendOperationAuthorizationRequest.struct_class = Types::ResendOperationAuthorizationRequest
+
+    RestoreDomainRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    RestoreDomainRequest.add_member(:consent, Shapes::ShapeRef.new(shape: Consent, location_name: "Consent"))
+    RestoreDomainRequest.struct_class = Types::RestoreDomainRequest
+
+    RestoreDomainResponse.add_member(:operation_id, Shapes::ShapeRef.new(shape: OperationId, location_name: "OperationId"))
+    RestoreDomainResponse.struct_class = Types::RestoreDomainResponse
 
     RetrieveDomainAuthCodeRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
     RetrieveDomainAuthCodeRequest.struct_class = Types::RetrieveDomainAuthCodeRequest
@@ -990,6 +999,18 @@ module Aws::Route53Domains
         o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         o.errors << Shapes::ShapeRef.new(shape: TLDInMaintenance)
+      end)
+
+      api.add_operation(:restore_domain, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RestoreDomain"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RestoreDomainRequest)
+        o.output = Shapes::ShapeRef.new(shape: RestoreDomainResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        o.errors << Shapes::ShapeRef.new(shape: DuplicateRequest)
+        o.errors << Shapes::ShapeRef.new(shape: OperationLimitExceeded)
+        o.errors << Shapes::ShapeRef.new(shape: UnsupportedTLD)
       end)
 
       api.add_operation(:retrieve_domain_auth_code, Seahorse::Model::Operation.new.tap do |o|

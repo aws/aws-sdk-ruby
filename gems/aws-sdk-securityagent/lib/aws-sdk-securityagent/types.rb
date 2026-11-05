@@ -2894,7 +2894,9 @@ module Aws::SecurityAgent
     #   @return [String]
     #
     # @!attribute [rw] member_type
-    #   The type of member. Currently, only USER is supported.
+    #   The type of member. Use USER for an individual user or GROUP for an
+    #   IAM Identity Center group. All members of a group have access to the
+    #   agent space.
     #   @return [String]
     #
     # @!attribute [rw] config
@@ -4951,6 +4953,26 @@ module Aws::SecurityAgent
       include Aws::Structure
     end
 
+    # Contains metadata about an IAM Identity Center group member, including
+    # the group display name and description.
+    #
+    # @!attribute [rw] display_name
+    #   The display name of the group.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   The description of the group.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/GroupMetadata AWS API Documentation
+    #
+    class GroupMetadata < Struct.new(
+      :display_name,
+      :description)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Contains HTTP route verification details for a target domain,
     # including the route path and token to serve for domain ownership
     # verification.
@@ -6839,16 +6861,22 @@ module Aws::SecurityAgent
     #   The user metadata for the member.
     #   @return [Types::UserMetadata]
     #
+    # @!attribute [rw] group
+    #   The group metadata for the member.
+    #   @return [Types::GroupMetadata]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/securityagent-2025-09-06/MemberMetadata AWS API Documentation
     #
     class MemberMetadata < Struct.new(
       :user,
+      :group,
       :unknown)
       SENSITIVE = []
       include Aws::Structure
       include Aws::Structure::Union
 
       class User < MemberMetadata; end
+      class Group < MemberMetadata; end
       class Unknown < MemberMetadata; end
     end
 

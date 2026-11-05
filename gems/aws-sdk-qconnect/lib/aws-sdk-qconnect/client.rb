@@ -1054,6 +1054,8 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent.modified_time #=> Time
+    #   resp.ai_agent.last_modified_time #=> Time
+    #   resp.ai_agent.last_modified_region #=> String
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_agent.tags #=> Hash
@@ -1269,6 +1271,8 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent.modified_time #=> Time
+    #   resp.ai_agent.last_modified_time #=> Time
+    #   resp.ai_agent.last_modified_region #=> String
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_agent.tags #=> Hash
@@ -1453,6 +1457,8 @@ module Aws::QConnect
     #   resp.ai_guardrail.tags["TagKey"] #=> String
     #   resp.ai_guardrail.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
     #   resp.ai_guardrail.modified_time #=> Time
+    #   resp.ai_guardrail.last_modified_time #=> Time
+    #   resp.ai_guardrail.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAIGuardrail AWS API Documentation
     #
@@ -1542,6 +1548,8 @@ module Aws::QConnect
     #   resp.ai_guardrail.tags["TagKey"] #=> String
     #   resp.ai_guardrail.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
     #   resp.ai_guardrail.modified_time #=> Time
+    #   resp.ai_guardrail.last_modified_time #=> Time
+    #   resp.ai_guardrail.last_modified_region #=> String
     #   resp.version_number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAIGuardrailVersion AWS API Documentation
@@ -1667,6 +1675,8 @@ module Aws::QConnect
     #   resp.ai_prompt.inference_configuration.top_k #=> Integer
     #   resp.ai_prompt.inference_configuration.max_tokens_to_sample #=> Integer
     #   resp.ai_prompt.modified_time #=> Time
+    #   resp.ai_prompt.last_modified_time #=> Time
+    #   resp.ai_prompt.last_modified_region #=> String
     #   resp.ai_prompt.description #=> String
     #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_prompt.tags #=> Hash
@@ -1739,6 +1749,8 @@ module Aws::QConnect
     #   resp.ai_prompt.inference_configuration.top_k #=> Integer
     #   resp.ai_prompt.inference_configuration.max_tokens_to_sample #=> Integer
     #   resp.ai_prompt.modified_time #=> Time
+    #   resp.ai_prompt.last_modified_time #=> Time
+    #   resp.ai_prompt.last_modified_region #=> String
     #   resp.ai_prompt.description #=> String
     #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_prompt.tags #=> Hash
@@ -1819,6 +1831,11 @@ module Aws::QConnect
     #     },
     #     server_side_encryption_configuration: {
     #       kms_key_id: "NonEmptyString",
+    #       replica_kms_keys: [
+    #         {
+    #           arn: "NonEmptyString", # required
+    #         },
+    #       ],
     #     },
     #   })
     #
@@ -1833,6 +1850,8 @@ module Aws::QConnect
     #   resp.assistant.tags #=> Hash
     #   resp.assistant.tags["TagKey"] #=> String
     #   resp.assistant.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.assistant.server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.assistant.server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
     #   resp.assistant.integration_configuration.topic_integration_arn #=> String
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
@@ -1841,6 +1860,9 @@ module Aws::QConnect
     #   resp.assistant.orchestrator_configuration_list #=> Array
     #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
+    #   resp.assistant.last_modified_time #=> Time
+    #   resp.assistant.last_modified_region #=> String
+    #   resp.assistant.assistant_global_resiliency_status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAssistant AWS API Documentation
     #
@@ -1916,6 +1938,8 @@ module Aws::QConnect
     #   resp.assistant_association.association_data.external_bedrock_knowledge_base_config.access_role_arn #=> String
     #   resp.assistant_association.tags #=> Hash
     #   resp.assistant_association.tags["TagKey"] #=> String
+    #   resp.assistant_association.last_modified_time #=> Time
+    #   resp.assistant_association.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateAssistantAssociation AWS API Documentation
     #
@@ -2024,6 +2048,9 @@ module Aws::QConnect
     #   resp.content.link_out_uri #=> String
     #   resp.content.url #=> String
     #   resp.content.url_expiry #=> Time
+    #   resp.content.last_modified_time #=> Time
+    #   resp.content.last_modified_region #=> String
+    #   resp.content.file_hash #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateContent AWS API Documentation
     #
@@ -2282,6 +2309,11 @@ module Aws::QConnect
     #     },
     #     server_side_encryption_configuration: {
     #       kms_key_id: "NonEmptyString",
+    #       replica_kms_keys: [
+    #         {
+    #           arn: "NonEmptyString", # required
+    #         },
+    #       ],
     #     },
     #     description: "Description",
     #     tags: {
@@ -2322,12 +2354,16 @@ module Aws::QConnect
     #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
     #   resp.knowledge_base.rendering_configuration.template_uri #=> String
     #   resp.knowledge_base.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.knowledge_base.server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.knowledge_base.server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
     #   resp.knowledge_base.description #=> String
     #   resp.knowledge_base.tags #=> Hash
     #   resp.knowledge_base.tags["TagKey"] #=> String
     #   resp.knowledge_base.ingestion_status #=> String, one of "SYNC_FAILED", "SYNCING_IN_PROGRESS", "SYNC_SUCCESS", "CREATE_IN_PROGRESS"
     #   resp.knowledge_base.ingestion_failure_reasons #=> Array
     #   resp.knowledge_base.ingestion_failure_reasons[0] #=> String
+    #   resp.knowledge_base.last_modified_time #=> Time
+    #   resp.knowledge_base.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/CreateKnowledgeBase AWS API Documentation
     #
@@ -3111,6 +3147,7 @@ module Aws::QConnect
     #   resp.quick_response.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.quick_response.created_time #=> Time
     #   resp.quick_response.last_modified_time #=> Time
+    #   resp.quick_response.last_modified_region #=> String
     #   resp.quick_response.contents.plain_text.content #=> String
     #   resp.quick_response.contents.markdown.content #=> String
     #   resp.quick_response.description #=> String
@@ -3955,6 +3992,8 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent.modified_time #=> Time
+    #   resp.ai_agent.last_modified_time #=> Time
+    #   resp.ai_agent.last_modified_region #=> String
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_agent.tags #=> Hash
@@ -4033,6 +4072,8 @@ module Aws::QConnect
     #   resp.ai_guardrail.tags["TagKey"] #=> String
     #   resp.ai_guardrail.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
     #   resp.ai_guardrail.modified_time #=> Time
+    #   resp.ai_guardrail.last_modified_time #=> Time
+    #   resp.ai_guardrail.last_modified_region #=> String
     #   resp.version_number #=> Integer
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetAIGuardrail AWS API Documentation
@@ -4082,6 +4123,8 @@ module Aws::QConnect
     #   resp.ai_prompt.inference_configuration.top_k #=> Integer
     #   resp.ai_prompt.inference_configuration.max_tokens_to_sample #=> Integer
     #   resp.ai_prompt.modified_time #=> Time
+    #   resp.ai_prompt.last_modified_time #=> Time
+    #   resp.ai_prompt.last_modified_region #=> String
     #   resp.ai_prompt.description #=> String
     #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_prompt.tags #=> Hash
@@ -4126,6 +4169,8 @@ module Aws::QConnect
     #   resp.assistant.tags #=> Hash
     #   resp.assistant.tags["TagKey"] #=> String
     #   resp.assistant.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.assistant.server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.assistant.server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
     #   resp.assistant.integration_configuration.topic_integration_arn #=> String
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
@@ -4134,6 +4179,9 @@ module Aws::QConnect
     #   resp.assistant.orchestrator_configuration_list #=> Array
     #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
+    #   resp.assistant.last_modified_time #=> Time
+    #   resp.assistant.last_modified_region #=> String
+    #   resp.assistant.assistant_global_resiliency_status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetAssistant AWS API Documentation
     #
@@ -4178,6 +4226,8 @@ module Aws::QConnect
     #   resp.assistant_association.association_data.external_bedrock_knowledge_base_config.access_role_arn #=> String
     #   resp.assistant_association.tags #=> Hash
     #   resp.assistant_association.tags["TagKey"] #=> String
+    #   resp.assistant_association.last_modified_time #=> Time
+    #   resp.assistant_association.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetAssistantAssociation AWS API Documentation
     #
@@ -4228,6 +4278,9 @@ module Aws::QConnect
     #   resp.content.link_out_uri #=> String
     #   resp.content.url #=> String
     #   resp.content.url_expiry #=> Time
+    #   resp.content.last_modified_time #=> Time
+    #   resp.content.last_modified_region #=> String
+    #   resp.content.file_hash #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetContent AWS API Documentation
     #
@@ -4328,6 +4381,9 @@ module Aws::QConnect
     #   resp.content_summary.metadata["NonEmptyString"] #=> String
     #   resp.content_summary.tags #=> Hash
     #   resp.content_summary.tags["TagKey"] #=> String
+    #   resp.content_summary.last_modified_time #=> Time
+    #   resp.content_summary.last_modified_region #=> String
+    #   resp.content_summary.file_hash #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetContentSummary AWS API Documentation
     #
@@ -4433,12 +4489,16 @@ module Aws::QConnect
     #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
     #   resp.knowledge_base.rendering_configuration.template_uri #=> String
     #   resp.knowledge_base.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.knowledge_base.server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.knowledge_base.server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
     #   resp.knowledge_base.description #=> String
     #   resp.knowledge_base.tags #=> Hash
     #   resp.knowledge_base.tags["TagKey"] #=> String
     #   resp.knowledge_base.ingestion_status #=> String, one of "SYNC_FAILED", "SYNCING_IN_PROGRESS", "SYNC_SUCCESS", "CREATE_IN_PROGRESS"
     #   resp.knowledge_base.ingestion_failure_reasons #=> Array
     #   resp.knowledge_base.ingestion_failure_reasons[0] #=> String
+    #   resp.knowledge_base.last_modified_time #=> Time
+    #   resp.knowledge_base.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/GetKnowledgeBase AWS API Documentation
     #
@@ -4730,6 +4790,7 @@ module Aws::QConnect
     #   resp.quick_response.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.quick_response.created_time #=> Time
     #   resp.quick_response.last_modified_time #=> Time
+    #   resp.quick_response.last_modified_region #=> String
     #   resp.quick_response.contents.plain_text.content #=> String
     #   resp.quick_response.contents.markdown.content #=> String
     #   resp.quick_response.description #=> String
@@ -5022,6 +5083,8 @@ module Aws::QConnect
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.ai_agent_arn #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.modified_time #=> Time
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.last_modified_time #=> Time
+    #   resp.ai_agent_version_summaries[0].ai_agent_summary.last_modified_region #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent_version_summaries[0].ai_agent_summary.configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
@@ -5231,6 +5294,8 @@ module Aws::QConnect
     #   resp.ai_agent_summaries[0].type #=> String, one of "MANUAL_SEARCH", "ANSWER_RECOMMENDATION", "SELF_SERVICE", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_agent_summaries[0].ai_agent_arn #=> String
     #   resp.ai_agent_summaries[0].modified_time #=> Time
+    #   resp.ai_agent_summaries[0].last_modified_time #=> Time
+    #   resp.ai_agent_summaries[0].last_modified_region #=> String
     #   resp.ai_agent_summaries[0].visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.answer_generation_ai_prompt_id #=> String
     #   resp.ai_agent_summaries[0].configuration.manual_search_ai_agent_configuration.answer_generation_ai_guardrail_id #=> String
@@ -5437,6 +5502,8 @@ module Aws::QConnect
     #   resp.ai_guardrail_version_summaries[0].ai_guardrail_summary.ai_guardrail_id #=> String
     #   resp.ai_guardrail_version_summaries[0].ai_guardrail_summary.ai_guardrail_arn #=> String
     #   resp.ai_guardrail_version_summaries[0].ai_guardrail_summary.modified_time #=> Time
+    #   resp.ai_guardrail_version_summaries[0].ai_guardrail_summary.last_modified_time #=> Time
+    #   resp.ai_guardrail_version_summaries[0].ai_guardrail_summary.last_modified_region #=> String
     #   resp.ai_guardrail_version_summaries[0].ai_guardrail_summary.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_guardrail_version_summaries[0].ai_guardrail_summary.description #=> String
     #   resp.ai_guardrail_version_summaries[0].ai_guardrail_summary.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
@@ -5493,6 +5560,8 @@ module Aws::QConnect
     #   resp.ai_guardrail_summaries[0].ai_guardrail_id #=> String
     #   resp.ai_guardrail_summaries[0].ai_guardrail_arn #=> String
     #   resp.ai_guardrail_summaries[0].modified_time #=> Time
+    #   resp.ai_guardrail_summaries[0].last_modified_time #=> Time
+    #   resp.ai_guardrail_summaries[0].last_modified_region #=> String
     #   resp.ai_guardrail_summaries[0].visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_guardrail_summaries[0].description #=> String
     #   resp.ai_guardrail_summaries[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
@@ -5559,6 +5628,8 @@ module Aws::QConnect
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.ai_prompt_arn #=> String
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.modified_time #=> Time
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.last_modified_time #=> Time
+    #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.last_modified_region #=> String
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.template_type #=> String, one of "TEXT"
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.model_id #=> String
     #   resp.ai_prompt_version_summaries[0].ai_prompt_summary.api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
@@ -5625,6 +5696,8 @@ module Aws::QConnect
     #   resp.ai_prompt_summaries[0].type #=> String, one of "ANSWER_GENERATION", "INTENT_LABELING_GENERATION", "QUERY_REFORMULATION", "SELF_SERVICE_PRE_PROCESSING", "SELF_SERVICE_ANSWER_GENERATION", "EMAIL_RESPONSE", "EMAIL_OVERVIEW", "EMAIL_GENERATIVE_ANSWER", "EMAIL_QUERY_REFORMULATION", "ORCHESTRATION", "NOTE_TAKING", "CASE_SUMMARIZATION"
     #   resp.ai_prompt_summaries[0].ai_prompt_arn #=> String
     #   resp.ai_prompt_summaries[0].modified_time #=> Time
+    #   resp.ai_prompt_summaries[0].last_modified_time #=> Time
+    #   resp.ai_prompt_summaries[0].last_modified_region #=> String
     #   resp.ai_prompt_summaries[0].template_type #=> String, one of "TEXT"
     #   resp.ai_prompt_summaries[0].model_id #=> String
     #   resp.ai_prompt_summaries[0].api_format #=> String, one of "ANTHROPIC_CLAUDE_MESSAGES", "ANTHROPIC_CLAUDE_TEXT_COMPLETIONS", "MESSAGES", "TEXT_COMPLETIONS"
@@ -5688,6 +5761,8 @@ module Aws::QConnect
     #   resp.assistant_association_summaries[0].association_data.external_bedrock_knowledge_base_config.access_role_arn #=> String
     #   resp.assistant_association_summaries[0].tags #=> Hash
     #   resp.assistant_association_summaries[0].tags["TagKey"] #=> String
+    #   resp.assistant_association_summaries[0].last_modified_time #=> Time
+    #   resp.assistant_association_summaries[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListAssistantAssociations AWS API Documentation
@@ -5735,6 +5810,8 @@ module Aws::QConnect
     #   resp.assistant_summaries[0].tags #=> Hash
     #   resp.assistant_summaries[0].tags["TagKey"] #=> String
     #   resp.assistant_summaries[0].server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.assistant_summaries[0].server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.assistant_summaries[0].server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
     #   resp.assistant_summaries[0].integration_configuration.topic_integration_arn #=> String
     #   resp.assistant_summaries[0].capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant_summaries[0].ai_agent_configuration #=> Hash
@@ -5743,6 +5820,8 @@ module Aws::QConnect
     #   resp.assistant_summaries[0].orchestrator_configuration_list #=> Array
     #   resp.assistant_summaries[0].orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant_summaries[0].orchestrator_configuration_list[0].orchestrator_use_case #=> String
+    #   resp.assistant_summaries[0].last_modified_time #=> Time
+    #   resp.assistant_summaries[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListAssistants AWS API Documentation
@@ -5864,6 +5943,9 @@ module Aws::QConnect
     #   resp.content_summaries[0].metadata["NonEmptyString"] #=> String
     #   resp.content_summaries[0].tags #=> Hash
     #   resp.content_summaries[0].tags["TagKey"] #=> String
+    #   resp.content_summaries[0].last_modified_time #=> Time
+    #   resp.content_summaries[0].last_modified_region #=> String
+    #   resp.content_summaries[0].file_hash #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListContents AWS API Documentation
@@ -5987,9 +6069,13 @@ module Aws::QConnect
     #   resp.knowledge_base_summaries[0].vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
     #   resp.knowledge_base_summaries[0].rendering_configuration.template_uri #=> String
     #   resp.knowledge_base_summaries[0].server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.knowledge_base_summaries[0].server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.knowledge_base_summaries[0].server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
     #   resp.knowledge_base_summaries[0].description #=> String
     #   resp.knowledge_base_summaries[0].tags #=> Hash
     #   resp.knowledge_base_summaries[0].tags["TagKey"] #=> String
+    #   resp.knowledge_base_summaries[0].last_modified_time #=> Time
+    #   resp.knowledge_base_summaries[0].last_modified_region #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListKnowledgeBases AWS API Documentation
@@ -6240,6 +6326,7 @@ module Aws::QConnect
     #   resp.model_summaries[0].model_lifecycle #=> String, one of "ACTIVE", "LEGACY"
     #   resp.model_summaries[0].legacy_timestamp #=> Time
     #   resp.model_summaries[0].end_of_life_timestamp #=> Time
+    #   resp.model_summaries[0].global_resiliency_status #=> String, one of "SUPPORTED", "UNSUPPORTED"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/ListModels AWS API Documentation
@@ -6292,6 +6379,7 @@ module Aws::QConnect
     #   resp.quick_response_summaries[0].status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.quick_response_summaries[0].created_time #=> Time
     #   resp.quick_response_summaries[0].last_modified_time #=> Time
+    #   resp.quick_response_summaries[0].last_modified_region #=> String
     #   resp.quick_response_summaries[0].description #=> String
     #   resp.quick_response_summaries[0].last_modified_by #=> String
     #   resp.quick_response_summaries[0].is_active #=> Boolean
@@ -6768,6 +6856,168 @@ module Aws::QConnect
       req.send_request(options)
     end
 
+    # Registers a replica Region KMS key for an Amazon Q in Connect
+    # assistant. To use this operation, you must have `kms:GenerateDataKey`
+    # permission on the replica key.
+    #
+    # @option params [required, String] :assistant_id
+    #   The identifier of the Amazon Q in Connect assistant.
+    #
+    # @option params [required, Types::ReplicaKmsKey] :replica_kms_key
+    #   The replica Region KMS key to register for the assistant.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]..
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::RegisterAssistantReplicaKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterAssistantReplicaKeyResponse#assistant #assistant} => Types::AssistantData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_assistant_replica_key({
+    #     assistant_id: "UuidOrArn", # required
+    #     replica_kms_key: { # required
+    #       arn: "NonEmptyString", # required
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.assistant.assistant_id #=> String
+    #   resp.assistant.assistant_arn #=> String
+    #   resp.assistant.name #=> String
+    #   resp.assistant.type #=> String, one of "AGENT"
+    #   resp.assistant.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.assistant.description #=> String
+    #   resp.assistant.tags #=> Hash
+    #   resp.assistant.tags["TagKey"] #=> String
+    #   resp.assistant.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.assistant.server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.assistant.server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
+    #   resp.assistant.integration_configuration.topic_integration_arn #=> String
+    #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
+    #   resp.assistant.ai_agent_configuration #=> Hash
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].ai_agent_id #=> String
+    #   resp.assistant.ai_agent_configuration["AIAgentType"].enabled #=> Boolean
+    #   resp.assistant.orchestrator_configuration_list #=> Array
+    #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
+    #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
+    #   resp.assistant.last_modified_time #=> Time
+    #   resp.assistant.last_modified_region #=> String
+    #   resp.assistant.assistant_global_resiliency_status #=> String, one of "ENABLED", "DISABLED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RegisterAssistantReplicaKey AWS API Documentation
+    #
+    # @overload register_assistant_replica_key(params = {})
+    # @param [Hash] params ({})
+    def register_assistant_replica_key(params = {}, options = {})
+      req = build_request(:register_assistant_replica_key, params)
+      req.send_request(options)
+    end
+
+    # Registers a replica Region KMS key for an Amazon Q in Connect
+    # knowledge base. To use this operation, you must have
+    # `kms:GenerateDataKey` permission on the replica key. You must also
+    # have `kms:CreateGrant` permission on the primary key.
+    #
+    # @option params [required, String] :knowledge_base_id
+    #   The identifier of the knowledge base.
+    #
+    # @option params [required, Types::ReplicaKmsKey] :replica_kms_key
+    #   The replica Region KMS key to register for the knowledge base.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1]..
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: http://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::RegisterKnowledgeBaseReplicaKeyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::RegisterKnowledgeBaseReplicaKeyResponse#knowledge_base #knowledge_base} => Types::KnowledgeBaseData
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.register_knowledge_base_replica_key({
+    #     knowledge_base_id: "UuidOrArn", # required
+    #     replica_kms_key: { # required
+    #       arn: "NonEmptyString", # required
+    #     },
+    #     client_token: "ClientToken",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.knowledge_base.knowledge_base_id #=> String
+    #   resp.knowledge_base.knowledge_base_arn #=> String
+    #   resp.knowledge_base.name #=> String
+    #   resp.knowledge_base.knowledge_base_type #=> String, one of "EXTERNAL", "CUSTOM", "QUICK_RESPONSES", "MESSAGE_TEMPLATES", "MANAGED"
+    #   resp.knowledge_base.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
+    #   resp.knowledge_base.last_content_modification_time #=> Time
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.chunking_strategy #=> String, one of "FIXED_SIZE", "NONE", "HIERARCHICAL", "SEMANTIC"
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.fixed_size_chunking_configuration.overlap_percentage #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations #=> Array
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.level_configurations[0].max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.hierarchical_chunking_configuration.overlap_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.max_tokens #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.buffer_size #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.chunking_configuration.semantic_chunking_configuration.breakpoint_percentile_threshold #=> Integer
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.parsing_strategy #=> String, one of "BEDROCK_FOUNDATION_MODEL"
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.model_arn #=> String
+    #   resp.knowledge_base.vector_ingestion_configuration.parsing_configuration.bedrock_foundation_model_configuration.parsing_prompt.parsing_prompt_text #=> String
+    #   resp.knowledge_base.source_configuration.app_integrations.app_integration_arn #=> String
+    #   resp.knowledge_base.source_configuration.app_integrations.object_fields #=> Array
+    #   resp.knowledge_base.source_configuration.app_integrations.object_fields[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.url_configuration.seed_urls[0].url #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.crawler_limits.rate_limit #=> Integer
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.inclusion_filters[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters #=> Array
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.exclusion_filters[0] #=> String
+    #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
+    #   resp.knowledge_base.rendering_configuration.template_uri #=> String
+    #   resp.knowledge_base.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.knowledge_base.server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.knowledge_base.server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
+    #   resp.knowledge_base.description #=> String
+    #   resp.knowledge_base.tags #=> Hash
+    #   resp.knowledge_base.tags["TagKey"] #=> String
+    #   resp.knowledge_base.ingestion_status #=> String, one of "SYNC_FAILED", "SYNCING_IN_PROGRESS", "SYNC_SUCCESS", "CREATE_IN_PROGRESS"
+    #   resp.knowledge_base.ingestion_failure_reasons #=> Array
+    #   resp.knowledge_base.ingestion_failure_reasons[0] #=> String
+    #   resp.knowledge_base.last_modified_time #=> Time
+    #   resp.knowledge_base.last_modified_region #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/RegisterKnowledgeBaseReplicaKey AWS API Documentation
+    #
+    # @overload register_knowledge_base_replica_key(params = {})
+    # @param [Hash] params ({})
+    def register_knowledge_base_replica_key(params = {}, options = {})
+      req = build_request(:register_knowledge_base_replica_key, params)
+      req.send_request(options)
+    end
+
     # Removes the AI Agent that is set for use by default on an Amazon Q in
     # Connect Assistant.
     #
@@ -7190,6 +7440,9 @@ module Aws::QConnect
     #   resp.content_summaries[0].metadata["NonEmptyString"] #=> String
     #   resp.content_summaries[0].tags #=> Hash
     #   resp.content_summaries[0].tags["TagKey"] #=> String
+    #   resp.content_summaries[0].last_modified_time #=> Time
+    #   resp.content_summaries[0].last_modified_region #=> String
+    #   resp.content_summaries[0].file_hash #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/SearchContent AWS API Documentation
@@ -7380,6 +7633,7 @@ module Aws::QConnect
     #   resp.results[0].contents.markdown.content #=> String
     #   resp.results[0].created_time #=> Time
     #   resp.results[0].last_modified_time #=> Time
+    #   resp.results[0].last_modified_region #=> String
     #   resp.results[0].is_active #=> Boolean
     #   resp.results[0].description #=> String
     #   resp.results[0].grouping_configuration.criteria #=> String
@@ -8329,6 +8583,8 @@ module Aws::QConnect
     #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.case_summarization_ai_guardrail_id #=> String
     #   resp.ai_agent.configuration.case_summarization_ai_agent_configuration.locale #=> String
     #   resp.ai_agent.modified_time #=> Time
+    #   resp.ai_agent.last_modified_time #=> Time
+    #   resp.ai_agent.last_modified_region #=> String
     #   resp.ai_agent.description #=> String
     #   resp.ai_agent.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_agent.tags #=> Hash
@@ -8506,6 +8762,8 @@ module Aws::QConnect
     #   resp.ai_guardrail.tags["TagKey"] #=> String
     #   resp.ai_guardrail.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "ACTIVE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED"
     #   resp.ai_guardrail.modified_time #=> Time
+    #   resp.ai_guardrail.last_modified_time #=> Time
+    #   resp.ai_guardrail.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateAIGuardrail AWS API Documentation
     #
@@ -8605,6 +8863,8 @@ module Aws::QConnect
     #   resp.ai_prompt.inference_configuration.top_k #=> Integer
     #   resp.ai_prompt.inference_configuration.max_tokens_to_sample #=> Integer
     #   resp.ai_prompt.modified_time #=> Time
+    #   resp.ai_prompt.last_modified_time #=> Time
+    #   resp.ai_prompt.last_modified_region #=> String
     #   resp.ai_prompt.description #=> String
     #   resp.ai_prompt.visibility_status #=> String, one of "SAVED", "PUBLISHED"
     #   resp.ai_prompt.tags #=> Hash
@@ -8666,6 +8926,8 @@ module Aws::QConnect
     #   resp.assistant.tags #=> Hash
     #   resp.assistant.tags["TagKey"] #=> String
     #   resp.assistant.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.assistant.server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.assistant.server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
     #   resp.assistant.integration_configuration.topic_integration_arn #=> String
     #   resp.assistant.capability_configuration.type #=> String, one of "V1", "V2"
     #   resp.assistant.ai_agent_configuration #=> Hash
@@ -8674,6 +8936,9 @@ module Aws::QConnect
     #   resp.assistant.orchestrator_configuration_list #=> Array
     #   resp.assistant.orchestrator_configuration_list[0].ai_agent_id #=> String
     #   resp.assistant.orchestrator_configuration_list[0].orchestrator_use_case #=> String
+    #   resp.assistant.last_modified_time #=> Time
+    #   resp.assistant.last_modified_region #=> String
+    #   resp.assistant.assistant_global_resiliency_status #=> String, one of "ENABLED", "DISABLED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateAssistantAIAgent AWS API Documentation
     #
@@ -8764,6 +9029,9 @@ module Aws::QConnect
     #   resp.content.link_out_uri #=> String
     #   resp.content.url #=> String
     #   resp.content.url_expiry #=> Time
+    #   resp.content.last_modified_time #=> Time
+    #   resp.content.last_modified_region #=> String
+    #   resp.content.file_hash #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateContent AWS API Documentation
     #
@@ -8833,12 +9101,16 @@ module Aws::QConnect
     #   resp.knowledge_base.source_configuration.managed_source_configuration.web_crawler_configuration.scope #=> String, one of "HOST_ONLY", "SUBDOMAINS"
     #   resp.knowledge_base.rendering_configuration.template_uri #=> String
     #   resp.knowledge_base.server_side_encryption_configuration.kms_key_id #=> String
+    #   resp.knowledge_base.server_side_encryption_configuration.replica_kms_keys #=> Array
+    #   resp.knowledge_base.server_side_encryption_configuration.replica_kms_keys[0].arn #=> String
     #   resp.knowledge_base.description #=> String
     #   resp.knowledge_base.tags #=> Hash
     #   resp.knowledge_base.tags["TagKey"] #=> String
     #   resp.knowledge_base.ingestion_status #=> String, one of "SYNC_FAILED", "SYNCING_IN_PROGRESS", "SYNC_SUCCESS", "CREATE_IN_PROGRESS"
     #   resp.knowledge_base.ingestion_failure_reasons #=> Array
     #   resp.knowledge_base.ingestion_failure_reasons[0] #=> String
+    #   resp.knowledge_base.last_modified_time #=> Time
+    #   resp.knowledge_base.last_modified_region #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/qconnect-2020-10-19/UpdateKnowledgeBaseTemplateUri AWS API Documentation
     #
@@ -9505,6 +9777,7 @@ module Aws::QConnect
     #   resp.quick_response.status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATED", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED"
     #   resp.quick_response.created_time #=> Time
     #   resp.quick_response.last_modified_time #=> Time
+    #   resp.quick_response.last_modified_region #=> String
     #   resp.quick_response.contents.plain_text.content #=> String
     #   resp.quick_response.contents.markdown.content #=> String
     #   resp.quick_response.description #=> String
@@ -9723,7 +9996,7 @@ module Aws::QConnect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-qconnect'
-      context[:gem_version] = '1.69.0'
+      context[:gem_version] = '1.70.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

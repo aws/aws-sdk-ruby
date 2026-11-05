@@ -10173,6 +10173,54 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Retrieves the current status and results of an upgrade analysis.
+    #
+    # @option params [required, String] :analysis_id
+    #   The unique identifier of the upgrade analysis to retrieve.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job associated with the analysis.
+    #
+    # @return [Types::GetJobUpgradeAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetJobUpgradeAnalysisResponse#job_name #job_name} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#analysis_id #analysis_id} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#status #status} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#source_version #source_version} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#target_version #target_version} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#analysis_type #analysis_type} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#auto_upgrade_evaluation_summary #auto_upgrade_evaluation_summary} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#error_message #error_message} => String
+    #   * {Types::GetJobUpgradeAnalysisResponse#auto_upgrade_eligibility_summary #auto_upgrade_eligibility_summary} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_job_upgrade_analysis({
+    #     analysis_id: "Id", # required
+    #     job_name: "Name", # required
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.job_name #=> String
+    #   resp.analysis_id #=> String
+    #   resp.status #=> String, one of "OBSERVING", "WAITING_FOR_CONSENT", "UPGRADING", "SUCCEEDED", "FAILED", "TIMEOUT", "STOPPED"
+    #   resp.source_version #=> String
+    #   resp.target_version #=> String
+    #   resp.analysis_type #=> String, one of "AUTO_UPGRADE"
+    #   resp.auto_upgrade_evaluation_summary #=> String
+    #   resp.error_message #=> String
+    #   resp.auto_upgrade_eligibility_summary #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetJobUpgradeAnalysis AWS API Documentation
+    #
+    # @overload get_job_upgrade_analysis(params = {})
+    # @param [Hash] params ({})
+    def get_job_upgrade_analysis(params = {}, options = {})
+      req = build_request(:get_job_upgrade_analysis, params)
+      req.send_request(options)
+    end
+
     # Retrieves all current job definitions.
     #
     # @option params [String] :next_token
@@ -19141,6 +19189,45 @@ module Aws::Glue
       req.send_request(options)
     end
 
+    # Resumes an analysis that is waiting for upgrade consent.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job associated with the analysis to resume.
+    #
+    # @option params [String] :analysis_id
+    #   The unique identifier of the upgrade analysis. The analysis must be in
+    #   `WAITING_FOR_CONSENT` status.
+    #
+    # @option params [String] :upgrade_consent
+    #   The customer's decision on whether to proceed with the upgrade.
+    #
+    # @return [Types::StartJobUpgradeAnalysisResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::StartJobUpgradeAnalysisResponse#analysis_id #analysis_id} => String
+    #   * {Types::StartJobUpgradeAnalysisResponse#job_name #job_name} => String
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.start_job_upgrade_analysis({
+    #     job_name: "Name", # required
+    #     analysis_id: "Id",
+    #     upgrade_consent: "APPROVE", # accepts APPROVE, DECLINE
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.analysis_id #=> String
+    #   resp.job_name #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StartJobUpgradeAnalysis AWS API Documentation
+    #
+    # @overload start_job_upgrade_analysis(params = {})
+    # @param [Hash] params ({})
+    def start_job_upgrade_analysis(params = {}, options = {})
+      req = build_request(:start_job_upgrade_analysis, params)
+      req.send_request(options)
+    end
+
     # Starts a task to estimate the quality of the transform.
     #
     # When you provide label sets as examples of truth, Glue machine
@@ -19448,6 +19535,32 @@ module Aws::Glue
     # @param [Hash] params ({})
     def stop_crawler_schedule(params = {}, options = {})
       req = build_request(:stop_crawler_schedule, params)
+      req.send_request(options)
+    end
+
+    # Stops an in-progress upgrade analysis.
+    #
+    # @option params [required, String] :job_name
+    #   The name of the job associated with the analysis.
+    #
+    # @option params [required, String] :analysis_id
+    #   The unique identifier of the analysis to stop.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.stop_job_upgrade_analysis({
+    #     job_name: "Name", # required
+    #     analysis_id: "Id", # required
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/StopJobUpgradeAnalysis AWS API Documentation
+    #
+    # @overload stop_job_upgrade_analysis(params = {})
+    # @param [Hash] params ({})
+    def stop_job_upgrade_analysis(params = {}, options = {})
+      req = build_request(:stop_job_upgrade_analysis, params)
       req.send_request(options)
     end
 
@@ -22069,7 +22182,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.290.0'
+      context[:gem_version] = '1.291.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -798,7 +798,7 @@ module Aws::SecurityAgent
       attr_accessor application_id: ::String
       attr_accessor agent_space_id: ::String
       attr_accessor membership_id: ::String
-      attr_accessor member_type: ("USER")
+      attr_accessor member_type: ("USER" | "GROUP")
       attr_accessor config: Types::MembershipConfig
       SENSITIVE: []
     end
@@ -1027,7 +1027,7 @@ module Aws::SecurityAgent
       attr_accessor application_id: ::String
       attr_accessor agent_space_id: ::String
       attr_accessor membership_id: ::String
-      attr_accessor member_type: ("USER")
+      attr_accessor member_type: ("USER" | "GROUP")
       SENSITIVE: []
     end
 
@@ -1333,6 +1333,12 @@ module Aws::SecurityAgent
       attr_accessor trigger_filter_groups: ::Array[Types::TriggerFilterGroup]
       attr_accessor leave_comments: bool
       attr_accessor remediate_code: bool
+      SENSITIVE: []
+    end
+
+    class GroupMetadata
+      attr_accessor display_name: ::String
+      attr_accessor description: ::String
       SENSITIVE: []
     end
 
@@ -1704,7 +1710,7 @@ module Aws::SecurityAgent
     class ListMembershipsRequest
       attr_accessor application_id: ::String
       attr_accessor agent_space_id: ::String
-      attr_accessor member_type: ("USER" | "ALL")
+      attr_accessor member_type: ("USER" | "GROUP" | "ALL")
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -1889,10 +1895,13 @@ module Aws::SecurityAgent
 
     class MemberMetadata
       attr_accessor user: Types::UserMetadata
+      attr_accessor group: Types::GroupMetadata
       attr_accessor unknown: untyped
       SENSITIVE: []
 
       class User < MemberMetadata
+      end
+      class Group < MemberMetadata
       end
       class Unknown < MemberMetadata
       end
@@ -1913,7 +1922,7 @@ module Aws::SecurityAgent
       attr_accessor membership_id: ::String
       attr_accessor application_id: ::String
       attr_accessor agent_space_id: ::String
-      attr_accessor member_type: ("USER")
+      attr_accessor member_type: ("USER" | "GROUP")
       attr_accessor config: Types::MembershipConfig
       attr_accessor metadata: Types::MemberMetadata
       attr_accessor created_at: ::Time
