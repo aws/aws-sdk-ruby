@@ -13,9 +13,160 @@
       },
       "input":{"shape":"KitchenSink"},
       "output":{"shape":"KitchenSink"}
+    },
+    "NestedCollectionsOperation": {
+      "name":"NestedCollectionsOperation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/NestedCollectionsOperation"
+      },
+      "input":{"shape":"NestedCollections"},
+      "output":{"shape":"NestedCollections"}
+    },
+    "NestedStructuresOperation": {
+      "name":"NestedStructuresOperation",
+      "http":{
+        "method":"POST",
+        "requestUri":"/NestedStructuresOperation"
+      },
+      "input":{"shape":"NestedStructures"},
+      "output":{"shape":"NestedStructures"}
     }
   },
   "shapes": {
+    "NestedCollections": {
+      "type": "structure",
+      "members": {
+        "ListOfListOfStrings": {
+          "shape": "ListOfListOfStrings"
+        },
+        "MapOfMapsOfLists": {
+          "shape": "MapOfMapsOfLists"
+        },
+        "SensitiveKeyMap": {
+          "shape": "SensitiveKeyMap"
+        },
+        "PlainList": {
+          "shape": "ListOfPlainStrings"
+        },
+        "PlainMapOfLists": {
+          "shape": "MapOfListsOfPlainStrings"
+        },
+        "MemberSensitiveLists": {
+          "shape": "ListOfMemberSensitiveLists"
+        }
+      }
+    },
+    "MapOfMapsOfLists": {
+      "type": "map",
+      "key": {
+        "shape": "PlainString"
+      },
+      "value": {
+        "shape": "MapOfListsOfStringsWithPlainKeys"
+      }
+    },
+    "MapOfListsOfStringsWithPlainKeys": {
+      "type": "map",
+      "key": {
+        "shape": "PlainString"
+      },
+      "value": {
+        "shape": "ListOfStrings"
+      }
+    },
+    "ListOfMemberSensitiveLists": {
+      "type": "list",
+      "member": {
+        "shape": "MemberSensitiveList"
+      }
+    },
+    "MemberSensitiveList": {
+      "type": "list",
+      "member": {
+        "shape": "PlainString",
+        "sensitive": true
+      }
+    },
+    "NestedStructures": {
+      "type": "structure",
+      "members": {
+        "Inner": {
+          "shape": "CollectionMemberStruct"
+        },
+        "InnerList": {
+          "shape": "ListOfCollectionMemberStructs"
+        },
+        "InnerMap": {
+          "shape": "MapOfCollectionMemberStructs"
+        }
+      }
+    },
+    "CollectionMemberStruct": {
+      "type": "structure",
+      "members": {
+        "Values": {
+          "shape": "ListOfListOfStrings"
+        },
+        "PlainValue": {
+          "shape": "PlainString"
+        },
+        "ClientSecret": {
+          "shape": "PlainString"
+        },
+        "Password": {
+          "shape": "PlainString"
+        },
+        "PrivateKey": {
+          "shape": "PlainString"
+        },
+        "RefreshToken": {
+          "shape": "PlainString"
+        }
+      }
+    },
+    "ListOfCollectionMemberStructs": {
+      "type": "list",
+      "member": {
+        "shape": "CollectionMemberStruct"
+      }
+    },
+    "MapOfCollectionMemberStructs": {
+      "type": "map",
+      "key": {
+        "shape": "PlainString"
+      },
+      "value": {
+        "shape": "CollectionMemberStruct"
+      }
+    },
+    "SensitiveKeyMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "PlainString"
+      }
+    },
+    "ListOfPlainStrings": {
+      "type": "list",
+      "member": {
+        "shape": "PlainString"
+      }
+    },
+    "MapOfListsOfPlainStrings": {
+      "type": "map",
+      "key": {
+        "shape": "PlainString"
+      },
+      "value": {
+        "shape": "ListOfPlainStrings"
+      }
+    },
+    "PlainString": {
+      "type": "string"
+    },
     "KitchenSink": {
       "type": "structure",
       "members": {
