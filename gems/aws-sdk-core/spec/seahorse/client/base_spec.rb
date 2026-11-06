@@ -24,7 +24,7 @@ module Seahorse
       describe '#config' do
 
         it 'returns a Configuration struct' do
-          expect(client.config).to be_kind_of(Struct)
+          expect(client.config).to be_kind_of(Configuration::DynamicStruct)
         end
 
         it 'contains the client api' do
