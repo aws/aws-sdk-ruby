@@ -178,6 +178,31 @@ module AwsSdkCodeGenerator
       str.gsub(/(.{1,#{width}})(\s+|\Z)/, "#{indent}\\1\n").chomp
     end
 
+    # Returns true if the member reference or its target shape is sensitive.
+    # Also checks nested list members and map keys and values.
+    #
+    # Stops at structures because each structure has its own SENSITIVE list.
+    def sensitive_shape_ref?(ref, api, visited = Set.new)
+      return true if ref['sensitive']
+
+      name = ref['shape']
+      return false if visited.include?(name)
+
+      visited << name
+      target = Api.shape(ref, api)
+      return true if target['sensitive']
+
+      case target['type']
+      when 'list'
+        sensitive_shape_ref?(target['member'], api, visited)
+      when 'map'
+        sensitive_shape_ref?(target['key'], api, visited) ||
+          sensitive_shape_ref?(target['value'], api, visited)
+      else
+        false
+      end
+    end
+
     def gem_lib_path(gem_name)
       File.expand_path(
         File.join(

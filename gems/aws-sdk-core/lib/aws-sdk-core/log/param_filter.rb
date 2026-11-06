@@ -24,7 +24,68 @@ module Aws
         @additional_filters = options[:filter] || []
       end
 
+      # Returns a copy with sensitive values replaced by "[FILTERED]".
+      #
+      # Uses generated SENSITIVE lists to choose which members to redact.
+      # Nested request hashes also use the global list for backwards compatibility.
+      # A ShapeRef preserves model types while filtering nested request parameters.
+      # Structure classes are also accepted for Structure#to_s and older callers.
+      #
+      # @param [Hash, Struct, Array, Object] values
+      # @param [Seahorse::Model::Shapes::ShapeRef, Class, nil] type
       def filter(values, type)
+        return filter_ref(values, type, root: true) if type.is_a?(Seahorse::Model::Shapes::ShapeRef)
+
+        filter_by_class(values, type)
+      end
+
+      private
+
+      def filter_ref(value, ref, root: false)
+        return filter_by_class(value, value.class) unless ref
+
+        shape = ref.shape
+        case shape
+        when Seahorse::Model::Shapes::StructureShape
+          if value.is_a?(Hash) || value.is_a?(Struct)
+            return filter_struct(
+              value, shape.struct_class, shape,
+              use_global_filters: !root && value.is_a?(Hash)
+            )
+          end
+        when Seahorse::Model::Shapes::ListShape
+          return value.map { |v| filter_ref(v, shape.member) } if value.is_a?(Array)
+        when Seahorse::Model::Shapes::MapShape
+          return filter_map(value, shape) if value.is_a?(Hash)
+        when Seahorse::Model::Shapes::DocumentShape, nil
+          return filter_by_class(value, value.class)
+        else
+          return value
+        end
+
+        filter_by_class(value, value.class)
+      end
+
+      def filter_map(values, shape)
+        filtered = {}
+        values.each_pair do |key, value|
+          filtered[key] =
+            if @enabled && @additional_filters.include?(key)
+              '[FILTERED]'
+            else
+              filter_ref(value, shape.value)
+            end
+        end
+        filtered
+      end
+
+      def member_ref(shape, key)
+        return unless key.is_a?(Symbol) || key.is_a?(String)
+
+        shape.member(key) if shape.member?(key)
+      end
+
+      def filter_by_class(values, type)
         case values
         when Struct then filter_struct(values, type)
         when Hash then filter_hash(values, type)
@@ -33,18 +94,19 @@ module Aws
         end
       end
 
-      private
-
-      def filter_struct(values, type)
-        if values.class.include? Aws::Structure::Union
+      def filter_struct(values, type, shape = nil, use_global_filters: false)
+        if values.is_a?(Struct) && values.class.include?(Aws::Structure::Union)
           values = { values.member => values.value }
         end
-        filter_hash(values, type)
+        filter_hash(values, type, shape, use_global_filters: use_global_filters)
       end
 
-      def filter_hash(values, type)
-        if type.const_defined?('SENSITIVE')
+      def filter_hash(values, type, shape = nil, use_global_filters: false)
+        if type && type.const_defined?(:SENSITIVE)
           filters = type::SENSITIVE + @additional_filters
+          # Nested hashes previously used the global list. Keep that protection
+          # alongside modeled sensitivity when following their shape references.
+          filters += SENSITIVE if use_global_filters
         else
           # Support backwards compatibility (new core + old service)
           filters = SENSITIVE + @additional_filters
@@ -54,15 +116,17 @@ module Aws
         values.each_pair do |key, value|
           filtered[key] = if @enabled && filters.include?(key)
             '[FILTERED]'
+          elsif shape
+            filter_ref(value, member_ref(shape, key))
           else
-            filter(value, value.class)
+            filter_by_class(value, value.class)
           end
         end
         filtered
       end
 
       def filter_array(values, type)
-        values.map { |value| filter(value, value.class) }
+        values.map { |value| filter_by_class(value, value.class) }
       end
 
     end
