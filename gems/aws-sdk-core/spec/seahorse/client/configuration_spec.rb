@@ -66,7 +66,7 @@ module Seahorse
         it 'returns self so it can be chained' do
           c = config.add_option(:name).add_option(:color)
           expect(c).to be(config)
-          expect(c.build!.members).to eq([:color, :name])
+          expect(c.build!.members).to eq(Set[:color, :name])
         end
 
       end
@@ -74,7 +74,7 @@ module Seahorse
       describe '#build!' do
 
         it 'returns a Struct' do
-          expect(config.add_option(:opt).build!).to be_kind_of(Struct)
+          expect(config.add_option(:opt).build!).to be_kind_of(Configuration::DynamicStruct)
         end
 
         it 'accepts a hash of options' do
