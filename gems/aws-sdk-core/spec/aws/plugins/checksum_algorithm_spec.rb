@@ -336,7 +336,8 @@ module Aws
         end
 
         %w[header trailer].each do |location|
-          context "checksum in #{location}" do
+          context "checksum in #{location}",
+                  skip: location == 'trailer' && defined?(JRUBY_VERSION) && 'Trailer checksums are disabled on JRuby' do
             let(:placement) { location }
 
             it 'supports a one-argument reader behind a delegator' do
@@ -347,6 +348,18 @@ module Aws
               klass = Class.new(one_argument_reader) do
                 def read(length, _buffer = nil)
                   super(length)
+                end
+              end
+              send_checksum_request(klass.new(payload))
+            end
+
+            it 'supports a reader that returns a frozen String instead of filling the buffer' do
+              klass = Class.new(StringIO) do
+                def read(length, buffer = nil)
+                  return super if length.zero? || @returned_frozen
+
+                  @returned_frozen = true
+                  super(length).freeze
                 end
               end
               send_checksum_request(klass.new(payload))
