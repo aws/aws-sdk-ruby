@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Seahorse::Client::Configuration no longer generate real Ruby Struct at runtime.
+
 3.211.0 (2024-10-21)
 ------------------
 
