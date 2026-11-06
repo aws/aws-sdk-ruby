@@ -319,7 +319,8 @@ module Aws
         end
 
         %w[trailer].each do |location|
-          context "checksum in #{location}" do
+          context "checksum in #{location}",
+                  skip: location == 'trailer' && defined?(JRUBY_VERSION) && 'Trailer checksums are disabled on JRuby' do
             let(:placement) { location }
 
             it 'supports a one-argument reader behind a delegator' do
@@ -330,6 +331,18 @@ module Aws
               klass = Class.new(one_argument_reader) do
                 def read(length, _buffer = nil)
                   super(length)
+                end
+              end
+              send_checksum_request(klass.new(payload))
+            end
+
+            it 'supports a reader that returns a frozen String instead of filling the buffer' do
+              klass = Class.new(StringIO) do
+                def read(length, buffer = nil)
+                  return super if length.zero? || @returned_frozen
+
+                  @returned_frozen = true
+                  super(length).freeze
                 end
               end
               send_checksum_request(klass.new(payload))
@@ -580,6 +593,22 @@ module Aws
           Thread.current[:net_http_override_body_stream_chunk] = previous_chunk_size
         end
 
+        it 'supports a one-argument reader when buffer_enabled is omitted' do
+          klass = Class.new(StringIO) do
+            def read(length)
+              super(length)
+            end
+          end
+          body = ChecksumAlgorithm::AwsChunkedTrailerDigestIO.new(
+            io: klass.new(payload),
+            algorithm: 'CRC32',
+            location_name: 'x-amz-checksum-crc32'
+          )
+
+          expect(body.read).to eq(encoded_payload)
+          expect(body.read).to be_nil
+        end
+
         it 'rewinds IO on initialization' do
           io = StringIO.new('hello world')
           io.read # move to EOF
@@ -613,7 +642,7 @@ module Aws
           expect(body).to be_eof
         end
 
-        it 'reinitializes the input buffer when rewound after EOF' do
+        it 'replays encoded content when rewound after EOF' do
           expect(body.read).to eq(encoded_payload)
           expect(body.read).to be_nil
           body.rewind

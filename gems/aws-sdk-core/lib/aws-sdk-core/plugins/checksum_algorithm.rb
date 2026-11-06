@@ -486,7 +486,7 @@ module Aws
         HEX_BASE = 16
 
         def initialize(options = {})
-          buffer_enabled = options.fetch(:buffer_enabled)
+          buffer_enabled = options.delete(:buffer_enabled) || false
           @io = options.delete(:io)
           @io.rewind if @io.respond_to?(:rewind)
           @location_name = options.delete(:location_name)
@@ -518,7 +518,6 @@ module Aws
 
         def rewind
           @io.rewind
-          @chunk = ''.b
           @encoded_buffer = +''
           @eof = false
           @digest = ChecksumAlgorithm.digest_for_algorithm(@algorithm)
@@ -566,10 +565,10 @@ module Aws
           return if required_length && @encoded_buffer.bytesize >= required_length
 
           while !@eof && fill_data?(required_length)
-            @chunk = @read_chunk.call
-            if @chunk && !@chunk.empty?
-              @digest.update(@chunk)
-              @encoded_buffer << @chunk.bytesize.to_s(HEX_BASE) << "\r\n" << @chunk << "\r\n"
+            chunk = @read_chunk.call
+            if chunk && !chunk.empty?
+              @digest.update(chunk)
+              @encoded_buffer << chunk.bytesize.to_s(HEX_BASE) << "\r\n" << chunk << "\r\n"
             else
               @encoded_buffer << "0\r\n" << trailer_string << "\r\n\r\n"
               @eof = true
