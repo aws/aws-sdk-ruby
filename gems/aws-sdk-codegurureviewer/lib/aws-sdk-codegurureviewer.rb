@@ -55,7 +55,7 @@ module Aws::CodeGuruReviewer
   autoload :EndpointProvider, 'aws-sdk-codegurureviewer/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codegurureviewer/endpoints'
 
-  GEM_VERSION = '1.90.0'
+  GEM_VERSION = '1.91.0'
 
 end
 

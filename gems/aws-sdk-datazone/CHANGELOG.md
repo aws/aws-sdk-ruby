@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.101.0 (2026-11-06)
+------------------
+
+* Feature - Adds support for updating OAuth 2.0 connection settings with UpdateConnection.
+
 1.100.0 (2026-11-04)
 ------------------
 

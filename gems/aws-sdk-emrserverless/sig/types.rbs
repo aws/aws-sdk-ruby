@@ -557,7 +557,7 @@ module Aws::EMRServerless
       attr_accessor entry_point: ::String
       attr_accessor entry_point_arguments: ::Array[::String]
       attr_accessor spark_submit_parameters: ::String
-      SENSITIVE: [:entry_point, :spark_submit_parameters]
+      SENSITIVE: [:entry_point, :entry_point_arguments, :spark_submit_parameters]
     end
 
     class StartApplicationRequest

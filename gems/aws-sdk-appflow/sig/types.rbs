@@ -345,7 +345,7 @@ module Aws::Appflow
     class CustomAuthCredentials
       attr_accessor custom_authentication_type: ::String
       attr_accessor credentials_map: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:credentials_map]
     end
 
     class CustomConnectorDestinationProperties

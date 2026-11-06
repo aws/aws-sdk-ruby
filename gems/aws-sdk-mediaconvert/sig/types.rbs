@@ -319,11 +319,13 @@ module Aws::MediaConvert
     end
 
     class CaptionDescription
+      attr_accessor audio_source_names: ::Array[::String]
       attr_accessor caption_selector_name: ::String
       attr_accessor custom_language_code: ::String
       attr_accessor destination_settings: Types::CaptionDestinationSettings
       attr_accessor language_code: ("ENG" | "SPA" | "FRA" | "DEU" | "GER" | "ZHO" | "ARA" | "HIN" | "JPN" | "RUS" | "POR" | "ITA" | "URD" | "VIE" | "KOR" | "PAN" | "ABK" | "AAR" | "AFR" | "AKA" | "SQI" | "AMH" | "ARG" | "HYE" | "ASM" | "AVA" | "AVE" | "AYM" | "AZE" | "BAM" | "BAK" | "EUS" | "BEL" | "BEN" | "BIH" | "BIS" | "BOS" | "BRE" | "BUL" | "MYA" | "CAT" | "KHM" | "CHA" | "CHE" | "NYA" | "CHU" | "CHV" | "COR" | "COS" | "CRE" | "HRV" | "CES" | "DAN" | "DIV" | "NLD" | "DZO" | "ENM" | "EPO" | "EST" | "EWE" | "FAO" | "FIJ" | "FIN" | "FRM" | "FUL" | "GLA" | "GLG" | "LUG" | "KAT" | "ELL" | "GRN" | "GUJ" | "HAT" | "HAU" | "HEB" | "HER" | "HMO" | "HUN" | "ISL" | "IDO" | "IBO" | "IND" | "INA" | "ILE" | "IKU" | "IPK" | "GLE" | "JAV" | "KAL" | "KAN" | "KAU" | "KAS" | "KAZ" | "KIK" | "KIN" | "KIR" | "KOM" | "KON" | "KUA" | "KUR" | "LAO" | "LAT" | "LAV" | "LIM" | "LIN" | "LIT" | "LUB" | "LTZ" | "MKD" | "MLG" | "MSA" | "MAL" | "MLT" | "GLV" | "MRI" | "MAR" | "MAH" | "MON" | "NAU" | "NAV" | "NDE" | "NBL" | "NDO" | "NEP" | "SME" | "NOR" | "NOB" | "NNO" | "OCI" | "OJI" | "ORI" | "ORM" | "OSS" | "PLI" | "FAS" | "POL" | "PUS" | "QUE" | "QAA" | "RON" | "ROH" | "RUN" | "SMO" | "SAG" | "SAN" | "SRD" | "SRB" | "SNA" | "III" | "SND" | "SIN" | "SLK" | "SLV" | "SOM" | "SOT" | "SUN" | "SWA" | "SSW" | "SWE" | "TGL" | "TAH" | "TGK" | "TAM" | "TAT" | "TEL" | "THA" | "BOD" | "TIR" | "TON" | "TSO" | "TSN" | "TUR" | "TUK" | "TWI" | "UIG" | "UKR" | "UZB" | "VEN" | "VOL" | "WLN" | "CYM" | "FRY" | "WOL" | "XHO" | "YID" | "YOR" | "ZHA" | "ZUL" | "ORJ" | "QPC" | "TNG" | "SRP")
       attr_accessor language_description: ::String
+      attr_accessor source: ("INPUT_CAPTION_SELECTOR" | "SMART_SUBTITLE")
       SENSITIVE: []
     end
 
@@ -562,6 +564,7 @@ module Aws::MediaConvert
       attr_accessor acceleration_settings: Types::AccelerationSettings
       attr_accessor billing_tags_source: ("QUEUE" | "PRESET" | "JOB_TEMPLATE" | "JOB")
       attr_accessor client_request_token: ::String
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
       attr_accessor job_engine_version: ::String
       attr_accessor job_template: ::String
@@ -585,6 +588,7 @@ module Aws::MediaConvert
       attr_accessor acceleration_settings: Types::AccelerationSettings
       attr_accessor category: ::String
       attr_accessor description: ::String
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
       attr_accessor name: ::String
       attr_accessor priority: ::Integer
@@ -915,7 +919,7 @@ module Aws::MediaConvert
     end
 
     class ElementalInferenceConfiguration
-      attr_accessor features: ::Array[("SMART_CROP")]
+      attr_accessor features: ::Array[("SMART_CROP" | "SMART_SUBTITLE")]
       attr_accessor feeds: ::Array[Types::ElementalInferenceFeed]
       SENSITIVE: []
     end
@@ -923,6 +927,16 @@ module Aws::MediaConvert
     class ElementalInferenceFeed
       attr_accessor arn: ::String
       attr_accessor feed_management_state: ("CREATED" | "ASSOCIATED" | "PENDING_DELETION" | "DELETED")
+      SENSITIVE: []
+    end
+
+    class ElementalInferenceFeedConfigurationSource
+      attr_accessor feed_arn: ::String
+      SENSITIVE: []
+    end
+
+    class ElementalInferenceSettings
+      attr_accessor feed_configuration_source: Types::ElementalInferenceFeedConfigurationSource
       SENSITIVE: []
     end
 
@@ -1501,6 +1515,7 @@ module Aws::MediaConvert
       attr_accessor created_at: ::Time
       attr_accessor current_phase: ("PROBING" | "TRANSCODING" | "UPLOADING")
       attr_accessor elemental_inference_configuration: Types::ElementalInferenceConfiguration
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor error_code: ::Integer
       attr_accessor error_message: ::String
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
@@ -1565,6 +1580,7 @@ module Aws::MediaConvert
       attr_accessor category: ::String
       attr_accessor created_at: ::Time
       attr_accessor description: ::String
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
       attr_accessor last_updated: ::Time
       attr_accessor name: ::String
@@ -2477,6 +2493,7 @@ module Aws::MediaConvert
       attr_accessor acceleration_settings: Types::AccelerationSettings
       attr_accessor category: ::String
       attr_accessor description: ::String
+      attr_accessor elemental_inference_settings: Types::ElementalInferenceSettings
       attr_accessor hop_destinations: ::Array[Types::HopDestination]
       attr_accessor name: ::String
       attr_accessor priority: ::Integer

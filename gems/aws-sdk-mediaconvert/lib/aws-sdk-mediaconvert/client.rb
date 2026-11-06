@@ -548,6 +548,9 @@ module Aws::MediaConvert
     #   Prevent duplicate jobs from being created and ensure idempotency for your requests. A client request token can be any string that includes up to 64 ASCII characters. If you reuse a client request token within one minute of a successful request, the API returns the job details of the original request instead. For more information see https://docs.aws.amazon.com/mediaconvert/latest/apireference/idempotency.html.**A suitable default value is auto-generated.** You should normally
     #   not need to pass this option.**
     #
+    # @option params [Types::ElementalInferenceSettings] :elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #
     # @option params [Array<Types::HopDestination>] :hop_destinations
     #   Optional. Use queue hopping to avoid overly long waits in the backlog
     #   of the queue that you submit your job to. Specify an alternate queue
@@ -643,6 +646,9 @@ module Aws::MediaConvert
     #
     # @option params [String] :description
     #   Optional. A description of the job template you are creating.
+    #
+    # @option params [Types::ElementalInferenceSettings] :elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
     #
     # @option params [Array<Types::HopDestination>] :hop_destinations
     #   Optional. Use queue hopping to avoid overly long waits in the backlog
@@ -4899,6 +4905,9 @@ module Aws::MediaConvert
     # @option params [String] :description
     #   The new description for the job template, if you are changing it.
     #
+    # @option params [Types::ElementalInferenceSettings] :elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #
     # @option params [Array<Types::HopDestination>] :hop_destinations
     #   Optional list of hop destinations.
     #
@@ -6690,7 +6699,7 @@ module Aws::MediaConvert
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-mediaconvert'
-      context[:gem_version] = '1.201.0'
+      context[:gem_version] = '1.202.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -671,6 +671,12 @@ module Aws::AutoScaling
     #   instance details.
     #   @return [Boolean]
     #
+    # @!attribute [rw] include_managed_resources
+    #   Specifies whether to include managed Auto Scaling groups in the
+    #   response. When set to `true` (default), the response includes
+    #   managed Auto Scaling groups.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -679,6 +685,11 @@ module Aws::AutoScaling
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] filters
@@ -690,6 +701,7 @@ module Aws::AutoScaling
     class AutoScalingGroupNamesType < Struct.new(
       :auto_scaling_group_names,
       :include_instances,
+      :include_managed_resources,
       :next_token,
       :max_records,
       :filters)
@@ -2329,9 +2341,20 @@ module Aws::AutoScaling
     #   Array Members: Maximum number of 50 items.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] include_managed_resources
+    #   Specifies whether to include managed Auto Scaling instances in the
+    #   response. When set to `true` (default), the response includes
+    #   managed Auto Scaling instances.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `50`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -2343,6 +2366,7 @@ module Aws::AutoScaling
     #
     class DescribeAutoScalingInstancesType < Struct.new(
       :instance_ids,
+      :include_managed_resources,
       :max_records,
       :next_token)
       SENSITIVE = []
@@ -2586,6 +2610,13 @@ module Aws::AutoScaling
     #   The name of the Auto Scaling group.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] include_managed_resources
+    #   Specifies whether to include notification configurations for managed
+    #   Auto Scaling groups in the response. When set to `true` (default),
+    #   the response includes notification configurations for managed Auto
+    #   Scaling groups.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -2594,12 +2625,18 @@ module Aws::AutoScaling
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeNotificationConfigurationsType AWS API Documentation
     #
     class DescribeNotificationConfigurationsType < Struct.new(
       :auto_scaling_group_names,
+      :include_managed_resources,
       :next_token,
       :max_records)
       SENSITIVE = []
@@ -2624,6 +2661,12 @@ module Aws::AutoScaling
     #   `StepScaling`, `TargetTrackingScaling`, and `PredictiveScaling`.
     #   @return [Array<String>]
     #
+    # @!attribute [rw] include_managed_resources
+    #   Specifies whether to include scaling policies for managed Auto
+    #   Scaling groups in the response. When set to `true` (default), the
+    #   response includes scaling policies for managed Auto Scaling groups.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -2632,6 +2675,11 @@ module Aws::AutoScaling
     # @!attribute [rw] max_records
     #   The maximum number of items to be returned with each call. The
     #   default value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribePoliciesType AWS API Documentation
@@ -2640,6 +2688,7 @@ module Aws::AutoScaling
       :auto_scaling_group_name,
       :policy_names,
       :policy_types,
+      :include_managed_resources,
       :next_token,
       :max_records)
       SENSITIVE = []
@@ -2669,9 +2718,21 @@ module Aws::AutoScaling
     #   Scaling groups.
     #   @return [Boolean]
     #
+    # @!attribute [rw] include_managed_resources
+    #   Specifies whether to include scaling activities for managed Auto
+    #   Scaling groups in the response. When set to `true` (default), the
+    #   response includes scaling activities for managed Auto Scaling
+    #   groups.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
     #   value is `100` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #   @return [Integer]
     #
     # @!attribute [rw] next_token
@@ -2719,6 +2780,7 @@ module Aws::AutoScaling
       :activity_ids,
       :auto_scaling_group_name,
       :include_deleted_groups,
+      :include_managed_resources,
       :max_records,
       :next_token,
       :filters)
@@ -2748,6 +2810,12 @@ module Aws::AutoScaling
     #   are provided, this property is ignored.
     #   @return [Time]
     #
+    # @!attribute [rw] include_managed_resources
+    #   Specifies whether to include scheduled actions for managed Auto
+    #   Scaling groups in the response. When set to `true` (default), the
+    #   response includes scheduled actions for managed Auto Scaling groups.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -2756,6 +2824,11 @@ module Aws::AutoScaling
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeScheduledActionsType AWS API Documentation
@@ -2765,6 +2838,7 @@ module Aws::AutoScaling
       :scheduled_action_names,
       :start_time,
       :end_time,
+      :include_managed_resources,
       :next_token,
       :max_records)
       SENSITIVE = []
@@ -2777,6 +2851,12 @@ module Aws::AutoScaling
     #   1000.
     #   @return [Array<Types::Filter>]
     #
+    # @!attribute [rw] include_managed_resources
+    #   Specifies whether to include tags for managed Auto Scaling groups in
+    #   the response. When set to `true` (default), the response includes
+    #   tags for managed Auto Scaling groups.
+    #   @return [Boolean]
+    #
     # @!attribute [rw] next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -2785,12 +2865,18 @@ module Aws::AutoScaling
     # @!attribute [rw] max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #   @return [Integer]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/DescribeTagsType AWS API Documentation
     #
     class DescribeTagsType < Struct.new(
       :filters,
+      :include_managed_resources,
       :next_token,
       :max_records)
       SENSITIVE = []
@@ -5696,7 +5782,9 @@ module Aws::AutoScaling
     #     balancer.
     #
     #   * `InService` - At least one Auto Scaling instance passed an `ELB`
-    #     health check.
+    #     health check. Note that the load balancer enters this state
+    #     immediately if you attach it in the [CreateAutoScalingGroup][1]
+    #     API call.
     #
     #   * `Removing` - The Auto Scaling instances are being deregistered
     #     from the load balancer. If connection draining is enabled, Elastic
@@ -5705,6 +5793,10 @@ module Aws::AutoScaling
     #
     #   * `Removed` - All Auto Scaling instances are deregistered from the
     #     load balancer.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LoadBalancerState AWS API Documentation
@@ -5732,7 +5824,9 @@ module Aws::AutoScaling
     #     target group.
     #
     #   * `InService` - At least one Auto Scaling instance passed an `ELB`
-    #     health check.
+    #     health check. Note that the target group enters this state
+    #     immediately if you attach it in the [CreateAutoScalingGroup][1]
+    #     API call.
     #
     #   * `Removing` - The Auto Scaling instances are being deregistered
     #     from the target group. If connection draining is enabled, Elastic
@@ -5741,6 +5835,10 @@ module Aws::AutoScaling
     #
     #   * `Removed` - All Auto Scaling instances are deregistered from the
     #     target group.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/autoscaling-2011-01-01/LoadBalancerTargetGroupState AWS API Documentation

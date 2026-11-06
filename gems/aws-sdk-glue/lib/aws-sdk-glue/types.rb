@@ -26871,11 +26871,20 @@ module Aws::Glue
     #   The URI for accessing the resource.
     #   @return [String]
     #
+    # @!attribute [rw] last_modified
+    #   The time at which the resource was last modified in Amazon S3. Glue
+    #   records this value when you create or update a function whose
+    #   `GovernanceMode` is `LAKE_FORMATION`. Analytics engines use it to
+    #   verify that the resource hasn't changed. This is an output-only
+    #   field.
+    #   @return [Time]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/ResourceUri AWS API Documentation
     #
     class ResourceUri < Struct.new(
       :resource_type,
-      :uri)
+      :uri,
+      :last_modified)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -34785,6 +34794,19 @@ module Aws::Glue
     #   The resource URIs for the function.
     #   @return [Array<Types::ResourceUri>]
     #
+    # @!attribute [rw] artifact_location
+    #   The Amazon S3 location that contains the function's artifacts. This
+    #   location must be registered with Lake Formation. Glue returns this
+    #   field only for functions whose `GovernanceMode` is `LAKE_FORMATION`.
+    #   @return [String]
+    #
+    # @!attribute [rw] governance_mode
+    #   How access to the function is governed. `IAM_ONLY` means access is
+    #   controlled by IAM permissions only. `LAKE_FORMATION` means Lake
+    #   Formation permissions (`EXECUTE`, `DESCRIBE`, `ALTER`, and `DROP`)
+    #   also control who can run, describe, update, and delete the function.
+    #   @return [String]
+    #
     # @!attribute [rw] catalog_id
     #   The ID of the Data Catalog in which the function resides.
     #   @return [String]
@@ -34800,6 +34822,8 @@ module Aws::Glue
       :owner_type,
       :create_time,
       :resource_uris,
+      :artifact_location,
+      :governance_mode,
       :catalog_id)
       SENSITIVE = []
       include Aws::Structure
@@ -34831,6 +34855,33 @@ module Aws::Glue
     #   The resource URIs for the function.
     #   @return [Array<Types::ResourceUri>]
     #
+    # @!attribute [rw] artifact_location
+    #   The Amazon S3 location that contains the function's artifacts.
+    #   Required when `GovernanceMode` is `LAKE_FORMATION`. You must
+    #   register the location with Lake Formation, and every resource URI
+    #   must be under this location.
+    #   @return [String]
+    #
+    # @!attribute [rw] governance_mode
+    #   How access to the function is governed. Specify `LAKE_FORMATION` to
+    #   manage access to the function with Lake Formation permissions. If
+    #   you don't specify a value, the default is `IAM_ONLY`. You can't
+    #   change the governance mode after the function is created.
+    #
+    #   When `GovernanceMode` is `LAKE_FORMATION`:
+    #
+    #   * You must be a data lake administrator or have all permissions on
+    #     the Data Catalog with the grant option.
+    #
+    #   * You must have the `DATA_LOCATION_ACCESS` permission on the
+    #     `ArtifactLocation`, unless you're a data lake administrator.
+    #
+    #   * You must specify from 1 to 10 resource URIs, each under the
+    #     `ArtifactLocation`.
+    #
+    #   * You can't rename the function.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/UserDefinedFunctionInput AWS API Documentation
     #
     class UserDefinedFunctionInput < Struct.new(
@@ -34839,7 +34890,9 @@ module Aws::Glue
       :owner_name,
       :function_type,
       :owner_type,
-      :resource_uris)
+      :resource_uris,
+      :artifact_location,
+      :governance_mode)
       SENSITIVE = []
       include Aws::Structure
     end

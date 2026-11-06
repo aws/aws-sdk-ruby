@@ -757,7 +757,7 @@ module Aws::RTBFabric
 
     class TrustStoreConfiguration
       attr_accessor certificate_authority_certificates: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:certificate_authority_certificates]
     end
 
     class UntagResourceRequest

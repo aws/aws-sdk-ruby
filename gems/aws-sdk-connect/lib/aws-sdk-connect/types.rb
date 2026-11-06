@@ -13457,6 +13457,14 @@ module Aws::Connect
       include Aws::Structure
     end
 
+    # End associated emails related to a case.
+    #
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connect-2017-08-08/EndAssociatedEmailsActionDefinition AWS API Documentation
+    #
+    class EndAssociatedEmailsActionDefinition < Aws::EmptyStructure; end
+
     # End associated tasks related to a case.
     #
     # @api private
@@ -31827,6 +31835,12 @@ module Aws::Connect
     #   Supported only for `TriggerEventSource` values: `OnCaseUpdate`.
     #   @return [Types::EndAssociatedTasksActionDefinition]
     #
+    # @!attribute [rw] end_associated_emails_action
+    #   Information about the end associated emails action.
+    #
+    #   Supported only for `TriggerEventSource` values: `OnCaseUpdate`.
+    #   @return [Types::EndAssociatedEmailsActionDefinition]
+    #
     # @!attribute [rw] submit_auto_evaluation_action
     #   Information about the submit automated evaluation action.
     #   @return [Types::SubmitAutoEvaluationActionDefinition]
@@ -31860,6 +31874,7 @@ module Aws::Connect
       :update_case_action,
       :assign_sla_action,
       :end_associated_tasks_action,
+      :end_associated_emails_action,
       :submit_auto_evaluation_action,
       :extract_information_action,
       :send_in_app_notification_action)

@@ -23,6 +23,7 @@ module Aws::RAM
     class AssociateResourceSharePermissionRequest
       attr_accessor resource_share_arn: ::String
       attr_accessor permission_arn: ::String
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameterInput]
       attr_accessor replace: bool
       attr_accessor client_token: ::String
       attr_accessor permission_version: ::Integer
@@ -59,6 +60,7 @@ module Aws::RAM
       attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
       attr_accessor last_updated_time: ::Time
       attr_accessor resource_share_arn: ::String
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameter]
       SENSITIVE: []
     end
 
@@ -77,6 +79,7 @@ module Aws::RAM
       attr_accessor name: ::String
       attr_accessor resource_type: ::String
       attr_accessor policy_template: ::String
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameterDeclaration]
       attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
       SENSITIVE: []
@@ -91,6 +94,7 @@ module Aws::RAM
     class CreatePermissionVersionRequest
       attr_accessor permission_arn: ::String
       attr_accessor policy_template: ::String
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameterDeclaration]
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -110,6 +114,7 @@ module Aws::RAM
       attr_accessor client_token: ::String
       attr_accessor permission_arns: ::Array[::String]
       attr_accessor sources: ::Array[::String]
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionArnAndTemplateParameters]
       attr_accessor resource_share_configuration: Types::ResourceShareConfiguration
       SENSITIVE: []
     end
@@ -129,7 +134,7 @@ module Aws::RAM
     class DeletePermissionResponse
       attr_accessor return_value: bool
       attr_accessor client_token: ::String
-      attr_accessor permission_status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+      attr_accessor permission_status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED" | "DEPRECATED")
       SENSITIVE: []
     end
 
@@ -143,7 +148,7 @@ module Aws::RAM
     class DeletePermissionVersionResponse
       attr_accessor return_value: bool
       attr_accessor client_token: ::String
-      attr_accessor permission_status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+      attr_accessor permission_status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED" | "DEPRECATED")
       SENSITIVE: []
     end
 
@@ -198,6 +203,7 @@ module Aws::RAM
     class GetPermissionRequest
       attr_accessor permission_arn: ::String
       attr_accessor permission_version: ::Integer
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameterInput]
       SENSITIVE: []
     end
 
@@ -331,6 +337,8 @@ module Aws::RAM
       attr_accessor resource_type: ::String
       attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
       attr_accessor default_version: bool
+      attr_accessor resource_owner: ("SELF" | "OTHER-ACCOUNTS")
+      attr_accessor resource_share_arn: ::String
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       SENSITIVE: []
@@ -357,9 +365,11 @@ module Aws::RAM
 
     class ListPermissionsRequest
       attr_accessor resource_type: ::String
+      attr_accessor resource_owner: ("SELF" | "OTHER-ACCOUNTS")
       attr_accessor next_token: ::String
       attr_accessor max_results: ::Integer
       attr_accessor permission_type: ("ALL" | "AWS_MANAGED" | "CUSTOMER_MANAGED")
+      attr_accessor permission_status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED" | "DEPRECATED")
       SENSITIVE: []
     end
 
@@ -485,8 +495,35 @@ module Aws::RAM
       SENSITIVE: []
     end
 
+    class PermissionArnAndTemplateParameters
+      attr_accessor permission_arn: ::String
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameterInput]
+      SENSITIVE: []
+    end
+
     class PermissionLimitExceededException
       attr_accessor message: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionTemplateParameter
+      attr_accessor name: ::String
+      attr_accessor type: ("STRING" | "STRING_LIST")
+      attr_accessor description: ::String
+      attr_accessor values: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class PermissionTemplateParameterDeclaration
+      attr_accessor name: ::String
+      attr_accessor type: ("STRING" | "STRING_LIST")
+      attr_accessor description: ::String
+      SENSITIVE: []
+    end
+
+    class PermissionTemplateParameterInput
+      attr_accessor name: ::String
+      attr_accessor values: ::Array[::String]
       SENSITIVE: []
     end
 
@@ -543,6 +580,7 @@ module Aws::RAM
       attr_accessor from_permission_arn: ::String
       attr_accessor from_permission_version: ::Integer
       attr_accessor to_permission_arn: ::String
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameterInput]
       attr_accessor client_token: ::String
       SENSITIVE: []
     end
@@ -559,6 +597,7 @@ module Aws::RAM
       attr_accessor from_permission_version: ::String
       attr_accessor to_permission_arn: ::String
       attr_accessor to_permission_version: ::String
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameter]
       attr_accessor status: ("IN_PROGRESS" | "COMPLETED" | "FAILED")
       attr_accessor status_message: ::String
       attr_accessor creation_time: ::Time
@@ -662,13 +701,15 @@ module Aws::RAM
       attr_accessor name: ::String
       attr_accessor resource_type: ::String
       attr_accessor permission: ::String
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameterDeclaration]
       attr_accessor creation_time: ::Time
       attr_accessor last_updated_time: ::Time
       attr_accessor is_resource_type_default: bool
       attr_accessor permission_type: ("CUSTOMER_MANAGED" | "AWS_MANAGED")
       attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
-      attr_accessor status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED")
+      attr_accessor status: ("ATTACHABLE" | "UNATTACHABLE" | "DELETING" | "DELETED" | "DEPRECATED")
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor resource_owner: ("SELF" | "OTHER-ACCOUNTS")
       SENSITIVE: []
     end
 
@@ -684,7 +725,9 @@ module Aws::RAM
       attr_accessor is_resource_type_default: bool
       attr_accessor permission_type: ("CUSTOMER_MANAGED" | "AWS_MANAGED")
       attr_accessor feature_set: ("CREATED_FROM_POLICY" | "PROMOTING_TO_STANDARD" | "STANDARD")
+      attr_accessor permission_template_parameters: ::Array[Types::PermissionTemplateParameter]
       attr_accessor tags: ::Array[Types::Tag]
+      attr_accessor resource_owner: ("SELF" | "OTHER-ACCOUNTS")
       SENSITIVE: []
     end
 
@@ -773,6 +816,19 @@ module Aws::RAM
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
+    end
+
+    class UpdatePermissionRequest
+      attr_accessor permission_arn: ::String
+      attr_accessor status: ("ATTACHABLE" | "DEPRECATED")
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class UpdatePermissionResponse
+      attr_accessor client_token: ::String
+      attr_accessor permission_status: ("ATTACHABLE" | "DEPRECATED")
+      SENSITIVE: []
     end
 
     class UpdateResourceShareRequest

@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.46.0 (2026-11-06)
+------------------
+
+* Feature - Added workloadIdentityProviderArn to the AssumeRoleForPodIdentity API response.
+
 1.45.0 (2026-11-04)
 ------------------
 

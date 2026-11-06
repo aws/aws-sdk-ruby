@@ -54,7 +54,7 @@ module Aws::WorkSpacesThinClient
   autoload :EndpointProvider, 'aws-sdk-workspacesthinclient/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-workspacesthinclient/endpoints'
 
-  GEM_VERSION = '1.55.0'
+  GEM_VERSION = '1.56.0'
 
 end
 

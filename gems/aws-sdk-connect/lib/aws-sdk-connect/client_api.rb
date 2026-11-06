@@ -784,6 +784,7 @@ module Aws::Connect
     EnableValueValidationOnAssociation = Shapes::BooleanShape.new(name: 'EnableValueValidationOnAssociation')
     EncryptionConfig = Shapes::StructureShape.new(name: 'EncryptionConfig')
     EncryptionType = Shapes::StringShape.new(name: 'EncryptionType')
+    EndAssociatedEmailsActionDefinition = Shapes::StructureShape.new(name: 'EndAssociatedEmailsActionDefinition')
     EndAssociatedTasksActionDefinition = Shapes::StructureShape.new(name: 'EndAssociatedTasksActionDefinition')
     Endpoint = Shapes::StructureShape.new(name: 'Endpoint')
     EndpointAddress = Shapes::StringShape.new(name: 'EndpointAddress')
@@ -5115,6 +5116,8 @@ module Aws::Connect
     EncryptionConfig.add_member(:key_id, Shapes::ShapeRef.new(shape: KeyId, required: true, location_name: "KeyId"))
     EncryptionConfig.struct_class = Types::EncryptionConfig
 
+    EndAssociatedEmailsActionDefinition.struct_class = Types::EndAssociatedEmailsActionDefinition
+
     EndAssociatedTasksActionDefinition.struct_class = Types::EndAssociatedTasksActionDefinition
 
     Endpoint.add_member(:type, Shapes::ShapeRef.new(shape: EndpointType, location_name: "Type"))
@@ -8309,6 +8312,7 @@ module Aws::Connect
     RuleAction.add_member(:update_case_action, Shapes::ShapeRef.new(shape: UpdateCaseActionDefinition, location_name: "UpdateCaseAction"))
     RuleAction.add_member(:assign_sla_action, Shapes::ShapeRef.new(shape: AssignSlaActionDefinition, location_name: "AssignSlaAction"))
     RuleAction.add_member(:end_associated_tasks_action, Shapes::ShapeRef.new(shape: EndAssociatedTasksActionDefinition, location_name: "EndAssociatedTasksAction"))
+    RuleAction.add_member(:end_associated_emails_action, Shapes::ShapeRef.new(shape: EndAssociatedEmailsActionDefinition, location_name: "EndAssociatedEmailsAction"))
     RuleAction.add_member(:submit_auto_evaluation_action, Shapes::ShapeRef.new(shape: SubmitAutoEvaluationActionDefinition, location_name: "SubmitAutoEvaluationAction"))
     RuleAction.add_member(:extract_information_action, Shapes::ShapeRef.new(shape: ExtractInformationActionDefinition, location_name: "ExtractInformationAction"))
     RuleAction.add_member(:send_in_app_notification_action, Shapes::ShapeRef.new(shape: SendInAppNotificationActionDefinition, location_name: "SendInAppNotificationAction"))

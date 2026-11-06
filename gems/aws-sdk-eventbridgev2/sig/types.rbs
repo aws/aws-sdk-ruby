@@ -519,7 +519,7 @@ module Aws::EventBridgeV2
       attr_accessor data: ::String
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor system_metadata: Types::PutRawEventsSystemMetadata
-      SENSITIVE: [:data]
+      SENSITIVE: [:data, :metadata]
     end
 
     class PutRawEventsResponse

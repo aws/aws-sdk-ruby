@@ -2156,7 +2156,7 @@ module Aws::IoTSiteWise
     class ExecutionEnvironmentVariables
       attr_accessor global: ::Hash[::String, ::String]
       attr_accessor compute_nodes: ::Hash[::String, ::Hash[::String, ::String]]
-      SENSITIVE: [:global]
+      SENSITIVE: [:global, :compute_nodes]
     end
 
     class ExecutionStatus

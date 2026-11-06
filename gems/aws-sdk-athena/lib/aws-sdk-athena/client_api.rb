@@ -79,6 +79,8 @@ module Aws::Athena
     CreatePreparedStatementOutput = Shapes::StructureShape.new(name: 'CreatePreparedStatementOutput')
     CreatePresignedNotebookUrlRequest = Shapes::StructureShape.new(name: 'CreatePresignedNotebookUrlRequest')
     CreatePresignedNotebookUrlResponse = Shapes::StructureShape.new(name: 'CreatePresignedNotebookUrlResponse')
+    CreateSystemTableConfigurationInput = Shapes::StructureShape.new(name: 'CreateSystemTableConfigurationInput')
+    CreateSystemTableConfigurationOutput = Shapes::StructureShape.new(name: 'CreateSystemTableConfigurationOutput')
     CreateWorkGroupInput = Shapes::StructureShape.new(name: 'CreateWorkGroupInput')
     CreateWorkGroupOutput = Shapes::StructureShape.new(name: 'CreateWorkGroupOutput')
     CustomerContentEncryptionConfiguration = Shapes::StructureShape.new(name: 'CustomerContentEncryptionConfiguration')
@@ -103,6 +105,8 @@ module Aws::Athena
     DeleteNotebookOutput = Shapes::StructureShape.new(name: 'DeleteNotebookOutput')
     DeletePreparedStatementInput = Shapes::StructureShape.new(name: 'DeletePreparedStatementInput')
     DeletePreparedStatementOutput = Shapes::StructureShape.new(name: 'DeletePreparedStatementOutput')
+    DeleteSystemTableConfigurationInput = Shapes::StructureShape.new(name: 'DeleteSystemTableConfigurationInput')
+    DeleteSystemTableConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteSystemTableConfigurationOutput')
     DeleteWorkGroupInput = Shapes::StructureShape.new(name: 'DeleteWorkGroupInput')
     DeleteWorkGroupOutput = Shapes::StructureShape.new(name: 'DeleteWorkGroupOutput')
     DescriptionString = Shapes::StringShape.new(name: 'DescriptionString')
@@ -161,6 +165,8 @@ module Aws::Athena
     GetSessionResponse = Shapes::StructureShape.new(name: 'GetSessionResponse')
     GetSessionStatusRequest = Shapes::StructureShape.new(name: 'GetSessionStatusRequest')
     GetSessionStatusResponse = Shapes::StructureShape.new(name: 'GetSessionStatusResponse')
+    GetSystemTableConfigurationInput = Shapes::StructureShape.new(name: 'GetSystemTableConfigurationInput')
+    GetSystemTableConfigurationOutput = Shapes::StructureShape.new(name: 'GetSystemTableConfigurationOutput')
     GetTableMetadataInput = Shapes::StructureShape.new(name: 'GetTableMetadataInput')
     GetTableMetadataOutput = Shapes::StructureShape.new(name: 'GetTableMetadataOutput')
     GetWorkGroupInput = Shapes::StructureShape.new(name: 'GetWorkGroupInput')
@@ -176,6 +182,7 @@ module Aws::Athena
     InvalidRequestException = Shapes::StructureShape.new(name: 'InvalidRequestException')
     KeyString = Shapes::StringShape.new(name: 'KeyString')
     KmsKey = Shapes::StringShape.new(name: 'KmsKey')
+    KmsKeyArn = Shapes::StringShape.new(name: 'KmsKeyArn')
     ListApplicationDPUSizesInput = Shapes::StructureShape.new(name: 'ListApplicationDPUSizesInput')
     ListApplicationDPUSizesOutput = Shapes::StructureShape.new(name: 'ListApplicationDPUSizesOutput')
     ListCalculationExecutionsRequest = Shapes::StructureShape.new(name: 'ListCalculationExecutionsRequest')
@@ -202,6 +209,8 @@ module Aws::Athena
     ListQueryExecutionsOutput = Shapes::StructureShape.new(name: 'ListQueryExecutionsOutput')
     ListSessionsRequest = Shapes::StructureShape.new(name: 'ListSessionsRequest')
     ListSessionsResponse = Shapes::StructureShape.new(name: 'ListSessionsResponse')
+    ListSystemTableStatusesInput = Shapes::StructureShape.new(name: 'ListSystemTableStatusesInput')
+    ListSystemTableStatusesOutput = Shapes::StructureShape.new(name: 'ListSystemTableStatusesOutput')
     ListTableMetadataInput = Shapes::StructureShape.new(name: 'ListTableMetadataInput')
     ListTableMetadataOutput = Shapes::StructureShape.new(name: 'ListTableMetadataOutput')
     ListTagsForResourceInput = Shapes::StructureShape.new(name: 'ListTagsForResourceInput')
@@ -233,6 +242,7 @@ module Aws::Athena
     MaxQueryExecutionsCount = Shapes::IntegerShape.new(name: 'MaxQueryExecutionsCount')
     MaxQueryResults = Shapes::IntegerShape.new(name: 'MaxQueryResults')
     MaxSessionsCount = Shapes::IntegerShape.new(name: 'MaxSessionsCount')
+    MaxSystemTableStatusesCount = Shapes::IntegerShape.new(name: 'MaxSystemTableStatusesCount')
     MaxTableMetadataCount = Shapes::IntegerShape.new(name: 'MaxTableMetadataCount')
     MaxTagsCount = Shapes::IntegerShape.new(name: 'MaxTagsCount')
     MaxWorkGroupsCount = Shapes::IntegerShape.new(name: 'MaxWorkGroupsCount')
@@ -320,6 +330,10 @@ module Aws::Athena
     String = Shapes::StringShape.new(name: 'String')
     StringList = Shapes::ListShape.new(name: 'StringList')
     SupportedDPUSizeList = Shapes::ListShape.new(name: 'SupportedDPUSizeList')
+    SystemTableName = Shapes::StringShape.new(name: 'SystemTableName')
+    SystemTableStatus = Shapes::StructureShape.new(name: 'SystemTableStatus')
+    SystemTableStatusList = Shapes::ListShape.new(name: 'SystemTableStatusList')
+    SystemTableType = Shapes::StringShape.new(name: 'SystemTableType')
     TableMetadata = Shapes::StructureShape.new(name: 'TableMetadata')
     TableMetadataList = Shapes::ListShape.new(name: 'TableMetadataList')
     TableTypeString = Shapes::StringShape.new(name: 'TableTypeString')
@@ -358,6 +372,8 @@ module Aws::Athena
     UpdateNotebookOutput = Shapes::StructureShape.new(name: 'UpdateNotebookOutput')
     UpdatePreparedStatementInput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementInput')
     UpdatePreparedStatementOutput = Shapes::StructureShape.new(name: 'UpdatePreparedStatementOutput')
+    UpdateSystemTableConfigurationInput = Shapes::StructureShape.new(name: 'UpdateSystemTableConfigurationInput')
+    UpdateSystemTableConfigurationOutput = Shapes::StructureShape.new(name: 'UpdateSystemTableConfigurationOutput')
     UpdateWorkGroupInput = Shapes::StructureShape.new(name: 'UpdateWorkGroupInput')
     UpdateWorkGroupOutput = Shapes::StructureShape.new(name: 'UpdateWorkGroupOutput')
     WorkGroup = Shapes::StructureShape.new(name: 'WorkGroup')
@@ -551,6 +567,18 @@ module Aws::Athena
     CreatePresignedNotebookUrlResponse.add_member(:auth_token_expiration_time, Shapes::ShapeRef.new(shape: Long, required: true, location_name: "AuthTokenExpirationTime"))
     CreatePresignedNotebookUrlResponse.struct_class = Types::CreatePresignedNotebookUrlResponse
 
+    CreateSystemTableConfigurationInput.add_member(:client_request_token, Shapes::ShapeRef.new(shape: IdempotencyToken, location_name: "ClientRequestToken", metadata: {"idempotencyToken" => true}))
+    CreateSystemTableConfigurationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: SystemTableName, required: true, location_name: "TableName"))
+    CreateSystemTableConfigurationInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    CreateSystemTableConfigurationInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateSystemTableConfigurationInput.struct_class = Types::CreateSystemTableConfigurationInput
+
+    CreateSystemTableConfigurationOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: SystemTableName, location_name: "TableName"))
+    CreateSystemTableConfigurationOutput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    CreateSystemTableConfigurationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    CreateSystemTableConfigurationOutput.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedAt"))
+    CreateSystemTableConfigurationOutput.struct_class = Types::CreateSystemTableConfigurationOutput
+
     CreateWorkGroupInput.add_member(:name, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "Name"))
     CreateWorkGroupInput.add_member(:configuration, Shapes::ShapeRef.new(shape: WorkGroupConfiguration, location_name: "Configuration"))
     CreateWorkGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
@@ -617,6 +645,11 @@ module Aws::Athena
     DeletePreparedStatementInput.struct_class = Types::DeletePreparedStatementInput
 
     DeletePreparedStatementOutput.struct_class = Types::DeletePreparedStatementOutput
+
+    DeleteSystemTableConfigurationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: SystemTableName, required: true, location_name: "TableName"))
+    DeleteSystemTableConfigurationInput.struct_class = Types::DeleteSystemTableConfigurationInput
+
+    DeleteSystemTableConfigurationOutput.struct_class = Types::DeleteSystemTableConfigurationOutput
 
     DeleteWorkGroupInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     DeleteWorkGroupInput.add_member(:recursive_delete_option, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "RecursiveDeleteOption"))
@@ -794,6 +827,15 @@ module Aws::Athena
     GetSessionStatusResponse.add_member(:status, Shapes::ShapeRef.new(shape: SessionStatus, location_name: "Status"))
     GetSessionStatusResponse.struct_class = Types::GetSessionStatusResponse
 
+    GetSystemTableConfigurationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: SystemTableName, required: true, location_name: "TableName"))
+    GetSystemTableConfigurationInput.struct_class = Types::GetSystemTableConfigurationInput
+
+    GetSystemTableConfigurationOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: SystemTableName, location_name: "TableName"))
+    GetSystemTableConfigurationOutput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    GetSystemTableConfigurationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    GetSystemTableConfigurationOutput.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedAt"))
+    GetSystemTableConfigurationOutput.struct_class = Types::GetSystemTableConfigurationOutput
+
     GetTableMetadataInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
     GetTableMetadataInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
     GetTableMetadataInput.add_member(:table_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "TableName"))
@@ -950,6 +992,14 @@ module Aws::Athena
     ListSessionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: SessionManagerToken, location_name: "NextToken"))
     ListSessionsResponse.add_member(:sessions, Shapes::ShapeRef.new(shape: SessionsList, location_name: "Sessions"))
     ListSessionsResponse.struct_class = Types::ListSessionsResponse
+
+    ListSystemTableStatusesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListSystemTableStatusesInput.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxSystemTableStatusesCount, location_name: "MaxResults"))
+    ListSystemTableStatusesInput.struct_class = Types::ListSystemTableStatusesInput
+
+    ListSystemTableStatusesOutput.add_member(:items, Shapes::ShapeRef.new(shape: SystemTableStatusList, required: true, location_name: "Items"))
+    ListSystemTableStatusesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
+    ListSystemTableStatusesOutput.struct_class = Types::ListSystemTableStatusesOutput
 
     ListTableMetadataInput.add_member(:catalog_name, Shapes::ShapeRef.new(shape: CatalogNameString, required: true, location_name: "CatalogName"))
     ListTableMetadataInput.add_member(:database_name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "DatabaseName"))
@@ -1283,6 +1333,12 @@ module Aws::Athena
 
     SupportedDPUSizeList.member = Shapes::ShapeRef.new(shape: Integer)
 
+    SystemTableStatus.add_member(:table_name, Shapes::ShapeRef.new(shape: SystemTableType, required: true, location_name: "TableName"))
+    SystemTableStatus.add_member(:enabled, Shapes::ShapeRef.new(shape: BoxedBoolean, required: true, location_name: "Enabled"))
+    SystemTableStatus.struct_class = Types::SystemTableStatus
+
+    SystemTableStatusList.member = Shapes::ShapeRef.new(shape: SystemTableStatus)
+
     TableMetadata.add_member(:name, Shapes::ShapeRef.new(shape: NameString, required: true, location_name: "Name"))
     TableMetadata.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
     TableMetadata.add_member(:last_access_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastAccessTime"))
@@ -1391,6 +1447,16 @@ module Aws::Athena
 
     UpdatePreparedStatementOutput.struct_class = Types::UpdatePreparedStatementOutput
 
+    UpdateSystemTableConfigurationInput.add_member(:table_name, Shapes::ShapeRef.new(shape: SystemTableName, required: true, location_name: "TableName"))
+    UpdateSystemTableConfigurationInput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    UpdateSystemTableConfigurationInput.struct_class = Types::UpdateSystemTableConfigurationInput
+
+    UpdateSystemTableConfigurationOutput.add_member(:table_name, Shapes::ShapeRef.new(shape: SystemTableName, location_name: "TableName"))
+    UpdateSystemTableConfigurationOutput.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyArn, location_name: "KmsKeyArn"))
+    UpdateSystemTableConfigurationOutput.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreatedAt"))
+    UpdateSystemTableConfigurationOutput.add_member(:last_modified_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedAt"))
+    UpdateSystemTableConfigurationOutput.struct_class = Types::UpdateSystemTableConfigurationOutput
+
     UpdateWorkGroupInput.add_member(:work_group, Shapes::ShapeRef.new(shape: WorkGroupName, required: true, location_name: "WorkGroup"))
     UpdateWorkGroupInput.add_member(:description, Shapes::ShapeRef.new(shape: WorkGroupDescriptionString, location_name: "Description"))
     UpdateWorkGroupInput.add_member(:configuration_updates, Shapes::ShapeRef.new(shape: WorkGroupConfigurationUpdates, location_name: "ConfigurationUpdates"))
@@ -1422,6 +1488,7 @@ module Aws::Athena
     WorkGroupConfiguration.add_member(:enable_minimum_encryption_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnableMinimumEncryptionConfiguration"))
     WorkGroupConfiguration.add_member(:identity_center_configuration, Shapes::ShapeRef.new(shape: IdentityCenterConfiguration, location_name: "IdentityCenterConfiguration"))
     WorkGroupConfiguration.add_member(:query_results_s3_access_grants_configuration, Shapes::ShapeRef.new(shape: QueryResultsS3AccessGrantsConfiguration, location_name: "QueryResultsS3AccessGrantsConfiguration"))
+    WorkGroupConfiguration.add_member(:system_table_statuses, Shapes::ShapeRef.new(shape: SystemTableStatusList, location_name: "SystemTableStatuses"))
     WorkGroupConfiguration.struct_class = Types::WorkGroupConfiguration
 
     WorkGroupConfigurationUpdates.add_member(:enforce_work_group_configuration, Shapes::ShapeRef.new(shape: BoxedBoolean, location_name: "EnforceWorkGroupConfiguration"))
@@ -1578,6 +1645,17 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
       end)
 
+      api.add_operation(:create_system_table_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateSystemTableConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateSystemTableConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: CreateSystemTableConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+      end)
+
       api.add_operation(:create_work_group, Seahorse::Model::Operation.new.tap do |o|
         o.name = "CreateWorkGroup"
         o.http_method = "POST"
@@ -1638,6 +1716,17 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:delete_system_table_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteSystemTableConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteSystemTableConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: DeleteSystemTableConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:delete_work_group, Seahorse::Model::Operation.new.tap do |o|
@@ -1846,6 +1935,18 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:get_system_table_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "GetSystemTableConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: GetSystemTableConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: GetSystemTableConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:get_table_metadata, Seahorse::Model::Operation.new.tap do |o|
@@ -2083,6 +2184,23 @@ module Aws::Athena
         )
       end)
 
+      api.add_operation(:list_system_table_statuses, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListSystemTableStatuses"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListSystemTableStatusesInput)
+        o.output = Shapes::ShapeRef.new(shape: ListSystemTableStatusesOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
       api.add_operation(:list_table_metadata, Seahorse::Model::Operation.new.tap do |o|
         o.name = "ListTableMetadata"
         o.http_method = "POST"
@@ -2293,6 +2411,18 @@ module Aws::Athena
         o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
         o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+      end)
+
+      api.add_operation(:update_system_table_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateSystemTableConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateSystemTableConfigurationInput)
+        o.output = Shapes::ShapeRef.new(shape: UpdateSystemTableConfigurationOutput)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
       end)
 
       api.add_operation(:update_work_group, Seahorse::Model::Operation.new.tap do |o|

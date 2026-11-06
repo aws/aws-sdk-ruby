@@ -22,7 +22,7 @@ module Aws::Lightsail
       attr_accessor status: ("Active" | "Inactive")
       attr_accessor created_at: ::Time
       attr_accessor last_used: Types::AccessKeyLastUsed
-      SENSITIVE: [:access_key_id]
+      SENSITIVE: [:access_key_id, :secret_access_key]
     end
 
     class AccessKeyLastUsed
@@ -484,7 +484,7 @@ module Aws::Lightsail
       attr_accessor password: ::String
       attr_accessor expires_at: ::Time
       attr_accessor registry: ::String
-      SENSITIVE: []
+      SENSITIVE: [:password]
     end
 
     class ContainerServiceStateDetail
@@ -792,7 +792,7 @@ module Aws::Lightsail
       attr_accessor public_key_base_64: ::String
       attr_accessor private_key_base_64: ::String
       attr_accessor operation: Types::Operation
-      SENSITIVE: []
+      SENSITIVE: [:private_key_base_64]
     end
 
     class CreateLoadBalancerRequest
@@ -1274,7 +1274,7 @@ module Aws::Lightsail
       attr_accessor public_key_base_64: ::String
       attr_accessor private_key_base_64: ::String
       attr_accessor created_at: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:private_key_base_64]
     end
 
     class EnableAddOnRequest
@@ -2177,7 +2177,7 @@ module Aws::Lightsail
       attr_accessor instance_name: ::String
       attr_accessor username: ::String
       attr_accessor host_keys: ::Array[Types::HostKeyAttributes]
-      SENSITIVE: []
+      SENSITIVE: [:password, :private_key]
     end
 
     class InstanceAttributeUpdates
@@ -2544,7 +2544,7 @@ module Aws::Lightsail
     class PasswordData
       attr_accessor ciphertext: ::String
       attr_accessor key_pair_name: ::String
-      SENSITIVE: []
+      SENSITIVE: [:ciphertext]
     end
 
     class PeerVpcRequest < Aws::EmptyStructure
@@ -2566,7 +2566,7 @@ module Aws::Lightsail
       attr_accessor master_user_password: ::String
       attr_accessor engine_version: ::String
       attr_accessor backup_retention_enabled: bool
-      SENSITIVE: []
+      SENSITIVE: [:master_user_password]
     end
 
     class PortInfo

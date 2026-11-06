@@ -619,6 +619,7 @@ module Aws::Lightsail
     RevocationReason = Shapes::StringShape.new(name: 'RevocationReason')
     SendContactMethodVerificationRequest = Shapes::StructureShape.new(name: 'SendContactMethodVerificationRequest')
     SendContactMethodVerificationResult = Shapes::StructureShape.new(name: 'SendContactMethodVerificationResult')
+    SensitiveBase64 = Shapes::StringShape.new(name: 'SensitiveBase64')
     SensitiveNonEmptyString = Shapes::StringShape.new(name: 'SensitiveNonEmptyString')
     SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
     SerialNumber = Shapes::StringShape.new(name: 'SerialNumber')
@@ -725,7 +726,7 @@ module Aws::Lightsail
     AccessDeniedException.struct_class = Types::AccessDeniedException
 
     AccessKey.add_member(:access_key_id, Shapes::ShapeRef.new(shape: IAMAccessKeyId, location_name: "accessKeyId"))
-    AccessKey.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "secretAccessKey"))
+    AccessKey.add_member(:secret_access_key, Shapes::ShapeRef.new(shape: SensitiveNonEmptyString, location_name: "secretAccessKey"))
     AccessKey.add_member(:status, Shapes::ShapeRef.new(shape: StatusType, location_name: "status"))
     AccessKey.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
     AccessKey.add_member(:last_used, Shapes::ShapeRef.new(shape: AccessKeyLastUsed, location_name: "lastUsed"))
@@ -1158,7 +1159,7 @@ module Aws::Lightsail
     ContainerServicePublicDomainsList.member = Shapes::ShapeRef.new(shape: string)
 
     ContainerServiceRegistryLogin.add_member(:username, Shapes::ShapeRef.new(shape: string, location_name: "username"))
-    ContainerServiceRegistryLogin.add_member(:password, Shapes::ShapeRef.new(shape: string, location_name: "password"))
+    ContainerServiceRegistryLogin.add_member(:password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "password"))
     ContainerServiceRegistryLogin.add_member(:expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "expiresAt"))
     ContainerServiceRegistryLogin.add_member(:registry, Shapes::ShapeRef.new(shape: string, location_name: "registry"))
     ContainerServiceRegistryLogin.struct_class = Types::ContainerServiceRegistryLogin
@@ -1382,7 +1383,7 @@ module Aws::Lightsail
 
     CreateKeyPairResult.add_member(:key_pair, Shapes::ShapeRef.new(shape: KeyPair, location_name: "keyPair"))
     CreateKeyPairResult.add_member(:public_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "publicKeyBase64"))
-    CreateKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "privateKeyBase64"))
+    CreateKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: SensitiveBase64, location_name: "privateKeyBase64"))
     CreateKeyPairResult.add_member(:operation, Shapes::ShapeRef.new(shape: Operation, location_name: "operation"))
     CreateKeyPairResult.struct_class = Types::CreateKeyPairResult
 
@@ -1740,7 +1741,7 @@ module Aws::Lightsail
     DownloadDefaultKeyPairRequest.struct_class = Types::DownloadDefaultKeyPairRequest
 
     DownloadDefaultKeyPairResult.add_member(:public_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "publicKeyBase64"))
-    DownloadDefaultKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: Base64, location_name: "privateKeyBase64"))
+    DownloadDefaultKeyPairResult.add_member(:private_key_base_64, Shapes::ShapeRef.new(shape: SensitiveBase64, location_name: "privateKeyBase64"))
     DownloadDefaultKeyPairResult.add_member(:created_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "createdAt"))
     DownloadDefaultKeyPairResult.struct_class = Types::DownloadDefaultKeyPairResult
 
@@ -2361,9 +2362,9 @@ module Aws::Lightsail
     InstanceAccessDetails.add_member(:expires_at, Shapes::ShapeRef.new(shape: IsoDate, location_name: "expiresAt"))
     InstanceAccessDetails.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "ipAddress"))
     InstanceAccessDetails.add_member(:ipv6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
-    InstanceAccessDetails.add_member(:password, Shapes::ShapeRef.new(shape: string, location_name: "password"))
+    InstanceAccessDetails.add_member(:password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "password"))
     InstanceAccessDetails.add_member(:password_data, Shapes::ShapeRef.new(shape: PasswordData, location_name: "passwordData"))
-    InstanceAccessDetails.add_member(:private_key, Shapes::ShapeRef.new(shape: string, location_name: "privateKey"))
+    InstanceAccessDetails.add_member(:private_key, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "privateKey"))
     InstanceAccessDetails.add_member(:protocol, Shapes::ShapeRef.new(shape: InstanceAccessProtocol, location_name: "protocol"))
     InstanceAccessDetails.add_member(:instance_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "instanceName"))
     InstanceAccessDetails.add_member(:username, Shapes::ShapeRef.new(shape: string, location_name: "username"))
@@ -2703,7 +2704,7 @@ module Aws::Lightsail
     PartnerInfo.add_member(:status, Shapes::ShapeRef.new(shape: PartnerStatus, required: true, location_name: "status"))
     PartnerInfo.struct_class = Types::PartnerInfo
 
-    PasswordData.add_member(:ciphertext, Shapes::ShapeRef.new(shape: string, location_name: "ciphertext"))
+    PasswordData.add_member(:ciphertext, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "ciphertext"))
     PasswordData.add_member(:key_pair_name, Shapes::ShapeRef.new(shape: ResourceName, location_name: "keyPairName"))
     PasswordData.struct_class = Types::PasswordData
 
@@ -2719,7 +2720,7 @@ module Aws::Lightsail
 
     PendingMaintenanceActionList.member = Shapes::ShapeRef.new(shape: PendingMaintenanceAction)
 
-    PendingModifiedRelationalDatabaseValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: string, location_name: "masterUserPassword"))
+    PendingModifiedRelationalDatabaseValues.add_member(:master_user_password, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "masterUserPassword"))
     PendingModifiedRelationalDatabaseValues.add_member(:engine_version, Shapes::ShapeRef.new(shape: string, location_name: "engineVersion"))
     PendingModifiedRelationalDatabaseValues.add_member(:backup_retention_enabled, Shapes::ShapeRef.new(shape: boolean, location_name: "backupRetentionEnabled"))
     PendingModifiedRelationalDatabaseValues.struct_class = Types::PendingModifiedRelationalDatabaseValues

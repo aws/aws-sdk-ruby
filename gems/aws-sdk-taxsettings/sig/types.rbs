@@ -359,7 +359,7 @@ module Aws::TaxSettings
     class ListSupplementalTaxRegistrationsResponse
       attr_accessor tax_registrations: ::Array[Types::SupplementalTaxRegistration]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:tax_registrations]
     end
 
     class ListTaxExemptionsRequest
@@ -383,7 +383,7 @@ module Aws::TaxSettings
     class ListTaxRegistrationsResponse
       attr_accessor account_details: ::Array[Types::AccountDetails]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:account_details]
     end
 
     class MalaysiaAdditionalInfo

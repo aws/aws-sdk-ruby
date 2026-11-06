@@ -65,6 +65,40 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class BatchCreateRelatedItemErrorEntry
+      attr_accessor case_identifier: Types::CaseIdentifier
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateRelatedItemIdentifier
+      attr_accessor case_identifier: Types::CaseIdentifierUnion
+      SENSITIVE: []
+    end
+
+    class BatchCreateRelatedItemRequest
+      attr_accessor domain_id: ::String
+      attr_accessor content: Types::RelatedItemInputContent
+      attr_accessor cases: ::Array[Types::BatchCreateRelatedItemIdentifier]
+      attr_accessor performed_by: Types::UserUnion
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class BatchCreateRelatedItemResponse
+      attr_accessor successful_items: ::Array[Types::BatchCreateRelatedItemSuccessEntry]
+      attr_accessor failed_items: ::Array[Types::BatchCreateRelatedItemErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchCreateRelatedItemSuccessEntry
+      attr_accessor case_identifier: Types::CaseIdentifier
+      attr_accessor related_item_id: ::String
+      attr_accessor related_item_arn: ::String
+      SENSITIVE: []
+    end
+
     class BatchGetCaseRuleRequest
       attr_accessor domain_id: ::String
       attr_accessor case_rules: ::Array[Types::CaseRuleIdentifier]
@@ -99,6 +133,41 @@ module Aws::ConnectCases
 
     class BatchPutFieldOptionsResponse
       attr_accessor errors: ::Array[Types::FieldOptionError]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateCaseErrorEntry
+      attr_accessor case_identifier: Types::CaseIdentifier
+      attr_accessor error_code: ::String
+      attr_accessor error_message: ::String
+      SENSITIVE: []
+    end
+
+    class BatchUpdateCaseIdentifier
+      attr_accessor case_identifier: Types::CaseIdentifierUnion
+      SENSITIVE: []
+    end
+
+    class BatchUpdateCaseRequest
+      attr_accessor domain_id: ::String
+      attr_accessor cases: ::Array[Types::BatchUpdateCaseIdentifier]
+      attr_accessor fields: ::Array[Types::FieldValueInput]
+      attr_accessor performed_by: Types::UserUnion
+      attr_accessor title: ::String
+      attr_accessor status: ::String
+      attr_accessor customer_id: ::String
+      attr_accessor client_token: ::String
+      SENSITIVE: [:title]
+    end
+
+    class BatchUpdateCaseResponse
+      attr_accessor successful_cases: ::Array[Types::BatchUpdateCaseSuccessEntry]
+      attr_accessor failed_cases: ::Array[Types::BatchUpdateCaseErrorEntry]
+      SENSITIVE: []
+    end
+
+    class BatchUpdateCaseSuccessEntry
+      attr_accessor case_identifier: Types::CaseIdentifier
       SENSITIVE: []
     end
 
@@ -154,6 +223,27 @@ module Aws::ConnectCases
       class OrAll < CaseFilter
       end
       class Unknown < CaseFilter
+      end
+    end
+
+    class CaseIdentifier
+      attr_accessor case_id: ::String
+      attr_accessor reference_number: ::String
+      attr_accessor reference_id: ::String
+      SENSITIVE: []
+    end
+
+    class CaseIdentifierUnion
+      attr_accessor case_id: ::String
+      attr_accessor reference_id: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class CaseId < CaseIdentifierUnion
+      end
+      class ReferenceId < CaseIdentifierUnion
+      end
+      class Unknown < CaseIdentifierUnion
       end
     end
 
@@ -545,6 +635,20 @@ module Aws::ConnectCases
       SENSITIVE: []
     end
 
+    class FieldIdentifierUnion
+      attr_accessor id: ::String
+      attr_accessor name: ::String
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class Id < FieldIdentifierUnion
+      end
+      class Name < FieldIdentifierUnion
+      end
+      class Unknown < FieldIdentifierUnion
+      end
+    end
+
     class FieldItem
       attr_accessor id: ::String
       SENSITIVE: []
@@ -583,6 +687,12 @@ module Aws::ConnectCases
 
     class FieldValue
       attr_accessor id: ::String
+      attr_accessor value: Types::FieldValueUnion
+      SENSITIVE: []
+    end
+
+    class FieldValueInput
+      attr_accessor field_identifier: Types::FieldIdentifierUnion
       attr_accessor value: Types::FieldValueUnion
       SENSITIVE: []
     end

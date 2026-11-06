@@ -1063,6 +1063,70 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Enables system tables for the current account. System tables are
+    # enabled or disabled for the entire account: creating this
+    # configuration enables them. If a configuration already exists, use
+    # UpdateSystemTableConfiguration to update it.
+    #
+    # @option params [String] :client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the system table configuration is idempotent (executes only once). If
+    #   another `CreateSystemTableConfiguration` request is received with the
+    #   same client token but different parameters, the request fails with an
+    #   `InvalidRequestException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    # @option params [required, String] :table_name
+    #   The system table configuration to create. The only accepted value is
+    #   `ALL`, the reserved keyword that enables all system tables for the
+    #   account.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS
+    #   KMS) key to use for encrypting the system table data.
+    #
+    # @option params [Array<Types::Tag>] :tags
+    #   The tags to add to the system table configuration.
+    #
+    # @return [Types::CreateSystemTableConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateSystemTableConfigurationOutput#table_name #table_name} => String
+    #   * {Types::CreateSystemTableConfigurationOutput#kms_key_arn #kms_key_arn} => String
+    #   * {Types::CreateSystemTableConfigurationOutput#created_at #created_at} => Time
+    #   * {Types::CreateSystemTableConfigurationOutput#last_modified_at #last_modified_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_system_table_configuration({
+    #     client_request_token: "IdempotencyToken",
+    #     table_name: "ALL", # required, accepts ALL
+    #     kms_key_arn: "KmsKeyArn",
+    #     tags: [
+    #       {
+    #         key: "TagKey",
+    #         value: "TagValue",
+    #       },
+    #     ],
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String, one of "ALL"
+    #   resp.kms_key_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateSystemTableConfiguration AWS API Documentation
+    #
+    # @overload create_system_table_configuration(params = {})
+    # @param [Hash] params ({})
+    def create_system_table_configuration(params = {}, options = {})
+      req = build_request(:create_system_table_configuration, params)
+      req.send_request(options)
+    end
+
     # Creates a workgroup with the specified name. A workgroup can be an
     # Apache Spark enabled workgroup or an Athena SQL workgroup.
     #
@@ -1173,6 +1237,12 @@ module Aws::Athena
     #         create_user_level_prefix: false,
     #         authentication_type: "DIRECTORY_IDENTITY", # required, accepts DIRECTORY_IDENTITY
     #       },
+    #       system_table_statuses: [
+    #         {
+    #           table_name: "QUERY_EXECUTIONS", # required, accepts QUERY_EXECUTIONS
+    #           enabled: false, # required
+    #         },
+    #       ],
     #     },
     #     description: "WorkGroupDescriptionString",
     #     tags: [
@@ -1333,6 +1403,32 @@ module Aws::Athena
     # @param [Hash] params ({})
     def delete_prepared_statement(params = {}, options = {})
       req = build_request(:delete_prepared_statement, params)
+      req.send_request(options)
+    end
+
+    # Disables system tables for the current account by deleting the
+    # account-level configuration. If the configuration doesn't exist, the
+    # operation succeeds without making any changes. The system table and
+    # previously published data are left intact.
+    #
+    # @option params [required, String] :table_name
+    #   The system table configuration to delete. The only accepted value is
+    #   `ALL`.
+    #
+    # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.delete_system_table_configuration({
+    #     table_name: "ALL", # required, accepts ALL
+    #   })
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteSystemTableConfiguration AWS API Documentation
+    #
+    # @overload delete_system_table_configuration(params = {})
+    # @param [Hash] params ({})
+    def delete_system_table_configuration(params = {}, options = {})
+      req = build_request(:delete_system_table_configuration, params)
       req.send_request(options)
     end
 
@@ -2154,6 +2250,43 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Returns the account-level system tables configuration. Fails with a
+    # `ResourceNotFoundException` if system tables are not enabled for the
+    # account.
+    #
+    # @option params [required, String] :table_name
+    #   The system table configuration to retrieve. The only accepted value is
+    #   `ALL`.
+    #
+    # @return [Types::GetSystemTableConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::GetSystemTableConfigurationOutput#table_name #table_name} => String
+    #   * {Types::GetSystemTableConfigurationOutput#kms_key_arn #kms_key_arn} => String
+    #   * {Types::GetSystemTableConfigurationOutput#created_at #created_at} => Time
+    #   * {Types::GetSystemTableConfigurationOutput#last_modified_at #last_modified_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.get_system_table_configuration({
+    #     table_name: "ALL", # required, accepts ALL
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String, one of "ALL"
+    #   resp.kms_key_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetSystemTableConfiguration AWS API Documentation
+    #
+    # @overload get_system_table_configuration(params = {})
+    # @param [Hash] params ({})
+    def get_system_table_configuration(params = {}, options = {})
+      req = build_request(:get_system_table_configuration, params)
+      req.send_request(options)
+    end
+
     # Returns table metadata for the specified catalog, database, and table.
     #
     # @option params [required, String] :catalog_name
@@ -2273,6 +2406,9 @@ module Aws::Athena
     #   resp.work_group.configuration.query_results_s3_access_grants_configuration.enable_s3_access_grants #=> Boolean
     #   resp.work_group.configuration.query_results_s3_access_grants_configuration.create_user_level_prefix #=> Boolean
     #   resp.work_group.configuration.query_results_s3_access_grants_configuration.authentication_type #=> String, one of "DIRECTORY_IDENTITY"
+    #   resp.work_group.configuration.system_table_statuses #=> Array
+    #   resp.work_group.configuration.system_table_statuses[0].table_name #=> String, one of "QUERY_EXECUTIONS"
+    #   resp.work_group.configuration.system_table_statuses[0].enabled #=> Boolean
     #   resp.work_group.description #=> String
     #   resp.work_group.creation_time #=> Time
     #   resp.work_group.identity_center_application_arn #=> String
@@ -3053,6 +3189,48 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Lists the system tables that the account-level configuration
+    # activates, along with whether each is currently enabled. Because
+    # system tables are enabled at the account level, every entry reflects
+    # the same account-wide state.
+    #
+    # @option params [String] :next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated.
+    #
+    # @option params [Integer] :max_results
+    #   Specifies the maximum number of results to return.
+    #
+    # @return [Types::ListSystemTableStatusesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::ListSystemTableStatusesOutput#items #items} => Array&lt;Types::SystemTableStatus&gt;
+    #   * {Types::ListSystemTableStatusesOutput#next_token #next_token} => String
+    #
+    # The returned {Seahorse::Client::Response response} is a pageable response and is Enumerable. For details on usage see {Aws::PageableResponse PageableResponse}.
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.list_system_table_statuses({
+    #     next_token: "Token",
+    #     max_results: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.items #=> Array
+    #   resp.items[0].table_name #=> String, one of "QUERY_EXECUTIONS"
+    #   resp.items[0].enabled #=> Boolean
+    #   resp.next_token #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListSystemTableStatuses AWS API Documentation
+    #
+    # @overload list_system_table_statuses(params = {})
+    # @param [Hash] params ({})
+    def list_system_table_statuses(params = {}, options = {})
+      req = build_request(:list_system_table_statuses, params)
+      req.send_request(options)
+    end
+
     # Lists the metadata for the tables in the specified data catalog
     # database.
     #
@@ -3388,6 +3566,12 @@ module Aws::Athena
     #   the following values: The name of the `Classifications` should be
     #   `athena-query-engine-properties`, with the only allowed properties as
     #   `max-dpu-count` and `min-dpu-count`.
+    #
+    #   **Note:** When using StartQueryExecution, only the Classifications
+    #   field applies. Do not specify the other fields (AdditionalConfigs,
+    #   CoordinatorDpuSize, DefaultExecutorDpuSize, MaxConcurrentDpus, and
+    #   SparkProperties), as these are used only with StartSession to
+    #   configure Apache Spark-based sessions.
     #
     # @return [Types::StartQueryExecutionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4001,6 +4185,50 @@ module Aws::Athena
       req.send_request(options)
     end
 
+    # Updates the account-level system tables configuration. If no
+    # configuration exists, use CreateSystemTableConfiguration to create
+    # one. Fields that you omit retain their current values.
+    #
+    # @option params [required, String] :table_name
+    #   The system table configuration to update. The only accepted value is
+    #   `ALL`.
+    #
+    # @option params [String] :kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS
+    #   KMS) key to use for encrypting the system table data. The encryption
+    #   key is immutable while the system table exists, so a change takes
+    #   effect only after the table has been deleted.
+    #
+    # @return [Types::UpdateSystemTableConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateSystemTableConfigurationOutput#table_name #table_name} => String
+    #   * {Types::UpdateSystemTableConfigurationOutput#kms_key_arn #kms_key_arn} => String
+    #   * {Types::UpdateSystemTableConfigurationOutput#created_at #created_at} => Time
+    #   * {Types::UpdateSystemTableConfigurationOutput#last_modified_at #last_modified_at} => Time
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_system_table_configuration({
+    #     table_name: "ALL", # required, accepts ALL
+    #     kms_key_arn: "KmsKeyArn",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.table_name #=> String, one of "ALL"
+    #   resp.kms_key_arn #=> String
+    #   resp.created_at #=> Time
+    #   resp.last_modified_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateSystemTableConfiguration AWS API Documentation
+    #
+    # @overload update_system_table_configuration(params = {})
+    # @param [Hash] params ({})
+    def update_system_table_configuration(params = {}, options = {})
+      req = build_request(:update_system_table_configuration, params)
+      req.send_request(options)
+    end
+
     # Updates the workgroup with the specified name. The workgroup's name
     # cannot be changed. Only `ConfigurationUpdates` can be specified.
     #
@@ -4136,7 +4364,7 @@ module Aws::Athena
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-athena'
-      context[:gem_version] = '1.131.0'
+      context[:gem_version] = '1.132.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

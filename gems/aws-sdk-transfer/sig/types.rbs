@@ -1252,7 +1252,7 @@ module Aws::Transfer
       attr_accessor local_directory_path: ::String
       attr_accessor remote_directory_path: ::String
       attr_accessor custom_http_headers: ::Array[Types::CustomHttpHeader]
-      SENSITIVE: []
+      SENSITIVE: [:custom_http_headers]
     end
 
     class StartFileTransferResponse

@@ -481,9 +481,178 @@ module Aws::ConnectCases
 
     # @!group API Operations
 
-    # Gets a batch of case rules. In the Amazon Connect admin website, case
-    # rules are known as *case field conditions*. For more information about
-    # case field conditions, see [Add case field conditions to a case
+    # Creates a comment and associates it with multiple cases in a single
+    # request. All cases must belong to the same domain. This operation
+    # supports only the Comment related item type.
+    #
+    # Each case is processed independently. If some cases fail, the
+    # remaining cases still receive the related item. To determine whether
+    # individual items failed, inspect the `failedItems` array in the
+    # response.
+    #
+    # The entire request fails, and no related items are created, in the
+    # following cases:
+    #
+    # * The specified domain doesn't exist.
+    #
+    # * A reference ID doesn't match any case in the domain.
+    #
+    # * The request contains duplicate case IDs.
+    #
+    # * The content isn't comment content.
+    #
+    # <note markdown="1"> This operation uses the same IAM action as [CreateRelatedItem][1]
+    # (`cases:CreateRelatedItem`). You can use the `cases:IsBatchAction`
+    # condition key in IAM policies to allow or deny batch operations
+    # independently from single-case operations.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> If you provide a value for `performedBy.userArn`, you must also have
+    # [DescribeUser][2] permission on the ARN of the user that you provide.
+    #
+    #  </note>
+    #
+    # **Endpoints**: See [Connect Customer endpoints and quotas][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cases/latest/APIReference/API_CreateRelatedItem.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
+    # [3]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @option params [required, Types::RelatedItemInputContent] :content
+    #   The content of the related item to be created. The same content is
+    #   applied to every case in the request. Only comment content is
+    #   supported for batch creation.
+    #
+    # @option params [required, Array<Types::BatchCreateRelatedItemIdentifier>] :cases
+    #   The list of cases to associate the related item with. All cases must
+    #   belong to the same domain.
+    #
+    # @option params [Types::UserUnion] :performed_by
+    #   The entity that created the related item.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   If you retry a request with the same client token, the service returns
+    #   the original response instead of processing the request again. If you
+    #   reuse a client token with different request parameters, the request
+    #   fails with a `ConflictException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::BatchCreateRelatedItemResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchCreateRelatedItemResponse#successful_items #successful_items} => Array&lt;Types::BatchCreateRelatedItemSuccessEntry&gt;
+    #   * {Types::BatchCreateRelatedItemResponse#failed_items #failed_items} => Array&lt;Types::BatchCreateRelatedItemErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_create_related_item({
+    #     domain_id: "DomainId", # required
+    #     content: { # required
+    #       contact: {
+    #         contact_arn: "ContactArn", # required
+    #       },
+    #       comment: {
+    #         body: "CommentBody", # required
+    #         content_type: "Text/Plain", # required, accepts Text/Plain
+    #       },
+    #       file: {
+    #         file_arn: "FileArn", # required
+    #       },
+    #       sla: {
+    #         sla_input_configuration: {
+    #           name: "SlaName", # required
+    #           type: "CaseField", # required, accepts CaseField
+    #           field_id: "FieldId",
+    #           target_field_values: [
+    #             {
+    #               string_value: "FieldValueUnionStringValueString",
+    #               double_value: 1.0,
+    #               boolean_value: false,
+    #               empty_value: {
+    #               },
+    #               user_arn_value: "String",
+    #             },
+    #           ],
+    #           target_sla_minutes: 1, # required
+    #         },
+    #       },
+    #       connect_case: {
+    #         case_id: "CaseId", # required
+    #       },
+    #       custom: {
+    #         fields: [ # required
+    #           {
+    #             id: "FieldId", # required
+    #             value: { # required
+    #               string_value: "FieldValueUnionStringValueString",
+    #               double_value: 1.0,
+    #               boolean_value: false,
+    #               empty_value: {
+    #               },
+    #               user_arn_value: "String",
+    #             },
+    #           },
+    #         ],
+    #       },
+    #     },
+    #     cases: [ # required
+    #       {
+    #         case_identifier: { # required
+    #           case_id: "CaseId",
+    #           reference_id: "ReferenceId",
+    #         },
+    #       },
+    #     ],
+    #     performed_by: {
+    #       user_arn: "UserArn",
+    #       custom_entity: "CustomEntity",
+    #     },
+    #     client_token: "BatchCreateRelatedItemRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_items #=> Array
+    #   resp.successful_items[0].case_identifier.case_id #=> String
+    #   resp.successful_items[0].case_identifier.reference_number #=> String
+    #   resp.successful_items[0].case_identifier.reference_id #=> String
+    #   resp.successful_items[0].related_item_id #=> String
+    #   resp.successful_items[0].related_item_arn #=> String
+    #   resp.failed_items #=> Array
+    #   resp.failed_items[0].case_identifier.case_id #=> String
+    #   resp.failed_items[0].case_identifier.reference_number #=> String
+    #   resp.failed_items[0].case_identifier.reference_id #=> String
+    #   resp.failed_items[0].error_code #=> String
+    #   resp.failed_items[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchCreateRelatedItem AWS API Documentation
+    #
+    # @overload batch_create_related_item(params = {})
+    # @param [Hash] params ({})
+    def batch_create_related_item(params = {}, options = {})
+      req = build_request(:batch_create_related_item, params)
+      req.send_request(options)
+    end
+
+    # Gets a batch of case rules. In the Connect Customer admin website,
+    # case rules are known as *case field conditions*. For more information
+    # about case field conditions, see [Add case field conditions to a case
     # template][1].
     #
     #
@@ -675,10 +844,171 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn`
+    # Updates fields on multiple cases in a single request. All cases must
+    # belong to the same domain. Set the title, status, and customer ID
+    # through the top-level `title`, `status`, and `customerId` parameters,
+    # and set other fields through the `fields` array.
+    #
+    # Each case is processed independently. If some cases fail, the
+    # remaining cases are still updated. To determine whether individual
+    # cases failed, inspect the `failedCases` array in the response.
+    #
+    # The entire request fails, and no cases are updated, in the following
+    # cases:
+    #
+    # * The specified domain doesn't exist.
+    #
+    # * A reference ID doesn't match any case in the domain.
+    #
+    # * The request contains duplicate case IDs.
+    #
+    # * The request doesn't specify any update. Provide at least one entry
+    #   in `fields`, or a `title`, `status`, or `customerId`.
+    #
+    # * A field identifier in `fields` doesn't resolve to a field in the
+    #   domain, for example, an unknown field name.
+    #
+    # * A field name contains a pipe (`|`) or comma (`,`) character.
+    #
+    # * `fields` includes `title`, `status`, or `customerId`.
+    #
+    # <note markdown="1"> This operation uses the same IAM action as [UpdateCase][1]
+    # (`cases:UpdateCase`). You can use the `cases:IsBatchAction` condition
+    # key in IAM policies to allow or deny batch operations independently
+    # from single-case operations.
+    #
+    #  </note>
+    #
+    # <note markdown="1"> If you provide a value for `performedBy.userArn`, you must also have
+    # [DescribeUser][2] permission on the ARN of the user that you provide.
+    #
+    #  </note>
+    #
+    # **Endpoints**: See [Connect Customer endpoints and quotas][3].
+    #
+    #
+    #
+    # [1]: https://docs.aws.amazon.com/cases/latest/APIReference/API_UpdateCase.html
+    # [2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
+    # [3]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+    #
+    # @option params [required, String] :domain_id
+    #   The unique identifier of the Cases domain.
+    #
+    # @option params [required, Array<Types::BatchUpdateCaseIdentifier>] :cases
+    #   The list of cases to update. All cases must belong to the same domain.
+    #
+    # @option params [required, Array<Types::FieldValueInput>] :fields
+    #   An array of objects, each with a `fieldIdentifier` and a `value`. You
+    #   can identify each field by its ID or by its name; identifying a field
+    #   by name is supported only in `BatchUpdateCase`. The same field values
+    #   are applied to every case in the request. This field must be present,
+    #   but can be an empty list when you provide the top-level `title`,
+    #   `status`, or `customerId` parameters. Do not include `title`,
+    #   `status`, or `customerId` in this list; set those values only through
+    #   their top-level parameters. Duplicating them in `fields` results in a
+    #   validation error.
+    #
+    # @option params [Types::UserUnion] :performed_by
+    #   The entity that performed the action.
+    #
+    # @option params [String] :title
+    #   The title to apply to all cases in the request.
+    #
+    # @option params [String] :status
+    #   The status to apply to all cases in the request.
+    #
+    # @option params [String] :customer_id
+    #   The ARN of the customer profile to associate with all cases in the
+    #   request.
+    #
+    # @option params [String] :client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency, see
+    #   [Making retries safe with idempotent APIs][1].
+    #
+    #   If you retry a request with the same client token, the service returns
+    #   the original response instead of processing the request again. If you
+    #   reuse a client token with different request parameters, the request
+    #   fails with a `ConflictException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.**
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #
+    # @return [Types::BatchUpdateCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::BatchUpdateCaseResponse#successful_cases #successful_cases} => Array&lt;Types::BatchUpdateCaseSuccessEntry&gt;
+    #   * {Types::BatchUpdateCaseResponse#failed_cases #failed_cases} => Array&lt;Types::BatchUpdateCaseErrorEntry&gt;
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.batch_update_case({
+    #     domain_id: "DomainId", # required
+    #     cases: [ # required
+    #       {
+    #         case_identifier: { # required
+    #           case_id: "CaseId",
+    #           reference_id: "ReferenceId",
+    #         },
+    #       },
+    #     ],
+    #     fields: [ # required
+    #       {
+    #         field_identifier: { # required
+    #           id: "FieldId",
+    #           name: "FieldName",
+    #         },
+    #         value: { # required
+    #           string_value: "FieldValueUnionStringValueString",
+    #           double_value: 1.0,
+    #           boolean_value: false,
+    #           empty_value: {
+    #           },
+    #           user_arn_value: "String",
+    #         },
+    #       },
+    #     ],
+    #     performed_by: {
+    #       user_arn: "UserArn",
+    #       custom_entity: "CustomEntity",
+    #     },
+    #     title: "CaseTitle",
+    #     status: "CaseStatus",
+    #     customer_id: "CustomerProfileArn",
+    #     client_token: "BatchUpdateCaseRequestClientTokenString",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.successful_cases #=> Array
+    #   resp.successful_cases[0].case_identifier.case_id #=> String
+    #   resp.successful_cases[0].case_identifier.reference_number #=> String
+    #   resp.successful_cases[0].case_identifier.reference_id #=> String
+    #   resp.failed_cases #=> Array
+    #   resp.failed_cases[0].case_identifier.case_id #=> String
+    #   resp.failed_cases[0].case_identifier.reference_number #=> String
+    #   resp.failed_cases[0].case_identifier.reference_id #=> String
+    #   resp.failed_cases[0].error_code #=> String
+    #   resp.failed_cases[0].error_message #=> String
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchUpdateCase AWS API Documentation
+    #
+    # @overload batch_update_case(params = {})
+    # @param [Hash] params ({})
+    def batch_update_case(params = {}, options = {})
+      req = build_request(:batch_update_case, params)
+      req.send_request(options)
+    end
+
+    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn`,
     # you must also have
-    # [connect:DescribeUser][1] permission on the User ARN resource that you
-    # provide
+    # the [connect:DescribeUser][1] permission on the user ARN that you
+    # provide.
     #
     #  </note>
     #
@@ -690,13 +1020,24 @@ module Aws::ConnectCases
     # configurations, the specified tags are automatically applied to the
     # case.
     #
-    #  The following fields are required when creating a case:
+    #  The following field is always required when creating a case:
     #
-    #  * `customer_id` - You must provide the full customer profile ARN in
-    #   this format: `arn:aws:profile:your_AWS_Region:your_AWS_account
-    #   ID:domains/your_profiles_domain_name/profiles/profile_ID`
+    #  * `title`
     #
-    # * `title`
+    # ^
+    #
+    #  The following field may be required depending on the template
+    # configuration:
+    #
+    #  * `customer_id` - Required only if the template's `requiredFields`
+    #   list includes `customer_id`. When required, provide the full
+    #   customer profile ARN in this format:
+    #
+    # `arn:aws:profile:your_AWS_Region:your_AWS_account_ID:domains/your_profiles_domain_name/profiles/profile_ID`.
+    #   When not required, the field is optional and can be omitted, added,
+    #   changed, or removed after case creation.
+    #
+    # ^
     #
     #
     #
@@ -729,8 +1070,8 @@ module Aws::ConnectCases
     #   Represents the entity that performed the action.
     #
     # @option params [Hash<String,String>] :tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #
     # @return [Types::CreateCaseResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -779,7 +1120,7 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Creates a new case rule. In the Amazon Connect admin website, case
+    # Creates a new case rule. In the Connect Customer admin website, case
     # rules are known as *case field conditions*. For more information about
     # case field conditions, see [Add case field conditions to a case
     # template][1].
@@ -926,13 +1267,13 @@ module Aws::ConnectCases
     end
 
     # Creates a domain, which is a container for all case data, such as
-    # cases, fields, templates and layouts. Each Amazon Connect instance can
-    # be associated with only one Cases domain.
+    # cases, fields, templates and layouts. Each Connect Customer instance
+    # can be associated with only one Cases domain.
     #
     # This will not associate your connect instance to Cases domain.
-    # Instead, use the Amazon Connect [CreateIntegrationAssociation][1] API.
-    # You need specific IAM permissions to successfully associate the Cases
-    # domain. For more information, see [Onboard to Cases][2].
+    # Instead, use the Connect Customer [CreateIntegrationAssociation][1]
+    # API. You need specific IAM permissions to successfully associate the
+    # Cases domain. For more information, see [Onboard to Cases][2].
     #
     #
     #
@@ -1108,7 +1449,7 @@ module Aws::ConnectCases
     # it with a case.
     #
     # There's a quota for the number of fields allowed in a Custom type
-    # related item. See [Amazon Connect Cases quotas][1].
+    # related item. See [Connect Customer Cases quotas][1].
     #
     # **Use cases**
     #
@@ -1121,7 +1462,7 @@ module Aws::ConnectCases
     #
     # * SLAs, to capture target resolution goals
     #
-    # * Cases, to capture related Amazon Connect Cases
+    # * Cases, to capture related Connect Customer Cases
     #
     # * Files, such as policy documentation or customer-provided attachments
     #
@@ -1141,13 +1482,11 @@ module Aws::ConnectCases
     #   own internal identifier, the `relatedItemArn`. Examples of related
     #   items include `comments` and `contacts`.
     #
-    # * If you provide a value for `performedBy.userArn` you must also have
+    # * If you provide a value for `performedBy.userArn`, you must also have
     #   [DescribeUser][3] permission on the ARN of the user that you
     #   provide.
     #
-    # * The `type` field is reserved for internal use only.
-    #
-    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
+    # **Endpoints**: See [Connect Customer endpoints and quotas][4].
     #
     #
     #
@@ -1292,6 +1631,11 @@ module Aws::ConnectCases
     #   A list of fields that must contain a value for a case to be
     #   successfully created with this template.
     #
+    #   To require a Customer Profile when creating cases, include
+    #   `customer_id` in this list. If `customer_id` is omitted, the Customer
+    #   Profile field is optional and can be added, changed, or removed after
+    #   case creation.
+    #
     # @option params [String] :status
     #   The status of the template.
     #
@@ -1395,7 +1739,7 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Deletes a case rule. In the Amazon Connect admin website, case rules
+    # Deletes a case rule. In the Connect Customer admin website, case rules
     # are known as *case field conditions*. For more information about case
     # field conditions, see [Add case field conditions to a case
     # template][1].
@@ -1431,8 +1775,8 @@ module Aws::ConnectCases
     # Deletes a Cases domain.
     #
     # <note markdown="1"> After deleting your domain you must disassociate the deleted domain
-    # from your Amazon Connect instance with another API call before being
-    # able to use Cases again with this Amazon Connect instance. See
+    # from your Connect Customer instance with another API call before being
+    # able to use Cases again with this Connect Customer instance. See
     # [DeleteIntegrationAssociation][1].
     #
     #  </note>
@@ -1461,7 +1805,7 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Deletes a field from a cases template.
+    # Deletes a field from a Cases template.
     #
     # After a field is deleted:
     #
@@ -1525,7 +1869,7 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Deletes a layout from a cases template. You can delete up to 100
+    # Deletes a layout from a Cases template. You can delete up to 100
     # layouts per domain.
     #
     # After a layout is deleted:
@@ -1600,10 +1944,10 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Deletes a cases template. You can delete up to 100 templates per
+    # Deletes a Cases template. You can delete up to 100 templates per
     # domain.
     #
-    # After a cases template is deleted:
+    # After a Cases template is deleted:
     #
     # * You can still retrieve the template by calling `GetTemplate`.
     #
@@ -1964,7 +2308,7 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Lists all case rules in a Cases domain. In the Amazon Connect admin
+    # Lists all case rules in a Cases domain. In the Connect Customer admin
     # website, case rules are known as *case field conditions*. For more
     # information about case field conditions, see [Add case field
     # conditions to a case template][1].
@@ -2024,7 +2368,7 @@ module Aws::ConnectCases
     #   The unique identifier of the Cases domain.
     #
     # @option params [required, String] :contact_arn
-    #   A unique identifier of a contact in Amazon Connect.
+    #   A unique identifier of a contact in Connect Customer.
     #
     # @option params [Integer] :max_results
     #   The maximum number of results to return per page.
@@ -2358,7 +2702,7 @@ module Aws::ConnectCases
 
     # Adds case event publishing configuration. For a complete list of
     # fields you can add to the event message, see [Create case fields][1]
-    # in the *Amazon Connect Administrator Guide*
+    # in the *Connect Customer Administrator Guide*.
     #
     #
     #
@@ -2431,7 +2775,7 @@ module Aws::ConnectCases
     # * This API searches across related items content, not case fields. Use
     #   the [SearchCases][3] API to search within case field values.
     #
-    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
+    # **Endpoints**: See [Connect Customer endpoints and quotas][4].
     #
     #
     #
@@ -3007,8 +3351,8 @@ module Aws::ConnectCases
     #   The Amazon Resource Name (ARN)
     #
     # @option params [required, Hash<String,String>] :tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #
     # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
     #
@@ -3056,16 +3400,16 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn`
+    # <note markdown="1"> If you provide a value for `PerformedBy.UserArn`,
     # you must also have
-    # [connect:DescribeUser][1] permission on the User ARN resource that you
-    # provide
+    # the [connect:DescribeUser][1] permission on the user ARN that you
+    # provide.
     #
     #  </note>
     #
     #  Updates the values of fields on a case. Fields to be updated are
     # received as an array of id/value pairs identical to the `CreateCase`
-    # input .
+    # input.
     #
     #  If the action is successful, the service sends back an HTTP 200
     # response with an empty HTTP body.
@@ -3122,7 +3466,7 @@ module Aws::ConnectCases
       req.send_request(options)
     end
 
-    # Updates a case rule. In the Amazon Connect admin website, case rules
+    # Updates a case rule. In the Connect Customer admin website, case rules
     # are known as *case field conditions*. For more information about case
     # field conditions, see [Add case field conditions to a case
     # template][1].
@@ -3391,7 +3735,7 @@ module Aws::ConnectCases
     # * **Custom** - Update the fields of a custom related item. You can
     #   add, modify, and remove fields from a custom related item. There's
     #   a quota for the number of fields allowed in a Custom type related
-    #   item. See [Amazon Connect Cases quotas][1].
+    #   item. See [Connect Customer Cases quotas][1].
     #
     # **Important things to know**
     #
@@ -3399,13 +3743,13 @@ module Aws::ConnectCases
     #   and their associated values should be included in the request.
     #   Fields not included as part of this request will be removed.
     #
-    # * If you provide a value for `performedBy.userArn` you must also have
+    # * If you provide a value for `performedBy.userArn`, you must also have
     #   [DescribeUser][2] permission on the ARN of the user that you
     #   provide.
     #
     # * [System case fields][3] cannot be used in a custom related item.
     #
-    # **Endpoints**: See [Amazon Connect endpoints and quotas][4].
+    # **Endpoints**: See [Connect Customer endpoints and quotas][4].
     #
     #
     #
@@ -3562,6 +3906,11 @@ module Aws::ConnectCases
     #   A list of fields that must contain a value for a case to be
     #   successfully created with this template.
     #
+    #   To require a Customer Profile when creating cases, include
+    #   `customer_id` in this list. If `customer_id` is omitted, the Customer
+    #   Profile field is optional and can be added, changed, or removed after
+    #   case creation.
+    #
     # @option params [String] :status
     #   The status of the template.
     #
@@ -3639,7 +3988,7 @@ module Aws::ConnectCases
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connectcases'
-      context[:gem_version] = '1.79.0'
+      context[:gem_version] = '1.80.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -24,7 +24,7 @@ module Aws::PersonalizeEvents
       attr_accessor recommendation_id: ::String
       attr_accessor impression: ::Array[::String]
       attr_accessor properties: ::String
-      SENSITIVE: [:action_id, :user_id, :properties]
+      SENSITIVE: [:action_id, :user_id, :impression, :properties]
     end
 
     class Event
@@ -37,7 +37,7 @@ module Aws::PersonalizeEvents
       attr_accessor recommendation_id: ::String
       attr_accessor impression: ::Array[::String]
       attr_accessor metric_attribution: Types::MetricAttribution
-      SENSITIVE: [:item_id, :properties]
+      SENSITIVE: [:item_id, :properties, :impression]
     end
 
     class InvalidInputException
@@ -73,7 +73,7 @@ module Aws::PersonalizeEvents
       attr_accessor user_id: ::String
       attr_accessor session_id: ::String
       attr_accessor event_list: ::Array[Types::Event]
-      SENSITIVE: [:user_id]
+      SENSITIVE: [:user_id, :event_list]
     end
 
     class PutItemsRequest

@@ -512,6 +512,7 @@ module Aws::EKSAuth
     #   * {Types::AssumeRoleForPodIdentityResponse#pod_identity_association #pod_identity_association} => Types::PodIdentityAssociation
     #   * {Types::AssumeRoleForPodIdentityResponse#assumed_role_user #assumed_role_user} => Types::AssumedRoleUser
     #   * {Types::AssumeRoleForPodIdentityResponse#credentials #credentials} => Types::Credentials
+    #   * {Types::AssumeRoleForPodIdentityResponse#workload_identity_provider_arn #workload_identity_provider_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -536,6 +537,7 @@ module Aws::EKSAuth
     #   resp.credentials.secret_access_key #=> String
     #   resp.credentials.access_key_id #=> String
     #   resp.credentials.expiration #=> Time
+    #   resp.workload_identity_provider_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/eks-auth-2023-11-26/AssumeRoleForPodIdentity AWS API Documentation
     #
@@ -564,7 +566,7 @@ module Aws::EKSAuth
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-eksauth'
-      context[:gem_version] = '1.45.0'
+      context[:gem_version] = '1.46.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

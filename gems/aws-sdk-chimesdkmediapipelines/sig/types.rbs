@@ -738,7 +738,7 @@ module Aws::ChimeSDKMediaPipelines
     class SelectedVideoStreams
       attr_accessor attendee_ids: ::Array[::String]
       attr_accessor external_user_ids: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:external_user_ids]
     end
 
     class SentimentConfiguration

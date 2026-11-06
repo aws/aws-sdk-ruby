@@ -723,7 +723,7 @@ module Aws::BedrockAgentCore
       attr_accessor linked_accounts: ::Array[Types::LinkedAccount]
       attr_accessor wallet_address: ::String
       attr_accessor redirect_url: ::String
-      SENSITIVE: []
+      SENSITIVE: [:linked_accounts]
     end
 
     class EvaluateRequest
@@ -1222,7 +1222,7 @@ module Aws::BedrockAgentCore
       attr_accessor custom_state: ::String
       attr_accessor resources: ::Array[::String]
       attr_accessor audiences: ::Array[::String]
-      SENSITIVE: [:workload_identity_token, :custom_state]
+      SENSITIVE: [:workload_identity_token, :custom_parameters, :custom_state]
     end
 
     class GetResourceOauth2TokenResponse
@@ -2459,7 +2459,7 @@ module Aws::BedrockAgentCore
       attr_accessor custom_parameters: ::Hash[::String, ::String]
       attr_accessor grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "TOKEN_EXCHANGE")
       attr_accessor default_return_url: ::String
-      SENSITIVE: []
+      SENSITIVE: [:custom_parameters]
     end
 
     class OnlineEvaluationConfigSource

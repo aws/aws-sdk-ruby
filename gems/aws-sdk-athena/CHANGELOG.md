@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.132.0 (2026-11-06)
+------------------
+
+* Feature - Added support for Athena System Tables which writes Athena usage data to AWS S3 managed tables in Apache Iceberg format. Adds CreateSystemTableConfiguration, UpdateSystemTableConfiguration, DeleteSystemTableConfiguration, GetSystemTableConfiguration, and ListSystemTableStatuses.
+
 1.131.0 (2026-11-04)
 ------------------
 

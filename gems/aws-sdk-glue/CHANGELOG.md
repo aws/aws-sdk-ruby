@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.292.0 (2026-11-06)
+------------------
+
+* Feature - Adds support for user-defined functions governed by AWS Lake Formation.
+
 1.291.0 (2026-11-05)
 ------------------
 

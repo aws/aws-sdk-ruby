@@ -171,7 +171,7 @@ module Aws::ChimeSDKMessaging
       attr_accessor sub_channel_id: ::String
       attr_accessor content_type: ::String
       attr_accessor target: ::Array[Types::Target]
-      SENSITIVE: [:content, :metadata, :content_type]
+      SENSITIVE: [:content, :metadata, :message_attributes, :content_type]
     end
 
     class ChannelMessageCallback
@@ -182,7 +182,7 @@ module Aws::ChimeSDKMessaging
       attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
       attr_accessor sub_channel_id: ::String
       attr_accessor content_type: ::String
-      SENSITIVE: [:content, :metadata, :content_type]
+      SENSITIVE: [:content, :metadata, :message_attributes, :content_type]
     end
 
     class ChannelMessageStatusStructure
@@ -205,7 +205,7 @@ module Aws::ChimeSDKMessaging
       attr_accessor message_attributes: ::Hash[::String, Types::MessageAttributeValue]
       attr_accessor content_type: ::String
       attr_accessor target: ::Array[Types::Target]
-      SENSITIVE: [:content, :metadata, :content_type]
+      SENSITIVE: [:content, :metadata, :message_attributes, :content_type]
     end
 
     class ChannelModeratedByAppInstanceUserSummary
@@ -709,7 +709,7 @@ module Aws::ChimeSDKMessaging
 
     class MessageAttributeValue
       attr_accessor string_values: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:string_values]
     end
 
     class MessagingSessionEndpoint
@@ -843,7 +843,7 @@ module Aws::ChimeSDKMessaging
       attr_accessor sub_channel_id: ::String
       attr_accessor content_type: ::String
       attr_accessor target: ::Array[Types::Target]
-      SENSITIVE: [:content, :metadata, :client_request_token, :content_type]
+      SENSITIVE: [:content, :metadata, :client_request_token, :message_attributes, :content_type]
     end
 
     class SendChannelMessageResponse
@@ -910,7 +910,7 @@ module Aws::ChimeSDKMessaging
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:tag_keys]
     end
 
     class UpdateChannelFlowRequest

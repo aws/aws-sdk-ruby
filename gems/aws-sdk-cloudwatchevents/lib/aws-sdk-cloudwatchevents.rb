@@ -54,7 +54,7 @@ module Aws::CloudWatchEvents
   autoload :EndpointProvider, 'aws-sdk-cloudwatchevents/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-cloudwatchevents/endpoints'
 
-  GEM_VERSION = '1.116.0'
+  GEM_VERSION = '1.117.0'
 
 end
 

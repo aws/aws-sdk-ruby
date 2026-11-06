@@ -55,7 +55,7 @@ module Aws::NetworkSecurityManager
   autoload :EndpointProvider, 'aws-sdk-networksecuritymanager/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-networksecuritymanager/endpoints'
 
-  GEM_VERSION = '1.6.0'
+  GEM_VERSION = '1.7.0'
 
 end
 

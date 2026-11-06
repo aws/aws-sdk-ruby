@@ -813,7 +813,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_by: Types::VersionCreatedBySource
       attr_accessor kms_key_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :components]
     end
 
     class CreateConfigurationBundleResponse
@@ -2531,7 +2531,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
       attr_accessor kms_key_arn: ::String
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :components]
     end
 
     class GetConfigurationBundleVersionRequest
@@ -2551,7 +2551,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor created_at: ::Time
       attr_accessor version_created_at: ::Time
       attr_accessor kms_key_arn: ::String
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :components]
     end
 
     class GetConsentPortalRequest
@@ -3661,7 +3661,7 @@ module Aws::BedrockAgentCoreControl
 
     class InlineExamplesSource
       attr_accessor examples: ::Array[untyped]
-      SENSITIVE: []
+      SENSITIVE: [:examples]
     end
 
     class Insight
@@ -3986,7 +3986,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor dataset_version: ::String
       attr_accessor examples: ::Array[untyped]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:examples]
     end
 
     class ListDatasetVersionsRequest
@@ -4707,7 +4707,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor custom_parameters: ::Hash[::String, ::String]
       attr_accessor grant_type: ("CLIENT_CREDENTIALS" | "AUTHORIZATION_CODE" | "TOKEN_EXCHANGE")
       attr_accessor default_return_url: ::String
-      SENSITIVE: []
+      SENSITIVE: [:custom_parameters]
     end
 
     class Oauth2AuthorizationServerMetadata
@@ -4860,7 +4860,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor stickiness_configuration: Types::StickinessConfiguration
       attr_accessor static_query_parameters: ::Hash[::String, ::String]
       attr_accessor static_query_parameter_conflict_resolution: ("CLIENT_OVERRIDE" | "STATIC_OVERRIDE")
-      SENSITIVE: []
+      SENSITIVE: [:static_query_parameters]
     end
 
     class PaymentConnectorSummary
@@ -5079,7 +5079,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor signing_algorithm: ("RS256" | "PS256" | "ES256")
       attr_accessor additional_header_claims: ::Hash[::String, ::String]
       attr_accessor additional_payload_claims: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:additional_header_claims, :additional_payload_claims]
     end
 
     class PrivateKeySource
@@ -5858,7 +5858,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor s3: Types::S3Configuration
       attr_accessor inline_payload: ::Array[Types::ToolDefinition]
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:inline_payload]
 
       class S3 < ToolSchema
       end
@@ -6046,7 +6046,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor commit_message: ::String
       attr_accessor created_by: Types::VersionCreatedBySource
       attr_accessor kms_key_arn: ::String
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :components]
     end
 
     class UpdateConfigurationBundleResponse
@@ -6085,7 +6085,7 @@ module Aws::BedrockAgentCoreControl
       attr_accessor dataset_id: ::String
       attr_accessor client_token: ::String
       attr_accessor examples: ::Array[untyped]
-      SENSITIVE: []
+      SENSITIVE: [:examples]
     end
 
     class UpdateDatasetExamplesResponse

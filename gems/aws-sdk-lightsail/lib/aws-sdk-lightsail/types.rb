@@ -102,7 +102,7 @@ module Aws::Lightsail
       :status,
       :created_at,
       :last_used)
-      SENSITIVE = [:access_key_id]
+      SENSITIVE = [:access_key_id, :secret_access_key]
       include Aws::Structure
     end
 
@@ -2746,7 +2746,7 @@ module Aws::Lightsail
       :password,
       :expires_at,
       :registry)
-      SENSITIVE = []
+      SENSITIVE = [:password]
       include Aws::Structure
     end
 
@@ -4362,7 +4362,7 @@ module Aws::Lightsail
       :public_key_base_64,
       :private_key_base_64,
       :operation)
-      SENSITIVE = []
+      SENSITIVE = [:private_key_base_64]
       include Aws::Structure
     end
 
@@ -6393,7 +6393,7 @@ module Aws::Lightsail
       :public_key_base_64,
       :private_key_base_64,
       :created_at)
-      SENSITIVE = []
+      SENSITIVE = [:private_key_base_64]
       include Aws::Structure
     end
 
@@ -10497,7 +10497,7 @@ module Aws::Lightsail
       :instance_name,
       :username,
       :host_keys)
-      SENSITIVE = []
+      SENSITIVE = [:password, :private_key]
       include Aws::Structure
     end
 
@@ -12697,7 +12697,7 @@ module Aws::Lightsail
     class PasswordData < Struct.new(
       :ciphertext,
       :key_pair_name)
-      SENSITIVE = []
+      SENSITIVE = [:ciphertext]
       include Aws::Structure
     end
 
@@ -12766,7 +12766,7 @@ module Aws::Lightsail
       :master_user_password,
       :engine_version,
       :backup_retention_enabled)
-      SENSITIVE = []
+      SENSITIVE = [:master_user_password]
       include Aws::Structure
     end
 

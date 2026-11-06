@@ -894,7 +894,7 @@ module Aws::Proton
     class ListComponentOutputsOutput
       attr_accessor next_token: ::String
       attr_accessor outputs: ::Array[Types::Output]
-      SENSITIVE: []
+      SENSITIVE: [:outputs]
     end
 
     class ListComponentProvisionedResourcesInput
@@ -965,7 +965,7 @@ module Aws::Proton
     class ListEnvironmentOutputsOutput
       attr_accessor next_token: ::String
       attr_accessor outputs: ::Array[Types::Output]
-      SENSITIVE: []
+      SENSITIVE: [:outputs]
     end
 
     class ListEnvironmentProvisionedResourcesInput
@@ -1056,7 +1056,7 @@ module Aws::Proton
     class ListServiceInstanceOutputsOutput
       attr_accessor next_token: ::String
       attr_accessor outputs: ::Array[Types::Output]
-      SENSITIVE: []
+      SENSITIVE: [:outputs]
     end
 
     class ListServiceInstanceProvisionedResourcesInput
@@ -1104,7 +1104,7 @@ module Aws::Proton
     class ListServicePipelineOutputsOutput
       attr_accessor next_token: ::String
       attr_accessor outputs: ::Array[Types::Output]
-      SENSITIVE: []
+      SENSITIVE: [:outputs]
     end
 
     class ListServicePipelineProvisionedResourcesInput
@@ -1176,7 +1176,7 @@ module Aws::Proton
       attr_accessor resource_arn: ::String
       attr_accessor status: ("IN_PROGRESS" | "FAILED" | "SUCCEEDED")
       attr_accessor status_message: ::String
-      SENSITIVE: [:status_message]
+      SENSITIVE: [:outputs, :status_message]
     end
 
     class NotifyResourceDeploymentStatusChangeOutput < Aws::EmptyStructure

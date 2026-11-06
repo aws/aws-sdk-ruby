@@ -79,6 +79,31 @@ module Aws
                   | (?Hash[Symbol, untyped]) -> instance
 
 
+      interface _BatchCreateRelatedItemResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchCreateRelatedItemResponse]
+        def successful_items: () -> ::Array[Types::BatchCreateRelatedItemSuccessEntry]
+        def failed_items: () -> ::Array[Types::BatchCreateRelatedItemErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#batch_create_related_item-instance_method
+      def batch_create_related_item: (
+                                       domain_id: ::String,
+                                       content: Params::related_item_input_content,
+                                       cases: Array[
+                                         {
+                                           case_identifier: {
+                                             case_id: ::String?,
+                                             reference_id: ::String?
+                                           }
+                                         }
+                                       ],
+                                       ?performed_by: {
+                                         user_arn: ::String?,
+                                         custom_entity: ::String?
+                                       },
+                                       ?client_token: ::String
+                                     ) -> _BatchCreateRelatedItemResponseSuccess
+                                   | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchCreateRelatedItemResponseSuccess
+
       interface _BatchGetCaseRuleResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::BatchGetCaseRuleResponse]
         def case_rules: () -> ::Array[Types::GetCaseRuleResponse]
@@ -129,6 +154,42 @@ module Aws
                                      ]
                                    ) -> _BatchPutFieldOptionsResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchPutFieldOptionsResponseSuccess
+
+      interface _BatchUpdateCaseResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::BatchUpdateCaseResponse]
+        def successful_cases: () -> ::Array[Types::BatchUpdateCaseSuccessEntry]
+        def failed_cases: () -> ::Array[Types::BatchUpdateCaseErrorEntry]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/ConnectCases/Client.html#batch_update_case-instance_method
+      def batch_update_case: (
+                               domain_id: ::String,
+                               cases: Array[
+                                 {
+                                   case_identifier: {
+                                     case_id: ::String?,
+                                     reference_id: ::String?
+                                   }
+                                 }
+                               ],
+                               fields: Array[
+                                 {
+                                   field_identifier: {
+                                     id: ::String?,
+                                     name: ::String?
+                                   },
+                                   value: Params::field_value_union
+                                 }
+                               ],
+                               ?performed_by: {
+                                 user_arn: ::String?,
+                                 custom_entity: ::String?
+                               },
+                               ?title: ::String,
+                               ?status: ::String,
+                               ?customer_id: ::String,
+                               ?client_token: ::String
+                             ) -> _BatchUpdateCaseResponseSuccess
+                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _BatchUpdateCaseResponseSuccess
 
       interface _CreateCaseResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateCaseResponse]
@@ -219,37 +280,7 @@ module Aws
                                  domain_id: ::String,
                                  case_id: ::String,
                                  type: ("Contact" | "Comment" | "File" | "Sla" | "ConnectCase" | "Custom"),
-                                 content: {
-                                   contact: {
-                                     contact_arn: ::String
-                                   }?,
-                                   comment: {
-                                     body: ::String,
-                                     content_type: ("Text/Plain")
-                                   }?,
-                                   file: {
-                                     file_arn: ::String
-                                   }?,
-                                   sla: {
-                                     sla_input_configuration: {
-                                       name: ::String,
-                                       type: ("CaseField"),
-                                       field_id: ::String?,
-                                       target_field_values: Array[
-                                         Params::field_value_union
-                                       ]?,
-                                       target_sla_minutes: ::Integer
-                                     }?
-                                   }?,
-                                   connect_case: {
-                                     case_id: ::String
-                                   }?,
-                                   custom: {
-                                     fields: Array[
-                                       Params::field_value
-                                     ]
-                                   }?
-                                 },
+                                 content: Params::related_item_input_content,
                                  ?performed_by: {
                                    user_arn: ::String?,
                                    custom_entity: ::String?

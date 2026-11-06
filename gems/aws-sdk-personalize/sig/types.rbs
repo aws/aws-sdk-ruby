@@ -1474,7 +1474,7 @@ module Aws::Personalize
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:tag_keys]
     end
 
     class UntagResourceResponse < Aws::EmptyStructure

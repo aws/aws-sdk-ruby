@@ -89,11 +89,21 @@ module Aws::RAM
     MissingRequiredParameterException = Shapes::StructureShape.new(name: 'MissingRequiredParameterException')
     OperationNotPermittedException = Shapes::StructureShape.new(name: 'OperationNotPermittedException')
     PermissionAlreadyExistsException = Shapes::StructureShape.new(name: 'PermissionAlreadyExistsException')
+    PermissionArnAndTemplateParameters = Shapes::StructureShape.new(name: 'PermissionArnAndTemplateParameters')
+    PermissionArnAndTemplateParametersList = Shapes::ListShape.new(name: 'PermissionArnAndTemplateParametersList')
     PermissionArnList = Shapes::ListShape.new(name: 'PermissionArnList')
     PermissionFeatureSet = Shapes::StringShape.new(name: 'PermissionFeatureSet')
     PermissionLimitExceededException = Shapes::StructureShape.new(name: 'PermissionLimitExceededException')
     PermissionName = Shapes::StringShape.new(name: 'PermissionName')
     PermissionStatus = Shapes::StringShape.new(name: 'PermissionStatus')
+    PermissionTemplateParameter = Shapes::StructureShape.new(name: 'PermissionTemplateParameter')
+    PermissionTemplateParameterDeclaration = Shapes::StructureShape.new(name: 'PermissionTemplateParameterDeclaration')
+    PermissionTemplateParameterDeclarationList = Shapes::ListShape.new(name: 'PermissionTemplateParameterDeclarationList')
+    PermissionTemplateParameterInput = Shapes::StructureShape.new(name: 'PermissionTemplateParameterInput')
+    PermissionTemplateParameterInputList = Shapes::ListShape.new(name: 'PermissionTemplateParameterInputList')
+    PermissionTemplateParameterList = Shapes::ListShape.new(name: 'PermissionTemplateParameterList')
+    PermissionTemplateParameterType = Shapes::StringShape.new(name: 'PermissionTemplateParameterType')
+    PermissionTemplateParameterValueList = Shapes::ListShape.new(name: 'PermissionTemplateParameterValueList')
     PermissionType = Shapes::StringShape.new(name: 'PermissionType')
     PermissionTypeFilter = Shapes::StringShape.new(name: 'PermissionTypeFilter')
     PermissionVersionsLimitExceededException = Shapes::StructureShape.new(name: 'PermissionVersionsLimitExceededException')
@@ -169,6 +179,9 @@ module Aws::RAM
     UnmatchedPolicyPermissionException = Shapes::StructureShape.new(name: 'UnmatchedPolicyPermissionException')
     UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
     UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
+    UpdatePermissionRequest = Shapes::StructureShape.new(name: 'UpdatePermissionRequest')
+    UpdatePermissionResponse = Shapes::StructureShape.new(name: 'UpdatePermissionResponse')
+    UpdatePermissionStatus = Shapes::StringShape.new(name: 'UpdatePermissionStatus')
     UpdateResourceShareRequest = Shapes::StructureShape.new(name: 'UpdateResourceShareRequest')
     UpdateResourceShareResponse = Shapes::StructureShape.new(name: 'UpdateResourceShareResponse')
 
@@ -182,6 +195,7 @@ module Aws::RAM
 
     AssociateResourceSharePermissionRequest.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceShareArn"))
     AssociateResourceSharePermissionRequest.add_member(:permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "permissionArn"))
+    AssociateResourceSharePermissionRequest.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterInputList, location_name: "permissionTemplateParameters"))
     AssociateResourceSharePermissionRequest.add_member(:replace, Shapes::ShapeRef.new(shape: Boolean, location_name: "replace"))
     AssociateResourceSharePermissionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     AssociateResourceSharePermissionRequest.add_member(:permission_version, Shapes::ShapeRef.new(shape: Integer, location_name: "permissionVersion"))
@@ -210,6 +224,7 @@ module Aws::RAM
     AssociatedPermission.add_member(:feature_set, Shapes::ShapeRef.new(shape: PermissionFeatureSet, location_name: "featureSet"))
     AssociatedPermission.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "lastUpdatedTime"))
     AssociatedPermission.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceShareArn"))
+    AssociatedPermission.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterList, location_name: "permissionTemplateParameters"))
     AssociatedPermission.struct_class = Types::AssociatedPermission
 
     AssociatedPermissionList.member = Shapes::ShapeRef.new(shape: AssociatedPermission)
@@ -228,6 +243,7 @@ module Aws::RAM
     CreatePermissionRequest.add_member(:name, Shapes::ShapeRef.new(shape: PermissionName, required: true, location_name: "name"))
     CreatePermissionRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceType"))
     CreatePermissionRequest.add_member(:policy_template, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "policyTemplate"))
+    CreatePermissionRequest.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterDeclarationList, location_name: "permissionTemplateParameters"))
     CreatePermissionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreatePermissionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
     CreatePermissionRequest.struct_class = Types::CreatePermissionRequest
@@ -238,6 +254,7 @@ module Aws::RAM
 
     CreatePermissionVersionRequest.add_member(:permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "permissionArn"))
     CreatePermissionVersionRequest.add_member(:policy_template, Shapes::ShapeRef.new(shape: Policy, required: true, location_name: "policyTemplate"))
+    CreatePermissionVersionRequest.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterDeclarationList, location_name: "permissionTemplateParameters"))
     CreatePermissionVersionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreatePermissionVersionRequest.struct_class = Types::CreatePermissionVersionRequest
 
@@ -253,6 +270,7 @@ module Aws::RAM
     CreateResourceShareRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     CreateResourceShareRequest.add_member(:permission_arns, Shapes::ShapeRef.new(shape: PermissionArnList, location_name: "permissionArns"))
     CreateResourceShareRequest.add_member(:sources, Shapes::ShapeRef.new(shape: SourceArnOrAccountList, location_name: "sources"))
+    CreateResourceShareRequest.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionArnAndTemplateParametersList, location_name: "permissionTemplateParameters"))
     CreateResourceShareRequest.add_member(:resource_share_configuration, Shapes::ShapeRef.new(shape: ResourceShareConfiguration, location_name: "resourceShareConfiguration"))
     CreateResourceShareRequest.struct_class = Types::CreateResourceShareRequest
 
@@ -314,6 +332,7 @@ module Aws::RAM
 
     GetPermissionRequest.add_member(:permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "permissionArn"))
     GetPermissionRequest.add_member(:permission_version, Shapes::ShapeRef.new(shape: Integer, location_name: "permissionVersion"))
+    GetPermissionRequest.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterInputList, location_name: "permissionTemplateParameters"))
     GetPermissionRequest.struct_class = Types::GetPermissionRequest
 
     GetPermissionResponse.add_member(:permission, Shapes::ShapeRef.new(shape: ResourceSharePermissionDetail, location_name: "permission"))
@@ -407,6 +426,8 @@ module Aws::RAM
     ListPermissionAssociationsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ListPermissionAssociationsRequest.add_member(:feature_set, Shapes::ShapeRef.new(shape: PermissionFeatureSet, location_name: "featureSet"))
     ListPermissionAssociationsRequest.add_member(:default_version, Shapes::ShapeRef.new(shape: Boolean, location_name: "defaultVersion"))
+    ListPermissionAssociationsRequest.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, location_name: "resourceOwner"))
+    ListPermissionAssociationsRequest.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: String, location_name: "resourceShareArn"))
     ListPermissionAssociationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListPermissionAssociationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListPermissionAssociationsRequest.struct_class = Types::ListPermissionAssociationsRequest
@@ -425,9 +446,11 @@ module Aws::RAM
     ListPermissionVersionsResponse.struct_class = Types::ListPermissionVersionsResponse
 
     ListPermissionsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
+    ListPermissionsRequest.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, location_name: "resourceOwner"))
     ListPermissionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
     ListPermissionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
     ListPermissionsRequest.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionTypeFilter, location_name: "permissionType"))
+    ListPermissionsRequest.add_member(:permission_status, Shapes::ShapeRef.new(shape: PermissionStatus, location_name: "permissionStatus"))
     ListPermissionsRequest.struct_class = Types::ListPermissionsRequest
 
     ListPermissionsResponse.add_member(:permissions, Shapes::ShapeRef.new(shape: ResourceSharePermissionList, location_name: "permissions"))
@@ -516,10 +539,39 @@ module Aws::RAM
     PermissionAlreadyExistsException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     PermissionAlreadyExistsException.struct_class = Types::PermissionAlreadyExistsException
 
+    PermissionArnAndTemplateParameters.add_member(:permission_arn, Shapes::ShapeRef.new(shape: String, location_name: "permissionArn"))
+    PermissionArnAndTemplateParameters.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterInputList, location_name: "permissionTemplateParameters"))
+    PermissionArnAndTemplateParameters.struct_class = Types::PermissionArnAndTemplateParameters
+
+    PermissionArnAndTemplateParametersList.member = Shapes::ShapeRef.new(shape: PermissionArnAndTemplateParameters)
+
     PermissionArnList.member = Shapes::ShapeRef.new(shape: String)
 
     PermissionLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     PermissionLimitExceededException.struct_class = Types::PermissionLimitExceededException
+
+    PermissionTemplateParameter.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    PermissionTemplateParameter.add_member(:type, Shapes::ShapeRef.new(shape: PermissionTemplateParameterType, location_name: "type"))
+    PermissionTemplateParameter.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    PermissionTemplateParameter.add_member(:values, Shapes::ShapeRef.new(shape: PermissionTemplateParameterValueList, location_name: "values"))
+    PermissionTemplateParameter.struct_class = Types::PermissionTemplateParameter
+
+    PermissionTemplateParameterDeclaration.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    PermissionTemplateParameterDeclaration.add_member(:type, Shapes::ShapeRef.new(shape: PermissionTemplateParameterType, location_name: "type"))
+    PermissionTemplateParameterDeclaration.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+    PermissionTemplateParameterDeclaration.struct_class = Types::PermissionTemplateParameterDeclaration
+
+    PermissionTemplateParameterDeclarationList.member = Shapes::ShapeRef.new(shape: PermissionTemplateParameterDeclaration)
+
+    PermissionTemplateParameterInput.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+    PermissionTemplateParameterInput.add_member(:values, Shapes::ShapeRef.new(shape: PermissionTemplateParameterValueList, location_name: "values"))
+    PermissionTemplateParameterInput.struct_class = Types::PermissionTemplateParameterInput
+
+    PermissionTemplateParameterInputList.member = Shapes::ShapeRef.new(shape: PermissionTemplateParameterInput)
+
+    PermissionTemplateParameterList.member = Shapes::ShapeRef.new(shape: PermissionTemplateParameter)
+
+    PermissionTemplateParameterValueList.member = Shapes::ShapeRef.new(shape: String)
 
     PermissionVersionsLimitExceededException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
     PermissionVersionsLimitExceededException.struct_class = Types::PermissionVersionsLimitExceededException
@@ -563,6 +615,7 @@ module Aws::RAM
     ReplacePermissionAssociationsRequest.add_member(:from_permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "fromPermissionArn"))
     ReplacePermissionAssociationsRequest.add_member(:from_permission_version, Shapes::ShapeRef.new(shape: Integer, location_name: "fromPermissionVersion"))
     ReplacePermissionAssociationsRequest.add_member(:to_permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "toPermissionArn"))
+    ReplacePermissionAssociationsRequest.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterInputList, location_name: "permissionTemplateParameters"))
     ReplacePermissionAssociationsRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
     ReplacePermissionAssociationsRequest.struct_class = Types::ReplacePermissionAssociationsRequest
 
@@ -575,6 +628,7 @@ module Aws::RAM
     ReplacePermissionAssociationsWork.add_member(:from_permission_version, Shapes::ShapeRef.new(shape: String, location_name: "fromPermissionVersion"))
     ReplacePermissionAssociationsWork.add_member(:to_permission_arn, Shapes::ShapeRef.new(shape: String, location_name: "toPermissionArn"))
     ReplacePermissionAssociationsWork.add_member(:to_permission_version, Shapes::ShapeRef.new(shape: String, location_name: "toPermissionVersion"))
+    ReplacePermissionAssociationsWork.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterList, location_name: "permissionTemplateParameters"))
     ReplacePermissionAssociationsWork.add_member(:status, Shapes::ShapeRef.new(shape: ReplacePermissionAssociationsWorkStatus, location_name: "status"))
     ReplacePermissionAssociationsWork.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
     ReplacePermissionAssociationsWork.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
@@ -672,6 +726,7 @@ module Aws::RAM
     ResourceSharePermissionDetail.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
     ResourceSharePermissionDetail.add_member(:resource_type, Shapes::ShapeRef.new(shape: String, location_name: "resourceType"))
     ResourceSharePermissionDetail.add_member(:permission, Shapes::ShapeRef.new(shape: String, location_name: "permission"))
+    ResourceSharePermissionDetail.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterDeclarationList, location_name: "permissionTemplateParameters"))
     ResourceSharePermissionDetail.add_member(:creation_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "creationTime"))
     ResourceSharePermissionDetail.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: DateTime, location_name: "lastUpdatedTime"))
     ResourceSharePermissionDetail.add_member(:is_resource_type_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "isResourceTypeDefault"))
@@ -679,6 +734,7 @@ module Aws::RAM
     ResourceSharePermissionDetail.add_member(:feature_set, Shapes::ShapeRef.new(shape: PermissionFeatureSet, location_name: "featureSet"))
     ResourceSharePermissionDetail.add_member(:status, Shapes::ShapeRef.new(shape: PermissionStatus, location_name: "status"))
     ResourceSharePermissionDetail.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ResourceSharePermissionDetail.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, location_name: "resourceOwner"))
     ResourceSharePermissionDetail.struct_class = Types::ResourceSharePermissionDetail
 
     ResourceSharePermissionList.member = Shapes::ShapeRef.new(shape: ResourceSharePermissionSummary)
@@ -694,7 +750,9 @@ module Aws::RAM
     ResourceSharePermissionSummary.add_member(:is_resource_type_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "isResourceTypeDefault"))
     ResourceSharePermissionSummary.add_member(:permission_type, Shapes::ShapeRef.new(shape: PermissionType, location_name: "permissionType"))
     ResourceSharePermissionSummary.add_member(:feature_set, Shapes::ShapeRef.new(shape: PermissionFeatureSet, location_name: "featureSet"))
+    ResourceSharePermissionSummary.add_member(:permission_template_parameters, Shapes::ShapeRef.new(shape: PermissionTemplateParameterList, location_name: "permissionTemplateParameters"))
     ResourceSharePermissionSummary.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+    ResourceSharePermissionSummary.add_member(:resource_owner, Shapes::ShapeRef.new(shape: ResourceOwner, location_name: "resourceOwner"))
     ResourceSharePermissionSummary.struct_class = Types::ResourceSharePermissionSummary
 
     ServerInternalException.add_member(:message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "message"))
@@ -765,6 +823,15 @@ module Aws::RAM
     UntagResourceRequest.struct_class = Types::UntagResourceRequest
 
     UntagResourceResponse.struct_class = Types::UntagResourceResponse
+
+    UpdatePermissionRequest.add_member(:permission_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "permissionArn"))
+    UpdatePermissionRequest.add_member(:status, Shapes::ShapeRef.new(shape: UpdatePermissionStatus, required: true, location_name: "status"))
+    UpdatePermissionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    UpdatePermissionRequest.struct_class = Types::UpdatePermissionRequest
+
+    UpdatePermissionResponse.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+    UpdatePermissionResponse.add_member(:permission_status, Shapes::ShapeRef.new(shape: UpdatePermissionStatus, location_name: "permissionStatus"))
+    UpdatePermissionResponse.struct_class = Types::UpdatePermissionResponse
 
     UpdateResourceShareRequest.add_member(:resource_share_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceShareArn"))
     UpdateResourceShareRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
@@ -884,6 +951,7 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: InvalidClientTokenException)
         o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
         o.errors << Shapes::ShapeRef.new(shape: PermissionVersionsLimitExceededException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
       end)
 
       api.add_operation(:create_resource_share, Seahorse::Model::Operation.new.tap do |o|
@@ -1409,6 +1477,23 @@ module Aws::RAM
         o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
         o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+      end)
+
+      api.add_operation(:update_permission, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdatePermission"
+        o.http_method = "POST"
+        o.http_request_uri = "/updatepermission"
+        o.input = Shapes::ShapeRef.new(shape: UpdatePermissionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdatePermissionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+        o.errors << Shapes::ShapeRef.new(shape: MalformedArnException)
+        o.errors << Shapes::ShapeRef.new(shape: ServerInternalException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
+        o.errors << Shapes::ShapeRef.new(shape: UnknownResourceException)
+        o.errors << Shapes::ShapeRef.new(shape: InvalidClientTokenException)
+        o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
+        o.errors << Shapes::ShapeRef.new(shape: PermissionLimitExceededException)
       end)
 
       api.add_operation(:update_resource_share, Seahorse::Model::Operation.new.tap do |o|

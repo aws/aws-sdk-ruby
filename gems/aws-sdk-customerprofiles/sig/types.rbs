@@ -2281,7 +2281,7 @@ module Aws::CustomerProfiles
     class ProfileTypeDimension
       attr_accessor dimension_type: ("INCLUSIVE" | "EXCLUSIVE")
       attr_accessor values: ::Array[("ACCOUNT_PROFILE" | "PROFILE")]
-      SENSITIVE: []
+      SENSITIVE: [:values]
     end
 
     class PutDomainObjectTypeRequest
@@ -2455,7 +2455,7 @@ module Aws::CustomerProfiles
     class RecommenderFilter
       attr_accessor name: ::String
       attr_accessor values: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:values]
     end
 
     class RecommenderFilterSummary
@@ -2475,7 +2475,7 @@ module Aws::CustomerProfiles
       attr_accessor values: ::Hash[::String, ::String]
       attr_accessor promotion_name: ::String
       attr_accessor percent_promoted_items: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:values]
     end
 
     class RecommenderRecipe

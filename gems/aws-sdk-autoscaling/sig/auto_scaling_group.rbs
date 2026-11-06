@@ -544,6 +544,7 @@ module Aws
       def activities: (
                         ?activity_ids: Array[::String],
                         ?include_deleted_groups: bool,
+                        ?include_managed_resources: bool,
                         ?filters: Array[
                           {
                             name: ::String?,
@@ -578,13 +579,15 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#notification_configurations-instance_method
       def notification_configurations: (
+                                         ?include_managed_resources: bool
                                        ) -> NotificationConfiguration::Collection
                                      | (?Hash[Symbol, untyped]) -> NotificationConfiguration::Collection
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/AutoScalingGroup.html#policies-instance_method
       def policies: (
                       ?policy_names: Array[::String],
-                      ?policy_types: Array[::String]
+                      ?policy_types: Array[::String],
+                      ?include_managed_resources: bool
                     ) -> ScalingPolicy::Collection
                   | (?Hash[Symbol, untyped]) -> ScalingPolicy::Collection
 
@@ -592,7 +595,8 @@ module Aws
       def scheduled_actions: (
                                ?scheduled_action_names: Array[::String],
                                ?start_time: ::Time,
-                               ?end_time: ::Time
+                               ?end_time: ::Time,
+                               ?include_managed_resources: bool
                              ) -> ScheduledAction::Collection
                            | (?Hash[Symbol, untyped]) -> ScheduledAction::Collection
 

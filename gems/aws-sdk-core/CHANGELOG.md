@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+3.265.0 (2026-11-06)
+------------------
+
 * Feature - Improve model-aware filtering of nested request parameters and sensitivity detection for nested collections.
 
 3.264.0 (2026-11-04)

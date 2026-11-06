@@ -86,7 +86,7 @@ module Aws::EBS
       attr_accessor volume_size: ::Integer
       attr_accessor block_size: ::Integer
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:changed_blocks]
     end
 
     class ListSnapshotBlocksRequest

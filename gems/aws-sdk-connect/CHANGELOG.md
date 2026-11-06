@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.295.0 (2026-11-06)
+------------------
+
+* Feature - Rules in Amazon Connect now support ending email contacts associated to a case based on case events.
+
 1.294.0 (2026-11-04)
 ------------------
 

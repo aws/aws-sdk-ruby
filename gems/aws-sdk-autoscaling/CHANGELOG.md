@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.175.0 (2026-11-06)
+------------------
+
+* Feature - Amazon EC2 Auto Scaling now lets you exclude managed resources from describe API responses using the new optional IncludeManagedResources parameter. Set this parameter to false to exclude managed resources from the response. By default, managed resources are included.
+
 1.174.0 (2026-11-04)
 ------------------
 

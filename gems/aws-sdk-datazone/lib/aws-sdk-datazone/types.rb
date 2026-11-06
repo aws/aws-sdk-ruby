@@ -1525,11 +1525,19 @@ module Aws::DataZone
     #   The basic authentication credentials of a connection.
     #   @return [Types::BasicAuthenticationCredentials]
     #
+    # @!attribute [rw] o_auth_2_properties
+    #   The OAuth2 properties, such as the client application, grant type,
+    #   and token URL, that you want to update for a connection. Only the
+    #   properties that you specify are updated; the connection keeps its
+    #   existing values for the properties that you omit.
+    #   @return [Types::OAuth2PropertiesPatch]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/AuthenticationConfigurationPatch AWS API Documentation
     #
     class AuthenticationConfigurationPatch < Struct.new(
       :secret_arn,
-      :basic_authentication_credentials)
+      :basic_authentication_credentials,
+      :o_auth_2_properties)
       SENSITIVE = [:basic_authentication_credentials]
       include Aws::Structure
     end
@@ -18102,6 +18110,38 @@ module Aws::DataZone
       :authorization_code_properties,
       :o_auth_2_credentials)
       SENSITIVE = [:o_auth_2_credentials]
+      include Aws::Structure
+    end
+
+    # Contains the OAuth2 properties, such as the client application, grant
+    # type, and token URL, that you want to update for a connection.
+    #
+    # @!attribute [rw] o_auth_2_grant_type
+    #   The OAuth2 grant type of the OAuth2 properties to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] o_auth_2_client_application
+    #   The OAuth2 client application of the OAuth2 properties to update.
+    #   @return [Types::OAuth2ClientApplication]
+    #
+    # @!attribute [rw] token_url
+    #   The OAuth2 token URL of the OAuth2 properties to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] token_url_parameters_map
+    #   The OAuth2 token URL parameter map of the OAuth2 properties to
+    #   update, for example the scope. If you specify an empty map, the
+    #   existing parameters are kept.
+    #   @return [Hash<String,String>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/OAuth2PropertiesPatch AWS API Documentation
+    #
+    class OAuth2PropertiesPatch < Struct.new(
+      :o_auth_2_grant_type,
+      :o_auth_2_client_application,
+      :token_url,
+      :token_url_parameters_map)
+      SENSITIVE = []
       include Aws::Structure
     end
 

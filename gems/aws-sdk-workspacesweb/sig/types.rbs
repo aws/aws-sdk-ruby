@@ -200,7 +200,7 @@ module Aws::WorkSpacesWeb
       attr_accessor browser_policy: ::String
       attr_accessor client_token: ::String
       attr_accessor web_content_filtering_policy: Types::WebContentFilteringPolicy
-      SENSITIVE: [:browser_policy]
+      SENSITIVE: [:tags, :browser_policy]
     end
 
     class CreateBrowserSettingsResponse
@@ -216,7 +216,7 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor inline_redaction_configuration: Types::InlineRedactionConfiguration
       attr_accessor client_token: ::String
-      SENSITIVE: [:display_name, :description]
+      SENSITIVE: [:display_name, :description, :tags]
     end
 
     class CreateDataProtectionSettingsResponse
@@ -231,7 +231,7 @@ module Aws::WorkSpacesWeb
       attr_accessor identity_provider_details: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: [:identity_provider_name, :identity_provider_details]
+      SENSITIVE: [:identity_provider_name, :identity_provider_details, :tags]
     end
 
     class CreateIdentityProviderResponse
@@ -247,7 +247,7 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor ip_rules: ::Array[Types::IpRule]
       attr_accessor client_token: ::String
-      SENSITIVE: [:display_name, :description, :ip_rules]
+      SENSITIVE: [:display_name, :description, :tags, :ip_rules]
     end
 
     class CreateIpAccessSettingsResponse
@@ -261,7 +261,7 @@ module Aws::WorkSpacesWeb
       attr_accessor security_group_ids: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:tags]
     end
 
     class CreateNetworkSettingsResponse
@@ -279,7 +279,7 @@ module Aws::WorkSpacesWeb
       attr_accessor instance_type: ("standard.regular" | "standard.large" | "standard.xlarge")
       attr_accessor max_concurrent_sessions: ::Integer
       attr_accessor portal_custom_domain: ::String
-      SENSITIVE: [:display_name]
+      SENSITIVE: [:display_name, :tags]
     end
 
     class CreatePortalResponse
@@ -296,7 +296,7 @@ module Aws::WorkSpacesWeb
       attr_accessor additional_encryption_context: ::Hash[::String, ::String]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
-      SENSITIVE: [:display_name]
+      SENSITIVE: [:display_name, :tags]
     end
 
     class CreateSessionLoggerResponse
@@ -308,7 +308,7 @@ module Aws::WorkSpacesWeb
       attr_accessor certificate_list: ::Array[::String]
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:tags]
     end
 
     class CreateTrustStoreResponse
@@ -320,7 +320,7 @@ module Aws::WorkSpacesWeb
       attr_accessor kinesis_stream_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:tags]
     end
 
     class CreateUserAccessLoggingSettingsResponse
@@ -345,7 +345,7 @@ module Aws::WorkSpacesWeb
       attr_accessor toolbar_configuration: Types::ToolbarConfiguration
       attr_accessor branding_configuration_input: Types::BrandingConfigurationCreateInput
       attr_accessor web_authn_allowed: ("Disabled" | "Enabled")
-      SENSITIVE: [:cookie_synchronization_configuration]
+      SENSITIVE: [:tags, :cookie_synchronization_configuration]
     end
 
     class CreateUserSettingsResponse
@@ -723,7 +723,7 @@ module Aws::WorkSpacesWeb
       attr_accessor global_enforced_urls: ::Array[::String]
       attr_accessor global_exempt_urls: ::Array[::String]
       attr_accessor global_confidence_level: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:global_enforced_urls, :global_exempt_urls]
     end
 
     class InlineRedactionPattern
@@ -733,7 +733,7 @@ module Aws::WorkSpacesWeb
       attr_accessor enforced_urls: ::Array[::String]
       attr_accessor exempt_urls: ::Array[::String]
       attr_accessor confidence_level: ::Integer
-      SENSITIVE: [:built_in_pattern_id]
+      SENSITIVE: [:built_in_pattern_id, :enforced_urls, :exempt_urls]
     end
 
     class InternalServerException
@@ -877,7 +877,7 @@ module Aws::WorkSpacesWeb
 
     class ListTagsForResourceResponse
       attr_accessor tags: ::Array[Types::Tag]
-      SENSITIVE: []
+      SENSITIVE: [:tags]
     end
 
     class ListTrustStoreCertificatesRequest
@@ -1050,7 +1050,7 @@ module Aws::WorkSpacesWeb
       attr_accessor status: ("Active" | "Terminated")
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
-      SENSITIVE: [:username]
+      SENSITIVE: [:username, :client_ip_addresses]
     end
 
     class SessionLogger
@@ -1093,7 +1093,7 @@ module Aws::WorkSpacesWeb
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Array[Types::Tag]
       attr_accessor client_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:tags]
     end
 
     class TagResourceResponse < Aws::EmptyStructure
@@ -1138,7 +1138,7 @@ module Aws::WorkSpacesWeb
     class UntagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tag_keys: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:tag_keys]
     end
 
     class UntagResourceResponse < Aws::EmptyStructure
@@ -1370,7 +1370,7 @@ module Aws::WorkSpacesWeb
       attr_accessor blocked_categories: ::Array[("Cults" | "Gambling" | "Nudity" | "Pornography" | "SexEducation" | "Tasteless" | "Violence" | "DownloadSites" | "ImageSharing" | "PeerToPeer" | "StreamingMediaAndDownloads" | "GenerativeAI" | "CriminalActivity" | "Hacking" | "HateAndIntolerance" | "IllegalDrug" | "IllegalSoftware" | "SchoolCheating" | "SelfHarm" | "Weapons" | "Chat" | "Games" | "InstantMessaging" | "ProfessionalNetwork" | "SocialNetworking" | "WebBasedEmail" | "ParkedDomains")]
       attr_accessor allowed_urls: ::Array[::String]
       attr_accessor blocked_urls: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:allowed_urls, :blocked_urls]
     end
   end
 end

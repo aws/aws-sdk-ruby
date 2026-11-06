@@ -108,6 +108,11 @@ module Aws
                         },
                         ?billing_tags_source: ("QUEUE" | "PRESET" | "JOB_TEMPLATE" | "JOB"),
                         ?client_request_token: ::String,
+                        ?elemental_inference_settings: {
+                          feed_configuration_source: {
+                            feed_arn: ::String?
+                          }?
+                        },
                         ?hop_destinations: Array[
                           {
                             priority: ::Integer?,
@@ -271,6 +276,11 @@ module Aws
                                  },
                                  ?category: ::String,
                                  ?description: ::String,
+                                 ?elemental_inference_settings: {
+                                   feed_configuration_source: {
+                                     feed_arn: ::String?
+                                   }?
+                                 },
                                  ?hop_destinations: Array[
                                    {
                                      priority: ::Integer?,
@@ -626,6 +636,11 @@ module Aws
                                  },
                                  ?category: ::String,
                                  ?description: ::String,
+                                 ?elemental_inference_settings: {
+                                   feed_configuration_source: {
+                                     feed_arn: ::String?
+                                   }?
+                                 },
                                  ?hop_destinations: Array[
                                    {
                                      priority: ::Integer?,

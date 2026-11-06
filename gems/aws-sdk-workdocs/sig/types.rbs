@@ -433,7 +433,7 @@ module Aws::WorkDocs
       attr_accessor creator_id: ::String
       attr_accessor thumbnail: ::Hash[("SMALL" | "SMALL_HQ" | "LARGE"), ::String]
       attr_accessor source: ::Hash[("ORIGINAL" | "WITH_COMMENTS"), ::String]
-      SENSITIVE: [:name]
+      SENSITIVE: [:name, :thumbnail, :source]
     end
 
     class DraftUploadOutOfSyncException

@@ -97,7 +97,7 @@ module Aws::GeoRoutes
       attr_accessor travel_mode_options: Types::RouteTravelModeOptions
       attr_accessor travel_step_type: ("Default" | "TurnByTurn")
       attr_accessor waypoints: ::Array[Types::RouteWaypoint]
-      SENSITIVE: [:arrival_time, :depart_now, :departure_time, :destination, :key, :origin]
+      SENSITIVE: [:arrival_time, :depart_now, :departure_time, :destination, :key, :leg_additional_features, :origin]
     end
 
     class CalculateRoutesResponse
@@ -117,7 +117,7 @@ module Aws::GeoRoutes
     class Corridor
       attr_accessor line_string: ::Array[::Array[::Float]]
       attr_accessor radius: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:line_string]
     end
 
     class InternalServerException
@@ -151,7 +151,7 @@ module Aws::GeoRoutes
       attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
       attr_accessor polyline_corridor: Types::PolylineCorridor
       attr_accessor polyline_polygon: ::Array[::String]
-      SENSITIVE: [:bounding_box, :corridor, :polyline_corridor]
+      SENSITIVE: [:bounding_box, :corridor, :polygon, :polyline_corridor, :polyline_polygon]
     end
 
     class IsolineAvoidanceOptions
@@ -167,7 +167,7 @@ module Aws::GeoRoutes
       attr_accessor tunnels: bool
       attr_accessor u_turns: bool
       attr_accessor zone_categories: ::Array[Types::IsolineAvoidanceZoneCategory]
-      SENSITIVE: [:car_shuttle_trains, :controlled_access_highways, :dirt_roads, :ferries, :seasonal_closure, :toll_roads, :toll_transponders, :tunnels, :u_turns]
+      SENSITIVE: [:car_shuttle_trains, :controlled_access_highways, :dirt_roads, :ferries, :seasonal_closure, :toll_roads, :toll_transponders, :truck_road_types, :tunnels, :u_turns]
     end
 
     class IsolineAvoidanceZoneCategory
@@ -193,7 +193,7 @@ module Aws::GeoRoutes
     class IsolineConnectionGeometry
       attr_accessor line_string: ::Array[::Array[::Float]]
       attr_accessor polyline: ::String
-      SENSITIVE: [:polyline]
+      SENSITIVE: [:line_string, :polyline]
     end
 
     class IsolineDestinationOptions
@@ -237,7 +237,7 @@ module Aws::GeoRoutes
     class IsolineShapeGeometry
       attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
       attr_accessor polyline_polygon: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:polygon, :polyline_polygon]
     end
 
     class IsolineSideOfStreetOptions
@@ -249,7 +249,7 @@ module Aws::GeoRoutes
     class IsolineThresholds
       attr_accessor distance: ::Array[::Integer]
       attr_accessor time: ::Array[::Integer]
-      SENSITIVE: []
+      SENSITIVE: [:distance, :time]
     end
 
     class IsolineTrafficOptions
@@ -291,7 +291,7 @@ module Aws::GeoRoutes
       attr_accessor weight_per_axle: ::Integer
       attr_accessor weight_per_axle_group: Types::WeightPerAxleGroup
       attr_accessor width: ::Integer
-      SENSITIVE: [:axle_count, :engine_type, :gross_weight, :height, :height_above_first_axle, :kpra_length, :length, :license_plate, :max_speed, :occupancy, :payload_capacity, :tire_count, :tunnel_restriction_code, :weight_per_axle, :width]
+      SENSITIVE: [:axle_count, :engine_type, :gross_weight, :hazardous_cargos, :height, :height_above_first_axle, :kpra_length, :length, :license_plate, :max_speed, :occupancy, :payload_capacity, :tire_count, :tunnel_restriction_code, :weight_per_axle, :width]
     end
 
     class IsolineVehicleLicensePlate
@@ -351,7 +351,7 @@ module Aws::GeoRoutes
     class RoadSnapSnappedGeometry
       attr_accessor line_string: ::Array[::Array[::Float]]
       attr_accessor polyline: ::String
-      SENSITIVE: [:polyline]
+      SENSITIVE: [:line_string, :polyline]
     end
 
     class RoadSnapSnappedTracePoint
@@ -387,7 +387,7 @@ module Aws::GeoRoutes
       attr_accessor trailer: Types::RoadSnapTrailerOptions
       attr_accessor tunnel_restriction_code: ::String
       attr_accessor width: ::Integer
-      SENSITIVE: [:gross_weight, :height, :length, :tunnel_restriction_code, :width]
+      SENSITIVE: [:gross_weight, :hazardous_cargos, :height, :length, :tunnel_restriction_code, :width]
     end
 
     class Route
@@ -431,7 +431,7 @@ module Aws::GeoRoutes
       attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
       attr_accessor polyline_corridor: Types::PolylineCorridor
       attr_accessor polyline_polygon: ::Array[::String]
-      SENSITIVE: [:corridor, :bounding_box, :polyline_corridor]
+      SENSITIVE: [:corridor, :bounding_box, :polygon, :polyline_corridor, :polyline_polygon]
     end
 
     class RouteAvoidanceOptions
@@ -447,7 +447,7 @@ module Aws::GeoRoutes
       attr_accessor tunnels: bool
       attr_accessor u_turns: bool
       attr_accessor zone_categories: ::Array[Types::RouteAvoidanceZoneCategory]
-      SENSITIVE: [:car_shuttle_trains, :controlled_access_highways, :dirt_roads, :ferries, :seasonal_closure, :toll_roads, :toll_transponders, :tunnels, :u_turns]
+      SENSITIVE: [:car_shuttle_trains, :controlled_access_highways, :dirt_roads, :ferries, :seasonal_closure, :toll_roads, :toll_transponders, :truck_road_types, :tunnels, :u_turns]
     end
 
     class RouteAvoidanceZoneCategory
@@ -520,7 +520,7 @@ module Aws::GeoRoutes
 
     class RouteExclusionOptions
       attr_accessor countries: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:countries]
     end
 
     class RouteExitStepDetails
@@ -630,7 +630,7 @@ module Aws::GeoRoutes
       attr_accessor taxi: Types::RouteIntermodalTaxiOptions
       attr_accessor transit: Types::RouteIntermodalTransitOptions
       attr_accessor vehicle: Types::RouteIntermodalVehicleOptions
-      SENSITIVE: []
+      SENSITIVE: [:accessibility_attributes]
     end
 
     class RouteIntermodalPedestrianOptions
@@ -643,28 +643,28 @@ module Aws::GeoRoutes
       attr_accessor allowed_modes: ::Array[("All" | "Car")]
       attr_accessor enabled_for: ::Array[("FirstLeg" | "LastLeg" | "EntireRoute" | "None")]
       attr_accessor excluded_modes: ::Array[("All" | "Car")]
-      SENSITIVE: []
+      SENSITIVE: [:allowed_modes, :enabled_for, :excluded_modes]
     end
 
     class RouteIntermodalTaxiOptions
       attr_accessor allowed_modes: ::Array[("All" | "Car")]
       attr_accessor enabled_for: ::Array[("FirstLeg" | "LastLeg" | "EntireRoute" | "None")]
       attr_accessor excluded_modes: ::Array[("All" | "Car")]
-      SENSITIVE: []
+      SENSITIVE: [:allowed_modes, :enabled_for, :excluded_modes]
     end
 
     class RouteIntermodalTransitOptions
       attr_accessor allowed_modes: ::Array[("AerialTramway" | "Airplane" | "All" | "Bus" | "BusRapidTransit" | "CityTrain" | "Ferry" | "FunicularRailway" | "HighSpeedTrain" | "IntercityTrain" | "InterregionalTrain" | "LightRail" | "Monorail" | "PrivateBus" | "RegionalTrain" | "Subway")]
       attr_accessor enabled_for: ::Array[("FirstLeg" | "LastLeg" | "EntireRoute" | "None")]
       attr_accessor excluded_modes: ::Array[("AerialTramway" | "Airplane" | "All" | "Bus" | "BusRapidTransit" | "CityTrain" | "Ferry" | "FunicularRailway" | "HighSpeedTrain" | "IntercityTrain" | "InterregionalTrain" | "LightRail" | "Monorail" | "PrivateBus" | "RegionalTrain" | "Subway")]
-      SENSITIVE: []
+      SENSITIVE: [:allowed_modes, :enabled_for, :excluded_modes]
     end
 
     class RouteIntermodalVehicleOptions
       attr_accessor allowed_modes: ::Array[("All" | "Car")]
       attr_accessor enabled_for: ::Array[("FirstLeg" | "LastLeg" | "EntireRoute" | "None")]
       attr_accessor excluded_modes: ::Array[("All" | "Car")]
-      SENSITIVE: []
+      SENSITIVE: [:allowed_modes, :enabled_for, :excluded_modes]
     end
 
     class RouteKeepStepDetails
@@ -692,7 +692,7 @@ module Aws::GeoRoutes
     class RouteLegGeometry
       attr_accessor line_string: ::Array[::Array[::Float]]
       attr_accessor polyline: ::String
-      SENSITIVE: [:polyline]
+      SENSITIVE: [:line_string, :polyline]
     end
 
     class RouteMajorRoadLabel
@@ -730,7 +730,7 @@ module Aws::GeoRoutes
       attr_accessor bounding_box: ::Array[::Float]
       attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
       attr_accessor polyline_polygon: ::Array[::String]
-      SENSITIVE: [:bounding_box]
+      SENSITIVE: [:bounding_box, :polygon, :polyline_polygon]
     end
 
     class RouteMatrixAvoidanceOptions
@@ -745,7 +745,7 @@ module Aws::GeoRoutes
       attr_accessor tunnels: bool
       attr_accessor u_turns: bool
       attr_accessor zone_categories: ::Array[Types::RouteMatrixAvoidanceZoneCategory]
-      SENSITIVE: [:car_shuttle_trains, :controlled_access_highways, :dirt_roads, :ferries, :toll_roads, :toll_transponders, :tunnels, :u_turns]
+      SENSITIVE: [:car_shuttle_trains, :controlled_access_highways, :dirt_roads, :ferries, :toll_roads, :toll_transponders, :truck_road_types, :tunnels, :u_turns]
     end
 
     class RouteMatrixAvoidanceZoneCategory
@@ -764,7 +764,7 @@ module Aws::GeoRoutes
       attr_accessor circle: Types::Circle
       attr_accessor bounding_box: ::Array[::Float]
       attr_accessor polygon: ::Array[::Array[::Array[::Float]]]
-      SENSITIVE: [:circle, :bounding_box]
+      SENSITIVE: [:circle, :bounding_box, :polygon]
     end
 
     class RouteMatrixCarOptions
@@ -797,7 +797,7 @@ module Aws::GeoRoutes
 
     class RouteMatrixExclusionOptions
       attr_accessor countries: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:countries]
     end
 
     class RouteMatrixMatchingOptions
@@ -870,7 +870,7 @@ module Aws::GeoRoutes
       attr_accessor weight_per_axle: ::Integer
       attr_accessor weight_per_axle_group: Types::WeightPerAxleGroup
       attr_accessor width: ::Integer
-      SENSITIVE: [:axle_count, :gross_weight, :height, :kpra_length, :length, :license_plate, :max_speed, :occupancy, :payload_capacity, :truck_type, :tunnel_restriction_code, :weight_per_axle, :width]
+      SENSITIVE: [:axle_count, :gross_weight, :hazardous_cargos, :height, :kpra_length, :length, :license_plate, :max_speed, :occupancy, :payload_capacity, :truck_type, :tunnel_restriction_code, :weight_per_axle, :width]
     end
 
     class RouteMatrixVehicleLicensePlate
@@ -989,7 +989,7 @@ module Aws::GeoRoutes
       attr_accessor route_numbers: ::Array[Types::RouteNumber]
       attr_accessor speed_limit: Types::RouteSpanSpeedLimitDetails
       attr_accessor typical_duration: ::Integer
-      SENSITIVE: [:best_case_duration, :country, :distance, :duration, :functional_classification, :region, :typical_duration]
+      SENSITIVE: [:best_case_duration, :country, :distance, :duration, :functional_classification, :pedestrian_access, :region, :road_attributes, :typical_duration]
     end
 
     class RoutePedestrianSummary
@@ -1409,7 +1409,7 @@ module Aws::GeoRoutes
       attr_accessor pass: Types::RouteTollPass
       attr_accessor payment_methods: ::Array[("BankCard" | "Cash" | "CashExact" | "CreditCard" | "PassSubscription" | "TravelCard" | "Transponder" | "VideoToll")]
       attr_accessor transponders: ::Array[Types::RouteTransponder]
-      SENSITIVE: [:applicable_times, :id, :name]
+      SENSITIVE: [:applicable_times, :id, :name, :payment_methods]
     end
 
     class RouteTollSummary
@@ -1486,7 +1486,7 @@ module Aws::GeoRoutes
       attr_accessor duration: ::Integer
       attr_accessor geometry_offset: ::Integer
       attr_accessor transport: Types::RouteTransitTransportModeDetails
-      SENSITIVE: [:duration]
+      SENSITIVE: [:attributes, :duration]
     end
 
     class RouteTransitLegDetails
@@ -1530,7 +1530,7 @@ module Aws::GeoRoutes
       attr_accessor excluded_modes: ::Array[("AerialTramway" | "Airplane" | "All" | "Bus" | "BusRapidTransit" | "CityTrain" | "Ferry" | "FunicularRailway" | "HighSpeedTrain" | "IntercityTrain" | "InterregionalTrain" | "LightRail" | "Monorail" | "PrivateBus" | "RegionalTrain" | "Subway")]
       attr_accessor max_transfers: ::Integer
       attr_accessor pedestrian: Types::RouteTransitPedestrianOptions
-      SENSITIVE: []
+      SENSITIVE: [:accessibility_attributes, :allowed_modes, :excluded_modes]
     end
 
     class RouteTransitOverviewSummary
@@ -1632,7 +1632,7 @@ module Aws::GeoRoutes
       attr_accessor weight_per_axle: ::Integer
       attr_accessor weight_per_axle_group: Types::WeightPerAxleGroup
       attr_accessor width: ::Integer
-      SENSITIVE: [:axle_count, :engine_type, :gross_weight, :height, :height_above_first_axle, :kpra_length, :length, :max_speed, :occupancy, :payload_capacity, :tire_count, :truck_type, :tunnel_restriction_code, :weight_per_axle, :width]
+      SENSITIVE: [:axle_count, :engine_type, :gross_weight, :hazardous_cargos, :height, :height_above_first_axle, :kpra_length, :length, :max_speed, :occupancy, :payload_capacity, :tire_count, :truck_type, :tunnel_restriction_code, :weight_per_axle, :width]
     end
 
     class RouteTurnStepDetails
@@ -1694,7 +1694,7 @@ module Aws::GeoRoutes
       attr_accessor travel_steps: ::Array[Types::RouteVehicleTravelStep]
       attr_accessor truck_road_types: ::Array[::String]
       attr_accessor zones: ::Array[Types::RouteZone]
-      SENSITIVE: []
+      SENSITIVE: [:truck_road_types]
     end
 
     class RouteVehicleLicensePlate
@@ -1759,7 +1759,7 @@ module Aws::GeoRoutes
       attr_accessor truck_road_types: ::Array[::Integer]
       attr_accessor typical_duration: ::Integer
       attr_accessor zones: ::Array[::Integer]
-      SENSITIVE: [:best_case_duration, :country, :distance, :duration, :functional_classification, :gate, :railway_crossing, :region, :typical_duration]
+      SENSITIVE: [:best_case_duration, :car_access, :country, :distance, :duration, :functional_classification, :gate, :railway_crossing, :region, :road_attributes, :scooter_access, :truck_access, :typical_duration]
     end
 
     class RouteVehicleSummary
@@ -1819,7 +1819,7 @@ module Aws::GeoRoutes
       attr_accessor truck_road_type: ::String
       attr_accessor truck_type: ("LightTruck" | "StraightTruck" | "Tractor")
       attr_accessor tunnel_restriction_code: ::String
-      SENSITIVE: [:all_hazards_restricted, :max_height, :max_kpra_length, :max_length, :max_payload_capacity, :max_weight_per_axle, :max_width, :time_dependent, :travel_mode, :truck_type, :tunnel_restriction_code]
+      SENSITIVE: [:all_hazards_restricted, :hazardous_cargos, :max_height, :max_kpra_length, :max_length, :max_payload_capacity, :max_weight_per_axle, :max_width, :time_dependent, :travel_mode, :truck_type, :tunnel_restriction_code]
     end
 
     class RouteWaypoint
@@ -1965,7 +1965,7 @@ module Aws::GeoRoutes
 
     class WaypointOptimizationExclusionOptions
       attr_accessor countries: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:countries]
     end
 
     class WaypointOptimizationFailedConstraint
@@ -2057,7 +2057,7 @@ module Aws::GeoRoutes
       attr_accessor tunnel_restriction_code: ::String
       attr_accessor weight_per_axle: ::Integer
       attr_accessor width: ::Integer
-      SENSITIVE: [:gross_weight, :height, :length, :truck_type, :tunnel_restriction_code, :weight_per_axle, :width]
+      SENSITIVE: [:gross_weight, :hazardous_cargos, :height, :length, :truck_type, :tunnel_restriction_code, :weight_per_axle, :width]
     end
 
     class WaypointOptimizationWaypoint

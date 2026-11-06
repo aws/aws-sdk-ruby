@@ -20,7 +20,7 @@ module Aws::Connect
     end
 
     class ActionSummary
-      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION" | "SEND_IN_APP_NOTIFICATION")
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "END_ASSOCIATED_EMAILS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION" | "SEND_IN_APP_NOTIFICATION")
       SENSITIVE: []
     end
 
@@ -3391,6 +3391,9 @@ module Aws::Connect
       SENSITIVE: []
     end
 
+    class EndAssociatedEmailsActionDefinition < Aws::EmptyStructure
+    end
+
     class EndAssociatedTasksActionDefinition < Aws::EmptyStructure
     end
 
@@ -6223,7 +6226,7 @@ module Aws::Connect
     class NameCriteria
       attr_accessor search_text: ::Array[::String]
       attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
-      SENSITIVE: []
+      SENSITIVE: [:search_text]
     end
 
     class NewSessionDetails
@@ -7342,7 +7345,7 @@ module Aws::Connect
     end
 
     class RuleAction
-      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION" | "SEND_IN_APP_NOTIFICATION")
+      attr_accessor action_type: ("CREATE_TASK" | "ASSIGN_CONTACT_CATEGORY" | "GENERATE_EVENTBRIDGE_EVENT" | "SEND_NOTIFICATION" | "CREATE_CASE" | "UPDATE_CASE" | "ASSIGN_SLA" | "END_ASSOCIATED_TASKS" | "END_ASSOCIATED_EMAILS" | "SUBMIT_AUTO_EVALUATION" | "EXTRACT_INFORMATION" | "SEND_IN_APP_NOTIFICATION")
       attr_accessor task_action: Types::TaskActionDefinition
       attr_accessor event_bridge_action: Types::EventBridgeActionDefinition
       attr_accessor assign_contact_category_action: Types::AssignContactCategoryActionDefinition
@@ -7351,6 +7354,7 @@ module Aws::Connect
       attr_accessor update_case_action: Types::UpdateCaseActionDefinition
       attr_accessor assign_sla_action: Types::AssignSlaActionDefinition
       attr_accessor end_associated_tasks_action: Types::EndAssociatedTasksActionDefinition
+      attr_accessor end_associated_emails_action: Types::EndAssociatedEmailsActionDefinition
       attr_accessor submit_auto_evaluation_action: Types::SubmitAutoEvaluationActionDefinition
       attr_accessor extract_information_action: Types::ExtractInformationActionDefinition
       attr_accessor send_in_app_notification_action: Types::SendInAppNotificationActionDefinition
@@ -7939,7 +7943,7 @@ module Aws::Connect
     class SearchableContactAttributesCriteria
       attr_accessor key: ::String
       attr_accessor values: ::Array[::String]
-      SENSITIVE: [:key]
+      SENSITIVE: [:key, :values]
     end
 
     class SearchableRoutingCriteria
@@ -8821,7 +8825,7 @@ module Aws::Connect
       attr_accessor participant_role: ("AGENT" | "CUSTOMER" | "SYSTEM" | "CUSTOM_BOT" | "SUPERVISOR")
       attr_accessor search_text: ::Array[::String]
       attr_accessor match_type: ("MATCH_ALL" | "MATCH_ANY" | "MATCH_EXACT" | "MATCH_NONE")
-      SENSITIVE: []
+      SENSITIVE: [:search_text]
     end
 
     class TransferContactRequest
@@ -9908,13 +9912,13 @@ module Aws::Connect
       attr_accessor input_schema: ::String
       attr_accessor template: ::String
       attr_accessor actions: ::Array[::String]
-      SENSITIVE: [:input_schema]
+      SENSITIVE: [:input_schema, :actions]
     end
 
     class ViewInputContent
       attr_accessor template: ::String
       attr_accessor actions: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:actions]
     end
 
     class ViewSearchCriteria

@@ -167,6 +167,7 @@ module Aws::AutoScaling
     class AutoScalingGroupNamesType
       attr_accessor auto_scaling_group_names: ::Array[::String]
       attr_accessor include_instances: bool
+      attr_accessor include_managed_resources: bool
       attr_accessor next_token: ::String
       attr_accessor max_records: ::Integer
       attr_accessor filters: ::Array[Types::Filter]
@@ -453,6 +454,7 @@ module Aws::AutoScaling
 
     class DescribeAutoScalingInstancesType
       attr_accessor instance_ids: ::Array[::String]
+      attr_accessor include_managed_resources: bool
       attr_accessor max_records: ::Integer
       attr_accessor next_token: ::String
       SENSITIVE: []
@@ -533,6 +535,7 @@ module Aws::AutoScaling
 
     class DescribeNotificationConfigurationsType
       attr_accessor auto_scaling_group_names: ::Array[::String]
+      attr_accessor include_managed_resources: bool
       attr_accessor next_token: ::String
       attr_accessor max_records: ::Integer
       SENSITIVE: []
@@ -542,6 +545,7 @@ module Aws::AutoScaling
       attr_accessor auto_scaling_group_name: ::String
       attr_accessor policy_names: ::Array[::String]
       attr_accessor policy_types: ::Array[::String]
+      attr_accessor include_managed_resources: bool
       attr_accessor next_token: ::String
       attr_accessor max_records: ::Integer
       SENSITIVE: []
@@ -551,6 +555,7 @@ module Aws::AutoScaling
       attr_accessor activity_ids: ::Array[::String]
       attr_accessor auto_scaling_group_name: ::String
       attr_accessor include_deleted_groups: bool
+      attr_accessor include_managed_resources: bool
       attr_accessor max_records: ::Integer
       attr_accessor next_token: ::String
       attr_accessor filters: ::Array[Types::Filter]
@@ -562,6 +567,7 @@ module Aws::AutoScaling
       attr_accessor scheduled_action_names: ::Array[::String]
       attr_accessor start_time: ::Time
       attr_accessor end_time: ::Time
+      attr_accessor include_managed_resources: bool
       attr_accessor next_token: ::String
       attr_accessor max_records: ::Integer
       SENSITIVE: []
@@ -569,6 +575,7 @@ module Aws::AutoScaling
 
     class DescribeTagsType
       attr_accessor filters: ::Array[Types::Filter]
+      attr_accessor include_managed_resources: bool
       attr_accessor next_token: ::String
       attr_accessor max_records: ::Integer
       SENSITIVE: []

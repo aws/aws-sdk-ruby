@@ -85,7 +85,7 @@ module Aws::Invoicing
       attr_accessor contacts: ::Array[Types::Contact]
       attr_accessor resource_tags: ::Array[Types::ResourceTag]
       attr_accessor client_token: ::String
-      SENSITIVE: [:procurement_portal_shared_secret]
+      SENSITIVE: [:procurement_portal_shared_secret, :contacts]
     end
 
     class CreateProcurementPortalPreferenceResponse
@@ -428,7 +428,7 @@ module Aws::Invoicing
       attr_accessor version: ::Integer
       attr_accessor create_date: ::Time
       attr_accessor last_update_date: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:contacts]
     end
 
     class ProcurementPortalPreferenceSelector
@@ -486,7 +486,7 @@ module Aws::Invoicing
       attr_accessor marketplace_punch_out_preference: Types::MarketplacePunchOutPreference
       attr_accessor contacts: ::Array[Types::Contact]
       attr_accessor client_token: ::String
-      SENSITIVE: [:procurement_portal_shared_secret]
+      SENSITIVE: [:procurement_portal_shared_secret, :contacts]
     end
 
     class PutProcurementPortalPreferenceResponse

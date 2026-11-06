@@ -160,7 +160,7 @@ module Aws::PartnerCentralSelling
       attr_accessor total_potential_savings_amount: ::String
       attr_accessor total_amount_by_category: ::Hash[::String, ::String]
       attr_accessor aws_products: ::Array[Types::AwsProductDetails]
-      SENSITIVE: [:currency_code, :total_amount, :total_optimized_amount, :total_potential_savings_amount]
+      SENSITIVE: [:currency_code, :total_amount, :total_optimized_amount, :total_potential_savings_amount, :total_amount_by_category]
     end
 
     class AwsProductOptimization
@@ -638,7 +638,7 @@ module Aws::PartnerCentralSelling
       attr_accessor revision: ::Integer
       attr_accessor payload: Types::ResourceSnapshotPayload
       attr_accessor target_member_accounts: ::Array[::String]
-      SENSITIVE: [:created_by]
+      SENSITIVE: [:created_by, :target_member_accounts]
     end
 
     class GetSellingSystemSettingsRequest
@@ -857,7 +857,7 @@ module Aws::PartnerCentralSelling
       attr_accessor status: ::Array[("ACCEPTED" | "PENDING" | "REJECTED" | "EXPIRED")]
       attr_accessor engagement_identifier: ::Array[::String]
       attr_accessor sender_aws_account_id: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:sender_aws_account_id]
     end
 
     class ListEngagementInvitationsResponse
@@ -907,7 +907,7 @@ module Aws::PartnerCentralSelling
       attr_accessor max_results: ::Integer
       attr_accessor next_token: ::String
       attr_accessor engagement_identifier: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:created_by, :exclude_created_by]
     end
 
     class ListEngagementsResponse

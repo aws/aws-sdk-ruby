@@ -2008,7 +2008,7 @@ module Aws::QuickSight
     class CellValueSynonym
       attr_accessor cell_value: ::String
       attr_accessor synonyms: ::Array[::String]
-      SENSITIVE: [:cell_value]
+      SENSITIVE: [:cell_value, :synonyms]
     end
 
     class ChartAxisLabelOptions
@@ -3202,7 +3202,7 @@ module Aws::QuickSight
       attr_accessor integer_values: ::Array[::Integer]
       attr_accessor decimal_values: ::Array[::Float]
       attr_accessor date_time_values: ::Array[::Time]
-      SENSITIVE: []
+      SENSITIVE: [:string_values, :integer_values, :decimal_values, :date_time_values]
     end
 
     class CustomPermissions
@@ -3729,7 +3729,7 @@ module Aws::QuickSight
 
     class DataSetStringListFilterValue
       attr_accessor static_values: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:static_values]
     end
 
     class DataSetSummary
@@ -3928,7 +3928,7 @@ module Aws::QuickSight
       attr_accessor dynamic_value: Types::DynamicDefaultValue
       attr_accessor static_values: ::Array[::Time]
       attr_accessor rolling_date: Types::RollingDateConfiguration
-      SENSITIVE: []
+      SENSITIVE: [:static_values]
     end
 
     class DateTimeFormatConfiguration
@@ -3947,7 +3947,7 @@ module Aws::QuickSight
     class DateTimeParameter
       attr_accessor name: ::String
       attr_accessor values: ::Array[::Time]
-      SENSITIVE: []
+      SENSITIVE: [:values]
     end
 
     class DateTimeParameterDeclaration
@@ -4004,13 +4004,13 @@ module Aws::QuickSight
     class DecimalDefaultValues
       attr_accessor dynamic_value: Types::DynamicDefaultValue
       attr_accessor static_values: ::Array[::Float]
-      SENSITIVE: []
+      SENSITIVE: [:static_values]
     end
 
     class DecimalParameter
       attr_accessor name: ::String
       attr_accessor values: ::Array[::Float]
-      SENSITIVE: []
+      SENSITIVE: [:values]
     end
 
     class DecimalParameterDeclaration
@@ -7273,7 +7273,7 @@ module Aws::QuickSight
       attr_accessor parent_value: ::String
       attr_accessor hierarchy_values: ::Array[::String]
       attr_accessor children: ::Array[Types::HierarchyFilterNode]
-      SENSITIVE: [:parent_value]
+      SENSITIVE: [:parent_value, :hierarchy_values]
     end
 
     class HistogramAggregatedFieldWells
@@ -7522,13 +7522,13 @@ module Aws::QuickSight
     class IntegerDefaultValues
       attr_accessor dynamic_value: Types::DynamicDefaultValue
       attr_accessor static_values: ::Array[::Integer]
-      SENSITIVE: []
+      SENSITIVE: [:static_values]
     end
 
     class IntegerParameter
       attr_accessor name: ::String
       attr_accessor values: ::Array[::Integer]
-      SENSITIVE: []
+      SENSITIVE: [:values]
     end
 
     class IntegerParameterDeclaration
@@ -10814,7 +10814,7 @@ module Aws::QuickSight
       attr_accessor truthy_cell_value_synonyms: ::Array[::String]
       attr_accessor falsey_cell_value: ::String
       attr_accessor falsey_cell_value_synonyms: ::Array[::String]
-      SENSITIVE: [:truthy_cell_value, :falsey_cell_value]
+      SENSITIVE: [:truthy_cell_value, :truthy_cell_value_synonyms, :falsey_cell_value, :falsey_cell_value_synonyms]
     end
 
     class SeriesItem
@@ -11447,7 +11447,7 @@ module Aws::QuickSight
     class StringDefaultValues
       attr_accessor dynamic_value: Types::DynamicDefaultValue
       attr_accessor static_values: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:static_values]
     end
 
     class StringFormatConfiguration
@@ -11459,7 +11459,7 @@ module Aws::QuickSight
     class StringParameter
       attr_accessor name: ::String
       attr_accessor values: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:values]
     end
 
     class StringParameterDeclaration
@@ -12075,7 +12075,7 @@ module Aws::QuickSight
       attr_accessor never_aggregate_in_filter: bool
       attr_accessor cell_value_synonyms: ::Array[Types::CellValueSynonym]
       attr_accessor non_additive: bool
-      SENSITIVE: [:calculated_field_name, :calculated_field_description, :expression]
+      SENSITIVE: [:calculated_field_name, :calculated_field_description, :expression, :calculated_field_synonyms]
     end
 
     class TopicCategoryFilter
@@ -12112,7 +12112,7 @@ module Aws::QuickSight
       attr_accessor never_aggregate_in_filter: bool
       attr_accessor cell_value_synonyms: ::Array[Types::CellValueSynonym]
       attr_accessor non_additive: bool
-      SENSITIVE: [:column_friendly_name, :column_description]
+      SENSITIVE: [:column_friendly_name, :column_description, :column_synonyms]
     end
 
     class TopicConfigOptions
@@ -12165,7 +12165,7 @@ module Aws::QuickSight
       attr_accessor date_range_filter: Types::TopicDateRangeFilter
       attr_accessor relative_date_filter: Types::TopicRelativeDateFilter
       attr_accessor null_filter: Types::TopicNullFilter
-      SENSITIVE: [:filter_description]
+      SENSITIVE: [:filter_description, :filter_synonyms]
     end
 
     class TopicIR
@@ -12253,7 +12253,7 @@ module Aws::QuickSight
       attr_accessor sort: ::Array[Types::NamedEntitySort]
       attr_accessor rank_order: ::Integer
       attr_accessor presentation_order: ::Integer
-      SENSITIVE: [:entity_description]
+      SENSITIVE: [:entity_description, :entity_synonyms]
     end
 
     class TopicNullFilter

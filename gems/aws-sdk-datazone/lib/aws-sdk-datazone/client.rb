@@ -14760,6 +14760,17 @@ module Aws::DataZone
     #               user_name: "BasicAuthenticationCredentialsUserNameString",
     #               password: "BasicAuthenticationCredentialsPasswordString",
     #             },
+    #             o_auth_2_properties: {
+    #               o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #               o_auth_2_client_application: {
+    #                 user_managed_client_application_client_id: "OAuth2ClientApplicationUserManagedClientApplicationClientIdString",
+    #                 a_ws_managed_client_application_reference: "OAuth2ClientApplicationAWSManagedClientApplicationReferenceString",
+    #               },
+    #               token_url: "OAuth2PropertiesPatchTokenUrlString",
+    #               token_url_parameters_map: {
+    #                 "TokenUrlParametersMapKeyString" => "TokenUrlParametersMapValueString",
+    #               },
+    #             },
     #           },
     #         },
     #       },
@@ -14814,6 +14825,17 @@ module Aws::DataZone
     #             basic_authentication_credentials: {
     #               user_name: "BasicAuthenticationCredentialsUserNameString",
     #               password: "BasicAuthenticationCredentialsPasswordString",
+    #             },
+    #             o_auth_2_properties: {
+    #               o_auth_2_grant_type: "AUTHORIZATION_CODE", # accepts AUTHORIZATION_CODE, CLIENT_CREDENTIALS, JWT_BEARER
+    #               o_auth_2_client_application: {
+    #                 user_managed_client_application_client_id: "OAuth2ClientApplicationUserManagedClientApplicationClientIdString",
+    #                 a_ws_managed_client_application_reference: "OAuth2ClientApplicationAWSManagedClientApplicationReferenceString",
+    #               },
+    #               token_url: "OAuth2PropertiesPatchTokenUrlString",
+    #               token_url_parameters_map: {
+    #                 "TokenUrlParametersMapKeyString" => "TokenUrlParametersMapValueString",
+    #               },
     #             },
     #           },
     #         },
@@ -17032,7 +17054,7 @@ module Aws::DataZone
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-datazone'
-      context[:gem_version] = '1.100.0'
+      context[:gem_version] = '1.101.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

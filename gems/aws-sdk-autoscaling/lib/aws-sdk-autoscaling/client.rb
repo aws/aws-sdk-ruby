@@ -2726,6 +2726,11 @@ module Aws::AutoScaling
     #   the response. When set to `true` (default), the response includes
     #   instance details.
     #
+    # @option params [Boolean] :include_managed_resources
+    #   Specifies whether to include managed Auto Scaling groups in the
+    #   response. When set to `true` (default), the response includes managed
+    #   Auto Scaling groups.
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -2733,6 +2738,11 @@ module Aws::AutoScaling
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #
     # @option params [Array<Types::Filter>] :filters
     #   One or more filters to limit the results based on specific tags.
@@ -2828,6 +2838,7 @@ module Aws::AutoScaling
     #   resp = client.describe_auto_scaling_groups({
     #     auto_scaling_group_names: ["XmlStringMaxLen255"],
     #     include_instances: false,
+    #     include_managed_resources: false,
     #     next_token: "XmlString",
     #     max_records: 1,
     #     filters: [
@@ -3013,9 +3024,19 @@ module Aws::AutoScaling
     #
     #   Array Members: Maximum number of 50 items.
     #
+    # @option params [Boolean] :include_managed_resources
+    #   Specifies whether to include managed Auto Scaling instances in the
+    #   response. When set to `true` (default), the response includes managed
+    #   Auto Scaling instances.
+    #
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `50`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -3060,6 +3081,7 @@ module Aws::AutoScaling
     #
     #   resp = client.describe_auto_scaling_instances({
     #     instance_ids: ["XmlStringMaxLen19"],
+    #     include_managed_resources: false,
     #     max_records: 1,
     #     next_token: "XmlString",
     #   })
@@ -3876,6 +3898,12 @@ module Aws::AutoScaling
     # @option params [Array<String>] :auto_scaling_group_names
     #   The name of the Auto Scaling group.
     #
+    # @option params [Boolean] :include_managed_resources
+    #   Specifies whether to include notification configurations for managed
+    #   Auto Scaling groups in the response. When set to `true` (default), the
+    #   response includes notification configurations for managed Auto Scaling
+    #   groups.
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -3883,6 +3911,11 @@ module Aws::AutoScaling
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #
     # @return [Types::DescribeNotificationConfigurationsAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -3922,6 +3955,7 @@ module Aws::AutoScaling
     #
     #   resp = client.describe_notification_configurations({
     #     auto_scaling_group_names: ["XmlStringMaxLen255"],
+    #     include_managed_resources: false,
     #     next_token: "XmlString",
     #     max_records: 1,
     #   })
@@ -3960,6 +3994,11 @@ module Aws::AutoScaling
     #   One or more policy types. The valid values are `SimpleScaling`,
     #   `StepScaling`, `TargetTrackingScaling`, and `PredictiveScaling`.
     #
+    # @option params [Boolean] :include_managed_resources
+    #   Specifies whether to include scaling policies for managed Auto Scaling
+    #   groups in the response. When set to `true` (default), the response
+    #   includes scaling policies for managed Auto Scaling groups.
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -3967,6 +4006,11 @@ module Aws::AutoScaling
     # @option params [Integer] :max_records
     #   The maximum number of items to be returned with each call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #
     # @return [Types::PoliciesType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4016,6 +4060,7 @@ module Aws::AutoScaling
     #     auto_scaling_group_name: "XmlStringMaxLen255",
     #     policy_names: ["ResourceName"],
     #     policy_types: ["XmlStringMaxLen64"],
+    #     include_managed_resources: false,
     #     next_token: "XmlString",
     #     max_records: 1,
     #   })
@@ -4168,9 +4213,19 @@ module Aws::AutoScaling
     #   Indicates whether to include scaling activity from deleted Auto
     #   Scaling groups.
     #
+    # @option params [Boolean] :include_managed_resources
+    #   Specifies whether to include scaling activities for managed Auto
+    #   Scaling groups in the response. When set to `true` (default), the
+    #   response includes scaling activities for managed Auto Scaling groups.
+    #
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
     #   value is `100` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
@@ -4249,6 +4304,7 @@ module Aws::AutoScaling
     #     activity_ids: ["XmlString"],
     #     auto_scaling_group_name: "XmlStringMaxLen255",
     #     include_deleted_groups: false,
+    #     include_managed_resources: false,
     #     max_records: 1,
     #     next_token: "XmlString",
     #     filters: [
@@ -4377,6 +4433,11 @@ module Aws::AutoScaling
     #   The latest scheduled start time to return. If scheduled action names
     #   are provided, this property is ignored.
     #
+    # @option params [Boolean] :include_managed_resources
+    #   Specifies whether to include scheduled actions for managed Auto
+    #   Scaling groups in the response. When set to `true` (default), the
+    #   response includes scheduled actions for managed Auto Scaling groups.
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -4384,6 +4445,11 @@ module Aws::AutoScaling
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #
     # @return [Types::ScheduledActionsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4425,6 +4491,7 @@ module Aws::AutoScaling
     #     scheduled_action_names: ["XmlStringMaxLen255"],
     #     start_time: Time.now,
     #     end_time: Time.now,
+    #     include_managed_resources: false,
     #     next_token: "XmlString",
     #     max_records: 1,
     #   })
@@ -4476,6 +4543,11 @@ module Aws::AutoScaling
     #   One or more filters to scope the tags to return. The maximum number of
     #   filters per filter type (for example, `auto-scaling-group`) is 1000.
     #
+    # @option params [Boolean] :include_managed_resources
+    #   Specifies whether to include tags for managed Auto Scaling groups in
+    #   the response. When set to `true` (default), the response includes tags
+    #   for managed Auto Scaling groups.
+    #
     # @option params [String] :next_token
     #   The token for the next set of items to return. (You received this
     #   token from a previous call.)
@@ -4483,6 +4555,11 @@ module Aws::AutoScaling
     # @option params [Integer] :max_records
     #   The maximum number of items to return with this call. The default
     #   value is `50` and the maximum value is `100`.
+    #
+    #   A response can contain fewer items than the value specified by
+    #   `MaxRecords`, even when more items are available. To retrieve the
+    #   additional items, use the `NextToken` value in a subsequent call
+    #   rather than relying on the number of items in the response.
     #
     # @return [Types::TagsType] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -4536,6 +4613,7 @@ module Aws::AutoScaling
     #         values: ["XmlString"],
     #       },
     #     ],
+    #     include_managed_resources: false,
     #     next_token: "XmlString",
     #     max_records: 1,
     #   })
@@ -7996,7 +8074,7 @@ module Aws::AutoScaling
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-autoscaling'
-      context[:gem_version] = '1.174.0'
+      context[:gem_version] = '1.175.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

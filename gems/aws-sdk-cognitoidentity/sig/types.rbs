@@ -80,7 +80,7 @@ module Aws::CognitoIdentity
       attr_accessor identity_id: ::String
       attr_accessor logins: ::Hash[::String, ::String]
       attr_accessor custom_role_arn: ::String
-      SENSITIVE: []
+      SENSITIVE: [:logins]
     end
 
     class GetCredentialsForIdentityResponse
@@ -93,7 +93,7 @@ module Aws::CognitoIdentity
       attr_accessor account_id: ::String
       attr_accessor identity_pool_id: ::String
       attr_accessor logins: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:logins]
     end
 
     class GetIdResponse
@@ -119,7 +119,7 @@ module Aws::CognitoIdentity
       attr_accessor logins: ::Hash[::String, ::String]
       attr_accessor principal_tags: ::Hash[::String, ::String]
       attr_accessor token_duration: ::Integer
-      SENSITIVE: []
+      SENSITIVE: [:logins]
     end
 
     class GetOpenIdTokenForDeveloperIdentityResponse
@@ -131,7 +131,7 @@ module Aws::CognitoIdentity
     class GetOpenIdTokenInput
       attr_accessor identity_id: ::String
       attr_accessor logins: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:logins]
     end
 
     class GetOpenIdTokenResponse
@@ -352,7 +352,7 @@ module Aws::CognitoIdentity
       attr_accessor identity_id: ::String
       attr_accessor logins: ::Hash[::String, ::String]
       attr_accessor logins_to_remove: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:logins]
     end
 
     class UnprocessedIdentityId

@@ -253,7 +253,7 @@ module Aws::CleanRooms
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
       attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
-      SENSITIVE: []
+      SENSITIVE: [:analysis_parameters]
     end
 
     class AnalysisTemplateArtifact
@@ -467,7 +467,7 @@ module Aws::CleanRooms
       attr_accessor validations: ::Array[Types::AnalysisTemplateValidationStatusDetail]
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
       attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
-      SENSITIVE: []
+      SENSITIVE: [:analysis_parameters]
     end
 
     class CollaborationAnalysisTemplateSummary
@@ -949,7 +949,7 @@ module Aws::CleanRooms
       attr_accessor schema: Types::AnalysisSchema
       attr_accessor error_message_configuration: Types::ErrorMessageConfiguration
       attr_accessor synthetic_data_parameters: Types::SyntheticDataParameters
-      SENSITIVE: []
+      SENSITIVE: [:analysis_parameters]
     end
 
     class CreateAnalysisTemplateOutput

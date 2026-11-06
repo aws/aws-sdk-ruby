@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.230.0 (2026-11-06)
+------------------
+
+* Feature - AWS Systems Manager now provides two new APIs - RegisterDefaultHostManagementConfiguration and DeregisterDefaultHostManagementConfiguration - along with a new DefaultHostManagementConfiguration CloudFormation resource type.
+
 1.229.0 (2026-11-04)
 ------------------
 

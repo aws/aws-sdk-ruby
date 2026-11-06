@@ -112,7 +112,7 @@ module Aws::SecurityAgent
       attr_accessor integrated_repositories: ::Array[Types::IntegratedRepository]
       attr_accessor trusted_ca_certificates: ::Array[Types::TrustedCaCertificate]
       attr_accessor client_certificates: ::Array[Types::ClientCertificate]
-      SENSITIVE: []
+      SENSITIVE: [:trusted_ca_certificates]
     end
 
     class Authentication
@@ -2005,7 +2005,7 @@ module Aws::SecurityAgent
       attr_accessor test_scope: Types::TestScope
       attr_accessor created_at: ::Time
       attr_accessor updated_at: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:trusted_ca_certificates]
     end
 
     class PentestJobSummary

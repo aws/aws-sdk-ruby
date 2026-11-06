@@ -12,7 +12,7 @@ module Aws::Pipes
       attr_accessor subnets: ::Array[::String]
       attr_accessor security_groups: ::Array[::String]
       attr_accessor assign_public_ip: ("ENABLED" | "DISABLED")
-      SENSITIVE: []
+      SENSITIVE: [:subnets, :security_groups]
     end
 
     class BatchArrayProperties
@@ -89,7 +89,7 @@ module Aws::Pipes
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor log_configuration: Types::PipeLogConfigurationParameters
       attr_accessor kms_key_identifier: ::String
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :tags]
     end
 
     class CreatePipeResponse
@@ -146,7 +146,7 @@ module Aws::Pipes
       attr_accessor last_modified_time: ::Time
       attr_accessor log_configuration: Types::PipeLogConfiguration
       attr_accessor kms_key_identifier: ::String
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :tags]
     end
 
     class DimensionMapping
@@ -258,7 +258,7 @@ module Aws::Pipes
 
     class ListTagsForResourceResponse
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:tags]
     end
 
     class MQBrokerAccessCredentials
@@ -327,7 +327,7 @@ module Aws::Pipes
       attr_accessor path_parameter_values: ::Array[::String]
       attr_accessor header_parameters: ::Hash[::String, ::String]
       attr_accessor query_string_parameters: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:path_parameter_values, :header_parameters, :query_string_parameters]
     end
 
     class PipeEnrichmentParameters
@@ -428,7 +428,7 @@ module Aws::Pipes
       attr_accessor credentials: Types::SelfManagedKafkaAccessConfigurationCredentials
       attr_accessor server_root_ca_certificate: ::String
       attr_accessor vpc: Types::SelfManagedKafkaAccessConfigurationVpc
-      SENSITIVE: [:topic_name, :consumer_group_id]
+      SENSITIVE: [:topic_name, :additional_bootstrap_servers, :consumer_group_id]
     end
 
     class PipeSourceSqsQueueParameters
@@ -486,7 +486,7 @@ module Aws::Pipes
       attr_accessor path_parameter_values: ::Array[::String]
       attr_accessor header_parameters: ::Hash[::String, ::String]
       attr_accessor query_string_parameters: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:path_parameter_values, :header_parameters, :query_string_parameters]
     end
 
     class PipeTargetKinesisStreamParameters
@@ -523,7 +523,7 @@ module Aws::Pipes
       attr_accessor statement_name: ::String
       attr_accessor with_event: bool
       attr_accessor sqls: ::Array[::String]
-      SENSITIVE: [:database, :db_user, :statement_name]
+      SENSITIVE: [:database, :db_user, :statement_name, :sqls]
     end
 
     class PipeTargetSageMakerPipelineParameters
@@ -611,7 +611,7 @@ module Aws::Pipes
     class SelfManagedKafkaAccessConfigurationVpc
       attr_accessor subnets: ::Array[::String]
       attr_accessor security_group: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:subnets, :security_group]
     end
 
     class ServiceQuotaExceededException
@@ -669,7 +669,7 @@ module Aws::Pipes
     class TagResourceRequest
       attr_accessor resource_arn: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:tags]
     end
 
     class TagResourceResponse < Aws::EmptyStructure

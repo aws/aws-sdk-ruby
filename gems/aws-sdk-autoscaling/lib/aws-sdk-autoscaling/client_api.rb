@@ -194,6 +194,7 @@ module Aws::AutoScaling
     ImpairedZoneHealthCheckBehavior = Shapes::StringShape.new(name: 'ImpairedZoneHealthCheckBehavior')
     IncludeDeletedGroups = Shapes::BooleanShape.new(name: 'IncludeDeletedGroups')
     IncludeInstances = Shapes::BooleanShape.new(name: 'IncludeInstances')
+    IncludeManagedResources = Shapes::BooleanShape.new(name: 'IncludeManagedResources')
     Instance = Shapes::StructureShape.new(name: 'Instance')
     InstanceCollection = Shapes::StructureShape.new(name: 'InstanceCollection')
     InstanceCollections = Shapes::ListShape.new(name: 'InstanceCollections')
@@ -595,6 +596,7 @@ module Aws::AutoScaling
 
     AutoScalingGroupNamesType.add_member(:auto_scaling_group_names, Shapes::ShapeRef.new(shape: AutoScalingGroupNames, location_name: "AutoScalingGroupNames"))
     AutoScalingGroupNamesType.add_member(:include_instances, Shapes::ShapeRef.new(shape: IncludeInstances, location_name: "IncludeInstances"))
+    AutoScalingGroupNamesType.add_member(:include_managed_resources, Shapes::ShapeRef.new(shape: IncludeManagedResources, location_name: "IncludeManagedResources"))
     AutoScalingGroupNamesType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     AutoScalingGroupNamesType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     AutoScalingGroupNamesType.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
@@ -834,6 +836,7 @@ module Aws::AutoScaling
     DescribeAdjustmentTypesAnswer.struct_class = Types::DescribeAdjustmentTypesAnswer
 
     DescribeAutoScalingInstancesType.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIds, location_name: "InstanceIds"))
+    DescribeAutoScalingInstancesType.add_member(:include_managed_resources, Shapes::ShapeRef.new(shape: IncludeManagedResources, location_name: "IncludeManagedResources"))
     DescribeAutoScalingInstancesType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeAutoScalingInstancesType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeAutoScalingInstancesType.struct_class = Types::DescribeAutoScalingInstancesType
@@ -888,6 +891,7 @@ module Aws::AutoScaling
     DescribeNotificationConfigurationsAnswer.struct_class = Types::DescribeNotificationConfigurationsAnswer
 
     DescribeNotificationConfigurationsType.add_member(:auto_scaling_group_names, Shapes::ShapeRef.new(shape: AutoScalingGroupNames, location_name: "AutoScalingGroupNames"))
+    DescribeNotificationConfigurationsType.add_member(:include_managed_resources, Shapes::ShapeRef.new(shape: IncludeManagedResources, location_name: "IncludeManagedResources"))
     DescribeNotificationConfigurationsType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeNotificationConfigurationsType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeNotificationConfigurationsType.struct_class = Types::DescribeNotificationConfigurationsType
@@ -895,6 +899,7 @@ module Aws::AutoScaling
     DescribePoliciesType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AutoScalingGroupName"))
     DescribePoliciesType.add_member(:policy_names, Shapes::ShapeRef.new(shape: PolicyNames, location_name: "PolicyNames"))
     DescribePoliciesType.add_member(:policy_types, Shapes::ShapeRef.new(shape: PolicyTypes, location_name: "PolicyTypes"))
+    DescribePoliciesType.add_member(:include_managed_resources, Shapes::ShapeRef.new(shape: IncludeManagedResources, location_name: "IncludeManagedResources"))
     DescribePoliciesType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribePoliciesType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribePoliciesType.struct_class = Types::DescribePoliciesType
@@ -902,6 +907,7 @@ module Aws::AutoScaling
     DescribeScalingActivitiesType.add_member(:activity_ids, Shapes::ShapeRef.new(shape: ActivityIds, location_name: "ActivityIds"))
     DescribeScalingActivitiesType.add_member(:auto_scaling_group_name, Shapes::ShapeRef.new(shape: XmlStringMaxLen255, location_name: "AutoScalingGroupName"))
     DescribeScalingActivitiesType.add_member(:include_deleted_groups, Shapes::ShapeRef.new(shape: IncludeDeletedGroups, location_name: "IncludeDeletedGroups"))
+    DescribeScalingActivitiesType.add_member(:include_managed_resources, Shapes::ShapeRef.new(shape: IncludeManagedResources, location_name: "IncludeManagedResources"))
     DescribeScalingActivitiesType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeScalingActivitiesType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeScalingActivitiesType.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
@@ -911,11 +917,13 @@ module Aws::AutoScaling
     DescribeScheduledActionsType.add_member(:scheduled_action_names, Shapes::ShapeRef.new(shape: ScheduledActionNames, location_name: "ScheduledActionNames"))
     DescribeScheduledActionsType.add_member(:start_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "StartTime"))
     DescribeScheduledActionsType.add_member(:end_time, Shapes::ShapeRef.new(shape: TimestampType, location_name: "EndTime"))
+    DescribeScheduledActionsType.add_member(:include_managed_resources, Shapes::ShapeRef.new(shape: IncludeManagedResources, location_name: "IncludeManagedResources"))
     DescribeScheduledActionsType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeScheduledActionsType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeScheduledActionsType.struct_class = Types::DescribeScheduledActionsType
 
     DescribeTagsType.add_member(:filters, Shapes::ShapeRef.new(shape: Filters, location_name: "Filters"))
+    DescribeTagsType.add_member(:include_managed_resources, Shapes::ShapeRef.new(shape: IncludeManagedResources, location_name: "IncludeManagedResources"))
     DescribeTagsType.add_member(:next_token, Shapes::ShapeRef.new(shape: XmlString, location_name: "NextToken"))
     DescribeTagsType.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
     DescribeTagsType.struct_class = Types::DescribeTagsType

@@ -182,6 +182,160 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # Information about a related item that wasn't created.
+    #
+    # @!attribute [rw] case_identifier
+    #   The identifiers of the case that the related item wasn't created
+    #   for.
+    #   @return [Types::CaseIdentifier]
+    #
+    # @!attribute [rw] error_code
+    #   The error code. For possible values, see `failedItems`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message that describes the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchCreateRelatedItemErrorEntry AWS API Documentation
+    #
+    class BatchCreateRelatedItemErrorEntry < Struct.new(
+      :case_identifier,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a case to associate the related item with in a
+    # `BatchCreateRelatedItem` request.
+    #
+    # @!attribute [rw] case_identifier
+    #   The identifier of the case to associate the related item with.
+    #   Specify either the case ID or the reference ID.
+    #   @return [Types::CaseIdentifierUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchCreateRelatedItemIdentifier AWS API Documentation
+    #
+    class BatchCreateRelatedItemIdentifier < Struct.new(
+      :case_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] content
+    #   The content of the related item to be created. The same content is
+    #   applied to every case in the request. Only comment content is
+    #   supported for batch creation.
+    #   @return [Types::RelatedItemInputContent]
+    #
+    # @!attribute [rw] cases
+    #   The list of cases to associate the related item with. All cases must
+    #   belong to the same domain.
+    #   @return [Array<Types::BatchCreateRelatedItemIdentifier>]
+    #
+    # @!attribute [rw] performed_by
+    #   The entity that created the related item.
+    #   @return [Types::UserUnion]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   If you retry a request with the same client token, the service
+    #   returns the original response instead of processing the request
+    #   again. If you reuse a client token with different request
+    #   parameters, the request fails with a `ConflictException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchCreateRelatedItemRequest AWS API Documentation
+    #
+    class BatchCreateRelatedItemRequest < Struct.new(
+      :domain_id,
+      :content,
+      :cases,
+      :performed_by,
+      :client_token)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_items
+    #   The list of related items that were successfully created and
+    #   associated with their cases.
+    #   @return [Array<Types::BatchCreateRelatedItemSuccessEntry>]
+    #
+    # @!attribute [rw] failed_items
+    #   The list of related items that were not created. Each entry includes
+    #   an error code and message. Possible error codes include:
+    #
+    #   * `CASE_NOT_FOUND` - No case exists with the specified case ID.
+    #
+    #   * `VALIDATION_ERROR` - The request contains invalid input.
+    #
+    #   * `CONFLICT` - Another operation is in progress on the case, such as
+    #     a concurrent update or a merge of the case into another case.
+    #
+    #   * `THROTTLED` - The request rate exceeded the allowed limit.
+    #
+    #   * `ACCESS_DENIED` - The caller lacks permission to perform the
+    #     operation.
+    #
+    #   * `SERVICE_QUOTA_EXCEEDED` - The request exceeded a service quota.
+    #
+    #   * `DOMAIN_NOT_FOUND` - The case domain was deleted while the request
+    #     was being processed.
+    #
+    #   * `INTERNAL_ERROR` - An unexpected error occurred on the server.
+    #   @return [Array<Types::BatchCreateRelatedItemErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchCreateRelatedItemResponse AWS API Documentation
+    #
+    class BatchCreateRelatedItemResponse < Struct.new(
+      :successful_items,
+      :failed_items)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a related item that was created.
+    #
+    # @!attribute [rw] case_identifier
+    #   The identifiers of the case that the related item is associated
+    #   with.
+    #   @return [Types::CaseIdentifier]
+    #
+    # @!attribute [rw] related_item_id
+    #   The unique identifier of the related item.
+    #   @return [String]
+    #
+    # @!attribute [rw] related_item_arn
+    #   The Amazon Resource Name (ARN) of the related item.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchCreateRelatedItemSuccessEntry AWS API Documentation
+    #
+    class BatchCreateRelatedItemSuccessEntry < Struct.new(
+      :case_identifier,
+      :related_item_id,
+      :related_item_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] domain_id
     #   Unique identifier of a Cases domain.
     #   @return [String]
@@ -289,7 +443,169 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # Boolean condition for a rule. In the Amazon Connect admin website,
+    # Information about a case that wasn't updated.
+    #
+    # @!attribute [rw] case_identifier
+    #   The identifiers of the case that wasn't updated.
+    #   @return [Types::CaseIdentifier]
+    #
+    # @!attribute [rw] error_code
+    #   The error code. For possible values, see `failedCases`.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_message
+    #   A message that describes the error.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchUpdateCaseErrorEntry AWS API Documentation
+    #
+    class BatchUpdateCaseErrorEntry < Struct.new(
+      :case_identifier,
+      :error_code,
+      :error_message)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a case to update in a `BatchUpdateCase` request.
+    #
+    # @!attribute [rw] case_identifier
+    #   The identifier of the case to update. Specify either the case ID or
+    #   the reference ID.
+    #   @return [Types::CaseIdentifierUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchUpdateCaseIdentifier AWS API Documentation
+    #
+    class BatchUpdateCaseIdentifier < Struct.new(
+      :case_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] domain_id
+    #   The unique identifier of the Cases domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] cases
+    #   The list of cases to update. All cases must belong to the same
+    #   domain.
+    #   @return [Array<Types::BatchUpdateCaseIdentifier>]
+    #
+    # @!attribute [rw] fields
+    #   An array of objects, each with a `fieldIdentifier` and a `value`.
+    #   You can identify each field by its ID or by its name; identifying a
+    #   field by name is supported only in `BatchUpdateCase`. The same field
+    #   values are applied to every case in the request. This field must be
+    #   present, but can be an empty list when you provide the top-level
+    #   `title`, `status`, or `customerId` parameters. Do not include
+    #   `title`, `status`, or `customerId` in this list; set those values
+    #   only through their top-level parameters. Duplicating them in
+    #   `fields` results in a validation error.
+    #   @return [Array<Types::FieldValueInput>]
+    #
+    # @!attribute [rw] performed_by
+    #   The entity that performed the action.
+    #   @return [Types::UserUnion]
+    #
+    # @!attribute [rw] title
+    #   The title to apply to all cases in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status to apply to all cases in the request.
+    #   @return [String]
+    #
+    # @!attribute [rw] customer_id
+    #   The ARN of the customer profile to associate with all cases in the
+    #   request.
+    #   @return [String]
+    #
+    # @!attribute [rw] client_token
+    #   A unique, case-sensitive identifier that you provide to ensure the
+    #   idempotency of the request. If not provided, the Amazon Web Services
+    #   SDK populates this field. For more information about idempotency,
+    #   see [Making retries safe with idempotent APIs][1].
+    #
+    #   If you retry a request with the same client token, the service
+    #   returns the original response instead of processing the request
+    #   again. If you reuse a client token with different request
+    #   parameters, the request fails with a `ConflictException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #
+    #
+    #
+    #   [1]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchUpdateCaseRequest AWS API Documentation
+    #
+    class BatchUpdateCaseRequest < Struct.new(
+      :domain_id,
+      :cases,
+      :fields,
+      :performed_by,
+      :title,
+      :status,
+      :customer_id,
+      :client_token)
+      SENSITIVE = [:title]
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] successful_cases
+    #   The list of cases that were successfully updated.
+    #   @return [Array<Types::BatchUpdateCaseSuccessEntry>]
+    #
+    # @!attribute [rw] failed_cases
+    #   The list of cases that were not updated. Each entry includes an
+    #   error code and message. Possible error codes include:
+    #
+    #   * `CASE_NOT_FOUND` - No case exists with the specified case ID.
+    #
+    #   * `VALIDATION_ERROR` - The request contains invalid input.
+    #
+    #   * `CONFLICT` - Another operation is in progress on the case, such as
+    #     a concurrent update or a merge of the case into another case.
+    #
+    #   * `THROTTLED` - The request rate exceeded the allowed limit.
+    #
+    #   * `ACCESS_DENIED` - The caller lacks permission to perform the
+    #     operation.
+    #
+    #   * `SERVICE_QUOTA_EXCEEDED` - The request exceeded a service quota.
+    #
+    #   * `DOMAIN_NOT_FOUND` - The case domain was deleted while the request
+    #     was being processed.
+    #
+    #   * `INTERNAL_ERROR` - An unexpected error occurred on the server.
+    #   @return [Array<Types::BatchUpdateCaseErrorEntry>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchUpdateCaseResponse AWS API Documentation
+    #
+    class BatchUpdateCaseResponse < Struct.new(
+      :successful_cases,
+      :failed_cases)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Information about a case that was updated.
+    #
+    # @!attribute [rw] case_identifier
+    #   The identifiers of the updated case.
+    #   @return [Types::CaseIdentifier]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/BatchUpdateCaseSuccessEntry AWS API Documentation
+    #
+    class BatchUpdateCaseSuccessEntry < Struct.new(
+      :case_identifier)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Boolean condition for a rule. In the Connect Customer admin website,
     # case rules are known as *case field conditions*. For more information
     # about case field conditions, see [Add case field conditions to a case
     # template][1].
@@ -339,10 +655,10 @@ module Aws::ConnectCases
       class Unknown < BooleanCondition; end
     end
 
-    # Boolean operands for a condition. In the Amazon Connect admin website,
-    # case rules are known as *case field conditions*. For more information
-    # about case field conditions, see [Add case field conditions to a case
-    # template][1].
+    # Boolean operands for a condition. In the Connect Customer admin
+    # website, case rules are known as *case field conditions*. For more
+    # information about case field conditions, see [Add case field
+    # conditions to a case template][1].
     #
     #
     #
@@ -429,10 +745,66 @@ module Aws::ConnectCases
       class Unknown < CaseFilter; end
     end
 
+    # The identifiers of a case that a batch operation returns.
+    #
+    # @!attribute [rw] case_id
+    #   The unique identifier of the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_number
+    #   The reference number of the case. Reference numbers aren't
+    #   guaranteed to be unique. `BatchUpdateCase` and
+    #   `BatchCreateRelatedItem` don't return this value.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_id
+    #   The reference ID of the case. Cases created before reference IDs
+    #   were available don't have one.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CaseIdentifier AWS API Documentation
+    #
+    class CaseIdentifier < Struct.new(
+      :case_id,
+      :reference_number,
+      :reference_id)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Identifies a case by its case ID or its reference ID. Specify only one
+    # member.
+    #
+    # @note CaseIdentifierUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] case_id
+    #   The unique identifier of the case.
+    #   @return [String]
+    #
+    # @!attribute [rw] reference_id
+    #   The reference ID of the case. Reference IDs are unique within a
+    #   domain, and uniqueness isn't case sensitive.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CaseIdentifierUnion AWS API Documentation
+    #
+    class CaseIdentifierUnion < Struct.new(
+      :case_id,
+      :reference_id,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class CaseId < CaseIdentifierUnion; end
+      class ReferenceId < CaseIdentifierUnion; end
+      class Unknown < CaseIdentifierUnion; end
+    end
+
     # Represents what rule type should take place, under what conditions. In
-    # the Amazon Connect admin website, case rules are known as *case field
-    # conditions*. For more information about case field conditions, see
-    # [Add case field conditions to a case template][1].
+    # the Connect Customer admin website, case rules are known as *case
+    # field conditions*. For more information about case field conditions,
+    # see [Add case field conditions to a case template][1].
     #
     #
     #
@@ -472,10 +844,10 @@ module Aws::ConnectCases
       class Unknown < CaseRuleDetails; end
     end
 
-    # Error for batch describe case rules API failure. In the Amazon Connect
-    # admin website, case rules are known as *case field conditions*. For
-    # more information about case field conditions, see [Add case field
-    # conditions to a case template][1].
+    # Error for batch describe case rules API failure. In the Connect
+    # Customer admin website, case rules are known as *case field
+    # conditions*. For more information about case field conditions, see
+    # [Add case field conditions to a case template][1].
     #
     #
     #
@@ -517,7 +889,7 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # Summary information of this case rule. In the Amazon Connect admin
+    # Summary information of this case rule. In the Connect Customer admin
     # website, case rules are known as *case field conditions*. For more
     # information about case field conditions, see [Add case field
     # conditions to a case template][1].
@@ -624,8 +996,8 @@ module Aws::ConnectCases
     end
 
     # A compound condition that combines multiple boolean conditions using
-    # logical operators. In the Amazon Connect admin website, case rules are
-    # known as *case field conditions*. For more information about case
+    # logical operators. In the Connect Customer admin website, case rules
+    # are known as *case field conditions*. For more information about case
     # field conditions, see [Add case field conditions to a case
     # template][1].
     #
@@ -708,10 +1080,10 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # An object that represents an Amazon Connect contact object.
+    # An object that represents an Connect Customer contact object.
     #
     # @!attribute [rw] contact_arn
-    #   A unique identifier of a contact in Amazon Connect.
+    #   A unique identifier of a contact in Connect Customer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/Contact AWS API Documentation
@@ -722,11 +1094,11 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # An object that represents a content of an Amazon Connect contact
+    # An object that represents a content of an Connect Customer contact
     # object.
     #
     # @!attribute [rw] contact_arn
-    #   A unique identifier of a contact in Amazon Connect.
+    #   A unique identifier of a contact in Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] channel
@@ -755,7 +1127,7 @@ module Aws::ConnectCases
     #   @return [Array<String>]
     #
     # @!attribute [rw] contact_arn
-    #   A unique identifier of a contact in Amazon Connect.
+    #   A unique identifier of a contact in Connect Customer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/ContactFilter AWS API Documentation
@@ -799,8 +1171,8 @@ module Aws::ConnectCases
     #   @return [Types::UserUnion]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/CreateCaseRequest AWS API Documentation
@@ -1070,6 +1442,11 @@ module Aws::ConnectCases
     # @!attribute [rw] required_fields
     #   A list of fields that must contain a value for a case to be
     #   successfully created with this template.
+    #
+    #   To require a Customer Profile when creating cases, include
+    #   `customer_id` in this list. If `customer_id` is omitted, the
+    #   Customer Profile field is optional and can be added, changed, or
+    #   removed after case creation.
     #   @return [Array<Types::RequiredField>]
     #
     # @!attribute [rw] status
@@ -1405,7 +1782,7 @@ module Aws::ConnectCases
     #
     class EmptyFieldValue < Aws::EmptyStructure; end
 
-    # Represents an empty operand value. In the Amazon Connect admin
+    # Represents an empty operand value. In the Connect Customer admin
     # website, case rules are known as *case field conditions*. For more
     # information about case field conditions, see [Add case field
     # conditions to a case template][1].
@@ -1594,6 +1971,34 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # Identifies a field by its ID or by its name. Specify only one member.
+    # Identifying a field by name is supported only in `BatchUpdateCase`.
+    #
+    # @note FieldIdentifierUnion is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @!attribute [rw] id
+    #   The unique identifier of the field.
+    #   @return [String]
+    #
+    # @!attribute [rw] name
+    #   The name of the field.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FieldIdentifierUnion AWS API Documentation
+    #
+    class FieldIdentifierUnion < Struct.new(
+      :id,
+      :name,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class Id < FieldIdentifierUnion; end
+      class Name < FieldIdentifierUnion; end
+      class Unknown < FieldIdentifierUnion; end
+    end
+
     # Object for field related information.
     #
     # @!attribute [rw] id
@@ -1742,6 +2147,25 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
+    # A field and the value to set for it.
+    #
+    # @!attribute [rw] field_identifier
+    #   The field to update, identified by field ID or field name.
+    #   @return [Types::FieldIdentifierUnion]
+    #
+    # @!attribute [rw] value
+    #   The value to set for the field.
+    #   @return [Types::FieldValueUnion]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FieldValueInput AWS API Documentation
+    #
+    class FieldValueInput < Struct.new(
+      :field_identifier,
+      :value)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Object to store union of Field values.
     #
     # <note markdown="1"> The `Summary` system field accepts up to 3000 characters, while all
@@ -1797,10 +2221,11 @@ module Aws::ConnectCases
       class Unknown < FieldValueUnion; end
     end
 
-    # An object that represents a content of an Amazon Connect file object.
+    # An object that represents a content of an Connect Customer file
+    # object.
     #
     # @!attribute [rw] file_arn
-    #   The Amazon Resource Name (ARN) of a File in Amazon Connect.
+    #   The Amazon Resource Name (ARN) of a File in Connect Customer.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/FileContent AWS API Documentation
@@ -1942,8 +2367,8 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetCaseResponse AWS API Documentation
@@ -1957,7 +2382,7 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # Detailed case rule information. In the Amazon Connect admin website,
+    # Detailed case rule information. In the Connect Customer admin website,
     # case rules are known as *case field conditions*. For more information
     # about case field conditions, see [Add case field conditions to a case
     # template][1].
@@ -1999,8 +2424,8 @@ module Aws::ConnectCases
     #   @return [Time]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetCaseRuleResponse AWS API Documentation
@@ -2052,8 +2477,8 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/GetDomainResponse AWS API Documentation
@@ -2096,8 +2521,8 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] deleted
@@ -2169,8 +2594,8 @@ module Aws::ConnectCases
     #   @return [Types::LayoutContent]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] deleted
@@ -2243,8 +2668,8 @@ module Aws::ConnectCases
     #   @return [Array<Types::RequiredField>]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] status
@@ -2462,7 +2887,7 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] contact_arn
-    #   A unique identifier of a contact in Amazon Connect.
+    #   A unique identifier of a contact in Connect Customer.
     #   @return [String]
     #
     # @!attribute [rw] max_results
@@ -2690,8 +3115,8 @@ module Aws::ConnectCases
     end
 
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/ListTagsForResourceResponse AWS API Documentation
@@ -2749,8 +3174,8 @@ module Aws::ConnectCases
       include Aws::Structure
     end
 
-    # Represents the left hand operand in the condition. In the Amazon
-    # Connect admin website, case rules are known as *case field
+    # Represents the left hand operand in the condition. In the Connect
+    # Customer admin website, case rules are known as *case field
     # conditions*. For more information about case field conditions, see
     # [Add case field conditions to a case template][1].
     #
@@ -2779,8 +3204,8 @@ module Aws::ConnectCases
       class Unknown < OperandOne; end
     end
 
-    # Represents the right hand operand in the condition. In the Amazon
-    # Connect admin website, case rules are known as *case field
+    # Represents the right hand operand in the condition. In the Connect
+    # Customer admin website, case rules are known as *case field
     # conditions*. For more information about case field conditions, see
     # [Add case field conditions to a case template][1].
     #
@@ -2890,7 +3315,8 @@ module Aws::ConnectCases
     #   @return [Types::SlaContent]
     #
     # @!attribute [rw] connect_case
-    #   Represents the Amazon Connect case to be created as a related item.
+    #   Represents the Connect Customer case to be created as a related
+    #   item.
     #   @return [Types::ConnectCaseContent]
     #
     # @!attribute [rw] custom
@@ -2941,7 +3367,7 @@ module Aws::ConnectCases
     # @note RelatedItemInputContent is a union - when making an API calls you must set exactly one of the members.
     #
     # @!attribute [rw] contact
-    #   Object representing a contact in Amazon Connect as an API request
+    #   Object representing a contact in Connect Customer as an API request
     #   field.
     #   @return [Types::Contact]
     #
@@ -2958,7 +3384,8 @@ module Aws::ConnectCases
     #   @return [Types::SlaInputContent]
     #
     # @!attribute [rw] connect_case
-    #   Represents the Amazon Connect case to be created as a related item.
+    #   Represents the Connect Customer case to be created as a related
+    #   item.
     #   @return [Types::ConnectCaseInputContent]
     #
     # @!attribute [rw] custom
@@ -3010,7 +3437,8 @@ module Aws::ConnectCases
     #   @return [Types::SlaFilter]
     #
     # @!attribute [rw] connect_case
-    #   Represents the Amazon Connect case to be created as a related item.
+    #   Represents the Connect Customer case to be created as a related
+    #   item.
     #   @return [Types::ConnectCaseFilter]
     #
     # @!attribute [rw] custom
@@ -3069,9 +3497,9 @@ module Aws::ConnectCases
     end
 
     # Required rule type, used to indicate whether a field is required. In
-    # the Amazon Connect admin website, case rules are known as *case field
-    # conditions*. For more information about case field conditions, see
-    # [Add case field conditions to a case template][1].
+    # the Connect Customer admin website, case rules are known as *case
+    # field conditions*. For more information about case field conditions,
+    # see [Add case field conditions to a case template][1].
     #
     #
     #
@@ -3225,8 +3653,8 @@ module Aws::ConnectCases
     #   @return [Types::UserUnion]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/SearchAllRelatedItemsResponseItem AWS API Documentation
@@ -3350,8 +3778,8 @@ module Aws::ConnectCases
     #   @return [Array<Types::FieldValue>]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/SearchCasesResponseItem AWS API Documentation
@@ -3437,8 +3865,8 @@ module Aws::ConnectCases
     #   @return [Types::RelatedItemContent]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] performed_by
@@ -3482,7 +3910,7 @@ module Aws::ConnectCases
     end
 
     # The service quota has been exceeded. For a list of service quotas, see
-    # [Amazon Connect Service Quotas][1] in the *Amazon Connect
+    # [Connect Customer Service Quotas][1] in the *Connect Customer
     # Administrator Guide*.
     #
     #
@@ -3642,7 +4070,7 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] sort_order
-    #   A structured set of sort terms
+    #   Whether results should be sorted in ascending or descending order.
     #   @return [String]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/Sort AWS API Documentation
@@ -3702,8 +4130,8 @@ module Aws::ConnectCases
     #   @return [String]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/connectcases-2022-10-03/TagResourceRequest AWS API Documentation
@@ -3735,7 +4163,7 @@ module Aws::ConnectCases
     end
 
     # An association representing a case rule acting upon a field. In the
-    # Amazon Connect admin website, case rules are known as *case field
+    # Connect Customer admin website, case rules are known as *case field
     # conditions*. For more information about case field conditions, see
     # [Add case field conditions to a case template][1].
     #
@@ -4031,8 +4459,8 @@ module Aws::ConnectCases
     #   @return [Time]
     #
     # @!attribute [rw] tags
-    #   A map of of key-value pairs that represent tags on a resource. Tags
-    #   are used to organize, track, or control access for this resource.
+    #   A map of key-value pairs that represent tags on a resource. Tags are
+    #   used to organize, track, or control access for this resource.
     #   @return [Hash<String,String>]
     #
     # @!attribute [rw] last_updated_user
@@ -4081,6 +4509,11 @@ module Aws::ConnectCases
     # @!attribute [rw] required_fields
     #   A list of fields that must contain a value for a case to be
     #   successfully created with this template.
+    #
+    #   To require a Customer Profile when creating cases, include
+    #   `customer_id` in this list. If `customer_id` is omitted, the
+    #   Customer Profile field is optional and can be added, changed, or
+    #   removed after case creation.
     #   @return [Array<Types::RequiredField>]
     #
     # @!attribute [rw] status
@@ -4129,7 +4562,7 @@ module Aws::ConnectCases
     # @note UserUnion is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of UserUnion corresponding to the set member.
     #
     # @!attribute [rw] user_arn
-    #   Represents the Amazon Connect ARN of the user.
+    #   Represents the Connect Customer ARN of the user.
     #   @return [String]
     #
     # @!attribute [rw] custom_entity

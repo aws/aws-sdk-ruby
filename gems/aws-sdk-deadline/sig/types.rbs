@@ -218,7 +218,7 @@ module Aws::Deadline
     class Attachments
       attr_accessor manifests: ::Array[Types::ManifestProperties]
       attr_accessor file_system: ("COPIED" | "VIRTUAL")
-      SENSITIVE: []
+      SENSITIVE: [:manifests]
     end
 
     class AwsCredentials
@@ -860,7 +860,7 @@ module Aws::Deadline
       attr_accessor display_name: ::String
       attr_accessor os_family: ("WINDOWS" | "LINUX" | "MACOS")
       attr_accessor file_system_locations: ::Array[Types::FileSystemLocation]
-      SENSITIVE: []
+      SENSITIVE: [:file_system_locations]
     end
 
     class CreateStorageProfileResponse
@@ -1634,7 +1634,7 @@ module Aws::Deadline
       attr_accessor display_name: ::String
       attr_accessor os_family: ("WINDOWS" | "LINUX" | "MACOS")
       attr_accessor file_system_locations: ::Array[Types::FileSystemLocation]
-      SENSITIVE: []
+      SENSITIVE: [:file_system_locations]
     end
 
     class GetStorageProfileRequest
@@ -1652,7 +1652,7 @@ module Aws::Deadline
       attr_accessor updated_at: ::Time
       attr_accessor updated_by: ::String
       attr_accessor file_system_locations: ::Array[Types::FileSystemLocation]
-      SENSITIVE: []
+      SENSITIVE: [:file_system_locations]
     end
 
     class GetTaskRequest
@@ -1792,7 +1792,7 @@ module Aws::Deadline
       attr_accessor schema_version: ::String
       attr_accessor extensions: ::Array[::String]
       attr_accessor path_mapping_rules: ::Array[Types::PathMappingRule]
-      SENSITIVE: [:parameters]
+      SENSITIVE: [:parameters, :path_mapping_rules]
     end
 
     class JobDetailsError
@@ -3404,7 +3404,7 @@ module Aws::Deadline
       attr_accessor os_family: ("WINDOWS" | "LINUX" | "MACOS")
       attr_accessor file_system_locations_to_add: ::Array[Types::FileSystemLocation]
       attr_accessor file_system_locations_to_remove: ::Array[Types::FileSystemLocation]
-      SENSITIVE: []
+      SENSITIVE: [:file_system_locations_to_add, :file_system_locations_to_remove]
     end
 
     class UpdateStorageProfileResponse < Aws::EmptyStructure

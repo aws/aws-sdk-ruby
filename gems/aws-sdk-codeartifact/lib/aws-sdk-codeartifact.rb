@@ -54,7 +54,7 @@ module Aws::CodeArtifact
   autoload :EndpointProvider, 'aws-sdk-codeartifact/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-codeartifact/endpoints'
 
-  GEM_VERSION = '1.86.0'
+  GEM_VERSION = '1.87.0'
 
 end
 

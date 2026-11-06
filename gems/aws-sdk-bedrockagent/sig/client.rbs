@@ -1463,7 +1463,14 @@ module Aws
                                    ?description: ::String,
                                    role_arn: ::String,
                                    knowledge_base_configuration: Params::knowledge_base_configuration,
-                                   ?storage_configuration: Params::storage_configuration
+                                   ?storage_configuration: Params::storage_configuration,
+                                   ?metadata_configurations: Array[
+                                     {
+                                       name: ::String,
+                                       type: ("STRING" | "STRING_LIST"),
+                                       searchability: ("ENABLED" | "DISABLED")
+                                     }
+                                   ]
                                  ) -> _UpdateKnowledgeBaseResponseSuccess
                                | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateKnowledgeBaseResponseSuccess
 

@@ -297,7 +297,7 @@ module Aws::QConnect
       attr_accessor association_configurations: ::Array[Types::AssociationConfiguration]
       attr_accessor locale: ::String
       attr_accessor suggested_messages: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:suggested_messages]
     end
 
     class AppIntegrationsConfiguration
@@ -849,7 +849,7 @@ module Aws::QConnect
       attr_accessor language: ::String
       attr_accessor client_token: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class CreateQuickResponseResponse
@@ -1508,7 +1508,7 @@ module Aws::QConnect
     class GroupingConfiguration
       attr_accessor criteria: ::String
       attr_accessor values: ::Array[::String]
-      SENSITIVE: [:criteria]
+      SENSITIVE: [:criteria, :values]
     end
 
     class GuardrailContentFilterConfig
@@ -1555,7 +1555,7 @@ module Aws::QConnect
       attr_accessor definition: ::String
       attr_accessor examples: ::Array[::String]
       attr_accessor type: ("DENY")
-      SENSITIVE: [:name, :definition, :type]
+      SENSITIVE: [:name, :definition, :examples, :type]
     end
 
     class GuardrailWordConfig
@@ -2272,7 +2272,7 @@ module Aws::QConnect
       attr_accessor locale: ::String
       attr_accessor input_schemas: ::Array[untyped]
       attr_accessor output_schemas: ::Array[untyped]
-      SENSITIVE: []
+      SENSITIVE: [:input_schemas, :output_schemas]
     end
 
     class OrchestratorConfigurationEntry
@@ -2477,7 +2477,7 @@ module Aws::QConnect
       attr_accessor channels: ::Array[::String]
       attr_accessor language: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class QuickResponseDataProvider
@@ -2543,7 +2543,7 @@ module Aws::QConnect
       attr_accessor attributes_not_interpolated: ::Array[::String]
       attr_accessor attributes_interpolated: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: [:attributes_not_interpolated, :attributes_interpolated]
+      SENSITIVE: [:channels, :attributes_not_interpolated, :attributes_interpolated]
     end
 
     class QuickResponseSummary
@@ -2562,7 +2562,7 @@ module Aws::QConnect
       attr_accessor is_active: bool
       attr_accessor channels: ::Array[::String]
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class RankingData
@@ -3439,7 +3439,7 @@ module Aws::QConnect
       attr_accessor is_active: bool
       attr_accessor channels: ::Array[::String]
       attr_accessor language: ::String
-      SENSITIVE: []
+      SENSITIVE: [:channels]
     end
 
     class UpdateQuickResponseResponse

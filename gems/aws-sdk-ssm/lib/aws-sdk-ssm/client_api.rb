@@ -262,6 +262,8 @@ module Aws::SSM
     CreatedDate = Shapes::TimestampShape.new(name: 'CreatedDate')
     Credentials = Shapes::StructureShape.new(name: 'Credentials')
     CustomSchemaCountLimitExceededException = Shapes::StructureShape.new(name: 'CustomSchemaCountLimitExceededException')
+    DHMCPermissionModel = Shapes::StringShape.new(name: 'DHMCPermissionModel')
+    DHMCRoleArn = Shapes::StringShape.new(name: 'DHMCRoleArn')
     DateTime = Shapes::TimestampShape.new(name: 'DateTime')
     DefaultBaseline = Shapes::BooleanShape.new(name: 'DefaultBaseline')
     DefaultInstanceName = Shapes::StringShape.new(name: 'DefaultInstanceName')
@@ -293,6 +295,8 @@ module Aws::SSM
     DeleteResourcePolicyResponse = Shapes::StructureShape.new(name: 'DeleteResourcePolicyResponse')
     DeletionMode = Shapes::StringShape.new(name: 'DeletionMode')
     DeliveryTimedOutCount = Shapes::IntegerShape.new(name: 'DeliveryTimedOutCount')
+    DeregisterDefaultHostManagementConfigurationRequest = Shapes::StructureShape.new(name: 'DeregisterDefaultHostManagementConfigurationRequest')
+    DeregisterDefaultHostManagementConfigurationResult = Shapes::StructureShape.new(name: 'DeregisterDefaultHostManagementConfigurationResult')
     DeregisterManagedInstanceRequest = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceRequest')
     DeregisterManagedInstanceResult = Shapes::StructureShape.new(name: 'DeregisterManagedInstanceResult')
     DeregisterPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'DeregisterPatchBaselineForPatchGroupRequest')
@@ -1099,6 +1103,8 @@ module Aws::SSM
     Region = Shapes::StringShape.new(name: 'Region')
     RegionList = Shapes::ListShape.new(name: 'RegionList')
     Regions = Shapes::ListShape.new(name: 'Regions')
+    RegisterDefaultHostManagementConfigurationRequest = Shapes::StructureShape.new(name: 'RegisterDefaultHostManagementConfigurationRequest')
+    RegisterDefaultHostManagementConfigurationResult = Shapes::StructureShape.new(name: 'RegisterDefaultHostManagementConfigurationResult')
     RegisterDefaultPatchBaselineRequest = Shapes::StructureShape.new(name: 'RegisterDefaultPatchBaselineRequest')
     RegisterDefaultPatchBaselineResult = Shapes::StructureShape.new(name: 'RegisterDefaultPatchBaselineResult')
     RegisterPatchBaselineForPatchGroupRequest = Shapes::StructureShape.new(name: 'RegisterPatchBaselineForPatchGroupRequest')
@@ -2188,6 +2194,10 @@ module Aws::SSM
     DeleteResourcePolicyRequest.struct_class = Types::DeleteResourcePolicyRequest
 
     DeleteResourcePolicyResponse.struct_class = Types::DeleteResourcePolicyResponse
+
+    DeregisterDefaultHostManagementConfigurationRequest.struct_class = Types::DeregisterDefaultHostManagementConfigurationRequest
+
+    DeregisterDefaultHostManagementConfigurationResult.struct_class = Types::DeregisterDefaultHostManagementConfigurationResult
 
     DeregisterManagedInstanceRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: ManagedInstanceId, required: true, location_name: "InstanceId"))
     DeregisterManagedInstanceRequest.struct_class = Types::DeregisterManagedInstanceRequest
@@ -4480,6 +4490,14 @@ module Aws::SSM
 
     Regions.member = Shapes::ShapeRef.new(shape: Region)
 
+    RegisterDefaultHostManagementConfigurationRequest.add_member(:permission_model, Shapes::ShapeRef.new(shape: DHMCPermissionModel, required: true, location_name: "PermissionModel"))
+    RegisterDefaultHostManagementConfigurationRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: DHMCRoleArn, location_name: "RoleArn"))
+    RegisterDefaultHostManagementConfigurationRequest.add_member(:overwrite, Shapes::ShapeRef.new(shape: Boolean, location_name: "Overwrite"))
+    RegisterDefaultHostManagementConfigurationRequest.struct_class = Types::RegisterDefaultHostManagementConfigurationRequest
+
+    RegisterDefaultHostManagementConfigurationResult.add_member(:role_arn, Shapes::ShapeRef.new(shape: DHMCRoleArn, location_name: "RoleArn"))
+    RegisterDefaultHostManagementConfigurationResult.struct_class = Types::RegisterDefaultHostManagementConfigurationResult
+
     RegisterDefaultPatchBaselineRequest.add_member(:baseline_id, Shapes::ShapeRef.new(shape: BaselineId, required: true, location_name: "BaselineId"))
     RegisterDefaultPatchBaselineRequest.struct_class = Types::RegisterDefaultPatchBaselineRequest
 
@@ -5630,6 +5648,15 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedResourcePolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyNotFoundException)
+      end)
+
+      api.add_operation(:deregister_default_host_management_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeregisterDefaultHostManagementConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeregisterDefaultHostManagementConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeregisterDefaultHostManagementConfigurationResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:deregister_managed_instance, Seahorse::Model::Operation.new.tap do |o|
@@ -6975,6 +7002,15 @@ module Aws::SSM
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         o.errors << Shapes::ShapeRef.new(shape: MalformedResourcePolicyDocumentException)
         o.errors << Shapes::ShapeRef.new(shape: ResourcePolicyNotFoundException)
+      end)
+
+      api.add_operation(:register_default_host_management_configuration, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "RegisterDefaultHostManagementConfiguration"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: RegisterDefaultHostManagementConfigurationRequest)
+        o.output = Shapes::ShapeRef.new(shape: RegisterDefaultHostManagementConfigurationResult)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
       end)
 
       api.add_operation(:register_default_patch_baseline, Seahorse::Model::Operation.new.tap do |o|

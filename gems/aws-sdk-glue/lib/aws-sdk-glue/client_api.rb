@@ -953,6 +953,7 @@ module Aws::Glue
     GlueTableAdditionalOptions = Shapes::MapShape.new(name: 'GlueTableAdditionalOptions')
     GlueTables = Shapes::ListShape.new(name: 'GlueTables')
     GlueVersionString = Shapes::StringShape.new(name: 'GlueVersionString')
+    GovernanceMode = Shapes::StringShape.new(name: 'GovernanceMode')
     GovernedCatalogSource = Shapes::StructureShape.new(name: 'GovernedCatalogSource')
     GovernedCatalogTarget = Shapes::StructureShape.new(name: 'GovernedCatalogTarget')
     GrokClassifier = Shapes::StructureShape.new(name: 'GrokClassifier')
@@ -7332,6 +7333,7 @@ module Aws::Glue
 
     ResourceUri.add_member(:resource_type, Shapes::ShapeRef.new(shape: ResourceType, location_name: "ResourceType"))
     ResourceUri.add_member(:uri, Shapes::ShapeRef.new(shape: URI, location_name: "Uri"))
+    ResourceUri.add_member(:last_modified, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModified"))
     ResourceUri.struct_class = Types::ResourceUri
 
     ResourceUriList.member = Shapes::ShapeRef.new(shape: ResourceUri)
@@ -8934,6 +8936,8 @@ module Aws::Glue
     UserDefinedFunction.add_member(:owner_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "OwnerType"))
     UserDefinedFunction.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreateTime"))
     UserDefinedFunction.add_member(:resource_uris, Shapes::ShapeRef.new(shape: ResourceUriList, location_name: "ResourceUris"))
+    UserDefinedFunction.add_member(:artifact_location, Shapes::ShapeRef.new(shape: URI, location_name: "ArtifactLocation"))
+    UserDefinedFunction.add_member(:governance_mode, Shapes::ShapeRef.new(shape: GovernanceMode, location_name: "GovernanceMode"))
     UserDefinedFunction.add_member(:catalog_id, Shapes::ShapeRef.new(shape: CatalogIdString, location_name: "CatalogId"))
     UserDefinedFunction.struct_class = Types::UserDefinedFunction
 
@@ -8943,6 +8947,8 @@ module Aws::Glue
     UserDefinedFunctionInput.add_member(:function_type, Shapes::ShapeRef.new(shape: FunctionType, location_name: "FunctionType"))
     UserDefinedFunctionInput.add_member(:owner_type, Shapes::ShapeRef.new(shape: PrincipalType, location_name: "OwnerType"))
     UserDefinedFunctionInput.add_member(:resource_uris, Shapes::ShapeRef.new(shape: ResourceUriList, location_name: "ResourceUris"))
+    UserDefinedFunctionInput.add_member(:artifact_location, Shapes::ShapeRef.new(shape: URI, location_name: "ArtifactLocation"))
+    UserDefinedFunctionInput.add_member(:governance_mode, Shapes::ShapeRef.new(shape: GovernanceMode, location_name: "GovernanceMode"))
     UserDefinedFunctionInput.struct_class = Types::UserDefinedFunctionInput
 
     UserDefinedFunctionList.member = Shapes::ShapeRef.new(shape: UserDefinedFunction)

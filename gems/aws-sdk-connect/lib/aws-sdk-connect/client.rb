@@ -5227,7 +5227,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, ASSIGN_SLA, END_ASSOCIATED_TASKS, SUBMIT_AUTO_EVALUATION, EXTRACT_INFORMATION, SEND_IN_APP_NOTIFICATION
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, ASSIGN_SLA, END_ASSOCIATED_TASKS, END_ASSOCIATED_EMAILS, SUBMIT_AUTO_EVALUATION, EXTRACT_INFORMATION, SEND_IN_APP_NOTIFICATION
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -5313,6 +5313,8 @@ module Aws::Connect
     #           },
     #         },
     #         end_associated_tasks_action: {
+    #         },
+    #         end_associated_emails_action: {
     #         },
     #         submit_auto_evaluation_action: {
     #           evaluation_form_id: "EvaluationFormId", # required
@@ -10081,7 +10083,7 @@ module Aws::Connect
     #   resp.rule.rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rule.function #=> String
     #   resp.rule.actions #=> Array
-    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
+    #   resp.rule.actions[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "END_ASSOCIATED_EMAILS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
     #   resp.rule.actions[0].task_action.name #=> String
     #   resp.rule.actions[0].task_action.description #=> String
     #   resp.rule.actions[0].task_action.contact_flow_id #=> String
@@ -19489,7 +19491,7 @@ module Aws::Connect
     #   resp.rule_summary_list[0].rule_capability_tiers #=> Array
     #   resp.rule_summary_list[0].rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rule_summary_list[0].action_summaries #=> Array
-    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
+    #   resp.rule_summary_list[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "END_ASSOCIATED_EMAILS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
     #   resp.rule_summary_list[0].created_time #=> Time
     #   resp.rule_summary_list[0].last_updated_time #=> Time
     #   resp.next_token #=> String
@@ -23696,7 +23698,7 @@ module Aws::Connect
     #   resp.rules[0].trigger_event_source.event_source_name #=> String, one of "OnPostCallAnalysisAvailable", "OnRealTimeCallAnalysisAvailable", "OnRealTimeChatAnalysisAvailable", "OnPostChatAnalysisAvailable", "OnAfterCallWorkAvailable", "OnAfterChatWorkAvailable", "OnEmailAnalysisAvailable", "OnZendeskTicketCreate", "OnZendeskTicketStatusUpdate", "OnSalesforceCaseCreate", "OnContactEvaluationSubmit", "OnMetricDataUpdate", "OnCaseCreate", "OnCaseUpdate", "OnSlaBreach", "OnAlertUpdate", "OnSchedulePublish", "OnScheduleUpdate", "OnScheduleTimeOffRequestActivity"
     #   resp.rules[0].trigger_event_source.integration_association_id #=> String
     #   resp.rules[0].action_summaries #=> Array
-    #   resp.rules[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
+    #   resp.rules[0].action_summaries[0].action_type #=> String, one of "CREATE_TASK", "ASSIGN_CONTACT_CATEGORY", "GENERATE_EVENTBRIDGE_EVENT", "SEND_NOTIFICATION", "CREATE_CASE", "UPDATE_CASE", "ASSIGN_SLA", "END_ASSOCIATED_TASKS", "END_ASSOCIATED_EMAILS", "SUBMIT_AUTO_EVALUATION", "EXTRACT_INFORMATION", "SEND_IN_APP_NOTIFICATION"
     #   resp.rules[0].rule_capability_tiers #=> Array
     #   resp.rules[0].rule_capability_tiers[0] #=> String, one of "GenerativeAI"
     #   resp.rules[0].publish_status #=> String, one of "DRAFT", "PUBLISHED"
@@ -31025,7 +31027,7 @@ module Aws::Connect
     #     function: "RuleFunction", # required
     #     actions: [ # required
     #       {
-    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, ASSIGN_SLA, END_ASSOCIATED_TASKS, SUBMIT_AUTO_EVALUATION, EXTRACT_INFORMATION, SEND_IN_APP_NOTIFICATION
+    #         action_type: "CREATE_TASK", # required, accepts CREATE_TASK, ASSIGN_CONTACT_CATEGORY, GENERATE_EVENTBRIDGE_EVENT, SEND_NOTIFICATION, CREATE_CASE, UPDATE_CASE, ASSIGN_SLA, END_ASSOCIATED_TASKS, END_ASSOCIATED_EMAILS, SUBMIT_AUTO_EVALUATION, EXTRACT_INFORMATION, SEND_IN_APP_NOTIFICATION
     #         task_action: {
     #           name: "TaskNameExpression", # required
     #           description: "TaskDescriptionExpression",
@@ -31111,6 +31113,8 @@ module Aws::Connect
     #           },
     #         },
     #         end_associated_tasks_action: {
+    #         },
+    #         end_associated_emails_action: {
     #         },
     #         submit_auto_evaluation_action: {
     #           evaluation_form_id: "EvaluationFormId", # required
@@ -32490,7 +32494,7 @@ module Aws::Connect
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-connect'
-      context[:gem_version] = '1.294.0'
+      context[:gem_version] = '1.295.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

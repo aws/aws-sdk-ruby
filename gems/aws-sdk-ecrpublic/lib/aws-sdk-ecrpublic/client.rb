@@ -1701,7 +1701,7 @@ module Aws::ECRPublic
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecrpublic'
-      context[:gem_version] = '1.76.0'
+      context[:gem_version] = '1.77.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

@@ -540,7 +540,7 @@ module Aws::SageMakerGeospatial
     class Geometry < Struct.new(
       :coordinates,
       :type)
-      SENSITIVE = []
+      SENSITIVE = [:coordinates]
       include Aws::Structure
     end
 
@@ -1375,7 +1375,7 @@ module Aws::SageMakerGeospatial
     #
     class MultiPolygonGeometryInput < Struct.new(
       :coordinates)
-      SENSITIVE = []
+      SENSITIVE = [:coordinates]
       include Aws::Structure
     end
 
@@ -1519,7 +1519,7 @@ module Aws::SageMakerGeospatial
     #
     class PolygonGeometryInput < Struct.new(
       :coordinates)
-      SENSITIVE = []
+      SENSITIVE = [:coordinates]
       include Aws::Structure
     end
 

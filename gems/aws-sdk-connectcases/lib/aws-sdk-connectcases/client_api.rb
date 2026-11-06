@@ -28,6 +28,15 @@ module Aws::ConnectCases
     AuditEventPerformedBy = Shapes::StructureShape.new(name: 'AuditEventPerformedBy')
     AuditEventType = Shapes::StringShape.new(name: 'AuditEventType')
     BasicLayout = Shapes::StructureShape.new(name: 'BasicLayout')
+    BatchCreateRelatedItemErrorEntry = Shapes::StructureShape.new(name: 'BatchCreateRelatedItemErrorEntry')
+    BatchCreateRelatedItemErrorEntryList = Shapes::ListShape.new(name: 'BatchCreateRelatedItemErrorEntryList')
+    BatchCreateRelatedItemIdentifier = Shapes::StructureShape.new(name: 'BatchCreateRelatedItemIdentifier')
+    BatchCreateRelatedItemRequest = Shapes::StructureShape.new(name: 'BatchCreateRelatedItemRequest')
+    BatchCreateRelatedItemRequestCasesList = Shapes::ListShape.new(name: 'BatchCreateRelatedItemRequestCasesList')
+    BatchCreateRelatedItemRequestClientTokenString = Shapes::StringShape.new(name: 'BatchCreateRelatedItemRequestClientTokenString')
+    BatchCreateRelatedItemResponse = Shapes::StructureShape.new(name: 'BatchCreateRelatedItemResponse')
+    BatchCreateRelatedItemSuccessEntry = Shapes::StructureShape.new(name: 'BatchCreateRelatedItemSuccessEntry')
+    BatchCreateRelatedItemSuccessEntryList = Shapes::ListShape.new(name: 'BatchCreateRelatedItemSuccessEntryList')
     BatchGetCaseRuleRequest = Shapes::StructureShape.new(name: 'BatchGetCaseRuleRequest')
     BatchGetCaseRuleResponse = Shapes::StructureShape.new(name: 'BatchGetCaseRuleResponse')
     BatchGetCaseRuleResponseCaseRulesList = Shapes::ListShape.new(name: 'BatchGetCaseRuleResponseCaseRulesList')
@@ -42,6 +51,16 @@ module Aws::ConnectCases
     BatchPutFieldOptionsRequestOptionsList = Shapes::ListShape.new(name: 'BatchPutFieldOptionsRequestOptionsList')
     BatchPutFieldOptionsResponse = Shapes::StructureShape.new(name: 'BatchPutFieldOptionsResponse')
     BatchPutFieldOptionsResponseErrorsList = Shapes::ListShape.new(name: 'BatchPutFieldOptionsResponseErrorsList')
+    BatchUpdateCaseErrorEntry = Shapes::StructureShape.new(name: 'BatchUpdateCaseErrorEntry')
+    BatchUpdateCaseErrorEntryList = Shapes::ListShape.new(name: 'BatchUpdateCaseErrorEntryList')
+    BatchUpdateCaseIdentifier = Shapes::StructureShape.new(name: 'BatchUpdateCaseIdentifier')
+    BatchUpdateCaseRequest = Shapes::StructureShape.new(name: 'BatchUpdateCaseRequest')
+    BatchUpdateCaseRequestCasesList = Shapes::ListShape.new(name: 'BatchUpdateCaseRequestCasesList')
+    BatchUpdateCaseRequestClientTokenString = Shapes::StringShape.new(name: 'BatchUpdateCaseRequestClientTokenString')
+    BatchUpdateCaseRequestFieldsList = Shapes::ListShape.new(name: 'BatchUpdateCaseRequestFieldsList')
+    BatchUpdateCaseResponse = Shapes::StructureShape.new(name: 'BatchUpdateCaseResponse')
+    BatchUpdateCaseSuccessEntry = Shapes::StructureShape.new(name: 'BatchUpdateCaseSuccessEntry')
+    BatchUpdateCaseSuccessEntryList = Shapes::ListShape.new(name: 'BatchUpdateCaseSuccessEntryList')
     Boolean = Shapes::BooleanShape.new(name: 'Boolean')
     BooleanCondition = Shapes::UnionShape.new(name: 'BooleanCondition')
     BooleanConditionList = Shapes::ListShape.new(name: 'BooleanConditionList')
@@ -53,6 +72,8 @@ module Aws::ConnectCases
     CaseFilterAndAllList = Shapes::ListShape.new(name: 'CaseFilterAndAllList')
     CaseFilterOrAllList = Shapes::ListShape.new(name: 'CaseFilterOrAllList')
     CaseId = Shapes::StringShape.new(name: 'CaseId')
+    CaseIdentifier = Shapes::StructureShape.new(name: 'CaseIdentifier')
+    CaseIdentifierUnion = Shapes::UnionShape.new(name: 'CaseIdentifierUnion')
     CaseRuleArn = Shapes::StringShape.new(name: 'CaseRuleArn')
     CaseRuleDescription = Shapes::StringShape.new(name: 'CaseRuleDescription')
     CaseRuleDetails = Shapes::UnionShape.new(name: 'CaseRuleDetails')
@@ -62,7 +83,9 @@ module Aws::ConnectCases
     CaseRuleIdentifierList = Shapes::ListShape.new(name: 'CaseRuleIdentifierList')
     CaseRuleName = Shapes::StringShape.new(name: 'CaseRuleName')
     CaseRuleSummary = Shapes::StructureShape.new(name: 'CaseRuleSummary')
+    CaseStatus = Shapes::StringShape.new(name: 'CaseStatus')
     CaseSummary = Shapes::StructureShape.new(name: 'CaseSummary')
+    CaseTitle = Shapes::StringShape.new(name: 'CaseTitle')
     Channel = Shapes::StringShape.new(name: 'Channel')
     CommentBody = Shapes::StringShape.new(name: 'CommentBody')
     CommentBodyTextType = Shapes::StringShape.new(name: 'CommentBodyTextType')
@@ -107,6 +130,7 @@ module Aws::ConnectCases
     CustomInputContentFieldsList = Shapes::ListShape.new(name: 'CustomInputContentFieldsList')
     CustomUpdateContent = Shapes::StructureShape.new(name: 'CustomUpdateContent')
     CustomUpdateContentFieldsList = Shapes::ListShape.new(name: 'CustomUpdateContentFieldsList')
+    CustomerProfileArn = Shapes::StringShape.new(name: 'CustomerProfileArn')
     DeleteCaseRequest = Shapes::StructureShape.new(name: 'DeleteCaseRequest')
     DeleteCaseResponse = Shapes::StructureShape.new(name: 'DeleteCaseResponse')
     DeleteCaseRuleRequest = Shapes::StructureShape.new(name: 'DeleteCaseRuleRequest')
@@ -143,6 +167,7 @@ module Aws::ConnectCases
     FieldGroupNameString = Shapes::StringShape.new(name: 'FieldGroupNameString')
     FieldId = Shapes::StringShape.new(name: 'FieldId')
     FieldIdentifier = Shapes::StructureShape.new(name: 'FieldIdentifier')
+    FieldIdentifierUnion = Shapes::UnionShape.new(name: 'FieldIdentifierUnion')
     FieldItem = Shapes::StructureShape.new(name: 'FieldItem')
     FieldName = Shapes::StringShape.new(name: 'FieldName')
     FieldNamespace = Shapes::StringShape.new(name: 'FieldNamespace')
@@ -155,6 +180,7 @@ module Aws::ConnectCases
     FieldSummary = Shapes::StructureShape.new(name: 'FieldSummary')
     FieldType = Shapes::StringShape.new(name: 'FieldType')
     FieldValue = Shapes::StructureShape.new(name: 'FieldValue')
+    FieldValueInput = Shapes::StructureShape.new(name: 'FieldValueInput')
     FieldValueList = Shapes::ListShape.new(name: 'FieldValueList')
     FieldValueUnion = Shapes::UnionShape.new(name: 'FieldValueUnion')
     FieldValueUnionStringValueString = Shapes::StringShape.new(name: 'FieldValueUnionStringValueString')
@@ -228,6 +254,8 @@ module Aws::ConnectCases
     ParentChildFieldOptionsMappingList = Shapes::ListShape.new(name: 'ParentChildFieldOptionsMappingList')
     PutCaseEventConfigurationRequest = Shapes::StructureShape.new(name: 'PutCaseEventConfigurationRequest')
     PutCaseEventConfigurationResponse = Shapes::StructureShape.new(name: 'PutCaseEventConfigurationResponse')
+    ReferenceId = Shapes::StringShape.new(name: 'ReferenceId')
+    ReferenceNumber = Shapes::StringShape.new(name: 'ReferenceNumber')
     RelatedItemArn = Shapes::StringShape.new(name: 'RelatedItemArn')
     RelatedItemContent = Shapes::UnionShape.new(name: 'RelatedItemContent')
     RelatedItemEventIncludedData = Shapes::StructureShape.new(name: 'RelatedItemEventIncludedData')
@@ -366,6 +394,36 @@ module Aws::ConnectCases
     BasicLayout.add_member(:more_info, Shapes::ShapeRef.new(shape: LayoutSections, location_name: "moreInfo"))
     BasicLayout.struct_class = Types::BasicLayout
 
+    BatchCreateRelatedItemErrorEntry.add_member(:case_identifier, Shapes::ShapeRef.new(shape: CaseIdentifier, required: true, location_name: "caseIdentifier"))
+    BatchCreateRelatedItemErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorCode"))
+    BatchCreateRelatedItemErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorMessage"))
+    BatchCreateRelatedItemErrorEntry.struct_class = Types::BatchCreateRelatedItemErrorEntry
+
+    BatchCreateRelatedItemErrorEntryList.member = Shapes::ShapeRef.new(shape: BatchCreateRelatedItemErrorEntry)
+
+    BatchCreateRelatedItemIdentifier.add_member(:case_identifier, Shapes::ShapeRef.new(shape: CaseIdentifierUnion, required: true, location_name: "caseIdentifier"))
+    BatchCreateRelatedItemIdentifier.struct_class = Types::BatchCreateRelatedItemIdentifier
+
+    BatchCreateRelatedItemRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    BatchCreateRelatedItemRequest.add_member(:content, Shapes::ShapeRef.new(shape: RelatedItemInputContent, required: true, location_name: "content"))
+    BatchCreateRelatedItemRequest.add_member(:cases, Shapes::ShapeRef.new(shape: BatchCreateRelatedItemRequestCasesList, required: true, location_name: "cases"))
+    BatchCreateRelatedItemRequest.add_member(:performed_by, Shapes::ShapeRef.new(shape: UserUnion, location_name: "performedBy"))
+    BatchCreateRelatedItemRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: BatchCreateRelatedItemRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    BatchCreateRelatedItemRequest.struct_class = Types::BatchCreateRelatedItemRequest
+
+    BatchCreateRelatedItemRequestCasesList.member = Shapes::ShapeRef.new(shape: BatchCreateRelatedItemIdentifier)
+
+    BatchCreateRelatedItemResponse.add_member(:successful_items, Shapes::ShapeRef.new(shape: BatchCreateRelatedItemSuccessEntryList, required: true, location_name: "successfulItems"))
+    BatchCreateRelatedItemResponse.add_member(:failed_items, Shapes::ShapeRef.new(shape: BatchCreateRelatedItemErrorEntryList, required: true, location_name: "failedItems"))
+    BatchCreateRelatedItemResponse.struct_class = Types::BatchCreateRelatedItemResponse
+
+    BatchCreateRelatedItemSuccessEntry.add_member(:case_identifier, Shapes::ShapeRef.new(shape: CaseIdentifier, required: true, location_name: "caseIdentifier"))
+    BatchCreateRelatedItemSuccessEntry.add_member(:related_item_id, Shapes::ShapeRef.new(shape: RelatedItemId, required: true, location_name: "relatedItemId"))
+    BatchCreateRelatedItemSuccessEntry.add_member(:related_item_arn, Shapes::ShapeRef.new(shape: RelatedItemArn, required: true, location_name: "relatedItemArn"))
+    BatchCreateRelatedItemSuccessEntry.struct_class = Types::BatchCreateRelatedItemSuccessEntry
+
+    BatchCreateRelatedItemSuccessEntryList.member = Shapes::ShapeRef.new(shape: BatchCreateRelatedItemSuccessEntry)
+
     BatchGetCaseRuleRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location: "uri", location_name: "domainId"))
     BatchGetCaseRuleRequest.add_member(:case_rules, Shapes::ShapeRef.new(shape: CaseRuleIdentifierList, required: true, location_name: "caseRules"))
     BatchGetCaseRuleRequest.struct_class = Types::BatchGetCaseRuleRequest
@@ -406,6 +464,39 @@ module Aws::ConnectCases
     BatchPutFieldOptionsResponse.struct_class = Types::BatchPutFieldOptionsResponse
 
     BatchPutFieldOptionsResponseErrorsList.member = Shapes::ShapeRef.new(shape: FieldOptionError)
+
+    BatchUpdateCaseErrorEntry.add_member(:case_identifier, Shapes::ShapeRef.new(shape: CaseIdentifier, required: true, location_name: "caseIdentifier"))
+    BatchUpdateCaseErrorEntry.add_member(:error_code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorCode"))
+    BatchUpdateCaseErrorEntry.add_member(:error_message, Shapes::ShapeRef.new(shape: String, required: true, location_name: "errorMessage"))
+    BatchUpdateCaseErrorEntry.struct_class = Types::BatchUpdateCaseErrorEntry
+
+    BatchUpdateCaseErrorEntryList.member = Shapes::ShapeRef.new(shape: BatchUpdateCaseErrorEntry)
+
+    BatchUpdateCaseIdentifier.add_member(:case_identifier, Shapes::ShapeRef.new(shape: CaseIdentifierUnion, required: true, location_name: "caseIdentifier"))
+    BatchUpdateCaseIdentifier.struct_class = Types::BatchUpdateCaseIdentifier
+
+    BatchUpdateCaseRequest.add_member(:domain_id, Shapes::ShapeRef.new(shape: DomainId, required: true, location_name: "domainId"))
+    BatchUpdateCaseRequest.add_member(:cases, Shapes::ShapeRef.new(shape: BatchUpdateCaseRequestCasesList, required: true, location_name: "cases"))
+    BatchUpdateCaseRequest.add_member(:fields, Shapes::ShapeRef.new(shape: BatchUpdateCaseRequestFieldsList, required: true, location_name: "fields"))
+    BatchUpdateCaseRequest.add_member(:performed_by, Shapes::ShapeRef.new(shape: UserUnion, location_name: "performedBy"))
+    BatchUpdateCaseRequest.add_member(:title, Shapes::ShapeRef.new(shape: CaseTitle, location_name: "title"))
+    BatchUpdateCaseRequest.add_member(:status, Shapes::ShapeRef.new(shape: CaseStatus, location_name: "status"))
+    BatchUpdateCaseRequest.add_member(:customer_id, Shapes::ShapeRef.new(shape: CustomerProfileArn, location_name: "customerId"))
+    BatchUpdateCaseRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: BatchUpdateCaseRequestClientTokenString, location_name: "clientToken", metadata: {"idempotencyToken" => true}))
+    BatchUpdateCaseRequest.struct_class = Types::BatchUpdateCaseRequest
+
+    BatchUpdateCaseRequestCasesList.member = Shapes::ShapeRef.new(shape: BatchUpdateCaseIdentifier)
+
+    BatchUpdateCaseRequestFieldsList.member = Shapes::ShapeRef.new(shape: FieldValueInput)
+
+    BatchUpdateCaseResponse.add_member(:successful_cases, Shapes::ShapeRef.new(shape: BatchUpdateCaseSuccessEntryList, required: true, location_name: "successfulCases"))
+    BatchUpdateCaseResponse.add_member(:failed_cases, Shapes::ShapeRef.new(shape: BatchUpdateCaseErrorEntryList, required: true, location_name: "failedCases"))
+    BatchUpdateCaseResponse.struct_class = Types::BatchUpdateCaseResponse
+
+    BatchUpdateCaseSuccessEntry.add_member(:case_identifier, Shapes::ShapeRef.new(shape: CaseIdentifier, required: true, location_name: "caseIdentifier"))
+    BatchUpdateCaseSuccessEntry.struct_class = Types::BatchUpdateCaseSuccessEntry
+
+    BatchUpdateCaseSuccessEntryList.member = Shapes::ShapeRef.new(shape: BatchUpdateCaseSuccessEntry)
 
     BooleanCondition.add_member(:equal_to, Shapes::ShapeRef.new(shape: BooleanOperands, location_name: "equalTo"))
     BooleanCondition.add_member(:not_equal_to, Shapes::ShapeRef.new(shape: BooleanOperands, location_name: "notEqualTo"))
@@ -448,6 +539,19 @@ module Aws::ConnectCases
     CaseFilterAndAllList.member = Shapes::ShapeRef.new(shape: CaseFilter)
 
     CaseFilterOrAllList.member = Shapes::ShapeRef.new(shape: CaseFilter)
+
+    CaseIdentifier.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "caseId"))
+    CaseIdentifier.add_member(:reference_number, Shapes::ShapeRef.new(shape: ReferenceNumber, location_name: "referenceNumber"))
+    CaseIdentifier.add_member(:reference_id, Shapes::ShapeRef.new(shape: ReferenceId, location_name: "referenceId"))
+    CaseIdentifier.struct_class = Types::CaseIdentifier
+
+    CaseIdentifierUnion.add_member(:case_id, Shapes::ShapeRef.new(shape: CaseId, location_name: "caseId"))
+    CaseIdentifierUnion.add_member(:reference_id, Shapes::ShapeRef.new(shape: ReferenceId, location_name: "referenceId"))
+    CaseIdentifierUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    CaseIdentifierUnion.add_member_subclass(:case_id, Types::CaseIdentifierUnion::CaseId)
+    CaseIdentifierUnion.add_member_subclass(:reference_id, Types::CaseIdentifierUnion::ReferenceId)
+    CaseIdentifierUnion.add_member_subclass(:unknown, Types::CaseIdentifierUnion::Unknown)
+    CaseIdentifierUnion.struct_class = Types::CaseIdentifierUnion
 
     CaseRuleDetails.add_member(:required, Shapes::ShapeRef.new(shape: RequiredCaseRule, location_name: "required"))
     CaseRuleDetails.add_member(:field_options, Shapes::ShapeRef.new(shape: FieldOptionsCaseRule, location_name: "fieldOptions"))
@@ -725,6 +829,14 @@ module Aws::ConnectCases
     FieldIdentifier.add_member(:id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "id"))
     FieldIdentifier.struct_class = Types::FieldIdentifier
 
+    FieldIdentifierUnion.add_member(:id, Shapes::ShapeRef.new(shape: FieldId, location_name: "id"))
+    FieldIdentifierUnion.add_member(:name, Shapes::ShapeRef.new(shape: FieldName, location_name: "name"))
+    FieldIdentifierUnion.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    FieldIdentifierUnion.add_member_subclass(:id, Types::FieldIdentifierUnion::Id)
+    FieldIdentifierUnion.add_member_subclass(:name, Types::FieldIdentifierUnion::Name)
+    FieldIdentifierUnion.add_member_subclass(:unknown, Types::FieldIdentifierUnion::Unknown)
+    FieldIdentifierUnion.struct_class = Types::FieldIdentifierUnion
+
     FieldItem.add_member(:id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "id"))
     FieldItem.struct_class = Types::FieldItem
 
@@ -756,6 +868,10 @@ module Aws::ConnectCases
     FieldValue.add_member(:id, Shapes::ShapeRef.new(shape: FieldId, required: true, location_name: "id"))
     FieldValue.add_member(:value, Shapes::ShapeRef.new(shape: FieldValueUnion, required: true, location_name: "value"))
     FieldValue.struct_class = Types::FieldValue
+
+    FieldValueInput.add_member(:field_identifier, Shapes::ShapeRef.new(shape: FieldIdentifierUnion, required: true, location_name: "fieldIdentifier"))
+    FieldValueInput.add_member(:value, Shapes::ShapeRef.new(shape: FieldValueUnion, required: true, location_name: "value"))
+    FieldValueInput.struct_class = Types::FieldValueInput
 
     FieldValueList.member = Shapes::ShapeRef.new(shape: FieldValue)
 
@@ -1375,6 +1491,21 @@ module Aws::ConnectCases
         "uid" => "connectcases-2022-10-03",
       }
 
+      api.add_operation(:batch_create_related_item, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchCreateRelatedItem"
+        o.http_method = "POST"
+        o.http_request_uri = "/cases:batchCreateRelatedItem"
+        o.input = Shapes::ShapeRef.new(shape: BatchCreateRelatedItemRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchCreateRelatedItemResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
       api.add_operation(:batch_get_case_rule, Seahorse::Model::Operation.new.tap do |o|
         o.name = "BatchGetCaseRule"
         o.http_method = "POST"
@@ -1413,6 +1544,20 @@ module Aws::ConnectCases
         o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ServiceQuotaExceededException)
+      end)
+
+      api.add_operation(:batch_update_case, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "BatchUpdateCase"
+        o.http_method = "PUT"
+        o.http_request_uri = "/cases:batchUpdateCase"
+        o.input = Shapes::ShapeRef.new(shape: BatchUpdateCaseRequest)
+        o.output = Shapes::ShapeRef.new(shape: BatchUpdateCaseResponse)
+        o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
+        o.errors << Shapes::ShapeRef.new(shape: ThrottlingException)
+        o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
       end)
 
       api.add_operation(:create_case, Seahorse::Model::Operation.new.tap do |o|

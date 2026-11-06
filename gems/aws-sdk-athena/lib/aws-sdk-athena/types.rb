@@ -947,6 +947,71 @@ module Aws::Athena
       include Aws::Structure
     end
 
+    # @!attribute [rw] client_request_token
+    #   A unique case-sensitive string used to ensure the request to create
+    #   the system table configuration is idempotent (executes only once).
+    #   If another `CreateSystemTableConfiguration` request is received with
+    #   the same client token but different parameters, the request fails
+    #   with an `InvalidRequestException`.
+    #
+    #   **A suitable default value is auto-generated.** You should normally
+    #   not need to pass this option.
+    #   @return [String]
+    #
+    # @!attribute [rw] table_name
+    #   The system table configuration to create. The only accepted value is
+    #   `ALL`, the reserved keyword that enables all system tables for the
+    #   account.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) key to use for encrypting the system table data.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   The tags to add to the system table configuration.
+    #   @return [Array<Types::Tag>]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateSystemTableConfigurationInput AWS API Documentation
+    #
+    class CreateSystemTableConfigurationInput < Struct.new(
+      :client_request_token,
+      :table_name,
+      :kms_key_arn,
+      :tags)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The system table configuration that was created. Always `ALL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) key used for encrypting the system table data.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the system table configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time the system table configuration was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/CreateSystemTableConfigurationOutput AWS API Documentation
+    #
+    class CreateSystemTableConfigurationOutput < Struct.new(
+      :table_name,
+      :kms_key_arn,
+      :created_at,
+      :last_modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] name
     #   The workgroup name.
     #   @return [String]
@@ -1375,6 +1440,23 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeletePreparedStatementOutput AWS API Documentation
     #
     class DeletePreparedStatementOutput < Aws::EmptyStructure; end
+
+    # @!attribute [rw] table_name
+    #   The system table configuration to delete. The only accepted value is
+    #   `ALL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteSystemTableConfigurationInput AWS API Documentation
+    #
+    class DeleteSystemTableConfigurationInput < Struct.new(
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/DeleteSystemTableConfigurationOutput AWS API Documentation
+    #
+    class DeleteSystemTableConfigurationOutput < Aws::EmptyStructure; end
 
     # @!attribute [rw] work_group
     #   The unique name of the workgroup to delete.
@@ -2183,6 +2265,47 @@ module Aws::Athena
     class GetSessionStatusResponse < Struct.new(
       :session_id,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The system table configuration to retrieve. The only accepted value
+    #   is `ALL`.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetSystemTableConfigurationInput AWS API Documentation
+    #
+    class GetSystemTableConfigurationInput < Struct.new(
+      :table_name)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The system table configuration. Always `ALL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) key used for encrypting the system table data.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the system table configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time the system table configuration was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/GetSystemTableConfigurationOutput AWS API Documentation
+    #
+    class GetSystemTableConfigurationOutput < Struct.new(
+      :table_name,
+      :kms_key_arn,
+      :created_at,
+      :last_modified_at)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3015,6 +3138,45 @@ module Aws::Athena
     class ListSessionsResponse < Struct.new(
       :next_token,
       :sessions)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   Specifies the maximum number of results to return.
+    #   @return [Integer]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListSystemTableStatusesInput AWS API Documentation
+    #
+    class ListSystemTableStatusesInput < Struct.new(
+      :next_token,
+      :max_results)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] items
+    #   The list of system tables and their enablement status for the
+    #   current account.
+    #   @return [Array<Types::SystemTableStatus>]
+    #
+    # @!attribute [rw] next_token
+    #   A token generated by the Athena service that specifies where to
+    #   continue pagination if a previous request was truncated. To obtain
+    #   the next set of pages, pass in the NextToken from the response
+    #   object of the previous page call.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/ListSystemTableStatusesOutput AWS API Documentation
+    #
+    class ListSystemTableStatusesOutput < Struct.new(
+      :items,
+      :next_token)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4608,6 +4770,12 @@ module Aws::Athena
     #   the following values: The name of the `Classifications` should be
     #   `athena-query-engine-properties`, with the only allowed properties
     #   as `max-dpu-count` and `min-dpu-count`.
+    #
+    #   **Note:** When using StartQueryExecution, only the Classifications
+    #   field applies. Do not specify the other fields (AdditionalConfigs,
+    #   CoordinatorDpuSize, DefaultExecutorDpuSize, MaxConcurrentDpus, and
+    #   SparkProperties), as these are used only with StartSession to
+    #   configure Apache Spark-based sessions.
     #   @return [Types::EngineConfiguration]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StartQueryExecutionInput AWS API Documentation
@@ -4810,6 +4978,27 @@ module Aws::Athena
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/StopQueryExecutionOutput AWS API Documentation
     #
     class StopQueryExecutionOutput < Aws::EmptyStructure; end
+
+    # The enablement status of a single system table. Because system tables
+    # are enabled at the account level, every status reflects the same
+    # account-wide state.
+    #
+    # @!attribute [rw] table_name
+    #   The name of the system table, such as `QUERY_EXECUTIONS`.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Indicates whether the system table is enabled for the account.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/SystemTableStatus AWS API Documentation
+    #
+    class SystemTableStatus < Struct.new(
+      :table_name,
+      :enabled)
+      SENSITIVE = []
+      include Aws::Structure
+    end
 
     # Contains metadata for a table.
     #
@@ -5312,6 +5501,55 @@ module Aws::Athena
     #
     class UpdatePreparedStatementOutput < Aws::EmptyStructure; end
 
+    # @!attribute [rw] table_name
+    #   The system table configuration to update. The only accepted value is
+    #   `ALL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) key to use for encrypting the system table data. The
+    #   encryption key is immutable while the system table exists, so a
+    #   change takes effect only after the table has been deleted.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateSystemTableConfigurationInput AWS API Documentation
+    #
+    class UpdateSystemTableConfigurationInput < Struct.new(
+      :table_name,
+      :kms_key_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] table_name
+    #   The system table configuration. Always `ALL`.
+    #   @return [String]
+    #
+    # @!attribute [rw] kms_key_arn
+    #   The Amazon Resource Name (ARN) of the AWS Key Management Service
+    #   (AWS KMS) key used for encrypting the system table data.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The date and time the system table configuration was created.
+    #   @return [Time]
+    #
+    # @!attribute [rw] last_modified_at
+    #   The date and time the system table configuration was last modified.
+    #   @return [Time]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/UpdateSystemTableConfigurationOutput AWS API Documentation
+    #
+    class UpdateSystemTableConfigurationOutput < Struct.new(
+      :table_name,
+      :kms_key_arn,
+      :created_at,
+      :last_modified_at)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # @!attribute [rw] work_group
     #   The specified workgroup that will be updated.
     #   @return [String]
@@ -5532,6 +5770,12 @@ module Aws::Athena
     #   results.
     #   @return [Types::QueryResultsS3AccessGrantsConfiguration]
     #
+    # @!attribute [rw] system_table_statuses
+    #   The read-only enablement status of each system table for the
+    #   account. This field is returned by GetWorkGroup and is ignored on
+    #   write.
+    #   @return [Array<Types::SystemTableStatus>]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/athena-2017-05-18/WorkGroupConfiguration AWS API Documentation
     #
     class WorkGroupConfiguration < Struct.new(
@@ -5549,7 +5793,8 @@ module Aws::Athena
       :customer_content_encryption_configuration,
       :enable_minimum_encryption_configuration,
       :identity_center_configuration,
-      :query_results_s3_access_grants_configuration)
+      :query_results_s3_access_grants_configuration,
+      :system_table_statuses)
       SENSITIVE = []
       include Aws::Structure
     end

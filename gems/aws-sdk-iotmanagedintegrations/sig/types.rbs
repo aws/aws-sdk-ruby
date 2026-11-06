@@ -1148,7 +1148,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor attributes: untyped
       attr_accessor commands: ::Hash[::String, untyped]
       attr_accessor events: ::Hash[::String, untyped]
-      SENSITIVE: [:attributes]
+      SENSITIVE: [:attributes, :commands, :events]
     end
 
     class MatterEndpoint
@@ -1438,7 +1438,7 @@ module Aws::IoTManagedIntegrations
       attr_accessor connector_device_id_list: ::Array[::String]
       attr_accessor protocol: ("ZWAVE" | "ZIGBEE" | "CUSTOM")
       attr_accessor end_device_identifier: ::String
-      SENSITIVE: [:authentication_material, :tags]
+      SENSITIVE: [:authentication_material, :tags, :connector_device_id_list]
     end
 
     class StartDeviceDiscoveryResponse

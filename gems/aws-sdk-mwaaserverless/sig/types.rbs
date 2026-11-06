@@ -86,7 +86,7 @@ module Aws::MWAAServerless
 
     class Environment
       attr_accessor variables: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:variables]
     end
 
     class GetTaskInstanceRequest

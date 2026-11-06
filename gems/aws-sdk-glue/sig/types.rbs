@@ -6588,6 +6588,7 @@ module Aws::Glue
     class ResourceUri
       attr_accessor resource_type: ("JAR" | "FILE" | "ARCHIVE")
       attr_accessor uri: ::String
+      attr_accessor last_modified: ::Time
       SENSITIVE: []
     end
 
@@ -8599,6 +8600,8 @@ module Aws::Glue
       attr_accessor owner_type: ("USER" | "ROLE" | "GROUP")
       attr_accessor create_time: ::Time
       attr_accessor resource_uris: ::Array[Types::ResourceUri]
+      attr_accessor artifact_location: ::String
+      attr_accessor governance_mode: ("IAM_ONLY" | "LAKE_FORMATION")
       attr_accessor catalog_id: ::String
       SENSITIVE: []
     end
@@ -8610,6 +8613,8 @@ module Aws::Glue
       attr_accessor function_type: ("REGULAR_FUNCTION" | "AGGREGATE_FUNCTION" | "STORED_PROCEDURE")
       attr_accessor owner_type: ("USER" | "ROLE" | "GROUP")
       attr_accessor resource_uris: ::Array[Types::ResourceUri]
+      attr_accessor artifact_location: ::String
+      attr_accessor governance_mode: ("IAM_ONLY" | "LAKE_FORMATION")
       SENSITIVE: []
     end
 

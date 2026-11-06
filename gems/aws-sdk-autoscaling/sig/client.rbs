@@ -435,6 +435,7 @@ module Aws
       def describe_auto_scaling_groups: (
                                           ?auto_scaling_group_names: Array[::String],
                                           ?include_instances: bool,
+                                          ?include_managed_resources: bool,
                                           ?next_token: ::String,
                                           ?max_records: ::Integer,
                                           ?filters: Array[
@@ -454,6 +455,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_auto_scaling_instances-instance_method
       def describe_auto_scaling_instances: (
                                              ?instance_ids: Array[::String],
+                                             ?include_managed_resources: bool,
                                              ?max_records: ::Integer,
                                              ?next_token: ::String
                                            ) -> _DescribeAutoScalingInstancesResponseSuccess
@@ -556,6 +558,7 @@ module Aws
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Client.html#describe_notification_configurations-instance_method
       def describe_notification_configurations: (
                                                   ?auto_scaling_group_names: Array[::String],
+                                                  ?include_managed_resources: bool,
                                                   ?next_token: ::String,
                                                   ?max_records: ::Integer
                                                 ) -> _DescribeNotificationConfigurationsResponseSuccess
@@ -571,6 +574,7 @@ module Aws
                                ?auto_scaling_group_name: ::String,
                                ?policy_names: Array[::String],
                                ?policy_types: Array[::String],
+                               ?include_managed_resources: bool,
                                ?next_token: ::String,
                                ?max_records: ::Integer
                              ) -> _DescribePoliciesResponseSuccess
@@ -586,6 +590,7 @@ module Aws
                                          ?activity_ids: Array[::String],
                                          ?auto_scaling_group_name: ::String,
                                          ?include_deleted_groups: bool,
+                                         ?include_managed_resources: bool,
                                          ?max_records: ::Integer,
                                          ?next_token: ::String,
                                          ?filters: Array[
@@ -616,6 +621,7 @@ module Aws
                                         ?scheduled_action_names: Array[::String],
                                         ?start_time: ::Time,
                                         ?end_time: ::Time,
+                                        ?include_managed_resources: bool,
                                         ?next_token: ::String,
                                         ?max_records: ::Integer
                                       ) -> _DescribeScheduledActionsResponseSuccess
@@ -634,6 +640,7 @@ module Aws
                                values: Array[::String]?
                              }
                            ],
+                           ?include_managed_resources: bool,
                            ?next_token: ::String,
                            ?max_records: ::Integer
                          ) -> _DescribeTagsResponseSuccess
@@ -1141,6 +1148,7 @@ module Aws
       def wait_until: (:group_exists waiter_name, 
                     ?auto_scaling_group_names: Array[::String],
                     ?include_instances: bool,
+                    ?include_managed_resources: bool,
                     ?next_token: ::String,
                     ?max_records: ::Integer,
                     ?filters: Array[
@@ -1154,6 +1162,7 @@ module Aws
                     | (:group_in_service waiter_name, 
                     ?auto_scaling_group_names: Array[::String],
                     ?include_instances: bool,
+                    ?include_managed_resources: bool,
                     ?next_token: ::String,
                     ?max_records: ::Integer,
                     ?filters: Array[
@@ -1167,6 +1176,7 @@ module Aws
                     | (:group_not_exists waiter_name, 
                     ?auto_scaling_group_names: Array[::String],
                     ?include_instances: bool,
+                    ?include_managed_resources: bool,
                     ?next_token: ::String,
                     ?max_records: ::Integer,
                     ?filters: Array[

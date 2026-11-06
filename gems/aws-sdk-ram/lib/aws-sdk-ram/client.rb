@@ -708,6 +708,12 @@ module Aws::RAM
     #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
     #   [2]: https://console.aws.amazon.com/ram/home#Permissions:
     #
+    # @option params [Array<Types::PermissionTemplateParameterInput>] :permission_template_parameters
+    #   Specifies the template parameter values for the permission being
+    #   associated. You must provide values for all parameters declared in the
+    #   permission template. This parameter is required only if the specified
+    #   permission has template parameters.
+    #
     # @option params [Boolean] :replace
     #   Specifies whether the specified permission should replace the existing
     #   permission associated with the resource share. Use `true` to replace
@@ -765,6 +771,12 @@ module Aws::RAM
     #   resp = client.associate_resource_share_permission({
     #     resource_share_arn: "String", # required
     #     permission_arn: "String", # required
+    #     permission_template_parameters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
     #     replace: false,
     #     client_token: "String",
     #     permission_version: 1,
@@ -834,6 +846,14 @@ module Aws::RAM
     #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
     #
+    # @option params [Array<Types::PermissionTemplateParameterDeclaration>] :permission_template_parameters
+    #   Specifies a list of template parameter declarations for this
+    #   permission. Each declaration defines a named placeholder that can be
+    #   used in the policy template using the syntax `@{parameterName}`.
+    #   Template parameters can only appear in Condition Key and Condition
+    #   Value fields of the policy. When you associate this permission with a
+    #   resource share, you must provide values for all declared parameters.
+    #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive identifier that you provide to
     #   ensure the idempotency of the request. This lets you safely retry the
@@ -868,6 +888,13 @@ module Aws::RAM
     #     name: "PermissionName", # required
     #     resource_type: "String", # required
     #     policy_template: "Policy", # required
+    #     permission_template_parameters: [
+    #       {
+    #         name: "String",
+    #         type: "STRING", # accepts STRING, STRING_LIST
+    #         description: "String",
+    #       },
+    #     ],
     #     client_token: "String",
     #     tags: [
     #       {
@@ -890,9 +917,16 @@ module Aws::RAM
     #   resp.permission.is_resource_type_default #=> Boolean
     #   resp.permission.permission_type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
     #   resp.permission.feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
+    #   resp.permission.permission_template_parameters #=> Array
+    #   resp.permission.permission_template_parameters[0].name #=> String
+    #   resp.permission.permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.permission.permission_template_parameters[0].description #=> String
+    #   resp.permission.permission_template_parameters[0].values #=> Array
+    #   resp.permission.permission_template_parameters[0].values[0] #=> String
     #   resp.permission.tags #=> Array
     #   resp.permission.tags[0].key #=> String
     #   resp.permission.tags[0].value #=> String
+    #   resp.permission.resource_owner #=> String, one of "SELF", "OTHER-ACCOUNTS"
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreatePermission AWS API Documentation
@@ -954,6 +988,13 @@ module Aws::RAM
     #   [1]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
     #   [2]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
     #
+    # @option params [Array<Types::PermissionTemplateParameterDeclaration>] :permission_template_parameters
+    #   Specifies a list of template parameter declarations for this version
+    #   of the permission. Each declaration defines a named placeholder that
+    #   can be used in the policy template. Because each version is
+    #   independent, you can define the same or a different set of template
+    #   parameters for each version.
+    #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive identifier that you provide to
     #   ensure the idempotency of the request. This lets you safely retry the
@@ -983,6 +1024,13 @@ module Aws::RAM
     #   resp = client.create_permission_version({
     #     permission_arn: "String", # required
     #     policy_template: "Policy", # required
+    #     permission_template_parameters: [
+    #       {
+    #         name: "String",
+    #         type: "STRING", # accepts STRING, STRING_LIST
+    #         description: "String",
+    #       },
+    #     ],
     #     client_token: "String",
     #   })
     #
@@ -994,15 +1042,20 @@ module Aws::RAM
     #   resp.permission.name #=> String
     #   resp.permission.resource_type #=> String
     #   resp.permission.permission #=> String
+    #   resp.permission.permission_template_parameters #=> Array
+    #   resp.permission.permission_template_parameters[0].name #=> String
+    #   resp.permission.permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.permission.permission_template_parameters[0].description #=> String
     #   resp.permission.creation_time #=> Time
     #   resp.permission.last_updated_time #=> Time
     #   resp.permission.is_resource_type_default #=> Boolean
     #   resp.permission.permission_type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
     #   resp.permission.feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
-    #   resp.permission.status #=> String, one of "ATTACHABLE", "UNATTACHABLE", "DELETING", "DELETED"
+    #   resp.permission.status #=> String, one of "ATTACHABLE", "UNATTACHABLE", "DELETING", "DELETED", "DEPRECATED"
     #   resp.permission.tags #=> Array
     #   resp.permission.tags[0].key #=> String
     #   resp.permission.tags[0].value #=> String
+    #   resp.permission.resource_owner #=> String, one of "SELF", "OTHER-ACCOUNTS"
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/CreatePermissionVersion AWS API Documentation
@@ -1123,6 +1176,13 @@ module Aws::RAM
     #   prevent confused deputy attacks by applying constraints on where
     #   service principals can access resources from.
     #
+    # @option params [Array<Types::PermissionArnAndTemplateParameters>] :permission_template_parameters
+    #   Specifies the template parameter values for each permission being
+    #   associated that has template parameters. Each entry maps a permission
+    #   ARN to the parameter values to use when rendering the permission
+    #   template for this resource share. You must provide values for all
+    #   parameters declared in each permission template.
+    #
     # @option params [Types::ResourceShareConfiguration] :resource_share_configuration
     #   Specifies the configuration of this resource share.
     #
@@ -1147,6 +1207,17 @@ module Aws::RAM
     #     client_token: "String",
     #     permission_arns: ["String"],
     #     sources: ["String"],
+    #     permission_template_parameters: [
+    #       {
+    #         permission_arn: "String",
+    #         permission_template_parameters: [
+    #           {
+    #             name: "String",
+    #             values: ["String"],
+    #           },
+    #         ],
+    #       },
+    #     ],
     #     resource_share_configuration: {
     #       retain_sharing_on_account_leave_organization: false,
     #     },
@@ -1228,7 +1299,7 @@ module Aws::RAM
     #
     #   resp.return_value #=> Boolean
     #   resp.client_token #=> String
-    #   resp.permission_status #=> String, one of "ATTACHABLE", "UNATTACHABLE", "DELETING", "DELETED"
+    #   resp.permission_status #=> String, one of "ATTACHABLE", "UNATTACHABLE", "DELETING", "DELETED", "DEPRECATED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeletePermission AWS API Documentation
     #
@@ -1308,7 +1379,7 @@ module Aws::RAM
     #
     #   resp.return_value #=> Boolean
     #   resp.client_token #=> String
-    #   resp.permission_status #=> String, one of "ATTACHABLE", "UNATTACHABLE", "DELETING", "DELETED"
+    #   resp.permission_status #=> String, one of "ATTACHABLE", "UNATTACHABLE", "DELETING", "DELETED", "DEPRECATED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/DeletePermissionVersion AWS API Documentation
     #
@@ -1598,6 +1669,13 @@ module Aws::RAM
 
     # Retrieves the contents of a managed permission in JSON format.
     #
+    # If the permission has template parameters, you can include the
+    # `permissionTemplateParameters` parameter in your request. The
+    # operation then renders the returned policy with the specified values
+    # in place of the template parameter placeholders. If you omit
+    # `permissionTemplateParameters`, the operation returns the raw policy
+    # template with `@{parameterName}` placeholders unchanged.
+    #
     # @option params [required, String] :permission_arn
     #   Specifies the [Amazon Resource Name (ARN)][1] of the permission whose
     #   contents you want to retrieve. To find the ARN for a permission, use
@@ -1617,6 +1695,20 @@ module Aws::RAM
     #
     #   To see the list of available versions, use ListPermissionVersions.
     #
+    # @option params [Array<Types::PermissionTemplateParameterInput>] :permission_template_parameters
+    #   Specifies the template parameter values to use when rendering the
+    #   permission's policy template. Each entry supplies a parameter name
+    #   and its values. When you provide this parameter, the response contains
+    #   the rendered policy with the specified values in place of the template
+    #   parameter placeholders.
+    #
+    #   For `STRING` type parameters, provide a single value. For
+    #   `STRING_LIST` type parameters, provide one or more values.
+    #
+    #   You can specify this parameter only for permissions that declare
+    #   template parameters. You must provide values for all parameters
+    #   declared in the permission template.
+    #
     # @return [Types::GetPermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetPermissionResponse#permission #permission} => Types::ResourceSharePermissionDetail
@@ -1626,6 +1718,12 @@ module Aws::RAM
     #   resp = client.get_permission({
     #     permission_arn: "String", # required
     #     permission_version: 1,
+    #     permission_template_parameters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
     #   })
     #
     # @example Response structure
@@ -1636,15 +1734,20 @@ module Aws::RAM
     #   resp.permission.name #=> String
     #   resp.permission.resource_type #=> String
     #   resp.permission.permission #=> String
+    #   resp.permission.permission_template_parameters #=> Array
+    #   resp.permission.permission_template_parameters[0].name #=> String
+    #   resp.permission.permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.permission.permission_template_parameters[0].description #=> String
     #   resp.permission.creation_time #=> Time
     #   resp.permission.last_updated_time #=> Time
     #   resp.permission.is_resource_type_default #=> Boolean
     #   resp.permission.permission_type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
     #   resp.permission.feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
-    #   resp.permission.status #=> String, one of "ATTACHABLE", "UNATTACHABLE", "DELETING", "DELETED"
+    #   resp.permission.status #=> String, one of "ATTACHABLE", "UNATTACHABLE", "DELETING", "DELETED", "DEPRECATED"
     #   resp.permission.tags #=> Array
     #   resp.permission.tags[0].key #=> String
     #   resp.permission.tags[0].value #=> String
+    #   resp.permission.resource_owner #=> String, one of "SELF", "OTHER-ACCOUNTS"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/GetPermission AWS API Documentation
     #
@@ -2207,6 +2310,26 @@ module Aws::RAM
     #   When `false` (the default value), lists associations with resource
     #   shares that use any version of the specified managed permission.
     #
+    # @option params [String] :resource_owner
+    #   Specifies that you want to list only those associations with resource
+    #   shares owned by a specific entity:
+    #
+    #   * `SELF` – returns only associations with resource shares owned by the
+    #     calling account.
+    #
+    #   * `OTHER-ACCOUNTS` – returns only associations with resource shares
+    #     owned by other Amazon Web Services accounts.
+    #
+    #   If you don't specify this parameter, the default is `SELF`.
+    #
+    # @option params [String] :resource_share_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the resource share
+    #   for which you want to retrieve permission associations.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
     # @option params [String] :next_token
     #   Specifies that you want to receive the next page of results. Valid
     #   only if you received a `NextToken` response in the previous request.
@@ -2242,6 +2365,8 @@ module Aws::RAM
     #     resource_type: "String",
     #     feature_set: "CREATED_FROM_POLICY", # accepts CREATED_FROM_POLICY, PROMOTING_TO_STANDARD, STANDARD
     #     default_version: false,
+    #     resource_owner: "SELF", # accepts SELF, OTHER-ACCOUNTS
+    #     resource_share_arn: "String",
     #     next_token: "String",
     #     max_results: 1,
     #   })
@@ -2257,6 +2382,12 @@ module Aws::RAM
     #   resp.permissions[0].feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
     #   resp.permissions[0].last_updated_time #=> Time
     #   resp.permissions[0].resource_share_arn #=> String
+    #   resp.permissions[0].permission_template_parameters #=> Array
+    #   resp.permissions[0].permission_template_parameters[0].name #=> String
+    #   resp.permissions[0].permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.permissions[0].permission_template_parameters[0].description #=> String
+    #   resp.permissions[0].permission_template_parameters[0].values #=> Array
+    #   resp.permissions[0].permission_template_parameters[0].values[0] #=> String
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissionAssociations AWS API Documentation
@@ -2336,9 +2467,16 @@ module Aws::RAM
     #   resp.permissions[0].is_resource_type_default #=> Boolean
     #   resp.permissions[0].permission_type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
     #   resp.permissions[0].feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
+    #   resp.permissions[0].permission_template_parameters #=> Array
+    #   resp.permissions[0].permission_template_parameters[0].name #=> String
+    #   resp.permissions[0].permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.permissions[0].permission_template_parameters[0].description #=> String
+    #   resp.permissions[0].permission_template_parameters[0].values #=> Array
+    #   resp.permissions[0].permission_template_parameters[0].values[0] #=> String
     #   resp.permissions[0].tags #=> Array
     #   resp.permissions[0].tags[0].key #=> String
     #   resp.permissions[0].tags[0].value #=> String
+    #   resp.permissions[0].resource_owner #=> String, one of "SELF", "OTHER-ACCOUNTS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissionVersions AWS API Documentation
@@ -2368,6 +2506,15 @@ module Aws::RAM
     #   For example, to list only permissions that apply to Amazon EC2
     #   subnets, specify `ec2:subnet`. You can use the ListResourceTypes
     #   operation to get the specific string required.
+    #
+    # @option params [String] :resource_owner
+    #   Specifies that you want to list only permissions owned by a specific
+    #   entity:
+    #
+    #   * `SELF` – returns only permissions owned by the calling account.
+    #
+    #   * `OTHER-ACCOUNTS` – returns only permissions shared with the calling
+    #     account by other accounts.
     #
     # @option params [String] :next_token
     #   Specifies that you want to receive the next page of results. Valid
@@ -2400,6 +2547,12 @@ module Aws::RAM
     #
     #   If you don't specify this parameter, the default is `All`.
     #
+    # @option params [String] :permission_status
+    #   Specifies that you want to filter the results to include only
+    #   permissions with the specified status. For example, use `ATTACHABLE`
+    #   to list only permissions that can be associated with resource shares,
+    #   or `DEPRECATED` to list only deprecated permissions.
+    #
     # @return [Types::ListPermissionsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListPermissionsResponse#permissions #permissions} => Array&lt;Types::ResourceSharePermissionSummary&gt;
@@ -2411,9 +2564,11 @@ module Aws::RAM
     #
     #   resp = client.list_permissions({
     #     resource_type: "String",
+    #     resource_owner: "SELF", # accepts SELF, OTHER-ACCOUNTS
     #     next_token: "String",
     #     max_results: 1,
     #     permission_type: "ALL", # accepts ALL, AWS_MANAGED, CUSTOMER_MANAGED
+    #     permission_status: "ATTACHABLE", # accepts ATTACHABLE, UNATTACHABLE, DELETING, DELETED, DEPRECATED
     #   })
     #
     # @example Response structure
@@ -2430,9 +2585,16 @@ module Aws::RAM
     #   resp.permissions[0].is_resource_type_default #=> Boolean
     #   resp.permissions[0].permission_type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
     #   resp.permissions[0].feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
+    #   resp.permissions[0].permission_template_parameters #=> Array
+    #   resp.permissions[0].permission_template_parameters[0].name #=> String
+    #   resp.permissions[0].permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.permissions[0].permission_template_parameters[0].description #=> String
+    #   resp.permissions[0].permission_template_parameters[0].values #=> Array
+    #   resp.permissions[0].permission_template_parameters[0].values[0] #=> String
     #   resp.permissions[0].tags #=> Array
     #   resp.permissions[0].tags[0].key #=> String
     #   resp.permissions[0].tags[0].value #=> String
+    #   resp.permissions[0].resource_owner #=> String, one of "SELF", "OTHER-ACCOUNTS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListPermissions AWS API Documentation
@@ -2642,6 +2804,12 @@ module Aws::RAM
     #   resp.replace_permission_associations_works[0].from_permission_version #=> String
     #   resp.replace_permission_associations_works[0].to_permission_arn #=> String
     #   resp.replace_permission_associations_works[0].to_permission_version #=> String
+    #   resp.replace_permission_associations_works[0].permission_template_parameters #=> Array
+    #   resp.replace_permission_associations_works[0].permission_template_parameters[0].name #=> String
+    #   resp.replace_permission_associations_works[0].permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.replace_permission_associations_works[0].permission_template_parameters[0].description #=> String
+    #   resp.replace_permission_associations_works[0].permission_template_parameters[0].values #=> Array
+    #   resp.replace_permission_associations_works[0].permission_template_parameters[0].values[0] #=> String
     #   resp.replace_permission_associations_works[0].status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.replace_permission_associations_works[0].status_message #=> String
     #   resp.replace_permission_associations_works[0].creation_time #=> Time
@@ -2723,9 +2891,16 @@ module Aws::RAM
     #   resp.permissions[0].is_resource_type_default #=> Boolean
     #   resp.permissions[0].permission_type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
     #   resp.permissions[0].feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
+    #   resp.permissions[0].permission_template_parameters #=> Array
+    #   resp.permissions[0].permission_template_parameters[0].name #=> String
+    #   resp.permissions[0].permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.permissions[0].permission_template_parameters[0].description #=> String
+    #   resp.permissions[0].permission_template_parameters[0].values #=> Array
+    #   resp.permissions[0].permission_template_parameters[0].values[0] #=> String
     #   resp.permissions[0].tags #=> Array
     #   resp.permissions[0].tags[0].key #=> String
     #   resp.permissions[0].tags[0].value #=> String
+    #   resp.permissions[0].resource_owner #=> String, one of "SELF", "OTHER-ACCOUNTS"
     #   resp.next_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/ListResourceSharePermissions AWS API Documentation
@@ -3095,9 +3270,16 @@ module Aws::RAM
     #   resp.permission.is_resource_type_default #=> Boolean
     #   resp.permission.permission_type #=> String, one of "CUSTOMER_MANAGED", "AWS_MANAGED"
     #   resp.permission.feature_set #=> String, one of "CREATED_FROM_POLICY", "PROMOTING_TO_STANDARD", "STANDARD"
+    #   resp.permission.permission_template_parameters #=> Array
+    #   resp.permission.permission_template_parameters[0].name #=> String
+    #   resp.permission.permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.permission.permission_template_parameters[0].description #=> String
+    #   resp.permission.permission_template_parameters[0].values #=> Array
+    #   resp.permission.permission_template_parameters[0].values[0] #=> String
     #   resp.permission.tags #=> Array
     #   resp.permission.tags[0].key #=> String
     #   resp.permission.tags[0].value #=> String
+    #   resp.permission.resource_owner #=> String, one of "SELF", "OTHER-ACCOUNTS"
     #   resp.client_token #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/PromotePermissionCreatedFromPolicy AWS API Documentation
@@ -3273,6 +3455,12 @@ module Aws::RAM
     #   The operation always associates the version that is currently the
     #   default for the specified managed permission.
     #
+    # @option params [Array<Types::PermissionTemplateParameterInput>] :permission_template_parameters
+    #   Specifies the template parameter values to apply when replacing the
+    #   permission. You must provide values for all parameters declared in the
+    #   target permission template. This parameter is required only if the
+    #   target permission (`toPermissionArn`) has template parameters.
+    #
     # @option params [String] :client_token
     #   Specifies a unique, case-sensitive identifier that you provide to
     #   ensure the idempotency of the request. This lets you safely retry the
@@ -3303,6 +3491,12 @@ module Aws::RAM
     #     from_permission_arn: "String", # required
     #     from_permission_version: 1,
     #     to_permission_arn: "String", # required
+    #     permission_template_parameters: [
+    #       {
+    #         name: "String",
+    #         values: ["String"],
+    #       },
+    #     ],
     #     client_token: "String",
     #   })
     #
@@ -3313,6 +3507,12 @@ module Aws::RAM
     #   resp.replace_permission_associations_work.from_permission_version #=> String
     #   resp.replace_permission_associations_work.to_permission_arn #=> String
     #   resp.replace_permission_associations_work.to_permission_version #=> String
+    #   resp.replace_permission_associations_work.permission_template_parameters #=> Array
+    #   resp.replace_permission_associations_work.permission_template_parameters[0].name #=> String
+    #   resp.replace_permission_associations_work.permission_template_parameters[0].type #=> String, one of "STRING", "STRING_LIST"
+    #   resp.replace_permission_associations_work.permission_template_parameters[0].description #=> String
+    #   resp.replace_permission_associations_work.permission_template_parameters[0].values #=> Array
+    #   resp.replace_permission_associations_work.permission_template_parameters[0].values[0] #=> String
     #   resp.replace_permission_associations_work.status #=> String, one of "IN_PROGRESS", "COMPLETED", "FAILED"
     #   resp.replace_permission_associations_work.status_message #=> String
     #   resp.replace_permission_associations_work.creation_time #=> Time
@@ -3492,6 +3692,92 @@ module Aws::RAM
       req.send_request(options)
     end
 
+    # Updates the status of the specified customer managed permission.
+    #
+    # Setting the status to `DEPRECATED` prevents new resource share
+    # associations. Setting it to `ATTACHABLE` restores a previously
+    # deprecated permission. Existing resource shares that use the
+    # permission continue to function.
+    #
+    # @option params [required, String] :permission_arn
+    #   Specifies the [Amazon Resource Name (ARN)][1] of the customer managed
+    #   permission that you want to update.
+    #
+    #
+    #
+    #   [1]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+    #
+    # @option params [required, String] :status
+    #   Specifies the new status for the permission. This can be one of the
+    #   following values:
+    #
+    #   * `ATTACHABLE` – Restores a previously deprecated permission so it can
+    #     be associated with resource shares again.
+    #
+    #   * `DEPRECATED` – Deprecates the permission so it can no longer be
+    #     associated with new resource shares.
+    #
+    # @option params [String] :client_token
+    #   Specifies a unique, case-sensitive identifier that you provide to
+    #   ensure the idempotency of the request. This lets you safely retry the
+    #   request without accidentally performing the same operation a second
+    #   time. Passing the same value to a later call to an operation requires
+    #   that you also pass the same value for all other parameters. We
+    #   recommend that you use a [UUID type of value.][1].
+    #
+    #   If you don't provide this value, then Amazon Web Services generates a
+    #   random one for you.
+    #
+    #   If you retry the operation with the same `ClientToken`, but with
+    #   different parameters, the retry fails with an
+    #   `IdempotentParameterMismatch` error.
+    #
+    #
+    #
+    #   [1]: https://wikipedia.org/wiki/Universally_unique_identifier
+    #
+    # @return [Types::UpdatePermissionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdatePermissionResponse#client_token #client_token} => String
+    #   * {Types::UpdatePermissionResponse#permission_status #permission_status} => String
+    #
+    #
+    # @example Example: Deprecate a managed permission
+    #
+    #   # Deprecates a customer managed permission so it can no longer be associated with new resource shares.
+    #
+    #   resp = client.update_permission({
+    #     permission_arn: "arn:aws:ram:us-east-1:123456789012:permission/AnyCompanyImageBuilderPermission", 
+    #     status: "DEPRECATED", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     permission_status: "DEPRECATED", 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_permission({
+    #     permission_arn: "String", # required
+    #     status: "ATTACHABLE", # required, accepts ATTACHABLE, DEPRECATED
+    #     client_token: "String",
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.client_token #=> String
+    #   resp.permission_status #=> String, one of "ATTACHABLE", "DEPRECATED"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ram-2018-01-04/UpdatePermission AWS API Documentation
+    #
+    # @overload update_permission(params = {})
+    # @param [Hash] params ({})
+    def update_permission(params = {}, options = {})
+      req = build_request(:update_permission, params)
+      req.send_request(options)
+    end
+
     # Modifies some of the properties of the specified resource share.
     #
     # @option params [required, String] :resource_share_arn
@@ -3587,7 +3873,7 @@ module Aws::RAM
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ram'
-      context[:gem_version] = '1.99.0'
+      context[:gem_version] = '1.100.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

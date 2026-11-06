@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.100.0 (2026-11-06)
+------------------
+
+* Feature - Adds support for using managed permission template parameters, discovering shared customer-managed permissions, and managing customer-managed permission deprecation.
+
 1.99.0 (2026-11-04)
 ------------------
 

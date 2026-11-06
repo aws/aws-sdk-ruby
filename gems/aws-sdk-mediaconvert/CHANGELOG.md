@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.202.0 (2026-11-06)
+------------------
+
+* Feature - Smart subtitling uses AWS Elemental Inference to generate captions from your content's audio, in embedded, burn-in, DVB-Sub, IMSC, SMI, SRT, teletext, TTML, or WebVTT outputs. Also fixes HEVC passthrough writing an incomplete codecs string to DASH and HLS manifests.
+
 1.201.0 (2026-11-04)
 ------------------
 

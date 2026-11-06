@@ -431,6 +431,7 @@ module Aws::DataZone
     class AuthenticationConfigurationPatch
       attr_accessor secret_arn: ::String
       attr_accessor basic_authentication_credentials: Types::BasicAuthenticationCredentials
+      attr_accessor o_auth_2_properties: Types::OAuth2PropertiesPatch
       SENSITIVE: [:basic_authentication_credentials]
     end
 
@@ -1403,7 +1404,7 @@ module Aws::DataZone
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
-      SENSITIVE: [:name, :description, :parameters]
+      SENSITIVE: [:name, :description, :metadata, :parameters]
     end
 
     class CreateNotebookOutput
@@ -1428,7 +1429,7 @@ module Aws::DataZone
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor error: Types::NotebookError
       attr_accessor git_metadata: Types::GitMetadata
-      SENSITIVE: [:name, :description, :parameters]
+      SENSITIVE: [:name, :description, :metadata, :parameters]
     end
 
     class CreateProjectFromProjectProfilePolicyGrantDetail
@@ -1581,7 +1582,7 @@ module Aws::DataZone
       attr_accessor metadata_forms: ::Array[Types::FormInput]
       attr_accessor asset_permissions: ::Array[Types::AssetPermission]
       attr_accessor asset_scopes: ::Array[Types::AcceptedAssetScope]
-      SENSITIVE: [:request_reason]
+      SENSITIVE: [:request_reason, :metadata_forms]
     end
 
     class CreateSubscriptionRequestOutput
@@ -3199,7 +3200,7 @@ module Aws::DataZone
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor error: Types::NotebookError
       attr_accessor git_metadata: Types::GitMetadata
-      SENSITIVE: [:name, :description, :parameters]
+      SENSITIVE: [:name, :description, :metadata, :parameters]
     end
 
     class GetNotebookRunInput
@@ -3232,7 +3233,7 @@ module Aws::DataZone
       attr_accessor updated_by: ::String
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
-      SENSITIVE: [:parameters]
+      SENSITIVE: [:metadata, :parameters]
     end
 
     class GetProjectInput
@@ -4813,6 +4814,14 @@ module Aws::DataZone
       SENSITIVE: [:o_auth_2_credentials]
     end
 
+    class OAuth2PropertiesPatch
+      attr_accessor o_auth_2_grant_type: ("AUTHORIZATION_CODE" | "CLIENT_CREDENTIALS" | "JWT_BEARER")
+      attr_accessor o_auth_2_client_application: Types::OAuth2ClientApplication
+      attr_accessor token_url: ::String
+      attr_accessor token_url_parameters_map: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
     class OpenLineageRunEventSummary
       attr_accessor event_type: ("START" | "RUNNING" | "COMPLETE" | "ABORT" | "FAIL" | "OTHER")
       attr_accessor run_id: ::String
@@ -6101,7 +6110,7 @@ module Aws::DataZone
       attr_accessor metadata: ::Hash[::String, ::String]
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
-      SENSITIVE: [:parameters]
+      SENSITIVE: [:metadata, :parameters]
     end
 
     class StartNotebookRunOutput
@@ -6128,7 +6137,7 @@ module Aws::DataZone
       attr_accessor updated_by: ::String
       attr_accessor started_at: ::Time
       attr_accessor completed_at: ::Time
-      SENSITIVE: [:parameters]
+      SENSITIVE: [:metadata, :parameters]
     end
 
     class StartNotebookSyncInput
@@ -6864,7 +6873,7 @@ module Aws::DataZone
       attr_accessor parameters: ::Hash[::String, ::String]
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor client_token: ::String
-      SENSITIVE: [:description, :name, :parameters]
+      SENSITIVE: [:description, :name, :metadata, :parameters]
     end
 
     class UpdateNotebookOutput
@@ -6889,7 +6898,7 @@ module Aws::DataZone
       attr_accessor environment_configuration: Types::EnvironmentConfig
       attr_accessor error: Types::NotebookError
       attr_accessor git_metadata: Types::GitMetadata
-      SENSITIVE: [:name, :description, :parameters]
+      SENSITIVE: [:name, :description, :metadata, :parameters]
     end
 
     class UpdateProjectInput

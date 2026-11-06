@@ -481,7 +481,7 @@ module Aws::PaymentCryptography
       attr_accessor key_exportability: ("EXPORTABLE" | "NON_EXPORTABLE" | "SENSITIVE")
       attr_accessor key_version: ::String
       attr_accessor optional_blocks: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:optional_blocks]
     end
 
     class KeyModesOfUse

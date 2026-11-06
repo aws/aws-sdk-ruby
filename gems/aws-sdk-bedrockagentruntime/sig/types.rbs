@@ -598,7 +598,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor node_name: ::String
       attr_accessor satisfied_conditions: ::Array[Types::SatisfiedCondition]
       attr_accessor timestamp: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:satisfied_conditions]
     end
 
     class ConflictException
@@ -782,7 +782,7 @@ module Aws::BedrockAgentRuntime
     class FilePart
       attr_accessor files: ::Array[Types::OutputFile]
       attr_accessor event_type: untyped
-      SENSITIVE: []
+      SENSITIVE: [:files]
     end
 
     class FileSource
@@ -867,14 +867,14 @@ module Aws::BedrockAgentRuntime
       attr_accessor fields: ::Array[Types::FlowInputField]
       attr_accessor node_name: ::String
       attr_accessor timestamp: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:fields]
     end
 
     class FlowExecutionOutputEvent
       attr_accessor fields: ::Array[Types::FlowOutputField]
       attr_accessor node_name: ::String
       attr_accessor timestamp: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:fields]
     end
 
     class FlowExecutionSummary
@@ -996,7 +996,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor node_name: ::String
       attr_accessor satisfied_conditions: ::Array[Types::FlowTraceCondition]
       attr_accessor timestamp: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:satisfied_conditions]
     end
 
     class FlowTraceDependencyEvent
@@ -1038,7 +1038,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor fields: ::Array[Types::FlowTraceNodeInputField]
       attr_accessor node_name: ::String
       attr_accessor timestamp: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:fields]
     end
 
     class FlowTraceNodeInputExecutionChainItem
@@ -1080,7 +1080,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor fields: ::Array[Types::FlowTraceNodeOutputField]
       attr_accessor node_name: ::String
       attr_accessor timestamp: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:fields]
     end
 
     class FlowTraceNodeOutputField
@@ -1088,7 +1088,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor next: ::Array[Types::FlowTraceNodeOutputNext]
       attr_accessor node_output_name: ::String
       attr_accessor type: ("String" | "Number" | "Boolean" | "Object" | "Array")
-      SENSITIVE: []
+      SENSITIVE: [:next]
     end
 
     class FlowTraceNodeOutputNext
@@ -1158,7 +1158,7 @@ module Aws::BedrockAgentRuntime
 
     class GenerateQueryResponse
       attr_accessor queries: ::Array[Types::GeneratedQuery]
-      SENSITIVE: []
+      SENSITIVE: [:queries]
     end
 
     class GeneratedQuery
@@ -1380,7 +1380,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor metadata: Types::Metadata
       attr_accessor output_assessments: ::Array[Types::GuardrailAssessment]
       attr_accessor trace_id: ::String
-      SENSITIVE: [:metadata]
+      SENSITIVE: [:input_assessments, :metadata, :output_assessments]
     end
 
     class GuardrailWordPolicyAssessment
@@ -1429,7 +1429,7 @@ module Aws::BedrockAgentRuntime
     class ImplicitFilterConfiguration
       attr_accessor metadata_attributes: ::Array[Types::MetadataAttributeSchema]
       attr_accessor model_arn: ::String
-      SENSITIVE: []
+      SENSITIVE: [:metadata_attributes]
     end
 
     class InferenceConfig
@@ -1449,7 +1449,7 @@ module Aws::BedrockAgentRuntime
     class InlineAgentFilePart
       attr_accessor files: ::Array[Types::OutputFile]
       attr_accessor event_type: untyped
-      SENSITIVE: []
+      SENSITIVE: [:files]
     end
 
     class InlineAgentPayloadPart
@@ -1572,7 +1572,7 @@ module Aws::BedrockAgentRuntime
     class InvocationStepPayload
       attr_accessor content_blocks: ::Array[Types::BedrockSessionContentBlock]
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:content_blocks]
 
       class ContentBlocks < InvocationStepPayload
       end
@@ -1879,7 +1879,7 @@ module Aws::BedrockAgentRuntime
     class Message
       attr_accessor content: ::Array[Types::ContentBlock]
       attr_accessor role: ("user" | "assistant")
-      SENSITIVE: []
+      SENSITIVE: [:content]
     end
 
     class Metadata
@@ -1969,7 +1969,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor fields: ::Array[Types::NodeInputField]
       attr_accessor node_name: ::String
       attr_accessor timestamp: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:fields]
     end
 
     class NodeInputExecutionChainItem
@@ -2000,7 +2000,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor fields: ::Array[Types::NodeOutputField]
       attr_accessor node_name: ::String
       attr_accessor timestamp: ::Time
-      SENSITIVE: []
+      SENSITIVE: [:fields]
     end
 
     class NodeOutputField
@@ -2008,7 +2008,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor name: ::String
       attr_accessor next: ::Array[Types::NodeOutputNext]
       attr_accessor type: ("String" | "Number" | "Boolean" | "Object" | "Array")
-      SENSITIVE: [:content]
+      SENSITIVE: [:content, :next]
     end
 
     class NodeOutputNext
@@ -2020,7 +2020,7 @@ module Aws::BedrockAgentRuntime
     class NodeTraceElements
       attr_accessor agent_traces: ::Array[Types::TracePart]
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:agent_traces]
 
       class AgentTraces < NodeTraceElements
       end
@@ -2403,7 +2403,7 @@ module Aws::BedrockAgentRuntime
       attr_accessor starts_with: Types::FilterAttribute
       attr_accessor string_contains: Types::FilterAttribute
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:and_all, :or_all]
 
       class AndAll < RetrievalFilter
       end
@@ -2826,7 +2826,7 @@ module Aws::BedrockAgentRuntime
     class TraceElements
       attr_accessor agent_traces: ::Array[Types::TracePart]
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:agent_traces]
 
       class AgentTraces < TraceElements
       end

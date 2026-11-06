@@ -209,6 +209,27 @@ module Aws
                                          ) -> _CreatePresignedNotebookUrlResponseSuccess
                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreatePresignedNotebookUrlResponseSuccess
 
+      interface _CreateSystemTableConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateSystemTableConfigurationOutput]
+        def table_name: () -> ("ALL")
+        def kms_key_arn: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#create_system_table_configuration-instance_method
+      def create_system_table_configuration: (
+                                               ?client_request_token: ::String,
+                                               table_name: ("ALL"),
+                                               ?kms_key_arn: ::String,
+                                               ?tags: Array[
+                                                 {
+                                                   key: ::String?,
+                                                   value: ::String?
+                                                 }
+                                               ]
+                                             ) -> _CreateSystemTableConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateSystemTableConfigurationResponseSuccess
+
       interface _CreateWorkGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateWorkGroupOutput]
       end
@@ -247,7 +268,13 @@ module Aws
                                    enable_s3_access_grants: bool,
                                    create_user_level_prefix: bool?,
                                    authentication_type: ("DIRECTORY_IDENTITY")
-                                 }?
+                                 }?,
+                                 system_table_statuses: Array[
+                                   {
+                                     table_name: ("QUERY_EXECUTIONS"),
+                                     enabled: bool
+                                   }
+                                 ]?
                                },
                                ?description: ::String,
                                ?tags: Array[
@@ -306,6 +333,15 @@ module Aws
                                        work_group: ::String
                                      ) -> _DeletePreparedStatementResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeletePreparedStatementResponseSuccess
+
+      interface _DeleteSystemTableConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteSystemTableConfigurationOutput]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#delete_system_table_configuration-instance_method
+      def delete_system_table_configuration: (
+                                               table_name: ("ALL")
+                                             ) -> _DeleteSystemTableConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteSystemTableConfigurationResponseSuccess
 
       interface _DeleteWorkGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteWorkGroupOutput]
@@ -526,6 +562,19 @@ module Aws
                               ) -> _GetSessionStatusResponseSuccess
                             | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSessionStatusResponseSuccess
 
+      interface _GetSystemTableConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetSystemTableConfigurationOutput]
+        def table_name: () -> ("ALL")
+        def kms_key_arn: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#get_system_table_configuration-instance_method
+      def get_system_table_configuration: (
+                                            table_name: ("ALL")
+                                          ) -> _GetSystemTableConfigurationResponseSuccess
+                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetSystemTableConfigurationResponseSuccess
+
       interface _GetTableMetadataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetTableMetadataOutput]
         def table_metadata: () -> Types::TableMetadata
@@ -737,6 +786,18 @@ module Aws
                            ?next_token: ::String
                          ) -> _ListSessionsResponseSuccess
                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSessionsResponseSuccess
+
+      interface _ListSystemTableStatusesResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListSystemTableStatusesOutput]
+        def items: () -> ::Array[Types::SystemTableStatus]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#list_system_table_statuses-instance_method
+      def list_system_table_statuses: (
+                                        ?next_token: ::String,
+                                        ?max_results: ::Integer
+                                      ) -> _ListSystemTableStatusesResponseSuccess
+                                    | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListSystemTableStatusesResponseSuccess
 
       interface _ListTableMetadataResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListTableMetadataOutput]
@@ -983,6 +1044,20 @@ module Aws
                                        ?description: ::String
                                      ) -> _UpdatePreparedStatementResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdatePreparedStatementResponseSuccess
+
+      interface _UpdateSystemTableConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateSystemTableConfigurationOutput]
+        def table_name: () -> ("ALL")
+        def kms_key_arn: () -> ::String
+        def created_at: () -> ::Time
+        def last_modified_at: () -> ::Time
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Athena/Client.html#update_system_table_configuration-instance_method
+      def update_system_table_configuration: (
+                                               table_name: ("ALL"),
+                                               ?kms_key_arn: ::String
+                                             ) -> _UpdateSystemTableConfigurationResponseSuccess
+                                           | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateSystemTableConfigurationResponseSuccess
 
       interface _UpdateWorkGroupResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateWorkGroupOutput]

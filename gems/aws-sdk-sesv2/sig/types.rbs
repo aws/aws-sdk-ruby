@@ -1458,7 +1458,7 @@ module Aws::SESV2
       attr_accessor tenant_name: ::Array[::String]
       attr_accessor last_delivery_event: ::Array[("SEND" | "DELIVERY" | "TRANSIENT_BOUNCE" | "PERMANENT_BOUNCE" | "UNDETERMINED_BOUNCE" | "COMPLAINT")]
       attr_accessor last_engagement_event: ::Array[("OPEN" | "CLICK")]
-      SENSITIVE: []
+      SENSITIVE: [:from_email_address, :destination, :subject]
     end
 
     class MessageRejected < Aws::EmptyStructure

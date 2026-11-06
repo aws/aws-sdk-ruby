@@ -540,7 +540,7 @@ module Aws::BillingConductor
       attr_accessor billing_groups: ::Array[::String]
       attr_accessor arns: ::Array[::String]
       attr_accessor account_ids: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:names]
     end
 
     class ListCustomLineItemsInput

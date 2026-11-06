@@ -4999,6 +4999,16 @@ module Aws::SSM
     #
     class DeleteResourcePolicyResponse < Aws::EmptyStructure; end
 
+    # @api private
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterDefaultHostManagementConfigurationRequest AWS API Documentation
+    #
+    class DeregisterDefaultHostManagementConfigurationRequest < Aws::EmptyStructure; end
+
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/DeregisterDefaultHostManagementConfigurationResult AWS API Documentation
+    #
+    class DeregisterDefaultHostManagementConfigurationResult < Aws::EmptyStructure; end
+
     # @!attribute [rw] instance_id
     #   The ID assigned to the managed node when you registered it using the
     #   activation process.
@@ -9614,13 +9624,6 @@ module Aws::SSM
     #
     # @!attribute [rw] recursive
     #   Retrieve all parameters within a hierarchy.
-    #
-    #   If a user has access to a path, then the user can access all levels
-    #   of that path. For example, if a user has permission to access path
-    #   `/a`, then the user can also access `/a/b`. Even if a user has
-    #   explicitly been denied access in IAM for parameter `/a/b`, they can
-    #   still call the GetParametersByPath API operation recursively for
-    #   `/a` and view `/a/b`.
     #   @return [Boolean]
     #
     # @!attribute [rw] parameter_filters
@@ -16929,6 +16932,74 @@ module Aws::SSM
     class PutResourcePolicyResponse < Struct.new(
       :policy_id,
       :policy_hash)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] permission_model
+    #   The permission model that determines how the IAM role for Default
+    #   Host Management Configuration is provided.
+    #
+    #   The permission model can be one of the following values:
+    #
+    #   SERVICE\_MANAGED
+    #
+    #   : Amazon Web Services Systems Manager creates and manages the role
+    #     on your behalf.
+    #
+    #   SELF\_MANAGED
+    #
+    #   : You provide the role to register in `RoleArn`.
+    #   @return [String]
+    #
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the self-managed IAM role that you
+    #   register for Default Host Management Configuration. The requirement
+    #   for this value depends on the permission model:
+    #
+    #   * If `PermissionModel` is `SELF_MANAGED`, this value is required.
+    #
+    #   * If `PermissionModel` is `SERVICE_MANAGED`, this value must not be
+    #     set.
+    #   @return [String]
+    #
+    # @!attribute [rw] overwrite
+    #   Specifies whether to override the role that is currently registered
+    #   for Default Host Management Configuration. The default is `false`,
+    #   which acts as a guardrail against accidentally replacing an existing
+    #   configuration. Set this to `true` to replace the currently
+    #   registered role.
+    #   @return [Boolean]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultHostManagementConfigurationRequest AWS API Documentation
+    #
+    class RegisterDefaultHostManagementConfigurationRequest < Struct.new(
+      :permission_model,
+      :role_arn,
+      :overwrite)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] role_arn
+    #   The Amazon Resource Name (ARN) of the IAM role registered for
+    #   Default Host Management Configuration. The value depends on the
+    #   permission model:
+    #
+    #   SERVICE\_MANAGED
+    #
+    #   : The ARN of the role that Amazon Web Services Systems Manager
+    #     created in the IAM reserved path.
+    #
+    #   SELF\_MANAGED
+    #
+    #   : The `RoleArn` that you provided.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/ssm-2014-11-06/RegisterDefaultHostManagementConfigurationResult AWS API Documentation
+    #
+    class RegisterDefaultHostManagementConfigurationResult < Struct.new(
+      :role_arn)
       SENSITIVE = []
       include Aws::Structure
     end

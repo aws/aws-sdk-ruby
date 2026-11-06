@@ -474,7 +474,7 @@ module Aws::GameLift
       attr_accessor game_session_id: ::String
       attr_accessor player_ids: ::Array[::String]
       attr_accessor player_data_map: ::Hash[::String, ::String]
-      SENSITIVE: [:player_ids]
+      SENSITIVE: [:player_ids, :player_data_map]
     end
 
     class CreatePlayerSessionsOutput
@@ -797,7 +797,7 @@ module Aws::GameLift
     class DescribeFleetEventsOutput
       attr_accessor events: ::Array[Types::Event]
       attr_accessor next_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:events]
     end
 
     class DescribeFleetLocationAttributesInput

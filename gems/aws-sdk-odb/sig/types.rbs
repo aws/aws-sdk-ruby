@@ -690,7 +690,7 @@ module Aws::Odb
       attr_accessor percent_progress: ::Float
       attr_accessor compute_model: ("ECPU" | "OCPU")
       attr_accessor iam_roles: ::Array[Types::IamRole]
-      SENSITIVE: []
+      SENSITIVE: [:ssh_public_keys]
     end
 
     class CloudVmClusterSummary
@@ -743,7 +743,7 @@ module Aws::Odb
       attr_accessor percent_progress: ::Float
       attr_accessor compute_model: ("ECPU" | "OCPU")
       attr_accessor iam_roles: ::Array[Types::IamRole]
-      SENSITIVE: []
+      SENSITIVE: [:ssh_public_keys]
     end
 
     class ConflictException

@@ -315,6 +315,7 @@ module Aws
                         ?activity_ids: Array[::String],
                         ?auto_scaling_group_name: ::String,
                         ?include_deleted_groups: bool,
+                        ?include_managed_resources: bool,
                         ?filters: Array[
                           {
                             name: ::String?,
@@ -334,6 +335,7 @@ module Aws
       def groups: (
                     ?auto_scaling_group_names: Array[::String],
                     ?include_instances: bool,
+                    ?include_managed_resources: bool,
                     ?filters: Array[
                       {
                         name: ::String?,
@@ -345,7 +347,8 @@ module Aws
 
       # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/AutoScaling/Resource.html#instances-instance_method
       def instances: (
-                       ?instance_ids: Array[::String]
+                       ?instance_ids: Array[::String],
+                       ?include_managed_resources: bool
                      ) -> Instance::Collection
                    | (?Hash[Symbol, untyped]) -> Instance::Collection
 
@@ -362,7 +365,8 @@ module Aws
       def policies: (
                       ?auto_scaling_group_name: ::String,
                       ?policy_names: Array[::String],
-                      ?policy_types: Array[::String]
+                      ?policy_types: Array[::String],
+                      ?include_managed_resources: bool
                     ) -> ScalingPolicy::Collection
                   | (?Hash[Symbol, untyped]) -> ScalingPolicy::Collection
 
@@ -377,7 +381,8 @@ module Aws
                                ?auto_scaling_group_name: ::String,
                                ?scheduled_action_names: Array[::String],
                                ?start_time: ::Time,
-                               ?end_time: ::Time
+                               ?end_time: ::Time,
+                               ?include_managed_resources: bool
                              ) -> ScheduledAction::Collection
                            | (?Hash[Symbol, untyped]) -> ScheduledAction::Collection
 
@@ -388,7 +393,8 @@ module Aws
                       name: ::String?,
                       values: Array[::String]?
                     }
-                  ]
+                  ],
+                  ?include_managed_resources: bool
                 ) -> Tag::Collection
               | (?Hash[Symbol, untyped]) -> Tag::Collection
     end

@@ -2132,6 +2132,14 @@ module Aws::MediaConvert
     # output. For each output that has captions, include one instance of
     # CaptionDescriptions.
     #
+    # @!attribute [rw] audio_source_names
+    #   Specifies the audio selector or audio selector group that
+    #   MediaConvert uses to generate Smart subtitles. The audio selector
+    #   you choose must exist in all inputs for the job. If MediaConvert
+    #   can't detect speech in the audio, it can't generate subtitles.
+    #   Required when source is SMART\_SUBTITLE; not allowed otherwise.
+    #   @return [Array<String>]
+    #
     # @!attribute [rw] caption_selector_name
     #   Specifies which "Caption Selector":#inputs-caption\_selector to use from each input when generating captions. The name should be of the format "Caption Selector <N>", which denotes that the Nth Caption Selector will be used from each input. </N>
     #   @return [String]
@@ -2173,14 +2181,25 @@ module Aws::MediaConvert
     #   outputs in other output groups, the service ignores this setting.
     #   @return [String]
     #
+    # @!attribute [rw] source
+    #   Specify the source of the captions for this caption description.
+    #   Choose Captions input source (INPUT\_CAPTION\_SELECTOR) to use a
+    #   caption selector from your input. Choose Smart subtitling
+    #   (SMART\_SUBTITLE) to have MediaConvert and Elemental Inference
+    #   generate subtitles automatically from an audio source that you
+    #   specify.
+    #   @return [String]
+    #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/CaptionDescription AWS API Documentation
     #
     class CaptionDescription < Struct.new(
+      :audio_source_names,
       :caption_selector_name,
       :custom_language_code,
       :destination_settings,
       :language_code,
-      :language_description)
+      :language_description,
+      :source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3815,6 +3834,10 @@ module Aws::MediaConvert
     #   not need to pass this option.
     #   @return [String]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] hop_destinations
     #   Optional. Use queue hopping to avoid overly long waits in the
     #   backlog of the queue that you submit your job to. Specify an
@@ -3899,6 +3922,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :billing_tags_source,
       :client_request_token,
+      :elemental_inference_settings,
       :hop_destinations,
       :job_engine_version,
       :job_template,
@@ -3950,6 +3974,10 @@ module Aws::MediaConvert
     #   Optional. A description of the job template you are creating.
     #   @return [String]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] hop_destinations
     #   Optional. Use queue hopping to avoid overly long waits in the
     #   backlog of the queue that you submit your job to. Specify an
@@ -4000,6 +4028,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :category,
       :description,
+      :elemental_inference_settings,
       :hop_destinations,
       :name,
       :priority,
@@ -5864,7 +5893,7 @@ module Aws::MediaConvert
     #   @return [Array<String>]
     #
     # @!attribute [rw] feeds
-    #   A list of Elemental Inference feeds used by this job.
+    #   A list of Elemental Inference feeds created during this job.
     #   @return [Array<Types::ElementalInferenceFeed>]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ElementalInferenceConfiguration AWS API Documentation
@@ -5876,10 +5905,10 @@ module Aws::MediaConvert
       include Aws::Structure
     end
 
-    # Elemental Inference Feed.
+    # An AWS Elemental Inference Feed.
     #
     # @!attribute [rw] arn
-    #   Feed ARN.
+    #   The ARN of an AWS Elemental Inference Feed.
     #   @return [String]
     #
     # @!attribute [rw] feed_management_state
@@ -5891,6 +5920,36 @@ module Aws::MediaConvert
     class ElementalInferenceFeed < Struct.new(
       :arn,
       :feed_management_state)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The source of your Elemental Inference Feed configuration.
+    #
+    # @!attribute [rw] feed_arn
+    #   The ARN of an Elemental Inference Feed.
+    #   @return [String]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ElementalInferenceFeedConfigurationSource AWS API Documentation
+    #
+    class ElementalInferenceFeedConfigurationSource < Struct.new(
+      :feed_arn)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The Elemental Inference settings used in this job.
+    #
+    # @!attribute [rw] feed_configuration_source
+    #   Optional. The source of your Elemental Inference Feed configuration.
+    #   MediaConvert will reference this configuration source when you
+    #   specify job settings which use Elemental Inference.
+    #   @return [Types::ElementalInferenceFeedConfigurationSource]
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/mediaconvert-2017-08-29/ElementalInferenceSettings AWS API Documentation
+    #
+    class ElementalInferenceSettings < Struct.new(
+      :feed_configuration_source)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -9788,6 +9847,10 @@ module Aws::MediaConvert
     #   The Elemental Inference configuration used in this job.
     #   @return [Types::ElementalInferenceConfiguration]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] error_code
     #   Error code for the job
     #   @return [Integer]
@@ -9937,6 +10000,7 @@ module Aws::MediaConvert
       :created_at,
       :current_phase,
       :elemental_inference_configuration,
+      :elemental_inference_settings,
       :error_code,
       :error_message,
       :hop_destinations,
@@ -10179,6 +10243,10 @@ module Aws::MediaConvert
     #   An optional description you create for each job template.
     #   @return [String]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] hop_destinations
     #   Optional list of hop destinations.
     #   @return [Array<Types::HopDestination>]
@@ -10229,6 +10297,7 @@ module Aws::MediaConvert
       :category,
       :created_at,
       :description,
+      :elemental_inference_settings,
       :hop_destinations,
       :last_updated,
       :name,
@@ -15243,6 +15312,10 @@ module Aws::MediaConvert
     #   The new description for the job template, if you are changing it.
     #   @return [String]
     #
+    # @!attribute [rw] elemental_inference_settings
+    #   The Elemental Inference settings used in this job.
+    #   @return [Types::ElementalInferenceSettings]
+    #
     # @!attribute [rw] hop_destinations
     #   Optional list of hop destinations.
     #   @return [Array<Types::HopDestination>]
@@ -15282,6 +15355,7 @@ module Aws::MediaConvert
       :acceleration_settings,
       :category,
       :description,
+      :elemental_inference_settings,
       :hop_destinations,
       :name,
       :priority,

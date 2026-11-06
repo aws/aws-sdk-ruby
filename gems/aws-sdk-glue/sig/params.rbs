@@ -1980,9 +1980,12 @@ module Aws
       resource_uris: Array[
         {
           resource_type: ("JAR" | "FILE" | "ARCHIVE")?,
-          uri: ::String?
+          uri: ::String?,
+          last_modified: ::Time?
         }
-      ]?
+      ]?,
+      artifact_location: ::String?,
+      governance_mode: ("IAM_ONLY" | "LAKE_FORMATION")?
     }
 
       type transform_filter_criteria = {

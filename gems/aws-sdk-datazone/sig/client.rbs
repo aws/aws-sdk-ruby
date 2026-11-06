@@ -3968,13 +3968,7 @@ module Aws
                                    glue_connection_input: {
                                      description: ::String?,
                                      connection_properties: Hash[::String, ::String]?,
-                                     authentication_configuration: {
-                                       secret_arn: ::String?,
-                                       basic_authentication_credentials: {
-                                         user_name: ::String?,
-                                         password: ::String?
-                                       }?
-                                     }?
+                                     authentication_configuration: Params::authentication_configuration_patch?
                                    }?
                                  }?,
                                  iam_properties: {
@@ -4021,13 +4015,7 @@ module Aws
                                    connectivity_properties_patch: {
                                      description: ::String?,
                                      connection_properties: Hash[::String, ::String]?,
-                                     authentication_configuration: {
-                                       secret_arn: ::String?,
-                                       basic_authentication_credentials: {
-                                         user_name: ::String?,
-                                         password: ::String?
-                                       }?
-                                     }?
+                                     authentication_configuration: Params::authentication_configuration_patch?
                                    }?,
                                    snowflake_role: ::String?,
                                    lineage_sync: {

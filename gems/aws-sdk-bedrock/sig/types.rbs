@@ -468,7 +468,7 @@ module Aws::Bedrock
       attr_accessor unused_variables: ::Array[::String]
       attr_accessor conflicting_rules: ::Array[::String]
       attr_accessor disjoint_rule_sets: ::Array[Types::AutomatedReasoningPolicyDisjointRuleSet]
-      SENSITIVE: []
+      SENSITIVE: [:unused_types, :unused_variables]
     end
 
     class AutomatedReasoningPolicyDefinitionRule
@@ -542,7 +542,7 @@ module Aws::Bedrock
     class AutomatedReasoningPolicyDisjointRuleSet
       attr_accessor variables: ::Array[::String]
       attr_accessor rules: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:variables]
     end
 
     class AutomatedReasoningPolicyFidelityReport
@@ -551,7 +551,7 @@ module Aws::Bedrock
       attr_accessor rule_reports: ::Hash[::String, Types::AutomatedReasoningPolicyRuleReport]
       attr_accessor variable_reports: ::Hash[::String, Types::AutomatedReasoningPolicyVariableReport]
       attr_accessor document_sources: ::Array[Types::AutomatedReasoningPolicyReportSourceDocument]
-      SENSITIVE: []
+      SENSITIVE: [:variable_reports]
     end
 
     class AutomatedReasoningPolicyGenerateFidelityReportContent
@@ -641,7 +641,7 @@ module Aws::Bedrock
       attr_accessor grounding_justifications: ::Array[::String]
       attr_accessor accuracy_score: ::Float
       attr_accessor accuracy_justification: ::String
-      SENSITIVE: [:accuracy_justification]
+      SENSITIVE: [:grounding_justifications, :accuracy_justification]
     end
 
     class AutomatedReasoningPolicyScenario
@@ -789,7 +789,7 @@ module Aws::Bedrock
       attr_accessor grounding_justifications: ::Array[::String]
       attr_accessor accuracy_score: ::Float
       attr_accessor accuracy_justification: ::String
-      SENSITIVE: [:policy_variable, :accuracy_justification]
+      SENSITIVE: [:policy_variable, :grounding_justifications, :accuracy_justification]
     end
 
     class AutomatedReasoningPolicyWorkflowTypeContent
@@ -851,7 +851,7 @@ module Aws::Bedrock
 
     class BatchDeleteEvaluationJobRequest
       attr_accessor job_identifiers: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:job_identifiers]
     end
 
     class BatchDeleteEvaluationJobResponse
@@ -1482,7 +1482,7 @@ module Aws::Bedrock
       attr_accessor task_type: ("Summarization" | "Classification" | "QuestionAndAnswer" | "Generation" | "Custom")
       attr_accessor dataset: Types::EvaluationDataset
       attr_accessor metric_names: ::Array[::String]
-      SENSITIVE: []
+      SENSITIVE: [:metric_names]
     end
 
     class EvaluationInferenceConfig
@@ -1931,7 +1931,7 @@ module Aws::Bedrock
       attr_accessor blocked_input_messaging: ::String
       attr_accessor blocked_outputs_messaging: ::String
       attr_accessor kms_key_arn: ::String
-      SENSITIVE: [:name, :description, :blocked_input_messaging, :blocked_outputs_messaging]
+      SENSITIVE: [:name, :description, :status_reasons, :failure_recommendations, :blocked_input_messaging, :blocked_outputs_messaging]
     end
 
     class GetImportedModelRequest
@@ -2190,7 +2190,7 @@ module Aws::Bedrock
       attr_accessor output_action: ("BLOCK" | "NONE")
       attr_accessor input_enabled: bool
       attr_accessor output_enabled: bool
-      SENSITIVE: [:input_action, :output_action]
+      SENSITIVE: [:input_modalities, :output_modalities, :input_action, :output_action]
     end
 
     class GuardrailContentFilterConfig
@@ -2203,7 +2203,7 @@ module Aws::Bedrock
       attr_accessor output_action: ("BLOCK" | "NONE")
       attr_accessor input_enabled: bool
       attr_accessor output_enabled: bool
-      SENSITIVE: [:input_action, :output_action]
+      SENSITIVE: [:input_modalities, :output_modalities, :input_action, :output_action]
     end
 
     class GuardrailContentFiltersTier
@@ -2373,7 +2373,7 @@ module Aws::Bedrock
       attr_accessor output_action: ("BLOCK" | "NONE")
       attr_accessor input_enabled: bool
       attr_accessor output_enabled: bool
-      SENSITIVE: [:name, :definition, :input_action, :output_action]
+      SENSITIVE: [:name, :definition, :examples, :input_action, :output_action]
     end
 
     class GuardrailTopicConfig
@@ -2385,7 +2385,7 @@ module Aws::Bedrock
       attr_accessor output_action: ("BLOCK" | "NONE")
       attr_accessor input_enabled: bool
       attr_accessor output_enabled: bool
-      SENSITIVE: [:name, :definition, :input_action, :output_action]
+      SENSITIVE: [:name, :definition, :examples, :input_action, :output_action]
     end
 
     class GuardrailTopicPolicy
@@ -2463,7 +2463,7 @@ module Aws::Bedrock
     class ImplicitFilterConfiguration
       attr_accessor metadata_attributes: ::Array[Types::MetadataAttributeSchema]
       attr_accessor model_arn: ::String
-      SENSITIVE: []
+      SENSITIVE: [:metadata_attributes]
     end
 
     class ImportedModelSummary
@@ -3350,7 +3350,7 @@ module Aws::Bedrock
       attr_accessor and_all: ::Array[Types::RetrievalFilter]
       attr_accessor or_all: ::Array[Types::RetrievalFilter]
       attr_accessor unknown: untyped
-      SENSITIVE: []
+      SENSITIVE: [:and_all, :or_all]
 
       class Equals < RetrievalFilter
       end

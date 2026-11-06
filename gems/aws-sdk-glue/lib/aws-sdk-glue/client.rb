@@ -5360,8 +5360,11 @@ module Aws::Glue
     #         {
     #           resource_type: "JAR", # accepts JAR, FILE, ARCHIVE
     #           uri: "URI",
+    #           last_modified: Time.now,
     #         },
     #       ],
+    #       artifact_location: "URI",
+    #       governance_mode: "IAM_ONLY", # accepts IAM_ONLY, LAKE_FORMATION
     #     },
     #   })
     #
@@ -13709,6 +13712,9 @@ module Aws::Glue
     #   resp.user_defined_function.resource_uris #=> Array
     #   resp.user_defined_function.resource_uris[0].resource_type #=> String, one of "JAR", "FILE", "ARCHIVE"
     #   resp.user_defined_function.resource_uris[0].uri #=> String
+    #   resp.user_defined_function.resource_uris[0].last_modified #=> Time
+    #   resp.user_defined_function.artifact_location #=> String
+    #   resp.user_defined_function.governance_mode #=> String, one of "IAM_ONLY", "LAKE_FORMATION"
     #   resp.user_defined_function.catalog_id #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/glue-2017-03-31/GetUserDefinedFunction AWS API Documentation
@@ -13782,6 +13788,9 @@ module Aws::Glue
     #   resp.user_defined_functions[0].resource_uris #=> Array
     #   resp.user_defined_functions[0].resource_uris[0].resource_type #=> String, one of "JAR", "FILE", "ARCHIVE"
     #   resp.user_defined_functions[0].resource_uris[0].uri #=> String
+    #   resp.user_defined_functions[0].resource_uris[0].last_modified #=> Time
+    #   resp.user_defined_functions[0].artifact_location #=> String
+    #   resp.user_defined_functions[0].governance_mode #=> String, one of "IAM_ONLY", "LAKE_FORMATION"
     #   resp.user_defined_functions[0].catalog_id #=> String
     #   resp.next_token #=> String
     #
@@ -22098,8 +22107,11 @@ module Aws::Glue
     #         {
     #           resource_type: "JAR", # accepts JAR, FILE, ARCHIVE
     #           uri: "URI",
+    #           last_modified: Time.now,
     #         },
     #       ],
+    #       artifact_location: "URI",
+    #       governance_mode: "IAM_ONLY", # accepts IAM_ONLY, LAKE_FORMATION
     #     },
     #   })
     #
@@ -22182,7 +22194,7 @@ module Aws::Glue
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-glue'
-      context[:gem_version] = '1.291.0'
+      context[:gem_version] = '1.292.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

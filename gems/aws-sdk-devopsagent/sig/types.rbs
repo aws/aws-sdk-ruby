@@ -519,7 +519,7 @@ module Aws::DevOpsAgent
       attr_accessor client_id: ::String
       attr_accessor exchange_parameters: ::Hash[::String, ::String]
       attr_accessor client_secret: ::String
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class DynatraceServiceAuthorizationConfig
@@ -1145,7 +1145,7 @@ module Aws::DevOpsAgent
 
     class MCPServerCustomHeadersConfig
       attr_accessor headers: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:headers]
     end
 
     class MCPServerDatadogConfiguration
@@ -1185,7 +1185,7 @@ module Aws::DevOpsAgent
       attr_accessor client_secret: ::String
       attr_accessor support_code_challenge: bool
       attr_accessor scopes: ::Array[::String]
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class MCPServerOAuthClientCredentialsConfig
@@ -1195,7 +1195,7 @@ module Aws::DevOpsAgent
       attr_accessor client_secret: ::String
       attr_accessor exchange_url: ::String
       attr_accessor scopes: ::Array[::String]
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class MCPServerSigV4AuthorizationConfig
@@ -1204,7 +1204,7 @@ module Aws::DevOpsAgent
       attr_accessor role_arn: ::String
       attr_accessor mcp_role_arn: ::String
       attr_accessor custom_headers: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:custom_headers]
     end
 
     class MCPServerSigV4Configuration
@@ -1338,7 +1338,7 @@ module Aws::DevOpsAgent
       attr_accessor client_id: ::String
       attr_accessor exchange_parameters: ::Hash[::String, ::String]
       attr_accessor client_secret: ::String
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class PatternFilter
@@ -1518,7 +1518,7 @@ module Aws::DevOpsAgent
       attr_accessor role_arn: ::String
       attr_accessor mcp_role_arn: ::String
       attr_accessor custom_headers: ::Hash[::String, ::String]
-      SENSITIVE: [:description]
+      SENSITIVE: [:description, :custom_headers]
     end
 
     class RegisteredNewRelicDetails
@@ -1623,7 +1623,7 @@ module Aws::DevOpsAgent
       attr_accessor client_secret: ::String
       attr_accessor exchange_url: ::String
       attr_accessor scopes: ::Array[::String]
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class RemoteAgentServiceDetails
@@ -1954,7 +1954,7 @@ module Aws::DevOpsAgent
       attr_accessor client_id: ::String
       attr_accessor exchange_parameters: ::Hash[::String, ::String]
       attr_accessor client_secret: ::String
-      SENSITIVE: [:client_id, :client_secret]
+      SENSITIVE: [:client_id, :exchange_parameters, :client_secret]
     end
 
     class ServiceNowServiceAuthorizationConfig

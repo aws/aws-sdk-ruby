@@ -966,6 +966,12 @@ module Aws::SSM
     class DeleteResourcePolicyResponse < Aws::EmptyStructure
     end
 
+    class DeregisterDefaultHostManagementConfigurationRequest < Aws::EmptyStructure
+    end
+
+    class DeregisterDefaultHostManagementConfigurationResult < Aws::EmptyStructure
+    end
+
     class DeregisterManagedInstanceRequest
       attr_accessor instance_id: ::String
       SENSITIVE: []
@@ -3740,6 +3746,18 @@ module Aws::SSM
     class PutResourcePolicyResponse
       attr_accessor policy_id: ::String
       attr_accessor policy_hash: ::String
+      SENSITIVE: []
+    end
+
+    class RegisterDefaultHostManagementConfigurationRequest
+      attr_accessor permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED")
+      attr_accessor role_arn: ::String
+      attr_accessor overwrite: bool
+      SENSITIVE: []
+    end
+
+    class RegisterDefaultHostManagementConfigurationResult
+      attr_accessor role_arn: ::String
       SENSITIVE: []
     end
 

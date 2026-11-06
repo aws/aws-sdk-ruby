@@ -614,6 +614,14 @@ module Aws
                                   ) -> _DeleteResourcePolicyResponseSuccess
                                 | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteResourcePolicyResponseSuccess
 
+      interface _DeregisterDefaultHostManagementConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterDefaultHostManagementConfigurationResult]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#deregister_default_host_management_configuration-instance_method
+      def deregister_default_host_management_configuration: (
+                                                            ) -> _DeregisterDefaultHostManagementConfigurationResponseSuccess
+                                                          | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeregisterDefaultHostManagementConfigurationResponseSuccess
+
       interface _DeregisterManagedInstanceResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeregisterManagedInstanceResult]
       end
@@ -2253,6 +2261,18 @@ module Aws
                                  ?policy_hash: ::String
                                ) -> _PutResourcePolicyResponseSuccess
                              | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _PutResourcePolicyResponseSuccess
+
+      interface _RegisterDefaultHostManagementConfigurationResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::RegisterDefaultHostManagementConfigurationResult]
+        def role_arn: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/SSM/Client.html#register_default_host_management_configuration-instance_method
+      def register_default_host_management_configuration: (
+                                                            permission_model: ("SERVICE_MANAGED" | "SELF_MANAGED"),
+                                                            ?role_arn: ::String,
+                                                            ?overwrite: bool
+                                                          ) -> _RegisterDefaultHostManagementConfigurationResponseSuccess
+                                                        | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _RegisterDefaultHostManagementConfigurationResponseSuccess
 
       interface _RegisterDefaultPatchBaselineResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::RegisterDefaultPatchBaselineResult]

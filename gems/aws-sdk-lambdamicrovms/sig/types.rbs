@@ -51,7 +51,7 @@ module Aws::LambdaMicrovms
 
     class CreateMicrovmAuthTokenResponse
       attr_accessor auth_token: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:auth_token]
     end
 
     class CreateMicrovmImageRequest
@@ -70,7 +70,7 @@ module Aws::LambdaMicrovms
       attr_accessor name: ::String
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor client_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class CreateMicrovmImageResponse
@@ -95,7 +95,7 @@ module Aws::LambdaMicrovms
       attr_accessor tags: ::Hash[::String, ::String]
       attr_accessor updated_at: ::Time
       attr_accessor image_version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class CreateMicrovmShellAuthTokenRequest
@@ -106,7 +106,7 @@ module Aws::LambdaMicrovms
 
     class CreateMicrovmShellAuthTokenResponse
       attr_accessor auth_token: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:auth_token]
     end
 
     class DeleteMicrovmImageInput
@@ -198,7 +198,7 @@ module Aws::LambdaMicrovms
       attr_accessor updated_at: ::Time
       attr_accessor state_reason: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class GetMicrovmRequest
@@ -444,7 +444,7 @@ module Aws::LambdaMicrovms
       attr_accessor updated_at: ::Time
       attr_accessor state_reason: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class MicrovmItem
@@ -618,7 +618,7 @@ module Aws::LambdaMicrovms
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor image_identifier: ::String
       attr_accessor client_token: ::String
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class UpdateMicrovmImageResponse
@@ -642,7 +642,7 @@ module Aws::LambdaMicrovms
       attr_accessor environment_variables: ::Hash[::String, ::String]
       attr_accessor updated_at: ::Time
       attr_accessor image_version: ::String
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class UpdateMicrovmImageVersionRequest
@@ -673,7 +673,7 @@ module Aws::LambdaMicrovms
       attr_accessor updated_at: ::Time
       attr_accessor state_reason: ::String
       attr_accessor tags: ::Hash[::String, ::String]
-      SENSITIVE: []
+      SENSITIVE: [:environment_variables]
     end
 
     class ValidationException

@@ -1651,6 +1651,7 @@ module Aws::AutoScaling
     #   activities = auto_scaling_group.activities({
     #     activity_ids: ["XmlString"],
     #     include_deleted_groups: false,
+    #     include_managed_resources: false,
     #     filters: [
     #       {
     #         name: "XmlString",
@@ -1671,6 +1672,10 @@ module Aws::AutoScaling
     # @option options [Boolean] :include_deleted_groups
     #   Indicates whether to include scaling activity from deleted Auto
     #   Scaling groups.
+    # @option options [Boolean] :include_managed_resources
+    #   Specifies whether to include scaling activities for managed Auto
+    #   Scaling groups in the response. When set to `true` (default), the
+    #   response includes scaling activities for managed Auto Scaling groups.
     # @option options [Array<Types::Filter>] :filters
     #   One or more filters to limit the results based on specific criteria.
     #   The following filters are supported:
@@ -1830,8 +1835,15 @@ module Aws::AutoScaling
 
     # @example Request syntax with placeholder values
     #
-    #   auto_scaling_group.notification_configurations()
+    #   notification_configurations = auto_scaling_group.notification_configurations({
+    #     include_managed_resources: false,
+    #   })
     # @param [Hash] options ({})
+    # @option options [Boolean] :include_managed_resources
+    #   Specifies whether to include notification configurations for managed
+    #   Auto Scaling groups in the response. When set to `true` (default), the
+    #   response includes notification configurations for managed Auto Scaling
+    #   groups.
     # @return [NotificationConfiguration::Collection]
     def notification_configurations(options = {})
       batches = Enumerator.new do |y|
@@ -1861,6 +1873,7 @@ module Aws::AutoScaling
     #   policies = auto_scaling_group.policies({
     #     policy_names: ["ResourceName"],
     #     policy_types: ["XmlStringMaxLen64"],
+    #     include_managed_resources: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :policy_names
@@ -1873,6 +1886,10 @@ module Aws::AutoScaling
     # @option options [Array<String>] :policy_types
     #   One or more policy types. The valid values are `SimpleScaling`,
     #   `StepScaling`, `TargetTrackingScaling`, and `PredictiveScaling`.
+    # @option options [Boolean] :include_managed_resources
+    #   Specifies whether to include scaling policies for managed Auto Scaling
+    #   groups in the response. When set to `true` (default), the response
+    #   includes scaling policies for managed Auto Scaling groups.
     # @return [ScalingPolicy::Collection]
     def policies(options = {})
       batches = Enumerator.new do |y|
@@ -1901,6 +1918,7 @@ module Aws::AutoScaling
     #     scheduled_action_names: ["XmlStringMaxLen255"],
     #     start_time: Time.now,
     #     end_time: Time.now,
+    #     include_managed_resources: false,
     #   })
     # @param [Hash] options ({})
     # @option options [Array<String>] :scheduled_action_names
@@ -1915,6 +1933,10 @@ module Aws::AutoScaling
     # @option options [Time,DateTime,Date,Integer,String] :end_time
     #   The latest scheduled start time to return. If scheduled action names
     #   are provided, this property is ignored.
+    # @option options [Boolean] :include_managed_resources
+    #   Specifies whether to include scheduled actions for managed Auto
+    #   Scaling groups in the response. When set to `true` (default), the
+    #   response includes scheduled actions for managed Auto Scaling groups.
     # @return [ScheduledAction::Collection]
     def scheduled_actions(options = {})
       batches = Enumerator.new do |y|
