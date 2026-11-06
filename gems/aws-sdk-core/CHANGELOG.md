@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Reduce memory usage of loaded service APIs by allocating shape metadata Hashes on first write.
+
 3.264.0 (2026-11-04)
 ------------------
 

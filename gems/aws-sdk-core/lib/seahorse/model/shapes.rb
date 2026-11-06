@@ -9,7 +9,7 @@ module Seahorse
       class ShapeRef
 
         def initialize(options = {})
-          @metadata = {}
+          @metadata = nil
           @required = false
           @deprecated = false
           @location = nil
@@ -84,7 +84,7 @@ module Seahorse
 
         # Gets metadata for the given `key`.
         def [](key)
-          if @metadata.key?(key.to_s)
+          if @metadata&.key?(key.to_s)
             @metadata[key.to_s]
           elsif @shape
             @shape[key.to_s]
@@ -93,7 +93,7 @@ module Seahorse
 
         # Sets metadata for the given `key`.
         def []=(key, value)
-          @metadata[key.to_s] = value
+          (@metadata ||= {})[key.to_s] = value
         end
 
       end
@@ -101,7 +101,7 @@ module Seahorse
       class Shape
 
         def initialize(options = {})
-          @metadata = {}
+          @metadata = nil
           options.each_pair do |key, value|
             if respond_to?("#{key}=")
               send("#{key}=", value)
@@ -122,12 +122,12 @@ module Seahorse
 
         # Gets metadata for the given `key`.
         def [](key)
-          @metadata[key.to_s]
+          @metadata && @metadata[key.to_s]
         end
 
         # Sets metadata for the given `key`.
         def []=(key, value)
-          @metadata[key.to_s] = value
+          (@metadata ||= {})[key.to_s] = value
         end
 
       end
