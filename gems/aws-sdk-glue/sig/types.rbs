@@ -1447,6 +1447,32 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class CreateDataQualityEvaluationConfigRequest
+      attr_accessor name: ::String
+      attr_accessor level: ("CATALOG" | "DATABASE" | "TABLE")
+      attr_accessor data_source: Types::DataQualityEvaluationConfigDataSource
+      attr_accessor ruleset_name: ::String
+      attr_accessor managed_ruleset_name: ("SIMPLE" | "ADVANCED")
+      attr_accessor triggers: ::Array[("ONCE" | "SCHEDULE" | "METADATA_CHANGE")]
+      attr_accessor schedule_expression: ::String
+      attr_accessor start_at: ::Time
+      attr_accessor end_at: ::Time
+      attr_accessor role: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor additional_run_options: Types::DataQualityEvaluationConfigAdditionalRunOptions
+      attr_accessor additional_data_sources: ::Hash[::String, Types::DataSource]
+      attr_accessor tags: ::Hash[::String, ::String]
+      attr_accessor client_token: ::String
+      SENSITIVE: []
+    end
+
+    class CreateDataQualityEvaluationConfigResponse
+      attr_accessor name: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      SENSITIVE: []
+    end
+
     class CreateDataQualityRulesetRequest
       attr_accessor name: ::String
       attr_accessor description: ::String
@@ -2036,6 +2062,60 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class DataQualityEvaluationConfigAdditionalRunOptions
+      attr_accessor cloud_watch_metrics_enabled: bool
+      attr_accessor results_s3_prefix: ::String
+      attr_accessor composite_rule_evaluation_method: ("COLUMN" | "ROW")
+      attr_accessor row_level_results: Types::RowLevelResultsOptions
+      attr_accessor profiling_results: Types::ProfilingResultsOptions
+      attr_accessor observation_scope: ("ALL" | "NONE")
+      attr_accessor observation_mode: ("SCHEDULED" | "FIXED")
+      attr_accessor data_quality_rule_results: Types::DataQualityRuleResultsOptions
+      attr_accessor observation_results: Types::ObservationResultsOptions
+      attr_accessor custom_log_group_prefix: ::String
+      SENSITIVE: []
+    end
+
+    class DataQualityEvaluationConfigDataSource
+      attr_accessor glue_tables: Types::DataQualityEvaluationConfigGlueTables
+      SENSITIVE: []
+    end
+
+    class DataQualityEvaluationConfigGlueTables
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name_pattern: ::String
+      attr_accessor pre_processing_query: ::String
+      attr_accessor connection_name: ::String
+      attr_accessor additional_options: ::Hash[::String, ::String]
+      SENSITIVE: []
+    end
+
+    class DataQualityEvaluationConfigListDataSource
+      attr_accessor glue_tables: Types::DataQualityEvaluationConfigListGlueTables
+      SENSITIVE: []
+    end
+
+    class DataQualityEvaluationConfigListDetails
+      attr_accessor name: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor level: ("CATALOG" | "DATABASE" | "TABLE")
+      attr_accessor data_source: Types::DataQualityEvaluationConfigListDataSource
+      attr_accessor ruleset_name: ::String
+      attr_accessor managed_ruleset_name: ("SIMPLE" | "ADVANCED")
+      attr_accessor pause_runs: bool
+      SENSITIVE: []
+    end
+
+    class DataQualityEvaluationConfigListGlueTables
+      attr_accessor catalog_id: ::String
+      attr_accessor database_name: ::String
+      attr_accessor table_name_pattern: ::String
+      SENSITIVE: []
+    end
+
     class DataQualityEvaluationRunAdditionalRunOptions
       attr_accessor cloud_watch_metrics_enabled: bool
       attr_accessor results_s3_prefix: ::String
@@ -2076,6 +2156,8 @@ module Aws::Glue
 
     class DataQualityResult
       attr_accessor result_id: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor data_quality_evaluation_config: ::String
       attr_accessor profile_id: ::String
       attr_accessor score: ::Float
       attr_accessor data_source: Types::DataSource
@@ -2095,6 +2177,8 @@ module Aws::Glue
 
     class DataQualityResultDescription
       attr_accessor result_id: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor data_quality_evaluation_config: ::String
       attr_accessor data_source: Types::DataSource
       attr_accessor job_name: ::String
       attr_accessor job_run_id: ::String
@@ -2108,11 +2192,15 @@ module Aws::Glue
       attr_accessor job_run_id: ::String
       attr_accessor started_after: ::Time
       attr_accessor started_before: ::Time
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor data_quality_evaluation_config: ::String
       SENSITIVE: []
     end
 
     class DataQualityResultV2Item
       attr_accessor result_id: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor data_quality_evaluation_config: ::String
       attr_accessor data_source: Types::DataSource
       attr_accessor dimensions: ::Hash[::String, ::String]
       attr_accessor tags: ::Hash[::String, ::String]
@@ -2132,6 +2220,8 @@ module Aws::Glue
 
     class DataQualityResultsV2Description
       attr_accessor result_id: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor data_quality_evaluation_config: ::String
       attr_accessor data_source: Types::DataSource
       attr_accessor result_published_on: ::Time
       attr_accessor dimensions: ::Hash[::String, ::String]
@@ -2146,6 +2236,8 @@ module Aws::Glue
       attr_accessor published_before: ::Time
       attr_accessor dimensions: ::Hash[::String, ::String]
       attr_accessor evaluation_context: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor data_quality_evaluation_config: ::String
       SENSITIVE: []
     end
 
@@ -2458,6 +2550,14 @@ module Aws::Glue
     class DeleteCustomEntityTypeResponse
       attr_accessor name: ::String
       SENSITIVE: []
+    end
+
+    class DeleteDataQualityEvaluationConfigRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class DeleteDataQualityEvaluationConfigResponse < Aws::EmptyStructure
     end
 
     class DeleteDataQualityRulesetRequest
@@ -3554,6 +3654,33 @@ module Aws::Glue
       SENSITIVE: []
     end
 
+    class GetDataQualityEvaluationConfigRequest
+      attr_accessor name: ::String
+      SENSITIVE: []
+    end
+
+    class GetDataQualityEvaluationConfigResponse
+      attr_accessor name: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor level: ("CATALOG" | "DATABASE" | "TABLE")
+      attr_accessor data_source: Types::DataQualityEvaluationConfigDataSource
+      attr_accessor ruleset_name: ::String
+      attr_accessor managed_ruleset_name: ("SIMPLE" | "ADVANCED")
+      attr_accessor triggers: ::Array[("ONCE" | "SCHEDULE" | "METADATA_CHANGE")]
+      attr_accessor schedule_expression: ::String
+      attr_accessor start_at: ::Time
+      attr_accessor end_at: ::Time
+      attr_accessor pause_runs: bool
+      attr_accessor role: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor additional_run_options: Types::DataQualityEvaluationConfigAdditionalRunOptions
+      attr_accessor additional_data_sources: ::Hash[::String, Types::DataSource]
+      SENSITIVE: []
+    end
+
     class GetDataQualityModelRequest
       attr_accessor statistic_id: ::String
       attr_accessor profile_id: ::String
@@ -3587,6 +3714,8 @@ module Aws::Glue
 
     class GetDataQualityResultResponse
       attr_accessor result_id: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor data_quality_evaluation_config: ::String
       attr_accessor profile_id: ::String
       attr_accessor score: ::Float
       attr_accessor data_source: Types::DataSource
@@ -3611,6 +3740,8 @@ module Aws::Glue
 
     class GetDataQualityResultV2Response
       attr_accessor result_id: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor data_quality_evaluation_config: ::String
       attr_accessor data_source: Types::DataSource
       attr_accessor profile_id: ::String
       attr_accessor dimensions: ::Hash[::String, ::String]
@@ -5376,6 +5507,19 @@ module Aws::Glue
 
     class ListCustomEntityTypesResponse
       attr_accessor custom_entity_types: ::Array[Types::CustomEntityType]
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityEvaluationConfigsRequest
+      attr_accessor level: ("CATALOG" | "DATABASE" | "TABLE")
+      attr_accessor max_results: ::Integer
+      attr_accessor next_token: ::String
+      SENSITIVE: []
+    end
+
+    class ListDataQualityEvaluationConfigsResponse
+      attr_accessor data_quality_evaluation_configs: ::Array[Types::DataQualityEvaluationConfigListDetails]
       attr_accessor next_token: ::String
       SENSITIVE: []
     end
@@ -8248,6 +8392,46 @@ module Aws::Glue
       attr_accessor custom_datatype_configured: bool
       attr_accessor custom_datatypes: ::Array[::String]
       attr_accessor serde: ("OpenCSVSerDe" | "LazySimpleSerDe" | "None")
+      SENSITIVE: []
+    end
+
+    class UpdateDataQualityEvaluationConfigRequest
+      attr_accessor name: ::String
+      attr_accessor data_source: Types::DataQualityEvaluationConfigDataSource
+      attr_accessor ruleset_name: ::String
+      attr_accessor managed_ruleset_name: ("SIMPLE" | "ADVANCED")
+      attr_accessor triggers: ::Array[("ONCE" | "SCHEDULE" | "METADATA_CHANGE")]
+      attr_accessor schedule_expression: ::String
+      attr_accessor start_at: ::Time
+      attr_accessor end_at: ::Time
+      attr_accessor pause_runs: bool
+      attr_accessor role: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor additional_run_options: Types::DataQualityEvaluationConfigAdditionalRunOptions
+      attr_accessor additional_data_sources: ::Hash[::String, Types::DataSource]
+      SENSITIVE: []
+    end
+
+    class UpdateDataQualityEvaluationConfigResponse
+      attr_accessor name: ::String
+      attr_accessor evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")
+      attr_accessor created_on: ::Time
+      attr_accessor last_modified_on: ::Time
+      attr_accessor level: ("CATALOG" | "DATABASE" | "TABLE")
+      attr_accessor data_source: Types::DataQualityEvaluationConfigDataSource
+      attr_accessor ruleset_name: ::String
+      attr_accessor managed_ruleset_name: ("SIMPLE" | "ADVANCED")
+      attr_accessor triggers: ::Array[("ONCE" | "SCHEDULE" | "METADATA_CHANGE")]
+      attr_accessor schedule_expression: ::String
+      attr_accessor start_at: ::Time
+      attr_accessor end_at: ::Time
+      attr_accessor pause_runs: bool
+      attr_accessor role: ::String
+      attr_accessor number_of_workers: ::Integer
+      attr_accessor timeout: ::Integer
+      attr_accessor additional_run_options: Types::DataQualityEvaluationConfigAdditionalRunOptions
+      attr_accessor additional_data_sources: ::Hash[::String, Types::DataSource]
       SENSITIVE: []
     end
 

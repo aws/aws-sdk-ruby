@@ -55,7 +55,7 @@ module Aws::S3Vectors
   autoload :EndpointProvider, 'aws-sdk-s3vectors/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-s3vectors/endpoints'
 
-  GEM_VERSION = '1.30.0'
+  GEM_VERSION = '1.31.0'
 
 end
 

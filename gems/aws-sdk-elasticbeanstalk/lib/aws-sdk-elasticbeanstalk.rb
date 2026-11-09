@@ -55,7 +55,7 @@ module Aws::ElasticBeanstalk
   autoload :EndpointProvider, 'aws-sdk-elasticbeanstalk/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-elasticbeanstalk/endpoints'
 
-  GEM_VERSION = '1.116.0'
+  GEM_VERSION = '1.117.0'
 
 end
 

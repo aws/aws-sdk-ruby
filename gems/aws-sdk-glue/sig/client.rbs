@@ -576,6 +576,32 @@ module Aws
                                      ) -> _CreateCustomEntityTypeResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateCustomEntityTypeResponseSuccess
 
+      interface _CreateDataQualityEvaluationConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataQualityEvaluationConfigResponse]
+        def name: () -> ::String
+        def evaluation_run_mode: () -> ("ON_DEMAND" | "EVALUATION_CONFIG")
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#create_data_quality_evaluation_config-instance_method
+      def create_data_quality_evaluation_config: (
+                                                   name: ::String,
+                                                   level: ("CATALOG" | "DATABASE" | "TABLE"),
+                                                   data_source: Params::data_quality_evaluation_config_data_source,
+                                                   ?ruleset_name: ::String,
+                                                   ?managed_ruleset_name: ("SIMPLE" | "ADVANCED"),
+                                                   ?triggers: Array[("ONCE" | "SCHEDULE" | "METADATA_CHANGE")],
+                                                   ?schedule_expression: ::String,
+                                                   ?start_at: ::Time,
+                                                   ?end_at: ::Time,
+                                                   role: ::String,
+                                                   ?number_of_workers: ::Integer,
+                                                   ?timeout: ::Integer,
+                                                   ?additional_run_options: Params::data_quality_evaluation_config_additional_run_options,
+                                                   ?additional_data_sources: Hash[::String, Params::data_source],
+                                                   ?tags: Hash[::String, ::String],
+                                                   ?client_token: ::String
+                                                 ) -> _CreateDataQualityEvaluationConfigResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _CreateDataQualityEvaluationConfigResponseSuccess
+
       interface _CreateDataQualityRulesetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::CreateDataQualityRulesetResponse]
         def name: () -> ::String
@@ -1268,6 +1294,15 @@ module Aws
                                      ) -> _DeleteCustomEntityTypeResponseSuccess
                                    | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteCustomEntityTypeResponseSuccess
 
+      interface _DeleteDataQualityEvaluationConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataQualityEvaluationConfigResponse]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#delete_data_quality_evaluation_config-instance_method
+      def delete_data_quality_evaluation_config: (
+                                                   name: ::String
+                                                 ) -> _DeleteDataQualityEvaluationConfigResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _DeleteDataQualityEvaluationConfigResponseSuccess
+
       interface _DeleteDataQualityRulesetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::DeleteDataQualityRulesetResponse]
       end
@@ -1959,6 +1994,33 @@ module Aws
                                                  ) -> _GetDataCatalogExportConfigurationResponseSuccess
                                                | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataCatalogExportConfigurationResponseSuccess
 
+      interface _GetDataQualityEvaluationConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityEvaluationConfigResponse]
+        def name: () -> ::String
+        def evaluation_run_mode: () -> ("ON_DEMAND" | "EVALUATION_CONFIG")
+        def created_on: () -> ::Time
+        def last_modified_on: () -> ::Time
+        def level: () -> ("CATALOG" | "DATABASE" | "TABLE")
+        def data_source: () -> Types::DataQualityEvaluationConfigDataSource
+        def ruleset_name: () -> ::String
+        def managed_ruleset_name: () -> ("SIMPLE" | "ADVANCED")
+        def triggers: () -> ::Array[("ONCE" | "SCHEDULE" | "METADATA_CHANGE")]
+        def schedule_expression: () -> ::String
+        def start_at: () -> ::Time
+        def end_at: () -> ::Time
+        def pause_runs: () -> bool
+        def role: () -> ::String
+        def number_of_workers: () -> ::Integer
+        def timeout: () -> ::Integer
+        def additional_run_options: () -> Types::DataQualityEvaluationConfigAdditionalRunOptions
+        def additional_data_sources: () -> ::Hash[::String, Types::DataSource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#get_data_quality_evaluation_config-instance_method
+      def get_data_quality_evaluation_config: (
+                                                name: ::String
+                                              ) -> _GetDataQualityEvaluationConfigResponseSuccess
+                                            | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _GetDataQualityEvaluationConfigResponseSuccess
+
       interface _GetDataQualityModelResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityModelResponse]
         def status: () -> ("RUNNING" | "SUCCEEDED" | "FAILED")
@@ -1988,6 +2050,8 @@ module Aws
       interface _GetDataQualityResultResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityResultResponse]
         def result_id: () -> ::String
+        def evaluation_run_mode: () -> ("ON_DEMAND" | "EVALUATION_CONFIG")
+        def data_quality_evaluation_config: () -> ::String
         def profile_id: () -> ::String
         def score: () -> ::Float
         def data_source: () -> Types::DataSource
@@ -2012,6 +2076,8 @@ module Aws
       interface _GetDataQualityResultV2ResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::GetDataQualityResultV2Response]
         def result_id: () -> ::String
+        def evaluation_run_mode: () -> ("ON_DEMAND" | "EVALUATION_CONFIG")
+        def data_quality_evaluation_config: () -> ::String
         def data_source: () -> Types::DataSource
         def profile_id: () -> ::String
         def dimensions: () -> ::Hash[::String, ::String]
@@ -3190,6 +3256,19 @@ module Aws
                                     ) -> _ListCustomEntityTypesResponseSuccess
                                   | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListCustomEntityTypesResponseSuccess
 
+      interface _ListDataQualityEvaluationConfigsResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::ListDataQualityEvaluationConfigsResponse]
+        def data_quality_evaluation_configs: () -> ::Array[Types::DataQualityEvaluationConfigListDetails]
+        def next_token: () -> ::String
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#list_data_quality_evaluation_configs-instance_method
+      def list_data_quality_evaluation_configs: (
+                                                  ?level: ("CATALOG" | "DATABASE" | "TABLE"),
+                                                  ?max_results: ::Integer,
+                                                  ?next_token: ::String
+                                                ) -> _ListDataQualityEvaluationConfigsResponseSuccess
+                                              | (?Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _ListDataQualityEvaluationConfigsResponseSuccess
+
       interface _ListDataQualityResultsResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::ListDataQualityResultsResponse]
         def results: () -> ::Array[Types::DataQualityResultDescription]
@@ -3202,7 +3281,9 @@ module Aws
                                          job_name: ::String?,
                                          job_run_id: ::String?,
                                          started_after: ::Time?,
-                                         started_before: ::Time?
+                                         started_before: ::Time?,
+                                         evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")?,
+                                         data_quality_evaluation_config: ::String?
                                        },
                                        ?next_token: ::String,
                                        ?max_results: ::Integer
@@ -3221,7 +3302,9 @@ module Aws
                                             published_after: ::Time?,
                                             published_before: ::Time?,
                                             dimensions: Hash[::String, ::String]?,
-                                            evaluation_context: ::String?
+                                            evaluation_context: ::String?,
+                                            evaluation_run_mode: ("ON_DEMAND" | "EVALUATION_CONFIG")?,
+                                            data_quality_evaluation_config: ::String?
                                           },
                                           ?next_token: ::String,
                                           ?max_results: ::Integer
@@ -4274,54 +4357,12 @@ module Aws
                                                          results_s3_prefix: ::String?,
                                                          composite_rule_evaluation_method: ("COLUMN" | "ROW")?,
                                                          custom_log_group_prefix: ::String?,
-                                                         row_level_results: {
-                                                           max_rows_to_write: ::Integer?,
-                                                           result_type: ("ALL" | "PASSED_ONLY" | "FAILED_ONLY")?,
-                                                           catalog_table_config: {
-                                                             database_name: ::String?,
-                                                             table_name: ::String?,
-                                                             s3_location: ::String?,
-                                                             catalog_id: ::String?
-                                                           }?
-                                                         }?,
-                                                         profiling_results: {
-                                                           write_profiling_results_enabled: bool?,
-                                                           catalog_table_config: {
-                                                             database_name: ::String?,
-                                                             table_name: ::String?,
-                                                             s3_location: ::String?,
-                                                             catalog_id: ::String?
-                                                           }?,
-                                                           distribution_results: {
-                                                             write_distribution_results_enabled: bool?,
-                                                             catalog_table_config: {
-                                                               database_name: ::String?,
-                                                               table_name: ::String?,
-                                                               s3_location: ::String?,
-                                                               catalog_id: ::String?
-                                                             }?
-                                                           }?
-                                                         }?,
+                                                         row_level_results: Params::row_level_results_options?,
+                                                         profiling_results: Params::profiling_results_options?,
                                                          observation_scope: ("ALL" | "NONE")?,
                                                          observation_mode: ("SCHEDULED" | "FIXED")?,
-                                                         data_quality_rule_results: {
-                                                           write_data_quality_rule_results_enabled: bool?,
-                                                           catalog_table_config: {
-                                                             database_name: ::String?,
-                                                             table_name: ::String?,
-                                                             s3_location: ::String?,
-                                                             catalog_id: ::String?
-                                                           }?
-                                                         }?,
-                                                         observation_results: {
-                                                           write_observation_results_enabled: bool?,
-                                                           catalog_table_config: {
-                                                             database_name: ::String?,
-                                                             table_name: ::String?,
-                                                             s3_location: ::String?,
-                                                             catalog_id: ::String?
-                                                           }?
-                                                         }?
+                                                         data_quality_rule_results: Params::data_quality_rule_results_options?,
+                                                         observation_results: Params::observation_results_options?
                                                        },
                                                        ruleset_names: Array[::String],
                                                        ?additional_data_sources: Hash[::String, Params::data_source]
@@ -4743,6 +4784,46 @@ module Aws
                                      ?schedule: ::String
                                    ) -> _UpdateCrawlerScheduleResponseSuccess
                                  | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateCrawlerScheduleResponseSuccess
+
+      interface _UpdateDataQualityEvaluationConfigResponseSuccess
+        include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataQualityEvaluationConfigResponse]
+        def name: () -> ::String
+        def evaluation_run_mode: () -> ("ON_DEMAND" | "EVALUATION_CONFIG")
+        def created_on: () -> ::Time
+        def last_modified_on: () -> ::Time
+        def level: () -> ("CATALOG" | "DATABASE" | "TABLE")
+        def data_source: () -> Types::DataQualityEvaluationConfigDataSource
+        def ruleset_name: () -> ::String
+        def managed_ruleset_name: () -> ("SIMPLE" | "ADVANCED")
+        def triggers: () -> ::Array[("ONCE" | "SCHEDULE" | "METADATA_CHANGE")]
+        def schedule_expression: () -> ::String
+        def start_at: () -> ::Time
+        def end_at: () -> ::Time
+        def pause_runs: () -> bool
+        def role: () -> ::String
+        def number_of_workers: () -> ::Integer
+        def timeout: () -> ::Integer
+        def additional_run_options: () -> Types::DataQualityEvaluationConfigAdditionalRunOptions
+        def additional_data_sources: () -> ::Hash[::String, Types::DataSource]
+      end
+      # https://docs.aws.amazon.com/sdk-for-ruby/v3/api/Aws/Glue/Client.html#update_data_quality_evaluation_config-instance_method
+      def update_data_quality_evaluation_config: (
+                                                   name: ::String,
+                                                   ?data_source: Params::data_quality_evaluation_config_data_source,
+                                                   ?ruleset_name: ::String,
+                                                   ?managed_ruleset_name: ("SIMPLE" | "ADVANCED"),
+                                                   ?triggers: Array[("ONCE" | "SCHEDULE" | "METADATA_CHANGE")],
+                                                   ?schedule_expression: ::String,
+                                                   ?start_at: ::Time,
+                                                   ?end_at: ::Time,
+                                                   ?pause_runs: bool,
+                                                   ?role: ::String,
+                                                   ?number_of_workers: ::Integer,
+                                                   ?timeout: ::Integer,
+                                                   ?additional_run_options: Params::data_quality_evaluation_config_additional_run_options,
+                                                   ?additional_data_sources: Hash[::String, Params::data_source]
+                                                 ) -> _UpdateDataQualityEvaluationConfigResponseSuccess
+                                               | (Hash[Symbol, untyped] params, ?Hash[Symbol, untyped] options) -> _UpdateDataQualityEvaluationConfigResponseSuccess
 
       interface _UpdateDataQualityRulesetResponseSuccess
         include ::Seahorse::Client::_ResponseSuccess[Types::UpdateDataQualityRulesetResponse]

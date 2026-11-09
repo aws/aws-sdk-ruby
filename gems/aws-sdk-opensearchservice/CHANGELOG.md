@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.120.0 (2026-11-09)
+------------------
+
+* Feature - Adds cloned blue-green upgrades for Amazon OpenSearch Service domains. UpgradeDomain accepts DeploymentStrategyOptions to upgrade on a cloned cluster, the new UpdateClone API shifts search traffic, cuts over and sets retention, and DescribeDomainChangeProgress reports the upgrade details.
+
 1.119.0 (2026-11-06)
 ------------------
 

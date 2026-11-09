@@ -835,6 +835,10 @@ module Aws::ElasticsearchService
     #   The IAM principal who initiated the configuration change.
     #   @return [String]
     #
+    # @!attribute [rw] cloned_blue_green_upgrade_details
+    #   Details about a cloned blue/green upgrade, when the change is one.
+    #   @return [Types::ClonedBlueGreenUpgradeDetails]
+    #
     class ChangeProgressStatusDetails < Struct.new(
       :change_id,
       :start_time,
@@ -845,7 +849,66 @@ module Aws::ElasticsearchService
       :change_progress_stages,
       :config_change_status,
       :last_updated_time,
-      :initiated_by)
+      :initiated_by,
+      :cloned_blue_green_upgrade_details)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Options for a cloned blue/green upgrade.
+    #
+    # @!attribute [rw] retention_options
+    #   How long to keep the cluster that you cut over from after cutover
+    #   completes. When you start the upgrade, only `RetentionInHours` is
+    #   accepted.
+    #   @return [Types::RetentionOptions]
+    #
+    class ClonedBlueGreenOptions < Struct.new(
+      :retention_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # An action that the service takes automatically at a scheduled time
+    # during a cloned blue/green upgrade.
+    #
+    # @!attribute [rw] action
+    #   The action that the service takes.
+    #   @return [String]
+    #
+    # @!attribute [rw] scheduled_time
+    #   The time at which the service takes the action.
+    #   @return [Time]
+    #
+    class ClonedBlueGreenScheduledAction < Struct.new(
+      :action,
+      :scheduled_time)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The state of a cloned blue/green upgrade. Members that don't apply
+    # are omitted.
+    #
+    # @!attribute [rw] traffic_split
+    #   The current split of search traffic between the primary and cloned
+    #   clusters.
+    #   @return [Types::TrafficPercents]
+    #
+    # @!attribute [rw] scheduled_action
+    #   The action that the service takes automatically if you don't act
+    #   before the scheduled time.
+    #   @return [Types::ClonedBlueGreenScheduledAction]
+    #
+    # @!attribute [rw] retention_in_hours
+    #   The retention period, in hours, for the cluster that you cut over
+    #   from.
+    #   @return [Integer]
+    #
+    class ClonedBlueGreenUpgradeDetails < Struct.new(
+      :traffic_split,
+      :scheduled_action,
+      :retention_in_hours)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -1242,6 +1305,37 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # The cutover target and status for a cloned blue/green upgrade.
+    #
+    # @!attribute [rw] target
+    #   The cluster that the domain is cutting over to.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the cutover.
+    #   @return [String]
+    #
+    class CutoverOptions < Struct.new(
+      :target,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The cutover to perform for a cloned blue/green upgrade.
+    #
+    # @!attribute [rw] target
+    #   The cluster to cut over to. `ClonedCluster` makes the cloned cluster
+    #   serve the domain. `PrimaryCluster` keeps the primary cluster and
+    #   ends the upgrade.
+    #   @return [String]
+    #
+    class CutoverRequestOptions < Struct.new(
+      :target)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `DeleteElasticsearchDomain`
     # operation. Specifies the name of the Elasticsearch domain that you
     # want to delete.
@@ -1408,6 +1502,27 @@ module Aws::ElasticsearchService
     class DeploymentStrategyOptionsStatus < Struct.new(
       :options,
       :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Overrides the deployment strategy for a single operation, such as a
+    # version upgrade.
+    #
+    # @!attribute [rw] deployment_strategy
+    #   The deployment strategy to use for this operation. The only valid
+    #   value is `ClonedBlueGreen`, which creates a cloned cluster on the
+    #   target version next to the primary cluster so that you can validate
+    #   it and shift traffic to it before you cut over.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloned_blue_green_options
+    #   Options that apply when `DeploymentStrategy` is `ClonedBlueGreen`.
+    #   @return [Types::ClonedBlueGreenOptions]
+    #
+    class DeploymentStrategyOverrideOptions < Struct.new(
+      :deployment_strategy,
+      :cloned_blue_green_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -3975,6 +4090,39 @@ module Aws::ElasticsearchService
     #
     class ResourceNotFoundException < Aws::EmptyStructure; end
 
+    # Controls how long the cluster that you cut over from is kept after
+    # cutover completes. Specify exactly one of `RetentionInHours` or
+    # `RetentionAction`.
+    #
+    # @note RetentionOptions is a union - when making an API calls you must set exactly one of the members.
+    #
+    # @note RetentionOptions is a union - when returned from an API call exactly one value will be set and the returned type will be a subclass of RetentionOptions corresponding to the set member.
+    #
+    # @!attribute [rw] retention_in_hours
+    #   The number of hours to keep the cluster that you cut over from. The
+    #   retention period starts when cutover completes. The minimum is 1
+    #   hour. In an `UpdateClone` response after cutover completes, this
+    #   value is the number of hours remaining in the retention period,
+    #   rounded up.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] retention_action
+    #   Ends the retention period now. Valid only after cutover completes.
+    #   @return [String]
+    #
+    class RetentionOptions < Struct.new(
+      :retention_in_hours,
+      :retention_action,
+      :unknown)
+      SENSITIVE = []
+      include Aws::Structure
+      include Aws::Structure::Union
+
+      class RetentionInHours < RetentionOptions; end
+      class RetentionAction < RetentionOptions; end
+      class Unknown < RetentionOptions; end
+    end
+
     # Revokes access to an Amazon OpenSearch Service domain that was
     # provided through an interface VPC endpoint.
     #
@@ -4326,6 +4474,128 @@ module Aws::ElasticsearchService
       include Aws::Structure
     end
 
+    # The split of search traffic between the primary and cloned clusters.
+    #
+    # @!attribute [rw] primary_read_traffic_percent
+    #   The percentage of search traffic sent to the primary cluster.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] clone_read_traffic_percent
+    #   The percentage of search traffic sent to the cloned cluster.
+    #   @return [Integer]
+    #
+    class TrafficPercents < Struct.new(
+      :primary_read_traffic_percent,
+      :clone_read_traffic_percent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The traffic split and status for a cloned blue/green upgrade.
+    #
+    # @!attribute [rw] current
+    #   The traffic split currently in effect.
+    #   @return [Types::TrafficPercents]
+    #
+    # @!attribute [rw] target
+    #   The requested traffic split.
+    #   @return [Types::TrafficPercents]
+    #
+    # @!attribute [rw] status
+    #   The status of the traffic shift.
+    #   @return [String]
+    #
+    class TrafficSplitOptions < Struct.new(
+      :current,
+      :target,
+      :status)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # The traffic shift to perform for a cloned blue/green upgrade.
+    #
+    # @!attribute [rw] strategy
+    #   The traffic shifting strategy. The only valid value is
+    #   `ShiftReadTrafficPercent`.
+    #   @return [String]
+    #
+    # @!attribute [rw] clone_read_traffic_percent
+    #   The percentage of search traffic, from 0 to 100, to send to the
+    #   cloned cluster. The rest goes to the primary cluster.
+    #   @return [Integer]
+    #
+    class TrafficSplitRequestOptions < Struct.new(
+      :strategy,
+      :clone_read_traffic_percent)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the request parameters to the `UpdateClone` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain that has a cloned blue/green upgrade in
+    #   progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] traffic_split_options
+    #   Shifts a percentage of search traffic from the primary cluster to
+    #   the cloned cluster.
+    #   @return [Types::TrafficSplitRequestOptions]
+    #
+    # @!attribute [rw] cutover_options
+    #   Cuts the domain over to the cloned cluster or back to the primary
+    #   cluster.
+    #   @return [Types::CutoverRequestOptions]
+    #
+    # @!attribute [rw] retention_options
+    #   Changes the retention period, or ends it after cutover completes.
+    #   @return [Types::RetentionOptions]
+    #
+    class UpdateCloneRequest < Struct.new(
+      :domain_name,
+      :traffic_split_options,
+      :cutover_options,
+      :retention_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
+    # Container for the response returned by the `UpdateClone` operation.
+    #
+    # @!attribute [rw] domain_name
+    #   The name of the domain.
+    #   @return [String]
+    #
+    # @!attribute [rw] change_id
+    #   The unique identifier of the configuration change. Use it with
+    #   `DescribeDomainChangeProgress` to track the change.
+    #   @return [String]
+    #
+    # @!attribute [rw] cutover_options
+    #   The requested cutover target and the status of the cutover.
+    #   @return [Types::CutoverOptions]
+    #
+    # @!attribute [rw] traffic_split_options
+    #   The current and requested traffic split, and the status of the
+    #   traffic shift.
+    #   @return [Types::TrafficSplitOptions]
+    #
+    # @!attribute [rw] retention_options
+    #   The retention settings for the upgrade.
+    #   @return [Types::RetentionOptions]
+    #
+    class UpdateCloneResponse < Struct.new(
+      :domain_name,
+      :change_id,
+      :cutover_options,
+      :traffic_split_options,
+      :retention_options)
+      SENSITIVE = []
+      include Aws::Structure
+    end
+
     # Container for the parameters to the `UpdateElasticsearchDomain`
     # operation. Specifies the type and number of instances in the domain
     # cluster.
@@ -4577,10 +4847,16 @@ module Aws::ElasticsearchService
     #   Upgrade.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   Overrides the deployment strategy for this upgrade. To run a cloned
+    #   blue/green upgrade, set `DeploymentStrategy` to `ClonedBlueGreen`.
+    #   @return [Types::DeploymentStrategyOverrideOptions]
+    #
     class UpgradeElasticsearchDomainRequest < Struct.new(
       :domain_name,
       :target_version,
-      :perform_check_only)
+      :perform_check_only,
+      :deployment_strategy_options)
       SENSITIVE = []
       include Aws::Structure
     end
@@ -4606,6 +4882,10 @@ module Aws::ElasticsearchService
     #   Upgrade.
     #   @return [Boolean]
     #
+    # @!attribute [rw] deployment_strategy_options
+    #   The deployment strategy override used for the upgrade.
+    #   @return [Types::DeploymentStrategyOverrideOptions]
+    #
     # @!attribute [rw] change_progress_details
     #   Specifies change details of the domain configuration change.
     #   @return [Types::ChangeProgressDetails]
@@ -4614,6 +4894,7 @@ module Aws::ElasticsearchService
       :domain_name,
       :target_version,
       :perform_check_only,
+      :deployment_strategy_options,
       :change_progress_details)
       SENSITIVE = []
       include Aws::Structure

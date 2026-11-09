@@ -2859,6 +2859,11 @@ module Aws::OpenSearchService
     #   resp.change_progress_status.last_updated_time #=> Time
     #   resp.change_progress_status.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
     #   resp.change_progress_status.initiated_by #=> String, one of "CUSTOMER", "SERVICE"
+    #   resp.change_progress_status.cloned_blue_green_upgrade_details.traffic_split.primary_read_traffic_percent #=> Integer
+    #   resp.change_progress_status.cloned_blue_green_upgrade_details.traffic_split.clone_read_traffic_percent #=> Integer
+    #   resp.change_progress_status.cloned_blue_green_upgrade_details.scheduled_action.action #=> String, one of "AutomaticCutoverToPrimaryCluster", "DeletePrimaryCluster"
+    #   resp.change_progress_status.cloned_blue_green_upgrade_details.scheduled_action.scheduled_time #=> Time
+    #   resp.change_progress_status.cloned_blue_green_upgrade_details.retention_in_hours #=> Integer
     #   resp.change_progress_status.validation_failures #=> Array
     #   resp.change_progress_status.validation_failures[0].code #=> String
     #   resp.change_progress_status.validation_failures[0].message #=> String
@@ -6357,6 +6362,76 @@ module Aws::OpenSearchService
       req.send_request(options)
     end
 
+    # Manages a cloned blue/green upgrade that is in progress on a domain.
+    # Use it to shift a percentage of search traffic to the cloned cluster,
+    # to cut over to the cloned cluster or back to the primary cluster, or
+    # to change the retention period. Specify exactly one of
+    # `TrafficSplitOptions`, `CutoverOptions`, or `RetentionOptions` in each
+    # request.
+    #
+    # @option params [required, String] :domain_name
+    #   The name of the domain that has a cloned blue/green upgrade in
+    #   progress.
+    #
+    # @option params [Types::TrafficSplitRequestOptions] :traffic_split_options
+    #   Shifts a percentage of search traffic from the primary cluster to the
+    #   cloned cluster.
+    #
+    # @option params [Types::CutoverRequestOptions] :cutover_options
+    #   Cuts the domain over to the cloned cluster or back to the primary
+    #   cluster.
+    #
+    # @option params [Types::RetentionOptions] :retention_options
+    #   Changes the retention period, or ends it after cutover completes.
+    #
+    # @return [Types::UpdateCloneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::UpdateCloneResponse#domain_name #domain_name} => String
+    #   * {Types::UpdateCloneResponse#change_id #change_id} => String
+    #   * {Types::UpdateCloneResponse#cutover_options #cutover_options} => Types::CutoverOptions
+    #   * {Types::UpdateCloneResponse#traffic_split_options #traffic_split_options} => Types::TrafficSplitOptions
+    #   * {Types::UpdateCloneResponse#retention_options #retention_options} => Types::RetentionOptions
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.update_clone({
+    #     domain_name: "DomainName", # required
+    #     traffic_split_options: {
+    #       strategy: "ShiftReadTrafficPercent", # required, accepts ShiftReadTrafficPercent
+    #       clone_read_traffic_percent: 1, # required
+    #     },
+    #     cutover_options: {
+    #       target: "ClonedCluster", # required, accepts ClonedCluster, PrimaryCluster
+    #     },
+    #     retention_options: {
+    #       retention_in_hours: 1,
+    #       retention_action: "RollbackToPrimaryCluster", # accepts RollbackToPrimaryCluster, DeletePrimaryCluster
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.domain_name #=> String
+    #   resp.change_id #=> String
+    #   resp.cutover_options.target #=> String, one of "ClonedCluster", "PrimaryCluster"
+    #   resp.cutover_options.status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.traffic_split_options.current.primary_read_traffic_percent #=> Integer
+    #   resp.traffic_split_options.current.clone_read_traffic_percent #=> Integer
+    #   resp.traffic_split_options.target.primary_read_traffic_percent #=> Integer
+    #   resp.traffic_split_options.target.clone_read_traffic_percent #=> Integer
+    #   resp.traffic_split_options.status #=> String, one of "InProgress", "Completed", "Failed"
+    #   resp.retention_options.retention_in_hours #=> Integer
+    #   resp.retention_options.retention_action #=> String, one of "RollbackToPrimaryCluster", "DeletePrimaryCluster"
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/opensearch-2021-01-01/UpdateClone AWS API Documentation
+    #
+    # @overload update_clone(params = {})
+    # @param [Hash] params ({})
+    def update_clone(params = {}, options = {})
+      req = build_request(:update_clone, params)
+      req.send_request(options)
+    end
+
     # Updates a direct-query data source. For more information, see [Working
     # with Amazon OpenSearch Service data source integrations with Amazon
     # S3][1].
@@ -7399,6 +7474,10 @@ module Aws::OpenSearchService
     #   reports its version as 7.10 so that it continues to work with
     #   Elasticsearch OSS clients and plugins.
     #
+    # @option params [Types::DeploymentStrategyOverrideOptions] :deployment_strategy_options
+    #   Overrides the deployment strategy for this upgrade. To run a cloned
+    #   blue/green upgrade, set `DeploymentStrategy` to `ClonedBlueGreen`.
+    #
     # @return [Types::UpgradeDomainResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::UpgradeDomainResponse#upgrade_id #upgrade_id} => String
@@ -7406,6 +7485,7 @@ module Aws::OpenSearchService
     #   * {Types::UpgradeDomainResponse#target_version #target_version} => String
     #   * {Types::UpgradeDomainResponse#perform_check_only #perform_check_only} => Boolean
     #   * {Types::UpgradeDomainResponse#advanced_options #advanced_options} => Hash&lt;String,String&gt;
+    #   * {Types::UpgradeDomainResponse#deployment_strategy_options #deployment_strategy_options} => Types::DeploymentStrategyOverrideOptions
     #   * {Types::UpgradeDomainResponse#change_progress_details #change_progress_details} => Types::ChangeProgressDetails
     #
     # @example Request syntax with placeholder values
@@ -7417,6 +7497,15 @@ module Aws::OpenSearchService
     #     advanced_options: {
     #       "String" => "String",
     #     },
+    #     deployment_strategy_options: {
+    #       deployment_strategy: "ClonedBlueGreen", # required, accepts ClonedBlueGreen
+    #       cloned_blue_green_options: {
+    #         retention_options: {
+    #           retention_in_hours: 1,
+    #           retention_action: "RollbackToPrimaryCluster", # accepts RollbackToPrimaryCluster, DeletePrimaryCluster
+    #         },
+    #       },
+    #     },
     #   })
     #
     # @example Response structure
@@ -7427,6 +7516,9 @@ module Aws::OpenSearchService
     #   resp.perform_check_only #=> Boolean
     #   resp.advanced_options #=> Hash
     #   resp.advanced_options["String"] #=> String
+    #   resp.deployment_strategy_options.deployment_strategy #=> String, one of "ClonedBlueGreen"
+    #   resp.deployment_strategy_options.cloned_blue_green_options.retention_options.retention_in_hours #=> Integer
+    #   resp.deployment_strategy_options.cloned_blue_green_options.retention_options.retention_action #=> String, one of "RollbackToPrimaryCluster", "DeletePrimaryCluster"
     #   resp.change_progress_details.change_id #=> String
     #   resp.change_progress_details.message #=> String
     #   resp.change_progress_details.config_change_status #=> String, one of "Pending", "Initializing", "Validating", "ValidationFailed", "ApplyingChanges", "Completed", "PendingUserInput", "Cancelled"
@@ -7461,7 +7553,7 @@ module Aws::OpenSearchService
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-opensearchservice'
-      context[:gem_version] = '1.119.0'
+      context[:gem_version] = '1.120.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

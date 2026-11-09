@@ -823,7 +823,7 @@ module Aws::ECS
     #             max: 1,
     #           },
     #           accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
-    #           accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
+    #           accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g, l40s, l4
     #           accelerator_total_memory_mi_b: {
     #             min: 1,
     #             max: 1,
@@ -840,6 +840,7 @@ module Aws::ECS
     #           reservation_group_arn: "String",
     #           reservation_preference: "RESERVATIONS_ONLY", # accepts RESERVATIONS_ONLY, RESERVATIONS_FIRST, RESERVATIONS_EXCLUDED
     #         },
+    #         nitro_enclaves_enabled: false,
     #       },
     #       propagate_tags: "CAPACITY_PROVIDER", # accepts CAPACITY_PROVIDER, NONE
     #       infrastructure_optimization: {
@@ -915,7 +916,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names #=> Array
-    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g", "l40s", "l4"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -926,6 +927,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.nitro_enclaves_enabled #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.managed_instances_provider.auto_repair_configuration.actions_status #=> String, one of "ENABLED", "DISABLED"
@@ -3781,7 +3783,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names #=> Array
-    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g", "l40s", "l4"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -3792,6 +3794,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.nitro_enclaves_enabled #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.managed_instances_provider.auto_repair_configuration.actions_status #=> String, one of "ENABLED", "DISABLED"
@@ -4748,6 +4751,8 @@ module Aws::ECS
     #   resp.task_definitions[0].registered_by #=> String
     #   resp.task_definitions[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task_definitions[0].enable_fault_injection #=> Boolean
+    #   resp.task_definitions[0].trusted_execution_configuration.isolation_mode #=> String, one of "SHARED", "ISOLATED_SANDBOX", "CONFIDENTIAL_SANDBOX"
+    #   resp.task_definitions[0].trusted_execution_configuration.attestation_policy #=> String
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -5314,6 +5319,8 @@ module Aws::ECS
     #   resp.task_definition.registered_by #=> String
     #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task_definition.enable_fault_injection #=> Boolean
+    #   resp.task_definition.trusted_execution_configuration.isolation_mode #=> String, one of "SHARED", "ISOLATED_SANDBOX", "CONFIDENTIAL_SANDBOX"
+    #   resp.task_definition.trusted_execution_configuration.attestation_policy #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/DeregisterTaskDefinition AWS API Documentation
     #
@@ -5526,7 +5533,7 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names #=> Array
-    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g", "l40s", "l4"
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -5537,6 +5544,7 @@ module Aws::ECS
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
     #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
+    #   resp.capacity_providers[0].managed_instances_provider.instance_launch_template.nitro_enclaves_enabled #=> Boolean
     #   resp.capacity_providers[0].managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_providers[0].managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_providers[0].managed_instances_provider.auto_repair_configuration.actions_status #=> String, one of "ENABLED", "DISABLED"
@@ -7983,6 +7991,8 @@ module Aws::ECS
     #   resp.task_definition.registered_by #=> String
     #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task_definition.enable_fault_injection #=> Boolean
+    #   resp.task_definition.trusted_execution_configuration.isolation_mode #=> String, one of "SHARED", "ISOLATED_SANDBOX", "CONFIDENTIAL_SANDBOX"
+    #   resp.task_definition.trusted_execution_configuration.attestation_policy #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -8354,6 +8364,8 @@ module Aws::ECS
     #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].fargate_ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].fargate_ephemeral_storage.kms_key_id #=> String
+    #   resp.tasks[0].trusted_execution_summary.isolation_mode #=> String, one of "SHARED", "ISOLATED_SANDBOX", "CONFIDENTIAL_SANDBOX"
+    #   resp.tasks[0].trusted_execution_summary.attestation_policy_status #=> String, one of "CONFIGURED"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -12148,7 +12160,7 @@ module Aws::ECS
     #
     #    * Linux platform version `1.4.0` or later.
     #
-    #   * Windows platform version `1.0.0` or later.
+    #   ^
     #
     #    </note>
     #
@@ -12163,6 +12175,15 @@ module Aws::ECS
     #   Enables fault injection when you register your task definition and
     #   allows for fault injection requests to be accepted from the task's
     #   containers. The default value is `false`.
+    #
+    # @option params [Types::TrustedExecutionConfiguration] :trusted_execution_configuration
+    #   The trusted execution configuration for tasks that use this task
+    #   definition, including the isolation mode and, if configured, an
+    #   attestation policy.
+    #
+    #   <note markdown="1"> Trusted execution is supported only for Amazon ECS Managed Instances.
+    #
+    #    </note>
     #
     # @return [Types::RegisterTaskDefinitionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
@@ -12484,6 +12505,10 @@ module Aws::ECS
     #       operating_system_family: "WINDOWS_SERVER_2019_FULL", # accepts WINDOWS_SERVER_2019_FULL, WINDOWS_SERVER_2019_CORE, WINDOWS_SERVER_2016_FULL, WINDOWS_SERVER_2004_CORE, WINDOWS_SERVER_2022_CORE, WINDOWS_SERVER_2022_FULL, WINDOWS_SERVER_2025_CORE, WINDOWS_SERVER_2025_FULL, WINDOWS_SERVER_20H2_CORE, LINUX
     #     },
     #     enable_fault_injection: false,
+    #     trusted_execution_configuration: {
+    #       isolation_mode: "SHARED", # required, accepts SHARED, ISOLATED_SANDBOX, CONFIDENTIAL_SANDBOX
+    #       attestation_policy: "String",
+    #     },
     #   })
     #
     # @example Response structure
@@ -12665,6 +12690,8 @@ module Aws::ECS
     #   resp.task_definition.registered_by #=> String
     #   resp.task_definition.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task_definition.enable_fault_injection #=> Boolean
+    #   resp.task_definition.trusted_execution_configuration.isolation_mode #=> String, one of "SHARED", "ISOLATED_SANDBOX", "CONFIDENTIAL_SANDBOX"
+    #   resp.task_definition.trusted_execution_configuration.attestation_policy #=> String
     #   resp.tags #=> Array
     #   resp.tags[0].key #=> String
     #   resp.tags[0].value #=> String
@@ -13290,6 +13317,8 @@ module Aws::ECS
     #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].fargate_ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].fargate_ephemeral_storage.kms_key_id #=> String
+    #   resp.tasks[0].trusted_execution_summary.isolation_mode #=> String, one of "SHARED", "ISOLATED_SANDBOX", "CONFIDENTIAL_SANDBOX"
+    #   resp.tasks[0].trusted_execution_summary.attestation_policy_status #=> String, one of "CONFIGURED"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -13735,6 +13764,8 @@ module Aws::ECS
     #   resp.tasks[0].ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].fargate_ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.tasks[0].fargate_ephemeral_storage.kms_key_id #=> String
+    #   resp.tasks[0].trusted_execution_summary.isolation_mode #=> String, one of "SHARED", "ISOLATED_SANDBOX", "CONFIDENTIAL_SANDBOX"
+    #   resp.tasks[0].trusted_execution_summary.attestation_policy_status #=> String, one of "CONFIGURED"
     #   resp.failures #=> Array
     #   resp.failures[0].arn #=> String
     #   resp.failures[0].reason #=> String
@@ -14048,6 +14079,8 @@ module Aws::ECS
     #   resp.task.ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task.fargate_ephemeral_storage.size_in_gi_b #=> Integer
     #   resp.task.fargate_ephemeral_storage.kms_key_id #=> String
+    #   resp.task.trusted_execution_summary.isolation_mode #=> String, one of "SHARED", "ISOLATED_SANDBOX", "CONFIDENTIAL_SANDBOX"
+    #   resp.task.trusted_execution_summary.attestation_policy_status #=> String, one of "CONFIGURED"
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/ecs-2014-11-13/StopTask AWS API Documentation
     #
@@ -14560,7 +14593,7 @@ module Aws::ECS
     #             max: 1,
     #           },
     #           accelerator_manufacturers: ["amazon-web-services"], # accepts amazon-web-services, amd, nvidia, xilinx, habana
-    #           accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g
+    #           accelerator_names: ["a100"], # accepts a100, inferentia, k520, k80, m60, radeon-pro-v520, t4, vu9p, v100, a10g, h100, t4g, l40s, l4
     #           accelerator_total_memory_mi_b: {
     #             min: 1,
     #             max: 1,
@@ -14645,7 +14678,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers #=> Array
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_manufacturers[0] #=> String, one of "amazon-web-services", "amd", "nvidia", "xilinx", "habana"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names #=> Array
-    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_names[0] #=> String, one of "a100", "inferentia", "k520", "k80", "m60", "radeon-pro-v520", "t4", "vu9p", "v100", "a10g", "h100", "t4g", "l40s", "l4"
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.min #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.accelerator_total_memory_mi_b.max #=> Integer
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.instance_requirements.network_bandwidth_gbps.min #=> Float
@@ -14656,6 +14689,7 @@ module Aws::ECS
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.fips_enabled #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_group_arn #=> String
     #   resp.capacity_provider.managed_instances_provider.instance_launch_template.capacity_reservations.reservation_preference #=> String, one of "RESERVATIONS_ONLY", "RESERVATIONS_FIRST", "RESERVATIONS_EXCLUDED"
+    #   resp.capacity_provider.managed_instances_provider.instance_launch_template.nitro_enclaves_enabled #=> Boolean
     #   resp.capacity_provider.managed_instances_provider.propagate_tags #=> String, one of "CAPACITY_PROVIDER", "NONE"
     #   resp.capacity_provider.managed_instances_provider.infrastructure_optimization.scale_in_after #=> Integer
     #   resp.capacity_provider.managed_instances_provider.auto_repair_configuration.actions_status #=> String, one of "ENABLED", "DISABLED"
@@ -17558,7 +17592,7 @@ module Aws::ECS
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-ecs'
-      context[:gem_version] = '1.256.0'
+      context[:gem_version] = '1.257.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

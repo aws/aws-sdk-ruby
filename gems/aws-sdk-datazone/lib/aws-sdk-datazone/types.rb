@@ -3835,13 +3835,15 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The Cedar permit policy that defines what actions holders of this
+    #   The Cedar permit policy that defines the actions holders of this
     #   designation are allowed to perform.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation.
-    #   Defaults to true when omitted.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. Defaults to `true` when omitted. When enabled,
+    #   `DeleteDesignation` is rejected until protection is disabled through
+    #   `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/CreateDesignationInput AWS API Documentation
@@ -3879,19 +3881,23 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] designation_type
-    #   The classification of this designation. MANAGED designations are
-    #   system-defined and cannot be modified or deleted.
+    #   The classification of this designation. Valid values:
+    #
+    #   * `MANAGED` — System-defined designations that cannot be modified or
+    #     deleted.
+    #
+    #   * `USER_CREATED` — Designations created through `CreateDesignation`.
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The Cedar permit policy that governs what actions holders of this
+    #   The Cedar permit policy that governs the actions holders of this
     #   designation are allowed to perform.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation. When
-    #   true, DeleteDesignation is rejected until protection is disabled via
-    #   UpdateDesignation.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. When `true`, `DeleteDesignation` is rejected until
+    #   protection is disabled through `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_by
@@ -7936,7 +7942,10 @@ module Aws::DataZone
       include Aws::Structure
     end
 
-    # Summary representation of a designation returned by list operations.
+    # The summary representation of a designation returned by
+    # `ListDesignations`. The summary omits the Cedar permit policy. Call
+    # `GetDesignation` to retrieve the full designation record including the
+    # policy.
     #
     # @!attribute [rw] domain_id
     #   The identifier of the Amazon DataZone domain that contains the
@@ -7957,11 +7966,17 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] designation_type
-    #   The classification of this designation.
+    #   The classification of this designation. Valid values:
+    #
+    #   * `MANAGED` — System-defined designation.
+    #
+    #   * `USER_CREATED` — User-created designation.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. When `true`, `DeleteDesignation` is rejected until
+    #   protection is disabled through `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_by
@@ -10174,19 +10189,23 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] designation_type
-    #   The classification of this designation. MANAGED designations are
-    #   system-defined and cannot be modified or deleted.
+    #   The classification of this designation. Valid values:
+    #
+    #   * `MANAGED` — System-defined designations that cannot be modified or
+    #     deleted.
+    #
+    #   * `USER_CREATED` — Designations created through `CreateDesignation`.
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The Cedar permit policy that governs what actions holders of this
+    #   The Cedar permit policy that governs the actions holders of this
     #   designation are allowed to perform.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation. When
-    #   true, DeleteDesignation is rejected until protection is disabled via
-    #   UpdateDesignation.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. When `true`, `DeleteDesignation` is rejected until
+    #   protection is disabled through `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_by
@@ -24386,12 +24405,12 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The updated Cedar permit policy.
+    #   The updated Cedar permit policy. Omit to keep the existing policy.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation. Omit to
-    #   keep the existing value.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. Omit to keep the existing value.
     #   @return [Boolean]
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/datazone-2018-05-10/UpdateDesignationInput AWS API Documentation
@@ -24430,19 +24449,23 @@ module Aws::DataZone
     #   @return [String]
     #
     # @!attribute [rw] designation_type
-    #   The classification of this designation. MANAGED designations are
-    #   system-defined and cannot be modified or deleted.
+    #   The classification of this designation. Valid values:
+    #
+    #   * `MANAGED` — System-defined designations that cannot be modified or
+    #     deleted.
+    #
+    #   * `USER_CREATED` — Designations created through `CreateDesignation`.
     #   @return [String]
     #
     # @!attribute [rw] policy
-    #   The Cedar permit policy that governs what actions holders of this
+    #   The Cedar permit policy that governs the actions holders of this
     #   designation are allowed to perform.
     #   @return [String]
     #
     # @!attribute [rw] deletion_protection
-    #   Whether deletion protection is enabled for this designation. When
-    #   true, DeleteDesignation is rejected until protection is disabled via
-    #   UpdateDesignation.
+    #   Specifies whether deletion protection is enabled for this
+    #   designation. When `true`, `DeleteDesignation` is rejected until
+    #   protection is disabled through `UpdateDesignation`.
     #   @return [Boolean]
     #
     # @!attribute [rw] created_by

@@ -1400,6 +1400,12 @@ module Aws::Evs
     #
     # @!attribute [rw] instance_type
     #   The EC2 instance type that represents the host.
+    #
+    #   <note markdown="1"> With VCF 5.2.x, you can use only the `i4i.metal`, `i7i.metal-24xl`,
+    #   and `i7i.metal-48xl` instance types. All of these instance types are
+    #   supported with `vcfVersion` set to `SELF_DEPLOYED`.
+    #
+    #    </note>
     #   @return [String]
     #
     # @!attribute [rw] placement_group_id

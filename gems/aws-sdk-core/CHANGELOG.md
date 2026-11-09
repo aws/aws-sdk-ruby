@@ -1,6 +1,13 @@
 Unreleased Changes
 ------------------
 
+3.266.0 (2026-11-09)
+------------------
+
+* Feature - Updated Aws::Signin::Client with the latest API changes.
+
+* Feature - Adds the CreateBearerToken API, which exchanges your IAM credentials for a bearer token that can be used to access supported AWS services.
+
 * Feature - Reduce memory allocations when streaming request bodies with checksum trailers while preserving compatibility with custom IO bodies.
 
 3.265.0 (2026-11-06)

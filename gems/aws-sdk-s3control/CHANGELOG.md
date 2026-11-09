@@ -1,6 +1,11 @@
 Unreleased Changes
 ------------------
 
+1.145.0 (2026-11-09)
+------------------
+
+* Feature - Adds support for cross-account access grants with InstanceScope parameter for GetDataAccess and ListCallerAccessGrants operations in S3 Access Grants.
+
 1.144.0 (2026-11-06)
 ------------------
 

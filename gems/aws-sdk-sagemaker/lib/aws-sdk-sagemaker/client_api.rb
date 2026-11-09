@@ -147,6 +147,7 @@ module Aws::SageMaker
     AlgorithmValidationProfile = Shapes::StructureShape.new(name: 'AlgorithmValidationProfile')
     AlgorithmValidationProfiles = Shapes::ListShape.new(name: 'AlgorithmValidationProfiles')
     AlgorithmValidationSpecification = Shapes::StructureShape.new(name: 'AlgorithmValidationSpecification')
+    AliasOperations = Shapes::StructureShape.new(name: 'AliasOperations')
     AmazonQSettings = Shapes::StructureShape.new(name: 'AmazonQSettings')
     AnnotationConsolidationConfig = Shapes::StructureShape.new(name: 'AnnotationConsolidationConfig')
     AppArn = Shapes::StringShape.new(name: 'AppArn')
@@ -653,6 +654,9 @@ module Aws::SageMaker
     CreateAutoMLJobResponse = Shapes::StructureShape.new(name: 'CreateAutoMLJobResponse')
     CreateAutoMLJobV2Request = Shapes::StructureShape.new(name: 'CreateAutoMLJobV2Request')
     CreateAutoMLJobV2Response = Shapes::StructureShape.new(name: 'CreateAutoMLJobV2Response')
+    CreateClusterExtensionRequest = Shapes::StructureShape.new(name: 'CreateClusterExtensionRequest')
+    CreateClusterExtensionRequestClientTokenString = Shapes::StringShape.new(name: 'CreateClusterExtensionRequestClientTokenString')
+    CreateClusterExtensionResponse = Shapes::StructureShape.new(name: 'CreateClusterExtensionResponse')
     CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
     CreateClusterResponse = Shapes::StructureShape.new(name: 'CreateClusterResponse')
     CreateClusterSchedulerConfigRequest = Shapes::StructureShape.new(name: 'CreateClusterSchedulerConfigRequest')
@@ -847,6 +851,8 @@ module Aws::SageMaker
     DeleteArtifactResponse = Shapes::StructureShape.new(name: 'DeleteArtifactResponse')
     DeleteAssociationRequest = Shapes::StructureShape.new(name: 'DeleteAssociationRequest')
     DeleteAssociationResponse = Shapes::StructureShape.new(name: 'DeleteAssociationResponse')
+    DeleteClusterExtensionRequest = Shapes::StructureShape.new(name: 'DeleteClusterExtensionRequest')
+    DeleteClusterExtensionResponse = Shapes::StructureShape.new(name: 'DeleteClusterExtensionResponse')
     DeleteClusterRequest = Shapes::StructureShape.new(name: 'DeleteClusterRequest')
     DeleteClusterResponse = Shapes::StructureShape.new(name: 'DeleteClusterResponse')
     DeleteClusterSchedulerConfigRequest = Shapes::StructureShape.new(name: 'DeleteClusterSchedulerConfigRequest')
@@ -956,6 +962,8 @@ module Aws::SageMaker
     DescribeAutoMLJobV2Response = Shapes::StructureShape.new(name: 'DescribeAutoMLJobV2Response')
     DescribeClusterEventRequest = Shapes::StructureShape.new(name: 'DescribeClusterEventRequest')
     DescribeClusterEventResponse = Shapes::StructureShape.new(name: 'DescribeClusterEventResponse')
+    DescribeClusterExtensionRequest = Shapes::StructureShape.new(name: 'DescribeClusterExtensionRequest')
+    DescribeClusterExtensionResponse = Shapes::StructureShape.new(name: 'DescribeClusterExtensionResponse')
     DescribeClusterNodeRequest = Shapes::StructureShape.new(name: 'DescribeClusterNodeRequest')
     DescribeClusterNodeResponse = Shapes::StructureShape.new(name: 'DescribeClusterNodeResponse')
     DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
@@ -1266,6 +1274,16 @@ module Aws::SageMaker
     ExplainerConfig = Shapes::StructureShape.new(name: 'ExplainerConfig')
     ExtendTrainingPlanRequest = Shapes::StructureShape.new(name: 'ExtendTrainingPlanRequest')
     ExtendTrainingPlanResponse = Shapes::StructureShape.new(name: 'ExtendTrainingPlanResponse')
+    ExtensionArn = Shapes::StringShape.new(name: 'ExtensionArn')
+    ExtensionConfigurationValues = Shapes::StringShape.new(name: 'ExtensionConfigurationValues')
+    ExtensionDetails = Shapes::StructureShape.new(name: 'ExtensionDetails')
+    ExtensionName = Shapes::StringShape.new(name: 'ExtensionName')
+    ExtensionNodeCount = Shapes::IntegerShape.new(name: 'ExtensionNodeCount')
+    ExtensionNodeSummary = Shapes::StructureShape.new(name: 'ExtensionNodeSummary')
+    ExtensionStatus = Shapes::StringShape.new(name: 'ExtensionStatus')
+    ExtensionSummaries = Shapes::ListShape.new(name: 'ExtensionSummaries')
+    ExtensionSummary = Shapes::StructureShape.new(name: 'ExtensionSummary')
+    ExtensionVersion = Shapes::StringShape.new(name: 'ExtensionVersion')
     FSxLustreConfig = Shapes::StructureShape.new(name: 'FSxLustreConfig')
     FSxLustreFileSystem = Shapes::StructureShape.new(name: 'FSxLustreFileSystem')
     FSxLustreFileSystemConfig = Shapes::StructureShape.new(name: 'FSxLustreFileSystemConfig')
@@ -1393,6 +1411,7 @@ module Aws::SageMaker
     HubContentSearchKeywordList = Shapes::ListShape.new(name: 'HubContentSearchKeywordList')
     HubContentSortBy = Shapes::StringShape.new(name: 'HubContentSortBy')
     HubContentStatus = Shapes::StringShape.new(name: 'HubContentStatus')
+    HubContentStepMetadata = Shapes::StructureShape.new(name: 'HubContentStepMetadata')
     HubContentSupportStatus = Shapes::StringShape.new(name: 'HubContentSupportStatus')
     HubContentType = Shapes::StringShape.new(name: 'HubContentType')
     HubContentVersion = Shapes::StringShape.new(name: 'HubContentVersion')
@@ -1708,6 +1727,8 @@ module Aws::SageMaker
     ListCandidatesForAutoMLJobResponse = Shapes::StructureShape.new(name: 'ListCandidatesForAutoMLJobResponse')
     ListClusterEventsRequest = Shapes::StructureShape.new(name: 'ListClusterEventsRequest')
     ListClusterEventsResponse = Shapes::StructureShape.new(name: 'ListClusterEventsResponse')
+    ListClusterExtensionsRequest = Shapes::StructureShape.new(name: 'ListClusterExtensionsRequest')
+    ListClusterExtensionsResponse = Shapes::StructureShape.new(name: 'ListClusterExtensionsResponse')
     ListClusterNodesRequest = Shapes::StructureShape.new(name: 'ListClusterNodesRequest')
     ListClusterNodesResponse = Shapes::StructureShape.new(name: 'ListClusterNodesResponse')
     ListClusterSchedulerConfigsRequest = Shapes::StructureShape.new(name: 'ListClusterSchedulerConfigsRequest')
@@ -2284,6 +2305,7 @@ module Aws::SageMaker
     PipelineExecutionSummary = Shapes::StructureShape.new(name: 'PipelineExecutionSummary')
     PipelineExecutionSummaryList = Shapes::ListShape.new(name: 'PipelineExecutionSummaryList')
     PipelineExperimentConfig = Shapes::StructureShape.new(name: 'PipelineExperimentConfig')
+    PipelineManagedBy = Shapes::StringShape.new(name: 'PipelineManagedBy')
     PipelineName = Shapes::StringShape.new(name: 'PipelineName')
     PipelineNameOrArn = Shapes::StringShape.new(name: 'PipelineNameOrArn')
     PipelineParameterName = Shapes::StringShape.new(name: 'PipelineParameterName')
@@ -2291,6 +2313,8 @@ module Aws::SageMaker
     PipelineSummary = Shapes::StructureShape.new(name: 'PipelineSummary')
     PipelineSummaryList = Shapes::ListShape.new(name: 'PipelineSummaryList')
     PipelineVersion = Shapes::StructureShape.new(name: 'PipelineVersion')
+    PipelineVersionAlias = Shapes::StringShape.new(name: 'PipelineVersionAlias')
+    PipelineVersionAliasList = Shapes::ListShape.new(name: 'PipelineVersionAliasList')
     PipelineVersionDescription = Shapes::StringShape.new(name: 'PipelineVersionDescription')
     PipelineVersionId = Shapes::IntegerShape.new(name: 'PipelineVersionId')
     PipelineVersionName = Shapes::StringShape.new(name: 'PipelineVersionName')
@@ -2963,6 +2987,9 @@ module Aws::SageMaker
     UpdateAppImageConfigResponse = Shapes::StructureShape.new(name: 'UpdateAppImageConfigResponse')
     UpdateArtifactRequest = Shapes::StructureShape.new(name: 'UpdateArtifactRequest')
     UpdateArtifactResponse = Shapes::StructureShape.new(name: 'UpdateArtifactResponse')
+    UpdateClusterExtensionRequest = Shapes::StructureShape.new(name: 'UpdateClusterExtensionRequest')
+    UpdateClusterExtensionRequestClientTokenString = Shapes::StringShape.new(name: 'UpdateClusterExtensionRequestClientTokenString')
+    UpdateClusterExtensionResponse = Shapes::StructureShape.new(name: 'UpdateClusterExtensionResponse')
     UpdateClusterRequest = Shapes::StructureShape.new(name: 'UpdateClusterRequest')
     UpdateClusterResponse = Shapes::StructureShape.new(name: 'UpdateClusterResponse')
     UpdateClusterSchedulerConfigRequest = Shapes::StructureShape.new(name: 'UpdateClusterSchedulerConfigRequest')
@@ -3464,6 +3491,10 @@ module Aws::SageMaker
     AlgorithmValidationSpecification.add_member(:validation_role, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "ValidationRole"))
     AlgorithmValidationSpecification.add_member(:validation_profiles, Shapes::ShapeRef.new(shape: AlgorithmValidationProfiles, required: true, location_name: "ValidationProfiles"))
     AlgorithmValidationSpecification.struct_class = Types::AlgorithmValidationSpecification
+
+    AliasOperations.add_member(:add, Shapes::ShapeRef.new(shape: PipelineVersionAliasList, location_name: "Add"))
+    AliasOperations.add_member(:remove, Shapes::ShapeRef.new(shape: PipelineVersionAliasList, location_name: "Remove"))
+    AliasOperations.struct_class = Types::AliasOperations
 
     AmazonQSettings.add_member(:status, Shapes::ShapeRef.new(shape: FeatureStatus, location_name: "Status"))
     AmazonQSettings.add_member(:q_profile_arn, Shapes::ShapeRef.new(shape: QProfileArn, location_name: "QProfileArn"))
@@ -4831,6 +4862,17 @@ module Aws::SageMaker
     CreateAutoMLJobV2Response.add_member(:auto_ml_job_arn, Shapes::ShapeRef.new(shape: AutoMLJobArn, required: true, location_name: "AutoMLJobArn"))
     CreateAutoMLJobV2Response.struct_class = Types::CreateAutoMLJobV2Response
 
+    CreateClusterExtensionRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    CreateClusterExtensionRequest.add_member(:extension_name, Shapes::ShapeRef.new(shape: ExtensionName, required: true, location_name: "ExtensionName"))
+    CreateClusterExtensionRequest.add_member(:extension_version, Shapes::ShapeRef.new(shape: ExtensionVersion, location_name: "ExtensionVersion"))
+    CreateClusterExtensionRequest.add_member(:configuration_values, Shapes::ShapeRef.new(shape: ExtensionConfigurationValues, location_name: "ConfigurationValues"))
+    CreateClusterExtensionRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+    CreateClusterExtensionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: CreateClusterExtensionRequestClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    CreateClusterExtensionRequest.struct_class = Types::CreateClusterExtensionRequest
+
+    CreateClusterExtensionResponse.add_member(:extension_arn, Shapes::ShapeRef.new(shape: ExtensionArn, required: true, location_name: "ExtensionArn"))
+    CreateClusterExtensionResponse.struct_class = Types::CreateClusterExtensionResponse
+
     CreateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterName, required: true, location_name: "ClusterName"))
     CreateClusterRequest.add_member(:instance_groups, Shapes::ShapeRef.new(shape: ClusterInstanceGroupSpecifications, location_name: "InstanceGroups"))
     CreateClusterRequest.add_member(:restricted_instance_groups, Shapes::ShapeRef.new(shape: ClusterRestrictedInstanceGroupSpecifications, location_name: "RestrictedInstanceGroups"))
@@ -5418,6 +5460,7 @@ module Aws::SageMaker
     CreatePipelineRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, required: true, location_name: "RoleArn"))
     CreatePipelineRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
     CreatePipelineRequest.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
+    CreatePipelineRequest.add_member(:pipeline_version_aliases, Shapes::ShapeRef.new(shape: PipelineVersionAliasList, location_name: "PipelineVersionAliases"))
     CreatePipelineRequest.struct_class = Types::CreatePipelineRequest
 
     CreatePipelineResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
@@ -5860,6 +5903,13 @@ module Aws::SageMaker
     DeleteAssociationResponse.add_member(:source_arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "SourceArn"))
     DeleteAssociationResponse.add_member(:destination_arn, Shapes::ShapeRef.new(shape: AssociationEntityArn, location_name: "DestinationArn"))
     DeleteAssociationResponse.struct_class = Types::DeleteAssociationResponse
+
+    DeleteClusterExtensionRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    DeleteClusterExtensionRequest.add_member(:extension_arn, Shapes::ShapeRef.new(shape: ExtensionArn, required: true, location_name: "ExtensionArn"))
+    DeleteClusterExtensionRequest.struct_class = Types::DeleteClusterExtensionRequest
+
+    DeleteClusterExtensionResponse.add_member(:extension_arn, Shapes::ShapeRef.new(shape: ExtensionArn, required: true, location_name: "ExtensionArn"))
+    DeleteClusterExtensionResponse.struct_class = Types::DeleteClusterExtensionResponse
 
     DeleteClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     DeleteClusterRequest.struct_class = Types::DeleteClusterRequest
@@ -6328,6 +6378,14 @@ module Aws::SageMaker
 
     DescribeClusterEventResponse.add_member(:event_details, Shapes::ShapeRef.new(shape: ClusterEventDetail, location_name: "EventDetails"))
     DescribeClusterEventResponse.struct_class = Types::DescribeClusterEventResponse
+
+    DescribeClusterExtensionRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    DescribeClusterExtensionRequest.add_member(:extension_arn, Shapes::ShapeRef.new(shape: ExtensionArn, required: true, location_name: "ExtensionArn"))
+    DescribeClusterExtensionRequest.struct_class = Types::DescribeClusterExtensionRequest
+
+    DescribeClusterExtensionResponse.add_member(:extension_details, Shapes::ShapeRef.new(shape: ExtensionDetails, required: true, location_name: "ExtensionDetails"))
+    DescribeClusterExtensionResponse.add_member(:node_summary, Shapes::ShapeRef.new(shape: ExtensionNodeSummary, location_name: "NodeSummary"))
+    DescribeClusterExtensionResponse.struct_class = Types::DescribeClusterExtensionResponse
 
     DescribeClusterNodeRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     DescribeClusterNodeRequest.add_member(:node_id, Shapes::ShapeRef.new(shape: ClusterNodeId, location_name: "NodeId"))
@@ -7221,10 +7279,13 @@ module Aws::SageMaker
     DescribePipelineExecutionResponse.add_member(:selective_execution_config, Shapes::ShapeRef.new(shape: SelectiveExecutionConfig, location_name: "SelectiveExecutionConfig"))
     DescribePipelineExecutionResponse.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
     DescribePipelineExecutionResponse.add_member(:m_lflow_config, Shapes::ShapeRef.new(shape: MLflowConfiguration, location_name: "MLflowConfig"))
+    DescribePipelineExecutionResponse.add_member(:pipeline_version_aliases, Shapes::ShapeRef.new(shape: PipelineVersionAliasList, location_name: "PipelineVersionAliases"))
+    DescribePipelineExecutionResponse.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     DescribePipelineExecutionResponse.struct_class = Types::DescribePipelineExecutionResponse
 
     DescribePipelineRequest.add_member(:pipeline_name, Shapes::ShapeRef.new(shape: PipelineNameOrArn, required: true, location_name: "PipelineName"))
     DescribePipelineRequest.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
+    DescribePipelineRequest.add_member(:pipeline_version_alias, Shapes::ShapeRef.new(shape: PipelineVersionAlias, location_name: "PipelineVersionAlias"))
     DescribePipelineRequest.struct_class = Types::DescribePipelineRequest
 
     DescribePipelineResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
@@ -7242,6 +7303,7 @@ module Aws::SageMaker
     DescribePipelineResponse.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
     DescribePipelineResponse.add_member(:pipeline_version_display_name, Shapes::ShapeRef.new(shape: PipelineVersionName, location_name: "PipelineVersionDisplayName"))
     DescribePipelineResponse.add_member(:pipeline_version_description, Shapes::ShapeRef.new(shape: PipelineVersionDescription, location_name: "PipelineVersionDescription"))
+    DescribePipelineResponse.add_member(:pipeline_version_aliases, Shapes::ShapeRef.new(shape: PipelineVersionAliasList, location_name: "PipelineVersionAliases"))
     DescribePipelineResponse.struct_class = Types::DescribePipelineResponse
 
     DescribeProcessingJobRequest.add_member(:processing_job_name, Shapes::ShapeRef.new(shape: ProcessingJobName, required: true, location_name: "ProcessingJobName"))
@@ -7991,6 +8053,29 @@ module Aws::SageMaker
     ExtendTrainingPlanResponse.add_member(:training_plan_extensions, Shapes::ShapeRef.new(shape: TrainingPlanExtensions, required: true, location_name: "TrainingPlanExtensions"))
     ExtendTrainingPlanResponse.struct_class = Types::ExtendTrainingPlanResponse
 
+    ExtensionDetails.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    ExtensionDetails.add_member(:extension_arn, Shapes::ShapeRef.new(shape: ExtensionArn, required: true, location_name: "ExtensionArn"))
+    ExtensionDetails.add_member(:extension_name, Shapes::ShapeRef.new(shape: ExtensionName, required: true, location_name: "ExtensionName"))
+    ExtensionDetails.add_member(:extension_version, Shapes::ShapeRef.new(shape: ExtensionVersion, required: true, location_name: "ExtensionVersion"))
+    ExtensionDetails.add_member(:status, Shapes::ShapeRef.new(shape: ExtensionStatus, required: true, location_name: "Status"))
+    ExtensionDetails.add_member(:configuration_values, Shapes::ShapeRef.new(shape: ExtensionConfigurationValues, location_name: "ConfigurationValues"))
+    ExtensionDetails.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    ExtensionDetails.add_member(:last_modified_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "LastModifiedTime"))
+    ExtensionDetails.struct_class = Types::ExtensionDetails
+
+    ExtensionNodeSummary.add_member(:total_count, Shapes::ShapeRef.new(shape: ExtensionNodeCount, required: true, location_name: "TotalCount"))
+    ExtensionNodeSummary.add_member(:active_count, Shapes::ShapeRef.new(shape: ExtensionNodeCount, required: true, location_name: "ActiveCount"))
+    ExtensionNodeSummary.struct_class = Types::ExtensionNodeSummary
+
+    ExtensionSummaries.member = Shapes::ShapeRef.new(shape: ExtensionSummary)
+
+    ExtensionSummary.add_member(:extension_arn, Shapes::ShapeRef.new(shape: ExtensionArn, required: true, location_name: "ExtensionArn"))
+    ExtensionSummary.add_member(:extension_name, Shapes::ShapeRef.new(shape: ExtensionName, required: true, location_name: "ExtensionName"))
+    ExtensionSummary.add_member(:extension_version, Shapes::ShapeRef.new(shape: ExtensionVersion, required: true, location_name: "ExtensionVersion"))
+    ExtensionSummary.add_member(:status, Shapes::ShapeRef.new(shape: ExtensionStatus, required: true, location_name: "Status"))
+    ExtensionSummary.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+    ExtensionSummary.struct_class = Types::ExtensionSummary
+
     FSxLustreConfig.add_member(:size_in_gi_b, Shapes::ShapeRef.new(shape: FSxLustreSizeInGiB, required: true, location_name: "SizeInGiB"))
     FSxLustreConfig.add_member(:per_unit_storage_throughput, Shapes::ShapeRef.new(shape: FSxLustrePerUnitStorageThroughput, required: true, location_name: "PerUnitStorageThroughput"))
     FSxLustreConfig.struct_class = Types::FSxLustreConfig
@@ -8275,6 +8360,10 @@ module Aws::SageMaker
     HubContentInfoList.member = Shapes::ShapeRef.new(shape: HubContentInfo)
 
     HubContentSearchKeywordList.member = Shapes::ShapeRef.new(shape: HubContentSearchKeyword)
+
+    HubContentStepMetadata.add_member(:hub_arn, Shapes::ShapeRef.new(shape: String2048, location_name: "HubArn"))
+    HubContentStepMetadata.add_member(:hub_content_arn, Shapes::ShapeRef.new(shape: String2048, location_name: "HubContentArn"))
+    HubContentStepMetadata.struct_class = Types::HubContentStepMetadata
 
     HubInfo.add_member(:hub_name, Shapes::ShapeRef.new(shape: HubName, required: true, location_name: "HubName"))
     HubInfo.add_member(:hub_arn, Shapes::ShapeRef.new(shape: HubArn, required: true, location_name: "HubArn"))
@@ -9208,6 +9297,17 @@ module Aws::SageMaker
     ListClusterEventsResponse.add_member(:events, Shapes::ShapeRef.new(shape: ClusterEventSummaries, location_name: "Events"))
     ListClusterEventsResponse.struct_class = Types::ListClusterEventsResponse
 
+    ListClusterExtensionsRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    ListClusterExtensionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListClusterExtensionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListClusterExtensionsRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
+    ListClusterExtensionsRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
+    ListClusterExtensionsRequest.struct_class = Types::ListClusterExtensionsRequest
+
+    ListClusterExtensionsResponse.add_member(:extensions, Shapes::ShapeRef.new(shape: ExtensionSummaries, required: true, location_name: "Extensions"))
+    ListClusterExtensionsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+    ListClusterExtensionsResponse.struct_class = Types::ListClusterExtensionsResponse
+
     ListClusterNodesRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     ListClusterNodesRequest.add_member(:creation_time_after, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeAfter"))
     ListClusterNodesRequest.add_member(:creation_time_before, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTimeBefore"))
@@ -10007,6 +10107,7 @@ module Aws::SageMaker
     ListPipelineExecutionsRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListPipelineExecutionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPipelineExecutionsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPipelineExecutionsRequest.add_member(:pipeline_version_alias, Shapes::ShapeRef.new(shape: PipelineVersionAlias, location_name: "PipelineVersionAlias"))
     ListPipelineExecutionsRequest.struct_class = Types::ListPipelineExecutionsRequest
 
     ListPipelineExecutionsResponse.add_member(:pipeline_execution_summaries, Shapes::ShapeRef.new(shape: PipelineExecutionSummaryList, location_name: "PipelineExecutionSummaries"))
@@ -10041,6 +10142,7 @@ module Aws::SageMaker
     ListPipelinesRequest.add_member(:sort_order, Shapes::ShapeRef.new(shape: SortOrder, location_name: "SortOrder"))
     ListPipelinesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
     ListPipelinesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "MaxResults"))
+    ListPipelinesRequest.add_member(:managed_by, Shapes::ShapeRef.new(shape: PipelineManagedBy, location_name: "ManagedBy"))
     ListPipelinesRequest.struct_class = Types::ListPipelinesRequest
 
     ListPipelinesResponse.add_member(:pipeline_summaries, Shapes::ShapeRef.new(shape: PipelineSummaryList, location_name: "PipelineSummaries"))
@@ -11336,6 +11438,7 @@ module Aws::SageMaker
     PipelineExecutionStepMetadata.add_member(:athena, Shapes::ShapeRef.new(shape: AthenaStepMetadata, location_name: "Athena"))
     PipelineExecutionStepMetadata.add_member(:cleanup, Shapes::ShapeRef.new(shape: CleanupStepMetadata, location_name: "Cleanup"))
     PipelineExecutionStepMetadata.add_member(:for_each, Shapes::ShapeRef.new(shape: ForEachStepMetadata, location_name: "ForEach"))
+    PipelineExecutionStepMetadata.add_member(:hub_content, Shapes::ShapeRef.new(shape: HubContentStepMetadata, location_name: "HubContent"))
     PipelineExecutionStepMetadata.struct_class = Types::PipelineExecutionStepMetadata
 
     PipelineExecutionSummary.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -11344,6 +11447,7 @@ module Aws::SageMaker
     PipelineExecutionSummary.add_member(:pipeline_execution_description, Shapes::ShapeRef.new(shape: PipelineExecutionDescription, location_name: "PipelineExecutionDescription"))
     PipelineExecutionSummary.add_member(:pipeline_execution_display_name, Shapes::ShapeRef.new(shape: PipelineExecutionName, location_name: "PipelineExecutionDisplayName"))
     PipelineExecutionSummary.add_member(:pipeline_execution_failure_reason, Shapes::ShapeRef.new(shape: String3072, location_name: "PipelineExecutionFailureReason"))
+    PipelineExecutionSummary.add_member(:pipeline_version_aliases, Shapes::ShapeRef.new(shape: PipelineVersionAliasList, location_name: "PipelineVersionAliases"))
     PipelineExecutionSummary.struct_class = Types::PipelineExecutionSummary
 
     PipelineExecutionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineExecutionSummary)
@@ -11375,7 +11479,10 @@ module Aws::SageMaker
     PipelineVersion.add_member(:last_executed_pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "LastExecutedPipelineExecutionArn"))
     PipelineVersion.add_member(:last_executed_pipeline_execution_display_name, Shapes::ShapeRef.new(shape: PipelineExecutionName, location_name: "LastExecutedPipelineExecutionDisplayName"))
     PipelineVersion.add_member(:last_executed_pipeline_execution_status, Shapes::ShapeRef.new(shape: PipelineExecutionStatus, location_name: "LastExecutedPipelineExecutionStatus"))
+    PipelineVersion.add_member(:pipeline_version_aliases, Shapes::ShapeRef.new(shape: PipelineVersionAliasList, location_name: "PipelineVersionAliases"))
     PipelineVersion.struct_class = Types::PipelineVersion
+
+    PipelineVersionAliasList.member = Shapes::ShapeRef.new(shape: PipelineVersionAlias)
 
     PipelineVersionSummary.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
     PipelineVersionSummary.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
@@ -11383,6 +11490,7 @@ module Aws::SageMaker
     PipelineVersionSummary.add_member(:pipeline_version_description, Shapes::ShapeRef.new(shape: PipelineVersionDescription, location_name: "PipelineVersionDescription"))
     PipelineVersionSummary.add_member(:pipeline_version_display_name, Shapes::ShapeRef.new(shape: PipelineVersionName, location_name: "PipelineVersionDisplayName"))
     PipelineVersionSummary.add_member(:last_execution_pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "LastExecutionPipelineExecutionArn"))
+    PipelineVersionSummary.add_member(:pipeline_version_aliases, Shapes::ShapeRef.new(shape: PipelineVersionAliasList, location_name: "PipelineVersionAliases"))
     PipelineVersionSummary.struct_class = Types::PipelineVersionSummary
 
     PipelineVersionSummaryList.member = Shapes::ShapeRef.new(shape: PipelineVersionSummary)
@@ -12337,6 +12445,8 @@ module Aws::SageMaker
     StartPipelineExecutionRequest.add_member(:selective_execution_config, Shapes::ShapeRef.new(shape: SelectiveExecutionConfig, location_name: "SelectiveExecutionConfig"))
     StartPipelineExecutionRequest.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, location_name: "PipelineVersionId"))
     StartPipelineExecutionRequest.add_member(:mlflow_experiment_name, Shapes::ShapeRef.new(shape: MlflowExperimentEntityName, location_name: "MlflowExperimentName"))
+    StartPipelineExecutionRequest.add_member(:pipeline_version_alias, Shapes::ShapeRef.new(shape: PipelineVersionAlias, location_name: "PipelineVersionAlias"))
+    StartPipelineExecutionRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     StartPipelineExecutionRequest.struct_class = Types::StartPipelineExecutionRequest
 
     StartPipelineExecutionResponse.add_member(:pipeline_execution_arn, Shapes::ShapeRef.new(shape: PipelineExecutionArn, location_name: "PipelineExecutionArn"))
@@ -13104,6 +13214,16 @@ module Aws::SageMaker
     UpdateArtifactResponse.add_member(:artifact_arn, Shapes::ShapeRef.new(shape: ArtifactArn, location_name: "ArtifactArn"))
     UpdateArtifactResponse.struct_class = Types::UpdateArtifactResponse
 
+    UpdateClusterExtensionRequest.add_member(:cluster_arn, Shapes::ShapeRef.new(shape: ClusterArn, required: true, location_name: "ClusterArn"))
+    UpdateClusterExtensionRequest.add_member(:extension_arn, Shapes::ShapeRef.new(shape: ExtensionArn, required: true, location_name: "ExtensionArn"))
+    UpdateClusterExtensionRequest.add_member(:extension_version, Shapes::ShapeRef.new(shape: ExtensionVersion, location_name: "ExtensionVersion"))
+    UpdateClusterExtensionRequest.add_member(:configuration_values, Shapes::ShapeRef.new(shape: ExtensionConfigurationValues, location_name: "ConfigurationValues"))
+    UpdateClusterExtensionRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: UpdateClusterExtensionRequestClientTokenString, location_name: "ClientToken", metadata: {"idempotencyToken" => true}))
+    UpdateClusterExtensionRequest.struct_class = Types::UpdateClusterExtensionRequest
+
+    UpdateClusterExtensionResponse.add_member(:extension_arn, Shapes::ShapeRef.new(shape: ExtensionArn, required: true, location_name: "ExtensionArn"))
+    UpdateClusterExtensionResponse.struct_class = Types::UpdateClusterExtensionResponse
+
     UpdateClusterRequest.add_member(:cluster_name, Shapes::ShapeRef.new(shape: ClusterNameOrArn, required: true, location_name: "ClusterName"))
     UpdateClusterRequest.add_member(:instance_groups, Shapes::ShapeRef.new(shape: ClusterInstanceGroupSpecifications, location_name: "InstanceGroups"))
     UpdateClusterRequest.add_member(:restricted_instance_groups, Shapes::ShapeRef.new(shape: ClusterRestrictedInstanceGroupSpecifications, location_name: "RestrictedInstanceGroups"))
@@ -13455,6 +13575,7 @@ module Aws::SageMaker
     UpdatePipelineRequest.add_member(:pipeline_description, Shapes::ShapeRef.new(shape: PipelineDescription, location_name: "PipelineDescription"))
     UpdatePipelineRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "RoleArn"))
     UpdatePipelineRequest.add_member(:parallelism_configuration, Shapes::ShapeRef.new(shape: ParallelismConfiguration, location_name: "ParallelismConfiguration"))
+    UpdatePipelineRequest.add_member(:pipeline_version_aliases, Shapes::ShapeRef.new(shape: PipelineVersionAliasList, location_name: "PipelineVersionAliases"))
     UpdatePipelineRequest.struct_class = Types::UpdatePipelineRequest
 
     UpdatePipelineResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
@@ -13465,6 +13586,7 @@ module Aws::SageMaker
     UpdatePipelineVersionRequest.add_member(:pipeline_version_id, Shapes::ShapeRef.new(shape: PipelineVersionId, required: true, location_name: "PipelineVersionId"))
     UpdatePipelineVersionRequest.add_member(:pipeline_version_display_name, Shapes::ShapeRef.new(shape: PipelineVersionName, location_name: "PipelineVersionDisplayName"))
     UpdatePipelineVersionRequest.add_member(:pipeline_version_description, Shapes::ShapeRef.new(shape: PipelineVersionDescription, location_name: "PipelineVersionDescription"))
+    UpdatePipelineVersionRequest.add_member(:pipeline_version_alias_operations, Shapes::ShapeRef.new(shape: AliasOperations, location_name: "PipelineVersionAliasOperations"))
     UpdatePipelineVersionRequest.struct_class = Types::UpdatePipelineVersionRequest
 
     UpdatePipelineVersionResponse.add_member(:pipeline_arn, Shapes::ShapeRef.new(shape: PipelineArn, location_name: "PipelineArn"))
@@ -13905,6 +14027,17 @@ module Aws::SageMaker
         o.output = Shapes::ShapeRef.new(shape: CreateClusterResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:create_cluster_extension, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "CreateClusterExtension"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: CreateClusterExtensionRequest)
+        o.output = Shapes::ShapeRef.new(shape: CreateClusterExtensionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
       end)
 
       api.add_operation(:create_cluster_scheduler_config, Seahorse::Model::Operation.new.tap do |o|
@@ -14607,6 +14740,17 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
+      api.add_operation(:delete_cluster_extension, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DeleteClusterExtension"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DeleteClusterExtensionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DeleteClusterExtensionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceInUse)
+      end)
+
       api.add_operation(:delete_cluster_scheduler_config, Seahorse::Model::Operation.new.tap do |o|
         o.name = "DeleteClusterSchedulerConfig"
         o.http_method = "POST"
@@ -15201,6 +15345,15 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: DescribeClusterEventRequest)
         o.output = Shapes::ShapeRef.new(shape: DescribeClusterEventResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+      end)
+
+      api.add_operation(:describe_cluster_extension, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "DescribeClusterExtension"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: DescribeClusterExtensionRequest)
+        o.output = Shapes::ShapeRef.new(shape: DescribeClusterExtensionResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
@@ -16066,6 +16219,21 @@ module Aws::SageMaker
         o.http_request_uri = "/"
         o.input = Shapes::ShapeRef.new(shape: ListClusterEventsRequest)
         o.output = Shapes::ShapeRef.new(shape: ListClusterEventsResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
+        o[:pager] = Aws::Pager.new(
+          limit_key: "max_results",
+          tokens: {
+            "next_token" => "next_token"
+          }
+        )
+      end)
+
+      api.add_operation(:list_cluster_extensions, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "ListClusterExtensions"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: ListClusterExtensionsRequest)
+        o.output = Shapes::ShapeRef.new(shape: ListClusterExtensionsResponse)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o[:pager] = Aws::Pager.new(
           limit_key: "max_results",
@@ -17561,6 +17729,16 @@ module Aws::SageMaker
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
         o.errors << Shapes::ShapeRef.new(shape: ResourceLimitExceeded)
+      end)
+
+      api.add_operation(:update_cluster_extension, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClusterExtension"
+        o.http_method = "POST"
+        o.http_request_uri = "/"
+        o.input = Shapes::ShapeRef.new(shape: UpdateClusterExtensionRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateClusterExtensionResponse)
+        o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFound)
       end)
 
       api.add_operation(:update_cluster_scheduler_config, Seahorse::Model::Operation.new.tap do |o|

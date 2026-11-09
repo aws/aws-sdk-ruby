@@ -899,7 +899,7 @@ module Aws::Evs
     #       {
     #         host_name: "HostName", # required
     #         key_name: "KeyName", # required
-    #         instance_type: "i4i.metal", # required, accepts i4i.metal, i7i.metal-24xl, i7i.metal-48xl
+    #         instance_type: "i4i.metal", # required, accepts i4i.metal, i7i.metal-24xl, i7i.metal-48xl, r7i.metal-24xl, r7i.metal-48xl
     #         placement_group_id: "PlacementGroupId",
     #         dedicated_host_id: "DedicatedHostId",
     #       },
@@ -1126,7 +1126,7 @@ module Aws::Evs
     #     host: { # required
     #       host_name: "HostName", # required
     #       key_name: "KeyName", # required
-    #       instance_type: "i4i.metal", # required, accepts i4i.metal, i7i.metal-24xl, i7i.metal-48xl
+    #       instance_type: "i4i.metal", # required, accepts i4i.metal, i7i.metal-24xl, i7i.metal-48xl, r7i.metal-24xl, r7i.metal-48xl
     #       placement_group_id: "PlacementGroupId",
     #       dedicated_host_id: "DedicatedHostId",
     #     },
@@ -1146,7 +1146,7 @@ module Aws::Evs
     #   resp.host.host_name #=> String
     #   resp.host.ip_address #=> String
     #   resp.host.key_name #=> String
-    #   resp.host.instance_type #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl"
+    #   resp.host.instance_type #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl"
     #   resp.host.placement_group_id #=> String
     #   resp.host.dedicated_host_id #=> String
     #   resp.host.created_at #=> Time
@@ -1456,7 +1456,7 @@ module Aws::Evs
     #   resp.host.host_name #=> String
     #   resp.host.ip_address #=> String
     #   resp.host.key_name #=> String
-    #   resp.host.instance_type #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl"
+    #   resp.host.instance_type #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl"
     #   resp.host.placement_group_id #=> String
     #   resp.host.dedicated_host_id #=> String
     #   resp.host.created_at #=> Time
@@ -1690,9 +1690,9 @@ module Aws::Evs
     #   resp.vcf_versions[0].status #=> String
     #   resp.vcf_versions[0].default_esx_version #=> String
     #   resp.vcf_versions[0].instance_types #=> Array
-    #   resp.vcf_versions[0].instance_types[0] #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl"
+    #   resp.vcf_versions[0].instance_types[0] #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl"
     #   resp.instance_type_esx_versions #=> Array
-    #   resp.instance_type_esx_versions[0].instance_type #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl"
+    #   resp.instance_type_esx_versions[0].instance_type #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl"
     #   resp.instance_type_esx_versions[0].esx_versions #=> Array
     #   resp.instance_type_esx_versions[0].esx_versions[0] #=> String
     #
@@ -1806,7 +1806,7 @@ module Aws::Evs
     #   resp.environment_hosts[0].host_name #=> String
     #   resp.environment_hosts[0].ip_address #=> String
     #   resp.environment_hosts[0].key_name #=> String
-    #   resp.environment_hosts[0].instance_type #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl"
+    #   resp.environment_hosts[0].instance_type #=> String, one of "i4i.metal", "i7i.metal-24xl", "i7i.metal-48xl", "r7i.metal-24xl", "r7i.metal-48xl"
     #   resp.environment_hosts[0].placement_group_id #=> String
     #   resp.environment_hosts[0].dedicated_host_id #=> String
     #   resp.environment_hosts[0].created_at #=> Time
@@ -2241,7 +2241,7 @@ module Aws::Evs
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-evs'
-      context[:gem_version] = '1.34.0'
+      context[:gem_version] = '1.35.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

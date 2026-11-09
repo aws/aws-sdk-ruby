@@ -112,6 +112,10 @@ module Aws::OpenSearchService
     ChangeProgressStageStatus = Shapes::StringShape.new(name: 'ChangeProgressStageStatus')
     ChangeProgressStatusDetails = Shapes::StructureShape.new(name: 'ChangeProgressStatusDetails')
     ClientToken = Shapes::StringShape.new(name: 'ClientToken')
+    ClonedBlueGreenOptions = Shapes::StructureShape.new(name: 'ClonedBlueGreenOptions')
+    ClonedBlueGreenScheduledAction = Shapes::StructureShape.new(name: 'ClonedBlueGreenScheduledAction')
+    ClonedBlueGreenScheduledActionType = Shapes::StringShape.new(name: 'ClonedBlueGreenScheduledActionType')
+    ClonedBlueGreenUpgradeDetails = Shapes::StructureShape.new(name: 'ClonedBlueGreenUpgradeDetails')
     CloudWatchDirectQueryDataSource = Shapes::StructureShape.new(name: 'CloudWatchDirectQueryDataSource')
     CloudWatchLogsLogGroupArn = Shapes::StringShape.new(name: 'CloudWatchLogsLogGroupArn')
     ClusterConfig = Shapes::StructureShape.new(name: 'ClusterConfig')
@@ -146,6 +150,10 @@ module Aws::OpenSearchService
     CreateVpcEndpointResponse = Shapes::StructureShape.new(name: 'CreateVpcEndpointResponse')
     CreatedAt = Shapes::TimestampShape.new(name: 'CreatedAt')
     CrossClusterSearchConnectionProperties = Shapes::StructureShape.new(name: 'CrossClusterSearchConnectionProperties')
+    CutoverOptions = Shapes::StructureShape.new(name: 'CutoverOptions')
+    CutoverRequestOptions = Shapes::StructureShape.new(name: 'CutoverRequestOptions')
+    CutoverStatus = Shapes::StringShape.new(name: 'CutoverStatus')
+    CutoverTarget = Shapes::StringShape.new(name: 'CutoverTarget')
     DataSource = Shapes::StructureShape.new(name: 'DataSource')
     DataSourceAttachmentStatus = Shapes::StringShape.new(name: 'DataSourceAttachmentStatus')
     DataSourceAttachmentSummary = Shapes::StructureShape.new(name: 'DataSourceAttachmentSummary')
@@ -180,6 +188,8 @@ module Aws::OpenSearchService
     DeploymentStrategy = Shapes::StringShape.new(name: 'DeploymentStrategy')
     DeploymentStrategyOptions = Shapes::StructureShape.new(name: 'DeploymentStrategyOptions')
     DeploymentStrategyOptionsStatus = Shapes::StructureShape.new(name: 'DeploymentStrategyOptionsStatus')
+    DeploymentStrategyOverride = Shapes::StringShape.new(name: 'DeploymentStrategyOverride')
+    DeploymentStrategyOverrideOptions = Shapes::StructureShape.new(name: 'DeploymentStrategyOverrideOptions')
     DeploymentType = Shapes::StringShape.new(name: 'DeploymentType')
     DeregisterCapabilityRequest = Shapes::StructureShape.new(name: 'DeregisterCapabilityRequest')
     DeregisterCapabilityResponse = Shapes::StructureShape.new(name: 'DeregisterCapabilityResponse')
@@ -558,6 +568,8 @@ module Aws::OpenSearchService
     ReservedInstancePaymentOption = Shapes::StringShape.new(name: 'ReservedInstancePaymentOption')
     ResourceAlreadyExistsException = Shapes::StructureShape.new(name: 'ResourceAlreadyExistsException')
     ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
+    RetentionAction = Shapes::StringShape.new(name: 'RetentionAction')
+    RetentionOptions = Shapes::UnionShape.new(name: 'RetentionOptions')
     RevokeVpcEndpointAccessRequest = Shapes::StructureShape.new(name: 'RevokeVpcEndpointAccessRequest')
     RevokeVpcEndpointAccessResponse = Shapes::StructureShape.new(name: 'RevokeVpcEndpointAccessResponse')
     RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -630,10 +642,18 @@ module Aws::OpenSearchService
     TimeUnit = Shapes::StringShape.new(name: 'TimeUnit')
     Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
     TotalNumberOfStages = Shapes::IntegerShape.new(name: 'TotalNumberOfStages')
+    TrafficPercent = Shapes::IntegerShape.new(name: 'TrafficPercent')
+    TrafficPercents = Shapes::StructureShape.new(name: 'TrafficPercents')
+    TrafficSplitOptions = Shapes::StructureShape.new(name: 'TrafficSplitOptions')
+    TrafficSplitRequestOptions = Shapes::StructureShape.new(name: 'TrafficSplitRequestOptions')
+    TrafficSplitStatus = Shapes::StringShape.new(name: 'TrafficSplitStatus')
+    TrafficStrategy = Shapes::StringShape.new(name: 'TrafficStrategy')
     UIntValue = Shapes::IntegerShape.new(name: 'UIntValue')
     UncompressedPluginSizeInBytes = Shapes::IntegerShape.new(name: 'UncompressedPluginSizeInBytes')
     UpdateApplicationRequest = Shapes::StructureShape.new(name: 'UpdateApplicationRequest')
     UpdateApplicationResponse = Shapes::StructureShape.new(name: 'UpdateApplicationResponse')
+    UpdateCloneRequest = Shapes::StructureShape.new(name: 'UpdateCloneRequest')
+    UpdateCloneResponse = Shapes::StructureShape.new(name: 'UpdateCloneResponse')
     UpdateDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDataSourceRequest')
     UpdateDataSourceResponse = Shapes::StructureShape.new(name: 'UpdateDataSourceResponse')
     UpdateDirectQueryDataSourceRequest = Shapes::StructureShape.new(name: 'UpdateDirectQueryDataSourceRequest')
@@ -1014,9 +1034,22 @@ module Aws::OpenSearchService
     ChangeProgressStatusDetails.add_member(:last_updated_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "LastUpdatedTime"))
     ChangeProgressStatusDetails.add_member(:config_change_status, Shapes::ShapeRef.new(shape: ConfigChangeStatus, location_name: "ConfigChangeStatus"))
     ChangeProgressStatusDetails.add_member(:initiated_by, Shapes::ShapeRef.new(shape: InitiatedBy, location_name: "InitiatedBy"))
+    ChangeProgressStatusDetails.add_member(:cloned_blue_green_upgrade_details, Shapes::ShapeRef.new(shape: ClonedBlueGreenUpgradeDetails, location_name: "ClonedBlueGreenUpgradeDetails"))
     ChangeProgressStatusDetails.add_member(:validation_failures, Shapes::ShapeRef.new(shape: ValidationFailures, location_name: "ValidationFailures"))
     ChangeProgressStatusDetails.add_member(:accepted_warnings, Shapes::ShapeRef.new(shape: AcceptedWarningsList, location_name: "AcceptedWarnings"))
     ChangeProgressStatusDetails.struct_class = Types::ChangeProgressStatusDetails
+
+    ClonedBlueGreenOptions.add_member(:retention_options, Shapes::ShapeRef.new(shape: RetentionOptions, location_name: "RetentionOptions"))
+    ClonedBlueGreenOptions.struct_class = Types::ClonedBlueGreenOptions
+
+    ClonedBlueGreenScheduledAction.add_member(:action, Shapes::ShapeRef.new(shape: ClonedBlueGreenScheduledActionType, location_name: "Action"))
+    ClonedBlueGreenScheduledAction.add_member(:scheduled_time, Shapes::ShapeRef.new(shape: UpdateTimestamp, location_name: "ScheduledTime"))
+    ClonedBlueGreenScheduledAction.struct_class = Types::ClonedBlueGreenScheduledAction
+
+    ClonedBlueGreenUpgradeDetails.add_member(:traffic_split, Shapes::ShapeRef.new(shape: TrafficPercents, location_name: "TrafficSplit"))
+    ClonedBlueGreenUpgradeDetails.add_member(:scheduled_action, Shapes::ShapeRef.new(shape: ClonedBlueGreenScheduledAction, location_name: "ScheduledAction"))
+    ClonedBlueGreenUpgradeDetails.add_member(:retention_in_hours, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "RetentionInHours"))
+    ClonedBlueGreenUpgradeDetails.struct_class = Types::ClonedBlueGreenUpgradeDetails
 
     CloudWatchDirectQueryDataSource.add_member(:role_arn, Shapes::ShapeRef.new(shape: DirectQueryDataSourceRoleArn, required: true, location_name: "RoleArn"))
     CloudWatchDirectQueryDataSource.struct_class = Types::CloudWatchDirectQueryDataSource
@@ -1176,6 +1209,13 @@ module Aws::OpenSearchService
     CrossClusterSearchConnectionProperties.add_member(:skip_unavailable, Shapes::ShapeRef.new(shape: SkipUnavailableStatus, location_name: "SkipUnavailable"))
     CrossClusterSearchConnectionProperties.struct_class = Types::CrossClusterSearchConnectionProperties
 
+    CutoverOptions.add_member(:target, Shapes::ShapeRef.new(shape: CutoverTarget, required: true, location_name: "Target"))
+    CutoverOptions.add_member(:status, Shapes::ShapeRef.new(shape: CutoverStatus, required: true, location_name: "Status"))
+    CutoverOptions.struct_class = Types::CutoverOptions
+
+    CutoverRequestOptions.add_member(:target, Shapes::ShapeRef.new(shape: CutoverTarget, required: true, location_name: "Target"))
+    CutoverRequestOptions.struct_class = Types::CutoverRequestOptions
+
     DataSource.add_member(:data_source_arn, Shapes::ShapeRef.new(shape: ARN, location_name: "dataSourceArn"))
     DataSource.add_member(:data_source_description, Shapes::ShapeRef.new(shape: DataSourceDescription, location_name: "dataSourceDescription"))
     DataSource.add_member(:iam_role_for_data_source_arn, Shapes::ShapeRef.new(shape: RoleArn, location_name: "iamRoleForDataSourceArn"))
@@ -1264,6 +1304,10 @@ module Aws::OpenSearchService
     DeploymentStrategyOptionsStatus.add_member(:options, Shapes::ShapeRef.new(shape: DeploymentStrategyOptions, required: true, location_name: "Options"))
     DeploymentStrategyOptionsStatus.add_member(:status, Shapes::ShapeRef.new(shape: OptionStatus, required: true, location_name: "Status"))
     DeploymentStrategyOptionsStatus.struct_class = Types::DeploymentStrategyOptionsStatus
+
+    DeploymentStrategyOverrideOptions.add_member(:deployment_strategy, Shapes::ShapeRef.new(shape: DeploymentStrategyOverride, required: true, location_name: "DeploymentStrategy"))
+    DeploymentStrategyOverrideOptions.add_member(:cloned_blue_green_options, Shapes::ShapeRef.new(shape: ClonedBlueGreenOptions, location_name: "ClonedBlueGreenOptions"))
+    DeploymentStrategyOverrideOptions.struct_class = Types::DeploymentStrategyOverrideOptions
 
     DeregisterCapabilityRequest.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, required: true, location: "uri", location_name: "ApplicationId"))
     DeregisterCapabilityRequest.add_member(:capability_name, Shapes::ShapeRef.new(shape: CapabilityName, required: true, location: "uri", location_name: "CapabilityName"))
@@ -2410,6 +2454,14 @@ module Aws::OpenSearchService
 
     ResourceNotFoundException.struct_class = Types::ResourceNotFoundException
 
+    RetentionOptions.add_member(:retention_in_hours, Shapes::ShapeRef.new(shape: IntegerClass, location_name: "RetentionInHours"))
+    RetentionOptions.add_member(:retention_action, Shapes::ShapeRef.new(shape: RetentionAction, location_name: "RetentionAction"))
+    RetentionOptions.add_member(:unknown, Shapes::ShapeRef.new(shape: nil, location_name: 'unknown'))
+    RetentionOptions.add_member_subclass(:retention_in_hours, Types::RetentionOptions::RetentionInHours)
+    RetentionOptions.add_member_subclass(:retention_action, Types::RetentionOptions::RetentionAction)
+    RetentionOptions.add_member_subclass(:unknown, Types::RetentionOptions::Unknown)
+    RetentionOptions.struct_class = Types::RetentionOptions
+
     RevokeVpcEndpointAccessRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     RevokeVpcEndpointAccessRequest.add_member(:account, Shapes::ShapeRef.new(shape: AWSAccount, location_name: "Account"))
     RevokeVpcEndpointAccessRequest.add_member(:service, Shapes::ShapeRef.new(shape: AWSServicePrincipal, location_name: "Service"))
@@ -2578,6 +2630,19 @@ module Aws::OpenSearchService
 
     ThrottlingException.struct_class = Types::ThrottlingException
 
+    TrafficPercents.add_member(:primary_read_traffic_percent, Shapes::ShapeRef.new(shape: TrafficPercent, required: true, location_name: "PrimaryReadTrafficPercent"))
+    TrafficPercents.add_member(:clone_read_traffic_percent, Shapes::ShapeRef.new(shape: TrafficPercent, required: true, location_name: "CloneReadTrafficPercent"))
+    TrafficPercents.struct_class = Types::TrafficPercents
+
+    TrafficSplitOptions.add_member(:current, Shapes::ShapeRef.new(shape: TrafficPercents, required: true, location_name: "Current"))
+    TrafficSplitOptions.add_member(:target, Shapes::ShapeRef.new(shape: TrafficPercents, required: true, location_name: "Target"))
+    TrafficSplitOptions.add_member(:status, Shapes::ShapeRef.new(shape: TrafficSplitStatus, required: true, location_name: "Status"))
+    TrafficSplitOptions.struct_class = Types::TrafficSplitOptions
+
+    TrafficSplitRequestOptions.add_member(:strategy, Shapes::ShapeRef.new(shape: TrafficStrategy, required: true, location_name: "Strategy"))
+    TrafficSplitRequestOptions.add_member(:clone_read_traffic_percent, Shapes::ShapeRef.new(shape: TrafficPercent, required: true, location_name: "CloneReadTrafficPercent"))
+    TrafficSplitRequestOptions.struct_class = Types::TrafficSplitRequestOptions
+
     UpdateApplicationRequest.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location: "uri", location_name: "id"))
     UpdateApplicationRequest.add_member(:data_sources, Shapes::ShapeRef.new(shape: DataSources, location_name: "dataSources"))
     UpdateApplicationRequest.add_member(:app_configs, Shapes::ShapeRef.new(shape: AppConfigs, location_name: "appConfigs"))
@@ -2593,6 +2658,19 @@ module Aws::OpenSearchService
     UpdateApplicationResponse.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
     UpdateApplicationResponse.add_member(:last_updated_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedAt"))
     UpdateApplicationResponse.struct_class = Types::UpdateApplicationResponse
+
+    UpdateCloneRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
+    UpdateCloneRequest.add_member(:traffic_split_options, Shapes::ShapeRef.new(shape: TrafficSplitRequestOptions, location_name: "TrafficSplitOptions"))
+    UpdateCloneRequest.add_member(:cutover_options, Shapes::ShapeRef.new(shape: CutoverRequestOptions, location_name: "CutoverOptions"))
+    UpdateCloneRequest.add_member(:retention_options, Shapes::ShapeRef.new(shape: RetentionOptions, location_name: "RetentionOptions"))
+    UpdateCloneRequest.struct_class = Types::UpdateCloneRequest
+
+    UpdateCloneResponse.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location_name: "DomainName"))
+    UpdateCloneResponse.add_member(:change_id, Shapes::ShapeRef.new(shape: GUID, required: true, location_name: "ChangeId"))
+    UpdateCloneResponse.add_member(:cutover_options, Shapes::ShapeRef.new(shape: CutoverOptions, location_name: "CutoverOptions"))
+    UpdateCloneResponse.add_member(:traffic_split_options, Shapes::ShapeRef.new(shape: TrafficSplitOptions, location_name: "TrafficSplitOptions"))
+    UpdateCloneResponse.add_member(:retention_options, Shapes::ShapeRef.new(shape: RetentionOptions, location_name: "RetentionOptions"))
+    UpdateCloneResponse.struct_class = Types::UpdateCloneResponse
 
     UpdateDataSourceRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: DomainName, required: true, location: "uri", location_name: "DomainName"))
     UpdateDataSourceRequest.add_member(:name, Shapes::ShapeRef.new(shape: DataSourceName, required: true, location: "uri", location_name: "DataSourceName"))
@@ -2697,6 +2775,7 @@ module Aws::OpenSearchService
     UpgradeDomainRequest.add_member(:target_version, Shapes::ShapeRef.new(shape: VersionString, required: true, location_name: "TargetVersion"))
     UpgradeDomainRequest.add_member(:perform_check_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformCheckOnly"))
     UpgradeDomainRequest.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
+    UpgradeDomainRequest.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOverrideOptions, location_name: "DeploymentStrategyOptions"))
     UpgradeDomainRequest.struct_class = Types::UpgradeDomainRequest
 
     UpgradeDomainResponse.add_member(:upgrade_id, Shapes::ShapeRef.new(shape: String, location_name: "UpgradeId"))
@@ -2704,6 +2783,7 @@ module Aws::OpenSearchService
     UpgradeDomainResponse.add_member(:target_version, Shapes::ShapeRef.new(shape: VersionString, location_name: "TargetVersion"))
     UpgradeDomainResponse.add_member(:perform_check_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "PerformCheckOnly"))
     UpgradeDomainResponse.add_member(:advanced_options, Shapes::ShapeRef.new(shape: AdvancedOptions, location_name: "AdvancedOptions"))
+    UpgradeDomainResponse.add_member(:deployment_strategy_options, Shapes::ShapeRef.new(shape: DeploymentStrategyOverrideOptions, location_name: "DeploymentStrategyOptions"))
     UpgradeDomainResponse.add_member(:change_progress_details, Shapes::ShapeRef.new(shape: ChangeProgressDetails, location_name: "ChangeProgressDetails"))
     UpgradeDomainResponse.struct_class = Types::UpgradeDomainResponse
 
@@ -4102,6 +4182,19 @@ module Aws::OpenSearchService
         o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
         o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+        o.errors << Shapes::ShapeRef.new(shape: InternalException)
+        o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
+      end)
+
+      api.add_operation(:update_clone, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "UpdateClone"
+        o.http_method = "POST"
+        o.http_request_uri = "/2021-01-01/opensearch/domain/{DomainName}/clone"
+        o.input = Shapes::ShapeRef.new(shape: UpdateCloneRequest)
+        o.output = Shapes::ShapeRef.new(shape: UpdateCloneResponse)
+        o.errors << Shapes::ShapeRef.new(shape: BaseException)
+        o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+        o.errors << Shapes::ShapeRef.new(shape: ValidationException)
         o.errors << Shapes::ShapeRef.new(shape: InternalException)
         o.errors << Shapes::ShapeRef.new(shape: DisabledOperationException)
       end)

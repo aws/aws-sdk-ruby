@@ -424,8 +424,27 @@ module Aws::OpenSearchService
       attr_accessor last_updated_time: ::Time
       attr_accessor config_change_status: ("Pending" | "Initializing" | "Validating" | "ValidationFailed" | "ApplyingChanges" | "Completed" | "PendingUserInput" | "Cancelled")
       attr_accessor initiated_by: ("CUSTOMER" | "SERVICE")
+      attr_accessor cloned_blue_green_upgrade_details: Types::ClonedBlueGreenUpgradeDetails
       attr_accessor validation_failures: ::Array[Types::ValidationFailure]
       attr_accessor accepted_warnings: ::Array[::String]
+      SENSITIVE: []
+    end
+
+    class ClonedBlueGreenOptions
+      attr_accessor retention_options: Types::RetentionOptions
+      SENSITIVE: []
+    end
+
+    class ClonedBlueGreenScheduledAction
+      attr_accessor action: ("AutomaticCutoverToPrimaryCluster" | "DeletePrimaryCluster")
+      attr_accessor scheduled_time: ::Time
+      SENSITIVE: []
+    end
+
+    class ClonedBlueGreenUpgradeDetails
+      attr_accessor traffic_split: Types::TrafficPercents
+      attr_accessor scheduled_action: Types::ClonedBlueGreenScheduledAction
+      attr_accessor retention_in_hours: ::Integer
       SENSITIVE: []
     end
 
@@ -629,6 +648,17 @@ module Aws::OpenSearchService
       SENSITIVE: []
     end
 
+    class CutoverOptions
+      attr_accessor target: ("ClonedCluster" | "PrimaryCluster")
+      attr_accessor status: ("InProgress" | "Completed" | "Failed")
+      SENSITIVE: []
+    end
+
+    class CutoverRequestOptions
+      attr_accessor target: ("ClonedCluster" | "PrimaryCluster")
+      SENSITIVE: []
+    end
+
     class DataSource
       attr_accessor data_source_arn: ::String
       attr_accessor data_source_description: ::String
@@ -758,6 +788,12 @@ module Aws::OpenSearchService
     class DeploymentStrategyOptionsStatus
       attr_accessor options: Types::DeploymentStrategyOptions
       attr_accessor status: Types::OptionStatus
+      SENSITIVE: []
+    end
+
+    class DeploymentStrategyOverrideOptions
+      attr_accessor deployment_strategy: ("ClonedBlueGreen")
+      attr_accessor cloned_blue_green_options: Types::ClonedBlueGreenOptions
       SENSITIVE: []
     end
 
@@ -2234,6 +2270,20 @@ module Aws::OpenSearchService
     class ResourceNotFoundException < Aws::EmptyStructure
     end
 
+    class RetentionOptions
+      attr_accessor retention_in_hours: ::Integer
+      attr_accessor retention_action: ("RollbackToPrimaryCluster" | "DeletePrimaryCluster")
+      attr_accessor unknown: untyped
+      SENSITIVE: []
+
+      class RetentionInHours < RetentionOptions
+      end
+      class RetentionAction < RetentionOptions
+      end
+      class Unknown < RetentionOptions
+      end
+    end
+
     class RevokeVpcEndpointAccessRequest
       attr_accessor domain_name: ::String
       attr_accessor account: ::String
@@ -2455,6 +2505,25 @@ module Aws::OpenSearchService
     class ThrottlingException < Aws::EmptyStructure
     end
 
+    class TrafficPercents
+      attr_accessor primary_read_traffic_percent: ::Integer
+      attr_accessor clone_read_traffic_percent: ::Integer
+      SENSITIVE: []
+    end
+
+    class TrafficSplitOptions
+      attr_accessor current: Types::TrafficPercents
+      attr_accessor target: Types::TrafficPercents
+      attr_accessor status: ("InProgress" | "Completed" | "Failed")
+      SENSITIVE: []
+    end
+
+    class TrafficSplitRequestOptions
+      attr_accessor strategy: ("ShiftReadTrafficPercent")
+      attr_accessor clone_read_traffic_percent: ::Integer
+      SENSITIVE: []
+    end
+
     class UpdateApplicationRequest
       attr_accessor id: ::String
       attr_accessor data_sources: ::Array[Types::DataSource]
@@ -2472,6 +2541,23 @@ module Aws::OpenSearchService
       attr_accessor app_configs: ::Array[Types::AppConfig]
       attr_accessor created_at: ::Time
       attr_accessor last_updated_at: ::Time
+      SENSITIVE: []
+    end
+
+    class UpdateCloneRequest
+      attr_accessor domain_name: ::String
+      attr_accessor traffic_split_options: Types::TrafficSplitRequestOptions
+      attr_accessor cutover_options: Types::CutoverRequestOptions
+      attr_accessor retention_options: Types::RetentionOptions
+      SENSITIVE: []
+    end
+
+    class UpdateCloneResponse
+      attr_accessor domain_name: ::String
+      attr_accessor change_id: ::String
+      attr_accessor cutover_options: Types::CutoverOptions
+      attr_accessor traffic_split_options: Types::TrafficSplitOptions
+      attr_accessor retention_options: Types::RetentionOptions
       SENSITIVE: []
     end
 
@@ -2611,6 +2697,7 @@ module Aws::OpenSearchService
       attr_accessor target_version: ::String
       attr_accessor perform_check_only: bool
       attr_accessor advanced_options: ::Hash[::String, ::String]
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOverrideOptions
       SENSITIVE: []
     end
 
@@ -2620,6 +2707,7 @@ module Aws::OpenSearchService
       attr_accessor target_version: ::String
       attr_accessor perform_check_only: bool
       attr_accessor advanced_options: ::Hash[::String, ::String]
+      attr_accessor deployment_strategy_options: Types::DeploymentStrategyOverrideOptions
       attr_accessor change_progress_details: Types::ChangeProgressDetails
       SENSITIVE: []
     end

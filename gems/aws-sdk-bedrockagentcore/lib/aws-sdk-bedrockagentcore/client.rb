@@ -4288,6 +4288,98 @@ module Aws::BedrockAgentCore
       req.send_request(options, &block)
     end
 
+    # Searches the web and returns a ranked list of results. Each result
+    # includes a text extract from the page.
+    #
+    # You can filter the results by domain and by publication date.
+    #
+    # To use this operation, you must have the
+    # `bedrock-agentcore:InvokeWebSearch` permission on the resource
+    # `arn:${Partition}:bedrock-agentcore:${Region}:aws:tool/web-search.v1`.
+    #
+    # @option params [required, String] :web_search_id
+    #   The identifier of the web search tool to invoke. The Amazon Web
+    #   Services-managed web search tool is `web-search.v1`.
+    #
+    # @option params [required, String] :search_query
+    #   The text to search for.
+    #
+    # @option params [Integer] :max_results
+    #   The maximum number of results to return. Defaults to 25.
+    #
+    # @option params [Types::WebSearchFilters] :filters
+    #   The filters to apply to the search results.
+    #
+    # @return [Types::InvokeWebSearchOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::InvokeWebSearchOutput#results #results} => Array&lt;Types::WebSearchResult&gt;
+    #
+    #
+    # @example Example: Search the web for recent pages from one domain
+    #
+    #   resp = client.invoke_web_search({
+    #     filters: {
+    #       domain_filter: {
+    #         include: [
+    #           "example.com", 
+    #         ], 
+    #       }, 
+    #       published_date_filter: {
+    #         published_after: Time.parse("2026-01-01T00:00:00Z"), 
+    #       }, 
+    #     }, 
+    #     max_results: 1, 
+    #     search_query: "Amazon Bedrock AgentCore web search", 
+    #     web_search_id: "web-search.v1", 
+    #   })
+    #
+    #   resp.to_h outputs the following:
+    #   {
+    #     results: [
+    #       {
+    #         published_at: Time.parse("2026-03-15T08:00:00Z"), 
+    #         text: "Web search lets an agent find current information on the public web and cite its sources.", 
+    #         title: "Getting started with web search", 
+    #         url: "https://docs.example.com/web-search/getting-started", 
+    #       }, 
+    #     ], 
+    #   }
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.invoke_web_search({
+    #     web_search_id: "WebSearchId", # required
+    #     search_query: "InvokeWebSearchInputSearchQueryString", # required
+    #     max_results: 1,
+    #     filters: {
+    #       domain_filter: {
+    #         include: ["DomainName"],
+    #         exclude: ["DomainName"],
+    #       },
+    #       published_date_filter: {
+    #         published_after: Time.now,
+    #         published_before: Time.now,
+    #       },
+    #     },
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.results #=> Array
+    #   resp.results[0].title #=> String
+    #   resp.results[0].url #=> String
+    #   resp.results[0].text #=> String
+    #   resp.results[0].published_at #=> Time
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/bedrock-agentcore-2024-02-28/InvokeWebSearch AWS API Documentation
+    #
+    # @overload invoke_web_search(params = {})
+    # @param [Hash] params ({})
+    def invoke_web_search(params = {}, options = {})
+      req = build_request(:invoke_web_search, params)
+      req.send_request(options)
+    end
+
     # Lists all A/B tests in the account.
     #
     # @option params [Integer] :max_results
@@ -6668,7 +6760,7 @@ module Aws::BedrockAgentCore
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-bedrockagentcore'
-      context[:gem_version] = '1.66.0'
+      context[:gem_version] = '1.67.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

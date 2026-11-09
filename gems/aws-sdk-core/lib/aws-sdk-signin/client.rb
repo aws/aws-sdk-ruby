@@ -481,6 +481,50 @@ module Aws::Signin
 
     # @!group API Operations
 
+    # Creates a bearer token that represents your IAM credentials and can be
+    # used to access a supported AWS service. By default, the token is valid
+    # for 12 hours.
+    #
+    # @option params [required, String] :grant_type
+    #   The grant type. Must be "client\_credentials".
+    #
+    # @option params [required, String] :resource
+    #   The AWS service the bearer token is for. Example: "ecr.amazonaws.com".
+    #
+    # @option params [Integer] :duration_seconds
+    #   The requested token lifetime in seconds, from 300 (5 minutes) up to
+    #   the maximum allowed for the service, currently 43200 (12 hours). If
+    #   omitted, the token is valid for 12 hours.
+    #
+    # @return [Types::CreateBearerTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+    #
+    #   * {Types::CreateBearerTokenResponse#access_token #access_token} => String
+    #   * {Types::CreateBearerTokenResponse#token_type #token_type} => String
+    #   * {Types::CreateBearerTokenResponse#expires_in #expires_in} => Integer
+    #
+    # @example Request syntax with placeholder values
+    #
+    #   resp = client.create_bearer_token({
+    #     grant_type: "ClientCredentialsGrantType", # required
+    #     resource: "Resource", # required
+    #     duration_seconds: 1,
+    #   })
+    #
+    # @example Response structure
+    #
+    #   resp.access_token #=> String
+    #   resp.token_type #=> String
+    #   resp.expires_in #=> Integer
+    #
+    # @see http://docs.aws.amazon.com/goto/WebAPI/signin-2023-01-01/CreateBearerToken AWS API Documentation
+    #
+    # @overload create_bearer_token(params = {})
+    # @param [Hash] params ({})
+    def create_bearer_token(params = {}, options = {})
+      req = build_request(:create_bearer_token, params)
+      req.send_request(options)
+    end
+
     # Exchanges an authorization code or refresh token for an OAuth 2.0
     # access token and refresh token.
     #
@@ -991,7 +1035,7 @@ module Aws::Signin
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-core'
-      context[:gem_version] = '3.265.0'
+      context[:gem_version] = '3.266.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

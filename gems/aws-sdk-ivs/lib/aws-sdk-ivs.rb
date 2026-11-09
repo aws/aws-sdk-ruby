@@ -54,7 +54,7 @@ module Aws::IVS
   autoload :EndpointProvider, 'aws-sdk-ivs/endpoint_provider'
   autoload :Endpoints, 'aws-sdk-ivs/endpoints'
 
-  GEM_VERSION = '1.101.0'
+  GEM_VERSION = '1.102.0'
 
 end
 

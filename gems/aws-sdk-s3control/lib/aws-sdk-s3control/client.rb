@@ -4511,6 +4511,11 @@ module Aws::S3Control
     # Returns a temporary access credential from S3 Access Grants to the
     # grantee or client application. The [temporary credential][1] is an
     # Amazon Web Services STS token that grants them access to the S3 data.
+    # By default, S3 Access Grants searches for a matching grant in the
+    # instance of the Amazon Web Services account ID in the request. To also
+    # search instances shared with the caller through Amazon Web Services
+    # Resource Access Manager (RAM), set the `InstanceScope` parameter to
+    # `ALL`.
     #
     # Permissions
     #
@@ -4577,11 +4582,23 @@ module Aws::S3Control
     #   credential request. This information will be displayed in CloudTrail
     #   log in your account.
     #
+    # @option params [String] :instance_scope
+    #   The scope of S3 Access Grants instances to search for a grant matching
+    #   the requested S3 URI path.
+    #
+    #   * `SELF` – Searches only the instance of the Amazon Web Services
+    #     account ID in the request.
+    #
+    #   * `ALL` – Searches the instance of the Amazon Web Services account ID
+    #     in the request and all instances shared with the caller's account
+    #     through Amazon Web Services Resource Access Manager (RAM).
+    #
     # @return [Types::GetDataAccessResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::GetDataAccessResult#credentials #credentials} => Types::Credentials
     #   * {Types::GetDataAccessResult#matched_grant_target #matched_grant_target} => String
     #   * {Types::GetDataAccessResult#grantee #grantee} => Types::Grantee
+    #   * {Types::GetDataAccessResult#matched_instance_arn #matched_instance_arn} => String
     #
     # @example Request syntax with placeholder values
     #
@@ -4593,6 +4610,7 @@ module Aws::S3Control
     #     privilege: "Minimal", # accepts Minimal, Default
     #     target_type: "Object", # accepts Object
     #     audit_context: "AuditContext",
+    #     instance_scope: "SELF", # accepts SELF, ALL
     #   })
     #
     # @example Response structure
@@ -4604,6 +4622,7 @@ module Aws::S3Control
     #   resp.matched_grant_target #=> String
     #   resp.grantee.grantee_type #=> String, one of "DIRECTORY_USER", "DIRECTORY_GROUP", "IAM"
     #   resp.grantee.grantee_identifier #=> String
+    #   resp.matched_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/GetDataAccess AWS API Documentation
     #
@@ -5736,14 +5755,18 @@ module Aws::S3Control
     # an Identity and Access Management (IAM) identity or Amazon Web
     # Services Identity Center corporate directory identity. You must pass
     # the Amazon Web Services account of the S3 data owner (grantor) in the
-    # request. You can, optionally, narrow the results by `GrantScope`,
-    # using a fragment of the data's S3 path, and S3 Access Grants will
-    # return only the grants with a path that contains the path fragment.
-    # You can also pass the `AllowedByApplication` filter in the request,
-    # which returns only the grants authorized for applications, whether the
-    # application is the caller's Identity Center application or any other
-    # application (`ALL`). For more information, see [List the caller's
-    # access grants][1] in the *Amazon S3 User Guide*.
+    # request. By default, S3 Access Grants returns grants from the instance
+    # of the Amazon Web Services account ID in the request. To return grants
+    # from all instances shared with the caller's account through Amazon
+    # Web Services Resource Access Manager (RAM), set the `InstanceScope`
+    # parameter to `ALL`. You can, optionally, narrow the results by
+    # `GrantScope`, using a fragment of the data's S3 path, and S3 Access
+    # Grants will return only the grants with a path that contains the path
+    # fragment. You can also pass the `AllowedByApplication` filter in the
+    # request, which returns only the grants authorized for applications,
+    # whether the application is the caller's Identity Center application
+    # or any other application (`ALL`). For more information, see [List the
+    # caller's access grants][1] in the *Amazon S3 User Guide*.
     #
     # Permissions
     #
@@ -5780,6 +5803,17 @@ module Aws::S3Control
     #   grants for the caller's Identity Center application or for any other
     #   applications (`ALL`).
     #
+    # @option params [String] :instance_scope
+    #   The scope of S3 Access Grants instances to list grants from.
+    #
+    #   * `SELF` – Lists grants from the instance of the Amazon Web Services
+    #     account ID in the request.
+    #
+    #   * `ALL` – Lists grants from the instance of the Amazon Web Services
+    #     account ID in the request and all instances shared with the
+    #     caller's account through Amazon Web Services Resource Access
+    #     Manager (RAM).
+    #
     # @return [Types::ListCallerAccessGrantsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
     #
     #   * {Types::ListCallerAccessGrantsResult#next_token #next_token} => String
@@ -5795,6 +5829,7 @@ module Aws::S3Control
     #     next_token: "ContinuationToken",
     #     max_results: 1,
     #     allowed_by_application: false,
+    #     instance_scope: "SELF", # accepts SELF, ALL
     #   })
     #
     # @example Response structure
@@ -5804,6 +5839,7 @@ module Aws::S3Control
     #   resp.caller_access_grants_list[0].permission #=> String, one of "READ", "WRITE", "READWRITE"
     #   resp.caller_access_grants_list[0].grant_scope #=> String
     #   resp.caller_access_grants_list[0].application_arn #=> String
+    #   resp.caller_access_grants_list[0].access_grants_instance_arn #=> String
     #
     # @see http://docs.aws.amazon.com/goto/WebAPI/s3control-2018-08-20/ListCallerAccessGrants AWS API Documentation
     #
@@ -8243,7 +8279,7 @@ module Aws::S3Control
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-s3control'
-      context[:gem_version] = '1.144.0'
+      context[:gem_version] = '1.145.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 

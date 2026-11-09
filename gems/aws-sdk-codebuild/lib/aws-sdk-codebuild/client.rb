@@ -7140,7 +7140,7 @@ module Aws::CodeBuild
         tracer: tracer
       )
       context[:gem_name] = 'aws-sdk-codebuild'
-      context[:gem_version] = '1.186.0'
+      context[:gem_version] = '1.187.0'
       Seahorse::Client::Request.new(handlers, context)
     end
 
