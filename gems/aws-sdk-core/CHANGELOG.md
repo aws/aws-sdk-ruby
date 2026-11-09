@@ -1,7 +1,7 @@
 Unreleased Changes
 ------------------
 
-* Feature - Reduce memory allocations when computing request checksums in a header.
+* Feature - Reuse read buffers to reduce allocations when calculating request checksums sent in headers.
 
 * Feature - Reduce memory allocations when streaming request bodies with checksum trailers while preserving compatibility with custom IO bodies.
 
